@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.14 2002/07/21 00:20:45 craigmcc Exp $
- * $Revision: 1.14 $
- * $Date: 2002/07/21 00:20:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.15 2002/12/09 22:17:12 rwaldhoff Exp $
+ * $Revision: 1.15 $
+ * $Date: 2002/12/09 22:17:12 $
  *
  * ====================================================================
  *
@@ -65,8 +65,9 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-import junit.framework.TestCase;
+
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
@@ -96,7 +97,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -781,5 +782,10 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
+    /** See http://issues.apache.org/bugzilla/show_bug.cgi?id=15170 */
+    public void testSetPropertyOnPrimitavieWrappers() throws Exception {
+        BeanUtils.setProperty(bean,"intProperty", new Integer(1));
+        assertEquals(1,bean.getIntProperty());
+    }
 }
 
