@@ -8,4 +8,4 @@ collections-Extension-Name: org.apache.commons.collections
 collections-Specification-Vendor: Apache Software Foundation
 collections-Specification-Version: 1.0
 collections-Implementation-Vendor: Apache Software Foundation
-collections-Implementation-Version: 0.01
+collections-Implementation-Version: 1.0
