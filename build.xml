@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.7 2001/04/16 13:26:05 geirm Exp $
+        $Id: build.xml,v 1.8 2001/04/17 00:50:28 craigmcc Exp $
 -->
 
 
@@ -46,7 +46,7 @@
   <property name="build.home"              value="target"/>
 
   <!-- The base directory for component configuration files -->
-  <property name="conf.home"               value="conf"/>
+  <property name="conf.home"               value="src/conf"/>
 
   <!-- The base directory for distribution targets -->
   <property name="dist.home"               value="build"/>
