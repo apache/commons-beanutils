@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.2 2001/04/16 16:30:13 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/04/16 16:30:13 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.3 2001/05/06 22:52:11 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/05/06 22:52:11 $
  *
  * ====================================================================
  *
@@ -75,6 +75,7 @@ import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.collections.FastHashMap;
 
 
 /**
@@ -120,7 +121,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.2 $ $Date: 2001/04/16 16:30:13 $
+ * @version $Revision: 1.3 $ $Date: 2001/05/06 22:52:11 $
  */
 
 public class PropertyUtils {
@@ -170,7 +171,11 @@ public class PropertyUtils {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the fully qualified class name of this object.
      */
-    private static HashMap descriptorsCache = new HashMap();
+    private static FastHashMap descriptorsCache = null;
+    static {
+        descriptorsCache = new FastHashMap();
+        descriptorsCache.setFast(true);
+    }
 
 
     // --------------------------------------------------------- Public Methods
@@ -493,10 +498,8 @@ public class PropertyUtils {
 	// Look up any cached descriptors for this bean class
 	String beanClassName = bean.getClass().getName();
 	PropertyDescriptor descriptors[] = null;
-        synchronized (descriptorsCache) {
-            descriptors =
-                (PropertyDescriptor[]) descriptorsCache.get(beanClassName);
-        }
+        descriptors =
+            (PropertyDescriptor[]) descriptorsCache.get(beanClassName);
 	if (descriptors != null)
 	    return (descriptors);
 
@@ -510,9 +513,7 @@ public class PropertyUtils {
 	descriptors = beanInfo.getPropertyDescriptors();
 	if (descriptors == null)
 	    descriptors = new PropertyDescriptor[0];
-        synchronized (descriptorsCache) {
-            descriptorsCache.put(beanClassName, descriptors);
-        }
+        descriptorsCache.put(beanClassName, descriptors);
 	return (descriptors);
 
     }
