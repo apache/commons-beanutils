@@ -6,8 +6,18 @@
   <id>commons-beanutils</id>
   <logo></logo>
   <currentVersion>1.7-dev</currentVersion>
+
+  <organization>
+    <name>Apache Software Foundation</name>
+    <url>http://www.apache.org</url>
+    <logo>http://jakarta.apache.org/images/jakarta-logo.gif</logo>
+  </organization>
+
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons Bean Utils</shortDescription>
+
+  <logo>/images/logo.png</logo>
+
   <description>Java Bean Utilities</description>
   <url>http://jakarta.apache.org/commons/beanutils/</url>
   <developers>
