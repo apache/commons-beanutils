@@ -297,6 +297,11 @@ public class MethodUtilsTestCase extends TestCase {
         } catch (NoSuchMethodException e) {
             // this is what we're expecting!
         }
+        
+        MethodUtils.invokeMethod(parent, "getName", null);
+        MethodUtils.invokeMethod(parent, "getName", null, null);
+        MethodUtils.invokeExactMethod(parent, "getName", null);
+        MethodUtils.invokeExactMethod(parent, "getName", null, null);        
     }
 
     

@@ -90,12 +90,13 @@ public class MethodUtils {
      */
     private static Log log = LogFactory.getLog(MethodUtils.class);
 
-
-
+    /** An empty class array */
+    private static final Class[] emptyClassArray = new Class[0];
+    /** An empty object array */
+    private static final Object[] emptyObjectArray = new Object[0];
+    
     // --------------------------------------------------------- Public Methods
-
-
-
+    
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
@@ -155,7 +156,7 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments
+     * @param args use these arguments - treat null as empty array
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -171,7 +172,10 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
+        
+        if (args == null) {
+            args = emptyObjectArray;
+        }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
@@ -198,8 +202,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments
-     * @param parameterTypes match these parameters
+     * @param args use these arguments - treat null as empty array
+     * @param parameterTypes match these parameters - treat null as empty array
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -216,7 +220,13 @@ public class MethodUtils {
                     NoSuchMethodException,
                     IllegalAccessException,
                     InvocationTargetException {
-        
+                    
+        if (parameterTypes == null) {
+            parameterTypes = emptyClassArray;
+        }        
+        if (args == null) {
+            args = emptyObjectArray;
+        }  
 
         Method method = getMatchingAccessibleMethod(
                 object.getClass(),
@@ -271,7 +281,7 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments
+     * @param args use these arguments - treat null as empty array
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -287,7 +297,9 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
+        if (args == null) {
+            args = emptyObjectArray;
+        }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
@@ -307,8 +319,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments
-     * @param parameterTypes match these parameters
+     * @param args use these arguments - treat null as empty array
+     * @param parameterTypes match these parameters - treat null as empty array
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -325,6 +337,14 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
+        
+        if (args == null) {
+            args = emptyObjectArray;
+        }  
+                
+        if (parameterTypes == null) {
+            parameterTypes = emptyClassArray;
+        }
 
         Method method = getAccessibleMethod(
                 object.getClass(),
