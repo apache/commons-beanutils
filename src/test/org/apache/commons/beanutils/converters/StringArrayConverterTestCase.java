@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/converters/StringArrayConverterTestCase.java,v 1.2 2003/10/05 13:32:38 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/05 13:32:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/converters/StringArrayConverterTestCase.java,v 1.3 2003/10/09 20:39:15 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/09 20:39:15 $
  *
  * ====================================================================
  * 
@@ -26,8 +26,8 @@
  *    if any, must include the following acknowledgement:  
  *       "This product includes software developed by the 
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgement may appear in the software itself,
+ *    if and wherever such third-party acknowledgements normally appear.
  *
  * 4. The names "Apache", "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
@@ -68,7 +68,7 @@ import junit.framework.TestCase;
  * Test Case for StringArrayConverter
  *
  * @author Robert Burrell Donkin
- * @version $Revision: 1.2 $ $Date: 2003/10/05 13:32:38 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/09 20:39:15 $
  */
 
 public class StringArrayConverterTestCase extends TestCase {

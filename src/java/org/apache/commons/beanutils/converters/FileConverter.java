@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/FileConverter.java,v 1.2 2003/10/05 13:34:53 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/10/05 13:34:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/FileConverter.java,v 1.3 2003/10/09 20:43:16 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/10/09 20:43:16 $
  *
  * ====================================================================
  * 
@@ -26,8 +26,8 @@
  *    if any, must include the following acknowledgement:  
  *       "This product includes software developed by the 
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgement may appear in the software itself,
+ *    if and wherever such third-party acknowledgements normally appear.
  *
  * 4. The names "Apache", "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
@@ -73,7 +73,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author James Strachan
- * @version $Revision: 1.2 $ $Date: 2003/10/05 13:34:53 $
+ * @version $Revision: 1.3 $ $Date: 2003/10/09 20:43:16 $
  * @since 1.6
  */
 public final class FileConverter implements Converter {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBean.java,v 1.4 2003/10/05 13:32:13 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/10/05 13:32:13 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBean.java,v 1.5 2003/10/09 20:38:48 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/10/09 20:38:48 $
  *
  * ====================================================================
  * 
@@ -26,8 +26,8 @@
  *    if any, must include the following acknowledgement:  
  *       "This product includes software developed by the 
  *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowlegement may appear in the software itself,
- *    if and wherever such third-party acknowlegements normally appear.
+ *    Alternately, this acknowledgement may appear in the software itself,
+ *    if and wherever such third-party acknowledgements normally appear.
  *
  * 4. The names "Apache", "The Jakarta Project", "Commons", and "Apache Software
  *    Foundation" must not be used to endorse or promote products derived
@@ -73,7 +73,7 @@ package org.apache.commons.beanutils.priv;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/10/05 13:32:13 $
+ * @version $Revision: 1.5 $ $Date: 2003/10/09 20:38:48 $
  */
 
 class PrivateBean implements PrivateDirect {
