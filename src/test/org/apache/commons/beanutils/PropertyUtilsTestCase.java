@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.15 2002/01/23 22:52:26 sanders Exp $
- * $Revision: 1.15 $
- * $Date: 2002/01/23 22:52:26 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.16 2002/06/15 20:22:01 craigmcc Exp $
+ * $Revision: 1.16 $
+ * $Date: 2002/06/15 20:22:01 $
  *
  * ====================================================================
  *
@@ -66,6 +66,7 @@ package org.apache.commons.beanutils;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
@@ -90,6 +91,7 @@ import junit.framework.TestSuite;
  * <li>getNestedProperty(Object,String)</li>
  * <li>getPropertyDescriptor(Object,String)</li>
  * <li>getPropertyDescriptors(Object)</li>
+ * <li>getPropertyType(Object,String)</li>
  * <li>getSimpleProperty(Object,String)</li>
  * <li>setIndexedProperty(Object,String,Object)</li>
  * <li>setIndexedProperty(Object,String,String,Object)</li>
@@ -101,7 +103,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.15 $ $Date: 2002/01/23 22:52:26 $
+ * @version $Revision: 1.16 $ $Date: 2002/06/15 20:22:01 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -1234,6 +1236,57 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
+        }
+
+    }
+
+
+    /**
+     * Test getPropertyType() on all kinds of properties.
+     */
+    public void testGetPropertyType() {
+
+        Class clazz = null;
+        int intArray[] = new int[0];
+        String stringArray[] = new String[0];
+
+        try {
+            clazz = PropertyUtils.getPropertyType(bean, "booleanProperty");
+            assertEquals("booleanProperty type", Boolean.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "booleanSecond");
+            assertEquals("booleanSecond type", Boolean.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "doubleProperty");
+            assertEquals("doubleProperty type", Double.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "floatProperty");
+            assertEquals("floatProperty type", Float.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "intArray");
+            assertEquals("intArray type", intArray.getClass(), clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "intIndexed");
+            assertEquals("intIndexed type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "intProperty");
+            assertEquals("intProperty type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "listIndexed");
+            assertEquals("listIndexed type", List.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "longProperty");
+            assertEquals("longProperty type", Long.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "mappedProperty");
+            assertEquals("mappedProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "mappedIntProperty");
+            assertEquals("mappedIntProperty type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "readOnlyProperty");
+            assertEquals("readOnlyProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "shortProperty");
+            assertEquals("shortProperty type", Short.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "stringArray");
+            assertEquals("stringArray type", stringArray.getClass(), clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "stringIndexed");
+            assertEquals("stringIndexed type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "stringProperty");
+            assertEquals("stringProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "writeOnlyProperty");
+            assertEquals("writeOnlyProperty type", String.class, clazz);
+        } catch (Exception e) {
+            fail("Exception: " + e.getMessage());
         }
 
     }

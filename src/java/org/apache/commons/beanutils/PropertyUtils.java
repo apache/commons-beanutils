@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.24 2002/04/28 01:16:48 craigmcc Exp $
- * $Revision: 1.24 $
- * $Date: 2002/04/28 01:16:48 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.25 2002/06/15 20:22:01 craigmcc Exp $
+ * $Revision: 1.25 $
+ * $Date: 2002/06/15 20:22:01 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.24 $ $Date: 2002/04/28 01:16:48 $
+ * @version $Revision: 1.25 $ $Date: 2002/06/15 20:22:01 $
  */
 
 public class PropertyUtils {
@@ -1028,6 +1028,9 @@ public class PropertyUtils {
         } else if (descriptor instanceof IndexedPropertyDescriptor) {
             return (((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType());
+        } else if (descriptor instanceof MappedPropertyDescriptor) {
+            return (((MappedPropertyDescriptor) descriptor).
+                    getMappedPropertyType());
         } else {
             return (descriptor.getPropertyType());
         }
