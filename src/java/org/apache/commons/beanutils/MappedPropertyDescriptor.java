@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.6 2002/01/23 22:32:53 sanders Exp $
- * $Revision: 1.6 $
- * $Date: 2002/01/23 22:32:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.7 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -62,11 +62,14 @@
 
 package org.apache.commons.beanutils;
 
+
 import java.beans.IntrospectionException;
-import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.*;
-import java.security.*;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+
 
 /**
  * A MappedPropertyDescriptor describes one mapped property.
@@ -83,8 +86,9 @@ import java.security.*;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.6 $ $Date: 2002/01/23 22:32:53 $
+ * @version $Revision: 1.7 $ $Date: 2002/01/23 22:35:58 $
  */
+
 
 public class MappedPropertyDescriptor extends PropertyDescriptor {
 
@@ -96,27 +100,29 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * The underlying data type of the property we are describing.
      */
-    private Class mappedPropertyType;
 
+    private Class mappedPropertyType;
 
 
     /**
      * The reader method for this property (if any).
      */
+
     private Method mappedReadMethod;
 
 
     /**
      * The writer method for this property (if any).
      */
-    private Method mappedWriteMethod;
 
+    private Method mappedWriteMethod;
 
 
     /**
      * The parameter types array for the reader method signature.
      */
-    private static final Class[] stringClassArray = new Class[] {String.class};
+
+    private static final Class[] stringClassArray = new Class[]{String.class};
 
 
     // ----------------------------------------------------------- Constructors
@@ -138,33 +144,56 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
+
     public MappedPropertyDescriptor(String propertyName, Class beanClass)
+
             throws IntrospectionException {
 
+
         super(propertyName, null, null);
+
         if (propertyName == null || propertyName.length() == 0) {
+
             throw new IntrospectionException("bad property name: " +
                     propertyName + " on class: " + beanClass.getClass().getName());
+
         }
+
         setName(propertyName);
+
         String base = capitalize(propertyName);
 
         // Look for mapped get and set methods
         try {
+
             mappedReadMethod = findMethod(beanClass, "get" + base, 1,
-                                          stringClassArray);
+
+                    stringClassArray);
+
             Class params[] =
-                { String.class, mappedReadMethod.getReturnType() };
+
+                    { String.class, mappedReadMethod.getReturnType() };
+
             mappedWriteMethod = findMethod(beanClass, "set" + base, 2,
-                                           params);
+
+                    params);
+
         } catch (IntrospectionException e) {
+
             ;
+
         }
+
         if ((mappedReadMethod == null) && (mappedWriteMethod == null))
+
             throw new IntrospectionException("Property '" + propertyName +
-                                             "' not found on " +
-                                             beanClass.getName());
+
+                    "' not found on " +
+
+                    beanClass.getName());
+
         findMappedPropertyType();
+
 
     }
 
@@ -186,30 +215,49 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
+
     public MappedPropertyDescriptor(String propertyName, Class beanClass,
-		String mappedGetterName, String mappedSetterName)
-		throws IntrospectionException {
+
+                                    String mappedGetterName, String mappedSetterName)
+
+            throws IntrospectionException {
+
 
         super(propertyName, null, null);
+
         if (propertyName == null || propertyName.length() == 0) {
+
             throw new IntrospectionException("bad property name: " +
-                propertyName);
+                    propertyName);
+
         }
+
         setName(propertyName);
 
         // search the mapped get and set methods
         mappedReadMethod =
-            findMethod(beanClass, mappedGetterName, 1, stringClassArray);
+
+                findMethod(beanClass, mappedGetterName, 1, stringClassArray);
+
         if (mappedReadMethod != null) {
+
             Class params[] = { String.class,
-                               mappedReadMethod.getReturnType() };
+                mappedReadMethod.getReturnType() };
+
             mappedWriteMethod =
-                findMethod(beanClass, mappedSetterName, 2, params);
+
+                    findMethod(beanClass, mappedSetterName, 2, params);
+
         } else {
+
             mappedWriteMethod =
-                findMethod(beanClass, mappedSetterName, 2);
+
+                    findMethod(beanClass, mappedSetterName, 2);
+
         }
+
         findMappedPropertyType();
+
 
     }
 
@@ -228,19 +276,31 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
+
     public MappedPropertyDescriptor(String propertyName,
-    		Method mappedGetter, Method mappedSetter)
-				throws IntrospectionException {
+
+                                    Method mappedGetter, Method mappedSetter)
+
+            throws IntrospectionException {
+
 
         super(propertyName, mappedGetter, mappedSetter);
+
         if (propertyName == null || propertyName.length() == 0) {
+
             throw new IntrospectionException("bad property name: " +
-                propertyName);
+                    propertyName);
+
         }
+
         setName(propertyName);
+
         mappedReadMethod = mappedGetter;
+
         mappedWriteMethod = mappedSetter;
+
         findMappedPropertyType();
+
 
     }
 
@@ -248,7 +308,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     // -------------------------------------------------------- Public Methods
 
 
-   /**
+    /**
      * Gets the Class object for the property values.
      *
      * @return The Java type info for the property values.  Note that
@@ -258,9 +318,12 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * <p>
      * This is the type that will be returned by the mappedReadMethod.
      */
+
     public Class getMappedPropertyType() {
 
+
         return mappedPropertyType;
+
 
     }
 
@@ -271,9 +334,12 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @return The method that should be used to read the property value.
      * May return null if the property can't be read.
      */
+
     public Method getMappedReadMethod() {
 
+
         return mappedReadMethod;
+
 
     }
 
@@ -283,11 +349,16 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param getter The new getter method.
      */
+
     public void setMappedReadMethod(Method mappedGetter)
-				throws IntrospectionException {
+
+            throws IntrospectionException {
+
 
         mappedReadMethod = mappedGetter;
+
         findMappedPropertyType();
+
 
     }
 
@@ -298,9 +369,12 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @return The method that should be used to write one of the property value.
      * May return null if the property can't be written.
      */
+
     public Method getMappedWriteMethod() {
 
+
         return mappedWriteMethod;
+
 
     }
 
@@ -310,11 +384,16 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param setter The new setter method.
      */
+
     public void setMappedWriteMethod(Method mappedSetter)
-				throws IntrospectionException {
+
+            throws IntrospectionException {
+
 
         mappedWriteMethod = mappedSetter;
+
         findMappedPropertyType();
+
 
     }
 
@@ -326,39 +405,72 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * Introspect our bean class to identify the corresponding getter
      * and setter methods.
      */
+
     private void findMappedPropertyType() throws IntrospectionException {
 
+
         try {
+
             mappedPropertyType = null;
+
             if (mappedReadMethod != null) {
+
                 if (mappedReadMethod.getParameterTypes().length != 1) {
+
                     throw new IntrospectionException
-                        ("bad mapped read method arg count");
+
+                            ("bad mapped read method arg count");
+
                 }
+
                 mappedPropertyType =
-                    mappedReadMethod.getReturnType();
+
+                        mappedReadMethod.getReturnType();
+
                 if (mappedPropertyType == Void.TYPE) {
+
                     throw new IntrospectionException
-                        ("mapped read method " +
-                         mappedReadMethod.getName() + " returns void");
+
+                            ("mapped read method " +
+
+                            mappedReadMethod.getName() + " returns void");
+
                 }
+
             }
+
             if (mappedWriteMethod != null) {
+
                 Class params[] = mappedWriteMethod.getParameterTypes();
+
                 if (params.length != 2) {
+
                     throw new IntrospectionException
-                        ("bad mapped write method arg count");
+
+                            ("bad mapped write method arg count");
+
                 }
+
                 if (mappedPropertyType != null &&
-                    mappedPropertyType != params[1]) {
+
+                        mappedPropertyType != params[1]) {
+
                     throw new IntrospectionException
-                        ("type mismatch between mapped read and write methods");
+
+                            ("type mismatch between mapped read and write methods");
+
                 }
+
                 mappedPropertyType = params[1];
+
             }
+
         } catch (IntrospectionException ex) {
+
             throw ex;
+
         }
+
 
     }
 
@@ -368,14 +480,22 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param s The property name
      */
+
     private static String capitalize(String s) {
 
+
         if (s.length() == 0) {
+
             return s;
+
         }
+
         char chars[] = s.toCharArray();
+
         chars[0] = Character.toUpperCase(chars[0]);
+
         return new String(chars);
+
 
     }
 
@@ -386,7 +506,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
     // Cache of Class.getDeclaredMethods:
     private static java.util.Hashtable
-        declaredMethodCache = new java.util.Hashtable();
+
+            declaredMethodCache = new java.util.Hashtable();
 
 
     /*
@@ -394,34 +515,52 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     private static synchronized Method[] getPublicDeclaredMethods(Class clz) {
 
+
         // Looking up Class.getDeclaredMethods is relatively expensive,
         // so we cache the results.
         final Class fclz = clz;
-        Method[] result = (Method[])declaredMethodCache.get(fclz);
+
+        Method[] result = (Method[]) declaredMethodCache.get(fclz);
+
         if (result != null) {
+
             return result;
+
         }
 
         // We have to raise privilege for getDeclaredMethods
         result = (Method[])
-            AccessController.doPrivileged(new PrivilegedAction() {
-                public Object run() {
-                    return fclz.getDeclaredMethods();
-                }
-            });
+
+                AccessController.doPrivileged(new PrivilegedAction() {
+
+                    public Object run() {
+
+                        return fclz.getDeclaredMethods();
+
+                    }
+
+                });
 
         // Null out any non-public methods.
         for (int i = 0; i < result.length; i++) {
+
             Method method = result[i];
+
             int mods = method.getModifiers();
+
             if (!Modifier.isPublic(mods)) {
+
                 result[i] = null;
+
             }
+
         }
 
         // Add it to the cache.
         declaredMethodCache.put(clz, result);
+
         return result;
+
 
     }
 
@@ -429,42 +568,68 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Internal support for finding a target methodName on a given class.
      */
+
     private static Method internalFindMethod(Class start, String methodName,
+
                                              int argCount) {
 
-	// For overridden methods we need to find the most derived version.
-	// So we start with the given class and walk up the superclass chain.
-	for (Class cl = start; cl != null; cl = cl.getSuperclass()) {
+
+        // For overridden methods we need to find the most derived version.
+        // So we start with the given class and walk up the superclass chain.
+        for (Class cl = start; cl != null; cl = cl.getSuperclass()) {
+
             Method methods[] = getPublicDeclaredMethods(cl);
-	    for (int i = 0; i < methods.length; i++) {
-	        Method method = methods[i];
-		if (method == null) {
-		    continue;
-		}
-	        // skip static methods.
-		int mods = method.getModifiers();
-		if (Modifier.isStatic(mods)) {
-		    continue;
-		}
-	        if (method.getName().equals(methodName) &&
-                    method.getParameterTypes().length == argCount) {
-	            return method;
- 	        }
-	    }
-	}
 
-	// Now check any inherited interfaces.  This is necessary both when
-	// the argument class is itself an interface, and when the argument
-	// class is an abstract class.
-	Class ifcs[] = start.getInterfaces();
-	for (int i = 0 ; i < ifcs.length; i++) {
-	    Method m = internalFindMethod(ifcs[i], methodName, argCount);
-	    if (m != null) {
-		return m;
-	    }
-	}
+            for (int i = 0; i < methods.length; i++) {
 
-	return null;
+                Method method = methods[i];
+
+                if (method == null) {
+
+                    continue;
+
+                }
+                // skip static methods.
+                int mods = method.getModifiers();
+
+                if (Modifier.isStatic(mods)) {
+
+                    continue;
+
+                }
+
+                if (method.getName().equals(methodName) &&
+
+                        method.getParameterTypes().length == argCount) {
+
+                    return method;
+
+                }
+
+            }
+
+        }
+
+        // Now check any inherited interfaces.  This is necessary both when
+        // the argument class is itself an interface, and when the argument
+        // class is an abstract class.
+        Class ifcs[] = start.getInterfaces();
+
+        for (int i = 0; i < ifcs.length; i++) {
+
+            Method m = internalFindMethod(ifcs[i], methodName, argCount);
+
+            if (m != null) {
+
+                return m;
+
+            }
+
+        }
+
+
+        return null;
+
 
     }
 
@@ -473,56 +638,94 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * Internal support for finding a target methodName with a given
      * parameter list on a given class.
      */
+
     private static Method internalFindMethod(Class start, String methodName,
+
                                              int argCount, Class args[]) {
+
 
         // For overriden methods we need to find the most derived version.
         // So we start with the given class and walk up the superclass chain.
         for (Class cl = start; cl != null; cl = cl.getSuperclass()) {
+
             Method methods[] = getPublicDeclaredMethods(cl);
+
             for (int i = 0; i < methods.length; i++) {
+
                 Method method = methods[i];
+
                 if (method == null) {
+
                     continue;
+
                 }
                 // skip static methods.
                 int mods = method.getModifiers();
+
                 if (Modifier.isStatic(mods)) {
+
                     continue;
+
                 }
                 // make sure method signature matches.
                 Class params[] = method.getParameterTypes();
+
                 if (method.getName().equals(methodName) &&
-                    params.length == argCount) {
+
+                        params.length == argCount) {
+
                     boolean different = false;
+
                     if (argCount > 0) {
+
                         for (int j = 0; j < argCount; j++) {
+
                             if (params[j] != args[j]) {
+
                                 different = true;
+
                                 continue;
+
                             }
+
                         }
+
                         if (different) {
+
                             continue;
+
                         }
+
                     }
+
                     return method;
+
                 }
+
             }
+
         }
 
         // Now check any inherited interfaces.  This is necessary both when
         // the argument class is itself an interface, and when the argument
         // class is an abstract class.
         Class ifcs[] = start.getInterfaces();
-        for (int i = 0 ; i < ifcs.length; i++) {
+
+        for (int i = 0; i < ifcs.length; i++) {
+
             Method m = internalFindMethod(ifcs[i], methodName, argCount);
+
             if (m != null) {
+
                 return m;
+
             }
+
         }
 
+
         return null;
+
 
     }
 
@@ -530,42 +733,64 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Find a target methodName on a given class.
      */
+
     static Method findMethod(Class cls, String methodName, int argCount)
-        throws IntrospectionException {
 
-	if (methodName == null) {
-	    return null;
-	}
+            throws IntrospectionException {
 
-	Method m = internalFindMethod(cls, methodName, argCount);
-	if (m != null ) {
-	    return m;
-	}
 
-	// We failed to find a suitable method
-	throw new IntrospectionException("No method \"" + methodName +
-                                         "\" with " + argCount + " arg(s)");
+        if (methodName == null) {
+
+            return null;
+
+        }
+
+
+        Method m = internalFindMethod(cls, methodName, argCount);
+
+        if (m != null) {
+
+            return m;
+
+        }
+
+        // We failed to find a suitable method
+        throw new IntrospectionException("No method \"" + methodName +
+
+                "\" with " + argCount + " arg(s)");
+
     }
 
 
     /**
      * Find a target methodName with specific parameter list on a given class.
      */
+
     static Method findMethod(Class cls, String methodName, int argCount,
+
                              Class args[]) throws IntrospectionException {
 
+
         if (methodName == null) {
+
             return null;
+
         }
 
+
         Method m = internalFindMethod(cls, methodName, argCount, args);
-        if (m != null ) {
+
+        if (m != null) {
+
             return m;
+
         }
 
         // We failed to find a suitable method
         throw new IntrospectionException("No method \"" + methodName +
-                   "\" with " + argCount + " arg(s) of matching types.");
+
+                "\" with " + argCount + " arg(s) of matching types.");
+
     }
 
 
@@ -575,31 +800,53 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * or "implements" b.
      * Note tht either or both "Class" objects may represent interfaces.
      */
-    static  boolean isSubclass(Class a, Class b) {
 
-	// We rely on the fact that for any given java class or
+    static boolean isSubclass(Class a, Class b) {
+
+
+        // We rely on the fact that for any given java class or
         // primtitive type there is a unqiue Class object, so
-	// we can use object equivalence in the comparisons.
-	if (a == b) {
-	    return true;
-	}
-	if (a == null || b == null) {
-	    return false;
-	}
-	for (Class x = a; x != null; x = x.getSuperclass()) {
-	    if (x == b) {
-		return true;
-	    }
-	    if (b.isInterface()) {
-		Class interfaces[] = x.getInterfaces();
-		for (int i = 0; i < interfaces.length; i++) {
-		    if (isSubclass(interfaces[i], b)) {
-			return true;
-		    }
-		}
-	    }
-	}
-	return false;
+        // we can use object equivalence in the comparisons.
+        if (a == b) {
+
+            return true;
+
+        }
+
+        if (a == null || b == null) {
+
+            return false;
+
+        }
+
+        for (Class x = a; x != null; x = x.getSuperclass()) {
+
+            if (x == b) {
+
+                return true;
+
+            }
+
+            if (b.isInterface()) {
+
+                Class interfaces[] = x.getInterfaces();
+
+                for (int i = 0; i < interfaces.length; i++) {
+
+                    if (isSubclass(interfaces[i], b)) {
+
+                        return true;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return false;
+
 
     }
 
@@ -607,15 +854,24 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Return true iff the given method throws the given exception.
      */
+
     private boolean throwsException(Method method, Class exception) {
 
-	Class exs[] = method.getExceptionTypes();
-	for (int i = 0; i < exs.length; i++) {
-	    if (exs[i] == exception) {
-		return true;
-	    }
-	}
-	return false;
+
+        Class exs[] = method.getExceptionTypes();
+
+        for (int i = 0; i < exs.length; i++) {
+
+            if (exs[i] == exception) {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.9 2002/01/23 22:32:53 sanders Exp $
- * $Revision: 1.9 $
- * $Date: 2002/01/23 22:32:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.10 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.10 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -63,17 +63,13 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.BeanInfo;
 import java.beans.IndexedPropertyDescriptor;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -90,7 +86,7 @@ import org.apache.commons.logging.LogSource;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.9 $ $Date: 2002/01/23 22:32:53 $
+ * @version $Revision: 1.10 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class BeanUtils {
@@ -147,8 +143,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static Object cloneBean(Object bean)
-        throws IllegalAccessException, InstantiationException,
-               InvocationTargetException, NoSuchMethodException {
+            throws IllegalAccessException, InstantiationException,
+            InvocationTargetException, NoSuchMethodException {
 
         if (log.isDebugEnabled()) {
             log.debug("Cloning bean: " + bean.getClass().getName());
@@ -178,17 +174,17 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static Map describe(Object bean)
-        throws IllegalAccessException, InvocationTargetException,
-               NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (log.isDebugEnabled()) {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
         if (bean == null)
-            //            return (Collections.EMPTY_MAP);
+        //            return (Collections.EMPTY_MAP);
             return (new java.util.HashMap());
         PropertyDescriptor descriptors[] =
-            PropertyUtils.getPropertyDescriptors(bean);
+                PropertyUtils.getPropertyDescriptors(bean);
         Map description = new HashMap(descriptors.length);
         for (int i = 0; i < descriptors.length; i++) {
             String name = descriptors[i].getName();
@@ -215,8 +211,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String[] getArrayProperty(Object bean, String name)
-        throws IllegalAccessException, InvocationTargetException,
-               NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getProperty(bean, name);
         if (value == null) {
@@ -271,8 +267,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getIndexedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getIndexedProperty(bean, name);
         return (ConvertUtils.convert(value));
@@ -297,9 +293,9 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getIndexedProperty(Object bean,
-					    String name, int index)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                            String name, int index)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getIndexedProperty(bean, name, index);
         return (ConvertUtils.convert(value));
@@ -326,8 +322,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getMappedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getMappedProperty(bean, name);
         return (ConvertUtils.convert(value));
@@ -353,8 +349,8 @@ public class BeanUtils {
      */
     public static String getMappedProperty(Object bean,
                                            String name, String key)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getMappedProperty(bean, name, key);
         return (ConvertUtils.convert(value));
@@ -379,8 +375,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getNestedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getNestedProperty(bean, name);
         return (ConvertUtils.convert(value));
@@ -404,8 +400,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         return (getNestedProperty(bean, name));
 
@@ -427,8 +423,8 @@ public class BeanUtils {
      *  propety cannot be found
      */
     public static String getSimpleProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         Object value = PropertyUtils.getSimpleProperty(bean, name);
         return (ConvertUtils.convert(value));
@@ -466,14 +462,14 @@ public class BeanUtils {
      *  throws an exception
      */
     public static void populate(Object bean, Map properties)
-        throws IllegalAccessException, InvocationTargetException {
+            throws IllegalAccessException, InvocationTargetException {
 
         if ((bean == null) || (properties == null))
             return;
 
         if (log.isDebugEnabled()) {
             log.debug("BeanUtils.populate(" + bean + ", " +
-                               properties + ")");
+                    properties + ")");
         }
 
         // Loop through the property name/value pairs to be set
@@ -488,8 +484,8 @@ public class BeanUtils {
 
             if (log.isDebugEnabled()) {
                 log.debug("  name='" + name + "', value.class='" +
-                                   (value == null ? "NONE" :
-                                   value.getClass().getName()) + "'");
+                        (value == null ? "NONE" :
+                        value.getClass().getName()) + "'");
             }
 
             // Get the property descriptor of the requested property (if any)
@@ -498,10 +494,10 @@ public class BeanUtils {
             try {
                 if (bean instanceof DynaBean) {
                     dynaProperty =
-                       ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                            ((DynaBean) bean).getDynaClass().getDynaProperty(name);
                 } else {
                     descriptor =
-                        PropertyUtils.getPropertyDescriptor(bean, name);
+                            PropertyUtils.getPropertyDescriptor(bean, name);
                 }
             } catch (Throwable t) {
 
@@ -523,7 +519,7 @@ public class BeanUtils {
 
             if (log.isDebugEnabled())
                 log.debug("    Property descriptor is '" +
-                                   descriptor + "'");
+                        descriptor + "'");
 
 
             // Process differently for JavaBeans and DynaBeans
@@ -533,9 +529,9 @@ public class BeanUtils {
                 Method setter = null;
                 if (descriptor instanceof IndexedPropertyDescriptor)
                     setter = ((IndexedPropertyDescriptor) descriptor).
-                        getIndexedWriteMethod();
+                            getIndexedWriteMethod();
                 else if (descriptor instanceof MappedPropertyDescriptor)
-                    setter =((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
+                    setter = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
 
                 if (setter == null)
                     setter = descriptor.getWriteMethod();
@@ -551,11 +547,11 @@ public class BeanUtils {
 
                 if (log.isDebugEnabled()) {
                     log.debug("    Setter method is '" +
-                        setter.getName() + "(" +
-                        parameterTypes[0].getName() +
-                        (parameterTypes.length > 1 ?
-                        ", " + parameterTypes[1].getName() : "" )
-                        + ")'");
+                            setter.getName() + "(" +
+                            parameterTypes[0].getName() +
+                            (parameterTypes.length > 1 ?
+                            ", " + parameterTypes[1].getName() : "")
+                            + ")'");
                 }
 
                 Class parameterType = parameterTypes[0];
@@ -569,20 +565,20 @@ public class BeanUtils {
                         String values[] = new String[1];
                         values[0] = (String) value;
                         parameters[0] = ConvertUtils.convert((String[]) values,
-                                                             parameterType);
+                                parameterType);
                     } else if (value instanceof String[]) {
                         parameters[0] = ConvertUtils.convert((String[]) value,
-                                                             parameterType);
+                                parameterType);
                     } else {
                         parameters[0] = value;
                     }
                 } else {
                     if (value instanceof String) {
                         parameters[0] = ConvertUtils.convert((String) value,
-                                                             parameterType);
+                                parameterType);
                     } else if (value instanceof String[]) {
                         parameters[0] = ConvertUtils.convert(((String[]) value)[0],
-                                                             parameterType);
+                                parameterType);
                     } else {
                         parameters[0] = value;
                     }
@@ -605,10 +601,10 @@ public class BeanUtils {
                         String values[] = new String[1];
                         values[0] = (String) value;
                         newValue = ConvertUtils.convert((String[]) values,
-                                                        type);
+                                type);
                     } else if (value instanceof String[]) {
                         newValue = ConvertUtils.convert((String[]) value,
-                                                        type);
+                                type);
                     } else {
                         newValue = value;
                     }
@@ -617,7 +613,7 @@ public class BeanUtils {
                         newValue = ConvertUtils.convert((String) value, type);
                     } else if (value instanceof String[]) {
                         newValue = ConvertUtils.convert(((String[]) value)[0],
-                                                        type);
+                                type);
                     } else {
                         newValue = value;
                     }

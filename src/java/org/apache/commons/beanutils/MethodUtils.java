@@ -59,9 +59,9 @@
 package org.apache.commons.beanutils;
 
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -101,16 +101,15 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-                Object object,
-                String methodName,
-                Object arg)
-                    throws
-                        NoSuchMethodException,
-                        IllegalAccessException,
-                        InvocationTargetException
-    {
+            Object object,
+            String methodName,
+            Object arg)
+            throws
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
 
-        Object [] args = {arg};
+        Object[] args = {arg};
         return invokeExactMethod(object, methodName, args);
 
     }
@@ -134,19 +133,17 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-                Object object,
-                String methodName,
-                Object [] args)
-                    throws
-                        NoSuchMethodException,
-                        IllegalAccessException,
-                        InvocationTargetException
-    {
+            Object object,
+            String methodName,
+            Object[] args)
+            throws
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
 
-        int arguments  = args.length;
+        int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
-        for (int i=0; i<arguments ;i++)
-        {
+        for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeExactMethod(object, methodName, args, parameterTypes);
@@ -173,20 +170,19 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-                Object object,
-                String methodName,
-                Object [] args,
-                Class [] parameterTypes)
-                    throws
-                        NoSuchMethodException,
-                        IllegalAccessException,
-                        InvocationTargetException
-    {
+            Object object,
+            String methodName,
+            Object[] args,
+            Class[] parameterTypes)
+            throws
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
 
         Method method = getAccessibleMethod(
-                                        object.getClass(),
-                                        methodName,
-                                        parameterTypes);
+                object.getClass(),
+                methodName,
+                parameterTypes);
         if (method == null)
             throw new NoSuchMethodException("No such accessible method: " +
                     methodName + "() on object: " + object.getClass().getName());
@@ -207,12 +203,11 @@ public class MethodUtils {
      * @param parameterType taking this type of parameter
      */
     public static Method getAccessibleMethod(
-                Class clazz,
-                String methodName,
-                Class parameterType)
-    {
+            Class clazz,
+            String methodName,
+            Class parameterType) {
 
-        Class [] parameterTypes = {parameterType};
+        Class[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
 
     }
@@ -230,14 +225,13 @@ public class MethodUtils {
      * @param parameterTypes with these parameters types
      */
     public static Method getAccessibleMethod(
-                Class clazz,
-                String methodName,
-                Class[] parameterTypes)
-    {
+            Class clazz,
+            String methodName,
+            Class[] parameterTypes) {
 
         try {
             return getAccessibleMethod
-                (clazz.getMethod(methodName, parameterTypes));
+                    (clazz.getMethod(methodName, parameterTypes));
         } catch (NoSuchMethodException e) {
             return (null);
         }
@@ -274,9 +268,9 @@ public class MethodUtils {
         String methodName = method.getName();
         Class[] parameterTypes = method.getParameterTypes();
         method =
-            getAccessibleMethodFromInterfaceNest(clazz,
-                                                 method.getName(),
-                                                 method.getParameterTypes());
+                getAccessibleMethodFromInterfaceNest(clazz,
+                        method.getName(),
+                        method.getParameterTypes());
         return (method);
 
     }
@@ -299,12 +293,12 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromInterfaceNest
-        (Class clazz, String methodName, Class parameterTypes[]) {
+            (Class clazz, String methodName, Class parameterTypes[]) {
 
         Method method = null;
 
         // Search up the superclass chain
-        for ( ; clazz != null; clazz = clazz.getSuperclass()) {
+        for (; clazz != null; clazz = clazz.getSuperclass()) {
 
             // Check the implemented interfaces of the parent class
             Class interfaces[] = clazz.getInterfaces();
@@ -317,7 +311,7 @@ public class MethodUtils {
                 // Does the method exist on this interface?
                 try {
                     method = interfaces[i].getDeclaredMethod(methodName,
-                                                             parameterTypes);
+                            parameterTypes);
                 } catch (NoSuchMethodException e) {
                     ;
                 }
@@ -326,9 +320,9 @@ public class MethodUtils {
 
                 // Recursively check our parent interfaces
                 method =
-                    getAccessibleMethodFromInterfaceNest(interfaces[i],
-                                                         methodName,
-                                                         parameterTypes);
+                        getAccessibleMethodFromInterfaceNest(interfaces[i],
+                                methodName,
+                                parameterTypes);
                 if (method != null)
                     break;
 

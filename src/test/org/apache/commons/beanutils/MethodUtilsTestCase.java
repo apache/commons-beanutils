@@ -58,26 +58,21 @@
 
 package org.apache.commons.beanutils;
 
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 
 
-/** 
+/**
  * <p> Test case for <code>MethodUtils</code> </p>
  *
- */ 
-public class MethodUtilsTestCase extends TestCase
-{
+ */
+public class MethodUtilsTestCase extends TestCase {
+
     // ---------------------------------------------------- Instance Variables
-    
+
     protected PrivateBeanFactory privateBeanFactory;
 
     // ---------------------------------------------------------- Constructors
@@ -87,8 +82,7 @@ public class MethodUtilsTestCase extends TestCase
      *
      * @param name Name of the test case
      */
-    public MethodUtilsTestCase(String name) 
-    {
+    public MethodUtilsTestCase(String name) {
         super(name);
     }
 
@@ -99,8 +93,7 @@ public class MethodUtilsTestCase extends TestCase
     /**
      * Set up instance variables required by this test case.
      */
-    public void setUp() 
-    {
+    public void setUp() {
         privateBeanFactory = new PrivateBeanFactory();
     }
 
@@ -108,130 +101,126 @@ public class MethodUtilsTestCase extends TestCase
     /**
      * Return the tests included in this test suite.
      */
-    public static Test suite() 
-    {
+    public static Test suite() {
         return (new TestSuite(MethodUtilsTestCase.class));
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
-    public void tearDown() 
-    {
+    public void tearDown() {
         privateBeanFactory = null;
     }
 
 
-    // ------------------------------------------------ Individual Test Methods   
-    
+    // ------------------------------------------------ Individual Test Methods
+
     /**
      * <p> Test <code>getAccessibleMethod</code>.
      */
-    public void testGetAccessibleMethod() 
-    {
-        // test MethodUtils.getAccessibleMethod 
+    public void testGetAccessibleMethod() {
+        // test MethodUtils.getAccessibleMethod
         // we'll make things easier by using the convenience methods
-        
+
         // easy bit first - find a public method
         // METHOD ONE
         Method method = MethodUtils.getAccessibleMethod
-            (TestBean.class, "setStringProperty",String.class);
+                (TestBean.class, "setStringProperty", String.class);
 
         // check that we've found one that matches
         assertNotNull(method);
         assertEquals("method ONE is named correctly",
-                     "setStringProperty", method.getName());
+                "setStringProperty", method.getName());
         assertTrue("Method ONE is public",
-                   Modifier.isPublic(method.getModifiers()));
-        
+                Modifier.isPublic(method.getModifiers()));
+
         // trickier this one - find a method in a direct interface
         // METHOD TWO
         method = MethodUtils.getAccessibleMethod
-            (privateBeanFactory.create().getClass(), 
-             "methodBar",
-             String.class);
-            
+                (privateBeanFactory.create().getClass(),
+                        "methodBar",
+                        String.class);
+
         // check that we've found one that matches
         assertNotNull(method);
         assertEquals("Method TWO is named correctly",
-                     "methodBar", method.getName());
+                "methodBar", method.getName());
         assertTrue("Method TWO is public",
-                   Modifier.isPublic(method.getModifiers()));
-        
+                Modifier.isPublic(method.getModifiers()));
+
         // trickier this one - find a method in a indirect interface
         // METHOD THREE
         method = MethodUtils.getAccessibleMethod
-            (privateBeanFactory.createSubclass().getClass(), 
-             "methodBaz",
-             String.class);
-            
+                (privateBeanFactory.createSubclass().getClass(),
+                        "methodBaz",
+                        String.class);
+
         // check that we've found one that matches
         assertNotNull(method);
         assertEquals("Method THREE is named correctly",
-                     "methodBaz", method.getName());
+                "methodBaz", method.getName());
         assertTrue("Method THREE is public",
-                   Modifier.isPublic(method.getModifiers()));
-        
+                Modifier.isPublic(method.getModifiers()));
+
     }
-    
+
 
     /**
      * <p> Test <code>invokeExactMethod</code>.
      */
-    public void testInvokeExactMethod()
-    {
-        // test MethodUtils.invokeExactMethod 
+    public void testInvokeExactMethod() {
+        // test MethodUtils.invokeExactMethod
         // easy bit first - invoke a public method
         // METHOD ONE
         try {
-            
+
             TestBean bean = new TestBean();
-            Object ret = MethodUtils.invokeExactMethod(bean, "setStringProperty","TEST");
+            Object ret = MethodUtils.invokeExactMethod(bean, "setStringProperty", "TEST");
             // check that the return's right and that the properties been set
             assertNull(ret);
-            assertEquals("Method ONE was invoked","TEST",bean.getStringProperty());           
-        
+            assertEquals("Method ONE was invoked", "TEST", bean.getStringProperty());
+
         } catch (Throwable t) {
             // ONE
             fail("Exception in method ONE prevented invokation: " + t.toString());
         }
-        
+
         // trickier this one - find a method in a direct interface
         // METHOD TWO FAILURE
         try {
-            
+
             Object ret = MethodUtils.invokeExactMethod(
-                        privateBeanFactory.create(), 
-                        "methodBar",
-                        "ANOTHER TEST");
-            
+                    privateBeanFactory.create(),
+                    "methodBar",
+                    "ANOTHER TEST");
+
             // check that we've found one that matches
-            assertEquals("Method TWO was invoked correctly","ANOTHER TEST",ret);
+            assertEquals("Method TWO was invoked correctly", "ANOTHER TEST", ret);
 
         } catch (Throwable t) {
             // METHOD TWO FAILURE
             fail("Exception in method TWO prevented invokation: " + t.toString());
         }
-        
-        
+
+
         // trickier this one - find a method in a indirect interface
         // METHOD THREE
         try {
-            
+
             Object ret = MethodUtils.invokeExactMethod(
-                        privateBeanFactory.createSubclass(), 
-                        "methodBaz",
-                        "YET ANOTHER TEST");
+                    privateBeanFactory.createSubclass(),
+                    "methodBaz",
+                    "YET ANOTHER TEST");
 
-            
+
             // check that we've found one that matches
-            assertEquals("Method TWO was invoked correctly","YET ANOTHER TEST",ret);
+            assertEquals("Method TWO was invoked correctly", "YET ANOTHER TEST", ret);
 
-        
+
         } catch (Throwable t) {
             // METHOD THREE FAILURE
             fail("Exception in method THREE prevented invokation: " + t.toString());
-            
+
         }
-    }  
+    }
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.2 2002/01/16 18:20:02 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/16 18:20:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -64,8 +64,6 @@ package org.apache.commons.beanutils;
 
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -76,7 +74,7 @@ import java.util.Map;
  * standard JavaBean instances.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/16 18:20:02 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class WrapDynaClass implements DynaClass {
@@ -177,7 +175,7 @@ public class WrapDynaClass implements DynaClass {
 
         if (name == null) {
             throw new IllegalArgumentException
-                ("No property name specified");
+                    ("No property name specified");
         }
         return ((DynaProperty) propertiesMap.get(name));
 
@@ -217,7 +215,7 @@ public class WrapDynaClass implements DynaClass {
      *  fails for some other reason
      */
     public DynaBean newInstance()
-        throws IllegalAccessException, InstantiationException {
+            throws IllegalAccessException, InstantiationException {
 
         throw new UnsupportedOperationException("newInstance() not supported");
 
@@ -265,7 +263,7 @@ public class WrapDynaClass implements DynaClass {
 
         synchronized (dynaClasses) {
             WrapDynaClass dynaClass =
-                (WrapDynaClass) dynaClasses.get(beanClass);
+                    (WrapDynaClass) dynaClasses.get(beanClass);
             if (dynaClass == null) {
                 dynaClass = new WrapDynaClass(beanClass);
                 dynaClasses.put(beanClass, dynaClass);
@@ -286,12 +284,12 @@ public class WrapDynaClass implements DynaClass {
 
         // Look up the property descriptors for this bean class
         PropertyDescriptor regulars[] =
-            PropertyUtils.getPropertyDescriptors(beanClass);
+                PropertyUtils.getPropertyDescriptors(beanClass);
         if (regulars == null) {
             regulars = new PropertyDescriptor[0];
         }
         HashMap mappeds =
-            PropertyUtils.getMappedPropertyDescriptors(beanClass);
+                PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null) {
             mappeds = new HashMap();
         }
@@ -300,24 +298,24 @@ public class WrapDynaClass implements DynaClass {
         properties = new DynaProperty[regulars.length + mappeds.size()];
         for (int i = 0; i < regulars.length; i++) {
             descriptorsMap.put(regulars[i].getName(),
-                               regulars[i]);
+                    regulars[i]);
             properties[i] =
-                new DynaProperty(regulars[i].getName(),
-                                 regulars[i].getPropertyType());
+                    new DynaProperty(regulars[i].getName(),
+                            regulars[i].getPropertyType());
             propertiesMap.put(properties[i].getName(),
-                              properties[i]);
+                    properties[i]);
         }
         int j = regulars.length;
         Iterator names = mappeds.keySet().iterator();
         while (names.hasNext()) {
             String name = (String) names.next();
             PropertyDescriptor descriptor =
-                (PropertyDescriptor) mappeds.get(name);
+                    (PropertyDescriptor) mappeds.get(name);
             properties[j] =
-                new DynaProperty(descriptor.getName(),
-                                 Map.class);
+                    new DynaProperty(descriptor.getName(),
+                            Map.class);
             propertiesMap.put(properties[j].getName(),
-                              properties[j]);
+                    properties[j]);
             j++;
         }
 

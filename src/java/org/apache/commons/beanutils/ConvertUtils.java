@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.4 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.5 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.lang.reflect.Array;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.4 $ $Date: 2002/01/21 00:44:39 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class ConvertUtils {
@@ -425,12 +425,12 @@ public class ConvertUtils {
         if (value == null)
             return (defaultValue);
         else if (value.equalsIgnoreCase("yes") ||
-                 value.equalsIgnoreCase("true") ||
-                 value.equalsIgnoreCase("on"))
+                value.equalsIgnoreCase("true") ||
+                value.equalsIgnoreCase("on"))
             return (Boolean.TRUE);
         else if (value.equalsIgnoreCase("no") ||
-                 value.equalsIgnoreCase("false") ||
-                 value.equalsIgnoreCase("off"))
+                value.equalsIgnoreCase("false") ||
+                value.equalsIgnoreCase("off"))
             return (Boolean.FALSE);
         else
             return (defaultValue);

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.2 2002/01/12 20:47:11 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/12 20:47:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -63,9 +63,7 @@
 package org.apache.commons.beanutils;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 
 /**
@@ -76,13 +74,13 @@ import java.util.Map;
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/12 20:47:11 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class WrapDynaBean implements DynaBean {
 
 
-     // ---------------------------------------------------------- Constructors
+    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -100,7 +98,7 @@ public class WrapDynaBean implements DynaBean {
     }
 
 
-     // ---------------------------------------------------- Instance Variables
+    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -116,7 +114,7 @@ public class WrapDynaBean implements DynaBean {
     protected Object instance = null;
 
 
-     // ------------------------------------------------------ DynaBean Methods
+    // ------------------------------------------------------ DynaBean Methods
 
 
     /**
@@ -132,7 +130,7 @@ public class WrapDynaBean implements DynaBean {
     public boolean contains(String name, String key) {
 
         throw new UnsupportedOperationException
-            ("WrapDynaBean does not support contains()");
+                ("WrapDynaBean does not support contains()");
 
     }
 
@@ -153,12 +151,12 @@ public class WrapDynaBean implements DynaBean {
             value = PropertyUtils.getSimpleProperty(instance, name);
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no read method");
+                    ("Property '" + name + "' has no read method");
         }
         return (value);
 
     }
- 
+
 
     /**
      * Return the value of an indexed property with the specified name.
@@ -185,7 +183,7 @@ public class WrapDynaBean implements DynaBean {
             throw e;
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no indexed read method");
+                    ("Property '" + name + "' has no indexed read method");
         }
         return (value);
 
@@ -211,7 +209,7 @@ public class WrapDynaBean implements DynaBean {
             value = PropertyUtils.getMappedProperty(instance, name, key);
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no mapped read method");
+                    ("Property '" + name + "' has no mapped read method");
         }
         return (value);
 
@@ -244,7 +242,7 @@ public class WrapDynaBean implements DynaBean {
 
 
         throw new UnsupportedOperationException
-            ("WrapDynaBean does not support remove()");
+                ("WrapDynaBean does not support remove()");
 
     }
 
@@ -269,7 +267,7 @@ public class WrapDynaBean implements DynaBean {
             PropertyUtils.setSimpleProperty(instance, name, value);
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no write method");
+                    ("Property '" + name + "' has no write method");
         }
 
     }
@@ -300,7 +298,7 @@ public class WrapDynaBean implements DynaBean {
             throw e;
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no indexed write method");
+                    ("Property '" + name + "' has no indexed write method");
         }
 
     }
@@ -326,7 +324,7 @@ public class WrapDynaBean implements DynaBean {
             PropertyUtils.setMappedProperty(instance, name, key, value);
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                ("Property '" + name + "' has no mapped write method");
+                    ("Property '" + name + "' has no mapped write method");
         }
 
     }
@@ -348,7 +346,7 @@ public class WrapDynaBean implements DynaBean {
         DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException
-                ("Invalid property name '" + name + "'");
+                    ("Invalid property name '" + name + "'");
         }
         return (descriptor);
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.3 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.4 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -61,11 +61,8 @@
 
 package org.apache.commons.beanutils;
 
-import java.lang.reflect.InvocationTargetException;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.lang.reflect.InvocationTargetException;
 
 
 /**
@@ -81,7 +78,7 @@ import junit.framework.TestSuite;
  *
  * <p>
  *   Note that the tests are dependant upon the static aspects
- *   (such as array sizes...) of the TestBean.java class, so ensure 
+ *   (such as array sizes...) of the TestBean.java class, so ensure
  *   than all changes to TestBean are reflected here.
  * </p>
  *
@@ -94,11 +91,10 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
-public class BeanUtilsTestCase extends TestCase 
-{
+public class BeanUtilsTestCase extends TestCase {
 
     // ---------------------------------------------------- Instance Variables
 
@@ -115,8 +111,7 @@ public class BeanUtilsTestCase extends TestCase
      *
      * @param name Name of the test case
      */
-    public BeanUtilsTestCase(String name) 
-    {
+    public BeanUtilsTestCase(String name) {
         super(name);
     }
 
@@ -127,8 +122,7 @@ public class BeanUtilsTestCase extends TestCase
     /**
      * Set up instance variables required by this test case.
      */
-    public void setUp() 
-    {
+    public void setUp() {
         bean = new TestBean();
     }
 
@@ -136,16 +130,14 @@ public class BeanUtilsTestCase extends TestCase
     /**
      * Return the tests included in this test suite.
      */
-    public static Test suite() 
-    {
+    public static Test suite() {
         return (new TestSuite(BeanUtilsTestCase.class));
     }
 
     /**
      * Tear down instance variables required by this test case.
      */
-    public void tearDown() 
-    {
+    public void tearDown() {
         bean = null;
     }
 
@@ -156,32 +148,24 @@ public class BeanUtilsTestCase extends TestCase
     /**
      *  tests the string and int arrays of TestBean
      */
-    public void testGetArrayProperty()
-    {
-        try
-        {
-            String arr[] = BeanUtils.getArrayProperty( bean, "stringArray");
+    public void testGetArrayProperty() {
+        try {
+            String arr[] = BeanUtils.getArrayProperty(bean, "stringArray");
             String comp[] = bean.getStringArray();
 
-            assertTrue("String array length = " + comp.length, 
-                   ( comp.length == arr.length ));
-        
-            arr = BeanUtils.getArrayProperty( bean, "intArray");
+            assertTrue("String array length = " + comp.length,
+                    (comp.length == arr.length));
+
+            arr = BeanUtils.getArrayProperty(bean, "intArray");
             int iarr[] = bean.getIntArray();
 
-            assertTrue("String array length = " + iarr.length, 
-                   ( iarr.length == arr.length ));
-        }
-        catch( IllegalAccessException e)
-        {
+            assertTrue("String array length = " + iarr.length,
+                    (iarr.length == arr.length));
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
 
@@ -191,60 +175,44 @@ public class BeanUtilsTestCase extends TestCase
     /**
      *  tests getting an indexed property
      */
-    public void testGetIndexedProperty1()
-    {
-        try
-        {
-            String val = BeanUtils.getIndexedProperty( bean, "intIndexed[3]");
-            String comp =  String.valueOf( bean.getIntIndexed(3));
-            assertTrue("intIndexed[3] == " + comp, val.equals( comp ));  
-                  
-            val = BeanUtils.getIndexedProperty( bean, "stringIndexed[3]");
+    public void testGetIndexedProperty1() {
+        try {
+            String val = BeanUtils.getIndexedProperty(bean, "intIndexed[3]");
+            String comp = String.valueOf(bean.getIntIndexed(3));
+            assertTrue("intIndexed[3] == " + comp, val.equals(comp));
+
+            val = BeanUtils.getIndexedProperty(bean, "stringIndexed[3]");
             comp = bean.getStringIndexed(3);
-            assertTrue("stringIndexed[3] == " + comp, val.equals( comp ) );
-        }
-        catch( IllegalAccessException e)
-        {
+            assertTrue("stringIndexed[3] == " + comp, val.equals(comp));
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
-    
+
     /**
      *  tests getting an indexed property
      */
-    public void testGetIndexedProperty2()
-    {
-        try
-        {
-            String val  = BeanUtils.getIndexedProperty( bean, "intIndexed", 3);
-            String comp =  String.valueOf(bean.getIntIndexed(3));
+    public void testGetIndexedProperty2() {
+        try {
+            String val = BeanUtils.getIndexedProperty(bean, "intIndexed", 3);
+            String comp = String.valueOf(bean.getIntIndexed(3));
 
-            assertTrue("intIndexed,3 == " + comp,   val.equals( comp ));
+            assertTrue("intIndexed,3 == " + comp, val.equals(comp));
 
-            val = BeanUtils.getIndexedProperty( bean, "stringIndexed",3);
+            val = BeanUtils.getIndexedProperty(bean, "stringIndexed", 3);
             comp = bean.getStringIndexed(3);
-           
-            assertTrue("stringIndexed,3 == " + comp ,  val.equals(comp));
-        
-        }
-        catch( IllegalAccessException e)
-        {
+
+            assertTrue("stringIndexed,3 == " + comp, val.equals(comp));
+
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
@@ -252,25 +220,17 @@ public class BeanUtilsTestCase extends TestCase
     /**
      *  tests getting a nested property
      */
-    public void testGetNestedProperty()
-    {
-        try
-        {
-            String val  = BeanUtils.getNestedProperty( bean, "nested.stringProperty");
-            String comp =  bean.getNested().getStringProperty();
-            assertTrue("nested.StringProperty == " + comp,  
-                   val.equals( comp ));       
-        }
-        catch( IllegalAccessException e)
-        {
+    public void testGetNestedProperty() {
+        try {
+            String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
+            String comp = bean.getNested().getStringProperty();
+            assertTrue("nested.StringProperty == " + comp,
+                    val.equals(comp));
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
@@ -278,53 +238,37 @@ public class BeanUtilsTestCase extends TestCase
     /**
      *  tests getting a 'whatever' property
      */
-    public void testGetGeneralProperty()
-    {
-        try
-        {
-            String val  = BeanUtils.getProperty( bean, "nested.intIndexed[2]");
-            String comp =  String.valueOf( bean.getIntIndexed(2) );
+    public void testGetGeneralProperty() {
+        try {
+            String val = BeanUtils.getProperty(bean, "nested.intIndexed[2]");
+            String comp = String.valueOf(bean.getIntIndexed(2));
 
             assertTrue("nested.intIndexed[2] == " + comp,
-                val.equals( comp ));       
-        }
-        catch( IllegalAccessException e)
-        {
+                    val.equals(comp));
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
 
- /**
+    /**
      *  tests getting a 'whatever' property
      */
-    public void testGetSimpleProperty()
-    {
-        try
-        {
-            String val  = BeanUtils.getSimpleProperty( bean, "shortProperty");
+    public void testGetSimpleProperty() {
+        try {
+            String val = BeanUtils.getSimpleProperty(bean, "shortProperty");
             String comp = String.valueOf(bean.getShortProperty());
 
             assertTrue("shortProperty == " + comp,
-                   val.equals(comp));     
-        }
-        catch( IllegalAccessException e)
-        {
+                    val.equals(comp));
+        } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
-        }
-        catch( InvocationTargetException e )
-        {
+        } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
-        }
-        catch( NoSuchMethodException e )
-        {
+        } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }

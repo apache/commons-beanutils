@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.7 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.8 2002/01/23 22:35:59 sanders Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/01/23 22:35:59 $
  *
  * ====================================================================
  *
@@ -63,16 +63,16 @@
 package org.apache.commons.beanutils;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2002/01/21 00:44:39 $
+ * @version $Revision: 1.8 $ $Date: 2002/01/23 22:35:59 $
  */
 
 public class TestBean {
@@ -183,6 +183,7 @@ public class TestBean {
      * A List property accessed as an indexed property.
      */
     private static List listIndexed = new ArrayList();
+
     static {
         listIndexed.add("String 0");
         listIndexed.add("String 1");
@@ -311,7 +312,7 @@ public class TestBean {
      * A String array property accessed as a String.
      */
     private String stringArray[] =
-    { "String 0", "String 1", "String 2", "String 3", "String 4" };
+            { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String[] getStringArray() {
         return (this.stringArray);
@@ -326,7 +327,7 @@ public class TestBean {
      * A String array property accessed as an indexed property.
      */
     private String stringIndexed[] =
-    { "String 0", "String 1", "String 2", "String 3", "String 4" };
+            { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed(int index) {
         return (stringIndexed[index]);

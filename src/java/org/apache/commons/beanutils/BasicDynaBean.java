@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.4 2002/01/11 02:25:43 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/11 02:25:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.5 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -77,13 +77,13 @@ import java.util.Map;
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/01/11 02:25:43 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class BasicDynaBean implements DynaBean {
 
 
-     // ---------------------------------------------------------- Constructors
+    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -100,7 +100,7 @@ public class BasicDynaBean implements DynaBean {
     }
 
 
-     // ---------------------------------------------------- Instance Variables
+    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -116,7 +116,7 @@ public class BasicDynaBean implements DynaBean {
     protected HashMap values = new HashMap();
 
 
-     // ------------------------------------------------------ DynaBean Methods
+    // ------------------------------------------------------ DynaBean Methods
 
 
     /**
@@ -135,12 +135,12 @@ public class BasicDynaBean implements DynaBean {
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
-                ("No mapped value for '" + name + "(" + key + ")'");
+                    ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             return (((Map) value).containsKey(key));
         } else {
             throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'");
+                    ("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -160,7 +160,7 @@ public class BasicDynaBean implements DynaBean {
         Object value = values.get(name);
         if (value != null) {
             return (value);
-        } 
+        }
 
         // Return a null value for a non-primitive property
         Class type = getDynaProperty(name).getType();
@@ -213,14 +213,14 @@ public class BasicDynaBean implements DynaBean {
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
-                ("No indexed value for '" + name + "[" + index + "]'");
+                    ("No indexed value for '" + name + "[" + index + "]'");
         } else if (value.getClass().isArray()) {
             return (Array.get(value, index));
         } else if (value instanceof List) {
             return ((List) value).get(index);
         } else {
             throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]'");
+                    ("Non-indexed property for '" + name + "[" + index + "]'");
         }
 
     }
@@ -244,12 +244,12 @@ public class BasicDynaBean implements DynaBean {
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
-                ("No mapped value for '" + name + "(" + key + ")'");
+                    ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             return (((Map) value).get(key));
         } else {
             throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'");
+                    ("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -283,12 +283,12 @@ public class BasicDynaBean implements DynaBean {
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
-                ("No mapped value for '" + name + "(" + key + ")'");
+                    ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             ((Map) value).remove(key);
         } else {
             throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'");
+                    ("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -313,14 +313,14 @@ public class BasicDynaBean implements DynaBean {
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
                 throw new NullPointerException
-                    ("Primitive value for '" + name + "'");
+                        ("Primitive value for '" + name + "'");
             }
         } else if (!isAssignable(descriptor.getType(), value.getClass())) {
             throw new ConversionException
-                ("Cannot assign value of type '" +
-                 value.getClass().getName() +
-                 "' to property '" + name + "' of type '" +
-                 descriptor.getType().getName() + "'");
+                    ("Cannot assign value of type '" +
+                    value.getClass().getName() +
+                    "' to property '" + name + "' of type '" +
+                    descriptor.getType().getName() + "'");
         }
         values.put(name, value);
 
@@ -349,7 +349,7 @@ public class BasicDynaBean implements DynaBean {
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
-                ("No indexed value for '" + name + "[" + index + "]'");
+                    ("No indexed value for '" + name + "[" + index + "]'");
         } else if (prop.getClass().isArray()) {
             Array.set(prop, index, value);
         } else if (prop instanceof List) {
@@ -360,7 +360,7 @@ public class BasicDynaBean implements DynaBean {
             }
         } else {
             throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]'");
+                    ("Non-indexed property for '" + name + "[" + index + "]'");
         }
 
     }
@@ -386,12 +386,12 @@ public class BasicDynaBean implements DynaBean {
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
-                ("No mapped value for '" + name + "(" + key + ")'");
+                    ("No mapped value for '" + name + "(" + key + ")'");
         } else if (prop instanceof Map) {
             ((Map) prop).put(key, value);
         } else {
             throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'");
+                    ("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -413,7 +413,7 @@ public class BasicDynaBean implements DynaBean {
         DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException
-                ("Invalid property name '" + name + "'");
+                    ("Invalid property name '" + name + "'");
         }
         return (descriptor);
 
@@ -429,14 +429,14 @@ public class BasicDynaBean implements DynaBean {
     protected boolean isAssignable(Class dest, Class source) {
 
         if (dest.isAssignableFrom(source) ||
-            ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
-            ((dest == Byte.TYPE) && (source == Byte.class)) ||
-            ((dest == Character.TYPE) && (source == Character.class)) ||
-            ((dest == Double.TYPE) && (source == Double.class)) ||
-            ((dest == Float.TYPE) && (source == Float.class)) ||
-            ((dest == Integer.TYPE) && (source == Integer.class)) ||
-            ((dest == Long.TYPE) && (source == Long.class)) ||
-            ((dest == Short.TYPE) && (source == Short.class))) {
+                ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
+                ((dest == Byte.TYPE) && (source == Byte.class)) ||
+                ((dest == Character.TYPE) && (source == Character.class)) ||
+                ((dest == Double.TYPE) && (source == Double.class)) ||
+                ((dest == Float.TYPE) && (source == Float.class)) ||
+                ((dest == Integer.TYPE) && (source == Integer.class)) ||
+                ((dest == Long.TYPE) && (source == Long.class)) ||
+                ((dest == Short.TYPE) && (source == Short.class))) {
             return (true);
         } else {
             return (false);

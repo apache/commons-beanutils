@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.7 2002/01/11 02:25:43 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/01/11 02:25:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.8 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -63,7 +63,7 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.PropertyDescriptor;
+
 
 
 /**
@@ -76,7 +76,7 @@ import java.beans.PropertyDescriptor;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.7 $ $Date: 2002/01/11 02:25:43 $
+ * @version $Revision: 1.8 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public interface DynaClass {
@@ -126,7 +126,7 @@ public interface DynaClass {
      *  fails for some other reason
      */
     public DynaBean newInstance()
-        throws IllegalAccessException, InstantiationException;
+            throws IllegalAccessException, InstantiationException;
 
 
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.1 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.2 2002/01/23 22:35:59 sanders Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/23 22:35:59 $
  *
  * ====================================================================
  *
@@ -63,20 +63,7 @@
 package org.apache.commons.beanutils;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.apache.commons.beanutils.priv.PrivateBeanFactory;
-import org.apache.commons.beanutils.priv.PrivateDirect;
-import org.apache.commons.beanutils.priv.PrivateIndirect;
 
 
 /**
@@ -85,7 +72,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/23 22:35:59 $
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
@@ -154,7 +141,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can see first key",
-                       bean.contains("mappedProperty", "First Key"));
+                    bean.contains("mappedProperty", "First Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException t) {
             ; // Expected result
@@ -165,7 +152,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can not see unknown key",
-                       !bean.contains("mappedProperty", "Unknown Key"));
+                    !bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException t) {
             ; // Expected result
@@ -176,7 +163,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
 
-
     /**
      * The <code>remove()</code> method is not supported by the
      * <code>WrapDynaBean</code> implementation class.
@@ -185,7 +171,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can see first key",
-                       bean.contains("mappedProperty", "First Key"));
+                    bean.contains("mappedProperty", "First Key"));
             bean.remove("mappedProperty", "First Key");
             fail("Should have thrown UnsupportedOperationException");
             //            assertTrue("Can not see first key",
@@ -198,7 +184,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can not see unknown key",
-                       !bean.contains("mappedProperty", "Unknown Key"));
+                    !bean.contains("mappedProperty", "Unknown Key"));
             bean.remove("mappedProperty", "Unknown Key");
             fail("Should have thrown UnsupportedOperationException");
             //            assertTrue("Can not see unknown key",

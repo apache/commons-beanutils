@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.20 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.20 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.21 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.21 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -71,11 +71,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.FastHashMap;
 
@@ -133,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.20 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.21 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class PropertyUtils {
@@ -403,10 +401,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             return (((DynaBean) bean).get(name, index));
         }
@@ -430,9 +428,9 @@ public class PropertyUtils {
                     return (readMethod.invoke(bean, subscript));
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
-                        ArrayIndexOutOfBoundsException) {
+                            ArrayIndexOutOfBoundsException) {
                         throw (ArrayIndexOutOfBoundsException)
-                            e.getTargetException();
+                                e.getTargetException();
                     } else {
                         throw e;
                     }
@@ -499,7 +497,7 @@ public class PropertyUtils {
         int delim2 = name.indexOf(MAPPED_DELIM2);
         if ((delim < 0) || (delim2 <= delim)) {
             throw new IllegalArgumentException
-                ("Invalid mapped property '" + name + "'");
+                    ("Invalid mapped property '" + name + "'");
         }
 
         // Isolate the name and the key
@@ -545,10 +543,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             return (((DynaBean) bean).get(name, key));
         }
@@ -655,7 +653,7 @@ public class PropertyUtils {
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
             if (indexOfMAPPED_DELIM >= 0 &&
                     (indexOfINDEXED_DELIM < 0 ||
-                     indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
                 bean = getMappedProperty(bean, next);
             } else {
                 if (indexOfINDEXED_DELIM >= 0) {
@@ -676,8 +674,8 @@ public class PropertyUtils {
         indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
         if (indexOfMAPPED_DELIM >= 0 &&
-            (indexOfINDEXED_DELIM < 0 ||
-             indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+                (indexOfINDEXED_DELIM < 0 ||
+                indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
             bean = getMappedProperty(bean, name);
         } else {
             if (indexOfINDEXED_DELIM >= 0) {
@@ -764,8 +762,8 @@ public class PropertyUtils {
             int indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             int indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
             if (indexOfMAPPED_DELIM >= 0 &&
-                (indexOfINDEXED_DELIM < 0 ||
-                 indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+                    (indexOfINDEXED_DELIM < 0 ||
+                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
                 bean = getMappedProperty(bean, next);
             } else {
                 if (indexOfINDEXED_DELIM >= 0) {
@@ -838,7 +836,7 @@ public class PropertyUtils {
      */
     // FIXME - does not work with DynaBeans
     public static PropertyDescriptor[]
-        getPropertyDescriptors(Class beanClass) {
+            getPropertyDescriptors(Class beanClass) {
 
         if (beanClass == null) {
             throw new IllegalArgumentException("No bean class specified");
@@ -976,7 +974,7 @@ public class PropertyUtils {
         // Special handling for DynaBeans
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 return (null);
             }
@@ -1062,10 +1060,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             return (((DynaBean) bean).get(name));
         }
@@ -1201,10 +1199,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             ((DynaBean) bean).set(name, index, value);
             return;
@@ -1230,9 +1228,9 @@ public class PropertyUtils {
                     writeMethod.invoke(bean, subscript);
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
-                        ArrayIndexOutOfBoundsException) {
+                            ArrayIndexOutOfBoundsException) {
                         throw (ArrayIndexOutOfBoundsException)
-                            e.getTargetException();
+                                e.getTargetException();
                     } else {
                         throw e;
                     }
@@ -1349,10 +1347,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             ((DynaBean) bean).set(name, key, value);
             return;
@@ -1428,8 +1426,8 @@ public class PropertyUtils {
             indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
             if (indexOfMAPPED_DELIM >= 0 &&
-                (indexOfINDEXED_DELIM < 0 ||
-                 indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+                    (indexOfINDEXED_DELIM < 0 ||
+                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
                 bean = getMappedProperty(bean, next);
             } else {
                 if (indexOfINDEXED_DELIM >= 0) {
@@ -1451,7 +1449,7 @@ public class PropertyUtils {
 
         if (indexOfMAPPED_DELIM >= 0 &&
                 (indexOfINDEXED_DELIM < 0 ||
-                 indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+                indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
             setMappedProperty(bean, name, value);
         } else {
             if (indexOfINDEXED_DELIM >= 0) {
@@ -1538,10 +1536,10 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
-                                                name + "'");
+                        name + "'");
             }
             ((DynaBean) bean).set(name, value);
             return;

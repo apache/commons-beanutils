@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.5 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.6 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -63,7 +63,6 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -78,7 +77,7 @@ import java.util.HashMap;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.6 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public class BasicDynaClass implements DynaClass {
@@ -212,7 +211,7 @@ public class BasicDynaClass implements DynaClass {
 
         if (name == null) {
             throw new IllegalArgumentException
-                ("No property name specified");
+                    ("No property name specified");
         }
         return ((DynaProperty) propertiesMap.get(name));
 
@@ -246,13 +245,13 @@ public class BasicDynaClass implements DynaClass {
      *  fails for some other reason
      */
     public DynaBean newInstance()
-        throws IllegalAccessException, InstantiationException {
+            throws IllegalAccessException, InstantiationException {
 
         try {
             return ((DynaBean) constructor.newInstance(constructorValues));
         } catch (InvocationTargetException e) {
             throw new InstantiationException
-                (e.getTargetException().getMessage());
+                    (e.getTargetException().getMessage());
         }
 
     }
@@ -291,20 +290,20 @@ public class BasicDynaClass implements DynaClass {
         // Validate the argument type specified
         if (dynaBeanClass.isInterface())
             throw new IllegalArgumentException
-                ("Class " + dynaBeanClass.getName() +
-                 " is an interface, not a class");
+                    ("Class " + dynaBeanClass.getName() +
+                    " is an interface, not a class");
         if (!DynaBean.class.isAssignableFrom(dynaBeanClass))
             throw new IllegalArgumentException
-                ("Class " + dynaBeanClass.getName() +
-                 " does not implement DynaBean");
+                    ("Class " + dynaBeanClass.getName() +
+                    " does not implement DynaBean");
 
         // Identify the Constructor we will use in newInstance()
         try {
             this.constructor = dynaBeanClass.getConstructor(constructorTypes);
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException
-                ("Class " + dynaBeanClass.getName() +
-                 " does not have an appropriate constructor");
+                    ("Class " + dynaBeanClass.getName() +
+                    " does not have an appropriate constructor");
         }
         this.dynaBeanClass = dynaBeanClass;
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MutableDynaClass.java,v 1.2 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MutableDynaClass.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/23 22:35:58 $
  *
  * ====================================================================
  *
@@ -63,7 +63,7 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.PropertyDescriptor;
+
 
 
 /**
@@ -77,7 +77,7 @@ import java.beans.PropertyDescriptor;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.2 $ $Date: 2002/01/21 00:44:39 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
  */
 
 public interface MutableDynaClass extends DynaClass {
