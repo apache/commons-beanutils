@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.26 2002/07/21 00:20:44 craigmcc Exp $
- * $Revision: 1.26 $
- * $Date: 2002/07/21 00:20:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.27 2002/11/19 20:20:08 rdonkin Exp $
+ * $Revision: 1.27 $
+ * $Date: 2002/11/19 20:20:08 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.26 $ $Date: 2002/07/21 00:20:44 $
+ * @version $Revision: 1.27 $ $Date: 2002/11/19 20:20:08 $
  */
 
 public class BeanUtils {
@@ -395,13 +395,15 @@ public class BeanUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        if (log.isDebugEnabled()) {
-            log.debug("Describing bean: " + bean.getClass().getName());
-        }
         if (bean == null) {
         //            return (Collections.EMPTY_MAP);
             return (new java.util.HashMap());
         }
+        
+        if (log.isDebugEnabled()) {
+            log.debug("Describing bean: " + bean.getClass().getName());
+        }
+            
         Map description = new HashMap();
         if (bean instanceof DynaBean) {
             DynaProperty descriptors[] =
