@@ -32,7 +32,8 @@ import org.apache.commons.logging.Log;
  * Test Case for the DateLocaleConverter class.
  *
  * @author Robert Burrell Donkin
- * @version $Revision: 1.5 $ $Date: 2004/07/13 20:51:44 $
+ * @author Niall Pemberton
+ * @version $Revision: 1.6 $ $Date: 2004/07/13 23:04:21 $
  */
 
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {

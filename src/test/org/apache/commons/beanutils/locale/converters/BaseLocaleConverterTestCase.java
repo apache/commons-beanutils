@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2004 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.locale.BaseLocaleConverter;
  * Base Test Case for the DecimalLocaleConverter classes.
  *
  * @author Niall Pemberton
- * @version $Revision: 1.2 $ $Date: 2004/07/13 20:51:44 $
+ * @version $Revision: 1.3 $ $Date: 2004/07/13 23:04:21 $
  */
 
 public class BaseLocaleConverterTestCase extends TestCase {

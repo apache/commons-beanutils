@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2004 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Test Case for the LongLocaleConverter class.
  *
- * @author Robert Burrell Donkin
- * @version $Revision: 1.1 $ $Date: 2004/07/08 13:12:06 $
+ * @author Niall Pemberton
+ * @version $Revision: 1.2 $ $Date: 2004/07/13 23:04:21 $
  */
 
 public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
