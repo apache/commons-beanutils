@@ -38,6 +38,10 @@ and accessing bean properties.</p>
     <li><a href="#conversion.defining">Defining Your Own Converters</a></li>
     <li><a href="#conversion.i18n">Locale Aware Conversions</a></li>
     </ul></li>
+<li><a href="#FAQ">Frequently Asked Questions</a>
+    <ul>
+    <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
+    </ul></li>
 </ol>
 
 <a name="overview"></a>
@@ -608,5 +612,24 @@ in situations where the locale is not important.</p>
 </a></code>. These are built along the same
 lines as the basic classes but support localization.</p>
 
+<a name="FAQ"></a>
+<h1>Frequently Asked Questions</h1>
+
+<a name="FAQ.property"></a>
+<h3>Why Can't BeanUtils Find My Method?</h3>
+<p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than 
+<em>reflection</em>. This means that it will find only 
+<a href='http://java.sun.com/products/javabeans'><em>JavaBean</em> 
+compliant</a> properties.</p>
+<p>There are some subtleties  of this specification that can catch out the unwary:
+<ul>
+<li>A property can have only one set and one get method. Overloading is not allowed.</li>
+<li>The <code>java.beans.Introspector</code> searches widely for a custom <em>BeanInfo</em> 
+class. If your class has the same name as another with a custom <em>BeanUtils</em> 
+(typically a java API class) then the <code>Introspector</code> may use that instead of
+creating via reflection based on your class. If this happens, the only solution is to 
+create your own <em>BeanInfo</em>.</li>
+</ul>
+</p>
 </body>
 </html>
