@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.5 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.6 2002/03/18 00:52:41 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/03/18 00:52:41 $
  *
  * ====================================================================
  *
@@ -64,6 +64,7 @@ package org.apache.commons.beanutils;
 
 
 import java.lang.reflect.Array;
+import org.apache.commons.collections.FastHashMap;
 
 
 /**
@@ -77,7 +78,7 @@ import java.lang.reflect.Array;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.5 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.6 $ $Date: 2002/03/18 00:52:41 $
  */
 
 public class ConvertUtils {
@@ -202,6 +203,13 @@ public class ConvertUtils {
 
 
     /**
+     * The set of custom {@link Converter}s that can be used to convert Strings
+     * into objects of a specified Class, keyed by the destination Class.
+     */
+    private static FastHashMap customConverters = null;
+
+
+    /**
      * The Class object for java.lang.String.
      */
     private static Class stringClass = String.class;
@@ -284,6 +292,11 @@ public class ConvertUtils {
             return (convertFloat(value, null));
         } else if (clazz == Short.class) {
             return (convertShort(value, null));
+        } else if ((customConverters != null) &&
+                   (customConverters.containsKey(clazz))) {
+            Converter converter = (Converter)
+                customConverters.get(clazz);
+            return (converter.convert(clazz, value));
         } else {
             if (value == null)
                 return ((String) null);
@@ -397,6 +410,15 @@ public class ConvertUtils {
             for (int i = 0; i < len; i++)
                 array[i] = convertShort(values[i], null);
             return (array);
+        } else if ((customConverters != null) &&
+                   (customConverters.containsKey(type))) {
+            Converter converter = (Converter)
+                customConverters.get(type);
+            Object array = Array.newInstance(type, len);
+            for (int i = 0; i < len; i++) {
+                Array.set(array, i, converter.convert(type, values[i]));
+            }
+            return (array);
         } else {
             if (values == null)
                 return ((String[]) null);
@@ -407,6 +429,69 @@ public class ConvertUtils {
                 return (array);
             }
         }
+
+    }
+
+
+    /**
+     * Remove all registered {@link Converter}s.
+     */
+    public static void deregister() {
+
+        if (customConverters != null) {
+            customConverters.clear();
+        }
+
+    }
+
+
+    /**
+     * Remove any registered {@link Converter} for the specified destination
+     * <code>Class</code>.
+     *
+     * @param clazz Class for which to remove a registered Converter
+     */
+    public static void deregister(Class clazz) {
+
+        if (customConverters != null) {
+            customConverters.remove(clazz);
+        }
+
+    }
+
+
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * destination class; if there is no registered Converter, return
+     * <code>null</code>.
+     *
+     * @param clazz Class for which to return a registered Converter
+     */
+    public static Converter lookup(Class clazz) {
+
+        if (customConverters != null) {
+            return ((Converter) customConverters.get(clazz));
+        } else {
+            return (null);
+        }
+
+    }
+
+
+    /**
+     * Register a custom {@link Converter} for the specified destination
+     * <code>Class</code>, replacing any previously registered Converter.
+     *
+     * @param converter Converter to be registered
+     * @param clazz Destination class for conversions performed by this
+     *  Converter
+     */
+    public static void register(Converter converter, Class clazz) {
+
+        if (customConverters == null) {
+            customConverters = new FastHashMap();
+        }
+        customConverters.put(clazz, converter);
 
     }
 
