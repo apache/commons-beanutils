@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.6 2002/03/11 04:49:53 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/03/11 04:49:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.7 2002/04/06 23:28:35 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/04/06 23:28:35 $
  *
  * ====================================================================
  *
@@ -95,7 +95,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -277,6 +277,7 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      * Test populate() method on individual array elements.
      */
@@ -327,6 +328,7 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+
     /**
      * Test populate() method on array properties as a whole.
      */
@@ -363,6 +365,60 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
     }
+
+    /**
+     * Test populate() method on nested properties.
+     */
+    public void testPopulateNested() {
+
+        try {
+
+            HashMap map = new HashMap();
+            map.put("nested.booleanProperty", "false");
+            // booleanSecond is left at true
+            map.put("nested.doubleProperty", "432.0");
+            // floatProperty is left at 123.0
+            map.put("nested.intProperty", "543");
+            // longProperty is left at 321
+            map.put("nested.shortProperty", "654");
+            // stringProperty is left at "This is a string"
+            map.put("nested.writeOnlyProperty", "New writeOnlyProperty value");
+
+            BeanUtils.populate(bean, map);
+
+            assertTrue("booleanProperty is false",
+                       !bean.getNested().getBooleanProperty());
+            assertTrue("booleanSecond is true",
+                       bean.getNested().isBooleanSecond());
+            assertEquals("doubleProperty is 432.0",
+                         (double) 432.0,
+                         bean.getNested().getDoubleProperty(),
+                         (double) 0.005);
+            assertEquals("floatProperty is 123.0",
+                         (float) 123.0,
+                         bean.getNested().getFloatProperty(),
+                         (float) 0.005);
+            assertEquals("intProperty is 543",
+                         543, bean.getNested().getIntProperty());
+            assertEquals("longProperty is 321",
+                         (long) 321, bean.getNested().getLongProperty());
+            assertEquals("shortProperty is 654",
+                         (short) 654, bean.getNested().getShortProperty());
+            assertEquals("stringProperty is \"This is a string\"",
+                         "This is a string",
+                         bean.getNested().getStringProperty());
+            assertEquals("writeOnlyProperty is \"New writeOnlyProperty value\"",
+                         "New writeOnlyProperty value",
+                         bean.getNested().getWriteOnlyPropertyValue());
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
+
 
     /**
      * Test populate() method on scalar properties.

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.6 2002/03/18 16:32:43 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/03/18 16:32:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.7 2002/04/06 23:28:35 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/04/06 23:28:35 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/03/18 16:32:43 $
+ * @version $Revision: 1.7 $ $Date: 2002/04/06 23:28:35 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -278,6 +278,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      *  tests getting an indexed property
      */
@@ -302,6 +303,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      *  tests getting a nested property
      */
@@ -319,6 +321,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
+
 
     /**
      *  tests getting a 'whatever' property
@@ -339,6 +342,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      *  tests getting a 'whatever' property
      */
@@ -357,6 +361,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
+
 
     /**
      * Test populate() method on individual array elements.
@@ -417,6 +422,58 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
+
+    /**
+     * Test populate() method on nested properties.
+     */
+    public void testPopulateNested() {
+
+        try {
+
+            HashMap map = new HashMap();
+            map.put("nested.booleanProperty", "false");
+            // booleanSecond is left at true
+            map.put("nested.doubleProperty", "432.0");
+            // floatProperty is left at 123.0
+            map.put("nested.intProperty", "543");
+            // longProperty is left at 321
+            map.put("nested.shortProperty", "654");
+            // stringProperty is left at "This is a string"
+
+            BeanUtils.populate(bean, map);
+
+            TestBean nested = (TestBean) bean.get("nested");
+            assertTrue("booleanProperty is false",
+                       !nested.getBooleanProperty());
+            assertTrue("booleanSecond is true",
+                       nested.isBooleanSecond());
+            assertEquals("doubleProperty is 432.0",
+                         (double) 432.0,
+                         nested.getDoubleProperty(),
+                         (double) 0.005);
+            assertEquals("floatProperty is 123.0",
+                         (float) 123.0,
+                         nested.getFloatProperty(),
+                         (float) 0.005);
+            assertEquals("intProperty is 543",
+                         543, nested.getIntProperty());
+            assertEquals("longProperty is 321",
+                         (long) 321, nested.getLongProperty());
+            assertEquals("shortProperty is 654",
+                         (short) 654, nested.getShortProperty());
+            assertEquals("stringProperty is \"This is a string\"",
+                         "This is a string",
+                         nested.getStringProperty());
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
+
+
     /**
      * Test populate() method on scalar properties.
      */
@@ -433,7 +490,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             // longProperty is left at 321
             map.put("shortProperty", "654");
             // stringProperty is left at "This is a string"
-            map.put("writeOnlyProperty", "New writeOnlyProperty value");
 
             BeanUtils.populate(bean, map);
 
