@@ -63,6 +63,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
+import org.apache.commons.beanutils.priv.PublicSubBean;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
@@ -565,5 +566,21 @@ public class MethodUtilsTestCase extends TestCase {
 
     }
 
-
+    public void testPublicSub() throws Exception {
+        // make sure that bean does what it should
+        PublicSubBean bean = new PublicSubBean();
+        assertEquals("Start value (foo)", bean.getFoo(), "This is foo");
+        assertEquals("Start value (bar)", bean.getBar(), "This is bar");
+        bean.setFoo("new foo");
+        bean.setBar("new bar");
+        assertEquals("Set value (foo)", bean.getFoo(), "new foo");
+        assertEquals("Set value (bar)", bean.getBar(), "new bar");
+        
+        // see if we can access public methods in a default access superclass
+        // from a public access subclass instance
+        MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        assertEquals("Set value (foo:2)", bean.getFoo(), "alpha");
+        MethodUtils.invokeMethod(bean, "setBar", "beta");
+        assertEquals("Set value (bar:2)", bean.getFoo(), "alpha");
+    }
 }

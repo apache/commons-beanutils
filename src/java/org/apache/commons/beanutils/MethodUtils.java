@@ -72,6 +72,18 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p> Utility reflection methods focussed on methods in general rather than properties in particular. </p>
  *
+ * <h3>Known Limitations</h3>
+ * <h4>Accessing Public Methods In A Default Access Superclass</h4>
+ * <p>There is an issue when invoking public methods contained in a default access superclass.
+ * Reflection locates these methods fine and correctly assigns them as public.
+ * However, an <code>IllegalAccessException</code> is thrown if the method is invoked.</p>
+ *
+ * <p><code>MethodUtils</code> contains a workaround for this situation. 
+ * It will attempt to call <code>setAccessible</code> on this method.
+ * If this call succeeds, then the method can be invoked as normal.
+ * This call will only succeed when the application has sufficient security privilages. 
+ * If this call fails then a warning will be logged and the method may fail.</p>
+ *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
@@ -541,6 +553,36 @@ public class MethodUtils {
         // most of the time this works and it's much faster
         try {
             Method method = clazz.getMethod(methodName, parameterTypes);
+            if (log.isTraceEnabled()) {
+                log.trace("Found straight match: " + method);
+                log.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
+            }
+            
+            try {
+                //
+                // XXX Default access superclass workaround
+                //
+                // When a public class has a default access superclass
+                // with public methods, these methods are accessible.
+                // Calling them from compiled code works fine.
+                //
+                // Unfortunately, using reflection to invoke these methods
+                // seems to (wrongly) to prevent access even when the method
+                // modifer is public.
+                //
+                // The following workaround solves the problem but will only
+                // work from sufficiently privilages code. 
+                //
+                // Better workarounds would be greatfully accepted.
+                //
+                method.setAccessible(true);
+                
+            } catch (SecurityException se) {
+                // log but continue just in case the method.invoke works anyway
+                log.warn(
+                "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
+                se);
+            }
             return method;
             
         } catch (NoSuchMethodException e) { /* SWALLOW */ }
@@ -583,6 +625,19 @@ public class MethodUtils {
                             if (log.isTraceEnabled()) {
                                 log.trace(method + " accessible version of " 
                                             + methods[i]);
+                            }
+                            try {
+                                //
+                                // XXX Default access superclass workaround
+                                // (See above for more details.)
+                                //
+                                method.setAccessible(true);
+                                
+                            } catch (SecurityException se) {
+                                // log but continue just in case the method.invoke works anyway
+                                log.warn(
+                                "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
+                                se);
                             }
                             return method;
                         }
