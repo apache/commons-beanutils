@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.3 2002/01/23 22:52:26 sanders Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/23 22:52:26 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.4 2002/12/19 18:05:20 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/12/19 18:05:20 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/23 22:52:26 $
+ * @version $Revision: 1.4 $ $Date: 2002/12/19 18:05:20 $
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
@@ -198,5 +198,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
+
+    /**
+     * Suppress serialization and deserialization tests.  WrapDynaClass
+     * is not serializable.
+     */
+    public void testSerialization() { }
 
 }
