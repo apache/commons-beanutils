@@ -17,12 +17,14 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 
 import java.text.ParseException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.util.Locale;
 
 
@@ -47,6 +49,9 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
     /** Should the date conversion be lenient? */
     boolean isLenient = false;
+
+    /** Default Pattern Characters */
+    public static String defaultChars;
 
     // ----------------------------------------------------------- Constructors
 
@@ -244,36 +249,100 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
      *
-     * @exception org.apache.commons.beanutils.ConversionException if conversion cannot be performed
-     *  successfully
+     * @exception org.apache.commons.beanutils.ConversionException 
+     * if conversion cannot be performed successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
-        SimpleDateFormat formatter = getFormatter(pattern, locale);
-        if (locPattern) {
-            formatter.applyLocalizedPattern(pattern);
-        }
-        else {
-            formatter.applyPattern(pattern);
-        }
-        return formatter.parse((String) value);
-    }
+ 
+         if (locPattern) {
+             pattern = convertLocalizedPattern(pattern, locale);
+         }
+ 
+         // Create Formatter - use default if pattern is null
+         DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
+                                                : new SimpleDateFormat(pattern, locale);
+         formatter.setLenient(isLenient);
+ 
 
+         // Parse the Date
+         return formatter.parse((String) value);
+     }
+   
+     /**
+      * Convert a pattern from a localized format to the default format.
+      *
+      * @param locale   The locale
+      * @param pattern  The pattern in 'local' symbol format
+      * @return pattern in 'default' symbol format
+      */
+     private String convertLocalizedPattern(String localizedPattern, Locale locale) {
+        
+         if (localizedPattern == null)
+            return null;
+         
+         // Note that this is a little obtuse.
+         // However, it is the best way that anyone can come up with 
+         // that works with some 1.4 series JVM.
+         
+         // Initialize the default symbols
+         if (defaultChars == null) {
+             DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
+             defaultChars = defaultSymbols.getLocalPatternChars();
+         }
+ 
+         // Get the symbols for the localized pattern
+         DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
+         String localChars = localizedSymbols.getLocalPatternChars();
+ 
+         if (defaultChars.equals(localChars)) {
+             return localizedPattern;
+         }
+ 
+         // Convert the localized pattern to default
+         String convertedPattern = null;
+         try {
+             convertedPattern = convertPattern(localizedPattern,
+                                                localChars,
+                                                defaultChars);
+         } catch (Exception ex) {
+             log.warn("Converting pattern '" + localizedPattern + "' for " + locale, ex);
+         }
+         return convertedPattern; 
+    }
+     
     /**
-     * Gets an appropriate <code>SimpleDateFormat</code> for given locale, 
-     * default Date format pattern is not provided.
+     * <p>Converts a Pattern from one character set to another.</p>
      */
-    private SimpleDateFormat getFormatter(String pattern, Locale locale) {
-        // This method is a fix for null pattern, which would cause 
-        // Null pointer exception when applied
-        // Note: that many constructors default the pattern to null, 
-        // so it only makes sense to handle nulls gracefully
-        if(pattern == null) {
-            pattern = locPattern ? 
-                new SimpleDateFormat().toLocalizedPattern() : new SimpleDateFormat().toPattern();
-            log.warn("Null pattern was provided, defaulting to: " + pattern);
+    private String convertPattern(String pattern, String fromChars, String toChars) {
+
+        StringBuffer converted = new StringBuffer();
+        boolean quoted = false;
+
+        for (int i = 0; i < pattern.length(); ++i) {
+            char thisChar = pattern.charAt(i);
+            if (quoted) {
+                if (thisChar == '\'') {
+                    quoted = false;
+                }
+            } else {
+                if (thisChar == '\'') {
+                   quoted = true;
+                } else if ((thisChar >= 'a' && thisChar <= 'z') || 
+                           (thisChar >= 'A' && thisChar <= 'Z')) {
+                    int index = fromChars.indexOf(thisChar );
+                    if (index == -1)
+                        throw new IllegalArgumentException(
+                            "Illegal pattern character '" + thisChar + "'");
+                    thisChar = toChars.charAt(index);
+                }
+            }
+            converted.append(thisChar);
         }
-        SimpleDateFormat format = new SimpleDateFormat(pattern, locale);
-        format.setLenient(isLenient);
-        return format;
+
+        if (quoted) {
+            throw new IllegalArgumentException("Unfinished quote in pattern");
+        }
+
+        return converted.toString();
     }
 }

@@ -18,14 +18,14 @@ package org.apache.commons.beanutils.locale.converters;
 
 import junit.framework.TestCase;
 import java.util.Locale;
-import org.apache.commons.beanutils.locale.BaseLocaleConverter
-;
+import java.text.DateFormatSymbols;
+import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 
 /**
  * Base Test Case for the DecimalLocaleConverter classes.
  *
  * @author Niall Pemberton
- * @version $Revision: 1.1 $ $Date: 2004/07/08 13:12:06 $
+ * @version $Revision: 1.2 $ $Date: 2004/07/13 20:51:44 $
  */
 
 public class BaseLocaleConverterTestCase extends TestCase {
@@ -45,19 +45,15 @@ public class BaseLocaleConverterTestCase extends TestCase {
     protected Locale localizedLocale;
     protected String localizedDecimalPattern; 
     protected String localizedIntegerPattern; 
-    protected String localizedDatePattern; 
     protected String localizedDecimalValue;
     protected String localizedIntegerValue;
-    protected String localizedDateValue;
 
     // Locale values
     protected Locale defaultLocale;
     protected String defaultDecimalPattern; 
     protected String defaultIntegerPattern; 
-    protected String defaultDatePattern; 
     protected String defaultDecimalValue;
     protected String defaultIntegerValue;
-    protected String defaultDateValue;
 
 
     // Expected values
@@ -81,19 +77,15 @@ public class BaseLocaleConverterTestCase extends TestCase {
         defaultLocale           = Locale.US;
         defaultDecimalPattern   = "#,###.00";
         defaultIntegerPattern   = "#,###";
-        defaultDatePattern      = "d MMMM yyyy";
         defaultDecimalValue     = "1,234.56";
         defaultIntegerValue     = "1,234";
-        defaultDateValue        = "1 October 2004";
 
         // Use German Locale (uses different separators to US)
         localizedLocale         = Locale.GERMAN;
         localizedDecimalPattern = "#.###,00";
         localizedIntegerPattern = "#.###";
-        localizedDatePattern    = "t MMMM uuuu";
         localizedDecimalValue   = "1.234,56";
         localizedIntegerValue   = "1.234";
-        localizedDateValue      = "1 Oktober 2004";
 
         // Expected Values
         expectedDecimalValue    = "1234.56";
