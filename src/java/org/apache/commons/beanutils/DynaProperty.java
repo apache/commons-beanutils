@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.7 2003/07/28 20:14:23 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/07/28 20:14:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.8 2003/08/21 21:31:56 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/08/21 21:31:56 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2003/07/28 20:14:23 $
+ * @version $Revision: 1.8 $ $Date: 2003/08/21 21:31:56 $
  */
 
 public class DynaProperty implements Serializable {
@@ -153,16 +153,16 @@ public class DynaProperty implements Serializable {
      *
      * @param name Name of the property being described
      * @param type Java class representing the property data type
-     * @param contentType Class that all mapped elements are instances of
      * @param keyType Class that all keys are instances of
+     * @param contentType Class that all mapped elements are instances of
      */
-    public DynaProperty(String name, Class type, Class contentType, Class keyType) {
+    public DynaProperty(String name, Class type, Class keyType, Class contentType) {
 
         super();
         this.name = name;
         this.type = type;
-        this.contentType = contentType;
         this.keyType = keyType;
+        this.contentType = contentType;
         
     }
 
@@ -195,10 +195,14 @@ public class DynaProperty implements Serializable {
     
     
     /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
-    protected Class contentType;
+    protected transient Class contentType;
     /**
      * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
      * that support this feature.
+     *
+     * <p>There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
      * @return the Class for the content type if this is an indexed <code>DynaProperty</code> 
      * and this feature is supported. Otherwise null.
@@ -209,10 +213,14 @@ public class DynaProperty implements Serializable {
     
     
     /** The <em>(optional)</em> type of keys for mapped <code>DynaProperty</code>'s */
-    protected Class keyType;
+    protected transient Class keyType;
     /**
      * Gets the <em>(optional)</em> type of the key for mapped <code>DynaProperty</code>'s
      * that support this feature.
+     *
+     * <p>There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
      * @return the Class for the key type if this is an mapped <code>DynaProperty</code> 
      * and this feature is supported. Otherwise null.
@@ -265,6 +273,11 @@ public class DynaProperty implements Serializable {
         sb.append(this.name);
         sb.append(",type=");
         sb.append(this.type);
+        if (isIndexed()) {
+            sb.append(" <").append(this.contentType).append(">");
+        } else if (isMapped()) {
+            sb.append(" <").append(this.keyType).append(",").append(this.contentType).append(">");
+        }
         sb.append("]");
         return (sb.toString());
 
@@ -279,38 +292,54 @@ public class DynaProperty implements Serializable {
      * This method provides a workaround.
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
-        // safely write out type class
+        
+        writeAnyClass(this.type,out);
+        
+        if (isIndexed()) {
+            writeAnyClass(this.contentType,out);
+        }
+        else if (isMapped()) {
+            writeAnyClass(this.keyType,out);
+            writeAnyClass(this.contentType,out);
+        }
+        
+        // write out other values
+        out.defaultWriteObject();
+    }
+
+    /**
+     * Write a class using safe encoding to workaround java 1.3 serialization bug.
+     */
+    private void writeAnyClass(Class clazz, ObjectOutputStream out) throws IOException {
+        // safely write out any class
         int primitiveType = 0;
-        if (Boolean.TYPE.equals(type)) {
+        if (Boolean.TYPE.equals(clazz)) {
             primitiveType = BOOLEAN_TYPE;
-        } else if (Byte.TYPE.equals(type)) {
+        } else if (Byte.TYPE.equals(clazz)) {
             primitiveType = BYTE_TYPE;
-        } else if (Character.TYPE.equals(type)) {
+        } else if (Character.TYPE.equals(clazz)) {
             primitiveType = CHAR_TYPE;
-        } else if (Double.TYPE.equals(type)) {
+        } else if (Double.TYPE.equals(clazz)) {
             primitiveType = DOUBLE_TYPE;
-        } else if (Float.TYPE.equals(type)) {
+        } else if (Float.TYPE.equals(clazz)) {
             primitiveType = FLOAT_TYPE;
-        } else if (Integer.TYPE.equals(type)) {
+        } else if (Integer.TYPE.equals(clazz)) {
             primitiveType = INT_TYPE;
-        } else if (Long.TYPE.equals(type)) {
+        } else if (Long.TYPE.equals(clazz)) {
             primitiveType = LONG_TYPE;
-        } else if (Short.TYPE.equals(type)) {
+        } else if (Short.TYPE.equals(clazz)) {
             primitiveType = SHORT_TYPE;
         }	
         
         if (primitiveType == 0) {
             // then it's not a primitive type
             out.writeBoolean(false);
-            out.writeObject(type);
+            out.writeObject(clazz);
         } else {
             // we'll write out a constant instead
             out.writeBoolean(true);
             out.writeInt(primitiveType);
         }
-        
-        // write out other values
-        out.defaultWriteObject();
     }
     
     /**
@@ -322,43 +351,39 @@ public class DynaProperty implements Serializable {
      * @throws StreamCorruptedException when the stream data values are outside expected range 
      */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        
+        this.type = readAnyClass(in);
+        
+        if (isIndexed()) {
+            this.contentType = readAnyClass(in);
+        }
+        else if (isMapped()) {
+            this.keyType = readAnyClass(in);
+            this.contentType = readAnyClass(in);
+        }
+        
+        // read other values
+        in.defaultReadObject();
+    }
+    
+
+    /**
+     * Reads a class using safe encoding to workaround java 1.3 serialization bug.
+     */
+    private Class readAnyClass(ObjectInputStream in) throws IOException, ClassNotFoundException {
         // read back type class safely 
         if (in.readBoolean()) {
             // it's a type constant
             switch (in.readInt()) {
             
-                case BOOLEAN_TYPE:
-                    type = Boolean.TYPE;
-                    break;
-                    
-                case BYTE_TYPE:
-                    type = Byte.TYPE;
-                    break;
-                
-                case CHAR_TYPE:
-                    type = Character.TYPE;
-                    break;
-                
-                case DOUBLE_TYPE:
-                    type = Double.TYPE;
-                    break;
-                
-                case FLOAT_TYPE:
-                    type = Float.TYPE;
-                    break;
-                
-                case INT_TYPE:
-                    type = Integer.TYPE;
-                    break;
-                
-                case LONG_TYPE:
-                    type = Long.TYPE;
-                    break;
-                
-                case SHORT_TYPE:
-                    type = Short.TYPE;
-                    break;
-                
+                case BOOLEAN_TYPE: return   Boolean.TYPE;
+                case BYTE_TYPE:    return      Byte.TYPE;
+                case CHAR_TYPE:    return Character.TYPE;
+                case DOUBLE_TYPE:  return    Double.TYPE;
+                case FLOAT_TYPE:   return     Float.TYPE;
+                case INT_TYPE:     return   Integer.TYPE;
+                case LONG_TYPE:    return      Long.TYPE;
+                case SHORT_TYPE:   return     Short.TYPE;
                 default:
                     // something's gone wrong
                     throw new StreamCorruptedException(
@@ -369,10 +394,7 @@ public class DynaProperty implements Serializable {
               
         } else {
             // it's another class
-            type = (Class) in.readObject();
+            return ((Class) in.readObject());
         }
-        
-        // read other values
-        in.defaultReadObject();
     }
 }
