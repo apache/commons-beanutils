@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.22 2002/03/16 04:11:04 craigmcc Exp $
- * $Revision: 1.22 $
- * $Date: 2002/03/16 04:11:04 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.23 2002/03/24 09:56:05 dion Exp $
+ * $Revision: 1.23 $
+ * $Date: 2002/03/24 09:56:05 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.22 $ $Date: 2002/03/16 04:11:04 $
+ * @version $Revision: 1.23 $ $Date: 2002/03/24 09:56:05 $
  */
 
 public class PropertyUtils {
@@ -582,6 +582,19 @@ public class PropertyUtils {
                 throw new NoSuchMethodException("Property '" + name +
                         "' has no mapped getter method");
             }
+        } else {
+          /* means that the result has to be retrieved from a map */
+          Method readMethod = descriptor.getReadMethod();
+          if (readMethod != null) {
+            Object invokeResult = readMethod.invoke(bean, new Object[0]);
+            /* test and fetch from the map */
+            if (invokeResult instanceof java.util.Map) {
+              result = ((java.util.Map)invokeResult).get(key);
+            }
+          } else {
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no mapped getter method");
+          }
         }
         return result;
 
@@ -1389,6 +1402,19 @@ public class PropertyUtils {
                         ("Property '" + name +
                         "' has no mapped setter method");
             }
+        } else {
+          /* means that the result has to be retrieved from a map */
+          Method readMethod = descriptor.getReadMethod();
+          if (readMethod != null) {
+            Object invokeResult = readMethod.invoke(bean, new Object[0]);
+            /* test and fetch from the map */
+            if (invokeResult instanceof java.util.Map) {
+              ((java.util.Map)invokeResult).put(key, value);
+            }
+          } else {
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no mapped getter method");
+          }
         }
 
     }
