@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.5 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.6 2002/01/23 22:32:53 sanders Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/01/23 22:32:53 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ import java.security.*;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.5 $ $Date: 2002/01/21 00:44:39 $
+ * @version $Revision: 1.6 $ $Date: 2002/01/23 22:32:53 $
  */
 
 public class MappedPropertyDescriptor extends PropertyDescriptor {
@@ -143,7 +143,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, null, null);
         if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name");
+            throw new IntrospectionException("bad property name: " +
+                    propertyName + " on class: " + beanClass.getClass().getName());
         }
         setName(propertyName);
         String base = capitalize(propertyName);
@@ -191,7 +192,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, null, null);
         if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name");
+            throw new IntrospectionException("bad property name: " +
+                propertyName);
         }
         setName(propertyName);
 
@@ -232,7 +234,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, mappedGetter, mappedSetter);
         if (propertyName == null || propertyName.length() == 0) {
-            throw new IntrospectionException("bad property name");
+            throw new IntrospectionException("bad property name: " +
+                propertyName);
         }
         setName(propertyName);
         mappedReadMethod = mappedGetter;
@@ -518,7 +521,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 return m;
             }
         }
-        
+
         return null;
 
     }

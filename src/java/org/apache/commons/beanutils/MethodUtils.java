@@ -86,10 +86,10 @@ public class MethodUtils {
      * <p>Invoke a method whose parameter type matches exactly the object
      * type.</p>
      *
-     * <p> This is a convenient wrapper for 
+     * <p> This is a convenient wrapper for
      * {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * </p>
-     *     
+     *
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param arg use this argument
@@ -112,7 +112,7 @@ public class MethodUtils {
 
         Object [] args = {arg};
         return invokeExactMethod(object, methodName, args);
-        
+
     }
 
 
@@ -120,13 +120,13 @@ public class MethodUtils {
      * <p>Invoke a method whose parameter types match exactly the object
      * types.</p>
      *
-     * <p> This uses reflection to invoke the method obtained from a call to 
+     * <p> This uses reflection to invoke the method obtained from a call to
      * {@link #getAccessibleMethod}.</p>
-     *     
+     *
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param args use these arguments
-     * 
+     *
      * @throw NoSuchMethodException if there is no such accessible method
      * @throw InvocationTargetException wraps an exception thrown by the
      *  method invoked
@@ -148,7 +148,7 @@ public class MethodUtils {
         for (int i=0; i<arguments ;i++)
         {
             parameterTypes[i] = args[i].getClass();
-        }       
+        }
         return invokeExactMethod(object, methodName, args, parameterTypes);
 
     }
@@ -158,14 +158,14 @@ public class MethodUtils {
      * <p>Invoke a method whose parameter types match exactly the parameter
      * types given.</p>
      *
-     * <p>This uses reflection to invoke the method obtained from a call to 
+     * <p>This uses reflection to invoke the method obtained from a call to
      * {@link #getAccessibleMethod}.</p>
-     *     
+     *
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param args use these arguments
      * @param parameterTypes match these parameters
-     * 
+     *
      * @throw NoSuchMethodException if there is no such accessible method
      * @throw InvocationTargetException wraps an exception thrown by the
      *  method invoked
@@ -181,14 +181,15 @@ public class MethodUtils {
                         NoSuchMethodException,
                         IllegalAccessException,
                         InvocationTargetException
-    {      
+    {
 
         Method method = getAccessibleMethod(
                                         object.getClass(),
                                         methodName,
                                         parameterTypes);
         if (method == null)
-            throw new NoSuchMethodException("No such accessible method.");
+            throw new NoSuchMethodException("No such accessible method: " +
+                    methodName + "() on object: " + object.getClass().getName());
         return method.invoke(object, args);
 
     }
@@ -197,30 +198,30 @@ public class MethodUtils {
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) with given name and a single parameter.  If no such method
-     * can be found, return <code>null</code>. 
+     * can be found, return <code>null</code>.
      * Basically, a convenience wrapper that constructs a <code>Class</code>
      * array for you.</p>
      *
      * @param clazz get method from this class
      * @param methodName get method with this name
-     * @param parameterType taking this type of parameter 
+     * @param parameterType taking this type of parameter
      */
     public static Method getAccessibleMethod(
-                Class clazz, 
-                String methodName, 
-                Class parameterType) 
+                Class clazz,
+                String methodName,
+                Class parameterType)
     {
 
         Class [] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
 
-    } 
-    
- 
+    }
+
+
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) with given name and parameters.  If no such method
-     * can be found, return <code>null</code>. 
+     * can be found, return <code>null</code>.
      * This is just a convenient wrapper for
      * {@link #getAccessibleMethod(Method method)}.</p>
      *
@@ -229,9 +230,9 @@ public class MethodUtils {
      * @param parameterTypes with these parameters types
      */
     public static Method getAccessibleMethod(
-                Class clazz, 
-                String methodName, 
-                Class[] parameterTypes) 
+                Class clazz,
+                String methodName,
+                Class[] parameterTypes)
     {
 
         try {

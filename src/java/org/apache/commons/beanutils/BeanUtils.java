@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.8 2002/01/21 00:44:39 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2002/01/21 00:44:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.9 2002/01/23 22:32:53 sanders Exp $
+ * $Revision: 1.9 $
+ * $Date: 2002/01/23 22:32:53 $
  *
  * ====================================================================
  *
@@ -78,6 +78,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogSource;
+
 
 /**
  * Utility methods for populating JavaBeans properties via reflection.
@@ -87,7 +90,7 @@ import java.util.Map;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.8 $ $Date: 2002/01/21 00:44:39 $
+ * @version $Revision: 1.9 $ $Date: 2002/01/23 22:32:53 $
  */
 
 public class BeanUtils {
@@ -95,16 +98,31 @@ public class BeanUtils {
 
     // ------------------------------------------------------ Private Variables
 
+    /**
+     * All logging goes through this logger
+     */
+    private static Log log = LogSource.getInstance(BeanUtils.class);
 
     /**
      * The debugging detail level for this component.
+     * Deprecated: use the log variable
      */
     private static int debug = 0;
 
+    /**
+     * @deprecated BeanUtils now uses commons-logging for all log messages.
+     *             Use your favorite logging tool to configure logging for
+     *             this class.
+     */
     public static int getDebug() {
         return (debug);
     }
 
+    /**
+     * @deprecated BeanUtils now uses commons-logging for all log messages.
+     *             Use your favorite logging tool to configure logging for
+     *             this class.
+     */
     public static void setDebug(int newDebug) {
         debug = newDebug;
     }
@@ -132,6 +150,9 @@ public class BeanUtils {
         throws IllegalAccessException, InstantiationException,
                InvocationTargetException, NoSuchMethodException {
 
+        if (log.isDebugEnabled()) {
+            log.debug("Cloning bean: " + bean.getClass().getName());
+        }
         Class clazz = bean.getClass();
         Object newBean = clazz.newInstance();
         PropertyUtils.copyProperties(newBean, bean);
@@ -160,6 +181,9 @@ public class BeanUtils {
         throws IllegalAccessException, InvocationTargetException,
                NoSuchMethodException {
 
+        if (log.isDebugEnabled()) {
+            log.debug("Describing bean: " + bean.getClass().getName());
+        }
         if (bean == null)
             //            return (Collections.EMPTY_MAP);
             return (new java.util.HashMap());
@@ -447,11 +471,10 @@ public class BeanUtils {
         if ((bean == null) || (properties == null))
             return;
 
-        /*
-        if (debug >= 1)
-            System.out.println("BeanUtils.populate(" + bean + ", " +
+        if (log.isDebugEnabled()) {
+            log.debug("BeanUtils.populate(" + bean + ", " +
                                properties + ")");
-        */
+        }
 
         // Loop through the property name/value pairs to be set
         Iterator names = properties.keySet().iterator();
@@ -463,12 +486,11 @@ public class BeanUtils {
                 continue;
             Object value = properties.get(name);	// String or String[]
 
-            /*
-            if (debug >= 1)
-                System.out.println("  name='" + name + "', value.class='" +
+            if (log.isDebugEnabled()) {
+                log.debug("  name='" + name + "', value.class='" +
                                    (value == null ? "NONE" :
                                    value.getClass().getName()) + "'");
-            */
+            }
 
             // Get the property descriptor of the requested property (if any)
             PropertyDescriptor descriptor = null;
@@ -482,25 +504,27 @@ public class BeanUtils {
                         PropertyUtils.getPropertyDescriptor(bean, name);
                 }
             } catch (Throwable t) {
-                /*
-                if (debug >= 1)
-                    System.out.println("    getPropertyDescriptor: " + t);
-                */
+
+                if (log.isDebugEnabled()) {
+                    log.debug("    getPropertyDescriptor: " + t);
+                }
+
                 descriptor = null;
                 dynaProperty = null;
             }
             if ((descriptor == null) && (dynaProperty == null)) {
-                /*
-                if (debug >= 1)
-                    System.out.println("    No such property, skipping");
-                */
+
+                if (log.isDebugEnabled()) {
+                    log.debug("    No such property, skipping");
+                }
+
                 continue;
             }
-            /*
-            if (debug >= 1)
-                System.out.println("    Property descriptor is '" +
+
+            if (log.isDebugEnabled())
+                log.debug("    Property descriptor is '" +
                                    descriptor + "'");
-            */
+
 
             // Process differently for JavaBeans and DynaBeans
             if (descriptor != null) {
@@ -516,22 +540,24 @@ public class BeanUtils {
                 if (setter == null)
                     setter = descriptor.getWriteMethod();
                 if (setter == null) {
-                    /*
-                      if (debug >= 1)
-                      System.out.println("    No setter method, skipping");
-                    */
+
+                    if (log.isDebugEnabled()) {
+                        System.out.println("    No setter method, skipping");
+                    }
+
                     continue;
                 }
                 Class parameterTypes[] = setter.getParameterTypes();
-                /*
-                  if (debug >= 1)
-                  System.out.println("    Setter method is '" +
-                  setter.getName() + "(" +
-                  parameterTypes[0].getName() +
-                  (parameterTypes.length > 1 ?
-                  ", " + parameterTypes[1].getName() : "" )
-                  + ")'");
-                */
+
+                if (log.isDebugEnabled()) {
+                    log.debug("    Setter method is '" +
+                        setter.getName() + "(" +
+                        parameterTypes[0].getName() +
+                        (parameterTypes.length > 1 ?
+                        ", " + parameterTypes[1].getName() : "" )
+                        + ")'");
+                }
+
                 Class parameterType = parameterTypes[0];
                 if (parameterTypes.length > 1)
                     parameterType = parameterTypes[1];      // Indexed or mapped setter
@@ -566,12 +592,7 @@ public class BeanUtils {
                 try {
                     PropertyUtils.setProperty(bean, name, parameters[0]);
                 } catch (NoSuchMethodException e) {
-                    /*
-                      if (debug >= 1) {
-                      System.out.println("    CANNOT HAPPEN: " + e);
-                      e.printStackTrace(System.out);
-                      }
-                    */
+                    log.error("  CANNOT HAPPEN (setProperty()): ", e);
                 }
 
             } else {
@@ -607,23 +628,13 @@ public class BeanUtils {
                 try {
                     PropertyUtils.setProperty(bean, name, newValue);
                 } catch (NoSuchMethodException e) {
-                    /*
-                      if (debug >= 1) {
-                      System.out.println("    CANNOT HAPPEN: " + e);
-                      e.printStackTrace(System.out);
-                      }
-                    */
+                    log.error("    CANNOT HAPPEN (setProperty())", e);
                 }
 
 
             }
 
         }
-
-        /*
-        if (debug >= 1)
-            System.out.println("============================================");
-        */
 
     }
 
