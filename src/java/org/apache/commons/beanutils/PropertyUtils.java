@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.11 2001/09/19 02:04:10 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2001/09/19 02:04:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.12 2001/09/19 13:58:38 craigmcc Exp $
+ * $Revision: 1.12 $
+ * $Date: 2001/09/19 13:58:38 $
  *
  * ====================================================================
  *
@@ -126,7 +126,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.11 $ $Date: 2001/09/19 02:04:10 $
+ * @version $Revision: 1.12 $ $Date: 2001/09/19 13:58:38 $
  */
 
 public class PropertyUtils {
@@ -210,6 +210,7 @@ public class PropertyUtils {
 
         descriptorsCache.clear();
         mappedDescriptorsCache.clear();
+        Introspector.flushCaches();
 
     }
 
