@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.2 2002/12/02 16:38:24 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/12/02 16:38:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.3 2002/12/07 23:34:40 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/12/07 23:34:40 $
  *
  * ====================================================================
  *
@@ -70,7 +70,6 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * Allows you to pass the name of a method in and compare two beans.
  *
  * @author     <a href"mailto:epugh@upstate.com">Eric Pugh</a>
- * @created    May 5, 2002
  */
 public class BeanComparator implements Comparator, Serializable {
 

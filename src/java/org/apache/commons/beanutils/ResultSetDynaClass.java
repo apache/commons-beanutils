@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.5 2002/09/13 11:51:18 jstrachan Exp $
- * $Revision: 1.5 $
- * $Date: 2002/09/13 11:51:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.6 2002/12/07 23:34:40 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/12/07 23:34:40 $
  *
  * ====================================================================
  *
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/09/13 11:51:18 $
+ * @version $Revision: 1.6 $ $Date: 2002/12/07 23:34:40 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
@@ -318,7 +318,7 @@ public class ResultSetDynaClass implements DynaClass {
 
     /**
      * <p>Factory method to create a new DynaProperty for the given index
-     * into the result set metadata</p>
+     * into the result set metadata.</p>
      * 
      * @param metadata is the result set metadata
      * @param i is the column index in the metadata

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.1 2002/09/03 21:34:20 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2002/09/03 21:34:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.2 2002/12/07 23:34:41 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/12/07 23:34:41 $
  *
  * ====================================================================
  *
@@ -393,7 +393,7 @@ public class LocaleConvertUtils {
      * if there is no registered one, return <code>null</code>.
      *
      * @param locale The Locale
-     * @return The FastHashMap instance contains the all {@LocaleConverter} types for
+     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
      *  the specified locale.
      */
     protected static FastHashMap lookup(Locale locale) {
@@ -418,7 +418,7 @@ public class LocaleConvertUtils {
      *  Create all {@link LocaleConverter} types for specified locale.
      *
      * @param locale The Locale
-     * @return The FastHashMap instance contains the all {@LocaleConverter} types
+     * @return The FastHashMap instance contains the all {@link LocaleConverter} types
      *  for the specified locale.
      */
     protected static FastHashMap create(Locale locale) {
