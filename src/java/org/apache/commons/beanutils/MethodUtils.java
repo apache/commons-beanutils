@@ -101,6 +101,8 @@ public class MethodUtils {
      * All logging goes through this logger
      */
     private static Log log = LogFactory.getLog(MethodUtils.class);
+    /** Only log warning about accessibility work around once */
+    private static boolean loggedAccessibleWarning = false;
 
     /** An empty class array */
     private static final Class[] emptyClassArray = new Class[0];
@@ -577,9 +579,14 @@ public class MethodUtils {
                 
             } catch (SecurityException se) {
                 // log but continue just in case the method.invoke works anyway
-                log.warn(
-                "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
-                se);
+                if (!loggedAccessibleWarning) {
+                    log.warn(
+                        "Cannot use JVM pre-1.4 access bug workaround die to restrictive security manager.");
+                    loggedAccessibleWarning = true;
+                }
+                log.debug(
+                        "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
+                        se);
             }
             return method;
             
@@ -633,9 +640,14 @@ public class MethodUtils {
                                 
                             } catch (SecurityException se) {
                                 // log but continue just in case the method.invoke works anyway
-                                log.warn(
-                                "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
-                                se);
+                                if (!loggedAccessibleWarning) {
+                                    log.warn(
+            "Cannot use JVM pre-1.4 access bug workaround die to restrictive security manager.");
+                                    loggedAccessibleWarning = true;
+                                }
+                                log.debug(
+            "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
+                                        se);
                             }
                             return method;
                         }
