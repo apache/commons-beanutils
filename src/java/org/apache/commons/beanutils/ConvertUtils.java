@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.8 2002/06/15 20:39:44 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2002/06/15 20:39:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.9 2002/06/29 22:29:22 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2002/06/29 22:29:22 $
  *
  * ====================================================================
  *
@@ -72,17 +72,26 @@ import java.sql.Timestamp;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BigIntegerConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
+import org.apache.commons.beanutils.converters.BooleanArrayConverter;
 import org.apache.commons.beanutils.converters.ByteConverter;
+import org.apache.commons.beanutils.converters.ByteArrayConverter;
 import org.apache.commons.beanutils.converters.CharacterConverter;
+import org.apache.commons.beanutils.converters.CharacterArrayConverter;
 import org.apache.commons.beanutils.converters.DoubleConverter;
+import org.apache.commons.beanutils.converters.DoubleArrayConverter;
 import org.apache.commons.beanutils.converters.FloatConverter;
+import org.apache.commons.beanutils.converters.FloatArrayConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.IntegerArrayConverter;
 import org.apache.commons.beanutils.converters.LongConverter;
+import org.apache.commons.beanutils.converters.LongArrayConverter;
 import org.apache.commons.beanutils.converters.ShortConverter;
+import org.apache.commons.beanutils.converters.ShortArrayConverter;
 import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.apache.commons.beanutils.converters.SqlTimeConverter;
 import org.apache.commons.beanutils.converters.SqlTimestampConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
+import org.apache.commons.beanutils.converters.StringArrayConverter;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -130,7 +139,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.8 $ $Date: 2002/06/15 20:39:44 $
+ * @version $Revision: 1.9 $ $Date: 2002/06/29 22:29:22 $
  */
 
 public class ConvertUtils {
@@ -408,28 +417,56 @@ public class ConvertUtils {
      */
     public static void deregister() {
 
+        boolean booleanArray[] = new boolean[0];
+        byte byteArray[] = new byte[0];
+        char charArray[] = new char[0];
+        double doubleArray[] = new double[0];
+        float floatArray[] = new float[0];
+        int intArray[] = new int[0];
+        long longArray[] = new long[0];
+        short shortArray[] = new short[0];
+        String stringArray[] = new String[0];
+
         converters.clear();
         converters.put(BigDecimal.class, new BigDecimalConverter());
         converters.put(BigInteger.class, new BigIntegerConverter());
         converters.put(Boolean.TYPE, new BooleanConverter(defaultBoolean));
         converters.put(Boolean.class,  new BooleanConverter(defaultBoolean));
+        converters.put(booleanArray.getClass(),
+                       new BooleanArrayConverter(booleanArray));
         converters.put(Byte.TYPE, new ByteConverter(defaultByte));
         converters.put(Byte.class, new ByteConverter(defaultByte));
+        converters.put(byteArray.getClass(),
+                       new ByteArrayConverter(byteArray));
         converters.put(Character.TYPE,
                        new CharacterConverter(defaultCharacter));
         converters.put(Character.class,
                        new CharacterConverter(defaultCharacter));
+        converters.put(charArray.getClass(),
+                       new CharacterArrayConverter(charArray));
         converters.put(Double.TYPE, new DoubleConverter(defaultDouble));
         converters.put(Double.class, new DoubleConverter(defaultDouble));
+        converters.put(doubleArray.getClass(),
+                       new DoubleArrayConverter(doubleArray));
         converters.put(Float.TYPE, new FloatConverter(defaultFloat));
         converters.put(Float.class, new FloatConverter(defaultFloat));
+        converters.put(floatArray.getClass(),
+                       new FloatArrayConverter(floatArray));
         converters.put(Integer.TYPE, new IntegerConverter(defaultInteger));
         converters.put(Integer.class, new IntegerConverter(defaultInteger));
+        converters.put(intArray.getClass(),
+                       new IntegerArrayConverter(intArray));
         converters.put(Long.TYPE, new LongConverter(defaultLong));
         converters.put(Long.class, new LongConverter(defaultLong));
+        converters.put(longArray.getClass(),
+                       new LongArrayConverter(longArray));
         converters.put(Short.TYPE, new ShortConverter(defaultShort));
         converters.put(Short.class, new ShortConverter(defaultShort));
+        converters.put(shortArray.getClass(),
+                       new ShortArrayConverter(shortArray));
         converters.put(String.class, new StringConverter());
+        converters.put(stringArray.getClass(),
+                       new StringArrayConverter(stringArray));
         converters.put(Date.class, new SqlDateConverter());
         converters.put(Time.class, new SqlTimeConverter());
         converters.put(Timestamp.class, new SqlTimestampConverter());

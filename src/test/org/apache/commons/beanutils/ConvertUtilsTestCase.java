@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.3 2002/06/15 21:14:34 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/06/15 21:14:34 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.4 2002/06/29 22:29:22 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/06/29 22:29:22 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/06/15 21:14:34 $
+ * @version $Revision: 1.4 $ $Date: 2002/06/29 22:29:22 $
  */
 
 public class ConvertUtilsTestCase extends TestCase {
@@ -129,6 +129,33 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Negative String to primitive integer array tests.
+     */
+    public void testNegativeIntegerArray() {
+
+        Object value = null;
+        int intArray[] = new int[0];
+
+        value = ConvertUtils.convert((String) null, intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("a", intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("{ a }", intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("1a3", intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("{ 1a3 }", intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("0,1a3", intArray.getClass());
+        checkIntegerArray(value, intArray);
+        value = ConvertUtils.convert("{ 0, 1a3 }", intArray.getClass());
+        checkIntegerArray(value, intArray);
+
+
+    }
 
 
     /**
@@ -198,6 +225,20 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("foo", Short.class);
         assertTrue(value instanceof Short);
         assertEquals(((Short) value).shortValue(), (short) 0);
+
+    }
+
+
+    /**
+     * Negative String to String array tests.
+     */
+    public void testNegativeStringArray() {
+
+        Object value = null;
+        String stringArray[] = new String[0];
+
+        value = ConvertUtils.convert((String) null, stringArray.getClass());
+        checkStringArray(value, stringArray);
 
     }
 
@@ -283,6 +324,42 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
+
+    }
+
+
+    /**
+     * Positive String to primitive integer array tests.
+     */
+    public void testPositiveIntegerArray() {
+
+        Object value = null;
+        int intArray[] = new int[0];
+        int intArray1[] = new int[] { 0 };
+        int intArray2[] = new int[] { 0, 10 };
+
+        value = ConvertUtils.convert("{  }", intArray.getClass());
+        checkIntegerArray(value, intArray);
+
+        value = ConvertUtils.convert("0", intArray.getClass());
+        checkIntegerArray(value, intArray1);
+        value = ConvertUtils.convert(" 0 ", intArray.getClass());
+        checkIntegerArray(value, intArray1);
+        value = ConvertUtils.convert("{ 0 }", intArray.getClass());
+        checkIntegerArray(value, intArray1);
+
+        value = ConvertUtils.convert("0,10", intArray.getClass());
+        checkIntegerArray(value, intArray2);
+        value = ConvertUtils.convert("0 10", intArray.getClass());
+        checkIntegerArray(value, intArray2);
+        value = ConvertUtils.convert("{0,10}", intArray.getClass());
+        checkIntegerArray(value, intArray2);
+        value = ConvertUtils.convert("{0 10}", intArray.getClass());
+        checkIntegerArray(value, intArray2);
+        value = ConvertUtils.convert("{ 0, 10 }", intArray.getClass());
+        checkIntegerArray(value, intArray2);
+        value = ConvertUtils.convert("{ 0 10 }", intArray.getClass());
+        checkIntegerArray(value, intArray2);
 
     }
 
@@ -434,6 +511,97 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert(input, Timestamp.class);
         assertTrue(value instanceof Timestamp);
         assertEquals(input, value.toString());
+
+    }
+
+
+    /**
+     * Positive String to String array tests.
+     */
+    public void testPositiveStringArray() {
+
+        Object value = null;
+        String stringArray[] = new String[0];
+        String stringArray1[] = new String[]
+            { "abc" };
+        String stringArray2[] = new String[]
+            { "abc", "de,f" };
+
+        value = ConvertUtils.convert("", stringArray.getClass());
+        checkStringArray(value, stringArray);
+        value = ConvertUtils.convert(" ", stringArray.getClass());
+        checkStringArray(value, stringArray);
+        value = ConvertUtils.convert("{}", stringArray.getClass());
+        checkStringArray(value, stringArray);
+        value = ConvertUtils.convert("{  }", stringArray.getClass());
+        checkStringArray(value, stringArray);
+
+        value = ConvertUtils.convert("abc", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+        value = ConvertUtils.convert("{abc}", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+        value = ConvertUtils.convert("\"abc\"", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+        value = ConvertUtils.convert("{\"abc\"}", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+        value = ConvertUtils.convert("'abc'", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+        value = ConvertUtils.convert("{'abc'}", stringArray.getClass());
+        checkStringArray(value, stringArray1);
+
+        value = ConvertUtils.convert("abc 'de,f'",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+        value = ConvertUtils.convert("{abc, 'de,f'}",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+        value = ConvertUtils.convert("\"abc\",\"de,f\"",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+        value = ConvertUtils.convert("{\"abc\" 'de,f'}",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+        value = ConvertUtils.convert("'abc' 'de,f'",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+        value = ConvertUtils.convert("{'abc', \"de,f\"}",
+                                     stringArray.getClass());
+        checkStringArray(value, stringArray2);
+
+
+    }
+
+
+    // -------------------------------------------------------- Private Methods
+
+
+    private void checkIntegerArray(Object value, int intArray[]) {
+
+        assertNotNull("Returned value is not null", value);
+        assertEquals("Returned value is int[]",
+                     intArray.getClass(), value.getClass());
+        int results[] = (int[]) value;
+        assertEquals("Returned array length", intArray.length, results.length);
+        for (int i = 0; i < intArray.length; i++) {
+            assertEquals("Returned array value " + i,
+                         intArray[i], results[i]);
+        }
+
+    }
+
+
+    private void checkStringArray(Object value, String stringArray[]) {
+
+        assertNotNull("Returned value is not null", value);
+        assertEquals("Returned value is String[]",
+                     stringArray.getClass(), value.getClass());
+        String results[] = (String[]) value;
+        assertEquals("Returned array length",
+                     stringArray.length, results.length);
+        for (int i = 0; i < stringArray.length; i++) {
+            assertEquals("Returned array value " + i,
+                         stringArray[i], results[i]);
+        }
 
     }
 
