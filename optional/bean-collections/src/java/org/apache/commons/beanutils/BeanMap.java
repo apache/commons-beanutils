@@ -43,7 +43,7 @@ import org.apache.commons.collections.Transformer;
  * property is considered non existent in the Map
  *
  * @since Commons Collections 1.0
- * @version $Revision: 1.1 $ $Date: 2004/05/11 22:46:13 $
+ * @version $Revision: 1.2 $ $Date: 2004/05/24 19:56:51 $
  * 
  * @author James Strachan
  * @author Stephen Colebourne
@@ -500,7 +500,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
             public Object next() {
                 Object key = iter.next();
                 Object value = get(key);
-                return new MyMapEntry( BeanMap.this, key, value );
+                return new Entry( BeanMap.this, key, value );
             }            
             public void remove() {
                 throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
@@ -643,17 +643,17 @@ public class BeanMap extends AbstractMap implements Cloneable {
     /**
      * Map entry used by {@link BeanMap}.
      */
-    protected static class MyMapEntry extends AbstractMapEntry {        
+    protected static class Entry extends AbstractMapEntry {        
         private BeanMap owner;
         
         /**
-         * Constructs a new <code>MyMapEntry</code>.
+         * Constructs a new <code>Entry</code>.
          *
          * @param owner  the BeanMap this entry belongs to
          * @param key  the key for this entry
          * @param value  the value for this entry
          */
-        protected MyMapEntry( BeanMap owner, Object key, Object value ) {
+        protected Entry( BeanMap owner, Object key, Object value ) {
             super( key, value );
             this.owner = owner;
         }
