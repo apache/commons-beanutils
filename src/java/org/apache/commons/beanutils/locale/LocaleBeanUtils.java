@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.7 2003/10/09 20:41:40 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/10/09 20:41:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.8 2003/12/22 21:26:47 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/12/22 21:26:47 $
  *
  * ====================================================================
  * 
@@ -121,7 +121,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Gets whether the pattern is localized or not</p>
+     * <p>Gets whether the pattern is localized or not.</p>
      *
      * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
@@ -133,7 +133,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Sets whether the pattern is localized or not</p>
+     * <p>Sets whether the pattern is localized or not.</p>
      *
      * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.8 2003/10/09 20:41:40 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/10/09 20:41:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.9 2003/12/22 21:26:47 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/12/22 21:26:47 $
  *
  * ====================================================================
  * 
@@ -107,7 +107,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Gets for applyLocalized</p>
+     * <p>Gets applyLocalized.</p>
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
@@ -118,7 +118,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Sets applyLocalized</p>
+     * <p>Sets applyLocalized.</p>
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *

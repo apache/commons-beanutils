@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ContextClassLoaderLocal.java,v 1.3 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ContextClassLoaderLocal.java,v 1.4 2003/12/22 21:26:47 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/12/22 21:26:47 $
  *
  * ====================================================================
  * 
@@ -72,7 +72,7 @@ import java.util.WeakHashMap;
  * <strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in a memory leak
  * for those JVMs.
  * 
- * @see Thread#getContextClassLoader().  
+ * @see java.lang.Thread#getContextClassLoader  
  * @author Eric Pabst
  */
 public class ContextClassLoaderLocal {

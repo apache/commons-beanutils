@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.7 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.8 2003/12/22 21:26:47 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/12/22 21:26:47 $
  *
  * ====================================================================
  * 
@@ -81,7 +81,7 @@ public class BeanComparator implements Comparator, Serializable {
      * <strong>Note</strong> that this is intended to be used 
      * only in bean-centric environments.
      * </p><p>
-     * Until {@link setProperty} is called with a non-null value.
+     * Until {@link #setProperty} is called with a non-null value.
      * this comparator will compare the Objects only.
      * </p>
      */
@@ -148,7 +148,7 @@ public class BeanComparator implements Comparator, Serializable {
 
     /**
      * Compare two JavaBeans by their shared property.
-     * If {@link getProperty} is null then the actual objects will be compared.
+     * If {@link #getProperty} is null then the actual objects will be compared.
      *
      * @param  o1 Object The first bean to get data from to compare against
      * @param  o2 Object The second bean to get data from to compare

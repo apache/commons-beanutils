@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.11 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.11 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.12 2003/12/22 21:26:47 rdonkin Exp $
+ * $Revision: 1.12 $
+ * $Date: 2003/12/22 21:26:47 $
  *
  * ====================================================================
  * 
@@ -75,7 +75,7 @@ import java.util.Map;
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
- * <p>The meta contains an <em>optional</em> content type property ({@link getContentType})
+ * <p>The meta contains an <em>optional</em> content type property ({@link #getContentType})
  * for use by mapped and iterated properties. 
  * A mapped or iterated property may choose to indicate the type it expects.
  * The DynaBean implementation may choose to enforce this type on its entries.
@@ -83,7 +83,7 @@ import java.util.Map;
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.11 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.12 $ $Date: 2003/12/22 21:26:47 $
  */
 
 public class DynaProperty implements Serializable {
