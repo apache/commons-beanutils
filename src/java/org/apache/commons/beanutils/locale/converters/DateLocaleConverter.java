@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.7 2003/10/09 20:41:41 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/10/09 20:41:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.8 2004/02/15 11:59:55 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/02/15 11:59:55 $
  *
  * ====================================================================
  * 
@@ -90,9 +90,8 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /** All logging goes through this logger */
     private static Log log = LogFactory.getLog(DateLocaleConverter.class);
 
-    /** The Date formatter */
-    private SimpleDateFormat formatter = getPattern(pattern, locale);
-
+    /** Should the date conversion be lenient? */
+    boolean isLenient = false;
 
     // ----------------------------------------------------------- Constructors
 
@@ -268,7 +267,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @see java.text.DateFormat#isLenient
      */
     public boolean isLenient() {
-        return formatter.isLenient();
+        return isLenient;
     }
     
     /**
@@ -278,7 +277,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @see java.text.DateFormat#setLenient
      */
     public void setLenient(boolean lenient) {
-        formatter.setLenient(lenient);
+        isLenient = lenient;
     }	
 
     // --------------------------------------------------------- Methods
@@ -294,6 +293,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *  successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
+        SimpleDateFormat formatter = getFormatter(pattern, locale);
         if (locPattern) {
             formatter.applyLocalizedPattern(pattern);
         }
@@ -307,7 +307,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * Gets an appropriate <code>SimpleDateFormat</code> for given locale, 
      * default Date format pattern is not provided.
      */
-    private SimpleDateFormat getPattern(String pattern, Locale locale) {
+    private SimpleDateFormat getFormatter(String pattern, Locale locale) {
         // This method is a fix for null pattern, which would cause 
         // Null pointer exception when applied
         // Note: that many constructors default the pattern to null, 
@@ -318,7 +318,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
             log.warn("Null pattern was provided, defaulting to: " + pattern);
         }
         SimpleDateFormat format = new SimpleDateFormat(pattern, locale);
-        format.setLenient(false);
+        format.setLenient(isLenient);
         return format;
     }
 }
