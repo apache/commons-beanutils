@@ -30,6 +30,7 @@ and accessing bean properties.</p>
     <li><a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
     <li><a href="#dynamic.rowSet">RowSetDynaClass (Disconnected ResultSet as DynaBeans)</a></li>
     <li><a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
+    <li><a href="#dynamic.lazy"><i>Lazy</i> DynaBeans</a></li>
     </ul></li>
 <li><a href="#conversion">Data Type Conversions</a>
     <ul>
@@ -586,6 +587,129 @@ like this:</p>
 
 <p>Note that, although appropriate <code>WrapDynaClass</code> instances are
 created internally, you never need to deal with them.</p>
+
+<a name="dynamic.lazy"></a>
+<h3><i>Lazy</i> DynaBeans (<a href="LazyDynaBean.html">LazyDynaBean</a>, 
+<a href="LazyDynaMap.html">LazyDynaMap</a> and <a href="LazyDynaClass.html">LazyDynaClass</a>)</h3>
+
+<p>You bought into the DynaBeans because it saves coding all those POJO JavaBeans but
+   you're here because <i>lazy</i> caught your eye and wondered whats that about?
+   What makes these flavors of DynaBean <i>lazy</i> are the following features:</p> 
+    <ul>
+        <li><strong><i>Lazy</i> property addition</strong> - lazy beans use a
+             <code><a href="DynaClass.html">DynaClass</a></code> which implements
+             the <code><a href="MutableDynaClass.html">MutableDynaClass</a></code> 
+             interface. This provides the ability to add and remove a DynaClass's 
+             properties. <i>Lazy</i> beans use this feature to automatically add
+             a property which doesn't exist to the DynaClass when
+             the <code>set(name, value)</code> method is called.</li>
+         <li><strong><i>Lazy</i> List/Array growth</strong> - If an <i>indexed</i> property is not large
+             enough to accomodate the <code>index</code> being set then the <code>List</code> or
+             <code>Array</code> is automatically <i>grown</i> so that it is.</li>
+         <li><strong><i>Lazy</i> List/Array instantiation</strong> - if an <i>indexed</i>
+             property doesn't exist then calling the <a href="DynaBean.html">DynaBean</a>'s 
+            <i>indexed</i> property getter/setter methods (i.e. <code>get(name, index)</code> or
+             <code>set(name, index, value)</code>) results in either a new <code>List</code>
+             or <code>Array</code> being instantiated. If the indexed property has not been
+             defined in the DynaClass then it is automatically added and a default <code>List</code>
+             implementation instantiated.</li>
+        <li><strong><i>Lazy</i> Map instantiation</strong> - if a <i>mapped</i>
+             property doesn't exist then calling the <a href="DynaBean.html">DynaBean</a>'s 
+             <i>mapped</i> property getter/setter methods (i.e. <code>get(name, key)</code> or
+             <code>set(name, key, value)</code>) results in a new <code>Map</code>
+             being instantiated. If the mapped property has not been defined in the DynaClass
+             then it is automatically added and a default <code>Map</code> implementation
+             instantiated.</li>
+        <li><strong><i>Lazy</i> Bean instantiation</strong> - if a property is defined in
+             the <code>DynaClass</code> as a <code>DynaBean</code> or regular bean and
+             doesn't exist in the <code>DynaBean</code> then <code>LazyDynaBean</code> wiill
+             try to instantiate the bean using a default empty constructor.</li> 
+    </ul>
+
+<p><strong><a href="LazyDynaBean.html">LazyDynaBean</a></strong> is the standard <i>lazy</i> bean 
+   implementation. By default it is associated with a <a href="LazyDynaClass.html">LazyDynaClass</a> 
+   which implements the <a href="MutableDynaClass.html">MutableDynaClass</a> interface - however
+   it can be used with any <code>MutableDynaClass</code> implementation. The question is <i>how do
+   I use it?</i> - well it can be as simple as creating a new bean and then calling the getters/setters...</p>
+
+<pre>
+    DynaBean dynaBean = new LazyDynaBean();
+
+    dynaBean.set("foo", "bar");                   // simple
+
+    dynaBean.set("customer", "title", "Mr");      // mapped
+    dynaBean.set("customer", "surname", "Smith"); // mapped
+
+    dynaBean.set("address", 0, addressLine1);     // indexed
+    dynaBean.set("address", 1, addressLine2);     // indexed
+    dynaBean.set("address", 2, addressLine3);     // indexed
+</pre>
+
+<p><strong><a href="LazyDynaMap.html">LazyDynaMap</a></strong> is a <i>light wieght</i> <code>DynaBean</code>
+   facade to a <code>Map</code> with all the usual <i>lazy</i> features. Its <i>light weight</i> because it doesn't
+   have an associated <code>DynaClass</code> containing all the properties. In fact it actually implements
+   the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>) and derives all the <i>DynaClass</i>
+   information from the actual contents of the <code>Map</code>. A <code>LazyDynaMap</code> can be created around an
+   existing <code>Map</code> or can instantiate its own <code>Map</code>. After any <code>DynaBean</code>
+   processing has finished the <code>Map</code> can be retrieved and the DynaBean <i>facade</i> discarded.</p>
+
+<p>If you need a new <code>Map</code> then to use....</p>
+
+<pre>
+    DynaBean dynaBean = new LazyDynaMap();        // create DynaBean
+
+    dynaBean.set("foo", "bar");                   // simple
+    dynaBean.set("customer", "title", "Mr");      // mapped
+    dynaBean.set("address", 0, addressLine1);     // indexed
+
+    Map myMap = dynaBean.getMap()                 // retrieve the Map
+</pre>
+<p><i>or</i> to use with an existing <code>Map</code> ....</p>
+
+<pre>
+    Map myMap = ....                             // exisitng Map
+    DynaBean dynaBean = new LazyDynaMap(myMap);  // wrap Map in DynaBean
+    dynaBean.set("foo", "bar");                  // set properties
+</pre>
+
+<p><strong><a href="LazyDynaClass.html">LazyDynaClass</a></strong> extends <a href="BasicDynaClass.html">BasicDynaClass</a>
+   and implements the <a href="MutableDynaClass.html">MutableDynaClass</a> interface. It can be used with other
+   <code>DynaBean</code> implementations, but it is the default <code>DynaClass</code> used by <code>LazyDynaBean</code>.
+   When using the <code>LazyDynaBean</code> there may be no need to have anything to do with the <code>DynaClass</code>
+   However sometimes there is a requirement to set up the <code>DynaClass</code> first - perhaps to
+   define the type of array for an indexed property, or if using the DynaBean in <i>restricted</i> mode (see note below)
+   is required. Doing so is straight forward...</p>
+
+<p><i>Either</i> create a <code>LazyDynaClass</code> first...
+
+<pre>
+    MutableDynaClass dynaClass = new LazyDynaClass();    // create DynaClass
+
+    dynaClass.add("amount", java.lang.Integer.class);    // add property
+    dynaClass.add("orders", OrderBean[].class);          // add indexed property
+    dynaClass.add("orders", java.util.TreeMapp.class);   // add mapped property
+
+    DynaBean dynaBean = new LazyDynaBean(dynaClass);     // Create DynaBean with associated DynaClass
+</pre>
+
+<p><i>or</i> create a <code>LazyDynaBean</code> and get the <code>DynaClass</code>...
+
+<pre>
+    DynaBean dynaBean = new LazyDynaBean();              // Create LazyDynaBean
+    MutableDynaClass dynaClass = 
+             (MutableDynaClass)dynaBean.getDynaClass();  // get DynaClass
+
+    dynaClass.add("amount", java.lang.Integer.class);    // add property
+    dynaClass.add("myBeans", myPackage.MyBean[].class);  // add 'array' indexed property
+    dynaClass.add("myMap", java.util.TreeMapp.class);    // add mapped property
+</pre>
+
+<p><strong>NOTE:</strong> One feature of <a href="MutableDynaClass.html">MutableDynaClass</a> is that it
+   has a <i>Restricted</i> property. When the DynaClass is <i>restricted</i> no properties can be added
+   or removed from the <code>DynaClass</code>. Neither the <code>LazyDynaBean</code> or <code>LazyDynaMap</code>
+   will add properties automatically if the <code>DynaClass</code> is <i>restricted</i>.</p>
+
+
 
 <a name="conversion"></a>
 <h1>Data Type Conversions</h1>
