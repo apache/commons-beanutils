@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.18 2001/12/15 19:19:24 craigmcc Exp $
+        $Id: build.xml,v 1.19 2001/12/20 09:31:49 vmassol Exp $
 -->
 
 
@@ -188,7 +188,9 @@
                 version="true"
                doctitle="&lt;h1&gt;${component.title}&lt;/h1&gt;"
             windowtitle="${component.title} (Version ${component.version})"
-                 bottom="Copyright (c) 2001 - Apache Software Foundation"/>
+                 bottom="Copyright (c) 2001 - Apache Software Foundation">
+      <classpath refid="compile.classpath"/>
+    </javadoc> 
   </target>
 
 
