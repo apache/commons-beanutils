@@ -580,8 +580,26 @@ public class MethodUtils {
             } catch (SecurityException se) {
                 // log but continue just in case the method.invoke works anyway
                 if (!loggedAccessibleWarning) {
-                    log.warn(
-                        "Cannot use JVM pre-1.4 access bug workaround die to restrictive security manager.");
+                    boolean vunerableJVM = false;
+                    try {
+                        String specVersion = System.getProperty("java.specification.version");
+                        if (specVersion.charAt(0) == '1' && 
+                                (specVersion.charAt(0) == '0' ||
+                                 specVersion.charAt(0) == '1' ||
+                                 specVersion.charAt(0) == '2' ||
+                                 specVersion.charAt(0) == '3')) {
+                                 
+                            vunerableJVM = true;
+                        }
+                    } catch (SecurityException e) {
+                        // don't know - so display warning
+                        vunerableJVM = true;
+                    }
+                    if (vunerableJVM) {
+                        log.warn(
+                            "Current Security Manager restricts use of workarounds for reflection bugs "
+                            + " in pre-1.4 JVMs.");
+                    }
                     loggedAccessibleWarning = true;
                 }
                 log.debug(
