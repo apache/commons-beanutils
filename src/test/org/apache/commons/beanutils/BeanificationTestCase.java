@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanificationTestCase.java,v 1.1 2003/05/16 14:50:22 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2003/05/16 14:50:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanificationTestCase.java,v 1.2 2003/07/07 22:00:57 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/07/07 22:00:57 $
  *
  * ====================================================================
  *
@@ -80,7 +80,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Robert Burrell Donkin
  * @author Juozas Baliuka
- * @version $Revision: 1.1 $ $Date: 2003/05/16 14:50:22 $
+ * @version $Revision: 1.2 $ $Date: 2003/07/07 22:00:57 $
  */
 
 public class BeanificationTestCase extends TestCase {
@@ -345,6 +345,52 @@ public class BeanificationTestCase extends TestCase {
                     PropertyUtilsBean.getInstance() != signal.getPropertyUtils());        
     }
     
+    
+    /** 
+     * Tests whether difference instances are loaded by different 
+     * context classloaders.
+     */
+    public void testContextClassLoaderLocal() throws Exception {
+            
+        class CCLLTesterThread extends Thread {
+            
+            private Signal signal;
+            private ContextClassLoaderLocal ccll;
+        
+            CCLLTesterThread(Signal signal, ContextClassLoaderLocal ccll) {
+                this.signal = signal;
+                this.ccll = ccll;
+            }
+            
+            public void run() {
+                ccll.set(new Integer(1789));
+                signal.setSignal(2);
+                signal.setMarkerObject(ccll.get());
+            }
+            
+            public String toString() {
+                return "CCLLTesterThread";
+            }
+        }
+            
+        ContextClassLoaderLocal ccll = new ContextClassLoaderLocal();
+        ccll.set(new Integer(1776));
+        assertEquals("Start thread sets value", new Integer(1776), ccll.get());  
+        
+        Signal signal = new Signal();
+        signal.setSignal(1);
+        
+        CCLLTesterThread thread = new CCLLTesterThread(signal, ccll);
+        thread.setContextClassLoader(new TestClassLoader());
+        
+        thread.start();
+        thread.join();
+        
+        assertEquals("Signal not set by test thread", 2, signal.getSignal());     
+        assertEquals("Second thread preserves value", new Integer(1776), ccll.get()); 
+        assertEquals("Second thread gets value it set", new Integer(1789), signal.getMarkerObject()); 
+    }
+    
     /** Tests whether calls are independent for different classloaders */
     public void testContextClassloaderIndependence() throws Exception {
     
@@ -403,6 +449,60 @@ public class BeanificationTestCase extends TestCase {
         
     }
     
+    /** Tests whether different threads can set beanutils instances correctly */
+    public void testBeanUtilsBeanSetInstance() throws Exception {
+            
+        class SetInstanceTesterThread extends Thread {
+            
+            private Signal signal;
+            private BeanUtilsBean bean;
+        
+            SetInstanceTesterThread(Signal signal, BeanUtilsBean bean) {
+                this.signal = signal;
+                this.bean = bean;
+            }
+            
+            public void run() {
+                BeanUtilsBean.setInstance(bean);
+                signal.setSignal(21);
+                signal.setBean(BeanUtilsBean.getInstance());
+            }
+            
+            public String toString() {
+                return "SetInstanceTesterThread";
+            }
+        }
+        
+        Signal signal = new Signal();
+        signal.setSignal(1);
+
+        BeanUtilsBean beanOne = new BeanUtilsBean();
+        BeanUtilsBean beanTwo = new BeanUtilsBean();
+        
+        SetInstanceTesterThread thread = new SetInstanceTesterThread(signal, beanTwo);
+        thread.setContextClassLoader(new TestClassLoader());
+        
+        BeanUtilsBean.setInstance(beanOne);
+        assertEquals("Start thread gets right instance", beanOne, BeanUtilsBean.getInstance()); 
+        
+        thread.start();
+        thread.join();
+        
+        assertEquals("Signal not set by test thread", 21, signal.getSignal());     
+        assertEquals("Second thread preserves value", beanOne, BeanUtilsBean.getInstance()); 
+        assertEquals("Second thread gets value it set", beanTwo, signal.getBean()); 
+    }
+    
+    /** Tests whether the unset method works*/
+    public void testContextClassLoaderUnset() throws Exception {
+        BeanUtilsBean beanOne = new BeanUtilsBean();
+        ContextClassLoaderLocal ccll = new ContextClassLoaderLocal();
+        ccll.set(beanOne);
+        assertEquals("Start thread gets right instance", beanOne, ccll.get()); 
+        ccll.unset();
+        assertTrue("Unset works", !beanOne.equals(ccll.get())); 
+    }
+    
     private boolean isPre14JVM() {
         // some pre 1.4 JVM have buggy WeakHashMap implementations 
         // this is used to test for those JVM
@@ -432,6 +532,7 @@ public class BeanificationTestCase extends TestCase {
         private BeanUtilsBean bean;
         private PropertyUtilsBean propertyUtils;
         private ConvertUtilsBean convertUtils;
+        private Object marker;
         
         public Exception getException() {
             return e;
@@ -447,6 +548,14 @@ public class BeanificationTestCase extends TestCase {
         
         public void setSignal(int signal) {
             this.signal = signal;
+        }
+        
+        public Object getMarkerObject() {
+            return marker;
+        }
+        
+        public void setMarkerObject(Object marker) {
+            this.marker = marker;
         }
         
         public BeanUtilsBean getBean() {
