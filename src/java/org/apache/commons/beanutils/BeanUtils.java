@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.33 2003/01/03 20:32:35 craigmcc Exp $
- * $Revision: 1.33 $
- * $Date: 2003/01/03 20:32:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.34 2003/01/03 20:38:11 craigmcc Exp $
+ * $Revision: 1.34 $
+ * $Date: 2003/01/03 20:38:11 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.33 $ $Date: 2003/01/03 20:32:35 $
+ * @version $Revision: 1.34 $ $Date: 2003/01/03 20:38:11 $
  */
 
 public class BeanUtils {
@@ -856,21 +856,27 @@ public class BeanUtils {
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
                 if (((MappedPropertyDescriptor) descriptor).getMappedWriteMethod() == null) {
-                    log.debug("Skipping read-only property");
+                    if (log.isDebugEnabled()) {
+                        log.debug("Skipping read-only property");
+                    }
                     return; // Read-only, skip this property setter
                 }
                 type = ((MappedPropertyDescriptor) descriptor).
                     getMappedPropertyType();
             } else if (descriptor instanceof IndexedPropertyDescriptor) {
                 if (((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod() == null) {
-                    log.debug("Skipping read-only property");
+                    if (log.isDebugEnabled()) {
+                        log.debug("Skipping read-only property");
+                    }
                     return; // Read-only, skip this property setter
                 }
                 type = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
             } else {
                 if (descriptor.getWriteMethod() == null) {
-                    log.debug("Skipping read-only property");
+                    if (log.isDebugEnabled()) {
+                        log.debug("Skipping read-only property");
+                    }
                     return; // Read-only, skip this property setter
                 }
                 type = descriptor.getPropertyType();
@@ -880,7 +886,6 @@ public class BeanUtils {
         // Convert the specified value to the required type
         Object newValue = null;
         if (type.isArray() && (index < 0)) { // Scalar value into array
-            log.debug("CONVERTING SCALAR '" + value + "' TO ARRAY");
             if (value == null) {
                 String values[] = new String[1];
                 values[0] = (String) value;
