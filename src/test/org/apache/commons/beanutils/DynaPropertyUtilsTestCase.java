@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.5 2002/07/07 23:08:42 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/07/07 23:08:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.6 2002/07/16 02:41:07 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/07/16 02:41:07 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/07/07 23:08:42 $
+ * @version $Revision: 1.6 $ $Date: 2002/07/16 02:41:07 $
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {
@@ -169,6 +169,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long((long) 321));
+        HashMap mapProperty = new HashMap();
+        mapProperty.put("First Key", "First Value");
+        mapProperty.put("Second Key", "Second Value");
+        bean.set("mapProperty", mapProperty);
         HashMap mappedProperty = new HashMap();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
@@ -731,7 +735,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("Finding third value threw " + t);
         }
 
-        // Use key expression
+        // Use key expression with parentheses
 
         try {
             value =
@@ -755,6 +759,35 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             value =
                     PropertyUtils.getMappedProperty(bean,
                             "mappedProperty(Third Key)");
+            assertNull("Can not find third value", value);
+        } catch (Throwable t) {
+            fail("Finding third value threw " + t);
+        }
+
+        // Use key expression with dotted syntax
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.First Key");
+            assertEquals("Can find first value", "First Value", value);
+        } catch (Throwable t) {
+            fail("Finding first value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Second Key");
+            assertEquals("Can find second value", "Second Value", value);
+        } catch (Throwable t) {
+            fail("Finding second value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Third Key");
             assertNull("Can not find third value", value);
         } catch (Throwable t) {
             fail("Finding third value threw " + t);
@@ -1832,7 +1865,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("Finding fourth value threw " + t);
         }
 
-        // Use key expression
+        // Use key expression with parentheses
 
         try {
             value =
@@ -1858,6 +1891,34 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertEquals("Can find fifth value", "Fifth Value", value);
         } catch (Throwable t) {
             fail("Finding fifth value threw " + t);
+        }
+
+        // Use key expression with dotted expression
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Sixth Key");
+            assertNull("Can not find sixth value", value);
+        } catch (Throwable t) {
+            fail("Finding fifth value threw " + t);
+        }
+
+        try {
+            PropertyUtils.setNestedProperty(bean,
+                    "mapProperty.Sixth Key",
+                    "Sixth Value");
+        } catch (Throwable t) {
+            fail("Setting sixth value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Sixth Key");
+            assertEquals("Can find sixth value", "Sixth Value", value);
+        } catch (Throwable t) {
+            fail("Finding sixth value threw " + t);
         }
 
     }
@@ -2469,6 +2530,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("intProperty", Integer.TYPE),
                             new DynaProperty("listIndexed", List.class),
                             new DynaProperty("longProperty", Long.TYPE),
+                            new DynaProperty("mapProperty", Map.class),
                             new DynaProperty("mappedProperty", Map.class),
                             new DynaProperty("mappedIntProperty", Map.class),
                             new DynaProperty("nested", TestBean.class),

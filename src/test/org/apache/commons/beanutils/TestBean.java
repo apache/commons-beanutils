@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.8 2002/01/23 22:35:59 sanders Exp $
- * $Revision: 1.8 $
- * $Date: 2002/01/23 22:35:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.9 2002/07/16 02:41:08 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2002/07/16 02:41:08 $
  *
  * ====================================================================
  *
@@ -66,13 +66,14 @@ package org.apache.commons.beanutils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2002/01/23 22:35:59 $
+ * @version $Revision: 1.9 $ $Date: 2002/07/16 02:41:08 $
  */
 
 public class TestBean {
@@ -208,6 +209,32 @@ public class TestBean {
 
     public void setLongProperty(long longProperty) {
         this.longProperty = longProperty;
+    }
+
+
+    /**
+     * A mapped property with only a getter and setter for a Map.
+     */
+    private Map mapProperty = null;
+
+    public Map getMapProperty() {
+        // Create the map the very first time
+        if (mapProperty == null) {
+            mapProperty = new HashMap();
+            mapProperty.put("First Key", "First Value");
+            mapProperty.put("Second Key", "Second Value");
+        }
+        return (mapProperty);
+    }
+
+    public void setMapProperty(Map mapProperty) {
+        // Create the map the very first time
+        if (mapProperty == null) {
+            mapProperty = new HashMap();
+            mapProperty.put("First Key", "First Value");
+            mapProperty.put("Second Key", "Second Value");
+        }
+        this.mapProperty = mapProperty;
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.17 2002/07/07 23:08:42 craigmcc Exp $
- * $Revision: 1.17 $
- * $Date: 2002/07/07 23:08:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.18 2002/07/16 02:41:08 craigmcc Exp $
+ * $Revision: 1.18 $
+ * $Date: 2002/07/16 02:41:08 $
  *
  * ====================================================================
  *
@@ -104,7 +104,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.17 $ $Date: 2002/07/07 23:08:42 $
+ * @version $Revision: 1.18 $ $Date: 2002/07/16 02:41:08 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -991,7 +991,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Finding third value threw " + t);
         }
 
-        // Use key expression
+        // Use key expression with parentheses
 
         try {
             value =
@@ -1015,6 +1015,35 @@ public class PropertyUtilsTestCase extends TestCase {
             value =
                     PropertyUtils.getMappedProperty(bean,
                             "mappedProperty(Third Key)");
+            assertNull("Can not find third value", value);
+        } catch (Throwable t) {
+            fail("Finding third value threw " + t);
+        }
+
+        // Use key expression with dotted syntax
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.First Key");
+            assertEquals("Can find first value", "First Value", value);
+        } catch (Throwable t) {
+            fail("Finding first value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Second Key");
+            assertEquals("Can find second value", "Second Value", value);
+        } catch (Throwable t) {
+            fail("Finding second value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Third Key");
             assertNull("Can not find third value", value);
         } catch (Throwable t) {
             fail("Finding third value threw " + t);
@@ -2352,7 +2381,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Finding fourth value threw " + t);
         }
 
-        // Use key expression
+        // Use key expression with parentheses
 
         try {
             value =
@@ -2378,6 +2407,34 @@ public class PropertyUtilsTestCase extends TestCase {
             assertEquals("Can find fifth value", "Fifth Value", value);
         } catch (Throwable t) {
             fail("Finding fifth value threw " + t);
+        }
+
+        // Use key expression with dotted expression
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Sixth Key");
+            assertNull("Can not find sixth value", value);
+        } catch (Throwable t) {
+            fail("Finding fifth value threw " + t);
+        }
+
+        try {
+            PropertyUtils.setNestedProperty(bean,
+                    "mapProperty.Sixth Key",
+                    "Sixth Value");
+        } catch (Throwable t) {
+            fail("Setting sixth value threw " + t);
+        }
+
+        try {
+            value =
+                    PropertyUtils.getNestedProperty(bean,
+                            "mapProperty.Sixth Key");
+            assertEquals("Can find sixth value", "Sixth Value", value);
+        } catch (Throwable t) {
+            fail("Finding sixth value threw " + t);
         }
 
     }

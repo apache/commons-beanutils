@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.27 2002/07/07 23:17:59 craigmcc Exp $
- * $Revision: 1.27 $
- * $Date: 2002/07/07 23:17:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.28 2002/07/16 02:41:07 craigmcc Exp $
+ * $Revision: 1.28 $
+ * $Date: 2002/07/16 02:41:07 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.27 $ $Date: 2002/07/07 23:17:59 $
+ * @version $Revision: 1.28 $ $Date: 2002/07/16 02:41:07 $
  */
 
 public class PropertyUtils {
@@ -700,16 +700,14 @@ public class PropertyUtils {
             String next = name.substring(0, period);
             indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
-            if (indexOfMAPPED_DELIM >= 0 &&
-                    (indexOfINDEXED_DELIM < 0 ||
-                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+            if (bean instanceof Map) {
+                bean = ((Map) bean).get(next);
+            } else if (indexOfMAPPED_DELIM >= 0) {
                 bean = getMappedProperty(bean, next);
+            } else if (indexOfINDEXED_DELIM >= 0) {
+                bean = getIndexedProperty(bean, next);
             } else {
-                if (indexOfINDEXED_DELIM >= 0) {
-                    bean = getIndexedProperty(bean, next);
-                } else {
-                    bean = getSimpleProperty(bean, next);
-                }
+                bean = getSimpleProperty(bean, next);
             }
             if (bean == null) {
                 throw new IllegalArgumentException
@@ -722,16 +720,14 @@ public class PropertyUtils {
         indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
         indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
-        if (indexOfMAPPED_DELIM >= 0 &&
-                (indexOfINDEXED_DELIM < 0 ||
-                indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+        if (bean instanceof Map) {
+            bean = ((Map) bean).get(name);
+        } else if (indexOfMAPPED_DELIM >= 0) {
             bean = getMappedProperty(bean, name);
+        } else if (indexOfINDEXED_DELIM >= 0) {
+            bean = getIndexedProperty(bean, name);
         } else {
-            if (indexOfINDEXED_DELIM >= 0) {
-                bean = getIndexedProperty(bean, name);
-            } else {
-                bean = getSimpleProperty(bean, name);
-            }
+            bean = getSimpleProperty(bean, name);
         }
         return bean;
 
@@ -1498,16 +1494,14 @@ public class PropertyUtils {
             String next = name.substring(0, delim);
             indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
-            if (indexOfMAPPED_DELIM >= 0 &&
-                    (indexOfINDEXED_DELIM < 0 ||
-                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+            if (bean instanceof Map) {
+                bean = ((Map) bean).get(next);
+            } else if (indexOfMAPPED_DELIM >= 0) {
                 bean = getMappedProperty(bean, next);
+            } else if (indexOfINDEXED_DELIM >= 0) {
+                bean = getIndexedProperty(bean, next);
             } else {
-                if (indexOfINDEXED_DELIM >= 0) {
-                    bean = getIndexedProperty(bean, next);
-                } else {
-                    bean = getSimpleProperty(bean, next);
-                }
+                bean = getSimpleProperty(bean, next);
             }
             if (bean == null) {
                 throw new IllegalArgumentException
@@ -1520,16 +1514,14 @@ public class PropertyUtils {
         indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
         indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
-        if (indexOfMAPPED_DELIM >= 0 &&
-                (indexOfINDEXED_DELIM < 0 ||
-                indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+        if (bean instanceof Map) {
+            ((Map) bean).put(name, value);
+        } else if (indexOfMAPPED_DELIM >= 0) {
             setMappedProperty(bean, name, value);
+        } else if (indexOfINDEXED_DELIM >= 0) {
+            setIndexedProperty(bean, name, value);
         } else {
-            if (indexOfINDEXED_DELIM >= 0) {
-                setIndexedProperty(bean, name, value);
-            } else {
-                setSimpleProperty(bean, name, value);
-            }
+            setSimpleProperty(bean, name, value);
         }
 
     }
