@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/SqlTimestampConverter.java,v 1.1 2002/03/18 16:32:43 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/03/18 16:32:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/SqlTimestampConverter.java,v 1.2 2002/04/11 19:50:06 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/04/11 19:50:06 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/03/18 16:32:43 $
+ * @version $Revision: 1.2 $ $Date: 2002/04/11 19:50:06 $
  * @since 1.3
  */
 
@@ -91,7 +91,8 @@ public final class SqlTimestampConverter implements Converter {
      */
     public SqlTimestampConverter() {
 
-        this(null);
+        this.defaultValue = null;
+        this.useDefault = false;
 
     }
 
@@ -105,6 +106,7 @@ public final class SqlTimestampConverter implements Converter {
     public SqlTimestampConverter(Object defaultValue) {
 
         this.defaultValue = defaultValue;
+        this.useDefault = true;
 
     }
 
@@ -116,6 +118,12 @@ public final class SqlTimestampConverter implements Converter {
      * The default value specified to our Constructor, if any.
      */
     private Object defaultValue = null;
+
+
+    /**
+     * Should we return the default value on conversion errors?
+     */
+    private boolean useDefault = true;
 
 
     // --------------------------------------------------------- Public Methods
@@ -134,7 +142,7 @@ public final class SqlTimestampConverter implements Converter {
     public Object convert(Class type, Object value) {
 
         if (value == null) {
-            if (defaultValue != null) {
+            if (useDefault) {
                 return (defaultValue);
             } else {
                 throw new ConversionException("No value specified");
@@ -144,7 +152,7 @@ public final class SqlTimestampConverter implements Converter {
         try {
             return (Timestamp.valueOf((String) value));
         } catch (Exception e) {
-            if (defaultValue != null) {
+            if (useDefault) {
                 return (defaultValue);
             } else {
                 throw new ConversionException(e);
