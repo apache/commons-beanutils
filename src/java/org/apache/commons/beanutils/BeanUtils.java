@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.2 2001/04/16 13:26:46 geirm Exp $
- * $Revision: 1.2 $
- * $Date: 2001/04/16 13:26:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.3 2001/04/16 16:30:12 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/04/16 16:30:12 $
  *
  * ====================================================================
  *
@@ -73,6 +73,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -83,7 +85,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.2 $ $Date: 2001/04/16 13:26:46 $
+ * @version $Revision: 1.3 $ $Date: 2001/04/16 16:30:12 $
  */
 
 public class BeanUtils {
@@ -132,6 +134,41 @@ public class BeanUtils {
         Object newBean = clazz.newInstance();
         PropertyUtils.copyProperties(newBean, bean);
         return (newBean);
+
+    }
+
+
+    /**
+     * Return the entire set of properties for which the specified bean
+     * provides a read method.  This map can be fed back to a call to
+     * <code>BeanUtils.populate()</code> to reconsitute the same set of
+     * properties, modulo differences for read-only and write-only
+     * properties.
+     *
+     * @param bean Bean whose properties are to be extracted
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @exception NoSuchMethodException if an accessor method for this
+     *  propety cannot be found
+     */
+    public static Map describe(Object bean)
+        throws IllegalAccessException, InvocationTargetException,
+               NoSuchMethodException {
+
+        if (bean == null)
+            return (Collections.EMPTY_MAP);
+        PropertyDescriptor descriptors[] =
+            PropertyUtils.getPropertyDescriptors(bean);
+        Map description = new HashMap(descriptors.length);
+        for (int i = 0; i < descriptors.length; i++) {
+            String name = descriptors[i].getName();
+            if (descriptors[i].getReadMethod() != null)
+                description.put(name, getProperty(bean, name));
+        }
+        return (description);
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.1 2001/04/14 18:29:56 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/04/14 18:29:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.2 2001/04/16 16:30:13 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/04/16 16:30:13 $
  *
  * ====================================================================
  *
@@ -72,7 +72,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -118,7 +120,7 @@ import java.util.HashMap;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.1 $ $Date: 2001/04/14 18:29:56 $
+ * @version $Revision: 1.2 $ $Date: 2001/04/16 16:30:13 $
  */
 
 public class PropertyUtils {
@@ -209,6 +211,40 @@ public class PropertyUtils {
                 }
 	    }
 	}
+
+    }
+
+
+    /**
+     * Return the entire set of properties for which the specified bean
+     * provides a read method.  This map contains the unconverted property
+     * values for all properties for which a read method is provided
+     * (i.e. where the <code>getReadMethod()</code> returns non-null).
+     *
+     * @param bean Bean whose properties are to be extracted
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @exception NoSuchMethodException if an accessor method for this
+     *  propety cannot be found
+     */
+    public static Map describe(Object bean)
+        throws IllegalAccessException, InvocationTargetException,
+               NoSuchMethodException {
+
+        if (bean == null)
+            return (Collections.EMPTY_MAP);
+        PropertyDescriptor descriptors[] =
+            PropertyUtils.getPropertyDescriptors(bean);
+        Map description = new HashMap(descriptors.length);
+        for (int i = 0; i < descriptors.length; i++) {
+            String name = descriptors[i].getName();
+            if (descriptors[i].getReadMethod() != null)
+                description.put(name, getProperty(bean, name));
+        }
+        return (description);
 
     }
 
