@@ -71,7 +71,7 @@ JavaBeans-aware tools to use Java's <em>introspection</em> capabilities to
 learn about the properties and operations provided by your class, and present
 them in a visually appealing manner in development tools.</p>
 
-<p>The <a href="http://java.sun.com/javabeans/docs/spec.html">JavaBeans
+<p>The <a href="http://java.sun.com/products/javabeans/docs/spec.html">JavaBeans
 Specification</a> describes the complete set of characteristics that makes
 an arbitrary Java class a JavaBean or not -- and you should consider reading
 this document to be an important part of developing your Java programming
@@ -515,12 +515,11 @@ which you can utilize as shown in this example:</p>
 
 <a name="dynamic.rowSet"></a>
 <h3><code>RowSetDynaClass</code> (Disconnected ResultSet as DynaBeans)</h3>
-
-<p>Although <a href="#dynamic.resultSet">ResultSetDynaClass</code> is a very
-useful technique for representing the results of an SQL query as a series of
-DynaBeans, an important problem is that the underlying <code>ResultSet</code>
-must remain open throughout the period of time that the rows are being
-processed by your application.  This hinders the ability to use
+<p>Although <a href="#dynamic.resultSet"><code>ResultSetDynaClass</code></a> is
+a very useful technique for representing the results of an SQL query as a
+series of DynaBeans, an important problem is that the underlying
+<code>ResultSet</code> must remain open throughout the period of time that the
+rows are being processed by your application.  This hinders the ability to use
 <code>ResultSetDynaClass</code> as a means of communicating information from
 the model layer to the view layer in a model-view-controller architecture
 such as that provided by the <a href="http://jakarta.apache.org/struts/">Struts
@@ -544,7 +543,7 @@ to implement <code>java.io.Serializable</code>, so that it (and the
 DynaBeans that correspond to each row of the result) can be conveniently
 serialized and deserialized (as long as the underlying column values are
 also Serializable).  Thus, <code>RowSetDynaClass</code> represents a very
-convenient way to transmit the results 0f an SQL query to a remote Java-based
+convenient way to transmit the results of an SQL query to a remote Java-based
 client application (such as an applet).</p>
 
 <p>The normal usage pattern for a <code>RowSetDynaClass</code> will look
@@ -760,7 +759,7 @@ For example, to filter a collection to find all beans where active employee is f
  
     // filter the Collection
     CollectionUtils.filter( peopleCollection, predicate );
-</pre</code>
+</pre></code>
 </p>
 
 <a href="bean-property-transformer"></a>
