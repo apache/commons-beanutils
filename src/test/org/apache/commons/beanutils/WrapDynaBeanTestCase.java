@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.7 2004/01/08 22:38:11 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2004/01/08 22:38:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.8 2004/01/08 22:59:07 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/01/08 22:59:07 $
  *
  * ====================================================================
  * 
@@ -73,7 +73,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/01/08 22:38:11 $
+ * @version $Revision: 1.8 $ $Date: 2004/01/08 22:59:07 $
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
@@ -213,6 +213,15 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertTrue("Object type is AlphaBean", wrappedInstance instanceof AlphaBean);
         AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
         assertTrue("Same Object", wrappedAlphaBean == alphaBean);
+    }
+
+    /** Tests the newInstance implementation for WrapDynaClass */
+    public void testNewInstance() throws Exception {
+        WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(AlphaBean.class);
+        Object createdInstance = dynaClass.newInstance();
+        assertTrue("Object type is WrapDynaBean", createdInstance instanceof WrapDynaBean);
+        WrapDynaBean dynaBean = (WrapDynaBean) createdInstance;
+        assertTrue("Object type is AlphaBean", dynaBean.getInstance() instanceof AlphaBean);
     }
 
 }

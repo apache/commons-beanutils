@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.6 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.7 2004/01/08 22:59:07 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2004/01/08 22:59:07 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,8 +72,19 @@ import java.util.Map;
  * <p>Implementation of <code>DynaClass</code> for DynaBeans that wrap
  * standard JavaBean instances.</p>
  *
+ * <p>
+ * It is suggested that this class should not usually need to be used directly
+ * to create new <code>WrapDynaBean</code> instances. 
+ * It's usually better to call the <code>WrapDynaBean</code> constructor directly.
+ * For example:</p>
+ * <code><pre>
+ *   Object javaBean = ...;
+ *   DynaBean wrapper = new WrapDynaBean(javaBean);
+ * </pre></code>
+ * <p>
+ *
  * @author Craig McClanahan
- * @version $Revision: 1.6 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.7 $ $Date: 2004/01/08 22:59:07 $
  */
 
 public class WrapDynaClass implements DynaClass {
@@ -198,14 +209,22 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * <p>Instantiate and return a new DynaBean instance, associated
-     * with this DynaClass.  <strong>NOTE</strong> - This operation is not
-     * supported, and throws an exception.  You should create new
-     * <code>WrapDynaBean</code> instances by calling its constructor:</p>
-     * <pre>
+     * <p>Instantiates a new standard JavaBean instance associated with
+     * this DynaClass and return it wrapped in a new WrapDynaBean   
+     * instance. <strong>NOTE</strong> the JavaBean should have a 
+     * no argument constructor.</p>
+     *
+     * <strong>NOTE</strong> - Most common use cases should not need to use
+     * this method. It is usually better to create new
+     * <code>WrapDynaBean</code> instances by calling its constructor.
+     * For example:</p>
+     * <code><pre>
      *   Object javaBean = ...;
      *   DynaBean wrapper = new WrapDynaBean(javaBean);
-     * </pre>
+     * </pre></code>
+     * <p>
+     * (This method is needed for some kinds of <code>DynaBean</code> framework.)
+     * </p>
      *
      * @exception IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
@@ -216,7 +235,7 @@ public class WrapDynaClass implements DynaClass {
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 
-        throw new UnsupportedOperationException("newInstance() not supported");
+        return new WrapDynaBean(beanClass.newInstance());
 
     }
 

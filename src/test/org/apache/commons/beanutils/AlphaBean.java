@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/AlphaBean.java,v 1.5 2003/10/09 20:40:07 rdonkin Exp $
- * $Revision: 1.5 $
- * $Date: 2003/10/09 20:40:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/AlphaBean.java,v 1.6 2004/01/08 22:59:07 rdonkin Exp $
+ * $Revision: 1.6 $
+ * $Date: 2004/01/08 22:59:07 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,6 +64,8 @@ package org.apache.commons.beanutils;
 public class AlphaBean extends AbstractParent implements Child {
     
     private String name;
+    
+    public AlphaBean() {}
     
     public AlphaBean(String name) {
         setName(name);
