@@ -1,4 +1,4 @@
-$Id: RELEASE-NOTES.txt,v 1.4 2002/04/28 00:56:53 craigmcc Exp $
+$Id: RELEASE-NOTES.txt,v 1.5 2002/04/29 16:36:32 craigmcc Exp $
 
                           Commons BeanUtils Package
                                 Version 1.3
@@ -137,5 +137,6 @@ BUG REPORTS ADDRESSED:
      to zero
 7929 PropertyUtils.getProperty fails on a class named Component
 8364 java.util.List support for getIndexedProperty()
+8627 Add "1/0" to BooleanConverter
 
 
