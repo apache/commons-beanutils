@@ -1,0 +1,222 @@
+<project name="Bean Utilities" default="compile" basedir=".">
+
+
+<!--
+        "Bean Utilities" component of the Jakarta Commons Subproject
+        $Id: build.xml,v 1.1 2001/03/27 05:25:34 craigmcc Exp $
+-->
+
+
+<!-- ========== Initialize Properties ===================================== -->
+
+
+  <property file="build.properties"/>                <!-- Component local   -->
+  <property file="../build.properties"/>             <!-- Commons local     -->
+  <property file="${user.home}/.build.properties"/>  <!-- User local        -->
+
+
+<!-- ========== External Dependencies ===================================== -->
+
+
+  <!-- The directory containing your binary distribution of JUnit,
+       version 3.2 or later -->
+  <property name="junit.home"              value="/usr/local/junit3.5"/>
+
+
+<!-- ========== Derived Values ============================================ -->
+
+
+  <!-- The pathname of the "junit.jar" JAR file -->
+  <property name="junit.jar"               value="${junit.home}/junit.jar"/>
+
+
+<!-- ========== Component Declarations ==================================== -->
+
+
+  <!-- The name of this component -->
+  <property name="component.name"          value="beanutils"/>
+
+  <!-- The title of this component -->
+  <property name="component.title"         value="Bean Introspection Utilities"/>
+
+  <!-- The current version number of this component -->
+  <property name="component.version"       value="0.1-dev"/>
+
+  <!-- The base directory for compilation targets -->
+  <property name="build.home"              value="target"/>
+
+  <!-- The base directory for component configuration files -->
+  <property name="conf.home"               value="conf"/>
+
+  <!-- The base directory for distribution targets -->
+  <property name="dist.home"               value="dist"/>
+
+  <!-- The base directory for component sources -->
+  <property name="source.home"             value="src/share"/>
+
+  <!-- The base directory for unit test sources -->
+  <property name="test.home"               value="src/test"/>
+
+
+<!-- ========== Compiler Defaults ========================================= -->
+
+
+  <!-- Should Java compilations set the 'debug' compiler option? -->
+  <property name="compile.debug"           value="true"/>
+
+  <!-- Should Java compilations set the 'deprecation' compiler option? -->
+  <property name="compile.decprecation"    value="true"/>
+
+  <!-- Should Java compilations set the 'optimize' compiler option? -->
+  <property name="compile.optimize"        value="true"/>
+
+  <!-- Construct compile classpath -->
+  <path id="compile.classpath">
+    <pathelement location="${build.home}/classes"/>
+  </path>
+
+
+<!-- ========== Test Execution Defaults =================================== -->
+
+
+  <!-- Construct unit test classpath -->
+  <path id="test.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${build.home}/tests"/>
+    <pathelement location="${junit.jar}"/>
+  </path>
+
+  <!-- Should all tests fail if one does? -->
+  <property name="test.failonerror"        value="true"/>
+
+  <!-- The test runner to execute -->
+  <property name="test.runner"             value="junit.textui.TestRunner"/>
+
+
+<!-- ========== Executable Targets ======================================== -->
+
+
+  <target name="init"
+   description="Initialize and evaluate conditionals">
+    <echo message="-------- ${component.name} ${component.version} --------"/>
+  </target>
+
+
+  <target name="prepare" depends="init"
+   description="Prepare build directory">
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/classes"/>
+    <mkdir dir="${build.home}/conf"/>
+    <mkdir dir="${build.home}/javadoc"/>
+    <mkdir dir="${build.home}/tests"/>
+  </target>
+
+
+  <target name="static" depends="prepare"
+   description="Copy static files to build directory">
+    <tstamp/>
+    <filter  token="name"                  value="${component.name}"/>
+    <filter  token="version"               value="${component.version}"/>
+    <copy  todir="${build.home}/conf">
+      <fileset dir="${conf.home}" includes="*.MF"/>
+    </copy>
+  </target>
+
+
+  <target name="compile" depends="static"
+   description="Compile shareable components">
+    <javac  srcdir="${source.home}"
+           destdir="${build.home}/classes"
+             debug="${compile.debug}"
+       deprecation="${compile.deprecation}"
+          optimize="${compile.optimize}">
+      <classpath refid="compile.classpath"/>
+    </javac>
+    <copy    todir="${build.home}/classes">
+      <fileset dir="${source.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="compile.tests" depends="compile"
+   description="Compile unit test cases">
+    <javac  srcdir="${test.home}"
+           destdir="${build.home}/tests"
+             debug="${compile.debug}"
+       deprecation="${compile.deprecation}"
+          optimize="${compile.optimize}">
+      <classpath refid="test.classpath"/>
+    </javac>
+    <copy    todir="${build.home}/classes">
+      <fileset dir="${test.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="clean"
+   description="Clean build and distribution directories">
+    <delete    dir="${build.home}"/>
+    <delete    dir="${dist.home}"/>
+  </target>
+
+
+  <target name="all" depends="clean,compile"
+   description="Clean and compile all components"/>
+
+
+  <target name="javadoc" depends="compile"
+   description="Create component Javadoc documentation">
+    <javadoc sourcepath="${source.home}"
+                destdir="${build.home}/javadoc"
+           packagenames="org.apache.commons.*"
+                 author="true"
+                private="true"
+                version="true"
+               doctitle="&lt;h1&gt;${component.title}&lt;/h1&gt;"
+            windowtitle="${component.title} (Version ${component.version})"
+                 bottom="Copyright (c) 2001 - Apache Software Foundation"/>
+  </target>
+
+
+  <target name="dist" depends="compile,javadoc"
+   description="Create binary distribution">
+    <!-- TODO: top level files like LICENSE and README -->
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${dist.home}/conf"/>
+    <copy     todir="${dist.home}/conf">
+      <fileset  dir="conf"/>
+    </copy>
+    <mkdir      dir="${dist.home}/lib"/>
+    <jar    jarfile="${dist.home}/lib/commons-${component.name}.jar"
+            basedir="${build.home}/classes"
+           manifest="${build.home}/conf/MANIFEST.MF"/>
+    <mkdir      dir="${dist.home}/src"/>
+    <copy     todir="${dist.home}/src">
+      <fileset  dir="src"/>
+    </copy>
+  </target>
+
+
+<!-- ========== Unit Test Targets ========================================= -->
+
+
+  <target name="test"  depends="compile.tests,
+                                test.property
+                               "
+   description="Run all unit test cases">
+  </target>
+
+
+  <target name="test.property">
+    <echo message="Running PropertyUtils tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.PropertyUtilsTestCase"/>
+      <classpath>
+        <path refid="test.classpath"/>
+      </classpath>
+    </java>
+  </target>
+
+
+</project>

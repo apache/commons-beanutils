@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Proposal for BeanUtils Package</title>
+</head>
+<body bgcolor="white">
+
+<div align="center">
+<h1>Proposal for <em>BeanUtils</em> Package</h1>
+</div>
+
+<h3>(0) Rationale</h3>
+
+<p>Most Java developers are used to creating Java classes that conform to the
+JavaBeans naming patterns for property getters and setters.  It is natural to
+then access these methods directly, using calls to the corresponding
+<code>getXxx</code> and <code>setXxx</code> methods.  However, there are some
+occasions where dynamic access to Java object properties (without compiled-in
+knowledge of the property getter and setter methods to be called) is needed.
+Example use cases include:</p>
+<ul>
+<li>Building scripting languages that interact with the Java object model
+    (such as the Bean Scripting Framework).</li>
+<li>Building template language processors for web presentation and similar
+    uses (such as JSP or Velocity).</li>
+<li>Building custom tag libraries for JSP and XSP environments (such as Jakarta
+    Taglibs, Struts, Cocoon).</li>
+<li>Consuming XML-based configuration resources (such as Ant build scripts, web
+    application deployment descriptors, Tomcat's <code>server.xml</code>
+    file).</li>
+</ul>
+
+<p>The Java language provides <em>Reflection</em> and <em>Introspection</em>
+APIs (see the <code>java.lang.reflect</code> and <code>java.beans</code>
+packages in the JDK Javadocs).  However, these APIs can be quite complex to
+understand and utilize.  The proposed <em>BeanUtils</em> component provides
+easy-to-use wrappers around these capabilities.</p>
+
+
+<h3>(1) Scope of the Package</h3>
+
+<p>This proposal is to create a package of Java utility methods for accessing
+and modifying the properties of arbitrary JavaBeans.  No dependencies outside
+of the JDK are required, so the use of this package is very lightweight.</p>
+
+<p>In addition to wrapping the reflection and introspection APIs of the
+standard JDK, <em>BeanUtils</em> components shall support a syntax for directly
+accessing <strong>nested</strong> and <strong>indexed</strong> properties, in a
+manner that will be familar to users of scripting languages like JavaScript.
+For example, the following property accessor expressions are supported:</p>
+<ul>
+<li><strong>customer</strong> - Equivalent to <code>getCustomer()</code>.</li>
+<li><strong>customer.address</strong> - Equivalent to
+    <code>getCustomer().getAddress()</code>.</li>
+<li><strong>customer.address[2].street</strong> - Equivalent to
+    <code>getCustomer().getAddress(2).getStreet()</code> (access to indexed
+    properties also works if the underlying property is an array rather than
+    providing indexed getter and setter methods).</li>
+</ul>
+
+
+<h3>(1.5) Interaction With Other Packages</h3>
+
+<p><em>BeanUtils</em> relies only on standard JDK 1.2 (or later) APIs for
+production deployment.  It utilizes the JUnit unit testing framework for
+developing and executing unit tests, but this is of interest only to
+developers of the component.  BeanUtils will also be a dependency for
+several future proposed components for the Jakarta Commons subproject.</li>
+
+<p>No external configuration files are utilized.</p>
+
+
+<h3>(2) Initial Source of the Package</h3>
+
+<p>The three original Java classes (<code>BeanUtils</code>,
+<code>ConvertUtils</code>, and <code>PropertyUtils</code>) are an integral
+part of the <a href="http://jakarta.apache.org/struts">Struts Framework</a>.
+However, they have very few dependencies on other aspects of Struts, and
+those dependencies have been removed in the proposed code base.
+Once accepted and released as a Jakarta Commons component, Struts will
+be modified to use the Commons version of these classes, and its internal
+versions will be deprecated.</p>
+
+<p>The proposed package name for the new component is
+<code>org.apache.commons.beanutils</code>.</p>
+
+
+<h3>(3)  Required Jakarta-Commons Resources</h3>
+
+<ul>
+<li>CVS Repository - New directory <code>beanutils</code> in the
+    <code>jakarta-commons</code> CVS repository.  All initial committers
+    are already committers on <code>jakarta-commons</code>, so no
+    additional user setups are required.</li>
+<li>Mailing List - Discussions will take place on the general
+    <em>jakarta-commons@jakarta.apache.org</em> mailing list.  To help
+    list subscribers identify messages of interest, it is suggested that
+    the message subject of messages about this component be prefixed with
+    [BeanUtils].</li>
+<li>Bugzilla - New component "BeanUtils" under the "Commons" product
+    category, with appropriate version identifiers as needed.</li>
+<li>Jyve FAQ - New category "commons-beanutils" (when available).
+</ul>
+
+
+<h3>(4) Initial Committers</h3>
+
+<p>The initial committers on the BeanUtils component shall be Craig
+McClanahan and Geir Magnusson Jr.</p>
+
+
+
+</body>
+</html>
