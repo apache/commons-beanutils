@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.8 2001/04/17 00:50:28 craigmcc Exp $
+        $Id: build.xml,v 1.9 2001/04/28 22:43:49 craigmcc Exp $
 -->
 
 
@@ -12,7 +12,7 @@
 
   <property file="build.properties"/>                <!-- Component local   -->
   <property file="../build.properties"/>             <!-- Commons local     -->
-  <property file="${user.home}/.build.properties"/>  <!-- User local        -->
+  <property file="${user.home}/build.properties"/>   <!-- User local        -->
 
 
 <!-- ========== External Dependencies ===================================== -->
