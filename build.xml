@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.26 2002/01/12 20:44:05 craigmcc Exp $
+        $Id: build.xml,v 1.27 2002/01/15 02:54:28 craigmcc Exp $
 -->
 
 
@@ -201,12 +201,29 @@
               todir="${dist.home}"/>
     <copy      file="RELEASE-NOTES.txt"
               todir="${dist.home}"/>
+    <antcall target="jar"/>
+  </target>
+
+
+  <target name="jar" depends="compile"
+   description="Create jar">
+    <mkdir      dir="${dist.home}"/>
     <mkdir      dir="${build.home}/classes/META-INF"/>
     <copy      file="../LICENSE"
              tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
     <jar    jarfile="${dist.home}/commons-${component.name}.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
+  </target>
+
+
+  <target name="install-jar" depends="jar"
+   description="--> Installs jar file in ${lib.repo}">
+    <copy todir="${lib.repo}" filtering="no">
+      <fileset dir="${dist.home}">
+        <include name="commons-${component.name}.jar"/>
+      </fileset>
+    </copy>
   </target>
 
 
