@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.30 2002/12/16 00:29:48 craigmcc Exp $
- * $Revision: 1.30 $
- * $Date: 2002/12/16 00:29:48 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.31 2002/12/16 01:31:29 craigmcc Exp $
+ * $Revision: 1.31 $
+ * $Date: 2002/12/16 01:31:29 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.30 $ $Date: 2002/12/16 00:29:48 $
+ * @version $Revision: 1.31 $ $Date: 2002/12/16 01:31:29 $
  */
 
 public class BeanUtils {
@@ -234,39 +234,38 @@ public class BeanUtils {
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                Object value = ((DynaBean) orig).get(name);
-                copyProperty(dest, name, value);
+                if (PropertyUtils.isWriteable(dest, name)) {
+                    Object value = ((DynaBean) orig).get(name);
+                    copyProperty(dest, name, value);
+                }
             }
         } else if (orig instanceof Map) {
             Iterator names = ((Map) orig).keySet().iterator();
             while (names.hasNext()) {
                 String name = (String) names.next();
-                Object value = ((Map) orig).get(name);
-                copyProperty(dest, name, value);
+                if (PropertyUtils.isWriteable(dest, name)) {
+                    Object value = ((Map) orig).get(name);
+                    copyProperty(dest, name, value);
+                }
             }
-        } else /* if (not a DynaBean or a Map) */ {
+        } else /* if (orig is a standard JavaBean) */ {
             PropertyDescriptor origDescriptors[] =
                 PropertyUtils.getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
-                if (origDescriptors[i].getReadMethod() == null) {
-                    if (log.isTraceEnabled()) {
-                        log.trace("-->No getter on JavaBean for " +
-                                  origDescriptors[i].getName() + ", skipping");
-                    }
-                    continue;
-                }
                 String name = origDescriptors[i].getName();
                 if ("class".equals(name)) {
                     continue; // No point in trying to set an object's class
                 }
-                Object value = null;
-                try {
-                    value = PropertyUtils.getSimpleProperty(orig, name);
-                } catch (NoSuchMethodException e) {
-                    log.error("-->Should not have happened", e);
-                    value = null; // Can not happen
+                if (PropertyUtils.isReadable(orig, name) &&
+                    PropertyUtils.isWriteable(dest, name)) {
+                    try {
+                        Object value =
+                            PropertyUtils.getSimpleProperty(orig, name);
+                        copyProperty(dest, name, value);
+                    } catch (NoSuchMethodException e) {
+                        ; // Should not happen
+                    }
                 }
-                copyProperty(dest, name, value);
             }
         }
 

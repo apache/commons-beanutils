@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.36 2002/12/16 00:21:02 craigmcc Exp $
- * $Revision: 1.36 $
- * $Date: 2002/12/16 00:21:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.37 2002/12/16 01:31:29 craigmcc Exp $
+ * $Revision: 1.37 $
+ * $Date: 2002/12/16 01:31:29 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.36 $ $Date: 2002/12/16 00:21:02 $
+ * @version $Revision: 1.37 $ $Date: 2002/12/16 01:31:29 $
  */
 
 public class PropertyUtils {
@@ -274,44 +274,51 @@ public class PropertyUtils {
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                Object value = getSimpleProperty(orig, name);
-                try {
-                    setSimpleProperty(dest, name, value);
-                } catch (NoSuchMethodException e) {
-                    ; // Skip non-matching property
+                if (dest instanceof DynaBean) {
+                    if (isWriteable(dest, name)) {
+                        Object value = ((DynaBean) orig).get(name);
+                        ((DynaBean) dest).set(name, value);
+                    }
+                } else {
+                    if (isWriteable(dest, name)) {
+                        Object value = ((DynaBean) orig).get(name);
+                        PropertyUtils.setSimpleProperty(dest, name, value);
+                    }
                 }
             }
         } else if (orig instanceof Map) {
             Iterator names = ((Map) orig).keySet().iterator();
             while (names.hasNext()) {
                 String name = (String) names.next();
-                Object value = ((Map) orig).get(name);
-                try {
-                    setSimpleProperty(dest, name, value);
-                } catch (NoSuchMethodException e) {
-                    ; // Skip non-matching property
+                if (dest instanceof DynaBean) {
+                    if (isWriteable(dest, name)) {
+                        Object value = ((Map) orig).get(name);
+                        ((DynaBean) dest).set(name, value);
+                    }
+                } else {
+                    if (isWriteable(dest, name)) {
+                        Object value = ((Map) orig).get(name);
+                        PropertyUtils.setSimpleProperty(dest, name, value);
+                    }
                 }
             }
-        } else /* orig is a standard JavaBean */ {
+        } else /* if (orig is a standard JavaBean) */ {
             PropertyDescriptor origDescriptors[] =
                 getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
-                Method readMethod = origDescriptors[i].getReadMethod();
-                if ((readMethod == null) &&
-                    (origDescriptors[i] instanceof IndexedPropertyDescriptor)) {
-                    readMethod =
-                        ((IndexedPropertyDescriptor) origDescriptors[i]).
-                        getIndexedReadMethod();
-                }
-                if (readMethod == null) {
-                    continue; // This is a write-only property
-                }
                 String name = origDescriptors[i].getName();
-                Object value = getSimpleProperty(orig, name);
-                try {
-                    setSimpleProperty(dest, name, value);
-                } catch (NoSuchMethodException e) {
-                    ; // Skip non-matching property
+                if (isReadable(orig, name)) {
+                    if (dest instanceof DynaBean) {
+                        if (isWriteable(dest, name)) {
+                            Object value = getSimpleProperty(orig, name);
+                            ((DynaBean) dest).set(name, value);
+                        }
+                    } else {
+                        if (isWriteable(dest, name)) {
+                            Object value = getSimpleProperty(orig, name);
+                            setSimpleProperty(dest, name, value);
+                        }
+                    }
                 }
             }
         }
@@ -1192,6 +1199,112 @@ public class PropertyUtils {
     public static Method getWriteMethod(PropertyDescriptor descriptor) {
 
         return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));
+
+    }
+
+
+    /**
+     * <p>Return <code>true</code> if the specified property name identifies
+     * a readable property on the specified bean; otherwise, return
+     * <code>false</code>.
+     *
+     * @param bean Bean to be examined (may be a {@link DynaBean}
+     * @param name Property name to be evaluated
+     *
+     * @exception IllegalArgumentException if <code>bean</code>
+     *  or <code>name</code> is <code>null</code>
+     *
+     * @since BeanUtils 1.6
+     */
+    public static boolean isReadable(Object bean, String name) {
+
+        // Validate method parameters
+        if (bean == null) {
+            throw new IllegalArgumentException("No bean specified");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("No name specified");
+        }
+
+        // Return the requested result
+        if (bean instanceof DynaBean) {
+            // All DynaBean properties are readable
+            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
+        } else {
+            try {
+                PropertyDescriptor desc =
+                    getPropertyDescriptor(bean, name);
+                if (desc != null) {
+                    Method readMethod = desc.getReadMethod();
+                    if ((readMethod == null) &&
+                        (desc instanceof IndexedPropertyDescriptor)) {
+                        readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
+                    }
+                    return (readMethod != null);
+                } else {
+                    return (false);
+                }
+            } catch (IllegalAccessException e) {
+                return (false);
+            } catch (InvocationTargetException e) {
+                return (false);
+            } catch (NoSuchMethodException e) {
+                return (false);
+            }
+        }
+
+    }
+
+
+    /**
+     * <p>Return <code>true</code> if the specified property name identifies
+     * a writeable property on the specified bean; otherwise, return
+     * <code>false</code>.
+     *
+     * @param bean Bean to be examined (may be a {@link DynaBean}
+     * @param name Property name to be evaluated
+     *
+     * @exception IllegalPointerException if <code>bean</code>
+     *  or <code>name</code> is <code>null</code>
+     *
+     * @since BeanUtils 1.6
+     */
+    public static boolean isWriteable(Object bean, String name) {
+
+        // Validate method parameters
+        if (bean == null) {
+            throw new IllegalArgumentException("No bean specified");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("No name specified");
+        }
+
+        // Return the requested result
+        if (bean instanceof DynaBean) {
+            // All DynaBean properties are writeable
+            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
+        } else {
+            try {
+                PropertyDescriptor desc =
+                    getPropertyDescriptor(bean, name);
+                if (desc != null) {
+                    Method writeMethod = desc.getWriteMethod();
+                    if ((writeMethod == null) &&
+                        (desc instanceof IndexedPropertyDescriptor)) {
+                        writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
+                    }
+                    return (writeMethod != null);
+                } else {
+                    return (false);
+                }
+            } catch (IllegalAccessException e) {
+                return (false);
+            } catch (InvocationTargetException e) {
+                return (false);
+            } catch (NoSuchMethodException e) {
+                return (false);
+            }
+        }
 
     }
 
