@@ -24,6 +24,8 @@
 
   <body>
     <links>
+      <item name="BeanUtils Core"                   
+            href="http://jakarta.apache.org/commons/beanutils"/>
       <item name="Jakarta Commons"                   
             href="http://jakarta.apache.org/commons/"/>
     </links>
