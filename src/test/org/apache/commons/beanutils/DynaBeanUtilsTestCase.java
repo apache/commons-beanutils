@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.15 2003/02/01 07:45:29 craigmcc Exp $
- * $Revision: 1.15 $
- * $Date: 2003/02/01 07:45:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.16 2003/02/01 08:14:33 craigmcc Exp $
+ * $Revision: 1.16 $
+ * $Date: 2003/02/01 08:14:33 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.15 $ $Date: 2003/02/01 07:45:29 $
+ * @version $Revision: 1.16 $ $Date: 2003/02/01 08:14:33 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -906,7 +906,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on byte.
      */
-    public void testSetPropertyByte() throws Exception {
+    public void testCopyPropertyByte() throws Exception {
 
         BeanUtils.setProperty(bean, "byteProperty", new Byte((byte) 123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
@@ -929,7 +929,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on double.
      */
-    public void testSetPropertyDouble() throws Exception {
+    public void testCopyPropertyDouble() throws Exception {
 
         BeanUtils.setProperty(bean, "doubleProperty", new Byte((byte) 123));
         assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
@@ -950,7 +950,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on float.
      */
-    public void testSetPropertyFloat() throws Exception {
+    public void testCopyPropertyFloat() throws Exception {
 
         BeanUtils.setProperty(bean, "floatProperty", new Byte((byte) 123));
         assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
@@ -971,7 +971,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on int.
      */
-    public void testSetPropertyInteger() throws Exception {
+    public void testCopyPropertyInteger() throws Exception {
 
         BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
         assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
@@ -994,7 +994,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on long.
      */
-    public void testSetPropertyLong() throws Exception {
+    public void testCopyPropertyLong() throws Exception {
 
         BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
         assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
@@ -1017,7 +1017,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * Test narrowing and widening conversions on short.
      */
-    public void testSetPropertyShort() throws Exception {
+    public void testCopyPropertyShort() throws Exception {
 
         BeanUtils.setProperty(bean, "shortProperty", new Byte((byte) 123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());

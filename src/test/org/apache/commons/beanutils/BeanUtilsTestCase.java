@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.18 2003/02/01 07:45:29 craigmcc Exp $
- * $Revision: 1.18 $
- * $Date: 2003/02/01 07:45:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.19 2003/02/01 08:14:33 craigmcc Exp $
+ * $Revision: 1.19 $
+ * $Date: 2003/02/01 08:14:33 $
  *
  * ====================================================================
  *
@@ -97,7 +97,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -989,5 +989,130 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-}
+    /**
+     * Test narrowing and widening conversions on byte.
+     */
+    public void testCopyPropertyByte() throws Exception {
 
+        BeanUtils.copyProperty(bean, "byteProperty", new Byte((byte) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+        BeanUtils.copyProperty(bean, "byteProperty", new Double((double) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+        BeanUtils.copyProperty(bean, "byteProperty", new Float((float) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+        BeanUtils.copyProperty(bean, "byteProperty", new Integer((int) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+        BeanUtils.copyProperty(bean, "byteProperty", new Long((long) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+        BeanUtils.copyProperty(bean, "byteProperty", new Short((short) 123));
+        assertEquals((byte) 123, bean.getByteProperty());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on double.
+     */
+    public void testCopyPropertyDouble() throws Exception {
+
+        BeanUtils.copyProperty(bean, "doubleProperty", new Byte((byte) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "doubleProperty", new Double((double) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "doubleProperty", new Float((float) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "doubleProperty", new Integer((int) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "doubleProperty", new Long((long) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "doubleProperty", new Short((short) 123));
+        assertEquals((double) 123, bean.getDoubleProperty(), 0.005);
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on float.
+     */
+    public void testCopyPropertyFloat() throws Exception {
+
+        BeanUtils.copyProperty(bean, "floatProperty", new Byte((byte) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "floatProperty", new Double((double) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "floatProperty", new Float((float) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "floatProperty", new Integer((int) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "floatProperty", new Long((long) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+        BeanUtils.copyProperty(bean, "floatProperty", new Short((short) 123));
+        assertEquals((float) 123, bean.getFloatProperty(), 0.005);
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on int.
+     */
+    public void testCopyPropertyInteger() throws Exception {
+
+        BeanUtils.copyProperty(bean, "longProperty", new Byte((byte) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Double((double) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Float((float) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Integer((int) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Long((long) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Short((short) 123));
+        assertEquals((int) 123, bean.getIntProperty());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on long.
+     */
+    public void testCopyPropertyLong() throws Exception {
+
+        BeanUtils.copyProperty(bean, "longProperty", new Byte((byte) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Double((double) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Float((float) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Integer((int) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Long((long) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+        BeanUtils.copyProperty(bean, "longProperty", new Short((short) 123));
+        assertEquals((long) 123, bean.getLongProperty());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on short.
+     */
+    public void testCopyPropertyShort() throws Exception {
+
+        BeanUtils.copyProperty(bean, "shortProperty", new Byte((byte) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+        BeanUtils.copyProperty(bean, "shortProperty", new Double((double) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+        BeanUtils.copyProperty(bean, "shortProperty", new Float((float) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+        BeanUtils.copyProperty(bean, "shortProperty", new Integer((int) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+        BeanUtils.copyProperty(bean, "shortProperty", new Long((long) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+        BeanUtils.copyProperty(bean, "shortProperty", new Short((short) 123));
+        assertEquals((short) 123, bean.getShortProperty());
+
+    }
+
+
+}
