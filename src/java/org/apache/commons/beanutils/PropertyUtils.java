@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.23 2002/03/24 09:56:05 dion Exp $
- * $Revision: 1.23 $
- * $Date: 2002/03/24 09:56:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.24 2002/04/28 01:16:48 craigmcc Exp $
+ * $Revision: 1.24 $
+ * $Date: 2002/04/28 01:16:48 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.23 $ $Date: 2002/03/24 09:56:05 $
+ * @version $Revision: 1.24 $ $Date: 2002/04/28 01:16:48 $
  */
 
 public class PropertyUtils {
@@ -281,10 +281,14 @@ public class PropertyUtils {
 
 
     /**
-     * Return the entire set of properties for which the specified bean
+     * <p>Return the entire set of properties for which the specified bean
      * provides a read method.  This map contains the unconverted property
      * values for all properties for which a read method is provided
-     * (i.e. where the <code>getReadMethod()</code> returns non-null).
+     * (i.e. where the <code>getReadMethod()</code> returns non-null).</p>
+     *
+     * <p><strong>FIXME</strong> - Does not account for mapped properties.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean whose properties are to be extracted
      *
@@ -296,8 +300,6 @@ public class PropertyUtils {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    // FIXME - does not account for mapped properties
-    // FIXME - does not work on DynaBeans
     public static Map describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
@@ -602,11 +604,12 @@ public class PropertyUtils {
 
 
     /**
-     * Return the mapped property descriptors for this bean class.
+     * <p>Return the mapped property descriptors for this bean class.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param beanClass Bean class to be introspected
      */
-    // FIXME - does not work with DynaBeans
     public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
 
         if (beanClass == null) {
@@ -620,11 +623,12 @@ public class PropertyUtils {
 
 
     /**
-     * Return the mapped property descriptors for this bean.
+     * <p>Return the mapped property descriptors for this bean.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean to be introspected
      */
-    // FIXME - does not work with DynaBeans
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 
         if (bean == null) {
@@ -740,12 +744,14 @@ public class PropertyUtils {
 
 
     /**
-     * Retrieve the property descriptor for the specified property of the
+     * <p>Retrieve the property descriptor for the specified property of the
      * specified bean, or return <code>null</code> if there is no such
      * descriptor.  This method resolves indexed and nested property
      * references in the same manner as other methods in this class, except
      * that if the last (or only) name element is indexed, the descriptor
-     * for the last resolved property itself is returned.
+     * for the last resolved property itself is returned.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
@@ -762,7 +768,6 @@ public class PropertyUtils {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    // FIXME - does not work with DynaBeans
     public static PropertyDescriptor getPropertyDescriptor(Object bean,
                                                            String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -850,14 +855,16 @@ public class PropertyUtils {
 
 
     /**
-     * Retrieve the property descriptors for the specified class, introspecting
-     * and caching them the first time a particular bean class is encountered.
+     * <p>Retrieve the property descriptors for the specified class,
+     * introspecting and caching them the first time a particular bean class
+     * is encountered.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param beanClass Bean class for which property descriptors are requested
      *
      * @exception IllegalArgumentException if <code>beanClass</code> is null
      */
-    // FIXME - does not work with DynaBeans
     public static PropertyDescriptor[]
             getPropertyDescriptors(Class beanClass) {
 
@@ -891,14 +898,16 @@ public class PropertyUtils {
 
 
     /**
-     * Retrieve the property descriptors for the specified bean, introspecting
-     * and caching them the first time a particular bean class is encountered.
+     * <p>Retrieve the property descriptors for the specified bean,
+     * introspecting and caching them the first time a particular bean class
+     * is encountered.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean for which property descriptors are requested
      *
      * @exception IllegalArgumentException if <code>bean</code> is null
      */
-    // FIXME - does not work with DynaBeans
     public static PropertyDescriptor[] getPropertyDescriptors(Object bean) {
 
         if (bean == null) {
@@ -910,16 +919,18 @@ public class PropertyUtils {
 
 
     /**
-     * Return the Java Class repesenting the property editor class that has
+     * <p>Return the Java Class repesenting the property editor class that has
      * been registered for this property (if any).  This method follows the
      * same name resolution rules used by <code>getPropertyDescriptor()</code>,
      * so if the last element of a name reference is indexed, the property
-     * editor for the underlying property's class is returned.
-     * <p>
-     * Note that <code>null</code> will be returned if there is no property,
+     * editor for the underlying property's class is returned.</p>
+     * 
+     * <p>Note that <code>null</code> will be returned if there is no property,
      * or if there is no registered property editor class.  Because this
      * return value is ambiguous, you should determine the existence of the
-     * property itself by other means.
+     * property itself by other means.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
@@ -936,7 +947,6 @@ public class PropertyUtils {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    // FIXME - Does not work with DynaBeans
     public static Class getPropertyEditorClass(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
@@ -1026,12 +1036,13 @@ public class PropertyUtils {
 
 
     /**
-     * Return an accessible property getter method for this property,
-     * if there is one; otherwise return <code>null</code>.
+     * <p>Return an accessible property getter method for this property,
+     * if there is one; otherwise return <code>null</code>.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param descriptor Property descriptor to return a getter for
      */
-    // FIXME - does not work with DynaBeans
     public static Method getReadMethod(PropertyDescriptor descriptor) {
 
         return (MethodUtils.getAccessibleMethod(descriptor.getReadMethod()));
@@ -1112,12 +1123,13 @@ public class PropertyUtils {
 
 
     /**
-     * Return an accessible property setter method for this property,
-     * if there is one; otherwise return <code>null</code>.
+     * <p>Return an accessible property setter method for this property,
+     * if there is one; otherwise return <code>null</code>.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param descriptor Property descriptor to return a setter for
      */
-    // FIXME - does not work with DynaBeans
     public static Method getWriteMethod(PropertyDescriptor descriptor) {
 
         return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));

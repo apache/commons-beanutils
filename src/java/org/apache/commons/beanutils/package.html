@@ -547,7 +547,20 @@ new code should not be written with reliance on ConvertUtils.</p>
 <a name="conversion.defining"></a>
 <h3>Defining Your Own Converters</h3>
 
-<p>This story has yet to be written ...</p>
+<p>The <code>ConvertUtils</code> class supports the ability to define and
+register your own String --> Object conversions for any given Java class.
+Once registered, such converters will be used transparently by all of the
+<code>BeanUtils</code> methods (including <code>populate()</code>).  To
+create and register your own converter, follow these steps:</p>
+<ul>
+<li>Write a class that implements the <a href="Converter.html">Converter</a>
+    interface.  The <code>convert()</code> method should accept the
+    <code>java.lang.Class</code> object of your application class (i.e.
+    the class that you want to convert to, and a String representing the
+    incoming value to be converted.</li>
+<li>At application startup time, register an instance of your converter class
+    by calling the <code>ConvertUtils.register()</code> method.</li>
+</ul>
 
 </body>
 </html>
