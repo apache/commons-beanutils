@@ -33,14 +33,14 @@ import java.security.PrivilegedAction;
  * For this class to work properly, a mapped value must have
  * getter and setter methods of the form
  * <p><code>get<strong>Property</strong>(String key)<code> and
- * <p><code>set&ltProperty&gt(String key, Object value)<code>,
+ * <p><code>set<strong>Property</strong>(String key, Object value)<code>,
  * <p>where <code><strong>Property</strong></code> must be replaced
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.19 $ $Date: 2004/07/18 14:58:22 $
+ * @version $Revision: 1.20 $ $Date: 2004/08/10 15:41:56 $
  */
 
 
