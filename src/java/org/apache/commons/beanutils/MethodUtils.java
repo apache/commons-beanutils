@@ -597,19 +597,19 @@ public class MethodUtils {
             // does anyone know a better strategy than comparing names?
             // also, this method does *not* do widening - you must specify exactly
             // is this the right behaviour?
-            if (parameterType.getName().equals("boolean")) {
+            if (boolean.class.equals(parameterType)) {
                 return Boolean.class.equals(parameterization);
             }         
-            if (parameterType.getName().equals("float")) {
+            if (float.class.equals(parameterType)) {
                 return Float.class.equals(parameterization);
             }     
-            if (parameterType.getName().equals("long")) {
+            if (long.class.equals(parameterType)) {
                 return Long.class.equals(parameterization);
             }     
-            if (parameterType.getName().equals("int")) {
+            if (int.class.equals(parameterType)) {
                 return Integer.class.equals(parameterization);
             }                
-            if (parameterType.getName().equals("double")) {
+            if (double.class.equals(parameterType)) {
                 return Double.class.equals(parameterization);
             }               
         }
