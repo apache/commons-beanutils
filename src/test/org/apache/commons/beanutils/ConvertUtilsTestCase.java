@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.2 2002/06/15 20:39:44 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/06/15 20:39:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.3 2002/06/15 21:14:34 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/06/15 21:14:34 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/06/15 20:39:44 $
+ * @version $Revision: 1.3 $ $Date: 2002/06/15 21:14:34 $
  */
 
 public class ConvertUtilsTestCase extends TestCase {
@@ -310,6 +310,14 @@ public class ConvertUtilsTestCase extends TestCase {
         assertTrue(value instanceof Boolean);
         assertEquals(((Boolean) value).booleanValue(), true);
 
+        value = ConvertUtils.convert("y", Boolean.TYPE);
+        assertTrue(value instanceof Boolean);
+        assertEquals(((Boolean) value).booleanValue(), true);
+
+        value = ConvertUtils.convert("y", Boolean.class);
+        assertTrue(value instanceof Boolean);
+        assertEquals(((Boolean) value).booleanValue(), true);
+
         value = ConvertUtils.convert("on", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(((Boolean) value).booleanValue(), true);
@@ -331,6 +339,14 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(((Boolean) value).booleanValue(), false);
 
         value = ConvertUtils.convert("no", Boolean.class);
+        assertTrue(value instanceof Boolean);
+        assertEquals(((Boolean) value).booleanValue(), false);
+
+        value = ConvertUtils.convert("n", Boolean.TYPE);
+        assertTrue(value instanceof Boolean);
+        assertEquals(((Boolean) value).booleanValue(), false);
+
+        value = ConvertUtils.convert("n", Boolean.class);
         assertTrue(value instanceof Boolean);
         assertEquals(((Boolean) value).booleanValue(), false);
 
