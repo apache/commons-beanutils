@@ -73,6 +73,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Rey François
  * @author Gregor Raýman
  * @author Jan Sorensen
+ * @author Robert Burrell Donkin
  */
 
 public class MethodUtils {
