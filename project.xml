@@ -4,7 +4,7 @@
   <extend>../project.xml</extend>
   <name>BeanUtils</name>
   <id>commons-beanutils</id>
-  <currentVersion>1.5</currentVersion>
+  <currentVersion>1.6-dev</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons Bean Utils</shortDescription>
   <description>Java Bean Utililities</description>
