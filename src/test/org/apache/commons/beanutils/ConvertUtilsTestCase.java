@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.1 2002/03/18 16:32:43 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/03/18 16:32:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.2 2002/06/15 20:39:44 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/06/15 20:39:44 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/03/18 16:32:43 $
+ * @version $Revision: 1.2 $ $Date: 2002/06/15 20:39:44 $
  */
 
 public class ConvertUtilsTestCase extends TestCase {
@@ -198,6 +198,66 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("foo", Short.class);
         assertTrue(value instanceof Short);
         assertEquals(((Short) value).shortValue(), (short) 0);
+
+    }
+
+
+    /**
+     * Test conversion of object to string for arrays.
+     */
+    public void testObjectToStringArray() {
+
+        int intArray0[] = new int[0];
+        int intArray1[] = { 123 };
+        int intArray2[] = { 123, 456 };
+        String stringArray0[] = new String[0];
+        String stringArray1[] = { "abc" };
+        String stringArray2[] = { "abc", "def" };
+
+        assertEquals("intArray0", null,
+                     ConvertUtils.convert(intArray0));
+        assertEquals("intArray1", "123",
+                     ConvertUtils.convert(intArray1));
+        assertEquals("intArray2", "123",
+                     ConvertUtils.convert(intArray2));
+
+        assertEquals("stringArray0", null,
+                     ConvertUtils.convert(stringArray0));
+        assertEquals("stringArray1", "abc",
+                     ConvertUtils.convert(stringArray1));
+        assertEquals("stringArray2", "abc",
+                     ConvertUtils.convert(stringArray2));
+
+    }
+
+
+    /**
+     * Test conversion of object to string for scalars.
+     */
+    public void testObjectToStringScalar() {
+
+        assertEquals("Boolean->String", "false",
+                     ConvertUtils.convert(Boolean.FALSE));
+        assertEquals("Boolean->String", "true",
+                     ConvertUtils.convert(Boolean.TRUE));
+        assertEquals("Byte->String", "123",
+                     ConvertUtils.convert(new Byte((byte) 123)));
+        assertEquals("Character->String", "a",
+                     ConvertUtils.convert(new Character('a')));
+        assertEquals("Double->String", "123.0",
+                     ConvertUtils.convert(new Double((double) 123.0)));
+        assertEquals("Float->String", "123.0",
+                     ConvertUtils.convert(new Float((float) 123.0)));
+        assertEquals("Integer->String", "123",
+                     ConvertUtils.convert(new Integer((int) 123)));
+        assertEquals("Long->String", "123",
+                     ConvertUtils.convert(new Long((long) 123)));
+        assertEquals("Short->String", "123",
+                     ConvertUtils.convert(new Short((short) 123)));
+        assertEquals("String->String", "abc",
+                     ConvertUtils.convert("abc"));
+        assertEquals("String->String null", null,
+                     ConvertUtils.convert(null));
 
     }
 

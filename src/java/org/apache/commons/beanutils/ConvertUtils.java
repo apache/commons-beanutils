@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.7 2002/03/18 16:32:42 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/03/18 16:32:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.8 2002/06/15 20:39:44 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/06/15 20:39:44 $
  *
  * ====================================================================
  *
@@ -130,7 +130,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.7 $ $Date: 2002/03/18 16:32:42 $
+ * @version $Revision: 1.8 $ $Date: 2002/06/15 20:39:44 $
  */
 
 public class ConvertUtils {
@@ -322,6 +322,9 @@ public class ConvertUtils {
         if (value == null) {
             return ((String) null);
         } else if (value.getClass().isArray()) {
+            if (Array.getLength(value) < 1) {
+                return (null);
+            }
             value = Array.get(value, 0);
             if (value == null)
                 return ((String) null);
