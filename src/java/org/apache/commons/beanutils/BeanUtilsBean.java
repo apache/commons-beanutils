@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.7 2003/05/16 14:50:22 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/05/16 14:50:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.8 2003/05/21 09:41:45 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/05/21 09:41:45 $
  *
  * ====================================================================
  *
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.7 $ $Date: 2003/05/16 14:50:22 $
+ * @version $Revision: 1.8 $ $Date: 2003/05/21 09:41:45 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -209,7 +209,12 @@ public class BeanUtilsBean {
             log.debug("Cloning bean: " + bean.getClass().getName());
         }
         Class clazz = bean.getClass();
-        Object newBean = clazz.newInstance();
+        Object newBean = null;
+        if (bean instanceof DynaBean) {
+            newBean = ((DynaBean) bean).getDynaClass().newInstance();
+        } else {
+            newBean = bean.getClass().newInstance();
+        }
         getPropertyUtils().copyProperties(newBean, bean);
         return (newBean);
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.17 2003/02/04 07:28:14 craigmcc Exp $
- * $Revision: 1.17 $
- * $Date: 2003/02/04 07:28:14 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.18 2003/05/21 09:41:45 rdonkin Exp $
+ * $Revision: 1.18 $
+ * $Date: 2003/05/21 09:41:45 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.17 $ $Date: 2003/02/04 07:28:14 $
+ * @version $Revision: 1.18 $ $Date: 2003/05/21 09:41:45 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -226,6 +226,82 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     // ------------------------------------------------ Individual Test Methods
 
+    /**
+     * Test the cloneBean() method from a DynaBean.
+     */
+    public void testCloneDynaBean() {
+
+        // Set up an origin bean with customized properties
+        DynaClass dynaClass = DynaBeanUtilsTestCase.createDynaClass();
+        DynaBean orig = null;
+        try {
+            orig = dynaClass.newInstance();
+        } catch (Exception e) {
+            fail("newInstance(): " + e);
+        }
+        orig.set("booleanProperty", Boolean.FALSE);
+        orig.set("byteProperty", new Byte((byte)111));
+        orig.set("doubleProperty", new Double(333.33));
+        orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        orig.set("intArray", new int[] { 100, 200, 300 });
+        orig.set("intProperty", new Integer(333));
+        orig.set("longProperty", new Long(3333));
+        orig.set("shortProperty", new Short((short) 33));
+        orig.set("stringArray", new String[] { "New 0", "New 1" });
+        orig.set("stringProperty", "Custom string");
+
+        // Copy the origin bean to our destination test bean
+        DynaBean clonedBean = null;
+        try {
+            clonedBean = (DynaBean) BeanUtils.cloneBean(orig);
+        } catch (Exception e) {
+            fail("Threw exception: " + e);
+        }
+
+        // Validate the results for scalar properties
+        assertEquals("Cloned boolean property",
+                     false,
+                     ((Boolean) clonedBean.get("booleanProperty")).booleanValue());
+        assertEquals("Cloned byte property",
+                     (byte) 111,
+                     ((Byte) clonedBean.get("byteProperty")).byteValue());
+        assertEquals("Cloned double property",
+                     333.33,
+                     ((Double) clonedBean.get("doubleProperty")).doubleValue(),
+                     0.005);
+        assertEquals("Cloned int property",
+                     333,
+                     ((Integer) clonedBean.get("intProperty")).intValue());
+        assertEquals("Cloned long property",
+                     (long) 3333,
+                     ((Long) clonedBean.get("longProperty")).longValue());
+        assertEquals("Cloned short property",
+                     (short) 33,
+                     ((Short) clonedBean.get("shortProperty")).shortValue());
+        assertEquals("Cloned string property",
+                     "Custom string",
+                     (String) clonedBean.get("stringProperty"));
+
+        // Validate the results for array properties
+        String dupProperty[] = (String[]) clonedBean.get("dupProperty");
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        int intArray[] = (int[]) clonedBean.get("intArray");
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 100, intArray[0]);
+        assertEquals("intArray[1]", 200, intArray[1]);
+        assertEquals("intArray[2]", 300, intArray[2]);
+        String stringArray[] = (String[]) clonedBean.get("stringArray");
+        assertNotNull("stringArray present", stringArray);
+        assertEquals("stringArray length", 2, stringArray.length);
+        assertEquals("stringArray[0]", "New 0", stringArray[0]);
+        assertEquals("stringArray[1]", "New 1", stringArray[1]);
+
+    }
 
     /**
      * Test the copyProperties() method from a DynaBean.
