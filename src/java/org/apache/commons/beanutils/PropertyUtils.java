@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.4 2001/05/07 00:32:32 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/05/07 00:32:32 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.5 2001/05/07 02:09:01 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2001/05/07 02:09:01 $
  *
  * ====================================================================
  *
@@ -121,7 +121,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.4 $ $Date: 2001/05/07 00:32:32 $
+ * @version $Revision: 1.5 $ $Date: 2001/05/07 02:09:01 $
  */
 
 public class PropertyUtils {
@@ -940,9 +940,16 @@ public class PropertyUtils {
             return (method);
         }
 
-        // Check the implemented interfaces
+        // Check the implemented interfaces and subinterfaces
         String methodName = method.getName();
         Class[] parameterTypes = method.getParameterTypes();
+        method =
+            getAccessibleMethodFromInterfaceNest(clazz,
+                                                 method.getName(),
+                                                 method.getParameterTypes());
+        return (method);
+
+        /*
         Class[] interfaces = clazz.getInterfaces();
         for (int i = 0; i < interfaces.length; i++) {
             // Is this interface public?
@@ -962,6 +969,56 @@ public class PropertyUtils {
 
         // We are out of luck
         return (null);
+        */
+
+    }
+
+
+    /**
+     * Return an accessible method (that is, one that can be invoked via
+     * reflection) that implements the specified method, by scanning through
+     * all implemented interfaces and subinterfaces.  If no such Method
+     * can be found, return <code>null</code>.
+     *
+     * @param clazz Parent class for the interfaces to be checked
+     * @param methodName Method name of the method we wish to call
+     * @param parameterTypes The parameter type signatures
+     */
+    private static Method getAccessibleMethodFromInterfaceNest
+        (Class clazz, String methodName, Class parameterTypes[]) {
+
+        Method method = null;
+
+        // Check the implemented interfaces of the parent class
+        Class interfaces[] = clazz.getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+
+            // Is this interface public?
+            if (!Modifier.isPublic(interfaces[i].getModifiers()))
+                continue;
+
+            // Does the method exist on this interface?
+            try {
+                method = interfaces[i].getDeclaredMethod(methodName,
+                                                         parameterTypes);
+            } catch (NoSuchMethodException e) {
+                ;
+            }
+            if (method != null)
+                break;
+
+            // Recursively check our parent interfaces
+            method =
+                getAccessibleMethodFromInterfaceNest(interfaces[i],
+                                                     methodName,
+                                                     parameterTypes);
+            if (method != null)
+                break;
+
+        }
+
+        // Return whatever we have found
+        return (method);
 
     }
 

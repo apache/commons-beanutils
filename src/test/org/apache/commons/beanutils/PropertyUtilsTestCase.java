@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.4 2001/05/07 00:32:32 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/05/07 00:32:32 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.5 2001/05/07 02:09:02 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2001/05/07 02:09:02 $
  *
  * ====================================================================
  *
@@ -69,6 +69,9 @@ import java.lang.reflect.Method;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.beanutils.priv.PrivateBeanFactory;
+import org.apache.commons.beanutils.priv.PrivateDirect;
+import org.apache.commons.beanutils.priv.PrivateIndirect;
 
 
 /**
@@ -88,13 +91,43 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2001/05/07 00:32:32 $
+ * @version $Revision: 1.5 $ $Date: 2001/05/07 02:09:02 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
 
 
     // ---------------------------------------------------- Instance Variables
+
+
+    /**
+     * The fully qualified class name of our private bean class.
+     */
+    private static final String PRIVATE_BEAN_CLASS =
+        "org.apache.commons.beanutils.priv.PrivateBean";
+
+
+    /**
+     * The fully qualified class name of our private directly
+     * implemented interface.
+     */
+    private static final String PRIVATE_DIRECT_CLASS =
+        "org.apache.commons.beanutils.priv.PrivateDirect";
+
+
+    /**
+     * The fully qualified class name of our private indirectly
+     * implemented interface.
+     */
+    private static final String PRIVATE_INDIRECT_CLASS =
+        "org.apache.commons.beanutils.priv.PrivateIndirect";
+
+
+    /**
+     * The fully qualified class name of our test bean class.
+     */
+    private static final String TEST_BEAN_CLASS =
+        "org.apache.commons.beanutils.TestBean";
 
 
     /**
@@ -107,6 +140,12 @@ public class PropertyUtilsTestCase extends TestCase {
      * The "package private subclass" test bean for each test.
      */
     protected TestBeanPackageSubclass beanPackageSubclass = null;
+
+
+    /**
+     * The test bean for private access tests.
+     */
+    protected PrivateDirect beanPrivate = null;
 
 
     /**
@@ -165,6 +204,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         bean = new TestBean();
         beanPackageSubclass = new TestBeanPackageSubclass();
+        beanPrivate = PrivateBeanFactory.create();
         beanPublicSubclass = new TestBeanPublicSubclass();
 
     }
@@ -187,6 +227,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         bean = null;
         beanPackageSubclass = null;
+        beanPrivate = null;
         beanPublicSubclass = null;
 
     }
@@ -616,7 +657,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetReadMethodBasic() {
 
-        testGetReadMethod(bean, properties);
+        testGetReadMethod(bean, properties, TEST_BEAN_CLASS);
 
     }
 
@@ -628,7 +669,50 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetReadMethodPackageSubclass() {
 
-        testGetReadMethod(beanPackageSubclass, properties);
+        testGetReadMethod(beanPackageSubclass, properties, TEST_BEAN_CLASS);
+
+    }
+
+
+    /**
+     * Test getting accessible property reader methods for a specified
+     * list of properties that are declared either directly or via
+     * implemented interfaces.
+     */
+    public void testGetReadMethodPublicInterface() {
+
+        // Properties "bar" and "baz" are visible via implemented interfaces
+        // (one direct and one indirect)
+        testGetReadMethod(beanPrivate,
+                          new String[] { "bar" },
+                          PRIVATE_DIRECT_CLASS);
+        testGetReadMethod(beanPrivate,
+                          new String[] { "baz" },
+                          PRIVATE_INDIRECT_CLASS);
+
+        // Property "foo" is not accessible because the underlying
+        // class has package scope
+        PropertyDescriptor pd[] =
+            PropertyUtils.getPropertyDescriptors(beanPrivate);
+        int n = -1;
+        for (int i = 0; i < pd.length; i++) {
+            if ("foo".equals(pd[i].getName())) {
+                n = i;
+                break;
+            }
+        }
+        assert("Found foo descriptor", n >= 0);
+        Method reader = pd[n].getReadMethod();
+        assertNotNull("Found foo read method", reader);
+        Object value = null;
+        try {
+            value = reader.invoke(beanPrivate, new Class[0]);
+            fail("Foo reader did throw IllegalAccessException");
+        } catch (IllegalAccessException e) {
+            ; // Expected result for this test
+        } catch (Throwable t) {
+            fail("Invoke foo reader: " + t);
+        }
 
     }
 
@@ -639,7 +723,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetReadMethodPublicSubclass() {
 
-        testGetReadMethod(beanPublicSubclass, properties);
+        testGetReadMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
 
     }
 
@@ -960,7 +1044,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetWriteMethodBasic() {
 
-        testGetWriteMethod(bean, properties);
+        testGetWriteMethod(bean, properties, TEST_BEAN_CLASS);
 
     }
 
@@ -972,7 +1056,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetWriteMethodPackageSubclass() {
 
-        testGetWriteMethod(beanPackageSubclass, properties);
+        testGetWriteMethod(beanPackageSubclass, properties, TEST_BEAN_CLASS);
 
     }
 
@@ -983,7 +1067,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetWriteMethodPublicSubclass() {
 
-        testGetWriteMethod(beanPublicSubclass, properties);
+        testGetWriteMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
 
     }
 
@@ -1622,8 +1706,10 @@ public class PropertyUtilsTestCase extends TestCase {
      *
      * @param bean Bean for which to retrieve read methods.
      * @param properties Property names to search for
+     * @param className Class name where this method should be defined
      */
-    protected void testGetReadMethod(Object bean, String properties[]) {
+    protected void testGetReadMethod(Object bean, String properties[],
+                                     String className) {
 
         PropertyDescriptor pd[] =
             PropertyUtils.getPropertyDescriptors(bean);
@@ -1655,7 +1741,15 @@ public class PropertyUtilsTestCase extends TestCase {
                           clazz);
             assertEquals("Correct declaring class for " + properties[i],
                          clazz.getName(),
-                         "org.apache.commons.beanutils.TestBean");
+                         className);
+
+            // Actually call the reader method we received
+            try {
+                Object value =
+                    reader.invoke(bean, new Class[0]);
+            } catch (Throwable t) {
+                fail("Call for " + properties[i] + ": " + t);
+            }                
 
         }
 
@@ -1667,8 +1761,10 @@ public class PropertyUtilsTestCase extends TestCase {
      *
      * @param bean Bean for which to retrieve write methods.
      * @param properties Property names to search for
+     * @param className Class name where this method should be defined
      */
-    protected void testGetWriteMethod(Object bean, String properties[]) {
+    protected void testGetWriteMethod(Object bean, String properties[],
+                                      String className) {
 
 
         PropertyDescriptor pd[] =
@@ -1703,7 +1799,7 @@ public class PropertyUtilsTestCase extends TestCase {
                           clazz);
             assertEquals("Correct declaring class for " + properties[i],
                          clazz.getName(),
-                         "org.apache.commons.beanutils.TestBean");
+                         className);
 
         }
 
