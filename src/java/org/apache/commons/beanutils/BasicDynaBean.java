@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.6 2002/10/25 00:15:50 dion Exp $
- * $Revision: 1.6 $
- * $Date: 2002/10/25 00:15:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.7 2002/12/18 06:20:40 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/12/18 06:20:40 $
  *
  * ====================================================================
  *
@@ -63,6 +63,7 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +77,15 @@ import java.util.Map;
  * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class that are
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
+ * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class can be
+ * successfully serialized and deserialized <strong>ONLY</strong> if all
+ * property values are <code>Serializable</code>.</p>
+ *
  * @author Craig McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/10/25 00:15:50 $
+ * @version $Revision: 1.7 $ $Date: 2002/12/18 06:20:40 $
  */
 
-public class BasicDynaBean implements DynaBean {
+public class BasicDynaBean implements DynaBean, Serializable {
 
 
     // ---------------------------------------------------------- Constructors

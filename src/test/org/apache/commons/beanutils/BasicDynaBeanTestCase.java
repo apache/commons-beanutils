@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.6 2002/10/25 00:27:42 dion Exp $
- * $Revision: 1.6 $
- * $Date: 2002/10/25 00:27:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.7 2002/12/18 06:20:41 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/12/18 06:20:41 $
  *
  * ====================================================================
  *
@@ -63,6 +63,11 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +84,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/10/25 00:27:42 $
+ * @version $Revision: 1.7 $ $Date: 2002/12/18 06:20:41 $
  */
 
 public class BasicDynaBeanTestCase extends TestCase {
@@ -676,6 +681,80 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
+
+    }
+
+
+    /**
+     * Test serialization and deserialization.
+     */
+    public void testSerialization() {
+
+        // Serialize the test bean
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(bean);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            fail("Exception during serialization: " + e);
+        }
+
+        // Deserialize the test bean
+        try {
+            bean = null;
+            ByteArrayInputStream bais =
+                new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            bean = (DynaBean) ois.readObject();
+            bais.close();
+        } catch (Exception e) {
+            fail("Exception during deserialization: " + e);
+        }
+
+        // Confirm property values
+        testGetDescriptorArguments();
+        testGetDescriptorBoolean();
+        testGetDescriptorDouble();
+        testGetDescriptorFloat();
+        testGetDescriptorInt();
+        testGetDescriptorLong();
+        testGetDescriptorSecond();
+        testGetDescriptorShort();
+        testGetDescriptorString();
+        testGetDescriptors();
+        testGetIndexedArguments();
+        testGetIndexedValues();
+        testGetMappedArguments();
+        testGetMappedValues();
+        testGetSimpleArguments();
+        testGetSimpleBoolean();
+        testGetSimpleDouble();
+        testGetSimpleFloat();
+        testGetSimpleInt();
+        testGetSimpleLong();
+        testGetSimpleShort();
+        testGetSimpleString();
+        testMappedContains();
+        testMappedRemove();
+
+        // Ensure that we can create a new instance of the same DynaClass
+        try {
+            bean = bean.getDynaClass().newInstance();
+        } catch (Exception e) {
+            fail("Exception creating new instance: " + e);
+        }
+        testGetDescriptorArguments();
+        testGetDescriptorBoolean();
+        testGetDescriptorDouble();
+        testGetDescriptorFloat();
+        testGetDescriptorInt();
+        testGetDescriptorLong();
+        testGetDescriptorSecond();
+        testGetDescriptorShort();
+        testGetDescriptorString();
+        testGetDescriptors();
 
     }
 

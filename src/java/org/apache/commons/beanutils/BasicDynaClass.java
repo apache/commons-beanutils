@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.6 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.6 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.7 2002/12/18 06:20:40 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/12/18 06:20:40 $
  *
  * ====================================================================
  *
@@ -63,6 +63,7 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -77,10 +78,10 @@ import java.util.HashMap;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.7 $ $Date: 2002/12/18 06:20:40 $
  */
 
-public class BasicDynaClass implements DynaClass {
+public class BasicDynaClass implements DynaClass, Serializable {
 
 
     // ----------------------------------------------------------- Constructors
@@ -138,7 +139,7 @@ public class BasicDynaClass implements DynaClass {
      * The constructor of the <code>dynaBeanClass</code> that we will use
      * for creating new instances.
      */
-    protected Constructor constructor = null;
+    protected transient Constructor constructor = null;
 
 
     /**
@@ -248,6 +249,11 @@ public class BasicDynaClass implements DynaClass {
             throws IllegalAccessException, InstantiationException {
 
         try {
+            // Refind the constructor after a deserialization (if needed)
+            if (constructor == null) {
+                setDynaBeanClass(this.dynaBeanClass);
+            }
+            // Invoke the constructor to create a new bean instance
             return ((DynaBean) constructor.newInstance(constructorValues));
         } catch (InvocationTargetException e) {
             throw new InstantiationException
