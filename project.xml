@@ -46,6 +46,12 @@
       <email>rwaldhoff@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Martin van den Bemt</name>
+      <id>mvdb</id>
+      <email>mvdb@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
   
   <dependencies>
