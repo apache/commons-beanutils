@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.25 2002/10/25 00:31:14 dion Exp $
- * $Revision: 1.25 $
- * $Date: 2002/10/25 00:31:14 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.26 2002/10/27 16:50:18 rdonkin Exp $
+ * $Revision: 1.26 $
+ * $Date: 2002/10/27 16:50:18 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.25 $ $Date: 2002/10/25 00:31:14 $
+ * @version $Revision: 1.26 $ $Date: 2002/10/27 16:50:18 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -3563,5 +3563,23 @@ public class PropertyUtilsTestCase extends TestCase {
                 "(2) Inner class property set/get property failed.", 
                 "5", 
                 out); 
+    }
+    
+    /** Text case for setting properties on parent */
+    public void testGetSetParentBean() throws Exception {
+
+        SonOfAlphaBean bean = new SonOfAlphaBean("Roger");
+        
+        String out = (String) PropertyUtils.getProperty(bean, "name");
+        assertEquals(
+                "(1) Get/Set On Parent.", 
+                "Roger", 
+                out); 
+        
+        PropertyUtils.setProperty(bean, "name", "abcd");
+        assertEquals(
+                "(2) Get/Set On Parent.", 
+                "abcd", 
+                bean.getName()); 
     }
 }
