@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.5 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.6 2002/10/25 00:15:50 dion Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/10/25 00:15:50 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.util.Map;
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.6 $ $Date: 2002/10/25 00:15:50 $
  */
 
 public class BasicDynaBean implements DynaBean {
@@ -131,7 +131,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public boolean contains(String name, String key) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -209,7 +208,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name, int index) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -240,7 +238,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name, String key) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -279,7 +276,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public void remove(String name, String key) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -345,7 +341,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public void set(String name, int index, Object value) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
@@ -382,7 +377,6 @@ public class BasicDynaBean implements DynaBean {
      */
     public void set(String name, String key, Object value) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
