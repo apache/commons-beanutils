@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.10 2003/05/24 08:14:23 rdonkin Exp $
- * $Revision: 1.10 $
- * $Date: 2003/05/24 08:14:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.11 2003/07/07 22:00:02 rdonkin Exp $
+ * $Revision: 1.11 $
+ * $Date: 2003/07/07 22:00:02 $
  *
  * ====================================================================
  *
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.10 $ $Date: 2003/05/24 08:14:23 $
+ * @version $Revision: 1.11 $ $Date: 2003/07/07 22:00:02 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -103,15 +103,16 @@ public class BeanUtilsBean {
 
     // ------------------------------------------------------ Private Class Variables
 
-    /** Singleton instance */
-    private static final BeanUtilsBean singleton = new BeanUtilsBean();
     /** 
-     * Map contains <code>BeanUtilsBean</code> instances indexed by context classloader.
-     * <strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in a memory leak
-     * for those JVMs.
+     * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
      */
-    private static final Map beansByClassLoader
-            = new WeakHashMap();
+    private static final ContextClassLoaderLocal 
+            beansByClassLoader = new ContextClassLoaderLocal() {
+                        // Creates the default instance used when the context classloader is unavailable
+                        protected Object initialValue() {
+                            return new BeanUtilsBean();
+                        }
+                    };
     
     /** 
      * Gets the instance which provides the functionality for {@link BeanUtils}.
@@ -119,30 +120,16 @@ public class BeanUtilsBean {
      * This mechanism provides isolation for web apps deployed in the same container. 
      */
     public synchronized static BeanUtilsBean getInstance() {
-        // synchronizing the whole method is a bit slower 
-        // but guarentees no subtle threading problems
-        
-        // make sure that the map is given a change to purge itself
-        beansByClassLoader.isEmpty();
-        try {
-            
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-            if (contextClassLoader != null) {
-                
-                BeanUtilsBean instance = (BeanUtilsBean) beansByClassLoader.get(contextClassLoader);
-                    
-                if (instance == null) {
-                    instance = new BeanUtilsBean();
-                    beansByClassLoader.put(contextClassLoader, instance);
-                }
-                return instance;
-                
-            }
-            
-        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
-        
-        // if in doubt, return the basic
-        return singleton;
+        return (BeanUtilsBean) beansByClassLoader.get();
+    }
+
+    /** 
+     * Sets the instance which provides the functionality for {@link BeanUtils}.
+     * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
+     * This mechanism provides isolation for web apps deployed in the same container. 
+     */
+    public synchronized static void setInstance(BeanUtilsBean newInstance) {
+        beansByClassLoader.set(newInstance);
     }
 
     // --------------------------------------------------------- Attributes
