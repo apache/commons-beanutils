@@ -1,8 +1,0 @@
-build.properties
-dist
-target
-beanutils.ipr
-maven.log
-velocity.log
-.classpath
-.project
