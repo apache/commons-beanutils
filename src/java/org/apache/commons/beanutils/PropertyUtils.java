@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.3 2001/05/06 22:52:11 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2001/05/06 22:52:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.4 2001/05/07 00:32:32 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2001/05/07 00:32:32 $
  *
  * ====================================================================
  *
@@ -121,7 +121,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.3 $ $Date: 2001/05/06 22:52:11 $
+ * @version $Revision: 1.4 $ $Date: 2001/05/07 00:32:32 $
  */
 
 public class PropertyUtils {
@@ -598,6 +598,19 @@ public class PropertyUtils {
 
 
     /**
+     * Return an accessible property getter method for this property,
+     * if there is one; otherwise return <code>null</code>.
+     *
+     * @param descriptor Property descriptor to return a getter for
+     */
+    public static Method getReadMethod(PropertyDescriptor descriptor) {
+
+        return (getAccessibleMethod(descriptor.getReadMethod()));
+
+    }
+
+
+    /**
      * Return the value of the specified simple property of the specified
      * bean, with no type conversions.
      *
@@ -639,6 +652,19 @@ public class PropertyUtils {
 	// Call the property getter and return the value
 	Object value = readMethod.invoke(bean, new Object[0]);
 	return (value);
+
+    }
+
+
+    /**
+     * Return an accessible property setter method for this property,
+     * if there is one; otherwise return <code>null</code>.
+     *
+     * @param descriptor Property descriptor to return a setter for
+     */
+    public static Method getWriteMethod(PropertyDescriptor descriptor) {
+
+        return (getAccessibleMethod(descriptor.getWriteMethod()));
 
     }
 
@@ -936,32 +962,6 @@ public class PropertyUtils {
 
         // We are out of luck
         return (null);
-
-    }
-
-
-    /**
-     * Return an accessible property getter method for this property,
-     * if there is one; otherwise return <code>null</code>.
-     *
-     * @param descriptor Property descriptor to return a getter for
-     */
-    private static Method getReadMethod(PropertyDescriptor descriptor) {
-
-        return (getAccessibleMethod(descriptor.getReadMethod()));
-
-    }
-
-
-    /**
-     * Return an accessible property setter method for this property,
-     * if there is one; otherwise return <code>null</code>.
-     *
-     * @param descriptor Property descriptor to return a setter for
-     */
-    private static Method getWriteMethod(PropertyDescriptor descriptor) {
-
-        return (getAccessibleMethod(descriptor.getWriteMethod()));
 
     }
 

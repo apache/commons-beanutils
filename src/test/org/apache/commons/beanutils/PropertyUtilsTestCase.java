@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.3 2001/04/03 18:21:23 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2001/04/03 18:21:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.4 2001/05/07 00:32:32 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2001/05/07 00:32:32 $
  *
  * ====================================================================
  *
@@ -88,7 +88,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2001/04/03 18:21:23 $
+ * @version $Revision: 1.4 $ $Date: 2001/05/07 00:32:32 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -98,9 +98,21 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * The test bean for each test.
+     * The basic test bean for each test.
      */
     protected TestBean bean = null;
+
+
+    /**
+     * The "package private subclass" test bean for each test.
+     */
+    protected TestBeanPackageSubclass beanPackageSubclass = null;
+
+
+    /**
+     * The "public subclass" test bean for each test.
+     */
+    protected TestBeanPublicSubclass beanPublicSubclass = null;
 
 
     /**
@@ -152,6 +164,8 @@ public class PropertyUtilsTestCase extends TestCase {
     public void setUp() {
 
         bean = new TestBean();
+        beanPackageSubclass = new TestBeanPackageSubclass();
+        beanPublicSubclass = new TestBeanPublicSubclass();
 
     }
 
@@ -172,6 +186,8 @@ public class PropertyUtilsTestCase extends TestCase {
     public void tearDown() {
 
         bean = null;
+        beanPackageSubclass = null;
+        beanPublicSubclass = null;
 
     }
 
@@ -595,6 +611,40 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Test getting accessible property reader methods for a specified
+     * list of properties of our standard test bean.
+     */
+    public void testGetReadMethodBasic() {
+
+        testGetReadMethod(bean, properties);
+
+    }
+
+
+    /**
+     * Test getting accessible property reader methods for a specified
+     * list of properties of a package private subclass of our standard
+     * test bean.
+     */
+    public void testGetReadMethodPackageSubclass() {
+
+        testGetReadMethod(beanPackageSubclass, properties);
+
+    }
+
+
+    /**
+     * Test getting accessible property reader methods for a specified
+     * list of properties of a public subclass of our standard test bean.
+     */
+    public void testGetReadMethodPublicSubclass() {
+
+        testGetReadMethod(beanPublicSubclass, properties);
+
+    }
+
+
+    /**
      * Test getSimpleProperty on a boolean property.
      */
     public void testGetSimpleBoolean() {
@@ -900,6 +950,40 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
         }        
+
+    }
+
+
+    /**
+     * Test getting accessible property writer methods for a specified
+     * list of properties of our standard test bean.
+     */
+    public void testGetWriteMethodBasic() {
+
+        testGetWriteMethod(bean, properties);
+
+    }
+
+
+    /**
+     * Test getting accessible property writer methods for a specified
+     * list of properties of a package private subclass of our standard
+     * test bean.
+     */
+    public void testGetWriteMethodPackageSubclass() {
+
+        testGetWriteMethod(beanPackageSubclass, properties);
+
+    }
+
+
+    /**
+     * Test getting accessible property writer methods for a specified
+     * list of properties of a public subclass of our standard test bean.
+     */
+    public void testGetWriteMethodPublicSubclass() {
+
+        testGetWriteMethod(beanPublicSubclass, properties);
 
     }
 
@@ -1528,6 +1612,99 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Base for testGetReadMethod() series of tests.
+     *
+     * @param bean Bean for which to retrieve read methods.
+     * @param properties Property names to search for
+     */
+    protected void testGetReadMethod(Object bean, String properties[]) {
+
+        PropertyDescriptor pd[] =
+            PropertyUtils.getPropertyDescriptors(bean);
+        for (int i = 0; i < properties.length; i++) {
+
+            // Identify the property descriptor for this property
+            if (properties[i].equals("intIndexed"))
+                continue;
+            if (properties[i].equals("stringIndexed"))
+                continue;
+            if (properties[i].equals("writeOnlyProperty"))
+                continue;
+            int n = -1;
+            for (int j = 0; j < pd.length; j++) {
+                if (properties[i].equals(pd[j].getName())) {
+                    n = j;
+                    break;
+                }
+            }
+            assert("PropertyDescriptor for " + properties[i],
+                   n >= 0);
+
+            // Locate an accessible property reader method for it
+            Method reader = PropertyUtils.getReadMethod(pd[n]);
+            assertNotNull("Reader for " + properties[i],
+                          reader);
+            Class clazz = reader.getDeclaringClass();
+            assertNotNull("Declaring class for " + properties[i],
+                          clazz);
+            assertEquals("Correct declaring class for " + properties[i],
+                         clazz.getName(),
+                         "org.apache.commons.beanutils.TestBean");
+
+        }
+
+    }
+
+
+    /**
+     * Base for testGetWriteMethod() series of tests.
+     *
+     * @param bean Bean for which to retrieve write methods.
+     * @param properties Property names to search for
+     */
+    protected void testGetWriteMethod(Object bean, String properties[]) {
+
+
+        PropertyDescriptor pd[] =
+            PropertyUtils.getPropertyDescriptors(bean);
+        for (int i = 0; i < properties.length; i++) {
+
+            // Identify the property descriptor for this property
+            if (properties[i].equals("intIndexed"))
+                continue;
+            if (properties[i].equals("nested"))
+                continue; // This property is read only
+            if (properties[i].equals("readOnlyProperty"))
+                continue;
+            if (properties[i].equals("stringIndexed"))
+                continue;
+            int n = -1;
+            for (int j = 0; j < pd.length; j++) {
+                if (properties[i].equals(pd[j].getName())) {
+                    n = j;
+                    break;
+                }
+            }
+            assert("PropertyDescriptor for " + properties[i],
+                   n >= 0);
+
+            // Locate an accessible property reader method for it
+            Method writer = PropertyUtils.getWriteMethod(pd[n]);
+            assertNotNull("Writer for " + properties[i],
+                          writer);
+            Class clazz = writer.getDeclaringClass();
+            assertNotNull("Declaring class for " + properties[i],
+                          clazz);
+            assertEquals("Correct declaring class for " + properties[i],
+                         clazz.getName(),
+                         "org.apache.commons.beanutils.TestBean");
+
         }
 
     }
