@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.13 2003/03/03 22:33:46 rdonkin Exp $
- * $Revision: 1.13 $
- * $Date: 2003/03/03 22:33:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.14 2003/04/16 08:36:34 rdonkin Exp $
+ * $Revision: 1.14 $
+ * $Date: 2003/04/16 08:36:34 $
  *
  * ====================================================================
  *
@@ -66,13 +66,13 @@ package org.apache.commons.beanutils;
  * <p>Utility methods for converting String scalar values to objects of the
  * specified Class, String arrays to arrays of the specified Class.</p>
  *
- * <p>For more details, see <code>ConvertUtilsBean</code> which provides the 
+ * <p>For more details, see <code>ConvertUtilsBean</code> which provides the
  * implementations for these methods.</p>
  *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.13 $ $Date: 2003/03/03 22:33:46 $
+ * @version $Revision: 1.14 $ $Date: 2003/04/16 08:36:34 $
  * @see ConvertUtilsBean
  */
 
@@ -191,7 +191,7 @@ public class ConvertUtils {
      *  Integer.class instead
      */
     public static void setDefaultInteger(int newDefaultInteger) {
-	ConvertUtilsBean.getInstance().setDefaultInteger(newDefaultInteger);
+        ConvertUtilsBean.getInstance().setDefaultInteger(newDefaultInteger);
     }
 
 
@@ -240,7 +240,7 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#convert(Object)  
+     * @see ConvertUtilsBean#convert(Object)
      */
     public static String convert(Object value) {
 
@@ -255,11 +255,11 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#convert(String, Class)  
+     * @see ConvertUtilsBean#convert(String, Class)
      */
     public static Object convert(String value, Class clazz) {
 
-	return ConvertUtilsBean.getInstance().convert(value, clazz);
+        return ConvertUtilsBean.getInstance().convert(value, clazz);
 
     }
 
@@ -270,11 +270,11 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#convert(String[], Class)  
+     * @see ConvertUtilsBean#convert(String[], Class)
      */
     public static Object convert(String values[], Class clazz) {
 
-	return ConvertUtilsBean.getInstance().convert(values, clazz);
+  return ConvertUtilsBean.getInstance().convert(values, clazz);
 
     }
 
@@ -285,7 +285,7 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#deregister()  
+     * @see ConvertUtilsBean#deregister()
      */
     public static void deregister() {
 
@@ -300,11 +300,11 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#deregister(Class)  
+     * @see ConvertUtilsBean#deregister(Class)
      */
     public static void deregister(Class clazz) {
 
-        ConvertUtilsBean.getInstance().deregister();
+        ConvertUtilsBean.getInstance().deregister(clazz);
 
     }
 
@@ -316,7 +316,7 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#lookup(Class)  
+     * @see ConvertUtilsBean#lookup(Class)
      */
     public static Converter lookup(Class clazz) {
 
@@ -331,7 +331,7 @@ public class ConvertUtils {
      *
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
-     * @see ConvertUtilsBean#register(Converter, Class)  
+     * @see ConvertUtilsBean#register(Converter, Class)
      */
     public static void register(Converter converter, Class clazz) {
 

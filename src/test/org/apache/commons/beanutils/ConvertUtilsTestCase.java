@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.6 2003/03/15 11:38:11 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/03/15 11:38:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.7 2003/04/16 08:36:34 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/04/16 08:36:34 $
  *
  * ====================================================================
  *
@@ -70,6 +70,7 @@ import java.util.HashMap;
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import org.apache.commons.beanutils.converters.BooleanConverter;
 
 
 /**
@@ -78,7 +79,7 @@ import junit.framework.TestSuite;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2003/03/15 11:38:11 $
+ * @version $Revision: 1.7 $ $Date: 2003/04/16 08:36:34 $
  */
 
 public class ConvertUtilsTestCase extends TestCase {
@@ -582,66 +583,83 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
     }
-    
+
     public void testSeparateConvertInstances() throws Exception {
         ConvertUtilsBean utilsOne = new ConvertUtilsBean();
         ConvertUtilsBean utilsTwo = new ConvertUtilsBean();
-        
+
         // make sure that the test work ok before anything's changed
         Object
         value = utilsOne.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(
-                    "Standard conversion failed (1)", 
-                    ((Boolean) value).booleanValue(), 
+                    "Standard conversion failed (1)",
+                    ((Boolean) value).booleanValue(),
                     true);
-        
+
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(
-                    "Standard conversion failed (2)", 
-                    ((Boolean) value).booleanValue(), 
+                    "Standard conversion failed (2)",
+                    ((Boolean) value).booleanValue(),
                     true);
-        
+
         // now register a test
-        
+
         utilsOne.register(new ThrowExceptionConverter(), Boolean.TYPE);
         try {
-            
+
             utilsOne.convert("true", Boolean.TYPE);
             fail("Register converter failed.");
-            
+
         } catch (PassTestException e) { /* This shows that the registration has worked */ }
-        
+
         try {
             // nothing should have changed
             value = utilsTwo.convert("true", Boolean.TYPE);
             assertTrue(value instanceof Boolean);
             assertEquals(
                         "Standard conversion failed (3)",
-                        ((Boolean) value).booleanValue(), 
+                        ((Boolean) value).booleanValue(),
                         true);
-            
-        } catch (PassTestException e) { 
-            // This is a failure since utilsTwo should still have 
-            // standard converters registered 
+
+        } catch (PassTestException e) {
+            // This is a failure since utilsTwo should still have
+            // standard converters registered
             fail("Registering a converter for an instance should not effect another instance.");
         }
-        
+
         // nothing we'll test deregister
         utilsOne.deregister();
         value = utilsOne.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals("Instance deregister failed.", ((Boolean) value).booleanValue(), true);
-        
+
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(
-                    "Standard conversion failed (4)", 
-                    ((Boolean) value).booleanValue(), 
+                    "Standard conversion failed (4)",
+                    ((Boolean) value).booleanValue(),
                     true);
-    }	
+    }
 
+    public void testDeregisteringSingleConverter() throws Exception {
+        ConvertUtils convertUtils = new ConvertUtils();
+
+        // make sure that the test work ok before anything's changed
+        Object
+        value = convertUtils.convert("true", Boolean.TYPE);
+        assertTrue(value instanceof Boolean);
+        assertEquals(
+                    "Standard conversion failed (1)",
+                    ((Boolean) value).booleanValue(),
+                    true);
+
+        // we'll test deregister
+        convertUtils.deregister(Boolean.TYPE);
+        assertNull("Converter should be null",convertUtils.lookup(Boolean.TYPE));
+
+    }
 
     // -------------------------------------------------------- Private Methods
 
