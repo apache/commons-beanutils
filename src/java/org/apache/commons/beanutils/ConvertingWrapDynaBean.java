@@ -111,7 +111,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
     public void set(String name, Object value) {
 
         try {
-            BeanUtils.setProperty(instance, name, value);
+            BeanUtils.copyProperty(instance, name, value);
         } catch (Throwable t) {
             throw new IllegalArgumentException
                     ("Property '" + name + "' has no write method");
