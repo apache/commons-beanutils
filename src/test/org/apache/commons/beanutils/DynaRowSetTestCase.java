@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaRowSetTestCase.java,v 1.1 2003/01/05 05:33:05 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/01/05 05:33:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaRowSetTestCase.java,v 1.2 2003/05/20 21:01:44 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/05/20 21:01:44 $
  *
  * ====================================================================
  *
@@ -80,7 +80,7 @@ import junit.framework.TestSuite;
  * Test accessing RowSets via DynaBeans.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/01/05 05:33:05 $
+ * @version $Revision: 1.2 $ $Date: 2003/05/20 21:01:44 $
  */
 
 public class DynaRowSetTestCase extends TestCase {
@@ -280,5 +280,13 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
+    public void testLimitedRows() throws Exception {
+        
+        // created one with low limit
+        RowSetDynaClass limitedDynaClass = new RowSetDynaClass(new TestResultSet(), 3);
+        List rows = limitedDynaClass.getRows();
+        assertNotNull("list exists", rows);
+        assertEquals("limited row count", 3, rows.size());
+        
+    }
 }

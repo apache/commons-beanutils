@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.4 2003/03/13 18:45:38 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/03/13 18:45:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.5 2003/05/20 21:01:44 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/05/20 21:01:44 $
  *
  * ====================================================================
  *
@@ -107,11 +107,27 @@ import java.util.List;
  * application components.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2003/03/13 18:45:38 $
+ * @version $Revision: 1.5 $ $Date: 2003/05/20 21:01:44 $
  */
 
 public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
 
+
+    // ----------------------------------------------------- Instance variables
+    
+    /**
+     * <p>Limits the size of the returned list.  The call to 
+     * <code>getRows()</code> will return at most limit number of rows.
+     * If less than or equal to 0, does not limit the size of the result.
+     */
+    protected int limit = -1;
+
+    /**
+     * <p>The list of {@link DynaBean}s representing the contents of
+     * the original <code>ResultSet</code> on which this
+     * {@link RowSetDynaClass} was based.</p>
+     */
+    protected List rows = new ArrayList();
 
     // ----------------------------------------------------------- Constructors
 
@@ -130,11 +146,57 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      */
     public RowSetDynaClass(ResultSet resultSet) throws SQLException {
 
-        this(resultSet, true);
+        this(resultSet, true, -1);
+
+    }
+
+    /**
+     * <p>Construct a new {@link RowSetDynaClass} for the specified
+     * <code>ResultSet</code>.  The property names corresponding
+     * to column names in the result set will be lower cased.</p>
+     * 
+     * If <code>limit</code> is not less than 0, max <code>limit</code>
+     * number of rows will be copied into the list. 
+     *
+     * @param resultSet The result set to be wrapped
+     * @param limit The maximum for the size of the result. 
+     *
+     * @exception NullPointerException if <code>resultSet</code>
+     *  is <code>null</code>
+     * @exception SQLException if the metadata for this result set
+     *  cannot be introspected
+     */
+    public RowSetDynaClass(ResultSet resultSet, int limit) throws SQLException {
+
+        this(resultSet, true, limit);
 
     }
 
 
+    /**
+     * <p>Construct a new {@link RowSetDynaClass} for the specified
+     * <code>ResultSet</code>.  The property names corresponding
+     * to the column names in the result set will be lower cased or not,
+     * depending on the specified <code>lowerCase</code> value.</p>
+     *
+     * If <code>limit</code> is not less than 0, max <code>limit</code>
+     * number of rows will be copied into the resultset. 
+     *
+     *
+     * @param resultSet The result set to be wrapped
+     * @param lowerCase Should property names be lower cased?
+     *
+     * @exception NullPointerException if <code>resultSet</code>
+     *  is <code>null</code>
+     * @exception SQLException if the metadata for this result set
+     *  cannot be introspected
+     */
+    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase)
+                                                    throws SQLException {
+        this(resultSet, lowerCase, -1);
+
+    }
+	
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
      * <code>ResultSet</code>.  The property names corresponding
@@ -156,26 +218,18 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase)
-        throws SQLException {
+    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase, int limit)
+                                                            throws SQLException {
 
         if (resultSet == null) {
             throw new NullPointerException();
         }
         this.lowerCase = lowerCase;
+        this.limit = limit;
         introspect(resultSet);
         copy(resultSet);
 
     }
-
-
-        /**
-     * <p>The list of {@link DynaBean}s representing the contents of
-     * the original <code>ResultSet</code> on which this
-     * {@link RowSetDynaClass} was based.</p>
-     */
-    protected List rows = new ArrayList();
-
 
     /**
      * <p>Return a <code>List</code> containing the {@link DynaBean}s that
@@ -211,7 +265,8 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      */
     protected void copy(ResultSet resultSet) throws SQLException {
 
-        while (resultSet.next()) {
+        int cnt = 0;
+        while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {	
             DynaBean bean = new BasicDynaBean(this);
             for (int i = 0; i < properties.length; i++) {
                 String name = properties[i].getName();
