@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.7 2001/08/21 21:59:02 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2001/08/21 21:59:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.8 2001/08/21 23:05:08 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2001/08/21 23:05:08 $
  *
  * ====================================================================
  *
@@ -126,7 +126,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.7 $ $Date: 2001/08/21 21:59:02 $
+ * @version $Revision: 1.8 $ $Date: 2001/08/21 23:05:08 $
  */
 
 public class PropertyUtils {
@@ -295,6 +295,8 @@ public class PropertyUtils {
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
      *
+     * @exception ArrayIndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying array
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -343,6 +345,8 @@ public class PropertyUtils {
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
      *
+     * @exception ArrayIndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying array
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -376,7 +380,16 @@ public class PropertyUtils {
 	    if (readMethod != null) {
 		Object subscript[] = new Object[1];
 		subscript[0] = new Integer(index);
-		return (readMethod.invoke(bean, subscript));
+                try {
+                    return (readMethod.invoke(bean, subscript));
+                } catch (InvocationTargetException e) {
+                    if (e.getTargetException() instanceof
+                        ArrayIndexOutOfBoundsException)
+                        throw (ArrayIndexOutOfBoundsException)
+                            e.getTargetException();
+                    else
+                        throw e;
+                }
 	    }
 	}
 
@@ -968,6 +981,8 @@ public class PropertyUtils {
      * @param value Value to which the specified property element
      *  should be set
      *
+     * @exception ArrayIndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying array
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -1018,6 +1033,8 @@ public class PropertyUtils {
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
      *
+     * @exception ArrayIndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying array
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -1052,7 +1069,16 @@ public class PropertyUtils {
 		Object subscript[] = new Object[2];
 		subscript[0] = new Integer(index);
 		subscript[1] = value;
-		writeMethod.invoke(bean, subscript);
+                try {
+                    writeMethod.invoke(bean, subscript);
+                } catch (InvocationTargetException e) {
+                    if (e.getTargetException() instanceof
+                        ArrayIndexOutOfBoundsException)
+                        throw (ArrayIndexOutOfBoundsException)
+                            e.getTargetException();
+                    else
+                        throw e;
+                }
                 return;
 	    }
 	}

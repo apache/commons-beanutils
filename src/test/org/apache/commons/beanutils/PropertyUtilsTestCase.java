@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.8 2001/08/21 21:59:02 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2001/08/21 21:59:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.9 2001/08/21 23:05:08 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2001/08/21 23:05:08 $
  *
  * ====================================================================
  *
@@ -82,18 +82,24 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * <p>So far, this test case has tests for the following methods of the
  * <code>PropertyUtils</code> class:</p>
  * <ul>
+ * <li>getIndexedProperty(Object,String)</li>
+ * <li>getIndexedProperty(Object,String,int)</li>
  * <li>getMappedProperty(Object,String)</li>
+ * <li>getMappedProperty(Object,String,String</li>
  * <li>getNestedProperty(Object,String)</li>
  * <li>getPropertyDescriptor(Object,String)</li>
  * <li>getPropertyDescriptors(Object)</li>
  * <li>getSimpleProperty(Object,String)</li>
+ * <li>setIndexedProperty(Object,String,Object)</li>
+ * <li>setIndexedProperty(Object,String,String,Object)</li>
  * <li>setMappedProperty(Object,String,Object)</li>
+ * <li>setMappedProperty(Object,String,String,Object)</li>
  * <li>setNestedProperty(Object,String,Object)</li>
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2001/08/21 21:59:02 $
+ * @version $Revision: 1.9 $ $Date: 2001/08/21 23:05:08 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -427,6 +433,326 @@ public class PropertyUtilsTestCase extends TestCase {
             ; // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
+        }
+
+    }
+
+
+    /**
+     * Corner cases on getIndexedProperty invalid arguments.
+     */
+    public void testGetIndexedArguments() {
+
+        // Use explicit index argument
+
+        try {
+            PropertyUtils.getIndexedProperty(null, "intArray", 0);
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, null, 0);
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        // Use index expression
+
+        try {
+            PropertyUtils.getIndexedProperty(null,
+                                            "intArray[0]");
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, "[0]");
+            fail("Should throw NoSuchMethodException 4");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 4");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, "intArray");
+            fail("Should throw IllegalArgumentException 5");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 5");
+        }
+
+        // Use explicit index argument
+
+        try {
+            PropertyUtils.getIndexedProperty(null, "intIndexed", 0);
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, null, 0);
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        // Use index expression
+
+        try {
+            PropertyUtils.getIndexedProperty(null,
+                                            "intIndexed[0]");
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, "[0]");
+            fail("Should throw NoSuchMethodException 4");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 4");
+        }
+
+        try {
+            PropertyUtils.getIndexedProperty(bean, "intIndexed");
+            fail("Should throw IllegalArgumentException 5");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 5");
+        }
+
+    }
+
+
+    /**
+     * Positive and negative tests on getIndexedProperty valid arguments.
+     */
+    public void testGetIndexedValues() {
+
+        Object value = null;
+
+        // Use explicit key argument
+
+        for (int i = 0; i < 5; i++) {
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean, "intArray", i);
+                assertNotNull("intArray returned value " + i, value);
+                assertTrue("intArray returned Integer " + i,
+                           value instanceof Integer);
+                assertEquals("intArray returned correct " + i, i * 10,
+                             ((Integer) value).intValue());
+            } catch (Throwable t) {
+                fail("intArray " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean, "intIndexed", i);
+                assertNotNull("intIndexed returned value " + i, value);
+                assertTrue("intIndexed returned Integer " + i,
+                           value instanceof Integer);
+                assertEquals("intIndexed returned correct " + i, i * 10,
+                             ((Integer) value).intValue());
+            } catch (Throwable t) {
+                fail("intIndexed " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean, "stringArray", i);
+                assertNotNull("stringArray returned value " + i, value);
+                assertTrue("intArray returned String " + i,
+                           value instanceof String);
+                assertEquals("stringArray returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("stringArray " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean, "stringIndexed", i);
+                assertNotNull("stringIndexed returned value " + i, value);
+                assertTrue("intArray returned String " + i,
+                           value instanceof String);
+                assertEquals("stringIndexed returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("stringIndexed " + i + " threw " + t);
+            }
+
+        }
+
+        // Use key expression
+
+        for (int i = 0; i < 5; i++) {
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean,
+                                                     "intArray[" + i + "]");
+                assertNotNull("intArray returned value " + i, value);
+                assertTrue("intArray returned Integer " + i,
+                           value instanceof Integer);
+                assertEquals("intArray returned correct " + i, i * 10,
+                             ((Integer) value).intValue());
+            } catch (Throwable t) {
+                fail("intArray " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean,
+                                                     "intIndexed[" + i + "]");
+                assertNotNull("intIndexed returned value " + i, value);
+                assertTrue("intIndexed returned Integer " + i,
+                           value instanceof Integer);
+                assertEquals("intIndexed returned correct " + i, i * 10,
+                             ((Integer) value).intValue());
+            } catch (Throwable t) {
+                fail("intIndexed " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean,
+                                                     "stringArray[" + i + "]");
+                assertNotNull("stringArray returned value " + i, value);
+                assertTrue("intArray returned String " + i,
+                           value instanceof String);
+                assertEquals("stringArray returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("stringArray " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean,
+                                                     "stringIndexed[" + i + "]");
+                assertNotNull("stringIndexed returned value " + i, value);
+                assertTrue("intArray returned String " + i,
+                           value instanceof String);
+                assertEquals("stringIndexed returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("stringIndexed " + i + " threw " + t);
+            }
+
+        }
+
+        // Index out of bounds tests
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intArray", -1);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intArray", 5);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intIndexed", -1);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intIndexed", 5);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray", -1);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray", 5);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringIndexed", -1);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringIndexed", 5);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
 
     }
@@ -1298,6 +1624,356 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetWriteMethodPublicSubclass() {
 
         testGetWriteMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
+
+    }
+
+
+    /**
+     * Corner cases on setIndexedProperty invalid arguments.
+     */
+    public void testSetIndexedArguments() {
+
+        // Use explicit index argument
+
+        try {
+            PropertyUtils.setIndexedProperty(null, "intArray", 0,
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, null, 0,
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        // Use index expression
+
+        try {
+            PropertyUtils.setIndexedProperty(null,
+                                            "intArray[0]",
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, "[0]",
+                                             new Integer(1));
+            fail("Should throw NoSuchMethodException 4");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 4");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, "intArray",
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 5");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 5");
+        }
+
+        // Use explicit index argument
+
+        try {
+            PropertyUtils.setIndexedProperty(null, "intIndexed", 0,
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, null, 0,
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        // Use index expression
+
+        try {
+            PropertyUtils.setIndexedProperty(null,
+                                            "intIndexed[0]",
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, "[0]",
+                                             new Integer(1));
+            fail("Should throw NoSuchMethodException 4");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 4");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean, "intIndexed",
+                                             new Integer(1));
+            fail("Should throw IllegalArgumentException 5");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 5");
+        }
+
+    }
+
+
+    /**
+     * Positive and negative tests on setIndexedProperty valid arguments.
+     */
+    public void testSetIndexedValues() {
+
+        Object value = null;
+
+        // Use explicit index argument
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intArray", 0,
+                                             new Integer(1));
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intArray", 0);
+            assertNotNull("Returned new value 0", value);
+            assertTrue("Returned Integer new value 0",
+                       value instanceof Integer);
+            assertEquals("Returned correct new value 0", 1,
+                         ((Integer) value).intValue());
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intIndexed", 1,
+                                             new Integer(11));
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intIndexed", 1);
+            assertNotNull("Returned new value 1", value);
+            assertTrue("Returned Integer new value 1",
+                       value instanceof Integer);
+            assertEquals("Returned correct new value 1", 11,
+                         ((Integer) value).intValue());
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray", 2,
+                                             "New Value 2");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray", 2);
+            assertNotNull("Returned new value 2", value);
+            assertTrue("Returned String new value 2",
+                       value instanceof String);
+            assertEquals("Returned correct new value 2", "New Value 2",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray", 3,
+                                             "New Value 3");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray", 3);
+            assertNotNull("Returned new value 3", value);
+            assertTrue("Returned String new value 3",
+                       value instanceof String);
+            assertEquals("Returned correct new value 3", "New Value 3",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        // Use index expression
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intArray[4]",
+                                             new Integer(1));
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intArray[4]");
+            assertNotNull("Returned new value 4", value);
+            assertTrue("Returned Integer new value 4",
+                       value instanceof Integer);
+            assertEquals("Returned correct new value 4", 1,
+                         ((Integer) value).intValue());
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intIndexed[3]",
+                                             new Integer(11));
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "intIndexed[3]");
+            assertNotNull("Returned new value 5", value);
+            assertTrue("Returned Integer new value 5",
+                       value instanceof Integer);
+            assertEquals("Returned correct new value 5", 11,
+                         ((Integer) value).intValue());
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray[1]",
+                                             "New Value 2");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray[2]");
+            assertNotNull("Returned new value 6", value);
+            assertTrue("Returned String new value 6",
+                       value instanceof String);
+            assertEquals("Returned correct new value 6", "New Value 2",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray[0]",
+                                             "New Value 3");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "stringArray[0]");
+            assertNotNull("Returned new value 7", value);
+            assertTrue("Returned String new value 7",
+                       value instanceof String);
+            assertEquals("Returned correct new value 7", "New Value 3",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        // Index out of bounds tests
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intArray", -1,
+                                             new Integer(0));
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intArray", 5,
+                                             new Integer(0));
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intIndexed", -1,
+                                             new Integer(0));
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "intIndexed", 5,
+                                             new Integer(0));
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray", -1,
+                                             "New String");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringArray", 5,
+                                             "New String");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringIndexed", -1,
+                                             "New String");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "stringIndexed", 5,
+                                             "New String");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
 
     }
 
