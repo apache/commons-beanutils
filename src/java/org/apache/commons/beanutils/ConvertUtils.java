@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.2 2001/09/03 16:39:18 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/09/03 16:39:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.3 2001/09/15 05:06:26 martinc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/09/15 05:06:26 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.lang.reflect.Array;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.2 $ $Date: 2001/09/03 16:39:18 $
+ * @version $Revision: 1.3 $ $Date: 2001/09/15 05:06:26 $
  */
 
 public class ConvertUtils {
@@ -464,12 +464,10 @@ public class ConvertUtils {
     private static Character convertCharacter(String value,
                                               Character defaultValue) {
 
-        if (value == null)
+        if (value == null || value.length() == 0)
             return (defaultValue);
-        else if (value.length() == 0)
-            return (new Character(' '));
         else
-            return (defaultValue);
+            return (new Character(value.charAt(0)));
 
     }
 
