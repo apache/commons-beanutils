@@ -27,7 +27,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-
 /**
  * <p> Utility reflection methods focussed on methods in general rather than properties in particular. </p>
  *
@@ -46,8 +45,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Fran&#231;ois
+ * @author Gregor Ra&#253;man
  * @author Jan Sorensen
  * @author Robert Burrell Donkin
  */
@@ -560,22 +559,22 @@ public class MethodUtils {
             } catch (SecurityException se) {
                 // log but continue just in case the method.invoke works anyway
                 if (!loggedAccessibleWarning) {
-                    boolean vunerableJVM = false;
+                    boolean vulnerableJVM = false;
                     try {
                         String specVersion = System.getProperty("java.specification.version");
                         if (specVersion.charAt(0) == '1' && 
-                                (specVersion.charAt(0) == '0' ||
-                                 specVersion.charAt(0) == '1' ||
-                                 specVersion.charAt(0) == '2' ||
-                                 specVersion.charAt(0) == '3')) {
+                                (specVersion.charAt(2) == '0' ||
+                                 specVersion.charAt(2) == '1' ||
+                                 specVersion.charAt(2) == '2' ||
+                                 specVersion.charAt(2) == '3')) {
                                  
-                            vunerableJVM = true;
+                            vulnerableJVM = true;
                         }
                     } catch (SecurityException e) {
                         // don't know - so display warning
-                        vunerableJVM = true;
+                        vulnerableJVM = true;
                     }
-                    if (vunerableJVM) {
+                    if (vulnerableJVM) {
                         log.warn(
                             "Current Security Manager restricts use of workarounds for reflection bugs "
                             + " in pre-1.4 JVMs.");
@@ -593,7 +592,10 @@ public class MethodUtils {
         
         // search through all methods 
         int paramSize = parameterTypes.length;
+        Method bestMatch = null;
         Method[] methods = clazz.getMethods();
+        float bestMatchCost = Float.MAX_VALUE;
+        float myCost = Float.MAX_VALUE;
         for (int i = 0, size = methods.length; i < size ; i++) {
             if (methods[i].getName().equals(methodName)) {	
                 // log some trace information
@@ -648,8 +650,11 @@ public class MethodUtils {
             "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
                                         se);
                             }
-                            cache.put(md, method);
-                            return method;
+                            myCost = getTotalTransformationCost(parameterTypes,method.getParameterTypes());
+                            if ( myCost < bestMatchCost ) {
+                               bestMatch = method;
+                               bestMatchCost = myCost;
+                            }
                         }
                         
                         log.trace("Couldn't find accessible method.");
@@ -657,12 +662,71 @@ public class MethodUtils {
                 }
             }
         }
-        
+        if ( bestMatch != null ){
+                 cache.put(md, bestMatch);  
+        } else {
         // didn't find a match
-        log.trace("No match found.");
-        return null;                                        
+               log.trace("No match found.");
+        }
+        
+        return bestMatch;                                        
     }
 
+    /**
+     * Returns the sum of the object transformation cost for each class in the source
+     * argument list.
+     * @param srcArgs The list of arguments to transform
+     * @param destArgs 
+     * @return
+     */
+    private static float getTotalTransformationCost(Class[] srcArgs, Class[] destArgs) {
+
+        float totalCost = 0.0f;
+        for (int i = 0; i < srcArgs.length; i++) {
+            Class srcClass, destClass;
+            srcClass = srcArgs[i];
+            destClass = destArgs[i];
+            totalCost += getObjectTransformationCost(srcClass, destClass);
+        }
+
+        return totalCost;
+    }
+    
+    /**
+     * Gets the number of steps required needed to turn the source class into the 
+     * destination class. This represents the number of steps in the object hierarchy 
+     * graph.
+     * @param srcClass
+     * @param destClass
+     * @return
+     */
+    private static float getObjectTransformationCost(Class srcClass, Class destClass) {
+        float cost = 0.0f;
+        while (destClass != null && !destClass.equals(srcClass)) {
+            if (destClass.isInterface() && isAssignmentCompatible(destClass,srcClass)) {
+                // slight penalty for interface match. 
+                // we still want an exact match to override an interface match, but  
+                // an interface match should override anything where we have to get a 
+                // superclass.
+                cost += 0.25f;
+                break;
+            }
+            cost++;
+            destClass = destClass.getSuperclass();
+        }
+
+        /*
+         * If the destination class is null, we've travelled all the way up to 
+         * an Object match. We'll penalize this by adding 1.5 to the cost.
+         */
+        if (destClass == null) {
+            cost += 1.5f;
+        }
+
+        return cost;
+    }
+    
+    
     /**
      * <p>Determine whether a type can be used as a parameter in a method invocation.
      * This method handles primitive conversions correctly.</p>
