@@ -397,7 +397,7 @@ can access its properties like this:</p>
     DynaBean employee = ...; // Details depend on which
                              // DynaBean implementation you use
     String firstName = (String) employee.get("firstName");
-    Address homeAddress = (String) employee.get("address", "home");
+    Address homeAddress = (Address) employee.get("address", "home");
     Object subordinate = employee.get("subordinate", 2);
 </pre>
 
@@ -430,12 +430,19 @@ DynaProperty</a>).  You start by defining the DynaClass that establishes
 the set of properties you care about:</p>
 
 <pre>
-    BasicDynaClass dynaClass = new BasicDynaClass("employee",
-     { new DynaProperty("address", "java.util.Map"),
-       new DynaProperty("subordinate", "mypackage.Employee[]"),
-       new DynaProperty("firstName", "java.lang.String"),
-       new DynaProperty("lastName", "java.lang.String") });
+    DynaProperty[] props = new DynaProperty[]{
+        new DynaProperty("address", java.util.Map.class),
+        new DynaProperty("subordinate", mypackage.Employee[].class),
+        new DynaProperty("firstName", String.class),
+        new DynaProperty("lastName",  String.class)
+      };
+    BasicDynaClass dynaClass = new BasicDynaClass("employee", null, props);
 </pre>
+
+<p>Note that the 'dynaBeanClass' argument (in the constructor of
+<code>BasicDynaClass</code>) can have the value of <code>null</code>.  In this
+case, the value of <code>dynaClass.getDynaBeanClass</code> will just be the
+<code>Class</code> for BasicDynaBean.</p>
 
 <p>Next, you use the <code>newInstance()</code> method of this DynaClass to
 create new DynaBean instances that conform to this DynaClass, and populate
