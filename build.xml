@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.42 2003/01/09 03:16:29 craigmcc Exp $
+        $Id: build.xml,v 1.43 2003/01/12 21:07:45 rdonkin Exp $
 -->
 
 
@@ -261,7 +261,8 @@
                                 test.method,
                                 test.dyna.result,
                                 test.dyna.row,
-                                test.bean.comparator
+                                test.bean.comparator,
+                                test.locale.converters
                                "
    description="Run all unit test cases">
   </target>
@@ -417,7 +418,7 @@
     </java>
   </target>
 
-	<target name="test.bean.comparator" depends="compile.tests">
+  <target name="test.bean.comparator" depends="compile.tests">
     <echo message="Running BeanComparator tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
@@ -428,6 +429,21 @@
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.BeanComparatorTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+  
+  <target name="test.locale.converters" depends="compile.tests">
+    <echo message="Running Locale converters tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>

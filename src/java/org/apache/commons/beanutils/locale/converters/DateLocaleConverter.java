@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.2 2003/01/11 22:06:23 martinc Exp $
- * $Revision: 1.2 $
- * $Date: 2003/01/11 22:06:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.3 2003/01/12 21:07:45 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/01/12 21:07:45 $
  *
  * ====================================================================
  *
@@ -253,6 +253,28 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     // --------------------------------------------------------- Methods
+    
+    /**
+     * Returns whether date formatting is lenient.
+     *
+     * @return true if the <code>DateFormat</code> used for formatting is lenient
+     * @see java.text.DateFormat#isLenient
+     */
+    public boolean isLenient() {
+        return formatter.isLenient();
+    }
+    
+    /**
+     * Specify whether or not date-time parsing should be lenient.
+     * 
+     * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
+     * @see java.text.DateFormat#setLenient
+     */
+    public void setLenient(boolean lenient) {
+        formatter.setLenient(lenient);
+    }	
+
+    // --------------------------------------------------------- Methods
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
@@ -265,14 +287,12 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *  successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
-
         if (locPattern) {
             formatter.applyLocalizedPattern(pattern);
         }
         else {
             formatter.applyPattern(pattern);
         }
-
-        return formatter.parse((String) value, new ParsePosition(0));
+        return formatter.parse((String) value);
     }
 }
