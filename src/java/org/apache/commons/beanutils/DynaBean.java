@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.1 2001/12/24 23:27:04 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/24 23:27:04 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.2 2001/12/27 08:11:05 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/12/27 08:11:05 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ package org.apache.commons.beanutils;
  * purpose of retrieving and setting property values.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/12/24 23:27:04 $
+ * @version $Revision: 1.2 $ $Date: 2001/12/27 08:11:05 $
  */
 
 public interface DynaBean {
@@ -133,6 +133,24 @@ public interface DynaBean {
 
 
     /**
+     * Return the value of the "dynamic modified" property, which will be
+     * <code>true</code> if any dynamic property has been the subject of a
+     * <code>set()</code> method call (even if the actual value did not
+     * change) since the last time that <code>setDynaModified(false)</code>
+     * was called for this instance.
+     */
+    public boolean isDynaModified();
+
+
+    /**
+     * Return the value of the "dynamic read only" property, which will be
+     * <code>true</code> if <code>set()</code> method calls against this
+     * property will fail because this bean has been marked read-only.
+     */
+    public boolean isDynaReadOnly();
+
+
+    /**
      * Set the value of a simple property with the specified name.  A null
      * value is allowed unless the underlying property type is a primitive.
      * If there is a Converter specified for our associated DynaClass, and
@@ -149,6 +167,8 @@ public interface DynaBean {
      *  be converted to the required property type
      * @exception IllegalStateException if the specified property exists,
      *  but has been defined as read-only
+     * @exception IllegalStateException if the specified property exists
+     *  and is writeable, but this bean instance has been marked read only
      */
     public void set(String name, Object value);
 
@@ -173,6 +193,8 @@ public interface DynaBean {
      *  exists, but is not indexed
      * @exception IllegalStateException if the specified property exists,
      *  but has been defined as read-only
+     * @exception IllegalStateException if the specified property exists
+     *  and is writeable, but this bean instance has been marked read only
      */
     public void set(String name, int index, Object value);
 
@@ -197,9 +219,26 @@ public interface DynaBean {
      *  exists, but is not mapped
      * @exception IllegalStateException if the specified property exists,
      *  but has been defined as read-only
+     * @exception IllegalStateException if the specified property exists
+     *  and is writeable, but this bean instance has been marked read only
      */
     public void set(String name, String key, Object value);
 
+
+    /**
+     * Set the value of the "dynamic modified" property.
+     *
+     * @param dynaModified The new dynamic modified property setting
+     */
+    public void setDynaModified(boolean dynaModified);
+
+
+    /**
+     * Set the value of the "dynamic read only" property.
+     *
+     * @param dynaReadOnly The new dynamic read only property setting
+     */
+    public void setDynaReadOnly(boolean dynaReadOnly);
 
 
 }
