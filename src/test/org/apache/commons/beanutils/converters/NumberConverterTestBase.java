@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/IntegerConverter.java,v 1.4 2002/12/09 22:03:11 rwaldhoff Exp $
- * $Revision: 1.4 $
- * $Date: 2002/12/09 22:03:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/converters/NumberConverterTestBase.java,v 1.1 2002/12/09 22:03:12 rwaldhoff Exp $
+ * $Revision: 1.1 $
+ * $Date: 2002/12/09 22:03:12 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,112 +59,78 @@
  *
  */
 
-
 package org.apache.commons.beanutils.converters;
 
+import junit.framework.TestCase;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.lang.Integer</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * Abstract base for &lt;Number&gt;Converter classes.
  *
- * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/12/09 22:03:11 $
- * @since 1.3
+ * @author Rodney Waldhoff
+ * @version $Revision: 1.1 $ $Date: 2002/12/09 22:03:12 $
  */
 
-public final class IntegerConverter implements Converter {
+public abstract class NumberConverterTestBase extends TestCase {
 
+    // ------------------------------------------------------------------------
 
-    // ----------------------------------------------------------- Constructors
-
-
-    /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
-     */
-    public IntegerConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+    public NumberConverterTestBase(String name) {
+        super(name);
     }
+    
+    // ------------------------------------------------------------------------
+    
+    protected abstract Converter makeConverter();
+    protected abstract Class getExpectedType();
 
-
-    /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
-     *
-     * @param defaultValue The default value to be returned
-     */
-    public IntegerConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
-    }
-
-
-    // ----------------------------------------------------- Instance Variables
-
+    // ------------------------------------------------------------------------
 
     /**
-     * The default value specified to our Constructor, if any.
+     * Assumes ConversionException in response to covert(getExpectedType(),null).
      */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Convert the specified input object into an output object of the
-     * specified type.
-     *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
-     */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof Integer) {
-            return (value);
-        } else if(value instanceof Number) {
-            return new Integer(((Number)value).intValue());
-        }
-
+    public void testConvertNull() throws Exception {
         try {
-            return (new Integer(value.toString()));
-        } catch (Exception e) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(e);
-            }
+            makeConverter().convert(getExpectedType(),null);
+            fail("Expected ConversionException");
+        } catch(ConversionException e) {
+            // expected
         }
-
     }
 
+    /**
+     * Assumes convert(getExpectedType(),Number) returns some non-null
+     * instance of getExpectedType().
+     */
+    public void testConvertNumber() throws Exception {
+        String[] message= { 
+            "from Byte",
+            "from Short",
+            "from Integer",
+            "from Long",
+            "from Float",
+            "from Double"
+        };
 
+        Object[] number = {
+            new Byte((byte)7),
+            new Short((short)8),
+            new Integer(9),
+            new Long(10),
+            new Float(11.1),
+            new Double(12.2)
+        };
+
+        for(int i=0;i<number.length;i++) {
+            Object val = makeConverter().convert(getExpectedType(),number[i]);
+            assertNotNull("Convert " + message[i] + " should not be null",val);
+            assertTrue(
+                "Convert " + message[i] + " should return a " + getExpectedType().getName(), 
+                getExpectedType().isInstance(val));
+        }
+    }
 }
+

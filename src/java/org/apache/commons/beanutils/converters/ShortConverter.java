@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ShortConverter.java,v 1.3 2002/07/13 02:22:08 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/07/13 02:22:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ShortConverter.java,v 1.4 2002/12/09 22:03:11 rwaldhoff Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/12/09 22:03:11 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/07/13 02:22:08 $
+ * @version $Revision: 1.4 $ $Date: 2002/12/09 22:03:11 $
  * @since 1.3
  */
 
@@ -150,6 +150,8 @@ public final class ShortConverter implements Converter {
 
         if (value instanceof Short) {
             return (value);
+        } else if (value instanceof Number) {
+            return new Short(((Number)value).shortValue());
         }
 
         try {
