@@ -115,12 +115,21 @@ when downloading from a mirror.
     Source releases are available
        <a href="http://jakarta.apache.org/site/sourceindex.cgi">here</a>
 </p>
-<p>
+</subsection>
+<subsection name='1.7.x Releases (Mirrored)'>
+    <p>
+<strong>BeanUtils 1.7.0</strong> is a service release which removes the dependency
+upon a specific commons-collection library version. It may be safely used together
+with either the 2.x or 3.x series of commons-collections releases.
+It also introduces a number of important enhancements. It is backward compatible
+with the 1.6 release.
+    </p>
+</subsection>
+<subsection name='1.6.x Releases (Mirrored)'>
 <ul>
        <li>Version 1.6.1 (latest) - 18 Feb 2003</li>
        <li>Version 1.6 - 21 Jan 2003</li>
 </ul>
-</p>
     </subsection>
     <subsection name='Older Releases (Not Mirrored)'>
     <p>
