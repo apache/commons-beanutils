@@ -2,7 +2,7 @@
 
 <project>
   <extend>../project.xml</extend>
-  <name>commons-beanutils</name>
+  <name>BeanUtils</name>
   <id>commons-beanutils</id>
   <currentVersion>1.0-dev</currentVersion>
   <inceptionYear>2000</inceptionYear>
