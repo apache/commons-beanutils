@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.1 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.2 2002/01/12 20:47:11 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/12 20:47:11 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.util.Map;
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/12 20:47:11 $
  */
 
 public class WrapDynaBean implements DynaBean {
@@ -244,7 +244,7 @@ public class WrapDynaBean implements DynaBean {
 
 
         throw new UnsupportedOperationException
-            ("WrapDynaBean does not support contains()");
+            ("WrapDynaBean does not support remove()");
 
     }
 
