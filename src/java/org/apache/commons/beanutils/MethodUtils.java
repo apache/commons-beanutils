@@ -63,6 +63,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -108,6 +109,11 @@ public class MethodUtils {
     private static final Class[] emptyClassArray = new Class[0];
     /** An empty object array */
     private static final Object[] emptyObjectArray = new Object[0];
+
+    /**
+     * Stores a cache of Methods against MethodDescriptors, in a WeakHashMap.
+     */
+    private static WeakHashMap cache = new WeakHashMap();
     
     // --------------------------------------------------------- Public Methods
     
@@ -411,8 +417,17 @@ public class MethodUtils {
             Class[] parameterTypes) {
 
         try {
-            return getAccessibleMethod
+            MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
+            // Check the cache first
+            Method method = (Method)cache.get(md);
+            if (method != null) {
+                return method;
+            }
+            
+            method =  getAccessibleMethod
                     (clazz.getMethod(methodName, parameterTypes));
+            cache.put(md, method);
+            return method;
         } catch (NoSuchMethodException e) {
             return (null);
         }
@@ -548,11 +563,18 @@ public class MethodUtils {
         if (log.isTraceEnabled()) {
             log.trace("Matching name=" + methodName + " on " + clazz);
         }
+        MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
         
         // see if we can find the method directly
         // most of the time this works and it's much faster
         try {
-            Method method = clazz.getMethod(methodName, parameterTypes);
+            // Check the cache first
+            Method method = (Method)cache.get(md);
+            if (method != null) {
+                return method;
+            }
+
+            method = clazz.getMethod(methodName, parameterTypes);
             if (log.isTraceEnabled()) {
                 log.trace("Found straight match: " + method);
                 log.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
@@ -606,6 +628,7 @@ public class MethodUtils {
                         "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
                         se);
             }
+            cache.put(md, method);
             return method;
             
         } catch (NoSuchMethodException e) { /* SWALLOW */ }
@@ -667,6 +690,7 @@ public class MethodUtils {
             "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
                                         se);
                             }
+                            cache.put(md, method);
                             return method;
                         }
                         
@@ -726,5 +750,71 @@ public class MethodUtils {
         }
         
         return false;
+    }
+
+    /**
+     * Represents the key to looking up a Method by reflection.
+     */
+    private static class MethodDescriptor {
+        private Class cls;
+        private String methodName;
+        private Class[] paramTypes;
+        private boolean exact;
+        private int hashCode;
+
+        /**
+         * The sole constructor.
+         *
+         * @param cls  the class to reflect, must not be null
+         * @param methodName  the method name to obtain
+         * @param paramTypes the array of classes representing the paramater types
+         * @param exact whether the match has to be exact.
+         */
+        public MethodDescriptor(Class cls, String methodName, Class[] paramTypes, boolean exact) {
+            if (cls == null) {
+                throw new IllegalArgumentException("Class cannot be null");
+            }
+            if (methodName == null) {
+                throw new IllegalArgumentException("Method Name cannot be null");
+            }
+            if (paramTypes == null) {
+                paramTypes = emptyClassArray;
+            }
+
+            this.cls = cls;
+            this.methodName = methodName;
+            this.paramTypes = paramTypes;
+            this.exact= exact;
+
+            this.hashCode = methodName.length();
+        }
+        /**
+         * Checks for equality.
+         * @param obj object to be tested for equality
+         * @return true, if the object describes the same Method.
+         */
+        public boolean equals(Object obj) {
+            if (!(obj instanceof MethodDescriptor)) {
+                return false;
+            }
+            MethodDescriptor md = (MethodDescriptor)obj;
+
+            return (
+                exact == md.exact &&
+                methodName.equals(md.methodName) &&
+                cls.equals(md.cls) &&
+                java.util.Arrays.equals(paramTypes, md.paramTypes)
+            );
+        }
+        /**
+         * Returns the string length of method name. I.e. if the
+         * hashcodes are different, the objects are different. If the
+         * hashcodes are the same, need to use the equals method to
+         * determine equality.
+         * @return the string length of method name.
+         */
+        public int hashCode() {
+            return hashCode;
+        }
     }
 }
