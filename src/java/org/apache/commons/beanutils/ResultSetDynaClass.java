@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.13 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.13 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.14 2004/02/15 02:07:12 craigmcc Exp $
+ * $Revision: 1.14 $
+ * $Date: 2004/02/15 02:07:12 $
  *
  * ====================================================================
  * 
@@ -123,7 +123,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.13 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.14 $ $Date: 2004/02/15 02:07:12 $
  */
 
 public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
@@ -186,27 +186,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
     // ----------------------------------------------------- Instance Variables
-
-
-    /**
-     * Flag defining whether column names should be lower cased when
-     * converted to property names.
-     */
-    protected boolean lowerCase = true;
-
-
-    /**
-     * The set of dynamic properties that are part of this DynaClass.
-     */
-    protected DynaProperty properties[] = null;
-
-
-    /**
-     * The set of dynamic properties that are part of this DynaClass,
-     * keyed by the property name.  Individual descriptor instances will
-     * be the same instances as those in the <code>properties</code> list.
-     */
-    protected HashMap propertiesMap = new HashMap();
 
 
     /**
