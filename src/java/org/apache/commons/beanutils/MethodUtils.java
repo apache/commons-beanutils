@@ -64,6 +64,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+
 /**
  * <p> Utility reflection methods focussed on methods in general rather than properties in particular. </p>
  *
@@ -77,6 +82,14 @@ import java.lang.reflect.Modifier;
  */
 
 public class MethodUtils {
+
+    // --------------------------------------------------------- Private Methods
+    
+    /**
+     * All logging goes through this logger
+     */
+    private static Log log = LogFactory.getLog(MethodUtils.class);
+
 
 
     // --------------------------------------------------------- Public Methods
@@ -483,26 +496,53 @@ public class MethodUtils {
                                                 Class clazz,
                                                 String methodName,
                                                 Class[] parameterTypes) {
+        // trace logging
+        if (log.isTraceEnabled()) {
+            log.trace("Matching name=" + methodName + " on " + clazz);
+        }
+        
+        // search through all methods 
         int paramSize = parameterTypes.length;
         Method[] methods = clazz.getMethods();
         for (int i = 0, size = methods.length; i < size ; i++) {
-            if (methods[i].getName().equals(methodName)) {
+            if (methods[i].getName().equals(methodName)) {	
+                // log some trace information
+                if (log.isTraceEnabled()) {
+                    log.trace("Found matching name:");
+                    log.trace(methods[i]);
+                }                
+                
+                // compare parameters
                 Class[] methodsParams = methods[i].getParameterTypes();
                 int methodParamSize = methodsParams.length;
                 if (methodParamSize == paramSize) {                    
                     for (int n = 0 ; n < methodParamSize; n++) {
                         if (!parameterTypes[n].isAssignableFrom(methodsParams[n])) {
+                            if (log.isTraceEnabled()) {
+                                log.trace(parameterTypes[n] + " is not assignable from " 
+                                            + methodsParams[n]);
+                            }    
                             break;
                         }
                     }
+                    
+                    // get accessible version of method
                     Method method = getAccessibleMethod(methods[i]);
                     if (method != null) {
+                        if (log.isTraceEnabled()) {
+                            log.trace(method + " accessible version of " 
+                                        + methods[i]);
+                        }
                         return method;
                     }
+                    
+                    log.trace("Couldn't find accessible method.");
                 }
             }
         }
         
+        // didn't find a match
+        log.trace("No match found.");
         return null;                                        
     }
 
