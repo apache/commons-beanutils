@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.7 2003/05/16 14:50:22 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/05/16 14:50:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.8 2003/07/07 22:06:44 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/07/07 22:06:44 $
  *
  * ====================================================================
  *
@@ -148,7 +148,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ralph Schaer
  * @author Chris Audley
  * @author James Strachan
- * @version $Revision: 1.7 $ $Date: 2003/05/16 14:50:22 $
+ * @version $Revision: 1.8 $ $Date: 2003/07/07 22:06:44 $
  * @since 1.7
  */
 
@@ -437,11 +437,11 @@ public class ConvertUtilsBean {
             if (value == null) {
                 return ((String) null);
             } else {
-                Converter converter = (Converter) converters.get(String.class);
+                Converter converter = lookup(String.class);
                 return ((String) converter.convert(String.class, value));
             }
         } else {
-            Converter converter = (Converter) converters.get(String.class);
+            Converter converter = lookup(String.class);
             return ((String) converter.convert(String.class, value));
         }
 
@@ -463,9 +463,9 @@ public class ConvertUtilsBean {
             log.debug("Convert string '" + value + "' to class '" +
                       clazz.getName() + "'");
         }
-        Converter converter = (Converter) converters.get(clazz);
+        Converter converter = lookup(clazz);
         if (converter == null) {
-            converter = (Converter) converters.get(String.class);
+            converter = lookup(String.class);
         }
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
@@ -497,9 +497,9 @@ public class ConvertUtilsBean {
             log.debug("Convert String[" + values.length + "] to class '" +
                       type.getName() + "[]'");
         }
-        Converter converter = (Converter) converters.get(type);
+        Converter converter = lookup(type);
         if (converter == null) {
-            converter = (Converter) converters.get(String.class);
+            converter = lookup(String.class);
         }
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
