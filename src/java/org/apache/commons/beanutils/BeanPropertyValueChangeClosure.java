@@ -63,7 +63,7 @@ import java.lang.reflect.InvocationTargetException;
  * <code>true</code>. Assuming...
  * <ul>
  *    <li>
- *       The top level object in the <code>peeopleCollection</code> is an object which represents a
+ *       The top level object in the <code>peopleCollection</code> is an object which represents a
  *       person.
  *    </li>
  *    <li>
