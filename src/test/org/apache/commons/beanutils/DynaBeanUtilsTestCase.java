@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.10 2002/07/13 02:22:09 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2002/07/13 02:22:09 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.11 2002/07/20 22:36:36 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/07/20 22:36:36 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2002/07/13 02:22:09 $
+ * @version $Revision: 1.11 $ $Date: 2002/07/20 22:36:36 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -105,6 +105,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     { "booleanProperty",
       "booleanSecond",
       "doubleProperty",
+      "dupProperty",
       "floatProperty",
       "intArray",
       "intIndexed",
@@ -155,6 +156,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
+        String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
+        bean.set("dupProperty", dupProperty);
         int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
         int intIndexed[] = { 0, 10, 20, 30, 40 };
@@ -231,6 +234,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("doubleProperty", new Double(333.33));
+        orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
         orig.set("intProperty", new Integer(333));
         orig.set("longProperty", new Long(3333));
@@ -267,6 +271,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Validate the results for array properties
+        String dupProperty[] = (String[]) bean.get("dupProperty");
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
         int intArray[] = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
@@ -291,6 +301,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         TestBean orig = new TestBean();
         orig.setBooleanProperty(false);
         orig.setDoubleProperty(333.33);
+        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
         orig.setIntArray(new int[] { 100, 200, 300 });
         orig.setIntProperty(333);
         orig.setLongProperty(3333);
@@ -327,6 +338,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Validate the results for array properties
+        String dupProperty[] = (String[]) bean.get("dupProperty");
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
         int intArray[] = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
@@ -776,6 +793,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                             new DynaProperty("booleanProperty", Boolean.TYPE),
                             new DynaProperty("booleanSecond", Boolean.TYPE),
                             new DynaProperty("doubleProperty", Double.TYPE),
+                            new DynaProperty("dupProperty", stringArray.getClass()),
                             new DynaProperty("floatProperty", Float.TYPE),
                             new DynaProperty("intArray", intArray.getClass()),
                             new DynaProperty("intIndexed", intArray.getClass()),

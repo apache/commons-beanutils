@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.19 2002/07/20 19:12:45 craigmcc Exp $
- * $Revision: 1.19 $
- * $Date: 2002/07/20 19:12:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.20 2002/07/20 22:36:36 craigmcc Exp $
+ * $Revision: 1.20 $
+ * $Date: 2002/07/20 22:36:36 $
  *
  * ====================================================================
  *
@@ -104,7 +104,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.19 $ $Date: 2002/07/20 19:12:45 $
+ * @version $Revision: 1.20 $ $Date: 2002/07/20 22:36:36 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -174,31 +174,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * The set of properties that should be described.
-     */
-    protected String describes[] =
-    { "booleanProperty",
-      "booleanSecond",
-      "doubleProperty",
-      "floatProperty",
-      "intArray",
-      //      "intIndexed",
-      "intProperty",
-      "listIndexed",
-      "longProperty",
-      //      "mappedProperty",
-      //      "mappedIntProperty",
-      "nested",
-      "nullProperty",
-      "readOnlyProperty",
-      "shortProperty",
-      "stringArray",
-      //      "stringIndexed",
-      "stringProperty"
-    };
-
-
-    /**
      * The set of property names we expect to have returned when calling
      * <code>getPropertyDescriptors()</code>.  You should update this list
      * when new properties are added to TestBean.
@@ -207,6 +182,7 @@ public class PropertyUtilsTestCase extends TestCase {
         "booleanProperty",
         "booleanSecond",
         "doubleProperty",
+        "dupProperty",
         "floatProperty",
         "intArray",
         "intIndexed",
@@ -282,52 +258,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
-
-
-    /**
-     * Test the describe() method.
-     */
-    public void testDescribe() {
-
-        Map map = null;
-        try {
-            map = BeanUtils.describe(bean);
-        } catch (Exception e) {
-            fail("Threw exception " + e);
-        }
-
-        // Verify existence of all the properties that should be present
-        for (int i = 0; i < describes.length; i++) {
-            assertTrue("Property '" + describes[i] + "' is present",
-                       map.containsKey(describes[i]));
-        }
-        assertTrue("Property 'writeOnlyProperty' is not present",
-                   !map.containsKey("writeOnlyProperty"));
-
-        // Verify the values of scalar properties
-        assertEquals("Value of 'booleanProperty'",
-                     "true",
-                     (String) map.get("booleanProperty"));
-        assertEquals("Value of 'doubleProperty'",
-                     "321.0",
-                     (String) map.get("doubleProperty"));
-        assertEquals("Value of 'floatProperty'",
-                     "123.0",
-                     (String) map.get("floatProperty"));
-        assertEquals("Value of 'intProperty'",
-                     "123",
-                     (String) map.get("intProperty"));
-        assertEquals("Value of 'longProperty'",
-                     "321",
-                     (String) map.get("longProperty"));
-        assertEquals("Value of 'shortProperty'",
-                     "987",
-                     (String) map.get("shortProperty"));
-        assertEquals("Value of 'stringProperty'",
-                     "This is a string",
-                     (String) map.get("stringProperty"));
-
-    }
 
 
     /**
@@ -643,6 +573,19 @@ public class PropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < 5; i++) {
 
             try {
+                value = PropertyUtils.getIndexedProperty
+                    (bean, "dupProperty", i);
+                assertNotNull("dupProperty returned value " + i, value);
+                assertTrue("dupProperty returned String " + i,
+                        value instanceof String);
+                assertEquals("dupProperty returned correct " + i,
+                             "Dup " + i,
+                             (String) value);
+            } catch (Throwable t) {
+                fail("dupProperty " + i + " threw " + t);
+            }
+
+            try {
                 value =
                         PropertyUtils.getIndexedProperty(bean, "intArray", i);
                 assertNotNull("intArray returned value " + i, value);
@@ -707,6 +650,19 @@ public class PropertyUtilsTestCase extends TestCase {
         // Use key expression
 
         for (int i = 0; i < 5; i++) {
+
+            try {
+                value = PropertyUtils.getIndexedProperty
+                    (bean, "dupProperty[" + i + "]");
+                assertNotNull("dupProperty returned value " + i, value);
+                assertTrue("dupProperty returned String " + i,
+                        value instanceof String);
+                assertEquals("dupProperty returned correct " + i,
+                             "Dup " + i,
+                             (String) value);
+            } catch (Throwable t) {
+                fail("dupProperty " + i + " threw " + t);
+            }
 
             try {
                 value =
@@ -776,6 +732,28 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
         // Index out of bounds tests
+
+        try {
+            value =
+                    PropertyUtils.getIndexedProperty(bean,
+                            "dupProperty", -1);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                    PropertyUtils.getIndexedProperty(bean,
+                            "dupProperty", 5);
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
 
         try {
             value =
@@ -1443,6 +1421,8 @@ public class PropertyUtilsTestCase extends TestCase {
             assertEquals("booleanSecond type", Boolean.TYPE, clazz);
             clazz = PropertyUtils.getPropertyType(bean, "doubleProperty");
             assertEquals("doubleProperty type", Double.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "dupProperty");
+            assertEquals("dupProperty type", String.class, clazz);
             clazz = PropertyUtils.getPropertyType(bean, "floatProperty");
             assertEquals("floatProperty type", Float.TYPE, clazz);
             clazz = PropertyUtils.getPropertyType(bean, "intArray");
@@ -2086,6 +2066,22 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean,
+                    "dupProperty", 0,
+                    "New 0");
+            value =
+                    PropertyUtils.getIndexedProperty(bean,
+                            "dupProperty", 0);
+            assertNotNull("Returned new value 0", value);
+            assertTrue("Returned String new value 0",
+                    value instanceof String);
+            assertEquals("Returned correct new value 0", "New 0",
+                    (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
                     "intArray", 0,
                     new Integer(1));
             value =
@@ -2168,6 +2164,22 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean,
+                    "dupProperty[4]",
+                    "New 4");
+            value =
+                    PropertyUtils.getIndexedProperty(bean,
+                            "dupProperty[4]");
+            assertNotNull("Returned new value 4", value);
+            assertTrue("Returned String new value 4",
+                    value instanceof String);
+            assertEquals("Returned correct new value 4", "New 4",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
                     "intArray[4]",
                     new Integer(1));
             value =
@@ -2247,6 +2259,28 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
         // Index out of bounds tests
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                    "dupProperty", -1,
+                    "New -1");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                    "dupProperty", 5,
+                    "New 5");
+            fail("Should have thrown ArrayIndexOutOfBoundsException");
+        } catch (ArrayIndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
 
         try {
             PropertyUtils.setIndexedProperty(bean,

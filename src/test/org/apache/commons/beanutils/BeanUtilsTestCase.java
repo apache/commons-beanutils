@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.12 2002/07/13 02:22:09 craigmcc Exp $
- * $Revision: 1.12 $
- * $Date: 2002/07/13 02:22:09 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.13 2002/07/20 22:36:36 craigmcc Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/07/20 22:36:36 $
  *
  * ====================================================================
  *
@@ -96,7 +96,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -116,6 +116,7 @@ public class BeanUtilsTestCase extends TestCase {
     { "booleanProperty",
       "booleanSecond",
       "doubleProperty",
+      "dupProperty",
       "floatProperty",
       "intArray",
       //      "intIndexed",
@@ -190,6 +191,8 @@ public class BeanUtilsTestCase extends TestCase {
         }
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("doubleProperty", new Double(333.33));
+        orig.set("dupProperty",
+                 new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
         orig.set("intProperty", new Integer(333));
         orig.set("longProperty", new Long(3333));
@@ -226,6 +229,12 @@ public class BeanUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Validate the results for array properties
+        String dupProperty[] = bean.getDupProperty();
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
         int intArray[] = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
@@ -250,6 +259,7 @@ public class BeanUtilsTestCase extends TestCase {
         TestBean orig = new TestBean();
         orig.setBooleanProperty(false);
         orig.setDoubleProperty(333.33);
+        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
         orig.setIntArray(new int[] { 100, 200, 300 });
         orig.setIntProperty(333);
         orig.setLongProperty(3333);
@@ -286,6 +296,12 @@ public class BeanUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Validate the results for array properties
+        String dupProperty[] = bean.getDupProperty();
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
         int intArray[] = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);

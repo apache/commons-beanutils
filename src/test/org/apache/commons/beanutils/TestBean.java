@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.10 2002/07/20 19:12:45 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2002/07/20 19:12:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.11 2002/07/20 22:36:36 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/07/20 22:36:36 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2002/07/20 19:12:45 $
+ * @version $Revision: 1.11 $ $Date: 2002/07/20 22:36:36 $
  */
 
 public class TestBean {
@@ -121,6 +121,30 @@ public class TestBean {
 
     public void setDoubleProperty(double doubleProperty) {
         this.doubleProperty = doubleProperty;
+    }
+
+
+    /**
+     * An "indexed property" accessible via both array and subscript
+     * based getters and setters.
+     */
+    private String dupProperty[] =
+    { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
+
+    public String[] getDupProperty() {
+        return (this.dupProperty);
+    }
+
+    public String getDupProperty(int index) {
+        return (this.dupProperty[index]);
+    }
+
+    public void setDupProperty(int index, String value) {
+        this.dupProperty[index] = value;
+    }
+
+    public void setDupProperty(String dupProperty[]) {
+        this.dupProperty = dupProperty;
     }
 
 
