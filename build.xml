@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.41 2003/01/05 05:33:05 craigmcc Exp $
+        $Id: build.xml,v 1.42 2003/01/09 03:16:29 craigmcc Exp $
 -->
 
 
@@ -217,7 +217,7 @@
   <target name="dist" depends="compile,javadoc"
    description="Create binary distribution">
     <mkdir      dir="${dist.home}"/>
-    <copy      file="../LICENSE"
+    <copy      file="LICENSE.txt"
               todir="${dist.home}"/>
     <copy      file="RELEASE-NOTES.txt"
               todir="${dist.home}"/>
@@ -229,7 +229,7 @@
    description="Create jar">
     <mkdir      dir="${dist.home}"/>
     <mkdir      dir="${build.home}/classes/META-INF"/>
-    <copy      file="../LICENSE"
+    <copy      file="LICENSE.txt"
              tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
     <jar    jarfile="${dist.home}/commons-${component.name}.jar"
             basedir="${build.home}/classes"
