@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/share/org/apache/commons/beanutils/Attic/ConvertUtils.java,v 1.1 2001/03/27 05:25:56 craigmcc Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.1 2001/04/14 18:29:56 craigmcc Exp $
  * $Revision: 1.1 $
- * $Date: 2001/03/27 05:25:56 $
+ * $Date: 2001/04/14 18:29:56 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.lang.reflect.Array;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.1 $ $Date: 2001/03/27 05:25:56 $
+ * @version $Revision: 1.1 $ $Date: 2001/04/14 18:29:56 $
  */
 
 public class ConvertUtils {
