@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author Craig R. McClanahan
  * @author Rodney Waldhoff
- * @version $Revision: 1.20 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision: 1.21 $ $Date: 2004/07/12 00:55:45 $
  */
 
 public class TestBean {
@@ -344,10 +344,10 @@ public class TestBean {
 
     public int getMappedIntProperty(String key) {
         // Create the map the very first time
-        if (mappedProperty == null) {
-            mappedProperty = new HashMap();
-            mappedProperty.put("One", new Integer(1));
-            mappedProperty.put("Two", new Integer(2));
+        if (mappedIntProperty == null) {
+            mappedIntProperty = new HashMap();
+            mappedIntProperty.put("One", new Integer(1));
+            mappedIntProperty.put("Two", new Integer(2));
         }
         Integer x = (Integer) mappedIntProperty.get(key);
         return ((x == null) ? 0 : x.intValue());
