@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.23 2002/09/28 09:31:55 rdonkin Exp $
- * $Revision: 1.23 $
- * $Date: 2002/09/28 09:31:55 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.24 2002/10/21 19:53:15 rdonkin Exp $
+ * $Revision: 1.24 $
+ * $Date: 2002/10/21 19:53:15 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.23 $ $Date: 2002/09/28 09:31:55 $
+ * @version $Revision: 1.24 $ $Date: 2002/10/21 19:53:15 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -3560,5 +3560,24 @@ public class PropertyUtilsTestCase extends TestCase {
             "Cannot set property on indexed property on property", 
             "Test#3", 
             nestedBean.getSimpleBeanProperty().getIndexedProperty(3).getTestString());  
+    }
+    
+    /** Text case for setting properties on inner classes */
+    public void testGetSetInnerBean() throws Exception {
+        BeanWithInnerBean bean = new BeanWithInnerBean();
+        
+        PropertyUtils.setProperty(bean, "innerBean.fish(loiterTimer)", "5");
+        String out = (String) PropertyUtils.getProperty(bean.getInnerBean(), "fish(loiterTimer)");
+        assertEquals(
+                "(1) Inner class property set/get property failed.", 
+                "5", 
+                out);  
+    
+        out = (String) PropertyUtils.getProperty(bean, "innerBean.fish(loiterTimer)");
+    
+        assertEquals(
+                "(2) Inner class property set/get property failed.", 
+                "5", 
+                out); 
     }
 }
