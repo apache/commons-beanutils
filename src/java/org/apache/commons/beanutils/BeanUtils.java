@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.28 2002/12/01 22:38:27 rdonkin Exp $
- * $Revision: 1.28 $
- * $Date: 2002/12/01 22:38:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.29 2002/12/16 00:21:02 craigmcc Exp $
+ * $Revision: 1.29 $
+ * $Date: 2002/12/16 00:21:02 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.28 $ $Date: 2002/12/01 22:38:27 $
+ * @version $Revision: 1.29 $ $Date: 2002/12/16 00:21:02 $
  */
 
 public class BeanUtils {
@@ -112,7 +112,9 @@ public class BeanUtils {
 
     /**
      * The debugging detail level for this component.
-     * Deprecated: use the log variable
+     * @deprecated BeanUtils now uses commons-logging for all log messages.
+     *             Use your favorite logging tool to configure logging for
+     *             this class.
      */
     private static int debug = 0;
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.35 2002/12/01 22:38:27 rdonkin Exp $
- * $Revision: 1.35 $
- * $Date: 2002/12/01 22:38:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.36 2002/12/16 00:21:02 craigmcc Exp $
+ * $Revision: 1.36 $
+ * $Date: 2002/12/16 00:21:02 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.35 $ $Date: 2002/12/01 22:38:27 $
+ * @version $Revision: 1.36 $ $Date: 2002/12/16 00:21:02 $
  */
 
 public class PropertyUtils {
@@ -178,13 +178,20 @@ public class PropertyUtils {
 
     /**
      * The debugging detail level for this component.
+     * @deprecated The <code>debug</code> static property is no longer used
      */
     private static int debug = 0;
 
+    /**
+     * @deprecated The <code>debug</code> static property is no longer used
+     */
     public static int getDebug() {
         return (debug);
     }
 
+    /**
+     * @deprecated The <code>debug</code> static property is no longer used
+     */
     public static void setDebug(int newDebug) {
         debug = newDebug;
     }
