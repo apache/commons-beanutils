@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.1 2001/04/16 13:28:52 geirm Exp $
- * $Revision: 1.1 $
- * $Date: 2001/04/16 13:28:52 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.2 2001/07/14 23:54:50 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/07/14 23:54:50 $
  *
  * ====================================================================
  *
@@ -94,7 +94,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public class BeanUtilsTestCase extends TestCase 
@@ -163,13 +163,13 @@ public class BeanUtilsTestCase extends TestCase
             String arr[] = BeanUtils.getArrayProperty( bean, "stringArray");
             String comp[] = bean.getStringArray();
 
-            assert("String array length = " + comp.length, 
+            assertTrue("String array length = " + comp.length, 
                    ( comp.length == arr.length ));
         
             arr = BeanUtils.getArrayProperty( bean, "intArray");
             int iarr[] = bean.getIntArray();
 
-            assert("String array length = " + iarr.length, 
+            assertTrue("String array length = " + iarr.length, 
                    ( iarr.length == arr.length ));
         }
         catch( IllegalAccessException e)
@@ -197,11 +197,11 @@ public class BeanUtilsTestCase extends TestCase
         {
             String val = BeanUtils.getIndexedProperty( bean, "intIndexed[3]");
             String comp =  String.valueOf( bean.getIntIndexed(3));
-            assert("intIndexed[3] == " + comp, val.equals( comp ));  
+            assertTrue("intIndexed[3] == " + comp, val.equals( comp ));  
                   
             val = BeanUtils.getIndexedProperty( bean, "stringIndexed[3]");
             comp = bean.getStringIndexed(3);
-            assert("stringIndexed[3] == " + comp, val.equals( comp ) );
+            assertTrue("stringIndexed[3] == " + comp, val.equals( comp ) );
         }
         catch( IllegalAccessException e)
         {
@@ -227,12 +227,12 @@ public class BeanUtilsTestCase extends TestCase
             String val  = BeanUtils.getIndexedProperty( bean, "intIndexed", 3);
             String comp =  String.valueOf(bean.getIntIndexed(3));
 
-            assert("intIndexed,3 == " + comp,   val.equals( comp ));
+            assertTrue("intIndexed,3 == " + comp,   val.equals( comp ));
 
             val = BeanUtils.getIndexedProperty( bean, "stringIndexed",3);
             comp = bean.getStringIndexed(3);
            
-            assert("stringIndexed,3 == " + comp ,  val.equals(comp));
+            assertTrue("stringIndexed,3 == " + comp ,  val.equals(comp));
         
         }
         catch( IllegalAccessException e)
@@ -258,7 +258,7 @@ public class BeanUtilsTestCase extends TestCase
         {
             String val  = BeanUtils.getNestedProperty( bean, "nested.stringProperty");
             String comp =  bean.getNested().getStringProperty();
-            assert("nested.StringProperty == " + comp,  
+            assertTrue("nested.StringProperty == " + comp,  
                    val.equals( comp ));       
         }
         catch( IllegalAccessException e)
@@ -285,7 +285,7 @@ public class BeanUtilsTestCase extends TestCase
             String val  = BeanUtils.getProperty( bean, "nested.intIndexed[2]");
             String comp =  String.valueOf( bean.getIntIndexed(2) );
 
-            assert("nested.intIndexed[2] == " + comp,
+            assertTrue("nested.intIndexed[2] == " + comp,
                 val.equals( comp ));       
         }
         catch( IllegalAccessException e)
@@ -312,7 +312,7 @@ public class BeanUtilsTestCase extends TestCase
             String val  = BeanUtils.getSimpleProperty( bean, "shortProperty");
             String comp = String.valueOf(bean.getShortProperty());
 
-            assert("shortProperty == " + comp,
+            assertTrue("shortProperty == " + comp,
                    val.equals(comp));     
         }
         catch( IllegalAccessException e)
