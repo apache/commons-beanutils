@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.2 2002/01/06 00:47:06 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/06 00:47:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.3 2002/01/06 06:01:08 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/06 06:01:08 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.util.Map;
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/06 00:47:06 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/06 06:01:08 $
  */
 
 public class BasicDynaBean implements DynaBean {
@@ -315,11 +315,12 @@ public class BasicDynaBean implements DynaBean {
                 throw new NullPointerException
                     ("Primitive value for '" + name + "'");
             }
-        } else if (!descriptor.getType().isAssignableFrom(value.getClass())) {
+        } else if (!isAssignable(descriptor.getType(), value.getClass())) {
             throw new ConversionException
                 ("Cannot assign value of type '" +
                  value.getClass().getName() +
-                 "' to property '" + name + "'");
+                 "' to property '" + name + "' of type '" +
+                 descriptor.getType().getName() + "'");
         }
         values.put(name, value);
 
@@ -415,6 +416,31 @@ public class BasicDynaBean implements DynaBean {
                 ("Invalid property name '" + name + "'");
         }
         return (descriptor);
+
+    }
+
+
+    /**
+     * Is an object of the source class assignable to the destination class?
+     *
+     * @param dest Destination class
+     * @param source Source class
+     */
+    protected boolean isAssignable(Class dest, Class source) {
+
+        if (dest.isAssignableFrom(source) ||
+            ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
+            ((dest == Byte.TYPE) && (source == Byte.class)) ||
+            ((dest == Character.TYPE) && (source == Character.class)) ||
+            ((dest == Double.TYPE) && (source == Double.class)) ||
+            ((dest == Float.TYPE) && (source == Float.class)) ||
+            ((dest == Integer.TYPE) && (source == Integer.class)) ||
+            ((dest == Long.TYPE) && (source == Long.class)) ||
+            ((dest == Short.TYPE) && (source == Short.class))) {
+            return (true);
+        } else {
+            return (false);
+        }
 
     }
 

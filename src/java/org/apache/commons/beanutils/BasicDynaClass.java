@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.2 2002/01/06 00:47:06 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/06 00:47:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.3 2002/01/06 06:01:08 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/06 06:01:08 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import java.util.HashMap;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/06 00:47:06 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/06 06:01:08 $
  */
 
 public class BasicDynaClass implements DynaClass {
@@ -123,8 +123,9 @@ public class BasicDynaClass implements DynaClass {
         super();
         if (name != null)
             this.name = name;
-        if (dynaBeanClass != null)
-            setDynaBeanClass(dynaBeanClass);
+        if (dynaBeanClass == null)
+            dynaBeanClass = BasicDynaBean.class;
+        setDynaBeanClass(dynaBeanClass);
         if (properties != null)
             setProperties(properties);
 
@@ -216,9 +217,15 @@ public class BasicDynaClass implements DynaClass {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     *
+     * @exception IllegalArgumentException if no property name is specified
      */
     public DynaProperty getPropertyDescriptor(String name) {
 
+        if (name == null) {
+            throw new IllegalArgumentException
+                ("No property name specified");
+        }
         return ((DynaProperty) propertiesMap.get(name));
 
     }
@@ -283,7 +290,7 @@ public class BasicDynaClass implements DynaClass {
             throw new IllegalArgumentException
                 ("Class " + dynaBeanClass.getName() +
                  " is an interface, not a class");
-        if (DynaBean.class.isAssignableFrom(dynaBeanClass))
+        if (!DynaBean.class.isAssignableFrom(dynaBeanClass))
             throw new IllegalArgumentException
                 ("Class " + dynaBeanClass.getName() +
                  " does not implement DynaBean");

@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.22 2002/01/05 00:31:54 craigmcc Exp $
+        $Id: build.xml,v 1.23 2002/01/06 06:01:08 craigmcc Exp $
 -->
 
 
@@ -214,6 +214,7 @@
 
 
   <target name="test"  depends="compile.tests,
+                                test.basic.dynabean,
                                 test.property,
                                 test.bean,
                                 test.method
@@ -222,7 +223,16 @@
   </target>
 
 
-  <target name="test.property">
+  <target name="test.basic.dynabean" depends="compile.tests">
+    <echo message="Running BasicDynaBean tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.BasicDynaBeanTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+  <target name="test.property" depends="compile.tests">
     <echo message="Running PropertyUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
@@ -231,7 +241,7 @@
     </java>
   </target>
 
- <target name="test.bean">
+ <target name="test.bean" depends="compile.tests">
     <echo message="Running BeanUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
@@ -240,7 +250,7 @@
     </java>
   </target>
 
-  <target name="test.method">
+  <target name="test.method" depends="compile.tests">
     <echo message="Running MethodUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">

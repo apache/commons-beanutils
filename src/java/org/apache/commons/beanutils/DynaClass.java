@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.5 2002/01/06 00:47:06 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/06 00:47:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.6 2002/01/06 06:01:08 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/01/06 06:01:08 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.beans.PropertyDescriptor;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.5 $ $Date: 2002/01/06 00:47:06 $
+ * @version $Revision: 1.6 $ $Date: 2002/01/06 06:01:08 $
  */
 
 public interface DynaClass {
@@ -97,6 +97,8 @@ public interface DynaClass {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     *
+     * @exception IllegalArgumentException if no property name is specified
      */
     public DynaProperty getPropertyDescriptor(String name);
 
