@@ -1,4 +1,52 @@
-$Id: RELEASE-NOTES.txt,v 1.9 2003/01/15 21:57:29 rdonkin Exp $
+$Id: RELEASE-NOTES.txt,v 1.10 2003/02/17 21:25:33 rdonkin Exp $
+
+
+                          Commons BeanUtils Package
+                                Version 1.6.1
+                               Release Notes
+
+INTRODUCTION:
+============
+
+Beanutils 1.6.1 is a bug fix release. 
+The 1.6 release notes can be found at the bottom of this document.
+
+CHANGES:
+========
+
+The ConstructorUtils java docs have been improved.
+
+ConvertingWrapDynaBean
+----------------------
+
+Use BeanUtils.copyProperty() intead of BeanUtils.setProperty() so that
+Object->Object conversions -- via registered Converters, if any, are done.
+
+BeanUtils
+---------
+
+Enhance BeanUtils.copyProperty() to deal with about 80% of the use cases for
+copying indexed, mapped, and nested properties with type conversions.  The
+remaining restrictions are documented in the Javadocs for this method.
+
+This is a partial response to Bugzilla #16525, which documents some
+restrictions in the functionality of copyProperty() that leads people
+to try setProperty() instead -- which they should not do.
+
+It is much more conservative than the proposed patch, which (as the reporter
+acknowledges) is more appropriate in a minor update (1.7) versus a bugfix
+patch (1.6.1) which is currently contemplated.
+
+BUG REPORTS ADDRESSED:
+=====================
+
+16854 ResultSetDynaClass misspelled ResutSetDynaClass
+16525 (partial) BeanUtils.setProperty is over-zealous at converting types
+
+
+
+
+
 
                           Commons BeanUtils Package
                                 Version 1.6
