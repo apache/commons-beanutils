@@ -112,10 +112,10 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param arg use this argument
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeMethod(
@@ -149,10 +149,10 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param args use these arguments
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeMethod(
@@ -189,10 +189,10 @@ public class MethodUtils {
      * @param args use these arguments
      * @param parameterTypes match these parameters
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeMethod(
@@ -229,10 +229,10 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param arg use this argument
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeExactMethod(
@@ -261,10 +261,10 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param args use these arguments
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeExactMethod(
@@ -298,10 +298,10 @@ public class MethodUtils {
      * @param args use these arguments
      * @param parameterTypes match these parameters
      *
-     * @throw NoSuchMethodException if there is no such accessible method
-     * @throw InvocationTargetException wraps an exception thrown by the
+     * @throws NoSuchMethodException if there is no such accessible method
+     * @throws InvocationTargetException wraps an exception thrown by the
      *  method invoked
-     * @throw IllegalAccessException if the requested method is not accessible
+     * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
      */
     public static Object invokeExactMethod(

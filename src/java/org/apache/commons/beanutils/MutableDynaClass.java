@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MutableDynaClass.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MutableDynaClass.java,v 1.4 2002/03/24 09:15:25 dion Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/03/24 09:15:25 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ package org.apache.commons.beanutils;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.4 $ $Date: 2002/03/24 09:15:25 $
  */
 
 public interface MutableDynaClass extends DynaClass {
@@ -132,7 +132,7 @@ public interface MutableDynaClass extends DynaClass {
 
 
     /**
-     * Is this DynaClass currently restricted?  If so, no changes to the
+     * Is this DynaClass currently restricted, if so, no changes to the
      * existing registration of property names, data types, readability, or
      * writeability are allowed.
      */

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.2 2002/01/09 19:27:30 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/09 19:27:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.3 2002/03/24 09:15:03 dion Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/03/24 09:15:03 $
  *
  * ====================================================================
  *
@@ -71,7 +71,7 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/09 19:27:30 $
+ * @version $Revision: 1.3 $ $Date: 2002/03/24 09:15:03 $
  */
 
 public class DynaProperty {
@@ -135,7 +135,7 @@ public class DynaProperty {
 
 
     /**
-     * Does this property represent an indexed value (i.e. an array or List)?
+     * Does this property represent an indexed value (ie an array or List)?
      */
     public boolean isIndexed() {
 
@@ -153,7 +153,7 @@ public class DynaProperty {
 
 
     /**
-     * Does this property represent a mapped value (i.e. a Map)?
+     * Does this property represent a mapped value (ie a Map)?
      */
     public boolean isMapped() {
 
