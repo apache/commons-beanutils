@@ -299,6 +299,46 @@ public class MethodUtilsTestCase extends TestCase {
         }
     }
 
+    
+    /**
+     * <p> Test <code>invokeMethod</code> with a primitive.
+     */
+    public void testInvokeMethodWithPrimitives() throws Exception {
+        // first test that the bean works 
+        PrimitiveBean bean = new PrimitiveBean();
+        bean.setFloat(20.0f);
+        bean.setLong(10l);
+        bean.setBoolean(true);
+        bean.setInt(12);
+        bean.setDouble(25.5d);
+        
+        assertEquals("Bug in PrimitiveBean (1)", 20.0f, bean.getFloat(), 0.01f);
+        assertEquals("Bug in PrimitiveBean (2)", 10, bean.getLong());
+        assertEquals("Bug in PrimitiveBean (3)", true, bean.getBoolean());
+        assertEquals("Bug in PrimitiveBean (4)", 12, bean.getInt());
+        assertEquals("Bug in PrimitiveBean (5)", 25.5d, bean.getDouble(), 0.01f);
+        
+        bean = new PrimitiveBean();
+        MethodUtils.invokeMethod(bean, "setBoolean", new Boolean(true));
+        assertEquals("Call boolean property using invokeMethod", true, bean.getBoolean());
+
+        bean = new PrimitiveBean();
+        MethodUtils.invokeMethod(bean, "setFloat", new Float(20.0f));
+        assertEquals("Call float property using invokeMethod", 20.0f, bean.getFloat(), 0.01f);
+        
+        bean = new PrimitiveBean();
+        MethodUtils.invokeMethod(bean, "setLong", new Long(10));
+        assertEquals("Call float property using invokeMethod", 10, bean.getLong());
+        
+        bean = new PrimitiveBean();
+        MethodUtils.invokeMethod(bean, "setInt", new Integer(12));
+        assertEquals("Set float property using invokeMethod", 12, bean.getInt());
+        
+        bean = new PrimitiveBean();
+        MethodUtils.invokeMethod(bean, "setDouble", new Double(25.5d));
+        assertEquals("Set float property using invokeMethod", 25.5d, bean.getDouble(), 0.01d);
+    }
+
 
     /**
      * Simple tests for accessing static methods via invokeMethod().

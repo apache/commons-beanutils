@@ -104,6 +104,10 @@ public class MethodUtils {
      * It loops through all methods with names that match
      * and then executes the first it finds with compatable parameters.</p>
      *
+     * <p>This method supports calls to methods taking primitive parameters 
+     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
+     * would match a <code>boolean</code> primitive.</p>
+     *
      * <p> This is a convenient wrapper for
      * {@link #invokeMethod(Object object,String methodName,Object [] args)}.
      * </p>
@@ -140,6 +144,10 @@ public class MethodUtils {
      * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. 
      * It loops through all methods with names that match
      * and then executes the first it finds with compatable parameters.</p>
+     *
+     * <p>This method supports calls to methods taking primitive parameters 
+     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
+     * would match a <code>boolean</code> primitive.</p>
      *
      * <p> This is a convenient wrapper for
      * {@link #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
@@ -182,6 +190,10 @@ public class MethodUtils {
      * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}. 
      * It loops through all methods with names that match
      * and then executes the first it finds with compatable parameters.</p>
+     *
+     * <p>This method supports calls to methods taking primitive parameters 
+     * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
+     * would match a <code>boolean</code> primitive.</p>
      *
      *
      * @param object invoke method on this object
@@ -488,6 +500,10 @@ public class MethodUtils {
      * {@link 
      * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      *
+     * <p>This method can match primitive parameter by passing in wrapper classes.
+     * For example, a <code>Boolean</code> will match a primitive <code>boolean</code>
+     * parameter.
+     *
      * @param clazz find method in this class
      * @param methodName find method with this name
      * @param parameterTypes find method with compatible parameters 
@@ -522,7 +538,7 @@ public class MethodUtils {
                             log.trace("Param=" + parameterTypes[n].getName());
                             log.trace("Method=" + methodsParams[n].getName());
                         }
-                        if (!methodsParams[n].isAssignableFrom(parameterTypes[n])) {
+                        if (!isAssignmentCompatible(methodsParams[n], parameterTypes[n])) {
                             if (log.isTraceEnabled()) {
                                 log.trace(methodsParams[n] + " is not assignable from " 
                                             + parameterTypes[n]);
@@ -554,4 +570,50 @@ public class MethodUtils {
         return null;                                        
     }
 
+    /**
+     * <p>Determine whether a type can be used as a parameter in a method invocation.
+     * This method handles primitive conversions correctly.</p>
+     *
+     * <p>In order words, it will match a <code>Boolean</code> to a <code>boolean</code>,
+     * a <code>Long</code> to a <code>long</code>,
+     * a <code>Float</code> to a <code>float</code>,
+     * a <code>Integer</code> to a <code>int</code>,
+     * and a <code>Double</code> to a <code>double</code>.
+     * Now logic widening matches are allowed.
+     * For example, a <code>Long</code> will not match a <code>int</code>.
+     *
+     * @param parameterType the type of parameter accepted by the method
+     * @param parameterization the type of parameter being tested 
+     *
+     * @return true if the assignement is compatible.
+     */
+    private static final boolean isAssignmentCompatible(Class parameterType, Class parameterization) {
+        // try plain assignment
+        if (parameterType.isAssignableFrom(parameterization)) {
+            return true;
+        }
+        
+        if (parameterType.isPrimitive()) {
+            // does anyone know a better strategy than comparing names?
+            // also, this method does *not* do widening - you must specify exactly
+            // is this the right behaviour?
+            if (parameterType.getName().equals("boolean")) {
+                return Boolean.class.equals(parameterization);
+            }         
+            if (parameterType.getName().equals("float")) {
+                return Float.class.equals(parameterization);
+            }     
+            if (parameterType.getName().equals("long")) {
+                return Long.class.equals(parameterization);
+            }     
+            if (parameterType.getName().equals("int")) {
+                return Integer.class.equals(parameterization);
+            }                
+            if (parameterType.getName().equals("double")) {
+                return Double.class.equals(parameterization);
+            }               
+        }
+        
+        return false;
+    }
 }
