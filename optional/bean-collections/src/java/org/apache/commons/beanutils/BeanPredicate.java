@@ -22,18 +22,38 @@ import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * <p>Predicate implementation that applies the given <code>Predicate</code>
+ * to the result of calling the given property getter.
+ * </p>
+ */
 public class BeanPredicate implements Predicate {
    
     private final Log log = LogFactory.getLog(this.getClass());
-
+    
+    /** Name of the property whose value will be predicated */
     private String propertyName;
+    /** <code>Predicate</code> to be applied to the property value */
     private Predicate predicate;
 
+    /**
+     * Constructs a <code>BeanPredicate</code> that applies the given
+     * <code>Predicate</code> to the named property value.
+     * @param propertyName the name of the property whose value is to be predicated,
+     * not null
+     * @param predicate the <code>Predicate</code> to be applied,
+     * not null
+     */
     public BeanPredicate(String propertyName, Predicate predicate) {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
 
+    /**
+     * Evaluates the given object by applying the {@link #getPredicate()}
+     * to a property value named by {@link #getPropertyName()}.
+     * @throws IllegalAccessException when the property cannot be evaluated
+     */
     public boolean evaluate(Object object) {
        
         boolean evaluation = false;
@@ -62,18 +82,38 @@ public class BeanPredicate implements Predicate {
         return evaluation;
     }
 
+    /**
+     * Gets the name of the property whose value is to be predicated.
+     * in the evaluation.
+     * @return the property name, not null
+     */ 
     public String getPropertyName() {
         return propertyName;
     }
 
+    /** 
+     * Sets the name of the property whose value is to be predicated.
+     * @param propertyName the name of the property whose value is to be predicated,
+     * not null
+     */
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
     }
 
+    /**
+     * Gets the <code>Predicate</code> to be applied to the value of the named property
+     * during {@link #evaluate}.
+     * @return <code>Predicate</code>, not null
+     */
     public Predicate getPredicate() {
         return predicate;
     }
 
+    /** 
+     * Sets the <code>Predicate</code> to be applied to the value of the named property
+     * during {@link evaluate}.
+     * @param predicate <code>Predicate</code>, not null
+     */
     public void setPredicate(Predicate predicate) {
         this.predicate = predicate;
     }
