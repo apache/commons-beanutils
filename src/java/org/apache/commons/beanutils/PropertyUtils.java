@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.8 2001/08/21 23:05:08 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2001/08/21 23:05:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.9 2001/09/03 18:01:08 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2001/09/03 18:01:08 $
  *
  * ====================================================================
  *
@@ -126,7 +126,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.8 $ $Date: 2001/08/21 23:05:08 $
+ * @version $Revision: 1.9 $ $Date: 2001/09/03 18:01:08 $
  */
 
 public class PropertyUtils {
@@ -186,7 +186,9 @@ public class PropertyUtils {
 
     /**
      * The cache of PropertyDescriptor arrays for beans we have already
-     * introspected, keyed by the fully qualified class name of this object.
+     * introspected.  The key for each entry is the class loader from which
+     * the corresponding bean was loaded, and the value is a Map containing
+     * the arrays of PropertyDescriptor objects, keyed by class name.
      */
     private static FastHashMap descriptorsCache = null;
     private static FastHashMap mappedDescriptorsCache = null;
@@ -199,6 +201,37 @@ public class PropertyUtils {
 
 
     // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Clear any cached property descriptor information for all classes loaded
+     * by all class loaders.  This is useful in environments where multiple
+     * class loaders are used, and class reloading is supported (by throwing
+     * away a class loader instance).
+     */
+    public static void clearDescriptors() {
+
+        descriptorsCache.clear();
+        mappedDescriptorsCache.clear();
+
+    }
+
+
+    /**
+     * Clear any cached property descriptor information for classes loaded by
+     * the specified class loader.  This is useful in environments where
+     * multiple class loaders are used, and class reloading is supported (by
+     * throwing away a class loader instance).
+     *
+     * @param classLoader The class loader for which descriptor information
+     *  should be cleared
+     */
+    public static void clearDescriptors(ClassLoader classLoader) {
+
+        descriptorsCache.remove(classLoader);
+        mappedDescriptorsCache.remove(classLoader);
+
+    }
 
 
     /**
@@ -513,11 +546,16 @@ public class PropertyUtils {
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 
         if (bean == null)
-            return null;
+            return (null);
 
         // Look up any cached descriptors for this bean class
+        Object classLoader = bean.getClass().getClassLoader();
+        FastHashMap map =
+            (FastHashMap) mappedDescriptorsCache.get(classLoader);
+        if (map == null)
+            return (null);
         String beanClassName = bean.getClass().getName();
-        return (FastHashMap) mappedDescriptorsCache.get(beanClassName);
+        return ((FastHashMap) map.get(beanClassName));
 
     }
 
@@ -747,8 +785,15 @@ public class PropertyUtils {
             if (mappedDescriptors==null) {
                 mappedDescriptors = new FastHashMap();
                 mappedDescriptors.setFast(true);
-                mappedDescriptorsCache.put
-                    (bean.getClass().getName(), mappedDescriptors);
+                ClassLoader classLoader = bean.getClass().getClassLoader();
+                FastHashMap map =
+                    (FastHashMap) mappedDescriptorsCache.get(classLoader);
+                if (map == null) {
+                    map = new FastHashMap();
+                    map.setFast(true);
+                    mappedDescriptorsCache.put(classLoader, map);
+                }
+                map.put(bean.getClass().getName(), mappedDescriptors);
             }
             mappedDescriptors.put(name, result);
         }
@@ -771,10 +816,17 @@ public class PropertyUtils {
             throw new IllegalArgumentException("No bean specified");
 
 	// Look up any cached descriptors for this bean class
+        ClassLoader classLoader = bean.getClass().getClassLoader();
+        FastHashMap map = (FastHashMap)descriptorsCache.get(classLoader);
+        if (map == null) {
+            map = new FastHashMap();
+            map.setFast(true);
+            descriptorsCache.put(classLoader, map);
+        }
 	String beanClassName = bean.getClass().getName();
 	PropertyDescriptor descriptors[] = null;
         descriptors =
-            (PropertyDescriptor[]) descriptorsCache.get(beanClassName);
+            (PropertyDescriptor[]) map.get(beanClassName);
 	if (descriptors != null)
 	    return (descriptors);
 
@@ -788,7 +840,7 @@ public class PropertyUtils {
 	descriptors = beanInfo.getPropertyDescriptors();
 	if (descriptors == null)
 	    descriptors = new PropertyDescriptor[0];
-        descriptorsCache.put(beanClassName, descriptors);
+        map.put(beanClassName, descriptors);
 	return (descriptors);
 
     }
