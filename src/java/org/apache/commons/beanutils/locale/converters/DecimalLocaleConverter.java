@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.1 2002/09/03 21:34:20 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2002/09/03 21:34:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.2 2003/01/11 22:06:23 martinc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/01/11 22:06:23 $
  *
  * ====================================================================
  *
