@@ -641,7 +641,7 @@ public class MethodUtils {
                                 // log but continue just in case the method.invoke works anyway
                                 if (!loggedAccessibleWarning) {
                                     log.warn(
-            "Cannot use JVM pre-1.4 access bug workaround die to restrictive security manager.");
+            "Cannot use JVM pre-1.4 access bug workaround due to restrictive security manager.");
                                     loggedAccessibleWarning = true;
                                 }
                                 log.debug(
