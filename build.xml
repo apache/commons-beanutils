@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.17 2001/09/22 17:54:55 craigmcc Exp $
+        $Id: build.xml,v 1.18 2001/12/15 19:19:24 craigmcc Exp $
 -->
 
 
@@ -208,7 +208,8 @@
 
   <target name="test"  depends="compile.tests,
                                 test.property,
-                                test.bean
+                                test.bean,
+                                test.method
                                "
    description="Run all unit test cases">
   </target>
@@ -232,7 +233,14 @@
     </java>
   </target>
 
-
+  <target name="test.method">
+    <echo message="Running MethodUtils tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.MethodUtilsTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
 
 
 </project>

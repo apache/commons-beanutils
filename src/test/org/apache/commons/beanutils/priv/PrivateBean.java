@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBean.java,v 1.1 2001/05/07 02:09:02 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/05/07 02:09:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBean.java,v 1.2 2001/12/15 19:19:24 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/12/15 19:19:24 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ package org.apache.commons.beanutils.priv;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/05/07 02:09:02 $
+ * @version $Revision: 1.2 $ $Date: 2001/12/15 19:19:24 $
  */
 
 class PrivateBean implements PrivateDirect {
@@ -121,6 +121,16 @@ class PrivateBean implements PrivateDirect {
 
 
     /**
+     * A method accessible via a directly implemented interface.
+     */
+    public String methodBar(String in) {
+
+        return (in);
+
+    }
+
+
+    /**
      * A property accessible via an indirectly implemented interface.
      */
     private String baz = "This is baz";
@@ -131,6 +141,15 @@ class PrivateBean implements PrivateDirect {
 
     }
 
+
+    /**
+     * A method accessible via an indirectly implemented interface.
+     */
+    public String methodBaz(String in) {
+
+        return (in);
+
+    }
 
 
 }

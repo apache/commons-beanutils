@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateDirect.java,v 1.1 2001/05/07 02:09:02 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/05/07 02:09:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateDirect.java,v 1.2 2001/12/15 19:19:24 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/12/15 19:19:24 $
  *
  * ====================================================================
  *
@@ -67,7 +67,7 @@ package org.apache.commons.beanutils.priv;
  * Interface that is directly implemented by PrivateBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/05/07 02:09:02 $
+ * @version $Revision: 1.2 $ $Date: 2001/12/15 19:19:24 $
  */
 
 public interface PrivateDirect extends PrivateIndirect {
@@ -81,5 +81,10 @@ public interface PrivateDirect extends PrivateIndirect {
      */
     String getBar();
 
+
+    /**
+     * A method accessible via a directly implemented interface.
+     */
+    String methodBar(String in);
 
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.14 2001/10/14 01:15:07 craigmcc Exp $
- * $Revision: 1.14 $
- * $Date: 2001/10/14 01:15:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.15 2001/12/15 19:19:24 craigmcc Exp $
+ * $Revision: 1.15 $
+ * $Date: 2001/12/15 19:19:24 $
  *
  * ====================================================================
  *
@@ -128,7 +128,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Rey François
  * @author Gregor Raýman
  * @author Jan Sorensen
- * @version $Revision: 1.14 $ $Date: 2001/10/14 01:15:07 $
+ * @version $Revision: 1.15 $ $Date: 2001/12/15 19:19:24 $
  */
 
 public class PropertyUtils {
@@ -908,7 +908,7 @@ public class PropertyUtils {
      */
     public static Method getReadMethod(PropertyDescriptor descriptor) {
 
-        return (getAccessibleMethod(descriptor.getReadMethod()));
+        return (MethodUtils.getAccessibleMethod(descriptor.getReadMethod()));
 
     }
 
@@ -977,7 +977,7 @@ public class PropertyUtils {
      */
     public static Method getWriteMethod(PropertyDescriptor descriptor) {
 
-        return (getAccessibleMethod(descriptor.getWriteMethod()));
+        return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));
 
     }
 
@@ -1385,126 +1385,6 @@ public class PropertyUtils {
 	Object values[] = new Object[1];
 	values[0] = value;
 	writeMethod.invoke(bean, values);
-
-    }
-
-
-    // -------------------------------------------------------- Private Methods
-
-
-    /**
-     * Return an accessible method (that is, one that can be invoked via
-     * reflection) that implements the specified Method.  If no such method
-     * can be found, return <code>null</code>.
-     *
-     * @param method The method that we wish to call
-     */
-    private static Method getAccessibleMethod(Method method) {
-
-        // Make sure we have a method to check
-        if (method == null) {
-            return (null);
-        }
-
-        // If the requested method is not public we cannot call it
-        if (!Modifier.isPublic(method.getModifiers())) {
-            return (null);
-        }
-
-        // If the declaring class is public, we are done
-        Class clazz = method.getDeclaringClass();
-        if (Modifier.isPublic(clazz.getModifiers())) {
-            return (method);
-        }
-
-        // Check the implemented interfaces and subinterfaces
-        String methodName = method.getName();
-        Class[] parameterTypes = method.getParameterTypes();
-        method =
-            getAccessibleMethodFromInterfaceNest(clazz,
-                                                 method.getName(),
-                                                 method.getParameterTypes());
-        return (method);
-
-        /*
-        Class[] interfaces = clazz.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-            // Is this interface public?
-            if (!Modifier.isPublic(interfaces[i].getModifiers())) {
-                continue;
-            }
-            // Does the method exist on this interface?
-            try {
-                method = interfaces[i].getDeclaredMethod(methodName,
-                                                         parameterTypes);
-            } catch (NoSuchMethodException e) {
-                continue;
-            }
-            // We have found what we are looking for
-            return (method);
-        }
-
-        // We are out of luck
-        return (null);
-        */
-
-    }
-
-
-    /**
-     * Return an accessible method (that is, one that can be invoked via
-     * reflection) that implements the specified method, by scanning through
-     * all implemented interfaces and subinterfaces.  If no such Method
-     * can be found, return <code>null</code>.
-     *
-     * @param clazz Parent class for the interfaces to be checked
-     * @param methodName Method name of the method we wish to call
-     * @param parameterTypes The parameter type signatures
-     */
-    private static Method getAccessibleMethodFromInterfaceNest
-        (Class clazz, String methodName, Class parameterTypes[]) {
-
-        Method method = null;
-
-        // Search up the superclass chain
-        for ( ; clazz != null; clazz = clazz.getSuperclass()) {
-
-            // Check the implemented interfaces of the parent class
-            Class interfaces[] = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
-
-                // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers()))
-                    continue;
-
-                // Does the method exist on this interface?
-                try {
-                    method = interfaces[i].getDeclaredMethod(methodName,
-                                                             parameterTypes);
-                } catch (NoSuchMethodException e) {
-                    ;
-                }
-                if (method != null)
-                    break;
-
-                // Recursively check our parent interfaces
-                method =
-                    getAccessibleMethodFromInterfaceNest(interfaces[i],
-                                                         methodName,
-                                                         parameterTypes);
-                if (method != null)
-                    break;
-
-            }
-
-        }
-
-        // If we found a method return it
-        if (method != null)
-            return (method);
-
-        // We did not find anything
-        return (null);
 
     }
 
