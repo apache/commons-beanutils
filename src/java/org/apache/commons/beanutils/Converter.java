@@ -21,7 +21,15 @@ package org.apache.commons.beanutils;
 /**
  * <p>General purpose data type converter that can be registered and used
  * within the BeanUtils package to manage the conversion of objects from
- * one type to another.
+ * one type to another.</p>
+ *
+ * <p>Converter subclasses bundled with the BeanUtils library are required
+ * to be thread-safe, as users of the library may call conversion methods
+ * from more than one thread simultaneously.</p>
+ *
+ * <p>Custom converter subclasses created by users of the library can be
+ * non-thread-safe if the application using them is single-threaded. However
+ * it is recommended that they be written in a thread-safe manner anyway.</p> 
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
