@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.10 2001/09/03 17:34:36 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2001/09/03 17:34:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.11 2001/10/14 01:15:07 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2001/10/14 01:15:07 $
  *
  * ====================================================================
  *
@@ -99,7 +99,8 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2001/09/03 17:34:36 $
+ * @author Jan Sorensen
+ * @version $Revision: 1.11 $ $Date: 2001/10/14 01:15:07 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -154,6 +155,12 @@ public class PropertyUtilsTestCase extends TestCase {
      * The test bean for private access tests.
      */
     protected PrivateDirect beanPrivate = null;
+
+
+    /**
+     * The test bean for private access tests of subclasses.
+     */
+    protected PrivateDirect beanPrivateSubclass = null;
 
 
     /**
@@ -213,6 +220,7 @@ public class PropertyUtilsTestCase extends TestCase {
         bean = new TestBean();
         beanPackageSubclass = new TestBeanPackageSubclass();
         beanPrivate = PrivateBeanFactory.create();
+        beanPrivateSubclass = PrivateBeanFactory.createSubclass();
         beanPublicSubclass = new TestBeanPublicSubclass();
 
     }
@@ -236,6 +244,7 @@ public class PropertyUtilsTestCase extends TestCase {
         bean = null;
         beanPackageSubclass = null;
         beanPrivate = null;
+        beanPrivateSubclass = null;
         beanPublicSubclass = null;
 
     }
@@ -1217,6 +1226,16 @@ public class PropertyUtilsTestCase extends TestCase {
                           new String[] { "bar" },
                           PRIVATE_DIRECT_CLASS);
         testGetReadMethod(beanPrivate,
+                          new String[] { "baz" },
+                          PRIVATE_INDIRECT_CLASS);
+
+        // Properties "bar" and "baz" are visible via implemented interfaces
+        // (one direct and one indirect).  The interface is implemented in
+        // a superclass
+        testGetReadMethod(beanPrivateSubclass,
+                          new String[] { "bar" },
+                          PRIVATE_DIRECT_CLASS);
+        testGetReadMethod(beanPrivateSubclass,
                           new String[] { "baz" },
                           PRIVATE_INDIRECT_CLASS);
 

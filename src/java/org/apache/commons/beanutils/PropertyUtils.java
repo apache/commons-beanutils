@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.13 2001/09/22 17:40:17 craigmcc Exp $
- * $Revision: 1.13 $
- * $Date: 2001/09/22 17:40:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.14 2001/10/14 01:15:07 craigmcc Exp $
+ * $Revision: 1.14 $
+ * $Date: 2001/10/14 01:15:07 $
  *
  * ====================================================================
  *
@@ -127,7 +127,8 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.13 $ $Date: 2001/09/22 17:40:17 $
+ * @author Jan Sorensen
+ * @version $Revision: 1.14 $ $Date: 2001/10/14 01:15:07 $
  */
 
 public class PropertyUtils {
@@ -1465,36 +1466,45 @@ public class PropertyUtils {
 
         Method method = null;
 
-        // Check the implemented interfaces of the parent class
-        Class interfaces[] = clazz.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
+        // Search up the superclass chain
+        for ( ; clazz != null; clazz = clazz.getSuperclass()) {
 
-            // Is this interface public?
-            if (!Modifier.isPublic(interfaces[i].getModifiers()))
-                continue;
+            // Check the implemented interfaces of the parent class
+            Class interfaces[] = clazz.getInterfaces();
+            for (int i = 0; i < interfaces.length; i++) {
 
-            // Does the method exist on this interface?
-            try {
-                method = interfaces[i].getDeclaredMethod(methodName,
+                // Is this interface public?
+                if (!Modifier.isPublic(interfaces[i].getModifiers()))
+                    continue;
+
+                // Does the method exist on this interface?
+                try {
+                    method = interfaces[i].getDeclaredMethod(methodName,
+                                                             parameterTypes);
+                } catch (NoSuchMethodException e) {
+                    ;
+                }
+                if (method != null)
+                    break;
+
+                // Recursively check our parent interfaces
+                method =
+                    getAccessibleMethodFromInterfaceNest(interfaces[i],
+                                                         methodName,
                                                          parameterTypes);
-            } catch (NoSuchMethodException e) {
-                ;
-            }
-            if (method != null)
-                break;
+                if (method != null)
+                    break;
 
-            // Recursively check our parent interfaces
-            method =
-                getAccessibleMethodFromInterfaceNest(interfaces[i],
-                                                     methodName,
-                                                     parameterTypes);
-            if (method != null)
-                break;
+            }
 
         }
 
-        // Return whatever we have found
-        return (method);
+        // If we found a method return it
+        if (method != null)
+            return (method);
+
+        // We did not find anything
+        return (null);
 
     }
 

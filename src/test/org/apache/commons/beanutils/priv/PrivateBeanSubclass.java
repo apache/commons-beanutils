@@ -1,6 +1,6 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBeanFactory.java,v 1.2 2001/10/14 01:15:07 craigmcc Exp $
- * $Revision: 1.2 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateBeanSubclass.java,v 1.1 2001/10/14 01:15:07 craigmcc Exp $
+ * $Revision: 1.1 $
  * $Date: 2001/10/14 01:15:07 $
  *
  * ====================================================================
@@ -64,32 +64,38 @@ package org.apache.commons.beanutils.priv;
 
 
 /**
- * Factory class for PrivateBean instances.
+ * Bean that exposes methods defined by an interface that is implemented
+ * in the superclass.
  *
- * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.2 $ $Date: 2001/10/14 01:15:07 $
+ * @version $Revision: 1.1 $ $Date: 2001/10/14 01:15:07 $
  */
 
-public class PrivateBeanFactory {
+class PrivateBeanSubclass extends PrivateBean {
+
+
+    // ----------------------------------------------------------- Constructors
 
 
     /**
-     * Factory method to create new beans.
+     * Create a new PrivateBeanSubclass instance.
      */
-    public static PrivateDirect create() {
+    PrivateBeanSubclass() {
 
-        return (new PrivateBean());
+        super();
 
     }
 
 
-    /**
-     * Factory method to create new beans.
-     */
-    public static PrivateDirect createSubclass() {
+    // ------------------------------------------------------------- Properties
 
-        return (new PrivateBeanSubclass());
+
+    /**
+     * A property accessible via the superclass.
+     */
+    public String getBar() {
+
+        return (super.getBar());
 
     }
 
