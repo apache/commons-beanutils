@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.3 2002/03/24 09:15:03 dion Exp $
- * $Revision: 1.3 $
- * $Date: 2002/03/24 09:15:03 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.4 2002/07/13 18:03:39 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/07/13 18:03:39 $
  *
  * ====================================================================
  *
@@ -63,6 +63,7 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -71,10 +72,10 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/03/24 09:15:03 $
+ * @version $Revision: 1.4 $ $Date: 2002/07/13 18:03:39 $
  */
 
-public class DynaProperty {
+public class DynaProperty implements Serializable {
 
 
     // ----------------------------------------------------------- Constructors
