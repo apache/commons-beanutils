@@ -29,6 +29,11 @@ import org.apache.commons.beanutils.Converter;
  * a specified default value or throws a {@link ConversionException} depending
  * on how this instance is constructed.</p>
  *
+ * <p>By default, the values to be converted are expected to be those
+ * recognised by a default instance of BooleanConverter. A customised
+ * BooleanConverter can be provided in order to recognise alternative values
+ * as true/false. </p>
+ *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.4
@@ -43,11 +48,14 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
     /**
      * Create a {@link Converter} that will throw a {@link ConversionException}
      * if a conversion error occurs.
+     *
+     * <p>Conversion of strings to boolean values will be done via a default
+     * instance of class BooleanConverter.</p>
      */
     public BooleanArrayConverter() {
 
-        this.defaultValue = null;
-        this.useDefault = false;
+        super();
+        this.booleanConverter = dfltBooleanConverter;
 
     }
 
@@ -56,37 +64,118 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * Create a {@link Converter} that will return the specified default value
      * if a conversion error occurs.
      *
+     * <p>Conversion of strings to boolean values will be done via a default
+     * instance of class BooleanConverter.</p>
+     *
      * @param defaultValue The default value to be returned
      */
     public BooleanArrayConverter(Object defaultValue) {
 
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
+        super(defaultValue);
+        this.booleanConverter = dfltBooleanConverter;
 
     }
 
 
+    /**
+     * Create a {@link Converter} that will return the specified default value
+     * if a conversion error occurs.
+     *
+     * <p>Conversion of strings to boolean values will be done via the
+     * specified converter.</p>
+     *
+     * @param converter is the converter object that will be used to
+     *  convert each input string-value into a boolean.
+     *
+     * @param defaultValue is the default value to be returned by method
+     * convert if conversion fails; null is a valid default value. See the
+     * documentation for method "convert" for more information.
+     * The value BooleanArrayConverter.NO_DEFAULT may be passed here to
+     * specify that an exception should be thrown on conversion failure.
+     *  
+     */
+    public BooleanArrayConverter(BooleanConverter converter, Object defaultValue) {
+
+        super(defaultValue);
+        this.booleanConverter = converter;
+
+    }
+
     // ------------------------------------------------------- Static Variables
 
+    /**
+     * Type which this class converts its input to. This value can be
+     * used as a parameter to the ConvertUtils.register method.
+     */
+    public static final Class MODEL = new boolean[0].getClass();
 
     /**
-     * <p>Model object for type comparisons.</p>
+     * The converter that all instances of this class will use to
+     * do individual string->boolean conversions, unless overridden
+     * in the constructor.
      */
-    private static boolean model[] = new boolean[0];
+    private static final BooleanConverter dfltBooleanConverter
+        = new BooleanConverter();
 
+    // ---------------------------------------------------- Instance Variables
+
+    /**
+     * This object is used to perform the conversion of individual strings
+     * into Boolean/boolean values.
+     */
+    protected final BooleanConverter booleanConverter;
 
     // --------------------------------------------------------- Public Methods
 
 
     /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * Convert the specified input object into an output object of type
+     * array-of-boolean.
+     * 
+     * <p>If the input value is null, then the default value specified in the
+     * constructor is returned. If no such value was provided, then a
+     * ConversionException is thrown instead.</p>
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
+     * <p>If the input value is of type String[] then the returned array shall
+     * be of the same size as this array, with a true or false value in each
+     * array element depending on the result of applying method
+     * BooleanConverter.convert to each string.</p>
+     *
+     * <p>For all other types of value, the object's toString method is
+     * expected to return a string containing a comma-separated list of
+     * values, eg "true, false, true". See the documentation for
+     * {@link AbstractArrayConverter#parseElements} for more information on
+     * the exact formats supported.</p>
+     *
+     * <p>If the result of value.toString() cannot be split into separate
+     * words, then the default value is also returned (or an exception thrown).
+     * </p>
+     *
+     * <p>If any of the elements in the value array (or the elements resulting
+     * from splitting up value.toString) are not recognised by the
+     * BooleanConverter associated with this object, then what happens depends
+     * on whether that BooleanConverter has a default value or not: if it does, 
+     * then that unrecognised element is converted into the BooleanConverter's
+     * default value. If the BooleanConverter does <i>not</i> have a default
+     * value, then the default value for this object is returned as the
+     * <i>complete</i> conversion result (not just for the element), or an 
+     * exception is thrown if this object has no default value defined.</p>
+     *
+     * @param type is the type to which this value should be converted. In the
+     *  case of this BooleanArrayConverter class, this value is ignored.
+     *
+     * @param value is the input value to be converted.
+     *
+     * @return an object of type boolean[], or the default value if there was
+     *  any sort of error during conversion and the constructor
+     *  was provided with a default value.
      *
      * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     *  successfully and the constructor was not provided with a default
+     *  value to return on conversion failure.
+     *
+     * @exception NullPointerException if value is an array, and any of the
+     * array elements are null.
      */
     public Object convert(Class type, Object value) {
 
@@ -100,36 +189,22 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         }
 
         // Deal with the no-conversion-needed case
-        if (model.getClass() == value.getClass()) {
+        if (MODEL == value.getClass()) {
             return (value);
         }
 
         // Deal with input value as a String array
+        //
+        // TODO: use if (value.getClass().isArray() instead...
+        //  this requires casting to Object[], then using values[i].toString()
         if (strings.getClass() == value.getClass()) {
             try {
                 String values[] = (String[]) value;
                 boolean results[] = new boolean[values.length];
                 for (int i = 0; i < values.length; i++) {
                     String stringValue = values[i];
-                    if (stringValue.equalsIgnoreCase("yes") ||
-                        stringValue.equalsIgnoreCase("y") ||
-                        stringValue.equalsIgnoreCase("true") ||
-                        stringValue.equalsIgnoreCase("on") ||
-                        stringValue.equalsIgnoreCase("1")) {
-                        results[i] = true;
-                    } else if (stringValue.equalsIgnoreCase("no") ||
-                               stringValue.equalsIgnoreCase("n") ||
-                               stringValue.equalsIgnoreCase("false") ||
-                               stringValue.equalsIgnoreCase("off") ||
-                               stringValue.equalsIgnoreCase("0")) {
-                        results[i] = false;
-                    } else {
-                        if (useDefault) {
-                            return (defaultValue);
-                        } else {
-                            throw new ConversionException(value.toString());
-                        }
-                    }
+                    Object result = booleanConverter.convert(Boolean.class, stringValue);
+                    results[i] = ((Boolean) result).booleanValue();
                 }
                 return (results);
             } catch (Exception e) {
@@ -141,32 +216,17 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
             }
         }
 
-        // Parse the input value as a String into elements
-        // and convert to the appropriate type
+        // We only get here if the input value is not of type String[].
+        // In this case, we assume value.toString() returns a comma-separated
+        // sequence of values; see method AbstractArrayConverter.parseElements
+        // for more information.
         try {
             List list = parseElements(value.toString());
             boolean results[] = new boolean[list.size()];
             for (int i = 0; i < results.length; i++) {
                 String stringValue = (String) list.get(i);
-                if (stringValue.equalsIgnoreCase("yes") ||
-                    stringValue.equalsIgnoreCase("y") ||
-                    stringValue.equalsIgnoreCase("true") ||
-                    stringValue.equalsIgnoreCase("on") ||
-                    stringValue.equalsIgnoreCase("1")) {
-                    results[i] = true;
-                } else if (stringValue.equalsIgnoreCase("no") ||
-                           stringValue.equalsIgnoreCase("n") ||
-                           stringValue.equalsIgnoreCase("false") ||
-                           stringValue.equalsIgnoreCase("off") ||
-                           stringValue.equalsIgnoreCase("0")) {
-                    results[i] = false;
-                } else {
-                    if (useDefault) {
-                        return (defaultValue);
-                    } else {
-                        throw new ConversionException(value.toString());
-                    }
-                }
+                Object result = booleanConverter.convert(Boolean.class, stringValue);
+                results[i] = ((Boolean) result).booleanValue();
             }
             return (results);
         } catch (Exception e) {
