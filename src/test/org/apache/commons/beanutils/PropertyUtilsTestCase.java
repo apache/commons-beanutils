@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.26 2002/10/27 16:50:18 rdonkin Exp $
- * $Revision: 1.26 $
- * $Date: 2002/10/27 16:50:18 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.27 2002/10/29 20:27:53 craigmcc Exp $
+ * $Revision: 1.27 $
+ * $Date: 2002/10/29 20:27:53 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.26 $ $Date: 2002/10/27 16:50:18 $
+ * @version $Revision: 1.27 $ $Date: 2002/10/29 20:27:53 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -1542,6 +1542,8 @@ public class PropertyUtilsTestCase extends TestCase {
         String stringArray[] = new String[0];
 
         try {
+
+            // Scalar and Indexed Properties
             clazz = PropertyUtils.getPropertyType(bean, "booleanProperty");
             assertEquals("booleanProperty type", Boolean.TYPE, clazz);
             clazz = PropertyUtils.getPropertyType(bean, "booleanSecond");
@@ -1578,6 +1580,45 @@ public class PropertyUtilsTestCase extends TestCase {
             assertEquals("stringProperty type", String.class, clazz);
             clazz = PropertyUtils.getPropertyType(bean, "writeOnlyProperty");
             assertEquals("writeOnlyProperty type", String.class, clazz);
+
+            // Nested Properties
+            clazz = PropertyUtils.getPropertyType(bean, "nested.booleanProperty");
+            assertEquals("booleanProperty type", Boolean.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.booleanSecond");
+            assertEquals("booleanSecond type", Boolean.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.doubleProperty");
+            assertEquals("doubleProperty type", Double.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.dupProperty");
+            assertEquals("dupProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.floatProperty");
+            assertEquals("floatProperty type", Float.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.intArray");
+            assertEquals("intArray type", intArray.getClass(), clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.intIndexed");
+            assertEquals("intIndexed type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.intProperty");
+            assertEquals("intProperty type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.listIndexed");
+            assertEquals("listIndexed type", List.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.longProperty");
+            assertEquals("longProperty type", Long.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.mappedProperty");
+            assertEquals("mappedProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.mappedIntProperty");
+            assertEquals("mappedIntProperty type", Integer.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.readOnlyProperty");
+            assertEquals("readOnlyProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.shortProperty");
+            assertEquals("shortProperty type", Short.TYPE, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.stringArray");
+            assertEquals("stringArray type", stringArray.getClass(), clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.stringIndexed");
+            assertEquals("stringIndexed type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.stringProperty");
+            assertEquals("stringProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nested.writeOnlyProperty");
+            assertEquals("writeOnlyProperty type", String.class, clazz);
+
         } catch (Exception e) {
             fail("Exception: " + e.getMessage());
         }
