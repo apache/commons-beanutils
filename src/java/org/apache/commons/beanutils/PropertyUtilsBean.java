@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.4 2003/03/20 20:12:24 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/03/20 20:12:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.5 2003/05/06 10:24:00 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/05/06 10:24:00 $
  *
  * ====================================================================
  *
@@ -134,7 +134,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.4 $ $Date: 2003/03/20 20:12:24 $
+ * @version $Revision: 1.5 $ $Date: 2003/05/06 10:24:00 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -143,9 +143,8 @@ public class PropertyUtilsBean {
 
     // --------------------------------------------------------- Class Methods
     
-    private static final PropertyUtilsBean singleton = new PropertyUtilsBean();
     protected static PropertyUtilsBean getInstance() {
-        return singleton;
+        return BeanUtilsBean.getInstance().getPropertyUtils();
     }	
 
     // --------------------------------------------------------- Variables
