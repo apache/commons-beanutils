@@ -197,7 +197,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      */
     public ByteLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
-        super(defaultValue, locale, pattern);
+        super(defaultValue, locale, pattern, locPattern);
     }
 
     /**

@@ -20,7 +20,19 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.ByteLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.DoubleLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTestCase;
+import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCase;
+//import org.apache.commons.beanutils.locale.converters.SqlDateLocaleConverterTestCase;
+//import org.apache.commons.beanutils.locale.converters.SqlTimeLocaleConverterTestCase;
+//import org.apache.commons.beanutils.locale.converters.SqlTimestampLocaleConverterTestCase;
+//import org.apache.commons.beanutils.locale.converters.StringLocaleConverterTestCase;
 
 /**
  * <p>
@@ -29,7 +41,7 @@ import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCas
  * </p>
  *
  * @author  Robert Burrell Donkin
- * @version $Revision: 1.6 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision: 1.7 $ $Date: 2004/07/08 13:12:06 $
  */
 
 public class LocaleConvertTestSuite {
@@ -40,8 +52,20 @@ public class LocaleConvertTestSuite {
     public static Test suite() {
         TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(LocaleConvertUtilsTestCase.class);
-        testSuite.addTestSuite(DateLocaleConverterTestCase.class);
         testSuite.addTestSuite(LocaleBeanificationTestCase.class);
+        testSuite.addTestSuite(BigDecimalLocaleConverterTestCase.class);
+        testSuite.addTestSuite(BigIntegerLocaleConverterTestCase.class);
+        testSuite.addTestSuite(ByteLocaleConverterTestCase.class);
+        testSuite.addTestSuite(DateLocaleConverterTestCase.class);
+        testSuite.addTestSuite(DoubleLocaleConverterTestCase.class);
+        testSuite.addTestSuite(FloatLocaleConverterTestCase.class);
+        testSuite.addTestSuite(IntegerLocaleConverterTestCase.class);
+        testSuite.addTestSuite(LongLocaleConverterTestCase.class);
+        testSuite.addTestSuite(ShortLocaleConverterTestCase.class);
+//        testSuite.addTestSuite(SqlDateLocaleConverterTestCase.class);
+//        testSuite.addTestSuite(SqlTimeLocaleConverterTestCase.class);
+//        testSuite.addTestSuite(SqlTimestampLocaleConverterTestCase.class);
+//        testSuite.addTestSuite(StringLocaleConverterTestCase.class);
         return testSuite;
     }
 }

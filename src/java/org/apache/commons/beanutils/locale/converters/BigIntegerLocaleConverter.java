@@ -17,6 +17,9 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import java.util.Locale;
+import java.math.BigInteger;
+import java.text.ParseException;
+import org.apache.commons.beanutils.ConversionException;
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
@@ -193,6 +196,38 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
      */
     public BigIntegerLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
-        super(defaultValue, locale, pattern);
+        super(defaultValue, locale, pattern, locPattern);
     }
+
+    /**
+     * Convert the specified locale-sensitive input object into an output object of
+     * BigInteger type.
+     *
+     * @param value The input object to be converted
+     * @param pattern The pattern is used for the convertion
+     *
+     * @exception ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    protected Object parse(Object value, String pattern) throws ParseException {
+
+        Object result = super.parse(value, pattern);
+
+        if (result == null || result instanceof BigInteger) {
+            return result;
+        }
+
+        if (result instanceof Number) {
+            return BigInteger.valueOf(((Number)result).longValue());
+        } 
+
+        try {
+            return new BigInteger(result.toString());
+        }
+        catch (NumberFormatException ex) {
+            throw new ConversionException("Suplied number is not of type BigInteger: " + result);
+        }
+
+    }
+
 }

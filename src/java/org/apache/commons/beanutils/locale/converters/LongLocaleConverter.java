@@ -17,6 +17,7 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import java.util.Locale;
+import java.text.ParseException;
 
 
 /**
@@ -195,5 +196,27 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
     public LongLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
+    }
+
+    /**
+     * Convert the specified locale-sensitive input object into an output object of the
+     * specified type. This method will return a Long type.
+     *
+     * @param value The input object to be converted
+     * @param pattern The pattern is used for the convertion
+     *
+     * @exception ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    protected Object parse(Object value, String pattern) throws ParseException {
+
+        Object result = super.parse(value, pattern);
+
+        if (result == null || result instanceof Long) {
+            return result;
+        }
+
+        return new Long(((Number)result).longValue());
+
     }
 }

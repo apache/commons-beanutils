@@ -17,6 +17,8 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import java.util.Locale;
+import java.text.ParseException;
+import org.apache.commons.beanutils.ConversionException;
 
 
 /**
@@ -193,7 +195,35 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      */
     public ShortLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
-        super(defaultValue, locale, pattern);
+        super(defaultValue, locale, pattern, locPattern);
     }
+
+    /**
+     * Convert the specified locale-sensitive input object into an output object of the
+     * specified type. This method will return values of type Short.
+     *
+     * @param value The input object to be converted
+     * @param pattern The pattern is used for the convertion
+     *
+     * @exception org.apache.commons.beanutils.ConversionException if conversion cannot be performed
+     *  successfully
+     */
+    protected Object parse(Object value, String pattern) throws ParseException {
+
+        Object result = super.parse(value, pattern);
+
+        if (result == null || result instanceof Short) {
+            return result;
+        }
+
+        Number parsed = (Number)result;
+        if (parsed.longValue() != parsed.shortValue()) {
+            throw new ConversionException("Supplied number is not of type Short: " + parsed.longValue());
+        }
+
+        // now returns property Short
+        return new Short(parsed.shortValue());
+    }
+
 }
 

@@ -197,7 +197,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
      */
     public FloatLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
-        super(defaultValue, locale, pattern);
+        super(defaultValue, locale, pattern, locPattern);
     }
 
    /**

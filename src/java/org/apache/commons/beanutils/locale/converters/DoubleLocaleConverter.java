@@ -196,7 +196,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      */
     public DoubleLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
-        super(defaultValue, locale, pattern);
+        super(defaultValue, locale, pattern, locPattern);
     }
 
     protected Object parse(Object value, String pattern) throws ParseException {
