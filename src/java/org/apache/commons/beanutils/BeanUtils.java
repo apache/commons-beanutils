@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.6 2001/09/19 02:04:10 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2001/09/19 02:04:10 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.7 2002/01/16 23:31:37 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/01/16 23:31:37 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import java.util.Map;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.6 $ $Date: 2001/09/19 02:04:10 $
+ * @version $Revision: 1.7 $ $Date: 2002/01/16 23:31:37 $
  */
 
 public class BeanUtils {
@@ -472,16 +472,24 @@ public class BeanUtils {
 
             // Get the property descriptor of the requested property (if any)
             PropertyDescriptor descriptor = null;
+            DynaProperty dynaProperty = null;
             try {
-                descriptor = PropertyUtils.getPropertyDescriptor(bean, name);
+                if (bean instanceof DynaBean) {
+                    dynaProperty =
+                       ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                } else {
+                    descriptor =
+                        PropertyUtils.getPropertyDescriptor(bean, name);
+                }
             } catch (Throwable t) {
                 /*
                 if (debug >= 1)
                     System.out.println("    getPropertyDescriptor: " + t);
                 */
                 descriptor = null;
+                dynaProperty = null;
             }
-            if (descriptor == null) {
+            if ((descriptor == null) && (dynaProperty == null)) {
                 /*
                 if (debug >= 1)
                     System.out.println("    No such property, skipping");
@@ -494,79 +502,120 @@ public class BeanUtils {
                                    descriptor + "'");
             */
 
-            // Identify the relevant setter method (if there is one)
-            Method setter = null;
-            if (descriptor instanceof IndexedPropertyDescriptor)
-                setter = ((IndexedPropertyDescriptor) descriptor).
-                    getIndexedWriteMethod();
-            else if (descriptor instanceof MappedPropertyDescriptor)
-                setter =((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
+            // Process differently for JavaBeans and DynaBeans
+            if (descriptor != null) {
 
-            if (setter == null)
-                setter = descriptor.getWriteMethod();
-            if (setter == null) {
-                /*
-                if (debug >= 1)
-                    System.out.println("    No setter method, skipping");
-                */
-                continue;
-            }
-            Class parameterTypes[] = setter.getParameterTypes();
-            /*
-            if (debug >= 1)
-                System.out.println("    Setter method is '" +
-                                   setter.getName() + "(" +
-                                   parameterTypes[0].getName() +
-                                   (parameterTypes.length > 1 ?
-                                    ", " + parameterTypes[1].getName() : "" )
-                                   + ")'");
-            */
-            Class parameterType = parameterTypes[0];
-            if (parameterTypes.length > 1)
-                parameterType = parameterTypes[1];      // Indexed or mapped setter
+                // Identify the relevant setter method (if there is one)
+                Method setter = null;
+                if (descriptor instanceof IndexedPropertyDescriptor)
+                    setter = ((IndexedPropertyDescriptor) descriptor).
+                        getIndexedWriteMethod();
+                else if (descriptor instanceof MappedPropertyDescriptor)
+                    setter =((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
 
-            // Convert the parameter value as required for this setter method
-            Object parameters[] = new Object[1];
-            if (parameterTypes[0].isArray()) {
-                if (value instanceof String) {
-                    String values[] = new String[1];
-                    values[0] = (String) value;
-                    parameters[0] = ConvertUtils.convert((String[]) values,
-                    parameterType);
-                } else if (value instanceof String[]) {
-                    parameters[0] = ConvertUtils.convert((String[]) value,
-                    parameterType);
-                } else {
-                    parameters[0] = value;
+                if (setter == null)
+                    setter = descriptor.getWriteMethod();
+                if (setter == null) {
+                    /*
+                      if (debug >= 1)
+                      System.out.println("    No setter method, skipping");
+                    */
+                    continue;
                 }
+                Class parameterTypes[] = setter.getParameterTypes();
+                /*
+                  if (debug >= 1)
+                  System.out.println("    Setter method is '" +
+                  setter.getName() + "(" +
+                  parameterTypes[0].getName() +
+                  (parameterTypes.length > 1 ?
+                  ", " + parameterTypes[1].getName() : "" )
+                  + ")'");
+                */
+                Class parameterType = parameterTypes[0];
+                if (parameterTypes.length > 1)
+                    parameterType = parameterTypes[1];      // Indexed or mapped setter
+
+                // Convert the parameter value as required for this setter method
+                Object parameters[] = new Object[1];
+                if (parameterTypes[0].isArray()) {
+                    if (value instanceof String) {
+                        String values[] = new String[1];
+                        values[0] = (String) value;
+                        parameters[0] = ConvertUtils.convert((String[]) values,
+                                                             parameterType);
+                    } else if (value instanceof String[]) {
+                        parameters[0] = ConvertUtils.convert((String[]) value,
+                                                             parameterType);
+                    } else {
+                        parameters[0] = value;
+                    }
+                } else {
+                    if (value instanceof String) {
+                        parameters[0] = ConvertUtils.convert((String) value,
+                                                             parameterType);
+                    } else if (value instanceof String[]) {
+                        parameters[0] = ConvertUtils.convert(((String[]) value)[0],
+                                                             parameterType);
+                    } else {
+                        parameters[0] = value;
+                    }
+                }
+
+                // Invoke the setter method
+                try {
+                    PropertyUtils.setProperty(bean, name, parameters[0]);
+                } catch (NoSuchMethodException e) {
+                    /*
+                      if (debug >= 1) {
+                      System.out.println("    CANNOT HAPPEN: " + e);
+                      e.printStackTrace(System.out);
+                      }
+                    */
+                }
+
             } else {
-                if (value instanceof String) {
-                    parameters[0] = ConvertUtils.convert((String) value,
-                    parameterType);
-                } else if (value instanceof String[]) {
-                    parameters[0] = ConvertUtils.convert(((String[]) value)[0],
-                    parameterType);
-                } else {
-                    parameters[0] = value;
-                }
-            }
 
-            // Invoke the setter method
-            /*
-            if (debug >= 1)
-                System.out.println("    Setting to " +
-                                   (parameters[0] == null ? "NULL" :
-                                    "'" + parameters[0] + "'"));
-            */
-            try {
-                PropertyUtils.setProperty(bean, name, parameters[0]);
-            } catch (NoSuchMethodException e) {
-                /*
-                if (debug >= 1) {
-                    System.out.println("    CANNOT HAPPEN: " + e);
-                    e.printStackTrace(System.out);
+                // Handle scalar and indexed properties differently
+                Object newValue = null;
+                Class type = dynaProperty.getType();
+                if (type.isArray()) {
+                    if (value instanceof String) {
+                        String values[] = new String[1];
+                        values[0] = (String) value;
+                        newValue = ConvertUtils.convert((String[]) values,
+                                                        type);
+                    } else if (value instanceof String[]) {
+                        newValue = ConvertUtils.convert((String[]) value,
+                                                        type);
+                    } else {
+                        newValue = value;
+                    }
+                } else {
+                    if (value instanceof String) {
+                        newValue = ConvertUtils.convert((String) value, type);
+                    } else if (value instanceof String[]) {
+                        newValue = ConvertUtils.convert(((String[]) value)[0],
+                                                        type);
+                    } else {
+                        newValue = value;
+                    }
+
                 }
-                */
+
+                // Invoke the setter method
+                try {
+                    PropertyUtils.setProperty(bean, name, newValue);
+                } catch (NoSuchMethodException e) {
+                    /*
+                      if (debug >= 1) {
+                      System.out.println("    CANNOT HAPPEN: " + e);
+                      e.printStackTrace(System.out);
+                      }
+                    */
+                }
+
+
             }
 
         }
