@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.5 2003/05/06 10:24:00 rdonkin Exp $
- * $Revision: 1.5 $
- * $Date: 2003/05/06 10:24:00 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.6 2003/05/06 11:32:23 rdonkin Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/05/06 11:32:23 $
  *
  * ====================================================================
  *
@@ -148,16 +148,20 @@ import org.apache.commons.logging.LogFactory;
  * @author Ralph Schaer
  * @author Chris Audley
  * @author James Strachan
- * @version $Revision: 1.5 $ $Date: 2003/05/06 10:24:00 $
+ * @version $Revision: 1.6 $ $Date: 2003/05/06 11:32:23 $
  * @since 1.7
  */
 
 public class ConvertUtilsBean {
     
+    // ------------------------------------------------------- Class Variables
+    /** Default singleton */
+    private static final ConvertUtilsBean singleton = new ConvertUtilsBean();
+    
     // ------------------------------------------------------- Class Methods
     /** Get singleton instance */
     protected static ConvertUtilsBean getInstance() {
-        return BeanUtilsBean.getInstance().getConvertUtils();
+        return singleton;
     }
 
     // ------------------------------------------------------- Variables

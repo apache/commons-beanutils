@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.5 2003/05/06 10:24:00 rdonkin Exp $
- * $Revision: 1.5 $
- * $Date: 2003/05/06 10:24:00 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.6 2003/05/06 11:32:23 rdonkin Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/05/06 11:32:23 $
  *
  * ====================================================================
  *
@@ -73,7 +73,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
@@ -93,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.5 $ $Date: 2003/05/06 10:24:00 $
+ * @version $Revision: 1.6 $ $Date: 2003/05/06 11:32:23 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -105,30 +104,8 @@ public class BeanUtilsBean {
 
     /** Singleton instance */
     private static final BeanUtilsBean singleton = new BeanUtilsBean();
-    
-    private static final Map beansByClassLoader = new WeakHashMap();
-    
-    /** Basic factory method */
-    protected synchronized static BeanUtilsBean getInstance() {
-        // synchronizing the method guarentees nothing will go wrong
-        try {
-            
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-            if (contextClassLoader != null) {
-                BeanUtilsBean instance 
-                    = (BeanUtilsBean) beansByClassLoader.get(contextClassLoader);
-                    
-                if (instance == null) {
-                    instance = new BeanUtilsBean();
-                    beansByClassLoader.put(contextClassLoader, instance);
-                }
-                System.out.println("Returning: " + instance);
-                return instance;
-            }
-        
-        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
-                
-        // if in doubt, return the basic
+    /** Basic factory method*/
+    protected static BeanUtilsBean getInstance() {
         return singleton;
     }
 
@@ -148,11 +125,11 @@ public class BeanUtilsBean {
     // --------------------------------------------------------- Constuctors
 
     /** 
-     * <p>Constructs an instance using new property 
+     * <p>Constructs an instance using standard (singleton) property 
      * and conversion instances.</p>
      */
     public BeanUtilsBean() {
-        this(new ConvertUtilsBean(), new PropertyUtilsBean());
+        this(ConvertUtilsBean.getInstance(),PropertyUtilsBean.getInstance());
     }
 
     /** 
