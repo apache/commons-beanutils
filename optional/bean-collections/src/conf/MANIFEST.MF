@@ -1,0 +1,7 @@
+Extension-Name: org.apache.commons.beanutils-bean-collections
+Specification-Title: Jakarta Commons Beanutils
+Specification-Vendor: Apache Software Foundation
+Specification-Version: 1.6
+Implementation-Title: org.apache.commons.beanutils-bean-collections
+Implementation-Vendor: Apache Software Foundation
+Implementation-Version: 1.6

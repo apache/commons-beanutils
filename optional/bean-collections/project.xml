@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright 2001-2004 The Apache Software Foundation
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project>
+  <extend>../../project.xml</extend>
+  <pomVersion>3</pomVersion>
+  <id>commons-beanutils-bean-collections</id>
+  <name>BeanUtils Bean Collections</name>
+  <currentVersion>1.7-dev</currentVersion>
+  <inceptionYear>2000</inceptionYear>
+  <shortDescription>Commons BeanUtils Bean Collections</shortDescription>
+  <description>Extensions of commons collections focussing on collections of beans</description>
+  
+  <siteDirectory>/www/jakarta.apache.org/commons/beanutils/beancollections</siteDirectory>
+      
+  <dependencies>
+    <dependency>
+      <id>commons-logging</id>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <id>commons-collections</id>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <id>commons-beanutils</id>
+      <version>1.6</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,296 @@
+<!--
+   Copyright 2001-2004 The Apache Software Foundation
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project name="Bean Utilities Bean Collections" default="dist" basedir=".">
+
+
+<!--
+        "Bean Utilities" component of the Jakarta Commons Subproject
+        $Id: build.xml,v 1.1 2004/05/10 19:55:30 rdonkin Exp $
+-->
+
+
+<!-- ========== Initialize Properties ===================================== -->
+
+
+  <property file="build.properties"/>                <!-- Component local   -->
+  <property file="../build.properties"/>             <!-- Commons local     -->
+  <property file="${user.home}/build.properties"/>   <!-- User local        -->
+
+<!-- ========== External Dependencies ===================================== -->
+
+  <!-- The home directory for the Commons collection classes distribution -->
+  <property name="commons-collections.home" value="../../../collections/dist"/>
+
+  <!-- The home directory for the Commons collection classes distribution -->
+  <property name="commons-logging.home" value="../logging/dist"/>
+
+  <!-- The directory containing your binary distribution of JUnit,
+       version 3.7 or later -->
+  <property name="junit.home"              value="/usr/local/junit3.7"/>
+  
+  <!-- The pathname of the beanutils core JAR file -->
+  <property name="commons-beanutils-core.jar" value="../../dist/commons-beanutils.jar"/>
+
+
+<!-- ========== Derived Values ============================================ -->
+
+  <!-- The pathname of the collections classes JAR file -->
+  <property name="commons-collections.jar" value="${commons-collections.home}/commons-collections.jar"/>
+
+  <!-- The pathname of the logging classes JAR file -->
+  <property name="commons-logging.jar" value="${commons-logging.home}/commons-logging.jar"/>
+
+  <!-- The pathname of the "junit.jar" JAR file -->
+  <property name="junit.jar"               value="${junit.home}/junit.jar"/>
+
+
+<!-- ========== Component Declarations ==================================== -->
+
+
+  <!-- The name of this component -->
+  <property name="component.name"          value="beanutils"/>
+
+  <!-- The primary package name of this component -->
+  <property name="component.package"       value="org.apache.commons.beanutils"/>
+
+  <!-- The title of this component -->
+  <property name="component.title"         value="Bean Introspection Utilities"/>
+
+  <!-- The current version number of this component -->
+  <property name="component.version"       value="1.7-dev"/>
+
+  <!-- The base directory for compilation targets -->
+  <property name="build.home"              value="target"/>
+
+  <!-- The base directory for component configuration files -->
+  <property name="conf.home"               value="src/conf"/>
+
+  <!-- The base directory for distribution targets -->
+  <property name="dist.home"               value="dist"/>
+
+  <!-- The base directory for component sources -->
+  <property name="source.home"             value="src/java"/>
+
+  <!-- The base directory for unit test sources -->
+  <property name="test.home"               value="src/test"/>
+
+
+<!-- ========== Compiler Defaults ========================================= -->
+
+
+  <!-- Should Java compilations set the 'debug' compiler option? -->
+  <property name="compile.debug"           value="true"/>
+
+  <!-- Should Java compilations set the 'deprecation' compiler option? -->
+  <property name="compile.deprecation"     value="false"/>
+
+  <!-- Should Java compilations set the 'optimize' compiler option? -->
+  <property name="compile.optimize"        value="true"/>
+
+  <!-- Construct compile classpath -->
+  <path id="compile.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${commons-logging.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
+    <pathelement location="${commons-beanutils-core.jar}"/>
+  </path>
+
+
+<!-- ========== Test Execution Defaults =================================== -->
+
+
+  <!-- Construct unit test classpath -->
+  <path id="test.classpath">
+    <pathelement location="${build.home}/classes"/>
+    <pathelement location="${build.home}/tests"/>
+    <pathelement location="${commons-logging.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
+    <pathelement location="${commons-beanutils-core.jar}"/>
+    <pathelement location="${junit.jar}"/>
+  </path>
+
+  <!-- Should all tests fail if one does? -->
+  <property name="test.failonerror"        value="true"/>
+
+  <!-- The test runner to execute -->
+  <property name="test.runner"             value="junit.textui.TestRunner"/>
+
+  <!-- The Commons Logger LogFactory implementation to use -->
+  <property name="test.factory"
+           value="org.apache.commons.logging.impl.LogFactoryImpl"/>
+
+  <!-- The Commons Logger Log implementation to use (standard factory) -->
+  <property name="test.log"
+           value="org.apache.commons.logging.impl.SimpleLog"/>
+
+  <!-- The Commons Logger SimpleLog level for testing -->
+  <property name="test.level"               value="error"/>
+
+  <!-- Loop counter for microbenchmarks -->
+  <property name="bench.counter"            value="100000"/>
+
+
+<!-- ========== Executable Targets ======================================== -->
+
+
+  <target name="init"
+   description="Initialize and evaluate conditionals">
+    <echo message="-------- ${component.name} ${component.version} --------"/>
+    <filter  token="name"                  value="${component.name}"/>
+    <filter  token="package"               value="${component.package}"/>
+    <filter  token="version"               value="${component.version}"/>
+  </target>
+
+
+  <target name="prepare" depends="init"
+   description="Prepare build directory">
+    <mkdir dir="${build.home}"/>
+    <mkdir dir="${build.home}/classes"/>
+    <mkdir dir="${build.home}/conf"/>
+    <mkdir dir="${build.home}/tests"/>
+  </target>
+
+
+  <target name="static" depends="prepare"
+   description="Copy static files to build directory">
+    <tstamp/>
+    <copy  todir="${build.home}/conf" filtering="on">
+      <fileset dir="${conf.home}" includes="*.MF"/>
+    </copy>
+  </target>
+
+
+  <target name="compile" depends="static"
+   description="Compile shareable components">
+    <javac  srcdir="${source.home}"
+           destdir="${build.home}/classes"
+             debug="${compile.debug}"
+       deprecation="${compile.deprecation}"
+          optimize="${compile.optimize}">
+      <classpath refid="compile.classpath"/>
+    </javac>
+    <copy    todir="${build.home}/classes" filtering="on">
+      <fileset dir="${source.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="compile.tests" depends="compile"
+   description="Compile unit test cases">
+    <javac  srcdir="${test.home}"
+           destdir="${build.home}/tests"
+             debug="${compile.debug}"
+       deprecation="${compile.deprecation}"
+          optimize="${compile.optimize}">
+      <classpath refid="test.classpath"/>
+    </javac>
+    <copy    todir="${build.home}/tests" filtering="on">
+      <fileset dir="${test.home}" excludes="**/*.java"/>
+    </copy>
+  </target>
+
+
+  <target name="clean"
+   description="Clean build and distribution directories">
+    <delete    dir="${build.home}"/>
+    <delete    dir="${dist.home}"/>
+  </target>
+
+
+  <target name="all" depends="clean,compile"
+   description="Clean and compile all components"/>
+
+  <target name="dist" depends="clean,compile,javadoc,jar"
+   description="Clean, compile and jar">
+    <copy todir='../../dist' file= '${dist.home}/commons-beanutils-bean-collections.jar'/>
+  </target>
+   
+  <target name="jar" depends="compile"
+   description="Create jar">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="../../LICENSE.txt"
+             tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <copy      file="../../NOTICE.txt"
+             tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
+    <jar    jarfile="${dist.home}/commons-beanutils-bean-collections.jar"
+            basedir="${build.home}/classes"
+           manifest="${build.home}/conf/MANIFEST.MF"/>
+    <jar    jarfile="../../dist/commons-beanutils.jar"
+            basedir="${build.home}/classes"
+            update='true'/>
+  </target>
+
+
+  <target name="javadoc" depends="compile"
+   description="Create component Javadoc documentation">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${dist.home}/docs"/>
+    <mkdir      dir="${dist.home}/docs/api"/>
+    <mkdir      dir="../../dist/docs/"/>
+    <mkdir      dir="../../dist/docs/bean-collections"/>
+    <javadoc sourcepath="${source.home}"
+                destdir="${dist.home}/docs/api"
+           packagenames="org.apache.commons.*"
+                 author="true"
+                private="true"
+                version="true"
+               overview="src/java/overview.html"
+               doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
+            windowtitle="${component.title} (Version ${component.version})"
+                 bottom="Copyright (c) 2001-2004 - Apache Software Foundation">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+    <copy 
+        todir='../../dist/docs/bean-collections'>
+        <fileset dir='${dist.home}/docs/api'/>
+    </copy>
+  </target>
+
+  <target name="install-jar" depends="jar"
+   description="--> Installs jar file in ${lib.repo}">
+    <copy todir="${lib.repo}" filtering="no">
+      <fileset dir="${dist.home}">
+        <include name="commons-${component.name}.jar"/>
+      </fileset>
+    </copy>
+  </target>
+
+
+<!-- ========== Unit Test Targets ========================================= -->
+
+
+  <target name="test"  depends="compile.tests,
+                                test.bean.collections"
+   description="Run all unit test cases">
+  </target>
+  
+  <target name="test.bean.collections" depends="compile.tests">
+    <echo message="Running bean collection utilities tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.BeanCollectionsTestSuite"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+  
+</project>
