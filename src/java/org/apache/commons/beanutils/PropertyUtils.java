@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.21 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.21 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.22 2002/03/16 04:11:04 craigmcc Exp $
+ * $Revision: 1.22 $
+ * $Date: 2002/03/16 04:11:04 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.21 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.22 $ $Date: 2002/03/16 04:11:04 $
  */
 
 public class PropertyUtils {
@@ -256,6 +256,16 @@ public class PropertyUtils {
 
         PropertyDescriptor origDescriptors[] = getPropertyDescriptors(orig);
         for (int i = 0; i < origDescriptors.length; i++) {
+            Method readMethod = origDescriptors[i].getReadMethod();
+            if ((readMethod == null) &&
+                (origDescriptors[i] instanceof IndexedPropertyDescriptor)) {
+                readMethod =
+                    ((IndexedPropertyDescriptor) origDescriptors[i]).
+                    getIndexedReadMethod();
+            }
+            if (readMethod == null) {
+                continue; // This is a write-only property
+            }
             String name = origDescriptors[i].getName();
             if (getPropertyDescriptor(dest, name) != null) {
                 Object value = getSimpleProperty(orig, name);
