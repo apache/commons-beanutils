@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/Attic/BeanComparatorTestCase.java,v 1.2 2002/10/25 00:27:42 dion Exp $
- * $Revision: 1.2 $
- * $Date: 2002/10/25 00:27:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/Attic/BeanComparatorTestCase.java,v 1.3 2003/02/01 05:14:07 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/02/01 05:14:07 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import junit.framework.TestSuite;
  *  Test Case for the BeanComparator class.
  *
  * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class BeanComparatorTestCase extends TestCase {
@@ -261,7 +261,7 @@ public class BeanComparatorTestCase extends TestCase {
 
         }
         catch (ClassCastException cce){
-          assertTrue("Two booleans should not be comparable",cce.toString().indexOf("Both arguments of this method were not Comparables: java.lang.Boolean and java.lang.Boolean") >=0);
+          ; // Expected result
         }
         catch (Exception e) {
             fail("Exception" + e);
