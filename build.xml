@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.31 2002/04/29 21:37:46 craigmcc Exp $
+        $Id: build.xml,v 1.32 2002/04/29 22:06:22 craigmcc Exp $
 -->
 
 
@@ -55,7 +55,7 @@
   <property name="component.title"         value="Bean Introspection Utilities"/>
 
   <!-- The current version number of this component -->
-  <property name="component.version"       value="1.3-dev"/>
+  <property name="component.version"       value="1.3"/>
 
   <!-- The base directory for compilation targets -->
   <property name="build.home"              value="target"/>
