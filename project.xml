@@ -18,7 +18,7 @@
   <pomVersion>3</pomVersion>
   <id>commons-beanutils</id>
   <name>BeanUtils</name>
-  <currentVersion>1.7-dev</currentVersion>
+  <currentVersion>1.7RC1</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons BeanUtils</shortDescription>
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
