@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.5 2001/05/07 02:09:02 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2001/05/07 02:09:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.6 2001/05/20 00:32:24 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2001/05/20 00:32:24 $
  *
  * ====================================================================
  *
@@ -91,7 +91,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2001/05/07 02:09:02 $
+ * @version $Revision: 1.6 $ $Date: 2001/05/20 00:32:24 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -235,6 +235,32 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Corner cases on getPropertyDescriptor invalid arguments.
+     */
+    public void testGetDescriptorArguments() {
+
+        try {
+            PropertyUtils.getPropertyDescriptor(null, "stringProperty");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getPropertyDescriptor(bean, null);
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+    }
 
 
     /**
@@ -382,6 +408,49 @@ public class PropertyUtilsTestCase extends TestCase {
                 fail("Missing property " + properties[j]);
             else if (count[j] > 1)
                 fail("Duplicate property " + properties[j]);
+        }
+
+    }
+
+
+    /**
+     * Corner cases on getPropertyDescriptors invalid arguments.
+     */
+    public void testGetDescriptorsArguments() {
+
+        try {
+            PropertyUtils.getPropertyDescriptors(null);
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException");
+        }
+
+    }
+
+
+    /**
+     * Corner cases on getNestedProperty invalid arguments.
+     */
+    public void testGetNestedArguments() {
+
+        try {
+            PropertyUtils.getNestedProperty(null, "stringProperty");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getNestedProperty(bean, null);
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
 
     }
@@ -724,6 +793,32 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetReadMethodPublicSubclass() {
 
         testGetReadMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
+
+    }
+
+
+    /**
+     * Corner cases on getSimpleProperty invalid arguments.
+     */
+    public void testGetSimpleArguments() {
+
+        try {
+            PropertyUtils.getSimpleProperty(null, "stringProperty");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getSimpleProperty(bean, null);
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
 
     }
 
@@ -1073,6 +1168,32 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Corner cases on setNestedProperty invalid arguments.
+     */
+    public void testSetNestedArguments() {
+
+        try {
+            PropertyUtils.setNestedProperty(null, "stringProperty", "");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.setNestedProperty(bean, null, "");
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+    }
+
+
+    /**
      * Test setNextedProperty on a boolean property.
      */
     public void testSetNestedBoolean() {
@@ -1335,6 +1456,32 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }        
+
+    }
+
+
+    /**
+     * Corner cases on setSimpleProperty invalid arguments.
+     */
+    public void testSetSimpleArguments() {
+
+        try {
+            PropertyUtils.setSimpleProperty(null, "stringProperty", "");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.setSimpleProperty(bean, null, "");
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.5 2001/05/07 02:09:01 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2001/05/07 02:09:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.6 2001/05/20 00:32:24 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2001/05/20 00:32:24 $
  *
  * ====================================================================
  *
@@ -121,7 +121,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.5 $ $Date: 2001/05/07 02:09:01 $
+ * @version $Revision: 1.6 $ $Date: 2001/05/20 00:32:24 $
  */
 
 public class PropertyUtils {
@@ -195,6 +195,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if the <code>dest</code> or
+     *  <code>orig</code> argument is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -203,6 +205,12 @@ public class PropertyUtils {
     public static void copyProperties(Object dest, Object orig)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (dest == null)
+            throw new IllegalArgumentException
+                ("No destination bean specified");
+        if (orig == null)
+            throw new IllegalArgumentException("No origin bean specified");
 
 	PropertyDescriptor origDescriptors[] = getPropertyDescriptors(orig);
 	for (int i = 0; i < origDescriptors.length; i++) {
@@ -230,6 +238,7 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -240,7 +249,7 @@ public class PropertyUtils {
                NoSuchMethodException {
 
         if (bean == null)
-            return (Collections.EMPTY_MAP);
+            throw new IllegalArgumentException("No bean specified");
         PropertyDescriptor descriptors[] =
             PropertyUtils.getPropertyDescriptors(bean);
         Map description = new HashMap(descriptors.length);
@@ -267,6 +276,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -275,6 +286,11 @@ public class PropertyUtils {
     public static Object getIndexedProperty(Object bean, String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	// Identify the index of the requested individual property
         int delim = name.indexOf(INDEXED_DELIM);
@@ -308,6 +324,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -317,6 +335,11 @@ public class PropertyUtils {
 					    String name, int index)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	// Retrieve the property descriptor for the specified property
 	PropertyDescriptor descriptor =
@@ -361,6 +384,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if a nested reference to a
      *  property returns null
      * @exception InvocationTargetException if the property accessor method
@@ -371,6 +396,11 @@ public class PropertyUtils {
     public static Object getNestedProperty(Object bean, String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	while (true) {
 	    int delim = name.indexOf(NESTED_DELIM);
@@ -407,6 +437,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -435,6 +467,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if a nested reference to a
      *  property returns null
      * @exception InvocationTargetException if the property accessor method
@@ -446,6 +480,11 @@ public class PropertyUtils {
 							   String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	// Resolve nested references
 	while (true) {
@@ -489,11 +528,13 @@ public class PropertyUtils {
      * and caching them the first time a particular bean class is encountered.
      *
      * @param bean Bean for which property descriptors are requested
+     *
+     * @exception IllegalArgumentException if <code>bean</code> is null
      */
     public static PropertyDescriptor[] getPropertyDescriptors(Object bean) {
 
 	if (bean == null)
-	    return (new PropertyDescriptor[0]);
+            throw new IllegalArgumentException("No bean specified");
 
 	// Look up any cached descriptors for this bean class
 	String beanClassName = bean.getClass().getName();
@@ -537,6 +578,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if a nested reference to a
      *  property returns null
      * @exception InvocationTargetException if the property accessor method
@@ -547,6 +590,11 @@ public class PropertyUtils {
     public static Class getPropertyEditorClass(Object bean, String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	PropertyDescriptor descriptor =
 	    getPropertyDescriptor(bean, name);
@@ -573,6 +621,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if a nested reference to a
      *  property returns null
      * @exception InvocationTargetException if the property accessor method
@@ -583,6 +633,11 @@ public class PropertyUtils {
     public static Class getPropertyType(Object bean, String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	PropertyDescriptor descriptor =
 	    getPropertyDescriptor(bean, name);
@@ -619,6 +674,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if the property name
      *  is nested or indexed
      * @exception InvocationTargetException if the property accessor method
@@ -629,6 +686,11 @@ public class PropertyUtils {
     public static Object getSimpleProperty(Object bean, String name)
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
+
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
         // Validate the syntax of the property name
         if (name.indexOf(NESTED_DELIM) >= 0)
@@ -684,6 +746,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -694,9 +758,10 @@ public class PropertyUtils {
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
 
-        if (debug >= 1)
-            System.out.println("setIndexedProperty('" + bean + ", " +
-                               name + ", " + value + ")");
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	// Identify the index of the requested individual property
 	int delim = name.indexOf(INDEXED_DELIM);
@@ -731,6 +796,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -741,9 +808,10 @@ public class PropertyUtils {
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
 
-        if (debug >= 1)
-            System.out.println("setIndexedProperty('" + bean + ", " +
-                               name + ", " + index + ", " + value + ")");
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	// Retrieve the property descriptor for the specified property
 	PropertyDescriptor descriptor =
@@ -793,6 +861,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if a nested reference to a
      *  property returns null
      * @exception InvocationTargetException if the property accessor method
@@ -805,9 +875,10 @@ public class PropertyUtils {
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
 
-        if (debug >= 1)
-            System.out.println("setNestedProperty('" + bean + ", " +
-                               name + ", " + value + ")");
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
 	while (true) {
 	    int delim = name.indexOf(NESTED_DELIM);
@@ -845,6 +916,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
@@ -869,6 +942,8 @@ public class PropertyUtils {
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
+     * @exception IllegalArgumentException if <code>bean</code> or
+     *  <code>name</code> is null
      * @exception IllegalArgumentException if the property name is
      *  nested or indexed
      * @exception InvocationTargetException if the property accessor method
@@ -881,9 +956,10 @@ public class PropertyUtils {
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
 
-        if (debug >= 1)
-            System.out.println("setSimpleProperty('" + bean + ", " +
-                               name + ", " + value + ")");
+        if (bean == null)
+            throw new IllegalArgumentException("No bean specified");
+        if (name == null)
+            throw new IllegalArgumentException("No name specified");
 
         // Validate the syntax of the property name
         if (name.indexOf(NESTED_DELIM) >= 0)
