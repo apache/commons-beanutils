@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.3 2003/03/20 20:12:24 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/03/20 20:12:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.4 2003/04/05 10:16:55 jstrachan Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/04/05 10:16:55 $
  *
  * ====================================================================
  *
@@ -63,9 +63,11 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -80,6 +82,7 @@ import org.apache.commons.beanutils.converters.CharacterArrayConverter;
 import org.apache.commons.beanutils.converters.ClassConverter;
 import org.apache.commons.beanutils.converters.DoubleConverter;
 import org.apache.commons.beanutils.converters.DoubleArrayConverter;
+import org.apache.commons.beanutils.converters.FileConverter;
 import org.apache.commons.beanutils.converters.FloatConverter;
 import org.apache.commons.beanutils.converters.FloatArrayConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
@@ -93,6 +96,7 @@ import org.apache.commons.beanutils.converters.SqlTimeConverter;
 import org.apache.commons.beanutils.converters.SqlTimestampConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 import org.apache.commons.beanutils.converters.StringArrayConverter;
+import org.apache.commons.beanutils.converters.URLConverter;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -118,6 +122,8 @@ import org.apache.commons.logging.LogFactory;
  * <li>long and java.lang.Long</li>
  * <li>short and java.lang.Short</li>
  * <li>java.lang.String</li>
+ * <li>java.io.File</li>
+ * <li>java.net.URL</li>
  * <li>java.sql.Date</li>
  * <li>java.sql.Time</li>
  * <li>java.sql.Timestamp</li>
@@ -141,7 +147,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.3 $ $Date: 2003/03/20 20:12:24 $
+ * @author James Strachan
+ * @version $Revision: 1.4 $ $Date: 2003/04/05 10:16:55 $
  * @since 1.7
  */
 
@@ -570,6 +577,8 @@ public class ConvertUtilsBean {
         converters.put(Date.class, new SqlDateConverter());
         converters.put(Time.class, new SqlTimeConverter());
         converters.put(Timestamp.class, new SqlTimestampConverter());
+        converters.put(File.class, new FileConverter());
+        converters.put(URL.class, new URLConverter());
 
     }
 
