@@ -515,28 +515,36 @@ public class MethodUtils {
                 // compare parameters
                 Class[] methodsParams = methods[i].getParameterTypes();
                 int methodParamSize = methodsParams.length;
-                if (methodParamSize == paramSize) {                    
+                if (methodParamSize == paramSize) {          
+                    boolean match = true;
                     for (int n = 0 ; n < methodParamSize; n++) {
-                        if (!parameterTypes[n].isAssignableFrom(methodsParams[n])) {
+                        if (log.isTraceEnabled()) {
+                            log.trace("Param=" + parameterTypes[n].getName());
+                            log.trace("Method=" + methodsParams[n].getName());
+                        }
+                        if (!methodsParams[n].isAssignableFrom(parameterTypes[n])) {
                             if (log.isTraceEnabled()) {
-                                log.trace(parameterTypes[n] + " is not assignable from " 
-                                            + methodsParams[n]);
+                                log.trace(methodsParams[n] + " is not assignable from " 
+                                            + parameterTypes[n]);
                             }    
+                            match = false;
                             break;
                         }
                     }
                     
-                    // get accessible version of method
-                    Method method = getAccessibleMethod(methods[i]);
-                    if (method != null) {
-                        if (log.isTraceEnabled()) {
-                            log.trace(method + " accessible version of " 
-                                        + methods[i]);
+                    if (match) {
+                        // get accessible version of method
+                        Method method = getAccessibleMethod(methods[i]);
+                        if (method != null) {
+                            if (log.isTraceEnabled()) {
+                                log.trace(method + " accessible version of " 
+                                            + methods[i]);
+                            }
+                            return method;
                         }
-                        return method;
+                        
+                        log.trace("Couldn't find accessible method.");
                     }
-                    
-                    log.trace("Couldn't find accessible method.");
                 }
             }
         }

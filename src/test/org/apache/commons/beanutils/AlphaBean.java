@@ -67,5 +67,10 @@ public class AlphaBean extends AbstractParent implements Child {
     
     public String getName() {
         return name;
-    }
+    }    
+    
+    /**
+     * Used for testing that correct exception is thrown.
+     */
+    public void bogus(String badParameter){}
 }

@@ -66,6 +66,20 @@ public abstract class AbstractParent {
         return child;
     }
 
+    /**
+     * Method which matches signature but which has wrong parameters 
+     */
+    public String testAddChild(String badParameter) {
+        return null;
+    }
+
+    /**
+     * Method which matches signature but which has wrong parameters 
+     */
+    public String testAddChild2(String ignore, String badParameter) {
+        return null;
+    }
+    
     public String testAddChild(Child child) {
         this.child = child;
         return child.getName();
@@ -76,4 +90,5 @@ public abstract class AbstractParent {
         this.child = child;
         return child.getName();
     }
+
 }

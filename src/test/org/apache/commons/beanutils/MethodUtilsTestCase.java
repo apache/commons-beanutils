@@ -285,5 +285,17 @@ public class MethodUtilsTestCase extends TestCase {
                         "ChildTwo", 
                         MethodUtils.invokeMethod(parent, "testAddChild2", params));
         
+        // test that exception is correctly thrown when a method cannot be found with matching params
+        try {
+            // the next line
+            parent = new AlphaBean("parent");
+            childOne = new BetaBean("ChildOne");
+            MethodUtils.invokeMethod(parent, "bogus", childOne);
+            // should get here!
+            fail("No exception thrown when no appropriate method exists");
+            
+        } catch (NoSuchMethodException e) {
+            // this is what we're expecting!
+        }
     }
 }
