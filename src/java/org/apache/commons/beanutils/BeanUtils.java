@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.7 2002/01/16 23:31:37 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/01/16 23:31:37 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.8 2002/01/21 00:44:39 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/01/21 00:44:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2001 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -87,7 +87,7 @@ import java.util.Map;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.7 $ $Date: 2002/01/16 23:31:37 $
+ * @version $Revision: 1.8 $ $Date: 2002/01/21 00:44:39 $
  */
 
 public class BeanUtils {

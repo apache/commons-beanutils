@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateIndirect.java,v 1.2 2001/12/15 19:19:24 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/12/15 19:19:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/priv/PrivateIndirect.java,v 1.3 2002/01/21 00:44:40 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/21 00:44:40 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2001 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -67,7 +67,7 @@ package org.apache.commons.beanutils.priv;
  * Interface that is indirectly implemented by PrivateBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2001/12/15 19:19:24 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/21 00:44:40 $
  */
 
 public interface PrivateIndirect {

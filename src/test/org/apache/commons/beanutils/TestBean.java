@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.6 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.7 2002/01/21 00:44:39 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/01/21 00:44:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2001 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,7 +72,7 @@ import java.util.ArrayList;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.7 $ $Date: 2002/01/21 00:44:39 $
  */
 
 public class TestBean {

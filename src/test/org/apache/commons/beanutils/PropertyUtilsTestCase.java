@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.12 2002/01/04 21:25:17 sanders Exp $
- * $Revision: 1.12 $
- * $Date: 2002/01/04 21:25:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.13 2002/01/21 00:44:39 craigmcc Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/01/21 00:44:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2001 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -100,7 +100,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.12 $ $Date: 2002/01/04 21:25:17 $
+ * @version $Revision: 1.13 $ $Date: 2002/01/21 00:44:39 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
