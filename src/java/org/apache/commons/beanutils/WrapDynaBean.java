@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.7 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.8 2004/01/08 22:38:11 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/01/08 22:38:11 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,11 +70,23 @@ package org.apache.commons.beanutils;
  * <p>Implementation of <code>DynaBean</code> that wraps a standard JavaBean
  * instance, so that DynaBean APIs can be used to access its properties.</p>
  *
+ * <p>
+ * The most common use cases for this class involve wrapping an existing java bean.
+ * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.) 
+ * For example:
+ * </p>
+ * <code><pre>
+ *  Object aJavaBean = ...;
+ *  ...
+ *  DynaBean db = new WrapDynaBean(aJavaBean);
+ *  ...
+ * </pre></code>
+ *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.7 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.8 $ $Date: 2004/01/08 22:38:11 $
  */
 
 public class WrapDynaBean implements DynaBean {
@@ -323,6 +335,20 @@ public class WrapDynaBean implements DynaBean {
                     ("Property '" + name + "' has no mapped write method");
         }
 
+    }
+
+    /** 
+     * Gets the bean instance wrapped by this DynaBean.
+     * For most common use cases, 
+     * this object should already be known 
+     * and this method safely be ignored.
+     * But some creators of frameworks using <code>DynaBean</code>'s may 
+     * find this useful.
+     *
+     * @return the java bean Object wrapped by this <code>DynaBean</code>
+     */
+    public Object getInstance() {
+        return instance;
     }
 
 

@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.6 2003/10/09 20:40:07 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/10/09 20:40:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.7 2004/01/08 22:38:11 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2004/01/08 22:38:11 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -73,7 +73,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2003/10/09 20:40:07 $
+ * @version $Revision: 1.7 $ $Date: 2004/01/08 22:38:11 $
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
@@ -204,5 +204,15 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * is not serializable.
      */
     public void testSerialization() { }
+    
+    /** Tests getInstance method */
+    public void testGetInstance() {
+        AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
+        WrapDynaBean dynaBean = new WrapDynaBean(alphaBean);
+        Object wrappedInstance = dynaBean.getInstance();
+        assertTrue("Object type is AlphaBean", wrappedInstance instanceof AlphaBean);
+        AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
+        assertTrue("Same Object", wrappedAlphaBean == alphaBean);
+    }
 
 }
