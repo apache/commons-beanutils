@@ -72,10 +72,24 @@ public abstract class AbstractArrayConverter implements Converter {
      */
     public AbstractArrayConverter(Object defaultValue) {
 
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
+        if (defaultValue == NO_DEFAULT) {
+            this.useDefault = false;
+        } else {
+            this.defaultValue = defaultValue;
+            this.useDefault = true;
+        }
 
     }
+
+    // ------------------------------------------------------- Static Variables
+
+    /**
+     * This is a special reference that can be passed as the "default object"
+     * to the constructor to indicate that no default is desired. Note that
+     * the value 'null' cannot be used for this purpose, as the caller may
+     * want a null to be returned as the default.
+     */
+    public static final Object NO_DEFAULT = new Object();
 
     // ----------------------------------------------------- Instance Variables
 
@@ -123,11 +137,12 @@ public abstract class AbstractArrayConverter implements Converter {
      * in the Java language into a <code>List</code> individual Strings
      * for each element, according to the following rules.</p>
      * <ul>
-     * <li>The string must have matching '{' and '}' delimiters around
-     *     a comma-delimited list of values.</li>
-     * <li>Whitespace before and after each element is stripped.
-     * <li>If an element is itself delimited by matching single or double
-     *     quotes, the usual rules for interpreting a quoted String apply.</li>
+     * <li>The string is expected to be a comma-separated list of values.</li>
+     * <li>The string may optionally have matching '{' and '}' delimiters
+     *   around the list.</li>
+     * <li>Whitespace before and after each element is stripped.</li>
+     * <li>Elements in the list may be delimited by single or double quotes.
+     *  Within a quoted elements, the normal Java escape sequences are valid.</li>
      * </ul>
      *
      * @param svalue String value to be parsed
