@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.12 2002/07/22 00:02:01 craigmcc Exp $
- * $Revision: 1.12 $
- * $Date: 2002/07/22 00:02:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.13 2002/09/24 18:45:54 rdonkin Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/09/24 18:45:54 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.12 $ $Date: 2002/07/22 00:02:01 $
+ * @version $Revision: 1.13 $ $Date: 2002/09/24 18:45:54 $
  */
 
 public class TestBean {
@@ -347,6 +347,24 @@ public class TestBean {
     }
 
 
+    /*
+     * Another nested reference to a bean containing mapp properties
+     */
+    class MappedTestBean { 
+        public void setValue(String key,String val) { }
+        public String getValue(String key) { return "Mapped Value"; }
+    }
+    
+    private MappedTestBean mappedNested = null;
+
+    public MappedTestBean getMappedNested() { 
+        if (mappedNested == null) 
+        {
+            mappedNested = new MappedTestBean();
+        }
+        return mappedNested;
+    }
+
     /**
      * A String property with an initial value of null.
      */
@@ -442,7 +460,7 @@ public class TestBean {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-
+    
     // ------------------------------------------------------- Static Variables
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.21 2002/07/21 00:20:45 craigmcc Exp $
- * $Revision: 1.21 $
- * $Date: 2002/07/21 00:20:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.22 2002/09/24 18:45:54 rdonkin Exp $
+ * $Revision: 1.22 $
+ * $Date: 2002/09/24 18:45:54 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.21 $ $Date: 2002/07/21 00:20:45 $
+ * @version $Revision: 1.22 $ $Date: 2002/09/24 18:45:54 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -1103,6 +1103,16 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
+        try 
+        {
+            assertEquals("Can't retrieved nested with mapped property",
+                         "Mapped Value",
+                         PropertyUtils.getNestedProperty(
+                             bean,"mappedNested.value(Mapped Key)"));
+        } catch (Exception e) 
+        {
+            fail("Thew exception: " + e);
+        } 
     }
 
 

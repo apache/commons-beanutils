@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.30 2002/07/21 00:20:44 craigmcc Exp $
- * $Revision: 1.30 $
- * $Date: 2002/07/21 00:20:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.31 2002/09/24 18:45:54 rdonkin Exp $
+ * $Revision: 1.31 $
+ * $Date: 2002/09/24 18:45:54 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.30 $ $Date: 2002/07/21 00:20:44 $
+ * @version $Revision: 1.31 $ $Date: 2002/09/24 18:45:54 $
  */
 
 public class PropertyUtils {
@@ -708,8 +708,11 @@ public class PropertyUtils {
         int indexOfMAPPED_DELIM2 = -1;
         int indexOfNESTED_DELIM = -1;
         while (true) {
+            indexOfNESTED_DELIM  = name.indexOf(NESTED_DELIM);
+            indexOfMAPPED_DELIM  = name.indexOf(MAPPED_DELIM);
             indexOfMAPPED_DELIM2 = name.indexOf(MAPPED_DELIM2);
-            if (indexOfMAPPED_DELIM2 >= 0) {
+            if (indexOfMAPPED_DELIM2 >= 0 && indexOfMAPPED_DELIM >=0 &&
+                (indexOfNESTED_DELIM < 0 || indexOfNESTED_DELIM > indexOfMAPPED_DELIM)) {
                 indexOfNESTED_DELIM =
                     name.indexOf(NESTED_DELIM, indexOfMAPPED_DELIM2);
             } else {
