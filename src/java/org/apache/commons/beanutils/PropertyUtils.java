@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.15 2001/12/15 19:19:24 craigmcc Exp $
- * $Revision: 1.15 $
- * $Date: 2001/12/15 19:19:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.16 2002/01/04 21:27:03 sanders Exp $
+ * $Revision: 1.16 $
+ * $Date: 2002/01/04 21:27:03 $
  *
  * ====================================================================
  *
@@ -75,6 +75,8 @@ import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+
 import org.apache.commons.collections.FastHashMap;
 
 
@@ -113,7 +115,9 @@ import org.apache.commons.collections.FastHashMap;
  * <li><strong>Indexed (<code>name[index]</code>)</strong> - The underlying
  *     property value is assumed to be an array, or this JavaBean is assumed
  *     to have indexed property getter and setter methods.  The appropriate
- *     (zero-relative) entry in the array is selected.</li>
+ *     (zero-relative) entry in the array is selected.  <code>List</code>
+ *     objects are now also supported for read/write.  You simply need to define
+ *     a getter that returns the <code>List</code></li>
  * <li><strong>Mapped (<code>name(key)</code>)</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
  *     additional attribute of type <code>java.lang.String</code>.</li>
@@ -128,7 +132,8 @@ import org.apache.commons.collections.FastHashMap;
  * @author Rey François
  * @author Gregor Raýman
  * @author Jan Sorensen
- * @version $Revision: 1.15 $ $Date: 2001/12/15 19:19:24 $
+ * @author Scott Sanders
+ * @version $Revision: 1.16 $ $Date: 2002/01/04 21:27:03 $
  */
 
 public class PropertyUtils {
@@ -192,6 +197,7 @@ public class PropertyUtils {
      */
     private static FastHashMap descriptorsCache = null;
     private static FastHashMap mappedDescriptorsCache = null;
+
     static {
         descriptorsCache = new FastHashMap();
         descriptorsCache.setFast(true);
@@ -239,27 +245,27 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void copyProperties(Object dest, Object orig)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (dest == null)
             throw new IllegalArgumentException
-                ("No destination bean specified");
+                    ("No destination bean specified");
         if (orig == null)
             throw new IllegalArgumentException("No origin bean specified");
 
-	PropertyDescriptor origDescriptors[] = getPropertyDescriptors(orig);
-	for (int i = 0; i < origDescriptors.length; i++) {
-	    String name = origDescriptors[i].getName();
-	    if (getPropertyDescriptor(dest, name) != null) {
-		Object value = getSimpleProperty(orig, name);
+        PropertyDescriptor origDescriptors[] = getPropertyDescriptors(orig);
+        for (int i = 0; i < origDescriptors.length; i++) {
+            String name = origDescriptors[i].getName();
+            if (getPropertyDescriptor(dest, name) != null) {
+                Object value = getSimpleProperty(orig, name);
                 try {
                     setSimpleProperty(dest, name, value);
                 } catch (NoSuchMethodException e) {
                     ;   // Skip non-matching property
                 }
-	    }
-	}
+            }
+        }
 
     }
 
@@ -282,13 +288,13 @@ public class PropertyUtils {
      */
     // FIXME - does not account for mapped properties
     public static Map describe(Object bean)
-        throws IllegalAccessException, InvocationTargetException,
-               NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         PropertyDescriptor descriptors[] =
-            PropertyUtils.getPropertyDescriptors(bean);
+                PropertyUtils.getPropertyDescriptors(bean);
         Map description = new HashMap(descriptors.length);
         for (int i = 0; i < descriptors.length; i++) {
             String name = descriptors[i].getName();
@@ -305,7 +311,8 @@ public class PropertyUtils {
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or <code>IllegalArgumentException</code> will be
-     * thrown.
+     * thrown.  In addition to supporting the JavaBeans specification, this
+     * method has been extended to support <code>List</code> objects as well.
      *
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname[index]</code> of the property value
@@ -323,39 +330,41 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getIndexedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Identify the index of the requested individual property
+        // Identify the index of the requested individual property
         int delim = name.indexOf(INDEXED_DELIM);
         int delim2 = name.indexOf(INDEXED_DELIM2);
         if ((delim < 0) || (delim2 <= delim))
-	    throw new IllegalArgumentException("Invalid indexed property '" +
-					       name + "'");
-	int index = -1;
-	try {
-	    String subscript = name.substring(delim + 1, delim2);
-	    index = Integer.parseInt(subscript);
-	} catch (NumberFormatException e) {
-	    throw new IllegalArgumentException("Invalid indexed property '" +
-					       name + "'");
-	}
-	name = name.substring(0, delim);
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "'");
+        int index = -1;
+        try {
+            String subscript = name.substring(delim + 1, delim2);
+            index = Integer.parseInt(subscript);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "'");
+        }
+        name = name.substring(0, delim);
 
-	// Request the specified indexed property value
-	return (getIndexedProperty(bean, name, index));
+        // Request the specified indexed property value
+        return (getIndexedProperty(bean, name, index));
 
     }
 
 
     /**
      * Return the value of the specified indexed property of the specified
-     * bean, with no type conversions.
+     * bean, with no type conversions.  In addition to supporting the JavaBeans
+     * specification, this method has been extended to support <code>List</code>
+     * objects as well.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -373,54 +382,62 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getIndexedProperty(Object bean,
-					    String name, int index)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                            String name, int index)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Retrieve the property descriptor for the specified property
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor == null)
-	    throw new NoSuchMethodException("Unknown property '" +
-					    name + "'");
+        // Retrieve the property descriptor for the specified property
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor == null)
+            throw new NoSuchMethodException("Unknown property '" +
+                    name + "'");
 
-	// Call the indexed getter method if there is one
-	if (descriptor instanceof IndexedPropertyDescriptor) {
-	    Method readMethod =	((IndexedPropertyDescriptor) descriptor).
-		getIndexedReadMethod();
-	    if (readMethod != null) {
-		Object subscript[] = new Object[1];
-		subscript[0] = new Integer(index);
+        // Call the indexed getter method if there is one
+        if (descriptor instanceof IndexedPropertyDescriptor) {
+            Method readMethod = ((IndexedPropertyDescriptor) descriptor).
+                    getIndexedReadMethod();
+            if (readMethod != null) {
+                Object subscript[] = new Object[1];
+                subscript[0] = new Integer(index);
                 try {
                     return (readMethod.invoke(bean, subscript));
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
-                        ArrayIndexOutOfBoundsException)
+                            ArrayIndexOutOfBoundsException)
                         throw (ArrayIndexOutOfBoundsException)
-                            e.getTargetException();
+                                e.getTargetException();
                     else
                         throw e;
                 }
-	    }
-	}
+            }
+        }
 
-	// Otherwise, the underlying property must be an array
+        // Otherwise, the underlying property must be an array
         Method readMethod = getReadMethod(descriptor);
-	if (readMethod == null)
-	    throw new NoSuchMethodException("Property '" + name +
-					    "' has no getter method");
+        if (readMethod == null)
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no getter method");
 
-	// Call the property getter and return the value
-	Object value = readMethod.invoke(bean, new Object[0]);
-	if (!value.getClass().isArray())
-	    throw new IllegalArgumentException("Property '" + name +
-					       "' is not indexed");
-	return (Array.get(value, index));
+        // Call the property getter and return the value
+        Object value = readMethod.invoke(bean, new Object[0]);
+        if (!value.getClass().isArray()) {
+            if (!(value instanceof java.util.List)) {
+                throw new IllegalArgumentException("Property '" + name
+                        + "' is not indexed");
+            } else {
+                //get the List's value
+                return ((java.util.List) value).get(index);
+            }
+        } else {
+            //get the array's value
+            return (Array.get(value, index));
+        }
 
     }
 
@@ -444,26 +461,26 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getMappedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Identify the index of the requested individual property
+        // Identify the index of the requested individual property
         int delim = name.indexOf(MAPPED_DELIM);
         int delim2 = name.indexOf(MAPPED_DELIM2);
         if ((delim < 0) || (delim2 <= delim))
-	    throw new IllegalArgumentException
-                ("Invalid mapped property '" + name + "'");
-	// Isolate the name and the key
-	String key = name.substring(delim + 1, delim2);
-	name = name.substring(0, delim);
+            throw new IllegalArgumentException
+                    ("Invalid mapped property '" + name + "'");
+        // Isolate the name and the key
+        String key = name.substring(delim + 1, delim2);
+        name = name.substring(0, delim);
 
-	// Request the specified indexed property value
-	return (getMappedProperty(bean, name, key));
+        // Request the specified indexed property value
+        return (getMappedProperty(bean, name, key));
 
     }
 
@@ -484,9 +501,9 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getMappedProperty(Object bean,
-					    String name, String key)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                           String name, String key)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
@@ -501,22 +518,22 @@ public class PropertyUtils {
         PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor == null)
             throw new NoSuchMethodException("Unknown property '" +
-                                            name + "'");
+                    name + "'");
 
         if (descriptor instanceof MappedPropertyDescriptor) {
             // Call the keyed getter method if there is one
-            Method readMethod = ((MappedPropertyDescriptor)descriptor).
-                getMappedReadMethod();
+            Method readMethod = ((MappedPropertyDescriptor) descriptor).
+                    getMappedReadMethod();
             if (readMethod != null) {
                 Object keyArray[] = new Object[1];
                 keyArray[0] = key;
                 result = readMethod.invoke(bean, keyArray);
             } else {
                 throw new NoSuchMethodException("Property '" + name +
-                                "' has no mapped getter method");
+                        "' has no mapped getter method");
             }
         }
-	return result;
+        return result;
 
     }
 
@@ -557,31 +574,31 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getNestedProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	int indexOfINDEXED_DELIM = -1;
-	int indexOfMAPPED_DELIM = -1;
-	while (true) {
+        int indexOfINDEXED_DELIM = -1;
+        int indexOfMAPPED_DELIM = -1;
+        while (true) {
             /*
-	    int delim = name.indexOf(NESTED_DELIM);
-	    if (delim < 0)
-		break;
-	    String next = name.substring(0, delim);
-	    if (next.indexOf(INDEXED_DELIM) >= 0)
-		bean = getIndexedProperty(bean, next);
-	    else
-		bean = getSimpleProperty(bean, next);
-	    if (bean == null)
-		throw new IllegalArgumentException
-		    ("Null property value for '" +
-		     name.substring(0, delim) + "'");
-	    name = name.substring(delim + 1);
+        int delim = name.indexOf(NESTED_DELIM);
+        if (delim < 0)
+        break;
+        String next = name.substring(0, delim);
+        if (next.indexOf(INDEXED_DELIM) >= 0)
+        bean = getIndexedProperty(bean, next);
+        else
+        bean = getSimpleProperty(bean, next);
+        if (bean == null)
+        throw new IllegalArgumentException
+            ("Null property value for '" +
+             name.substring(0, delim) + "'");
+        name = name.substring(delim + 1);
             */
             int period = name.indexOf(NESTED_DELIM);
             if (period < 0)
@@ -590,8 +607,8 @@ public class PropertyUtils {
             indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
             if (indexOfMAPPED_DELIM >= 0 &&
-                (indexOfINDEXED_DELIM <0 ||
-                 indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
+                    (indexOfINDEXED_DELIM < 0 ||
+                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
                 bean = getMappedProperty(bean, next);
             else {
                 if (indexOfINDEXED_DELIM >= 0)
@@ -601,10 +618,10 @@ public class PropertyUtils {
             }
             if (bean == null)
                 throw new IllegalArgumentException
-                    ("Null property value for '" +
-                     name.substring(0, period) + "'");
+                        ("Null property value for '" +
+                        name.substring(0, period) + "'");
             name = name.substring(period + 1);
-	}
+        }
 
         /*
 	if (name.indexOf(INDEXED_DELIM) >= 0)
@@ -612,18 +629,18 @@ public class PropertyUtils {
 	else
 	    return (getSimpleProperty(bean, name));
         */
-	indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
-	indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
+        indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
+        indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
-	if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM <0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
+        if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM < 0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
             bean = getMappedProperty(bean, name);
-	else {
+        else {
             if (indexOfINDEXED_DELIM >= 0)
                 bean = getIndexedProperty(bean, name);
             else
                 bean = getSimpleProperty(bean, name);
         }
-	return bean;
+        return bean;
 
     }
 
@@ -647,10 +664,10 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
-	return (getNestedProperty(bean, name));
+        return (getNestedProperty(bean, name));
 
     }
 
@@ -679,63 +696,63 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static PropertyDescriptor getPropertyDescriptor(Object bean,
-							   String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                                           String name)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Resolve nested references
-	while (true) {
-	    int period = name.indexOf(NESTED_DELIM);
-	    if (period < 0)
-		break;
-	    String next = name.substring(0, period);
+        // Resolve nested references
+        while (true) {
+            int period = name.indexOf(NESTED_DELIM);
+            if (period < 0)
+                break;
+            String next = name.substring(0, period);
             /*
-	    if (next.indexOf(INDEXED_DELIM) >= 0)
-		bean = getIndexedProperty(bean, next);
-	    else
-		bean = getSimpleProperty(bean, next);
-	    if (bean == null)
-		throw new IllegalArgumentException
-		    ("Null property value for '" +
-		     name.substring(0, period) + "'");
-	    name = name.substring(period + 1);
+        if (next.indexOf(INDEXED_DELIM) >= 0)
+        bean = getIndexedProperty(bean, next);
+        else
+        bean = getSimpleProperty(bean, next);
+        if (bean == null)
+        throw new IllegalArgumentException
+            ("Null property value for '" +
+             name.substring(0, period) + "'");
+        name = name.substring(period + 1);
             */
             int indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             int indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
-            if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM <0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
+            if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM < 0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
                 bean = getMappedProperty(bean, next);
             else {
                 if (indexOfINDEXED_DELIM >= 0)
                     bean = getIndexedProperty(bean, next);
                 else
                     bean = getSimpleProperty(bean, next);
-                }
+            }
             if (bean == null)
                 throw new IllegalArgumentException
-                    ("Null property value for '" +
-                     name.substring(0, period) + "'");
+                        ("Null property value for '" +
+                        name.substring(0, period) + "'");
             name = name.substring(period + 1);
-	}
+        }
 
-	// Remove any subscript from the final name value
-	int left = name.indexOf(INDEXED_DELIM);
-	if (left >= 0)
-	    name = name.substring(0, left);
+        // Remove any subscript from the final name value
+        int left = name.indexOf(INDEXED_DELIM);
+        if (left >= 0)
+            name = name.substring(0, left);
         left = name.indexOf(MAPPED_DELIM);
         if (left >= 0)
             name = name.substring(0, left);
 
-	// Look up and return this property from our cache
+        // Look up and return this property from our cache
         // creating and adding it to the cache if not found.
-	if ((bean == null) || (name == null))
-	    return (null);
+        if ((bean == null) || (name == null))
+            return (null);
 
-	PropertyDescriptor descriptors[] = getPropertyDescriptors(bean);
+        PropertyDescriptor descriptors[] = getPropertyDescriptors(bean);
         if (descriptors != null) {
             for (int i = 0; i < descriptors.length; i++) {
                 if (name.equals(descriptors[i].getName()))
@@ -745,24 +762,24 @@ public class PropertyUtils {
 
         PropertyDescriptor result = null;
         FastHashMap mappedDescriptors =
-            getMappedPropertyDescriptors(bean);
+                getMappedPropertyDescriptors(bean);
         if (mappedDescriptors != null) {
             result = (PropertyDescriptor) mappedDescriptors.get(name);
         }
-        if (result==null) {
+        if (result == null) {
             // not found, try to create it
             try {
                 result =
-                    new MappedPropertyDescriptor(name, bean.getClass());
+                        new MappedPropertyDescriptor(name, bean.getClass());
             } catch (IntrospectionException ie) {
             }
         }
-        if (result!=null) {
-            if (mappedDescriptors==null) {
+        if (result != null) {
+            if (mappedDescriptors == null) {
                 mappedDescriptors = new FastHashMap();
                 mappedDescriptors.setFast(true);
                 mappedDescriptorsCache.put
-                    (bean.getClass(), mappedDescriptors);
+                        (bean.getClass(), mappedDescriptors);
             }
             mappedDescriptors.put(name, result);
         }
@@ -781,29 +798,29 @@ public class PropertyUtils {
      */
     public static PropertyDescriptor[] getPropertyDescriptors(Object bean) {
 
-	if (bean == null)
+        if (bean == null)
             throw new IllegalArgumentException("No bean specified");
 
-	// Look up any cached descriptors for this bean class
-	Class beanClass = bean.getClass();
-	PropertyDescriptor descriptors[] = null;
+        // Look up any cached descriptors for this bean class
+        Class beanClass = bean.getClass();
+        PropertyDescriptor descriptors[] = null;
         descriptors =
-            (PropertyDescriptor[]) descriptorsCache.get(beanClass);
-	if (descriptors != null)
-	    return (descriptors);
+                (PropertyDescriptor[]) descriptorsCache.get(beanClass);
+        if (descriptors != null)
+            return (descriptors);
 
-	// Introspect the bean and cache the generated descriptors
-	BeanInfo beanInfo = null;
-	try {
-	    beanInfo = Introspector.getBeanInfo(bean.getClass());
-	} catch (IntrospectionException e) {
-	    return (new PropertyDescriptor[0]);
-	}
-	descriptors = beanInfo.getPropertyDescriptors();
-	if (descriptors == null)
-	    descriptors = new PropertyDescriptor[0];
+        // Introspect the bean and cache the generated descriptors
+        BeanInfo beanInfo = null;
+        try {
+            beanInfo = Introspector.getBeanInfo(bean.getClass());
+        } catch (IntrospectionException e) {
+            return (new PropertyDescriptor[0]);
+        }
+        descriptors = beanInfo.getPropertyDescriptors();
+        if (descriptors == null)
+            descriptors = new PropertyDescriptor[0];
         descriptorsCache.put(beanClass, descriptors);
-	return (descriptors);
+        return (descriptors);
 
     }
 
@@ -836,20 +853,20 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Class getPropertyEditorClass(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor != null)
-	    return (descriptor.getPropertyEditorClass());
-	else
-	    return (null);
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor != null)
+            return (descriptor.getPropertyEditorClass());
+        else
+            return (null);
 
     }
 
@@ -879,23 +896,23 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Class getPropertyType(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor == null)
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor == null)
             return (null);
         else if (descriptor instanceof IndexedPropertyDescriptor)
             return (((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType());
         else
-	    return (descriptor.getPropertyType());
+            return (descriptor.getPropertyType());
 
     }
 
@@ -932,8 +949,8 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static Object getSimpleProperty(Object bean, String name)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
@@ -943,28 +960,28 @@ public class PropertyUtils {
         // Validate the syntax of the property name
         if (name.indexOf(NESTED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Nested property names are not allowed");
+                    ("Nested property names are not allowed");
         else if (name.indexOf(INDEXED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Indexed property names are not allowed");
+                    ("Indexed property names are not allowed");
         else if (name.indexOf(MAPPED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Mapped property names are not allowed");
+                    ("Mapped property names are not allowed");
 
-	// Retrieve the property getter method for the specified property
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor == null)
-	    throw new NoSuchMethodException("Unknown property '" +
-					    name + "'");
+        // Retrieve the property getter method for the specified property
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor == null)
+            throw new NoSuchMethodException("Unknown property '" +
+                    name + "'");
         Method readMethod = getReadMethod(descriptor);
-	if (readMethod == null)
-	    throw new NoSuchMethodException("Property '" + name +
-					    "' has no getter method");
+        if (readMethod == null)
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no getter method");
 
-	// Call the property getter and return the value
-	Object value = readMethod.invoke(bean, new Object[0]);
-	return (value);
+        // Call the property getter and return the value
+        Object value = readMethod.invoke(bean, new Object[0]);
+        return (value);
 
     }
 
@@ -987,7 +1004,8 @@ public class PropertyUtils {
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or <code>IllegalArgumentException</code> will be
-     * thrown.
+     * thrown.  In addition to supporting the JavaBeans specification, this
+     * method has been extended to support <code>List</code> objects as well.
      *
      * @param bean Bean whose property is to be modified
      * @param name <code>propertyname[index]</code> of the property value
@@ -1007,40 +1025,42 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setIndexedProperty(Object bean, String name,
-					  Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                          Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Identify the index of the requested individual property
-	int delim = name.indexOf(INDEXED_DELIM);
+        // Identify the index of the requested individual property
+        int delim = name.indexOf(INDEXED_DELIM);
         int delim2 = name.indexOf(INDEXED_DELIM2);
         if ((delim < 0) || (delim2 <= delim))
-	    throw new IllegalArgumentException("Invalid indexed property '" +
-					       name + "'");
-	int index = -1;
-	try {
-	    String subscript = name.substring(delim + 1, delim2);
-	    index = Integer.parseInt(subscript);
-	} catch (NumberFormatException e) {
-	    throw new IllegalArgumentException("Invalid indexed property '" +
-					       name + "'");
-	}
-	name = name.substring(0, delim);
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "'");
+        int index = -1;
+        try {
+            String subscript = name.substring(delim + 1, delim2);
+            index = Integer.parseInt(subscript);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "'");
+        }
+        name = name.substring(0, delim);
 
-	// Set the specified indexed property value
-	setIndexedProperty(bean, name, index, value);
+        // Set the specified indexed property value
+        setIndexedProperty(bean, name, index, value);
 
     }
 
 
     /**
      * Set the value of the specified indexed property of the specified
-     * bean, with no type conversions.
+     * bean, with no type conversions.  In addition to supporting the JavaBeans
+     * specification, this method has been extended to support <code>List</code>
+     * objects as well.
      *
      * @param bean Bean whose property is to be set
      * @param name Simple property name of the property value to be set
@@ -1059,58 +1079,64 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setIndexedProperty(Object bean, String name,
-					  int index, Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                          int index, Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Retrieve the property descriptor for the specified property
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor == null)
-	    throw new NoSuchMethodException("Unknown property '" +
-					    name + "'");
+        // Retrieve the property descriptor for the specified property
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor == null)
+            throw new NoSuchMethodException("Unknown property '" +
+                    name + "'");
 
-	// Call the indexed setter method if there is one
-	if (descriptor instanceof IndexedPropertyDescriptor) {
-	    Method writeMethod = ((IndexedPropertyDescriptor) descriptor).
-		getIndexedWriteMethod();
-	    if (writeMethod != null) {
-		Object subscript[] = new Object[2];
-		subscript[0] = new Integer(index);
-		subscript[1] = value;
+        // Call the indexed setter method if there is one
+        if (descriptor instanceof IndexedPropertyDescriptor) {
+            Method writeMethod = ((IndexedPropertyDescriptor) descriptor).
+                    getIndexedWriteMethod();
+            if (writeMethod != null) {
+                Object subscript[] = new Object[2];
+                subscript[0] = new Integer(index);
+                subscript[1] = value;
                 try {
                     writeMethod.invoke(bean, subscript);
                 } catch (InvocationTargetException e) {
-                    if (e.getTargetException() instanceof
-                        ArrayIndexOutOfBoundsException)
+                    if (e.getTargetException() instanceof ArrayIndexOutOfBoundsException) {
                         throw (ArrayIndexOutOfBoundsException)
-                            e.getTargetException();
-                    else
+                                e.getTargetException();
+                    } else {
                         throw e;
+                    }
                 }
                 return;
-	    }
-	}
+            }
+        }
 
-	// Otherwise, the underlying property must be an array
+        // Otherwise, the underlying property must be an array or a list
         Method readMethod = descriptor.getReadMethod();
-	if (readMethod == null)
-	    throw new NoSuchMethodException("Property '" + name +
-					    "' has no getter method");
+        if (readMethod == null)
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no getter method");
 
-	// Call the property getter to get the array
-	Object array = readMethod.invoke(bean, new Object[0]);
-	if (!array.getClass().isArray())
-	    throw new IllegalArgumentException("Property '" + name +
-					       "' is not indexed");
-
-	// Modify the specified value
-	Array.set(array, index, value);
+        // Call the property getter to get the array or list
+        Object array = readMethod.invoke(bean, new Object[0]);
+        if (!array.getClass().isArray()) {
+            if (array instanceof List) {
+                // Modify the specified value in the List
+                ((List) array).set(index, value);
+            } else {
+                throw new IllegalArgumentException("Property '" + name +
+                        "' is not indexed");
+            }
+        } else {
+            // Modify the specified value in the array
+            Array.set(array, index, value);
+        }
 
     }
 
@@ -1135,27 +1161,27 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setMappedProperty(Object bean, String name,
-                                              Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                         Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	// Identify the index of the requested individual property
+        // Identify the index of the requested individual property
         int delim = name.indexOf(MAPPED_DELIM);
         int delim2 = name.indexOf(MAPPED_DELIM2);
         if ((delim < 0) || (delim2 <= delim))
-	    throw new IllegalArgumentException
-                ("Invalid mapped property '" + name + "'");
-	// Isolate the name and the key
-	String key = name.substring(delim + 1, delim2);
-	name = name.substring(0, delim);
-        
-	// Request the specified indexed property value
-	setMappedProperty(bean, name, key, value);
+            throw new IllegalArgumentException
+                    ("Invalid mapped property '" + name + "'");
+        // Isolate the name and the key
+        String key = name.substring(delim + 1, delim2);
+        name = name.substring(0, delim);
+
+        // Request the specified indexed property value
+        setMappedProperty(bean, name, key, value);
 
     }
 
@@ -1177,9 +1203,9 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setMappedProperty(Object bean, String name,
-                                              String key, Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                         String key, Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
@@ -1190,25 +1216,25 @@ public class PropertyUtils {
 
         // Retrieve the property descriptor for the specified property
         PropertyDescriptor descriptor =
-            getPropertyDescriptor(bean, name);
+                getPropertyDescriptor(bean, name);
         if (descriptor == null)
             throw new NoSuchMethodException("Unknown property '" +
-                                            name + "'");
+                    name + "'");
 
         if (descriptor instanceof MappedPropertyDescriptor) {
             // Call the keyed setter method if there is one
-	    Method mappedWriteMethod =
-                ((MappedPropertyDescriptor)descriptor).
+            Method mappedWriteMethod =
+                    ((MappedPropertyDescriptor) descriptor).
                     getMappedWriteMethod();
-	    if (mappedWriteMethod != null) {
+            if (mappedWriteMethod != null) {
                 Object params[] = new Object[2];
                 params[0] = key;
                 params[1] = value;
                 mappedWriteMethod.invoke(bean, params);
-	    } else {
+            } else {
                 throw new NoSuchMethodException
-                    ("Property '" + name +
-                     "' has no mapped setter method");
+                        ("Property '" + name +
+                        "' has no mapped setter method");
             }
         }
 
@@ -1235,49 +1261,49 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setNestedProperty(Object bean,
-					 String name, Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                         String name, Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
         if (name == null)
             throw new IllegalArgumentException("No name specified");
 
-	int indexOfINDEXED_DELIM = -1;
-	int indexOfMAPPED_DELIM = -1;
-	while (true) {
-	    int delim = name.indexOf(NESTED_DELIM);
-	    if (delim < 0)
-		break;
-	    String next = name.substring(0, delim);
+        int indexOfINDEXED_DELIM = -1;
+        int indexOfMAPPED_DELIM = -1;
+        while (true) {
+            int delim = name.indexOf(NESTED_DELIM);
+            if (delim < 0)
+                break;
+            String next = name.substring(0, delim);
             /*
-	    if (next.indexOf(INDEXED_DELIM) >= 0)
-		bean = getIndexedProperty(bean, next);
-	    else
-		bean = getSimpleProperty(bean, next);
-	    if (bean == null)
-		throw new IllegalArgumentException
-		    ("Null property value for '" +
-		     name.substring(0, delim) + "'");
-	    name = name.substring(delim + 1);
+        if (next.indexOf(INDEXED_DELIM) >= 0)
+        bean = getIndexedProperty(bean, next);
+        else
+        bean = getSimpleProperty(bean, next);
+        if (bean == null)
+        throw new IllegalArgumentException
+            ("Null property value for '" +
+             name.substring(0, delim) + "'");
+        name = name.substring(delim + 1);
             */
-	    indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
-	    indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
-	    if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM <0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
-	    	bean = getMappedProperty(bean, next);
-	    else {
+            indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
+            indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
+            if (indexOfMAPPED_DELIM >= 0 && (indexOfINDEXED_DELIM < 0 || indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
+                bean = getMappedProperty(bean, next);
+            else {
                 if (indexOfINDEXED_DELIM >= 0)
                     bean = getIndexedProperty(bean, next);
                 else
                     bean = getSimpleProperty(bean, next);
             }
-	    if (bean == null)
-		throw new IllegalArgumentException
-		    ("Null property value for '" +
-		     name.substring(0, delim) + "'");
-	    name = name.substring(delim + 1);
-	}
+            if (bean == null)
+                throw new IllegalArgumentException
+                        ("Null property value for '" +
+                        name.substring(0, delim) + "'");
+            name = name.substring(delim + 1);
+        }
 
         /*
 	if (name.indexOf(INDEXED_DELIM) >= 0)
@@ -1285,14 +1311,14 @@ public class PropertyUtils {
 	else
 	    setSimpleProperty(bean, name, value);
         */
-	indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
-	indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
+        indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);
+        indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
-	if (indexOfMAPPED_DELIM >= 0 &&
-            (indexOfINDEXED_DELIM <0 ||
-             indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
+        if (indexOfMAPPED_DELIM >= 0 &&
+                (indexOfINDEXED_DELIM < 0 ||
+                indexOfMAPPED_DELIM < indexOfINDEXED_DELIM))
             setMappedProperty(bean, name, value);
-	else {
+        else {
             if (indexOfINDEXED_DELIM >= 0)
                 setIndexedProperty(bean, name, value);
             else
@@ -1322,10 +1348,10 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setProperty(Object bean, String name, Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
-	setNestedProperty(bean, name, value);
+        setNestedProperty(bean, name, value);
 
     }
 
@@ -1350,9 +1376,9 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     public static void setSimpleProperty(Object bean,
-					 String name, Object value)
-	throws IllegalAccessException, InvocationTargetException,
-	       NoSuchMethodException {
+                                         String name, Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
 
         if (bean == null)
             throw new IllegalArgumentException("No bean specified");
@@ -1362,29 +1388,29 @@ public class PropertyUtils {
         // Validate the syntax of the property name
         if (name.indexOf(NESTED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Nested property names are not allowed");
+                    ("Nested property names are not allowed");
         else if (name.indexOf(INDEXED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Indexed property names are not allowed");
+                    ("Indexed property names are not allowed");
         else if (name.indexOf(MAPPED_DELIM) >= 0)
             throw new IllegalArgumentException
-                ("Mapped property names are not allowed");
+                    ("Mapped property names are not allowed");
 
-	// Retrieve the property setter method for the specified property
-	PropertyDescriptor descriptor =
-	    getPropertyDescriptor(bean, name);
-	if (descriptor == null)
-	    throw new NoSuchMethodException("Unknown property '" +
-					    name + "'");
+        // Retrieve the property setter method for the specified property
+        PropertyDescriptor descriptor =
+                getPropertyDescriptor(bean, name);
+        if (descriptor == null)
+            throw new NoSuchMethodException("Unknown property '" +
+                    name + "'");
         Method writeMethod = getWriteMethod(descriptor);
-	if (writeMethod == null)
-	    throw new NoSuchMethodException("Property '" + name +
-					    "' has no setter method");
+        if (writeMethod == null)
+            throw new NoSuchMethodException("Property '" + name +
+                    "' has no setter method");
 
-	// Call the property setter method
-	Object values[] = new Object[1];
-	values[0] = value;
-	writeMethod.invoke(bean, values);
+        // Call the property setter method
+        Object values[] = new Object[1];
+        values[0] = value;
+        writeMethod.invoke(bean, values);
 
     }
 
