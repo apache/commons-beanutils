@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.31 2002/09/24 18:45:54 rdonkin Exp $
- * $Revision: 1.31 $
- * $Date: 2002/09/24 18:45:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.32 2002/10/22 06:48:32 sanders Exp $
+ * $Revision: 1.32 $
+ * $Date: 2002/10/22 06:48:32 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.31 $ $Date: 2002/09/24 18:45:54 $
+ * @version $Revision: 1.32 $ $Date: 2002/10/22 06:48:32 $
  */
 
 public class PropertyUtils {
@@ -877,9 +877,12 @@ public class PropertyUtils {
         PropertyDescriptor result = null;
         FastHashMap mappedDescriptors =
                 getMappedPropertyDescriptors(bean);
-        if (mappedDescriptors != null) {
-            result = (PropertyDescriptor) mappedDescriptors.get(name);
+        if (mappedDescriptors == null) {
+            mappedDescriptors = new FastHashMap();
+            mappedDescriptors.setFast(true);
+            mappedDescriptorsCache.put(bean.getClass(), mappedDescriptors);
         }
+        result = (PropertyDescriptor) mappedDescriptors.get(name);
         if (result == null) {
             // not found, try to create it
             try {
@@ -887,9 +890,9 @@ public class PropertyUtils {
                         new MappedPropertyDescriptor(name, bean.getClass());
             } catch (IntrospectionException ie) {
             }
-        }
-        if (result != null) {
-            mappedDescriptorsCache.put(name, result);
+            if (result != null) {
+                mappedDescriptors.put(name, result);
+            }
         }
         return result;
 
