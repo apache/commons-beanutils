@@ -16,13 +16,10 @@
  * limitations under the License.
  */ 
 
-
 package org.apache.commons.beanutils;
-
 
 import java.util.List;
 import java.util.ArrayList;
-
 
 /**
  * Indexed Properties Test bean for JUnit tests for the "beanutils" component.
