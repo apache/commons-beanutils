@@ -76,6 +76,12 @@
       <email>mvdb@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Yoav Shapira</name>
+      <id>yoavs</id>
+      <email>yoavs@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
   
   <dependencies>
@@ -85,7 +91,7 @@
     </dependency>
     <dependency>
       <id>commons-collections</id>
-      <version>3.0-dev</version>
+      <version>3.0</version>
     </dependency>
   </dependencies>
 
