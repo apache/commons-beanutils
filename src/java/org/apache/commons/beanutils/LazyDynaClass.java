@@ -214,7 +214,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         }
 
         // Check if property already exists
-        if (propertiesMap.get(name) != null) {
+        if (propertiesMap.get(property.getName()) != null) {
            return;
         }
 
