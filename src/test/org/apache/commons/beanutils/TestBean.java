@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.3 2001/08/21 21:59:02 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2001/08/21 21:59:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.4 2001/09/03 17:34:36 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2001/09/03 17:34:36 $
  *
  * ====================================================================
  *
@@ -70,7 +70,7 @@ import java.util.HashMap;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2001/08/21 21:59:02 $
+ * @version $Revision: 1.4 $ $Date: 2001/09/03 17:34:36 $
  */
 
 public class TestBean {
@@ -208,6 +208,27 @@ public class TestBean {
 
     public void setMappedProperty(String key, String value) {
         mappedProperty.put(key, value);
+    }
+
+
+    /**
+     * A mapped property that has String keys and int values.
+     */
+    private HashMap mappedIntProperty = null;
+
+    public int getMappedIntProperty(String key) {
+        // Create the map the very first time
+        if (mappedProperty == null) {
+            mappedProperty = new HashMap();
+            mappedProperty.put("One", new Integer(1));
+            mappedProperty.put("Two", new Integer(2));
+        }
+        Integer x = (Integer) mappedIntProperty.get(key);
+        return ((x == null) ? 0 : x.intValue());
+    }
+
+    public void setMappedIntProperty(String key, int value) {
+        mappedIntProperty.put(key, new Integer(value));
     }
 
 

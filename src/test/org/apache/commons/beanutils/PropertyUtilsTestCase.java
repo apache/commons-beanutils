@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.9 2001/08/21 23:05:08 craigmcc Exp $
- * $Revision: 1.9 $
- * $Date: 2001/08/21 23:05:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.10 2001/09/03 17:34:36 craigmcc Exp $
+ * $Revision: 1.10 $
+ * $Date: 2001/09/03 17:34:36 $
  *
  * ====================================================================
  *
@@ -99,7 +99,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2001/08/21 23:05:08 $
+ * @version $Revision: 1.10 $ $Date: 2001/09/03 17:34:36 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -1624,6 +1624,28 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetWriteMethodPublicSubclass() {
 
         testGetWriteMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
+
+    }
+
+
+    /**
+     * Test the mappedPropertyType of MappedPropertyDescriptor.
+     */
+    public void testMappedPropertyType() throws Exception {
+
+        MappedPropertyDescriptor desc;
+
+        // Check a String property
+        desc = (MappedPropertyDescriptor)
+            PropertyUtils.getPropertyDescriptor(bean,
+                                                "mappedProperty");
+        assertEquals(String.class, desc.getMappedPropertyType());
+
+        // Check an int property
+        desc = (MappedPropertyDescriptor)
+            PropertyUtils.getPropertyDescriptor(bean,
+                                                "mappedIntProperty");
+        assertEquals(Integer.TYPE, desc.getMappedPropertyType());
 
     }
 

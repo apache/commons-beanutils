@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.1 2001/08/21 21:59:02 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/08/21 21:59:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.2 2001/09/03 17:34:36 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/09/03 17:34:36 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ import java.security.*;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.1 $ $Date: 2001/08/21 21:59:02 $
+ * @version $Revision: 1.2 $ $Date: 2001/09/03 17:34:36 $
  */
 
 public class MappedPropertyDescriptor extends PropertyDescriptor {
@@ -331,7 +331,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     throw new IntrospectionException
                         ("type mismatch between mapped read and write methods");
                 }
-                mappedPropertyType = params[0];
+                mappedPropertyType = params[1];
             }
         } catch (IntrospectionException ex) {
             throw ex;
