@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2004 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,8 @@ public class LazyDynaBeanTestCase extends TestCase {
     protected LazyDynaBean  bean      = null;
     protected LazyDynaClass dynaClass = null;
     protected String testProperty     = "myProperty";
+    protected String testPropertyA    = "myProperty-A";
+    protected String testPropertyB    = "myProperty-B";
     protected String testString1      = "myStringValue-1";
     protected String testString2      = "myStringValue-2";
     protected Integer testInteger1    = new Integer(30);
@@ -165,14 +167,13 @@ public class LazyDynaBeanTestCase extends TestCase {
 
         // Check the property & value doesn't exist
         assertNull("Check Mapped Property doesn't exist", dynaClass.getDynaProperty(testProperty));
-        assertNull("Check Map is null", bean.get(testProperty));
-        assertNull("Check Mapped Value is null", bean.get(testProperty, testKey));
 
         // Add a 'TreeMap' property to the DynaClass
         dynaClass.add(testProperty, TreeMap.class);
         assertTrue("Check Property is mapped", dynaClass.getDynaProperty(testProperty).isMapped());
         assertEquals("Check Property is correct type", TreeMap.class, dynaClass.getDynaProperty(testProperty).getType());
-        assertNull("Check mapped property is null", bean.get(testProperty));
+        assertEquals("Check Mapped Property exists", TreeMap.class, bean.get(testProperty).getClass());
+//        assertNull("Check mapped property is null", bean.get(testProperty));
 
         // Set a new mapped property - should instatiate a new TreeMap property and set the mapped value
         bean.set(testProperty, testKey, testInteger1);
@@ -290,13 +291,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Indexed Property is null", bean.get(testProperty));
-        assertNull("Check Indexed value is null", bean.get(testProperty, index));
 
         // Add a 'LinkedList' property to the DynaClass
         dynaClass.add(testProperty, LinkedList.class);
         assertTrue("Check Property is indexed", dynaClass.getDynaProperty(testProperty).isIndexed());
         assertEquals("Check Property is correct type", LinkedList.class, dynaClass.getDynaProperty(testProperty).getType());
-        assertNull("Check Indexed property is null", bean.get(testProperty));
+        assertEquals("Check Property type is correct", LinkedList.class, bean.get(testProperty).getClass());
 
         // Set the property, should instantiate a new LinkedList and set appropriate indexed value
         bean.set(testProperty, index, testString1);
@@ -322,12 +322,11 @@ public class LazyDynaBeanTestCase extends TestCase {
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Indexed Property is null", bean.get(testProperty));
-        assertNull("Check Indexed value is null", bean.get(testProperty, index));
 
         // Add a DynaProperty of type int[]
         dynaClass.add(testProperty, primitiveArray.getClass());
         assertEquals("Check Indexed Property exists", primitiveArray.getClass(), dynaClass.getDynaProperty(testProperty).getType());
-        assertNull("Check Indexed Property is null", bean.get(testProperty));
+        assertEquals("Check Indexed Property is correct type", primitiveArray.getClass(), bean.get(testProperty).getClass());
 
         // Set an indexed value
         bean.set(testProperty, index, testInteger1);
@@ -357,12 +356,11 @@ public class LazyDynaBeanTestCase extends TestCase {
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Indexed Property is null", bean.get(testProperty));
-        assertNull("Check Indexed value is null", bean.get(testProperty, index));
 
         // Add a DynaProperty of type String[]
         dynaClass.add(testProperty, objectArray.getClass());
         assertEquals("Check Indexed Property exists", objectArray.getClass(), dynaClass.getDynaProperty(testProperty).getType());
-        assertNull("Check Indexed Property is null", bean.get(testProperty));
+        assertEquals("Check Indexed Property is correct type", objectArray.getClass(), bean.get(testProperty).getClass());
 
         // Set an indexed value
         bean.set(testProperty, index, testString1);
@@ -378,6 +376,36 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check Second Indexed Value is correct(a)", testString2, bean.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[])bean.get(testProperty))[index]);
         assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((String[])bean.get(testProperty)).length));
+    }
+
+    /**
+     * Test Getting/Setting an DynaBean[] array
+     */
+    public void testIndexedDynaBeanArray() {
+
+        int   index     = 3;
+        Object objectArray = new LazyDynaMap[0];
+
+        // Check the property & value doesn't exist
+        assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
+        assertNull("Check Indexed Property is null", bean.get(testProperty));
+
+        // Add a DynaProperty of type String[]
+        dynaClass.add(testProperty, objectArray.getClass());
+        assertEquals("Check Indexed Property exists", objectArray.getClass(), dynaClass.getDynaProperty(testProperty).getType());
+        assertEquals("Check Indexed Property is correct type", objectArray.getClass(), bean.get(testProperty).getClass());
+
+        // Retrieving from Array should initialize DynaBean
+        for (int i = index; i >= 0; i--) {
+            assertEquals("Check Array Components initialized", LazyDynaMap.class, bean.get(testProperty, index).getClass());
+        }
+
+        dynaClass.add(testPropertyB, objectArray.getClass());
+        LazyDynaMap newMap = new LazyDynaMap();
+        newMap.set(testPropertyB, testString2);
+        bean.set(testPropertyA, index, newMap);
+        assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean)bean.get(testPropertyA, index)).get(testPropertyB));
+
     }
 
     /**
