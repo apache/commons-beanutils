@@ -64,6 +64,10 @@ import java.lang.reflect.Modifier;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 
 /**
  * <p> Test case for <code>MethodUtils</code> </p>

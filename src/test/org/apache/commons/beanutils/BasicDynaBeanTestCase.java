@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.4 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.5 2002/01/23 22:52:26 sanders Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/23 22:52:26 $
  *
  * ====================================================================
  *
@@ -68,6 +68,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 
 /**
  * <p>Test Case for the <code>BasicDynaBean</code> implementation class.
@@ -75,7 +79,7 @@ import java.util.Map;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/23 22:52:26 $
  */
 
 public class BasicDynaBeanTestCase extends TestCase {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.4 2002/01/23 22:52:26 sanders Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/01/23 22:52:26 $
  *
  * ====================================================================
  *
@@ -68,12 +68,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 
 /**
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.4 $ $Date: 2002/01/23 22:52:26 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.14 2002/01/23 22:35:59 sanders Exp $
- * $Revision: 1.14 $
- * $Date: 2002/01/23 22:35:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.15 2002/01/23 22:52:26 sanders Exp $
+ * $Revision: 1.15 $
+ * $Date: 2002/01/23 22:52:26 $
  *
  * ====================================================================
  *
@@ -70,6 +70,10 @@ import java.lang.reflect.Method;
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
 
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 
 /**
  * <p>Test Case for the PropertyUtils class.  The majority of these tests use
@@ -97,7 +101,7 @@ import org.apache.commons.beanutils.priv.PrivateDirect;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.14 $ $Date: 2002/01/23 22:35:59 $
+ * @version $Revision: 1.15 $ $Date: 2002/01/23 22:52:26 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {

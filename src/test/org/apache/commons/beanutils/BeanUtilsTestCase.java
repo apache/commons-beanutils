@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.4 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.5 2002/01/23 22:52:26 sanders Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/23 22:52:26 $
  *
  * ====================================================================
  *
@@ -64,6 +64,10 @@ package org.apache.commons.beanutils;
 
 import java.lang.reflect.InvocationTargetException;
 
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 
 /**
  * <p>
@@ -91,7 +95,7 @@ import java.lang.reflect.InvocationTargetException;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public class BeanUtilsTestCase extends TestCase {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.2 2002/01/23 22:35:59 sanders Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/23 22:35:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/WrapDynaBeanTestCase.java,v 1.3 2002/01/23 22:52:26 sanders Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/23 22:52:26 $
  *
  * ====================================================================
  *
@@ -63,7 +63,8 @@
 package org.apache.commons.beanutils;
 
 
-
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 
 /**
@@ -72,7 +73,7 @@ package org.apache.commons.beanutils;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/23 22:35:59 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/23 22:52:26 $
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
