@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.20 2003/02/04 07:28:14 craigmcc Exp $
- * $Revision: 1.20 $
- * $Date: 2003/02/04 07:28:14 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.21 2003/02/05 00:45:53 craigmcc Exp $
+ * $Revision: 1.21 $
+ * $Date: 2003/02/05 00:45:53 $
  *
  * ====================================================================
  *
@@ -98,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -1208,6 +1208,25 @@ public class BeanUtilsTestCase extends TestCase {
         assertNotNull(bean.getNested());
         assertEquals(0, bean.getIntProperty());
         assertEquals(4, bean.getNested().getIntProperty());
+
+    }
+
+
+    /**
+     * Test copying a new value to a write-only property, with and without
+     * conversions.
+     */
+    public void testCopyPropertyWriteOnly() throws Exception {
+
+        bean.setWriteOnlyProperty("Original value");
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "writeOnlyProperty", "New value");
+        assertEquals("New value", bean.getWriteOnlyPropertyValue());
+
+        // Integer->String conversion required
+        BeanUtils.copyProperty(bean, "writeOnlyProperty", new Integer(123));
+        assertEquals("123", bean.getWriteOnlyPropertyValue());
 
     }
 
