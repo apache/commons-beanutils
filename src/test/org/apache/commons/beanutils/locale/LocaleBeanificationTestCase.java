@@ -100,7 +100,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
-        ClassLoader loader = new ClassLoader() {};
+        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
         WeakReference reference = new  WeakReference(loader);
         Class myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
         
