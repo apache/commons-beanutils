@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.7 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.7 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.8 2004/02/15 02:00:32 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2004/02/15 02:00:32 $
  *
  * ====================================================================
  * 
@@ -107,7 +107,7 @@ import java.util.List;
  * application components.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.8 $ $Date: 2004/02/15 02:00:32 $
  */
 
 public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
@@ -267,7 +267,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
 
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {	
-            DynaBean bean = new BasicDynaBean(this);
+            DynaBean bean = createDynaBean();
             for (int i = 0; i < properties.length; i++) {
                 String name = properties[i].getName();
                 bean.set(name, resultSet.getObject(name));
@@ -276,5 +276,17 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
         }
 
     }
+
+
+    /**
+     * <p>Create and return a new {@link DynaBean} instance to be used for
+     * representing a row in the underlying result set.</p>
+     */
+    protected DynaBean createDynaBean() {
+
+        return (new BasicDynaBean(this));
+
+    }
+
 
 }
