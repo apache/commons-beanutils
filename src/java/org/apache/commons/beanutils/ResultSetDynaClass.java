@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.4 2002/08/14 20:29:14 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2002/08/14 20:29:14 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.5 2002/09/13 11:51:18 jstrachan Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/09/13 11:51:18 $
  *
  * ====================================================================
  *
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/08/14 20:29:14 $
+ * @version $Revision: 1.5 $ $Date: 2002/09/13 11:51:18 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
@@ -301,16 +301,10 @@ public class ResultSetDynaClass implements DynaClass {
         ResultSetMetaData metadata = resultSet.getMetaData();
         int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
-            String name = metadata.getColumnName(i).toLowerCase();
-            String className = metadata.getColumnClassName(i);
-            Class clazz = null;
-            try {
-                clazz = Class.forName(className);
-            } catch (Exception e) {
-                throw new SQLException("Cannot load column class '" +
-                                       className + "': " + e);
+            DynaProperty dynaProperty = createDynaProperty(metadata, i);
+            if (dynaProperty != null) {
+                list.add(dynaProperty);
             }
-            list.add(new DynaProperty(name, clazz));
         }
 
         // Convert this list into the internal data structures we need
@@ -322,5 +316,48 @@ public class ResultSetDynaClass implements DynaClass {
 
     }
 
+    /**
+     * <p>Factory method to create a new DynaProperty for the given index
+     * into the result set metadata</p>
+     * 
+     * @param metadata is the result set metadata
+     * @param i is the column index in the metadata
+     * @return the newly created DynaProperty instance
+     */
+    protected DynaProperty createDynaProperty(ResultSetMetaData metadata, int i) throws SQLException {
+        String name = metadata.getColumnName(i).toLowerCase();
+        
+        String className = null;
+        try {
+            className = metadata.getColumnClassName(i);
+        }
+        catch (SQLException e) {
+            // this is a patch for HsqlDb to ignore exceptions thrown by its metadata implementation
+        }
+
+        // lets default to Object type if no class name could be retrieved from the metadata
+        Class clazz = Object.class;
+        if (className != null) {
+            clazz = loadClass(className);
+        }
+        return new DynaProperty(name, clazz);
+    }
+
+    /**
+     * <p>Loads the class of the given name which by default uses the class loader used 
+     * to load this library.
+     * Dervations of this class could implement alternative class loading policies such as
+     * using custom ClassLoader or using the Threads's context class loader etc.
+     * </p>
+     */        
+    protected Class loadClass(String className) throws SQLException {
+        try {
+            return getClass().getClassLoader().loadClass(className);
+        } 
+        catch (Exception e) {
+            throw new SQLException("Cannot load column class '" +
+                                   className + "': " + e);
+        }
+    }
 
 }
