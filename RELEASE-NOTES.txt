@@ -1,4 +1,4 @@
-$Id: RELEASE-NOTES.txt,v 1.10 2003/02/17 21:25:33 rdonkin Exp $
+$Id: RELEASE-NOTES.txt,v 1.11 2003/02/18 19:55:56 rdonkin Exp $
 
 
                           Commons BeanUtils Package
@@ -19,7 +19,7 @@ The ConstructorUtils java docs have been improved.
 ConvertingWrapDynaBean
 ----------------------
 
-Use BeanUtils.copyProperty() intead of BeanUtils.setProperty() so that
+Use BeanUtils.copyProperty() instead of BeanUtils.setProperty() so that
 Object->Object conversions -- via registered Converters, if any, are done.
 
 BeanUtils
