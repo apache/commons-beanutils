@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.16 2002/06/15 20:22:01 craigmcc Exp $
- * $Revision: 1.16 $
- * $Date: 2002/06/15 20:22:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.17 2002/07/07 23:08:42 craigmcc Exp $
+ * $Revision: 1.17 $
+ * $Date: 2002/07/07 23:08:42 $
  *
  * ====================================================================
  *
@@ -67,6 +67,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
@@ -103,7 +104,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.16 $ $Date: 2002/06/15 20:22:01 $
+ * @version $Revision: 1.17 $ $Date: 2002/07/07 23:08:42 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -170,6 +171,31 @@ public class PropertyUtilsTestCase extends TestCase {
      * The "public subclass" test bean for each test.
      */
     protected TestBeanPublicSubclass beanPublicSubclass = null;
+
+
+    /**
+     * The set of properties that should be described.
+     */
+    protected String describes[] =
+    { "booleanProperty",
+      "booleanSecond",
+      "doubleProperty",
+      "floatProperty",
+      "intArray",
+      //      "intIndexed",
+      "intProperty",
+      "listIndexed",
+      "longProperty",
+      //      "mappedProperty",
+      //      "mappedIntProperty",
+      "nested",
+      "nullProperty",
+      "readOnlyProperty",
+      "shortProperty",
+      "stringArray",
+      //      "stringIndexed",
+      "stringProperty"
+    };
 
 
     /**
@@ -256,6 +282,52 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test the describe() method.
+     */
+    public void testDescribe() {
+
+        Map map = null;
+        try {
+            map = BeanUtils.describe(bean);
+        } catch (Exception e) {
+            fail("Threw exception " + e);
+        }
+
+        // Verify existence of all the properties that should be present
+        for (int i = 0; i < describes.length; i++) {
+            assertTrue("Property '" + describes[i] + "' is present",
+                       map.containsKey(describes[i]));
+        }
+        assertTrue("Property 'writeOnlyProperty' is not present",
+                   !map.containsKey("writeOnlyProperty"));
+
+        // Verify the values of scalar properties
+        assertEquals("Value of 'booleanProperty'",
+                     "true",
+                     (String) map.get("booleanProperty"));
+        assertEquals("Value of 'doubleProperty'",
+                     "321.0",
+                     (String) map.get("doubleProperty"));
+        assertEquals("Value of 'floatProperty'",
+                     "123.0",
+                     (String) map.get("floatProperty"));
+        assertEquals("Value of 'intProperty'",
+                     "123",
+                     (String) map.get("intProperty"));
+        assertEquals("Value of 'longProperty'",
+                     "321",
+                     (String) map.get("longProperty"));
+        assertEquals("Value of 'shortProperty'",
+                     "987",
+                     (String) map.get("shortProperty"));
+        assertEquals("Value of 'stringProperty'",
+                     "This is a string",
+                     (String) map.get("stringProperty"));
+
+    }
 
 
     /**

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.8 2002/04/27 23:11:23 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2002/04/27 23:11:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.9 2002/07/07 23:08:42 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2002/07/07 23:08:42 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2002/04/27 23:11:23 $
+ * @version $Revision: 1.9 $ $Date: 2002/07/07 23:08:42 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -96,6 +96,31 @@ public class DynaBeanUtilsTestCase extends TestCase {
      * The nested bean pointed at by the "nested" property.
      */
     protected TestBean nested = null;
+
+
+    /**
+     * The set of properties that should be described.
+     */
+    protected String describes[] =
+    { "booleanProperty",
+      "booleanSecond",
+      "doubleProperty",
+      "floatProperty",
+      "intArray",
+      "intIndexed",
+      "intProperty",
+      "listIndexed",
+      "longProperty",
+      "mappedProperty",
+      "mappedIntProperty",
+      "nested",
+      "nullProperty",
+      //      "readOnlyProperty",
+      "shortProperty",
+      "stringArray",
+      "stringIndexed",
+      "stringProperty"
+    };
 
 
     // ----------------------------------------------------------- Constructors
@@ -189,6 +214,52 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test the describe() method.
+     */
+    public void testDescribe() {
+
+        Map map = null;
+        try {
+            map = PropertyUtils.describe(bean);
+        } catch (Exception e) {
+            fail("Threw exception " + e);
+        }
+
+        // Verify existence of all the properties that should be present
+        for (int i = 0; i < describes.length; i++) {
+            assertTrue("Property '" + describes[i] + "' is present",
+                       map.containsKey(describes[i]));
+        }
+        assertTrue("Property 'writeOnlyProperty' is not present",
+                   !map.containsKey("writeOnlyProperty"));
+
+        // Verify the values of scalar properties
+        assertEquals("Value of 'booleanProperty'",
+                     Boolean.TRUE,
+                     (Boolean) map.get("booleanProperty"));
+        assertEquals("Value of 'doubleProperty'",
+                     new Double(321.0),
+                     (Double) map.get("doubleProperty"));
+        assertEquals("Value of 'floatProperty'",
+                     new Float((float) 123.0),
+                     (Float) map.get("floatProperty"));
+        assertEquals("Value of 'intProperty'",
+                     new Integer(123),
+                     (Integer) map.get("intProperty"));
+        assertEquals("Value of 'longProperty'",
+                     new Long(321),
+                     (Long) map.get("longProperty"));
+        assertEquals("Value of 'shortProperty'",
+                     new Short((short) 987),
+                     (Short) map.get("shortProperty"));
+        assertEquals("Value of 'stringProperty'",
+                     "This is a string",
+                     (String) map.get("stringProperty"));
+
+    }
 
 
     /**

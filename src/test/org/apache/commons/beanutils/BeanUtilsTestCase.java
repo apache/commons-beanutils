@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.10 2002/06/05 20:46:38 rdonkin Exp $
- * $Revision: 1.10 $
- * $Date: 2002/06/05 20:46:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.11 2002/07/07 23:08:42 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/07/07 23:08:42 $
  *
  * ====================================================================
  *
@@ -64,6 +64,7 @@ package org.apache.commons.beanutils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -95,7 +96,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -106,6 +107,31 @@ public class BeanUtilsTestCase extends TestCase {
      * The test bean for each test.
      */
     protected TestBean bean = null;
+
+
+    /**
+     * The set of properties that should be described.
+     */
+    protected String describes[] =
+    { "booleanProperty",
+      "booleanSecond",
+      "doubleProperty",
+      "floatProperty",
+      "intArray",
+      //      "intIndexed",
+      "intProperty",
+      "listIndexed",
+      "longProperty",
+      //      "mappedProperty",
+      //      "mappedIntProperty",
+      "nested",
+      "nullProperty",
+      "readOnlyProperty",
+      "shortProperty",
+      "stringArray",
+      //      "stringIndexed",
+      "stringProperty"
+    };
 
 
     // ---------------------------------------------------------- Constructors
@@ -147,6 +173,52 @@ public class BeanUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test the describe() method.
+     */
+    public void testDescribe() {
+
+        Map map = null;
+        try {
+            map = BeanUtils.describe(bean);
+        } catch (Exception e) {
+            fail("Threw exception " + e);
+        }
+
+        // Verify existence of all the properties that should be present
+        for (int i = 0; i < describes.length; i++) {
+            assertTrue("Property '" + describes[i] + "' is present",
+                       map.containsKey(describes[i]));
+        }
+        assertTrue("Property 'writeOnlyProperty' is not present",
+                   !map.containsKey("writeOnlyProperty"));
+
+        // Verify the values of scalar properties
+        assertEquals("Value of 'booleanProperty'",
+                     "true",
+                     (String) map.get("booleanProperty"));
+        assertEquals("Value of 'doubleProperty'",
+                     "321.0",
+                     (String) map.get("doubleProperty"));
+        assertEquals("Value of 'floatProperty'",
+                     "123.0",
+                     (String) map.get("floatProperty"));
+        assertEquals("Value of 'intProperty'",
+                     "123",
+                     (String) map.get("intProperty"));
+        assertEquals("Value of 'longProperty'",
+                     "321",
+                     (String) map.get("longProperty"));
+        assertEquals("Value of 'shortProperty'",
+                     "987",
+                     (String) map.get("shortProperty"));
+        assertEquals("Value of 'stringProperty'",
+                     "This is a string",
+                     (String) map.get("stringProperty"));
+
+    }
 
 
     /**

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.25 2002/06/15 20:22:01 craigmcc Exp $
- * $Revision: 1.25 $
- * $Date: 2002/06/15 20:22:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.26 2002/07/07 23:08:41 craigmcc Exp $
+ * $Revision: 1.26 $
+ * $Date: 2002/07/07 23:08:41 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.25 $ $Date: 2002/06/15 20:22:01 $
+ * @version $Revision: 1.26 $ $Date: 2002/07/07 23:08:41 $
  */
 
 public class PropertyUtils {
@@ -307,13 +307,22 @@ public class PropertyUtils {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        PropertyDescriptor descriptors[] =
-                PropertyUtils.getPropertyDescriptors(bean);
-        Map description = new HashMap(descriptors.length);
-        for (int i = 0; i < descriptors.length; i++) {
-            String name = descriptors[i].getName();
-            if (descriptors[i].getReadMethod() != null)
+        Map description = new HashMap();
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptors[] =
+                ((DynaBean) bean).getDynaClass().getDynaProperties();
+            for (int i = 0; i < descriptors.length; i++) {
+                String name = descriptors[i].getName();
                 description.put(name, getProperty(bean, name));
+            }
+        } else {
+            PropertyDescriptor descriptors[] =
+                PropertyUtils.getPropertyDescriptors(bean);
+            for (int i = 0; i < descriptors.length; i++) {
+                String name = descriptors[i].getName();
+                if (descriptors[i].getReadMethod() != null)
+                    description.put(name, getProperty(bean, name));
+            }
         }
         return (description);
 
