@@ -540,7 +540,7 @@ public class MethodUtils {
      * @param methodName find method with this name
      * @param parameterTypes find method with compatible parameters 
      */
-    private static Method getMatchingAccessibleMethod(
+    public static Method getMatchingAccessibleMethod(
                                                 Class clazz,
                                                 String methodName,
                                                 Class[] parameterTypes) {
