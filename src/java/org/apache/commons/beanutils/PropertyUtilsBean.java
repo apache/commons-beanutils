@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.12 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.12 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.13 2003/10/13 14:12:08 rdonkin Exp $
+ * $Revision: 1.13 $
+ * $Date: 2003/10/13 14:12:08 $
  *
  * ====================================================================
  * 
@@ -133,7 +133,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.12 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.13 $ $Date: 2003/10/13 14:12:08 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -1422,6 +1422,15 @@ public class PropertyUtilsBean {
                 subscript[0] = new Integer(index);
                 subscript[1] = value;
                 try {
+                    if (log.isTraceEnabled()) {
+                        String valueClassName =
+                            value == null ? "<null>" 
+                                          : value.getClass().getName();
+                        log.trace("setSimpleProperty: Invoking method "
+                                  + writeMethod +" with index=" + index
+                                  + ", value=" + value
+                                  + " (class " + valueClassName+ ")");
+                    }
                     invokeMethod(writeMethod, bean, subscript);
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
@@ -1570,6 +1579,14 @@ public class PropertyUtilsBean {
                 Object params[] = new Object[2];
                 params[0] = key;
                 params[1] = value;
+                if (log.isTraceEnabled()) {
+                    String valueClassName =
+                        value == null ? "<null>" : value.getClass().getName();
+                    log.trace("setSimpleProperty: Invoking method "
+                              + mappedWriteMethod + " with key=" + key
+                              + ", value=" + value
+                              + " (class " + valueClassName +")");
+                }
                 invokeMethod(mappedWriteMethod, bean, params);
             } else {
                 throw new NoSuchMethodException
@@ -1776,6 +1793,12 @@ public class PropertyUtilsBean {
         // Call the property setter method
         Object values[] = new Object[1];
         values[0] = value;
+        if (log.isTraceEnabled()) {
+            String valueClassName =
+                value == null ? "<null>" : value.getClass().getName();
+            log.trace("setSimpleProperty: Invoking method " + writeMethod
+                      + " with value " + value + " (class " + valueClassName + ")");
+        }
         invokeMethod(writeMethod, bean, values);
 
     }
