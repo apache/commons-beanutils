@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.3 2002/01/06 06:01:08 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/06 06:01:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.4 2002/01/11 02:25:43 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/01/11 02:25:43 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.util.Map;
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/06 06:01:08 $
+ * @version $Revision: 1.4 $ $Date: 2002/01/11 02:25:43 $
  */
 
 public class BasicDynaBean implements DynaBean {
@@ -131,7 +131,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public boolean contains(String name, String key) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -163,7 +163,7 @@ public class BasicDynaBean implements DynaBean {
         } 
 
         // Return a null value for a non-primitive property
-        Class type = getPropertyDescriptor(name).getType();
+        Class type = getDynaProperty(name).getType();
         if (!type.isPrimitive()) {
             return (value);
         }
@@ -209,7 +209,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name, int index) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -240,7 +240,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name, String key) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -279,7 +279,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public void remove(String name, String key) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -309,7 +309,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public void set(String name, Object value) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
                 throw new NullPointerException
@@ -345,7 +345,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public void set(String name, int index, Object value) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
@@ -382,7 +382,7 @@ public class BasicDynaBean implements DynaBean {
      */
     public void set(String name, String key, Object value) {
 
-        DynaProperty descriptor = getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaProperty(name);
         Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
@@ -408,9 +408,9 @@ public class BasicDynaBean implements DynaBean {
      * @exception IllegalArgumentException if this is not a valid property
      *  name for our DynaClass
      */
-    protected DynaProperty getPropertyDescriptor(String name) {
+    protected DynaProperty getDynaProperty(String name) {
 
-        DynaProperty descriptor = getDynaClass().getPropertyDescriptor(name);
+        DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException
                 ("Invalid property name '" + name + "'");

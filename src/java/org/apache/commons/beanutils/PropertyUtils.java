@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.18 2002/01/09 19:27:30 craigmcc Exp $
- * $Revision: 1.18 $
- * $Date: 2002/01/09 19:27:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.19 2002/01/11 02:25:43 craigmcc Exp $
+ * $Revision: 1.19 $
+ * $Date: 2002/01/11 02:25:43 $
  *
  * ====================================================================
  *
@@ -133,7 +133,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.18 $ $Date: 2002/01/09 19:27:30 $
+ * @version $Revision: 1.19 $ $Date: 2002/01/11 02:25:43 $
  */
 
 public class PropertyUtils {
@@ -403,7 +403,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");
@@ -545,7 +545,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");
@@ -948,7 +948,7 @@ public class PropertyUtils {
         // Special handling for DynaBeans
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 return (null);
             }
@@ -1034,7 +1034,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");
@@ -1173,7 +1173,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");
@@ -1321,7 +1321,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");
@@ -1510,7 +1510,7 @@ public class PropertyUtils {
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             DynaProperty descriptor =
-                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
                 throw new NoSuchMethodException("Unknown property '" +
                                                 name + "'");

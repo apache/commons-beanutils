@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.1 2002/01/06 06:01:08 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/01/06 06:01:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.2 2002/01/11 02:25:43 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/11 02:25:43 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/01/06 06:01:08 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/11 02:25:43 $
  */
 
 public class BasicDynaBeanTestCase extends TestCase {
@@ -102,7 +102,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     /**
      * The set of property names we expect to have returned when calling
-     * <code>getPropertyDescriptors()</code>.  You should update this list
+     * <code>getDynaProperties()</code>.  You should update this list
      * when new properties are added to TestBean.
      */
     protected final static String[] properties = {
@@ -216,13 +216,13 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Corner cases on getPropertyDescriptor invalid arguments.
+     * Corner cases on getDynaProperty invalid arguments.
      */
     public void testGetDescriptorArguments() {
 
         try {
             DynaProperty descriptor =
-                bean.getDynaClass().getPropertyDescriptor("unknown");
+                bean.getDynaClass().getDynaProperty("unknown");
             assertNull("Unknown property descriptor should be null",
                        descriptor);
         } catch (Throwable t) {
@@ -230,7 +230,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
         try {
-            bean.getDynaClass().getPropertyDescriptor(null);
+            bean.getDynaClass().getDynaProperty(null);
             fail("Should throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             ; // Expected response
@@ -242,7 +242,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>booleanProperty</code>.
+     * Positive getDynaProperty on property <code>booleanProperty</code>.
      */
     public void testGetDescriptorBoolean() {
 
@@ -252,7 +252,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>doubleProperty</code>.
+     * Positive getDynaProperty on property <code>doubleProperty</code>.
      */
     public void testGetDescriptorDouble() {
 
@@ -262,7 +262,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>floatProperty</code>.
+     * Positive getDynaProperty on property <code>floatProperty</code>.
      */
     public void testGetDescriptorFloat() {
 
@@ -272,7 +272,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>intProperty</code>.
+     * Positive getDynaProperty on property <code>intProperty</code>.
      */
     public void testGetDescriptorInt() {
 
@@ -282,7 +282,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>longProperty</code>.
+     * Positive getDynaProperty on property <code>longProperty</code>.
      */
     public void testGetDescriptorLong() {
 
@@ -292,7 +292,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>booleanSecond</code>
+     * Positive getDynaProperty on property <code>booleanSecond</code>
      * that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
@@ -303,7 +303,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>shortProperty</code>.
+     * Positive getDynaProperty on property <code>shortProperty</code>.
      */
     public void testGetDescriptorShort() {
 
@@ -313,7 +313,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getPropertyDescriptor on property <code>stringProperty</code>.
+     * Positive getDynaProperty on property <code>stringProperty</code>.
      */
     public void testGetDescriptorString() {
 
@@ -323,12 +323,12 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive test for getPropertyDescriptors().  Each property name
+     * Positive test for getDynaPropertys().  Each property name
      * listed in <code>properties</code> should be returned exactly once.
      */
     public void testGetDescriptors() {
 
-        DynaProperty pd[] = bean.getDynaClass().getPropertyDescriptors();
+        DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
         int count[] = new int[properties.length];
         for (int i = 0; i < pd.length; i++) {
@@ -1035,7 +1035,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             DynaProperty descriptor =
-                bean.getDynaClass().getPropertyDescriptor(name);
+                bean.getDynaClass().getDynaProperty(name);
             assertNotNull("Got descriptor", descriptor);
             assertEquals("Got correct type", type, descriptor.getType());
         } catch (Throwable t) {

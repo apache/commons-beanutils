@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.3 2002/01/06 06:01:08 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/06 06:01:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.4 2002/01/11 02:25:43 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/01/11 02:25:43 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import java.util.HashMap;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/06 06:01:08 $
+ * @version $Revision: 1.4 $ $Date: 2002/01/11 02:25:43 $
  */
 
 public class BasicDynaClass implements DynaClass {
@@ -220,7 +220,7 @@ public class BasicDynaClass implements DynaClass {
      *
      * @exception IllegalArgumentException if no property name is specified
      */
-    public DynaProperty getPropertyDescriptor(String name) {
+    public DynaProperty getDynaProperty(String name) {
 
         if (name == null) {
             throw new IllegalArgumentException
@@ -240,7 +240,7 @@ public class BasicDynaClass implements DynaClass {
      * <code>getBeanInfo()</code> instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      */
-    public DynaProperty[] getPropertyDescriptors() {
+    public DynaProperty[] getDynaProperties() {
 
         return (properties);
 
