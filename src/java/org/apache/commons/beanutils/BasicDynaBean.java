@@ -1,6 +1,6 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.4 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.4 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.1 2001/12/28 03:59:41 craigmcc Exp $
+ * $Revision: 1.1 $
  * $Date: 2001/12/28 03:59:41 $
  *
  * ====================================================================
@@ -63,19 +63,70 @@
 package org.apache.commons.beanutils;
 
 
+import java.util.HashMap;
+
+
 /**
- * <p>A <strong>DynaBean</strong> is a Java object that supports properties
- * whose names and data types, as well as values, may be dynamically modified.
- * To the maximum degree feasible, other components of the BeanUtils package
- * will recognize such beans and treat them as standard JavaBeans for the
- * purpose of retrieving and setting property values.</p>
+ * <p>Minimal implementation of the <code>DynaBean</code> interface.  Can be
+ * used as a convenience base class for more sophisticated implementations.</p>
+ *
+ * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class that are
+ * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @author Paulo Gaspar
- * @version $Revision: 1.4 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.1 $ $Date: 2001/12/28 03:59:41 $
  */
 
-public interface DynaBean {
+public class BasicDynaBean implements DynaBean {
+
+
+     // ---------------------------------------------------------- Constructors
+
+
+    /**
+     * Construct a new <code>DynaBean</code> associated with the specified
+     * <code>DynaClass</code> instance.
+     *
+     * @param dynaClass The DynaClass we are associated with
+     */
+    public BasicDynaBean(DynaClass dynaClass) {
+
+        super();
+        this.dynaClass = dynaClass;
+
+    }
+
+
+     // ---------------------------------------------------- Instance Variables
+
+
+    /**
+     * The <code>DynaClass</code> "base class" that this DynaBean
+     * is associated with.
+     */
+    protected DynaClass dynaClass = null;
+
+
+    /**
+     * Have any properties of this instance been modified since the last time
+     * that <code>setDynaModified(false)</code> was called?
+     */
+    protected boolean modified = false;
+
+
+    /**
+     * Has this DynaBean instance been declared read only?
+     */
+    protected boolean readOnly = false;
+
+
+    /**
+     * The set of property values for this DynaBean, keyed by property name.
+     */
+    protected HashMap values = new HashMap();
+
+
+     // ------------------------------------------------------ DynaBean Methods
 
 
     /**
@@ -85,8 +136,19 @@ public interface DynaBean {
      * <code>contains()</code> method to distinguish these cases.
      *
      * @param name Name of the property whose value is to be retrieved
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      */
-    public Object get(String name);
+    public Object get(String name) {
+
+        if (!values.containsKey(name))
+            throw new IllegalArgumentException
+                ("No property " + name + " exists");
+
+        return (values.get(name));
+
+    }
 
 
     /**
@@ -98,10 +160,20 @@ public interface DynaBean {
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
      */
-    public Object get(String name, int index);
+    public Object get(String name, int index) {
+
+        if (!values.containsKey(name))
+            throw new IllegalArgumentException
+                ("No property " + name + " exists");
+
+        return (null); // FIXME - get(String,int)
+
+    }
 
 
     /**
@@ -113,17 +185,31 @@ public interface DynaBean {
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
      *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public Object get(String name, String key);
+    public Object get(String name, String key) {
+
+        if (!values.containsKey(name))
+            throw new IllegalArgumentException
+                ("No property " + name + " exists");
+
+        return (null); // FIXME - get(String, String)
+
+    }
 
 
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
      */
-    public DynaClass getDynaClass();
+    public DynaClass getDynaClass() {
+
+        return (this.dynaClass);
+
+    }
 
 
     /**
@@ -139,8 +225,31 @@ public interface DynaBean {
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     * @exception IllegalStateException if the specified property exists
+     *  and is writeable, but this bean instance has been marked read only
      */
-    public void set(String name, Object value);
+    public void set(String name, Object value) {
+
+        DynaProperty descriptor = dynaClass.getPropertyDescriptor(name);
+        if (descriptor == null)
+            throw new IllegalArgumentException
+                ("No property " + name + " exists");
+        if (value != null)
+            if (!descriptor.getType().isAssignableFrom(value.getClass()))
+                throw new IllegalArgumentException
+                    ("Cannot assign value of type " +
+                     value.getClass().getName() +
+                     " to property " + name);
+        if (readOnly)
+            throw new IllegalStateException
+                ("This instance is read-only");
+
+        this.modified = true;
+        values.put(name, value);
+
+    }
 
 
     /**
@@ -166,7 +275,11 @@ public interface DynaBean {
      * @exception IllegalStateException if the specified property exists
      *  and is writeable, but this bean instance has been marked read only
      */
-    public void set(String name, int index, Object value);
+    public void set(String name, int index, Object value) {
+
+        ; // FIXME - set(String, int, Object)
+
+    }
 
 
     /**
@@ -192,7 +305,64 @@ public interface DynaBean {
      * @exception IllegalStateException if the specified property exists
      *  and is writeable, but this bean instance has been marked read only
      */
-    public void set(String name, String key, Object value);
+    public void set(String name, String key, Object value) {
+
+        ; // FIXME - set(String, String, Object)
+
+    }
+
+
+    // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Return the value of the "dynamic modified" property, which will be
+     * <code>true</code> if any dynamic property has been the subject of a
+     * <code>set()</code> method call (even if the actual value did not
+     * change) since the last time that <code>setDynaModified(false)</code>
+     * was called for this instance.
+     */
+    public boolean isModified() {
+
+        return (this.modified);
+
+    }
+
+
+    /**
+     * Return the value of the "dynamic read only" property, which will be
+     * <code>true</code> if <code>set()</code> method calls against this
+     * property will fail because this bean has been marked read-only.
+     */
+    public boolean isReadOnly() {
+
+        return (this.readOnly);
+
+    }
+
+
+    /**
+     * Set the value of the "dynamic modified" property.
+     *
+     * @param modified The new dynamic modified property setting
+     */
+    public void setModified(boolean modified) {
+
+        this.modified = modified;
+
+    }
+
+
+    /**
+     * Set the value of the "dynamic read only" property.
+     *
+     * @param readOnly The new dynamic read only property setting
+     */
+    public void setReadOnly(boolean readOnly) {
+
+        this.readOnly = readOnly;
+
+    }
 
 
 }

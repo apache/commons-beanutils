@@ -1,6 +1,6 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.4 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.4 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.1 2001/12/28 03:59:41 craigmcc Exp $
+ * $Revision: 1.1 $
  * $Date: 2001/12/28 03:59:41 $
  *
  * ====================================================================
@@ -63,68 +63,86 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.PropertyDescriptor;
-
-
 /**
- * <p>A <strong>DynaClass</strong> is a simulation of the functionality of
- * <code>java.lang.Class</code> for classes implementing the
- * <code>DynaBean</code> interface.  DynaBean instances that share the same
- * DynaClass all have the same set of available properties, along with any
- * associated data types, read-only states, and write-only states.</p>
+ * <p>The metadata describing an individual property of a DynaBean.</p>
  *
- * @author Craig McClanahan
- * @author Michael Smith
- * @author Paulo Gaspar
- * @version $Revision: 1.4 $ $Date: 2001/12/28 03:59:41 $
+ * @author Craig R. McClanahan
+ * @version $Revision: 1.1 $ $Date: 2001/12/28 03:59:41 $
  */
 
-public interface DynaClass {
+public class DynaProperty {
+
+
+    // ----------------------------------------------------------- Constructors
 
 
     /**
-     * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
-     * different dynamic classes, with different sets of properties.
-     */
-    public String getName();
-
-
-    /**
-     * Return a property descriptor for the specified property, if it exists;
-     * otherwise, return <code>null</code>.
+     * Construct a property that accepts any data type.
      *
-     * @param name Name of the dynamic property for which a descriptor
-     *  is requested
+     * @param name Name of the property being described
      */
-    public DynaProperty getPropertyDescriptor(String name);
+    public DynaProperty(String name) {
+
+        this(name, Object.class);
+
+    }
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
+     * Construct a property of the specified data type.
      *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
+     * @param name Name of the property being described
+     * @param type Java class representing the property data type
      */
-    public DynaProperty[] getPropertyDescriptors();
+    public DynaProperty(String name, Class type) {
+
+        super();
+        this.name = name;
+        this.type = type;
+
+    }
+
+
+    // ------------------------------------------------------------- Properties
 
 
     /**
-     * Instantiate and return a new DynaBean instance, using the implementation
-     * class specified by the <code>dynaBeanClass</code> property.
-     *
-     * @exception IllegalAccessException if the Class or the appropriate
-     *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
-     *  class, an array class, a primitive type, or void; or if instantiation
-     *  fails for some other reason
+     * The name of this property.
      */
-    public DynaBean newInstance()
-        throws IllegalAccessException, InstantiationException;
+    protected String name = null;
+
+    public String getName() {
+        return (this.name);
+    }
+
+
+    /**
+     * The Java class representing the data type of the underlying property
+     * values.
+     */
+    protected Class type = null;
+
+    public Class getType() {
+        return (this.type);
+    }
+
+
+    // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Return a String representation of this Object.
+     */
+    public String toString() {
+
+        StringBuffer sb = new StringBuffer("DynaProperty[name=");
+        sb.append(this.name);
+        sb.append(",type=");
+        sb.append(this.type);
+        sb.append("]");
+        return (sb.toString());
+
+    }
 
 
 }
