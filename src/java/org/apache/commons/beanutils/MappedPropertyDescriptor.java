@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.10 2002/03/24 09:53:52 dion Exp $
- * $Revision: 1.10 $
- * $Date: 2002/03/24 09:53:52 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.11 2002/03/24 09:59:30 dion Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/03/24 09:59:30 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.10 $ $Date: 2002/03/24 09:53:52 $
+ * @version $Revision: 1.11 $ $Date: 2002/03/24 09:59:30 $
  */
 
 
@@ -354,360 +354,180 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         return new String(chars);
     }
 
-
-
-
-
     //======================================================================
-
     // Package private support methods (copied from java.beans.Introspector).
-
     //======================================================================
-
-
 
     // Cache of Class.getDeclaredMethods:
-
-    private static java.util.Hashtable
-
-            declaredMethodCache = new java.util.Hashtable();
-
-
-
-
+    private static java.util.Hashtable 
+        declaredMethodCache = new java.util.Hashtable();
 
     /*
-
      * Internal method to return *public* methods within a class.
-
      */
-
     private static synchronized Method[] getPublicDeclaredMethods(Class clz) {
-
-
         // Looking up Class.getDeclaredMethods is relatively expensive,
-
         // so we cache the results.
-
         final Class fclz = clz;
-
         Method[] result = (Method[]) declaredMethodCache.get(fclz);
-
         if (result != null) {
-
             return result;
-
         }
-
-
 
         // We have to raise privilege for getDeclaredMethods
-
         result = (Method[])
-
                 AccessController.doPrivileged(new PrivilegedAction() {
-
                     public Object run() {
-
                         return fclz.getDeclaredMethods();
-
                     }
-
                 });
 
-
-
         // Null out any non-public methods.
-
         for (int i = 0; i < result.length; i++) {
-
             Method method = result[i];
-
             int mods = method.getModifiers();
-
             if (!Modifier.isPublic(mods)) {
-
                 result[i] = null;
-
             }
-
         }
-
-
 
         // Add it to the cache.
-
         declaredMethodCache.put(clz, result);
-
         return result;
-
-
     }
 
-
     /**
-
      * Internal support for finding a target methodName on a given class.
-
      */
-
     private static Method internalFindMethod(Class start, String methodName,
-
                                              int argCount) {
-
-
         // For overridden methods we need to find the most derived version.
-
         // So we start with the given class and walk up the superclass chain.
-
         for (Class cl = start; cl != null; cl = cl.getSuperclass()) {
-
             Method methods[] = getPublicDeclaredMethods(cl);
-
             for (int i = 0; i < methods.length; i++) {
-
                 Method method = methods[i];
-
                 if (method == null) {
-
                     continue;
-
                 }
-
                 // skip static methods.
-
                 int mods = method.getModifiers();
-
                 if (Modifier.isStatic(mods)) {
-
                     continue;
-
                 }
-
                 if (method.getName().equals(methodName) &&
-
                         method.getParameterTypes().length == argCount) {
-
                     return method;
-
                 }
-
             }
-
         }
-
-
 
         // Now check any inherited interfaces.  This is necessary both when
-
         // the argument class is itself an interface, and when the argument
-
         // class is an abstract class.
-
         Class ifcs[] = start.getInterfaces();
-
         for (int i = 0; i < ifcs.length; i++) {
-
             Method m = internalFindMethod(ifcs[i], methodName, argCount);
-
             if (m != null) {
-
                 return m;
-
             }
-
         }
 
-
         return null;
-
-
     }
 
-
     /**
-
      * Internal support for finding a target methodName with a given
-
      * parameter list on a given class.
-
      */
-
     private static Method internalFindMethod(Class start, String methodName,
-
                                              int argCount, Class args[]) {
-
-
         // For overriden methods we need to find the most derived version.
-
         // So we start with the given class and walk up the superclass chain.
-
         for (Class cl = start; cl != null; cl = cl.getSuperclass()) {
-
             Method methods[] = getPublicDeclaredMethods(cl);
-
             for (int i = 0; i < methods.length; i++) {
-
                 Method method = methods[i];
-
                 if (method == null) {
-
                     continue;
-
                 }
-
                 // skip static methods.
-
                 int mods = method.getModifiers();
-
                 if (Modifier.isStatic(mods)) {
-
                     continue;
-
                 }
-
                 // make sure method signature matches.
-
                 Class params[] = method.getParameterTypes();
-
                 if (method.getName().equals(methodName) &&
-
                         params.length == argCount) {
-
                     boolean different = false;
-
                     if (argCount > 0) {
-
                         for (int j = 0; j < argCount; j++) {
-
                             if (params[j] != args[j]) {
-
                                 different = true;
-
                                 continue;
-
                             }
-
                         }
-
                         if (different) {
-
                             continue;
-
                         }
-
                     }
-
                     return method;
-
                 }
-
             }
-
         }
-
-
 
         // Now check any inherited interfaces.  This is necessary both when
-
         // the argument class is itself an interface, and when the argument
-
         // class is an abstract class.
-
         Class ifcs[] = start.getInterfaces();
-
         for (int i = 0; i < ifcs.length; i++) {
-
             Method m = internalFindMethod(ifcs[i], methodName, argCount);
-
             if (m != null) {
-
                 return m;
-
             }
-
         }
-
-
+        
         return null;
-
-
     }
 
-
     /**
-
      * Find a target methodName on a given class.
-
      */
-
     static Method findMethod(Class cls, String methodName, int argCount)
-
             throws IntrospectionException {
-
-
         if (methodName == null) {
-
             return null;
-
         }
-
 
         Method m = internalFindMethod(cls, methodName, argCount);
-
         if (m != null) {
-
             return m;
-
         }
 
-
-
         // We failed to find a suitable method
-
         throw new IntrospectionException("No method \"" + methodName +
-
                 "\" with " + argCount + " arg(s)");
-
     }
-
 
     /**
-
      * Find a target methodName with specific parameter list on a given class.
-
      */
-
     static Method findMethod(Class cls, String methodName, int argCount,
-
                              Class args[]) throws IntrospectionException {
-
-
         if (methodName == null) {
-
             return null;
-
         }
-
 
         Method m = internalFindMethod(cls, methodName, argCount, args);
-
         if (m != null) {
-
             return m;
-
         }
 
-
-
         // We failed to find a suitable method
-
         throw new IntrospectionException("No method \"" + methodName +
-
                 "\" with " + argCount + " arg(s) of matching types.");
-
     }
-
 
     /**
      * Return true if class a is either equivalent to class b, or
@@ -716,12 +536,9 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * Note tht either or both "Class" objects may represent interfaces.
      */
     static boolean isSubclass(Class a, Class b) {
-
-
         // We rely on the fact that for any given java class or
         // primtitive type there is a unqiue Class object, so
         // we can use object equivalence in the comparisons.
-
         if (a == b) {
             return true;
         }
@@ -764,7 +581,4 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         return false;
     }
-
-
 }
-
