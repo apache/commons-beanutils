@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.15 2002/03/11 04:49:53 craigmcc Exp $
- * $Revision: 1.15 $
- * $Date: 2002/03/11 04:49:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.16 2002/03/30 23:58:45 craigmcc Exp $
+ * $Revision: 1.16 $
+ * $Date: 2002/03/30 23:58:45 $
  *
  * ====================================================================
  *
@@ -74,6 +74,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -86,13 +87,23 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.15 $ $Date: 2002/03/11 04:49:53 $
+ * @version $Revision: 1.16 $ $Date: 2002/03/30 23:58:45 $
  */
 
 public class BeanUtils {
 
 
     // ------------------------------------------------------ Private Variables
+
+
+    /**
+     * Dummy collection from the Commons Collections API, to force a
+     * ClassNotFoundException if commons-collections.jar is not present in the
+     * runtime classpath, and this class is the first one referenced.
+     * Otherwise, the ClassNotFoundException thrown by ConvertUtils or
+     * PropertyUtils can get masked.
+     */
+    private static FastHashMap dummy = new FastHashMap();
 
     /**
      * All logging goes through this logger
