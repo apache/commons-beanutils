@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.24 2002/10/21 19:53:15 rdonkin Exp $
- * $Revision: 1.24 $
- * $Date: 2002/10/21 19:53:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.25 2002/10/25 00:31:14 dion Exp $
+ * $Revision: 1.25 $
+ * $Date: 2002/10/25 00:31:14 $
  *
  * ====================================================================
  *
@@ -105,20 +105,13 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.24 $ $Date: 2002/10/21 19:53:15 $
+ * @version $Revision: 1.25 $ $Date: 2002/10/25 00:31:14 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
 
 
     // ---------------------------------------------------- Instance Variables
-
-
-    /**
-     * The fully qualified class name of our private bean class.
-     */
-    private static final String PRIVATE_BEAN_CLASS =
-            "org.apache.commons.beanutils.priv.PrivateBean";
 
 
     /**
@@ -1503,9 +1496,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetNestedUnknown() {
 
         try {
-            Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.unknown");
+            PropertyUtils.getNestedProperty(bean, "nested.unknown");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1526,9 +1517,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetNestedWriteOnly() {
 
         try {
-            Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "writeOnlyProperty");
+            PropertyUtils.getNestedProperty(bean, "writeOnlyProperty");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1979,9 +1968,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetSimpleUnknown() {
 
         try {
-            Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "unknown");
+            PropertyUtils.getSimpleProperty(bean, "unknown");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2002,9 +1989,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetSimpleWriteOnly() {
 
         try {
-            Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "writeOnlyProperty");
+            PropertyUtils.getSimpleProperty(bean, "writeOnlyProperty");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -3424,8 +3409,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
             // Actually call the reader method we received
             try {
-                Object value =
-                        reader.invoke(bean, new Class[0]);
+                reader.invoke(bean, new Class[0]);
             } catch (Throwable t) {
                 fail("Call for " + properties[i] + ": " + t);
             }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.5 2002/01/23 22:52:26 sanders Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/23 22:52:26 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.6 2002/10/25 00:27:42 dion Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/10/25 00:27:42 $
  *
  * ====================================================================
  *
@@ -79,7 +79,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/01/23 22:52:26 $
+ * @version $Revision: 1.6 $ $Date: 2002/10/25 00:27:42 $
  */
 
 public class BasicDynaBeanTestCase extends TestCase {
@@ -772,8 +772,6 @@ public class BasicDynaBeanTestCase extends TestCase {
      * Positive and negative tests on setMappedProperty valid arguments.
      */
     public void testSetMappedValues() {
-
-        Object value = null;
 
         try {
             bean.set("mappedProperty", "First Key", "New First Value");

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/Attic/BeanComparatorTestCase.java,v 1.1 2002/10/18 17:41:48 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2002/10/18 17:41:48 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/Attic/BeanComparatorTestCase.java,v 1.2 2002/10/25 00:27:42 dion Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/10/25 00:27:42 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import junit.framework.TestSuite;
  *  Test Case for the BeanComparator class.
  *
  * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public class BeanComparatorTestCase extends TestCase {
@@ -213,7 +213,7 @@ public class BeanComparatorTestCase extends TestCase {
     public void testCompareWithNulls() {
         try {
           beanComparator = new BeanComparator("name");
-          int result = beanComparator.compare(alphaBean2, null);
+          beanComparator.compare(alphaBean2, null);
 
           // DEP not sure if this is the best way to test an exception?
           fail("Should not be able to compare a null value.");
@@ -230,7 +230,7 @@ public class BeanComparatorTestCase extends TestCase {
     public void testCompareOnMissingProperty() {
         try {
           beanComparator = new BeanComparator("bogusName");
-          int result = beanComparator.compare(alphaBean2, alphaBean1);
+          beanComparator.compare(alphaBean2, alphaBean1);
           fail("should not be able to compare");
 
 
@@ -255,7 +255,7 @@ public class BeanComparatorTestCase extends TestCase {
           testBeanB.setBooleanProperty(false);
 
           beanComparator = new BeanComparator("booleanProperty");
-          int result = beanComparator.compare(testBeanA, testBeanB);
+          beanComparator.compare(testBeanA, testBeanB);
 
           fail("BeanComparator should throw an exception when comparing two booleans.");
 

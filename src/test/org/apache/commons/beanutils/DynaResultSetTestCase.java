@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaResultSetTestCase.java,v 1.1 2002/07/12 22:38:21 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/12 22:38:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaResultSetTestCase.java,v 1.2 2002/10/25 00:31:14 dion Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/10/25 00:31:14 $
  *
  * ====================================================================
  *
@@ -80,7 +80,7 @@ import junit.framework.TestSuite;
  * Test accessing ResultSets via DynaBeans.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/07/12 22:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2002/10/25 00:31:14 $
  */
 
 public class DynaResultSetTestCase extends TestCase {
@@ -230,7 +230,7 @@ public class DynaResultSetTestCase extends TestCase {
         assertNotNull("iterator exists", rows);
         int n = 0;
         while (rows.hasNext()) {
-            DynaBean row = (DynaBean) rows.next();
+            rows.next();
             n++;
             if (n > 10) {
                 fail("Returned too many rows");

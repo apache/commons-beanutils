@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.8 2002/07/21 00:20:45 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2002/07/21 00:20:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.9 2002/10/25 00:27:42 dion Exp $
+ * $Revision: 1.9 $
+ * $Date: 2002/10/25 00:27:42 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2002/07/21 00:20:45 $
+ * @version $Revision: 1.9 $ $Date: 2002/10/25 00:27:42 $
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {
@@ -156,7 +156,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("booleanProperty", new Boolean(true));
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
-        String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
         bean.set("floatProperty", new Float((float) 123.0));
         int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
@@ -1202,9 +1201,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedUnknown() {
 
         try {
-            Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.unknown");
+            PropertyUtils.getNestedProperty(bean, "nested.unknown");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1487,9 +1484,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleUnknown() {
 
         try {
-            Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "unknown");
+            PropertyUtils.getSimpleProperty(bean, "unknown");
             fail("Should have thrown NoSuchMethodException");
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
