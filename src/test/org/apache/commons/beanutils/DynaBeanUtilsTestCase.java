@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.13 2002/12/21 19:33:20 craigmcc Exp $
- * $Revision: 1.13 $
- * $Date: 2002/12/21 19:33:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.14 2003/01/03 20:32:35 craigmcc Exp $
+ * $Revision: 1.14 $
+ * $Date: 2003/01/03 20:32:35 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.13 $ $Date: 2002/12/21 19:33:20 $
+ * @version $Revision: 1.14 $ $Date: 2003/01/03 20:32:35 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -828,6 +828,48 @@ public class DynaBeanUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         }
+
+    }
+
+
+    /**
+     * Test calling setProperty() with null property values.
+     */
+    public void testSetPropertyNullValues() throws Exception {
+
+        Object oldValue = null;
+        Object newValue = null;
+
+        // Scalar value into array
+        oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
+        BeanUtils.setProperty(bean, "stringArray", (String) null);
+        newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
+        assertNotNull("stringArray is not null", newValue);
+        assertTrue("stringArray of correct type",
+                   newValue instanceof String[]);
+        assertEquals("stringArray length",
+                     1, ((String[]) newValue).length);
+        assertTrue("stringArray[0] is null",
+                   ((String[]) newValue)[0] == null);
+        PropertyUtils.setProperty(bean, "stringArray", oldValue);
+
+        // Indexed value into array
+        oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
+        BeanUtils.setProperty(bean, "stringArray[2]", (String) null);
+        newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
+        assertNotNull("stringArray is not null", newValue);
+        assertTrue("stringArray of correct type",
+                   newValue instanceof String[]);
+        assertEquals("stringArray length",
+                     5, ((String[]) newValue).length);
+        assertTrue("stringArray[2] is null",
+                   ((String[]) newValue)[2] == null);
+        PropertyUtils.setProperty(bean, "stringArray", oldValue);
+
+        // Value into scalar
+        BeanUtils.setProperty(bean, "stringProperty", null);
+        assertTrue("stringProperty is now null",
+                   BeanUtils.getProperty(bean, "stringProperty") == null);
 
     }
 

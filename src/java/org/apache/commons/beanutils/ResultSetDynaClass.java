@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.7 2002/12/16 01:53:20 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/12/16 01:53:20 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.8 2003/01/03 20:32:35 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/01/03 20:32:35 $
  *
  * ====================================================================
  *
@@ -87,8 +87,8 @@ import java.util.Iterator;
  * </pre>
  *
  * <p>Each column in the result set will be represented as a DynaBean
- * property of the corresponding name (forced to lower case for portability).
- * </p>
+ * property of the corresponding name (optionally forced to lower case
+ * for portability).</p>
  *
  * <p><strong>WARNING</strong> - Any {@link DynaBean} instance returned by
  * this class, or from the <code>Iterator</code> returned by the
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2002/12/16 01:53:20 $
+ * @version $Revision: 1.8 $ $Date: 2003/01/03 20:32:35 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
@@ -142,7 +142,7 @@ public class ResultSetDynaClass implements DynaClass {
      * @param resultSet The result set to be wrapped
      *
      * @exception NullPointerException if <code>resultSet</code>
-     *  is <code>false</code>
+     *  is <code>null</code>
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
@@ -170,7 +170,7 @@ public class ResultSetDynaClass implements DynaClass {
      * @param lowerCase Should property names be lower cased?
      *
      * @exception NullPointerException if <code>resultSet</code>
-     *  is <code>false</code>
+     *  is <code>null</code>
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */

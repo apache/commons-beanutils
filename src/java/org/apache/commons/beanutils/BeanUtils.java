@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.32 2002/12/21 19:33:19 craigmcc Exp $
- * $Revision: 1.32 $
- * $Date: 2002/12/21 19:33:19 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.33 2003/01/03 20:32:35 craigmcc Exp $
+ * $Revision: 1.33 $
+ * $Date: 2003/01/03 20:32:35 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.32 $ $Date: 2002/12/21 19:33:19 $
+ * @version $Revision: 1.33 $ $Date: 2003/01/03 20:32:35 $
  */
 
 public class BeanUtils {
@@ -880,7 +880,12 @@ public class BeanUtils {
         // Convert the specified value to the required type
         Object newValue = null;
         if (type.isArray() && (index < 0)) { // Scalar value into array
-            if (value instanceof String) {
+            log.debug("CONVERTING SCALAR '" + value + "' TO ARRAY");
+            if (value == null) {
+                String values[] = new String[1];
+                values[0] = (String) value;
+                newValue = ConvertUtils.convert((String[]) values, type);
+            } else if (value instanceof String) {
                 String values[] = new String[1];
                 values[0] = (String) value;
                 newValue = ConvertUtils.convert((String[]) values, type);
@@ -900,7 +905,7 @@ public class BeanUtils {
                 newValue = value;
             }
         } else {                             // Value into scalar
-            if (value instanceof String || (value == null && type.isPrimitive())) {
+            if ((value instanceof String) || (value == null)) {
                 newValue = ConvertUtils.convert((String) value, type);
             } else if (value instanceof String[]) {
                 newValue = ConvertUtils.convert(((String[]) value)[0],
