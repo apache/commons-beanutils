@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.9 2003/01/15 21:59:39 rdonkin Exp $
- * $Revision: 1.9 $
- * $Date: 2003/01/15 21:59:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.10 2003/02/08 18:49:56 craigmcc Exp $
+ * $Revision: 1.10 $
+ * $Date: 2003/02/08 18:49:56 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.util.Iterator;
  * The normal usage pattern is something like:</p>
  * <pre>
  *   ResultSet rs = ...;
- *   ResutSetDynaClass rsdc = new ResultSetDynaClass(rs);
+ *   ResultSetDynaClass rsdc = new ResultSetDynaClass(rs);
  *   Iterator rows = rsdc.iterator();
  *   while (rows.hasNext())  {
  *     DynaBean row = (DynaBean) rows.next();
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2003/01/15 21:59:39 $
+ * @version $Revision: 1.10 $ $Date: 2003/02/08 18:49:56 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
