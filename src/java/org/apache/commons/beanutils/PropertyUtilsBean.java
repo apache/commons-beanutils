@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.8 2003/05/16 14:50:22 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/05/16 14:50:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.9 2003/08/03 00:43:52 craigmcc Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/08/03 00:43:52 $
  *
  * ====================================================================
  *
@@ -134,7 +134,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.8 $ $Date: 2003/05/16 14:50:22 $
+ * @version $Revision: 1.9 $ $Date: 2003/08/03 00:43:52 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -237,10 +237,10 @@ public class PropertyUtilsBean {
                         Object value = ((DynaBean) orig).get(name);
                         ((DynaBean) dest).set(name, value);
                     }
-                } else {
+                } else /* if (dest is a standard JavaBean) */ {
                     if (isWriteable(dest, name)) {
                         Object value = ((DynaBean) orig).get(name);
-                        PropertyUtils.setSimpleProperty(dest, name, value);
+                        setSimpleProperty(dest, name, value);
                     }
                 }
             }
@@ -253,10 +253,10 @@ public class PropertyUtilsBean {
                         Object value = ((Map) orig).get(name);
                         ((DynaBean) dest).set(name, value);
                     }
-                } else {
+                } else /* if (dest is a standard JavaBean) */ {
                     if (isWriteable(dest, name)) {
                         Object value = ((Map) orig).get(name);
-                        PropertyUtils.setSimpleProperty(dest, name, value);
+                        setSimpleProperty(dest, name, value);
                     }
                 }
             }
@@ -271,7 +271,7 @@ public class PropertyUtilsBean {
                             Object value = getSimpleProperty(orig, name);
                             ((DynaBean) dest).set(name, value);
                         }
-                    } else {
+                    } else /* if (dest is a standard JavaBean) */ {
                         if (isWriteable(dest, name)) {
                             Object value = getSimpleProperty(orig, name);
                             setSimpleProperty(dest, name, value);
@@ -319,7 +319,7 @@ public class PropertyUtilsBean {
             }
         } else {
             PropertyDescriptor descriptors[] =
-                PropertyUtils.getPropertyDescriptors(bean);
+                getPropertyDescriptors(bean);
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
                 if (descriptors[i].getReadMethod() != null)
