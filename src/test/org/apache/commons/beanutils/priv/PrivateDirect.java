@@ -22,7 +22,7 @@ package org.apache.commons.beanutils.priv;
  * Interface that is directly implemented by PrivateBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public interface PrivateDirect extends PrivateIndirect {

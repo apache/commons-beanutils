@@ -28,7 +28,7 @@ package org.apache.commons.beanutils.priv;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 class PrivateBean implements PrivateDirect {

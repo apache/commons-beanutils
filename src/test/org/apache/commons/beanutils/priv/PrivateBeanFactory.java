@@ -23,7 +23,7 @@ package org.apache.commons.beanutils.priv;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.6 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class PrivateBeanFactory {

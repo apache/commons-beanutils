@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.ConversionException;
  * Test Case for the IntegerLocaleConverter class.
  *
  * @author Niall Pemberton
- * @version $Revision: 1.2 $ $Date: 2004/07/13 23:04:21 $
+ * @version $Revision$ $Date$
  */
 
 public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {

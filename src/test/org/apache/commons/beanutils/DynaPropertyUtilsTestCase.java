@@ -33,7 +33,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.12 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {

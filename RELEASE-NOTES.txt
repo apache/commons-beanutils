@@ -1,4 +1,4 @@
-$Id: RELEASE-NOTES.txt,v 1.12 2004/08/02 19:49:20 rdonkin Exp $
+$Id$
 
    Copyright 2001-2004 The Apache Software Foundation
 

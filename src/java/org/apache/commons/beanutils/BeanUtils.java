@@ -35,7 +35,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.40 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  * @see BeanUtilsBean
  */
 

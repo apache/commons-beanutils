@@ -53,7 +53,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.29 $
+ * @version $Revision$
  */
 
 public class BeanUtilsTestCase extends TestCase {

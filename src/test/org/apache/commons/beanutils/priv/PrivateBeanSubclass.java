@@ -23,7 +23,7 @@ package org.apache.commons.beanutils.priv;
  * in the superclass.
  *
  * @author Jan Sorensen
- * @version $Revision: 1.5 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 class PrivateBeanSubclass extends PrivateBean {

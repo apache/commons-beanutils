@@ -24,7 +24,7 @@ import org.apache.commons.collections.KeyValue;
  * the MapEntry contract from being broken.
  *
  * @since Commons Collections 3.0
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:53:16 $
+ * @version $Revision$ $Date$
  * 
  * @author James Strachan
  * @author Michael A. Smith

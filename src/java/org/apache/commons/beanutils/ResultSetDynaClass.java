@@ -78,7 +78,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.15 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 
 public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {

@@ -42,7 +42,7 @@ import org.apache.commons.collections.Transformer;
  * If an exception occurs during attempts to get or set a property then the
  * property is considered non existent in the Map
  *
- * @version $Revision: 1.3 $ $Date: 2004/08/02 19:49:21 $
+ * @version $Revision$ $Date$
  * 
  * @author James Strachan
  * @author Stephen Colebourne

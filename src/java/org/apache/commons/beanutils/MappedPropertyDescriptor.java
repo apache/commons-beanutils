@@ -40,7 +40,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.20 $ $Date: 2004/08/10 15:41:56 $
+ * @version $Revision$ $Date$
  */
 
 

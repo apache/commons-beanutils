@@ -43,7 +43,7 @@ import java.lang.reflect.Modifier;
  * @author Jan Sorensen
  * @author Robert Burrell Donkin
  * @author Rodney Waldhoff
- * @version $Revision: 1.7 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 public class ConstructorUtils {
 

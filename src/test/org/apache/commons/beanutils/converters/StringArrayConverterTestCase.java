@@ -23,7 +23,7 @@ import junit.framework.TestCase;
  * Test Case for StringArrayConverter
  *
  * @author Robert Burrell Donkin
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class StringArrayConverterTestCase extends TestCase {

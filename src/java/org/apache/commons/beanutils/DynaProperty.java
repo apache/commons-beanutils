@@ -38,7 +38,7 @@ import java.util.Map;
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.13 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 
 public class DynaProperty implements Serializable {

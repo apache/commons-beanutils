@@ -27,7 +27,7 @@ package org.apache.commons.beanutils.priv;
  * <p>This is the default access superclass</p>
  *
  * @author Robert Burrell Donkin
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class PublicSubBean extends PackageBean {

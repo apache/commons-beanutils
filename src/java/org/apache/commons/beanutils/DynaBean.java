@@ -27,7 +27,7 @@ package org.apache.commons.beanutils;
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
- * @version $Revision: 1.9 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 
 public interface DynaBean {

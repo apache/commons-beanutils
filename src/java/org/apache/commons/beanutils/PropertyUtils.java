@@ -39,7 +39,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.43 $ $Date: 2004/08/02 19:49:21 $
+ * @version $Revision$ $Date$
  * @see PropertyUtilsBean
  */
 

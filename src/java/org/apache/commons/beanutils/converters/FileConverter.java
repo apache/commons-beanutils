@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author James Strachan
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:34 $
+ * @version $Revision$ $Date$
  * @since 1.6
  */
 public final class FileConverter implements Converter {

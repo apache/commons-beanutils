@@ -31,7 +31,7 @@ package org.apache.commons.beanutils;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.8 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 
 public interface MutableDynaClass extends DynaClass {

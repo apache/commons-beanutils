@@ -43,7 +43,7 @@ import org.apache.commons.beanutils.Converter;
  * any combination of whitespace and comma characters.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2004/02/28 13:18:34 $
+ * @version $Revision$ $Date$
  * @since 1.4
  */
 

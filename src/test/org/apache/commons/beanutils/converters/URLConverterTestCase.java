@@ -28,7 +28,7 @@ import java.net.URL;
  * Test Case for the URLConverter class.
  *
  * @author Henri Yandell
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class URLConverterTestCase extends TestCase {

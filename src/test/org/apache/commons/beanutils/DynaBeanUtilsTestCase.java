@@ -33,7 +33,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.22 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {

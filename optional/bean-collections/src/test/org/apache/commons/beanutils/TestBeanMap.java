@@ -28,7 +28,7 @@ import org.apache.commons.collections.BulkTest;
 /**
  * Test cases for BeanMap
  * 
- * @version $Revision: 1.1 $ $Date: 2004/05/11 22:46:26 $
+ * @version $Revision$ $Date$
  * 
  * @author Morgan Delagrange
  * @author Stephen Colebourne

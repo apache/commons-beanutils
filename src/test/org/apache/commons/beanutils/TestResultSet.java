@@ -43,7 +43,7 @@ import java.util.Map;
  * to exercise the {@link ResultSetDyaClass} functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class TestResultSet implements ResultSet {

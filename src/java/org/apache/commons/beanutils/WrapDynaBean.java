@@ -41,7 +41,7 @@ package org.apache.commons.beanutils;
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.9 $ $Date: 2004/02/28 13:18:34 $
+ * @version $Revision$ $Date$
  */
 
 public class WrapDynaBean implements DynaBean {

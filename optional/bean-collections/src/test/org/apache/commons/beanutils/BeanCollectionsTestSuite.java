@@ -29,7 +29,7 @@ import junit.framework.TestSuite;
  * <p>Test suite which runs all the test cases application to beans in collections.
  *
  * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
- * @version $Revision: 1.2 $
+ * @version $Revision$
  */
 
 public class BeanCollectionsTestSuite extends TestCase {

@@ -23,7 +23,7 @@ package org.apache.commons.collections;
  * two get methods.
  *
  * @since Commons Collections 3.0
- * @version $Revision: 1.1 $ $Date: 2004/11/18 22:12:24 $
+ * @version $Revision$ $Date$
  * 
  * @author Stephen Colebourne
  */

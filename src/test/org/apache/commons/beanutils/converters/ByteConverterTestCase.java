@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.Converter;
  * Test Case for the ByteConverter class.
  *
  * @author Rodney Waldhoff
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class ByteConverterTestCase extends NumberConverterTestBase {

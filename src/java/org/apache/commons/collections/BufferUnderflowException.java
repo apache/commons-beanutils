@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
  * NOTE: From version 3.0, this exception extends NoSuchElementException.
  * 
  * @since Commons Collections 2.1
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:50:52 $
+ * @version $Revision$ $Date$
  *
  * @author Avalon
  * @author Berin Loritsch

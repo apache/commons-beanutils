@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {

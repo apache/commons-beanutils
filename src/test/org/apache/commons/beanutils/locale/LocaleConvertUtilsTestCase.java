@@ -41,7 +41,7 @@ import org.apache.commons.beanutils.ConversionException;
  *
  * @author  Michael Szlapa
  * @author Paul Hamamnt & Rune Johannesen (pairing) - patches.
- * @version $Revision: 1.7 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class LocaleConvertUtilsTestCase extends TestCase {

@@ -26,7 +26,7 @@ import org.apache.commons.beanutils.Converter;
  * Abstract base for &lt;Number&gt;Converter classes.
  *
  * @author Rodney Waldhoff
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public abstract class NumberConverterTestBase extends TestCase {

@@ -33,7 +33,7 @@ import java.net.MalformedURLException;
  * error occurs.</p>
  *
  * @author Henri Yandell
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:34 $
+ * @version $Revision$ $Date$
  * @since 1.3
  */
 

@@ -24,7 +24,7 @@ import java.util.Map;
  * Just a java bean (JAJB) to try to replicate a reported bug 
  *
  * @author Robert Burrell Donkin
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class MappedPropertyTestBean {

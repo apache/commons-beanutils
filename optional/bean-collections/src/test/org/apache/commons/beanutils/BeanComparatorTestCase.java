@@ -30,7 +30,7 @@ import junit.framework.TestSuite;
  *  Test Case for the BeanComparator class.
  *
  * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
- * @version $Revision: 1.1 $
+ * @version $Revision$
  */
 
 public class BeanComparatorTestCase extends TestCase {

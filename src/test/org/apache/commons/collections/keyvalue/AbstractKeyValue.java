@@ -21,7 +21,7 @@ import org.apache.commons.collections.KeyValue;
  * Abstract pair class to assist with creating KeyValue and MapEntry implementations.
  *
  * @since Commons Collections 3.0
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:53:54 $
+ * @version $Revision$ $Date$
  * 
  * @author James Strachan
  * @author Michael A. Smith

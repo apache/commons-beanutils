@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author Craig R. McClanahan
  * @author Rodney Waldhoff
- * @version $Revision: 1.21 $ $Date: 2004/07/12 00:55:45 $
+ * @version $Revision$ $Date$
  */
 
 public class TestBean {

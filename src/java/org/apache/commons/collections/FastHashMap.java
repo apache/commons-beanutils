@@ -57,7 +57,7 @@ import java.util.Set;
  * Double-Checked Locking Idiom Is Broken Declaration</a>.</p>
  *
  * @since Commons Collections 1.0
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:51:13 $
+ * @version $Revision$ $Date$
  * 
  * @author Craig R. McClanahan
  * @author Stephen Colebourne

@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.Converter;
  * on how this instance is constructed.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2004/02/28 13:18:34 $
+ * @version $Revision$ $Date$
  * @since 1.4
  */
 

@@ -40,7 +40,7 @@ import java.util.EmptyStackException;
  *
  * @see java.util.Stack
  * @since Commons Collections 1.0
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:50:13 $
+ * @version $Revision$ $Date$
  * 
  * @author Craig R. McClanahan
  * @author Paul Jack

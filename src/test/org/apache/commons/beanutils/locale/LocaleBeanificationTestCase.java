@@ -39,7 +39,7 @@ import org.apache.commons.beanutils.PrimitiveBean;
  *
  * @author Robert Burrell Donkin
  * @author Juozas Baliuka
- * @version $Revision: 1.2 $ $Date: 2004/02/28 13:18:37 $
+ * @version $Revision$ $Date$
  */
 
 public class LocaleBeanificationTestCase extends TestCase {

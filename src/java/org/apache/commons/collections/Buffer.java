@@ -40,7 +40,7 @@ import java.util.Collection;
  * coexistance with both collections 2.1 and 3.0.
  *
  * @since Commons Collections 2.1
- * @version $Revision: 1.1 $ $Date: 2004/05/10 19:50:28 $
+ * @version $Revision$ $Date$
  * 
  * @author Avalon
  * @author Berin Loritsch

@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
  * Test accessing RowSets via DynaBeans.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class DynaRowSetTestCase extends TestCase {

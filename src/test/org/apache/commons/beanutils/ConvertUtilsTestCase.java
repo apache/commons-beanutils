@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.converters.BooleanConverter;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class ConvertUtilsTestCase extends TestCase {

@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author   Craig R. McClanahan
  * @author   George Franciscus
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  */
 
 abstract class JDBCDynaClass implements DynaClass, Serializable {

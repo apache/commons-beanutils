@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Robert Burrell Donkin
  * @author Juozas Baliuka
- * @version $Revision: 1.5 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class BeanificationTestCase extends TestCase {

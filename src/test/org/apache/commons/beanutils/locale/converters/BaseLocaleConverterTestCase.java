@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.locale.BaseLocaleConverter;
  * Base Test Case for the DecimalLocaleConverter classes.
  *
  * @author Niall Pemberton
- * @version $Revision: 1.3 $ $Date: 2004/07/13 23:04:21 $
+ * @version $Revision$ $Date$
  */
 
 public class BaseLocaleConverterTestCase extends TestCase {

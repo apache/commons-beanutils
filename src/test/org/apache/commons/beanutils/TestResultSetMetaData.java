@@ -28,7 +28,7 @@ import java.sql.SQLException;
  * to exercise the {@link ResultSetDyaClass} functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 public class TestResultSetMetaData implements ResultSetMetaData {

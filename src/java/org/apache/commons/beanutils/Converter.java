@@ -25,7 +25,7 @@ package org.apache.commons.beanutils;
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
- * @version $Revision: 1.7 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  * @since 1.3
  */
 

@@ -23,7 +23,7 @@ package org.apache.commons.beanutils;
  * should still be accessible via reflection.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2004/02/28 13:18:36 $
+ * @version $Revision$ $Date$
  */
 
 class TestBeanPackageSubclass extends TestBean {

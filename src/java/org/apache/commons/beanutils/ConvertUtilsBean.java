@@ -103,7 +103,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ralph Schaer
  * @author Chris Audley
  * @author James Strachan
- * @version $Revision: 1.13 $ $Date: 2004/07/18 14:58:22 $
+ * @version $Revision$ $Date$
  * @since 1.7
  */
 

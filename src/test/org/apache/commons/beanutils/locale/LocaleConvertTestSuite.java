@@ -41,7 +41,7 @@ import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCa
  * </p>
  *
  * @author  Robert Burrell Donkin
- * @version $Revision: 1.7 $ $Date: 2004/07/08 13:12:06 $
+ * @version $Revision$ $Date$
  */
 
 public class LocaleConvertTestSuite {

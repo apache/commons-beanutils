@@ -27,7 +27,7 @@ package org.apache.commons.beanutils;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.17 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision$ $Date$
  * @see ConvertUtilsBean
  */
 
