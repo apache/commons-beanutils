@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.7 2002/04/06 23:28:35 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/04/06 23:28:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.8 2002/04/06 23:31:04 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/04/06 23:31:04 $
  *
  * ====================================================================
  *
@@ -95,7 +95,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -197,6 +197,7 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      *  tests getting an indexed property
      */
@@ -221,6 +222,7 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+
     /**
      *  tests getting a nested property
      */
@@ -238,6 +240,7 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
+
 
     /**
      *  tests getting a 'whatever' property
@@ -257,6 +260,7 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
+
 
     /**
      *  tests getting a 'whatever' property
@@ -365,6 +369,7 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
     }
+
 
     /**
      * Test populate() method on nested properties.
