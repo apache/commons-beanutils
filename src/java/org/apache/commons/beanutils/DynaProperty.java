@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.8 2003/08/21 21:31:56 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/08/21 21:31:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.9 2003/08/27 19:48:22 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/08/27 19:48:22 $
  *
  * ====================================================================
  *
@@ -75,8 +75,15 @@ import java.util.Map;
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
+ * <p>The meta contains an <em>optional</em> content type property ({@link getContentType})
+ * for use by mapped and iterated properties. 
+ * A mapped or iterated property may choose to indicate the type it expects.
+ * The DynaBean implementation may choose to enforce this type on its entries.
+ * Alternatively, an implementatin may choose to ignore this property.
+ * All keys for maps must be of type String so no meta data is needed for map keys.</p>
+ *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2003/08/21 21:31:56 $
+ * @version $Revision: 1.9 $ $Date: 2003/08/27 19:48:22 $
  */
 
 public class DynaProperty implements Serializable {
@@ -131,37 +138,18 @@ public class DynaProperty implements Serializable {
     }
     
     /**
-     * Construct an indexed <code>DynaProperty</code> that supports (pseudo)-introspection
-     * of the indexed property type.
+     * Construct an indexed or mapped <code>DynaProperty</code> that supports (pseudo)-introspection
+     * of the content type.
      *
      * @param name Name of the property being described
      * @param type Java class representing the property data type
-     * @param contentType Class that all indexed elements are instances of
+     * @param contentType Class that all indexed or mapped elements are instances of
      */
     public DynaProperty(String name, Class type, Class contentType) {
 
         super();
         this.name = name;
         this.type = type;
-        this.contentType = contentType;
-        
-    }
-
-    /**
-     * Construct a mapped <code>DynaProperty</code> that supports (pseudo)-introspection
-     * of the mapped content and key type.
-     *
-     * @param name Name of the property being described
-     * @param type Java class representing the property data type
-     * @param keyType Class that all keys are instances of
-     * @param contentType Class that all mapped elements are instances of
-     */
-    public DynaProperty(String name, Class type, Class keyType, Class contentType) {
-
-        super();
-        this.name = name;
-        this.type = type;
-        this.keyType = keyType;
         this.contentType = contentType;
         
     }
@@ -211,24 +199,6 @@ public class DynaProperty implements Serializable {
         return contentType;
     }
     
-    
-    /** The <em>(optional)</em> type of keys for mapped <code>DynaProperty</code>'s */
-    protected transient Class keyType;
-    /**
-     * Gets the <em>(optional)</em> type of the key for mapped <code>DynaProperty</code>'s
-     * that support this feature.
-     *
-     * <p>There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
-     * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
-     *
-     * @return the Class for the key type if this is an mapped <code>DynaProperty</code> 
-     * and this feature is supported. Otherwise null.
-     */
-    public Class getKeyType() {
-        return keyType;
-    }
-
     // --------------------------------------------------------- Public Methods
 
 
@@ -273,10 +243,8 @@ public class DynaProperty implements Serializable {
         sb.append(this.name);
         sb.append(",type=");
         sb.append(this.type);
-        if (isIndexed()) {
+        if (isMapped() || isIndexed()) {
             sb.append(" <").append(this.contentType).append(">");
-        } else if (isMapped()) {
-            sb.append(" <").append(this.keyType).append(",").append(this.contentType).append(">");
         }
         sb.append("]");
         return (sb.toString());
@@ -295,11 +263,7 @@ public class DynaProperty implements Serializable {
         
         writeAnyClass(this.type,out);
         
-        if (isIndexed()) {
-            writeAnyClass(this.contentType,out);
-        }
-        else if (isMapped()) {
-            writeAnyClass(this.keyType,out);
+        if (isMapped() || isIndexed()) {
             writeAnyClass(this.contentType,out);
         }
         
@@ -354,11 +318,7 @@ public class DynaProperty implements Serializable {
         
         this.type = readAnyClass(in);
         
-        if (isIndexed()) {
-            this.contentType = readAnyClass(in);
-        }
-        else if (isMapped()) {
-            this.keyType = readAnyClass(in);
+        if (isMapped() || isIndexed()) {
             this.contentType = readAnyClass(in);
         }
         
