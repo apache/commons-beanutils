@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.4 2001/05/21 04:20:21 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/05/21 04:20:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.5 2001/08/21 21:59:02 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2001/08/21 21:59:02 $
  *
  * ====================================================================
  *
@@ -85,7 +85,9 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.4 $ $Date: 2001/05/21 04:20:21 $
+ * @author Rey François
+ * @author Gregor Raýman
+ * @version $Revision: 1.5 $ $Date: 2001/08/21 21:59:02 $
  */
 
 public class BeanUtils {
@@ -446,6 +448,9 @@ public class BeanUtils {
             if (descriptor instanceof IndexedPropertyDescriptor)
                 setter = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedWriteMethod();
+            else if (descriptor instanceof MappedPropertyDescriptor)
+                setter =((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
+
             if (setter == null)
                 setter = descriptor.getWriteMethod();
             if (setter == null) {
@@ -467,7 +472,7 @@ public class BeanUtils {
             */
             Class parameterType = parameterTypes[0];
             if (parameterTypes.length > 1)
-                parameterType = parameterTypes[1];      // Indexed setter
+                parameterType = parameterTypes[1];      // Indexed or mapped setter
 
             // Convert the parameter value as required for this setter method
             Object parameters[] = new Object[1];

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.7 2001/07/14 23:54:51 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2001/07/14 23:54:51 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.8 2001/08/21 21:59:02 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2001/08/21 21:59:02 $
  *
  * ====================================================================
  *
@@ -82,16 +82,18 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * <p>So far, this test case has tests for the following methods of the
  * <code>PropertyUtils</code> class:</p>
  * <ul>
+ * <li>getMappedProperty(Object,String)</li>
  * <li>getNestedProperty(Object,String)</li>
  * <li>getPropertyDescriptor(Object,String)</li>
  * <li>getPropertyDescriptors(Object)</li>
  * <li>getSimpleProperty(Object,String)</li>
+ * <li>setMappedProperty(Object,String,Object)</li>
  * <li>setNestedProperty(Object,String,Object)</li>
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2001/07/14 23:54:51 $
+ * @version $Revision: 1.8 $ $Date: 2001/08/21 21:59:02 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -427,6 +429,139 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
 
+    }
+
+
+    /**
+     * Corner cases on getMappedProperty invalid arguments.
+     */
+    public void testGetMappedArguments() {
+
+        // Use explicit key argument
+
+        try {
+            PropertyUtils.getMappedProperty(null, "mappedProperty",
+                                            "First Key");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.getMappedProperty(bean, null, "First Key");
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        try {
+            PropertyUtils.getMappedProperty(bean, "mappedProperty", null);
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        // Use key expression
+
+        try {
+            PropertyUtils.getMappedProperty(null,
+                                            "mappedProperty(First Key)");
+            fail("Should throw IllegalArgumentException 4");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 4");
+        }
+
+        try {
+            PropertyUtils.getMappedProperty(bean, "(Second Key)");
+            fail("Should throw IllegalArgumentException 5");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 5");
+        }
+
+        try {
+            PropertyUtils.getMappedProperty(bean, "mappedProperty");
+            fail("Should throw IllegalArgumentException 6");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 6");
+        }
+
+    }
+
+
+    /**
+     * Positive and negative tests on getMappedProperty valid arguments.
+     */
+    public void testGetMappedValues() {
+
+        Object value = null;
+
+        // Use explicit key argument
+
+        try {
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
+                                                    "First Key");
+            assertEquals("Can find first value", "First Value", value);
+        } catch (Throwable t) {
+            fail("Finding first value threw " + t);
+        }
+
+        try {
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
+                                                    "Second Key");
+            assertEquals("Can find second value", "Second Value", value);
+        } catch (Throwable t) {
+            fail("Finding second value threw " + t);
+        }
+
+        try {
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
+                                                    "Third Key");
+            assertNull("Can not find third value", value);
+        } catch (Throwable t) {
+            fail("Finding third value threw " + t);
+        }
+
+        // Use key expression
+
+        try {
+            value =
+                PropertyUtils.getMappedProperty(bean,
+                                                "mappedProperty(First Key)");
+            assertEquals("Can find first value", "First Value", value);
+        } catch (Throwable t) {
+            fail("Finding first value threw " + t);
+        }
+
+        try {
+            value =
+                PropertyUtils.getMappedProperty(bean,
+                                                "mappedProperty(Second Key)");
+            assertEquals("Can find second value", "Second Value", value);
+        } catch (Throwable t) {
+            fail("Finding second value threw " + t);
+        }
+
+        try {
+            value =
+                PropertyUtils.getMappedProperty(bean,
+                                                "mappedProperty(Third Key)");
+            assertNull("Can not find third value", value);
+        } catch (Throwable t) {
+            fail("Finding third value threw " + t);
+        }
+        
     }
 
 
@@ -1163,6 +1298,142 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetWriteMethodPublicSubclass() {
 
         testGetWriteMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
+
+    }
+
+
+    /**
+     * Corner cases on getMappedProperty invalid arguments.
+     */
+    public void testSetMappedArguments() {
+
+        // Use explicit key argument
+
+        try {
+            PropertyUtils.setMappedProperty(null, "mappedProperty",
+                                            "First Key", "First Value");
+            fail("Should throw IllegalArgumentException 1");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 1");
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean, null, "First Key",
+                                            "First Value");
+            fail("Should throw IllegalArgumentException 2");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 2");
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", null,
+                                            "First Value");
+            fail("Should throw IllegalArgumentException 3");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 3");
+        }
+
+        // Use key expression
+
+        try {
+            PropertyUtils.setMappedProperty(null,
+                                            "mappedProperty(First Key)",
+                                            "First Value");
+            fail("Should throw IllegalArgumentException 4");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 4");
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "(Second Key)",
+                                            "Second Value");
+            fail("Should throw IllegalArgumentException 5");
+        } catch (NoSuchMethodException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of NoSuchMethodException 5");
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "mappedProperty",
+                                            "Third Value");
+            fail("Should throw IllegalArgumentException 6");
+        } catch (IllegalArgumentException e) {
+            ; // Expected response
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IllegalArgumentException 6");
+        }
+
+    }
+
+
+    /**
+     * Positive and negative tests on setMappedProperty valid arguments.
+     */
+    public void testSetMappedValues() {
+
+        Object value = null;
+
+        // Use explicit key argument
+
+        try {
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
+                                                    "Fourth Key");
+            assertNull("Can not find fourth value", value);
+        } catch (Throwable t) {
+            fail("Finding fourth value threw " + t);
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "mappedProperty",
+                                            "Fourth Key", "Fourth Value");
+        } catch (Throwable t) {
+            fail("Setting fourth value threw " + t);
+        }
+
+        try {
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
+                                                    "Fourth Key");
+            assertEquals("Can find fourth value", "Fourth Value", value);
+        } catch (Throwable t) {
+            fail("Finding fourth value threw " + t);
+        }
+
+        // Use key expression
+
+        try {
+            value =
+                PropertyUtils.getMappedProperty(bean,
+                                                "mappedProperty(Fifth Key)");
+            assertNull("Can not find fifth value", value);
+        } catch (Throwable t) {
+            fail("Finding fifth value threw " + t);
+        }
+
+        try {
+            PropertyUtils.setMappedProperty(bean,
+                                            "mappedProperty(Fifth Key)",
+                                            "Fifth Value");
+        } catch (Throwable t) {
+            fail("Setting fifth value threw " + t);
+        }
+
+        try {
+            value =
+                PropertyUtils.getMappedProperty(bean,
+                                                "mappedProperty(Fifth Key)");
+            assertEquals("Can find fifth value", "Fifth Value", value);
+        } catch (Throwable t) {
+            fail("Finding fifth value threw " + t);
+        }
 
     }
 

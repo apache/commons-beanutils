@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.2 2001/04/03 18:21:24 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/04/03 18:21:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.3 2001/08/21 21:59:02 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/08/21 21:59:02 $
  *
  * ====================================================================
  *
@@ -63,11 +63,14 @@
 package org.apache.commons.beanutils;
 
 
+import java.util.HashMap;
+
+
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2001/04/03 18:21:24 $
+ * @version $Revision: 1.3 $ $Date: 2001/08/21 21:59:02 $
  */
 
 public class TestBean {
@@ -185,6 +188,26 @@ public class TestBean {
 
     public void setLongProperty(long longProperty) {
         this.longProperty = longProperty;
+    }
+
+
+    /**
+     * A mapped property that has String keys and String values.
+     */
+    private HashMap mappedProperty = null;
+
+    public String getMappedProperty(String key) {
+        // Create the map the very first time
+        if (mappedProperty == null) {
+            mappedProperty = new HashMap();
+            mappedProperty.put("First Key", "First Value");
+            mappedProperty.put("Second Key", "Second Value");
+        }
+        return ((String) mappedProperty.get(key));
+    }
+
+    public void setMappedProperty(String key, String value) {
+        mappedProperty.put(key, value);
     }
 
 
