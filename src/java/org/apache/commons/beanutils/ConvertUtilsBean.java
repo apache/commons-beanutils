@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.8 2003/07/07 22:06:44 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/07/07 22:06:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.9 2003/07/14 21:11:05 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/07/14 21:11:05 $
  *
  * ====================================================================
  *
@@ -148,7 +148,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ralph Schaer
  * @author Chris Audley
  * @author James Strachan
- * @version $Revision: 1.8 $ $Date: 2003/07/07 22:06:44 $
+ * @version $Revision: 1.9 $ $Date: 2003/07/14 21:11:05 $
  * @since 1.7
  */
 
@@ -529,55 +529,59 @@ public class ConvertUtilsBean {
         short shortArray[] = new short[0];
         String stringArray[] = new String[0];
 
-        converters.clear();
-        converters.put(BigDecimal.class, new BigDecimalConverter());
-        converters.put(BigInteger.class, new BigIntegerConverter());
-        converters.put(Boolean.TYPE, new BooleanConverter(defaultBoolean));
-        converters.put(Boolean.class,  new BooleanConverter(defaultBoolean));
-        converters.put(booleanArray.getClass(),
+		converters.clear();
+        register(BigDecimal.class, new BigDecimalConverter());
+        register(BigInteger.class, new BigIntegerConverter());
+        register(Boolean.TYPE, new BooleanConverter(defaultBoolean));
+        register(Boolean.class,  new BooleanConverter(defaultBoolean));
+        register(booleanArray.getClass(),
                        new BooleanArrayConverter(booleanArray));
-        converters.put(Byte.TYPE, new ByteConverter(defaultByte));
-        converters.put(Byte.class, new ByteConverter(defaultByte));
-        converters.put(byteArray.getClass(),
+        register(Byte.TYPE, new ByteConverter(defaultByte));
+        register(Byte.class, new ByteConverter(defaultByte));
+        register(byteArray.getClass(),
                        new ByteArrayConverter(byteArray));
-        converters.put(Character.TYPE,
+        register(Character.TYPE,
                        new CharacterConverter(defaultCharacter));
-        converters.put(Character.class,
+        register(Character.class,
                        new CharacterConverter(defaultCharacter));
-        converters.put(charArray.getClass(),
+        register(charArray.getClass(),
                        new CharacterArrayConverter(charArray));
-        converters.put(Class.class, new ClassConverter());
-        converters.put(Double.TYPE, new DoubleConverter(defaultDouble));
-        converters.put(Double.class, new DoubleConverter(defaultDouble));
-        converters.put(doubleArray.getClass(),
+        register(Class.class, new ClassConverter());
+        register(Double.TYPE, new DoubleConverter(defaultDouble));
+        register(Double.class, new DoubleConverter(defaultDouble));
+        register(doubleArray.getClass(),
                        new DoubleArrayConverter(doubleArray));
-        converters.put(Float.TYPE, new FloatConverter(defaultFloat));
-        converters.put(Float.class, new FloatConverter(defaultFloat));
-        converters.put(floatArray.getClass(),
+        register(Float.TYPE, new FloatConverter(defaultFloat));
+        register(Float.class, new FloatConverter(defaultFloat));
+        register(floatArray.getClass(),
                        new FloatArrayConverter(floatArray));
-        converters.put(Integer.TYPE, new IntegerConverter(defaultInteger));
-        converters.put(Integer.class, new IntegerConverter(defaultInteger));
-        converters.put(intArray.getClass(),
+        register(Integer.TYPE, new IntegerConverter(defaultInteger));
+        register(Integer.class, new IntegerConverter(defaultInteger));
+        register(intArray.getClass(),
                        new IntegerArrayConverter(intArray));
-        converters.put(Long.TYPE, new LongConverter(defaultLong));
-        converters.put(Long.class, new LongConverter(defaultLong));
-        converters.put(longArray.getClass(),
+        register(Long.TYPE, new LongConverter(defaultLong));
+        register(Long.class, new LongConverter(defaultLong));
+        register(longArray.getClass(),
                        new LongArrayConverter(longArray));
-        converters.put(Short.TYPE, new ShortConverter(defaultShort));
-        converters.put(Short.class, new ShortConverter(defaultShort));
-        converters.put(shortArray.getClass(),
+        register(Short.TYPE, new ShortConverter(defaultShort));
+        register(Short.class, new ShortConverter(defaultShort));
+        register(shortArray.getClass(),
                        new ShortArrayConverter(shortArray));
-        converters.put(String.class, new StringConverter());
-        converters.put(stringArray.getClass(),
+        register(String.class, new StringConverter());
+        register(stringArray.getClass(),
                        new StringArrayConverter(stringArray));
-        converters.put(Date.class, new SqlDateConverter());
-        converters.put(Time.class, new SqlTimeConverter());
-        converters.put(Timestamp.class, new SqlTimestampConverter());
-        converters.put(File.class, new FileConverter());
-        converters.put(URL.class, new URLConverter());
+        register(Date.class, new SqlDateConverter());
+        register(Time.class, new SqlTimeConverter());
+        register(Timestamp.class, new SqlTimestampConverter());
+        register(File.class, new FileConverter());
+        register(URL.class, new URLConverter());
 
     }
 
+    /** strictly for convenience since it has same parameter order as Map.put */
+    private void register(Class clazz, Converter converter) {
+        register(converter, clazz);
+    }
 
     /**
      * Remove any registered {@link Converter} for the specified destination
