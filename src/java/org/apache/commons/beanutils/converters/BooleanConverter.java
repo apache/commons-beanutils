@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BooleanConverter.java,v 1.2 2002/04/11 19:50:06 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/04/11 19:50:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BooleanConverter.java,v 1.3 2002/04/29 16:32:44 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/04/29 16:32:44 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/04/11 19:50:06 $
+ * @version $Revision: 1.3 $ $Date: 2002/04/29 16:32:44 $
  * @since 1.3
  */
 
@@ -152,11 +152,13 @@ public final class BooleanConverter implements Converter {
             String stringValue = (String) value;
             if (stringValue.equalsIgnoreCase("yes") ||
                 stringValue.equalsIgnoreCase("true") ||
-                stringValue.equalsIgnoreCase("on")) {
+                stringValue.equalsIgnoreCase("on") ||
+                stringValue.equalsIgnoreCase("1")) {
                 return (Boolean.TRUE);
             } else if (stringValue.equalsIgnoreCase("no") ||
                        stringValue.equalsIgnoreCase("false") ||
-                       stringValue.equalsIgnoreCase("off")) {
+                       stringValue.equalsIgnoreCase("off") ||
+                       stringValue.equalsIgnoreCase("0")) {
                 return (Boolean.FALSE);
             } else if (useDefault) {
                 return (defaultValue);
