@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.5 2001/04/14 18:16:36 craigmcc Exp $
+        $Id: build.xml,v 1.6 2001/04/14 18:45:32 craigmcc Exp $
 -->
 
 
@@ -49,10 +49,10 @@
   <property name="conf.home"               value="conf"/>
 
   <!-- The base directory for distribution targets -->
-  <property name="dist.home"               value="dist"/>
+  <property name="dist.home"               value="build"/>
 
   <!-- The base directory for component sources -->
-  <property name="source.home"             value="src/share"/>
+  <property name="source.home"             value="src/java"/>
 
   <!-- The base directory for unit test sources -->
   <property name="test.home"               value="src/test"/>
@@ -166,8 +166,10 @@
 
   <target name="javadoc" depends="compile"
    description="Create component Javadoc documentation">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${dist.home}/javadoc"/>
     <javadoc sourcepath="${source.home}"
-                destdir="${build.home}/javadoc"
+                destdir="${dist.home}/javadoc"
            packagenames="org.apache.commons.*"
                  author="true"
                 private="true"
@@ -182,12 +184,7 @@
    description="Create binary distribution">
     <!-- TODO: top level files like LICENSE and README -->
     <mkdir      dir="${dist.home}"/>
-    <mkdir      dir="${dist.home}/conf"/>
-    <copy     todir="${dist.home}/conf">
-      <fileset  dir="${build.home}/conf"/>
-    </copy>
-    <mkdir      dir="${dist.home}/lib"/>
-    <jar    jarfile="${dist.home}/lib/commons-${component.name}.jar"
+    <jar    jarfile="${dist.home}/commons-${component.name}.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
     <mkdir      dir="${dist.home}/src"/>
