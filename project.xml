@@ -18,7 +18,14 @@
 
   <logo>/images/logo.png</logo>
 
-  <description>Java Bean Utilities</description>
+  <description>BeanUtils provides an easy-to-use but flexible wrapper around
+  reflection and introspection.</description>
+  
+  <repository>
+    <connection>scm:cvs:${beanutils.cvs}:jakarta-commons/beanutils/</connection>
+    <url>http://cvs.apache.org/viewcvs/jakarta-commons/beanutils/</url>
+  </repository>
+  
   <url>http://jakarta.apache.org/commons/beanutils/</url>
   <developers>
     <developer>

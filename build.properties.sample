@@ -16,3 +16,9 @@ junit.home = /usr/local/junit3.7
 
 # The pathname of the "junit.jar" JAR file
 junit.jar = ${junit.home}/junit.jar
+
+
+# Maven properties (for web site build)
+# Those committers using agents may like to use
+#maven.username=rdonkin
+#digester.cvs=lserver:rdonkin@cvs.apache.org:/home/cvs
