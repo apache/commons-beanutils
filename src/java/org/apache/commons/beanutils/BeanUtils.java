@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.21 2002/04/27 23:11:23 craigmcc Exp $
- * $Revision: 1.21 $
- * $Date: 2002/04/27 23:11:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.22 2002/05/17 07:25:50 jstrachan Exp $
+ * $Revision: 1.22 $
+ * $Date: 2002/05/17 07:25:50 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.21 $ $Date: 2002/04/27 23:11:23 $
+ * @version $Revision: 1.22 $ $Date: 2002/05/17 07:25:50 $
  */
 
 public class BeanUtils {
@@ -521,7 +521,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    private static void setProperty(Object bean, String name, Object value)
+    public static void setProperty(Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
 
         // Trace logging (if enabled)
