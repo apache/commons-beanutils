@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.18 2002/04/06 23:34:29 craigmcc Exp $
- * $Revision: 1.18 $
- * $Date: 2002/04/06 23:34:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.19 2002/04/07 00:27:32 craigmcc Exp $
+ * $Revision: 1.19 $
+ * $Date: 2002/04/07 00:27:32 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.18 $ $Date: 2002/04/06 23:34:29 $
+ * @version $Revision: 1.19 $ $Date: 2002/04/07 00:27:32 $
  */
 
 public class BeanUtils {
@@ -560,8 +560,7 @@ public class BeanUtils {
                 target =
                     PropertyUtils.getProperty(bean, name.substring(0, delim));
             } catch (NoSuchMethodException e) {
-                throw new InvocationTargetException
-                    (e, "Cannot retrieve " + name.substring(0, delim));
+                return; // Skip this property setter
             }
             name = name.substring(delim + 1);
             if (log.isTraceEnabled()) {
@@ -605,8 +604,7 @@ public class BeanUtils {
             DynaClass dynaClass = ((DynaBean) target).getDynaClass();
             DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
             if (dynaProperty == null) {
-                throw new IllegalArgumentException
-                    ("No DynaPropertyDescriptor for " + propName);
+                return; // Skip this property setter
             }
             type = dynaProperty.getType();
         } else {
@@ -615,8 +613,7 @@ public class BeanUtils {
                 descriptor =
                     PropertyUtils.getPropertyDescriptor(target, name);
             } catch (NoSuchMethodException e) {
-                throw new IllegalArgumentException
-                    ("No PropertyDescriptor for " + name);
+                return; // Skip this property setter
             }
             if (descriptor instanceof IndexedPropertyDescriptor) {
                 type = ((IndexedPropertyDescriptor) descriptor).
