@@ -40,7 +40,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.17 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision: 1.18 $ $Date: 2004/06/03 21:16:56 $
  */
 
 
@@ -337,16 +337,35 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         result = (Method[])
                 AccessController.doPrivileged(new PrivilegedAction() {
                     public Object run() {
-                        return fclz.getDeclaredMethods();
+                        try{
+                        
+                            return fclz.getDeclaredMethods();
+                            
+                        } catch (SecurityException ex) {
+                            // this means we're in a limited security environment
+                            // so let's try going through the public methods
+                            // and null those those that are not from the declaring 
+                            // class
+                            Method[] methods = fclz.getMethods();
+                            for (int i = 0, size = methods.length; i < size; i++) {
+                                Method method =  methods[i];
+                                if (!(fclz.equals(method.getDeclaringClass()))) {
+                                    methods[i] = null;
+                                }
+                            }
+                            return methods;
+                        }
                     }
                 });
 
         // Null out any non-public methods.
         for (int i = 0; i < result.length; i++) {
             Method method = result[i];
-            int mods = method.getModifiers();
-            if (!Modifier.isPublic(mods)) {
-                result[i] = null;
+            if (method != null) {
+                int mods = method.getModifiers();
+                if (!Modifier.isPublic(mods)) {
+                    result[i] = null;
+                }
             }
         }
 
