@@ -765,7 +765,7 @@ public class MethodUtils {
     /**
      * Find a non primitive representation for given primitive class.
      *
-     * @param Class the class to find a representation for, not null
+     * @param clazz the class to find a representation for, not null
      * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
      */
     public static Class toNonPrimitiveClass(Class clazz) {
