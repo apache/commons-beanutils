@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.10 2003/02/08 18:49:56 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2003/02/08 18:49:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.11 2003/03/13 18:45:38 rdonkin Exp $
+ * $Revision: 1.11 $
+ * $Date: 2003/03/13 18:45:38 $
  *
  * ====================================================================
  *
@@ -64,9 +64,7 @@ package org.apache.commons.beanutils;
 
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -125,10 +123,10 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.10 $ $Date: 2003/02/08 18:49:56 $
+ * @version $Revision: 1.11 $ $Date: 2003/03/13 18:45:38 $
  */
 
-public class ResultSetDynaClass implements DynaClass {
+public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
     // ----------------------------------------------------------- Constructors
@@ -182,7 +180,7 @@ public class ResultSetDynaClass implements DynaClass {
         }
         this.resultSet = resultSet;
         this.lowerCase = lowerCase;
-        introspect();
+        introspect(resultSet);
 
     }
 
@@ -217,81 +215,6 @@ public class ResultSetDynaClass implements DynaClass {
     protected ResultSet resultSet = null;
 
 
-
-    // ------------------------------------------------------ DynaClass Methods
-
-
-
-    /**
-     * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
-     * different dynamic classes, with different sets of properties.
-     */
-    public String getName() {
-
-        return (this.getClass().getName());
-
-    }
-
-
-    /**
-     * Return a property descriptor for the specified property, if it exists;
-     * otherwise, return <code>null</code>.
-     *
-     * @param name Name of the dynamic property for which a descriptor
-     *  is requested
-     *
-     * @exception IllegalArgumentException if no property name is specified
-     */
-    public DynaProperty getDynaProperty(String name) {
-
-        if (name == null) {
-            throw new IllegalArgumentException
-                    ("No property name specified");
-        }
-        return ((DynaProperty) propertiesMap.get(name));
-
-    }
-
-
-    /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
-     *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
-     */
-    public DynaProperty[] getDynaProperties() {
-
-        return (properties);
-
-    }
-
-
-    /**
-     * <p>Instantiate and return a new DynaBean instance, associated
-     * with this DynaClass.  <strong>NOTE</strong> - This operation is not
-     * supported, and throws an exception.  The <code>Iterator</code> that
-     * is returned by <code>iterator()</code> will create DynaBean instances
-     * for each row as needed.</p>
-     *
-     * @exception IllegalAccessException if the Class or the appropriate
-     *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
-     *  class, an array class, a primitive type, or void; or if instantiation
-     *  fails for some other reason
-     */
-    public DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException {
-
-        throw new UnsupportedOperationException("newInstance() not supported");
-
-    }
-
-
     // --------------------------------------------------------- Public Methods
 
 
@@ -322,73 +245,7 @@ public class ResultSetDynaClass implements DynaClass {
 
 
     // ------------------------------------------------------ Protected Methods
-
-
-    /**
-     * <p>Introspect the metadata associated with our result set, and populate
-     * the <code>properties</code> and <code>propertiesMap</code> instance
-     * variables.</p>
-     *
-     * @exception SQLException if an error is encountered processing the
-     *  result set metadata
-     */
-    protected void introspect() throws SQLException {
-
-        // Accumulate an ordered list of DynaProperties
-        ArrayList list = new ArrayList();
-        ResultSetMetaData metadata = resultSet.getMetaData();
-        int n = metadata.getColumnCount();
-        for (int i = 1; i <= n; i++) { // JDBC is one-relative!
-            DynaProperty dynaProperty = createDynaProperty(metadata, i);
-            if (dynaProperty != null) {
-                list.add(dynaProperty);
-            }
-        }
-
-        // Convert this list into the internal data structures we need
-        properties =
-            (DynaProperty[]) list.toArray(new DynaProperty[list.size()]);
-        for (int i = 0; i < properties.length; i++) {
-            propertiesMap.put(properties[i].getName(), properties[i]);
-        }
-
-    }
-
-
-    /**
-     * <p>Factory method to create a new DynaProperty for the given index
-     * into the result set metadata.</p>
-     * 
-     * @param metadata is the result set metadata
-     * @param i is the column index in the metadata
-     * @return the newly created DynaProperty instance
-     */
-    protected DynaProperty createDynaProperty(ResultSetMetaData metadata, int i) throws SQLException {
-
-        String name = null;
-        if (lowerCase) {
-            name = metadata.getColumnName(i).toLowerCase();
-        } else {
-            name = metadata.getColumnName(i);
-        }
-        String className = null;
-        try {
-            className = metadata.getColumnClassName(i);
-        }
-        catch (SQLException e) {
-            // this is a patch for HsqlDb to ignore exceptions thrown by its metadata implementation
-        }
-
-        // lets default to Object type if no class name could be retrieved from the metadata
-        Class clazz = Object.class;
-        if (className != null) {
-            clazz = loadClass(className);
-        }
-        return new DynaProperty(name, clazz);
-
-    }
-
-
+    
     /**
      * <p>Loads the class of the given name which by default uses the class loader used 
      * to load this library.
@@ -405,8 +262,5 @@ public class ResultSetDynaClass implements DynaClass {
             throw new SQLException("Cannot load column class '" +
                                    className + "': " + e);
         }
-
     }
-
-
 }
