@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.28 2002/11/21 22:21:01 rdonkin Exp $
- * $Revision: 1.28 $
- * $Date: 2002/11/21 22:21:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.29 2002/11/26 21:28:46 rdonkin Exp $
+ * $Revision: 1.29 $
+ * $Date: 2002/11/26 21:28:46 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.28 $ $Date: 2002/11/21 22:21:01 $
+ * @version $Revision: 1.29 $ $Date: 2002/11/26 21:28:46 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -3645,5 +3645,22 @@ public class PropertyUtilsTestCase extends TestCase {
         
         PropertyUtils.setMappedProperty(bean, "noGetterMappedProperty",  "Epsilon", "Epsilon");
         assertEquals("Cannot set mapped no-getter property", "MAP:Epsilon", bean.getSecret());
+    }
+    
+    /** 
+     * This tests to see that classes that implement Map can have 
+     * their standard properties set.
+     */
+    public void testSetMapExtension() throws Exception {
+        ExtendMapBean bean = new ExtendMapBean();
+        
+        bean.setUnusuallyNamedProperty("bean value");
+        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
+        
+        PropertyUtils.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
+        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
+        
+        PropertyUtils.setProperty(bean, "unusuallyNamedProperty", "next value");
+        assertEquals("Set property on map failed (2)", "next value", bean.getUnusuallyNamedProperty());
     }
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.33 2002/11/23 23:47:07 craigmcc Exp $
- * $Revision: 1.33 $
- * $Date: 2002/11/23 23:47:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.34 2002/11/26 21:28:46 rdonkin Exp $
+ * $Revision: 1.34 $
+ * $Date: 2002/11/26 21:28:46 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.33 $ $Date: 2002/11/23 23:47:07 $
+ * @version $Revision: 1.34 $ $Date: 2002/11/26 21:28:46 $
  */
 
 public class PropertyUtils {
@@ -1544,7 +1544,16 @@ public class PropertyUtils {
         indexOfMAPPED_DELIM = name.indexOf(MAPPED_DELIM);
 
         if (bean instanceof Map) {
-            ((Map) bean).put(name, value);
+            // check to see if the class has a standard property 
+            PropertyDescriptor descriptor = 
+                getPropertyDescriptor(bean, name);
+            if (descriptor == null) {
+                // no - then put the value into the map
+                ((Map) bean).put(name, value);
+            } else {
+                // yes - use that instead
+                setSimpleProperty(bean, name, value);
+            }
         } else if (indexOfMAPPED_DELIM >= 0) {
             setMappedProperty(bean, name, value);
         } else if (indexOfINDEXED_DELIM >= 0) {
