@@ -27,6 +27,7 @@ and accessing bean properties.</p>
     <ul>
     <li><a href="#dynamic.background">Background</a></li>
     <li><a href="#dynamic.basic">BasicDynaBean and BasicDynaClass</a></li>
+    <li><a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
     <li><a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
     </ul></li>
 <li><a href="#conversion">Data Type Conversions</a>
@@ -460,6 +461,33 @@ to a <code>PropertyUtils</code> method that gets and sets properties, and it
 will be interpreted as you expect -- the dynamic properties of the DynaBean
 will be retrieved or modified, instead of underlying properties on the
 actual BasicDynaBean implementation class.</p>
+
+<a name="dynamic.resultSet"></a>
+<h3><code>ResultSetDynaClass</code> (Wraps ResultSet in DynaBeans)</h3>
+
+<p>A very common use case for DynaBean APIs is to wrap other collections of
+"stuff" that do not normally present themselves as JavaBeans.  One of the most
+common collections that would be nice to wrap is the
+<code>java.sql.ResultSet</code> that is returned when you ask a JDBC driver
+to perform a SQL SELECT statement.  Commons BeanUtils offers a standard
+mechanism for making each row of the result set visible as a DynaBean,
+which you can utilize as shown in this example:</p>
+<pre>
+  Connection conn = ...;
+  Statement stmt = conn.createStatement();
+  ResultSet rs = stmt.executeQuery
+    ("select account_id, name from customers");
+  ResultSetDynaClass rsdc = new ResultSetDynaClass(rs);
+  Iterator rows = (new ResultSetDynaClass(rs)).iterator();
+  while (rows.hasNext()) {
+    DynaBean row = (DynaBean) rows.next();
+    System.out.println("Account number is " +
+                       row.get("account_id") +
+                       " and name is " + row.get("name"));
+  }
+  rs.close();
+  stmt.close();
+</pre>
 
 <a name="dynamic.wrap"></a>
 <h3><code>WrapDynaBean</code> and <code>WrapDynaClass</code></h3>

@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.33 2002/04/29 22:17:51 craigmcc Exp $
+        $Id: build.xml,v 1.34 2002/07/12 22:38:21 craigmcc Exp $
 -->
 
 
@@ -80,7 +80,7 @@
   <property name="compile.debug"           value="true"/>
 
   <!-- Should Java compilations set the 'deprecation' compiler option? -->
-  <property name="compile.deprecation"     value="true"/>
+  <property name="compile.deprecation"     value="false"/>
 
   <!-- Should Java compilations set the 'optimize' compiler option? -->
   <property name="compile.optimize"        value="true"/>
@@ -258,7 +258,8 @@
                                 test.dyna.bean,
                                 test.bean,
                                 test.convert,
-                                test.method
+                                test.method,
+                                test.dyna.result
                                "
    description="Run all unit test cases">
   </target>
@@ -380,6 +381,21 @@
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.MethodUtilsTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+  <target name="test.dyna.result" depends="compile.tests">
+    <echo message="Running DynaBean ResultSet tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.DynaResultSetTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
