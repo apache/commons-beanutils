@@ -16,8 +16,19 @@
  
 package org.apache.commons.beanutils.locale;
 
-import org.apache.commons.beanutils.locale.converters.*;
-import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.ByteLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.DoubleLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.FloatLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.ShortLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.StringLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.SqlDateLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.SqlTimeLocaleConverter;
+import org.apache.commons.beanutils.locale.converters.SqlTimestampLocaleConverter;
+
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,9 +36,6 @@ import org.apache.commons.logging.LogFactory;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Locale;
 
 /**
