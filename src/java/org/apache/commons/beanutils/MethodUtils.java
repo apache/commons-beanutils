@@ -444,8 +444,6 @@ public class MethodUtils {
         }
 
         // Check the implemented interfaces and subinterfaces
-        String methodName = method.getName();
-        Class[] parameterTypes = method.getParameterTypes();
         method =
                 getAccessibleMethodFromInterfaceNest(clazz,
                         method.getName(),

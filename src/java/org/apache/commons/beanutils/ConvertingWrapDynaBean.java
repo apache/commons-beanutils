@@ -110,7 +110,6 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      */
     public void set(String name, Object value) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         try {
             BeanUtils.setProperty(instance, name, value);
         } catch (Throwable t) {

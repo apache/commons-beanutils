@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.4 2002/10/25 00:21:01 dion Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/10/25 00:21:01 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ package org.apache.commons.beanutils;
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.4 $ $Date: 2002/10/25 00:21:01 $
  */
 
 public class WrapDynaBean implements DynaBean {
@@ -145,7 +145,6 @@ public class WrapDynaBean implements DynaBean {
      */
     public Object get(String name) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = null;
         try {
             value = PropertyUtils.getSimpleProperty(instance, name);
@@ -175,7 +174,6 @@ public class WrapDynaBean implements DynaBean {
      */
     public Object get(String name, int index) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         Object value = null;
         try {
             value = PropertyUtils.getIndexedProperty(instance, name, index);
@@ -262,7 +260,6 @@ public class WrapDynaBean implements DynaBean {
      */
     public void set(String name, Object value) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         try {
             PropertyUtils.setSimpleProperty(instance, name, value);
         } catch (Throwable t) {
@@ -291,7 +288,6 @@ public class WrapDynaBean implements DynaBean {
      */
     public void set(String name, int index, Object value) {
 
-        DynaProperty descriptor = getDynaProperty(name);
         try {
             PropertyUtils.setIndexedProperty(instance, name, index, value);
         } catch (IndexOutOfBoundsException e) {
