@@ -1,167 +1,90 @@
-$Id: RELEASE-NOTES.txt,v 1.11 2003/02/18 19:55:56 rdonkin Exp $
+$Id: RELEASE-NOTES.txt,v 1.11.2.3 2004/08/01 20:15:19 rdonkin Exp $
+
+   Copyright 2001-2004 The Apache Software Foundation
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
 
 
                           Commons BeanUtils Package
-                                Version 1.6.1
+                             Version 1.7.0
                                Release Notes
 
 INTRODUCTION:
 ============
 
-Beanutils 1.6.1 is a bug fix release. 
-The 1.6 release notes can be found at the bottom of this document.
+Beanutils 1.7.0 is a service release aimed at providing compatibility
+with both the commons collections 2.x series of releases 
+and the commons collections 3.x series of releases
 
 CHANGES:
 ========
 
-The ConstructorUtils java docs have been improved.
+Upgraded License To Apache License 2.0
+--------------------------------------
+Beanutils is now released under the Apache License 2.0. 
+See http://www.apache.org/licenses/LICENSE-2.0.
 
-ConvertingWrapDynaBean
-----------------------
+Beanification
+-------------
+Creation of objects to back the static utility classes. These object are 
+per-context-classloader pseudo-singletons. Each web or enterprise application 
+is therefore isolated from changes made to the state of others suing the
+static facades. Greater flexibility of implementation is encourage since users
+can subclass and then set their own implementations. Calls to the static facades 
+will then be passed to that implementation.
 
-Use BeanUtils.copyProperty() instead of BeanUtils.setProperty() so that
-Object->Object conversions -- via registered Converters, if any, are done.
+Removal Of Commons Collections Dependency
+-----------------------------------------
+The commons collections dependency is in the process of being removed
+from core beanutils. This will reduce the number of dependencies for
+the core beanutils and also will allow beanutils to used with both
+collection 2.x and collection 3.x releases.
 
-BeanUtils
----------
+Documentation Improvements
+--------------------------
+Many thanks to all those kind souls who've contributed documentation :)
 
-Enhance BeanUtils.copyProperty() to deal with about 80% of the use cases for
-copying indexed, mapped, and nested properties with type conversions.  The
-remaining restrictions are documented in the Javadocs for this method.
+ 
+ENHANCEMENTS:
+=============
 
-This is a partial response to Bugzilla #16525, which documents some
-restrictions in the functionality of copyProperty() that leads people
-to try setProperty() instead -- which they should not do.
+BeanAccessLanguageException & NestNullException
+-----------------------------------------------
+Added new subclasses of RuntimeException so that bean access language
+exceptions can be trapped by users.
 
-It is much more conservative than the proposed patch, which (as the reporter
-acknowledges) is more appropriate in a minor update (1.7) versus a bugfix
-patch (1.6.1) which is currently contemplated.
+BeanComparator
+--------------
+Added no-argument constructor for use in bean-centric environments.
+
+ConvertUtilsBean
+----------------
+Added a File converter and registered the File and URL converters by default
+
 
 BUG REPORTS ADDRESSED:
 =====================
+   #14848 Converted localized versions of beanutils and convert utils to use 
+          delegated singletons. Now instances with the functionality in these 
+          classes can be created.  
+          Added public constructors for the utility objects (BeanUtilsBean, 
+          PropertyUtilsBean and ConvertUtilsBean). Add public accessor properties
+          for the ConvertUtilsBean and PropertyUtilsBean instances used by a 
+          BeanUtilsBean. This allows BeanUtilsBean objects to be created with 
+          independent registered converters and independent caches.  Also added
+          test cases. 
+   #17663 Made BeanUtils.getArrayProperty conversions use ConvertUtils 
+          (rather than just toString)
+   #18918 This bug prevented converters from being correctly deregistered
+   #19850 Now cloneBean will deal successfully with DynaBeans.
 
-16854 ResultSetDynaClass misspelled ResutSetDynaClass
-16525 (partial) BeanUtils.setProperty is over-zealous at converting types
-
-
-
-
-
-
-                          Commons BeanUtils Package
-                                Version 1.6
-                               Release Notes
-
-INTRODUCTION:
-============
-
-This document contains the release notes for this version of the Commons
-BeanUtils package, and highlights changes since the previous version.
-
-
-NEW FEATURES:
-============
-
-New Classes
------------
-
-Initial checkin of a new class providing reflection utilities for constructors
-(similar to MethodUtils). See org.apache.commons.beanutils.ConstructorUtils.
-
-Added a new DynaClass implementation that creates an in-memory collection of 
-DyanBeans representing the results of a SQL query. 
-See org.apache.commons.beanutils.RowSetDynaClass.java
-
-
-DyanBeans Enhancements
-----------------------
-
-Improved DynaProperty serialization on Java 1.3 by adding a custom 
-serialization mechanism. Now primitive type classes will be correctly serialized 
-on Java 1.3.
-
-ResultSetDynaClass: Made it possible to select an operational mode where column 
-names are *not* lower cased when being converted into DynaBean property names.  
-Because different JDBC drivers behave differently with regards to the case of 
-the column names they return, using this mode will make your application
-dependent upon the behavior of your particular JDBC driver.  However, there
-are some circumstances when consciously selecting such dependence is
-necessary.
-
-Cleaned up Javadoc generation warnings under JDK 1.4.
-
-BeanComparator Enhancements
----------------------------
-
-Added getComparator() property allowing retrieval of Comparator being used.
-
-Cleaned up Javadoc generation warnings under JDK 1.4.
-
-BeanUtils Enhancements
-----------------------
-
-Enhanced the behavior of BeanUtils.setProperty() such that, if the destination
-property is a String and there is a registered Converter for the value's
-class, the value's toString() method will be called, followed by conversion
-to the appropriate destination type.  Among other things, this makes it
-possible to pass in a primitive wrapper type (such as Integer) and have it
-converted to a String.
-
-Performance improvements.
-
-Java doc comments improvements.
-
-MethodUtils Enhancements
-------------------------
-
-Made getMatchingAccessibleMethod public. 
-
-Converters Enhancements
------------------------
-
-Added support for Number types in numeric converter classes.
-
-LocaleConvertUtils Enhancements
--------------------------------
-
-Cleaned up Javadoc generation warnings under JDK 1.4.  
-
-DateLocaleConverter Enhancements
---------------------------------
-
-Added new Lenient property that allows lenient to be get and set on the 
-underlying date formatter.
-
-DEPRECATED
-==========
-
-org.apache.common.beanutils.BeanUtils getDebug(), setDebug() 
-    (replaced by commons-logging)
-    
-org.apache.common.beanutils.PropertyUtils getDebug(), setDebug() 
-    (replaced by commons-logging)
-
-CHANGES:
-========
-
-Various documentation fixes by several people.
-
-BUG REPORTS ADDRESSED:
-=====================
-
-15067 BaseDynaBean, BasicDynaClass not serializable
-15773 setProperty throws exception on null value
-15170 BeanUtils.setProperty doesn't convert primitive wrappers
-15004 BeanUtils.copyProperties goes though wasted processing
-15160 speedup for beanutils / array getter
-14620 exception thrown when logging is set to debug
-14170 ConvertUtils.convert(Object) doesn't use registered converter
-10167 Mapped properties require getter
-14394 Excessive exceptions log under (restrictive) security manager
-14667 PropertyUtils.copyProperties does not copy to DynaBean
-14440 PropertyUtils.setProperty ignores property setter
-15004 BeanUtils.copyProperties goes through wasted processing
-14796 ResultSetDynaClass.createDynaProperty users getColumnName()
-15773 setProperty throws exception on null value
-15908 commons-beanutils.jar debug info line numbers off by a factor of 2
-15888 lenient method is loose in DateLocaleConverter

@@ -73,6 +73,13 @@ For more information about functors, please read the introduction to the
         </p>
     </subsection>
 </section>
+<section name='Releases'>
+        <p>
+BeanUtils Bean-Collections is distributed as an optional jar within the main 
+beanutils distribution. For details, see the 
+<a href='http://jakarta.apache.org/commons/beanutils/index.html'>main BeanUtils website</a>
+        </p>
+</section>
 
 </body>
 </document>
