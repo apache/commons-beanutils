@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.2 2002/07/15 15:40:37 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/07/15 15:40:37 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.3 2002/08/14 18:40:05 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/08/14 18:40:05 $
  *
  * ====================================================================
  *
@@ -116,7 +116,7 @@ import java.util.Iterator;
  *     new BasicDynaClass("foo", BasicDynaBean.class,
  *                        rsdc.getDynaProperties());
  *   Iterator rows = rsdc.iterator();
- *   while (rsdc.hasNext()) {
+ *   while (rows.hasNext()) {
  *     DynaBean oldRow = (DynaBean) rows.iterator();
  *     DynaBean newRow = bdc.newInstance();
  *     PropertyUtils.copyProperties(newRow, oldRow);
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/07/15 15:40:37 $
+ * @version $Revision: 1.3 $ $Date: 2002/08/14 18:40:05 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
