@@ -48,7 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.16 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision: 1.17 $ $Date: 2004/10/17 14:01:04 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -465,6 +465,22 @@ public class BeanUtilsBean {
      * properties, modulo differences for read-only and write-only
      * properties, but only if there are no indexed properties.</p>
      *
+     * <p><strong>Warning:</strong> if any of the bean property implementations
+     * contain (directly or indirectly) a call to this method then 
+     * a stack overflow may result. For example:
+     * <code><pre>
+     * class MyBean
+     * {
+     *    public Map getParameterMap()
+     *    {
+     *         BeanUtils.describe(this);
+     *    }
+     * }
+     * </pre></code>
+     * will result in an infinite regression when <code>getParametersMap</code>
+     * is called. It is recommended that such methods are given alternative
+     * names (for example, <code>parametersMap</code>).
+     * </p>
      * @param bean Bean whose properties are to be extracted
      *
      * @exception IllegalAccessException if the caller does not have
