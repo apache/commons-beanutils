@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.17 2002/01/09 18:12:53 craigmcc Exp $
- * $Revision: 1.17 $
- * $Date: 2002/01/09 18:12:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.18 2002/01/09 19:27:30 craigmcc Exp $
+ * $Revision: 1.18 $
+ * $Date: 2002/01/09 19:27:30 $
  *
  * ====================================================================
  *
@@ -133,7 +133,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.17 $ $Date: 2002/01/09 18:12:53 $
+ * @version $Revision: 1.18 $ $Date: 2002/01/09 19:27:30 $
  */
 
 public class PropertyUtils {
@@ -289,6 +289,7 @@ public class PropertyUtils {
      *  propety cannot be found
      */
     // FIXME - does not account for mapped properties
+    // FIXME - does not work on DynaBeans
     public static Map describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
@@ -397,6 +398,17 @@ public class PropertyUtils {
         }
         if (name == null) {
             throw new IllegalArgumentException("No name specified");
+        }
+
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            return (((DynaBean) bean).get(name, index));
         }
 
         // Retrieve the property descriptor for the specified property
@@ -530,6 +542,17 @@ public class PropertyUtils {
             throw new IllegalArgumentException("No key specified");
         }
 
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            return (((DynaBean) bean).get(name, key));
+        }
+
         Object result = null;
 
         // Retrieve the property descriptor for the specified property
@@ -562,6 +585,7 @@ public class PropertyUtils {
      *
      * @param bean Bean to be introspected
      */
+    // FIXME - does not work with DynaBeans
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 
         if (bean == null) {
@@ -702,6 +726,7 @@ public class PropertyUtils {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    // FIXME - does not work with DynaBeans
     public static PropertyDescriptor getPropertyDescriptor(Object bean,
                                                            String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -802,6 +827,7 @@ public class PropertyUtils {
      *
      * @exception IllegalArgumentException if <code>bean</code> is null
      */
+    // FIXME - does not work with DynaBeans
     public static PropertyDescriptor[] getPropertyDescriptors(Object bean) {
 
         if (bean == null) {
@@ -861,6 +887,7 @@ public class PropertyUtils {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    // FIXME - Does not work with DynaBeans
     public static Class getPropertyEditorClass(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
@@ -918,6 +945,23 @@ public class PropertyUtils {
             throw new IllegalArgumentException("No name specified");
         }
 
+        // Special handling for DynaBeans
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                return (null);
+            }
+            Class type = descriptor.getType();
+            if (type == null) {
+                return (null);
+            } else if (type.isArray()) {
+                return (type.getComponentType());
+            } else {
+                return (type);
+            }
+        }
+
         PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor == null) {
@@ -938,6 +982,7 @@ public class PropertyUtils {
      *
      * @param descriptor Property descriptor to return a getter for
      */
+    // FIXME - does not work with DynaBeans
     public static Method getReadMethod(PropertyDescriptor descriptor) {
 
         return (MethodUtils.getAccessibleMethod(descriptor.getReadMethod()));
@@ -986,6 +1031,17 @@ public class PropertyUtils {
                     ("Mapped property names are not allowed");
         }
 
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            return (((DynaBean) bean).get(name));
+        }
+
         // Retrieve the property getter method for the specified property
         PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
@@ -1012,6 +1068,7 @@ public class PropertyUtils {
      *
      * @param descriptor Property descriptor to return a setter for
      */
+    // FIXME - does not work with DynaBeans
     public static Method getWriteMethod(PropertyDescriptor descriptor) {
 
         return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));
@@ -1111,6 +1168,18 @@ public class PropertyUtils {
         }
         if (name == null) {
             throw new IllegalArgumentException("No name specified");
+        }
+
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            ((DynaBean) bean).set(name, index, value);
+            return;
         }
 
         // Retrieve the property descriptor for the specified property
@@ -1247,6 +1316,18 @@ public class PropertyUtils {
         }
         if (key == null) {
             throw new IllegalArgumentException("No key specified");
+        }
+
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            ((DynaBean) bean).set(name, key, value);
+            return;
         }
 
         // Retrieve the property descriptor for the specified property
@@ -1424,6 +1505,18 @@ public class PropertyUtils {
         } else if (name.indexOf(MAPPED_DELIM) >= 0) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed");
+        }
+
+        // Handle DynaBean instances specially
+        if (bean instanceof DynaBean) {
+            DynaProperty descriptor =
+                ((DynaBean) bean).getDynaClass().getPropertyDescriptor(name);
+            if (descriptor == null) {
+                throw new NoSuchMethodException("Unknown property '" +
+                                                name + "'");
+            }
+            ((DynaBean) bean).set(name, value);
+            return;
         }
 
         // Retrieve the property setter method for the specified property

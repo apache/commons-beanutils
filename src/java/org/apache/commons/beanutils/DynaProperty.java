@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.1 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/28 03:59:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.2 2002/01/09 19:27:30 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/09 19:27:30 $
  *
  * ====================================================================
  *
@@ -63,11 +63,15 @@
 package org.apache.commons.beanutils;
 
 
+import java.util.List;
+import java.util.Map;
+
+
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/09 19:27:30 $
  */
 
 public class DynaProperty {
@@ -128,6 +132,38 @@ public class DynaProperty {
 
 
     // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Does this property represent an indexed value (i.e. an array or List)?
+     */
+    public boolean isIndexed() {
+
+        if (type == null) {
+            return (false);
+        } else if (type.isArray()) {
+            return (true);
+        } else if (List.class.isAssignableFrom(type)) {
+            return (true);
+        } else {
+            return (false);
+        }
+
+    }
+
+
+    /**
+     * Does this property represent a mapped value (i.e. a Map)?
+     */
+    public boolean isMapped() {
+
+        if (type == null) {
+            return (false);
+        } else {
+            return (Map.class.isAssignableFrom(type));
+        }
+
+    }
 
 
     /**
