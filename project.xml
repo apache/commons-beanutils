@@ -24,8 +24,8 @@
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
   <logo>/images/logo.png</logo>
   
-  <package>org.apache.commons.${pom.artifactId.substring(8)}.*</package>
-  <url>http://jakarta.apache.org/commons/${pom.artifactId.substring(8)}/index.html</url>
+  <package>org.apache.commons.beanutils.*</package>
+  <url>http://jakarta.apache.org/commons/beanutils/index.html</url>
 
   <organization>
     <name>The Apache Software Foundation</name>
@@ -123,15 +123,26 @@
       <organization>Apache Software Foundation</organization>
     </developer>
   </developers>
+
+  <contributors>
+    <contributor>
+      <name>Paul Jack</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Stephen Colebourne</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Berin Loritsch</name>
+      <email></email>
+    </contributor>    
+  </contributors>
   
   <dependencies>
     <dependency>
       <id>commons-logging</id>
       <version>1.0.3</version>
-    </dependency>
-    <dependency>
-      <id>commons-collections</id>
-      <version>3.0</version>
     </dependency>
   </dependencies>
 

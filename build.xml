@@ -18,7 +18,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.58 2004/02/29 21:17:51 scolebourne Exp $
+        $Id: build.xml,v 1.59 2004/05/10 19:48:03 rdonkin Exp $
 -->
 
 
@@ -32,10 +32,6 @@
 
 <!-- ========== External Dependencies ===================================== -->
 
-
-  <!-- The home directory for the Commons collection classes distribution -->
-  <property name="commons-collections.home" value="../collections/dist"/>
-
   <!-- The home directory for the Commons collection classes distribution -->
   <property name="commons-logging.home" value="../logging/dist"/>
 
@@ -45,13 +41,6 @@
 
 
 <!-- ========== Derived Values ============================================ -->
-
-
-  <!-- The pathname of the collections classes JAR file -->
-  <property name="commons-collections.jar" value="${commons-collections.home}/commons-collections.jar"/>
-
-  <!-- The pathname of the logging classes JAR file -->
-  <property name="commons-logging.jar" value="${commons-logging.home}/commons-logging.jar"/>
 
   <!-- The pathname of the "junit.jar" JAR file -->
   <property name="junit.jar"               value="${junit.home}/junit.jar"/>
@@ -103,7 +92,6 @@
   <!-- Construct compile classpath -->
   <path id="compile.classpath">
     <pathelement location="${build.home}/classes"/>
-    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${commons-logging.jar}"/>
   </path>
 
@@ -115,7 +103,6 @@
   <path id="test.classpath">
     <pathelement location="${build.home}/classes"/>
     <pathelement location="${build.home}/tests"/>
-    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${commons-logging.jar}"/>
     <pathelement location="${junit.jar}"/>
   </path>
@@ -226,7 +213,7 @@
                overview="src/java/overview.html"
                doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
             windowtitle="${component.title} (Version ${component.version})"
-                 bottom="Copyright (c) 2001-2003 - Apache Software Foundation">
+                 bottom="Copyright (c) 2001-2004 - Apache Software Foundation">
       <classpath refid="compile.classpath"/>
     </javadoc>
   </target>
@@ -241,7 +228,10 @@
               todir="${dist.home}"/>
     <copy      file="RELEASE-NOTES.txt"
               todir="${dist.home}"/>
+    <copy      file="README.txt"
+              todir="${dist.home}"/>
     <antcall target="jar"/>
+    <antcall target="bean-collections-dist"/>
   </target>
 
 
@@ -253,9 +243,10 @@
              tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
     <copy      file="NOTICE.txt"
              tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
-    <jar    jarfile="${dist.home}/commons-${component.name}.jar"
+    <jar    jarfile="${dist.home}/commons-beanutils.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
+    <copy tofile='${dist.home}/commons-beanutils-core.jar' file='${dist.home}/commons-beanutils.jar'/>
   </target>
 
 
@@ -268,6 +259,11 @@
     </copy>
   </target>
 
+<!-- ========== Sub Component Targets ===================================== -->
+
+  <target name='bean-collections-dist'>
+    <ant antfile='optional/bean-collections/build.xml' target='dist' inheritAll='false'/>
+  </target>
 
 <!-- ========== Unit Test Targets ========================================= -->
 
@@ -283,7 +279,6 @@
                                 test.method,
                                 test.dyna.result,
                                 test.dyna.row,
-                                test.bean.collections,
                                 test.locale.convert,
                                 test.converters,
                                 test.beanification
@@ -438,21 +433,6 @@
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.DynaRowSetTestCase"/>
-      <classpath refid="test.classpath"/>
-    </java>
-  </target>
-
-  <target name="test.bean.collections" depends="compile.tests">
-    <echo message="Running bean collection utilities tests ..."/>
-    <java classname="${test.runner}" fork="yes"
-        failonerror="${test.failonerror}">
-      <sysproperty key="org.apache.commons.logging.LogFactory"
-                 value="${test.factory}"/>
-      <sysproperty key="org.apache.commons.logging.Log"
-                 value="${test.log}"/>
-      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
-                 value="${test.level}"/>
-      <arg value="org.apache.commons.beanutils.BeanCollectionsTestSuite"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
