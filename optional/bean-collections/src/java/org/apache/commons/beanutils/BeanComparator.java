@@ -155,5 +155,37 @@ public class BeanComparator implements Comparator, Serializable {
             throw new ClassCastException( e.toString() );
         }
     }
+    
+    /**
+     * Two <code>BeanComparator</code>'s are equals if and only if
+     * the wrapped comparators and the property names to be compared
+     * are equal.
+     */
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BeanComparator)) return false;
 
+        final BeanComparator beanComparator = (BeanComparator) o;
+
+        if (!comparator.equals(beanComparator.comparator)) return false;
+        if (property != null)
+        {
+            if (!property.equals(beanComparator.property)) return false;
+        }
+        else
+        {
+            return (beanComparator.property == null);
+        }
+
+        return true;
+    }
+
+    /**
+     * Hashcode compatible with equals.
+     */ 
+    public int hashCode() {
+        int result;
+        result = comparator.hashCode();
+        return result;
+    }
 }
