@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.22 2002/09/24 18:45:54 rdonkin Exp $
- * $Revision: 1.22 $
- * $Date: 2002/09/24 18:45:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.23 2002/09/28 09:31:55 rdonkin Exp $
+ * $Revision: 1.23 $
+ * $Date: 2002/09/28 09:31:55 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.22 $ $Date: 2002/09/24 18:45:54 $
+ * @version $Revision: 1.23 $ $Date: 2002/09/28 09:31:55 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -3486,5 +3486,79 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    public void testNestedWithIndex() throws Exception
+    {
+        NestedTestBean nestedBean = new NestedTestBean("base");
+        nestedBean.init();
+        nestedBean.getSimpleBeanProperty().init();
+        
+        NestedTestBean 
+        
+        // test first calling properties on indexed beans
+        
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[0]");
+        assertEquals("Cannot get simple index(1)", "Bean@0", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+        
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[1]");  
+        assertEquals("Cannot get simple index(1)", "Bean@1", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+        
+        String
+        prop = (String) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[0].testString");
+        assertEquals("Get property on indexes failed (1)", "NOT SET", prop);
+        
+        prop = (String) PropertyUtils.getProperty(
+                                nestedBean,
+                                "indexedProperty[1].testString");  
+        assertEquals("Get property on indexes failed (2)", "NOT SET", prop);  
 
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "indexedProperty[0].testString",
+                                "Test#1");
+        assertEquals(
+                "Cannot set property on indexed bean (1)", 
+                "Test#1", 
+                nestedBean.getIndexedProperty(0).getTestString());
+        
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "indexedProperty[1].testString",
+                                "Test#2");  
+        assertEquals(
+                "Cannot set property on indexed bean (2)", 
+                "Test#2", 
+                nestedBean.getIndexedProperty(1).getTestString());  
+        
+        
+        // test first calling indexed properties on a simple property
+        
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty");
+        assertEquals("Cannot get simple bean", "Simple Property Bean", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+        
+        value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[3]");
+        assertEquals("Cannot get index property on property", "Bean@3", value.getName());
+        assertEquals("Bug in NestedTestBean", "NOT SET", value.getTestString());
+   
+        PropertyUtils.setProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[3].testString",
+                                "Test#3");  
+        assertEquals(
+            "Cannot set property on indexed property on property", 
+            "Test#3", 
+            nestedBean.getSimpleBeanProperty().getIndexedProperty(3).getTestString());  
+    }
 }
