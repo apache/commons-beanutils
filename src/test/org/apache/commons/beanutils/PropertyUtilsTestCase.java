@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.2 2001/04/03 00:09:35 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/04/03 00:09:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.3 2001/04/03 18:21:23 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/04/03 18:21:23 $
  *
  * ====================================================================
  *
@@ -88,7 +88,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2001/04/03 00:09:35 $
+ * @version $Revision: 1.3 $ $Date: 2001/04/03 18:21:23 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -110,6 +110,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     protected final static String[] properties = {
         "booleanProperty",
+        "booleanSecond",
         "doubleProperty",
         "floatProperty",
         "intArray",
@@ -242,6 +243,18 @@ public class PropertyUtilsTestCase extends TestCase {
 
         testGetDescriptorBase("readOnlyProperty", "getReadOnlyProperty",
                               null);
+
+    }
+
+
+    /**
+     * Positive getPropertyDescriptor on property <code>booleanSecond</code>
+     * that uses an "is" method as the getter.
+     */
+    public void testGetDescriptorSecond() {
+
+        testGetDescriptorBase("booleanSecond", "isBooleanSecond",
+                              "setBooleanSecond");
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.1 2001/03/27 05:33:07 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/03/27 05:33:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.2 2001/04/03 18:21:24 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/04/03 18:21:24 $
  *
  * ====================================================================
  *
@@ -67,7 +67,7 @@ package org.apache.commons.beanutils;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/03/27 05:33:07 $
+ * @version $Revision: 1.2 $ $Date: 2001/04/03 18:21:24 $
  */
 
 public class TestBean {
@@ -87,6 +87,20 @@ public class TestBean {
 
     public void setBooleanProperty(boolean booleanProperty) {
         this.booleanProperty = booleanProperty;
+    }
+
+
+    /**
+     * A boolean property that uses an "is" method for the getter.
+     */
+    private boolean booleanSecond = true;
+
+    public boolean isBooleanSecond() {
+        return (booleanSecond);
+    }
+
+    public void setBooleanSecond(boolean booleanSecond) {
+        this.booleanSecond = booleanSecond;
     }
 
 
