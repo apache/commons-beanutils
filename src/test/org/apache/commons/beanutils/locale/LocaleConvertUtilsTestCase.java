@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertUtilsTestCase.java,v 1.1 2003/03/09 21:25:17 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2003/03/09 21:25:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertUtilsTestCase.java,v 1.2 2003/05/07 19:30:51 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/05/07 19:30:51 $
  *
  * ====================================================================
  *
@@ -67,6 +67,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.Locale;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
@@ -82,13 +85,15 @@ import org.apache.commons.beanutils.ConversionException;
  * </p>
  *
  * @author  Michael Szlapa
- * @version $Revision: 1.1 $ $Date: 2003/03/09 21:25:17 $
+ * @author Paul Hamamnt & Rune Johannesen (pairing) - patches.
+ * @version $Revision: 1.2 $ $Date: 2003/05/07 19:30:51 $
  */
 
 public class LocaleConvertUtilsTestCase extends TestCase {
 
     // ---------------------------------------------------- Instance Variables
 
+    private char m_decimalSeparator;
 
     // ---------------------------------------------------------- Constructors
 
@@ -112,6 +117,13 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void setUp() {
 
         LocaleConvertUtils.deregister();
+
+        NumberFormat nf = DecimalFormat.getNumberInstance();
+        String result = nf.format(1.1);
+
+        // could be commas instead of stops in Europe.
+        m_decimalSeparator = result.charAt(1);
+
 
     }
 
@@ -334,9 +346,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(new Byte((byte) 123)));
         assertEquals("Character->String", "a",
                 LocaleConvertUtils.convert(new Character('a')));
-        assertEquals("Double->String", "123.4",
+        assertEquals("Double->String", "123" + m_decimalSeparator + "4",
                 LocaleConvertUtils.convert(new Double((double) 123.4)));
-        assertEquals("Float->String", "123.4",
+        assertEquals("Float->String", "123" + m_decimalSeparator + "4",
                 LocaleConvertUtils.convert(new Float((float) 123.4)));
         assertEquals("Integer->String", "123",
                 LocaleConvertUtils.convert(new Integer((int) 123)));
@@ -510,22 +522,22 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals(String.class, (Class) value);
         */
 
-        value = LocaleConvertUtils.convert("123.456", Double.TYPE);
+        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.TYPE);
         assertTrue(value instanceof Double);
         assertEquals(((Double) value).doubleValue(), (double) 123.456,
                 (double) 0.005);
 
-        value = LocaleConvertUtils.convert("123.456", Double.class);
+        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.class);
         assertTrue(value instanceof Double);
         assertEquals(((Double) value).doubleValue(), (double) 123.456,
                 (double) 0.005);
 
-        value = LocaleConvertUtils.convert("123.456", Float.TYPE);
+        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Float.TYPE);
         assertTrue(value instanceof Float);
         assertEquals(((Float) value).floatValue(), (float) 123.456,
                 (float) 0.005);
 
-        value = LocaleConvertUtils.convert("123.456", Float.class);
+        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Float.class);
         assertTrue(value instanceof Float);
         assertEquals(((Float) value).floatValue(), (float) 123.456,
                 (float) 0.005);
