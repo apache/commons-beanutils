@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.5 2001/08/21 21:59:02 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2001/08/21 21:59:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.6 2001/09/19 02:04:10 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2001/09/19 02:04:10 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import java.util.Map;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.5 $ $Date: 2001/08/21 21:59:02 $
+ * @version $Revision: 1.6 $ $Date: 2001/09/19 02:04:10 $
  */
 
 public class BeanUtils {
@@ -277,11 +277,62 @@ public class BeanUtils {
 	throws IllegalAccessException, InvocationTargetException,
 	       NoSuchMethodException {
 
-        StringBuffer sb = new StringBuffer(name);
-        sb.append(PropertyUtils.INDEXED_DELIM);
-        sb.append(index);
-        sb.append(PropertyUtils.INDEXED_DELIM2);
-        Object value = PropertyUtils.getIndexedProperty(bean, sb.toString());
+        Object value = PropertyUtils.getIndexedProperty(bean, name, index);
+        return (ConvertUtils.convert(value));
+
+    }
+
+
+    /**
+     * Return the value of the specified indexed property of the specified
+     * bean, as a String.  The String-valued key of the required value
+     * must be included (in parentheses) as a suffix to
+     * the property name, or <code>IllegalArgumentException</code> will be
+     * thrown.
+     *
+     * @param bean Bean whose property is to be extracted
+     * @param name <code>propertyname(index)</code> of the property value
+     *  to be extracted
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @exception NoSuchMethodException if an accessor method for this
+     *  propety cannot be found
+     */
+    public static String getMappedProperty(Object bean, String name)
+	throws IllegalAccessException, InvocationTargetException,
+	       NoSuchMethodException {
+
+        Object value = PropertyUtils.getMappedProperty(bean, name);
+        return (ConvertUtils.convert(value));
+
+    }
+
+
+    /**
+     * Return the value of the specified mapped property of the specified
+     * bean, as a String.  The key is specified as a method parameter and
+     * must *not* be included in the property name expression
+     *
+     * @param bean Bean whose property is to be extracted
+     * @param name Simple property name of the property value to be extracted
+     * @param key Lookup key of the property value to be extracted
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @exception NoSuchMethodException if an accessor method for this
+     *  propety cannot be found
+     */
+    public static String getMappedProperty(Object bean,
+                                           String name, String key)
+	throws IllegalAccessException, InvocationTargetException,
+	       NoSuchMethodException {
+
+        Object value = PropertyUtils.getMappedProperty(bean, name, key);
         return (ConvertUtils.convert(value));
 
     }

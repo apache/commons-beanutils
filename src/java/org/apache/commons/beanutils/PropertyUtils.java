@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.10 2001/09/19 01:50:37 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2001/09/19 01:50:37 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.11 2001/09/19 02:04:10 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2001/09/19 02:04:10 $
  *
  * ====================================================================
  *
@@ -114,7 +114,7 @@ import org.apache.commons.collections.FastHashMap;
  *     property value is assumed to be an array, or this JavaBean is assumed
  *     to have indexed property getter and setter methods.  The appropriate
  *     (zero-relative) entry in the array is selected.</li>
- * <li><strong>String keyed (<code>name(index)</code>)</strong> - The JavaBean
+ * <li><strong>Mapped (<code>name(index)</code>)</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
  *     additional attribute of type <code>java.lang.String</code>.</li>
  * <li><strong>Combined (<code>name1.name2[index].name3</strong> - Various
@@ -126,7 +126,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.10 $ $Date: 2001/09/19 01:50:37 $
+ * @version $Revision: 1.11 $ $Date: 2001/09/19 02:04:10 $
  */
 
 public class PropertyUtils {
