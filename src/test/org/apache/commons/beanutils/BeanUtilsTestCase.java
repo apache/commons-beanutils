@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.27 2003/10/09 20:40:07 rdonkin Exp $
- * $Revision: 1.27 $
- * $Date: 2003/10/09 20:40:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.28 2004/02/15 04:28:19 craigmcc Exp $
+ * $Revision: 1.28 $
+ * $Date: 2004/02/15 04:28:19 $
  *
  * ====================================================================
  * 
@@ -98,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -752,6 +752,8 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
+            bean.setNullProperty("Non-null value");
+
             HashMap map = new HashMap();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
@@ -760,6 +762,7 @@ public class BeanUtilsTestCase extends TestCase {
             // floatProperty is left at 123.0
             map.put("intProperty", "543");
             map.put("longProperty", "");
+            map.put("nullProperty", null);
             map.put("shortProperty", "654");
             // stringProperty is left at "This is a string"
             map.put("writeOnlyProperty", "New writeOnlyProperty value");
@@ -781,6 +784,8 @@ public class BeanUtilsTestCase extends TestCase {
                          543, bean.getIntProperty());
             assertEquals("longProperty is 0",
                          (long) 0, bean.getLongProperty());
+            assertNull("nullProperty is null",
+                       bean.getNullProperty());
             assertEquals("shortProperty is 654",
                          (short) 654, bean.getShortProperty());
             assertEquals("stringProperty is \"This is a string\"",
@@ -963,6 +968,18 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals((long) 123, bean.getLongProperty());
         BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
         assertEquals((long) 123, bean.getLongProperty());
+
+    }
+
+
+    /**
+     * Test setting a null property value.
+     */
+    public void testSetPropertyNull() throws Exception {
+
+        bean.setNullProperty("non-null value");
+        BeanUtils.setProperty(bean, "nullProperty", null);
+        assertNull("nullProperty is null", bean.getNullProperty());
 
     }
 
@@ -1208,6 +1225,18 @@ public class BeanUtilsTestCase extends TestCase {
         assertNotNull(bean.getNested());
         assertEquals(0, bean.getIntProperty());
         assertEquals(4, bean.getNested().getIntProperty());
+
+    }
+
+
+    /**
+     * Test copying a null property value.
+     */
+    public void testCopyPropertyNull() throws Exception {
+
+        bean.setNullProperty("non-null value");
+        BeanUtils.copyProperty(bean, "nullProperty", null);
+        assertNull("nullProperty is null", bean.getNullProperty());
 
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.20 2003/10/09 20:40:07 rdonkin Exp $
- * $Revision: 1.20 $
- * $Date: 2003/10/09 20:40:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.21 2004/02/15 04:28:19 craigmcc Exp $
+ * $Revision: 1.21 $
+ * $Date: 2004/02/15 04:28:19 $
  *
  * ====================================================================
  * 
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.20 $ $Date: 2003/10/09 20:40:07 $
+ * @version $Revision: 1.21 $ $Date: 2004/02/15 04:28:19 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -884,6 +884,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
+            bean.set("nullProperty", "non-null value");
+
             HashMap map = new HashMap();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
@@ -891,6 +893,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             // floatProperty is left at 123.0
             map.put("intProperty", "543");
             // longProperty is left at 321
+            map.put("nullProperty", null);
             map.put("shortProperty", "654");
             // stringProperty is left at "This is a string"
 
@@ -914,6 +917,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             Long longProperty = (Long) bean.get("longProperty");
             assertEquals("longProperty is 321",
                          (long) 321, longProperty.longValue());
+            assertNull("nullProperty is null", bean.get("nullProperty"));
             Short shortProperty = (Short) bean.get("shortProperty");
             assertEquals("shortProperty is 654",
                          (short) 654, shortProperty.shortValue());
@@ -981,6 +985,18 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals(1,((Integer) bean.get("intProperty")).intValue());
         BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
         assertEquals(1, Integer.parseInt((String) bean.get("stringProperty")));
+
+    }
+
+
+    /**
+     * Test setting a null property value.
+     */
+    public void testSetPropertyNull() throws Exception {
+
+        bean.set("nullProperty", "non-null value");
+        BeanUtils.setProperty(bean, "nullProperty", null);
+        assertNull("nullProperty is null", bean.get("nullProperty"));
 
     }
 
@@ -1092,6 +1108,18 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
         BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
         assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+
+    }
+
+
+    /**
+     * Test copying a null property value.
+     */
+    public void testCopyPropertyNull() throws Exception {
+
+        bean.set("nullProperty", "non-null value");
+        BeanUtils.copyProperty(bean, "nullProperty", null);
+        assertNull("nullProperty is null", bean.get("nullProperty"));
 
     }
 
