@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.1 2001/12/24 23:27:04 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/24 23:27:04 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.2 2001/12/27 21:17:38 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/12/27 21:17:38 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import java.beans.PropertyDescriptor;
  *
  * @author Craig McClanahan
  * @author Michael Smith
- * @version $Revision: 1.1 $ $Date: 2001/12/24 23:27:04 $
+ * @version $Revision: 1.2 $ $Date: 2001/12/27 21:17:38 $
  */
 
 public interface DynaClass {
@@ -130,10 +130,11 @@ public interface DynaClass {
 
 
     /**
-     * Return the <code>Converter</code> instance that will be used to
-     * convert input property values to the appropriate types (if any).
+     * Return the Class object we will use to create new instances in the
+     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
+     * implement the <code>DynaBean</code> interface.
      */
-    public Converter getConverter();
+    public Class getDynaBeanClass();
 
 
     /**
@@ -176,6 +177,13 @@ public interface DynaClass {
 
 
     /**
+     * Instantiate and return a new DynaBean instance, using the implementation
+     * class specified by the <code>dynaBeanClass</code> property.
+     */
+    public DynaBean newInstance();
+
+
+    /**
      * Remove the specified dynamic property, and any associated data type,
      * readability, and writeability, from this dynamic class.
      * <strong>NOTE</strong> - This does <strong>NOT</strong> cause any
@@ -189,6 +197,19 @@ public interface DynaClass {
      *  restricted, so no properties can be removed
      */
     public void remove(String name);
+
+
+    /**
+     * Set the Class object we will use to create new instances in the
+     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
+     * implement the <code>DynaBean</code> interface.
+     *
+     * @param clazz The new Class object
+     *
+     * @exception IllegalArgumentException if the specified Class does not
+     *  implement the <code>DynaBean</code> interface
+     */
+    public void setDynaBeanClass(Class clazz);
 
 
     /**
