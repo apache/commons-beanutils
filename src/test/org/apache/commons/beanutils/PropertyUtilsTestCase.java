@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.1 2001/03/27 05:33:07 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/03/27 05:33:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.2 2001/04/03 00:09:35 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/04/03 00:09:35 $
  *
  * ====================================================================
  *
@@ -79,14 +79,16 @@ import junit.framework.TestSuite;
  * <p>So far, this test case has tests for the following methods of the
  * <code>PropertyUtils</code> class:</p>
  * <ul>
+ * <li>getNestedProperty(Object,String)</li>
  * <li>getPropertyDescriptor(Object,String)</li>
  * <li>getPropertyDescriptors(Object)</li>
  * <li>getSimpleProperty(Object,String)</li>
+ * <li>setNestedProperty(Object,String,Object)</li>
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/03/27 05:33:07 $
+ * @version $Revision: 1.2 $ $Date: 2001/04/03 00:09:35 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -316,6 +318,270 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Test getNestedProperty on a boolean property.
+     */
+    public void testGetNestedBoolean() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.booleanProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Boolean));
+            assert("Got correct value",
+                   ((Boolean) value).booleanValue() ==
+                   bean.getNested().getBooleanProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a double property.
+     */
+    public void testGetNestedDouble() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.doubleProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Double));
+            assertEquals("Got correct value",
+                         ((Double) value).doubleValue(),
+                         bean.getNested().getDoubleProperty(),
+                         0.005);
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a float property.
+     */
+    public void testGetNestedFloat() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.floatProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Float));
+            assertEquals("Got correct value",
+                         ((Float) value).floatValue(),
+                         bean.getNested().getFloatProperty(),
+                         (float) 0.005);
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on an int property.
+     */
+    public void testGetNestedInt() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.intProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Integer));
+            assertEquals("Got correct value",
+                         ((Integer) value).intValue(),
+                         bean.getNested().getIntProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a long property.
+     */
+    public void testGetNestedLong() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.longProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Long));
+            assertEquals("Got correct value",
+                         ((Long) value).longValue(),
+                         bean.getNested().getLongProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a read-only String property.
+     */
+    public void testGetNestedReadOnly() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.readOnlyProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof String));
+            assertEquals("Got correct value",
+                         (String) value,
+                         bean.getReadOnlyProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a short property.
+     */
+    public void testGetNestedShort() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.shortProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof Short));
+            assertEquals("Got correct value",
+                         ((Short) value).shortValue(),
+                         bean.getNested().getShortProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a String property.
+     */
+    public void testGetNestedString() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.stringProperty");
+            assertNotNull("Got a value", value);
+            assert("Got correct type", (value instanceof String));
+            assertEquals("Got correct value",
+                         ((String) value),
+                         bean.getNested().getStringProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }
+
+    }
+
+
+    /**
+     * Negative test getNestedProperty on an unknown property.
+     */
+    public void testGetNestedUnknown() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "nested.unknown");
+            fail("Should have thrown NoSuchMethodException");
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            ; // Correct result for this test
+        }        
+
+    }
+
+
+    /**
+     * Test getNestedProperty on a write-only String property.
+     */
+    public void testGetNestedWriteOnly() {
+
+        try {
+            Object value =
+                PropertyUtils.getNestedProperty
+                (bean, "writeOnlyProperty");
+            fail("Should have thrown NoSuchMethodException");
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            ; // Correct result for this test
+        }        
+
+    }
+
+
+    /**
      * Test getSimpleProperty on a boolean property.
      */
     public void testGetSimpleBoolean() {
@@ -326,9 +592,9 @@ public class PropertyUtilsTestCase extends TestCase {
                                                 "booleanProperty");
             assertNotNull("Got a value", value);
             assert("Got correct type", (value instanceof Boolean));
-            assertEquals("Got correct value",
-                         ((Boolean) value).booleanValue(),
-                         bean.getBooleanProperty());
+            assert("Got correct value",
+                   ((Boolean) value).booleanValue() ==
+                   bean.getBooleanProperty());
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
@@ -626,6 +892,273 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Test setNextedProperty on a boolean property.
+     */
+    public void testSetNestedBoolean() {
+
+        try {
+            boolean oldValue = bean.getNested().getBooleanProperty();
+            boolean newValue = !oldValue;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.booleanProperty",
+                                            new Boolean(newValue));
+            assert("Matched new value",
+                   newValue ==
+                   bean.getNested().getBooleanProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a double property.
+     */
+    public void testSetNestedDouble() {
+
+        try {
+            double oldValue = bean.getNested().getDoubleProperty();
+            double newValue = oldValue + 1.0;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.doubleProperty",
+                                            new Double(newValue));
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getDoubleProperty(),
+                         0.005);
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a float property.
+     */
+    public void testSetNestedFloat() {
+
+        try {
+            float oldValue = bean.getNested().getFloatProperty();
+            float newValue = oldValue + (float) 1.0;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.floatProperty",
+                                            new Float(newValue));
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getFloatProperty(),
+                         (float) 0.005);
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a int property.
+     */
+    public void testSetNestedInt() {
+
+        try {
+            int oldValue = bean.getNested().getIntProperty();
+            int newValue = oldValue + 1;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.intProperty",
+                                            new Integer(newValue));
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getIntProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a long property.
+     */
+    public void testSetNestedLong() {
+
+        try {
+            long oldValue = bean.getNested().getLongProperty();
+            long newValue = oldValue + 1;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.longProperty",
+                                            new Long(newValue));
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getLongProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a read-only String property.
+     */
+    public void testSetNestedReadOnly() {
+
+        try {
+            String oldValue = bean.getNested().getWriteOnlyPropertyValue();
+            String newValue = oldValue + " Extra Value";
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.readOnlyProperty",
+                                            newValue);
+            fail("Should have thrown NoSuchMethodException");
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            ; // Correct result for this test
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a short property.
+     */
+    public void testSetNestedShort() {
+
+        try {
+            short oldValue = bean.getNested().getShortProperty();
+            short newValue = oldValue; newValue++;
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.shortProperty",
+                                            new Short(newValue));
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getShortProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a String property.
+     */
+    public void testSetNestedString() {
+
+        try {
+            String oldValue = bean.getNested().getStringProperty();
+            String newValue = oldValue + " Extra Value";
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.stringProperty",
+                                            newValue);
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getStringProperty());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on an unknown property name.
+     */
+    public void testSetNestedUnknown() {
+
+        try {
+            String newValue = "New String Value";
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.unknown",
+                                            newValue);
+            fail("Should have thrown NoSuchMethodException");
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            ; // Correct result for this test
+        }        
+
+    }
+
+
+    /**
+     * Test setNestedProperty on a write-only String property.
+     */
+    public void testSetNestedWriteOnly() {
+
+        try {
+            String oldValue = bean.getNested().getWriteOnlyPropertyValue();
+            String newValue = oldValue + " Extra Value";
+            PropertyUtils.setNestedProperty(bean,
+                                            "nested.writeOnlyProperty",
+                                            newValue);
+            assertEquals("Matched new value",
+                         newValue,
+                         bean.getNested().getWriteOnlyPropertyValue());
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (IllegalArgumentException e) {
+            fail("IllegalArgumentException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        } catch (NoSuchMethodException e) {
+            fail("NoSuchMethodException");
+        }        
+
+    }
+
+
+    /**
      * Test setSimpleProperty on a boolean property.
      */
     public void testSetSimpleBoolean() {
@@ -636,9 +1169,9 @@ public class PropertyUtilsTestCase extends TestCase {
             PropertyUtils.setSimpleProperty(bean,
                                             "booleanProperty",
                                             new Boolean(newValue));
-            assertEquals("Matched new value",
-                         newValue,
-                         bean.getBooleanProperty());
+            assert("Matched new value",
+                   newValue ==
+                   bean.getBooleanProperty());
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
