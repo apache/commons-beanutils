@@ -1,0 +1,4 @@
+*.log
+*.properties
+target
+dist
