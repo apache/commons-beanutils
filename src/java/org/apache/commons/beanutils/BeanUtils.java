@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.3 2001/04/16 16:30:12 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2001/04/16 16:30:12 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.4 2001/05/21 04:20:21 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2001/05/21 04:20:21 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.3 $ $Date: 2001/04/16 16:30:12 $
+ * @version $Revision: 1.4 $ $Date: 2001/05/21 04:20:21 $
  */
 
 public class BeanUtils {
@@ -159,7 +159,8 @@ public class BeanUtils {
                NoSuchMethodException {
 
         if (bean == null)
-            return (Collections.EMPTY_MAP);
+            //            return (Collections.EMPTY_MAP);
+            return (new java.util.HashMap());
         PropertyDescriptor descriptors[] =
             PropertyUtils.getPropertyDescriptors(bean);
         Map description = new HashMap(descriptors.length);
