@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.35 2003/01/15 21:59:38 rdonkin Exp $
- * $Revision: 1.35 $
- * $Date: 2003/01/15 21:59:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.36 2003/02/04 07:28:14 craigmcc Exp $
+ * $Revision: 1.36 $
+ * $Date: 2003/02/04 07:28:14 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.35 $ $Date: 2003/01/15 21:59:38 $
+ * @version $Revision: 1.36 $ $Date: 2003/02/04 07:28:14 $
  */
 
 public class BeanUtils {
@@ -153,7 +153,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static Object cloneBean(Object bean)
             throws IllegalAccessException, InstantiationException,
@@ -275,18 +275,28 @@ public class BeanUtils {
     /**
      * <p>Copy the specified property value to the specified destination bean,
      * performing any type conversion that is required.  If the specified
-     * bean does not have a property of the specified name, return without
+     * bean does not have a property of the specified name, or the property
+     * is read only on the destination bean, return without
      * doing anything.  If you have custom destination property types, register
      * {@link Converter}s for them by calling the <code>register()</code>
      * method of {@link ConvertUtils}.</p>
      *
-     * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
-     * have getter and setter methods for the underlying array or Map are not
-     * copied by this method.</p>
+     * <p><strong>IMPLEMENTATION RESTRICTIONS</strong>:</p>
+     * <ul>
+     * <li>Does not support destination properties that are indexed,
+     *     but only an indexed setter (as opposed to an array setter)
+     *     is available.</li>
+     * <li>Does not support destination properties that are mapped,
+     *     but only a keyed setter (as opposed to a Map setter)
+     *     is available.</li>
+     * <li>The desired property type of a mapped setter cannot be
+     *     determined (since Maps support any data type), so no conversion
+     *     will be performed.</li>
+     * </ul>
      *
      * @param bean Bean on which setting is to be performed
-     * @param name Simple property name of the property to be set
-     * @param value Property value to be set
+     * @param name Property name (can be nested/indexed/mapped/combo)
+     * @param value Value to be set
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -296,6 +306,7 @@ public class BeanUtils {
     public static void copyProperty(Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
 
+        // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
             StringBuffer sb = new StringBuffer("  copyProperty(");
             sb.append(bean);
@@ -323,55 +334,123 @@ public class BeanUtils {
             log.trace(sb.toString());
         }
 
-        if (bean instanceof DynaBean) {
-            DynaProperty propDescriptor =
-                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
-            if (propDescriptor != null) {
-                Converter converter =
-                    ConvertUtils.lookup(propDescriptor.getType());
-                if (converter != null) {
-                    value = converter.convert(propDescriptor.getType(), value);
-                }
-                try {
-                    PropertyUtils.setSimpleProperty(bean, name, value);
-                } catch (NoSuchMethodException e) {
-                    log.error("-->Should not have happened", e);
-                    ; // Silently ignored
-                }
-            } else {
-                if (log.isTraceEnabled()) {
-                    log.trace("-->No setter on 'to' DynaBean, skipping");
-                }
-            }
-        } else /* if (!(bean instanceof DynaBean)) */ {
-            PropertyDescriptor propDescriptor = null;
+        // Resolve any nested expression to get the actual target bean
+        Object target = bean;
+        int delim = name.lastIndexOf(PropertyUtils.NESTED_DELIM);
+        if (delim >= 0) {
             try {
-                propDescriptor =
-                    PropertyUtils.getPropertyDescriptor(bean, name);
+                target =
+                    PropertyUtils.getProperty(bean, name.substring(0, delim));
             } catch (NoSuchMethodException e) {
-                propDescriptor = null;
+                return; // Skip this property setter
             }
-            if ((propDescriptor != null) &&
-                (propDescriptor.getWriteMethod() == null)) {
-                propDescriptor = null;
+            name = name.substring(delim + 1);
+            if (log.isTraceEnabled()) {
+                log.trace("    Target bean = " + target);
+                log.trace("    Target name = " + name);
             }
-            if (propDescriptor != null) {
-                Converter converter =
-                    ConvertUtils.lookup(propDescriptor.getPropertyType());
-                if (converter != null) {
-                    value = converter.convert
-                        (propDescriptor.getPropertyType(), value);
+        }
+
+        // Declare local variables we will require
+        String propName = null;          // Simple name of target property
+        Class type = null;               // Java type of target property
+        int index = -1;                  // Indexed subscript value (if any)
+        String key = null;               // Mapped key value (if any)
+
+        // Calculate the target property name, index, and key values
+        propName = name;
+        int i = propName.indexOf(PropertyUtils.INDEXED_DELIM);
+        if (i >= 0) {
+            int k = propName.indexOf(PropertyUtils.INDEXED_DELIM2);
+            try {
+                index =
+                    Integer.parseInt(propName.substring(i + 1, k));
+            } catch (NumberFormatException e) {
+                ;
+            }
+            propName = propName.substring(0, i);
+        }
+        int j = propName.indexOf(PropertyUtils.MAPPED_DELIM);
+        if (j >= 0) {
+            int k = propName.indexOf(PropertyUtils.MAPPED_DELIM2);
+            try {
+                key = propName.substring(j + 1, k);
+            } catch (IndexOutOfBoundsException e) {
+                ;
+            }
+            propName = propName.substring(0, j);
+        }
+
+        // Calculate the target property type
+        if (target instanceof DynaBean) {
+            DynaClass dynaClass = ((DynaBean) target).getDynaClass();
+            DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
+            if (dynaProperty == null) {
+                return; // Skip this property setter
+            }
+            type = dynaProperty.getType();
+        } else {
+            PropertyDescriptor descriptor = null;
+            try {
+                descriptor =
+                    PropertyUtils.getPropertyDescriptor(target, name);
+                if (descriptor == null) {
+                    return; // Skip this property setter
                 }
-                try {
-                    PropertyUtils.setSimpleProperty(bean, name, value);
-                } catch (NoSuchMethodException e) {
-                    log.error("-->Should not have happened", e);
-                    ; // Silently ignored
-                }
-            } else {
+            } catch (NoSuchMethodException e) {
+                return; // Skip this property setter
+            }
+            type = descriptor.getPropertyType();
+            if (type == null) {
+                // Most likely an indexed setter on a POJB only
                 if (log.isTraceEnabled()) {
-                    log.trace("-->No setter on JavaBean, skipping");
+                    log.trace("    target type for property '" +
+                              propName + "' is null, so skipping ths setter");
                 }
+                return;
+            }
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("    target propName=" + propName + ", type=" +
+                      type + ", index=" + index + ", key=" + key);
+        }
+
+        // Convert the specified value to the required type and store it
+        if (index >= 0) {                    // Destination must be indexed
+            Converter converter = ConvertUtils.lookup(type.getComponentType());
+            if (converter != null) {
+                log.trace("        USING CONVERTER " + converter);
+                value = converter.convert(type, value);
+            }
+            try {
+                PropertyUtils.setIndexedProperty(target, propName,
+                                                 index, value);
+            } catch (NoSuchMethodException e) {
+                throw new InvocationTargetException
+                    (e, "Cannot set " + propName);
+            }
+        } else if (key != null) {            // Destination must be mapped
+            // Maps do not know what the preferred data type is,
+            // so perform no conversions at all
+            // FIXME - should we create or support a TypedMap?
+            try {
+                PropertyUtils.setMappedProperty(target, propName,
+                                                key, value);
+            } catch (NoSuchMethodException e) {
+                throw new InvocationTargetException
+                    (e, "Cannot set " + propName);
+            }
+        } else {                             // Destination must be simple
+            Converter converter = ConvertUtils.lookup(type);
+            if (converter != null) {
+                log.trace("        USING CONVERTER " + converter);
+                value = converter.convert(type, value);
+            }
+            try {
+                PropertyUtils.setSimpleProperty(target, propName, value);
+            } catch (NoSuchMethodException e) {
+                throw new InvocationTargetException
+                    (e, "Cannot set " + propName);
             }
         }
 
@@ -392,7 +471,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static Map describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
@@ -441,7 +520,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String[] getArrayProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -499,7 +578,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getIndexedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -525,7 +604,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getIndexedProperty(Object bean,
                                             String name, int index)
@@ -554,7 +633,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getMappedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -580,7 +659,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getMappedProperty(Object bean,
                                            String name, String key)
@@ -607,7 +686,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getNestedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -632,7 +711,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -655,7 +734,7 @@ public class BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public static String getSimpleProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -747,6 +826,12 @@ public class BeanUtils {
      * to meet the needs of <code>populate()</code>, and is probably not what
      * you want for general property copying with type conversion.  For that
      * purpose, check out the <code>copyProperty()</code> method instead.</p>
+     *
+     * <p><strong>WARNING</strong> - PLEASE do not modify the behavior of this
+     * method without consulting with the Struts developer community.  There
+     * are some subtleties to its functionality that are not documented in the
+     * Javadoc description above, yet are vital to the way that Struts utilizes
+     * this method.</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)

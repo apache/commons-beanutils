@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.16 2003/02/01 08:14:33 craigmcc Exp $
- * $Revision: 1.16 $
- * $Date: 2003/02/01 08:14:33 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.17 2003/02/04 07:28:14 craigmcc Exp $
+ * $Revision: 1.17 $
+ * $Date: 2003/02/04 07:28:14 $
  *
  * ====================================================================
  *
@@ -65,6 +65,7 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -77,7 +78,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.16 $ $Date: 2003/02/01 08:14:33 $
+ * @version $Revision: 1.17 $ $Date: 2003/02/04 07:28:14 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -113,6 +114,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
       "intProperty",
       "listIndexed",
       "longProperty",
+      "mapProperty",
       "mappedProperty",
       "mappedIntProperty",
       "nested",
@@ -173,6 +175,10 @@ public class DynaBeanUtilsTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long((long) 321));
+        HashMap mapProperty = new HashMap();
+        mapProperty.put("First Key", "First Value");
+        mapProperty.put("Second Key", "Second Value");
+        bean.set("mapProperty", mapProperty);
         HashMap mappedProperty = new HashMap();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
@@ -1037,7 +1043,127 @@ public class DynaBeanUtilsTestCase extends TestCase {
     }
 
 
+    /**
+     * Test copying a property using a nested indexed array expression,
+     * with and without conversions.
+     */
+    public void testCopyPropertyNestedIndexedArray() throws Exception {
+
+        int origArray[] = { 0, 10, 20, 30, 40};
+        int intArray[] = { 0, 0, 0 };
+        ((TestBean) bean.get("nested")).setIntArray(intArray);
+        int intChanged[] = { 0, 0, 0 };
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
+        checkIntArray((int[]) bean.get("intArray"), origArray);
+        intChanged[1] = 1;
+        checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
+                      intChanged);
+
+        // Widening conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Byte((byte) 2));
+        checkIntArray((int[]) bean.get("intArray"), origArray);
+        intChanged[1] = 2;
+        checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
+                      intChanged);
+
+        // Narrowing conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Long((long) 3));
+        checkIntArray((int[]) bean.get("intArray"), origArray);
+        intChanged[1] = 3;
+        checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
+                      intChanged);
+
+        // String conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", "4");
+        checkIntArray((int[]) bean.get("intArray"), origArray);
+        intChanged[1] = 4;
+        checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
+                      intChanged);
+
+    }
+
+
+    /**
+     * Test copying a property using a nested mapped map property.
+     */
+    public void testCopyPropertyNestedMappedMap() throws Exception {
+
+        Map origMap = new HashMap();
+        origMap.put("First Key", "First Value");
+        origMap.put("Second Key", "Second Value");
+        Map changedMap = new HashMap();
+        changedMap.put("First Key", "First Value");
+        changedMap.put("Second Key", "Second Value");
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.mapProperty(Second Key)",
+                               "New Second Value");
+        checkMap((Map) bean.get("mapProperty"), origMap);
+        changedMap.put("Second Key", "New Second Value");
+        checkMap(((TestBean) bean.get("nested")).getMapProperty(), changedMap);
+
+    }
+
+
+    /**
+     * Test copying a property using a nested simple expression, with and
+     * without conversions.
+     */
+    public void testCopyPropertyNestedSimple() throws Exception {
+
+        bean.set("intProperty", new Integer(0));
+        nested.setIntProperty(0);
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Integer(1));
+        assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
+        assertEquals(1, nested.getIntProperty());
+
+        // Widening conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Byte((byte) 2));
+        assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
+        assertEquals(2, nested.getIntProperty());
+
+        // Narrowing conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Long((long) 3));
+        assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
+        assertEquals(3, nested.getIntProperty());
+
+        // String conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", "4");
+        assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
+        assertEquals(4, nested.getIntProperty());
+
+    }
+
+
     // ------------------------------------------------------ Protected Methods
+
+
+    // Ensure that the nested intArray matches the specified values
+    protected void checkIntArray(int actual[], int expected[]) {
+        assertNotNull("actual array not null", actual);
+        assertEquals("actual array length", expected.length, actual.length);
+        for (int i = 0; i < actual.length; i++) {
+            assertEquals("actual array value[" + i + "]",
+                         expected[i], actual[i]);
+        }
+    }
+
+
+    // Ensure that the actual Map matches the expected Map
+    protected void checkMap(Map actual, Map expected) {
+        assertNotNull("actual map not null", actual);
+        assertEquals("actual map size", expected.size(), actual.size());
+        Iterator keys = expected.keySet().iterator();
+        while (keys.hasNext()) {
+            Object key = keys.next();
+            assertEquals("actual map value(" + key + ")",
+                         expected.get(key), actual.get(key));
+        }
+    }
 
 
     /**
@@ -1063,6 +1189,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                             new DynaProperty("intProperty", Integer.TYPE),
                             new DynaProperty("listIndexed", List.class),
                             new DynaProperty("longProperty", Long.TYPE),
+                            new DynaProperty("mapProperty", Map.class),
                             new DynaProperty("mappedProperty", Map.class),
                             new DynaProperty("mappedIntProperty", Map.class),
                             new DynaProperty("nested", TestBean.class),

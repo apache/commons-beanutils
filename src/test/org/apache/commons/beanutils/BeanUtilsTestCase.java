@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.19 2003/02/01 08:14:33 craigmcc Exp $
- * $Revision: 1.19 $
- * $Date: 2003/02/01 08:14:33 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.20 2003/02/04 07:28:14 craigmcc Exp $
+ * $Revision: 1.20 $
+ * $Date: 2003/02/04 07:28:14 $
  *
  * ====================================================================
  *
@@ -64,6 +64,7 @@ package org.apache.commons.beanutils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.Test;
@@ -97,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -1112,6 +1113,126 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.copyProperty(bean, "shortProperty", new Short((short) 123));
         assertEquals((short) 123, bean.getShortProperty());
 
+    }
+
+
+    /**
+     * Test copying a property using a nested indexed array expression,
+     * with and without conversions.
+     */
+    public void testCopyPropertyNestedIndexedArray() throws Exception {
+
+        int origArray[] = { 0, 10, 20, 30, 40 };
+        int intArray[] = { 0, 0, 0 };
+        bean.getNested().setIntArray(intArray);
+        int intChanged[] = { 0, 0, 0 };
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
+        checkIntArray(bean.getIntArray(), origArray);
+        intChanged[1] = 1;
+        checkIntArray(bean.getNested().getIntArray(), intChanged);
+
+        // Widening conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Byte((byte) 2));
+        checkIntArray(bean.getIntArray(), origArray);
+        intChanged[1] = 2;
+        checkIntArray(bean.getNested().getIntArray(), intChanged);
+
+        // Narrowing conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Long((long) 3));
+        checkIntArray(bean.getIntArray(), origArray);
+        intChanged[1] = 3;
+        checkIntArray(bean.getNested().getIntArray(), intChanged);
+
+        // String conversion required
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", "4");
+        checkIntArray(bean.getIntArray(), origArray);
+        intChanged[1] = 4;
+        checkIntArray(bean.getNested().getIntArray(), intChanged);
+
+    }
+
+
+    /**
+     * Test copying a property using a nested mapped map property.
+     */
+    public void testCopyPropertyNestedMappedMap() throws Exception {
+
+        Map origMap = new HashMap();
+        origMap.put("First Key", "First Value");
+        origMap.put("Second Key", "Second Value");
+        Map changedMap = new HashMap();
+        changedMap.put("First Key", "First Value");
+        changedMap.put("Second Key", "Second Value");
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.mapProperty(Second Key)",
+                               "New Second Value");
+        checkMap(bean.getMapProperty(), origMap);
+        changedMap.put("Second Key", "New Second Value");
+        checkMap(bean.getNested().getMapProperty(), changedMap);
+
+    }
+
+
+    /**
+     * Test copying a property using a nested simple expression, with and
+     * without conversions.
+     */
+    public void testCopyPropertyNestedSimple() throws Exception {
+
+        bean.setIntProperty(0);
+        bean.getNested().setIntProperty(0);
+
+        // No conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Integer(1));
+        assertNotNull(bean.getNested());
+        assertEquals(0, bean.getIntProperty());
+        assertEquals(1, bean.getNested().getIntProperty());
+
+        // Widening conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Byte((byte) 2));
+        assertNotNull(bean.getNested());
+        assertEquals(0, bean.getIntProperty());
+        assertEquals(2, bean.getNested().getIntProperty());
+
+        // Narrowing conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", new Long((long) 3));
+        assertNotNull(bean.getNested());
+        assertEquals(0, bean.getIntProperty());
+        assertEquals(3, bean.getNested().getIntProperty());
+
+        // String conversion required
+        BeanUtils.copyProperty(bean, "nested.intProperty", "4");
+        assertNotNull(bean.getNested());
+        assertEquals(0, bean.getIntProperty());
+        assertEquals(4, bean.getNested().getIntProperty());
+
+    }
+
+
+    // Ensure that the actual int[] matches the expected int[]
+    protected void checkIntArray(int actual[], int expected[]) {
+        assertNotNull("actual array not null", actual);
+        assertEquals("actual array length", expected.length, actual.length);
+        for (int i = 0; i < actual.length; i++) {
+            assertEquals("actual array value[" + i + "]",
+                         expected[i], actual[i]);
+        }
+    }
+
+
+    // Ensure that the actual Map matches the expected Map
+    protected void checkMap(Map actual, Map expected) {
+        assertNotNull("actual map not null", actual);
+        assertEquals("actual map size", expected.size(), actual.size());
+        Iterator keys = expected.keySet().iterator();
+        while (keys.hasNext()) {
+            Object key = keys.next();
+            assertEquals("actual map value(" + key + ")",
+                         expected.get(key), actual.get(key));
+        }
     }
 
 
