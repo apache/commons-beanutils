@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.21 2001/12/24 21:45:28 craigmcc Exp $
+        $Id: build.xml,v 1.22 2002/01/05 00:31:54 craigmcc Exp $
 -->
 
 
@@ -201,6 +201,9 @@
               todir="${dist.home}"/>
     <copy      file="RELEASE-NOTES.txt"
               todir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="../LICENSE"
+             tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
     <jar    jarfile="${dist.home}/commons-${component.name}.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
