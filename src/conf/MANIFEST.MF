@@ -1,6 +1,11 @@
-Extension-Name: @name@
+Extension-Name: @package@
 Specification-Vendor: Apache Software Foundation
 Specification-Version: 1.0
 Implementation-Vendor: Apache Software Foundation
 Implementation-Version: @version@
-
+Extension-List: collections
+collections-Extension-Name: org.apache.commons.collections
+collections-Specification-Vendor: Apache Software Foundation
+collections-Specification-Version: 1.0
+collections-Implementation-Vendor: Apache Software Foundation
+collections-Implementation-Version: 0.01

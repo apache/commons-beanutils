@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.10 2001/04/30 17:35:23 craigmcc Exp $
+        $Id: build.xml,v 1.11 2001/05/06 23:06:20 craigmcc Exp $
 -->
 
 
@@ -18,6 +18,9 @@
 <!-- ========== External Dependencies ===================================== -->
 
 
+  <!-- The home directory for the Commons collection classes distribution -->
+  <property name="commons-collections.home" value="../collections/dist"/>
+
   <!-- The directory containing your binary distribution of JUnit,
        version 3.2 or later -->
   <property name="junit.home"              value="/usr/local/junit3.5"/>
@@ -25,6 +28,9 @@
 
 <!-- ========== Derived Values ============================================ -->
 
+
+  <!-- The pathname of the collections classes JAR file -->
+  <property name="commons-collections.jar" value="${commons-collections.home}/commons-collections.jar"/>
 
   <!-- The pathname of the "junit.jar" JAR file -->
   <property name="junit.jar"               value="${junit.home}/junit.jar"/>
@@ -35,6 +41,9 @@
 
   <!-- The name of this component -->
   <property name="component.name"          value="beanutils"/>
+
+  <!-- The primary package name of this component -->
+  <property name="component.package"       value="org.apache.commons.beanutils"/>
 
   <!-- The title of this component -->
   <property name="component.title"         value="Bean Introspection Utilities"/>
@@ -73,6 +82,7 @@
   <!-- Construct compile classpath -->
   <path id="compile.classpath">
     <pathelement location="${build.home}/classes"/>
+    <pathelement location="${commons-collections.jar}"/>
   </path>
 
 
@@ -83,6 +93,7 @@
   <path id="test.classpath">
     <pathelement location="${build.home}/classes"/>
     <pathelement location="${build.home}/tests"/>
+    <pathelement location="${commons-collections.jar}"/>
     <pathelement location="${junit.jar}"/>
   </path>
 
@@ -100,6 +111,7 @@
    description="Initialize and evaluate conditionals">
     <echo message="-------- ${component.name} ${component.version} --------"/>
     <filter  token="name"                  value="${component.name}"/>
+    <filter  token="package"               value="${component.package}"/>
     <filter  token="version"               value="${component.version}"/>
   </target>
 
