@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.13 2002/09/24 18:45:54 rdonkin Exp $
- * $Revision: 1.13 $
- * $Date: 2002/09/24 18:45:54 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.14 2002/11/26 23:25:57 rwaldhoff Exp $
+ * $Revision: 1.14 $
+ * $Date: 2002/11/26 23:25:57 $
  *
  * ====================================================================
  *
@@ -73,12 +73,62 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.13 $ $Date: 2002/09/24 18:45:54 $
+ * @author Rodney Waldhoff
+ * @version $Revision: 1.14 $ $Date: 2002/11/26 23:25:57 $
  */
 
 public class TestBean {
 
+    // ----------------------------------------------------------- Constructors
 
+    public TestBean() {
+    }
+    
+    public TestBean(String stringProperty) {
+        setStringProperty(stringProperty);
+    }
+    
+    public TestBean(float floatProperty) {
+        setFloatProperty(floatProperty);
+    }
+
+    public TestBean(boolean booleanProperty) {
+        setBooleanProperty(booleanProperty);
+    }
+    
+    public TestBean(Boolean booleanSecond) {
+        setBooleanSecond(booleanSecond.booleanValue());
+    }
+    
+    public TestBean(float floatProperty, String stringProperty) {
+        setFloatProperty(floatProperty);
+        setStringProperty(stringProperty);
+    }
+
+    public TestBean(boolean booleanProperty, String stringProperty) {
+        setBooleanProperty(booleanProperty);
+        setStringProperty(stringProperty);
+    }
+
+    public TestBean(Boolean booleanSecond, String stringProperty) {
+        setBooleanSecond(booleanSecond.booleanValue());
+        setStringProperty(stringProperty);
+    }
+
+    public TestBean(Integer intProperty) {
+        setIntProperty(intProperty.intValue());
+    }
+    
+    TestBean(int intProperty) {
+        setIntProperty(intProperty);
+    }
+
+    protected TestBean(boolean booleanProperty, boolean booleanSecond, String stringProperty) {
+        setBooleanProperty(booleanProperty);
+        setBooleanSecond(booleanSecond);
+        setStringProperty(stringProperty);
+    }
+    
     // ------------------------------------------------------------- Properties
 
 

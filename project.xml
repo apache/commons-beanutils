@@ -40,6 +40,12 @@
       <email>sanders@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Rodney Waldhoff</name>
+      <id>rwaldhoff</id>
+      <email>rwaldhoff@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
   
   <dependencies>
