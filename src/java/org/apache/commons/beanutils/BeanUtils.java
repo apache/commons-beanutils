@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.11 2002/01/24 01:39:57 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2002/01/24 01:39:57 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.12 2002/01/27 04:12:42 craigmcc Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/01/27 04:12:42 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import org.apache.commons.logging.LogSource;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.11 $ $Date: 2002/01/24 01:39:57 $
+ * @version $Revision: 1.12 $ $Date: 2002/01/27 04:12:42 $
  */
 
 public class BeanUtils {
@@ -517,9 +517,15 @@ public class BeanUtils {
                 continue;
             }
 
-            if (log.isDebugEnabled())
-                log.debug("    Property descriptor is '" +
-                        descriptor + "'");
+            if (log.isDebugEnabled()) {
+                if (descriptor != null) {
+                    log.debug("    Property descriptor is '" +
+                              descriptor + "'");
+                } else /* if (dynaProperty != null) */ {
+                    log.debug("    DynaProperty descriptor is '" +
+                              descriptor + "'");
+                }
+            }
 
 
             // Process differently for JavaBeans and DynaBeans
@@ -560,7 +566,8 @@ public class BeanUtils {
 
                 // Convert the parameter value as required for this setter method
                 Object parameters[] = new Object[1];
-                if (parameterTypes[0].isArray()) {
+                //                if (parameterTypes[0].isArray()) {
+                if (parameterType.isArray()) {
                     if (value instanceof String) {
                         String values[] = new String[1];
                         values[0] = (String) value;
@@ -591,7 +598,7 @@ public class BeanUtils {
                     log.error("  CANNOT HAPPEN (setProperty()): ", e);
                 }
 
-            } else {
+            } else /* if (dynaProperty != null) */ {
 
                 // Handle scalar and indexed properties differently
                 Object newValue = null;
