@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.12 2001/09/19 13:58:38 craigmcc Exp $
- * $Revision: 1.12 $
- * $Date: 2001/09/19 13:58:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.13 2001/09/22 17:40:17 craigmcc Exp $
+ * $Revision: 1.13 $
+ * $Date: 2001/09/22 17:40:17 $
  *
  * ====================================================================
  *
@@ -91,7 +91,7 @@ import org.apache.commons.collections.FastHashMap;
  * <code>PropertyEditor</code> classes that have been registered, although
  * a convenient way to access the registered classes themselves is included.
  * <p>
- * For the purposes of this class, three formats for referencing a particular
+ * For the purposes of this class, five formats for referencing a particular
  * property value of a bean are defined, with the layout of an identifying
  * String in parentheses:
  * <ul>
@@ -114,11 +114,12 @@ import org.apache.commons.collections.FastHashMap;
  *     property value is assumed to be an array, or this JavaBean is assumed
  *     to have indexed property getter and setter methods.  The appropriate
  *     (zero-relative) entry in the array is selected.</li>
- * <li><strong>Mapped (<code>name(index)</code>)</strong> - The JavaBean
+ * <li><strong>Mapped (<code>name(key)</code>)</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
  *     additional attribute of type <code>java.lang.String</code>.</li>
- * <li><strong>Combined (<code>name1.name2[index].name3</strong> - Various
- *     forms combining nested and indexed references are also supported.</li>
+ * <li><strong>Combined (<code>name1.name2[index].name3(key)</code>)</strong> -
+ *     Combining mapped, nested, and indexed references is also
+ *     supported.</li>
  * </ul>
  *
  * @author Craig R. McClanahan
@@ -126,7 +127,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.12 $ $Date: 2001/09/19 13:58:38 $
+ * @version $Revision: 1.13 $ $Date: 2001/09/22 17:40:17 $
  */
 
 public class PropertyUtils {
