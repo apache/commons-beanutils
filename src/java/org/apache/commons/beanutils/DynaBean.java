@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.2 2001/12/27 08:11:05 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/12/27 08:11:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.3 2001/12/28 00:33:56 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/12/28 00:33:56 $
  *
  * ====================================================================
  *
@@ -71,7 +71,8 @@ package org.apache.commons.beanutils;
  * purpose of retrieving and setting property values.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.2 $ $Date: 2001/12/27 08:11:05 $
+ * @author Paulo Gaspar
+ * @version $Revision: 1.3 $ $Date: 2001/12/28 00:33:56 $
  */
 
 public interface DynaBean {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.2 2001/12/27 21:17:38 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/12/27 21:17:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.3 2001/12/28 00:33:56 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/12/28 00:33:56 $
  *
  * ====================================================================
  *
@@ -75,66 +75,11 @@ import java.beans.PropertyDescriptor;
  *
  * @author Craig McClanahan
  * @author Michael Smith
- * @version $Revision: 1.2 $ $Date: 2001/12/27 21:17:38 $
+ * @author Paulo Gaspar
+ * @version $Revision: 1.3 $ $Date: 2001/12/28 00:33:56 $
  */
 
 public interface DynaClass {
-
-
-    /**
-     * Add a new dynamic property with no restrictions on data type,
-     * readability, or writeability.
-     *
-     * @param name Name of the new dynamic property
-     *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
-     *  restricted, so no new properties can be added
-     */
-    public void add(String name);
-
-
-    /**
-     * Add a new dynamic property with the specified data type, but with
-     * no restrictions on readability or writeability.
-     *
-     * @param name Name of the new dynamic property
-     * @param type Data type of the new dynamic property (null for no
-     *  restrictions)
-     *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
-     *  restricted, so no new properties can be added
-     */
-    public void add(String name, Class type);
-
-
-    /**
-     * Add a new dynamic property with the specified data type, readability,
-     * and writeability.
-     *
-     * @param name Name of the new dynamic property
-     * @param type Data type of the new dynamic property (null for no
-     *  restrictions)
-     * @param readable Set to <code>true</code> if this property value
-     *  should be readable
-     * @param writeable Set to <code>true</code> if this property value
-     *  should be writeable
-     *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
-     *  restricted, so no new properties can be added
-     */
-    public void add(String name, Class type, boolean readable,
-                    boolean writeable);
-
-
-    /**
-     * Return the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
-     */
-    public Class getDynaBeanClass();
 
 
     /**
@@ -153,7 +98,7 @@ public interface DynaClass {
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
      */
-    public PropertyDescriptor[] getPropertyDescriptor(String name);
+    public PropertyDescriptor getPropertyDescriptor(String name);
 
 
     /**
@@ -169,55 +114,10 @@ public interface DynaClass {
 
 
     /**
-     * Is this DynaClass currently restricted?  If so, no changes to the
-     * existing registration of property names, data types, readability, or
-     * writeability are allowed.
-     */
-    public boolean isRestricted();
-
-
-    /**
      * Instantiate and return a new DynaBean instance, using the implementation
      * class specified by the <code>dynaBeanClass</code> property.
      */
     public DynaBean newInstance();
-
-
-    /**
-     * Remove the specified dynamic property, and any associated data type,
-     * readability, and writeability, from this dynamic class.
-     * <strong>NOTE</strong> - This does <strong>NOT</strong> cause any
-     * corresponding property values to be removed from DynaBean instances
-     * associated with this DynaClass.
-     *
-     * @param name Name of the dynamic property to remove
-     *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
-     *  restricted, so no properties can be removed
-     */
-    public void remove(String name);
-
-
-    /**
-     * Set the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
-     *
-     * @param clazz The new Class object
-     *
-     * @exception IllegalArgumentException if the specified Class does not
-     *  implement the <code>DynaBean</code> interface
-     */
-    public void setDynaBeanClass(Class clazz);
-
-
-    /**
-     * Set the restricted state of this DynaClass to the specified value.
-     *
-     * @param restricted The new restricted state
-     */
-    public void setRestricted(boolean restricted);
 
 
 }
