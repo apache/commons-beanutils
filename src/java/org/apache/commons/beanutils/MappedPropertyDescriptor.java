@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.12 2002/11/21 22:21:01 rdonkin Exp $
- * $Revision: 1.12 $
- * $Date: 2002/11/21 22:21:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.13 2002/12/09 22:33:03 rwaldhoff Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/12/09 22:33:03 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.12 $ $Date: 2002/11/21 22:21:01 $
+ * @version $Revision: 1.13 $ $Date: 2002/12/09 22:33:03 $
  */
 
 
@@ -142,7 +142,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
 
         setName(propertyName);
-        String base = capitalize(propertyName);
+        String base = capitalizePropertyName(propertyName);
         
         // Look for mapped read method and matching write method
         try {
@@ -349,7 +349,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param s The property name
      */
-    private static String capitalize(String s) {
+    private static String capitalizePropertyName(String s) {
         if (s.length() == 0) {
             return s;
         }
