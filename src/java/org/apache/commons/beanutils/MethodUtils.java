@@ -82,6 +82,128 @@ public class MethodUtils {
     // --------------------------------------------------------- Public Methods
 
 
+
+    /**
+     * <p>Invoke a named method whose parameter type matches the object type.</p>
+     *
+     * <p>The behaviour of this method is less deterministic 
+     * than {@link #invokeExactMethod}. 
+     * It loops through all methods with names that match
+     * and then executes the first it finds with compatable parameters.</p>
+     *
+     * <p> This is a convenient wrapper for
+     * {@link #invokeMethod(Object object,String methodName,Object [] args)}.
+     * </p>
+     *
+     * @param object invoke method on this object
+     * @param methodName get method with this name
+     * @param arg use this argument
+     *
+     * @throw NoSuchMethodException if there is no such accessible method
+     * @throw InvocationTargetException wraps an exception thrown by the
+     *  method invoked
+     * @throw IllegalAccessException if the requested method is not accessible
+     *  via reflection
+     */
+    public static Object invokeMethod(
+            Object object,
+            String methodName,
+            Object arg)
+            throws
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
+
+        Object[] args = {arg};
+        return invokeMethod(object, methodName, args);
+
+    }
+
+
+    /**
+     * <p>Invoke a named method whose parameter type matches the object type.</p>
+     *
+     * <p>The behaviour of this method is less deterministic 
+     * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. 
+     * It loops through all methods with names that match
+     * and then executes the first it finds with compatable parameters.</p>
+     *
+     * <p> This is a convenient wrapper for
+     * {@link #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
+     * </p>
+     *
+     * @param object invoke method on this object
+     * @param methodName get method with this name
+     * @param args use these arguments
+     *
+     * @throw NoSuchMethodException if there is no such accessible method
+     * @throw InvocationTargetException wraps an exception thrown by the
+     *  method invoked
+     * @throw IllegalAccessException if the requested method is not accessible
+     *  via reflection
+     */
+    public static Object invokeMethod(
+            Object object,
+            String methodName,
+            Object[] args)
+            throws
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException {
+
+        int arguments = args.length;
+        Class parameterTypes [] = new Class[arguments];
+        for (int i = 0; i < arguments; i++) {
+            parameterTypes[i] = args[i].getClass();
+        }
+        return invokeMethod(object, methodName, args, parameterTypes);
+
+    }
+
+
+    /**
+     * <p>Invoke a named method whose parameter type matches the object type.</p>
+     *
+     * <p>The behaviour of this method is less deterministic 
+     * than {@link 
+     * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}. 
+     * It loops through all methods with names that match
+     * and then executes the first it finds with compatable parameters.</p>
+     *
+     *
+     * @param object invoke method on this object
+     * @param methodName get method with this name
+     * @param args use these arguments
+     * @param parameterTypes match these parameters
+     *
+     * @throw NoSuchMethodException if there is no such accessible method
+     * @throw InvocationTargetException wraps an exception thrown by the
+     *  method invoked
+     * @throw IllegalAccessException if the requested method is not accessible
+     *  via reflection
+     */
+    public static Object invokeMethod(
+            Object object,
+            String methodName,
+            Object[] args,
+            Class[] parameterTypes)
+                throws
+                    NoSuchMethodException,
+                    IllegalAccessException,
+                    InvocationTargetException {
+        
+
+        Method method = getMatchingAccessibleMethod(
+                object.getClass(),
+                methodName,
+                parameterTypes);
+        if (method == null)
+            throw new NoSuchMethodException("No such accessible method: " +
+                    methodName + "() on object: " + object.getClass().getName());
+        return method.invoke(object, args);
+    }
+
+
     /**
      * <p>Invoke a method whose parameter type matches exactly the object
      * type.</p>
@@ -339,5 +461,49 @@ public class MethodUtils {
 
     }
 
+    /**
+     * <p>Find an accessible method that matches the given name and has compatible parameters.
+     * Compatible parameters mean that every method parameter is assignable from 
+     * the given parameters.
+     * In other words, it finds a method with the given name 
+     * that will take the parameters given.<p>
+     *
+     * <p>This method is slightly undeterminstic since it loops 
+     * through methods names and return the first matching method.</p>
+     * 
+     * <p>This method is used by 
+     * {@link 
+     * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
+     *
+     * @param clazz find method in this class
+     * @param methodName find method with this name
+     * @param parameterTypes find method with compatible parameters 
+     */
+    private static Method getMatchingAccessibleMethod(
+                                                Class clazz,
+                                                String methodName,
+                                                Class[] parameterTypes) {
+        int paramSize = parameterTypes.length;
+        Method[] methods = clazz.getMethods();
+        for (int i = 0, size = methods.length; i < size ; i++) {
+            if (methods[i].getName().equals(methodName)) {
+                Class[] methodsParams = methods[i].getParameterTypes();
+                int methodParamSize = methodsParams.length;
+                if (methodParamSize == paramSize) {                    
+                    for (int n = 0 ; n < methodParamSize; n++) {
+                        if (!parameterTypes[n].isAssignableFrom(methodsParams[n])) {
+                            break;
+                        }
+                    }
+                    Method method = getAccessibleMethod(methods[i]);
+                    if (method != null) {
+                        return method;
+                    }
+                }
+            }
+        }
+        
+        return null;                                        
+    }
 
 }

@@ -227,4 +227,63 @@ public class MethodUtilsTestCase extends TestCase {
 
         }
     }
+    
+    /**
+     * <p> Test <code>invokeMethod</code>.
+     */
+    public void testInvokeMethod() throws Exception {
+        // i'm going to test that the actual calls work first and then try them via reflection
+        
+        AbstractParent parent = new AlphaBean("parent");
+        
+        // try testAddChild through abstract superclass
+        BetaBean childOne = new BetaBean("ChildOne");
+        
+        assertEquals("Oh no! Badly coded test case! (1)", "ChildOne", parent.testAddChild(childOne));
+        
+        // let's try MethodUtils version
+        assertEquals(
+                        "Cannot invoke through abstract class (1)", 
+                        "ChildOne", 
+                        MethodUtils.invokeMethod(parent, "testAddChild", childOne));
+
+        
+        // try adding through interface
+        AlphaBean childTwo = new AlphaBean("ChildTwo");
+        
+        assertEquals("Oh no! Badly coded test case! (2)", "ChildTwo", parent.testAddChild(childTwo));
+        
+        // let's try MethodUtils version
+        assertEquals(
+                        "Cannot invoke through interface (1)", 
+                        "ChildTwo", 
+                        MethodUtils.invokeMethod(parent, "testAddChild", childTwo));
+       
+        
+        Object[] params = new Object[2];
+
+        assertEquals("Oh no! Badly coded test case! (3)", "ChildOne", parent.testAddChild2("parameter", childOne));
+        
+        
+        // let's try MethodUtils version
+        params[0] = "parameter";
+        params[1] = childOne;
+        
+        assertEquals(
+                        "Cannot invoke through abstract class (1)", 
+                        "ChildOne", 
+                        MethodUtils.invokeMethod(parent, "testAddChild2", params));
+                        
+        assertEquals("Oh no! Badly coded test case! (4)", "ChildTwo", parent.testAddChild2("parameter", childTwo));
+        
+        // let's try MethodUtils version
+        params[0] = "parameter";
+        params[1] = childTwo;
+       
+        assertEquals(
+                        "Cannot invoke through abstract class (1)", 
+                        "ChildTwo", 
+                        MethodUtils.invokeMethod(parent, "testAddChild2", params));
+        
+    }
 }
