@@ -28,6 +28,7 @@ and accessing bean properties.</p>
     <li><a href="#dynamic.background">Background</a></li>
     <li><a href="#dynamic.basic">BasicDynaBean and BasicDynaClass</a></li>
     <li><a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
+    <li><a href="#dynamic.rowSet">RowSetDynaClass (Disconnected ResultSet as DynaBeans)</a></li>
     <li><a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
     </ul></li>
 <li><a href="#conversion">Data Type Conversions</a>
@@ -499,6 +500,56 @@ which you can utilize as shown in this example:</p>
   rs.close();
   stmt.close();
 </pre>
+
+
+<a name="dynamic.rowSet"></a>
+<h3><code>RowSetDynaClass</code> (Disconnected ResultSet as DynaBeans)</h3>
+
+<p>Although <a href="#dynamic.resultSet">ResultSetDynaClass</code> is a very
+useful technique for representing the results of an SQL query as a series of
+DynaBeans, an important problem is that the underlying <code>ResultSet</code>
+must remain open throughout the period of time that the rows are being
+processed by your application.  This hinders the ability to use
+<code>ResultSetDynaClass</code> as a means of communicating information from
+the model layer to the view layer in a model-view-controller architecture
+such as that provided by the <a href="http://jakarta.apache.org/struts/">Struts
+Framework</a>, because there is no easy mechanism to assure that the result set
+is finally closed (and the underlying <code>Connection</code> returned to its
+connection pool, if you are using one).</p>
+
+<p>The <code>RowSetDynaClass</code> class represents a different approach to
+this problem.  When you construct such an instance, the underlying data is
+<em>copied</em> into a set of in-memory DynaBeans that represent the result.
+The advantage of this technique, of course, is that you can immediately close
+the ResultSet (and the corresponding Statement), normally before you even
+process the actual data that was returned.  The disadvantage, of course, is
+that you must pay the performance and memory costs of copying the result data,
+and the result data must fit entirely into available heap memory.  For many
+environments (particularly in web applications), this tradeoff is usually
+quite beneficial.</p>
+
+<p>As an additional benefit, the <code>RowSetDynaClass</code> class is defined
+to implement <code>java.io.Serializable</code>, so that it (and the
+DynaBeans that correspond to each row of the result) can be conveniently
+serialized and deserialized (as long as the underlying column values are
+also Serializable).  Thus, <code>RowSetDynaClass</code> represents a very
+convenient way to transmit the results 0f an SQL query to a remote Java-based
+client application (such as an applet).</p>
+
+<p>The normal usage pattern for a <code>RowSetDynaClass</code> will look
+something like this:</p>
+<pre>
+    Connection conn = ...;  // Acquire connection from pool
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT ...");
+    RowSetDynaClass rsdc = new RowSetDynaClass(rs);
+    rs.close();
+    stmt.close();
+    ...;                    // Return connection to pool
+    List rows = rsdc.getRows();
+    ...;                   // Process the rows as desired
+/pre>
+
 
 <a name="dynamic.wrap"></a>
 <h3><code>WrapDynaBean</code> and <code>WrapDynaClass</code></h3>

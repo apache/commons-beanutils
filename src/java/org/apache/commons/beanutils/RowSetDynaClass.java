@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.1 2003/01/05 05:33:05 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2003/01/05 05:33:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/RowSetDynaClass.java,v 1.2 2003/01/05 05:45:41 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/01/05 05:45:41 $
  *
  * ====================================================================
  *
@@ -116,7 +116,7 @@ import java.util.Map;
  * factored out so that they can be shared.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2003/01/05 05:33:05 $
+ * @version $Revision: 1.2 $ $Date: 2003/01/05 05:45:41 $
  */
 
 public class RowSetDynaClass implements DynaClass, Serializable {
@@ -287,7 +287,7 @@ public class RowSetDynaClass implements DynaClass, Serializable {
      * <p>Return a <code>List</code> containing the {@link DynaBean}s that
      * represent the contents of each <code>Row</code> from the
      * <code>ResultSet</code> that was the basis of this
-     * {@link RowSetDynaClass} instance.  These {@link DynaBeans} are
+     * {@link RowSetDynaClass} instance.  These {@link DynaBean}s are
      * disconnected from the database itself, so there is no problem with
      * modifying the contents of the list, or the values of the properties
      * of these {@link DynaBean}s.  However, it is the application's
