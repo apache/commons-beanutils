@@ -1,9 +1,8 @@
-$Id: RELEASE-NOTES.txt,v 1.8 2002/10/24 04:40:41 sanders Exp $
+$Id: RELEASE-NOTES.txt,v 1.9 2003/01/15 21:57:29 rdonkin Exp $
 
                           Commons BeanUtils Package
-                                Version 1.5
+                                Version 1.6
                                Release Notes
-
 
 INTRODUCTION:
 ============
@@ -15,8 +14,84 @@ BeanUtils package, and highlights changes since the previous version.
 NEW FEATURES:
 ============
 
-NEW: BeanComparator! Check it out.
+New Classes
+-----------
 
+Initial checkin of a new class providing reflection utilities for constructors
+(similar to MethodUtils). See org.apache.commons.beanutils.ConstructorUtils.
+
+Added a new DynaClass implementation that creates an in-memory collection of 
+DyanBeans representing the results of a SQL query. 
+See org.apache.commons.beanutils.RowSetDynaClass.java
+
+
+DyanBeans Enhancements
+----------------------
+
+Improved DynaProperty serialization on Java 1.3 by adding a custom 
+serialization mechanism. Now primitive type classes will be correctly serialized 
+on Java 1.3.
+
+ResultSetDynaClass: Made it possible to select an operational mode where column 
+names are *not* lower cased when being converted into DynaBean property names.  
+Because different JDBC drivers behave differently with regards to the case of 
+the column names they return, using this mode will make your application
+dependent upon the behavior of your particular JDBC driver.  However, there
+are some circumstances when consciously selecting such dependence is
+necessary.
+
+Cleaned up Javadoc generation warnings under JDK 1.4.
+
+BeanComparator Enhancements
+---------------------------
+
+Added getComparator() property allowing retrieval of Comparator being used.
+
+Cleaned up Javadoc generation warnings under JDK 1.4.
+
+BeanUtils Enhancements
+----------------------
+
+Enhanced the behavior of BeanUtils.setProperty() such that, if the destination
+property is a String and there is a registered Converter for the value's
+class, the value's toString() method will be called, followed by conversion
+to the appropriate destination type.  Among other things, this makes it
+possible to pass in a primitive wrapper type (such as Integer) and have it
+converted to a String.
+
+Performance improvements.
+
+Java doc comments improvements.
+
+MethodUtils Enhancements
+------------------------
+
+Made getMatchingAccessibleMethod public. 
+
+Converters Enhancements
+-----------------------
+
+Added support for Number types in numeric converter classes.
+
+LocaleConvertUtils Enhancements
+-------------------------------
+
+Cleaned up Javadoc generation warnings under JDK 1.4.  
+
+DateLocaleConverter Enhancements
+--------------------------------
+
+Added new Lenient property that allows lenient to be get and set on the 
+underlying date formatter.
+
+DEPRECATED
+==========
+
+org.apache.common.beanutils.BeanUtils getDebug(), setDebug() 
+    (replaced by commons-logging)
+    
+org.apache.common.beanutils.PropertyUtils getDebug(), setDebug() 
+    (replaced by commons-logging)
 
 CHANGES:
 ========
@@ -26,17 +101,19 @@ Various documentation fixes by several people.
 BUG REPORTS ADDRESSED:
 =====================
 
-10458	Can't use . (dot) in mapped properties (Again :-)
-11772   IllegalArgumentException when using a.b(key) in property in struts
-        1.1b2
-11860   minor typo in overview doc
-12152   Combined property access ( b.mapped(bar/foo) ) throws excception
-12247   MethodUtils.getMatchingAccessibleMethod throws NullPointerException
-        when parameterTypes is null
-12458   BeanUtils.setProperty does not work with indexed properties
-12544   mappedDescriptorsCache not caching
-12728   Cache Bug in the PropertyUtils.java line 889
-12994   PropertyUtils.copyProperties don't work if JavaBean orig and DynaBean
-        dest
-13596   Missing Test case
-
+15067 BaseDynaBean, BasicDynaClass not serializable
+15773 setProperty throws exception on null value
+15170 BeanUtils.setProperty doesn't convert primitive wrappers
+15004 BeanUtils.copyProperties goes though wasted processing
+15160 speedup for beanutils / array getter
+14620 exception thrown when logging is set to debug
+14170 ConvertUtils.convert(Object) doesn't use registered converter
+10167 Mapped properties require getter
+14394 Excessive exceptions log under (restrictive) security manager
+14667 PropertyUtils.copyProperties does not copy to DynaBean
+14440 PropertyUtils.setProperty ignores property setter
+15004 BeanUtils.copyProperties goes through wasted processing
+14796 ResultSetDynaClass.createDynaProperty users getColumnName()
+15773 setProperty throws exception on null value
+15908 commons-beanutils.jar debug info line numbers off by a factor of 2
+15888 lenient method is loose in DateLocaleConverter
