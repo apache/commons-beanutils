@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ClassConverter.java,v 1.1 2002/07/20 18:21:21 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/20 18:21:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ClassConverter.java,v 1.2 2002/07/22 00:24:44 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/07/22 00:24:44 $
  *
  * ====================================================================
  *
@@ -76,8 +76,8 @@ import org.apache.commons.beanutils.Converter;
  * will be used.</p>
  *
  * @author Tomas Viberg
- * @version $Revision: 1.1 $ $Date: 2002/07/20 18:21:21 $
- * @since 1.3
+ * @version $Revision: 1.2 $ $Date: 2002/07/22 00:24:44 $
+ * @since 1.4
  */
 
 public final class ClassConverter implements Converter {
