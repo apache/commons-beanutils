@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.1 2003/03/03 22:33:46 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2003/03/03 22:33:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.2 2003/03/04 19:30:22 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/03/04 19:30:22 $
  *
  * ====================================================================
  *
@@ -77,6 +77,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.FastHashMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -132,7 +134,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.1 $ $Date: 2003/03/03 22:33:46 $
+ * @version $Revision: 1.2 $ $Date: 2003/03/04 19:30:22 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -154,6 +156,9 @@ public class PropertyUtilsBean {
      */
     private FastHashMap descriptorsCache = null;
     private FastHashMap mappedDescriptorsCache = null;
+    
+    /** Log instance */
+    private Log log = LogFactory.getLog(PropertyUtils.class);
     
     // ---------------------------------------------------------- Constructors
     
@@ -444,7 +449,7 @@ public class PropertyUtilsBean {
                 Object subscript[] = new Object[1];
                 subscript[0] = new Integer(index);
                 try {
-                    return (readMethod.invoke(bean, subscript));
+                    return (invokeMethod(readMethod,bean, subscript));
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             ArrayIndexOutOfBoundsException) {
@@ -465,7 +470,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter and return the value
-        Object value = readMethod.invoke(bean, new Object[0]);
+        Object value = invokeMethod(readMethod, bean, new Object[0]);
         if (!value.getClass().isArray()) {
             if (!(value instanceof java.util.List)) {
                 throw new IllegalArgumentException("Property '" + name
@@ -586,7 +591,7 @@ public class PropertyUtilsBean {
             if (readMethod != null) {
                 Object keyArray[] = new Object[1];
                 keyArray[0] = key;
-                result = readMethod.invoke(bean, keyArray);
+                result = invokeMethod(readMethod, bean, keyArray);
             } else {
                 throw new NoSuchMethodException("Property '" + name +
                         "' has no mapped getter method");
@@ -595,7 +600,7 @@ public class PropertyUtilsBean {
           /* means that the result has to be retrieved from a map */
           Method readMethod = descriptor.getReadMethod();
           if (readMethod != null) {
-            Object invokeResult = readMethod.invoke(bean, new Object[0]);
+            Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
               result = ((java.util.Map)invokeResult).get(key);
@@ -1136,7 +1141,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter and return the value
-        Object value = readMethod.invoke(bean, new Object[0]);
+        Object value = invokeMethod(readMethod, bean, new Object[0]);
         return (value);
 
     }
@@ -1386,7 +1391,7 @@ public class PropertyUtilsBean {
                 subscript[0] = new Integer(index);
                 subscript[1] = value;
                 try {
-                    writeMethod.invoke(bean, subscript);
+                    invokeMethod(writeMethod, bean, subscript);
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             ArrayIndexOutOfBoundsException) {
@@ -1408,7 +1413,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter to get the array or list
-        Object array = readMethod.invoke(bean, new Object[0]);
+        Object array = invokeMethod(readMethod, bean, new Object[0]);
         if (!array.getClass().isArray()) {
             if (array instanceof List) {
                 // Modify the specified value in the List
@@ -1534,7 +1539,7 @@ public class PropertyUtilsBean {
                 Object params[] = new Object[2];
                 params[0] = key;
                 params[1] = value;
-                mappedWriteMethod.invoke(bean, params);
+                invokeMethod(mappedWriteMethod, bean, params);
             } else {
                 throw new NoSuchMethodException
                         ("Property '" + name +
@@ -1544,7 +1549,7 @@ public class PropertyUtilsBean {
           /* means that the result has to be retrieved from a map */
           Method readMethod = descriptor.getReadMethod();
           if (readMethod != null) {
-            Object invokeResult = readMethod.invoke(bean, new Object[0]);
+            Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
               ((java.util.Map)invokeResult).put(key, value);
@@ -1740,7 +1745,29 @@ public class PropertyUtilsBean {
         // Call the property setter method
         Object values[] = new Object[1];
         values[0] = value;
-        writeMethod.invoke(bean, values);
+        invokeMethod(writeMethod, bean, values);
 
+    }
+    
+    /** This just catches and wraps IllegalArgumentException. */
+    private Object invokeMethod(
+                        Method method, 
+                        Object bean, 
+                        Object[] values) 
+                            throws
+                                IllegalAccessException,
+                                InvocationTargetException {
+        try {
+            
+            return method.invoke(bean, values);
+        
+        } catch (IllegalArgumentException e) {
+            
+            log.error("Method invocation failed.", e);
+            throw new IllegalArgumentException(
+                "Cannot invoke " + method.getDeclaringClass().getName() + "." 
+                + method.getName() + " - " + e.getMessage());
+            
+        }
     }
 }
