@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.27 2002/11/19 20:20:08 rdonkin Exp $
- * $Revision: 1.27 $
- * $Date: 2002/11/19 20:20:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.28 2002/12/01 22:38:27 rdonkin Exp $
+ * $Revision: 1.28 $
+ * $Date: 2002/12/01 22:38:27 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.27 $ $Date: 2002/11/19 20:20:08 $
+ * @version $Revision: 1.28 $ $Date: 2002/12/01 22:38:27 $
  */
 
 public class BeanUtils {
@@ -178,9 +178,11 @@ public class BeanUtils {
      * silently ignored.</p>
      *
      * <p>If the origin "bean" is actually a <code>Map</code>, it is assumed
-     * to contain String-valued simple property names as the keys, pointing at
+     * to contain String-valued <strong>simple</strong> property names as the keys, pointing at
      * the corresponding property values that will be converted (if necessary)
-     * and set in the destination bean.</p>
+     * and set in the destination bean. <strong>Note</strong> that this method
+     * is intended to perform a "shallow copy" of the properties and so complex
+     * properties (for example, nested ones) will not be copied.</p>
      *
      * <p>This method differs from <code>populate()</code>, which
      * was primarily designed for populating JavaBeans from the map of request
