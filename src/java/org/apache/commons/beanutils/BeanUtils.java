@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.1 2001/04/14 18:29:56 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/04/14 18:29:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.2 2001/04/16 13:26:46 geirm Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/04/16 13:26:46 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ import java.util.Map;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.1 $ $Date: 2001/04/14 18:29:56 $
+ * @version $Revision: 1.2 $ $Date: 2001/04/16 13:26:46 $
  */
 
 public class BeanUtils {
@@ -241,7 +241,7 @@ public class BeanUtils {
         sb.append(PropertyUtils.INDEXED_DELIM);
         sb.append(index);
         sb.append(PropertyUtils.INDEXED_DELIM2);
-        Object value = PropertyUtils.getIndexedProperty(bean, name);
+        Object value = PropertyUtils.getIndexedProperty(bean, sb.toString());
         return (ConvertUtils.convert(value));
 
     }
