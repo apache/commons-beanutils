@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestResultSet.java,v 1.1 2002/07/12 22:38:21 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/12 22:38:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestResultSet.java,v 1.2 2002/12/09 22:13:36 rwaldhoff Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/12/09 22:13:36 $
  *
  * ====================================================================
  *
@@ -88,7 +88,7 @@ import java.util.Map;
  * to exercise the {@link ResultSetDyaClass} functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/07/12 22:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2002/12/09 22:13:36 $
  */
 
 public class TestResultSet implements ResultSet {
@@ -247,7 +247,7 @@ public class TestResultSet implements ResultSet {
         throw new UnsupportedOperationException();
     }
 
-
+    /** @deprecated */
     public BigDecimal getBigDecimal(int columnIndex, int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
@@ -259,6 +259,7 @@ public class TestResultSet implements ResultSet {
     }
 
 
+    /** @deprecated */
     public BigDecimal getBigDecimal(String columnName, int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
@@ -518,11 +519,13 @@ public class TestResultSet implements ResultSet {
     }
 
 
+    /** @deprecated */
     public InputStream getUnicodeStream(int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
+    /** @deprecated */
     public InputStream getUnicodeStream(String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
