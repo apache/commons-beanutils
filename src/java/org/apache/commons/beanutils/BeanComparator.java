@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.1 2002/09/10 07:01:07 bayard Exp $
- * $Revision: 1.1 $
- * $Date: 2002/09/10 07:01:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.2 2002/12/02 16:38:24 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/12/02 16:38:24 $
  *
  * ====================================================================
  *
@@ -67,7 +67,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.comparators.ComparableComparator;
 
 /**
- * Allows you to pass the name of a method in and compare two beans
+ * Allows you to pass the name of a method in and compare two beans.
  *
  * @author     <a href"mailto:epugh@upstate.com">Eric Pugh</a>
  * @created    May 5, 2002
@@ -119,6 +119,15 @@ public class BeanComparator implements Comparator, Serializable {
     public String getProperty() {
         return property;
     }
+
+
+    /**
+     * Gets the Comparator being used to compare beans.
+     */
+    public Comparator getComparator() {
+        return comparator;
+    }
+
 
     /**
      * Compare two JavaBeans by their shared property.
