@@ -59,6 +59,9 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -582,5 +585,18 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals("Set value (foo:2)", bean.getFoo(), "alpha");
         MethodUtils.invokeMethod(bean, "setBar", "beta");
         assertEquals("Set value (bar:2)", bean.getFoo(), "alpha");
+    }
+    
+    public void testParentMethod() throws Exception {
+        OutputStream os = new PrintStream(System.out);
+        PrintStream ps = new PrintStream(System.out);
+        
+        A a = new A();
+        MethodUtils.invokeMethod(a, "foo", os);
+        assertTrue("Method Invoked(1)", a.called);
+        
+        a = new A();
+        MethodUtils.invokeMethod(a, "foo", ps);
+        assertTrue("Method Invoked(2)", a.called);
     }
 }
