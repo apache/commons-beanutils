@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.29 2002/12/16 00:21:02 craigmcc Exp $
- * $Revision: 1.29 $
- * $Date: 2002/12/16 00:21:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.30 2002/12/16 00:29:48 craigmcc Exp $
+ * $Revision: 1.30 $
+ * $Date: 2002/12/16 00:29:48 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.29 $ $Date: 2002/12/16 00:21:02 $
+ * @version $Revision: 1.30 $ $Date: 2002/12/16 00:29:48 $
  */
 
 public class BeanUtils {
@@ -456,27 +456,25 @@ public class BeanUtils {
             Iterator items = ((Collection) value).iterator();
             while (items.hasNext()) {
                 Object item = items.next();
-                if (item == null)
+                if (item == null) {
                     values.add((String) null);
-                else
+                } else {
                     values.add(item.toString());
+                }
             }
             return ((String[]) values.toArray(new String[values.size()]));
         } else if (value.getClass().isArray()) {
-            ArrayList values = new ArrayList();
-            try {
-                int n = Array.getLength(value);
-                for (int i = 0; i < n; i++) {
-                    Object item = Array.get(value, i);
-                    if (item == null)
-                        values.add((String) null);
-                    else
-                        values.add(item.toString());
+            int n = Array.getLength(value);
+            String results[] = new String[n];
+            for (int i = 0; i < n; i++) {
+                Object item = Array.get(value, i);
+                if (item == null) {
+                    results[i] = null;
+                } else {
+                    results[i] = item.toString();
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ;
             }
-            return ((String[]) values.toArray(new String[values.size()]));
+            return (results);
         } else {
             String results[] = new String[1];
             results[0] = value.toString();
