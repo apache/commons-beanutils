@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.22 2002/05/17 07:25:50 jstrachan Exp $
- * $Revision: 1.22 $
- * $Date: 2002/05/17 07:25:50 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.23 2002/06/05 20:46:38 rdonkin Exp $
+ * $Revision: 1.23 $
+ * $Date: 2002/06/05 20:46:38 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.22 $ $Date: 2002/05/17 07:25:50 $
+ * @version $Revision: 1.23 $ $Date: 2002/06/05 20:46:38 $
  */
 
 public class BeanUtils {
@@ -509,8 +509,14 @@ public class BeanUtils {
 
 
     /**
-     * Set the specified property value, performing type conversions as
-     * required to conform to the type of the destination property.
+     * <p>Set the specified property value, performing type conversions as
+     * required to conform to the type of the destination property.</p>
+     *
+     * <p>If the property is read only then the method returns 
+     * without throwing an exception.</p>
+     *
+     * <p>If <code>null</code> is passed into a property expecting a primitive value,
+     * then this will be converted as if it were a <code>null</code> string.</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
@@ -619,12 +625,24 @@ public class BeanUtils {
                 return; // Skip this property setter
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
+                if (((MappedPropertyDescriptor) descriptor).getMappedWriteMethod() == null) {
+                    log.debug("Skipping read-only property");
+                    return; // Read-only, skip this property setter
+                }
                 type = ((MappedPropertyDescriptor) descriptor).
                     getMappedPropertyType();
             } else if (descriptor instanceof IndexedPropertyDescriptor) {
+                if (((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod() == null) {
+                    log.debug("Skipping read-only property");
+                    return; // Read-only, skip this property setter
+                }
                 type = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
             } else {
+                if (descriptor.getWriteMethod() == null) {
+                    log.debug("Skipping read-only property");
+                    return; // Read-only, skip this property setter
+                }
                 type = descriptor.getPropertyType();
             }
         }
@@ -652,7 +670,7 @@ public class BeanUtils {
                 newValue = value;
             }
         } else {                             // Value into scalar
-            if (value instanceof String) {
+            if (value instanceof String || (value == null && type.isPrimitive())) {
                 newValue = ConvertUtils.convert((String) value, type);
             } else if (value instanceof String[]) {
                 newValue = ConvertUtils.convert(((String[]) value)[0],

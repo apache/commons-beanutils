@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.9 2002/04/27 23:11:23 craigmcc Exp $
- * $Revision: 1.9 $
- * $Date: 2002/04/27 23:11:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.10 2002/06/05 20:46:38 rdonkin Exp $
+ * $Revision: 1.10 $
+ * $Date: 2002/06/05 20:46:38 $
  *
  * ====================================================================
  *
@@ -95,7 +95,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -472,10 +472,11 @@ public class BeanUtilsTestCase extends TestCase {
             map.put("doubleProperty", "432.0");
             // floatProperty is left at 123.0
             map.put("intProperty", "543");
-            // longProperty is left at 321
+            map.put("longProperty", null);
             map.put("shortProperty", "654");
             // stringProperty is left at "This is a string"
             map.put("writeOnlyProperty", "New writeOnlyProperty value");
+            map.put("readOnlyProperty", "New readOnlyProperty value");
 
             BeanUtils.populate(bean, map);
 
@@ -489,8 +490,8 @@ public class BeanUtilsTestCase extends TestCase {
                          (float) 0.005);
             assertEquals("intProperty is 543",
                          543, bean.getIntProperty());
-            assertEquals("longProperty is 321",
-                         (long) 321, bean.getLongProperty());
+            assertEquals("longProperty is 0",
+                         (long) 0, bean.getLongProperty());
             assertEquals("shortProperty is 654",
                          (short) 654, bean.getShortProperty());
             assertEquals("stringProperty is \"This is a string\"",
@@ -498,6 +499,9 @@ public class BeanUtilsTestCase extends TestCase {
             assertEquals("writeOnlyProperty is \"New writeOnlyProperty value\"",
                          "New writeOnlyProperty value",
                          bean.getWriteOnlyPropertyValue());
+            assertEquals("readOnlyProperty is \"Read Only String Property\"",
+                         "Read Only String Property",
+                         bean.getReadOnlyProperty());
 
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
