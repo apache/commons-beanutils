@@ -39,5 +39,12 @@
       <id>commons-beanutils</id>
       <version>1.6</version>
     </dependency>
+    <!-- Test Only -->
+    <dependency>
+        <artifactId>commons-collections-testframework</artifactId> 
+        <groupId>commons-collections</groupId>
+        <version>SNAPSHOT</version> 
+    </dependency>
+    
   </dependencies>
 </project>

@@ -29,7 +29,7 @@ import junit.framework.TestSuite;
  * <p>Test suite which runs all the test cases application to beans in collections.
  *
  * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public class BeanCollectionsTestSuite extends TestCase {
@@ -48,7 +48,7 @@ public class BeanCollectionsTestSuite extends TestCase {
         suite.addTestSuite(BeanToPropertyValueTransformerTest.class);
         suite.addTestSuite(BeanPropertyValueEqualsPredicateTest.class);
         suite.addTestSuite(BeanPropertyValueChangeClosureTest.class);
-
+        suite.addTestSuite(TestBeanMap.class);
 
         return suite;
     }

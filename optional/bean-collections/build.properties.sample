@@ -17,6 +17,7 @@ commons-collections.home = ../collections/dist
 
 # The pathname of the collections classes JAR file
 commons-collections.jar = ${commons-collections.home}/commons-collections.jar
+commons-collections.jar = ${commons-collections.home}/commons-collections-testframework-3.0-dev.jar
 
 # The home directory for the Commons logging classes distribution
 commons-logging.home = ../logging/dist
