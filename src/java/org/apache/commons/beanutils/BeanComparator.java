@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.4 2003/01/15 21:59:38 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/01/15 21:59:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.5 2003/08/25 21:05:02 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/08/25 21:05:02 $
  *
  * ====================================================================
  *
@@ -76,13 +76,27 @@ public class BeanComparator implements Comparator, Serializable {
     private String property;
     private Comparator comparator;
 
+    /** 
+     * <p>Constructs a Bean Comparator without a property set.
+     * <strong>Note</strong> that this is intended to be used 
+     * only in bean-centric environments.
+     * </p><p>
+     * Until {@link setProperty} is called with a non-null value.
+     * this comparator will compare the Objects only.
+     * </p>
+     */
+    public BeanComparator() {
+        this( null );
+    }
+
     /**
      * Creates a Bean comparator that calls the property specified 
      * on the objects.
-     * If you pass in a null, the BeanComparator defaults to comparing
+     * Defaults to comparing
      * based on the natural order, that is java.lang.Comparable.
      *
-     * @param property String name of bean property
+     * @param property String name of bean property. 
+     * If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator( String property ) {
         this( property, ComparableComparator.getInstance() );
@@ -94,6 +108,8 @@ public class BeanComparator implements Comparator, Serializable {
      *
      * @param property String method name to call to compare 
      * @param comparator      Comparator to call afterwords!
+     * If you pass in a null, the BeanComparator defaults to comparing
+     * based on the natural order, that is java.lang.Comparable.
      */
     public BeanComparator( String property, Comparator comparator ) {
         setProperty( property );
@@ -104,6 +120,7 @@ public class BeanComparator implements Comparator, Serializable {
      * Sets the method to be called to compare two JavaBeans
      *
      * @param property String method name to call to compare 
+     * If the property passed in is null then the actual objects will be compared
      */
     public void setProperty( String property ) {
         this.property = property;
@@ -113,7 +130,8 @@ public class BeanComparator implements Comparator, Serializable {
     /**
      * Gets the property attribute of the BeanComparator
      *
-     * @return String method name to call to compare
+     * @return String method name to call to compare. 
+     * A null value indicates that the actual objects will be compared
      */
     public String getProperty() {
         return property;
@@ -130,12 +148,19 @@ public class BeanComparator implements Comparator, Serializable {
 
     /**
      * Compare two JavaBeans by their shared property.
+     * If {@link getProperty} is null then the actual objects will be compared.
      *
      * @param  o1 Object The first bean to get data from to compare against
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
     public int compare( Object o1, Object o2 ) {
+        
+        if ( property == null ) {
+            // compare the actual objects
+            return comparator.compare( o1, o2 );
+        }
+        
         try {
             Object value1 = PropertyUtils.getProperty( o1, property );
             Object value2 = PropertyUtils.getProperty( o2, property );
