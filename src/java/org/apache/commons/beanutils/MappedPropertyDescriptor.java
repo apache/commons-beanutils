@@ -1,10 +1,10 @@
 /*
 
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.8 2002/03/24 09:16:11 dion Exp $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.9 2002/03/24 09:47:05 dion Exp $
 
- * $Revision: 1.8 $
+ * $Revision: 1.9 $
 
- * $Date: 2002/03/24 09:16:11 $
+ * $Date: 2002/03/24 09:47:05 $
 
  *
 
@@ -160,7 +160,7 @@ import java.security.PrivilegedAction;
 
  * @author Gregor Raýman
 
- * @version $Revision: 1.8 $ $Date: 2002/03/24 09:16:11 $
+ * @version $Revision: 1.9 $ $Date: 2002/03/24 09:47:05 $
 
  */
 
@@ -1054,79 +1054,50 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
 
         // We rely on the fact that for any given java class or
-
         // primtitive type there is a unqiue Class object, so
-
         // we can use object equivalence in the comparisons.
 
         if (a == b) {
-
             return true;
-
         }
 
         if (a == null || b == null) {
-
             return false;
-
         }
 
         for (Class x = a; x != null; x = x.getSuperclass()) {
-
             if (x == b) {
-
                 return true;
-
             }
 
             if (b.isInterface()) {
-
                 Class interfaces[] = x.getInterfaces();
-
                 for (int i = 0; i < interfaces.length; i++) {
-
                     if (isSubclass(interfaces[i], b)) {
-
                         return true;
-
                     }
-
                 }
-
             }
-
         }
 
         return false;
-
-
     }
 
 
     /**
-
      * Return true iff the given method throws the given exception.
-
      */
 
     private boolean throwsException(Method method, Class exception) {
 
-
         Class exs[] = method.getExceptionTypes();
-
         for (int i = 0; i < exs.length; i++) {
-
             if (exs[i] == exception) {
-
                 return true;
-
             }
-
         }
 
         return false;
-
-
     }
 
 
