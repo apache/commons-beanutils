@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.26 2002/07/07 23:08:41 craigmcc Exp $
- * $Revision: 1.26 $
- * $Date: 2002/07/07 23:08:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.27 2002/07/07 23:17:59 craigmcc Exp $
+ * $Revision: 1.27 $
+ * $Date: 2002/07/07 23:17:59 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.26 $ $Date: 2002/07/07 23:08:41 $
+ * @version $Revision: 1.27 $ $Date: 2002/07/07 23:17:59 $
  */
 
 public class PropertyUtils {
@@ -254,25 +254,40 @@ public class PropertyUtils {
             throw new IllegalArgumentException("No origin bean specified");
         }
 
-        PropertyDescriptor origDescriptors[] = getPropertyDescriptors(orig);
-        for (int i = 0; i < origDescriptors.length; i++) {
-            Method readMethod = origDescriptors[i].getReadMethod();
-            if ((readMethod == null) &&
-                (origDescriptors[i] instanceof IndexedPropertyDescriptor)) {
-                readMethod =
-                    ((IndexedPropertyDescriptor) origDescriptors[i]).
-                    getIndexedReadMethod();
-            }
-            if (readMethod == null) {
-                continue; // This is a write-only property
-            }
-            String name = origDescriptors[i].getName();
-            if (getPropertyDescriptor(dest, name) != null) {
+        if (orig instanceof DynaBean) {
+            DynaProperty origDescriptors[] =
+                ((DynaBean) orig).getDynaClass().getDynaProperties();
+            for (int i = 0; i < origDescriptors.length; i++) {
+                String name = origDescriptors[i].getName();
                 Object value = getSimpleProperty(orig, name);
                 try {
                     setSimpleProperty(dest, name, value);
                 } catch (NoSuchMethodException e) {
-                    ;   // Skip non-matching property
+                    ; // Skip non-matching property
+                }
+            }
+        } else {
+            PropertyDescriptor origDescriptors[] =
+                getPropertyDescriptors(orig);
+            for (int i = 0; i < origDescriptors.length; i++) {
+                Method readMethod = origDescriptors[i].getReadMethod();
+                if ((readMethod == null) &&
+                    (origDescriptors[i] instanceof IndexedPropertyDescriptor)) {
+                    readMethod =
+                        ((IndexedPropertyDescriptor) origDescriptors[i]).
+                        getIndexedReadMethod();
+                }
+                if (readMethod == null) {
+                    continue; // This is a write-only property
+                }
+                String name = origDescriptors[i].getName();
+                if (getPropertyDescriptor(dest, name) != null) {
+                    Object value = getSimpleProperty(orig, name);
+                    try {
+                        setSimpleProperty(dest, name, value);
+                    } catch (NoSuchMethodException e) {
+                        ;   // Skip non-matching property
+                    }
                 }
             }
         }
@@ -287,8 +302,6 @@ public class PropertyUtils {
      * (i.e. where the <code>getReadMethod()</code> returns non-null).</p>
      *
      * <p><strong>FIXME</strong> - Does not account for mapped properties.</p>
-     *
-     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean whose properties are to be extracted
      *
