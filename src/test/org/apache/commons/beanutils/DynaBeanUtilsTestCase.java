@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.4 2002/01/23 22:52:26 sanders Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/23 22:52:26 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.5 2002/03/11 04:49:53 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/03/11 04:49:53 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/01/23 22:52:26 $
+ * @version $Revision: 1.5 $ $Date: 2002/03/11 04:49:53 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -317,6 +317,156 @@ public class DynaBeanUtilsTestCase extends TestCase {
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
+    }
+
+    /**
+     * Test populate() method on individual array elements.
+     */
+    public void testPopulateArrayElements() {
+
+        try {
+
+            HashMap map = new HashMap();
+            map.put("intIndexed[0]", "100");
+            map.put("intIndexed[2]", "120");
+            map.put("intIndexed[4]", "140");
+
+            BeanUtils.populate(bean, map);
+            Integer intIndexed0 = (Integer) bean.get("intIndexed", 0);
+            assertEquals("intIndexed[0] is 100",
+                         100, intIndexed0.intValue());
+            Integer intIndexed1 = (Integer) bean.get("intIndexed", 1);
+            assertEquals("intIndexed[1] is 10",
+                         10, intIndexed1.intValue());
+            Integer intIndexed2 = (Integer) bean.get("intIndexed", 2);
+            assertEquals("intIndexed[2] is 120",
+                         120, intIndexed2.intValue());
+            Integer intIndexed3 = (Integer) bean.get("intIndexed", 3);
+            assertEquals("intIndexed[3] is 30",
+                         30, intIndexed3.intValue());
+            Integer intIndexed4 = (Integer) bean.get("intIndexed", 4);
+            assertEquals("intIndexed[4] is 140",
+                         140, intIndexed4.intValue());
+
+            map.clear();
+            map.put("stringIndexed[1]", "New String 1");
+            map.put("stringIndexed[3]", "New String 3");
+
+            BeanUtils.populate(bean, map);
+
+            assertEquals("stringIndexed[0] is \"String 0\"",
+                         "String 0",
+                         (String) bean.get("stringIndexed", 0));
+            assertEquals("stringIndexed[1] is \"New String 1\"",
+                         "New String 1",
+                         (String) bean.get("stringIndexed", 1));
+            assertEquals("stringIndexed[2] is \"String 2\"",
+                         "String 2",
+                         (String) bean.get("stringIndexed", 2));
+            assertEquals("stringIndexed[3] is \"New String 3\"",
+                         "New String 3",
+                         (String) bean.get("stringIndexed", 3));
+            assertEquals("stringIndexed[4] is \"String 4\"",
+                         "String 4",
+                         (String) bean.get("stringIndexed", 4));
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
+
+    /**
+     * Test populate() method on array properties as a whole.
+     */
+    public void testPopulateArrayProperties() {
+
+        try {
+
+            HashMap map = new HashMap();
+            //            int intArray[] = new int[] { 123, 456, 789 };
+            String intArrayIn[] = new String[] { "123", "456", "789" };
+            map.put("intArray", intArrayIn);
+            String stringArray[] = new String[]
+                { "New String 0", "New String 1" };
+            map.put("stringArray", stringArray);
+
+            BeanUtils.populate(bean, map);
+
+            int intArray[] = (int[]) bean.get("intArray");
+            assertNotNull("intArray is present", intArray);
+            assertEquals("intArray length",
+                         3, intArray.length);
+            assertEquals("intArray[0]", 123, intArray[0]);
+            assertEquals("intArray[1]", 456, intArray[1]);
+            assertEquals("intArray[2]", 789, intArray[2]);
+            stringArray = (String[]) bean.get("stringArray");
+            assertNotNull("stringArray is present", stringArray);
+            assertEquals("stringArray length", 2, stringArray.length);
+            assertEquals("stringArray[0]", "New String 0", stringArray[0]);
+            assertEquals("stringArray[1]", "New String 1", stringArray[1]);
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
+
+    /**
+     * Test populate() method on scalar properties.
+     */
+    public void testPopulateScalar() {
+
+        try {
+
+            HashMap map = new HashMap();
+            map.put("booleanProperty", "false");
+            // booleanSecond is left at true
+            map.put("doubleProperty", "432.0");
+            // floatProperty is left at 123.0
+            map.put("intProperty", "543");
+            // longProperty is left at 321
+            map.put("shortProperty", "654");
+            // stringProperty is left at "This is a string"
+            map.put("writeOnlyProperty", "New writeOnlyProperty value");
+
+            BeanUtils.populate(bean, map);
+
+            Boolean booleanProperty = (Boolean) bean.get("booleanProperty");
+            assertTrue("booleanProperty is false", !booleanProperty.booleanValue());
+            Boolean booleanSecond = (Boolean) bean.get("booleanSecond");
+            assertTrue("booleanSecond is true", booleanSecond.booleanValue());
+            Double doubleProperty = (Double) bean.get("doubleProperty");
+            assertEquals("doubleProperty is 432.0",
+                         (double) 432.0, doubleProperty.doubleValue(),
+                         (double) 0.005);
+            Float floatProperty = (Float) bean.get("floatProperty");
+            assertEquals("floatProperty is 123.0",
+                         (float) 123.0, floatProperty.floatValue(),
+                         (float) 0.005);
+            Integer intProperty = (Integer) bean.get("intProperty");
+            assertEquals("intProperty is 543",
+                         543, intProperty.intValue());
+            Long longProperty = (Long) bean.get("longProperty");
+            assertEquals("longProperty is 321",
+                         (long) 321, longProperty.longValue());
+            Short shortProperty = (Short) bean.get("shortProperty");
+            assertEquals("shortProperty is 654",
+                         (short) 654, shortProperty.shortValue());
+            assertEquals("stringProperty is \"This is a string\"",
+                         "This is a string",
+                         (String) bean.get("stringProperty"));
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.14 2002/03/07 06:43:17 martinc Exp $
- * $Revision: 1.14 $
- * $Date: 2002/03/07 06:43:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.15 2002/03/11 04:49:53 craigmcc Exp $
+ * $Revision: 1.15 $
+ * $Date: 2002/03/11 04:49:53 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.14 $ $Date: 2002/03/07 06:43:17 $
+ * @version $Revision: 1.15 $ $Date: 2002/03/11 04:49:53 $
  */
 
 public class BeanUtils {
@@ -499,8 +499,17 @@ public class BeanUtils {
             DynaProperty dynaProperty = null;
             try {
                 if (bean instanceof DynaBean) {
-                    dynaProperty =
-                            ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+                    String dynaName = name;
+                    int i = dynaName.indexOf(PropertyUtils.INDEXED_DELIM);
+                    if (i >= 0) {
+                        dynaName = dynaName.substring(0, i);
+                    }
+                    int j = dynaName.indexOf(PropertyUtils.MAPPED_DELIM);
+                    if (j >= 0) {
+                        dynaName = dynaName.substring(0, j);
+                    }
+                    DynaClass dynaClass = ((DynaBean) bean).getDynaClass();
+                    dynaProperty = dynaClass.getDynaProperty(dynaName);
                 } else {
                     descriptor =
                             PropertyUtils.getPropertyDescriptor(bean, name);
@@ -539,11 +548,13 @@ public class BeanUtils {
 
                 // Identify the relevant setter method (if there is one)
                 Method setter = null;
-                if (descriptor instanceof IndexedPropertyDescriptor)
+                if ((descriptor instanceof IndexedPropertyDescriptor) &&
+                    (name.indexOf(PropertyUtils.INDEXED_DELIM) > 0)) {
                     setter = ((IndexedPropertyDescriptor) descriptor).
                             getIndexedWriteMethod();
-                else if (descriptor instanceof MappedPropertyDescriptor)
+                } else if (descriptor instanceof MappedPropertyDescriptor) {
                     setter = ((MappedPropertyDescriptor) descriptor).getMappedWriteMethod();
+                }
 
                 if (setter == null)
                     setter = descriptor.getWriteMethod();
@@ -609,7 +620,31 @@ public class BeanUtils {
                 // Handle scalar and indexed properties differently
                 Object newValue = null;
                 Class type = dynaProperty.getType();
-                if (type.isArray()) {
+                String dynaName = name;
+                int index = -1;
+                String key = null;
+                int delim1 = name.indexOf(PropertyUtils.INDEXED_DELIM);
+                int delim2 = name.indexOf(PropertyUtils.INDEXED_DELIM2);
+                if (delim1 >= 0) {
+                    dynaName = name.substring(0, delim1);
+                    try {
+                        index =
+                            Integer.parseInt(name.substring(delim1+1, delim2));
+                    } catch (NumberFormatException e) {
+                        ;
+                    }
+                }
+                delim1 = name.indexOf(PropertyUtils.MAPPED_DELIM);
+                delim2 = name.indexOf(PropertyUtils.MAPPED_DELIM2);
+                if (delim1 >= 0) {
+                    dynaName = name.substring(0, delim1);
+                    try {
+                        key = name.substring(delim1 + 1, delim2);
+                    } catch (IndexOutOfBoundsException e) {
+                        ;
+                    }
+                }
+                if (type.isArray() && (index < 0)) {
                     if (value instanceof String) {
                         String values[] = new String[1];
                         values[0] = (String) value;
@@ -618,6 +653,18 @@ public class BeanUtils {
                     } else if (value instanceof String[]) {
                         newValue = ConvertUtils.convert((String[]) value,
                                 type);
+                    } else {
+                        newValue = value;
+                    }
+                } else if (type.isArray() /* && (index >= 0) */ ) {
+                    if (value instanceof String) {
+                        newValue =
+                            ConvertUtils.convert((String) value,
+                                                 type.getComponentType());
+                    } else if (value instanceof String[]) {
+                        newValue =
+                            ConvertUtils.convert(((String[]) value)[0],
+                                                 type.getComponentType());
                     } else {
                         newValue = value;
                     }
@@ -630,12 +677,19 @@ public class BeanUtils {
                     } else {
                         newValue = value;
                     }
-
                 }
 
                 // Invoke the setter method
                 try {
-                    PropertyUtils.setProperty(bean, name, newValue);
+                    if (index >= 0) {
+                        PropertyUtils.setIndexedProperty(bean, dynaName,
+                                                         index, newValue);
+                    } else if (key != null) {
+                        PropertyUtils.setMappedProperty(bean, dynaName,
+                                                        key, newValue);
+                    } else {
+                        PropertyUtils.setProperty(bean, name, newValue);
+                    }
                 } catch (NoSuchMethodException e) {
                     log.error("    CANNOT HAPPEN (setProperty())", e);
                 }
