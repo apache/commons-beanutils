@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.32 2002/10/22 06:48:32 sanders Exp $
- * $Revision: 1.32 $
- * $Date: 2002/10/22 06:48:32 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.33 2002/11/23 23:47:07 craigmcc Exp $
+ * $Revision: 1.33 $
+ * $Date: 2002/11/23 23:47:07 $
  *
  * ====================================================================
  *
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.32 $ $Date: 2002/10/22 06:48:32 $
+ * @version $Revision: 1.33 $ $Date: 2002/11/23 23:47:07 $
  */
 
 public class PropertyUtils {
@@ -277,9 +277,13 @@ public class PropertyUtils {
             while (names.hasNext()) {
                 String name = (String) names.next();
                 Object value = ((Map) orig).get(name);
-                setSimpleProperty(dest, name, value);
+                try {
+                    setSimpleProperty(dest, name, value);
+                } catch (NoSuchMethodException e) {
+                    ; // Skip non-matching property
+                }
             }
-        } else {
+        } else /* orig is a standard JavaBean */ {
             PropertyDescriptor origDescriptors[] =
                 getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
@@ -294,13 +298,11 @@ public class PropertyUtils {
                     continue; // This is a write-only property
                 }
                 String name = origDescriptors[i].getName();
-                if (getPropertyDescriptor(dest, name) != null) {
-                    Object value = getSimpleProperty(orig, name);
-                    try {
-                        setSimpleProperty(dest, name, value);
-                    } catch (NoSuchMethodException e) {
-                        ;   // Skip non-matching property
-                    }
+                Object value = getSimpleProperty(orig, name);
+                try {
+                    setSimpleProperty(dest, name, value);
+                } catch (NoSuchMethodException e) {
+                    ; // Skip non-matching property
                 }
             }
         }
@@ -969,7 +971,7 @@ public class PropertyUtils {
      * same name resolution rules used by <code>getPropertyDescriptor()</code>,
      * so if the last element of a name reference is indexed, the property
      * editor for the underlying property's class is returned.</p>
-     * 
+     *
      * <p>Note that <code>null</code> will be returned if there is no property,
      * or if there is no registered property editor class.  Because this
      * return value is ambiguous, you should determine the existence of the
