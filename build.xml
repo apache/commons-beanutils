@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.24 2002/01/09 19:27:30 craigmcc Exp $
+        $Id: build.xml,v 1.25 2002/01/09 19:42:07 craigmcc Exp $
 -->
 
 
@@ -217,6 +217,7 @@
                                 test.basic.dynabean,
                                 test.dyna.property,
                                 test.property,
+                                test.dyna.bean,
                                 test.bean,
                                 test.method
                                "
@@ -247,6 +248,15 @@
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
       <arg value="org.apache.commons.beanutils.PropertyUtilsTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+  <target name="test.dyna.bean" depends="compile.tests">
+    <echo message="Running DynaBean BeanUtils tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.DynaBeanUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>

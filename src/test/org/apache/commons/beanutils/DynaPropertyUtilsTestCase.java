@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.1 2002/01/09 19:27:30 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/01/09 19:27:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.2 2002/01/09 19:42:07 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/09 19:42:07 $
  *
  * ====================================================================
  *
@@ -80,7 +80,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/01/09 19:27:30 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/09 19:42:07 $
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {
@@ -185,6 +185,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void tearDown() {
 
         bean = null;
+        nested = null;
 
     }
 
