@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.9 2003/05/22 14:16:08 rdonkin Exp $
- * $Revision: 1.9 $
- * $Date: 2003/05/22 14:16:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.10 2003/05/24 08:14:23 rdonkin Exp $
+ * $Revision: 1.10 $
+ * $Date: 2003/05/24 08:14:23 $
  *
  * ====================================================================
  *
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.9 $ $Date: 2003/05/22 14:16:08 $
+ * @version $Revision: 1.10 $ $Date: 2003/05/24 08:14:23 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -187,8 +187,14 @@ public class BeanUtilsBean {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Clone a bean based on the available property getters and setters,
-     * even if the bean class itself does not implement Cloneable.
+     * <p>Clone a bean based on the available property getters and setters,
+     * even if the bean class itself does not implement Cloneable.</p>
+     *
+     * <p>
+     * <strong>Note:</strong> this method creates a <strong>shallow</strong> clone.
+     * In other words, any objects referred to by the bean are shared with the clone
+     * rather than being cloned in turn.
+     * </p>
      *
      * @param bean Bean to be cloned
      *
