@@ -46,7 +46,32 @@ but in real life applications, this is typically insignificant. So why not use
 these classes to speed development and then substitute faster implementations only
 where the profiler indicates there is a problem :) 
 </p>
-
+    <subsection name='Quick-Quick Guide To Functors'>
+        <p>
+Many of the classes in <code>bean-collections</code> are functor implementations
+specialized for bean properties. This is a very quick guide (aimed to let java developer
+know why functors make for elegant code).
+        </p>
+        <p>
+The word <code>functor</code> is mathematical in origin but comes into object oriented
+development from functional and logic coding. In Java terms, a functor 
+is a function that is encapsulated as an object (and so can be manipulated as an object).
+This allows elegant, concise and powerful techniques to be used. For example, 
+<a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>
+contains utilities that allow functions (as functors) to be easily applied to 
+Collections.
+        </p>
+        <p>
+This is actually pretty useful when it comes to collections of beans. It's a common 
+problem to want to extract information from a collection of beans or to change all properties
+to a particular value. Functors can be a particularly elegant way to do this. So try them!
+You might just like them!
+        </p>
+        <p>
+For more information about functors, please read the introduction to the
+<a href='http://jakarta.apache.org/commons/sandbox/functor/'>Commons Functor component</a>.
+        </p>
+    </subsection>
 </section>
 
 </body>
