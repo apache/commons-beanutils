@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.25 2002/01/09 19:42:07 craigmcc Exp $
+        $Id: build.xml,v 1.26 2002/01/12 20:44:05 craigmcc Exp $
 -->
 
 
@@ -215,6 +215,7 @@
 
   <target name="test"  depends="compile.tests,
                                 test.basic.dynabean,
+                                test.wrap.dynabean,
                                 test.dyna.property,
                                 test.property,
                                 test.dyna.bean,
@@ -230,6 +231,15 @@
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
       <arg value="org.apache.commons.beanutils.BasicDynaBeanTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+  <target name="test.wrap.dynabean" depends="compile.tests">
+    <echo message="Running WrapDynaBean tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.WrapDynaBeanTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>

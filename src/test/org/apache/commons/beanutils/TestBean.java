@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.5 2002/01/04 21:25:17 sanders Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/04 21:25:17 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.6 2002/01/12 20:44:05 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/01/12 20:44:05 $
  *
  * ====================================================================
  *
@@ -72,7 +72,7 @@ import java.util.ArrayList;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/01/04 21:25:17 $
+ * @version $Revision: 1.6 $ $Date: 2002/01/12 20:44:05 $
  */
 
 public class TestBean {
@@ -226,6 +226,12 @@ public class TestBean {
     }
 
     public void setMappedProperty(String key, String value) {
+        // Create the map the very first time
+        if (mappedProperty == null) {
+            mappedProperty = new HashMap();
+            mappedProperty.put("First Key", "First Value");
+            mappedProperty.put("Second Key", "Second Value");
+        }
         mappedProperty.put(key, value);
     }
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.19 2002/01/11 02:25:43 craigmcc Exp $
- * $Revision: 1.19 $
- * $Date: 2002/01/11 02:25:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.20 2002/01/12 20:44:05 craigmcc Exp $
+ * $Revision: 1.20 $
+ * $Date: 2002/01/12 20:44:05 $
  *
  * ====================================================================
  *
@@ -133,7 +133,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.19 $ $Date: 2002/01/11 02:25:43 $
+ * @version $Revision: 1.20 $ $Date: 2002/01/12 20:44:05 $
  */
 
 public class PropertyUtils {
@@ -581,6 +581,24 @@ public class PropertyUtils {
 
 
     /**
+     * Return the mapped property descriptors for this bean class.
+     *
+     * @param beanClass Bean class to be introspected
+     */
+    // FIXME - does not work with DynaBeans
+    public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
+
+        if (beanClass == null) {
+            return null;
+        }
+
+        // Look up any cached descriptors for this bean class
+        return (FastHashMap) mappedDescriptorsCache.get(beanClass);
+
+    }
+
+
+    /**
      * Return the mapped property descriptors for this bean.
      *
      * @param bean Bean to be introspected
@@ -591,10 +609,7 @@ public class PropertyUtils {
         if (bean == null) {
             return null;
         }
-
-        // Look up any cached descriptors for this bean class
-        Class beanClass = bean.getClass();
-        return (FastHashMap) mappedDescriptorsCache.get(beanClass);
+        return (getMappedPropertyDescriptors(bean.getClass()));
 
     }
 
@@ -806,15 +821,50 @@ public class PropertyUtils {
             }
         }
         if (result != null) {
-            if (mappedDescriptors == null) {
-                mappedDescriptors = new FastHashMap();
-                mappedDescriptors.setFast(true);
-                mappedDescriptorsCache.put
-                        (bean.getClass(), mappedDescriptors);
-            }
-            mappedDescriptors.put(name, result);
+            mappedDescriptorsCache.put(name, result);
         }
         return result;
+
+    }
+
+
+    /**
+     * Retrieve the property descriptors for the specified class, introspecting
+     * and caching them the first time a particular bean class is encountered.
+     *
+     * @param beanClass Bean class for which property descriptors are requested
+     *
+     * @exception IllegalArgumentException if <code>beanClass</code> is null
+     */
+    // FIXME - does not work with DynaBeans
+    public static PropertyDescriptor[]
+        getPropertyDescriptors(Class beanClass) {
+
+        if (beanClass == null) {
+            throw new IllegalArgumentException("No bean class specified");
+        }
+
+        // Look up any cached descriptors for this bean class
+        PropertyDescriptor descriptors[] = null;
+        descriptors =
+                (PropertyDescriptor[]) descriptorsCache.get(beanClass);
+        if (descriptors != null) {
+            return (descriptors);
+        }
+
+        // Introspect the bean and cache the generated descriptors
+        BeanInfo beanInfo = null;
+        try {
+            beanInfo = Introspector.getBeanInfo(beanClass);
+        } catch (IntrospectionException e) {
+            return (new PropertyDescriptor[0]);
+        }
+        descriptors = beanInfo.getPropertyDescriptors();
+        if (descriptors == null) {
+            descriptors = new PropertyDescriptor[0];
+        }
+        descriptorsCache.put(beanClass, descriptors);
+        return (descriptors);
 
     }
 
@@ -833,29 +883,7 @@ public class PropertyUtils {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-
-        // Look up any cached descriptors for this bean class
-        Class beanClass = bean.getClass();
-        PropertyDescriptor descriptors[] = null;
-        descriptors =
-                (PropertyDescriptor[]) descriptorsCache.get(beanClass);
-        if (descriptors != null) {
-            return (descriptors);
-        }
-
-        // Introspect the bean and cache the generated descriptors
-        BeanInfo beanInfo = null;
-        try {
-            beanInfo = Introspector.getBeanInfo(bean.getClass());
-        } catch (IntrospectionException e) {
-            return (new PropertyDescriptor[0]);
-        }
-        descriptors = beanInfo.getPropertyDescriptors();
-        if (descriptors == null) {
-            descriptors = new PropertyDescriptor[0];
-        }
-        descriptorsCache.put(beanClass, descriptors);
-        return (descriptors);
+        return (getPropertyDescriptors(bean.getClass()));
 
     }
 

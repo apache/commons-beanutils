@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.2 2002/01/11 02:25:43 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/01/11 02:25:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BasicDynaBeanTestCase.java,v 1.3 2002/01/12 20:44:05 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/01/12 20:44:05 $
  *
  * ====================================================================
  *
@@ -85,7 +85,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  * because the two classes provide similar levels of functionality.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/01/11 02:25:43 $
+ * @version $Revision: 1.3 $ $Date: 2002/01/12 20:44:05 $
  */
 
 public class BasicDynaBeanTestCase extends TestCase {
@@ -560,25 +560,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Test getSimpleProperty on an indexed property.
-     */
-    public void testGetSimpleIndexed() {
-
-        int intIndexed[] = new int[0];
-        Object value = null;
-        try {
-            value = bean.get("intIndexed");
-            assertTrue
-                ("Got correct type",
-                 intIndexed.getClass().isAssignableFrom(value.getClass()));
-        } catch (Throwable t) {
-            fail("Exception: " + t);
-        }
-
-    }
-
-
-    /**
      * Test getSimpleProperty on a int property.
      */
     public void testGetSimpleInt() {
@@ -882,31 +863,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
-
-    /**
-     * Negative test setSimpleProperty on an indexed property.
-     */
-    /*
-    public void testSetSimpleIndexed() {
-
-        try {
-            BasicDynaBean.setSimpleProperty(bean,
-                                            "stringIndexed[0]",
-                                            "New String Value");
-            fail("Should have thrown IllegalArgumentException");
-        } catch (IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (IllegalArgumentException e) {
-            ; // Correct result for this test
-        } catch (InvocationTargetException e) {
-            fail("InvocationTargetException");
-        } catch (NoSuchMethodException e) {
-            fail("NoSuchMethodException");
-        }
-
-    }
-    */
 
 
     /**

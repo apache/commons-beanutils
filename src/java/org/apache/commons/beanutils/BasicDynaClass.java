@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.4 2002/01/11 02:25:43 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/01/11 02:25:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.5 2002/01/12 20:44:05 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/12 20:44:05 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import java.util.HashMap;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/01/11 02:25:43 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/12 20:44:05 $
  */
 
 public class BasicDynaClass implements DynaClass {
@@ -187,18 +187,6 @@ public class BasicDynaClass implements DynaClass {
 
 
     /**
-     * Return the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
-     */
-    public Class getDynaBeanClass() {
-
-        return (this.dynaBeanClass);
-
-    }
-
-
-    /**
      * Return the name of this DynaClass (analogous to the
      * <code>getName()</code> method of <code>java.lang.Class</code), which
      * allows the same <code>DynaClass</code> implementation class to support
@@ -266,6 +254,21 @@ public class BasicDynaClass implements DynaClass {
             throw new InstantiationException
                 (e.getTargetException().getMessage());
         }
+
+    }
+
+
+    // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Return the Class object we will use to create new instances in the
+     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
+     * implement the <code>DynaBean</code> interface.
+     */
+    public Class getDynaBeanClass() {
+
+        return (this.dynaBeanClass);
 
     }
 
