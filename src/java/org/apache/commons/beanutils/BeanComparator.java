@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.8 2003/12/22 21:26:47 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/12/22 21:26:47 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Attic/BeanComparator.java,v 1.9 2004/01/06 20:53:15 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2004/01/06 20:53:15 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -67,9 +67,22 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.comparators.ComparableComparator;
 
 /**
- * Allows you to pass the name of a method in and compare two beans.
+ * <p>
+ * This comparator compares two beans by the specified bean property. 
+ * It is also possible to compare beans based on nested, indexed, 
+ * combined, mapped bean properties. Please see the {@link PropertyUtilsBean} 
+ * documentation for all property name possibilities. 
+ *
+ * </p><p>
+ * <strong>Note:</strong> The BeanComparator passes the values of the specified 
+ * bean property to a ComparableComparator, if no comparator is 
+ * specified in the constructor. If you are comparing two beans based 
+ * on a property that could contain "null" values, a suitable <code>Comparator</code> 
+ * or <code>ComparatorChain</code> should be supplied in the constructor. 
+ * </p>
  *
  * @author     <a href"mailto:epugh@upstate.com">Eric Pugh</a>
+ * @author Tim O'Brien 
  */
 public class BeanComparator implements Comparator, Serializable {
 
@@ -78,6 +91,7 @@ public class BeanComparator implements Comparator, Serializable {
 
     /** 
      * <p>Constructs a Bean Comparator without a property set.
+     * </p><p>
      * <strong>Note</strong> that this is intended to be used 
      * only in bean-centric environments.
      * </p><p>
@@ -90,12 +104,21 @@ public class BeanComparator implements Comparator, Serializable {
     }
 
     /**
-     * Creates a Bean comparator that calls the property specified 
-     * on the objects.
-     * Defaults to comparing
-     * based on the natural order, that is java.lang.Comparable.
+     * <p>Constructs a property-based comparator for beans.
+     * This compares two beans by the property 
+     * specified in the property parameter. This constructor creates 
+     * a <code>BeanComparator</code> that uses a <code>ComparableComparator</code>
+     * to compare the property values. 
+     * </p>
+     * 
+     * <p>Passing "null" to this constructor will cause the BeanComparator 
+     * to compare objects based on natural order, that is 
+     * <code>java.lang.Comparable</code>. 
+     * </p>
      *
-     * @param property String name of bean property. 
+     * @param property String Name of a bean property, which may contain the 
+     * name of a simple, nested, indexed, mapped, or combined 
+     * property. See {@link PropertyUtilsBean} for property query language syntax. 
      * If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator( String property ) {
@@ -103,13 +126,20 @@ public class BeanComparator implements Comparator, Serializable {
     }
 
     /**
-     * Creates a comparator that compares objects based on the method 
-     * name of two JavaBeans.
-     *
-     * @param property String method name to call to compare 
-     * @param comparator      Comparator to call afterwords!
-     * If you pass in a null, the BeanComparator defaults to comparing
-     * based on the natural order, that is java.lang.Comparable.
+     * Constructs a property-based comparator for beans.
+     * This constructor creates 
+     * a BeanComparator that uses the supplied Comparator to compare 
+     * the property values. 
+     * 
+     * @param property Name of a bean property, can contain the name 
+     * of a simple, nested, indexed, mapped, or combined 
+     * property. See {@link PropertyUtilsBean} for property query language  
+     * syntax. 
+     * @param comparator BeanComparator will pass the values of the 
+     * specified bean property to this Comparator. 
+     * If your bean property is not a comparable or 
+     * contains null values, a suitable comparator 
+     * may be supplied in this constructor.
      */
     public BeanComparator( String property, Comparator comparator ) {
         setProperty( property );
