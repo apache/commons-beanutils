@@ -46,9 +46,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     /** All logging goes through this logger */
     private static Log log = LogFactory.getLog(DecimalLocaleConverter.class);     
 
-    /** The Decimal formatter */
-    private DecimalFormat formatter = null;
-
     // ----------------------------------------------------------- Constructors
 
     /**
@@ -211,7 +208,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     public DecimalLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
-	formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
+	
     }
 
     // --------------------------------------------------------- Methods
@@ -227,7 +224,8 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      *  successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
-
+        // DecimalFormat is not thread safe so best to construct one each time
+        DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
         if (pattern != null) {
             if (locPattern) {
