@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.14 2002/11/26 23:25:57 rwaldhoff Exp $
- * $Revision: 1.14 $
- * $Date: 2002/11/26 23:25:57 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.15 2003/02/01 07:45:29 craigmcc Exp $
+ * $Revision: 1.15 $
+ * $Date: 2003/02/01 07:45:29 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ import java.util.Map;
  *
  * @author Craig R. McClanahan
  * @author Rodney Waldhoff
- * @version $Revision: 1.14 $ $Date: 2002/11/26 23:25:57 $
+ * @version $Revision: 1.15 $ $Date: 2003/02/01 07:45:29 $
  */
 
 public class TestBean {
@@ -83,11 +83,11 @@ public class TestBean {
 
     public TestBean() {
     }
-    
+
     public TestBean(String stringProperty) {
         setStringProperty(stringProperty);
     }
-    
+
     public TestBean(float floatProperty) {
         setFloatProperty(floatProperty);
     }
@@ -95,11 +95,11 @@ public class TestBean {
     public TestBean(boolean booleanProperty) {
         setBooleanProperty(booleanProperty);
     }
-    
+
     public TestBean(Boolean booleanSecond) {
         setBooleanSecond(booleanSecond.booleanValue());
     }
-    
+
     public TestBean(float floatProperty, String stringProperty) {
         setFloatProperty(floatProperty);
         setStringProperty(stringProperty);
@@ -118,7 +118,7 @@ public class TestBean {
     public TestBean(Integer intProperty) {
         setIntProperty(intProperty.intValue());
     }
-    
+
     TestBean(int intProperty) {
         setIntProperty(intProperty);
     }
@@ -128,7 +128,7 @@ public class TestBean {
         setBooleanSecond(booleanSecond);
         setStringProperty(stringProperty);
     }
-    
+
     // ------------------------------------------------------------- Properties
 
 
@@ -157,6 +157,20 @@ public class TestBean {
 
     public void setBooleanSecond(boolean booleanSecond) {
         this.booleanSecond = booleanSecond;
+    }
+
+
+    /**
+     * A byte property.
+     */
+    private byte byteProperty = (byte) 121;
+
+    public byte getByteProperty() {
+        return (this.byteProperty);
+    }
+
+    public void setByteProperty(byte byteProperty) {
+        this.byteProperty = byteProperty;
     }
 
 
@@ -400,15 +414,15 @@ public class TestBean {
     /*
      * Another nested reference to a bean containing mapp properties
      */
-    class MappedTestBean { 
+    class MappedTestBean {
         public void setValue(String key,String val) { }
         public String getValue(String key) { return "Mapped Value"; }
     }
-    
+
     private MappedTestBean mappedNested = null;
 
-    public MappedTestBean getMappedNested() { 
-        if (mappedNested == null) 
+    public MappedTestBean getMappedNested() {
+        if (mappedNested == null)
         {
             mappedNested = new MappedTestBean();
         }
@@ -510,7 +524,7 @@ public class TestBean {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-    
+
     // ------------------------------------------------------- Static Variables
 
 

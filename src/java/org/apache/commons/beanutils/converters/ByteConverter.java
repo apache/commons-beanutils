@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ByteConverter.java,v 1.5 2003/01/15 21:59:40 rdonkin Exp $
- * $Revision: 1.5 $
- * $Date: 2003/01/15 21:59:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ByteConverter.java,v 1.6 2003/02/01 07:45:29 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/02/01 07:45:29 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2003/01/15 21:59:40 $
+ * @version $Revision: 1.6 $ $Date: 2003/02/01 07:45:29 $
  * @since 1.3
  */
 
@@ -147,6 +147,8 @@ public final class ByteConverter implements Converter {
                 throw new ConversionException("No value specified");
             }
         }
+
+        // System.err.println("VALUE=" + value + ", TYPE=" + value.getClass().getName());
 
         if (value instanceof Byte) {
             return (value);

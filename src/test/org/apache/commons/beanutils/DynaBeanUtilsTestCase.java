@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.14 2003/01/03 20:32:35 craigmcc Exp $
- * $Revision: 1.14 $
- * $Date: 2003/01/03 20:32:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.15 2003/02/01 07:45:29 craigmcc Exp $
+ * $Revision: 1.15 $
+ * $Date: 2003/02/01 07:45:29 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.14 $ $Date: 2003/01/03 20:32:35 $
+ * @version $Revision: 1.15 $ $Date: 2003/02/01 07:45:29 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -104,6 +104,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     protected String describes[] =
     { "booleanProperty",
       "booleanSecond",
+      "byteProperty",
       "doubleProperty",
       "dupProperty",
       "floatProperty",
@@ -154,6 +155,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         // Initialize the DynaBean's property values (like TestBean)
         bean.set("booleanProperty", new Boolean(true));
         bean.set("booleanSecond", new Boolean(true));
+        bean.set("byteProperty", new Byte((byte) 121));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
         String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
@@ -233,6 +235,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("newInstance(): " + e);
         }
         orig.set("booleanProperty", Boolean.FALSE);
+        orig.set("byteProperty", new Byte((byte)111));
         orig.set("doubleProperty", new Double(333.33));
         orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
@@ -253,6 +256,9 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals("Copied boolean property",
                      false,
                      ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("Copied byte property",
+                     (byte) 111,
+                     ((Byte) bean.get("byteProperty")).byteValue());
         assertEquals("Copied double property",
                      333.33,
                      ((Double) bean.get("doubleProperty")).doubleValue(),
@@ -299,6 +305,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         Map map = new HashMap();
         map.put("booleanProperty", "false");
+        map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         map.put("floatProperty", "222.0");
@@ -317,6 +324,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
         // Scalar properties
         assertEquals("booleanProperty", false,
                      ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("byteProperty", (byte) 111,
+                     ((Byte) bean.get("byteProperty")).byteValue());
         assertEquals("doubleProperty", 333.0,
                      ((Double) bean.get("doubleProperty")).doubleValue(),
                      0.005);
@@ -331,7 +340,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      ((Short) bean.get("shortProperty")).shortValue());
         assertEquals("stringProperty", "New String Property",
                      (String) bean.get("stringProperty"));
-                     
+
         // Indexed Properties
         String dupProperty[] = (String[]) bean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
@@ -357,6 +366,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         // Set up an origin bean with customized properties
         TestBean orig = new TestBean();
         orig.setBooleanProperty(false);
+        orig.setByteProperty((byte) 111);
         orig.setDoubleProperty(333.33);
         orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
         orig.setIntArray(new int[] { 100, 200, 300 });
@@ -377,6 +387,9 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals("Copied boolean property",
                      false,
                      ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("Copied byte property",
+                     (byte) 111,
+                     ((Byte) bean.get("byteProperty")).byteValue());
         assertEquals("Copied double property",
                      333.33,
                      ((Double) bean.get("doubleProperty")).doubleValue(),
@@ -440,6 +453,9 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals("Value of 'booleanProperty'",
                      Boolean.TRUE,
                      (Boolean) map.get("booleanProperty"));
+        assertEquals("Value of 'byteProperty'",
+                     new Byte((byte) 121),
+                     (Byte) map.get("byteProperty"));
         assertEquals("Value of 'doubleProperty'",
                      new Double(321.0),
                      (Double) map.get("doubleProperty"));
@@ -887,6 +903,140 @@ public class DynaBeanUtilsTestCase extends TestCase {
     }
 
 
+    /**
+     * Test narrowing and widening conversions on byte.
+     */
+    public void testSetPropertyByte() throws Exception {
+
+        BeanUtils.setProperty(bean, "byteProperty", new Byte((byte) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+/*
+        BeanUtils.setProperty(bean, "byteProperty", new Double((double) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+        BeanUtils.setProperty(bean, "byteProperty", new Float((float) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+*/
+        BeanUtils.setProperty(bean, "byteProperty", new Integer((int) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+        BeanUtils.setProperty(bean, "byteProperty", new Long((long) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+        BeanUtils.setProperty(bean, "byteProperty", new Short((short) 123));
+        assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on double.
+     */
+    public void testSetPropertyDouble() throws Exception {
+
+        BeanUtils.setProperty(bean, "doubleProperty", new Byte((byte) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        BeanUtils.setProperty(bean, "doubleProperty", new Double((double) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        BeanUtils.setProperty(bean, "doubleProperty", new Float((float) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        BeanUtils.setProperty(bean, "doubleProperty", new Integer((int) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        BeanUtils.setProperty(bean, "doubleProperty", new Long((long) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        BeanUtils.setProperty(bean, "doubleProperty", new Short((short) 123));
+        assertEquals((double) 123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on float.
+     */
+    public void testSetPropertyFloat() throws Exception {
+
+        BeanUtils.setProperty(bean, "floatProperty", new Byte((byte) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+        BeanUtils.setProperty(bean, "floatProperty", new Double((double) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+        BeanUtils.setProperty(bean, "floatProperty", new Float((float) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+        BeanUtils.setProperty(bean, "floatProperty", new Integer((int) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+        BeanUtils.setProperty(bean, "floatProperty", new Long((long) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+        BeanUtils.setProperty(bean, "floatProperty", new Short((short) 123));
+        assertEquals((float) 123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on int.
+     */
+    public void testSetPropertyInteger() throws Exception {
+
+        BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+/*
+        BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+        BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+*/
+        BeanUtils.setProperty(bean, "longProperty", new Integer((int) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+        BeanUtils.setProperty(bean, "longProperty", new Long((long) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+        BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
+        assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on long.
+     */
+    public void testSetPropertyLong() throws Exception {
+
+        BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+/*
+        BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+        BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+*/
+        BeanUtils.setProperty(bean, "longProperty", new Integer((int) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+        BeanUtils.setProperty(bean, "longProperty", new Long((long) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+        BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
+        assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
+
+    }
+
+
+    /**
+     * Test narrowing and widening conversions on short.
+     */
+    public void testSetPropertyShort() throws Exception {
+
+        BeanUtils.setProperty(bean, "shortProperty", new Byte((byte) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+/*
+        BeanUtils.setProperty(bean, "shortProperty", new Double((double) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+        BeanUtils.setProperty(bean, "shortProperty", new Float((float) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+*/
+        BeanUtils.setProperty(bean, "shortProperty", new Integer((int) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+        BeanUtils.setProperty(bean, "shortProperty", new Long((long) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+        BeanUtils.setProperty(bean, "shortProperty", new Short((short) 123));
+        assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
+
+    }
+
+
     // ------------------------------------------------------ Protected Methods
 
 
@@ -904,6 +1054,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                         new DynaProperty[]{
                             new DynaProperty("booleanProperty", Boolean.TYPE),
                             new DynaProperty("booleanSecond", Boolean.TYPE),
+                            new DynaProperty("byteProperty", Byte.TYPE),
                             new DynaProperty("doubleProperty", Double.TYPE),
                             new DynaProperty("dupProperty", stringArray.getClass()),
                             new DynaProperty("floatProperty", Float.TYPE),
