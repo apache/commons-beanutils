@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.13 2002/12/09 22:33:03 rwaldhoff Exp $
- * $Revision: 1.13 $
- * $Date: 2002/12/09 22:33:03 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.14 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.14 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -86,7 +86,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.13 $ $Date: 2002/12/09 22:33:03 $
+ * @version $Revision: 1.14 $ $Date: 2003/01/15 21:59:38 $
  */
 
 

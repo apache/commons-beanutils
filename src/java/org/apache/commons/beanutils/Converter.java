@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Converter.java,v 1.3 2002/03/18 16:32:43 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2002/03/18 16:32:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Converter.java,v 1.4 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,7 +70,7 @@ package org.apache.commons.beanutils;
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
- * @version $Revision: 1.3 $ $Date: 2002/03/18 16:32:43 $
+ * @version $Revision: 1.4 $ $Date: 2003/01/15 21:59:38 $
  * @since 1.3
  */
 

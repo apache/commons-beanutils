@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.5 2003/01/12 16:04:56 rdonkin Exp $
- * $Revision: 1.5 $
- * $Date: 2003/01/12 16:04:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.6 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,7 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2003/01/12 16:04:56 $
+ * @version $Revision: 1.6 $ $Date: 2003/01/15 21:59:38 $
  */
 
 public class DynaProperty implements Serializable {

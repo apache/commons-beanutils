@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.5 2002/01/06 00:47:06 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/01/06 00:47:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.6 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.6 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,7 +72,7 @@ package org.apache.commons.beanutils;
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
- * @version $Revision: 1.5 $ $Date: 2002/01/06 00:47:06 $
+ * @version $Revision: 1.6 $ $Date: 2003/01/15 21:59:38 $
  */
 
 public interface DynaBean {

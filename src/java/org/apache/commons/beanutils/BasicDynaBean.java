@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.7 2002/12/18 06:20:40 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/12/18 06:20:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.8 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.8 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -82,7 +82,7 @@ import java.util.Map;
  * property values are <code>Serializable</code>.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.7 $ $Date: 2002/12/18 06:20:40 $
+ * @version $Revision: 1.8 $ $Date: 2003/01/15 21:59:38 $
  */
 
 public class BasicDynaBean implements DynaBean, Serializable {

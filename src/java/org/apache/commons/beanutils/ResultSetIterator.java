@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetIterator.java,v 1.1 2002/07/12 22:38:21 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/12 22:38:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetIterator.java,v 1.2 2003/01/15 21:59:39 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/01/15 21:59:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,7 @@ import java.util.NoSuchElementException;
  * represents a single row from the result set being wrapped.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/07/12 22:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003/01/15 21:59:39 $
  */
 
 public class ResultSetIterator implements DynaBean, Iterator {

@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/FloatConverter.java,v 1.4 2002/12/09 22:03:11 rwaldhoff Exp $
- * $Revision: 1.4 $
- * $Date: 2002/12/09 22:03:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/FloatConverter.java,v 1.5 2003/01/15 21:59:40 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/01/15 21:59:40 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/12/09 22:03:11 $
+ * @version $Revision: 1.5 $ $Date: 2003/01/15 21:59:40 $
  * @since 1.3
  */
 

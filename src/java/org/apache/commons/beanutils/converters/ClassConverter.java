@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ClassConverter.java,v 1.2 2002/07/22 00:24:44 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/07/22 00:24:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ClassConverter.java,v 1.3 2003/01/15 21:59:40 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/01/15 21:59:40 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,7 +76,7 @@ import org.apache.commons.beanutils.Converter;
  * will be used.</p>
  *
  * @author Tomas Viberg
- * @version $Revision: 1.2 $ $Date: 2002/07/22 00:24:44 $
+ * @version $Revision: 1.3 $ $Date: 2003/01/15 21:59:40 $
  * @since 1.4
  */
 

@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.3 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.3 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.4 2003/01/15 21:59:39 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/01/15 21:59:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ import java.util.Map;
  * standard JavaBean instances.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.3 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.4 $ $Date: 2003/01/15 21:59:39 $
  */
 
 public class WrapDynaClass implements DynaClass {

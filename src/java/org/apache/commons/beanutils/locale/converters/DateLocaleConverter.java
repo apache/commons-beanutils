@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.3 2003/01/12 21:07:45 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/12 21:07:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.4 2003/01/15 21:59:43 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/01/15 21:59:43 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without

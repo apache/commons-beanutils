@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.34 2003/01/03 20:38:11 craigmcc Exp $
- * $Revision: 1.34 $
- * $Date: 2003/01/03 20:38:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.35 2003/01/15 21:59:38 rdonkin Exp $
+ * $Revision: 1.35 $
+ * $Date: 2003/01/15 21:59:38 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.34 $ $Date: 2003/01/03 20:38:11 $
+ * @version $Revision: 1.35 $ $Date: 2003/01/15 21:59:38 $
  */
 
 public class BeanUtils {

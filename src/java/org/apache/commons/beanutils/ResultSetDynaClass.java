@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.8 2003/01/03 20:32:35 craigmcc Exp $
- * $Revision: 1.8 $
- * $Date: 2003/01/03 20:32:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.9 2003/01/15 21:59:39 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/01/15 21:59:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.8 $ $Date: 2003/01/03 20:32:35 $
+ * @version $Revision: 1.9 $ $Date: 2003/01/15 21:59:39 $
  */
 
 public class ResultSetDynaClass implements DynaClass {

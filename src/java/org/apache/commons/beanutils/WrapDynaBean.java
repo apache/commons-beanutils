@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.4 2002/10/25 00:21:01 dion Exp $
- * $Revision: 1.4 $
- * $Date: 2002/10/25 00:21:01 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaBean.java,v 1.5 2003/01/15 21:59:39 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/01/15 21:59:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ package org.apache.commons.beanutils;
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/10/25 00:21:01 $
+ * @version $Revision: 1.5 $ $Date: 2003/01/15 21:59:39 $
  */
 
 public class WrapDynaBean implements DynaBean {

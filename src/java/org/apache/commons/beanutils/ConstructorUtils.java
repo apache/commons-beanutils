@@ -3,7 +3,7 @@
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,7 +62,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
- * @version $Revision: 1.1 $ $Date: 2002/11/26 23:25:57 $
+ * @version $Revision: 1.2 $ $Date: 2003/01/15 21:59:38 $
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley

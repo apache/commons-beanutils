@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.37 2002/12/16 01:31:29 craigmcc Exp $
- * $Revision: 1.37 $
- * $Date: 2002/12/16 01:31:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.38 2003/01/15 21:59:39 rdonkin Exp $
+ * $Revision: 1.38 $
+ * $Date: 2003/01/15 21:59:39 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -132,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.37 $ $Date: 2002/12/16 01:31:29 $
+ * @version $Revision: 1.38 $ $Date: 2003/01/15 21:59:39 $
  */
 
 public class PropertyUtils {
