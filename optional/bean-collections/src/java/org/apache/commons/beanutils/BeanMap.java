@@ -42,7 +42,7 @@ import org.apache.commons.collections.Transformer;
  * If an exception occurs during attempts to get or set a property then the
  * property is considered non existent in the Map
  *
- * @version $Revision: 1.2.2.1 $ $Date: 2004/06/22 20:56:34 $
+ * @version $Revision: 1.2.2.2 $ $Date: 2004/06/22 21:07:02 $
  * 
  * @author James Strachan
  * @author Stephen Colebourne
@@ -158,6 +158,10 @@ public class BeanMap extends AbstractMap implements Cloneable {
     // Map interface
     //-------------------------------------------------------------------------
 
+    /**
+     * Renders a string representation of this object.
+     * @return a <code>String</code> representation of this object
+     */
     public String toString() {
         return "BeanMap<" + String.valueOf(bean) + ">";
     }
