@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.14 2003/10/09 20:43:15 rdonkin Exp $
- * $Revision: 1.14 $
- * $Date: 2003/10/09 20:43:15 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.15 2004/02/18 22:25:01 rdonkin Exp $
+ * $Revision: 1.15 $
+ * $Date: 2004/02/18 22:25:01 $
  *
  * ====================================================================
  * 
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.14 $ $Date: 2003/10/09 20:43:15 $
+ * @version $Revision: 1.15 $ $Date: 2004/02/18 22:25:01 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -500,11 +500,15 @@ public class BeanUtilsBean {
 
 
     /**
-     * Return the entire set of properties for which the specified bean
-     * provides a read method.  This map can be fed back to a call to
+     * <p>Return the entire set of properties for which the specified bean
+     * provides a read method. This map contains the to <code>String</code>
+     * converted property values for all properties for which a read method
+     * is provided (i.e. where the getReadMethod() returns non-null).</p>
+     *
+     * <p>This map can be fed back to a call to
      * <code>BeanUtils.populate()</code> to reconsitute the same set of
      * properties, modulo differences for read-only and write-only
-     * properties, but only if there are no indexed properties.
+     * properties, but only if there are no indexed properties.</p>
      *
      * @param bean Bean whose properties are to be extracted
      *
