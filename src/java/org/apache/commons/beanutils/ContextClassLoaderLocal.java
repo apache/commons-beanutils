@@ -20,12 +20,81 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * A value that is provided per (thread) context classloader.
- * Patterned after ThreadLocal. 
- * There is a separate value used when Thread.getContextClassLoader() is null.  
- * This mechanism provides isolation for web apps deployed in the same container. 
- * <strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in a memory leak
- * for those JVMs.
+ * An instance of this class represents a value that is provided per (thread)
+ * context classloader.
+ * 
+ * <p>Occasionally it is necessary to store data in "global" variables
+ * (including uses of the Singleton pattern). In applications which have only
+ * a single classloader such data can simply be stored as "static" members on
+ * some class. When multiple classloaders are involved, however, this approach
+ * can fail; in particular, this doesn't work when the code may be run within a
+ * servlet container or a j2ee container, and the class on which the static
+ * member is defined is loaded via a "shared" classloader that is visible to all
+ * components running within the container. This class provides a mechanism for
+ * associating data with a ClassLoader instance, which ensures that when the
+ * code runs in such a container each component gets its own copy of the
+ * "global" variable rather than unexpectedly sharing a single copy of the
+ * variable with other components that happen to be running in the same
+ * container at the same time (eg servlets or EJBs.)</p>
+ *
+ * <p>This class is strongly patterned after the java.lang.ThreadLocal
+ * class, which performs a similar task in allowing data to be associated
+ * with a particular thread.</p>
+ *
+ * <p>When code that uses this class is run as a "normal" application, ie
+ * not within a container, the effect is identical to just using a static 
+ * member variable to store the data, because Thread.getContextClassLoader
+ * always returns the same classloader (the system classloader).</p>
+ *
+ * <p>Expected usage is as follows:<br>
+ * <pre>
+ *  public class SomeClass {
+ *    private static final ContextClassLoaderLocal global 
+ *      = new ContextClassLoaderLocal() {
+ *          protected Object initialValue() {
+ *              return new String("Initial value");
+ *          };
+ *
+ *    public void testGlobal() {
+ *      String s = (String) global.get();
+ *      System.out.println("global value:" + s);
+ *      buf.set("New Value");
+ *    }
+ * </pre>
+ * </p>
+ *
+ * <p><strong>Note:</strong> This class takes some care to ensure that when
+ * a component which uses this class is "undeployed" by a container the
+ * component-specific classloader and all its associated classes (and their
+ * static variables) are garbage-collected. Unfortunately there is one
+ * scenario in which this does <i>not</i> work correctly and there
+ * is unfortunately no known workaround other than ensuring that the
+ * component (or its container) calls the "unset" method on this class for
+ * each instance of this class when the component is undeployed. The problem
+ * occurs if:
+ * <ul>
+ * <li>the class containing a static instance of this class was loaded via
+ * a shared classloader, and</li>
+ * <li>the value stored in the instance is an object whose class was loaded
+ * via the component-specific classloader (or any of the objects it refers
+ * to were loaded via that classloader).</li>
+ * </ul>
+ * The result is that the map managed by this object still contains a strong
+ * reference to the stored object, which contains a strong reference to the
+ * classloader that loaded it, meaning that although the container has
+ * "undeployed" the component the component-specific classloader and all the
+ * related classes and static variables cannot be garbage-collected. This is
+ * not expected to be an issue with the commons-beanutils library as the only
+ * classes which use this class are BeanUtilsBean and ConvertUtilsBean and
+ * there is no obvious reason for a user of the beanutils library to subclass
+ * either of those classes.</p>
+ *
+ * <p><strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in 
+ * a memory leak for those JVMs.</p>
+ *
+ * <p><strong>Note:</strong> Of course all of this would be unnecessary if
+ * containers required each component to load the full set of classes it
+ * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  * 
  * @see java.lang.Thread#getContextClassLoader  
  * @author Eric Pabst
@@ -60,11 +129,11 @@ public class ContextClassLoaderLocal {
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container. 
-     * @return the object currently associated with the 
+     * @return the object currently associated with the context-classloader of the current thread. 
      */
     public synchronized Object get() {
         // synchronizing the whole method is a bit slower 
-        // but guarentees no subtle threading problems, and there's no 
+        // but guarantees no subtle threading problems, and there's no 
         // need to synchronize valueByClassLoader
         
         // make sure that the map is given a change to purge itself
