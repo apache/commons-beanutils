@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.1 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/28 03:59:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaBean.java,v 1.2 2002/01/06 00:47:06 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/06 00:47:06 $
  *
  * ====================================================================
  *
@@ -63,7 +63,10 @@
 package org.apache.commons.beanutils;
 
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -74,7 +77,7 @@ import java.util.HashMap;
  * accessed from multiple threads simultaneously need to be synchronized.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/06 00:47:06 $
  */
 
 public class BasicDynaBean implements DynaBean {
@@ -108,19 +111,6 @@ public class BasicDynaBean implements DynaBean {
 
 
     /**
-     * Have any properties of this instance been modified since the last time
-     * that <code>setDynaModified(false)</code> was called?
-     */
-    protected boolean modified = false;
-
-
-    /**
-     * Has this DynaBean instance been declared read only?
-     */
-    protected boolean readOnly = false;
-
-
-    /**
      * The set of property values for this DynaBean, keyed by property name.
      */
     protected HashMap values = new HashMap();
@@ -130,10 +120,34 @@ public class BasicDynaBean implements DynaBean {
 
 
     /**
-     * Return the value of a simple property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Does the specified mapped property contain a value for the specified
+     * key value?
+     *
+     * @param name Name of the property to check
+     * @param key Name of the key to check
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     */
+    public boolean contains(String name, String key) {
+
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object value = values.get(name);
+        if (value == null) {
+            throw new NullPointerException
+                ("No mapped value for '" + name + "(" + key + ")'");
+        } else if (value instanceof Map) {
+            return (((Map) value).containsKey(key));
+        } else {
+            throw new IllegalArgumentException
+                ("Non-mapped property for '" + name + "(" + key + ")'");
+        }
+
+    }
+
+
+    /**
+     * Return the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      *
@@ -142,20 +156,44 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name) {
 
-        if (!values.containsKey(name))
-            throw new IllegalArgumentException
-                ("No property " + name + " exists");
+        // Return any non-null value for the specified property
+        Object value = values.get(name);
+        if (value != null) {
+            return (value);
+        } 
 
-        return (values.get(name));
+        // Return a null value for a non-primitive property
+        Class type = getPropertyDescriptor(name).getType();
+        if (!type.isPrimitive()) {
+            return (value);
+        }
+
+        // Manufacture default values for primitive properties
+        if (type == Boolean.TYPE) {
+            return (Boolean.FALSE);
+        } else if (type == Byte.TYPE) {
+            return (new Byte((byte) 0));
+        } else if (type == Character.TYPE) {
+            return (new Character((char) 0));
+        } else if (type == Double.TYPE) {
+            return (new Double((double) 0.0));
+        } else if (type == Float.TYPE) {
+            return (new Float((float) 0.0));
+        } else if (type == Integer.TYPE) {
+            return (new Integer((int) 0));
+        } else if (type == Long.TYPE) {
+            return (new Long((int) 0));
+        } else if (type == Short.TYPE) {
+            return (new Short((short) 0));
+        } else {
+            return (null);
+        }
 
     }
 
 
     /**
-     * Return the value of an indexed property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Return the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
@@ -164,23 +202,33 @@ public class BasicDynaBean implements DynaBean {
      *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the range of the underlying property
+     * @exception NullPointerException if no array or List has been
+     *  initialized for this property
      */
     public Object get(String name, int index) {
 
-        if (!values.containsKey(name))
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object value = values.get(name);
+        if (value == null) {
+            throw new NullPointerException
+                ("No indexed value for '" + name + "[" + index + "]'");
+        } else if (value.getClass().isArray()) {
+            return (Array.get(value, index));
+        } else if (value instanceof List) {
+            return ((List) value).get(index);
+        } else {
             throw new IllegalArgumentException
-                ("No property " + name + " exists");
-
-        return (null); // FIXME - get(String,int)
+                ("Non-indexed property for '" + name + "[" + index + "]'");
+        }
 
     }
 
 
     /**
-     * Return the value of a mapped property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Return the value of a mapped property with the specified name,
+     * or <code>null</code> if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
@@ -192,11 +240,17 @@ public class BasicDynaBean implements DynaBean {
      */
     public Object get(String name, String key) {
 
-        if (!values.containsKey(name))
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object value = values.get(name);
+        if (value == null) {
+            throw new NullPointerException
+                ("No mapped value for '" + name + "(" + key + ")'");
+        } else if (value instanceof Map) {
+            return (((Map) value).get(key));
+        } else {
             throw new IllegalArgumentException
-                ("No property " + name + " exists");
-
-        return (null); // FIXME - get(String, String)
+                ("Non-mapped property for '" + name + "(" + key + ")'");
+        }
 
     }
 
@@ -213,12 +267,35 @@ public class BasicDynaBean implements DynaBean {
 
 
     /**
-     * Set the value of a simple property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Remove any existing value for the specified key on the
+     * specified mapped property.
+     *
+     * @param name Name of the property for which a value is to
+     *  be removed
+     * @param key Key of the value to be removed
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     */
+    public void remove(String name, String key) {
+
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object value = values.get(name);
+        if (value == null) {
+            throw new NullPointerException
+                ("No mapped value for '" + name + "(" + key + ")'");
+        } else if (value instanceof Map) {
+            ((Map) value).remove(key);
+        } else {
+            throw new IllegalArgumentException
+                ("Non-mapped property for '" + name + "(" + key + ")'");
+        }
+
+    }
+
+
+    /**
+     * Set the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
@@ -227,38 +304,30 @@ public class BasicDynaBean implements DynaBean {
      *  converted to the type required for this property
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalStateException if the specified property exists
-     *  and is writeable, but this bean instance has been marked read only
+     * @exception NullPointerException if an attempt is made to set a
+     *  primitive property to null
      */
     public void set(String name, Object value) {
 
-        DynaProperty descriptor = dynaClass.getPropertyDescriptor(name);
-        if (descriptor == null)
-            throw new IllegalArgumentException
-                ("No property " + name + " exists");
-        if (value != null)
-            if (!descriptor.getType().isAssignableFrom(value.getClass()))
-                throw new IllegalArgumentException
-                    ("Cannot assign value of type " +
-                     value.getClass().getName() +
-                     " to property " + name);
-        if (readOnly)
-            throw new IllegalStateException
-                ("This instance is read-only");
-
-        this.modified = true;
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        if (value == null) {
+            if (descriptor.getType().isPrimitive()) {
+                throw new NullPointerException
+                    ("Primitive value for '" + name + "'");
+            }
+        } else if (!descriptor.getType().isAssignableFrom(value.getClass())) {
+            throw new ConversionException
+                ("Cannot assign value of type '" +
+                 value.getClass().getName() +
+                 "' to property '" + name + "'");
+        }
         values.put(name, value);
 
     }
 
 
     /**
-     * Set the value of an indexed property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Set the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param index Index of the property to be set
@@ -266,29 +335,38 @@ public class BasicDynaBean implements DynaBean {
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if the specified value cannot
-     *  be converted to the required property type
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IllegalStateException if the specified property exists,
-     *  but has been defined as read-only
-     * @exception IllegalStateException if the specified property exists
-     *  and is writeable, but this bean instance has been marked read only
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the range of the underlying property
      */
     public void set(String name, int index, Object value) {
 
-        ; // FIXME - set(String, int, Object)
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object prop = values.get(name);
+        if (prop == null) {
+            throw new NullPointerException
+                ("No indexed value for '" + name + "[" + index + "]'");
+        } else if (prop.getClass().isArray()) {
+            Array.set(prop, index, value);
+        } else if (prop instanceof List) {
+            try {
+                ((List) prop).set(index, value);
+            } catch (ClassCastException e) {
+                throw new ConversionException(e.getMessage());
+            }
+        } else {
+            throw new IllegalArgumentException
+                ("Non-indexed property for '" + name + "[" + index + "]'");
+        }
 
     }
 
 
     /**
-     * Set the value of a mapped property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Set the value of a mapped property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param key Key of the property to be set
@@ -296,71 +374,47 @@ public class BasicDynaBean implements DynaBean {
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if the specified value cannot
-     *  be converted to the required property type
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
-     * @exception IllegalStateException if the specified property exists,
-     *  but has been defined as read-only
-     * @exception IllegalStateException if the specified property exists
-     *  and is writeable, but this bean instance has been marked read only
      */
     public void set(String name, String key, Object value) {
 
-        ; // FIXME - set(String, String, Object)
+        DynaProperty descriptor = getPropertyDescriptor(name);
+        Object prop = values.get(name);
+        if (prop == null) {
+            throw new NullPointerException
+                ("No mapped value for '" + name + "(" + key + ")'");
+        } else if (prop instanceof Map) {
+            ((Map) prop).put(key, value);
+        } else {
+            throw new IllegalArgumentException
+                ("Non-mapped property for '" + name + "(" + key + ")'");
+        }
 
     }
 
 
-    // --------------------------------------------------------- Public Methods
+    // ------------------------------------------------------ Protected Methods
 
 
     /**
-     * Return the value of the "dynamic modified" property, which will be
-     * <code>true</code> if any dynamic property has been the subject of a
-     * <code>set()</code> method call (even if the actual value did not
-     * change) since the last time that <code>setDynaModified(false)</code>
-     * was called for this instance.
-     */
-    public boolean isModified() {
-
-        return (this.modified);
-
-    }
-
-
-    /**
-     * Return the value of the "dynamic read only" property, which will be
-     * <code>true</code> if <code>set()</code> method calls against this
-     * property will fail because this bean has been marked read-only.
-     */
-    public boolean isReadOnly() {
-
-        return (this.readOnly);
-
-    }
-
-
-    /**
-     * Set the value of the "dynamic modified" property.
+     * Return the property descriptor for the specified property name.
      *
-     * @param modified The new dynamic modified property setting
-     */
-    public void setModified(boolean modified) {
-
-        this.modified = modified;
-
-    }
-
-
-    /**
-     * Set the value of the "dynamic read only" property.
+     * @param name Name of the property for which to retrieve the descriptor
      *
-     * @param readOnly The new dynamic read only property setting
+     * @exception IllegalArgumentException if this is not a valid property
+     *  name for our DynaClass
      */
-    public void setReadOnly(boolean readOnly) {
+    protected DynaProperty getPropertyDescriptor(String name) {
 
-        this.readOnly = readOnly;
+        DynaProperty descriptor = getDynaClass().getPropertyDescriptor(name);
+        if (descriptor == null) {
+            throw new IllegalArgumentException
+                ("Invalid property name '" + name + "'");
+        }
+        return (descriptor);
 
     }
 

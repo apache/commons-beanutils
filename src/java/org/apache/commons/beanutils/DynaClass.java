@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.4 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/12/28 03:59:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaClass.java,v 1.5 2002/01/06 00:47:06 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/06 00:47:06 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.beans.PropertyDescriptor;
  * @author Craig McClanahan
  * @author Michael Smith
  * @author Paulo Gaspar
- * @version $Revision: 1.4 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/06 00:47:06 $
  */
 
 public interface DynaClass {
@@ -114,8 +114,8 @@ public interface DynaClass {
 
 
     /**
-     * Instantiate and return a new DynaBean instance, using the implementation
-     * class specified by the <code>dynaBeanClass</code> property.
+     * Instantiate and return a new DynaBean instance, associated
+     * with this DynaClass.
      *
      * @exception IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible

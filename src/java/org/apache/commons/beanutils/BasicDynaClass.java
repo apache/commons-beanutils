@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.1 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/28 03:59:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BasicDynaClass.java,v 1.2 2002/01/06 00:47:06 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/06 00:47:06 $
  *
  * ====================================================================
  *
@@ -66,6 +66,7 @@ package org.apache.commons.beanutils;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 
 
 /**
@@ -77,7 +78,7 @@ import java.lang.reflect.InvocationTargetException;
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.1 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/06 00:47:06 $
  */
 
 public class BasicDynaClass implements DynaClass {
@@ -125,7 +126,7 @@ public class BasicDynaClass implements DynaClass {
         if (dynaBeanClass != null)
             setDynaBeanClass(dynaBeanClass);
         if (properties != null)
-            this.properties = properties;
+            setProperties(properties);
 
     }
 
@@ -158,7 +159,7 @@ public class BasicDynaClass implements DynaClass {
      * The <code>DynaBean</code> implementation class we will use for
      * creating new instances.
      */
-    protected Class dynaBeanClass = null;  // BasicDynaBean.class
+    protected Class dynaBeanClass = BasicDynaBean.class;
 
 
     /**
@@ -171,6 +172,14 @@ public class BasicDynaClass implements DynaClass {
      * The set of dynamic properties that are part of this DynaClass.
      */
     protected DynaProperty properties[] = new DynaProperty[0];
+
+
+    /**
+     * The set of dynamic properties that are part of this DynaClass,
+     * keyed by the property name.  Individual descriptor instances will
+     * be the same instances as those in the <code>properties</code> list.
+     */
+    protected HashMap propertiesMap = new HashMap();
 
 
     // ------------------------------------------------------ DynaClass Methods
@@ -210,12 +219,7 @@ public class BasicDynaClass implements DynaClass {
      */
     public DynaProperty getPropertyDescriptor(String name) {
 
-        // FIXME - HashMap for better performance?
-        for (int i = 0; i < properties.length; i++) {
-            if (name.equals(properties[i].getName()))
-                return (properties[i]);
-        }
-        return (null);
+        return ((DynaProperty) propertiesMap.get(name));
 
     }
 
@@ -237,8 +241,8 @@ public class BasicDynaClass implements DynaClass {
 
 
     /**
-     * Instantiate and return a new DynaBean instance, using the implementation
-     * class specified by the <code>dynaBeanClass</code> property.
+     * Instantiate and return a new DynaBean instance, associated
+     * with this DynaClass.
      *
      * @exception IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
@@ -293,6 +297,22 @@ public class BasicDynaClass implements DynaClass {
                  " does not have an appropriate constructor");
         }
         this.dynaBeanClass = dynaBeanClass;
+
+    }
+
+
+    /**
+     * Set the list of dynamic properties supported by this DynaClass.
+     *
+     * @param properties List of dynamic properties to be supported
+     */
+    protected void setProperties(DynaProperty properties[]) {
+
+        this.properties = properties;
+        propertiesMap.clear();
+        for (int i = 0; i < properties.length; i++) {
+            propertiesMap.put(properties[i].getName(), properties[i]);
+        }
 
     }
 

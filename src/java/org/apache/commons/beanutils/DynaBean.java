@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.4 2001/12/28 03:59:41 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/12/28 03:59:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaBean.java,v 1.5 2002/01/06 00:47:06 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/06 00:47:06 $
  *
  * ====================================================================
  *
@@ -72,47 +72,63 @@ package org.apache.commons.beanutils;
  *
  * @author Craig McClanahan
  * @author Paulo Gaspar
- * @version $Revision: 1.4 $ $Date: 2001/12/28 03:59:41 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/06 00:47:06 $
  */
 
 public interface DynaBean {
 
 
     /**
-     * Return the value of a simple property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Does the specified mapped property contain a value for the specified
+     * key value?
+     *
+     * @param name Name of the property to check
+     * @param key Name of the key to check
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     */
+    public boolean contains(String name, String key);
+
+
+    /**
+     * Return the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      */
     public Object get(String name);
 
 
     /**
-     * Return the value of an indexed property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Return the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the range of the underlying property
+     * @exception NullPointerException if no array or List has been
+     *  initialized for this property
      */
     public Object get(String name, int index);
 
 
     /**
-     * Return the value of a mapped property with the specified name.  A
-     * <code>null</code> return value means that either the property does
-     * not exist, or that the property exists with a null value.  Use the
-     * <code>contains()</code> method to distinguish these cases.
+     * Return the value of a mapped property with the specified name,
+     * or <code>null</code> if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
      *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
@@ -127,29 +143,37 @@ public interface DynaBean {
 
 
     /**
-     * Set the value of a simple property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Remove any existing value for the specified key on the
+     * specified mapped property.
+     *
+     * @param name Name of the property for which a value is to
+     *  be removed
+     * @param key Key of the value to be removed
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     */
+    public void remove(String name, String key);
+
+
+    /**
+     * Set the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     * @exception NullPointerException if an attempt is made to set a
+     *  primitive property to null
      */
     public void set(String name, Object value);
 
 
     /**
-     * Set the value of an indexed property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Set the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param index Index of the property to be set
@@ -157,25 +181,18 @@ public interface DynaBean {
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if the specified value cannot
-     *  be converted to the required property type
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IllegalStateException if the specified property exists,
-     *  but has been defined as read-only
-     * @exception IllegalStateException if the specified property exists
-     *  and is writeable, but this bean instance has been marked read only
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the range of the underlying property
      */
     public void set(String name, int index, Object value);
 
 
     /**
-     * Set the value of a mapped property with the specified name.  A null
-     * value is allowed unless the underlying property type is a primitive.
-     * If there is a Converter specified for our associated DynaClass, and
-     * if the specified property is restricted to a particular data type,
-     * the Converter will be used as necessary to convert the input value to
-     * an object of the specified type.
+     * Set the value of a mapped property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param key Key of the property to be set
@@ -183,14 +200,10 @@ public interface DynaBean {
      *
      * @exception ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if the specified value cannot
-     *  be converted to the required property type
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
-     * @exception IllegalStateException if the specified property exists,
-     *  but has been defined as read-only
-     * @exception IllegalStateException if the specified property exists
-     *  and is writeable, but this bean instance has been marked read only
      */
     public void set(String name, String key, Object value);
 

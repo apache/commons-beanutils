@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConversionException.java,v 1.1 2001/12/24 23:27:04 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/12/24 23:27:04 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConversionException.java,v 1.2 2002/01/06 00:47:06 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/06 00:47:06 $
  *
  * ====================================================================
  *
@@ -74,7 +74,19 @@ package org.apache.commons.beanutils;
 public class ConversionException extends RuntimeException {
 
 
-    // No additional functionality is required
+    // ----------------------------------------------------------- Constructors
+
+
+    /**
+     * Construct a new exception with the specified message.
+     *
+     * @param message The message describing this exception
+     */
+    public ConversionException(String message) {
+
+        super(message);
+
+    }
 
 
 }
