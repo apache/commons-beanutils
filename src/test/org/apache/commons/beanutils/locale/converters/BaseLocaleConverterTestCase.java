@@ -22,7 +22,9 @@ import java.text.DateFormatSymbols;
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 
 /**
- * Base Test Case for the DecimalLocaleConverter classes.
+ * Base Test Case for the DecimalLocaleConverter classes. This class doesn't
+ * define any real tests; it just provides useful methods for the real
+ * test case classes to inherit.
  *
  * @author Niall Pemberton
  * @version $Revision$ $Date$
@@ -252,5 +254,13 @@ public class BaseLocaleConverterTestCase extends TestCase {
 
     }
 
+    /**
+     * This class isn't intended to perform any real tests; it just provides
+     * methods for the real test cases to inherit. However junit complains
+     * if a class named ..TestCase contains no test methods, so here we
+     * define a dummy one to keep it happy.
+     */
+    public void testNothing() {
+    }
 }
 
