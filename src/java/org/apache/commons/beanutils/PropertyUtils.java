@@ -39,7 +39,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.42 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision: 1.43 $ $Date: 2004/08/02 19:49:21 $
  * @see PropertyUtilsBean
  */
 
@@ -233,6 +233,7 @@ public class PropertyUtils {
      * <p>For more details see <code>PropertyUtilsBean</code>.</p>
      *
      * @see PropertyUtilsBean#getMappedPropertyDescriptors(Class)
+     * @deprecated This method should not be exposed
      */
     public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
 	
@@ -247,6 +248,7 @@ public class PropertyUtils {
      * <p>For more details see <code>PropertyUtilsBean</code>.</p>
      *
      * @see PropertyUtilsBean#getMappedPropertyDescriptors(Object)
+     * @deprecated This method should not be exposed
      */
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 

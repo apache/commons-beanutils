@@ -88,7 +88,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.14 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision: 1.15 $ $Date: 2004/08/02 19:49:21 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -574,6 +574,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param beanClass Bean class to be introspected
+     * @deprecated This method should not be exposed
      */
     public FastHashMap getMappedPropertyDescriptors(Class beanClass) {
 
@@ -593,6 +594,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean to be introspected
+     * @deprecated This method should not be exposed
      */
     public FastHashMap getMappedPropertyDescriptors(Object bean) {
 
