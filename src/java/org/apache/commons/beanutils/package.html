@@ -477,7 +477,6 @@ which you can utilize as shown in this example:</p>
   Statement stmt = conn.createStatement();
   ResultSet rs = stmt.executeQuery
     ("select account_id, name from customers");
-  ResultSetDynaClass rsdc = new ResultSetDynaClass(rs);
   Iterator rows = (new ResultSetDynaClass(rs)).iterator();
   while (rows.hasNext()) {
     DynaBean row = (DynaBean) rows.next();
