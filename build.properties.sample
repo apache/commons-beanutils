@@ -4,6 +4,9 @@ commons-collections.home = ../collections/dist
 # The pathname of the collections classes JAR file
 commons-collections.jar = ${commons-collections.home}/commons-collections.jar
 
+# The pathname of the Commons Logging JAR file
+commons-logging.jar = /java/commons-logging.jar
+
 # The directory containing your binary distribution of JUnit, 
 # version 3.7 or later
 junit.home = /usr/local/junit3.7
