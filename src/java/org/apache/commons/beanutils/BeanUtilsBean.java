@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.17 $ $Date: 2004/10/17 14:01:04 $
+ * @version $Revision$ $Date$
  * @see BeanUtils
  * @since 1.7
  */
@@ -967,7 +967,7 @@ public class BeanUtilsBean {
                 }
                 type = ((MappedPropertyDescriptor) descriptor).
                     getMappedPropertyType();
-            } else if (descriptor instanceof IndexedPropertyDescriptor) {
+            } else if (index >= 0 && descriptor instanceof IndexedPropertyDescriptor) {
                 if (((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod() == null) {
                     if (log.isDebugEnabled()) {
                         log.debug("Skipping read-only property");

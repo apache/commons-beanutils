@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.15 $ $Date: 2004/08/02 19:49:21 $
+ * @version $Revision$ $Date$
  * @see PropertyUtils
  * @since 1.7
  */
@@ -109,6 +109,8 @@ public class PropertyUtilsBean {
      */
     private FastHashMap descriptorsCache = null;
     private FastHashMap mappedDescriptorsCache = null;
+    private static final Class[] indexedListGetterArgs = new Class[0];
+    private static final Class[] indexedListSetterArgs = new Class[] {java.util.List.class};
     
     /** Log instance */
     private Log log = LogFactory.getLog(PropertyUtils.class);
@@ -901,6 +903,79 @@ public class PropertyUtilsBean {
         if (descriptors == null) {
             descriptors = new PropertyDescriptor[0];
         }
+
+        // ----------------- Workaround for Bug 28358 --------- START ------------------
+        //
+        // The following code fixes an issue where IndexedPropertyDescriptor behaves
+        // Differently in different versions of the JDK for 'indexed' properties which
+        // use java.util.List (rather than an array).
+        //
+        // If you have a Bean with the following getters/setters for an indexed property:
+        //
+        //     public List getFoo()
+        //     public Object getFoo(int index)
+        //     public void setFoo(List foo)
+        //     public void setFoo(int index, Object foo)
+        //
+        // then the IndexedPropertyDescriptor's getReadMethod() and getWriteMethod()
+        // behave as follows:
+        //
+        //     JDK 1.3.1_04: returns valid Method objects from these methods.
+        //     JDK 1.4.2_05: returns null from these methods.
+        //
+        for (int i = 0; i < descriptors.length; i++) {
+            if (descriptors[i] instanceof IndexedPropertyDescriptor) {
+                IndexedPropertyDescriptor descriptor =  (IndexedPropertyDescriptor)descriptors[i];
+                String propName = descriptor.getName().substring(0, 1).toUpperCase() +
+                                  descriptor.getName().substring(1);
+
+                if (descriptor.getReadMethod() == null) {
+                    String methodName = descriptor.getIndexedReadMethod() != null
+                                        ? descriptor.getIndexedReadMethod().getName()
+                                        : "get" + propName;
+                    Method readMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
+                                                            methodName,
+                                                            indexedListGetterArgs);
+                    if (readMethod != null) {
+                        try {
+                            descriptor.setReadMethod(readMethod);
+                        } catch(Exception e) {
+                            log.error("Error setting indexed property read method", e);
+                        }
+                    }
+                }
+                if (descriptor.getWriteMethod() == null) {
+                    String methodName = descriptor.getIndexedWriteMethod() != null
+                                      ? descriptor.getIndexedWriteMethod().getName()
+                                      : "set" + propName;
+                    Method writeMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
+                                                            methodName,
+                                                            indexedListSetterArgs);
+                    if (writeMethod == null) {
+                        Method[] methods = beanClass.getMethods();
+                        for (int j = 0; j < methods.length; j++) {
+                            if (methods[j].getName().equals(methodName)) {
+                                Class[] parameterTypes = methods[j].getParameterTypes();
+                                if (parameterTypes.length == 1 &&
+                                    List.class.isAssignableFrom(parameterTypes[0])) {
+                                    writeMethod = methods[j];
+                                    break; 
+                                }
+                            }
+                        }
+                    }
+                    if (writeMethod != null) {
+                        try {
+                            descriptor.setWriteMethod(writeMethod);
+                        } catch(Exception e) {
+                            log.error("Error setting indexed property write method", e);
+                        }
+                    }
+                }
+            }
+        }
+        // ----------------- Workaround for Bug 28358 ---------- END -------------------
+
         descriptorsCache.put(beanClass, descriptors);
         return (descriptors);
 
