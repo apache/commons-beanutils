@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertTestSuite.java,v 1.4 2004/01/05 20:56:16 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2004/01/05 20:56:16 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertTestSuite.java,v 1.5 2004/01/05 21:55:52 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2004/01/05 21:55:52 $
  *
  * ====================================================================
  * 
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 2001-2003 The Apache Software Foundation.  All rights
+ * Copyright (c) 2001-2004 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCas
  * </p>
  *
  * @author  Robert Burrell Donkin
- * @version $Revision: 1.4 $ $Date: 2004/01/05 20:56:16 $
+ * @version $Revision: 1.5 $ $Date: 2004/01/05 21:55:52 $
  */
 
 public class LocaleConvertTestSuite {
