@@ -1,7 +1,7 @@
-$Id: RELEASE-NOTES.txt,v 1.5 2002/04/29 16:36:32 craigmcc Exp $
+$Id: RELEASE-NOTES.txt,v 1.6 2002/08/13 04:42:07 sanders Exp $
 
                           Commons BeanUtils Package
-                                Version 1.3
+                                Version 1.4
                                Release Notes
 
 
@@ -15,128 +15,156 @@ BeanUtils package, and highlights changes since the previous version.
 NEW FEATURES:
 ============
 
+Initial checkin of a way to wrap DynaBean APIs around the rows in a 
+java.sql.ResultSet, along with associated test cases and docco updates.
+Please note that this does not support indexed or mapped properties.
+See org.apache.commons.beanutils.ResultSetDynaClass and ResultSetIterator.
 
-DynaBeans:
----------
+Added a new WrapDynaBean derivation, called ConvertingWrapDynaBean which will
+perform type conversion when the set(name, value) method is called.  This is
+particularly useful when using a DynaBean to wrap a bean and configuring it by
+passing in Strings
+  
 
-DynaBeans are a very simple API that allows applications to construct "bean
-like" classes dynamically at runtime, and then get and set property values
-by name, rather than requiring compiled-in accesses to specific getter and
-setter methods.  The key interfaces are:
+Infrastructure Enhancements:
+----------------------------
 
-* org.apache.commons.beanutils.DynaBean - Property access methods for a
-  DynaBean.  Simple, indexed, and mapped properties are supported.
-
-* org.apache.commons.beanutils.DynaClass - The DynaBeans equivalent of
-  java.lang.Class, which maintains a list of the properties (names and types)
-  that are valid for DynaBeans that "implement" that DynaClass.
-
-* org.apache.commons.beanutils.DynaProperty - The DynaBeans equivalent of
-  java.beans.PropertyDescriptor, which describes the name and Java type of
-  a specific property of a DynaBean.
-
-The DynaBean and DynaClass APIs are interfaces, which can be implemented in a
-large variety of ways.  To get you started, two implementations are included
-in the commons-beanutils package:
-
-* BasicDynaBean / BasicDynaClass - Supports creation of a BasicDynaClass
-  that has a specific set of properties (passed into the constructor), plus a
-  factory to create DynaBean instances that support this set of properties.
-
-* WrapDynaBean / WrapDynaClass - Each WrapDynaBean instance wraps a standard
-  JavaBean so that its properties can be accessed via the DynaBean interface
-  methods, consistent with the way any other DynaBean is accessed.
+BeanUtils can now be built using Maven. 
+See http://jakarta.apache.org/turbine/maven for more details.
 
 
-Logging:
--------
+DynaBeans Enhancements:
+-----------------------
 
-All components of the commons-beanutils package now use the commons-logging
-package for logging, which means that the BeanUtils classes will transparently
-adapt to whatever logging implementation your application is using.  Set the
-logging detail level to DEBUG or TRACE to receive debugging output.  The
-following log names are utilized (named after the calling class):
-  org.apache.commons.beanutils.BeanUtils
-  org.apache.commons.beanutils.ConvertUtils
-  org.apache.commons.beanutils.MethodUtils
-  org.apache.commons.beanutils.PropertyUtils
+Update usage documentation to note the restrictions that are due to the fact
+that the DynaBeans returned by iterator() are mapped directly to the current
+row of the result set.  If you want to use the data outside the context of
+what is supported, you need to copy it, so document one way to "clone" the
+data with standard BasicDynaBean beans.
 
+DynaProperty is now serializable.
+  
 
 BeanUtils Enhancements:
 ----------------------
 
-The populate() method now has full support for setting simple, indexed,
-mapped, and nested properties.  This support works transparently on both
-standard JavaBeans and DynaBean implementations.
+Add BeanUtils.copyProperties() and associated BeanUtils.copyProperty() method,
+plus associated unit tests.  BeanUtils.copyProperties() is similar to
+PropertyUtils.copyProperties(), but it attempts to perform type conversions
+needed to adapt to differences between the two beans.  For example, it is 
+common (especially in Struts applications) to use String properties in a form 
+bean that receives values from an HTTP form, even though your corresponding 
+model objects have int or boolean properties of the same name.  Now, you can 
+call BeanUtils.copyProperties() and have these conversions (or any other 
+conversions for which you have registered a Converter with 
+ConvertUtils.register()) automatically.
+
+BeanUtils.describe() now supports DynaBeans.
+
+'NoSuchMethod for read only properties and NullPointer when populating
+primitives' patch submitted by Tomas Viberg.  
+See http://marc.theaimsgroup.com/?l=jakarta-commons-dev&m=102331002605035&w=2
+
+Made BeanUtils.setProperty() public. This is a useful method for those wishing to
+set a single property on a bean while still making use of the default conversion
+mechanism.  
+
+
 
 
 ConvertUtils Enhancements:
 -------------------------
 
-You can now register custom implementations of the new Converter
-interface, so that your application can define its own String->Object
-conversion methodology.  A standard set of converters is supplied (in the
-org.apache.commons.beanutils.converters package) and registered for all of
-the following data types:
-* java.lang.Boolean (and boolean primitives)
-* java.lang.Byte (and byte primitives)
-* java.lang.Character (and char primitives)
-* java.lang.Double (and double primitives)
-* java.lang.Float (and float primitives)
-* java.lang.Integer (and int primitives)
-* java.lang.Long (and long primitives)
-* java.lang.Short (and short primitives)
-* java.lang.String - identity conversion
-* java.math.BigDecimal
-* java.math.BigInteger
-* java.sql.Date
-* java.sql.Time
-* java.sql.Timestamp
+Add standard String->Class converter, based on a patch provided by
+Tomas Viberg.  The only tweak I did was to make the class loading attempt
+to grab from the thread context class loader first (if it exists), and then
+from the class loader that loaded the ClassConverter class.
 
+Add new standard converters (and register them) for String to primitive
+array conversions (for example, String --> int[]), as well as
+String --> String[].  The syntax accepted by these converters is similar
+to that accepted by a Java compiler doing array initializers, with the
+following adjustments:
+  
+  * Only literal values of the appropriate type are recognized
+    (i.e. no expressions)
+  
+  * Leading and trailing "{" and "}" are allowed, but optional
+  
+  * Commas between elements are considered to be whitespace,
+    so that they are optional.
+  
+  Thus, you can initialize a three-element integer array with values
+  1, 2, and 3 with any of the following String values.
+  
+    "{ 1, 2, 3}"
+  
+    "1, 2, 3"
+  
+    "{ 1 2 3 }"
+  
+    "1 2 3"
+  
+  Quoted strings embedded in the initial String (delimited with either single
+  or double quotes) are recognized by the rules of the java.io.StreamTokenizer
+  class.  This is particularly useful in the String --> String[] converter,
+  where you can initialize array elements to a String that includes a comma
+  or embedded quote character.
+  
 
 MethodUtils Enhancements:
 ------------------------
 
-An additional mechanism for matching the actual method to be called searches
-for parameter lists that are compatible with, rather than exactly matching,
-the types specified in the call.  This more closely matches the method matching
-semantics that the Java compiler supports when determining which method should
-be called.
+Enhance BeanUtils.copyProperties() and PropertyUtils.copyProperties() such
+that, if the "origin bean" is a Map, it will be assumed to have keys that
+are simple property names and values that are the corresponding property
+values.  BeanUtils.copyProperties() will additionally pass property values
+through an appropriate Converter.
+  
+Enhance standard array Converter implementations to deal with String arrays
+as the input value.  They now create an output array of the same size, and
+perform the appropriate String->primitive conversion for each element.
+  
+Add unit tests for copyProperties() when the origin bean is a Map.
+  
+New test cases for calling static methods.
+
+Improved primitive type checking, including the ability to call methods
+containing primitive parameters by passing the apropriate wrapping class
+(eg Integer for int). 
+See: http://marc.theaimsgroup.com/?l=jakarta-commons-dev&m=102822664727735&w=2
+and  http://marc.theaimsgroup.com/?l=jakarta-commons-dev&m=102796703724338&w=2
 
 
 PropertyUtils Enhancements:
 --------------------------
 
-Elements of properties whose underlying data type is a java.util.List may now
-be retrieved and set via the getIndexedProperty() and setIndexedProperty()
-methods, even though this usage was not defined in the JavaBeans Specification.
 
-All of the property getter and setter methods transparently support operations
-on DynaBeans, as well as standard JavaBeans.  However, the methods to retrieve
-PropertyDescriptors (and related information) about DynaBeans have not been
-implemented.
+Support mapped keys that have periods in them, so that things like this
+will work correctly: 
+  PropertyUtils.getProperty("mapped_property(key.with.a.dot).blah");
+
+Support an extension to the property expression syntax that is similar to
+the way the EL in JSTL and JSP 2.0 works:  If property "a" is a Map, interpret
+"a.b" the same as "a(b)".  This is similar to what the JSP/JSTL expression
+does when interpreting "a.b" as "a['b']" if "a" is a Map.  
+
+Make PropertyUtils.copyProperties() support a DynaBean as the "orig"
+argument (it already worked as a "dest" argument).
+
+PropertyUtils.describe() now supports DynaBeans.
 
 
 BUG REPORTS ADDRESSED:
 =====================
 
-4895 Populate method doesn't work for an indexed setter for arrays
-5407 NullPointerException in BeanUtils.java when submission of form
-     with <select> results in "...&bla=&..."
-5639 java.util.List to be permitted for indexed properties
-6125 Populate method has mistaken the judgement which uses indexed
-     property
-6465 Wrong method BeanUtils.populate(), so that in Struts indexed
-     multiselects not work
-7309 Mapped properties should work against a collection object as well as
-     method definition only
-7333 Missing dependency on FastHashMap is masked
-7521 BeanUtils.populate() does not handle nested properties of DynaBeans
-7740 MethodUtils method compare bug
-7784 ConvertUtils changes long standing default conversions from null
-     to zero
-7929 PropertyUtils.getProperty fails on a class named Component
-8364 java.util.List support for getIndexedProperty()
-8627 Add "1/0" to BooleanConverter
+9868  BeanUtils.populate() throws IllegalArgumentException when setting indexed 
+      property as array.
+10478 Can't use . (dot) in mapped properties
+10655 Add ClassConverter to standard converters
+10535 DynaActionForm, BeanUtils.populate, Unknown property 'multipartRequestHandler'
+9582  Add "y/n" to BooleanConverter
+8868  ConvertUtils.convert does not support zero-length arrays
+8810  PropertyUtil.getPropertyType() should support MappedPropertyDecriptors
 
 
