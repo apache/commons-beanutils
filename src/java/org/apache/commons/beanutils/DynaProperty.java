@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.4 2002/07/13 18:03:39 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/07/13 18:03:39 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.5 2003/01/12 16:04:56 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/01/12 16:04:56 $
  *
  * ====================================================================
  *
@@ -63,7 +63,11 @@
 package org.apache.commons.beanutils;
 
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
 
@@ -72,11 +76,30 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/07/13 18:03:39 $
+ * @version $Revision: 1.5 $ $Date: 2003/01/12 16:04:56 $
  */
 
 public class DynaProperty implements Serializable {
 
+    // ----------------------------------------------------------- Constants
+    
+    /*
+     * There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * This class uses a custom serialization implementation that writes an integer
+     * for these primitive class.
+     * This list of constants are the ones used in serialization.
+     * If these values are changed, then older versions will no longer be read correctly
+     */
+    private static final int BOOLEAN_TYPE = 1;
+    private static final int BYTE_TYPE = 2;
+    private static final int CHAR_TYPE = 3;
+    private static final int DOUBLE_TYPE = 4;
+    private static final int FLOAT_TYPE = 5;
+    private static final int INT_TYPE = 6;
+    private static final int LONG_TYPE = 7;
+    private static final int SHORT_TYPE = 8;
+    
 
     // ----------------------------------------------------------- Constructors
 
@@ -122,10 +145,16 @@ public class DynaProperty implements Serializable {
 
 
     /**
-     * The Java class representing the data type of the underlying property
-     * values.
+     * <p>The Java class representing the data type of the underlying property
+     * values.</p>
+     * 
+     * <p>There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
+     * 
+     * <p><strong>Please leave this field as <code>transient</code></strong></p>
      */
-    protected Class type = null;
+    protected transient Class type = null;
 
     public Class getType() {
         return (this.type);
@@ -181,5 +210,109 @@ public class DynaProperty implements Serializable {
 
     }
 
+    // --------------------------------------------------------- Serialization helper methods
+    
+    /**
+     * Writes this object safely.
+     * There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * This method provides a workaround.
+     */
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        // safely write out type class
+        int primitiveType = 0;
+        if (Boolean.TYPE.equals(type)) {
+            primitiveType = BOOLEAN_TYPE;
+        } else if (Byte.TYPE.equals(type)) {
+            primitiveType = BYTE_TYPE;
+        } else if (Character.TYPE.equals(type)) {
+            primitiveType = CHAR_TYPE;
+        } else if (Double.TYPE.equals(type)) {
+            primitiveType = DOUBLE_TYPE;
+        } else if (Float.TYPE.equals(type)) {
+            primitiveType = FLOAT_TYPE;
+        } else if (Integer.TYPE.equals(type)) {
+            primitiveType = INT_TYPE;
+        } else if (Long.TYPE.equals(type)) {
+            primitiveType = LONG_TYPE;
+        } else if (Short.TYPE.equals(type)) {
+            primitiveType = SHORT_TYPE;
+        }	
+        
+        if (primitiveType == 0) {
+            // then it's not a primitive type
+            out.writeBoolean(false);
+            out.writeObject(type);
+        } else {
+            // we'll write out a constant instead
+            out.writeBoolean(true);
+            out.writeInt(primitiveType);
+        }
+        
+        // write out other values
+        out.defaultWriteObject();
+    }
+    
+    /**
+     * Reads field values for this object safely.
+     * There are issues with serializing primitive class types on certain JVM versions
+     * (including java 1.3).
+     * This method provides a workaround.
+     *
+     * @throws StreamCorruptedException when the stream data values are outside expected range 
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        // read back type class safely 
+        if (in.readBoolean()) {
+            // it's a type constant
+            switch (in.readInt()) {
+            
+                case BOOLEAN_TYPE:
+                    type = Boolean.TYPE;
+                    break;
+                    
+                case BYTE_TYPE:
+                    type = Byte.TYPE;
+                    break;
+                
+                case CHAR_TYPE:
+                    type = Character.TYPE;
+                    break;
+                
+                case DOUBLE_TYPE:
+                    type = Double.TYPE;
+                    break;
+                
+                case FLOAT_TYPE:
+                    type = Float.TYPE;
+                    break;
+                
+                case INT_TYPE:
+                    type = Integer.TYPE;
+                    break;
+                
+                case LONG_TYPE:
+                    type = Long.TYPE;
+                    break;
+                
+                case SHORT_TYPE:
+                    type = Short.TYPE;
+                    break;
+                
+                default:
+                    // something's gone wrong
+                    throw new StreamCorruptedException(
+                        "Invalid primitive type. "
+                        + "Check version of beanutils used to serialize is compatible.");
 
+            }
+              
+        } else {
+            // it's another class
+            type = (Class) in.readObject();
+        }
+        
+        // read other values
+        in.defaultReadObject();
+    }
 }
