@@ -50,19 +50,46 @@ import org.apache.commons.beanutils.Converter;
 public abstract class AbstractArrayConverter implements Converter {
 
 
+    // ----------------------------------------------------------- Constructors
+
+
+    /**
+     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * if a conversion error occurs.
+     */
+    public AbstractArrayConverter() {
+
+        this.defaultValue = null;
+        this.useDefault = false;
+
+    }
+
+    /**
+     * Create a {@link Converter} that will return the specified default value
+     * if a conversion error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     */
+    public AbstractArrayConverter(Object defaultValue) {
+
+        this.defaultValue = defaultValue;
+        this.useDefault = true;
+
+    }
+
     // ----------------------------------------------------- Instance Variables
+
+
+    /**
+     * <p>Model object for string arrays.</p>
+     */
+    protected static final String strings[] = new String[0];
 
 
     /**
      * The default value specified to our Constructor, if any.
      */
     protected Object defaultValue = null;
-
-
-    /**
-     * <p>Model object for string arrays.</p>
-     */
-    protected static String strings[] = new String[0];
 
 
     /**
