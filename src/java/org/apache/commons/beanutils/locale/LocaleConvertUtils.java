@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.4 2003/01/15 21:59:42 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/01/15 21:59:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtils.java,v 1.5 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -62,6 +62,7 @@
 package org.apache.commons.beanutils.locale;
 
 import org.apache.commons.beanutils.locale.converters.*;
+import org.apache.commons.beanutils.Converter;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -179,7 +180,7 @@ public class LocaleConvertUtils {
      *
      * @param value The Value to be converted
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @exception org.apache.commons.beanutils.ConversionException if thrown by an underlying Converter
      */
     public static String convert(Object value) {
         return convert(value, defaultLocale, null);
@@ -291,6 +292,20 @@ public class LocaleConvertUtils {
 
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
+
+   /**
+    * Convert an array of specified values to an array of objects of the
+    * specified class (if possible) .
+    *
+    * @param values Value to be converted (may be null)
+    * @param clazz Java array or element class to be converted to
+    *
+    * @exception ConversionException if thrown by an underlying Converter
+    */
+   public static Object convert(String values[], Class clazz) {
+
+       return convert(values, clazz, getDefaultLocale(), null);
+   }
 
     /**
      * Convert an array of specified values to an array of objects of the
@@ -449,9 +464,13 @@ public class LocaleConvertUtils {
 
         converter.put(String.class, new StringLocaleConverter(locale, applyLocalized));
 
-        converter.put(Date.class, new SqlDateLocaleConverter(locale, applyLocalized));
-        converter.put(Time.class, new SqlTimeLocaleConverter(locale, applyLocalized));
-        converter.put(Timestamp.class, new SqlTimestampLocaleConverter(locale, applyLocalized));
+        // conversion format patterns of java.sql.* types should correspond to default
+        // behaviour of toString and valueOf methods of these classes
+        converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
+        converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
+        converter.put( java.sql.Timestamp.class,
+                       new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S")
+                     );
 
         converter.setFast(true);
 

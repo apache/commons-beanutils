@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/FloatLocaleConverter.java,v 1.3 2003/01/15 21:59:43 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/15 21:59:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/FloatLocaleConverter.java,v 1.4 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -61,14 +61,17 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
+import org.apache.commons.beanutils.ConversionException;
+
 import java.util.Locale;
+import java.text.ParseException;
 
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+ * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.math.BigDecimal</code> object,
- * optionally using a default value or throwing a 
+ * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
@@ -81,7 +84,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -94,7 +97,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -107,7 +110,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -119,7 +122,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -132,7 +135,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -145,7 +148,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -159,7 +162,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -173,7 +176,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -187,7 +190,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -200,7 +203,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -214,7 +217,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -228,7 +231,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -241,4 +244,23 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
 
         super(defaultValue, locale, pattern);
     }
+
+   /**
+    * Convert the specified locale-sensitive input object into an output object of the
+    * specified type.  This method will return Float value or throw exception if value
+    * can not be stored in the Float.
+    *
+    * @param value The input object to be converted
+    * @param pattern The pattern is used for the convertion
+    *
+    * @exception ConversionException if conversion cannot be performed
+    *  successfully
+    */
+   protected Object parse(Object value, String pattern) throws ParseException {
+      final Number parsed = (Number) super.parse(value, pattern);
+      if( Math.abs(parsed.doubleValue() - parsed.floatValue()) > parsed.floatValue() * 0.00001 ) {
+         throw new ConversionException("Suplied number is not of type Float: "+parsed.longValue());
+      }
+      return new Float(parsed.floatValue()); // unlike superclass it returns Float type
+   }
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.3 2003/01/15 21:59:43 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/15 21:59:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.4 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -62,6 +62,8 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -83,6 +85,9 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
 
 
     // ----------------------------------------------------- Instance Variables
+
+    /** All logging goes through this logger */
+    private static Log log = LogFactory.getLog(DecimalLocaleConverter.class);     
 
     /** The Decimal formatter */
     private DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
@@ -265,11 +270,15 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      */
     protected Object parse(Object value, String pattern) throws ParseException {
 
-        if (locPattern) {
-            formatter.applyLocalizedPattern(pattern);
-        }
-        else {
-            formatter.applyPattern(pattern);
+        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
+        if (pattern != null) {
+            if (locPattern) {
+                formatter.applyLocalizedPattern(pattern);
+            } else {
+                formatter.applyPattern(pattern);
+            }
+        } else {
+            log.warn("No pattern provided, using default.");
         }
 
         return formatter.parse((String) value);

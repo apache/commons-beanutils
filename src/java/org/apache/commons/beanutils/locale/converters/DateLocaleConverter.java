@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.4 2003/01/15 21:59:43 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/01/15 21:59:43 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DateLocaleConverter.java,v 1.5 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -62,6 +62,8 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
 
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -78,14 +80,19 @@ import java.util.Locale;
  * if a conversion error occurs.</p>
  *
  * @author Yauheny Mikulski
+ * @author Michael Szlapa
  */
 
 public class DateLocaleConverter extends BaseLocaleConverter {
 
     // ----------------------------------------------------- Instance Variables
 
+    /** All logging goes through this logger */
+    private static Log log = LogFactory.getLog(DateLocaleConverter.class);
+
     /** The Date formatter */
-    private SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
+    private SimpleDateFormat formatter = getPattern(pattern, locale);
+
 
     // ----------------------------------------------------------- Constructors
 
@@ -283,7 +290,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @exception org.apache.commons.beanutils.ConversionException if conversion cannot be performed
      *  successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
@@ -294,5 +301,24 @@ public class DateLocaleConverter extends BaseLocaleConverter {
             formatter.applyPattern(pattern);
         }
         return formatter.parse((String) value);
+    }
+
+    /**
+     * Gets an appropriate <code>SimpleDateFormat</code> for given locale, 
+     * default Date format pattern is not provided.
+     */
+    private SimpleDateFormat getPattern(String pattern, Locale locale) {
+        // This method is a fix for null pattern, which would cause 
+        // Null pointer exception when applied
+        // Note: that many constructors default the pattern to null, 
+        // so it only makes sense to handle nulls gracefully
+        if(pattern == null) {
+            pattern = locPattern ? 
+                new SimpleDateFormat().toLocalizedPattern() : new SimpleDateFormat().toPattern();
+            log.warn("Null pattern was provided, defaulting to: " + pattern);
+        }
+        SimpleDateFormat format = new SimpleDateFormat(pattern, locale);
+        format.setLenient(false);
+        return format;
     }
 }

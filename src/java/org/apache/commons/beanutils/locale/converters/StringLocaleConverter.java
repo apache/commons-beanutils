@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/StringLocaleConverter.java,v 1.3 2003/01/15 21:59:44 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/15 21:59:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/StringLocaleConverter.java,v 1.4 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -58,10 +58,12 @@
  * <http://www.apache.org/>.
  *
  */
- 
+
 package org.apache.commons.beanutils.locale.converters;
 
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -74,10 +76,10 @@ import java.util.Locale;
 
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+ * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive object into a <code>java.lang.String</code> object,
- * optionally using a default value or throwing a 
+ * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
@@ -86,10 +88,16 @@ import java.util.Locale;
 
 public class StringLocaleConverter extends BaseLocaleConverter {
 
+    // ----------------------------------------------------- Instance Variables
+
+    /** All logging goes through this logger */
+    private static Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
+
+
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -102,7 +110,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -115,7 +123,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -127,7 +135,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -140,7 +148,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -153,7 +161,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -167,7 +175,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -181,7 +189,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -195,7 +203,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -208,7 +216,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -222,7 +230,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -236,7 +244,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -307,11 +315,15 @@ public class StringLocaleConverter extends BaseLocaleConverter {
 
         DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
 
-        if (locPattern) {
-            numberFormat.applyLocalizedPattern(pattern);
-        }
-        else {
-            numberFormat.applyPattern(pattern);
+        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
+        if (pattern != null) {
+            if (locPattern) {
+                numberFormat.applyLocalizedPattern(pattern);
+            } else {
+                numberFormat.applyPattern(pattern);
+            }
+        } else {
+            log.warn("No pattern provided, using default.");
         }
 
         return numberFormat;

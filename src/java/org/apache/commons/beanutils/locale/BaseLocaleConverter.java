@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/BaseLocaleConverter.java,v 1.3 2003/01/15 21:59:42 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/15 21:59:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/BaseLocaleConverter.java,v 1.4 2003/03/09 21:25:17 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/09 21:25:17 $
  *
  * ====================================================================
  *
@@ -62,6 +62,9 @@
 package org.apache.commons.beanutils.locale;
 
 import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -80,6 +83,9 @@ import java.util.Locale;
 public abstract class BaseLocaleConverter implements LocaleConverter {
 
     // ----------------------------------------------------- Instance Variables
+
+    /** All logging goes through this logger */
+    private static Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
     private Object defaultValue = null;
@@ -249,25 +255,24 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         if (value == null) {
             if (useDefault) {
                 return (defaultValue);
-            }
-            else {
-                throw new ConversionException("No value specified");
+            } else {
+                // symmetric beanutils function allows null
+                // so do not: throw new ConversionException("No value specified");
+                log.debug("Null value specified for conversion, returing null");
+                return null;
             }
         }
 
         try {
             if (pattern != null) {
                 return parse(value, pattern);
-            }
-            else {
+            } else {
                 return parse(value, this.pattern);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             if (useDefault) {
                 return (defaultValue);
-            }
-            else {
+            } else {
                 throw new ConversionException(e);
             }
         }

@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.50 2003/02/18 22:50:08 rdonkin Exp $
+        $Id: build.xml,v 1.51 2003/03/09 21:25:16 rdonkin Exp $
 -->
 
 
@@ -262,7 +262,7 @@
                                 test.dyna.result,
                                 test.dyna.row,
                                 test.bean.comparator,
-                                test.locale.converters
+                                test.locale.convert
                                "
    description="Run all unit test cases">
   </target>
@@ -433,7 +433,7 @@
     </java>
   </target>
   
-  <target name="test.locale.converters" depends="compile.tests">
+  <target name="test.locale.convert" depends="compile.tests">
     <echo message="Running Locale converters tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
@@ -443,7 +443,7 @@
                  value="${test.log}"/>
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
-      <arg value="org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCase"/>
+      <arg value="org.apache.commons.beanutils.locale.LocaleConvertTestSuite"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
