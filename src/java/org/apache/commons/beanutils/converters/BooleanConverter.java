@@ -1,6 +1,6 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/Converter.java,v 1.3 2002/03/18 16:32:43 craigmcc Exp $
- * $Revision: 1.3 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BooleanConverter.java,v 1.1 2002/03/18 16:32:43 craigmcc Exp $
+ * $Revision: 1.1 $
  * $Date: 2002/03/18 16:32:43 $
  *
  * ====================================================================
@@ -60,21 +60,64 @@
  */
 
 
-package org.apache.commons.beanutils;
+package org.apache.commons.beanutils.converters;
+
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>General purpose data type converter that can be registered and used
- * within the BeanUtils package to manage the conversion of objects from
- * one type to another.
+ * <p>Standard {@link Converter} implementation that converts an incoming
+ * String into a <code>java.lang.Boolean</code> object, optionally using a
+ * default value or throwing a {@link ConversionException} if a conversion
+ * error occurs.</p>
  *
- * @author Craig McClanahan
- * @author Paulo Gaspar
- * @version $Revision: 1.3 $ $Date: 2002/03/18 16:32:43 $
+ * @author Craig R. McClanahan
+ * @version $Revision: 1.1 $ $Date: 2002/03/18 16:32:43 $
  * @since 1.3
  */
 
-public interface Converter {
+public final class BooleanConverter implements Converter {
+
+
+    // ----------------------------------------------------------- Constructors
+
+
+    /**
+     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * if a conversion error occurs.
+     */
+    public BooleanConverter() {
+
+        this(null);
+
+    }
+
+
+    /**
+     * Create a {@link Converter} that will return the specified default value
+     * if a conversion error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     */
+    public BooleanConverter(Object defaultValue) {
+
+        this.defaultValue = defaultValue;
+
+    }
+
+
+    // ----------------------------------------------------- Instance Variables
+
+
+    /**
+     * The default value specified to our Constructor, if any.
+     */
+    private Object defaultValue = null;
+
+
+    // --------------------------------------------------------- Public Methods
 
 
     /**
@@ -87,7 +130,40 @@ public interface Converter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(Class type, Object value);
+    public Object convert(Class type, Object value) {
+
+        if (value == null) {
+            if (defaultValue != null) {
+                return (defaultValue);
+            } else {
+                throw new ConversionException("No value specified");
+            }
+        }
+
+        try {
+            String stringValue = (String) value;
+            if (stringValue.equalsIgnoreCase("yes") ||
+                stringValue.equalsIgnoreCase("true") ||
+                stringValue.equalsIgnoreCase("on")) {
+                return (Boolean.TRUE);
+            } else if (stringValue.equalsIgnoreCase("no") ||
+                       stringValue.equalsIgnoreCase("false") ||
+                       stringValue.equalsIgnoreCase("off")) {
+                return (Boolean.FALSE);
+            } else if (defaultValue != null) {
+                return (defaultValue);
+            } else {
+                throw new ConversionException(stringValue);
+            }
+        } catch (ClassCastException e) {
+            if (defaultValue != null) {
+                return (defaultValue);
+            } else {
+                throw new ConversionException(e);
+            }
+        }
+
+    }
 
 
 }

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConversionException.java,v 1.4 2002/03/18 16:32:42 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/03/18 16:32:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BigIntegerConverter.java,v 1.1 2002/03/18 16:32:43 craigmcc Exp $
+ * $Revision: 1.1 $
+ * $Date: 2002/03/18 16:32:43 $
  *
  * ====================================================================
  *
@@ -60,74 +60,97 @@
  */
 
 
-package org.apache.commons.beanutils;
+package org.apache.commons.beanutils.converters;
+
+
+import java.math.BigInteger;
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>A <strong>ConversionException</strong> indicates that a call to
- * <code>Converter.convert()</code> has failed to complete successfully.
+ * <p>Standard {@link Converter} implementation that converts an incoming
+ * String into a <code>java.math.BigInteger</code> object, optionally using a
+ * default value or throwing a {@link ConversionException} if a conversion
+ * error occurs.</p>
  *
- * @author Craig McClanahan
- * @author Paulo Gaspar
+ * @author Craig R. McClanahan
+ * @version $Revision: 1.1 $ $Date: 2002/03/18 16:32:43 $
  * @since 1.3
  */
 
-public class ConversionException extends RuntimeException {
+public final class BigIntegerConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors
 
 
     /**
-     * Construct a new exception with the specified message.
-     *
-     * @param message The message describing this exception
+     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * if a conversion error occurs.
      */
-    public ConversionException(String message) {
+    public BigIntegerConverter() {
 
-        super(message);
+        this(null);
 
     }
 
 
     /**
-     * Construct a new exception with the specified message and root cause.
+     * Create a {@link Converter} that will return the specified default value
+     * if a conversion error occurs.
      *
-     * @param message The message describing this exception
-     * @param cause The root cause of this exception
+     * @param defaultValue The default value to be returned
      */
-    public ConversionException(String message, Throwable cause) {
+    public BigIntegerConverter(Object defaultValue) {
 
-        super(message);
-        this.cause = cause;
+        this.defaultValue = defaultValue;
 
     }
 
 
+    // ----------------------------------------------------- Instance Variables
+
+
     /**
-     * Construct a new exception with the specified root cause.
+     * The default value specified to our Constructor, if any.
+     */
+    private Object defaultValue = null;
+
+
+    // --------------------------------------------------------- Public Methods
+
+
+    /**
+     * Convert the specified input object into an output object of the
+     * specified type.
      *
-     * @param cause The root cause of this exception
+     * @param type Data type to which this value should be converted
+     * @param value The input value to be converted
+     *
+     * @exception ConversionException if conversion cannot be performed
+     *  successfully
      */
-    public ConversionException(Throwable cause) {
+    public Object convert(Class type, Object value) {
 
-        super(cause.getMessage());
-        this.cause = cause;
+        if (value == null) {
+            if (defaultValue != null) {
+                return (defaultValue);
+            } else {
+                throw new ConversionException("No value specified");
+            }
+        }
 
-    }
+        try {
+            return (new BigInteger((String) value));
+        } catch (Exception e) {
+            if (defaultValue != null) {
+                return (defaultValue);
+            } else {
+                throw new ConversionException(e);
+            }
+        }
 
-
-    // ------------------------------------------------------------- Properties
-
-
-    /**
-     * The root cause of this <code>ConversionException</code>, compatible with
-     * JDK 1.4's extensions to <code>java.lang.Throwable</code>.
-     */
-    protected Throwable cause = null;
-
-    public Throwable getCause() {
-        return (this.cause);
     }
 
 

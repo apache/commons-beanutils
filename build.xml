@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.29 2002/01/23 22:32:53 sanders Exp $
+        $Id: build.xml,v 1.30 2002/03/18 16:32:42 craigmcc Exp $
 -->
 
 
@@ -110,6 +110,17 @@
 
   <!-- The test runner to execute -->
   <property name="test.runner"             value="junit.textui.TestRunner"/>
+
+  <!-- The Commons Logger LogFactory implementation to use -->
+  <property name="test.factory"
+           value="org.apache.commons.logging.impl.LogFactoryImpl"/>
+
+  <!-- The Commons Logger Log implementation to use (standard factory) -->
+  <property name="test.log"
+           value="org.apache.commons.logging.impl.SimpleLog"/>
+
+  <!-- The Commons Logger SimpleLog level for testing -->
+  <property name="test.level"               value="error"/>
 
 
 <!-- ========== Executable Targets ======================================== -->
@@ -245,6 +256,7 @@
                                 test.property,
                                 test.dyna.bean,
                                 test.bean,
+                                test.convert,
                                 test.method
                                "
    description="Run all unit test cases">
@@ -255,6 +267,12 @@
     <echo message="Running BasicDynaBean tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.BasicDynaBeanTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
@@ -264,6 +282,12 @@
     <echo message="Running WrapDynaBean tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.WrapDynaBeanTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
@@ -273,6 +297,12 @@
     <echo message="Running DynaBean PropertyUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.DynaPropertyUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
@@ -282,6 +312,12 @@
     <echo message="Running PropertyUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.PropertyUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
@@ -291,6 +327,12 @@
     <echo message="Running DynaBean BeanUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.DynaBeanUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
@@ -300,7 +342,28 @@
     <echo message="Running BeanUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.BeanUtilsTestCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+ <target name="test.convert" depends="compile.tests">
+    <echo message="Running ConvertUtils tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.ConvertUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
@@ -309,6 +372,12 @@
     <echo message="Running MethodUtils tests ..."/>
     <java classname="${test.runner}" fork="yes"
         failonerror="${test.failonerror}">
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.MethodUtilsTestCase"/>
       <classpath refid="test.classpath"/>
     </java>

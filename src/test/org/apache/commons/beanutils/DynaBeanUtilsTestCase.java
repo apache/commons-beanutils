@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.5 2002/03/11 04:49:53 craigmcc Exp $
- * $Revision: 1.5 $
- * $Date: 2002/03/11 04:49:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.6 2002/03/18 16:32:43 craigmcc Exp $
+ * $Revision: 1.6 $
+ * $Date: 2002/03/18 16:32:43 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.5 $ $Date: 2002/03/11 04:49:53 $
+ * @version $Revision: 1.6 $ $Date: 2002/03/18 16:32:43 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -189,6 +189,45 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test populate() method on array properties as a whole.
+     */
+    public void testPopulateArrayProperties() {
+
+        try {
+
+            HashMap map = new HashMap();
+            //            int intArray[] = new int[] { 123, 456, 789 };
+            String intArrayIn[] = new String[] { "123", "456", "789" };
+            map.put("intArray", intArrayIn);
+            String stringArray[] = new String[]
+                { "New String 0", "New String 1" };
+            map.put("stringArray", stringArray);
+
+            BeanUtils.populate(bean, map);
+
+            int intArray[] = (int[]) bean.get("intArray");
+            assertNotNull("intArray is present", intArray);
+            assertEquals("intArray length",
+                         3, intArray.length);
+            assertEquals("intArray[0]", 123, intArray[0]);
+            assertEquals("intArray[1]", 456, intArray[1]);
+            assertEquals("intArray[2]", 789, intArray[2]);
+            stringArray = (String[]) bean.get("stringArray");
+            assertNotNull("stringArray is present", stringArray);
+            assertEquals("stringArray length", 2, stringArray.length);
+            assertEquals("stringArray[0]", "New String 0", stringArray[0]);
+            assertEquals("stringArray[1]", "New String 1", stringArray[1]);
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
 
 
     /**
@@ -369,44 +408,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
             assertEquals("stringIndexed[4] is \"String 4\"",
                          "String 4",
                          (String) bean.get("stringIndexed", 4));
-
-        } catch (IllegalAccessException e) {
-            fail("IllegalAccessException");
-        } catch (InvocationTargetException e) {
-            fail("InvocationTargetException");
-        }
-
-    }
-
-    /**
-     * Test populate() method on array properties as a whole.
-     */
-    public void testPopulateArrayProperties() {
-
-        try {
-
-            HashMap map = new HashMap();
-            //            int intArray[] = new int[] { 123, 456, 789 };
-            String intArrayIn[] = new String[] { "123", "456", "789" };
-            map.put("intArray", intArrayIn);
-            String stringArray[] = new String[]
-                { "New String 0", "New String 1" };
-            map.put("stringArray", stringArray);
-
-            BeanUtils.populate(bean, map);
-
-            int intArray[] = (int[]) bean.get("intArray");
-            assertNotNull("intArray is present", intArray);
-            assertEquals("intArray length",
-                         3, intArray.length);
-            assertEquals("intArray[0]", 123, intArray[0]);
-            assertEquals("intArray[1]", 456, intArray[1]);
-            assertEquals("intArray[2]", 789, intArray[2]);
-            stringArray = (String[]) bean.get("stringArray");
-            assertNotNull("stringArray is present", stringArray);
-            assertEquals("stringArray length", 2, stringArray.length);
-            assertEquals("stringArray[0]", "New String 0", stringArray[0]);
-            assertEquals("stringArray[1]", "New String 1", stringArray[1]);
 
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConversionException.java,v 1.4 2002/03/18 16:32:42 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/03/18 16:32:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/StringConverter.java,v 1.1 2002/03/18 16:32:43 craigmcc Exp $
+ * $Revision: 1.1 $
+ * $Date: 2002/03/18 16:32:43 $
  *
  * ====================================================================
  *
@@ -60,74 +60,48 @@
  */
 
 
-package org.apache.commons.beanutils;
+package org.apache.commons.beanutils.converters;
+
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>A <strong>ConversionException</strong> indicates that a call to
- * <code>Converter.convert()</code> has failed to complete successfully.
+ * <p>Standard {@link Converter} implementation that converts an incoming
+ * String into a <code>java.lang.String</code> object, optionally using a
+ * default value or throwing a {@link ConversionException} if a conversion
+ * error occurs.</p>
  *
- * @author Craig McClanahan
- * @author Paulo Gaspar
+ * @author Craig R. McClanahan
+ * @version $Revision: 1.1 $ $Date: 2002/03/18 16:32:43 $
  * @since 1.3
  */
 
-public class ConversionException extends RuntimeException {
+public final class StringConverter implements Converter {
 
 
-    // ----------------------------------------------------------- Constructors
+    // --------------------------------------------------------- Public Methods
 
 
     /**
-     * Construct a new exception with the specified message.
+     * Convert the specified input object into an output object of the
+     * specified type.
      *
-     * @param message The message describing this exception
-     */
-    public ConversionException(String message) {
-
-        super(message);
-
-    }
-
-
-    /**
-     * Construct a new exception with the specified message and root cause.
+     * @param type Data type to which this value should be converted
+     * @param value The input value to be converted
      *
-     * @param message The message describing this exception
-     * @param cause The root cause of this exception
+     * @exception ConversionException if conversion cannot be performed
+     *  successfully
      */
-    public ConversionException(String message, Throwable cause) {
+    public Object convert(Class type, Object value) {
 
-        super(message);
-        this.cause = cause;
+        if (value == null) {
+            return ((String) null);
+        } else {
+            return (value.toString());
+        }
 
-    }
-
-
-    /**
-     * Construct a new exception with the specified root cause.
-     *
-     * @param cause The root cause of this exception
-     */
-    public ConversionException(Throwable cause) {
-
-        super(cause.getMessage());
-        this.cause = cause;
-
-    }
-
-
-    // ------------------------------------------------------------- Properties
-
-
-    /**
-     * The root cause of this <code>ConversionException</code>, compatible with
-     * JDK 1.4's extensions to <code>java.lang.Throwable</code>.
-     */
-    protected Throwable cause = null;
-
-    public Throwable getCause() {
-        return (this.cause);
     }
 
 

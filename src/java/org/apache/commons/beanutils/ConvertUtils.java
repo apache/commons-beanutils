@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.6 2002/03/18 00:52:41 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/03/18 00:52:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.7 2002/03/18 16:32:42 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/03/18 16:32:42 $
  *
  * ====================================================================
  *
@@ -64,21 +64,73 @@ package org.apache.commons.beanutils;
 
 
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import org.apache.commons.beanutils.converters.BigDecimalConverter;
+import org.apache.commons.beanutils.converters.BigIntegerConverter;
+import org.apache.commons.beanutils.converters.BooleanConverter;
+import org.apache.commons.beanutils.converters.ByteConverter;
+import org.apache.commons.beanutils.converters.CharacterConverter;
+import org.apache.commons.beanutils.converters.DoubleConverter;
+import org.apache.commons.beanutils.converters.FloatConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.LongConverter;
+import org.apache.commons.beanutils.converters.ShortConverter;
+import org.apache.commons.beanutils.converters.SqlDateConverter;
+import org.apache.commons.beanutils.converters.SqlTimeConverter;
+import org.apache.commons.beanutils.converters.SqlTimestampConverter;
+import org.apache.commons.beanutils.converters.StringConverter;
 import org.apache.commons.collections.FastHashMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
- * Utility methods for converting String values to objects of the specified
- * class.  If you specify a Java primitive type, or an array of a Java
- * primitive type, as a destination type, a scalar or array of the coresponding
- * Java wrapper class will be created instead.  If you attempt to convert an
- * Object or Object array of a non-String and non-primitive type, it will be
- * converted to a scalar String or array of Strings, as appropriate.
+ * <p>Utility methods for converting String scalar values to objects of the
+ * specified Class, String arrays to arrays of the specified Class.  The
+ * actual {@link Converter} instance to be used can be registered for each
+ * possible destination Class.  Unless you override them, standard
+ * {@link Converter} instances are provided for all of the following
+ * destination Classes:</p>
+ * <ul>
+ * <li>java.lang.BigDecimal</li>
+ * <li>java.lang.BigInteger</li>
+ * <li>boolean and java.lang.Boolean</li>
+ * <li>byte and java.lang.Byte</li>
+ * <li>char and java.lang.Character</li>
+ * <li>double and java.lang.Double</li>
+ * <li>float and java.lang.Float</li>
+ * <li>int and java.lang.Integer</li>
+ * <li>long and java.lang.Long</li>
+ * <li>short and java.lang.Short</li>
+ * <li>java.lang.String</li>
+ * <li>java.sql.Date</li>
+ * <li>java.sql.Time</li>
+ * <li>java.sql.Timestamp</li>
+ * </ul>
+ *
+ * <p>For backwards compatibility, the standard Converters for primitive
+ * types (and the corresponding wrapper classes) return a defined
+ * default value when a conversion error occurs.  If you prefer to have a
+ * {@link ConversionException} thrown instead, replace the standard Converter
+ * instances with instances created with the zero-arguments constructor.  For
+ * example, to cause the Converters for integers to throw an exception on
+ * conversion errors, you could do this:</p>
+ * <pre>
+ *   // No-args constructor gets the version that throws exceptions
+ *   Converter myConverter =
+ *    new org.apache.commons.beanutils.converter.IntegerConverter();
+ *   ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
+ *   ConvertUtils.register(myConverter, Integer.class);   // Wrapper class
+ * </pre>
  *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.6 $ $Date: 2002/03/18 00:52:41 $
+ * @version $Revision: 1.7 $ $Date: 2002/03/18 16:32:42 $
  */
 
 public class ConvertUtils {
@@ -89,6 +141,8 @@ public class ConvertUtils {
 
     /**
      * The default value for Boolean conversions.
+     * @deprecated Register replacement converters for Boolean.TYPE and
+     *  Boolean.class instead
      */
     private static Boolean defaultBoolean = Boolean.FALSE;
 
@@ -98,11 +152,15 @@ public class ConvertUtils {
 
     public static void setDefaultBoolean(boolean newDefaultBoolean) {
         defaultBoolean = new Boolean(newDefaultBoolean);
+        converters.put(Boolean.TYPE, new BooleanConverter(defaultBoolean));
+        converters.put(Boolean.class,  new BooleanConverter(defaultBoolean));
     }
 
 
     /**
      * The default value for Byte conversions.
+     * @deprecated Register replacement converters for Byte.TYPE and
+     *  Byte.class instead
      */
     private static Byte defaultByte = new Byte((byte) 0);
 
@@ -112,11 +170,15 @@ public class ConvertUtils {
 
     public static void setDefaultByte(byte newDefaultByte) {
         defaultByte = new Byte(newDefaultByte);
+        converters.put(Byte.TYPE, new ByteConverter(defaultByte));
+        converters.put(Byte.class, new ByteConverter(defaultByte));
     }
 
 
     /**
      * The default value for Character conversions.
+     * @deprecated Register replacement converters for Character.TYPE and
+     *  Character.class instead
      */
     private static Character defaultCharacter = new Character(' ');
 
@@ -126,11 +188,17 @@ public class ConvertUtils {
 
     public static void setDefaultCharacter(char newDefaultCharacter) {
         defaultCharacter = new Character(newDefaultCharacter);
+        converters.put(Character.TYPE,
+                       new CharacterConverter(defaultCharacter));
+        converters.put(Character.class,
+                       new CharacterConverter(defaultCharacter));
     }
 
 
     /**
      * The default value for Double conversions.
+     * @deprecated Register replacement converters for Double.TYPE and
+     *  Double.class instead
      */
     private static Double defaultDouble = new Double((double) 0.0);
 
@@ -140,11 +208,15 @@ public class ConvertUtils {
 
     public static void setDefaultDouble(double newDefaultDouble) {
         defaultDouble = new Double(newDefaultDouble);
+        converters.put(Double.TYPE, new DoubleConverter(defaultDouble));
+        converters.put(Double.class, new DoubleConverter(defaultDouble));
     }
 
 
     /**
      * The default value for Float conversions.
+     * @deprecated Register replacement converters for Float.TYPE and
+     *  Float.class instead
      */
     private static Float defaultFloat = new Float((float) 0.0);
 
@@ -154,11 +226,15 @@ public class ConvertUtils {
 
     public static void setDefaultFloat(float newDefaultFloat) {
         defaultFloat = new Float(newDefaultFloat);
+        converters.put(Float.TYPE, new FloatConverter(defaultFloat));
+        converters.put(Float.class, new FloatConverter(defaultFloat));
     }
 
 
     /**
      * The default value for Integer conversions.
+     * @deprecated Register replacement converters for Integer.TYPE and
+     *  Integer.class instead
      */
     private static Integer defaultInteger = new Integer(0);
 
@@ -168,11 +244,15 @@ public class ConvertUtils {
 
     public static void setDefaultInteger(int newDefaultInteger) {
         defaultInteger = new Integer(newDefaultInteger);
+        converters.put(Integer.TYPE, new IntegerConverter(defaultInteger));
+        converters.put(Integer.class, new IntegerConverter(defaultInteger));
     }
 
 
     /**
      * The default value for Long conversions.
+     * @deprecated Register replacement converters for Long.TYPE and
+     *  Long.class instead
      */
     private static Long defaultLong = new Long((long) 0);
 
@@ -182,11 +262,15 @@ public class ConvertUtils {
 
     public static void setDefaultLong(long newDefaultLong) {
         defaultLong = new Long(newDefaultLong);
+        converters.put(Long.TYPE, new LongConverter(defaultLong));
+        converters.put(Long.class, new LongConverter(defaultLong));
     }
 
 
     /**
      * The default value for Short conversions.
+     * @deprecated Register replacement converters for Short.TYPE and
+     *  Short.class instead
      */
     private static Short defaultShort = new Short((short) 0);
 
@@ -196,6 +280,8 @@ public class ConvertUtils {
 
     public static void setDefaultShort(short newDefaultShort) {
         defaultShort = new Short(newDefaultShort);
+        converters.put(Short.TYPE, new ShortConverter(defaultShort));
+        converters.put(Short.class, new ShortConverter(defaultShort));
     }
 
 
@@ -203,16 +289,22 @@ public class ConvertUtils {
 
 
     /**
-     * The set of custom {@link Converter}s that can be used to convert Strings
+     * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private static FastHashMap customConverters = null;
+    private static FastHashMap converters = new FastHashMap();
+
+    static {
+        converters.setFast(false);
+        deregister();
+        converters.setFast(true);
+    }
 
 
     /**
-     * The Class object for java.lang.String.
+     * The <code>Log</code> instance for this class.
      */
-    private static Class stringClass = String.class;
+    private static Log log = LogFactory.getLog(ConvertUtils.class);
 
 
     // --------------------------------------------------------- Public Classes
@@ -245,202 +337,99 @@ public class ConvertUtils {
     /**
      * Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.
-     * If you specify <code>type</code> as the name of a Java primitive
-     * type, an instance of the corresponding wrapper class (initialized
-     * to the correct value) is returned instead.
      *
      * @param value Value to be converted (may be null)
-     * @param clazz Java class to be converted to (must be java.lang.String
-     *  or one of the primitive type wrappers)
+     * @param clazz Java class to be converted to
+     *
+     * @exception ConversionException if thrown by an underlying Converter
      */
     public static Object convert(String value, Class clazz) {
 
-        if (clazz == stringClass) {
-            if (value == null)
-                return ((String) null);
-            else
-                return (value);
-        } else if (clazz == Integer.TYPE) {
-            return (convertInteger(value, defaultInteger));
-        } else if (clazz == Boolean.TYPE) {
-            return (convertBoolean(value, defaultBoolean));
-        } else if (clazz == Long.TYPE) {
-            return (convertLong(value, defaultLong));
-        } else if (clazz == Double.TYPE) {
-            return (convertDouble(value, defaultDouble));
-        } else if (clazz == Character.TYPE) {
-            return (convertCharacter(value, defaultCharacter));
-        } else if (clazz == Byte.TYPE) {
-            return (convertByte(value, defaultByte));
-        } else if (clazz == Float.TYPE) {
-            return (convertFloat(value, defaultFloat));
-        } else if (clazz == Short.TYPE) {
-            return (convertShort(value, defaultShort));
-        } else if (clazz == Integer.class) {
-            return (convertInteger(value, null));
-        } else if (clazz == Boolean.class) {
-            return (convertBoolean(value, null));
-        } else if (clazz == Long.class) {
-            return (convertLong(value, null));
-        } else if (clazz == Double.class) {
-            return (convertDouble(value, null));
-        } else if (clazz == Character.class) {
-            return (convertCharacter(value, null));
-        } else if (clazz == Byte.class) {
-            return (convertByte(value, null));
-        } else if (clazz == Float.class) {
-            return (convertFloat(value, null));
-        } else if (clazz == Short.class) {
-            return (convertShort(value, null));
-        } else if ((customConverters != null) &&
-                   (customConverters.containsKey(clazz))) {
-            Converter converter = (Converter)
-                customConverters.get(clazz);
-            return (converter.convert(clazz, value));
-        } else {
-            if (value == null)
-                return ((String) null);
-            else
-                return (value.toString());
+        if (log.isDebugEnabled()) {
+            log.debug("Convert string '" + value + "' to class '" +
+                      clazz.getName() + "'");
         }
+        Converter converter = (Converter) converters.get(clazz);
+        if (converter == null) {
+            converter = (Converter) converters.get(String.class);
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("  Using converter " + converter);
+        }
+        return (converter.convert(clazz, value));
 
     }
 
 
     /**
      * Convert an array of specified values to an array of objects of the
-     * specified class (if possible).  If you specify <code>type</code>
-     * as one of the Java primitive types, an array of that type will be
-     * returned; otherwise an array of the requested type (must be String
-     * or a Java wrapper class for the primitive types) will be returned.
+     * specified class (if possible).  If the specified Java class is itself
+     * an array class, this class will be the type of the returned value.
+     * Otherwise, an array will be constructed whose component type is the
+     * specified class.
      *
      * @param value Value to be converted (may be null)
-     * @param clazz Java array class to be converted to (must be String[],
-     *  or an array of one of the Java primitive types)
+     * @param clazz Java array or element class to be converted to
+     *
+     * @exception ConversionException if thrown by an underlying Converter
      */
     public static Object convert(String values[], Class clazz) {
 
-        Class type = clazz.getComponentType();
-        if (type == stringClass) {
-            if (values == null)
-                return ((String[]) null);
-            else
-                return (values);
+        Class type = clazz;
+        if (clazz.isArray()) {
+            type = clazz.getComponentType();
         }
-
-        int len = values.length;
-
-        if (type == Integer.TYPE) {
-            int array[] = new int[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertInteger(values[i], defaultInteger).intValue();
-            return (array);
-        } else if (type == Boolean.TYPE) {
-            boolean array[] = new boolean[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertBoolean(values[i], defaultBoolean).booleanValue();
-            return (array);
-        } else if (type == Long.TYPE) {
-            long array[] = new long[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertLong(values[i], defaultLong).longValue();
-            return (array);
-        } else if (type == Double.TYPE) {
-            double array[] = new double[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertDouble(values[i], defaultDouble).doubleValue();
-            return (array);
-        } else if (type == Character.TYPE) {
-            char array[] = new char[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertCharacter(values[i], defaultCharacter).charValue();
-            return (array);
-        } else if (type == Byte.TYPE) {
-            byte array[] = new byte[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertByte(values[i], defaultByte).byteValue();
-            return (array);
-        } else if (type == Float.TYPE) {
-            float array[] = new float[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertFloat(values[i], defaultFloat).floatValue();
-            return (array);
-        } else if (type == Short.TYPE) {
-            short array[] = new short[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertShort(values[i], defaultShort).shortValue();
-            return (array);
-        } else if (type == Integer.class) {
-            Integer array[] = new Integer[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertInteger(values[i], null);
-            return (array);
-        } else if (type == Boolean.class) {
-            Boolean array[] = new Boolean[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertBoolean(values[i], null);
-            return (array);
-        } else if (type == Long.class) {
-            Long array[] = new Long[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertLong(values[i], null);
-            return (array);
-        } else if (type == Double.class) {
-            Double array[] = new Double[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertDouble(values[i], null);
-            return (array);
-        } else if (type == Character.class) {
-            Character array[] = new Character[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertCharacter(values[i], null);
-            return (array);
-        } else if (type == Byte.class) {
-            Byte array[] = new Byte[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertByte(values[i], null);
-            return (array);
-        } else if (type == Float.class) {
-            Float array[] = new Float[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertFloat(values[i], null);
-            return (array);
-        } else if (type == Short.class) {
-            Short array[] = new Short[len];
-            for (int i = 0; i < len; i++)
-                array[i] = convertShort(values[i], null);
-            return (array);
-        } else if ((customConverters != null) &&
-                   (customConverters.containsKey(type))) {
-            Converter converter = (Converter)
-                customConverters.get(type);
-            Object array = Array.newInstance(type, len);
-            for (int i = 0; i < len; i++) {
-                Array.set(array, i, converter.convert(type, values[i]));
-            }
-            return (array);
-        } else {
-            if (values == null)
-                return ((String[]) null);
-            else {
-                String array[] = new String[len];
-                for (int i = 0; i < len; i++)
-                    array[i] = values[i].toString();
-                return (array);
-            }
+        if (log.isDebugEnabled()) {
+            log.debug("Convert String[" + values.length + "] to class '" +
+                      type.getName() + "[]'");
         }
+        Converter converter = (Converter) converters.get(type);
+        if (converter == null) {
+            converter = (Converter) converters.get(String.class);
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("  Using converter " + converter);
+        }
+        Object array = Array.newInstance(type, values.length);
+        for (int i = 0; i < values.length; i++) {
+            Array.set(array, i, converter.convert(type, values[i]));
+        }
+        return (array);
 
     }
 
 
     /**
-     * Remove all registered {@link Converter}s.
+     * Remove all registered {@link Converter}s, and re-establish the
+     * standard Converters.
      */
     public static void deregister() {
 
-        if (customConverters != null) {
-            customConverters.clear();
-        }
+        converters.clear();
+        converters.put(BigDecimal.class, new BigDecimalConverter());
+        converters.put(BigInteger.class, new BigIntegerConverter());
+        converters.put(Boolean.TYPE, new BooleanConverter(defaultBoolean));
+        converters.put(Boolean.class,  new BooleanConverter(defaultBoolean));
+        converters.put(Byte.TYPE, new ByteConverter(defaultByte));
+        converters.put(Byte.class, new ByteConverter(defaultByte));
+        converters.put(Character.TYPE,
+                       new CharacterConverter(defaultCharacter));
+        converters.put(Character.class,
+                       new CharacterConverter(defaultCharacter));
+        converters.put(Double.TYPE, new DoubleConverter(defaultDouble));
+        converters.put(Double.class, new DoubleConverter(defaultDouble));
+        converters.put(Float.TYPE, new FloatConverter(defaultFloat));
+        converters.put(Float.class, new FloatConverter(defaultFloat));
+        converters.put(Integer.TYPE, new IntegerConverter(defaultInteger));
+        converters.put(Integer.class, new IntegerConverter(defaultInteger));
+        converters.put(Long.TYPE, new LongConverter(defaultLong));
+        converters.put(Long.class, new LongConverter(defaultLong));
+        converters.put(Short.TYPE, new ShortConverter(defaultShort));
+        converters.put(Short.class, new ShortConverter(defaultShort));
+        converters.put(String.class, new StringConverter());
+        converters.put(Date.class, new SqlDateConverter());
+        converters.put(Time.class, new SqlTimeConverter());
+        converters.put(Timestamp.class, new SqlTimestampConverter());
 
     }
 
@@ -453,9 +442,7 @@ public class ConvertUtils {
      */
     public static void deregister(Class clazz) {
 
-        if (customConverters != null) {
-            customConverters.remove(clazz);
-        }
+        converters.remove(clazz);
 
     }
 
@@ -469,11 +456,7 @@ public class ConvertUtils {
      */
     public static Converter lookup(Class clazz) {
 
-        if (customConverters != null) {
-            return ((Converter) customConverters.get(clazz));
-        } else {
-            return (null);
-        }
+        return ((Converter) converters.get(clazz));
 
     }
 
@@ -488,159 +471,7 @@ public class ConvertUtils {
      */
     public static void register(Converter converter, Class clazz) {
 
-        if (customConverters == null) {
-            customConverters = new FastHashMap();
-        }
-        customConverters.put(clazz, converter);
-
-    }
-
-
-    // -------------------------------------------------------- Private Methods
-
-
-    /**
-     * Convert a String value to a corresponding Boolean value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Boolean convertBoolean(String value, Boolean defaultValue) {
-
-        if (value == null)
-            return (defaultValue);
-        else if (value.equalsIgnoreCase("yes") ||
-                value.equalsIgnoreCase("true") ||
-                value.equalsIgnoreCase("on"))
-            return (Boolean.TRUE);
-        else if (value.equalsIgnoreCase("no") ||
-                value.equalsIgnoreCase("false") ||
-                value.equalsIgnoreCase("off"))
-            return (Boolean.FALSE);
-        else
-            return (defaultValue);
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Byte value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Byte convertByte(String value, Byte defaultValue) {
-
-        try {
-            return (new Byte(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Character value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Character convertCharacter(String value,
-                                              Character defaultValue) {
-
-        if (value == null || value.length() == 0)
-            return (defaultValue);
-        else
-            return (new Character(value.charAt(0)));
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Double value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Double convertDouble(String value,
-                                        Double defaultValue) {
-
-        try {
-            return (new Double(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Float value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Float convertFloat(String value,
-                                      Float defaultValue) {
-
-        try {
-            return (new Float(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Integer value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Integer convertInteger(String value,
-                                          Integer defaultValue) {
-
-        try {
-            return (new Integer(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Long value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Long convertLong(String value, Long defaultValue) {
-
-        try {
-            return (new Long(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
-
-    }
-
-
-    /**
-     * Convert a String value to a corresponding Short value.
-     *
-     * @param value The string value to convert
-     * @param defaultValue Default value to return on a conversion error
-     */
-    private static Short convertShort(String value, Short defaultValue) {
-
-        try {
-            return (new Short(value));
-        } catch (NumberFormatException e) {
-            return (defaultValue);
-        }
+        converters.put(clazz, converter);
 
     }
 
