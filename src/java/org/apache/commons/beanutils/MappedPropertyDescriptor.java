@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.3 2001/10/14 00:54:24 craigmcc Exp $
- * $Revision: 1.3 $
- * $Date: 2001/10/14 00:54:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.4 2002/01/15 02:39:34 craigmcc Exp $
+ * $Revision: 1.4 $
+ * $Date: 2002/01/15 02:39:34 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ import java.security.*;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.3 $ $Date: 2001/10/14 00:54:24 $
+ * @version $Revision: 1.4 $ $Date: 2002/01/15 02:39:34 $
  */
 
 public class MappedPropertyDescriptor extends PropertyDescriptor {
@@ -365,7 +365,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param s The property name
      */
-    static String capitalize(String s) {
+    private static String capitalize(String s) {
 
         if (s.length() == 0) {
             return s;
