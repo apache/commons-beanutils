@@ -24,7 +24,7 @@
   <shortDescription>Commons BeanUtils Bean Collections</shortDescription>
   <description>Extensions of commons collections focussing on collections of beans</description>
   
-  <siteDirectory>/www/jakarta.apache.org/commons/beanutils/beancollections</siteDirectory>
+  <siteDirectory>/www/jakarta.apache.org/commons/beanutils/bean-collections</siteDirectory>
       
   <dependencies>
     <dependency>
