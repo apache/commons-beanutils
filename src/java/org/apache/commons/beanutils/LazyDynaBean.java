@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2004 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Date;
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>DynaBean which automatically adds properties to the <code>DynaClass</code>
- * if they don't exist.</p>
- *
- * <p><strong>N.B.</strong> Must be used with a <code>DynaClass</code> that
- * implements the <code>MutableDynaClass</code> interface - if not specified
- * the <code>LazyDynaClass</code> is used by default.</p>
+ *   and provides <i>Lazy List</i> and <i>Lazy Map</i> features.</p>
  *
  * <p>DynaBeans deal with three types of properties - <i>simple</i>, <i>indexed</i> and <i>mapped</i> and
  *    have the following <code>get()</code> and <code>set()</code> methods for
@@ -104,21 +105,44 @@ import java.lang.reflect.Array;
  * @see LazyDynaClass
  * @author Niall Pemberton
  */
-public class LazyDynaBean extends BasicDynaBean {
+public class LazyDynaBean implements DynaBean  {
+
+
+   /**
+    * Commons Logging
+    */
+    private static Log logger = LogFactory.getLog(LazyDynaBean.class);
+
+    protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
+    protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
+    protected static final Character  Character_SPACE = new Character(' ');
+    protected static final Byte       Byte_ZERO       = new Byte((byte)0);
+    protected static final Short      Short_ZERO      = new Short((short)0);
+    protected static final Integer    Integer_ZERO    = new Integer(0);
+    protected static final Long       Long_ZERO       = new Long((long)0);
+    protected static final Float      Float_ZERO      = new Float((byte)0);
+    protected static final Double     Double_ZERO     = new Double((byte)0);
 
     /**
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
      * is associated with.
      */
-    protected MutableDynaClass mutableDynaClass;
+    protected Map values;
+
+    /**
+     * The <code>MutableDynaClass</code> "base class" that this DynaBean
+     * is associated with.
+     */
+    protected MutableDynaClass dynaClass;
+
+
+    // ------------------- Constructors ----------------------------------
 
     /**
      * Construct a new <code>LazyDynaBean</code> with a <code>LazyDynaClass</code> instance.
      */
     public LazyDynaBean() {
-
         this(new LazyDynaClass());
-
     }
 
     /**
@@ -127,26 +151,98 @@ public class LazyDynaBean extends BasicDynaBean {
      * @param name Name of this DynaBean class
      */
     public LazyDynaBean(String name) {
-
         this(new LazyDynaClass(name));
-
     }
 
     /**
      * Construct a new <code>DynaBean</code> associated with the specified
-     * <code>DynaClass</code> instance - must be <code>MutableDynaClass</code>.
+     * <code>DynaClass</code> instance - if its not a <code>MutableDynaClass</code>
+     * then a new <code>LazyDynaClass</code> is created and the properties copied.
      *
      * @param dynaClass The DynaClass we are associated with
      */
     public LazyDynaBean(DynaClass dynaClass) {
 
-        super(dynaClass);
+        values = newMap();
 
-        if (!(dynaClass instanceof MutableDynaClass))
-            throw new IllegalArgumentException("DynaClass must be a MutableDynaClass type: " +
-                                                dynaClass.getClass().getName());
+        if (dynaClass instanceof MutableDynaClass) {
+            this.dynaClass = (MutableDynaClass)dynaClass;
+        } else {
+            this.dynaClass = new LazyDynaClass(dynaClass.getName(), dynaClass.getDynaProperties());
+        }
 
-        mutableDynaClass = (MutableDynaClass)dynaClass;
+    }
+
+
+    // ------------------- Public Methods ----------------------------------
+
+    /**
+     * Return the Map backing this <code>DynaBean</code>
+     */
+    public Map getMap() {
+        return values;
+    }
+
+    /**
+     * <p>Return the size of an indexed or mapped property.</p>
+     *
+     * @param size Size of the Map, List or Array.
+     * @exception IllegalArgumentException if no property name is specified
+     */
+    public int size(String name) {
+
+        if (name == null) {
+            throw new IllegalArgumentException("No property name specified");
+        }
+
+        Object value = values.get(name);
+        if (value == null) {
+            return 0;
+        }
+
+        if (value instanceof Map) {
+            return ((Map)value).size();
+        }
+
+        if (value instanceof List) {
+            return ((List)value).size();
+        }
+
+        if ((value.getClass().isArray())) {
+            return Array.getLength(value);
+        }
+
+        return 0;
+
+    }
+
+    // ------------------- DynaBean Methods ----------------------------------
+
+    /**
+     * Does the specified mapped property contain a value for the specified
+     * key value?
+     *
+     * @param name Name of the property to check
+     * @param key Name of the key to check
+     *
+     * @exception IllegalArgumentException if no property name is specified
+     */
+    public boolean contains(String name, String key) {
+
+        if (name == null) {
+            throw new IllegalArgumentException("No property name specified");
+        }
+
+        Object value = values.get(name);
+        if (value == null) {
+            return false;
+        }
+
+        if (value instanceof Map) {
+            return (((Map) value).containsKey(key));
+        }
+
+        return false;
 
     }
 
@@ -157,18 +253,33 @@ public class LazyDynaBean extends BasicDynaBean {
      *  of the specified name.</p>
      *
      * @param name Name of the property whose value is to be retrieved.
+     * @exception IllegalArgumentException if no property name is specified
      */
     public Object get(String name) {
 
-        if (isDynaProperty(name)) {
-
-            return super.get(name);
-
-        } else {
-
-            return null;
-
+        if (name == null) {
+            throw new IllegalArgumentException("No property name specified");
         }
+
+        // Value found
+        Object value = values.get(name);
+        if (value != null) {
+            return value;
+        }
+
+        // Property doesn't exist
+        if (!isDynaProperty(name)) {
+            return null;
+        }
+
+        // Property doesn't exist
+        value = createProperty(name, dynaClass.getDynaProperty(name).getType());
+
+        if (value != null) {
+            set(name, value);
+        }
+
+        return value;
 
     }
 
@@ -188,14 +299,33 @@ public class LazyDynaBean extends BasicDynaBean {
      */
     public Object get(String name, int index) {
 
-        if (get(name) == null) {
+        // If its not a property, then create default indexed property
+        if (!isDynaProperty(name)) {
+            set(name, defaultIndexedProperty(name));
+        }
 
-            return null;
+        // Get the indexed property
+        Object indexedProperty = get(name);
 
+        // Check that the property is indexed
+        if (!dynaClass.getDynaProperty(name).isIndexed()) {
+            throw new IllegalArgumentException
+                ("Non-indexed property for '" + name + "[" + index + "]' "
+                                      + dynaClass.getDynaProperty(name).getName());
+        }
+
+        // Grow indexed property to appropriate size
+        indexedProperty = growIndexedProperty(name, indexedProperty, index);
+
+        // Return the indexed value
+        if (indexedProperty.getClass().isArray()) {
+            return Array.get(indexedProperty, index);
+        } else if (indexedProperty instanceof List) {
+            return ((List)indexedProperty).get(index);
         } else {
-
-            return super.get(name, index);
-
+            throw new IllegalArgumentException
+                ("Non-indexed property for '" + name + "[" + index + "]' "
+                                  + indexedProperty.getClass().getName());
         }
 
     }
@@ -214,14 +344,69 @@ public class LazyDynaBean extends BasicDynaBean {
      */
     public Object get(String name, String key) {
 
-        if (get(name) == null) {
+        // If its not a property, then create default mapped property
+        if (!isDynaProperty(name)) {
+            set(name, defaultMappedProperty(name));
+        }
 
-            return null;
+        // Get the mapped property
+        Object mappedProperty = get(name);
 
+        // Check that the property is mapped
+        if (!dynaClass.getDynaProperty(name).isMapped()) {
+            throw new IllegalArgumentException
+                ("Non-mapped property for '" + name + "(" + key + ")'"
+                            + dynaClass.getDynaProperty(name).getType().getName());
+        }
+
+        // Get the value from the Map
+        if (mappedProperty instanceof Map) {
+            return (((Map) mappedProperty).get(key));
         } else {
+            throw new IllegalArgumentException
+              ("Non-mapped property for '" + name + "(" + key + ")'"
+                                  + mappedProperty.getClass().getName());
+        }
 
-            return super.get(name, key);
+    }
 
+
+    /**
+     * Return the <code>DynaClass</code> instance that describes the set of
+     * properties available for this DynaBean.
+     */
+    public DynaClass getDynaClass() {
+        return (DynaClass)dynaClass;
+    }
+
+    /**
+     * Remove any existing value for the specified key on the
+     * specified mapped property.
+     *
+     * @param name Name of the property for which a value is to
+     *  be removed
+     * @param key Key of the value to be removed
+     *
+     * @exception IllegalArgumentException if there is no property
+     *  of the specified name
+     */
+    public void remove(String name, String key) {
+
+        if (name == null) {
+            throw new IllegalArgumentException("No property name specified");
+        }
+
+        Object value = values.get(name);
+        if (value == null) {
+            return;
+        }
+
+        if (value instanceof Map) {
+            ((Map) value).remove(key);
+        } else {
+            throw new IllegalArgumentException
+                    ("Non-mapped property for '" + name + "(" + key + ")'"
+                            + value.getClass().getName());
         }
 
     }
@@ -244,21 +429,35 @@ public class LazyDynaBean extends BasicDynaBean {
         // If the property doesn't exist, then add it
         if (!isDynaProperty(name)) {
 
-            if (mutableDynaClass.isRestricted()) {
+            if (dynaClass.isRestricted()) {
                 throw new IllegalArgumentException
                     ("Invalid property name '" + name + "' (DynaClass is restricted)");
             }
-
             if (value == null) {
-                mutableDynaClass.add(name);
+                dynaClass.add(name);
             } else {
-                mutableDynaClass.add(name, value.getClass());
+                dynaClass.add(name, value.getClass());
             }
 
         }
 
+        DynaProperty descriptor = dynaClass.getDynaProperty(name);
+
+        if (value == null) {
+            if (descriptor.getType().isPrimitive()) {
+                throw new NullPointerException
+                        ("Primitive value for '" + name + "'");
+            }
+        } else if (!isAssignable(descriptor.getType(), value.getClass())) {
+            throw new ConversionException
+                    ("Cannot assign value of type '" +
+                    value.getClass().getName() +
+                    "' to property '" + name + "' of type '" +
+                    descriptor.getType().getName() + "'");
+        }
+
         // Set the property's value
-        super.set(name, value);
+        values.put(name, value);
 
     }
 
@@ -280,82 +479,34 @@ public class LazyDynaBean extends BasicDynaBean {
      */
     public void set(String name, int index, Object value) {
 
-        // If the 'indexed' property doesn't exist, then add it
+        // If its not a property, then create default indexed property
         if (!isDynaProperty(name)) {
-            set(name, newIndexedProperty(name));
+            set(name, defaultIndexedProperty(name));
         }
 
-        // Check if its an Indexed Property
-        DynaProperty dynaProperty = mutableDynaClass.getDynaProperty(name);
-        if (!dynaProperty.isIndexed()) {
+        // Get the indexed property
+        Object indexedProperty = get(name);
+
+        // Check that the property is indexed
+        if (!dynaClass.getDynaProperty(name).isIndexed()) {
             throw new IllegalArgumentException
-                    ("Non-indexed property for '" + name + "[" + index + "]', type is '" +
-                         dynaProperty.getType().getName()+"'");
+                ("Non-indexed property for '" + name + "[" + index + "]'"
+                            + dynaClass.getDynaProperty(name).getType().getName());
         }
 
+        // Grow indexed property to appropriate size
+        indexedProperty = growIndexedProperty(name, indexedProperty, index);
 
-        // Instantiate the indexed property
-        Object prop = get(name);
-        if (prop == null) {
-            Class type = dynaProperty.getType();
-            if (List.class.isAssignableFrom(type)) {
-
-                try {
-                    prop = type.newInstance();
-                    set(name, prop);
-                }
-                catch (Exception ex) {
-                    throw new IllegalArgumentException
-                        ("Error instantiating List of type '" + type.getName() +
-                                      "' for '" + name + "[" + index + "]'");
-                }
-
-            } else if (type.isArray()) {
-
-                prop = Array.newInstance(type.getComponentType(), index+1);
-                set(name, prop);
-
-            } else {
-
-                throw new IllegalArgumentException
-                   ("Non-indexed property for '" + name + "[" + index + "]'");
-            }
+        // Set the value in an array
+        if (indexedProperty.getClass().isArray()) {
+            Array.set(indexedProperty, index, value);
+        } else if (indexedProperty instanceof List) {
+            ((List)indexedProperty).set(index, value);
+        } else {
+            throw new IllegalArgumentException
+                ("Non-indexed property for '" + name + "[" + index + "]' "
+                            + indexedProperty.getClass().getName());
         }
-
-        // Grow the List or Array dynamically
-        if (prop instanceof List) {
-
-            List list = (List)prop;
-            while (index >= list.size()) {
-                list.add(null);
-            }
-
-        } else if ((prop.getClass().isArray())) {
-
-            int length = Array.getLength(prop);
-            if (index >= length) {
-                Object newArray = Array.newInstance(prop.getClass().getComponentType(), (index + 1));
-                System.arraycopy(prop, 0, newArray, 0, length);
-                set(name, newArray);
-            }
-        }
-
-        super.set(name, index, value);
-
-    }
-
-    /**
-     * <p>Creates a new <code>ArrayList</code> for an 'indexed' property
-     *    which doesn't exist.</p>
-     *
-     * <p>This method shouls be overriden if an alternative <code>List</code>
-     *    or <code>Array</code> implementation is required for 'indexed' properties.</p>
-     *
-     * @param name Name of the 'indexed property.
-     */
-    protected Object newIndexedProperty(String name) {
-
-        return new ArrayList();
 
     }
 
@@ -377,35 +528,245 @@ public class LazyDynaBean extends BasicDynaBean {
 
         // If the 'mapped' property doesn't exist, then add it
         if (!isDynaProperty(name)) {
-            set(name, newMappedProperty(name));
+            set(name, defaultMappedProperty(name));
         }
 
-        // Check if its an Indexed Property
-        DynaProperty dynaProperty = mutableDynaClass.getDynaProperty(name);
-        if (!dynaProperty.isMapped()) {
-            throw new IllegalArgumentException("Non-mapped property for '" +
-                 name + "(" + key + ")', type is '" + dynaProperty.getType().getName()+"'");
+        // Get the mapped property
+        Object mappedProperty = get(name);
+
+        // Check that the property is mapped
+        if (!dynaClass.getDynaProperty(name).isMapped()) {
+            throw new IllegalArgumentException
+                ("Non-mapped property for '" + name + "(" + key + ")'"
+                            + dynaClass.getDynaProperty(name).getType().getName());
         }
 
-        // Instantiate the mapped property
-        Object prop = get(name);
-        if (prop == null) {
-            Class type = dynaProperty.getType();
+        // Set the value in the Map
+        ((Map)mappedProperty).put(key, value);
+
+    }
+
+    // ------------------- protected Methods ----------------------------------
+
+    protected Object growIndexedProperty(String name, Object indexedProperty, int index) {
+
+        // Grow a List to the appropriate size
+        if (indexedProperty instanceof List) {
+
+            List list = (List)indexedProperty;
+            while (index >= list.size()) {
+                list.add(null);
+            }
+
+        }
+
+        // Grow an Array to the appropriate size
+        if ((indexedProperty.getClass().isArray())) {
+
+            int length = Array.getLength(indexedProperty);
+            if (index >= length) {
+                Class componentType = indexedProperty.getClass().getComponentType();
+                Object newArray = Array.newInstance(componentType, (index + 1));
+                System.arraycopy(indexedProperty, 0, newArray, 0, length);
+                indexedProperty = newArray;
+                set(name, indexedProperty);
+                int newLength = Array.getLength(indexedProperty);
+                for (int i = length; i < newLength; i++) {
+                    Array.set(indexedProperty, i, createProperty(name+"["+i+"]", componentType));
+                }
+            }
+        }
+
+        return indexedProperty;
+
+    }
+
+    /**
+     * Create a new Instance of a Property
+     */
+    protected Object createProperty(String name, Class type) {
+
+        // Create Lists, arrays or DynaBeans
+        if (type.isArray() || List.class.isAssignableFrom(type)) {
+            return createIndexedProperty(name, type);
+        }
+
+        if (Map.class.isAssignableFrom(type)) {
+            return createMappedProperty(name, type);
+        }
+
+        if (DynaBean.class.isAssignableFrom(type)) {
+            return createDynaBeanProperty(name, type);
+        }
+
+        if (type.isPrimitive()) {
+            return createPrimitiveProperty(name, type);
+        }
+
+        if (Number.class.isAssignableFrom(type)) {
+            return createNumberProperty(name, type);
+        }
+
+        return createOtherProperty(name, type);
+
+    }
+
+    /**
+     * Create a new Instance of an 'Indexed' Property
+     */
+    protected Object createIndexedProperty(String name, Class type) {
+
+        // Create the indexed object
+        Object indexedProperty = null;
+
+        if (type == null) {
+
+            indexedProperty = defaultIndexedProperty(name);
+
+        } else if (type.isArray()) {
+
+            indexedProperty = Array.newInstance(type.getComponentType(), 0);
+
+        } else if (List.class.isAssignableFrom(type)) {
+            if (type.isInterface()) {
+                indexedProperty = defaultIndexedProperty(name);
+            } else {
+                try {
+                    indexedProperty = type.newInstance();
+                }
+                catch (Exception ex) {
+                    throw new IllegalArgumentException
+                        ("Error instantiating indexed property of type '" +
+                                   type.getName() + "' for '" + name + "' " + ex);
+                }
+            }
+        } else {
+
+            throw new IllegalArgumentException
+                    ("Non-indexed property of type '" + type.getName() + "' for '" + name + "'");
+        }
+
+        return indexedProperty;
+
+    }
+
+    /**
+     * Create a new Instance of a 'Mapped' Property
+     */
+    protected Object createMappedProperty(String name, Class type) {
+
+        // Create the mapped object
+        Object mappedProperty = null;
+
+        if (type == null) {
+
+            mappedProperty = defaultMappedProperty(name);
+
+        } else if (type.isInterface()) {
+
+            mappedProperty = defaultMappedProperty(name);
+
+        } else if (Map.class.isAssignableFrom(type)) {
             try {
-                set(name, type.newInstance());
+                mappedProperty = type.newInstance();
             }
             catch (Exception ex) {
                 throw new IllegalArgumentException
-                    ("Error instantiating Map of type '" + type.getName() +
-                                      "' for '" + name + "(" + key + ")'");
+                    ("Error instantiating mapped property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
+        } else {
+
+            throw new IllegalArgumentException
+                    ("Non-mapped property of type '" + type.getName() + "' for '" + name + "'");
         }
 
+        return mappedProperty;
 
-        // Set the 'mapped' property's value
-        super.set(name, key, value);
+    }
 
+    /**
+     * Create a new Instance of a 'Mapped' Property
+     */
+    protected Object createDynaBeanProperty(String name, Class type) {
+        try {
+            return type.newInstance();
+        }
+        catch (Exception ex) {
+            if (logger.isWarnEnabled()) {
+                logger.warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            }
+            return null;
+        }
+    }
 
+    /**
+     * Create a new Instance of a 'Primitive' Property
+     */
+    protected Object createPrimitiveProperty(String name, Class type) {
+
+        if (type == Boolean.TYPE) {
+            return Boolean.FALSE;
+        } else if (type == Integer.TYPE) {
+            return Integer_ZERO;
+        } else if (type == Long.TYPE) {
+            return Long_ZERO;
+        } else if (type == Double.TYPE) {
+            return Double_ZERO;
+        } else if (type == Float.TYPE) {
+            return Float_ZERO;
+        } else if (type == Byte.TYPE) {
+            return Byte_ZERO;
+        } else if (type == Short.TYPE) {
+            return Short_ZERO;
+        } else if (type == Character.TYPE) {
+            return Character_SPACE;
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
+     * Create a new Instance of a 'Primitive' Property
+     */
+    protected Object createNumberProperty(String name, Class type) {
+
+        return null;
+
+    }
+
+    /**
+     * Create a new Instance of a 'Mapped' Property
+     */
+    protected Object createOtherProperty(String name, Class type) {
+
+        if (type == String.class || type == Boolean.class ||
+            type == Character.class || Date.class.isAssignableFrom(type)) {
+            return null;
+        }
+
+        try {
+            return type.newInstance();
+        }
+        catch (Exception ex) {
+            if (logger.isWarnEnabled()) {
+                logger.warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            }
+            return null;
+        }
+    }
+
+    /**
+     * <p>Creates a new <code>ArrayList</code> for an 'indexed' property
+     *    which doesn't exist.</p>
+     *
+     * <p>This method shouls be overriden if an alternative <code>List</code>
+     *    or <code>Array</code> implementation is required for 'indexed' properties.</p>
+     *
+     * @param name Name of the 'indexed property.
+     */
+    protected Object defaultIndexedProperty(String name) {
+        return new ArrayList();
     }
 
     /**
@@ -417,10 +778,8 @@ public class LazyDynaBean extends BasicDynaBean {
      *
      * @param name Name of the 'mapped property.
      */
-    protected Map newMappedProperty(String name) {
-
+    protected Map defaultMappedProperty(String name) {
         return new HashMap();
-
     }
 
     /**
@@ -428,14 +787,49 @@ public class LazyDynaBean extends BasicDynaBean {
      */
     protected boolean isDynaProperty(String name) {
 
+        if (name == null) {
+            throw new IllegalArgumentException("No property name specified");
+        }
+
         // Handle LazyDynaClasses
-        if (mutableDynaClass instanceof LazyDynaClass) {
-            return ((LazyDynaClass)mutableDynaClass).isDynaProperty(name);
+        if (dynaClass instanceof LazyDynaClass) {
+            return ((LazyDynaClass)dynaClass).isDynaProperty(name);
         }
 
         // Handle other MutableDynaClass
-        return mutableDynaClass.getDynaProperty(name) == null ? false : true;
+        return dynaClass.getDynaProperty(name) == null ? false : true;
 
+    }
+
+    /**
+     * Is an object of the source class assignable to the destination class?
+     *
+     * @param dest Destination class
+     * @param source Source class
+     */
+    protected boolean isAssignable(Class dest, Class source) {
+
+        if (dest.isAssignableFrom(source) ||
+                ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
+                ((dest == Byte.TYPE) && (source == Byte.class)) ||
+                ((dest == Character.TYPE) && (source == Character.class)) ||
+                ((dest == Double.TYPE) && (source == Double.class)) ||
+                ((dest == Float.TYPE) && (source == Float.class)) ||
+                ((dest == Integer.TYPE) && (source == Integer.class)) ||
+                ((dest == Long.TYPE) && (source == Long.class)) ||
+                ((dest == Short.TYPE) && (source == Short.class))) {
+            return (true);
+        } else {
+            return (false);
+        }
+
+    }
+
+    /**
+     * <p>Creates a new instance of the <code>Map</code></p>
+     */
+    protected Map newMap() {
+        return new HashMap();
     }
 
 }
