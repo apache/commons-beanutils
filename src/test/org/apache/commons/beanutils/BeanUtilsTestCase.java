@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.22 2003/02/05 00:49:22 craigmcc Exp $
- * $Revision: 1.22 $
- * $Date: 2003/02/05 00:49:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.23 2003/03/15 11:38:11 rdonkin Exp $
+ * $Revision: 1.23 $
+ * $Date: 2003/03/15 11:38:11 $
  *
  * ====================================================================
  *
@@ -98,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -1247,6 +1247,50 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "writeOnlyProperty", new Integer(123));
         assertEquals("123", bean.getWriteOnlyPropertyValue());
 
+    }
+
+    /** Tests that separate instances can register separate instances */
+    public void testSeparateInstances() throws Exception {
+        BeanUtilsBean utilsOne = new BeanUtilsBean(
+                                                new ConvertUtilsBean(), 
+                                                new PropertyUtilsBean());
+        BeanUtilsBean utilsTwo = new BeanUtilsBean(
+                                                new ConvertUtilsBean(), 
+                                                new PropertyUtilsBean());        
+        
+        
+        TestBean bean = new TestBean();
+        
+        // Make sure what we're testing works
+        bean.setBooleanProperty(false);
+        utilsOne.setProperty(bean, "booleanProperty", "true");
+        assertEquals("Set property failed (1)", bean.getBooleanProperty(), true);
+        
+        bean.setBooleanProperty(false);
+        utilsTwo.setProperty(bean, "booleanProperty", "true");
+        assertEquals("Set property failed (2)", bean.getBooleanProperty(), true);       
+        
+        // now change the registered conversion
+        
+        utilsOne.getConvertUtils().register(new ThrowExceptionConverter(), Boolean.TYPE);
+        try {
+            
+            bean.setBooleanProperty(false);
+            utilsOne.setProperty(bean, "booleanProperty", "true");
+            fail("Registered conversion not used.");
+            
+        } catch (PassTestException e) { /* Do nothing */ }
+        
+        // make sure that this conversion has no been registered in the other instance
+        try {
+        
+            bean.setBooleanProperty(false);
+            utilsTwo.setProperty(bean, "booleanProperty", "true");
+            assertEquals("Set property failed (3)", bean.getBooleanProperty(), true);
+            
+        } catch (PassTestException e) {
+            fail("Registed converter is used by other instances");
+        }
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.1 2003/03/03 22:33:46 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2003/03/03 22:33:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.2 2003/03/15 11:38:10 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/03/15 11:38:10 $
  *
  * ====================================================================
  *
@@ -92,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.1 $ $Date: 2003/03/03 22:33:46 $
+ * @version $Revision: 1.2 $ $Date: 2003/03/15 11:38:10 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -115,16 +115,38 @@ public class BeanUtilsBean {
      * Logging for this instance
      */
     private Log log = LogFactory.getLog(BeanUtils.class);
+    
+    /** Used to perform conversions between object types when setting properties */
+    private ConvertUtilsBean convertUtilsBean;
+    
+    /** Used to access properties*/
+    private PropertyUtilsBean propertyUtilsBean;
 
     // --------------------------------------------------------- Constuctors
 
     /** 
-     * <p>Base constructor.</p>
-     *
-     * <p>For the moment, this will be private. 
-     * At first, we'll have a straight replacement for current functionality
+     * <p>Constructs an instance using standard (singleton) property 
+     * and conversion instances.</p>
      */
-    protected BeanUtilsBean() {}
+    public BeanUtilsBean() {
+        this(ConvertUtilsBean.getInstance(),PropertyUtilsBean.getInstance());
+    }
+
+    /** 
+     * <p>Constructs an instance using given property and conversion instances.</p>
+     *
+     * @param convertUtilsBean use this <code>ConvertUtilsBean</code> 
+     * to perform conversions from one object to another
+     * @param propertyUtilsBean use this <code>PropertyUtilsBean</code>
+     * to access properties
+     */
+    public BeanUtilsBean(		
+                            ConvertUtilsBean convertUtilsBean, 
+                            PropertyUtilsBean propertyUtilsBean) {
+                            
+        this.convertUtilsBean = convertUtilsBean;
+        this.propertyUtilsBean = propertyUtilsBean;
+    }
 
     // --------------------------------------------------------- Public Methods
 
@@ -1013,14 +1035,17 @@ public class BeanUtilsBean {
 
     }
     
-    // --------------------------------------------------------- Other Methods
-    
-    protected ConvertUtilsBean getConvertUtils() {
-        return ConvertUtilsBean.getInstance();
+    /** 
+     * Gets the <code>ConvertUtilsBean</code> instance used to perform the conversions.
+     */
+    public ConvertUtilsBean getConvertUtils() {
+        return convertUtilsBean;
     }
     
-    
-    protected PropertyUtilsBean getPropertyUtils() {
-        return PropertyUtilsBean.getInstance();
+    /**
+     * Gets the <code>PropertyUtilsBean</code> instance used to access properties.
+     */
+    public PropertyUtilsBean getPropertyUtils() {
+        return propertyUtilsBean;
     }
 }

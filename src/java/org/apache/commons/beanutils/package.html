@@ -39,6 +39,10 @@ and accessing bean properties.</p>
     <li><a href="#conversion.defining">Defining Your Own Converters</a></li>
     <li><a href="#conversion.i18n">Locale Aware Conversions</a></li>
     </ul></li>
+<li><a href="#instances">Utility Objects And Static Utility Classes</a>
+    <ul>
+    <li><a href="#instances.background">Background</a></li>
+    </ul></li>
 <li><a href="#FAQ">Frequently Asked Questions</a>
     <ul>
     <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
@@ -548,7 +552,7 @@ something like this:</p>
     ...;                    // Return connection to pool
     List rows = rsdc.getRows();
     ...;                   // Process the rows as desired
-/pre>
+</pre>
 
 
 <a name="dynamic.wrap"></a>
@@ -662,6 +666,34 @@ in situations where the locale is not important.</p>
 <code><a href='locale/package-summary.html'>org.apache.commons.beanutils.locale
 </a></code>. These are built along the same
 lines as the basic classes but support localization.</p>
+
+
+<a name="instances"></a>
+<h1>Utility Objects And Static Utility Classes</h1>
+<a name="instances.background"></a>
+<h3>Background</h3>
+<p>
+So far, the examples have covered the static utility classes (<code>BeanUtils</code>,
+<code>ConvertUtils</code> and <code>PropertyUtils</code>). These are easy to use but are
+somewhat inflexible. These all share the same registered converters and the same caches.
+</p>
+<p>
+This functionality can also be accessed through utility objects (in fact, the static utility
+class use worker instances of these classes). For each static utility class, there is a corresponding
+class with the same functionality that can be instantiated:
+</p>
+<p>
+<table cols='2' width='60%'>
+<tr><th>Static Utility Class</th><th>Utility Object</th></tr>
+<tr><td>BeanUtils</td><td>BeanUtilsBean</td></tr>
+<tr><td>ConvertUtils</td><td>ConvertUtilsBean</td></tr>
+<tr><td>PropertyUtils</td><td>PropertyUtilsBean</td></tr>
+</table>
+</p>
+<p>
+Creating an instances allow gives guarenteed control of the caching and registration 
+to the code that creates it. 
+</p>
 
 <a name="FAQ"></a>
 <h1>Frequently Asked Questions</h1>

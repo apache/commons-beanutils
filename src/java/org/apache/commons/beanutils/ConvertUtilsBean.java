@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.1 2003/03/03 22:33:46 rdonkin Exp $
- * $Revision: 1.1 $
- * $Date: 2003/03/03 22:33:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtilsBean.java,v 1.2 2003/03/15 11:38:10 rdonkin Exp $
+ * $Revision: 1.2 $
+ * $Date: 2003/03/15 11:38:10 $
  *
  * ====================================================================
  *
@@ -141,7 +141,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.1 $ $Date: 2003/03/03 22:33:46 $
+ * @version $Revision: 1.2 $ $Date: 2003/03/15 11:38:10 $
  * @since 1.7
  */
 
@@ -174,7 +174,7 @@ public class ConvertUtilsBean {
     // ------------------------------------------------------- Constructors
 
     /** Construct a bean with standard converters registered */
-    protected ConvertUtilsBean() {
+    public ConvertUtilsBean() {
         converters.setFast(false);
         deregister();
         converters.setFast(true);

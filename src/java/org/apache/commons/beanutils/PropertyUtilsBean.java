@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.2 2003/03/04 19:30:22 rdonkin Exp $
- * $Revision: 1.2 $
- * $Date: 2003/03/04 19:30:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.3 2003/03/15 11:38:10 rdonkin Exp $
+ * $Revision: 1.3 $
+ * $Date: 2003/03/15 11:38:10 $
  *
  * ====================================================================
  *
@@ -134,7 +134,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.2 $ $Date: 2003/03/04 19:30:22 $
+ * @version $Revision: 1.3 $ $Date: 2003/03/15 11:38:10 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -163,7 +163,7 @@ public class PropertyUtilsBean {
     // ---------------------------------------------------------- Constructors
     
     /** Base constructor */
-    protected PropertyUtilsBean() {
+    public PropertyUtilsBean() {
         descriptorsCache = new FastHashMap();
         descriptorsCache.setFast(true);
         mappedDescriptorsCache = new FastHashMap();
