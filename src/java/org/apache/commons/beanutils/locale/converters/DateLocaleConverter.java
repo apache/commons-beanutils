@@ -272,7 +272,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
       * Convert a pattern from a localized format to the default format.
       *
       * @param locale   The locale
-      * @param pattern  The pattern in 'local' symbol format
+      * @param localizedPattern The pattern in 'local' symbol format
       * @return pattern in 'default' symbol format
       */
      private String convertLocalizedPattern(String localizedPattern, Locale locale) {
