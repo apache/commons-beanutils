@@ -1,0 +1,477 @@
+/*
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanificationTestCase.java,v 1.1 2003/05/16 14:50:22 rdonkin Exp $
+ * $Revision: 1.1 $
+ * $Date: 2003/05/16 14:50:22 $
+ *
+ * ====================================================================
+ *
+ * The Apache Software License, Version 1.1
+ *
+ * Copyright (c) 1999-2003 The Apache Software Foundation.  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution, if
+ *    any, must include the following acknowlegement:
+ *       "This product includes software developed by the
+ *        Apache Software Foundation (http://www.apache.org/)."
+ *    Alternately, this acknowlegement may appear in the software itself,
+ *    if and wherever such third-party acknowlegements normally appear.
+ *
+ * 4. The names "The Jakarta Project", "Commons", and "Apache Software
+ *    Foundation" must not be used to endorse or promote products derived
+ *    from this software without prior written permission. For written
+ *    permission, please contact apache@apache.org.
+ *
+ * 5. Products derived from this software may not be called "Apache"
+ *    nor may "Apache" appear in their names without prior written
+ *    permission of the Apache Group.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * <http://www.apache.org/>.
+ *
+ */
+
+package org.apache.commons.beanutils;
+
+import java.util.*;
+
+import java.lang.ref.WeakReference;
+import java.lang.ref.ReferenceQueue;
+
+import junit.framework.TestCase;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import org.apache.commons.collections.ReferenceMap;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <p>
+ * Test Case for changes made during Beanutils Beanification
+ * </p>
+ *
+ * @author Robert Burrell Donkin
+ * @author Juozas Baliuka
+ * @version $Revision: 1.1 $ $Date: 2003/05/16 14:50:22 $
+ */
+
+public class BeanificationTestCase extends TestCase {
+    
+    // ---------------------------------------------------- Constants
+    
+    /** Maximum number of iterations before our test fails */
+    public static final int MAX_GC_ITERATIONS = 50;
+    
+    // ---------------------------------------------------- Instance Variables
+
+
+    // ---------------------------------------------------------- Constructors
+
+
+    /**
+     * Construct a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public BeanificationTestCase(String name) {
+        super(name);
+    }
+
+
+    // -------------------------------------------------- Overall Test Methods
+
+
+    /**
+     * Set up instance variables required by this test case.
+     */
+    public void setUp() {
+
+        ConvertUtils.deregister();
+
+    }
+
+
+    /**
+     * Return the tests included in this test suite.
+     */
+    public static Test suite() {
+        return (new TestSuite(BeanificationTestCase.class));
+    }
+
+
+    /**
+     * Tear down instance variables required by this test case.
+     */
+    public void tearDown() {
+        ;    // No action required
+    }
+
+
+    // ------------------------------------------------ Individual Test Methods
+    
+    /** Test of the methodology we'll use for some of the later tests */
+    public void testMemoryTestMethodology() throws Exception {
+        // test methodology
+        // many thanks to Juozas Baliuka for suggesting this method
+        ClassLoader loader = new ClassLoader() {};
+        WeakReference reference = new  WeakReference(loader);
+        Class myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
+        
+        assertNotNull("Weak reference released early", reference.get());
+        
+        // dereference class loader and class:
+        loader = null;
+        myClass = null;
+        
+        int iterations = 0;
+        int bytz = 2;
+        while(true) {
+            System.gc();
+            if(iterations++ > MAX_GC_ITERATIONS){
+                fail("Max iterations reached before resource released.");
+            }
+            if( reference.get() == null ) {
+                break;
+                
+            } else {
+                // create garbage:
+                byte[] b =  new byte[bytz];
+                bytz = bytz * 2;
+            }
+        }
+    }
+    
+    /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
+    public void testMemoryLeak2() throws Exception {
+        // tests when the map used by beanutils has the right behaviour
+        
+        if (isPre14JVM()) {
+            System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
+            return;
+        }
+        
+        // many thanks to Juozas Baliuka for suggesting this methodology
+        TestClassLoader loader = new TestClassLoader();
+        ReferenceQueue queue = new ReferenceQueue();
+        WeakReference loaderReference = new WeakReference(loader, queue);
+        Integer test = new Integer(1);
+        
+        WeakReference testReference = new WeakReference(test, queue);
+        //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
+        Map map = new WeakHashMap();
+        map.put(loader, test);
+        
+        assertEquals("In map", test, map.get(loader));
+        assertNotNull("Weak reference released early (1)", loaderReference.get());
+        assertNotNull("Weak reference released early (2)", testReference.get());
+        
+        // dereference strong references
+        loader = null;
+        test = null;
+        
+        int iterations = 0;
+        int bytz = 2;
+        while(true) {
+            System.gc();
+            if(iterations++ > MAX_GC_ITERATIONS){
+                fail("Max iterations reached before resource released.");
+            }
+            map.isEmpty();
+            
+            if( 
+                loaderReference.get() == null &&
+                testReference.get() == null) {
+                break;
+                
+            } else {
+                // create garbage:
+                byte[] b =  new byte[bytz];
+                bytz = bytz * 2;
+            }
+        }
+    }
+    
+    /** Tests whether classloaders and beans are released from memory */
+    public void testMemoryLeak() throws Exception {
+        if (isPre14JVM()) {
+            System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
+            return;
+        }
+        
+        // many thanks to Juozas Baliuka for suggesting this methodology
+        TestClassLoader loader = new TestClassLoader();
+        WeakReference loaderReference = new  WeakReference(loader);
+        BeanUtilsBean.getInstance();
+
+        class GetBeanUtilsBeanThread extends Thread {
+            
+            BeanUtilsBean beanUtils;
+            ConvertUtilsBean convertUtils;
+            PropertyUtilsBean propertyUtils;
+        
+            GetBeanUtilsBeanThread() {}
+            
+            public void run() {
+                beanUtils = BeanUtilsBean.getInstance();
+                convertUtils = ConvertUtilsBean.getInstance();
+                propertyUtils = PropertyUtilsBean.getInstance();
+                // XXX Log keeps a reference around!
+                LogFactory.releaseAll();
+            }
+            
+            public String toString() {
+                return "GetBeanUtilsBeanThread";
+            }
+        }
+        
+    
+        GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
+        WeakReference threadWeakReference = new WeakReference(thread);
+        thread.setContextClassLoader(loader);
+
+        thread.start();
+        thread.join();
+        
+        WeakReference beanUtilsReference = new WeakReference(thread.beanUtils);
+        WeakReference propertyUtilsReference =  new WeakReference(thread.propertyUtils);
+        WeakReference convertUtilsReference = new WeakReference(thread.convertUtils);
+        
+        assertNotNull("Weak reference released early (1)", loaderReference.get());
+        assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
+        assertNotNull("Weak reference released early (3)", propertyUtilsReference.get());
+        assertNotNull("Weak reference released early (4)", convertUtilsReference.get());
+        
+        // dereference strong references
+        loader = null;
+        thread.setContextClassLoader(null);
+        thread = null;
+        
+        int iterations = 0;
+        int bytz = 2;
+        while(true) {
+            BeanUtilsBean.getInstance();
+            System.gc();
+            if(iterations++ > MAX_GC_ITERATIONS){
+                fail("Max iterations reached before resource released.");
+            }
+
+            if( 
+                loaderReference.get() == null &&
+                beanUtilsReference.get() == null && 
+                propertyUtilsReference.get() == null && 
+                convertUtilsReference.get() == null) {
+                break;
+                
+            } else {
+                // create garbage:
+                byte[] b =  new byte[bytz];
+                bytz = bytz * 2;
+            }
+        }
+    }
+    
+    /** 
+     * Tests whether difference instances are loaded by different 
+     * context classloaders.
+     */
+    public void testGetByContextClassLoader() throws Exception {
+            
+        class GetBeanUtilsBeanThread extends Thread {
+            
+            private Signal signal;
+        
+            GetBeanUtilsBeanThread(Signal signal) {
+                this.signal = signal;
+            }
+            
+            public void run() {
+                signal.setSignal(2);
+                signal.setBean(BeanUtilsBean.getInstance());
+                signal.setConvertUtils(ConvertUtilsBean.getInstance());
+                signal.setPropertyUtils(PropertyUtilsBean.getInstance());
+            }
+            
+            public String toString() {
+                return "GetBeanUtilsBeanThread";
+            }
+        }
+            
+        Signal signal = new Signal();
+        signal.setSignal(1);
+        
+        GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread(signal);
+        thread.setContextClassLoader(new TestClassLoader());
+        
+        thread.start();
+        thread.join();
+        
+        assertEquals("Signal not set by test thread", 2, signal.getSignal());
+        assertTrue(
+                    "Different BeanUtilsBean instances per context classloader", 
+                    BeanUtilsBean.getInstance() != signal.getBean());
+        assertTrue(
+                    "Different ConvertUtilsBean instances per context classloader", 
+                    ConvertUtilsBean.getInstance() != signal.getConvertUtils());                    
+        assertTrue(
+                    "Different PropertyUtilsBean instances per context classloader", 
+                    PropertyUtilsBean.getInstance() != signal.getPropertyUtils());        
+    }
+    
+    /** Tests whether calls are independent for different classloaders */
+    public void testContextClassloaderIndependence() throws Exception {
+    
+        class TestIndependenceThread extends Thread {
+            private Signal signal;
+            private PrimitiveBean bean;
+        
+            TestIndependenceThread(Signal signal, PrimitiveBean bean) {
+                this.signal = signal;
+                this.bean = bean;
+            }
+            
+            public void run() {
+                try {
+                    signal.setSignal(3);
+                    ConvertUtils.register(new Converter() {
+                                            public Object convert(Class type, Object value) {
+                                                return new Integer(9);
+                                            }
+                                                }, Integer.TYPE);
+                    BeanUtils.setProperty(bean, "int", new Integer(1));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    signal.setException(e);
+                }
+            }
+            
+            public String toString() {
+                return "TestIndependenceThread";
+            }
+        }
+        
+        PrimitiveBean bean = new PrimitiveBean();
+        BeanUtils.setProperty(bean, "int", new Integer(1));
+        assertEquals("Wrong property value (1)", 1, bean.getInt());
+
+        ConvertUtils.register(new Converter() {
+                                public Object convert(Class type, Object value) {
+                                    return new Integer(5);
+                                }
+                                    }, Integer.TYPE);
+        BeanUtils.setProperty(bean, "int", new Integer(1));
+        assertEquals("Wrong property value(2)", 5, bean.getInt());
+    
+        Signal signal = new Signal();
+        signal.setSignal(1);
+        TestIndependenceThread thread = new TestIndependenceThread(signal, bean);
+        thread.setContextClassLoader(new TestClassLoader());
+        
+        thread.start();
+        thread.join();
+        
+        assertNull("Exception thrown by test thread:" + signal.getException(), signal.getException());
+        assertEquals("Signal not set by test thread", 3, signal.getSignal());
+        assertEquals("Wrong property value(3)", 9, bean.getInt());
+        
+    }
+    
+    private boolean isPre14JVM() {
+        // some pre 1.4 JVM have buggy WeakHashMap implementations 
+        // this is used to test for those JVM
+        String version = System.getProperty("java.specification.version");
+        StringTokenizer tokenizer = new StringTokenizer(version,".");
+        if (tokenizer.nextToken().equals("1")) {
+            String minorVersion = tokenizer.nextToken();
+            if (minorVersion.equals("0")) return true;
+            if (minorVersion.equals("1")) return true;
+            if (minorVersion.equals("2")) return true;
+            if (minorVersion.equals("3")) return true;
+        }
+        return false;
+    }
+    
+    // ---- Auxillary classes
+    
+    class TestClassLoader extends ClassLoader {
+        public String toString() {
+            return "TestClassLoader";
+        }
+    }
+    
+    class Signal {
+        private Exception e;
+        private int signal = 0;
+        private BeanUtilsBean bean;
+        private PropertyUtilsBean propertyUtils;
+        private ConvertUtilsBean convertUtils;
+        
+        public Exception getException() {
+            return e;
+        }
+        
+        public void setException(Exception e) {
+            this.e = e;
+        }
+        
+        public int getSignal() {
+            return signal;
+        }
+        
+        public void setSignal(int signal) {
+            this.signal = signal;
+        }
+        
+        public BeanUtilsBean getBean() {
+            return bean;
+        }
+        
+        public void setBean(BeanUtilsBean bean) {
+            this.bean = bean;
+        }
+        
+        public PropertyUtilsBean getPropertyUtils() {
+            return propertyUtils;
+        }
+        
+        public void setPropertyUtils(PropertyUtilsBean propertyUtils) {
+            this.propertyUtils = propertyUtils;
+        }
+        
+        public ConvertUtilsBean getConvertUtils() {
+            return convertUtils;
+        }
+        
+        public void setConvertUtils(ConvertUtilsBean convertUtils) {
+            this.convertUtils = convertUtils;
+        }
+    }
+}
+

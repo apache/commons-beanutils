@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.6 2003/05/06 11:32:23 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/05/06 11:32:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.7 2003/05/16 14:50:22 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/05/16 14:50:22 $
  *
  * ====================================================================
  *
@@ -73,6 +73,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
@@ -92,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.6 $ $Date: 2003/05/06 11:32:23 $
+ * @version $Revision: 1.7 $ $Date: 2003/05/16 14:50:22 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -104,8 +105,43 @@ public class BeanUtilsBean {
 
     /** Singleton instance */
     private static final BeanUtilsBean singleton = new BeanUtilsBean();
-    /** Basic factory method*/
-    protected static BeanUtilsBean getInstance() {
+    /** 
+     * Map contains <code>BeanUtilsBean</code> instances indexed by context classloader.
+     * <strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in a memory leak
+     * for those JVMs.
+     */
+    private static final Map beansByClassLoader
+            = new WeakHashMap();
+    
+    /** 
+     * Gets the instance which provides the functionality for {@link BeanUtils}.
+     * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
+     * This mechanism provides isolation for web apps deployed in the same container. 
+     */
+    public synchronized static BeanUtilsBean getInstance() {
+        // synchronizing the whole method is a bit slower 
+        // but guarentees no subtle threading problems
+        
+        // make sure that the map is given a change to purge itself
+        beansByClassLoader.isEmpty();
+        try {
+            
+            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            if (contextClassLoader != null) {
+                
+                BeanUtilsBean instance = (BeanUtilsBean) beansByClassLoader.get(contextClassLoader);
+                    
+                if (instance == null) {
+                    instance = new BeanUtilsBean();
+                    beansByClassLoader.put(contextClassLoader, instance);
+                }
+                return instance;
+                
+            }
+            
+        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
+        
+        // if in doubt, return the basic
         return singleton;
     }
 
@@ -125,11 +161,11 @@ public class BeanUtilsBean {
     // --------------------------------------------------------- Constuctors
 
     /** 
-     * <p>Constructs an instance using standard (singleton) property 
+     * <p>Constructs an instance using new property 
      * and conversion instances.</p>
      */
     public BeanUtilsBean() {
-        this(ConvertUtilsBean.getInstance(),PropertyUtilsBean.getInstance());
+        this(new ConvertUtilsBean(), new PropertyUtilsBean());
     }
 
     /** 

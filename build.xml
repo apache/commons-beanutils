@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.54 2003/05/06 11:32:23 rdonkin Exp $
+        $Id: build.xml,v 1.55 2003/05/16 14:50:21 rdonkin Exp $
 -->
 
 
@@ -263,7 +263,8 @@
                                 test.dyna.row,
                                 test.bean.comparator,
                                 test.locale.convert,
-                                test.converters
+                                test.converters,
+                                test.beanification
                                "
    description="Run all unit test cases">
   </target>
@@ -461,6 +462,15 @@
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
       <arg value="org.apache.commons.beanutils.converters.ConverterTestSuite"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+  
+  <target name="test.beanification" depends="compile.tests">
+    <echo message="Running Beanification tests ..."/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <arg value="org.apache.commons.beanutils.BeanificationTestCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
