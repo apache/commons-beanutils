@@ -722,35 +722,108 @@ public class MethodUtils {
      *
      * @return true if the assignement is compatible.
      */
-    protected static final boolean isAssignmentCompatible(Class parameterType, Class parameterization) {
+    public static final boolean isAssignmentCompatible(Class parameterType, Class parameterization) {
         // try plain assignment
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
         }
         
         if (parameterType.isPrimitive()) {
-            // does anyone know a better strategy than comparing names?
-            // also, this method does *not* do widening - you must specify exactly
+            // this method does *not* do widening - you must specify exactly
             // is this the right behaviour?
-            if (boolean.class.equals(parameterType)) {
-                return Boolean.class.equals(parameterization);
-            }         
-            if (float.class.equals(parameterType)) {
-                return Float.class.equals(parameterization);
-            }     
-            if (long.class.equals(parameterType)) {
-                return Long.class.equals(parameterization);
-            }     
-            if (int.class.equals(parameterType)) {
-                return Integer.class.equals(parameterization);
-            }                
-            if (double.class.equals(parameterType)) {
-                return Double.class.equals(parameterization);
-            }               
+            Class parameterWrapperClazz = getPrimitiveWrapper(parameterType);
+            if (parameterWrapperClazz != null) {
+                return parameterWrapperClazz.equals(parameterization);
+            }
         }
         
         return false;
     }
+    
+    /**
+     * Gets the wrapper object class for the given primitive type class.
+     * For example, passing <code>boolean.class</code> returns <code>Boolean.class</code>
+     * @param primitiveType the primitive type class for which a match is to be found
+     * @return the wrapper type associated with the given primitive 
+     * or null if no match is found
+     */
+    public static Class getPrimitiveWrapper(Class primitiveType) {
+        // does anyone know a better strategy than comparing names?
+        if (boolean.class.equals(primitiveType)) {
+            return Boolean.class;
+        } else if (float.class.equals(primitiveType)) {
+            return Float.class;
+        } else if (long.class.equals(primitiveType)) {
+            return Long.class;
+        } else if (int.class.equals(primitiveType)) {
+            return Integer.class;
+        } else if (short.class.equals(primitiveType)) {
+            return Short.class;
+        } else if (byte.class.equals(primitiveType)) {
+            return Byte.class;
+        } else if (double.class.equals(primitiveType)) {
+            return Double.class;
+        } else if (char.class.equals(primitiveType)) {
+            return Character.class;
+        } else {
+            
+            return null;
+        }
+    }
+
+    /**
+     * Gets the class for the primitive type corresponding to the primitive wrapper class given.
+     * For example, an instance of <code>Boolean.class</code> returns a <code>boolean.class</code>. 
+     * @param wrapperType the 
+     * @return the primitive type class corresponding to the given wrapper class,
+     * null if no match is found
+     */
+    public static Class getPrimitiveType(Class wrapperType) {
+        // does anyone know a better strategy than comparing names?
+        if (Boolean.class.equals(wrapperType)) {
+            return boolean.class;
+        } else if (Float.class.equals(wrapperType)) {
+            return float.class;
+        } else if (Long.class.equals(wrapperType)) {
+            return long.class;
+        } else if (Integer.class.equals(wrapperType)) {
+            return int.class;
+        } else if (Short.class.equals(wrapperType)) {
+            return short.class;
+        } else if (Byte.class.equals(wrapperType)) {
+            return byte.class;
+        } else if (Double.class.equals(wrapperType)) {
+            return double.class;
+        } else if (Character.class.equals(wrapperType)) {
+            return char.class;
+        } else {
+            if (log.isDebugEnabled()) {
+                log.debug("Not a known primitive wrapper class: " + wrapperType);
+            }
+            return null;
+        }
+    }
+    
+    /**
+     * Find a non primitive representation for given primitive class.
+     *
+     * @param Class the class to find a representation for, not null
+     * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
+     */
+    public static Class toNonPrimitiveClass(Class clazz) {
+        if (clazz.isPrimitive()) {
+            Class primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
+            // the above method returns 
+            if (primitiveClazz != null) {
+                return primitiveClazz;
+            } else {
+                return clazz;
+            }
+        } else {
+            return clazz;
+        }
+    }
+    
 
     /**
      * Represents the key to looking up a Method by reflection.
