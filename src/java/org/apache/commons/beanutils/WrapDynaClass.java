@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.1 2002/01/12 20:44:05 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/01/12 20:44:05 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/WrapDynaClass.java,v 1.2 2002/01/16 18:20:02 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/01/16 18:20:02 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.util.Map;
  * standard JavaBean instances.</p>
  *
  * @author Craig McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/01/12 20:44:05 $
+ * @version $Revision: 1.2 $ $Date: 2002/01/16 18:20:02 $
  */
 
 public class WrapDynaClass implements DynaClass {
@@ -142,7 +142,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * The set of <code>WrapDynaBean</code> instances that have ever been
+     * The set of <code>WrapDynaClass</code> instances that have ever been
      * created, keyed by the underlying bean Class.
      */
     protected static HashMap dynaClasses = new HashMap();
@@ -318,7 +318,6 @@ public class WrapDynaClass implements DynaClass {
                                  Map.class);
             propertiesMap.put(properties[j].getName(),
                               properties[j]);
-            System.out.println("Adding mapped property " + properties[j]);
             j++;
         }
 
