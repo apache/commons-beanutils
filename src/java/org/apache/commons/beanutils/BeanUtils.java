@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.19 2002/04/07 00:27:32 craigmcc Exp $
- * $Revision: 1.19 $
- * $Date: 2002/04/07 00:27:32 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.20 2002/04/08 17:19:59 craigmcc Exp $
+ * $Revision: 1.20 $
+ * $Date: 2002/04/08 17:19:59 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.19 $ $Date: 2002/04/07 00:27:32 $
+ * @version $Revision: 1.20 $ $Date: 2002/04/08 17:19:59 $
  */
 
 public class BeanUtils {
@@ -612,6 +612,9 @@ public class BeanUtils {
             try {
                 descriptor =
                     PropertyUtils.getPropertyDescriptor(target, name);
+                if (descriptor == null) {
+                    return; // Skip this property setter
+                }
             } catch (NoSuchMethodException e) {
                 return; // Skip this property setter
             }
