@@ -1,13 +1,13 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/LICENSE.txt,v 1.1 2002/07/25 02:36:44 jvanzyl Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/25 02:36:44 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/LICENSE.txt,v 1.2 2002/10/24 04:45:05 sanders Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/10/24 04:45:05 $
  *
  * ====================================================================
  *
  * The Apache Software License, Version 1.1
  *
- * Copyright (c) 1999-2001 The Apache Software Foundation.  All rights
+ * Copyright (c) 1999-2002 The Apache Software Foundation.  All rights
  * reserved.
  *
  * Redistribution and use in source and binary forms, with or without

@@ -1,7 +1,7 @@
-$Id: RELEASE-NOTES.txt,v 1.7 2002/08/21 16:41:52 sanders Exp $
+$Id: RELEASE-NOTES.txt,v 1.8 2002/10/24 04:40:41 sanders Exp $
 
                           Commons BeanUtils Package
-                               Version 1.4.1
+                                Version 1.5
                                Release Notes
 
 
@@ -15,8 +15,28 @@ BeanUtils package, and highlights changes since the previous version.
 NEW FEATURES:
 ============
 
-MethodUtils Enhancements:
-------------------------
+NEW: BeanComparator! Check it out.
 
-Optimized slow method by checking to see if the method can be found directly 
-before going through all the class methods.
+
+CHANGES:
+========
+
+Various documentation fixes by several people.
+
+BUG REPORTS ADDRESSED:
+=====================
+
+10458	Can't use . (dot) in mapped properties (Again :-)
+11772   IllegalArgumentException when using a.b(key) in property in struts
+        1.1b2
+11860   minor typo in overview doc
+12152   Combined property access ( b.mapped(bar/foo) ) throws excception
+12247   MethodUtils.getMatchingAccessibleMethod throws NullPointerException
+        when parameterTypes is null
+12458   BeanUtils.setProperty does not work with indexed properties
+12544   mappedDescriptorsCache not caching
+12728   Cache Bug in the PropertyUtils.java line 889
+12994   PropertyUtils.copyProperties don't work if JavaBean orig and DynaBean
+        dest
+13596   Missing Test case
+

@@ -4,7 +4,7 @@
   <extend>../project.xml</extend>
   <name>BeanUtils</name>
   <id>commons-beanutils</id>
-  <currentVersion>1.0-dev</currentVersion>
+  <currentVersion>1.5</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons Bean Utils</shortDescription>
   <description>Java Bean Utililities</description>
@@ -14,6 +14,12 @@
       <name>Craig McClanahan</name>
       <id></id>
       <email></email>
+      <organization></organization>
+    </developer>
+    <developer>
+      <name>Scott Sanders</name>
+      <id>sanders</id>
+      <email>sanders@apache.org</email>
       <organization></organization>
     </developer>
   </developers>
