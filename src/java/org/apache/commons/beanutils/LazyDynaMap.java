@@ -44,7 +44,7 @@ import java.util.Iterator;
  *
  * @author Niall Pemberton
  */
-public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
+public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     /**
      * The name of this DynaClass (analogous to the
@@ -72,7 +72,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
      * Default Constructor.
      */
     public LazyDynaMap() {
-        this(null, null, null);
+        this(null, (Map)null);
     }
 
     /**
@@ -81,7 +81,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
      * @param name Name of this DynaBean class
      */
     public LazyDynaMap(String name) {
-        this(name, null, null);
+        this(name, (Map)null);
     }
 
     /**
@@ -90,17 +90,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
      * @param values The Map backing this <code>LazyDynaMap</code>
      */
     public LazyDynaMap(Map values) {
-        this(null, values, null);
-    }
-
-    /**
-     * Construct a new <code>LazyDynaMap</code> with the specified properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaMap(DynaProperty[] properties) {
-        this(null, null, properties);
+        this(null, values);
     }
 
     /**
@@ -110,7 +100,18 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
      * @param values The Map backing this <code>LazyDynaMap</code>
      */
     public LazyDynaMap(String name, Map values) {
-        this(name, values, null);
+        this.name      = name   == null ? "LazyDynaMap" : name;
+        this.values    = values == null ? newMap()      : values;
+        this.dynaClass = this;
+    }
+
+    /**
+     * Construct a new <code>LazyDynaMap</code> with the specified properties.
+     *
+     * @param properties Property descriptors for the supported properties
+     */
+    public LazyDynaMap(DynaProperty[] properties) {
+        this(null, properties);
     }
 
     /**
@@ -120,53 +121,21 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
      * @param properties Property descriptors for the supported properties
      */
     public LazyDynaMap(String name, DynaProperty[] properties) {
-        this(name, null, properties);
+        this(name, (Map)null);
+        if (properties != null) {
+            for (int i = 0; i < properties.length; i++) {
+                add(properties[i]);
+            }
+        }
     }
 
     /**
-     * Construct a new <code>LazyDynaMap</code> with the name, class and properties.
+     * Construct a new <code>LazyDynaMap</code> based on an exisiting DynaClass
      *
-     * @param name Name of this DynaBean class
-     * @param valuesClass The implementation class for the <code>Map</code>
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaMap(Map values, DynaProperty properties[]) {
-        this(null, values, properties);
-    }
-
-    /**
-     * Construct a new <code>LazyDynaMap</code> with the name, class and properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param valuesClass The implementation class for the <code>Map</code>
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaMap(String name, Map values, DynaProperty properties[]) {
-        initialize(name, values, properties);
-    }
-
-    /**
-     * Construct a new <code>LazyDynaMap</code> with the specified name and properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param properties Property descriptors for the supported properties
+     * @param dynaClass DynaClass to copy the name and properties from
      */
     public LazyDynaMap(DynaClass dynaClass) {
-        this(dynaClass, null);
-    }
-
-    /**
-     * Construct a new <code>LazyDynaMap</code> with the specified name and properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaMap(DynaClass dynaClass, Map values) {
-        if (dynaClass == null) {
-            initialize(null, values, null);
-        } else {
-            initialize(dynaClass.getName(), values, dynaClass.getDynaProperties());
-        }
+        this(dynaClass.getName(), dynaClass.getDynaProperties());
     }
 
     // ------------------- Public Methods ----------------------------------
@@ -278,12 +247,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
     /**
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
-     *
-     * @exception IllegalAccessException if the Class or the appropriate
-     *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
-     *  class, an array class, a primitive type, or void; or if instantiation
-     *  fails for some other reason
      */
     public DynaBean newInstance()  {
         return new LazyDynaMap(this);
@@ -293,18 +256,18 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
     // ------------------- MutableDynaClass Methods ----------------------------------
 
     /**
-     * Is this DynaClass currently restricted, if so, no changes to the
-     * existing registration of property names, data types, readability, or
-     * writeability are allowed.
+     * <p>Is this DynaClass currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
      */
     public boolean isRestricted() {
         return restricted;
     }
 
     /**
-     * Set whether this DynaClass is currently restricted. if so, no changes to the
-     * existing registration of property names, data types, readability, or
-     * writeability are allowed.
+     * <p>Set whether this DynaClass is currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
      */
     public void setRestricted(boolean restricted) {
         this.restricted = restricted;
@@ -380,8 +343,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
     /**
      * Add a new dynamic property.
      *
-     * @param name Name of the new dynamic property
-     * @param type Property the new dynamic property
+     * @param property Property the new dynamic property to add.
      *
      * @exception IllegalArgumentException if name is null
      */
@@ -442,26 +404,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass  {
 
 
     // ------------------- Protected Methods ----------------------------------
-
-    /**
-     * Initialize the  the new <code>LazyDynaMap</code> with the name, Map and properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param valuesClass The implementation class for the <code>Map</code>
-     * @param properties Property descriptors for the supported properties
-     */
-    protected void initialize(String name, Map values, DynaProperty properties[]) {
-
-        this.dynaClass = this;
-        this.name      = name   == null ? "LazyDynaMap" : name;
-        this.values    = values == null ? newMap()      : values;
-
-        if (properties != null) {
-            for (int i = 0; i < properties.length; i++) {
-                add(properties[i]);
-            }
-        }
-    }
 
    /**
      * <p>Indicate whether a property actually exists.</p>

@@ -23,6 +23,7 @@ import java.util.Date;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -105,7 +106,7 @@ import org.apache.commons.logging.LogFactory;
  * @see LazyDynaClass
  * @author Niall Pemberton
  */
-public class LazyDynaBean implements DynaBean  {
+public class LazyDynaBean implements DynaBean, Serializable {
 
 
    /**
@@ -186,7 +187,7 @@ public class LazyDynaBean implements DynaBean  {
     /**
      * <p>Return the size of an indexed or mapped property.</p>
      *
-     * @param size Size of the Map, List or Array.
+     * @param name Name of the property
      * @exception IllegalArgumentException if no property name is specified
      */
     public int size(String name) {
@@ -355,7 +356,7 @@ public class LazyDynaBean implements DynaBean  {
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
             throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'"
+                ("Non-mapped property for '" + name + "(" + key + ")' "
                             + dynaClass.getDynaProperty(name).getType().getName());
         }
 
@@ -826,7 +827,7 @@ public class LazyDynaBean implements DynaBean  {
     }
 
     /**
-     * <p>Creates a new instance of the <code>Map</code></p>
+     * <p>Creates a new instance of the <code>Map</code>.</p>
      */
     protected Map newMap() {
         return new HashMap();

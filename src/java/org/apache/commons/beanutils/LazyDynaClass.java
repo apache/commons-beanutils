@@ -64,17 +64,16 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified parameters.
+     * Construct a new LazyDynaClass with the specified name.
      *
      * @param name Name of this DynaBean class
-     * @param dynaBeanClass The implementation class for new instances
      */
     public LazyDynaClass(String name) {
         this(name, (DynaProperty[])null);
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified parameters.
+     * Construct a new LazyDynaClass with the specified name and DynaBean class.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances
@@ -84,10 +83,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified parameters.
+     * Construct a new LazyDynaClass with the specified name and properties.
      *
      * @param name Name of this DynaBean class
-     * @param dynaBeanClass The implementation class for new intances
      * @param properties Property descriptors for the supported properties
      */
     public LazyDynaClass(String name, DynaProperty[] properties) {
@@ -95,7 +93,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified parameters.
+     * Construct a new LazyDynaClass with the specified name, DynaBean class and properties.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new intances
@@ -106,18 +104,18 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Is this DynaClass currently restricted, if so, no changes to the
-     * existing registration of property names, data types, readability, or
-     * writeability are allowed.
+     * <p>Is this DynaClass currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
      */
     public boolean isRestricted() {
         return restricted;
     }
 
     /**
-     * Set whether this DynaClass is currently restricted. if so, no changes to the
-     * existing registration of property names, data types, readability, or
-     * writeability are allowed.
+     * <p>Set whether this DynaClass is currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
      */
     public void setRestricted(boolean restricted) {
         this.restricted = restricted;
@@ -199,8 +197,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     /**
      * Add a new dynamic property.
      *
-     * @param name Name of the new dynamic property
-     * @param type Property the new dynamic property
+     * @param property Property the new dynamic property to add.
      *
      * @exception IllegalArgumentException if name is null
      * @exception IllegalStateException if this DynaClass is currently
