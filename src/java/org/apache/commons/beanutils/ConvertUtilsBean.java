@@ -103,7 +103,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Ralph Schaer
  * @author Chris Audley
  * @author James Strachan
- * @version $Revision: 1.12 $ $Date: 2004/02/28 13:18:33 $
+ * @version $Revision: 1.13 $ $Date: 2004/07/18 14:58:22 $
  * @since 1.7
  */
 
@@ -437,7 +437,7 @@ public class ConvertUtilsBean {
      * Otherwise, an array will be constructed whose component type is the
      * specified class.
      *
-     * @param value Value to be converted (may be null)
+     * @param values Array of values to be converted
      * @param clazz Java array or element class to be converted to
      *
      * @exception ConversionException if thrown by an underlying Converter

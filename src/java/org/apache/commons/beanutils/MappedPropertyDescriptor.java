@@ -40,7 +40,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.18 $ $Date: 2004/06/03 21:16:56 $
+ * @version $Revision: 1.19 $ $Date: 2004/07/18 14:58:22 $
  */
 
 
@@ -228,7 +228,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Sets the method that should be used to read one of the property value.
      *
-     * @param getter The new getter method.
+     * @param mappedGetter The mapped getter method.
      */
     public void setMappedReadMethod(Method mappedGetter)
             throws IntrospectionException {
@@ -249,7 +249,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Sets the method that should be used to write the property value.
      *
-     * @param setter The new setter method.
+     * @param mappedSetter The mapped setter method.
      */
     public void setMappedWriteMethod(Method mappedSetter)
             throws IntrospectionException {
