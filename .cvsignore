@@ -3,3 +3,4 @@ dist
 target
 beanutils.ipr
 maven.log
+velocity.log
