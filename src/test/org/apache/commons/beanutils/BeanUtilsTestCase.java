@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.11 2002/07/07 23:08:42 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2002/07/07 23:08:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.12 2002/07/13 02:22:09 craigmcc Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/07/13 02:22:09 $
  *
  * ====================================================================
  *
@@ -96,7 +96,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -173,6 +173,132 @@ public class BeanUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test the copyProperties() method from a DynaBean.
+     */
+    public void testCopyPropertiesDynaBean() {
+
+        // Set up an origin bean with customized properties
+        DynaClass dynaClass = DynaBeanUtilsTestCase.createDynaClass();
+        DynaBean orig = null;
+        try {
+            orig = dynaClass.newInstance();
+        } catch (Exception e) {
+            fail("newInstance(): " + e);
+        }
+        orig.set("booleanProperty", Boolean.FALSE);
+        orig.set("doubleProperty", new Double(333.33));
+        orig.set("intArray", new int[] { 100, 200, 300 });
+        orig.set("intProperty", new Integer(333));
+        orig.set("longProperty", new Long(3333));
+        orig.set("shortProperty", new Short((short) 33));
+        orig.set("stringArray", new String[] { "New 0", "New 1" });
+        orig.set("stringProperty", "Custom string");
+
+        // Copy the origin bean to our destination test bean
+        try {
+            BeanUtils.copyProperties(bean, orig);
+        } catch (Exception e) {
+            fail("Threw exception: " + e);
+        }
+
+        // Validate the results for scalar properties
+        assertEquals("Copied boolean property",
+                     false,
+                     bean.getBooleanProperty());
+        assertEquals("Copied double property",
+                     333.33,
+                     bean.getDoubleProperty(),
+                     0.005);
+        assertEquals("Copied int property",
+                     333,
+                     bean.getIntProperty());
+        assertEquals("Copied long property",
+                     (long) 3333,
+                     bean.getLongProperty());
+        assertEquals("Copied short property",
+                     (short) 33,
+                     bean.getShortProperty());
+        assertEquals("Copied string property",
+                     "Custom string",
+                     bean.getStringProperty());
+
+        // Validate the results for array properties
+        int intArray[] = bean.getIntArray();
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 100, intArray[0]);
+        assertEquals("intArray[1]", 200, intArray[1]);
+        assertEquals("intArray[2]", 300, intArray[2]);
+        String stringArray[] = bean.getStringArray();
+        assertNotNull("stringArray present", stringArray);
+        assertEquals("stringArray length", 2, stringArray.length);
+        assertEquals("stringArray[0]", "New 0", stringArray[0]);
+        assertEquals("stringArray[1]", "New 1", stringArray[1]);
+
+    }
+
+
+    /**
+     * Test the copyProperties() method from a standard JavaBean.
+     */
+    public void testCopyPropertiesStandard() {
+
+        // Set up an origin bean with customized properties
+        TestBean orig = new TestBean();
+        orig.setBooleanProperty(false);
+        orig.setDoubleProperty(333.33);
+        orig.setIntArray(new int[] { 100, 200, 300 });
+        orig.setIntProperty(333);
+        orig.setLongProperty(3333);
+        orig.setShortProperty((short) 33);
+        orig.setStringArray(new String[] { "New 0", "New 1" });
+        orig.setStringProperty("Custom string");
+
+        // Copy the origin bean to our destination test bean
+        try {
+            BeanUtils.copyProperties(bean, orig);
+        } catch (Exception e) {
+            fail("Threw exception: " + e);
+        }
+
+        // Validate the results for scalar properties
+        assertEquals("Copied boolean property",
+                     false,
+                     bean.getBooleanProperty());
+        assertEquals("Copied double property",
+                     333.33,
+                     bean.getDoubleProperty(),
+                     0.005);
+        assertEquals("Copied int property",
+                     333,
+                     bean.getIntProperty());
+        assertEquals("Copied long property",
+                     (long) 3333,
+                     bean.getLongProperty());
+        assertEquals("Copied short property",
+                     (short) 33,
+                     bean.getShortProperty());
+        assertEquals("Copied string property",
+                     "Custom string",
+                     bean.getStringProperty());
+
+        // Validate the results for array properties
+        int intArray[] = bean.getIntArray();
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 100, intArray[0]);
+        assertEquals("intArray[1]", 200, intArray[1]);
+        assertEquals("intArray[2]", 300, intArray[2]);
+        String stringArray[] = bean.getStringArray();
+        assertNotNull("stringArray present", stringArray);
+        assertEquals("stringArray length", 2, stringArray.length);
+        assertEquals("stringArray[0]", "New 0", stringArray[0]);
+        assertEquals("stringArray[1]", "New 1", stringArray[1]);
+
+    }
 
 
     /**

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/LongConverter.java,v 1.2 2002/04/11 19:50:06 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/04/11 19:50:06 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/LongConverter.java,v 1.3 2002/07/13 02:22:08 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/07/13 02:22:08 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/04/11 19:50:06 $
+ * @version $Revision: 1.3 $ $Date: 2002/07/13 02:22:08 $
  * @since 1.3
  */
 
@@ -148,8 +148,12 @@ public final class LongConverter implements Converter {
             }
         }
 
+        if (value instanceof Long) {
+            return (value);
+        }
+
         try {
-            return (new Long((String) value));
+            return (new Long(value.toString()));
         } catch (Exception e) {
             if (useDefault) {
                 return (defaultValue);

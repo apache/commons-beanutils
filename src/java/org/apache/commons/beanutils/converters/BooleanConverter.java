@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BooleanConverter.java,v 1.4 2002/06/15 21:14:34 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/06/15 21:14:34 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/BooleanConverter.java,v 1.5 2002/07/13 02:22:08 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/07/13 02:22:08 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.Converter;
  * error occurs.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/06/15 21:14:34 $
+ * @version $Revision: 1.5 $ $Date: 2002/07/13 02:22:08 $
  * @since 1.3
  */
 
@@ -148,8 +148,12 @@ public final class BooleanConverter implements Converter {
             }
         }
 
+        if (value instanceof Boolean) {
+            return (value);
+        }
+
         try {
-            String stringValue = (String) value;
+            String stringValue = value.toString();
             if (stringValue.equalsIgnoreCase("yes") ||
                 stringValue.equalsIgnoreCase("y") ||
                 stringValue.equalsIgnoreCase("true") ||

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.24 2002/07/07 23:08:41 craigmcc Exp $
- * $Revision: 1.24 $
- * $Date: 2002/07/07 23:08:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.25 2002/07/13 02:22:08 craigmcc Exp $
+ * $Revision: 1.25 $
+ * $Date: 2002/07/13 02:22:08 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.24 $ $Date: 2002/07/07 23:08:41 $
+ * @version $Revision: 1.25 $ $Date: 2002/07/13 02:22:08 $
  */
 
 public class BeanUtils {
@@ -169,11 +169,206 @@ public class BeanUtils {
 
 
     /**
+     * <p>Copy property values from the origin bean to the destination bean
+     * for all cases where the property names are the same.  For each
+     * property, a conversion is attempted as necessary.  All combinations of
+     * standard JavaBeans and DynaBeans as origin and destination are
+     * supported.  Properties that exist in the origin bean, but do not exist
+     * in the destination bean (or are read-only in the destination bean) are
+     * silently ignored.</p>
+     *
+     * <p>This method differs from <code>populate()</code>, which
+     * was primarily designed for populating JavaBeans from the map of request
+     * parameters retrieved on an HTTP request, is that no scalar->indexed
+     * or indexed->scalar manipulations are performed.  If the origin property
+     * is indexed, the destination property must be also.</p>
+     *
+     * <p>If you know that no type conversions are required, the
+     * <code>copyProperties()</code> method in {@link PropertyUtils} will
+     * execute faster than this method.</p>
+     *
+     * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
+     * have getter and setter methods for the underlying array or Map are not
+     * copied by this method.</p>
+     *
+     * @param dest Destination bean whose properties are modified
+     * @param orig Origin bean whose properties are retrieved
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception IllegalArgumentException if the <code>dest</code> or
+     *  <code>orig</code> argument is null
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @exception NullPointerException if <code>orig</code> or
+     *  <code>dest</code> is <code>null</code>
+     */
+    public static void copyProperties(Object dest, Object orig)
+        throws IllegalAccessException, InvocationTargetException {
+
+        // Validate existence of the specified beans
+        if (dest == null) {
+            throw new IllegalArgumentException
+                    ("No destination bean specified");
+        }
+        if (orig == null) {
+            throw new IllegalArgumentException("No origin bean specified");
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("BeanUtils.copyProperties(" + dest + ", " +
+                      orig + ")");
+        }
+
+        // Copy the properties, converting as necessary
+        if (orig instanceof DynaBean) {
+            DynaProperty origDescriptors[] =
+                ((DynaBean) orig).getDynaClass().getDynaProperties();
+            for (int i = 0; i < origDescriptors.length; i++) {
+                String name = origDescriptors[i].getName();
+                Object value = ((DynaBean) orig).get(name);
+                copyProperty(dest, name, value);
+            }
+        } else /* if (!(orig instanceof DynaBean)) */ {
+            PropertyDescriptor origDescriptors[] =
+                PropertyUtils.getPropertyDescriptors(orig);
+            for (int i = 0; i < origDescriptors.length; i++) {
+                if (origDescriptors[i].getReadMethod() == null) {
+                    if (log.isTraceEnabled()) {
+                        log.trace("-->No getter on JavaBean for " +
+                                  origDescriptors[i].getName() + ", skipping");
+                    }
+                    continue;
+                }
+                String name = origDescriptors[i].getName();
+                if ("class".equals(name)) {
+                    continue; // No point in trying to set an object's class
+                }
+                Object value = null;
+                try {
+                    value = PropertyUtils.getSimpleProperty(orig, name);
+                } catch (NoSuchMethodException e) {
+                    log.error("-->Should not have happened", e);
+                    value = null; // Can not happen
+                }
+                copyProperty(dest, name, value);
+            }
+        }
+
+    }
+
+
+    /**
+     * <p>Copy the specified property value to the specified destination bean,
+     * performing any type conversion that is required.  If the specified
+     * bean does not have a property of the specified name, return without
+     * doing anything.  If you have custom destination property types, register
+     * {@link Converter}s for them by calling the <code>register()</code>
+     * method of {@link ConvertUtils}.</p>
+     *
+     * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
+     * have getter and setter methods for the underlying array or Map are not
+     * copied by this method.</p>
+     *
+     * @param bean Bean on which setting is to be performed
+     * @param name Simple property name of the property to be set
+     * @param value Property value to be set
+     *
+     * @exception IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @exception InvocationTargetException if the property accessor method
+     *  throws an exception
+     */
+    public static void copyProperty(Object bean, String name, Object value)
+        throws IllegalAccessException, InvocationTargetException {
+
+        if (log.isTraceEnabled()) {
+            StringBuffer sb = new StringBuffer("  copyProperty(");
+            sb.append(bean);
+            sb.append(", ");
+            sb.append(name);
+            sb.append(", ");
+            if (value == null) {
+                sb.append("<NULL>");
+            } else if (value instanceof String) {
+                sb.append((String) value);
+            } else if (value instanceof String[]) {
+                String values[] = (String[]) value;
+                sb.append('[');
+                for (int i = 0; i < values.length; i++) {
+                    if (i > 0) {
+                        sb.append(',');
+                    }
+                    sb.append(values[i]);
+                }
+                sb.append(']');
+            } else {
+                sb.append(value.toString());
+            }
+            sb.append(')');
+            log.trace(sb.toString());
+        }
+
+        if (bean instanceof DynaBean) {
+            DynaProperty propDescriptor =
+                ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+            if (propDescriptor != null) {
+                Converter converter =
+                    ConvertUtils.lookup(propDescriptor.getType());
+                if (converter != null) {
+                    value = converter.convert(propDescriptor.getType(), value);
+                }
+                try {
+                    PropertyUtils.setSimpleProperty(bean, name, value);
+                } catch (NoSuchMethodException e) {
+                    log.error("-->Should not have happened", e);
+                    ; // Silently ignored
+                }
+            } else {
+                if (log.isTraceEnabled()) {
+                    log.trace("-->No setter on 'to' DynaBean, skipping");
+                }
+            }
+        } else /* if (!(bean instanceof DynaBean)) */ {
+            PropertyDescriptor propDescriptor = null;
+            try {
+                propDescriptor =
+                    PropertyUtils.getPropertyDescriptor(bean, name);
+            } catch (NoSuchMethodException e) {
+                propDescriptor = null;
+            }
+            if ((propDescriptor != null) &&
+                (propDescriptor.getWriteMethod() == null)) {
+                propDescriptor = null;
+            }
+            if (propDescriptor != null) {
+                Converter converter =
+                    ConvertUtils.lookup(propDescriptor.getPropertyType());
+                if (converter != null) {
+                    value = converter.convert
+                        (propDescriptor.getPropertyType(), value);
+                }
+                try {
+                    PropertyUtils.setSimpleProperty(bean, name, value);
+                } catch (NoSuchMethodException e) {
+                    log.error("-->Should not have happened", e);
+                    ; // Silently ignored
+                }
+            } else {
+                if (log.isTraceEnabled()) {
+                    log.trace("-->No setter on JavaBean, skipping");
+                }
+            }
+        }
+
+    }
+
+
+    /**
      * Return the entire set of properties for which the specified bean
      * provides a read method.  This map can be fed back to a call to
      * <code>BeanUtils.populate()</code> to reconsitute the same set of
      * properties, modulo differences for read-only and write-only
-     * properties.
+     * properties, but only if there are no indexed properties.
      *
      * @param bean Bean whose properties are to be extracted
      *
@@ -458,24 +653,30 @@ public class BeanUtils {
 
 
     /**
-     * Populate the JavaBeans properties of the specified bean, based on
+     * <p>Populate the JavaBeans properties of the specified bean, based on
      * the specified name/value pairs.  This method uses Java reflection APIs
      * to identify corresponding "property setter" method names, and deals
      * with setter arguments of type <code>String</code>, <code>boolean</code>,
      * <code>int</code>, <code>long</code>, <code>float</code>, and
      * <code>double</code>.  In addition, array setters for these types (or the
-     * corresponding primitive types) can also be identified.
-     * <p>
-     * The particular setter method to be called for each property is
+     * corresponding primitive types) can also be identified.</p>
+     * 
+     * <p>The particular setter method to be called for each property is
      * determined using the usual JavaBeans introspection mechanisms.  Thus,
      * you may identify custom setter methods using a BeanInfo class that is
      * associated with the class of the bean itself.  If no such BeanInfo
      * class is available, the standard method name conversion ("set" plus
-     * the capitalized name of the property in question) is used.
-     * <p>
-     * <strong>NOTE</strong>:  It is contrary to the JavaBeans Specification
+     * the capitalized name of the property in question) is used.</p>
+     * 
+     * <p><strong>NOTE</strong>:  It is contrary to the JavaBeans Specification
      * to have more than one setter method (with different argument
-     * signatures) for the same property.
+     * signatures) for the same property.</p>
+     *
+     * <p><strong>WARNING</strong> - The logic of this method is customized
+     * for extracting String-based request parameters from an HTTP request.
+     * It is probably not what you want for general property copying with
+     * type conversion.  For that purpose, check out the
+     * <code>copyProperties()</code> method instead.</p>
      *
      * @param bean JavaBean whose properties are being populated
      * @param properties Map keyed by property name, with the
@@ -526,6 +727,11 @@ public class BeanUtils {
      *
      * <p>If <code>null</code> is passed into a property expecting a primitive value,
      * then this will be converted as if it were a <code>null</code> string.</p>
+     *
+     * <p><strong>WARNING</strong> - The logic of this method is customized
+     * to meet the needs of <code>populate()</code>, and is probably not what
+     * you want for general property copying with type conversion.  For that
+     * purpose, check out the <code>copyProperty()</code> method instead.</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)

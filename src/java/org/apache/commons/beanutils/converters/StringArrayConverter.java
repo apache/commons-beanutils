@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/StringArrayConverter.java,v 1.1 2002/06/29 22:29:22 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/06/29 22:29:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/StringArrayConverter.java,v 1.2 2002/07/13 02:22:08 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/07/13 02:22:08 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.beanutils.Converter;
  * on how this instance is constructed.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/06/29 22:29:22 $
+ * @version $Revision: 1.2 $ $Date: 2002/07/13 02:22:08 $
  * @since 1.4
  */
 
@@ -111,6 +111,15 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     }
 
 
+    // ------------------------------------------------------- Static Variables
+
+
+    /**
+     * <p>Model object for type comparisons.</p>
+     */
+    private static String model[] = new String[0];
+
+
     // --------------------------------------------------------- Public Methods
 
 
@@ -133,6 +142,11 @@ public final class StringArrayConverter extends AbstractArrayConverter {
             } else {
                 throw new ConversionException("No value specified");
             }
+        }
+
+        // Deal with the no-conversion-needed case
+        if (model.getClass() == value.getClass()) {
+            return (value);
         }
 
         // Parse the input value as a String into elements
