@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.28 2002/07/16 02:41:07 craigmcc Exp $
- * $Revision: 1.28 $
- * $Date: 2002/07/16 02:41:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.29 2002/07/20 19:12:45 craigmcc Exp $
+ * $Revision: 1.29 $
+ * $Date: 2002/07/20 19:12:45 $
  *
  * ====================================================================
  *
@@ -131,7 +131,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.28 $ $Date: 2002/07/16 02:41:07 $
+ * @version $Revision: 1.29 $ $Date: 2002/07/20 19:12:45 $
  */
 
 public class PropertyUtils {
@@ -692,12 +692,20 @@ public class PropertyUtils {
 
         int indexOfINDEXED_DELIM = -1;
         int indexOfMAPPED_DELIM = -1;
+        int indexOfMAPPED_DELIM2 = -1;
+        int indexOfNESTED_DELIM = -1;
         while (true) {
-            int period = name.indexOf(NESTED_DELIM);
-            if (period < 0) {
+            indexOfMAPPED_DELIM2 = name.indexOf(MAPPED_DELIM2);
+            if (indexOfMAPPED_DELIM2 >= 0) {
+                indexOfNESTED_DELIM =
+                    name.indexOf(NESTED_DELIM, indexOfMAPPED_DELIM2);
+            } else {
+                indexOfNESTED_DELIM = name.indexOf(NESTED_DELIM);
+            }
+            if (indexOfNESTED_DELIM < 0) {
                 break;
             }
-            String next = name.substring(0, period);
+            String next = name.substring(0, indexOfNESTED_DELIM);
             indexOfINDEXED_DELIM = next.indexOf(INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(MAPPED_DELIM);
             if (bean instanceof Map) {
@@ -712,9 +720,9 @@ public class PropertyUtils {
             if (bean == null) {
                 throw new IllegalArgumentException
                         ("Null property value for '" +
-                        name.substring(0, period) + "'");
+                        name.substring(0, indexOfNESTED_DELIM) + "'");
             }
-            name = name.substring(period + 1);
+            name = name.substring(indexOfNESTED_DELIM + 1);
         }
 
         indexOfINDEXED_DELIM = name.indexOf(INDEXED_DELIM);

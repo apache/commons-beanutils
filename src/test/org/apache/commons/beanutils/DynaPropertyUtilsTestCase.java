@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.6 2002/07/16 02:41:07 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/07/16 02:41:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.7 2002/07/20 19:12:45 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/07/20 19:12:45 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/07/16 02:41:07 $
+ * @version $Revision: 1.7 $ $Date: 2002/07/20 19:12:45 $
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {
@@ -106,6 +106,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
       "intProperty",
       "listIndexed",
       "longProperty",
+      "mappedObjects",
       "mappedProperty",
       "mappedIntProperty",
       "nested",
@@ -173,6 +174,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
         bean.set("mapProperty", mapProperty);
+        HashMap mappedObjects = new HashMap();
+        mappedObjects.put("First Key", "First Value");
+        mappedObjects.put("Second Key", "Second Value");
+        bean.set("mappedObjects", mappedObjects);
         HashMap mappedProperty = new HashMap();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
@@ -697,6 +702,91 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             ; // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
+        }
+
+    }
+
+
+    /**
+     * Test getting mapped values with periods in the key.
+     */
+    public void testGetMappedPeriods() {
+
+        bean.set("mappedProperty", "key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly",
+                     "Special Value",
+                     (String) bean.get("mappedProperty", "key.with.a.dot"));
+        try {
+            assertEquals("Can retrieve via getMappedProperty",
+                         "Special Value",
+                         PropertyUtils.getMappedProperty
+                         (bean, "mappedProperty", "key.with.a.dot"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+        try {
+            assertEquals("Can retrieve via getNestedProperty",
+                         "Special Value",
+                         PropertyUtils.getNestedProperty
+                         (bean, "mappedProperty(key.with.a.dot)"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.set("mappedObjects", "nested.property", new TestBean());
+        assertNotNull("Can retrieve directly",
+                      bean.get("mappedObjects", "nested.property"));
+        try {
+            assertEquals("Can retrieve nested",
+                         "This is a string",
+                         PropertyUtils.getNestedProperty
+                         (bean,
+                          "mappedObjects(nested.property).stringProperty"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+    }
+
+
+    /**
+     * Test getting mapped values with slashes in the key.  This is different
+     * from periods because slashes are not syntactically significant.
+     */
+    public void testGetMappedSlashes() {
+
+        bean.set("mappedProperty", "key/with/a/slash", "Special Value");
+        assertEquals("Can retrieve directly",
+                     "Special Value",
+                     bean.get("mappedProperty", "key/with/a/slash"));
+        try {
+            assertEquals("Can retrieve via getMappedProperty",
+                         "Special Value",
+                         PropertyUtils.getMappedProperty
+                         (bean, "mappedProperty", "key/with/a/slash"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+        try {
+            assertEquals("Can retrieve via getNestedProperty",
+                         "Special Value",
+                         PropertyUtils.getNestedProperty
+                         (bean, "mappedProperty(key/with/a/slash)"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.set("mappedObjects", "nested/property", new TestBean());
+        assertNotNull("Can retrieve directly",
+                      bean.get("mappedObjects", "nested/property"));
+        try {
+            assertEquals("Can retrieve nested",
+                         "This is a string",
+                         PropertyUtils.getNestedProperty
+                         (bean,
+                          "mappedObjects(nested/property).stringProperty"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
         }
 
     }
@@ -2531,6 +2621,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("listIndexed", List.class),
                             new DynaProperty("longProperty", Long.TYPE),
                             new DynaProperty("mapProperty", Map.class),
+                            new DynaProperty("mappedObjects", Map.class),
                             new DynaProperty("mappedProperty", Map.class),
                             new DynaProperty("mappedIntProperty", Map.class),
                             new DynaProperty("nested", TestBean.class),

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.18 2002/07/16 02:41:08 craigmcc Exp $
- * $Revision: 1.18 $
- * $Date: 2002/07/16 02:41:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.19 2002/07/20 19:12:45 craigmcc Exp $
+ * $Revision: 1.19 $
+ * $Date: 2002/07/20 19:12:45 $
  *
  * ====================================================================
  *
@@ -104,7 +104,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.18 $ $Date: 2002/07/16 02:41:08 $
+ * @version $Revision: 1.19 $ $Date: 2002/07/20 19:12:45 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -953,6 +953,91 @@ public class PropertyUtilsTestCase extends TestCase {
             ; // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
+        }
+
+    }
+
+
+    /**
+     * Test getting mapped values with periods in the key.
+     */
+    public void testGetMappedPeriods() {
+
+        bean.setMappedProperty("key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly",
+                     "Special Value",
+                     bean.getMappedProperty("key.with.a.dot"));
+        try {
+            assertEquals("Can retrieve via getMappedProperty",
+                         "Special Value",
+                         PropertyUtils.getMappedProperty
+                         (bean, "mappedProperty", "key.with.a.dot"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+        try {
+            assertEquals("Can retrieve via getNestedProperty",
+                         "Special Value",
+                         PropertyUtils.getNestedProperty
+                         (bean, "mappedProperty(key.with.a.dot)"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.setMappedObjects("nested.property", new TestBean());
+        assertNotNull("Can retrieve directly",
+                      bean.getMappedObjects("nested.property"));
+        try {
+            assertEquals("Can retrieve nested",
+                         "This is a string",
+                         PropertyUtils.getNestedProperty
+                         (bean,
+                          "mappedObjects(nested.property).stringProperty"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+    }
+
+
+    /**
+     * Test getting mapped values with slashes in the key.  This is different
+     * from periods because slashes are not syntactically significant.
+     */
+    public void testGetMappedSlashes() {
+
+        bean.setMappedProperty("key/with/a/slash", "Special Value");
+        assertEquals("Can retrieve directly",
+                     "Special Value",
+                     bean.getMappedProperty("key/with/a/slash"));
+        try {
+            assertEquals("Can retrieve via getMappedProperty",
+                         "Special Value",
+                         PropertyUtils.getMappedProperty
+                         (bean, "mappedProperty", "key/with/a/slash"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+        try {
+            assertEquals("Can retrieve via getNestedProperty",
+                         "Special Value",
+                         PropertyUtils.getNestedProperty
+                         (bean, "mappedProperty(key/with/a/slash)"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        bean.setMappedObjects("nested/property", new TestBean());
+        assertNotNull("Can retrieve directly",
+                      bean.getMappedObjects("nested/property"));
+        try {
+            assertEquals("Can retrieve nested",
+                         "This is a string",
+                         PropertyUtils.getNestedProperty
+                         (bean,
+                          "mappedObjects(nested/property).stringProperty"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
         }
 
     }

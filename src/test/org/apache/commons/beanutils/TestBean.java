@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.9 2002/07/16 02:41:08 craigmcc Exp $
- * $Revision: 1.9 $
- * $Date: 2002/07/16 02:41:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.10 2002/07/20 19:12:45 craigmcc Exp $
+ * $Revision: 1.10 $
+ * $Date: 2002/07/20 19:12:45 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.9 $ $Date: 2002/07/16 02:41:08 $
+ * @version $Revision: 1.10 $ $Date: 2002/07/20 19:12:45 $
  */
 
 public class TestBean {
@@ -235,6 +235,32 @@ public class TestBean {
             mapProperty.put("Second Key", "Second Value");
         }
         this.mapProperty = mapProperty;
+    }
+
+
+    /**
+     * A mapped property that has String keys and Object values.
+     */
+    private HashMap mappedObjects = null;
+
+    public Object getMappedObjects(String key) {
+        // Create the map the very first time
+        if (mappedObjects == null) {
+            mappedObjects = new HashMap();
+            mappedObjects.put("First Key", "First Value");
+            mappedObjects.put("Second Key", "Second Value");
+        }
+        return (mappedObjects.get(key));
+    }
+
+    public void setMappedObjects(String key, Object value) {
+        // Create the map the very first time
+        if (mappedObjects == null) {
+            mappedObjects = new HashMap();
+            mappedObjects.put("First Key", "First Value");
+            mappedObjects.put("Second Key", "Second Value");
+        }
+        mappedObjects.put(key, value);
     }
 
 
