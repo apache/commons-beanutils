@@ -1,0 +1,12 @@
+# The home directory for the Commons collection classes distribution
+commons-collections.home = ../collections/dist
+
+# The pathname of the collections classes JAR file
+commons-collections.jar = ${commons-collections.home}/commons-collections.jar
+
+# The directory containing your binary distribution of JUnit, 
+# version 3.7 or later
+junit.home = /usr/local/junit3.7
+
+# The pathname of the "junit.jar" JAR file
+junit.jar = ${junit.home}/junit.jar
