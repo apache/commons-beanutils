@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.2 2001/09/03 17:34:36 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2001/09/03 17:34:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.3 2001/10/14 00:54:24 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2001/10/14 00:54:24 $
  *
  * ====================================================================
  *
@@ -83,7 +83,7 @@ import java.security.*;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.2 $ $Date: 2001/09/03 17:34:36 $
+ * @version $Revision: 1.3 $ $Date: 2001/10/14 00:54:24 $
  */
 
 public class MappedPropertyDescriptor extends PropertyDescriptor {
@@ -141,9 +141,29 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     public MappedPropertyDescriptor(String propertyName, Class beanClass)
             throws IntrospectionException {
 
-        this(propertyName, beanClass,
-             "get" + capitalize(propertyName),
-             "set" + capitalize(propertyName));
+        super(propertyName, null, null);
+        if (propertyName == null || propertyName.length() == 0) {
+            throw new IntrospectionException("bad property name");
+        }
+        setName(propertyName);
+        String base = capitalize(propertyName);
+
+        // Look for mapped get and set methods
+        try {
+            mappedReadMethod = findMethod(beanClass, "get" + base, 1,
+                                          stringClassArray);
+            Class params[] =
+                { String.class, mappedReadMethod.getReturnType() };
+            mappedWriteMethod = findMethod(beanClass, "set" + base, 2,
+                                           params);
+        } catch (IntrospectionException e) {
+            ;
+        }
+        if ((mappedReadMethod == null) && (mappedWriteMethod == null))
+            throw new IntrospectionException("Property '" + propertyName +
+                                             "' not found on " +
+                                             beanClass.getName());
+        findMappedPropertyType();
 
     }
 
