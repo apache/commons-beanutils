@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.1 2001/04/14 18:29:56 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2001/04/14 18:29:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.2 2001/09/03 16:39:18 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2001/09/03 16:39:18 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import java.lang.reflect.Array;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.1 $ $Date: 2001/04/14 18:29:56 $
+ * @version $Revision: 1.2 $ $Date: 2001/09/03 16:39:18 $
  */
 
 public class ConvertUtils {
@@ -91,12 +91,12 @@ public class ConvertUtils {
      */
     private static Boolean defaultBoolean = Boolean.FALSE;
 
-    public boolean getDefaultBoolean() {
+    public static boolean getDefaultBoolean() {
         return (defaultBoolean.booleanValue());
     }
 
-    public void setDefaultBoolean(boolean defaultBoolean) {
-        this.defaultBoolean = new Boolean(defaultBoolean);
+    public static void setDefaultBoolean(boolean newDefaultBoolean) {
+        defaultBoolean = new Boolean(newDefaultBoolean);
     }
 
 
@@ -105,12 +105,12 @@ public class ConvertUtils {
      */
     private static Byte defaultByte = new Byte((byte) 0);
 
-    public byte getDefaultByte() {
+    public static byte getDefaultByte() {
         return (defaultByte.byteValue());
     }
 
-    public void setDefaultByte(byte defaultByte) {
-        this.defaultByte = new Byte(defaultByte);
+    public static void setDefaultByte(byte newDefaultByte) {
+        defaultByte = new Byte(newDefaultByte);
     }
 
 
@@ -119,12 +119,12 @@ public class ConvertUtils {
      */
     private static Character defaultCharacter = new Character(' ');
 
-    public char getDefaultCharacter() {
+    public static char getDefaultCharacter() {
         return (defaultCharacter.charValue());
     }
 
-    public void setDefaultCharacter(char defaultCharacter) {
-        this.defaultCharacter = new Character(defaultCharacter);
+    public static void setDefaultCharacter(char newDefaultCharacter) {
+        defaultCharacter = new Character(newDefaultCharacter);
     }
 
 
@@ -133,12 +133,12 @@ public class ConvertUtils {
      */
     private static Double defaultDouble = new Double((double) 0.0);
 
-    public double getDefaultDouble() {
+    public static double getDefaultDouble() {
         return (defaultDouble.doubleValue());
     }
 
-    public void setDefaultDouble(double defaultDouble) {
-        this.defaultDouble = new Double(defaultDouble);
+    public static void setDefaultDouble(double newDefaultDouble) {
+        defaultDouble = new Double(newDefaultDouble);
     }
 
 
@@ -147,12 +147,12 @@ public class ConvertUtils {
      */
     private static Float defaultFloat = new Float((float) 0.0);
 
-    public float getDefaultFloat() {
+    public static float getDefaultFloat() {
         return (defaultFloat.floatValue());
     }
 
-    public void setDefaultFloat(float defaultFloat) {
-        this.defaultFloat = new Float(defaultFloat);
+    public static void setDefaultFloat(float newDefaultFloat) {
+        defaultFloat = new Float(newDefaultFloat);
     }
 
 
@@ -161,12 +161,12 @@ public class ConvertUtils {
      */
     private static Integer defaultInteger = new Integer(0);
 
-    public int getDefaultInteger() {
+    public static int getDefaultInteger() {
         return (defaultInteger.intValue());
     }
 
-    public void setDefaultInteger(int defaultInteger) {
-        this.defaultInteger = new Integer(defaultInteger);
+    public static void setDefaultInteger(int newDefaultInteger) {
+        defaultInteger = new Integer(newDefaultInteger);
     }
 
 
@@ -175,12 +175,12 @@ public class ConvertUtils {
      */
     private static Long defaultLong = new Long((long) 0);
 
-    public long getDefaultLong() {
+    public static long getDefaultLong() {
         return (defaultLong.longValue());
     }
 
-    public void setDefaultLong(long defaultLong) {
-        this.defaultLong = new Long(defaultLong);
+    public static void setDefaultLong(long newDefaultLong) {
+        defaultLong = new Long(newDefaultLong);
     }
 
 
@@ -189,12 +189,12 @@ public class ConvertUtils {
      */
     private static Short defaultShort = new Short((short) 0);
 
-    public short getDefaultShort() {
+    public static short getDefaultShort() {
         return (defaultShort.shortValue());
     }
 
-    public void setDefaultShort(short defaultShort) {
-        this.defaultShort = new Short(defaultShort);
+    public static void setDefaultShort(short newDefaultShort) {
+        defaultShort = new Short(newDefaultShort);
     }
 
 
