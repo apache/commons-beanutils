@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.3 2003/01/15 21:59:42 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/01/15 21:59:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.4 2003/03/20 20:12:25 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/20 20:12:25 $
  *
  * ====================================================================
  *
@@ -73,8 +73,11 @@ import java.util.Locale;
 
 
 /**
- * Utility methods for populating JavaBeans properties
- * via reflection in a locale-dependent manner.
+ * <p>Utility methods for populating JavaBeans properties
+ * via reflection in a locale-dependent manner.</p>
+ *
+ * <p>The implementations for these methods are provided by <code>LocalBeanUtilsBean</code>.
+ * For more details see {@link LocalBeanUtilsBean}.</p>
  *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
@@ -93,680 +96,365 @@ public class LocaleBeanUtils extends BeanUtils {
     private static Log log = LogFactory.getLog(LocaleBeanUtils.class);
 
     /**
-     * getter for defaultLocale
+     * <p>Gets the locale used when no locale is passed.</p>
+     *
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {
 
-        return LocaleConvertUtils.getDefaultLocale();
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getDefaultLocale();
     }
 
 
     /**
-     * setter for defaultLocale
+     * <p>Sets the locale used when no locale is passed.</p>
+     *
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(Locale locale) {
 
-        LocaleConvertUtils.setDefaultLocale(locale);
+        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setDefaultLocale(locale);
     }
 
     /**
-     * getter for applyLocalized
-     * (Indicate whether the pattern is localized or not)
+     * <p>Gets whether the pattern is localized or not</p>
+     *
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#getApplyLocalized()
      */
     public static boolean getApplyLocalized() {
 
-        return LocaleConvertUtils.getApplyLocalized();
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getApplyLocalized();
     }
 
     /**
-     * setter for applyLocalized
-     * (Indicate whether the pattern is localized or not)
+     * <p>Sets whether the pattern is localized or not</p>
+     *
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#setApplyLocalized(boolean)
      */
     public static void setApplyLocalized(boolean newApplyLocalized) {
 
-        LocaleConvertUtils.setApplyLocalized(newApplyLocalized);
+        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setApplyLocalized(newApplyLocalized);
     }
 
 
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Return the value of the specified locale-sensitive indexed property
-     * of the specified bean, as a String. The zero-relative index of the
-     * required value must be included (in square brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
-     * thrown.
+     * <p>Return the value of the specified locale-sensitive indexed property
+     * of the specified bean, as a String.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
-     *  to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, String)
      */
     public static String getIndexedProperty(Object bean, String name, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getIndexedProperty(bean, name);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getIndexedProperty(bean, name, pattern);
     }
 
     /**
      * Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the default convertion pattern of
-     * the corresponding {@link LocaleConverter}. The zero-relative index
-     * of the required value must be included (in square brackets) as a suffix
-     * to the property name, or <code>IllegalArgumentException</code> will be thrown.
+     * the corresponding {@link LocaleConverter}.
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
-     *  to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String)
      */
     public static String getIndexedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getIndexedProperty(bean, name, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getIndexedProperty(bean, name);
     }
 
     /**
-     * Return the value of the specified locale-sensetive indexed property
-     * of the specified bean, as a String using the specified convertion pattern.
-     * The index is specified as a method parameter and
-     * must *not* be included in the property name expression
+     * <p>Return the value of the specified locale-sensetive indexed property
+     * of the specified bean, as a String using the specified convertion pattern.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Simple property name of the property value to be extracted
-     * @param index Index of the property value to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int, String)
      */
     public static String getIndexedProperty(Object bean,
                                             String name, int index, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getIndexedProperty(bean, name, index);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getIndexedProperty(bean, name, index, pattern);
     }
 
     /**
-     * Return the value of the specified locale-sensetive indexed property
+     * <p>Return the value of the specified locale-sensetive indexed property
      * of the specified bean, as a String using the default convertion pattern of
-     * the corresponding {@link LocaleConverter}.
-     * The index is specified as a method parameter and
-     * must *not* be included in the property name expression
+     * the corresponding {@link LocaleConverter}.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Simple property name of the property value to be extracted
-     * @param index Index of the property value to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int)
      */
     public static String getIndexedProperty(Object bean,
                                             String name, int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        return getIndexedProperty(bean, name, index, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getIndexedProperty(bean, name, index);
     }
 
     /**
-     * Return the value of the specified simple locale-sensitive property
+     * <p>Return the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the specified
-     * convertion pattern.
+     * convertion pattern.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Name of the property to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String, String)
      */
     public static String getSimpleProperty(Object bean, String name, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getSimpleProperty(bean, name);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getSimpleProperty(bean, name, pattern);
     }
 
     /**
-     * Return the value of the specified simple locale-sensitive property
+     * <p>Return the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * convertion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Name of the property to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String)
      */
     public static String getSimpleProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getSimpleProperty(bean, name, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getSimpleProperty(bean, name);
     }
 
     /**
-     * Return the value of the specified mapped locale-sensitive property
-     * of the specified bean, as a String using the specified convertion pattern.
-     * The key is specified as a method parameter and must *not* be included in
-     * the property name expression.
+     * <p>Return the value of the specified mapped locale-sensitive property
+     * of the specified bean, as a String using the specified convertion pattern.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Simple property name of the property value to be extracted
-     * @param key Lookup key of the property value to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String, String)
      */
     public static String getMappedProperty(Object bean,
                                            String name, String key, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getMappedProperty(bean, name, key);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name, key, pattern);
     }
 
     /**
-     * Return the value of the specified mapped locale-sensitive property
+     * <p>Return the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String
      * The key is specified as a method parameter and must *not* be included
-     * in the property name expression
+     * in the property name expression.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Simple property name of the property value to be extracted
-     * @param key Lookup key of the property value to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String)
      */
     public static String getMappedProperty(Object bean,
                                            String name, String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getMappedProperty(bean, name, key, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name, key);
     }
 
 
     /**
-     * Return the value of the specified locale-sensitive mapped property
-     * of the specified bean, as a String using the specified pattern.
-     * The String-valued key of the required value
-     * must be included (in parentheses) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
-     * thrown.
+     * <p>Return the value of the specified locale-sensitive mapped property
+     * of the specified bean, as a String using the specified pattern.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
-     *  to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getMappedPropertyLocale(Object, String, String)
      */
     public static String getMappedPropertyLocale(Object bean, String name, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getMappedProperty(bean, name);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedPropertyLocale(bean, name, pattern);
     }
 
 
     /**
-     * Return the value of the specified locale-sensitive mapped property
+     * <p>Return the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
-     * The String-valued key of the required value
-     * must be included (in parentheses) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
-     * thrown.
+     * convertion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
-     *  to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getMappedProperty(Object, String)
      */
     public static String getMappedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getMappedPropertyLocale(bean, name, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name);
     }
 
     /**
-     * Return the value of the (possibly nested) locale-sensitive property
+     * <p>Return the value of the (possibly nested) locale-sensitive property
      * of the specified name, for the specified bean,
-     * as a String using the specified pattern.
+     * as a String using the specified pattern.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Possibly nested name of the property to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception IllegalArgumentException if a nested reference to a
-     *  property returns null
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getNestedProperty(Object, String, String)
      */
     public static String getNestedProperty(Object bean, String name, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getNestedProperty(bean, name);
-        return LocaleConvertUtils.convert(value, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getNestedProperty(bean, name, pattern);
     }
 
     /**
-     * Return the value of the (possibly nested) locale-sensitive property
-     * of the specified name, for the specified bean, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * <p>Return the value of the (possibly nested) locale-sensitive property
+     * of the specified name.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Possibly nested name of the property to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception IllegalArgumentException if a nested reference to a
-     *  property returns null
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getNestedProperty(Object, String)
      */
     public static String getNestedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getNestedProperty(bean, name, null);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getNestedProperty(bean, name);
     }
 
     /**
-     * Return the value of the specified locale-sensitive property
-     * of the specified bean, no matter which property reference
-     * format is used, as a String using the specified convertion pattern.
+     * <p>Return the value of the specified locale-sensitive property
+     * of the specified bean.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Possibly indexed and/or nested name of the property
-     *  to be extracted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getProperty(Object, String, String)
      */
     public static String getProperty(Object bean, String name, String pattern)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getNestedProperty(bean, name, pattern);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getProperty(bean, name, pattern);
     }
 
     /**
-     * Return the value of the specified locale-sensitive property
-     * of the specified bean, no matter which property reference
-     * format is used, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * <p>Return the value of the specified locale-sensitive property
+     * of the specified bean.</p>
      *
-     * @param bean Bean whose property is to be extracted
-     * @param name Possibly indexed and/or nested name of the property
-     *  to be extracted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     * @see LocaleBeanUtilsBean#getProperty(Object, String)
      */
     public static String getProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return getNestedProperty(bean, name);
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getProperty(bean, name);
     }
 
     /**
-     * Set the specified locale-sensitive property value, performing type
+     * <p>Set the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination property
-     * using the default convertion pattern of the corresponding {@link LocaleConverter}.
+     * using the default convertion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * @param bean Bean on which setting is to be performed
-     * @param name Property name (can be nested/indexed/mapped/combo)
-     * @param value Value to be set
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @see LocaleBeanUtilsBean#setProperty(Object, String, Object)
      */
     public static void setProperty(Object bean, String name, Object value)
             throws IllegalAccessException, InvocationTargetException {
 
-        setProperty(bean, name, value, null);
+        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value);
     }
 
     /**
-     * Set the specified locale-sensitive property value, performing type
+     * <p>Set the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination
-     * property using the specified convertion pattern.
+     * property using the specified convertion pattern.</p>
      *
-     * @param bean Bean on which setting is to be performed
-     * @param name Property name (can be nested/indexed/mapped/combo)
-     * @param value Value to be set
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @see LocaleBeanUtilsBean#setProperty(Object, String, Object, String)
      */
     public static void setProperty(Object bean, String name, Object value, String pattern)
             throws IllegalAccessException, InvocationTargetException {
 
-        // Trace logging (if enabled)
-        if (log.isTraceEnabled()) {
-            StringBuffer sb = new StringBuffer("  setProperty(");
-            sb.append(bean);
-            sb.append(", ");
-            sb.append(name);
-            sb.append(", ");
-            if (value == null) {
-                sb.append("<NULL>");
-            }
-            else if (value instanceof String) {
-                sb.append((String) value);
-            }
-            else if (value instanceof String[]) {
-                String values[] = (String[]) value;
-                sb.append('[');
-                for (int i = 0; i < values.length; i++) {
-                    if (i > 0) {
-                        sb.append(',');
-                    }
-                    sb.append(values[i]);
-                }
-                sb.append(']');
-            }
-            else {
-                sb.append(value.toString());
-            }
-            sb.append(')');
-            log.trace(sb.toString());
-        }
-
-        Descriptor propInfo = calculate(bean, name);
-
-        if (propInfo != null) {
-            Class type = definePropertyType(propInfo.getTarget(), name, propInfo.getPropName());
-
-            if (type != null) {
-
-                Object newValue = convert(type, propInfo.getIndex(), value, pattern);
-                invokeSetter(propInfo.getTarget(), propInfo.getPropName(),
-                        propInfo.getKey(), propInfo.getIndex(), newValue);
-            }
-        }
-    }
+        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setProperty(bean, name, value, pattern);
+     }
 
     /**
-     * Calculate the property type.
+     * <p>Calculate the property type.</p>
      *
-     * @param target The bean
-     * @param name The property name
-     * @param propName The Simple name of target property
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @see LocaleBeanUtilsBean#definePropertyType(Object, String, String)
      */
     protected static Class definePropertyType(Object target, String name, String propName)
             throws IllegalAccessException, InvocationTargetException {
 
-        Class type = null;               // Java type of target property
-
-        if (target instanceof DynaBean) {
-            DynaClass dynaClass = ((DynaBean) target).getDynaClass();
-            DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
-            if (dynaProperty == null) {
-                return null; // Skip this property setter
-            }
-            type = dynaProperty.getType();
-        }
-        else {
-            PropertyDescriptor descriptor = null;
-            try {
-                descriptor =
-                        PropertyUtils.getPropertyDescriptor(target, name);
-                if (descriptor == null) {
-                    return null; // Skip this property setter
-                }
-            }
-            catch (NoSuchMethodException e) {
-                return null; // Skip this property setter
-            }
-            if (descriptor instanceof MappedPropertyDescriptor) {
-                type = ((MappedPropertyDescriptor) descriptor).
-                        getMappedPropertyType();
-            }
-            else if (descriptor instanceof IndexedPropertyDescriptor) {
-                type = ((IndexedPropertyDescriptor) descriptor).
-                        getIndexedPropertyType();
-            }
-            else {
-                type = descriptor.getPropertyType();
-            }
-        }
-        return type;
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().definePropertyType(target, name, propName);
     }
 
     /**
-     * Convert the specified value to the required type using the
-     * specified convertion pattern.
+     * <p>Convert the specified value to the required type using the
+     * specified convertion pattern.</p>
      *
-     * @param type The Java type of target property
-     * @param index The indexed subscript value (if any)
-     * @param value The value to be converted
-     * @param pattern The convertion pattern
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#convert(Class, int, Object, String)
      */
     protected static Object convert(Class type, int index, Object value, String pattern) {
 
-        Object newValue = null;
-
-        if (type.isArray() && (index < 0)) { // Scalar value into array
-            if (value instanceof String) {
-                String values[] = new String[1];
-                values[0] = (String) value;
-                newValue = LocaleConvertUtils.convert((String[]) values, type, pattern);
-            }
-            else if (value instanceof String[]) {
-                newValue = LocaleConvertUtils.convert((String[]) value, type, pattern);
-            }
-            else {
-                newValue = value;
-            }
-        }
-        else if (type.isArray()) {         // Indexed value into array
-            if (value instanceof String) {
-                newValue = LocaleConvertUtils.convert((String) value,
-                        type.getComponentType(), pattern);
-            }
-            else if (value instanceof String[]) {
-                newValue = LocaleConvertUtils.convert(((String[]) value)[0],
-                        type.getComponentType(), pattern);
-            }
-            else {
-                newValue = value;
-            }
-        }
-        else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = LocaleConvertUtils.convert((String) value, type, pattern);
-            }
-            else if (value instanceof String[]) {
-                newValue = LocaleConvertUtils.convert(((String[]) value)[0],
-                        type, pattern);
-            }
-            else {
-                newValue = value;
-            }
-        }
-        return newValue;
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value, pattern);
     }
 
     /**
-     *  Convert the specified value to the required type.
+     * <p>Convert the specified value to the required type.</p>
      *
-     * @param type The Java type of target property
-     * @param index The indexed subscript value (if any)
-     * @param value The value to be converted
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     *
+     * @see LocaleBeanUtilsBean#convert(Class, int, Object)
      */
     protected static Object convert(Class type, int index, Object value) {
 
-        Object newValue = null;
-
-        if (type.isArray() && (index < 0)) { // Scalar value into array
-            if (value instanceof String) {
-                String values[] = new String[1];
-                values[0] = (String) value;
-                newValue = ConvertUtils.convert((String[]) values, type);
-            }
-            else if (value instanceof String[]) {
-                newValue = ConvertUtils.convert((String[]) value, type);
-            }
-            else {
-                newValue = value;
-            }
-        }
-        else if (type.isArray()) {         // Indexed value into array
-            if (value instanceof String) {
-                newValue = ConvertUtils.convert((String) value,
-                        type.getComponentType());
-            }
-            else if (value instanceof String[]) {
-                newValue = ConvertUtils.convert(((String[]) value)[0],
-                        type.getComponentType());
-            }
-            else {
-                newValue = value;
-            }
-        }
-        else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = ConvertUtils.convert((String) value, type);
-            }
-            else if (value instanceof String[]) {
-                newValue = ConvertUtils.convert(((String[]) value)[0],
-                        type);
-            }
-            else {
-                newValue = value;
-            }
-        }
-        return newValue;
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value);
     }
 
     /**
-     * Invoke the setter method.
+     * <p>Invoke the setter method.</p>
      *
-     * @param target The bean
-     * @param propName The Simple name of target property
-     * @param key The Mapped key value (if any)
-     * @param index The indexed subscript value (if any)
-     * @param newValue The value to be set
+     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
      *
-     * @exception IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @see LocaleBeanUtilsBean#invokeSetter(Object, String, String, int, Object)
      */
     protected static void invokeSetter(Object target, String propName, String key, int index, Object newValue)
             throws IllegalAccessException, InvocationTargetException {
 
-        try {
-            if (index >= 0) {
-                PropertyUtils.setIndexedProperty(target, propName,
-                        index, newValue);
-            }
-            else if (key != null) {
-                PropertyUtils.setMappedProperty(target, propName,
-                        key, newValue);
-            }
-            else {
-                PropertyUtils.setProperty(target, propName, newValue);
-            }
-        }
-        catch (NoSuchMethodException e) {
-            throw new InvocationTargetException
-                    (e, "Cannot set " + propName);
-        }
+       LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().invokeSetter(target, propName, key, index, newValue);
     }
 
     /**
      * Resolve any nested expression to get the actual target bean.
      *
+     * @deprecated moved into <code>LocalBeanUtilsBean</code>
      * @param bean The bean
      * @param name The property name
      *
@@ -827,6 +515,7 @@ public class LocaleBeanUtils extends BeanUtils {
         return new Descriptor(target, name, propName, key, index);
     }
 
+    /** @deprecated moved into <code>LocaleBeanUtils</code> */
     protected static class Descriptor {
 
         private int index = -1;    // Indexed subscript value (if any)
