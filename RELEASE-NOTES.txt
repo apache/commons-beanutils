@@ -1,7 +1,7 @@
-$Id: RELEASE-NOTES.txt,v 1.1 2001/12/24 21:35:04 craigmcc Exp $
+$Id: RELEASE-NOTES.txt,v 1.2 2002/01/04 21:24:37 sanders Exp $
 
                           Commons BeanUtils Package
-                                Version 1.2
+                                Version 1.3
                                Release Notes
 
 
@@ -9,25 +9,24 @@ INTRODUCTION:
 
 This document contains the release notes for this version of the Commons
 BeanUtils package, and highlights changes since the previous version.  The
-current release adds one major new feature and several bug fixes, and is
-being done now to provide a stable starting point for some major enhancements.
+current release adds new features and bug fixes, and is being done now to
+follow the release early/release often mentality.
 
 
 NEW FEATURES:
 
-* The protected methods in PropertyUtils used to identify the Method objects
-  for specific sets of argument types has been extracted into a new
-  "MethodUtils" class and made public, because they are generally useful.
-  In addition, several convenience methods have been added to utilize the
-  new Method finding capabilities.
+* DynaBeans are here.  Ever wondered how to created loosely typed objects like
+  python has?  That's DynaBean!  Use them for EJB Dependent Objects, easy
+  representation of servlet parameters as a JavaBean, and more.
+
+* PropertyUtils has been upgraded to allow getters and setters on List objects.
+  Note that this is a deviation from the JavaBeans spec, but was done to make
+  life easier for a developer using BeanUtils.  To be more specific, the spec is
+  located at http://java.sun.com/products/javabeans/docs/beans.101.pdf and we
+  violating section 8.3.3 ;-)  We hope that eventually the JavaBeans spec might
+  be updated to include this feature.
 
 
 BUG FIXES:
 
-* MappedPropertyDescriptor - Modified the two-argument constructor so that
-  read-only properties (no setter method) are correctly recognized.
-
-* PropertyUtils - When searching for public methods, also search the public
-  methods of interfaces implemented by superclasses of the current class,
-  not just those implemented by the current class itself.
 
