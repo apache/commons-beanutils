@@ -36,6 +36,7 @@ and accessing bean properties.</p>
     <li><a href="#conversion.beanutils">BeanUtils and ConvertUtils
         Conversions</a></li>
     <li><a href="#conversion.defining">Defining Your Own Converters</a></li>
+    <li><a href="#conversion.i18n">Locale Aware Conversions</a></li>
     </ul></li>
 </ol>
 
@@ -197,7 +198,7 @@ JavaBeans specification, and some of which are uniquely supported by the
     type is <code>java.util.List</code> (or an implementation of List) to be
     indexed as well.</li>
 <li><strong>Mapped</strong> - As an extension to standard JavaBeans APIs,
-    the <em>BeanUtils></em> package considers any property whose underlying
+    the <em>BeanUtils</em> package considers any property whose underlying
     value is a <code>java.util.Map</code> to be "mapped".  You can set and
     retrieve individual values via a String-valued key.</li>
 </ul>
@@ -529,7 +530,7 @@ for performing this task as well.</p>
 <h3><code>BeanUtils</code> and <code>ConvertUtils</code> Conversions</h3>
 
 <p>A very common use case (and the situation that caused the initial creation
-of the <em>BeanUtils</em> package was a desire to convert the set of request
+of the <em>BeanUtils</em> package) was the desire to convert the set of request
 parameters that were included in a
 <code>javax.servlet.HttpServletRequest</code> received by a web application
 into a set of corresponding property setter calls on an arbitrary JavaBean.
@@ -589,6 +590,16 @@ create and register your own converter, follow these steps:</p>
 <li>At application startup time, register an instance of your converter class
     by calling the <code>ConvertUtils.register()</code> method.</li>
 </ul>
+
+<a name="conversion.i18n"></a>
+<h3>Locale Aware Conversions</h3>
+<p>The standard classes in <code>org.apache.commons.beanutils</code> are not
+locale aware. This gives them a cleaner interface and makes then easier to use
+in situations where the locale is not important.</p>
+<p>Extended, locale-aware analogues can be found in 
+<code><a href='locale/package-summary.html'>org.apache.commons.beanutils.locale
+</a></code>. These are built along the same
+lines as the basic classes but support localization.</p>
 
 </body>
 </html>
