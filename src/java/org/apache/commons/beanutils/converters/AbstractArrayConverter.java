@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/AbstractArrayConverter.java,v 1.1 2002/06/29 22:29:22 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/06/29 22:29:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/AbstractArrayConverter.java,v 1.2 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -88,7 +88,7 @@ import org.apache.commons.beanutils.Converter;
  * any combination of whitespace and comma characters.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/06/29 22:29:22 $
+ * @version $Revision: 1.2 $ $Date: 2002/07/21 00:20:45 $
  * @since 1.4
  */
 
@@ -102,6 +102,12 @@ public abstract class AbstractArrayConverter implements Converter {
      * The default value specified to our Constructor, if any.
      */
     protected Object defaultValue = null;
+
+
+    /**
+     * <p>Model object for string arrays.</p>
+     */
+    protected static String strings[] = new String[0];
 
 
     /**

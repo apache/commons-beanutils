@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.29 2002/07/20 19:12:45 craigmcc Exp $
- * $Revision: 1.29 $
- * $Date: 2002/07/20 19:12:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtils.java,v 1.30 2002/07/21 00:20:44 craigmcc Exp $
+ * $Revision: 1.30 $
+ * $Date: 2002/07/21 00:20:44 $
  *
  * ====================================================================
  *
@@ -72,6 +72,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -131,7 +132,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.29 $ $Date: 2002/07/20 19:12:45 $
+ * @version $Revision: 1.30 $ $Date: 2002/07/21 00:20:44 $
  */
 
 public class PropertyUtils {
@@ -222,13 +223,18 @@ public class PropertyUtils {
 
 
     /**
-     * Copy property values from the "origin" bean to the "destination" bean
+     * <p>Copy property values from the "origin" bean to the "destination" bean
      * for all cases where the property names are the same (even though the
      * actual getter and setter methods might have been customized via
      * <code>BeanInfo</code> classes).  No conversions are performed on the
      * actual property values -- it is assumed that the values retrieved from
      * the origin bean are assignment-compatible with the types expected by
-     * the destination bean.
+     * the destination bean.</p>
+     *
+     * <p>If the origin "bean" is actually a <code>Map</code>, it is assumed
+     * to contain String-valued simple property names as the keys, pointing
+     * at the corresponding property values that will be set in the destination
+     * bean.</p>
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
@@ -265,6 +271,13 @@ public class PropertyUtils {
                 } catch (NoSuchMethodException e) {
                     ; // Skip non-matching property
                 }
+            }
+        } else if (orig instanceof Map) {
+            Iterator names = ((Map) orig).keySet().iterator();
+            while (names.hasNext()) {
+                String name = (String) names.next();
+                Object value = ((Map) orig).get(name);
+                setSimpleProperty(dest, name, value);
             }
         } else {
             PropertyDescriptor origDescriptors[] =

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.13 2002/07/20 22:36:36 craigmcc Exp $
- * $Revision: 1.13 $
- * $Date: 2002/07/20 22:36:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.14 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.14 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -96,7 +96,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -246,6 +246,61 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
         assertEquals("stringArray[1]", "New 1", stringArray[1]);
+
+    }
+
+
+    /**
+     * Test copyProperties() when the origin is a a <code>Map</code>.
+     */
+    public void testCopyPropertiesMap() {
+
+        Map map = new HashMap();
+        map.put("booleanProperty", "false");
+        map.put("doubleProperty", "333.0");
+        map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        map.put("floatProperty", "222.0");
+        map.put("intArray", new String[] { "0", "100", "200" });
+        map.put("intProperty", "111");
+        map.put("longProperty", "444");
+        map.put("shortProperty", "555");
+        map.put("stringProperty", "New String Property");
+
+        try {
+            BeanUtils.copyProperties(bean, map);
+        } catch (Throwable t) {
+            fail("Threw " + t.toString());
+        }
+
+        // Scalar properties
+        assertEquals("booleanProperty", false,
+                     bean.getBooleanProperty());
+        assertEquals("doubleProperty", 333.0,
+                     bean.getDoubleProperty(), 0.005);
+        assertEquals("floatProperty", (float) 222.0,
+                     bean.getFloatProperty(), (float) 0.005);
+        assertEquals("intProperty", 111,
+                     bean.getIntProperty());
+        assertEquals("longProperty", (long) 444,
+                     bean.getLongProperty());
+        assertEquals("shortProperty", (short) 555,
+                     bean.getShortProperty());
+        assertEquals("stringProperty", "New String Property",
+                     bean.getStringProperty());
+                     
+        // Indexed Properties
+        String dupProperty[] = bean.getDupProperty();
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        int intArray[] = bean.getIntArray();
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 0, intArray[0]);
+        assertEquals("intArray[1]", 100, intArray[1]);
+        assertEquals("intArray[2]", 200, intArray[2]);
 
     }
 
@@ -686,7 +741,7 @@ public class BeanUtilsTestCase extends TestCase {
             map.put("doubleProperty", "432.0");
             // floatProperty is left at 123.0
             map.put("intProperty", "543");
-            map.put("longProperty", null);
+            map.put("longProperty", "");
             map.put("shortProperty", "654");
             // stringProperty is left at "This is a string"
             map.put("writeOnlyProperty", "New writeOnlyProperty value");

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.25 2002/07/13 02:22:08 craigmcc Exp $
- * $Revision: 1.25 $
- * $Date: 2002/07/13 02:22:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.26 2002/07/21 00:20:44 craigmcc Exp $
+ * $Revision: 1.26 $
+ * $Date: 2002/07/21 00:20:44 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.25 $ $Date: 2002/07/13 02:22:08 $
+ * @version $Revision: 1.26 $ $Date: 2002/07/21 00:20:44 $
  */
 
 public class BeanUtils {
@@ -177,6 +177,11 @@ public class BeanUtils {
      * in the destination bean (or are read-only in the destination bean) are
      * silently ignored.</p>
      *
+     * <p>If the origin "bean" is actually a <code>Map</code>, it is assumed
+     * to contain String-valued simple property names as the keys, pointing at
+     * the corresponding property values that will be converted (if necessary)
+     * and set in the destination bean.</p>
+     *
      * <p>This method differs from <code>populate()</code>, which
      * was primarily designed for populating JavaBeans from the map of request
      * parameters retrieved on an HTTP request, is that no scalar->indexed
@@ -228,7 +233,14 @@ public class BeanUtils {
                 Object value = ((DynaBean) orig).get(name);
                 copyProperty(dest, name, value);
             }
-        } else /* if (!(orig instanceof DynaBean)) */ {
+        } else if (orig instanceof Map) {
+            Iterator names = ((Map) orig).keySet().iterator();
+            while (names.hasNext()) {
+                String name = (String) names.next();
+                Object value = ((Map) orig).get(name);
+                copyProperty(dest, name, value);
+            }
+        } else /* if (not a DynaBean or a Map) */ {
             PropertyDescriptor origDescriptors[] =
                 PropertyUtils.getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {

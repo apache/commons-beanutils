@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.20 2002/07/20 22:36:36 craigmcc Exp $
- * $Revision: 1.20 $
- * $Date: 2002/07/20 22:36:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.21 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.21 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -66,6 +66,7 @@ package org.apache.commons.beanutils;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.20 $ $Date: 2002/07/20 22:36:36 $
+ * @version $Revision: 1.21 $ $Date: 2002/07/21 00:20:45 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -171,6 +172,32 @@ public class PropertyUtilsTestCase extends TestCase {
      * The "public subclass" test bean for each test.
      */
     protected TestBeanPublicSubclass beanPublicSubclass = null;
+
+
+    /**
+     * The set of properties that should be described.
+     */
+    protected String describes[] =
+    { "booleanProperty",
+      "booleanSecond",
+      "doubleProperty",
+      "floatProperty",
+      "intArray",
+      //      "intIndexed",
+      "intProperty",
+      "listIndexed",
+      "longProperty",
+      //      "mappedObjects",
+      //      "mappedProperty",
+      //      "mappedIntProperty",
+      "nested",
+      "nullProperty",
+      //      "readOnlyProperty",
+      "shortProperty",
+      "stringArray",
+      //      "stringIndexed",
+      "stringProperty"
+    };
 
 
     /**
@@ -258,6 +285,107 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test copyProperties() when the origin is a a <code>Map</code>.
+     */
+    public void testCopyPropertiesMap() {
+
+        Map map = new HashMap();
+        map.put("booleanProperty", Boolean.FALSE);
+        map.put("doubleProperty", new Double(333.0));
+        map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        map.put("floatProperty", new Float((float) 222.0));
+        map.put("intArray", new int[] { 0, 100, 200 });
+        map.put("intProperty", new Integer(111));
+        map.put("longProperty", new Long(444));
+        map.put("shortProperty", new Short((short) 555));
+        map.put("stringProperty", "New String Property");
+
+        try {
+            PropertyUtils.copyProperties(bean, map);
+        } catch (Throwable t) {
+            fail("Threw " + t.toString());
+        }
+
+        // Scalar properties
+        assertEquals("booleanProperty", false,
+                     bean.getBooleanProperty());
+        assertEquals("doubleProperty", 333.0,
+                     bean.getDoubleProperty(), 0.005);
+        assertEquals("floatProperty", (float) 222.0,
+                     bean.getFloatProperty(), (float) 0.005);
+        assertEquals("intProperty", 111,
+                     bean.getIntProperty());
+        assertEquals("longProperty", (long) 444,
+                     bean.getLongProperty());
+        assertEquals("shortProperty", (short) 555,
+                     bean.getShortProperty());
+        assertEquals("stringProperty", "New String Property",
+                     bean.getStringProperty());
+                     
+        // Indexed Properties
+        String dupProperty[] = bean.getDupProperty();
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        int intArray[] = bean.getIntArray();
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 0, intArray[0]);
+        assertEquals("intArray[1]", 100, intArray[1]);
+        assertEquals("intArray[2]", 200, intArray[2]);
+
+    }
+
+
+    /**
+     * Test the describe() method.
+     */
+    public void testDescribe() {
+
+        Map map = null;
+        try {
+            map = PropertyUtils.describe(bean);
+        } catch (Exception e) {
+            fail("Threw exception " + e);
+        }
+
+        // Verify existence of all the properties that should be present
+        for (int i = 0; i < describes.length; i++) {
+            assertTrue("Property '" + describes[i] + "' is present",
+                       map.containsKey(describes[i]));
+        }
+        assertTrue("Property 'writeOnlyProperty' is not present",
+                   !map.containsKey("writeOnlyProperty"));
+
+        // Verify the values of scalar properties
+        assertEquals("Value of 'booleanProperty'",
+                     Boolean.TRUE,
+                     (Boolean) map.get("booleanProperty"));
+        assertEquals("Value of 'doubleProperty'",
+                     new Double(321.0),
+                     (Double) map.get("doubleProperty"));
+        assertEquals("Value of 'floatProperty'",
+                     new Float((float) 123.0),
+                     (Float) map.get("floatProperty"));
+        assertEquals("Value of 'intProperty'",
+                     new Integer(123),
+                     (Integer) map.get("intProperty"));
+        assertEquals("Value of 'longProperty'",
+                     new Long(321),
+                     (Long) map.get("longProperty"));
+        assertEquals("Value of 'shortProperty'",
+                     new Short((short) 987),
+                     (Short) map.get("shortProperty"));
+        assertEquals("Value of 'stringProperty'",
+                     "This is a string",
+                     (String) map.get("stringProperty"));
+
+    }
 
 
     /**

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ShortArrayConverter.java,v 1.2 2002/07/13 02:22:08 craigmcc Exp $
- * $Revision: 1.2 $
- * $Date: 2002/07/13 02:22:08 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/converters/ShortArrayConverter.java,v 1.3 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.3 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import org.apache.commons.beanutils.Converter;
  * on how this instance is constructed.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.2 $ $Date: 2002/07/13 02:22:08 $
+ * @version $Revision: 1.3 $ $Date: 2002/07/21 00:20:45 $
  * @since 1.4
  */
 
@@ -147,6 +147,24 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
         // Deal with the no-conversion-needed case
         if (model.getClass() == value.getClass()) {
             return (value);
+        }
+
+        // Deal with input value as a String array
+        if (strings.getClass() == value.getClass()) {
+            try {
+                String values[] = (String[]) value;
+                short results[] = new short[values.length];
+                for (int i = 0; i < values.length; i++) {
+                    results[i] = Short.parseShort(values[i]);
+                }
+                return (results);
+            } catch (Exception e) {
+                if (useDefault) {
+                    return (defaultValue);
+                } else {
+                    throw new ConversionException(value.toString(), e);
+                }
+            }
         }
 
         // Parse the input value as a String into elements

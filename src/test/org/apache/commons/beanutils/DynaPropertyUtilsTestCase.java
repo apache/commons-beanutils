@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.7 2002/07/20 19:12:45 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/07/20 19:12:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaPropertyUtilsTestCase.java,v 1.8 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2002/07/20 19:12:45 $
+ * @version $Revision: 1.8 $ $Date: 2002/07/21 00:20:45 $
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {
@@ -156,6 +156,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("booleanProperty", new Boolean(true));
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
+        String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
         bean.set("floatProperty", new Float((float) 123.0));
         int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
@@ -224,6 +225,63 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
 
     // ------------------------------------------------ Individual Test Methods
+
+
+    /**
+     * Test copyProperties() when the origin is a a <code>Map</code>.
+     */
+    public void testCopyPropertiesMap() {
+
+        Map map = new HashMap();
+        map.put("booleanProperty", Boolean.FALSE);
+        map.put("doubleProperty", new Double(333.0));
+        map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        map.put("floatProperty", new Float((float) 222.0));
+        map.put("intArray", new int[] { 0, 100, 200 });
+        map.put("intProperty", new Integer(111));
+        map.put("longProperty", new Long(444));
+        map.put("shortProperty", new Short((short) 555));
+        map.put("stringProperty", "New String Property");
+
+        try {
+            PropertyUtils.copyProperties(bean, map);
+        } catch (Throwable t) {
+            fail("Threw " + t.toString());
+        }
+
+        // Scalar properties
+        assertEquals("booleanProperty", false,
+                     ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("doubleProperty", 333.0,
+                     ((Double) bean.get("doubleProperty")).doubleValue(),
+                     0.005);
+        assertEquals("floatProperty", (float) 222.0,
+                     ((Float) bean.get("floatProperty")).floatValue(),
+                     (float) 0.005);
+        assertEquals("intProperty", 111,
+                     ((Integer) bean.get("intProperty")).intValue());
+        assertEquals("longProperty", (long) 444,
+                     ((Long) bean.get("longProperty")).longValue());
+        assertEquals("shortProperty", (short) 555,
+                     ((Short) bean.get("shortProperty")).shortValue());
+        assertEquals("stringProperty", "New String Property",
+                     (String) bean.get("stringProperty"));
+                     
+        // Indexed Properties
+        String dupProperty[] = (String[]) bean.get("dupProperty");
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        int intArray[] = (int[]) bean.get("intArray");
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 0, intArray[0]);
+        assertEquals("intArray[1]", 100, intArray[1]);
+        assertEquals("intArray[2]", 200, intArray[2]);
+
+    }
 
 
     /**
@@ -2614,6 +2672,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("booleanProperty", Boolean.TYPE),
                             new DynaProperty("booleanSecond", Boolean.TYPE),
                             new DynaProperty("doubleProperty", Double.TYPE),
+                            new DynaProperty("dupProperty", stringArray.getClass()),
                             new DynaProperty("floatProperty", Float.TYPE),
                             new DynaProperty("intArray", intArray.getClass()),
                             new DynaProperty("intIndexed", intArray.getClass()),

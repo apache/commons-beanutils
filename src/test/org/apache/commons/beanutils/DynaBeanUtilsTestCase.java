@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.11 2002/07/20 22:36:36 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2002/07/20 22:36:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.12 2002/07/21 00:20:45 craigmcc Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/07/21 00:20:45 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.11 $ $Date: 2002/07/20 22:36:36 $
+ * @version $Revision: 1.12 $ $Date: 2002/07/21 00:20:45 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -288,6 +288,63 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
         assertEquals("stringArray[1]", "New 1", stringArray[1]);
+
+    }
+
+
+    /**
+     * Test copyProperties() when the origin is a a <code>Map</code>.
+     */
+    public void testCopyPropertiesMap() {
+
+        Map map = new HashMap();
+        map.put("booleanProperty", "false");
+        map.put("doubleProperty", "333.0");
+        map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        map.put("floatProperty", "222.0");
+        map.put("intArray", new String[] { "0", "100", "200" });
+        map.put("intProperty", "111");
+        map.put("longProperty", "444");
+        map.put("shortProperty", "555");
+        map.put("stringProperty", "New String Property");
+
+        try {
+            BeanUtils.copyProperties(bean, map);
+        } catch (Throwable t) {
+            fail("Threw " + t.toString());
+        }
+
+        // Scalar properties
+        assertEquals("booleanProperty", false,
+                     ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("doubleProperty", 333.0,
+                     ((Double) bean.get("doubleProperty")).doubleValue(),
+                     0.005);
+        assertEquals("floatProperty", (float) 222.0,
+                     ((Float) bean.get("floatProperty")).floatValue(),
+                     (float) 0.005);
+        assertEquals("intProperty", 111,
+                     ((Integer) bean.get("intProperty")).intValue());
+        assertEquals("longProperty", (long) 444,
+                     ((Long) bean.get("longProperty")).longValue());
+        assertEquals("shortProperty", (short) 555,
+                     ((Short) bean.get("shortProperty")).shortValue());
+        assertEquals("stringProperty", "New String Property",
+                     (String) bean.get("stringProperty"));
+                     
+        // Indexed Properties
+        String dupProperty[] = (String[]) bean.get("dupProperty");
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        int intArray[] = (int[]) bean.get("intArray");
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 0, intArray[0]);
+        assertEquals("intArray[1]", 100, intArray[1]);
+        assertEquals("intArray[2]", 200, intArray[2]);
 
     }
 
