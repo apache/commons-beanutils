@@ -55,6 +55,7 @@ and accessing bean properties.</p>
     <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
     <li><a href="#FAQ.bc.order">How Do I Set The BeanComparator Order To Be Ascending/Descending?</a></li>
     </ul></li>
+<li><a href='#Packaging'>Packaging</a></li>
 </ol>
 
 <a name="overview"></a>
@@ -704,6 +705,12 @@ to the code that creates it.
 
 <a name="collections"></a>
 <h1>Collections</h1>
+<strong>Note:</strong> these classes depend on 
+<a href='http://jakarta.apache.org/commons/collections'>Commons Collection</a> 3.0 or higher
+and are optional. To use them, please ensure that this library is available 
+and that either the all-in-one jar is used or the modular
+<code>commons-beanutils-bean-collections.jar</code> is available 
+(in addition to <code>commons-beanutils-core.jar</code>, of course :-).
 <a name="bean-comparator"></a>
 <h3>Comparing Beans</h3>
 <p>
@@ -832,5 +839,28 @@ For example:
     Collections.sort(myList, reversedNaturalOrderBeanComparator);
     ...
 </pre></code>
+
+<a name="Packaging"></a>
+<h1>Packaging</h1>
+<p>
+BeanUtils now comes packaged (into jars) in two different ways: 
+</p>
+<ol>
+    <li>an all-in-one jar (<code>commons-beanutils.jar</code>)</li>
+    <li>and as modular component jars:
+        <ul>
+	<li><code>commons-beanutils-core.jar</code> (core classes)</li>
+	<li><code>commons-beanutils-bean-collections.jar</code> 
+    (additional dependency on commons-collections 3.0)</li>
+</ol>
+<p>
+Those who want it all should grab the all-in-one <code>commons-beanutils.jar</code> 
+(and remember to add any optional dependencies needed) 
+whereas those who need minimal dependencies should use <code>commons-beanutils-core.jar</code>
+plus any optional jars they plan to use. 
+</p>
+<p>
+The binary distribution contains all these jars.
+</p>
 </body>
 </html>
