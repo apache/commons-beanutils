@@ -3,7 +3,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.55 2003/05/16 14:50:21 rdonkin Exp $
+        $Id: build.xml,v 1.56 2003/08/02 20:37:16 craigmcc Exp $
 -->
 
 
@@ -121,6 +121,9 @@
 
   <!-- The Commons Logger SimpleLog level for testing -->
   <property name="test.level"               value="error"/>
+
+  <!-- Loop counter for microbenchmarks -->
+  <property name="bench.counter"            value="100000"/>
 
 
 <!-- ========== Executable Targets ======================================== -->
@@ -474,4 +477,52 @@
       <classpath refid="test.classpath"/>
     </java>
   </target>
+
+
+  <!-- ========== Microbenchmark Cases ===================================== -->
+
+
+  <target name="bench"  depends="compile.tests,
+                                 bench.BeanUtils,
+                                 bench.PropertyUtils
+                                "
+   description="Execute microbenchmark cases"/>
+
+
+  <target name="bench.BeanUtils" depends="compile.tests">
+    <echo message="Running BeanUtils microbenchmarks"/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="counter"
+                 value="${bench.counter}"/>
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.BeanUtilsBenchCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+  <target name="bench.PropertyUtils" depends="compile.tests">
+    <echo message="Running PropertyUtils microbenchmarks"/>
+    <java classname="${test.runner}" fork="yes"
+        failonerror="${test.failonerror}">
+      <sysproperty key="counter"
+                 value="${bench.counter}"/>
+      <sysproperty key="org.apache.commons.logging.LogFactory"
+                 value="${test.factory}"/>
+      <sysproperty key="org.apache.commons.logging.Log"
+                 value="${test.log}"/>
+      <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
+                 value="${test.level}"/>
+      <arg value="org.apache.commons.beanutils.PropertyUtilsBenchCase"/>
+      <classpath refid="test.classpath"/>
+    </java>
+  </target>
+
+
+
 </project>
