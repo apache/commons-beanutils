@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.11 2002/03/24 09:59:30 dion Exp $
- * $Revision: 1.11 $
- * $Date: 2002/03/24 09:59:30 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/MappedPropertyDescriptor.java,v 1.12 2002/11/21 22:21:01 rdonkin Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/11/21 22:21:01 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import java.security.PrivilegedAction;
  *
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.11 $ $Date: 2002/03/24 09:59:30 $
+ * @version $Revision: 1.12 $ $Date: 2002/11/21 22:21:01 $
  */
 
 
@@ -143,8 +143,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         setName(propertyName);
         String base = capitalize(propertyName);
-
-        // Look for mapped get and set methods
+        
+        // Look for mapped read method and matching write method
         try {
             mappedReadMethod = findMethod(beanClass, "get" + base, 1,
                     stringClassArray);
@@ -152,6 +152,11 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             mappedWriteMethod = findMethod(beanClass, "set" + base, 2,  params);
         } catch (IntrospectionException e) {
             ;
+        }
+        
+        // If there's no read method, then look for just a write method 
+        if (mappedReadMethod == null) {
+            mappedWriteMethod = findMethod(beanClass, "set" + base, 2);
         }
 
         if ((mappedReadMethod == null) && (mappedWriteMethod == null)) {

@@ -59,6 +59,20 @@ package org.apache.commons.beanutils;
 
 public class BetaBean extends AbstractChild {
     
+    private String secret = "utah";
+    
+    public String getSecret() {
+        return secret;
+    }
+    
+    public void setNoGetterProperty(String secret) {
+        this.secret = secret;
+    }
+    
+    public void setNoGetterMappedProperty(String secret, String key) {
+        this.secret = "MAP:" + secret;
+    }
+    
     public BetaBean(String name) {
         setName(name);
     }

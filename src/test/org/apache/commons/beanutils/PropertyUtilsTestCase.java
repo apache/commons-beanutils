@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.27 2002/10/29 20:27:53 craigmcc Exp $
- * $Revision: 1.27 $
- * $Date: 2002/10/29 20:27:53 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.28 2002/11/21 22:21:01 rdonkin Exp $
+ * $Revision: 1.28 $
+ * $Date: 2002/11/21 22:21:01 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.27 $ $Date: 2002/10/29 20:27:53 $
+ * @version $Revision: 1.28 $ $Date: 2002/11/21 22:21:01 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -3622,5 +3622,28 @@ public class PropertyUtilsTestCase extends TestCase {
                 "(2) Get/Set On Parent.", 
                 "abcd", 
                 bean.getName()); 
+    }
+    
+    public void testSetNoGetter() throws Exception
+    {
+        BetaBean bean = new BetaBean("Cedric");
+        
+        // test standard no getter
+        bean.setNoGetterProperty("Sigma");
+        assertEquals("BetaBean test failed", "Sigma", bean.getSecret());
+        
+        assertNotNull("Descriptor is null", PropertyUtils.getPropertyDescriptor(bean, "noGetterProperty"));
+        
+        BeanUtils.setProperty(bean, "noGetterProperty",  "Omega");
+        assertEquals("Cannot set no-getter property", "Omega", bean.getSecret());
+        
+        // test mapped no getter descriptor
+        MappedPropertyDescriptor descriptor 
+            = new MappedPropertyDescriptor("noGetterMappedProperty", BetaBean.class);
+        
+        assertNotNull("Map Descriptor is null", PropertyUtils.getPropertyDescriptor(bean, "noGetterMappedProperty"));
+        
+        PropertyUtils.setMappedProperty(bean, "noGetterMappedProperty",  "Epsilon", "Epsilon");
+        assertEquals("Cannot set mapped no-getter property", "MAP:Epsilon", bean.getSecret());
     }
 }
