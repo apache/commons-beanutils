@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.16 2003/07/03 19:10:27 craigmcc Exp $
- * $Revision: 1.16 $
- * $Date: 2003/07/03 19:10:27 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.17 2003/08/28 21:10:36 rdonkin Exp $
+ * $Revision: 1.17 $
+ * $Date: 2003/08/28 21:10:36 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import java.util.Map;
  *
  * @author Craig R. McClanahan
  * @author Rodney Waldhoff
- * @version $Revision: 1.16 $ $Date: 2003/07/03 19:10:27 $
+ * @version $Revision: 1.17 $ $Date: 2003/08/28 21:10:36 $
  */
 
 public class TestBean {
@@ -119,6 +119,10 @@ public class TestBean {
         setIntProperty(intProperty.intValue());
     }
 
+   public TestBean(double doubleProperty) {
+       setDoubleProperty(doubleProperty);
+   }
+   
     TestBean(int intProperty) {
         setIntProperty(intProperty);
     }
@@ -410,7 +414,19 @@ public class TestBean {
         return (nested);
     }
 
-
+   /**
+    * Another nested reference to another test bean,
+    */
+   private TestBean anotherNested = null;
+    
+   public TestBean getAnotherNested() {
+      return anotherNested;
+   }
+    
+   public void setAnotherNested( TestBean anotherNested ) {
+      this.anotherNested = anotherNested;
+   }
+   
     /*
      * Another nested reference to a bean containing mapp properties
      */

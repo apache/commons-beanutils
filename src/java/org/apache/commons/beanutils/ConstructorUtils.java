@@ -62,8 +62,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
- * @version $Revision: 1.3 $ $Date: 2003/02/03 20:50:49 $
- *
  * <p> Utility reflection methods focussed on constructors, modelled after {@link MethodUtils}. </p>
  *
  * <h3>Known Limitations</h3>
@@ -86,6 +84,7 @@ import java.lang.reflect.Modifier;
  * @author Jan Sorensen
  * @author Robert Burrell Donkin
  * @author Rodney Waldhoff
+ * @version $Revision: 1.4 $ $Date: 2003/08/28 21:10:36 $
  */
 public class ConstructorUtils {
 
