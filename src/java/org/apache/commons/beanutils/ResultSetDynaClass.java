@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.6 2002/12/07 23:34:40 craigmcc Exp $
- * $Revision: 1.6 $
- * $Date: 2002/12/07 23:34:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.7 2002/12/16 01:53:20 craigmcc Exp $
+ * $Revision: 1.7 $
+ * $Date: 2002/12/16 01:53:20 $
  *
  * ====================================================================
  *
@@ -125,7 +125,7 @@ import java.util.Iterator;
  * </pre>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2002/12/07 23:34:40 $
+ * @version $Revision: 1.7 $ $Date: 2002/12/16 01:53:20 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
@@ -136,7 +136,8 @@ public class ResultSetDynaClass implements DynaClass {
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
-     * <code>ResultSet</code>.</p>
+     * <code>ResultSet</code>.  The property names corresponding
+     * to column names in the result set will be lower cased.</p>
      *
      * @param resultSet The result set to be wrapped
      *
@@ -147,16 +148,53 @@ public class ResultSetDynaClass implements DynaClass {
      */
     public ResultSetDynaClass(ResultSet resultSet) throws SQLException {
 
+        this(resultSet, true);
+
+    }
+
+
+    /**
+     * <p>Construct a new ResultSetDynaClass for the specified
+     * <code>ResultSet</code>.  The property names corresponding
+     * to the column names in the result set will be lower cased or not,
+     * depending on the specified <code>lowerCase</code> value.</p>
+     *
+     * <p><strong>WARNING</strong> - If you specify <code>false</code>
+     * for <code>lowerCase</code>, the returned property names will
+     * exactly match the column names returned by your JDBC driver.
+     * Because different drivers might return column names in different
+     * cases, the property names seen by your application will vary
+     * depending on which JDBC driver you are using.</p>
+     *
+     * @param resultSet The result set to be wrapped
+     * @param lowerCase Should property names be lower cased?
+     *
+     * @exception NullPointerException if <code>resultSet</code>
+     *  is <code>false</code>
+     * @exception SQLException if the metadata for this result set
+     *  cannot be introspected
+     */
+    public ResultSetDynaClass(ResultSet resultSet, boolean lowerCase)
+        throws SQLException {
+
         if (resultSet == null) {
             throw new NullPointerException();
         }
         this.resultSet = resultSet;
+        this.lowerCase = lowerCase;
         introspect();
 
     }
 
 
     // ----------------------------------------------------- Instance Variables
+
+
+    /**
+     * Flag defining whether column names should be lower cased when
+     * converted to property names.
+     */
+    protected boolean lowerCase = true;
 
 
     /**
@@ -316,6 +354,7 @@ public class ResultSetDynaClass implements DynaClass {
 
     }
 
+
     /**
      * <p>Factory method to create a new DynaProperty for the given index
      * into the result set metadata.</p>
@@ -325,8 +364,13 @@ public class ResultSetDynaClass implements DynaClass {
      * @return the newly created DynaProperty instance
      */
     protected DynaProperty createDynaProperty(ResultSetMetaData metadata, int i) throws SQLException {
-        String name = metadata.getColumnName(i).toLowerCase();
-        
+
+        String name = null;
+        if (lowerCase) {
+            name = metadata.getColumnName(i).toLowerCase();
+        } else {
+            name = metadata.getColumnName(i);
+        }
         String className = null;
         try {
             className = metadata.getColumnClassName(i);
@@ -341,7 +385,9 @@ public class ResultSetDynaClass implements DynaClass {
             clazz = loadClass(className);
         }
         return new DynaProperty(name, clazz);
+
     }
+
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used 
@@ -351,6 +397,7 @@ public class ResultSetDynaClass implements DynaClass {
      * </p>
      */        
     protected Class loadClass(String className) throws SQLException {
+
         try {
             return getClass().getClassLoader().loadClass(className);
         } 
@@ -358,6 +405,8 @@ public class ResultSetDynaClass implements DynaClass {
             throw new SQLException("Cannot load column class '" +
                                    className + "': " + e);
         }
+
     }
+
 
 }
