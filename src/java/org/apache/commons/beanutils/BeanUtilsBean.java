@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.8 2003/05/21 09:41:45 rdonkin Exp $
- * $Revision: 1.8 $
- * $Date: 2003/05/21 09:41:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.9 2003/05/22 14:16:08 rdonkin Exp $
+ * $Revision: 1.9 $
+ * $Date: 2003/05/22 14:16:08 $
  *
  * ====================================================================
  *
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.8 $ $Date: 2003/05/21 09:41:45 $
+ * @version $Revision: 1.9 $ $Date: 2003/05/22 14:16:08 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -260,8 +260,6 @@ public class BeanUtilsBean {
      *  <code>orig</code> argument is null
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NullPointerException if <code>orig</code> or
-     *  <code>dest</code> is <code>null</code>
      */
     public void copyProperties(Object dest, Object orig)
         throws IllegalAccessException, InvocationTargetException {
