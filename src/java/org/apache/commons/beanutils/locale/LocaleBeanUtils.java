@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.4 2003/03/20 20:12:25 rdonkin Exp $
- * $Revision: 1.4 $
- * $Date: 2003/03/20 20:12:25 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtils.java,v 1.5 2003/07/14 21:44:08 rdonkin Exp $
+ * $Revision: 1.5 $
+ * $Date: 2003/07/14 21:44:08 $
  *
  * ====================================================================
  *
@@ -76,8 +76,8 @@ import java.util.Locale;
  * <p>Utility methods for populating JavaBeans properties
  * via reflection in a locale-dependent manner.</p>
  *
- * <p>The implementations for these methods are provided by <code>LocalBeanUtilsBean</code>.
- * For more details see {@link LocalBeanUtilsBean}.</p>
+ * <p>The implementations for these methods are provided by <code>LocaleBeanUtilsBean</code>.
+ * For more details see {@link LocaleBeanUtilsBean}.</p>
  *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
@@ -454,7 +454,7 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * Resolve any nested expression to get the actual target bean.
      *
-     * @deprecated moved into <code>LocalBeanUtilsBean</code>
+     * @deprecated moved into <code>LocaleBeanUtilsBean</code>
      * @param bean The bean
      * @param name The property name
      *
