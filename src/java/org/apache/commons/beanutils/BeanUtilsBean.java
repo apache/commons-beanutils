@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.11 2003/07/07 22:00:02 rdonkin Exp $
- * $Revision: 1.11 $
- * $Date: 2003/07/07 22:00:02 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.12 2003/08/27 23:28:07 rdonkin Exp $
+ * $Revision: 1.12 $
+ * $Date: 2003/08/27 23:28:07 $
  *
  * ====================================================================
  *
@@ -93,7 +93,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.11 $ $Date: 2003/07/07 22:00:02 $
+ * @version $Revision: 1.12 $ $Date: 2003/08/27 23:28:07 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -919,7 +919,7 @@ public class BeanUtilsBean {
 
         // Resolve any nested expression to get the actual target bean
         Object target = bean;
-        int delim = name.lastIndexOf(PropertyUtils.NESTED_DELIM);
+        int delim = findLastNestedIndex(name);
         if (delim >= 0) {
             try {
                 target =
@@ -1067,6 +1067,37 @@ public class BeanUtilsBean {
                 (e, "Cannot set " + propName);
         }
 
+    }
+    
+    private int findLastNestedIndex(String expression)
+    {
+        // walk back from the end to the start 
+        // and find the first index that 
+        int bracketCount = 0;
+        for (int i = expression.length() - 1; i>=0 ; i--) {
+            char at = expression.charAt(i);
+            switch (at) {
+                case PropertyUtils.NESTED_DELIM:
+                    if (bracketCount < 1) {
+                        return i;
+                    }
+                    break;
+                    
+                case PropertyUtils.MAPPED_DELIM:
+                case PropertyUtils.INDEXED_DELIM:
+                    // not bothered which
+                    --bracketCount;
+                    break;
+                
+                case PropertyUtils.MAPPED_DELIM2:
+                case PropertyUtils.INDEXED_DELIM2:
+                    // not bothered which
+                    ++bracketCount;
+                    break;            
+            }
+        }
+        // can't find any
+        return -1;
     }
     
     /** 

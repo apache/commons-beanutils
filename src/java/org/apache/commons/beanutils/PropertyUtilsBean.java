@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.9 2003/08/03 00:43:52 craigmcc Exp $
- * $Revision: 1.9 $
- * $Date: 2003/08/03 00:43:52 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.10 2003/08/27 23:28:07 rdonkin Exp $
+ * $Revision: 1.10 $
+ * $Date: 2003/08/27 23:28:07 $
  *
  * ====================================================================
  *
@@ -134,7 +134,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.9 $ $Date: 2003/08/03 00:43:52 $
+ * @version $Revision: 1.10 $ $Date: 2003/08/27 23:28:07 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -799,8 +799,8 @@ public class PropertyUtilsBean {
         }
 
         // Resolve nested references
-        while (true) {
-            int period = name.indexOf(PropertyUtils.NESTED_DELIM);
+        while (true) {            
+            int period = findNextNestedIndex(name);
             if (period < 0) {
                 break;
             }
@@ -841,9 +841,10 @@ public class PropertyUtilsBean {
         if ((bean == null) || (name == null)) {
             return (null);
         }
-
+        
         PropertyDescriptor descriptors[] = getPropertyDescriptors(bean);
         if (descriptors != null) {
+            
             for (int i = 0; i < descriptors.length; i++) {
                 if (name.equals(descriptors[i].getName()))
                     return (descriptors[i]);
@@ -870,8 +871,40 @@ public class PropertyUtilsBean {
                 mappedDescriptors.put(name, result);
             }
         }
+        
         return result;
 
+    }
+    
+    private int findNextNestedIndex(String expression)
+    {
+        // walk back from the end to the start 
+        // and find the first index that 
+        int bracketCount = 0;
+        for (int i=0, size=expression.length(); i<size ; i++) {
+            char at = expression.charAt(i);
+            switch (at) {
+                case PropertyUtils.NESTED_DELIM:
+                    if (bracketCount < 1) {
+                        return i;
+                    }
+                    break;
+                    
+                case PropertyUtils.MAPPED_DELIM:
+                case PropertyUtils.INDEXED_DELIM:
+                    // not bothered which
+                    ++bracketCount;
+                    break;
+                
+                case PropertyUtils.MAPPED_DELIM2:
+                case PropertyUtils.INDEXED_DELIM2:
+                    // not bothered which
+                    --bracketCount;
+                    break;            
+            }
+        }
+        // can't find any
+        return -1;
     }
 
 

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.24 2003/03/26 19:51:46 rdonkin Exp $
- * $Revision: 1.24 $
- * $Date: 2003/03/26 19:51:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.25 2003/08/27 23:28:07 rdonkin Exp $
+ * $Revision: 1.25 $
+ * $Date: 2003/08/27 23:28:07 $
  *
  * ====================================================================
  *
@@ -98,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -1344,5 +1344,14 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
-
+    public void testMappedProperty() throws Exception {
+        MappedPropertyTestBean bean = new MappedPropertyTestBean();
+        
+        BeanUtils.setProperty(bean, "mapproperty(this.that.the-other)", "some.dotty.value");
+        
+        assertEquals(
+                        "Mapped property set correctly", 
+                        "some.dotty.value", 
+                        bean.getMapproperty("this.that.the-other"));
+    }	
 }
