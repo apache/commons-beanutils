@@ -122,6 +122,12 @@
       <email>yoavs@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Niall Pemberton</name>
+      <id>niallp</id>
+      <email>niallp at apache dot org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
 
   <contributors>
