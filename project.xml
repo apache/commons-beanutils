@@ -11,16 +11,34 @@
 
   <developers>
     <developer>
+      <name>Robert Burrell Donkin</name>
+      <id>rdonkin</id>
+      <email>rdonkin@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>dIon Gillard</name>
+      <id>dion</id>
+      <email>dion@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
       <name>Craig McClanahan</name>
-      <id></id>
-      <email></email>
-      <organization></organization>
+      <id>craigmcc</id>
+      <email>craigmcc@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Geir Magnusson Jr.</name>
+      <id>geirm</id>
+      <email>geirm@apache.org</email>
+      <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Scott Sanders</name>
       <id>sanders</id>
       <email>sanders@apache.org</email>
-      <organization></organization>
+      <organization>Apache Software Foundation</organization>
     </developer>
   </developers>
   
