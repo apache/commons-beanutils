@@ -53,6 +53,7 @@ and accessing bean properties.</p>
 <li><a href="#FAQ">Frequently Asked Questions</a>
     <ul>
     <li><a href="#FAQ.property">Why Can't BeanUtils Find My Method?</a></li>
+    <li><a href="#FAQ.bc.order">How Do I Set The BeanComparator Order To Be Ascending/Descending?</a></li>
     </ul></li>
 </ol>
 
@@ -808,5 +809,28 @@ creating via reflection based on your class. If this happens, the only solution 
 create your own <em>BeanInfo</em>.</li>
 </ul>
 </p>
+<a name="FAQ.bc.order"></a>
+<h3>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h3>
+<p>
+BeanComparator relies on an internal Comparator to perform the actual 
+comparisions. By default, 
+<code>org.apache.commons.collections.comparators.ComparableComparator</code> 
+is used which imposes a natural order. If you want to change the order, 
+then a custom Comparator should be created and passed into the 
+appropriate constructor.
+</p>
+<p>
+For example:
+</p>
+<code><pre>
+    import org.apache.commons.collections.comparators.ComparableComparator;
+    import org.apache.commons.collections.comparators.ReverseComparator;
+    import org.apache.commons.beanutils.BeanComparator;
+    ...
+    BeanComparator reversedNaturalOrderBeanComparator
+        = new BeanComparator("propertyName", new ReverseComparator(new ComparableComparator()));
+    Collections.sort(myList, reversedNaturalOrderBeanComparator);
+    ...
+</pre></code>
 </body>
 </html>
