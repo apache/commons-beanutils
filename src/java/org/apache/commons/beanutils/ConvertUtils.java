@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.10 2002/07/20 18:21:21 craigmcc Exp $
- * $Revision: 1.10 $
- * $Date: 2002/07/20 18:21:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.11 2002/12/21 19:53:24 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/12/21 19:53:24 $
  *
  * ====================================================================
  *
@@ -141,7 +141,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.10 $ $Date: 2002/07/20 18:21:21 $
+ * @version $Revision: 1.11 $ $Date: 2002/12/21 19:53:24 $
  */
 
 public class ConvertUtils {
@@ -324,7 +324,10 @@ public class ConvertUtils {
     /**
      * Convert the specified value into a String.  If the specified value
      * is an array, the first element (converted to a String) will be
-     * returned.
+     * returned.  The registered {@link Converter} for the
+     * <code>java.lang.String</code> class will be used, which allows
+     * applications to customize Object->String conversions (the default
+     * implementation simply uses toString()).
      *
      * @param value Value to be converted (may be null)
      */
@@ -337,12 +340,15 @@ public class ConvertUtils {
                 return (null);
             }
             value = Array.get(value, 0);
-            if (value == null)
+            if (value == null) {
                 return ((String) null);
-            else
-                return (value.toString());
+            } else {
+                Converter converter = (Converter) converters.get(String.class);
+                return ((String) converter.convert(String.class, value));
+            }
         } else {
-            return (value.toString());
+            Converter converter = (Converter) converters.get(String.class);
+            return ((String) converter.convert(String.class, value));
         }
 
     }
