@@ -8,7 +8,7 @@
   <currentVersion>1.7-dev</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons Bean Utils</shortDescription>
-  <description>Java Bean Utililities</description>
+  <description>Java Bean Utilities</description>
   <url>http://jakarta.apache.org/commons/beanutils/</url>
   <developers>
     <developer>
