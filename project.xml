@@ -41,6 +41,12 @@
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
+      <name>James Strachan</name>
+      <id>jstrachan</id>
+      <email>jstrachan@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
       <name>Rodney Waldhoff</name>
       <id>rwaldhoff</id>
       <email>rwaldhoff@apache.org</email>
