@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.12 2002/07/21 00:20:45 craigmcc Exp $
- * $Revision: 1.12 $
- * $Date: 2002/07/21 00:20:45 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.13 2002/12/21 19:33:20 craigmcc Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/12/21 19:33:20 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.12 $ $Date: 2002/07/21 00:20:45 $
+ * @version $Revision: 1.13 $ $Date: 2002/12/21 19:33:20 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -828,6 +828,19 @@ public class DynaBeanUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         }
+
+    }
+
+
+    /**
+     * Test converting to and from primitive wrapper types.
+     */
+    public void testSetPropertyOnPrimitiveWrappers() throws Exception {
+
+        BeanUtils.setProperty(bean,"intProperty", new Integer(1));
+        assertEquals(1,((Integer) bean.get("intProperty")).intValue());
+        BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
+        assertEquals(1, Integer.parseInt((String) bean.get("stringProperty")));
 
     }
 

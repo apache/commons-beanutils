@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.31 2002/12/16 01:31:29 craigmcc Exp $
- * $Revision: 1.31 $
- * $Date: 2002/12/16 01:31:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.32 2002/12/21 19:33:19 craigmcc Exp $
+ * $Revision: 1.32 $
+ * $Date: 2002/12/21 19:33:19 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.31 $ $Date: 2002/12/16 01:31:29 $
+ * @version $Revision: 1.32 $ $Date: 2002/12/21 19:33:19 $
  */
 
 public class BeanUtils {
@@ -905,6 +905,8 @@ public class BeanUtils {
             } else if (value instanceof String[]) {
                 newValue = ConvertUtils.convert(((String[]) value)[0],
                                                 type);
+            } else if (ConvertUtils.lookup(value.getClass()) != null) {
+                newValue = ConvertUtils.convert(value.toString(), type);
             } else {
                 newValue = value;
             }

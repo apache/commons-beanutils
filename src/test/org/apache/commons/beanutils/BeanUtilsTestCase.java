@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.15 2002/12/09 22:17:12 rwaldhoff Exp $
- * $Revision: 1.15 $
- * $Date: 2002/12/09 22:17:12 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.16 2002/12/21 19:33:20 craigmcc Exp $
+ * $Revision: 1.16 $
+ * $Date: 2002/12/21 19:33:20 $
  *
  * ====================================================================
  *
@@ -97,7 +97,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -782,10 +782,18 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-    /** See http://issues.apache.org/bugzilla/show_bug.cgi?id=15170 */
-    public void testSetPropertyOnPrimitavieWrappers() throws Exception {
+    /**
+     * Test converting to and from primitive wrapper types.
+     */
+    public void testSetPropertyOnPrimitiveWrappers() throws Exception {
+
         BeanUtils.setProperty(bean,"intProperty", new Integer(1));
         assertEquals(1,bean.getIntProperty());
+        BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
+        assertEquals(1, Integer.parseInt(bean.getStringProperty()));
+
     }
+
+
 }
 
