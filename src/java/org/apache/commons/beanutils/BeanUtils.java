@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.10 2002/01/23 22:35:58 sanders Exp $
- * $Revision: 1.10 $
- * $Date: 2002/01/23 22:35:58 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.11 2002/01/24 01:39:57 craigmcc Exp $
+ * $Revision: 1.11 $
+ * $Date: 2002/01/24 01:39:57 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import org.apache.commons.logging.LogSource;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.10 $ $Date: 2002/01/23 22:35:58 $
+ * @version $Revision: 1.11 $ $Date: 2002/01/24 01:39:57 $
  */
 
 public class BeanUtils {
@@ -538,7 +538,7 @@ public class BeanUtils {
                 if (setter == null) {
 
                     if (log.isDebugEnabled()) {
-                        System.out.println("    No setter method, skipping");
+                        log.debug("    No setter method, skipping");
                     }
 
                     continue;
