@@ -18,7 +18,7 @@
 
 <!--
         "Bean Utilities" component of the Jakarta Commons Subproject
-        $Id: build.xml,v 1.2.2.1 2004/07/20 22:01:50 rdonkin Exp $
+        $Id: build.xml,v 1.2.2.2 2004/07/20 22:23:41 rdonkin Exp $
 -->
 
 
@@ -71,7 +71,7 @@
   <property name="component.package"       value="org.apache.commons.beanutils"/>
 
   <!-- The title of this component -->
-  <property name="component.title"         value="Bean Introspection Utilities"/>
+  <property name="component.title"         value="Bean Utilities Bean Collections"/>
 
   <!-- The current version number of this component -->
   <property name="component.version"       value="1.7RC1"/>
