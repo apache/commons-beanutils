@@ -24,7 +24,7 @@
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
   <logo>/images/logo.png</logo>
   
-  <package>org.apache.commons.beanutils.*</package>
+  <package>org.apache.commons.beanutils</package>
   <url>http://jakarta.apache.org/commons/beanutils/index.html</url>
 
   <organization>
