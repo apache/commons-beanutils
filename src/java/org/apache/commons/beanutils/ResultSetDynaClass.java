@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.1 2002/07/12 22:38:21 craigmcc Exp $
- * $Revision: 1.1 $
- * $Date: 2002/07/12 22:38:21 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ResultSetDynaClass.java,v 1.2 2002/07/15 15:40:37 craigmcc Exp $
+ * $Revision: 1.2 $
+ * $Date: 2002/07/15 15:40:37 $
  *
  * ====================================================================
  *
@@ -90,8 +90,42 @@ import java.util.Iterator;
  * property of the corresponding name (forced to lower case for portability).
  * </p>
  *
+ * <p><strong>WARNING</strong> - Any {@link DynaBean} instance returned by
+ * this class, or from the <code>Iterator</code> returned by the
+ * <code>iterator()</code> method, is directly linked to the row that the
+ * underlying result set is currently positioned at.  This has the following
+ * implications:</p>
+ * <ul>
+ * <li>Once you retrieve a different {@link DynaBean} instance, you should
+ *     no longer use any previous instance.</li>
+ * <li>Changing the position of the underlying result set will change the
+ *     data that the {@link DynaBean} references.</li>
+ * <li>Once the underlying result set is closed, the {@link DynaBean}
+ *     instance may no longer be used.</li>
+ * </ul>
+ *
+ * <p>Any database data that you wish to utilize outside the context of the
+ * current row of an open result set must be copied.  For example, you could
+ * use the following code to create standalone copies of the information in
+ * a result set:</p>
+ * <pre>
+ *   ArrayList results = new ArrayList(); // To hold copied list
+ *   ResultSetDynaClass rsdc = ...;
+ *   DynaProperty properties[] = rsdc.getDynaProperties();
+ *   BasicDynaClass bdc =
+ *     new BasicDynaClass("foo", BasicDynaBean.class,
+ *                        rsdc.getDynaProperties());
+ *   Iterator rows = rsdc.iterator();
+ *   while (rsdc.hasNext()) {
+ *     DynaBean oldRow = (DynaBean) rows.iterator();
+ *     DynaBean newRow = bdc.newInstance();
+ *     PropertyUtils.copyProperties(newRow, oldRow);
+ *     results.add(newRow);
+ *   }
+ * </pre>
+ *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2002/07/12 22:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2002/07/15 15:40:37 $
  */
 
 public class ResultSetDynaClass implements DynaClass {
