@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.12 2002/01/27 04:12:42 craigmcc Exp $
- * $Revision: 1.12 $
- * $Date: 2002/01/27 04:12:42 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.13 2002/02/14 06:59:59 craigmcc Exp $
+ * $Revision: 1.13 $
+ * $Date: 2002/02/14 06:59:59 $
  *
  * ====================================================================
  *
@@ -75,7 +75,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogSource;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -86,7 +86,7 @@ import org.apache.commons.logging.LogSource;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.12 $ $Date: 2002/01/27 04:12:42 $
+ * @version $Revision: 1.13 $ $Date: 2002/02/14 06:59:59 $
  */
 
 public class BeanUtils {
@@ -97,7 +97,7 @@ public class BeanUtils {
     /**
      * All logging goes through this logger
      */
-    private static Log log = LogSource.getInstance(BeanUtils.class);
+    private static Log log = LogFactory.getLog(BeanUtils.class);
 
     /**
      * The debugging detail level for this component.
@@ -180,9 +180,10 @@ public class BeanUtils {
         if (log.isDebugEnabled()) {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
-        if (bean == null)
+        if (bean == null) {
         //            return (Collections.EMPTY_MAP);
             return (new java.util.HashMap());
+        }
         PropertyDescriptor descriptors[] =
                 PropertyUtils.getPropertyDescriptors(bean);
         Map description = new HashMap(descriptors.length);
@@ -482,10 +483,11 @@ public class BeanUtils {
                 continue;
             Object value = properties.get(name);	// String or String[]
 
-            if (log.isDebugEnabled()) {
-                log.debug("  name='" + name + "', value.class='" +
-                        (value == null ? "NONE" :
-                        value.getClass().getName()) + "'");
+            if (log.isTraceEnabled()) {
+                log.trace("  name='" + name + "', value.class='" +
+                          (value == null ? "NONE" :
+                           value.getClass().getName()) + "', value='" +
+                          (value == null ? "NONE" : value) + "'");
             }
 
             // Get the property descriptor of the requested property (if any)
@@ -501,8 +503,8 @@ public class BeanUtils {
                 }
             } catch (Throwable t) {
 
-                if (log.isDebugEnabled()) {
-                    log.debug("    getPropertyDescriptor: " + t);
+                if (log.isTraceEnabled()) {
+                    log.trace("    getPropertyDescriptor", t);
                 }
 
                 descriptor = null;
@@ -510,19 +512,19 @@ public class BeanUtils {
             }
             if ((descriptor == null) && (dynaProperty == null)) {
 
-                if (log.isDebugEnabled()) {
-                    log.debug("    No such property, skipping");
+                if (log.isTraceEnabled()) {
+                    log.trace("    No such property, skipping");
                 }
 
                 continue;
             }
 
-            if (log.isDebugEnabled()) {
+            if (log.isTraceEnabled()) {
                 if (descriptor != null) {
-                    log.debug("    Property descriptor is '" +
+                    log.trace("    Property descriptor is '" +
                               descriptor + "'");
                 } else /* if (dynaProperty != null) */ {
-                    log.debug("    DynaProperty descriptor is '" +
+                    log.trace("    DynaProperty descriptor is '" +
                               descriptor + "'");
                 }
             }
@@ -543,21 +545,21 @@ public class BeanUtils {
                     setter = descriptor.getWriteMethod();
                 if (setter == null) {
 
-                    if (log.isDebugEnabled()) {
-                        log.debug("    No setter method, skipping");
+                    if (log.isTraceEnabled()) {
+                        log.trace("    No setter method, skipping");
                     }
 
                     continue;
                 }
                 Class parameterTypes[] = setter.getParameterTypes();
 
-                if (log.isDebugEnabled()) {
-                    log.debug("    Setter method is '" +
-                            setter.getName() + "(" +
-                            parameterTypes[0].getName() +
-                            (parameterTypes.length > 1 ?
-                            ", " + parameterTypes[1].getName() : "")
-                            + ")'");
+                if (log.isTraceEnabled()) {
+                    log.trace("    Setter method is '" +
+                              setter.getName() + "(" +
+                              parameterTypes[0].getName() +
+                              (parameterTypes.length > 1 ?
+                               ", " + parameterTypes[1].getName() : "")
+                              + ")'");
                 }
 
                 Class parameterType = parameterTypes[0];
