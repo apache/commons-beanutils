@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.6 2003/10/09 20:41:41 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/10/09 20:41:41 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/converters/DecimalLocaleConverter.java,v 1.7 2004/02/04 02:22:55 yoavs Exp $
+ * $Revision: 1.7 $
+ * $Date: 2004/02/04 02:22:55 $
  *
  * ====================================================================
  * 
@@ -79,6 +79,8 @@ import java.util.Locale;
  * if a conversion error occurs.</p>
  *
  * @author Yauheny Mikulski
+ * @author Yoav Shapira
+ * @since 1.7
  */
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {
@@ -90,7 +92,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     private static Log log = LogFactory.getLog(DecimalLocaleConverter.class);     
 
     /** The Decimal formatter */
-    private DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
+    private DecimalFormat formatter = null;
 
     // ----------------------------------------------------------- Constructors
 
@@ -169,7 +171,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      */
     public DecimalLocaleConverter(Locale locale, String pattern, boolean locPattern) {
 
-        super(locale, pattern, locPattern);
+        this(null, locale, pattern, locPattern);
     }
 
     /**
@@ -254,6 +256,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     public DecimalLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
+	formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
     }
 
     // --------------------------------------------------------- Methods
