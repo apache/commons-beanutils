@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.11 2002/07/20 22:36:36 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2002/07/20 22:36:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.12 2002/07/22 00:02:01 craigmcc Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/07/22 00:02:01 $
  *
  * ====================================================================
  *
@@ -73,7 +73,7 @@ import java.util.Map;
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.11 $ $Date: 2002/07/20 22:36:36 $
+ * @version $Revision: 1.12 $ $Date: 2002/07/22 00:02:01 $
  */
 
 public class TestBean {
@@ -440,6 +440,48 @@ public class TestBean {
 
     public void setWriteOnlyProperty(String writeOnlyProperty) {
         this.writeOnlyProperty = writeOnlyProperty;
+    }
+
+
+    // ------------------------------------------------------- Static Variables
+
+
+    /**
+     * A static variable that is accessed and updated via static methods
+     * for MethodUtils testing.
+     */
+    private static int counter = 0;
+
+
+    /**
+     * Return the current value of the counter.
+     */
+    public static int currentCounter() {
+
+        return (counter);
+
+    }
+
+
+    /**
+     * Increment the current value of the counter by 1.
+     */
+    public static void incrementCounter() {
+
+        incrementCounter(1);
+
+    }
+
+
+    /**
+     * Increment the current value of the counter by the specified amount.
+     *
+     * @param amount Amount to be added to the current counter
+     */
+    public static void incrementCounter(int amount) {
+
+        counter += amount;
+
     }
 
 
