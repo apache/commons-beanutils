@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtilsBean.java,v 1.3 2003/10/09 20:41:40 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/09 20:41:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleConvertUtilsBean.java,v 1.4 2004/01/05 20:56:16 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2004/01/05 20:56:16 $
  *
  * ====================================================================
  * 
@@ -117,12 +117,12 @@ import java.util.Locale;
  */
 public class LocaleConvertUtilsBean {
     
-    /** Singleton instance */
-    private static final LocaleConvertUtilsBean singleton = new LocaleConvertUtilsBean();
-    
-    /** Gets singleton instance */
+    /** 
+     * Gets singleton instance.
+     * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
+     */
     public static LocaleConvertUtilsBean getInstance() {
-        return singleton;
+        return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
     // ----------------------------------------------------- Instance Variables
@@ -228,7 +228,7 @@ public class LocaleConvertUtilsBean {
     public String convert(Object value, Locale locale, String pattern) {
 
         LocaleConverter converter = lookup(String.class, locale);
-
+		
         return (String) converter.convert(String.class, value, pattern);
     }
 
@@ -416,7 +416,13 @@ public class LocaleConvertUtilsBean {
      */
     public LocaleConverter lookup(Class clazz, Locale locale) {
 
-        return (LocaleConverter) lookup(locale).get(clazz);
+        LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
+        
+        if (log.isTraceEnabled()) {
+            log.trace("LocaleConverter:" + converter);
+        }
+        
+        return converter;
     }
 
     /**

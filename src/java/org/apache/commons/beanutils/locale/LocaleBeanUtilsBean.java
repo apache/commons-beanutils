@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtilsBean.java,v 1.3 2003/10/09 20:41:40 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/09 20:41:40 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/locale/LocaleBeanUtilsBean.java,v 1.4 2004/01/05 20:56:16 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2004/01/05 20:56:16 $
  *
  * ====================================================================
  * 
@@ -63,6 +63,7 @@ package org.apache.commons.beanutils.locale;
 
 
 import org.apache.commons.beanutils.*;
+import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -87,13 +88,30 @@ import java.util.Locale;
 
 public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
-    /** Singleton instance used by static methods */
-    private static LocaleBeanUtilsBean singleton;
-    
-    /** Gets singleton instance */
-    public static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
-        return singleton;
-    }
+	/** 
+	 * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
+	 */
+    private static final ContextClassLoaderLocal 
+            localeBeansByClassLoader = new ContextClassLoaderLocal() {
+                        // Creates the default instance used when the context classloader is unavailable
+                        protected Object initialValue() {
+                            return new LocaleBeanUtilsBean();
+                        }
+                    };
+     
+     /** Gets singleton instance */
+     public synchronized static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
+        return (LocaleBeanUtilsBean)localeBeansByClassLoader.get();
+     }
+ 
+	/** 
+	 * Sets the instance which provides the functionality for {@link LocaleBeanUtils}.
+	 * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
+	 * This mechanism provides isolation for web apps deployed in the same container. 
+	 */
+	public synchronized static void setInstance(LocaleBeanUtilsBean newInstance) {
+        localeBeansByClassLoader.set(newInstance);
+	}
 
     /** All logging goes through this logger */
     private static Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
@@ -107,7 +125,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     
     /** Construct instance with standard conversion bean */
     public LocaleBeanUtilsBean() {
-        this.localeConvertUtils = LocaleConvertUtilsBean.getInstance();
+        this.localeConvertUtils = new LocaleConvertUtilsBean();
     }
     
     /** 
@@ -138,13 +156,13 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     
     // --------------------------------------------------------- Public Methods
     
-    /** Gets bean used for conversions */
+    /** Gets the bean instance used for conversions */
     public LocaleConvertUtilsBean getLocaleConvertUtils() {
         return localeConvertUtils;
     }
     
     /**
-     * getter for defaultLocale
+     * Gets the default Locale
      */
     public Locale getDefaultLocale() {
 
@@ -153,7 +171,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
 
     /**
-     * setter for defaultLocale
+     * Sets the default Locale
      */
     public void setDefaultLocale(Locale locale) {
 
@@ -161,7 +179,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * getter for applyLocalized
+     * Is the pattern to be applied localized
      * (Indicate whether the pattern is localized or not)
      */
     public boolean getApplyLocalized() {
@@ -170,7 +188,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * setter for applyLocalized
+     * Sets whether the pattern is applied localized
      * (Indicate whether the pattern is localized or not)
      */
     public void setApplyLocalized(boolean newApplyLocalized) {
@@ -200,11 +218,16 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public String getIndexedProperty(Object bean, String name, String pattern)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public String getIndexedProperty(
+                                    Object bean, 
+                                    String name, 
+                                    String pattern)
+                                        throws 
+                                            IllegalAccessException, 
+                                            InvocationTargetException,
+                                            NoSuchMethodException {
 
-        Object value = PropertyUtils.getIndexedProperty(bean, name);
+        Object value = getPropertyUtils().getIndexedProperty(bean, name);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -226,9 +249,13 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public String getIndexedProperty(Object bean, String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public String getIndexedProperty(
+                                    Object bean, 
+                                    String name)
+                                        throws 
+                                            IllegalAccessException, 
+                                            InvocationTargetException,
+                                            NoSuchMethodException {
 
         return getIndexedProperty(bean, name, null);
     }
@@ -256,7 +283,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getIndexedProperty(bean, name, index);
+        Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -305,7 +332,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = PropertyUtils.getSimpleProperty(bean, name);
+        Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -349,12 +376,17 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public String getMappedProperty(Object bean,
-                                           String name, String key, String pattern)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public String getMappedProperty(
+                                    Object bean,
+                                    String name, 
+                                    String key, 
+                                    String pattern)
+                                        throws 
+                                            IllegalAccessException, 
+                                            InvocationTargetException,
+                                            NoSuchMethodException {
 
-        Object value = PropertyUtils.getMappedProperty(bean, name, key);
+        Object value = getPropertyUtils().getMappedProperty(bean, name, key);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -404,11 +436,16 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public String getMappedPropertyLocale(Object bean, String name, String pattern)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public String getMappedPropertyLocale(
+                                        Object bean, 
+                                        String name, 
+                                        String pattern)
+                                            throws 
+                                                IllegalAccessException, 
+                                                InvocationTargetException,
+                                                NoSuchMethodException {
 
-        Object value = PropertyUtils.getMappedProperty(bean, name);
+        Object value = getPropertyUtils().getMappedProperty(bean, name);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -434,8 +471,10 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *  propety cannot be found
      */
     public String getMappedProperty(Object bean, String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                                    throws 
+                                        IllegalAccessException, 
+                                        InvocationTargetException,
+                                        NoSuchMethodException {
 
         return getMappedPropertyLocale(bean, name, null);
     }
@@ -458,11 +497,16 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public String getNestedProperty(Object bean, String name, String pattern)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public String getNestedProperty(    
+                                    Object bean, 
+                                    String name, 
+                                    String pattern)
+                                        throws 
+                                            IllegalAccessException, 
+                                            InvocationTargetException,
+                                            NoSuchMethodException {
 
-        Object value = PropertyUtils.getNestedProperty(bean, name);
+        Object value = getPropertyUtils().getNestedProperty(bean, name);
         return getLocaleConvertUtils().convert(value, pattern);
     }
 
@@ -484,8 +528,10 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *  propety cannot be found
      */
     public String getNestedProperty(Object bean, String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                                    throws 
+                                        IllegalAccessException, 
+                                        InvocationTargetException,
+                                        NoSuchMethodException {
 
         return getNestedProperty(bean, name, null);
     }
@@ -508,8 +554,10 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *  propety cannot be found
      */
     public String getProperty(Object bean, String name, String pattern)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                                throws 
+                                    IllegalAccessException, 
+                                    InvocationTargetException,
+                                    NoSuchMethodException {
 
         return getNestedProperty(bean, name, pattern);
     }
@@ -532,8 +580,10 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *  propety cannot be found
      */
     public String getProperty(Object bean, String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                                throws 
+                                    IllegalAccessException, 
+                                    InvocationTargetException,
+                                    NoSuchMethodException {
 
         return getNestedProperty(bean, name);
     }
@@ -553,7 +603,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *  throws an exception
      */
     public void setProperty(Object bean, String name, Object value)
-            throws IllegalAccessException, InvocationTargetException {
+                                throws 
+                                    IllegalAccessException, 
+                                    InvocationTargetException {
 
         setProperty(bean, name, value, null);
     }
@@ -573,8 +625,14 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    public void setProperty(Object bean, String name, Object value, String pattern)
-            throws IllegalAccessException, InvocationTargetException {
+    public void setProperty(
+                            Object bean, 
+                            String name, 
+                            Object value, 
+                            String pattern)
+                                throws 
+                                    IllegalAccessException, 
+                                    InvocationTargetException {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
@@ -650,7 +708,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             PropertyDescriptor descriptor = null;
             try {
                 descriptor =
-                        PropertyUtils.getPropertyDescriptor(target, name);
+                        getPropertyUtils().getPropertyDescriptor(target, name);
                 if (descriptor == null) {
                     return null; // Skip this property setter
                 }
@@ -683,7 +741,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param pattern The convertion pattern
      */
     protected Object convert(Class type, int index, Object value, String pattern) {
-
+		
+		if (log.isTraceEnabled()) {
+			log.trace("Converting value '" + value + "' to type:" + type);
+		}
+		
         Object newValue = null;
 
         if (type.isArray() && (index < 0)) { // Scalar value into array
@@ -798,15 +860,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         try {
             if (index >= 0) {
-                PropertyUtils.setIndexedProperty(target, propName,
+                getPropertyUtils().setIndexedProperty(target, propName,
                         index, newValue);
             }
             else if (key != null) {
-                PropertyUtils.setMappedProperty(target, propName,
+                getPropertyUtils().setMappedProperty(target, propName,
                         key, newValue);
             }
             else {
-                PropertyUtils.setProperty(target, propName, newValue);
+                getPropertyUtils().setProperty(target, propName, newValue);
             }
         }
         catch (NoSuchMethodException e) {
@@ -838,7 +900,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         if (delim >= 0) {
             try {
                 target =
-                        PropertyUtils.getProperty(bean, name.substring(0, delim));
+                        getPropertyUtils().getProperty(bean, name.substring(0, delim));
             }
             catch (NoSuchMethodException e) {
                 return null; // Skip this property setter

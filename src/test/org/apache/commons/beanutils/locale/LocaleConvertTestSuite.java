@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertTestSuite.java,v 1.3 2003/10/09 20:39:04 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/10/09 20:39:04 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/locale/LocaleConvertTestSuite.java,v 1.4 2004/01/05 20:56:16 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2004/01/05 20:56:16 $
  *
  * ====================================================================
  * 
@@ -74,7 +74,7 @@ import org.apache.commons.beanutils.locale.converters.DateLocaleConverterTestCas
  * </p>
  *
  * @author  Robert Burrell Donkin
- * @version $Revision: 1.3 $ $Date: 2003/10/09 20:39:04 $
+ * @version $Revision: 1.4 $ $Date: 2004/01/05 20:56:16 $
  */
 
 public class LocaleConvertTestSuite {
@@ -86,6 +86,7 @@ public class LocaleConvertTestSuite {
         TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(LocaleConvertUtilsTestCase.class);
         testSuite.addTestSuite(DateLocaleConverterTestCase.class);
+        testSuite.addTestSuite(LocaleBeanificationTestCase.class);
         return testSuite;
     }
 }
