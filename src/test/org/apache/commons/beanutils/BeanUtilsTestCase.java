@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.23 2003/03/15 11:38:11 rdonkin Exp $
- * $Revision: 1.23 $
- * $Date: 2003/03/15 11:38:11 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/BeanUtilsTestCase.java,v 1.24 2003/03/26 19:51:46 rdonkin Exp $
+ * $Revision: 1.24 $
+ * $Date: 2003/03/26 19:51:46 $
  *
  * ====================================================================
  *
@@ -98,7 +98,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 
 public class BeanUtilsTestCase extends TestCase {
@@ -1293,6 +1293,33 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+    public void testArrayPropertyConversion() throws Exception {
+        BeanUtilsBean beanUtils = new BeanUtilsBean(	
+                                                    new ConvertUtilsBean(), 
+                                                    new PropertyUtilsBean());
+        beanUtils.getConvertUtils().register(
+            new Converter () {
+                public Object convert(Class type, Object value) {
+                    return "Spam, spam, spam, spam!";
+                }
+            },
+            String.class);
+            
+        TestBean bean = new TestBean();
+        String [] results = beanUtils.getArrayProperty(bean, "intArray");
+                
+        int[] values = bean.getIntArray();
+        assertEquals(
+                    "Converted array size not equal to property array size.",
+                    results.length,
+                    values.length);
+        for (int i=0, size=values.length ;  i<size; i++) {
+            assertEquals(
+                    "Value " + i + " incorrectly converted ", 
+                    "Spam, spam, spam, spam!",
+                    results[i]);
+        }
+    }
 
     // Ensure that the actual int[] matches the expected int[]
     protected void checkIntArray(int actual[], int expected[]) {

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.3 2003/03/20 20:12:24 rdonkin Exp $
- * $Revision: 1.3 $
- * $Date: 2003/03/20 20:12:24 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtilsBean.java,v 1.4 2003/03/26 19:51:46 rdonkin Exp $
+ * $Revision: 1.4 $
+ * $Date: 2003/03/26 19:51:46 $
  *
  * ====================================================================
  *
@@ -92,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.3 $ $Date: 2003/03/20 20:12:24 $
+ * @version $Revision: 1.4 $ $Date: 2003/03/26 19:51:46 $
  * @see BeanUtils
  * @since 1.7
  */
@@ -547,7 +547,8 @@ public class BeanUtilsBean {
                 if (item == null) {
                     values.add((String) null);
                 } else {
-                    values.add(item.toString());
+                    // convert to string using convert utils
+                    values.add(getConvertUtils().convert(item));
                 }
             }
             return ((String[]) values.toArray(new String[values.size()]));
@@ -559,7 +560,8 @@ public class BeanUtilsBean {
                 if (item == null) {
                     results[i] = null;
                 } else {
-                    results[i] = item.toString();
+                    // convert to string using convert utils
+                    results[i] = getConvertUtils().convert(item);
                 }
             }
             return (results);
