@@ -21,4 +21,4 @@ junit.jar = ${junit.home}/junit.jar
 # Maven properties (for web site build)
 # Those committers using agents may like to use
 #maven.username=rdonkin
-#digester.cvs=lserver:rdonkin@cvs.apache.org:/home/cvs
+#beanutils.cvs=lserver:rdonkin@cvs.apache.org:/home/cvs
