@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.11 2001/10/14 01:15:07 craigmcc Exp $
- * $Revision: 1.11 $
- * $Date: 2001/10/14 01:15:07 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.12 2002/01/04 21:25:17 sanders Exp $
+ * $Revision: 1.12 $
+ * $Date: 2002/01/04 21:25:17 $
  *
  * ====================================================================
  *
@@ -100,7 +100,7 @@ import org.apache.commons.beanutils.priv.PrivateIndirect;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.11 $ $Date: 2001/10/14 01:15:07 $
+ * @version $Revision: 1.12 $ $Date: 2002/01/04 21:25:17 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -182,6 +182,7 @@ public class PropertyUtilsTestCase extends TestCase {
         "intArray",
         "intIndexed",
         "intProperty",
+        "listIndexed",
         "longProperty",
         "nested",
         "nullProperty",
@@ -592,9 +593,21 @@ public class PropertyUtilsTestCase extends TestCase {
 
             try {
                 value =
+                    PropertyUtils.getIndexedProperty(bean, "listIndexed", i);
+                assertNotNull("listIndexed returned value " + i, value);
+                assertTrue("list returned String " + i,
+                           value instanceof String);
+                assertEquals("listIndexed returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("listIndexed " + i + " threw " + t);
+            }
+
+            try {
+                value =
                     PropertyUtils.getIndexedProperty(bean, "stringArray", i);
                 assertNotNull("stringArray returned value " + i, value);
-                assertTrue("intArray returned String " + i,
+                assertTrue("stringArray returned String " + i,
                            value instanceof String);
                 assertEquals("stringArray returned correct " + i,
                              "String " + i, (String) value);
@@ -606,7 +619,7 @@ public class PropertyUtilsTestCase extends TestCase {
                 value =
                     PropertyUtils.getIndexedProperty(bean, "stringIndexed", i);
                 assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("intArray returned String " + i,
+                assertTrue("stringIndexed returned String " + i,
                            value instanceof String);
                 assertEquals("stringIndexed returned correct " + i,
                              "String " + i, (String) value);
@@ -649,9 +662,22 @@ public class PropertyUtilsTestCase extends TestCase {
             try {
                 value =
                     PropertyUtils.getIndexedProperty(bean,
+                                                     "listIndexed[" + i + "]");
+                assertNotNull("listIndexed returned value " + i, value);
+                assertTrue("listIndexed returned String " + i,
+                           value instanceof String);
+                assertEquals("listIndexed returned correct " + i,
+                             "String " + i, (String) value);
+            } catch (Throwable t) {
+                fail("listIndexed " + i + " threw " + t);
+            }
+
+            try {
+                value =
+                    PropertyUtils.getIndexedProperty(bean,
                                                      "stringArray[" + i + "]");
                 assertNotNull("stringArray returned value " + i, value);
-                assertTrue("intArray returned String " + i,
+                assertTrue("stringArray returned String " + i,
                            value instanceof String);
                 assertEquals("stringArray returned correct " + i,
                              "String " + i, (String) value);
@@ -664,7 +690,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getIndexedProperty(bean,
                                                      "stringIndexed[" + i + "]");
                 assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("intArray returned String " + i,
+                assertTrue("stringIndexed returned String " + i,
                            value instanceof String);
                 assertEquals("stringIndexed returned correct " + i,
                              "String " + i, (String) value);
@@ -718,6 +744,28 @@ public class PropertyUtilsTestCase extends TestCase {
             ; // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "listIndexed", -1);
+            fail("Should have thrown IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IndexOutOfBoundsException");
+        }
+
+        try {
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "listIndexed", 5);
+            fail("Should have thrown IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
         try {
@@ -896,7 +944,7 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch (Throwable t) {
             fail("Finding third value threw " + t);
         }
-        
+
     }
 
 
@@ -1085,7 +1133,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1162,7 +1210,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -1185,7 +1233,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -1325,7 +1373,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1353,7 +1401,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1381,7 +1429,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1404,7 +1452,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1431,7 +1479,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1458,7 +1506,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1481,7 +1529,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1508,7 +1556,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1535,7 +1583,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1562,7 +1610,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -1585,7 +1633,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -1608,7 +1656,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -1830,6 +1878,22 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean,
+                                             "listIndexed", 2,
+                                             "New Value 2");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "listIndexed", 2);
+            assertNotNull("Returned new value 2", value);
+            assertTrue("Returned String new value 2",
+                       value instanceof String);
+            assertEquals("Returned correct new value 2", "New Value 2",
+                         (String) value);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
                                              "stringArray", 2,
                                              "New Value 2");
             value =
@@ -1890,6 +1954,22 @@ public class PropertyUtilsTestCase extends TestCase {
                        value instanceof Integer);
             assertEquals("Returned correct new value 5", 11,
                          ((Integer) value).intValue());
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "listIndexed[1]",
+                                             "New Value 2");
+            value =
+                PropertyUtils.getIndexedProperty(bean,
+                                                 "listIndexed[1]");
+            assertNotNull("Returned new value 6", value);
+            assertTrue("Returned String new value 6",
+                       value instanceof String);
+            assertEquals("Returned correct new value 6", "New Value 2",
+                         (String) value);
         } catch (Throwable t) {
             fail("Threw " + t);
         }
@@ -1970,6 +2050,28 @@ public class PropertyUtilsTestCase extends TestCase {
             ; // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "listIndexed", 5,
+                                             "New String");
+            fail("Should have thrown IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IndexOutOfBoundsException");
+        }
+
+        try {
+            PropertyUtils.setIndexedProperty(bean,
+                                             "listIndexed", -1,
+                                             "New String");
+            fail("Should have thrown IndexOutOfBoundsException");
+        } catch (IndexOutOfBoundsException t) {
+            ; // Expected results
+        } catch (Throwable t) {
+            fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
         try {
@@ -2203,7 +2305,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2231,7 +2333,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2259,7 +2361,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2286,7 +2388,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2313,7 +2415,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2338,7 +2440,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -2365,7 +2467,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2392,7 +2494,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2416,7 +2518,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -2443,7 +2545,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2496,7 +2598,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2524,7 +2626,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2552,7 +2654,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2575,7 +2677,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2602,7 +2704,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2629,7 +2731,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2652,7 +2754,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2677,7 +2779,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -2704,7 +2806,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2731,7 +2833,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2755,7 +2857,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             ; // Correct result for this test
-        }        
+        }
 
     }
 
@@ -2782,7 +2884,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             fail("NoSuchMethodException");
-        }        
+        }
 
     }
 
@@ -2884,7 +2986,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     reader.invoke(bean, new Class[0]);
             } catch (Throwable t) {
                 fail("Call for " + properties[i] + ": " + t);
-            }                
+            }
 
         }
 
@@ -2908,6 +3010,8 @@ public class PropertyUtilsTestCase extends TestCase {
 
             // Identify the property descriptor for this property
             if (properties[i].equals("intIndexed"))
+                continue;
+            if (properties[i].equals("listIndexed"))
                 continue;
             if (properties[i].equals("nested"))
                 continue; // This property is read only

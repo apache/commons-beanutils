@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.4 2001/09/03 17:34:36 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2001/09/03 17:34:36 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.5 2002/01/04 21:25:17 sanders Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/01/04 21:25:17 $
  *
  * ====================================================================
  *
@@ -64,13 +64,15 @@ package org.apache.commons.beanutils;
 
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2001/09/03 17:34:36 $
+ * @version $Revision: 1.5 $ $Date: 2002/01/04 21:25:17 $
  */
 
 public class TestBean {
@@ -174,6 +176,23 @@ public class TestBean {
 
     public void setIntProperty(int intProperty) {
         this.intProperty = intProperty;
+    }
+
+
+    /**
+     * A List property accessed as an indexed property.
+     */
+    private static List listIndexed = new ArrayList();
+    static {
+        listIndexed.add("String 0");
+        listIndexed.add("String 1");
+        listIndexed.add("String 2");
+        listIndexed.add("String 3");
+        listIndexed.add("String 4");
+    }
+
+    public List getListIndexed() {
+        return (listIndexed);
     }
 
 
