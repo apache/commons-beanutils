@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.7 2002/04/06 23:28:35 craigmcc Exp $
- * $Revision: 1.7 $
- * $Date: 2002/04/06 23:28:35 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/DynaBeanUtilsTestCase.java,v 1.8 2002/04/27 23:11:23 craigmcc Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/04/27 23:11:23 $
  *
  * ====================================================================
  *
@@ -77,7 +77,7 @@ import junit.framework.TestSuite;
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.7 $ $Date: 2002/04/06 23:28:35 $
+ * @version $Revision: 1.8 $ $Date: 2002/04/27 23:11:23 $
  */
 
 public class DynaBeanUtilsTestCase extends TestCase {
@@ -413,6 +413,40 @@ public class DynaBeanUtilsTestCase extends TestCase {
             assertEquals("stringIndexed[4] is \"String 4\"",
                          "String 4",
                          (String) bean.get("stringIndexed", 4));
+
+        } catch (IllegalAccessException e) {
+            fail("IllegalAccessException");
+        } catch (InvocationTargetException e) {
+            fail("InvocationTargetException");
+        }
+
+    }
+
+
+    /**
+     * Test populate() on mapped properties.
+     */
+    public void testPopulateMapped() {
+
+        try {
+
+            HashMap map = new HashMap();
+            map.put("mappedProperty(First Key)", "New First Value");
+            map.put("mappedProperty(Third Key)", "New Third Value");
+
+            BeanUtils.populate(bean, map);
+
+            assertEquals("mappedProperty(First Key)",
+                         "New First Value",
+                         (String) bean.get("mappedProperty", "First Key"));
+            assertEquals("mappedProperty(Second Key)",
+                         "Second Value",
+                         (String) bean.get("mappedProperty", "Second Key"));
+            assertEquals("mappedProperty(Third Key)",
+                         "New Third Value",
+                         (String) bean.get("mappedProperty", "Third Key"));
+            assertNull("mappedProperty(Fourth Key",
+                       (String) bean.get("mappedProperty", "Fourth Key"));
 
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");

@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.20 2002/04/08 17:19:59 craigmcc Exp $
- * $Revision: 1.20 $
- * $Date: 2002/04/08 17:19:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.21 2002/04/27 23:11:23 craigmcc Exp $
+ * $Revision: 1.21 $
+ * $Date: 2002/04/27 23:11:23 $
  *
  * ====================================================================
  *
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.20 $ $Date: 2002/04/08 17:19:59 $
+ * @version $Revision: 1.21 $ $Date: 2002/04/27 23:11:23 $
  */
 
 public class BeanUtils {
@@ -618,7 +618,10 @@ public class BeanUtils {
             } catch (NoSuchMethodException e) {
                 return; // Skip this property setter
             }
-            if (descriptor instanceof IndexedPropertyDescriptor) {
+            if (descriptor instanceof MappedPropertyDescriptor) {
+                type = ((MappedPropertyDescriptor) descriptor).
+                    getMappedPropertyType();
+            } else if (descriptor instanceof IndexedPropertyDescriptor) {
                 type = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
             } else {
