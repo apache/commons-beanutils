@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.30 2003/05/12 21:42:56 rdonkin Exp $
- * $Revision: 1.30 $
- * $Date: 2003/05/12 21:42:56 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.31 2003/07/03 19:10:27 craigmcc Exp $
+ * $Revision: 1.31 $
+ * $Date: 2003/07/03 19:10:27 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.30 $ $Date: 2003/05/12 21:42:56 $
+ * @version $Revision: 1.31 $ $Date: 2003/07/03 19:10:27 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -447,6 +447,33 @@ public class PropertyUtilsTestCase extends TestCase {
 
         testGetDescriptorBase("intProperty", "getIntProperty",
                 "setIntProperty");
+
+    }
+
+
+    /**
+     * <p>Negative tests on an invalid property with two different boolean
+     * getters (which is fine, according to the JavaBeans spec) but a
+     * String setter instead of a boolean setter.</p>
+     *
+     * <p>Although one could logically argue that this combination of method
+     * signatures should not identify a property at all, there is a sentence
+     * in Section 8.3.1 making it clear that the behavior tested for here
+     * is correct:  "If we find only one of these methods, then we regard
+     * it as defining either a read-only or write-only property called
+     * <em>&lt;property-name&gt;</em>.</p>
+     */
+    public void testGetDescriptorInvalidBoolean() throws Exception {
+
+	PropertyDescriptor pd =
+	    PropertyUtils.getPropertyDescriptor(bean, "invalidBoolean");
+	assertNotNull("invalidBoolean is a property", pd);
+	assertNotNull("invalidBoolean has a getter method",
+		      pd.getReadMethod());
+	assertNull("invalidBoolean has no write method",
+		   pd.getWriteMethod());
+	assertTrue("invalidBoolean getter method is isInvalidBoolean",
+		   "isInvalidBoolean".equals(pd.getReadMethod().getName()));
 
     }
 

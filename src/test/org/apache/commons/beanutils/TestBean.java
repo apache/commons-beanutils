@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.15 2003/02/01 07:45:29 craigmcc Exp $
- * $Revision: 1.15 $
- * $Date: 2003/02/01 07:45:29 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/TestBean.java,v 1.16 2003/07/03 19:10:27 craigmcc Exp $
+ * $Revision: 1.16 $
+ * $Date: 2003/07/03 19:10:27 $
  *
  * ====================================================================
  *
@@ -74,7 +74,7 @@ import java.util.Map;
  *
  * @author Craig R. McClanahan
  * @author Rodney Waldhoff
- * @version $Revision: 1.15 $ $Date: 2003/02/01 07:45:29 $
+ * @version $Revision: 1.16 $ $Date: 2003/07/03 19:10:27 $
  */
 
 public class TestBean {
@@ -523,6 +523,37 @@ public class TestBean {
     public void setWriteOnlyProperty(String writeOnlyProperty) {
         this.writeOnlyProperty = writeOnlyProperty;
     }
+
+
+    // ------------------------------------------------------ Invalid Properties
+
+
+    /**
+     * <p>An invalid property that has two boolean getters (getInvalidBoolean
+     * and isInvalidBoolean) plus a String setter (setInvalidBoolean).  By the
+     * rules described in the JavaBeans Specification, this will be considered
+     * a read-only boolean property, using isInvalidBoolean() as the getter.</p>
+     */
+    private boolean invalidBoolean = false;
+
+    public boolean getInvalidBoolean() {
+	return (this.invalidBoolean);
+    }
+
+    public boolean isInvalidBoolean() {
+	return (this.invalidBoolean);
+    }
+
+    public void setInvalidBoolean(String invalidBoolean) {
+	if ("true".equalsIgnoreCase(invalidBoolean) ||
+	    "yes".equalsIgnoreCase(invalidBoolean) ||
+	    "1".equalsIgnoreCase(invalidBoolean)) {
+	    this.invalidBoolean = true;
+	} else {
+	    this.invalidBoolean = false;
+	}
+    }
+
 
 
     // ------------------------------------------------------- Static Variables
