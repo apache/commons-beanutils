@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.13 2002/02/14 06:59:59 craigmcc Exp $
- * $Revision: 1.13 $
- * $Date: 2002/02/14 06:59:59 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/BeanUtils.java,v 1.14 2002/03/07 06:43:17 martinc Exp $
+ * $Revision: 1.14 $
+ * $Date: 2002/03/07 06:43:17 $
  *
  * ====================================================================
  *
@@ -86,7 +86,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Chris Audley
  * @author Rey François
  * @author Gregor Raýman
- * @version $Revision: 1.13 $ $Date: 2002/02/14 06:59:59 $
+ * @version $Revision: 1.14 $ $Date: 2002/03/07 06:43:17 $
  */
 
 public class BeanUtils {
@@ -234,7 +234,11 @@ public class BeanUtils {
             try {
                 int n = Array.getLength(value);
                 for (int i = 0; i < n; i++) {
-                    values.add(Array.get(value, i).toString());
+                    Object item = Array.get(value, i);
+                    if (item == null)
+                        values.add((String) null);
+                    else
+                        values.add(item.toString());
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 ;
