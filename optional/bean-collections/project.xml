@@ -19,7 +19,7 @@
   <pomVersion>3</pomVersion>
   <id>commons-beanutils-bean-collections</id>
   <name>BeanUtils Bean Collections</name>
-  <currentVersion>1.7</currentVersion>
+  <currentVersion>1.7.1-dev</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons BeanUtils Bean Collections</shortDescription>
   <description>Extensions of commons collections focussing on collections of beans</description>

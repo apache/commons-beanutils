@@ -29,13 +29,26 @@
     </links>
 
     <menu name="Commons BeanUtils">
-      <item name="Overview" href="/index.html"/>
-      <item name="Javadoc (Release)" href="api/index.html"/>
+      <item name="Overview" href="/index.html"/>   
       <item name="Mailing lists" href="/mail-lists.html"/>
       <item name="Team" href="/team-list.html"/>
       <!--item name="Tasks" href="/tasks.html"/-->
       <item name="CVS" href="http://cvs.apache.org/viewcvs/jakarta-commons/beanutils/"/>
       <item name="Javadoc (CVS latest)" href="apidocs/index.html"/>
+      <item name='1.7.0 Release'>
+            <item   name='Core API'
+                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api'/>
+            <item   name='Bean Collections API'
+                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/bean-collections'/>
+            <item   name='Release Notes'
+                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt'/>
+      </item>
+      <item name='1.6.1 Release'>
+            <item   name='API'
+                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/'/>
+            <item   name='Release Notes'
+                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
+      </item>
     </menu>
     
     <menu name='Modules'>

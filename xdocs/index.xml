@@ -124,6 +124,24 @@ with either the 2.x or 3.x series of commons-collections releases.
 It also introduces a number of important enhancements. It is backward compatible
 with the 1.6 release.
     </p>
+<p>
+This important service release is intended to help downstream applications solve
+dependency issues. The dependency on commons collections (which has become problematic
+now that there are two incompatible series of commons collections releases)
+has been factored into a separate optional sub-component plus a small number of
+stable and mature <code>org.apache.commons.collections</code> packaged classes 
+(which are distributed with the BeanUtils core). This arrangement means that the 
+BeanUtils core sub-component (which is the primary dependency for most downsteam 
+applications) can now be safely included on the same classpath as commons collections 
+2.x, 3.x or indeed neither.
+</p>
+<p>
+The distribution now contains alternative jar sets. The all-in-one
+jar contains all classes. The modular jar set consists of a core jar dependent only
+on commons logging and an optional bean collections jar (containing classes that 
+provide easy and efficient ways to manage collections of beans) which depends on 
+commons collections 3.
+</p>
 </subsection>
 <subsection name='1.6.x Releases (Mirrored)'>
 <ul>
