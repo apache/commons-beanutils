@@ -517,6 +517,14 @@ public class MethodUtils {
             log.trace("Matching name=" + methodName + " on " + clazz);
         }
         
+        // see if we can find the method directly
+        // most of the time this works and it's much faster
+        try {
+            Method method = clazz.getMethod(methodName, parameterTypes);
+            return method;
+            
+        } catch (NoSuchMethodException e) { /* SWALLOW */ }
+        
         // search through all methods 
         int paramSize = parameterTypes.length;
         Method[] methods = clazz.getMethods();
