@@ -74,7 +74,7 @@ containing everything. Drop it in and add any dependencies your application need
         <p>
 Bean collections is a library combining BeanUtils with 
 <a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>
-to provide services for collections of beans. Once class (<code>BeanComparator</code>)
+to provide services for collections of beans. One class (<code>BeanComparator</code>)
 was previously released, the rest are new. This new distribution strategy should allow
 this sub-component to evolve naturally without the concerns about size and scope
 that might otherwise happen.
