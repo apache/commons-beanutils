@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.6 2003/05/06 11:32:23 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/05/06 11:32:23 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/PropertyUtilsBean.java,v 1.7 2003/05/12 21:42:56 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/05/12 21:42:56 $
  *
  * ====================================================================
  *
@@ -134,7 +134,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Gregor Raýman
  * @author Jan Sorensen
  * @author Scott Sanders
- * @version $Revision: 1.6 $ $Date: 2003/05/06 11:32:23 $
+ * @version $Revision: 1.7 $ $Date: 2003/05/12 21:42:56 $
  * @see PropertyUtils
  * @since 1.7
  */
@@ -662,10 +662,10 @@ public class PropertyUtilsBean {
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if a nested reference to a
+     * @exception NestedNullException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @exception InvocationTargetException 
+     * if the property accessor method throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
@@ -711,7 +711,7 @@ public class PropertyUtilsBean {
                 bean = getSimpleProperty(bean, next);
             }
             if (bean == null) {
-                throw new IllegalArgumentException
+                throw new NestedNullException
                         ("Null property value for '" +
                         name.substring(0, indexOfNESTED_DELIM) + "'");
             }

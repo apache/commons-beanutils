@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.29 2002/11/26 21:28:46 rdonkin Exp $
- * $Revision: 1.29 $
- * $Date: 2002/11/26 21:28:46 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/PropertyUtilsTestCase.java,v 1.30 2003/05/12 21:42:56 rdonkin Exp $
+ * $Revision: 1.30 $
+ * $Date: 2003/05/12 21:42:56 $
  *
  * ====================================================================
  *
@@ -105,7 +105,7 @@ import junit.framework.TestSuite;
  *
  * @author Craig R. McClanahan
  * @author Jan Sorensen
- * @version $Revision: 1.29 $ $Date: 2002/11/26 21:28:46 $
+ * @version $Revision: 1.30 $ $Date: 2003/05/12 21:42:56 $
  */
 
 public class PropertyUtilsTestCase extends TestCase {
@@ -1510,6 +1510,23 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /** 
+     * When a bean has a null property which is reference by the standard access language,
+     * this should throw a NestedNullException.
+     */
+    public void testThrowNestedNull() throws Exception {
+        NestedTestBean nestedBean = new NestedTestBean("base");
+        // don't init!
+        
+        try {
+            NestedTestBean value = (NestedTestBean) PropertyUtils.getProperty(
+                                nestedBean,
+                                "simpleBeanProperty.indexedProperty[0]");
+            fail("NestedNullException not thrown");
+        } catch (NestedNullException e) {
+            // that's what we wanted!
+        }
+    }
 
     /**
      * Test getNestedProperty on a write-only String property.
