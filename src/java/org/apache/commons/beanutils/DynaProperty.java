@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.6 2003/01/15 21:59:38 rdonkin Exp $
- * $Revision: 1.6 $
- * $Date: 2003/01/15 21:59:38 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/DynaProperty.java,v 1.7 2003/07/28 20:14:23 rdonkin Exp $
+ * $Revision: 1.7 $
+ * $Date: 2003/07/28 20:14:23 $
  *
  * ====================================================================
  *
@@ -76,7 +76,7 @@ import java.util.Map;
  * <p>The metadata describing an individual property of a DynaBean.</p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.6 $ $Date: 2003/01/15 21:59:38 $
+ * @version $Revision: 1.7 $ $Date: 2003/07/28 20:14:23 $
  */
 
 public class DynaProperty implements Serializable {
@@ -129,23 +129,58 @@ public class DynaProperty implements Serializable {
         this.type = type;
 
     }
+    
+    /**
+     * Construct an indexed <code>DynaProperty</code> that supports (pseudo)-introspection
+     * of the indexed property type.
+     *
+     * @param name Name of the property being described
+     * @param type Java class representing the property data type
+     * @param contentType Class that all indexed elements are instances of
+     */
+    public DynaProperty(String name, Class type, Class contentType) {
 
+        super();
+        this.name = name;
+        this.type = type;
+        this.contentType = contentType;
+        
+    }
+
+    /**
+     * Construct a mapped <code>DynaProperty</code> that supports (pseudo)-introspection
+     * of the mapped content and key type.
+     *
+     * @param name Name of the property being described
+     * @param type Java class representing the property data type
+     * @param contentType Class that all mapped elements are instances of
+     * @param keyType Class that all keys are instances of
+     */
+    public DynaProperty(String name, Class type, Class contentType, Class keyType) {
+
+        super();
+        this.name = name;
+        this.type = type;
+        this.contentType = contentType;
+        this.keyType = keyType;
+        
+    }
 
     // ------------------------------------------------------------- Properties
 
-
-    /**
-     * The name of this property.
-     */
+    /** Property name */
     protected String name = null;
-
+    /**
+     * Get the name of this property.
+     */
     public String getName() {
         return (this.name);
     }
-
-
+    
+    /** Property type */
+    protected transient Class type = null;
     /**
-     * <p>The Java class representing the data type of the underlying property
+     * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>
      * 
      * <p>There are issues with serializing primitive class types on certain JVM versions
@@ -154,12 +189,37 @@ public class DynaProperty implements Serializable {
      * 
      * <p><strong>Please leave this field as <code>transient</code></strong></p>
      */
-    protected transient Class type = null;
-
     public Class getType() {
         return (this.type);
     }
-
+    
+    
+    /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
+    protected Class contentType;
+    /**
+     * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
+     * that support this feature.
+     *
+     * @return the Class for the content type if this is an indexed <code>DynaProperty</code> 
+     * and this feature is supported. Otherwise null.
+     */
+    public Class getContentType() {
+        return contentType;
+    }
+    
+    
+    /** The <em>(optional)</em> type of keys for mapped <code>DynaProperty</code>'s */
+    protected Class keyType;
+    /**
+     * Gets the <em>(optional)</em> type of the key for mapped <code>DynaProperty</code>'s
+     * that support this feature.
+     *
+     * @return the Class for the key type if this is an mapped <code>DynaProperty</code> 
+     * and this feature is supported. Otherwise null.
+     */
+    public Class getKeyType() {
+        return keyType;
+    }
 
     // --------------------------------------------------------- Public Methods
 
