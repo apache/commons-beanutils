@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.4 2002/06/29 22:29:22 craigmcc Exp $
- * $Revision: 1.4 $
- * $Date: 2002/06/29 22:29:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/test/org/apache/commons/beanutils/ConvertUtilsTestCase.java,v 1.5 2002/07/20 18:21:21 craigmcc Exp $
+ * $Revision: 1.5 $
+ * $Date: 2002/07/20 18:21:21 $
  *
  * ====================================================================
  *
@@ -78,7 +78,7 @@ import junit.framework.TestSuite;
  * </p>
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2002/06/29 22:29:22 $
+ * @version $Revision: 1.5 $ $Date: 2002/07/20 18:21:21 $
  */
 
 public class ConvertUtilsTestCase extends TestCase {
@@ -181,6 +181,14 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("foo", Byte.class);
         assertTrue(value instanceof Byte);
         assertEquals(((Byte) value).byteValue(), (byte) 0);
+
+        try {
+            value = ConvertUtils.convert
+                ("org.apache.commons.beanutils.Undefined", Class.class);
+            fail("Should have thrown conversion exception");
+        } catch (ConversionException e) {
+            ; // Expected result
+        }
 
         value = ConvertUtils.convert("foo", Double.TYPE);
         assertTrue(value instanceof Double);
@@ -450,6 +458,10 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("a", Character.class);
         assertTrue(value instanceof Character);
         assertEquals(((Character) value).charValue(), 'a');
+
+        value = ConvertUtils.convert("java.lang.String", Class.class);
+        assertTrue(value instanceof Class);
+        assertEquals(String.class, (Class) value);
 
         value = ConvertUtils.convert("123.456", Double.TYPE);
         assertTrue(value instanceof Double);

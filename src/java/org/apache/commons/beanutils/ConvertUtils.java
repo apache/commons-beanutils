@@ -1,7 +1,7 @@
 /*
- * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.9 2002/06/29 22:29:22 craigmcc Exp $
- * $Revision: 1.9 $
- * $Date: 2002/06/29 22:29:22 $
+ * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//beanutils/src/java/org/apache/commons/beanutils/ConvertUtils.java,v 1.10 2002/07/20 18:21:21 craigmcc Exp $
+ * $Revision: 1.10 $
+ * $Date: 2002/07/20 18:21:21 $
  *
  * ====================================================================
  *
@@ -77,6 +77,7 @@ import org.apache.commons.beanutils.converters.ByteConverter;
 import org.apache.commons.beanutils.converters.ByteArrayConverter;
 import org.apache.commons.beanutils.converters.CharacterConverter;
 import org.apache.commons.beanutils.converters.CharacterArrayConverter;
+import org.apache.commons.beanutils.converters.ClassConverter;
 import org.apache.commons.beanutils.converters.DoubleConverter;
 import org.apache.commons.beanutils.converters.DoubleArrayConverter;
 import org.apache.commons.beanutils.converters.FloatConverter;
@@ -110,6 +111,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>boolean and java.lang.Boolean</li>
  * <li>byte and java.lang.Byte</li>
  * <li>char and java.lang.Character</li>
+ * <li>java.lang.Class</li>
  * <li>double and java.lang.Double</li>
  * <li>float and java.lang.Float</li>
  * <li>int and java.lang.Integer</li>
@@ -139,7 +141,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @version $Revision: 1.9 $ $Date: 2002/06/29 22:29:22 $
+ * @version $Revision: 1.10 $ $Date: 2002/07/20 18:21:21 $
  */
 
 public class ConvertUtils {
@@ -444,6 +446,7 @@ public class ConvertUtils {
                        new CharacterConverter(defaultCharacter));
         converters.put(charArray.getClass(),
                        new CharacterArrayConverter(charArray));
+        converters.put(Class.class, new ClassConverter());
         converters.put(Double.TYPE, new DoubleConverter(defaultDouble));
         converters.put(Double.class, new DoubleConverter(defaultDouble));
         converters.put(doubleArray.getClass(),
