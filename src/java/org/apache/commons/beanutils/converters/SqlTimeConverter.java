@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public final class SqlTimeConverter implements Converter {
+public class SqlTimeConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

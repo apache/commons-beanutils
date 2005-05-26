@@ -33,7 +33,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public final class LongConverter implements Converter {
+public class LongConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

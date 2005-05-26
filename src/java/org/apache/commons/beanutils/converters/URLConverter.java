@@ -37,7 +37,7 @@ import java.net.MalformedURLException;
  * @since 1.3
  */
 
-public final class URLConverter implements Converter {
+public class URLConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

@@ -35,7 +35,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.4
  */
 
-public final class ClassConverter implements Converter {
+public class ClassConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

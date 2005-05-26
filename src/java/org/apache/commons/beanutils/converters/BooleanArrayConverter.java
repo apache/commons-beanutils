@@ -39,7 +39,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.4
  */
 
-public final class BooleanArrayConverter extends AbstractArrayConverter {
+public class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     // ----------------------------------------------------------- Constructors
