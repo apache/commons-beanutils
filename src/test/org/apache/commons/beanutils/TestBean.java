@@ -37,6 +37,11 @@ public class TestBean {
     // ----------------------------------------------------------- Constructors
 
     public TestBean() {
+        listIndexed.add("String 0");
+        listIndexed.add("String 1");
+        listIndexed.add("String 2");
+        listIndexed.add("String 3");
+        listIndexed.add("String 4");
     }
 
     public TestBean(String stringProperty) {
@@ -230,15 +235,7 @@ public class TestBean {
     /**
      * A List property accessed as an indexed property.
      */
-    private static List listIndexed = new ArrayList();
-
-    static {
-        listIndexed.add("String 0");
-        listIndexed.add("String 1");
-        listIndexed.add("String 2");
-        listIndexed.add("String 3");
-        listIndexed.add("String 4");
-    }
+    private List listIndexed = new ArrayList();
 
     public List getListIndexed() {
         return (listIndexed);
