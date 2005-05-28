@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.lang.Decimal</code> object,
+ * locale-sensitive String into a <code>java.lang.Number</code> object,
  * optionally using a default value or throwing a 
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
@@ -214,8 +214,8 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     // --------------------------------------------------------- Methods
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output 
+     * object of the specified type.
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
@@ -224,9 +224,14 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      *  successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
-        // DecimalFormat is not thread safe so best to construct one each time
+        // Note that despite the ambiguous "getInstance" name, and despite the
+        // fact that objects returned from this method have the same toString
+        // representation, each call to getInstance actually returns a new
+        // object.
         DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
-        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
+
+        // if some constructors default pattern to null, it makes only sense 
+        // to handle null pattern gracefully
         if (pattern != null) {
             if (locPattern) {
                 formatter.applyLocalizedPattern(pattern);
