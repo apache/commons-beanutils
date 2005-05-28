@@ -134,7 +134,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * Negative scalar conversion tests.  These rely on the standard
      * default value conversions in LocaleConvertUtils.
      */
-    public void fixmetestNegativeScalar() {
+    public void testNegativeScalar() {
 
         Object value = null;
 

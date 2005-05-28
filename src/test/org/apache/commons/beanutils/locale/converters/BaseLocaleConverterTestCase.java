@@ -242,13 +242,16 @@ public class BaseLocaleConverterTestCase extends TestCase {
         // Convert value with no pattern
         try {
             result = converter.convert("xyz");
+            if (expectedValue == null) {
+                fail("Expected ConversionException if no default value " + msgId);
+            }
         } catch (Exception e) {
-            fail("Invalid conversion " + msgId + " threw " + e);
+            if (expectedValue != null) {
+                fail("Expected default value " + msgId + " threw " + e);
+            }
         }
 
-        if (expectedValue == null) {
-            assertNull("Check invalid conversion is null " + msgId + " result="+result, result);
-        } else {
+        if (expectedValue != null) {
             assertEquals("Check invalid conversion is default " + msgId, expectedValue, result);
         }
 

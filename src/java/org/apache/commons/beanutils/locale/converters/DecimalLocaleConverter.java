@@ -123,7 +123,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      */
     public DecimalLocaleConverter(Locale locale, String pattern, boolean locPattern) {
 
-        this(null, locale, pattern, locPattern);
+        super(locale, pattern, locPattern);
     }
 
     /**

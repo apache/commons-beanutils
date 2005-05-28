@@ -411,28 +411,5 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     }
 
-    /**
-     * Test Converting an invalid value.
-     */
-    protected void convertInvalid(BaseLocaleConverter converter, String msgId, Object expectedValue) {
-
-        // Convert value with no pattern
-        try {
-            result = converter.convert("xyz");
-            if (expectedValue == null) {
-                fail("Expected ConversionException if no default value " + msgId);
-            }
-        } catch (Exception e) {
-            if (expectedValue != null) {
-                fail("Expected default value " + msgId + " threw " + e);
-            }
-        }
-
-        if (expectedValue != null) {
-            assertEquals("Check invalid conversion is default " + msgId, expectedValue, result);
-        }
-
-    }
-
 }
 
