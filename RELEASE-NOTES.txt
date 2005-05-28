@@ -1,6 +1,6 @@
 $Id$
 
-   Copyright 2001-2004 The Apache Software Foundation
+   Copyright 2001-2005 The Apache Software Foundation
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,75 +16,108 @@ $Id$
 
 
                           Commons BeanUtils Package
-                             Version 1.7.0
+                             Version 1.7.1
                                Release Notes
 
 INTRODUCTION:
 ============
 
-Beanutils 1.7.0 is a service release aimed at providing compatibility
-with both the commons collections 2.x series of releases 
-and the commons collections 3.x series of releases
+Beanutils 1.7.1 is a service release, containing just bugfixes for the
+1.7.0 release.
+
+IMPORTANT NOTES:
+================
+
+Potential Memory Leak On Component Unload
+-----------------------------------------
+
+The "beanification" which was done in release 1.7 included the implementation of
+per-context-classpath pseudo-singletons, which are intended to effectively isolate
+different components in a container (eg webapps in a servlet engine) which
+use the static methods available on the BeanUtils, PropertyUtils and ConvertUtils 
+classes, even when the commons-beanutils library is deployed in a shared classloader.
+
+Unfortunately this code can produce memory leaks when a component (eg a webapp)
+is undeployed; because the beanutils classes in the shared classloader hold
+references to classes loaded via the component classloader the component classloader
+(and all the classes it references) cannot be garbage collected. Note that this
+problem can *not* be completely solved by the use of weak references.
+
+This problem is only triggered when:
+ * a subclass of Converter or LocaleConverter is created, the code is loaded via
+   a component webloader, and the converter object is then "registered", or
+ * a subclass of BeanUtilsBean is created and registered as the default via
+    BeanUtilsBean.setInstance(theSubclass)
+ * as above for LocaleBeanUtilsBean
+ 
+If your componentn does one of the above, then on component unload you must
+clear your change, eg by calling ConvertUtils.deregister() or
+BeanUtilsBean.setInstance(null).
+
+See Bugzilla #33931
+
+Incompatible change in behaviour of setNestedProperty
+-----------------------------------------------------
+
+This change makes method PropertyUtilsBean.setNestedProperty (and
+therefore method PropertyUtils.setNestedProperty) work very slightly 
+differently from the behaviour in version 1.6.1. This issue only
+occurs when one of the objects involved implements the Map interface.
+
+* in very early releases of beanutils, map behaviour was not supported at all.
+* r128486 (2001-08-22) added support for classes implementing Map.
+  However this behaviour was triggered only if "(" was in the name string,eg
+  "foo.bar(baz)". In other words, this change was backwards-compatible. Format
+  "a.b" always meant accessing a getB or setB method and never meant using a map
+  get("b") or set("b") method.
+* r128586 (2002-07-16) deliberately changed the interpretation of
+  a.b to mean a.get("b") if a was a map, in order to be compatible with EL and
+  JSP2.0. This change was part of release 1.5 and of course broke backwards
+  compatibility with 1.4.
+* r128642 (2002-11-26) introduced a change that made setNestedProperty check
+  for an explicit setter first before using the map, as a
+  response to bugzilla#14440. This partially restored compatibility with 1.4 for
+  setNestedProperty, but forgot to fix getNestedProperty. And it wasn't 100%
+  compatible with 1.5 as the map would never get updated if a property was
+  available. This was part of release 1.6, 1.6.1 and release 1.7.
+
+Having getNestedProperty and setNestedProperty behave differently is clearly not
+acceptable. Release 1.7.1 therefore has reverted setNestedProperty to the 1.5
+behaviour, ie only ever calling a.set(b), never a.setB() when a is a Map.
+
+This change can potentially break existing code.
+
+If you have a class X that implements Map, but you want explicit setters and
+getters on that class to be used in preference to the Map.set and Map.get
+methods, then you must now override the Map.get and Map.set methods on class X
+in order to implement this behaviour.
+
+
+See Bugzilla #23815
+
+DecimalLocaleConverter Now Throws ConversionException
+-----------------------------------------------------
+
+In versions of commons-beanutils prior to 1.7.0, a DecimalLocaleConverter
+object created without specifying any default value would throw a 
+ConversionException if invalid data was passed to its convert method.
+
+A bug was accidentally introduced into the 1.7.0 release which meant that
+DecimalLocaleConverter would return null on invalid data instead of throwing
+an exception in this case. The javadoc for the class still specified the original
+(and correct) behaviour.
+
+Version 1.7.1 restores the correct behaviour. As a result, code written against
+the 1.7.0 release should be checked to make sure that it handles ConversionException
+correctly when invalid data is passed to the convert method.
+
 
 CHANGES:
 ========
 
-Upgraded License To Apache License 2.0
---------------------------------------
-Beanutils is now released under the Apache License 2.0. 
-See http://www.apache.org/licenses/LICENSE-2.0.
-
-Beanification
--------------
-Creation of objects to back the static utility classes. These object are 
-per-context-classloader pseudo-singletons. Each web or enterprise application 
-is therefore isolated from changes made to the state of others suing the
-static facades. Greater flexibility of implementation is encourage since users
-can subclass and then set their own implementations. Calls to the static facades 
-will then be passed to that implementation.
-
-Removal Of Commons Collections Dependency
------------------------------------------
-The commons collections dependency is in the process of being removed
-from core beanutils. This will reduce the number of dependencies for
-the core beanutils and also will allow beanutils to used with both
-collection 2.x and collection 3.x releases.
-
-Documentation Improvements
---------------------------
-Many thanks to all those kind souls who've contributed documentation :)
-
- 
 ENHANCEMENTS:
 =============
 
-BeanAccessLanguageException & NestNullException
------------------------------------------------
-Added new subclasses of RuntimeException so that bean access language
-exceptions can be trapped by users.
-
-BeanComparator
---------------
-Added no-argument constructor for use in bean-centric environments.
-
-ConvertUtilsBean
-----------------
-Added a File converter and registered the File and URL converters by default
-
-
 BUG REPORTS ADDRESSED:
 =====================
-   #14848 Converted localized versions of beanutils and convert utils to use 
-          delegated singletons. Now instances with the functionality in these 
-          classes can be created.  
-          Added public constructors for the utility objects (BeanUtilsBean, 
-          PropertyUtilsBean and ConvertUtilsBean). Add public accessor properties
-          for the ConvertUtilsBean and PropertyUtilsBean instances used by a 
-          BeanUtilsBean. This allows BeanUtilsBean objects to be created with 
-          independent registered converters and independent caches.  Also added
-          test cases. 
-   #17663 Made BeanUtils.getArrayProperty conversions use ConvertUtils 
-          (rather than just toString)
-   #18918 This bug prevented converters from being correctly deregistered
-   #19850 Now cloneBean will deal successfully with DynaBeans.
-
+   #XXXXX  description
