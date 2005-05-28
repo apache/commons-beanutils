@@ -30,6 +30,13 @@ import org.apache.commons.logging.LogFactory;
 
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.PrimitiveBean;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
+
+import java.util.Locale;
 
 /**
  * <p>
@@ -457,6 +464,52 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Start thread gets right instance", beanOne, ccll.get()); 
         ccll.unset();
         assertTrue("Unset works", !beanOne.equals(ccll.get())); 
+    }
+    
+    /** 
+     * Test registering a locale-aware converter with the standard ConvertUtils.
+     */
+    public void testLocaleAwareConverterInConvertUtils() throws Exception {
+        try {
+            // first use the default non-locale-aware converter
+            try {
+                Long data = (Long) ConvertUtils.convert("777", Long.class);
+                assertEquals("Standard format long converted ok", 777, data.longValue());
+            }
+            catch(ConversionException ex) {
+                fail("Unable to convert non-locale-aware number 777");
+            }
+
+            // now try default converter with special delimiters
+            try {
+                // This conversion will cause an error. But the default
+                // Long converter is set up to return a default value of
+                // zero on error.
+                Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
+                assertEquals("Standard format behaved as expected", 0, data.longValue());
+            }
+            catch(ConversionException ex) {
+                fail("Unexpected exception from standard Long converter.");
+            }
+            
+            // Now try using a locale-aware converter together with 
+            // locale-specific input string. Note that in the german locale, 
+            // large numbers can be split up into groups of three digits 
+            // using a dot character (and comma is the decimal-point indicator).
+            try {
+                
+                Locale germanLocale = Locale.GERMAN;
+                LongLocaleConverter longLocaleConverter = new LongLocaleConverter(germanLocale);
+                ConvertUtils.register(longLocaleConverter, Long.class);
+
+                Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
+                assertEquals("German-format long converted ok", 1000000, data.longValue());
+            } catch(ConversionException ex) {
+                fail("Unable to convert german-format number");
+            }
+        } finally {
+            ConvertUtils.deregister();
+        }
     }
     
     private boolean isPre14JVM() {
