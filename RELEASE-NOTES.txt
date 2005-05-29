@@ -92,6 +92,8 @@ getters on that class to be used in preference to the Map.set and Map.get
 methods, then you must now override the Map.get and Map.set methods on class X
 in order to implement this behaviour.
 
+Alternatively you may subclass PropertyUtilsBean and override the methods
+getPropertyOfMapBean and setPropertyOfMapBean, thought this is not recommended.
 
 See Bugzilla #23815
 
@@ -111,9 +113,32 @@ Version 1.7.1 restores the correct behaviour. As a result, code written against
 the 1.7.0 release should be checked to make sure that it handles ConversionException
 correctly when invalid data is passed to the convert method.
 
+See Bugzilla #33839.
 
 CHANGES:
 ========
+
+PropertyUtilsBean
+-----------------
+Protected methods getPropertyOfMapBean and setPropertyOfMapBean have been added
+to allow users to subclass PropertyUtilsBean and change the way that methods
+getNestedProperty and setNestedProperty behave when encountering an object that
+implements Map. This satisfies a number of bugzilla requests. Note, however, that
+using this functionality is discouraged; it is better to fix code to work with
+PropertyUtilsBean's default approach.
+
+getNestedProperty/setNestedProperty
+-----------------------------------
+As noted in "IMPORTANT NOTES" section, setNestedProperty now completely ignores
+simple properties on an object that implements Map. This restores the behaviour
+of version 1.5. 
+
+When accessing a property of a Map object, an IllegalArgumentException will now
+be thrown if the propertyName is a mapped or indexed expression; formerly, the
+entire string was simply taken literally. Because the old behaviour was extremely
+unlikely to result in the library doing what the caller expected, this change is
+not regarded as a backwards incompatibility.
+
 
 ENHANCEMENTS:
 =============
