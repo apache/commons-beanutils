@@ -3647,6 +3647,93 @@ public class PropertyUtilsTestCase extends TestCase {
     }
     
     /**
+     * There is an issue in setNestedProperty/getNestedProperty when the
+     * target bean is a map and the name string requests mapped or indexed
+     * operations on a field. These are not supported for fields of a Map,
+     * but it's an easy mistake to make and this test case ensures that an
+     * appropriate exception is thrown when a user does this.
+     * <p>
+     * The problem is with passing strings of form "a(b)" or "a[3]" to
+     * setNestedProperty or getNestedProperty when the target bean they
+     * are applied to implements Map. These strings are actually requesting
+     * "the result of calling mapped method a on the target object with
+     * a parameter of b" or "the result of calling indexed method a on the
+     * target object with a parameter of 3". And these requests are not valid
+     * when the target is a Map as a Map only supports calling get(fieldName)
+     * or put(fieldName), neither of which can be further indexed with a
+     * string or an integer.
+     * <p>
+     * However it is likely that some users will assume that "a[3]" when applied
+     * to a map will be equivalent to (map.get("a"))[3] with the appropriate
+     * typecasting, or for "a(b)" to be equivalent to map.get("a").get("b").
+     * <p>
+     * Here we verify that an exception is thrown if the user makes this
+     * mistake.
+     */
+    public void testNestedPropertyKeyOrIndexOnBeanImplementingMap() throws Exception {
+        HashMap map = new HashMap();
+        HashMap submap = new HashMap();
+        BetaBean betaBean1 = new BetaBean("test1");
+        BetaBean betaBean2 = new BetaBean("test2");
+        
+        // map.put("submap", submap)
+        PropertyUtils.setNestedProperty(map, "submap", submap);
+        
+        // map.get("submap").put("beta1", betaBean1)
+        PropertyUtils.setNestedProperty(map, "submap.beta1", betaBean1);
+        assertEquals("Unexpected keys in map", "submap", keysToString(map));
+        assertEquals("Unexpected keys in submap", "beta1", keysToString(submap));
+
+        try {
+            // One would expect that the command below would be equivalent to
+            //   Map m = (Map) map.get("submap");
+            //   m.put("beta2", betaBean2)
+            // However this isn't how javabeans property methods work. A map
+            // only effectively has "simple" properties, even when the
+            // returned object is a Map or Array.
+            PropertyUtils.setNestedProperty(map, "submap(beta2)", betaBean2);
+
+            // What, no exception? In that case, setNestedProperties has 
+            // probably just tried to do 
+            //    map.set("submap(beta2)", betaBean2)
+            // which is almost certainly not what the used expected. This is
+            // what beanutils 1.5.0 to 1.7.1 did....
+            fail("Exception not thrown for invalid setNestedProperty syntax");
+        } catch(IllegalArgumentException ex) {
+            // ok, getting an exception was expected. As it is of a generic
+            // type, let's check the message string to make sure it really
+            // was caused by the issue we expected.
+            int index = ex.getMessage().indexOf(
+                    "Indexed or mapped properties are not supported");
+            assertTrue("Unexpected exception message", index>=0);
+        }
+
+        try {
+            // One would expect that "submap[3]" would be equivalent to
+            //   Object[] objects = (Object[]) map.get("submap");
+            //   return objects[3];
+            // However this isn't how javabeans property methods work. A map
+            // only effectively has "simple" properties, even when the
+            // returned object is a Map or Array.
+            Object o = PropertyUtils.getNestedProperty(map, "submap[3]");
+            
+            // What, no exception? In that case, getNestedProperties has 
+            // probably just tried to do 
+            //    map.get("submap[3]")
+            // which is almost certainly not what the used expected. This is
+            // what beanutils 1.5.0 to 1.7.1 did....
+            fail("Exception not thrown for invalid setNestedProperty syntax");
+        } catch(IllegalArgumentException ex) {
+            // ok, getting an exception was expected. As it is of a generic
+            // type, let's check the message string to make sure it really
+            // was caused by the issue we expected.
+            int index = ex.getMessage().indexOf(
+                    "Indexed or mapped properties are not supported");
+            assertTrue("Unexpected exception message", index>=0);
+        }
+    }
+
+    /**
      * Returns a single string containing all the keys in the map,
      * sorted in alphabetical order and separated by ", ".
      * <p>
@@ -3699,5 +3786,42 @@ public class PropertyUtilsTestCase extends TestCase {
             "Set nested property on map unexpected affected simple property", 
             "new value", 
             bean.getUnusuallyNamedProperty());
+    }
+
+    /** 
+     * This tests to see that it is possible to subclass PropertyUtilsBean
+     * and change the behaviour of setNestedProperty/getNestedProperty when
+     * dealing with objects that implement Map. 
+     */
+    public void testMapExtensionCustom() throws Exception {
+        PropsFirstPropertyUtilsBean utilsBean = new PropsFirstPropertyUtilsBean();
+        ExtendMapBean bean = new ExtendMapBean();
+        
+        // hardly worth testing this, really :-)
+        bean.setUnusuallyNamedProperty("bean value");
+        assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
+
+        // setSimpleProperty should affect the simple property
+        utilsBean.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
+        assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
+
+        // setNestedProperty with setter should affect the simple property
+        // getNestedProperty with getter should obtain the simple property
+        utilsBean.setProperty(bean, "unusuallyNamedProperty", "next value");
+        assertEquals("Set property on map failed (2)", "next value", bean.getUnusuallyNamedProperty());
+        assertEquals("setNestedProperty on non-simple property failed", 
+                "next value",
+                utilsBean.getNestedProperty(bean, "unusuallyNamedProperty"));
+
+        // setting property without setter should update the map
+        // getting property without setter should fetch from the map
+        utilsBean.setProperty(bean, "mapProperty", "value1");
+        assertEquals("setNestedProperty on non-simple property failed", 
+                "value1", utilsBean.getNestedProperty(bean, "mapProperty"));
+        
+        HashMap myMap = new HashMap();
+        myMap.put("thebean", bean);
+        utilsBean.getNestedProperty(myMap, "thebean.mapitem");
+        utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
     }
 }

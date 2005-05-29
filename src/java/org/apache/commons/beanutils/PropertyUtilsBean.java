@@ -659,7 +659,7 @@ public class PropertyUtilsBean {
             indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
             if (bean instanceof Map) {
-                bean = ((Map) bean).get(next);
+                bean = getPropertyOfMapBean((Map) bean, next);
             } else if (indexOfMAPPED_DELIM >= 0) {
                 bean = getMappedProperty(bean, next);
             } else if (indexOfINDEXED_DELIM >= 0) {
@@ -679,7 +679,7 @@ public class PropertyUtilsBean {
         indexOfMAPPED_DELIM = name.indexOf(PropertyUtils.MAPPED_DELIM);
 
         if (bean instanceof Map) {
-            bean = ((Map) bean).get(name);
+            bean = getPropertyOfMapBean((Map) bean, name);
         } else if (indexOfMAPPED_DELIM >= 0) {
             bean = getMappedProperty(bean, name);
         } else if (indexOfINDEXED_DELIM >= 0) {
@@ -690,6 +690,42 @@ public class PropertyUtilsBean {
         return bean;
 
     }
+
+    /**
+     * This method is called by getNestedProperty and setNestedProperty to
+     * define what it means to get a property from an object which implements
+     * Map. See setPropertyOfMapBean for more information.
+     * 
+     * @throws IllegalArgumentException when the propertyName is regarded as
+     * being invalid.
+     * 
+     * @throws IllegalAccessException just in case subclasses override this
+     * method to try to access real getter methods and find permission is denied.
+     * 
+     * @throws InvocationTargetException just in case subclasses override this
+     * method to try to access real getter methods, and find it throws an
+     * exception when invoked.
+     * 
+     * @throws NoSuchMethodException just in case subclasses override this
+     * method to try to access real getter methods, and want to fail if
+     * no simple method is available.
+     */
+    protected Object getPropertyOfMapBean(Map bean, String propertyName) 
+        throws IllegalArgumentException, IllegalAccessException, 
+        InvocationTargetException, NoSuchMethodException {
+
+        int indexOfINDEXED_DELIM = propertyName.indexOf(PropertyUtils.INDEXED_DELIM);
+        int indexOfMAPPED_DELIM = propertyName.indexOf(PropertyUtils.MAPPED_DELIM);
+        
+        if ((indexOfINDEXED_DELIM >= 0) || (indexOfMAPPED_DELIM >= 0)) {
+            throw new IllegalArgumentException(
+                    "Indexed or mapped properties are not supported on"
+                    + " objects of type Map: " + propertyName);
+        }
+
+        return bean.get(propertyName);
+    }
+
 
 
     /**
@@ -1646,6 +1682,17 @@ public class PropertyUtilsBean {
     /**
      * Set the value of the (possibly nested) property of the specified
      * name, for the specified bean, with no type conversions.
+     * <p>
+     * Example values for parameter "name" are:
+     * <ul>
+     * <li> "a" -- sets the value of property a of the specified bean </li>
+     * <li> "a.b" -- gets the value of property a of the specified bean,
+     * then on that object sets the value of property b.</li>
+     * <li> "a(key)" -- sets a value of mapped-property a on the specified
+     * bean. This effectively means bean.setA("key").</li>
+     * <li> "a[3]" -- sets a value of indexed-property a on the specified
+     * bean. This effectively means bean.setA(3).</li>
+     * </ul>
      *
      * @param bean Bean whose property is to be modified
      * @param name Possibly nested name of the property to be modified
@@ -1685,7 +1732,7 @@ public class PropertyUtilsBean {
             indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
             if (bean instanceof Map) {
-                bean = ((Map) bean).get(next);
+                bean = getPropertyOfMapBean((Map)bean, next);
             } else if (indexOfMAPPED_DELIM >= 0) {
                 bean = getMappedProperty(bean, next);
             } else if (indexOfINDEXED_DELIM >= 0) {
@@ -1705,7 +1752,7 @@ public class PropertyUtilsBean {
         indexOfMAPPED_DELIM = name.indexOf(PropertyUtils.MAPPED_DELIM);
 
         if (bean instanceof Map) {
-            ((Map) bean).put(name, value);
+            setPropertyOfMapBean((Map) bean, name, value);
         } else if (indexOfMAPPED_DELIM >= 0) {
             setMappedProperty(bean, name, value);
         } else if (indexOfINDEXED_DELIM >= 0) {
@@ -1715,6 +1762,74 @@ public class PropertyUtilsBean {
         }
 
     }
+
+    /**
+     * This method is called by method setNestedProperty when the current bean
+     * is found to be a Map object, and defines how to deal with setting
+     * a property on a Map.
+     * <p>
+     * The standard implementation here is to:
+     * <ul>
+     * <li>call bean.set(propertyName) for all propertyName values.</li>
+     * <li>throw an IllegalArgumentException if the property specifier
+     * contains MAPPED_DELIM or INDEXED_DELIM, as Map entries are essentially
+     * simple properties; mapping and indexing operations do not make sense
+     * when accessing a map (even thought the returned object may be a Map
+     * or an Array).</li>
+     * </ul>
+     * <p>
+     * The default behaviour of beanutils 1.7.1 or later is for assigning to
+     * "a.b" to mean a.put(b, obj) always. However the behaviour of beanutils 
+     * version 1.6.0, 1.6.1, 1.7.0 was for "a.b" to mean a.setB(obj) if such
+     * a method existed, and a.put(b, obj) otherwise. In version 1.5 it meant
+     * a.put(b, obj) always (ie the same as the behaviour in the current version).
+     * In versions prior to 1.5 it meant a.setB(obj) always. [yes, this is 
+     * all <i>very</i> unfortunate]
+     * <p>
+     * Users who would like to customise the meaning of "a.b" in method 
+     * setNestedProperty when a is a Map can create a custom subclass of
+     * this class and override this method to implement the behaviour of 
+     * their choice, such as restoring the pre-1.4 behaviour of this class
+     * if they wish. When overriding this method, do not forget to deal 
+     * with MAPPED_DELIM and INDEXED_DELIM characters in the propertyName.
+     * <p>
+     * Note, however, that the recommended solution for objects that
+     * implement Map but want their simple properties to come first is
+     * for <i>those</i> objects to override their get/put methods to implement
+     * that behaviour, and <i>not</i> to solve the problem by modifying the
+     * default behaviour of the PropertyUtilsBean class by overriding this
+     * method.
+     * 
+     * @throws IllegalArgumentException when the propertyName is regarded as
+     * being invalid.
+     * 
+     * @throws IllegalAccessException just in case subclasses override this
+     * method to try to access real setter methods and find permission is denied.
+     * 
+     * @throws InvocationTargetException just in case subclasses override this
+     * method to try to access real setter methods, and find it throws an
+     * exception when invoked.
+     * 
+     * @throws NoSuchMethodException just in case subclasses override this
+     * method to try to access real setter methods, and want to fail if
+     * no simple method is available.
+     */
+    protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
+        throws IllegalArgumentException, IllegalAccessException, 
+        InvocationTargetException, NoSuchMethodException {
+
+        int indexOfINDEXED_DELIM = propertyName.indexOf(PropertyUtils.INDEXED_DELIM);
+        int indexOfMAPPED_DELIM = propertyName.indexOf(PropertyUtils.MAPPED_DELIM);
+        
+        if ((indexOfINDEXED_DELIM >= 0) || (indexOfMAPPED_DELIM >= 0)) {
+            throw new IllegalArgumentException(
+                    "Indexed or mapped properties are not supported on"
+                    + " objects of type Map: " + propertyName);
+        }
+
+        bean.put(propertyName, value);
+    }
+
 
 
     /**
