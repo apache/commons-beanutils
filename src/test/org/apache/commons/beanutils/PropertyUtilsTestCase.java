@@ -3646,6 +3646,49 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Cannot set mapped no-getter property", "MAP:Epsilon", bean.getSecret());
     }
     
+    /**
+     * There was a bug in setNestedProperty/getNestedProperty when the
+     * target bean is a map. This test case ensures that the problem is
+     * fixed.
+     */
+    public void testBeanImplementingMap() throws Exception {
+        HashMap map = new HashMap();
+        HashMap submap = new HashMap();
+        BetaBean betaBean1 = new BetaBean("test1");
+        BetaBean betaBean2 = new BetaBean("test2");
+        
+        // map.put("submap", submap)
+        PropertyUtils.setNestedProperty(map, "submap", submap);
+        
+        // map.get("submap").put("beta1", betaBean1)
+        PropertyUtils.setNestedProperty(map, "submap.beta1", betaBean1);
+        assertEquals("Unexpected keys in map", "submap", keysToString(map));
+        assertEquals("Unexpected keys in submap", "beta1", keysToString(submap));
+
+        // map.get("submap").put("beta2", betaBean2)
+        PropertyUtils.setNestedProperty(map, "submap(beta2)", betaBean2);
+        assertEquals("Unexpected keys in map", "submap", keysToString(map));
+        assertEquals("Unexpected keys in submap", "beta1, beta2", keysToString(submap));
+    }
+
+    /**
+     * Returns a single string containing all the keys in the map,
+     * sorted in alphabetical order and separated by ", ".
+     * <p>
+     * If there are no keys, an empty string is returned.
+     */
+    private String keysToString(Map map) {
+        Object[] mapKeys = map.keySet().toArray();
+        java.util.Arrays.sort(mapKeys);
+        StringBuffer buf = new StringBuffer();
+        for(int i=0; i<mapKeys.length; ++i) {
+            if (i != 0)
+                buf.append(", ");
+            buf.append(mapKeys[i]);
+        }
+        return buf.toString();
+    }
+
     /** 
      * This tests to see that classes that implement Map can have 
      * their standard properties set.
