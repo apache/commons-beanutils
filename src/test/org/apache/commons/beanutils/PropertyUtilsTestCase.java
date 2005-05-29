@@ -3647,31 +3647,6 @@ public class PropertyUtilsTestCase extends TestCase {
     }
     
     /**
-     * There was a bug in setNestedProperty/getNestedProperty when the
-     * target bean is a map. This test case ensures that the problem is
-     * fixed.
-     */
-    public void testBeanImplementingMap() throws Exception {
-        HashMap map = new HashMap();
-        HashMap submap = new HashMap();
-        BetaBean betaBean1 = new BetaBean("test1");
-        BetaBean betaBean2 = new BetaBean("test2");
-        
-        // map.put("submap", submap)
-        PropertyUtils.setNestedProperty(map, "submap", submap);
-        
-        // map.get("submap").put("beta1", betaBean1)
-        PropertyUtils.setNestedProperty(map, "submap.beta1", betaBean1);
-        assertEquals("Unexpected keys in map", "submap", keysToString(map));
-        assertEquals("Unexpected keys in submap", "beta1", keysToString(submap));
-
-        // map.get("submap").put("beta2", betaBean2)
-        PropertyUtils.setNestedProperty(map, "submap(beta2)", betaBean2);
-        assertEquals("Unexpected keys in map", "submap", keysToString(map));
-        assertEquals("Unexpected keys in submap", "beta1, beta2", keysToString(submap));
-    }
-
-    /**
      * Returns a single string containing all the keys in the map,
      * sorted in alphabetical order and separated by ", ".
      * <p>
@@ -3690,19 +3665,39 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /** 
-     * This tests to see that classes that implement Map can have 
-     * their standard properties set.
+     * This tests to see that classes that implement Map always have their
+     * custom properties ignored.
+     * <p>
+     * Note that this behaviour has changed several times over past releases
+     * of beanutils, breaking backwards compatibility each time. Here's hoping
+     * that the current 1.7.1 release is the last time this behaviour changes! 
      */
-    public void testSetMapExtension() throws Exception {
+    public void testMapExtensionDefault() throws Exception {
         ExtendMapBean bean = new ExtendMapBean();
-        
+
+        // setting property direct should work, and not affect map
         bean.setUnusuallyNamedProperty("bean value");
         assertEquals("Set property direct failed", "bean value", bean.getUnusuallyNamedProperty());
+        assertNull("Get on unset map property failed", 
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
         
+        // setting simple property should call the setter method only, and not
+        // affect the map.
         PropertyUtils.setSimpleProperty(bean, "unusuallyNamedProperty", "new value");
         assertEquals("Set property on map failed (1)", "new value", bean.getUnusuallyNamedProperty());
-        
+        assertNull("Get on unset map property failed", 
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
+
+        // setting via setNestedProperty should affect the map only, and not
+        // call the setter method.
         PropertyUtils.setProperty(bean, "unusuallyNamedProperty", "next value");
-        assertEquals("Set property on map failed (2)", "next value", bean.getUnusuallyNamedProperty());
+        assertEquals(
+                "setNestedProperty on map not visible to getNestedProperty", 
+                "next value", 
+                PropertyUtils.getNestedProperty(bean, "unusuallyNamedProperty"));
+        assertEquals(
+            "Set nested property on map unexpected affected simple property", 
+            "new value", 
+            bean.getUnusuallyNamedProperty());
     }
 }

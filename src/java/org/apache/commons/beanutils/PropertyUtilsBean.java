@@ -1705,16 +1705,7 @@ public class PropertyUtilsBean {
         indexOfMAPPED_DELIM = name.indexOf(PropertyUtils.MAPPED_DELIM);
 
         if (bean instanceof Map) {
-            // check to see if the class has a standard property 
-            PropertyDescriptor descriptor = 
-                getPropertyDescriptor(bean, name);
-            if (descriptor == null) {
-                // no - then put the value into the map
-                ((Map) bean).put(name, value);
-            } else {
-                // yes - use that instead
-                setSimpleProperty(bean, name, value);
-            }
+            ((Map) bean).put(name, value);
         } else if (indexOfMAPPED_DELIM >= 0) {
             setMappedProperty(bean, name, value);
         } else if (indexOfINDEXED_DELIM >= 0) {
