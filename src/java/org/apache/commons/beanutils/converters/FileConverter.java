@@ -31,7 +31,7 @@ import org.apache.commons.beanutils.Converter;
  * @version $Revision$ $Date$
  * @since 1.6
  */
-public class FileConverter implements Converter {
+public final class FileConverter implements Converter {
 
     // ----------------------------------------------------- Instance Variables
 

@@ -33,7 +33,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public class ByteConverter implements Converter {
+public final class ByteConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

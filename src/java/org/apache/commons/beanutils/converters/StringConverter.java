@@ -33,7 +33,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public class StringConverter implements Converter {
+public final class StringConverter implements Converter {
 
 
     // --------------------------------------------------------- Public Methods

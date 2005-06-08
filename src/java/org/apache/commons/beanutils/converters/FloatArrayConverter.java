@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.4
  */
 
-public class FloatArrayConverter extends AbstractArrayConverter {
+public final class FloatArrayConverter extends AbstractArrayConverter {
 
 
     // ----------------------------------------------------------- Constructors

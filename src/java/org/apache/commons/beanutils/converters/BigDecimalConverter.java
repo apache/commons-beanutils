@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public class BigDecimalConverter implements Converter {
+public final class BigDecimalConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors

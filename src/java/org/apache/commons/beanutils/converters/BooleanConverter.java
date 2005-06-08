@@ -53,7 +53,7 @@ import org.apache.commons.beanutils.Converter;
  * @since 1.3
  */
 
-public class BooleanConverter implements Converter {
+public final class BooleanConverter implements Converter {
 
 
     // ----------------------------------------------------------- Constructors
