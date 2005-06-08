@@ -140,9 +140,6 @@ public class ConvertUtilsBean {
 
     // --------------------------------------------------------- Public Methods
     
-    // ------------------------------------------------------ Static Properties
-
-
     /**
      * The default value for Boolean conversions.
      * @deprecated Register replacement converters for Boolean.TYPE and
