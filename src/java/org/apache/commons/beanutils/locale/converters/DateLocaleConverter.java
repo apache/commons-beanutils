@@ -50,8 +50,11 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /** Should the date conversion be lenient? */
     boolean isLenient = false;
 
-    /** Default Pattern Characters */
-    public static String defaultChars;
+    /** 
+     * Default Pattern Characters 
+     * 
+     */
+    private static final String defaultChars = initDefaultChars();
 
     // ----------------------------------------------------------- Constructors
 
@@ -284,12 +287,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          // However, it is the best way that anyone can come up with 
          // that works with some 1.4 series JVM.
          
-         // Initialize the default symbols
-         if (defaultChars == null) {
-             DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
-             defaultChars = defaultSymbols.getLocalPatternChars();
-         }
- 
          // Get the symbols for the localized pattern
          DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
          String localChars = localizedSymbols.getLocalPatternChars();
@@ -345,4 +342,15 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
         return converted.toString();
     }
+
+    /**
+     * This method is called at class initialization time to define the
+     * value for constant member defaultChars. All other methods needing
+     * this data should just read that constant.
+     */
+    private static String initDefaultChars() {
+        DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
+        return defaultSymbols.getLocalPatternChars();
+    }
+
 }
