@@ -47,9 +47,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
     // ----------------------------------------------------- Instance Variables
 
-    /** All logging goes through this logger */
-    private static Log log = LogFactory.getLog(LocaleBeanUtils.class);
-
     /**
      * <p>Gets the locale used when no locale is passed.</p>
      *
@@ -420,6 +417,8 @@ public class LocaleBeanUtils extends BeanUtils {
      */
     protected static Descriptor calculate(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException {
+
+        Log log = LogFactory.getLog(LocaleBeanUtils.class);
 
         String propName = null;          // Simple name of target property
         int index = -1;                  // Indexed subscript value (if any)

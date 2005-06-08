@@ -55,10 +55,6 @@ public class MethodUtils {
 
     // --------------------------------------------------------- Private Methods
     
-    /**
-     * All logging goes through this logger
-     */
-    private static Log log = LogFactory.getLog(MethodUtils.class);
     /** Only log warning about accessibility work around once */
     private static boolean loggedAccessibleWarning = false;
 
@@ -517,6 +513,7 @@ public class MethodUtils {
                                                 String methodName,
                                                 Class[] parameterTypes) {
         // trace logging
+        Log log = LogFactory.getLog(MethodUtils.class);
         if (log.isTraceEnabled()) {
             log.trace("Matching name=" + methodName + " on " + clazz);
         }
@@ -819,6 +816,7 @@ public class MethodUtils {
         } else if (Character.class.equals(wrapperType)) {
             return char.class;
         } else {
+            Log log = LogFactory.getLog(MethodUtils.class);
             if (log.isDebugEnabled()) {
                 log.debug("Not a known primitive wrapper class: " + wrapperType);
             }

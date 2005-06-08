@@ -44,7 +44,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
-    private static Log log = LogFactory.getLog(DecimalLocaleConverter.class);     
+    private Log log = LogFactory.getLog(DecimalLocaleConverter.class);     
 
     // ----------------------------------------------------------- Constructors
 

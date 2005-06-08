@@ -46,7 +46,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
-    private static Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
+    private Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
 
 
     // ----------------------------------------------------------- Constructors

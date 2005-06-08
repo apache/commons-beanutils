@@ -69,7 +69,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 	}
 
     /** All logging goes through this logger */
-    private static Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
+    private Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
     // ----------------------------------------------------- Instance Variables
         
