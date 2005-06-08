@@ -72,7 +72,7 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static float model[] = new float[0];
+    private static final float model[] = new float[0];
 
 
     // --------------------------------------------------------- Public Methods

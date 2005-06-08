@@ -72,7 +72,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static int model[] = new int[0];
+    private static final int model[] = new int[0];
 
 
     // --------------------------------------------------------- Public Methods

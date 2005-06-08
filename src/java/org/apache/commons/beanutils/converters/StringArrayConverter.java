@@ -72,12 +72,12 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static String model[] = new String[0];
+    private static final String model[] = new String[0];
     
     /**
      * <p> Model object for int arrays.</p>
      */
-    private static int ints[] = new int[0];
+    private static final int ints[] = new int[0];
 
 
 

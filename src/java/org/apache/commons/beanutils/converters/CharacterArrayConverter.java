@@ -72,7 +72,7 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static char model[] = new char[0];
+    private static final char model[] = new char[0];
 
 
     // --------------------------------------------------------- Public Methods

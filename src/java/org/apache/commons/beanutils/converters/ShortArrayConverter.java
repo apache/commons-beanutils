@@ -72,7 +72,7 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static short model[] = new short[0];
+    private static final short model[] = new short[0];
 
 
     // --------------------------------------------------------- Public Methods

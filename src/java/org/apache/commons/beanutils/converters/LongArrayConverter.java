@@ -72,7 +72,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static long model[] = new long[0];
+    private static final long model[] = new long[0];
 
 
     // --------------------------------------------------------- Public Methods

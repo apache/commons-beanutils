@@ -72,7 +72,7 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static byte model[] = new byte[0];
+    private static final byte model[] = new byte[0];
 
 
     // --------------------------------------------------------- Public Methods

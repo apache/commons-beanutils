@@ -72,7 +72,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static double model[] = new double[0];
+    private static final double model[] = new double[0];
 
 
     // --------------------------------------------------------- Public Methods
