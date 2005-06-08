@@ -55,7 +55,17 @@ public class MethodUtils {
 
     // --------------------------------------------------------- Private Methods
     
-    /** Only log warning about accessibility work around once */
+    /** 
+     * Only log warning about accessibility work around once.
+     * <p>
+     * Note that this is broken when this class is deployed via a shared
+     * classloader in a container, as the warning message will be emitted
+     * only once, not once per webapp. However making the warning appear
+     * once per webapp means having a map keyed by context classloader
+     * which introduces nasty memory-leak problems. As this warning is
+     * really optional we can ignore this problem; only one of the webapps
+     * will get the warning in its logs but that should be good enough.
+     */
     private static boolean loggedAccessibleWarning = false;
 
     /** An empty class array */
@@ -64,7 +74,24 @@ public class MethodUtils {
     private static final Object[] emptyObjectArray = new Object[0];
 
     /**
-     * Stores a cache of Methods against MethodDescriptors, in a WeakHashMap.
+     * Stores a cache of MethodDescriptor -> Method in a WeakHashMap.
+     * <p>
+     * The keys into this map only ever exist as temporary variables within
+     * methods of this class, and are never exposed to users of this class.
+     * This means that the WeakHashMap is used only as a mechanism for 
+     * limiting the size of the cache, ie a way to tell the garbage collector
+     * that the contents of the cache can be completely garbage-collected 
+     * whenever it needs the memory. Whether this is a good approach to
+     * this problem is doubtful; something like the commons-collections
+     * LRUMap may be more appropriate (though of course selecting an
+     * appropriate size is an issue).
+     * <p>
+     * This static variable is safe even when this code is deployed via a
+     * shared classloader because it is keyed via a MethodDescriptor object
+     * which has a Class as one of its members and that member is used in
+     * the MethodDescriptor.equals method. So two components that load the same
+     * class via different classloaders will generate non-equal MethodDescriptor
+     * objects and hence end up with different entries in the map.
      */
     private static WeakHashMap cache = new WeakHashMap();
     
