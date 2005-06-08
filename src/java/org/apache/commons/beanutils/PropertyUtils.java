@@ -86,6 +86,12 @@ public class PropertyUtils {
 
     /**
      * The debugging detail level for this component.
+     * 
+     * Note that this static variable will have unexpected side-effects if
+     * this class is deployed in a shared classloader within a container.
+     * However as it is actually completely ignored by this class due to its
+     * deprecated status, it doesn't do any actual harm.
+     *
      * @deprecated The <code>debug</code> static property is no longer used
      */
     private static int debug = 0;
