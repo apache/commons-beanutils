@@ -106,7 +106,20 @@ public class WrapDynaClass implements DynaClass {
 
     /**
      * The set of <code>WrapDynaClass</code> instances that have ever been
-     * created, keyed by the underlying bean Class.
+     * created, keyed by the underlying bean Class. The keys to this map
+     * are Class objects, and the values are corresponding WrapDynaClass
+     * objects.
+     * <p>
+     * This static variable is safe even when this code is deployed via a
+     * shared classloader because it is keyed via a Class object. The same
+     * class loaded via two different classloaders will result in different
+     * entries in this map.
+     * <p>
+     * Note, however, that this HashMap can result in a memory leak. When
+     * this class is in a shared classloader it will retain references to
+     * classes loaded via a webapp classloader even after the webapp has been
+     * undeployed. That will prevent the entire classloader and all the classes
+     * it refers to and all their static members from being freed.
      */
     protected static HashMap dynaClasses = new HashMap();
 
