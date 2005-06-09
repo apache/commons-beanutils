@@ -65,23 +65,23 @@ import org.apache.commons.logging.LogFactory;
  * {@link Converter} instances are provided for all of the following
  * destination Classes:</p>
  * <ul>
- * <li>java.lang.BigDecimal</li>
- * <li>java.lang.BigInteger</li>
- * <li>boolean and java.lang.Boolean</li>
- * <li>byte and java.lang.Byte</li>
- * <li>char and java.lang.Character</li>
- * <li>java.lang.Class</li>
- * <li>double and java.lang.Double</li>
- * <li>float and java.lang.Float</li>
- * <li>int and java.lang.Integer</li>
- * <li>long and java.lang.Long</li>
- * <li>short and java.lang.Short</li>
- * <li>java.lang.String</li>
- * <li>java.io.File</li>
- * <li>java.net.URL</li>
- * <li>java.sql.Date</li>
- * <li>java.sql.Time</li>
- * <li>java.sql.Timestamp</li>
+ * <li>java.lang.BigDecimal (no default value)</li>
+ * <li>java.lang.BigInteger (no default value)</li>
+ * <li>boolean and java.lang.Boolean (default to false)</li>
+ * <li>byte and java.lang.Byte (default to zero)</li>
+ * <li>char and java.lang.Character (default to a space)</li>
+ * <li>java.lang.Class (no default value)</li>
+ * <li>double and java.lang.Double (default to zero)</li>
+ * <li>float and java.lang.Float (default to zero)</li>
+ * <li>int and java.lang.Integer (default to zero)</li>
+ * <li>long and java.lang.Long (default to zero)</li>
+ * <li>short and java.lang.Short (default to zero)</li>
+ * <li>java.lang.String (default to null)</li>
+ * <li>java.io.File (no default value)</li>
+ * <li>java.net.URL (no default value)</li>
+ * <li>java.sql.Date (no default value)</li>
+ * <li>java.sql.Time (no default value)</li>
+ * <li>java.sql.Timestamp (no default value)</li>
  * </ul>
  *
  * <p>For backwards compatibility, the standard Converters for primitive
@@ -98,7 +98,32 @@ import org.apache.commons.logging.LogFactory;
  *   ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
  *   ConvertUtils.register(myConverter, Integer.class);   // Wrapper class
  * </pre>
+ * 
+ * <p>
+ * Converters generally treat null input as if it were invalid
+ * input, ie they return their default value if one was specified when the
+ * converter was constructed, and throw an exception otherwise. If you prefer
+ * nulls to be preserved for converters that are converting to objects (not
+ * primitives) then register a converter as above, passing a default value of
+ * null to the converter constructor (and of course registering that converter
+ * only for the .class target).
+ * </p>
  *
+ * <p>
+ * When a converter is listed above as having no default value, then that
+ * converter will throw an exception when passed null or an invalid value
+ * as its input. In particular, by default the BigInteger and BigDecimal
+ * converters have no default (and are therefore somewhat inconsistent
+ * with the other numerical converters which all have zero as their default).
+ * </p>
+ * 
+ * <p>
+ * Converters that generate <i>arrays</i> of each of the primitive types are
+ * also automatically configured (including String[]). When passed null
+ * or invalid input, these return an empty array (not null). See class
+ * AbstractArrayConverter for the supported input formats for these converters.
+ * </p>
+ * 
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
@@ -482,8 +507,13 @@ public class ConvertUtilsBean {
         String stringArray[] = new String[0];
 
 		converters.clear();
+        
+        // Note: these two converters have no default values. This is
+        // not consistent with the other numeric converters, but cannot
+        // be fixed without breaking backwards compatibility.
         register(BigDecimal.class, new BigDecimalConverter());
         register(BigInteger.class, new BigIntegerConverter());
+
         register(Boolean.TYPE, new BooleanConverter(defaultBoolean));
         register(Boolean.class,  new BooleanConverter(defaultBoolean));
         register(booleanArray.getClass(),
