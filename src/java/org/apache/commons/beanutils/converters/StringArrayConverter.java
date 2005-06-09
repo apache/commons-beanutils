@@ -24,10 +24,13 @@ import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into an array of String.  On a conversion failure, returns
+ * Standard {@link Converter} implementation that converts an incoming
+ * String into an array of String objects. On a conversion failure, returns
  * a specified default value or throws a {@link ConversionException} depending
- * on how this instance is constructed.</p>
+ * on how this instance is constructed.
+ * <p>
+ * There is also some special handling where the input is of type int[].
+ * See method convert for more details.  
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
@@ -87,12 +90,33 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     /**
      * Convert the specified input object into an output object of the
      * specified type.
-     *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
+     * <p>
+     * If the value is already of type String[] then it is simply returned
+     * unaltered.
+     * <p>
+     * If the value is of type int[], then a String[] is returned where each
+     * element in the string array is the result of calling Integer.toString
+     * on the corresponding element of the int array. This was added as a
+     * result of bugzilla request #18297 though there is not complete
+     * agreement that this feature should have been added. 
+     * <p>
+     * In all other cases, this method calls toString on the input object, then
+     * assumes the result is a comma-separated list of values. The values are 
+     * split apart into the individual items and returned as the elements of an
+     * array. See class AbstractArrayConverter for the exact input formats
+     * supported.
+     * 
+     * @param type is the data type to which this value should be converted.
+     * It is expected to be the class for type String[] (though this parameter
+     * is actually ignored by this method).
+     * 
+     * @param value is the input value to be converted. If null then the
+     * default value is returned or an exception thrown if no default value
+     * exists.
      *
      * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * successfully, or the input is null and there is no default value set
+     * for this object.
      */
     public Object convert(Class type, Object value) {
 
@@ -139,8 +163,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
                 throw new ConversionException(value.toString(), e);
             }
         }
-
     }
-
 
 }
