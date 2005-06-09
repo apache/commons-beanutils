@@ -23,10 +23,25 @@ import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.lang.String</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * Standard {@link Converter} implementation that converts an incoming
+ * object into a <code>java.lang.String</code> object.
+ * <p>
+ * Note that ConvertUtils really is designed to do string->object conversions,
+ * and offers very little support for object->string conversions. The
+ * ConvertUtils/ConvertUtilsBean methods only select a converter to apply
+ * based upon the target type being converted to, and generally assume that
+ * the input is a string (by calling its toString method if needed).
+ * <p>
+ * This class is therefore just a dummy converter that converts its input
+ * into a string by calling the input object's toString method and returning
+ * that value.
+ * <p>
+ * It is possible to replace this converter with something that has a big
+ * if/else statement that selects behaviour based on the real type of the
+ * object being converted (or possibly has a map of converters, and looks
+ * them up based on the class of the input object). However this is not part
+ * of the existing ConvertUtils framework.
+ *  
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
