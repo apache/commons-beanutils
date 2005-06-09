@@ -199,9 +199,11 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param type Data is type to which this value should be converted
+     * @param value is the input object to be converted
+     * @param pattern is the pattern is used for the conversion; if null is
+     * passed then the default pattern associated with the converter object
+     * will be used.
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully
