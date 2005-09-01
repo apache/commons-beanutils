@@ -40,4 +40,42 @@ public class MappedPropertyTestBean {
     public void setMapproperty(String key, String value) {	
         map.put(key, value);
     }
+
+    protected String getProtectedMapped(String key) {
+        return (String) map.get(key);
+    }
+
+    protected void setProtectedMapped(String key, String value) {	
+        map.put(key, value);
+    }
+
+    public void setMappedPrimitive(int key, int value) {	
+        map.put(new Integer(key), new Integer(value));
+    }
+
+    public void setAnyMapped(MappedPropertyTestBean key, MappedPropertyTestBean value) {	
+        map.put(key, value);
+    }
+
+    public void setMappedSetterOnly(String key, String value) {	
+        map.put(key, value);
+    }
+
+    public String getMappedGetterOnly(String key) {
+        return (String) map.get(key);
+    }
+
+    public String getInvalidGetter(String key, String other) {
+        return (String) map.get(key);
+    }
+
+    public void setInvalidGetter(String key, String value) {	
+        map.put(key, value);
+    }
+    public String getInvalidSetter(String key) {
+        return (String) map.get(key);
+    }
+    public void setInvalidSetter(String key, String value, String other) {	
+    }
+
 }
