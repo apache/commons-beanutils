@@ -116,6 +116,21 @@ public class LazyDynaBeanTestCase extends TestCase {
     }
 
     /**
+     * Test Getting/Setting a 'null' Property
+     */
+    public void testNullProperty() {
+
+        // Check the property & value doesn't exist
+        assertNull("Check Property doesn't exist", dynaClass.getDynaProperty(testProperty));
+        assertNull("Check Value is null", bean.get(testProperty));
+
+        // Set a new property to null
+        bean.set(testProperty, null);
+        assertNull("Check Value is still null", bean.get(testProperty));
+
+    }
+
+    /**
      * Test Setting a Simple Property when MutableDynaClass is set to restricted
      */
     public void testSimplePropertyRestricted() {

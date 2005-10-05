@@ -587,6 +587,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected Object createProperty(String name, Class type) {
 
+        if (type == Object.class) {
+            return null;
+        }
+
         // Create Lists, arrays or DynaBeans
         if (type.isArray() || List.class.isAssignableFrom(type)) {
             return createIndexedProperty(name, type);
@@ -728,7 +732,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a 'Primitive' Property
+     * Create a new Instance of a <code>java.lang.Number</code> Property.
      */
     protected Object createNumberProperty(String name, Class type) {
 
@@ -737,13 +741,18 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a 'Mapped' Property
+     * Create a new Instance of other Property types
      */
     protected Object createOtherProperty(String name, Class type) {
 
-        if (type == String.class || type == Boolean.class ||
-            type == Character.class || Date.class.isAssignableFrom(type)) {
+        if (type == Object.class    ||
+            type == String.class    ||
+            type == Boolean.class   ||
+            type == Character.class ||
+            Date.class.isAssignableFrom(type)) {
+
             return null;
+
         }
 
         try {
