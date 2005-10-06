@@ -112,7 +112,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
    /**
     * Commons Logging
     */
-    private Log logger = LogFactory.getLog(LazyDynaBean.class);
+    private static Log logger = LogFactory.getLog(LazyDynaBean.class);
 
     protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
