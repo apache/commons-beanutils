@@ -1,5 +1,5 @@
 /*
- * Copyright 2004 The Apache Software Foundation.
+ * Copyright 2004-2005 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -586,10 +586,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * Create a new Instance of a Property
      */
     protected Object createProperty(String name, Class type) {
-
-        if (type == Object.class) {
-            return null;
-        }
 
         // Create Lists, arrays or DynaBeans
         if (type.isArray() || List.class.isAssignableFrom(type)) {
