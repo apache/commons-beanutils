@@ -1,5 +1,5 @@
 /*
- * Copyright 2004 The Apache Software Foundation.
+ * Copyright 2004-2005 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,10 @@
  */
 package org.apache.commons.beanutils;
 
+import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.lang.reflect.InvocationTargetException;
@@ -481,6 +483,27 @@ public class LazyDynaMapTestCase extends TestCase {
         } catch (IllegalArgumentException expected) {
             // expected result
         }
+    }
+
+    /**
+     * Test creating using DynaClass.newInstance()
+     */
+    public void testNewInstance() {
+
+        // Create LazyDynaMap using TreeMap 
+        // containing some properties
+        LazyDynaMap orig = new LazyDynaMap(new TreeMap());
+        orig.set("indexProp", 0, "indexVal0");
+        orig.set("indexProp", 2, "indexVal1");
+        assertEquals("Index prop size", 1, ((List)orig.get("indexProp")).size());
+        
+        LazyDynaMap newOne = (LazyDynaMap)orig.newInstance();
+        Map newMap = newOne.getMap();
+        assertEquals("Check Map type", TreeMap.class, newMap.getClass());
+        
+        ArrayList indexProp = (ArrayList)newMap.get("indexProp");
+        assertNotNull("Indexed Prop missing", indexProp);
+        assertEquals("Index prop size", 0, indexProp.size());
     }
 
 }

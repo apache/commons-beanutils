@@ -1,5 +1,5 @@
 /*
- * Copyright 2004 The Apache Software Foundation.
+ * Copyright 2004-2005 The Apache Software Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -249,7 +249,24 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * with this DynaClass.
      */
     public DynaBean newInstance()  {
-        return new LazyDynaMap(this);
+
+        // Create a new instance of the Map
+        Map newMap = null;
+        try {
+            newMap = (Map)getMap().getClass().newInstance();
+        } catch(Exception ex) {
+            newMap = newMap();
+        }
+
+        // Crate new LazyDynaMap and initialize properties
+        LazyDynaMap lazyMap = new LazyDynaMap(newMap);
+        DynaProperty[] properties = this.getDynaProperties();
+        if (properties != null) {
+            for (int i = 0; i < properties.length; i++) {
+                lazyMap.add(properties[i]);
+            }
+        }
+        return lazyMap;
     }
 
 
