@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,10 @@
 
 package org.apache.commons.beanutils;
 
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -153,13 +156,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-
-    /**
-     * Suppress serialization and deserialization tests.  WrapDynaClass
-     * is not serializable.
-     */
-    public void testSerialization() { }
-    
     /** Tests getInstance method */
     public void testGetInstance() {
         AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
@@ -177,6 +173,57 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertTrue("Object type is WrapDynaBean", createdInstance instanceof WrapDynaBean);
         WrapDynaBean dynaBean = (WrapDynaBean) createdInstance;
         assertTrue("Object type is AlphaBean", dynaBean.getInstance() instanceof AlphaBean);
+    }
+
+
+    /**
+     * Serialization and deserialization tests.
+     * (WrapDynaBean is now serializable, although WrapDynaClass still is not)
+     */
+    public void testSerialization() {
+
+        // Create a bean and set a value
+        WrapDynaBean origBean = new WrapDynaBean(new TestBean());
+        Integer newValue = new Integer(789);
+        assertEquals("origBean default", new Integer(123), (Integer)origBean.get("intProperty"));
+        origBean.set("intProperty", newValue); 
+        assertEquals("origBean new value", newValue, (Integer)origBean.get("intProperty"));
+        
+        // Serialize/Deserialize & test value
+        WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
+        assertEquals("bean value", newValue, (Integer)bean.get("intProperty"));
+        
+    }
+
+    /**
+     * Do serialization and deserialization.
+     */
+    private Object serializeDeserialize(Object target, String text) {
+
+        // Serialize the test object
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(target);
+            oos.flush();
+            oos.close();
+        } catch (Exception e) {
+            fail(text + ": Exception during serialization: " + e);
+        }
+
+        // Deserialize the test object
+        Object result = null;
+        try {
+            ByteArrayInputStream bais =
+                new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            result = ois.readObject();
+            bais.close();
+        } catch (Exception e) {
+            fail(text + ": Exception during deserialization: " + e);
+        }
+        return result;
+
     }
 
 }

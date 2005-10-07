@@ -494,8 +494,8 @@ public class LazyDynaMapTestCase extends TestCase {
         // containing some properties
         LazyDynaMap orig = new LazyDynaMap(new TreeMap());
         orig.set("indexProp", 0, "indexVal0");
-        orig.set("indexProp", 2, "indexVal1");
-        assertEquals("Index prop size", 1, ((List)orig.get("indexProp")).size());
+        orig.set("indexProp", 1, "indexVal1");
+        assertEquals("Index prop size", 2, ((List)orig.get("indexProp")).size());
         
         LazyDynaMap newOne = (LazyDynaMap)orig.newInstance();
         Map newMap = newOne.getMap();

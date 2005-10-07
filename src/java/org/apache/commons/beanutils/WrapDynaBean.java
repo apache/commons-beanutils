@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 package org.apache.commons.beanutils;
 
-
+import java.io.Serializable;
 
 
 
@@ -44,7 +44,7 @@ package org.apache.commons.beanutils;
  * @version $Revision$ $Date$
  */
 
-public class WrapDynaBean implements DynaBean {
+public class WrapDynaBean implements DynaBean, Serializable {
 
 
     // ---------------------------------------------------------- Constructors
@@ -60,7 +60,7 @@ public class WrapDynaBean implements DynaBean {
 
         super();
         this.instance = instance;
-        this.dynaClass = WrapDynaClass.createDynaClass(instance.getClass());
+        this.dynaClass = (WrapDynaClass)getDynaClass();
 
     }
 
@@ -72,7 +72,7 @@ public class WrapDynaBean implements DynaBean {
      * The <code>DynaClass</code> "base class" that this DynaBean
      * is associated with.
      */
-    protected WrapDynaClass dynaClass = null;
+    protected transient WrapDynaClass dynaClass = null;
 
 
     /**
@@ -186,6 +186,10 @@ public class WrapDynaBean implements DynaBean {
      * properties available for this DynaBean.
      */
     public DynaClass getDynaClass() {
+
+        if (dynaClass == null) {
+            dynaClass = WrapDynaClass.createDynaClass(instance.getClass());
+        }
 
         return (this.dynaClass);
 
