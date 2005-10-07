@@ -112,7 +112,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
    /**
     * Commons Logging
     */
-    private static Log logger = LogFactory.getLog(LazyDynaBean.class);
+    private transient Log logger = LogFactory.getLog(LazyDynaBean.class);
 
     protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
@@ -693,8 +693,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return type.newInstance();
         }
         catch (Exception ex) {
-            if (logger.isWarnEnabled()) {
-                logger.warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            if (logger().isWarnEnabled()) {
+                logger().warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }
@@ -755,8 +755,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return type.newInstance();
         }
         catch (Exception ex) {
-            if (logger.isWarnEnabled()) {
-                logger.warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
+            if (logger().isWarnEnabled()) {
+                logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }
@@ -836,6 +836,16 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected Map newMap() {
         return new HashMap();
+    }
+
+    /**
+     * <p>Returns the <code>Log</code>.
+     */
+    private Log logger() {
+        if (logger == null) {
+            logger = LogFactory.getLog(LazyDynaBean.class);
+        }
+        return logger;
     }
 
 }
