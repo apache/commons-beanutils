@@ -16,9 +16,10 @@
 -->
 <project>
   <pomVersion>3</pomVersion>
-  <id>commons-beanutils</id>
+  <groupId>commons-beanutils</groupId>
+  <artifactId>commons-beanutils</artifactId>
   <name>BeanUtils</name>
-  <currentVersion>1.7.1-dev</currentVersion>
+  <currentVersion>1.7.1-SNAPSHOT</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons BeanUtils</shortDescription>
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
@@ -158,13 +159,82 @@
   </contributors>
   
   <dependencies>
+
     <dependency>
-      <id>commons-logging</id>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
       <version>1.0.3</version>
+      <url>http://jakarta.apache.org/commons/logging/</url>
     </dependency>
+
     <dependency>
-      <id>junit</id>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
       <version>3.8.1</version>
+      <url>http://www.junit.org/</url>
+      <properties>
+          <scope>test</scope>
+          <comment>
+              &lt;strong&gt;Test Only&lt;/strong&gt; - required only for
+              running the Validator unit tests.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-xdoc-plugin</artifactId>
+      <version>1.9.2</version>
+      <url>http://maven.apache.org/reference/plugins/xdoc/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.9.2 (minimum)
+              required for building the BeanUtils Site documentation.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-changelog-plugin</artifactId>
+      <version>1.8.2</version>
+      <url>http://maven.apache.org/reference/plugins/changelog/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.8.2 (minimum)
+              required for building the BeanUtils Site documentation.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-file-activity-plugin</artifactId>
+      <version>1.5.2</version>
+      <url>http://maven.apache.org/reference/plugins/file-activity/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.5.2 (minimum)
+              required for building the BeanUtils Site documentation.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>maven</groupId>
+      <artifactId>maven-developer-activity-plugin</artifactId>
+      <version>1.5.2</version>
+      <url>http://maven.apache.org/reference/plugins/developer-activity/</url>
+      <type>plugin</type>
+      <properties>
+          <comment>
+              &lt;strong&gt;Site Only&lt;/strong&gt; - v1.5.2 (minimum)
+              required for building the BeanUtils Site documentation.
+          </comment>
+      </properties>
     </dependency>
   </dependencies>
 
