@@ -205,7 +205,9 @@ public class BeanUtilsBean {
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null
+     *  <code>orig</code> argument is null or if the <code>dest</code> 
+     *  property type is different from the source type and the relevant
+     *  converter has not been registered.
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
