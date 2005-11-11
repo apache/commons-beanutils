@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -406,6 +406,27 @@ public class BeanUtilsTestCase extends TestCase {
 
             assertTrue("String array length = " + iarr.length,
                     (iarr.length == arr.length));
+
+
+            // Test property which isn't array or collection
+            arr = BeanUtils.getArrayProperty(bean, "shortProperty");
+            String shortAsString = "" + bean.getShortProperty();
+            assertEquals("Short List Test lth", 1, arr.length);
+            assertEquals("Short Test value", shortAsString, arr[0]);
+
+
+            // Test comma delimited list
+            String value1 = "ABC";
+            String value2 = "DEF";
+            String value3 = "GHK";
+            String delimitedList = value1 + "," + value2 + "," + value3;
+            bean.setStringProperty(delimitedList);
+            arr = BeanUtils.getArrayProperty(bean, "stringProperty");
+            assertEquals("Delimited List Test lth", 3, arr.length);
+            assertEquals("Delimited List Test value1", value1, arr[0]);
+            assertEquals("Delimited List Test value2", value2, arr[1]);
+            assertEquals("Delimited List Test value3", value3, arr[2]);
+
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (InvocationTargetException e) {
