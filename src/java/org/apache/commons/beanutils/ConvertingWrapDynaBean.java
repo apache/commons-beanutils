@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package org.apache.commons.beanutils;
 
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <p>Implementation of <code>DynaBean</code> that wraps a standard JavaBean
@@ -56,20 +57,22 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
-     *  of the specified name
-     * @exception NullPointerException if an attempt is made to set a
-     *  primitive property to null
+     * @exception IllegalArgumentException if there are any problems
+     *            copying the property.
      */
     public void set(String name, Object value) {
 
         try {
             BeanUtils.copyProperty(instance, name, value);
+        } catch (InvocationTargetException ite) {
+            Throwable cause = ite.getTargetException();
+            throw new IllegalArgumentException
+                    ("Error setting property '" + name +
+                              "' nested exception - " + cause);
         } catch (Throwable t) {
             throw new IllegalArgumentException
-                    ("Property '" + name + "' has no write method");
+                    ("Error setting property '" + name +
+                              "', exception - " + t);
         }
 
     }

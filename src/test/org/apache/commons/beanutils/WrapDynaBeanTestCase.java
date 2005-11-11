@@ -93,6 +93,86 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
     /**
+     * The <code>set()</code> method.
+     */
+    public void testSimpleProperties() {
+
+        // Invalid getter
+        try {
+            Object result = bean.get("invalidProperty");
+            fail("Invalid get should have thrown IllegalArgumentException");
+        } catch (IllegalArgumentException t) {
+            ; // Expected result
+        }
+
+        // Invalid setter
+        try {
+            bean.set("invalidProperty", "XYZ");
+            fail("Invalid set should have thrown IllegalArgumentException");
+        } catch (IllegalArgumentException t) {
+            ; // Expected result
+        }
+
+        // Set up initial Value
+        String testValue = "Original Value";
+        String testProperty = "stringProperty";
+        TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        instance.setStringProperty(testValue);
+        assertEquals("Check String property", testValue, instance.getStringProperty());
+
+        // Test Valid Get & Set
+        try {
+            testValue = "Some new value";
+            bean.set(testProperty, testValue);
+            assertEquals("Test Set", testValue, instance.getStringProperty());
+            assertEquals("Test Get", testValue, bean.get(testProperty));
+        } catch (IllegalArgumentException t) {
+            fail("Get threw exception: " + t);
+        }
+
+    }
+
+    /**
+     * The <code>set()</code> method.
+     */
+    public void testIndexedProperties() {
+
+        // Invalid getter
+        try {
+            Object result = bean.get("invalidProperty", 0);
+            fail("Invalid get should have thrown IllegalArgumentException");
+        } catch (IllegalArgumentException t) {
+            ; // Expected result
+        }
+
+        // Invalid setter
+        try {
+            bean.set("invalidProperty", 0, "XYZ");
+            fail("Invalid set should have thrown IllegalArgumentException");
+        } catch (IllegalArgumentException t) {
+            ; // Expected result
+        }
+
+        // Set up initial Value
+        String testValue = "Original Value";
+        String testProperty = "stringIndexed";
+        TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        instance.setStringIndexed(0, testValue);
+        assertEquals("Check String property", testValue, instance.getStringIndexed(0));
+
+        // Test Valid Get & Set
+        try {
+            testValue = "Some new value";
+            bean.set(testProperty, 0, testValue);
+            assertEquals("Test Set", testValue, instance.getStringIndexed(0));
+            assertEquals("Test Get", testValue, bean.get(testProperty, 0));
+        } catch (IllegalArgumentException t) {
+            fail("Get threw exception: " + t);
+        }
+
+    }
+
+    /**
      * The <code>contains()</code> method is not supported by the
      * <code>WrapDynaBean</code> implementation class.
      */
