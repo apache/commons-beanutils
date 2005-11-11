@@ -30,6 +30,8 @@ import java.util.Map;
 public class MappedPropertyTestBean {
 
     private Map map = new HashMap();
+    private Map myMap = new HashMap();
+
 
     // -------------------------------------------------------------- Properties
 
@@ -75,6 +77,9 @@ public class MappedPropertyTestBean {
 
     public String getInvalidGetter(String key, String other) {
         return (String) map.get(key);
+    }
+    public Map getMyMap() {
+        return myMap;
     }
 
     public void setInvalidGetter(String key, String value) {	

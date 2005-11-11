@@ -984,6 +984,14 @@ public class BeanUtilsBean {
                 }
                 type = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
+            } else if (key != null) {
+                if (descriptor.getReadMethod() == null) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Skipping read-only property");
+                    }
+                    return; // Read-only, skip this property setter
+                }
+                type = (value == null) ? Object.class : value.getClass();
             } else {
                 if (descriptor.getWriteMethod() == null) {
                     if (log.isDebugEnabled()) {

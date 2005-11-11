@@ -204,6 +204,23 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
+    /**
+     * Test Mpa getter
+     */
+    public void testMapGetter() {
+        MappedPropertyTestBean bean = new MappedPropertyTestBean();
+        Class clazz = MappedPropertyTestBean.class;
+        String property = "myMap";
+        try {
+            String testValue = "test value";
+            String testKey   = "testKey";
+            BeanUtils.setProperty(bean, "myMap("+testKey+")", "test value");
+            assertEquals("Map getter", testValue, bean.getMyMap().get(testKey));
+        } catch (Exception ex) {
+            fail("Test set mapped property failed: " + ex);
+        }
+    }
+
 
     /**
      * Test property with any two args
