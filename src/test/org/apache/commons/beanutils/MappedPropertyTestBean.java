@@ -78,4 +78,11 @@ public class MappedPropertyTestBean {
     public void setInvalidSetter(String key, String value, String other) {	
     }
 
+    public Long getDifferentTypes(String key) {
+        return new Long(((Number)map.get(key)).longValue());
+    }
+    public void setDifferentTypes(String key, Integer value) {	
+        map.put(key, value);
+    }
+
 }

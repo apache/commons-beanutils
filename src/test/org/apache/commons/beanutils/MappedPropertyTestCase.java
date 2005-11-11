@@ -169,6 +169,27 @@ public class MappedPropertyTestCase extends TestCase {
     }
 
     /**
+     * Test Mapped Property - Different Types
+     *
+     * Expect to find the getDifferentTypes() method, but not
+     * the setDifferentTypes() method because setDifferentTypes()
+     * sets and Integer, while getDifferentTypes() returns a Long.
+     */
+    public void testDifferentTypes() {
+        String property = "differentTypes";
+        Class clazz = MappedPropertyTestBean.class;
+        try {
+            MappedPropertyDescriptor desc 
+                = new MappedPropertyDescriptor(property, clazz);
+            assertNotNull("Getter is missing", desc.getMappedReadMethod());
+            assertNull("Setter is found", desc.getMappedWriteMethod());
+        } catch (Exception ex) {
+            fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
+        }
+    }
+
+
+    /**
      * Test property with any two args
      */
     public void testAnyArgsProperty() {
