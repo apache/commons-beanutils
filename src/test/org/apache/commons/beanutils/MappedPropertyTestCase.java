@@ -90,6 +90,22 @@ public class MappedPropertyTestCase extends TestCase {
     }
 
     /**
+     * Test boolean "is" method name
+     */
+    public void testBooleanMapped() {
+        String property = "mappedBoolean";
+        Class clazz = MappedPropertyTestBean.class;
+        try {
+            MappedPropertyDescriptor desc 
+                = new MappedPropertyDescriptor(property, clazz);
+            assertNotNull("Getter is missing", desc.getMappedReadMethod());
+            assertNotNull("Setter is missing", desc.getMappedWriteMethod());
+        } catch (Exception ex) {
+            fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
+        }
+    }
+
+    /**
      * Test invalid method name
      */
     public void testNotFound() {

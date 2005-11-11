@@ -100,8 +100,13 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         
         // Look for mapped read method and matching write method
         try {
-            mappedReadMethod = getMethod(beanClass, "get" + base,
-                    stringClassArray);
+            try {
+                mappedReadMethod = getMethod(beanClass, "get" + base,
+                        stringClassArray);
+            } catch (IntrospectionException e) {
+                mappedReadMethod = getMethod(beanClass, "is" + base,
+                        stringClassArray);
+            }
             Class params[] = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
         } catch (IntrospectionException e) {

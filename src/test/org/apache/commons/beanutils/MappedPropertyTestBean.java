@@ -1,5 +1,5 @@
 /*
- * Copyright 2001-2004 The Apache Software Foundation.
+ * Copyright 2001-2005 The Apache Software Foundation.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,14 @@ public class MappedPropertyTestBean {
 
     public void setMapproperty(String key, String value) {	
         map.put(key, value);
+    }
+
+    public boolean isMappedBoolean(String key) {
+        return ((Boolean)map.get(key)).booleanValue();
+    }
+
+    public void setMappedBoolean(String key, boolean value) {	
+        map.put(key, (value ? Boolean.TRUE : Boolean.FALSE));
     }
 
     protected String getProtectedMapped(String key) {
