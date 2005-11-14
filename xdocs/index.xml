@@ -89,6 +89,9 @@ Bean Collections has an additional dependency on
 
 <section name="Documentation">
 
+<p>The <a href="apidocs/org/apache/commons/beanutils/package-summary.html#package_description">
+User Guide</a> is part of the <i>package</i> JavaDocs.</p>
+
 <p>The <a href="http://jakarta.apache.org/commons/beanutils/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
 included in this release.</p>
@@ -165,6 +168,22 @@ commons collections 3.
     </subsection>
 </section>
 
+
+<section name="Support">
+    <p>
+    The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
+    The user list is suitable for most library usage queries.
+    The dev list is intended for the development discussion.
+    Please remember that the lists are shared between all commons components,
+    so prefix your email by [beanutils].
+    </p>
+
+    <p>
+    Issues may be reported via <a href="issue-tracking.html">ASF Bugzilla</a>.
+    Please remember that Bugzilla is shared between all commons components,
+    so prefix your issue by [beanutils].
+    </p>
+    </section>
 
 
 </body>
