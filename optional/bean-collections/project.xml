@@ -17,7 +17,7 @@
 <project>
   <extend>../../project.xml</extend>
   <pomVersion>3</pomVersion>
-  <id>commons-beanutils-bean-collections</id>
+  <artifactId>commons-beanutils-bean-collections</artifactId>
   <name>BeanUtils Bean Collections</name>
   <currentVersion>1.7.1-SNAPSHOT</currentVersion>
   <inceptionYear>2000</inceptionYear>
@@ -28,15 +28,18 @@
       
   <dependencies>
     <dependency>
-      <id>commons-logging</id>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
       <version>1.0.3</version>
     </dependency>
     <dependency>
-      <id>commons-collections</id>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
       <version>3.0</version>
     </dependency>
     <dependency>
-      <id>commons-beanutils</id>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
       <version>1.6</version>
     </dependency>
     <!-- Test Only -->
