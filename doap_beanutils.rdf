@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://usefulinc.com/ns/doap#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:asfext="http://projects.apache.org/ns/asfext#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:doap="http://usefulinc.com/ns/doap#" xml:lang="en">
+  <Project rdf:about="http://jakarta.apache.org/commons/beanutils/index.html">
+    <name>Apache Jakarta Commons BeanUtils</name>
+    <homepage rdf:resource="http://jakarta.apache.org/commons/beanutils/index.html"/>
+    <programming-language>Java</programming-language>
+    <category rdf:resource="http://projects.apache.org/category/library"/>
+    <license rdf:resource="http://usefulinc.com/doap/licenses/asl20"/>
+    <bug-database rdf:resource="http://issues.apache.org/bugzilla/buglist.cgi?product=Commons&amp;component=beanutils"/>
+    <download-page rdf:resource="http://jakarta.apache.org/site/downloads/downloads_commons-beanutils.cgi"/>
+    <asfext:pmc rdf:resource="Jakarta"/>
+    <shortdesc xml:lang="en">Commons BeanUtils</shortdesc>
+    <description xml:lang="en">BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
+    <repository>
+      <SVNRepository>
+        <browse rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils/trunk"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils"/>
+      </SVNRepository>
+    </repository>
+    <release>
+      <revision>
+        <name>??</name>
+        <created>yyyy-mm-dd</created>
+        <version>??</version>
+      </revision>
+    </release>
+    <mailing-list rdf:resource="http://jakarta.apache.org/site/mail2.html#Commons"/>
+  </Project>
+</rdf:RDF>
