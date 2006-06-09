@@ -1,7 +1,8 @@
 Extension-Name: org.apache.commons.beanutils
 Specification-Title: Jakarta Commons Beanutils
 Specification-Vendor: Apache Software Foundation
-Specification-Version: 1.6
+Specification-Version: @version@
 Implementation-Title: org.apache.commons.beanutils
 Implementation-Vendor: Apache Software Foundation
-Implementation-Version: 1.6
+Implementation-Vendor-Id: org.apache
+Implementation-Version: @version@
