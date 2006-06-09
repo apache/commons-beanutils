@@ -58,7 +58,7 @@ import org.apache.commons.logging.LogFactory;
  *       It will also instantiate a new <code>ArrayList</code> and automatically <i>grow</i>
  *       the <code>List</code> so that it is big enough to accomodate the index being set.
  *       <code>ArrayList</code> is the default indexed property that LazyDynaBean uses but
- *       this can be easily changed by overriding the <code>newIndexedProperty(name)</code>
+ *       this can be easily changed by overriding the <code>defaultIndexedProperty(name)</code>
  *       method.</p>
  *
  *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
@@ -83,7 +83,7 @@ import org.apache.commons.logging.LogFactory;
  *       instantiate a new <code>HashMap</code> in the DynaBean when the
  *       <code>set(name, key, value)</code> method is called. <code>HashMap</code> is the default
  *       mapped property that LazyDynaBean uses but this can be easily changed by overriding
- *       the <code>newMappedProperty(name)</code> method.</p>
+ *       the <code>defaultMappedProperty(name)</code> method.</p>
  *
  *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
  *     <code>myBean.set("myMappedProperty", "myKey", "myValue");</code></br>
