@@ -23,7 +23,8 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Issue tracking">
 <p>
-  Commons BeanUtils uses <a href="http://issues.apache.org/jira/browse/BEANUTILS">ASF Jira</a> for tracking issues.
+  Commons BeanUtils uses <a href="http://issues.apache.org/jira/">ASF Jira</a> for for tracking issues.
+  See the <a href="http://issues.apache.org/jira/browse/BEANUTILS">BeanUtils's Jira project page</a>.
 </p>
 <p>
   To use Jira you may need to <a href="http://issues.apache.org/jira/secure/Signup!default.jspa">create an account</a>
@@ -39,7 +40,9 @@ limitations under the License.
   If you find your issue listed then please add a comment with your details.</li>
   <li><a href="http://mail-archives.apache.org/mod_mbox/jakarta-commons-dev/">Search the mailing list archive</a>.
   You may find your issue or idea has already been discussed.</li>
-  <li><a href="http://issues.apache.org/jira/browse/BEANUTILS">Submit a bug report or enhancement request</a>.</li>
+  <li>Decide if your issue is a bug or an enhancement.</li>
+  <li>Submit either a <a href="http://issues.apache.org/jira/secure/CreateIssueDetails!init.jspa?pid=12310460&amp;issuetype=1&amp;priority=4&amp;assignee=-1">bug report</a>
+  or <a href="http://issues.apache.org/jira/secure/CreateIssueDetails!init.jspa?pid=12310460&amp;issuetype=4&amp;priority=4&amp;assignee=-1">enhancement request</a>.</li>
   </ol>
 </p>
 <p>

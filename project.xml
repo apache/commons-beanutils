@@ -35,11 +35,11 @@
   </organization>
   
   <licenses>
-	<license>
-    	<name>The Apache Software License, Version 2.0</name>
-    	<url>/LICENSE.txt</url>
-    	<distribution>repo</distribution>
-	</license>
+      <license>
+          <name>The Apache Software License, Version 2.0</name>
+          <url>/LICENSE.txt</url>
+          <distribution>repo</distribution>
+      </license>
   </licenses>
   
   <gumpRepositoryId>jakarta</gumpRepositoryId>
@@ -50,7 +50,7 @@
   
   <repository>
     <connection>scm:svn:http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</connection>
-    <url>http://svn.apache.org/repos/asf/jakarta/commons/proper/${pom.artifactId.substring(8)}/trunk</url>
+    <url>http://svn.apache.org/viewvc</url>
   </repository>
   
   <mailingLists>
@@ -239,38 +239,46 @@
   </dependencies>
 
   <build>
-    	<nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
-    	<sourceDirectory>src/java</sourceDirectory>
-    	<unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-    	<integrationUnitTestSourceDirectory/>
-    	<aspectSourceDirectory/>
+     <nagEmailAddress>commons-dev@jakarta.apache.org</nagEmailAddress>
+     <sourceDirectory>src/java</sourceDirectory>
+     <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+     <integrationUnitTestSourceDirectory/>
+     <aspectSourceDirectory/>
+     <resources>
+         <resource>
+             <directory>${basedir}</directory>
+             <targetPath>META-INF</targetPath>
+             <includes>
+                 <include>NOTICE.txt</include>
+             </includes>
+         </resource>
+     </resources>
 
-    	<!-- Unit test classes -->
-    	<unitTest>
-            <includes>
-                <include>**/*TestCase.java</include>
-            </includes>
-            <excludes>
-                <!-- This test case is known to fail, and there isn't any proposed fix
-                  -  so we will just exclude it until someone comes up with a solution.
-		  -->
-                <exclude>**/*MemoryTestCase.java</exclude>
-            </excludes>
-            <resources>
-                <resource>
-                    <directory>${pom.build.unitTestSourceDirectory}</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                    </includes>
-                </resource>
-            </resources>
-   		</unitTest>
-
-  	</build>
+     <!-- Unit test classes -->
+     <unitTest>
+         <includes>
+             <include>**/*TestCase.java</include>
+         </includes>
+         <excludes>
+             <!-- This test case is known to fail, and there isn't any proposed fix
+               -  so we will just exclude it until someone comes up with a solution.
+             -->
+             <exclude>**/*MemoryTestCase.java</exclude>
+         </excludes>
+         <resources>
+             <resource>
+                 <directory>${pom.build.unitTestSourceDirectory}</directory>
+                 <includes>
+                     <include>**/*.xml</include>
+                 </includes>
+             </resource>
+         </resources>
+     </unitTest>
+  </build>
 
   <reports>
-  	<report>maven-changelog-plugin</report>
-   	<report>maven-changes-plugin</report>
+    <report>maven-changelog-plugin</report>
+    <report>maven-changes-plugin</report>
     <report>maven-developer-activity-plugin</report>
     <report>maven-file-activity-plugin</report>
     <report>maven-javadoc-plugin</report>

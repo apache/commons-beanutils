@@ -14,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<!DOCTYPE org.apache.commons.menus SYSTEM '../../commons-build/menus/menus.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM 'http://jakarta.apache.org/commons/build/maven-build.dtd'>
 <project name="BeanUtils">
 
   <title>BeanUtils</title>
@@ -24,20 +24,15 @@
 
   <body>
     <links>
-      <item name="Jakarta"                   
-            href="http://jakarta.apache.org"/>
-      <item name="Jakarta Commons"                   
-            href="http://jakarta.apache.org/commons/"/>
+      <item name="Apache"  href="http://www.apache.org"/>
+      <item name="Jakarta" href="http://jakarta.apache.org"/>
+      <item name="Commons" href="http://jakarta.apache.org/commons/"/>
     </links>
 
-    <menu name="Commons BeanUtils">
+    <menu name="BeanUtils">
       <item name="Overview" href="/index.html"/>   
-      <item name="Mailing lists" href="/mail-lists.html"/>
-      <item name="Team" href="/team-list.html"/>
-      <!--item name="Tasks" href="/tasks.html"/-->
-      <item name="Source Repository" href="cvs-usage.html"/>
+      <item name="Download"                href="/downloads.html"/>
       <item name="User Guide (SVN latest)" href="apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
-      <item name="Javadoc (SVN latest)" href="apidocs/index.html"/>
       <item name='1.7.0 Release'>
             <item   name='User Guide'
                     href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
@@ -56,13 +51,23 @@
             <item   name='Release Notes'
                     href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
       </item>
+      <item name='Modules'>
+            <item name="Bean Collections" href="bean-collections/index.html"/>
+      </item>
+      <item name="Wiki" href="http://wiki.apache.org/jakarta-commons/BeanUtils"/>
     </menu>
     
-    <menu name='Modules'>
-        <item name="Bean Collections" href="bean-collections/index.html"/>
+    <menu name="Development">
+      <item name="History"                 href="/changes-report.html"/>
+      <item name="Building"                href="/building.html"/>
+      <item name="Mailing Lists"           href="/mail-lists.html"/>
+      <item name="Issue Tracking"          href="/issue-tracking.html"/>
+      <item name="Team"                    href="/team-list.html"/>
+      <item name="Source Repository"       href="/cvs-usage.html"/>
+      <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/chain/apidocs/"/>
     </menu>
-    
-    &common-menus;
+
+    &commons;
 
   </body>
 </project>
