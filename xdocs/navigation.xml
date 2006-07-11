@@ -64,7 +64,7 @@
       <item name="Issue Tracking"          href="/issue-tracking.html"/>
       <item name="Team"                    href="/team-list.html"/>
       <item name="Source Repository"       href="/cvs-usage.html"/>
-      <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/chain/apidocs/"/>
+      <item name="Javadoc (latest)"        href="http://jakarta.apache.org/commons/beanutils/apidocs/"/>
     </menu>
 
     &commons;
