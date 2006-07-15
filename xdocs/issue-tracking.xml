@@ -23,11 +23,11 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Issue tracking">
 <p>
-  Commons BeanUtils uses <a href="http://issues.apache.org/jira/">ASF Jira</a> for for tracking issues.
-  See the <a href="http://issues.apache.org/jira/browse/BEANUTILS">BeanUtils's Jira project page</a>.
+  Commons BeanUtils uses <a href="http://issues.apache.org/jira/">ASF JIRA</a> for for tracking issues.
+  See the <a href="http://issues.apache.org/jira/browse/BEANUTILS">BeanUtils JIRA project page</a>.
 </p>
 <p>
-  To use Jira you may need to <a href="http://issues.apache.org/jira/secure/Signup!default.jspa">create an account</a>
+  To use JIRA you may need to <a href="http://issues.apache.org/jira/secure/Signup!default.jspa">create an account</a>
   (if you have previously created/updated Commons issues using Bugzilla an account will have been automatically
   created and you can use the <a href="http://issues.apache.org/jira/secure/ForgotPassword!default.jspa">Forgot Password</a>
   page to get a new password).
