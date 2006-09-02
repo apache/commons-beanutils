@@ -20,6 +20,9 @@ package org.apache.commons.beanutils.converters;
 
 
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
@@ -107,6 +110,14 @@ public final class SqlTimeConverter implements Converter {
 
         if (value instanceof Time) {
             return (value);
+        }
+
+        if (value instanceof Date) {
+            return new Time(((Date)value).getTime());
+        }
+
+        if (value instanceof Calendar) {
+            return new Time(((Calendar)value).getTime().getTime());
         }
 
         try {
