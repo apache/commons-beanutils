@@ -1021,7 +1021,7 @@ public class BeanUtilsBean {
                 newValue = value;
             }
         } else if (type.isArray()) {         // Indexed value into array
-            if (value instanceof String) {
+            if (value instanceof String || value == null) {
                 newValue = getConvertUtils().convert((String) value,
                                                 type.getComponentType());
             } else if (value instanceof String[]) {
