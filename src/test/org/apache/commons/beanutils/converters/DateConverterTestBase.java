@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils.converters;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 import org.apache.commons.beanutils.Converter;
@@ -78,6 +79,9 @@ public abstract class DateConverterTestBase extends TestCase {
             new java.sql.Time(now),
             new java.sql.Timestamp(now)
         };
+        
+        // Initialize calendar also with same ms to avoid a failing test in a new time slice
+        ((GregorianCalendar)date[1]).setTimeInMillis(now);
 
         for (int i = 0; i < date.length; i++) {
             Object val = makeConverter().convert(getExpectedType(), date[i]);
