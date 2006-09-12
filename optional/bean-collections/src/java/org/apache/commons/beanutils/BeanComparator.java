@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.io.Serializable;
 import java.util.Comparator;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -152,9 +153,15 @@ public class BeanComparator implements Comparator, Serializable {
             Object value2 = PropertyUtils.getProperty( o2, property );
             return comparator.compare( value1, value2 );
         }
-        catch ( Exception e ) {
-            throw new ClassCastException( e.toString() );
+        catch ( IllegalAccessException iae ) {
+            throw new RuntimeException( "IllegalAccessException: " + iae.toString() );
+        } 
+        catch ( InvocationTargetException ite ) {
+            throw new RuntimeException( "InvocationTargetException: " + ite.toString() );
         }
+        catch ( NoSuchMethodException nsme ) {
+            throw new RuntimeException( "NoSuchMethodException: " + nsme.toString() );
+        } 
     }
     
     /**
