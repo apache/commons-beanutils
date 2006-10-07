@@ -167,7 +167,11 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *  restricted, so no new properties can be added
      */
     public void add(String name, Class type) {
-        add(new DynaProperty(name, type));
+        if (type == null) {
+            add(name);
+        } else {
+            add(new DynaProperty(name, type));
+        }
     }
 
     /**
