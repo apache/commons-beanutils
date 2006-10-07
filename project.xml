@@ -20,7 +20,7 @@
   <groupId>org.apache.commons</groupId>
   <artifactId>commons-beanutils</artifactId>
   <name>BeanUtils</name>
-  <currentVersion>1.7.1-SNAPSHOT</currentVersion>
+  <currentVersion>1.8.0-SNAPSHOT</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons BeanUtils</shortDescription>
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
