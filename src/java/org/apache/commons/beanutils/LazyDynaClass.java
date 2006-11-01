@@ -126,6 +126,10 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Should this DynaClass return a <code>null</code> from
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
+     *
+     * @return <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * <code>false</code> if a new {@link DynaProperty} should be created.
      */
     public boolean isReturnNull() {
         return returnNull;
@@ -135,6 +139,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Set whether this DynaClass should return a <code>null</code> from
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
+     * @param returnNull <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * <code>false</code> if a new {@link DynaProperty} should be created.
      */
     public void setReturnNull(boolean returnNull) {
         this.returnNull = returnNull;
@@ -327,6 +334,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * return a DynaProperty if it doesn't exist (depending on the
      * <code>returnNull</code> indicator).</p>
      *
+     * @param name The name of the property to check
+     * @return <code>true<code> if there is a property of the
+     * specified name, otherwise <code>false</code>
      * @exception IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(String name) {

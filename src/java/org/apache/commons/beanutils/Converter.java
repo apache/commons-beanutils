@@ -47,6 +47,7 @@ public interface Converter {
      *
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
+     * @return The converted value
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully

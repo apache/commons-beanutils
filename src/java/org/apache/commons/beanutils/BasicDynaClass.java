@@ -226,6 +226,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * Return the Class object we will use to create new instances in the
      * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
      * implement the <code>DynaBean</code> interface.
+     *
+     * @return The class of the {@link DynaBean}
      */
     public Class getDynaBeanClass() {
 

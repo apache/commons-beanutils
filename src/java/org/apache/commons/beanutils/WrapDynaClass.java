@@ -217,6 +217,7 @@ public class WrapDynaClass implements DynaClass {
      * otherwise return <code>null</code>.
      *
      * @param name Name of the property to be retrieved
+     * @return The descriptor for the specified property
      */
     public PropertyDescriptor getPropertyDescriptor(String name) {
 
@@ -245,6 +246,7 @@ public class WrapDynaClass implements DynaClass {
      * instance for the specified bean class.
      *
      * @param beanClass Bean class for which a WrapDynaClass is requested
+     * @return A new <i>Wrap</i> {@link DynaClass}
      */
     public static WrapDynaClass createDynaClass(Class beanClass) {
 

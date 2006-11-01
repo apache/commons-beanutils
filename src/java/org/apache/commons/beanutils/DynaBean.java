@@ -40,6 +40,8 @@ public interface DynaBean {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
+     * @return <code>true<code> if the mapped property contains a value for
+     * the specified key, otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -51,6 +53,7 @@ public interface DynaBean {
      * Return the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
+     * @return The property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -63,6 +66,7 @@ public interface DynaBean {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
+     * @return The indexed property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -82,6 +86,7 @@ public interface DynaBean {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
+     * @return The mapped property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -94,6 +99,8 @@ public interface DynaBean {
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
+     *
+     * @return The associated DynaClass
      */
     public DynaClass getDynaClass();
 

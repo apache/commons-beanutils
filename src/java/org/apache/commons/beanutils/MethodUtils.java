@@ -102,7 +102,7 @@ public class MethodUtils {
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
      * <p>The behaviour of this method is less deterministic 
-     * than {@link #invokeExactMethod}. 
+     * than <code>invokeExactMethod()</code>.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatable parameters.</p>
      *
@@ -117,6 +117,7 @@ public class MethodUtils {
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param arg use this argument
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -158,6 +159,7 @@ public class MethodUtils {
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -205,6 +207,7 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
      * @param parameterTypes match these parameters - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -251,6 +254,7 @@ public class MethodUtils {
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param arg use this argument
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -278,11 +282,12 @@ public class MethodUtils {
      * types.</p>
      *
      * <p> This uses reflection to invoke the method obtained from a call to
-     * {@link #getAccessibleMethod}.</p>
+     * <code>getAccessibleMethod()</code>.</p>
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -316,12 +321,13 @@ public class MethodUtils {
      * types given.</p>
      *
      * <p>This uses reflection to invoke the method obtained from a call to
-     * {@link #getAccessibleMethod}.</p>
+     * <code>getAccessibleMethod()</code>.</p>
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
      * @param parameterTypes match these parameters - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -369,6 +375,7 @@ public class MethodUtils {
      * @param clazz get method from this class
      * @param methodName get method with this name
      * @param parameterType taking this type of parameter
+     * @return The accessible method
      */
     public static Method getAccessibleMethod(
             Class clazz,
@@ -391,6 +398,7 @@ public class MethodUtils {
      * @param clazz get method from this class
      * @param methodName get method with this name
      * @param parameterTypes with these parameters types
+     * @return The accessible method
      */
     public static Method getAccessibleMethod(
             Class clazz,
@@ -422,6 +430,7 @@ public class MethodUtils {
      * can be found, return <code>null</code>.</p>
      *
      * @param method The method that we wish to call
+     * @return The accessible method
      */
     public static Method getAccessibleMethod(Method method) {
 
@@ -537,6 +546,7 @@ public class MethodUtils {
      * @param clazz find method in this class
      * @param methodName find method with this name
      * @param parameterTypes find method with compatible parameters 
+     * @return The accessible method
      */
     public static Method getMatchingAccessibleMethod(
                                                 Class clazz,
@@ -702,9 +712,9 @@ public class MethodUtils {
     /**
      * Returns the sum of the object transformation cost for each class in the source
      * argument list.
-     * @param srcArgs The list of arguments to transform
-     * @param destArgs 
-     * @return
+     * @param srcArgs The source arguments
+     * @param destArgs The destination arguments
+     * @return The total transformation cost
      */
     private static float getTotalTransformationCost(Class[] srcArgs, Class[] destArgs) {
 
@@ -723,9 +733,9 @@ public class MethodUtils {
      * Gets the number of steps required needed to turn the source class into the 
      * destination class. This represents the number of steps in the object hierarchy 
      * graph.
-     * @param srcClass
-     * @param destClass
-     * @return
+     * @param srcClass The source class
+     * @param destClass The destination class
+     * @return The cost of transforming an object
      */
     private static float getObjectTransformationCost(Class srcClass, Class destClass) {
         float cost = 0.0f;

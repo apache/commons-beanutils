@@ -157,6 +157,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * each row of the wrapped <code>ResultSet</code>, in "forward" order.
      * Unless the underlying result set supports scrolling, this method
      * should be called only once.</p>
+     * @return An <code>Iterator</code> of {@link DynaBean} instances
      */
     public Iterator iterator() {
 

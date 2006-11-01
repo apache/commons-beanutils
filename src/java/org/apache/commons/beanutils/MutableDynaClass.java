@@ -90,6 +90,9 @@ public interface MutableDynaClass extends DynaClass {
      * Is this DynaClass currently restricted, if so, no changes to the
      * existing registration of property names, data types, readability, or
      * writeability are allowed.
+     *
+     * @return <code>true</code> if this Mutable {@link DynaClass} is restricted,
+     * otherwise <code>false</code>
      */
     public boolean isRestricted();
 

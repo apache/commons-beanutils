@@ -67,6 +67,11 @@ public class ConstructorUtils {
      * @param arg the actual argument
      * @return new instance of <code>klazz</code>
      *
+     * @throws NoSuchMethodException If the constructor cannot be found
+     * @throws IllegalAccessException If an error occurs accessing the constructor
+     * @throws InvocationTargetException If an error occurs invoking the constructor
+     * @throws InstantiationException If an error occurs instantiating the class
+     *
      * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static Object invokeConstructor(Class klass, Object arg)
@@ -91,6 +96,11 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param args actual argument array
      * @return new instance of <code>klazz</code>
+     *
+     * @throws NoSuchMethodException If the constructor cannot be found
+     * @throws IllegalAccessException If an error occurs accessing the constructor
+     * @throws InvocationTargetException If an error occurs invoking the constructor
+     * @throws InstantiationException If an error occurs instantiating the class
      *
      * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
@@ -168,6 +178,11 @@ public class ConstructorUtils {
      * @param arg the actual argument
      * @return new instance of <code>klazz</code>
      *
+     * @throws NoSuchMethodException If the constructor cannot be found
+     * @throws IllegalAccessException If an error occurs accessing the constructor
+     * @throws InvocationTargetException If an error occurs invoking the constructor
+     * @throws InstantiationException If an error occurs instantiating the class
+     *
      * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static Object invokeExactConstructor(Class klass, Object arg)
@@ -192,6 +207,11 @@ public class ConstructorUtils {
      * @param klass the class to be constructed.
      * @param args actual argument array
      * @return new instance of <code>klazz</code>
+     *
+     * @throws NoSuchMethodException If the constructor cannot be found
+     * @throws IllegalAccessException If an error occurs accessing the constructor
+     * @throws InvocationTargetException If an error occurs invoking the constructor
+     * @throws InstantiationException If an error occurs instantiating the class
      *
      * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
@@ -261,6 +281,7 @@ public class ConstructorUtils {
     /**
      * Returns a constructor with single argument.
      * @param klass the class to be constructed
+     * @param parameterType The constructor parameter type
      * @return null if matching accessible constructor can not be found.
      * @see Class#getConstructor
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)

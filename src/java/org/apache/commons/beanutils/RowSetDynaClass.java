@@ -168,6 +168,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
+     * @param limit Maximum limit for the <code>List</code> of {@link DynaBean}
      *
      * @exception NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
@@ -197,6 +198,8 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * of these {@link DynaBean}s.  However, it is the application's
      * responsibility to persist any such changes back to the database,
      * if it so desires.</p>
+     *
+     * @return A <code>List</code> of {@link DynaBean} instances
      */
     public List getRows() {
 
@@ -237,6 +240,8 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     /**
      * <p>Create and return a new {@link DynaBean} instance to be used for
      * representing a row in the underlying result set.</p>
+     *
+     * @return A new <code>DynaBean</code> instance
      */
     protected DynaBean createDynaBean() {
 

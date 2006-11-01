@@ -105,6 +105,9 @@ public class ContextClassLoaderLocal {
     private boolean globalValueInitialized = false;
     private Object globalValue;
 
+    /**
+     * Construct a context classloader instance
+     */
     public ContextClassLoaderLocal() {
         super();
     }
@@ -205,6 +208,7 @@ public class ContextClassLoaderLocal {
     
     /** 
      * Unsets the value associated with the given classloader
+     * @param classLoader The classloader to <i>unset</i> for
      */
     public synchronized void unset(ClassLoader classLoader) {    
         valueByClassLoader.remove(classLoader);

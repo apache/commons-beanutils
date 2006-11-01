@@ -22,8 +22,6 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 
 
 /**
@@ -237,6 +235,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * Sets the method that should be used to read one of the property value.
      *
      * @param mappedGetter The mapped getter method.
+     * @throws IntrospectionException If an error occurs finding the
+     * mapped property
      */
     public void setMappedReadMethod(Method mappedGetter)
             throws IntrospectionException {
@@ -258,6 +258,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * Sets the method that should be used to write the property value.
      *
      * @param mappedSetter The mapped setter method.
+     * @throws IntrospectionException If an error occurs finding the
+     * mapped property
      */
     public void setMappedWriteMethod(Method mappedSetter)
             throws IntrospectionException {

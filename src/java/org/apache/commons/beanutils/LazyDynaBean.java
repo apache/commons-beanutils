@@ -115,14 +115,23 @@ public class LazyDynaBean implements DynaBean, Serializable {
     */
     private transient Log logger = LogFactory.getLog(LazyDynaBean.class);
 
+    /** BigInteger Zero */
     protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
+    /** BigDecimal Zero */
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
+    /** Character Space */
     protected static final Character  Character_SPACE = new Character(' ');
+    /** Byte Zero */
     protected static final Byte       Byte_ZERO       = new Byte((byte)0);
+    /** Short Zero */
     protected static final Short      Short_ZERO      = new Short((short)0);
+    /** Integer Zero */
     protected static final Integer    Integer_ZERO    = new Integer(0);
+    /** Long Zero */
     protected static final Long       Long_ZERO       = new Long(0);
+    /** Float Zero */
     protected static final Float      Float_ZERO      = new Float((byte)0);
+    /** Double Zero */
     protected static final Double     Double_ZERO     = new Double((byte)0);
 
     /**
@@ -180,6 +189,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Return the Map backing this <code>DynaBean</code>
+     * @return the underlying Map
      */
     public Map getMap() {
         return values;
@@ -189,6 +199,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * <p>Return the size of an indexed or mapped property.</p>
      *
      * @param name Name of the property
+     * @return The indexed or mapped property size
      * @exception IllegalArgumentException if no property name is specified
      */
     public int size(String name) {
@@ -550,6 +561,14 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     // ------------------- protected Methods ----------------------------------
 
+    /**
+     * Grow the size of an indexed property
+     * @param name The name of the property
+     * @param indexedProperty The current property value
+     * @param index The indexed value to grow the property to (i.e. one less than
+     * the required size)
+     * @return The new property value (grown to the appropriate size)
+     */
     protected Object growIndexedProperty(String name, Object indexedProperty, int index) {
 
         // Grow a List to the appropriate size
@@ -585,6 +604,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Create a new Instance of a Property
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createProperty(String name, Class type) {
 
@@ -615,6 +637,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Create a new Instance of an 'Indexed' Property
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createIndexedProperty(String name, Class type) {
 
@@ -654,6 +679,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Create a new Instance of a 'Mapped' Property
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createMappedProperty(String name, Class type) {
 
@@ -687,7 +715,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a 'Mapped' Property
+     * Create a new Instance of a 'DynaBean' Property.
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createDynaBeanProperty(String name, Class type) {
         try {
@@ -702,7 +733,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a 'Primitive' Property
+     * Create a new Instance of a 'Primitive' Property.
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createPrimitiveProperty(String name, Class type) {
 
@@ -730,6 +764,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Create a new Instance of a <code>java.lang.Number</code> Property.
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createNumberProperty(String name, Class type) {
 
@@ -739,6 +776,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Create a new Instance of other Property types
+     * @param name The name of the property
+     * @param type The class of the property
+     * @return The new value
      */
     protected Object createOtherProperty(String name, Class type) {
 
@@ -771,6 +811,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *    or <code>Array</code> implementation is required for 'indexed' properties.</p>
      *
      * @param name Name of the 'indexed property.
+     * @return The default value for an indexed property (java.util.ArrayList)
      */
     protected Object defaultIndexedProperty(String name) {
         return new ArrayList();
@@ -784,6 +825,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *    implementation is required for 'mapped' properties.</p>
      *
      * @param name Name of the 'mapped property.
+     * @return The default value for a mapped property (java.util.HashMap)
      */
     protected Map defaultMappedProperty(String name) {
         return new HashMap();
@@ -791,6 +833,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * Indicates if there is a property with the specified name.
+     * @param name The name of the property to check
+     * @return <code>true<code> if there is a property of the
+     * specified name, otherwise <code>false</code>
      */
     protected boolean isDynaProperty(String name) {
 
@@ -813,6 +858,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param dest Destination class
      * @param source Source class
+     * @return <code>true<code> if the source class is assignable to the
+     * destination class, otherwise <code>false</code>
      */
     protected boolean isAssignable(Class dest, Class source) {
 
@@ -834,6 +881,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * <p>Creates a new instance of the <code>Map</code>.</p>
+     * @return a new Map instance
      */
     protected Map newMap() {
         return new HashMap();

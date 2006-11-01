@@ -70,7 +70,9 @@ public class BeanUtilsBean {
     /** 
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container. 
+     * This mechanism provides isolation for web apps deployed in the same container.
+     *
+     * @return The (pseudo-singleton) BeanUtils bean instance
      */
     public synchronized static BeanUtilsBean getInstance() {
         return (BeanUtilsBean) beansByClassLoader.get();
@@ -79,7 +81,9 @@ public class BeanUtilsBean {
     /** 
      * Sets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container. 
+     * This mechanism provides isolation for web apps deployed in the same container.
+     * 
+     * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
     public synchronized static void setInstance(BeanUtilsBean newInstance) {
         beansByClassLoader.set(newInstance);
@@ -137,6 +141,7 @@ public class BeanUtilsBean {
      * </p>
      *
      * @param bean Bean to be cloned
+     * @return the cloned bean
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -483,6 +488,7 @@ public class BeanUtilsBean {
      * names (for example, <code>parametersMap</code>).
      * </p>
      * @param bean Bean whose properties are to be extracted
+     * @return Map of property descriptors
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -532,6 +538,7 @@ public class BeanUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
+     * @return The array property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -598,6 +605,7 @@ public class BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -624,6 +632,7 @@ public class BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -653,6 +662,7 @@ public class BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname(index)</code> of the property value
      *  to be extracted
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -679,6 +689,7 @@ public class BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param key Lookup key of the property value to be extracted
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -704,6 +715,7 @@ public class BeanUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
+     * @return The nested property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -731,6 +743,7 @@ public class BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
      *  to be extracted
+     * @return The property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -754,6 +767,7 @@ public class BeanUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
+     * @return The property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -1094,6 +1108,8 @@ public class BeanUtilsBean {
     
     /** 
      * Gets the <code>ConvertUtilsBean</code> instance used to perform the conversions.
+     *
+     * @return The ConvertUtils bean instance
      */
     public ConvertUtilsBean getConvertUtils() {
         return convertUtilsBean;
@@ -1101,6 +1117,8 @@ public class BeanUtilsBean {
     
     /**
      * Gets the <code>PropertyUtilsBean</code> instance used to access properties.
+     *
+     * @return The ConvertUtils bean instance
      */
     public PropertyUtilsBean getPropertyUtils() {
         return propertyUtilsBean;

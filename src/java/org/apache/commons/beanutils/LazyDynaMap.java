@@ -143,6 +143,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     /**
      * Set the Map backing this <code>DynaBean</code>
+     *
+     * @param values The new Map of values
      */
     public void setMap(Map values) {
         this.values = values;
@@ -406,6 +408,10 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * Should this DynaClass return a <code>null</code> from
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
+     *
+     * @return <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * <code>false</code> if a new {@link DynaProperty} should be created.
      */
     public boolean isReturnNull() {
         return returnNull;
@@ -415,6 +421,10 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * Set whether this DynaClass should return a <code>null</code> from
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
+     *
+     * @param returnNull <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * <code>false</code> if a new {@link DynaProperty} should be created.
      */
     public void setReturnNull(boolean returnNull) {
         this.returnNull = returnNull;

@@ -97,7 +97,11 @@ import org.apache.commons.logging.LogFactory;
 public class PropertyUtilsBean {
 
     // --------------------------------------------------------- Class Methods
-    
+
+    /**
+     * Return the PropertyUtils bean instance.
+     * @return The PropertyUtils bean instance
+     */
     protected static PropertyUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getPropertyUtils();
     }	
@@ -250,6 +254,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not account for mapped properties.</p>
      *
      * @param bean Bean whose properties are to be extracted
+     * @return The set of properties for the bean
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -299,6 +304,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
+     * @return the indexed property value
      *
      * @exception ArrayIndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying array
@@ -354,6 +360,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
+     * @return the indexed property value
      *
      * @exception ArrayIndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying array
@@ -453,6 +460,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname(key)</code> of the property value
      *  to be extracted
+     * @return the mapped property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -497,6 +505,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Mapped property name of the property value to be extracted
      * @param key Key of the property value to be extracted
+     * @return the mapped property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -577,6 +586,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param beanClass Bean class to be introspected
+     * @return the mapped property descriptors
      * @deprecated This method should not be exposed
      */
     public FastHashMap getMappedPropertyDescriptors(Class beanClass) {
@@ -597,6 +607,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean to be introspected
+     * @return the mapped property descriptors
      * @deprecated This method should not be exposed
      */
     public FastHashMap getMappedPropertyDescriptors(Object bean) {
@@ -615,6 +626,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
+     * @return the nested property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -696,6 +708,10 @@ public class PropertyUtilsBean {
      * This method is called by getNestedProperty and setNestedProperty to
      * define what it means to get a property from an object which implements
      * Map. See setPropertyOfMapBean for more information.
+     *
+     * @param bean Map bean
+     * @param propertyName The property name
+     * @return the property value
      * 
      * @throws IllegalArgumentException when the propertyName is regarded as
      * being invalid.
@@ -737,6 +753,7 @@ public class PropertyUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
      *  to be extracted
+     * @return the property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -769,6 +786,7 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
+     * @return the property descriptor
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -914,6 +932,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param beanClass Bean class for which property descriptors are requested
+     * @return the property descriptors
      *
      * @exception IllegalArgumentException if <code>beanClass</code> is null
      */
@@ -1030,6 +1049,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param bean Bean for which property descriptors are requested
+     * @return the property descriptors
      *
      * @exception IllegalArgumentException if <code>bean</code> is null
      */
@@ -1060,6 +1080,7 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
+     * @return the property editor class
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -1106,6 +1127,7 @@ public class PropertyUtilsBean {
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
      *  which a property descriptor is requested
+     * @return The property type
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -1170,6 +1192,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param descriptor Property descriptor to return a getter for
+     * @return The read method
      */
     public Method getReadMethod(PropertyDescriptor descriptor) {
 
@@ -1184,6 +1207,7 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
+     * @return The property value
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -1257,6 +1281,7 @@ public class PropertyUtilsBean {
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param descriptor Property descriptor to return a setter for
+     * @return The write method
      */
     public Method getWriteMethod(PropertyDescriptor descriptor) {
 
@@ -1272,6 +1297,8 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
+     * @return <code>true</code> if the property is readable,
+     * otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if <code>bean</code>
      *  or <code>name</code> is <code>null</code>
@@ -1325,8 +1352,10 @@ public class PropertyUtilsBean {
      *
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
+     * @return <code>true</code> if the property is writeable,
+     * otherwise <code>false</code>
      *
-     * @exception IllegalPointerException if <code>bean</code>
+     * @exception IllegalArgumentException if <code>bean</code>
      *  or <code>name</code> is <code>null</code>
      *
      * @since BeanUtils 1.6
@@ -1803,6 +1832,10 @@ public class PropertyUtilsBean {
      * that behaviour, and <i>not</i> to solve the problem by modifying the
      * default behaviour of the PropertyUtilsBean class by overriding this
      * method.
+     *
+     * @param bean Map bean
+     * @param propertyName The property name
+     * @param value the property value
      * 
      * @throws IllegalArgumentException when the propertyName is regarded as
      * being invalid.

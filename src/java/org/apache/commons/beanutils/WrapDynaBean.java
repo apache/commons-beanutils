@@ -355,6 +355,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * Return the property descriptor for the specified property name.
      *
      * @param name Name of the property for which to retrieve the descriptor
+     * @return The descriptor for the specified property
      *
      * @exception IllegalArgumentException if this is not a valid property
      *  name for our DynaClass

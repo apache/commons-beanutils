@@ -124,6 +124,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * If there is no such class loader, the class loader used to load this
      * class will be utilized.</p>
      *
+     * @param className The name of the class to load
+     * @return The loaded class
      * @exception SQLException if an exception was thrown trying to load
      *  the specified class
      */
@@ -149,6 +151,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @param metadata is the result set metadata
      * @param i is the column index in the metadata
      * @return the newly created DynaProperty instance
+     * @throws SQLException If an error occurs accessing the SQL metadata
      */
     protected DynaProperty createDynaProperty(
                                     ResultSetMetaData metadata,

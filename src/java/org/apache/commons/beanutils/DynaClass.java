@@ -43,6 +43,8 @@ public interface DynaClass {
      * <code>getName()</code> method of <code>java.lang.Class</code), which
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.
+     *
+     * @return the name of the DynaClass
      */
     public String getName();
 
@@ -53,6 +55,7 @@ public interface DynaClass {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     * @return The descriptor for the specified property
      *
      * @exception IllegalArgumentException if no property name is specified
      */
@@ -67,6 +70,8 @@ public interface DynaClass {
      * <p><strong>FIXME</strong> - Should we really be implementing
      * <code>getBeanInfo()</code> instead, which returns property descriptors
      * and a bunch of other stuff?</p>
+     *
+     * @return the set of properties for this DynaClass
      */
     public DynaProperty[] getDynaProperties();
 
@@ -74,6 +79,8 @@ public interface DynaClass {
     /**
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
+     *
+     * @return A new <code>DynaBean</code> instance
      *
      * @exception IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible

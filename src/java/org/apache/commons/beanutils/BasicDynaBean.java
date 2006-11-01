@@ -359,6 +359,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * Return the property descriptor for the specified property name.
      *
      * @param name Name of the property for which to retrieve the descriptor
+     * @return The property descriptor
      *
      * @exception IllegalArgumentException if this is not a valid property
      *  name for our DynaClass
@@ -380,6 +381,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *
      * @param dest Destination class
      * @param source Source class
+     * @return <code>true</code> if the source class is assignable to the
+     * destination class, otherwise <code>false</code>
      */
     protected boolean isAssignable(Class dest, Class source) {
 
