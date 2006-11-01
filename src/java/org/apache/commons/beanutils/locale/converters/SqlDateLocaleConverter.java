@@ -209,8 +209,8 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
      *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @exception org.apache.commons.beanutils.ConversionException if conversion
+     * cannot be performed successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
 
