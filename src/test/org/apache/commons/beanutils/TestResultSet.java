@@ -69,7 +69,7 @@ public class TestResultSet implements ResultSet {
 
 
     public void close() throws SQLException {
-        ; // No action required
+        // No action required
     }
 
 
@@ -132,7 +132,7 @@ public class TestResultSet implements ResultSet {
         if (row > 5) {
             throw new SQLException("No current row");
         }
-        ; // FIXME - updateObject()
+        // FIXME - updateObject()
     }
 
 

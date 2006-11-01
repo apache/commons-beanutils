@@ -129,7 +129,7 @@ public class DynaResultSetTestCase extends TestCase {
             dynaClass.getDynaProperty(null);
             fail("Did not throw IllegaArgumentException");
         } catch (IllegalArgumentException e) {
-            ; // Expected result
+            // Expected result
         }
 
         // Negative test
@@ -167,7 +167,7 @@ public class DynaResultSetTestCase extends TestCase {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
         } catch (UnsupportedOperationException e) {
-            ; // Expected result
+            // Expected result
         } catch (Exception e) {
             fail("Threw exception " + e);
         }
@@ -205,7 +205,7 @@ public class DynaResultSetTestCase extends TestCase {
             row.get("unknownProperty");
             fail("Did not throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            ; // Expected result
+            // Expected result
         }
 
         // Verify property values

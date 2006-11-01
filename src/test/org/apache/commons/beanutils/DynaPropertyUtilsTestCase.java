@@ -296,7 +296,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(null, "intArray", 0);
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -305,7 +305,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, null, 0);
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -317,7 +317,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "intArray[0]");
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -326,7 +326,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, "[0]");
             fail("Should throw NoSuchMethodException 4");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 4");
         }
@@ -335,7 +335,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, "intArray");
             fail("Should throw IllegalArgumentException 5");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
@@ -346,7 +346,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(null, "intIndexed", 0);
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -355,7 +355,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, null, 0);
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -367,7 +367,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "intIndexed[0]");
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -376,7 +376,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, "[0]");
             fail("Should throw NoSuchMethodException 4");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 4");
         }
@@ -385,7 +385,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getIndexedProperty(bean, "intIndexed");
             fail("Should throw IllegalArgumentException 5");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
@@ -545,7 +545,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "intArray", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -556,7 +556,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "intArray", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -567,7 +567,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "intIndexed", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -578,7 +578,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "intIndexed", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -589,7 +589,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "listIndexed", -1);
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
@@ -600,7 +600,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "listIndexed", 5);
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
@@ -611,7 +611,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "stringArray", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -622,7 +622,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "stringArray", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -633,7 +633,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "stringIndexed", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -644,7 +644,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             "stringIndexed", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -664,7 +664,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "First Key");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -673,7 +673,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getMappedProperty(bean, null, "First Key");
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -682,7 +682,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getMappedProperty(bean, "mappedProperty", null);
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -694,7 +694,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "mappedProperty(First Key)");
             fail("Should throw IllegalArgumentException 4");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 4");
         }
@@ -703,7 +703,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getMappedProperty(bean, "(Second Key)");
             fail("Should throw IllegalArgumentException 5");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 5");
         }
@@ -712,7 +712,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getMappedProperty(bean, "mappedProperty");
             fail("Should throw IllegalArgumentException 6");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
         }
@@ -908,7 +908,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getNestedProperty(null, "stringProperty");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -917,7 +917,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getNestedProperty(bean, null);
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -1166,7 +1166,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         }
 
     }
@@ -1181,7 +1181,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getSimpleProperty(null, "stringProperty");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -1190,7 +1190,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.getSimpleProperty(bean, null);
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -1293,7 +1293,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
@@ -1370,7 +1370,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
@@ -1449,7 +1449,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         }
 
     }
@@ -1467,7 +1467,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -1477,7 +1477,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -1490,7 +1490,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -1500,7 +1500,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 4");
         }
@@ -1510,7 +1510,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
@@ -1522,7 +1522,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -1532,7 +1532,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -1545,7 +1545,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -1555,7 +1555,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 4");
         }
@@ -1565,7 +1565,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
@@ -1752,7 +1752,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1763,7 +1763,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1774,7 +1774,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1785,7 +1785,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     new Integer(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1796,7 +1796,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
@@ -1807,7 +1807,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
@@ -1818,7 +1818,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1829,7 +1829,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1840,7 +1840,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1851,7 +1851,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (ArrayIndexOutOfBoundsException t) {
-            ; // Expected results
+            // Expected results
         } catch (Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
@@ -1871,7 +1871,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "First Key", "First Value");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -1881,7 +1881,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "First Value");
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -1891,7 +1891,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "First Value");
             fail("Should throw IllegalArgumentException 3");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 3");
         }
@@ -1904,7 +1904,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "First Value");
             fail("Should throw IllegalArgumentException 4");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 4");
         }
@@ -1914,7 +1914,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "Second Value");
             fail("Should throw IllegalArgumentException 5");
         } catch (NoSuchMethodException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of NoSuchMethodException 5");
         }
@@ -1924,7 +1924,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     "Third Value");
             fail("Should throw IllegalArgumentException 6");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
         }
@@ -2032,7 +2032,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.setNestedProperty(null, "stringProperty", "");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -2041,7 +2041,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.setNestedProperty(bean, null, "");
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -2205,7 +2205,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         }
 
     }
@@ -2284,7 +2284,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         }
 
     }
@@ -2326,7 +2326,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.setSimpleProperty(null, "stringProperty", "");
             fail("Should throw IllegalArgumentException 1");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 1");
         }
@@ -2335,7 +2335,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             PropertyUtils.setSimpleProperty(bean, null, "");
             fail("Should throw IllegalArgumentException 2");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
@@ -2439,7 +2439,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
@@ -2516,7 +2516,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
@@ -2599,7 +2599,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (InvocationTargetException e) {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
-            ; // Correct result for this test
+            // Correct result for this test
         }
 
     }

@@ -92,7 +92,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * Tear down instance variables required by this test case.
      */
     public void tearDown() {
-        ;    // No action required
+        // No action required
     }
 
 
@@ -148,14 +148,14 @@ public class LocaleConvertUtilsTestCase extends TestCase {
             value = LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (1)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Byte.class);
             fail("Should have thrown conversion exception (2)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         /* fixme - not implemented
@@ -171,70 +171,70 @@ public class LocaleConvertUtilsTestCase extends TestCase {
             value = LocaleConvertUtils.convert("foo", Double.TYPE);
             fail("Should have thrown conversion exception (3)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Double.class);
             fail("Should have thrown conversion exception (4)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Float.TYPE);
             fail("Should have thrown conversion exception (5)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Float.class);
             fail("Should have thrown conversion exception (6)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Integer.TYPE);
             fail("Should have thrown conversion exception (7)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Integer.class);
             fail("Should have thrown conversion exception (8)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (9)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Long.class);
             fail("Should have thrown conversion exception (10)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Short.TYPE);
             fail("Should have thrown conversion exception (11)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         try {
             value = LocaleConvertUtils.convert("foo", Short.class);
             fail("Should have thrown conversion exception (12)");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
     }

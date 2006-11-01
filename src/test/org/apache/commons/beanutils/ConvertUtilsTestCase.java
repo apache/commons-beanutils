@@ -78,7 +78,7 @@ public class ConvertUtilsTestCase extends TestCase {
      * Tear down instance variables required by this test case.
      */
     public void tearDown() {
-        ;    // No action required
+        // No action required
     }
 
 
@@ -141,7 +141,7 @@ public class ConvertUtilsTestCase extends TestCase {
                 ("org.apache.commons.beanutils.Undefined", Class.class);
             fail("Should have thrown conversion exception");
         } catch (ConversionException e) {
-            ; // Expected result
+            // Expected result
         }
 
         value = ConvertUtils.convert("foo", Double.TYPE);

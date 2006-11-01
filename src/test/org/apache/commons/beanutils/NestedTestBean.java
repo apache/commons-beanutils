@@ -82,7 +82,7 @@ public class NestedTestBean {
         indexedBeans[4] = new NestedTestBean("Bean@4");
         
         simpleBean = new NestedTestBean("Simple Property Bean");
-    };
+    }
     
     public NestedTestBean getIndexedProperty(int index) {
         return (this.indexedBeans[index]);

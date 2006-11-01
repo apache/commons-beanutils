@@ -97,7 +97,7 @@ public class LocaleBeanificationTestCase extends TestCase {
      * Tear down instance variables required by this test case.
      */
     public void tearDown() {
-        ;    // No action required
+        // No action required
     }
 
 

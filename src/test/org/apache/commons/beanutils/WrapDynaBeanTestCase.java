@@ -184,7 +184,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
                     bean.contains("mappedProperty", "First Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException t) {
-            ; // Expected result
+            // Expected result
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -195,7 +195,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
                     !bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (UnsupportedOperationException t) {
-            ; // Expected result
+            // Expected result
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -217,7 +217,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             //            assertTrue("Can not see first key",
             //         !bean.contains("mappedProperty", "First Key"));
         } catch (UnsupportedOperationException t) {
-            ; // Expected result
+            // Expected result
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -230,7 +230,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             //            assertTrue("Can not see unknown key",
             //         !bean.contains("mappedProperty", "Unknown Key"));
         } catch (UnsupportedOperationException t) {
-            ; // Expected result
+            // Expected result
         } catch (Throwable t) {
             fail("Exception: " + t);
         }

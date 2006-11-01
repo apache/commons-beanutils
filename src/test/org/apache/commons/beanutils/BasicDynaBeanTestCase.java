@@ -188,7 +188,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.getDynaClass().getDynaProperty(null);
             fail("Should throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
@@ -312,7 +312,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.get("intArray", -1);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
@@ -448,7 +448,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.get(null);
             fail("Should throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
@@ -724,7 +724,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.set("intArray", -1, new Integer(0));
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            ; // Expected response
+            // Expected response
         } catch (Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
