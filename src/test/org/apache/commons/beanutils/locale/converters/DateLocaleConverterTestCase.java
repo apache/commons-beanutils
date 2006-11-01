@@ -48,8 +48,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     protected String defaultDateValue;
     protected String defaultShortDateValue;
 
-    protected Object expectedValue;
-
     protected boolean validLocalDateSymbols;
 
     // ------------------------------------------------------------------------
