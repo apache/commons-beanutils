@@ -30,10 +30,6 @@ import org.apache.commons.beanutils.locale.converters.FloatLocaleConverterTestCa
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverterTestCase;
 import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCase;
-//import org.apache.commons.beanutils.locale.converters.SqlDateLocaleConverterTestCase;
-//import org.apache.commons.beanutils.locale.converters.SqlTimeLocaleConverterTestCase;
-//import org.apache.commons.beanutils.locale.converters.SqlTimestampLocaleConverterTestCase;
-//import org.apache.commons.beanutils.locale.converters.StringLocaleConverterTestCase;
 
 /**
  * <p>
@@ -63,10 +59,6 @@ public class LocaleConvertTestSuite {
         testSuite.addTestSuite(IntegerLocaleConverterTestCase.class);
         testSuite.addTestSuite(LongLocaleConverterTestCase.class);
         testSuite.addTestSuite(ShortLocaleConverterTestCase.class);
-//        testSuite.addTestSuite(SqlDateLocaleConverterTestCase.class);
-//        testSuite.addTestSuite(SqlTimeLocaleConverterTestCase.class);
-//        testSuite.addTestSuite(SqlTimestampLocaleConverterTestCase.class);
-//        testSuite.addTestSuite(StringLocaleConverterTestCase.class);
         return testSuite;
     }
 }
