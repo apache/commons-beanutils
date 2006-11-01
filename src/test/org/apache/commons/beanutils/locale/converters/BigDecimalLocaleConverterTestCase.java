@@ -17,11 +17,7 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-import java.util.Locale;
 import java.math.BigDecimal;
-
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.ConversionException;
 
 /**
  * Test Case for the BigDecimalLocaleConverter class.

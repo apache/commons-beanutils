@@ -19,7 +19,6 @@ package org.apache.commons.beanutils.locale.converters;
 
 import junit.framework.TestCase;
 import java.util.Locale;
-import java.text.DateFormatSymbols;
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 
 /**

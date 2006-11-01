@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils.converters;
 
 import junit.framework.TestCase;
-import junit.framework.TestCase;
 
 /**
  * Test Case for StringArrayConverter

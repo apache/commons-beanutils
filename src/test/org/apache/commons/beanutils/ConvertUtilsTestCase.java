@@ -18,15 +18,12 @@
 package org.apache.commons.beanutils;
 
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import org.apache.commons.beanutils.converters.BooleanConverter;
 
 
 /**

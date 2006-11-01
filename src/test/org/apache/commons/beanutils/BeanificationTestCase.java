@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.apache.commons.collections.ReferenceMap;
 import org.apache.commons.logging.LogFactory;
 
 /**

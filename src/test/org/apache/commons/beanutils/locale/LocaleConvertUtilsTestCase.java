@@ -18,19 +18,15 @@
 package org.apache.commons.beanutils.locale;
 
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Locale;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConversionException;
 
 
