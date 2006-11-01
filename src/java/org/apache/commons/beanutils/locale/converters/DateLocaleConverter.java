@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 

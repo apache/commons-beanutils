@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils.locale;
 
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
