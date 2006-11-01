@@ -257,7 +257,7 @@ public class ConvertUtilsBean {
      * @deprecated Register replacement converters for Double.TYPE and
      *  Double.class instead
      */
-    private Double defaultDouble = new Double((double) 0.0);
+    private Double defaultDouble = new Double(0.0);
 
     /**
      * Gets the default value for Double conversions.
@@ -341,7 +341,7 @@ public class ConvertUtilsBean {
      * @deprecated Register replacement converters for Long.TYPE and
      *  Long.class instead
      */
-    private Long defaultLong = new Long((long) 0);
+    private Long defaultLong = new Long(0);
 
     /**
      * Gets the default value for Long conversions.

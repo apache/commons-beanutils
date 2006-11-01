@@ -124,7 +124,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         listIndexed.add("String 3");
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
-        bean.set("longProperty", new Long((long) 321));
+        bean.set("longProperty", new Long(321));
         HashMap mappedProperty = new HashMap();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
@@ -485,8 +485,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertTrue("Got correct type", (value instanceof Double));
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
-                    (double) 321.0,
-                    (double) 0.005);
+                    321.0, 0.005);
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -525,7 +524,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertTrue("Got correct type", (value instanceof Integer));
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
-                    (int) 123);
+                    123);
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -544,7 +543,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertTrue("Got correct type", (value instanceof Long));
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
-                    (long) 321);
+                    321);
         } catch (Throwable t) {
             fail("Exception: " + t);
         }
@@ -863,7 +862,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertEquals("Matched new value",
                     newValue,
                     ((Double) bean.get("doubleProperty")).doubleValue(),
-                    (double) 0.005);
+                    0.005);
         } catch (Throwable e) {
             fail("Exception: " + e);
         }

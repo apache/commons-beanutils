@@ -213,6 +213,6 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter {
      */
     protected Object parse(Object value, String pattern) throws ParseException {
 
-        return new Time(((java.util.Date) super.parse((String) value, pattern)).getTime());
+        return new Time(((java.util.Date) super.parse(value, pattern)).getTime());
     }
 }

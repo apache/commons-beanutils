@@ -1010,11 +1010,11 @@ public class BeanUtilsBean {
             if (value == null) {
                 String values[] = new String[1];
                 values[0] = (String) value;
-                newValue = getConvertUtils().convert((String[]) values, type);
+                newValue = getConvertUtils().convert(values, type);
             } else if (value instanceof String) {
                 String values[] = new String[1];
                 values[0] = (String) value;
-                newValue = getConvertUtils().convert((String[]) values, type);
+                newValue = getConvertUtils().convert(values, type);
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert((String[]) value, type);
             } else {

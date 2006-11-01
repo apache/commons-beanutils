@@ -249,7 +249,7 @@ public class LocaleConvertUtilsBean {
         LocaleConverter converter = lookup(clazz, locale);
 
         if (converter == null) {
-            converter = (LocaleConverter) lookup(String.class, locale);
+            converter = lookup(String.class, locale);
         }
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);

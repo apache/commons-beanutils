@@ -136,13 +136,13 @@ public class BasicDynaBean implements DynaBean, Serializable {
         } else if (type == Character.TYPE) {
             return (new Character((char) 0));
         } else if (type == Double.TYPE) {
-            return (new Double((double) 0.0));
+            return (new Double(0.0));
         } else if (type == Float.TYPE) {
             return (new Float((float) 0.0));
         } else if (type == Integer.TYPE) {
-            return (new Integer((int) 0));
+            return (new Integer(0));
         } else if (type == Long.TYPE) {
-            return (new Long((int) 0));
+            return (new Long(0));
         } else if (type == Short.TYPE) {
             return (new Short((short) 0));
         } else {

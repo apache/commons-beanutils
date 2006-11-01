@@ -214,6 +214,6 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      */
     protected Object parse(Object value, String pattern) throws ParseException {
 
-        return new Date(((java.util.Date) super.parse((String) value, pattern)).getTime());
+        return new Date(((java.util.Date) super.parse(value, pattern)).getTime());
     }
 }

@@ -121,7 +121,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected static final Byte       Byte_ZERO       = new Byte((byte)0);
     protected static final Short      Short_ZERO      = new Short((short)0);
     protected static final Integer    Integer_ZERO    = new Integer(0);
-    protected static final Long       Long_ZERO       = new Long((long)0);
+    protected static final Long       Long_ZERO       = new Long(0);
     protected static final Float      Float_ZERO      = new Float((byte)0);
     protected static final Double     Double_ZERO     = new Double((byte)0);
 
@@ -378,7 +378,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * properties available for this DynaBean.
      */
     public DynaClass getDynaClass() {
-        return (DynaClass)dynaClass;
+        return dynaClass;
     }
 
     /**

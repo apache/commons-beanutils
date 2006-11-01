@@ -146,13 +146,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Double.TYPE);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 0.0,
-                     (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 0.0,
+                     0.005);
 
         value = ConvertUtils.convert("foo", Double.class);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 0.0,
-                     (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 0.0, 0.005);
 
         value = ConvertUtils.convert("foo", Float.TYPE);
         assertTrue(value instanceof Float);
@@ -166,11 +165,11 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Integer.TYPE);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 0);
+        assertEquals(((Integer) value).intValue(), 0);
 
         value = ConvertUtils.convert("foo", Integer.class);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 0);
+        assertEquals(((Integer) value).intValue(), 0);
 
         value = ConvertUtils.convert("foo", Byte.TYPE);
         assertTrue(value instanceof Byte);
@@ -178,7 +177,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Long.class);
         assertTrue(value instanceof Long);
-        assertEquals(((Long) value).longValue(), (long) 0);
+        assertEquals(((Long) value).longValue(), 0);
 
         value = ConvertUtils.convert("foo", Short.TYPE);
         assertTrue(value instanceof Short);
@@ -248,13 +247,13 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals("Character->String", "a",
                      ConvertUtils.convert(new Character('a')));
         assertEquals("Double->String", "123.0",
-                     ConvertUtils.convert(new Double((double) 123.0)));
+                     ConvertUtils.convert(new Double(123.0)));
         assertEquals("Float->String", "123.0",
                      ConvertUtils.convert(new Float((float) 123.0)));
         assertEquals("Integer->String", "123",
-                     ConvertUtils.convert(new Integer((int) 123)));
+                     ConvertUtils.convert(new Integer(123)));
         assertEquals("Long->String", "123",
-                     ConvertUtils.convert(new Long((long) 123)));
+                     ConvertUtils.convert(new Long(123)));
         assertEquals("Short->String", "123",
                      ConvertUtils.convert(new Short((short) 123)));
         assertEquals("String->String", "abc",
@@ -415,17 +414,15 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("java.lang.String", Class.class);
         assertTrue(value instanceof Class);
-        assertEquals(String.class, (Class) value);
+        assertEquals(String.class, value);
 
         value = ConvertUtils.convert("123.456", Double.TYPE);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 123.456,
-                     (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
         value = ConvertUtils.convert("123.456", Double.class);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 123.456,
-                     (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
         value = ConvertUtils.convert("123.456", Float.TYPE);
         assertTrue(value instanceof Float);
@@ -439,19 +436,19 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("123", Integer.TYPE);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 123);
+        assertEquals(((Integer) value).intValue(), 123);
 
         value = ConvertUtils.convert("123", Integer.class);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 123);
+        assertEquals(((Integer) value).intValue(), 123);
 
         value = ConvertUtils.convert("123", Long.TYPE);
         assertTrue(value instanceof Long);
-        assertEquals(((Long) value).longValue(), (long) 123);
+        assertEquals(((Long) value).longValue(), 123);
 
         value = ConvertUtils.convert("123", Long.class);
         assertTrue(value instanceof Long);
-        assertEquals(((Long) value).longValue(), (long) 123);
+        assertEquals(((Long) value).longValue(), 123);
 
         value = ConvertUtils.convert("123", Short.TYPE);
         assertTrue(value instanceof Short);

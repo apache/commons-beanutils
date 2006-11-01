@@ -125,7 +125,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         listIndexed.add("String 3");
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
-        bean.set("longProperty", new Long((long) 321));
+        bean.set("longProperty", new Long(321));
         HashMap mapProperty = new HashMap();
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
@@ -215,7 +215,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                      (float) 0.005);
         assertEquals("intProperty", 111,
                      ((Integer) bean.get("intProperty")).intValue());
-        assertEquals("longProperty", (long) 444,
+        assertEquals("longProperty", 444,
                      ((Long) bean.get("longProperty")).longValue());
         assertEquals("shortProperty", (short) 555,
                      ((Short) bean.get("shortProperty")).shortValue());
@@ -261,23 +261,17 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         // Verify the values of scalar properties
         assertEquals("Value of 'booleanProperty'",
-                     Boolean.TRUE,
-                     (Boolean) map.get("booleanProperty"));
+                     Boolean.TRUE, map.get("booleanProperty"));
         assertEquals("Value of 'doubleProperty'",
-                     new Double(321.0),
-                     (Double) map.get("doubleProperty"));
+                     new Double(321.0), map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
-                     new Float((float) 123.0),
-                     (Float) map.get("floatProperty"));
+                     new Float((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
-                     new Integer(123),
-                     (Integer) map.get("intProperty"));
+                     new Integer(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
-                     new Long(321),
-                     (Long) map.get("longProperty"));
+                     new Long(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
-                     new Short((short) 987),
-                     (Short) map.get("shortProperty"));
+                     new Short((short) 987), map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
                      (String) map.get("stringProperty"));
@@ -1236,9 +1230,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Double));
             assertEquals("Got correct value",
-                    ((Double) value).doubleValue(),
-                    (double) 321.0,
-                    (double) 0.005);
+                    ((Double) value).doubleValue(), 321.0, 0.005);
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {
@@ -1343,7 +1335,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertTrue("Got correct type", (value instanceof Long));
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
-                    (long) 321);
+                    321);
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (IllegalArgumentException e) {

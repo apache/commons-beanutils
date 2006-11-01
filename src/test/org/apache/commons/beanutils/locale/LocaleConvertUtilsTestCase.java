@@ -299,13 +299,13 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals("Character->String", "a",
                 LocaleConvertUtils.convert(new Character('a')));
         assertEquals("Double->String", "123" + m_decimalSeparator + "4",
-                LocaleConvertUtils.convert(new Double((double) 123.4)));
+                LocaleConvertUtils.convert(new Double(123.4)));
         assertEquals("Float->String", "123" + m_decimalSeparator + "4",
                 LocaleConvertUtils.convert(new Float((float) 123.4)));
         assertEquals("Integer->String", "123",
-                LocaleConvertUtils.convert(new Integer((int) 123)));
+                LocaleConvertUtils.convert(new Integer(123)));
         assertEquals("Long->String", "123",
-                LocaleConvertUtils.convert(new Long((long) 123)));
+                LocaleConvertUtils.convert(new Long(123)));
         assertEquals("Short->String", "123",
                 LocaleConvertUtils.convert(new Short((short) 123)));
         assertEquals("String->String", "abc",
@@ -476,13 +476,11 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.TYPE);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 123.456,
-                (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
         value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.class);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), (double) 123.456,
-                (double) 0.005);
+        assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
         value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Float.TYPE);
         assertTrue(value instanceof Float);
@@ -496,19 +494,19 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         value = LocaleConvertUtils.convert("123", Integer.TYPE);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 123);
+        assertEquals(((Integer) value).intValue(), 123);
 
         value = LocaleConvertUtils.convert("123", Integer.class);
         assertTrue(value instanceof Integer);
-        assertEquals(((Integer) value).intValue(), (int) 123);
+        assertEquals(((Integer) value).intValue(), 123);
 
         value = LocaleConvertUtils.convert("123", Long.TYPE);
         assertTrue(value instanceof Long);
-        assertEquals(((Long) value).longValue(), (long) 123);
+        assertEquals(((Long) value).longValue(), 123);
 
         value = LocaleConvertUtils.convert("123456", Long.class);
         assertTrue(value instanceof Long);
-        assertEquals(((Long) value).longValue(), (long) 123456);
+        assertEquals(((Long) value).longValue(), 123456);
 
         /* fixme - Short conversion not implemented at this point
         value = LocaleConvertUtils.convert("123", Short.TYPE);

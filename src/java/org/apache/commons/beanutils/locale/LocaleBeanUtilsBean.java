@@ -708,7 +708,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             if (value instanceof String) {
                 String values[] = new String[1];
                 values[0] = (String) value;
-                newValue = getLocaleConvertUtils().convert((String[]) values, type, pattern);
+                newValue = getLocaleConvertUtils().convert(values, type, pattern);
             }
             else if (value instanceof String[]) {
                 newValue = getLocaleConvertUtils().convert((String[]) value, type, pattern);
@@ -760,7 +760,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             if (value instanceof String) {
                 String values[] = new String[1];
                 values[0] = (String) value;
-                newValue = ConvertUtils.convert((String[]) values, type);
+                newValue = ConvertUtils.convert(values, type);
             }
             else if (value instanceof String[]) {
                 newValue = ConvertUtils.convert((String[]) value, type);
