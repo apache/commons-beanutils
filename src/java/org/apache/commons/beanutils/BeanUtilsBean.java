@@ -157,7 +157,6 @@ public class BeanUtilsBean {
         if (log.isDebugEnabled()) {
             log.debug("Cloning bean: " + bean.getClass().getName());
         }
-        Class clazz = bean.getClass();
         Object newBean = null;
         if (bean instanceof DynaBean) {
             newBean = ((DynaBean) bean).getDynaClass().newInstance();
