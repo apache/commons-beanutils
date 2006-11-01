@@ -878,7 +878,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                         Integer.parseInt(propName.substring(i + 1, k));
             }
             catch (NumberFormatException e) {
-                ;
+                /* Swallow NumberFormatException
+                 * TODO: Why?
+                 */
             }
             propName = propName.substring(0, i);
         }
@@ -889,7 +891,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                 key = propName.substring(j + 1, k);
             }
             catch (IndexOutOfBoundsException e) {
-                ;
+                /* Swallow NumberFormatException
+                 * TODO: Why?
+                 */
             }
             propName = propName.substring(0, j);
         }

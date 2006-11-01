@@ -488,7 +488,9 @@ public class MethodUtils {
                     method = interfaces[i].getDeclaredMethod(methodName,
                             parameterTypes);
                 } catch (NoSuchMethodException e) {
-                    ;
+                    /* Swallow, if no method is found after the loop then this
+                     * method returns null.
+                     */
                 }
                 if (method != null)
                     break;

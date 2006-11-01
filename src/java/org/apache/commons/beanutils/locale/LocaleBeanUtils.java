@@ -452,7 +452,7 @@ public class LocaleBeanUtils extends BeanUtils {
                         Integer.parseInt(propName.substring(i + 1, k));
             }
             catch (NumberFormatException e) {
-                ;
+                /* Swallow NumberFormatException */
             }
             propName = propName.substring(0, i);
         }
@@ -463,7 +463,7 @@ public class LocaleBeanUtils extends BeanUtils {
                 key = propName.substring(j + 1, k);
             }
             catch (IndexOutOfBoundsException e) {
-                ;
+                /* Swallow IndexOutOfBoundsException */
             }
             propName = propName.substring(0, j);
         }

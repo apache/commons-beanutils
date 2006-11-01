@@ -111,7 +111,9 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             Class params[] = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
         } catch (IntrospectionException e) {
-            ;
+            /* Swallow IntrospectionException
+             * TODO: Why?
+             */
         }
         
         // If there's no read method, then look for just a write method 

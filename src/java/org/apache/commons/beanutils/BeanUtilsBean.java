@@ -262,7 +262,7 @@ public class BeanUtilsBean {
                             getPropertyUtils().getSimpleProperty(orig, name);
                         copyProperty(dest, name, value);
                     } catch (NoSuchMethodException e) {
-                        ; // Should not happen
+                        // Should not happen
                     }
                 }
             }
@@ -365,7 +365,8 @@ public class BeanUtilsBean {
                 index =
                     Integer.parseInt(propName.substring(i + 1, k));
             } catch (NumberFormatException e) {
-                ;
+            	// Swallow NumberFormatException
+            	// TODO: Why?
             }
             propName = propName.substring(0, i);
         }
@@ -375,7 +376,8 @@ public class BeanUtilsBean {
             try {
                 key = propName.substring(j + 1, k);
             } catch (IndexOutOfBoundsException e) {
-                ;
+                // Swallow IndexOutOfBoundsException
+                // TODO: Why?
             }
             propName = propName.substring(0, j);
         }
@@ -932,7 +934,8 @@ public class BeanUtilsBean {
                 index =
                     Integer.parseInt(propName.substring(i + 1, k));
             } catch (NumberFormatException e) {
-                ;
+                // Swallow NumberFormatException
+                // TODO: Why?
             }
             propName = propName.substring(0, i);
         }
@@ -942,7 +945,8 @@ public class BeanUtilsBean {
             try {
                 key = propName.substring(j + 1, k);
             } catch (IndexOutOfBoundsException e) {
-                ;
+                // Swallow IndexOutOfBoundsException
+                // TODO: Why?
             }
             propName = propName.substring(0, j);
         }
