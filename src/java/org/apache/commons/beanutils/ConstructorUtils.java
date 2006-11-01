@@ -365,7 +365,9 @@ public class ConstructorUtils {
                 // Better workarounds would be greatfully accepted.
                 //
                 ctor.setAccessible(true);
-            } catch (SecurityException se) {}
+            } catch (SecurityException se) {
+                /* SWALLOW, if workaround fails don't fret. */
+            }
             return ctor;
 
         } catch (NoSuchMethodException e) { /* SWALLOW */
@@ -396,7 +398,11 @@ public class ConstructorUtils {
                     if (ctor != null) {
                         try {
                             ctor.setAccessible(true);
-                        } catch (SecurityException se) {}
+                        } catch (SecurityException se) {
+                            /* Swallow SecurityException
+                             * TODO: Why?
+                             */
+                        }
                         return ctor;
                     }
                 }

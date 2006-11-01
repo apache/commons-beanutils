@@ -861,6 +861,9 @@ public class PropertyUtilsBean {
                 result =
                         new MappedPropertyDescriptor(name, bean.getClass());
             } catch (IntrospectionException ie) {
+                /* Swallow IntrospectionException
+                 * TODO: Why?
+                 */
             }
             if (result != null) {
                 mappedDescriptors.put(name, result);
