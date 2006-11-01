@@ -597,11 +597,9 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
     public void testDeregisteringSingleConverter() throws Exception {
-        ConvertUtils convertUtils = new ConvertUtils();
-
         // make sure that the test work ok before anything's changed
         Object
-        value = convertUtils.convert("true", Boolean.TYPE);
+        value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(
                     "Standard conversion failed (1)",
@@ -609,8 +607,8 @@ public class ConvertUtilsTestCase extends TestCase {
                     true);
 
         // we'll test deregister
-        convertUtils.deregister(Boolean.TYPE);
-        assertNull("Converter should be null",convertUtils.lookup(Boolean.TYPE));
+        ConvertUtils.deregister(Boolean.TYPE);
+        assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
 
     }
 

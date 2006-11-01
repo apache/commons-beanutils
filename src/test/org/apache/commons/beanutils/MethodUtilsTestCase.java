@@ -38,10 +38,6 @@ import junit.framework.TestSuite;
  */
 public class MethodUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
-
-    protected PrivateBeanFactory privateBeanFactory;
-
     // ---------------------------------------------------------- Constructors
 
     /**
@@ -61,7 +57,6 @@ public class MethodUtilsTestCase extends TestCase {
      * Set up instance variables required by this test case.
      */
     public void setUp() {
-        privateBeanFactory = new PrivateBeanFactory();
     }
 
 
@@ -76,7 +71,6 @@ public class MethodUtilsTestCase extends TestCase {
      * Tear down instance variables required by this test case.
      */
     public void tearDown() {
-        privateBeanFactory = null;
     }
 
 
@@ -104,7 +98,7 @@ public class MethodUtilsTestCase extends TestCase {
         // trickier this one - find a method in a direct interface
         // METHOD TWO
         method = MethodUtils.getAccessibleMethod
-                (privateBeanFactory.create().getClass(),
+                (PrivateBeanFactory.create().getClass(),
                         "methodBar",
                         String.class);
 
@@ -118,7 +112,7 @@ public class MethodUtilsTestCase extends TestCase {
         // trickier this one - find a method in a indirect interface
         // METHOD THREE
         method = MethodUtils.getAccessibleMethod
-                (privateBeanFactory.createSubclass().getClass(),
+                (PrivateBeanFactory.createSubclass().getClass(),
                         "methodBaz",
                         String.class);
 
@@ -157,7 +151,7 @@ public class MethodUtilsTestCase extends TestCase {
         try {
 
             Object ret = MethodUtils.invokeExactMethod(
-                    privateBeanFactory.create(),
+                    PrivateBeanFactory.create(),
                     "methodBar",
                     "ANOTHER TEST");
 
@@ -175,7 +169,7 @@ public class MethodUtilsTestCase extends TestCase {
         try {
 
             Object ret = MethodUtils.invokeExactMethod(
-                    privateBeanFactory.createSubclass(),
+                    PrivateBeanFactory.createSubclass(),
                     "methodBaz",
                     "YET ANOTHER TEST");
 
