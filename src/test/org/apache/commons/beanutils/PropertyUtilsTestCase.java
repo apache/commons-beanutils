@@ -2012,6 +2012,8 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Unknown property 'unknown' on class '" + 
+                         bean.getClass() + "'", e.getMessage() );
         }
 
     }
@@ -2033,6 +2035,8 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Property 'writeOnlyProperty' has no getter method in class '" + 
+                         bean.getClass() + "'", e.getMessage() );
         }
 
     }
@@ -3239,6 +3243,8 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Property 'readOnlyProperty' has no setter method in class '" + 
+                         bean.getClass() + "'", e.getMessage() );
         }
 
     }
@@ -3318,6 +3324,8 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Unknown property 'unknown' on class '" + 
+                         bean.getClass() + "'", e.getMessage() );
         }
 
     }

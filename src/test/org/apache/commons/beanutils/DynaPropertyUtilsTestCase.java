@@ -1442,6 +1442,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Unknown property 'unknown' on dynaclass '" +
+                         ((DynaBean) bean).getDynaClass() + "'", e.getMessage() );
         }
 
     }
@@ -2592,6 +2594,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (NoSuchMethodException e) {
             // Correct result for this test
+            assertEquals("Unknown property 'unknown' on dynaclass '" +
+                         ((DynaBean) bean).getDynaClass() + "'", e.getMessage() );
         }
 
     }
