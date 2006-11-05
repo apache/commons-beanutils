@@ -147,8 +147,9 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
+     * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @exception ParseException if conversion cannot be performed
      *  successfully
      */
 
@@ -160,6 +161,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * The default pattern is used for the convertion.
      *
      * @param value The input object to be converted
+     * @return The converted value
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully
@@ -173,6 +175,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
+     * @return The converted value
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully

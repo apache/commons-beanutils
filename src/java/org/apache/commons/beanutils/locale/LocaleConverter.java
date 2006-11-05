@@ -39,8 +39,8 @@ public interface LocaleConverter extends Converter {
      * @param value The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
      *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @exception org.apache.commons.beanutils.ConversionException if conversion
+     * cannot be performed successfully
      */
     public Object convert(Class type, Object value, String pattern);
 }

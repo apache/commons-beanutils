@@ -17,6 +17,7 @@
  
 package org.apache.commons.beanutils.locale;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.ByteLocaleConverter;
