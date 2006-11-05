@@ -43,6 +43,10 @@ public class LongConverterTestCase extends NumberConverterTestBase {
 
     public void setUp() throws Exception {
         converter = makeConverter();
+        numbers[0] = new Long("-12");
+        numbers[1] = new Long("13");
+        numbers[2] = new Long("-22");
+        numbers[3] = new Long("23");
     }
 
     public static TestSuite suite() {
@@ -55,8 +59,12 @@ public class LongConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
     
-    protected Converter makeConverter() {
+    protected NumberConverter makeConverter() {
         return new LongConverter();
+    }
+    
+    protected NumberConverter makeConverter(Object defaultValue) {
+        return new LongConverter(defaultValue);
     }
     
     protected Class getExpectedType() {

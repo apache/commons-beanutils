@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils.converters;
 
+import java.math.BigDecimal;
+
 import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils.Converter;
@@ -29,13 +31,13 @@ import org.apache.commons.beanutils.Converter;
  * @version $Revision$ $Date$
  */
 
-public class DoubleConverterTestCase extends NumberConverterTestBase {
+public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
-    public DoubleConverterTestCase(String name) {
+    public BigDecimalConverterTestCase(String name) {
         super(name);
     }
     
@@ -43,14 +45,14 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
 
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Double("-12");
-        numbers[1] = new Double("13");
-        numbers[2] = new Double("-22");
-        numbers[3] = new Double("23");
+        numbers[0] = new BigDecimal("-12");
+        numbers[1] = new BigDecimal("13");
+        numbers[2] = new BigDecimal("-22");
+        numbers[3] = new BigDecimal("23");
     }
 
     public static TestSuite suite() {
-        return new TestSuite(DoubleConverterTestCase.class);        
+        return new TestSuite(BigDecimalConverterTestCase.class);        
     }
 
     public void tearDown() throws Exception {
@@ -60,23 +62,21 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
     
     protected NumberConverter makeConverter() {
-        return new DoubleConverter();
+        return new BigDecimalConverter();
     }
     
     protected NumberConverter makeConverter(Object defaultValue) {
-        return new DoubleConverter(defaultValue);
+        return new BigDecimalConverter(defaultValue);
     }
     
     protected Class getExpectedType() {
-        return Double.class;
+        return BigDecimal.class;
     }
 
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         String[] message= { 
-            "from String",
-            "from String",
             "from String",
             "from String",
             "from String",
@@ -91,53 +91,42 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         };
         
         Object[] input = { 
-            String.valueOf(Double.MIN_VALUE),
             "-17.2",
             "-1.1",
             "0.0",
             "1.1",
             "17.2",
-            String.valueOf(Double.MAX_VALUE),
             new Byte((byte)7),
             new Short((short)8),
             new Integer(9),
             new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+            new Float("11.1"),
+            new Double("12.2")
         };
         
-        Double[] expected = { 
-            new Double(Double.MIN_VALUE),
-            new Double(-17.2),
-            new Double(-1.1),
-            new Double(0.0),
-            new Double(1.1),
-            new Double(17.2),
-            new Double(Double.MAX_VALUE),
-            new Double(7),
-            new Double(8),
-            new Double(9),
-            new Double(10),
-            new Double(11.1),
-            new Double(12.2)
+        BigDecimal[] expected = { 
+            new BigDecimal("-17.2"),
+            new BigDecimal("-1.1"),
+            new BigDecimal("0.0"),
+            new BigDecimal("1.1"),
+            new BigDecimal("17.2"),
+            new BigDecimal("7"),
+            new BigDecimal("8"),
+            new BigDecimal("9"),
+            new BigDecimal("10"),
+            new BigDecimal("11.1"),
+            new BigDecimal("12.2")
         };
         
         for(int i=0;i<expected.length;i++) {
             assertEquals(
-                message[i] + " to Double",
-                expected[i].doubleValue(),
-                ((Double)(converter.convert(Double.class,input[i]))).doubleValue(),
-                0.00001D);
-            assertEquals(
-                message[i] + " to double",
-                expected[i].doubleValue(),
-                ((Double)(converter.convert(Double.TYPE,input[i]))).doubleValue(),
-                0.00001D);
+                message[i] + " to BigDecimal",
+                expected[i],
+                converter.convert(BigDecimal.class,input[i]));
             assertEquals(
                 message[i] + " to null type",
-                expected[i].doubleValue(),
-                ((Double)(converter.convert(null,input[i]))).doubleValue(),
-                0.00001D);
+                expected[i],
+                converter.convert(null,input[i]));
         }
     }
     

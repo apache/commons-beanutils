@@ -14,112 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
-
 package org.apache.commons.beanutils.converters;
 
-
 import java.math.BigInteger;
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
-
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.math.BigInteger</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * {@link NumberConverter} implementation that handles conversion to
+ * and from <b>java.math.BigInteger</b> objects.
+ * <p>
+ * This implementation can be configured to handle conversion either
+ * by using BigInteger's default String conversion, or by using a Locale's pattern
+ * or by specifying a format pattern. See the {@link NumberConverter}
+ * documentation for further details.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.3
  */
-
-public final class BigIntegerConverter implements Converter {
-
-
-    // ----------------------------------------------------------- Constructors
-
+public final class BigIntegerConverter extends NumberConverter {
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
      */
     public BigIntegerConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+        super(BigInteger.class, false);
     }
 
-
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
      */
     public BigIntegerConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
+        super(BigInteger.class, false, defaultValue);
     }
-
-
-    // ----------------------------------------------------- Instance Variables
-
-
-    /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Convert the specified input object into an output object of the
-     * specified type.
-     *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
-     */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof BigInteger) {
-            return (value);
-        }
-
-        try {
-            return (new BigInteger(value.toString()));
-        } catch (Exception e) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(e);
-            }
-        }
-
-    }
-
 
 }

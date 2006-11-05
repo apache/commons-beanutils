@@ -423,7 +423,7 @@ public class BeanUtilsBean {
             Converter converter = getConvertUtils().lookup(type.getComponentType());
             if (converter != null) {
                 log.trace("        USING CONVERTER " + converter);
-                value = converter.convert(type, value);
+                value = converter.convert(type.getComponentType(), value);
             }
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,

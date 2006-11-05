@@ -17,30 +17,25 @@
 
 package org.apache.commons.beanutils.converters;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+import java.math.BigInteger;
 
 import junit.framework.TestSuite;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 
 /**
- * Test Case for the IntegerConverter class.
+ * Test Case for the BigInteger class.
  *
- * @author Rodney Waldhoff
- * @version $Revision$ $Date$
+ * @version $Revision$ $Date $
  */
-
-public class IntegerConverterTestCase extends NumberConverterTestBase {
+public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
-    public IntegerConverterTestCase(String name) {
+    public BigIntegerConverterTestCase(String name) {
         super(name);
     }
     
@@ -48,14 +43,14 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
 
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Integer("-12");
-        numbers[1] = new Integer("13");
-        numbers[2] = new Integer("-22");
-        numbers[3] = new Integer("23");
+        numbers[0] = new BigInteger("-12");
+        numbers[1] = new BigInteger("13");
+        numbers[2] = new BigInteger("-22");
+        numbers[3] = new BigInteger("23");
     }
 
     public static TestSuite suite() {
-        return new TestSuite(IntegerConverterTestCase.class);        
+        return new TestSuite(BigIntegerConverterTestCase.class);        
     }
 
     public void tearDown() throws Exception {
@@ -65,15 +60,15 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
     
     protected NumberConverter makeConverter() {
-        return new IntegerConverter();
+        return new BigIntegerConverter();
     }
     
     protected NumberConverter makeConverter(Object defaultValue) {
-        return new IntegerConverter(defaultValue);
+        return new BigIntegerConverter(defaultValue);
     }
     
     protected Class getExpectedType() {
-        return Integer.class;
+        return BigInteger.class;
     }
 
     // ------------------------------------------------------------------------
@@ -96,13 +91,13 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         };
         
         Object[] input = { 
-            String.valueOf(Integer.MIN_VALUE),
+            String.valueOf(Long.MIN_VALUE),
             "-17",
             "-1",
             "0",
             "1",
             "17",
-            String.valueOf(Integer.MAX_VALUE),
+            String.valueOf(Long.MAX_VALUE),
             new Byte((byte)7),
             new Short((short)8),
             new Integer(9),
@@ -110,63 +105,28 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
             new Float(11.1),
             new Double(12.2)
         };
-        
-        Integer[] expected = { 
-            new Integer(Integer.MIN_VALUE),
-            new Integer(-17),
-            new Integer(-1),
-            new Integer(0),
-            new Integer(1),
-            new Integer(17),
-            new Integer(Integer.MAX_VALUE),
-            new Integer(7),
-            new Integer(8),
-            new Integer(9),
-            new Integer(10),
-            new Integer(11),
-            new Integer(12)
+
+        BigInteger[] expected = { 
+            BigInteger.valueOf(Long.MIN_VALUE),
+            BigInteger.valueOf(-17),
+            BigInteger.valueOf(-1),
+            BigInteger.valueOf(0),
+            BigInteger.valueOf(1),
+            BigInteger.valueOf(17),
+            BigInteger.valueOf(Long.MAX_VALUE),
+            BigInteger.valueOf(7),
+            BigInteger.valueOf(8),
+            BigInteger.valueOf(9),
+            BigInteger.valueOf(10),
+            BigInteger.valueOf(11),
+            BigInteger.valueOf(12)
         };
         
         for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Integer",expected[i],converter.convert(Integer.class,input[i]));
-            assertEquals(message[i] + " to int",expected[i],converter.convert(Integer.TYPE,input[i]));
+            assertEquals(message[i] + " to BigInteger",expected[i],converter.convert(BigInteger.class,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-
-    /**
-     * Test Invalid Amounts (too big/small)
-     */
-    public void testInvalidAmount() {
-        Converter converter = makeConverter();
-        Class clazz = Integer.class;
-
-        Long min         = new Long(Integer.MIN_VALUE);
-        Long max         = new Long(Integer.MAX_VALUE);
-        Long minMinusOne = new Long(min.longValue() - 1);
-        Long maxPlusOne  = new Long(max.longValue() + 1);
-
-        // Minimum
-        assertEquals("Minimum", new Integer(Integer.MIN_VALUE), converter.convert(clazz, min));
-
-        // Maximum
-        assertEquals("Maximum", new Integer(Integer.MAX_VALUE), converter.convert(clazz, max));
-
-        // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (Exception e) {
-            // expected result
-        }
-
-        // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (Exception e) {
-            // expected result
-        }
-    }
+    
 }
 

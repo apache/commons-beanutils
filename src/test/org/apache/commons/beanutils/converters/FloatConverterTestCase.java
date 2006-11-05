@@ -43,6 +43,10 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
 
     public void setUp() throws Exception {
         converter = makeConverter();
+        numbers[0] = new Float("-12");
+        numbers[1] = new Float("13");
+        numbers[2] = new Float("-22");
+        numbers[3] = new Float("23");
     }
 
     public static TestSuite suite() {
@@ -55,8 +59,12 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
     
-    protected Converter makeConverter() {
+    protected NumberConverter makeConverter() {
         return new FloatConverter();
+    }
+    
+    protected NumberConverter makeConverter(Object defaultValue) {
+        return new FloatConverter(defaultValue);
     }
     
     protected Class getExpectedType() {
@@ -95,7 +103,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             new Integer(9),
             new Long(10),
             new Float(11.1),
-            new Double(12.2)
+            new Double(12.2),
         };
         
         Float[] expected = { 
@@ -132,6 +140,28 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
                 0.00001);
         }
     }
-    
+
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        Converter converter = makeConverter();
+        Class clazz = Float.class;
+
+        Double max     = new Double(Float.MAX_VALUE);
+        Double tooBig  = new Double(Double.MAX_VALUE);
+
+        // Maximum
+        assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
+
+        // Too Large
+        try {
+            assertEquals("Too Big", null, converter.convert(clazz, tooBig));
+            fail("More than maximum, expected ConversionException");
+        } catch (Exception e) {
+            // expected result
+        }
+    }
 }
 

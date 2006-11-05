@@ -43,6 +43,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     public void setUp() throws Exception {
         converter = makeConverter();
+        numbers[0] = new Byte("-12");
+        numbers[1] = new Byte("13");
+        numbers[2] = new Byte("-22");
+        numbers[3] = new Byte("23");
     }
 
     public static TestSuite suite() {
@@ -55,10 +59,13 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
     
-    protected Converter makeConverter() {
+    protected NumberConverter makeConverter() {
         return new ByteConverter();
     }
     
+    protected NumberConverter makeConverter(Object defaultValue) {
+        return new ByteConverter(defaultValue);
+    }
     protected Class getExpectedType() {
         return Byte.class;
     }
@@ -118,6 +125,41 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to Byte",expected[i],converter.convert(Byte.class,input[i]));
             assertEquals(message[i] + " to byte",expected[i],converter.convert(Byte.TYPE,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        }
+    }
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        Converter converter = makeConverter();
+        Class clazz = Byte.class;
+
+        Long min         = new Long(Byte.MIN_VALUE);
+        Long max         = new Long(Byte.MAX_VALUE);
+        Long minMinusOne = new Long(min.longValue() - 1);
+        Long maxPlusOne  = new Long(max.longValue() + 1);
+
+        // Minimum
+        assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
+
+        // Maximum
+        assertEquals("Maximum", new Byte(Byte.MAX_VALUE), converter.convert(clazz, max));
+
+        // Too Small
+        try {
+            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
+            fail("Less than minimum, expected ConversionException");
+        } catch (Exception e) {
+            // expected result
+        }
+
+        // Too Large
+        try {
+            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
+            fail("More than maximum, expected ConversionException");
+        } catch (Exception e) {
+            // expected result
         }
     }
     
