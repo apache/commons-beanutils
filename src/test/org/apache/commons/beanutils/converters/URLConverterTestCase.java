@@ -106,6 +106,10 @@ public class URLConverterTestCase extends TestCase {
             assertEquals(message[i] + " to URL",expected[i],converter.convert(URL.class,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
+        
+        for(int i=0;i<expected.length;i++) {
+            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+        }
     }
     
 }

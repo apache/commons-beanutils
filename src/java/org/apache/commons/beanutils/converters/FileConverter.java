@@ -14,98 +14,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
 package org.apache.commons.beanutils.converters;
 
 import java.io.File;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.io.FileL</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * {@link Converter} implementaion that handles conversion
+ * to and from <b>java.io.File</b> objects.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
  *
  * @author James Strachan
  * @version $Revision$ $Date$
  * @since 1.6
  */
-public final class FileConverter implements Converter {
-
-    // ----------------------------------------------------- Instance Variables
-
+public final class FileConverter extends AbstractConverter {
 
     /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // ----------------------------------------------------------- Constructors
-
-
-    /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Construct a <b>java.io.File</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
      */
     public FileConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+        super(File.class);
     }
 
-
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Construct a <b>java.io.File</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
      */
     public FileConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
+        super(File.class, defaultValue);
     }
 
-
-
-    // --------------------------------------------------------- Public Methods
-
-
     /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * <p>Convert the input object into a java.io.File.</p>
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Exception if conversion cannot be performed successfully
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof File) {
-            return (value);
-        }
-
+    protected Object convertToType(Class type, Object value) throws Exception {
         return new File(value.toString());
     }
 }

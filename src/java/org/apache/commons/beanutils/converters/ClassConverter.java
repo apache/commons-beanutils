@@ -14,118 +14,72 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
-
 package org.apache.commons.beanutils.converters;
 
-
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
-
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.lang.Class</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.  The class will be loaded from the thread context class
+ * {@link Converter} implementaion that handles conversion
+ * to and from <b>java.lang.Class</b> objects.
+ * <p>
+ * The class will be loaded from the thread context class
  * loader (if it exists); otherwise the class loader that loaded this class
- * will be used.</p>
+ * will be used.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
  *
  * @author Tomas Viberg
  * @version $Revision$ $Date$
  * @since 1.4
  */
-
-public final class ClassConverter implements Converter {
-
-
-    // ----------------------------------------------------------- Constructors
-
+public final class ClassConverter extends AbstractConverter {
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Construct a <b>java.lang.Class</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
      */
     public ClassConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+        super(Class.class);
     }
 
-
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Construct a <b>java.lang.Class</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
      */
     public ClassConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
+        super(Class.class, defaultValue);
     }
 
-
-    // ----------------------------------------------------- Instance Variables
-
-
     /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * <p>Convert a java.lang.Class or object into a String.</p>
      *
-     * @param type Data type to which this value should be converted
      * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @return the converted String value.
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof Class) {
-            return (value);
-        }
-
-        try {
-            ClassLoader classLoader =
-                Thread.currentThread().getContextClassLoader();
-            if (classLoader == null) {
-                classLoader = ClassConverter.class.getClassLoader();
-            }
-            return (classLoader.loadClass(value.toString()));
-        } catch (Exception e) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(e);
-            }
-        }
-
+    protected String convertToString(Object value) {
+        return (value instanceof Class) ? ((Class)value).getName() : value.toString();
     }
 
+    /**
+     * <p>Convert the input object into a java.lang.Class.</p>
+     *
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Exception if conversion cannot be performed successfully
+     */
+    protected Object convertToType(Class type, Object value) throws Exception {
+        ClassLoader classLoader =
+            Thread.currentThread().getContextClassLoader();
+        if (classLoader == null) {
+            classLoader = ClassConverter.class.getClassLoader();
+        }
+        return (classLoader.loadClass(value.toString()));
+    }
 
 }

@@ -62,7 +62,7 @@ public class BooleanConverterTestCase extends TestCase {
     }
 
     public void testDefaultValue() {
-        Object defaultValue = new Object();
+        Object defaultValue = Boolean.TRUE;
         BooleanConverter converter = new BooleanConverter(defaultValue);
 
         assertSame(defaultValue, converter.convert(Boolean.class, "bogus"));

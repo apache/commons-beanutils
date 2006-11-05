@@ -14,21 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
-
 package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
-
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.lang.Boolean</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
- *
- * <p>By default any object whose string representation is one of the values
+ * Generic {@link Converter} implementaion that handles conversion
+ * to and from <b>array</b> objects.
+ * {@link org.apache.commons.beanutils.Converter} implementaion that
+ * handles conversion to and from <b>java.lang.Boolean</b> objects.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
+ * <p>
+ * By default any object whose string representation is one of the values
  * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and 
  * string representations {"no", "n", "false", "off", "0"} are converted
  * to Boolean.FALSE. The recognised true/false strings can be changed by:
@@ -53,8 +53,7 @@ import org.apache.commons.beanutils.Converter;
  * @version $Revision$ $Date$
  * @since 1.3
  */
-
-public final class BooleanConverter implements Converter {
+public final class BooleanConverter extends AbstractConverter {
 
 
     // ----------------------------------------------------------- Constructors
@@ -66,9 +65,7 @@ public final class BooleanConverter implements Converter {
      * not one of the known true strings, nor one of the known false strings.
      */
     public BooleanConverter() {
-
-        this.useDefault = false;
-
+        super(Boolean.class);
     }
 
 
@@ -85,14 +82,32 @@ public final class BooleanConverter implements Converter {
      *  in which case this constructor acts like the no-argument one.
      */
     public BooleanConverter(Object defaultValue) {
-
-        if (defaultValue == NO_DEFAULT) {
-            this.useDefault = false;
-        } else {
-            this.defaultValue = defaultValue;
-            this.useDefault = true;
+        super(Boolean.class);
+        if (defaultValue != NO_DEFAULT) {
+            setDefaultValue(defaultValue);
         }
+    }
 
+    /**
+     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * if a conversion error occurs, ie the string value being converted is
+     * not one of the known true strings, nor one of the known false strings.
+     * <p>
+     * The provided string arrays are copied, so that changes to the elements
+     * of the array after this call is made do not affect this object.
+     *
+     * @param trueStrings is the set of strings which should convert to the
+     *  value Boolean.TRUE. The value null must not be present. Case is
+     *  ignored.
+     *
+     * @param falseStrings is the set of strings which should convert to the
+     *  value Boolean.TRUE. The value null must not be present. Case is
+     *  ignored.
+     */
+    public BooleanConverter(String[] trueStrings, String[] falseStrings) {
+        super(Boolean.class);
+        this.trueStrings = copyStrings(trueStrings);
+        this.falseStrings = copyStrings(falseStrings);
     }
 
     /**
@@ -119,17 +134,12 @@ public final class BooleanConverter implements Converter {
      */
     public BooleanConverter(String[] trueStrings, String[] falseStrings, 
                 Object defaultValue) {
-
+        super(Boolean.class);
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
-        
-        if (defaultValue == NO_DEFAULT) {
-            this.useDefault = false;
-        } else {
-            this.defaultValue = defaultValue;
-            this.useDefault = true;
+        if (defaultValue != NO_DEFAULT) {
+            setDefaultValue(defaultValue);
         }
-
     }
 
 
@@ -141,34 +151,24 @@ public final class BooleanConverter implements Converter {
      * to the constructor to indicate that no default is desired. Note that
      * the value 'null' cannot be used for this purpose, as the caller may
      * want a null to be returned as the default.
+     * @deprecated Use constructors without default value.
      */
     public static final Object NO_DEFAULT = new Object();
 
 
     // ----------------------------------------------------- Instance Variables
 
-
-    /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue;
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault;
-
     /**
      * The set of strings that are known to map to Boolean.TRUE.
      */
-    private String[] trueStrings = {"yes", "y", "true", "on", "1"};
+    private String[] trueStrings = {"true", "yes", "y", "on", "1"};
 
     /**
      * The set of strings that are known to map to Boolean.FALSE.
      */
-    private String[] falseStrings = {"no", "n", "false", "off", "0"};
+    private String[] falseStrings = {"false", "no", "n", "off", "0"};
 
-    // --------------------------------------------------------- Public Methods
+    // --------------------------------------------------------- Protected Methods
 
     /**
      * Convert the specified input object into an output object of the
@@ -190,19 +190,7 @@ public final class BooleanConverter implements Converter {
      *  successfully and the constructor was not provided with a default
      *  value to return on conversion failure.
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof Boolean) {
-            return (value);
-        }
+    protected Object convertToType(Class type, Object value) throws Exception {
 
         // All the values in the trueStrings and falseStrings arrays are
         // guaranteed to be lower-case. By converting the input value
@@ -220,11 +208,7 @@ public final class BooleanConverter implements Converter {
                 return Boolean.FALSE;
         }
         
-        if (useDefault) {
-            return defaultValue;
-        }
-
-        throw new ConversionException(value.toString());
+        throw new ConversionException("Cna't convert value '" + value + "' to a Boolean");
     }
 
     /**

@@ -14,115 +14,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
-
 package org.apache.commons.beanutils.converters;
 
+import java.net.URL;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
-import java.net.URL;
-import java.net.MalformedURLException;
-
-
-
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.net.URL</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * {@link Converter} implementaion that handles conversion
+ * to and from <b>java.net.URL</b> objects.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
  *
  * @author Henri Yandell
  * @version $Revision$ $Date$
  * @since 1.3
  */
-
-public final class URLConverter implements Converter {
-
-
-    // ----------------------------------------------------------- Constructors
-
+public final class URLConverter extends AbstractConverter {
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Construct a <b>java.net.URL</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
      */
     public URLConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+        super(URL.class);
     }
 
-
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Construct a <b>java.net.URL</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
      */
     public URLConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
+        super(URL.class, defaultValue);
     }
 
-
-    // ----------------------------------------------------- Instance Variables
-
-
     /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * <p>Convert a java.net.URL or object into a String.</p>
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Exception if conversion cannot be performed successfully
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
-        }
-
-        if (value instanceof URL) {
-            return (value);
-        }
-
-        try {
-            return new URL(value.toString());
-        } catch(MalformedURLException murle) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(murle);
-            }
-        }
-
+    protected Object convertToType(Class type, Object value) throws Exception {
+        return new URL(value.toString());
     }
-
 
 }
