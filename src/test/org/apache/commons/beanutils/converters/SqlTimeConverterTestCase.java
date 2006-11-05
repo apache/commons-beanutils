@@ -18,9 +18,10 @@
 package org.apache.commons.beanutils.converters;
 
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Locale;
 
 import junit.framework.TestSuite;
-import org.apache.commons.beanutils.Converter;
 
 /**
  * Test Case for the {@link SqlTimeConverter} class.
@@ -30,24 +31,116 @@ import org.apache.commons.beanutils.Converter;
 
 public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
     public SqlTimeConverterTestCase(String name) {
         super(name);
     }
 
     // ------------------------------------------------------------------------
 
+    /**
+     * Create Test Suite
+     * @return test suite
+     */
     public static TestSuite suite() {
         return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
     // ------------------------------------------------------------------------
 
-    protected Converter makeConverter() {
-        return new SqlTimeConverter();
+    /**
+     * Test Date Converter with no default value
+     */
+    public void testLocale() {
+
+        // Re-set the default Locale to Locale.US
+        Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        String pattern = "h:mm a"; // SHORT style time format for US Locale
+
+        // Create & Configure the Converter
+        DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(true);
+
+        // Valid String --> Type Conversion
+        String testString = "3:06 pm";
+        Object expected = toType(testString, pattern, null);
+        validConversion(converter, expected, testString);
+
+        // Invalid Conversions
+        invalidConversion(converter, null);
+        invalidConversion(converter, "");
+        invalidConversion(converter, "13:05");
+        invalidConversion(converter, "11:05 p");
+        invalidConversion(converter, "11.05 pm");
+        invalidConversion(converter, new Integer(2));
+
+        // Test specified Locale
+        converter.setLocale(Locale.UK);
+        invalidConversion(converter, testString);      // Test previous value now fails
+        validConversion(converter, expected, "15:06"); // UK Short style is "HH:mm"
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
+
     }
 
+    /**
+     * Test default String to java.sql.Time conversion
+     */
+    public void testDefaultStringToTypeConvert() {
+
+        // Create & Configure the Converter
+        DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        // Valid String --> java.sql.Time Conversion
+        String testString = "15:36:21";
+        Object expected = toType(testString, "HH:mm:ss", null);
+        validConversion(converter, expected, testString);
+
+        // Invalid String --> java.sql.Time Conversion
+        invalidConversion(converter, "15:36");
+
+    }
+
+    /**
+     * Create the Converter with no default value.
+     * @return A new Converter
+     */
+    protected DateTimeConverter makeConverter() {
+        return new SqlTimeConverter();
+    }
+    
+    /**
+     * Create the Converter with a default value.
+     * @param defaultValue The default value
+     * @return A new Converter
+     */
+    protected DateTimeConverter makeConverter(Object defaultValue) {
+        return new SqlTimeConverter(defaultValue);
+    }
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
     protected Class getExpectedType() {
         return Time.class;
+    }
+
+    /**
+     * Convert from a Calendar to the appropriate Date type
+     * 
+     * @param value The Calendar value to convert
+     * @return The converted value
+     */
+    protected Object toType(Calendar value) {
+        return new Time(value.getTimeInMillis());
     }
 
 }

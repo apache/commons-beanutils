@@ -14,123 +14,69 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 package org.apache.commons.beanutils.converters;
 
-
 import java.sql.Time;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
-
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
- * String into a <code>java.sql.Time</code> object, optionally using a
- * default value or throwing a {@link ConversionException} if a conversion
- * error occurs.</p>
+ * {@link DateTimeConverter} implementation that handles conversion to
+ * and from <b>java.sql.Time</b> objects.
+ * <p>
+ * This implementation can be configured to handle conversion either
+ * by using java.sql.Time's default String conversion, or by using a
+ * Locale's default format or by specifying a set of format patterns.
+ * See the {@link DateTimeConverter} documentation for further details.
+ * <p>
+ * Can be configured to either return a <i>default value</i> or throw a
+ * <code>ConversionException</code> if a conversion error occurs.
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.3
  */
-
-public final class SqlTimeConverter implements Converter {
-
-
-    // ----------------------------------------------------------- Constructors
-
+public final class SqlTimeConverter extends DateTimeConverter {
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Construct a <b>java.sql.Time</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
      */
     public SqlTimeConverter() {
-
-        this.defaultValue = null;
-        this.useDefault = false;
-
+        super(Time.class);
     }
 
-
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Construct a <b>java.sql.Time</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
      */
     public SqlTimeConverter(Object defaultValue) {
-
-        this.defaultValue = defaultValue;
-        this.useDefault = true;
-
+        super(Time.class, defaultValue);
     }
 
-
-    // ----------------------------------------------------- Instance Variables
-
-
     /**
-     * The default value specified to our Constructor, if any.
-     */
-    private Object defaultValue = null;
-
-
-    /**
-     * Should we return the default value on conversion errors?
-     */
-    private boolean useDefault = true;
-
-
-    // --------------------------------------------------------- Public Methods
-
-
-    /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * Return a <code>DateFormat<code> for the Locale.
+     * @param locale TODO
+     * @param timeZone TODO
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @return The DateFormat.
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
-            }
+    protected DateFormat getFormat(Locale locale, TimeZone timeZone) {
+        DateFormat format = null;
+        if (locale == null) {
+            format = DateFormat.getTimeInstance(DateFormat.SHORT);
+        } else {
+            format = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
         }
-
-        if (value instanceof Time) {
-            return (value);
+        if (timeZone != null) {
+            format.setTimeZone(timeZone);
         }
-
-        if (value instanceof Date) {
-            return new Time(((Date)value).getTime());
-        }
-
-        if (value instanceof Calendar) {
-            return new Time(((Calendar)value).getTime().getTime());
-        }
-
-        try {
-            return (Time.valueOf(value.toString()));
-        } catch (Exception e) {
-            if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(e);
-            }
-        }
-
+        return format;
     }
-
 
 }

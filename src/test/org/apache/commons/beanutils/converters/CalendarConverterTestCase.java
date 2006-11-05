@@ -14,27 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.beanutils.converters;
 
-import java.sql.Date;
 import java.util.Calendar;
-
 import junit.framework.TestSuite;
 
 /**
- * Test Case for the {@link SqlDateConverter} class.
+ * Test Case for the CalendarConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Revision$
  */
-
-public class SqlDateConverterTestCase extends DateConverterTestBase {
+public class CalendarConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
+     * Construct a new Calendar test case.
      * @param name Test Name
      */
-    public SqlDateConverterTestCase(String name) {
+    public CalendarConverterTestCase(String name) {
         super(name);
     }
 
@@ -45,53 +41,16 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(SqlDateConverterTestCase.class);
+        return new TestSuite(CalendarConverterTestCase.class);        
     }
 
     // ------------------------------------------------------------------------
-
-    /**
-     * Test default String to java.sql.Date conversion
-     */
-    public void testDefaultStringToTypeConvert() {
-
-        // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        // Valid String --> java.sql.Date Conversion
-        String testString = "2006-05-16";
-        Object expected = toType(testString, "yyyy-MM-dd", null);
-        validConversion(converter, expected, testString);
-
-        // Invalid String --> java.sql.Date Conversion
-        invalidConversion(converter, "01/01/2006");
-    }
-
-    /**
-     * Test default java.sql.Date to String conversion
-     */
-    public void testDefaultTypeToStringConvert() {
-
-        // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        // Valid String --> java.sql.Date Conversion
-        String expected  = "2006-05-16";
-        Object testVal   = toType(expected, "yyyy-MM-dd", null);
-        stringConversion(converter, expected, testVal);
-
-        Object result = converter.convert(String.class, new Integer(2));
-        assertEquals("Default toString()", "2", result);
-    }
-
     /**
      * Create the Converter with no default value.
      * @return A new Converter
      */
     protected DateTimeConverter makeConverter() {
-        return new SqlDateConverter();
+        return new CalendarConverter();
     }
     
     /**
@@ -100,7 +59,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     protected DateTimeConverter makeConverter(Object defaultValue) {
-        return new SqlDateConverter(defaultValue);
+        return new CalendarConverter(defaultValue);
     }
 
     /**
@@ -108,17 +67,17 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     protected Class getExpectedType() {
-        return Date.class;
+        return Calendar.class;
     }
 
     /**
-     * Convert from a Calendar to the appropriate Date type
+     * Convert from a java.util.Date to the Converter's type.
      * 
-     * @param value The Calendar value to convert
+     * @param value The Date value to convert
      * @return The converted value
      */
     protected Object toType(Calendar value) {
-        return new java.sql.Date(value.getTimeInMillis());
-    }
+        return value;
+   }
 
 }
