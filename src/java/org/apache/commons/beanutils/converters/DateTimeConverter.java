@@ -1,0 +1,544 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */ 
+package org.apache.commons.beanutils.converters;
+
+import java.util.Date;
+import java.util.Locale;
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
+import org.apache.commons.beanutils.ConversionException;
+
+/**
+ * Generic {@link org.apache.commons.beanutils.Converter} implementaion
+ * that handles conversion to and from <b>date/time</b> objects.
+ * <p>
+ * This implementation handles conversion for the following
+ * <i>date/time</i> types.
+ * <ul>
+ *     <li><code>java.util.Date</code></li>
+ *     <li><code>java.util.Calendar</code></li>
+ *     <li><code>java.sql.Date</code></li>
+ *     <li><code>java.sql.Time</code></li>
+ *     <li><code>java.sql.Timestamp</code></li>
+ * </ul>
+ *
+ * <h3>String Conversions (to and from)</h3>
+ * This class provides a number of ways in which date/time
+ * conversions to/from Strings can be achieved:
+ * <ul>
+ *    <li>Using the SHORT date format for the default Locale, configure using:</li>
+ *        <ul>
+ *           <li><code>setUseLocaleFormat(true)</code></li>
+ *        </ul>
+ *    <li>Using the SHORT date format for a specified Locale, configure using:</li>
+ *        <ul>
+ *           <li><code>setLocale(Locale)</code></li>
+ *        </ul>
+ *    <li>Using the specified date pattern(s) for the default Locale, configure using:</li>
+ *        <ul>
+ *           <li>Either <code>setPattern(String)</code> or
+ *                      <code>setPatterns(String[])</code></li>
+ *        </ul>
+ *    <li>Using the specified date pattern(s) for a specified Locale, configure using:</li>
+ *        <ul>
+ *           <li><code>setPattern(String)</code> or
+ *                    <code>setPatterns(String[]) and...</code></li>
+ *           <li><code>setLocale(Locale)</code></li>
+ *        </ul>
+ *    <li>If none of the above are configured the
+ *        <code>toDate(String)</code> method is used to convert
+ *        from String to Date and the Dates's
+ *        <code>toString()</code> method used to convert from
+ *        Date to String.</li>
+ * </ul>
+ *
+ * <p>
+ * The <b>Time Zone</b> to use with the date format can be specified
+ * using the <code>setTimeZone()</code> method.
+ *
+ * @version $Revision$ $Date$
+ * @since 1.8.0
+ */
+public class DateTimeConverter extends AbstractConverter {
+
+    private String[] patterns;
+    private String displayPatterns;
+    private Locale locale;
+    private TimeZone timeZone;
+    private boolean useLocaleFormat;
+
+
+    // ----------------------------------------------------------- Constructors
+
+    /**
+     * Construct a Date/Time <i>Converter</i> that throws a
+     * <code>ConversionException</code> if an error occurs.
+     *
+     * @param defaultType The default type this <code>Converter</code>
+     * handles
+     */
+    public DateTimeConverter(Class defaultType) {
+        super(defaultType);
+    }
+
+    /**
+     * Construct a Date/Time <i>Converter</i> that returns a default
+     * value if an error occurs.
+     *
+     * @param defaultType The default type this <code>Converter</code>
+     * handles
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public DateTimeConverter(Class defaultType, Object defaultValue) {
+        super(defaultType, defaultValue);
+    }
+
+
+    // --------------------------------------------------------- Public Methods
+
+    /**
+     * Indicate whether conversion should use a format/pattern or not.
+     *
+     * @param useLocaleFormat <code>true</code> if the format
+     * for the locale should be used, otherwise <code>false</code>
+     */
+    public void setUseLocaleFormat(boolean useLocaleFormat) {
+        this.useLocaleFormat = useLocaleFormat;
+    }
+
+    /**
+     * Set the Time Zone to use when converting dates.
+     *
+     * @param timeZone The Time Zone.
+     */
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    /**
+     * Set the Locale for the <i>Converter</i>.
+     *
+     * @param locale The Locale.
+     */
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        setUseLocaleFormat(true);
+    }
+
+    /**
+     * Set a date format pattern to use to convert
+     * dates to/from a <code>java.lang.String</code>.
+     *
+     * @see SimpleDateFormat
+     * @param pattern The format pattern.
+     */
+    public void setPattern(String pattern) {
+        setPatterns(new String[] {pattern});
+    }
+
+    /**
+     * Set the date format patterns to use to convert
+     * dates to/from a <code>java.lang.String</code>.
+     *
+     * @see SimpleDateFormat
+     * @param patterns Array of format patterns.
+     */
+    public void setPatterns(String[] patterns) {
+        this.patterns = patterns;
+        if (patterns != null && patterns.length > 1) {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < patterns.length; i++) {
+                if (i > 0) {
+                    buffer.append(", ");
+                }
+                buffer.append(patterns[i]);
+            }
+            displayPatterns = buffer.toString();
+        }
+        setUseLocaleFormat(true);
+    }
+
+    // ------------------------------------------------------ Protected Methods
+
+    /**
+     * Convert an input Date/Calendar object into a String.
+     * <p>
+     * <b>N.B.</b>If the converter has been configured to with
+     * one or more patterns (using <code>setPatterns()</code>), then
+     * the first pattern will be used to format the date into a String.
+     * Otherwise the default <code>DateFormat</code> for the default locale
+     * (and <i>style</i> if configured) will be used.
+     *
+     * @param value The input value to be converted
+     * @return the converted String value.
+     */
+    protected String convertToString(Object value) {
+
+        Date date     = null;
+        if (value instanceof Date) {
+            date = (Date)value;
+        } else if (value instanceof Calendar) {
+            date = ((Calendar)value).getTime();
+        } else if (value instanceof Long) {
+            date = new Date(((Long)value).longValue());
+        }
+
+        String result = null;
+        if (useLocaleFormat && date != null) {
+            DateFormat format = null;
+            if (patterns != null && patterns.length > 0) {
+                format = getFormat(patterns[0]);
+            } else {
+                format = getFormat(locale, timeZone);
+            }
+            logFormat("Formatting", format);
+            result = format.format(date);
+            if (log().isDebugEnabled()) {
+                log().debug("    Converted  to String using format '" + result + "'");
+            }
+        } else {
+            result = value.toString();
+            if (log().isDebugEnabled()) {
+                log().debug("    Converted  to String using toString() '" + result + "'");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Convert the input object into a Date object of the
+     * specified type.
+     * <p>
+     * This method handles conversions between the following
+     * types:
+     * <ul>
+     *     <li><code>java.util.Date</code></li>
+     *     <li><code>java.util.Calendar</code></li>
+     *     <li><code>java.sql.Date</code></li>
+     *     <li><code>java.sql.Time</code></li>
+     *     <li><code>java.sql.Timestamp</code></li>
+     * </ul>
+     *
+     * It also handles conversion from a <code>String</code> to
+     * any of the above types.
+     * <p>
+     *
+     * For <code>String</code> conversion, if the converter has been configured
+     * with one or more patterns (using <code>setPatterns()</code>), then
+     * the conversion is attempted with each of the specified patterns.
+     * Otherwise the default <code>DateFormat</code> for the default locale
+     * (and <i>style</i> if configured) will be used.
+     *
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Exception if conversion cannot be performed successfully
+     */
+    protected Object convertToType(Class type, Object value) throws Exception {
+
+        // Handle Date (includs java.sql.Date, java.sql.Time & java.sql.Timestamp)
+        if (value instanceof Date) {
+            Date date = (Date)value;
+            return toDate(type, date.getTime());
+        }
+
+        // Handle Calendar
+        if (value instanceof Calendar) {
+            Calendar calendar = (Calendar)value;
+            return toDate(type, calendar.getTime().getTime());
+        }
+
+        // Handle Long
+        if (value instanceof Long) {
+            Long longObj = (Long)value;
+            return toDate(type, longObj.longValue());
+        }
+
+        // Convert all other types to String & handle
+        String stringValue = value.toString().trim();
+        if (stringValue.length() == 0) {
+            return handleMissing(type);
+        }
+
+        // Parse the Date/Time
+        if (useLocaleFormat) {
+            Calendar calendar = null;
+            if (patterns != null && patterns.length > 0) {
+                calendar = parse(stringValue);
+            } else {
+                DateFormat format = getFormat(locale, timeZone);
+                calendar = parse(stringValue, format);
+            }
+            if (Calendar.class.isAssignableFrom(type)) {
+                return calendar;
+            } else {
+                return toDate(type, calendar.getTime().getTime());
+            }
+        }
+
+        // Default String conversion
+        return toDate(type, stringValue);
+
+    }
+
+    /**
+     * Convert a long value to the specified Date type for this
+     * <i>Converter</i>.
+     * <p>
+     *
+     * This method handles conversion to the following types:
+     * <ul>
+     *     <li><code>java.util.Date</code></li>
+     *     <li><code>java.util.Calendar</code></li>
+     *     <li><code>java.sql.Date</code></li>
+     *     <li><code>java.sql.Time</code></li>
+     *     <li><code>java.sql.Timestamp</code></li>
+     * </ul>
+     *
+     * @param type The Date type to convert to
+     * @param value The long value to convert.
+     * @return The converted date value.
+     */
+    private Object toDate(Class type, long value) {
+
+        // java.util.Date
+        if (type.equals(Date.class)) {
+            return new Date(value);
+        }
+
+        // java.sql.Date
+        if (type.equals(java.sql.Date.class)) {
+            return new java.sql.Date(value);
+        }
+
+        // java.sql.Time
+        if (type.equals(java.sql.Time.class)) {
+            return new java.sql.Time(value);
+        }
+
+        // java.sql.Timestamp
+        if (type.equals(java.sql.Timestamp.class)) {
+            return new java.sql.Timestamp(value);
+        }
+
+        // java.util.Calendar
+        if (type.equals(Calendar.class)) {
+            Calendar calendar = null;
+            if (locale == null && timeZone == null) {
+                calendar = Calendar.getInstance();
+            } else if (locale == null) {
+                calendar = Calendar.getInstance(timeZone);
+            } else if (timeZone == null) {
+                calendar = Calendar.getInstance(locale);
+            } else {
+                calendar = Calendar.getInstance(timeZone, locale);
+            }
+            calendar.setTime(new Date(value));
+            calendar.setLenient(false);
+            return calendar;
+        }
+
+        throw new ConversionException("Cannot handle conversion to Date type "
+                + toString(type));
+    }
+
+    /**
+     * Default String to Date conversion.
+     * <p>
+     * This method handles conversion from a String to the following types:
+     * <ul>
+     *     <li><code>java.sql.Date</code></li>
+     *     <li><code>java.sql.Time</code></li>
+     *     <li><code>java.sql.Timestamp</code></li>
+     * </ul>
+     * <p>
+     * <strong>N.B.</strong> No default String conversion
+     * mechanism is provided for <code>java.util.Date</code>
+     * and <code>java.util.Calendar</code> type.
+     *
+     * @param type The Number type to convert to
+     * @param value The String value to convert.
+     * @return The converted Number value.
+     */
+    private Object toDate(Class type, String value) {
+        // java.sql.Date
+        if (type.equals(java.sql.Date.class)) {
+            try {
+                return java.sql.Date.valueOf(value);
+            } catch (IllegalArgumentException e) {
+                throw new ConversionException(
+                        "Date must be in JDBC format [yyyy-MM-dd]");
+            }
+        }
+
+        // java.sql.Time
+        if (type.equals(java.sql.Time.class)) {
+            try {
+                return java.sql.Time.valueOf(value);
+            } catch (IllegalArgumentException e) {
+                throw new ConversionException(
+                        "Time must be in JDBC format [HH:mm:ss]");
+            }
+        }
+
+        // java.sql.Timestamp
+        if (type.equals(java.sql.Timestamp.class)) {
+            try {
+                return java.sql.Timestamp.valueOf(value);
+            } catch (IllegalArgumentException e) {
+                throw new ConversionException(
+                        "Timestamp must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff]");
+            }
+        }
+
+        String msg = "String to '" + toString(type) + "' conversion unsupported.";
+        if (log().isWarnEnabled()) {
+            log().warn("    " + msg
+                    + " Change converter configuration or use a different implementation.");
+        }
+        throw new ConversionException(msg);
+    }
+
+    /**
+     * Return a <code>DateFormat<code> for the Locale.
+     * @param locale The Locale to create the Format with (may be null)
+     * @param timeZone The Time Zone create the Format with (may be null)
+     *
+     * @return A Date Format.
+     */
+    protected DateFormat getFormat(Locale locale, TimeZone timeZone) {
+        DateFormat format = null;
+        if (locale == null) {
+            format = DateFormat.getDateInstance(DateFormat.SHORT);
+        } else {
+            format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+        }
+        if (timeZone != null) {
+            format.setTimeZone(timeZone);
+        }
+        return format;
+    }
+
+    /**
+     * Create a date format for the specified pattern.
+     *
+     * @param pattern The date pattern
+     * @return The DateFormat
+     */
+    private DateFormat getFormat(String pattern) {
+        DateFormat format = new SimpleDateFormat(pattern);
+        if (timeZone != null) {
+            format.setTimeZone(timeZone);
+        }
+        return format;
+    }
+
+    /**
+     * Parse a String date value using the set of patterns.
+     * @param value The String date value.
+     * @param type The type to convert the value to.
+     *
+     * @return The converted Date object.
+     * @throws Exception if an error occurs parsing the date.
+     */
+    private Calendar parse(String value) throws Exception {
+        Exception firstEx = null;
+        for (int i = 0; i < patterns.length; i++) {
+            try {
+                DateFormat format = getFormat(patterns[i]);
+                Calendar calendar = parse(value, format);
+                return calendar;
+            } catch (Exception ex) {
+                if (firstEx == null) {
+                    firstEx = ex;
+                }
+            }
+        }
+        if (patterns.length > 1) {
+            throw new ConversionException("Can't parse date '" + value
+                    + "' using  patterns '" + displayPatterns + "'");
+        } else {
+            throw firstEx;
+        }
+    }
+
+    /**
+     * Parse a String into a <code>Calendar</code> object
+     * using the specified <code>DateFormat</code>.
+     *
+     * @param value The String date value.
+     * @param format The DateFormat to parse the String value.
+     * @return The converted Calendar object.
+     * @throws ConversionException if the String cannot be converted.
+     */
+    private Calendar parse(String value, DateFormat format) {
+        logFormat("Parsing", format);
+        format.setLenient(false);
+        ParsePosition pos = new ParsePosition(0);
+        Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
+        if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
+            String msg = "Error parsing date '" + value + "'";
+            if (format instanceof SimpleDateFormat) {
+                msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
+            }
+            if (log().isDebugEnabled()) {
+                log().debug("    " + msg);
+            }
+            throw new ConversionException(msg);
+        }
+        Calendar calendar = format.getCalendar();
+        return calendar;
+    }
+
+    /**
+     * Log the <code>DateFormat<code> creation.
+     * @param action The action the format is being used for
+     * @param format The Date format
+     */
+    private void logFormat(String action, DateFormat format) {
+        if (log().isDebugEnabled()) {
+            StringBuffer buffer = new StringBuffer(45);
+            buffer.append("    ");
+            buffer.append(action);
+            buffer.append(" with Format");
+            if (format instanceof SimpleDateFormat) {
+                buffer.append("[");
+                buffer.append(((SimpleDateFormat)format).toPattern());
+                buffer.append("]");
+            }
+            buffer.append(" for ");
+            if (locale == null) {
+                buffer.append("default locale");
+            } else {
+                buffer.append("locale[");
+                buffer.append(locale);
+                buffer.append("]");
+            }
+            if (timeZone != null) {
+                buffer.append(", TimeZone[");
+                buffer.append(timeZone);
+                buffer.append("]");
+            }
+            log().debug(buffer.toString());
+        }
+    }
+}
