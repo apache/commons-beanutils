@@ -113,7 +113,7 @@ public abstract class DateConverterTestBase extends TestCase {
         };
         
         // Initialize calendar also with same ms to avoid a failing test in a new time slice
-        ((GregorianCalendar)date[1]).setTimeInMillis(now);
+        ((GregorianCalendar)date[1]).setTime(new Date(now));
 
         for (int i = 0; i < date.length; i++) {
             Object val = makeConverter().convert(getExpectedType(), date[i]);
@@ -121,7 +121,7 @@ public abstract class DateConverterTestBase extends TestCase {
             assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
                        getExpectedType().isInstance(val));
             assertEquals("Convert " + message[i] + " should return a " + date[0],
-                         now, (Calendar.class.isInstance(val) ? ((Calendar)val).getTimeInMillis() : ((Date)val).getTime()));
+                         now, getTimeInMillis(val));
         }
     }
 
@@ -489,7 +489,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return The converted java.sql.Date
      */
     java.sql.Date toSqlDate(Calendar calendar) {
-        return new java.sql.Date(calendar.getTimeInMillis());
+        return new java.sql.Date(getTimeInMillis(calendar));
     }
 
     /**
@@ -498,7 +498,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return The converted java.sql.Time
      */
     java.sql.Time toSqlTime(Calendar calendar) {
-        return new java.sql.Time(calendar.getTimeInMillis());
+        return new java.sql.Time(getTimeInMillis(calendar));
     }
 
     /**
@@ -507,6 +507,31 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return The converted java.sql.Timestamp
      */
     java.sql.Timestamp toSqlTimestamp(Calendar calendar) {
-        return new java.sql.Timestamp(calendar.getTimeInMillis());
+        return new java.sql.Timestamp(getTimeInMillis(calendar));
+    }
+
+    /**
+     * Convert a Date or Calendar objects to the time in millisconds
+     * @param date The date or calendar object
+     * @return The time in milliseconds
+     */
+    long getTimeInMillis(Object date) {
+
+        if (date instanceof java.sql.Timestamp) {
+            // ---------------------- JDK 1.3 Fix ----------------------
+            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
+            //      didn't include the milliseconds. The following code
+            //      ensures it works consistently accross JDK versions
+            java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
+            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
+            timeInMillis += timestamp.getNanos() / 1000000;
+            return timeInMillis;
+        }
+
+        if (date instanceof Calendar) {
+            return ((Calendar)date).getTime().getTime();
+        } else {
+            return ((Date)date).getTime();
+        }
     }
 }

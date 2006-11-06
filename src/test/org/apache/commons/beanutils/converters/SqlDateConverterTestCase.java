@@ -118,7 +118,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     protected Object toType(Calendar value) {
-        return new java.sql.Date(value.getTimeInMillis());
+        return new java.sql.Date(getTimeInMillis(value));
     }
 
 }

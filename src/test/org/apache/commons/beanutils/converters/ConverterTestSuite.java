@@ -37,13 +37,27 @@ public class ConverterTestSuite {
      */
     public static Test suite() {
         TestSuite testSuite = new TestSuite();
+        testSuite.addTestSuite(ArrayConverterTestCase.class);
+        testSuite.addTestSuite(BigDecimalConverterTestCase.class);
+        testSuite.addTestSuite(BigIntegerConverterTestCase.class);
+        testSuite.addTestSuite(BooleanArrayConverterTestCase.class);
+        testSuite.addTestSuite(BooleanConverterTestCase.class);
         testSuite.addTestSuite(ByteConverterTestCase.class);
+        testSuite.addTestSuite(CalendarConverterTestCase.class);
+        testSuite.addTestSuite(CharacterConverterTestCase.class);
+        testSuite.addTestSuite(ClassConverterTestCase.class);
+        testSuite.addTestSuite(DateConverterTestCase.class);
         testSuite.addTestSuite(DoubleConverterTestCase.class);
+        testSuite.addTestSuite(FileConverterTestCase.class);
         testSuite.addTestSuite(FloatConverterTestCase.class);
         testSuite.addTestSuite(IntegerConverterTestCase.class);
         testSuite.addTestSuite(LongConverterTestCase.class);
         testSuite.addTestSuite(ShortConverterTestCase.class);
+        testSuite.addTestSuite(SqlDateConverterTestCase.class);
+        testSuite.addTestSuite(SqlTimeConverterTestCase.class);
+        testSuite.addTestSuite(SqlTimestampConverterTestCase.class);
         testSuite.addTestSuite(StringArrayConverterTestCase.class);
+        testSuite.addTestSuite(URLConverterTestCase.class);
         return testSuite;
     }
 }

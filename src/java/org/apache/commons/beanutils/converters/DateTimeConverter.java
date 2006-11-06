@@ -250,7 +250,21 @@ public class DateTimeConverter extends AbstractConverter {
      */
     protected Object convertToType(Class type, Object value) throws Exception {
 
-        // Handle Date (includs java.sql.Date, java.sql.Time & java.sql.Timestamp)
+        // Handle java.sql.Timestamp
+        if (value instanceof java.sql.Timestamp) {
+
+            // ---------------------- JDK 1.3 Fix ----------------------
+            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
+            //      didn't include the milliseconds. The following code
+            //      ensures it works consistently accross JDK versions
+            java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
+            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
+            timeInMillis += timestamp.getNanos() / 1000000;
+            // ---------------------- JDK 1.3 Fix ----------------------
+            return toDate(type, timeInMillis);
+        }
+
+        // Handle Date (includes java.sql.Date & java.sql.Time)
         if (value instanceof Date) {
             Date date = (Date)value;
             return toDate(type, date.getTime());

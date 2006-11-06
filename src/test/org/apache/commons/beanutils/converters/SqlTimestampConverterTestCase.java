@@ -137,7 +137,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     protected Object toType(Calendar value) {
-        return new Timestamp(value.getTimeInMillis());
+        return new Timestamp(getTimeInMillis(value));
     }
 
 }
