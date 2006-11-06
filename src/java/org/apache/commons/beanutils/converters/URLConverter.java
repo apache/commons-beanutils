@@ -27,7 +27,6 @@ import org.apache.commons.beanutils.Converter;
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  *
- * @author Henri Yandell
  * @version $Revision$ $Date$
  * @since 1.3
  */

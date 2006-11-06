@@ -28,7 +28,6 @@ import java.net.URL;
 /**
  * Test Case for the URLConverter class.
  *
- * @author Henri Yandell
  * @version $Revision$ $Date$
  */
 
