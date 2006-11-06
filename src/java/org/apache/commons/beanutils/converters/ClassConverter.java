@@ -61,8 +61,8 @@ public final class ClassConverter extends AbstractConverter {
      * @param value The input value to be converted
      * @return the converted String value.
      */
-    protected String convertToString(Object value) {
-        return (value instanceof Class) ? ((Class)value).getName() : value.toString();
+    protected Object convertToString(Object value) {
+        return (value instanceof Class) ? ((Class)value).getName() : value;
     }
 
     /**

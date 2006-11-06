@@ -191,9 +191,9 @@ public class DateTimeConverter extends AbstractConverter {
      * @param value The input value to be converted
      * @return the converted String value.
      */
-    protected String convertToString(Object value) {
+    protected Object convertToString(Object value) {
 
-        Date date     = null;
+        Date date = null;
         if (value instanceof Date) {
             date = (Date)value;
         } else if (value instanceof Calendar) {
@@ -202,7 +202,7 @@ public class DateTimeConverter extends AbstractConverter {
             date = new Date(((Long)value).longValue());
         }
 
-        String result = null;
+        Object result = value;
         if (useLocaleFormat && date != null) {
             DateFormat format = null;
             if (patterns != null && patterns.length > 0) {
@@ -214,11 +214,6 @@ public class DateTimeConverter extends AbstractConverter {
             result = format.format(date);
             if (log().isDebugEnabled()) {
                 log().debug("    Converted  to String using format '" + result + "'");
-            }
-        } else {
-            result = value.toString();
-            if (log().isDebugEnabled()) {
-                log().debug("    Converted  to String using toString() '" + result + "'");
             }
         }
         return result;

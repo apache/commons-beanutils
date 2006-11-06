@@ -68,6 +68,14 @@ public class ClassConverterTestCase extends TestCase {
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
         assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuffer("bar")));
         assertEquals("Null Test",   null, converter.convert(String.class, null));
+
+        // StringBuffer Tests
+        Object result = converter.convert(StringBuffer.class, Integer.class);
+        assertEquals("StringBuffer Test", StringBuffer.class, result.getClass());
+        assertEquals("StringBuffer Test", "java.lang.Integer", result.toString());
+        result = converter.convert(StringBuffer.class, null);
+        assertEquals("StringBuffer Null", StringBuffer.class, result.getClass());
+        assertEquals("StringBuffer Null", "", result.toString());
     }
 
     /**

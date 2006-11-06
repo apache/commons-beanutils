@@ -83,7 +83,7 @@ import org.apache.commons.beanutils.Converter;
  *    ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
  *
  *    // Construct a "Matrix" Converter which converts arrays of integer arrays using
- *    // the pre-ceeding ArrayConverter as the element Converter. 
+ *    // the pre-ceeding ArrayConverter as the element Converter.
  *    // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
  *    //      Also the delimiter used by the first ArrayConverter needs to be added to the
  *    //      "allowed characters" for this one.
@@ -176,7 +176,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param value The value to be converted.
      * @return the converted String value.
      */
-    protected String convertToString(Object value) {
+    protected Object convertToString(Object value) {
 
         Class type = value.getClass();
         if (!type.isArray()) {
@@ -185,9 +185,10 @@ public class ArrayConverter extends AbstractConverter {
 
         int size = Array.getLength(value);
         if (size == 0) {
-            return (String)getDefault(String.class);
+            return "";
         }
 
+        // Create a StringBuffer containing a delimited list of the values
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < size; i++) {
             if (i > 0) {
@@ -200,7 +201,7 @@ public class ArrayConverter extends AbstractConverter {
             }
         }
 
-        return buffer.toString();
+        return buffer;
 
     }
 
@@ -215,27 +216,31 @@ public class ArrayConverter extends AbstractConverter {
      */
     protected Object convertToType(Class type, Object value) throws Exception {
 
-        Class sourceType    = value.getClass();
-        Class componentType = type.getComponentType();
+        if (!type.isArray()) {
+            throw new ConversionException("Not an array: " + toString(type));
+        }
 
-        Collection collection = null;
+        // Handle the source
         int size = 0;
-
-        if (sourceType.isArray()) {
+        Iterator iterator = null;
+        if (value.getClass().isArray()) {
             size = Array.getLength(value);
-        } else if (value instanceof Collection) {
-            collection = (Collection)value;
-            size = collection.size();
         } else {
-            collection =  parseElements(value.toString().trim());
+            Collection collection = null;
+            if (value instanceof Collection) {
+                collection = (Collection)value;
+            } else {
+                collection = parseElements(value.toString().trim());
+            }
             size = collection.size();
+            iterator = collection.iterator();
         }
 
         // Allocate a new Array
+        Class componentType = type.getComponentType();
         Object newArray = Array.newInstance(componentType, size);
 
         // Convert and set each element in the new Array
-        Iterator iterator = collection == null ? null : collection.iterator();
         for (int i = 0; i < size; i++) {
             Object element = iterator == null ? Array.get(value, i) : iterator.next();
             element = elementConverter.convert(componentType, element);
@@ -322,7 +327,7 @@ public class ArrayConverter extends AbstractConverter {
                     if (list == null) {
                         list = new ArrayList();
                     }
-                    list.add(st.sval);
+                    list.add(st.sval.trim());
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
                 } else {
