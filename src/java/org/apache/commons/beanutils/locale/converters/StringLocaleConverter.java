@@ -279,7 +279,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
                 numberFormat.applyPattern(pattern);
             }
         } else {
-            log.warn("No pattern provided, using default.");
+            log.info("No pattern provided, using default.");
         }
 
         return numberFormat;

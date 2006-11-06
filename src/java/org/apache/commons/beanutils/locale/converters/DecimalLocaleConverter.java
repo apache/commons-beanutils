@@ -240,7 +240,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
                 formatter.applyPattern(pattern);
             }
         } else {
-            log.warn("No pattern provided, using default.");
+            log.info("No pattern provided, using default.");
         }
 
         return formatter.parse((String) value);
