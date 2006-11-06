@@ -148,9 +148,9 @@ public abstract class AbstractConverter implements Converter {
         Class targetType  = primitive(type  == null ? getDefaultType() : type);
 
         if (log.isDebugEnabled()) {
-            log.debug("Converting value '" + value + "'"
-                        + (value == null ? "" : ", type[" + toString(sourceType) + "]")
-                        + " to type " + toString(targetType));
+            log.debug("Converting"
+                    + (value == null ? "" : " '" + toString(sourceType) + "'")
+                    + " value '" + value + "' to type '" + toString(targetType) + "'");
         }
 
         // Missing Value
