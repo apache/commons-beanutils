@@ -306,8 +306,8 @@ public class PropertyUtilsBean {
      *  to be extracted
      * @return the indexed property value
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying array or List
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -362,8 +362,8 @@ public class PropertyUtilsBean {
      * @param index Index of the property value to be extracted
      * @return the indexed property value
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -415,8 +415,8 @@ public class PropertyUtilsBean {
                     return (invokeMethod(readMethod,bean, subscript));
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
-                            ArrayIndexOutOfBoundsException) {
-                        throw (ArrayIndexOutOfBoundsException)
+                            IndexOutOfBoundsException) {
+                        throw (IndexOutOfBoundsException)
                                 e.getTargetException();
                     } else {
                         throw e;
@@ -1415,8 +1415,8 @@ public class PropertyUtilsBean {
      * @param value Value to which the specified property element
      *  should be set
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -1472,8 +1472,8 @@ public class PropertyUtilsBean {
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -1536,8 +1536,8 @@ public class PropertyUtilsBean {
                     invokeMethod(writeMethod, bean, subscript);
                 } catch (InvocationTargetException e) {
                     if (e.getTargetException() instanceof
-                            ArrayIndexOutOfBoundsException) {
-                        throw (ArrayIndexOutOfBoundsException)
+                            IndexOutOfBoundsException) {
+                        throw (IndexOutOfBoundsException)
                                 e.getTargetException();
                     } else {
                         throw e;

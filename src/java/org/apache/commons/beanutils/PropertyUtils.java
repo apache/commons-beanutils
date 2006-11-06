@@ -201,8 +201,8 @@ public class PropertyUtils {
      *  to be extracted
      * @return the indexed property value
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -233,8 +233,8 @@ public class PropertyUtils {
      * @param index Index of the property value to be extracted
      * @return the indexed property value
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -667,8 +667,8 @@ public class PropertyUtils {
      * @param value Value to which the specified property element
      *  should be set
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
@@ -700,8 +700,8 @@ public class PropertyUtils {
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
      *
-     * @exception ArrayIndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying array
+     * @exception IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if <code>bean</code> or
