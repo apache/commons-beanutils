@@ -292,10 +292,10 @@ public class DateTimeConverter extends AbstractConverter {
         if (useLocaleFormat) {
             Calendar calendar = null;
             if (patterns != null && patterns.length > 0) {
-                calendar = parse(stringValue);
+                calendar = parse(type, stringValue);
             } else {
                 DateFormat format = getFormat(locale, timeZone);
-                calendar = parse(stringValue, format);
+                calendar = parse(type, stringValue, format);
             }
             if (Calendar.class.isAssignableFrom(type)) {
                 return calendar;
@@ -366,8 +366,12 @@ public class DateTimeConverter extends AbstractConverter {
             return calendar;
         }
 
-        throw new ConversionException("Cannot handle conversion to Date type "
-                + toString(type));
+        String msg = toString(getClass()) + " cannot handle conversion to '"
+                   + toString(type) + "'";
+        if (log().isWarnEnabled()) {
+            log().warn("    " + msg);
+        }
+        throw new ConversionException(msg);
     }
 
     /**
@@ -419,10 +423,11 @@ public class DateTimeConverter extends AbstractConverter {
             }
         }
 
-        String msg = "String to '" + toString(type) + "' conversion unsupported.";
+        String msg = toString(getClass()) + " does not support default String to '"
+                   + toString(type) + "' conversion.";
         if (log().isWarnEnabled()) {
-            log().warn("    " + msg
-                    + " Change converter configuration or use a different implementation.");
+            log().warn("    " + msg);
+            log().warn("    (N.B. Re-configure Converter or use alternative implementation)");
         }
         throw new ConversionException(msg);
     }
@@ -463,18 +468,19 @@ public class DateTimeConverter extends AbstractConverter {
 
     /**
      * Parse a String date value using the set of patterns.
+     *
+     * @param type The type to convert the value to
      * @param value The String date value.
      * @param type The type to convert the value to.
-     *
      * @return The converted Date object.
      * @throws Exception if an error occurs parsing the date.
      */
-    private Calendar parse(String value) throws Exception {
+    private Calendar parse(Class type, String value) throws Exception {
         Exception firstEx = null;
         for (int i = 0; i < patterns.length; i++) {
             try {
                 DateFormat format = getFormat(patterns[i]);
-                Calendar calendar = parse(value, format);
+                Calendar calendar = parse(type, value, format);
                 return calendar;
             } catch (Exception ex) {
                 if (firstEx == null) {
@@ -483,7 +489,7 @@ public class DateTimeConverter extends AbstractConverter {
             }
         }
         if (patterns.length > 1) {
-            throw new ConversionException("Can't parse date '" + value
+            throw new ConversionException("Error converting to '" + toString(type)
                     + "' using  patterns '" + displayPatterns + "'");
         } else {
             throw firstEx;
@@ -494,18 +500,19 @@ public class DateTimeConverter extends AbstractConverter {
      * Parse a String into a <code>Calendar</code> object
      * using the specified <code>DateFormat</code>.
      *
+     * @param type The type to convert the value to
      * @param value The String date value.
      * @param format The DateFormat to parse the String value.
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Calendar parse(String value, DateFormat format) {
+    private Calendar parse(Class type, String value, DateFormat format) {
         logFormat("Parsing", format);
         format.setLenient(false);
         ParsePosition pos = new ParsePosition(0);
         Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
-            String msg = "Error parsing date '" + value + "'";
+            String msg = "Error converting to '" + toString(type) + "'";
             if (format instanceof SimpleDateFormat) {
                 msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
             }

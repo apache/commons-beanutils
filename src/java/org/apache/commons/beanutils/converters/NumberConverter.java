@@ -218,7 +218,7 @@ public class NumberConverter extends AbstractConverter {
         Number number = null;
         if (useLocaleFormat) {
             NumberFormat format = getFormat();
-            number = parse(format, stringValue);
+            number = parse(type, stringValue, format);
         } else {
             if (log().isDebugEnabled()) {
                 log().debug("    No NumberFormat, using default conversion");
@@ -333,8 +333,12 @@ public class NumberConverter extends AbstractConverter {
             return BigInteger.valueOf(value.longValue());
         }
 
-        throw new ConversionException("Cannot handle conversion to Number type "
-                + toString(type));
+        String msg = toString(getClass()) + " cannot handle conversion to '"
+                   + toString(type) + "'";
+        if (log().isWarnEnabled()) {
+            log().warn("    " + msg);
+        }
+        throw new ConversionException(msg);
 
     }
 
@@ -399,8 +403,12 @@ public class NumberConverter extends AbstractConverter {
             return new BigInteger(value);
         }
 
-        throw new ConversionException("Cannot handle conversion from String to type "
-                + toString(type));
+        String msg = toString(getClass())
+            + " cannot handle conversion from String to '" + toString(type) + "'";
+        if (log().isWarnEnabled()) {
+            log().warn("    " + msg);
+        }
+        throw new ConversionException(msg);
     }
 
     /**
@@ -446,20 +454,23 @@ public class NumberConverter extends AbstractConverter {
     /**
      * Convert a String into a <code>Number</code> object.
      *
+     * @param type The type to convert the value to
      * @param value The String date value.
      * @param format The NumberFormat to parse the String value.
      * @return The converted Number object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Number parse(NumberFormat format, String value) {
+    private Number parse(Class type, String value, NumberFormat format) {
         ParsePosition pos = new ParsePosition(0);
         Number parsedNumber = (Number)format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
-            String msg = "Error parsing number '" + value + "'";
+            String msg = "Error converting to '" + toString(type) + "'";
             if (format instanceof DecimalFormat) {
                 msg += " using pattern '" + ((DecimalFormat)format).toPattern() + "'";
             }
-            msg += (locale == null ? " for the default locale" : " for locale=[" + locale + "]");
+            if (locale != null) {
+                msg += " for locale=[" + locale + "]";
+            }
             if (log().isDebugEnabled()) {
                 log().debug("    " + msg);
             }

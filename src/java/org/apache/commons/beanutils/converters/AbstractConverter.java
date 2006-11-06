@@ -46,6 +46,13 @@ import org.apache.commons.beanutils.Converter;
  */
 public abstract class AbstractConverter implements Converter {
 
+    /** Debug logging message to indicate default value configuration */
+    private static final String DEFAULT_CONFIG_MSG =
+        "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
+
+    /** Current package name */
+    private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
+
     /**
      * Logging for this instance.
      */
@@ -250,13 +257,15 @@ public abstract class AbstractConverter implements Converter {
             cex = (ConversionException)ex;
             if (log.isDebugEnabled()) {
                 log.debug("    Re-throwing ConversionException: " + cex.getMessage());
+                log.debug("    " + DEFAULT_CONFIG_MSG);
             }
         } else {
-            String msg = "Error converting type[" + toString(value.getClass()) +
-                    "], value '" + value + "' to [" + toString(type) + "]";
+            String msg = "Error converting from '" + toString(value.getClass()) +
+                    "' to '" + toString(type) + "' " + ex.getMessage();
             cex = new ConversionException(msg, ex);
             if (log.isDebugEnabled()) {
                 log.debug("    Throwing ConversionException: " + msg);
+                log.debug("    " + DEFAULT_CONFIG_MSG);
             }
         }
 
@@ -294,9 +303,11 @@ public abstract class AbstractConverter implements Converter {
             return value;
         }
 
-        ConversionException cex =  new ConversionException("No value specified.");
+        ConversionException cex =  new ConversionException("No value specified for '" +
+                toString(type) + "'");
         if (log.isDebugEnabled()) {
             log.debug("    Throwing ConversionException: " + cex.getMessage());
+            log.debug("    " + DEFAULT_CONFIG_MSG);
         }
         throw cex;
 
@@ -399,6 +410,8 @@ public abstract class AbstractConverter implements Converter {
         }
         if (typeName.startsWith("java.lang.")) {
             typeName = typeName.substring("java.lang.".length());
+        } else if (typeName.startsWith(PACKAGE)) {
+            typeName = typeName.substring(PACKAGE.length());
         }
         return typeName;
     }

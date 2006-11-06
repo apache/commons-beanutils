@@ -180,7 +180,9 @@ public class ArrayConverter extends AbstractConverter {
 
         Class type = value.getClass();
         if (!type.isArray()) {
-            throw new ConversionException("Not an array: " + toString(type));
+            throw new ConversionException(toString(getClass())
+                    + " cannot handle conversion from '"
+                    + toString(type) + "' to String (not an array).");
         }
 
         int size = Array.getLength(value);
@@ -217,7 +219,9 @@ public class ArrayConverter extends AbstractConverter {
     protected Object convertToType(Class type, Object value) throws Exception {
 
         if (!type.isArray()) {
-            throw new ConversionException("Not an array: " + toString(type));
+            throw new ConversionException(toString(getClass())
+                    + " cannot handle conversion to '"
+                    + toString(type) + "' (not an array).");
         }
 
         // Handle the source
@@ -230,7 +234,7 @@ public class ArrayConverter extends AbstractConverter {
             if (value instanceof Collection) {
                 collection = (Collection)value;
             } else {
-                collection = parseElements(value.toString().trim());
+                collection = parseElements(type, value.toString().trim());
             }
             size = collection.size();
             iterator = collection.iterator();
@@ -243,6 +247,8 @@ public class ArrayConverter extends AbstractConverter {
         // Convert and set each element in the new Array
         for (int i = 0; i < size; i++) {
             Object element = iterator == null ? Array.get(value, i) : iterator.next();
+            // TODO - probably should catch conversion errors and throw
+            //        new exception providing better info back to the user
             element = elementConverter.convert(componentType, element);
             Array.set(newArray, i, element);
         }
@@ -287,6 +293,7 @@ public class ArrayConverter extends AbstractConverter {
      *  Within a quoted elements, the normal Java escape sequences are valid.</li>
      * </ul>
      *
+     * @param type The type to convert the value to
      * @param value String value to be parsed
      * @return List of parsed elements.
      *
@@ -295,7 +302,7 @@ public class ArrayConverter extends AbstractConverter {
      * @throws NullPointerException if <code>svalue</code>
      *  is <code>null</code>
      */
-    private List parseElements(String value) {
+    private List parseElements(Class type, String value) {
 
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
@@ -331,8 +338,8 @@ public class ArrayConverter extends AbstractConverter {
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
                 } else {
-                    throw new ConversionException
-                        ("Encountered token of type " + ttype);
+                    throw new ConversionException("Encountered token of type "
+                        + ttype + " parsing elements to '" + toString(type) + ".");
                 }
             }
 
@@ -348,7 +355,8 @@ public class ArrayConverter extends AbstractConverter {
 
         } catch (IOException e) {
 
-            throw new ConversionException("Error parsing elements: " + e.getMessage(), e);
+            throw new ConversionException("Error converting from String to '"
+                    + toString(type) + "': " + e.getMessage(), e);
 
         }
 
