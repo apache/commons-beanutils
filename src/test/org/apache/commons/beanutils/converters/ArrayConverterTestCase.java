@@ -183,6 +183,60 @@ public class ArrayConverterTestCase extends TestCase {
     }
 
     /**
+     * Test Converting a String[] to integer array (with leading/trailing whitespace)
+     */
+    public void testStringArrayToNumber() {
+
+        // Configure Converter
+        IntegerConverter intConverter = new IntegerConverter();
+        ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter);
+
+        // Test Data
+        String[] array = new String[] {"10", "  11", "12  ", "  13  "};
+        ArrayList list = new ArrayList();
+        for (int i = 0; i < array.length; i++) {
+            list.add(array[i]);
+        }
+        
+        // Expected results
+        String msg = null;
+        int[]     expectedInt     = new int[] {10, 11, 12, 13};
+        Integer[] expectedInteger = new Integer[] {new Integer(expectedInt[0]), new Integer(expectedInt[1]), new Integer(expectedInt[2]), new Integer(expectedInt[3])};
+
+        // Test String[] --> int[]
+        try {
+            msg = "String[] --> int[]";
+            checkArray(msg, expectedInt, arrayConverter.convert(int[].class, array));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // Test String[] --> Integer[]
+        try {
+            msg = "String[] --> Integer[]";
+            checkArray(msg, expectedInteger, arrayConverter.convert(Integer[].class, array));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // Test List --> int[]
+        try {
+            msg = "List --> int[]";
+            checkArray(msg, expectedInt, arrayConverter.convert(int[].class, list));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // Test List --> Integer[]
+        try {
+            msg = "List --> Integer[]";
+            checkArray(msg, expectedInteger, arrayConverter.convert(Integer[].class, list));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+   }
+
+    /**
      * Test the Matrix!!!! (parses a String into a 2 dimensional integer array or matrix)
      */
     public void testTheMatrix() {
