@@ -1993,11 +1993,34 @@ public class PropertyUtilsBean {
             return method.invoke(bean, values);
         
         } catch (IllegalArgumentException e) {
-            
-            log.error("Method invocation failed.", e);
+            String valueString = "";
+            if (values != null) {
+                for (int i = 0; i < values.length; i++) {
+                    if (i>0) {
+                        valueString += ", " ;
+                    }
+                    valueString += (values[i]).getClass().getName();
+                }
+            }
+            String expectedString = "";
+            Class[] parTypes = method.getParameterTypes();
+            if (parTypes != null) {
+                for (int i = 0; i < parTypes.length; i++) {
+                    if (i > 0) {
+                        expectedString += ", ";
+                    }
+                    expectedString += parTypes[i].getName();
+                }
+            }
+            log.error("Method invocation failed", e);
             throw new IllegalArgumentException(
                 "Cannot invoke " + method.getDeclaringClass().getName() + "." 
-                + method.getName() + " - " + e.getMessage());
+                + method.getName() + " - " + e.getMessage()
+                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
+                + " - had objects of type \"" + valueString
+                + "\" but expected signature \""
+                +   expectedString + "\""
+                );
             
         }
     }
