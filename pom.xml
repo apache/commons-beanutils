@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-parent</artifactId>
+    <version>1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-beanutils</artifactId>
+  <version>1.8.0-SNAPSHOT</version>
+  <name>BeanUtils</name>
+
+  <inceptionYear>2000</inceptionYear>
+  <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
+
+  <url>http://jakarta.apache.org/commons/beanutils/</url>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://issues.apache.org/jira/browse/BEANUTILS</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:svn:scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils/trunk</connection>
+    <developerConnection>scm:svn:scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/jakarta/commons/proper/beanutils/trunk</url>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Robert Burrell Donkin</name>
+      <id>rdonkin</id>
+      <email>rdonkin@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>dIon Gillard</name>
+      <id>dion</id>
+      <email>dion@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Craig McClanahan</name>
+      <id>craigmcc</id>
+      <email>craigmcc@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Geir Magnusson Jr.</name>
+      <id>geirm</id>
+      <email>geirm@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Scott Sanders</name>
+      <id>sanders</id>
+      <email>sanders@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>James Strachan</name>
+      <id>jstrachan</id>
+      <email>jstrachan@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Rodney Waldhoff</name>
+      <id>rwaldhoff</id>
+      <email>rwaldhoff@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Martin van den Bemt</name>
+      <id>mvdb</id>
+      <email>mvdb@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Yoav Shapira</name>
+      <id>yoavs</id>
+      <email>yoavs@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Niall Pemberton</name>
+      <id>niallp</id>
+      <email>niallp at apache dot org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Simon Kitching</name>
+      <id>skitching</id>
+      <email>skitching@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>James Carman</name>
+      <id>jcarman</id>
+      <email>jcarman@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Paul Jack</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Stephen Colebourne</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Berin Loritsch</name>
+      <email></email>
+    </contributor>    
+  </contributors>
+
+  <dependencies>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <testSourceDirectory>src/test</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>.</directory>
+        <targetPath>META-INF</targetPath>
+          <includes>
+            <include>NOTICE.txt</include>
+          </includes>
+        </resource>
+      </resources>
+      <testResources>
+        <testResource>
+          <directory>${pom.build.testSourceDirectory}</directory>
+          <includes>
+            <include>**/*.xml</include>
+          </includes>
+        </testResource>
+      </testResources>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/*TestCase.java</include>
+              </includes>
+              <excludes>
+                <!-- This test case is known to fail, and there isn't any proposed fix
+                  -  so we will just exclude it until someone comes up with a solution.
+                -->
+                <exclude>**/*MemoryTestCase.java</exclude>
+              </excludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+
+</project>
