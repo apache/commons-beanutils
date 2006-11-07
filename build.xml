@@ -31,22 +31,6 @@
   <property file="${user.home}/build.properties"/>   <!-- User local        -->
 
 
-<!-- ========== External Dependencies ===================================== -->
-
-  <!-- The home directory for the Commons collection classes distribution -->
-  <property name="commons-logging.home" value="../logging/dist"/>
-
-  <!-- The directory containing your binary distribution of JUnit,
-       version 3.7 or later -->
-  <property name="junit.home"              value="/usr/local/junit3.7"/>
-
-
-<!-- ========== Derived Values ============================================ -->
-
-  <!-- The pathname of the "junit.jar" JAR file -->
-  <property name="junit.jar"               value="${junit.home}/junit.jar"/>
-
-
 <!-- ========== Component Declarations ==================================== -->
 
 
