@@ -105,7 +105,7 @@ public class PropertyUtilsBean {
      */
     protected static PropertyUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getPropertyUtils();
-    }	
+    }
 
     // --------------------------------------------------------- Variables
 
@@ -326,7 +326,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Identify the index of the requested individual property
@@ -383,7 +384,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
@@ -478,7 +480,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Identify the index of the requested individual property
@@ -525,10 +528,12 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
         if (key == null) {
-            throw new IllegalArgumentException("No key specified");
+            throw new IllegalArgumentException("No key specified for property '" +
+                    name + "' on bean class " + bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
@@ -651,7 +656,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         int indexOfINDEXED_DELIM = -1;
@@ -687,9 +693,8 @@ public class PropertyUtilsBean {
             }
             if (nestedBean == null) {
                 throw new NestedNullException
-                        ("Null property value for '" +
-                        name.substring(0, indexOfNESTED_DELIM) + 
-                        "' on bean " + " class '" + bean.getClass() + "'");
+                        ("Null property value for '" + name.substring(0, indexOfNESTED_DELIM) +
+                        "' on bean class '" + bean.getClass() + "'");
             }
             bean = nestedBean;
             name = name.substring(indexOfNESTED_DELIM + 1);
@@ -815,7 +820,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Resolve nested references
@@ -841,9 +847,8 @@ public class PropertyUtilsBean {
             }
             if (bean == null) {
                 throw new IllegalArgumentException
-                        ("Null property value for '" +
-                        name.substring(0, period) + "' on bean class '" +
-                        bean.getClass() + "'");
+                       ("Null property value for '" + name.substring(0, period) +
+                        "' on bean class '" + bean.getClass() + "'");
             }
             bean = nestedBean;
             name = name.substring(period + 1);
@@ -1110,7 +1115,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         PropertyDescriptor descriptor =
@@ -1157,7 +1163,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Special handling for DynaBeans
@@ -1237,19 +1244,23 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Validate the syntax of the property name
         if (name.indexOf(PropertyUtils.NESTED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Nested property names are not allowed");
+                    ("Nested property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         } else if (name.indexOf(PropertyUtils.INDEXED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Indexed property names are not allowed");
+                    ("Indexed property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         } else if (name.indexOf(PropertyUtils.MAPPED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Mapped property names are not allowed");
+                    ("Mapped property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
@@ -1322,7 +1333,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Return the requested result
@@ -1377,7 +1389,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Return the requested result
@@ -1444,7 +1457,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Identify the index of the requested individual property
@@ -1501,7 +1515,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
@@ -1609,7 +1624,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Identify the index of the requested individual property
@@ -1656,10 +1672,12 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
         if (key == null) {
-            throw new IllegalArgumentException("No key specified");
+            throw new IllegalArgumentException("No key specified for property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
@@ -1763,7 +1781,8 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         int indexOfINDEXED_DELIM = -1;
@@ -1939,19 +1958,23 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException("No bean specified");
         }
         if (name == null) {
-            throw new IllegalArgumentException("No name specified");
+            throw new IllegalArgumentException("No name specified for bean class '" +
+                    bean.getClass() + "'");
         }
 
         // Validate the syntax of the property name
         if (name.indexOf(PropertyUtils.NESTED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Nested property names are not allowed");
+                    ("Nested property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         } else if (name.indexOf(PropertyUtils.INDEXED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Indexed property names are not allowed");
+                    ("Indexed property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         } else if (name.indexOf(PropertyUtils.MAPPED_DELIM) >= 0) {
             throw new IllegalArgumentException
-                    ("Mapped property names are not allowed");
+                    ("Mapped property names are not allowed: Property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         }
 
         // Handle DynaBean instances specially
