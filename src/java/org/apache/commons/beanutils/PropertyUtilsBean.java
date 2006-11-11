@@ -827,15 +827,16 @@ public class PropertyUtilsBean {
             String next = name.substring(0, period);
             int indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
             int indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
+            Object nestedBean = null;
             if (indexOfMAPPED_DELIM >= 0 &&
                     (indexOfINDEXED_DELIM < 0 ||
                     indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
-                bean = getMappedProperty(bean, next);
+                nestedBean = getMappedProperty(bean, next);
             } else {
                 if (indexOfINDEXED_DELIM >= 0) {
-                    bean = getIndexedProperty(bean, next);
+                    nestedBean = getIndexedProperty(bean, next);
                 } else {
-                    bean = getSimpleProperty(bean, next);
+                    nestedBean = getSimpleProperty(bean, next);
                 }
             }
             if (bean == null) {
@@ -844,6 +845,7 @@ public class PropertyUtilsBean {
                         name.substring(0, period) + "' on bean class '" +
                         bean.getClass() + "'");
             }
+            bean = nestedBean;
             name = name.substring(period + 1);
         }
 
@@ -1774,20 +1776,22 @@ public class PropertyUtilsBean {
             String next = name.substring(0, delim);
             indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
             indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
+            Object nestedBean = null;
             if (bean instanceof Map) {
-                bean = getPropertyOfMapBean((Map)bean, next);
+                nestedBean = getPropertyOfMapBean((Map)bean, next);
             } else if (indexOfMAPPED_DELIM >= 0) {
-                bean = getMappedProperty(bean, next);
+                nestedBean = getMappedProperty(bean, next);
             } else if (indexOfINDEXED_DELIM >= 0) {
-                bean = getIndexedProperty(bean, next);
+                nestedBean = getIndexedProperty(bean, next);
             } else {
-                bean = getSimpleProperty(bean, next);
+                nestedBean = getSimpleProperty(bean, next);
             }
             if (bean == null) {
                 throw new IllegalArgumentException
                         ("Null property value for '" + name.substring(0, delim) +
                          "' on bean class '" + bean.getClass() + "'");
             }
+            bean = nestedBean;
             name = name.substring(delim + 1);
         }
 
