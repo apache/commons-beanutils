@@ -417,55 +417,14 @@ public class LocaleBeanUtils extends BeanUtils {
     protected static Descriptor calculate(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException {
 
-        Log log = LogFactory.getLog(LocaleBeanUtils.class);
-
-        String propName = null;          // Simple name of target property
-        int index = -1;                  // Indexed subscript value (if any)
-        String key = null;               // Mapped key value (if any)
-
-        Object target = bean;
-        int delim = name.lastIndexOf(PropertyUtils.NESTED_DELIM);
-        if (delim >= 0) {
-            try {
-                target =
-                        PropertyUtils.getProperty(bean, name.substring(0, delim));
-            }
-            catch (NoSuchMethodException e) {
-                return null; // Skip this property setter
-            }
-            name = name.substring(delim + 1);
-            if (log.isTraceEnabled()) {
-                log.trace("    Target bean = " + target);
-                log.trace("    Target name = " + name);
-            }
-        }
-
-        // Calculate the property name, index, and key values
-        propName = name;
-        int i = propName.indexOf(PropertyUtils.INDEXED_DELIM);
-        if (i >= 0) {
-            int k = propName.indexOf(PropertyUtils.INDEXED_DELIM2);
-            try {
-                index =
-                        Integer.parseInt(propName.substring(i + 1, k));
-            }
-            catch (NumberFormatException e) {
-                /* Swallow NumberFormatException */
-            }
-            propName = propName.substring(0, i);
-        }
-        int j = propName.indexOf(PropertyUtils.MAPPED_DELIM);
-        if (j >= 0) {
-            int k = propName.indexOf(PropertyUtils.MAPPED_DELIM2);
-            try {
-                key = propName.substring(j + 1, k);
-            }
-            catch (IndexOutOfBoundsException e) {
-                /* Swallow IndexOutOfBoundsException */
-            }
-            propName = propName.substring(0, j);
-        }
-        return new Descriptor(target, name, propName, key, index);
+        org.apache.commons.beanutils.locale.LocaleBeanUtilsBean.Descriptor descriptor
+            = LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().calculate(bean, name);
+        return new Descriptor(
+                descriptor.getTarget(),
+                descriptor.getName(),
+                descriptor.getPropName(),
+                descriptor.getKey(),
+                descriptor.getIndex());
     }
 
     /** @deprecated moved into <code>LocaleBeanUtils</code> */
