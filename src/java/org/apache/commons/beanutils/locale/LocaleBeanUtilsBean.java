@@ -45,9 +45,9 @@ import java.util.Locale;
 
 public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
-	/** 
-	 * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
-	 */
+    /** 
+     * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
+     */
     private static final ContextClassLoaderLocal 
             localeBeansByClassLoader = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
@@ -61,14 +61,14 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         return (LocaleBeanUtilsBean)localeBeansByClassLoader.get();
      }
  
-	/** 
-	 * Sets the instance which provides the functionality for {@link LocaleBeanUtils}.
-	 * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-	 * This mechanism provides isolation for web apps deployed in the same container. 
-	 */
-	public synchronized static void setInstance(LocaleBeanUtilsBean newInstance) {
+    /** 
+     * Sets the instance which provides the functionality for {@link LocaleBeanUtils}.
+     * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
+     * This mechanism provides isolation for web apps deployed in the same container. 
+     */
+    public synchronized static void setInstance(LocaleBeanUtilsBean newInstance) {
         localeBeansByClassLoader.set(newInstance);
-	}
+    }
 
     /** All logging goes through this logger */
     private Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
@@ -712,11 +712,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param pattern The convertion pattern
      */
     protected Object convert(Class type, int index, Object value, String pattern) {
-		
-		if (log.isTraceEnabled()) {
-			log.trace("Converting value '" + value + "' to type:" + type);
-		}
-		
+
+        if (log.isTraceEnabled()) {
+            log.trace("Converting value '" + value + "' to type:" + type);
+        }
+
         Object newValue = null;
 
         if (type.isArray() && (index < 0)) { // Scalar value into array
