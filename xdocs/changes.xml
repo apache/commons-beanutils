@@ -40,8 +40,86 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8.0" date="in SVN">
+      <action dev="niallp" type="add" issue="BEANUTILS-259">
+         Add plugable property name expression <b><i>Resolver</i></b>.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-262">
+         Correct getPropertyDescriptor() and setNestedProperty() methods to throw
+         a NestedNullException rather than just IllegalArgumentException (consistent
+         with the getNestedProperty() method).
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-207" due-to="Erik Meade">
+         Include bean class in the message of PropertyUtilsBean exceptions.
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-224" due-to="Ralf Hauser">
+         Provide better error message for "argument type mismatch".
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-41" due-to="Ralf Hauser">
+         Provide better error message for "No value specified".
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-256" due-to="Torsten Feig">
+         PropertyUtilsBean.getIndexedProperty()'s javadoc should indicate
+         IndexOutOufBoundsException can be thrown rather than just
+         ArrayIndexOutOufBoundsException.
+      </action>
+      <action dev="niallp" type="add" issue="BEANUTILS-242">
+         Add new generic <b>ArrayConverter</b> implementation.
+      </action>
+      <action dev="niallp" type="add" issue="BEANUTILS-255">
+         Add new generic <b>DateTimeConverter</b> implementation.
+         <ul>
+             <li>Converts both to and from <code>String</code> for dates.</li>
+             <li>Can be configured to convert using the default format for either
+                 the default Locale or a specified Locale.</li>
+             <li>Can be configured to convert using a set of 
+                 <code>DateFormat</code> patterns.</li>
+             <li>Provides the basis for all the date converters in BeanUtils.</li>
+             <li>Handles conversion for (and between) <code>java.util.Date</code>,
+                 <code>java.util.Calendar</code>, <code>java.sql.Date</code>,
+                 <code>java.sql.Time</code> and <code>java.sql.Timestamp</code></li>
+         </ul>
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-258">
+         General Converter implementation improvements:
+         <ul>
+           <li>New <b>AbstractConverter</b> which provides a basic structure for
+               Converter implementations:</li>
+               <ul>
+                   <li>Provides structure for converting to and from a String
+                       for the type the converter handles.</li>
+                   <li>Provides a mechanism for default values.</li>
+                   <li>Handles missing and invalid values in a uniform way.</li>
+               </ul>
+           <li>New <b>NumberConverter</b> implementation:</li>
+               <ul>
+                   <li>Converts both to and from <code>String</code> for numbers.</li>
+                   <li>Can be configured to convert using the default format for either
+                       the default Locale or a specified Locale.</li>
+                   <li>Can be configured to convert using a specified 
+                       <code>DecimalFormat</code> pattern, either for the default
+                       Locale or a specified Locale.</li>
+                   <li>Provides the basis for all the number converters in BeanUtils.</li>
+               </ul>
+         </ul>
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-30" due-to="Barry Kaplan">
+         Improved messages for unknown properties.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-121" due-to="Chris Tilden">
+         Resolve compiler warnings: Unused imports, un-read local variables,
+         field hiding, empty block, improperly used statics, uncessary semi
+         colons, unnecessary casts.
+      </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-250">
          LazyDynaClass can create a DynaProperty with a "null" type.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-241" due-to="Chris Hyzer">
+         Fix BeanComparator throws wrong exception and hides cause.
+      </action>
+      <action dev="vgritsenko" type="update" issue="BEANUTILS-239" due-to="Rafael Afonso">
+         Better implementation of SqlDateConverter. Modified SqlDateConverter,
+         SqlTimeConverter and SqlTimestampConverter to accept java.util.Date
+         and Calendar object instances. Added tests.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-54" due-to="Pascal Grange">
          Add Implementation-Vendor-Id entry to jar's manifest.

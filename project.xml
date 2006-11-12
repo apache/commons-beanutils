@@ -142,6 +142,11 @@
       <email>jcarman@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Henri Yandell</name>
+      <id>bayard</id>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
 
   <contributors>
