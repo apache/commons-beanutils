@@ -57,7 +57,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                     };
      
      /** Gets singleton instance */
-     public synchronized static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
+     public static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
         return (LocaleBeanUtilsBean)localeBeansByClassLoader.get();
      }
  
@@ -66,7 +66,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container. 
      */
-    public synchronized static void setInstance(LocaleBeanUtilsBean newInstance) {
+    public static void setInstance(LocaleBeanUtilsBean newInstance) {
         localeBeansByClassLoader.set(newInstance);
     }
 

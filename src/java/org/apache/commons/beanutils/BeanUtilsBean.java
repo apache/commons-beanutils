@@ -75,7 +75,7 @@ public class BeanUtilsBean {
      *
      * @return The (pseudo-singleton) BeanUtils bean instance
      */
-    public synchronized static BeanUtilsBean getInstance() {
+    public static BeanUtilsBean getInstance() {
         return (BeanUtilsBean) beansByClassLoader.get();
     }
 
@@ -86,7 +86,7 @@ public class BeanUtilsBean {
      * 
      * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
-    public synchronized static void setInstance(BeanUtilsBean newInstance) {
+    public static void setInstance(BeanUtilsBean newInstance) {
         beansByClassLoader.set(newInstance);
     }
 
