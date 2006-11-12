@@ -37,8 +37,8 @@ import java.lang.reflect.Modifier;
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
  *
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Francois
+ * @author Gregor Rayman
  * @version $Revision$ $Date$
  */
 

@@ -45,8 +45,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Francois
+ * @author Gregor Rayman
  * @version $Revision$ $Date$
  * @see BeanUtils
  * @since 1.7

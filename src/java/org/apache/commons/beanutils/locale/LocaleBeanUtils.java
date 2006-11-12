@@ -36,8 +36,8 @@ import java.util.Locale;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Francois
+ * @author Gregor Rayman
  * @author Yauheny Mikulski
  */
 

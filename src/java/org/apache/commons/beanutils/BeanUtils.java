@@ -34,8 +34,8 @@ import org.apache.commons.collections.FastHashMap;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Francois
+ * @author Gregor Rayman
  * @version $Revision$ $Date$
  * @see BeanUtilsBean
  */

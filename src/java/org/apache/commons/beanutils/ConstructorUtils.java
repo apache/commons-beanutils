@@ -39,8 +39,8 @@ import java.lang.reflect.Modifier;
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
- * @author Rey François
- * @author Gregor Raýman
+ * @author Rey Francois
+ * @author Gregor Rayman
  * @author Jan Sorensen
  * @author Robert Burrell Donkin
  * @author Rodney Waldhoff
