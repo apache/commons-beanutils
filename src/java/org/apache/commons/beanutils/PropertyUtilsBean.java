@@ -845,7 +845,7 @@ public class PropertyUtilsBean {
                     nestedBean = getSimpleProperty(bean, next);
                 }
             }
-            if (bean == null) {
+            if (nestedBean == null) {
                 throw new NestedNullException
                        ("Null property value for '" + name.substring(0, period) +
                         "' on bean class '" + bean.getClass() + "'");
@@ -1805,7 +1805,7 @@ public class PropertyUtilsBean {
             } else {
                 nestedBean = getSimpleProperty(bean, next);
             }
-            if (bean == null) {
+            if (nestedBean == null) {
                 throw new NestedNullException
                         ("Null property value for '" + name.substring(0, delim) +
                          "' on bean class '" + bean.getClass() + "'");
