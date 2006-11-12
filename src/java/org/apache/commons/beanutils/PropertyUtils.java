@@ -23,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.collections.FastHashMap;
 
 
@@ -42,6 +43,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Scott Sanders
  * @version $Revision$ $Date$
  * @see PropertyUtilsBean
+ * @see Resolver
  */
 
 public class PropertyUtils {
@@ -53,6 +55,9 @@ public class PropertyUtils {
     /**
      * The delimiter that preceeds the zero-relative subscript for an
      * indexed reference.
+     *
+     * @deprecated The notation used for property name expressions is now
+     * dependant on the {@link Resolver} implementation being used.
      */
     public static final char INDEXED_DELIM = '[';
 
@@ -60,24 +65,36 @@ public class PropertyUtils {
     /**
      * The delimiter that follows the zero-relative subscript for an
      * indexed reference.
+     *
+     * @deprecated The notation used for property name expressions is now
+     * dependant on the {@link Resolver} implementation being used.
      */
     public static final char INDEXED_DELIM2 = ']';
 
 
     /**
      * The delimiter that preceeds the key of a mapped property.
+     *
+     * @deprecated The notation used for property name expressions is now
+     * dependant on the {@link Resolver} implementation being used.
      */
     public static final char MAPPED_DELIM = '(';
 
 
     /**
      * The delimiter that follows the key of a mapped property.
+     *
+     * @deprecated The notation used for property name expressions is now
+     * dependant on the {@link Resolver} implementation being used.
      */
     public static final char MAPPED_DELIM2 = ')';
 
 
     /**
      * The delimiter that separates the components of a nested reference.
+     *
+     * @deprecated The notation used for property name expressions is now
+     * dependant on the {@link Resolver} implementation being used.
      */
     public static final char NESTED_DELIM = '.';
 

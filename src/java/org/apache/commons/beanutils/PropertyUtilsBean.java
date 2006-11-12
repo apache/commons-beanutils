@@ -31,6 +31,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.expression.DefaultResolver;
+import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,8 +52,10 @@ import org.apache.commons.logging.LogFactory;
  * a convenient way to access the registered classes themselves is included.
  * <p>
  * For the purposes of this class, five formats for referencing a particular
- * property value of a bean are defined, with the layout of an identifying
- * String in parentheses:
+ * property value of a bean are defined, with the <i>default</i> layout of an
+ * identifying String in parentheses. However the notation for these formats
+ * and how they are resolved is now (since BeanUtils 1.8.0) controlled by
+ * the configured {@link Resolver} implementation:
  * <ul>
  * <li><strong>Simple (<code>name</code>)</strong> - The specified
  *     <code>name</code> identifies an individual property of a particular
@@ -91,11 +95,14 @@ import org.apache.commons.logging.LogFactory;
  * @author Scott Sanders
  * @author Erik Meade
  * @version $Revision$ $Date$
+ * @see Resolver
  * @see PropertyUtils
  * @since 1.7
  */
 
 public class PropertyUtilsBean {
+
+    private Resolver resolver = new DefaultResolver();
 
     // --------------------------------------------------------- Class Methods
 
@@ -134,6 +141,42 @@ public class PropertyUtilsBean {
 
     // --------------------------------------------------------- Public Methods
 
+
+    /**
+     * Return the configured {@link Resolver} implementation used by BeanUtils.
+     * <p>
+     * The {@link Resolver} handles the <i>property name</i>
+     * expressions and the implementation in use effectively
+     * controls the dialect of the <i>expression language</i>
+     * that BeanUtils recongnises.
+     * <p>
+     * {@link DefaultResolver} is the default implementation used.
+     *
+     * @return resolver The property expression resolver.
+     */
+    public Resolver getResolver() {
+        return resolver;
+    }
+
+    /**
+     * Configure the {@link Resolver} implementation used by BeanUtils.
+     * <p>
+     * The {@link Resolver} handles the <i>property name</i>
+     * expressions and the implementation in use effectively
+     * controls the dialect of the <i>expression language</i>
+     * that BeanUtils recongnises.
+     * <p>
+     * {@link DefaultResolver} is the default implementation used.
+     *
+     * @param resolver The property expression resolver.
+     */
+    public void setResolver(Resolver resolver) {
+        if (resolver == null) {
+            this.resolver = new DefaultResolver();
+        } else {
+            this.resolver = resolver;
+        }
+    }
 
     /**
      * Clear any cached property descriptors information for all classes
@@ -331,21 +374,21 @@ public class PropertyUtilsBean {
         }
 
         // Identify the index of the requested individual property
-        int delim = name.indexOf(PropertyUtils.INDEXED_DELIM);
-        int delim2 = name.indexOf(PropertyUtils.INDEXED_DELIM2);
-        if ((delim < 0) || (delim2 <= delim)) {
-            throw new IllegalArgumentException("Invalid indexed property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
-        }
         int index = -1;
         try {
-            String subscript = name.substring(delim + 1, delim2);
-            index = Integer.parseInt(subscript);
-        } catch (NumberFormatException e) {
+            index = resolver.getIndex(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "' on bean class '" + bean.getClass() + "' " +
+                    e.getMessage());
+        }
+        if (index < 0) {
             throw new IllegalArgumentException("Invalid indexed property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
         }
-        name = name.substring(0, delim);
+
+        // Isolate the name
+        name = resolver.getProperty(name);
 
         // Request the specified indexed property value
         return (getIndexedProperty(bean, name, index));
@@ -484,18 +527,22 @@ public class PropertyUtilsBean {
                     bean.getClass() + "'");
         }
 
-        // Identify the index of the requested individual property
-        int delim = name.indexOf(PropertyUtils.MAPPED_DELIM);
-        int delim2 = name.indexOf(PropertyUtils.MAPPED_DELIM2);
-        if ((delim < 0) || (delim2 <= delim)) {
+        // Identify the key of the requested individual property
+        String key  = null;
+        try {
+            key = resolver.getKey(name);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException
                     ("Invalid mapped property '" + name +
-                    "' on bean class '" + bean.getClass() + "'");
+                    "' on bean class '" + bean.getClass() + "' " + e.getMessage());
+        }
+        if (key == null) {
+            throw new IllegalArgumentException("Invalid mapped property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
         }
 
-        // Isolate the name and the key
-        String key = name.substring(delim + 1, delim2);
-        name = name.substring(0, delim);
+        // Isolate the name
+        name = resolver.getProperty(name);
 
         // Request the specified indexed property value
         return (getMappedProperty(bean, name, key));
@@ -660,54 +707,33 @@ public class PropertyUtilsBean {
                     bean.getClass() + "'");
         }
 
-        int indexOfINDEXED_DELIM = -1;
-        int indexOfMAPPED_DELIM = -1;
-        int indexOfMAPPED_DELIM2 = -1;
-        int indexOfNESTED_DELIM = -1;
-        while (true) {
-            indexOfNESTED_DELIM  = name.indexOf(PropertyUtils.NESTED_DELIM);
-            indexOfMAPPED_DELIM  = name.indexOf(PropertyUtils.MAPPED_DELIM);
-            indexOfMAPPED_DELIM2 = name.indexOf(PropertyUtils.MAPPED_DELIM2);
-            if (indexOfMAPPED_DELIM2 >= 0 && indexOfMAPPED_DELIM >=0 &&
-                (indexOfNESTED_DELIM < 0 || indexOfNESTED_DELIM > indexOfMAPPED_DELIM)) {
-                indexOfNESTED_DELIM =
-                    name.indexOf(PropertyUtils.NESTED_DELIM, indexOfMAPPED_DELIM2);
-            } else {
-                indexOfNESTED_DELIM = name.indexOf(PropertyUtils.NESTED_DELIM);
-            }
-            if (indexOfNESTED_DELIM < 0) {
-                break;
-            }
-            String next = name.substring(0, indexOfNESTED_DELIM);
-            indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
-            indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
+        // Resolve nested references
+        while (resolver.hasNested(name)) {
+            String next = resolver.next(name);
             Object nestedBean = null;
             if (bean instanceof Map) {
                 nestedBean = getPropertyOfMapBean((Map) bean, next);
-            } else if (indexOfMAPPED_DELIM >= 0) {
+            } else if (resolver.isMapped(next)) {
                 nestedBean = getMappedProperty(bean, next);
-            } else if (indexOfINDEXED_DELIM >= 0) {
+            } else if (resolver.isIndexed(next)) {
                 nestedBean = getIndexedProperty(bean, next);
             } else {
                 nestedBean = getSimpleProperty(bean, next);
             }
             if (nestedBean == null) {
                 throw new NestedNullException
-                        ("Null property value for '" + name.substring(0, indexOfNESTED_DELIM) +
+                        ("Null property value for '" + name +
                         "' on bean class '" + bean.getClass() + "'");
             }
             bean = nestedBean;
-            name = name.substring(indexOfNESTED_DELIM + 1);
+            name = resolver.remove(name);
         }
-
-        indexOfINDEXED_DELIM = name.indexOf(PropertyUtils.INDEXED_DELIM);
-        indexOfMAPPED_DELIM = name.indexOf(PropertyUtils.MAPPED_DELIM);
 
         if (bean instanceof Map) {
             bean = getPropertyOfMapBean((Map) bean, name);
-        } else if (indexOfMAPPED_DELIM >= 0) {
+        } else if (resolver.isMapped(name)) {
             bean = getMappedProperty(bean, name);
-        } else if (indexOfINDEXED_DELIM >= 0) {
+        } else if (resolver.isIndexed(name)) {
             bean = getIndexedProperty(bean, name);
         } else {
             bean = getSimpleProperty(bean, name);
@@ -743,10 +769,8 @@ public class PropertyUtilsBean {
         throws IllegalArgumentException, IllegalAccessException, 
         InvocationTargetException, NoSuchMethodException {
 
-        int indexOfINDEXED_DELIM = propertyName.indexOf(PropertyUtils.INDEXED_DELIM);
-        int indexOfMAPPED_DELIM = propertyName.indexOf(PropertyUtils.MAPPED_DELIM);
-        
-        if ((indexOfINDEXED_DELIM >= 0) || (indexOfMAPPED_DELIM >= 0)) {
+        if (resolver.isIndexed(propertyName) ||
+            resolver.isMapped(propertyName)) {
             throw new IllegalArgumentException(
                     "Indexed or mapped properties are not supported on"
                     + " objects of type Map: " + propertyName);
@@ -825,44 +849,29 @@ public class PropertyUtilsBean {
         }
 
         // Resolve nested references
-        while (true) {            
-            int period = findNextNestedIndex(name);
-            if (period < 0) {
-                break;
-            }
-            String next = name.substring(0, period);
-            int indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
-            int indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
+        while (resolver.hasNested(name)) {
+            String next = resolver.next(name);
             Object nestedBean = null;
-            if (indexOfMAPPED_DELIM >= 0 &&
-                    (indexOfINDEXED_DELIM < 0 ||
-                    indexOfMAPPED_DELIM < indexOfINDEXED_DELIM)) {
+            if (bean instanceof Map) {
+                nestedBean = getPropertyOfMapBean((Map)bean, next);
+            } else if (resolver.isMapped(next)) {
                 nestedBean = getMappedProperty(bean, next);
+            } else if (resolver.isIndexed(next)) {
+                nestedBean = getIndexedProperty(bean, next);
             } else {
-                if (indexOfINDEXED_DELIM >= 0) {
-                    nestedBean = getIndexedProperty(bean, next);
-                } else {
-                    nestedBean = getSimpleProperty(bean, next);
-                }
+                nestedBean = getSimpleProperty(bean, next);
             }
             if (nestedBean == null) {
                 throw new NestedNullException
-                       ("Null property value for '" + name.substring(0, period) +
+                        ("Null property value for '" + name +
                         "' on bean class '" + bean.getClass() + "'");
             }
             bean = nestedBean;
-            name = name.substring(period + 1);
+            name = resolver.remove(name);
         }
 
         // Remove any subscript from the final name value
-        int left = name.indexOf(PropertyUtils.INDEXED_DELIM);
-        if (left >= 0) {
-            name = name.substring(0, left);
-        }
-        left = name.indexOf(PropertyUtils.MAPPED_DELIM);
-        if (left >= 0) {
-            name = name.substring(0, left);
-        }
+        name = resolver.getProperty(name);
 
         // Look up and return this property from our cache
         // creating and adding it to the cache if not found.
@@ -904,37 +913,6 @@ public class PropertyUtilsBean {
         
         return result;
 
-    }
-    
-    private int findNextNestedIndex(String expression)
-    {
-        // walk back from the end to the start 
-        // and find the first index that 
-        int bracketCount = 0;
-        for (int i=0, size=expression.length(); i<size ; i++) {
-            char at = expression.charAt(i);
-            switch (at) {
-                case PropertyUtils.NESTED_DELIM:
-                    if (bracketCount < 1) {
-                        return i;
-                    }
-                    break;
-                    
-                case PropertyUtils.MAPPED_DELIM:
-                case PropertyUtils.INDEXED_DELIM:
-                    // not bothered which
-                    ++bracketCount;
-                    break;
-                
-                case PropertyUtils.MAPPED_DELIM2:
-                case PropertyUtils.INDEXED_DELIM2:
-                    // not bothered which
-                    --bracketCount;
-                    break;            
-            }
-        }
-        // can't find any
-        return -1;
     }
 
 
@@ -1249,15 +1227,15 @@ public class PropertyUtilsBean {
         }
 
         // Validate the syntax of the property name
-        if (name.indexOf(PropertyUtils.NESTED_DELIM) >= 0) {
+        if (resolver.hasNested(name)) {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (name.indexOf(PropertyUtils.INDEXED_DELIM) >= 0) {
+        } else if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (name.indexOf(PropertyUtils.MAPPED_DELIM) >= 0) {
+        } else if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
@@ -1462,21 +1440,20 @@ public class PropertyUtilsBean {
         }
 
         // Identify the index of the requested individual property
-        int delim = name.indexOf(PropertyUtils.INDEXED_DELIM);
-        int delim2 = name.indexOf(PropertyUtils.INDEXED_DELIM2);
-        if ((delim < 0) || (delim2 <= delim)) {
-            throw new IllegalArgumentException("Invalid indexed property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
-        }
         int index = -1;
         try {
-            String subscript = name.substring(delim + 1, delim2);
-            index = Integer.parseInt(subscript);
-        } catch (NumberFormatException e) {
+            index = resolver.getIndex(name);
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid indexed property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
         }
-        name = name.substring(0, delim);
+        if (index < 0) {
+            throw new IllegalArgumentException("Invalid indexed property '" +
+                    name + "' on bean class '" + bean.getClass() + "'");
+        }
+
+        // Isolate the name
+        name = resolver.getProperty(name);
 
         // Set the specified indexed property value
         setIndexedProperty(bean, name, index, value);
@@ -1628,18 +1605,23 @@ public class PropertyUtilsBean {
                     bean.getClass() + "'");
         }
 
-        // Identify the index of the requested individual property
-        int delim = name.indexOf(PropertyUtils.MAPPED_DELIM);
-        int delim2 = name.indexOf(PropertyUtils.MAPPED_DELIM2);
-        if ((delim < 0) || (delim2 <= delim)) {
+        // Identify the key of the requested individual property
+        String key  = null;
+        try {
+            key = resolver.getKey(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException
+                    ("Invalid mapped property '" + name + 
+                    "' on bean class '" + bean.getClass() + "'");
+        }
+        if (key == null) {
             throw new IllegalArgumentException
                     ("Invalid mapped property '" + name + 
                     "' on bean class '" + bean.getClass() + "'");
         }
 
-        // Isolate the name and the key
-        String key = name.substring(delim + 1, delim2);
-        name = name.substring(0, delim);
+        // Isolate the name
+        name = resolver.getProperty(name);
 
         // Request the specified indexed property value
         setMappedProperty(bean, name, key, value);
@@ -1785,43 +1767,33 @@ public class PropertyUtilsBean {
                     bean.getClass() + "'");
         }
 
-        int indexOfINDEXED_DELIM = -1;
-        int indexOfMAPPED_DELIM = -1;
-        while (true) {
-            int delim = name.indexOf(PropertyUtils.NESTED_DELIM);
-            if (delim < 0) {
-                break;
-            }
-            String next = name.substring(0, delim);
-            indexOfINDEXED_DELIM = next.indexOf(PropertyUtils.INDEXED_DELIM);
-            indexOfMAPPED_DELIM = next.indexOf(PropertyUtils.MAPPED_DELIM);
+        // Resolve nested references
+        while (resolver.hasNested(name)) {
+            String next = resolver.next(name);
             Object nestedBean = null;
             if (bean instanceof Map) {
                 nestedBean = getPropertyOfMapBean((Map)bean, next);
-            } else if (indexOfMAPPED_DELIM >= 0) {
+            } else if (resolver.isMapped(next)) {
                 nestedBean = getMappedProperty(bean, next);
-            } else if (indexOfINDEXED_DELIM >= 0) {
+            } else if (resolver.isIndexed(next)) {
                 nestedBean = getIndexedProperty(bean, next);
             } else {
                 nestedBean = getSimpleProperty(bean, next);
             }
             if (nestedBean == null) {
                 throw new NestedNullException
-                        ("Null property value for '" + name.substring(0, delim) +
+                        ("Null property value for '" + name +
                          "' on bean class '" + bean.getClass() + "'");
             }
             bean = nestedBean;
-            name = name.substring(delim + 1);
+            name = resolver.remove(name);
         }
-
-        indexOfINDEXED_DELIM = name.indexOf(PropertyUtils.INDEXED_DELIM);
-        indexOfMAPPED_DELIM = name.indexOf(PropertyUtils.MAPPED_DELIM);
 
         if (bean instanceof Map) {
             setPropertyOfMapBean((Map) bean, name, value);
-        } else if (indexOfMAPPED_DELIM >= 0) {
+        } else if (resolver.isMapped(name)) {
             setMappedProperty(bean, name, value);
-        } else if (indexOfINDEXED_DELIM >= 0) {
+        } else if (resolver.isIndexed(name)) {
             setIndexedProperty(bean, name, value);
         } else {
             setSimpleProperty(bean, name, value);
@@ -1888,10 +1860,8 @@ public class PropertyUtilsBean {
         throws IllegalArgumentException, IllegalAccessException, 
         InvocationTargetException, NoSuchMethodException {
 
-        int indexOfINDEXED_DELIM = propertyName.indexOf(PropertyUtils.INDEXED_DELIM);
-        int indexOfMAPPED_DELIM = propertyName.indexOf(PropertyUtils.MAPPED_DELIM);
-        
-        if ((indexOfINDEXED_DELIM >= 0) || (indexOfMAPPED_DELIM >= 0)) {
+        if (resolver.isIndexed(propertyName) ||
+            resolver.isMapped(propertyName)) {
             throw new IllegalArgumentException(
                     "Indexed or mapped properties are not supported on"
                     + " objects of type Map: " + propertyName);
@@ -1963,15 +1933,15 @@ public class PropertyUtilsBean {
         }
 
         // Validate the syntax of the property name
-        if (name.indexOf(PropertyUtils.NESTED_DELIM) >= 0) {
+        if (resolver.hasNested(name)) {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (name.indexOf(PropertyUtils.INDEXED_DELIM) >= 0) {
+        } else if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (name.indexOf(PropertyUtils.MAPPED_DELIM) >= 0) {
+        } else if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");

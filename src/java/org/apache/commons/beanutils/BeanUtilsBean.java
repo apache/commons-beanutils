@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -337,52 +338,25 @@ public class BeanUtilsBean {
 
         // Resolve any nested expression to get the actual target bean
         Object target = bean;
-        int delim = name.lastIndexOf(PropertyUtils.NESTED_DELIM);
-        if (delim >= 0) {
+        Resolver resolver = getPropertyUtils().getResolver();
+        while (resolver.hasNested(name)) {
             try {
-                target =
-                    getPropertyUtils().getProperty(bean, name.substring(0, delim));
+                target = getPropertyUtils().getProperty(target, resolver.next(name));
+                name = resolver.remove(name);
             } catch (NoSuchMethodException e) {
                 return; // Skip this property setter
             }
-            name = name.substring(delim + 1);
-            if (log.isTraceEnabled()) {
-                log.trace("    Target bean = " + target);
-                log.trace("    Target name = " + name);
-            }
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("    Target bean = " + target);
+            log.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
-        String propName = null;          // Simple name of target property
-        Class type = null;               // Java type of target property
-        int index = -1;                  // Indexed subscript value (if any)
-        String key = null;               // Mapped key value (if any)
-
-        // Calculate the target property name, index, and key values
-        propName = name;
-        int i = propName.indexOf(PropertyUtils.INDEXED_DELIM);
-        if (i >= 0) {
-            int k = propName.indexOf(PropertyUtils.INDEXED_DELIM2);
-            try {
-                index =
-                    Integer.parseInt(propName.substring(i + 1, k));
-            } catch (NumberFormatException e) {
-            	// Swallow NumberFormatException
-            	// TODO: Why?
-            }
-            propName = propName.substring(0, i);
-        }
-        int j = propName.indexOf(PropertyUtils.MAPPED_DELIM);
-        if (j >= 0) {
-            int k = propName.indexOf(PropertyUtils.MAPPED_DELIM2);
-            try {
-                key = propName.substring(j + 1, k);
-            } catch (IndexOutOfBoundsException e) {
-                // Swallow IndexOutOfBoundsException
-                // TODO: Why?
-            }
-            propName = propName.substring(0, j);
-        }
+        String propName = resolver.getProperty(name); // Simple name of target property
+        Class type = null;                            // Java type of target property
+        int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
+        String key = resolver.getKey(name);           // Mapped key value (if any)
 
         // Calculate the target property type
         if (target instanceof DynaBean) {
@@ -915,52 +889,25 @@ public class BeanUtilsBean {
 
         // Resolve any nested expression to get the actual target bean
         Object target = bean;
-        int delim = findLastNestedIndex(name);
-        if (delim >= 0) {
+        Resolver resolver = getPropertyUtils().getResolver();
+        while (resolver.hasNested(name)) {
             try {
-                target =
-                    getPropertyUtils().getProperty(bean, name.substring(0, delim));
+                target = getPropertyUtils().getProperty(target, resolver.next(name));
+                name = resolver.remove(name);
             } catch (NoSuchMethodException e) {
                 return; // Skip this property setter
             }
-            name = name.substring(delim + 1);
-            if (log.isTraceEnabled()) {
-                log.trace("    Target bean = " + target);
-                log.trace("    Target name = " + name);
-            }
+        }
+        if (log.isTraceEnabled()) {
+            log.trace("    Target bean = " + target);
+            log.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
-        String propName = null;          // Simple name of target property
-        Class type = null;               // Java type of target property
-        int index = -1;                  // Indexed subscript value (if any)
-        String key = null;               // Mapped key value (if any)
-
-        // Calculate the property name, index, and key values
-        propName = name;
-        int i = propName.indexOf(PropertyUtils.INDEXED_DELIM);
-        if (i >= 0) {
-            int k = propName.indexOf(PropertyUtils.INDEXED_DELIM2);
-            try {
-                index =
-                    Integer.parseInt(propName.substring(i + 1, k));
-            } catch (NumberFormatException e) {
-                // Swallow NumberFormatException
-                // TODO: Why?
-            }
-            propName = propName.substring(0, i);
-        }
-        int j = propName.indexOf(PropertyUtils.MAPPED_DELIM);
-        if (j >= 0) {
-            int k = propName.indexOf(PropertyUtils.MAPPED_DELIM2);
-            try {
-                key = propName.substring(j + 1, k);
-            } catch (IndexOutOfBoundsException e) {
-                // Swallow IndexOutOfBoundsException
-                // TODO: Why?
-            }
-            propName = propName.substring(0, j);
-        }
+        String propName = resolver.getProperty(name); // Simple name of target property
+        Class type = null;                            // Java type of target property
+        int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
+        String key = resolver.getKey(name);           // Mapped key value (if any)
 
         // Calculate the property type
         if (target instanceof DynaBean) {
@@ -1073,37 +1020,6 @@ public class BeanUtilsBean {
                 (e, "Cannot set " + propName);
         }
 
-    }
-    
-    private int findLastNestedIndex(String expression)
-    {
-        // walk back from the end to the start 
-        // and find the first index that 
-        int bracketCount = 0;
-        for (int i = expression.length() - 1; i>=0 ; i--) {
-            char at = expression.charAt(i);
-            switch (at) {
-                case PropertyUtils.NESTED_DELIM:
-                    if (bracketCount < 1) {
-                        return i;
-                    }
-                    break;
-                    
-                case PropertyUtils.MAPPED_DELIM:
-                case PropertyUtils.INDEXED_DELIM:
-                    // not bothered which
-                    --bracketCount;
-                    break;
-                
-                case PropertyUtils.MAPPED_DELIM2:
-                case PropertyUtils.INDEXED_DELIM2:
-                    // not bothered which
-                    ++bracketCount;
-                    break;            
-            }
-        }
-        // can't find any
-        return -1;
     }
     
     /** 
