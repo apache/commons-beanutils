@@ -90,6 +90,9 @@ public class DynaProperty implements Serializable {
         super();
         this.name = name;
         this.type = type;
+        if (type != null && type.isArray()) {
+            this.contentType = type.getComponentType();
+        }
 
     }
     
