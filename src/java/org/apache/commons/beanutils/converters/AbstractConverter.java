@@ -51,7 +51,9 @@ public abstract class AbstractConverter implements Converter {
         "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
 
     /** Current package name */
-    private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
+    //    getPackage() below returns null on some platforms/jvm versions during the unit tests.
+//    private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
+    private static final String PACKAGE = "org.apache.commons.beanutils.converters.";
 
     /**
      * Logging for this instance.
