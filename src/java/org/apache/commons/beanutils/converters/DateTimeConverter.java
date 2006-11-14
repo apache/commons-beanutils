@@ -399,7 +399,7 @@ public class DateTimeConverter extends AbstractConverter {
                 return java.sql.Date.valueOf(value);
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
-                        "Date must be in JDBC format [yyyy-MM-dd]");
+                        "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
             }
         }
 
@@ -409,7 +409,7 @@ public class DateTimeConverter extends AbstractConverter {
                 return java.sql.Time.valueOf(value);
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
-                        "Time must be in JDBC format [HH:mm:ss]");
+                        "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
             }
         }
 
@@ -419,7 +419,8 @@ public class DateTimeConverter extends AbstractConverter {
                 return java.sql.Timestamp.valueOf(value);
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
-                        "Timestamp must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff]");
+                        "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
+                        "to create a java.sql.Timestamp");
             }
         }
 
@@ -489,7 +490,7 @@ public class DateTimeConverter extends AbstractConverter {
             }
         }
         if (patterns.length > 1) {
-            throw new ConversionException("Error converting to '" + toString(type)
+            throw new ConversionException("Error converting String to '" + toString(type)
                     + "' using  patterns '" + displayPatterns + "'");
         } else {
             throw firstEx;
@@ -512,7 +513,7 @@ public class DateTimeConverter extends AbstractConverter {
         ParsePosition pos = new ParsePosition(0);
         Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
-            String msg = "Error converting to '" + toString(type) + "'";
+            String msg = "Error converting String to '" + toString(type) + "'";
             if (format instanceof SimpleDateFormat) {
                 msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
             }
