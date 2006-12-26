@@ -555,7 +555,6 @@ public class TestBean implements Serializable {
 
     }
 
-
     /**
      * Increment the current value of the counter by the specified amount.
      *
@@ -567,5 +566,14 @@ public class TestBean implements Serializable {
 
     }
 
+    /**
+     * Increments the current value of the count by the 
+     * specified amount * 2. It has the same name 
+     * as the method above so as to test the looseness 
+     * of getMethod. 
+     */
+    public static void incrementCounter(Number amount) {
+        counter += 2 * amount.intValue();
+    }
 
 }

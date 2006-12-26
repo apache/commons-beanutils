@@ -301,6 +301,34 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals("Set float property using invokeMethod", 25.5d, bean.getDouble(), 0.01d);
     }
 
+    public void testStaticInvokeMethod() throws Exception {
+
+        Object value = null;
+        int current = TestBean.currentCounter();
+
+        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+
+        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[0]);
+        current++;
+
+        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+
+        MethodUtils.invokeStaticMethod(TestBean.class, "incrementCounter", new Object[] { new Integer(8) } );
+        current += 8;
+
+        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+
+        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter", 
+            new Object[] { new Integer(8) }, new Class[] { Number.class } );
+        current += 16;
+
+        value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+    }
+
 
     /**
      * Simple tests for accessing static methods via invokeMethod().
