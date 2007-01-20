@@ -100,7 +100,11 @@ public class BeanComparator implements Comparator, Serializable {
      */
     public BeanComparator( String property, Comparator comparator ) {
         setProperty( property );
-        this.comparator = comparator;
+        if (comparator != null) {
+            this.comparator = comparator;
+        } else {
+            this.comparator = ComparableComparator.getInstance();
+        }
     }
 
     /**
