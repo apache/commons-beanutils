@@ -191,11 +191,8 @@ public class BeanComparatorTestCase extends TestCase {
 
 
         }
-        catch (ClassCastException cce){
-          assertTrue("Wrong exception was thrown.",cce.toString().indexOf("Unknown property") > -1);
-        }
         catch (Exception e) {
-            fail("Exception" + e);
+          assertTrue("Wrong exception was thrown: " + e, e.toString().indexOf("Unknown property") > -1);
         }
     }
 
