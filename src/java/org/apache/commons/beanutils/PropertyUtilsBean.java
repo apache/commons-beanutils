@@ -207,6 +207,9 @@ public class PropertyUtilsBean {
      * bean.<strong>Note</strong> that this method is intended to perform 
      * a "shallow copy" of the properties and so complex properties 
      * (for example, nested ones) will not be copied.</p>
+     * 
+     * <p>Note, that this method will not copy a List to a List, or an Object[] 
+     * to an Object[]. It's specifically for copying JavaBean properties. </p>
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
