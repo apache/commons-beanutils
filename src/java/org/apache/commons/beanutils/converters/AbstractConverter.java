@@ -109,32 +109,6 @@ public abstract class AbstractConverter implements Converter {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Set the default value, converting as required.
-     * <p>
-     * If the default value is different from the type the
-     * <code>Converter</code> handles, it will be converted
-     * to the handled type.
-     *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
-     * @throws ConversionException if an error occurs converting
-     * the default value
-     */
-    public void setDefaultValue(Object defaultValue) {
-        useDefault = false;
-        if (log.isDebugEnabled()) {
-            log.debug("Setting default value: " + defaultValue);
-        }
-        if (defaultValue == null) {
-           this.defaultValue  = null;
-        } else {
-           this.defaultValue  = convert(getDefaultType(), defaultValue);
-        }
-        useDefault = true;
-    }
-
-    /**
      * Convert the input object into an output object of the
      * specified type.
      *
@@ -301,6 +275,32 @@ public abstract class AbstractConverter implements Converter {
         }
         throw cex;
 
+    }
+
+    /**
+     * Set the default value, converting as required.
+     * <p>
+     * If the default value is different from the type the
+     * <code>Converter</code> handles, it will be converted
+     * to the handled type.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     * @throws ConversionException if an error occurs converting
+     * the default value
+     */
+    protected void setDefaultValue(Object defaultValue) {
+        useDefault = false;
+        if (log.isDebugEnabled()) {
+            log.debug("Setting default value: " + defaultValue);
+        }
+        if (defaultValue == null) {
+           this.defaultValue  = null;
+        } else {
+           this.defaultValue  = convert(getDefaultType(), defaultValue);
+        }
+        useDefault = true;
     }
 
     /**
