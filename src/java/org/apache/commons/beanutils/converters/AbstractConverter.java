@@ -159,21 +159,9 @@ public abstract class AbstractConverter implements Converter {
         if (value == null) {
             return handleMissing(targetType);
 
-        // Convert --> String or StringBuffer
-        } else if (targetType.equals(String.class) ||
-                targetType.equals(StringBuffer.class)) {
-            Object result = convertToString(value);
-            if (result == null) {
-                return getDefault(targetType);
-            } else if (type.equals(StringBuffer.class)) {
-                if (result instanceof StringBuffer) {
-                    return result;
-                } else {
-                    return new StringBuffer(result.toString());
-                }
-            } else {
-                return result.toString();
-            }
+        // Convert --> String
+        } else if (targetType.equals(String.class)) {
+            return convertToString(value);
 
         // No conversion necessary
         } else if (targetType.equals(sourceType)) {
@@ -200,18 +188,18 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Convert the input object into a String (or StringBuffer).
+     * Convert the input object into a String.
      * <p>
-     * <b>N.B.</b>This implementation simply returns the value unchanged.
-     * The {@link AbstractConverter#convert(Class, Object)} method
-     * checks the value returned by this method, converting to either
-     * a String or StringBuffer as required.
+     * <b>N.B.</b>This implementation simply uses the value's
+     * <code>toString()</code> method and should be overriden if a
+     * more sophisticated mechanism for <i>conversion to a String</i>
+     * is required.
      *
      * @param value The input value to be converted.
      * @return the converted String value.
      */
-    protected Object convertToString(Object value) {
-        return value;
+    protected String convertToString(Object value) {
+        return value.toString();
     }
 
     /**
@@ -288,7 +276,7 @@ public abstract class AbstractConverter implements Converter {
      */
     protected Object handleMissing(Class type) {
 
-        if (useDefault || type.equals(String.class) || type.equals(StringBuffer.class)) {
+        if (useDefault || type.equals(String.class)) {
             Object value = getDefault(type);
             if (useDefault && value != null && !(type.equals(value.getClass()))) {
                 try {
@@ -333,8 +321,6 @@ public abstract class AbstractConverter implements Converter {
     protected Object getDefault(Class type) {
         if (type.equals(String.class)) {
             return null;
-        } else if (type.equals(StringBuffer.class)) {
-            return new StringBuffer();
         } else {
             return defaultValue;
         }

@@ -147,16 +147,6 @@ public class ArrayConverterTestCase extends TestCase {
             fail(msg + " failed " + e);
         }
 
-        // LONG[] --> StringBuffer
-        try {
-            msg = "LONG[] --> StringBuffer";
-            Object result = arrayConverter.convert(StringBuffer.class, LONGArray);
-            assertEquals(msg, StringBuffer.class, result.getClass());
-            assertEquals(msg, stringB, result.toString());
-        } catch (Exception e) {
-            fail(msg + " failed " + e);
-        }
-
         // LONG[] --> String[]
         try {
             msg = "long[] --> String[]";

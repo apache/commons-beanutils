@@ -176,7 +176,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param value The value to be converted.
      * @return the converted String value.
      */
-    protected Object convertToString(Object value) {
+    protected String convertToString(Object value) {
 
         Class type = value.getClass();
         if (!type.isArray()) {
@@ -187,7 +187,7 @@ public class ArrayConverter extends AbstractConverter {
 
         int size = Array.getLength(value);
         if (size == 0) {
-            return "";
+            return (String)getDefault(String.class);
         }
 
         // Create a StringBuffer containing a delimited list of the values
@@ -203,7 +203,7 @@ public class ArrayConverter extends AbstractConverter {
             }
         }
 
-        return buffer;
+        return buffer.toString();
 
     }
 

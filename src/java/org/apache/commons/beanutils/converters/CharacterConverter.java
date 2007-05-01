@@ -57,7 +57,7 @@ public final class CharacterConverter extends AbstractConverter {
      * @param value The input value to be converted
      * @return the converted String value.
      */
-    protected Object convertToString(Object value) {
+    protected String convertToString(Object value) {
         String strValue = value.toString();
         return strValue.length() == 0 ? "" : strValue.substring(0, 1);
     }

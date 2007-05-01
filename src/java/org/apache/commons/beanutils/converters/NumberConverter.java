@@ -167,15 +167,21 @@ public class NumberConverter extends AbstractConverter {
      * @param value The input value to be converted
      * @return the converted String value.
      */
-    protected Object convertToString(Object value) {
+    protected String convertToString(Object value) {
 
-        Object result = value;
+        String result = null;
         if (useLocaleFormat && value instanceof Number) {
             NumberFormat format = getFormat();
             format.setGroupingUsed(false);
             result = format.format(value);
             if (log().isDebugEnabled()) {
                 log().debug("    Converted  to String using format '" + result + "'");
+            }
+
+        } else {
+            result = value.toString();
+            if (log().isDebugEnabled()) {
+                log().debug("    Converted  to String using toString() '" + result + "'");
             }
         }
         return result;
