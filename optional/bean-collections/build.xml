@@ -49,10 +49,10 @@
 <!-- ========== Derived Values ============================================ -->
 
   <!-- The pathname of the collections classes JAR file -->
-  <property name="commons-collections.jar" value="${commons-collections.home}/commons-collections-3.0-dev.jar"/>
+  <property name="commons-collections.jar" value="${commons-collections.home}/commons-collections-3.2.jar"/>
 
   <!-- The pathname of the collections testframework classes JAR file -->
-  <property name="commons-collections-testframework.jar" value="${commons-collections.home}/commons-collections-testframework-3.0-dev.jar"/>
+  <property name="commons-collections-testframework.jar" value="${commons-collections.home}/commons-collections-testframework-3.2.jar"/>
 
 
   <!-- The pathname of the logging classes JAR file -->
@@ -75,7 +75,7 @@
   <property name="component.title"         value="Bean Utilities Bean Collections"/>
 
   <!-- The current version number of this component -->
-  <property name="component.version"       value="1.7.1-dev"/>
+  <property name="component.version"       value="1.8.0-SNAPSHOT"/>
 
   <!-- The base directory for compilation targets -->
   <property name="build.home"              value="target"/>
@@ -235,9 +235,11 @@
     <jar    jarfile="${dist.home}/commons-beanutils-bean-collections.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
+<!--
     <jar    jarfile="../../dist/commons-beanutils.jar"
             basedir="${build.home}/classes"
             update='true'/>
+-->
   </target>
 
 

@@ -20,7 +20,7 @@
   <pomVersion>3</pomVersion>
   <artifactId>commons-beanutils-bean-collections</artifactId>
   <name>BeanUtils Bean Collections</name>
-  <currentVersion>1.7.1-SNAPSHOT</currentVersion>
+  <currentVersion>1.8.0-SNAPSHOT</currentVersion>
   <inceptionYear>2000</inceptionYear>
   <shortDescription>Commons BeanUtils Bean Collections</shortDescription>
   <description>Extensions of commons collections focussing on collections of beans</description>
@@ -31,23 +31,23 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.0.3</version>
+      <version>1.0.4</version>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
-      <version>3.0</version>
+      <version>3.2</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
-      <version>1.6</version>
+      <version>1.8.0-SNAPSHOT</version>
     </dependency>
     <!-- Test Only -->
     <dependency>
       <artifactId>commons-collections-testframework</artifactId> 
       <groupId>commons-collections</groupId>
-      <version>SNAPSHOT</version> 
+      <version>3.2</version> 
       <properties>
         <scope>test</scope>
       </properties>
