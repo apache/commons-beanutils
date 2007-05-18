@@ -106,6 +106,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void setUp() throws Exception {
 
+        ConvertUtils.deregister();
+
         // Instantiate a new DynaBean instance
         DynaClass dynaClass = createDynaClass();
         bean = dynaClass.newInstance();
