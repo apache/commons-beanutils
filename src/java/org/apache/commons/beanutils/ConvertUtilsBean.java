@@ -27,7 +27,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
@@ -153,7 +152,7 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private Map converters = Collections.synchronizedMap(new HashMap());
+    private Map converters = new HashMap();
 
     /**
      * The <code>Log</code> instance for this class.
