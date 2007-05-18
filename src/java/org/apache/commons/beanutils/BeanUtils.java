@@ -21,7 +21,6 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import org.apache.commons.collections.FastHashMap;
 
 
 /**
@@ -45,15 +44,6 @@ public class BeanUtils {
 
     // ------------------------------------------------------ Private Variables
 
-
-    /**
-     * Dummy collection from the Commons Collections API, to force a
-     * ClassNotFoundException if commons-collections.jar is not present in the
-     * runtime classpath, and this class is the first one referenced.
-     * Otherwise, the ClassNotFoundException thrown by ConvertUtils or
-     * PropertyUtils can get masked.
-     */
-    private static final FastHashMap dummy = new FastHashMap();
 
     /**
      * The debugging detail level for this component.

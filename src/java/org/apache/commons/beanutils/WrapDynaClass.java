@@ -277,7 +277,7 @@ public class WrapDynaClass implements DynaClass {
         if (regulars == null) {
             regulars = new PropertyDescriptor[0];
         }
-        HashMap mappeds =
+        Map mappeds =
                 PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null) {
             mappeds = new HashMap();

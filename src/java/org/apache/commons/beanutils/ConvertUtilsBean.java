@@ -27,6 +27,9 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BigIntegerConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
@@ -53,7 +56,6 @@ import org.apache.commons.beanutils.converters.SqlTimestampConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 import org.apache.commons.beanutils.converters.StringArrayConverter;
 import org.apache.commons.beanutils.converters.URLConverter;
-import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -151,7 +153,7 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private FastHashMap converters = new FastHashMap();
+    private Map converters = Collections.synchronizedMap(new HashMap());
 
     /**
      * The <code>Log</code> instance for this class.
@@ -162,9 +164,7 @@ public class ConvertUtilsBean {
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
-        converters.setFast(false);
         deregister();
-        converters.setFast(true);
     }
 
     // --------------------------------------------------------- Public Methods
