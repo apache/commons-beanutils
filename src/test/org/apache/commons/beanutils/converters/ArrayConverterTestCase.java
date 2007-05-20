@@ -131,6 +131,14 @@ public class ArrayConverterTestCase extends TestCase {
             fail(msg + " failed " + e);
         }
 
+        // Long --> int[]
+        try {
+            msg = "Long --> int[]";
+            checkArray(msg, new int[] {LONGArray[0].intValue()}, arrayConverter.convert(int[].class, LONGArray[0]));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
         // LONG[] --> int[]
         try {
             msg = "LONG[] --> int[]";
@@ -139,10 +147,35 @@ public class ArrayConverterTestCase extends TestCase {
             fail(msg + " failed " + e);
         }
 
-        // LONG[] --> String
+        // Long --> String
         try {
-            msg = "LONG[] --> String";
+            msg = "Long --> String";
+            assertEquals(msg, LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray[0]));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // LONG[] --> String (first)
+        try {
+            msg = "LONG[] --> String (first)";
+            assertEquals(msg, LONGArray[0] + "", arrayConverter.convert(String.class, LONGArray));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // LONG[] --> String (all)
+        try {
+            msg = "LONG[] --> String (all)";
+            arrayConverter.setOnlyFirstToString(false);
             assertEquals(msg, stringB, arrayConverter.convert(String.class, LONGArray));
+        } catch (Exception e) {
+            fail(msg + " failed " + e);
+        }
+
+        // Collection of Long --> String
+        try {
+            msg = "Collection of Long --> String";
+            assertEquals(msg, stringB, arrayConverter.convert(String.class, longList));
         } catch (Exception e) {
             fail(msg + " failed " + e);
         }
@@ -323,12 +356,6 @@ public class ArrayConverterTestCase extends TestCase {
             new ArrayConverter(int[].class, null);
             fail("Component Converter missing - expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            // expected result
-        }
-        try {
-            new ArrayConverter(int[].class, new IntegerConverter()).convert(String.class, "ABC");
-            fail("Non-array to String, expected ConversionException");
-        } catch (ConversionException e) {
             // expected result
         }
     }

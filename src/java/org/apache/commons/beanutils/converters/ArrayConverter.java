@@ -105,6 +105,7 @@ public class ArrayConverter extends AbstractConverter {
     private int defaultSize;
     private char delimiter    = ',';
     private char[] allowedChars = new char[] {'.', '-'};
+    private boolean onlyFirstToString = true;
 
     // ----------------------------------------------------------- Constructors
 
@@ -171,6 +172,19 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
+     * Indicates whether converting to a String should create
+     * a delimited list or just convert the first value.
+     *
+     * @param onlyFirstToString <code>true</code> converts only
+     * the first value in the array to a String, <code>false</code>
+     * converts all values in the array into a delimited list (default
+     * is <code>true</code> 
+     */
+    public void setOnlyFirstToString(boolean onlyFirstToString) {
+        this.onlyFirstToString = onlyFirstToString;
+    }
+
+    /**
      * Convert the input object into a String.
      *
      * @param value The value to be converted.
@@ -178,16 +192,26 @@ public class ArrayConverter extends AbstractConverter {
      */
     protected String convertToString(Object value) {
 
+        int size = 0;
+        Iterator iterator = null;
         Class type = value.getClass();
-        if (!type.isArray()) {
-            throw new ConversionException(toString(getClass())
-                    + " cannot handle conversion from '"
-                    + toString(type) + "' to String (not an array).");
+        if (type.isArray()) {
+            size = Array.getLength(value);
+        } else if (value instanceof Collection) {
+            Collection collection = (Collection)value;
+            size = collection.size();
+            iterator = collection.iterator();
+        } else {
+            Object converted = elementConverter.convert(String.class, value);
+            return (converted == null ? (String)getDefault(String.class) : converted.toString());
         }
 
-        int size = Array.getLength(value);
         if (size == 0) {
             return (String)getDefault(String.class);
+        }
+
+        if (onlyFirstToString) {
+            size = 1;
         }
 
         // Create a StringBuffer containing a delimited list of the values
@@ -196,7 +220,7 @@ public class ArrayConverter extends AbstractConverter {
             if (i > 0) {
                 buffer.append(delimiter);
             }
-            Object element = Array.get(value, i);
+            Object element = iterator == null ? Array.get(value, i) : iterator.next();
             element = elementConverter.convert(String.class, element);
             if (element != null) {
                 buffer.append(element);
@@ -230,12 +254,7 @@ public class ArrayConverter extends AbstractConverter {
         if (value.getClass().isArray()) {
             size = Array.getLength(value);
         } else {
-            Collection collection = null;
-            if (value instanceof Collection) {
-                collection = (Collection)value;
-            } else {
-                collection = parseElements(type, value.toString().trim());
-            }
+            Collection collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
         }
@@ -254,6 +273,28 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         return newArray;
+    }
+
+    /**
+     * Convert an Object into a Collection.
+     *
+     * @param type The type to convert the value to
+     * @param value value to be converted
+     * @return List of parsed elements.
+     */
+    protected Collection convertToCollection(Class type, Object value) {
+        if (value instanceof Collection) {
+            return (Collection)value;
+        }
+        if (value instanceof Number ||
+            value instanceof Boolean ||
+            value instanceof java.util.Date) {
+            List list = new ArrayList(1);
+            list.add(value);
+            return list;
+        }
+        
+        return parseElements(type, value.toString());
     }
 
     /**
