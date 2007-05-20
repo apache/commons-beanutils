@@ -210,7 +210,9 @@ public class BeanComparatorTestCase extends TestCase {
           beanComparator = new BeanComparator("booleanProperty");
           beanComparator.compare(testBeanA, testBeanB);
 
-          fail("BeanComparator should throw an exception when comparing two booleans.");
+          // **** java.lang.Boolean implements Comparable from JDK 1.5 onwards
+          //      so this test no longer fails
+          // fail("BeanComparator should throw an exception when comparing two booleans.");
 
         }
         catch (ClassCastException cce){
