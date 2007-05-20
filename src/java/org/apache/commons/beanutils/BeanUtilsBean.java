@@ -989,10 +989,8 @@ public class BeanUtilsBean {
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
                                                 type);
-            } else if (getConvertUtils().lookup(value.getClass()) != null) {
-                newValue = getConvertUtils().convert(value.toString(), type);
             } else {
-                newValue = value;
+                newValue = getConvertUtils().convert(value, type);
             }
         }
 
