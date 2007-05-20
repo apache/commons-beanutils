@@ -54,4 +54,15 @@
     </dependency>
     
   </dependencies>
+
+  <build>
+     <!-- Unit test classes -->
+     <unitTest>
+         <includes>
+             <include>**/*TestCase.java</include>
+             <include>**/*Test.java</include>
+             <include>**/TestBeanMap.java</include>
+         </includes>
+     </unitTest>
+  </build>
 </project>
