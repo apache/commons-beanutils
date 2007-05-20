@@ -19,12 +19,14 @@ package org.apache.commons.beanutils;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.HashMap;
 
 import junit.framework.Test;
 import junit.textui.TestRunner;
 
 import org.apache.commons.collections.map.AbstractTestMap;
 import org.apache.commons.collections.BulkTest;
+import org.apache.commons.collections.Transformer;
 
 /**
  * Test cases for BeanMap
@@ -341,5 +343,81 @@ public class TestBeanMap extends AbstractTestMap {
         Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
-    
+
+    /**
+     *  Test the default transformers using the getTypeTransformer() method
+     */
+    public void testGetTypeTransformerMethod() {
+        BeanMap beanMap = new BeanMap();
+        assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
+        assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
+        assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
+        assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
+        assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
+        assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
+        assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
+        assertEquals("Double.TYPE",    new Double("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
+    }
+
+    /**
+     *  Test the default transformers via the pub static Map instance
+     */
+    public void testGetDefaultTransformersMap() {
+        BeanMap beanMap = new BeanMap();
+        assertEquals("Boolean.TYPE",   Boolean.TRUE,        ((Transformer)BeanMap.defaultTransformers.get(Boolean.TYPE)).transform("true"));
+        assertEquals("Character.TYPE", new Character('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
+        assertEquals("Byte.TYPE",      new Byte((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
+        assertEquals("Short.TYPE",     new Short((short)2), ((Transformer)BeanMap.defaultTransformers.get(Short.TYPE)).transform("2"));
+        assertEquals("Integer.TYPE",   new Integer(3),      ((Transformer)BeanMap.defaultTransformers.get(Integer.TYPE)).transform("3"));
+        assertEquals("Long.TYPE",      new Long(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
+        assertEquals("Float.TYPE",     new Float("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
+        assertEquals("Double.TYPE",    new Double("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
+        try {
+            BeanMap.defaultTransformers.put("FOO", null);
+            fail("put() - expected UnsupportedOperationException");
+        } catch(UnsupportedOperationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Test the default transformers via the pub static Map instance
+     */
+    public void testDefaultTransformersMap() {
+        assertEquals("Size",     8, BeanMap.defaultTransformers.size());
+        assertEquals("entrySet", 8, BeanMap.defaultTransformers.entrySet().size());
+        assertEquals("keySet",   8, BeanMap.defaultTransformers.keySet().size());
+        assertEquals("values",   8, BeanMap.defaultTransformers.values().size());
+        assertFalse("isEmpty",      BeanMap.defaultTransformers.isEmpty());
+        assertTrue("containsKey(Double)",    BeanMap.defaultTransformers.containsKey(Double.TYPE));
+        assertFalse("containsKey(Object)",   BeanMap.defaultTransformers.containsKey(Object.class));
+        assertTrue("containsValue(double)",  BeanMap.defaultTransformers.containsValue(BeanMap.defaultTransformers.get(Double.TYPE)));
+        assertFalse("containsValue(Object)", BeanMap.defaultTransformers.containsValue(Object.class));
+
+        try {
+            BeanMap.defaultTransformers.clear();
+            fail("clear() - expected UnsupportedOperationException");
+        } catch(UnsupportedOperationException e) {
+            // expected result
+        }
+        try {
+            BeanMap.defaultTransformers.put("FOO", null);
+            fail("put() - expected UnsupportedOperationException");
+        } catch(UnsupportedOperationException e) {
+            // expected result
+        }
+        try {
+            BeanMap.defaultTransformers.putAll(new HashMap());
+            fail("putAll() - expected UnsupportedOperationException");
+        } catch(UnsupportedOperationException e) {
+            // expected result
+        }
+        try {
+            BeanMap.defaultTransformers.remove("FOO");
+            fail("remove() - expected UnsupportedOperationException");
+        } catch(UnsupportedOperationException e) {
+            // expected result
+        }
+    }
+   
 }

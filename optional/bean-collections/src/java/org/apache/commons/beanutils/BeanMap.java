@@ -27,8 +27,10 @@ import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.list.UnmodifiableList;
@@ -64,10 +66,59 @@ public class BeanMap extends AbstractMap implements Cloneable {
     /**
      * Maps primitive Class types to transformers.  The transformer
      * transform strings into the appropriate primitive wrapper.
+     *
+     * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    public static HashMap defaultTransformers = new HashMap();
+    private static Map typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+
+    /**
+     * This HashMap has been made unmodifiable to prevent issues when
+     * loaded in a shared ClassLoader enviroment.
+     *
+     * @see http://issues.apache.org/jira/browse/BEANUTILS-112
+     * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
+     */
+    public static HashMap defaultTransformers = new HashMap() {
+        public void clear() {
+            throw new UnsupportedOperationException();
+        }
+        public boolean containsKey(Object key) {
+            return typeTransformers.containsKey(key);
+        }
+        public boolean containsValue(Object value) {
+            return typeTransformers.containsValue(value);
+        }
+        public Set entrySet() {
+            return typeTransformers.entrySet();
+        }
+        public Object get(Object key) {
+            return typeTransformers.get(key);
+        }
+        public boolean isEmpty() {
+            return false;
+        }
+        public Set keySet() {
+            return typeTransformers.keySet();
+        }
+        public Object put(Object key, Object value) {
+            throw new UnsupportedOperationException();
+        }
+        public void putAll(Map m) {
+            throw new UnsupportedOperationException();
+        }
+        public Object remove(Object key) {
+            throw new UnsupportedOperationException();
+        }
+        public int size() {
+            return typeTransformers.size();
+        }
+        public Collection values() {
+            return typeTransformers.values();
+        }
+    };
     
-    static {
+    private static Map createTypeTransformers() {
+        Map defaultTransformers = new HashMap();
         defaultTransformers.put( 
             Boolean.TYPE, 
             new Transformer() {
@@ -132,6 +183,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
                 }
             }
         );
+        return defaultTransformers;
     }
     
     
@@ -776,7 +828,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *  or null if the given type is not a primitive type
      */
     protected Transformer getTypeTransformer( Class aType ) {
-        return (Transformer) defaultTransformers.get( aType );
+        return (Transformer) typeTransformers.get( aType );
     }
 
     /**
