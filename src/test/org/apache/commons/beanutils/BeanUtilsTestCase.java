@@ -976,6 +976,27 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test setting a String value to a String array property
+     */
+    public void testSetPropertyStringToArray() throws Exception {
+        BeanUtils.setProperty(bean, "stringArray", "ABC,DEF,GHI");
+        String[] strArray =  bean.getStringArray();
+        assertEquals("length", 3, strArray.length);
+        assertEquals("value[0]", "ABC", strArray[0]);
+        assertEquals("value[1]", "DEF", strArray[1]);
+        assertEquals("value[2]", "GHI", strArray[2]);
+
+        BeanUtils.setProperty(bean, "intArray", "0, 10, 20, 30, 40");
+        int[] intArray =  bean.getIntArray();
+        assertEquals("length", 5, intArray.length);
+        assertEquals("value[0]", 0, intArray[0]);
+        assertEquals("value[1]", 10, intArray[1]);
+        assertEquals("value[2]", 20, intArray[2]);
+        assertEquals("value[3]", 30, intArray[3]);
+        assertEquals("value[4]", 40, intArray[4]);
+    }
+
 
     /**
      * Test narrowing and widening conversions on byte.
