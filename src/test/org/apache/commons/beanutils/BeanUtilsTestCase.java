@@ -794,9 +794,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertTrue("stringArray of correct type",
                    newValue instanceof String[]);
         assertEquals("stringArray length",
-                     1, ((String[]) newValue).length);
-        assertTrue("stringArray[0] is null",
-                   ((String[]) newValue)[0] == null);
+                     0, ((String[]) newValue).length);
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
         // Indexed value into array
@@ -1298,13 +1296,6 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtilsBean beanUtils = new BeanUtilsBean(	
                                                     new ConvertUtilsBean(), 
                                                     new PropertyUtilsBean());
-        beanUtils.getConvertUtils().register(
-            new Converter () {
-                public Object convert(Class type, Object value) {
-                    return "Spam, spam, spam, spam!";
-                }
-            },
-            String.class);
             
         TestBean bean = new TestBean();
         String [] results = beanUtils.getArrayProperty(bean, "intArray");
@@ -1317,7 +1308,7 @@ public class BeanUtilsTestCase extends TestCase {
         for (int i=0, size=values.length ;  i<size; i++) {
             assertEquals(
                     "Value " + i + " incorrectly converted ", 
-                    "Spam, spam, spam, spam!",
+                    values[i] + "",
                     results[i]);
         }
     }

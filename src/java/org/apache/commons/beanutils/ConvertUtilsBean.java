@@ -27,6 +27,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
@@ -434,12 +435,10 @@ public class ConvertUtilsBean {
             if (value == null) {
                 return ((String) null);
             } else {
-                Converter converter = lookup(String.class);
-                return ((String) converter.convert(String.class, value));
+                return ((String)convert(value, String.class));
             }
         } else {
-            Converter converter = lookup(String.class);
-            return ((String) converter.convert(String.class, value));
+            return ((String)convert(value, String.class));
         }
 
     }
@@ -490,6 +489,10 @@ public class ConvertUtilsBean {
 
         Class type = clazz;
         if (clazz.isArray()) {
+            Converter converter = lookup(clazz);
+            if (converter != null) {
+                return converter.convert(clazz, values);
+            }
             type = clazz.getComponentType();
         }
         if (log.isDebugEnabled()) {
@@ -511,6 +514,45 @@ public class ConvertUtilsBean {
 
     }
 
+
+    /**
+     * <p>Convert the value to an object of the specified class (if
+     * possible).</p>
+     *
+     * @param value Value to be converted (may be null)
+     * @param targetType Class of the value to be converted to
+     * @return The converted value
+     *
+     * @exception ConversionException if thrown by an underlying Converter
+     */
+    public Object convert(Object value, Class targetType) {
+
+        Class sourceType = value == null ? null : value.getClass();
+
+        if (log.isDebugEnabled()) {
+            if (value == null) {
+                log.debug("Convert null value to type '" +
+                        targetType.getName() + "'");
+            } else {
+                log.debug("Convert type '" + sourceType.getName() + "' value '" + value +
+                      "' to type '" + targetType.getName() + "'");
+            }
+        }
+
+        Object converted = value;
+        Converter converter = lookup(sourceType, targetType);
+        if (converter != null) {
+            if (log.isTraceEnabled()) {
+                log.trace("  Using converter " + converter);
+            }
+            converted = converter.convert(targetType, value);
+        }
+        if (targetType == String.class && value != null) {
+            converted = value.toString();
+        }
+        return converted;
+
+    }
 
     /**
      * Remove all registered {@link Converter}s, and re-establish the
@@ -614,6 +656,51 @@ public class ConvertUtilsBean {
 
     }
 
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * source and destination class; if there is no registered Converter,
+     * return <code>null</code>.
+     *
+     * @param sourceType Class of the value being converted
+     * @param targetType Class of the value to be converted to
+     * @return The registered {@link Converter} or <code>null</code> if not found
+     */
+    public Converter lookup(Class sourceType, Class targetType) {
+
+        if (targetType == null) {
+            throw new IllegalArgumentException("Target type is missing");
+        }
+
+        Converter converter = null;
+        // Convert --> String 
+        if (targetType == String.class) {
+            if (sourceType != null) {
+                converter = lookup(sourceType);
+                if (converter == null && (sourceType.isArray() ||
+                        Collection.class.isAssignableFrom(sourceType))) {
+                    converter = lookup(String[].class);
+                }
+            }
+            if (converter == null) {
+                converter = lookup(String.class);
+            }
+            return converter;
+        }
+
+        // Convert --> String array 
+        if (targetType == String[].class) {
+            if (sourceType != null && sourceType.isArray()) {
+                converter = lookup(sourceType);
+            }
+            if (converter == null) {
+                converter = lookup(String[].class);
+            }
+        } else {
+            converter = lookup(targetType);
+        }
+        return converter;
+
+    }
 
     /**
      * Register a custom {@link Converter} for the specified destination

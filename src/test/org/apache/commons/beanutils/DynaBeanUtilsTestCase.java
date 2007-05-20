@@ -907,9 +907,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertTrue("stringArray of correct type",
                    newValue instanceof String[]);
         assertEquals("stringArray length",
-                     1, ((String[]) newValue).length);
-        assertTrue("stringArray[0] is null",
-                   ((String[]) newValue)[0] == null);
+                     0, ((String[]) newValue).length);
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
         // Indexed value into array

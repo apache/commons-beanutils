@@ -261,6 +261,21 @@ public class ConvertUtils {
 
     }
 
+    /**
+     * <p>Convert the value to an object of the specified class (if
+     * possible).</p>
+     *
+     * @param value Value to be converted (may be null)
+     * @param targetType Class of the value to be converted to
+     * @return The converted value
+     *
+     * @exception ConversionException if thrown by an underlying Converter
+     */
+    public static Object convert(Object value, Class targetType) {
+
+        return ConvertUtilsBean.getInstance().convert(value, targetType);
+
+    }
 
     /**
      * <p>Remove all registered {@link Converter}s, and re-establish the
@@ -310,6 +325,20 @@ public class ConvertUtils {
 
     }
 
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * source and destination class; if there is no registered Converter,
+     * return <code>null</code>.
+     *
+     * @param sourceType Class of the value being converted
+     * @param targetType Class of the value to be converted to
+     * @return The registered {@link Converter} or <code>null</code> if not found
+     */
+    public static Converter lookup(Class sourceType, Class targetType) {
+
+        return ConvertUtilsBean.getInstance().lookup(sourceType, targetType);
+
+    }
 
     /**
      * <p>Register a custom {@link Converter} for the specified destination
