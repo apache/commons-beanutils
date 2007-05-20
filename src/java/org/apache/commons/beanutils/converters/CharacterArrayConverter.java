@@ -33,6 +33,7 @@ import org.apache.commons.beanutils.Converter;
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.4
+ * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */
 
 public final class CharacterArrayConverter extends AbstractArrayConverter {
