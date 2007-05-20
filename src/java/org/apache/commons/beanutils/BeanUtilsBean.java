@@ -556,13 +556,7 @@ public class BeanUtilsBean {
             return (results);
         } else {
             String results[] = new String[1];
-            try {
-                Class type = results.getClass();
-                Converter converter = getConvertUtils().lookup(type);
-                results = (String[])converter.convert(type, value);
-            } catch (Exception e) {
-                results[0] = value.toString();
-            }
+            results[0] = getConvertUtils().convert(value);
             return (results);
         }
 

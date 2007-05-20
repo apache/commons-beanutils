@@ -418,15 +418,10 @@ public class BeanUtilsTestCase extends TestCase {
 
             // Test comma delimited list
             String value1 = "ABC";
-            String value2 = "DEF";
-            String value3 = "GHK";
-            String delimitedList = value1 + "," + value2 + "," + value3;
-            bean.setStringProperty(delimitedList);
+            bean.setStringProperty("ABC");
             arr = BeanUtils.getArrayProperty(bean, "stringProperty");
-            assertEquals("Delimited List Test lth", 3, arr.length);
-            assertEquals("Delimited List Test value1", value1, arr[0]);
-            assertEquals("Delimited List Test value2", value2, arr[1]);
-            assertEquals("Delimited List Test value3", value3, arr[2]);
+            assertEquals("Delimited List Test lth", 1, arr.length);
+            assertEquals("Delimited List Test value1", "ABC", arr[0]);
 
         } catch (IllegalAccessException e) {
             fail("IllegalAccessException");
