@@ -83,7 +83,7 @@ public class DynaResultSetTestCase extends TestCase {
      */
     public void setUp() throws Exception {
 
-        dynaClass = new ResultSetDynaClass(new TestResultSet());
+        dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
 
     }
 

@@ -83,7 +83,7 @@ public class DynaRowSetTestCase extends TestCase {
      */
     public void setUp() throws Exception {
 
-        dynaClass = new RowSetDynaClass(new TestResultSet());
+        dynaClass = new RowSetDynaClass(TestResultSet.createProxy());
 
     }
 
@@ -234,7 +234,7 @@ public class DynaRowSetTestCase extends TestCase {
     public void testLimitedRows() throws Exception {
         
         // created one with low limit
-        RowSetDynaClass limitedDynaClass = new RowSetDynaClass(new TestResultSet(), 3);
+        RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
         List rows = limitedDynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());

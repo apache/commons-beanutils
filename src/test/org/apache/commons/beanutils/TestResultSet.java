@@ -21,6 +21,9 @@ package org.apache.commons.beanutils;
 
 import java.io.InputStream;
 import java.io.Reader;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Array;
@@ -47,7 +50,7 @@ import java.util.Map;
  * @version $Revision$ $Date$
  */
 
-public class TestResultSet implements ResultSet {
+public class TestResultSet implements InvocationHandler {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -65,6 +68,46 @@ public class TestResultSet implements ResultSet {
     protected long timestamp = System.currentTimeMillis();
 
 
+    /**
+     * Factory method for creating {@link ResultSet} proxies.
+     *
+     * @return A result set proxy
+     */
+    public static ResultSet createProxy() {
+        ClassLoader classLoader = ResultSet.class.getClassLoader();
+        Class[] interfaces = new Class[] { ResultSet.class };
+        InvocationHandler invocationHandler = new TestResultSet();
+        return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+    }
+
+    /**
+     * Handles method invocation on the ResultSet proxy. 
+     *
+     * @param proxy The proxy ResultSet object
+     * @param method the method being invoked
+     * @param args The method arguments
+     * @return The result of invoking the method.
+     * @throws Throwable if an error occurs.
+     */
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        String methodName = method.getName();
+        if ("close".equals(methodName)) {
+            return null;
+        } if ("getMetaData".equals(methodName)) {
+            return getMetaData();
+        } if ("getObject".equals(methodName)) {
+            return getObject((String)args[0]);
+        } if ("next".equals(methodName)) {
+            return (next() ? Boolean.TRUE : Boolean.FALSE);
+        } if ("updateObject".equals(methodName)) {
+            updateObject((String)args[0], args[1]);
+            return null;
+        }
+        
+        throw new UnsupportedOperationException(methodName + " not implemented");
+    }
+
+
     // ---------------------------------------------------- Implemented Methods
 
 
@@ -74,7 +117,7 @@ public class TestResultSet implements ResultSet {
 
 
     public ResultSetMetaData getMetaData() throws SQLException {
-        return (new TestResultSetMetaData());
+        return TestResultSetMetaData.createProxy();
     }
 
 
