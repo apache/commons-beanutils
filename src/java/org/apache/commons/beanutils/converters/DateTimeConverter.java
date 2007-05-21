@@ -126,12 +126,32 @@ public class DateTimeConverter extends AbstractConverter {
     }
 
     /**
+     * Return the Time Zone to use when converting dates
+     * (or <code>null</code> if none specified.
+     *
+     * @return The Time Zone.
+     */
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    /**
      * Set the Time Zone to use when converting dates.
      *
      * @param timeZone The Time Zone.
      */
     public void setTimeZone(TimeZone timeZone) {
         this.timeZone = timeZone;
+    }
+
+    /**
+     * Return the Locale for the <i>Converter</i>
+     * (or <code>null</code> if none specified).
+     *
+     * @return The locale to use for conversion
+     */
+    public Locale getLocale() {
+        return locale;
     }
 
     /**
@@ -153,6 +173,18 @@ public class DateTimeConverter extends AbstractConverter {
      */
     public void setPattern(String pattern) {
         setPatterns(new String[] {pattern});
+    }
+
+    /**
+     * Return the date format patterns used to convert
+     * dates to/from a <code>java.lang.String</code>
+     * (or <code>null</code> if none specified).
+     *
+     * @see SimpleDateFormat
+     * @return Array of format patterns.
+     */
+    public String[] getPatterns() {
+        return patterns; 
     }
 
     /**

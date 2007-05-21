@@ -125,6 +125,15 @@ public class NumberConverter extends AbstractConverter {
     // --------------------------------------------------------- Public Methods
 
     /**
+     * Return whether decimals are allowed in the number.
+     *
+     * @return Whether decimals are allowed in the number
+     */
+    public boolean isAllowDecimals() {
+        return allowDecimals;
+    }
+
+    /**
      * Set whether a format should be used to convert
      * the Number.
      *
@@ -133,6 +142,20 @@ public class NumberConverter extends AbstractConverter {
      */
     public void setUseLocaleFormat(boolean useLocaleFormat) {
         this.useLocaleFormat = useLocaleFormat;
+    }
+
+    /**
+     * Return the number format pattern used to convert
+     * Numbers to/from a <code>java.lang.String</code>
+     * (or <code>null</code> if none specified).
+     * <p>
+     * See <code>java.text.SimpleDateFormat</code> for details
+     * of how to specify the pattern.
+     *
+     * @return The format pattern.
+     */
+    public String getPattern() {
+        return pattern;
     }
 
     /**
@@ -150,9 +173,19 @@ public class NumberConverter extends AbstractConverter {
     }
 
     /**
+     * Return the Locale for the <i>Converter</i>
+     * (or <code>null</code> if none specified).
+     *
+     * @return The locale to use for conversion
+     */
+    public Locale getLocale() {
+        return locale;
+    }
+
+    /**
      * Set the Locale for the <i>Converter</i>.
      *
-     * @param locale The default Locale.
+     * @param locale The locale to use for conversion
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
