@@ -23,6 +23,7 @@ import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -102,6 +103,9 @@ public class BeanUtilsBean {
     
     /** Used to access properties*/
     private PropertyUtilsBean propertyUtilsBean;
+
+    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
+    private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
     // --------------------------------------------------------- Constuctors
 
@@ -1028,5 +1032,51 @@ public class BeanUtilsBean {
      */
     public PropertyUtilsBean getPropertyUtils() {
         return propertyUtilsBean;
+    }
+
+    /** 
+     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     * 
+     * @param  throwable The throwable.
+     * @param  cause     The cause of the throwable.
+     * @return  true if the cause was initialized, otherwise false.
+     */
+    public boolean initCause(Throwable throwable, Throwable cause) {
+        if (INIT_CAUSE_METHOD != null && cause != null) {
+            try {
+                INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
+                return true;
+            } catch (Throwable e) {
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a <code>Method<code> allowing access to
+     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
+     * or <code>null</code> if the method
+     * does not exist.
+     * 
+     * @return A <code>Method<code> for <code>Throwable.initCause</code>, or
+     * <code>null</code> if unavailable.
+     */ 
+    private static Method getInitCauseMethod() {
+        try {
+            Class[] paramsClasses = new Class[] { Throwable.class };
+            return Throwable.class.getMethod("initCause", paramsClasses);
+        } catch (NoSuchMethodException e) {
+            Log log = LogFactory.getLog(BeanUtils.class);
+            if (log.isWarnEnabled()) {
+                log.warn("Throwable does not have initCause() method in JDK 1.3");
+            }
+            return null;
+        } catch (Throwable e) {
+            Log log = LogFactory.getLog(BeanUtils.class);
+            if (log.isWarnEnabled()) {
+                log.warn("Error getting the Throwable initCause() method", e);
+            }
+            return null;
+        }
     }
 }

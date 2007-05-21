@@ -22,6 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -1367,4 +1368,72 @@ public class BeanUtilsTestCase extends TestCase {
                         "some.dotty.value", 
                         bean.getMapproperty("this.that.the-other"));
     }	
+
+    /**
+     * Test for {@link BeanUtilsBean#initCause(Throwable, Throwable)} method.
+     */
+    public void testInitCause() {
+        if (isPre14JVM()) {
+            return;
+        }
+        String parentMsg = "PARENT-THROWABLE";
+        String causeMsg  = "THROWABLE-CAUSE";
+        try {
+            initCauseAndThrowException(parentMsg, causeMsg);
+        } catch (Throwable thrownParent) {
+            assertEquals("Parent", parentMsg, thrownParent.getMessage());
+            try {
+                assertEquals("Parent", parentMsg, thrownParent.getMessage());
+                Throwable thrownCause = getCause(thrownParent);
+                assertNotNull("Cause Null", thrownCause);
+                assertEquals("Cause", causeMsg, thrownCause.getMessage());
+            } catch (Throwable testError) {
+                fail("If you're running JDK 1.3 then don't worry this should fail," +
+                        " if not then needs checking out: " + testError);
+            }
+        }
+    }
+
+    /**
+     * Use reflection to get the cause
+     */
+    private Throwable getCause(Throwable t) throws Throwable {
+        return (Throwable)PropertyUtils.getProperty(t, "cause");
+    }
+
+    /**
+     * Catch a cause, initialize using BeanUtils.initCause() and throw new exception
+     */
+    private void initCauseAndThrowException(String parent, String cause) throws Throwable {
+        try {
+            throwException(cause);
+        } catch (Throwable e) {
+            Throwable t = new Exception(parent);
+            BeanUtils.initCause(t, e);
+            throw t;
+        }
+    }
+
+    /**
+     * Throw an exception with the specified message. 
+     */
+    private void throwException(String msg) throws Throwable {
+        throw new Exception(msg);
+    }
+
+    /**
+     * Test for JDK 1.4
+     */
+    private boolean isPre14JVM() {
+        String version = System.getProperty("java.specification.version");
+        StringTokenizer tokenizer = new StringTokenizer(version,".");
+        if (tokenizer.nextToken().equals("1")) {
+            String minorVersion = tokenizer.nextToken();
+            if (minorVersion.equals("0")) return true;
+            if (minorVersion.equals("1")) return true;
+            if (minorVersion.equals("2")) return true;
+            if (minorVersion.equals("3")) return true;
+        }
+        return false;
+    }
 }

@@ -455,4 +455,15 @@ public class BeanUtils {
 
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
     }
+
+    /** 
+     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     * 
+     * @param  throwable The throwable.
+     * @param  cause     The cause of the throwable.
+     * @return  true if the cause was initialized, otherwise false.
+     */
+    public static boolean initCause(Throwable throwable, Throwable cause) {
+        return BeanUtilsBean.getInstance().initCause(throwable, cause);
+    }
 }

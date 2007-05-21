@@ -2001,7 +2001,7 @@ public class PropertyUtilsBean {
             
             return method.invoke(bean, values);
         
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException cause) {
             if(bean == null) {
                 throw new IllegalArgumentException("No bean specified " +
                     "- this should have been checked before reaching this method");
@@ -2025,16 +2025,19 @@ public class PropertyUtilsBean {
                     expectedString += parTypes[i].getName();
                 }
             }
-            log.error("Method invocation failed", e);
-            throw new IllegalArgumentException(
+            IllegalArgumentException e = new IllegalArgumentException(
                 "Cannot invoke " + method.getDeclaringClass().getName() + "." 
                 + method.getName() + " on bean class '" + bean.getClass() +
-                "' - " + e.getMessage()
+                "' - " + cause.getMessage()
                 // as per https://issues.apache.org/jira/browse/BEANUTILS-224
                 + " - had objects of type \"" + valueString
                 + "\" but expected signature \""
                 +   expectedString + "\""
                 );
+            if (!BeanUtils.initCause(e, cause)) {
+                log.error("Method invocation failed", cause);
+            }
+            throw e;
             
         }
     }
