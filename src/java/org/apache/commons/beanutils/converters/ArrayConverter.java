@@ -48,9 +48,34 @@ import org.apache.commons.beanutils.Converter;
  *         of the delegate {@link Converter}.</li>
  *     <li><b>Delimited Lists</b> - can Convert <b>to</b> and <b>from</b> a
  *         delimited list in String format.</li>
- *     <li><b>Multi Dimensional Arrays</b> - its possible to convert to
- *         multi-dimensional arrays, by embedding {@link ArrayConverter}
+ *     <li><b>Conversion to String</b> - converts an array to a 
+ *         <code>String</code> in one of two ways: as a <i>delimited list</i>
+ *         or by converting the first element in the array to a String - this
+ *         is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)}
+ *         parameter.</li>
+ *     <li><b>Multi Dimensional Arrays</b> - its possible to convert a <code>String</code>
+ *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
+ *     <li><b>Default Value</b></li>
+ *         <ul>
+ *             <li><b><i>No Default</b></i> - use the 
+ *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
+ *                 constructor to create a converter which throws a
+ *                 {@link ConversionException} if the value is missing or
+ *                 invalid.</li>
+ *             <li><b><i>Default values</b></i> - use the 
+ *                 {@link ArrayConverter#ArrayConverter(Class, Converter, int)}
+ *                 constructor to create a converter which returns a <i>default
+ *                 value</i>. The <i>defaultSize</i> parameter controls the 
+ *                 <i>default value</i> in the following way:</li>
+ *                 <ul>
+ *                    <li><i>defaultSize &lt; 0</i> - default is <code>null</code></li>
+ *                    <li><i>defaultSize = 0</i> - default is an array of length zero</li>
+ *                    <li><i>defaultSize &gt; 0</i> - default is an array with a
+ *                        length specified by <code>defaultSize</code> (N.B. elements
+ *                        in the array will be <code>null</code>)</li>
+ *                 </ul>
+ *         </ul>
  * </ul>
  *
  * <h3>Parsing Delimited Lists</h3>
@@ -66,7 +91,7 @@ import org.apache.commons.beanutils.Converter;
  * </ul>
  *
  * <h3>Multi Dimensional Arrays</h3>
- * It is possible to convert to mulit-dimensional arrays by using
+ * It is possible to convert a <code>String</code> to mulit-dimensional arrays by using
  * {@link ArrayConverter} as the element {@link Converter}
  * within another {@link ArrayConverter}.
  * <p>
@@ -133,7 +158,7 @@ public class ArrayConverter extends AbstractConverter {
     /**
      * Construct an <b>array</b> <code>Converter</code> with the specified
      * <b>component</b> <code>Converter</code> that returns a default
-     * array of the specified size if an error occurs.
+     * array of the specified size (or <code>null</code>) if an error occurs.
      *
      * @param defaultType The default array type this
      *  <code>Converter</code> handles
@@ -185,7 +210,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Convert the input object into a String.
+     * Handles conversion to a String.
      *
      * @param value The value to be converted.
      * @return the converted String value.
@@ -197,13 +222,10 @@ public class ArrayConverter extends AbstractConverter {
         Class type = value.getClass();
         if (type.isArray()) {
             size = Array.getLength(value);
-        } else if (value instanceof Collection) {
-            Collection collection = (Collection)value;
+        } else {
+            Collection collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
-        } else {
-            Object converted = elementConverter.convert(String.class, value);
-            return (converted == null ? (String)getDefault(String.class) : converted.toString());
         }
 
         if (size == 0) {
@@ -232,8 +254,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Convert the input object into an array of the
-     * specified type.
+     * Handles conversion to an array of the specified type.
      *
      * @param type The type to which this value should be converted.
      * @param value The input value to be converted.
@@ -276,11 +297,25 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Convert an Object into a Collection.
+     * Converts non-array values to a Collection prior
+     * to being converted either to an array or a String.
+     * </p>
+     * <ul>
+     *   <li>{@link Collection} values are returned unchanged</li>
+     *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date} 
+     *       values returned as a the only element in a List.</li>
+     *   <li>All other types are converted to a String and parsed
+     *       as a delimited list.</li>
+     * </ul>
+     *
+     * <strong>N.B.</strong> The method is called by both the
+     * {@link ArrayConverter#convertToType(Class, Object)} and
+     * {@link ArrayConverter#convertToString(Object)} methods for
+     * <i>non-array</i> types.
      *
      * @param type The type to convert the value to
      * @param value value to be converted
-     * @return List of parsed elements.
+     * @return Collection elements.
      */
     protected Collection convertToCollection(Class type, Object value) {
         if (value instanceof Collection) {
