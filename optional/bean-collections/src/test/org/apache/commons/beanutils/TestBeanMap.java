@@ -360,7 +360,7 @@ public class TestBeanMap extends AbstractTestMap {
     }
 
     /**
-     *  Test the default transformers via the pub static Map instance
+     *  Test the default transformers via the public static Map instance
      */
     public void testGetDefaultTransformersMap() {
         BeanMap beanMap = new BeanMap();
@@ -372,16 +372,10 @@ public class TestBeanMap extends AbstractTestMap {
         assertEquals("Long.TYPE",      new Long(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
         assertEquals("Float.TYPE",     new Float("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
         assertEquals("Double.TYPE",    new Double("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
-        try {
-            BeanMap.defaultTransformers.put("FOO", null);
-            fail("put() - expected UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
-     *  Test the default transformers via the pub static Map instance
+     *  Test the default transformers HashMap
      */
     public void testDefaultTransformersMap() {
         assertEquals("Size",     8, BeanMap.defaultTransformers.size());
