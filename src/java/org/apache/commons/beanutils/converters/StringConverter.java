@@ -14,14 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */ 
-
-
 package org.apache.commons.beanutils.converters;
 
-
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
-
 
 /**
  * Standard {@link Converter} implementation that converts an incoming
@@ -48,31 +43,40 @@ import org.apache.commons.beanutils.Converter;
  * @version $Revision$ $Date$
  * @since 1.3
  */
+public final class StringConverter extends AbstractConverter {
 
-public final class StringConverter implements Converter {
 
+    /**
+     * Construct a <b>java.lang.String</b> <i>Converter</i> that throws
+     * a <code>ConversionException</code> if an error occurs.
+     */
+    public StringConverter() {
+        super(String.class);
+    }
 
-    // --------------------------------------------------------- Public Methods
-
+    /**
+     * Construct a <b>java.lang.String</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public StringConverter(Object defaultValue) {
+        super(String.class, defaultValue);
+    }
 
     /**
      * Convert the specified input object into an output object of the
      * specified type.
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
-     *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Throwable if an error occurs converting to the specified type
      */
-    public Object convert(Class type, Object value) {
-
-        if (value == null) {
-            return ((String) null);
-        } else {
-            return (value.toString());
-        }
-
+    protected Object convertToType(Class type, Object value) throws Throwable {
+        return value.toString();
     }
 
 
