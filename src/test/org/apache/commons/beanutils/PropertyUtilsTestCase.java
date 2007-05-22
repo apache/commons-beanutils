@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
@@ -3825,5 +3826,43 @@ public class PropertyUtilsTestCase extends TestCase {
         myMap.put("thebean", bean);
         utilsBean.getNestedProperty(myMap, "thebean.mapitem");
         utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
+    }
+
+    /**
+     * Test {@link PropertyUtilsBean}'s invoke method throwing an IllegalArgumentException
+     * and check that the "cause" has been properly initialized for JDK 1.4+
+     * See BEANUTILS-266 for changes and reason for test
+     */
+    public void testExceptionFromInvoke() throws Exception {
+        if (isPre14JVM()) {
+            return;
+        }
+        try {
+            PropertyUtils.setSimpleProperty(bean, "intProperty","XXX");
+        } catch(IllegalArgumentException t) {
+            Throwable cause = (Throwable)PropertyUtils.getProperty(t, "cause");
+            assertNotNull("Cause not found", cause);
+            assertTrue("Expected cause to be IllegalArgumentException, but was: " + cause.getClass(),
+                    cause instanceof IllegalArgumentException);
+            assertEquals("Check error message", "argument type mismatch", cause.getMessage());
+        } catch(Throwable t) {
+            fail("Expected IllegalArgumentException, but threw " + t);
+        }
+    }
+
+    /**
+     * Test for JDK 1.4
+     */
+    private boolean isPre14JVM() {
+        String version = System.getProperty("java.specification.version");
+        StringTokenizer tokenizer = new StringTokenizer(version,".");
+        if (tokenizer.nextToken().equals("1")) {
+            String minorVersion = tokenizer.nextToken();
+            if (minorVersion.equals("0")) return true;
+            if (minorVersion.equals("1")) return true;
+            if (minorVersion.equals("2")) return true;
+            if (minorVersion.equals("3")) return true;
+        }
+        return false;
     }
 }
