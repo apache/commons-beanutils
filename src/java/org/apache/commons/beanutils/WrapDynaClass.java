@@ -19,9 +19,12 @@ package org.apache.commons.beanutils;
 
 
 import java.beans.PropertyDescriptor;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 
 /**
@@ -105,6 +108,20 @@ public class WrapDynaClass implements DynaClass {
     // ------------------------------------------------------- Static Variables
 
 
+    private static final ContextClassLoaderLocal wrapDynaClassesByClassLoader = 
+        new ContextClassLoaderLocal() {
+            protected Object initialValue() {
+                return new WeakHashMap();
+        }
+    };
+
+    /**
+     * Get the wrap dyna classes cache
+     */
+    private static Map getDynaClassesMap() {
+        return (Map)wrapDynaClassesByClassLoader.get();
+    }
+
     /**
      * The set of <code>WrapDynaClass</code> instances that have ever been
      * created, keyed by the underlying bean Class. The keys to this map
@@ -121,8 +138,70 @@ public class WrapDynaClass implements DynaClass {
      * classes loaded via a webapp classloader even after the webapp has been
      * undeployed. That will prevent the entire classloader and all the classes
      * it refers to and all their static members from being freed.
+     *
+     ************* !!!!!!!!!!!! PLEASE NOTE !!!!!!!!!!!! *************
+     *
+     * THE FOLLOWING IS A NASTY HACK TO SO THAT BEANUTILS REMAINS BINARY
+     *              COMPATIBLE WITH PREVIOUS RELEASES.
+     *
+     * There are two issues here:
+     * 
+     * 1) Memory Issues: The static HashMap caused memory problems (See BEANUTILS-59)
+     *    to resolve this it has been moved into a ContextClassLoaderLocal instance
+     *    (named wrapDynaClassesByClassLoader above) which holds one copy per
+     *    ClassLoader in a WeakHashMap.
+     * 
+     * 2) Binary Compatibility: As the "dynaClasses" static HashMap is "protected"
+     *    removing it breaks BeanUtils binary compatibility with previous versions.
+     *    To resolve this all the methods have been overriden to delegate to the
+     *    Map for the ClassLoader in the ContextClassLoaderLocal.
+     *
+     * @deprecated The dynaClasses Map will be removed in a subsequent release
      */
-    protected static HashMap dynaClasses = new HashMap();
+    protected static HashMap dynaClasses = new HashMap() {
+        public void clear() {
+            getDynaClassesMap().clear();
+        }
+        public boolean containsKey(Object key) {
+            return getDynaClassesMap().containsKey(key);
+        }
+        public boolean containsValue(Object value) {
+            return getDynaClassesMap().containsValue(value);
+        }
+        public Set entrySet() {
+            return getDynaClassesMap().entrySet();
+        }
+        public boolean equals(Object o) {
+            return getDynaClassesMap().equals(o);
+        }
+        public Object get(Object key) {
+            return getDynaClassesMap().get(key);
+        }
+        public int hashCode() {
+            return getDynaClassesMap().hashCode();
+        }
+        public boolean isEmpty() {
+            return getDynaClassesMap().isEmpty();
+        }
+        public Set keySet() {
+            return getDynaClassesMap().keySet();
+        }
+        public Object put(Object key, Object value) {
+            return getDynaClassesMap().put(key, value);
+        }
+        public void putAll(Map m) {
+            getDynaClassesMap().putAll(m);
+        }
+        public Object remove(Object key) {
+            return getDynaClassesMap().remove(key);
+        }
+        public int size() {
+            return getDynaClassesMap().size();
+        }
+        public Collection values() {
+            return getDynaClassesMap().values();
+        }
+    };
 
 
     // ------------------------------------------------------ DynaClass Methods
@@ -234,9 +313,7 @@ public class WrapDynaClass implements DynaClass {
      */
     public static void clear() {
 
-        synchronized (dynaClasses) {
-            dynaClasses.clear();
-        }
+        getDynaClassesMap().clear();
 
     }
 
@@ -250,15 +327,13 @@ public class WrapDynaClass implements DynaClass {
      */
     public static WrapDynaClass createDynaClass(Class beanClass) {
 
-        synchronized (dynaClasses) {
             WrapDynaClass dynaClass =
-                    (WrapDynaClass) dynaClasses.get(beanClass);
+                    (WrapDynaClass) getDynaClassesMap().get(beanClass);
             if (dynaClass == null) {
                 dynaClass = new WrapDynaClass(beanClass);
-                dynaClasses.put(beanClass, dynaClass);
+                getDynaClassesMap().put(beanClass, dynaClass);
             }
             return (dynaClass);
-        }
 
     }
 

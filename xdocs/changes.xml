@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8.0" date="in SVN">
+      <action dev="niallp" type="fix" issue="BEANUTILS-243" due-to="Henri Yandell">
+         BeanUtils's tests fail to compile under JDK 1.6
+      </action>
       <action dev="niallp" type="add" issue="BEANUTILS-259">
          Add plugable property name expression <b><i>Resolver</i></b>.
       </action>

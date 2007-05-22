@@ -229,7 +229,15 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
             DynaBean bean = createDynaBean();
             for (int i = 0; i < properties.length; i++) {
                 String name = properties[i].getName();
-                bean.set(name, resultSet.getObject(name));
+                Object value = resultSet.getObject(name);
+                if (value != null) {
+                    Class type = properties[i].getClass();
+                    try {
+                        value = ConvertUtils.convert(value, type);
+                    } catch (Throwable t) {
+                    }
+                }
+                bean.set(name, value);
             }
             rows.add(bean);
         }

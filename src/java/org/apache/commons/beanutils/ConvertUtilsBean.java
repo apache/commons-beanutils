@@ -24,9 +24,6 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
@@ -35,6 +32,7 @@ import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BigIntegerConverter;
 import org.apache.commons.beanutils.converters.BooleanConverter;
 import org.apache.commons.beanutils.converters.ByteConverter;
+import org.apache.commons.beanutils.converters.CalendarConverter;
 import org.apache.commons.beanutils.converters.CharacterConverter;
 import org.apache.commons.beanutils.converters.ClassConverter;
 import org.apache.commons.beanutils.converters.DateConverter;
@@ -130,6 +128,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class ConvertUtilsBean {
     
+    private static final Integer ZERO = new Integer(0);
+
     // ------------------------------------------------------- Class Methods
     /**
      * Get singleton instance
@@ -557,76 +557,217 @@ public class ConvertUtilsBean {
 
 		converters.clear();
         
-        // Note: these two converters have no default values. This is
-        // not consistent with the other numeric converters, but cannot
-        // be fixed without breaking backwards compatibility.
+        registerPrimitives(false);
+        registerStandard(false, false);
+        registerOther(true);
+        registerArrays(false, 0);
         register(BigDecimal.class, new BigDecimalConverter());
         register(BigInteger.class, new BigIntegerConverter());
-        registerArrayConverter(BigDecimal[].class, new BigDecimalConverter());
-        registerArrayConverter(BigInteger[].class, new BigIntegerConverter());
+    }
 
-        register(Boolean.TYPE, new BooleanConverter(defaultBoolean));
-        register(Boolean.class,  new BooleanConverter(defaultBoolean));
-        registerArrayConverter(boolean[].class, new BooleanConverter());
-        registerArrayConverter(Boolean[].class, new BooleanConverter());
-        register(Byte.TYPE, new ByteConverter(defaultByte));
-        register(Byte.class, new ByteConverter(defaultByte));
-        registerArrayConverter(byte[].class, new ByteConverter());
-        registerArrayConverter(Byte[].class, new ByteConverter());
-        register(Character.TYPE,
-                       new CharacterConverter(defaultCharacter));
-        register(Character.class,
-                       new CharacterConverter(defaultCharacter));
-        registerArrayConverter(char[].class,      new CharacterConverter());
-        registerArrayConverter(Character[].class, new CharacterConverter());
-        register(Class.class, new ClassConverter());
-        register(Double.TYPE, new DoubleConverter(defaultDouble));
-        register(Double.class, new DoubleConverter(defaultDouble));
-        registerArrayConverter(double[].class, new DoubleConverter());
-        registerArrayConverter(Double[].class, new DoubleConverter());
-        register(Float.TYPE, new FloatConverter(defaultFloat));
-        register(Float.class, new FloatConverter(defaultFloat));
-        registerArrayConverter(float[].class, new FloatConverter());
-        registerArrayConverter(Float[].class, new FloatConverter());
-        register(Integer.TYPE, new IntegerConverter(defaultInteger));
-        register(Integer.class, new IntegerConverter(defaultInteger));
-        registerArrayConverter(int[].class,     new IntegerConverter());
-        registerArrayConverter(Integer[].class, new IntegerConverter());
-        register(Long.TYPE, new LongConverter(defaultLong));
-        register(Long.class, new LongConverter(defaultLong));
-        registerArrayConverter(long[].class, new LongConverter());
-        registerArrayConverter(Long[].class, new LongConverter());
-        register(Short.TYPE, new ShortConverter(defaultShort));
-        register(Short.class, new ShortConverter(defaultShort));
-        registerArrayConverter(short[].class, new ShortConverter());
-        registerArrayConverter(Short[].class, new ShortConverter());
-        register(String.class, new StringConverter());
-        registerArrayConverter(String[].class, new StringConverter());
-        register(Date.class, new SqlDateConverter());
-        registerArrayConverter(Date[].class, new SqlDateConverter());
-        register(Time.class, new SqlTimeConverter());
-        registerArrayConverter(Time[].class, new SqlTimeConverter());
-        register(Timestamp.class, new SqlTimestampConverter());
-        registerArrayConverter(Timestamp[].class, new SqlTimestampConverter());
-        register(File.class, new FileConverter());
-        register(URL.class, new URLConverter());
-        register(java.util.Date.class,                     new DateConverter());
-        register(java.util.Calendar.class,                 new DateConverter());
-        registerArrayConverter(java.util.Date[].class,     new DateConverter());
-        registerArrayConverter(java.util.Calendar[].class, new DateConverter());
+    /**
+     * Register the standard converters with the specified defaults.
+     * </p>
+     * This method delegates to the following methods (see their docs
+     * to find out which converters each one registers.
+     * <ul>
+     *     <li>{@link ConvertUtilsBean#registerPrimitives(boolean)}</li>
+     *     <li>{@link ConvertUtilsBean#registerStandard(boolean, boolean)}</li>
+     *     <li>{@link ConvertUtilsBean#registerOther(boolean)}</li>
+     *     <li>{@link ConvertUtilsBean#registerArrays(boolean, int)}</li>
+     * </ul>
+     *
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     * @param defaultNull <code>true</code>if the <i>standard</i> converters
+     * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
+     * should use a default value of <code>null</code>, otherwise <code>false</code>.
+     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     * @param defaultArraySize The size of the default array value for array converters
+     * (see {@link ConvertUtilsBean#registerArrays(boolean, int)}).
+     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     */
+    public void register(boolean throwException, boolean defaultNull, int defaultArraySize) {
+        registerPrimitives(throwException);
+        registerStandard(throwException, defaultNull);
+        registerOther(throwException);
+        registerArrays(throwException, defaultArraySize);
+    }
+
+    /**
+     * Register the converters for primitive types.
+     * </p>
+     * This method registers the following converters:
+     * <ul>
+     *     <li><code>Boolean.TYPE</code> - {@link BooleanConverter}</li>
+     *     <li><code>Byte.TYPE</code> - {@link ByteConverter}</li>
+     *     <li><code>Character.TYPE</code> - {@link CharacterConverter}</li>
+     *     <li><code>Double.TYPE</code> - {@link DoubleConverter}</li>
+     *     <li><code>Float.TYPE</code> - {@link FloatConverter}</li>
+     *     <li><code>Integer.TYPE</code> - {@link IntegerConverter}</li>
+     *     <li><code>Long.TYPE</code> - {@link LongConverter}</li>
+     *     <li><code>Short.TYPE</code> - {@link ShortConverter}</li>
+     * </ul>
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     */
+    public void registerPrimitives(boolean throwException) {
+        register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
+        register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
+        register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(new Character(' ')));
+        register(Double.TYPE,    throwException ? new DoubleConverter()     : new DoubleConverter(ZERO));
+        register(Float.TYPE,     throwException ? new FloatConverter()      : new FloatConverter(ZERO));
+        register(Integer.TYPE,   throwException ? new IntegerConverter()    : new IntegerConverter(ZERO));
+        register(Long.TYPE,      throwException ? new LongConverter()       : new LongConverter(ZERO));
+        register(Short.TYPE,     throwException ? new ShortConverter()      : new ShortConverter(ZERO));
+    }
+
+    /**
+     * Register the converters for standard types.
+     * </p>
+     * This method registers the following converters:
+     * <ul>
+     *     <li><code>BigDecimal.class</code> - {@link BigDecimalConverter}</li>
+     *     <li><code>BigInteger.class</code> - {@link BigIntegerConverter}</li>
+     *     <li><code>Boolean.class</code> - {@link BooleanConverter}</li>
+     *     <li><code>Byte.class</code> - {@link ByteConverter}</li>
+     *     <li><code>Character.class</code> - {@link CharacterConverter}</li>
+     *     <li><code>Double.class</code> - {@link DoubleConverter}</li>
+     *     <li><code>Float.class</code> - {@link FloatConverter}</li>
+     *     <li><code>Integer.class</code> - {@link IntegerConverter}</li>
+     *     <li><code>Long.class</code> - {@link LongConverter}</li>
+     *     <li><code>Short.class</code> - {@link ShortConverter}</li>
+     *     <li><code>String.class</code> - {@link StringConverter}</li>
+     * </ul>
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     * @param defaultNull <code>true</code>if the <i>standard</i> converters
+     * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
+     * should use a default value of <code>null</code>, otherwise <code>false</code>.
+     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     */
+    public void registerStandard(boolean throwException, boolean defaultNull) {
+
+        Number     defaultNumber     = defaultNull ? null : ZERO;
+        BigDecimal bigDecimalDefault = defaultNull ? null : new BigDecimal("0.0");
+        BigInteger bigIntegerDefault = defaultNull ? null : new BigInteger("0");
+        Boolean    booleanDefault    = defaultNull ? null : Boolean.FALSE;
+        Character  charDefault       = defaultNull ? null : new Character(' ');
+        String     stringDefault     = defaultNull ? null : "";
+
+        register(BigDecimal.class, throwException ? new BigDecimalConverter() : new BigDecimalConverter(bigDecimalDefault));
+        register(BigInteger.class, throwException ? new BigIntegerConverter() : new BigIntegerConverter(bigIntegerDefault));
+        register(Boolean.class,    throwException ? new BooleanConverter()    : new BooleanConverter(booleanDefault));
+        register(Byte.class,       throwException ? new ByteConverter()       : new ByteConverter(defaultNumber));
+        register(Character.class,  throwException ? new CharacterConverter()  : new CharacterConverter(charDefault));
+        register(Double.class,     throwException ? new DoubleConverter()     : new DoubleConverter(defaultNumber));
+        register(Float.class,      throwException ? new FloatConverter()      : new FloatConverter(defaultNumber));
+        register(Integer.class,    throwException ? new IntegerConverter()    : new IntegerConverter(defaultNumber));
+        register(Long.class,       throwException ? new LongConverter()       : new LongConverter(defaultNumber));
+        register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
+        register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
+        
+    }
+
+    /**
+     * Register the converters for other types.
+     * </p>
+     * This method registers the following converters:
+     * <ul>
+     *     <li><code>Class.class</code> - {@link ClassConverter}</li>
+     *     <li><code>java.util.Date.class</code> - {@link DateConverter}</li>
+     *     <li><code>java.util.Calendar.class</code> - {@link CalendarConverter}</li>
+     *     <li><code>File.class</code> - {@link FileConverter}</li>
+     *     <li><code>java.sql.Date.class</code> - {@link SqlDateConverter}</li>
+     *     <li><code>java.sql.Time.class</code> - {@link SqlTimeConverter}</li>
+     *     <li><code>java.sql.Timestamp.class</code> - {@link SqlTimestampConverter}</li>
+     *     <li><code>URL.class</code> - {@link URLConverter}</li>
+     * </ul>
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     */
+    public void registerOther(boolean throwException) {
+        register(Class.class,              throwException ? new ClassConverter()        : new ClassConverter(null));
+        register(java.util.Date.class,     throwException ? new DateConverter()         : new DateConverter(null));
+        register(java.util.Calendar.class, throwException ? new CalendarConverter()     : new CalendarConverter(null));
+        register(File.class,               throwException ? new FileConverter()         : new FileConverter(null));
+        register(java.sql.Date.class,      throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
+        register(java.sql.Time.class,      throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
+        register(java.sql.Timestamp.class, throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
+        register(URL.class,                throwException ? new URLConverter()          : new URLConverter(null));
+    }
+
+    /**
+     * Register array converters.
+     *
+     * @param throwException <code>true</code> if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * <code>false</code> if a default value should be used.
+     * @param defaultArraySize The size of the default array value for array converters
+     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
+     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * the default.
+     */
+    public void registerArrays(boolean throwException, int defaultArraySize) {
+
+        // Primitives
+        registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Byte.TYPE,      new ByteConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Character.TYPE, new CharacterConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Double.TYPE,    new DoubleConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Float.TYPE,     new FloatConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Integer.TYPE,   new IntegerConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Long.TYPE,      new LongConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Short.TYPE,     new ShortConverter(),     throwException, defaultArraySize);
+
+        // Standard
+        registerArrayConverter(BigDecimal.class, new BigDecimalConverter(), throwException, defaultArraySize);
+        registerArrayConverter(BigInteger.class, new BigIntegerConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Boolean.class,    new BooleanConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Byte.class,       new ByteConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Character.class,  new CharacterConverter(),  throwException, defaultArraySize);
+        registerArrayConverter(Double.class,     new DoubleConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Float.class,      new FloatConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Integer.class,    new IntegerConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Long.class,       new LongConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Short.class,      new ShortConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
+
+        // Other
+        registerArrayConverter(Class.class,              new ClassConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(java.util.Date.class,     new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(java.util.Calendar.class, new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(File.class,               new FileConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Date.class,      new SqlDateConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Time.class,      new SqlTimeConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Timestamp.class, new SqlTimestampConverter(), throwException, defaultArraySize);
+        registerArrayConverter(URL.class,                new URLConverter(),          throwException, defaultArraySize);
 
     }
 
     /**
-     * Create a new ArrayConverter with the specified element delegate converter
-     * and the default size.
+     * Register a new ArrayConverter with the specified element delegate converter
+     * that returns a default array of the specified size in the event of conversion errors.
+     *
+     * @param componentType The component type of the array
+     * @param componentConverter The converter to delegate to for the array elements
+     * @param throwException Whether a conversion exception should be thrown or a default
+     * value used in the event of a conversion error
+     * @param defaultArraySize The size of the default array
      */
-    private void registerArrayConverter(Class clazz, Converter converter) {
-        if (defaultArraySize < 0) {
-            register(clazz, new ArrayConverter(clazz, converter));
+    private void registerArrayConverter(Class componentType, Converter componentConverter, boolean throwException, int defaultArraySize) {
+        Class arrayType = Array.newInstance(componentType, 0).getClass();
+        Converter arrayConverter = null;
+        if (throwException) {
+            arrayConverter = new ArrayConverter(arrayType, componentConverter);
         } else {
-            register(clazz, new ArrayConverter(clazz, converter, defaultArraySize));
+            arrayConverter = new ArrayConverter(arrayType, componentConverter, defaultArraySize);
         }
+        register(arrayType, arrayConverter);
     }
 
     /** strictly for convenience since it has same parameter order as Map.put */
