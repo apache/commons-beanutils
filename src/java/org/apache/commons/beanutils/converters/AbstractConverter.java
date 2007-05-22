@@ -18,6 +18,7 @@ package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
@@ -58,7 +59,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Logging for this instance.
      */
-    private Log log = LogFactory.getLog(getClass());
+    private transient Log _log;
 
     /**
      * The default type this <code>Converter</code> handles.
@@ -123,8 +124,8 @@ public abstract class AbstractConverter implements Converter {
         Class sourceType  = value == null ? null : value.getClass();
         Class targetType  = primitive(type  == null ? getDefaultType() : type);
 
-        if (log.isDebugEnabled()) {
-            log.debug("Converting"
+        if (log().isDebugEnabled()) {
+            log().debug("Converting"
                     + (value == null ? "" : " '" + toString(sourceType) + "'")
                     + " value '" + value + "' to type '" + toString(targetType) + "'");
         }
@@ -132,31 +133,32 @@ public abstract class AbstractConverter implements Converter {
         // Missing Value
         if (value == null) {
             return handleMissing(targetType);
+        }
 
-        // Convert --> String
-        } else if (targetType.equals(String.class)) {
-            return convertToString(value);
+        try {
+            // Convert --> String
+            if (targetType.equals(String.class)) {
+                return convertToString(value);
 
-        // No conversion necessary
-        } else if (targetType.equals(sourceType)) {
-            if (log.isDebugEnabled()) {
-                log.debug("    No conversion required, value is already a "
-                                + toString(targetType));
-            }
-            return value;
+            // No conversion necessary
+            } else if (targetType.equals(sourceType)) {
+                if (log().isDebugEnabled()) {
+                    log().debug("    No conversion required, value is already a "
+                                    + toString(targetType));
+                }
+                return value;
 
-        // Convert --> Type
-        } else {
-            try {
+            // Convert --> Type
+            } else {
                 Object result = convertToType(targetType, value);
-                if (log.isDebugEnabled()) {
-                    log.debug("    Converted to " + toString(targetType) +
+                if (log().isDebugEnabled()) {
+                    log().debug("    Converted to " + toString(targetType) +
                                    " value '" + result + "'");
                 }
                 return result;
-            } catch (Exception ex) {
-                return handleError(targetType, value, ex);
             }
+        } catch (Throwable t) {
+            return handleError(targetType, value, t);
         }
 
     }
@@ -171,8 +173,9 @@ public abstract class AbstractConverter implements Converter {
      *
      * @param value The input value to be converted.
      * @return the converted String value.
+     * @throws Throwable if an error occurs converting to a String
      */
-    protected String convertToString(Object value) {
+    protected String convertToString(Object value) throws Throwable {
         return value.toString();
     }
 
@@ -186,9 +189,9 @@ public abstract class AbstractConverter implements Converter {
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Exception if an error occurs converting to the specified type
+     * @throws Throwable if an error occurs converting to the specified type
      */
-    protected abstract Object convertToType(Class type, Object value) throws Exception;
+    protected abstract Object convertToType(Class type, Object value) throws Throwable;
 
     /**
      * Handle Conversion Errors.
@@ -198,17 +201,17 @@ public abstract class AbstractConverter implements Converter {
      *
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted
-     * @param ex The exception thrown by the <code>convert</code> method
+     * @param cause The exception thrown by the <code>convert</code> method
      * @return The default value.
      * @throws ConversionException if no default value has been
      * specified for this {@link Converter}.
      */
-    protected Object handleError(Class type, Object value, Exception ex) {
-        if (log.isDebugEnabled()) {
-            if (ex instanceof ConversionException) {
-                log.debug("    Conversion threw ConversionException: " + ex.getMessage());
+    protected Object handleError(Class type, Object value, Throwable cause) {
+        if (log().isDebugEnabled()) {
+            if (cause instanceof ConversionException) {
+                log().debug("    Conversion threw ConversionException: " + cause.getMessage());
             } else {
-                log.debug("    Conversion threw " + ex);
+                log().debug("    Conversion threw " + cause);
             }
         }
 
@@ -217,20 +220,21 @@ public abstract class AbstractConverter implements Converter {
         }
 
         ConversionException cex = null;
-        if (ex instanceof ConversionException) {
-            cex = (ConversionException)ex;
-            if (log.isDebugEnabled()) {
-                log.debug("    Re-throwing ConversionException: " + cex.getMessage());
-                log.debug("    " + DEFAULT_CONFIG_MSG);
+        if (cause instanceof ConversionException) {
+            cex = (ConversionException)cause;
+            if (log().isDebugEnabled()) {
+                log().debug("    Re-throwing ConversionException: " + cex.getMessage());
+                log().debug("    " + DEFAULT_CONFIG_MSG);
             }
         } else {
             String msg = "Error converting from '" + toString(value.getClass()) +
-                    "' to '" + toString(type) + "' " + ex.getMessage();
-            cex = new ConversionException(msg, ex);
-            if (log.isDebugEnabled()) {
-                log.debug("    Throwing ConversionException: " + msg);
-                log.debug("    " + DEFAULT_CONFIG_MSG);
+                    "' to '" + toString(type) + "' " + cause.getMessage();
+            cex = new ConversionException(msg, cause);
+            if (log().isDebugEnabled()) {
+                log().debug("    Throwing ConversionException: " + msg);
+                log().debug("    " + DEFAULT_CONFIG_MSG);
             }
+            BeanUtils.initCause(cex, cause);
         }
 
         throw cex;
@@ -255,12 +259,13 @@ public abstract class AbstractConverter implements Converter {
             if (useDefault && value != null && !(type.equals(value.getClass()))) {
                 try {
                     value = convertToType(type, defaultValue);
-                } catch (Exception e) {
-                    // default conversion shouldn't fail
+                } catch (Throwable t) {
+                    log().error("    Default conversion to " + toString(type)
+                            + "failed: " + t);
                 }
             }
-            if (log.isDebugEnabled()) {
-                log.debug("    Using default "
+            if (log().isDebugEnabled()) {
+                log().debug("    Using default "
                         + (value == null ? "" : toString(value.getClass()) + " ")
                         + "value '" + defaultValue + "'");
             }
@@ -269,9 +274,9 @@ public abstract class AbstractConverter implements Converter {
 
         ConversionException cex =  new ConversionException("No value specified for '" +
                 toString(type) + "'");
-        if (log.isDebugEnabled()) {
-            log.debug("    Throwing ConversionException: " + cex.getMessage());
-            log.debug("    " + DEFAULT_CONFIG_MSG);
+        if (log().isDebugEnabled()) {
+            log().debug("    Throwing ConversionException: " + cex.getMessage());
+            log().debug("    " + DEFAULT_CONFIG_MSG);
         }
         throw cex;
 
@@ -292,8 +297,8 @@ public abstract class AbstractConverter implements Converter {
      */
     protected void setDefaultValue(Object defaultValue) {
         useDefault = false;
-        if (log.isDebugEnabled()) {
-            log.debug("Setting default value: " + defaultValue);
+        if (log().isDebugEnabled()) {
+            log().debug("Setting default value: " + defaultValue);
         }
         if (defaultValue == null) {
            this.defaultValue  = null;
@@ -339,7 +344,10 @@ public abstract class AbstractConverter implements Converter {
      * @return The Log instance.
      */
     Log log() {
-        return log;
+        if (_log == null) {
+            _log = LogFactory.getLog(getClass());
+        }
+        return _log;
     }
 
     /**

@@ -59,9 +59,9 @@ public final class FileConverter extends AbstractConverter {
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Exception if conversion cannot be performed successfully
+     * @throws Throwable if an error occurs converting to the specified type
      */
-    protected Object convertToType(Class type, Object value) throws Exception {
+    protected Object convertToType(Class type, Object value) throws Throwable {
         return new File(value.toString());
     }
 }

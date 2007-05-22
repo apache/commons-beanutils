@@ -222,8 +222,9 @@ public class DateTimeConverter extends AbstractConverter {
      *
      * @param value The input value to be converted
      * @return the converted String value.
+     * @throws Throwable if an error occurs converting to a String
      */
-    protected String convertToString(Object value) {
+    protected String convertToString(Object value) throws Throwable {
 
         Date date = null;
         if (value instanceof Date) {

@@ -214,8 +214,9 @@ public class ArrayConverter extends AbstractConverter {
      *
      * @param value The value to be converted.
      * @return the converted String value.
+     * @throws Throwable if an error occurs converting to a String
      */
-    protected String convertToString(Object value) {
+    protected String convertToString(Object value) throws Throwable {
 
         int size = 0;
         Iterator iterator = null;
@@ -259,9 +260,9 @@ public class ArrayConverter extends AbstractConverter {
      * @param type The type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
-     * @throws Exception if conversion cannot be performed successfully
+     * @throws Throwable if an error occurs converting to the specified type
      */
-    protected Object convertToType(Class type, Object value) throws Exception {
+    protected Object convertToType(Class type, Object value) throws Throwable {
 
         if (!type.isArray()) {
             throw new ConversionException(toString(getClass())

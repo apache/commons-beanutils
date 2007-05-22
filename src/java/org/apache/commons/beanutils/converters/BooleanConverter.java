@@ -186,11 +186,9 @@ public final class BooleanConverter extends AbstractConverter {
      *  the default value if the value was not recognised and the constructor
      *  was provided with a default value.
      *
-     * @exception ConversionException if conversion cannot be performed
-     *  successfully and the constructor was not provided with a default
-     *  value to return on conversion failure.
+     * @throws Throwable if an error occurs converting to the specified type
      */
-    protected Object convertToType(Class type, Object value) throws Exception {
+    protected Object convertToType(Class type, Object value) throws Throwable {
 
         // All the values in the trueStrings and falseStrings arrays are
         // guaranteed to be lower-case. By converting the input value
