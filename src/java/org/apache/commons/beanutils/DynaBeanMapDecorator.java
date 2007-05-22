@@ -74,7 +74,7 @@ public class DynaBeanMapDecorator implements Map {
 
     private DynaBean dynaBean;
     private boolean readOnly;
-    private Set keySet;
+    private transient Set keySet;
 
     // ------------------- Constructors ----------------------------------
 
@@ -331,7 +331,7 @@ public class DynaBeanMapDecorator implements Map {
      *
      * @return the decorated {@link DynaBean}.
      */
-    protected DynaBean getDynaBean() {
+    public DynaBean getDynaBean() {
         return dynaBean;
     }
 

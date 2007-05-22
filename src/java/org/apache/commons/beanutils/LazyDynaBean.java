@@ -140,6 +140,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected Map values;
 
+    /** Map decorator for this DynaBean */
+    private transient Map mapDecorator;
+
     /**
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
      * is associated with.
@@ -188,11 +191,20 @@ public class LazyDynaBean implements DynaBean, Serializable {
     // ------------------- Public Methods ----------------------------------
 
     /**
-     * Return the Map backing this <code>DynaBean</code>
-     * @return the underlying Map
+     * Return a Map representation of this DynaBean.
+     * </p>
+     * This, for example, could be used in JSTL in the following way to access
+     * a DynaBean's <code>fooProperty</code>:
+     * <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
+     *
+     * @return a Map representation of this DynaBean
      */
     public Map getMap() {
-        return values;
+        // cache the Map
+        if (mapDecorator == null) {
+            mapDecorator = new DynaBeanMapDecorator(this);
+        }
+        return mapDecorator;
     }
 
     /**

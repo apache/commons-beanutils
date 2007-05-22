@@ -76,6 +76,27 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     protected HashMap values = new HashMap();
 
+    /** Map decorator for this DynaBean */
+    private transient Map mapDecorator;
+
+    /**
+     * Return a Map representation of this DynaBean.
+     * </p>
+     * This, for example, could be used in JSTL in the following way to access
+     * a DynaBean's <code>fooProperty</code>:
+     * <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
+     *
+     * @return a Map representation of this DynaBean
+     */
+    public Map getMap() {
+
+        // cache the Map
+        if (mapDecorator == null) {
+            mapDecorator = new DynaBeanMapDecorator(this);
+        }
+        return mapDecorator;
+
+    }
 
     // ------------------------------------------------------ DynaBean Methods
 
