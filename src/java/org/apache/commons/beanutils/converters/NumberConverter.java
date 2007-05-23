@@ -363,6 +363,8 @@ public class NumberConverter extends AbstractConverter {
         if (type.equals(BigDecimal.class)) {
             if (value instanceof Float || value instanceof Double) {
                 return new BigDecimal(value.toString());
+            } else if (value instanceof BigInteger) {
+                return new BigDecimal((BigInteger)value);
             } else {
                 return BigDecimal.valueOf(value.longValue());
             }
@@ -370,7 +372,11 @@ public class NumberConverter extends AbstractConverter {
 
         // BigInteger
         if (type.equals(BigInteger.class)) {
-            return BigInteger.valueOf(value.longValue());
+            if (value instanceof BigDecimal) {
+                return ((BigDecimal)value).toBigInteger();
+            } else {
+                return BigInteger.valueOf(value.longValue());
+            }
         }
 
         String msg = toString(getClass()) + " cannot handle conversion to '"
