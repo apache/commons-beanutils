@@ -439,6 +439,45 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test getting mapped descriptor with periods in the key.
+     */
+    public void testGetDescriptorMappedPeriods() {
+
+        bean.getMappedIntProperty("xyz"); // initializes mappedIntProperty
+
+        PropertyDescriptor desc;
+        Integer testIntegerValue = new Integer(1234);
+
+        bean.setMappedIntProperty("key.with.a.dot", testIntegerValue.intValue());
+        assertEquals("Can retrieve directly",
+                     testIntegerValue,
+                     new Integer(bean.getMappedIntProperty("key.with.a.dot")));
+        try {
+            desc = PropertyUtils.getPropertyDescriptor
+                         (bean, "mappedIntProperty(key.with.a.dot)");
+            assertEquals("Check descriptor type (A)",
+                         Integer.TYPE,
+                         ((MappedPropertyDescriptor)desc).getMappedPropertyType());
+        } catch (Exception e) {
+            fail("Threw exception (A): " + e);
+        }
+
+        bean.setMappedObjects("nested.property", new TestBean(testIntegerValue.intValue()));
+        assertEquals("Can retrieve directly",
+                      testIntegerValue,
+                      new Integer(((TestBean)bean.getMappedObjects("nested.property")).getIntProperty()));
+        try {
+            desc = PropertyUtils.getPropertyDescriptor
+                         (bean, "mappedObjects(nested.property).intProperty");
+            assertEquals("Check descriptor type (B)",
+                         Integer.TYPE,
+                         desc.getPropertyType());
+        } catch (Exception e) {
+            fail("Threw exception (B): " + e);
+        }
+    }
+
 
     /**
      * Positive getPropertyDescriptor on property
@@ -2774,7 +2813,77 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test setting mapped values with periods in the key.
+     */
+    public void testSetMappedPeriods() {
 
+
+        // -------- PropertyUtils.setMappedProperty()--------
+        bean.setMappedProperty("key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly (A)",
+                     "Special Value",
+                     bean.getMappedProperty("key.with.a.dot"));
+
+        try {
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", "key.with.a.dot", "Updated Special Value");
+            assertEquals("Check set via setMappedProperty",
+                         "Updated Special Value",
+                          bean.getMappedProperty("key.with.a.dot"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        // -------- PropertyUtils.setNestedProperty() --------
+        bean.setMappedProperty("key.with.a.dot", "Special Value");
+        assertEquals("Can retrieve directly (B)",
+                     "Special Value",
+                     bean.getMappedProperty("key.with.a.dot"));
+        try {
+            PropertyUtils.setNestedProperty(bean, "mappedProperty(key.with.a.dot)", "Updated Special Value");
+            assertEquals("Check set via setNestedProperty (B)",
+                         "Updated Special Value",
+                         bean.getMappedProperty("key.with.a.dot"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+
+        // -------- PropertyUtils.setNestedProperty() --------
+        TestBean testBean = new TestBean();
+        bean.setMappedObjects("nested.property", testBean);
+        assertEquals("Can retrieve directly (C)",
+                     "This is a string",
+                     testBean.getStringProperty()); 
+        try {
+            PropertyUtils.setNestedProperty(bean, "mappedObjects(nested.property).stringProperty",
+                                                  "Updated String Value");
+            assertEquals("Check set via setNestedProperty (C)",
+                         "Updated String Value",
+                         testBean.getStringProperty()); 
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        }
+
+        // -------- PropertyUtils.setNestedProperty() --------
+        bean.getNested().setMappedProperty("Mapped Key", "Nested Mapped Value"); 
+        try {
+            assertEquals("Can retrieve via getNestedProperty (D)",
+                         "Nested Mapped Value",
+                         PropertyUtils.getNestedProperty(
+                             bean,"nested.mappedProperty(Mapped Key)"));
+            PropertyUtils.setNestedProperty(bean, "nested.mappedProperty(Mapped Key)",
+                                                  "Updated Nested Mapped Value");
+            assertEquals("Check set via setNestedProperty (D)",
+                         "Updated Nested Mapped Value",
+                         PropertyUtils.getNestedProperty(
+                             bean,"nested.mappedProperty(Mapped Key)"));
+        } catch (Exception e) {
+            fail("Thew exception: " + e);
+        } 
+    }
+
+    
     /**
      * Corner cases on setNestedProperty invalid arguments.
      */
