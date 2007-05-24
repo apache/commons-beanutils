@@ -2076,6 +2076,60 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test isReadable() method.
+     */
+    public void testIsReadable() {
+        TestBean bean = new TestBean();
+        String property = null;
+        try {
+            property = "stringProperty";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+        try {
+            property = "stringIndexed";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+        try {
+            property = "mappedProperty";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+        
+    }
+
+    /**
+     * Test isReadable() method.
+     */
+    public void testIsWriteable() {
+        TestBean bean = new TestBean();
+        String property = null;
+        try {
+            property = "stringProperty";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+        try {
+            property = "stringIndexed";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+        try {
+            property = "mappedProperty";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+        
+    }
+
 
     /**
      * Test the mappedPropertyType of MappedPropertyDescriptor.

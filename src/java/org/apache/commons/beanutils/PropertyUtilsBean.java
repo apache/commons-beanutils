@@ -1328,9 +1328,12 @@ public class PropertyUtilsBean {
                     getPropertyDescriptor(bean, name);
                 if (desc != null) {
                     Method readMethod = desc.getReadMethod();
-                    if ((readMethod == null) &&
-                        (desc instanceof IndexedPropertyDescriptor)) {
-                        readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
+                    if (readMethod == null) {
+                        if (desc instanceof IndexedPropertyDescriptor) {
+                            readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
+                        } else if (desc instanceof MappedPropertyDescriptor) {
+                            readMethod = ((MappedPropertyDescriptor) desc).getMappedReadMethod();
+                        }
                     }
                     return (readMethod != null);
                 } else {
@@ -1384,9 +1387,12 @@ public class PropertyUtilsBean {
                     getPropertyDescriptor(bean, name);
                 if (desc != null) {
                     Method writeMethod = desc.getWriteMethod();
-                    if ((writeMethod == null) &&
-                        (desc instanceof IndexedPropertyDescriptor)) {
-                        writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
+                    if (writeMethod == null) {
+                        if (desc instanceof IndexedPropertyDescriptor) {
+                            writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
+                        } else if (desc instanceof MappedPropertyDescriptor) {
+                            writeMethod = ((MappedPropertyDescriptor) desc).getMappedWriteMethod();
+                        }
                     }
                     return (writeMethod != null);
                 } else {
