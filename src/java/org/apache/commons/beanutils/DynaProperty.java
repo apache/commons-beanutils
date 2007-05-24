@@ -201,6 +201,40 @@ public class DynaProperty implements Serializable {
 
     }
 
+    /**
+     * Checks this instance against the specified Object for equality. Overrides the
+     * default refererence test for equality provided by {@link java.lang.Object#equals(Object)}  
+     */
+    public boolean equals(final Object obj) {
+
+        boolean result = false;
+
+        result = (obj == this);
+
+        if ((!result) && obj instanceof DynaProperty) {
+            final DynaProperty that = (DynaProperty) obj;
+            result = 
+               ((this.name == null) ? (that.name == null) : (this.name.equals(that.name))) &&
+               ((this.type == null) ? (that.type == null) : (this.type.equals(that.type))) &&
+               ((this.contentType == null) ? (that.contentType == null) : (this.contentType.equals(that.contentType)));
+        }
+
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#hashCode
+     */
+    public int hashCode() {
+
+       int result = 1;
+       
+       result = result * 31 + ((name == null) ? 0 : name.hashCode());
+       result = result * 31 + ((type == null) ? 0 : type.hashCode());
+       result = result * 31 + ((contentType == null) ? 0 : contentType.hashCode());
+
+       return result;
+    }
 
     /**
      * Return a String representation of this Object.
