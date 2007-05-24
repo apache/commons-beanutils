@@ -2104,7 +2104,7 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test isReadable() method.
+     * Test isWriteable() method.
      */
     public void testIsWriteable() {
         TestBean bean = new TestBean();
