@@ -404,7 +404,9 @@ public abstract class AbstractConverter implements Converter {
         } else {
             typeName = type.getName();
         }
-        if (typeName.startsWith("java.lang.")) {
+        if (typeName.startsWith("java.lang.") ||
+            typeName.startsWith("java.util.") ||
+            typeName.startsWith("java.math.")) {
             typeName = typeName.substring("java.lang.".length());
         } else if (typeName.startsWith(PACKAGE)) {
             typeName = typeName.substring(PACKAGE.length());

@@ -281,12 +281,14 @@ public class DateTimeConverter extends AbstractConverter {
      * Otherwise the default <code>DateFormat</code> for the default locale
      * (and <i>style</i> if configured) will be used.
      *
-     * @param type Data type to which this value should be converted.
+     * @param targetType Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Exception if conversion cannot be performed successfully
      */
-    protected Object convertToType(Class type, Object value) throws Exception {
+    protected Object convertToType(Class targetType, Object value) throws Exception {
+
+        Class sourceType = value.getClass();
 
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
@@ -299,51 +301,51 @@ public class DateTimeConverter extends AbstractConverter {
             long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
             timeInMillis += timestamp.getNanos() / 1000000;
             // ---------------------- JDK 1.3 Fix ----------------------
-            return toDate(type, timeInMillis);
+            return toDate(targetType, timeInMillis);
         }
 
         // Handle Date (includes java.sql.Date & java.sql.Time)
         if (value instanceof Date) {
             Date date = (Date)value;
-            return toDate(type, date.getTime());
+            return toDate(targetType, date.getTime());
         }
 
         // Handle Calendar
         if (value instanceof Calendar) {
             Calendar calendar = (Calendar)value;
-            return toDate(type, calendar.getTime().getTime());
+            return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Handle Long
         if (value instanceof Long) {
             Long longObj = (Long)value;
-            return toDate(type, longObj.longValue());
+            return toDate(targetType, longObj.longValue());
         }
 
         // Convert all other types to String & handle
         String stringValue = value.toString().trim();
         if (stringValue.length() == 0) {
-            return handleMissing(type);
+            return handleMissing(targetType);
         }
 
         // Parse the Date/Time
         if (useLocaleFormat) {
             Calendar calendar = null;
             if (patterns != null && patterns.length > 0) {
-                calendar = parse(type, stringValue);
+                calendar = parse(sourceType, targetType, stringValue);
             } else {
                 DateFormat format = getFormat(locale, timeZone);
-                calendar = parse(type, stringValue, format);
+                calendar = parse(sourceType, targetType, stringValue, format);
             }
-            if (Calendar.class.isAssignableFrom(type)) {
+            if (Calendar.class.isAssignableFrom(targetType)) {
                 return calendar;
             } else {
-                return toDate(type, calendar.getTime().getTime());
+                return toDate(targetType, calendar.getTime().getTime());
             }
         }
 
         // Default String conversion
-        return toDate(type, stringValue);
+        return toDate(targetType, stringValue);
 
     }
 
@@ -508,18 +510,19 @@ public class DateTimeConverter extends AbstractConverter {
     /**
      * Parse a String date value using the set of patterns.
      *
-     * @param type The type to convert the value to
+     * @param sourceType The type of the value being converted
+     * @param targetType The type to convert the value to.
      * @param value The String date value.
-     * @param type The type to convert the value to.
+     *
      * @return The converted Date object.
      * @throws Exception if an error occurs parsing the date.
      */
-    private Calendar parse(Class type, String value) throws Exception {
+    private Calendar parse(Class sourceType, Class targetType, String value) throws Exception {
         Exception firstEx = null;
         for (int i = 0; i < patterns.length; i++) {
             try {
                 DateFormat format = getFormat(patterns[i]);
-                Calendar calendar = parse(type, value, format);
+                Calendar calendar = parse(sourceType, targetType, value, format);
                 return calendar;
             } catch (Exception ex) {
                 if (firstEx == null) {
@@ -528,7 +531,7 @@ public class DateTimeConverter extends AbstractConverter {
             }
         }
         if (patterns.length > 1) {
-            throw new ConversionException("Error converting String to '" + toString(type)
+            throw new ConversionException("Error converting '" + toString(sourceType) + "' to '" + toString(targetType)
                     + "' using  patterns '" + displayPatterns + "'");
         } else {
             throw firstEx;
@@ -539,19 +542,21 @@ public class DateTimeConverter extends AbstractConverter {
      * Parse a String into a <code>Calendar</code> object
      * using the specified <code>DateFormat</code>.
      *
-     * @param type The type to convert the value to
+     * @param sourceType The type of the value being converted
+     * @param targetType The type to convert the value to
      * @param value The String date value.
      * @param format The DateFormat to parse the String value.
+     *
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Calendar parse(Class type, String value, DateFormat format) {
+    private Calendar parse(Class sourceType, Class targetType, String value, DateFormat format) {
         logFormat("Parsing", format);
         format.setLenient(false);
         ParsePosition pos = new ParsePosition(0);
         Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
-            String msg = "Error converting String to '" + toString(type) + "'";
+            String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
                 msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
             }

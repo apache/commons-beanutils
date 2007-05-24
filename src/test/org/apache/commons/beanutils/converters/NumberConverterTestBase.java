@@ -19,6 +19,7 @@ package org.apache.commons.beanutils.converters;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -192,6 +193,19 @@ public abstract class NumberConverterTestBase extends TestCase {
             // expected result
         }
 
+        // Invalid Type (will try via String)
+        Object obj =  new Object() {
+            public String toString() {
+                return "dsdgsdsdg";
+            }
+        };
+        try {
+            converter.convert(getExpectedType(), obj);
+            fail("Expected invalid value to cause ConversionException");
+        } catch (Exception e) {
+            // expected result
+        }
+
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
     }
@@ -271,16 +285,49 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Date --> Long (default conversion)  
+     * Convert Date --> Long
      */
-    public void testDateToLongDefault() {
+    public void testDateToNumber() {
 
         NumberConverter converter = makeConverter();
 
-        // Other type --> String conversion
-        Date now = new Date();
-        assertEquals("Date to long", new Long(now.getTime()), converter.convert(Long.class, now));
-    
+        Date dateValue = new Date();
+        long longValue = dateValue.getTime();
+
+        // Date --> Long conversion
+        assertEquals("Date to Long", new Long(longValue), converter.convert(Long.class, dateValue));
+
+        // Date --> Integer
+        try {
+            converter.convert(Integer.class, dateValue);
+            fail("Date to Integer - expected a ConversionException");
+        } catch (ConversionException e) {
+            // expected result - too large for Integer
+        }
+
+    }
+
+    /**
+     * Convert Calendar --> Long
+     */
+    public void testCalendarToNumber() {
+
+        NumberConverter converter = makeConverter();
+
+        Calendar calendarValue = Calendar.getInstance();
+        long longValue = calendarValue.getTime().getTime();
+
+        // Calendar --> Long conversion
+        assertEquals("Calendar to Long", new Long(longValue), converter.convert(Long.class, calendarValue));
+
+        // Calendar --> Integer
+        try {
+            converter.convert(Integer.class, calendarValue);
+            fail("Calendar to Integer - expected a ConversionException");
+        } catch (ConversionException e) {
+            // expected result - too large for Integer
+        }
+
     }
 
     /**
