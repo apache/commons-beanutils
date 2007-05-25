@@ -16,6 +16,8 @@
  */ 
 package org.apache.commons.beanutils.converters;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.beanutils.BeanUtils;
@@ -130,10 +132,14 @@ public abstract class AbstractConverter implements Converter {
                     + " value '" + value + "' to type '" + toString(targetType) + "'");
         }
 
+        value = convertArray(value);
+
         // Missing Value
         if (value == null) {
             return handleMissing(targetType);
         }
+
+        sourceType = value.getClass();
 
         try {
             // Convert --> String
@@ -192,6 +198,38 @@ public abstract class AbstractConverter implements Converter {
      * @throws Throwable if an error occurs converting to the specified type
      */
     protected abstract Object convertToType(Class type, Object value) throws Throwable;
+
+    /**
+     * Return the first element from an Array (or Collection)
+     * or the value unchanged if not an Array (or Collection).
+     *
+     * N.B. This needs to be overriden for array/Collection converters.
+     *
+     * @param value The value to convert
+     * @return The first element in an Array (or Collection)
+     * or the value unchanged if not an Array (or Collection)
+     */
+    protected Object convertArray(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value.getClass().isArray()) {
+            if (Array.getLength(value) > 0) {
+                return Array.get(value, 0);
+            } else {
+                return null;
+            }
+        }
+        if (value instanceof Collection) {
+            Collection collection = (Collection)value;
+            if (collection.size() > 0) {
+                return collection.iterator().next();
+            } else {
+                return null;
+            }
+        }
+        return value;
+    }
 
     /**
      * Handle Conversion Errors.

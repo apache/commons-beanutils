@@ -79,7 +79,8 @@ public abstract class NumberConverterTestBase extends TestCase {
             "from Float",
             "from Double",
             "from BigDecimal",
-            "from BigInteger"
+            "from BigInteger",
+            "from Integer array",
         };
 
         Object[] number = {
@@ -90,7 +91,8 @@ public abstract class NumberConverterTestBase extends TestCase {
             new Float(11.1),
             new Double(12.2),
             new BigDecimal("17.2"),
-            new BigInteger("33")
+            new BigInteger("33"),
+            new Integer[] {new Integer(3), new Integer(2), new Integer(1)}
         };
 
         for(int i=0;i<number.length;i++) {
@@ -149,6 +151,21 @@ public abstract class NumberConverterTestBase extends TestCase {
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Convert Array --> Number
+     */
+    public void testStringArrayToInteger() {
+
+        Integer defaultValue = new Integer(-1);
+        NumberConverter converter = makeConverter(defaultValue);
+
+        // Default Locale
+        assertEquals("Valid First",   new Integer(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
+        assertEquals("Invalid First", defaultValue,   converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
+        assertEquals("Null First",    defaultValue,   converter.convert(Integer.class, new String[] {null, "1", "2"}));
+        assertEquals("Long Array",    new Integer(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
     }
 
     /**

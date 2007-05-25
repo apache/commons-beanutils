@@ -298,6 +298,16 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
+     * Returns the value unchanged.
+     *
+     * @param value The value to convert
+     * @return The value unchanged
+     */
+    protected Object convertArray(Object value) {
+        return value;
+    }
+
+    /**
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
      * </p>
