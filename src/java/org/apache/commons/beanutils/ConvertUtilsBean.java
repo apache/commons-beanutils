@@ -816,16 +816,17 @@ public class ConvertUtilsBean {
         if (targetType == null) {
             throw new IllegalArgumentException("Target type is missing");
         }
+        if (sourceType == null) {
+            return lookup(targetType);
+        }
 
         Converter converter = null;
         // Convert --> String 
         if (targetType == String.class) {
-            if (sourceType != null) {
-                converter = lookup(sourceType);
-                if (converter == null && (sourceType.isArray() ||
+            converter = lookup(sourceType);
+            if (converter == null && (sourceType.isArray() ||
                         Collection.class.isAssignableFrom(sourceType))) {
-                    converter = lookup(String[].class);
-                }
+                converter = lookup(String[].class);
             }
             if (converter == null) {
                 converter = lookup(String.class);
@@ -835,16 +836,16 @@ public class ConvertUtilsBean {
 
         // Convert --> String array 
         if (targetType == String[].class) {
-            if (sourceType != null && sourceType.isArray()) {
+            if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
                 converter = lookup(sourceType);
             }
             if (converter == null) {
                 converter = lookup(String[].class);
             }
-        } else {
-            converter = lookup(targetType);
+            return converter;
         }
-        return converter;
+
+        return lookup(targetType);
 
     }
 
