@@ -542,8 +542,8 @@ public class ConvertUtilsBean {
             }
             converted = converter.convert(targetType, value);
         }
-        if (targetType == String.class && value != null) {
-            converted = value.toString();
+        if (targetType == String.class && converted != null) {
+            converted = converted.toString();
         }
         return converted;
 

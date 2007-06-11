@@ -21,6 +21,10 @@ package org.apache.commons.beanutils;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import org.apache.commons.beanutils.converters.DateConverter;
 import junit.framework.TestCase;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -607,6 +611,27 @@ public class ConvertUtilsTestCase extends TestCase {
         ConvertUtils.deregister(Boolean.TYPE);
         assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
 
+    }
+
+    public void testConvertToString() throws Exception {
+
+        ConvertUtilsBean utils = new ConvertUtilsBean();
+
+        // Register a DateConverter using Locale.US
+        DateConverter dateConverter = new DateConverter();
+        dateConverter.setLocale(Locale.US);
+        utils.register(dateConverter, java.util.Date.class);
+
+        java.util.Date today = new java.util.Date();
+        DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
+        String expected = fmt.format(today);
+
+        assertEquals("date M/d/yy", expected, utils.convert(today, String.class));
+        
+        // Remove the registered DateConverter
+        utils.deregister(java.util.Date.class);
+        assertEquals("Date.toString()", today.toString(), utils.convert(today, String.class));
+        
     }
 
     // -------------------------------------------------------- Private Methods
