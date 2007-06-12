@@ -168,16 +168,20 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        // Set should be ordered in same sequence as properties
         Iterator iterator = set.iterator();
+        List namesList = new ArrayList();
         int i = 0;
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry)iterator.next();
-            String expectName  = properties[i].getName();
-            Object expectValue = decoratedMap.get(expectName);
-            assertEquals("entrySet("+i+") key", expectName,  entry.getKey());
+            String name  = (String)entry.getKey();
+            namesList.add(name);
+            Object expectValue = decoratedMap.get(name);
             assertEquals("entrySet("+i+") val", expectValue, entry.getValue());
             i++;
+        }
+        for (int j = 0; j < properties.length; j++) {
+            String name = properties[j].getName();
+            assertTrue("Check property[" + j + "]", namesList.contains(name));
         }
     }
 
@@ -217,13 +221,9 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("keySet size", properties.length, set.size());
 
-        // Set should be ordered in same sequence as properties
-        Iterator iterator = set.iterator();
-        int i = 0;
-        while (iterator.hasNext()) {
-            String expectName  = properties[i].getName();
-            assertEquals("keySet("+i+") key", expectName,  iterator.next());
-            i++;
+        for (int i = 0; i < properties.length; i++) {
+            String name = properties[i].getName();
+            assertTrue("Check property[" + i + "]", set.contains(name));
         }
     }
 

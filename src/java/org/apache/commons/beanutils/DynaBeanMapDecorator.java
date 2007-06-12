@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Collection;
 import java.util.Collections;
@@ -183,7 +183,7 @@ public class DynaBeanMapDecorator implements Map {
      */
     public Set entrySet() {
         DynaProperty[] properties = getDynaProperties();
-        Set set = new LinkedHashSet(properties.length);
+        Set set = new HashSet(properties.length);
         for (int i = 0; i < properties.length; i++) {
             String key = properties[i].getName();
             Object value = getDynaBean().get(key);
@@ -232,7 +232,7 @@ public class DynaBeanMapDecorator implements Map {
 
         // Create a Set of the keys
         DynaProperty[] properties = getDynaProperties();
-        Set set = new LinkedHashSet(properties.length);
+        Set set = new HashSet(properties.length);
         for (int i = 0; i < properties.length; i++) {
             set.add(properties[i].getName());
         }
