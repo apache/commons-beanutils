@@ -412,7 +412,7 @@ public class IndexedPropertyTestCase extends TestCase {
     public void testGetListAsString() {
 
         try {
-            assertEquals("[list-0, list-1, list-2]", 
+            assertEquals("list-0", 
                          beanUtilsBean.getProperty(bean, "stringList"));
         } catch(Exception e) {
             fail("Threw exception " + e);
