@@ -544,7 +544,23 @@ public class ConvertUtilsBean {
         }
         if (targetType == String.class && converted != null && 
                 !(converted instanceof String)) {
-            converted = converted.toString();
+
+            // NOTE: For backwards compatibility, if the Converter
+            //       doesn't handle  conversion-->String then
+            //       use the registered String Converter
+            converter = lookup(String.class);
+            if (converter != null) {
+                if (log.isTraceEnabled()) {
+                    log.trace("  Using converter " + converter);
+                }
+                converted = converter.convert(String.class, converted);
+            }
+
+            // If the object still isn't a String, use toString() method
+            if (converted != null && !(converted instanceof String)) {
+                converted = converted.toString();
+            }
+
         }
         return converted;
 

@@ -614,23 +614,46 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
     public void testConvertToString() throws Exception {
+        Converter dummyConverter = new Converter() {
+            public Object convert(Class type, Object value) {
+                return value;
+            }
+        };
 
-        ConvertUtilsBean utils = new ConvertUtilsBean();
+        Converter fooConverter = new Converter() {
+            public Object convert(Class type, Object value) {
+                return "Foo-Converter";
+            }
+        };
 
-        // Register a DateConverter using Locale.US
         DateConverter dateConverter = new DateConverter();
         dateConverter.setLocale(Locale.US);
-        utils.register(dateConverter, java.util.Date.class);
 
+        ConvertUtilsBean utils = new ConvertUtilsBean();
+        utils.register(dateConverter, java.util.Date.class);
+        utils.register(fooConverter, String.class);
+
+        // Convert using registerd DateConverter
         java.util.Date today = new java.util.Date();
         DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
         String expected = fmt.format(today);
-
-        assertEquals("date M/d/yy", expected, utils.convert(today, String.class));
+        assertEquals("DateConverter M/d/yy", expected, utils.convert(today, String.class));
         
-        // Remove the registered DateConverter
+        // Date converter doesn't do String conversion - use String Converter
+        utils.register(dummyConverter, java.util.Date.class);
+        assertEquals("Date Converter doesn't do String conversion", "Foo-Converter", utils.convert(today, String.class));
+        
+        // No registered Date converter - use String Converter
         utils.deregister(java.util.Date.class);
-        assertEquals("Date.toString()", today.toString(), utils.convert(today, String.class));
+        assertEquals("No registered Date converter", "Foo-Converter", utils.convert(today, String.class));
+        
+        // String Converter doesn't do Strings!!!
+        utils.register(dummyConverter, String.class);
+        assertEquals("String Converter doesn't do Strings!!!", today.toString(), utils.convert(today, String.class));
+        
+        // No registered Date or String converter - use Object's toString()
+        utils.deregister(String.class);
+        assertEquals("Object's toString()", today.toString(), utils.convert(today, String.class));
         
     }
 
