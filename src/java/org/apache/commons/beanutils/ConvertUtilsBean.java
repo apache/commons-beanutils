@@ -35,6 +35,7 @@ import org.apache.commons.beanutils.converters.ByteConverter;
 import org.apache.commons.beanutils.converters.CalendarConverter;
 import org.apache.commons.beanutils.converters.CharacterConverter;
 import org.apache.commons.beanutils.converters.ClassConverter;
+import org.apache.commons.beanutils.converters.ConverterFacade;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DoubleConverter;
 import org.apache.commons.beanutils.converters.FileConverter;
@@ -789,7 +790,7 @@ public class ConvertUtilsBean {
 
     /** strictly for convenience since it has same parameter order as Map.put */
     private void register(Class clazz, Converter converter) {
-        register(converter, clazz);
+        register(new ConverterFacade(converter), clazz);
     }
 
     /**
