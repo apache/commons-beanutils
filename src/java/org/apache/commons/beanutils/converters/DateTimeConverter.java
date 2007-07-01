@@ -570,6 +570,35 @@ public class DateTimeConverter extends AbstractConverter {
     }
 
     /**
+     * Provide a String representation of this date/time converter.
+     *
+     * @return A String representation of this date/time converter
+     */
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(toString(getClass()));
+        buffer.append("[UseDefault=");
+        buffer.append(isUseDefault());
+        buffer.append(", UseLocaleFormat=");
+        buffer.append(useLocaleFormat);
+        if (displayPatterns != null) {
+            buffer.append(", Patterns={");
+            buffer.append(displayPatterns);
+            buffer.append('}');
+        }
+        if (locale != null) {
+            buffer.append(", Locale=");
+            buffer.append(locale);
+        }
+        if (timeZone != null) {
+            buffer.append(", TimeZone=");
+            buffer.append(timeZone);
+        }
+        buffer.append(']');
+        return buffer.toString();
+    }
+
+    /**
      * Log the <code>DateFormat<code> creation.
      * @param action The action the format is being used for
      * @param format The Date format

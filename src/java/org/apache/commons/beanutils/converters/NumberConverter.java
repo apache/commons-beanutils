@@ -467,6 +467,30 @@ public class NumberConverter extends AbstractConverter {
     }
 
     /**
+     * Provide a String representation of this number converter.
+     *
+     * @return A String representation of this number converter
+     */
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(toString(getClass()));
+        buffer.append("[UseDefault=");
+        buffer.append(isUseDefault());
+        buffer.append(", UseLocaleFormat=");
+        buffer.append(useLocaleFormat);
+        if (pattern != null) {
+            buffer.append(", Pattern=");
+            buffer.append(pattern);
+        }
+        if (locale != null) {
+            buffer.append(", Locale=");
+            buffer.append(locale);
+        }
+        buffer.append(']');
+        return buffer.toString();
+    }
+
+    /**
      * Return a NumberFormat to use for Conversion.
      *
      * @return The NumberFormat.

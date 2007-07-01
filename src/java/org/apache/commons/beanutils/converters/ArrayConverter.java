@@ -368,6 +368,22 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
+     * Provide a String representation of this array converter.
+     *
+     * @return A String representation of this array converter
+     */
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(toString(getClass()));
+        buffer.append("[UseDefault=");
+        buffer.append(isUseDefault());
+        buffer.append(", ");
+        buffer.append(elementConverter.toString());
+        buffer.append(']');
+        return buffer.toString();
+    }
+
+    /**
      * <p>Parse an incoming String of the form similar to an array initializer
      * in the Java language into a <code>List</code> individual Strings
      * for each element, according to the following rules.</p>

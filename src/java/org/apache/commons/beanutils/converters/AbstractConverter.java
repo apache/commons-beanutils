@@ -112,6 +112,18 @@ public abstract class AbstractConverter implements Converter {
     // --------------------------------------------------------- Public Methods
 
     /**
+     * Indicates whether a default value will be returned or exception
+     * thrown in the event of a conversion error.
+     *
+     * @return <code>true</code> if a default value will be returned for
+     * conversion errors or <code>false</code> if a {@link ConversionException}
+     * will be thrown.
+     */
+    public boolean isUseDefault() {
+        return useDefault;
+    }
+
+    /**
      * Convert the input object into an output object of the
      * specified type.
      *
@@ -367,6 +379,15 @@ public abstract class AbstractConverter implements Converter {
         } else {
             return defaultValue;
         }
+    }
+    
+    /**
+     * Provide a String representation of this converter.
+     *
+     * @return A String representation of this converter
+     */
+    public String toString() {
+        return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }
 
     // ----------------------------------------------------------- Package Methods
