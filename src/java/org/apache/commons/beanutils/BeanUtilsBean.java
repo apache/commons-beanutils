@@ -398,7 +398,11 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type and store it
         if (index >= 0) {                    // Destination must be indexed
-            value = getConvertUtils().convert(value, type.getComponentType());
+            Converter converter = getConvertUtils().lookup(type.getComponentType());
+            if (converter != null) {
+                log.trace("        USING CONVERTER " + converter);
+                value = converter.convert(type.getComponentType(), value);
+            }
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
                                                  index, value);
@@ -418,7 +422,11 @@ public class BeanUtilsBean {
                     (e, "Cannot set " + propName);
             }
         } else {                             // Destination must be simple
-            value = getConvertUtils().convert(value, type);
+            Converter converter = getConvertUtils().lookup(type);
+            if (converter != null) {
+                log.trace("        USING CONVERTER " + converter);
+                value = converter.convert(type, value);
+            }
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
             } catch (NoSuchMethodException e) {
@@ -957,25 +965,17 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type
         Object newValue = null;
-        Class sourceType = value == null ? null : value.getClass();
-        Class targetType = (type.isArray() && (index >= 0) ? type.getComponentType() : type);
-        Converter converter = getConvertUtils().lookup(sourceType, targetType);
-        if (converter != null) {
-            newValue = converter.convert(targetType, value);
-            newValue = (targetType == String.class && newValue != null ? newValue.toString() : newValue);
-        } else if (type.isArray() && (index < 0)) { // Scalar value into array
+        if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value == null) {
                 String values[] = new String[1];
                 values[0] = (String) value;
-                newValue = getConvertUtils().convert(values, type);
+                newValue = getConvertUtils().convert((String[]) values, type);
             } else if (value instanceof String) {
-                String values[] = new String[1];
-                values[0] = (String) value;
-                newValue = getConvertUtils().convert(values, type);
+                newValue = getConvertUtils().convert(value, type);
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert((String[]) value, type);
             } else {
-                newValue = value;
+                newValue = getConvertUtils().convert(value, type);
             }
         } else if (type.isArray()) {         // Indexed value into array
             if (value instanceof String || value == null) {
@@ -985,7 +985,7 @@ public class BeanUtilsBean {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
                                                 type.getComponentType());
             } else {
-                newValue = value;
+                newValue = getConvertUtils().convert(value, type.getComponentType());
             }
         } else {                             // Value into scalar
             if ((value instanceof String) || (value == null)) {

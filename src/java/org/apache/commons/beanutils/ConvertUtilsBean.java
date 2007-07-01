@@ -431,10 +431,12 @@ public class ConvertUtilsBean {
             if (value == null) {
                 return ((String) null);
             } else {
-                return ((String)convert(value, String.class));
+                Converter converter = lookup(String.class);
+                return ((String) converter.convert(String.class, value));
             }
         } else {
-            return ((String)convert(value, String.class));
+            Converter converter = lookup(String.class);
+            return ((String) converter.convert(String.class, value));
         }
 
     }
@@ -485,10 +487,6 @@ public class ConvertUtilsBean {
 
         Class type = clazz;
         if (clazz.isArray()) {
-            Converter converter = lookup(clazz);
-            if (converter != null) {
-                return converter.convert(clazz, values);
-            }
             type = clazz.getComponentType();
         }
         if (log.isDebugEnabled()) {
