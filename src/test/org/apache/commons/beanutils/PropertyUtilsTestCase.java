@@ -1024,11 +1024,7 @@ public class PropertyUtilsTestCase extends TestCase {
             assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "string2dArray[1][1]"));
             assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "string2dArray[1][2]"));
             assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "string2dArray[1][3]"));
-            
-            PropertyUtils.setProperty(bean, "string2dArray[1][3]", "FOO");
-            assertEquals("WRITE", "FOO", secondArray[3]);
         } catch (Throwable t) {
-            t.printStackTrace();
             fail("Threw " + t + "");
         }
     }
@@ -1051,11 +1047,7 @@ public class PropertyUtilsTestCase extends TestCase {
             assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "listIndexed[1][1]"));
             assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "listIndexed[1][2]"));
             assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "listIndexed[1][3]"));
-            
-            PropertyUtils.setProperty(bean, "listIndexed[1][3]", "FOO");
-            assertEquals("WRITE", "FOO", secondArray[3]);
         } catch (Throwable t) {
-            t.printStackTrace();
             fail("Threw " + t + "");
         }
     }
@@ -2364,6 +2356,41 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test setting an indexed value out of a multi-dimensional array
+     */
+    public void testSetIndexedArray() {
+        String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
+        String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        String[][] mainArray = {firstArray, secondArray};
+        TestBean bean = new TestBean(mainArray);
+        assertEquals("BEFORE", "SECOND-3", bean.getString2dArray(1)[2]);
+        try {
+            PropertyUtils.setProperty(bean, "string2dArray[1][2]", "SECOND-3-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "SECOND-3-UPDATED", bean.getString2dArray(1)[2]);
+    }
+
+    /**
+     * Test setting an indexed value out of List of Lists
+     */
+    public void testSetIndexedList() {
+        String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
+        String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        List mainList   = new ArrayList();
+        mainList.add(Arrays.asList(firstArray));
+        mainList.add(Arrays.asList(secondArray));
+        TestBean bean = new TestBean(mainList);
+        assertEquals("BEFORE", "SECOND-4", ((List)bean.getListIndexed().get(1)).get(3));
+        try {
+            PropertyUtils.setProperty(bean, "listIndexed[1][3]", "SECOND-4-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "SECOND-4-UPDATED", ((List)bean.getListIndexed().get(1)).get(3));
+    }
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
