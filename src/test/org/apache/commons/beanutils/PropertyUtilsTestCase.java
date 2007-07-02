@@ -1052,6 +1052,30 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
+    /**
+     * Test getting a value out of a mapped Map
+     */
+    public void testGetIndexedMap() {
+        Map firstMap  = new HashMap();
+        firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
+        firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
+        Map secondMap  = new HashMap();
+        secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
+        secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
+        
+        List mainList   = new ArrayList();
+        mainList.add(firstMap);
+        mainList.add(secondMap);
+        TestBean bean = new TestBean(mainList);
+        try {
+            assertEquals("listIndexed[0](FIRST-KEY-1)",  "FIRST-VALUE-1",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-1)"));
+            assertEquals("listIndexed[0](FIRST-KEY-2)",  "FIRST-VALUE-2",   PropertyUtils.getProperty(bean, "listIndexed[0](FIRST-KEY-2)"));
+            assertEquals("listIndexed[1](SECOND-KEY-1)", "SECOND-VALUE-1",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-1)"));
+            assertEquals("listIndexed[1](SECOND-KEY-2)", "SECOND-VALUE-2",  PropertyUtils.getProperty(bean, "listIndexed[1](SECOND-KEY-2)"));
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
@@ -1120,6 +1144,40 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test getting an indexed value out of a mapped array
+     */
+    public void testGetMappedArray() {
+        TestBean bean = new TestBean();
+        String[] array = new String[] {"abc", "def", "ghi"};
+        bean.getMapProperty().put("mappedArray", array);
+        try {
+            assertEquals("abc", PropertyUtils.getProperty(bean, "mapProperty(mappedArray)[0]"));
+            assertEquals("def", PropertyUtils.getProperty(bean, "mapProperty(mappedArray)[1]"));
+            assertEquals("ghi", PropertyUtils.getProperty(bean, "mapProperty(mappedArray)[2]"));
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
+
+    /**
+     * Test getting an indexed value out of a mapped List
+     */
+    public void testGetMappedList() {
+        TestBean bean = new TestBean();
+        List list = new ArrayList();
+        list.add("klm");
+        list.add("nop");
+        list.add("qrs");
+        bean.getMapProperty().put("mappedList", list);
+        try {
+            assertEquals("klm", PropertyUtils.getProperty(bean, "mapProperty(mappedList)[0]"));
+            assertEquals("nop", PropertyUtils.getProperty(bean, "mapProperty(mappedList)[1]"));
+            assertEquals("qrs", PropertyUtils.getProperty(bean, "mapProperty(mappedList)[2]"));
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
 
     /**
      * Test getting a value out of a mapped Map
@@ -2412,6 +2470,35 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
     /**
+     * Test setting a value out of a mapped Map
+     */
+    public void testSetIndexedMap() {
+        Map firstMap  = new HashMap();
+        firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
+        firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
+        Map secondMap  = new HashMap();
+        secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
+        secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
+        
+        List mainList = new ArrayList();
+        mainList.add(firstMap);
+        mainList.add(secondMap);
+        TestBean bean = new TestBean(mainList);
+
+        assertEquals("BEFORE",  null,              ((Map)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
+        assertEquals("BEFORE",  "SECOND-VALUE-1",  ((Map)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
+        try {
+            PropertyUtils.setProperty(bean, "listIndexed[0](FIRST-NEW-KEY)", "FIRST-NEW-VALUE");
+            PropertyUtils.setProperty(bean, "listIndexed[1](SECOND-KEY-1)",  "SECOND-VALUE-1-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("BEFORE", "FIRST-NEW-VALUE",         ((Map)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
+        assertEquals("AFTER",  "SECOND-VALUE-1-UPDATED",  ((Map)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
+    }
+
+
+    /**
      * Positive and negative tests on setIndexedProperty valid arguments.
      */
     public void testSetIndexedValues() {
@@ -2823,6 +2910,43 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
+    /**
+     * Test setting an indexed value out of a mapped array
+     */
+    public void testSetMappedArray() {
+        TestBean bean = new TestBean();
+        String[] array = new String[] {"abc", "def", "ghi"};
+        bean.getMapProperty().put("mappedArray", array);
+
+        assertEquals("BEFORE", "def", ((String[])bean.getMapProperty().get("mappedArray"))[1]);
+        try {
+            PropertyUtils.setProperty(bean, "mapProperty(mappedArray)[1]", "DEF-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "DEF-UPDATED", ((String[])bean.getMapProperty().get("mappedArray"))[1]);
+    }
+
+    /**
+     * Test setting an indexed value out of a mapped List
+     */
+    public void testSetMappedList() {
+        TestBean bean = new TestBean();
+        List list = new ArrayList();
+        list.add("klm");
+        list.add("nop");
+        list.add("qrs");
+        bean.getMapProperty().put("mappedList", list);
+
+        assertEquals("BEFORE", "klm", ((List)bean.getMapProperty().get("mappedList")).get(0));
+        try {
+            PropertyUtils.setProperty(bean, "mapProperty(mappedList)[0]", "KLM-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "KLM-UPDATED", ((List)bean.getMapProperty().get("mappedList")).get(0));
+    }
 
     /**
      * Test setting a value out of a mapped Map
