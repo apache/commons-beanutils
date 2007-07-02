@@ -95,6 +95,14 @@ public class TestBean implements Serializable {
         setStringProperty(stringProperty);
     }
 
+    public TestBean(List listIndexed) {
+        this.listIndexed = listIndexed;
+    }
+
+    public TestBean(String[][] string2dArray) {
+        this.string2dArray = string2dArray;
+    }
+
     // ------------------------------------------------------------- Properties
 
 
@@ -492,6 +500,10 @@ public class TestBean implements Serializable {
         stringIndexed[index] = value;
     }
 
+    private String[][] string2dArray = new String[][] {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
+    public String[] getString2dArray(int index) {
+        return string2dArray[index];
+    }
 
     /**
      * A String property.

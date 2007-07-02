@@ -26,6 +26,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -428,6 +429,13 @@ public class PropertyUtilsBean {
 
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
+        }
+        if (name == null || name.length() == 0) {
+            if (bean.getClass().isArray()) {
+                return Array.get(bean, index);
+            } else if (bean instanceof List) {
+                return ((List)bean).get(index);   
+            }
         }
         if (name == null) {
             throw new IllegalArgumentException("No name specified for bean class '" +
@@ -1499,6 +1507,15 @@ public class PropertyUtilsBean {
 
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
+        }
+        if (name == null || name.length() == 0) {
+            if (bean.getClass().isArray()) {
+                Array.set(bean, index, value);
+                return;
+            } else if (bean instanceof List) {
+                ((List)bean).set(index, value);   
+                return;
+            }
         }
         if (name == null) {
             throw new IllegalArgumentException("No name specified for bean class '" +

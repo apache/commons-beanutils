@@ -22,6 +22,8 @@ package org.apache.commons.beanutils;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1003,6 +1005,59 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
 
+    }
+
+
+    /**
+     * Test getting an indexed value out of a multi-dimensional array
+     */
+    public void testGetIndexedArray() {
+        String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
+        String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        String[][] mainArray = {firstArray, secondArray};
+        TestBean bean = new TestBean(mainArray);
+        try {
+            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "string2dArray[0][0]"));
+            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "string2dArray[0][1]"));
+            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "string2dArray[0][2]"));
+            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "string2dArray[1][0]"));
+            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "string2dArray[1][1]"));
+            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "string2dArray[1][2]"));
+            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "string2dArray[1][3]"));
+            
+            PropertyUtils.setProperty(bean, "string2dArray[1][3]", "FOO");
+            assertEquals("WRITE", "FOO", secondArray[3]);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            fail("Threw " + t + "");
+        }
+    }
+
+    /**
+     * Test getting an indexed value out of List of Lists
+     */
+    public void testGetIndexedList() {
+        String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
+        String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        List mainList   = new ArrayList();
+        mainList.add(Arrays.asList(firstArray));
+        mainList.add(Arrays.asList(secondArray));
+        TestBean bean = new TestBean(mainList);
+        try {
+            assertEquals("firstArray[0]", firstArray[0],  PropertyUtils.getProperty(bean, "listIndexed[0][0]"));
+            assertEquals("firstArray[1]", firstArray[1],  PropertyUtils.getProperty(bean, "listIndexed[0][1]"));
+            assertEquals("firstArray[2]", firstArray[2],  PropertyUtils.getProperty(bean, "listIndexed[0][2]"));
+            assertEquals("secondArray[0]", secondArray[0], PropertyUtils.getProperty(bean, "listIndexed[1][0]"));
+            assertEquals("secondArray[1]", secondArray[1], PropertyUtils.getProperty(bean, "listIndexed[1][1]"));
+            assertEquals("secondArray[2]", secondArray[2], PropertyUtils.getProperty(bean, "listIndexed[1][2]"));
+            assertEquals("secondArray[3]", secondArray[3], PropertyUtils.getProperty(bean, "listIndexed[1][3]"));
+            
+            PropertyUtils.setProperty(bean, "listIndexed[1][3]", "FOO");
+            assertEquals("WRITE", "FOO", secondArray[3]);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            fail("Threw " + t + "");
+        }
     }
 
 
