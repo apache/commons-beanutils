@@ -1122,6 +1122,25 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
     /**
+     * Test getting a value out of a mapped Map
+     */
+    public void testGetMappedMap() {
+        TestBean bean = new TestBean();
+        Map map = new HashMap();
+        map.put("sub-key-1", "sub-value-1");
+        map.put("sub-key-2", "sub-value-2");
+        map.put("sub-key-3", "sub-value-3");
+        bean.getMapProperty().put("mappedMap", map);
+        try {
+            assertEquals("sub-value-1", PropertyUtils.getProperty(bean, "mapProperty(mappedMap)(sub-key-1)"));
+            assertEquals("sub-value-2", PropertyUtils.getProperty(bean, "mapProperty(mappedMap)(sub-key-2)"));
+            assertEquals("sub-value-3", PropertyUtils.getProperty(bean, "mapProperty(mappedMap)(sub-key-3)"));
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+    }
+
+    /**
      * Test getting mapped values with periods in the key.
      */
     public void testGetMappedPeriods() {
@@ -2804,6 +2823,26 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
+
+    /**
+     * Test setting a value out of a mapped Map
+     */
+    public void testSetMappedMap() {
+        TestBean bean = new TestBean();
+        Map map = new HashMap();
+        map.put("sub-key-1", "sub-value-1");
+        map.put("sub-key-2", "sub-value-2");
+        map.put("sub-key-3", "sub-value-3");
+        bean.getMapProperty().put("mappedMap", map);
+
+        assertEquals("BEFORE", "sub-value-3", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        try {
+            PropertyUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+    }
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.

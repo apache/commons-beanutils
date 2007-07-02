@@ -780,6 +780,13 @@ public class PropertyUtilsBean {
         throws IllegalArgumentException, IllegalAccessException, 
         InvocationTargetException, NoSuchMethodException {
 
+        if (resolver.isMapped(propertyName)) {
+            String name = resolver.getProperty(propertyName);
+            if (name == null || name.length() == 0) {
+                propertyName = resolver.getKey(propertyName);
+            }
+        }
+
         if (resolver.isIndexed(propertyName) ||
             resolver.isMapped(propertyName)) {
             throw new IllegalArgumentException(
@@ -1885,6 +1892,13 @@ public class PropertyUtilsBean {
     protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
         throws IllegalArgumentException, IllegalAccessException, 
         InvocationTargetException, NoSuchMethodException {
+
+        if (resolver.isMapped(propertyName)) {
+            String name = resolver.getProperty(propertyName);
+            if (name == null || name.length() == 0) {
+                propertyName = resolver.getKey(propertyName);
+            }
+        }
 
         if (resolver.isIndexed(propertyName) ||
             resolver.isMapped(propertyName)) {
