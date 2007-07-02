@@ -141,6 +141,32 @@ public class TestBean implements Serializable {
 
 
     /**
+     * A java.util.Date property.
+     */
+    private java.util.Date dateProperty;
+
+    public java.util.Date getDateProperty() {
+        return dateProperty;
+    }
+
+    public void setDateProperty(java.util.Date dateProperty) {
+        this.dateProperty = dateProperty;
+    }
+
+    /**
+     * A java.util.Date property.
+     */
+    private java.util.Date[] dateArrayProperty;
+
+    public java.util.Date[] getDateArrayProperty() {
+        return dateArrayProperty;
+    }
+
+    public void setDateArrayProperty(java.util.Date[] dateArrayProperty) {
+        this.dateArrayProperty = dateArrayProperty;
+    }
+
+    /**
      * A double property.
      */
     private double doubleProperty = 321.0;

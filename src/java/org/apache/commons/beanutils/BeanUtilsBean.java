@@ -118,6 +118,19 @@ public class BeanUtilsBean {
     }
 
     /** 
+     * <p>Constructs an instance using given conversion instances
+     * and new {@link PropertyUtilsBean} instance.</p>
+     *
+     * @param convertUtilsBean use this <code>ConvertUtilsBean</code> 
+     * to perform conversions from one object to another
+     *
+     * @since 1.8.0
+     */
+    public BeanUtilsBean(ConvertUtilsBean convertUtilsBean) {
+        this(convertUtilsBean, new PropertyUtilsBean());
+    }
+
+    /** 
      * <p>Constructs an instance using given property and conversion instances.</p>
      *
      * @param convertUtilsBean use this <code>ConvertUtilsBean</code> 
@@ -398,11 +411,7 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type and store it
         if (index >= 0) {                    // Destination must be indexed
-            Converter converter = getConvertUtils().lookup(type.getComponentType());
-            if (converter != null) {
-                log.trace("        USING CONVERTER " + converter);
-                value = converter.convert(type.getComponentType(), value);
-            }
+            value = convert(value, type.getComponentType());
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
                                                  index, value);
@@ -422,11 +431,7 @@ public class BeanUtilsBean {
                     (e, "Cannot set " + propName);
             }
         } else {                             // Destination must be simple
-            Converter converter = getConvertUtils().lookup(type);
-            if (converter != null) {
-                log.trace("        USING CONVERTER " + converter);
-                value = converter.convert(type, value);
-            }
+            value = convert(value, type);
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
             } catch (NoSuchMethodException e) {
@@ -975,7 +980,7 @@ public class BeanUtilsBean {
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert((String[]) value, type);
             } else {
-                newValue = getConvertUtils().convert(value, type);
+                newValue = convert(value, type);
             }
         } else if (type.isArray()) {         // Indexed value into array
             if (value instanceof String || value == null) {
@@ -985,7 +990,7 @@ public class BeanUtilsBean {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
                                                 type.getComponentType());
             } else {
-                newValue = getConvertUtils().convert(value, type.getComponentType());
+                newValue = convert(value, type.getComponentType());
             }
         } else {                             // Value into scalar
             if ((value instanceof String) || (value == null)) {
@@ -994,7 +999,7 @@ public class BeanUtilsBean {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
                                                 type);
             } else {
-                newValue = getConvertUtils().convert(value, type);
+                newValue = convert(value, type);
             }
         }
 
@@ -1050,6 +1055,26 @@ public class BeanUtilsBean {
             }
         }
         return false;
+    }
+
+    /**
+     * <p>Convert the value to an object of the specified class (if
+     * possible).</p>
+     *
+     * @param value Value to be converted (may be null)
+     * @param type Class of the value to be converted to
+     * @return The converted value
+     *
+     * @exception ConversionException if thrown by an underlying Converter
+     */
+    protected Object convert(Object value, Class type) {
+        Converter converter = getConvertUtils().lookup(type);
+        if (converter != null) {
+            log.trace("        USING CONVERTER " + converter);
+            return converter.convert(type, value);
+        } else {
+            return value;
+        }
     }
 
     /**

@@ -19,10 +19,15 @@ package org.apache.commons.beanutils;
 
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.beanutils.converters.DateConverter;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -94,6 +99,14 @@ public class BeanUtilsTestCase extends TestCase {
       "stringProperty"
     };
 
+    /** Test Calendar value */
+    protected java.util.Calendar testCalendar;
+
+    /** Test java.util.Date value */
+    protected java.util.Date testUtilDate;
+
+    /** Test String Date value */
+    protected String testStringDate;
 
     // ---------------------------------------------------------- Constructors
 
@@ -114,7 +127,31 @@ public class BeanUtilsTestCase extends TestCase {
      * Set up instance variables required by this test case.
      */
     public void setUp() {
+        ConvertUtils.deregister();
+        BeanUtilsBean.setInstance(new BeanUtilsBean());
+        setUpShared();
+    }
+
+    /**
+     * Shared Set up.
+     */
+    protected void setUpShared() {
         bean = new TestBean();
+
+        DateConverter dateConverter = new DateConverter(null);
+        dateConverter.setLocale(Locale.US);
+        dateConverter.setPattern("dd.MM.yyyy");
+        ConvertUtils.register(dateConverter, java.util.Date.class);
+
+        ArrayConverter dateArrayConverter = 
+            new ArrayConverter(java.util.Date[].class, dateConverter, 0);
+        ConvertUtils.register(dateArrayConverter, java.util.Date[].class);
+        
+        testCalendar = Calendar.getInstance();
+        testCalendar.set(1992, 11, 28, 0, 0, 0);
+        testCalendar.set(Calendar.MILLISECOND, 0);
+        testUtilDate = testCalendar.getTime();
+        testStringDate = "28.12.1992";
     }
 
 
@@ -434,6 +471,20 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test <code>getArrayProperty()</code> converting to a String.
+     */
+    public void testGetArrayPropertyDate() {
+        String[] value = null;
+        try {
+            bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
+            value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date[] --> String[] length", 1, value.length);
+        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), value[0]);
+    }
 
     /**
      *  tests getting an indexed property
@@ -456,6 +507,19 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+    /**
+     * Test <code>getArrayProperty()</code> converting to a String.
+     */
+    public void testGetIndexedPropertyDate() {
+        String value = null;
+        try {
+            bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
+            value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date[0] --> String", testUtilDate.toString(), value);
+    }
 
     /**
      *  tests getting an indexed property
@@ -540,6 +604,19 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
+    /**
+     * Test <code>getSimpleProperty()</code> converting to a String.
+     */
+    public void testGetSimplePropertyDate() {
+        String value = null;
+        try {
+            bean.setDateProperty(testUtilDate);
+            value = BeanUtils.getSimpleProperty(bean, "dateProperty");
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date --> String", testUtilDate.toString(), value);
+    }
 
     /**
      * Test populate() method on individual array elements.
@@ -854,6 +931,68 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test <code>setProperty()</code> conversion.
+     */
+    public void testSetPropertyConvert() {
+        try {
+            BeanUtils.setProperty(bean, "dateProperty", testCalendar);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
+    }
+
+    /**
+     * Test <code>setProperty()</code> converting from a String.
+     */
+    public void testSetPropertyConvertFromString() {
+        try {
+            BeanUtils.setProperty(bean, "dateProperty", testStringDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("String --> java.util.Date", testUtilDate, bean.getDateProperty());
+    }
+
+    /**
+     * Test <code>setProperty()</code> converting to a String.
+     */
+    public void testSetPropertyConvertToString() {
+        try {
+            BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
+    }
+
+    /**
+     * Test <code>setProperty()</code> converting to a String array.
+     */
+    public void testSetPropertyConvertToStringArray() {
+        try {
+            bean.setStringArray(null);
+            BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
+        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
+    }
+
+    /**
+     * Test <code>setProperty()</code> converting to a String on indexed property
+     */
+    public void testSetPropertyConvertToStringIndexed() {
+        try {
+            bean.setStringArray(new String[1]);
+            BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
+    }
 
     /**
      * Test narrowing and widening conversions on double.
@@ -1019,6 +1158,68 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test <code>copyProperty()</code> conversion.
+     */
+    public void testCopyPropertyConvert() {
+        try {
+            BeanUtils.copyProperty(bean, "dateProperty", testCalendar);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
+    }
+
+    /**
+     * Test <code>copyProperty()</code> converting from a String.
+     */
+    public void testCopyPropertyConvertFromString() {
+        try {
+            BeanUtils.copyProperty(bean, "dateProperty", testStringDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("String --> java.util.Date", testUtilDate, bean.getDateProperty());
+    }
+
+    /**
+     * Test <code>copyProperty()</code> converting to a String.
+     */
+    public void testCopyPropertyConvertToString() {
+        try {
+            BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
+    }
+
+    /**
+     * Test <code>copyProperty()</code> converting to a String.
+     */
+    public void testCopyPropertyConvertToStringArray() {
+        try {
+            bean.setStringArray(null);
+            BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
+        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
+    }
+
+    /**
+     * Test <code>copyProperty()</code> converting to a String on indexed property
+     */
+    public void testCopyPropertyConvertToStringIndexed() {
+        try {
+            bean.setStringArray(new String[1]);
+            BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
+        } catch (Throwable t) {
+            fail("Threw " + t);
+        }
+        assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
+    }
 
     /**
      * Test narrowing and widening conversions on double.
