@@ -241,12 +241,9 @@ public class PropertyUtilsBean {
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                if (dest instanceof DynaBean) {
-                    if (isWriteable(dest, name)) {
-                        Object value = ((DynaBean) orig).get(name);
-                        ((DynaBean) dest).set(name, value);
-                    }
-                } else /* if (dest is a standard JavaBean) */ {
+                // Need to check isReadable() for WrapDynaBean
+                // (see Jira issue# BEANUTILS-61)
+                if (isReadable(orig, name)) {
                     if (isWriteable(dest, name)) {
                         Object value = ((DynaBean) orig).get(name);
                         setSimpleProperty(dest, name, value);
@@ -1333,6 +1330,12 @@ public class PropertyUtilsBean {
                     bean.getClass() + "'");
         }
 
+        // Treat WrapDynaBean as special case - may be a write-only property
+        // (see Jira issue# BEANUTILS-61)
+        if (bean instanceof WrapDynaBean) {
+            bean = ((WrapDynaBean)bean).getInstance();
+        }
+
         // Return the requested result
         if (bean instanceof DynaBean) {
             // All DynaBean properties are readable
@@ -1390,6 +1393,12 @@ public class PropertyUtilsBean {
         if (name == null) {
             throw new IllegalArgumentException("No name specified for bean class '" +
                     bean.getClass() + "'");
+        }
+
+        // Treat WrapDynaBean as special case - may be a read-only property
+        // (see Jira issue# BEANUTILS-61)
+        if (bean instanceof WrapDynaBean) {
+            bean = ((WrapDynaBean)bean).getInstance();
         }
 
         // Return the requested result

@@ -253,7 +253,10 @@ public class BeanUtilsBean {
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                if (getPropertyUtils().isWriteable(dest, name)) {
+                // Need to check isReadable() for WrapDynaBean
+                // (see Jira issue# BEANUTILS-61)
+                if (getPropertyUtils().isReadable(orig, name) &&
+                    getPropertyUtils().isWriteable(dest, name)) {
                     Object value = ((DynaBean) orig).get(name);
                     copyProperty(dest, name, value);
                 }
