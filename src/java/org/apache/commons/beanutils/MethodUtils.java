@@ -709,17 +709,54 @@ public class MethodUtils {
             return (method);
         }
 
+        String methodName      = method.getName();
+        Class[] parameterTypes = method.getParameterTypes();
+
         // Check the implemented interfaces and subinterfaces
         method =
                 getAccessibleMethodFromInterfaceNest(clazz,
-                        method.getName(),
-                        method.getParameterTypes());
+                        methodName,
+                        parameterTypes);
+
+        // Check the superclass chain
+        if (method == null) {
+            method = getAccessibleMethodFromSuperclass(clazz,
+                        methodName,
+                        parameterTypes);
+        }
+
         return (method);
 
     }
 
 
     // -------------------------------------------------------- Private Methods
+
+    /**
+     * <p>Return an accessible method (that is, one that can be invoked via
+     * reflection) by scanning through the superclasses. If no such method
+     * can be found, return <code>null</code>.</p>
+     *
+     * @param clazz Class to be checked
+     * @param methodName Method name of the method we wish to call
+     * @param parameterTypes The parameter type signatures
+     */
+    private static Method getAccessibleMethodFromSuperclass
+            (Class clazz, String methodName, Class parameterTypes[]) {
+
+        Class parentClazz = clazz.getSuperclass();
+        while (parentClazz != null) {
+            if (Modifier.isPublic(parentClazz.getModifiers())) {
+                try {
+                    return parentClazz.getMethod(methodName, parameterTypes);
+                } catch (NoSuchMethodException e) {
+                    return null;
+                }
+            }
+            parentClazz = parentClazz.getSuperclass();
+        }
+        return null;
+    }
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
