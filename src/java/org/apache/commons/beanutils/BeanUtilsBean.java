@@ -509,8 +509,9 @@ public class BeanUtilsBean {
                 getPropertyUtils().getPropertyDescriptors(bean);
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
-                if (descriptors[i].getReadMethod() != null)
+                if (getPropertyUtils().getReadMethod(descriptors[i]) != null) {
                     description.put(name, getProperty(bean, name));
+                }
             }
         }
         return (description);
