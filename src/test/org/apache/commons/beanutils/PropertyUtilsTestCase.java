@@ -4252,7 +4252,8 @@ public class PropertyUtilsTestCase extends TestCase {
             assertNotNull("Cause not found", cause);
             assertTrue("Expected cause to be IllegalArgumentException, but was: " + cause.getClass(),
                     cause instanceof IllegalArgumentException);
-            assertEquals("Check error message", "argument type mismatch", cause.getMessage());
+            // JDK 1.6 doesn't have "argument type mismatch" message
+            // assertEquals("Check error message", "argument type mismatch", cause.getMessage());
         } catch(Throwable t) {
             fail("Expected IllegalArgumentException, but threw " + t);
         }
