@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<project name="BeanUtils">
+    <bannerRight>
+        <name>Commons BeanUtils</name>
+        <src>/images/logo.png</src>
+        <href>/index.html</href>
+    </bannerRight>
+
+    <body>
+        <menu name="BeanUtils">
+            <item name="Overview"             href="/index.html"/>
+            <item name="Download"             href="http://jakarta.apache.org/site/downloads/downloads_commons-beanutils.cgi"/>
+            <item name="Dependencies"         href="/dependencies.html"/>
+            <item name="Mailing Lists"        href="/mail-lists.html"/>
+            <item name="Issue Tracking"       href="/issue-tracking.html"/>
+            <item name="Source Repository"    href="/source-repository.html"/>
+            <item name="License"              href="/license.html"/>
+        </menu>
+
+        <menu name="Documentation">
+            <item name="Building"             href="/building.html"/>
+            <!-- item name="History"              href="/changes-report.html"/ -->
+            <item name="Wiki"                 href="http://wiki.apache.org/jakarta-commons/BeanUtils"/>
+            <item name="Latest">
+                <item name="User Guide"       href="/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"              href="/apidocs/index.html"/>
+                <item name="Bean Collections" href="/bean-collections/index.html"/>
+            </item>
+            <item name="1.7.0 Release">
+                <item name="User Guide"       href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="Core API"         href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api"/>
+                <item name="Bean Collections" href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/bean-collections"/>
+                <item name="Release Notes"    href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt"/>
+            </item>
+            <item name="1.6.1 Release">
+                <item name="User Guide"       href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"              href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/"/>
+                <item name="Release Notes"    href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt"/>
+            </item>
+        </menu>
+
+    </body>
+
+</project>
