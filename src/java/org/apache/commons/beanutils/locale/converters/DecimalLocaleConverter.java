@@ -225,6 +225,11 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * cannot be performed successfully
      */
     protected Object parse(Object value, String pattern) throws ParseException {
+
+        if (value instanceof Number) {
+            return value;
+        }
+
         // Note that despite the ambiguous "getInstance" name, and despite the
         // fact that objects returned from this method have the same toString
         // representation, each call to getInstance actually returns a new

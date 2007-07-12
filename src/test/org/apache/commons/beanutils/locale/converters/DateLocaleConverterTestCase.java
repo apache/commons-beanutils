@@ -430,5 +430,23 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     }
 
+    /**
+     * Test java.util.Date
+     */
+    public void testDateObject() {
+        converter = new DateLocaleConverter(defaultLocale);
+        assertEquals("java.util.Date", expectedValue, converter.convert(expectedValue));
+    }
+
+    /**
+     * Test Calendar
+     */
+    public void testCalendarObject() {
+        converter = new DateLocaleConverter(defaultLocale);
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTime((java.util.Date)expectedValue);
+        assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
+    }
+
 }
 

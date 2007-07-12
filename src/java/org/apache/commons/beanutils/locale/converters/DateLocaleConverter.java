@@ -259,6 +259,16 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     protected Object parse(Object value, String pattern) throws ParseException {
  
+        // Handle Date
+        if (value instanceof java.util.Date) {
+            return value;
+        }
+
+        // Handle Calendar
+        if (value instanceof java.util.Calendar) {
+            return ((java.util.Calendar)value).getTime();
+        }
+
          if (locPattern) {
              pattern = convertLocalizedPattern(pattern, locale);
          }

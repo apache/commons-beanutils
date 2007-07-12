@@ -258,6 +258,19 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
     }
 
 
+    /**
+     * Test Converting a number
+     */
+    public void testNumber() {
+
+        // ------------- Construct using specified Locale --------
+        converter = new IntegerLocaleConverter(localizedLocale);
+
+        Integer value = new Integer(1234);
+        assertEquals("Convert Integer", value, converter.convert(value));
+        assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
+    }
+
 
 }
 
