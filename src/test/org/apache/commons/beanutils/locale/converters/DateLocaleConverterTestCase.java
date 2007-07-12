@@ -409,5 +409,26 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     }
 
+    /**
+     * Test invalid date
+     */
+    public void testInvalidDate() {
+
+        converter = new DateLocaleConverter(defaultLocale);
+
+        try {
+            converter.convert("01/10/2004", "dd-MM-yyyy");
+        } catch (ConversionException e) {
+            assertEquals("Parse Error", "Error parsing date '01/10/2004' at position=2", e.getMessage());
+        }
+
+        try {
+            converter.convert("01-10-2004X", "dd-MM-yyyy");
+        } catch (ConversionException e) {
+            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
+        }
+
+    }
+
 }
 

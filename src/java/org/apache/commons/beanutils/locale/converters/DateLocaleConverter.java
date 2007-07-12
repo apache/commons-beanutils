@@ -17,11 +17,13 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -268,7 +270,17 @@ public class DateLocaleConverter extends BaseLocaleConverter {
  
 
          // Parse the Date
-         return formatter.parse((String) value);
+        ParsePosition pos = new ParsePosition(0);
+        String strValue = value.toString();
+        Object parsedValue = formatter.parseObject(strValue, pos);
+        if (pos.getErrorIndex() > -1) {
+            throw new ConversionException("Error parsing date '" + value + "' at position="+ pos.getErrorIndex());
+        }
+        if (pos.getIndex() < strValue.length()) {
+            throw new ConversionException("Date '" + value + "' contains unparsed characters from position=" + pos.getIndex());
+        }
+
+        return parsedValue;
      }
    
      /**
