@@ -214,8 +214,10 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     */
    protected Object parse(Object value, String pattern) throws ParseException {
       final Number parsed = (Number) super.parse(value, pattern);
-      if( Math.abs(parsed.doubleValue() - parsed.floatValue()) > parsed.floatValue() * 0.00001 ) {
-         throw new ConversionException("Suplied number is not of type Float: "+parsed.longValue());
+      double doubleValue = parsed.doubleValue();
+      double posDouble = (doubleValue >= (double)0) ? doubleValue : (doubleValue * (double)-1);
+      if (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE) {
+          throw new ConversionException("Suplied number is not of type Float: "+parsed);
       }
       return new Float(parsed.floatValue()); // unlike superclass it returns Float type
    }

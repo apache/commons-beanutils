@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
+import java.text.DecimalFormat;
+import org.apache.commons.beanutils.ConversionException;
 
 /**
  * Test Case for the FloatLocaleConverter class.
@@ -256,6 +258,49 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
 
+    }
+
+    /**
+     * Test Float limits
+     */
+    public void testFloatLimits() {
+
+        converter = new FloatLocaleConverter(defaultLocale, defaultDecimalPattern);
+        DecimalFormat fmt = new DecimalFormat("#.#############################################################");
+
+        assertEquals(new Float(-0.12), converter.convert("-0.12"));
+        assertEquals("Positive Float.MAX_VALUE", new Float(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)));
+        assertEquals("Positive Float.MIN_VALUE", new Float(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)));
+
+        assertEquals("Negative Float.MAX_VALUE", new Float(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
+        assertEquals("Negative Float.MIN_VALUE", new Float(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
+        
+        
+        try {
+            converter.convert(fmt.format((double)Float.MAX_VALUE * (double)10));
+            fail("Positive Too Large should throw ConversionException");
+        } catch (ConversionException e) {
+            // expected result
+        }
+        try {
+            converter.convert(fmt.format((double)Float.MAX_VALUE * (double)-10));
+            fail("Negative Too Large should throw ConversionException");
+        } catch (ConversionException e) {
+            // expected result
+        }
+        
+        try {
+            converter.convert(fmt.format((double)Float.MIN_VALUE / (double)10));
+            fail("Positive Too Small should throw ConversionException");
+        } catch (ConversionException e) {
+            // expected result
+        }
+        try {
+            converter.convert(fmt.format((double)Float.MIN_VALUE / (double)-10));
+            fail("Negative Too Small should throw ConversionException");
+        } catch (ConversionException e) {
+            // expected result
+        }
     }
 
 
