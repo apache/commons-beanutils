@@ -217,7 +217,7 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
       double doubleValue = parsed.doubleValue();
       double posDouble = (doubleValue >= (double)0) ? doubleValue : (doubleValue * (double)-1);
       if (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE) {
-          throw new ConversionException("Suplied number is not of type Float: "+parsed);
+          throw new ConversionException("Supplied number is not of type Float: "+parsed);
       }
       return new Float(parsed.floatValue()); // unlike superclass it returns Float type
    }
