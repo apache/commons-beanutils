@@ -233,6 +233,9 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
             if (useDefault) {
                 return (defaultValue);
             } else {
+                if (e instanceof ConversionException) {
+                    throw (ConversionException)e;
+                }
                 throw new ConversionException(e);
             }
         }
