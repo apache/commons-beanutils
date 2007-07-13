@@ -20,6 +20,9 @@ package org.apache.commons.beanutils;
 
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -239,5 +242,48 @@ public class DynaRowSetTestCase extends TestCase {
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());
         
+    }
+
+    public void testInconsistent() throws Exception {
+
+        ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
+        ResultSet resultSet = TestResultSet.createProxy(metaData);
+        
+        int dateColIdx = 4;
+        assertEquals("Meta Column Name",       "dateProperty",       metaData.getColumnName(dateColIdx));
+        assertEquals("Meta Column Class Name", "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
+        assertEquals("ResultSet Value",        java.sql.Date.class,  resultSet.getObject("dateproperty").getClass());
+
+        RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
+        DynaBean firstRow = (DynaBean)inconsistentDynaClass.getRows().get(0);
+        DynaProperty dynaProperty = firstRow.getDynaClass().getDynaProperty("dateproperty");
+        assertEquals("DynaProperty Class", java.sql.Timestamp.class, dynaProperty.getType());
+        assertEquals("DynaBean Value",     java.sql.Timestamp.class, firstRow.get("dateproperty").getClass());
+    }
+
+    /**
+     * A proxy ResultSetMetaData implementation that returns a class name that
+     * is inconsistent with the type returned by the ResultSet.getObject() method.
+     *
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142 
+     */
+    private static class TestResultSetMetaDataInconsistent extends  TestResultSetMetaData {
+
+        /**
+         * This method substitues class names of "java.sql.Timestamp" with
+         * "java.sql.Date" to test inconsistent JDBC drivers.
+         *
+         * @param columnIndex The column index
+         * @return The column class name
+         * @throws SQLException if an error occurs
+         */
+        public String getColumnClassName(int columnIndex) throws SQLException {
+            String columnClassName = super.getColumnClassName(columnIndex);
+            if (java.sql.Date.class.getName().equals(columnClassName)) {
+                return java.sql.Timestamp.class.getName();
+            } else {
+                return columnClassName;
+            }
+        }
     }
 }
