@@ -67,6 +67,10 @@ public class TestResultSet implements InvocationHandler {
      */
     protected long timestamp = System.currentTimeMillis();
 
+    /**
+     * Meta data for the result set.
+     */
+    protected ResultSetMetaData resultSetMetaData;
 
     /**
      * Factory method for creating {@link ResultSet} proxies.
@@ -74,10 +78,36 @@ public class TestResultSet implements InvocationHandler {
      * @return A result set proxy
      */
     public static ResultSet createProxy() {
+        return TestResultSet.createProxy(TestResultSetMetaData.createProxy());
+    }
+
+    /**
+     * Factory method for creating {@link ResultSet} proxies.
+     *
+     * @param resultSetMetaData The result set meta data
+     * @return A result set proxy
+     */
+    public static ResultSet createProxy(ResultSetMetaData resultSetMetaData) {
         ClassLoader classLoader = ResultSet.class.getClassLoader();
         Class[] interfaces = new Class[] { ResultSet.class };
-        InvocationHandler invocationHandler = new TestResultSet();
+        InvocationHandler invocationHandler = new TestResultSet(resultSetMetaData);
         return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+    }
+    
+    /**
+     * Create a proxy ResultSet.
+     */
+    public TestResultSet() {
+        this(TestResultSetMetaData.createProxy());
+    }
+    
+    /**
+     * Create a proxy ResultSet with the specified meta data.
+     *
+     * @param resultSetMetaData The result set meta data
+     */
+    public TestResultSet(ResultSetMetaData resultSetMetaData) {
+        this.resultSetMetaData = resultSetMetaData;
     }
 
     /**
@@ -96,7 +126,13 @@ public class TestResultSet implements InvocationHandler {
         } if ("getMetaData".equals(methodName)) {
             return getMetaData();
         } if ("getObject".equals(methodName)) {
-            return getObject((String)args[0]);
+            String columnName = null;
+            if (args[0] instanceof Integer) {
+                columnName = resultSetMetaData.getColumnName(((Integer)args[0]).intValue());
+            } else {
+                columnName = (String)args[0];
+            }
+            return getObject(columnName);
         } if ("next".equals(methodName)) {
             return (next() ? Boolean.TRUE : Boolean.FALSE);
         } if ("updateObject".equals(methodName)) {
@@ -117,7 +153,7 @@ public class TestResultSet implements InvocationHandler {
 
 
     public ResultSetMetaData getMetaData() throws SQLException {
-        return TestResultSetMetaData.createProxy();
+        return resultSetMetaData;
     }
 
 

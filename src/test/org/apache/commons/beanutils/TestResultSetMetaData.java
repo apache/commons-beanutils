@@ -29,7 +29,7 @@ import java.sql.SQLException;
 /**
  * <p>Mock object that implements enough of
  * <code>java.sql.ResultSetMetaData</code>
- * to exercise the {@link ResultSetDyaClass} functionality.</p>
+ * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
@@ -45,19 +45,19 @@ public class TestResultSetMetaData implements InvocationHandler {
      * <p>Array of column names and class names for metadata.</p>
      */
     protected String metadata[][] = {
-        { "bigDecimalProperty", "java.math.BigDecimal" },
+        { "bigDecimalProperty", java.math.BigDecimal.class.getName() },
         { "booleanProperty", Boolean.class.getName() },
         { "byteProperty", Byte.class.getName() },
-        { "dateProperty", "java.sql.Date" },
+        { "dateProperty", java.sql.Date.class.getName() },
         { "doubleProperty", Double.class.getName() },
         { "floatProperty", Float.class.getName() },
         { "intProperty", Integer.class.getName() },
         { "longProperty", Long.class.getName() },
-        { "nullProperty", "java.lang.String" },
+        { "nullProperty", String.class.getName() },
         { "shortProperty", Short.class.getName() },
-        { "stringProperty", "java.lang.String" },
-        { "timeProperty", "java.sql.Time" },
-        { "timestampProperty", "java.sql.Timestamp" },
+        { "stringProperty", String.class.getName() },
+        { "timeProperty", java.sql.Time.class.getName() },
+        { "timestampProperty", java.sql.Timestamp.class.getName() },
     };
 
 
@@ -67,9 +67,17 @@ public class TestResultSetMetaData implements InvocationHandler {
      * @return A result set meta data proxy
      */
     public static ResultSetMetaData createProxy() {
+        return TestResultSetMetaData.createProxy(new TestResultSetMetaData());
+    }
+
+    /**
+     * Factory method for creating {@link ResultSetMetaData} proxies.
+     * @param invocationHandler Invocation Handler
+     * @return A result set meta data proxy
+     */
+    public static ResultSetMetaData createProxy(InvocationHandler invocationHandler) {
         ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
         Class[] interfaces = new Class[] { ResultSetMetaData.class };
-        InvocationHandler invocationHandler = new TestResultSetMetaData();
         return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
