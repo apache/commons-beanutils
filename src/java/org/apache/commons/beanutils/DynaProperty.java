@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -204,6 +204,9 @@ public class DynaProperty implements Serializable {
     /**
      * Checks this instance against the specified Object for equality. Overrides the
      * default refererence test for equality provided by {@link java.lang.Object#equals(Object)}  
+     * @param obj The object to compare to
+     * @return <code>true</code> if object is a dyna property with the same name
+     * type and content type, otherwise <code>false</code>
      */
     public boolean equals(final Object obj) {
 
@@ -223,6 +226,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
+     * @return the hashcode for this dyna property
      * @see java.lang.Object#hashCode
      */
     public int hashCode() {
@@ -238,6 +242,7 @@ public class DynaProperty implements Serializable {
 
     /**
      * Return a String representation of this Object.
+     * @return a String representation of the dyna property
      */
     public String toString() {
 
@@ -295,7 +300,7 @@ public class DynaProperty implements Serializable {
             primitiveType = LONG_TYPE;
         } else if (Short.TYPE.equals(clazz)) {
             primitiveType = SHORT_TYPE;
-        }	
+        }
         
         if (primitiveType == 0) {
             // then it's not a primitive type

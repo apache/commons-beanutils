@@ -428,6 +428,7 @@ public class LazyDynaList extends ArrayList {
     /**
      * <p>Converts the List to an Array of the specified type.</p>
      *
+     * @param model The model for the type of array to return
      * @return An Array of the elements in this List.
      */
     public Object[] toArray(Object[] model) {

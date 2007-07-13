@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -62,7 +62,7 @@ public class BeanUtilsBean {
      * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
      */
     private static final ContextClassLoaderLocal 
-            beansByClassLoader = new ContextClassLoaderLocal() {
+            BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
                         protected Object initialValue() {
                             return new BeanUtilsBean();
@@ -77,7 +77,7 @@ public class BeanUtilsBean {
      * @return The (pseudo-singleton) BeanUtils bean instance
      */
     public static BeanUtilsBean getInstance() {
-        return (BeanUtilsBean) beansByClassLoader.get();
+        return (BeanUtilsBean) BEANS_BY_CLASSLOADER.get();
     }
 
     /** 
@@ -88,7 +88,7 @@ public class BeanUtilsBean {
      * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
     public static void setInstance(BeanUtilsBean newInstance) {
-        beansByClassLoader.set(newInstance);
+        BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
     // --------------------------------------------------------- Attributes
@@ -138,7 +138,7 @@ public class BeanUtilsBean {
      * @param propertyUtilsBean use this <code>PropertyUtilsBean</code>
      * to access properties
      */
-    public BeanUtilsBean(		
+    public BeanUtilsBean(
                             ConvertUtilsBean convertUtilsBean, 
                             PropertyUtilsBean propertyUtilsBean) {
                             
@@ -1056,6 +1056,7 @@ public class BeanUtilsBean {
                 INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
                 return true;
             } catch (Throwable e) {
+                return false; // can't initialize cause
             }
         }
         return false;

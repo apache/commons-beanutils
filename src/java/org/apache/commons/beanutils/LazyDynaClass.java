@@ -108,6 +108,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Is this DynaClass currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     * @return <code>true</code> if this {@link MutableDynaClass} cannot be changed
+     * otherwise <code>false</code>
      */
     public boolean isRestricted() {
         return restricted;
@@ -117,6 +119,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Set whether this DynaClass is currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     * @param restricted <code>true</code> if this {@link MutableDynaClass} cannot
+     * be changed otherwise <code>false</code>
      */
     public void setRestricted(boolean restricted) {
         this.restricted = restricted;
@@ -305,6 +309,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     * @return The dyna property for the specified name
      *
      * @exception IllegalArgumentException if no property name is specified
      */

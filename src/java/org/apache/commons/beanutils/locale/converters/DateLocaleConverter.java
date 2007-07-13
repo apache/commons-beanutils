@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -56,7 +56,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * Default Pattern Characters 
      * 
      */
-    private static final String defaultChars = initDefaultChars();
+    private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
     // ----------------------------------------------------------- Constructors
 
@@ -243,7 +243,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     public void setLenient(boolean lenient) {
         isLenient = lenient;
-    }	
+    }
 
     // --------------------------------------------------------- Methods
 
@@ -253,9 +253,11 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
+     * @return the converted Date value
      *
      * @exception org.apache.commons.beanutils.ConversionException 
      * if conversion cannot be performed successfully
+     * @throws ParseException if an error occurs parsing
      */
     protected Object parse(Object value, String pattern) throws ParseException {
  
@@ -313,7 +315,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
          String localChars = localizedSymbols.getLocalPatternChars();
  
-         if (defaultChars.equals(localChars)) {
+         if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
              return localizedPattern;
          }
  
@@ -322,7 +324,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          try {
              convertedPattern = convertPattern(localizedPattern,
                                                 localChars,
-                                                defaultChars);
+                                                DEFAULT_PATTERN_CHARS);
          } catch (Exception ex) {
              log.info("Converting pattern '" + localizedPattern + "' for " + locale, ex);
          }
@@ -367,7 +369,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
     /**
      * This method is called at class initialization time to define the
-     * value for constant member defaultChars. All other methods needing
+     * value for constant member DEFAULT_PATTERN_CHARS. All other methods needing
      * this data should just read that constant.
      */
     private static String initDefaultChars() {

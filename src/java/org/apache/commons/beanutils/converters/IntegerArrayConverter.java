@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils.converters;
@@ -74,7 +74,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final int model[] = new int[0];
+    private static final int MODEL[] = new int[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -86,6 +86,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
      *
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
+     * @return the converted value
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully
@@ -102,7 +103,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         }
 
         // Deal with the no-conversion-needed case
-        if (model.getClass() == value.getClass()) {
+        if (MODEL.getClass() == value.getClass()) {
             return (value);
         }
 

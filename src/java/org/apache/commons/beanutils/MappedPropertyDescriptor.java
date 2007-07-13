@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -64,7 +64,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * The parameter types array for the reader method signature.
      */
-    private static final Class[] stringClassArray = new Class[]{String.class};
+    private static final Class[] STRING_CLASS_PARAMETER = new Class[]{String.class};
 
     // ----------------------------------------------------------- Constructors
 
@@ -79,7 +79,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
-     *		example sun.beans.OurButton.class.
+     *        example sun.beans.OurButton.class.
      *
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
@@ -101,10 +101,10 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         try {
             try {
                 mappedReadMethod = getMethod(beanClass, "get" + base,
-                        stringClassArray);
+                        STRING_CLASS_PARAMETER);
             } catch (IntrospectionException e) {
                 mappedReadMethod = getMethod(beanClass, "is" + base,
-                        stringClassArray);
+                        STRING_CLASS_PARAMETER);
             }
             Class params[] = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
@@ -135,7 +135,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
-     *		example sun.beans.OurButton.class.
+     *        example sun.beans.OurButton.class.
      * @param mappedGetterName The name of the method used for
      *          reading one of the property values.  May be null if the
      *          property is write-only.
@@ -160,7 +160,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         // search the mapped get and set methods
         mappedReadMethod =
-            getMethod(beanClass, mappedGetterName, stringClassArray);
+            getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
 
         if (mappedReadMethod != null) {
             Class params[] = { String.class, mappedReadMethod.getReturnType() };

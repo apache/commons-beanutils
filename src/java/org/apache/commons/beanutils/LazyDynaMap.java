@@ -182,6 +182,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     /**
      * Return the name of this DynaClass (analogous to the
      * <code>getName()</code> method of <code>java.lang.Class</code)
+     *
+     * @return the name of the DynaClass
      */
     public String getName() {
         return this.name;
@@ -206,6 +208,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     * @return The descriptor for the specified property
      *
      * @exception IllegalArgumentException if no property name is specified
      */
@@ -238,6 +241,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p><strong>FIXME</strong> - Should we really be implementing
      * <code>getBeanInfo()</code> instead, which returns property descriptors
      * and a bunch of other stuff?</p>
+     * @return the set of properties for this DynaClass
      */
     public DynaProperty[] getDynaProperties() {
 
@@ -258,6 +262,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     /**
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
+     * @return A new <code>DynaBean</code> instance
      */
     public DynaBean newInstance()  {
 
@@ -287,6 +292,9 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p>Is this DynaClass currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     *
+     * @return <code>true</code> if this Mutable {@link DynaClass} is restricted,
+     * otherwise <code>false</code>
      */
     public boolean isRestricted() {
         return restricted;
@@ -296,6 +304,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p>Set whether this DynaClass is currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
+     *
+     * @param restricted The new restricted state
      */
     public void setRestricted(boolean restricted) {
         this.restricted = restricted;
@@ -449,6 +459,9 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * return a DynaProperty if it doesn't exist (depending on the
      * <code>returnNull</code> indicator).</p>
      *
+     * @param name Name of the dynamic property
+     * @return <code>true</code> if the property exists,
+     * otherwise <code>false</code>
      * @exception IllegalArgumentException if no property name is specified
      */
     protected boolean isDynaProperty(String name) {

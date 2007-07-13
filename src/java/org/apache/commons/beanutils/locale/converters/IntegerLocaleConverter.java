@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -208,9 +208,11 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the convertion
+     * @return The converted value
      *
      * @exception ConversionException if conversion cannot be performed
      *  successfully
+     * @throws ParseException if an error occurs parsing a String to a Number
      */
     protected Object parse(Object value, String pattern) throws ParseException {
         final Number parsed = (Number) super.parse(value, pattern);

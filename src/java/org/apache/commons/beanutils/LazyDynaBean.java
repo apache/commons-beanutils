@@ -249,6 +249,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
+     * @return <code>true<code> if the mapped property contains a value for
+     * the specified key, otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if no property name is specified
      */
@@ -278,6 +280,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *  of the specified name.</p>
      *
      * @param name Name of the property whose value is to be retrieved.
+     * @return The property's value
      * @exception IllegalArgumentException if no property name is specified
      */
     public Object get(String name) {
@@ -316,6 +319,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
+     * @return The indexed property's value
      *
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not indexed
@@ -363,6 +367,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
+     * @return The mapped property's value
      *
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
@@ -399,6 +404,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
+     *
+     * @return The associated DynaClass
      */
     public DynaClass getDynaClass() {
         return dynaClass;

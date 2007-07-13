@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -123,8 +123,8 @@ public class PropertyUtilsBean {
      */
     private FastHashMap descriptorsCache = null;
     private FastHashMap mappedDescriptorsCache = null;
-    private static final Class[] indexedListGetterArgs = new Class[0];
-    private static final Class[] indexedListSetterArgs = new Class[] {java.util.List.class};
+    private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
+    private static final Class[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
     
     /** Log instance */
     private Log log = LogFactory.getLog(PropertyUtils.class);
@@ -1001,7 +1001,7 @@ public class PropertyUtilsBean {
                                         : "get" + propName;
                     Method readMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
                                                             methodName,
-                                                            indexedListGetterArgs);
+                                                            EMPTY_CLASS_PARAMETERS);
                     if (readMethod != null) {
                         try {
                             descriptor.setReadMethod(readMethod);
@@ -1016,7 +1016,7 @@ public class PropertyUtilsBean {
                                       : "set" + propName;
                     Method writeMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
                                                             methodName,
-                                                            indexedListSetterArgs);
+                                                            LIST_CLASS_PARAMETER);
                     if (writeMethod == null) {
                         Method[] methods = beanClass.getMethods();
                         for (int j = 0; j < methods.length; j++) {

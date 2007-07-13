@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -70,9 +70,9 @@ public class MethodUtils {
     private static boolean loggedAccessibleWarning = false;
 
     /** An empty class array */
-    private static final Class[] emptyClassArray = new Class[0];
+    private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
     /** An empty object array */
-    private static final Object[] emptyObjectArray = new Object[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     /**
      * Stores a cache of MethodDescriptor -> Method in a WeakHashMap.
@@ -177,7 +177,7 @@ public class MethodUtils {
             InvocationTargetException {
         
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
@@ -226,10 +226,10 @@ public class MethodUtils {
                     InvocationTargetException {
                     
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }        
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
 
         Method method = getMatchingAccessibleMethod(
@@ -304,7 +304,7 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
@@ -346,11 +346,11 @@ public class MethodUtils {
             InvocationTargetException {
         
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
                 
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
 
         Method method = getAccessibleMethod(
@@ -375,6 +375,7 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
      * @param parameterTypes match these parameters - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -393,11 +394,11 @@ public class MethodUtils {
             InvocationTargetException {
         
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
                 
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
 
         Method method = getAccessibleMethod(
@@ -430,6 +431,7 @@ public class MethodUtils {
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
      * @param arg use this argument
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -471,6 +473,7 @@ public class MethodUtils {
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -488,7 +491,7 @@ public class MethodUtils {
             InvocationTargetException {
         
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
@@ -518,6 +521,7 @@ public class MethodUtils {
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
      * @param parameterTypes match these parameters - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -536,10 +540,10 @@ public class MethodUtils {
                     InvocationTargetException {
                     
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }        
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
 
         Method method = getMatchingAccessibleMethod(
@@ -564,6 +568,7 @@ public class MethodUtils {
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
      * @param arg use this argument
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -596,6 +601,7 @@ public class MethodUtils {
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
      * @param args use these arguments - treat null as empty array
+     * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
      * @throws InvocationTargetException wraps an exception thrown by the
@@ -612,7 +618,7 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
         Class parameterTypes [] = new Class[arguments];
@@ -930,7 +936,7 @@ public class MethodUtils {
         float bestMatchCost = Float.MAX_VALUE;
         float myCost = Float.MAX_VALUE;
         for (int i = 0, size = methods.length; i < size ; i++) {
-            if (methods[i].getName().equals(methodName)) {	
+            if (methods[i].getName().equals(methodName)) {
                 // log some trace information
                 if (log.isTraceEnabled()) {
                     log.trace("Found matching name:");
@@ -1207,7 +1213,7 @@ public class MethodUtils {
                 throw new IllegalArgumentException("Method Name cannot be null");
             }
             if (paramTypes == null) {
-                paramTypes = emptyClassArray;
+                paramTypes = EMPTY_CLASS_PARAMETERS;
             }
 
             this.cls = cls;

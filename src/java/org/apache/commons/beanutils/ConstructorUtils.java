@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -50,9 +50,9 @@ public class ConstructorUtils {
 
     // --------------------------------------------------------- Private Members
     /** An empty class array */
-    private static final Class[] emptyClassArray = new Class[0];
+    private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
     /** An empty object array */
-    private static final Object[] emptyObjectArray = new Object[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     // --------------------------------------------------------- Public Methods
 
@@ -112,7 +112,7 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (null == args) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
         Class parameterTypes[] = new Class[arguments];
@@ -151,10 +151,10 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }
 
         Constructor ctor =
@@ -222,7 +222,7 @@ public class ConstructorUtils {
             InvocationTargetException,
             InstantiationException {
         if (null == args) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
         Class parameterTypes[] = new Class[arguments];
@@ -262,11 +262,11 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (args == null) {
-            args = emptyObjectArray;
+            args = EMPTY_OBJECT_ARRAY;
         }
 
         if (parameterTypes == null) {
-            parameterTypes = emptyClassArray;
+            parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
 
         Constructor ctor = getAccessibleConstructor(klass, parameterTypes);

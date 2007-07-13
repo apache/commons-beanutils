@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -147,6 +147,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * <code>getName()</code> method of <code>java.lang.Class</code), which
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.
+     *
+     * @return the name of the DynaClass
      */
     public String getName() {
 
@@ -161,6 +163,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
+     * @return The descriptor for the specified property
      *
      * @exception IllegalArgumentException if no property name is specified
      */
@@ -183,6 +186,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * <p><strong>FIXME</strong> - Should we really be implementing
      * <code>getBeanInfo()</code> instead, which returns property descriptors
      * and a bunch of other stuff?</p>
+     *
+     * @return the set of properties for this DynaClass
      */
     public DynaProperty[] getDynaProperties() {
 
@@ -195,6 +200,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
      *
+     * @return A new <code>DynaBean</code> instance
      * @exception IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
      * @exception InstantiationException if this Class represents an abstract

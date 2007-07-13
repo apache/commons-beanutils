@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -241,6 +241,10 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * CloneNotSupportedException.
      *
      * <ul>
+     *
+     * @return a cloned instance of this bean map
+     * @throws CloneNotSupportedException if the underlying bean
+     * cannot be cloned
      */
     public Object clone() throws CloneNotSupportedException {
         BeanMap newMap = (BeanMap)super.clone();
@@ -411,6 +415,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *   if the given name is not a {@link String}; if the bean doesn't
      *   define a property with that name; or if the bean property with
      *   that name is read-only
+     * @throws ClassCastException if an error occurs creating the method args
      */
     public Object put(Object name, Object value) throws IllegalArgumentException, ClassCastException {
         if ( bean != null ) {
@@ -744,6 +749,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *   raises it
      * @throws IllegalArgumentException if any other exception is raised
      *   by {@link #convertType(Class,Object)}
+     * @throws ClassCastException if an error occurs creating the method args
      */
     protected Object[] createWriteMethodArguments( Method method, Object value ) throws IllegalAccessException, ClassCastException {            
         try {

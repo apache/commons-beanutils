@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
  
 package org.apache.commons.beanutils.locale;
 
@@ -49,25 +49,31 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
      */
     private static final ContextClassLoaderLocal 
-            localeBeansByClassLoader = new ContextClassLoaderLocal() {
+            LOCALE_BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
                         protected Object initialValue() {
                             return new LocaleBeanUtilsBean();
                         }
                     };
      
-     /** Gets singleton instance */
+     /**
+      * Gets singleton instance
+      *
+      * @return the singleton instance
+      */
      public static LocaleBeanUtilsBean getLocaleBeanUtilsInstance() {
-        return (LocaleBeanUtilsBean)localeBeansByClassLoader.get();
+        return (LocaleBeanUtilsBean)LOCALE_BEANS_BY_CLASSLOADER.get();
      }
  
     /** 
      * Sets the instance which provides the functionality for {@link LocaleBeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container. 
+     * This mechanism provides isolation for web apps deployed in the same container.
+     * 
+     * @param newInstance a new singleton instance
      */
     public static void setInstance(LocaleBeanUtilsBean newInstance) {
-        localeBeansByClassLoader.set(newInstance);
+        LOCALE_BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
     /** All logging goes through this logger */
@@ -113,13 +119,18 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     
     // --------------------------------------------------------- Public Methods
     
-    /** Gets the bean instance used for conversions */
+    /**
+     * Gets the bean instance used for conversions
+     *
+     * @return the locale converter bean instance
+     */
     public LocaleConvertUtilsBean getLocaleConvertUtils() {
         return localeConvertUtils;
     }
     
     /**
      * Gets the default Locale
+     * @return the default locale
      */
     public Locale getDefaultLocale() {
 
@@ -128,7 +139,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
 
     /**
-     * Sets the default Locale
+     * Sets the default Locale.
+     *
+     * @param locale the default locale
      */
     public void setDefaultLocale(Locale locale) {
 
@@ -138,6 +151,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Is the pattern to be applied localized
      * (Indicate whether the pattern is localized or not)
+     *
+     * @return <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
      */
     public boolean getApplyLocalized() {
 
@@ -147,6 +163,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Sets whether the pattern is applied localized
      * (Indicate whether the pattern is localized or not)
+     *
+     * @param newApplyLocalized <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
      */
     public void setApplyLocalized(boolean newApplyLocalized) {
 
@@ -166,7 +185,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -190,7 +210,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Return the value of the specified locale-sensitive indexed property
-     * of the specified bean, as a String using the default convertion pattern of
+     * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}. The zero-relative index
      * of the required value must be included (in square brackets) as a suffix
      * to the property name, or <code>IllegalArgumentException</code> will be thrown.
@@ -198,6 +218,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname[index]</code> of the property value
      *  to be extracted
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -219,14 +240,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Return the value of the specified locale-sensetive indexed property
-     * of the specified bean, as a String using the specified convertion pattern.
+     * of the specified bean, as a String using the specified conversion pattern.
      * The index is specified as a method parameter and
      * must *not* be included in the property name expression
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -246,7 +268,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Return the value of the specified locale-sensetive indexed property
-     * of the specified bean, as a String using the default convertion pattern of
+     * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.
      * The index is specified as a method parameter and
      * must *not* be included in the property name expression
@@ -254,6 +276,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
+     * @return The indexed property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -272,11 +295,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Return the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the specified
-     * convertion pattern.
+     * conversion pattern.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -296,10 +320,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Return the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * conversion pattern of the corresponding {@link LocaleConverter}.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
+     * @return The property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -317,14 +342,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Return the value of the specified mapped locale-sensitive property
-     * of the specified bean, as a String using the specified convertion pattern.
+     * of the specified bean, as a String using the specified conversion pattern.
      * The key is specified as a method parameter and must *not* be included in
      * the property name expression.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param key Lookup key of the property value to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -356,6 +382,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param key Lookup key of the property value to be extracted
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -384,7 +411,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname(index)</code> of the property value
      *  to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -410,7 +438,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Return the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * conversion pattern of the corresponding {@link LocaleConverter}.
      * The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
      * the property name, or <code>IllegalArgumentException</code> will be
@@ -419,6 +447,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param bean Bean whose property is to be extracted
      * @param name <code>propertyname(index)</code> of the property value
      *  to be extracted
+     * @return The mapped property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -443,7 +472,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The nested property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -470,10 +500,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Return the value of the (possibly nested) locale-sensitive property
      * of the specified name, for the specified bean, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * conversion pattern of the corresponding {@link LocaleConverter}.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
+     * @return The nested property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -496,12 +527,13 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Return the value of the specified locale-sensitive property
      * of the specified bean, no matter which property reference
-     * format is used, as a String using the specified convertion pattern.
+     * format is used, as a String using the specified conversion pattern.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
      *  to be extracted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The nested property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -523,11 +555,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * Return the value of the specified locale-sensitive property
      * of the specified bean, no matter which property reference
      * format is used, as a String using the default
-     * convertion pattern of the corresponding {@link LocaleConverter}.
+     * conversion pattern of the corresponding {@link LocaleConverter}.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
      *  to be extracted
+     * @return The property's value, converted to a String
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -548,7 +581,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Set the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination property
-     * using the default convertion pattern of the corresponding {@link LocaleConverter}.
+     * using the default conversion pattern of the corresponding {@link LocaleConverter}.
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
@@ -570,12 +603,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Set the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination
-     * property using the specified convertion pattern.
+     * property using the specified conversion pattern.
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -656,6 +689,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param target The bean
      * @param name The property name
      * @param propName The Simple name of target property
+     * @return The property's type
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -704,12 +738,13 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
      * Convert the specified value to the required type using the
-     * specified convertion pattern.
+     * specified conversion pattern.
      *
      * @param type The Java type of target property
      * @param index The indexed subscript value (if any)
      * @param value The value to be converted
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
+     * @return The converted value
      */
     protected Object convert(Class type, int index, Object value, String pattern) {
 
@@ -766,6 +801,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param type The Java type of target property
      * @param index The indexed subscript value (if any)
      * @param value The value to be converted
+     * @return The converted value
      */
     protected Object convert(Class type, int index, Object value) {
 
@@ -849,10 +885,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Resolve any nested expression to get the actual target bean.
+     * Resolve any nested expression to get the actual target property.
      *
      * @param bean The bean
      * @param name The property name
+     * @return The property's descriptor
      *
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
@@ -902,6 +939,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         private String key;        // Mapped key value (if any)
         private Object target;
 
+        /**
+         * Construct a descriptor instance for the target bean and property.
+         *
+         * @param target The target bean
+         * @param name The property name (includes indexed/mapped expr)
+         * @param propName The property name
+         * @param key The mapped property key (if any)
+         * @param index The indexed property index (if any)
+         */
         public Descriptor(Object target, String name, String propName, String key, int index) {
 
             setTarget(target);
@@ -911,42 +957,92 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             setIndex(index);
         }
 
+        /**
+         * Return the target bean.
+         *
+         * @return The descriptors target bean
+         */
         public Object getTarget() {
             return target;
         }
 
+        /**
+         * Set the target bean.
+         *
+         * @param target The target bean
+         */
         public void setTarget(Object target) {
             this.target = target;
         }
 
+        /**
+         * Return the mapped property key.
+         *
+         * @return the mapped property key (if any)
+         */
         public String getKey() {
             return key;
         }
 
+        /**
+         * Set the mapped property key.
+         *
+         * @param key The mapped property key (if any)
+         */
         public void setKey(String key) {
             this.key = key;
         }
 
+        /**
+         * Return indexed property index.
+         *
+         * @return indexed property index (if any)
+         */
         public int getIndex() {
             return index;
         }
 
+        /**
+         * Set the indexed property index.
+         *
+         * @param index The indexed property index (if any)
+         */
         public void setIndex(int index) {
             this.index = index;
         }
 
+        /**
+         * Return property name (includes indexed/mapped expr).
+         *
+         * @return The property name (includes indexed/mapped expr)
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         * Set the property name (includes indexed/mapped expr).
+         *
+         * @param name The property name (includes indexed/mapped expr)
+         */
         public void setName(String name) {
             this.name = name;
         }
 
+        /**
+         * Return the property name.
+         *
+         * @return The property name
+         */
         public String getPropName() {
             return propName;
         }
 
+        /**
+         * Set the property name.
+         *
+         * @param propName The property name
+         */
         public void setPropName(String propName) {
             this.propName = propName;
         }

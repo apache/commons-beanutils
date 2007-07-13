@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -145,7 +145,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#clearDescriptors  
      */
     public static void clearDescriptors() {
-	
+
         PropertyUtilsBean.getInstance().clearDescriptors();
 
     }
@@ -339,7 +339,7 @@ public class PropertyUtils {
      * @deprecated This method should not be exposed
      */
     public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
-	
+
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
 
     }
@@ -357,7 +357,7 @@ public class PropertyUtils {
      */
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 
-	return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
+        return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
 
     }
 
@@ -524,7 +524,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-	return PropertyUtilsBean.getInstance().getPropertyEditorClass(bean, name);
+        return PropertyUtilsBean.getInstance().getPropertyEditorClass(bean, name);
 
     }
 
@@ -668,7 +668,7 @@ public class PropertyUtils {
      */
     public static boolean isWriteable(Object bean, String name) {
 
-	return PropertyUtilsBean.getInstance().isWriteable(bean, name);
+        return PropertyUtilsBean.getInstance().isWriteable(bean, name);
     }
 
 

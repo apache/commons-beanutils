@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -435,6 +435,7 @@ public class FastHashMap extends HashMap {
     /**
      * Return a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a <code>Map.Entry</code>.
+     * @return the set of map Map entries
      */
     public Set entrySet() {
         return new EntrySet();
@@ -442,6 +443,7 @@ public class FastHashMap extends HashMap {
 
     /**
      * Return a set view of the keys contained in this map.
+     * @return the set of the Map's keys
      */
     public Set keySet() {
         return new KeySet();
@@ -449,6 +451,7 @@ public class FastHashMap extends HashMap {
 
     /**
      * Return a collection view of the values contained in this map.
+     * @return the set of the Map's values
      */
     public Collection values() {
         return new Values();

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
  
 package org.apache.commons.beanutils.locale;
 
@@ -41,7 +41,7 @@ public class LocaleConvertUtils {
      * no <code>Locale</code> is passed to a method.</p>
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
-     *
+     * @return the default locale
      * @see LocaleConvertUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {
@@ -55,6 +55,7 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param locale the default locale
      * @see LocaleConvertUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(Locale locale) {
@@ -67,6 +68,8 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @return <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
      * @see LocaleConvertUtilsBean#getApplyLocalized()
      */
     public static boolean getApplyLocalized() {
@@ -78,6 +81,8 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param newApplyLocalized <code>true</code> if pattern is localized,
+     * otherwise <code>false</code>
      * @see LocaleConvertUtilsBean#setApplyLocalized(boolean)
      */
     public static void setApplyLocalized(boolean newApplyLocalized) {
@@ -91,6 +96,8 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The Value to be converted
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(Object)
      */
     public static String convert(Object value) {
@@ -99,10 +106,13 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Convert the specified locale-sensitive value into a String
-     * using the convertion pattern.</p>
+     * using the conversion pattern.</p>
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The Value to be converted
+     * @param pattern       The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(Object, String)
      */
     public static String convert(Object value, String pattern) {
@@ -115,6 +125,10 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The Value to be converted
+     * @param locale The locale
+     * @param pattern The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(Object, Locale, String)
      */
     public static String convert(Object value, Locale locale, String pattern) {
@@ -128,6 +142,9 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The String scalar value to be converted
+     * @param clazz The Data type to which this value should be converted.
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String, Class)
      */
     public static Object convert(String value, Class clazz) {
@@ -142,6 +159,10 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The String scalar value to be converted
+     * @param clazz The Data type to which this value should be converted.
+     * @param pattern The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String, Class, String)
      */
     public static Object convert(String value, Class clazz, String pattern) {
@@ -156,6 +177,11 @@ public class LocaleConvertUtils {
      *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param value The String scalar value to be converted
+     * @param clazz The Data type to which this value should be converted.
+     * @param locale The locale
+     * @param pattern The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String, Class, Locale, String)
      */
     public static Object convert(String value, Class clazz, Locale locale, String pattern) {
@@ -169,6 +195,10 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param values Value to be converted (may be null)
+     * @param clazz Java array or element class to be converted to
+     * @param pattern The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, String)
      */
     public static Object convert(String values[], Class clazz, String pattern) {
@@ -182,6 +212,9 @@ public class LocaleConvertUtils {
     * 
     * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
     *
+    * @param values Value to be converted (may be null)
+    * @param clazz Java array or element class to be converted to
+    * @return the converted value
     * @see LocaleConvertUtilsBean#convert(String[], Class)
     */
    public static Object convert(String values[], Class clazz) {
@@ -195,6 +228,11 @@ public class LocaleConvertUtils {
      *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param values Value to be converted (may be null)
+     * @param clazz Java array or element class to be converted to
+     * @param locale The locale
+     * @param pattern The convertion pattern
+     * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
     public static Object convert(String values[], Class clazz, Locale locale, String pattern) {
@@ -208,6 +246,10 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param converter The LocaleConverter to be registered
+     * @param clazz The Destination class for conversions performed by this
+     *  Converter
+     * @param locale The locale
      * @see LocaleConvertUtilsBean#register(LocaleConverter, Class, Locale)
      */
     public static void register(LocaleConverter converter, Class clazz, Locale locale) {
@@ -233,6 +275,7 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param locale The locale
      * @see LocaleConvertUtilsBean#deregister(Locale)
      */
     public static void deregister(Locale locale) {
@@ -246,6 +289,8 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param clazz Class for which to remove a registered Converter
+     * @param locale The locale
      * @see LocaleConvertUtilsBean#deregister(Class, Locale)
      */
     public static void deregister(Class clazz, Locale locale) {
@@ -260,6 +305,9 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param clazz Class for which to return a registered Converter
+     * @param locale The Locale
+     * @return The registered locale Converter, if any
      * @see LocaleConvertUtilsBean#lookup(Class, Locale)
      */
     public static LocaleConverter lookup(Class clazz, Locale locale) {
@@ -272,6 +320,9 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param locale The Locale
+     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
+     *  the specified locale.
      * @see LocaleConvertUtilsBean#lookup(Locale)
      */
     protected static FastHashMap lookup(Locale locale) {
@@ -283,6 +334,9 @@ public class LocaleConvertUtils {
      * 
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
+     * @param locale The Locale
+     * @return The FastHashMap instance contains the all {@link LocaleConverter} types
+     *  for the specified locale.
      * @see LocaleConvertUtilsBean#create(Locale)
      */
     protected static FastHashMap create(Locale locale) {

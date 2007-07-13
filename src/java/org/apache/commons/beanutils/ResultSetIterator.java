@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -87,6 +87,8 @@ public class ResultSetIterator implements DynaBean, Iterator {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
+     * @return <code>true<code> if the mapped property contains a value for
+     * the specified key, otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -103,6 +105,7 @@ public class ResultSetIterator implements DynaBean, Iterator {
      * Return the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
+     * @return The property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -127,6 +130,7 @@ public class ResultSetIterator implements DynaBean, Iterator {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
+     * @return The indexed property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -151,6 +155,7 @@ public class ResultSetIterator implements DynaBean, Iterator {
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
+     * @return The mapped property's value
      *
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
@@ -168,6 +173,8 @@ public class ResultSetIterator implements DynaBean, Iterator {
     /**
      * Return the <code>DynaClass</code> instance that describes the set of
      * properties available for this DynaBean.
+     *
+     * @return The associated DynaClass
      */
     public DynaClass getDynaClass() {
 
@@ -274,6 +281,9 @@ public class ResultSetIterator implements DynaBean, Iterator {
 
     /**
      * <p>Return <code>true</code> if the iteration has more elements.</p>
+     *
+     * @return <code>true</code> if the result set has another
+     * row, otherwise <code>false</code>
      */
     public boolean hasNext() {
 
@@ -289,6 +299,8 @@ public class ResultSetIterator implements DynaBean, Iterator {
 
     /**
      * <p>Return the next element in the iteration.</p>
+     *
+     * @return advance to the new row and return this
      */
     public Object next() {
 
