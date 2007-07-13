@@ -16,10 +16,9 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.Converter;
-
 /**
- * Standard {@link Converter} implementation that converts an incoming
+ * {@link org.apache.commons.beanutils.Converter}
+ * implementation that converts an incoming
  * object into a <code>java.lang.String</code> object.
  * <p>
  * Note that ConvertUtils really is designed to do string->object conversions,

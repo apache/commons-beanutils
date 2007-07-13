@@ -36,9 +36,12 @@ import org.apache.commons.logging.LogFactory;
  *    have the following <code>get()</code> and <code>set()</code> methods for
  *    each of these types:</p>
  *    <ul>
- *        <li><i>Simple</i> property methods - <code>get(name)</code> and <code>set(name, value)</code></li>
- *        <li><i>Indexed</i> property methods - <code>get(name, index)</code> and <code>set(name, index, value)</code></li>
- *        <li><i>Mapped</i> property methods - <code>get(name, key)</code> and <code>set(name, key, value)</code></li>
+ *        <li><i>Simple</i> property methods - <code>get(name)</code> and
+ *                          <code>set(name, value)</code></li>
+ *        <li><i>Indexed</i> property methods - <code>get(name, index)</code> and
+ *                          <code>set(name, index, value)</code></li>
+ *        <li><i>Mapped</i> property methods - <code>get(name, key)</code> and
+ *                          <code>set(name, key, value)</code></li>
  *    </ul>
  *
  * <p><b><u>Getting Property Values</u></b></p>
@@ -721,7 +724,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
             }
             catch (Exception ex) {
                 throw new IllegalArgumentException
-                    ("Error instantiating mapped property of type '" + type.getName() + "' for '" + name + "' " + ex);
+                    ("Error instantiating mapped property of type '" +
+                            type.getName() + "' for '" + name + "' " + ex);
             }
         } else {
 
@@ -745,7 +749,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
         catch (Exception ex) {
             if (logger().isWarnEnabled()) {
-                logger().warn("Error instantiating DynaBean property of type '" + type.getName() + "' for '" + name + "' " + ex);
+                logger().warn("Error instantiating DynaBean property of type '" +
+                        type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }

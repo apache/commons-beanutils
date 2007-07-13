@@ -236,9 +236,10 @@ public class MethodUtils {
                 object.getClass(),
                 methodName,
                 parameterTypes);
-        if (method == null)
+        if (method == null) {
             throw new NoSuchMethodException("No such accessible method: " +
                     methodName + "() on object: " + object.getClass().getName());
+        }
         return method.invoke(object, args);
     }
 
@@ -357,9 +358,10 @@ public class MethodUtils {
                 object.getClass(),
                 methodName,
                 parameterTypes);
-        if (method == null)
+        if (method == null) {
             throw new NoSuchMethodException("No such accessible method: " +
                     methodName + "() on object: " + object.getClass().getName());
+        }
         return method.invoke(object, args);
 
     }
@@ -369,7 +371,7 @@ public class MethodUtils {
      * types given.</p>
      *
      * <p>This uses reflection to invoke the method obtained from a call to
-     * {@link #getAccessibleMethod}.</p>
+     * {@link #getAccessibleMethod(Class, String, Class[])}.</p>
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
@@ -405,9 +407,10 @@ public class MethodUtils {
                 objectClass,
                 methodName,
                 parameterTypes);
-        if (method == null)
+        if (method == null) {
             throw new NoSuchMethodException("No such accessible method: " +
                     methodName + "() on class: " + objectClass.getName());
+        }
         return method.invoke(null, args);
 
     }
@@ -416,7 +419,7 @@ public class MethodUtils {
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
      * <p>The behaviour of this method is less deterministic 
-     * than {@link #invokeExactMethod}. 
+     * than {@link #invokeExactMethod(Object, String, Object[], Class[])}. 
      * It loops through all methods with names that match
      * and then executes the first it finds with compatable parameters.</p>
      *
@@ -550,9 +553,10 @@ public class MethodUtils {
                 objectClass,
                 methodName,
                 parameterTypes);
-        if (method == null)
+        if (method == null) {
             throw new NoSuchMethodException("No such accessible method: " +
                     methodName + "() on class: " + objectClass.getName());
+        }
         return method.invoke(null, args);
     }
 
@@ -596,7 +600,7 @@ public class MethodUtils {
      * types.</p>
      *
      * <p> This uses reflection to invoke the method obtained from a call to
-     * {@link #getAccessibleMethod}.</p>
+     * {@link #getAccessibleMethod(Class, String, Class[])}.</p>
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
@@ -791,8 +795,9 @@ public class MethodUtils {
             for (int i = 0; i < interfaces.length; i++) {
 
                 // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers()))
+                if (!Modifier.isPublic(interfaces[i].getModifiers())) {
                     continue;
+                }
 
                 // Does the method exist on this interface?
                 try {
@@ -803,24 +808,27 @@ public class MethodUtils {
                      * method returns null.
                      */
                 }
-                if (method != null)
+                if (method != null) {
                     break;
+                }
 
                 // Recursively check our parent interfaces
                 method =
                         getAccessibleMethodFromInterfaceNest(interfaces[i],
                                 methodName,
                                 parameterTypes);
-                if (method != null)
+                if (method != null) {
                     break;
+                }
 
             }
 
         }
 
         // If we found a method return it
-        if (method != null)
+        if (method != null) {
             return (method);
+        }
 
         // We did not find anything
         return (null);

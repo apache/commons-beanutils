@@ -77,13 +77,16 @@ public class BasicDynaClass implements DynaClass, Serializable {
                           DynaProperty properties[]) {
 
         super();
-        if (name != null)
+        if (name != null) {
             this.name = name;
-        if (dynaBeanClass == null)
+        }
+        if (dynaBeanClass == null) {
             dynaBeanClass = BasicDynaBean.class;
+        }
         setDynaBeanClass(dynaBeanClass);
-        if (properties != null)
+        if (properties != null) {
             setProperties(properties);
+        }
 
     }
 
@@ -258,14 +261,16 @@ public class BasicDynaClass implements DynaClass, Serializable {
     protected void setDynaBeanClass(Class dynaBeanClass) {
 
         // Validate the argument type specified
-        if (dynaBeanClass.isInterface())
+        if (dynaBeanClass.isInterface()) {
             throw new IllegalArgumentException
                     ("Class " + dynaBeanClass.getName() +
                     " is an interface, not a class");
-        if (!DynaBean.class.isAssignableFrom(dynaBeanClass))
+        }
+        if (!DynaBean.class.isAssignableFrom(dynaBeanClass)) {
             throw new IllegalArgumentException
                     ("Class " + dynaBeanClass.getName() +
                     " does not implement DynaBean");
+        }
 
         // Identify the Constructor we will use in newInstance()
         try {

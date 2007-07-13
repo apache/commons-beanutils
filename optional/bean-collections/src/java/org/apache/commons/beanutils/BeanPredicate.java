@@ -115,7 +115,7 @@ public class BeanPredicate implements Predicate {
 
     /** 
      * Sets the <code>Predicate</code> to be applied to the value of the named property
-     * during {@link evaluate}.
+     * during {@link #evaluate(Object)}.
      * @param predicate <code>Predicate</code>, not null
      */
     public void setPredicate(Predicate predicate) {

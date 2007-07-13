@@ -20,7 +20,8 @@ import java.util.Map;
 import java.util.Iterator;
 
 /**
- * <p>Provides a <i>light weight</i> <code>DynaBean</code> facade to a <code>Map</code> with <i>lazy</i> map/list processing.</p>
+ * <p>Provides a <i>light weight</i> <code>DynaBean</code> facade to a <code>Map</code>
+ *  with <i>lazy</i> map/list processing.</p>
  *
  * <p>Its a <i>light weight</i> <code>DynaBean</code> implementation because there is no
  *    actual <code>DynaClass</code> associated with this <code>DynaBean</code> - in fact
@@ -214,8 +215,9 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     public DynaProperty getDynaProperty(String name) {
 
-        if (name == null)
+        if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
+        }
 
         // If it doesn't exist and returnNull is false
         // create a new DynaProperty
@@ -341,8 +343,9 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
-        if (isRestricted())
+        if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
+        }
 
         Object value = values.get(name);
 

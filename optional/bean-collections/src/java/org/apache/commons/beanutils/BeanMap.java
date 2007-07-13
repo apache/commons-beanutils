@@ -321,7 +321,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * BeanMap are fixed).
      */
     public void clear() {
-        if(bean == null) return;
+        if(bean == null) {
+            return;
+        }
 
         Class beanClass = null;
         try {
@@ -422,7 +424,8 @@ public class BeanMap extends AbstractMap implements Cloneable {
             Object oldValue = get( name );
             Method method = getWriteMethod( name );
             if ( method == null ) {
-                throw new IllegalArgumentException( "The bean of type: "+ bean.getClass().getName() + " has no property called: " + name );
+                throw new IllegalArgumentException( "The bean of type: "+ 
+                        bean.getClass().getName() + " has no property called: " + name );
             }
             try {
                 Object[] arguments = createWriteMethodArguments( method, value );
@@ -654,7 +657,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
     }
 
     private void initialise() {
-        if(getBean() == null) return;
+        if(getBean() == null) {
+            return;
+        }
 
         Class  beanClass = getBean().getClass();
         try {
@@ -751,7 +756,8 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *   by {@link #convertType(Class,Object)}
      * @throws ClassCastException if an error occurs creating the method args
      */
-    protected Object[] createWriteMethodArguments( Method method, Object value ) throws IllegalAccessException, ClassCastException {            
+    protected Object[] createWriteMethodArguments( Method method, Object value ) 
+        throws IllegalAccessException, ClassCastException {            
         try {
             if ( value != null ) {
                 Class[] types = method.getParameterTypes();

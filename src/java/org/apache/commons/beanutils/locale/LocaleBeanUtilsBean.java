@@ -18,7 +18,14 @@
 package org.apache.commons.beanutils.locale;
 
 
-import org.apache.commons.beanutils.*;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.apache.commons.beanutils.DynaBean;
+import org.apache.commons.beanutils.DynaClass;
+import org.apache.commons.beanutils.DynaProperty;
+import org.apache.commons.beanutils.MappedPropertyDescriptor;
+import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.logging.Log;

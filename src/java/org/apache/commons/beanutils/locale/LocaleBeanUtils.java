@@ -18,12 +18,11 @@
 package org.apache.commons.beanutils.locale;
 
 
-import org.apache.commons.beanutils.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
+
 
 
 /**

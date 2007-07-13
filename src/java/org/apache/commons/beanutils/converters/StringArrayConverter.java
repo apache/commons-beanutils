@@ -21,11 +21,10 @@ package org.apache.commons.beanutils.converters;
 
 import java.util.List;
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
 
 
 /**
- * Standard {@link Converter} implementation that converts an incoming
+ * Standard {@link org.apache.commons.beanutils.Converter} implementation that converts an incoming
  * String into an array of String objects. On a conversion failure, returns
  * a specified default value or throws a {@link ConversionException} depending
  * on how this instance is constructed.
@@ -46,8 +45,8 @@ public final class StringArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw
+     * a {@link ConversionException} if a conversion error occurs.
      */
     public StringArrayConverter() {
 
@@ -58,8 +57,8 @@ public final class StringArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return
+     * the specified default value if a conversion error occurs.
      *
      * @param defaultValue The default value to be returned
      */

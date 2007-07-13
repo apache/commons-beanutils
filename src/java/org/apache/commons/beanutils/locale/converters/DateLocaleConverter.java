@@ -286,10 +286,12 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         String strValue = value.toString();
         Object parsedValue = formatter.parseObject(strValue, pos);
         if (pos.getErrorIndex() > -1) {
-            throw new ConversionException("Error parsing date '" + value + "' at position="+ pos.getErrorIndex());
+            throw new ConversionException("Error parsing date '" + value +
+                    "' at position="+ pos.getErrorIndex());
         }
         if (pos.getIndex() < strValue.length()) {
-            throw new ConversionException("Date '" + value + "' contains unparsed characters from position=" + pos.getIndex());
+            throw new ConversionException("Date '" + value +
+                    "' contains unparsed characters from position=" + pos.getIndex());
         }
 
         return parsedValue;
@@ -304,8 +306,9 @@ public class DateLocaleConverter extends BaseLocaleConverter {
       */
      private String convertLocalizedPattern(String localizedPattern, Locale locale) {
         
-         if (localizedPattern == null)
+         if (localizedPattern == null) {
             return null;
+         }
          
          // Note that this is a little obtuse.
          // However, it is the best way that anyone can come up with 
@@ -351,9 +354,10 @@ public class DateLocaleConverter extends BaseLocaleConverter {
                 } else if ((thisChar >= 'a' && thisChar <= 'z') || 
                            (thisChar >= 'A' && thisChar <= 'Z')) {
                     int index = fromChars.indexOf(thisChar );
-                    if (index == -1)
+                    if (index == -1) {
                         throw new IllegalArgumentException(
                             "Illegal pattern character '" + thisChar + "'");
+                    }
                     thisChar = toChars.charAt(index);
                 }
             }

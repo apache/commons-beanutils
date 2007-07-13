@@ -24,6 +24,8 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
@@ -130,6 +132,7 @@ import org.apache.commons.logging.LogFactory;
 public class ConvertUtilsBean {
     
     private static final Integer ZERO = new Integer(0);
+    private static final Character SPACE = new Character(' ');
 
     // ------------------------------------------------------- Class Methods
     /**
@@ -153,8 +156,6 @@ public class ConvertUtilsBean {
      * The <code>Log</code> instance for this class.
      */
     private Log log = LogFactory.getLog(ConvertUtils.class);
-
-    private int defaultArraySize = 0;
 
     // ------------------------------------------------------- Constructors
 
@@ -632,7 +633,7 @@ public class ConvertUtilsBean {
     public void registerPrimitives(boolean throwException) {
         register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
         register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
-        register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(new Character(' ')));
+        register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(SPACE));
         register(Double.TYPE,    throwException ? new DoubleConverter()     : new DoubleConverter(ZERO));
         register(Float.TYPE,     throwException ? new FloatConverter()      : new FloatConverter(ZERO));
         register(Integer.TYPE,   throwException ? new IntegerConverter()    : new IntegerConverter(ZERO));
@@ -668,14 +669,14 @@ public class ConvertUtilsBean {
     public void registerStandard(boolean throwException, boolean defaultNull) {
 
         Number     defaultNumber     = defaultNull ? null : ZERO;
-        BigDecimal bigDecimalDefault = defaultNull ? null : new BigDecimal("0.0");
-        BigInteger bigIntegerDefault = defaultNull ? null : new BigInteger("0");
+        BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
+        BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
         Boolean    booleanDefault    = defaultNull ? null : Boolean.FALSE;
-        Character  charDefault       = defaultNull ? null : new Character(' ');
+        Character  charDefault       = defaultNull ? null : SPACE;
         String     stringDefault     = defaultNull ? null : "";
 
-        register(BigDecimal.class, throwException ? new BigDecimalConverter() : new BigDecimalConverter(bigDecimalDefault));
-        register(BigInteger.class, throwException ? new BigIntegerConverter() : new BigIntegerConverter(bigIntegerDefault));
+        register(BigDecimal.class, throwException ? new BigDecimalConverter() : new BigDecimalConverter(bigDecDeflt));
+        register(BigInteger.class, throwException ? new BigIntegerConverter() : new BigIntegerConverter(bigIntDeflt));
         register(Boolean.class,    throwException ? new BooleanConverter()    : new BooleanConverter(booleanDefault));
         register(Byte.class,       throwException ? new ByteConverter()       : new ByteConverter(defaultNumber));
         register(Character.class,  throwException ? new CharacterConverter()  : new CharacterConverter(charDefault));
@@ -707,14 +708,14 @@ public class ConvertUtilsBean {
      * <code>false</code> if a default value should be used.
      */
     public void registerOther(boolean throwException) {
-        register(Class.class,              throwException ? new ClassConverter()        : new ClassConverter(null));
-        register(java.util.Date.class,     throwException ? new DateConverter()         : new DateConverter(null));
-        register(java.util.Calendar.class, throwException ? new CalendarConverter()     : new CalendarConverter(null));
-        register(File.class,               throwException ? new FileConverter()         : new FileConverter(null));
-        register(java.sql.Date.class,      throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
-        register(java.sql.Time.class,      throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
-        register(java.sql.Timestamp.class, throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
-        register(URL.class,                throwException ? new URLConverter()          : new URLConverter(null));
+        register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
+        register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
+        register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
+        register(File.class,          throwException ? new FileConverter()         : new FileConverter(null));
+        register(java.sql.Date.class, throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
+        register(java.sql.Time.class, throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
+        register(Timestamp.class,     throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
+        register(URL.class,           throwException ? new URLConverter()          : new URLConverter(null));
     }
 
     /**
@@ -754,14 +755,14 @@ public class ConvertUtilsBean {
         registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
 
         // Other
-        registerArrayConverter(Class.class,              new ClassConverter(),        throwException, defaultArraySize);
-        registerArrayConverter(java.util.Date.class,     new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(java.util.Calendar.class, new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(File.class,               new FileConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Date.class,      new SqlDateConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Time.class,      new SqlTimeConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Timestamp.class, new SqlTimestampConverter(), throwException, defaultArraySize);
-        registerArrayConverter(URL.class,                new URLConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Class.class,          new ClassConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(java.util.Date.class, new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Calendar.class,       new DateConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(File.class,           new FileConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(), throwException, defaultArraySize);
+        registerArrayConverter(URL.class,            new URLConverter(),          throwException, defaultArraySize);
 
     }
 
@@ -775,7 +776,8 @@ public class ConvertUtilsBean {
      * value used in the event of a conversion error
      * @param defaultArraySize The size of the default array
      */
-    private void registerArrayConverter(Class componentType, Converter componentConverter, boolean throwException, int defaultArraySize) {
+    private void registerArrayConverter(Class componentType, Converter componentConverter,
+            boolean throwException, int defaultArraySize) {
         Class arrayType = Array.newInstance(componentType, 0).getClass();
         Converter arrayConverter = null;
         if (throwException) {

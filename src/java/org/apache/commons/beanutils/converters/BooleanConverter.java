@@ -17,11 +17,10 @@
 package org.apache.commons.beanutils.converters;
 
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
 
 /**
- * Generic {@link Converter} implementaion that handles conversion
- * to and from <b>array</b> objects.
+ * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
+ * to and from <b>Boolean</b> objects.
  * {@link org.apache.commons.beanutils.Converter} implementaion that
  * handles conversion to and from <b>java.lang.Boolean</b> objects.
  * <p>
@@ -60,7 +59,7 @@ public final class BooleanConverter extends AbstractConverter {
 
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a {@link ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      */
@@ -70,7 +69,7 @@ public final class BooleanConverter extends AbstractConverter {
 
 
     /**
-     * Create a {@link Converter} that will return the specified default value
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return the specified default value
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      *
@@ -89,7 +88,7 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a {@link ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      * <p>
@@ -111,8 +110,8 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return
+     * the specified default value if a conversion error occurs.
      * <p>
      * The provided string arrays are copied, so that changes to the elements
      * of the array after this call is made do not affect this object.
@@ -197,13 +196,15 @@ public final class BooleanConverter extends AbstractConverter {
         String stringValue = value.toString().toLowerCase();
 
         for(int i=0; i<trueStrings.length; ++i) {
-            if (trueStrings[i].equals(stringValue))
+            if (trueStrings[i].equals(stringValue)) {
                 return Boolean.TRUE;
+            }
         }
 
         for(int i=0; i<falseStrings.length; ++i) {
-            if (falseStrings[i].equals(stringValue))
+            if (falseStrings[i].equals(stringValue)) {
                 return Boolean.FALSE;
+            }
         }
         
         throw new ConversionException("Cna't convert value '" + value + "' to a Boolean");

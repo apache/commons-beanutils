@@ -35,7 +35,9 @@ import java.lang.reflect.InvocationTargetException;
  * be.
  * <dl>
  *    <dt>
- *       <strong><code><pre>public BeanPropertyValueEqualsPredicate( String propertyName, Object propertyValue )</pre></code></strong>
+ *       <strong><code>
+ *           <pre>public BeanPropertyValueEqualsPredicate( String propertyName, Object propertyValue )</pre>
+ *       </code></strong>
  *    </dt>
  *    <dd>
  *       Will create a <code>Predicate</code> that will evaluate the target object and return

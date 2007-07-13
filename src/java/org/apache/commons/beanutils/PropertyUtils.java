@@ -23,7 +23,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.apache.commons.beanutils.expression.Resolver;
 import org.apache.commons.collections.FastHashMap;
 
 
@@ -43,7 +42,7 @@ import org.apache.commons.collections.FastHashMap;
  * @author Scott Sanders
  * @version $Revision$ $Date$
  * @see PropertyUtilsBean
- * @see Resolver
+ * @see org.apache.commons.beanutils.expression.Resolver
  */
 
 public class PropertyUtils {
@@ -57,7 +56,8 @@ public class PropertyUtils {
      * indexed reference.
      *
      * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link Resolver} implementation being used.
+     * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
+     * implementation being used.
      */
     public static final char INDEXED_DELIM = '[';
 
@@ -67,7 +67,8 @@ public class PropertyUtils {
      * indexed reference.
      *
      * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link Resolver} implementation being used.
+     * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
+     * implementation being used.
      */
     public static final char INDEXED_DELIM2 = ']';
 
@@ -76,7 +77,8 @@ public class PropertyUtils {
      * The delimiter that preceeds the key of a mapped property.
      *
      * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link Resolver} implementation being used.
+     * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
+     * implementation being used.
      */
     public static final char MAPPED_DELIM = '(';
 
@@ -85,7 +87,8 @@ public class PropertyUtils {
      * The delimiter that follows the key of a mapped property.
      *
      * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link Resolver} implementation being used.
+     * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
+     * implementation being used.
      */
     public static final char MAPPED_DELIM2 = ')';
 
@@ -94,7 +97,8 @@ public class PropertyUtils {
      * The delimiter that separates the components of a nested reference.
      *
      * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link Resolver} implementation being used.
+     * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
+     * implementation being used.
      */
     public static final char NESTED_DELIM = '.';
 
@@ -551,7 +555,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#getPropertyType
+     * @see PropertyUtilsBean#getPropertyType(Object, String)
      */
     public static Class getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,

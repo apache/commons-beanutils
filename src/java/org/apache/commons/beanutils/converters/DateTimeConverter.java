@@ -26,7 +26,7 @@ import java.text.ParsePosition;
 import org.apache.commons.beanutils.ConversionException;
 
 /**
- * Generic {@link org.apache.commons.beanutils.Converter} implementaion
+ * {@link org.apache.commons.beanutils.Converter} implementaion
  * that handles conversion to and from <b>date/time</b> objects.
  * <p>
  * This implementation handles conversion for the following

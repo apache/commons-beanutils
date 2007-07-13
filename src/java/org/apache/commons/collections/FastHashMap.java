@@ -592,7 +592,9 @@ public class FastHashMap extends HashMap {
 
 
         public boolean equals(Object o) {
-            if (o == this) return true;
+            if (o == this) {
+                return true;
+            }
             if (fast) {
                 return get(map).equals(o);
             } else {

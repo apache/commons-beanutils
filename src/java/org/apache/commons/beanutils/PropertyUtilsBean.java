@@ -26,7 +26,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -329,8 +328,9 @@ public class PropertyUtilsBean {
                 getPropertyDescriptors(bean);
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
-                if (descriptors[i].getReadMethod() != null)
+                if (descriptors[i].getReadMethod() != null) {
                     description.put(name, getProperty(bean, name));
+                }
             }
         }
         return (description);
@@ -898,8 +898,9 @@ public class PropertyUtilsBean {
         if (descriptors != null) {
             
             for (int i = 0; i < descriptors.length; i++) {
-                if (name.equals(descriptors[i].getName()))
+                if (name.equals(descriptors[i].getName())) {
                     return (descriptors[i]);
+                }
             }
         }
 

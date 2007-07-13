@@ -17,7 +17,6 @@
  
 package org.apache.commons.beanutils.locale;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.ByteLocaleConverter;
@@ -171,7 +170,8 @@ public class LocaleConvertUtilsBean {
      * @param value The Value to be converted
      * @return the converted value
      *
-     * @exception org.apache.commons.beanutils.ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public String convert(Object value) {
         return convert(value, defaultLocale, null);
@@ -185,7 +185,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern       The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public String convert(Object value, String pattern) {
         return convert(value, defaultLocale, pattern);
@@ -200,7 +201,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public String convert(Object value, Locale locale, String pattern) {
 
@@ -217,7 +219,8 @@ public class LocaleConvertUtilsBean {
      * @param clazz The Data type to which this value should be converted.
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public Object convert(String value, Class clazz) {
 
@@ -234,7 +237,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public Object convert(String value, Class clazz, String pattern) {
 
@@ -252,7 +256,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public Object convert(String value, Class clazz, Locale locale, String pattern) {
 
@@ -283,7 +288,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public Object convert(String values[], Class clazz, String pattern) {
 
@@ -298,7 +304,8 @@ public class LocaleConvertUtilsBean {
     * @param clazz Java array or element class to be converted to
     * @return the converted value
     *
-    * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
     */
    public Object convert(String values[], Class clazz) {
 
@@ -315,7 +322,8 @@ public class LocaleConvertUtilsBean {
      * @param pattern The convertion pattern
      * @return the converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws org.apache.commons.beanutils.ConversionException if thrown by an
+     * underlying Converter
      */
     public Object convert(String values[], Class clazz, Locale locale, String pattern) {
 

@@ -20,7 +20,6 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 import java.io.Serializable;
 import java.util.Comparator;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.comparators.ComparableComparator;
 
 /**
@@ -178,15 +177,23 @@ public class BeanComparator implements Comparator, Serializable {
      * @return whether the the comparators are equal or not
      */
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BeanComparator)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BeanComparator)) {
+            return false;
+        }
 
         final BeanComparator beanComparator = (BeanComparator) o;
 
-        if (!comparator.equals(beanComparator.comparator)) return false;
+        if (!comparator.equals(beanComparator.comparator)) {
+            return false;
+        }
         if (property != null)
         {
-            if (!property.equals(beanComparator.property)) return false;
+            if (!property.equals(beanComparator.property)) {
+                return false;
+            }
         }
         else
         {

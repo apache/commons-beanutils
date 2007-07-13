@@ -33,7 +33,9 @@ import java.lang.reflect.InvocationTargetException;
  * what property will be updated and with what value.
  * <dl>
  *    <dt>
- *       <b><code><pre>public BeanPropertyValueChangeClosure( String propertyName, Object propertyValue )</pre></code></b>
+ *       <b><code>
+ *           <pre>public BeanPropertyValueChangeClosure( String propertyName, Object propertyValue )</pre>
+ *       </code></b>
  *    </dt>
  *    <dd>
  *       Will create a <code>Closure</code> that will update an object by setting the property

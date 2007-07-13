@@ -21,11 +21,10 @@ package org.apache.commons.beanutils.converters;
 
 import java.util.List;
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
 
 
 /**
- * <p>Standard {@link Converter} implementation that converts an incoming
+ * <p>Standard {@link org.apache.commons.beanutils.Converter} implementation that converts an incoming
  * String into a primitive array of boolean.  On a conversion failure, returns
  * a specified default value or throws a {@link ConversionException} depending
  * on how this instance is constructed.</p>
@@ -48,8 +47,8 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Create a {@link Converter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw
+     * a {@link ConversionException} if a conversion error occurs.
      *
      * <p>Conversion of strings to boolean values will be done via a default
      * instance of class BooleanConverter.</p>
@@ -63,8 +62,8 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return
+     * the specified default value if a conversion error occurs.
      *
      * <p>Conversion of strings to boolean values will be done via a default
      * instance of class BooleanConverter.</p>
@@ -80,8 +79,8 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
     /**
-     * Create a {@link Converter} that will return the specified default value
-     * if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils.Converter} that will return
+     * the specified default value if a conversion error occurs.
      *
      * <p>Conversion of strings to boolean values will be done via the
      * specified converter.</p>

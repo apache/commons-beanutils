@@ -27,10 +27,9 @@ import java.text.DecimalFormatSymbols;
 import java.text.ParsePosition;
 
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.Converter;
 
 /**
- * Generic {@link Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
  * to and from <b>java.lang.Number</b> objects.
  * <p>
  * This implementation handles conversion for the following

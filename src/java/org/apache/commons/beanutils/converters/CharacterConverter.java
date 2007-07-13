@@ -16,10 +16,8 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.Converter;
-
 /**
- * {@link Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
  * to and from <b>java.lang.Character</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a

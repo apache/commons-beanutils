@@ -78,7 +78,8 @@ package org.apache.commons.beanutils.expression;
  *   </ul>
  *   <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean}</li>
  *   <ul>
- *       <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean#setProperty(Object, String, Object, String)}</li>
+ *       <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean#setProperty(Object,
+ *        String, Object, String)}</li>
  *   </ul>
  * </ul>
  *
