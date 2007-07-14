@@ -78,19 +78,18 @@ public class TestResultSet implements InvocationHandler {
      * @return A result set proxy
      */
     public static ResultSet createProxy() {
-        return TestResultSet.createProxy(TestResultSetMetaData.createProxy());
+        return TestResultSet.createProxy(new TestResultSet());
     }
 
     /**
      * Factory method for creating {@link ResultSet} proxies.
      *
-     * @param resultSetMetaData The result set meta data
+     * @param invocationHandler Invocation Handler
      * @return A result set proxy
      */
-    public static ResultSet createProxy(ResultSetMetaData resultSetMetaData) {
+    public static ResultSet createProxy(InvocationHandler invocationHandler) {
         ClassLoader classLoader = ResultSet.class.getClassLoader();
         Class[] interfaces = new Class[] { ResultSet.class };
-        InvocationHandler invocationHandler = new TestResultSet(resultSetMetaData);
         return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
     
@@ -126,13 +125,13 @@ public class TestResultSet implements InvocationHandler {
         } if ("getMetaData".equals(methodName)) {
             return getMetaData();
         } if ("getObject".equals(methodName)) {
-            String columnName = null;
-            if (args[0] instanceof Integer) {
-                columnName = resultSetMetaData.getColumnName(((Integer)args[0]).intValue());
-            } else {
-                columnName = (String)args[0];
-            }
-            return getObject(columnName);
+            return getObject(columnName(args[0]));
+        } if ("getDate".equals(methodName)) {
+            return getDate(columnName(args[0]));
+        } if ("getTime".equals(methodName)) {
+            return getTime(columnName(args[0]));
+        } if ("getTimestamp".equals(methodName)) {
+            return getTimestamp(columnName(args[0]));
         } if ("next".equals(methodName)) {
             return (next() ? Boolean.TRUE : Boolean.FALSE);
         } if ("updateObject".equals(methodName)) {
@@ -143,6 +142,13 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
+    private String columnName(Object arg) throws SQLException {
+        if (arg instanceof Integer) {
+            return resultSetMetaData.getColumnName(((Integer)arg).intValue());
+        } else {
+            return (String)arg;
+        }
+    }
 
     // ---------------------------------------------------- Implemented Methods
 
@@ -196,6 +202,17 @@ public class TestResultSet implements InvocationHandler {
         }
     }
 
+    public Date getDate(String columnName) throws SQLException {
+        return (new Date(timestamp));
+    }
+
+    public Time getTime(String columnName) throws SQLException {
+        return (new Time(timestamp));
+    }
+
+    public Timestamp getTimestamp(String columnName) throws SQLException {
+        return (new Timestamp(timestamp));
+    }
 
     public boolean next() throws SQLException {
         if (row++ < 5) {
@@ -392,9 +409,6 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Date getDate(String columnName) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
 
 
     public Date getDate(String columnName, Calendar cal) throws SQLException {
@@ -517,10 +531,6 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Time getTime(String columnName) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
-
 
     public Time getTime(String columnName, Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
@@ -537,10 +547,6 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
-
-    public Timestamp getTimestamp(String columnName) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
 
 
     public Timestamp getTimestamp(String columnName, Calendar cal)

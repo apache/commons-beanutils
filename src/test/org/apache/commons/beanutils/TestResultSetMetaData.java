@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 
 
 /**
@@ -98,6 +99,8 @@ public class TestResultSetMetaData implements InvocationHandler {
             return new Integer(getColumnCount());
         } if ("getColumnName".equals(methodName)) {
             return getColumnName(((Integer)args[0]).intValue());
+        } if ("getColumnType".equals(methodName)) {
+            return getColumnType(((Integer)args[0]).intValue());
         }
         
         throw new UnsupportedOperationException(methodName + " not implemented");
@@ -120,6 +123,42 @@ public class TestResultSetMetaData implements InvocationHandler {
     }
 
 
+    public Integer getColumnType(int columnIndex) throws SQLException {
+        String columnName = getColumnName(columnIndex);
+        int sqlType = Types.OTHER;
+        if (columnName.equals("bigDecimalProperty")) {
+            sqlType = Types.DECIMAL;
+        } else if (columnName.equals("booleanProperty")) {
+            sqlType = Types.BOOLEAN;
+        } else if (columnName.equals("byteProperty")) {
+            sqlType = Types.TINYINT;
+        } else if (columnName.equals("dateProperty")) {
+            sqlType = Types.DATE;
+        } else if (columnName.equals("doubleProperty")) {
+            sqlType = Types.DOUBLE;
+        } else if (columnName.equals("floatProperty")) {
+            sqlType = Types.FLOAT;
+        } else if (columnName.equals("intProperty")) {
+            sqlType = Types.INTEGER;
+        } else if (columnName.equals("longProperty")) {
+            sqlType = Types.BIGINT;
+        } else if (columnName.equals("nullProperty")) {
+            sqlType = Types.VARCHAR;
+        } else if (columnName.equals("shortProperty")) {
+            sqlType = Types.SMALLINT;
+        } else if (columnName.equals("stringProperty")) {
+            sqlType = Types.VARCHAR;
+        } else if (columnName.equals("timeProperty")) {
+            sqlType = Types.TIME;
+        } else if (columnName.equals("timestampProperty")) {
+            sqlType = Types.TIMESTAMP;
+        } else {
+            sqlType = Types.OTHER;
+        }
+        return new Integer(sqlType);
+    }
+
+
     // -------------------------------------------------- Unimplemented Methods
 
 
@@ -134,11 +173,6 @@ public class TestResultSetMetaData implements InvocationHandler {
 
 
     public String getColumnLabel(int columnIndex) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
-
-
-    public int getColumnType(int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 

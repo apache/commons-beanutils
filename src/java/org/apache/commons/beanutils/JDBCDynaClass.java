@@ -18,9 +18,12 @@
 package org.apache.commons.beanutils;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -174,7 +177,17 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         }
         String className = null;
         try {
-            className = metadata.getColumnClassName(i);
+            int sqlType = metadata.getColumnType(i);
+            switch (sqlType) {
+                case java.sql.Types.DATE:
+                    return new DynaProperty(name, java.sql.Date.class);
+                case java.sql.Types.TIMESTAMP:
+                    return new DynaProperty(name, java.sql.Timestamp.class);
+                case java.sql.Types.TIME:
+                    return new DynaProperty(name, java.sql.Time.class);
+                default:
+                    className = metadata.getColumnClassName(i);
+            }
         } catch (SQLException e) {
             // this is a patch for HsqlDb to ignore exceptions
             // thrown by its metadata implementation
@@ -233,7 +246,28 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     protected Object getObject(ResultSet resultSet, String name) throws SQLException {
 
+        DynaProperty property = getDynaProperty(name);
+        if (property == null) {
+            throw new IllegalArgumentException("Invalid name '" + name + "'");
+        }
         String columnName = getColumnName(name);
+        Class type = property.getType();
+
+        // java.sql.Date
+        if (type.equals(Date.class)) {
+            return resultSet.getDate(columnName);
+        }
+
+        // java.sql.Timestamp
+        if (type.equals(Timestamp.class)) {
+            return resultSet.getTimestamp(columnName);
+        }
+
+        // java.sql.Time
+        if (type.equals(Time.class)) {
+            return resultSet.getTime(columnName);
+        }
+
         return resultSet.getObject(columnName);
     }
 
