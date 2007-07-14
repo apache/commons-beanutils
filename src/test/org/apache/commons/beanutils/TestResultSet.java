@@ -161,35 +161,35 @@ public class TestResultSet implements InvocationHandler {
         if (row > 5) {
             throw new SQLException("No current row");
         }
-        if ("bigdecimalproperty".equals(columnName)) {
+        if ("bigDecimalProperty".equals(columnName)) {
             return (new BigDecimal(123.45));
-        } else if ("booleanproperty".equals(columnName)) {
+        } else if ("booleanProperty".equals(columnName)) {
             if ((row % 2) == 0) {
                 return (Boolean.TRUE);
             } else {
                 return (Boolean.FALSE);
             }
-        } else if ("byteproperty".equals(columnName)) {
+        } else if ("byteProperty".equals(columnName)) {
             return (new Byte((byte) row));
-        } else if ("dateproperty".equals(columnName)) {
+        } else if ("dateProperty".equals(columnName)) {
             return (new Date(timestamp));
-        } else if ("doubleproperty".equals(columnName)) {
+        } else if ("doubleProperty".equals(columnName)) {
             return (new Double(321.0));
-        } else if ("floatproperty".equals(columnName)) {
+        } else if ("floatProperty".equals(columnName)) {
             return (new Float((float) 123.0));
-        } else if ("intproperty".equals(columnName)) {
+        } else if ("intProperty".equals(columnName)) {
             return (new Integer(100 + row));
-        } else if ("longproperty".equals(columnName)) {
+        } else if ("longProperty".equals(columnName)) {
             return (new Long(200 + row));
-        } else if ("nullproperty".equals(columnName)) {
+        } else if ("nullProperty".equals(columnName)) {
             return (null);
-        } else if ("shortproperty".equals(columnName)) {
+        } else if ("shortProperty".equals(columnName)) {
             return (new Short((short) (300 + row)));
-        } else if ("stringproperty".equals(columnName)) {
+        } else if ("stringProperty".equals(columnName)) {
             return ("This is a string");
-        } else if ("timeproperty".equals(columnName)) {
+        } else if ("timeProperty".equals(columnName)) {
             return (new Time(timestamp));
-        } else if ("timestampproperty".equals(columnName)) {
+        } else if ("timestampProperty".equals(columnName)) {
             return (new Timestamp(timestamp));
         } else {
             throw new SQLException("Unknown column name " + columnName);

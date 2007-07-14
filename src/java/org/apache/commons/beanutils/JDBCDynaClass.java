@@ -57,6 +57,12 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     protected Map propertiesMap = new HashMap();
 
+    /**
+     * Cross Refernece for column name --> dyna property name
+     * (needed when lowerCase option is true)
+     */
+    private Map columnNameXref;
+
     // ------------------------------------------------------ DynaClass Methods
 
     /**
@@ -158,11 +164,13 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
                                     int i)
                                     throws SQLException {
 
-        String name = null;
-        if (lowerCase) {
-            name = metadata.getColumnName(i).toLowerCase();
-        } else {
-            name = metadata.getColumnName(i);
+        String columnName = metadata.getColumnName(i);
+        String name = lowerCase ? columnName.toLowerCase() : columnName;
+        if (!name.equals(columnName)) {
+            if (columnNameXref == null) {
+                columnNameXref = new HashMap();
+            }
+            columnNameXref.put(name, columnName);
         }
         String className = null;
         try {
@@ -213,6 +221,35 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             propertiesMap.put(properties[i].getName(), properties[i]);
         }
 
+    }
+
+    /**
+     * Get a column value from a {@link ResultSet} for the specified name.
+     *
+     * @param resultSet The result set
+     * @param name The property name
+     * @return The value
+     * @throws SQLException if an error occurs
+     */
+    protected Object getObject(ResultSet resultSet, String name) throws SQLException {
+
+        String columnName = getColumnName(name);
+        return resultSet.getObject(columnName);
+    }
+
+    /**
+     * Get the table column name for the specified property name.
+     * 
+     * @param name The property name
+     * @return The column name (which can be different if the <i>lowerCase</i>
+     * option is used).
+     */
+    protected String getColumnName(String name) {
+        if (columnNameXref != null && columnNameXref.containsKey(name)) {
+            return (String)columnNameXref.get(name);
+        } else {
+            return name;
+        }
     }
 
 }

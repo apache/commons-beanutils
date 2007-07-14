@@ -166,6 +166,18 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     }
 
 
+    /**
+     * Get a value from the {@link ResultSet} for the specified
+     * property name.
+     *
+     * @param name The property name
+     * @return The value
+     * @throws SQLException if an error occurs
+     */
+    public Object getObjectFromResultSet(String name) throws SQLException {
+        return getObject(getResultSet(), name);
+    }
+
     // -------------------------------------------------------- Package Methods
 
 

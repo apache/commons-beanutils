@@ -242,4 +242,63 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
 
+    /**
+     * Test normal case column names (i.e. not converted to lower case)
+     */
+    public void testIteratorResultsNormalCase() {
+        ResultSetDynaClass dynaClass = null;
+        try {
+            dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
+        } catch (Exception e) {
+            fail("Error creating ResultSetDynaClass: " + e);
+        }
+
+        // Grab the third row
+        Iterator rows = dynaClass.iterator();
+        rows.next();
+        rows.next();
+        DynaBean row = (DynaBean) rows.next();
+
+        // Invalid argument test
+        try {
+            row.get("unknownProperty");
+            fail("Did not throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected result
+        }
+
+        // Verify property values
+
+        Object bigDecimalProperty = row.get("bigDecimalProperty");
+        assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
+        assertTrue("bigDecimalProperty type",
+                   bigDecimalProperty instanceof BigDecimal);
+        assertEquals("bigDecimalProperty value",
+                     123.45,
+                     ((BigDecimal) bigDecimalProperty).doubleValue(),
+                     0.005);
+
+        Object intProperty = row.get("intProperty");
+        assertNotNull("intProperty exists", intProperty);
+        assertTrue("intProperty type",
+                   intProperty instanceof Integer);
+        assertEquals("intProperty value",
+                     103,
+                     ((Integer) intProperty).intValue());
+
+        Object nullProperty = row.get("nullProperty");
+        assertNull("nullProperty null", nullProperty);
+
+        Object stringProperty = row.get("stringProperty");
+        assertNotNull("stringProperty exists", stringProperty);
+        assertTrue("stringProperty type",
+                   stringProperty instanceof String);
+        assertEquals("stringProperty value",
+                     "This is a string",
+                     (String) stringProperty);
+
+
+    }
+
+
 }

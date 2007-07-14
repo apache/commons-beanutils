@@ -116,7 +116,7 @@ public class ResultSetIterator implements DynaBean, Iterator {
             throw new IllegalArgumentException(name);
         }
         try {
-            return (dynaClass.getResultSet().getObject(name));
+            return dynaClass.getObjectFromResultSet(name);
         } catch (SQLException e) {
             throw new RuntimeException
                 ("get(" + name + "): SQLException: " + e);
