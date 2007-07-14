@@ -73,7 +73,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final long MODEL[] = new long[0];
+    private static final long[] MODEL = new long[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -109,8 +109,8 @@ public final class LongArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                long results[] = new long[values.length];
+                String[] values = (String[]) value;
+                long[] results = new long[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Long.parseLong(values[i]);
                 }
@@ -128,7 +128,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            long results[] = new long[list.size()];
+            long[] results = new long[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Long.parseLong((String) list.get(i));
             }

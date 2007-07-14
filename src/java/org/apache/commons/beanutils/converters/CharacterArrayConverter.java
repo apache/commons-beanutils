@@ -73,7 +73,7 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final char MODEL[] = new char[0];
+    private static final char[] MODEL = new char[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -109,8 +109,8 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                char results[] = new char[values.length];
+                String[] values = (String[]) value;
+                char[] results = new char[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = values[i].charAt(0);
                 }
@@ -128,7 +128,7 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            char results[] = new char[list.size()];
+            char[] results = new char[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = ((String) list.get(i)).charAt(0);
             }

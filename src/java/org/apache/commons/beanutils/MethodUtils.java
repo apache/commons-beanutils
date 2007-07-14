@@ -180,7 +180,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
-        Class parameterTypes [] = new Class[arguments];
+        Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -308,7 +308,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
-        Class parameterTypes [] = new Class[arguments];
+        Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -497,7 +497,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
-        Class parameterTypes [] = new Class[arguments];
+        Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -625,7 +625,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }  
         int arguments = args.length;
-        Class parameterTypes [] = new Class[arguments];
+        Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -752,7 +752,7 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromSuperclass
-            (Class clazz, String methodName, Class parameterTypes[]) {
+            (Class clazz, String methodName, Class[] parameterTypes) {
 
         Class parentClazz = clazz.getSuperclass();
         while (parentClazz != null) {
@@ -783,7 +783,7 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromInterfaceNest
-            (Class clazz, String methodName, Class parameterTypes[]) {
+            (Class clazz, String methodName, Class[] parameterTypes) {
 
         Method method = null;
 
@@ -791,7 +791,7 @@ public class MethodUtils {
         for (; clazz != null; clazz = clazz.getSuperclass()) {
 
             // Check the implemented interfaces of the parent class
-            Class interfaces[] = clazz.getInterfaces();
+            Class[] interfaces = clazz.getInterfaces();
             for (int i = 0; i < interfaces.length; i++) {
 
                 // Is this interface public?

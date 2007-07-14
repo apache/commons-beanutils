@@ -74,7 +74,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @param properties Property descriptors for the supported properties
      */
     public BasicDynaClass(String name, Class dynaBeanClass,
-                          DynaProperty properties[]) {
+                          DynaProperty[] properties) {
 
         super();
         if (name != null) {
@@ -105,14 +105,14 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The method signature of the constructor we will use to create
      * new DynaBean instances.
      */
-    protected static Class constructorTypes[] = { DynaClass.class };
+    protected static Class[] constructorTypes = { DynaClass.class };
 
 
     /**
      * The argument values to be passed to the constructore we will use
      * to create new DynaBean instances.
      */
-    protected Object constructorValues[] = { this };
+    protected Object[] constructorValues = { this };
 
 
     /**
@@ -131,7 +131,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty properties[] = new DynaProperty[0];
+    protected DynaProperty[] properties = new DynaProperty[0];
 
 
     /**
@@ -290,7 +290,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @param properties List of dynamic properties to be supported
      */
-    protected void setProperties(DynaProperty properties[]) {
+    protected void setProperties(DynaProperty[] properties) {
 
         this.properties = properties;
         propertiesMap.clear();

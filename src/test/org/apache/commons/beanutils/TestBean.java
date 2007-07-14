@@ -192,7 +192,7 @@ public class TestBean implements Serializable {
      * An "indexed property" accessible via both array and subscript
      * based getters and setters.
      */
-    private String dupProperty[] =
+    private String[] dupProperty =
     { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
 
     public String[] getDupProperty() {
@@ -207,7 +207,7 @@ public class TestBean implements Serializable {
         this.dupProperty[index] = value;
     }
 
-    public void setDupProperty(String dupProperty[]) {
+    public void setDupProperty(String[] dupProperty) {
         this.dupProperty = dupProperty;
     }
 
@@ -235,7 +235,7 @@ public class TestBean implements Serializable {
         return (this.intArray);
     }
 
-    public void setIntArray(int intArray[]) {
+    public void setIntArray(int[] intArray) {
         this.intArray = intArray;
     }
 
@@ -474,14 +474,14 @@ public class TestBean implements Serializable {
     /**
      * A String array property accessed as a String.
      */
-    private String stringArray[] =
+    private String[] stringArray =
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String[] getStringArray() {
         return (this.stringArray);
     }
 
-    public void setStringArray(String stringArray[]) {
+    public void setStringArray(String[] stringArray) {
         this.stringArray = stringArray;
     }
 
@@ -489,7 +489,7 @@ public class TestBean implements Serializable {
     /**
      * A String array property accessed as an indexed property.
      */
-    private String stringIndexed[] =
+    private String[] stringIndexed =
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed(int index) {

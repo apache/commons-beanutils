@@ -80,7 +80,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * The set of PropertyDescriptors for this bean class.
      */
-    protected PropertyDescriptor descriptors[] = null;
+    protected PropertyDescriptor[] descriptors = null;
 
 
     /**
@@ -94,7 +94,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty properties[] = null;
+    protected DynaProperty[] properties = null;
 
 
     /**
@@ -353,7 +353,7 @@ public class WrapDynaClass implements DynaClass {
     protected void introspect() {
 
         // Look up the property descriptors for this bean class
-        PropertyDescriptor regulars[] =
+        PropertyDescriptor[] regulars =
                 PropertyUtils.getPropertyDescriptors(beanClass);
         if (regulars == null) {
             regulars = new PropertyDescriptor[0];

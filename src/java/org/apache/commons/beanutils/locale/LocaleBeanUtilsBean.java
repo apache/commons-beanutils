@@ -645,7 +645,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                 sb.append((String) value);
             }
             else if (value instanceof String[]) {
-                String values[] = (String[]) value;
+                String[] values = (String[]) value;
                 sb.append('[');
                 for (int i = 0; i < values.length; i++) {
                     if (i > 0) {
@@ -763,7 +763,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value instanceof String) {
-                String values[] = new String[1];
+                String[] values = new String[1];
                 values[0] = (String) value;
                 newValue = getLocaleConvertUtils().convert(values, type, pattern);
             }
@@ -816,7 +816,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value instanceof String) {
-                String values[] = new String[1];
+                String[] values = new String[1];
                 values[0] = (String) value;
                 newValue = ConvertUtils.convert(values, type);
             }

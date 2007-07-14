@@ -64,7 +64,7 @@ import java.util.Iterator;
  * <pre>
  *   ArrayList results = new ArrayList(); // To hold copied list
  *   ResultSetDynaClass rsdc = ...;
- *   DynaProperty properties[] = rsdc.getDynaProperties();
+ *   DynaProperty[] properties = rsdc.getDynaProperties();
  *   BasicDynaClass bdc =
  *     new BasicDynaClass("foo", BasicDynaBean.class,
  *                        rsdc.getDynaProperties());

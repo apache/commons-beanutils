@@ -200,8 +200,8 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         //  this requires casting to Object[], then using values[i].toString()
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                boolean results[] = new boolean[values.length];
+                String[] values = (String[]) value;
+                boolean[] results = new boolean[values.length];
                 for (int i = 0; i < values.length; i++) {
                     String stringValue = values[i];
                     Object result = booleanConverter.convert(Boolean.class, stringValue);
@@ -223,7 +223,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         // for more information.
         try {
             List list = parseElements(value.toString());
-            boolean results[] = new boolean[list.size()];
+            boolean[] results = new boolean[list.size()];
             for (int i = 0; i < results.length; i++) {
                 String stringValue = (String) list.get(i);
                 Object result = booleanConverter.convert(Boolean.class, stringValue);

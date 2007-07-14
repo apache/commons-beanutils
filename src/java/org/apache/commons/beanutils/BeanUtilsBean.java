@@ -249,7 +249,7 @@ public class BeanUtilsBean {
 
         // Copy the properties, converting as necessary
         if (orig instanceof DynaBean) {
-            DynaProperty origDescriptors[] =
+            DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
@@ -271,7 +271,7 @@ public class BeanUtilsBean {
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
-            PropertyDescriptor origDescriptors[] =
+            PropertyDescriptor[] origDescriptors =
                 getPropertyUtils().getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
@@ -340,7 +340,7 @@ public class BeanUtilsBean {
             } else if (value instanceof String) {
                 sb.append((String) value);
             } else if (value instanceof String[]) {
-                String values[] = (String[]) value;
+                String[] values = (String[]) value;
                 sb.append('[');
                 for (int i = 0; i < values.length; i++) {
                     if (i > 0) {
@@ -498,14 +498,14 @@ public class BeanUtilsBean {
             
         Map description = new HashMap();
         if (bean instanceof DynaBean) {
-            DynaProperty descriptors[] =
+            DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
-            PropertyDescriptor descriptors[] =
+            PropertyDescriptor[] descriptors =
                 getPropertyUtils().getPropertyDescriptors(bean);
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
@@ -556,7 +556,7 @@ public class BeanUtilsBean {
             return ((String[]) values.toArray(new String[values.size()]));
         } else if (value.getClass().isArray()) {
             int n = Array.getLength(value);
-            String results[] = new String[n];
+            String[] results = new String[n];
             for (int i = 0; i < n; i++) {
                 Object item = Array.get(value, i);
                 if (item == null) {
@@ -568,7 +568,7 @@ public class BeanUtilsBean {
             }
             return (results);
         } else {
-            String results[] = new String[1];
+            String[] results = new String[1];
             results[0] = getConvertUtils().convert(value);
             return (results);
         }
@@ -878,7 +878,7 @@ public class BeanUtilsBean {
             } else if (value instanceof String) {
                 sb.append((String) value);
             } else if (value instanceof String[]) {
-                String values[] = (String[]) value;
+                String[] values = (String[]) value;
                 sb.append('[');
                 for (int i = 0; i < values.length; i++) {
                     if (i > 0) {
@@ -976,7 +976,7 @@ public class BeanUtilsBean {
         Object newValue = null;
         if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value == null) {
-                String values[] = new String[1];
+                String[] values = new String[1];
                 values[0] = (String) value;
                 newValue = getConvertUtils().convert((String[]) values, type);
             } else if (value instanceof String) {

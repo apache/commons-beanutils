@@ -106,7 +106,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 mappedReadMethod = getMethod(beanClass, "is" + base,
                         STRING_CLASS_PARAMETER);
             }
-            Class params[] = { String.class, mappedReadMethod.getReturnType() };
+            Class[] params = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
         } catch (IntrospectionException e) {
             /* Swallow IntrospectionException
@@ -163,7 +163,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
 
         if (mappedReadMethod != null) {
-            Class params[] = { String.class, mappedReadMethod.getReturnType() };
+            Class[] params = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = 
                 getMethod(beanClass, mappedSetterName, params);
         } else {
@@ -290,7 +290,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             }
 
             if (mappedWriteMethod != null) {
-                Class params[] = mappedWriteMethod.getParameterTypes();
+                Class[] params = mappedWriteMethod.getParameterTypes();
                 if (params.length != 2) {
                     throw new IntrospectionException
                             ("bad mapped write method arg count");
@@ -318,7 +318,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             return s;
         }
 
-        char chars[] = s.toCharArray();
+        char[] chars = s.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         return new String(chars);
     }
@@ -331,7 +331,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         // For overridden methods we need to find the most derived version.
         // So we start with the given class and walk up the superclass chain.
         for (Class clazz = initial; clazz != null; clazz = clazz.getSuperclass()) {
-            Method methods[] = clazz.getDeclaredMethods();
+            Method[] methods = clazz.getDeclaredMethods();
             for (int i = 0; i < methods.length; i++) {
                 Method method = methods[i];
                 if (method == null) {

@@ -255,7 +255,7 @@ public class ConvertUtils {
      *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
-    public static Object convert(String values[], Class clazz) {
+    public static Object convert(String[] values, Class clazz) {
 
   return ConvertUtilsBean.getInstance().convert(values, clazz);
 

@@ -236,7 +236,7 @@ public class PropertyUtilsBean {
         }
 
         if (orig instanceof DynaBean) {
-            DynaProperty origDescriptors[] =
+            DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
@@ -266,7 +266,7 @@ public class PropertyUtilsBean {
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
-            PropertyDescriptor origDescriptors[] =
+            PropertyDescriptor[] origDescriptors =
                 getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
@@ -317,14 +317,14 @@ public class PropertyUtilsBean {
         }
         Map description = new HashMap();
         if (bean instanceof DynaBean) {
-            DynaProperty descriptors[] =
+            DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
-            PropertyDescriptor descriptors[] =
+            PropertyDescriptor[] descriptors =
                 getPropertyDescriptors(bean);
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
@@ -463,7 +463,7 @@ public class PropertyUtilsBean {
             Method readMethod = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedReadMethod();
             if (readMethod != null) {
-                Object subscript[] = new Object[1];
+                Object[] subscript = new Object[1];
                 subscript[0] = new Integer(index);
                 try {
                     return (invokeMethod(readMethod,bean, subscript));
@@ -616,7 +616,7 @@ public class PropertyUtilsBean {
             Method readMethod = ((MappedPropertyDescriptor) descriptor).
                     getMappedReadMethod();
             if (readMethod != null) {
-                Object keyArray[] = new Object[1];
+                Object[] keyArray = new Object[1];
                 keyArray[0] = key;
                 result = invokeMethod(readMethod, bean, keyArray);
             } else {
@@ -894,7 +894,7 @@ public class PropertyUtilsBean {
             return (null);
         }
         
-        PropertyDescriptor descriptors[] = getPropertyDescriptors(bean);
+        PropertyDescriptor[] descriptors = getPropertyDescriptors(bean);
         if (descriptors != null) {
             
             for (int i = 0; i < descriptors.length; i++) {
@@ -952,7 +952,7 @@ public class PropertyUtilsBean {
         }
 
         // Look up any cached descriptors for this bean class
-        PropertyDescriptor descriptors[] = null;
+        PropertyDescriptor[] descriptors = null;
         descriptors =
                 (PropertyDescriptor[]) descriptorsCache.get(beanClass);
         if (descriptors != null) {
@@ -1564,7 +1564,7 @@ public class PropertyUtilsBean {
             Method writeMethod = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedWriteMethod();
             if (writeMethod != null) {
-                Object subscript[] = new Object[2];
+                Object[] subscript = new Object[2];
                 subscript[0] = new Integer(index);
                 subscript[1] = value;
                 try {
@@ -1731,7 +1731,7 @@ public class PropertyUtilsBean {
                     ((MappedPropertyDescriptor) descriptor).
                     getMappedWriteMethod();
             if (mappedWriteMethod != null) {
-                Object params[] = new Object[2];
+                Object[] params = new Object[2];
                 params[0] = key;
                 params[1] = value;
                 if (log.isTraceEnabled()) {
@@ -2024,7 +2024,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property setter method
-        Object values[] = new Object[1];
+        Object[] values = new Object[1];
         values[0] = value;
         if (log.isTraceEnabled()) {
             String valueClassName =

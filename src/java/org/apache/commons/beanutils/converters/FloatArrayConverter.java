@@ -73,7 +73,7 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final float MODEL[] = new float[0];
+    private static final float[] MODEL = new float[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -109,8 +109,8 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                float results[] = new float[values.length];
+                String[] values = (String[]) value;
+                float[] results = new float[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Float.parseFloat(values[i]);
                 }
@@ -128,7 +128,7 @@ public final class FloatArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            float results[] = new float[list.size()];
+            float[] results = new float[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Float.parseFloat((String) list.get(i));
             }

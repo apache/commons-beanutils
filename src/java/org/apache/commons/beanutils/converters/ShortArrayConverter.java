@@ -73,7 +73,7 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final short MODEL[] = new short[0];
+    private static final short[] MODEL = new short[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -109,8 +109,8 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                short results[] = new short[values.length];
+                String[] values = (String[]) value;
+                short[] results = new short[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Short.parseShort(values[i]);
                 }
@@ -128,7 +128,7 @@ public final class ShortArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            short results[] = new short[list.size()];
+            short[] results = new short[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Short.parseShort((String) list.get(i));
             }

@@ -76,12 +76,12 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final String MODEL[] = new String[0];
+    private static final String[] MODEL = new String[0];
     
     /**
      * <p> Model object for int arrays.</p>
      */
-    private static final int INT_MODEL[] = new int[0];
+    private static final int[] INT_MODEL = new int[0];
 
 
 
@@ -153,7 +153,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            String results[] = new String[list.size()];
+            String[] results = new String[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = (String) list.get(i);
             }

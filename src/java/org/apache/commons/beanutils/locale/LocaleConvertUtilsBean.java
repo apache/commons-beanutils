@@ -291,7 +291,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String values[], Class clazz, String pattern) {
+    public Object convert(String[] values, Class clazz, String pattern) {
 
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
@@ -307,7 +307,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
     */
-   public Object convert(String values[], Class clazz) {
+   public Object convert(String[] values, Class clazz) {
 
        return convert(values, clazz, getDefaultLocale(), null);
    }
@@ -325,7 +325,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String values[], Class clazz, Locale locale, String pattern) {
+    public Object convert(String[] values, Class clazz, Locale locale, String pattern) {
 
         Class type = clazz;
         if (clazz.isArray()) {

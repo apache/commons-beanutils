@@ -73,7 +73,7 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final byte MODEL[] = new byte[0];
+    private static final byte[] MODEL = new byte[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -108,8 +108,8 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                byte results[] = new byte[values.length];
+                String[] values = (String[]) value;
+                byte[] results = new byte[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Byte.parseByte(values[i]);
                 }
@@ -127,7 +127,7 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            byte results[] = new byte[list.size()];
+            byte[] results = new byte[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Byte.parseByte((String) list.get(i));
             }

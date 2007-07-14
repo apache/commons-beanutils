@@ -484,7 +484,7 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(String values[], Class clazz) {
+    public Object convert(String[] values, Class clazz) {
 
         Class type = clazz;
         if (clazz.isArray()) {

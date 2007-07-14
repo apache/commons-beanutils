@@ -47,7 +47,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * <p>The set of dynamic properties that are part of this
      * {@link DynaClass}.</p>
      */
-    protected DynaProperty properties[] = null;
+    protected DynaProperty[] properties = null;
 
     /**
      * <p>The set of dynamic properties that are part of this

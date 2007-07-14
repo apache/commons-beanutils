@@ -201,7 +201,7 @@ public class LocaleConvertUtils {
      * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, String)
      */
-    public static Object convert(String values[], Class clazz, String pattern) {
+    public static Object convert(String[] values, Class clazz, String pattern) {
 
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, pattern);
     }
@@ -217,7 +217,7 @@ public class LocaleConvertUtils {
     * @return the converted value
     * @see LocaleConvertUtilsBean#convert(String[], Class)
     */
-   public static Object convert(String values[], Class clazz) {
+   public static Object convert(String[] values, Class clazz) {
 
        return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
    }
@@ -235,7 +235,7 @@ public class LocaleConvertUtils {
      * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
-    public static Object convert(String values[], Class clazz, Locale locale, String pattern) {
+    public static Object convert(String[] values, Class clazz, Locale locale, String pattern) {
 
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, locale, pattern);
     }

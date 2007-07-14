@@ -73,7 +73,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final double MODEL[] = new double[0];
+    private static final double[] MODEL = new double[0];
 
 
     // --------------------------------------------------------- Public Methods
@@ -108,8 +108,8 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String values[] = (String[]) value;
-                double results[] = new double[values.length];
+                String[] values = (String[]) value;
+                double[] results = new double[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Double.parseDouble(values[i]);
                 }
@@ -127,7 +127,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
         // and convert to the appropriate type
         try {
             List list = parseElements(value.toString());
-            double results[] = new double[list.size()];
+            double[] results = new double[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Double.parseDouble((String) list.get(i));
             }
