@@ -462,6 +462,7 @@ public class PropertyUtilsBean {
         if (descriptor instanceof IndexedPropertyDescriptor) {
             Method readMethod = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedReadMethod();
+            readMethod = MethodUtils.getAccessibleMethod(readMethod);
             if (readMethod != null) {
                 Object[] subscript = new Object[1];
                 subscript[0] = new Integer(index);
@@ -615,6 +616,7 @@ public class PropertyUtilsBean {
             // Call the keyed getter method if there is one
             Method readMethod = ((MappedPropertyDescriptor) descriptor).
                     getMappedReadMethod();
+            readMethod = MethodUtils.getAccessibleMethod(readMethod);
             if (readMethod != null) {
                 Object[] keyArray = new Object[1];
                 keyArray[0] = key;
@@ -626,7 +628,7 @@ public class PropertyUtilsBean {
             }
         } else {
           /* means that the result has to be retrieved from a map */
-          Method readMethod = descriptor.getReadMethod();
+          Method readMethod = getReadMethod(descriptor);
           if (readMethod != null) {
             Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
             /* test and fetch from the map */
@@ -1346,13 +1348,14 @@ public class PropertyUtilsBean {
                 PropertyDescriptor desc =
                     getPropertyDescriptor(bean, name);
                 if (desc != null) {
-                    Method readMethod = desc.getReadMethod();
+                    Method readMethod = getReadMethod(desc);
                     if (readMethod == null) {
                         if (desc instanceof IndexedPropertyDescriptor) {
                             readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
                         } else if (desc instanceof MappedPropertyDescriptor) {
                             readMethod = ((MappedPropertyDescriptor) desc).getMappedReadMethod();
                         }
+                        readMethod = MethodUtils.getAccessibleMethod(readMethod);
                     }
                     return (readMethod != null);
                 } else {
@@ -1411,13 +1414,14 @@ public class PropertyUtilsBean {
                 PropertyDescriptor desc =
                     getPropertyDescriptor(bean, name);
                 if (desc != null) {
-                    Method writeMethod = desc.getWriteMethod();
+                    Method writeMethod = getWriteMethod(desc);
                     if (writeMethod == null) {
                         if (desc instanceof IndexedPropertyDescriptor) {
                             writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
                         } else if (desc instanceof MappedPropertyDescriptor) {
                             writeMethod = ((MappedPropertyDescriptor) desc).getMappedWriteMethod();
                         }
+                        writeMethod = MethodUtils.getAccessibleMethod(writeMethod);
                     }
                     return (writeMethod != null);
                 } else {
@@ -1563,6 +1567,7 @@ public class PropertyUtilsBean {
         if (descriptor instanceof IndexedPropertyDescriptor) {
             Method writeMethod = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedWriteMethod();
+            writeMethod = MethodUtils.getAccessibleMethod(writeMethod);
             if (writeMethod != null) {
                 Object[] subscript = new Object[2];
                 subscript[0] = new Integer(index);
@@ -1592,7 +1597,7 @@ public class PropertyUtilsBean {
         }
 
         // Otherwise, the underlying property must be an array or a list
-        Method readMethod = descriptor.getReadMethod();
+        Method readMethod = getReadMethod(descriptor);
         if (readMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
                     "' has no getter method on bean class '" + bean.getClass() + "'");
@@ -1730,6 +1735,7 @@ public class PropertyUtilsBean {
             Method mappedWriteMethod =
                     ((MappedPropertyDescriptor) descriptor).
                     getMappedWriteMethod();
+            mappedWriteMethod = MethodUtils.getAccessibleMethod(mappedWriteMethod);
             if (mappedWriteMethod != null) {
                 Object[] params = new Object[2];
                 params[0] = key;
@@ -1750,7 +1756,7 @@ public class PropertyUtilsBean {
             }
         } else {
           /* means that the result has to be retrieved from a map */
-          Method readMethod = descriptor.getReadMethod();
+          Method readMethod = getReadMethod(descriptor);
           if (readMethod != null) {
             Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
             /* test and fetch from the map */

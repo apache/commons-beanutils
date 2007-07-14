@@ -418,7 +418,7 @@ public class TestBean implements Serializable {
     /*
      * Another nested reference to a bean containing mapp properties
      */
-    class MappedTestBean {
+    public class MappedTestBean {
         public void setValue(String key,String val) { }
         public String getValue(String key) { return "Mapped Value"; }
     }
