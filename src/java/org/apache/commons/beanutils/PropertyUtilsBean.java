@@ -240,11 +240,11 @@ public class PropertyUtilsBean {
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                // Need to check isReadable() for WrapDynaBean
-                // (see Jira issue# BEANUTILS-61)
-                if (isReadable(orig, name)) {
-                    if (isWriteable(dest, name)) {
-                        Object value = ((DynaBean) orig).get(name);
+                if (isReadable(orig, name) && isWriteable(dest, name)) {
+                    Object value = ((DynaBean) orig).get(name);
+                    if (dest instanceof DynaBean) {
+                        ((DynaBean) dest).set(name, value);
+                    } else {
                         setSimpleProperty(dest, name, value);
                     }
                 }
@@ -253,14 +253,11 @@ public class PropertyUtilsBean {
             Iterator names = ((Map) orig).keySet().iterator();
             while (names.hasNext()) {
                 String name = (String) names.next();
-                if (dest instanceof DynaBean) {
-                    if (isWriteable(dest, name)) {
-                        Object value = ((Map) orig).get(name);
+                if (isWriteable(dest, name)) {
+                    Object value = ((Map) orig).get(name);
+                    if (dest instanceof DynaBean) {
                         ((DynaBean) dest).set(name, value);
-                    }
-                } else /* if (dest is a standard JavaBean) */ {
-                    if (isWriteable(dest, name)) {
-                        Object value = ((Map) orig).get(name);
+                    } else {
                         setSimpleProperty(dest, name, value);
                     }
                 }
@@ -270,17 +267,12 @@ public class PropertyUtilsBean {
                 getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
-                if (isReadable(orig, name)) {
+                if (isReadable(orig, name) && isWriteable(dest, name)) {
+                    Object value = getSimpleProperty(orig, name);
                     if (dest instanceof DynaBean) {
-                        if (isWriteable(dest, name)) {
-                            Object value = getSimpleProperty(orig, name);
-                            ((DynaBean) dest).set(name, value);
-                        }
-                    } else /* if (dest is a standard JavaBean) */ {
-                        if (isWriteable(dest, name)) {
-                            Object value = getSimpleProperty(orig, name);
-                            setSimpleProperty(dest, name, value);
-                        }
+                        ((DynaBean) dest).set(name, value);
+                    } else {
+                        setSimpleProperty(dest, name, value);
                     }
                 }
             }
