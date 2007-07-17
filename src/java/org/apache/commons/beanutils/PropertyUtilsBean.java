@@ -241,11 +241,17 @@ public class PropertyUtilsBean {
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
-                    Object value = ((DynaBean) orig).get(name);
-                    if (dest instanceof DynaBean) {
-                        ((DynaBean) dest).set(name, value);
-                    } else {
-                        setSimpleProperty(dest, name, value);
+                    try {
+                        Object value = ((DynaBean) orig).get(name);
+                        if (dest instanceof DynaBean) {
+                            ((DynaBean) dest).set(name, value);
+                        } else {
+                                setSimpleProperty(dest, name, value);
+                        }
+                    } catch (NoSuchMethodException e) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        }
                     }
                 }
             }
@@ -254,11 +260,17 @@ public class PropertyUtilsBean {
             while (names.hasNext()) {
                 String name = (String) names.next();
                 if (isWriteable(dest, name)) {
-                    Object value = ((Map) orig).get(name);
-                    if (dest instanceof DynaBean) {
-                        ((DynaBean) dest).set(name, value);
-                    } else {
-                        setSimpleProperty(dest, name, value);
+                    try {
+                        Object value = ((Map) orig).get(name);
+                        if (dest instanceof DynaBean) {
+                            ((DynaBean) dest).set(name, value);
+                        } else {
+                            setSimpleProperty(dest, name, value);
+                        }
+                    } catch (NoSuchMethodException e) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        }
                     }
                 }
             }
@@ -268,11 +280,17 @@ public class PropertyUtilsBean {
             for (int i = 0; i < origDescriptors.length; i++) {
                 String name = origDescriptors[i].getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
-                    Object value = getSimpleProperty(orig, name);
-                    if (dest instanceof DynaBean) {
-                        ((DynaBean) dest).set(name, value);
-                    } else {
-                        setSimpleProperty(dest, name, value);
+                    try {
+                        Object value = getSimpleProperty(orig, name);
+                        if (dest instanceof DynaBean) {
+                            ((DynaBean) dest).set(name, value);
+                        } else {
+                                setSimpleProperty(dest, name, value);
+                        }
+                    } catch (NoSuchMethodException e) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
+                        }
                     }
                 }
             }
