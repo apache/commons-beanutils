@@ -61,7 +61,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected Map propertiesMap = new HashMap();
 
     /**
-     * Cross Refernece for column name --> dyna property name
+     * Cross Reference for column name --> dyna property name
      * (needed when lowerCase option is true)
      */
     private Map columnNameXref;
