@@ -99,7 +99,7 @@ public abstract class AbstractArrayConverter implements Converter {
     /**
      * <p>Model object for string arrays.</p>
      */
-    protected static final String[] strings = new String[0];
+    protected static String[] strings = new String[0];
 
 
     /**
