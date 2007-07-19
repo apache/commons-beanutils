@@ -41,14 +41,6 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>optional</directory>
-            <excludes>
-                <exclude>build.properties</exclude>
-                <exclude>target</exclude>
-                <exclude>dist</exclude>
-            </excludes>
-        </fileSet>
-        <fileSet>
             <directory>src</directory>
         </fileSet>
         <fileSet>

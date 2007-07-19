@@ -57,11 +57,6 @@
              <fileset dir="xdocs"/>
          </copy>
 
-         <!-- Copy optional files -->
-         <copy todir="${maven.dist.src.assembly.dir}/optional">
-             <fileset dir="optional"/>
-         </copy>
-
     </postGoal>
 
     <!-- ================================================================== -->
