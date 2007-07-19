@@ -201,7 +201,7 @@
                overview="src/java/overview.html"
                doctitle="&lt;h1&gt;${component.title} (Version ${component.version})&lt;/h1&gt;"
             windowtitle="${component.title} (Version ${component.version})"
-                 bottom="Copyright (c) 2001-2004 - Apache Software Foundation">
+                 bottom="Copyright (c) 2001-2007 - Apache Software Foundation">
       <classpath refid="compile.classpath"/>
     </javadoc>
   </target>
@@ -230,7 +230,7 @@
              tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
     <copy      file="NOTICE.txt"
              tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
-    <jar    jarfile="${dist.home}/commons-beanutils.jar"
+    <jar    jarfile="${dist.home}/commons-beanutils-${component.version}.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
   </target>
