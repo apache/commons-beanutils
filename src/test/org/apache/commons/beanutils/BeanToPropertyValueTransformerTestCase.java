@@ -25,7 +25,7 @@ import junit.framework.TestCase;
  *
  * @author Norm Deane
  */
-public class BeanToPropertyValueTransformerTest extends TestCase {
+public class BeanToPropertyValueTransformerTestCase extends TestCase {
    
     private static final Integer expectedIntegerValue = new Integer(123);
     private static final Long expectedLongValue = new Long(123);
@@ -35,11 +35,11 @@ public class BeanToPropertyValueTransformerTest extends TestCase {
     private static final Byte expectedByteValue = new Byte("12");
 
     /**
-     * Constructor for BeanToPropertyValueTransformerTest.
+     * Constructor for BeanToPropertyValueTransformerTestCase.
      *
      * @param name Name of this test case.
      */
-    public BeanToPropertyValueTransformerTest(String name) {
+    public BeanToPropertyValueTransformerTestCase(String name) {
         super(name);
     }
 

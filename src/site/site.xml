@@ -40,7 +40,7 @@
             <item name="Latest">
                 <item name="User Guide"       href="/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
                 <item name="API"              href="/apidocs/index.html"/>
-                <item name="Bean Collections" href="/bean-collections/index.html"/>
+                <item name="Bean Collections" href="/bean-collections.html"/>
             </item>
             <item name="1.7.0 Release">
                 <item name="User Guide"       href="http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description"/>

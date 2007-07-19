@@ -36,9 +36,9 @@ import org.apache.commons.collections.Transformer;
  * @author Morgan Delagrange
  * @author Stephen Colebourne
  */
-public class TestBeanMap extends AbstractTestMap {
+public class BeanMapTestCase extends AbstractTestMap {
 
-    public TestBeanMap(String testName) {
+    public BeanMapTestCase(String testName) {
         super(testName);
     }
     
@@ -47,7 +47,7 @@ public class TestBeanMap extends AbstractTestMap {
     }
 
     public static Test suite() {
-        return BulkTest.makeSuite(TestBeanMap.class);
+        return BulkTest.makeSuite(BeanMapTestCase.class);
     }
 
 /*

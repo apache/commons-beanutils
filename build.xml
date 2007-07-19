@@ -78,6 +78,7 @@
   <path id="compile.classpath">
     <pathelement location="${build.home}/classes"/>
     <pathelement location="${commons-logging.jar}"/>
+    <pathelement location="${commons-collections.jar}"/>
   </path>
 
 
@@ -88,6 +89,8 @@
   <path id="test.classpath">
     <pathelement location="${build.home}/classes"/>
     <pathelement location="${build.home}/tests"/>
+    <pathelement location="${commons-collections.jar}"/>
+    <pathelement location="${commons-collections-testframework.jar}"/>
     <pathelement location="${commons-logging.jar}"/>
     <pathelement location="${junit.jar}"/>
   </path>
@@ -216,7 +219,6 @@
     <copy      file="README.txt"
               todir="${dist.home}"/>
     <antcall target="jar"/>
-    <antcall target="bean-collections-dist"/>
   </target>
 
 
@@ -231,7 +233,6 @@
     <jar    jarfile="${dist.home}/commons-beanutils.jar"
             basedir="${build.home}/classes"
            manifest="${build.home}/conf/MANIFEST.MF"/>
-    <copy tofile='${dist.home}/commons-beanutils-core.jar' file='${dist.home}/commons-beanutils.jar'/>
   </target>
 
 
@@ -242,12 +243,6 @@
         <include name="commons-${component.name}.jar"/>
       </fileset>
     </copy>
-  </target>
-
-<!-- ========== Sub Component Targets ===================================== -->
-
-  <target name='bean-collections-dist'>
-    <ant antfile='optional/bean-collections/build.xml' target='dist' inheritAll='false'/>
   </target>
 
 <!-- ========== Unit Test Targets ========================================= -->

@@ -174,6 +174,35 @@
     </dependency>
 
     <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId> 
+      <version>3.2</version> 
+      <url>http://jakarta.apache.org/commons/collections/</url>
+      <properties>
+          <optional>true</optional>
+          <comment>
+              &lt;strong&gt;Optional&lt;/strong&gt; - only required if using
+              BeanComparator, BeanMap, BeanPredicate, BeanPropertyValueChangeClosure,
+              BeanPropertyValueEqualsPredicate or BeanToPropertyValueTransformer
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections-testframework</artifactId> 
+      <version>3.2</version> 
+      <url>http://jakarta.apache.org/commons/collections/</url>
+      <properties>
+          <scope>test</scope>
+          <comment>
+              &lt;strong&gt;Test Only&lt;/strong&gt; - required only for
+              running the some of the unit tests.
+          </comment>
+      </properties>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>

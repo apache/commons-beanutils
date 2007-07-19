@@ -19,6 +19,7 @@ repository=${user.home}/.maven/repository
 # The pathname of the collections classes JAR file
 commons-collections.home=${repository}/commons-collections/jars
 commons-collections.jar=${commons-collections.home}/commons-collections-3.2.jar
+commons-collections-testframework.jar=${commons-collections.home}/commons-collections-testframework-3.2.jar
 
 # The pathname of the Commons Logging JAR file
 commons-logging.home=${repository}/commons-logging/jars

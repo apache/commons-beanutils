@@ -34,6 +34,7 @@
       <item name="Overview" href="/index.html"/>   
       <item name="Download"                href="/downloads.html"/>
       <item name="User Guide (SVN latest)" href="apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+      <item name="Bean-Collections"        href="/bean-collections.html"/>
       <item name='1.7.0 Release'>
             <item   name='User Guide'
                     href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
@@ -51,9 +52,6 @@
                     href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/'/>
             <item   name='Release Notes'
                     href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
-      </item>
-      <item name='Modules'>
-            <item name="Bean Collections" href="bean-collections/index.html"/>
       </item>
       <item name="Wiki" href="http://wiki.apache.org/jakarta-commons/BeanUtils"/>
     </menu>

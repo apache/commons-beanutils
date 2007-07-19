@@ -25,7 +25,7 @@ import junit.framework.TestCase;
  *
  * @author Norm Deane
  */
-public class BeanPropertyValueEqualsPredicateTest extends TestCase {
+public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
    
     private static final Integer expectedIntegerValue = new Integer(123);
     private static final Float expectedFloatValue = new Float(123.123f);
@@ -38,7 +38,7 @@ public class BeanPropertyValueEqualsPredicateTest extends TestCase {
      *
      * @param name Name of this test case.
      */
-    public BeanPropertyValueEqualsPredicateTest(String name) {
+    public BeanPropertyValueEqualsPredicateTestCase(String name) {
         super(name);
     }
 
