@@ -24,12 +24,18 @@ limitations under the License.
 <!-- ================================================== -->
 <section name="Overview">
 <p>
-  Commons BeanUtils uses <a href="http://maven.apache.org">Maven</a> or
-  <a href="http://ant.apache.org">Ant</a> as a build system.
+  Commons BeanUtils can be built using
+  <a href="http://maven.apache.org/maven-1.x/">Maven 1</a>,
+  <a href="http://maven.apache.org">Maven 2</a> or
+  <a href="http://ant.apache.org">Ant</a> as the build system.
 </p>
+  <p>
+	Further details can be found in the
+	<a href="http://jakarta.apache.org/commons/building.html">commons build instructions</a>.
+  </p>
 </section>
 <!-- ================================================== -->
-<section name="Maven Goals">
+<section name="Maven 1 Goals">
   <p>
     To build a jar file, change into BeanUtils's root directory and run 
     <strong><code>maven jar</code></strong>.
@@ -37,26 +43,45 @@ limitations under the License.
   </p>
   <p>
     To build the Javadocs, run <strong><code>maven javadoc</code></strong>.
-    The result will be in "target/docs/apidocs".
+    The result will be in "target/docs/apidocs" subdirectory.
   </p>
   <p>
     To build the full website, run <strong><code>maven site</code></strong>.
-
-    The result will be in "target/docs".
+    The result will be in "target/docs" subdirectory.
+  </p>
+</section>
+<!-- ================================================== -->
+<section name="Maven 2 Goals">
+  <p>
+    To build a jar file, change into BeanUtils's root directory and run 
+    <strong><code>mvn package</code></strong>.
+    The result will be in the "target" subdirectory.
   </p>
   <p>
-	Further details can be found in the
-	<a href="http://jakarta.apache.org/commons/building.html">commons build instructions</a>.
+    To build the full website, run <strong><code>mvn site</code></strong>.
+    The result will be in "target/site" subdirectory.
+  </p>
+  <p>
+    To build the full distribution, run <strong><code>mvn site assembly:assembly</code></strong>.
+    The result will be in "target" subdirectory.
   </p>
 </section>
 <!-- ================================================== -->
 <section name="Ant Goals">
   <p>
-    To build a jar file and the javadocs, change into Validator's root directory
+    To build a jar file and the javadocs, change into BeanUtils's root directory
     and run <strong><code>ant dist</code></strong>.
     The result will be in the "dist" subdirectory.
   </p>
 </section>
 <!-- ================================================== -->
+<section name="Nightly Builds">
+  <p>
+      <a href="http://people.apache.org/builds/jakarta-commons/nightly/commons-beanutils/">Nightly Builds</a>
+      are built once a day from the current SVN HEAD. These are provided purely for test purposes and are <b>NOT
+      official releases</b> of the Apache Software Foundation - Released versions of Commons BeanUtils are
+      available <a href="http://jakarta.apache.org/site/downloads/downloads_commons-beanutils.cgi">here</a>.
+  </p>
+</section>
 </body>
 </document>
