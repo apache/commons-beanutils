@@ -324,6 +324,7 @@ public class LocaleConvertUtils {
      * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
      *  the specified locale.
      * @see LocaleConvertUtilsBean#lookup(Locale)
+     * @deprecated This method will be modified to return a Map in the next release.
      */
     protected static FastHashMap lookup(Locale locale) {
         return LocaleConvertUtilsBean.getInstance().lookup(locale);
@@ -338,6 +339,7 @@ public class LocaleConvertUtils {
      * @return The FastHashMap instance contains the all {@link LocaleConverter} types
      *  for the specified locale.
      * @see LocaleConvertUtilsBean#create(Locale)
+     * @deprecated This method will be modified to return a Map in the next release.
      */
     protected static FastHashMap create(Locale locale) {
 
