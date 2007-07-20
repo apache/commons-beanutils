@@ -583,16 +583,7 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Register the standard converters with the specified defaults.
-     * </p>
-     * This method delegates to the following methods (see their docs
-     * to find out which converters each one registers.
-     * <ul>
-     *     <li>{@link ConvertUtilsBean#registerPrimitives(boolean)}</li>
-     *     <li>{@link ConvertUtilsBean#registerStandard(boolean, boolean)}</li>
-     *     <li>{@link ConvertUtilsBean#registerOther(boolean)}</li>
-     *     <li>{@link ConvertUtilsBean#registerArrays(boolean, int)}</li>
-     * </ul>
+     * Register the provided converters with the specified defaults.
      *
      * @param throwException <code>true</code> if the converters should
      * throw an exception when a conversion error occurs, otherwise <code>
@@ -602,8 +593,9 @@ public class ConvertUtilsBean {
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
      * @param defaultArraySize The size of the default array value for array converters
-     * (see {@link ConvertUtilsBean#registerArrays(boolean, int)}).
-     * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
+     * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
+     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * the default.
      */
     public void register(boolean throwException, boolean defaultNull, int defaultArraySize) {
         registerPrimitives(throwException);
@@ -630,7 +622,7 @@ public class ConvertUtilsBean {
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      */
-    public void registerPrimitives(boolean throwException) {
+    private void registerPrimitives(boolean throwException) {
         register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
         register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
         register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(SPACE));
@@ -666,7 +658,7 @@ public class ConvertUtilsBean {
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
      */
-    public void registerStandard(boolean throwException, boolean defaultNull) {
+    private void registerStandard(boolean throwException, boolean defaultNull) {
 
         Number     defaultNumber     = defaultNull ? null : ZERO;
         BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
@@ -707,7 +699,7 @@ public class ConvertUtilsBean {
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      */
-    public void registerOther(boolean throwException) {
+    private void registerOther(boolean throwException) {
         register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
         register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
@@ -729,7 +721,7 @@ public class ConvertUtilsBean {
      * Specifying a value less than zero causes a <code>null<code> value to be used for
      * the default.
      */
-    public void registerArrays(boolean throwException, int defaultArraySize) {
+    private void registerArrays(boolean throwException, int defaultArraySize) {
 
         // Primitives
         registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
