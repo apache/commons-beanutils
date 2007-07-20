@@ -1,0 +1,108 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project name="Bean Utilities (Other jars)" default="other-jars" basedir=".">
+
+
+<!--
+        $Id$
+-->
+
+
+<!-- ========== Component Declarations ==================================== -->
+
+
+  <!-- The current version number of this component -->
+  <property name="component.version"       value=""/>
+
+  <!-- The base directory for compilation targets -->
+  <property name="build.home"              value="target"/>
+
+  <!-- The base directory for distribution targets -->
+  <property name="dist.home"               value="dist"/>
+
+  <!-- JDK versions -->
+  <property name="maven.compile.source"    value=""/>
+  <property name="maven.compile.target"    value=""/>
+
+
+<!-- ========== Executable Targets ======================================== -->
+
+  <target name="other-jars" depends="core-jar,bean-collections-jar">
+  </target>
+
+  <target name="core-jar" description="Create BeanUtils Core jar">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="LICENSE.txt" tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <copy      file="NOTICE.txt"  tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
+    <jar    jarfile="${dist.home}/commons-beanutils-core-${component.version}.jar">
+        <manifest>
+            <attribute name="Specification-Title" value="Commons BeanUtils Core"/>
+            <attribute name="Specification-Version" value="${component.version}"/>
+            <attribute name="Specification-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Title" value="Commons BeanUtils Core"/>
+            <attribute name="Implementation-Version" value="${component.version}"/> 
+            <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Vendor-Id" value="org.apache"/>
+            <attribute name="X-Compile-Source-JDK" value="${maven.compile.source}"/>
+            <attribute name="X-Compile-Target-JDK" value="${maven.compile.target}"/>
+        </manifest>
+        <fileset dir="${build.home}/classes">
+            <include name="**/*.class"/>
+            <include name="**/LICENSE.txt"/>
+            <include name="**/NOTICE.txt"/>
+            <exclude name="**/BeanComparator*.class"/>
+            <exclude name="**/BeanMap*.class"/>
+            <exclude name="**/BeanPredicate*.class"/>
+            <exclude name="**/BeanPropertyValueChangeClosure*.class"/>
+            <exclude name="**/BeanPropertyValueEqualsPredicate*.class"/>
+            <exclude name="**/BeanToPropertyValueTransformer*.class"/>
+        </fileset>
+    </jar>
+  </target>
+
+  <target name="bean-collections-jar" description="Create Bean Collections jar">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="LICENSE.txt" tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <copy      file="NOTICE.txt"  tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
+    <jar    jarfile="${dist.home}/commons-beanutils-bean-collections-${component.version}.jar">
+        <manifest>
+            <attribute name="Specification-Title" value="Commons BeanUtils Bean Collections"/>
+            <attribute name="Specification-Version" value="${component.version}"/>
+            <attribute name="Specification-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Title" value="Commons BeanUtils Bean Collections"/>
+            <attribute name="Implementation-Version" value="${component.version}"/> 
+            <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Vendor-Id" value="org.apache"/>
+            <attribute name="X-Compile-Source-JDK" value="${maven.compile.source}"/>
+            <attribute name="X-Compile-Target-JDK" value="${maven.compile.target}"/>
+        </manifest>
+        <fileset dir="${build.home}/classes">
+            <include name="**/LICENSE.txt"/>
+            <include name="**/NOTICE.txt"/>
+            <include name="**/BeanComparator*.class"/>
+            <include name="**/BeanMap*.class"/>
+            <include name="**/BeanPredicate*.class"/>
+            <include name="**/BeanPropertyValueChangeClosure*.class"/>
+            <include name="**/BeanPropertyValueEqualsPredicate*.class"/>
+            <include name="**/BeanToPropertyValueTransformer*.class"/>
+        </fileset>
+    </jar>
+  </target>
+
+</project>

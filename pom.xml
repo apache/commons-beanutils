@@ -28,7 +28,7 @@
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
   <version>1.8.0-SNAPSHOT</version>
-  <name>BeanUtils</name>
+  <name>Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
@@ -190,6 +190,28 @@
                 <exclude>**/*MemoryTestCase.java</exclude>
               </excludes>
           </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <configuration>
+                <tasks>
+                  <ant antfile="build-other-jars.xml" target="other-jars">
+                    <property name="component.version"    value="${project.version}"/>
+                    <property name="build.home"           value="${project.build.directory}"/>
+                    <property name="dist.home"            value="${project.build.directory}"/>
+                    <property name="maven.compile.source" value="${maven.compile.source}"/>
+                    <property name="maven.compile.target" value="${maven.compile.target}"/>
+                  </ant>
+                </tasks>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
             <artifactId>maven-assembly-plugin</artifactId>

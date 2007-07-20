@@ -26,6 +26,14 @@
             <fileset dir="${basedir}/src/site/resources/images"/>
         </copy>
     </preGoal>
+
+    <preGoal name="jar:jar">
+        <ant:ant antfile="build-other-jars.xml" target="other-jars">
+            <property name="component.version" value="${pom.currentVersion}"/>
+            <property name="build.home"        value="${maven.build.dir}"/>
+            <property name="dist.home"         value="${maven.build.dir}"/>
+        </ant:ant>
+    </preGoal>
   
     <!-- ================================================================== -->
     <!-- Copy into the binary distribution                                  -->
