@@ -598,7 +598,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
             List list = (List)indexedProperty;
             while (index >= list.size()) {
-                list.add(null);
+                Class contentType = getDynaClass().getDynaProperty(name).getContentType();
+                Object value = null;
+                if (contentType != null) {
+                    value = createProperty(name+"["+list.size()+"]", contentType);
+                }
+                list.add(value);
             }
 
         }
@@ -631,6 +636,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The new value
      */
     protected Object createProperty(String name, Class type) {
+        if (type == null) {
+            return null;
+        }
 
         // Create Lists, arrays or DynaBeans
         if (type.isArray() || List.class.isAssignableFrom(type)) {
