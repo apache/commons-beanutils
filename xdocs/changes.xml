@@ -39,48 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.8.0" date="in SVN">
-      <action dev="niallp" type="fix" issue="BEANUTILS-243" due-to="Henri Yandell">
-         BeanUtils's tests fail to compile under JDK 1.6
-      </action>
+    <release version="1.8.0" date="in SVN" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
       <action dev="niallp" type="add" issue="BEANUTILS-259">
          Add plugable property name expression <b><i>Resolver</i></b>.
-      </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-262">
-         Correct getPropertyDescriptor() and setNestedProperty() methods to throw
-         a NestedNullException rather than just IllegalArgumentException (consistent
-         with the getNestedProperty() method).
-      </action>
-      <action dev="bayard" type="update" issue="BEANUTILS-207" due-to="Erik Meade">
-         Include bean class in the message of PropertyUtilsBean exceptions.
-      </action>
-      <action dev="bayard" type="update" issue="BEANUTILS-224" due-to="Ralf Hauser">
-         Provide better error message for "argument type mismatch".
-      </action>
-      <action dev="niallp" type="update" issue="BEANUTILS-41" due-to="Ralf Hauser">
-         Provide better error message for "No value specified".
-      </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-256" due-to="Torsten Feig">
-         PropertyUtilsBean.getIndexedProperty()'s javadoc should indicate
-         IndexOutOufBoundsException can be thrown rather than just
-         ArrayIndexOutOufBoundsException.
-      </action>
-      <action dev="niallp" type="add" issue="BEANUTILS-242">
-         Add new generic <b>ArrayConverter</b> implementation.
-      </action>
-      <action dev="niallp" type="add" issue="BEANUTILS-255">
-         Add new generic <b>DateTimeConverter</b> implementation.
-         <ul>
-             <li>Converts both to and from <code>String</code> for dates.</li>
-             <li>Can be configured to convert using the default format for either
-                 the default Locale or a specified Locale.</li>
-             <li>Can be configured to convert using a set of 
-                 <code>DateFormat</code> patterns.</li>
-             <li>Provides the basis for all the date converters in BeanUtils.</li>
-             <li>Handles conversion for (and between) <code>java.util.Date</code>,
-                 <code>java.util.Calendar</code>, <code>java.sql.Date</code>,
-                 <code>java.sql.Time</code> and <code>java.sql.Timestamp</code></li>
-         </ul>
       </action>
       <action dev="niallp" type="update" issue="BEANUTILS-258">
          General Converter implementation improvements:
@@ -105,36 +66,85 @@ The <action> type attribute can be add,update,fix,remove.
                </ul>
          </ul>
       </action>
-      <action dev="bayard" type="update" issue="BEANUTILS-30" due-to="Barry Kaplan">
-         Improved messages for unknown properties.
+      <action dev="niallp" type="add" issue="BEANUTILS-242">
+         Add new generic <b>ArrayConverter</b> implementation.
       </action>
-      <action dev="bayard" type="fix" issue="BEANUTILS-121" due-to="Chris Tilden">
-         Resolve compiler warnings: Unused imports, un-read local variables,
-         field hiding, empty block, improperly used statics, uncessary semi
-         colons, unnecessary casts.
-      </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-250">
-         LazyDynaClass can create a DynaProperty with a "null" type.
-      </action>
-      <action dev="bayard" type="fix" issue="BEANUTILS-241" due-to="Chris Hyzer">
-         Fix BeanComparator throws wrong exception and hides cause.
+      <action dev="niallp" type="add" issue="BEANUTILS-255">
+         Add new generic <b>DateTimeConverter</b> implementation.
+         <ul>
+             <li>Converts both to and from <code>String</code> for dates.</li>
+             <li>Can be configured to convert using the default format for either
+                 the default Locale or a specified Locale.</li>
+             <li>Can be configured to convert using a set of 
+                 <code>DateFormat</code> patterns.</li>
+             <li>Provides the basis for all the date converters in BeanUtils.</li>
+             <li>Handles conversion for (and between) <code>java.util.Date</code>,
+                 <code>java.util.Calendar</code>, <code>java.sql.Date</code>,
+                 <code>java.sql.Time</code> and <code>java.sql.Timestamp</code></li>
+         </ul>
       </action>
       <action dev="vgritsenko" type="update" issue="BEANUTILS-239" due-to="Rafael Afonso">
          Better implementation of SqlDateConverter. Modified SqlDateConverter,
          SqlTimeConverter and SqlTimestampConverter to accept java.util.Date
          and Calendar object instances. Added tests.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-54" due-to="Pascal Grange">
-         Add Implementation-Vendor-Id entry to jar's manifest.
+      <action dev="niallp" type="add" issue="BEANUTILS-286">
+         New Facade converter implementation - hide non-Converter public APIs.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-133" due-to="Masoud Omidvar">
-         LazyDynabean JavaDoc corrections.
+      <action dev="skitching" type="update" issue="BEANUTILS-229">
+         Add "t/f" to BooleanConverter.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-68" due-to="Dmitry Platonoff">
-         Writing to a mapped property requires a setter for a map, but never uses it.
+      <action dev="niallp" type="update" issue="BEANUTILS-43" due-to="Firepica and Thomas Jacob">
+         Support Mapped property inside a mapped property.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-69" due-to="Chris Audley">
-         MappedPropertyDescriptor doesn't recognize boolean property accessor.
+      <action dev="niallp" type="update" issue="BEANUTILS-113" due-to="Firepica and Ludwig Wensauer">
+         Support Indexed property inside a mapped property.
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-247" due-to="Christian Poitras, Thomas Jacob and scott sadlo">
+         Support Arrays with multiple dimension.
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-207" due-to="Erik Meade">
+         Include bean class in the message of PropertyUtilsBean exceptions.
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-224" due-to="Ralf Hauser">
+         Provide better error message for "argument type mismatch".
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-30" due-to="Barry Kaplan">
+         Improved messages for unknown properties.
+      </action>
+      <action dev="bayard" type="update" issue="BEANUTILS-193" due-to="Nestor Boscan">
+         MethodUtils.invoke for static methods.
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-266" due-to="Brian Ewins and Commons HttpClient">
+         Log or throw exception in PropertyUtilsBean.
+         Added mechanism to initialize the "cause" on an Exception using reflection for JDK 1.4+
+         (copied from Commons HttpClient).
+      </action>
+      <action dev="niallp" type="add" due-to="Vic Cekvenich">
+         Add lazyDynaList.
+      </action>
+      <action dev="niallp" type="add" issue="BEANUTILS-185" due-to="Gabriel Belingueres">
+         Provide a Map decorator for a DynaBean (enables DynaBean to be used with other teechnologies such as JSTL).
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-233" due-to="Russell">
+         Implement equals() and hashCode() methods for DynaProperty. 
+      </action>
+
+
+      <action dev="niallp" type="fix" issue="BEANUTILS-243" due-to="Henri Yandell">
+         BeanUtils's tests fail to compile under JDK 1.6
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-49" due-to="Jesper Richter-Reichhelm">
+         Lock in BeanUtilsBean.getInstance(
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-157" due-to="Thorbjorn Ravn Andersen">
+         Beanutils's describe() method cannot determine reader methods for anonymous class.
+      </action>
+      <action dev="rdonkin" type="fix" issue="BEANUTILS-158">
+         Added warning about describe behaviour to the javadocs.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-249" due-to="Brad">
+         BeanUtilsBean's setProperty() does not convert objects using custom converters properly.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-17">
          Fix javadoc - IllegalArgumentException in BeanUtils.copyProperties
@@ -142,43 +152,56 @@ The <action> type attribute can be add,update,fix,remove.
         <dueto name="Matthew Sgarlata"/>
         <dueto name="Corey Scott"/>
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-163">
-         Add test for MappedPropertyDescriptor with different types on get/set methods.
-      </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-23" due-to="Aslak Hellesoy">
-         Misleading error message in ConvertingWrapDynaBean.
+      <action dev="niallp" type="fix" issue="BEANUTILS-68" due-to="Dmitry Platonoff">
+         Writing to a mapped property requires a setter for a map, but never uses it.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-110" due-to="Etienne Bernard">
          BeanUtilsBean.getArrayProperty() does not use ConvertUtils.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-217" due-to="Carlos Sanchez">
-         Improvements to maven build.
-      </action>
-      <action dev="niallp" type="add" due-to="Vic Cekvenich">
-         Add lazyDynaList.
-      </action>
-      <action dev="niallp" type="fix">
-         Make WrapDynaBean Serializable.
-      </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-24" due-to="Roi Ares">
-         LazyDynaBean: don't try and instantiate properties of type Object.class.
-      </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-6" due-to="Sam Ruby">
-         Replace copied code.
-      </action>
-      <action dev="skitching" type="fix">
-         WrapDynaClass: Added comment re potential memory leak, and safety when using
-         shared classloader
+         MappedPropertyDescriptor - replace copied code.
       </action>
       <action dev="skitching" type="fix">
          MappedPropertyDescriptor: Add comments re: * use of static variable safe in shared
          classloader * memory leak possible on webapp undeploy.
       </action>
-      <action dev="skitching" type="fix">
-         Replace use of static Log objects with instance or local variables. It isn't safe
-         to use static Log objects in code that might be deployed via a shared classloader
-         as they will bind to the Log object from the context classloader in use when the
-         first use happens.
+      <action dev="niallp" type="fix" issue="BEANUTILS-69" due-to="Chris Audley">
+         MappedPropertyDescriptor doesn't recognize boolean property accessor.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-163">
+         Add test for MappedPropertyDescriptor with different types on get/set methods.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-140" due-to="Marco La Porta">
+         LocaleBeanUtils setProperty does not work on nested property.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-87" due-to="YOKOTA Takehiko">
+         Package scope implementation of a public interface for mapped property fails
+         (fixed by changes to MappedPropertyDescriptor associated with BEANUTILS-6)
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-33" due-to="Eoin Curran">
+         PropertyUtils incosistency - can't use "dot" in mapped properties for setProperty
+         or getPropertyDescriptor (fixed by the changes for BEANUTILS-259
+         Plugable Property Name Expression Resolver).
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-273" due-to="Marcelo Liberato">
+         Public methods overriden in anonymous or private subclasses are not recognized by PropertyUtils.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-88" due-to="Chuck Daniels">
+         PropertyUtilsBean's isReadable() / isWriteable() always return false for mapped properties.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-61" due-to="Brian Ewins">
+         PropertyUtilsBean isReadable() and isWriteable() methods do not work correctly for WrapDynaBean.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-18" due-to="Maarten Coene">
+         PropertyUtils.isReadable() and PropertyUtils.getProperty() not consistent.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-92" due-to="Will Pugh">
+         PropertyUtilsBean.copyProperties does not catch NoSuchMethodException
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-256" due-to="Torsten Feig">
+         PropertyUtilsBean.getIndexedProperty()'s javadoc should indicate
+         IndexOutOufBoundsException can be thrown rather than just
+         ArrayIndexOutOufBoundsException.
       </action>
       <action dev="skitching" type="fix" issue="BEANUTILS-162">
          Create new methods getPropertyOfMapBean and setPropertyOfMapBean that the existing
@@ -198,16 +221,13 @@ The <action> type attribute can be add,update,fix,remove.
          See <a href="http://issues.apache.org/jira/browse/BEANUTILS-162">BEANUTILS-162</a> for
          discussion.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-78" due-to="Stefan Lotscher">
-         DecimalLocaleConverter and subClasses never throw a ConversionException.
+      <action dev="niallp" type="fix" issue="BEANUTILS-262">
+         Correct getPropertyDescriptor() and setNestedProperty() methods to throw
+         a NestedNullException rather than just IllegalArgumentException (consistent
+         with the getNestedProperty() method).
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-36" due-to="Jack">
-         WrapDynaBeanTestCase failing with jikes/kaffe because of static List in TestBean.
-      </action>
-      <action dev="scolebourne" type="fix" due-to="Dimiter Dimitrov">
-         BeanMap: Fix internal variable to not include non-existant write methods.
-         Fix for <a href="http://issues.apache.org/jira/browse/COLLECTIONS-22">COLLECTIONS-22</a>
-         ported from Commons Collections.
+      <action dev="niallp" type="fix" issue="BEANUTILS-97">
+         Problems on indexed property with JDK 1.4.
       </action>
       <action dev="skitching" type="update">
          BooleanArrayConverter:
@@ -230,11 +250,83 @@ The <action> type attribute can be add,update,fix,remove.
          AbstractArrayConverter: provide ability to pass special NO_DEFAULT object as the
          "defaultValue" constructor parameter.
       </action>
-      <action dev="rdonkin" type="fix" issue="BEANUTILS-158">
-         Added warning about describe behaviour to the javadocs.
+      <action dev="niallp" type="fix" issue="BEANUTILS-78" due-to="Stefan Lotscher">
+         DecimalLocaleConverter and subClasses never throw a ConversionException.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-97">
-         Problems on indexed property with JDK 1.4.
+      <action dev="niallp" type="fix" issue="BEANUTILS-44" due-to="Paul Jenkins">
+         FloatLocaleConverter cannot parse negative values.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-263" due-to="Alex Albu">
+         Improve ClassConverter robustness.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-271" due-to="Nico Hoogervorst">
+         DateLocaleConverter does not always throw an Exception for invalid dates.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-288">
+         Don't try parsing values that are already Dates/Numbers in Date/Number locale Converters.
+      </action>
+      <action dev="skitching" type="fix">
+         WrapDynaClass: Added comment re potential memory leak, and safety when using
+         shared classloader
+      </action>
+      <action dev="niallp" type="fix">
+         Make WrapDynaBean Serializable.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-36" due-to="Jack">
+         WrapDynaBeanTestCase failing with jikes/kaffe because of static List in TestBean.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-23" due-to="Aslak Hellesoy">
+         Misleading error message in ConvertingWrapDynaBean.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-24" due-to="Roi Ares">
+         LazyDynaBean: don't try and instantiate properties of type Object.class.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-133" due-to="Masoud Omidvar">
+         LazyDynabean JavaDoc corrections.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-250">
+         LazyDynaClass can create a DynaProperty with a "null" type.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-289">
+         JDBCDynaClass "lowerCase" option causes problems in RowSetDynaClass and ResultSetIterator.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-142" due-to="Li Zhang">
+         RowSetDynaClass fails to copy ResultSet to DynaBean with Oracle 10g JDBC driver.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-241" due-to="Chris Hyzer">
+         Fix BeanComparator throws wrong exception and hides cause.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-112" due-to="Simon Kitching">
+         Deprecate the public static defaultTransformers HashMap and make it unmodifiable.
+      </action>
+
+      <action dev="niallp" type="update" issue="BEANUTILS-290">
+         Merge Bean-Collections back into core BeanUtils and remove Bean-Collections sub-project.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-287">
+         Fixi the build to include all the tests and change the build.properties.sample so it's easier
+         to use for the default maven user (ie: it looks by default in the .maven repository)
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-217" due-to="Carlos Sanchez">
+         Improvements to maven build.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-54" due-to="Pascal Grange">
+         Add Implementation-Vendor-Id entry to jar's manifest.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-121" due-to="Chris Tilden">
+         Resolve compiler warnings: Unused imports, un-read local variables,
+         field hiding, empty block, improperly used statics, uncessary semi
+         colons, unnecessary casts.
+      </action>
+      <action dev="skitching" type="fix">
+         Replace use of static Log objects with instance or local variables. It isn't safe
+         to use static Log objects in code that might be deployed via a shared classloader
+         as they will bind to the Log object from the context classloader in use when the
+         first use happens.
+      </action>
+      <action dev="scolebourne" type="fix" due-to="Dimiter Dimitrov" issue="COLLECTIONS-22">
+         BeanMap: Fix internal variable to not include non-existant write methods.
+         - ported from Commons Collections.
       </action>
       <action dev="rdonkin" type="update" due-to="Steve Cohen">
          Change MethodUtils to make getMatchingAccessibleMethod() method selection more

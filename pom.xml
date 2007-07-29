@@ -33,7 +33,7 @@
   <inceptionYear>2000</inceptionYear>
   <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
 
-  <url>http://jakarta.apache.org/commons/beanutils/</url>
+  <url>http://commons.apache.org/beanutils/</url>
 
   <issueManagement>
     <system>jira</system>
@@ -41,9 +41,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/jakarta/commons/proper/beanutils/trunk/</developerConnection>
-    <url>http://svn.apache.org/viewvc/jakarta/commons/proper/beanutils/trunk/</url>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</developerConnection>
+    <url>http://svn.apache.org/viewvc/commons/proper/beanutils/trunk/</url>
   </scm>
 
   <developers>
