@@ -58,7 +58,7 @@ The word <code>functor</code> is mathematical in origin but comes into object or
 development from functional and logic coding. In Java terms, a functor 
 is a function that is encapsulated as an object (and so can be manipulated as an object).
 This allows elegant, concise and powerful techniques to be used. For example, 
-<a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>
+<a href='http://commons.apache.org/collections'>Commons Collections</a>
 contains utilities that allow functions (as functors) to be easily applied to 
 Collections.
         </p>
@@ -70,7 +70,7 @@ You might just like them!
         </p>
         <p>
 For more information about functors, please read the introduction to the
-<a href='http://jakarta.apache.org/commons/sandbox/functor/'>Commons Functor component</a>.
+<a href='http://commons.apache.org/sandbox/functor/'>Commons Functor component</a>.
         </p>
     </subsection>
 </section>
@@ -78,7 +78,7 @@ For more information about functors, please read the introduction to the
         <p>
 BeanUtils Bean-Collections is distributed as an optional jar within the main 
 beanutils distribution. For details, see the 
-<a href='http://jakarta.apache.org/commons/beanutils/index.html'>main BeanUtils website</a>
+<a href='http://commons.apache.org/beanutils/index.html'>main BeanUtils website</a>
         </p>
 </section>
 

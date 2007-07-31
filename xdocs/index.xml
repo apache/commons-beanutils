@@ -60,7 +60,7 @@ The next release will see a departure from the usual packaging strategy.
 Rather than just a single jar, BeanUtils will distribute a 
 <code>commons-beanutils-core.jar</code> containing the essential parts of BeanUtils
 with minimal dependencies (for this release just 
-<a href='http://jakarta.apache.org/commons/logging'>Commons Logging</a>).
+<a href='http://commons.apache.org/logging'>Commons Logging</a>).
 Other parts of BeanUtils (typically specialized modules) will be distributed as separate,
 modular jars with additional dependencies. Hopefully this will allow library and framework 
 creators more finely grained control over their dependencies. It should also help with
@@ -74,7 +74,7 @@ containing everything. Drop it in and add any dependencies your application need
     <subsection name='Bean Collections'>
         <p>
 Bean collections is a library combining BeanUtils with 
-<a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>
+<a href='http://commons.apache.org/collections'>Commons Collections</a>
 to provide services for collections of beans. One class (<code>BeanComparator</code>)
 was previously released, the rest are new. This new distribution strategy should allow
 this sub-component to evolve naturally without the concerns about size and scope
@@ -82,7 +82,7 @@ that might otherwise happen.
         </p>
         <p>
 Bean Collections has an additional dependency on 
-<a href='http://jakarta.apache.org/commons/collections'>Commons Collections</a>.
+<a href='http://commons.apache.org/collections'>Commons Collections</a>.
         </p>
     </subsection>
 </section>
@@ -93,11 +93,11 @@ Bean Collections has an additional dependency on
 <p>The <a href="apidocs/org/apache/commons/beanutils/package-summary.html#package_description">
 User Guide</a> is part of the <i>package</i> JavaDocs.</p>
 
-<p>The <a href="http://jakarta.apache.org/commons/beanutils/RELEASE-NOTES.txt">
+<p>The <a href="http://commons.apache.org/beanutils/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
 included in this release.</p>
 
-<p>The <a href="http://jakarta.apache.org/commons/beanutils/api/index.html">
+<p>The <a href="http://commons.apache.org/beanutils/api/index.html">
 JavaDoc API documents</a> are available online.  In particular, you should
 note the property reference syntax options described in the
 <code>PropertyUtils</code> class description.</p>

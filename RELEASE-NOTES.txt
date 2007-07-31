@@ -27,7 +27,7 @@ This document contains the release notes for this version of the Commons
 BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
-o http://jakarta.apache.org/commons/beanutils/
+o http://commons.apache.org/beanutils/
 
 Compatibility with 1.7.0
 ========================

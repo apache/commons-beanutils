@@ -15,7 +15,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<!DOCTYPE org.apache.commons.menus SYSTEM 'http://jakarta.apache.org/commons/build/maven-build.dtd'>
+<!DOCTYPE org.apache.commons.menus SYSTEM 'http://commons.apache.org/build/maven-build.dtd'>
 <project name="BeanUtils">
 
   <title>BeanUtils</title>
@@ -27,7 +27,7 @@
     <links>
       <item name="Apache"  href="http://www.apache.org"/>
       <item name="Jakarta" href="http://jakarta.apache.org"/>
-      <item name="Commons" href="http://jakarta.apache.org/commons/"/>
+      <item name="Commons" href="http://commons.apache.org/"/>
     </links>
 
     <menu name="BeanUtils">
@@ -53,21 +53,21 @@
 
       <item name='1.7.0 Release'>
             <item   name='User Guide'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
             <item   name='Core API'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/api'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/docs/api'/>
             <item   name='Bean Collections API'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/docs/bean-collections'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/docs/bean-collections'/>
             <item   name='Release Notes'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt'/>
       </item>
       <item name='1.6.1 Release'>
             <item   name='User Guide'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
             <item   name='API'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/docs/api/'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/docs/api/'/>
             <item   name='Release Notes'
-                    href='http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
+                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
       </item>
     </menu>
 
