@@ -19,20 +19,19 @@
 <project name="BeanUtils">
 
   <title>BeanUtils</title>
-  <organizationLogo href="/images/jakarta-logo-blue.gif">
-   Jakarta
+  <organizationLogo href="http://commons.apache.org/images/logo.png">
+   Commons
   </organizationLogo>
 
   <body>
     <links>
       <item name="Apache"  href="http://www.apache.org"/>
-      <item name="Jakarta" href="http://jakarta.apache.org"/>
       <item name="Commons" href="http://commons.apache.org/"/>
     </links>
 
     <menu name="BeanUtils">
       <item name="Overview" href="/index.html"/>   
-      <item name="Download"                href="http://jakarta.apache.org/site/downloads/downloads_commons-beanutils.cgi"/>
+      <item name="Download"                href="http://commons.apache.org/downloads/download_beanutils.cgi"/>
       <item name="Release Notes"           href="/changes-report.html"/>
       <item name="Dependencies"            href="/dependencies.html"/>
       <item name="Mailing Lists"           href="/mail-lists.html"/>
