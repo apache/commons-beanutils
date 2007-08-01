@@ -211,7 +211,7 @@
           <scope>test</scope>
           <comment>
               &lt;strong&gt;Test Only&lt;/strong&gt; - required only for
-              running the Validator unit tests.
+              running the unit tests.
           </comment>
       </properties>
     </dependency>
