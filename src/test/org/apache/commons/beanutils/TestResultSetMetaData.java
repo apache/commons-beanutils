@@ -128,8 +128,9 @@ public class TestResultSetMetaData implements InvocationHandler {
         int sqlType = Types.OTHER;
         if (columnName.equals("bigDecimalProperty")) {
             sqlType = Types.DECIMAL;
-        } else if (columnName.equals("booleanProperty")) {
-            sqlType = Types.BOOLEAN;
+// Types.BOOLEAN only introduced in JDK 1.4
+//        } else if (columnName.equals("booleanProperty")) {
+//            sqlType = Types.BOOLEAN;
         } else if (columnName.equals("byteProperty")) {
             sqlType = Types.TINYINT;
         } else if (columnName.equals("dateProperty")) {
