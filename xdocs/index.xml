@@ -54,37 +54,33 @@ packages in the JDK Javadocs).  However, these APIs can be quite complex to
 understand and utilize.  The  <em>BeanUtils</em> component provides
 easy-to-use wrappers around these capabilities.
 </p>
-    <subsection name='BeanUtils Core And Modules'>
-        <p>
-The next release will see a departure from the usual packaging strategy. 
-Rather than just a single jar, BeanUtils will distribute a 
-<code>commons-beanutils-core.jar</code> containing the essential parts of BeanUtils
-with minimal dependencies (for this release just 
-<a href='http://commons.apache.org/logging'>Commons Logging</a>).
-Other parts of BeanUtils (typically specialized modules) will be distributed as separate,
-modular jars with additional dependencies. Hopefully this will allow library and framework 
-creators more finely grained control over their dependencies. It should also help with
-compatibility issues.
-        </p>
-        <p>
-For everyone else, don't worry :) There will be a single commons-beanutils-all.jar 
-containing everything. Drop it in and add any dependencies your application needs.
-        </p>
-    </subsection>
-    <subsection name='Bean Collections'>
-        <p>
+
+<subsection name='BeanUtils Core And Modules'>
+<p>
+Since the 1.7.0 release BeanUtils has distributed three jars:
+<ul>
+  <li><code>commons-beanutils.jar</code> - contains everything</li>
+  <li><code>commons-beanutils-core.jar</code> - excludes <i>Bean Collections</i> classes</li>
+  <li><code>commons-beanutils-bean-collections.jar</code> - only <i>Bean Collections</i> classes</li>
+</ul>
+The main <code>commons-beanutils.jar</code> has an <b><i>optional</i></b> dependency on
+<a href='http://commons.apache.org/collections'>Commons Collections</a>
+</p>
+</subsection>
+<subsection name='Bean Collections'>
+<p>
 Bean collections is a library combining BeanUtils with 
 <a href='http://commons.apache.org/collections'>Commons Collections</a>
 to provide services for collections of beans. One class (<code>BeanComparator</code>)
 was previously released, the rest are new. This new distribution strategy should allow
 this sub-component to evolve naturally without the concerns about size and scope
 that might otherwise happen.
-        </p>
-        <p>
+</p>
+<p>
 Bean Collections has an additional dependency on 
 <a href='http://commons.apache.org/collections'>Commons Collections</a>.
-        </p>
-    </subsection>
+</p>
+</subsection>
 </section>
 
 
