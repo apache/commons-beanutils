@@ -39,7 +39,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.8.0" date="in SVN" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
+    <release version="1.8.0-BETA" date="2007-08-04" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
       <action dev="niallp" type="add" issue="BEANUTILS-259">
          Add plugable property name expression <b><i>Resolver</i></b>.
       </action>

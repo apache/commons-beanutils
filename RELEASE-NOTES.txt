@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.8.0
+                            Version 1.8.0-BETA
                                Release Notes
 
 INTRODUCTION:
@@ -31,7 +31,7 @@ o http://commons.apache.org/beanutils/
 
 Compatibility with 1.7.0
 ========================
-BeanUtils 1.8.0 is binary compatible release with Beanutils 1.7.0,
+BeanUtils 1.8.0-BETA is binary compatible release with Beanutils 1.7.0,
 containing a number of bug fixes and enhancements.
 
 ENHANCEMENTS:
