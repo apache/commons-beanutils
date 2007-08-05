@@ -28,6 +28,11 @@
 <section name="Commons BeanUtils">
 
 <p>
+<strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
+and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
+release</strong> (see <a href="/issue-tracking.html">here</a> for reporting any issues).
+</p>
+<p>
 Most Java developers are used to creating Java classes that conform to the
 JavaBeans naming patterns for property getters and setters.  It is natural to
 then access these methods directly, using calls to the corresponding
@@ -102,20 +107,24 @@ note the property reference syntax options described in the
 
 
 <section name="Releases">
-    <subsection name='Mirrored Releases'>
+<subsection name="1.8.0 Beta">
 <p>
-Releases after 1.7.0 should be downloaded from a mirror. Please remember to verify the 
-sigature of the release from the 
-<a href='http://www.apache.org/dist/commons/beanutils/'>main apache site</a>
-when downloading from a mirror.
+<strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
+and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
+release</strong> (see <a href="/issue-tracking.html">here</a> for reporting any issues).
 </p>
 <p>
-    Binary and Source releases are available 
-    <a href="http://commons.apache.org/downloads/download_beanutils.cgi">here</a>.
+BeanUtils <strong>1.8.0 Beta</strong> is binary compatible with version 1.7.0
+and contains quite a few 
+<a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">
+bug fixes and enhancements</a>. Since it has been nearly three years since the
+last BeanUtils release, it is hoped that this <strong><i>Beta</i></strong> release
+will facilitate wider testing to ensure that there are no major compatibility issues
+before the final 1.8.0 release.
 </p>
 </subsection>
-<subsection name='1.7.x Releases (Mirrored)'>
-    <p>
+<subsection name="1.7.0">
+<p>
 <strong>BeanUtils 1.7.0</strong> is a service release which removes the dependency
 upon a specific commons-collection library version. It may be safely used together
 with either the 2.x or 3.x series of commons-collections releases.
@@ -139,6 +148,10 @@ jar contains all classes. The modular jar set consists of a core jar dependent o
 on commons logging and an optional bean collections jar (containing classes that 
 provide easy and efficient ways to manage collections of beans) which depends on 
 commons collections 3.
+</p>
+<p>
+BeanUtils 1.7.0 is available to download
+<a href="http://commons.apache.org/downloads/download_beanutils.cgi">here</a>.
 </p>
 </subsection>
     <subsection name='Older Releases (Not Mirrored)'>

@@ -37,10 +37,10 @@
             <item name="Building"             href="/building.html"/>
             <!-- item name="History"              href="/changes-report.html"/ -->
             <item name="Wiki"                 href="http://wiki.apache.org/jakarta-commons/BeanUtils"/>
-            <item name="Latest">
-                <item name="User Guide"       href="/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
-                <item name="API"              href="/apidocs/index.html"/>
-                <item name="Bean Collections" href="/bean-collections.html"/>
+            <item name="1.8.0-BETA">
+                <item name="Release Notes"    href='http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt'/>
+                <item name="User Guide"       href="http://commons.apache.org/beanutils/v1.8.0-BETA/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+                <item name="API"              href="http://commons.apache.org/beanutils/v1.8.0-BETA/apidocs/index.html"/>
             </item>
             <item name="1.7.0 Release">
                 <item name="User Guide"       href="http://commons.apache.org/beanutils/commons-beanutils-1.7.0/docs/api/org/apache/commons/beanutils/package-summary.html#package_description"/>
