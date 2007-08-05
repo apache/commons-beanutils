@@ -42,7 +42,7 @@
 
     <menu name="Documentation">
       <item name="Building"                href="/building.html"/>
-      <item name="Wiki"                    href="http://wiki.apache.org/jakarta-commons/BeanUtils"/>
+      <item name="Wiki"                    href="http://wiki.apache.org/commons/BeanUtils"/>
 
       <item name="1.8.0-BETA">
             <item name="Release Notes"     href='http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt'/>
