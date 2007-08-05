@@ -30,7 +30,7 @@
 <p>
 <strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
 and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
-release</strong> (see <a href="/issue-tracking.html">here</a> for reporting any issues).
+release</strong> (see <a href="issue-tracking.html">here</a> for reporting any issues).
 </p>
 <p>
 Most Java developers are used to creating Java classes that conform to the
@@ -111,7 +111,7 @@ note the property reference syntax options described in the
 <p>
 <strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
 and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
-release</strong> (see <a href="/issue-tracking.html">here</a> for reporting any issues).
+release</strong> (see <a href="issue-tracking.html">here</a> for reporting any issues).
 </p>
 <p>
 BeanUtils <strong>1.8.0 Beta</strong> is binary compatible with version 1.7.0
