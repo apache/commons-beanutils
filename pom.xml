@@ -41,7 +41,7 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</connection>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</developerConnection>
     <url>http://svn.apache.org/viewvc/commons/proper/beanutils/trunk/</url>
   </scm>
