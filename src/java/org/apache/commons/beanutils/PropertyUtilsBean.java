@@ -125,6 +125,9 @@ public class PropertyUtilsBean {
     private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
     private static final Class[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
     
+    /** An empty object array */
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
     /** Log instance */
     private Log log = LogFactory.getLog(PropertyUtils.class);
     
@@ -498,7 +501,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter and return the value
-        Object value = invokeMethod(readMethod, bean, new Object[0]);
+        Object value = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         if (!value.getClass().isArray()) {
             if (!(value instanceof java.util.List)) {
                 throw new IllegalArgumentException("Property '" + name +
@@ -640,7 +643,7 @@ public class PropertyUtilsBean {
           /* means that the result has to be retrieved from a map */
           Method readMethod = getReadMethod(descriptor);
           if (readMethod != null) {
-            Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
+            Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
               result = ((java.util.Map)invokeResult).get(key);
@@ -1295,7 +1298,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter and return the value
-        Object value = invokeMethod(readMethod, bean, new Object[0]);
+        Object value = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         return (value);
 
     }
@@ -1614,7 +1617,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter to get the array or list
-        Object array = invokeMethod(readMethod, bean, new Object[0]);
+        Object array = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         if (!array.getClass().isArray()) {
             if (array instanceof List) {
                 // Modify the specified value in the List
@@ -1768,7 +1771,7 @@ public class PropertyUtilsBean {
           /* means that the result has to be retrieved from a map */
           Method readMethod = getReadMethod(descriptor);
           if (readMethod != null) {
-            Object invokeResult = invokeMethod(readMethod, bean, new Object[0]);
+            Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
               ((java.util.Map)invokeResult).put(key, value);
