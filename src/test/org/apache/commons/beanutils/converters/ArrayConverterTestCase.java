@@ -361,6 +361,33 @@ public class ArrayConverterTestCase extends TestCase {
     }
 
     /**
+     * Test for BEANUTILS-302 - throwing a NPE when underscore used
+     */
+    public void testUnderscore_BEANUTILS_302() {
+        String value = "first_value,second_value";
+        ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
+
+        // test underscore not allowed (the default)
+        String[] result = (String[])converter.convert(String[].class, value);
+        assertNotNull("result.null", result);
+        assertEquals("result.length", 4, result.length);
+        assertEquals("result[0]", "first", result[0]);
+        assertEquals("result[1]", "value", result[1]);
+        assertEquals("result[2]", "second", result[2]);
+        assertEquals("result[3]", "value", result[3]);
+
+        // configure the converter to allow underscore
+        converter.setAllowedChars(new char[] {'.', '-', '_'});
+
+        // test underscore allowed
+        result = (String[])converter.convert(String[].class, value);
+        assertNotNull("result.null", result);
+        assertEquals("result.length", 2, result.length);
+        assertEquals("result[0]", "first_value", result[0]);
+        assertEquals("result[1]", "second_value", result[1]);
+    }
+
+    /**
      * Check that two arrays are the same.
      * @param msg Test prefix msg
      * @param expected Expected Array value

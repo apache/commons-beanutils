@@ -434,10 +434,12 @@ public class ArrayConverter extends AbstractConverter {
             while (true) {
                 int ttype = st.nextToken();
                 if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)) {
-                    if (list == null) {
-                        list = new ArrayList();
+                    if (st.sval != null) {
+                        if (list == null) {
+                            list = new ArrayList();
+                        }
+                        list.add(st.sval);
                     }
-                    list.add(st.sval.trim());
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
                 } else {
