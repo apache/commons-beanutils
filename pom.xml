@@ -180,6 +180,23 @@
                 -->
                 <exclude>**/*MemoryTestCase.java</exclude>
               </excludes>
+
+              <!-- Configure Logging -->
+              <systemProperties>
+                  <property>
+                      <name>org.apache.commons.logging.LogFactory</name>
+                      <value>org.apache.commons.logging.impl.LogFactoryImpl</value>
+                  </property>
+                  <property>
+                      <name>org.apache.commons.logging.Log</name>
+                      <value>org.apache.commons.logging.impl.SimpleLog</value>
+                  </property>
+                  <property>
+                      <name>org.apache.commons.logging.simplelog.defaultlog</name>
+                      <value>WARN</value>
+                  </property>
+              </systemProperties>
+
           </configuration>
         </plugin>
         <plugin>

@@ -263,7 +263,7 @@ public class LocaleConvertUtilsBean {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
-                    clazz.getName() + " using " + locale.toString() +
+                    clazz.getName() + " using " + locale +
                     " locale and " + pattern + " pattern");
         }
 
@@ -333,7 +333,7 @@ public class LocaleConvertUtilsBean {
         }
         if (log.isDebugEnabled()) {
             log.debug("Convert String[" + values.length + "] to class " +
-                    type.getName() + "[] using " + locale.toString() +
+                    type.getName() + "[] using " + locale +
                     " locale and " + pattern + " pattern");
         }
 

@@ -23,6 +23,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
@@ -593,6 +594,39 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 stringArray.getClass());
         checkStringArray(value, stringArray2);
 
+    }
+
+    /**
+     * Test conversion of a String using a Locale and pattern.
+     */
+    public void testConvertStringLocaleNull() {
+        Object result = null;
+        try {
+            result = LocaleConvertUtils.convert("123", Integer.class, (Locale)null, "#,###");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Threw: " + e);
+        }
+        assertNotNull("Null Result", result);
+        assertEquals("Integer Type", Integer.class, result.getClass());
+        assertEquals("Integer Value", new Integer(123), result);
+    }
+
+    /**
+     * Test conversion of a String array using a Locale and pattern.
+     */
+    public void testConvertStringArrayLocaleNull() {
+        Object result = null;
+        try {
+            result = LocaleConvertUtils.convert(new String[] {"123"}, Integer[].class, (Locale)null, "#,###");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Threw: " + e);
+        }
+        assertNotNull("Null Result", result);
+        assertEquals("Integer Array Type", Integer[].class, result.getClass());
+        assertEquals("Integer Array Length", 1, ((Integer[])result).length);
+        assertEquals("Integer Array Value", new Integer(123), ((Integer[])result)[0]);
     }
 
 
