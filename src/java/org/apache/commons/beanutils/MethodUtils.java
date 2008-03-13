@@ -68,6 +68,16 @@ public class MethodUtils {
      * will get the warning in its logs but that should be good enough.
      */
     private static boolean loggedAccessibleWarning = false;
+    
+    /** 
+     * Indicates whether methods should be cached for improved performance.
+     * <p>
+     * Note that when this class is deployed via a shared classloader in
+     * a container, this will affect all webapps. However making this
+     * configurable per webapp would mean having a map keyed by context classloader
+     * which may introduce memory-leak problems.
+     */
+    private static boolean CACHE_METHODS = true;
 
     /** An empty class array */
     private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
@@ -97,6 +107,30 @@ public class MethodUtils {
     private static WeakHashMap cache = new WeakHashMap();
     
     // --------------------------------------------------------- Public Methods
+
+    /**
+     * Set whether methods should be cached for greater performance or not,
+     * default is <code>true</code>.
+     *
+     * @param cacheMethods <code>true</code> if methods should be
+     * cached for greater performance, otherwise <code>false</code>
+     */
+    public static synchronized void setCacheMethods(boolean cacheMethods) {
+        CACHE_METHODS = cacheMethods;
+        if (!CACHE_METHODS) {
+            clearCache();
+        }
+    }
+
+    /**
+     * Clear the method cache.
+     * @return the number of cached methods cleared
+     */
+    public static synchronized int clearCache() {
+        int size = cache.size();
+        cache.clear();
+        return size;
+    }
     
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
@@ -677,14 +711,14 @@ public class MethodUtils {
         try {
             MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
             // Check the cache first
-            Method method = (Method)cache.get(md);
+            Method method = getCachedMethod(md);
             if (method != null) {
                 return method;
             }
             
             method =  getAccessibleMethod
                     (clazz.getMethod(methodName, parameterTypes));
-            cache.put(md, method);
+            cacheMethod(md, method);
             return method;
         } catch (NoSuchMethodException e) {
             return (null);
@@ -873,7 +907,7 @@ public class MethodUtils {
         // most of the time this works and it's much faster
         try {
             // Check the cache first
-            Method method = (Method)cache.get(md);
+            Method method = getCachedMethod(md);
             if (method != null) {
                 return method;
             }
@@ -932,7 +966,7 @@ public class MethodUtils {
                         "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
                         se);
             }
-            cache.put(md, method);
+            cacheMethod(md, method);
             return method;
             
         } catch (NoSuchMethodException e) { /* SWALLOW */ }
@@ -1010,7 +1044,7 @@ public class MethodUtils {
             }
         }
         if ( bestMatch != null ){
-                 cache.put(md, bestMatch);  
+                 cacheMethod(md, bestMatch);
         } else {
         // didn't find a match
                log.trace("No match found.");
@@ -1194,6 +1228,33 @@ public class MethodUtils {
         }
     }
     
+
+    /**
+     * Return the method from the cache, if present.
+     *
+     * @param md The method descriptor
+     * @return The cached method
+     */
+    private static Method getCachedMethod(MethodDescriptor md) {
+        if (CACHE_METHODS) {
+            return (Method)cache.get(md);
+        }
+        return null;
+    }
+
+    /**
+     * Add a method to the cache.
+     *
+     * @param md The method descriptor
+     * @param method The method to cache
+     */
+    private static void cacheMethod(MethodDescriptor md, Method method) {
+        if (CACHE_METHODS) {
+            if (method != null) {
+                cache.put(md, method);
+            }
+        }
+    }
 
     /**
      * Represents the key to looking up a Method by reflection.

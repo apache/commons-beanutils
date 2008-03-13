@@ -580,4 +580,51 @@ public class MethodUtilsTestCase extends TestCase {
         MethodUtils.invokeMethod(a, "foo", ps);
         assertTrue("Method Invoked(2)", a.called);
     }
+
+    /**
+     * Test {@link MethodUtils#clearCache()}.
+     */
+    public void testClearCache() {
+
+        MethodUtils.clearCache(); // make sure it starts empty
+        PublicSubBean bean = new PublicSubBean();
+        try {
+            MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        } catch (Throwable t) {
+            fail("invokeMethod() threw " + t);
+        }
+        assertEquals(1, MethodUtils.clearCache());
+        assertEquals(0, MethodUtils.clearCache());
+    }
+
+    /**
+     * Test {@link MethodUtils#setCacheMethods(boolean)}.
+     */
+    public void testSetCacheMethods() {
+
+        MethodUtils.clearCache(); // make sure it starts empty
+
+        // caching
+        MethodUtils.setCacheMethods(true);
+        PublicSubBean bean = new PublicSubBean();
+        try {
+            MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        } catch (Throwable t) {
+            fail("invokeMethod() threw " + t);
+        }
+        assertEquals(1, MethodUtils.clearCache());
+        assertEquals(0, MethodUtils.clearCache());
+
+        // no caching
+        MethodUtils.setCacheMethods(false);
+        try {
+            MethodUtils.invokeMethod(bean, "setFoo", "alpha");
+        } catch (Throwable t) {
+            fail("invokeMethod() threw " + t);
+        }
+        assertEquals(0, MethodUtils.clearCache());
+
+        // reset default
+        MethodUtils.setCacheMethods(true);
+    }
 }
