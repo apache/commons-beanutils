@@ -203,23 +203,35 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
             final String errorMsg = "Problem during evaluation. Null value encountered in property path...";
 
             if (ignoreNull) {
-                log.warn("WARNING: " + errorMsg, e);
+                log.warn("WARNING: " + errorMsg + e);
             } else {
-                log.error("ERROR: " + errorMsg, e);
-                throw e;
+                IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+                if (!BeanUtils.initCause(iae, e)) {
+                    log.error(errorMsg, e);
+                }
+                throw iae;
             }
         } catch (IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
-            log.error(errorMsg, e);
-            throw new IllegalArgumentException(errorMsg);
+            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            if (!BeanUtils.initCause(iae, e)) {
+                log.error(errorMsg, e);
+            }
+            throw iae;
         } catch (InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
-            log.error(errorMsg, e);
-            throw new IllegalArgumentException(errorMsg);
+            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            if (!BeanUtils.initCause(iae, e)) {
+                log.error(errorMsg, e);
+            }
+            throw iae;
         } catch (NoSuchMethodException e) {
             final String errorMsg = "Property not found.";
-            log.error(errorMsg, e);
-            throw new IllegalArgumentException(errorMsg);
+            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            if (!BeanUtils.initCause(iae, e)) {
+                log.error(errorMsg, e);
+            }
+            throw iae;
         }
 
         return evaluation;
