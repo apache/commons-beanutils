@@ -66,7 +66,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.setUp();
 
         String version = System.getProperty("java.specification.version");
-        log.warn("JDK Version "+version);
+        log.debug("JDK Version "+version);
 
 
         try {

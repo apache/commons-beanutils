@@ -329,7 +329,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
                                                 localChars,
                                                 DEFAULT_PATTERN_CHARS);
          } catch (Exception ex) {
-             log.info("Converting pattern '" + localizedPattern + "' for " + locale, ex);
+             log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
          }
          return convertedPattern; 
     }

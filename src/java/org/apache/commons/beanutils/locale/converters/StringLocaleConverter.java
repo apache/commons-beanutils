@@ -283,7 +283,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
                 numberFormat.applyPattern(pattern);
             }
         } else {
-            log.info("No pattern provided, using default.");
+            log.debug("No pattern provided, using default.");
         }
 
         return numberFormat;
