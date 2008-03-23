@@ -924,6 +924,8 @@ public class BeanUtilsBean {
                 return; // Skip this property setter
             }
             type = dynaProperty.getType();
+        } else if (target instanceof Map) {
+            type = Object.class;
         } else {
             PropertyDescriptor descriptor = null;
             try {
@@ -1009,15 +1011,7 @@ public class BeanUtilsBean {
 
         // Invoke the setter method
         try {
-            if (index >= 0) {
-                getPropertyUtils().setIndexedProperty(target, propName,
-                                                 index, newValue);
-            } else if (key != null) {
-                getPropertyUtils().setMappedProperty(target, propName,
-                                                key, newValue);
-            } else {
-                getPropertyUtils().setProperty(target, propName, newValue);
-            }
+          getPropertyUtils().setProperty(target, name, newValue);
         } catch (NoSuchMethodException e) {
             throw new InvocationTargetException
                 (e, "Cannot set " + propName);

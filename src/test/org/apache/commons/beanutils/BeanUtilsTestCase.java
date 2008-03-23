@@ -1471,6 +1471,26 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
+    /**
+     * Test setting a value out of a mapped Map
+     */
+    public void testSetMappedMap() {
+        TestBean bean = new TestBean();
+        Map map = new HashMap();
+        map.put("sub-key-1", "sub-value-1");
+        map.put("sub-key-2", "sub-value-2");
+        map.put("sub-key-3", "sub-value-3");
+        bean.getMapProperty().put("mappedMap", map);
+
+        assertEquals("BEFORE", "sub-value-3", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        try {
+            BeanUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
+        } catch (Throwable t) {
+            fail("Threw " + t + "");
+        }
+        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+    }
+
     /** Tests that separate instances can register separate instances */
     public void testSeparateInstances() throws Exception {
         BeanUtilsBean utilsOne = new BeanUtilsBean(
