@@ -82,7 +82,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @version $Revision$ $Date$
  * @since 1.8.0
  */
-public class NumberConverter extends AbstractConverter {
+public abstract class NumberConverter extends AbstractConverter {
 
     private static final Integer ZERO = new Integer(0);
     private static final Integer ONE  = new Integer(1);
@@ -98,12 +98,10 @@ public class NumberConverter extends AbstractConverter {
      * Construct a <b>java.lang.Number</b> <i>Converter</i>
      * that throws a <code>ConversionException</code> if a error occurs.
      *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      * @param allowDecimals Indicates whether decimals are allowed
      */
-    public NumberConverter(Class defaultType, boolean allowDecimals) {
-        super(defaultType);
+    public NumberConverter(boolean allowDecimals) {
+        super();
         this.allowDecimals = allowDecimals;
     }
 
@@ -111,13 +109,11 @@ public class NumberConverter extends AbstractConverter {
      * Construct a <code>java.lang.Number</code> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      * @param allowDecimals Indicates whether decimals are allowed
      * @param defaultValue The default value to be returned
      */
-    public NumberConverter(Class defaultType, boolean allowDecimals, Object defaultValue) {
-        super(defaultType);
+    public NumberConverter(boolean allowDecimals, Object defaultValue) {
+        super();
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }

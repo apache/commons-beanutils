@@ -64,11 +64,6 @@ public abstract class AbstractConverter implements Converter {
     private transient Log log;
 
     /**
-     * The default type this <code>Converter</code> handles.
-     */
-    private Class defaultType = null;
-
-    /**
      * Should we return the default value on conversion errors?
      */
     private boolean useDefault = false;
@@ -83,29 +78,19 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Construct a <i>Converter</i> that throws a
      * <code>ConversionException</code> if an error occurs.
-     *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      */
-    public AbstractConverter(Class defaultType) {
-        this.defaultType = defaultType;
-        if (defaultType == null) {
-            throw new IllegalArgumentException("Default type is missing.");
-        }
+    public AbstractConverter() {
     }
 
     /**
      * Construct a <i>Converter</i> that returns a default
      * value if an error occurs.
      *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      * @param defaultValue The default value to be returned
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public AbstractConverter(Class defaultType, Object defaultValue) {
-        this(defaultType);
+    public AbstractConverter(Object defaultValue) {
         setDefaultValue(defaultValue);
     }
 
@@ -363,9 +348,7 @@ public abstract class AbstractConverter implements Converter {
      *
      * @return The default type this <code>Converter</code> handles.
      */
-    protected Class getDefaultType() {
-        return defaultType;
-    }
+    protected abstract Class getDefaultType();
 
     /**
      * Return the default value for conversions to the specified

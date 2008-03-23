@@ -40,7 +40,7 @@ public final class CalendarConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public CalendarConverter() {
-        super(Calendar.class);
+        super();
     }
 
     /**
@@ -52,7 +52,16 @@ public final class CalendarConverter extends DateTimeConverter {
      * occurs converting the value.
      */
     public CalendarConverter(Object defaultValue) {
-        super(Calendar.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Calendar.class;
     }
 
 }

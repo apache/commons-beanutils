@@ -126,6 +126,7 @@ import org.apache.commons.beanutils.Converter;
  */
 public class ArrayConverter extends AbstractConverter {
 
+    private Object defaultTypeInstance;
     private Converter elementConverter;
     private int defaultSize;
     private char delimiter    = ',';
@@ -145,13 +146,17 @@ public class ArrayConverter extends AbstractConverter {
      *  individual array elements.
      */
     public ArrayConverter(Class defaultType, Converter elementConverter) {
-        super(defaultType);
+        super();
+        if (defaultType == null) {
+            throw new IllegalArgumentException("Default type is missing");
+        }
         if (!defaultType.isArray()) {
             throw new IllegalArgumentException("Default type must be an array.");
         }
         if (elementConverter == null) {
             throw new IllegalArgumentException("Component Converter is missing.");
         }
+        this.defaultTypeInstance = Array.newInstance(defaultType.getComponentType(), 0);
         this.elementConverter = elementConverter;
     }
 
@@ -207,6 +212,15 @@ public class ArrayConverter extends AbstractConverter {
      */
     public void setOnlyFirstToString(boolean onlyFirstToString) {
         this.onlyFirstToString = onlyFirstToString;
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return defaultTypeInstance.getClass();
     }
 
     /**

@@ -39,7 +39,7 @@ public final class ShortConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public ShortConverter() {
-        super(Short.class, false);
+        super(false);
     }
 
     /**
@@ -51,7 +51,16 @@ public final class ShortConverter extends NumberConverter {
      * occurs converting the value.
      */
     public ShortConverter(Object defaultValue) {
-        super(Short.class, false, defaultValue);
+        super(false, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Short.class;
     }
 
 }

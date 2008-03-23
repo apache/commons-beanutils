@@ -34,7 +34,7 @@ public final class CharacterConverter extends AbstractConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public CharacterConverter() {
-        super(Character.class);
+        super();
     }
 
     /**
@@ -46,7 +46,16 @@ public final class CharacterConverter extends AbstractConverter {
      * occurs converting the value.
      */
     public CharacterConverter(Object defaultValue) {
-        super(Character.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Character.class;
     }
 
     /**

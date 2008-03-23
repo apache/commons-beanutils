@@ -36,7 +36,7 @@ public final class FileConverter extends AbstractConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public FileConverter() {
-        super(File.class);
+        super();
     }
 
     /**
@@ -48,7 +48,16 @@ public final class FileConverter extends AbstractConverter {
      * occurs converting the value.
      */
     public FileConverter(Object defaultValue) {
-        super(File.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return File.class;
     }
 
     /**

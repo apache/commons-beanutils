@@ -76,7 +76,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @version $Revision$ $Date$
  * @since 1.8.0
  */
-public class DateTimeConverter extends AbstractConverter {
+public abstract class DateTimeConverter extends AbstractConverter {
 
     private String[] patterns;
     private String displayPatterns;
@@ -90,26 +90,21 @@ public class DateTimeConverter extends AbstractConverter {
     /**
      * Construct a Date/Time <i>Converter</i> that throws a
      * <code>ConversionException</code> if an error occurs.
-     *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      */
-    public DateTimeConverter(Class defaultType) {
-        super(defaultType);
+    public DateTimeConverter() {
+        super();
     }
 
     /**
      * Construct a Date/Time <i>Converter</i> that returns a default
      * value if an error occurs.
      *
-     * @param defaultType The default type this <code>Converter</code>
-     * handles
      * @param defaultValue The default value to be returned
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public DateTimeConverter(Class defaultType, Object defaultValue) {
-        super(defaultType, defaultValue);
+    public DateTimeConverter(Object defaultValue) {
+        super(defaultValue);
     }
 
 

@@ -39,7 +39,7 @@ public final class FloatConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public FloatConverter() {
-        super(Float.class, true);
+        super(true);
     }
 
     /**
@@ -51,7 +51,16 @@ public final class FloatConverter extends NumberConverter {
      * occurs converting the value.
      */
     public FloatConverter(Object defaultValue) {
-        super(Float.class, true, defaultValue);
+        super(true, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Float.class;
     }
 
 }

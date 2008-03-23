@@ -41,7 +41,7 @@ public final class BigIntegerConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public BigIntegerConverter() {
-        super(BigInteger.class, false);
+        super(false);
     }
 
     /**
@@ -53,7 +53,16 @@ public final class BigIntegerConverter extends NumberConverter {
      * occurs converting the value.
      */
     public BigIntegerConverter(Object defaultValue) {
-        super(BigInteger.class, false, defaultValue);
+        super(false, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return BigInteger.class;
     }
 
 }

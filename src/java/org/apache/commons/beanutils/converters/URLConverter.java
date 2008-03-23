@@ -35,7 +35,7 @@ public final class URLConverter extends AbstractConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public URLConverter() {
-        super(URL.class);
+        super();
     }
 
     /**
@@ -47,7 +47,16 @@ public final class URLConverter extends AbstractConverter {
      * occurs converting the value.
      */
     public URLConverter(Object defaultValue) {
-        super(URL.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return URL.class;
     }
 
     /**

@@ -44,7 +44,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlTimestampConverter() {
-        super(Timestamp.class);
+        super();
     }
 
     /**
@@ -56,7 +56,16 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * occurs converting the value.
      */
     public SqlTimestampConverter(Object defaultValue) {
-        super(Timestamp.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Timestamp.class;
     }
 
     /**

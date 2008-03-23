@@ -38,7 +38,7 @@ public final class ClassConverter extends AbstractConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public ClassConverter() {
-        super(Class.class);
+        super();
     }
 
     /**
@@ -50,7 +50,16 @@ public final class ClassConverter extends AbstractConverter {
      * occurs converting the value.
      */
     public ClassConverter(Object defaultValue) {
-        super(Class.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Class.class;
     }
 
     /**

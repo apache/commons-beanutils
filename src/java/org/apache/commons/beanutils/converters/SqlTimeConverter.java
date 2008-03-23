@@ -44,7 +44,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlTimeConverter() {
-        super(Time.class);
+        super();
     }
 
     /**
@@ -56,7 +56,16 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * occurs converting the value.
      */
     public SqlTimeConverter(Object defaultValue) {
-        super(Time.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Time.class;
     }
 
     /**

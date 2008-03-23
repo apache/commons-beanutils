@@ -39,7 +39,7 @@ public final class LongConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public LongConverter() {
-        super(Long.class, false);
+        super(false);
     }
 
     /**
@@ -51,7 +51,16 @@ public final class LongConverter extends NumberConverter {
      * occurs converting the value.
      */
     public LongConverter(Object defaultValue) {
-        super(Long.class, false, defaultValue);
+        super(false, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Long.class;
     }
 
 }

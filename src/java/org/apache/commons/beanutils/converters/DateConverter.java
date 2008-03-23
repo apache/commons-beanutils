@@ -40,7 +40,7 @@ public final class DateConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public DateConverter() {
-        super(Date.class);
+        super();
     }
 
     /**
@@ -52,7 +52,16 @@ public final class DateConverter extends DateTimeConverter {
      * occurs converting the value.
      */
     public DateConverter(Object defaultValue) {
-        super(Date.class, defaultValue);
+        super(defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Date.class;
     }
 
 }

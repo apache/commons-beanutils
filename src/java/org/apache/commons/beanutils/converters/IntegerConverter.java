@@ -39,7 +39,7 @@ public final class IntegerConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public IntegerConverter() {
-        super(Integer.class, false);
+        super(false);
     }
 
     /**
@@ -51,7 +51,16 @@ public final class IntegerConverter extends NumberConverter {
      * occurs converting the value.
      */
     public IntegerConverter(Object defaultValue) {
-        super(Integer.class, false, defaultValue);
+        super(false, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Integer.class;
     }
 
 }

@@ -39,7 +39,7 @@ public final class DoubleConverter extends NumberConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public DoubleConverter() {
-        super(Double.class, true);
+        super(true);
     }
 
     /**
@@ -51,7 +51,16 @@ public final class DoubleConverter extends NumberConverter {
      * occurs converting the value.
      */
     public DoubleConverter(Object defaultValue) {
-        super(Double.class, true, defaultValue);
+        super(true, defaultValue);
+    }
+
+    /**
+     * Return the default type this <code>Converter</code> handles.
+     *
+     * @return The default type this <code>Converter</code> handles.
+     */
+    protected Class getDefaultType() {
+        return Double.class;
     }
 
 }
