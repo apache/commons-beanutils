@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.WrapDynaBean;
 import org.apache.commons.beanutils.WrapDynaClass;
-import org.apache.commons.beanutils.converters.NumberConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.locale.LocaleBeanUtilsBean;
 import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
@@ -266,7 +266,7 @@ public class MemoryLeakTestCase extends TestCase {
 
         // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
-        ConvertUtils.register(new NumberConverter(beanClass, false), beanClass);
+        ConvertUtils.register(new IntegerConverter(), beanClass);
         assertEquals("12345", ConvertUtils.convert(bean, String.class));
 
         // this should make the reference go away.
