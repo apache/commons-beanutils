@@ -507,9 +507,10 @@ public class BeanUtilsBean {
         } else {
             PropertyDescriptor[] descriptors =
                 getPropertyUtils().getPropertyDescriptors(bean);
+            Class clazz = bean.getClass();
             for (int i = 0; i < descriptors.length; i++) {
                 String name = descriptors[i].getName();
-                if (getPropertyUtils().getReadMethod(descriptors[i]) != null) {
+                if (getPropertyUtils().getReadMethod(clazz, descriptors[i]) != null) {
                     description.put(name, getProperty(bean, name));
                 }
             }

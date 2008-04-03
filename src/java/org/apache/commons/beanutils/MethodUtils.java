@@ -717,7 +717,7 @@ public class MethodUtils {
             }
             
             method =  getAccessibleMethod
-                    (clazz.getMethod(methodName, parameterTypes));
+                    (clazz, clazz.getMethod(methodName, parameterTypes));
             cacheMethod(md, method);
             return method;
         } catch (NoSuchMethodException e) {
@@ -742,13 +742,38 @@ public class MethodUtils {
             return (null);
         }
 
+        return getAccessibleMethod(method.getDeclaringClass(), method);
+
+    }
+
+
+
+    /**
+     * <p>Return an accessible method (that is, one that can be invoked via
+     * reflection) that implements the specified Method.  If no such method
+     * can be found, return <code>null</code>.</p>
+     *
+     * @param clazz The class of the object
+     * @param method The method that we wish to call
+     * @return The accessible method
+     */
+    public static Method getAccessibleMethod(Class clazz, Method method) {
+
+        // Make sure we have a method to check
+        if (method == null) {
+            return (null);
+        }
+
         // If the requested method is not public we cannot call it
         if (!Modifier.isPublic(method.getModifiers())) {
             return (null);
         }
 
-        // If the declaring class is public, we are done
-        Class clazz = method.getDeclaringClass();
+        if (clazz == null) {
+            clazz = method.getDeclaringClass();
+        }
+
+        // If the class is public, we are done
         if (Modifier.isPublic(clazz.getModifiers())) {
             return (method);
         }
@@ -843,7 +868,7 @@ public class MethodUtils {
                      */
                 }
                 if (method != null) {
-                    break;
+                    return method;
                 }
 
                 // Recursively check our parent interfaces
@@ -852,7 +877,7 @@ public class MethodUtils {
                                 methodName,
                                 parameterTypes);
                 if (method != null) {
-                    break;
+                    return method;
                 }
 
             }
@@ -1007,7 +1032,7 @@ public class MethodUtils {
                     
                     if (match) {
                         // get accessible version of method
-                        Method method = getAccessibleMethod(methods[i]);
+                        Method method = getAccessibleMethod(clazz, methods[i]);
                         if (method != null) {
                             if (log.isTraceEnabled()) {
                                 log.trace(method + " accessible version of " 
