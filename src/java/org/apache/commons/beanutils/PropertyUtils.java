@@ -573,7 +573,7 @@ public class PropertyUtils {
      *
      * @param descriptor Property descriptor to return a getter for
      * @return The read method
-     * @see PropertyUtilsBean#getReadMethod
+     * @see PropertyUtilsBean#getReadMethod(PropertyDescriptor)
      */
     public static Method getReadMethod(PropertyDescriptor descriptor) {
 
@@ -621,7 +621,7 @@ public class PropertyUtils {
      *
      * @param descriptor Property descriptor to return a setter for
      * @return The write method
-     * @see PropertyUtilsBean#getWriteMethod
+     * @see PropertyUtilsBean#getWriteMethod(PropertyDescriptor)
      */
     public static Method getWriteMethod(PropertyDescriptor descriptor) {
 
