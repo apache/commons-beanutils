@@ -28,7 +28,8 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.WeakHashMap;
+
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
 import org.apache.commons.beanutils.converters.BigIntegerConverter;
@@ -150,7 +151,7 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private Map converters = new HashMap();
+    private Map converters = new WeakHashMap();
 
     /**
      * The <code>Log</code> instance for this class.

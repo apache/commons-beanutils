@@ -37,7 +37,12 @@ import org.apache.commons.logging.LogFactory;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -454,7 +459,7 @@ public class LocaleConvertUtilsBean {
      */
     protected FastHashMap create(Locale locale) {
 
-        FastHashMap converter = new FastHashMap();
+        FastHashMap converter = new WeakFastHashMap();
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -491,5 +496,68 @@ public class LocaleConvertUtilsBean {
         converter.setFast(true);
 
         return converter;
+    }
+
+    /**
+     * FastHashMap implementation that uses WeakReferences to overcome
+     * memory leak problems.
+     *
+     * This is a hack to retain binary compatibility with previous
+     * releases (where FastHashMap is exposed in the API), but
+     * use WeakHashMap to resolve memory leaks.
+     */
+    private static class WeakFastHashMap extends FastHashMap {
+
+        private Map fastMap = new WeakHashMap();
+        private Map slowMap = Collections.synchronizedMap(fastMap);
+
+        private WeakFastHashMap() {
+            super(0);
+        }
+        public void clear() {
+            getMap().clear();
+        }
+        public boolean containsKey(Object key) {
+            return getMap().containsKey(key);
+        }
+        public boolean containsValue(Object value) {
+            return getMap().containsValue(value);
+        }
+        public Set entrySet() {
+            return getMap().entrySet();
+        }
+        public boolean equals(Object o) {
+            return getMap().equals(o);
+        }
+        public Object get(Object key) {
+            return getMap().get(key);
+        }
+        public int hashCode() {
+            return getMap().hashCode();
+        }
+        public boolean isEmpty() {
+            return getMap().isEmpty();
+        }
+        public Set keySet() {
+            return getMap().keySet();
+        }
+        public Object put(Object key, Object value) {
+            return getMap().put(key, value);
+        }
+        public void putAll(Map m) {
+            getMap().putAll(m);
+        }
+        public Object remove(Object key) {
+            return getMap().remove(key);
+        }
+        public int size() {
+            return getMap().size();
+        }
+        public Collection values() {
+            return getMap().values();
+        }
+        private Map getMap() {
+            return (getFast() ? fastMap : slowMap);
+        }
     }
 }

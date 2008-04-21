@@ -18,6 +18,8 @@
 package org.apache.commons.beanutils;
 
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -1262,7 +1264,10 @@ public class MethodUtils {
      */
     private static Method getCachedMethod(MethodDescriptor md) {
         if (CACHE_METHODS) {
-            return (Method)cache.get(md);
+            Reference methodRef = (Reference)cache.get(md);
+            if (methodRef != null) {
+                return (Method)methodRef.get();
+            }
         }
         return null;
     }
@@ -1276,7 +1281,7 @@ public class MethodUtils {
     private static void cacheMethod(MethodDescriptor md, Method method) {
         if (CACHE_METHODS) {
             if (method != null) {
-                cache.put(md, method);
+                cache.put(md, new WeakReference(method));
             }
         }
     }

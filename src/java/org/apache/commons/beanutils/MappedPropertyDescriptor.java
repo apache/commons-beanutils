@@ -20,6 +20,9 @@ package org.apache.commons.beanutils;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -49,17 +52,17 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * The underlying data type of the property we are describing.
      */
-    private Class mappedPropertyType;
+    private Reference mappedPropertyTypeRef;
 
     /**
      * The reader method for this property (if any).
      */
-    private Method mappedReadMethod;
+    private MappedMethodReference mappedReadMethodRef;
 
     /**
      * The writer method for this property (if any).
      */
-    private Method mappedWriteMethod;
+    private MappedMethodReference mappedWriteMethodRef;
 
     /**
      * The parameter types array for the reader method signature.
@@ -98,6 +101,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         String base = capitalizePropertyName(propertyName);
         
         // Look for mapped read method and matching write method
+        Method mappedReadMethod = null;
+        Method mappedWriteMethod = null;
         try {
             try {
                 mappedReadMethod = getMethod(beanClass, "get" + base,
@@ -124,6 +129,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     "' not found on " +
                     beanClass.getName());
         }
+        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
+        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
         
         findMappedPropertyType();
     }
@@ -159,6 +166,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         setName(propertyName);
 
         // search the mapped get and set methods
+        Method mappedReadMethod = null;
+        Method mappedWriteMethod = null;
         mappedReadMethod =
             getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
 
@@ -170,6 +179,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             mappedWriteMethod =
                 getMethod(beanClass, mappedSetterName, 2);
         }
+        mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
+        mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
 
         findMappedPropertyType();
     }
@@ -200,8 +211,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
 
         setName(propertyName);
-        mappedReadMethod = mappedGetter;
-        mappedWriteMethod = mappedSetter;
+        mappedReadMethodRef  = new MappedMethodReference(mappedGetter);
+        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
         findMappedPropertyType();
     }
 
@@ -218,7 +229,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * This is the type that will be returned by the mappedReadMethod.
      */
     public Class getMappedPropertyType() {
-        return mappedPropertyType;
+        return (Class)mappedPropertyTypeRef.get();
     }
 
     /**
@@ -228,7 +239,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * May return null if the property can't be read.
      */
     public Method getMappedReadMethod() {
-        return mappedReadMethod;
+        return mappedReadMethodRef.get();
     }
 
     /**
@@ -240,7 +251,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     public void setMappedReadMethod(Method mappedGetter)
             throws IntrospectionException {
-        mappedReadMethod = mappedGetter;
+        mappedReadMethodRef = new MappedMethodReference(mappedGetter);
         findMappedPropertyType();
     }
 
@@ -251,7 +262,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * May return null if the property can't be written.
      */
     public Method getMappedWriteMethod() {
-        return mappedWriteMethod;
+        return mappedWriteMethodRef.get();
     }
 
     /**
@@ -263,7 +274,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     public void setMappedWriteMethod(Method mappedSetter)
             throws IntrospectionException {
-        mappedWriteMethod = mappedSetter;
+        mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
         findMappedPropertyType();
     }
 
@@ -275,7 +286,9 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     private void findMappedPropertyType() throws IntrospectionException {
         try {
-            mappedPropertyType = null;
+            Method mappedReadMethod  = getMappedReadMethod();
+            Method mappedWriteMethod = getMappedWriteMethod();
+            Class mappedPropertyType = null;
             if (mappedReadMethod != null) {
                 if (mappedReadMethod.getParameterTypes().length != 1) {
                     throw new IntrospectionException
@@ -302,6 +315,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 }
                 mappedPropertyType = params[1];
             }
+            mappedPropertyTypeRef = new SoftReference(mappedPropertyType);
         } catch (IntrospectionException ex) {
             throw ex;
         }
@@ -404,4 +418,60 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 "\" with " + parameterCount + " parameter(s) of matching types.");
     }
 
+    /**
+     * Holds a {@link Method} in a {@link SoftReference} so that it
+     * it doesn't prevent any ClassLoader being garbage collected, but
+     * tries to re-create the method if the method reference has been
+     * released.
+     *
+     * See http://issues.apache.org/jira/browse/BEANUTILS-291
+     */
+    private static class MappedMethodReference {
+        private String className;
+        private String methodName;
+        private Reference methodRef;
+        private Reference classRef;
+        private Reference writeParamTypeRef;
+        MappedMethodReference(Method m) {
+            if (m != null) {
+                className = m.getDeclaringClass().getName();
+                methodName = m.getName();
+                methodRef = new SoftReference(m);
+                classRef = new WeakReference(m.getDeclaringClass());
+                Class[] types = m.getParameterTypes();
+                if (types.length == 2) {
+                    writeParamTypeRef = new WeakReference(types[1]);
+                }
+            }
+        }
+        private Method get() {
+            if (methodRef == null) {
+                return null;
+            }
+            Method m = (Method)methodRef.get();
+            if (m == null) {
+                Class clazz = (Class)classRef.get();
+                if (clazz == null) {
+                    throw new RuntimeException("Method " + methodName + " for " +
+                            className + " could not be reconstructed - class reference has gone");
+                }
+                Class[] paramTypes = null;
+                if (writeParamTypeRef != null) {
+                    paramTypes = new Class[] {String.class, (Class)writeParamTypeRef.get()};
+                } else {
+                    paramTypes = STRING_CLASS_PARAMETER;
+                }
+                try {
+                    m = clazz.getMethod(methodName, paramTypes);
+                    // Un-comment following line for testing
+                    // System.out.println("Recreated Method " + methodName + " for " + className);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException("Method " + methodName + " for " +
+                            className + " could not be reconstructed - method not found");
+                }
+                methodRef = new SoftReference(m);
+            }
+            return m;
+        }
+    }
 }

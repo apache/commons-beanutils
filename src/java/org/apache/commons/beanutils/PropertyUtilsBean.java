@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.beanutils.expression.DefaultResolver;
 import org.apache.commons.beanutils.expression.Resolver;
@@ -120,8 +121,8 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private FastHashMap descriptorsCache = null;
-    private FastHashMap mappedDescriptorsCache = null;
+    private Map descriptorsCache = new WeakHashMap();
+    private Map mappedDescriptorsCache = new WeakHashMap();
     private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
     private static final Class[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
     
@@ -135,10 +136,6 @@ public class PropertyUtilsBean {
     
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new FastHashMap();
-        descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new FastHashMap();
-        mappedDescriptorsCache.setFast(true);
     }
 
 
