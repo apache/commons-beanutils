@@ -34,6 +34,13 @@ Compatibility with 1.7.0
 BeanUtils 1.8.0 is binary compatible release with Beanutils 1.7.0,
 containing a number of bug fixes and enhancements.
 
+Compatibility with 1.8.0-BETA
+=============================
+There are a number of incompatible changes with the BeanUtils 1.8.0-BETA release:
+ - AbstractConverter - constructor signatures are different and getDefaultType() method is now abstract
+ - DateTimeConverter - now an abstract class and constructor signatures are different
+ - NumberConverter - now an abstract class and constructor signatures are different
+
 ENHANCEMENTS:
 =============
 
@@ -96,11 +103,21 @@ The following is a list of the enhancements in this release, with their Jira iss
                       initialize the "cause" on an Exception using reflection for JDK 1.4+
   * [BEANUTILS-185] - Map decorator for DynaBeans to allow BeanUtils to operate with technologies such as JSTL
   * [BEANUTILS-233] - Implement equals() and hashCode() methods for DynaProperty
+  * [BEANUTILS-310] - Provide facility to configure and clear MethodUtils cache
 
 BUG REPORTS ADDRESSED:
 =====================
 
-The following is a list of the bugs fixed in this release, with their Jira issue number:
+The following is a list of the bugs fixed since the 1.8.0-BETA release, with their Jira issue number:
+  * [BEANUTILS-291] - Circular Reference on WeakHashMap
+  * [BEANUTILS-294] - BeanUtilsBean.setProperty() does not support nested map
+  * [BEANUTILS-295] - Unnecessary Garbage Objects in Class PropertyUtilsBean
+  * [BEANUTILS-297] - ConvertingWrapDynaBean hides cause exceptions
+  * [BEANUTILS-298] - MethodUtils.getAccessibleMethod(Method method) could not find right public method
+  * [BEANUTILS-302] - NPE in ArrayConverter when converting a non-quoted string with underscores to a string array
+  * [BEANUTILS-306] - LocaleConvertUtilsBean.convert throws NPE on null Locale when debug logging is enabled
+
+The following is a list of the bugs fixed since the 1.7.0 release, with their Jira issue number:
 
   * [BEANUTILS-243] - BeanUtils fails to compile under 1.6
   * [BEANUTILS-49]  - Lock in BeanUtilsBean.getInstance
