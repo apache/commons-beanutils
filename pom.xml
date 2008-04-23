@@ -171,6 +171,8 @@
           <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <forkMode>pertest</forkMode>
+              <!-- limit memory size see BEANUTILS-291 -->
+              <argLine>-Xmx25M</argLine>
               <includes>
                 <include>**/*TestCase.java</include>
               </includes>

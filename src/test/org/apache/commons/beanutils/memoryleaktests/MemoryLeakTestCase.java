@@ -16,6 +16,7 @@
  */ 
 package org.apache.commons.beanutils.memoryleaktests;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -421,21 +422,28 @@ public class MemoryLeakTestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        java.util.ArrayList list = new java.util.ArrayList();
-        try {
-            long i = 0;
-            while (true) {
-                list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+        SoftReference ref = new SoftReference(new Object());
+        int count = 0;
+        while(ref.get() != null && count++ < 5) {
+            java.util.ArrayList list = new java.util.ArrayList();
+            try {
+                long i = 0;
+                while (true && ref.get() != null) {
+                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                }
+            } catch (Throwable ignored) {
             }
-        } catch (Throwable e) {
+            list.clear();
+            list = null;
+            // System.out.println("Count " + count + " : " + getMemoryStats());
+            System.gc(); 
+            Thread.sleep(1000);
         }
-
-        list.clear();
-        list = null;
-
-        // Prompt garbage collector
-        System.gc();
-        Thread.sleep(1000);
+        // System.out.println("After GC: " + getMemoryStats());
+        
+        if (ref.get() != null) {
+            throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
+        }
     }
 
     /**
@@ -498,5 +506,20 @@ public class MemoryLeakTestCase extends TestCase {
             if (minorVersion.equals("4")) return true;
         }
         return false;
+    }
+
+    /**
+     * Get the total, free, used memory stats.
+     * @return the total, free, used memory stats
+     */
+    private String getMemoryStats() {
+        java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");
+        Runtime runtime = Runtime.getRuntime();
+        long free = runtime.freeMemory() / 1024;
+        long total = runtime.totalMemory() / 1024;
+        long used = total - free;
+        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: "
+                + fmt.format(used) + "k " + "Free: "
+                + fmt.format(free) + "k";
     }
 }
