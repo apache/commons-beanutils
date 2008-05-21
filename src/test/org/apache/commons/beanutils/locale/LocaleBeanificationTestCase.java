@@ -184,7 +184,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
         }
     }
-	
+
     /** Tests whether classloaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
         if (isPre14JVM()) {
@@ -364,7 +364,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter() {
-											public Object convert(Class type, Object value) {
+                                            public Object convert(Class type, Object value) {
                                                 return new Integer(9);
                                             }
                                             public Object convert(Class type, Object value, String pattern) {
@@ -388,7 +388,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         LocaleConvertUtils.register(new LocaleConverter() {
-								public Object convert(Class type, Object value) {
+                                public Object convert(Class type, Object value) {
                                     return new Integer(5);
                                 }
                                 public Object convert(Class type, Object value, String pattern) {

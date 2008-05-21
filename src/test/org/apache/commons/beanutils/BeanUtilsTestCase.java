@@ -1536,7 +1536,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     public void testArrayPropertyConversion() throws Exception {
-        BeanUtilsBean beanUtils = new BeanUtilsBean(	
+        BeanUtilsBean beanUtils = new BeanUtilsBean(
                                                     new ConvertUtilsBean(), 
                                                     new PropertyUtilsBean());
             
@@ -1588,7 +1588,7 @@ public class BeanUtilsTestCase extends TestCase {
                         "Mapped property set correctly", 
                         "some.dotty.value", 
                         bean.getMapproperty("this.that.the-other"));
-    }	
+    }
 
     /**
      * Test for {@link BeanUtilsBean#initCause(Throwable, Throwable)} method.

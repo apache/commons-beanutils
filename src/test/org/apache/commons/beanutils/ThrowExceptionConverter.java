@@ -32,5 +32,5 @@ public class ThrowExceptionConverter implements Converter {
     
     public Object convert(Class type, Object value) {
         throw new PassTestException();
-    }	
+    }
 }

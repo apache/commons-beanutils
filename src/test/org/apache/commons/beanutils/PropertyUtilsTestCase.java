@@ -418,15 +418,15 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetDescriptorInvalidBoolean() throws Exception {
 
-	PropertyDescriptor pd =
-	    PropertyUtils.getPropertyDescriptor(bean, "invalidBoolean");
-	assertNotNull("invalidBoolean is a property", pd);
-	assertNotNull("invalidBoolean has a getter method",
-		      pd.getReadMethod());
-	assertNull("invalidBoolean has no write method",
-		   pd.getWriteMethod());
-	assertTrue("invalidBoolean getter method is isInvalidBoolean",
-		   "isInvalidBoolean".equals(pd.getReadMethod().getName()));
+    PropertyDescriptor pd =
+        PropertyUtils.getPropertyDescriptor(bean, "invalidBoolean");
+    assertNotNull("invalidBoolean is a property", pd);
+    assertNotNull("invalidBoolean has a getter method",
+              pd.getReadMethod());
+    assertNull("invalidBoolean has no write method",
+           pd.getWriteMethod());
+    assertTrue("invalidBoolean getter method is isInvalidBoolean",
+           "isInvalidBoolean".equals(pd.getReadMethod().getName()));
 
     }
 

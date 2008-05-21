@@ -40,7 +40,7 @@ public class MappedPropertyTestBean {
         return (String) map.get(key);
     }
 
-    public void setMapproperty(String key, String value) {	
+    public void setMapproperty(String key, String value) {
         map.put(key, value);
     }
 
@@ -48,7 +48,7 @@ public class MappedPropertyTestBean {
         return ((Boolean)map.get(key)).booleanValue();
     }
 
-    public void setMappedBoolean(String key, boolean value) {	
+    public void setMappedBoolean(String key, boolean value) {
         map.put(key, (value ? Boolean.TRUE : Boolean.FALSE));
     }
 
@@ -56,19 +56,19 @@ public class MappedPropertyTestBean {
         return (String) map.get(key);
     }
 
-    protected void setProtectedMapped(String key, String value) {	
+    protected void setProtectedMapped(String key, String value) {
         map.put(key, value);
     }
 
-    public void setMappedPrimitive(int key, int value) {	
+    public void setMappedPrimitive(int key, int value) {
         map.put(new Integer(key), new Integer(value));
     }
 
-    public void setAnyMapped(MappedPropertyTestBean key, MappedPropertyTestBean value) {	
+    public void setAnyMapped(MappedPropertyTestBean key, MappedPropertyTestBean value) {
         map.put(key, value);
     }
 
-    public void setMappedSetterOnly(String key, String value) {	
+    public void setMappedSetterOnly(String key, String value) {
         map.put(key, value);
     }
 
@@ -83,19 +83,19 @@ public class MappedPropertyTestBean {
         return myMap;
     }
 
-    public void setInvalidGetter(String key, String value) {	
+    public void setInvalidGetter(String key, String value) {
         map.put(key, value);
     }
     public String getInvalidSetter(String key) {
         return (String) map.get(key);
     }
-    public void setInvalidSetter(String key, String value, String other) {	
+    public void setInvalidSetter(String key, String value, String other) {
     }
 
     public Long getDifferentTypes(String key) {
         return new Long(((Number)map.get(key)).longValue());
     }
-    public void setDifferentTypes(String key, Integer value) {	
+    public void setDifferentTypes(String key, Integer value) {
         map.put(key, value);
     }
 

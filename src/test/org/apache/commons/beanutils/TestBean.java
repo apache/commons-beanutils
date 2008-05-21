@@ -545,21 +545,21 @@ public class TestBean implements Serializable {
     private boolean invalidBoolean = false;
 
     public boolean getInvalidBoolean() {
-	return (this.invalidBoolean);
+        return (this.invalidBoolean);
     }
 
     public boolean isInvalidBoolean() {
-	return (this.invalidBoolean);
+        return (this.invalidBoolean);
     }
 
     public void setInvalidBoolean(String invalidBoolean) {
-	if ("true".equalsIgnoreCase(invalidBoolean) ||
-	    "yes".equalsIgnoreCase(invalidBoolean) ||
-	    "1".equalsIgnoreCase(invalidBoolean)) {
-	    this.invalidBoolean = true;
-	} else {
-	    this.invalidBoolean = false;
-	}
+        if ("true".equalsIgnoreCase(invalidBoolean) ||
+            "yes".equalsIgnoreCase(invalidBoolean) ||
+            "1".equalsIgnoreCase(invalidBoolean)) {
+            this.invalidBoolean = true;
+        } else {
+            this.invalidBoolean = false;
+        }
     }
 
 

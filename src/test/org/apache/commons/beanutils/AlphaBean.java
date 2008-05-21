@@ -33,7 +33,7 @@ public class AlphaBean extends AbstractParent implements Child {
     
     public void setName(String name) {
         this.name = name;
-    }	
+    }
     
     /**
      * Used for testing that correct exception is thrown.

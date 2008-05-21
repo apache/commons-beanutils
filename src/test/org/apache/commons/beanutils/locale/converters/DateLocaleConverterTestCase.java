@@ -138,7 +138,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         
         } catch (ParseException e) {
             // that's what we expected
-        }	
+        }
         
         // test with leniency
         dateFormat.setLenient(true);
@@ -182,7 +182,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         
         } catch (ConversionException e) {
             // that's what we expected
-        }	
+        }
         
         // test with leniency
         converter.setLenient(true);
