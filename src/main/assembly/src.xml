@@ -28,7 +28,6 @@
                 <include>build.xml</include>
                 <include>build-other-jars.xml</include>
                 <include>checkstyle.xml</include>
-                <include>doap_beanutils.rdf</include>
                 <include>LICENSE.txt</include>
                 <include>license-header.txt</include>
                 <include>maven.xml</include>
