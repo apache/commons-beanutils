@@ -169,14 +169,14 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.0.4</version>
+      <version>1.1.1</version>
       <url>http://commons.apache.org/logging/</url>
     </dependency>
 
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId> 
-      <version>3.2</version> 
+      <version>3.2.1</version> 
       <url>http://commons.apache.org/collections/</url>
       <properties>
           <optional>true</optional>
@@ -191,7 +191,7 @@
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections-testframework</artifactId> 
-      <version>3.2</version> 
+      <version>3.2.1</version> 
       <url>http://commons.apache.org/collections/</url>
       <properties>
           <scope>test</scope>

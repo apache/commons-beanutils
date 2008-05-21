@@ -140,18 +140,18 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
-      <version>1.0.4</version>
+      <version>1.1.1</version>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId> 
-      <version>3.2</version> 
+      <version>3.2.1</version> 
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections-testframework</artifactId> 
-      <version>3.2</version> 
+      <version>3.2.1</version> 
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -268,6 +268,18 @@
                 <configuration>
                     <comparisonVersion>1.8.0-BETA</comparisonVersion>
                     <minSeverity>info</minSeverity>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <linksource>true</linksource>
+                    <links>
+                        <link>http://java.sun.com/j2se/1.4.2/docs/api/</link>
+                        <link>http://commons.apache.org/collections/api-release/</link>
+                    </links>
                 </configuration>
             </plugin>
         </plugins>

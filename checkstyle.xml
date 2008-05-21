@@ -44,7 +44,7 @@ limitations under the License.
       <property name="allowUndeclaredRTE" value="true"/>
     </module>
     <module name="Header">
-      <property name="headerFile" value="${basedir}/LICENSE-header.txt"/>
+      <property name="headerFile" value="LICENSE-header.txt"/>
     </module>
  </module>
 </module>
