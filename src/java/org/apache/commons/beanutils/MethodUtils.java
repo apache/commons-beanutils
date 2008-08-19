@@ -24,8 +24,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import java.util.WeakHashMap;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -106,9 +104,13 @@ public class MethodUtils {
      * class via different classloaders will generate non-equal MethodDescriptor
      * objects and hence end up with different entries in the map.
      */
-    private static WeakHashMap cache = new WeakHashMap();
+    private static final WeakFastHashMap cache = new WeakFastHashMap();
     
     // --------------------------------------------------------- Public Methods
+
+    static {
+        cache.setFast(true);
+    }
 
     /**
      * Set whether methods should be cached for greater performance or not,
