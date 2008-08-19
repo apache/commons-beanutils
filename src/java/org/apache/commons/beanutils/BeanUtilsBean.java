@@ -262,12 +262,12 @@ public class BeanUtilsBean {
                 }
             }
         } else if (orig instanceof Map) {
-            Iterator names = ((Map) orig).keySet().iterator();
-            while (names.hasNext()) {
-                String name = (String) names.next();
+            Iterator entries = ((Map) orig).entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry entry = (Map.Entry) entries.next();
+                String name = (String)entry.getKey();
                 if (getPropertyUtils().isWriteable(dest, name)) {
-                    Object value = ((Map) orig).get(name);
-                    copyProperty(dest, name, value);
+                    copyProperty(dest, name, entry.getValue());
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
@@ -816,18 +816,18 @@ public class BeanUtilsBean {
         }
 
         // Loop through the property name/value pairs to be set
-        Iterator names = properties.keySet().iterator();
-        while (names.hasNext()) {
+        Iterator entries = properties.entrySet().iterator();
+        while (entries.hasNext()) {
 
             // Identify the property name and value(s) to be assigned
-            String name = (String) names.next();
+            Map.Entry entry = (Map.Entry)entries.next();
+            String name = (String) entry.getKey();
             if (name == null) {
                 continue;
             }
-            Object value = properties.get(name);
 
             // Perform the assignment for this property
-            setProperty(bean, name, value);
+            setProperty(bean, name, entry.getValue());
 
         }
 

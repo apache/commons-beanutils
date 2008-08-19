@@ -259,16 +259,16 @@ public class PropertyUtilsBean {
                 }
             }
         } else if (orig instanceof Map) {
-            Iterator names = ((Map) orig).keySet().iterator();
-            while (names.hasNext()) {
-                String name = (String) names.next();
+            Iterator entries = ((Map) orig).entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry entry = (Map.Entry) entries.next();
+                String name = (String)entry.getKey();
                 if (isWriteable(dest, name)) {
                     try {
-                        Object value = ((Map) orig).get(name);
                         if (dest instanceof DynaBean) {
-                            ((DynaBean) dest).set(name, value);
+                            ((DynaBean) dest).set(name, entry.getValue());
                         } else {
-                            setSimpleProperty(dest, name, value);
+                            setSimpleProperty(dest, name, entry.getValue());
                         }
                     } catch (NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
