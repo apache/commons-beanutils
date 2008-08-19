@@ -208,6 +208,15 @@ public class PropertyUtilsTestCase extends TestCase {
         beanPrivateSubclass = PrivateBeanFactory.createSubclass();
         beanPublicSubclass = new TestBeanPublicSubclass();
 
+        DynaProperty[] properties = new DynaProperty[] {
+                new DynaProperty("stringProperty", String.class),
+                new DynaProperty("nestedBean", TestBean.class),
+                new DynaProperty("nullDynaBean", DynaBean.class)
+                };
+        BasicDynaClass dynaClass = new BasicDynaClass("nestedDynaBean", BasicDynaBean.class, properties);
+        BasicDynaBean nestedDynaBean = new BasicDynaBean(dynaClass);
+        nestedDynaBean.set("nestedBean", bean);
+        bean.setNestedDynaBean(nestedDynaBean);
     }
 
 
@@ -1777,6 +1786,28 @@ public class PropertyUtilsTestCase extends TestCase {
             clazz = PropertyUtils.getPropertyType(bean, "nested.writeOnlyProperty");
             assertEquals("writeOnlyProperty type", String.class, clazz);
 
+            // Nested DynaBean
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean");
+            assertEquals("nestedDynaBean type", DynaBean.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.stringProperty");
+            assertEquals("nestedDynaBean.stringProperty type", String.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.nestedBean");
+            assertEquals("nestedDynaBean.nestedBean type", TestBean.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.nestedBean.nestedDynaBean");
+            assertEquals("nestedDynaBean.nestedBean.nestedDynaBean type", DynaBean.class, clazz);
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.nestedBean.nestedDynaBean.stringProperty");
+            assertEquals("nestedDynaBean.nestedBean.nestedDynaBean.stringPropert type", String.class, clazz);
+
+            // test Null
+            clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.nullDynaBean");
+            assertEquals("nestedDynaBean.nullDynaBean type", DynaBean.class, clazz);
+            try {
+                clazz = PropertyUtils.getPropertyType(bean, "nestedDynaBean.nullDynaBean.foo");
+                fail("Expected NestedNullException for nestedDynaBean.nullDynaBean.foo");
+            } catch (NestedNullException e) {
+                // expected
+            }
+
         } catch (Exception e) {
             fail("Exception: " + e.getMessage());
         }
@@ -2243,7 +2274,6 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test isReadable() method.
      */
     public void testIsReadable() {
-        TestBean bean = new TestBean();
         String property = null;
         try {
             property = "stringProperty";
@@ -2264,13 +2294,63 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
         
+        try {
+            property = "nestedDynaBean";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.stringProperty";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean.nestedDynaBean";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean.nestedDynaBean.stringProperty";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nullDynaBean";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nullDynaBean.foo";
+            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            fail("Property " + property +" isReadable expected NestedNullException");
+        } catch (NestedNullException e) {
+            // expected result
+        } catch (Throwable t) {
+            fail("Property " + property +" isReadable Threw exception: " + t);
+        }
     }
 
     /**
      * Test isWriteable() method.
      */
     public void testIsWriteable() {
-        TestBean bean = new TestBean();
         String property = null;
         try {
             property = "stringProperty";
@@ -2291,6 +2371,58 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
         
+        try {
+            property = "nestedDynaBean";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.stringProperty";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            t.printStackTrace();
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean.nestedDynaBean";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nestedBean.nestedDynaBean.stringProperty";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nullDynaBean";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
+
+        try {
+            property = "nestedDynaBean.nullDynaBean.foo";
+            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            fail("Property " + property +" isWriteable expected NestedNullException");
+        } catch (NestedNullException e) {
+            // expected result
+        } catch (Throwable t) {
+            fail("Property " + property +" isWriteable Threw exception: " + t);
+        }
     }
 
 

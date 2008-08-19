@@ -414,6 +414,19 @@ public class TestBean implements Serializable {
    public void setAnotherNested( TestBean anotherNested ) {
       this.anotherNested = anotherNested;
    }
+
+   /**
+    * Another nested reference to another test bean,
+    */
+   private DynaBean nestedDynaBean = null;
+    
+   public DynaBean getNestedDynaBean() {
+      return nestedDynaBean;
+   }
+    
+   public void setNestedDynaBean(DynaBean nestedDynaBean) {
+      this.nestedDynaBean = nestedDynaBean;
+   }
    
     /*
      * Another nested reference to a bean containing mapp properties
