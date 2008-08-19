@@ -27,8 +27,6 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.BigDecimalConverter;
@@ -151,7 +149,7 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private Map converters = new WeakHashMap();
+    private WeakFastHashMap converters = new WeakFastHashMap();
 
     /**
      * The <code>Log</code> instance for this class.
@@ -162,7 +160,9 @@ public class ConvertUtilsBean {
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
+        converters.setFast(false);   
         deregister();
+        converters.setFast(true);
     }
 
     // --------------------------------------------------------- Public Methods

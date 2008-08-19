@@ -17,6 +17,7 @@
  
 package org.apache.commons.beanutils.locale;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.ByteLocaleConverter;
@@ -38,11 +39,9 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -110,7 +109,7 @@ public class LocaleConvertUtilsBean {
      *  key = locale
      *  value = FastHashMap of converters for the certain locale.
      */
-    private FastHashMap mapConverters = new FastHashMap();
+    private FastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
     // --------------------------------------------------------- Constructors
 
@@ -119,7 +118,9 @@ public class LocaleConvertUtilsBean {
      *  and then registers default locale converters.
      */
     public LocaleConvertUtilsBean() {
+        mapConverters.setFast(false);
         deregister();
+        mapConverters.setFast(true);
     }
     
     // --------------------------------------------------------- Properties
@@ -459,7 +460,7 @@ public class LocaleConvertUtilsBean {
      */
     protected FastHashMap create(Locale locale) {
 
-        FastHashMap converter = new WeakFastHashMap();
+        FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -506,58 +507,60 @@ public class LocaleConvertUtilsBean {
      * releases (where FastHashMap is exposed in the API), but
      * use WeakHashMap to resolve memory leaks.
      */
-    private static class WeakFastHashMap extends FastHashMap {
+    private static class DelegateFastHashMap extends FastHashMap {
 
-        private Map fastMap = new WeakHashMap();
-        private Map slowMap = Collections.synchronizedMap(fastMap);
+        private final Map map;
 
-        private WeakFastHashMap() {
-            super(0);
+        private DelegateFastHashMap(Map map) {
+            this.map = map;
         }
         public void clear() {
-            getMap().clear();
+            map.clear();
         }
         public boolean containsKey(Object key) {
-            return getMap().containsKey(key);
+            return map.containsKey(key);
         }
         public boolean containsValue(Object value) {
-            return getMap().containsValue(value);
+            return map.containsValue(value);
         }
         public Set entrySet() {
-            return getMap().entrySet();
+            return map.entrySet();
         }
         public boolean equals(Object o) {
-            return getMap().equals(o);
+            return map.equals(o);
         }
         public Object get(Object key) {
-            return getMap().get(key);
+            return map.get(key);
         }
         public int hashCode() {
-            return getMap().hashCode();
+            return map.hashCode();
         }
         public boolean isEmpty() {
-            return getMap().isEmpty();
+            return map.isEmpty();
         }
         public Set keySet() {
-            return getMap().keySet();
+            return map.keySet();
         }
         public Object put(Object key, Object value) {
-            return getMap().put(key, value);
+            return map.put(key, value);
         }
         public void putAll(Map m) {
-            getMap().putAll(m);
+            map.putAll(m);
         }
         public Object remove(Object key) {
-            return getMap().remove(key);
+            return map.remove(key);
         }
         public int size() {
-            return getMap().size();
+            return map.size();
         }
         public Collection values() {
-            return getMap().values();
+            return map.values();
         }
-        private Map getMap() {
-            return (getFast() ? fastMap : slowMap);
+        public boolean getFast() {
+            return BeanUtils.getCacheFast(map);
+        }
+        public void setFast(boolean fast) {
+            BeanUtils.setCacheFast(map, fast);
         }
     }
 }

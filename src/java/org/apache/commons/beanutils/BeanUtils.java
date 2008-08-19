@@ -466,4 +466,36 @@ public class BeanUtils {
     public static boolean initCause(Throwable throwable, Throwable cause) {
         return BeanUtilsBean.getInstance().initCause(throwable, cause);
     }
+
+    /**
+     * Create a cache.
+     * @return a new cache
+     */
+    public static Map createCache() {
+        return new WeakFastHashMap();
+    }
+
+    /**
+     * Return whether a Map is fast
+     * @param map The map
+     * @return Whether it is fast or not.
+     */
+    public static boolean getCacheFast(Map map) {
+        if (map instanceof WeakFastHashMap) {
+            return ((WeakFastHashMap)map).getFast();
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Set whether fast on a Map
+     * @param map The map
+     * @param fast Whether it should be fast or not.
+     */
+    public static void setCacheFast(Map map, boolean fast) {
+        if (map instanceof WeakFastHashMap) {
+            ((WeakFastHashMap)map).setFast(fast);
+        }
+    }
 }
