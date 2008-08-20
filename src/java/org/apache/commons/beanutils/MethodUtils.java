@@ -947,54 +947,8 @@ public class MethodUtils {
                 log.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
             }
             
-            try {
-                //
-                // XXX Default access superclass workaround
-                //
-                // When a public class has a default access superclass
-                // with public methods, these methods are accessible.
-                // Calling them from compiled code works fine.
-                //
-                // Unfortunately, using reflection to invoke these methods
-                // seems to (wrongly) to prevent access even when the method
-                // modifer is public.
-                //
-                // The following workaround solves the problem but will only
-                // work from sufficiently privilages code. 
-                //
-                // Better workarounds would be greatfully accepted.
-                //
-                method.setAccessible(true);
-                
-            } catch (SecurityException se) {
-                // log but continue just in case the method.invoke works anyway
-                if (!loggedAccessibleWarning) {
-                    boolean vulnerableJVM = false;
-                    try {
-                        String specVersion = System.getProperty("java.specification.version");
-                        if (specVersion.charAt(0) == '1' && 
-                                (specVersion.charAt(2) == '0' ||
-                                 specVersion.charAt(2) == '1' ||
-                                 specVersion.charAt(2) == '2' ||
-                                 specVersion.charAt(2) == '3')) {
-                                 
-                            vulnerableJVM = true;
-                        }
-                    } catch (SecurityException e) {
-                        // don't know - so display warning
-                        vulnerableJVM = true;
-                    }
-                    if (vulnerableJVM) {
-                        log.warn(
-                            "Current Security Manager restricts use of workarounds for reflection bugs "
-                            + " in pre-1.4 JVMs.");
-                    }
-                    loggedAccessibleWarning = true;
-                }
-                log.debug(
-                        "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
-                        se);
-            }
+            setMethodAccessible(method); // Default access superclass workaround
+
             cacheMethod(md, method);
             return method;
             
@@ -1042,24 +996,7 @@ public class MethodUtils {
                                 log.trace(method + " accessible version of " 
                                             + methods[i]);
                             }
-                            try {
-                                //
-                                // XXX Default access superclass workaround
-                                // (See above for more details.)
-                                //
-                                method.setAccessible(true);
-                                
-                            } catch (SecurityException se) {
-                                // log but continue just in case the method.invoke works anyway
-                                if (!loggedAccessibleWarning) {
-                                    log.warn(
-            "Cannot use JVM pre-1.4 access bug workaround due to restrictive security manager.");
-                                    loggedAccessibleWarning = true;
-                                }
-                                log.debug(
-            "Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", 
-                                        se);
-                            }
+                            setMethodAccessible(method); // Default access superclass workaround
                             myCost = getTotalTransformationCost(parameterTypes,method.getParameterTypes());
                             if ( myCost < bestMatchCost ) {
                                bestMatch = method;
@@ -1080,6 +1017,60 @@ public class MethodUtils {
         }
         
         return bestMatch;                                        
+    }
+
+    /**
+     * Try to make the method accessible
+     * @param method The source arguments
+     */
+    private static void setMethodAccessible(Method method) {
+        try {
+            //
+            // XXX Default access superclass workaround
+            //
+            // When a public class has a default access superclass
+            // with public methods, these methods are accessible.
+            // Calling them from compiled code works fine.
+            //
+            // Unfortunately, using reflection to invoke these methods
+            // seems to (wrongly) to prevent access even when the method
+            // modifer is public.
+            //
+            // The following workaround solves the problem but will only
+            // work from sufficiently privilages code. 
+            //
+            // Better workarounds would be greatfully accepted.
+            //
+            method.setAccessible(true);
+            
+        } catch (SecurityException se) {
+            // log but continue just in case the method.invoke works anyway
+            Log log = LogFactory.getLog(MethodUtils.class);
+            if (!loggedAccessibleWarning) {
+                boolean vulnerableJVM = false;
+                try {
+                    String specVersion = System.getProperty("java.specification.version");
+                    if (specVersion.charAt(0) == '1' && 
+                            (specVersion.charAt(2) == '0' ||
+                             specVersion.charAt(2) == '1' ||
+                             specVersion.charAt(2) == '2' ||
+                             specVersion.charAt(2) == '3')) {
+                             
+                        vulnerableJVM = true;
+                    }
+                } catch (SecurityException e) {
+                    // don't know - so display warning
+                    vulnerableJVM = true;
+                }
+                if (vulnerableJVM) {
+                    log.warn(
+                        "Current Security Manager restricts use of workarounds for reflection bugs "
+                        + " in pre-1.4 JVMs.");
+                }
+                loggedAccessibleWarning = true;
+            }
+            log.debug("Cannot setAccessible on method. Therefore cannot use jvm access bug workaround.", se);
+        }
     }
 
     /**
