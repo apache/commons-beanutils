@@ -39,49 +39,55 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.8.0-BETA" date="2007-08-04" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
+    <release version="1.8.0" date="2008-09-01" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
+      <action dev="niallp" type="fix" issue="BEANUTILS-265" due-to="Tom Schindl and Romain Muller">
+         Allow access to non public class's public methods from a public sub-classes.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-291" due-to="Clebert Suconic ">
+         Circular Reference on WeakHashMap.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-294" due-to="Stephen Leung">
+         BeanUtilsBean.setProperty() does not support nested map.
+      </action>
+      <action dev="bayard" type="fix" issue="BEANUTILS-295" due-to="Stefan Wohlgemuth">
+         Unnecessary Garbage Objects in Class PropertyUtilsBean.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-297" due-to="Alex Tkachev">
+         ConvertingWrapDynaBean hides cause exceptions.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-298" due-to="Roman Mukhin">
+         MethodUtils.getAccessibleMethod(Method method) could not find right public method.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-302" due-to="Martin Bartlett">
+         NPE in ArrayConverter when converting a non-quoted string with underscores to a string array.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-306" due-to="Lucian Chirita">
+         LocaleConvertUtilsBean.convert throws NPE on null Locale when debug logging is enabled.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-318" due-to="Sylvain Legault">
+         Fix WeakHashMap is not thread safe in MethodUtils using new FastWeakHashMap.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-319" due-to="Erik Erskine">
+         PropertyUtils.getPropertyType fails for DynaBeans contained within a normal bean.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-326" due-to="Vladimir Orlov">
+         Iterating by a Map' key/value pairs in BeanUtilsBean and PropertyUtilsBean.
+      </action>
+    </release>
+
+    <release version="1.8.0-BETA" date="2007-08-04" description="Trial Beta release">
       <action dev="niallp" type="add" issue="BEANUTILS-259">
-         Add plugable property name expression <b><i>Resolver</i></b>.
+         Add plugable property name expression Resolver.
       </action>
       <action dev="niallp" type="update" issue="BEANUTILS-258">
-         General Converter implementation improvements:
-         <ul>
-           <li>New <b>AbstractConverter</b> which provides a basic structure for
-               Converter implementations:</li>
-               <ul>
-                   <li>Provides structure for converting to and from a String
-                       for the type the converter handles.</li>
-                   <li>Provides a mechanism for default values.</li>
-                   <li>Handles missing and invalid values in a uniform way.</li>
-               </ul>
-           <li>New <b>NumberConverter</b> implementation:</li>
-               <ul>
-                   <li>Converts both to and from <code>String</code> for numbers.</li>
-                   <li>Can be configured to convert using the default format for either
-                       the default Locale or a specified Locale.</li>
-                   <li>Can be configured to convert using a specified 
-                       <code>DecimalFormat</code> pattern, either for the default
-                       Locale or a specified Locale.</li>
-                   <li>Provides the basis for all the number converters in BeanUtils.</li>
-               </ul>
-         </ul>
+         General Converter implementation improvements: New AbstractConverter which provides
+         a basic structure for Converter implementations and new NumberConverter implementation.
       </action>
       <action dev="niallp" type="add" issue="BEANUTILS-242">
-         Add new generic <b>ArrayConverter</b> implementation.
+         Add new generic ArrayConverter implementation.
       </action>
       <action dev="niallp" type="add" issue="BEANUTILS-255">
-         Add new generic <b>DateTimeConverter</b> implementation.
-         <ul>
-             <li>Converts both to and from <code>String</code> for dates.</li>
-             <li>Can be configured to convert using the default format for either
-                 the default Locale or a specified Locale.</li>
-             <li>Can be configured to convert using a set of 
-                 <code>DateFormat</code> patterns.</li>
-             <li>Provides the basis for all the date converters in BeanUtils.</li>
-             <li>Handles conversion for (and between) <code>java.util.Date</code>,
-                 <code>java.util.Calendar</code>, <code>java.sql.Date</code>,
-                 <code>java.sql.Time</code> and <code>java.sql.Timestamp</code></li>
-         </ul>
+         Add new generic DateTimeConverter implementation.
       </action>
       <action dev="vgritsenko" type="update" issue="BEANUTILS-239" due-to="Rafael Afonso">
          Better implementation of SqlDateConverter. Modified SqlDateConverter,
@@ -146,11 +152,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="niallp" type="fix" issue="BEANUTILS-249" due-to="Brad">
          BeanUtilsBean's setProperty() does not convert objects using custom converters properly.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-17">
+      <action dev="niallp" type="fix" issue="BEANUTILS-17" due-to="Matthew Sgarlata and Corey Scott">
          Fix javadoc - IllegalArgumentException in BeanUtils.copyProperties
          when property types don't match.
-        <dueto name="Matthew Sgarlata"/>
-        <dueto name="Corey Scott"/>
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-68" due-to="Dmitry Platonoff">
          Writing to a mapped property requires a setter for a map, but never uses it.
@@ -215,11 +219,9 @@ The <action> type attribute can be add,update,fix,remove.
          be of help to future developers who make this mistake though...
       </action>
       <action dev="skitching" type="fix">
-         Ignore simple properties on <code>java.util.Map</code> objects -
-         <i>Map methods are always used on a Map object</i>.
-         Reverts <a href="http://issues.apache.org/jira/browse/BEANUTILS-144">BEANUTILS-144</a>.
-         See <a href="http://issues.apache.org/jira/browse/BEANUTILS-162">BEANUTILS-162</a> for
-         discussion.
+         Ignore simple properties on java.util.Map objects -
+         Map methods are always used on a Map object. Reverts BEANUTILS-144.
+         See BEANUTILS-162 for discussion.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-262">
          Correct getPropertyDescriptor() and setNestedProperty() methods to throw
@@ -230,21 +232,14 @@ The <action> type attribute can be add,update,fix,remove.
          Problems on indexed property with JDK 1.4.
       </action>
       <action dev="skitching" type="update">
-         BooleanArrayConverter:
-         <ul>
-            <li>Use new AbstractArrayConverter constructors</li>
-            <li>Convert strings to booleans by invoking a BooleanConverter rather than
-                hard-wiring the conversion.</li>
-         </ul> 
+         BooleanArrayConverter: Use new AbstractArrayConverter constructors and
+         Convert strings to booleans by invoking a BooleanConverter rather than
+         hard-wiring the conversion.
       </action>
       <action dev="skitching" type="update" due-to="Eric Rizzo">
-         BooleanConverter:
-         <ul>
-            <li>Add facility for user to override the default set of true and false
-                string definitions</li>
-            <li>provide ability to pass special NO_DEFAULT object as the
-               "defaultValue" constructor parameter.</li>
-         </ul> 
+         BooleanConverter: Add facility for user to override the default set
+         of true and false string definitions and provide ability to pass special
+         NO_DEFAULT object as the "defaultValue" constructor parameter.
       </action>
       <action dev="skitching" type="update">
          AbstractArrayConverter: provide ability to pass special NO_DEFAULT object as the
@@ -336,57 +331,49 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.7.0" date="2004-08-02">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt">
-         1.7.0 Release Notes</a>
+         See href="http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.6.1" date="2003-02-18">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt">
-         1.6.1 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.6" date="2003-01-21">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.6/RELEASE-NOTES.txt">
-         1.6 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.6/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.5" date="2002-10-23">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.5/RELEASE-NOTES.txt">
-         1.5 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.5/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.4.1" date="2002-08-28">
       <action type="fix">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.4.1/RELEASE-NOTES.txt">
-         1.4.1 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.4.1/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.4" date="2002-08-13">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.4/RELEASE-NOTES.txt">
-         1.4 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.4/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.3" date="2002-04-29">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.3/RELEASE-NOTES.txt">
-         1.3 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.3/RELEASE-NOTES.txt
       </action>
     </release>
 
     <release version="1.2" date="2001-12-24">
       <action type="update">
-         See <a href="http://commons.apache.org/beanutils/commons-beanutils-1.2/RELEASE-NOTES.txt">
-         1.2 Release Notes</a>
+         See http://commons.apache.org/beanutils/commons-beanutils-1.2/RELEASE-NOTES.txt
       </action>
     </release>
 

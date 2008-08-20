@@ -109,6 +109,8 @@ BUG REPORTS ADDRESSED:
 =====================
 
 The following is a list of the bugs fixed since the 1.8.0-BETA release, with their Jira issue number:
+
+  * [BEANUTILS-265] - Allow access to non public class's public methods from a public sub-classes
   * [BEANUTILS-291] - Circular Reference on WeakHashMap
   * [BEANUTILS-294] - BeanUtilsBean.setProperty() does not support nested map
   * [BEANUTILS-295] - Unnecessary Garbage Objects in Class PropertyUtilsBean
@@ -116,6 +118,9 @@ The following is a list of the bugs fixed since the 1.8.0-BETA release, with the
   * [BEANUTILS-298] - MethodUtils.getAccessibleMethod(Method method) could not find right public method
   * [BEANUTILS-302] - NPE in ArrayConverter when converting a non-quoted string with underscores to a string array
   * [BEANUTILS-306] - LocaleConvertUtilsBean.convert throws NPE on null Locale when debug logging is enabled
+  * [BEANUTILS-318] - Fix WeakHashMap is not thread safe in MethodUtils using new FastWeakHashMap
+  * [BEANUTILS-319] - PropertyUtils.getPropertyType fails for DynaBeans contained within a normal bean
+  * [BEANUTILS-326] - Iterating by a Map' key/value pairs in BeanUtilsBean and PropertyUtilsBean
 
 The following is a list of the bugs fixed since the 1.7.0 release, with their Jira issue number:
 

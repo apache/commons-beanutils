@@ -28,11 +28,6 @@
 <section name="Commons BeanUtils">
 
 <p>
-<strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
-and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
-release</strong> (see <a href="issue-tracking.html">here</a> for reporting any issues).
-</p>
-<p>
 Most Java developers are used to creating Java classes that conform to the
 JavaBeans naming patterns for property getters and setters.  It is natural to
 then access these methods directly, using calls to the corresponding
@@ -107,20 +102,16 @@ note the property reference syntax options described in the
 
 
 <section name="Releases">
-<subsection name="1.8.0 Beta">
+<subsection name="1.8.0">
 <p>
-<strong>Please <a href="http://commons.apache.org/downloads/download_beanutils.cgi">download</a>
-and test the BeanUtils <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">1.8.0 Beta</a>
-release</strong> (see <a href="issue-tracking.html">here</a> for reporting any issues).
-</p>
-<p>
-BeanUtils <strong>1.8.0 Beta</strong> is binary compatible with version 1.7.0
+BeanUtils <strong>1.8.0</strong> is binary compatible with version 1.7.0
 and contains quite a few 
 <a href="http://commons.apache.org/beanutils/v1.8.0-BETA/RELEASE-NOTES.txt">
-bug fixes and enhancements</a>. Since it has been nearly three years since the
-last BeanUtils release, it is hoped that this <strong><i>Beta</i></strong> release
-will facilitate wider testing to ensure that there are no major compatibility issues
-before the final 1.8.0 release.
+bug fixes and enhancements</a>.
+</p>
+<p>
+BeanUtils 1.8.0 is available to download
+<a href="http://commons.apache.org/downloads/download_beanutils.cgi">here</a>.
 </p>
 </subsection>
 <subsection name="1.7.0">
