@@ -31,6 +31,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
+import org.apache.commons.beanutils.priv.PublicSubBean;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
@@ -1812,6 +1813,34 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Exception: " + e.getMessage());
         }
 
+    }
+
+
+    /**
+     * Test accessing a public sub-bean of a package scope bean
+     */
+    public void testGetPublicSubBean_of_PackageBean() {
+
+        PublicSubBean bean = new PublicSubBean();
+        bean.setFoo("foo-start");
+        bean.setBar("bar-start");
+        Object result = null;
+        
+        // Get Foo
+        try {
+            result = PropertyUtils.getProperty(bean, "foo");
+        } catch (Throwable t) {
+            fail("getProperty(foo) threw " + t);
+        }
+        assertEquals("foo property", "foo-start", result);
+
+        // Get Bar
+        try {
+            result = PropertyUtils.getProperty(bean, "bar");
+        } catch (Throwable t) {
+            fail("getProperty(bar) threw " + t);
+        }
+        assertEquals("bar property", "bar-start", result);
     }
 
 
@@ -4187,6 +4216,32 @@ public class PropertyUtilsTestCase extends TestCase {
         
         PropertyUtils.setMappedProperty(bean, "noGetterMappedProperty",  "Epsilon", "Epsilon");
         assertEquals("Cannot set mapped no-getter property", "MAP:Epsilon", bean.getSecret());
+    }
+
+    /**
+     * Test accessing a public sub-bean of a package scope bean
+     */
+    public void testSetPublicSubBean_of_PackageBean() {
+
+        PublicSubBean bean = new PublicSubBean();
+        bean.setFoo("foo-start");
+        bean.setBar("bar-start");
+
+        // Set Foo
+        try {
+            PropertyUtils.setProperty(bean, "foo", "foo-updated");
+        } catch (Throwable t) {
+            fail("setProperty(foo) threw " + t);
+        }
+        assertEquals("foo property", "foo-updated", bean.getFoo());
+        
+        // Set Bar
+        try {
+            PropertyUtils.setProperty(bean, "bar", "bar-updated");
+        } catch (Throwable t) {
+            fail("setProperty(bar) threw " + t);
+        }
+        assertEquals("bar property", "bar-updated", bean.getBar());
     }
     
     /**

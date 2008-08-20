@@ -565,7 +565,35 @@ public class MethodUtilsTestCase extends TestCase {
         MethodUtils.invokeMethod(bean, "setFoo", "alpha");
         assertEquals("Set value (foo:2)", bean.getFoo(), "alpha");
         MethodUtils.invokeMethod(bean, "setBar", "beta");
-        assertEquals("Set value (bar:2)", bean.getFoo(), "alpha");
+        assertEquals("Set value (bar:2)", bean.getBar(), "beta");
+
+        Method method = null;
+        try {
+            method = MethodUtils.getAccessibleMethod(PublicSubBean.class, "setFoo", String.class);
+        } catch (Throwable t) {
+            fail("getAccessibleMethod() setFoo threw " + t);
+        }
+        assertNotNull("getAccessibleMethod() setFoo is Null", method);
+        try {
+            method.invoke(bean, new Object[] {"1111"});
+        } catch (Throwable t) {
+            fail("Invoking setFoo threw " + t);
+        }
+        assertEquals("Set value (foo:3)", "1111", bean.getFoo());
+
+        try {
+            method = MethodUtils.getAccessibleMethod(PublicSubBean.class, "setBar", String.class);
+        } catch (Throwable t) {
+            fail("getAccessibleMethod() setBar threw " + t);
+        }
+        assertNotNull("getAccessibleMethod() setBar is Null", method);
+        try {
+            method.invoke(bean, new Object[] {"2222"});
+        } catch (Throwable t) {
+            fail("Invoking setBar threw " + t);
+        }
+        assertEquals("Set value (bar:3)", "2222", bean.getBar());
+    
     }
     
     public void testParentMethod() throws Exception {

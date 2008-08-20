@@ -773,12 +773,22 @@ public class MethodUtils {
             return (null);
         }
 
+        boolean sameClass = true;
         if (clazz == null) {
             clazz = method.getDeclaringClass();
+        } else {
+            sameClass = clazz.equals(method.getDeclaringClass());
+            if (!method.getDeclaringClass().isAssignableFrom(clazz)) {
+                throw new IllegalArgumentException(clazz.getName() +
+                        " is not assignable from " + method.getDeclaringClass().getName());
+            }
         }
 
         // If the class is public, we are done
         if (Modifier.isPublic(clazz.getModifiers())) {
+            if (!sameClass && !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
+                setMethodAccessible(method); // Default access superclass workaround
+            }
             return (method);
         }
 
