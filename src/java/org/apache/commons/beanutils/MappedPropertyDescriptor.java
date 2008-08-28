@@ -452,6 +452,12 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             if (m == null) {
                 Class clazz = (Class)classRef.get();
                 if (clazz == null) {
+                    clazz = reLoadClass();
+                    if (clazz != null) {
+                        classRef = new WeakReference(clazz);
+                    }
+                }
+                if (clazz == null) {
                     throw new RuntimeException("Method " + methodName + " for " +
                             className + " could not be reconstructed - class reference has gone");
                 }
@@ -472,6 +478,30 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 methodRef = new SoftReference(m);
             }
             return m;
+        }
+
+        /**
+         * Try to re-load the class
+         */
+        private Class reLoadClass() {
+
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+            // Try the context class loader
+            if (classLoader != null) {
+                try {
+                    return classLoader.loadClass(className);
+                } catch (Throwable t) {
+                    // ignore
+                }
+            }
+
+            // Try this class's class loader
+            try {
+                return classLoader.loadClass(className);
+            } catch (Throwable t) {
+                return null;
+            }
         }
     }
 }

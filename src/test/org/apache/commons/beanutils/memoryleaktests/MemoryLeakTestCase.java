@@ -155,7 +155,7 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that MappedPropertyDescriptor can re-create the Method reference after it
      * has been garbage collected.
      */
-    public void testMappedPropertyDescriptor_MappedMethodReference() throws Exception {
+    public void testMappedPropertyDescriptor_MappedMethodReference1() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -177,6 +177,55 @@ public class MemoryLeakTestCase extends TestCase {
         assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
         assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
         assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+
+        forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
+
+        // The aim of this test is to check the functinality in MappedPropertyDescriptor which
+        // re-creates the Method references after they have been garbage collected. However theres no
+        // way of knowing the method references were garbage collected and that code was run, except by
+        // un-commeting the System.out statement in MappedPropertyDescriptor's MappedMethodReference's
+        // get() method.
+
+        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
+        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
+        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
+        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+
+        // Clear All BeanUtils caches after the test
+        clearAllBeanUtilsCaches();
+    }
+
+    /**
+     * Tests that MappedPropertyDescriptor can re-create the Method reference after it
+     * has been garbage collected.
+     */
+    public void testMappedPropertyDescriptor_MappedMethodReference2() throws Exception {
+
+        // Clear All BeanUtils caches before the test
+        clearAllBeanUtilsCaches();
+
+        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
+        ClassLoader loader = newClassLoader();
+        Class beanClass    = loader.loadClass(className);
+        Object bean        = beanClass.newInstance();
+        // -----------------------------------------------------------------------------
+
+        // Sanity checks only
+        assertNotNull("ClassLoader is null", loader);
+        assertNotNull("BeanClass is null", beanClass);
+        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
+        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+
+        MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
+        assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
+        assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
+        assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
+        assertEquals("1-Read Write name", "setMappedProperty", descriptor.getMappedWriteMethod().getName());
+
+        // this should make the reference go away.
+        loader = null;
+        beanClass = null;
+        bean = null;
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
