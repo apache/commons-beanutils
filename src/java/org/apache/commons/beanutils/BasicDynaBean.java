@@ -87,6 +87,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
      *
      * @return a Map representation of this DynaBean
+     * @since 1.8.0
      */
     public Map getMap() {
 

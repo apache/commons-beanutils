@@ -1044,6 +1044,7 @@ public class BeanUtilsBean {
      * @param  throwable The throwable.
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.
+     * @since 1.8.0
      */
     public boolean initCause(Throwable throwable, Throwable cause) {
         if (INIT_CAUSE_METHOD != null && cause != null) {
@@ -1066,6 +1067,7 @@ public class BeanUtilsBean {
      * @return The converted value
      *
      * @exception ConversionException if thrown by an underlying Converter
+     * @since 1.8.0
      */
     protected Object convert(Object value, Class type) {
         Converter converter = getConvertUtils().lookup(type);

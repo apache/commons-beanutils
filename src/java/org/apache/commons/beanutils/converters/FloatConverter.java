@@ -58,6 +58,7 @@ public final class FloatConverter extends NumberConverter {
      * Return the default type this <code>Converter</code> handles.
      *
      * @return The default type this <code>Converter</code> handles.
+     * @since 1.8.0
      */
     protected Class getDefaultType() {
         return Float.class;

@@ -462,6 +462,7 @@ public class BeanUtils {
      * @param  throwable The throwable.
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.
+     * @since 1.8.0
      */
     public static boolean initCause(Throwable throwable, Throwable cause) {
         return BeanUtilsBean.getInstance().initCause(throwable, cause);
@@ -470,6 +471,7 @@ public class BeanUtils {
     /**
      * Create a cache.
      * @return a new cache
+     * @since 1.8.0
      */
     public static Map createCache() {
         return new WeakFastHashMap();
@@ -479,6 +481,7 @@ public class BeanUtils {
      * Return whether a Map is fast
      * @param map The map
      * @return Whether it is fast or not.
+     * @since 1.8.0
      */
     public static boolean getCacheFast(Map map) {
         if (map instanceof WeakFastHashMap) {
@@ -492,6 +495,7 @@ public class BeanUtils {
      * Set whether fast on a Map
      * @param map The map
      * @param fast Whether it should be fast or not.
+     * @since 1.8.0
      */
     public static void setCacheFast(Map map, boolean fast) {
         if (map instanceof WeakFastHashMap) {

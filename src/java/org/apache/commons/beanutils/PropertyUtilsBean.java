@@ -156,6 +156,7 @@ public class PropertyUtilsBean {
      * {@link DefaultResolver} is the default implementation used.
      *
      * @return resolver The property expression resolver.
+     * @since 1.8.0
      */
     public Resolver getResolver() {
         return resolver;
@@ -172,6 +173,7 @@ public class PropertyUtilsBean {
      * {@link DefaultResolver} is the default implementation used.
      *
      * @param resolver The property expression resolver.
+     * @since 1.8.0
      */
     public void setResolver(Resolver resolver) {
         if (resolver == null) {
@@ -787,6 +789,7 @@ public class PropertyUtilsBean {
      * @throws NoSuchMethodException just in case subclasses override this
      * method to try to access real getter methods, and want to fail if
      * no simple method is available.
+     * @since 1.8.0
      */
     protected Object getPropertyOfMapBean(Map bean, String propertyName) 
         throws IllegalArgumentException, IllegalAccessException, 
@@ -2004,6 +2007,7 @@ public class PropertyUtilsBean {
      * @throws NoSuchMethodException just in case subclasses override this
      * method to try to access real setter methods, and want to fail if
      * no simple method is available.
+     * @since 1.8.0
      */
     protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
         throws IllegalArgumentException, IllegalAccessException, 

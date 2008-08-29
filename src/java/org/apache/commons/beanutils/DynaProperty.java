@@ -207,6 +207,7 @@ public class DynaProperty implements Serializable {
      * @param obj The object to compare to
      * @return <code>true</code> if object is a dyna property with the same name
      * type and content type, otherwise <code>false</code>
+     * @since 1.8.0
      */
     public boolean equals(final Object obj) {
 
@@ -228,6 +229,7 @@ public class DynaProperty implements Serializable {
     /**
      * @return the hashcode for this dyna property
      * @see java.lang.Object#hashCode
+     * @since 1.8.0
      */
     public int hashCode() {
 

@@ -118,6 +118,7 @@ public class MethodUtils {
      *
      * @param cacheMethods <code>true</code> if methods should be
      * cached for greater performance, otherwise <code>false</code>
+     * @since 1.8.0
      */
     public static synchronized void setCacheMethods(boolean cacheMethods) {
         CACHE_METHODS = cacheMethods;
@@ -129,6 +130,7 @@ public class MethodUtils {
     /**
      * Clear the method cache.
      * @return the number of cached methods cleared
+     * @since 1.8.0
      */
     public static synchronized int clearCache() {
         int size = cache.size();
@@ -422,6 +424,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
             Class objectClass,
@@ -479,6 +482,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeStaticMethod(
             Class objectClass,
@@ -521,6 +525,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeStaticMethod(
             Class objectClass,
@@ -569,6 +574,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeStaticMethod(
             Class objectClass,
@@ -617,6 +623,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
             Class objectClass,
@@ -650,6 +657,7 @@ public class MethodUtils {
      *  method invoked
      * @throws IllegalAccessException if the requested method is not accessible
      *  via reflection
+     * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
             Class objectClass,
@@ -760,6 +768,7 @@ public class MethodUtils {
      * @param clazz The class of the object
      * @param method The method that we wish to call
      * @return The accessible method
+     * @since 1.8.0
      */
     public static Method getAccessibleMethod(Class clazz, Method method) {
 

@@ -224,6 +224,7 @@ public class WrapDynaClass implements DynaClass {
      * Return the class of the underlying wrapped bean.
      *
      * @return the class of the underlying wrapped bean
+     * @since 1.8.0
      */
     protected Class getBeanClass() {
         return (Class)beanClassRef.get();

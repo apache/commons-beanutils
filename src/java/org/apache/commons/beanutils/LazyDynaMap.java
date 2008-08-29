@@ -154,6 +154,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     /**
      * Return the underlying Map backing this <code>DynaBean</code>
      * @return the underlying Map
+     * @since 1.8.0
      */
     public Map getMap() {
         return values;

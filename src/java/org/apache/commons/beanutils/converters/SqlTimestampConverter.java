@@ -63,6 +63,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * Return the default type this <code>Converter</code> handles.
      *
      * @return The default type this <code>Converter</code> handles.
+     * @since 1.8.0
      */
     protected Class getDefaultType() {
         return Timestamp.class;
@@ -74,6 +75,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * @param timeZone TODO
      *
      * @return The DateFormat.
+     * @since 1.8.0
      */
     protected DateFormat getFormat(Locale locale, TimeZone timeZone) {
         DateFormat format = null;

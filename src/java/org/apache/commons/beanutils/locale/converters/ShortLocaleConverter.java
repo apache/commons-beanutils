@@ -210,6 +210,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @exception org.apache.commons.beanutils.ConversionException if conversion cannot be performed
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
+     * @since 1.8.0
      */
     protected Object parse(Object value, String pattern) throws ParseException {
 

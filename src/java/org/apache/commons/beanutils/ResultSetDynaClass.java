@@ -173,6 +173,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @param name The property name
      * @return The value
      * @throws SQLException if an error occurs
+     * @since 1.8.0
      */
     public Object getObjectFromResultSet(String name) throws SQLException {
         return getObject(getResultSet(), name);

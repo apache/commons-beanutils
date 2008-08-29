@@ -158,6 +158,7 @@ import java.lang.reflect.Array;
  * 
  * @author Niall Pemberton
  * @version $Revision$ $Date$
+ * @since 1.8.0
  */
 public class LazyDynaList extends ArrayList {
     
