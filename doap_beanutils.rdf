@@ -35,9 +35,9 @@
     </repository>
     <release>
       <revision>
-        <name>??</name>
-        <created>yyyy-mm-dd</created>
-        <version>??</version>
+        <name>1.8.0</name>
+        <created>2008-09-01</created>
+        <version>1.8.0</version>
       </revision>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/mail-lists.html"/>
