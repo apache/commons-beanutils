@@ -21,8 +21,6 @@ import java.lang.ref.WeakReference;
 
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConversionException;
-
 import junit.framework.TestCase;
 
 /**

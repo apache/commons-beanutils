@@ -17,13 +17,8 @@
 
 package org.apache.commons.beanutils.converters;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import junit.framework.TestSuite;
 
-import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 
