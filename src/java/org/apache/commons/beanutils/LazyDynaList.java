@@ -417,7 +417,7 @@ public class LazyDynaList extends ArrayList {
             if (Map.class.isAssignableFrom(elementType)) {
                 array[i] = ((LazyDynaMap)get(i)).getMap(); 
             } else if (DynaBean.class.isAssignableFrom(elementType)) {
-                array[i] = (DynaBean)get(i);
+                array[i] = get(i);
             } else {
                 array[i] = ((WrapDynaBean)get(i)).getInstance(); 
             }

@@ -424,14 +424,14 @@ public class ConvertUtilsBean {
     public String convert(Object value) {
 
         if (value == null) {
-            return ((String) null);
+            return null;
         } else if (value.getClass().isArray()) {
             if (Array.getLength(value) < 1) {
                 return (null);
             }
             value = Array.get(value, 0);
             if (value == null) {
-                return ((String) null);
+                return null;
             } else {
                 Converter converter = lookup(String.class);
                 return ((String) converter.convert(String.class, value));
