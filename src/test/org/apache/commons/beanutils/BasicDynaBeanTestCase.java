@@ -740,7 +740,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             bean.set("intArray", 0, new Integer(1));
-            value = (Integer) bean.get("intArray", 0);
+            value = bean.get("intArray", 0);
             assertNotNull("Returned new value 0", value);
             assertTrue("Returned Integer new value 0",
                     value instanceof Integer);
@@ -752,7 +752,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             bean.set("intIndexed", 1, new Integer(11));
-            value = (Integer) bean.get("intIndexed", 1);
+            value = bean.get("intIndexed", 1);
             assertNotNull("Returned new value 1", value);
             assertTrue("Returned Integer new value 1",
                     value instanceof Integer);
@@ -764,7 +764,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             bean.set("listIndexed", 2, "New Value 2");
-            value = (String) bean.get("listIndexed", 2);
+            value = bean.get("listIndexed", 2);
             assertNotNull("Returned new value 2", value);
             assertTrue("Returned String new value 2",
                     value instanceof String);
@@ -776,7 +776,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             bean.set("stringArray", 3, "New Value 3");
-            value = (String) bean.get("stringArray", 3);
+            value = bean.get("stringArray", 3);
             assertNotNull("Returned new value 3", value);
             assertTrue("Returned String new value 3",
                     value instanceof String);
@@ -788,7 +788,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         try {
             bean.set("stringIndexed", 4, "New Value 4");
-            value = (String) bean.get("stringIndexed", 4);
+            value = bean.get("stringIndexed", 4);
             assertNotNull("Returned new value 4", value);
             assertTrue("Returned String new value 4",
                     value instanceof String);
