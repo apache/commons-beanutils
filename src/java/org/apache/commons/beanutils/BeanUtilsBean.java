@@ -980,8 +980,8 @@ public class BeanUtilsBean {
         if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value == null) {
                 String[] values = new String[1];
-                values[0] = (String) value;
-                newValue = getConvertUtils().convert((String[]) values, type);
+                values[0] = null;
+                newValue = getConvertUtils().convert(values, type);
             } else if (value instanceof String) {
                 newValue = getConvertUtils().convert(value, type);
             } else if (value instanceof String[]) {
