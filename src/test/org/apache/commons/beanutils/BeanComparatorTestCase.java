@@ -18,11 +18,8 @@
 package org.apache.commons.beanutils;
 
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
@@ -216,7 +213,7 @@ public class BeanComparatorTestCase extends TestCase {
 
         }
         catch (ClassCastException cce){
-          ; // Expected result
+          // Expected result
         }
         catch (Exception e) {
             fail("Exception" + e);

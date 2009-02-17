@@ -20,16 +20,13 @@ package org.apache.commons.beanutils;
 
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
 import java.util.List;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
