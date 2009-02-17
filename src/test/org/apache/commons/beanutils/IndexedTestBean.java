@@ -61,7 +61,7 @@ public class IndexedTestBean {
      * Indexed Getter for the String[] property.
      */
     public String getStringArray(int index) {
-        return (String)stringArray[index];
+        return stringArray[index];
     }
 
     /**
