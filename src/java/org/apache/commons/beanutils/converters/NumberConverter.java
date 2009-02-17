@@ -537,7 +537,7 @@ public abstract class NumberConverter extends AbstractConverter {
      */
     private Number parse(Class sourceType, Class targetType, String value, NumberFormat format) {
         ParsePosition pos = new ParsePosition(0);
-        Number parsedNumber = (Number)format.parse(value, pos);
+        Number parsedNumber = format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
             String msg = "Error converting from '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof DecimalFormat) {
