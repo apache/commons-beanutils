@@ -103,7 +103,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             Object result = bean.get("invalidProperty");
             fail("Invalid get should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
-            ; // Expected result
+            // Expected result
         }
 
         // Invalid setter
@@ -111,7 +111,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set("invalidProperty", "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
-            ; // Expected result
+            // Expected result
         }
 
         // Set up initial Value
@@ -143,7 +143,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             Object result = bean.get("invalidProperty", 0);
             fail("Invalid get should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
-            ; // Expected result
+            // Expected result
         }
 
         // Invalid setter
@@ -151,7 +151,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set("invalidProperty", 0, "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
-            ; // Expected result
+            // Expected result
         }
 
         // Set up initial Value

@@ -165,7 +165,7 @@ public class Jira157TestCase extends TestCase {
     public static interface XY {
         String getX();
         String getY();
-    };
+    }
 
     public static class FooBar {
         String getPackageFoo() {
@@ -180,5 +180,5 @@ public class Jira157TestCase extends TestCase {
         public String getPublicFoo() {
             return "PublicFoo Value";
         }
-    };
+    }
 }
