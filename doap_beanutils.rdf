@@ -37,7 +37,7 @@
       <Version>
         <name>1.8.0</name>
         <created>2008-09-01</created>
-        <revision>1.8.0</version>
+        <revision>1.8.0</revision>
       </Version>
     </release>
     <mailing-list rdf:resource="http://commons.apache.org/mail-lists.html"/>
