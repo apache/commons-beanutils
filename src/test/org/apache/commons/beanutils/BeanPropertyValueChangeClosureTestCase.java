@@ -217,7 +217,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("intProperty", null).execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (NullPointerException e) { 
+        } catch (IllegalArgumentException e) { 
             /* this is what we expect */
         }
     }

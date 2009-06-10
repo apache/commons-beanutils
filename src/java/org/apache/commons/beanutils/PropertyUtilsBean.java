@@ -2169,7 +2169,11 @@ public class PropertyUtilsBean {
                     if (i>0) {
                         valueString += ", " ;
                     }
-                    valueString += (values[i]).getClass().getName();
+                    if (values[i] == null) {
+                        valueString += "<null>";
+                    } else {
+                        valueString += (values[i]).getClass().getName();
+                    }
                 }
             }
             String expectedString = "";
