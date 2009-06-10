@@ -184,6 +184,7 @@
               </excludes>
 
               <!-- Configure Logging -->
+              <redirectTestOutputToFile>true</redirectTestOutputToFile>
               <systemProperties>
                   <property>
                       <name>org.apache.commons.logging.LogFactory</name>
