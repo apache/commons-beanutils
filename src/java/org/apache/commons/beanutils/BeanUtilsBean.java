@@ -1000,7 +1000,7 @@ public class BeanUtilsBean {
                 newValue = convert(value, type.getComponentType());
             }
         } else {                             // Value into scalar
-            if ((value instanceof String) || (value == null)) {
+            if (value instanceof String) {
                 newValue = getConvertUtils().convert((String) value, type);
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
