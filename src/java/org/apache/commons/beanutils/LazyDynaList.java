@@ -503,7 +503,8 @@ public class LazyDynaList extends ArrayList {
             throw new IllegalArgumentException("Element Type is missing");
         }
 
-        if (size() > 0) {
+        boolean changeType = (this.elementType != null && !this.elementType.equals(elementType));
+        if (changeType && size() > 0) {
             throw new IllegalStateException("Element Type cannot be reset");
         }
 
@@ -634,18 +635,17 @@ public class LazyDynaList extends ArrayList {
             }
 
             // Get DynaClass (restore WrapDynaClass lost in serialization)
-            DynaClass dynaClass = (elementDynaClass == null) ? wrapDynaClass : elementDynaClass;
-            if (dynaClass == null) {
+            if (getDynaClass() == null) {
                 setElementType(elementType);
             }
                          
             // Create a new DynaBean            
             try {
-                dynaBean = dynaClass.newInstance();
+                dynaBean = getDynaClass().newInstance();
                 newDynaBeanType = dynaBean.getClass();
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error creating DynaBean: " 
-                              + dynaClass.getClass().getName() 
+                              + getDynaClass().getClass().getName() 
                               + " - " + e);
             }
 
@@ -675,7 +675,7 @@ public class LazyDynaList extends ArrayList {
 
         // Check the new element type, matches all the 
         // other elements in the List
-        if (newElementType != elementType) {
+        if (elementType != null && !newElementType.equals(elementType)) {
             throw new IllegalArgumentException("Element Type "  + newElementType 
                        + " doesn't match other elements " + elementType);
         }
@@ -683,5 +683,11 @@ public class LazyDynaList extends ArrayList {
         return dynaBean;
         
     }
-    
+
+    /**
+     * Return the DynaClass.
+     */
+    private DynaClass getDynaClass() {
+        return (elementDynaClass == null ? wrapDynaClass : elementDynaClass);
+    }
 }

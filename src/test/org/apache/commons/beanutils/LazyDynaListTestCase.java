@@ -219,6 +219,13 @@ public class LazyDynaListTestCase extends TestCase {
 
     }
 
+    /**
+     * Test adding a map to List with no type set.
+     */
+    public void testNullType() {
+        LazyDynaList lazyList = new LazyDynaList();
+        lazyList.add(new HashMap());
+    }
 
     /**
      * Test DynaBean Create
@@ -518,6 +525,9 @@ public class LazyDynaListTestCase extends TestCase {
         LazyDynaList result = (LazyDynaList)serializeDeserialize(target, "POJO");
         target = null;
         bean = null;
+
+        // Test BEANUTILS-300
+        result.add(null);
 
         // Confirm property value
         bean = (WrapDynaBean)result.get(0);
