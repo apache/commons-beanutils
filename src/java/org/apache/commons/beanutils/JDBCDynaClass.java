@@ -47,6 +47,11 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected boolean lowerCase = true;
 
     /**
+     * <p>Flag defining whether column names or labels should be used.
+     */
+    private boolean useColumnLabel;
+
+    /**
      * <p>The set of dynamic properties that are part of this
      * {@link DynaClass}.</p>
      */
@@ -128,6 +133,15 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
+     * Set whether the column label or name should be used for the property name.
+     *
+     * @param useColumnLabel true if the column label should be used, otherwise false
+     */
+    public void setUseColumnLabel(boolean useColumnLabel) {
+        this.useColumnLabel = useColumnLabel;
+    }
+
+    /**
      * <p>Loads and returns the <code>Class</code> of the given name.
      * By default, a load from the thread context class loader is attempted.
      * If there is no such class loader, the class loader used to load this
@@ -167,7 +181,13 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
                                     int i)
                                     throws SQLException {
 
-        String columnName = metadata.getColumnName(i);
+        String columnName = null;
+        if (useColumnLabel) {
+            columnName = metadata.getColumnLabel(i);
+        }
+        if (columnName == null || columnName.trim().length() == 0) {
+            columnName = metadata.getColumnName(i);
+        }
         String name = lowerCase ? columnName.toLowerCase() : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
