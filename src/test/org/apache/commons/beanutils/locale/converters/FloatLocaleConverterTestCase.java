@@ -18,7 +18,10 @@
 package org.apache.commons.beanutils.locale.converters;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
+
 import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 
 /**
  * Test Case for the FloatLocaleConverter class.
@@ -303,6 +306,18 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         }
     }
 
+    /**
+     * Test parsing zero - see BEANUTILS-351
+     */
+    public void testParseZero() {
+        try {
+            Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
+            assertEquals(new Float(0), result);
+        } catch (ConversionException e) {
+            fail("Zero threw ConversionException: " + e);
+        }
+        
+    }
 
 
 }
