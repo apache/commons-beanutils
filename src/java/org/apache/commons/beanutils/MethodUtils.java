@@ -1060,7 +1060,9 @@ public class MethodUtils {
             //
             // Better workarounds would be greatfully accepted.
             //
-            method.setAccessible(true);
+            if (!method.isAccessible()) {
+                method.setAccessible(true);
+            }
             
         } catch (SecurityException se) {
             // log but continue just in case the method.invoke works anyway
