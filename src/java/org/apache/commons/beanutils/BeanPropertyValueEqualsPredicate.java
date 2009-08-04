@@ -245,7 +245,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @param actual The actual value.
      * @return True if they are equal; false otherwise.
      */
-    private boolean evaluateValue(Object expected, Object actual) {
+    protected boolean evaluateValue(Object expected, Object actual) {
         return (expected == actual) || ((expected != null) && expected.equals(actual));
     }
 
