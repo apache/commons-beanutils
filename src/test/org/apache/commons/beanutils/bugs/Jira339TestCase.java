@@ -17,6 +17,8 @@
 package org.apache.commons.beanutils.bugs;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -83,13 +85,30 @@ public class Jira339TestCase extends TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)}
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
     public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
         
         TestBean bean = new TestBean();
         try {
             BeanUtils.setProperty(bean, "comparator", null);
+        } catch (Throwable t) {
+            log.error("Failed: " + t.getMessage(), t);
+            fail("Threw exception: " + t);
+        }
+        assertNull("TestBean comparator should be null", bean.getComparator());
+    }
+
+    /**
+     * Test {@link BeanUtils#populate(Object, Map)}
+     */
+    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
+        
+        TestBean bean = new TestBean();
+        try {
+            Map properties = new HashMap();
+            properties.put("comparator", null);
+            BeanUtils.populate(bean, properties);
         } catch (Throwable t) {
             log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
