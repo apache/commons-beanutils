@@ -491,15 +491,16 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             if (classLoader != null) {
                 try {
                     return classLoader.loadClass(className);
-                } catch (Throwable t) {
+                } catch (ClassNotFoundException e) {
                     // ignore
                 }
             }
 
             // Try this class's class loader
+            classLoader = MappedPropertyDescriptor.class.getClassLoader();
             try {
                 return classLoader.loadClass(className);
-            } catch (Throwable t) {
+            } catch (ClassNotFoundException e) {
                 return null;
             }
         }
