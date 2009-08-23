@@ -431,7 +431,9 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         private String methodName;
         private Reference methodRef;
         private Reference classRef;
-        private Reference writeParamTypeRef;
+        private Reference writeParamTypeRef0;
+        private Reference writeParamTypeRef1;
+        private String[] writeParamClassNames;
         MappedMethodReference(Method m) {
             if (m != null) {
                 className = m.getDeclaringClass().getName();
@@ -440,7 +442,11 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 classRef = new WeakReference(m.getDeclaringClass());
                 Class[] types = m.getParameterTypes();
                 if (types.length == 2) {
-                    writeParamTypeRef = new WeakReference(types[1]);
+                    writeParamTypeRef0 = new WeakReference(types[0]);
+                    writeParamTypeRef1 = new WeakReference(types[1]);
+                    writeParamClassNames = new String[2];
+                    writeParamClassNames[0] = types[0].getName();
+                    writeParamClassNames[1] = types[1].getName();
                 }
             }
         }
@@ -462,8 +468,22 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                             className + " could not be reconstructed - class reference has gone");
                 }
                 Class[] paramTypes = null;
-                if (writeParamTypeRef != null) {
-                    paramTypes = new Class[] {String.class, (Class)writeParamTypeRef.get()};
+                if (writeParamClassNames != null) {
+                    paramTypes = new Class[2];
+                    paramTypes[0] = (Class)writeParamTypeRef0.get();
+                    if (paramTypes[0] == null) {
+                        paramTypes[0] = reLoadClass(writeParamClassNames[0]);
+                        if (paramTypes[0] != null) {
+                            writeParamTypeRef0 = new WeakReference(paramTypes[0]);
+                        }
+                    }
+                    paramTypes[1] = (Class)writeParamTypeRef1.get();
+                    if (paramTypes[1] == null) {
+                        paramTypes[1] = reLoadClass(writeParamClassNames[1]);
+                        if (paramTypes[1] != null) {
+                            writeParamTypeRef1 = new WeakReference(paramTypes[1]);
+                        }
+                    }
                 } else {
                     paramTypes = STRING_CLASS_PARAMETER;
                 }
@@ -484,13 +504,20 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
          * Try to re-load the class
          */
         private Class reLoadClass() {
+            return reLoadClass(className);
+        }
+
+        /**
+         * Try to re-load the class
+         */
+        private Class reLoadClass(String name) {
 
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
             // Try the context class loader
             if (classLoader != null) {
                 try {
-                    return classLoader.loadClass(className);
+                    return classLoader.loadClass(name);
                 } catch (ClassNotFoundException e) {
                     // ignore
                 }
@@ -499,7 +526,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             // Try this class's class loader
             classLoader = MappedPropertyDescriptor.class.getClassLoader();
             try {
-                return classLoader.loadClass(className);
+                return classLoader.loadClass(name);
             } catch (ClassNotFoundException e) {
                 return null;
             }
