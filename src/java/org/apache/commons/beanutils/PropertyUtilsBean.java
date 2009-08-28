@@ -514,7 +514,13 @@ public class PropertyUtilsBean {
             }
         } else {
             //get the array's value
-            return (Array.get(value, index));
+            try {
+                return (Array.get(value, index));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ArrayIndexOutOfBoundsException("Index: " +
+                        index + ", Size: " + Array.getLength(value) +
+                        " for property '" + name + "'");
+            }
         }
 
     }
