@@ -69,13 +69,13 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *
      * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static Map typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+    private static final Map typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     /**
      * This HashMap has been made unmodifiable to prevent issues when
      * loaded in a shared ClassLoader enviroment.
      *
-     * @see http://issues.apache.org/jira/browse/BEANUTILS-112
+     * @see "http://issues.apache.org/jira/browse/BEANUTILS-112"
      * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
      */
     public static HashMap defaultTransformers = new HashMap() {
@@ -256,9 +256,8 @@ public class BeanMap extends AbstractMap implements Cloneable {
         }
 
         Object newBean = null;            
-        Class beanClass = null;
+        Class beanClass = bean.getClass(); // Cannot throw Exception
         try {
-            beanClass = bean.getClass();
             newBean = beanClass.newInstance();
         } catch (Exception e) {
             // unable to instantiate
