@@ -905,7 +905,7 @@ public class PropertyUtilsBean {
 
         // Look up and return this property from our cache
         // creating and adding it to the cache if not found.
-        if ((bean == null) || (name == null)) {
+        if (name == null) {
             return (null);
         }
         
