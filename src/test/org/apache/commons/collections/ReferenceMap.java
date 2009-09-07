@@ -595,7 +595,7 @@ public class ReferenceMap extends AbstractMap {
     public void clear() {
         Arrays.fill(table, null);
         size = 0;
-        while (queue.poll() != null); // drain the queue
+        while (queue.poll() != null){} // drain the queue
     }
 
 
