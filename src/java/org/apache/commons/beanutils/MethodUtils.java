@@ -907,11 +907,6 @@ public class MethodUtils {
 
         }
 
-        // If we found a method return it
-        if (method != null) {
-            return (method);
-        }
-
         // We did not find anything
         return (null);
 
