@@ -30,8 +30,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.PrimitiveBean;
-import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;

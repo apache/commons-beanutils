@@ -18,9 +18,6 @@
 
 package org.apache.commons.beanutils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Test Interface
  *

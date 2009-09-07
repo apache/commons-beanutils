@@ -16,8 +16,6 @@
  */ 
 package org.apache.commons.beanutils.memoryleaktests.pojotests;
 
-import java.util.HashMap;
-
 /**
  * Test POJO
  */

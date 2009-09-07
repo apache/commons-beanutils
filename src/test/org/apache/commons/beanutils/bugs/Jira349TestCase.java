@@ -16,16 +16,11 @@
  */
 package org.apache.commons.beanutils.bugs;
 
-import java.lang.reflect.Method;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.beanutils.bugs.other.Jira298BeanFactory;
-import org.apache.commons.beanutils.bugs.other.Jira298BeanFactory.IX;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
