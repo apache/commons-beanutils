@@ -159,7 +159,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             if (cl == null) {
                     cl = this.getClass().getClassLoader();
             }
-            return (cl.loadClass(className));
+            // use Class.forName() - see BEANUTILS-327
+            return Class.forName(className, false, cl);
         } catch (Exception e) {
             throw new SQLException(
                     "Cannot load column class '" + className + "': " + e);
