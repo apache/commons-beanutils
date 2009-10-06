@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.8.0
+                               Version 1.8.1
                                Release Notes
 
 INTRODUCTION:
@@ -29,160 +29,32 @@ BeanUtils package, and highlights changes since the previous version.
 For more information on Commons BeanUtils, see
 o http://commons.apache.org/beanutils/
 
-Compatibility with 1.7.0
+Compatibility with 1.8.0
 ========================
-BeanUtils 1.8.0 is binary compatible release with Beanutils 1.7.0,
-containing a number of bug fixes and enhancements.
+BeanUtils 1.8.1 is binary compatible release with Beanutils 1.8.0, containing mostly bug fixes.
 
-Compatibility with 1.8.0-BETA
-=============================
-There are a number of incompatible changes with the BeanUtils 1.8.0-BETA release:
- - AbstractConverter - constructor signatures are different and getDefaultType() method is now abstract
- - DateTimeConverter - now an abstract class and constructor signatures are different
- - NumberConverter - now an abstract class and constructor signatures are different
+
+BUGS FIXED:
+===========
+
+The following is a list of the bugs fixed in this release, with their Jira issue number:
+
+  * [BEANUTILS-300] - NPE in LazyDynaList
+  * [BEANUTILS-327] - JDBCDynaClass throws class not found exception under java6
+  * [BEANUTILS-336] - MappedPropertyDescriptor#reLoadClass() possible NPE / odd code; also swallows Throwable
+  * [BEANUTILS-339] - BeanUtilsBean.setProperty throws IllegalArgumentException if value is null
+  * [BEANUTILS-345] - BeanUtilsBean.setProperty does not handle some kind of nested properties
+  * [BEANUTILS-347] - MappedPropertyDescriptor throws an exception after method reference has been garbage collected
+  * [BEANUTILS-349] - copyProperties throws NullPointerException if an IllegalArgumentException is thrown due to a null value parameter for a primitive
+  * [BEANUTILS-351] - FloatLocaleConverter cannot parse 0
+  * [BEANUTILS-354] - Type in BooleanConverter: "Cna't convert value"
+
 
 ENHANCEMENTS:
 =============
+The following is a list of enhancements in this release, with their Jira issue number:
 
-Expression Resolver
--------------------
-Prior versions of BeanUtils duplicated the logic required to "resolve"
-expressions and suffered from inconsistency as a result. A new plugable Resolver
-has been introduced in BeanUtils 1.8.0 which removes that duplication, makes
-all expression resolution consistent and allows different expression syntax
-flavours to be plugged in. As well as this BeanUtils now has improved support
-for nested Map and indexed properties.
+  * [BEANUTILS-333] - Avoid calling setAccessible() if not needed
+  * [BEANUTILS-344] - Method createDynaProperty of JDBCDynaClass should first look for column label instead of column name in ResultSetMetadata object..
+  * [BEANUTILS-350] - change visibility of method "evaluateValue" belongs to the class BeanPropertyValueEqualsPredicate to "protected".
 
-Conversion
-----------
-The converter implementations have been significantly improved in this release:
-
-1) Arrays: A new "generic" ArrayConverter has been introduced which delegates
-           the individual component conversion to an appropriate Converter for
-           the component type.
-2) Numbers: All numeric Converters now handle conversion between numeric types
-           and have improved conversion facilities to and from Strings
-           based on formats and/or a specified Locale.
-3) Dates: Improvements to the existing SQL Date, Time and Timestamp converters
-          now handle conversion between Date/Calendar types and have improved
-          conversion facilities to and from Strings based on formats and/or
-          a specified Locale. New java.util.Date and Calendar converter
-          implementations have been added.
-
-Prior versions of BeanUtils delegated all conversion to String to the registered
-String Converter. All Converter implementations provided by BeanUtils can now handle
-conversion to String (as well as from) for their type. New ConvertUtils lookup/convert
-methods have been added which delegate conversion to String appropriately. However
-existing convert methods work as before to retain compatibility, but can be switched
-to the new behaviour by configuring the BeanUtilsBean2 / ConvertUtilsBean2 implementations.
-
-
-Errors
-------
-Exception messages have been improved, providing more information relating to
-where the failure occured. For JDK 1.4+ where BeanUtils catches exceptions
-and throws new ones - the cause is now being intialized.
-
-The following is a list of the enhancements in this release, with their Jira issue number:
-
-  * [BEANUTILS-259] - Plugable Property Name Expression Resolver
-  * [BEANUTILS-258] - Improve Converter Implementations
-  * [BEANUTILS-242] - Add general array type conversion
-  * [BEANUTILS-255] - Date and Calendar Converter implementations
-  * [BEANUTILS-239] - Better implementation of SqlDateConverter
-  * [BEANUTILS-286] - New Facade converter implementation - hides non-Converter public APIs
-  * [BEANUTILS-229] - Add "t/f" to BooleanConverter
-  * [BEANUTILS-43]  - Support Mapped property inside a mapped property
-  * [BEANUTILS-113] - Support Indexed property inside a mapped property
-  * [BEANUTILS-247] - Support Arrays with multiple dimensions
-  * [BEANUTILS-207] - Include bean class in the message of PropertyUtilsBean exceptions.
-  * [BEANUTILS-224] - Provide better error message for "argument type mismatch".
-  * [BEANUTILS-30]  - Improve message for "Unknown property"
-  * [BEANUTILS-193] - MethodUtils.invoke for static methods
-  * [BEANUTILS-266] - Log or throw exception in PropertyUtilsBean. Added mechanism to
-                      initialize the "cause" on an Exception using reflection for JDK 1.4+
-  * [BEANUTILS-185] - Map decorator for DynaBeans to allow BeanUtils to operate with technologies such as JSTL
-  * [BEANUTILS-233] - Implement equals() and hashCode() methods for DynaProperty
-  * [BEANUTILS-310] - Provide facility to configure and clear MethodUtils cache
-
-BUG REPORTS ADDRESSED:
-=====================
-
-The following is a list of the bugs fixed since the 1.8.0-BETA release, with their Jira issue number:
-
-  * [BEANUTILS-265] - Allow access to non public class's public methods from a public sub-classes
-  * [BEANUTILS-291] - Circular Reference on WeakHashMap
-  * [BEANUTILS-294] - BeanUtilsBean.setProperty() does not support nested map
-  * [BEANUTILS-295] - Unnecessary Garbage Objects in Class PropertyUtilsBean
-  * [BEANUTILS-297] - ConvertingWrapDynaBean hides cause exceptions
-  * [BEANUTILS-298] - MethodUtils.getAccessibleMethod(Method method) could not find right public method
-  * [BEANUTILS-302] - NPE in ArrayConverter when converting a non-quoted string with underscores to a string array
-  * [BEANUTILS-306] - LocaleConvertUtilsBean.convert throws NPE on null Locale when debug logging is enabled
-  * [BEANUTILS-318] - Fix WeakHashMap is not thread safe in MethodUtils using new FastWeakHashMap
-  * [BEANUTILS-319] - PropertyUtils.getPropertyType fails for DynaBeans contained within a normal bean
-  * [BEANUTILS-326] - Iterating by a Map' key/value pairs in BeanUtilsBean and PropertyUtilsBean
-
-The following is a list of the bugs fixed since the 1.7.0 release, with their Jira issue number:
-
-  * [BEANUTILS-243] - BeanUtils fails to compile under 1.6
-  * [BEANUTILS-49]  - Lock in BeanUtilsBean.getInstance
-  * [BEANUTILS-157] - Beanutils's describe() method cannot determine reader methods for anonymous class
-  * [BEANUTILS-158] - Beanutils's - added warning about describe behaviour to the javadocs
-  * [BEANUTILS-249] - Beanutils's setProperty() does not convert objects using custom converters properly
-  * [BEANUTILS-274] - BeanUtils cannot set property of type Long with value of Double
-  * [BEANUTILS-168] - BeanUtils's copyProperties(List, List) does not work - add warning about this
-  * [BEANUTILS-17]  - BeanUtils's copyProperties - IllegalArgumentException when property types don't match
-  * [BEANUTILS-199] - BeanUtils's setProperty is over-zealous at converting types
-  * [BEANUTILS-68]  - BeanUtils's setProperty - mapped property requires a setter for a map, but never uses it
-  * [BEANUTILS-110] - BeanUtils's getArrayProperty does not use ConvertUtils
-  * [BEANUTILS-6]   - MappedPropertyDescriptor - replace copied code
-  * [BEANUTILS-69]  - MappedPropertyDescriptor doesn't recognize boolean property accessor
-  * [BEANUTILS-140] - LocaleBeanUtils setProperty does not work on nested property
-  * [BEANUTILS-59]  - Memory leak on webapp undeploy in WrapDynaClass
-  * [BEANUTILS-156] - Memory leak on webapp undeploy in MappedPropertyDescriptor
-  * [BEANUTILS-87]  - Package scope implementation of a public interface for mapped property fails
-                      (fixed by changes to MappedPropertyDescriptor associated with BEANUTILS-6)
-  * [BEANUTILS-33]  - PropertyUtils incosistency - can't use "dot" in mapped properties for setProperty or getPropertyDescriptor
-                      (fixed by the changes for BEANUTILS-259 Plugable Property Name Expression Resolver).
-  * [BEANUTILS-273] - PropertyUtils doesn't recognize public methods overriden in anonymous or private subclasses.
-  * [BEANUTILS-88]  - PropertyUtils's isReadable() and isWriteable() methods always return false for mapped properties.
-  * [BEANUTILS-61]  - PropertyUtils's isReadable() and isWriteable() methods do not work correctly for WrapDynaBean
-  * [BEANUTILS-18]  - PropertyUtils's isReadable() and PropertyUtils.getProperty() not consistent
-  * [BEANUTILS-92]  - PropertyUtils's copyProperties() does not catch NoSuchMethodException
-  * [BEANUTILS-256] - PropertyUtils's getIndexedProperty() javadoc should indicate IndexOutOufBoundsException
-                      can be thrown rather than just ArrayIndexOutOufBoundsException
-  * [BEANUTILS-162] - PropertyUtils's getNestedProperty() doesn't allow getXxxx on Map-Instances any longer
-  * [BEANUTILS-262] - Correct getPropertyDescriptor() and setNestedProperty() methods to throw a NestedNullException rather
-                      than just IllegalArgumentException (consistent with the getNestedProperty() method).
-  * [BEANUTILS-97]  - Problems on indexed property with JDK 1.4
-  * [BEANUTILS-78]  - DecimalLocaleConverter and subClasses never throw a ConversionException
-  * [BEANUTILS-44]  - FloatLocaleConverter cannot parse negative values
-  * [BEANUTILS-263] - Improve ClassConverter robustness
-  * [BEANUTILS-271] - DateLocaleConverter does not always throw an Exception for invalid dates
-  * [BEANUTILS-288] - Don't try parsing values that are already Dates/Numbers in Date/Number locale Converters
-  * [BEANUTILS-23]  - Misleading error message in ConvertingWrapDynaBean
-  * [BEANUTILS-36]  - WrapDynaBeanTestCase failing with jikes/kaffe because of static List in TestBean
-  * [BEANUTILS-24]  - LazyDynaBean - don't try and instantiate properties of type Object.class.
-  * [BEANUTILS-133] - LazyDynabean JavaDoc corrections
-  * [BEANUTILS-250] - LazyDynaClass can create a DynaProperty with a "null" type
-  * [BEANUTILS-289] - JDBCDynaClass "lowerCase" option causes problems in RowSetDynaClass and ResultSetIterator
-  * [BEANUTILS-142] - RowSetDynaClass fails to copy ResultSet to DynaBean with Oracle 10g JDBC driver
-  * [BEANUTILS-241] - BeanComparator throws wrong exception and hides cause
-  * [BEANUTILS-112] - Deprecate the public static defaultTransformers HashMap and make it unmodifiable.
-  * [BEANUTILS-267] - BeanComparator(String, Comparator) should check the comparator for null and default to ComparableComparator.getInstance()
-  * [COLLECTIONS-22] - BeanMap: Fix internal variable to not include non-existant write methods.
-
-
-TASKS:
-=====
-The following is a list of the tasks completed in this release, with their Jira issue number:
-
-  * [BEANUTILS-290] - Merge Bean-Collections back into core BeanUtils and remove Bean-Collections sub-project
-  * [BEANUTILS-287] - Missing unit tests using ant and unit test errors using maven 
-  * [BEANUTILS-217] - Improvements to maven build
-  * [BEANUTILS-54]  - Add Implementation-Vendor-Id entry to jar's manifest.
-  * [BEANUTILS-254] - Run Checkstyle/PMD on the source and fixe highlighted issues up
-  * [BEANUTILS-280] - Check binary compatibility with version 1.7.0
-  * [BEANUTILS-22]  - Larger warning fixes.
-  * [BEANUTILS-55]  - Warning fixes.
-  * [BEANUTILS-121] - Easy warning fixes.

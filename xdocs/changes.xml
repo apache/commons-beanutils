@@ -39,6 +39,45 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
+    <release version="1.8.1" date="2008-10-10" description="Bug fixes for 1.8.0">
+      <action dev="niallp" type="fix" issue="BEANUTILS-300" due-to="Henri and Sebb">
+         NPE in LazyDynaList
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-327" due-to="Sascha Riemann">
+         JDBCDynaClass throws class not found exception under java6
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-336" due-to="Sebb">
+         MappedPropertyDescriptor#reLoadClass() possible NPE / odd code; also swallows Throwable
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-339" due-to="Alan Escreet">
+         BeanUtilsBean.setProperty throws IllegalArgumentException if value is null
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-345" due-to="Simone Riccucci">
+         BeanUtilsBean.setProperty does not handle some kind of nested properties
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-347" due-to="Eickvonder">
+         MappedPropertyDescriptor throws an exception after method reference has been garbage collected
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-349" due-to="Eivind Tagseth">
+         copyProperties throws NullPointerException if an IllegalArgumentException is thrown due to a null value parameter for a primitive
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-351" due-to="Lucian Chirita">
+         FloatLocaleConverter cannot parse 0
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-354" due-to="Anders Wallgren">
+         Type in BooleanConverter: "Cna't convert value"
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-333" due-to="Lukasz Lenart">
+         Avoid calling setAccessible() if not needed
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-344" due-to="Viral">
+         Method createDynaProperty of JDBCDynaClass should first look for column label instead of column name in ResultSetMetadata object..
+      </action>
+      <action dev="niallp" type="update" issue="BEANUTILS-354" due-to="Anders Wallgren">
+         Type in BooleanConverter: "Cna't convert value"
+      </action>
+    </release>
+
     <release version="1.8.0" date="2008-09-01" description="Converter improvements, Plugable expression Resolver and bug fixes for 1.7.0">
       <action dev="niallp" type="fix" issue="BEANUTILS-265" due-to="Tom Schindl and Romain Muller">
          Allow access to non public class's public methods from a public sub-classes.
