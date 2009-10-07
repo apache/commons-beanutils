@@ -2160,15 +2160,55 @@ public class PropertyUtilsBean {
                             throws
                                 IllegalAccessException,
                                 InvocationTargetException {
+        if(bean == null) {
+            throw new IllegalArgumentException("No bean specified " +
+                "- this should have been checked before reaching this method");
+        }
+
         try {
             
             return method.invoke(bean, values);
         
-        } catch (IllegalArgumentException cause) {
-            if(bean == null) {
-                throw new IllegalArgumentException("No bean specified " +
-                    "- this should have been checked before reaching this method");
+        } catch (NullPointerException cause) {
+            // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
+            // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
+            String valueString = "";
+            if (values != null) {
+                for (int i = 0; i < values.length; i++) {
+                    if (i>0) {
+                        valueString += ", " ;
+                    }
+                    if (values[i] == null) {
+                        valueString += "<null>";
+                    } else {
+                        valueString += (values[i]).getClass().getName();
+                    }
+                }
             }
+            String expectedString = "";
+            Class[] parTypes = method.getParameterTypes();
+            if (parTypes != null) {
+                for (int i = 0; i < parTypes.length; i++) {
+                    if (i > 0) {
+                        expectedString += ", ";
+                    }
+                    expectedString += parTypes[i].getName();
+                }
+            }
+            IllegalArgumentException e = new IllegalArgumentException(
+                "Cannot invoke " + method.getDeclaringClass().getName() + "." 
+                + method.getName() + " on bean class '" + bean.getClass() +
+                "' - " + cause.getMessage()
+                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
+                + " - had objects of type \"" + valueString
+                + "\" but expected signature \""
+                +   expectedString + "\""
+                );
+            if (!BeanUtils.initCause(e, cause)) {
+                log.error("Method invocation failed", cause);
+            }
+            throw e;
+        } catch (IllegalArgumentException cause) {
             String valueString = "";
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
