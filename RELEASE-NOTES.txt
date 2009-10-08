@@ -33,6 +33,7 @@ Compatibility with 1.8.0
 ========================
 BeanUtils 1.8.1 is binary compatible release with Beanutils 1.8.0, containing mostly bug fixes.
 
+BeanUtils 1.8.0 requires a minimum of JDK 1.3.
 
 BUGS FIXED:
 ===========

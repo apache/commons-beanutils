@@ -31,7 +31,7 @@
 
     <menu name="BeanUtils">
       <item name="Overview" href="/index.html"/>   
-      <item name="Download"                href="http://commons.apache.org/downloads/download_beanutils.cgi"/>
+      <item name="Download"                href="http://commons.apache.org/beanutils/download_beanutils.cgi"/>
       <item name="Release Notes"           href="/changes-report.html"/>
       <item name="Dependencies"            href="/dependencies.html"/>
       <item name="Mailing Lists"           href="/mail-lists.html"/>
@@ -43,6 +43,12 @@
     <menu name="Documentation">
       <item name="Building"                href="/building.html"/>
       <item name="Wiki"                    href="http://wiki.apache.org/commons/BeanUtils"/>
+
+      <item name="1.8.1">
+            <item name="Release Notes"     href='http://commons.apache.org/beanutils/v1.8.1/RELEASE-NOTES.txt'/>
+            <item name="User Guide"        href="http://commons.apache.org/beanutils/v1.8.1/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+            <item name="API"               href="http://commons.apache.org/beanutils/v1.8.1/apidocs/index.html"/>
+      </item>
 
       <item name="1.8.0">
             <item name="Release Notes"     href='http://commons.apache.org/beanutils/v1.8.0/RELEASE-NOTES.txt'/>
@@ -59,14 +65,6 @@
                     href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/docs/bean-collections'/>
             <item   name='Release Notes'
                     href='http://commons.apache.org/beanutils/commons-beanutils-1.7.0/RELEASE-NOTES.txt'/>
-      </item>
-      <item name='1.6.1 Release'>
-            <item   name='User Guide'
-                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/docs/api/org/apache/commons/beanutils/package-summary.html#package_description'/>
-            <item   name='API'
-                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/docs/api/'/>
-            <item   name='Release Notes'
-                    href='http://commons.apache.org/beanutils/commons-beanutils-1.6.1/RELEASE-NOTES.txt'/>
       </item>
     </menu>
 
