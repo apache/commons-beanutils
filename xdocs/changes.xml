@@ -39,7 +39,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.8.1" date="2009-10-11" description="Bug fixes for 1.8.0">
+    <release version="1.8.1" date="2009-10-20" description="Bug fixes for 1.8.0">
       <action dev="niallp" type="fix" issue="BEANUTILS-300" due-to="Henri and Sebb">
          NPE in LazyDynaList
       </action>
