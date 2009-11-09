@@ -44,6 +44,12 @@
       <item name="Building"                href="/building.html"/>
       <item name="Wiki"                    href="http://wiki.apache.org/commons/BeanUtils"/>
 
+      <item name="1.8.2">
+            <item name="Release Notes"     href='http://commons.apache.org/beanutils/v1.8.2/RELEASE-NOTES.txt'/>
+            <item name="User Guide"        href="http://commons.apache.org/beanutils/v1.8.2/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
+            <item name="API"               href="http://commons.apache.org/beanutils/v1.8.2/apidocs/index.html"/>
+      </item>
+
       <item name="1.8.1">
             <item name="Release Notes"     href='http://commons.apache.org/beanutils/v1.8.1/RELEASE-NOTES.txt'/>
             <item name="User Guide"        href="http://commons.apache.org/beanutils/v1.8.1/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>

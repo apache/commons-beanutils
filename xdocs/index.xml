@@ -102,16 +102,23 @@ note the property reference syntax options described in the
 
 
 <section name="Releases">
+<subsection name="1.8.2">
+<p>
+BeanUtils <strong>1.8.2</strong> is binary compatible with version 1.8.1 and contains
+<a href="http://commons.apache.org/beanutils/v1.8.2/RELEASE-NOTES.txt">
+bug fixes</a> for 1.8.1. BeanUtils 1.8.2 requires a minimum of JDK 1.3.
+</p>
+<p>
+BeanUtils 1.8.2 is available to download
+<a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
+</p>
+</subsection>
 <subsection name="1.8.1">
 <p>
 BeanUtils <strong>1.8.1</strong> is binary compatible with version 1.8.0
 and contains a number
 <a href="http://commons.apache.org/beanutils/v1.8.1/RELEASE-NOTES.txt">
 bug fixes</a> for 1.8.0. BeanUtils 1.8.1 requires a minimum of JDK 1.3.
-</p>
-<p>
-BeanUtils 1.8.1 is available to download
-<a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
 </p>
 </subsection>
 <subsection name="1.8.0">
