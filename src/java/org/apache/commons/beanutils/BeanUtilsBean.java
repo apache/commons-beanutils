@@ -927,7 +927,7 @@ public class BeanUtilsBean {
             type = dynaProperty.getType();
         } else if (target instanceof Map) {
             type = Object.class;
-        } else if (target.getClass().isArray() && index >= 0) {
+        } else if (target != null && target.getClass().isArray() && index >= 0) {
             type = Array.get(target, index).getClass();
         } else {
             PropertyDescriptor descriptor = null;

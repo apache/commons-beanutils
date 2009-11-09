@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.8.1
+                               Version 1.8.2
                                Release Notes
 
 INTRODUCTION:
@@ -29,11 +29,11 @@ BeanUtils package, and highlights changes since the previous version.
 For more information on Commons BeanUtils, see
 o http://commons.apache.org/beanutils/
 
-Compatibility with 1.8.0
+Compatibility with 1.8.1
 ========================
-BeanUtils 1.8.1 is binary compatible release with Beanutils 1.8.0, containing mostly bug fixes.
+BeanUtils 1.8.2 is binary compatible release with Beanutils 1.8.1, containing only bug fixes.
 
-BeanUtils 1.8.1 requires a minimum of JDK 1.3.
+BeanUtils 1.8.2 requires a minimum of JDK 1.3.
 
 Memory Leak
 ===========
@@ -41,7 +41,7 @@ A memory leak was found in BeanUtils 1.7.0 (see BEANUTILS-291) which was fixed
 in BeanUtils 1.8.0 for JDK 1.5+.
 
 Testing of BeanUtils 1.8.1 revealed that the leak still appears to exist
-(in both BeanUtils 1.8.0 and 1.8.1 versions) in IBM's JDK 1.6 implementation.
+(in BeanUtils 1.8.0, 1.8.1 and 1.8.2 versions) in IBM's JDK 1.6 implementation.
 
 
 see http://issues.apache.org/jira/browse/BEANUTILS-291
@@ -53,22 +53,5 @@ BUGS FIXED:
 
 The following is a list of the bugs fixed in this release, with their Jira issue number:
 
-  * [BEANUTILS-300] - NPE in LazyDynaList
-  * [BEANUTILS-327] - JDBCDynaClass throws class not found exception under java6
-  * [BEANUTILS-336] - MappedPropertyDescriptor#reLoadClass() possible NPE / odd code; also swallows Throwable
-  * [BEANUTILS-339] - BeanUtilsBean.setProperty throws IllegalArgumentException if value is null
-  * [BEANUTILS-345] - BeanUtilsBean.setProperty does not handle some kind of nested properties
-  * [BEANUTILS-347] - MappedPropertyDescriptor throws an exception after method reference has been garbage collected
-  * [BEANUTILS-349] - copyProperties throws NullPointerException if an IllegalArgumentException is thrown due to a null value parameter for a primitive
-  * [BEANUTILS-351] - FloatLocaleConverter cannot parse 0
-  * [BEANUTILS-354] - Type in BooleanConverter: "Cna't convert value"
-
-
-ENHANCEMENTS:
-=============
-The following is a list of enhancements in this release, with their Jira issue number:
-
-  * [BEANUTILS-333] - Avoid calling setAccessible() if not needed
-  * [BEANUTILS-344] - Method createDynaProperty of JDBCDynaClass should first look for column label instead of column name in ResultSetMetadata object..
-  * [BEANUTILS-350] - change visibility of method "evaluateValue" belongs to the class BeanPropertyValueEqualsPredicate to "protected".
+  * [BEANUTILS-368] - NullPointerException in BeanUtilsBean .setProperty()
 
