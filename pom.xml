@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.8.2</version>
+  <version>1.8.3-SNAPSHOT</version>
   <name>Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -267,7 +267,7 @@
                 <artifactId>clirr-maven-plugin</artifactId>
                 <version>2.2.2</version>
                 <configuration>
-                    <comparisonVersion>1.8.0</comparisonVersion>
+                    <comparisonVersion>1.8.2</comparisonVersion>
                     <minSeverity>info</minSeverity>
                 </configuration>
             </plugin>
