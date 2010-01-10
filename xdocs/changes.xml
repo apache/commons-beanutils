@@ -39,6 +39,12 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
+    <release version="1.8.3" date="in SVN" description="Bug fix for 1.8.2">
+      <action dev="niallp" type="fix" issue="BEANUTILS-371" due-to="David Tonhofer">
+         Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass.
+      </action>
+    </release>
+
     <release version="1.8.2" date="2009-11-13" description="Bug fix for 1.8.1">
       <action dev="niallp" type="fix" issue="BEANUTILS-368" due-to="Peter Fassev">
          NullPointerException in BeanUtilsBean .setProperty()
