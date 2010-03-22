@@ -46,6 +46,8 @@ public class DynaProperty implements Serializable {
 
     // ----------------------------------------------------------- Constants
     
+    private static final long serialVersionUID = 1L;
+
     /*
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).

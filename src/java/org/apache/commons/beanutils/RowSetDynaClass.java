@@ -68,6 +68,7 @@ import java.util.List;
 
 public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
 
+    private static final long serialVersionUID = 1L;
 
     // ----------------------------------------------------- Instance variables
     

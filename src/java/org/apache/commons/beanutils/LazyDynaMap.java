@@ -48,6 +48,8 @@ import java.util.Iterator;
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The name of this DynaClass (analogous to the
      * <code>getName()</code> method of <code>java.lang.Class</code>).

@@ -38,6 +38,8 @@ import java.util.Map;
 
 abstract class JDBCDynaClass implements DynaClass, Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     // ----------------------------------------------------- Instance Variables
 
     /**
