@@ -27,7 +27,6 @@
 
 
   <property file="build.properties"/>                <!-- Component local   -->
-  <property file="project.properties"/>              <!-- Project local     -->
   <property file="${user.home}/build.properties"/>   <!-- User local        -->
 
 
@@ -53,14 +52,20 @@
   <property name="dist.home"               value="dist"/>
 
   <!-- The base directory for component sources -->
-  <property name="source.home"             value="src/java"/>
+  <property name="source.home"             value="src/main/java"/>
 
   <!-- The base directory for unit test sources -->
-  <property name="test.home"               value="src/test"/>
+  <property name="test.home"               value="src/test/java"/>
 
 
 <!-- ========== Compiler Defaults ========================================= -->
 
+
+  <!-- Compiler source JDK version -->
+  <property name="compile.source"          value="1.3"/>
+
+  <!-- Compiler target JDK version -->
+  <property name="compile.target"          value="1.3"/>
 
   <!-- Should Java compilations set the 'debug' compiler option? -->
   <property name="compile.debug"           value="true"/>
@@ -139,8 +144,8 @@
    description="Compile shareable components">
     <javac  srcdir="${source.home}"
            destdir="${build.home}/classes"
-            source="${maven.compile.source}"
-            target="${maven.compile.target}"
+            source="${compile.source}"
+            target="${compile.target}"
              debug="${compile.debug}"
        deprecation="${compile.deprecation}"
           optimize="${compile.optimize}">
@@ -232,8 +237,8 @@
             <attribute name="Implementation-Version" value="${component.version}"/> 
             <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
             <attribute name="Implementation-Vendor-Id" value="org.apache"/>
-            <attribute name="X-Compile-Source-JDK" value="${maven.compile.source}"/>
-            <attribute name="X-Compile-Target-JDK" value="${maven.compile.target}"/>
+            <attribute name="X-Compile-Source-JDK" value="${compile.source}"/>
+            <attribute name="X-Compile-Target-JDK" value="${compile.target}"/>
         </manifest>
         <fileset dir="${build.home}/classes">
             <include name="**/*.class"/>
@@ -246,8 +251,8 @@
       <property name="dist.dir"             value="${dist.home}"/>
       <property name="build.dir"            value="${build.home}"/>
       <property name="component.version"    value="${component.version}"/>
-      <property name="maven.compile.source" value="${maven.compile.source}"/>
-      <property name="maven.compile.target" value="${maven.compile.target}"/>
+      <property name="maven.compile.source" value="${compile.source}"/>
+      <property name="maven.compile.target" value="${compile.target}"/>
     </ant>
   </target>
 

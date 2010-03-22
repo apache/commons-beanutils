@@ -14,20 +14,20 @@
 #  limitations under the License.
 
 # Repository base path
-repository=${user.home}/.maven/repository
+repository=${user.home}/.m2/repository
 
 # The pathname of the collections classes JAR file
-commons-collections.home=${repository}/commons-collections/jars
-commons-collections.jar=${commons-collections.home}/commons-collections-3.2.1.jar
-commons-collections-testframework.jar=${commons-collections.home}/commons-collections-testframework-3.2.1.jar
+commons-collections.home=${repository}/commons-collections
+commons-collections.jar=${commons-collections.home}/commons-collections/3.2.1/commons-collections-3.2.1.jar
+commons-collections-testframework.jar=${commons-collections.home}/commons-collections-testframework/3.2.1/commons-collections-testframework-3.2.1.jar
 
 # The pathname of the Commons Logging JAR file
-commons-logging.home=${repository}/commons-logging/jars
-commons-logging.jar=${commons-logging.home}/commons-logging-1.1.1.jar
+commons-logging.home=${repository}/commons-logging/commons-logging
+commons-logging.jar=${commons-logging.home}/1.1.1/commons-logging-1.1.1.jar
 
 # The pathname of the "junit.jar" JAR file
-junit.home=${repository}/junit/jars
-junit.jar=${junit.home}/junit-3.8.1.jar
+junit.home=${repository}/junit/junit
+junit.jar=${junit.home}/3.8.1/junit-3.8.1.jar
 
 # Configuration Example for Commons Logging in maven
 maven.junit.fork=true

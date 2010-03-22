@@ -163,8 +163,6 @@
   </dependencies>
 
   <build>
-      <sourceDirectory>src/java</sourceDirectory>
-      <testSourceDirectory>src/test</testSourceDirectory>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -288,7 +286,6 @@
                 <artifactId>maven-changes-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <xmlPath>${basedir}/xdocs/changes.xml</xmlPath>
                     <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
                 </configuration>
                 <reportSets>
