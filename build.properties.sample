@@ -28,15 +28,3 @@ commons-logging.jar=${commons-logging.home}/1.1.1/commons-logging-1.1.1.jar
 # The pathname of the "junit.jar" JAR file
 junit.home=${repository}/junit/junit
 junit.jar=${junit.home}/3.8.1/junit-3.8.1.jar
-
-# Configuration Example for Commons Logging in maven
-maven.junit.fork=true
-maven.junit.sysproperties=org.apache.commons.logging.LogFactory org.apache.commons.logging.Log org.apache.commons.logging.simplelog.defaultlog
-org.apache.commons.logging.LogFactory=org.apache.commons.logging.impl.LogFactoryImpl
-org.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog
-org.apache.commons.logging.simplelog.defaultlog=debug
-
-# Maven properties (for web site build)
-# Those committers using agents may like to use
-#maven.username=rdonkin
-#beanutils.cvs=lserver:rdonkin@cvs.apache.org:/home/cvs
