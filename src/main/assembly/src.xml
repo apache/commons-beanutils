@@ -30,20 +30,14 @@
                 <include>checkstyle.xml</include>
                 <include>LICENSE.txt</include>
                 <include>license-header.txt</include>
-                <include>maven.xml</include>
                 <include>NOTICE.txt</include>
                 <include>pom.xml</include>
-                <include>project.properties</include>
-                <include>project.xml</include>
                 <include>README.txt</include>
                 <include>RELEASE-NOTES.txt</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>src</directory>
-        </fileSet>
-        <fileSet>
-            <directory>xdocs</directory>
         </fileSet>
     </fileSets>
 </assembly>
