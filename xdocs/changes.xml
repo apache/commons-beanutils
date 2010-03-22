@@ -40,6 +40,10 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8.3" date="in SVN" description="Bug fix for 1.8.2">
+      <action dev="niallp" type="fix" issue="BEANUTILS-373" due-to="Andrew Sunde">
+         MethodUtils is not thread safe because WeakFastHashMap which uses WeakHashMap is not thread-safe
+         (duplicate of BEANUTILS-318 which was not fixed properly in BeanUtils 1.8.0).
+      </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-371" due-to="David Tonhofer">
          Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass.
       </action>
