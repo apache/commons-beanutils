@@ -25,29 +25,12 @@ limitations under the License.
 <section name="Overview">
 <p>
   Commons BeanUtils can be built using
-  <a href="http://maven.apache.org/maven-1.x/">Maven 1</a>,
   <a href="http://maven.apache.org">Maven 2</a> or
   <a href="http://ant.apache.org">Ant</a> as the build system.
 </p>
   <p>
 	Further details can be found in the
 	<a href="http://commons.apache.org/building.html">commons build instructions</a>.
-  </p>
-</section>
-<!-- ================================================== -->
-<section name="Maven 1 Goals">
-  <p>
-    To build a jar file, change into BeanUtils's root directory and run 
-    <strong><code>maven jar</code></strong>.
-    The result will be in the "target" subdirectory.
-  </p>
-  <p>
-    To build the Javadocs, run <strong><code>maven javadoc</code></strong>.
-    The result will be in "target/docs/apidocs" subdirectory.
-  </p>
-  <p>
-    To build the full website, run <strong><code>maven site</code></strong>.
-    The result will be in "target/docs" subdirectory.
   </p>
 </section>
 <!-- ================================================== -->
@@ -62,7 +45,7 @@ limitations under the License.
     The result will be in "target/site" subdirectory.
   </p>
   <p>
-    To build the full distribution, run <strong><code>mvn site assembly:assembly</code></strong>.
+    To build the full distribution, run <strong><code>mvn -Prc package</code></strong>.
     The result will be in "target" subdirectory.
   </p>
 </section>
