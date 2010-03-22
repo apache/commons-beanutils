@@ -247,13 +247,72 @@
         </fileset>
     </jar>
 
-    <ant antfile="build-other-jars.xml" target="other-jars">
-      <property name="dist.dir"             value="${dist.home}"/>
-      <property name="build.dir"            value="${build.home}"/>
-      <property name="component.version"    value="${component.version}"/>
-      <property name="maven.compile.source" value="${compile.source}"/>
-      <property name="maven.compile.target" value="${compile.target}"/>
-    </ant>
+    <ant target="other-jars" />
+
+  </target>
+
+  <target name="other-jars" depends="core-jar,bean-collections-jar">
+  </target>
+
+  <target name="core-jar" description="Create BeanUtils Core jar">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="LICENSE.txt" tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <copy      file="NOTICE.txt"  tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
+    <jar    jarfile="${dist.home}/commons-beanutils-core-${component.version}.jar">
+        <manifest>
+            <attribute name="Specification-Title" value="Commons BeanUtils Core"/>
+            <attribute name="Specification-Version" value="${component.version}"/>
+            <attribute name="Specification-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Title" value="Commons BeanUtils Core"/>
+            <attribute name="Implementation-Version" value="${component.version}"/> 
+            <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Vendor-Id" value="org.apache"/>
+            <attribute name="X-Compile-Source-JDK" value="${compile.source}"/>
+            <attribute name="X-Compile-Target-JDK" value="${compile.target}"/>
+        </manifest>
+        <fileset dir="${build.home}/classes">
+            <include name="**/*.class"/>
+            <include name="**/LICENSE.txt"/>
+            <include name="**/NOTICE.txt"/>
+            <exclude name="**/BeanComparator*.class"/>
+            <exclude name="**/BeanMap*.class"/>
+            <exclude name="**/BeanPredicate*.class"/>
+            <exclude name="**/BeanPropertyValueChangeClosure*.class"/>
+            <exclude name="**/BeanPropertyValueEqualsPredicate*.class"/>
+            <exclude name="**/BeanToPropertyValueTransformer*.class"/>
+        </fileset>
+    </jar>
+  </target>
+
+  <target name="bean-collections-jar" description="Create Bean Collections jar">
+    <mkdir      dir="${dist.home}"/>
+    <mkdir      dir="${build.home}/classes/META-INF"/>
+    <copy      file="LICENSE.txt" tofile="${build.home}/classes/META-INF/LICENSE.txt"/>
+    <copy      file="NOTICE.txt"  tofile="${build.home}/classes/META-INF/NOTICE.txt"/>
+    <jar    jarfile="${dist.home}/commons-beanutils-bean-collections-${component.version}.jar">
+        <manifest>
+            <attribute name="Specification-Title" value="Commons BeanUtils Bean Collections"/>
+            <attribute name="Specification-Version" value="${component.version}"/>
+            <attribute name="Specification-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Title" value="Commons BeanUtils Bean Collections"/>
+            <attribute name="Implementation-Version" value="${component.version}"/> 
+            <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            <attribute name="Implementation-Vendor-Id" value="org.apache"/>
+            <attribute name="X-Compile-Source-JDK" value="${compile.source}"/>
+            <attribute name="X-Compile-Target-JDK" value="${compile.target}"/>
+        </manifest>
+        <fileset dir="${build.home}/classes">
+            <include name="**/LICENSE.txt"/>
+            <include name="**/NOTICE.txt"/>
+            <include name="**/BeanComparator*.class"/>
+            <include name="**/BeanMap*.class"/>
+            <include name="**/BeanPredicate*.class"/>
+            <include name="**/BeanPropertyValueChangeClosure*.class"/>
+            <include name="**/BeanPropertyValueEqualsPredicate*.class"/>
+            <include name="**/BeanToPropertyValueTransformer*.class"/>
+        </fileset>
+    </jar>
   </target>
 
 
