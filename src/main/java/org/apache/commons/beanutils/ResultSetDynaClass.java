@@ -156,6 +156,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      *  is <code>null</code>
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
+     * @since 1.8.3
      */
     public ResultSetDynaClass(ResultSet resultSet, boolean lowerCase, boolean useColumnLabel)
         throws SQLException {
