@@ -243,7 +243,6 @@
         <commons.jira.id>BEANUTILS</commons.jira.id>
         <commons.jira.pid>12310460</commons.jira.pid>
         <commons.osgi.export>
-             !org.apache.commons.collections,
               org.apache.commons.beanutils.*;version=${pom.version};-noimport:=true
         </commons.osgi.export>
     </properties> 
