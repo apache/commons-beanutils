@@ -51,36 +51,36 @@ public class Jira273BeanFactory {
     }
 
     /**
-     * Factory method which creates {@link PrivatePublicOverriden}.
+     * Factory method which creates a PrivatePublicOverriden bean.
      *
-     * @return a new {@link PrivatePublicOverriden}.
+     * @return a new a PrivatePublicOverriden bean.
      */
     public static Object createPrivatePublicOverriden() {
         return new PrivatePublicOverriden();
     }
 
     /**
-     * Factory method which creates {@link PrivatePrivatePublicOverriden}.
+     * Factory method which creates a PrivatePrivatePublicOverriden bean.
      *
-     * @return a new {@link PrivatePrivatePublicOverriden}.
+     * @return a new a PrivatePrivatePublicOverriden bean.
      */
     public static Object createPrivatePrivatePublicOverriden() {
         return new PrivatePrivatePublicOverriden();
     }
 
     /**
-     * Factory method which creates {@link PrivatePrivatePublicNotOverriden}.
+     * Factory method which creates a PrivatePrivatePublicNotOverriden bean.
      *
-     * @return a new {@link PrivatePrivatePublicNotOverriden}.
+     * @return a new a PrivatePrivatePublicNotOverriden bean.
      */
     public static Object createPrivatePrivatePublicNotOverriden() {
         return new PrivatePrivatePublicNotOverriden();
     }
 
     /**
-     * Factory method which creates {@link PrivatePublicNotOverriden}.
+     * Factory method which creates a PrivatePublicNotOverriden bean.
      *
-     * @return a new {@link PrivatePublicNotOverriden}.
+     * @return a new a PrivatePublicNotOverriden bean.
      */
     public static Object createPrivatePublicNotOverriden() {
         return new PrivatePublicNotOverriden();
