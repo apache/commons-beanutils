@@ -55,5 +55,4 @@ The following is a list of the bugs fixed in this release, with their Jira issue
 
   * [BEANUTILS-373] - MethodUtils is not thread safe because WeakFastHashMap which uses WeakHashMap is not thread-safe
   * [BEANUTILS-371] - Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass
-  * [BEANUTILS-362] - Add serialVersionUID to DynaBean/DynaClass implementations
 

@@ -47,9 +47,6 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="niallp" type="fix" issue="BEANUTILS-371" due-to="David Tonhofer">
          Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass.
       </action>
-      <action dev="niallp" type="fix" issue="BEANUTILS-362" due-to="Brent Worden">
-         Add serialVersionUID to DynaBean/DynaClass implementations.
-      </action>
     </release>
 
     <release version="1.8.2" date="2009-11-13" description="Bug fix for 1.8.1">

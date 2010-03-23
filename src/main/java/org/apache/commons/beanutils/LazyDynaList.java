@@ -161,8 +161,6 @@ import java.lang.reflect.Array;
  * @since 1.8.0
  */
 public class LazyDynaList extends ArrayList {
-
-    private static final long serialVersionUID = 1L;
     
     /**
      * The DynaClass of the List's elements.
