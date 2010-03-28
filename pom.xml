@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.8.3</version>
+  <version>1.8.4-SNAPSHOT</version>
   <name>Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
