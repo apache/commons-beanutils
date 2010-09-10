@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils.priv.PrivateDirect;
@@ -4429,7 +4428,7 @@ public class PropertyUtilsTestCase extends TestCase {
      * See BEANUTILS-266 for changes and reason for test
      */
     public void testExceptionFromInvoke() throws Exception {
-        if (isPre14JVM()) {
+        if (BeanUtilsTestCase.isPre14JVM()) {
             return;
         }
         try {
@@ -4444,21 +4443,5 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch(Throwable t) {
             fail("Expected IllegalArgumentException, but threw " + t);
         }
-    }
-
-    /**
-     * Test for JDK 1.4
-     */
-    private boolean isPre14JVM() {
-        String version = System.getProperty("java.specification.version");
-        StringTokenizer tokenizer = new StringTokenizer(version,".");
-        if (tokenizer.nextToken().equals("1")) {
-            String minorVersion = tokenizer.nextToken();
-            if (minorVersion.equals("0")) return true;
-            if (minorVersion.equals("1")) return true;
-            if (minorVersion.equals("2")) return true;
-            if (minorVersion.equals("3")) return true;
-        }
-        return false;
     }
 }

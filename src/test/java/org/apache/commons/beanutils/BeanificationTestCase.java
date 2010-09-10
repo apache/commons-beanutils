@@ -128,7 +128,7 @@ public class BeanificationTestCase extends TestCase {
     public void testMemoryLeak2() throws Exception {
         // tests when the map used by beanutils has the right behaviour
         
-        if (isPre14JVM()) {
+        if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
             return;
         }
@@ -176,7 +176,7 @@ public class BeanificationTestCase extends TestCase {
     
     /** Tests whether classloaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
-        if (isPre14JVM()) {
+        if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
             return;
         }
@@ -456,21 +456,6 @@ public class BeanificationTestCase extends TestCase {
         assertEquals("Start thread gets right instance", beanOne, ccll.get()); 
         ccll.unset();
         assertTrue("Unset works", !beanOne.equals(ccll.get())); 
-    }
-    
-    private boolean isPre14JVM() {
-        // some pre 1.4 JVM have buggy WeakHashMap implementations 
-        // this is used to test for those JVM
-        String version = System.getProperty("java.specification.version");
-        StringTokenizer tokenizer = new StringTokenizer(version,".");
-        if (tokenizer.nextToken().equals("1")) {
-            String minorVersion = tokenizer.nextToken();
-            if (minorVersion.equals("0")) return true;
-            if (minorVersion.equals("1")) return true;
-            if (minorVersion.equals("2")) return true;
-            if (minorVersion.equals("3")) return true;
-        }
-        return false;
     }
     
     // ---- Auxillary classes
