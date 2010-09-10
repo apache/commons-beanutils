@@ -39,6 +39,13 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
+    <release version="1.8.4" date="in SVN" description="Bug fix for 1.8.3">
+      <action dev="niallp" type="fix" issue="BEANUTILS-380" due-to="Brendan Nolan">
+         BeanMap methods should initialize the root cause of exceptions that are thrown
+         when running on JDK 1.4+
+      </action>
+    </release>
+
     <release version="1.8.3" date="2010-03-28" description="Bug fix for 1.8.2">
       <action dev="niallp" type="fix" issue="BEANUTILS-373" due-to="Andrew Sunde">
          MethodUtils is not thread safe because WeakFastHashMap which uses WeakHashMap is not thread-safe

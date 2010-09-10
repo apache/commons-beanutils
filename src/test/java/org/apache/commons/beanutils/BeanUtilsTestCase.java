@@ -1645,7 +1645,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * Test for JDK 1.4
      */
-    private boolean isPre14JVM() {
+    public static boolean isPre14JVM() {
         String version = System.getProperty("java.specification.version");
         StringTokenizer tokenizer = new StringTokenizer(version,".");
         if (tokenizer.nextToken().equals("1")) {
