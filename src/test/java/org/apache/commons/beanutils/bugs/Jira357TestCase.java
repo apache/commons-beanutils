@@ -156,7 +156,7 @@ public class Jira357TestCase extends TestCase {
             }
             public void setInnerName(String firstName) {
                 this.firstName = firstName;
-            };
+            }
         }
     }
 
