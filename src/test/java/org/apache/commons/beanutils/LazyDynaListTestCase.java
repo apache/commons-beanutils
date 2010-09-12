@@ -306,7 +306,7 @@ public class LazyDynaListTestCase extends TestCase {
 
         // Test Insert - add(index, Object)
         try {
-            DynaBean extraElement = (DynaBean)testDynaClass.newInstance();
+            DynaBean extraElement = testDynaClass.newInstance();
             extraElement.set(testProperty, "extraOne");
             list.add(2, extraElement);
             dynaArray = list.toDynaBeanArray();

@@ -328,7 +328,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testBeanMapClone() {
         BeanMap map = (BeanMap)makeFullMap();
         try {
-            BeanMap map2 = (BeanMap)((BeanMap)map).clone();
+            BeanMap map2 = (BeanMap)map.clone();
 
             // make sure containsKey is working to verify the bean was cloned
             // ok, and the read methods were properly initialized
