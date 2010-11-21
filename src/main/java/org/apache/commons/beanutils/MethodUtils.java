@@ -1119,6 +1119,13 @@ public class MethodUtils {
     private static float getObjectTransformationCost(Class srcClass, Class destClass) {
         float cost = 0.0f;
         while (srcClass != null && !destClass.equals(srcClass)) {
+            if (destClass.isPrimitive()) {
+                Class destClassWrapperClazz = getPrimitiveWrapper(destClass);
+                if (destClassWrapperClazz != null && destClassWrapperClazz.equals(srcClass)) {
+                    cost += 0.25f;
+                    break;
+                }
+            }
             if (destClass.isInterface() && isAssignmentCompatible(destClass,srcClass)) {
                 // slight penalty for interface match. 
                 // we still want an exact match to override an interface match, but  
