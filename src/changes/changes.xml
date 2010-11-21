@@ -44,6 +44,12 @@ The <action> type attribute can be add,update,fix,remove.
          BeanMap methods should initialize the root cause of exceptions that are thrown
          when running on JDK 1.4+
       </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-379">
+         Remove copied Collection classes.
+      </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-378" due-to="Christian Schneider">
+         BeanMap does not work in osgi (fixed by BEANUTILS-379)
+      </action>
     </release>
 
     <release version="1.8.3" date="2010-03-28" description="Bug fix for 1.8.2">
