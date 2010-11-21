@@ -50,6 +50,10 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="niallp" type="fix" issue="BEANUTILS-378" due-to="Christian Schneider">
          BeanMap does not work in osgi (fixed by BEANUTILS-379)
       </action>
+      <action dev="niallp" type="fix" issue="BEANUTILS-381" due-to="Todd Nine">
+         MethodUtils getMatchingAccessibleMethod() does not correctly handle inheritance
+         and method overloading.
+      </action>
     </release>
 
     <release version="1.8.3" date="2010-03-28" description="Bug fix for 1.8.2">
