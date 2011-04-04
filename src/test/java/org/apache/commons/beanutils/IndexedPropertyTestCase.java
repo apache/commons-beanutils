@@ -37,7 +37,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  */
 

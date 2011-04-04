@@ -22,7 +22,6 @@ import java.math.BigInteger;
 /**
  * Test Case for the BigIntegerLocaleConverter class.
  *
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  */
 

@@ -32,7 +32,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>LazyDynaList</code>class.</p>
  *
- * @author Niall Pemberton
  */
 public class LazyDynaListTestCase extends TestCase {
 

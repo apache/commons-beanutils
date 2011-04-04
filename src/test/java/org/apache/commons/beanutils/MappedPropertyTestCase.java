@@ -25,7 +25,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Test Case for the <code>MappedPropertyDescriptor</code>.</p>
  *
- * @author Niall Pemberton
  */
 public class MappedPropertyTestCase extends TestCase {
 

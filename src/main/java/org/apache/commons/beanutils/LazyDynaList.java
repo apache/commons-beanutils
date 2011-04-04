@@ -156,7 +156,6 @@ import java.lang.reflect.Array;
  *
  * </code></pre>
  * 
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  * @since 1.8.0
  */

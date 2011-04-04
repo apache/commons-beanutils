@@ -108,7 +108,6 @@ import org.apache.commons.logging.LogFactory;
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
  *
  * @see LazyDynaClass
- * @author Niall Pemberton
  */
 public class LazyDynaBean implements DynaBean, Serializable {
 

@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>LazyDynaMap</code> implementation class.</p>
  *
- * @author Niall Pemberton
  */
 public class LazyDynaMapTestCase extends TestCase {
 

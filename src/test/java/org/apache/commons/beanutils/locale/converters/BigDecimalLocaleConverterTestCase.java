@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 /**
  * Test Case for the BigDecimalLocaleConverter class.
  *
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  */
 

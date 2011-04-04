@@ -21,7 +21,6 @@ package org.apache.commons.beanutils;
 /**
  * Test Interface
  *
- * @author Niall Pemberton
  * @version $Revision$ $Date$
  */
 

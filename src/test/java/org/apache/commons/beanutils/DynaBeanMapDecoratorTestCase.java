@@ -31,7 +31,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>DynaBeanMapDecorator</code> implementation class.</p>
  *
- * @author Niall Pemberton
  */
 public class DynaBeanMapDecoratorTestCase extends TestCase {
 

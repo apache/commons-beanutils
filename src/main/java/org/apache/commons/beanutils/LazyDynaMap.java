@@ -44,7 +44,6 @@ import java.util.Iterator;
  *       restricted then calling any of the <code>set()</code> methods for a property which
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
  *
- * @author Niall Pemberton
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 

@@ -40,7 +40,6 @@ package org.apache.commons.beanutils;
  *    in order to control read/write facilities.</p>
  *
  * @see LazyDynaBean
- * @author Niall Pemberton
  */
 public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 

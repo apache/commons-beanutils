@@ -22,7 +22,6 @@ package org.apache.commons.beanutils;
 /**
  * Inherited Mapped property test bean.
  *
- * @author Niall pemberton
  * @version $Revision$ $Date$
  */
 

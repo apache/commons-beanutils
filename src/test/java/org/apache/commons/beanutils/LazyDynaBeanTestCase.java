@@ -28,7 +28,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>LazyDynaBean</code> implementation class.</p>
  *
- * @author Niall Pemberton
  */
 public class LazyDynaBeanTestCase extends TestCase {
 
