@@ -74,8 +74,8 @@ import org.apache.commons.beanutils.ConversionException;
  * </ul>
  *
  * <p>
- * <strong>N.B.</strong>Patterns can only be specified used the <i>standard</i>
- * pattern characters and NOT in <i>localized</i> form (see <code>java.text.SimpleDateFormat</code>).
+ * <strong>N.B.</strong>Patterns can only be specified using the <i>standard</i>
+ * pattern characters and NOT in <i>localized</i> form (see <code>java.text.DecimalFormat</code>).
  * For example to cater for number styles used in Germany such as <code>0.000,00</code> the pattern
  * is specified in the normal form <code>0,000.00</code> and the locale set to <code>Locale.GERMANY</code>.
  *
@@ -145,7 +145,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * Numbers to/from a <code>java.lang.String</code>
      * (or <code>null</code> if none specified).
      * <p>
-     * See <code>java.text.SimpleDateFormat</code> for details
+     * See <code>java.text.DecimalFormat</code> for details
      * of how to specify the pattern.
      *
      * @return The format pattern.
@@ -158,7 +158,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * Set a number format pattern to use to convert
      * Numbers to/from a <code>java.lang.String</code>.
      * <p>
-     * See <code>java.text.SimpleDateFormat</code> for details
+     * See <code>java.text.DecimalFormat</code> for details
      * of how to specify the pattern.
      *
      * @param pattern The format pattern.
