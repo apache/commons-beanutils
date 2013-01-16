@@ -201,6 +201,22 @@
             </configuration>
         </plugin>
       </plugins>
+      <pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-scm-publish-plugin</artifactId>
+            <configuration>
+              <!-- when moving to svnpubsub links to previous releases must be fixed -->
+              <!-- ignore paths manual content -->
+              <ignorePathsToDelete>
+                <ignorePathToDelete>javadocs**</ignorePathToDelete>
+                <ignorePathToDelete>release-notes**</ignorePathToDelete>
+              </ignorePathsToDelete>
+            </configuration>
+          </plugin>
+        </plugins>
+      </pluginManagement>
     </build>
 
     <properties>
