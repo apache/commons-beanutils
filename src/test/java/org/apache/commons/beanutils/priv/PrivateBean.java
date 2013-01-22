@@ -55,7 +55,7 @@ class PrivateBean implements PrivateDirect {
     /**
      * A directly implemented property.
      */
-    private String foo = "This is foo";
+    private final String foo = "This is foo";
 
     public String getFoo() {
 
@@ -67,7 +67,7 @@ class PrivateBean implements PrivateDirect {
     /**
      * A property accessible via a directly implemented interface.
      */
-    private String bar = "This is bar";
+    private final String bar = "This is bar";
 
     public String getBar() {
 
@@ -89,7 +89,7 @@ class PrivateBean implements PrivateDirect {
     /**
      * A property accessible via an indirectly implemented interface.
      */
-    private String baz = "This is baz";
+    private final String baz = "This is baz";
 
     public String getBaz() {
 

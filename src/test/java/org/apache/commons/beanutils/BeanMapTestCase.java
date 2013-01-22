@@ -204,7 +204,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      *  are equivalent since getSampleValues() would otherwise construct a new
      *  and different Object each time.
      **/
-    private Object objectInFullMap = new Object();
+    private final Object objectInFullMap = new Object();
 
     // note to self: the sample values were created manually
     public Object[] getSampleValues() {

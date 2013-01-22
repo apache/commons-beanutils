@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira61TestCase extends TestCase {
 
-    private Log log = LogFactory.getLog(Jira61TestCase.class);
+    private final Log log = LogFactory.getLog(Jira61TestCase.class);
     private Jira61BeanFactory.TestBean testBean;
     private WrapDynaBean wrapDynaBean;
 

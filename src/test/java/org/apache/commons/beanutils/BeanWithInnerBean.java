@@ -26,7 +26,7 @@ import java.util.Properties;
  * @author Robert Burrell Donkin
  */
 public class BeanWithInnerBean {
-  private InnerBean innerBean = new InnerBean();
+  private final InnerBean innerBean = new InnerBean();
 
   public BeanWithInnerBean() {}
     public InnerBean getInnerBean(){
@@ -34,7 +34,7 @@ public class BeanWithInnerBean {
     }
 
   public class InnerBean {
-    private Properties fish = new Properties();
+    private final Properties fish = new Properties();
 
     public String getFish(String key){
       return fish.getProperty(key);

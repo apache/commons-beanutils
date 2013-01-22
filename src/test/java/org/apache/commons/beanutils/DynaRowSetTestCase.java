@@ -399,7 +399,7 @@ public class DynaRowSetTestCase extends TestCase {
         }
     }
     private static class CustomTimestamp {
-        private long timestamp = new java.util.Date().getTime();
+        private final long timestamp = new java.util.Date().getTime();
         public String toString() {
             return "CustomTimestamp[" + timestamp + "]";
         }

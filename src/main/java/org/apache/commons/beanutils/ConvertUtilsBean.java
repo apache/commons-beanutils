@@ -149,12 +149,12 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private WeakFastHashMap converters = new WeakFastHashMap();
+    private final WeakFastHashMap converters = new WeakFastHashMap();
 
     /**
      * The <code>Log</code> instance for this class.
      */
-    private Log log = LogFactory.getLog(ConvertUtils.class);
+    private final Log log = LogFactory.getLog(ConvertUtils.class);
 
     // ------------------------------------------------------- Constructors
 

@@ -724,7 +724,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * Map entry used by {@link BeanMap}.
      */
     protected static class Entry extends AbstractMapEntry {        
-        private BeanMap owner;
+        private final BeanMap owner;
         
         /**
          * Constructs a new <code>Entry</code>.

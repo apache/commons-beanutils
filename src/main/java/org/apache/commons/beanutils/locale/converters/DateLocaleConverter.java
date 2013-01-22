@@ -47,7 +47,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
-    private Log log = LogFactory.getLog(DateLocaleConverter.class);
+    private final Log log = LogFactory.getLog(DateLocaleConverter.class);
 
     /** Should the date conversion be lenient? */
     boolean isLenient = false;

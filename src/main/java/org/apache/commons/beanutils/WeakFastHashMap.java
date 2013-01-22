@@ -654,7 +654,7 @@ class WeakFastHashMap extends HashMap {
 
             private Map expected;
             private Map.Entry lastReturned = null;
-            private Iterator iterator;
+            private final Iterator iterator;
 
             public CollectionViewIterator() {
                 this.expected = map;

@@ -129,7 +129,7 @@ public class PropertyUtilsBean {
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     /** Log instance */
-    private Log log = LogFactory.getLog(PropertyUtils.class);
+    private final Log log = LogFactory.getLog(PropertyUtils.class);
     
     // ---------------------------------------------------------- Constructors
     

@@ -126,8 +126,8 @@ import org.apache.commons.beanutils.Converter;
  */
 public class ArrayConverter extends AbstractConverter {
 
-    private Object defaultTypeInstance;
-    private Converter elementConverter;
+    private final Object defaultTypeInstance;
+    private final Converter elementConverter;
     private int defaultSize;
     private char delimiter    = ',';
     private char[] allowedChars = new char[] {'.', '-'};

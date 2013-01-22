@@ -40,7 +40,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
-    private Log log = LogFactory.getLog(BaseLocaleConverter.class);
+    private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
     private Object defaultValue = null;

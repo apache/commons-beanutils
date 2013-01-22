@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira18TestCase extends TestCase {
 
-    private Log log = LogFactory.getLog(Jira18TestCase.class);
+    private final Log log = LogFactory.getLog(Jira18TestCase.class);
     private Object bean;
 
     /**

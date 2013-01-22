@@ -243,7 +243,7 @@ public class TestBean implements Serializable {
     /**
      * An integer array property accessed as an indexed property.
      */
-    private int intIndexed[] = { 0, 10, 20, 30, 40 };
+    private final int intIndexed[] = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed(int index) {
         return (intIndexed[index]);
@@ -463,7 +463,7 @@ public class TestBean implements Serializable {
     /**
      * A read-only String property.
      */
-    private String readOnlyProperty = "Read Only String Property";
+    private final String readOnlyProperty = "Read Only String Property";
 
     public String getReadOnlyProperty() {
         return (this.readOnlyProperty);
@@ -502,7 +502,7 @@ public class TestBean implements Serializable {
     /**
      * A String array property accessed as an indexed property.
      */
-    private String[] stringIndexed =
+    private final String[] stringIndexed =
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed(int index) {

@@ -96,13 +96,13 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private Log log = LogFactory.getLog(BeanUtils.class);
+    private final Log log = LogFactory.getLog(BeanUtils.class);
     
     /** Used to perform conversions between object types when setting properties */
-    private ConvertUtilsBean convertUtilsBean;
+    private final ConvertUtilsBean convertUtilsBean;
     
     /** Used to access properties*/
-    private PropertyUtilsBean propertyUtilsBean;
+    private final PropertyUtilsBean propertyUtilsBean;
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();

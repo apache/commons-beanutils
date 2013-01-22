@@ -30,8 +30,8 @@ import java.util.Map;
 
 public class MappedPropertyTestBean {
 
-    private Map map = new HashMap();
-    private Map myMap = new HashMap();
+    private final Map map = new HashMap();
+    private final Map myMap = new HashMap();
 
 
     // -------------------------------------------------------------- Properties

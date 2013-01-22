@@ -43,7 +43,7 @@ public class Jira92TestCase extends TestCase {
      */
     public static class Jira92TestBean {
         
-        private java.util.Date[] dateArrayProperty = new java.util.Date[10];
+        private final java.util.Date[] dateArrayProperty = new java.util.Date[10];
 
         /**
          * Indexed Setter.

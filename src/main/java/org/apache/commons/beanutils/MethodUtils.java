@@ -1305,11 +1305,11 @@ public class MethodUtils {
      * Represents the key to looking up a Method by reflection.
      */
     private static class MethodDescriptor {
-        private Class cls;
-        private String methodName;
-        private Class[] paramTypes;
-        private boolean exact;
-        private int hashCode;
+        private final Class cls;
+        private final String methodName;
+        private final Class[] paramTypes;
+        private final boolean exact;
+        private final int hashCode;
 
         /**
          * The sole constructor.

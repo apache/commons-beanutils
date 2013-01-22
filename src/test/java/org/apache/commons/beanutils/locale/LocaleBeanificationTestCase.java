@@ -266,7 +266,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             
         class GetBeanUtilsBeanThread extends Thread {
             
-            private Signal signal;
+            private final Signal signal;
         
             GetBeanUtilsBeanThread(Signal signal) {
                 this.signal = signal;
@@ -310,8 +310,8 @@ public class LocaleBeanificationTestCase extends TestCase {
             
         class CCLLTesterThread extends Thread {
             
-            private Signal signal;
-            private ContextClassLoaderLocal ccll;
+            private final Signal signal;
+            private final ContextClassLoaderLocal ccll;
         
             CCLLTesterThread(Signal signal, ContextClassLoaderLocal ccll) {
                 this.signal = signal;
@@ -351,8 +351,8 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void testContextClassloaderIndependence() throws Exception {
     
         class TestIndependenceThread extends Thread {
-            private Signal signal;
-            private PrimitiveBean bean;
+            private final Signal signal;
+            private final PrimitiveBean bean;
         
             TestIndependenceThread(Signal signal, PrimitiveBean bean) {
                 this.signal = signal;
@@ -416,8 +416,8 @@ public class LocaleBeanificationTestCase extends TestCase {
             
         class SetInstanceTesterThread extends Thread {
             
-            private Signal signal;
-            private LocaleBeanUtilsBean bean;
+            private final Signal signal;
+            private final LocaleBeanUtilsBean bean;
         
             SetInstanceTesterThread(Signal signal, LocaleBeanUtilsBean bean) {
                 this.signal = signal;

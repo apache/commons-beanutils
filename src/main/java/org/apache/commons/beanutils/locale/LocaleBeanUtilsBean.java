@@ -84,12 +84,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /** All logging goes through this logger */
-    private Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
+    private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
     // ----------------------------------------------------- Instance Variables
         
     /** Convertor used by this class */
-    private LocaleConvertUtilsBean localeConvertUtils;
+    private final LocaleConvertUtilsBean localeConvertUtils;
     
     // --------------------------------------------------------- Constructors
     

@@ -103,13 +103,13 @@ public class LocaleConvertUtilsBean {
     private boolean applyLocalized = false;
 
     /** The <code>Log</code> instance for this class. */
-    private Log log = LogFactory.getLog(LocaleConvertUtils.class);
+    private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
 
     /** Every entry of the mapConverters is:
      *  key = locale
      *  value = FastHashMap of converters for the certain locale.
      */
-    private FastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
+    private final FastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
     // --------------------------------------------------------- Constructors
 

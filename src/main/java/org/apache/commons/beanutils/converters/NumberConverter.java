@@ -88,7 +88,7 @@ public abstract class NumberConverter extends AbstractConverter {
     private static final Integer ONE  = new Integer(1);
 
     private String pattern;
-    private boolean allowDecimals;
+    private final boolean allowDecimals;
     private boolean useLocaleFormat;
     private Locale locale;
 

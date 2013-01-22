@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Jira273TestCase extends TestCase {
 
-    private Log log = LogFactory.getLog(Jira273TestCase.class);
+    private final Log log = LogFactory.getLog(Jira273TestCase.class);
 
     /**
      * Create a test case with the specified name.

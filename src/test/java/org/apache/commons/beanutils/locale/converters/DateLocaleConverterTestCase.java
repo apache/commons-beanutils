@@ -37,7 +37,7 @@ import org.apache.commons.logging.Log;
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /** All logging goes through this logger */
-    private Log log = LogFactory.getLog(DateLocaleConverterTestCase.class);
+    private final Log log = LogFactory.getLog(DateLocaleConverterTestCase.class);
 
     protected String localizedDatePattern; 
     protected String localizedDateValue;

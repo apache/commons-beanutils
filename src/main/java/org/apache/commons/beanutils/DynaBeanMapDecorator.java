@@ -72,8 +72,8 @@ import java.util.Collections;
  */
 public class DynaBeanMapDecorator implements Map {
 
-    private DynaBean dynaBean;
-    private boolean readOnly;
+    private final DynaBean dynaBean;
+    private final boolean readOnly;
     private transient Set keySet;
 
     // ------------------- Constructors ----------------------------------
@@ -362,8 +362,8 @@ public class DynaBeanMapDecorator implements Map {
      * Map.Entry implementation.
      */
     private static class MapEntry implements Map.Entry {
-        private Object key;
-        private Object value;
+        private final Object key;
+        private final Object value;
         MapEntry(Object key, Object value) {
             this.key = key;
             this.value = value;

@@ -40,7 +40,7 @@ import junit.framework.TestSuite;
  */
 public class Jira87TestCase extends TestCase {
 
-    private Log log = LogFactory.getLog(Jira87TestCase.class);
+    private final Log log = LogFactory.getLog(Jira87TestCase.class);
 
     /**
      * Create a test case with the specified name.

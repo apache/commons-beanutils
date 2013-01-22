@@ -42,9 +42,9 @@ public class Jira61BeanFactory {
      */
     public static class TestBean {
 
-        private String[] indexed = new String[] {"one", "two", "three"};
+        private final String[] indexed = new String[] {"one", "two", "three"};
         private String simple = "FOO";
-        private Map mapped = new HashMap();
+        private final Map mapped = new HashMap();
 
         /** Default Constructor */
         public TestBean() {
