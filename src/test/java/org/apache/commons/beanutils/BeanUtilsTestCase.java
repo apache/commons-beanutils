@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -143,10 +143,10 @@ public class BeanUtilsTestCase extends TestCase {
         dateConverter.setPattern("dd.MM.yyyy");
         ConvertUtils.register(dateConverter, java.util.Date.class);
 
-        ArrayConverter dateArrayConverter = 
+        ArrayConverter dateArrayConverter =
             new ArrayConverter(java.util.Date[].class, dateConverter, 0);
         ConvertUtils.register(dateArrayConverter, java.util.Date[].class);
-        
+
         testCalendar = Calendar.getInstance();
         testCalendar.set(1992, 11, 28, 0, 0, 0);
         testCalendar.set(Calendar.MILLISECOND, 0);
@@ -1494,42 +1494,42 @@ public class BeanUtilsTestCase extends TestCase {
     /** Tests that separate instances can register separate instances */
     public void testSeparateInstances() throws Exception {
         BeanUtilsBean utilsOne = new BeanUtilsBean(
-                                                new ConvertUtilsBean(), 
+                                                new ConvertUtilsBean(),
                                                 new PropertyUtilsBean());
         BeanUtilsBean utilsTwo = new BeanUtilsBean(
-                                                new ConvertUtilsBean(), 
-                                                new PropertyUtilsBean());        
-        
-        
+                                                new ConvertUtilsBean(),
+                                                new PropertyUtilsBean());
+
+
         TestBean bean = new TestBean();
-        
+
         // Make sure what we're testing works
         bean.setBooleanProperty(false);
         utilsOne.setProperty(bean, "booleanProperty", "true");
         assertEquals("Set property failed (1)", bean.getBooleanProperty(), true);
-        
+
         bean.setBooleanProperty(false);
         utilsTwo.setProperty(bean, "booleanProperty", "true");
-        assertEquals("Set property failed (2)", bean.getBooleanProperty(), true);       
-        
+        assertEquals("Set property failed (2)", bean.getBooleanProperty(), true);
+
         // now change the registered conversion
-        
+
         utilsOne.getConvertUtils().register(new ThrowExceptionConverter(), Boolean.TYPE);
         try {
-            
+
             bean.setBooleanProperty(false);
             utilsOne.setProperty(bean, "booleanProperty", "true");
             fail("Registered conversion not used.");
-            
+
         } catch (PassTestException e) { /* Do nothing */ }
-        
+
         // make sure that this conversion has no been registered in the other instance
         try {
-        
+
             bean.setBooleanProperty(false);
             utilsTwo.setProperty(bean, "booleanProperty", "true");
             assertEquals("Set property failed (3)", bean.getBooleanProperty(), true);
-            
+
         } catch (PassTestException e) {
             fail("Registed converter is used by other instances");
         }
@@ -1537,12 +1537,12 @@ public class BeanUtilsTestCase extends TestCase {
 
     public void testArrayPropertyConversion() throws Exception {
         BeanUtilsBean beanUtils = new BeanUtilsBean(
-                                                    new ConvertUtilsBean(), 
+                                                    new ConvertUtilsBean(),
                                                     new PropertyUtilsBean());
-            
+
         TestBean bean = new TestBean();
         String [] results = beanUtils.getArrayProperty(bean, "intArray");
-                
+
         int[] values = bean.getIntArray();
         assertEquals(
                     "Converted array size not equal to property array size.",
@@ -1550,7 +1550,7 @@ public class BeanUtilsTestCase extends TestCase {
                     values.length);
         for (int i=0, size=values.length ;  i<size; i++) {
             assertEquals(
-                    "Value " + i + " incorrectly converted ", 
+                    "Value " + i + " incorrectly converted ",
                     values[i] + "",
                     results[i]);
         }
@@ -1581,12 +1581,12 @@ public class BeanUtilsTestCase extends TestCase {
 
     public void testMappedProperty() throws Exception {
         MappedPropertyTestBean bean = new MappedPropertyTestBean();
-        
+
         BeanUtils.setProperty(bean, "mapproperty(this.that.the-other)", "some.dotty.value");
-        
+
         assertEquals(
-                        "Mapped property set correctly", 
-                        "some.dotty.value", 
+                        "Mapped property set correctly",
+                        "some.dotty.value",
                         bean.getMapproperty("this.that.the-other"));
     }
 
@@ -1636,7 +1636,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Throw an exception with the specified message. 
+     * Throw an exception with the specified message.
      */
     private void throwException(String msg) throws Throwable {
         throw new Exception(msg);
