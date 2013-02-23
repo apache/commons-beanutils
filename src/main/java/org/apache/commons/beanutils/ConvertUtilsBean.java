@@ -449,7 +449,7 @@ public class ConvertUtilsBean {
      * possible).  Otherwise, return a String representation of the value.
      *
      * @param value Value to be converted (may be null)
-     * @param clazz Java class to be converted to
+     * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
      *
      * @exception ConversionException if thrown by an underlying Converter
@@ -480,7 +480,7 @@ public class ConvertUtilsBean {
      * specified class.
      *
      * @param values Array of values to be converted
-     * @param clazz Java array or element class to be converted to
+     * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
      * @exception ConversionException if thrown by an underlying Converter
@@ -516,7 +516,7 @@ public class ConvertUtilsBean {
      * possible).</p>
      *
      * @param value Value to be converted (may be null)
-     * @param targetType Class of the value to be converted to
+     * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value
      *
      * @exception ConversionException if thrown by an underlying Converter
