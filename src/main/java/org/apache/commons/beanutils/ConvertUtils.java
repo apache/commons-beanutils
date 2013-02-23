@@ -257,7 +257,7 @@ public class ConvertUtils {
      */
     public static Object convert(String[] values, Class clazz) {
 
-  return ConvertUtilsBean.getInstance().convert(values, clazz);
+        return ConvertUtilsBean.getInstance().convert(values, clazz);
 
     }
 
@@ -356,6 +356,5 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().register(converter, clazz);
 
     }
-
 
 }
