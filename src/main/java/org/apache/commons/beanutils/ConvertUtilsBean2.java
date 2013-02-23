@@ -49,7 +49,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * method.
      *
      * @param value Value to be converted (may be null)
-     * @param clazz Java class to be converted to
+     * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
      *
      * @see ConvertUtilsBean#convert(String[], Class)
@@ -63,7 +63,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * method.
      *
      * @param value Array of values to be converted
-     * @param clazz Java array or element class to be converted to
+     * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
      * @see ConvertUtilsBean#convert(String[], Class)
