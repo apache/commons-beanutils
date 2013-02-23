@@ -94,7 +94,7 @@ import org.apache.commons.logging.LogFactory;
  *   ConvertUtils.register(myConverter, Integer.TYPE);    // Native type
  *   ConvertUtils.register(myConverter, Integer.class);   // Wrapper class
  * </pre>
- * 
+ *
  * <p>
  * Converters generally treat null input as if it were invalid
  * input, ie they return their default value if one was specified when the
@@ -112,14 +112,14 @@ import org.apache.commons.logging.LogFactory;
  * converters have no default (and are therefore somewhat inconsistent
  * with the other numerical converters which all have zero as their default).
  * </p>
- * 
+ *
  * <p>
  * Converters that generate <i>arrays</i> of each of the primitive types are
  * also automatically configured (including String[]). When passed null
  * or invalid input, these return an empty array (not null). See class
  * AbstractArrayConverter for the supported input formats for these converters.
  * </p>
- * 
+ *
  * @author Craig R. McClanahan
  * @author Ralph Schaer
  * @author Chris Audley
@@ -129,7 +129,7 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class ConvertUtilsBean {
-    
+
     private static final Integer ZERO = new Integer(0);
     private static final Character SPACE = new Character(' ');
 
@@ -160,13 +160,13 @@ public class ConvertUtilsBean {
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
-        converters.setFast(false);   
+        converters.setFast(false);
         deregister();
         converters.setFast(true);
     }
 
     // --------------------------------------------------------- Public Methods
-    
+
     /**
      * The default value for Boolean conversions.
      * @deprecated Register replacement converters for Boolean.TYPE and
@@ -335,7 +335,7 @@ public class ConvertUtilsBean {
     public int getDefaultInteger() {
         return (defaultInteger.intValue());
     }
-    
+
     /**
      * Sets the default value for Integer conversions.
      * @param newDefaultInteger The default Integer value
@@ -543,7 +543,7 @@ public class ConvertUtilsBean {
             }
             converted = converter.convert(targetType, value);
         }
-        if (targetType == String.class && converted != null && 
+        if (targetType == String.class && converted != null &&
                 !(converted instanceof String)) {
 
             // NOTE: For backwards compatibility, if the Converter
@@ -574,7 +574,7 @@ public class ConvertUtilsBean {
     public void deregister() {
 
         converters.clear();
-        
+
         registerPrimitives(false);
         registerStandard(false, false);
         registerOther(true);
@@ -679,7 +679,7 @@ public class ConvertUtilsBean {
         register(Long.class,       throwException ? new LongConverter()       : new LongConverter(defaultNumber));
         register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
         register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
-        
+
     }
 
     /**
@@ -832,7 +832,7 @@ public class ConvertUtilsBean {
         }
 
         Converter converter = null;
-        // Convert --> String 
+        // Convert --> String
         if (targetType == String.class) {
             converter = lookup(sourceType);
             if (converter == null && (sourceType.isArray() ||
@@ -845,7 +845,7 @@ public class ConvertUtilsBean {
             return converter;
         }
 
-        // Convert --> String array 
+        // Convert --> String array
         if (targetType == String[].class) {
             if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
                 converter = lookup(sourceType);
