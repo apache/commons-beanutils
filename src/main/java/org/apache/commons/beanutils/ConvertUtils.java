@@ -213,7 +213,7 @@ public class ConvertUtils {
      * <p>For more details see <code>ConvertUtilsBean</code>.</p>
      *
      * @param value Value to be converted (may be null)
-     * @return The converted String value
+     * @return The converted String value or null if value is null
      *
      * @see ConvertUtilsBean#convert(Object)
      */

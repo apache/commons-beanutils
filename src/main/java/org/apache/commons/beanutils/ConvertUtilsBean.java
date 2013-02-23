@@ -419,7 +419,7 @@ public class ConvertUtilsBean {
      * implementation simply uses toString()).
      *
      * @param value Value to be converted (may be null)
-     * @return The converted String value
+     * @return The converted String value or null if value is null
      */
     public String convert(Object value) {
 
