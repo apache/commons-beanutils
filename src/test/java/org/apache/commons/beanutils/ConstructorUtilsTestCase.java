@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -160,7 +160,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertEquals("TEST",((TestBean)obj).getStringProperty());
         }
     }
-    
+
     public void testInvokeExactConstructorWithTypeArray() throws Exception {
         {
             Object[] args = { Boolean.TRUE, "TEST" };
@@ -203,17 +203,17 @@ public class ConstructorUtilsTestCase extends TestCase {
 
     public void testGetAccessibleConstructor() throws Exception {
         {
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,String.class);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,String.class);
             assertNotNull(ctor);
             assertTrue(Modifier.isPublic(ctor.getModifiers()));
         }
         {
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,Integer.class);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,Integer.class);
             assertNotNull(ctor);
             assertTrue(Modifier.isPublic(ctor.getModifiers()));
         }
         {
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,Integer.TYPE);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,Integer.TYPE);
             assertNull(ctor);
         }
     }
@@ -221,13 +221,13 @@ public class ConstructorUtilsTestCase extends TestCase {
     public void testGetAccessibleConstructorWithTypeArray() throws Exception {
         {
             Class[] types = { Boolean.TYPE, String.class };
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,types);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,types);
             assertNotNull(ctor);
             assertTrue(Modifier.isPublic(ctor.getModifiers()));
         }
         {
             Class[] types = { Boolean.TYPE, Boolean.TYPE, String.class };
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,types);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class,types);
             assertNull(ctor);
         }
     }
@@ -236,21 +236,21 @@ public class ConstructorUtilsTestCase extends TestCase {
         {
             Class[] types = { Integer.class };
             Constructor c1 = TestBean.class.getConstructor(types);
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);
             assertNotNull(ctor);
             assertTrue(Modifier.isPublic(ctor.getModifiers()));
         }
         {
             Class[] types = { Integer.class };
             Constructor c1 = TestBean.class.getDeclaredConstructor(types);
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);
             assertNotNull(ctor);
             assertTrue(Modifier.isPublic(ctor.getModifiers()));
         }
         {
             Class[] types = { Integer.TYPE };
             Constructor c1 = TestBean.class.getDeclaredConstructor(types);
-            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);       
+            Constructor ctor = ConstructorUtils.getAccessibleConstructor(c1);
             assertNull(ctor);
         }
     }
