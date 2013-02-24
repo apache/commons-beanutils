@@ -50,79 +50,79 @@
     <developer>
       <name>Robert Burrell Donkin</name>
       <id>rdonkin</id>
-      <email>rdonkin at apache dot org</email>
+      <email>rdonkin@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
-      <name>dIon Gillard</name>
+      <name>Dion Gillard</name>
       <id>dion</id>
-      <email>dion at apache dot org</email>
+      <email>dion@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Craig McClanahan</name>
       <id>craigmcc</id>
-      <email>craigmcc at apache dot org</email>
+      <email>craigmcc@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Geir Magnusson Jr.</name>
       <id>geirm</id>
-      <email>geirm at apache dot org</email>
+      <email>geirm@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Scott Sanders</name>
       <id>sanders</id>
-      <email>sanders at apache dot org</email>
+      <email>sanders@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>James Strachan</name>
       <id>jstrachan</id>
-      <email>jstrachan at apache dot org</email>
+      <email>jstrachan@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Rodney Waldhoff</name>
       <id>rwaldhoff</id>
-      <email>rwaldhoff at apache dot org</email>
+      <email>rwaldhoff@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Martin van den Bemt</name>
       <id>mvdb</id>
-      <email>mvdb at apache dot org</email>
+      <email>mvdb@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Yoav Shapira</name>
       <id>yoavs</id>
-      <email>yoavs at apache dot org</email>
+      <email>yoavs@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Niall Pemberton</name>
       <id>niallp</id>
-      <email>niallp at apache dot org</email>
+      <email>niallp@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Simon Kitching</name>
       <id>skitching</id>
-      <email>skitching at apache dot org</email>
+      <email>skitching@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>James Carman</name>
       <id>jcarman</id>
-      <email>jcarman at apache dot org</email>
+      <email>jcarman@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
     <developer>
       <name>Benedikt Ritter</name>
       <id>britter</id>
-      <email>britter at apache dot org</email>
+      <email>britter@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
   </developers>
