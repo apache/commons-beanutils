@@ -133,7 +133,7 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
         {
             try {
-                Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class,new Float(17.3f));
+                ConstructorUtils.invokeExactConstructor(TestBean.class,new Float(17.3f));
                 fail("Expected NoSuchMethodException");
             } catch(NoSuchMethodException e) {
                 // expected
@@ -151,7 +151,7 @@ public class ConstructorUtilsTestCase extends TestCase {
         {
             Object[] args = { new Float(17.3f), "TEST" };
             try {
-                Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class,args);
+                ConstructorUtils.invokeExactConstructor(TestBean.class,args);
                 fail("Expected NoSuchMethodException");
             } catch(NoSuchMethodException e) {
                 // expected
@@ -199,7 +199,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             Object[] args = { new Float(17.3f), "TEST" };
             Class[] types = { Float.class, String.class };
             try {
-                Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class,args,types);
+                ConstructorUtils.invokeExactConstructor(TestBean.class,args,types);
                 fail("Expected NoSuchMethodException");
             } catch(NoSuchMethodException e) {
                 // expected
