@@ -83,7 +83,6 @@ public class ConstructorUtils {
 
         Object[] args = { arg };
         return invokeConstructor(klass, args);
-
     }
 
     /**
@@ -120,7 +119,6 @@ public class ConstructorUtils {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeConstructor(klass, args, parameterTypes);
-
     }
 
     /**
@@ -194,7 +192,6 @@ public class ConstructorUtils {
 
         Object[] args = { arg };
         return invokeExactConstructor(klass, args);
-
     }
 
     /**
@@ -221,6 +218,7 @@ public class ConstructorUtils {
             IllegalAccessException,
             InvocationTargetException,
             InstantiationException {
+
         if (null == args) {
             args = EMPTY_OBJECT_ARRAY;
         }
@@ -230,7 +228,6 @@ public class ConstructorUtils {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeExactConstructor(klass, args, parameterTypes);
-
     }
 
     /**
@@ -275,7 +272,6 @@ public class ConstructorUtils {
                 "No such accessible constructor on object: " + klass.getName());
         }
         return ctor.newInstance(args);
-
     }
 
     /**
@@ -292,7 +288,6 @@ public class ConstructorUtils {
 
         Class[] parameterTypes = { parameterType };
         return getAccessibleConstructor(klass, parameterTypes);
-
     }
 
     /**
@@ -313,7 +308,6 @@ public class ConstructorUtils {
         } catch (NoSuchMethodException e) {
             return (null);
         }
-
     }
 
     /**
@@ -342,7 +336,6 @@ public class ConstructorUtils {
 
         // what else can we do?
         return null;
-
     }
 
     // -------------------------------------------------------- Private Methods
@@ -381,7 +374,7 @@ public class ConstructorUtils {
                 // modifer is public.
                 //
                 // The following workaround solves the problem but will only
-                // work from sufficiently privilages code. 
+                // work from sufficiently privilages code.
                 //
                 // Better workarounds would be greatfully accepted.
                 //
@@ -394,7 +387,7 @@ public class ConstructorUtils {
         } catch (NoSuchMethodException e) { /* SWALLOW */
         }
 
-        // search through all methods 
+        // search through all methods
         int paramSize = parameterTypes.length;
         Constructor[] ctors = clazz.getConstructors();
         for (int i = 0, size = ctors.length; i < size; i++) {
