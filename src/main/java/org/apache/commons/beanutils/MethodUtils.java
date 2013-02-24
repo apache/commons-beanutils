@@ -173,7 +173,7 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = {arg};
+        Object[] args = toArray(arg);
         return invokeMethod(object, methodName, args);
     }
 
@@ -309,7 +309,7 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = {arg};
+        Object[] args = toArray(arg);
         return invokeExactMethod(object, methodName, args);
     }
 
@@ -487,7 +487,7 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = {arg};
+        Object[] args = toArray(arg);
         return invokeStaticMethod (objectClass, methodName, args);
     }
 
@@ -626,10 +626,9 @@ public class MethodUtils {
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = {arg};
+        Object[] args = toArray(arg);
         return invokeExactStaticMethod (objectClass, methodName, args);
     }
-
 
     /**
      * <p>Invoke a static method whose parameter types match exactly the object
@@ -670,6 +669,14 @@ public class MethodUtils {
         return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
     }
 
+
+    private static Object[] toArray(Object arg) {
+        Object[] args = {arg};
+        if (arg == null) {
+            args = null;
+        }
+        return args;
+    }
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via

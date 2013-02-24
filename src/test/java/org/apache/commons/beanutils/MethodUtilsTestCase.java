@@ -185,6 +185,13 @@ public class MethodUtilsTestCase extends TestCase {
         }
     }
 
+    public void testInvokeExactMethodNull() throws Exception {
+        Object object = new Object();
+        Object result = MethodUtils.invokeExactMethod(object, "toString", (Object) null);
+        assertEquals(object.toString(), result);
+    }
+
+
     /**
      * <p> Test <code>invokeMethod</code>.
      */
@@ -261,6 +268,12 @@ public class MethodUtilsTestCase extends TestCase {
         MethodUtils.invokeExactMethod(parent, "getName", null, null);
     }
 
+    public void testInvokeMethodNull() throws Exception {
+        Object object = new Object();
+        Object result = MethodUtils.invokeMethod(object, "toString", (Object) null);
+        assertEquals(object.toString(), result);
+    }
+
     /**
      * <p> Test <code>invokeMethod</code> with a primitive.
      */
@@ -328,6 +341,17 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals("currentCounter value", current, ((Integer) value).intValue());
     }
 
+    public void testInvokeStaticMethodNull() throws Exception {
+        int current = TestBean.currentCounter();
+        Object value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", (Object) null);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+    }
+
+    public void testInvokeExactStaticMethodNull() throws Exception {
+        int current = TestBean.currentCounter();
+        Object value = MethodUtils.invokeExactStaticMethod(TestBean.class, "currentCounter", (Object) null);
+        assertEquals("currentCounter value", current, ((Integer) value).intValue());
+    }
 
     /**
      * Simple tests for accessing static methods via invokeMethod().
