@@ -40,10 +40,10 @@ import org.apache.commons.logging.LogFactory;
  * Reflection locates these methods fine and correctly assigns them as public.
  * However, an <code>IllegalAccessException</code> is thrown if the method is invoked.</p>
  *
- * <p><code>MethodUtils</code> contains a workaround for this situation. 
+ * <p><code>MethodUtils</code> contains a workaround for this situation.
  * It will attempt to call <code>setAccessible</code> on this method.
  * If this call succeeds, then the method can be invoked as normal.
- * This call will only succeed when the application has sufficient security privilages. 
+ * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
  * @author Craig R. McClanahan
@@ -58,8 +58,8 @@ import org.apache.commons.logging.LogFactory;
 public class MethodUtils {
 
     // --------------------------------------------------------- Private Methods
-    
-    /** 
+
+    /**
      * Only log warning about accessibility work around once.
      * <p>
      * Note that this is broken when this class is deployed via a shared
@@ -71,8 +71,8 @@ public class MethodUtils {
      * will get the warning in its logs but that should be good enough.
      */
     private static boolean loggedAccessibleWarning = false;
-    
-    /** 
+
+    /**
      * Indicates whether methods should be cached for improved performance.
      * <p>
      * Note that when this class is deployed via a shared classloader in
@@ -92,9 +92,9 @@ public class MethodUtils {
      * <p>
      * The keys into this map only ever exist as temporary variables within
      * methods of this class, and are never exposed to users of this class.
-     * This means that the WeakHashMap is used only as a mechanism for 
+     * This means that the WeakHashMap is used only as a mechanism for
      * limiting the size of the cache, ie a way to tell the garbage collector
-     * that the contents of the cache can be completely garbage-collected 
+     * that the contents of the cache can be completely garbage-collected
      * whenever it needs the memory. Whether this is a good approach to
      * this problem is doubtful; something like the commons-collections
      * LRUMap may be more appropriate (though of course selecting an
@@ -108,7 +108,7 @@ public class MethodUtils {
      * objects and hence end up with different entries in the map.
      */
     private static final Map cache = Collections.synchronizedMap(new WeakHashMap());
-    
+
     // --------------------------------------------------------- Public Methods
 
     /**
@@ -136,16 +136,16 @@ public class MethodUtils {
         cache.clear();
         return size;
     }
-    
+
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
+     * <p>The behaviour of this method is less deterministic
      * than <code>invokeExactMethod()</code>.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -175,19 +175,18 @@ public class MethodUtils {
 
         Object[] args = {arg};
         return invokeMethod(object, methodName, args);
-
     }
 
 
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
-     * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. 
+     * <p>The behaviour of this method is less deterministic
+     * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -214,30 +213,29 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
         int arguments = args.length;
         Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeMethod(object, methodName, args, parameterTypes);
-
     }
 
 
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
-     * than {@link 
-     * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}. 
+     * <p>The behaviour of this method is less deterministic
+     * than {@link
+     * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -263,13 +261,13 @@ public class MethodUtils {
                     NoSuchMethodException,
                     IllegalAccessException,
                     InvocationTargetException {
-                    
+
         if (parameterTypes == null) {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
-        }        
+        }
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
 
         Method method = getMatchingAccessibleMethod(
                 object.getClass(),
@@ -313,7 +311,6 @@ public class MethodUtils {
 
         Object[] args = {arg};
         return invokeExactMethod(object, methodName, args);
-
     }
 
 
@@ -343,16 +340,16 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
         int arguments = args.length;
         Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeExactMethod(object, methodName, args, parameterTypes);
-
     }
 
 
@@ -384,11 +381,11 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
-                
+        }
+
         if (parameterTypes == null) {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
@@ -402,7 +399,6 @@ public class MethodUtils {
                     methodName + "() on object: " + object.getClass().getName());
         }
         return method.invoke(object, args);
-
     }
 
     /**
@@ -434,11 +430,11 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
-                
+        }
+
         if (parameterTypes == null) {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
@@ -452,18 +448,17 @@ public class MethodUtils {
                     methodName + "() on class: " + objectClass.getName());
         }
         return method.invoke(null, args);
-
     }
 
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
-     * than {@link #invokeExactMethod(Object, String, Object[], Class[])}. 
+     * <p>The behaviour of this method is less deterministic
+     * than {@link #invokeExactMethod(Object, String, Object[], Class[])}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -494,19 +489,18 @@ public class MethodUtils {
 
         Object[] args = {arg};
         return invokeStaticMethod (objectClass, methodName, args);
-
     }
 
 
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
-     * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}. 
+     * <p>The behaviour of this method is less deterministic
+     * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -534,30 +528,29 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-        
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
         int arguments = args.length;
         Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeStaticMethod (objectClass, methodName, args, parameterTypes);
-
     }
 
 
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic 
-     * than {@link 
-     * #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}. 
+     * <p>The behaviour of this method is less deterministic
+     * than {@link
+     * #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
-     * <p>This method supports calls to methods taking primitive parameters 
+     * <p>This method supports calls to methods taking primitive parameters
      * via passing in wrapping classes. So, for example, a <code>Boolean</code> class
      * would match a <code>boolean</code> primitive.</p>
      *
@@ -584,13 +577,13 @@ public class MethodUtils {
                     NoSuchMethodException,
                     IllegalAccessException,
                     InvocationTargetException {
-                    
+
         if (parameterTypes == null) {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
-        }        
+        }
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
 
         Method method = getMatchingAccessibleMethod(
                 objectClass,
@@ -635,7 +628,6 @@ public class MethodUtils {
 
         Object[] args = {arg};
         return invokeExactStaticMethod (objectClass, methodName, args);
-
     }
 
 
@@ -666,16 +658,16 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
+
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
-        }  
+        }
         int arguments = args.length;
         Class[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
         return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
-
     }
 
 
@@ -698,7 +690,6 @@ public class MethodUtils {
 
         Class[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
-
     }
 
 
@@ -726,7 +717,7 @@ public class MethodUtils {
             if (method != null) {
                 return method;
             }
-            
+
             method =  getAccessibleMethod
                     (clazz, clazz.getMethod(methodName, parameterTypes));
             cacheMethod(md, method);
@@ -734,9 +725,7 @@ public class MethodUtils {
         } catch (NoSuchMethodException e) {
             return (null);
         }
-
     }
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -754,7 +743,6 @@ public class MethodUtils {
         }
 
         return getAccessibleMethod(method.getDeclaringClass(), method);
-
     }
 
 
@@ -817,7 +805,6 @@ public class MethodUtils {
         }
 
         return (method);
-
     }
 
 
@@ -908,21 +895,20 @@ public class MethodUtils {
 
         // We did not find anything
         return (null);
-
     }
 
     /**
      * <p>Find an accessible method that matches the given name and has compatible parameters.
-     * Compatible parameters mean that every method parameter is assignable from 
+     * Compatible parameters mean that every method parameter is assignable from
      * the given parameters.
-     * In other words, it finds a method with the given name 
+     * In other words, it finds a method with the given name
      * that will take the parameters given.<p>
      *
-     * <p>This method is slightly undeterminstic since it loops 
+     * <p>This method is slightly undeterminstic since it loops
      * through methods names and return the first matching method.</p>
-     * 
-     * <p>This method is used by 
-     * {@link 
+     *
+     * <p>This method is used by
+     * {@link
      * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      *
      * <p>This method can match primitive parameter by passing in wrapper classes.
@@ -931,7 +917,7 @@ public class MethodUtils {
      *
      * @param clazz find method in this class
      * @param methodName find method with this name
-     * @param parameterTypes find method with compatible parameters 
+     * @param parameterTypes find method with compatible parameters
      * @return The accessible method
      */
     public static Method getMatchingAccessibleMethod(
@@ -944,7 +930,7 @@ public class MethodUtils {
             log.trace("Matching name=" + methodName + " on " + clazz);
         }
         MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
-        
+
         // see if we can find the method directly
         // most of the time this works and it's much faster
         try {
@@ -959,15 +945,15 @@ public class MethodUtils {
                 log.trace("Found straight match: " + method);
                 log.trace("isPublic:" + Modifier.isPublic(method.getModifiers()));
             }
-            
+
             setMethodAccessible(method); // Default access superclass workaround
 
             cacheMethod(md, method);
             return method;
-            
+
         } catch (NoSuchMethodException e) { /* SWALLOW */ }
-        
-        // search through all methods 
+
+        // search through all methods
         int paramSize = parameterTypes.length;
         Method bestMatch = null;
         Method[] methods = clazz.getMethods();
@@ -979,12 +965,12 @@ public class MethodUtils {
                 if (log.isTraceEnabled()) {
                     log.trace("Found matching name:");
                     log.trace(methods[i]);
-                }                
-                
+                }
+
                 // compare parameters
                 Class[] methodsParams = methods[i].getParameterTypes();
                 int methodParamSize = methodsParams.length;
-                if (methodParamSize == paramSize) {          
+                if (methodParamSize == paramSize) {
                     boolean match = true;
                     for (int n = 0 ; n < methodParamSize; n++) {
                         if (log.isTraceEnabled()) {
@@ -993,20 +979,20 @@ public class MethodUtils {
                         }
                         if (!isAssignmentCompatible(methodsParams[n], parameterTypes[n])) {
                             if (log.isTraceEnabled()) {
-                                log.trace(methodsParams[n] + " is not assignable from " 
+                                log.trace(methodsParams[n] + " is not assignable from "
                                             + parameterTypes[n]);
-                            }    
+                            }
                             match = false;
                             break;
                         }
                     }
-                    
+
                     if (match) {
                         // get accessible version of method
                         Method method = getAccessibleMethod(clazz, methods[i]);
                         if (method != null) {
                             if (log.isTraceEnabled()) {
-                                log.trace(method + " accessible version of " 
+                                log.trace(method + " accessible version of "
                                             + methods[i]);
                             }
                             setMethodAccessible(method); // Default access superclass workaround
@@ -1016,7 +1002,7 @@ public class MethodUtils {
                                bestMatchCost = myCost;
                             }
                         }
-                        
+
                         log.trace("Couldn't find accessible method.");
                     }
                 }
@@ -1028,8 +1014,8 @@ public class MethodUtils {
         // didn't find a match
                log.trace("No match found.");
         }
-        
-        return bestMatch;                                        
+
+        return bestMatch;
     }
 
     /**
@@ -1050,14 +1036,14 @@ public class MethodUtils {
             // modifer is public.
             //
             // The following workaround solves the problem but will only
-            // work from sufficiently privilages code. 
+            // work from sufficiently privilages code.
             //
             // Better workarounds would be greatfully accepted.
             //
             if (!method.isAccessible()) {
                 method.setAccessible(true);
             }
-            
+
         } catch (SecurityException se) {
             // log but continue just in case the method.invoke works anyway
             Log log = LogFactory.getLog(MethodUtils.class);
@@ -1065,12 +1051,12 @@ public class MethodUtils {
                 boolean vulnerableJVM = false;
                 try {
                     String specVersion = System.getProperty("java.specification.version");
-                    if (specVersion.charAt(0) == '1' && 
+                    if (specVersion.charAt(0) == '1' &&
                             (specVersion.charAt(2) == '0' ||
                              specVersion.charAt(2) == '1' ||
                              specVersion.charAt(2) == '2' ||
                              specVersion.charAt(2) == '3')) {
-                             
+
                         vulnerableJVM = true;
                     }
                 } catch (SecurityException e) {
@@ -1107,10 +1093,10 @@ public class MethodUtils {
 
         return totalCost;
     }
-    
+
     /**
-     * Gets the number of steps required needed to turn the source class into the 
-     * destination class. This represents the number of steps in the object hierarchy 
+     * Gets the number of steps required needed to turn the source class into the
+     * destination class. This represents the number of steps in the object hierarchy
      * graph.
      * @param srcClass The source class
      * @param destClass The destination class
@@ -1127,9 +1113,9 @@ public class MethodUtils {
                 }
             }
             if (destClass.isInterface() && isAssignmentCompatible(destClass,srcClass)) {
-                // slight penalty for interface match. 
-                // we still want an exact match to override an interface match, but  
-                // an interface match should override anything where we have to get a 
+                // slight penalty for interface match.
+                // we still want an exact match to override an interface match, but
+                // an interface match should override anything where we have to get a
                 // superclass.
                 cost += 0.25f;
                 break;
@@ -1139,7 +1125,7 @@ public class MethodUtils {
         }
 
         /*
-         * If the destination class is null, we've travelled all the way up to 
+         * If the destination class is null, we've travelled all the way up to
          * an Object match. We'll penalize this by adding 1.5 to the cost.
          */
         if (srcClass == null) {
@@ -1148,8 +1134,8 @@ public class MethodUtils {
 
         return cost;
     }
-    
-    
+
+
     /**
      * <p>Determine whether a type can be used as a parameter in a method invocation.
      * This method handles primitive conversions correctly.</p>
@@ -1163,7 +1149,7 @@ public class MethodUtils {
      * For example, a <code>Long</code> will not match a <code>int</code>.
      *
      * @param parameterType the type of parameter accepted by the method
-     * @param parameterization the type of parameter being tested 
+     * @param parameterization the type of parameter being tested
      *
      * @return true if the assignement is compatible.
      */
@@ -1172,7 +1158,7 @@ public class MethodUtils {
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
         }
-        
+
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
             // is this the right behaviour?
@@ -1181,15 +1167,15 @@ public class MethodUtils {
                 return parameterWrapperClazz.equals(parameterization);
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * Gets the wrapper object class for the given primitive type class.
      * For example, passing <code>boolean.class</code> returns <code>Boolean.class</code>
      * @param primitiveType the primitive type class for which a match is to be found
-     * @return the wrapper type associated with the given primitive 
+     * @return the wrapper type associated with the given primitive
      * or null if no match is found
      */
     public static Class getPrimitiveWrapper(Class primitiveType) {
@@ -1211,15 +1197,15 @@ public class MethodUtils {
         } else if (char.class.equals(primitiveType)) {
             return Character.class;
         } else {
-            
+
             return null;
         }
     }
 
     /**
      * Gets the class for the primitive type corresponding to the primitive wrapper class given.
-     * For example, an instance of <code>Boolean.class</code> returns a <code>boolean.class</code>. 
-     * @param wrapperType the 
+     * For example, an instance of <code>Boolean.class</code> returns a <code>boolean.class</code>.
+     * @param wrapperType the
      * @return the primitive type class corresponding to the given wrapper class,
      * null if no match is found
      */
@@ -1249,7 +1235,7 @@ public class MethodUtils {
             return null;
         }
     }
-    
+
     /**
      * Find a non primitive representation for given primitive class.
      *
@@ -1259,7 +1245,7 @@ public class MethodUtils {
     public static Class toNonPrimitiveClass(Class clazz) {
         if (clazz.isPrimitive()) {
             Class primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
-            // the above method returns 
+            // the above method returns
             if (primitiveClazz != null) {
                 return primitiveClazz;
             } else {
@@ -1269,7 +1255,7 @@ public class MethodUtils {
             return clazz;
         }
     }
-    
+
 
     /**
      * Return the method from the cache, if present.
