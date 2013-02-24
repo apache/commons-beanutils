@@ -88,6 +88,12 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
     }
 
+    public void testInvokeConstructorNull() throws Exception {
+        Object obj = ConstructorUtils.invokeConstructor(TestBean.class, (Object) null);
+        assertNotNull(obj);
+        assertTrue(obj instanceof TestBean);
+    }
+
     public void testInvokeConstructorWithArgArray() throws Exception {
         Object[] args = { new Float(17.3f), "TEST" };
         Object obj = ConstructorUtils.invokeConstructor(TestBean.class,args);
