@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -184,64 +184,64 @@ public class MethodUtilsTestCase extends TestCase {
 
         }
     }
-    
+
     /**
      * <p> Test <code>invokeMethod</code>.
      */
     public void testInvokeMethod() throws Exception {
         // i'm going to test that the actual calls work first and then try them via reflection
-        
+
         AbstractParent parent = new AlphaBean("parent");
-        
+
         // try testAddChild through abstract superclass
         BetaBean childOne = new BetaBean("ChildOne");
-        
+
         assertEquals("Oh no! Badly coded test case! (1)", "ChildOne", parent.testAddChild(childOne));
-        
+
         // let's try MethodUtils version
         assertEquals(
-                        "Cannot invoke through abstract class (1)", 
-                        "ChildOne", 
+                        "Cannot invoke through abstract class (1)",
+                        "ChildOne",
                         MethodUtils.invokeMethod(parent, "testAddChild", childOne));
 
-        
+
         // try adding through interface
         AlphaBean childTwo = new AlphaBean("ChildTwo");
-        
+
         assertEquals("Oh no! Badly coded test case! (2)", "ChildTwo", parent.testAddChild(childTwo));
-        
+
         // let's try MethodUtils version
         assertEquals(
-                        "Cannot invoke through interface (1)", 
-                        "ChildTwo", 
+                        "Cannot invoke through interface (1)",
+                        "ChildTwo",
                         MethodUtils.invokeMethod(parent, "testAddChild", childTwo));
-       
-        
+
+
         Object[] params = new Object[2];
 
         assertEquals("Oh no! Badly coded test case! (3)", "ChildOne", parent.testAddChild2("parameter", childOne));
-        
-        
+
+
         // let's try MethodUtils version
         params[0] = "parameter";
         params[1] = childOne;
-        
+
         assertEquals(
-                        "Cannot invoke through abstract class (1)", 
-                        "ChildOne", 
+                        "Cannot invoke through abstract class (1)",
+                        "ChildOne",
                         MethodUtils.invokeMethod(parent, "testAddChild2", params));
-                        
+
         assertEquals("Oh no! Badly coded test case! (4)", "ChildTwo", parent.testAddChild2("parameter", childTwo));
-        
+
         // let's try MethodUtils version
         params[0] = "parameter";
         params[1] = childTwo;
-       
+
         assertEquals(
-                        "Cannot invoke through abstract class (1)", 
-                        "ChildTwo", 
+                        "Cannot invoke through abstract class (1)",
+                        "ChildTwo",
                         MethodUtils.invokeMethod(parent, "testAddChild2", params));
-        
+
         // test that exception is correctly thrown when a method cannot be found with matching params
         try {
             // the next line
@@ -250,36 +250,35 @@ public class MethodUtilsTestCase extends TestCase {
             MethodUtils.invokeMethod(parent, "bogus", childOne);
             // should get here!
             fail("No exception thrown when no appropriate method exists");
-            
+
         } catch (NoSuchMethodException e) {
             // this is what we're expecting!
         }
-        
+
         MethodUtils.invokeMethod(parent, "getName", null);
         MethodUtils.invokeMethod(parent, "getName", null, null);
         MethodUtils.invokeExactMethod(parent, "getName", null);
-        MethodUtils.invokeExactMethod(parent, "getName", null, null);        
+        MethodUtils.invokeExactMethod(parent, "getName", null, null);
     }
 
-    
     /**
      * <p> Test <code>invokeMethod</code> with a primitive.
      */
     public void testInvokeMethodWithPrimitives() throws Exception {
-        // first test that the bean works 
+        // first test that the bean works
         PrimitiveBean bean = new PrimitiveBean();
         bean.setFloat(20.0f);
         bean.setLong(10l);
         bean.setBoolean(true);
         bean.setInt(12);
         bean.setDouble(25.5d);
-        
+
         assertEquals("Bug in PrimitiveBean (1)", 20.0f, bean.getFloat(), 0.01f);
         assertEquals("Bug in PrimitiveBean (2)", 10, bean.getLong());
         assertEquals("Bug in PrimitiveBean (3)", true, bean.getBoolean());
         assertEquals("Bug in PrimitiveBean (4)", 12, bean.getInt());
         assertEquals("Bug in PrimitiveBean (5)", 25.5d, bean.getDouble(), 0.01f);
-        
+
         bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setBoolean", new Boolean(true));
         assertEquals("Call boolean property using invokeMethod", true, bean.getBoolean());
@@ -287,15 +286,15 @@ public class MethodUtilsTestCase extends TestCase {
         bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setFloat", new Float(20.0f));
         assertEquals("Call float property using invokeMethod", 20.0f, bean.getFloat(), 0.01f);
-        
+
         bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setLong", new Long(10));
         assertEquals("Call float property using invokeMethod", 10, bean.getLong());
-        
+
         bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setInt", new Integer(12));
         assertEquals("Set float property using invokeMethod", 12, bean.getInt());
-        
+
         bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setDouble", new Double(25.5d));
         assertEquals("Set float property using invokeMethod", 25.5d, bean.getDouble(), 0.01d);
@@ -321,7 +320,7 @@ public class MethodUtilsTestCase extends TestCase {
         value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);
         assertEquals("currentCounter value", current, ((Integer) value).intValue());
 
-        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter", 
+        MethodUtils.invokeExactStaticMethod(TestBean.class, "incrementCounter",
             new Object[] { new Integer(8) }, new Class[] { Number.class } );
         current += 16;
 
@@ -559,7 +558,7 @@ public class MethodUtilsTestCase extends TestCase {
         bean.setBar("new bar");
         assertEquals("Set value (foo)", bean.getFoo(), "new foo");
         assertEquals("Set value (bar)", bean.getBar(), "new bar");
-        
+
         // see if we can access public methods in a default access superclass
         // from a public access subclass instance
         MethodUtils.invokeMethod(bean, "setFoo", "alpha");
@@ -593,17 +592,17 @@ public class MethodUtilsTestCase extends TestCase {
             fail("Invoking setBar threw " + t);
         }
         assertEquals("Set value (bar:3)", "2222", bean.getBar());
-    
+
     }
-    
+
     public void testParentMethod() throws Exception {
         OutputStream os = new PrintStream(System.out);
         PrintStream ps = new PrintStream(System.out);
-        
+
         A a = new A();
         MethodUtils.invokeMethod(a, "foo", os);
         assertTrue("Method Invoked(1)", a.called);
-        
+
         a = new A();
         MethodUtils.invokeMethod(a, "foo", ps);
         assertTrue("Method Invoked(2)", a.called);
