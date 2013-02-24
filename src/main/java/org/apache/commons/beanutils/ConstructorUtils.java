@@ -194,6 +194,9 @@ public class ConstructorUtils {
             InstantiationException {
 
         Object[] args = { arg };
+        if (arg == null) {
+            args = null;
+        }
         return invokeExactConstructor(klass, args);
     }
 
