@@ -64,7 +64,7 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param klass the class to be constructed.
-     * @param arg the actual argument
+     * @param arg the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of <code>klazz</code>
      *
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -93,7 +93,7 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param klass the class to be constructed.
-     * @param args actual argument array
+     * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of <code>klazz</code>
      *
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -128,7 +128,7 @@ public class ConstructorUtils {
      * <p>The signatures should be assignment compatible.</p>
      *
      * @param klass the class to be constructed.
-     * @param args actual argument array
+     * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of <code>klazz</code>
      *
@@ -173,7 +173,7 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param klass the class to be constructed.
-     * @param arg the actual argument
+     * @param arg the actual argument. May be null (this will result in calling the default constructor).
      * @return new instance of <code>klazz</code>
      *
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -202,7 +202,7 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param klass the class to be constructed.
-     * @param args actual argument array
+     * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @return new instance of <code>klazz</code>
      *
      * @throws NoSuchMethodException If the constructor cannot be found
@@ -238,7 +238,7 @@ public class ConstructorUtils {
      * <p>The signatures should match exactly.</p>
      *
      * @param klass the class to be constructed.
-     * @param args actual argument array
+     * @param args actual argument array. May be null (this will result in calling the default constructor).
      * @param parameterTypes parameter types array
      * @return new instance of <code>klazz</code>
      *
