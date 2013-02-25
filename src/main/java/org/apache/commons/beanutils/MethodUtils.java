@@ -155,7 +155,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param arg use this argument
+     * @param arg use this argument. May be null (this will result in calling the
+     *  parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -196,7 +197,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -242,7 +244,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
      *
@@ -291,7 +294,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param arg use this argument
+     * @param arg use this argument. May be null (this will result in calling the
+     *  parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -323,7 +327,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -362,7 +367,8 @@ public class MethodUtils {
      *
      * @param object invoke method on this object
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
      *
@@ -410,7 +416,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
      *
@@ -468,7 +475,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param arg use this argument
+     * @param arg use this argument. May be null (this will result in calling the
+     *  parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -510,7 +518,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -557,7 +566,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @param parameterTypes match these parameters - treat null as empty array
      * @return The value returned by the invoked method
      *
@@ -607,7 +617,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param arg use this argument
+     * @param arg use this argument. May be null (this will result in calling the
+     *  parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
@@ -639,7 +650,8 @@ public class MethodUtils {
      *
      * @param objectClass invoke static method on this class
      * @param methodName get method with this name
-     * @param args use these arguments - treat null as empty array
+     * @param args use these arguments - treat null as empty array (passing null will
+     *  result in calling the parameterless method with name 'methodName').
      * @return The value returned by the invoked method
      *
      * @throws NoSuchMethodException if there is no such accessible method
