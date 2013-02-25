@@ -81,10 +81,7 @@ public class ConstructorUtils {
             InvocationTargetException,
             InstantiationException {
 
-        Object[] args = { arg };
-        if (arg == null) {
-            args = null;
-        }
+        Object[] args = toArray(arg);
         return invokeConstructor(klass, args);
     }
 
@@ -193,10 +190,7 @@ public class ConstructorUtils {
             InvocationTargetException,
             InstantiationException {
 
-        Object[] args = { arg };
-        if (arg == null) {
-            args = null;
-        }
+        Object[] args = toArray(arg);
         return invokeExactConstructor(klass, args);
     }
 
@@ -342,6 +336,14 @@ public class ConstructorUtils {
 
         // what else can we do?
         return null;
+    }
+
+    private static Object[] toArray(Object arg) {
+        Object[] args = null;
+        if (arg != null) {
+            args = new Object[] { arg };
+        }
+        return args;
     }
 
     // -------------------------------------------------------- Private Methods

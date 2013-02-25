@@ -671,9 +671,9 @@ public class MethodUtils {
 
 
     private static Object[] toArray(Object arg) {
-        Object[] args = {arg};
-        if (arg == null) {
-            args = null;
+        Object[] args = null;
+        if (arg != null) {
+            args = new Object[] { arg };
         }
         return args;
     }
