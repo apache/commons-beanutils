@@ -108,7 +108,7 @@ public class PropertyUtils {
 
     /**
      * The debugging detail level for this component.
-     * 
+     *
      * Note that this static variable will have unexpected side-effects if
      * this class is deployed in a shared classloader within a container.
      * However as it is actually completely ignored by this class due to its
@@ -146,7 +146,7 @@ public class PropertyUtils {
      *
      * <p>For more details see <code>PropertyUtilsBean</code>.</p>
      *
-     * @see PropertyUtilsBean#clearDescriptors  
+     * @see PropertyUtilsBean#clearDescriptors
      */
     public static void clearDescriptors() {
 
@@ -174,7 +174,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#copyProperties  
+     * @see PropertyUtilsBean#copyProperties
      */
     public static void copyProperties(Object dest, Object orig)
             throws IllegalAccessException, InvocationTargetException,
@@ -200,7 +200,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#describe  
+     * @see PropertyUtilsBean#describe
      */
     public static Map describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
@@ -232,7 +232,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#getIndexedProperty(Object,String)  
+     * @see PropertyUtilsBean#getIndexedProperty(Object,String)
      */
     public static Object getIndexedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -264,7 +264,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#getIndexedProperty(Object,String, int)  
+     * @see PropertyUtilsBean#getIndexedProperty(Object,String, int)
      */
     public static Object getIndexedProperty(Object bean,
                                             String name, int index)
@@ -292,7 +292,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#getMappedProperty(Object,String)  
+     * @see PropertyUtilsBean#getMappedProperty(Object,String)
      */
     public static Object getMappedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -320,7 +320,7 @@ public class PropertyUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
-     * @see PropertyUtilsBean#getMappedProperty(Object,String, String)  
+     * @see PropertyUtilsBean#getMappedProperty(Object,String, String)
      */
     public static Object getMappedProperty(Object bean,
                                            String name, String key)
@@ -382,7 +382,7 @@ public class PropertyUtils {
      *  <code>name</code> is null
      * @exception NestedNullException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException 
+     * @exception InvocationTargetException
      * if the property accessor method throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
@@ -393,7 +393,7 @@ public class PropertyUtils {
             NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getNestedProperty(bean, name);
-        
+
     }
 
 
@@ -609,7 +609,7 @@ public class PropertyUtils {
             NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getSimpleProperty(bean, name);
-        
+
     }
 
 
