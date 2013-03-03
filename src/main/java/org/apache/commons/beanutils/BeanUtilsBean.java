@@ -901,6 +901,9 @@ public class BeanUtilsBean {
         while (resolver.hasNested(name)) {
             try {
                 target = getPropertyUtils().getProperty(target, resolver.next(name));
+                if (target == null) { // the value of a nested property is null
+                    return;
+                }
                 name = resolver.remove(name);
             } catch (NoSuchMethodException e) {
                 return; // Skip this property setter
