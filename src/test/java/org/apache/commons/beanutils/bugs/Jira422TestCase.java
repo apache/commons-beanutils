@@ -22,6 +22,15 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
+/**
+ * getPropertyType return null on second descendant class
+ *
+ * <p />
+ * See https://issues.apache.org/jira/browse/BEANUTILS-422
+ * <p />
+ *
+ * @version $Revision$ $Date$
+ */
 public class Jira422TestCase extends TestCase {
 
     public void testRootBean() throws Exception {
