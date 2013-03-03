@@ -29,9 +29,9 @@ import java.lang.reflect.InvocationTargetException;
  * </p>
  */
 public class BeanPredicate implements Predicate {
-   
+
     private final Log log = LogFactory.getLog(this.getClass());
-    
+
     /** Name of the property whose value will be predicated */
     private String propertyName;
     /** <code>Predicate</code> to be applied to the property value */
@@ -59,7 +59,7 @@ public class BeanPredicate implements Predicate {
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
     public boolean evaluate(Object object) {
-       
+
         boolean evaluation = false;
 
         try {
@@ -90,12 +90,12 @@ public class BeanPredicate implements Predicate {
      * Gets the name of the property whose value is to be predicated.
      * in the evaluation.
      * @return the property name, not null
-     */ 
+     */
     public String getPropertyName() {
         return propertyName;
     }
 
-    /** 
+    /**
      * Sets the name of the property whose value is to be predicated.
      * @param propertyName the name of the property whose value is to be predicated,
      * not null
@@ -113,7 +113,7 @@ public class BeanPredicate implements Predicate {
         return predicate;
     }
 
-    /** 
+    /**
      * Sets the <code>Predicate</code> to be applied to the value of the named property
      * during {@link #evaluate(Object)}.
      * @param predicate <code>Predicate</code>, not null

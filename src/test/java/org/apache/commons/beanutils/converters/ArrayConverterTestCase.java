@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 package org.apache.commons.beanutils.converters;
 
 import java.lang.reflect.Array;
@@ -37,7 +37,7 @@ public class ArrayConverterTestCase extends TestCase {
     public ArrayConverterTestCase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
 
     /**
@@ -45,7 +45,7 @@ public class ArrayConverterTestCase extends TestCase {
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(ArrayConverterTestCase.class);        
+        return new TestSuite(ArrayConverterTestCase.class);
     }
 
     /** Set Up */
@@ -86,7 +86,7 @@ public class ArrayConverterTestCase extends TestCase {
             longList.add(LONGArray[i]);
         }
 
-        
+
         String msg = null;
 
         // String --> int[]
@@ -218,7 +218,7 @@ public class ArrayConverterTestCase extends TestCase {
         for (int i = 0; i < array.length; i++) {
             list.add(array[i]);
         }
-        
+
         // Expected results
         String msg = null;
         int[]     expectedInt     = new int[] {10, 11, 12, 13};
@@ -277,7 +277,7 @@ public class ArrayConverterTestCase extends TestCase {
 
         // Construct an array Converter for an integer array (i.e. int[]) using
         // an IntegerConverter as the element converter.
-        // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers 
+        // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers
         ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
 
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
@@ -317,7 +317,7 @@ public class ArrayConverterTestCase extends TestCase {
         int[]  zeroArray  = new int[0];
         int[]  oneArray   = new int[1];
         IntegerConverter intConverter = new IntegerConverter();
-        
+
         assertEquals("Null Default", null,   new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
         checkArray("Zero Length",  zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
         checkArray("One Length",   oneArray,  new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
@@ -329,7 +329,7 @@ public class ArrayConverterTestCase extends TestCase {
     public void testEmptyString() {
         int[]  zeroArray  = new int[0];
         IntegerConverter intConverter = new IntegerConverter();
-        
+
         checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
         assertEquals("Default String",  null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
     }

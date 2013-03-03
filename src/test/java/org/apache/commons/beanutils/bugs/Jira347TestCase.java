@@ -36,18 +36,18 @@ import org.apache.commons.beanutils.memoryleaktests.MemoryLeakTestCase;
  * @version $Revision$ $Date$
  */
 public class Jira347TestCase extends TestCase {
-    
+
     /**
      * Tests that MappedPropertyDescriptor does not throw an exception while re-creating a Method reference after it
      * has been garbage collected under the following circumstances.
      * - a class has a property 'mappedProperty'
      * - there is no getter for this property
      * - there is method setMappedProperty(MappedPropertyTestBean,MappedPropertyTestBean)
-     * 
+     *
      * In this case getMappedWriteMethod should not throw an exception after the method reference has been garbage collected.
-     * It is essential that in both cases the same method is returned or in both cases null. 
+     * It is essential that in both cases the same method is returned or in both cases null.
      * If the constructor of the MappedPropertyDescriptor would recognize the situation (of the first param not being of type String)
-     * this would be fine as well.          
+     * this would be fine as well.
      */
     public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
         String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
@@ -70,7 +70,7 @@ public class Jira347TestCase extends TestCase {
         catch (IntrospectionException e) {
           // this would be fine as well
         }
-        
+
         if (descriptor != null) {
             String m1 = getMappedWriteMethod(descriptor);
              forceGarbageCollection();
@@ -83,21 +83,21 @@ public class Jira347TestCase extends TestCase {
              }
         }
     }
-    
+
     /**
      * Retrieves the string representation of the mapped write method
      * for the given descriptor.
-     * This conversion is needed as there must not be strong reference to the 
+     * This conversion is needed as there must not be strong reference to the
      * Method object outside of this method as otherwise the garbage collector will not
-     * clean up the soft reference within the MappedPropertyDescriptor. 
-     * 
+     * clean up the soft reference within the MappedPropertyDescriptor.
+     *
      * @return the string representation or null if mapped write method does not exist
      */
     private String getMappedWriteMethod(MappedPropertyDescriptor descriptor) {
         Method m = descriptor.getMappedWriteMethod();
         return m == null ? null : m.toString();
     }
-    
+
     /**
      * Try to force the garbage collector to run by filling up memory and calling System.gc().
      */
@@ -117,16 +117,16 @@ public class Jira347TestCase extends TestCase {
             list.clear();
             list = null;
             // System.out.println("Count " + count + " : " + getMemoryStats());
-            System.gc(); 
+            System.gc();
             Thread.sleep(1000);
         }
         // System.out.println("After GC: " + getMemoryStats());
-        
+
         if (ref.get() != null) {
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }
     }
-    
+
     /**
      * Create a new class loader instance.
      */

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.converters;
 
@@ -38,7 +38,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     public BigIntegerConverterTestCase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
 
     public void setUp() throws Exception {
@@ -50,7 +50,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     }
 
     public static TestSuite suite() {
-        return new TestSuite(BigIntegerConverterTestCase.class);        
+        return new TestSuite(BigIntegerConverterTestCase.class);
     }
 
     public void tearDown() throws Exception {
@@ -58,15 +58,15 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     }
 
     // ------------------------------------------------------------------------
-    
+
     protected NumberConverter makeConverter() {
         return new BigIntegerConverter();
     }
-    
+
     protected NumberConverter makeConverter(Object defaultValue) {
         return new BigIntegerConverter(defaultValue);
     }
-    
+
     protected Class getExpectedType() {
         return BigInteger.class;
     }
@@ -74,7 +74,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= { 
+        String[] message= {
             "from String",
             "from String",
             "from String",
@@ -89,8 +89,8 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             "from Float",
             "from Double"
         };
-        
-        Object[] input = { 
+
+        Object[] input = {
             String.valueOf(Long.MIN_VALUE),
             "-17",
             "-1",
@@ -106,7 +106,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             new Double(12.2)
         };
 
-        BigInteger[] expected = { 
+        BigInteger[] expected = {
             BigInteger.valueOf(Long.MIN_VALUE),
             BigInteger.valueOf(-17),
             BigInteger.valueOf(-1),
@@ -121,12 +121,12 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             BigInteger.valueOf(11),
             BigInteger.valueOf(12)
         };
-        
+
         for(int i=0;i<expected.length;i++) {
             assertEquals(message[i] + " to BigInteger",expected[i],converter.convert(BigInteger.class,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-    
+
 }
 

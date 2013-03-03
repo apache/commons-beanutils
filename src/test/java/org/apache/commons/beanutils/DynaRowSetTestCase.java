@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -291,20 +291,20 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
     public void testLimitedRows() throws Exception {
-        
+
         // created one with low limit
         RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
         List rows = limitedDynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());
-        
+
     }
 
     /**
      * Test issues associated with Oracle JDBC driver.
-     * 
+     *
      * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
-     * 
+     *
      * @throws Exception if an error occurs
      */
     public void testInconsistentOracleDriver() throws Exception {
@@ -331,7 +331,7 @@ public class DynaRowSetTestCase extends TestCase {
         DynaBean firstRow = (DynaBean)inconsistentDynaClass.getRows().get(0);
         Class expectedType = null;
         DynaProperty property = null;
-        
+
         // Test Date
         property = firstRow.getDynaClass().getDynaProperty("dateproperty");
         expectedType = java.sql.Date.class;
@@ -348,7 +348,7 @@ public class DynaRowSetTestCase extends TestCase {
     /**
      * A proxy ResultSet implementation that returns Timstamp for a date column.
      *
-     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142 
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
      */
     private static class TestResultSetInconsistent extends  TestResultSet {
 
@@ -375,7 +375,7 @@ public class DynaRowSetTestCase extends TestCase {
      * A proxy ResultSetMetaData implementation that returns a class name that
      * is inconsistent with the type returned by the ResultSet.getObject() method.
      *
-     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142 
+     * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
      */
     private static class TestResultSetMetaDataInconsistent extends  TestResultSetMetaData {
 

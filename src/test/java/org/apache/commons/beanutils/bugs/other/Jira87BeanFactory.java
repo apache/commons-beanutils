@@ -54,7 +54,7 @@ public class Jira87BeanFactory {
 
         /**
          * This implementation returns the key value.
-         * 
+         *
          * @param key The key of the mapped value
          * @return The key value
          */

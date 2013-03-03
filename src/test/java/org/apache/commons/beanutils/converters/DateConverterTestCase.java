@@ -43,7 +43,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(DateConverterTestCase.class);        
+        return new TestSuite(DateConverterTestCase.class);
     }
 
     /** Set Up */
@@ -55,7 +55,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
     }
 
     // ------------------------------------------------------------------------
-    
+
     /**
      * Create the Converter with no default value.
      * @return A new Converter
@@ -63,7 +63,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new DateConverter();
     }
-    
+
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
@@ -83,7 +83,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
 
     /**
      * Convert from a Calendar to the appropriate Date type
-     * 
+     *
      * @param value The Calendar value to convert
      * @return The converted value
      */

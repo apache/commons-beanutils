@@ -41,7 +41,7 @@ public class ClassReloaderTestCase extends TestCase {
 
     public static class DummyClass {
     }
-        
+
     /**
      * Test basic operation of the ClassReloader.
      */
@@ -54,7 +54,7 @@ public class ClassReloaderTestCase extends TestCase {
 
         // the two Class objects contain the same bytecode, but are not equal
         assertTrue(sharedClass != componentClass);
-        
+
         // the two class objects have different classloaders
         assertSame(sharedLoader, sharedClass.getClassLoader());
         assertSame(componentLoader, componentClass.getClassLoader());

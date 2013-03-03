@@ -102,7 +102,7 @@ public class Jira345TestCase extends TestCase {
                 {{"11","12"}, {"13","14"}},
                 {{"21","22"}, {"23","24"}},
         };
-        
+
         public String[][] getMatr() {
             return matr;
         }

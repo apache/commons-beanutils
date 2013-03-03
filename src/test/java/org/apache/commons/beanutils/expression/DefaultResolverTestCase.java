@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 package org.apache.commons.beanutils.expression;
 
 import junit.framework.TestCase;
@@ -34,7 +34,7 @@ public class DefaultResolverTestCase extends TestCase {
     private final String[] validIndexProperties = new String[] {"a[1]", "b[12]", "cd[3]", "ef[45]", "ghi[6]", "jkl[789]", };
     private final String[] validIndexNames      = new String[] {"a",    "b",     "cd",    "ef",     "ghi",    "jkl"};
     private final int[]    validIndexValues     = new int[]    {1,      12,      3,       45,       6,        789};
-    
+
     // Mapped Properties Test Data
     private final String[] validMapProperties = new String[] {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]"};
     private final String[] validMapNames      = new String[] {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
@@ -59,7 +59,7 @@ public class DefaultResolverTestCase extends TestCase {
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(DefaultResolverTestCase.class);        
+        return new TestSuite(DefaultResolverTestCase.class);
     }
 
     /**

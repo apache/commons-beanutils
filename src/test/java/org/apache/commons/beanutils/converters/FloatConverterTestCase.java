@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.converters;
 
@@ -38,7 +38,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     public FloatConverterTestCase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
 
     public void setUp() throws Exception {
@@ -50,7 +50,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     }
 
     public static TestSuite suite() {
-        return new TestSuite(FloatConverterTestCase.class);        
+        return new TestSuite(FloatConverterTestCase.class);
     }
 
     public void tearDown() throws Exception {
@@ -58,15 +58,15 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     }
 
     // ------------------------------------------------------------------------
-    
+
     protected NumberConverter makeConverter() {
         return new FloatConverter();
     }
-    
+
     protected NumberConverter makeConverter(Object defaultValue) {
         return new FloatConverter(defaultValue);
     }
-    
+
     protected Class getExpectedType() {
         return Float.class;
     }
@@ -74,7 +74,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= { 
+        String[] message= {
             "from String",
             "from String",
             "from String",
@@ -89,8 +89,8 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             "from Float",
             "from Double"
         };
-        
-        Object[] input = { 
+
+        Object[] input = {
             String.valueOf(Float.MIN_VALUE),
             "-17.2",
             "-1.1",
@@ -105,8 +105,8 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             new Float(11.1),
             new Double(12.2),
         };
-        
-        Float[] expected = { 
+
+        Float[] expected = {
             new Float(Float.MIN_VALUE),
             new Float(-17.2),
             new Float(-1.1),
@@ -121,7 +121,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             new Float(11.1),
             new Float(12.2)
         };
-        
+
         for(int i=0;i<expected.length;i++) {
             assertEquals(
                 message[i] + " to Float",

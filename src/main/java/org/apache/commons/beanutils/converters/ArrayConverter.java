@@ -48,7 +48,7 @@ import org.apache.commons.beanutils.Converter;
  *         of the delegate {@link Converter}.</li>
  *     <li><b>Delimited Lists</b> - can Convert <b>to</b> and <b>from</b> a
  *         delimited list in String format.</li>
- *     <li><b>Conversion to String</b> - converts an array to a 
+ *     <li><b>Conversion to String</b> - converts an array to a
  *         <code>String</code> in one of two ways: as a <i>delimited list</i>
  *         or by converting the first element in the array to a String - this
  *         is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)}
@@ -58,15 +58,15 @@ import org.apache.commons.beanutils.Converter;
  *         within each other - see example below.</li>
  *     <li><b>Default Value</b></li>
  *         <ul>
- *             <li><b><i>No Default</b></i> - use the 
+ *             <li><b><i>No Default</b></i> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
  *                 constructor to create a converter which throws a
  *                 {@link ConversionException} if the value is missing or
  *                 invalid.</li>
- *             <li><b><i>Default values</b></i> - use the 
+ *             <li><b><i>Default values</b></i> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter, int)}
  *                 constructor to create a converter which returns a <i>default
- *                 value</i>. The <i>defaultSize</i> parameter controls the 
+ *                 value</i>. The <i>defaultSize</i> parameter controls the
  *                 <i>default value</i> in the following way:</li>
  *                 <ul>
  *                    <li><i>defaultSize &lt; 0</i> - default is <code>null</code></li>
@@ -208,7 +208,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param onlyFirstToString <code>true</code> converts only
      * the first value in the array to a String, <code>false</code>
      * converts all values in the array into a delimited list (default
-     * is <code>true</code> 
+     * is <code>true</code>
      */
     public void setOnlyFirstToString(boolean onlyFirstToString) {
         this.onlyFirstToString = onlyFirstToString;
@@ -327,7 +327,7 @@ public class ArrayConverter extends AbstractConverter {
      * </p>
      * <ul>
      *   <li>{@link Collection} values are returned unchanged</li>
-     *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date} 
+     *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
      *       values returned as a the only element in a List.</li>
      *   <li>All other types are converted to a String and parsed
      *       as a delimited list.</li>
@@ -353,7 +353,7 @@ public class ArrayConverter extends AbstractConverter {
             list.add(value);
             return list;
         }
-        
+
         return parseElements(type, value.toString());
     }
 

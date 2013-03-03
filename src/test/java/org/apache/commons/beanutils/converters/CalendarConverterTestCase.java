@@ -41,7 +41,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(CalendarConverterTestCase.class);        
+        return new TestSuite(CalendarConverterTestCase.class);
     }
 
     // ------------------------------------------------------------------------
@@ -52,7 +52,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new CalendarConverter();
     }
-    
+
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
@@ -72,7 +72,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
 
     /**
      * Convert from a java.util.Date to the Converter's type.
-     * 
+     *
      * @param value The Date value to convert
      * @return The converted value
      */

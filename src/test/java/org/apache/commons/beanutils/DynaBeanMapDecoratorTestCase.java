@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 package org.apache.commons.beanutils;
 
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      */
     public void setUp() throws Exception {
 
-        mapVal.clear(); 
+        mapVal.clear();
         mapVal.put("key1", "key1Value");
         mapVal.put("key2", "key2Value");
 

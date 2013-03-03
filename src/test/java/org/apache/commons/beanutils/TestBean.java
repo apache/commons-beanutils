@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -84,7 +84,7 @@ public class TestBean implements Serializable {
    public TestBean(double doubleProperty) {
        setDoubleProperty(doubleProperty);
    }
-   
+
     TestBean(int intProperty) {
         setIntProperty(intProperty);
     }
@@ -406,11 +406,11 @@ public class TestBean implements Serializable {
     * Another nested reference to another test bean,
     */
    private TestBean anotherNested = null;
-    
+
    public TestBean getAnotherNested() {
       return anotherNested;
    }
-    
+
    public void setAnotherNested( TestBean anotherNested ) {
       this.anotherNested = anotherNested;
    }
@@ -419,15 +419,15 @@ public class TestBean implements Serializable {
     * Another nested reference to another test bean,
     */
    private DynaBean nestedDynaBean = null;
-    
+
    public DynaBean getNestedDynaBean() {
       return nestedDynaBean;
    }
-    
+
    public void setNestedDynaBean(DynaBean nestedDynaBean) {
       this.nestedDynaBean = nestedDynaBean;
    }
-   
+
     /*
      * Another nested reference to a bean containing mapp properties
      */
@@ -618,10 +618,10 @@ public class TestBean implements Serializable {
     }
 
     /**
-     * Increments the current value of the count by the 
-     * specified amount * 2. It has the same name 
-     * as the method above so as to test the looseness 
-     * of getMethod. 
+     * Increments the current value of the count by the
+     * specified amount * 2. It has the same name
+     * as the method above so as to test the looseness
+     * of getMethod.
      */
     public static void incrementCounter(Number amount) {
         counter += 2 * amount.intValue();

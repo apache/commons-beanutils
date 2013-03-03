@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.converters;
 
@@ -40,7 +40,7 @@ public class URLConverterTestCase extends TestCase {
     public URLConverterTestCase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
 
     public void setUp() throws Exception {
@@ -48,7 +48,7 @@ public class URLConverterTestCase extends TestCase {
     }
 
     public static TestSuite suite() {
-        return new TestSuite(URLConverterTestCase.class);        
+        return new TestSuite(URLConverterTestCase.class);
     }
 
     public void tearDown() throws Exception {
@@ -56,11 +56,11 @@ public class URLConverterTestCase extends TestCase {
     }
 
     // ------------------------------------------------------------------------
-    
+
     protected Converter makeConverter() {
         return new URLConverter();
     }
-    
+
     protected Class getExpectedType() {
         return URL.class;
     }
@@ -68,7 +68,7 @@ public class URLConverterTestCase extends TestCase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= { 
+        String[] message= {
             "from String",
             "from String",
             "from String",
@@ -78,8 +78,8 @@ public class URLConverterTestCase extends TestCase {
             "from String",
             "from String",
         };
-        
-        Object[] input = { 
+
+        Object[] input = {
             "http://www.apache.org",
             "http://www.apache.org/",
             "ftp://cvs.apache.org",
@@ -89,8 +89,8 @@ public class URLConverterTestCase extends TestCase {
             "http://user:admin@www.apache.org:50/one/two.three",
             "http://notreal.apache.org",
         };
-        
-        URL[] expected = { 
+
+        URL[] expected = {
             new URL("http://www.apache.org"),
             new URL("http://www.apache.org/"),
             new URL("ftp://cvs.apache.org"),
@@ -100,16 +100,16 @@ public class URLConverterTestCase extends TestCase {
             new URL("http://user:admin@www.apache.org:50/one/two.three"),
             new URL("http://notreal.apache.org")
         };
-        
+
         for(int i=0;i<expected.length;i++) {
             assertEquals(message[i] + " to URL",expected[i],converter.convert(URL.class,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
-        
+
         for(int i=0;i<expected.length;i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
-    
+
 }
 

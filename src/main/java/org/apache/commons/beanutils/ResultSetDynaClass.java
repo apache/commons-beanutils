@@ -225,9 +225,9 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
     // ------------------------------------------------------ Protected Methods
-    
+
     /**
-     * <p>Loads the class of the given name which by default uses the class loader used 
+     * <p>Loads the class of the given name which by default uses the class loader used
      * to load this library.
      * Dervations of this class could implement alternative class loading policies such as
      * using custom ClassLoader or using the Threads's context class loader etc.
@@ -235,12 +235,12 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @param className The name of the class to load
      * @return The loaded class
      * @throws SQLException if the class cannot be loaded
-     */        
+     */
     protected Class loadClass(String className) throws SQLException {
 
         try {
             return getClass().getClassLoader().loadClass(className);
-        } 
+        }
         catch (Exception e) {
             throw new SQLException("Cannot load column class '" +
                                    className + "': " + e);

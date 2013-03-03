@@ -88,7 +88,7 @@ public class Jira339TestCase extends TestCase {
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      */
     public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
-        
+
         TestBean bean = new TestBean();
         try {
             BeanUtils.setProperty(bean, "comparator", null);
@@ -103,7 +103,7 @@ public class Jira339TestCase extends TestCase {
      * Test {@link BeanUtils#populate(Object, Map)}
      */
     public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
-        
+
         TestBean bean = new TestBean();
         try {
             Map properties = new HashMap();
@@ -139,6 +139,6 @@ public class Jira339TestCase extends TestCase {
         public void setComparator(Comparator comparator) {
             this.comparator = comparator;
         }
-        
+
     }
 }

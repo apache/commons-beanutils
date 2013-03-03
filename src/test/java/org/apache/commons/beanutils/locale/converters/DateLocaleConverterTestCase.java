@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -39,10 +39,10 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverterTestCase.class);
 
-    protected String localizedDatePattern; 
+    protected String localizedDatePattern;
     protected String localizedDateValue;
     protected String localizedShortDateValue;
-    protected String defaultDatePattern; 
+    protected String defaultDatePattern;
     protected String defaultDateValue;
     protected String defaultShortDateValue;
 
@@ -53,7 +53,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public DateLocaleConverterTestCase(String name) {
         super(name);
     }
-    
+
     // -------------------------------------------------- Overall Test Methods
 
     /**
@@ -97,7 +97,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         DateFormatSymbols localizedSymbols = new DateFormatSymbols(localizedLocale);
         String localChars    = localizedSymbols.getLocalPatternChars();
 
-        // different JDK versions seem to have different numbers of pattern characters 
+        // different JDK versions seem to have different numbers of pattern characters
         int lth = localChars.length() > expectedChars.length() ? expectedChars.length() :
                      localChars.length() < expectedChars.length() ? localChars.length() : expectedChars.length();
         validLocalDateSymbols = expectedChars.substring(0, lth).equals(localChars.substring(0, lth));
@@ -117,87 +117,87 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void testSetLenient() {
         // make sure that date format works as expected
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
-        
+
         // test with no leniency
         dateFormat.setLenient(false);
-        
+
         try {
-            
+
             dateFormat.parse("Feb 10, 2001");
-            
+
         } catch (ParseException e) {
             fail("Could not parse date (1) - " + e.getMessage());
         }
-        
+
         try {
-        
+
             dateFormat.parse("Feb 31, 2001");
             fail("Parsed illegal date (1)");
-        
+
         } catch (ParseException e) {
             // that's what we expected
         }
-        
+
         // test with leniency
         dateFormat.setLenient(true);
-        
+
         try {
-            
+
             dateFormat.parse("Feb 10, 2001");
-            
+
         } catch (ParseException e) {
             fail("Could not parse date (2) - " + e.getMessage());
         }
-        
+
         try {
-        
+
             dateFormat.parse("Feb 31, 2001");
-        
+
         } catch (ParseException e) {
             fail("Could not parse date (3) - " + e.getMessage());
         }
-        
+
         // now repeat tests for converter
         DateLocaleConverter converter = new DateLocaleConverter(Locale.UK, "MMM dd, yyyy");
-        
+
         // test with no leniency
         converter.setLenient(false);
         assertEquals("Set lenient failed", converter.isLenient(), false);
-        
+
         try {
-            
+
             converter.convert("Feb 10, 2001");
-            
+
         } catch (ConversionException e) {
             fail("Could not parse date (4) - " + e.getMessage());
         }
-        
+
         try {
-        
+
             converter.convert("Feb 31, 2001");
             assertEquals("Set lenient failed", converter.isLenient(), false);
             fail("Parsed illegal date (2)");
-        
+
         } catch (ConversionException e) {
             // that's what we expected
         }
-        
+
         // test with leniency
         converter.setLenient(true);
         assertEquals("Set lenient failed", converter.isLenient(), true);
-        
+
         try {
-            
+
             converter.convert("Feb 10, 2001");
-            
+
         } catch (ConversionException e) {
             fail("Could not parse date (5) - " + e.getMessage());
         }
-        
+
         try {
-        
+
             converter.convert("Feb 31, 2001");
-        
+
         } catch (ConversionException e) {
             fail("Could not parse date (6) - " + e.getMessage());
         }
@@ -212,7 +212,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         if (!validLocalDateSymbols) {
             log.error("Invalid locale symbols *** skipping testConstructorMain() **");
             return;
-        } 
+        }
 
         // ------------- Construct with localized pattern ------------
         converter = new DateLocaleConverter(defaultValue,
@@ -235,7 +235,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // **************************************************************************
         // Convert with specified type
-        // 
+        //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Date.
         //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
@@ -259,9 +259,9 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter() constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_2() {
 
@@ -278,9 +278,9 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter(locPattern) constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_3() {
 
@@ -323,7 +323,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         if (!validLocalDateSymbols) {
             log.error("Invalid locale symbols *** skipping testConstructor_5() **");
             return;
-        } 
+        }
 
         // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale, true);
@@ -362,7 +362,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         if (!validLocalDateSymbols) {
             log.error("Invalid locale symbols *** skipping testConstructor_7() **");
             return;
-        } 
+        }
 
         // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale, localizedDatePattern, true);

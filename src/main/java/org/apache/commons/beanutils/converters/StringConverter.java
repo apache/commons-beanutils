@@ -36,7 +36,7 @@ package org.apache.commons.beanutils.converters;
  * object being converted (or possibly has a map of converters, and looks
  * them up based on the class of the input object). However this is not part
  * of the existing ConvertUtils framework.
- *  
+ *
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$

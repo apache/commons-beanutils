@@ -112,7 +112,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new SqlTimestampConverter();
     }
-    
+
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
@@ -132,7 +132,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     /**
      * Convert from a Calendar to the appropriate Date type
-     * 
+     *
      * @param value The Calendar value to convert
      * @return The converted value
      */

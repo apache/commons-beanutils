@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils;
 
-/** 
+/**
  * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query
  * against given bean since a nested bean referenced is null.
  *
@@ -26,19 +26,19 @@ package org.apache.commons.beanutils;
  */
 
 public class NestedNullException extends BeanAccessLanguageException {
-    
+
     // --------------------------------------------------------- Constuctors
-    
-    /** 
+
+    /**
      * Constructs a <code>NestedNullException</code> without a detail message.
      */
     public NestedNullException() {
         super();
     }
-    
+
     /**
      * Constructs a <code>NestedNullException</code> without a detail message.
-     * 
+     *
      * @param message the detail message explaining this exception
      */
     public NestedNullException(String message) {

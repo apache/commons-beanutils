@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.ConversionException;
  * on how this instance is constructed.
  * <p>
  * There is also some special handling where the input is of type int[].
- * See method convert for more details.  
+ * See method convert for more details.
  *
  * @author Craig R. McClanahan
  * @version $Revision$ $Date$
@@ -77,7 +77,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * <p>Model object for type comparisons.</p>
      */
     private static final String[] MODEL = new String[0];
-    
+
     /**
      * <p> Model object for int arrays.</p>
      */
@@ -99,18 +99,18 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * element in the string array is the result of calling Integer.toString
      * on the corresponding element of the int array. This was added as a
      * result of bugzilla request #18297 though there is not complete
-     * agreement that this feature should have been added. 
+     * agreement that this feature should have been added.
      * <p>
      * In all other cases, this method calls toString on the input object, then
-     * assumes the result is a comma-separated list of values. The values are 
+     * assumes the result is a comma-separated list of values. The values are
      * split apart into the individual items and returned as the elements of an
      * array. See class AbstractArrayConverter for the exact input formats
      * supported.
-     * 
+     *
      * @param type is the data type to which this value should be converted.
      * It is expected to be the class for type String[] (though this parameter
      * is actually ignored by this method).
-     * 
+     *
      * @param value is the input value to be converted. If null then the
      * default value is returned or an exception thrown if no default value
      * exists.

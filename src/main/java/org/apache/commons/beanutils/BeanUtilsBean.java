@@ -58,18 +58,18 @@ public class BeanUtilsBean {
 
     // ------------------------------------------------------ Private Class Variables
 
-    /** 
+    /**
      * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
      */
-    private static final ContextClassLoaderLocal 
+    private static final ContextClassLoaderLocal
             BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
                         protected Object initialValue() {
                             return new BeanUtilsBean();
                         }
                     };
-    
-    /** 
+
+    /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
@@ -80,11 +80,11 @@ public class BeanUtilsBean {
         return (BeanUtilsBean) BEANS_BY_CLASSLOADER.get();
     }
 
-    /** 
+    /**
      * Sets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
-     * 
+     *
      * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
     public static void setInstance(BeanUtilsBean newInstance) {
@@ -97,10 +97,10 @@ public class BeanUtilsBean {
      * Logging for this instance
      */
     private final Log log = LogFactory.getLog(BeanUtils.class);
-    
+
     /** Used to perform conversions between object types when setting properties */
     private final ConvertUtilsBean convertUtilsBean;
-    
+
     /** Used to access properties*/
     private final PropertyUtilsBean propertyUtilsBean;
 
@@ -109,19 +109,19 @@ public class BeanUtilsBean {
 
     // --------------------------------------------------------- Constuctors
 
-    /** 
-     * <p>Constructs an instance using new property 
+    /**
+     * <p>Constructs an instance using new property
      * and conversion instances.</p>
      */
     public BeanUtilsBean() {
         this(new ConvertUtilsBean(), new PropertyUtilsBean());
     }
 
-    /** 
+    /**
      * <p>Constructs an instance using given conversion instances
      * and new {@link PropertyUtilsBean} instance.</p>
      *
-     * @param convertUtilsBean use this <code>ConvertUtilsBean</code> 
+     * @param convertUtilsBean use this <code>ConvertUtilsBean</code>
      * to perform conversions from one object to another
      *
      * @since 1.8.0
@@ -130,18 +130,18 @@ public class BeanUtilsBean {
         this(convertUtilsBean, new PropertyUtilsBean());
     }
 
-    /** 
+    /**
      * <p>Constructs an instance using given property and conversion instances.</p>
      *
-     * @param convertUtilsBean use this <code>ConvertUtilsBean</code> 
+     * @param convertUtilsBean use this <code>ConvertUtilsBean</code>
      * to perform conversions from one object to another
      * @param propertyUtilsBean use this <code>PropertyUtilsBean</code>
      * to access properties
      */
     public BeanUtilsBean(
-                            ConvertUtilsBean convertUtilsBean, 
+                            ConvertUtilsBean convertUtilsBean,
                             PropertyUtilsBean propertyUtilsBean) {
-                            
+
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
     }
@@ -225,7 +225,7 @@ public class BeanUtilsBean {
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null or if the <code>dest</code> 
+     *  <code>orig</code> argument is null or if the <code>dest</code>
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
      * @exception InvocationTargetException if the property accessor method
@@ -458,7 +458,7 @@ public class BeanUtilsBean {
      * properties, but only if there are no indexed properties.</p>
      *
      * <p><strong>Warning:</strong> if any of the bean property implementations
-     * contain (directly or indirectly) a call to this method then 
+     * contain (directly or indirectly) a call to this method then
      * a stack overflow may result. For example:
      * <code><pre>
      * class MyBean
@@ -491,11 +491,11 @@ public class BeanUtilsBean {
         //            return (Collections.EMPTY_MAP);
             return (new java.util.HashMap());
         }
-        
+
         if (log.isDebugEnabled()) {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
-            
+
         Map description = new HashMap();
         if (bean instanceof DynaBean) {
             DynaProperty[] descriptors =
@@ -776,14 +776,14 @@ public class BeanUtilsBean {
      * <code>int</code>, <code>long</code>, <code>float</code>, and
      * <code>double</code>.  In addition, array setters for these types (or the
      * corresponding primitive types) can also be identified.</p>
-     * 
+     *
      * <p>The particular setter method to be called for each property is
      * determined using the usual JavaBeans introspection mechanisms.  Thus,
      * you may identify custom setter methods using a BeanInfo class that is
      * associated with the class of the bean itself.  If no such BeanInfo
      * class is available, the standard method name conversion ("set" plus
      * the capitalized name of the property in question) is used.</p>
-     * 
+     *
      * <p><strong>NOTE</strong>:  It is contrary to the JavaBeans Specification
      * to have more than one setter method (with different argument
      * signatures) for the same property.</p>
@@ -838,7 +838,7 @@ public class BeanUtilsBean {
      * <p>Set the specified property value, performing type conversions as
      * required to conform to the type of the destination property.</p>
      *
-     * <p>If the property is read only then the method returns 
+     * <p>If the property is read only then the method returns
      * without throwing an exception.</p>
      *
      * <p>If <code>null</code> is passed into a property expecting a primitive value,
@@ -1021,8 +1021,8 @@ public class BeanUtilsBean {
         }
 
     }
-    
-    /** 
+
+    /**
      * Gets the <code>ConvertUtilsBean</code> instance used to perform the conversions.
      *
      * @return The ConvertUtils bean instance
@@ -1030,7 +1030,7 @@ public class BeanUtilsBean {
     public ConvertUtilsBean getConvertUtils() {
         return convertUtilsBean;
     }
-    
+
     /**
      * Gets the <code>PropertyUtilsBean</code> instance used to access properties.
      *
@@ -1040,9 +1040,9 @@ public class BeanUtilsBean {
         return propertyUtilsBean;
     }
 
-    /** 
+    /**
      * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     * 
+     *
      * @param  throwable The throwable.
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.
@@ -1086,10 +1086,10 @@ public class BeanUtilsBean {
      * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
      * or <code>null</code> if the method
      * does not exist.
-     * 
+     *
      * @return A <code>Method<code> for <code>Throwable.initCause</code>, or
      * <code>null</code> if unavailable.
-     */ 
+     */
     private static Method getInitCauseMethod() {
         try {
             Class[] paramsClasses = new Class[] { Throwable.class };

@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8.4" date="in SVN" description="Bug fix for 1.8.3">
+      <action dev="britter" type="update" issue="BEANUTILS-429" >
+         Delete trailing white spaces and white spaces on empty lines from all files
+      </action>
       <action dev="britter" type="update" issue="BEANUTILS-427" >
          Configure Checkstyle to check for trailing white spaces and white spaces on empty lines
       </action>

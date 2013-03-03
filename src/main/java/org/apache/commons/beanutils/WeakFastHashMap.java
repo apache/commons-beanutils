@@ -46,12 +46,12 @@ import java.util.WeakHashMap;
  * <code>java.util.HashMap</code> directly (with no synchronization), for
  * maximum performance.</p>
  *
- * <p><strong>NOTE</strong>: <i>This class is not cross-platform.  
+ * <p><strong>NOTE</strong>: <i>This class is not cross-platform.
  * Using it may cause unexpected failures on some architectures.</i>
- * It suffers from the same problems as the double-checked locking idiom.  
- * In particular, the instruction that clones the internal collection and the 
- * instruction that sets the internal reference to the clone can be executed 
- * or perceived out-of-order.  This means that any read operation might fail 
+ * It suffers from the same problems as the double-checked locking idiom.
+ * In particular, the instruction that clones the internal collection and the
+ * instruction that sets the internal reference to the clone can be executed
+ * or perceived out-of-order.  This means that any read operation might fail
  * unexpectedly, as it may be reading the state of the internal collection
  * before the internal collection is fully formed.
  * For more information on the double-checked locking idiom, see the
@@ -60,7 +60,7 @@ import java.util.WeakHashMap;
  *
  * @since Commons Collections 1.0
  * @version $Revision$ $Date$
- * 
+ *
  * @author Craig R. McClanahan
  * @author Stephen Colebourne
  */
@@ -167,7 +167,7 @@ class WeakFastHashMap extends HashMap {
 
     /**
      * Return the number of key-value mappings in this map.
-     * 
+     *
      * @return the current size of the map
      */
     public int size() {
@@ -182,7 +182,7 @@ class WeakFastHashMap extends HashMap {
 
     /**
      * Return <code>true</code> if this map contains no mappings.
-     * 
+     *
      * @return is the map currently empty
      */
     public boolean isEmpty() {
@@ -318,7 +318,7 @@ class WeakFastHashMap extends HashMap {
 
     // Basic object methods
     // ----------------------------------------------------------------------
-    
+
     /**
      * Compare the specified object with this list for equality.  This
      * implementation uses exactly the code that is used to define the
@@ -358,7 +358,7 @@ class WeakFastHashMap extends HashMap {
                 }
             }
             return (true);
-            
+
         } else {
             synchronized (map) {
                 if (mo.size() != map.size()) {
@@ -388,7 +388,7 @@ class WeakFastHashMap extends HashMap {
      * Return the hash code value for this map.  This implementation uses
      * exactly the code that is used to define the list hash function in the
      * documentation for the <code>Map.hashCode</code> method.
-     * 
+     *
      * @return suitable integer hash code
      */
     public int hashCode() {
@@ -414,7 +414,7 @@ class WeakFastHashMap extends HashMap {
     /**
      * Return a shallow copy of this <code>FastHashMap</code> instance.
      * The keys and values themselves are not copied.
-     * 
+     *
      * @return a clone of this map
      */
     public Object clone() {
@@ -432,7 +432,7 @@ class WeakFastHashMap extends HashMap {
 
     // Map views
     // ----------------------------------------------------------------------
-    
+
     /**
      * Return a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a <code>Map.Entry</code>.
@@ -472,11 +472,11 @@ class WeakFastHashMap extends HashMap {
     protected Map createMap(int capacity, float factor) {
         return new WeakHashMap(capacity, factor);
     }
-    
+
     protected Map createMap(Map map) {
         return new WeakHashMap(map);
     }
-    
+
     protected Map cloneMap(Map map) {
         return createMap(map);
     }
@@ -660,7 +660,7 @@ class WeakFastHashMap extends HashMap {
                 this.expected = map;
                 this.iterator = expected.entrySet().iterator();
             }
- 
+
             public boolean hasNext() {
                 if (expected != map) {
                     throw new ConcurrentModificationException();
@@ -701,44 +701,44 @@ class WeakFastHashMap extends HashMap {
      * Set implementation over the keys of the FastHashMap
      */
     private class KeySet extends CollectionView implements Set {
-    
+
         protected Collection get(Map map) {
             return map.keySet();
         }
-    
+
         protected Object iteratorNext(Map.Entry entry) {
             return entry.getKey();
         }
-    
+
     }
-    
+
     /**
      * Collection implementation over the values of the FastHashMap
      */
     private class Values extends CollectionView {
-    
+
         protected Collection get(Map map) {
             return map.values();
         }
-    
+
         protected Object iteratorNext(Map.Entry entry) {
             return entry.getValue();
         }
     }
-    
+
     /**
      * Set implementation over the entries of the FastHashMap
      */
     private class EntrySet extends CollectionView implements Set {
-    
+
         protected Collection get(Map map) {
             return map.entrySet();
         }
-    
+
         protected Object iteratorNext(Map.Entry entry) {
             return entry;
         }
-    
+
     }
 
 }

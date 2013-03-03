@@ -88,7 +88,7 @@ public class Jira357TestCase extends TestCase {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
-        
+
         // FIXME the isBar() method returning AbstractTestBean.class as the
         //       declaring class instead of ConcreteTestBean.class
         //       causing this test to fail - so its commented out for now
@@ -106,7 +106,7 @@ public class Jira357TestCase extends TestCase {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     private void checkReadMethod(String propertyName, Class expectedDeclaringClass) throws Exception {
-        
+
         PropertyDescriptor[] descriptors = null;
         try {
             descriptors = PropertyUtils.getPropertyDescriptors(ConcreteTestBean.class);
@@ -147,7 +147,7 @@ public class Jira357TestCase extends TestCase {
         public abstract void setBar(boolean bar);
 
         public abstract AbstractTestBean.InnerClass getInnerClassProperty();
-        
+
         /** Inner Class */
         public abstract static class InnerClass {
             private String firstName;

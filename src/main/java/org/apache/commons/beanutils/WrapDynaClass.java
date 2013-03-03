@@ -35,7 +35,7 @@ import java.util.WeakHashMap;
  *
  * <p>
  * It is suggested that this class should not usually need to be used directly
- * to create new <code>WrapDynaBean</code> instances. 
+ * to create new <code>WrapDynaBean</code> instances.
  * It's usually better to call the <code>WrapDynaBean</code> constructor directly.
  * For example:</p>
  * <code><pre>
@@ -122,7 +122,7 @@ public class WrapDynaClass implements DynaClass {
     // ------------------------------------------------------- Static Variables
 
 
-    private static final ContextClassLoaderLocal CLASSLOADER_CACHE = 
+    private static final ContextClassLoaderLocal CLASSLOADER_CACHE =
         new ContextClassLoaderLocal() {
             protected Object initialValue() {
                 return new WeakHashMap();
@@ -159,12 +159,12 @@ public class WrapDynaClass implements DynaClass {
      *              COMPATIBLE WITH PREVIOUS RELEASES.
      *
      * There are two issues here:
-     * 
+     *
      * 1) Memory Issues: The static HashMap caused memory problems (See BEANUTILS-59)
      *    to resolve this it has been moved into a ContextClassLoaderLocal instance
      *    (named CLASSLOADER_CACHE above) which holds one copy per
      *    ClassLoader in a WeakHashMap.
-     * 
+     *
      * 2) Binary Compatibility: As the "dynaClasses" static HashMap is "protected"
      *    removing it breaks BeanUtils binary compatibility with previous versions.
      *    To resolve this all the methods have been overriden to delegate to the
@@ -286,8 +286,8 @@ public class WrapDynaClass implements DynaClass {
 
     /**
      * <p>Instantiates a new standard JavaBean instance associated with
-     * this DynaClass and return it wrapped in a new WrapDynaBean   
-     * instance. <strong>NOTE</strong> the JavaBean should have a 
+     * this DynaClass and return it wrapped in a new WrapDynaBean
+     * instance. <strong>NOTE</strong> the JavaBean should have a
      * no argument constructor.</p>
      *
      * <strong>NOTE</strong> - Most common use cases should not need to use

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -266,14 +266,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         // Create a bean and set a value
         WrapDynaBean origBean = new WrapDynaBean(new TestBean());
         Integer newValue = new Integer(789);
-        assertEquals("origBean default", new Integer(123), (Integer)origBean.get("intProperty"));
-        origBean.set("intProperty", newValue); 
-        assertEquals("origBean new value", newValue, (Integer)origBean.get("intProperty"));
-        
+        assertEquals("origBean default", new Integer(123), origBean.get("intProperty"));
+        origBean.set("intProperty", newValue);
+        assertEquals("origBean new value", newValue, origBean.get("intProperty"));
+
         // Serialize/Deserialize & test value
         WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
-        assertEquals("bean value", newValue, (Integer)bean.get("intProperty"));
-        
+        assertEquals("bean value", newValue, bean.get("intProperty"));
+
     }
 
     /**

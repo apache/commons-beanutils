@@ -39,10 +39,10 @@ public class Jira92TestCase extends TestCase {
     }
 
     /**
-     * Test bean which has only indexed setter 
+     * Test bean which has only indexed setter
      */
     public static class Jira92TestBean {
-        
+
         private final java.util.Date[] dateArrayProperty = new java.util.Date[10];
 
         /**

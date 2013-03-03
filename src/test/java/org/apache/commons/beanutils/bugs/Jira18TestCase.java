@@ -30,8 +30,8 @@ import org.apache.commons.logging.LogFactory;
  * <p />
  * See https://issues.apache.org/jira/browse/BEANUTILS-18
  * <p />
- * 
- * 
+ *
+ *
  * <p />
  * This test case demonstrates the issue.
  *

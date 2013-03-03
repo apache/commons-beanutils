@@ -24,7 +24,7 @@ import org.apache.commons.beanutils.bugs.Jira18TestCase;
 /**
  * Factory whcih creates <i>package</i> scope beans with
  * public methods for {@link Jira18TestCase}.
- * 
+ *
  * @version $Revision$ $Date$
  */
 public class Jira18BeanFactory {
@@ -52,7 +52,7 @@ public class Jira18BeanFactory {
         }
         /**
          * Return simple property.
-         * 
+         *
          * @return The simple value
          */
         public String getSimple() {
@@ -61,7 +61,7 @@ public class Jira18BeanFactory {
 
         /**
          * Set simple property.
-         * 
+         *
          * @param simple The simple value
          */
         public void setSimple(String simple) {
@@ -70,7 +70,7 @@ public class Jira18BeanFactory {
 
         /**
          * Return indexed property.
-         * 
+         *
          * @param index The index
          * @return The indexed value
          */
@@ -80,7 +80,7 @@ public class Jira18BeanFactory {
 
         /**
          * Set indexed property.
-         * 
+         *
          * @param index The index
          * @param value The indexed value
          */
@@ -90,7 +90,7 @@ public class Jira18BeanFactory {
 
         /**
          * Return mapped property.
-         * 
+         *
          * @param key The mapped key
          * @return The mapped value
          */
@@ -100,7 +100,7 @@ public class Jira18BeanFactory {
 
         /**
          * Set mapped property.
-         * 
+         *
          * @param key The mapped key
          * @param value The mapped value
          */

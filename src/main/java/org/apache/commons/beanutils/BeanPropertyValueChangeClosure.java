@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils;
 
 import org.apache.commons.collections.Closure;
@@ -80,7 +80,7 @@ import java.lang.reflect.InvocationTargetException;
  * @see org.apache.commons.collections.Closure
  */
 public class BeanPropertyValueChangeClosure implements Closure {
-   
+
     /** For logging. */
     private final Log log = LogFactory.getLog(this.getClass());
 
@@ -161,7 +161,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
     public void execute(Object object) {
-       
+
         try {
             PropertyUtils.setProperty(object, propertyName, propertyValue);
         } catch (IllegalArgumentException e) {

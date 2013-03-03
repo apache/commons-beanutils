@@ -98,7 +98,7 @@ public class Jira157TestCase extends TestCase {
             }
             public String getY() {
                 return "y-value";
-            }             
+            }
         };
         Map result = null;
         try {
@@ -124,7 +124,7 @@ public class Jira157TestCase extends TestCase {
             }
             public String getY() {
                 return "y-value";
-            }             
+            }
         };
         Map result = null;
         try {

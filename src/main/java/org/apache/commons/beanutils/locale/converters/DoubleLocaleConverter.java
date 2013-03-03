@@ -23,10 +23,10 @@ import java.util.Locale;
 
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+ * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.lang.Double</code> object,
- * optionally using a default value or throwing a 
+ * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
@@ -39,7 +39,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -52,7 +52,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -65,7 +65,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -77,7 +77,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -90,7 +90,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -103,7 +103,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -117,7 +117,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -131,7 +131,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -145,7 +145,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -158,7 +158,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -172,7 +172,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -186,7 +186,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *

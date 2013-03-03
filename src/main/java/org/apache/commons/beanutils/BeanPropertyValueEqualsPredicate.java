@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils;
 
 import org.apache.commons.collections.Predicate;
@@ -109,7 +109,7 @@ import java.lang.reflect.InvocationTargetException;
  * @see org.apache.commons.collections.Predicate
  */
 public class BeanPropertyValueEqualsPredicate implements Predicate {
-   
+
     /** For logging. */
     private final Log log = LogFactory.getLog(this.getClass());
 
@@ -193,7 +193,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
     public boolean evaluate(Object object) {
-       
+
         boolean evaluation = false;
 
         try {

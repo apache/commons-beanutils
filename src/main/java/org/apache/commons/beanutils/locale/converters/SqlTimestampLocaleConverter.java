@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils.locale.converters;
 
 import java.sql.Timestamp;
@@ -22,10 +22,10 @@ import java.text.ParseException;
 import java.util.Locale;
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+ * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.sql.Timestamp</code> object,
- * optionally using a default value or throwing a 
+ * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
@@ -38,7 +38,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -51,7 +51,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -64,7 +64,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -76,7 +76,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -89,7 +89,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -102,7 +102,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -116,7 +116,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -129,7 +129,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -143,7 +143,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -156,7 +156,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -170,7 +170,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -184,7 +184,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *

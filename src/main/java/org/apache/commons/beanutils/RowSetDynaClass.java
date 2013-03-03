@@ -70,9 +70,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
 
 
     // ----------------------------------------------------- Instance variables
-    
+
     /**
-     * <p>Limits the size of the returned list.  The call to 
+     * <p>Limits the size of the returned list.  The call to
      * <code>getRows()</code> will return at most limit number of rows.
      * If less than or equal to 0, does not limit the size of the result.
      */
@@ -110,12 +110,12 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * <p>Construct a new {@link RowSetDynaClass} for the specified
      * <code>ResultSet</code>.  The property names corresponding
      * to column names in the result set will be lower cased.</p>
-     * 
+     *
      * If <code>limit</code> is not less than 0, max <code>limit</code>
-     * number of rows will be copied into the list. 
+     * number of rows will be copied into the list.
      *
      * @param resultSet The result set to be wrapped
-     * @param limit The maximum for the size of the result. 
+     * @param limit The maximum for the size of the result.
      *
      * @exception NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
@@ -136,7 +136,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * depending on the specified <code>lowerCase</code> value.</p>
      *
      * If <code>limit</code> is not less than 0, max <code>limit</code>
-     * number of rows will be copied into the resultset. 
+     * number of rows will be copied into the resultset.
      *
      *
      * @param resultSet The result set to be wrapped

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.converters;
 
@@ -38,7 +38,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     public LongConverterTestCase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
 
     public void setUp() throws Exception {
@@ -50,7 +50,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     }
 
     public static TestSuite suite() {
-        return new TestSuite(LongConverterTestCase.class);        
+        return new TestSuite(LongConverterTestCase.class);
     }
 
     public void tearDown() throws Exception {
@@ -58,15 +58,15 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     }
 
     // ------------------------------------------------------------------------
-    
+
     protected NumberConverter makeConverter() {
         return new LongConverter();
     }
-    
+
     protected NumberConverter makeConverter(Object defaultValue) {
         return new LongConverter(defaultValue);
     }
-    
+
     protected Class getExpectedType() {
         return Long.class;
     }
@@ -74,7 +74,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= { 
+        String[] message= {
             "from String",
             "from String",
             "from String",
@@ -89,8 +89,8 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             "from Float",
             "from Double"
         };
-        
-        Object[] input = { 
+
+        Object[] input = {
             String.valueOf(Long.MIN_VALUE),
             "-17",
             "-1",
@@ -105,8 +105,8 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             new Float(11.1),
             new Double(12.2)
         };
-        
-        Long[] expected = { 
+
+        Long[] expected = {
             new Long(Long.MIN_VALUE),
             new Long(-17),
             new Long(-1),
@@ -121,13 +121,13 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             new Long(11),
             new Long(12)
         };
-        
+
         for(int i=0;i<expected.length;i++) {
             assertEquals(message[i] + " to Long",expected[i],converter.convert(Long.class,input[i]));
             assertEquals(message[i] + " to long",expected[i],converter.convert(Long.TYPE,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-    
+
 }
 

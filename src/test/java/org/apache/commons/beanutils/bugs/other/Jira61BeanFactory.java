@@ -38,7 +38,7 @@ public class Jira61BeanFactory {
     }
 
     /**
-     * Test Bean 
+     * Test Bean
      */
     public static class TestBean {
 
@@ -72,7 +72,7 @@ public class Jira61BeanFactory {
 
         /**
          * Return indexed property.
-         * 
+         *
          * @param index The index
          * @return The indexed value
          */
@@ -82,7 +82,7 @@ public class Jira61BeanFactory {
 
         /**
          * Set indexed property.
-         * 
+         *
          * @param index The index
          * @param value The indexed value
          */
@@ -92,7 +92,7 @@ public class Jira61BeanFactory {
 
         /**
          * Return mapped property.
-         * 
+         *
          * @param key The mapped key
          * @return The mapped value
          */
@@ -102,7 +102,7 @@ public class Jira61BeanFactory {
 
         /**
          * Set mapped property.
-         * 
+         *
          * @param key The mapped key
          * @param value The mapped value
          */

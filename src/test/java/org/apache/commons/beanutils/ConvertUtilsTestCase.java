@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils;
 
@@ -638,23 +638,23 @@ public class ConvertUtilsTestCase extends TestCase {
         DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
         String expected = fmt.format(today);
         assertEquals("DateConverter M/d/yy", expected, utils.convert(today, String.class));
-        
+
         // Date converter doesn't do String conversion - use String Converter
         utils.register(dummyConverter, java.util.Date.class);
         assertEquals("Date Converter doesn't do String conversion", "Foo-Converter", utils.convert(today, String.class));
-        
+
         // No registered Date converter - use String Converter
         utils.deregister(java.util.Date.class);
         assertEquals("No registered Date converter", "Foo-Converter", utils.convert(today, String.class));
-        
+
         // String Converter doesn't do Strings!!!
         utils.register(dummyConverter, String.class);
         assertEquals("String Converter doesn't do Strings!!!", today.toString(), utils.convert(today, String.class));
-        
+
         // No registered Date or String converter - use Object's toString()
         utils.deregister(String.class);
         assertEquals("Object's toString()", today.toString(), utils.convert(today, String.class));
-        
+
     }
 
     // -------------------------------------------------------- Private Methods

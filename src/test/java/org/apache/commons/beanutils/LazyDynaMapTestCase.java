@@ -490,17 +490,17 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testNewInstance() {
 
-        // Create LazyDynaMap using TreeMap 
+        // Create LazyDynaMap using TreeMap
         // containing some properties
         LazyDynaMap orig = new LazyDynaMap(new TreeMap());
         orig.set("indexProp", 0, "indexVal0");
         orig.set("indexProp", 1, "indexVal1");
         assertEquals("Index prop size", 2, ((List)orig.get("indexProp")).size());
-        
+
         LazyDynaMap newOne = (LazyDynaMap)orig.newInstance();
         Map newMap = newOne.getMap();
         assertEquals("Check Map type", TreeMap.class, newMap.getClass());
-        
+
         ArrayList indexProp = (ArrayList)newMap.get("indexProp");
         assertNotNull("Indexed Prop missing", indexProp);
         assertEquals("Index prop size", 0, indexProp.size());

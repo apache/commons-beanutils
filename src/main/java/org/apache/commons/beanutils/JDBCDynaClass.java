@@ -171,7 +171,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     /**
      * <p>Factory method to create a new DynaProperty for the given index
      * into the result set metadata.</p>
-     * 
+     *
      * @param metadata is the result set metadata
      * @param i is the column index in the metadata
      * @return the newly created DynaProperty instance
@@ -294,7 +294,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     /**
      * Get the table column name for the specified property name.
-     * 
+     *
      * @param name The property name
      * @return The column name (which can be different if the <i>lowerCase</i>
      * option is used).

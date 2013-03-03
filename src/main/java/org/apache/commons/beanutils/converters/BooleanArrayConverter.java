@@ -93,7 +93,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * documentation for method "convert" for more information.
      * The value BooleanArrayConverter.NO_DEFAULT may be passed here to
      * specify that an exception should be thrown on conversion failure.
-     *  
+     *
      */
     public BooleanArrayConverter(BooleanConverter converter, Object defaultValue) {
 
@@ -133,7 +133,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
     /**
      * Convert the specified input object into an output object of type
      * array-of-boolean.
-     * 
+     *
      * <p>If the input value is null, then the default value specified in the
      * constructor is returned. If no such value was provided, then a
      * ConversionException is thrown instead.</p>
@@ -156,11 +156,11 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * <p>If any of the elements in the value array (or the elements resulting
      * from splitting up value.toString) are not recognised by the
      * BooleanConverter associated with this object, then what happens depends
-     * on whether that BooleanConverter has a default value or not: if it does, 
+     * on whether that BooleanConverter has a default value or not: if it does,
      * then that unrecognised element is converted into the BooleanConverter's
      * default value. If the BooleanConverter does <i>not</i> have a default
      * value, then the default value for this object is returned as the
-     * <i>complete</i> conversion result (not just for the element), or an 
+     * <i>complete</i> conversion result (not just for the element), or an
      * exception is thrown if this object has no default value defined.</p>
      *
      * @param type is the type to which this value should be converted. In the

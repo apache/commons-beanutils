@@ -80,7 +80,7 @@ public class Jira358TestCase extends TestCase {
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
     public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
-        
+
         TestBean bean = new TestBean();
         try {
             PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length);
@@ -94,7 +94,7 @@ public class Jira358TestCase extends TestCase {
      * Test {@link PropertyUtils#getIndexedProperty(Object, String, int)}
      */
     public void testPropertyUtils_getIndexedProperty_List() throws Exception {
-        
+
         TestBean bean = new TestBean();
         try {
             PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size());

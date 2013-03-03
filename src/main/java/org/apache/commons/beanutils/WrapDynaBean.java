@@ -28,7 +28,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * <p>
  * The most common use cases for this class involve wrapping an existing java bean.
- * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.) 
+ * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.)
  * For example:
  * </p>
  * <code><pre>
@@ -339,12 +339,12 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-    /** 
+    /**
      * Gets the bean instance wrapped by this DynaBean.
-     * For most common use cases, 
-     * this object should already be known 
+     * For most common use cases,
+     * this object should already be known
      * and this method safely be ignored.
-     * But some creators of frameworks using <code>DynaBean</code>'s may 
+     * But some creators of frameworks using <code>DynaBean</code>'s may
      * find this useful.
      *
      * @return the java bean Object wrapped by this <code>DynaBean</code>

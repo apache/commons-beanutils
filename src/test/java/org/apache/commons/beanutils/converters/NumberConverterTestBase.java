@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.converters;
 
@@ -45,9 +45,9 @@ public abstract class NumberConverterTestBase extends TestCase {
     public NumberConverterTestBase(String name) {
         super(name);
     }
-    
+
     // ------------------------------------------------------------------------
-    
+
     protected abstract NumberConverter makeConverter();
     protected abstract NumberConverter makeConverter(Object defaultValue);
     protected abstract Class getExpectedType();
@@ -71,7 +71,7 @@ public abstract class NumberConverterTestBase extends TestCase {
      * instance of getExpectedType().
      */
     public void testConvertNumber() {
-        String[] message= { 
+        String[] message= {
             "from Byte",
             "from Short",
             "from Integer",
@@ -99,12 +99,12 @@ public abstract class NumberConverterTestBase extends TestCase {
             Object val = makeConverter().convert(getExpectedType(),number[i]);
             assertNotNull("Convert " + message[i] + " should not be null",val);
             assertTrue(
-                "Convert " + message[i] + " should return a " + getExpectedType().getName(), 
+                "Convert " + message[i] + " should return a " + getExpectedType().getName(),
                 getExpectedType().isInstance(val));
         }
     }
     /**
-     * Convert Number --> String (using a Pattern, with default and specified Locales)  
+     * Convert Number --> String (using a Pattern, with default and specified Locales)
      */
     public void testNumberToStringPattern() {
 
@@ -129,7 +129,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Number --> String (using default and specified Locales)  
+     * Convert Number --> String (using default and specified Locales)
      */
     public void testNumberToStringLocale() {
 
@@ -169,7 +169,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Number --> String (default conversion)  
+     * Convert Number --> String (default conversion)
      */
     public void testNumberToStringDefault() {
 
@@ -178,11 +178,11 @@ public abstract class NumberConverterTestBase extends TestCase {
         // Default Number --> String conversion
         assertEquals("Default Convert " + numbers[0], numbers[0].toString(), converter.convert(String.class, numbers[0]));
         assertEquals("Default Convert " + numbers[1], numbers[1].toString(), converter.convert(String.class, numbers[1]));
-    
+
     }
 
     /**
-     * Convert String --> Number (using a Pattern, with default and specified Locales)  
+     * Convert String --> Number (using a Pattern, with default and specified Locales)
      */
     public void testStringToNumberPattern() {
 
@@ -196,7 +196,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         // Default Locale
         assertEquals("Default Locale " + numbers[0], numbers[0], converter.convert(getExpectedType(), "(1,2)"));
         assertEquals("Default Locale " + numbers[1], numbers[1], converter.convert(getExpectedType(), "[1,3]"));
-        
+
         // Locale.GERMAN
         converter.setLocale(Locale.GERMAN);
         assertEquals("Locale.GERMAN " + numbers[2], numbers[2], converter.convert(getExpectedType(), "(2.2)"));
@@ -228,7 +228,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert String --> Number (using default and specified Locales)  
+     * Convert String --> Number (using default and specified Locales)
      */
     public void testStringToNumberLocale() {
 
@@ -269,7 +269,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert String --> Number (default conversion)  
+     * Convert String --> Number (default conversion)
      */
     public void testStringToNumberDefault() {
 
@@ -289,7 +289,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Boolean --> Number (default conversion)  
+     * Convert Boolean --> Number (default conversion)
      */
     public void testBooleanToNumberDefault() {
 
@@ -298,7 +298,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         // Other type --> String conversion
         assertEquals("Boolean.FALSE to Number ", 0, ((Number)converter.convert(getExpectedType(), Boolean.FALSE)).intValue());
         assertEquals("Boolean.TRUE to Number ",  1, ((Number)converter.convert(getExpectedType(), Boolean.TRUE)).intValue());
-    
+
     }
 
     /**
@@ -348,7 +348,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Other --> String (default conversion)  
+     * Convert Other --> String (default conversion)
      */
     public void testOtherToStringDefault() {
 
@@ -356,11 +356,11 @@ public abstract class NumberConverterTestBase extends TestCase {
 
         // Other type --> String conversion
         assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuffer("ABC")));
-    
+
     }
 
     /**
-     * Convert Number --> String (using default and specified Locales)  
+     * Convert Number --> String (using default and specified Locales)
      */
     public void testInvalidDefault() {
 
@@ -373,7 +373,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert Number --> String (using default and specified Locales)  
+     * Convert Number --> String (using default and specified Locales)
      */
     public void testInvalidException() {
 
@@ -394,7 +394,7 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
-     * Test specifying an invalid type.  
+     * Test specifying an invalid type.
      */
     public void testInvalidType() {
 

@@ -24,13 +24,13 @@ import java.io.IOException;
 
 /**
  * A special classloader useful for testing j2ee-like scenarios.
- * 
+ *
  * <p>In some tests we want to be able to emulate "container" frameworks,
  * where code runs in a hierarchy of classloaders, and certain classes may
  * be loaded by various classloaders in the hierarchy.</p>
  *
  * <p>Normally this is done by having certain jars or class-file-directories
- * in the classpath of some classloaders but not others. This is quite 
+ * in the classpath of some classloaders but not others. This is quite
  * difficult difficult to integrate with the build process for the unit
  * tests though; compiling certain classes and having the output go into
  * places that is not in the default classpath for the unit tests would be
@@ -48,7 +48,7 @@ public class ClassReloader extends ClassLoader {
     public ClassReloader(ClassLoader parent) {
         super(parent);
     }
-    
+
     /**
      * Given a class already in the classpath of a parent classloader,
      * reload that class via this classloader.
@@ -57,11 +57,11 @@ public class ClassReloader extends ClassLoader {
         String className = clazz.getName();
         String classFile = className.replace('.', '/') + ".class";
         InputStream classStream = getParent().getResourceAsStream(classFile);
-        
+
         if (classStream == null) {
             throw new FileNotFoundException(classFile);
         }
-        
+
         byte[] buf = new byte[1024];
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         for(;;) {
@@ -71,9 +71,9 @@ public class ClassReloader extends ClassLoader {
             baos.write(buf, 0, bytesRead);
         }
         classStream.close();
-        
+
         byte[] classData = baos.toByteArray();
-        
+
         // now we have the raw class data, let's turn it into a class
         Class newClass = defineClass(className, classData, 0, classData.length);
         resolveClass(newClass);

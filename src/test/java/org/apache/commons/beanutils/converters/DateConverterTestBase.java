@@ -53,7 +53,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return A new Converter
      */
     protected abstract DateTimeConverter makeConverter();
-    
+
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
@@ -69,7 +69,7 @@ public abstract class DateConverterTestBase extends TestCase {
 
     /**
      * Convert from a Calendar to the appropriate Date type
-     * 
+     *
      * @param value The Calendar value to convert
      * @return The converted value
      */
@@ -111,7 +111,7 @@ public abstract class DateConverterTestBase extends TestCase {
             new java.sql.Time(now),
             new java.sql.Timestamp(now)
         };
-        
+
         // Initialize calendar also with same ms to avoid a failing test in a new time slice
         ((GregorianCalendar)date[1]).setTime(new Date(now));
 
@@ -139,7 +139,7 @@ public abstract class DateConverterTestBase extends TestCase {
         String testString = "2006-10-29";
         Calendar calendar = toCalendar(testString, pattern, null);
         Object expected   = toType(calendar);
-        
+
         Object result = converter.convert(null, testString);
         if (getExpectedType().equals(Calendar.class)) {
             assertTrue("TYPE ", getExpectedType().isAssignableFrom(result.getClass()));
@@ -433,7 +433,7 @@ public abstract class DateConverterTestBase extends TestCase {
         String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
             Object result = converter.convert(getExpectedType(), value);
-            fail(msg + ", expected ConversionException, but result = '" + result + "'"); 
+            fail(msg + ", expected ConversionException, but result = '" + result + "'");
         } catch (ConversionException ex) {
             // Expected Result
         }
@@ -461,7 +461,7 @@ public abstract class DateConverterTestBase extends TestCase {
     Calendar toCalendar(String value, String pattern, Locale locale) {
         Calendar calendar = null;
         try {
-            DateFormat format = (locale == null) 
+            DateFormat format = (locale == null)
                            ? new SimpleDateFormat(pattern)
                            : new SimpleDateFormat(pattern, locale);
             format.setLenient(false);

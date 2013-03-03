@@ -30,7 +30,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
     public PropsFirstPropertyUtilsBean() {
         super();
     }
-    
+
     /**
      * Note: this is a *very rough* override of this method. In particular,
      * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
@@ -39,7 +39,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      */
     protected Object getPropertyOfMapBean(Map bean, String propertyName)
     throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        
+
         PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
             // no simple property exists so return the value from the map

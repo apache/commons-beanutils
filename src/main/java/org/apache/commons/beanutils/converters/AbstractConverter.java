@@ -363,7 +363,7 @@ public abstract class AbstractConverter implements Converter {
             return defaultValue;
         }
     }
-    
+
     /**
      * Provide a String representation of this converter.
      *

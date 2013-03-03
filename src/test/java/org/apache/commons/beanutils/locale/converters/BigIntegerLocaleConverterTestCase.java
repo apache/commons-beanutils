@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -34,7 +34,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
     public BigIntegerLocaleConverterTestCase(String name) {
         super(name);
     }
-    
+
     // -------------------------------------------------- Overall Test Methods
 
     /**
@@ -81,7 +81,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // Convert value in the wrong format - maybe you would expect it to throw an
         // exception and return the default - it doesn't, DecimalFormat parses it
         // quite happily turning "1,234" into "1"
-        // I guess this is one of the limitations of DecimalFormat 
+        // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new BigInteger("1"));
 
@@ -90,14 +90,14 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
         // quite happily turning "1,234" into "1"
-        // Again this is one of the limitations of DecimalFormat 
+        // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new BigInteger("1"));
 
 
         // **************************************************************************
         // Convert with specified type
-        // 
+        //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a BigInteger.
         //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
@@ -121,9 +121,9 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     /**
      * Test Converter() constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_2() {
 
@@ -140,9 +140,9 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     /**
      * Test Converter(locPattern) constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_3() {
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils;
 
 import org.apache.commons.collections.Transformer;
@@ -70,7 +70,7 @@ import java.lang.reflect.InvocationTargetException;
  * @see org.apache.commons.collections.Transformer
  */
 public class BeanToPropertyValueTransformer implements Transformer {
-   
+
     /** For logging. */
     private final Log log = LogFactory.getLog(this.getClass());
 
@@ -146,7 +146,7 @@ public class BeanToPropertyValueTransformer implements Transformer {
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
     public Object transform(Object object) {
-       
+
         Object propertyValue = null;
 
         try {

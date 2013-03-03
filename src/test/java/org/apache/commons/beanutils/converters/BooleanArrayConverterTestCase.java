@@ -52,12 +52,12 @@ public class BooleanArrayConverterTestCase extends TestCase {
      */
     public void testStandardStringArrayConversion() {
         String[] values = {
-            "true", "false", 
+            "true", "false",
             "yes", "no",
             "y", "n",
             "1", "0",
         };
-        
+
         BooleanArrayConverter converter = new BooleanArrayConverter();
         boolean[] results = (boolean[]) converter.convert(null, values);
 
@@ -134,7 +134,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
         assertTrue(results[0]);
 
         // string has only one element, quoted with '
-        // Here we also pass an object of type String rather than the 
+        // Here we also pass an object of type String rather than the
         // StringBuffer
         results = (boolean[]) converter.convert(null, "'yes'");
 
@@ -155,14 +155,14 @@ public class BooleanArrayConverterTestCase extends TestCase {
             trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
         BooleanArrayConverter converter = new BooleanArrayConverter(
             bc, BooleanArrayConverter.NO_DEFAULT);
-        
+
         boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
         assertNotNull(results);
         assertEquals(3, results.length);
         assertFalse(results[0]);
         assertTrue(results[1]);
         assertTrue(results[2]);
-        
+
         try {
             // the literal string 'true' should no longer be recognised as
             // a true value..
@@ -226,7 +226,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
         Object o = converter.convert(null, "true,bogus");
         assertSame("Unexpected object returned for failed conversion", o, defaults);
     }
-    
+
     /**
      * Check that when a custom BooleanConverter is used, and that converter
      * has a (per-element) default, then that element (and just that element)
@@ -243,12 +243,12 @@ public class BooleanArrayConverterTestCase extends TestCase {
         BooleanConverter bc = new BooleanConverter(Boolean.TRUE);
         BooleanArrayConverter converter = new BooleanArrayConverter(bc, defaults);
         boolean[] results = (boolean[]) converter.convert(null, "true,bogus");
-        
+
         assertEquals(2, results.length);
         assertTrue(results[0]);
         assertTrue(results[1]);
     }
-    
+
     /**
      * Check that registration of a custom converter works.
      */
@@ -260,11 +260,11 @@ public class BooleanArrayConverterTestCase extends TestCase {
 
         BooleanArrayConverter converter = new BooleanArrayConverter(
             bc, BooleanArrayConverter.NO_DEFAULT);
-            
+
         ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
         boolean[] sample = new boolean[0];
         boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
-        
+
         assertEquals(2, results.length);
         assertTrue(results[0]);
         assertFalse(results[1]);

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -33,7 +33,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public DoubleLocaleConverterTestCase(String name) {
         super(name);
     }
-    
+
     // -------------------------------------------------- Overall Test Methods
 
     /**
@@ -97,7 +97,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // **************************************************************************
         // Convert with specified type
-        // 
+        //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Double.
         //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
@@ -121,9 +121,9 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter() constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_2() {
 
@@ -140,9 +140,9 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter(locPattern) constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_3() {
 

@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 package org.apache.commons.beanutils.memoryleaktests;
 
 import java.lang.ref.SoftReference;
@@ -40,9 +40,9 @@ import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
 
 /**
  * Test BeanUtils memory leaks.
- * 
+ *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
- * 
+ *
  * @author Clebert Suconic
  */
 public class MemoryLeakTestCase extends TestCase {
@@ -137,7 +137,7 @@ public class MemoryLeakTestCase extends TestCase {
         // PropertyUtilsBean uses the MethodUtils's method cache for mapped properties.
         // Uncomment the following line to check this is not just a repeat of that memory leak.
         // MethodUtils.clearCache();
-        
+
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
         if (someRef.get() != null) {
@@ -485,11 +485,11 @@ public class MemoryLeakTestCase extends TestCase {
             list.clear();
             list = null;
             // System.out.println("Count " + count + " : " + getMemoryStats());
-            System.gc(); 
+            System.gc();
             Thread.sleep(1000);
         }
         // System.out.println("After GC: " + getMemoryStats());
-        
+
         if (ref.get() != null) {
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }

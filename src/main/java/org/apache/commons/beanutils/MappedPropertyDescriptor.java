@@ -91,7 +91,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             throws IntrospectionException {
 
         super(propertyName, null, null);
-        
+
         if (propertyName == null || propertyName.length() == 0) {
             throw new IntrospectionException("bad property name: " +
                     propertyName + " on class: " + beanClass.getClass().getName());
@@ -99,7 +99,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         setName(propertyName);
         String base = capitalizePropertyName(propertyName);
-        
+
         // Look for mapped read method and matching write method
         Method mappedReadMethod = null;
         Method mappedWriteMethod = null;
@@ -118,8 +118,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
              * TODO: Why?
              */
         }
-        
-        // If there's no read method, then look for just a write method 
+
+        // If there's no read method, then look for just a write method
         if (mappedReadMethod == null) {
             mappedWriteMethod = getMethod(beanClass, "set" + base, 2);
         }
@@ -131,7 +131,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
         mappedReadMethodRef  = new MappedMethodReference(mappedReadMethod);
         mappedWriteMethodRef = new MappedMethodReference(mappedWriteMethod);
-        
+
         findMappedPropertyType();
     }
 
@@ -173,7 +173,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         if (mappedReadMethod != null) {
             Class[] params = { String.class, mappedReadMethod.getReturnType() };
-            mappedWriteMethod = 
+            mappedWriteMethod =
                 getMethod(beanClass, mappedSetterName, params);
         } else {
             mappedWriteMethod =
@@ -400,7 +400,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Find a method on a class with a specified parameter list.
      */
-    private static Method getMethod(Class clazz, String methodName, Class[] parameterTypes) 
+    private static Method getMethod(Class clazz, String methodName, Class[] parameterTypes)
                                            throws IntrospectionException {
         if (methodName == null) {
             return null;

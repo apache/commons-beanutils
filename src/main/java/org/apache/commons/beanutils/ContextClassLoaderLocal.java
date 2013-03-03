@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.WeakHashMap;
 /**
  * An instance of this class represents a value that is provided per (thread)
  * context classloader.
- * 
+ *
  * <p>Occasionally it is necessary to store data in "global" variables
  * (including uses of the Singleton pattern). In applications which have only
  * a single classloader such data can simply be stored as "static" members on
@@ -43,14 +43,14 @@ import java.util.WeakHashMap;
  * with a particular thread.</p>
  *
  * <p>When code that uses this class is run as a "normal" application, ie
- * not within a container, the effect is identical to just using a static 
+ * not within a container, the effect is identical to just using a static
  * member variable to store the data, because Thread.getContextClassLoader
  * always returns the same classloader (the system classloader).</p>
  *
  * <p>Expected usage is as follows:<br>
  * <pre>
  *  public class SomeClass {
- *    private static final ContextClassLoaderLocal global 
+ *    private static final ContextClassLoaderLocal global
  *      = new ContextClassLoaderLocal() {
  *          protected Object initialValue() {
  *              return new String("Initial value");
@@ -90,14 +90,14 @@ import java.util.WeakHashMap;
  * there is no obvious reason for a user of the beanutils library to subclass
  * either of those classes.</p>
  *
- * <p><strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in 
+ * <p><strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in
  * a memory leak for those JVMs.</p>
  *
  * <p><strong>Note:</strong> Of course all of this would be unnecessary if
  * containers required each component to load the full set of classes it
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
- * 
- * @see java.lang.Thread#getContextClassLoader  
+ *
+ * @see java.lang.Thread#getContextClassLoader
  * @author Eric Pabst
  */
 public class ContextClassLoaderLocal {
@@ -115,7 +115,7 @@ public class ContextClassLoaderLocal {
     /**
      * Returns the initial value for this ContextClassLoaderLocal
      * variable. This method will be called once per Context ClassLoader for
-     * each ContextClassLoaderLocal, the first time it is accessed 
+     * each ContextClassLoaderLocal, the first time it is accessed
      * with get or set.  If the programmer desires ContextClassLoaderLocal variables
      * to be initialized to some value other than null, ContextClassLoaderLocal must
      * be subclassed, and this method overridden.  Typically, an anonymous
@@ -129,37 +129,37 @@ public class ContextClassLoaderLocal {
         return null;
     }
 
-    /** 
+    /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container. 
-     * @return the object currently associated with the context-classloader of the current thread. 
+     * This mechanism provides isolation for web apps deployed in the same container.
+     * @return the object currently associated with the context-classloader of the current thread.
      */
     public synchronized Object get() {
-        // synchronizing the whole method is a bit slower 
-        // but guarantees no subtle threading problems, and there's no 
+        // synchronizing the whole method is a bit slower
+        // but guarantees no subtle threading problems, and there's no
         // need to synchronize valueByClassLoader
-        
+
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-            
+
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
-                
+
                 Object value = valueByClassLoader.get(contextClassLoader);
-                if ((value == null) 
+                if ((value == null)
                 && !valueByClassLoader.containsKey(contextClassLoader)) {
                     value = initialValue();
                     valueByClassLoader.put(contextClassLoader, value);
                 }
                 return value;
-                
+
             }
-            
+
         } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
-        
-        // if none or exception, return the globalValue 
+
+        // if none or exception, return the globalValue
         if (!globalValueInitialized) {
             globalValue = initialValue();
             globalValueInitialized = true;
@@ -167,50 +167,50 @@ public class ContextClassLoaderLocal {
         return globalValue;
     }
 
-    /** 
+    /**
      * Sets the value - a value is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container. 
-     * 
+     * This mechanism provides isolation for web apps deployed in the same container.
+     *
      * @param value the object to be associated with the entrant thread's context classloader
      */
     public synchronized void set(Object value) {
-        // synchronizing the whole method is a bit slower 
+        // synchronizing the whole method is a bit slower
         // but guarentees no subtle threading problems
-        
+
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-            
+
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
                 valueByClassLoader.put(contextClassLoader, value);
                 return;
             }
-            
+
         } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
-        
+
         // if in doubt, set the global value
         globalValue = value;
         globalValueInitialized = true;
     }
-    
-    /** 
+
+    /**
      * Unsets the value associated with the current thread's context classloader
      */
-    public synchronized void unset() {    
+    public synchronized void unset() {
         try {
-        
+
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             unset(contextClassLoader);
-            
+
         } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
     }
-    
-    /** 
+
+    /**
      * Unsets the value associated with the given classloader
      * @param classLoader The classloader to <i>unset</i> for
      */
-    public synchronized void unset(ClassLoader classLoader) {    
+    public synchronized void unset(ClassLoader classLoader) {
         valueByClassLoader.remove(classLoader);
-    }    
+    }
 }

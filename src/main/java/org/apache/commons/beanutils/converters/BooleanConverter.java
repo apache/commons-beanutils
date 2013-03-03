@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.ConversionException;
  * <code>ConversionException</code> if a conversion error occurs.
  * <p>
  * By default any object whose string representation is one of the values
- * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and 
+ * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and
  * string representations {"no", "n", "false", "off", "0"} are converted
  * to Boolean.FALSE. The recognised true/false strings can be changed by:
  * <pre>
@@ -45,7 +45,7 @@ import org.apache.commons.beanutils.ConversionException;
  *   ConvertUtils.register(bac, bac.MODEL);
  * </pre>
  * </p>
- * 
+ *
  * <p>Case is ignored when converting values to true or false.</p>
  *
  * @author Craig R. McClanahan
@@ -133,7 +133,7 @@ public final class BooleanConverter extends AbstractConverter {
      *  in which case an exception will be thrown on conversion failure.
      * @since 1.8.0
      */
-    public BooleanConverter(String[] trueStrings, String[] falseStrings, 
+    public BooleanConverter(String[] trueStrings, String[] falseStrings,
                 Object defaultValue) {
         super();
         this.trueStrings = copyStrings(trueStrings);
@@ -192,7 +192,7 @@ public final class BooleanConverter extends AbstractConverter {
      *  shall be invoked on this object, and the result compared (ignoring
      *  case) against the known "true" and "false" string values.
      *
-     * @return Boolean.TRUE if the value was a recognised "true" value, 
+     * @return Boolean.TRUE if the value was a recognised "true" value,
      *  Boolean.FALSE if the value was a recognised "false" value, or
      *  the default value if the value was not recognised and the constructor
      *  was provided with a default value.
@@ -219,7 +219,7 @@ public final class BooleanConverter extends AbstractConverter {
                 return Boolean.FALSE;
             }
         }
-        
+
         throw new ConversionException("Can't convert value '" + value + "' to a Boolean");
     }
 

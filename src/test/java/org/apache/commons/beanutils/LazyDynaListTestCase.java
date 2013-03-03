@@ -108,7 +108,7 @@ public class LazyDynaListTestCase extends TestCase {
         // Create LazyArrayList for DynaBeans
         LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
 
-   
+
         LazyDynaBean bean = new LazyDynaBean();
         bean.set("prop1", "val");
 

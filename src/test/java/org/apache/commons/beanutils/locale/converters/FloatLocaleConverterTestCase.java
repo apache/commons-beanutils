@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 package org.apache.commons.beanutils.locale.converters;
 
@@ -38,7 +38,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public FloatLocaleConverterTestCase(String name) {
         super(name);
     }
-    
+
     // -------------------------------------------------- Overall Test Methods
 
     /**
@@ -102,7 +102,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // **************************************************************************
         // Convert with specified type
-        // 
+        //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Float.class here it still returns a Float.
         //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
@@ -126,9 +126,9 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter() constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_2() {
 
@@ -145,9 +145,9 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     /**
      * Test Converter(locPattern) constructor
-     * 
+     *
      * Uses the default locale, no default value
-     * 
+     *
      */
     public void testConstructor_3() {
 
@@ -276,8 +276,8 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         assertEquals("Negative Float.MAX_VALUE", new Float(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
         assertEquals("Negative Float.MIN_VALUE", new Float(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
-        
-        
+
+
         try {
             converter.convert(fmt.format((double)Float.MAX_VALUE * (double)10));
             fail("Positive Too Large should throw ConversionException");
@@ -290,7 +290,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         } catch (ConversionException e) {
             // expected result
         }
-        
+
         try {
             converter.convert(fmt.format((double)Float.MIN_VALUE / (double)10));
             fail("Positive Too Small should throw ConversionException");
@@ -315,7 +315,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         } catch (ConversionException e) {
             fail("Zero threw ConversionException: " + e);
         }
-        
+
     }
 
 

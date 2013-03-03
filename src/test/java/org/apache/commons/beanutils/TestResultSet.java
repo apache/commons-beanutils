@@ -5,15 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */ 
+ */
 
 
 package org.apache.commons.beanutils;
@@ -92,14 +92,14 @@ public class TestResultSet implements InvocationHandler {
         Class[] interfaces = new Class[] { ResultSet.class };
         return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
-    
+
     /**
      * Create a proxy ResultSet.
      */
     public TestResultSet() {
         this(TestResultSetMetaData.createProxy());
     }
-    
+
     /**
      * Create a proxy ResultSet with the specified meta data.
      *
@@ -110,7 +110,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
     /**
-     * Handles method invocation on the ResultSet proxy. 
+     * Handles method invocation on the ResultSet proxy.
      *
      * @param proxy The proxy ResultSet object
      * @param method the method being invoked
@@ -138,7 +138,7 @@ public class TestResultSet implements InvocationHandler {
             updateObject((String)args[0], args[1]);
             return null;
         }
-        
+
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 

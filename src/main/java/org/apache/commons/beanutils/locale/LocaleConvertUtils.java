@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils.locale;
 
 import org.apache.commons.collections.FastHashMap;
@@ -37,9 +37,9 @@ public class LocaleConvertUtils {
     // ----------------------------------------------------- Instance Variables
 
     /**
-     * <p>Gets the <code>Locale</code> which will be used when 
+     * <p>Gets the <code>Locale</code> which will be used when
      * no <code>Locale</code> is passed to a method.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      * @return the default locale
      * @see LocaleConvertUtilsBean#getDefaultLocale()
@@ -50,9 +50,9 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Sets the <code>Locale</code> which will be used when 
+     * <p>Sets the <code>Locale</code> which will be used when
      * no <code>Locale</code> is passed to a method.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param locale the default locale
@@ -65,7 +65,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Gets applyLocalized.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @return <code>true</code> if pattern is localized,
@@ -78,7 +78,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Sets applyLocalized.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param newApplyLocalized <code>true</code> if pattern is localized,
@@ -93,7 +93,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Convert the specified locale-sensitive value into a String.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param value The Value to be converted
@@ -107,7 +107,7 @@ public class LocaleConvertUtils {
     /**
      * <p>Convert the specified locale-sensitive value into a String
      * using the conversion pattern.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param value The Value to be converted
@@ -122,7 +122,7 @@ public class LocaleConvertUtils {
     /**
      * <p>Convert the specified locale-sensitive value into a String
      * using the paticular convertion pattern.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param value The Value to be converted
@@ -139,7 +139,7 @@ public class LocaleConvertUtils {
     /**
      * <p>Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param value The String scalar value to be converted
@@ -156,7 +156,7 @@ public class LocaleConvertUtils {
      * <p>Convert the specified value to an object of the specified class (if
      * possible) using the convertion pattern. Otherwise, return a String
      * representation of the value.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param value The String scalar value to be converted
@@ -192,7 +192,7 @@ public class LocaleConvertUtils {
     /**
      * <p>Convert an array of specified values to an array of objects of the
      * specified class (if possible) using the convertion pattern.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param values Value to be converted (may be null)
@@ -209,7 +209,7 @@ public class LocaleConvertUtils {
    /**
     * <p>Convert an array of specified values to an array of objects of the
     * specified class (if possible).</p>
-    * 
+    *
     * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
     *
     * @param values Value to be converted (may be null)
@@ -243,7 +243,7 @@ public class LocaleConvertUtils {
     /**
      * <p>Register a custom {@link LocaleConverter} for the specified destination
      * <code>Class</code>, replacing any previously registered converter.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param converter The LocaleConverter to be registered
@@ -259,7 +259,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Remove any registered {@link LocaleConverter}.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @see LocaleConvertUtilsBean#deregister()
@@ -272,7 +272,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Remove any registered {@link LocaleConverter} for the specified locale.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param locale The locale
@@ -286,7 +286,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Remove any registered {@link LocaleConverter} for the specified locale and Class.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param clazz Class for which to remove a registered Converter
@@ -302,7 +302,7 @@ public class LocaleConvertUtils {
      * <p>Look up and return any registered {@link LocaleConverter} for the specified
      * destination class and locale; if there is no registered Converter, return
      * <code>null</code>.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param clazz Class for which to return a registered Converter
@@ -317,7 +317,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Look up and return any registered FastHashMap instance for the specified locale.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param locale The Locale
@@ -332,7 +332,7 @@ public class LocaleConvertUtils {
 
     /**
      * <p>Create all {@link LocaleConverter} types for specified locale.</p>
-     * 
+     *
      * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
      *
      * @param locale The Locale

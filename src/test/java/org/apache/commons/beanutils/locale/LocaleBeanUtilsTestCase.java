@@ -30,9 +30,9 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$ $Date$
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
-    
+
     private static Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
-    
+
     /**
      * Construct a new instance of this test case.
      *

@@ -157,5 +157,5 @@ public class Jira359TestCase extends TestCase {
         public void setJcrMixinTypes(String[] mixinTypes) {
             this.jcrMixinTypes = mixinTypes;
         }
-    }    
+    }
 }

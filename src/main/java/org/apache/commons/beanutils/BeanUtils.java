@@ -47,12 +47,12 @@ public class BeanUtils {
 
     /**
      * The debugging detail level for this component.
-     * 
+     *
      * Note that this static variable will have unexpected side-effects if
      * this class is deployed in a shared classloader within a container.
      * However as it is actually completely ignored by this class due to its
      * deprecated status, it doesn't do any actual harm.
-     * 
+     *
      * @deprecated BeanUtils now uses commons-logging for all log messages.
      *             Use your favorite logging tool to configure logging for
      *             this class.
@@ -124,7 +124,7 @@ public class BeanUtils {
      * @exception IllegalAccessException if the caller does not have
      *  access to the property accessor method
      * @exception IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null or if the <code>dest</code> 
+     *  <code>orig</code> argument is null or if the <code>dest</code>
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
      * @exception InvocationTargetException if the property accessor method
@@ -133,14 +133,14 @@ public class BeanUtils {
      */
     public static void copyProperties(Object dest, Object orig)
         throws IllegalAccessException, InvocationTargetException {
-        
+
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
 
     /**
      * <p>Copy the specified property value to the specified destination bean,
-     * performing any type conversion that is required.</p>    
+     * performing any type conversion that is required.</p>
      *
      * <p>For more details see <code>BeanUtilsBean</code>.</p>
      *
@@ -152,7 +152,7 @@ public class BeanUtils {
      *  access to the property accessor method
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
-     * @see BeanUtilsBean#copyProperty     
+     * @see BeanUtilsBean#copyProperty
      */
     public static void copyProperty(Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
@@ -176,7 +176,7 @@ public class BeanUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
-     * @see BeanUtilsBean#describe 
+     * @see BeanUtilsBean#describe
      */
     public static Map describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
@@ -202,7 +202,7 @@ public class BeanUtils {
      *  throws an exception
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
-     * @see BeanUtilsBean#getArrayProperty 
+     * @see BeanUtilsBean#getArrayProperty
      */
     public static String[] getArrayProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -234,7 +234,7 @@ public class BeanUtils {
     public static String getIndexedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        
+
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
@@ -429,7 +429,7 @@ public class BeanUtils {
      */
     public static void populate(Object bean, Map properties)
         throws IllegalAccessException, InvocationTargetException {
-        
+
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
 
@@ -456,9 +456,9 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
     }
 
-    /** 
+    /**
      * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     * 
+     *
      * @param  throwable The throwable.
      * @param  cause     The cause of the throwable.
      * @return  true if the cause was initialized, otherwise false.

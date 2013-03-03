@@ -50,13 +50,13 @@ public class Jira381TestCase extends TestCase {
      * See Jira issue# BEANUTILS-381.
      */
     public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
-        
+
         Class target = TestServiceBean.class;
         String methodName = "performOp";
         Class[] runtimeClasses = new Class[]{TestObjectSubclass.class};
-        
+
         Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
-        
+
         assertEquals(target, returned.getDeclaringClass());
         assertEquals(methodName, returned.getName());
         assertEquals(TestObject.class, returned.getParameterTypes()[0]);
@@ -66,20 +66,20 @@ public class Jira381TestCase extends TestCase {
      * Test bean.
      */
     public class TestServiceBean{
-        
+
         /**
          * Generic object method
          */
         public void performOp(Object o){
         }
-        
+
         /**
          * Object method
          */
         public void performOp(TestObject o){
         }
     }
-    
+
     /**
      * Test object.
      *

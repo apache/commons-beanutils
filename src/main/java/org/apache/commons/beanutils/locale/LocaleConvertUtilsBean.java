@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.apache.commons.beanutils.locale;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -48,9 +48,9 @@ import java.util.Set;
  * specified Class, String arrays to arrays of the specified Class and
  * object to locale-sensitive String scalar value.</p>
  *
- * <p>This class provides the implementations used by the static utility methods in 
+ * <p>This class provides the implementations used by the static utility methods in
  * {@link LocaleConvertUtils}.</p>
- * 
+ *
  * <p>The actual {@link LocaleConverter} instance to be used
  * can be registered for each possible destination Class. Unless you override them, standard
  * {@link LocaleConverter} instances are provided for all of the following
@@ -84,8 +84,8 @@ import java.util.Set;
  * @since 1.7
  */
 public class LocaleConvertUtilsBean {
-    
-    /** 
+
+    /**
      * Gets singleton instance.
      * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
      * @return the singleton instance
@@ -122,9 +122,9 @@ public class LocaleConvertUtilsBean {
         deregister();
         mapConverters.setFast(true);
     }
-    
+
     // --------------------------------------------------------- Properties
-     
+
     /**
      * getter for defaultLocale.
      * @return the default locale
@@ -147,7 +147,7 @@ public class LocaleConvertUtilsBean {
             defaultLocale = locale;
         }
     }
-    
+
     /**
      * getter for applyLocalized
      *
@@ -415,11 +415,11 @@ public class LocaleConvertUtilsBean {
     public LocaleConverter lookup(Class clazz, Locale locale) {
 
         LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
-        
+
         if (log.isTraceEnabled()) {
             log.trace("LocaleConverter:" + converter);
         }
-        
+
         return converter;
     }
 

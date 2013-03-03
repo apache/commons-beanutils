@@ -31,10 +31,10 @@ import java.util.Locale;
 
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+ * <p>Standard {@link org.apache.commons.beanutils.locale.LocaleConverter}
  * implementation that converts an incoming
  * locale-sensitive String into a <code>java.util.Date</code> object,
- * optionally using a default value or throwing a 
+ * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
@@ -52,16 +52,16 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /** Should the date conversion be lenient? */
     boolean isLenient = false;
 
-    /** 
-     * Default Pattern Characters 
-     * 
+    /**
+     * Default Pattern Characters
+     *
      */
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -74,7 +74,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -87,7 +87,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -99,7 +99,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -112,7 +112,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -125,7 +125,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs.
      *
@@ -139,7 +139,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
@@ -153,7 +153,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine.
@@ -167,7 +167,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -180,7 +180,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -195,7 +195,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs. An unlocalized pattern is used for the convertion.
      *
@@ -209,7 +209,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter} 
+     * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
      *
@@ -224,7 +224,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     }
 
     // --------------------------------------------------------- Methods
-    
+
     /**
      * Returns whether date formatting is lenient.
      *
@@ -234,10 +234,10 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     public boolean isLenient() {
         return isLenient;
     }
-    
+
     /**
      * Specify whether or not date-time parsing should be lenient.
-     * 
+     *
      * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
      * @see java.text.DateFormat#setLenient
      */
@@ -255,12 +255,12 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return the converted Date value
      *
-     * @exception org.apache.commons.beanutils.ConversionException 
+     * @exception org.apache.commons.beanutils.ConversionException
      * if conversion cannot be performed successfully
      * @throws ParseException if an error occurs parsing
      */
     protected Object parse(Object value, String pattern) throws ParseException {
- 
+
         // Handle Date
         if (value instanceof java.util.Date) {
             return value;
@@ -274,12 +274,12 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          if (locPattern) {
              pattern = convertLocalizedPattern(pattern, locale);
          }
- 
+
          // Create Formatter - use default if pattern is null
          DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
                                                 : new SimpleDateFormat(pattern, locale);
          formatter.setLenient(isLenient);
- 
+
 
          // Parse the Date
         ParsePosition pos = new ParsePosition(0);
@@ -296,7 +296,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
 
         return parsedValue;
      }
-   
+
      /**
       * Convert a pattern from a localized format to the default format.
       *
@@ -305,23 +305,23 @@ public class DateLocaleConverter extends BaseLocaleConverter {
       * @return pattern in 'default' symbol format
       */
      private String convertLocalizedPattern(String localizedPattern, Locale locale) {
-        
+
          if (localizedPattern == null) {
             return null;
          }
-         
+
          // Note that this is a little obtuse.
-         // However, it is the best way that anyone can come up with 
+         // However, it is the best way that anyone can come up with
          // that works with some 1.4 series JVM.
-         
+
          // Get the symbols for the localized pattern
          DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
          String localChars = localizedSymbols.getLocalPatternChars();
- 
+
          if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
              return localizedPattern;
          }
- 
+
          // Convert the localized pattern to default
          String convertedPattern = null;
          try {
@@ -331,9 +331,9 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          } catch (Exception ex) {
              log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
          }
-         return convertedPattern; 
+         return convertedPattern;
     }
-     
+
     /**
      * <p>Converts a Pattern from one character set to another.</p>
      */
@@ -351,7 +351,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
             } else {
                 if (thisChar == '\'') {
                    quoted = true;
-                } else if ((thisChar >= 'a' && thisChar <= 'z') || 
+                } else if ((thisChar >= 'a' && thisChar <= 'z') ||
                            (thisChar >= 'A' && thisChar <= 'Z')) {
                     int index = fromChars.indexOf(thisChar );
                     if (index == -1) {
