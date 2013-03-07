@@ -29,7 +29,7 @@ import junit.framework.TestCase;
  * See https://issues.apache.org/jira/browse/BEANUTILS-422
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira422TestCase extends TestCase {
 
