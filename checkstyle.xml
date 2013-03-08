@@ -51,12 +51,12 @@ limitations under the License.
       <property name="scope" value="protected"/>
       <property name="allowUndeclaredRTE" value="true"/>
     </module>
- </module>
-     <!-- Line with trailing spaces -->
-    <module name="RegexpSingleline">
-        <property name="format" value="\s+$"/>
-        <property name="message" value="Line has trailing spaces."/>
-    </module>
+  </module>
+  <!-- Line with trailing spaces -->
+  <module name="RegexpSingleline">
+    <property name="format" value="\s+$"/>
+    <property name="message" value="Line has trailing spaces."/>
+  </module>
 </module>
                         
 
