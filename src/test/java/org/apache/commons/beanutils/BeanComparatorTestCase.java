@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
  * <p>
  *  Test Case for the BeanComparator class.
  *
- * @author <a href="mailto:epugh@upstate.com">Eric Pugh</a>
  * @version $Revision$
  */
 

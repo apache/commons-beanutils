@@ -86,14 +86,6 @@ import org.apache.commons.logging.LogFactory;
  *     supported.</li>
  * </ul>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author Rey Francois
- * @author Gregor Rayman
- * @author Jan Sorensen
- * @author Scott Sanders
- * @author Erik Meade
  * @version $Revision$ $Date$
  * @see Resolver
  * @see PropertyUtils

@@ -46,13 +46,6 @@ import org.apache.commons.logging.LogFactory;
  * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author Rey Fran&#231;ois
- * @author Gregor Ra&#253;man
- * @author Jan Sorensen
- * @author Robert Burrell Donkin
  */
 
 public class MethodUtils {

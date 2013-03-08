@@ -38,7 +38,6 @@ package org.apache.commons.beanutils.converters;
  * of the existing ConvertUtils framework.
  *
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.3
  */

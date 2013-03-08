@@ -120,10 +120,6 @@ import org.apache.commons.logging.LogFactory;
  * AbstractArrayConverter for the supported input formats for these converters.
  * </p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author James Strachan
  * @version $Revision$ $Date$
  * @since 1.7
  */

@@ -33,8 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * Test Case for changes made during Beanutils Beanification
  * </p>
  *
- * @author Robert Burrell Donkin
- * @author Juozas Baliuka
  * @version $Revision$ $Date$
  */
 

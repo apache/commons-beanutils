@@ -36,7 +36,6 @@ import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCa
  * edit the build.xml.
  * </p>
  *
- * @author  Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

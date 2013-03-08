@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.8.4" date="in SVN" description="Bug fix for 1.8.3">
+      <action dev="britter" type="update" issue="BEANUTILS-431" >
+         Remove @author tags and move missing authors to pom.xml
+      </action>
       <action dev="britter" type="update" issue="BEANUTILS-432" >
          Switch to Java 1.5
       </action>

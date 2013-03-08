@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils;
 
-/** @author Robert Burrell Donkin */
 public class SonOfAlphaBean extends AlphaBean {
 
     public SonOfAlphaBean(String name) {

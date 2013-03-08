@@ -33,7 +33,6 @@ import junit.framework.TestSuite;
 /**
  * Test accessing RowSets via DynaBeans.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

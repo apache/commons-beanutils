@@ -77,7 +77,6 @@ import java.util.Iterator;
  *   }
  * </pre>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

@@ -33,7 +33,6 @@ import java.util.HashMap;
  * constructor of its own that accepts a <code>DynaClass</code>.  This is
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
- * @author Craig McClanahan
  * @version $Revision$ $Date$
  */
 

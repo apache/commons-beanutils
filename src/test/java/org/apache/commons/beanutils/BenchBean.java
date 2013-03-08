@@ -22,7 +22,6 @@ package org.apache.commons.beanutils;
 /**
  * Plain old java bean (POJO) for microbenchmarks.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

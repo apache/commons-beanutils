@@ -21,7 +21,6 @@ package org.apache.commons.beanutils;
  * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query
  * against given bean since a nested bean referenced is null.
  *
- * @author Robert Burrell Donkin
  * @since 1.7
  */
 

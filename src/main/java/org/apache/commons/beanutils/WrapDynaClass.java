@@ -44,7 +44,6 @@ import java.util.WeakHashMap;
  * </pre></code>
  * <p>
  *
- * @author Craig McClanahan
  * @version $Revision$ $Date$
  */
 

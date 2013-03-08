@@ -98,7 +98,6 @@ import java.util.WeakHashMap;
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  *
  * @see java.lang.Thread#getContextClassLoader
- * @author Eric Pabst
  */
 public class ContextClassLoaderLocal {
     private final Map valueByClassLoader = new WeakHashMap();

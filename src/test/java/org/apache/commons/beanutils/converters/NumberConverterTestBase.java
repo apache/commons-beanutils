@@ -31,7 +31,6 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
  *
- * @author Rodney Waldhoff
  * @version $Revision$ $Date$
  */
 

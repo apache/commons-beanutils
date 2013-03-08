@@ -22,7 +22,6 @@ package org.apache.commons.beanutils.priv;
 /**
  * Interface that is directly implemented by PrivateBean.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

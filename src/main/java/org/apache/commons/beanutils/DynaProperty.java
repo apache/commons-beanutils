@@ -38,7 +38,6 @@ import java.util.Map;
  * Alternatively, an implementatin may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

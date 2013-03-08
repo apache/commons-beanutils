@@ -23,7 +23,6 @@ package org.apache.commons.beanutils;
  * This is a public subclass of TestBean.  All of our properties should still
  * be accessible via reflection.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

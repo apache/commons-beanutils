@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
  * edit the build.xml.
  * </p>
  *
- * @author  Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

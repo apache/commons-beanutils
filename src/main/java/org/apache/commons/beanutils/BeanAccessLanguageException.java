@@ -22,7 +22,6 @@ package org.apache.commons.beanutils;
  * against given bean. This is a runtime exception and access langauges are encouraged
  * to subclass to create custom exceptions whenever appropriate.
  *
- * @author Robert Burrell Donkin
  * @since 1.7
  */
 

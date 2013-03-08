@@ -25,7 +25,6 @@ import java.io.File;
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  *
- * @author James Strachan
  * @version $Revision$ $Date$
  * @since 1.6
  */

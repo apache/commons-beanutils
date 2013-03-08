@@ -29,9 +29,6 @@ package org.apache.commons.beanutils;
  * APIs ... it's here primarily to preserve some concepts that were in the
  * original proposal for further discussion.</p>
  *
- * @author Craig McClanahan
- * @author Michael Smith
- * @author Paulo Gaspar
  * @version $Revision$ $Date$
  */
 

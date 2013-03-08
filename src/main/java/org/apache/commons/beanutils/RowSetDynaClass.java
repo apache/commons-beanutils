@@ -62,7 +62,6 @@ import java.util.List;
  * convenient mechanism for transporting data sets to remote Java-based
  * application components.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

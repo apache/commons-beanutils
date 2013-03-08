@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 /**
  * Test cases for <code>BeanPropertyValueEqualsPredicateTest</code>.
  *
- * @author Norm Deane
  */
 public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
 

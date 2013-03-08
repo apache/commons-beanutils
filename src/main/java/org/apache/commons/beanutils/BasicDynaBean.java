@@ -37,7 +37,6 @@ import java.util.Map;
  * successfully serialized and deserialized <strong>ONLY</strong> if all
  * property values are <code>Serializable</code>.</p>
  *
- * @author Craig McClanahan
  * @version $Revision$ $Date$
  */
 

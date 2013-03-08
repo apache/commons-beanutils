@@ -30,7 +30,6 @@ import org.apache.commons.logging.Log;
 /**
  * Test Case for the DateLocaleConverter class.
  *
- * @author Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

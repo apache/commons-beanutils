@@ -62,8 +62,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
- * @author Craig R. McClanahan
- * @author Jan Sorensen
  * @version $Revision$ $Date$
  */
 

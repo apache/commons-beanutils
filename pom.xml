@@ -125,6 +125,42 @@
       <email>britter@apache.org</email>
       <organization>Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <name>Tim O'Brien</name>
+      <id>tobrien</id>
+      <email>tobrien@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>David Eric Pugh</name>
+      <id>epugh</id>
+      <email>epugh@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Rodney Waldhoff</name>
+      <id>rwaldhoff</id>
+      <email>rwaldhoff@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Morgan James Delagrange</name>
+      <id>morgand</id>
+      <email>morgand@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>John E. Conlon</name>
+      <id>jconlon</id>
+      <email>jconlon@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Stephen Colebourne</name>
+      <id>scolebourne</id>
+      <email>scolebourne@apache.org</email>
+      <organization>Apache Software Foundation</organization>
+    </developer>
   </developers>
 
   <contributors>
@@ -146,8 +182,80 @@
     </contributor>    
     <contributor>
       <name>Marcus Zander</name>
-      <email>marcus.z@gmx.de</email>
-    </contributor>    
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Paul Hamamnt</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Rune Johannesen</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Clebert Suconic</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Norm Deane</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Ralph Schaer</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Chris Audley</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Rey Fran&#231;ois</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Gregor Ra&#253;man</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Jan Sorensen</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Eric Pabst</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Paulo Gaspar</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Michael Smith</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>George Franciscus</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Erik Meade</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Tomas Viberg</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Yauheny Mikulski</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Michael Szlapa</name>
+      <email></email>
+    </contributor>
+    <contributor>
+      <name>Juozas Baliuka</name>
+      <email></email>
+    </contributor>
   </contributors>
 
   <dependencies>

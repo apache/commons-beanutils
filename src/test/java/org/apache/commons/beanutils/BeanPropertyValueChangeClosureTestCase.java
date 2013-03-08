@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 /**
  * Test cases for <code>BeanPropertyValueChangeClosure</code>.
  *
- * @author Norm Deane
  */
 public class BeanPropertyValueChangeClosureTestCase extends TestCase {
 

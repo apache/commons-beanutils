@@ -25,9 +25,6 @@ package org.apache.commons.beanutils;
  * <p>For more details, see <code>ConvertUtilsBean</code> which provides the
  * implementations for these methods.</p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
  * @version $Revision$ $Date$
  * @see ConvertUtilsBean
  */

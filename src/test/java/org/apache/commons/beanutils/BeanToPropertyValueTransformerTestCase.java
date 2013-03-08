@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 /**
  * Test cases for <code>BeanToPropertyValueTransformer</code>.
  *
- * @author Norm Deane
  */
 public class BeanToPropertyValueTransformerTestCase extends TestCase {
 

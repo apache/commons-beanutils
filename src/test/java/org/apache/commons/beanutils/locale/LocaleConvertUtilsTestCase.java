@@ -37,8 +37,6 @@ import org.apache.commons.beanutils.ConversionException;
  *  See unimplemented functionality of the convert utils in the method begining with fixme
  * </p>
  *
- * @author  Michael Szlapa
- * @author Paul Hamamnt & Rune Johannesen (pairing) - patches.
  * @version $Revision$ $Date$
  */
 

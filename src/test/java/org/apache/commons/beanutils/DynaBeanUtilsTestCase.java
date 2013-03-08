@@ -33,7 +33,6 @@ import junit.framework.TestSuite;
 /**
  * Test case for BeanUtils when the underlying bean is actually a DynaBean.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

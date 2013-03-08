@@ -41,12 +41,6 @@ import java.util.Locale;
  * <p>Utility methods for populating JavaBeans properties
  * via reflection in a locale-dependent manner.</p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author Rey Francois
- * @author Gregor Rayman
- * @author Yauheny Mikulski
  * @since 1.7
  */
 

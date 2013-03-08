@@ -22,8 +22,6 @@ import java.util.Properties;
 /**
  * Bean with inner bean.
  *
- * @author John E. Conlon
- * @author Robert Burrell Donkin
  */
 public class BeanWithInnerBean {
   private final InnerBean innerBean = new InnerBean();

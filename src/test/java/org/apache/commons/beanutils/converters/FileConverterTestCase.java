@@ -28,7 +28,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the FileConverter class.
  *
- * @author James Strachan
  * @version $Revision$ $Date$
  */
 

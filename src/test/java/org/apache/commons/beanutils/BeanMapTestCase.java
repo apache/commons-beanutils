@@ -35,8 +35,6 @@ import org.apache.commons.collections.Transformer;
  *
  * @version $Revision$ $Date$
  *
- * @author Morgan Delagrange
- * @author Stephen Colebourne
  */
 public class BeanMapTestCase extends AbstractTestMap {
 

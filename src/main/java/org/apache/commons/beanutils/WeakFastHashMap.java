@@ -60,9 +60,6 @@ import java.util.WeakHashMap;
  *
  * @since Commons Collections 1.0
  * @version $Revision$ $Date$
- *
- * @author Craig R. McClanahan
- * @author Stephen Colebourne
  */
 class WeakFastHashMap extends HashMap {
 

@@ -46,7 +46,6 @@ import java.util.Map;
  * <p>Mock object that implements enough of <code>java.sql.ResultSet</code>
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

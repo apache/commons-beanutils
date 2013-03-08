@@ -75,7 +75,6 @@ import java.lang.reflect.InvocationTargetException;
  *    </li>
  * </ul>
  *
- * @author Norm Deane
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see org.apache.commons.collections.Closure
  */

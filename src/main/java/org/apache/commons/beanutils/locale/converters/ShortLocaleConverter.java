@@ -29,8 +29,6 @@ import org.apache.commons.beanutils.ConversionException;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
- *
- * @author Yauheny Mikulski
  */
 
 public class ShortLocaleConverter extends DecimalLocaleConverter {

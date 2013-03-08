@@ -25,7 +25,6 @@ package org.apache.commons.beanutils;
  * The idea is that catching this exception is a clear signal that this method
  * has been called.
  *
- * @author Robert Burrell Donkin
  */
 
 public class ThrowExceptionConverter implements Converter {

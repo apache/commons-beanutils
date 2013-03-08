@@ -104,7 +104,6 @@ import java.lang.reflect.InvocationTargetException;
  * </ul>
  * </p>
  *
- * @author Norm Deane
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see org.apache.commons.collections.Predicate
  */

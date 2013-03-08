@@ -80,7 +80,6 @@ import java.util.Set;
  * It's important that {@link LocaleConverter} should be registered for
  * the specified locale and Class (or primitive type).
  *
- * @author Yauheny Mikulski
  * @since 1.7
  */
 public class LocaleConvertUtilsBean {

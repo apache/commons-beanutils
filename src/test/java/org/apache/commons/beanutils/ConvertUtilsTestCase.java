@@ -35,7 +35,6 @@ import junit.framework.TestSuite;
  *  Test Case for the ConvertUtils class.
  * </p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

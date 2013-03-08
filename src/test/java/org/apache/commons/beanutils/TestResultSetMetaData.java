@@ -32,7 +32,6 @@ import java.sql.Types;
  * <code>java.sql.ResultSetMetaData</code>
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

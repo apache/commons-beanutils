@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the LongConverter class.
  *
- * @author Rodney Waldhoff
  * @version $Revision$ $Date$
  */
 

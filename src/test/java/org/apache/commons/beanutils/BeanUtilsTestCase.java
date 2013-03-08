@@ -59,7 +59,6 @@ import junit.framework.TestSuite;
  *   <li>getArrayProperty(Object bean, String name)</li>
  * </ul>
  *
- * @author <a href="mailto:geirm@optonline.net">Geir Magnusson Jr.</a>
  * @version $Revision$
  */
 

@@ -24,7 +24,6 @@ import java.util.Map;
 /**
  * Just a java bean (JAJB) to try to replicate a reported bug
  *
- * @author Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

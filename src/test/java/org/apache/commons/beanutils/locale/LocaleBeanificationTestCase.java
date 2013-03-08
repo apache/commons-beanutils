@@ -43,8 +43,6 @@ import java.util.Locale;
  * This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
  *
- * @author Robert Burrell Donkin
- * @author Juozas Baliuka
  * @version $Revision$ $Date$
  */
 

@@ -23,7 +23,6 @@ import java.util.Hashtable;
 /**
  * Used to test
  *
- * @author Robert Burrell
  */
 
 public class ExtendMapBean extends Hashtable {

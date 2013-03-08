@@ -36,14 +36,6 @@ import java.lang.reflect.Modifier;
  * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author Rey Francois
- * @author Gregor Rayman
- * @author Jan Sorensen
- * @author Robert Burrell Donkin
- * @author Rodney Waldhoff
  * @version $Revision$ $Date$
  */
 public class ConstructorUtils {

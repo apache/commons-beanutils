@@ -29,8 +29,6 @@ import java.io.Serializable;
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
  *
- * @author Craig R. McClanahan
- * @author Rodney Waldhoff
  * @version $Revision$ $Date$
  */
 

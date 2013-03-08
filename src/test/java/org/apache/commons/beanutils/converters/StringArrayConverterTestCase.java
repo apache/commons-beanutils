@@ -22,7 +22,6 @@ import junit.framework.TestCase;
 /**
  * Test Case for StringArrayConverter
  *
- * @author Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

@@ -46,9 +46,6 @@ import org.apache.commons.collections.Transformer;
  * property is considered non existent in the Map
  *
  * @version $Revision$ $Date$
- *
- * @author James Strachan
- * @author Stephen Colebourne
  */
 public class BeanMap extends AbstractMap implements Cloneable {
 

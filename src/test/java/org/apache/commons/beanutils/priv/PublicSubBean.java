@@ -27,7 +27,6 @@ package org.apache.commons.beanutils.priv;
  *
  * <p>This is the default access superclass</p>
  *
- * @author Robert Burrell Donkin
  * @version $Revision$ $Date$
  */
 

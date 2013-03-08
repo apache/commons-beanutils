@@ -22,8 +22,6 @@ package org.apache.commons.beanutils.priv;
 /**
  * Factory class for PrivateBean instances.
  *
- * @author Craig R. McClanahan
- * @author Jan Sorensen
  * @version $Revision$ $Date$
  */
 

@@ -30,7 +30,6 @@ import java.util.NoSuchElementException;
  * object returned by this iterator will be a {@link DynaBean} that
  * represents a single row from the result set being wrapped.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

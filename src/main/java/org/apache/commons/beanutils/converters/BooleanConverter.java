@@ -48,7 +48,6 @@ import org.apache.commons.beanutils.ConversionException;
  *
  * <p>Case is ignored when converting values to true or false.</p>
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.3
  */

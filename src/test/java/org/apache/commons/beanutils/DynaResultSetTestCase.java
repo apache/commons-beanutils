@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
 /**
  * Test accessing ResultSets via DynaBeans.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  */
 

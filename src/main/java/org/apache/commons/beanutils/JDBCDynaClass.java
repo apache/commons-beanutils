@@ -31,8 +31,6 @@ import java.util.Map;
 /**
  * <p>Provides common logic for JDBC implementations of {@link DynaClass}.</p>
  *
- * @author   Craig R. McClanahan
- * @author   George Franciscus
  * @version $Revision$ $Date$
  */
 

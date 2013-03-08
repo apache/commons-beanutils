@@ -43,11 +43,6 @@ import org.apache.commons.logging.LogFactory;
  * Different instances can be used to isolate caches between classloaders
  * and to vary the value converters registered.</p>
  *
- * @author Craig R. McClanahan
- * @author Ralph Schaer
- * @author Chris Audley
- * @author Rey Francois
- * @author Gregor Rayman
  * @version $Revision$ $Date$
  * @see BeanUtils
  * @since 1.7

@@ -26,8 +26,6 @@ package org.apache.commons.beanutils;
  * will recognize such beans and treat them as standard JavaBeans for the
  * purpose of retrieving and setting property values.</p>
  *
- * @author Craig McClanahan
- * @author Paulo Gaspar
  * @version $Revision$ $Date$
  */
 

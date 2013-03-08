@@ -32,7 +32,6 @@ import org.apache.commons.beanutils.ConversionException;
  * There is also some special handling where the input is of type int[].
  * See method convert for more details.
  *
- * @author Craig R. McClanahan
  * @version $Revision$ $Date$
  * @since 1.4
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
