@@ -41,7 +41,7 @@ The <action> type attribute can be add,update,fix,remove.
 
     <release version="1.8.4" date="in SVN" description="Bug fix for 1.8.3">
       <action dev="britter" type="update" issue="BEANUTILS-437" >
-         Replace $Date$ and $Revision$ SVN keywords with $Id$
+         Replace Date and Revision SVN keywords with Id
       </action>
       <action dev="britter" type="update" issue="BEANUTILS-431" >
          Remove @author tags and move missing authors to pom.xml
