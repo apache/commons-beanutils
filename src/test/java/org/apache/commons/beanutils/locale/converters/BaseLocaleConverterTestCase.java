@@ -72,6 +72,7 @@ public class BaseLocaleConverterTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         // Default Locale (Use US)
@@ -114,6 +115,7 @@ public class BaseLocaleConverterTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         converter = null;

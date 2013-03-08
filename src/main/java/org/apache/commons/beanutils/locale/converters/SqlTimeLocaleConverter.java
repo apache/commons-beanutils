@@ -213,6 +213,7 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter {
      * cannot be performed successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
 
         return new Time(((java.util.Date) super.parse(value, pattern)).getTime());

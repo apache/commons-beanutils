@@ -82,6 +82,7 @@ public class Jira61TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         testBean = Jira61BeanFactory.createBean();
@@ -95,6 +96,7 @@ public class Jira61TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }

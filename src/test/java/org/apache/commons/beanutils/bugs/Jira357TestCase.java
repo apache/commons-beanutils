@@ -64,6 +64,7 @@ public class Jira357TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
     }
@@ -73,6 +74,7 @@ public class Jira357TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }
@@ -169,18 +171,23 @@ public class Jira357TestCase extends TestCase {
         private boolean bar;
         private ConcreteTestBean.InnerClass innerClassProperty;
 
+        @Override
         public String getFoo() {
             return foo;
         }
+        @Override
         public void setFoo(String foo) {
             this.foo = foo;
         }
+        @Override
         public boolean isBar() {
             return bar;
         }
+        @Override
         public void setBar(boolean bar) {
             this.bar = bar;
         }
+        @Override
         public ConcreteTestBean.InnerClass getInnerClassProperty() {
             return innerClassProperty;
         }

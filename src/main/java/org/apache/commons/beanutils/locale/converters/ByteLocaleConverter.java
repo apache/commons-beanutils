@@ -213,6 +213,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
         final Number parsed = (Number) super.parse(value, pattern);
         if (parsed.longValue() != parsed.byteValue()) {

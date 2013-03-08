@@ -198,6 +198,7 @@ public class PropertyUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
 
         bean = new TestBean();
@@ -231,6 +232,7 @@ public class PropertyUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         bean = null;

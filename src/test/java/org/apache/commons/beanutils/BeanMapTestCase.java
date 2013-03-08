@@ -178,6 +178,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     //
     // Then, I manually added the "class" key, which is a property that exists for
     // all beans (and all objects for that matter.
+    @Override
     public Object[] getSampleKeys() {
         Object[] keys = new Object[] {
             "someIntValue",
@@ -204,6 +205,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     private final Object objectInFullMap = new Object();
 
     // note to self: the sample values were created manually
+    @Override
     public Object[] getSampleValues() {
         Object[] values = new Object[] {
             new Integer(1234),
@@ -221,6 +223,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         return values;
     }
 
+    @Override
     public Object[] getNewSampleValues() {
         Object[] values = new Object[] {
             new Integer(223),
@@ -241,6 +244,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     /**
      * Values is a dead copy in BeanMap, so refresh each time.
      */
+    @Override
     public void verifyValues() {
         values = map.values();
         super.verifyValues();
@@ -251,6 +255,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      * bean has.  Adding and removing mappings is not possible, thus this
      * method is overridden to return false.
      */
+    @Override
     public boolean isPutAddSupported() {
         return false;
     }
@@ -260,10 +265,12 @@ public class BeanMapTestCase extends AbstractTestMap {
      * bean has.  Adding and removing mappings is not possible, thus this
      * method is overridden to return false.
      */
+    @Override
     public boolean isRemoveSupported() {
         return false;
     }
 
+    @Override
     public Map makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
@@ -281,10 +288,12 @@ public class BeanMapTestCase extends AbstractTestMap {
         return new BeanMap(bean);
     }
 
+    @Override
     public Map makeEmptyMap() {
         return new BeanMap();
     }
 
+    @Override
     public String[] ignoredTests() {
         // Ignore the serialization tests on collection views.
         return new String[] {
@@ -309,6 +318,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      * UnsupportedOperationException since this class is not add/remove
      * modifiable.  In our case though, we do not always throw that exception.
      */
+    @Override
     public void testMapClear() {
         //TODO: make sure a call to BeanMap.clear returns the bean to its
         //default initialization values.
@@ -318,6 +328,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Need to override this method because the "put()" method on the bean
      * doesn't work for this type of Map.
      */
+    @Override
     public void testMapPut() {
         // see testBeanMapPutAllWriteable
     }

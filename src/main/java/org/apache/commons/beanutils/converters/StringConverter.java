@@ -70,6 +70,7 @@ public final class StringConverter extends AbstractConverter {
      * @return The default type this <code>Converter</code> handles.
      * @since 1.8.0
      */
+    @Override
     protected Class getDefaultType() {
         return String.class;
     }
@@ -84,6 +85,7 @@ public final class StringConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      * @since 1.8.0
      */
+    @Override
     protected Object convertToType(Class type, Object value) throws Throwable {
         return value.toString();
     }

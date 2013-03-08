@@ -44,6 +44,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
         ConvertUtils.deregister();
         BeanUtilsBean.setInstance(new BeanUtilsBean2());
@@ -61,6 +62,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         bean = null;
     }
@@ -68,6 +70,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>copyProperty()</code> converting to a String.
      */
+    @Override
     public void testCopyPropertyConvertToString() {
         try {
             BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
@@ -80,6 +83,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>copyProperty()</code> converting to a String.
      */
+    @Override
     public void testCopyPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
@@ -94,6 +98,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>copyProperty()</code> converting to a String on indexed property
      */
+    @Override
     public void testCopyPropertyConvertToStringIndexed() {
         try {
             bean.setStringArray(new String[1]);
@@ -108,6 +113,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>getArrayProperty()</code> converting to a String.
      */
+    @Override
     public void testGetArrayPropertyDate() {
         String[] value = null;
         try {
@@ -123,6 +129,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>getArrayProperty()</code> converting to a String.
      */
+    @Override
     public void testGetIndexedPropertyDate() {
         String value = null;
         try {
@@ -137,6 +144,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>getSimpleProperty()</code> converting to a String.
      */
+    @Override
     public void testGetSimplePropertyDate() {
         String value = null;
         try {
@@ -151,6 +159,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>setProperty()</code> converting to a String.
      */
+    @Override
     public void testSetPropertyConvertToString() {
         try {
             BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
@@ -163,6 +172,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>setProperty()</code> converting to a String array.
      */
+    @Override
     public void testSetPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
@@ -177,6 +187,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     /**
      * Test <code>setProperty()</code> converting to a String on indexed property
      */
+    @Override
     public void testSetPropertyConvertToStringIndexed() {
         try {
             bean.setStringArray(new String[1]);

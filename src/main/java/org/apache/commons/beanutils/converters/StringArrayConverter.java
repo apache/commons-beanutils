@@ -37,6 +37,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */
 
+@Deprecated
 public final class StringArrayConverter extends AbstractArrayConverter {
 
 
@@ -119,6 +120,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * successfully, or the input is null and there is no default value set
      * for this object.
      */
+    @Override
     public Object convert(Class type, Object value) {
 
         // Deal with a null value

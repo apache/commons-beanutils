@@ -80,6 +80,7 @@ public class DynaResultSetTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
@@ -100,6 +101,7 @@ public class DynaResultSetTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         dynaClass = null;

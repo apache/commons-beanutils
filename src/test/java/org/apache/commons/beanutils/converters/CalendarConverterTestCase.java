@@ -49,6 +49,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * Create the Converter with no default value.
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter() {
         return new CalendarConverter();
     }
@@ -58,6 +59,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @param defaultValue The default value
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter(Object defaultValue) {
         return new CalendarConverter(defaultValue);
     }
@@ -66,6 +68,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * Return the expected type
      * @return The expected type
      */
+    @Override
     protected Class getExpectedType() {
         return Calendar.class;
     }
@@ -76,6 +79,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @param value The Date value to convert
      * @return The converted value
      */
+    @Override
     protected Object toType(Calendar value) {
         return value;
    }

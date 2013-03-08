@@ -54,6 +54,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
     /**
      * Test Date Converter with no default value
      */
+    @Override
     public void testLocale() {
 
         // Re-set the default Locale to Locale.US
@@ -92,6 +93,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
     /**
      * Test default String to java.sql.Time conversion
      */
+    @Override
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
@@ -112,6 +114,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * Create the Converter with no default value.
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter() {
         return new SqlTimeConverter();
     }
@@ -121,6 +124,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * @param defaultValue The default value
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter(Object defaultValue) {
         return new SqlTimeConverter(defaultValue);
     }
@@ -129,6 +133,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * Return the expected type
      * @return The expected type
      */
+    @Override
     protected Class getExpectedType() {
         return Time.class;
     }
@@ -139,6 +144,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * @param value The Calendar value to convert
      * @return The converted value
      */
+    @Override
     protected Object toType(Calendar value) {
         return new Time(getTimeInMillis(value));
     }

@@ -87,6 +87,7 @@ public class WrapDynaClass implements DynaClass {
      *
      * @deprecated No longer initialized, use getBeanClass() method instead
      */
+    @Deprecated
     protected Class beanClass = null;
 
 
@@ -123,6 +124,7 @@ public class WrapDynaClass implements DynaClass {
 
     private static final ContextClassLoaderLocal CLASSLOADER_CACHE =
         new ContextClassLoaderLocal() {
+            @Override
             protected Object initialValue() {
                 return new WeakHashMap();
         }
@@ -171,46 +173,61 @@ public class WrapDynaClass implements DynaClass {
      *
      * @deprecated The dynaClasses Map will be removed in a subsequent release
      */
+    @Deprecated
     protected static HashMap dynaClasses = new HashMap() {
+        @Override
         public void clear() {
             getDynaClassesMap().clear();
         }
+        @Override
         public boolean containsKey(Object key) {
             return getDynaClassesMap().containsKey(key);
         }
+        @Override
         public boolean containsValue(Object value) {
             return getDynaClassesMap().containsValue(value);
         }
+        @Override
         public Set entrySet() {
             return getDynaClassesMap().entrySet();
         }
+        @Override
         public boolean equals(Object o) {
             return getDynaClassesMap().equals(o);
         }
+        @Override
         public Object get(Object key) {
             return getDynaClassesMap().get(key);
         }
+        @Override
         public int hashCode() {
             return getDynaClassesMap().hashCode();
         }
+        @Override
         public boolean isEmpty() {
             return getDynaClassesMap().isEmpty();
         }
+        @Override
         public Set keySet() {
             return getDynaClassesMap().keySet();
         }
+        @Override
         public Object put(Object key, Object value) {
             return getDynaClassesMap().put(key, value);
         }
+        @Override
         public void putAll(Map m) {
             getDynaClassesMap().putAll(m);
         }
+        @Override
         public Object remove(Object key) {
             return getDynaClassesMap().remove(key);
         }
+        @Override
         public int size() {
             return getDynaClassesMap().size();
         }
+        @Override
         public Collection values() {
             return getDynaClassesMap().values();
         }

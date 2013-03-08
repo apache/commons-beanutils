@@ -635,6 +635,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
+    @Deprecated
     protected static Descriptor calculate(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException {
 
@@ -649,6 +650,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /** @deprecated moved into <code>LocaleBeanUtils</code> */
+    @Deprecated
     protected static class Descriptor {
 
         private int index = -1;    // Indexed subscript value (if any)

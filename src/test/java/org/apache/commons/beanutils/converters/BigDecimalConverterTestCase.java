@@ -42,6 +42,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new BigDecimal("-12");
@@ -54,20 +55,24 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(BigDecimalConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new BigDecimalConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new BigDecimalConverter(defaultValue);
     }
 
+    @Override
     protected Class getExpectedType() {
         return BigDecimal.class;
     }

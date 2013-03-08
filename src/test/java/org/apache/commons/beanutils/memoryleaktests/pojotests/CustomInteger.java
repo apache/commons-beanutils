@@ -44,6 +44,7 @@ public class CustomInteger extends Number {
      * Return the double value.
      * @return  the double value
      */
+    @Override
     public double doubleValue() {
         return i;
     }
@@ -52,6 +53,7 @@ public class CustomInteger extends Number {
      * Return the float value.
      * @return  the float value
      */
+    @Override
     public float floatValue() {
         return i;
     }
@@ -60,6 +62,7 @@ public class CustomInteger extends Number {
      * Return the integer value.
      * @return  the integer value
      */
+    @Override
     public int intValue() {
         return i;
     }
@@ -68,6 +71,7 @@ public class CustomInteger extends Number {
      * Return the long value.
      * @return  the long value
      */
+    @Override
     public long longValue() {
         return i;
     }
@@ -75,6 +79,7 @@ public class CustomInteger extends Number {
     /**
      * Return a String representation of this number.
      */
+    @Override
     public String toString() {
         return Integer.toString(i);
     }

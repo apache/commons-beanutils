@@ -69,6 +69,7 @@ public class BeanUtilsBean2 extends BeanUtilsBean {
      * @param type Class of the value to be converted to
      * @return The converted value
      */
+    @Override
     protected Object convert(Object value, Class type) {
         return getConvertUtils().convert(value, type);
     }

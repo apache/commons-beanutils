@@ -326,6 +326,7 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#lookup(Locale)
      * @deprecated This method will be modified to return a Map in the next release.
      */
+    @Deprecated
     protected static FastHashMap lookup(Locale locale) {
         return LocaleConvertUtilsBean.getInstance().lookup(locale);
     }
@@ -341,6 +342,7 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#create(Locale)
      * @deprecated This method will be modified to return a Map in the next release.
      */
+    @Deprecated
     protected static FastHashMap create(Locale locale) {
 
         return LocaleConvertUtilsBean.getInstance().create(locale);

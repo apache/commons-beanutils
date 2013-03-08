@@ -66,6 +66,7 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
         bean = new TestBean();
         alphaBean1 = new AlphaBean("alphaBean1");
@@ -85,6 +86,7 @@ public class BeanComparatorTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         bean = null;
         alphaBean1 = null;

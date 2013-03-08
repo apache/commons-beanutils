@@ -39,6 +39,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */
 
+@Deprecated
 public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
@@ -178,6 +179,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * @exception NullPointerException if value is an array, and any of the
      * array elements are null.
      */
+    @Override
     public Object convert(Class type, Object value) {
 
         // Deal with a null value

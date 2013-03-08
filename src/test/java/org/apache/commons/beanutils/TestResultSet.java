@@ -299,6 +299,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
     /** @deprecated */
+    @Deprecated
     public BigDecimal getBigDecimal(int columnIndex, int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
@@ -311,6 +312,7 @@ public class TestResultSet implements InvocationHandler {
 
 
     /** @deprecated */
+    @Deprecated
     public BigDecimal getBigDecimal(String columnName, int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
@@ -560,12 +562,14 @@ public class TestResultSet implements InvocationHandler {
 
 
     /** @deprecated */
+    @Deprecated
     public InputStream getUnicodeStream(int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
     /** @deprecated */
+    @Deprecated
     public InputStream getUnicodeStream(String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }

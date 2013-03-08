@@ -33,6 +33,7 @@ public class Jira273BeanFactory {
      */
     public static Object createAnnonymousOverriden() {
         return new PublicBeanWithMethod() {
+            @Override
             public String getBeanValue() {
                 return "AnnonymousOverriden";
             }
@@ -98,6 +99,7 @@ public class Jira273BeanFactory {
         }
     }
     private static class PrivatePublicOverriden extends PublicBeanWithMethod {
+        @Override
         public String getBeanValue() {
             return "PrivatePublicOverriden";
         }
@@ -105,6 +107,7 @@ public class Jira273BeanFactory {
     private static class PrivatePublicNotOverriden extends PublicBeanWithMethod {
     }
     private static class PrivatePrivatePublicOverriden extends PrivatePublicNotOverriden {
+        @Override
         public String getBeanValue() {
             return "PrivatePrivatePublicOverriden";
         }

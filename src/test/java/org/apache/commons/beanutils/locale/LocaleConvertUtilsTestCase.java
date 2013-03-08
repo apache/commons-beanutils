@@ -65,6 +65,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
 
         LocaleConvertUtils.deregister();
@@ -90,6 +91,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         // No action required
     }

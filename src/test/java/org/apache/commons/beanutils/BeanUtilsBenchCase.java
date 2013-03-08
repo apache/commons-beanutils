@@ -80,6 +80,7 @@ public class BeanUtilsBenchCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         // Set up loop counter (if property specified)
@@ -154,6 +155,7 @@ public class BeanUtilsBenchCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         dynaClass = null;

@@ -59,6 +59,7 @@ public final class ByteConverter extends NumberConverter {
      * @return The default type this <code>Converter</code> handles.
      * @since 1.8.0
      */
+    @Override
     protected Class getDefaultType() {
         return Byte.class;
     }

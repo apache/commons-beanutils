@@ -152,6 +152,7 @@ class WeakFastHashMap extends HashMap {
      * @param key  the key whose value is to be returned
      * @return the value mapped to that key, or null
      */
+    @Override
     public Object get(Object key) {
         if (fast) {
             return (map.get(key));
@@ -167,6 +168,7 @@ class WeakFastHashMap extends HashMap {
      *
      * @return the current size of the map
      */
+    @Override
     public int size() {
         if (fast) {
             return (map.size());
@@ -182,6 +184,7 @@ class WeakFastHashMap extends HashMap {
      *
      * @return is the map currently empty
      */
+    @Override
     public boolean isEmpty() {
         if (fast) {
             return (map.isEmpty());
@@ -199,6 +202,7 @@ class WeakFastHashMap extends HashMap {
      * @param key  the key to be searched for
      * @return true if the map contains the key
      */
+    @Override
     public boolean containsKey(Object key) {
         if (fast) {
             return (map.containsKey(key));
@@ -216,6 +220,7 @@ class WeakFastHashMap extends HashMap {
      * @param value  the value to be searched for
      * @return true if the map contains the value
      */
+    @Override
     public boolean containsValue(Object value) {
         if (fast) {
             return (map.containsValue(value));
@@ -241,6 +246,7 @@ class WeakFastHashMap extends HashMap {
      * @param value  the value to be associated with this key
      * @return the value previously mapped to the key, or null
      */
+    @Override
     public Object put(Object key, Object value) {
         if (fast) {
             synchronized (this) {
@@ -262,6 +268,7 @@ class WeakFastHashMap extends HashMap {
      *
      * @param in  the map whose mappings are to be copied
      */
+    @Override
     public void putAll(Map in) {
         if (fast) {
             synchronized (this) {
@@ -283,6 +290,7 @@ class WeakFastHashMap extends HashMap {
      * @param key  the key whose mapping is to be removed
      * @return the value removed, or null
      */
+    @Override
     public Object remove(Object key) {
         if (fast) {
             synchronized (this) {
@@ -301,6 +309,7 @@ class WeakFastHashMap extends HashMap {
     /**
      * Remove all mappings from this map.
      */
+    @Override
     public void clear() {
         if (fast) {
             synchronized (this) {
@@ -325,6 +334,7 @@ class WeakFastHashMap extends HashMap {
      * @param o  the object to be compared to this list
      * @return true if the two maps are equal
      */
+    @Override
     public boolean equals(Object o) {
         // Simple tests that require no synchronization
         if (o == this) {
@@ -388,6 +398,7 @@ class WeakFastHashMap extends HashMap {
      *
      * @return suitable integer hash code
      */
+    @Override
     public int hashCode() {
         if (fast) {
             int h = 0;
@@ -414,6 +425,7 @@ class WeakFastHashMap extends HashMap {
      *
      * @return a clone of this map
      */
+    @Override
     public Object clone() {
         WeakFastHashMap results = null;
         if (fast) {
@@ -435,6 +447,7 @@ class WeakFastHashMap extends HashMap {
      * element in the returned collection is a <code>Map.Entry</code>.
      * @return the set of map Map entries
      */
+    @Override
     public Set entrySet() {
         return new EntrySet();
     }
@@ -443,6 +456,7 @@ class WeakFastHashMap extends HashMap {
      * Return a set view of the keys contained in this map.
      * @return the set of the Map's keys
      */
+    @Override
     public Set keySet() {
         return new KeySet();
     }
@@ -451,6 +465,7 @@ class WeakFastHashMap extends HashMap {
      * Return a collection view of the values contained in this map.
      * @return the set of the Map's values
      */
+    @Override
     public Collection values() {
         return new Values();
     }
@@ -612,6 +627,7 @@ class WeakFastHashMap extends HashMap {
         }
 
 
+        @Override
         public boolean equals(Object o) {
             if (o == this) {
                 return true;
@@ -625,6 +641,7 @@ class WeakFastHashMap extends HashMap {
             }
         }
 
+        @Override
         public int hashCode() {
             if (fast) {
                 return get(map).hashCode();
@@ -699,10 +716,12 @@ class WeakFastHashMap extends HashMap {
      */
     private class KeySet extends CollectionView implements Set {
 
+        @Override
         protected Collection get(Map map) {
             return map.keySet();
         }
 
+        @Override
         protected Object iteratorNext(Map.Entry entry) {
             return entry.getKey();
         }
@@ -714,10 +733,12 @@ class WeakFastHashMap extends HashMap {
      */
     private class Values extends CollectionView {
 
+        @Override
         protected Collection get(Map map) {
             return map.values();
         }
 
+        @Override
         protected Object iteratorNext(Map.Entry entry) {
             return entry.getValue();
         }
@@ -728,10 +749,12 @@ class WeakFastHashMap extends HashMap {
      */
     private class EntrySet extends CollectionView implements Set {
 
+        @Override
         protected Collection get(Map map) {
             return map.entrySet();
         }
 
+        @Override
         protected Object iteratorNext(Map.Entry entry) {
             return entry;
         }

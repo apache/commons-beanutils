@@ -212,6 +212,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
         Number result = (Number) super.parse(value, pattern);
         if (result instanceof Long) {

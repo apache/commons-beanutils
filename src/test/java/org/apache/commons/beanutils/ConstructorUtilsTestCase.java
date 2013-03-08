@@ -52,6 +52,7 @@ public class ConstructorUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
         super.setUp();
     }
@@ -67,6 +68,7 @@ public class ConstructorUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() throws Exception {
         super.tearDown();
     }

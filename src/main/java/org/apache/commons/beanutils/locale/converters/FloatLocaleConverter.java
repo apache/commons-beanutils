@@ -214,7 +214,8 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     *  successfully
     * @throws ParseException if an error occurs parsing a String to a Number
     */
-   protected Object parse(Object value, String pattern) throws ParseException {
+   @Override
+protected Object parse(Object value, String pattern) throws ParseException {
       final Number parsed = (Number) super.parse(value, pattern);
       double doubleValue = parsed.doubleValue();
       double posDouble = (doubleValue >= 0) ? doubleValue : (doubleValue * -1);

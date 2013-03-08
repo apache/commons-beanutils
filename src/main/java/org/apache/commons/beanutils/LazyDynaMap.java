@@ -156,6 +156,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @return the underlying Map
      * @since 1.8.0
      */
+    @Override
     public Map getMap() {
         return values;
     }
@@ -168,6 +169,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      */
+    @Override
     public void set(String name, Object value) {
 
         if (isRestricted() && !values.containsKey(name)) {
@@ -468,6 +470,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * otherwise <code>false</code>
      * @exception IllegalArgumentException if no property name is specified
      */
+    @Override
     protected boolean isDynaProperty(String name) {
 
         if (name == null) {

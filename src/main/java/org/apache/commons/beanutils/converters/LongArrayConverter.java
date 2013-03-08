@@ -34,6 +34,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */
 
+@Deprecated
 public final class LongArrayConverter extends AbstractArrayConverter {
 
 
@@ -89,6 +90,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public Object convert(Class type, Object value) {
 
         // Deal with a null value

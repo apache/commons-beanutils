@@ -41,6 +41,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new BigInteger("-12");
@@ -53,20 +54,24 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(BigIntegerConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new BigIntegerConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new BigIntegerConverter(defaultValue);
     }
 
+    @Override
     protected Class getExpectedType() {
         return BigInteger.class;
     }

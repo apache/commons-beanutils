@@ -53,6 +53,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     private static final ContextClassLoaderLocal
             LOCALE_BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
+                        @Override
                         protected Object initialValue() {
                             return new LocaleBeanUtilsBean();
                         }
@@ -229,6 +230,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getIndexedProperty(
                                     Object bean,
                                     String name)
@@ -287,6 +289,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getIndexedProperty(Object bean,
                                             String name, int index)
             throws IllegalAccessException, InvocationTargetException,
@@ -335,6 +338,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getSimpleProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
@@ -393,6 +397,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getMappedProperty(Object bean,
                                            String name, String key)
             throws IllegalAccessException, InvocationTargetException,
@@ -458,6 +463,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getMappedProperty(Object bean, String name)
                                     throws
                                         IllegalAccessException,
@@ -517,6 +523,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getNestedProperty(Object bean, String name)
                                     throws
                                         IllegalAccessException,
@@ -571,6 +578,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
+    @Override
     public String getProperty(Object bean, String name)
                                 throws
                                     IllegalAccessException,
@@ -594,6 +602,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
+    @Override
     public void setProperty(Object bean, String name, Object value)
                                 throws
                                     IllegalAccessException,
@@ -901,6 +910,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * the configured {@link Resolver} implementation and this method
      * is no longer used by BeanUtils.
      */
+    @Deprecated
     protected Descriptor calculate(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException {
 
@@ -933,6 +943,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * the configured {@link Resolver} implementation and this class
      * is no longer used by BeanUtils.
      */
+    @Deprecated
     protected class Descriptor {
 
         private int index = -1;    // Indexed subscript value (if any)

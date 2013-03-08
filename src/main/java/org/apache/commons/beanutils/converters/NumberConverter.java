@@ -197,6 +197,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return the converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
+    @Override
     protected String convertToString(Object value) throws Throwable {
 
         String result = null;
@@ -227,6 +228,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
      */
+    @Override
     protected Object convertToType(Class targetType, Object value) throws Throwable {
 
         Class sourceType = value.getClass();
@@ -466,6 +468,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @return A String representation of this number converter
      */
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(toString(getClass()));

@@ -52,6 +52,7 @@ public class PropertyUtils {
      * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
      * implementation being used.
      */
+    @Deprecated
     public static final char INDEXED_DELIM = '[';
 
 
@@ -63,6 +64,7 @@ public class PropertyUtils {
      * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
      * implementation being used.
      */
+    @Deprecated
     public static final char INDEXED_DELIM2 = ']';
 
 
@@ -73,6 +75,7 @@ public class PropertyUtils {
      * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
      * implementation being used.
      */
+    @Deprecated
     public static final char MAPPED_DELIM = '(';
 
 
@@ -83,6 +86,7 @@ public class PropertyUtils {
      * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
      * implementation being used.
      */
+    @Deprecated
     public static final char MAPPED_DELIM2 = ')';
 
 
@@ -93,6 +97,7 @@ public class PropertyUtils {
      * dependant on the {@link org.apache.commons.beanutils.expression.Resolver}
      * implementation being used.
      */
+    @Deprecated
     public static final char NESTED_DELIM = '.';
 
 
@@ -109,6 +114,7 @@ public class PropertyUtils {
      *
      * @deprecated The <code>debug</code> static property is no longer used
      */
+    @Deprecated
     private static int debug = 0;
 
     /**
@@ -116,6 +122,7 @@ public class PropertyUtils {
      * @return debug property
      * @deprecated The <code>debug</code> static property is no longer used
      */
+    @Deprecated
     public static int getDebug() {
         return (debug);
     }
@@ -125,6 +132,7 @@ public class PropertyUtils {
      * @param newDebug debug property
      * @deprecated The <code>debug</code> static property is no longer used
      */
+    @Deprecated
     public static void setDebug(int newDebug) {
         debug = newDebug;
     }
@@ -335,6 +343,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getMappedPropertyDescriptors(Class)
      * @deprecated This method should not be exposed
      */
+    @Deprecated
     public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
@@ -352,6 +361,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getMappedPropertyDescriptors(Object)
      * @deprecated This method should not be exposed
      */
+    @Deprecated
     public static FastHashMap getMappedPropertyDescriptors(Object bean) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);

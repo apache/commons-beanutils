@@ -65,6 +65,7 @@ public class BeanificationTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
 
         ConvertUtils.deregister();
@@ -83,6 +84,7 @@ public class BeanificationTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         // No action required
     }
@@ -192,6 +194,7 @@ public class BeanificationTestCase extends TestCase {
 
             GetBeanUtilsBeanThread() {}
 
+            @Override
             public void run() {
                 beanUtils = BeanUtilsBean.getInstance();
                 convertUtils = ConvertUtilsBean.getInstance();
@@ -200,6 +203,7 @@ public class BeanificationTestCase extends TestCase {
                 LogFactory.releaseAll();
             }
 
+            @Override
             public String toString() {
                 return "GetBeanUtilsBeanThread";
             }
@@ -265,6 +269,7 @@ public class BeanificationTestCase extends TestCase {
                 this.signal = signal;
             }
 
+            @Override
             public void run() {
                 signal.setSignal(2);
                 signal.setBean(BeanUtilsBean.getInstance());
@@ -272,6 +277,7 @@ public class BeanificationTestCase extends TestCase {
                 signal.setPropertyUtils(PropertyUtilsBean.getInstance());
             }
 
+            @Override
             public String toString() {
                 return "GetBeanUtilsBeanThread";
             }
@@ -315,12 +321,14 @@ public class BeanificationTestCase extends TestCase {
                 this.ccll = ccll;
             }
 
+            @Override
             public void run() {
                 ccll.set(new Integer(1789));
                 signal.setSignal(2);
                 signal.setMarkerObject(ccll.get());
             }
 
+            @Override
             public String toString() {
                 return "CCLLTesterThread";
             }
@@ -356,6 +364,7 @@ public class BeanificationTestCase extends TestCase {
                 this.bean = bean;
             }
 
+            @Override
             public void run() {
                 try {
                     signal.setSignal(3);
@@ -371,6 +380,7 @@ public class BeanificationTestCase extends TestCase {
                 }
             }
 
+            @Override
             public String toString() {
                 return "TestIndependenceThread";
             }
@@ -415,12 +425,14 @@ public class BeanificationTestCase extends TestCase {
                 this.bean = bean;
             }
 
+            @Override
             public void run() {
                 BeanUtilsBean.setInstance(bean);
                 signal.setSignal(21);
                 signal.setBean(BeanUtilsBean.getInstance());
             }
 
+            @Override
             public String toString() {
                 return "SetInstanceTesterThread";
             }
@@ -459,6 +471,7 @@ public class BeanificationTestCase extends TestCase {
     // ---- Auxillary classes
 
     class TestClassLoader extends ClassLoader {
+        @Override
         public String toString() {
             return "TestClassLoader";
         }

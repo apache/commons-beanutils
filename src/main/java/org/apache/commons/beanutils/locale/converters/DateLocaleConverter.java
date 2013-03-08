@@ -258,6 +258,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * if conversion cannot be performed successfully
      * @throws ParseException if an error occurs parsing
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
 
         // Handle Date

@@ -35,6 +35,7 @@ public class Jira411TestCase extends TestCase {
     private BeanUtilsBean instance;
     private DummyBean testBean;
 
+    @Override
     protected void setUp() throws Exception {
         instance = new BeanUtilsBean();
         testBean = new DummyBean();

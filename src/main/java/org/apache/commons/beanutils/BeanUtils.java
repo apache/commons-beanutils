@@ -52,6 +52,7 @@ public class BeanUtils {
      *             Use your favorite logging tool to configure logging for
      *             this class.
      */
+    @Deprecated
     private static int debug = 0;
 
     /**
@@ -61,6 +62,7 @@ public class BeanUtils {
      *             Use your favorite logging tool to configure logging for
      *             this class.
      */
+    @Deprecated
     public static int getDebug() {
         return (debug);
     }
@@ -72,6 +74,7 @@ public class BeanUtils {
      *             Use your favorite logging tool to configure logging for
      *             this class.
      */
+    @Deprecated
     public static void setDebug(int newDebug) {
         debug = newDebug;
     }

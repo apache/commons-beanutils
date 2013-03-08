@@ -53,6 +53,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
     /**
      * Test default String to java.sql.Date conversion
      */
+    @Override
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
@@ -90,6 +91,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * Create the Converter with no default value.
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter() {
         return new SqlDateConverter();
     }
@@ -99,6 +101,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @param defaultValue The default value
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter(Object defaultValue) {
         return new SqlDateConverter(defaultValue);
     }
@@ -107,6 +110,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * Return the expected type
      * @return The expected type
      */
+    @Override
     protected Class getExpectedType() {
         return Date.class;
     }
@@ -117,6 +121,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @param value The Calendar value to convert
      * @return The converted value
      */
+    @Override
     protected Object toType(Calendar value) {
         return new java.sql.Date(getTimeInMillis(value));
     }

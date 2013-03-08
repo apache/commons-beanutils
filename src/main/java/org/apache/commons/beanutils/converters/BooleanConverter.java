@@ -153,6 +153,7 @@ public final class BooleanConverter extends AbstractConverter {
      * want a null to be returned as the default.
      * @deprecated Use constructors without default value.
      */
+    @Deprecated
     public static final Object NO_DEFAULT = new Object();
 
 
@@ -176,6 +177,7 @@ public final class BooleanConverter extends AbstractConverter {
      * @return The default type this <code>Converter</code> handles.
      * @since 1.8.0
      */
+    @Override
     protected Class getDefaultType() {
         return Boolean.class;
     }
@@ -199,6 +201,7 @@ public final class BooleanConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      * @since 1.8.0
      */
+    @Override
     protected Object convertToType(Class type, Object value) throws Throwable {
 
         // All the values in the trueStrings and falseStrings arrays are

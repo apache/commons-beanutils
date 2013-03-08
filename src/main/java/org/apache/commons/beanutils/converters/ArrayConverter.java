@@ -219,6 +219,7 @@ public class ArrayConverter extends AbstractConverter {
      *
      * @return The default type this <code>Converter</code> handles.
      */
+    @Override
     protected Class getDefaultType() {
         return defaultTypeInstance.getClass();
     }
@@ -230,6 +231,7 @@ public class ArrayConverter extends AbstractConverter {
      * @return the converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
+    @Override
     protected String convertToString(Object value) throws Throwable {
 
         int size = 0;
@@ -276,6 +278,7 @@ public class ArrayConverter extends AbstractConverter {
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
      */
+    @Override
     protected Object convertToType(Class type, Object value) throws Throwable {
 
         if (!type.isArray()) {
@@ -317,6 +320,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param value The value to convert
      * @return The value unchanged
      */
+    @Override
     protected Object convertArray(Object value) {
         return value;
     }
@@ -363,6 +367,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param type Data type to which this value should be converted.
      * @return The default value for the specified type.
      */
+    @Override
     protected Object getDefault(Class type) {
         if (type.equals(String.class)) {
             return null;
@@ -386,6 +391,7 @@ public class ArrayConverter extends AbstractConverter {
      *
      * @return A String representation of this array converter
      */
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(toString(getClass()));

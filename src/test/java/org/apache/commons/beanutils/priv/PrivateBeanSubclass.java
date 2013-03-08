@@ -48,6 +48,7 @@ class PrivateBeanSubclass extends PrivateBean {
     /**
      * A property accessible via the superclass.
      */
+    @Override
     public String getBar() {
 
         return (super.getBar());

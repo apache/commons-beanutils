@@ -100,6 +100,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         // Instantiate a new DynaBean instance
@@ -158,6 +159,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         bean = null;

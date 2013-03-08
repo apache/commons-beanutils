@@ -313,6 +313,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @exception IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(String name) {
 
         if (name == null) {

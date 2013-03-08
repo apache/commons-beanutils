@@ -211,6 +211,7 @@ public abstract class NumberConverterTestBase extends TestCase {
 
         // Invalid Type (will try via String)
         Object obj =  new Object() {
+            @Override
             public String toString() {
                 return "dsdgsdsdg";
             }

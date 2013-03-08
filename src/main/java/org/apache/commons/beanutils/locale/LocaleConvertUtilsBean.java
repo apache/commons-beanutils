@@ -432,6 +432,7 @@ public class LocaleConvertUtilsBean {
      *  the specified locale.
      * @deprecated This method will be modified to return a Map in the next release.
      */
+    @Deprecated
     protected FastHashMap lookup(Locale locale) {
         FastHashMap localeConverters;
 
@@ -458,6 +459,7 @@ public class LocaleConvertUtilsBean {
      *  for the specified locale.
      * @deprecated This method will be modified to return a Map in the next release.
      */
+    @Deprecated
     protected FastHashMap create(Locale locale) {
 
         FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
@@ -514,51 +516,67 @@ public class LocaleConvertUtilsBean {
         private DelegateFastHashMap(Map map) {
             this.map = map;
         }
+        @Override
         public void clear() {
             map.clear();
         }
+        @Override
         public boolean containsKey(Object key) {
             return map.containsKey(key);
         }
+        @Override
         public boolean containsValue(Object value) {
             return map.containsValue(value);
         }
+        @Override
         public Set entrySet() {
             return map.entrySet();
         }
+        @Override
         public boolean equals(Object o) {
             return map.equals(o);
         }
+        @Override
         public Object get(Object key) {
             return map.get(key);
         }
+        @Override
         public int hashCode() {
             return map.hashCode();
         }
+        @Override
         public boolean isEmpty() {
             return map.isEmpty();
         }
+        @Override
         public Set keySet() {
             return map.keySet();
         }
+        @Override
         public Object put(Object key, Object value) {
             return map.put(key, value);
         }
+        @Override
         public void putAll(Map m) {
             map.putAll(m);
         }
+        @Override
         public Object remove(Object key) {
             return map.remove(key);
         }
+        @Override
         public int size() {
             return map.size();
         }
+        @Override
         public Collection values() {
             return map.values();
         }
+        @Override
         public boolean getFast() {
             return BeanUtils.getCacheFast(map);
         }
+        @Override
         public void setFast(boolean fast) {
             BeanUtils.setCacheFast(map, fast);
         }

@@ -83,6 +83,7 @@ public class DynaRowSetTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         dynaClass = new RowSetDynaClass(TestResultSet.createProxy());
@@ -103,6 +104,7 @@ public class DynaRowSetTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         dynaClass = null;
@@ -360,6 +362,7 @@ public class DynaRowSetTestCase extends TestCase {
          * @return the column value
          * @throws SQLException if an error occurs
          */
+        @Override
         public Object getObject(String columnName) throws SQLException {
             if ("timestampProperty".equals(columnName)) {
                 return new CustomTimestamp();
@@ -386,6 +389,7 @@ public class DynaRowSetTestCase extends TestCase {
          * @return The column class name
          * @throws SQLException if an error occurs
          */
+        @Override
         public String getColumnClassName(int columnIndex) throws SQLException {
             String columnName = getColumnName(columnIndex);
             if (columnName.equals("dateProperty")) {
@@ -399,6 +403,7 @@ public class DynaRowSetTestCase extends TestCase {
     }
     private static class CustomTimestamp {
         private final long timestamp = new java.util.Date().getTime();
+        @Override
         public String toString() {
             return "CustomTimestamp[" + timestamp + "]";
         }

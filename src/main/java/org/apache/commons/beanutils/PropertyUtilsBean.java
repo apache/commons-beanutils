@@ -668,6 +668,7 @@ public class PropertyUtilsBean {
      * @return the mapped property descriptors
      * @deprecated This method should not be exposed
      */
+    @Deprecated
     public FastHashMap getMappedPropertyDescriptors(Class beanClass) {
 
         if (beanClass == null) {
@@ -689,6 +690,7 @@ public class PropertyUtilsBean {
      * @return the mapped property descriptors
      * @deprecated This method should not be exposed
      */
+    @Deprecated
     public FastHashMap getMappedPropertyDescriptors(Object bean) {
 
         if (bean == null) {

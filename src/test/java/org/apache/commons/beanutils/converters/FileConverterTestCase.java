@@ -43,6 +43,7 @@ public class FileConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
     }
@@ -51,6 +52,7 @@ public class FileConverterTestCase extends TestCase {
         return new TestSuite(FileConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }

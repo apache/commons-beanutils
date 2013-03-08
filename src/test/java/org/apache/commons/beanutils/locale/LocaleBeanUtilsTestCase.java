@@ -49,6 +49,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
     }
 
@@ -65,6 +66,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
     }
 

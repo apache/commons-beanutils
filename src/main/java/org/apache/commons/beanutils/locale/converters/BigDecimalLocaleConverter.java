@@ -212,6 +212,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @throws ParseException if an error occurs parsing a String to a Number
      * @since 1.8.0
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
 
         Object result = super.parse(value, pattern);

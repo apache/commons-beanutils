@@ -60,6 +60,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      * @exception IllegalArgumentException if there are any problems
      *            copying the property.
      */
+    @Override
     public void set(String name, Object value) {
 
         try {

@@ -48,6 +48,7 @@ import org.apache.commons.beanutils.Converter;
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */
 
+@Deprecated
 public abstract class AbstractArrayConverter implements Converter {
 
 

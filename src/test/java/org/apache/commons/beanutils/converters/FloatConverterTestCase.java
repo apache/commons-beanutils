@@ -40,6 +40,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new Float("-12");
@@ -52,20 +53,24 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(FloatConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new FloatConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new FloatConverter(defaultValue);
     }
 
+    @Override
     protected Class getExpectedType() {
         return Float.class;
     }

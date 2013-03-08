@@ -39,6 +39,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * propertyName, so propertyNames like "a(b)" or "a[3]" will not
      * be correctly handled.
      */
+    @Override
     protected Object getPropertyOfMapBean(Map bean, String propertyName)
     throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
@@ -58,6 +59,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * propertyName, so propertyNames like "a(b)" or "a[3]" will not
      * be correctly handled.
      */
+    @Override
     protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
         throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);

@@ -67,12 +67,14 @@ public class DefaultResolverTestCase extends TestCase {
     /**
      * Set Up
      */
+    @Override
     protected void setUp() {
     }
 
     /**
      * Tear Down
      */
+    @Override
     protected void tearDown() {
     }
 

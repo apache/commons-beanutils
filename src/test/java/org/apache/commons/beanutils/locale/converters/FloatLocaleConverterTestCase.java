@@ -44,6 +44,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         super.setUp();
@@ -56,6 +57,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         super.tearDown();
     }

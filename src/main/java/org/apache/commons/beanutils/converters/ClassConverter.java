@@ -58,6 +58,7 @@ public final class ClassConverter extends AbstractConverter {
      * @return The default type this <code>Converter</code> handles.
      * @since 1.8.0
      */
+    @Override
     protected Class getDefaultType() {
         return Class.class;
     }
@@ -69,6 +70,7 @@ public final class ClassConverter extends AbstractConverter {
      * @return the converted String value.
      * @since 1.8.0
      */
+    @Override
     protected String convertToString(Object value) {
         return (value instanceof Class) ? ((Class)value).getName() : value.toString();
     }
@@ -82,6 +84,7 @@ public final class ClassConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      * @since 1.8.0
      */
+    @Override
     protected Object convertToType(Class type, Object value) throws Throwable {
         ClassLoader classLoader =
             Thread.currentThread().getContextClassLoader();

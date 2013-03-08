@@ -228,6 +228,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * cannot be performed successfully
      * @throws ParseException if an error occurs
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
 
         String result = null;

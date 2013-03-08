@@ -40,6 +40,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new Byte("-12");
@@ -52,19 +53,23 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(ByteConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new ByteConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new ByteConverter(defaultValue);
     }
+    @Override
     protected Class getExpectedType() {
         return Byte.class;
     }

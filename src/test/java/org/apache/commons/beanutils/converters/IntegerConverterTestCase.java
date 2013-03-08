@@ -40,6 +40,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new Integer("-12");
@@ -52,20 +53,24 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(IntegerConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new IntegerConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new IntegerConverter(defaultValue);
     }
 
+    @Override
     protected Class getExpectedType() {
         return Integer.class;
     }

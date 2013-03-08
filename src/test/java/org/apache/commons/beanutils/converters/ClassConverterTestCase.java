@@ -48,10 +48,12 @@ public class ClassConverterTestCase extends TestCase {
     }
 
     /** Set Up */
+    @Override
     public void setUp() throws Exception {
     }
 
     /** Tear Down */
+    @Override
     public void tearDown() throws Exception {
     }
 

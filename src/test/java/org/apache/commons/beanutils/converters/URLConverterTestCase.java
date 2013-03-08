@@ -43,6 +43,7 @@ public class URLConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
     }
@@ -51,6 +52,7 @@ public class URLConverterTestCase extends TestCase {
         return new TestSuite(URLConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }

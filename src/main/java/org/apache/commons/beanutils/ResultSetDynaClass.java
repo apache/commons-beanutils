@@ -235,6 +235,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @return The loaded class
      * @throws SQLException if the class cannot be loaded
      */
+    @Override
     protected Class loadClass(String className) throws SQLException {
 
         try {

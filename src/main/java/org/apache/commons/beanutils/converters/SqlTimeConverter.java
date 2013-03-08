@@ -64,6 +64,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * @return The default type this <code>Converter</code> handles.
      * @since 1.8.0
      */
+    @Override
     protected Class getDefaultType() {
         return Time.class;
     }
@@ -76,6 +77,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * @return The DateFormat.
      * @since 1.8.0
      */
+    @Override
     protected DateFormat getFormat(Locale locale, TimeZone timeZone) {
         DateFormat format = null;
         if (locale == null) {

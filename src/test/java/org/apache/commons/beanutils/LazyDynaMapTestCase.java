@@ -74,6 +74,7 @@ public class LazyDynaMapTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
         dynaMap = new LazyDynaMap();
         dynaMap.setReturnNull(true);
@@ -82,6 +83,7 @@ public class LazyDynaMapTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
       dynaMap = null;
     }

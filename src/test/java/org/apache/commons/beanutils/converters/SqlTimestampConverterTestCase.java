@@ -54,6 +54,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     /**
      * Test Date Converter with no default value
      */
+    @Override
     public void testLocale() {
 
         // Re-set the default Locale to Locale.US
@@ -87,6 +88,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     /**
      * Test default String to java.sql.Timestamp conversion
      */
+    @Override
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
@@ -109,6 +111,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * Create the Converter with no default value.
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter() {
         return new SqlTimestampConverter();
     }
@@ -118,6 +121,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @param defaultValue The default value
      * @return A new Converter
      */
+    @Override
     protected DateTimeConverter makeConverter(Object defaultValue) {
         return new SqlTimestampConverter(defaultValue);
     }
@@ -126,6 +130,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * Return the expected type
      * @return The expected type
      */
+    @Override
     protected Class getExpectedType() {
         return Timestamp.class;
     }
@@ -136,6 +141,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @param value The Calendar value to convert
      * @return The converted value
      */
+    @Override
     protected Object toType(Calendar value) {
         return new Timestamp(getTimeInMillis(value));
     }

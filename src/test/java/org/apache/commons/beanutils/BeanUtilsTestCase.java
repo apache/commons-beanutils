@@ -125,6 +125,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
         ConvertUtils.deregister();
         BeanUtilsBean.setInstance(new BeanUtilsBean());
@@ -164,6 +165,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         bean = null;
     }

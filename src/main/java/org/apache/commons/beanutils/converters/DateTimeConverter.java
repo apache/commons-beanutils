@@ -219,6 +219,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return the converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
+    @Override
     protected String convertToString(Object value) throws Throwable {
 
         Date date = null;
@@ -281,6 +282,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return The converted value.
      * @throws Exception if conversion cannot be performed successfully
      */
+    @Override
     protected Object convertToType(Class targetType, Object value) throws Exception {
 
         Class sourceType = value.getClass();
@@ -569,6 +571,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      *
      * @return A String representation of this date/time converter
      */
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append(toString(getClass()));

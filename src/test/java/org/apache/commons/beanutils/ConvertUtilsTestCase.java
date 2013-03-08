@@ -62,6 +62,7 @@ public class ConvertUtilsTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
 
         ConvertUtils.deregister();
@@ -80,6 +81,7 @@ public class ConvertUtilsTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         // No action required
     }

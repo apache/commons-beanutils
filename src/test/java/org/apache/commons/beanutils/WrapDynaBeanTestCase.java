@@ -61,6 +61,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         bean = new WrapDynaBean(new TestBean());
@@ -81,6 +82,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
 
         bean = null;
@@ -176,6 +178,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * The <code>contains()</code> method is not supported by the
      * <code>WrapDynaBean</code> implementation class.
      */
+    @Override
     public void testMappedContains() {
 
         try {
@@ -206,6 +209,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * The <code>remove()</code> method is not supported by the
      * <code>WrapDynaBean</code> implementation class.
      */
+    @Override
     public void testMappedRemove() {
 
         try {
@@ -260,6 +264,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * Serialization and deserialization tests.
      * (WrapDynaBean is now serializable, although WrapDynaClass still is not)
      */
+    @Override
     public void testSerialization() {
 
         // Create a bean and set a value

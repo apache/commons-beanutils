@@ -40,6 +40,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    @Override
     public void setUp() throws Exception {
         converter = makeConverter();
         numbers[0] = new Short("-12");
@@ -52,20 +53,24 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(ShortConverterTestCase.class);
     }
 
+    @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
     // ------------------------------------------------------------------------
 
+    @Override
     protected NumberConverter makeConverter() {
         return new ShortConverter();
     }
 
+    @Override
     protected NumberConverter makeConverter(Object defaultValue) {
         return new ShortConverter(defaultValue);
     }
 
+    @Override
     protected Class getExpectedType() {
         return Short.class;
     }

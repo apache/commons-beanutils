@@ -225,6 +225,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * cannot be performed successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */
+    @Override
     protected Object parse(Object value, String pattern) throws ParseException {
 
         if (value instanceof Number) {

@@ -37,6 +37,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() throws Exception {
 
         super.setUp();
@@ -60,6 +61,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         super.tearDown();
     }

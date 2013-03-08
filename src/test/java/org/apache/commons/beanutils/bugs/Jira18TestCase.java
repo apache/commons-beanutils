@@ -74,6 +74,7 @@ public class Jira18TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         bean = Jira18BeanFactory.createBean();
@@ -84,6 +85,7 @@ public class Jira18TestCase extends TestCase {
      *
      * @throws java.lang.Exception
      */
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }

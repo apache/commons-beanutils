@@ -75,6 +75,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     /**
      * Set up instance variables required by this test case.
      */
+    @Override
     public void setUp() {
 
         LocaleConvertUtils.deregister();
@@ -93,6 +94,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     /**
      * Tear down instance variables required by this test case.
      */
+    @Override
     public void tearDown() {
         // No action required
     }
@@ -201,6 +203,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
             GetBeanUtilsBeanThread() {}
 
+            @Override
             public void run() {
                 beanUtils = LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
                 convertUtils = LocaleConvertUtilsBean.getInstance();
@@ -208,6 +211,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 LogFactory.releaseAll();
             }
 
+            @Override
             public String toString() {
                 return "GetBeanUtilsBeanThread";
             }
@@ -270,12 +274,14 @@ public class LocaleBeanificationTestCase extends TestCase {
                 this.signal = signal;
             }
 
+            @Override
             public void run() {
                 signal.setSignal(2);
                 signal.setBean(LocaleBeanUtilsBean.getLocaleBeanUtilsInstance());
                 signal.setConvertUtils(LocaleConvertUtilsBean.getInstance());
             }
 
+            @Override
             public String toString() {
                 return "GetBeanUtilsBeanThread";
             }
@@ -316,12 +322,14 @@ public class LocaleBeanificationTestCase extends TestCase {
                 this.ccll = ccll;
             }
 
+            @Override
             public void run() {
                 ccll.set(new Integer(1789));
                 signal.setSignal(2);
                 signal.setMarkerObject(ccll.get());
             }
 
+            @Override
             public String toString() {
                 return "CCLLTesterThread";
             }
@@ -357,6 +365,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 this.bean = bean;
             }
 
+            @Override
             public void run() {
                 try {
                     signal.setSignal(3);
@@ -375,6 +384,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 }
             }
 
+            @Override
             public String toString() {
                 return "TestIndependenceThread";
             }
@@ -422,12 +432,14 @@ public class LocaleBeanificationTestCase extends TestCase {
                 this.bean = bean;
             }
 
+            @Override
             public void run() {
                 LocaleBeanUtilsBean.setInstance(bean);
                 signal.setSignal(21);
                 signal.setBean(LocaleBeanUtilsBean.getLocaleBeanUtilsInstance());
             }
 
+            @Override
             public String toString() {
                 return "SetInstanceTesterThread";
             }
@@ -512,6 +524,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     // ---- Auxillary classes
 
     class TestClassLoader extends ClassLoader {
+        @Override
         public String toString() {
             return "TestClassLoader";
         }
