@@ -32,6 +32,7 @@ import java.util.Locale;
  * <p>The implementations for these methods are provided by <code>LocaleBeanUtilsBean</code>.
  * For more details see {@link LocaleBeanUtilsBean}.</p>
  *
+ * @version $Id$
  */
 
 public class LocaleBeanUtils extends BeanUtils {

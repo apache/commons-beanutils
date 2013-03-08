@@ -22,6 +22,8 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for the ClassReloader utility class.
+ *
+ * @version $Id$
  */
 
 public class ClassReloaderTestCase extends TestCase {

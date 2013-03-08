@@ -32,7 +32,7 @@ package org.apache.commons.beanutils;
  * non-thread-safe if the application using them is single-threaded. However
  * it is recommended that they be written in a thread-safe manner anyway.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.3
  */
 

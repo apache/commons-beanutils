@@ -68,7 +68,7 @@ import java.util.Collections;
  *    and <code>remove()</code> operations.</p>
  *
  * @since BeanUtils 1.8.0
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class DynaBeanMapDecorator implements Map {
 

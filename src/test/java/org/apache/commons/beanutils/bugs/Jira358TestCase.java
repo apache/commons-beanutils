@@ -27,7 +27,7 @@ import org.apache.commons.beanutils.TestBean;
  * See https://issues.apache.org/jira/browse/BEANUTILS-358
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira358TestCase extends TestCase {
 

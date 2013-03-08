@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * See https://issues.apache.org/jira/browse/BEANUTILS-157
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira157TestCase extends TestCase {
 

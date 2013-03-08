@@ -30,7 +30,7 @@ import junit.framework.TestSuite;
 /**
  * Test accessing ResultSets via DynaBeans.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class DynaResultSetTestCase extends TestCase {

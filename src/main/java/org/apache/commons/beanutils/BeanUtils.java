@@ -30,7 +30,7 @@ import java.util.Map;
  * These static utility methods use the default instance.
  * More sophisticated behaviour can be provided by using a <code>BeanUtilsBean</code> instance.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @see BeanUtilsBean
  */
 

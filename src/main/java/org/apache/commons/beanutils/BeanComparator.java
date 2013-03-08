@@ -36,6 +36,8 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * on a property that could contain "null" values, a suitable <code>Comparator</code>
  * or <code>ComparatorChain</code> should be supplied in the constructor.
  * </p>
+ *
+ * @version $Id$
  */
 public class BeanComparator implements Comparator, Serializable {
 

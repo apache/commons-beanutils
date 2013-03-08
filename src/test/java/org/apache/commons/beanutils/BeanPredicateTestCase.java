@@ -24,6 +24,9 @@ import org.apache.commons.collections.functors.InstanceofPredicate;
 import org.apache.commons.collections.functors.NotPredicate;
 import org.apache.commons.collections.functors.NullPredicate;
 
+/**
+ * @version $Id$
+ */
 public class BeanPredicateTestCase extends TestCase {
 
     public BeanPredicateTestCase(String name) {

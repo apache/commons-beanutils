@@ -39,6 +39,7 @@ package org.apache.commons.beanutils;
  *    this attributes need to be added to the <code>DynaProperty</code> class
  *    in order to control read/write facilities.</p>
  *
+ * @version $Id$
  * @see LazyDynaBean
  */
 public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {

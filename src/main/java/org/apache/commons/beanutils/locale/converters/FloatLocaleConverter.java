@@ -30,6 +30,8 @@ import java.text.ParseException;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
+ *
+ * @version $Id$
  */
 
 public class FloatLocaleConverter extends DecimalLocaleConverter {

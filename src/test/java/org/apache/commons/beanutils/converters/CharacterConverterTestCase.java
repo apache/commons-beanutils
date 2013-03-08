@@ -24,7 +24,7 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the CharacterConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class CharacterConverterTestCase extends TestCase {
 

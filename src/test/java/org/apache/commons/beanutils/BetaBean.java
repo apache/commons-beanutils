@@ -17,6 +17,9 @@
 
 package org.apache.commons.beanutils;
 
+/**
+ * @version $Id$
+ */
 public class BetaBean extends AbstractChild {
 
     private String secret = "utah";

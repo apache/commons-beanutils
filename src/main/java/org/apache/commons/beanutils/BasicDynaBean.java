@@ -37,7 +37,7 @@ import java.util.Map;
  * successfully serialized and deserialized <strong>ONLY</strong> if all
  * property values are <code>Serializable</code>.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class BasicDynaBean implements DynaBean, Serializable {

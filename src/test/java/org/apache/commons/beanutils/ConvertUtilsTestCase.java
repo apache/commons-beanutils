@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
  *  Test Case for the ConvertUtils class.
  * </p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class ConvertUtilsTestCase extends TestCase {

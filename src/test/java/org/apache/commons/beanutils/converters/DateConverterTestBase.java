@@ -31,7 +31,7 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public abstract class DateConverterTestBase extends TestCase {

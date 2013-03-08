@@ -17,6 +17,9 @@
 
 package org.apache.commons.beanutils;
 
+/**
+ * @version $Id$
+ */
 public abstract class AbstractParent {
 
     private Child child;

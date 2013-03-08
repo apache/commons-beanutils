@@ -59,7 +59,7 @@ import java.util.WeakHashMap;
  * Double-Checked Locking Idiom Is Broken Declaration</a>.</p>
  *
  * @since Commons Collections 1.0
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 class WeakFastHashMap extends HashMap {
 

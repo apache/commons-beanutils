@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the FloatConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class FloatConverterTestCase extends NumberConverterTestBase {

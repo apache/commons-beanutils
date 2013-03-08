@@ -28,7 +28,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  * See https://issues.apache.org/jira/browse/BEANUTILS-357
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira357TestCase extends TestCase {
 

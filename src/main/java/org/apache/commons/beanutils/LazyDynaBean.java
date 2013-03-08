@@ -107,6 +107,7 @@ import org.apache.commons.logging.LogFactory;
  *       restricted then calling any of the <code>set()</code> methods for a property which
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
  *
+ * @version $Id$
  * @see LazyDynaClass
  */
 public class LazyDynaBean implements DynaBean, Serializable {

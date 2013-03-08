@@ -43,7 +43,7 @@ import org.apache.commons.beanutils.Converter;
  * characters are optional, and individual elements may be separated by
  * any combination of whitespace and comma characters.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.4
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */

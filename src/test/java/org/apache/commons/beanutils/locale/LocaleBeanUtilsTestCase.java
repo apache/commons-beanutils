@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Test Case for {@link LocaleBeanUtils}.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
 

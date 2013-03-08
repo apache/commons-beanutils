@@ -29,7 +29,7 @@ import org.apache.commons.beanutils.converters.StringConverter;
  * See https://issues.apache.org/jira/browse/BEANUTILS-359
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira359TestCase extends TestCase {
 

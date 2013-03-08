@@ -28,6 +28,8 @@ import java.util.Locale;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
+ *
+ * @version $Id$
  */
 
 public class SqlTimeLocaleConverter extends DateLocaleConverter {

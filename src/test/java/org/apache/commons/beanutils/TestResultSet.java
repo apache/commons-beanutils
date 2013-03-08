@@ -46,7 +46,7 @@ import java.util.Map;
  * <p>Mock object that implements enough of <code>java.sql.ResultSet</code>
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class TestResultSet implements InvocationHandler {

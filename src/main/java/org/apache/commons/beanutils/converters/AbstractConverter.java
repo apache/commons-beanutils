@@ -44,7 +44,7 @@ import org.apache.commons.beanutils.Converter;
  *         to the specified type</li>
  * </ul>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.8.0
  */
 public abstract class AbstractConverter implements Converter {

@@ -26,7 +26,7 @@ import org.apache.commons.beanutils.TestBean;
  * <br/>
  * See https://issues.apache.org/jira/browse/BEANUTILS-92
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira92TestCase extends TestCase {
 

@@ -48,7 +48,7 @@ package org.apache.commons.beanutils;
  * </p>
  *
  * @see ConvertUtilsBean2
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.8.0
  */
 public class BeanUtilsBean2 extends BeanUtilsBean {

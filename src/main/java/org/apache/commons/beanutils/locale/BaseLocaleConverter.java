@@ -32,6 +32,7 @@ import java.util.Locale;
  * optionally using a default value or throwing a {@link ConversionException}
  * if a conversion error occurs.</p>
  *
+ * @version $Id$
  */
 
 public abstract class BaseLocaleConverter implements LocaleConverter {

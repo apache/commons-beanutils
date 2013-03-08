@@ -21,7 +21,9 @@ import org.apache.commons.beanutils.ConversionException;
 
 import junit.framework.TestCase;
 
-
+/**
+ * @version $Id$
+ */
 public class BooleanConverterTestCase extends TestCase {
 
     public static final String[] STANDARD_TRUES = new String[] {

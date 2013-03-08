@@ -23,6 +23,7 @@ package org.apache.commons.beanutils;
  * to subclass to create custom exceptions whenever appropriate.
  *
  * @since 1.7
+ * @version $Id$
  */
 
 public class BeanAccessLanguageException extends IllegalArgumentException {

@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * Different instances can be used to isolate caches between classloaders
  * and to vary the value converters registered.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @see BeanUtils
  * @since 1.7
  */

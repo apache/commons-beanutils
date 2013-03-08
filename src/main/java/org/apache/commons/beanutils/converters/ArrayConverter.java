@@ -121,7 +121,7 @@ import org.apache.commons.beanutils.Converter;
  *    int[][] result = (int[][])matrixConverter.convert(int[][].class, matrixString);
  * </pre>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.8.0
  */
 public class ArrayConverter extends AbstractConverter {

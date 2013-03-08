@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * <p />
  * This test case demonstrates the issue.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira18TestCase extends TestCase {
 

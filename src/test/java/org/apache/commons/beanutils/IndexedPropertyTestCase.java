@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class IndexedPropertyTestCase extends TestCase {

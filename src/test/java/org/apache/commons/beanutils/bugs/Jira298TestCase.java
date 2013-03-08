@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * See https://issues.apache.org/jira/browse/BEANUTILS-298
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira298TestCase extends TestCase {
 

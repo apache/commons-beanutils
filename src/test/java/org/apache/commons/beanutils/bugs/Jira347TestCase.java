@@ -33,7 +33,7 @@ import org.apache.commons.beanutils.memoryleaktests.MemoryLeakTestCase;
  * <br/>
  * See https://issues.apache.org/jira/browse/BEANUTILS-347
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira347TestCase extends TestCase {
 

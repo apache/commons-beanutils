@@ -35,6 +35,7 @@ import junit.framework.TestSuite;
 /**
  * <p> Test case for <code>MethodUtils</code> </p>
  *
+ * @version $Id$
  */
 public class MethodUtilsTestCase extends TestCase {
 

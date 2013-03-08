@@ -26,7 +26,7 @@ import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 /**
  * Test Case for the FloatLocaleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {

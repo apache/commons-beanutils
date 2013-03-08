@@ -48,7 +48,7 @@ import org.apache.commons.beanutils.ConversionException;
  *
  * <p>Case is ignored when converting values to true or false.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.3
  */
 public final class BooleanConverter extends AbstractConverter {

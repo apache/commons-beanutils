@@ -21,7 +21,7 @@ package org.apache.commons.beanutils.locale.converters;
 /**
  * Test Case for the LongLocaleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {

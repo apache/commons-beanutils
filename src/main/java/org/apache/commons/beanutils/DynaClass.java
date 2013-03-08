@@ -23,7 +23,7 @@ package org.apache.commons.beanutils;
  * DynaClass all have the same set of available properties, along with any
  * associated data types, read-only states, and write-only states.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public interface DynaClass {

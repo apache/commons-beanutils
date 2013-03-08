@@ -27,7 +27,7 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the DoubleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class BigDecimalConverterTestCase extends NumberConverterTestBase {

@@ -24,6 +24,8 @@ import java.lang.reflect.InvocationTargetException;
  * A PropertyUtilsBean which customises the behaviour of the
  * setNestedProperty and getNestedProperty methods to look for
  * simple properties in preference to map entries.
+ *
+ * @version $Id$
  */
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 

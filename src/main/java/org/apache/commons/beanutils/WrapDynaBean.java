@@ -41,7 +41,7 @@ import java.lang.reflect.InvocationTargetException;
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class WrapDynaBean implements DynaBean, Serializable {

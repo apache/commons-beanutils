@@ -26,6 +26,8 @@ import junit.framework.TestCase;
 /**
  * This class provides a number of unit tests related to classloaders and
  * garbage collection, particularly in j2ee-like situations.
+ *
+ * @version $Id$
  */
 public class MemoryTestCase extends TestCase {
 

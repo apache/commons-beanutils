@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the {@link BeanUtilsBean2}.
  *
- * @version $Revision$
+ * @version $Id$
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
 

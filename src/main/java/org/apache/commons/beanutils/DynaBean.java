@@ -26,7 +26,7 @@ package org.apache.commons.beanutils;
  * will recognize such beans and treat them as standard JavaBeans for the
  * purpose of retrieving and setting property values.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public interface DynaBean {

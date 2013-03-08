@@ -23,6 +23,7 @@ import java.io.OutputStream;
 /**
  * <p>Class used in MethodUtils test</p>
  *
+ * @version $Id$
  */
 public class A {
 

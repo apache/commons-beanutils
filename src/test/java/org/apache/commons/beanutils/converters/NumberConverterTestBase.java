@@ -31,7 +31,7 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public abstract class NumberConverterTestBase extends TestCase {

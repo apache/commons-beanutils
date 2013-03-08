@@ -42,6 +42,7 @@ import java.util.Locale;
  * via reflection in a locale-dependent manner.</p>
  *
  * @since 1.7
+ * @version $Id$
  */
 
 public class LocaleBeanUtilsBean extends BeanUtilsBean {

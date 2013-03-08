@@ -51,7 +51,7 @@ package org.apache.commons.beanutils.expression;
  *     supported.</li>
  * </ul>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.8.0
  */
 public class DefaultResolver implements Resolver {

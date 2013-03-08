@@ -42,6 +42,8 @@ import java.io.IOException;
  * present in the classpath for a container's "shared" classloader <i>and</i>
  * been present in the component-specific classpath too, without any messing
  * about with the way unit test code is compiled or executed.
+ *
+ * @version $Id$
  */
 
 public class ClassReloader extends ClassLoader {

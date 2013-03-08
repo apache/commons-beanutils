@@ -22,7 +22,7 @@ import junit.framework.TestCase;
 /**
  * Test Case for StringArrayConverter
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class StringArrayConverterTestCase extends TestCase {

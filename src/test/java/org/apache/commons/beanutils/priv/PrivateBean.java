@@ -28,7 +28,7 @@ package org.apache.commons.beanutils.priv;
  * <li><strong>baz</strong> - Via indirectly implemented interface
  * </ul>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 class PrivateBean implements PrivateDirect {

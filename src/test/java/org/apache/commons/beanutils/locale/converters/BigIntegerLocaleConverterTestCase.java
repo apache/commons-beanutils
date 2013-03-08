@@ -22,7 +22,7 @@ import java.math.BigInteger;
 /**
  * Test Case for the BigIntegerLocaleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {

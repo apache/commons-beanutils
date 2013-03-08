@@ -44,6 +44,7 @@ import java.util.Iterator;
  *       restricted then calling any of the <code>set()</code> methods for a property which
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
  *
+ * @version $Id$
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
@@ -271,7 +272,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         // Create a new instance of the Map
         Map newMap = null;
         try {
-            newMap = (Map)getMap().getClass().newInstance();
+            newMap = getMap().getClass().newInstance();
         } catch(Exception ex) {
             newMap = newMap();
         }

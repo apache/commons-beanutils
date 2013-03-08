@@ -29,6 +29,8 @@ import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for BeanUtils.
+ *
+ * @version $Id$
  */
 
 public class BeanUtilsBenchCase extends TestCase {

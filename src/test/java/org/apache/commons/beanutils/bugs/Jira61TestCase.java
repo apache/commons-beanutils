@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
  * wrapped may have read-only or write-only properties (unlike
  * regular DynaBeans.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira61TestCase extends TestCase {
 

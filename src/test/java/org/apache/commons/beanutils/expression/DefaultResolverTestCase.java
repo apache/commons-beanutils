@@ -21,6 +21,8 @@ import junit.framework.TestSuite;
 
 /**
  * Junit Test for BasicResolver.
+ *
+ * @version $Id$
  */
 public class DefaultResolverTestCase extends TestCase {
 

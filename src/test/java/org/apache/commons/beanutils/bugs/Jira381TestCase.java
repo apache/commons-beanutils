@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.MethodUtils;
  * See https://issues.apache.org/jira/browse/BEANUTILS-381
  * <p />
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira381TestCase extends TestCase {
 

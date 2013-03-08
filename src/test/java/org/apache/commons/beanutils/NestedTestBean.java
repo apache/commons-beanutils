@@ -23,7 +23,7 @@ package org.apache.commons.beanutils;
 /**
  * Specialist test bean for complex nested properties.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class NestedTestBean {

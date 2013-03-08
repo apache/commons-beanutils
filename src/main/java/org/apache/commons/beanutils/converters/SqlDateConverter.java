@@ -30,7 +30,7 @@ import java.sql.Date;
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.3
  */
 public final class SqlDateConverter extends DateTimeConverter {

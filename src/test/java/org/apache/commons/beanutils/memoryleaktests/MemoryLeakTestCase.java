@@ -43,6 +43,7 @@ import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
  *
+ * @version $Id$
  */
 public class MemoryLeakTestCase extends TestCase {
 

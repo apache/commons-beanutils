@@ -32,7 +32,7 @@ import java.sql.Types;
  * <code>java.sql.ResultSetMetaData</code>
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class TestResultSetMetaData implements InvocationHandler {

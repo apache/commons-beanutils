@@ -156,7 +156,7 @@ import java.lang.reflect.Array;
  *
  * </code></pre>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.8.0
  */
 public class LazyDynaList extends ArrayList {

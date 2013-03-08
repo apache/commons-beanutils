@@ -33,7 +33,7 @@ import junit.framework.TestSuite;
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class DynaPropertyUtilsTestCase extends TestCase {

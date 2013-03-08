@@ -22,7 +22,7 @@ package org.apache.commons.beanutils.priv;
 /**
  * Factory class for PrivateBean instances.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class PrivateBeanFactory {

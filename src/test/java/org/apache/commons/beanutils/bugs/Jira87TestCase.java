@@ -36,7 +36,7 @@ import junit.framework.TestSuite;
  * <p />
  * This test case demonstrates the issue.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class Jira87TestCase extends TestCase {
 

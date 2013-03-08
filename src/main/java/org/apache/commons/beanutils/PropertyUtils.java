@@ -33,7 +33,7 @@ import org.apache.commons.collections.FastHashMap;
  * <p>The implementations for these methods are provided by <code>PropertyUtilsBean</code>.
  * For more details see {@link PropertyUtilsBean}.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @see PropertyUtilsBean
  * @see org.apache.commons.beanutils.expression.Resolver
  */

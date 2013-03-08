@@ -27,7 +27,7 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the BigInteger class.
  *
- * @version $Revision$ $Date $
+ * @version $Id$
  */
 public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 

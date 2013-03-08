@@ -36,7 +36,7 @@ import java.lang.reflect.Modifier;
  * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 public class ConstructorUtils {
 

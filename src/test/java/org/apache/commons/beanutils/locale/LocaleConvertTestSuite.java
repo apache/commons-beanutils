@@ -36,7 +36,7 @@ import org.apache.commons.beanutils.locale.converters.ShortLocaleConverterTestCa
  * edit the build.xml.
  * </p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class LocaleConvertTestSuite {

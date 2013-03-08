@@ -33,7 +33,9 @@ import java.util.Locale;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
+ *
  * @since 1.7
+ * @version $Id$
  */
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {

@@ -97,6 +97,7 @@ import java.util.WeakHashMap;
  * containers required each component to load the full set of classes it
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  *
+ * @version $Id$
  * @see java.lang.Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal {

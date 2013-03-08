@@ -62,7 +62,7 @@ import java.util.List;
  * convenient mechanism for transporting data sets to remote Java-based
  * application components.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {

@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
  * object returned by this iterator will be a {@link DynaBean} that
  * represents a single row from the result set being wrapped.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class ResultSetIterator implements DynaBean, Iterator {

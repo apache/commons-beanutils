@@ -34,7 +34,7 @@ import org.apache.commons.beanutils.ConversionException;
  * BooleanConverter can be provided in order to recognise alternative values
  * as true/false. </p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  * @since 1.4
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */

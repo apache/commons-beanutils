@@ -21,7 +21,7 @@ package org.apache.commons.beanutils.locale.converters;
 /**
  * Test Case for the ShortLocaleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {

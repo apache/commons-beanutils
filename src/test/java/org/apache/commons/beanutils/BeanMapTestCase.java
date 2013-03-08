@@ -33,8 +33,7 @@ import org.apache.commons.collections.Transformer;
 /**
  * Test cases for BeanMap
  *
- * @version $Revision$ $Date$
- *
+ * @version $Id$
  */
 public class BeanMapTestCase extends AbstractTestMap {
 

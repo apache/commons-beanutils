@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * <p>Provides common logic for JDBC implementations of {@link DynaClass}.</p>
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 abstract class JDBCDynaClass implements DynaClass, Serializable {

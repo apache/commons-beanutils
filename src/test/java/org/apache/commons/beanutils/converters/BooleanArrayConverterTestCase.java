@@ -30,6 +30,8 @@ import junit.framework.TestCase;
  * BooleanConverter instance to do those conversions, and the BooleanConverter
  * class has its own unit tests. Here, the tests focus on the array-related
  * behaviour.</p>
+ *
+ * @version $Id$
  */
 public class BooleanArrayConverterTestCase extends TestCase {
 

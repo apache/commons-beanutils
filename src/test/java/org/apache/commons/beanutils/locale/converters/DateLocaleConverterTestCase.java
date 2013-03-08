@@ -30,7 +30,7 @@ import org.apache.commons.logging.Log;
 /**
  * Test Case for the DateLocaleConverter class.
  *
- * @version $Revision$ $Date$
+ * @version $Id$
  */
 
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {

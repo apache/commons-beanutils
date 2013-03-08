@@ -24,6 +24,8 @@ import org.apache.commons.beanutils.Converter;
  * <p>General purpose locale-sensitive data type converter that can be registered and used
  * within the BeanUtils package to manage the conversion of objects from
  * one type to another.
+ *
+ * @version $Id$
  */
 
 public interface LocaleConverter extends Converter {
