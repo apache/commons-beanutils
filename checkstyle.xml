@@ -24,8 +24,7 @@ limitations under the License.
 <module name="Checker">
   <property name="localeLanguage" value="en"/>
   <module name="JavadocPackage">
-    <!-- setting allowLegacy means it will check for package.html instead of just package-info.java -->
-    <property name="allowLegacy" value="true"/>
+    <property name="allowLegacy" value="false"/>
   </module>
   <module name="Header">
     <property name="headerFile" value="${checkstyle.header.file}"/>
@@ -58,5 +57,3 @@ limitations under the License.
     <property name="message" value="Line has trailing spaces."/>
   </module>
 </module>
-                        
-
