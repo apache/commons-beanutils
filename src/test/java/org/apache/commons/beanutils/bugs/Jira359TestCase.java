@@ -26,10 +26,8 @@ import org.apache.commons.beanutils.converters.ArrayConverter;
 import org.apache.commons.beanutils.converters.StringConverter;
 
 /**
- * See https://issues.apache.org/jira/browse/BEANUTILS-359
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-359">https://issues.apache.org/jira/browse/BEANUTILS-359</a>
  */
 public class Jira359TestCase extends TestCase {
 

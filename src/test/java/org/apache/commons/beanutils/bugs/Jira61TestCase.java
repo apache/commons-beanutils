@@ -33,16 +33,15 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Test case for Jira issue# BEANUTILS-61.
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-61
- * <p />
  *
+ * <p>
  * {@link WrapDynaBean} is a secial case for the PropertyUtils's
  * isReadable() and isWriteable() methods - since the bean being
  * wrapped may have read-only or write-only properties (unlike
  * regular DynaBeans.
  *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-61">https://issues.apache.org/jira/browse/BEANUTILS-61</a>
  */
 public class Jira61TestCase extends TestCase {
 

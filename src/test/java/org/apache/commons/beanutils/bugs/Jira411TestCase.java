@@ -24,11 +24,8 @@ import org.apache.commons.beanutils.BeanUtilsBean;
  * BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested
  * property returns null
  *
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-411
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-411">https://issues.apache.org/jira/browse/BEANUTILS-411</a>
  */
 public class Jira411TestCase extends TestCase {
 

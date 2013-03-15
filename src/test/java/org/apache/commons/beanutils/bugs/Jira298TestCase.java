@@ -30,10 +30,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * See https://issues.apache.org/jira/browse/BEANUTILS-298
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-298">https://issues.apache.org/jira/browse/BEANUTILS-298</a>
  */
 public class Jira298TestCase extends TestCase {
 

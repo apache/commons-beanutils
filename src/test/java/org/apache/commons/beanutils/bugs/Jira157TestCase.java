@@ -28,13 +28,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Beanutils's describe() method cannot determine reader methods
- * for anonymous class - see Jira issue# BEANUTILS-157.
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-157
- * <p />
+ * Beanutils's describe() method cannot determine reader methods for anonymous
+ * class - see Jira issue# BEANUTILS-157.
  *
  * @version $Id$
+ * @see <a
+ *      href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
  */
 public class Jira157TestCase extends TestCase {
 

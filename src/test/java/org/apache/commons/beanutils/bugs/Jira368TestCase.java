@@ -23,10 +23,8 @@ import junit.framework.TestSuite;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * See https://issues.apache.org/jira/browse/BEANUTILS-368
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-368">https://issues.apache.org/jira/browse/BEANUTILS-368</a>
  */
 public class Jira368TestCase extends TestCase {
 

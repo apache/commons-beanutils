@@ -25,11 +25,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 /**
  * getPropertyType return null on second descendant class
  *
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-422
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
  */
 public class Jira422TestCase extends TestCase {
 

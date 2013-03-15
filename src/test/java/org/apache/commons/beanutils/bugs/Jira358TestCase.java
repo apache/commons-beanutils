@@ -24,10 +24,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.TestBean;
 
 /**
- * See https://issues.apache.org/jira/browse/BEANUTILS-358
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-358">https://issues.apache.org/jira/browse/BEANUTILS-358</a>
  */
 public class Jira358TestCase extends TestCase {
 

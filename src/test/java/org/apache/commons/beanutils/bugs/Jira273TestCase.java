@@ -28,11 +28,9 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Public methods overriden in anonymous or private subclasses
  * are not recognized by PropertyUtils - see issue# BEANUTILS-273.
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-273
- * <p />
  *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-273">https://issues.apache.org/jira/browse/BEANUTILS-273</a>
  */
 public class Jira273TestCase extends TestCase {
 

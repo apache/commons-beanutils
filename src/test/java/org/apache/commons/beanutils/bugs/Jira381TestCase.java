@@ -26,11 +26,8 @@ import org.apache.commons.beanutils.MethodUtils;
  * MethodUtils's getMatchingAccessibleMethod() does not correctly
  * handle inheritance and method overloading.
  *
- * <p />
- * See https://issues.apache.org/jira/browse/BEANUTILS-381
- * <p />
- *
  * @version $Id$
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-381">https://issues.apache.org/jira/browse/BEANUTILS-381</a>
  */
 public class Jira381TestCase extends TestCase {
 
