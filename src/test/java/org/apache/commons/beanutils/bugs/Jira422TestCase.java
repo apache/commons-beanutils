@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils.bugs;
 
-import org.apache.commons.beanutils.PropertyUtils;
-
-import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * getPropertyType return null on second descendant class
@@ -49,13 +49,13 @@ public class Jira422TestCase extends TestCase {
 
 class RootBean {
 
-    private ArrayList file;
+    private List file;
 
-    public ArrayList getFile() {
+    public List getFile() {
         return file;
     }
 
-    public void setFile(ArrayList file) {
+    public void setFile(List file) {
         this.file = file;
     }
 
