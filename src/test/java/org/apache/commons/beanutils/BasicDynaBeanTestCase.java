@@ -117,7 +117,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
-        List listIndexed = new ArrayList();
+        List<String> listIndexed = new ArrayList<String>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
@@ -125,11 +125,11 @@ public class BasicDynaBeanTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long(321));
-        HashMap mappedProperty = new HashMap();
+        HashMap<String, String> mappedProperty = new HashMap<String, String>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        HashMap mappedIntProperty = new HashMap();
+        HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
         mappedIntProperty.put("One", new Integer(1));
         mappedIntProperty.put("Two", new Integer(2));
         bean.set("mappedIntProperty", mappedIntProperty);
@@ -1014,7 +1014,7 @@ public class BasicDynaBeanTestCase extends TestCase {
      * @param name Name of the property to be retrieved
      * @param type Expected class type of this property
      */
-    protected void testGetDescriptorBase(String name, Class type) {
+    protected void testGetDescriptorBase(String name, Class<?> type) {
 
         try {
             DynaProperty descriptor =
