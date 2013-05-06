@@ -17,10 +17,11 @@
 
 package org.apache.commons.beanutils.locale;
 
-import java.util.*;
-
 import java.lang.ref.WeakReference;
 import java.lang.ref.ReferenceQueue;
+import java.util.Locale;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
@@ -34,8 +35,6 @@ import org.apache.commons.beanutils.PrimitiveBean;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
-
-import java.util.Locale;
 
 /**
  * <p>
@@ -107,8 +106,8 @@ public class LocaleBeanificationTestCase extends TestCase {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        WeakReference reference = new  WeakReference(loader);
-        Class myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
+        WeakReference<ClassLoader> reference = new  WeakReference<ClassLoader>(loader);
+        Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
         assertNotNull("Weak reference released early", reference.get());
 
@@ -145,13 +144,13 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        ReferenceQueue queue = new ReferenceQueue();
+        ReferenceQueue<?> queue = new ReferenceQueue<Object>();
         WeakReference loaderReference = new WeakReference(loader, queue);
         Integer test = new Integer(1);
 
         WeakReference testReference = new WeakReference(test, queue);
         //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
-        Map map = new WeakHashMap();
+        Map<TestClassLoader, Integer> map = new WeakHashMap<TestClassLoader, Integer>();
         map.put(loader, test);
 
         assertEquals("In map", test, map.get(loader));
@@ -193,7 +192,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        WeakReference loaderReference = new  WeakReference(loader);
+        WeakReference<TestClassLoader> loaderReference = new  WeakReference<TestClassLoader>(loader);
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
 
         class GetBeanUtilsBeanThread extends Thread {
@@ -219,7 +218,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
 
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
-        WeakReference threadWeakReference = new WeakReference(thread);
+        WeakReference<GetBeanUtilsBeanThread> threadWeakReference = new WeakReference<GetBeanUtilsBeanThread>(thread);
         thread.setContextClassLoader(loader);
 
         thread.start();

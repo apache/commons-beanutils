@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils;
 
-import java.util.*;
-
 import java.lang.ref.WeakReference;
 import java.lang.ref.ReferenceQueue;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import junit.framework.TestCase;
 import junit.framework.Test;
