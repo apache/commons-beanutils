@@ -62,11 +62,11 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -111,11 +111,11 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -162,13 +162,14 @@ public class MemoryLeakTestCase extends TestCase {
 
         String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
         assertNotNull("BeanClass is null", beanClass);
+        assertNotNull("Bean is null", bean);
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
@@ -206,13 +207,14 @@ public class MemoryLeakTestCase extends TestCase {
 
         String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
         assertNotNull("BeanClass is null", beanClass);
+        assertNotNull("Bean is null", bean);
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
@@ -256,11 +258,11 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -305,12 +307,12 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -357,11 +359,11 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -404,11 +406,11 @@ public class MemoryLeakTestCase extends TestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
+        Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference someRef = new WeakReference(loader);
+        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -471,10 +473,10 @@ public class MemoryLeakTestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        SoftReference ref = new SoftReference(new Object());
+        SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
-            java.util.ArrayList list = new java.util.ArrayList();
+            java.util.ArrayList<String> list = new java.util.ArrayList<String>();
             try {
                 long i = 0;
                 while (true && ref.get() != null) {
