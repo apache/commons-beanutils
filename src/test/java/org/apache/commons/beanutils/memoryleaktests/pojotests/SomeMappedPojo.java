@@ -26,22 +26,22 @@ import java.util.HashMap;
 public class SomeMappedPojo {
 
 
-    private HashMap mappedProperty = null;
+    private HashMap<String, String> mappedProperty = null;
 
     public String getMappedProperty(String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap();
+            mappedProperty = new HashMap<String, String>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
-        return ((String) mappedProperty.get(key));
+        return mappedProperty.get(key);
     }
 
     public void setMappedProperty(String key, String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap();
+            mappedProperty = new HashMap<String, String>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
