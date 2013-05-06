@@ -51,9 +51,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
 
     private transient Object bean;
 
-    private transient HashMap readMethods = new HashMap();
-    private transient HashMap writeMethods = new HashMap();
-    private transient HashMap types = new HashMap();
+    private transient HashMap<String, Method> readMethods = new HashMap<String, Method>();
+    private transient HashMap<String, Method> writeMethods = new HashMap<String, Method>();
+    private transient HashMap<String, Class<? extends Object>> types = new HashMap<String, Class<? extends Object>>();
 
     /**
      * An empty array.  Used to invoke accessors via reflection.
@@ -66,7 +66,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *
      * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+    private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     /**
      * This HashMap has been made unmodifiable to prevent issues when
@@ -127,8 +127,8 @@ public class BeanMap extends AbstractMap implements Cloneable {
         }
     };
 
-    private static Map createTypeTransformers() {
-        Map defaultTransformers = new HashMap();
+    private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
+        Map<Class<? extends Object>, Transformer> defaultTransformers = new HashMap<Class<? extends Object>, Transformer>();
         defaultTransformers.put(
             Boolean.TYPE,
             new Transformer() {
@@ -268,7 +268,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
         }
 
         Object newBean = null;
-        Class beanClass = bean.getClass(); // Cannot throw Exception
+        Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
         try {
             newBean = beanClass.newInstance();
         } catch (Exception e) {
@@ -294,7 +294,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
             // copy only properties that are readable and writable.  If its
             // not readable, we can't get the value from the old map.  If
             // its not writable, we can't write a value into the new map.
-            Iterator readableKeys = readMethods.keySet().iterator();
+            Iterator<?> readableKeys = readMethods.keySet().iterator();
             while(readableKeys.hasNext()) {
                 Object key = readableKeys.next();
                 if(getWriteMethod(key) != null) {
@@ -319,7 +319,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @param map  the BeanMap whose properties to put
      */
     public void putAllWriteable(BeanMap map) {
-        Iterator readableKeys = map.readMethods.keySet().iterator();
+        Iterator<?> readableKeys = map.readMethods.keySet().iterator();
         while (readableKeys.hasNext()) {
             Object key = readableKeys.next();
             if (getWriteMethod(key) != null) {
@@ -343,7 +343,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
             return;
         }
 
-        Class beanClass = null;
+        Class<? extends Object> beanClass = null;
         try {
             beanClass = bean.getClass();
             bean = beanClass.newInstance();
@@ -552,7 +552,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *  property exists
      */
     public Class getType(String name) {
-        return (Class) types.get( name );
+        return types.get( name );
     }
 
     /**
@@ -641,7 +641,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return the accessor method for the property, or null
      */
     public Method getReadMethod(String name) {
-        return (Method) readMethods.get(name);
+        return readMethods.get(name);
     }
 
     /**
@@ -651,7 +651,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return the mutator method for the property, or null
      */
     public Method getWriteMethod(String name) {
-        return (Method) writeMethods.get(name);
+        return writeMethods.get(name);
     }
 
 
@@ -667,7 +667,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *  method for that property
      */
     protected Method getReadMethod( Object name ) {
-        return (Method) readMethods.get( name );
+        return readMethods.get( name );
     }
 
     /**
@@ -679,7 +679,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * property is read-only; or the mutator method for that property
      */
     protected Method getWriteMethod( Object name ) {
-        return (Method) writeMethods.get( name );
+        return writeMethods.get( name );
     }
 
     /**
@@ -698,7 +698,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
             return;
         }
 
-        Class  beanClass = getBean().getClass();
+        Class<? extends Object>  beanClass = getBean().getClass();
         try {
             //BeanInfo beanInfo = Introspector.getBeanInfo( bean, null );
             BeanInfo beanInfo = Introspector.getBeanInfo( beanClass );
@@ -710,7 +710,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
                         String name = propertyDescriptor.getName();
                         Method readMethod = propertyDescriptor.getReadMethod();
                         Method writeMethod = propertyDescriptor.getWriteMethod();
-                        Class aType = propertyDescriptor.getPropertyType();
+                        Class<? extends Object> aType = propertyDescriptor.getPropertyType();
 
                         if ( readMethod != null ) {
                             readMethods.put( name, readMethod );
@@ -798,9 +798,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
         throws IllegalAccessException, ClassCastException {
         try {
             if ( value != null ) {
-                Class[] types = method.getParameterTypes();
+                Class<? extends Object>[] types = method.getParameterTypes();
                 if ( types != null && types.length > 0 ) {
-                    Class paramType = types[0];
+                    Class<? extends Object> paramType = types[0];
                     if ( ! paramType.isAssignableFrom( value.getClass() ) ) {
                         value = convertType( paramType, value );
                     }
@@ -861,9 +861,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
         throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         // try call constructor
-        Class[] types = { value.getClass() };
+        Class<?>[] types = { value.getClass() };
         try {
-            Constructor constructor = newType.getConstructor( types );
+            Constructor<?> constructor = newType.getConstructor( types );
             Object[] arguments = { value };
             return constructor.newInstance( arguments );
         }
@@ -885,7 +885,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *  or null if the given type is not a primitive type
      */
     protected Transformer getTypeTransformer( Class aType ) {
-        return (Transformer) typeTransformers.get( aType );
+        return typeTransformers.get( aType );
     }
 
     /**
