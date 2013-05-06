@@ -59,6 +59,7 @@ public class BeanUtilsBean {
     private static final ContextClassLoaderLocal
             BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
                         // Creates the default instance used when the context classloader is unavailable
+                        @Override
                         protected Object initialValue() {
                             return new BeanUtilsBean();
                         }

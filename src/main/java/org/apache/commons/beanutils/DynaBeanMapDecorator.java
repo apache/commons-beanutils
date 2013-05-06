@@ -368,6 +368,7 @@ public class DynaBeanMapDecorator implements Map {
             this.key = key;
             this.value = value;
         }
+        @Override
         public boolean equals(Object o) {
             if (!(o instanceof Map.Entry)) {
                 return false;
@@ -377,6 +378,7 @@ public class DynaBeanMapDecorator implements Map {
                     (value == null ? e.getValue() == null
                                    : value.equals(e.getValue())));
         }
+        @Override
         public int hashCode() {
             return key.hashCode() + (value == null ? 0 : value.hashCode());
         }

@@ -208,6 +208,7 @@ public class DynaProperty implements Serializable {
      * type and content type, otherwise <code>false</code>
      * @since 1.8.0
      */
+    @Override
     public boolean equals(final Object obj) {
 
         boolean result = false;
@@ -230,6 +231,7 @@ public class DynaProperty implements Serializable {
      * @see java.lang.Object#hashCode
      * @since 1.8.0
      */
+    @Override
     public int hashCode() {
 
        int result = 1;
@@ -245,6 +247,7 @@ public class DynaProperty implements Serializable {
      * Return a String representation of this Object.
      * @return a String representation of the dyna property
      */
+    @Override
     public String toString() {
 
         StringBuffer sb = new StringBuffer("DynaProperty[name=");

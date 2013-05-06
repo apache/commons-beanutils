@@ -67,6 +67,7 @@ public final class ConverterFacade implements Converter {
      * @return A String representation of this facade implementation
      * sand the underlying {@link Converter} it delegates to
      */
+    @Override
     public String toString() {
         return "ConverterFacade[" + converter.toString() + "]";
     }

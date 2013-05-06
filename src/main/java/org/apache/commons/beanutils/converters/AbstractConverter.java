@@ -369,6 +369,7 @@ public abstract class AbstractConverter implements Converter {
      *
      * @return A String representation of this converter
      */
+    @Override
     public String toString() {
         return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }

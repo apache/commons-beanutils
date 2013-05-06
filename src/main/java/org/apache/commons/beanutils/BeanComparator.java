@@ -175,6 +175,7 @@ public class BeanComparator implements Comparator, Serializable {
      * @param  o Comparator to compare to
      * @return whether the the comparators are equal or not
      */
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -206,6 +207,7 @@ public class BeanComparator implements Comparator, Serializable {
      * Hashcode compatible with equals.
      * @return the hash code for this comparator
      */
+    @Override
     public int hashCode() {
         int result;
         result = comparator.hashCode();
