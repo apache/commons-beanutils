@@ -46,6 +46,14 @@
     <url>http://svn.apache.org/viewvc/commons/proper/beanutils/trunk/</url>
   </scm>
 
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <name>Apache Commons Beanutils Site</name>
+      <url>scm:svn:https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</url>
+    </site>
+  </distributionManagement>
+
   <developers>
     <developer>
       <name>Robert Burrell Donkin</name>
