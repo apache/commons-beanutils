@@ -39,7 +39,7 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
-    <release version="1.8.4" date="in SVN" description="Bug fix for 1.8.3">
+    <release version="1.9.0" date="tba" description="Upgrade to Java 5 including generics where possible">
       <action dev="britter" type="update" issue="BEANUTILS-436" >
          Replace package.html with package-info.java
       </action>
