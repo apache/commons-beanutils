@@ -89,11 +89,11 @@ Bean Collections has an additional dependency on
 <p>The <a href="apidocs/org/apache/commons/beanutils/package-summary.html#package_description">
 User Guide</a> is part of the <i>package</i> JavaDocs.</p>
 
-<p>The <a href="http://commons.apache.org/beanutils/RELEASE-NOTES.txt">
+<p>The <a href="http://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt">
 Release Notes</a> document the new features and bug fixes that have been
 included in this release.</p>
 
-<p>The <a href="http://commons.apache.org/beanutils/api/index.html">
+<p>The <a href="http://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html">
 JavaDoc API documents</a> are available online.  In particular, you should
 note the property reference syntax options described in the
 <code>PropertyUtils</code> class description.</p>
