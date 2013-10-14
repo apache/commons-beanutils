@@ -58,7 +58,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances
      */
-    public BasicDynaClass(String name, Class dynaBeanClass) {
+    public BasicDynaClass(String name, Class<?> dynaBeanClass) {
 
         this(name, dynaBeanClass, null);
 
@@ -72,7 +72,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @param dynaBeanClass The implementation class for new intances
      * @param properties Property descriptors for the supported properties
      */
-    public BasicDynaClass(String name, Class dynaBeanClass,
+    public BasicDynaClass(String name, Class<?> dynaBeanClass,
                           DynaProperty[] properties) {
 
         super();
@@ -97,14 +97,14 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The constructor of the <code>dynaBeanClass</code> that we will use
      * for creating new instances.
      */
-    protected transient Constructor constructor = null;
+    protected transient Constructor<?> constructor = null;
 
 
     /**
      * The method signature of the constructor we will use to create
      * new DynaBean instances.
      */
-    protected static Class[] constructorTypes = { DynaClass.class };
+    protected static Class<?>[] constructorTypes = { DynaClass.class };
 
 
     /**
@@ -118,7 +118,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The <code>DynaBean</code> implementation class we will use for
      * creating new instances.
      */
-    protected Class dynaBeanClass = BasicDynaBean.class;
+    protected Class<?> dynaBeanClass = BasicDynaBean.class;
 
 
     /**
@@ -138,7 +138,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap propertiesMap = new HashMap();
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
 
 
     // ------------------------------------------------------ DynaClass Methods
@@ -175,7 +175,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
             throw new IllegalArgumentException
                     ("No property name specified");
         }
-        return ((DynaProperty) propertiesMap.get(name));
+        return propertiesMap.get(name);
 
     }
 
@@ -237,7 +237,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @return The class of the {@link DynaBean}
      */
-    public Class getDynaBeanClass() {
+    public Class<?> getDynaBeanClass() {
 
         return (this.dynaBeanClass);
 
@@ -257,7 +257,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @exception IllegalArgumentException if the specified Class does not
      *  implement the <code>DynaBean</code> interface
      */
-    protected void setDynaBeanClass(Class dynaBeanClass) {
+    protected void setDynaBeanClass(Class<?> dynaBeanClass) {
 
         // Validate the argument type specified
         if (dynaBeanClass.isInterface()) {
