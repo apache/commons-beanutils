@@ -16,14 +16,13 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>Decorates a {@link DynaBean} to provide <code>Map</code> behaviour.</p>
@@ -66,15 +65,18 @@ import java.util.Collections;
  *    and <code>values()</code> methods create an <b><i>unmodifiable</i></b>
  *    <code>Set</code> and it does not support the Map's <code>clear()</code>
  *    and <code>remove()</code> operations.</p>
+ * <p>For reasons of backwards compatibility, the generic types of this
+ *    {@code Map} implementation are {@code <Object, Object>}. However, the
+ *    keys of the map are typically strings.</p>
  *
  * @since BeanUtils 1.8.0
  * @version $Id$
  */
-public class DynaBeanMapDecorator implements Map {
+public class DynaBeanMapDecorator implements Map<Object, Object> {
 
     private final DynaBean dynaBean;
     private final boolean readOnly;
-    private transient Set keySet;
+    private transient Set<Object> keySet;
 
     // ------------------- Constructors ----------------------------------
 
@@ -181,9 +183,9 @@ public class DynaBeanMapDecorator implements Map {
      * @return An unmodifiable set of the DynaBean
      * property name/value pairs
      */
-    public Set entrySet() {
+    public Set<Map.Entry<Object, Object>> entrySet() {
         DynaProperty[] properties = getDynaProperties();
-        Set set = new HashSet(properties.length);
+        Set<Map.Entry<Object, Object>> set = new HashSet<Map.Entry<Object, Object>>(properties.length);
         for (int i = 0; i < properties.length; i++) {
             String key = properties[i].getName();
             Object value = getDynaBean().get(key);
@@ -225,14 +227,14 @@ public class DynaBeanMapDecorator implements Map {
      * @return An unmodifiable set of the {@link DynaBean}s
      * property names.
      */
-    public Set keySet() {
+    public Set<Object> keySet() {
         if (keySet != null) {
             return keySet;
         }
 
         // Create a Set of the keys
         DynaProperty[] properties = getDynaProperties();
-        Set set = new HashSet(properties.length);
+        Set<Object> set = new HashSet<Object>(properties.length);
         for (int i = 0; i < properties.length; i++) {
             set.add(properties[i].getName());
         }
@@ -275,14 +277,12 @@ public class DynaBeanMapDecorator implements Map {
      * @throws UnsupportedOperationException if
      * <code>isReadOnly()</code> is true.
      */
-    public void putAll(Map map) {
+    public void putAll(Map<? extends Object, ? extends Object> map) {
         if (isReadOnly()) {
             throw new UnsupportedOperationException("Map is read only");
         }
-        Iterator keys = map.keySet().iterator();
-        while (keys.hasNext()) {
-            Object key = keys.next();
-            put(key, map.get(key));
+        for (Map.Entry<?, ?> e : map.entrySet()) {
+            put(e.getKey(), e.getValue());
         }
     }
 
@@ -312,9 +312,9 @@ public class DynaBeanMapDecorator implements Map {
      *
      * @return Unmodifiable collection of values.
      */
-    public Collection values() {
+    public Collection<Object> values() {
         DynaProperty[] properties = getDynaProperties();
-        List values = new ArrayList(properties.length);
+        List<Object> values = new ArrayList<Object>(properties.length);
         for (int i = 0; i < properties.length; i++) {
             String key = properties[i].getName();
             Object value = getDynaBean().get(key);
@@ -361,7 +361,7 @@ public class DynaBeanMapDecorator implements Map {
     /**
      * Map.Entry implementation.
      */
-    private static class MapEntry implements Map.Entry {
+    private static class MapEntry implements Map.Entry<Object, Object> {
         private final Object key;
         private final Object value;
         MapEntry(Object key, Object value) {
@@ -373,7 +373,7 @@ public class DynaBeanMapDecorator implements Map {
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-            Map.Entry e = (Map.Entry)o;
+            Map.Entry<?, ?> e = (Map.Entry<?, ?>)o;
             return ((key.equals(e.getKey())) &&
                     (value == null ? e.getValue() == null
                                    : value.equals(e.getValue())));
