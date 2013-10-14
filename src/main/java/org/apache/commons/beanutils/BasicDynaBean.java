@@ -73,10 +73,10 @@ public class BasicDynaBean implements DynaBean, Serializable {
     /**
      * The set of property values for this DynaBean, keyed by property name.
      */
-    protected HashMap values = new HashMap();
+    protected HashMap<String, Object> values = new HashMap<String, Object>();
 
     /** Map decorator for this DynaBean */
-    private transient Map mapDecorator;
+    private transient Map<Object, Object> mapDecorator;
 
     /**
      * Return a Map representation of this DynaBean.
@@ -88,7 +88,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @return a Map representation of this DynaBean
      * @since 1.8.0
      */
-    public Map getMap() {
+    public Map<Object, Object> getMap() {
 
         // cache the Map
         if (mapDecorator == null) {
@@ -120,7 +120,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
-            return (((Map) value).containsKey(key));
+            return (((Map<?, ?>) value).containsKey(key));
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -147,7 +147,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
         }
 
         // Return a null value for a non-primitive property
-        Class type = getDynaProperty(name).getType();
+        Class<?> type = getDynaProperty(name).getType();
         if (!type.isPrimitive()) {
             return (value);
         }
@@ -201,7 +201,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
         } else if (value.getClass().isArray()) {
             return (Array.get(value, index));
         } else if (value instanceof List) {
-            return ((List) value).get(index);
+            return ((List<?>) value).get(index);
         } else {
             throw new IllegalArgumentException
                     ("Non-indexed property for '" + name + "[" + index + "]'");
@@ -230,7 +230,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
-            return (((Map) value).get(key));
+            return (((Map<?, ?>) value).get(key));
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -270,7 +270,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
-            ((Map) value).remove(key);
+            ((Map<?, ?>) value).remove(key);
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -338,7 +338,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
             Array.set(prop, index, value);
         } else if (prop instanceof List) {
             try {
-                ((List) prop).set(index, value);
+                @SuppressWarnings("unchecked")
+                // This is safe to cast because list properties are always
+                // of type Object
+                List<Object> list = (List<Object>) prop;
+                list.set(index, value);
             } catch (ClassCastException e) {
                 throw new ConversionException(e.getMessage());
             }
@@ -371,7 +375,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (prop instanceof Map) {
-            ((Map) prop).put(key, value);
+            @SuppressWarnings("unchecked")
+            // This is safe to cast because mapped properties are always
+            // maps of types String -> Object
+            Map<String, Object> map = (Map<String, Object>) prop;
+            map.put(key, value);
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -412,7 +420,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @return <code>true</code> if the source class is assignable to the
      * destination class, otherwise <code>false</code>
      */
-    protected boolean isAssignable(Class dest, Class source) {
+    protected boolean isAssignable(Class<?> dest, Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
                 ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
