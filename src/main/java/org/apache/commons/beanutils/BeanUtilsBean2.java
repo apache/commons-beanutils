@@ -70,7 +70,7 @@ public class BeanUtilsBean2 extends BeanUtilsBean {
      * @return The converted value
      */
     @Override
-    protected Object convert(Object value, Class type) {
+    protected Object convert(Object value, Class<?> type) {
         return getConvertUtils().convert(value, type);
     }
 }
