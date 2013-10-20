@@ -31,7 +31,7 @@ package org.apache.commons.beanutils.converters;
  * @version $Id$
  * @since 1.3
  */
-public final class LongConverter extends NumberConverter {
+public final class LongConverter extends NumberConverter<Long> {
 
     /**
      * Construct a <b>java.lang.Long</b> <i>Converter</i> that throws
@@ -60,7 +60,7 @@ public final class LongConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<Long> getDefaultType() {
         return Long.class;
     }
 

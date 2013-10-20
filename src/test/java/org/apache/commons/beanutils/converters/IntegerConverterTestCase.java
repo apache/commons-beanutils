@@ -19,6 +19,7 @@ package org.apache.commons.beanutils.converters;
 
 import junit.framework.TestSuite;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 
@@ -61,17 +62,17 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected NumberConverter<?> makeConverter() {
         return new IntegerConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter<?> makeConverter(Object defaultValue) {
         return new IntegerConverter(defaultValue);
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Integer.class;
     }
 
@@ -138,7 +139,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
      */
     public void testInvalidAmount() {
         Converter converter = makeConverter();
-        Class clazz = Integer.class;
+        Class<?> clazz = Integer.class;
 
         Long min         = new Long(Integer.MIN_VALUE);
         Long max         = new Long(Integer.MAX_VALUE);
@@ -164,6 +165,19 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
             assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
             fail("More than maximum, expected ConversionException");
         } catch (Exception e) {
+            // expected result
+        }
+    }
+
+    /**
+     * Tests whether an invalid default object causes an exception.
+     */
+    public void testInvalidDefaultObject() {
+        NumberConverter<?> converter = makeConverter();
+        try {
+            converter.setDefaultValue("notANumber");
+            fail("Invalid default value not detected!");
+        } catch (ConversionException cex) {
             // expected result
         }
     }

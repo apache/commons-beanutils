@@ -61,17 +61,17 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected NumberConverter<?> makeConverter() {
         return new DoubleConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter<?> makeConverter(Object defaultValue) {
         return new DoubleConverter(defaultValue);
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Double.class;
     }
 
@@ -130,12 +130,12 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
             assertEquals(
                 message[i] + " to Double",
                 expected[i].doubleValue(),
-                ((Double)(converter.convert(Double.class,input[i]))).doubleValue(),
+                (converter.convert(Double.class,input[i])).doubleValue(),
                 0.00001D);
             assertEquals(
                 message[i] + " to double",
                 expected[i].doubleValue(),
-                ((Double)(converter.convert(Double.TYPE,input[i]))).doubleValue(),
+                (converter.convert(Double.TYPE,input[i])).doubleValue(),
                 0.00001D);
             assertEquals(
                 message[i] + " to null type",

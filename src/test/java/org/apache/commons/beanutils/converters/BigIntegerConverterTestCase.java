@@ -62,17 +62,17 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected NumberConverter<?> makeConverter() {
         return new BigIntegerConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter<?> makeConverter(Object defaultValue) {
         return new BigIntegerConverter(defaultValue);
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return BigInteger.class;
     }
 

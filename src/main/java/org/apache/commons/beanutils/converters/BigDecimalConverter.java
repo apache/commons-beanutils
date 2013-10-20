@@ -33,7 +33,7 @@ import java.math.BigDecimal;
  * @version $Id$
  * @since 1.3
  */
-public final class BigDecimalConverter extends NumberConverter {
+public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
 
     /**
      * Construct a <b>java.math.BigDecimal</b> <i>Converter</i> that throws
@@ -62,7 +62,7 @@ public final class BigDecimalConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<BigDecimal> getDefaultType() {
         return BigDecimal.class;
     }
 

@@ -63,17 +63,17 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected NumberConverter<?> makeConverter() {
         return new BigDecimalConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter<?> makeConverter(Object defaultValue) {
         return new BigDecimalConverter(defaultValue);
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return BigDecimal.class;
     }
 

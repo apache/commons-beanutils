@@ -16,15 +16,15 @@
  */
 package org.apache.commons.beanutils.converters;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.text.NumberFormat;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.ParsePosition;
 
 import org.apache.commons.beanutils.ConversionException;
 
@@ -79,10 +79,11 @@ import org.apache.commons.beanutils.ConversionException;
  * For example to cater for number styles used in Germany such as <code>0.000,00</code> the pattern
  * is specified in the normal form <code>0,000.00</code> and the locale set to <code>Locale.GERMANY</code>.
  *
+ * @param <D> the default type of this converter
  * @version $Id$
  * @since 1.8.0
  */
-public abstract class NumberConverter extends AbstractConverter {
+public abstract class NumberConverter<D> extends AbstractConverter<D> {
 
     private static final Integer ZERO = new Integer(0);
     private static final Integer ONE  = new Integer(1);
@@ -229,9 +230,9 @@ public abstract class NumberConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      */
     @Override
-    protected Object convertToType(Class targetType, Object value) throws Throwable {
+    protected <T> T convertToType(Class<T> targetType, Object value) throws Throwable {
 
-        Class sourceType = value.getClass();
+        Class<?> sourceType = value.getClass();
         // Handle Number
         if (value instanceof Number) {
             return toNumber(sourceType, targetType, (Number)value);
@@ -244,12 +245,12 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Handle Date --> Long
         if (value instanceof Date && Long.class.equals(targetType)) {
-            return new Long(((Date)value).getTime());
+            return targetType.cast(new Long(((Date)value).getTime()));
         }
 
         // Handle Calendar --> Long
         if (value instanceof Calendar  && Long.class.equals(targetType)) {
-            return new Long(((Calendar)value).getTime().getTime());
+            return targetType.cast(new Long(((Calendar)value).getTime().getTime()));
         }
 
         // Convert all other types to String & handle
@@ -296,11 +297,11 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @return The converted value.
      */
-    private Number toNumber(Class sourceType, Class targetType, Number value) {
+    private <T> T toNumber(Class<?> sourceType, Class<T> targetType, Number value) {
 
         // Correct Number type already
         if (targetType.equals(value.getClass())) {
-            return value;
+            return targetType.cast(value);
         }
 
         // Byte
@@ -314,7 +315,7 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return new Byte(value.byteValue());
+            return targetType.cast(new Byte(value.byteValue()));
         }
 
         // Short
@@ -328,7 +329,7 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return new Short(value.shortValue());
+            return targetType.cast(new Short(value.shortValue()));
         }
 
         // Integer
@@ -342,12 +343,12 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return new Integer(value.intValue());
+            return targetType.cast(new Integer(value.intValue()));
         }
 
         // Long
         if (targetType.equals(Long.class)) {
-            return new Long(value.longValue());
+            return targetType.cast(new Long(value.longValue()));
         }
 
         // Float
@@ -356,31 +357,31 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too large for " + toString(targetType));
             }
-            return new Float(value.floatValue());
+            return targetType.cast(new Float(value.floatValue()));
         }
 
         // Double
         if (targetType.equals(Double.class)) {
-            return new Double(value.doubleValue());
+            return targetType.cast(new Double(value.doubleValue()));
         }
 
         // BigDecimal
         if (targetType.equals(BigDecimal.class)) {
             if (value instanceof Float || value instanceof Double) {
-                return new BigDecimal(value.toString());
+                return targetType.cast(new BigDecimal(value.toString()));
             } else if (value instanceof BigInteger) {
-                return new BigDecimal((BigInteger)value);
+                return targetType.cast(new BigDecimal((BigInteger)value));
             } else {
-                return BigDecimal.valueOf(value.longValue());
+                return targetType.cast(BigDecimal.valueOf(value.longValue()));
             }
         }
 
         // BigInteger
         if (targetType.equals(BigInteger.class)) {
             if (value instanceof BigDecimal) {
-                return ((BigDecimal)value).toBigInteger();
+                return targetType.cast(((BigDecimal)value).toBigInteger());
             } else {
-                return BigInteger.valueOf(value.longValue());
+                return targetType.cast(BigInteger.valueOf(value.longValue()));
             }
         }
 
@@ -413,7 +414,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @return The converted Number value.
      */
-    private Number toNumber(Class sourceType, Class targetType, String value) {
+    private Number toNumber(Class<?> sourceType, Class<?> targetType, String value) {
 
         // Byte
         if (targetType.equals(Byte.class)) {
@@ -530,7 +531,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
     /**
      * Convert a String into a <code>Number</code> object.
-     * @param sourceType TODO
+     * @param sourceType the source type of the conversion
      * @param targetType The type to convert the value to
      * @param value The String date value.
      * @param format The NumberFormat to parse the String value.
@@ -538,7 +539,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted Number object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Number parse(Class sourceType, Class targetType, String value, NumberFormat format) {
+    private Number parse(Class<?> sourceType, Class<?> targetType, String value, NumberFormat format) {
         ParsePosition pos = new ParsePosition(0);
         Number parsedNumber = format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
