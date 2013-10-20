@@ -16,15 +16,16 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Collection;
+import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
-import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
@@ -53,7 +54,7 @@ import org.apache.commons.beanutils.Converter;
  *         or by converting the first element in the array to a String - this
  *         is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)}
  *         parameter.</li>
- *     <li><b>Multi Dimensional Arrays</b> - its possible to convert a <code>String</code>
+ *     <li><b>Multi Dimensional Arrays</b> - it is possible to convert a <code>String</code>
  *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
  *     <li><b>Default Value</b></li>
@@ -121,12 +122,13 @@ import org.apache.commons.beanutils.Converter;
  *    int[][] result = (int[][])matrixConverter.convert(int[][].class, matrixString);
  * </pre>
  *
+ * @param <D> the default type of this array converter
  * @version $Id$
  * @since 1.8.0
  */
-public class ArrayConverter extends AbstractConverter {
+public class ArrayConverter<D> extends AbstractConverter<D> {
 
-    private final Object defaultTypeInstance;
+    private final Class<D> defaultType;
     private final Converter elementConverter;
     private int defaultSize;
     private char delimiter    = ',';
@@ -145,7 +147,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param elementConverter Converter used to convert
      *  individual array elements.
      */
-    public ArrayConverter(Class defaultType, Converter elementConverter) {
+    public ArrayConverter(Class<D> defaultType, Converter elementConverter) {
         super();
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
@@ -156,7 +158,7 @@ public class ArrayConverter extends AbstractConverter {
         if (elementConverter == null) {
             throw new IllegalArgumentException("Component Converter is missing.");
         }
-        this.defaultTypeInstance = Array.newInstance(defaultType.getComponentType(), 0);
+        this.defaultType = defaultType;
         this.elementConverter = elementConverter;
     }
 
@@ -172,7 +174,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param defaultSize Specifies the size of the default array value or if less
      *  than zero indicates that a <code>null</code> default value should be used.
      */
-    public ArrayConverter(Class defaultType, Converter elementConverter, int defaultSize) {
+    public ArrayConverter(Class<D> defaultType, Converter elementConverter, int defaultSize) {
         this(defaultType, elementConverter);
         this.defaultSize = defaultSize;
         Object defaultValue = null;
@@ -220,8 +222,8 @@ public class ArrayConverter extends AbstractConverter {
      * @return The default type this <code>Converter</code> handles.
      */
     @Override
-    protected Class getDefaultType() {
-        return defaultTypeInstance.getClass();
+    protected Class<D> getDefaultType() {
+        return defaultType;
     }
 
     /**
@@ -235,12 +237,12 @@ public class ArrayConverter extends AbstractConverter {
     protected String convertToString(Object value) throws Throwable {
 
         int size = 0;
-        Iterator iterator = null;
-        Class type = value.getClass();
+        Iterator<?> iterator = null;
+        Class<?> type = value.getClass();
         if (type.isArray()) {
             size = Array.getLength(value);
         } else {
-            Collection collection = convertToCollection(type, value);
+            Collection<?> collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
         }
@@ -254,7 +256,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         // Create a StringBuffer containing a delimited list of the values
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < size; i++) {
             if (i > 0) {
                 buffer.append(delimiter);
@@ -279,7 +281,7 @@ public class ArrayConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      */
     @Override
-    protected Object convertToType(Class type, Object value) throws Throwable {
+    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
 
         if (!type.isArray()) {
             throw new ConversionException(toString(getClass())
@@ -289,17 +291,17 @@ public class ArrayConverter extends AbstractConverter {
 
         // Handle the source
         int size = 0;
-        Iterator iterator = null;
+        Iterator<?> iterator = null;
         if (value.getClass().isArray()) {
             size = Array.getLength(value);
         } else {
-            Collection collection = convertToCollection(type, value);
+            Collection<?> collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
         }
 
         // Allocate a new Array
-        Class componentType = type.getComponentType();
+        Class<?> componentType = type.getComponentType();
         Object newArray = Array.newInstance(componentType, size);
 
         // Convert and set each element in the new Array
@@ -311,7 +313,11 @@ public class ArrayConverter extends AbstractConverter {
             Array.set(newArray, i, element);
         }
 
-        return newArray;
+        @SuppressWarnings("unchecked")
+        // This is safe because T is an array type and newArray is an array of
+        // T's component type
+        T result = (T) newArray;
+        return result;
     }
 
     /**
@@ -346,14 +352,14 @@ public class ArrayConverter extends AbstractConverter {
      * @param value value to be converted
      * @return Collection elements.
      */
-    protected Collection convertToCollection(Class type, Object value) {
+    protected Collection<?> convertToCollection(Class<?> type, Object value) {
         if (value instanceof Collection) {
-            return (Collection)value;
+            return (Collection<?>)value;
         }
         if (value instanceof Number ||
             value instanceof Boolean ||
             value instanceof java.util.Date) {
-            List list = new ArrayList(1);
+            List<Object> list = new ArrayList<Object>(1);
             list.add(value);
             return list;
         }
@@ -368,7 +374,7 @@ public class ArrayConverter extends AbstractConverter {
      * @return The default value for the specified type.
      */
     @Override
-    protected Object getDefault(Class type) {
+    protected Object getDefault(Class<?> type) {
         if (type.equals(String.class)) {
             return null;
         }
@@ -393,7 +399,7 @@ public class ArrayConverter extends AbstractConverter {
      */
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(toString(getClass()));
         buffer.append("[UseDefault=");
         buffer.append(isUseDefault());
@@ -425,7 +431,7 @@ public class ArrayConverter extends AbstractConverter {
      * @throws NullPointerException if <code>svalue</code>
      *  is <code>null</code>
      */
-    private List parseElements(Class type, String value) {
+    private List<String> parseElements(Class<?> type, String value) {
 
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
@@ -450,13 +456,13 @@ public class ArrayConverter extends AbstractConverter {
             }
 
             // Split comma-delimited tokens into a List
-            List list = null;
+            List<String> list = null;
             while (true) {
                 int ttype = st.nextToken();
                 if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)) {
                     if (st.sval != null) {
                         if (list == null) {
-                            list = new ArrayList();
+                            list = new ArrayList<String>();
                         }
                         list.add(st.sval);
                     }
@@ -469,7 +475,7 @@ public class ArrayConverter extends AbstractConverter {
             }
 
             if (list == null) {
-                list = Collections.EMPTY_LIST;
+                list = Collections.emptyList();
             }
             if (log().isDebugEnabled()) {
                 log().debug(list.size() + " elements parsed");

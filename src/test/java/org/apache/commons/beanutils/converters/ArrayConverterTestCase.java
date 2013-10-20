@@ -69,7 +69,7 @@ public class ArrayConverterTestCase extends TestCase {
         IntegerConverter intConverter = new IntegerConverter(new Integer(0));
         intConverter.setPattern("#,###");
         intConverter.setLocale(Locale.US);
-        ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter, 0);
+        ArrayConverter<int[]> arrayConverter = new ArrayConverter<int[]>(int[].class, intConverter, 0);
         arrayConverter.setAllowedChars(new char[] {',', '-'});
         arrayConverter.setDelimiter(';');
 
@@ -81,8 +81,8 @@ public class ArrayConverterTestCase extends TestCase {
         long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
         Long[]    LONGArray    = new Long[]    {new Long(intArray[0]),    new Long(intArray[1]),    new Long(intArray[2]),    new Long(intArray[3])};
         Integer[] IntegerArray = new Integer[] {new Integer(intArray[0]), new Integer(intArray[1]), new Integer(intArray[2]), new Integer(intArray[3])};
-        ArrayList strList = new ArrayList();
-        ArrayList longList = new ArrayList();
+        ArrayList<String> strList = new ArrayList<String>();
+        ArrayList<Long> longList = new ArrayList<Long>();
         for (int i = 0; i < strArray.length; i++) {
             strList.add(strArray[i]);
             longList.add(LONGArray[i]);
@@ -212,11 +212,11 @@ public class ArrayConverterTestCase extends TestCase {
 
         // Configure Converter
         IntegerConverter intConverter = new IntegerConverter();
-        ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter);
+        ArrayConverter<int[]> arrayConverter = new ArrayConverter<int[]>(int[].class, intConverter);
 
         // Test Data
         String[] array = new String[] {"10", "  11", "12  ", "  13  "};
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < array.length; i++) {
             list.add(array[i]);
         }
@@ -280,14 +280,14 @@ public class ArrayConverterTestCase extends TestCase {
         // Construct an array Converter for an integer array (i.e. int[]) using
         // an IntegerConverter as the element converter.
         // N.B. Uses the default comma (i.e. ",") as the delimiter between individual numbers
-        ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
+        ArrayConverter<int[]> arrayConverter = new ArrayConverter<int[]>(int[].class, integerConverter);
 
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
         // the first (int[]) Converter as the element Converter.
         // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
         //      Also the delimiter for the above array Converter needs to be added to this
         //      array Converter's "allowed characters"
-        ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);
+        ArrayConverter<int[][]> matrixConverter = new ArrayConverter<int[][]>(int[][].class, arrayConverter);
         matrixConverter.setDelimiter(';');
         matrixConverter.setAllowedChars(new char[] {','});
 
@@ -320,9 +320,9 @@ public class ArrayConverterTestCase extends TestCase {
         int[]  oneArray   = new int[1];
         IntegerConverter intConverter = new IntegerConverter();
 
-        assertEquals("Null Default", null,   new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
-        checkArray("Zero Length",  zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
-        checkArray("One Length",   oneArray,  new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
+        assertEquals("Null Default", null,   new ArrayConverter<int[]>(int[].class, intConverter, -1).convert(int[].class, null));
+        checkArray("Zero Length",  zeroArray, new ArrayConverter<int[]>(int[].class, intConverter, 0).convert(int[].class, null));
+        checkArray("One Length",   oneArray,  new ArrayConverter<Integer[]>(Integer[].class, intConverter, 1).convert(int[].class, null));
     }
 
     /**
@@ -332,8 +332,8 @@ public class ArrayConverterTestCase extends TestCase {
         int[]  zeroArray  = new int[0];
         IntegerConverter intConverter = new IntegerConverter();
 
-        checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
-        assertEquals("Default String",  null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
+        checkArray("Empty String",  zeroArray, new ArrayConverter<int[]>(int[].class, intConverter, -1).convert(int[].class, ""));
+        assertEquals("Default String",  null, new ArrayConverter<int[]>(int[].class, intConverter).convert(String.class, null));
     }
 
     /**
@@ -341,19 +341,19 @@ public class ArrayConverterTestCase extends TestCase {
      */
     public void testErrors() {
         try {
-            new ArrayConverter(null, new DateConverter());
+            new ArrayConverter<Object>(null, new DateConverter());
             fail("Default Type missing - expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             // expected result
         }
         try {
-            new ArrayConverter(Boolean.class, new DateConverter());
+            new ArrayConverter<Boolean>(Boolean.class, new DateConverter());
             fail("Default Type not an array - expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             // expected result
         }
         try {
-            new ArrayConverter(int[].class, null);
+            new ArrayConverter<int[]>(int[].class, null);
             fail("Component Converter missing - expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             // expected result
@@ -365,10 +365,10 @@ public class ArrayConverterTestCase extends TestCase {
      */
     public void testUnderscore_BEANUTILS_302() {
         String value = "first_value,second_value";
-        ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
+        ArrayConverter<String[]> converter = new ArrayConverter<String[]>(String[].class, new StringConverter());
 
         // test underscore not allowed (the default)
-        String[] result = (String[])converter.convert(String[].class, value);
+        String[] result = converter.convert(String[].class, value);
         assertNotNull("result.null", result);
         assertEquals("result.length", 4, result.length);
         assertEquals("result[0]", "first", result[0]);
@@ -380,7 +380,7 @@ public class ArrayConverterTestCase extends TestCase {
         converter.setAllowedChars(new char[] {'.', '-', '_'});
 
         // test underscore allowed
-        result = (String[])converter.convert(String[].class, value);
+        result = converter.convert(String[].class, value);
         assertNotNull("result.null", result);
         assertEquals("result.length", 2, result.length);
         assertEquals("result[0]", "first_value", result[0]);
