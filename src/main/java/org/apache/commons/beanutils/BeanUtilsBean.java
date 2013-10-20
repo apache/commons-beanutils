@@ -381,7 +381,7 @@ public class BeanUtilsBean {
             if (dynaProperty == null) {
                 return; // Skip this property setter
             }
-            type = dynaProperty.getType();
+            type = dynaPropertyType(dynaProperty, value);
         } else {
             PropertyDescriptor descriptor = null;
             try {
@@ -918,7 +918,7 @@ public class BeanUtilsBean {
             if (dynaProperty == null) {
                 return; // Skip this property setter
             }
-            type = dynaProperty.getType();
+            type = dynaPropertyType(dynaProperty, value);
         } else if (target instanceof Map) {
             type = Object.class;
         } else if (target != null && target.getClass().isArray() && index >= 0) {
@@ -1101,5 +1101,21 @@ public class BeanUtilsBean {
             }
             return null;
         }
+    }
+
+    /**
+     * Determines the type of a {@code DynaProperty}. Here a special treatment
+     * is needed for mapped properties.
+     *
+     * @param dynaProperty the property descriptor
+     * @param value the value object to be set for this property
+     * @return the type of this property
+     */
+    private static Class<?> dynaPropertyType(DynaProperty dynaProperty,
+            Object value) {
+        if (!dynaProperty.isMapped()) {
+            return dynaProperty.getType();
+        }
+        return (value == null) ? String.class : value.getClass();
     }
 }
