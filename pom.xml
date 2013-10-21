@@ -28,10 +28,10 @@
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
   <version>1.8.4-SNAPSHOT</version>
-  <name>Commons BeanUtils</name>
+  <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
-  <description>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
+  <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
 
   <url>http://commons.apache.org/proper/commons-beanutils/</url>
 
