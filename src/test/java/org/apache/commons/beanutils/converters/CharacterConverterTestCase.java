@@ -19,6 +19,7 @@ package org.apache.commons.beanutils.converters;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 /**
@@ -80,6 +81,22 @@ public class CharacterConverterTestCase extends TestCase {
         assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
         assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
         assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
+    }
+
+    /**
+     * Tests whether the primitive char class can be passed as target type.
+     */
+    public void testConvertToChar() {
+        Converter converter = new CharacterConverter();
+        assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
+    }
+
+    /**
+     * Tests a conversion to character for null input if no default value is
+     * provided.
+     */
+    public void testConvertToCharacterNullNoDefault() {
+        Converter converter = new CharacterConverter();
         try {
             converter.convert(Character.class, null);
             fail("Expected a ConversionException for null value");
@@ -94,5 +111,18 @@ public class CharacterConverterTestCase extends TestCase {
     public void testDefault() {
         Converter converter = new CharacterConverter("C");
         assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
+    }
+
+    /**
+     * Tries a conversion to an unsupported type.
+     */
+    public void testConvertToUnsupportedType() {
+        Converter converter = new CharacterConverter();
+        try {
+            converter.convert(Integer.class, "Test");
+            fail("Could convert to unsupported type!");
+        } catch (ConversionException cex) {
+            // expected result
+        }
     }
 }
