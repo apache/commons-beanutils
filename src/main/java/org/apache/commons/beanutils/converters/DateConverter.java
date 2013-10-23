@@ -61,7 +61,7 @@ public final class DateConverter extends DateTimeConverter {
      * @return The default type this <code>Converter</code> handles.
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return Date.class;
     }
 

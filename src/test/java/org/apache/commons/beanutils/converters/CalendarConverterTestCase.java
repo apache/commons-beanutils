@@ -17,6 +17,7 @@
 package org.apache.commons.beanutils.converters;
 
 import java.util.Calendar;
+
 import junit.framework.TestSuite;
 
 /**
@@ -69,7 +70,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Calendar.class;
     }
 

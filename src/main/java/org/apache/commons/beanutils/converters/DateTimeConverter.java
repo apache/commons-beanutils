@@ -16,13 +16,14 @@
  */
 package org.apache.commons.beanutils.converters;
 
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Calendar;
 import java.util.TimeZone;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.text.ParsePosition;
+
 import org.apache.commons.beanutils.ConversionException;
 
 /**
@@ -277,15 +278,16 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * Otherwise the default <code>DateFormat</code> for the default locale
      * (and <i>style</i> if configured) will be used.
      *
+     * @param <T> The desired target type of the conversion.
      * @param targetType Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Exception if conversion cannot be performed successfully
      */
     @Override
-    protected Object convertToType(Class targetType, Object value) throws Exception {
+    protected <T> T convertToType(Class<T> targetType, Object value) throws Exception {
 
-        Class sourceType = value.getClass();
+        Class<?> sourceType = value.getClass();
 
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
@@ -335,7 +337,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
                 calendar = parse(sourceType, targetType, stringValue, format);
             }
             if (Calendar.class.isAssignableFrom(targetType)) {
-                return calendar;
+                return targetType.cast(calendar);
             } else {
                 return toDate(targetType, calendar.getTime().getTime());
             }
@@ -360,30 +362,31 @@ public abstract class DateTimeConverter extends AbstractConverter {
      *     <li><code>java.sql.Timestamp</code></li>
      * </ul>
      *
+     * @param <T> The target type
      * @param type The Date type to convert to
      * @param value The long value to convert.
      * @return The converted date value.
      */
-    private Object toDate(Class type, long value) {
+    private <T> T toDate(Class<T> type, long value) {
 
         // java.util.Date
         if (type.equals(Date.class)) {
-            return new Date(value);
+            return type.cast(new Date(value));
         }
 
         // java.sql.Date
         if (type.equals(java.sql.Date.class)) {
-            return new java.sql.Date(value);
+            return type.cast(new java.sql.Date(value));
         }
 
         // java.sql.Time
         if (type.equals(java.sql.Time.class)) {
-            return new java.sql.Time(value);
+            return type.cast(new java.sql.Time(value));
         }
 
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
-            return new java.sql.Timestamp(value);
+            return type.cast(new java.sql.Timestamp(value));
         }
 
         // java.util.Calendar
@@ -400,7 +403,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             }
             calendar.setTime(new Date(value));
             calendar.setLenient(false);
-            return calendar;
+            return type.cast(calendar);
         }
 
         String msg = toString(getClass()) + " cannot handle conversion to '"
@@ -425,15 +428,16 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * mechanism is provided for <code>java.util.Date</code>
      * and <code>java.util.Calendar</code> type.
      *
-     * @param type The Number type to convert to
+     * @param <T> The target type
+     * @param type The date type to convert to
      * @param value The String value to convert.
      * @return The converted Number value.
      */
-    private Object toDate(Class type, String value) {
+    private <T> T toDate(Class<T> type, String value) {
         // java.sql.Date
         if (type.equals(java.sql.Date.class)) {
             try {
-                return java.sql.Date.valueOf(value);
+                return type.cast(java.sql.Date.valueOf(value));
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
                         "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
@@ -443,7 +447,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // java.sql.Time
         if (type.equals(java.sql.Time.class)) {
             try {
-                return java.sql.Time.valueOf(value);
+                return type.cast(java.sql.Time.valueOf(value));
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
                         "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
@@ -453,7 +457,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
             try {
-                return java.sql.Timestamp.valueOf(value);
+                return type.cast(java.sql.Timestamp.valueOf(value));
             } catch (IllegalArgumentException e) {
                 throw new ConversionException(
                         "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
@@ -514,7 +518,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return The converted Date object.
      * @throws Exception if an error occurs parsing the date.
      */
-    private Calendar parse(Class sourceType, Class targetType, String value) throws Exception {
+    private Calendar parse(Class<?> sourceType, Class<?> targetType, String value) throws Exception {
         Exception firstEx = null;
         for (int i = 0; i < patterns.length; i++) {
             try {
@@ -547,7 +551,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Calendar parse(Class sourceType, Class targetType, String value, DateFormat format) {
+    private Calendar parse(Class<?> sourceType, Class<?> targetType, String value, DateFormat format) {
         logFormat("Parsing", format);
         format.setLenient(false);
         ParsePosition pos = new ParsePosition(0);

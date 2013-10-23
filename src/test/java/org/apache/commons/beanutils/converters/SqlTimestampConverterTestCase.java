@@ -131,7 +131,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Timestamp.class;
     }
 
