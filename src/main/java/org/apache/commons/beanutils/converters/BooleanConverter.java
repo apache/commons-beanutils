@@ -51,7 +51,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @version $Id$
  * @since 1.3
  */
-public final class BooleanConverter extends AbstractConverter {
+public final class BooleanConverter extends AbstractConverter<Boolean> {
 
 
     // ----------------------------------------------------------- Constructors
@@ -178,7 +178,7 @@ public final class BooleanConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<Boolean> getDefaultType() {
         return Boolean.class;
     }
 
@@ -202,27 +202,29 @@ public final class BooleanConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Object convertToType(Class type, Object value) throws Throwable {
+    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
 
-        // All the values in the trueStrings and falseStrings arrays are
-        // guaranteed to be lower-case. By converting the input value
-        // to lowercase too, we can use the efficient String.equals method
-        // instead of the less-efficient String.equalsIgnoreCase method.
-        String stringValue = value.toString().toLowerCase();
+        if (Boolean.class.equals(type) || Boolean.TYPE.equals(type)) {
+            // All the values in the trueStrings and falseStrings arrays are
+            // guaranteed to be lower-case. By converting the input value
+            // to lowercase too, we can use the efficient String.equals method
+            // instead of the less-efficient String.equalsIgnoreCase method.
+            String stringValue = value.toString().toLowerCase();
 
-        for(int i=0; i<trueStrings.length; ++i) {
-            if (trueStrings[i].equals(stringValue)) {
-                return Boolean.TRUE;
+            for (int i = 0; i < trueStrings.length; ++i) {
+                if (trueStrings[i].equals(stringValue)) {
+                    return type.cast(Boolean.TRUE);
+                }
+            }
+
+            for (int i = 0; i < falseStrings.length; ++i) {
+                if (falseStrings[i].equals(stringValue)) {
+                    return type.cast(Boolean.FALSE);
+                }
             }
         }
 
-        for(int i=0; i<falseStrings.length; ++i) {
-            if (falseStrings[i].equals(stringValue)) {
-                return Boolean.FALSE;
-            }
-        }
-
-        throw new ConversionException("Can't convert value '" + value + "' to a Boolean");
+        throw new ConversionException("Can't convert value '" + value + "' to type " + type);
     }
 
     /**
