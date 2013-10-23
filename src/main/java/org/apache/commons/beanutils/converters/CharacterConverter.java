@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.ConversionException;
 
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
@@ -89,8 +88,7 @@ public final class CharacterConverter extends AbstractConverter {
             return type.cast(new Character(value.toString().charAt(0)));
         }
 
-        throw new ConversionException("Can't convert value '" + value
-                + "' to type " + type);
+        throw conversionException(type, value);
     }
 
 }

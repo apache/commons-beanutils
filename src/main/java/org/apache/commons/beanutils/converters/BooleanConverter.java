@@ -224,7 +224,7 @@ public final class BooleanConverter extends AbstractConverter {
             }
         }
 
-        throw new ConversionException("Can't convert value '" + value + "' to type " + type);
+        throw conversionException(type, value);
     }
 
     /**

@@ -488,4 +488,18 @@ public abstract class AbstractConverter implements Converter {
         T result = (T) convert(getDefaultType(), value);
         return result;
     }
+
+    /**
+     * Generates a standard conversion exception with a message indicating that
+     * the passed in value cannot be converted to the desired target type.
+     *
+     * @param type the target type
+     * @param value the value to be converted
+     * @return a {@code ConversionException} with a standard message
+     * @since 1.9
+     */
+    protected ConversionException conversionException(Class<?> type, Object value) {
+        return new ConversionException("Can't convert value '" + value
+                + "' to type " + type);
+    }
 }
