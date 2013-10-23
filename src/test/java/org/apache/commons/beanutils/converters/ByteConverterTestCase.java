@@ -61,12 +61,12 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter<?> makeConverter() {
+    protected NumberConverter makeConverter() {
         return new ByteConverter();
     }
 
     @Override
-    protected NumberConverter<?> makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(Object defaultValue) {
         return new ByteConverter(defaultValue);
     }
     @Override

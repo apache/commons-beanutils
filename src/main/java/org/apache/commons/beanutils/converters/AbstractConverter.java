@@ -51,11 +51,10 @@ import org.apache.commons.logging.LogFactory;
  * tries to transform the default value to the requested target type.
  * If this fails, a {@code ConversionException} if thrown.
  *
- * @param <D> the default conversion target type of this converter
  * @version $Id$
  * @since 1.8.0
  */
-public abstract class AbstractConverter<D> implements Converter {
+public abstract class AbstractConverter implements Converter {
 
     /** Debug logging message to indicate default value configuration */
     private static final String DEFAULT_CONFIG_MSG =
@@ -79,7 +78,7 @@ public abstract class AbstractConverter<D> implements Converter {
     /**
      * The default value specified to our Constructor, if any.
      */
-    private D defaultValue = null;
+    private Object defaultValue = null;
 
     // ----------------------------------------------------------- Constructors
 
@@ -98,7 +97,7 @@ public abstract class AbstractConverter<D> implements Converter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public AbstractConverter(D defaultValue) {
+    public AbstractConverter(Object defaultValue) {
         setDefaultValue(defaultValue);
     }
 
@@ -363,7 +362,7 @@ public abstract class AbstractConverter<D> implements Converter {
      *
      * @return The default type this <code>Converter</code> handles.
      */
-    protected abstract Class<? extends D> getDefaultType();
+    protected abstract Class<?> getDefaultType();
 
     /**
      * Return the default value for conversions to the specified

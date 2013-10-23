@@ -51,7 +51,7 @@ import org.apache.commons.beanutils.ConversionException;
  * @version $Id$
  * @since 1.3
  */
-public final class BooleanConverter extends AbstractConverter<Boolean> {
+public final class BooleanConverter extends AbstractConverter {
 
 
     // ----------------------------------------------------------- Constructors

@@ -61,12 +61,12 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter<?> makeConverter() {
+    protected NumberConverter makeConverter() {
         return new ShortConverter();
     }
 
     @Override
-    protected NumberConverter<?> makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(Object defaultValue) {
         return new ShortConverter(defaultValue);
     }
 

@@ -31,7 +31,7 @@ package org.apache.commons.beanutils.converters;
  * @version $Id$
  * @since 1.3
  */
-public final class ShortConverter extends NumberConverter<Short> {
+public final class ShortConverter extends NumberConverter {
 
     /**
      * Construct a <b>java.lang.Short</b> <i>Converter</i> that throws

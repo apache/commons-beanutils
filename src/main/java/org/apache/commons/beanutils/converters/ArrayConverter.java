@@ -126,9 +126,9 @@ import org.apache.commons.beanutils.Converter;
  * @version $Id$
  * @since 1.8.0
  */
-public class ArrayConverter<D> extends AbstractConverter<D> {
+public class ArrayConverter extends AbstractConverter {
 
-    private final Class<D> defaultType;
+    private final Class<?> defaultType;
     private final Converter elementConverter;
     private int defaultSize;
     private char delimiter    = ',';
@@ -147,7 +147,7 @@ public class ArrayConverter<D> extends AbstractConverter<D> {
      * @param elementConverter Converter used to convert
      *  individual array elements.
      */
-    public ArrayConverter(Class<D> defaultType, Converter elementConverter) {
+    public ArrayConverter(Class<?> defaultType, Converter elementConverter) {
         super();
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
@@ -174,7 +174,7 @@ public class ArrayConverter<D> extends AbstractConverter<D> {
      * @param defaultSize Specifies the size of the default array value or if less
      *  than zero indicates that a <code>null</code> default value should be used.
      */
-    public ArrayConverter(Class<D> defaultType, Converter elementConverter, int defaultSize) {
+    public ArrayConverter(Class<?> defaultType, Converter elementConverter, int defaultSize) {
         this(defaultType, elementConverter);
         this.defaultSize = defaultSize;
         Object defaultValue = null;
@@ -222,7 +222,7 @@ public class ArrayConverter<D> extends AbstractConverter<D> {
      * @return The default type this <code>Converter</code> handles.
      */
     @Override
-    protected Class<D> getDefaultType() {
+    protected Class<?> getDefaultType() {
         return defaultType;
     }
 

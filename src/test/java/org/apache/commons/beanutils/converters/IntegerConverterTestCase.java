@@ -62,12 +62,12 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     @Override
-    protected NumberConverter<?> makeConverter() {
+    protected NumberConverter makeConverter() {
         return new IntegerConverter();
     }
 
     @Override
-    protected NumberConverter<?> makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(Object defaultValue) {
         return new IntegerConverter(defaultValue);
     }
 
@@ -173,7 +173,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
      * Tests whether an invalid default object causes an exception.
      */
     public void testInvalidDefaultObject() {
-        NumberConverter<?> converter = makeConverter();
+        NumberConverter converter = makeConverter();
         try {
             converter.setDefaultValue("notANumber");
             fail("Invalid default value not detected!");
