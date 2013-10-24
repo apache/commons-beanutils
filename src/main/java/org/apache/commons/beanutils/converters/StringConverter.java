@@ -71,7 +71,7 @@ public final class StringConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return String.class;
     }
 
@@ -86,8 +86,13 @@ public final class StringConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Object convertToType(Class type, Object value) throws Throwable {
-        return value.toString();
+    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+        // We have to support Object, too, because this class is sometimes
+        // used for a standard to Object conversion
+        if (String.class.equals(type) || Object.class.equals(type)) {
+            return type.cast(value.toString());
+        }
+        throw conversionException(type, value);
     }
 
 
