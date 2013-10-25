@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils.converters;
 
-import java.io.InputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * A special classloader useful for testing j2ee-like scenarios.
@@ -55,7 +55,7 @@ public class ClassReloader extends ClassLoader {
      * Given a class already in the classpath of a parent classloader,
      * reload that class via this classloader.
      */
-    public Class reload(Class clazz) throws FileNotFoundException, IOException {
+    public Class<?> reload(Class<?> clazz) throws FileNotFoundException, IOException {
         String className = clazz.getName();
         String classFile = className.replace('.', '/') + ".class";
         InputStream classStream = getParent().getResourceAsStream(classFile);
@@ -77,7 +77,7 @@ public class ClassReloader extends ClassLoader {
         byte[] classData = baos.toByteArray();
 
         // now we have the raw class data, let's turn it into a class
-        Class newClass = defineClass(className, classData, 0, classData.length);
+        Class<?> newClass = defineClass(className, classData, 0, classData.length);
         resolveClass(newClass);
         return newClass;
     }
