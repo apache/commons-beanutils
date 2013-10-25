@@ -52,11 +52,12 @@ public final class ConverterFacade implements Converter {
      * specified type by delegating to the underlying {@link Converter}
      * implementation.
      *
+     * @param <T> The result type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value.
      */
-    public Object convert(Class type, Object value) {
+    public <T> T convert(Class<T> type, Object value) {
         return converter.convert(type, value);
     }
 
