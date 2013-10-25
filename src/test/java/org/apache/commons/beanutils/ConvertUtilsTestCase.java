@@ -24,10 +24,12 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import org.apache.commons.beanutils.converters.DateConverter;
-import junit.framework.TestCase;
+
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils.converters.DateConverter;
 
 
 /**
@@ -614,6 +616,8 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    // We need to use raw types in order to test legacy converters
     public void testConvertToString() throws Exception {
         Converter dummyConverter = new Converter() {
             public Object convert(Class type, Object value) {
@@ -656,6 +660,16 @@ public class ConvertUtilsTestCase extends TestCase {
         utils.deregister(String.class);
         assertEquals("Object's toString()", today.toString(), utils.convert(today, String.class));
 
+    }
+
+    /**
+     * Tests a conversion to an unsupported target type.
+     */
+    public void testConvertUnsupportedTargetType() {
+        ConvertUtilsBean utils = new ConvertUtilsBean();
+        Object value = "A test value";
+        assertSame("Got different object", value,
+                utils.convert(value, getClass()));
     }
 
     // -------------------------------------------------------- Private Methods
