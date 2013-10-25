@@ -129,7 +129,7 @@ public abstract class AbstractConverter implements Converter {
     public <T> T convert(Class<T> type, Object value) {
 
         if (type == null) {
-            return convertToDefaultType(value);
+            return convertToDefaultType(type, value);
         }
 
         Class<?> sourceType  = value == null ? null : value.getClass();
@@ -480,10 +480,12 @@ public abstract class AbstractConverter implements Converter {
      * Therefore, we can cast to it (which is required to fulfill the contract
      * of the method signature).
      *
+     * @param <T> the type of the result object
+     * @param targetClass the target class of the conversion
      * @param value the value to be converted
      * @return the converted value
      */
-    private <T> T convertToDefaultType(Object value) {
+    private <T> T convertToDefaultType(Class<T> targetClass, Object value) {
         @SuppressWarnings("unchecked")
         T result = (T) convert(getDefaultType(), value);
         return result;
