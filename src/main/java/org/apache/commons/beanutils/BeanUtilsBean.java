@@ -55,11 +55,11 @@ public class BeanUtilsBean {
     /**
      * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
      */
-    private static final ContextClassLoaderLocal
-            BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal() {
+    private static final ContextClassLoaderLocal<BeanUtilsBean>
+            BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<BeanUtilsBean>() {
                         // Creates the default instance used when the context classloader is unavailable
                         @Override
-                        protected Object initialValue() {
+                        protected BeanUtilsBean initialValue() {
                             return new BeanUtilsBean();
                         }
                     };
@@ -72,7 +72,7 @@ public class BeanUtilsBean {
      * @return The (pseudo-singleton) BeanUtils bean instance
      */
     public static BeanUtilsBean getInstance() {
-        return (BeanUtilsBean) BEANS_BY_CLASSLOADER.get();
+        return BEANS_BY_CLASSLOADER.get();
     }
 
     /**
