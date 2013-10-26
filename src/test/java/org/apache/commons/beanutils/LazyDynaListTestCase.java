@@ -16,17 +16,18 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -43,8 +44,8 @@ public class LazyDynaListTestCase extends TestCase {
                                                new DynaProperty(BASIC_PROP1, String.class),
                                                new DynaProperty(BASIC_PROP2, HashMap.class)};
 
-    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap());
-    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap());
+    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
+    protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
@@ -174,15 +175,16 @@ public class LazyDynaListTestCase extends TestCase {
     /**
      * Test Collection
      */
-    public void testCollection(LazyDynaList list, Class testClass, DynaClass testDynaClass, Object wrongBean) {
+    public void testCollection(LazyDynaList list, Class<?> testClass, DynaClass testDynaClass, Object wrongBean) {
 
         // ----- Create Collection & Array of Maps -----
         int size = 5;
-        List testList = new ArrayList(size);
-        TreeMap[] testArray = new TreeMap[size];
+        List<Object> testList = new ArrayList<Object>(size);
+        TreeMap<?, ?>[] testArray = new TreeMap[size];
         for (int i = 0; i < size; i++) {
-            testArray[i] = new TreeMap();
-            testArray[i].put("prop"+i, "val"+i);
+            TreeMap<String, Object> map = new TreeMap<String, Object>();
+            map.put("prop"+i, "val"+i);
+            testArray[i] = map;
             testList.add(testArray[i]);
         }
 
@@ -192,7 +194,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("1. check size", size, lazyList.size());
 
         DynaBean[] dynaArray = lazyList.toDynaBeanArray();
-        TreeMap[]  mapArray  = (TreeMap[])lazyList.toArray();
+        TreeMap<?, ?>[]  mapArray  = (TreeMap[])lazyList.toArray();
 
         // Check values
         assertEquals("2. check size", size, dynaArray.length);
@@ -226,13 +228,13 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testNullType() {
         LazyDynaList lazyList = new LazyDynaList();
-        lazyList.add(new HashMap());
+        lazyList.add(new HashMap<String, Object>());
     }
 
     /**
      * Test DynaBean Create
      */
-    private void dynaBeanTest(LazyDynaList list, Class testClass, DynaClass testDynaClass, Object wrongBean) {
+    private void dynaBeanTest(LazyDynaList list, Class<?> testClass, DynaClass testDynaClass, Object wrongBean) {
 
         // Test get(index) created correct DynaBean - Second
         Object dynaBean = list.get(1);
@@ -276,7 +278,7 @@ public class LazyDynaListTestCase extends TestCase {
         }
 
         // Create Collection
-        List collection = new ArrayList();
+        List<Object> collection = new ArrayList<Object>();
         try {
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
@@ -339,7 +341,7 @@ public class LazyDynaListTestCase extends TestCase {
     /**
      * Test Map Create
      */
-    private void mapTest(LazyDynaList list, Class testClass, Object wrongBean) {
+    private void mapTest(LazyDynaList list, Class<?> testClass, Object wrongBean) {
 
         // Test get(index) created correct DynaBean - First
         Object dynaBean = list.get(0);
@@ -355,7 +357,7 @@ public class LazyDynaListTestCase extends TestCase {
         Object array = list.toArray();
         assertNotNull("5. Array Not Created", array);
         assertEquals("6. Not Map[]", testClass, array.getClass().getComponentType());
-        Map[] mapArray = (Map[])array;
+        Map<?, ?>[] mapArray = (Map[])array;
         assertEquals("7. Array Size Wrong", 1, mapArray.length);
 
         // Test get(index) created correct DynaBean - Third
@@ -388,7 +390,7 @@ public class LazyDynaListTestCase extends TestCase {
     /**
      * Test Pojo Create
      */
-    private void pojoTest(LazyDynaList list, Class testClass, Object wrongBean) {
+    private void pojoTest(LazyDynaList list, Class<?> testClass, Object wrongBean) {
 
         // Test get(index) created correct DynaBean - First
         Object dynaBean = list.get(0);
@@ -568,4 +570,51 @@ public class LazyDynaListTestCase extends TestCase {
 
     }
 
+    /**
+     * Tests toArray() if the list contains DynaBean objects.
+     */
+    public void testToArrayDynaBeans() {
+        LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
+        LazyDynaBean elem = new LazyDynaBean();
+        list.add(elem);
+        LazyDynaBean[] beans = new LazyDynaBean[1];
+        assertSame("Wrong array", beans, list.toArray(beans));
+        assertSame("Wrong element", elem, beans[0]);
+    }
+
+    /**
+     * Tests toArray() if the list contains maps.
+     */
+    public void testToArrayMapType() {
+        LazyDynaList list = new LazyDynaList(HashMap.class);
+        HashMap<String, Object> elem = new HashMap<String, Object>();
+        list.add(elem);
+        Map<?, ?>[] array = new Map[1];
+        assertSame("Wrong array", array, list.toArray(array));
+        assertEquals("Wrong element", elem, array[0]);
+    }
+
+    /**
+     * Tests toArray() for other bean elements.
+     */
+    public void testToArrayOtherType() {
+        LazyDynaList list = new LazyDynaList(TestBean.class);
+        TestBean elem = new TestBean();
+        list.add(elem);
+        TestBean[] array = new TestBean[1];
+        assertSame("Wrong array", array, list.toArray(array));
+        assertEquals("Wrong element", elem, array[0]);
+    }
+
+    /**
+     * Tests toArray() if the array's size does not fit the collection size.
+     */
+    public void testToArrayUnsufficientSize() {
+        LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
+        LazyDynaBean elem = new LazyDynaBean();
+        list.add(elem);
+        LazyDynaBean[] array = (LazyDynaBean[]) list.toArray(new LazyDynaBean[0]);
+        assertEquals("Wrong array size", 1, array.length);
+        assertEquals("Wrong element", elem, array[0]);
+    }
 }
