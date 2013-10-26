@@ -60,7 +60,7 @@ public interface MutableDynaClass extends DynaClass {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class type);
+    public void add(String name, Class<?> type);
 
 
     /**
@@ -79,7 +79,7 @@ public interface MutableDynaClass extends DynaClass {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class type, boolean readable,
+    public void add(String name, Class<?> type, boolean readable,
                     boolean writeable);
 
 
