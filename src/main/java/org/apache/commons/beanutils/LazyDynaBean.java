@@ -16,15 +16,16 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Date;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -141,10 +142,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
      * is associated with.
      */
-    protected Map values;
+    protected Map<String, Object> values;
 
     /** Map decorator for this DynaBean */
-    private transient Map mapDecorator;
+    private transient Map<Object, Object> mapDecorator;
 
     /**
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
@@ -202,7 +203,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @return a Map representation of this DynaBean
      */
-    public Map getMap() {
+    public Map<Object, Object> getMap() {
         // cache the Map
         if (mapDecorator == null) {
             mapDecorator = new DynaBeanMapDecorator(this);
@@ -229,11 +230,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            return ((Map)value).size();
+            return ((Map<?, ?>)value).size();
         }
 
         if (value instanceof List) {
-            return ((List)value).size();
+            return ((List<?>)value).size();
         }
 
         if ((value.getClass().isArray())) {
@@ -269,7 +270,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            return (((Map) value).containsKey(key));
+            return (((Map<?, ?>) value).containsKey(key));
         }
 
         return false;
@@ -353,7 +354,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         if (indexedProperty.getClass().isArray()) {
             return Array.get(indexedProperty, index);
         } else if (indexedProperty instanceof List) {
-            return ((List)indexedProperty).get(index);
+            return ((List<?>)indexedProperty).get(index);
         } else {
             throw new IllegalArgumentException
                 ("Non-indexed property for '" + name + "[" + index + "]' "
@@ -394,7 +395,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Get the value from the Map
         if (mappedProperty instanceof Map) {
-            return (((Map) mappedProperty).get(key));
+            return (((Map<?, ?>) mappedProperty).get(key));
         } else {
             throw new IllegalArgumentException
               ("Non-mapped property for '" + name + "(" + key + ")'"
@@ -437,7 +438,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            ((Map) value).remove(key);
+            ((Map<?, ?>) value).remove(key);
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'"
@@ -536,7 +537,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
         if (indexedProperty.getClass().isArray()) {
             Array.set(indexedProperty, index, value);
         } else if (indexedProperty instanceof List) {
-            ((List)indexedProperty).set(index, value);
+            @SuppressWarnings("unchecked")
+            // Indexed properties are stored in a List<Object>
+            List<Object> values = (List<Object>) indexedProperty;
+            values.set(index, value);
         } else {
             throw new IllegalArgumentException
                 ("Non-indexed property for '" + name + "[" + index + "]' "
@@ -577,7 +581,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Set the value in the Map
-        ((Map)mappedProperty).put(key, value);
+        @SuppressWarnings("unchecked")
+        // mapped properties are stored in a Map<String, Object>
+        Map<String, Object> valuesMap = (Map<String, Object>) mappedProperty;
+        valuesMap.put(key, value);
 
     }
 
@@ -596,9 +603,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Grow a List to the appropriate size
         if (indexedProperty instanceof List) {
 
-            List list = (List)indexedProperty;
+            @SuppressWarnings("unchecked")
+            // Indexed properties are stored as List<Object>
+            List<Object> list = (List<Object>)indexedProperty;
             while (index >= list.size()) {
-                Class contentType = getDynaClass().getDynaProperty(name).getContentType();
+                Class<?> contentType = getDynaClass().getDynaProperty(name).getContentType();
                 Object value = null;
                 if (contentType != null) {
                     value = createProperty(name+"["+list.size()+"]", contentType);
@@ -613,7 +622,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
             int length = Array.getLength(indexedProperty);
             if (index >= length) {
-                Class componentType = indexedProperty.getClass().getComponentType();
+                Class<?> componentType = indexedProperty.getClass().getComponentType();
                 Object newArray = Array.newInstance(componentType, (index + 1));
                 System.arraycopy(indexedProperty, 0, newArray, 0, length);
                 indexedProperty = newArray;
@@ -635,7 +644,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createProperty(String name, Class type) {
+    protected Object createProperty(String name, Class<?> type) {
         if (type == null) {
             return null;
         }
@@ -671,7 +680,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createIndexedProperty(String name, Class type) {
+    protected Object createIndexedProperty(String name, Class<?> type) {
 
         // Create the indexed object
         Object indexedProperty = null;
@@ -713,7 +722,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createMappedProperty(String name, Class type) {
+    protected Object createMappedProperty(String name, Class<?> type) {
 
         // Create the mapped object
         Object mappedProperty = null;
@@ -751,7 +760,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createDynaBeanProperty(String name, Class type) {
+    protected Object createDynaBeanProperty(String name, Class<?> type) {
         try {
             return type.newInstance();
         }
@@ -770,7 +779,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createPrimitiveProperty(String name, Class type) {
+    protected Object createPrimitiveProperty(String name, Class<?> type) {
 
         if (type == Boolean.TYPE) {
             return Boolean.FALSE;
@@ -800,7 +809,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createNumberProperty(String name, Class type) {
+    protected Object createNumberProperty(String name, Class<?> type) {
 
         return null;
 
@@ -812,7 +821,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createOtherProperty(String name, Class type) {
+    protected Object createOtherProperty(String name, Class<?> type) {
 
         if (type == Object.class    ||
             type == String.class    ||
@@ -839,28 +848,28 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * <p>Creates a new <code>ArrayList</code> for an 'indexed' property
      *    which doesn't exist.</p>
      *
-     * <p>This method shouls be overriden if an alternative <code>List</code>
+     * <p>This method should be overridden if an alternative <code>List</code>
      *    or <code>Array</code> implementation is required for 'indexed' properties.</p>
      *
      * @param name Name of the 'indexed property.
      * @return The default value for an indexed property (java.util.ArrayList)
      */
     protected Object defaultIndexedProperty(String name) {
-        return new ArrayList();
+        return new ArrayList<Object>();
     }
 
     /**
      * <p>Creates a new <code>HashMap</code> for a 'mapped' property
      *    which doesn't exist.</p>
      *
-     * <p>This method can be overriden if an alternative <code>Map</code>
+     * <p>This method can be overridden if an alternative <code>Map</code>
      *    implementation is required for 'mapped' properties.</p>
      *
      * @param name Name of the 'mapped property.
      * @return The default value for a mapped property (java.util.HashMap)
      */
-    protected Map defaultMappedProperty(String name) {
-        return new HashMap();
+    protected Map<String, Object> defaultMappedProperty(String name) {
+        return new HashMap<String, Object>();
     }
 
     /**
@@ -893,7 +902,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return <code>true<code> if the source class is assignable to the
      * destination class, otherwise <code>false</code>
      */
-    protected boolean isAssignable(Class dest, Class source) {
+    protected boolean isAssignable(Class<?> dest, Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
                 ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
@@ -915,8 +924,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * <p>Creates a new instance of the <code>Map</code>.</p>
      * @return a new Map instance
      */
-    protected Map newMap() {
-        return new HashMap();
+    protected Map<String, Object> newMap() {
+        return new HashMap<String, Object>();
     }
 
     /**

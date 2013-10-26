@@ -16,13 +16,14 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.lang.reflect.InvocationTargetException;
-import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.TreeMap;
+
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -170,12 +171,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", HashMap.class, bean.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, bean.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap)bean.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>)bean.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         bean.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, bean.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap)bean.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>)bean.get(testProperty)).get(testKey));
     }
 
     /**
@@ -197,12 +198,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, bean.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, bean.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap)bean.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>)bean.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         bean.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, bean.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap)bean.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>)bean.get(testProperty)).get(testKey));
     }
 
     /**
@@ -290,13 +291,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", bean.get(testProperty));
         assertEquals("Check Indexed Property is correct type", ArrayList.class, bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testInteger1, bean.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((ArrayList)bean.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, bean.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((ArrayList)bean.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)bean.get(testProperty)).size()));
     }
 
     /**
@@ -320,13 +321,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, index, testString1);
         assertEquals("Check Property type is correct", LinkedList.class, bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testString1, bean.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((LinkedList)bean.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, bean.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((LinkedList)bean.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)bean.get(testProperty)).size()));
     }
 
     /**
