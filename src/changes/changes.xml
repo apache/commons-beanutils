@@ -40,6 +40,16 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.9.0" date="tba" description="Upgrade to Java 5 including generics where possible">
+      <action dev="oheger" type="update" issue="BEANUTILS-447" >
+         LazyDynaList.toArray() is not conform to the contract defined by the
+         Collection interface
+      </action>
+      <action dev="oheger" type="update" issue="BEANUTILS-446" >
+         Some of the converters ignore the passed in target type
+      </action>
+      <action dev="oheger" type="update" issue="BEANUTILS-445" >
+         Converters can return an invalid result object if a default value is set
+      </action>
       <action dev="britter" type="update" issue="BEANUTILS-436" >
          Replace package.html with package-info.java
       </action>
