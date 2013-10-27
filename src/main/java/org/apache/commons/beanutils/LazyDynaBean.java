@@ -145,7 +145,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected Map<String, Object> values;
 
     /** Map decorator for this DynaBean */
-    private transient Map<Object, Object> mapDecorator;
+    private transient Map<String, Object> mapDecorator;
 
     /**
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
@@ -203,10 +203,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @return a Map representation of this DynaBean
      */
-    public Map<Object, Object> getMap() {
+    public Map<String, Object> getMap() {
         // cache the Map
         if (mapDecorator == null) {
-            mapDecorator = new DynaBeanMapDecorator(this);
+            mapDecorator = new DynaBeanPropertyMapDecorator(this);
         }
         return mapDecorator;
     }
