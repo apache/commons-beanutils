@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.beanutils.expression.DefaultResolver;
 import org.apache.commons.beanutils.expression.Resolver;
@@ -112,10 +113,10 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private WeakFastHashMap descriptorsCache = null;
-    private WeakFastHashMap mappedDescriptorsCache = null;
-    private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
-    private static final Class[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
+    private WeakFastHashMap<Class<?>, PropertyDescriptor[]> descriptorsCache = null;
+    private WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache = null;
+    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
+    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
 
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
@@ -127,9 +128,9 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap();
+        descriptorsCache = new WeakFastHashMap<Class<?>, PropertyDescriptor[]>();
         descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap();
+        mappedDescriptorsCache = new WeakFastHashMap<Class<?>, FastHashMap>();
         mappedDescriptorsCache.setFast(true);
     }
 
@@ -253,9 +254,9 @@ public class PropertyUtilsBean {
                 }
             }
         } else if (orig instanceof Map) {
-            Iterator entries = ((Map) orig).entrySet().iterator();
+            Iterator<?> entries = ((Map<?, ?>) orig).entrySet().iterator();
             while (entries.hasNext()) {
-                Map.Entry entry = (Map.Entry) entries.next();
+                Map.Entry<?, ?> entry = (Entry<?, ?>) entries.next();
                 String name = (String)entry.getKey();
                 if (isWriteable(dest, name)) {
                     try {
@@ -315,14 +316,14 @@ public class PropertyUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public Map describe(Object bean)
+    public Map<String, Object> describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        Map description = new HashMap();
+        Map<String, Object> description = new HashMap<String, Object>();
         if (bean instanceof DynaBean) {
             DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
@@ -438,7 +439,7 @@ public class PropertyUtilsBean {
             if (bean.getClass().isArray()) {
                 return Array.get(bean, index);
             } else if (bean instanceof List) {
-                return ((List)bean).get(index);
+                return ((List<?>)bean).get(index);
             }
         }
         if (name == null) {
@@ -502,7 +503,7 @@ public class PropertyUtilsBean {
                         "' is not indexed on bean class '" + bean.getClass() + "'");
             } else {
                 //get the List's value
-                return ((java.util.List) value).get(index);
+                return ((java.util.List<?>) value).get(index);
             }
         } else {
             //get the array's value
@@ -646,7 +647,7 @@ public class PropertyUtilsBean {
             Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
-              result = ((java.util.Map)invokeResult).get(key);
+              result = ((java.util.Map<?, ?>)invokeResult).get(key);
             }
           } else {
             throw new NoSuchMethodException("Property '" + name +
@@ -669,14 +670,14 @@ public class PropertyUtilsBean {
      * @deprecated This method should not be exposed
      */
     @Deprecated
-    public FastHashMap getMappedPropertyDescriptors(Class beanClass) {
+    public FastHashMap getMappedPropertyDescriptors(Class<?> beanClass) {
 
         if (beanClass == null) {
             return null;
         }
 
         // Look up any cached descriptors for this bean class
-        return (FastHashMap) mappedDescriptorsCache.get(beanClass);
+        return mappedDescriptorsCache.get(beanClass);
 
     }
 
@@ -737,7 +738,7 @@ public class PropertyUtilsBean {
             String next = resolver.next(name);
             Object nestedBean = null;
             if (bean instanceof Map) {
-                nestedBean = getPropertyOfMapBean((Map) bean, next);
+                nestedBean = getPropertyOfMapBean((Map<?, ?>) bean, next);
             } else if (resolver.isMapped(next)) {
                 nestedBean = getMappedProperty(bean, next);
             } else if (resolver.isIndexed(next)) {
@@ -755,7 +756,7 @@ public class PropertyUtilsBean {
         }
 
         if (bean instanceof Map) {
-            bean = getPropertyOfMapBean((Map) bean, name);
+            bean = getPropertyOfMapBean((Map<?, ?>) bean, name);
         } else if (resolver.isMapped(name)) {
             bean = getMappedProperty(bean, name);
         } else if (resolver.isIndexed(name)) {
@@ -791,7 +792,7 @@ public class PropertyUtilsBean {
      * no simple method is available.
      * @since 1.8.0
      */
-    protected Object getPropertyOfMapBean(Map bean, String propertyName)
+    protected Object getPropertyOfMapBean(Map<?, ?> bean, String propertyName)
         throws IllegalArgumentException, IllegalAccessException,
         InvocationTargetException, NoSuchMethodException {
 
@@ -954,7 +955,7 @@ public class PropertyUtilsBean {
      * @exception IllegalArgumentException if <code>beanClass</code> is null
      */
     public PropertyDescriptor[]
-            getPropertyDescriptors(Class beanClass) {
+            getPropertyDescriptors(Class<?> beanClass) {
 
         if (beanClass == null) {
             throw new IllegalArgumentException("No bean class specified");
@@ -963,7 +964,7 @@ public class PropertyUtilsBean {
         // Look up any cached descriptors for this bean class
         PropertyDescriptor[] descriptors = null;
         descriptors =
-                (PropertyDescriptor[]) descriptorsCache.get(beanClass);
+                descriptorsCache.get(beanClass);
         if (descriptors != null) {
             return (descriptors);
         }
@@ -1031,7 +1032,7 @@ public class PropertyUtilsBean {
                         Method[] methods = beanClass.getMethods();
                         for (int j = 0; j < methods.length; j++) {
                             if (methods[j].getName().equals(methodName)) {
-                                Class[] parameterTypes = methods[j].getParameterTypes();
+                                Class<?>[] parameterTypes = methods[j].getParameterTypes();
                                 if (parameterTypes.length == 1 &&
                                     List.class.isAssignableFrom(parameterTypes[0])) {
                                     writeMethod = methods[j];
@@ -1110,7 +1111,7 @@ public class PropertyUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public Class getPropertyEditorClass(Object bean, String name)
+    public Class<?> getPropertyEditorClass(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -1158,7 +1159,7 @@ public class PropertyUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
-    public Class getPropertyType(Object bean, String name)
+    public Class<?> getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -1193,7 +1194,7 @@ public class PropertyUtilsBean {
             if (descriptor == null) {
                 return (null);
             }
-            Class type = descriptor.getType();
+            Class<?> type = descriptor.getType();
             if (type == null) {
                 return (null);
             } else if (type.isArray()) {
@@ -1246,7 +1247,7 @@ public class PropertyUtilsBean {
      * @param descriptor Property descriptor to return a getter for
      * @return The read method
      */
-    Method getReadMethod(Class clazz, PropertyDescriptor descriptor) {
+    Method getReadMethod(Class<?> clazz, PropertyDescriptor descriptor) {
         return (MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod()));
     }
 
@@ -1355,7 +1356,7 @@ public class PropertyUtilsBean {
      * @param descriptor Property descriptor to return a setter for
      * @return The write method
      */
-    Method getWriteMethod(Class clazz, PropertyDescriptor descriptor) {
+    Method getWriteMethod(Class<?> clazz, PropertyDescriptor descriptor) {
         return (MethodUtils.getAccessibleMethod(clazz, descriptor.getWriteMethod()));
     }
 
@@ -1637,7 +1638,8 @@ public class PropertyUtilsBean {
                 Array.set(bean, index, value);
                 return;
             } else if (bean instanceof List) {
-                ((List)bean).set(index, value);
+                List<Object> list = toObjectList(bean);
+                list.set(index, value);
                 return;
             }
         }
@@ -1711,7 +1713,8 @@ public class PropertyUtilsBean {
         if (!array.getClass().isArray()) {
             if (array instanceof List) {
                 // Modify the specified value in the List
-                ((List) array).set(index, value);
+                List<Object> list = toObjectList(array);
+                list.set(index, value);
             } else {
                 throw new IllegalArgumentException("Property '" + name +
                         "' is not indexed on bean class '" + bean.getClass() + "'");
@@ -1864,7 +1867,8 @@ public class PropertyUtilsBean {
             Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
             /* test and fetch from the map */
             if (invokeResult instanceof java.util.Map) {
-              ((java.util.Map)invokeResult).put(key, value);
+              java.util.Map<String, Object> map = toPropertyMap(invokeResult);
+              map.put(key, value);
             }
           } else {
             throw new NoSuchMethodException("Property '" + name +
@@ -1924,7 +1928,7 @@ public class PropertyUtilsBean {
             String next = resolver.next(name);
             Object nestedBean = null;
             if (bean instanceof Map) {
-                nestedBean = getPropertyOfMapBean((Map)bean, next);
+                nestedBean = getPropertyOfMapBean((Map<?, ?>)bean, next);
             } else if (resolver.isMapped(next)) {
                 nestedBean = getMappedProperty(bean, next);
             } else if (resolver.isIndexed(next)) {
@@ -1942,7 +1946,7 @@ public class PropertyUtilsBean {
         }
 
         if (bean instanceof Map) {
-            setPropertyOfMapBean((Map) bean, name, value);
+            setPropertyOfMapBean(toPropertyMap(bean), name, value);
         } else if (resolver.isMapped(name)) {
             setMappedProperty(bean, name, value);
         } else if (resolver.isIndexed(name)) {
@@ -2009,7 +2013,7 @@ public class PropertyUtilsBean {
      * no simple method is available.
      * @since 1.8.0
      */
-    protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
+    protected void setPropertyOfMapBean(Map<String, Object> bean, String propertyName, Object value)
         throws IllegalArgumentException, IllegalAccessException,
         InvocationTargetException, NoSuchMethodException {
 
@@ -2180,7 +2184,7 @@ public class PropertyUtilsBean {
                 }
             }
             String expectedString = "";
-            Class[] parTypes = method.getParameterTypes();
+            Class<?>[] parTypes = method.getParameterTypes();
             if (parTypes != null) {
                 for (int i = 0; i < parTypes.length; i++) {
                     if (i > 0) {
@@ -2217,7 +2221,7 @@ public class PropertyUtilsBean {
                 }
             }
             String expectedString = "";
-            Class[] parTypes = method.getParameterTypes();
+            Class<?>[] parTypes = method.getParameterTypes();
             if (parTypes != null) {
                 for (int i = 0; i < parTypes.length; i++) {
                     if (i > 0) {
@@ -2241,5 +2245,35 @@ public class PropertyUtilsBean {
             throw e;
 
         }
+    }
+
+    /**
+     * Converts an object to a list of objects. This method is used when dealing
+     * with indexed properties. It assumes that indexed properties are stored as
+     * lists of objects.
+     *
+     * @param obj the object to be converted
+     * @return the resulting list of objects
+     */
+    private static List<Object> toObjectList(Object obj) {
+        @SuppressWarnings("unchecked")
+        // indexed properties are stored in lists of objects
+        List<Object> list = (List<Object>) obj;
+        return list;
+    }
+
+    /**
+     * Converts an object to a map with property values. This method is used
+     * when dealing with mapped properties. It assumes that mapped properties
+     * are stored in a Map&lt;String, Object&gt;.
+     *
+     * @param obj the object to be converted
+     * @return the resulting properties map
+     */
+    private static Map<String, Object> toPropertyMap(Object obj) {
+        @SuppressWarnings("unchecked")
+        // mapped properties are stores in maps of type <String, Object>
+        Map<String, Object> map = (Map<String, Object>) obj;
+        return map;
     }
 }

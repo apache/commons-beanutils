@@ -203,7 +203,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#describe
      */
-    public static Map describe(Object bean)
+    public static Map<String, Object> describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -344,7 +344,7 @@ public class PropertyUtils {
      * @deprecated This method should not be exposed
      */
     @Deprecated
-    public static FastHashMap getMappedPropertyDescriptors(Class beanClass) {
+    public static FastHashMap getMappedPropertyDescriptors(Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
 
@@ -478,7 +478,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getPropertyDescriptors(Class)
      */
     public static PropertyDescriptor[]
-            getPropertyDescriptors(Class beanClass) {
+            getPropertyDescriptors(Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(beanClass);
 
@@ -527,7 +527,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getPropertyEditorClass(Object,String)
      */
-    public static Class getPropertyEditorClass(Object bean, String name)
+    public static Class<?> getPropertyEditorClass(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -560,7 +560,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getPropertyType(Object, String)
      */
-    public static Class getPropertyType(Object bean, String name)
+    public static Class<?> getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 

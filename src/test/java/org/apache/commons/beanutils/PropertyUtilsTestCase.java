@@ -253,7 +253,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", new Double(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
@@ -308,7 +308,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testDescribe() {
 
-        Map map = null;
+        Map<String, Object> map = null;
         try {
             map = PropertyUtils.describe(bean);
         } catch (Exception e) {
@@ -1044,7 +1044,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetIndexedList() {
         String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
         String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        List mainList   = new ArrayList();
+        List<Object> mainList = new ArrayList<Object>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
         TestBean bean = new TestBean(mainList);
@@ -1065,14 +1065,14 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test getting a value out of a mapped Map
      */
     public void testGetIndexedMap() {
-        Map firstMap  = new HashMap();
+        Map<String, Object> firstMap  = new HashMap<String, Object>();
         firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
         firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
-        Map secondMap  = new HashMap();
+        Map<String, Object> secondMap  = new HashMap<String, Object>();
         secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
         secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
 
-        List mainList   = new ArrayList();
+        List<Object> mainList   = new ArrayList<Object>();
         mainList.add(firstMap);
         mainList.add(secondMap);
         TestBean bean = new TestBean(mainList);
@@ -1174,7 +1174,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetMappedList() {
         TestBean bean = new TestBean();
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<Object>();
         list.add("klm");
         list.add("nop");
         list.add("qrs");
@@ -1193,7 +1193,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetMappedMap() {
         TestBean bean = new TestBean();
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");
@@ -1669,7 +1669,7 @@ public class PropertyUtilsTestCase extends TestCase {
         // don't init!
 
         try {
-            NestedTestBean value = (NestedTestBean) PropertyUtils.getProperty(
+            PropertyUtils.getProperty(
                                 nestedBean,
                                 "simpleBeanProperty.indexedProperty[0]");
             fail("NestedNullException not thrown");
@@ -1704,7 +1704,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetPropertyType() {
 
-        Class clazz = null;
+        Class<?> clazz = null;
         int intArray[] = new int[0];
         String stringArray[] = new String[0];
 
@@ -1906,9 +1906,8 @@ public class PropertyUtilsTestCase extends TestCase {
         assertTrue("Found foo descriptor", n >= 0);
         Method reader = pd[n].getReadMethod();
         assertNotNull("Found foo read method", reader);
-        Object value = null;
         try {
-            value = reader.invoke(beanPrivate, new Class[0]);
+            reader.invoke(beanPrivate, (Object[]) new Class<?>[0]);
             fail("Foo reader did throw IllegalAccessException");
         } catch (IllegalAccessException e) {
             // Expected result for this test
@@ -2043,9 +2042,8 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetSimpleIndexed() {
 
-        Object value = null;
         try {
-            value = PropertyUtils.getSimpleProperty(bean,
+            PropertyUtils.getSimpleProperty(bean,
                     "intIndexed[0]");
             fail("Should have thrown IllegalArgumentException");
         } catch (IllegalAccessException e) {
@@ -2120,9 +2118,8 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetSimpleNested() {
 
-        Object value = null;
         try {
-            value = PropertyUtils.getSimpleProperty(bean,
+            PropertyUtils.getSimpleProperty(bean,
                     "nested.stringProperty");
             fail("Should have thrown IllegaArgumentException");
         } catch (IllegalAccessException e) {
@@ -2616,45 +2613,45 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testSetIndexedList() {
         String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
         String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        List mainList   = new ArrayList();
+        List<Object> mainList   = new ArrayList<Object>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
         TestBean bean = new TestBean(mainList);
-        assertEquals("BEFORE", "SECOND-4", ((List)bean.getListIndexed().get(1)).get(3));
+        assertEquals("BEFORE", "SECOND-4", ((List<?>)bean.getListIndexed().get(1)).get(3));
         try {
             PropertyUtils.setProperty(bean, "listIndexed[1][3]", "SECOND-4-UPDATED");
         } catch (Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("AFTER", "SECOND-4-UPDATED", ((List)bean.getListIndexed().get(1)).get(3));
+        assertEquals("AFTER", "SECOND-4-UPDATED", ((List<?>)bean.getListIndexed().get(1)).get(3));
     }
 
     /**
      * Test setting a value out of a mapped Map
      */
     public void testSetIndexedMap() {
-        Map firstMap  = new HashMap();
+        Map<String, Object> firstMap  = new HashMap<String, Object>();
         firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
         firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
-        Map secondMap  = new HashMap();
+        Map<String, Object> secondMap  = new HashMap<String, Object>();
         secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
         secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
 
-        List mainList = new ArrayList();
+        List<Object> mainList = new ArrayList<Object>();
         mainList.add(firstMap);
         mainList.add(secondMap);
         TestBean bean = new TestBean(mainList);
 
-        assertEquals("BEFORE",  null,              ((Map)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
-        assertEquals("BEFORE",  "SECOND-VALUE-1",  ((Map)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
+        assertEquals("BEFORE",  null,              ((Map<?, ?>)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
+        assertEquals("BEFORE",  "SECOND-VALUE-1",  ((Map<?, ?>)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
         try {
             PropertyUtils.setProperty(bean, "listIndexed[0](FIRST-NEW-KEY)", "FIRST-NEW-VALUE");
             PropertyUtils.setProperty(bean, "listIndexed[1](SECOND-KEY-1)",  "SECOND-VALUE-1-UPDATED");
         } catch (Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("BEFORE", "FIRST-NEW-VALUE",         ((Map)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
-        assertEquals("AFTER",  "SECOND-VALUE-1-UPDATED",  ((Map)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
+        assertEquals("BEFORE", "FIRST-NEW-VALUE",         ((Map<?, ?>)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
+        assertEquals("AFTER",  "SECOND-VALUE-1-UPDATED",  ((Map<?, ?>)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
     }
 
 
@@ -3093,19 +3090,19 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedList() {
         TestBean bean = new TestBean();
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<Object>();
         list.add("klm");
         list.add("nop");
         list.add("qrs");
         bean.getMapProperty().put("mappedList", list);
 
-        assertEquals("BEFORE", "klm", ((List)bean.getMapProperty().get("mappedList")).get(0));
+        assertEquals("BEFORE", "klm", ((List<?>)bean.getMapProperty().get("mappedList")).get(0));
         try {
             PropertyUtils.setProperty(bean, "mapProperty(mappedList)[0]", "KLM-UPDATED");
         } catch (Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("AFTER", "KLM-UPDATED", ((List)bean.getMapProperty().get("mappedList")).get(0));
+        assertEquals("AFTER", "KLM-UPDATED", ((List<?>)bean.getMapProperty().get("mappedList")).get(0));
     }
 
     /**
@@ -3113,19 +3110,19 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedMap() {
         TestBean bean = new TestBean();
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");
         bean.getMapProperty().put("mappedMap", map);
 
-        assertEquals("BEFORE", "sub-value-3", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("BEFORE", "sub-value-3", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
         try {
             PropertyUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
         } catch (Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
     }
 
     /**
@@ -4011,7 +4008,7 @@ public class PropertyUtilsTestCase extends TestCase {
             Method reader = PropertyUtils.getReadMethod(pd[n]);
             assertNotNull("Reader for " + properties[i],
                     reader);
-            Class clazz = reader.getDeclaringClass();
+            Class<?> clazz = reader.getDeclaringClass();
             assertNotNull("Declaring class for " + properties[i],
                     clazz);
             assertEquals("Correct declaring class for " + properties[i],
@@ -4020,7 +4017,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
             // Actually call the reader method we received
             try {
-                reader.invoke(bean, new Class[0]);
+                reader.invoke(bean, (Object[]) new Class<?>[0]);
             } catch (Throwable t) {
                 fail("Call for " + properties[i] + ": " + t);
             }
@@ -4070,7 +4067,7 @@ public class PropertyUtilsTestCase extends TestCase {
             Method writer = PropertyUtils.getWriteMethod(pd[n]);
             assertNotNull("Writer for " + properties[i],
                     writer);
-            Class clazz = writer.getDeclaringClass();
+            Class<?> clazz = writer.getDeclaringClass();
             assertNotNull("Declaring class for " + properties[i],
                     clazz);
             assertEquals("Correct declaring class for " + properties[i],
@@ -4208,9 +4205,6 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Cannot set no-getter property", "Omega", bean.getSecret());
 
         // test mapped no getter descriptor
-        MappedPropertyDescriptor descriptor
-            = new MappedPropertyDescriptor("noGetterMappedProperty", BetaBean.class);
-
         assertNotNull("Map Descriptor is null", PropertyUtils.getPropertyDescriptor(bean, "noGetterMappedProperty"));
 
         PropertyUtils.setMappedProperty(bean, "noGetterMappedProperty",  "Epsilon", "Epsilon");
@@ -4268,8 +4262,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * mistake.
      */
     public void testNestedPropertyKeyOrIndexOnBeanImplementingMap() throws Exception {
-        HashMap map = new HashMap();
-        HashMap submap = new HashMap();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> submap = new HashMap<String, Object>();
         BetaBean betaBean1 = new BetaBean("test1");
         BetaBean betaBean2 = new BetaBean("test2");
 
@@ -4312,7 +4306,7 @@ public class PropertyUtilsTestCase extends TestCase {
             // However this isn't how javabeans property methods work. A map
             // only effectively has "simple" properties, even when the
             // returned object is a Map or Array.
-            Object o = PropertyUtils.getNestedProperty(map, "submap[3]");
+            PropertyUtils.getNestedProperty(map, "submap[3]");
 
             // What, no exception? In that case, getNestedProperties has
             // probably just tried to do
@@ -4336,10 +4330,10 @@ public class PropertyUtilsTestCase extends TestCase {
      * <p>
      * If there are no keys, an empty string is returned.
      */
-    private String keysToString(Map map) {
+    private String keysToString(Map<?, ?> map) {
         Object[] mapKeys = map.keySet().toArray();
         java.util.Arrays.sort(mapKeys);
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         for(int i=0; i<mapKeys.length; ++i) {
             if (i != 0)
                 buf.append(", ");
@@ -4416,7 +4410,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("setNestedProperty on non-simple property failed",
                 "value1", utilsBean.getNestedProperty(bean, "mapProperty"));
 
-        HashMap myMap = new HashMap();
+        HashMap<String, Object> myMap = new HashMap<String, Object>();
         myMap.put("thebean", bean);
         utilsBean.getNestedProperty(myMap, "thebean.mapitem");
         utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
