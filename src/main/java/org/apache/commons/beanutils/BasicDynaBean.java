@@ -76,7 +76,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     protected HashMap<String, Object> values = new HashMap<String, Object>();
 
     /** Map decorator for this DynaBean */
-    private transient Map<Object, Object> mapDecorator;
+    private transient Map<String, Object> mapDecorator;
 
     /**
      * Return a Map representation of this DynaBean.
@@ -88,11 +88,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @return a Map representation of this DynaBean
      * @since 1.8.0
      */
-    public Map<Object, Object> getMap() {
+    public Map<String, Object> getMap() {
 
         // cache the Map
         if (mapDecorator == null) {
-            mapDecorator = new DynaBeanMapDecorator(this);
+            mapDecorator = new DynaBeanPropertyMapDecorator(this);
         }
         return mapDecorator;
 
