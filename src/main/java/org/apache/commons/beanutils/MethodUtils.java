@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 
 
 /**
- * <p> Utility reflection methods focussed on methods in general rather than properties in particular. </p>
+ * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
  *
  * <h3>Known Limitations</h3>
  * <h4>Accessing Public Methods In A Default Access Superclass</h4>
@@ -77,7 +77,7 @@ public class MethodUtils {
     private static boolean CACHE_METHODS = true;
 
     /** An empty class array */
-    private static final Class[] EMPTY_CLASS_PARAMETERS = new Class[0];
+    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
@@ -101,7 +101,8 @@ public class MethodUtils {
      * class via different classloaders will generate non-equal MethodDescriptor
      * objects and hence end up with different entries in the map.
      */
-    private static final Map cache = Collections.synchronizedMap(new WeakHashMap());
+    private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
+            .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
 
     // --------------------------------------------------------- Public Methods
 
@@ -214,7 +215,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
-        Class[] parameterTypes = new Class[arguments];
+        Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -253,7 +254,7 @@ public class MethodUtils {
             Object object,
             String methodName,
             Object[] args,
-            Class[] parameterTypes)
+            Class<?>[] parameterTypes)
                 throws
                     NoSuchMethodException,
                     IllegalAccessException,
@@ -344,7 +345,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
-        Class[] parameterTypes = new Class[arguments];
+        Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -376,7 +377,7 @@ public class MethodUtils {
             Object object,
             String methodName,
             Object[] args,
-            Class[] parameterTypes)
+            Class<?>[] parameterTypes)
             throws
             NoSuchMethodException,
             IllegalAccessException,
@@ -423,10 +424,10 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object[] args,
-            Class[] parameterTypes)
+            Class<?>[] parameterTypes)
             throws
             NoSuchMethodException,
             IllegalAccessException,
@@ -481,7 +482,7 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object arg)
             throws
@@ -524,7 +525,7 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object[] args)
             throws
@@ -536,7 +537,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
-        Class[] parameterTypes = new Class[arguments];
+        Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -573,10 +574,10 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object[] args,
-            Class[] parameterTypes)
+            Class<?>[] parameterTypes)
                 throws
                     NoSuchMethodException,
                     IllegalAccessException,
@@ -623,7 +624,7 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object arg)
             throws
@@ -656,7 +657,7 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class objectClass,
+            Class<?> objectClass,
             String methodName,
             Object[] args)
             throws
@@ -668,7 +669,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
         int arguments = args.length;
-        Class[] parameterTypes = new Class[arguments];
+        Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -697,11 +698,11 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(
-            Class clazz,
+            Class<?> clazz,
             String methodName,
-            Class parameterType) {
+            Class<?> parameterType) {
 
-        Class[] parameterTypes = {parameterType};
+        Class<?>[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
     }
 
@@ -719,9 +720,9 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(
-            Class clazz,
+            Class<?> clazz,
             String methodName,
-            Class[] parameterTypes) {
+            Class<?>[] parameterTypes) {
 
         try {
             MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
@@ -770,7 +771,7 @@ public class MethodUtils {
      * @return The accessible method
      * @since 1.8.0
      */
-    public static Method getAccessibleMethod(Class clazz, Method method) {
+    public static Method getAccessibleMethod(Class<?> clazz, Method method) {
 
         // Make sure we have a method to check
         if (method == null) {
@@ -802,7 +803,7 @@ public class MethodUtils {
         }
 
         String methodName      = method.getName();
-        Class[] parameterTypes = method.getParameterTypes();
+        Class<?>[] parameterTypes = method.getParameterTypes();
 
         // Check the implemented interfaces and subinterfaces
         method =
@@ -833,9 +834,9 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromSuperclass
-            (Class clazz, String methodName, Class[] parameterTypes) {
+            (Class<?> clazz, String methodName, Class<?>[] parameterTypes) {
 
-        Class parentClazz = clazz.getSuperclass();
+        Class<?> parentClazz = clazz.getSuperclass();
         while (parentClazz != null) {
             if (Modifier.isPublic(parentClazz.getModifiers())) {
                 try {
@@ -864,7 +865,7 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromInterfaceNest
-            (Class clazz, String methodName, Class[] parameterTypes) {
+            (Class<?> clazz, String methodName, Class<?>[] parameterTypes) {
 
         Method method = null;
 
@@ -872,7 +873,7 @@ public class MethodUtils {
         for (; clazz != null; clazz = clazz.getSuperclass()) {
 
             // Check the implemented interfaces of the parent class
-            Class[] interfaces = clazz.getInterfaces();
+            Class<?>[] interfaces = clazz.getInterfaces();
             for (int i = 0; i < interfaces.length; i++) {
 
                 // Is this interface public?
@@ -917,7 +918,7 @@ public class MethodUtils {
      * In other words, it finds a method with the given name
      * that will take the parameters given.<p>
      *
-     * <p>This method is slightly undeterminstic since it loops
+     * <p>This method is slightly undeterministic since it loops
      * through methods names and return the first matching method.</p>
      *
      * <p>This method is used by
@@ -934,9 +935,9 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getMatchingAccessibleMethod(
-                                                Class clazz,
+                                                Class<?> clazz,
                                                 String methodName,
-                                                Class[] parameterTypes) {
+                                                Class<?>[] parameterTypes) {
         // trace logging
         Log log = LogFactory.getLog(MethodUtils.class);
         if (log.isTraceEnabled()) {
@@ -981,7 +982,7 @@ public class MethodUtils {
                 }
 
                 // compare parameters
-                Class[] methodsParams = methods[i].getParameterTypes();
+                Class<?>[] methodsParams = methods[i].getParameterTypes();
                 int methodParamSize = methodsParams.length;
                 if (methodParamSize == paramSize) {
                     boolean match = true;
@@ -1094,11 +1095,11 @@ public class MethodUtils {
      * @param destArgs The destination arguments
      * @return The total transformation cost
      */
-    private static float getTotalTransformationCost(Class[] srcArgs, Class[] destArgs) {
+    private static float getTotalTransformationCost(Class<?>[] srcArgs, Class<?>[] destArgs) {
 
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
-            Class srcClass, destClass;
+            Class<?> srcClass, destClass;
             srcClass = srcArgs[i];
             destClass = destArgs[i];
             totalCost += getObjectTransformationCost(srcClass, destClass);
@@ -1115,11 +1116,11 @@ public class MethodUtils {
      * @param destClass The destination class
      * @return The cost of transforming an object
      */
-    private static float getObjectTransformationCost(Class srcClass, Class destClass) {
+    private static float getObjectTransformationCost(Class<?> srcClass, Class<?> destClass) {
         float cost = 0.0f;
         while (srcClass != null && !destClass.equals(srcClass)) {
             if (destClass.isPrimitive()) {
-                Class destClassWrapperClazz = getPrimitiveWrapper(destClass);
+                Class<?> destClassWrapperClazz = getPrimitiveWrapper(destClass);
                 if (destClassWrapperClazz != null && destClassWrapperClazz.equals(srcClass)) {
                     cost += 0.25f;
                     break;
@@ -1164,9 +1165,9 @@ public class MethodUtils {
      * @param parameterType the type of parameter accepted by the method
      * @param parameterization the type of parameter being tested
      *
-     * @return true if the assignement is compatible.
+     * @return true if the assignment is compatible.
      */
-    public static final boolean isAssignmentCompatible(Class parameterType, Class parameterization) {
+    public static final boolean isAssignmentCompatible(Class<?> parameterType, Class<?> parameterization) {
         // try plain assignment
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
@@ -1175,7 +1176,7 @@ public class MethodUtils {
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
             // is this the right behaviour?
-            Class parameterWrapperClazz = getPrimitiveWrapper(parameterType);
+            Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
             if (parameterWrapperClazz != null) {
                 return parameterWrapperClazz.equals(parameterization);
             }
@@ -1191,7 +1192,7 @@ public class MethodUtils {
      * @return the wrapper type associated with the given primitive
      * or null if no match is found
      */
-    public static Class getPrimitiveWrapper(Class primitiveType) {
+    public static Class<?> getPrimitiveWrapper(Class<?> primitiveType) {
         // does anyone know a better strategy than comparing names?
         if (boolean.class.equals(primitiveType)) {
             return Boolean.class;
@@ -1222,7 +1223,7 @@ public class MethodUtils {
      * @return the primitive type class corresponding to the given wrapper class,
      * null if no match is found
      */
-    public static Class getPrimitiveType(Class wrapperType) {
+    public static Class<?> getPrimitiveType(Class<?> wrapperType) {
         // does anyone know a better strategy than comparing names?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
@@ -1255,9 +1256,9 @@ public class MethodUtils {
      * @param clazz the class to find a representation for, not null
      * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
      */
-    public static Class toNonPrimitiveClass(Class clazz) {
+    public static Class<?> toNonPrimitiveClass(Class<?> clazz) {
         if (clazz.isPrimitive()) {
-            Class primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
+            Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
             // the above method returns
             if (primitiveClazz != null) {
                 return primitiveClazz;
@@ -1278,9 +1279,9 @@ public class MethodUtils {
      */
     private static Method getCachedMethod(MethodDescriptor md) {
         if (CACHE_METHODS) {
-            Reference methodRef = (Reference)cache.get(md);
+            Reference<Method> methodRef = cache.get(md);
             if (methodRef != null) {
-                return (Method)methodRef.get();
+                return methodRef.get();
             }
         }
         return null;
@@ -1295,7 +1296,7 @@ public class MethodUtils {
     private static void cacheMethod(MethodDescriptor md, Method method) {
         if (CACHE_METHODS) {
             if (method != null) {
-                cache.put(md, new WeakReference(method));
+                cache.put(md, new WeakReference<Method>(method));
             }
         }
     }
@@ -1304,9 +1305,9 @@ public class MethodUtils {
      * Represents the key to looking up a Method by reflection.
      */
     private static class MethodDescriptor {
-        private final Class cls;
+        private final Class<?> cls;
         private final String methodName;
-        private final Class[] paramTypes;
+        private final Class<?>[] paramTypes;
         private final boolean exact;
         private final int hashCode;
 
@@ -1315,10 +1316,10 @@ public class MethodUtils {
          *
          * @param cls  the class to reflect, must not be null
          * @param methodName  the method name to obtain
-         * @param paramTypes the array of classes representing the paramater types
+         * @param paramTypes the array of classes representing the parameter types
          * @param exact whether the match has to be exact.
          */
-        public MethodDescriptor(Class cls, String methodName, Class[] paramTypes, boolean exact) {
+        public MethodDescriptor(Class<?> cls, String methodName, Class<?>[] paramTypes, boolean exact) {
             if (cls == null) {
                 throw new IllegalArgumentException("Class cannot be null");
             }
