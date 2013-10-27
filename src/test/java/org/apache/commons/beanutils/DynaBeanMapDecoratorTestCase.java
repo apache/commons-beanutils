@@ -34,6 +34,7 @@ import junit.framework.TestSuite;
  *
  * @version $Id$
  */
+@SuppressWarnings("deprecation")
 public class DynaBeanMapDecoratorTestCase extends TestCase {
 
     private static final DynaProperty stringProp = new DynaProperty("stringProp", String.class);

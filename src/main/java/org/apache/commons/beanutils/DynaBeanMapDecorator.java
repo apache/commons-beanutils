@@ -64,7 +64,12 @@ package org.apache.commons.beanutils;
  *
  * @since BeanUtils 1.8.0
  * @version $Id$
+ * @deprecated Use {@link DynaBeanPropertyMapDecorator} instead. When adding
+ * generics it turned out that it was not possible to use the correct type
+ * parameters without breaking backwards compatibility. Therefore, class
+ * {@code DynaBeanPropertyMapDecorator} was introduced as a replacement.
  */
+@Deprecated
 public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
     /**
      * Construct a Map for the specified {@link DynaBean}.
