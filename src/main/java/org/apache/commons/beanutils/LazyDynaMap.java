@@ -17,7 +17,6 @@
 package org.apache.commons.beanutils;
 
 import java.util.Map;
-import java.util.Iterator;
 
 /**
  * <p>Provides a <i>light weight</i> <code>DynaBean</code> facade to a <code>Map</code>
@@ -74,7 +73,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * Default Constructor.
      */
     public LazyDynaMap() {
-        this(null, (Map)null);
+        this(null, (Map<String, Object>)null);
     }
 
     /**
@@ -83,7 +82,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param name Name of this DynaBean class
      */
     public LazyDynaMap(String name) {
-        this(name, (Map)null);
+        this(name, (Map<String, Object>)null);
     }
 
     /**
@@ -91,7 +90,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * @param values The Map backing this <code>LazyDynaMap</code>
      */
-    public LazyDynaMap(Map values) {
+    public LazyDynaMap(Map<String, Object> values) {
         this(null, values);
     }
 
@@ -101,7 +100,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param name Name of this DynaBean class
      * @param values The Map backing this <code>LazyDynaMap</code>
      */
-    public LazyDynaMap(String name, Map values) {
+    public LazyDynaMap(String name, Map<String, Object> values) {
         this.name      = name   == null ? "LazyDynaMap" : name;
         this.values    = values == null ? newMap()      : values;
         this.dynaClass = this;
@@ -123,7 +122,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param properties Property descriptors for the supported properties
      */
     public LazyDynaMap(String name, DynaProperty[] properties) {
-        this(name, (Map)null);
+        this(name, (Map<String, Object>)null);
         if (properties != null) {
             for (int i = 0; i < properties.length; i++) {
                 add(properties[i]);
@@ -147,7 +146,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * @param values The new Map of values
      */
-    public void setMap(Map values) {
+    public void setMap(Map<String, Object> values) {
         this.values = values;
     }
 
@@ -157,7 +156,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @since 1.8.0
      */
     @Override
-    public Map getMap() {
+    public Map<String, Object> getMap() {
         return values;
     }
 
@@ -252,12 +251,11 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
         int i = 0;
         DynaProperty[] properties = new DynaProperty[values.size()];
-        Iterator iterator = values.keySet().iterator();
-
-        while (iterator.hasNext()) {
-            String name = (String)iterator.next();
+        for (Map.Entry<String, Object> e : values.entrySet()) {
+            String name = e.getKey();
             Object value = values.get(name);
-            properties[i++] = new DynaProperty(name, value == null ? null : value.getClass());
+            properties[i++] = new DynaProperty(name, value == null ? null
+                    : value.getClass());
         }
 
         return properties;
@@ -272,9 +270,12 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public DynaBean newInstance()  {
 
         // Create a new instance of the Map
-        Map newMap = null;
+        Map<String, Object> newMap = null;
         try {
-            newMap = getMap().getClass().newInstance();
+            @SuppressWarnings("unchecked")
+            // The new map is used as properties map
+            Map<String, Object> temp = getMap().getClass().newInstance();
+            newMap = temp;
         } catch(Exception ex) {
             newMap = newMap();
         }
@@ -340,7 +341,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class type) {
+    public void add(String name, Class<?> type) {
 
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
@@ -380,7 +381,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * @exception UnsupportedOperationException anytime this method is called
      */
-    public void add(String name, Class type, boolean readable, boolean writeable) {
+    public void add(String name, Class<?> type, boolean readable, boolean writeable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
     }
 

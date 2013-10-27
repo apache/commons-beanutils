@@ -531,7 +531,7 @@ public class LazyDynaList extends ArrayList<Object> {
         // Create a DynaBean
         DynaBean dynaBean = null;
         if (Map.class.isAssignableFrom(elementType)) {
-            dynaBean = new LazyDynaMap((Map<?, ?>)object);
+            dynaBean = createDynaBeanForMapProperty(object);
             this.elementDynaClass = dynaBean.getDynaClass();
         } else if (DynaBean.class.isAssignableFrom(elementType)) {
             dynaBean = (DynaBean)object;
@@ -663,7 +663,7 @@ public class LazyDynaList extends ArrayList<Object> {
             // Transform Object to a DynaBean
             newElementType = element.getClass();
             if (Map.class.isAssignableFrom(element.getClass())) {
-                dynaBean = new LazyDynaMap((Map<?, ?>)element);
+                dynaBean = createDynaBeanForMapProperty(element);
             } else if (DynaBean.class.isAssignableFrom(element.getClass())) {
                 dynaBean = (DynaBean)element;
             } else {
@@ -691,6 +691,19 @@ public class LazyDynaList extends ArrayList<Object> {
 
         return dynaBean;
 
+    }
+
+    /**
+     * Creates a new {@code LazyDynaMap} object for the given property value.
+     *
+     * @param value the property value
+     * @return the newly created {@code LazyDynaMap}
+     */
+    private LazyDynaMap createDynaBeanForMapProperty(Object value) {
+        @SuppressWarnings("unchecked")
+        // map properties are always stored as Map<String, Object>
+        Map<String, Object> valueMap = (Map<String, Object>) value;
+        return new LazyDynaMap(valueMap);
     }
 
     /**

@@ -16,15 +16,16 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.lang.reflect.InvocationTargetException;
-import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -160,12 +161,12 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", HashMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         dynaMap.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, dynaMap.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
     }
 
     /**
@@ -187,12 +188,12 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         dynaMap.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, dynaMap.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
     }
 
     /**
@@ -280,13 +281,13 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", ArrayList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((ArrayList)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((ArrayList)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -310,13 +311,13 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Property type is correct", LinkedList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((LinkedList)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((LinkedList)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -495,16 +496,16 @@ public class LazyDynaMapTestCase extends TestCase {
 
         // Create LazyDynaMap using TreeMap
         // containing some properties
-        LazyDynaMap orig = new LazyDynaMap(new TreeMap());
+        LazyDynaMap orig = new LazyDynaMap(new TreeMap<String, Object>());
         orig.set("indexProp", 0, "indexVal0");
         orig.set("indexProp", 1, "indexVal1");
-        assertEquals("Index prop size", 2, ((List)orig.get("indexProp")).size());
+        assertEquals("Index prop size", 2, ((List<?>)orig.get("indexProp")).size());
 
         LazyDynaMap newOne = (LazyDynaMap)orig.newInstance();
-        Map newMap = newOne.getMap();
+        Map<String, Object> newMap = newOne.getMap();
         assertEquals("Check Map type", TreeMap.class, newMap.getClass());
 
-        ArrayList indexProp = (ArrayList)newMap.get("indexProp");
+        ArrayList<?> indexProp = (ArrayList<?>)newMap.get("indexProp");
         assertNotNull("Indexed Prop missing", indexProp);
         assertEquals("Index prop size", 0, indexProp.size());
     }
