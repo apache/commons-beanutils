@@ -17,12 +17,13 @@
 
 package org.apache.commons.beanutils.locale;
 
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.text.ParseException;
 import java.util.Locale;
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -158,7 +159,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /**
      * Convert the specified locale-sensitive input object into an output object.
-     * The default pattern is used for the convertion.
+     * The default pattern is used for the conversion.
      *
      * @param value The input object to be converted
      * @return The converted value
@@ -174,7 +175,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
      * @exception ConversionException if conversion cannot be performed
@@ -188,6 +189,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type. The default pattern is used for the convertion.
      *
+     * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input object to be converted
      * @return The converted value
@@ -195,7 +197,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(Class type, Object value) {
+    public <T> T convert(Class<T> type, Object value) {
         return convert(type, value, null);
     }
 
@@ -203,6 +205,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
+     * @param <T> The desired target type of the conversion
      * @param type Data is type to which this value should be converted
      * @param value is the input object to be converted
      * @param pattern is the pattern is used for the conversion; if null is
@@ -213,10 +216,11 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(Class type, Object value, String pattern) {
+    public <T> T convert(Class<T> type, Object value, String pattern) {
+        Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
+                return getDefaultAs(targetType);
             } else {
                 // symmetric beanutils function allows null
                 // so do not: throw new ConversionException("No value specified");
@@ -227,13 +231,13 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
         try {
             if (pattern != null) {
-                return parse(value, pattern);
+                return checkConversionResult(targetType, parse(value, pattern));
             } else {
-                return parse(value, this.pattern);
+                return checkConversionResult(targetType, parse(value, this.pattern));
             }
         } catch (Exception e) {
             if (useDefault) {
-                return (defaultValue);
+                return getDefaultAs(targetType);
             } else {
                 if (e instanceof ConversionException) {
                     throw (ConversionException)e;
@@ -241,5 +245,45 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
                 throw new ConversionException(e);
             }
         }
+    }
+
+    /**
+     * Returns the default object specified for this converter cast for the
+     * given target type. If the default value is not conform to the given type,
+     * an exception is thrown.
+     *
+     * @param <T> the desired target type
+     * @param type the target class of the conversion
+     * @return the default value in the given target type
+     * @throws ConversionException if the default object is not compatible with
+     *         the target type
+     */
+    private <T> T getDefaultAs(Class<T> type) {
+        return checkConversionResult(type, defaultValue);
+    }
+
+    /**
+     * Checks whether the result of a conversion is conform to the specified
+     * target type. If this is the case, the passed in result object is cast to
+     * the correct target type. Otherwise, an exception is thrown.
+     *
+     * @param <T> the desired result type
+     * @param type the target class of the conversion
+     * @param result the conversion result object
+     * @return the result cast to the target class
+     * @throws ConversionException if the result object is not compatible with
+     *         the target type
+     */
+    private static <T> T checkConversionResult(Class<T> type, Object result) {
+        if (type == null) {
+            // in this case we cannot do much; the result object is returned
+            @SuppressWarnings("unchecked")
+            T temp = (T) result;
+            return temp;
+        }
+        if (type.isInstance(result)) {
+            return type.cast(result);
+        }
+        throw new ConversionException("Unsupported target type: " + type);
     }
 }
