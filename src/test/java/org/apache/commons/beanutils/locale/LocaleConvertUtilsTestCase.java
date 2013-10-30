@@ -25,9 +25,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
 import org.apache.commons.beanutils.ConversionException;
 
 
@@ -134,8 +135,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      */
     public void testNegativeScalar() {
 
-        Object value = null;
-
         /*  fixme Boolean converters not implemented at this point
         value = LocaleConvertUtils.convert("foo", Boolean.TYPE);
         ...
@@ -146,14 +145,14 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
 
         try {
-            value = LocaleConvertUtils.convert("foo", Byte.TYPE);
+            LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (1)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Byte.class);
+            LocaleConvertUtils.convert("foo", Byte.class);
             fail("Should have thrown conversion exception (2)");
         } catch (ConversionException e) {
             // Expected result
@@ -169,70 +168,70 @@ public class LocaleConvertUtilsTestCase extends TestCase {
          */
 
         try {
-            value = LocaleConvertUtils.convert("foo", Double.TYPE);
+            LocaleConvertUtils.convert("foo", Double.TYPE);
             fail("Should have thrown conversion exception (3)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Double.class);
+            LocaleConvertUtils.convert("foo", Double.class);
             fail("Should have thrown conversion exception (4)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Float.TYPE);
+            LocaleConvertUtils.convert("foo", Float.TYPE);
             fail("Should have thrown conversion exception (5)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Float.class);
+            LocaleConvertUtils.convert("foo", Float.class);
             fail("Should have thrown conversion exception (6)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Integer.TYPE);
+            LocaleConvertUtils.convert("foo", Integer.TYPE);
             fail("Should have thrown conversion exception (7)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Integer.class);
+            LocaleConvertUtils.convert("foo", Integer.class);
             fail("Should have thrown conversion exception (8)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Byte.TYPE);
+            LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (9)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Long.class);
+            LocaleConvertUtils.convert("foo", Long.class);
             fail("Should have thrown conversion exception (10)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Short.TYPE);
+            LocaleConvertUtils.convert("foo", Short.TYPE);
             fail("Should have thrown conversion exception (11)");
         } catch (ConversionException e) {
             // Expected result
         }
 
         try {
-            value = LocaleConvertUtils.convert("foo", Short.class);
+            LocaleConvertUtils.convert("foo", Short.class);
             fail("Should have thrown conversion exception (12)");
         } catch (ConversionException e) {
             // Expected result
