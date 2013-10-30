@@ -18,10 +18,10 @@
 package org.apache.commons.beanutils.locale;
 
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 
 
@@ -558,7 +558,7 @@ public class LocaleBeanUtils extends BeanUtils {
      *
      * @see LocaleBeanUtilsBean#definePropertyType(Object, String, String)
      */
-    protected static Class definePropertyType(Object target, String name, String propName)
+    protected static Class<?> definePropertyType(Object target, String name, String propName)
             throws IllegalAccessException, InvocationTargetException {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().definePropertyType(target, name, propName);
@@ -577,7 +577,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @return The converted value
      * @see LocaleBeanUtilsBean#convert(Class, int, Object, String)
      */
-    protected static Object convert(Class type, int index, Object value, String pattern) {
+    protected static Object convert(Class<?> type, int index, Object value, String pattern) {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value, pattern);
     }
@@ -593,7 +593,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @return The converted value
      * @see LocaleBeanUtilsBean#convert(Class, int, Object)
      */
-    protected static Object convert(Class type, int index, Object value) {
+    protected static Object convert(Class<?> type, int index, Object value) {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value);
     }
