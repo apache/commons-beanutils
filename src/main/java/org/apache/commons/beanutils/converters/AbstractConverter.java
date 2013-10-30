@@ -21,6 +21,7 @@ import java.util.Collection;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -133,7 +134,7 @@ public abstract class AbstractConverter implements Converter {
         }
 
         Class<?> sourceType  = value == null ? null : value.getClass();
-        Class<T> targetType  = primitive(type);
+        Class<T> targetType  = ConvertUtils.primitiveToWrapper(type);
 
         if (log().isDebugEnabled()) {
             log().debug("Converting"
@@ -405,40 +406,6 @@ public abstract class AbstractConverter implements Converter {
             log = LogFactory.getLog(getClass());
         }
         return log;
-    }
-
-    /**
-     * Change primitive Class types to the associated wrapper class.
-     * @param type The class type to check.
-     * @return The converted type.
-     */
-    // All type casts are safe because the TYPE members of the wrapper types
-    // return their own class.
-    @SuppressWarnings("unchecked")
-    <T> Class<T> primitive(Class<T> type) {
-        if (type == null || !type.isPrimitive()) {
-            return type;
-        }
-
-        if (type == Integer.TYPE) {
-            return (Class<T>) Integer.class;
-        } else if (type == Double.TYPE) {
-            return (Class<T>) Double.class;
-        } else if (type == Long.TYPE) {
-            return (Class<T>) Long.class;
-        } else if (type == Boolean.TYPE) {
-            return (Class<T>) Boolean.class;
-        } else if (type == Float.TYPE) {
-            return (Class<T>) Float.class;
-        } else if (type == Short.TYPE) {
-            return (Class<T>) Short.class;
-        } else if (type == Byte.TYPE) {
-            return (Class<T>) Byte.class;
-        } else if (type == Character.TYPE) {
-            return (Class<T>) Character.class;
-        } else {
-            return type;
-        }
     }
 
     /**
