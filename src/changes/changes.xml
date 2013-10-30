@@ -40,6 +40,12 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.9.0" date="tba" description="Upgrade to Java 5 including generics where possible">
+      <action dev="oheger" type="update" issue="BEANUTILS-44*" >
+         LocaleConverters do not take the target type into account
+      </action>
+      <action dev="oheger" type="update" issue="BEANUTILS-448" >
+         LocaleConverters do not check their default value
+      </action>
       <action dev="oheger" type="update" issue="BEANUTILS-447" >
          LazyDynaList.toArray() is not conform to the contract defined by the
          Collection interface
