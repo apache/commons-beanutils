@@ -17,24 +17,23 @@
 
 package org.apache.commons.beanutils.locale;
 
-import java.lang.ref.WeakReference;
 import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.logging.LogFactory;
 
 import org.apache.commons.beanutils.BeanUtilsTestCase;
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
-import org.apache.commons.beanutils.PrimitiveBean;
-import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.PrimitiveBean;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>
@@ -144,11 +143,11 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        ReferenceQueue<?> queue = new ReferenceQueue<Object>();
-        WeakReference loaderReference = new WeakReference(loader, queue);
+        ReferenceQueue<Object> queue = new ReferenceQueue<Object>();
+        WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
         Integer test = new Integer(1);
 
-        WeakReference testReference = new WeakReference(test, queue);
+        WeakReference<Integer> testReference = new WeakReference<Integer>(test, queue);
         //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
         Map<TestClassLoader, Integer> map = new WeakHashMap<TestClassLoader, Integer>();
         map.put(loader, test);
@@ -224,8 +223,8 @@ public class LocaleBeanificationTestCase extends TestCase {
         thread.start();
         thread.join();
 
-        WeakReference beanUtilsReference = new WeakReference(thread.beanUtils);
-        WeakReference convertUtilsReference = new WeakReference(thread.convertUtils);
+        WeakReference<LocaleBeanUtilsBean> beanUtilsReference = new WeakReference<LocaleBeanUtilsBean>(thread.beanUtils);
+        WeakReference<LocaleConvertUtilsBean> convertUtilsReference = new WeakReference<LocaleConvertUtilsBean>(thread.convertUtils);
 
         assertNotNull("Weak reference released early (1)", loaderReference.get());
         assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
@@ -314,9 +313,9 @@ public class LocaleBeanificationTestCase extends TestCase {
         class CCLLTesterThread extends Thread {
 
             private final Signal signal;
-            private final ContextClassLoaderLocal ccll;
+            private final ContextClassLoaderLocal<Integer> ccll;
 
-            CCLLTesterThread(Signal signal, ContextClassLoaderLocal ccll) {
+            CCLLTesterThread(Signal signal, ContextClassLoaderLocal<Integer> ccll) {
                 this.signal = signal;
                 this.ccll = ccll;
             }
@@ -334,8 +333,8 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
         }
 
-        ContextClassLoaderLocal ccll = new ContextClassLoaderLocal();
-        ccll.set(new Integer(1776));
+        ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<Integer>();
+        ccll.set(1776);
         assertEquals("Start thread sets value", new Integer(1776), ccll.get());
 
         Signal signal = new Signal();
@@ -369,11 +368,11 @@ public class LocaleBeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter() {
-                                            public Object convert(Class type, Object value) {
-                                                return new Integer(9);
+                                            public <T> T convert(Class<T> type, Object value) {
+                                                return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
-                                            public Object convert(Class type, Object value, String pattern) {
-                                                return new Integer(9);
+                                            public <T> T convert(Class<T> type, Object value, String pattern) {
+                                                return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
                                                 }, Integer.TYPE, Locale.getDefault());
                     LocaleBeanUtils.setProperty(bean, "int", "1");
@@ -394,11 +393,11 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         LocaleConvertUtils.register(new LocaleConverter() {
-                                public Object convert(Class type, Object value) {
-                                    return new Integer(5);
+                                public <T> T convert(Class<T> type, Object value) {
+                                    return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
-                                public Object convert(Class type, Object value, String pattern) {
-                                    return new Integer(5);
+                                public <T> T convert(Class<T> type, Object value, String pattern) {
+                                    return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
                                     }, Integer.TYPE, Locale.getDefault());
         LocaleBeanUtils.setProperty(bean, "int", "1");
@@ -467,7 +466,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     /** Tests whether the unset method works*/
     public void testContextClassLoaderUnset() throws Exception {
         LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
-        ContextClassLoaderLocal ccll = new ContextClassLoaderLocal();
+        ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<LocaleBeanUtilsBean>();
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
