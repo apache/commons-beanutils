@@ -17,6 +17,14 @@
 
 package org.apache.commons.beanutils.locale;
 
+import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
@@ -26,22 +34,13 @@ import org.apache.commons.beanutils.locale.converters.FloatLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.LongLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.ShortLocaleConverter;
-import org.apache.commons.beanutils.locale.converters.StringLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.SqlDateLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.SqlTimeLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.SqlTimestampLocaleConverter;
-
+import org.apache.commons.beanutils.locale.converters.StringLocaleConverter;
 import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -214,7 +213,7 @@ public class LocaleConvertUtilsBean {
 
         LocaleConverter converter = lookup(String.class, locale);
 
-        return (String) converter.convert(String.class, value, pattern);
+        return converter.convert(String.class, value, pattern);
     }
 
     /**
@@ -228,7 +227,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class clazz) {
+    public Object convert(String value, Class<?> clazz) {
 
         return convert(value, clazz, defaultLocale, null);
     }
@@ -246,7 +245,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class clazz, String pattern) {
+    public Object convert(String value, Class<?> clazz, String pattern) {
 
         return convert(value, clazz, defaultLocale, pattern);
     }
@@ -265,7 +264,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class clazz, Locale locale, String pattern) {
+    public Object convert(String value, Class<?> clazz, Locale locale, String pattern) {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
@@ -297,7 +296,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String[] values, Class clazz, String pattern) {
+    public Object convert(String[] values, Class<?> clazz, String pattern) {
 
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
@@ -313,7 +312,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
     */
-   public Object convert(String[] values, Class clazz) {
+   public Object convert(String[] values, Class<?> clazz) {
 
        return convert(values, clazz, getDefaultLocale(), null);
    }
@@ -331,9 +330,9 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String[] values, Class clazz, Locale locale, String pattern) {
+    public Object convert(String[] values, Class<?> clazz, Locale locale, String pattern) {
 
-        Class type = clazz;
+        Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
         }
@@ -360,7 +359,7 @@ public class LocaleConvertUtilsBean {
      *  Converter
      * @param locale The locale
      */
-    public void register(LocaleConverter converter, Class clazz, Locale locale) {
+    public void register(LocaleConverter converter, Class<?> clazz, Locale locale) {
 
         lookup(locale).put(clazz, converter);
     }
@@ -398,7 +397,7 @@ public class LocaleConvertUtilsBean {
      * @param clazz Class for which to remove a registered Converter
      * @param locale The locale
      */
-    public void deregister(Class clazz, Locale locale) {
+    public void deregister(Class<?> clazz, Locale locale) {
 
         lookup(locale).remove(clazz);
     }
@@ -412,7 +411,7 @@ public class LocaleConvertUtilsBean {
      * @param locale The Locale
      * @return The registered locale Converter, if any
      */
-    public LocaleConverter lookup(Class clazz, Locale locale) {
+    public LocaleConverter lookup(Class<?> clazz, Locale locale) {
 
         LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
 
@@ -511,9 +510,9 @@ public class LocaleConvertUtilsBean {
      */
     private static class DelegateFastHashMap extends FastHashMap {
 
-        private final Map map;
+        private final Map<Object, Object> map;
 
-        private DelegateFastHashMap(Map map) {
+        private DelegateFastHashMap(Map<Object, Object> map) {
             this.map = map;
         }
         @Override
@@ -529,7 +528,7 @@ public class LocaleConvertUtilsBean {
             return map.containsValue(value);
         }
         @Override
-        public Set entrySet() {
+        public Set<Map.Entry<Object, Object>> entrySet() {
             return map.entrySet();
         }
         @Override
@@ -549,13 +548,16 @@ public class LocaleConvertUtilsBean {
             return map.isEmpty();
         }
         @Override
-        public Set keySet() {
+        public Set<Object> keySet() {
             return map.keySet();
         }
         @Override
         public Object put(Object key, Object value) {
             return map.put(key, value);
         }
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        // we operate on very generic types (<Object, Object>), so there is
+        // no need for doing type checks
         @Override
         public void putAll(Map m) {
             map.putAll(m);
@@ -569,7 +571,7 @@ public class LocaleConvertUtilsBean {
             return map.size();
         }
         @Override
-        public Collection values() {
+        public Collection<Object> values() {
             return map.values();
         }
         @Override
