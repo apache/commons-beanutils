@@ -32,18 +32,19 @@ public class Jira422TestCase extends TestCase {
 
     public void testRootBean() throws Exception {
         RootBean bean = new FirstChildBean();
-        Class propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
+        Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
     public void testSecondChildBean() throws Exception {
         RootBean bean = new SecondChildBean();
-        Class propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
+        Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
 }
 
+@SuppressWarnings("rawtypes")
 class RootBean {
 
     private List file;
@@ -60,6 +61,7 @@ class RootBean {
         return (String) file.get(i);
     }
 
+    @SuppressWarnings("unchecked")
     public void setFile(int i, String file) {
         this.file.set(i, file);
     }
