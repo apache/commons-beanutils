@@ -122,7 +122,7 @@ public class Jira298TestCase extends TestCase {
         Object result = null;
         try {
             Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
-            result = m2.invoke(bean, null);
+            result = m2.invoke(bean);
         } catch (Throwable t) {
             log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
