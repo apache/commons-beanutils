@@ -105,7 +105,7 @@ public class Jira357TestCase extends TestCase {
     /**
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
-    private void checkReadMethod(String propertyName, Class expectedDeclaringClass) throws Exception {
+    private void checkReadMethod(String propertyName, Class<?> expectedDeclaringClass) throws Exception {
 
         PropertyDescriptor[] descriptors = null;
         try {
