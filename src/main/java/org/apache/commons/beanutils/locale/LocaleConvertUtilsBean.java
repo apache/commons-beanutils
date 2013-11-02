@@ -272,16 +272,18 @@ public class LocaleConvertUtilsBean {
                     " locale and " + pattern + " pattern");
         }
 
+        Class<?> targetClass = clazz;
         LocaleConverter converter = lookup(clazz, locale);
 
         if (converter == null) {
             converter = lookup(String.class, locale);
+            targetClass = String.class;
         }
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
 
-        return (converter.convert(clazz, value, pattern));
+        return (converter.convert(targetClass, value, pattern));
     }
 
     /**

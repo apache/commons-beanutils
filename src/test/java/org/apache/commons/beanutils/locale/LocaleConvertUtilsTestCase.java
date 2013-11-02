@@ -628,6 +628,17 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals("Integer Array Value", new Integer(123), ((Integer[])result)[0]);
     }
 
+    /**
+     * Tests a conversion if there is no suitable converter registered. In this
+     * case, the string converter is used, and the passed in target type is
+     * ignored. (This test is added to prevent a regression after the locale
+     * converters have been generified.)
+     */
+    public void testDefaultToStringConversionUnsupportedType() {
+        Integer value = 20131101;
+        assertEquals("Wrong result", value.toString(),
+                LocaleConvertUtils.convert(value.toString(), getClass()));
+    }
 
     // -------------------------------------------------------- Private Methods
 
