@@ -26,12 +26,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.apache.commons.beanutils.converters.ArrayConverter;
-import org.apache.commons.beanutils.converters.DateConverter;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils.converters.ArrayConverter;
+import org.apache.commons.beanutils.converters.DateConverter;
 
 
 /**
@@ -257,7 +257,7 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("booleanProperty", "false");
         map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
@@ -386,7 +386,7 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testDescribe() {
 
-        Map map = null;
+        Map<String, String> map = null;
         try {
             map = BeanUtils.describe(bean);
         } catch (Exception e) {
@@ -404,28 +404,28 @@ public class BeanUtilsTestCase extends TestCase {
         // Verify the values of scalar properties
         assertEquals("Value of 'booleanProperty'",
                      "true",
-                     (String) map.get("booleanProperty"));
+                     map.get("booleanProperty"));
         assertEquals("Value of 'byteProperty'",
                      "121",
-                     (String) map.get("byteProperty"));
+                     map.get("byteProperty"));
         assertEquals("Value of 'doubleProperty'",
                      "321.0",
-                     (String) map.get("doubleProperty"));
+                     map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
                      "123.0",
-                     (String) map.get("floatProperty"));
+                     map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
                      "123",
-                     (String) map.get("intProperty"));
+                     map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
                      "321",
-                     (String) map.get("longProperty"));
+                     map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
                      "987",
-                     (String) map.get("shortProperty"));
+                     map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
-                     (String) map.get("stringProperty"));
+                     map.get("stringProperty"));
 
     }
 
@@ -456,7 +456,6 @@ public class BeanUtilsTestCase extends TestCase {
 
 
             // Test comma delimited list
-            String value1 = "ABC";
             bean.setStringProperty("ABC");
             arr = BeanUtils.getArrayProperty(bean, "stringProperty");
             assertEquals("Delimited List Test lth", 1, arr.length);
@@ -626,7 +625,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            HashMap map = new HashMap();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("intIndexed[0]", "100");
             map.put("intIndexed[2]", "120");
             map.put("intIndexed[4]", "140");
@@ -677,7 +676,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            HashMap map = new HashMap();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             int intArray[] = new int[] { 123, 456, 789 };
             map.put("intArray", intArray);
             String stringArray[] = new String[]
@@ -715,7 +714,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            HashMap map = new HashMap();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("mappedProperty(First Key)", "New First Value");
             map.put("mappedProperty(Third Key)", "New Third Value");
 
@@ -749,7 +748,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            HashMap map = new HashMap();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("nested.booleanProperty", "false");
             // booleanSecond is left at true
             map.put("nested.doubleProperty", "432.0");
@@ -805,7 +804,7 @@ public class BeanUtilsTestCase extends TestCase {
 
             bean.setNullProperty("Non-null value");
 
-            HashMap map = new HashMap();
+            HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
             map.put("byteProperty", "111");
@@ -1370,10 +1369,10 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedMappedMap() throws Exception {
 
-        Map origMap = new HashMap();
+        Map<String, Object> origMap = new HashMap<String, Object>();
         origMap.put("First Key", "First Value");
         origMap.put("Second Key", "Second Value");
-        Map changedMap = new HashMap();
+        Map<String, Object> changedMap = new HashMap<String, Object>();
         changedMap.put("First Key", "First Value");
         changedMap.put("Second Key", "Second Value");
 
@@ -1477,19 +1476,19 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetMappedMap() {
         TestBean bean = new TestBean();
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");
         bean.getMapProperty().put("mappedMap", map);
 
-        assertEquals("BEFORE", "sub-value-3", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("BEFORE", "sub-value-3", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
         try {
             BeanUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
         } catch (Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
     }
 
     /** Tests that separate instances can register separate instances */
@@ -1569,10 +1568,10 @@ public class BeanUtilsTestCase extends TestCase {
 
 
     // Ensure that the actual Map matches the expected Map
-    protected void checkMap(Map actual, Map expected) {
+    protected void checkMap(Map<?, ?> actual, Map<?, ?> expected) {
         assertNotNull("actual map not null", actual);
         assertEquals("actual map size", expected.size(), actual.size());
-        Iterator keys = expected.keySet().iterator();
+        Iterator<?> keys = expected.keySet().iterator();
         while (keys.hasNext()) {
             Object key = keys.next();
             assertEquals("actual map value(" + key + ")",
