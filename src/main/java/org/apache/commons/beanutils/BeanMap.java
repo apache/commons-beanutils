@@ -33,10 +33,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.list.UnmodifiableList;
+import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.keyvalue.AbstractMapEntry;
 import org.apache.commons.collections.set.UnmodifiableSet;
-import org.apache.commons.collections.Transformer;
 
 /**
  * An implementation of Map for JavaBeans which uses introspection to
@@ -47,7 +46,7 @@ import org.apache.commons.collections.Transformer;
  *
  * @version $Id$
  */
-public class BeanMap extends AbstractMap implements Cloneable {
+public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     private transient Object bean;
 
@@ -499,8 +498,11 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return BeanMap keys.  The Set returned by this method is not
      *        modifiable.
      */
+    @SuppressWarnings("unchecked")
+    // The set actually contains strings; however, because it cannot be
+    // modified there is no danger in selling it as Set<Object>
     @Override
-    public Set keySet() {
+    public Set<Object> keySet() {
         return UnmodifiableSet.decorate(readMethods.keySet());
     }
 
@@ -512,10 +514,10 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return the unmodifiable set of mappings
      */
     @Override
-    public Set entrySet() {
-        return UnmodifiableSet.decorate(new AbstractSet() {
+    public Set<Map.Entry<Object, Object>> entrySet() {
+        return Collections.unmodifiableSet(new AbstractSet<Map.Entry<Object, Object>>() {
             @Override
-            public Iterator iterator() {
+            public Iterator<Map.Entry<Object, Object>> iterator() {
                 return entryIterator();
             }
             @Override
@@ -532,12 +534,12 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *        modifiable.
      */
     @Override
-    public Collection values() {
-        ArrayList answer = new ArrayList( readMethods.size() );
-        for ( Iterator iter = valueIterator(); iter.hasNext(); ) {
+    public Collection<Object> values() {
+        ArrayList<Object> answer = new ArrayList<Object>( readMethods.size() );
+        for ( Iterator<Object> iter = valueIterator(); iter.hasNext(); ) {
             answer.add( iter.next() );
         }
-        return UnmodifiableList.decorate(answer);
+        return Collections.unmodifiableList(answer);
     }
 
 
@@ -551,7 +553,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return  the type of the property, or <code>null</code> if no such
      *  property exists
      */
-    public Class getType(String name) {
+    public Class<?> getType(String name) {
         return types.get( name );
     }
 
@@ -562,7 +564,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *
      * @return an iterator over the keys
      */
-    public Iterator keyIterator() {
+    public Iterator<String> keyIterator() {
         return readMethods.keySet().iterator();
     }
 
@@ -571,9 +573,9 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *
      * @return an iterator over the values
      */
-    public Iterator valueIterator() {
-        final Iterator iter = keyIterator();
-        return new Iterator() {
+    public Iterator<Object> valueIterator() {
+        final Iterator<?> iter = keyIterator();
+        return new Iterator<Object>() {
             public boolean hasNext() {
                 return iter.hasNext();
             }
@@ -592,16 +594,20 @@ public class BeanMap extends AbstractMap implements Cloneable {
      *
      * @return an iterator over the entries
      */
-    public Iterator entryIterator() {
-        final Iterator iter = keyIterator();
-        return new Iterator() {
+    public Iterator<Map.Entry<Object, Object>> entryIterator() {
+        final Iterator<String> iter = keyIterator();
+        return new Iterator<Map.Entry<Object, Object>>() {
             public boolean hasNext() {
                 return iter.hasNext();
             }
-            public Object next() {
+            public Map.Entry<Object, Object> next() {
                 Object key = iter.next();
                 Object value = get(key);
-                return new Entry( BeanMap.this, key, value );
+                @SuppressWarnings("unchecked")
+                // This should not cause any problems; the key is actually a
+                // string, but it does no harm to expose it as Object
+                Map.Entry<Object, Object> tmpEntry = new Entry( BeanMap.this, key, value );
+                return tmpEntry;
             }
             public void remove() {
                 throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
@@ -857,7 +863,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @throws IllegalAccessException  never
      * @throws IllegalArgumentException  never
      */
-    protected Object convertType( Class newType, Object value )
+    protected Object convertType( Class<?> newType, Object value )
         throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         // try call constructor
@@ -884,7 +890,7 @@ public class BeanMap extends AbstractMap implements Cloneable {
      * @return a transformer that will convert strings into that type,
      *  or null if the given type is not a primitive type
      */
-    protected Transformer getTypeTransformer( Class aType ) {
+    protected Transformer getTypeTransformer( Class<?> aType ) {
         return typeTransformers.get( aType );
     }
 
