@@ -19,9 +19,10 @@ package org.apache.commons.beanutils.converters;
 
 import java.lang.ref.WeakReference;
 
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.beanutils.ConvertUtils;
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
 
 /**
  * This class provides a number of unit tests related to classloaders and
@@ -39,7 +40,7 @@ public class MemoryTestCase extends TestCase {
         Thread.currentThread().setContextClassLoader(componentLoader);
         Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
-        WeakReference ref = new WeakReference(componentLoader);
+        WeakReference<ClassLoader> ref = new WeakReference<ClassLoader>(componentLoader);
         componentLoader = null;
 
         forceGarbageCollection(ref);
@@ -124,7 +125,7 @@ public class MemoryTestCase extends TestCase {
 
             // Emulate a container "undeploying" component #1. This should
             // make component loader available for garbage collection (we hope)
-            WeakReference weakRefToComponent1 = new WeakReference(componentLoader1);
+            WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<ClassLoader>(componentLoader1);
             componentLoader1 = null;
 
             // force garbage collection and  verify that the componentLoader
@@ -179,7 +180,7 @@ public class MemoryTestCase extends TestCase {
               // Here we pretend we're running inside the component, and that
               // a class FloatConverter has been loaded from the component's
               // private classpath.
-              Class newFloatConverterClass = componentLoader.reload(FloatConverter.class);
+              Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
               Object newFloatConverter = newFloatConverterClass.newInstance();
               assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
 
@@ -218,7 +219,7 @@ public class MemoryTestCase extends TestCase {
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
             // Emulate a container "undeploying" the component. This should
             // make component loader available for garbage collection (we hope)
-            WeakReference weakRefToComponent = new WeakReference(componentLoader);
+            WeakReference<ClassLoader> weakRefToComponent = new WeakReference<ClassLoader>(componentLoader);
             componentLoader = null;
 
             // force garbage collection and  verify that the componentLoader
@@ -254,7 +255,7 @@ public class MemoryTestCase extends TestCase {
      * else we were not able to trigger garbage collection; there is no way
      * to tell these scenarios apart.</p>
      */
-    private void forceGarbageCollection(WeakReference target) {
+    private void forceGarbageCollection(WeakReference<?> target) {
         int bytes = 2;
 
         while(target.get() != null) {
@@ -266,7 +267,8 @@ public class MemoryTestCase extends TestCase {
             // all data (including the target) rather than simply collecting
             // this easily-reclaimable memory!
             try {
-                byte[] b =  new byte[bytes];
+                @SuppressWarnings("unused")
+                byte[] b = new byte[bytes];
                 bytes = bytes * 2;
             } catch(OutOfMemoryError e) {
                 // well that sure should have forced a garbage collection
