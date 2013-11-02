@@ -106,7 +106,7 @@ public class Jira339TestCase extends TestCase {
 
         TestBean bean = new TestBean();
         try {
-            Map properties = new HashMap();
+            Map<String, Object> properties = new HashMap<String, Object>();
             properties.put("comparator", null);
             BeanUtils.populate(bean, properties);
         } catch (Throwable t) {
@@ -120,14 +120,14 @@ public class Jira339TestCase extends TestCase {
      * Test Bean.
      */
     public static class TestBean {
-        private Comparator comparator;
+        private Comparator<?> comparator;
 
         /**
          * Return the comparator.
          *
          * @return the comparator
          */
-        public Comparator getComparator() {
+        public Comparator<?> getComparator() {
             return comparator;
         }
 
@@ -136,7 +136,7 @@ public class Jira339TestCase extends TestCase {
          *
          * @param comparator the comparator
          */
-        public void setComparator(Comparator comparator) {
+        public void setComparator(Comparator<?> comparator) {
             this.comparator = comparator;
         }
 
