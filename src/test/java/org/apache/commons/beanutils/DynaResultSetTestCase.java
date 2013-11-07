@@ -22,8 +22,8 @@ package org.apache.commons.beanutils;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
@@ -178,7 +178,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     public void testIteratorCount() {
 
-        Iterator rows = dynaClass.iterator();
+        Iterator<?> rows = dynaClass.iterator();
         assertNotNull("iterator exists", rows);
         int n = 0;
         while (rows.hasNext()) {
@@ -196,7 +196,7 @@ public class DynaResultSetTestCase extends TestCase {
     public void testIteratorResults() {
 
         // Grab the third row
-        Iterator rows = dynaClass.iterator();
+        Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
         DynaBean row = (DynaBean) rows.next();
@@ -255,7 +255,7 @@ public class DynaResultSetTestCase extends TestCase {
         }
 
         // Grab the third row
-        Iterator rows = dynaClass.iterator();
+        Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
         DynaBean row = (DynaBean) rows.next();
