@@ -88,7 +88,7 @@ public class TestResultSet implements InvocationHandler {
      */
     public static ResultSet createProxy(InvocationHandler invocationHandler) {
         ClassLoader classLoader = ResultSet.class.getClassLoader();
-        Class[] interfaces = new Class[] { ResultSet.class };
+        Class<?>[] interfaces = new Class[] { ResultSet.class };
         return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
@@ -472,12 +472,12 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Object getObject(int columnIndex, Map map) throws SQLException {
+    public Object getObject(int columnIndex, Map<?, ?> map) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object getObject(String columnName, Map map) throws SQLException {
+    public Object getObject(String columnName, Map<?, ?> map) throws SQLException {
         throw new UnsupportedOperationException();
     }
 

@@ -77,7 +77,7 @@ public class TestResultSetMetaData implements InvocationHandler {
      */
     public static ResultSetMetaData createProxy(InvocationHandler invocationHandler) {
         ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
-        Class[] interfaces = new Class[] { ResultSetMetaData.class };
+        Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
         return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
