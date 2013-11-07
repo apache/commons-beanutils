@@ -181,7 +181,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     public void testListCount() {
 
-        List rows = dynaClass.getRows();
+        List<DynaBean> rows = dynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("list row count", 5, rows.size());
 
@@ -191,8 +191,8 @@ public class DynaRowSetTestCase extends TestCase {
     public void testListResults() {
 
         // Grab the third row
-        List rows = dynaClass.getRows();
-        DynaBean row = (DynaBean) rows.get(2);
+        List<DynaBean> rows = dynaClass.getRows();
+        DynaBean row = rows.get(2);
 
         // Invalid argument test
         try {
@@ -247,8 +247,8 @@ public class DynaRowSetTestCase extends TestCase {
         }
 
         // Grab the third row
-        List rows = dynaClass.getRows();
-        DynaBean row = (DynaBean) rows.get(2);
+        List<DynaBean> rows = dynaClass.getRows();
+        DynaBean row = rows.get(2);
 
         // Invalid argument test
         try {
@@ -295,7 +295,7 @@ public class DynaRowSetTestCase extends TestCase {
 
         // created one with low limit
         RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
-        List rows = limitedDynaClass.getRows();
+        List<DynaBean> rows = limitedDynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());
 
@@ -329,8 +329,8 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,           resultSet.getObject("timestampProperty").getClass());
 
         RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
-        DynaBean firstRow = (DynaBean)inconsistentDynaClass.getRows().get(0);
-        Class expectedType = null;
+        DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
+        Class<?> expectedType = null;
         DynaProperty property = null;
 
         // Test Date
