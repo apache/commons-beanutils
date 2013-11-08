@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
@@ -51,8 +52,8 @@ public class Jira347TestCase extends TestCase {
     public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
         String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
         ClassLoader loader = newClassLoader();
-        Class beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Class<?> beanClass    = loader.loadClass(className);
+        beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
@@ -102,10 +103,10 @@ public class Jira347TestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        SoftReference ref = new SoftReference(new Object());
+        SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
-            java.util.ArrayList list = new java.util.ArrayList();
+            ArrayList<Object> list = new ArrayList<Object>();
             try {
                 long i = 0;
                 while (true && ref.get() != null) {

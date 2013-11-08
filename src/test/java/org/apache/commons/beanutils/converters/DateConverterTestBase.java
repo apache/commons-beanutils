@@ -25,8 +25,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import junit.framework.TestCase;
-import org.apache.commons.beanutils.Converter;
+
 import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.Converter;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
@@ -39,7 +40,7 @@ public abstract class DateConverterTestBase extends TestCase {
     // ------------------------------------------------------------------------
 
     /**
-     * Construtc a new test case.
+     * Construct a new test case.
      * @param name Name of the test
      */
     public DateConverterTestBase(String name) {
@@ -65,7 +66,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * Return the expected type
      * @return The expected type
      */
-    protected abstract Class getExpectedType();
+    protected abstract Class<?> getExpectedType();
 
     /**
      * Convert from a Calendar to the appropriate Date type
@@ -152,7 +153,7 @@ public abstract class DateConverterTestBase extends TestCase {
     /**
      * Test default String to type conversion
      *
-     * N.B. This method is overriden by test case
+     * N.B. This method is overridden by test case
      * implementations for java.sql.Date/Time/Timestamp
      */
     public void testDefaultStringToTypeConvert() {
@@ -394,8 +395,8 @@ public abstract class DateConverterTestBase extends TestCase {
         String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
             Object result = converter.convert(getExpectedType(), value);
-            Class resultType = (result   == null ? null : result.getClass());
-            Class expectType = (expected == null ? null : expected.getClass());
+            Class<?> resultType = (result   == null ? null : result.getClass());
+            Class<?> expectType = (expected == null ? null : expected.getClass());
             assertEquals("TYPE "  + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (Exception ex) {
@@ -414,8 +415,8 @@ public abstract class DateConverterTestBase extends TestCase {
         String msg = "Converting '" + valueType + "' value '" + value + "' to String";
         try {
             Object result = converter.convert(String.class, value);
-            Class resultType = (result   == null ? null : result.getClass());
-            Class expectType = (expected == null ? null : expected.getClass());
+            Class<?> resultType = (result   == null ? null : result.getClass());
+            Class<?> expectType = (expected == null ? null : expected.getClass());
             assertEquals("TYPE "  + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (Exception ex) {

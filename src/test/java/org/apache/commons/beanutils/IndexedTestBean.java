@@ -17,8 +17,8 @@
 
 package org.apache.commons.beanutils;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Indexed Properties Test bean for JUnit tests for the "beanutils" component.
@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class IndexedTestBean {
 
     private String[] stringArray;
-    private List stringList;
-    private ArrayList arrayList;
+    private List<String> stringList;
+    private ArrayList<Object> arrayList;
 
 
     // ----------------------------------------------------------- Constructors
@@ -71,14 +71,14 @@ public class IndexedTestBean {
     /**
      * Getter for the java.util.List property.
      */
-    public List getStringList() {
+    public List<String> getStringList() {
         return stringList;
     }
 
     /**
      * Setter for the java.util.List property.
      */
-    public void setStringList(List stringList) {
+    public void setStringList(List<String> stringList) {
         this.stringList = stringList;
     }
 
@@ -86,7 +86,7 @@ public class IndexedTestBean {
      * Indexed Getter for the java.util.List property.
      */
     public String getStringList(int index) {
-        return (String)stringList.get(index);
+        return stringList.get(index);
     }
 
     /**
@@ -99,14 +99,14 @@ public class IndexedTestBean {
     /**
      * Getter for the java.util.ArrayList property.
      */
-    public ArrayList getArrayList() {
+    public ArrayList<Object> getArrayList() {
         return arrayList;
     }
 
     /**
      * Setter for the java.util.ArrayList property.
      */
-    public void setArrayList(ArrayList arrayList) {
+    public void setArrayList(ArrayList<Object> arrayList) {
         this.arrayList = arrayList;
     }
 

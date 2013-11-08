@@ -60,7 +60,7 @@ public final class FloatConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<Float> getDefaultType() {
         return Float.class;
     }
 

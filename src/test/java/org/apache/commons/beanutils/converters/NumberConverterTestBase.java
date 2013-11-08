@@ -49,7 +49,7 @@ public abstract class NumberConverterTestBase extends TestCase {
 
     protected abstract NumberConverter makeConverter();
     protected abstract NumberConverter makeConverter(Object defaultValue);
-    protected abstract Class getExpectedType();
+    protected abstract Class<?> getExpectedType();
 
     // ------------------------------------------------------------------------
 
@@ -289,6 +289,17 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
     /**
+     * Convert String --> Number if the target type is not defined. Then the
+     * default type should be used.
+     */
+    public void testStringToNumberDefaultType() {
+        NumberConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(null, numbers[0].toString()));
+    }
+
+    /**
      * Convert Boolean --> Number (default conversion)
      */
     public void testBooleanToNumberDefault() {
@@ -407,5 +418,21 @@ public abstract class NumberConverterTestBase extends TestCase {
             // expected result
         }
     }
+
+    /**
+     * Tests a conversion to an unsupported type if a default value is set.
+     */
+    public void testInvalidTypeWithDefault() {
+
+        NumberConverter converter = makeConverter(42);
+
+        try {
+            converter.convert(Object.class, numbers[0]);
+            fail("Invalid type with default test, expected ConversionException");
+        } catch(ConversionException e) {
+            // expected result
+        }
+    }
+
 }
 

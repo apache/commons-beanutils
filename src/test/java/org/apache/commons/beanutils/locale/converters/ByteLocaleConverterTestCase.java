@@ -108,9 +108,9 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Byte.
-        //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
+        //  **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
 
         // ------------- Construct with non-localized pattern ------------

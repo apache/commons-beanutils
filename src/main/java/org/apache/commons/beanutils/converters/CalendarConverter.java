@@ -61,7 +61,7 @@ public final class CalendarConverter extends DateTimeConverter {
      * @return The default type this <code>Converter</code> handles.
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return Calendar.class;
     }
 

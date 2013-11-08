@@ -82,7 +82,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * the original <code>ResultSet</code> on which this
      * {@link RowSetDynaClass} was based.</p>
      */
-    protected List rows = new ArrayList();
+    protected List<DynaBean> rows = new ArrayList<DynaBean>();
 
     // ----------------------------------------------------------- Constructors
 
@@ -261,7 +261,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *
      * @return A <code>List</code> of {@link DynaBean} instances
      */
-    public List getRows() {
+    public List<DynaBean> getRows() {
 
         return (this.rows);
 

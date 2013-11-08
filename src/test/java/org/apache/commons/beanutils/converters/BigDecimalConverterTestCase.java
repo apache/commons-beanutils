@@ -73,7 +73,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return BigDecimal.class;
     }
 

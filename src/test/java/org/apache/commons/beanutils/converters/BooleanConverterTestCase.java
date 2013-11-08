@@ -17,9 +17,9 @@
 
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.ConversionException;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils.ConversionException;
 
 /**
  * @version $Id$
@@ -95,6 +95,26 @@ public class BooleanConverterTestCase extends TestCase {
         }
     }
 
+    /**
+     * Tests a conversion to another target type. This should not be possible.
+     */
+    public void testConversionToOtherType() {
+        BooleanConverter converter = new BooleanConverter();
+        try {
+            converter.convert(Integer.class, STANDARD_TRUES[0]);
+            fail("Could convert to unsupported type!");
+        } catch (ConversionException cex) {
+            // Expected result
+        }
+    }
+
+    /**
+     * Tests whether a conversion to a primitive boolean is possible.
+     */
+    public void testPrimitiveTargetClass() {
+        BooleanConverter converter = new BooleanConverter();
+        assertTrue("Wrong result", converter.convert(Boolean.TYPE, STANDARD_TRUES[0]));
+    }
 
     protected void testConversionValues(BooleanConverter converter,
             String[] trueValues, String[] falseValues) {

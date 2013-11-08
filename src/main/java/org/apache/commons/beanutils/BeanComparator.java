@@ -17,9 +17,10 @@
 
 package org.apache.commons.beanutils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
+
 import org.apache.commons.collections.comparators.ComparableComparator;
 
 /**
@@ -35,14 +36,20 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * specified in the constructor. If you are comparing two beans based
  * on a property that could contain "null" values, a suitable <code>Comparator</code>
  * or <code>ComparatorChain</code> should be supplied in the constructor.
+ * Note that the passed in {@code Comparator} must be able to handle the
+ * passed in objects. Because the type of the property to be compared is not
+ * known at compile time no type checks can be performed by the compiler.
+ * Thus {@code ClassCastException} exceptions can be thrown if unexpected
+ * property values occur.
  * </p>
  *
+ * @param <B> the type of beans to be compared by this {@code Comparator}
  * @version $Id$
  */
-public class BeanComparator implements Comparator, Serializable {
+public class BeanComparator<B> implements Comparator<B>, Serializable {
 
     private String property;
-    private Comparator comparator;
+    private final Comparator<?> comparator;
 
     /**
      * <p>Constructs a Bean Comparator without a property set.
@@ -96,7 +103,7 @@ public class BeanComparator implements Comparator, Serializable {
      * contains null values, a suitable comparator
      * may be supplied in this constructor.
      */
-    public BeanComparator( String property, Comparator comparator ) {
+    public BeanComparator( String property, Comparator<?> comparator ) {
         setProperty( property );
         if (comparator != null) {
             this.comparator = comparator;
@@ -132,7 +139,7 @@ public class BeanComparator implements Comparator, Serializable {
      *
      * @return the Comparator being used to compare beans
      */
-    public Comparator getComparator() {
+    public Comparator<?> getComparator() {
         return comparator;
     }
 
@@ -145,17 +152,17 @@ public class BeanComparator implements Comparator, Serializable {
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
-    public int compare( Object o1, Object o2 ) {
+    public int compare( B o1, B o2 ) {
 
         if ( property == null ) {
             // compare the actual objects
-            return comparator.compare( o1, o2 );
+            return internalCompare( o1, o2 );
         }
 
         try {
             Object value1 = PropertyUtils.getProperty( o1, property );
             Object value2 = PropertyUtils.getProperty( o2, property );
-            return comparator.compare( value1, value2 );
+            return internalCompare( value1, value2 );
         }
         catch ( IllegalAccessException iae ) {
             throw new RuntimeException( "IllegalAccessException: " + iae.toString() );
@@ -184,7 +191,7 @@ public class BeanComparator implements Comparator, Serializable {
             return false;
         }
 
-        final BeanComparator beanComparator = (BeanComparator) o;
+        final BeanComparator<?> beanComparator = (BeanComparator<?>) o;
 
         if (!comparator.equals(beanComparator.comparator)) {
             return false;
@@ -212,5 +219,21 @@ public class BeanComparator implements Comparator, Serializable {
         int result;
         result = comparator.hashCode();
         return result;
+    }
+
+    /**
+     * Compares the given values using the internal {@code Comparator}.
+     * <em>Note</em>: This comparison cannot be performed in a type-safe way; so
+     * {@code ClassCastException} exceptions may be thrown.
+     *
+     * @param val1 the first value to be compared
+     * @param val2 the second value to be compared
+     * @return the result of the comparison
+     */
+    private int internalCompare(Object val1, Object val2) {
+        @SuppressWarnings("rawtypes")
+        // to make the compiler happy
+        Comparator c = comparator;
+        return c.compare(val1, val2);
     }
 }

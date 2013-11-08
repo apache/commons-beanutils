@@ -22,7 +22,7 @@ import java.util.Map;
 import org.apache.commons.beanutils.bugs.Jira18TestCase;
 
 /**
- * Factory whcih creates <i>package</i> scope beans with
+ * Factory which creates <i>package</i> scope beans with
  * public methods for {@link Jira18TestCase}.
  *
  * @version $Id$
@@ -43,7 +43,7 @@ public class Jira18BeanFactory {
 
         private final String[] indexed = new String[] {"one", "two", "three"};
         private String simple = "FOO";
-        private final Map mapped = new HashMap();
+        private final Map<String, Object> mapped = new HashMap<String, Object>();
 
         /** Default Constructor */
         public PackageFriendlyBean() {

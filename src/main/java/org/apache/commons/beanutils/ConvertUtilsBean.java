@@ -145,7 +145,8 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap converters = new WeakFastHashMap();
+    private final WeakFastHashMap<Class<?>, Converter> converters =
+            new WeakFastHashMap<Class<?>, Converter>();
 
     /**
      * The <code>Log</code> instance for this class.
@@ -454,11 +455,11 @@ public class ConvertUtilsBean {
                 return null;
             } else {
                 Converter converter = lookup(String.class);
-                return ((String) converter.convert(String.class, value));
+                return (converter.convert(String.class, value));
             }
         } else {
             Converter converter = lookup(String.class);
-            return ((String) converter.convert(String.class, value));
+            return (converter.convert(String.class, value));
         }
 
     }
@@ -468,13 +469,14 @@ public class ConvertUtilsBean {
      * Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.
      *
+     * @param <T> The desired target type of the conversion
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(String value, Class clazz) {
+    public Object convert(String value, Class<?> clazz) {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" +
@@ -505,9 +507,9 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(String[] values, Class clazz) {
+    public Object convert(String[] values, Class<?> clazz) {
 
-        Class type = clazz;
+        Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
         }
@@ -532,8 +534,9 @@ public class ConvertUtilsBean {
 
 
     /**
-     * <p>Convert the value to an object of the specified class (if
-     * possible).</p>
+     * Convert the value to an object of the specified class (if
+     * possible). If no converter for the desired target type is registered,
+     * the passed in object is returned unchanged.
      *
      * @param value Value to be converted (may be null)
      * @param targetType Class of the value to be converted to (must not be null)
@@ -541,9 +544,9 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(Object value, Class targetType) {
+    public Object convert(Object value, Class<?> targetType) {
 
-        Class sourceType = value == null ? null : value.getClass();
+        Class<?> sourceType = value == null ? null : value.getClass();
 
         if (log.isDebugEnabled()) {
             if (value == null) {
@@ -563,7 +566,7 @@ public class ConvertUtilsBean {
             }
             converted = converter.convert(targetType, value);
         }
-        if (targetType == String.class && converted != null &&
+        if (String.class.equals(targetType) && converted != null &&
                 !(converted instanceof String)) {
 
             // NOTE: For backwards compatibility, if the Converter
@@ -789,9 +792,9 @@ public class ConvertUtilsBean {
      * value used in the event of a conversion error
      * @param defaultArraySize The size of the default array
      */
-    private void registerArrayConverter(Class componentType, Converter componentConverter,
+    private void registerArrayConverter(Class<?> componentType, Converter componentConverter,
             boolean throwException, int defaultArraySize) {
-        Class arrayType = Array.newInstance(componentType, 0).getClass();
+        Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
         Converter arrayConverter = null;
         if (throwException) {
             arrayConverter = new ArrayConverter(arrayType, componentConverter);
@@ -802,7 +805,7 @@ public class ConvertUtilsBean {
     }
 
     /** strictly for convenience since it has same parameter order as Map.put */
-    private void register(Class clazz, Converter converter) {
+    private void register(Class<?> clazz, Converter converter) {
         register(new ConverterFacade(converter), clazz);
     }
 
@@ -812,7 +815,7 @@ public class ConvertUtilsBean {
      *
      * @param clazz Class for which to remove a registered Converter
      */
-    public void deregister(Class clazz) {
+    public void deregister(Class<?> clazz) {
 
         converters.remove(clazz);
 
@@ -827,9 +830,9 @@ public class ConvertUtilsBean {
      * @param clazz Class for which to return a registered Converter
      * @return The registered {@link Converter} or <code>null</code> if not found
      */
-    public Converter lookup(Class clazz) {
+    public Converter lookup(Class<?> clazz) {
 
-        return ((Converter) converters.get(clazz));
+        return (converters.get(clazz));
 
     }
 
@@ -842,7 +845,7 @@ public class ConvertUtilsBean {
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or <code>null</code> if not found
      */
-    public Converter lookup(Class sourceType, Class targetType) {
+    public Converter lookup(Class<?> sourceType, Class<?> targetType) {
 
         if (targetType == null) {
             throw new IllegalArgumentException("Target type is missing");
@@ -888,7 +891,7 @@ public class ConvertUtilsBean {
      * @param clazz Destination class for conversions performed by this
      *  Converter
      */
-    public void register(Converter converter, Class clazz) {
+    public void register(Converter converter, Class<?> clazz) {
 
         converters.put(clazz, converter);
 

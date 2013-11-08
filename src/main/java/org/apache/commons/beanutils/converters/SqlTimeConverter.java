@@ -65,7 +65,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return Time.class;
     }
 

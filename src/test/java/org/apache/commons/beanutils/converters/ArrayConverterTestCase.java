@@ -81,8 +81,8 @@ public class ArrayConverterTestCase extends TestCase {
         long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
         Long[]    LONGArray    = new Long[]    {new Long(intArray[0]),    new Long(intArray[1]),    new Long(intArray[2]),    new Long(intArray[3])};
         Integer[] IntegerArray = new Integer[] {new Integer(intArray[0]), new Integer(intArray[1]), new Integer(intArray[2]), new Integer(intArray[3])};
-        ArrayList strList = new ArrayList();
-        ArrayList longList = new ArrayList();
+        ArrayList<String> strList = new ArrayList<String>();
+        ArrayList<Long> longList = new ArrayList<Long>();
         for (int i = 0; i < strArray.length; i++) {
             strList.add(strArray[i]);
             longList.add(LONGArray[i]);
@@ -216,7 +216,7 @@ public class ArrayConverterTestCase extends TestCase {
 
         // Test Data
         String[] array = new String[] {"10", "  11", "12  ", "  13  "};
-        ArrayList list = new ArrayList();
+        ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < array.length; i++) {
             list.add(array[i]);
         }
@@ -368,7 +368,7 @@ public class ArrayConverterTestCase extends TestCase {
         ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
 
         // test underscore not allowed (the default)
-        String[] result = (String[])converter.convert(String[].class, value);
+        String[] result = converter.convert(String[].class, value);
         assertNotNull("result.null", result);
         assertEquals("result.length", 4, result.length);
         assertEquals("result[0]", "first", result[0]);
@@ -380,7 +380,7 @@ public class ArrayConverterTestCase extends TestCase {
         converter.setAllowedChars(new char[] {'.', '-', '_'});
 
         // test underscore allowed
-        result = (String[])converter.convert(String[].class, value);
+        result = converter.convert(String[].class, value);
         assertNotNull("result.null", result);
         assertEquals("result.length", 2, result.length);
         assertEquals("result[0]", "first_value", result[0]);

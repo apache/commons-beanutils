@@ -62,7 +62,7 @@ public final class BigDecimalConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<BigDecimal> getDefaultType() {
         return BigDecimal.class;
     }
 

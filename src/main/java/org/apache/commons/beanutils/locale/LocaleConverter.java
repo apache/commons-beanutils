@@ -35,13 +35,14 @@ public interface LocaleConverter extends Converter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
+     * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
      * @return The converted value
      *
      * @exception org.apache.commons.beanutils.ConversionException if conversion
-     * cannot be performed successfully
+     * cannot be performed successfully or if the target type is not supported
      */
-    public Object convert(Class type, Object value, String pattern);
+    public <T> T convert(Class<T> type, Object value, String pattern);
 }

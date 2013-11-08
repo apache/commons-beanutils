@@ -72,7 +72,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return BigInteger.class;
     }
 

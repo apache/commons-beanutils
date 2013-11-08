@@ -60,7 +60,7 @@ public final class LongConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<Long> getDefaultType() {
         return Long.class;
     }
 

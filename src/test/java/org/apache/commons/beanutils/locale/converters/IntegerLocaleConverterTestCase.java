@@ -101,9 +101,9 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Integer.
-        //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
+        //  **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
 
         // ------------- Construct with non-localized pattern ------------
@@ -272,6 +272,15 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
     }
 
-
+    /**
+     * Tests whether a conversion to a primitive type can be performed.
+     */
+    public void testToPrimitiveType() {
+        converter = new IntegerLocaleConverter();
+        Integer value = 20131028;
+        Class<Integer> target = Integer.TYPE;
+        int result = converter.convert(target, (Object) value.toString());
+        assertEquals("Wrong result", value.intValue(), result);
+    }
 }
 

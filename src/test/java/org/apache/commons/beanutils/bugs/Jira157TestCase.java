@@ -94,14 +94,18 @@ public class Jira157TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() {
         Object bean = new Serializable() {
+            private static final long serialVersionUID = 1L;
+
+            @SuppressWarnings("unused")
             public String getX() {
                 return "x-value";
             }
+            @SuppressWarnings("unused")
             public String getY() {
                 return "y-value";
             }
         };
-        Map result = null;
+        Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
         } catch (Throwable t) {
@@ -127,7 +131,7 @@ public class Jira157TestCase extends TestCase {
                 return "y-value";
             }
         };
-        Map result = null;
+        Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
         } catch (Throwable t) {
@@ -150,7 +154,7 @@ public class Jira157TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() {
         Object bean = new FooBar();
-        Map result = null;
+        Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
         } catch (Throwable t) {
@@ -172,6 +176,7 @@ public class Jira157TestCase extends TestCase {
         String getPackageFoo() {
             return "Package Value";
         }
+        @SuppressWarnings("unused")
         private String getPrivateFoo() {
             return "PrivateFoo Value";
         }

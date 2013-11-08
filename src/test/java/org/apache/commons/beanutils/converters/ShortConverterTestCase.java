@@ -71,7 +71,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Short.class;
     }
 
@@ -138,7 +138,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
      */
     public void testInvalidAmount() {
         Converter converter = makeConverter();
-        Class clazz = Short.class;
+        Class<?> clazz = Short.class;
 
         Long min         = new Long(Short.MIN_VALUE);
         Long max         = new Long(Short.MAX_VALUE);

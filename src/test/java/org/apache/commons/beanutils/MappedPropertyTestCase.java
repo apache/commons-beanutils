@@ -16,11 +16,9 @@
  */
 package org.apache.commons.beanutils;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>Test Case for the <code>MappedPropertyDescriptor</code>.</p>
@@ -28,9 +26,6 @@ import org.apache.commons.logging.LogFactory;
  * @version $Id$
  */
 public class MappedPropertyTestCase extends TestCase {
-
-    private static final Log log = LogFactory.getLog(MappedPropertyTestCase.class);
-
 
     // ---------------------------------------------------------- Constructors
 
@@ -80,7 +75,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testFound() {
         String property = "mapproperty";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -96,7 +91,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testBooleanMapped() {
         String property = "mappedBoolean";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -112,10 +107,9 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testNotFound() {
         String property = "xxxxxxx";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
         } catch (Exception ex) {
             // expected result
@@ -127,7 +121,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testMappedGetterOnly() {
         String property = "mappedGetterOnly";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -143,7 +137,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testMappedSetterOnly() {
         String property = "mappedSetterOnly";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -159,7 +153,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testInvalidSetter() {
         String property = "invalidSetter";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -175,7 +169,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testInvalidGetter() {
         String property = "invalidGetter";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -195,7 +189,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testDifferentTypes() {
         String property = "differentTypes";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -207,12 +201,10 @@ public class MappedPropertyTestCase extends TestCase {
     }
 
     /**
-     * Test Mpa getter
+     * Test Map getter
      */
     public void testMapGetter() {
         MappedPropertyTestBean bean = new MappedPropertyTestBean();
-        Class clazz = MappedPropertyTestBean.class;
-        String property = "myMap";
         try {
             String testValue = "test value";
             String testKey   = "testKey";
@@ -229,7 +221,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testAnyArgsProperty() {
         String property = "anyMapped";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -241,11 +233,11 @@ public class MappedPropertyTestCase extends TestCase {
     }
 
     /**
-     * Test property with two primitve args
+     * Test property with two primitive args
      */
     public void testPrimitiveArgsProperty() {
         String property = "mappedPrimitive";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -261,10 +253,9 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testProtected() {
         String property = "protectedProperty";
-        Class clazz = MappedPropertyTestBean.class;
+        Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
         } catch (Exception ex) {
             // expected result
@@ -277,7 +268,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testPublicParentMethod() {
         String property = "mapproperty";
-        Class clazz = MappedPropertyChildBean.class;
+        Class<?> clazz = MappedPropertyChildBean.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -293,10 +284,9 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testProtectedParentMethod() {
         String property = "protectedMapped";
-        Class clazz = MappedPropertyChildBean.class;
+        Class<?> clazz = MappedPropertyChildBean.class;
         try {
-            MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
         } catch (Exception ex) {
         }
@@ -308,7 +298,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testInterfaceMapped() {
         String property = "mapproperty";
-        Class clazz = MappedPropertyTestInterface.class;
+        Class<?> clazz = MappedPropertyTestInterface.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);
@@ -324,10 +314,9 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testInterfaceNotFound() {
         String property = "XXXXXX";
-        Class clazz = MappedPropertyTestInterface.class;
+        Class<?> clazz = MappedPropertyTestInterface.class;
         try {
-            MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
         } catch (Exception ex) {
         }
@@ -338,7 +327,7 @@ public class MappedPropertyTestCase extends TestCase {
      */
     public void testChildInterfaceMapped() {
         String property = "mapproperty";
-        Class clazz = MappedPropertyChildInterface.class;
+        Class<?> clazz = MappedPropertyChildInterface.class;
         try {
             MappedPropertyDescriptor desc
                 = new MappedPropertyDescriptor(property, clazz);

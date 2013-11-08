@@ -17,8 +17,10 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-import junit.framework.TestCase;
 import java.util.Locale;
+
+import junit.framework.TestCase;
+
 import org.apache.commons.beanutils.locale.BaseLocaleConverter;
 
 /**
@@ -180,16 +182,16 @@ public class BaseLocaleConverterTestCase extends TestCase {
     }
 
     /**
-     * Test Converting Value To a spcified Type
+     * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(BaseLocaleConverter converter, Class clazz, Object value, String pattern, Object expectedValue) {
+    protected void convertValueToType(BaseLocaleConverter converter, Class<?> clazz, Object value, String pattern, Object expectedValue) {
         convertValueToType(converter, "", clazz, value, pattern, expectedValue);
     }
 
     /**
-     * Test Converting Value To a spcified Type
+     * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(BaseLocaleConverter converter, String msgId, Class clazz, Object value, String pattern, Object expectedValue) {
+    protected void convertValueToType(BaseLocaleConverter converter, String msgId, Class<?> clazz, Object value, String pattern, Object expectedValue) {
 
         // Convert value with no pattern
         try {

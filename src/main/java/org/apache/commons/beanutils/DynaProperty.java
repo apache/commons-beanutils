@@ -20,9 +20,9 @@ package org.apache.commons.beanutils;
 
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +84,7 @@ public class DynaProperty implements Serializable {
      * @param name Name of the property being described
      * @param type Java class representing the property data type
      */
-    public DynaProperty(String name, Class type) {
+    public DynaProperty(String name, Class<?> type) {
 
         super();
         this.name = name;
@@ -103,7 +103,7 @@ public class DynaProperty implements Serializable {
      * @param type Java class representing the property data type
      * @param contentType Class that all indexed or mapped elements are instances of
      */
-    public DynaProperty(String name, Class type, Class contentType) {
+    public DynaProperty(String name, Class<?> type, Class<?> contentType) {
 
         super();
         this.name = name;
@@ -125,7 +125,7 @@ public class DynaProperty implements Serializable {
     }
 
     /** Property type */
-    protected transient Class type = null;
+    protected transient Class<?> type = null;
     /**
      * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>
@@ -138,13 +138,13 @@ public class DynaProperty implements Serializable {
      *
      * @return the property type
      */
-    public Class getType() {
+    public Class<?> getType() {
         return (this.type);
     }
 
 
     /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
-    protected transient Class contentType;
+    protected transient Class<?> contentType;
     /**
      * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
      * that support this feature.
@@ -156,7 +156,7 @@ public class DynaProperty implements Serializable {
      * @return the Class for the content type if this is an indexed <code>DynaProperty</code>
      * and this feature is supported. Otherwise null.
      */
-    public Class getContentType() {
+    public Class<?> getContentType() {
         return contentType;
     }
 
@@ -285,7 +285,7 @@ public class DynaProperty implements Serializable {
     /**
      * Write a class using safe encoding to workaround java 1.3 serialization bug.
      */
-    private void writeAnyClass(Class clazz, ObjectOutputStream out) throws IOException {
+    private void writeAnyClass(Class<?> clazz, ObjectOutputStream out) throws IOException {
         // safely write out any class
         int primitiveType = 0;
         if (Boolean.TYPE.equals(clazz)) {
@@ -341,7 +341,7 @@ public class DynaProperty implements Serializable {
     /**
      * Reads a class using safe encoding to workaround java 1.3 serialization bug.
      */
-    private Class readAnyClass(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private Class<?> readAnyClass(ObjectInputStream in) throws IOException, ClassNotFoundException {
         // read back type class safely
         if (in.readBoolean()) {
             // it's a type constant
@@ -365,7 +365,7 @@ public class DynaProperty implements Serializable {
 
         } else {
             // it's another class
-            return ((Class) in.readObject());
+            return ((Class<?>) in.readObject());
         }
     }
 }

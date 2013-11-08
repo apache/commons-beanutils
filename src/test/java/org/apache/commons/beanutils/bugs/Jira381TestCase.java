@@ -48,9 +48,9 @@ public class Jira381TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
 
-        Class target = TestServiceBean.class;
+        Class<?> target = TestServiceBean.class;
         String methodName = "performOp";
-        Class[] runtimeClasses = new Class[]{TestObjectSubclass.class};
+        Class<?>[] runtimeClasses = new Class<?>[]{TestObjectSubclass.class};
 
         Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
 

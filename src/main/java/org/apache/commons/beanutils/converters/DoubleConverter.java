@@ -60,7 +60,7 @@ public final class DoubleConverter extends NumberConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<Double> getDefaultType() {
         return Double.class;
     }
 

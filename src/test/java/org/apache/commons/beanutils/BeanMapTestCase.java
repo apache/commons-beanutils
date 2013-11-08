@@ -19,22 +19,23 @@ package org.apache.commons.beanutils;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.Test;
 import junit.textui.TestRunner;
 
 import org.apache.commons.beanutils.bugs.other.Jira87BeanFactory;
-import org.apache.commons.collections.map.AbstractTestMap;
 import org.apache.commons.collections.BulkTest;
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.map.AbstractTestMap;
 
 /**
  * Test cases for BeanMap
  *
  * @version $Id$
  */
+@SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {
 
     public BeanMapTestCase(String testName) {
@@ -271,7 +272,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map makeFullMap() {
+    public Map<Object, Object> makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
         BeanWithProperties bean = new BeanWithProperties();
@@ -289,7 +290,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map makeEmptyMap() {
+    public Map<Object, Object> makeEmptyMap() {
         return new BeanMap();
     }
 
@@ -361,7 +362,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     public void testMethodAccessor() throws Exception {
         BeanMap map = (BeanMap) makeFullMap();
-        Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue", null);
+        Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
         assertEquals(method, map.getReadMethod("someIntegerValue"));
     }
 
@@ -390,7 +391,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      *  Test the default transformers via the public static Map instance
      */
     public void testGetDefaultTransformersMap() {
-        BeanMap beanMap = new BeanMap();
         assertEquals("Boolean.TYPE",   Boolean.TRUE,        ((Transformer)BeanMap.defaultTransformers.get(Boolean.TYPE)).transform("true"));
         assertEquals("Character.TYPE", new Character('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
         assertEquals("Byte.TYPE",      new Byte((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
@@ -428,7 +428,7 @@ public class BeanMapTestCase extends AbstractTestMap {
             // expected result
         }
         try {
-            BeanMap.defaultTransformers.putAll(new HashMap());
+            BeanMap.defaultTransformers.putAll(new HashMap<Object, Object>());
             fail("putAll() - expected UnsupportedOperationException");
         } catch(UnsupportedOperationException e) {
             // expected result
@@ -513,7 +513,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     /**
-     * Test that the cause of exception thrown by put() is initialised.
+     * Test that the cause of exception thrown by put() is initialized.
      */
     public void testExceptionThrowFromPut() {
 
@@ -523,7 +523,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         }
 
         try {
-            Map map = new BeanMap(new BeanThrowingExceptions());
+            Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
             map.put("valueThrowingException", "value");
             fail("Setter exception - expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {

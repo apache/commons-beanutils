@@ -57,7 +57,7 @@ public final class URLConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return URL.class;
     }
 
@@ -71,8 +71,12 @@ public final class URLConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Object convertToType(Class type, Object value) throws Throwable {
-        return new URL(value.toString());
+    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+        if (URL.class.equals(type)) {
+            return type.cast(new URL(value.toString()));
+        }
+
+        throw conversionException(type, value);
     }
 
 }

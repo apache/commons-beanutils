@@ -61,13 +61,13 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * instances will be the same instances as those in the
      * <code>properties</code> list.</p>
      */
-    protected Map propertiesMap = new HashMap();
+    protected Map<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
 
     /**
      * Cross Reference for column name --> dyna property name
      * (needed when lowerCase option is true)
      */
-    private Map columnNameXref;
+    private Map<String, String> columnNameXref;
 
     // ------------------------------------------------------ DynaClass Methods
 
@@ -97,7 +97,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
-        return ((DynaProperty) propertiesMap.get(name));
+        return (propertiesMap.get(name));
 
     }
 
@@ -150,7 +150,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @exception SQLException if an exception was thrown trying to load
      *  the specified class
      */
-    protected Class loadClass(String className) throws SQLException {
+    protected Class<?> loadClass(String className) throws SQLException {
 
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -190,7 +190,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         String name = lowerCase ? columnName.toLowerCase() : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
-                columnNameXref = new HashMap();
+                columnNameXref = new HashMap<String, String>();
             }
             columnNameXref.put(name, columnName);
         }
@@ -214,7 +214,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
         // Default to Object type if no class name could be retrieved
         // from the metadata
-        Class clazz = Object.class;
+        Class<?> clazz = Object.class;
         if (className != null) {
             clazz = loadClass(className);
         }
@@ -236,7 +236,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected void introspect(ResultSet resultSet) throws SQLException {
 
         // Accumulate an ordered list of DynaProperties
-        ArrayList list = new ArrayList();
+        ArrayList<DynaProperty> list = new ArrayList<DynaProperty>();
         ResultSetMetaData metadata = resultSet.getMetaData();
         int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
@@ -248,7 +248,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
         // Convert this list into the internal data structures we need
         properties =
-            (DynaProperty[]) list.toArray(new DynaProperty[list.size()]);
+            list.toArray(new DynaProperty[list.size()]);
         for (int i = 0; i < properties.length; i++) {
             propertiesMap.put(properties[i].getName(), properties[i]);
         }
@@ -270,7 +270,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             throw new IllegalArgumentException("Invalid name '" + name + "'");
         }
         String columnName = getColumnName(name);
-        Class type = property.getType();
+        Class<?> type = property.getType();
 
         // java.sql.Date
         if (type.equals(Date.class)) {
@@ -299,7 +299,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     protected String getColumnName(String name) {
         if (columnNameXref != null && columnNameXref.containsKey(name)) {
-            return (String)columnNameXref.get(name);
+            return columnNameXref.get(name);
         } else {
             return name;
         }

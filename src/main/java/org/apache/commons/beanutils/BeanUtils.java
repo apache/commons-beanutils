@@ -176,7 +176,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#describe
      */
-    public static Map describe(Object bean)
+    public static Map<String, String> describe(Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -425,7 +425,7 @@ public class BeanUtils {
      *  throws an exception
      * @see BeanUtilsBean#populate
      */
-    public static void populate(Object bean, Map properties)
+    public static void populate(Object bean, Map<String, ? extends Object> properties)
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().populate(bean, properties);
@@ -468,11 +468,13 @@ public class BeanUtils {
 
     /**
      * Create a cache.
+     * @param <K> the key type of the cache
+     * @param <V> the value type of the cache
      * @return a new cache
      * @since 1.8.0
      */
-    public static Map createCache() {
-        return new WeakFastHashMap();
+    public static <K, V> Map<K, V> createCache() {
+        return new WeakFastHashMap<K, V>();
     }
 
     /**
@@ -481,9 +483,9 @@ public class BeanUtils {
      * @return Whether it is fast or not.
      * @since 1.8.0
      */
-    public static boolean getCacheFast(Map map) {
+    public static boolean getCacheFast(Map<?, ?> map) {
         if (map instanceof WeakFastHashMap) {
-            return ((WeakFastHashMap)map).getFast();
+            return ((WeakFastHashMap<?, ?>) map).getFast();
         } else {
             return false;
         }
@@ -495,9 +497,9 @@ public class BeanUtils {
      * @param fast Whether it should be fast or not.
      * @since 1.8.0
      */
-    public static void setCacheFast(Map map, boolean fast) {
+    public static void setCacheFast(Map<?, ?> map, boolean fast) {
         if (map instanceof WeakFastHashMap) {
-            ((WeakFastHashMap)map).setFast(fast);
+            ((WeakFastHashMap<?, ?>)map).setFast(fast);
         }
     }
 }

@@ -102,9 +102,9 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Double.
-        //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
+        //  **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
+        //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
 
         // ------------- Construct with non-localized pattern ------------

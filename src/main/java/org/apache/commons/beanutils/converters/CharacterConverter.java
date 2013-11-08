@@ -16,6 +16,7 @@
  */
 package org.apache.commons.beanutils.converters;
 
+
 /**
  * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
  * to and from <b>java.lang.Character</b> objects.
@@ -55,7 +56,7 @@ public final class CharacterConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class getDefaultType() {
+    protected Class<?> getDefaultType() {
         return Character.class;
     }
 
@@ -82,8 +83,12 @@ public final class CharacterConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Object convertToType(Class type, Object value) throws Exception {
-        return new Character(value.toString().charAt(0));
+    protected <T> T convertToType(Class<T> type, Object value) throws Exception {
+        if (Character.class.equals(type) || Character.TYPE.equals(type)) {
+            return type.cast(new Character(value.toString().charAt(0)));
+        }
+
+        throw conversionException(type, value);
     }
 
 }

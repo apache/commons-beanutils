@@ -150,4 +150,16 @@ public class ClassConverterTestCase extends TestCase {
         }
     }
 
+    /**
+     * Tries a conversion to an unsupported target type.
+     */
+    public void testUnsupportedTargetType() {
+        Converter converter = new ClassConverter();
+        try {
+            converter.convert(Integer.class, getClass().getName());
+            fail("Invalid target class not detected!");
+        } catch (ConversionException cex) {
+            // expected result
+        }
+    }
 }

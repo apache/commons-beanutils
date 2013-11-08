@@ -19,6 +19,8 @@ package org.apache.commons.beanutils.locale.converters;
 
 import java.math.BigInteger;
 
+import org.apache.commons.beanutils.ConversionException;
+
 /**
  * Test Case for the BigIntegerLocaleConverter class.
  *
@@ -102,9 +104,9 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a BigInteger.
-        //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
+        //  **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
 
         // ------------- Construct with non-localized pattern ------------
@@ -259,7 +261,19 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     }
 
-
+    /**
+     * Tries to convert to an unsupported type. This tests behavior of the base
+     * class. All locale converters should react in the same way.
+     */
+    public void testUnsupportedType() {
+        converter = new BigIntegerLocaleConverter();
+        try {
+            converter.convert(getClass(), "test", null);
+            fail("Unsupported type not detected!");
+        } catch (ConversionException cex) {
+            // expected result
+        }
+    }
 
 }
 

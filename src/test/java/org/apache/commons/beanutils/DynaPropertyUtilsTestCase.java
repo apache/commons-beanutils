@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 
@@ -118,7 +118,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
-        List listIndexed = new ArrayList();
+        List<String> listIndexed = new ArrayList<String>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
@@ -126,19 +126,19 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long(321));
-        HashMap mapProperty = new HashMap();
+        HashMap<String, Object> mapProperty = new HashMap<String, Object>();
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
         bean.set("mapProperty", mapProperty);
-        HashMap mappedObjects = new HashMap();
+        HashMap<String, Object> mappedObjects = new HashMap<String, Object>();
         mappedObjects.put("First Key", "First Value");
         mappedObjects.put("Second Key", "Second Value");
         bean.set("mappedObjects", mappedObjects);
-        HashMap mappedProperty = new HashMap();
+        HashMap<String, Object> mappedProperty = new HashMap<String, Object>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        HashMap mappedIntProperty = new HashMap();
+        HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
         mappedIntProperty.put("One", new Integer(1));
         mappedIntProperty.put("Two", new Integer(2));
         bean.set("mappedIntProperty", mappedIntProperty);
@@ -188,7 +188,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", new Double(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
@@ -245,7 +245,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public void testDescribe() {
 
-        Map map = null;
+        Map<String, Object> map = null;
         try {
             map = PropertyUtils.describe(bean);
         } catch (Exception e) {
@@ -1278,9 +1278,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public void testGetSimpleIndexed() {
 
-        Object value = null;
         try {
-            value = PropertyUtils.getSimpleProperty(bean,
+            PropertyUtils.getSimpleProperty(bean,
                     "intIndexed[0]");
             fail("Should have thrown IllegalArgumentException");
         } catch (IllegalAccessException e) {
@@ -1355,9 +1354,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public void testGetSimpleNested() {
 
-        Object value = null;
         try {
-            value = PropertyUtils.getSimpleProperty(bean,
+            PropertyUtils.getSimpleProperty(bean,
                     "nested.stringProperty");
             fail("Should have thrown IllegaArgumentException");
         } catch (IllegalAccessException e) {

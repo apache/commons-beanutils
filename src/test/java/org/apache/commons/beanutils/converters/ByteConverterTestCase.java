@@ -70,7 +70,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         return new ByteConverter(defaultValue);
     }
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Byte.class;
     }
 
@@ -137,7 +137,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
      */
     public void testInvalidAmount() {
         Converter converter = makeConverter();
-        Class clazz = Byte.class;
+        Class<?> clazz = Byte.class;
 
         Long min         = new Long(Byte.MIN_VALUE);
         Long max         = new Long(Byte.MAX_VALUE);

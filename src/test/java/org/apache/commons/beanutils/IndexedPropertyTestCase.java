@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -52,9 +52,9 @@ public class IndexedPropertyTestCase extends TestCase {
     private PropertyUtilsBean propertyUtilsBean;
     private String[] testArray;
     private String[] newArray;
-    private List testList;
-    private List newList;
-    private ArrayList arrayList;
+    private List<String> testList;
+    private List<Object> newList;
+    private ArrayList<Object> arrayList;
 
     // ---------------------------------------------------------- Constructors
 
@@ -85,17 +85,17 @@ public class IndexedPropertyTestCase extends TestCase {
         testArray= new String[] {"array-0", "array-1", "array-2"};
         newArray = new String[]  {"newArray-0", "newArray-1", "newArray-2"};
 
-        testList = new ArrayList();
+        testList = new ArrayList<String>();
         testList.add("list-0");
         testList.add("list-1");
         testList.add("list-2");
 
-        newList = new ArrayList();
+        newList = new ArrayList<Object>();
         newList.add("newList-0");
         newList.add("newList-1");
         newList.add("newList-2");
 
-        arrayList = new ArrayList();
+        arrayList = new ArrayList<Object>();
         arrayList.add("arrayList-0");
         arrayList.add("arrayList-1");
         arrayList.add("arrayList-2");
@@ -511,7 +511,7 @@ public class IndexedPropertyTestCase extends TestCase {
             beanUtilsBean.setProperty(bean, "stringList", newList);
             Object value = bean.getStringList();
             assertEquals("Type is different", newList.getClass(), value.getClass());
-            List list  = (List)value;
+            List<?> list  = (List<?>)value;
             assertEquals("List size is different", newList.size(), list.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals("Element " + i + " is different", newList.get(i), list.get(i));
@@ -571,7 +571,7 @@ public class IndexedPropertyTestCase extends TestCase {
             beanUtilsBean.setProperty(bean, "arrayList", newList);
             Object value = bean.getArrayList();
             assertEquals("Type is different", newList.getClass(), value.getClass());
-            List list  = (List)value;
+            List<?> list  = (List<?>)value;
             assertEquals("List size is different", newList.size(), list.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals("Element " + i + " is different", newList.get(i), list.get(i));

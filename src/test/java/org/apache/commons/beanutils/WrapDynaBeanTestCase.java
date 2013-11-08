@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -101,7 +102,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         // Invalid getter
         try {
-            Object result = bean.get("invalidProperty");
+            bean.get("invalidProperty");
             fail("Invalid get should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
             // Expected result
@@ -141,7 +142,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         // Invalid getter
         try {
-            Object result = bean.get("invalidProperty", 0);
+            bean.get("invalidProperty", 0);
             fail("Invalid get should have thrown IllegalArgumentException");
         } catch (IllegalArgumentException t) {
             // Expected result

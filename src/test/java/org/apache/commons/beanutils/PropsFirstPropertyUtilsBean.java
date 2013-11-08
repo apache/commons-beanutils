@@ -16,9 +16,9 @@
  */
 package org.apache.commons.beanutils;
 
-import java.util.Map;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 /**
  * A PropertyUtilsBean which customises the behaviour of the
@@ -40,7 +40,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * be correctly handled.
      */
     @Override
-    protected Object getPropertyOfMapBean(Map bean, String propertyName)
+    protected Object getPropertyOfMapBean(Map<?, ?> bean, String propertyName)
     throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
@@ -60,7 +60,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * be correctly handled.
      */
     @Override
-    protected void setPropertyOfMapBean(Map bean, String propertyName, Object value)
+    protected void setPropertyOfMapBean(Map<String, Object> bean, String propertyName, Object value)
         throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {

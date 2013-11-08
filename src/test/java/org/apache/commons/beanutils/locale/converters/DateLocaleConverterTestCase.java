@@ -17,15 +17,14 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 import java.text.DateFormatSymbols;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Test Case for the DateLocaleConverter class.
@@ -239,9 +238,9 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Date.
-        //  **** SHOULD IMPLEMENT THIS BEHAVIOUR ****
+        //  **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
+        //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
 
 
         // ------------- Construct with non-localized pattern ------------

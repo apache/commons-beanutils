@@ -26,7 +26,7 @@ import java.util.Hashtable;
  * @version $Id$
  */
 
-public class ExtendMapBean extends Hashtable {
+public class ExtendMapBean extends Hashtable<Object, Object> {
 
     private String dbName = "[UNSET]";
 

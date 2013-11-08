@@ -71,7 +71,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Long.class;
     }
 

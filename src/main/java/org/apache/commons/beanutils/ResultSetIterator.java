@@ -33,7 +33,7 @@ import java.util.NoSuchElementException;
  * @version $Id$
  */
 
-public class ResultSetIterator implements DynaBean, Iterator {
+public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
 
     // ------------------------------------------------------------ Constructor
@@ -301,7 +301,7 @@ public class ResultSetIterator implements DynaBean, Iterator {
      *
      * @return advance to the new row and return this
      */
-    public Object next() {
+    public DynaBean next() {
 
         try {
             advance();

@@ -17,12 +17,13 @@
 
 package org.apache.commons.beanutils.converters;
 
-import junit.framework.TestSuite;
-import junit.framework.TestCase;
-
-import org.apache.commons.beanutils.Converter;
-
 import java.net.URL;
+
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.Converter;
 
 
 /**
@@ -63,7 +64,7 @@ public class URLConverterTestCase extends TestCase {
         return new URLConverter();
     }
 
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return URL.class;
     }
 
@@ -113,5 +114,16 @@ public class URLConverterTestCase extends TestCase {
         }
     }
 
+    /**
+     * Tests a conversion to an unsupported type.
+     */
+    public void testUnsupportedType() {
+        try {
+            converter.convert(Integer.class, "http://www.apache.org");
+            fail("Unsupported type could be converted!");
+        } catch (ConversionException cex) {
+            // expected result
+        }
+    }
 }
 

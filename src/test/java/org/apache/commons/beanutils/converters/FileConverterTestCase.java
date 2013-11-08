@@ -22,6 +22,7 @@ import java.io.File;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 
@@ -63,7 +64,7 @@ public class FileConverterTestCase extends TestCase {
         return new FileConverter();
     }
 
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return File.class;
     }
 
@@ -94,5 +95,16 @@ public class FileConverterTestCase extends TestCase {
         }
     }
 
+    /**
+     * Tries a conversion to an unsupported target type.
+     */
+    public void testUnsupportedTargetType() {
+        try {
+            converter.convert(Integer.class, "/tmp");
+            fail("Could convert to unsupported type!");
+        } catch (ConversionException cex) {
+            // expected result
+        }
+    }
 }
 

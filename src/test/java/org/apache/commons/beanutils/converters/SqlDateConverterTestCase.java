@@ -111,7 +111,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class getExpectedType() {
+    protected Class<?> getExpectedType() {
         return Date.class;
     }
 

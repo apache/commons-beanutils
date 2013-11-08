@@ -190,7 +190,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * should be called only once.</p>
      * @return An <code>Iterator</code> of {@link DynaBean} instances
      */
-    public Iterator iterator() {
+    public Iterator<DynaBean> iterator() {
 
         return (new ResultSetIterator(this));
 
@@ -236,7 +236,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @throws SQLException if the class cannot be loaded
      */
     @Override
-    protected Class loadClass(String className) throws SQLException {
+    protected Class<?> loadClass(String className) throws SQLException {
 
         try {
             return getClass().getClassLoader().loadClass(className);

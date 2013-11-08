@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +34,7 @@ import junit.framework.TestSuite;
  *
  * @version $Id$
  */
+@SuppressWarnings("deprecation")
 public class DynaBeanMapDecoratorTestCase extends TestCase {
 
     private static final DynaProperty stringProp = new DynaProperty("stringProp", String.class);
@@ -47,14 +49,14 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static String  stringVal = "somevalue";
     private static Integer intVal    = new Integer(5);
     private static Date    dateVal   = new Date();
-    private final Map     mapVal    = new HashMap();
+    private final Map<Object, Object>     mapVal    = new HashMap<Object, Object>();
 
     private final Object[] values = new Object[] {stringVal, null, intVal, dateVal, mapVal};
 
     private BasicDynaBean dynaBean;
-    private Map decoratedMap;
-    private Map modifiableMap;
-    private static final Map emptyMap = new DynaBeanMapDecorator(new BasicDynaBean(new BasicDynaClass()));
+    private Map<Object, Object> decoratedMap;
+    private Map<Object, Object> modifiableMap;
+    private static final Map<Object, Object> emptyMap = new DynaBeanMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
     // ---------------------------------------------------------- Constructors
 
@@ -163,18 +165,20 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test entrySet() method
      */
     public void testEntrySet() {
-        Set set = modifiableMap.entrySet();
+        Set<Map.Entry<Object, Object>> set = modifiableMap.entrySet();
 
         // Check the Set can't be modified
-        checkUnmodifiable("entrySet()", set);
+        Map<Object, Object> m = new HashMap<Object, Object>();
+        m.put("key", "value");
+        checkUnmodifiable("entrySet()", set, m.entrySet().iterator().next());
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        Iterator iterator = set.iterator();
-        List namesList = new ArrayList();
+        Iterator<Map.Entry<Object, Object>> iterator = set.iterator();
+        List<String> namesList = new ArrayList<String>();
         int i = 0;
         while (iterator.hasNext()) {
-            Map.Entry entry = (Map.Entry)iterator.next();
+            Map.Entry<Object, Object> entry = iterator.next();
             String name  = (String)entry.getKey();
             namesList.add(name);
             Object expectValue = decoratedMap.get(name);
@@ -216,10 +220,10 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test keySet() method
      */
     public void testKeySet() {
-        Set set = modifiableMap.keySet();
+        Set<Object> set = modifiableMap.keySet();
 
         // Check the Set can't be modified
-        checkUnmodifiable("keySet()", set);
+        checkUnmodifiable("keySet()", set, "xyz");
 
         assertEquals("keySet size", properties.length, set.size());
 
@@ -256,7 +260,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public void testPutAll() {
 
         String newValue = "ABC";
-        Map newMap = new HashMap();
+        Map<Object, Object> newMap = new HashMap<Object, Object>();
         newMap.put(stringProp.getName(), newValue);
 
         // Test read only
@@ -303,15 +307,15 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test values() method
      */
     public void testValues() {
-        Collection collection = modifiableMap.values();
+        Collection<Object> collection = modifiableMap.values();
 
         // Check the Collection can't be modified
-        checkUnmodifiable("values()", collection);
+        checkUnmodifiable("values()", collection, "xyz");
 
         assertEquals("values size", values.length, collection.size());
 
         // Collection should be ordered in same sequence as properties
-        Iterator iterator = collection.iterator();
+        Iterator<Object> iterator = collection.iterator();
         int i = 0;
         while (iterator.hasNext()) {
             assertEquals("values("+i+")", values[i], iterator.next());
@@ -322,20 +326,18 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     /**
      * Check that a Collection is not modifiable
      */
-    private void checkUnmodifiable(String desc, Collection collection) {
-        String testVal = "xyz";
-
+    private <E> void checkUnmodifiable(String desc, Collection<E> collection, E addElem) {
         // Check can't add()
         try {
-            collection.add(testVal);
+            collection.add(addElem);
             fail(desc + ".add()");
         } catch(UnsupportedOperationException ignore) {
             // expected result
         }
 
         // Check can't addAll()
-        List list = new ArrayList(1);
-        list.add(testVal);
+        List<E> list = new ArrayList<E>(1);
+        list.add(addElem);
         try {
             collection.addAll(list);
             fail(desc + ".addAll()");

@@ -51,8 +51,8 @@ public class ClassReloaderTestCase extends TestCase {
         ClassLoader sharedLoader = this.getClass().getClassLoader();
         ClassReloader componentLoader = new ClassReloader(sharedLoader);
 
-        Class sharedClass = DummyClass.class;
-        Class componentClass = componentLoader.reload(sharedClass);
+        Class<?> sharedClass = DummyClass.class;
+        Class<?> componentClass = componentLoader.reload(sharedClass);
 
         // the two Class objects contain the same bytecode, but are not equal
         assertTrue(sharedClass != componentClass);
