@@ -36,6 +36,7 @@
  *     <li>2.1 <a href="#standard.background">Background</a></li>
  *     <li>2.2 <a href="#standard.basic">Basic Property Access</a></li>
  *     <li>2.3 <a href="#standard.nested">Nested Property Access</a></li>
+ *     <li>2.4 <a href="#standard.customize">Customizing Introspection</a></li>
  *     </ul>
  * </li>
  * <li>3. <a href="#dynamic">Dynamic Beans (DynaBeans)</a>
@@ -396,6 +397,40 @@
  *     String city = (String) PropertyUtils.getProperty(employee,
  *       "subordinate[3].address(home).city");
  * </pre>
+ *
+ * <a name="standard.customize"></a>
+ * <h2>2.4 Customizing Introspection</h2>
+ *
+ * <p>As was pointed out, BeanUtils relies on conventions defined by the
+ * <em>JavaBeans</em> specification to determine the properties available for
+ * a specific bean class. Thus all classes conforming to these conventions can
+ * be used out of the box.</p>
+ *
+ * <p>Sometimes an application has to deal with classes using different
+ * conventions. For instance, fluent APIs allowing method chaining are not
+ * compliant to the <em>JavaBeans</em> specification because here set methods
+ * have non-void return values. From version 1.9.0 onwards, BeanUtils supports
+ * customization of its introspection mechanism. This allows an application
+ * to extend or modify the default discovery of bean properties.</p>
+ *
+ * <p>The key to this extension mechanism is the {@link org.apache.commons.beanutils.BeanIntrospector}
+ * interface. The purpose of an object implementing this interface is to
+ * process a specific target class and create corresponding
+ * <code>PropertyDescriptor</code> objects for the properties it detects.
+ * Per default, BeanUtils uses a {@link org.apache.commons.beanutils.DefaultBeanIntrospector}
+ * object which detects properties compatible with the <em>JavaBeans</em>
+ * specification.</p>
+ *
+ * <p>In order to extend the property discovery mechanism, <code>PropertyUtils</code>
+ * offers the {@link org.apache.commons.beanutils.PropertyUtils#addBeanIntrospector(BeanIntrospector)}
+ * method. Here a custom <code>BeanIntrospector</code> implementation can be
+ * passed in. During introspection of a class, this custom introspector is
+ * then called, and it can add the properties it has detected to the total
+ * result. As an example of such a custom <code>BeanIntrospector</code>
+ * implementation, BeanUtils ships with the {@link org.apache.commons.beanutils.FluentPropertyBeanIntrospector}
+ * class. This implementation can detect properties whose set methods have a
+ * non-void return type - thus enabling support for typical properties in a
+ * fluent API.</p>
  *
  * <a name="dynamic"></a>
  * <h1>3. Dynamic Beans (DynaBeans)</h1>
