@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.8.3
+                               Version 1.9.0
                                Release Notes
 
 INTRODUCTION:
@@ -28,6 +28,123 @@ BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
 o http://commons.apache.org/beanutils/
+
+Release 1.9.0 contains some bug fixes and improvements that have accumulated
+after the 1.8.3 release. The most obvious change is that the new version now
+requires JDK 1.5 or higher, and that language features introduced with Java 5
+(mainly generics) are used. A new feature has been introduced, too: the support
+for customizing bean introspection.
+
+Compatibility with 1.8.3
+========================
+Adding generics to the BeanUtils API has been done in a backwards compatible
+way. This means that after type erasure the resulting classes look the same as
+in the previous version. A drawback of this approach is that sometimes it is
+not possible to use the logically correct type parameters because then
+backwards compatibility would be broken. One example is the BeanMap class: The
+class is now a Map<Object, Object> while its keys actually are strings.
+However, implementing Map<String, Object> would change the signatures of some
+methods in an incompatible way. More details about limitations of the
+generification can be found at
+https://issues.apache.org/jira/browse/BEANUTILS-452
+
+One exception from the compatibility rule is the ResultSetIterator class which
+now implements the Iterator<DynaBean> interface. This causes a change in the
+return value of its next() method. ResultSetIterator is used internally as the
+iterator implementation within ResultSetDynaClass (it is probably a mistake
+it is public). So chances are minimal that this change affects existing code.
+Except for this change on ResultSetIterator Commons BeanUtils 1.9.0 is fully
+binary compatible with the previous version 1.8.3.
+
+Changes on Converters
+=====================
+The convert() method in the Converter interface now uses a type parameter in
+the following way:
+
+    <T> T convert(Class<T> type, Object value);
+
+This makes it possible to access the converter's result in a type-safe way.
+Applying generics in this way revealed some inconsistencies in the Converter
+implementations. There were situations in which converters could return a
+result object of a different type as was requested. This was not a problem
+before because the result type was just Object. Now the compiler complains if
+a converter's result is not compatible with the desired target type.
+
+Because of that Converter implementations have been made more strict. A
+converter now checks the passed in target type, and if it cannot handle it,
+throws a ConversionException. This prevents unexpected results and makes
+converters more reliable (it could be considered a bug that a converter returns
+a result object of a different data type as the passed in target type). In a
+typical scenario, when converters are accessed via ConvertUtils, this change
+should not cause any problems because the converters are only called for the
+data types they have been registered for. But if converters are used directly,
+they might now throw ConversionExceptions when they did not in a previous
+version.
+
+BUGFIXES in version 1.9.0
+=========================
+* [BEANUTILS-411]
+  BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested
+  property returns null.
+* [BEANUTILS-408]
+  MethodUtils.invokeMethod() throws NullPointerException when args==null.
+* [BEANUTILS-426]
+  ConstructorUtils.invokeConstructor(Class klass, Object arg) throws
+  NullPointerException when arg==null.
+* [BEANUTILS-380]
+  BeanMap methods should initialize the root cause of exceptions that are
+  thrown when running on JDK 1.4+.
+* [BEANUTILS-379]
+  Remove copied Collection classes.
+* [BEANUTILS-378]
+  BeanMap does not work in osgi (fixed by BEANUTILS-379).
+* [BEANUTILS-381]
+  MethodUtils getMatchingAccessibleMethod() does not correctly handle
+  inheritance and method overloading.
+
+New features in version 1.9.0
+=============================
+* [BEANUTILS-425]
+  Support customization of introspection mechanism.
+* [BEANUTILS-428]
+  Provide a BeanIntrospector implementation which supports properties in a
+  fluent API.
+
+Other changes in version 1.9.0
+==============================
+* [BEANUTILS-452]
+  Add generics.
+* [BEANUTILS-449]
+  LocaleConverters do not take the target type into account.
+* [BEANUTILS-448]
+  LocaleConverters do not check their default value.
+* [BEANUTILS-447]
+  LazyDynaList.toArray() is not conform to the contract defined by the
+  Collection interface.
+* [BEANUTILS-446]
+  Some of the converters ignore the passed in target type.
+* [BEANUTILS-445]
+  Converters can return an invalid result object if a default value is set.
+* [BEANUTILS-441]
+  Replace UnmodifiableSet.decorate with Collections.unModifiableSet.
+* [BEANUTILS-436]
+  Replace package.html with package-info.java.
+* [BEANUTILS-438]
+  Add @Deprecated and @Override Annotations.
+* [BEANUTILS-437]
+  Replace Date and Revision SVN keywords with Id.
+* [BEANUTILS-431]
+  Remove @author tags and move missing authors to pom.xml.
+* [BEANUTILS-432]
+  Switch to Java 1.5.
+* [BEANUTILS-429]
+  Delete trailing white spaces and white spaces on empty lines from all files.
+* [BEANUTILS-427]
+  Configure Checkstyle to check for trailing white spaces and white spaces on
+  empty lines.
+
+
+                        Release Notes for version 1.8.3
 
 Compatibility with 1.8.2
 ========================
