@@ -77,6 +77,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="britter" type="update" issue="BEANUTILS-432" >
          Switch to Java 1.5
       </action>
+      <action dev="oheger" type="add" issue="BEANUTILS-425" >
+         Support customization of introspection mechanism
+      </action>
       <action dev="britter" type="fix" issue="BEANUTILS-411" due-to="Marcus Zander">
          BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested property returns null
       </action>
