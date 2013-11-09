@@ -35,7 +35,6 @@ import java.util.Set;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.keyvalue.AbstractMapEntry;
-import org.apache.commons.collections.set.UnmodifiableSet;
 
 /**
  * An implementation of Map for JavaBeans which uses introspection to
@@ -498,12 +497,12 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @return BeanMap keys.  The Set returned by this method is not
      *        modifiable.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     // The set actually contains strings; however, because it cannot be
     // modified there is no danger in selling it as Set<Object>
     @Override
     public Set<Object> keySet() {
-        return UnmodifiableSet.decorate(readMethods.keySet());
+        return Collections.unmodifiableSet((Set) readMethods.keySet());
     }
 
     /**
