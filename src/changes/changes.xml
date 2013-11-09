@@ -59,6 +59,9 @@ The <action> type attribute can be add,update,fix,remove.
       <action dev="oheger" type="update" issue="BEANUTILS-445" >
          Converters can return an invalid result object if a default value is set
       </action>
+      <action dev="oheger" type="update" issue="BEANUTILS-441" due-to="Samir Kerroumi">
+         Replace UnmodifiableSet.decorate with Collections.unModifiableSet 
+      </action>
       <action dev="britter" type="update" issue="BEANUTILS-436" >
          Replace package.html with package-info.java
       </action>
