@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 /**
  * Test class for {@code FluentPropertyBeanIntrospector}.
  *
- * @version $Id: $
+ * @version $Id$
  */
 public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     /**

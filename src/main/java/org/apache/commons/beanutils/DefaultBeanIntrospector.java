@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * instance as its only {@code BeanIntrospector} object.
  * </p>
  *
- * @version $Id: $
+ * @version $Id$
  * @since 1.9
  */
 public class DefaultBeanIntrospector implements BeanIntrospector {

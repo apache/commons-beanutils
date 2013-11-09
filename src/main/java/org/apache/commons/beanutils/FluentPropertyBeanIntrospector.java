@@ -72,7 +72,7 @@ import org.apache.commons.logging.LogFactory;
  * method.
  * </p>
  *
- * @version $Id: $
+ * @version $Id$
  * @since 1.9
  */
 public class FluentPropertyBeanIntrospector implements BeanIntrospector {
