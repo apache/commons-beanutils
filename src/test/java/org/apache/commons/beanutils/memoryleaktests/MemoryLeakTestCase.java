@@ -421,7 +421,7 @@ public class MemoryLeakTestCase extends TestCase {
         // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
         LocaleConvertUtils.register(new IntegerLocaleConverter(Locale.US, false), beanClass, Locale.US);
-        assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), beanClass, Locale.US, "#,###"));
+        assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
 
         // this should make the reference go away.
         loader    = null;

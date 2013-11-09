@@ -308,8 +308,6 @@
                   -  so we will just exclude it until someone comes up with a solution.
                 -->
                 <exclude>**/*MemoryTestCase.java</exclude>
-                <!-- Temporarily disabled long-running test case -->
-                <exclude>**/MemoryLeakTestCase.java</exclude>
               </excludes>
 
               <!-- Configure Logging -->
