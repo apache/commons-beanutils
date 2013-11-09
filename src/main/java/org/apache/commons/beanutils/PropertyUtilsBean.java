@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils;
 
 
-import java.beans.BeanInfo;
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -31,6 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.beanutils.expression.DefaultResolver;
 import org.apache.commons.beanutils.expression.Resolver;
@@ -115,14 +115,15 @@ public class PropertyUtilsBean {
      */
     private WeakFastHashMap<Class<?>, PropertyDescriptor[]> descriptorsCache = null;
     private WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache = null;
-    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
-    private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] {java.util.List.class};
 
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     /** Log instance */
     private final Log log = LogFactory.getLog(PropertyUtils.class);
+
+    /** The list with BeanIntrospector objects. */
+    private final List<BeanIntrospector> introspectors;
 
     // ---------------------------------------------------------- Constructors
 
@@ -132,6 +133,8 @@ public class PropertyUtilsBean {
         descriptorsCache.setFast(true);
         mappedDescriptorsCache = new WeakFastHashMap<Class<?>, FastHashMap>();
         mappedDescriptorsCache.setFast(true);
+        introspectors = new CopyOnWriteArrayList<BeanIntrospector>();
+        introspectors.add(DefaultBeanIntrospector.INSTANCE);
     }
 
 
@@ -174,6 +177,35 @@ public class PropertyUtilsBean {
         } else {
             this.resolver = resolver;
         }
+    }
+
+    /**
+     * Adds a <code>BeanIntrospector</code>. This object is invoked when the
+     * property descriptors of a class need to be obtained.
+     *
+     * @param introspector the <code>BeanIntrospector</code> to be added (must
+     *        not be <b>null</b>
+     * @throws IllegalArgumentException if the argument is <b>null</b>
+     * @since 1.9
+     */
+    public void addBeanIntrospector(BeanIntrospector introspector) {
+        if (introspector == null) {
+            throw new IllegalArgumentException(
+                    "BeanIntrospector must not be null!");
+        }
+        introspectors.add(introspector);
+    }
+
+    /**
+     * Removes the specified <code>BeanIntrospector</code>.
+     *
+     * @param introspector the <code>BeanIntrospector</code> to be removed
+     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and
+     *         could be removed, <b>false</b> otherwise
+     * @since 1.9
+     */
+    public boolean removeBeanIntrospector(BeanIntrospector introspector) {
+        return introspectors.remove(introspector);
     }
 
     /**
@@ -969,90 +1001,7 @@ public class PropertyUtilsBean {
             return (descriptors);
         }
 
-        // Introspect the bean and cache the generated descriptors
-        BeanInfo beanInfo = null;
-        try {
-            beanInfo = Introspector.getBeanInfo(beanClass);
-        } catch (IntrospectionException e) {
-            return (new PropertyDescriptor[0]);
-        }
-        descriptors = beanInfo.getPropertyDescriptors();
-        if (descriptors == null) {
-            descriptors = new PropertyDescriptor[0];
-        }
-
-        // ----------------- Workaround for Bug 28358 --------- START ------------------
-        //
-        // The following code fixes an issue where IndexedPropertyDescriptor behaves
-        // Differently in different versions of the JDK for 'indexed' properties which
-        // use java.util.List (rather than an array).
-        //
-        // If you have a Bean with the following getters/setters for an indexed property:
-        //
-        //     public List getFoo()
-        //     public Object getFoo(int index)
-        //     public void setFoo(List foo)
-        //     public void setFoo(int index, Object foo)
-        //
-        // then the IndexedPropertyDescriptor's getReadMethod() and getWriteMethod()
-        // behave as follows:
-        //
-        //     JDK 1.3.1_04: returns valid Method objects from these methods.
-        //     JDK 1.4.2_05: returns null from these methods.
-        //
-        for (int i = 0; i < descriptors.length; i++) {
-            if (descriptors[i] instanceof IndexedPropertyDescriptor) {
-                IndexedPropertyDescriptor descriptor =  (IndexedPropertyDescriptor)descriptors[i];
-                String propName = descriptor.getName().substring(0, 1).toUpperCase() +
-                                  descriptor.getName().substring(1);
-
-                if (descriptor.getReadMethod() == null) {
-                    String methodName = descriptor.getIndexedReadMethod() != null
-                                        ? descriptor.getIndexedReadMethod().getName()
-                                        : "get" + propName;
-                    Method readMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
-                                                            methodName,
-                                                            EMPTY_CLASS_PARAMETERS);
-                    if (readMethod != null) {
-                        try {
-                            descriptor.setReadMethod(readMethod);
-                        } catch(Exception e) {
-                            log.error("Error setting indexed property read method", e);
-                        }
-                    }
-                }
-                if (descriptor.getWriteMethod() == null) {
-                    String methodName = descriptor.getIndexedWriteMethod() != null
-                                      ? descriptor.getIndexedWriteMethod().getName()
-                                      : "set" + propName;
-                    Method writeMethod = MethodUtils.getMatchingAccessibleMethod(beanClass,
-                                                            methodName,
-                                                            LIST_CLASS_PARAMETER);
-                    if (writeMethod == null) {
-                        Method[] methods = beanClass.getMethods();
-                        for (int j = 0; j < methods.length; j++) {
-                            if (methods[j].getName().equals(methodName)) {
-                                Class<?>[] parameterTypes = methods[j].getParameterTypes();
-                                if (parameterTypes.length == 1 &&
-                                    List.class.isAssignableFrom(parameterTypes[0])) {
-                                    writeMethod = methods[j];
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (writeMethod != null) {
-                        try {
-                            descriptor.setWriteMethod(writeMethod);
-                        } catch(Exception e) {
-                            log.error("Error setting indexed property write method", e);
-                        }
-                    }
-                }
-            }
-        }
-        // ----------------- Workaround for Bug 28358 ---------- END -------------------
-
+        descriptors = fetchPropertyDescriptors(beanClass);
         descriptorsCache.put(beanClass, descriptors);
         return (descriptors);
 
@@ -2245,6 +2194,27 @@ public class PropertyUtilsBean {
             throw e;
 
         }
+    }
+
+    /**
+     * Performs introspection on the specified class. This method invokes all {@code BeanIntrospector} objects that were
+     * added to this instance.
+     *
+     * @param beanClass the class to be inspected
+     * @return an array with all property descriptors found
+     */
+    private PropertyDescriptor[] fetchPropertyDescriptors(Class<?> beanClass) {
+        DefaultIntrospectionContext ictx = new DefaultIntrospectionContext(beanClass);
+
+        for (BeanIntrospector bi : introspectors) {
+            try {
+                bi.introspect(ictx);
+            } catch (IntrospectionException iex) {
+                log.error("Exception during introspection", iex);
+            }
+        }
+
+        return ictx.getPropertyDescriptors();
     }
 
     /**

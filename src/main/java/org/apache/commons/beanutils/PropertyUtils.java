@@ -155,6 +155,31 @@ public class PropertyUtils {
 
     }
 
+    /**
+     * Adds a <code>BeanIntrospector</code>. This object is invoked when the
+     * property descriptors of a class need to be obtained.
+     *
+     * @param introspector the <code>BeanIntrospector</code> to be added (must
+     *        not be <b>null</b>
+     * @throws IllegalArgumentException if the argument is <b>null</b>
+     * @since 1.9
+     */
+    public static void addBeanIntrospector(BeanIntrospector introspector) {
+        PropertyUtilsBean.getInstance().addBeanIntrospector(introspector);
+    }
+
+    /**
+     * Removes the specified <code>BeanIntrospector</code>.
+     *
+     * @param introspector the <code>BeanIntrospector</code> to be removed
+     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and
+     *         could be removed, <b>false</b> otherwise
+     * @since 1.9
+     */
+    public static boolean removeBeanIntrospector(BeanIntrospector introspector) {
+        return PropertyUtilsBean.getInstance().removeBeanIntrospector(
+                introspector);
+    }
 
     /**
      * <p>Copy property values from the "origin" bean to the "destination" bean

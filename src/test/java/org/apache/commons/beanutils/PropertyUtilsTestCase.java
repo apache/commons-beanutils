@@ -19,14 +19,17 @@
 package org.apache.commons.beanutils;
 
 
+import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -4436,6 +4439,106 @@ public class PropertyUtilsTestCase extends TestCase {
             // assertEquals("Check error message", "argument type mismatch", cause.getMessage());
         } catch(Throwable t) {
             fail("Expected IllegalArgumentException, but threw " + t);
+        }
+    }
+
+    /**
+     * Tests whether the default introspection mechanism can be replaced by a
+     * custom BeanIntrospector.
+     */
+    public void testCustomIntrospection() {
+        PropertyDescriptor[] desc1 = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        PropertyDescriptor nameDescriptor = findNameDescriptor(desc1);
+        assertNotNull("No write method", nameDescriptor.getWriteMethod());
+
+        BeanIntrospector bi = new BeanIntrospector() {
+            // Only produce read-only property descriptors
+            public void introspect(IntrospectionContext icontext)
+                    throws IntrospectionException {
+                Set names = icontext.propertyNames();
+                PropertyDescriptor[] newDescs = new PropertyDescriptor[names
+                        .size()];
+                int idx = 0;
+                for (Iterator it = names.iterator(); it.hasNext(); idx++) {
+                    String propName = (String) it.next();
+                    PropertyDescriptor pd = icontext
+                            .getPropertyDescriptor(propName);
+                    newDescs[idx] = new PropertyDescriptor(pd.getName(),
+                            pd.getReadMethod(), null);
+                }
+                icontext.addPropertyDescriptors(newDescs);
+            }
+        };
+        PropertyUtils.clearDescriptors();
+        PropertyUtils.addBeanIntrospector(bi);
+        PropertyDescriptor[] desc2 = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertEquals("Different number of properties", desc1.length,
+                desc2.length);
+        nameDescriptor = findNameDescriptor(desc2);
+        assertNull("Got a write method", nameDescriptor.getWriteMethod());
+        PropertyUtils.removeBeanIntrospector(bi);
+    }
+
+    /**
+     * Finds the descriptor of the name property.
+     *
+     * @param desc the array with descriptors
+     * @return the found descriptor or null
+     */
+    private static PropertyDescriptor findNameDescriptor(
+            PropertyDescriptor[] desc) {
+        for (int i = 0; i < desc.length; i++) {
+            if (desc[i].getName().equals("name")) {
+                return desc[i];
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Tests whether exceptions during custom introspection are handled.
+     */
+    public void testCustomIntrospectionEx() {
+        BeanIntrospector bi = new BeanIntrospector() {
+            public void introspect(IntrospectionContext icontext)
+                    throws IntrospectionException {
+                throw new IntrospectionException("TestException");
+            }
+        };
+        PropertyUtils.clearDescriptors();
+        PropertyUtils.addBeanIntrospector(bi);
+        PropertyDescriptor[] desc = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertNotNull("Introspection did not work", findNameDescriptor(desc));
+        PropertyUtils.removeBeanIntrospector(bi);
+    }
+
+    /**
+     * Tests whether a BeanIntrospector can be removed.
+     */
+    public void testRemoveBeanIntrospector() {
+        PropertyUtils.clearDescriptors();
+        assertTrue(
+                "Wrong result",
+                PropertyUtils
+                        .removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
+        PropertyDescriptor[] desc = PropertyUtils
+                .getPropertyDescriptors(AlphaBean.class);
+        assertEquals("Got descriptors", 0, desc.length);
+        PropertyUtils.addBeanIntrospector(DefaultBeanIntrospector.INSTANCE);
+    }
+
+    /**
+     * Tries to add a null BeanIntrospector.
+     */
+    public void testAddBeanIntrospectorNull() {
+        try {
+            PropertyUtils.addBeanIntrospector(null);
+            fail("Could add null BeanIntrospector!");
+        } catch (IllegalArgumentException iex) {
+            // ok
         }
     }
 }
