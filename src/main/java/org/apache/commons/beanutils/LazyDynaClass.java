@@ -131,7 +131,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
      *
-     * @return <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * @return <code>true</code> if a <code>null</code> {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
      * <code>false</code> if a new {@link DynaProperty} should be created.
      */
@@ -143,7 +143,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Set whether this DynaClass should return a <code>null</code> from
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
-     * @param returnNull <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * @param returnNull <code>true</code> if a <code>null</code> {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
      * <code>false</code> if a new {@link DynaProperty} should be created.
      */
@@ -341,7 +341,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <code>returnNull</code> indicator).</p>
      *
      * @param name The name of the property to check
-     * @return <code>true<code> if there is a property of the
+     * @return <code>true</code> if there is a property of the
      * specified name, otherwise <code>false</code>
      * @exception IllegalArgumentException if no property name is specified
      */

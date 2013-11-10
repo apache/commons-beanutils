@@ -107,7 +107,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
+     * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if there is no property

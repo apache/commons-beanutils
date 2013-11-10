@@ -87,7 +87,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * // search the Collection
  * CollectionUtils.find( peopleCollection, predicate );
- * </pre><code>
+ * </pre></code>
  * </p>
  * <p>
  * This would search a <code>Collection</code> of person objects and return the first object whose

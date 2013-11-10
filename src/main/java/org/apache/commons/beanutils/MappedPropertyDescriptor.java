@@ -34,16 +34,14 @@ import java.lang.reflect.Modifier;
  * Such property values are typically stored in a Map collection.
  * For this class to work properly, a mapped value must have
  * getter and setter methods of the form
- * <p><code>get<strong>Property</strong>(String key)<code> and
- * <p><code>set<strong>Property</strong>(String key, Object value)<code>,
+ * <p><code>get<strong>Property</strong>(String key)</code> and
+ * <p><code>set<strong>Property</strong>(String key, Object value)</code>,
  * <p>where <code><strong>Property</strong></code> must be replaced
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
  *
  * @version $Id$
  */
-
-
 public class MappedPropertyDescriptor extends PropertyDescriptor {
     // ----------------------------------------------------- Instance Variables
 

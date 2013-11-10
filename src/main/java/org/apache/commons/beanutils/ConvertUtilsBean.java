@@ -618,7 +618,7 @@ public class ConvertUtilsBean {
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
      * @param defaultArraySize The size of the default array value for array converters
      * (N.B. This values is ignored if <code>throwException</code> is <code>true</code>).
-     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * Specifying a value less than zero causes a <code>null</code> value to be used for
      * the default.
      */
     public void register(boolean throwException, boolean defaultNull, int defaultArraySize) {

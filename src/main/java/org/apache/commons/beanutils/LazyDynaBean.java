@@ -253,7 +253,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
+     * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
      * @exception IllegalArgumentException if no property name is specified
@@ -875,7 +875,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * Indicates if there is a property with the specified name.
      * @param name The name of the property to check
-     * @return <code>true<code> if there is a property of the
+     * @return <code>true</code> if there is a property of the
      * specified name, otherwise <code>false</code>
      */
     protected boolean isDynaProperty(String name) {
@@ -899,7 +899,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param dest Destination class
      * @param source Source class
-     * @return <code>true<code> if the source class is assignable to the
+     * @return <code>true</code> if the source class is assignable to the
      * destination class, otherwise <code>false</code>
      */
     protected boolean isAssignable(Class<?> dest, Class<?> source) {

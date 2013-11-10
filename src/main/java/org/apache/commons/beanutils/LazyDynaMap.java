@@ -434,7 +434,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
      *
-     * @return <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * @return <code>true</code> if a <code>null</code> {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
      * <code>false</code> if a new {@link DynaProperty} should be created.
      */
@@ -447,7 +447,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * the <code>getDynaProperty(name)</code> method if the property
      * doesn't exist.
      *
-     * @param returnNull <code>true<code> if a <code>null</code> {@link DynaProperty}
+     * @param returnNull <code>true</code> if a <code>null</code> {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
      * <code>false</code> if a new {@link DynaProperty} should be created.
      */
