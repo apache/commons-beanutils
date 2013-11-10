@@ -178,24 +178,6 @@
  * <ul>
  * <li><a href="http://commons.apache.org/downloads/download_logging.cgi">
  * Logging Package (Apache Commons)</a>, version 1.0 or later</li>
- * </ul>
- *
- * <p>Furthermore, if any of the following <em>commons-beanutils</em> classes are used:
- * </p>
- * <ul>
- * <li> {@link org.apache.commons.beanutils.BeanMap org.apache.commons.beanutils.BeanMap}</li>
- * <li> {@link org.apache.commons.beanutils.BeanPredicate org.apache.commons.beanutils.BeanPredicate}</li>
- * <li> {@link org.apache.commons.beanutils.BeanPropertyValueChangeClosure
- *      org.apache.commons.beanutils.BeanPropertyValueChangeClosure}</li>
- * <li> {@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
- *      org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}</li>
- * <li> {@link org.apache.commons.beanutils.BeanToPropertyValueTransformer
- *      org.apache.commons.beanutils.BeanToPropertyValueTransformer}</li>
- * </ul>
- * <p>
- * then the following packages must also be available in the application's class path at runtime:
- * </p>
- * <ul>
  * <li><a href="http://commons.apache.org/downloads/download_collections.cgi">
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
