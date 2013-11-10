@@ -43,10 +43,10 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * property values occur.
  * </p>
  *
- * @param <B> the type of beans to be compared by this {@code Comparator}
+ * @param <T> the type of beans to be compared by this {@code Comparator}
  * @version $Id$
  */
-public class BeanComparator<B> implements Comparator<B>, Serializable {
+public class BeanComparator<T> implements Comparator<T>, Serializable {
 
     private String property;
     private final Comparator<?> comparator;
@@ -152,7 +152,7 @@ public class BeanComparator<B> implements Comparator<B>, Serializable {
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
-    public int compare( B o1, B o2 ) {
+    public int compare( T o1, T o2 ) {
 
         if ( property == null ) {
             // compare the actual objects
