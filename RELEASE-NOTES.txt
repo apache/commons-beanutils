@@ -51,10 +51,19 @@ https://issues.apache.org/jira/browse/BEANUTILS-452
 One exception from the compatibility rule is the ResultSetIterator class which
 now implements the Iterator<DynaBean> interface. This causes a change in the
 return value of its next() method. ResultSetIterator is used internally as the
-iterator implementation within ResultSetDynaClass (it is probably a mistake
+iterator implementation within ResultSetDynaClass (it is probably a mistake that
 it is public). So chances are minimal that this change affects existing code.
-Except for this change on ResultSetIterator Commons BeanUtils 1.9.0 is fully
-binary compatible with the previous version 1.8.3.
+
+Another change which may affect compatibility is [BEANUTILS-379] (details can
+be found at https://issues.apache.org/jira/browse/BEANUTILS-379). Older
+versions of BeanUtils contained some classes that were copied from Commons
+Collections. These classes have now been removed, and a dependency to Commons
+Collections has been added; the collections jar now has to be contained in the
+classpath, too.
+
+Except for the change on ResultSetIterator and the additional dependency to
+Commons Collections, Commons BeanUtils 1.9.0 is fully binary compatible with
+the previous version 1.8.3.
 
 Changes on Converters
 =====================
@@ -97,7 +106,7 @@ BUGFIXES in version 1.9.0
 * [BEANUTILS-379]
   Remove copied Collection classes.
 * [BEANUTILS-378]
-  BeanMap does not work in osgi (fixed by BEANUTILS-379).
+  BeanMap does not work in osgi (fixed by BEANUTILS-378).
 * [BEANUTILS-381]
   MethodUtils getMatchingAccessibleMethod() does not correctly handle
   inheritance and method overloading.
