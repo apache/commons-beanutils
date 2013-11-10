@@ -358,6 +358,7 @@ public class ConvertUtils {
      * useful for concrete converter implementations which typically treat
      * primitive types like their corresponding wrapper types.
      *
+     * @param <T> The type to be checked.
      * @param type The class type to check.
      * @return The converted type.
      * @since 1.9

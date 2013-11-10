@@ -291,6 +291,7 @@ public class ConstructorUtils {
 
     /**
      * Returns a constructor given a class and signature.
+     * @param <T> the type to be constructed
      * @param klass the class to be constructed
      * @param parameterTypes the parameter array
      * @return null if matching accessible constructor can not be found

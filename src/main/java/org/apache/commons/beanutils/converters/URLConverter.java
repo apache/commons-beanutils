@@ -64,6 +64,7 @@ public final class URLConverter extends AbstractConverter {
     /**
      * <p>Convert a java.net.URL or object into a String.</p>
      *
+     * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.

@@ -64,7 +64,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      *
      * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map<Class<? extends Object>, Transformer> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
+    private static final Map<Class<? extends Object>, Transformer> typeTransformers =
+            Collections.unmodifiableMap(createTypeTransformers());
 
     /**
      * This HashMap has been made unmodifiable to prevent issues when
@@ -126,7 +127,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     };
 
     private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
-        Map<Class<? extends Object>, Transformer> defaultTransformers = new HashMap<Class<? extends Object>, Transformer>();
+        Map<Class<? extends Object>, Transformer> defaultTransformers =
+                new HashMap<Class<? extends Object>, Transformer>();
         defaultTransformers.put(
             Boolean.TYPE,
             new Transformer() {

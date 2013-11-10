@@ -16,12 +16,10 @@
  */
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.ConversionException;
-
 /**
- * {@link org.apache.commons.beanutils.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils.Converter} implementation that handles conversion
  * to and from <b>Boolean</b> objects.
- * {@link org.apache.commons.beanutils.Converter} implementaion that
+ * {@link org.apache.commons.beanutils.Converter} implementation that
  * handles conversion to and from <b>java.lang.Boolean</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
@@ -58,7 +56,8 @@ public final class BooleanConverter extends AbstractConverter {
 
 
     /**
-     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a {@link ConversionException}
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a
+     * {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      */
@@ -87,7 +86,8 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a {@link ConversionException}
+     * Create a {@link org.apache.commons.beanutils.Converter} that will throw a
+     * {@link org.apache.commons.beanutils.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      * <p>
@@ -186,6 +186,7 @@ public final class BooleanConverter extends AbstractConverter {
      * Convert the specified input object into an output object of the
      * specified type.
      *
+     * @param <T> Target type of the conversion.
      * @param type is the type to which this value should be converted. In the
      *  case of this BooleanConverter class, this value is ignored.
      *

@@ -50,7 +50,8 @@ package org.apache.commons.beanutils;
  *    <code>DynaBeanPropertyMapDecorator</code> with the <b><i>read only</i></b>
  *    attribute set to <code>false</code>:</p>
  *
- * <ul><li><code>Map&lt;String, Object&gt; fooMap = new DynaBeanPropertyMapDecorator(fooDynaBean, false);</code></li></ul>
+ * <ul><li><code>Map&lt;String, Object&gt; fooMap =
+ *   new DynaBeanPropertyMapDecorator(fooDynaBean, false);</code></li></ul>
  *
  * <h3>Limitations</h3>
  * <p>In this implementation the <code>entrySet()</code>, <code>keySet()</code>

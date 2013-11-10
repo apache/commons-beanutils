@@ -469,7 +469,6 @@ public class ConvertUtilsBean {
      * Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.
      *
-     * @param <T> The desired target type of the conversion
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value

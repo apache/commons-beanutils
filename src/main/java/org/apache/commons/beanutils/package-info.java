@@ -185,9 +185,12 @@
  * <ul>
  * <li> {@link org.apache.commons.beanutils.BeanMap org.apache.commons.beanutils.BeanMap}</li>
  * <li> {@link org.apache.commons.beanutils.BeanPredicate org.apache.commons.beanutils.BeanPredicate}</li>
- * <li> {@link org.apache.commons.beanutils.BeanPropertyValueChangeClosure org.apache.commons.beanutils.BeanPropertyValueChangeClosure}</li>
- * <li> {@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}</li>
- * <li> {@link org.apache.commons.beanutils.BeanToPropertyValueTransformer org.apache.commons.beanutils.BeanToPropertyValueTransformer}</li>
+ * <li> {@link org.apache.commons.beanutils.BeanPropertyValueChangeClosure
+ *      org.apache.commons.beanutils.BeanPropertyValueChangeClosure}</li>
+ * <li> {@link org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate
+ *      org.apache.commons.beanutils.BeanPropertyValueEqualsPredicate}</li>
+ * <li> {@link org.apache.commons.beanutils.BeanToPropertyValueTransformer
+ *      org.apache.commons.beanutils.BeanToPropertyValueTransformer}</li>
  * </ul>
  * <p>
  * then the following packages must also be available in the application's class path at runtime:
@@ -706,13 +709,14 @@
  *     dynaBean.set("address", 2, addressLine3);     // indexed
  * </pre>
  *
- * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <i>light wieght</i> <code>DynaBean</code>
- *    facade to a <code>Map</code> with all the usual <i>lazy</i> features. Its <i>light weight</i> because it doesn't
- *    have an associated <code>DynaClass</code> containing all the properties. In fact it actually implements
- *    the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>) and derives all the <i>DynaClass</i>
- *    information from the actual contents of the <code>Map</code>. A <code>LazyDynaMap</code> can be created around an
- *    existing <code>Map</code> or can instantiate its own <code>Map</code>. After any <code>DynaBean</code>
- *    processing has finished the <code>Map</code> can be retrieved and the DynaBean <i>facade</i> discarded.</p>
+ * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <i>light weight</i>
+ *    <code>DynaBean</code> facade to a <code>Map</code> with all the usual <i>lazy</i> features. Its
+ *    <i>light weight</i> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
+ *    In fact it actually implements the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>)
+ *    and derives all the <i>DynaClass</i> information from the actual contents of the <code>Map</code>. A
+ *    <code>LazyDynaMap</code> can be created around an existing <code>Map</code> or can instantiate its own
+ *    <code>Map</code>. After any <code>DynaBean</code> processing has finished the <code>Map</code> can be retrieved
+ *    and the DynaBean <i>facade</i> discarded.</p>
  *
  * <p>If you need a new <code>Map</code> then to use....</p>
  *

@@ -223,6 +223,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * Convert the input object into a Number object of the
      * specified type.
      *
+     * @param <T> Target type of the conversion.
      * @param targetType Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.

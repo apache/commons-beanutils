@@ -79,6 +79,7 @@ public final class StringConverter extends AbstractConverter {
      * Convert the specified input object into an output object of the
      * specified type.
      *
+     * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.

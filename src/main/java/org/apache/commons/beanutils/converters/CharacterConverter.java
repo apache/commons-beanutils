@@ -76,6 +76,7 @@ public final class CharacterConverter extends AbstractConverter {
     /**
      * <p>Convert the input object into a java.lang.Character.</p>
      *
+     * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.

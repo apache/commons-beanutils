@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.Converter;
 
 /**
- * Generic {@link Converter} implementaion that handles conversion
+ * Generic {@link Converter} implementation that handles conversion
  * to and from <b>array</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
@@ -122,7 +122,6 @@ import org.apache.commons.beanutils.Converter;
  *    int[][] result = (int[][])matrixConverter.convert(int[][].class, matrixString);
  * </pre>
  *
- * @param <D> the default type of this array converter
  * @version $Id$
  * @since 1.8.0
  */
@@ -275,6 +274,7 @@ public class ArrayConverter extends AbstractConverter {
     /**
      * Handles conversion to an array of the specified type.
      *
+     * @param <T> Target type of the conversion.
      * @param type The type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.

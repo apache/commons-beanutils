@@ -202,6 +202,7 @@ public abstract class AbstractConverter implements Converter {
      * Typical implementations will provide a minimum of
      * <code>String --> type</code> conversion.
      *
+     * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
@@ -247,6 +248,7 @@ public abstract class AbstractConverter implements Converter {
      * If a default value has been specified then it is returned
      * otherwise a ConversionException is thrown.
      *
+     * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted
      * @param cause The exception thrown by the <code>convert</code> method
