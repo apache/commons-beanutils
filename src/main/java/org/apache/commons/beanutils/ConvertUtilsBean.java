@@ -610,7 +610,7 @@ public class ConvertUtilsBean {
      * Register the provided converters with the specified defaults.
      *
      * @param throwException <code>true</code> if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
+     * throw an exception when a conversion error occurs, otherwise
      * <code>false</code> if a default value should be used.
      * @param defaultNull <code>true</code>if the <i>standard</i> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})

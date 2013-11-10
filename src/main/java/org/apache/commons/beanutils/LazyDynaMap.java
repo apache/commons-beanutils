@@ -184,7 +184,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     /**
      * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code)
+     * <code>getName()</code> method of <code>java.lang.Class</code>)
      *
      * @return the name of the DynaClass
      */
