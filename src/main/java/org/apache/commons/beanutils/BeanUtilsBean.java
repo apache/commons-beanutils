@@ -410,7 +410,7 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type and store it
         if (index >= 0) {                    // Destination must be indexed
-            value = convert(value, type.getComponentType());
+            value = convertForCopy(value, type.getComponentType());
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
                                                  index, value);
@@ -430,7 +430,7 @@ public class BeanUtilsBean {
                     (e, "Cannot set " + propName);
             }
         } else {                             // Destination must be simple
-            value = convert(value, type);
+            value = convertForCopy(value, type);
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
             } catch (NoSuchMethodException e) {
@@ -1073,6 +1073,19 @@ public class BeanUtilsBean {
         } else {
             return value;
         }
+    }
+
+    /**
+     * Performs a type conversion of a property value before it is copied to a target
+     * bean. This method delegates to {@link #convert(Object, Class)}, but <b>null</b>
+     * values are not converted. This causes <b>null</b> values to be copied verbatim.
+     *
+     * @param value the value to be converted and copied
+     * @param type the target type of the conversion
+     * @return the converted value
+     */
+    private Object convertForCopy(Object value, Class<?> type) {
+        return (value != null) ? convert(value, type) : value;
     }
 
     /**
