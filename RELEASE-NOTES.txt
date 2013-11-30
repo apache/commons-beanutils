@@ -92,6 +92,10 @@ version.
 
 BUGFIXES in version 1.9.0
 =========================
+* [BEANUTILS-454]
+  BeanUtilsBean.copyProperties() no longer throws a ConversionException for
+  null properties of certain data types. This fixes a regression introduced in
+  version 1.8.0. The issue is related to [BEANUTILS-387].
 * [BEANUTILS-411]
   BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested
   property returns null.
