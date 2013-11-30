@@ -17,17 +17,17 @@
 
 package org.apache.commons.beanutils.locale.converters;
 
-import org.apache.commons.beanutils.ConversionException;
-import org.apache.commons.beanutils.locale.BaseLocaleConverter;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
-
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
-import java.text.DateFormatSymbols;
 import java.util.Locale;
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.locale.BaseLocaleConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**
@@ -339,7 +339,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     private String convertPattern(String pattern, String fromChars, String toChars) {
 
-        StringBuffer converted = new StringBuffer();
+        StringBuilder converted = new StringBuilder();
         boolean quoted = false;
 
         for (int i = 0; i < pattern.length(); ++i) {

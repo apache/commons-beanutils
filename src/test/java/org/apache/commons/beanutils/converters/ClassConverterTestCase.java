@@ -68,7 +68,7 @@ public class ClassConverterTestCase extends TestCase {
 
         assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
-        assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuffer("bar")));
+        assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuilder("bar")));
         assertEquals("Null Test",   null, converter.convert(String.class, null));
     }
 
@@ -80,7 +80,7 @@ public class ClassConverterTestCase extends TestCase {
 
         assertEquals("Class Test",        Integer.class, converter.convert(Class.class, Integer.class));
         assertEquals("String Test",       Integer.class, converter.convert(Class.class, "java.lang.Integer"));
-        assertEquals("StringBuffer Test", Integer.class, converter.convert(Class.class, new StringBuffer("java.lang.Integer")));
+        assertEquals("StringBuilder Test", Integer.class, converter.convert(Class.class, new StringBuilder("java.lang.Integer")));
 
         // Invalid Test
         try {

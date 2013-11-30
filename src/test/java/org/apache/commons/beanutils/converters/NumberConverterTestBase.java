@@ -366,7 +366,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         NumberConverter converter = makeConverter();
 
         // Other type --> String conversion
-        assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuffer("ABC")));
+        assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuilder("ABC")));
 
     }
 

@@ -637,7 +637,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
-            StringBuffer sb = new StringBuffer("  setProperty(");
+            StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
             sb.append(name);

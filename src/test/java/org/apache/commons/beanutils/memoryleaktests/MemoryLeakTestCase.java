@@ -507,7 +507,7 @@ public class MemoryLeakTestCase extends TestCase {
         String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
         //System.out.println("location: " + location);
 
-        StringBuffer newString = new StringBuffer();
+        StringBuilder newString = new StringBuilder();
         for (int i=0;i<location.length();i++) {
             if (location.charAt(i)=='\\') {
                 newString.append("/");

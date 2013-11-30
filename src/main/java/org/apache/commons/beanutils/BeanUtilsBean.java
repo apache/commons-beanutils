@@ -326,7 +326,7 @@ public class BeanUtilsBean {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
-            StringBuffer sb = new StringBuffer("  copyProperty(");
+            StringBuilder sb = new StringBuilder("  copyProperty(");
             sb.append(bean);
             sb.append(", ");
             sb.append(name);
@@ -860,7 +860,7 @@ public class BeanUtilsBean {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
-            StringBuffer sb = new StringBuffer("  setProperty(");
+            StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
             sb.append(name);

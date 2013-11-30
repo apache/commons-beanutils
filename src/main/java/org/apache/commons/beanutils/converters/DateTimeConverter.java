@@ -193,7 +193,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public void setPatterns(String[] patterns) {
         this.patterns = patterns;
         if (patterns != null && patterns.length > 1) {
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             for (int i = 0; i < patterns.length; i++) {
                 if (i > 0) {
                     buffer.append(", ");
@@ -577,7 +577,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(toString(getClass()));
         buffer.append("[UseDefault=");
         buffer.append(isUseDefault());
@@ -607,7 +607,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     private void logFormat(String action, DateFormat format) {
         if (log().isDebugEnabled()) {
-            StringBuffer buffer = new StringBuffer(45);
+            StringBuilder buffer = new StringBuilder(45);
             buffer.append("    ");
             buffer.append(action);
             buffer.append(" with Format");

@@ -17,10 +17,10 @@
 
 package org.apache.commons.beanutils.converters;
 
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.ConversionException;
-
 import junit.framework.TestCase;
+
+import org.apache.commons.beanutils.ConversionException;
+import org.apache.commons.beanutils.ConvertUtils;
 
 /**
  * Test conversions of String[]->boolean[] and String->boolean[].
@@ -82,7 +82,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
     public void testStandardStringConversion() {
         BooleanArrayConverter converter = new BooleanArrayConverter();
 
-        StringBuffer input = new StringBuffer();
+        StringBuilder input = new StringBuilder();
         boolean[] results;
 
         // string has {}
@@ -137,7 +137,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
 
         // string has only one element, quoted with '
         // Here we also pass an object of type String rather than the
-        // StringBuffer
+        // StringBuilder
         results = (boolean[]) converter.convert(null, "'yes'");
 
         assertNotNull(results);

@@ -250,7 +250,7 @@ public class DynaProperty implements Serializable {
     @Override
     public String toString() {
 
-        StringBuffer sb = new StringBuffer("DynaProperty[name=");
+        StringBuilder sb = new StringBuilder("DynaProperty[name=");
         sb.append(this.name);
         sb.append(",type=");
         sb.append(this.type);
