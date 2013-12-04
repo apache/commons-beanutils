@@ -330,4 +330,39 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertSame("Wrong DynaClass", clazz, bean.getDynaClass());
         checkSimplePropertyAccess();
     }
+
+    /**
+     * Tests whether caching works for WrapDynaClass objects.
+     */
+    public void testGetWrapDynaClassFromCache() {
+        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        assertSame("Instance not cached", clazz,
+                WrapDynaClass.createDynaClass(TestBean.class));
+    }
+
+    /**
+     * Tests whether the PropertyUtilsBean instance associated with a WrapDynaClass is
+     * taken into account when accessing an instance from the cache.
+     */
+    public void testGetWrapDynaClassFromCacheWithPropUtils() {
+        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        PropertyUtilsBean pu = new PropertyUtilsBean();
+        WrapDynaClass clazz2 = WrapDynaClass.createDynaClass(TestBean.class, pu);
+        assertNotSame("Got same instance from cache", clazz, clazz2);
+    }
+
+    /**
+     * Tests whether a custom PropertyUtilsBean instance can be used for introspection of
+     * bean properties.
+     */
+    public void testIntrospectionWithCustomPropUtils() {
+        PropertyUtilsBean pu = new PropertyUtilsBean();
+        pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
+        WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(
+                FluentIntrospectionTestBean.class, pu);
+        FluentIntrospectionTestBean obj = new FluentIntrospectionTestBean();
+        bean = new WrapDynaBean(obj, dynaClass);
+        bean.set("fluentProperty", "testvalue");
+        assertEquals("Property not set", "testvalue", obj.getStringProperty());
+    }
 }

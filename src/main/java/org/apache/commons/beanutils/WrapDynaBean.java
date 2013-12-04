@@ -132,7 +132,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         Object value = null;
         try {
-            value = PropertyUtils.getSimpleProperty(instance, name);
+            value = getPropertyUtils().getSimpleProperty(instance, name);
         } catch (InvocationTargetException ite) {
             Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException
@@ -168,7 +168,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         Object value = null;
         try {
-            value = PropertyUtils.getIndexedProperty(instance, name, index);
+            value = getPropertyUtils().getIndexedProperty(instance, name, index);
         } catch (IndexOutOfBoundsException e) {
             throw e;
         } catch (InvocationTargetException ite) {
@@ -203,7 +203,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         Object value = null;
         try {
-            value = PropertyUtils.getMappedProperty(instance, name, key);
+            value = getPropertyUtils().getMappedProperty(instance, name, key);
         } catch (InvocationTargetException ite) {
             Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException
@@ -271,7 +271,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     public void set(String name, Object value) {
 
         try {
-            PropertyUtils.setSimpleProperty(instance, name, value);
+            getPropertyUtils().setSimpleProperty(instance, name, value);
         } catch (InvocationTargetException ite) {
             Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException
@@ -305,7 +305,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     public void set(String name, int index, Object value) {
 
         try {
-            PropertyUtils.setIndexedProperty(instance, name, index, value);
+            getPropertyUtils().setIndexedProperty(instance, name, index, value);
         } catch (IndexOutOfBoundsException e) {
             throw e;
         } catch (InvocationTargetException ite) {
@@ -339,7 +339,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     public void set(String name, String key, Object value) {
 
         try {
-            PropertyUtils.setMappedProperty(instance, name, key, value);
+            getPropertyUtils().setMappedProperty(instance, name, key, value);
         } catch (InvocationTargetException ite) {
             Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException
@@ -391,5 +391,19 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
+    /**
+     * Returns the {@code PropertyUtilsBean} instance to be used for accessing properties.
+     * If available, this object is obtained from the associated {@code WrapDynaClass}.
+     *
+     * @return the associated {@code PropertyUtilsBean}
+     */
+    private PropertyUtilsBean getPropertyUtils() {
 
+        PropertyUtilsBean propUtils = null;
+        if (dynaClass != null) {
+            propUtils = dynaClass.getPropertyUtilsBean();
+        }
+        return (propUtils != null) ? propUtils : PropertyUtilsBean.getInstance();
+
+    }
 }

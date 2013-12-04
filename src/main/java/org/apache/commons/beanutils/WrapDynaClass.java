@@ -23,6 +23,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -59,11 +60,13 @@ public class WrapDynaClass implements DynaClass {
      * needed via calls to the <code>createDynaClass(Class)</code> method.
      *
      * @param beanClass JavaBean class to be introspected around
+     * @param propUtils the {@code PropertyUtilsBean} associated with this class
      */
-    private WrapDynaClass(Class<?> beanClass) {
+    private WrapDynaClass(Class<?> beanClass, PropertyUtilsBean propUtils) {
 
         this.beanClassRef = new SoftReference<Class<?>>(beanClass);
         this.beanClassName = beanClass.getName();
+        propertyUtilsBean = propUtils;
         introspect();
 
     }
@@ -80,6 +83,9 @@ public class WrapDynaClass implements DynaClass {
      * Reference to the JavaBean class represented by this WrapDynaClass.
      */
     private Reference<Class<?>> beanClassRef = null;
+
+    /** Stores the associated {@code PropertyUtilsBean} instance. */
+    private final PropertyUtilsBean propertyUtilsBean;
 
     /**
      * The JavaBean <code>Class</code> which is represented by this
@@ -122,18 +128,32 @@ public class WrapDynaClass implements DynaClass {
     // ------------------------------------------------------- Static Variables
 
 
-    private static final ContextClassLoaderLocal<Map<Object, Object>> CLASSLOADER_CACHE =
-        new ContextClassLoaderLocal<Map<Object, Object>>() {
+    private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
+        new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
-            protected Map<Object, Object> initialValue() {
-                return new WeakHashMap<Object, Object>();
+            protected Map<CacheKey, WrapDynaClass> initialValue() {
+                return new WeakHashMap<CacheKey, WrapDynaClass>();
         }
     };
 
     /**
-     * Get the wrap dyna classes cache
+     * Get the wrap dyna classes cache. Note: This method only exists to
+     * satisfy the deprecated {@code dynaClasses} hash map.
      */
+    @SuppressWarnings("unchecked")
     private static Map<Object, Object> getDynaClassesMap() {
+        @SuppressWarnings("rawtypes")
+        Map cache = CLASSLOADER_CACHE.get();
+        return cache;
+    }
+
+    /**
+     * Returns the cache for the already created class instances. For each
+     * combination of bean class and {@code PropertyUtilsBean} instance an
+     * entry is created in the cache.
+     * @return the cache for already created {@code WrapDynaClass} instances
+     */
+    private static Map<CacheKey, WrapDynaClass> getClassesCache() {
         return CLASSLOADER_CACHE.get();
     }
 
@@ -209,15 +229,24 @@ public class WrapDynaClass implements DynaClass {
         }
         @Override
         public Set<Object> keySet() {
-            return getDynaClassesMap().keySet();
+            // extract the classes from the key to stay backwards compatible
+            Set<Object> result = new HashSet<Object>();
+            for (CacheKey k : getClassesCache().keySet()) {
+                result.add(k.beanClass);
+            }
+            return result;
         }
         @Override
         public Object put(Object key, Object value) {
-            return getDynaClassesMap().put(key, value);
+            return getClassesCache().put(
+                    new CacheKey((Class<?>) key, PropertyUtilsBean.getInstance()),
+                    (WrapDynaClass) value);
         }
         @Override
         public void putAll(Map<? extends Object, ? extends Object> m) {
-            getDynaClassesMap().putAll(m);
+            for (Map.Entry<? extends Object, ? extends Object> e : m.entrySet()) {
+                put(e.getKey(), e.getValue());
+            }
         }
         @Override
         public Object remove(Object key) {
@@ -358,7 +387,7 @@ public class WrapDynaClass implements DynaClass {
      */
     public static void clear() {
 
-        getDynaClassesMap().clear();
+        getClassesCache().clear();
 
     }
 
@@ -372,19 +401,49 @@ public class WrapDynaClass implements DynaClass {
      */
     public static WrapDynaClass createDynaClass(Class<?> beanClass) {
 
-            WrapDynaClass dynaClass =
-                    (WrapDynaClass) getDynaClassesMap().get(beanClass);
-            if (dynaClass == null) {
-                dynaClass = new WrapDynaClass(beanClass);
-                getDynaClassesMap().put(beanClass, dynaClass);
-            }
-            return (dynaClass);
+        return createDynaClass(beanClass, null);
+
+    }
+
+
+    /**
+     * Create (if necessary) and return a new {@code WrapDynaClass} instance
+     * for the specified bean class using the given {@code PropertyUtilsBean}
+     * instance for introspection. Using this method a specially configured
+     * {@code PropertyUtilsBean} instance can be hooked into the introspection
+     * mechanism of the managed bean. The argument is optional; if no
+     * {@code PropertyUtilsBean} object is provided, the default instance is used.
+     * @param beanClass Bean class for which a WrapDynaClass is requested
+     * @param pu the optional {@code PropertyUtilsBean} to be used for introspection
+     * @return A new <i>Wrap</i> {@link DynaClass}
+     * @since 1.9
+     */
+    public static WrapDynaClass createDynaClass(Class<?> beanClass, PropertyUtilsBean pu) {
+
+        PropertyUtilsBean propUtils = (pu != null) ? pu : PropertyUtilsBean.getInstance();
+        CacheKey key = new CacheKey(beanClass, propUtils);
+        WrapDynaClass dynaClass = getClassesCache().get(key);
+        if (dynaClass == null) {
+            dynaClass = new WrapDynaClass(beanClass, propUtils);
+            getClassesCache().put(key, dynaClass);
+        }
+        return (dynaClass);
 
     }
 
 
     // ------------------------------------------------------ Protected Methods
 
+    /**
+     * Returns the {@code PropertyUtilsBean} instance associated with this class. This
+     * bean is used for introspection.
+     *
+     * @return the associated {@code PropertyUtilsBean} instance
+     * @since 1.9
+     */
+    protected PropertyUtilsBean getPropertyUtilsBean() {
+        return propertyUtilsBean;
+    }
 
     /**
      * Introspect our bean class to identify the supported properties.
@@ -394,7 +453,7 @@ public class WrapDynaClass implements DynaClass {
         // Look up the property descriptors for this bean class
         Class<?> beanClass = getBeanClass();
         PropertyDescriptor[] regulars =
-                PropertyUtils.getPropertyDescriptors(beanClass);
+                getPropertyUtilsBean().getPropertyDescriptors(beanClass);
         if (regulars == null) {
             regulars = new PropertyDescriptor[0];
         }
@@ -431,5 +490,49 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
+    /**
+     * A class representing the combined key for the cache of {@code WrapDynaClass}
+     * instances. A single key consists of a bean class and an instance of
+     * {@code PropertyUtilsBean}. Instances are immutable.
+     */
+    private static class CacheKey {
+        /** The bean class. */
+        private final Class<?> beanClass;
 
+        /** The instance of PropertyUtilsBean. */
+        private final PropertyUtilsBean propUtils;
+
+        /**
+         * Creates a new instance of {@code CacheKey}.
+         *
+         * @param beanCls the bean class
+         * @param pu the instance of {@code PropertyUtilsBean}
+         */
+        public CacheKey(Class<?> beanCls, PropertyUtilsBean pu) {
+            beanClass = beanCls;
+            propUtils = pu;
+        }
+
+        @Override
+        public int hashCode() {
+            int factor = 31;
+            int result = 17;
+            result = factor * beanClass.hashCode() + result;
+            result = factor * propUtils.hashCode() + result;
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof CacheKey)) {
+                return false;
+            }
+
+            CacheKey c = (CacheKey) obj;
+            return beanClass.equals(c.beanClass) && propUtils.equals(c.propUtils);
+        }
+    }
 }
