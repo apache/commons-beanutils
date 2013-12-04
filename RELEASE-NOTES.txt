@@ -122,6 +122,9 @@ New features in version 1.9.0
 * [BEANUTILS-428]
   Provide a BeanIntrospector implementation which supports properties in a
   fluent API.
+* [BEANUTILS-455]
+  WrapDynaBeans can now be configured to use a specific instance of
+  PropertyUtilsBean for introspection or property access.
 
 Other changes in version 1.9.0
 ==============================
