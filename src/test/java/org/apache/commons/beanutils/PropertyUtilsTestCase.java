@@ -219,6 +219,7 @@ public class PropertyUtilsTestCase extends TestCase {
         BasicDynaBean nestedDynaBean = new BasicDynaBean(dynaClass);
         nestedDynaBean.set("nestedBean", bean);
         bean.setNestedDynaBean(nestedDynaBean);
+        PropertyUtils.clearDescriptors();
     }
 
 
@@ -244,6 +245,7 @@ public class PropertyUtilsTestCase extends TestCase {
         beanPrivateSubclass = null;
         beanPublicSubclass = null;
 
+        PropertyUtils.resetBeanIntrospectors();
     }
 
 
@@ -4456,12 +4458,12 @@ public class PropertyUtilsTestCase extends TestCase {
             // Only produce read-only property descriptors
             public void introspect(IntrospectionContext icontext)
                     throws IntrospectionException {
-                Set names = icontext.propertyNames();
+                Set<String> names = icontext.propertyNames();
                 PropertyDescriptor[] newDescs = new PropertyDescriptor[names
                         .size()];
                 int idx = 0;
-                for (Iterator it = names.iterator(); it.hasNext(); idx++) {
-                    String propName = (String) it.next();
+                for (Iterator<String> it = names.iterator(); it.hasNext(); idx++) {
+                    String propName = it.next();
                     PropertyDescriptor pd = icontext
                             .getPropertyDescriptor(propName);
                     newDescs[idx] = new PropertyDescriptor(pd.getName(),
@@ -4519,7 +4521,6 @@ public class PropertyUtilsTestCase extends TestCase {
      * Tests whether a BeanIntrospector can be removed.
      */
     public void testRemoveBeanIntrospector() {
-        PropertyUtils.clearDescriptors();
         assertTrue(
                 "Wrong result",
                 PropertyUtils
@@ -4540,5 +4541,16 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch (IllegalArgumentException iex) {
             // ok
         }
+    }
+
+    /**
+     * Tests whether a reset of the registered BeanIntrospectors can be performed.
+     */
+    public void testResetBeanIntrospectors() {
+        assertTrue("Wrong result",
+                PropertyUtils.removeBeanIntrospector(DefaultBeanIntrospector.INSTANCE));
+        PropertyUtils.resetBeanIntrospectors();
+        PropertyDescriptor[] desc = PropertyUtils.getPropertyDescriptors(AlphaBean.class);
+        assertTrue("Got no descriptors", desc.length > 0);
     }
 }

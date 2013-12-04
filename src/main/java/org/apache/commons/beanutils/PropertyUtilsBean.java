@@ -134,7 +134,7 @@ public class PropertyUtilsBean {
         mappedDescriptorsCache = new WeakFastHashMap<Class<?>, FastHashMap>();
         mappedDescriptorsCache.setFast(true);
         introspectors = new CopyOnWriteArrayList<BeanIntrospector>();
-        introspectors.add(DefaultBeanIntrospector.INSTANCE);
+        resetBeanIntrospectors();
     }
 
 
@@ -177,6 +177,17 @@ public class PropertyUtilsBean {
         } else {
             this.resolver = resolver;
         }
+    }
+
+    /**
+     * Resets the {@link BeanIntrospector} objects registered at this instance. After this
+     * method was called, only the default {@code BeanIntrospector} is registered.
+     *
+     * @since 1.9
+     */
+    public final void resetBeanIntrospectors() {
+        introspectors.clear();
+        introspectors.add(DefaultBeanIntrospector.INSTANCE);
     }
 
     /**

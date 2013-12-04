@@ -156,6 +156,16 @@ public class PropertyUtils {
     }
 
     /**
+     * Resets the registered {@link BeanIntrospector} objects to the initial default
+     * state.
+     *
+     * @since 1.9
+     */
+    public static void resetBeanIntrospectors() {
+        PropertyUtilsBean.getInstance().resetBeanIntrospectors();
+    }
+
+    /**
      * Adds a <code>BeanIntrospector</code>. This object is invoked when the
      * property descriptors of a class need to be obtained.
      *
