@@ -58,12 +58,27 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     public WrapDynaBean(Object instance) {
 
-        super();
-        this.instance = instance;
-        this.dynaClass = (WrapDynaClass)getDynaClass();
+        this(instance, null);
 
     }
 
+    /**
+     * Creates a new instance of {@code WrapDynaBean}, associates it with the specified
+     * JavaBean instance, and initializes the bean's {@code DynaClass}. Using this
+     * constructor this {@code WrapDynaBean} instance can be assigned a class which has
+     * been configured externally. If no {@code WrapDynaClass} is provided, a new one is
+     * created using a standard mechanism.
+     *
+     * @param instance JavaBean instance to be wrapped
+     * @param cls the optional {@code WrapDynaClass} to be used for this bean
+     * @since 1.9
+     */
+    public WrapDynaBean(Object instance, WrapDynaClass cls) {
+
+        this.instance = instance;
+        this.dynaClass = (cls != null) ? cls : (WrapDynaClass) getDynaClass();
+
+    }
 
     // ---------------------------------------------------- Instance Variables
 

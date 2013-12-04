@@ -100,6 +100,16 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     public void testSimpleProperties() {
 
+        checkSimplePropertyAccess();
+
+    }
+
+
+    /**
+     * Helper method for testing whether basic access to properties works as
+     * expected.
+     */
+    private void checkSimplePropertyAccess() {
         // Invalid getter
         try {
             bean.get("invalidProperty");
@@ -132,7 +142,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         } catch (IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
-
     }
 
     /**
@@ -312,4 +321,13 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
+    /**
+     * Tests whether a WrapDynaClass can be provided when constructing a bean.
+     */
+    public void testInitWithDynaClass() {
+        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        bean = new WrapDynaBean(new TestBean(), clazz);
+        assertSame("Wrong DynaClass", clazz, bean.getDynaClass());
+        checkSimplePropertyAccess();
+    }
 }
