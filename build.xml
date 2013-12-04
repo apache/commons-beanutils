@@ -62,10 +62,10 @@
 
 
   <!-- Compiler source JDK version -->
-  <property name="compile.source"          value="1.3"/>
+  <property name="compile.source"          value="1.5"/>
 
   <!-- Compiler target JDK version -->
-  <property name="compile.target"          value="1.3"/>
+  <property name="compile.target"          value="1.5"/>
 
   <!-- Should Java compilations set the 'debug' compiler option? -->
   <property name="compile.debug"           value="true"/>
@@ -263,12 +263,14 @@
 
  <target name="test" depends="compile.tests"
    description="Run all unit test cases">
-      <junit printsummary="true" showoutput="true" fork="yes" haltonfailure="${test.failonerror}">
+      <junit printsummary="true" showoutput="true" fork="yes" haltonfailure="${test.failonerror}"
+        maxmemory="25m">
         <classpath refid="test.classpath"/>
         <batchtest>
           <fileset dir="${test.home}">
             <include name="**/*TestCase.java"/>
             <exclude name="**/*MemoryTestCase.java"/>
+            <exclude name="**/MemoryLeakTestCase.java"/>
           </fileset>
         </batchtest>
       </junit>
