@@ -16,7 +16,11 @@
  */
 package org.apache.commons.beanutils;
 
+import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -42,6 +46,9 @@ class BeanIntrospectionData {
     /** An array with property descriptors for the managed bean class. */
     private final PropertyDescriptor[] descriptors;
 
+    /** A map for remembering the write method names for properties. */
+    private final Map<String, String> writeMethodNames;
+
     /**
      * Creates a new instance of {@code BeanIntrospectionData} and initializes its
      * completely.
@@ -49,7 +56,19 @@ class BeanIntrospectionData {
      * @param descs the array with the descriptors of the available properties
      */
     public BeanIntrospectionData(PropertyDescriptor[] descs) {
+        this(descs, setUpWriteMethodNames(descs));
+    }
+
+    /**
+     * Creates a new instance of {@code BeanIntrospectionData} and allows setting the map
+     * with write method names. This constructor is mainly used for testing purposes.
+     *
+     * @param descs the array with the descriptors of the available properties
+     * @param writeMethNames the map with the names of write methods
+     */
+    BeanIntrospectionData(PropertyDescriptor[] descs, Map<String, String> writeMethNames) {
         descriptors = descs;
+        writeMethodNames = writeMethNames;
     }
 
     /**
@@ -75,5 +94,58 @@ class BeanIntrospectionData {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns the write method for the property determined by the given
+     * {@code PropertyDescriptor}. This information is normally available in the
+     * descriptor object itself. However, at least by the ORACLE implementation, the
+     * method is stored as a {@code SoftReference}. If this reference has been freed by
+     * the GC, it may be the case that the method cannot be obtained again. Then,
+     * additional information stored in this object is necessary to obtain the method
+     * again.
+     *
+     * @param beanCls the class of the affected bean
+     * @param desc the {@code PropertyDescriptor} of the desired property
+     * @return the write method for this property or <b>null</b> if there is none
+     */
+    public Method getWriteMethod(Class<?> beanCls, PropertyDescriptor desc) {
+        Method method = desc.getWriteMethod();
+        if (method == null) {
+            String methodName = writeMethodNames.get(desc.getName());
+            if (methodName != null) {
+                method = MethodUtils.getAccessibleMethod(beanCls, methodName,
+                        desc.getPropertyType());
+                if (method != null) {
+                    try {
+                        desc.setWriteMethod(method);
+                    } catch (IntrospectionException e) {
+                        // ignore, in this case the method is not cached
+                    }
+                }
+            }
+        }
+
+        return method;
+    }
+
+    /**
+     * Initializes the map with the names of the write methods for the supported
+     * properties. The method names - if defined - need to be stored separately because
+     * they may get lost when the GC claims soft references used by the
+     * {@code PropertyDescriptor} objects.
+     *
+     * @param descs the array with the descriptors of the available properties
+     * @return the map with the names of write methods for properties
+     */
+    private static Map<String, String> setUpWriteMethodNames(PropertyDescriptor[] descs) {
+        Map<String, String> methods = new HashMap<String, String>();
+        for (PropertyDescriptor pd : descs) {
+            Method method = pd.getWriteMethod();
+            if (method != null) {
+                methods.put(pd.getName(), method.getName());
+            }
+        }
+        return methods;
     }
 }
