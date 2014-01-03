@@ -113,7 +113,7 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private WeakFastHashMap<Class<?>, PropertyDescriptor[]> descriptorsCache = null;
+    private WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache = null;
     private WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache = null;
 
     /** An empty object array */
@@ -129,7 +129,7 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<Class<?>, PropertyDescriptor[]>();
+        descriptorsCache = new WeakFastHashMap<Class<?>, BeanIntrospectionData>();
         descriptorsCache.setFast(true);
         mappedDescriptorsCache = new WeakFastHashMap<Class<?>, FastHashMap>();
         mappedDescriptorsCache.setFast(true);
@@ -1000,24 +1000,9 @@ public class PropertyUtilsBean {
     public PropertyDescriptor[]
             getPropertyDescriptors(Class<?> beanClass) {
 
-        if (beanClass == null) {
-            throw new IllegalArgumentException("No bean class specified");
-        }
-
-        // Look up any cached descriptors for this bean class
-        PropertyDescriptor[] descriptors = null;
-        descriptors =
-                descriptorsCache.get(beanClass);
-        if (descriptors != null) {
-            return (descriptors);
-        }
-
-        descriptors = fetchPropertyDescriptors(beanClass);
-        descriptorsCache.put(beanClass, descriptors);
-        return (descriptors);
+        return getIntrospectionData(beanClass).getDescriptors();
 
     }
-
 
     /**
      * <p>Retrieve the property descriptors for the specified bean,
@@ -2208,13 +2193,37 @@ public class PropertyUtilsBean {
     }
 
     /**
+     * Obtains the {@code BeanIntrospectionData} object describing the specified bean
+     * class. This object is looked up in the internal cache. If necessary, introspection
+     * is performed now on the affected bean class, and the results object is created.
+     *
+     * @param beanClass the bean class in question
+     * @return the {@code BeanIntrospectionData} object for this class
+     * @throws IllegalArgumentException if the bean class is <b>null</b>
+     */
+    private BeanIntrospectionData getIntrospectionData(Class<?> beanClass) {
+        if (beanClass == null) {
+            throw new IllegalArgumentException("No bean class specified");
+        }
+
+        // Look up any cached information for this bean class
+        BeanIntrospectionData data = descriptorsCache.get(beanClass);
+        if (data == null) {
+            data = fetchIntrospectionData(beanClass);
+            descriptorsCache.put(beanClass, data);
+        }
+
+        return data;
+    }
+
+    /**
      * Performs introspection on the specified class. This method invokes all {@code BeanIntrospector} objects that were
      * added to this instance.
      *
      * @param beanClass the class to be inspected
-     * @return an array with all property descriptors found
+     * @return a data object with the results of introspection
      */
-    private PropertyDescriptor[] fetchPropertyDescriptors(Class<?> beanClass) {
+    private BeanIntrospectionData fetchIntrospectionData(Class<?> beanClass) {
         DefaultIntrospectionContext ictx = new DefaultIntrospectionContext(beanClass);
 
         for (BeanIntrospector bi : introspectors) {
@@ -2225,7 +2234,7 @@ public class PropertyUtilsBean {
             }
         }
 
-        return ictx.getPropertyDescriptors();
+        return new BeanIntrospectionData(ictx.getPropertyDescriptors());
     }
 
     /**
