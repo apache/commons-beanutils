@@ -40,6 +40,9 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.9.1" date="in SVN" description="TBD">
+      <action dev="oheger" type="fix" issue="BEANUTILS-456" >
+         Write methods for PropertyDescriptors created during custom introspection are lost
+      </action>
     </release>
 
     <release version="1.9.0" date="2013-12-11" description="Upgrade to Java 5 including generics where possible">
