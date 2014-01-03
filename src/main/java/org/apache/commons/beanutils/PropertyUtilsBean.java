@@ -1274,6 +1274,11 @@ public class PropertyUtilsBean {
      * <p>Return an accessible property setter method for this property,
      * if there is one; otherwise return <code>null</code>.</p>
      *
+     * <p><em>Note:</em> This method does not work correctly with custom bean
+     * introspection under certain circumstances. It may return {@code null}
+     * even if a write method is defined for the property in question. Use
+     * {@link #getWriteMethod(Class, PropertyDescriptor)} to be sure that the
+     * correct result is returned.</p>
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
      * @param descriptor Property descriptor to return a setter for
@@ -1295,8 +1300,9 @@ public class PropertyUtilsBean {
      * @param clazz The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a setter for
      * @return The write method
+     * @since 1.9.1
      */
-    Method getWriteMethod(Class<?> clazz, PropertyDescriptor descriptor) {
+    public Method getWriteMethod(Class<?> clazz, PropertyDescriptor descriptor) {
         BeanIntrospectionData data = getIntrospectionData(clazz);
         return (MethodUtils.getAccessibleMethod(clazz,
                 data.getWriteMethod(clazz, descriptor)));
