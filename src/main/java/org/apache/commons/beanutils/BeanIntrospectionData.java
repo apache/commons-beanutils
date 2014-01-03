@@ -39,7 +39,7 @@ import java.util.Map;
  * required by the {@code BeanUtils} library is also stored here.
  * </p>
  *
- * @version $Id: $
+ * @version $Id$
  * @since 1.9.1
  */
 class BeanIntrospectionData {

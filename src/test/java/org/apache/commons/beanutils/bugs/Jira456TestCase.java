@@ -29,7 +29,7 @@ import org.apache.commons.beanutils.PropertyUtilsBean;
  * <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA issue
  * BEANUTILS-456</a>.
  *
- * @version $Id: $
+ * @version $Id$
  */
 public class Jira456TestCase extends TestCase {
     /** Constant for the name of the test property. */
