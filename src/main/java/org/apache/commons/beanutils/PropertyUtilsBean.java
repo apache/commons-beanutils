@@ -1297,7 +1297,9 @@ public class PropertyUtilsBean {
      * @return The write method
      */
     Method getWriteMethod(Class<?> clazz, PropertyDescriptor descriptor) {
-        return (MethodUtils.getAccessibleMethod(clazz, descriptor.getWriteMethod()));
+        BeanIntrospectionData data = getIntrospectionData(clazz);
+        return (MethodUtils.getAccessibleMethod(clazz,
+                data.getWriteMethod(clazz, descriptor)));
     }
 
 
