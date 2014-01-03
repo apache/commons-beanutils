@@ -60,4 +60,20 @@ class BeanIntrospectionData {
     public PropertyDescriptor[] getDescriptors() {
         return descriptors;
     }
+
+    /**
+     * Returns the {@code PropertyDescriptor} for the property with the specified name. If
+     * this property is unknown, result is <b>null</b>.
+     *
+     * @param name the name of the property in question
+     * @return the {@code PropertyDescriptor} for this property or <b>null</b>
+     */
+    public PropertyDescriptor getDescriptor(String name) {
+        for (PropertyDescriptor pd : getDescriptors()) {
+            if (name.equals(pd.getName())) {
+                return pd;
+            }
+        }
+        return null;
+    }
 }

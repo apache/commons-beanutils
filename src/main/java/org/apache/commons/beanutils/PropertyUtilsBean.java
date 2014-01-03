@@ -947,17 +947,12 @@ public class PropertyUtilsBean {
             return (null);
         }
 
-        PropertyDescriptor[] descriptors = getPropertyDescriptors(bean);
-        if (descriptors != null) {
-
-            for (int i = 0; i < descriptors.length; i++) {
-                if (name.equals(descriptors[i].getName())) {
-                    return (descriptors[i]);
-                }
-            }
+        BeanIntrospectionData data = getIntrospectionData(bean.getClass());
+        PropertyDescriptor result = data.getDescriptor(name);
+        if (result != null) {
+            return result;
         }
 
-        PropertyDescriptor result = null;
         FastHashMap mappedDescriptors =
                 getMappedPropertyDescriptors(bean);
         if (mappedDescriptors == null) {
