@@ -107,10 +107,10 @@ note the property reference syntax options described in the
 
 
 <section name="Releases">
-<subsection name="1.9.0 release">
+<subsection name="1.9.x releases">
   <p>
-    BeanUtils <strong>1.9.0</strong> is binary compatible (with a minor exception
-    described in the release notes) with version 1.8.3 and requires a minimum of
+    BeanUtils <strong>1.9.x</strong> releases are binary compatible (with a minor exception
+    described in the release notes) with version 1.8.3 and require a minimum of
     JDK 1.5.
   </p>
   <p>
@@ -118,6 +118,12 @@ note the property reference syntax options described in the
     <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
+    <li>1.9.1
+      <ul>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.1/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.1/apidocs/index.html">JavaDoc</a></li>
+      </ul>
+    </li>
     <li>1.9.0
       <ul>
         <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.0/RELEASE-NOTES.txt">Release Notes</a></li>
