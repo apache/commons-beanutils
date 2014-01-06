@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.9.0
+                               Version 1.9.1
                                Release Notes
 
 INTRODUCTION:
@@ -28,6 +28,20 @@ BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
 o http://commons.apache.org/beanutils/
+
+Release 1.9.1 is a bug fix release which addresses a problem with the new
+feature of custom introspection introduced with release 1.9.0. It is fully
+binary compatible with the previous release. The minimum required Java version
+is 1.5.
+
+BUGFIXES in version 1.9.1
+=========================
+* [BEANUTILS-456]
+  For PropertyDescriptors obtained via custom introspection now additional
+  information is stored to prevent that write methods are lost during
+  garbage collection.
+
+                        Release Notes for version 1.9.0
 
 Release 1.9.0 contains some bug fixes and improvements that have accumulated
 after the 1.8.3 release. The most obvious change is that the new version now
