@@ -353,7 +353,7 @@
         <maven.compiler.source>1.5</maven.compiler.source>
         <maven.compiler.target>1.5</maven.compiler.target>
         <commons.componentid>beanutils</commons.componentid>
-        <commons.release.version>1.9.0</commons.release.version>
+        <commons.release.version>1.9.1</commons.release.version>
         <commons.jira.id>BEANUTILS</commons.jira.id>
         <commons.jira.pid>12310460</commons.jira.pid>
     </properties> 
