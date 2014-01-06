@@ -95,32 +95,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BeanUtils 1.9.0 ">
+    <section name="Apache Commons BeanUtils 1.9.1 ">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.tar.gz">commons-beanutils-1.9.0-bin.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.tar.gz.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.tar.gz">commons-beanutils-1.9.1-bin.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.tar.gz.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.zip">commons-beanutils-1.9.0-bin.zip</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.zip.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.0-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.zip">commons-beanutils-1.9.1-bin.zip</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.zip.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.1-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.0-src.tar.gz">commons-beanutils-1.9.0-src.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.0-src.tar.gz.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.0-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.1-src.tar.gz">commons-beanutils-1.9.1-src.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.1-src.tar.gz.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.1-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.0-src.zip">commons-beanutils-1.9.0-src.zip</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.0-src.zip.md5">md5</a></td>
-              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.0-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.1-src.zip">commons-beanutils-1.9.1-src.zip</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.1-src.zip.md5">md5</a></td>
+              <td><a href="http://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.1-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
