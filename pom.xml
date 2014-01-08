@@ -358,7 +358,7 @@
         <commons.jira.pid>12310460</commons.jira.pid>
         <!-- limit memory size see BEANUTILS-291; allow command-line override -->
         <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
-        <surefire.argLine>-Xmx25M</surefire.argLine>
+        <surefire.argLine>-Xmx50M</surefire.argLine>
     </properties> 
 
     <reporting>
