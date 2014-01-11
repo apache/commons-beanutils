@@ -39,6 +39,9 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
+    <release version="1.9.2" date="in SVN" description="TBD">
+    </release>
+
     <release version="1.9.1" date="2014-01-11" description="Bug fix for 1.9.0">
       <action dev="oheger" type="fix" issue="BEANUTILS-456" >
          Write methods for PropertyDescriptors created during custom introspection are lost
