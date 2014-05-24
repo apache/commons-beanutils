@@ -37,6 +37,7 @@
  *     <li>2.2 <a href="#standard.basic">Basic Property Access</a></li>
  *     <li>2.3 <a href="#standard.nested">Nested Property Access</a></li>
  *     <li>2.4 <a href="#standard.customize">Customizing Introspection</a></li>
+ *     <li>2.5 <a href="#standard.suppress">Suppressing Properties</a></li>
  *     </ul>
  * </li>
  * <li>3. <a href="#dynamic">Dynamic Beans (DynaBeans)</a>
@@ -416,6 +417,32 @@
  * class. This implementation can detect properties whose set methods have a
  * non-void return type - thus enabling support for typical properties in a
  * fluent API.</p>
+ *
+ * <a name="standard.suppress"></a>
+ * <h2>2.5 Suppressing Properties</h2>
+ * <p>The mechanism of customizing bean introspection described in the previous
+ * section can also be used to suppress specific properties. There is a
+ * specialized <code>BeanIntrospector</code> implementation that does exactly
+ * this: {@link org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector}.
+ * When creating an instance, a collection with the names of properties that
+ * should not be accessible on beans has to be provided. These properties will
+ * then be removed if they have been detected by other <code>BeanIntrospector</code>
+ * instances during processing of a bean class.</p>
+ *
+ * <p>A good use case for suppressing properties is the special <code>class</code>
+ * property which is per default available for all beans; it is generated from the
+ * <code>getClass()</code> method inherited from <code>Object</code> which follows the
+ * naming conventions for property get methods. Exposing this property in an
+ * uncontrolled way can lead to a security vulnerability as it allows access to
+ * the class loader. More information can be found at
+ * <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">
+ * https://issues.apache.org/jira/browse/BEANUTILS-463</a>.</p>
+ *
+ * <p>Because the <code>class</code> property is undesired in many use cases
+ * there is already an instance of <code>SuppressPropertiesBeanIntrospector</code>
+ * which is configured to suppress this property. It can be obtained via the
+ * <code>SUPPRESS_CLASS</code> constant of
+ * <code>SuppressPropertiesBeanIntrospector</code>.</p>
  *
  * <a name="dynamic"></a>
  * <h1>3. Dynamic Beans (DynaBeans)</h1>
