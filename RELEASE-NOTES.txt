@@ -17,7 +17,7 @@ $Id$
 
 
                           Commons BeanUtils Package
-                               Version 1.9.1
+                               Version 1.9.2
                                Release Notes
 
 INTRODUCTION:
@@ -28,6 +28,42 @@ BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
 o http://commons.apache.org/beanutils/
+
+Release 1.9.2 mainly addresses a potential security issue when accessing
+properties in an uncontrolled way. In a nutshell, if an application that uses
+Commons BeanUtils passes property paths from an external source directly to
+the getProperty() method of BeanUtilsBean, an attacker can access the class
+loader via the class property available on all Java objects.
+
+In version 1.9.2 now a special BeanIntrospector class was added which allows
+suppressing this property. Note that this BeanIntrospector is NOT enabled by
+default! Commons BeanUtils is a low-level library, and on this layer it cannot
+be decided whether access to a certain property is legal or not. Therefore,
+an application has to activate this suppressing BeanIntrospector explicitly.
+This can be done with the following lines of code:
+
+BeanUtilsBean bub = new BeanUtilsBean();
+bub.getPropertyUtils().addBeanIntrospector(
+    SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+
+Now all access to properties has to be done via the specially configured
+BeanUtilsBean instance. More information about this issue can be found at
+https://issues.apache.org/jira/browse/BEANUTILS-463 or in section 2.5 of the
+user's guide.
+
+BUGFIXES in version 1.9.2
+=========================
+* [BEANUTILS-458]
+  BaseLocaleConverter.checkConversionResult() no longer throws a
+  ConversionException if the result of a conversion is null.
+
+New features in version 1.9.2
+=============================
+* [BEANUTILS-463]
+  Added new SuppressPropertiesBeanIntrospector class to deal with a potential
+  class loader vulnerability.
+
+                        Release Notes for version 1.9.0
 
 Release 1.9.1 is a bug fix release which addresses a problem with the new
 feature of custom introspection introduced with release 1.9.0. It is fully
