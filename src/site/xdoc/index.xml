@@ -100,6 +100,12 @@ Bean Collections has an additional dependency on
     <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
+    <li>1.9.2
+      <ul>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html">JavaDoc</a></li>
+      </ul>
+    </li>
     <li>1.9.1
       <ul>
         <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.1/RELEASE-NOTES.txt">Release Notes</a></li>
