@@ -281,6 +281,10 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
             T temp = (T) result;
             return temp;
         }
+
+        if (result == null) {
+            return null;
+        }
         if (type.isInstance(result)) {
             return type.cast(result);
         }
