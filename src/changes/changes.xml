@@ -40,8 +40,13 @@ The <action> type attribute can be add,update,fix,remove.
   <body>
 
     <release version="1.9.2" date="in SVN" description="TBD">
-      <action dev="oheger" type="add" issue="BEANUTILS-463" >
+      <action dev="oheger" type="add" issue="BEANUTILS-463">
          Class loader vulnerability in DefaultResolver
+      </action>
+      <action dev="oheger" type="fix" issue="BEANUTILS-458"
+        due-to="Manuel Dominguez Sarmiento ">
+         BaseLocaleConverter.checkConversionResult() fails with
+         ConversionException when result is null when it should not
       </action>
     </release>
 
