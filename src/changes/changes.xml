@@ -39,6 +39,10 @@ The <action> type attribute can be add,update,fix,remove.
   </properties>
   <body>
 
+    <release version="1.9.2" date="in SVN"
+      description="TBD">
+    </release>
+
     <release version="1.9.2" date="2014-05-29"
       description="Added a new BeanIntrospector for addressing a potential class loader vulnerability">
       <action dev="oheger" type="add" issue="BEANUTILS-463">
