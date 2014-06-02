@@ -63,7 +63,7 @@ New features in version 1.9.2
   Added new SuppressPropertiesBeanIntrospector class to deal with a potential
   class loader vulnerability.
 
-                        Release Notes for version 1.9.0
+                        Release Notes for version 1.9.1
 
 Release 1.9.1 is a bug fix release which addresses a problem with the new
 feature of custom introspection introduced with release 1.9.0. It is fully
