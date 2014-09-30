@@ -20,6 +20,9 @@
   <body>
 
     <release version="1.9.3" date="in SVN" description="TBD">
+      <action dev="ggregory" type="update" issue="BEANUTILS-469">
+        Update commons-logging from 1.1.1 to 1.2.
+      </action>
     </release>
 
     <release version="1.9.2" date="2014-05-29"
