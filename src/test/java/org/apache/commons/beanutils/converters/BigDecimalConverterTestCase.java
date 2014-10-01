@@ -20,7 +20,6 @@ package org.apache.commons.beanutils.converters;
 import java.math.BigDecimal;
 
 import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils.Converter;
 
 
@@ -91,7 +90,9 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             "from Integer",
             "from Long",
             "from Float",
-            "from Double"
+            "from Double",
+            "from BigDecimal",
+            "from BigDecimal extension"
         };
 
         Object[] input = {
@@ -105,7 +106,9 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             new Integer(9),
             new Long(10),
             new Float("11.1"),
-            new Double("12.2")
+            new Double("12.2"),
+            new BigDecimal("3200.11"),
+            new ExtendingBigDecimal("3200.11")
         };
 
         BigDecimal[] expected = {
@@ -119,7 +122,9 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             new BigDecimal("9"),
             new BigDecimal("10"),
             new BigDecimal("11.1"),
-            new BigDecimal("12.2")
+            new BigDecimal("12.2"),
+            new BigDecimal("3200.11"),
+            new BigDecimal("3200.11")
         };
 
         for(int i=0;i<expected.length;i++) {
@@ -134,5 +139,14 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         }
     }
 
+    /**
+     * A class derived from {@code BigDecimal} used for testing whether
+     * derived number classes are handled correctly.
+     */
+    private class ExtendingBigDecimal extends BigDecimal {
+        private ExtendingBigDecimal(String val) {
+            super(val);
+        }
+    }
 }
 
