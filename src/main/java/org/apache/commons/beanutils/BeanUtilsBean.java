@@ -27,6 +27,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.expression.Resolver;
@@ -952,6 +953,8 @@ public class BeanUtilsBean {
                 }
                 type = ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
+            } else if (index >= 0 && List.class.isAssignableFrom(descriptor.getPropertyType())) {
+                type = Object.class;
             } else if (key != null) {
                 if (descriptor.getReadMethod() == null) {
                     if (log.isDebugEnabled()) {
