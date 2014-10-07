@@ -20,11 +20,14 @@
   <body>
 
     <release version="1.9.3" date="in SVN" description="TBD">
-      <action dev="oheger" type="fix" issue="BEANUTILS-470" due-to=" Tommy Tynj&#228;">
+      <action dev="oheger" type="fix" issue="BEANUTILS-470" due-to="Tommy Tynj&#228;">
         Precision lost when converting BigDecimal
       </action>
       <action dev="ggregory" type="update" issue="BEANUTILS-469">
         Update commons-logging from 1.1.1 to 1.2.
+      </action>
+      <action dev="oheger" type="fix" issue="BEANUTILS-465" due-to="Daniel Atallah">
+        Indexed List Setters no longer work
       </action>
     </release>
 
