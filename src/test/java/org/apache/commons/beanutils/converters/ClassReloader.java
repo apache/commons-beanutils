@@ -68,8 +68,9 @@ public class ClassReloader extends ClassLoader {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         for(;;) {
             int bytesRead = classStream.read(buf);
-            if (bytesRead == -1)
+            if (bytesRead == -1) {
                 break;
+            }
             baos.write(buf, 0, bytesRead);
         }
         classStream.close();

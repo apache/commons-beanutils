@@ -1650,10 +1650,18 @@ public class BeanUtilsTestCase extends TestCase {
         StringTokenizer tokenizer = new StringTokenizer(version,".");
         if (tokenizer.nextToken().equals("1")) {
             String minorVersion = tokenizer.nextToken();
-            if (minorVersion.equals("0")) return true;
-            if (minorVersion.equals("1")) return true;
-            if (minorVersion.equals("2")) return true;
-            if (minorVersion.equals("3")) return true;
+            if (minorVersion.equals("0")) {
+                return true;
+            }
+            if (minorVersion.equals("1")) {
+                return true;
+            }
+            if (minorVersion.equals("2")) {
+                return true;
+            }
+            if (minorVersion.equals("3")) {
+                return true;
+            }
         }
         return false;
     }

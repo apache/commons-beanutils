@@ -290,15 +290,17 @@ public class BasicDynaBeanTestCase extends TestCase {
         for (int i = 0; i < pd.length; i++) {
             String name = pd[i].getName();
             for (int j = 0; j < properties.length; j++) {
-                if (name.equals(properties[j]))
+                if (name.equals(properties[j])) {
                     count[j]++;
+                }
             }
         }
         for (int j = 0; j < properties.length; j++) {
-            if (count[j] < 0)
+            if (count[j] < 0) {
                 fail("Missing property " + properties[j]);
-            else if (count[j] > 1)
+            } else if (count[j] > 1) {
                 fail("Duplicate property " + properties[j]);
+            }
         }
 
     }

@@ -395,8 +395,9 @@ public class TestBean implements Serializable {
     private TestBean nested = null;
 
     public TestBean getNested() {
-        if (nested == null)
+        if (nested == null) {
             nested = new TestBean();
+        }
         return (nested);
     }
 

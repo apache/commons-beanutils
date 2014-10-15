@@ -576,15 +576,17 @@ public class PropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < pd.length; i++) {
             String name = pd[i].getName();
             for (int j = 0; j < properties.length; j++) {
-                if (name.equals(properties[j]))
+                if (name.equals(properties[j])) {
                     count[j]++;
+                }
             }
         }
         for (int j = 0; j < properties.length; j++) {
-            if (count[j] < 0)
+            if (count[j] < 0) {
                 fail("Missing property " + properties[j]);
-            else if (count[j] > 1)
+            } else if (count[j] > 1) {
                 fail("Duplicate property " + properties[j]);
+            }
         }
 
     }
@@ -3993,12 +3995,15 @@ public class PropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < properties.length; i++) {
 
             // Identify the property descriptor for this property
-            if (properties[i].equals("intIndexed"))
+            if (properties[i].equals("intIndexed")) {
                 continue;
-            if (properties[i].equals("stringIndexed"))
+            }
+            if (properties[i].equals("stringIndexed")) {
                 continue;
-            if (properties[i].equals("writeOnlyProperty"))
+            }
+            if (properties[i].equals("writeOnlyProperty")) {
                 continue;
+            }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
                 if (properties[i].equals(pd[j].getName())) {
@@ -4048,16 +4053,22 @@ public class PropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < properties.length; i++) {
 
             // Identify the property descriptor for this property
-            if (properties[i].equals("intIndexed"))
+            if (properties[i].equals("intIndexed")) {
                 continue;
-            if (properties[i].equals("listIndexed"))
+            }
+            if (properties[i].equals("listIndexed")) {
                 continue;
+            }
             if (properties[i].equals("nested"))
+             {
                 continue; // This property is read only
-            if (properties[i].equals("readOnlyProperty"))
+            }
+            if (properties[i].equals("readOnlyProperty")) {
                 continue;
-            if (properties[i].equals("stringIndexed"))
+            }
+            if (properties[i].equals("stringIndexed")) {
                 continue;
+            }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
                 if (properties[i].equals(pd[j].getName())) {
@@ -4340,8 +4351,9 @@ public class PropertyUtilsTestCase extends TestCase {
         java.util.Arrays.sort(mapKeys);
         StringBuilder buf = new StringBuilder();
         for(int i=0; i<mapKeys.length; ++i) {
-            if (i != 0)
+            if (i != 0) {
                 buf.append(", ");
+            }
             buf.append(mapKeys[i]);
         }
         return buf.toString();
