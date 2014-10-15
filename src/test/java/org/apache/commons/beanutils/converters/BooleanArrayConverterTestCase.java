@@ -44,7 +44,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
         };
 
 
-    public BooleanArrayConverterTestCase(String name) {
+    public BooleanArrayConverterTestCase(final String name) {
         super(name);
     }
 
@@ -53,15 +53,15 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * values gets converted nicely.
      */
     public void testStandardStringArrayConversion() {
-        String[] values = {
+        final String[] values = {
             "true", "false",
             "yes", "no",
             "y", "n",
             "1", "0",
         };
 
-        BooleanArrayConverter converter = new BooleanArrayConverter();
-        boolean[] results = (boolean[]) converter.convert(null, values);
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
+        final boolean[] results = (boolean[]) converter.convert(null, values);
 
         assertNotNull(results);
         assertEquals(8, results.length);
@@ -80,9 +80,9 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * values gets converted nicely.
      */
     public void testStandardStringConversion() {
-        BooleanArrayConverter converter = new BooleanArrayConverter();
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
 
-        StringBuilder input = new StringBuilder();
+        final StringBuilder input = new StringBuilder();
         boolean[] results;
 
         // string has {}
@@ -151,14 +151,14 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * providing a customised BooleanConverter.
      */
     public void testAdditionalStrings() {
-        String[] trueStrings = {"sure"};
-        String[] falseStrings = {"nope"};
-        BooleanConverter bc = new BooleanConverter(
+        final String[] trueStrings = {"sure"};
+        final String[] falseStrings = {"nope"};
+        final BooleanConverter bc = new BooleanConverter(
             trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
-        BooleanArrayConverter converter = new BooleanArrayConverter(
+        final BooleanArrayConverter converter = new BooleanArrayConverter(
             bc, BooleanArrayConverter.NO_DEFAULT);
 
-        boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
+        final boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
         assertNotNull(results);
         assertEquals(3, results.length);
         assertFalse(results[0]);
@@ -170,7 +170,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
             // a true value..
             converter.convert(null, "true");
             fail("Converting invalid string should have generated an exception");
-        } catch(Exception ex) {
+        } catch(final Exception ex) {
             // ok, expected
         }
     }
@@ -180,11 +180,11 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * there is no default value then an exception is thrown.
      */
     public void testInvalidStringWithoutDefault() {
-        BooleanArrayConverter converter = new BooleanArrayConverter();
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
         try {
             converter.convert(null, "true!");
             fail("Converting invalid string should have generated an exception");
-        } catch (ConversionException expected) {
+        } catch (final ConversionException expected) {
             // Exception is successful test
         }
     }
@@ -194,9 +194,9 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * there is a default value then that default is returned.
      */
     public void testInvalidStringWithDefault() {
-        boolean[] defaults = new boolean[1];
-        BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
-        Object o = converter.convert(null, "true!");
+        final boolean[] defaults = new boolean[1];
+        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
+        final Object o = converter.convert(null, "true!");
         assertSame("Unexpected object returned for failed conversion", o, defaults);
     }
 
@@ -205,11 +205,11 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * a valid boolean, and there is no default value then an exception is thrown.
      */
     public void testInvalidElementWithoutDefault() {
-        BooleanArrayConverter converter = new BooleanArrayConverter();
+        final BooleanArrayConverter converter = new BooleanArrayConverter();
         try {
             converter.convert(null, "true,bogus");
             fail("Converting invalid string should have generated an exception");
-        } catch (ConversionException expected) {
+        } catch (final ConversionException expected) {
             // Exception is successful test
         }
     }
@@ -223,9 +223,9 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * not for the failed element.
      */
     public void testInvalidElementWithDefault() {
-        boolean[] defaults = new boolean[1];
-        BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
-        Object o = converter.convert(null, "true,bogus");
+        final boolean[] defaults = new boolean[1];
+        final BooleanArrayConverter converter = new BooleanArrayConverter(defaults);
+        final Object o = converter.convert(null, "true,bogus");
         assertSame("Unexpected object returned for failed conversion", o, defaults);
     }
 
@@ -241,10 +241,10 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * others are converted as expected.
      */
     public void testElementDefault() {
-        boolean[] defaults = new boolean[1];
-        BooleanConverter bc = new BooleanConverter(Boolean.TRUE);
-        BooleanArrayConverter converter = new BooleanArrayConverter(bc, defaults);
-        boolean[] results = (boolean[]) converter.convert(null, "true,bogus");
+        final boolean[] defaults = new boolean[1];
+        final BooleanConverter bc = new BooleanConverter(Boolean.TRUE);
+        final BooleanArrayConverter converter = new BooleanArrayConverter(bc, defaults);
+        final boolean[] results = (boolean[]) converter.convert(null, "true,bogus");
 
         assertEquals(2, results.length);
         assertTrue(results[0]);
@@ -255,17 +255,17 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * Check that registration of a custom converter works.
      */
     public void testRegistration() {
-        String[] trueStrings = {"sure"};
-        String[] falseStrings = {"nope"};
-        BooleanConverter bc = new BooleanConverter(
+        final String[] trueStrings = {"sure"};
+        final String[] falseStrings = {"nope"};
+        final BooleanConverter bc = new BooleanConverter(
             trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
 
-        BooleanArrayConverter converter = new BooleanArrayConverter(
+        final BooleanArrayConverter converter = new BooleanArrayConverter(
             bc, BooleanArrayConverter.NO_DEFAULT);
 
         ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
-        boolean[] sample = new boolean[0];
-        boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
+        final boolean[] sample = new boolean[0];
+        final boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
 
         assertEquals(2, results.length);
         assertTrue(results[0]);

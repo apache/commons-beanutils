@@ -64,7 +64,7 @@ public class Jira18BeanFactory {
          *
          * @param simple The simple value
          */
-        public void setSimple(String simple) {
+        public void setSimple(final String simple) {
             this.simple = simple;
         }
 
@@ -74,7 +74,7 @@ public class Jira18BeanFactory {
          * @param index The index
          * @return The indexed value
          */
-        public String getIndexed(int index) {
+        public String getIndexed(final int index) {
             return indexed[index];
         }
 
@@ -84,7 +84,7 @@ public class Jira18BeanFactory {
          * @param index The index
          * @param value The indexed value
          */
-        public void setIndexed(int index, String value) {
+        public void setIndexed(final int index, final String value) {
             this.indexed[index] = value;
         }
 
@@ -94,7 +94,7 @@ public class Jira18BeanFactory {
          * @param key The mapped key
          * @return The mapped value
          */
-        public String getMapped(String key) {
+        public String getMapped(final String key) {
             return (String)mapped.get(key);
         }
 
@@ -104,7 +104,7 @@ public class Jira18BeanFactory {
          * @param key The mapped key
          * @param value The mapped value
          */
-        public void setMapped(String key, String value) {
+        public void setMapped(final String key, final String value) {
             mapped.put(key, value);
         }
 

@@ -38,7 +38,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public LocaleBeanUtilsTestCase(String name) {
+    public LocaleBeanUtilsTestCase(final String name) {
         super(name);
     }
 
@@ -77,12 +77,12 @@ public class LocaleBeanUtilsTestCase extends TestCase {
      * Test setting a nested simple property
      */
     public void testSetNestedPropertySimple() {
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         bean.getNested().setIntProperty(5);
         assertEquals("Initial value 5", 5, bean.getNested().getIntProperty());
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error(t);
             fail("Threw " + t);
         }
@@ -93,12 +93,12 @@ public class LocaleBeanUtilsTestCase extends TestCase {
      * Test setting a nested indexed property
      */
     public void testSetNestedPropertyIndexed() {
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         bean.getNested().setIntIndexed(1, 51);
         assertEquals("Initial value[1] 51", 51, bean.getNested().getIntIndexed(1));
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error(t);
             fail("Threw " + t);
         }

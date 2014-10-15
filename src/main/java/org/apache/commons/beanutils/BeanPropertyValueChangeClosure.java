@@ -117,7 +117,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * object.
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
-    public BeanPropertyValueChangeClosure(String propertyName, Object propertyValue) {
+    public BeanPropertyValueChangeClosure(final String propertyName, final Object propertyValue) {
         this(propertyName, propertyValue, false);
     }
 
@@ -134,7 +134,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * genenerate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
-    public BeanPropertyValueChangeClosure(String propertyName, Object propertyValue, boolean ignoreNull) {
+    public BeanPropertyValueChangeClosure(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
         super();
 
         if ((propertyName != null) && (propertyName.length() > 0)) {
@@ -160,39 +160,39 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
-    public void execute(Object object) {
+    public void execute(final Object object) {
 
         try {
             PropertyUtils.setProperty(object, propertyName, propertyValue);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             final String errorMsg = "Unable to execute Closure. Null value encountered in property path...";
 
             if (ignoreNull) {
                 log.warn("WARNING: " + errorMsg + e);
             } else {
-                IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+                final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
                     log.error(errorMsg, e);
                 }
                 throw iae;
             }
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }

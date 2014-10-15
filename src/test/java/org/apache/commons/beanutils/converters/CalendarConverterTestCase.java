@@ -31,7 +31,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * Construct a new Calendar test case.
      * @param name Test Name
      */
-    public CalendarConverterTestCase(String name) {
+    public CalendarConverterTestCase(final String name) {
         super(name);
     }
 
@@ -61,7 +61,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(Object defaultValue) {
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
         return new CalendarConverter(defaultValue);
     }
 
@@ -81,7 +81,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(Calendar value) {
+    protected Object toType(final Calendar value) {
         return value;
    }
 

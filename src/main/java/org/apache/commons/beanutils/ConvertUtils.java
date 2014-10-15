@@ -52,7 +52,7 @@ public class ConvertUtils {
      *  Boolean.class instead
      */
     @Deprecated
-    public static void setDefaultBoolean(boolean newDefaultBoolean) {
+    public static void setDefaultBoolean(final boolean newDefaultBoolean) {
         ConvertUtilsBean.getInstance().setDefaultBoolean(newDefaultBoolean);
     }
 
@@ -75,7 +75,7 @@ public class ConvertUtils {
      *  Byte.class instead
      */
     @Deprecated
-    public static void setDefaultByte(byte newDefaultByte) {
+    public static void setDefaultByte(final byte newDefaultByte) {
         ConvertUtilsBean.getInstance().setDefaultByte(newDefaultByte);
     }
 
@@ -98,7 +98,7 @@ public class ConvertUtils {
      *  Character.class instead
      */
     @Deprecated
-    public static void setDefaultCharacter(char newDefaultCharacter) {
+    public static void setDefaultCharacter(final char newDefaultCharacter) {
         ConvertUtilsBean.getInstance().setDefaultCharacter(newDefaultCharacter);
     }
 
@@ -121,7 +121,7 @@ public class ConvertUtils {
      *  Double.class instead
      */
     @Deprecated
-    public static void setDefaultDouble(double newDefaultDouble) {
+    public static void setDefaultDouble(final double newDefaultDouble) {
         ConvertUtilsBean.getInstance().setDefaultDouble(newDefaultDouble);
     }
 
@@ -144,7 +144,7 @@ public class ConvertUtils {
      *  Float.class instead
      */
     @Deprecated
-    public static void setDefaultFloat(float newDefaultFloat) {
+    public static void setDefaultFloat(final float newDefaultFloat) {
         ConvertUtilsBean.getInstance().setDefaultFloat(newDefaultFloat);
     }
 
@@ -167,7 +167,7 @@ public class ConvertUtils {
      *  Integer.class instead
      */
     @Deprecated
-    public static void setDefaultInteger(int newDefaultInteger) {
+    public static void setDefaultInteger(final int newDefaultInteger) {
         ConvertUtilsBean.getInstance().setDefaultInteger(newDefaultInteger);
     }
 
@@ -190,7 +190,7 @@ public class ConvertUtils {
      *  Long.class instead
      */
     @Deprecated
-    public static void setDefaultLong(long newDefaultLong) {
+    public static void setDefaultLong(final long newDefaultLong) {
         ConvertUtilsBean.getInstance().setDefaultLong(newDefaultLong);
     }
 
@@ -213,7 +213,7 @@ public class ConvertUtils {
      *  Short.class instead
      */
     @Deprecated
-    public static void setDefaultShort(short newDefaultShort) {
+    public static void setDefaultShort(final short newDefaultShort) {
         ConvertUtilsBean.getInstance().setDefaultShort(newDefaultShort);
     }
 
@@ -230,7 +230,7 @@ public class ConvertUtils {
      *
      * @see ConvertUtilsBean#convert(Object)
      */
-    public static String convert(Object value) {
+    public static String convert(final Object value) {
         return ConvertUtilsBean.getInstance().convert(value);
     }
 
@@ -247,7 +247,7 @@ public class ConvertUtils {
      *
      * @see ConvertUtilsBean#convert(String, Class)
      */
-    public static Object convert(String value, Class<?> clazz) {
+    public static Object convert(final String value, final Class<?> clazz) {
         return ConvertUtilsBean.getInstance().convert(value, clazz);
     }
 
@@ -264,7 +264,7 @@ public class ConvertUtils {
      *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
-    public static Object convert(String[] values, Class<?> clazz) {
+    public static Object convert(final String[] values, final Class<?> clazz) {
         return ConvertUtilsBean.getInstance().convert(values, clazz);
     }
 
@@ -278,7 +278,7 @@ public class ConvertUtils {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public static Object convert(Object value, Class<?> targetType) {
+    public static Object convert(final Object value, final Class<?> targetType) {
         return ConvertUtilsBean.getInstance().convert(value, targetType);
     }
 
@@ -304,7 +304,7 @@ public class ConvertUtils {
      * @param clazz Class for which to remove a registered Converter
      * @see ConvertUtilsBean#deregister(Class)
      */
-    public static void deregister(Class<?> clazz) {
+    public static void deregister(final Class<?> clazz) {
         ConvertUtilsBean.getInstance().deregister(clazz);
     }
 
@@ -320,7 +320,7 @@ public class ConvertUtils {
      * @return The registered {@link Converter} or <code>null</code> if not found
      * @see ConvertUtilsBean#lookup(Class)
      */
-    public static Converter lookup(Class<?> clazz) {
+    public static Converter lookup(final Class<?> clazz) {
         return ConvertUtilsBean.getInstance().lookup(clazz);
     }
 
@@ -333,7 +333,7 @@ public class ConvertUtils {
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or <code>null</code> if not found
      */
-    public static Converter lookup(Class<?> sourceType, Class<?> targetType) {
+    public static Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
         return ConvertUtilsBean.getInstance().lookup(sourceType, targetType);
     }
 
@@ -348,7 +348,7 @@ public class ConvertUtils {
      *  Converter
      * @see ConvertUtilsBean#register(Converter, Class)
      */
-    public static void register(Converter converter, Class<?> clazz) {
+    public static void register(final Converter converter, final Class<?> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }
 
@@ -366,7 +366,7 @@ public class ConvertUtils {
     // All type casts are safe because the TYPE members of the wrapper types
     // return their own class.
     @SuppressWarnings("unchecked")
-    public static <T> Class<T> primitiveToWrapper(Class<T> type) {
+    public static <T> Class<T> primitiveToWrapper(final Class<T> type) {
         if (type == null || !type.isPrimitive()) {
             return type;
         }

@@ -49,7 +49,7 @@ public final class DoubleConverter extends NumberConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public DoubleConverter(Object defaultValue) {
+    public DoubleConverter(final Object defaultValue) {
         super(true, defaultValue);
     }
 

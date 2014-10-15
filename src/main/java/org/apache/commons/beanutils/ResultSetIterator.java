@@ -46,7 +46,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @param dynaClass The {@link ResultSetDynaClass} wrapping the
      *  result set we will iterate over
      */
-    ResultSetIterator(ResultSetDynaClass dynaClass) {
+    ResultSetIterator(final ResultSetDynaClass dynaClass) {
 
         this.dynaClass = dynaClass;
 
@@ -92,7 +92,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public boolean contains(String name, String key) {
+    public boolean contains(final String name, final String key) {
 
         throw new UnsupportedOperationException
             ("FIXME - mapped properties not currently supported");
@@ -109,14 +109,14 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public Object get(String name) {
+    public Object get(final String name) {
 
         if (dynaClass.getDynaProperty(name) == null) {
             throw new IllegalArgumentException(name);
         }
         try {
             return dynaClass.getObjectFromResultSet(name);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             throw new RuntimeException
                 ("get(" + name + "): SQLException: " + e);
         }
@@ -140,7 +140,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception NullPointerException if no array or List has been
      *  initialized for this property
      */
-    public Object get(String name, int index) {
+    public Object get(final String name, final int index) {
 
         throw new UnsupportedOperationException
             ("FIXME - indexed properties not currently supported");
@@ -161,7 +161,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public Object get(String name, String key) {
+    public Object get(final String name, final String key) {
 
         throw new UnsupportedOperationException
             ("FIXME - mapped properties not currently supported");
@@ -193,7 +193,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public void remove(String name, String key) {
+    public void remove(final String name, final String key) {
 
         throw new UnsupportedOperationException
             ("FIXME - mapped operations not currently supported");
@@ -214,14 +214,14 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
-    public void set(String name, Object value) {
+    public void set(final String name, final Object value) {
 
         if (dynaClass.getDynaProperty(name) == null) {
             throw new IllegalArgumentException(name);
         }
         try {
             dynaClass.getResultSet().updateObject(name, value);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             throw new RuntimeException
                 ("set(" + name + "): SQLException: " + e);
         }
@@ -245,7 +245,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
-    public void set(String name, int index, Object value) {
+    public void set(final String name, final int index, final Object value) {
 
         throw new UnsupportedOperationException
             ("FIXME - indexed properties not currently supported");
@@ -267,7 +267,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public void set(String name, String key, Object value) {
+    public void set(final String name, final String key, final Object value) {
 
         throw new UnsupportedOperationException
             ("FIXME - mapped properties not currently supported");
@@ -289,7 +289,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             advance();
             return (!eof);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             throw new RuntimeException("hasNext():  SQLException:  " + e);
         }
 
@@ -310,7 +310,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             }
             current = false;
             return (this);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             throw new RuntimeException("next():  SQLException:  " + e);
         }
 

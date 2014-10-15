@@ -35,7 +35,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * Construct a new Date test case.
      * @param name Test Name
      */
-    public SqlTimestampConverterTestCase(String name) {
+    public SqlTimestampConverterTestCase(final String name) {
         super(name);
     }
 
@@ -58,18 +58,18 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     public void testLocale() {
 
         // Re-set the default Locale to Locale.US
-        Locale defaultLocale = Locale.getDefault();
+        final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        String pattern = "M/d/yy h:mm a"; // SHORT style Date & Time format for US Locale
+        final String pattern = "M/d/yy h:mm a"; // SHORT style Date & Time format for US Locale
 
         // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
+        final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Valid String --> Type Conversion
-        String testString = "3/21/06 3:06 pm";
-        Object expected = toType(testString, pattern, null);
+        final String testString = "3/21/06 3:06 pm";
+        final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
 
         // Invalid Conversions
@@ -92,12 +92,12 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
+        final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Timestamp Conversion
-        String testString = "2006-10-23 15:36:01.0";
-        Object expected = toType(testString, "yyyy-MM-dd HH:mm:ss.S", null);
+        final String testString = "2006-10-23 15:36:01.0";
+        final Object expected = toType(testString, "yyyy-MM-dd HH:mm:ss.S", null);
         validConversion(converter, expected, testString);
 
         // Invalid String --> java.sql.Timestamp Conversion
@@ -122,7 +122,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(Object defaultValue) {
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
         return new SqlTimestampConverter(defaultValue);
     }
 
@@ -142,7 +142,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(Calendar value) {
+    protected Object toType(final Calendar value) {
         return new Timestamp(getTimeInMillis(value));
     }
 

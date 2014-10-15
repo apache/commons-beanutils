@@ -46,7 +46,7 @@ public final class URLConverter extends AbstractConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public URLConverter(Object defaultValue) {
+    public URLConverter(final Object defaultValue) {
         super(defaultValue);
     }
 
@@ -72,7 +72,7 @@ public final class URLConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (URL.class.equals(type)) {
             return type.cast(new URL(value.toString()));
         }

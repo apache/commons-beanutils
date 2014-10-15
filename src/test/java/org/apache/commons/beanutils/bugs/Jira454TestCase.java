@@ -30,8 +30,8 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class Jira454TestCase extends TestCase {
     public void testCopyProperties() throws Exception {
-        TestBean bean = new TestBean();
-        TestBean b2 = new TestBean();
+        final TestBean bean = new TestBean();
+        final TestBean b2 = new TestBean();
         BeanUtils.copyProperties(b2, bean);
         assertNull("Got a creation date", b2.getCreatedAt());
     }
@@ -43,7 +43,7 @@ public class Jira454TestCase extends TestCase {
             return createdAt;
         }
 
-        public void setCreatedAt(Date createdAt) {
+        public void setCreatedAt(final Date createdAt) {
             this.createdAt = createdAt;
         }
     }

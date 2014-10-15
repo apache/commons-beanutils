@@ -52,7 +52,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      *
      * @param cls the current class
      */
-    public DefaultIntrospectionContext(Class<?> cls) {
+    public DefaultIntrospectionContext(final Class<?> cls) {
         currentClass = cls;
         descriptors = new HashMap<String, PropertyDescriptor>();
     }
@@ -61,7 +61,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
         return currentClass;
     }
 
-    public void addPropertyDescriptor(PropertyDescriptor desc) {
+    public void addPropertyDescriptor(final PropertyDescriptor desc) {
         if (desc == null) {
             throw new IllegalArgumentException(
                     "Property descriptor must not be null!");
@@ -69,7 +69,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
         descriptors.put(desc.getName(), desc);
     }
 
-    public void addPropertyDescriptors(PropertyDescriptor[] descs) {
+    public void addPropertyDescriptors(final PropertyDescriptor[] descs) {
         if (descs == null) {
             throw new IllegalArgumentException(
                     "Array with descriptors must not be null!");
@@ -80,15 +80,15 @@ class DefaultIntrospectionContext implements IntrospectionContext {
         }
     }
 
-    public boolean hasProperty(String name) {
+    public boolean hasProperty(final String name) {
         return descriptors.containsKey(name);
     }
 
-    public PropertyDescriptor getPropertyDescriptor(String name) {
+    public PropertyDescriptor getPropertyDescriptor(final String name) {
         return descriptors.get(name);
     }
 
-    public void removePropertyDescriptor(String name) {
+    public void removePropertyDescriptor(final String name) {
         descriptors.remove(name);
     }
 

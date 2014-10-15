@@ -36,7 +36,7 @@ public class Jira359TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira359TestCase(String name) {
+    public Jira359TestCase(final String name) {
         super(name);
     }
 
@@ -45,7 +45,7 @@ public class Jira359TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -82,13 +82,13 @@ public class Jira359TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
     public void testBeanUtilsSetProperty_CustomConvertStringToArray_WithColonValue() throws Exception{
-        ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
+        final ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
         converter.setAllowedChars(new char[] {'.', '-', ':'});
 
-        BeanUtilsBean utils = new BeanUtilsBean();
+        final BeanUtilsBean utils = new BeanUtilsBean();
         utils.getConvertUtils().register(converter, String[].class);
 
-        SimplePojoData simplePojo = new SimplePojoData();
+        final SimplePojoData simplePojo = new SimplePojoData();
         utils.setProperty(simplePojo, "jcrMixinTypes", "mix:rereferencible,mix:simple");
         showArray("Custom WithColonValue", simplePojo.getJcrMixinTypes());
         assertEquals("array size", 2, simplePojo.getJcrMixinTypes().length);
@@ -100,7 +100,7 @@ public class Jira359TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
     public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithColonValue() throws Exception{
-        SimplePojoData simplePojo = new SimplePojoData();
+        final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mix:rereferencible,mix:simple");
         showArray("Default WithColonValue", simplePojo.getJcrMixinTypes());
         assertEquals("array size", 4, simplePojo.getJcrMixinTypes().length);
@@ -114,7 +114,7 @@ public class Jira359TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() String to array without colon value
      */
     public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValue() throws Exception{
-        SimplePojoData simplePojo = new SimplePojoData();
+        final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible,mixsimple");
         showArray("Default WithoutColonValue", simplePojo.getJcrMixinTypes());
         assertEquals("array size", 2, simplePojo.getJcrMixinTypes().length);
@@ -126,7 +126,7 @@ public class Jira359TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() String to array without colon value and no comma
      */
     public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValueAndNocoma() throws Exception{
-        SimplePojoData simplePojo = new SimplePojoData();
+        final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible");
         showArray("Default WithoutColonAndNocoma", simplePojo.getJcrMixinTypes());
         assertEquals("array size", 1, simplePojo.getJcrMixinTypes().length);
@@ -136,7 +136,7 @@ public class Jira359TestCase extends TestCase {
     /**
      * Show array contents.
      */
-    private void showArray(String text, String[] array) {
+    private void showArray(final String text, final String[] array) {
         if (array == null) {
             System.out.println(text + " array is null");
         } else {
@@ -154,7 +154,7 @@ public class Jira359TestCase extends TestCase {
         public String[] getJcrMixinTypes() {
             return this.jcrMixinTypes;
         }
-        public void setJcrMixinTypes(String[] mixinTypes) {
+        public void setJcrMixinTypes(final String[] mixinTypes) {
             this.jcrMixinTypes = mixinTypes;
         }
     }

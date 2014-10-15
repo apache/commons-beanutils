@@ -76,27 +76,27 @@ public class DefaultResolver implements Resolver {
      * @throws IllegalArgumentException If the indexed property is illegally
      * formed or has an invalid (non-numeric) value.
      */
-    public int getIndex(String expression) {
+    public int getIndex(final String expression) {
         if (expression == null || expression.length() == 0) {
             return -1;
         }
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (c == NESTED || c == MAPPED_START) {
                 return -1;
             } else if (c == INDEXED_START) {
-                int end = expression.indexOf(INDEXED_END, i);
+                final int end = expression.indexOf(INDEXED_END, i);
                 if (end < 0) {
                     throw new IllegalArgumentException("Missing End Delimiter");
                 }
-                String value = expression.substring(i + 1, end);
+                final String value = expression.substring(i + 1, end);
                 if (value.length() == 0) {
                     throw new IllegalArgumentException("No Index Value");
                 }
                 int index = 0;
                 try {
                     index = Integer.parseInt(value, 10);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     throw new IllegalArgumentException("Invalid index value '"
                             + value + "'");
                 }
@@ -113,16 +113,16 @@ public class DefaultResolver implements Resolver {
      * @return The index value
      * @throws IllegalArgumentException If the mapped property is illegally formed.
      */
-    public String getKey(String expression) {
+    public String getKey(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;
         }
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (c == NESTED || c == INDEXED_START) {
                 return null;
             } else if (c == MAPPED_START) {
-                int end = expression.indexOf(MAPPED_END, i);
+                final int end = expression.indexOf(MAPPED_END, i);
                 if (end < 0) {
                     throw new IllegalArgumentException("Missing End Delimiter");
                 }
@@ -138,12 +138,12 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The property name
      */
-    public String getProperty(String expression) {
+    public String getProperty(final String expression) {
         if (expression == null || expression.length() == 0) {
             return expression;
         }
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (c == NESTED) {
                 return expression.substring(0, i);
             } else if (c == MAPPED_START || c == INDEXED_START) {
@@ -160,7 +160,7 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The next property expression
      */
-    public boolean hasNested(String expression) {
+    public boolean hasNested(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
         } else {
@@ -175,12 +175,12 @@ public class DefaultResolver implements Resolver {
      * @return <code>true</code> if the expresion is indexed,
      *  otherwise <code>false</code>
      */
-    public boolean isIndexed(String expression) {
+    public boolean isIndexed(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (c == NESTED || c == MAPPED_START) {
                 return false;
             } else if (c == INDEXED_START) {
@@ -197,12 +197,12 @@ public class DefaultResolver implements Resolver {
      * @return <code>true</code> if the expresion is mapped,
      *  otherwise <code>false</code>
      */
-    public boolean isMapped(String expression) {
+    public boolean isMapped(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (c == NESTED || c == INDEXED_START) {
                 return false;
             } else if (c == MAPPED_START) {
@@ -219,14 +219,14 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The next property expression
      */
-    public String next(String expression) {
+    public String next(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;
         }
         boolean indexed = false;
         boolean mapped  = false;
         for (int i = 0; i < expression.length(); i++) {
-            char c = expression.charAt(i);
+            final char c = expression.charAt(i);
             if (indexed) {
                 if (c == INDEXED_END) {
                     return expression.substring(0, i + 1);
@@ -256,11 +256,11 @@ public class DefaultResolver implements Resolver {
      * @return The new expression value, with first property
      * expression removed - null if there are no more expressions
      */
-    public String remove(String expression) {
+    public String remove(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;
         }
-        String property = next(expression);
+        final String property = next(expression);
         if (expression.length() == property.length()) {
             return null;
         }

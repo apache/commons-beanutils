@@ -38,7 +38,7 @@ public class URLConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    public URLConverterTestCase(String name) {
+    public URLConverterTestCase(final String name) {
         super(name);
     }
 
@@ -71,7 +71,7 @@ public class URLConverterTestCase extends TestCase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -82,7 +82,7 @@ public class URLConverterTestCase extends TestCase {
             "from String",
         };
 
-        Object[] input = {
+        final Object[] input = {
             "http://www.apache.org",
             "http://www.apache.org/",
             "ftp://cvs.apache.org",
@@ -93,7 +93,7 @@ public class URLConverterTestCase extends TestCase {
             "http://notreal.apache.org",
         };
 
-        URL[] expected = {
+        final URL[] expected = {
             new URL("http://www.apache.org"),
             new URL("http://www.apache.org/"),
             new URL("ftp://cvs.apache.org"),
@@ -121,7 +121,7 @@ public class URLConverterTestCase extends TestCase {
         try {
             converter.convert(Integer.class, "http://www.apache.org");
             fail("Unsupported type could be converted!");
-        } catch (ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

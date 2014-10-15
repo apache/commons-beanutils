@@ -47,7 +47,7 @@ public class BeanPredicate implements Predicate {
      * @param predicate the <code>Predicate</code> to be applied,
      * not null
      */
-    public BeanPredicate(String propertyName, Predicate predicate) {
+    public BeanPredicate(final String propertyName, final Predicate predicate) {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
@@ -60,26 +60,26 @@ public class BeanPredicate implements Predicate {
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
-    public boolean evaluate(Object object) {
+    public boolean evaluate(final Object object) {
 
         boolean evaluation = false;
 
         try {
-            Object propValue = PropertyUtils.getProperty( object, propertyName );
+            final Object propValue = PropertyUtils.getProperty( object, propertyName );
             evaluation = predicate.evaluate(propValue);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
             log.error("ERROR: " + errorMsg, e);
             throw e;
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found.";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);
@@ -102,7 +102,7 @@ public class BeanPredicate implements Predicate {
      * @param propertyName the name of the property whose value is to be predicated,
      * not null
      */
-    public void setPropertyName(String propertyName) {
+    public void setPropertyName(final String propertyName) {
         this.propertyName = propertyName;
     }
 
@@ -120,7 +120,7 @@ public class BeanPredicate implements Predicate {
      * during {@link #evaluate(Object)}.
      * @param predicate <code>Predicate</code>, not null
      */
-    public void setPredicate(Predicate predicate) {
+    public void setPredicate(final Predicate predicate) {
         this.predicate = predicate;
     }
 

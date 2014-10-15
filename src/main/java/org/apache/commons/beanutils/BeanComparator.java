@@ -83,7 +83,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * property. See {@link PropertyUtilsBean} for property query language syntax.
      * If the property passed in is null then the actual objects will be compared
      */
-    public BeanComparator( String property ) {
+    public BeanComparator( final String property ) {
         this( property, ComparableComparator.getInstance() );
     }
 
@@ -103,7 +103,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * contains null values, a suitable comparator
      * may be supplied in this constructor.
      */
-    public BeanComparator( String property, Comparator<?> comparator ) {
+    public BeanComparator( final String property, final Comparator<?> comparator ) {
         setProperty( property );
         if (comparator != null) {
             this.comparator = comparator;
@@ -118,7 +118,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param property String method name to call to compare
      * If the property passed in is null then the actual objects will be compared
      */
-    public void setProperty( String property ) {
+    public void setProperty( final String property ) {
         this.property = property;
     }
 
@@ -152,7 +152,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
-    public int compare( T o1, T o2 ) {
+    public int compare( final T o1, final T o2 ) {
 
         if ( property == null ) {
             // compare the actual objects
@@ -160,17 +160,17 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         }
 
         try {
-            Object value1 = PropertyUtils.getProperty( o1, property );
-            Object value2 = PropertyUtils.getProperty( o2, property );
+            final Object value1 = PropertyUtils.getProperty( o1, property );
+            final Object value2 = PropertyUtils.getProperty( o2, property );
             return internalCompare( value1, value2 );
         }
-        catch ( IllegalAccessException iae ) {
+        catch ( final IllegalAccessException iae ) {
             throw new RuntimeException( "IllegalAccessException: " + iae.toString() );
         }
-        catch ( InvocationTargetException ite ) {
+        catch ( final InvocationTargetException ite ) {
             throw new RuntimeException( "InvocationTargetException: " + ite.toString() );
         }
-        catch ( NoSuchMethodException nsme ) {
+        catch ( final NoSuchMethodException nsme ) {
             throw new RuntimeException( "NoSuchMethodException: " + nsme.toString() );
         }
     }
@@ -183,7 +183,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @return whether the the comparators are equal or not
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -230,8 +230,9 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param val2 the second value to be compared
      * @return the result of the comparison
      */
-    private int internalCompare(Object val1, Object val2) {
+    private int internalCompare(final Object val1, final Object val2) {
         @SuppressWarnings("rawtypes")
+        final
         // to make the compiler happy
         Comparator c = comparator;
         return c.compare(val1, val2);

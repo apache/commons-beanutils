@@ -35,10 +35,10 @@ public class BeanWithInnerBean {
   public class InnerBean {
     private final Properties fish = new Properties();
 
-    public String getFish(String key){
+    public String getFish(final String key){
       return fish.getProperty(key);
     }
-    public void setFish(String key, String value){
+    public void setFish(final String key, final String value){
       fish.setProperty(key, value);
     }
   }

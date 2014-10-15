@@ -133,7 +133,7 @@ public class PropertyUtils {
      * @deprecated The <code>debug</code> static property is no longer used
      */
     @Deprecated
-    public static void setDebug(int newDebug) {
+    public static void setDebug(final int newDebug) {
         debug = newDebug;
     }
 
@@ -174,7 +174,7 @@ public class PropertyUtils {
      * @throws IllegalArgumentException if the argument is <b>null</b>
      * @since 1.9
      */
-    public static void addBeanIntrospector(BeanIntrospector introspector) {
+    public static void addBeanIntrospector(final BeanIntrospector introspector) {
         PropertyUtilsBean.getInstance().addBeanIntrospector(introspector);
     }
 
@@ -186,7 +186,7 @@ public class PropertyUtils {
      *         could be removed, <b>false</b> otherwise
      * @since 1.9
      */
-    public static boolean removeBeanIntrospector(BeanIntrospector introspector) {
+    public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
         return PropertyUtilsBean.getInstance().removeBeanIntrospector(
                 introspector);
     }
@@ -212,7 +212,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#copyProperties
      */
-    public static void copyProperties(Object dest, Object orig)
+    public static void copyProperties(final Object dest, final Object orig)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -238,7 +238,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#describe
      */
-    public static Map<String, Object> describe(Object bean)
+    public static Map<String, Object> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -270,7 +270,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getIndexedProperty(Object,String)
      */
-    public static Object getIndexedProperty(Object bean, String name)
+    public static Object getIndexedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -302,8 +302,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getIndexedProperty(Object,String, int)
      */
-    public static Object getIndexedProperty(Object bean,
-                                            String name, int index)
+    public static Object getIndexedProperty(final Object bean,
+                                            final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -330,7 +330,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getMappedProperty(Object,String)
      */
-    public static Object getMappedProperty(Object bean, String name)
+    public static Object getMappedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -358,8 +358,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getMappedProperty(Object,String, String)
      */
-    public static Object getMappedProperty(Object bean,
-                                           String name, String key)
+    public static Object getMappedProperty(final Object bean,
+                                           final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -379,7 +379,7 @@ public class PropertyUtils {
      * @deprecated This method should not be exposed
      */
     @Deprecated
-    public static FastHashMap getMappedPropertyDescriptors(Class<?> beanClass) {
+    public static FastHashMap getMappedPropertyDescriptors(final Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
 
@@ -397,7 +397,7 @@ public class PropertyUtils {
      * @deprecated This method should not be exposed
      */
     @Deprecated
-    public static FastHashMap getMappedPropertyDescriptors(Object bean) {
+    public static FastHashMap getMappedPropertyDescriptors(final Object bean) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
 
@@ -426,7 +426,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getNestedProperty
      */
-    public static Object getNestedProperty(Object bean, String name)
+    public static Object getNestedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -457,7 +457,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getProperty
      */
-    public static Object getProperty(Object bean, String name)
+    public static Object getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -490,8 +490,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getPropertyDescriptor
      */
-    public static PropertyDescriptor getPropertyDescriptor(Object bean,
-                                                           String name)
+    public static PropertyDescriptor getPropertyDescriptor(final Object bean,
+                                                           final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -513,7 +513,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getPropertyDescriptors(Class)
      */
     public static PropertyDescriptor[]
-            getPropertyDescriptors(Class<?> beanClass) {
+            getPropertyDescriptors(final Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(beanClass);
 
@@ -532,7 +532,7 @@ public class PropertyUtils {
      * @exception IllegalArgumentException if <code>bean</code> is null
      * @see PropertyUtilsBean#getPropertyDescriptors(Object)
      */
-    public static PropertyDescriptor[] getPropertyDescriptors(Object bean) {
+    public static PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
 
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(bean);
 
@@ -562,7 +562,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getPropertyEditorClass(Object,String)
      */
-    public static Class<?> getPropertyEditorClass(Object bean, String name)
+    public static Class<?> getPropertyEditorClass(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -595,7 +595,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getPropertyType(Object, String)
      */
-    public static Class<?> getPropertyType(Object bean, String name)
+    public static Class<?> getPropertyType(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -613,7 +613,7 @@ public class PropertyUtils {
      * @return The read method
      * @see PropertyUtilsBean#getReadMethod(PropertyDescriptor)
      */
-    public static Method getReadMethod(PropertyDescriptor descriptor) {
+    public static Method getReadMethod(final PropertyDescriptor descriptor) {
 
         return (PropertyUtilsBean.getInstance().getReadMethod(descriptor));
 
@@ -642,7 +642,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#getSimpleProperty
      */
-    public static Object getSimpleProperty(Object bean, String name)
+    public static Object getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -661,7 +661,7 @@ public class PropertyUtils {
      * @return The write method
      * @see PropertyUtilsBean#getWriteMethod(PropertyDescriptor)
      */
-    public static Method getWriteMethod(PropertyDescriptor descriptor) {
+    public static Method getWriteMethod(final PropertyDescriptor descriptor) {
 
         return PropertyUtilsBean.getInstance().getWriteMethod(descriptor);
 
@@ -685,7 +685,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#isReadable
      * @since BeanUtils 1.6
      */
-    public static boolean isReadable(Object bean, String name) {
+    public static boolean isReadable(final Object bean, final String name) {
 
         return PropertyUtilsBean.getInstance().isReadable(bean, name);
     }
@@ -708,7 +708,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#isWriteable
      * @since BeanUtils 1.6
      */
-    public static boolean isWriteable(Object bean, String name) {
+    public static boolean isWriteable(final Object bean, final String name) {
 
         return PropertyUtilsBean.getInstance().isWriteable(bean, name);
     }
@@ -738,8 +738,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
-    public static void setIndexedProperty(Object bean, String name,
-                                          Object value)
+    public static void setIndexedProperty(final Object bean, final String name,
+                                          final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -771,8 +771,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
-    public static void setIndexedProperty(Object bean, String name,
-                                          int index, Object value)
+    public static void setIndexedProperty(final Object bean, final String name,
+                                          final int index, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -799,8 +799,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setMappedProperty(Object, String, Object)
      */
-    public static void setMappedProperty(Object bean, String name,
-                                         Object value)
+    public static void setMappedProperty(final Object bean, final String name,
+                                         final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -827,8 +827,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setMappedProperty(Object, String, String, Object)
      */
-    public static void setMappedProperty(Object bean, String name,
-                                         String key, Object value)
+    public static void setMappedProperty(final Object bean, final String name,
+                                         final String key, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -858,8 +858,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setNestedProperty
      */
-    public static void setNestedProperty(Object bean,
-                                         String name, Object value)
+    public static void setNestedProperty(final Object bean,
+                                         final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -889,7 +889,7 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setProperty
      */
-    public static void setProperty(Object bean, String name, Object value)
+    public static void setProperty(final Object bean, final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -920,8 +920,8 @@ public class PropertyUtils {
      *  propety cannot be found
      * @see PropertyUtilsBean#setSimpleProperty
      */
-    public static void setSimpleProperty(Object bean,
-                                         String name, Object value)
+    public static void setSimpleProperty(final Object bean,
+                                         final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 

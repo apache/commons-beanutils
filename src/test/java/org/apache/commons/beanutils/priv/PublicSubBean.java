@@ -61,7 +61,7 @@ public class PublicSubBean extends PackageBean {
 
     }
 
-    public void setFoo(String foo) {
+    public void setFoo(final String foo) {
 
         this.foo = foo;
 

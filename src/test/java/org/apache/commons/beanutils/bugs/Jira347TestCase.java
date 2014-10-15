@@ -50,9 +50,9 @@ public class Jira347TestCase extends TestCase {
      * this would be fine as well.
      */
     public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
-        String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
-        ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
+        final String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
+        final ClassLoader loader = newClassLoader();
+        final Class<?> beanClass    = loader.loadClass(className);
         beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
@@ -67,18 +67,18 @@ public class Jira347TestCase extends TestCase {
         try {
           descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
         }
-        catch (IntrospectionException e) {
+        catch (final IntrospectionException e) {
           // this would be fine as well
         }
 
         if (descriptor != null) {
-            String m1 = getMappedWriteMethod(descriptor);
+            final String m1 = getMappedWriteMethod(descriptor);
              forceGarbageCollection();
              try {
-                 String m2 = getMappedWriteMethod(descriptor);
+                 final String m2 = getMappedWriteMethod(descriptor);
                  assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
              }
-             catch (RuntimeException e) {
+             catch (final RuntimeException e) {
                  fail("getMappedWriteMethod threw an exception after garbage collection " + e);
              }
         }
@@ -93,8 +93,8 @@ public class Jira347TestCase extends TestCase {
      *
      * @return the string representation or null if mapped write method does not exist
      */
-    private String getMappedWriteMethod(MappedPropertyDescriptor descriptor) {
-        Method m = descriptor.getMappedWriteMethod();
+    private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor) {
+        final Method m = descriptor.getMappedWriteMethod();
         return m == null ? null : m.toString();
     }
 
@@ -103,7 +103,7 @@ public class Jira347TestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        SoftReference<Object> ref = new SoftReference<Object>(new Object());
+        final SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
             ArrayList<Object> list = new ArrayList<Object>();
@@ -112,7 +112,7 @@ public class Jira347TestCase extends TestCase {
                 while (true && ref.get() != null) {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
                 }
-            } catch (Throwable ignored) {
+            } catch (final Throwable ignored) {
             }
             list.clear();
             list = null;
@@ -132,12 +132,12 @@ public class Jira347TestCase extends TestCase {
      */
     private static URLClassLoader newClassLoader() throws MalformedURLException {
 
-        String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
+        final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
         //System.out.println("dataFilePath: " + dataFilePath);
-        String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
+        final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
         //System.out.println("location: " + location);
 
-        StringBuilder newString = new StringBuilder();
+        final StringBuilder newString = new StringBuilder();
         for (int i=0;i<location.length();i++) {
             if (location.charAt(i)=='\\') {
                 newString.append("/");
@@ -145,10 +145,10 @@ public class Jira347TestCase extends TestCase {
                 newString.append(location.charAt(i));
             }
         }
-        String classLocation = newString.toString();
+        final String classLocation = newString.toString();
         //System.out.println("classlocation: " + classLocation);
 
-        URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
+        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
         return theLoader;
     }
 }

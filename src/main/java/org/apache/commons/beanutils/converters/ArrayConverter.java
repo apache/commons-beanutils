@@ -146,7 +146,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param elementConverter Converter used to convert
      *  individual array elements.
      */
-    public ArrayConverter(Class<?> defaultType, Converter elementConverter) {
+    public ArrayConverter(final Class<?> defaultType, final Converter elementConverter) {
         super();
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
@@ -173,7 +173,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param defaultSize Specifies the size of the default array value or if less
      *  than zero indicates that a <code>null</code> default value should be used.
      */
-    public ArrayConverter(Class<?> defaultType, Converter elementConverter, int defaultSize) {
+    public ArrayConverter(final Class<?> defaultType, final Converter elementConverter, final int defaultSize) {
         this(defaultType, elementConverter);
         this.defaultSize = defaultSize;
         Object defaultValue = null;
@@ -188,7 +188,7 @@ public class ArrayConverter extends AbstractConverter {
      *
      * @param delimiter The delimiter [default ',']
      */
-    public void setDelimiter(char delimiter) {
+    public void setDelimiter(final char delimiter) {
         this.delimiter = delimiter;
     }
 
@@ -198,7 +198,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param allowedChars Characters which are to be considered as part of
      * the tokens when parsing a delimited String [default is '.' and '-']
      */
-    public void setAllowedChars(char[] allowedChars) {
+    public void setAllowedChars(final char[] allowedChars) {
         this.allowedChars = allowedChars;
     }
 
@@ -211,7 +211,7 @@ public class ArrayConverter extends AbstractConverter {
      * converts all values in the array into a delimited list (default
      * is <code>true</code>
      */
-    public void setOnlyFirstToString(boolean onlyFirstToString) {
+    public void setOnlyFirstToString(final boolean onlyFirstToString) {
         this.onlyFirstToString = onlyFirstToString;
     }
 
@@ -233,15 +233,15 @@ public class ArrayConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to a String
      */
     @Override
-    protected String convertToString(Object value) throws Throwable {
+    protected String convertToString(final Object value) throws Throwable {
 
         int size = 0;
         Iterator<?> iterator = null;
-        Class<?> type = value.getClass();
+        final Class<?> type = value.getClass();
         if (type.isArray()) {
             size = Array.getLength(value);
         } else {
-            Collection<?> collection = convertToCollection(type, value);
+            final Collection<?> collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
         }
@@ -255,7 +255,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         // Create a StringBuffer containing a delimited list of the values
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < size; i++) {
             if (i > 0) {
                 buffer.append(delimiter);
@@ -281,7 +281,7 @@ public class ArrayConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      */
     @Override
-    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
 
         if (!type.isArray()) {
             throw new ConversionException(toString(getClass())
@@ -295,14 +295,14 @@ public class ArrayConverter extends AbstractConverter {
         if (value.getClass().isArray()) {
             size = Array.getLength(value);
         } else {
-            Collection<?> collection = convertToCollection(type, value);
+            final Collection<?> collection = convertToCollection(type, value);
             size = collection.size();
             iterator = collection.iterator();
         }
 
         // Allocate a new Array
-        Class<?> componentType = type.getComponentType();
-        Object newArray = Array.newInstance(componentType, size);
+        final Class<?> componentType = type.getComponentType();
+        final Object newArray = Array.newInstance(componentType, size);
 
         // Convert and set each element in the new Array
         for (int i = 0; i < size; i++) {
@@ -314,6 +314,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         @SuppressWarnings("unchecked")
+        final
         // This is safe because T is an array type and newArray is an array of
         // T's component type
         T result = (T) newArray;
@@ -327,7 +328,7 @@ public class ArrayConverter extends AbstractConverter {
      * @return The value unchanged
      */
     @Override
-    protected Object convertArray(Object value) {
+    protected Object convertArray(final Object value) {
         return value;
     }
 
@@ -352,14 +353,14 @@ public class ArrayConverter extends AbstractConverter {
      * @param value value to be converted
      * @return Collection elements.
      */
-    protected Collection<?> convertToCollection(Class<?> type, Object value) {
+    protected Collection<?> convertToCollection(final Class<?> type, final Object value) {
         if (value instanceof Collection) {
             return (Collection<?>)value;
         }
         if (value instanceof Number ||
             value instanceof Boolean ||
             value instanceof java.util.Date) {
-            List<Object> list = new ArrayList<Object>(1);
+            final List<Object> list = new ArrayList<Object>(1);
             list.add(value);
             return list;
         }
@@ -374,12 +375,12 @@ public class ArrayConverter extends AbstractConverter {
      * @return The default value for the specified type.
      */
     @Override
-    protected Object getDefault(Class<?> type) {
+    protected Object getDefault(final Class<?> type) {
         if (type.equals(String.class)) {
             return null;
         }
 
-        Object defaultValue = super.getDefault(type);
+        final Object defaultValue = super.getDefault(type);
         if (defaultValue == null) {
             return null;
         }
@@ -399,7 +400,7 @@ public class ArrayConverter extends AbstractConverter {
      */
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(toString(getClass()));
         buffer.append("[UseDefault=");
         buffer.append(isUseDefault());
@@ -431,7 +432,7 @@ public class ArrayConverter extends AbstractConverter {
      * @throws NullPointerException if <code>svalue</code>
      *  is <code>null</code>
      */
-    private List<String> parseElements(Class<?> type, String value) {
+    private List<String> parseElements(final Class<?> type, String value) {
 
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
@@ -446,7 +447,7 @@ public class ArrayConverter extends AbstractConverter {
         try {
 
             // Set up a StreamTokenizer on the characters in this String
-            StreamTokenizer st = new StreamTokenizer(new StringReader(value));
+            final StreamTokenizer st = new StreamTokenizer(new StringReader(value));
             st.whitespaceChars(delimiter , delimiter); // Set the delimiters
             st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
             st.wordChars('0', '9');      // Needed to make part of tokens
@@ -458,7 +459,7 @@ public class ArrayConverter extends AbstractConverter {
             // Split comma-delimited tokens into a List
             List<String> list = null;
             while (true) {
-                int ttype = st.nextToken();
+                final int ttype = st.nextToken();
                 if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)) {
                     if (st.sval != null) {
                         if (list == null) {
@@ -484,7 +485,7 @@ public class ArrayConverter extends AbstractConverter {
             // Return the completed list
             return (list);
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
 
             throw new ConversionException("Error converting from String to '"
                     + toString(type) + "': " + e.getMessage(), e);

@@ -35,7 +35,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public BigDecimalConverterTestCase(String name) {
+    public BigDecimalConverterTestCase(final String name) {
         super(name);
     }
 
@@ -67,7 +67,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new BigDecimalConverter(defaultValue);
     }
 
@@ -79,7 +79,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -95,7 +95,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             "from BigDecimal extension"
         };
 
-        Object[] input = {
+        final Object[] input = {
             "-17.2",
             "-1.1",
             "0.0",
@@ -111,7 +111,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             new ExtendingBigDecimal("3200.11")
         };
 
-        BigDecimal[] expected = {
+        final BigDecimal[] expected = {
             new BigDecimal("-17.2"),
             new BigDecimal("-1.1"),
             new BigDecimal("0.0"),
@@ -144,7 +144,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
      * derived number classes are handled correctly.
      */
     private class ExtendingBigDecimal extends BigDecimal {
-        private ExtendingBigDecimal(String val) {
+        private ExtendingBigDecimal(final String val) {
             super(val);
         }
     }

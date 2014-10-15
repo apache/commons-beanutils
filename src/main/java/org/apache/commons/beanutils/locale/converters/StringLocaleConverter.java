@@ -73,7 +73,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(boolean locPattern) {
+    public StringLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -85,7 +85,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *
      * @param locale        The locale
      */
-    public StringLocaleConverter(Locale locale) {
+    public StringLocaleConverter(final Locale locale) {
 
         this(locale, false);
     }
@@ -98,7 +98,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(Locale locale, boolean locPattern) {
+    public StringLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null, locPattern);
     }
@@ -111,7 +111,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public StringLocaleConverter(Locale locale, String pattern) {
+    public StringLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -125,7 +125,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public StringLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -139,7 +139,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public StringLocaleConverter(Object defaultValue) {
+    public StringLocaleConverter(final Object defaultValue) {
 
         this(defaultValue, false);
     }
@@ -153,7 +153,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(Object defaultValue, boolean locPattern) {
+    public StringLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -166,7 +166,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public StringLocaleConverter(Object defaultValue, Locale locale) {
+    public StringLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -180,7 +180,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public StringLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -194,7 +194,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public StringLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -209,7 +209,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public StringLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -229,7 +229,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @throws ParseException if an error occurs
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, final String pattern) throws ParseException {
 
         String result = null;
 
@@ -249,7 +249,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         }
         else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
 
-            SimpleDateFormat dateFormat =
+            final SimpleDateFormat dateFormat =
                     new SimpleDateFormat(pattern, locale);
 
             result = dateFormat.format(value);
@@ -272,9 +272,9 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */
-    private DecimalFormat getDecimalFormat(Locale locale, String pattern) {
+    private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
 
-        DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
+        final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
 
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
         if (pattern != null) {

@@ -42,7 +42,7 @@ public class Jira339TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira339TestCase(String name) {
+    public Jira339TestCase(final String name) {
         super(name);
     }
 
@@ -51,7 +51,7 @@ public class Jira339TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -89,10 +89,10 @@ public class Jira339TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
 
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         try {
             BeanUtils.setProperty(bean, "comparator", null);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
@@ -104,12 +104,12 @@ public class Jira339TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
 
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         try {
-            Map<String, Object> properties = new HashMap<String, Object>();
+            final Map<String, Object> properties = new HashMap<String, Object>();
             properties.put("comparator", null);
             BeanUtils.populate(bean, properties);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
@@ -136,7 +136,7 @@ public class Jira339TestCase extends TestCase {
          *
          * @param comparator the comparator
          */
-        public void setComparator(Comparator<?> comparator) {
+        public void setComparator(final Comparator<?> comparator) {
             this.comparator = comparator;
         }
 

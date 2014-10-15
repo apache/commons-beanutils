@@ -33,7 +33,7 @@ public class Jira368TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira368TestCase(String name) {
+    public Jira368TestCase(final String name) {
         super(name);
     }
 
@@ -42,7 +42,7 @@ public class Jira368TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -81,11 +81,11 @@ public class Jira368TestCase extends TestCase {
     public void testBeanUtilsSetProperty_NullBean() throws Exception {
         try {
             BeanUtils.setProperty(null, "foo", "bar");
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) {
             fail("Threw NullPointerException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // expected result
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw " + e);
         }
     }

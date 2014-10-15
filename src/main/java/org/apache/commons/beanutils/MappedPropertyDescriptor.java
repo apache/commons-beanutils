@@ -83,7 +83,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
-    public MappedPropertyDescriptor(String propertyName, Class<?> beanClass)
+    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass)
             throws IntrospectionException {
 
         super(propertyName, null, null);
@@ -94,7 +94,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
 
         setName(propertyName);
-        String base = capitalizePropertyName(propertyName);
+        final String base = capitalizePropertyName(propertyName);
 
         // Look for mapped read method and matching write method
         Method mappedReadMethod = null;
@@ -103,13 +103,13 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             try {
                 mappedReadMethod = getMethod(beanClass, "get" + base,
                         STRING_CLASS_PARAMETER);
-            } catch (IntrospectionException e) {
+            } catch (final IntrospectionException e) {
                 mappedReadMethod = getMethod(beanClass, "is" + base,
                         STRING_CLASS_PARAMETER);
             }
-            Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
+            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
-        } catch (IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             /* Swallow IntrospectionException
              * TODO: Why?
              */
@@ -149,8 +149,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
-    public MappedPropertyDescriptor(String propertyName, Class<?> beanClass,
-                                    String mappedGetterName, String mappedSetterName)
+    public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass,
+                                    final String mappedGetterName, final String mappedSetterName)
             throws IntrospectionException {
 
         super(propertyName, null, null);
@@ -168,7 +168,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
 
         if (mappedReadMethod != null) {
-            Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
+            final Class<?>[] params = { String.class, mappedReadMethod.getReturnType() };
             mappedWriteMethod =
                 getMethod(beanClass, mappedSetterName, params);
         } else {
@@ -195,8 +195,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
-    public MappedPropertyDescriptor(String propertyName,
-                                    Method mappedGetter, Method mappedSetter)
+    public MappedPropertyDescriptor(final String propertyName,
+                                    final Method mappedGetter, final Method mappedSetter)
             throws IntrospectionException {
 
         super(propertyName, mappedGetter, mappedSetter);
@@ -245,7 +245,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @throws IntrospectionException If an error occurs finding the
      * mapped property
      */
-    public void setMappedReadMethod(Method mappedGetter)
+    public void setMappedReadMethod(final Method mappedGetter)
             throws IntrospectionException {
         mappedReadMethodRef = new MappedMethodReference(mappedGetter);
         findMappedPropertyType();
@@ -268,7 +268,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @throws IntrospectionException If an error occurs finding the
      * mapped property
      */
-    public void setMappedWriteMethod(Method mappedSetter)
+    public void setMappedWriteMethod(final Method mappedSetter)
             throws IntrospectionException {
         mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
         findMappedPropertyType();
@@ -282,8 +282,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     private void findMappedPropertyType() throws IntrospectionException {
         try {
-            Method mappedReadMethod  = getMappedReadMethod();
-            Method mappedWriteMethod = getMappedWriteMethod();
+            final Method mappedReadMethod  = getMappedReadMethod();
+            final Method mappedWriteMethod = getMappedWriteMethod();
             Class<?> mappedPropertyType = null;
             if (mappedReadMethod != null) {
                 if (mappedReadMethod.getParameterTypes().length != 1) {
@@ -299,7 +299,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             }
 
             if (mappedWriteMethod != null) {
-                Class<?>[] params = mappedWriteMethod.getParameterTypes();
+                final Class<?>[] params = mappedWriteMethod.getParameterTypes();
                 if (params.length != 2) {
                     throw new IntrospectionException
                             ("bad mapped write method arg count");
@@ -312,7 +312,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 mappedPropertyType = params[1];
             }
             mappedPropertyTypeRef = new SoftReference<Class<?>>(mappedPropertyType);
-        } catch (IntrospectionException ex) {
+        } catch (final IntrospectionException ex) {
             throw ex;
         }
     }
@@ -323,12 +323,12 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param s The property name
      */
-    private static String capitalizePropertyName(String s) {
+    private static String capitalizePropertyName(final String s) {
         if (s.length() == 0) {
             return s;
         }
 
-        char[] chars = s.toCharArray();
+        final char[] chars = s.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         return new String(chars);
     }
@@ -336,19 +336,19 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Find a method on a class with a specified number of parameters.
      */
-    private static Method internalGetMethod(Class<?> initial, String methodName,
-                                            int parameterCount) {
+    private static Method internalGetMethod(final Class<?> initial, final String methodName,
+                                            final int parameterCount) {
         // For overridden methods we need to find the most derived version.
         // So we start with the given class and walk up the superclass chain.
         for (Class<?> clazz = initial; clazz != null; clazz = clazz.getSuperclass()) {
-            Method[] methods = clazz.getDeclaredMethods();
+            final Method[] methods = clazz.getDeclaredMethods();
             for (int i = 0; i < methods.length; i++) {
-                Method method = methods[i];
+                final Method method = methods[i];
                 if (method == null) {
                     continue;
                 }
                 // skip static methods.
-                int mods = method.getModifiers();
+                final int mods = method.getModifiers();
                 if (!Modifier.isPublic(mods) ||
                     Modifier.isStatic(mods)) {
                     continue;
@@ -363,9 +363,9 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         // Now check any inherited interfaces.  This is necessary both when
         // the argument class is itself an interface, and when the argument
         // class is an abstract class.
-        Class<?>[] interfaces = initial.getInterfaces();
+        final Class<?>[] interfaces = initial.getInterfaces();
         for (int i = 0; i < interfaces.length; i++) {
-            Method method = internalGetMethod(interfaces[i], methodName, parameterCount);
+            final Method method = internalGetMethod(interfaces[i], methodName, parameterCount);
             if (method != null) {
                 return method;
             }
@@ -377,13 +377,13 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Find a method on a class with a specified number of parameters.
      */
-    private static Method getMethod(Class<?> clazz, String methodName, int parameterCount)
+    private static Method getMethod(final Class<?> clazz, final String methodName, final int parameterCount)
             throws IntrospectionException {
         if (methodName == null) {
             return null;
         }
 
-        Method method = internalGetMethod(clazz, methodName, parameterCount);
+        final Method method = internalGetMethod(clazz, methodName, parameterCount);
         if (method != null) {
             return method;
         }
@@ -396,18 +396,18 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     /**
      * Find a method on a class with a specified parameter list.
      */
-    private static Method getMethod(Class<?> clazz, String methodName, Class<?>[] parameterTypes)
+    private static Method getMethod(final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes)
                                            throws IntrospectionException {
         if (methodName == null) {
             return null;
         }
 
-        Method method = MethodUtils.getMatchingAccessibleMethod(clazz, methodName, parameterTypes);
+        final Method method = MethodUtils.getMatchingAccessibleMethod(clazz, methodName, parameterTypes);
         if (method != null) {
             return method;
         }
 
-        int parameterCount = (parameterTypes == null) ? 0 : parameterTypes.length;
+        final int parameterCount = (parameterTypes == null) ? 0 : parameterTypes.length;
 
         // No Method found
         throw new IntrospectionException("No method \"" + methodName +
@@ -430,13 +430,13 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         private Reference<Class<?>> writeParamTypeRef0;
         private Reference<Class<?>> writeParamTypeRef1;
         private String[] writeParamClassNames;
-        MappedMethodReference(Method m) {
+        MappedMethodReference(final Method m) {
             if (m != null) {
                 className = m.getDeclaringClass().getName();
                 methodName = m.getName();
                 methodRef = new SoftReference<Method>(m);
                 classRef = new WeakReference<Class<?>>(m.getDeclaringClass());
-                Class<?>[] types = m.getParameterTypes();
+                final Class<?>[] types = m.getParameterTypes();
                 if (types.length == 2) {
                     writeParamTypeRef0 = new WeakReference<Class<?>>(types[0]);
                     writeParamTypeRef1 = new WeakReference<Class<?>>(types[1]);
@@ -487,7 +487,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     m = clazz.getMethod(methodName, paramTypes);
                     // Un-comment following line for testing
                     // System.out.println("Recreated Method " + methodName + " for " + className);
-                } catch (NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     throw new RuntimeException("Method " + methodName + " for " +
                             className + " could not be reconstructed - method not found");
                 }
@@ -506,7 +506,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         /**
          * Try to re-load the class
          */
-        private Class<?> reLoadClass(String name) {
+        private Class<?> reLoadClass(final String name) {
 
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
@@ -514,7 +514,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             if (classLoader != null) {
                 try {
                     return classLoader.loadClass(name);
-                } catch (ClassNotFoundException e) {
+                } catch (final ClassNotFoundException e) {
                     // ignore
                 }
             }
@@ -523,7 +523,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             classLoader = MappedPropertyDescriptor.class.getClassLoader();
             try {
                 return classLoader.loadClass(name);
-            } catch (ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
                 return null;
             }
         }

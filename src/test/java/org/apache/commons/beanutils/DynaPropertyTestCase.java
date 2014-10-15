@@ -41,7 +41,7 @@ public class DynaPropertyTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public DynaPropertyTestCase(String name) {
+    public DynaPropertyTestCase(final String name) {
         super(name);
     }
 

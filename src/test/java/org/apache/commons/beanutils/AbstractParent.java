@@ -32,24 +32,24 @@ public abstract class AbstractParent {
     /**
      * Method which matches signature but which has wrong parameters
      */
-    public String testAddChild(String badParameter) {
+    public String testAddChild(final String badParameter) {
         return null;
     }
 
     /**
      * Method which matches signature but which has wrong parameters
      */
-    public String testAddChild2(String ignore, String badParameter) {
+    public String testAddChild2(final String ignore, final String badParameter) {
         return null;
     }
 
-    public String testAddChild(Child child) {
+    public String testAddChild(final Child child) {
         this.child = child;
         return child.getName();
     }
 
 
-    public String testAddChild2(String ignore, Child child) {
+    public String testAddChild2(final String ignore, final Child child) {
         this.child = child;
         return child.getName();
     }

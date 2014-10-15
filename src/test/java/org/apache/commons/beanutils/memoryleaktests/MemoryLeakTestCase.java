@@ -58,7 +58,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -66,7 +66,7 @@ public class MemoryLeakTestCase extends TestCase {
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -107,7 +107,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -115,7 +115,7 @@ public class MemoryLeakTestCase extends TestCase {
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -160,10 +160,10 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
-        ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
+        final ClassLoader loader = newClassLoader();
+        final Class<?> beanClass    = loader.loadClass(className);
+        final Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
@@ -173,7 +173,7 @@ public class MemoryLeakTestCase extends TestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
+        final MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
         assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
         assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
         assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
@@ -205,7 +205,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
@@ -218,7 +218,7 @@ public class MemoryLeakTestCase extends TestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
+        final MappedPropertyDescriptor descriptor = new MappedPropertyDescriptor("mappedProperty", beanClass);
         assertNotNull("1-Read Method null", descriptor.getMappedReadMethod());
         assertNotNull("1-Write Method null", descriptor.getMappedWriteMethod());
         assertEquals("1-Read Method name", "getMappedProperty", descriptor.getMappedReadMethod().getName());
@@ -254,7 +254,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -262,7 +262,7 @@ public class MemoryLeakTestCase extends TestCase {
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -303,7 +303,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomePojo";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -312,7 +312,7 @@ public class MemoryLeakTestCase extends TestCase {
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -355,7 +355,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.CustomInteger";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.CustomInteger";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -363,7 +363,7 @@ public class MemoryLeakTestCase extends TestCase {
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -402,7 +402,7 @@ public class MemoryLeakTestCase extends TestCase {
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.CustomInteger";
+        final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.CustomInteger";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -410,7 +410,7 @@ public class MemoryLeakTestCase extends TestCase {
         Object bean        = beanClass.newInstance();
         // -----------------------------------------------------------------------------
 
-        WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -473,7 +473,7 @@ public class MemoryLeakTestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        SoftReference<Object> ref = new SoftReference<Object>(new Object());
+        final SoftReference<Object> ref = new SoftReference<Object>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
             java.util.ArrayList<String> list = new java.util.ArrayList<String>();
@@ -482,7 +482,7 @@ public class MemoryLeakTestCase extends TestCase {
                 while (true && ref.get() != null) {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
                 }
-            } catch (Throwable ignored) {
+            } catch (final Throwable ignored) {
             }
             list.clear();
             list = null;
@@ -502,12 +502,12 @@ public class MemoryLeakTestCase extends TestCase {
      */
     private static URLClassLoader newClassLoader() throws MalformedURLException {
 
-        String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
+        final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
         //System.out.println("dataFilePath: " + dataFilePath);
-        String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
+        final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils.memoryleaktests.pojotests".length());
         //System.out.println("location: " + location);
 
-        StringBuilder newString = new StringBuilder();
+        final StringBuilder newString = new StringBuilder();
         for (int i=0;i<location.length();i++) {
             if (location.charAt(i)=='\\') {
                 newString.append("/");
@@ -515,10 +515,10 @@ public class MemoryLeakTestCase extends TestCase {
                 newString.append(location.charAt(i));
             }
         }
-        String classLocation = newString.toString();
+        final String classLocation = newString.toString();
         //System.out.println("classlocation: " + classLocation);
 
-        URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
+        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
         return theLoader;
     }
 
@@ -530,7 +530,7 @@ public class MemoryLeakTestCase extends TestCase {
      *
      * @param className The name of the class to profile
      */
-    private void profilerLeakReport(String test, String className) {
+    private void profilerLeakReport(final String test, final String className) {
        /*
         * If you want a report about where the leaks are... uncomment this,
         * add jboss-profiler.jvmti.jar and jboss-commons.jar (for org.jboss.loggin).
@@ -546,10 +546,10 @@ public class MemoryLeakTestCase extends TestCase {
      * Test for JDK 1.5
      */
     private boolean isPre15JVM() {
-        String version = System.getProperty("java.specification.version");
-        StringTokenizer tokenizer = new StringTokenizer(version,".");
+        final String version = System.getProperty("java.specification.version");
+        final StringTokenizer tokenizer = new StringTokenizer(version,".");
         if (tokenizer.nextToken().equals("1")) {
-            String minorVersion = tokenizer.nextToken();
+            final String minorVersion = tokenizer.nextToken();
             if (minorVersion.equals("0")) {
                 return true;
             }
@@ -574,11 +574,11 @@ public class MemoryLeakTestCase extends TestCase {
      * @return the total, free, used memory stats
      */
     private String getMemoryStats() {
-        java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");
-        Runtime runtime = Runtime.getRuntime();
-        long free = runtime.freeMemory() / 1024;
-        long total = runtime.totalMemory() / 1024;
-        long used = total - free;
+        final java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");
+        final Runtime runtime = Runtime.getRuntime();
+        final long free = runtime.freeMemory() / 1024;
+        final long total = runtime.totalMemory() / 1024;
+        final long used = total - free;
         return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: "
                 + fmt.format(used) + "k " + "Free: "
                 + fmt.format(free) + "k";

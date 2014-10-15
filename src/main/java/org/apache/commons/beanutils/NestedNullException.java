@@ -41,7 +41,7 @@ public class NestedNullException extends BeanAccessLanguageException {
      *
      * @param message the detail message explaining this exception
      */
-    public NestedNullException(String message) {
+    public NestedNullException(final String message) {
         super(message);
     }
 }

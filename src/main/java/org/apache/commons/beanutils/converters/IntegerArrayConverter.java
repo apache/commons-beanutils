@@ -59,7 +59,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
      *
      * @param defaultValue The default value to be returned
      */
-    public IntegerArrayConverter(Object defaultValue) {
+    public IntegerArrayConverter(final Object defaultValue) {
 
         this.defaultValue = defaultValue;
         this.useDefault = true;
@@ -91,7 +91,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
      *  successfully
      */
     @Override
-    public Object convert(Class type, Object value) {
+    public Object convert(final Class type, final Object value) {
 
         // Deal with a null value
         if (value == null) {
@@ -110,13 +110,13 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String[] values = (String[]) value;
-                int[] results = new int[values.length];
+                final String[] values = (String[]) value;
+                final int[] results = new int[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Integer.parseInt(values[i]);
                 }
                 return (results);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 if (useDefault) {
                     return (defaultValue);
                 } else {
@@ -128,13 +128,13 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            List list = parseElements(value.toString());
-            int[] results = new int[list.size()];
+            final List list = parseElements(value.toString());
+            final int[] results = new int[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Integer.parseInt((String) list.get(i));
             }
             return (results);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
             } else {

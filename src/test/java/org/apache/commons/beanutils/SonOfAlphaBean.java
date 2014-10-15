@@ -22,7 +22,7 @@ package org.apache.commons.beanutils;
  */
 public class SonOfAlphaBean extends AlphaBean {
 
-    public SonOfAlphaBean(String name) {
+    public SonOfAlphaBean(final String name) {
         super(name);
     }
 }

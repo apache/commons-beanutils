@@ -51,7 +51,7 @@ public final class SqlDateConverter extends DateTimeConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlDateConverter(Object defaultValue) {
+    public SqlDateConverter(final Object defaultValue) {
         super(defaultValue);
     }
 

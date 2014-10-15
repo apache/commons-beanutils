@@ -34,7 +34,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public FloatConverterTestCase(String name) {
+    public FloatConverterTestCase(final String name) {
         super(name);
     }
 
@@ -66,7 +66,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new FloatConverter(defaultValue);
     }
 
@@ -78,7 +78,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -94,7 +94,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             "from Double"
         };
 
-        Object[] input = {
+        final Object[] input = {
             String.valueOf(Float.MIN_VALUE),
             "-17.2",
             "-1.1",
@@ -110,7 +110,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             new Double(12.2),
         };
 
-        Float[] expected = {
+        final Float[] expected = {
             new Float(Float.MIN_VALUE),
             new Float(-17.2),
             new Float(-1.1),
@@ -150,11 +150,11 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        Converter converter = makeConverter();
-        Class<?> clazz = Float.class;
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Float.class;
 
-        Double max     = new Double(Float.MAX_VALUE);
-        Double tooBig  = new Double(Double.MAX_VALUE);
+        final Double max     = new Double(Float.MAX_VALUE);
+        final Double tooBig  = new Double(Double.MAX_VALUE);
 
         // Maximum
         assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
@@ -163,7 +163,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
         try {
             assertEquals("Too Big", null, converter.convert(clazz, tooBig));
             fail("More than maximum, expected ConversionException");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // expected result
         }
     }

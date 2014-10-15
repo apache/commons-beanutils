@@ -45,7 +45,7 @@ public final class CharacterConverter extends AbstractConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public CharacterConverter(Object defaultValue) {
+    public CharacterConverter(final Object defaultValue) {
         super(defaultValue);
     }
 
@@ -68,8 +68,8 @@ public final class CharacterConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected String convertToString(Object value) {
-        String strValue = value.toString();
+    protected String convertToString(final Object value) {
+        final String strValue = value.toString();
         return strValue.length() == 0 ? "" : strValue.substring(0, 1);
     }
 
@@ -84,7 +84,7 @@ public final class CharacterConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected <T> T convertToType(Class<T> type, Object value) throws Exception {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Exception {
         if (Character.class.equals(type) || Character.TYPE.equals(type)) {
             return type.cast(new Character(value.toString().charAt(0)));
         }

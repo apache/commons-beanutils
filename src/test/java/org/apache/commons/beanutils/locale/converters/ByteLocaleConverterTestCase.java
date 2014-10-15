@@ -28,7 +28,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     // ---------------------------------------------------------- Constructors
 
-    public ByteLocaleConverterTestCase(String name) {
+    public ByteLocaleConverterTestCase(final String name) {
         super(name);
     }
 

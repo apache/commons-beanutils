@@ -33,7 +33,7 @@ public class Jira369TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira369TestCase(String name) {
+    public Jira369TestCase(final String name) {
         super(name);
     }
 
@@ -42,7 +42,7 @@ public class Jira369TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -79,15 +79,15 @@ public class Jira369TestCase extends TestCase {
      * Test {@link BeanUtils} getProperty() for property "aRatedCd".
      */
     public void testBeanUtilsGetProperty_aRatedCd() throws Exception {
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
 
         try {
             assertEquals("foo", BeanUtils.getProperty(bean, "aRatedCd"));
             fail("Expected NoSuchMethodException");
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             // expected result
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw " + e);
         }
     }
@@ -96,11 +96,11 @@ public class Jira369TestCase extends TestCase {
      * Test {@link BeanUtils} getProperty() for property "ARatedCd".
      */
     public void testBeanUtilsGetProperty_ARatedCd() throws Exception {
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         bean.setARatedCd("foo");
         try {
             assertEquals("foo", BeanUtils.getProperty(bean, "ARatedCd"));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw " + e);
         }
     }
@@ -109,11 +109,11 @@ public class Jira369TestCase extends TestCase {
      * Test {@link BeanUtils} getProperty() for property "bRatedCd".
      */
     public void testBeanUtilsGetProperty_bRatedCd() throws Exception {
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         bean.setbRatedCd("foo");
         try {
             assertEquals("foo", BeanUtils.getProperty(bean, "bRatedCd"));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw " + e);
         }
     }
@@ -129,7 +129,7 @@ public class Jira369TestCase extends TestCase {
             return aproperty;
         }
 
-        public void setARatedCd(String aproperty) {
+        public void setARatedCd(final String aproperty) {
             this.aproperty = aproperty;
         }
 
@@ -137,7 +137,7 @@ public class Jira369TestCase extends TestCase {
             return bproperty;
         }
 
-        public void setbRatedCd(String bproperty) {
+        public void setbRatedCd(final String bproperty) {
             this.bproperty = bproperty;
         }
     }

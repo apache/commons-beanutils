@@ -38,7 +38,7 @@ public class FileConverterTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    public FileConverterTestCase(String name) {
+    public FileConverterTestCase(final String name) {
         super(name);
     }
 
@@ -71,19 +71,19 @@ public class FileConverterTestCase extends TestCase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String"
         };
 
-        Object[] input = {
+        final Object[] input = {
             "/tmp",
             "/tmp/foo.txt",
             "/tmp/does/not/exist.foo"
         };
 
-        File[] expected = {
+        final File[] expected = {
             new File("/tmp"),
             new File("/tmp/foo.txt"),
             new File("/tmp/does/not/exist.foo")
@@ -102,7 +102,7 @@ public class FileConverterTestCase extends TestCase {
         try {
             converter.convert(Integer.class, "/tmp");
             fail("Could convert to unsupported type!");
-        } catch (ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

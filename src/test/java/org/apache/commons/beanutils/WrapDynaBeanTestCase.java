@@ -49,7 +49,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      *
      * @param name Name of the test case
      */
-    public WrapDynaBeanTestCase(String name) {
+    public WrapDynaBeanTestCase(final String name) {
 
         super(name);
 
@@ -114,7 +114,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.get("invalidProperty");
             fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             // Expected result
         }
 
@@ -122,14 +122,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.set("invalidProperty", "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             // Expected result
         }
 
         // Set up initial Value
         String testValue = "Original Value";
-        String testProperty = "stringProperty";
-        TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final String testProperty = "stringProperty";
+        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
         instance.setStringProperty(testValue);
         assertEquals("Check String property", testValue, instance.getStringProperty());
 
@@ -139,7 +139,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set(testProperty, testValue);
             assertEquals("Test Set", testValue, instance.getStringProperty());
             assertEquals("Test Get", testValue, bean.get(testProperty));
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
     }
@@ -153,7 +153,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.get("invalidProperty", 0);
             fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             // Expected result
         }
 
@@ -161,14 +161,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.set("invalidProperty", 0, "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             // Expected result
         }
 
         // Set up initial Value
         String testValue = "Original Value";
-        String testProperty = "stringIndexed";
-        TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final String testProperty = "stringIndexed";
+        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
         instance.setStringIndexed(0, testValue);
         assertEquals("Check String property", testValue, instance.getStringIndexed(0));
 
@@ -178,7 +178,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set(testProperty, 0, testValue);
             assertEquals("Test Set", testValue, instance.getStringIndexed(0));
             assertEquals("Test Get", testValue, bean.get(testProperty, 0));
-        } catch (IllegalArgumentException t) {
+        } catch (final IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
 
@@ -195,9 +195,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
             fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException t) {
+        } catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -206,9 +206,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
-        } catch (UnsupportedOperationException t) {
+        } catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -229,9 +229,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             fail("Should have thrown UnsupportedOperationException");
             //            assertTrue("Can not see first key",
             //         !bean.contains("mappedProperty", "First Key"));
-        } catch (UnsupportedOperationException t) {
+        } catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -242,9 +242,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             fail("Should have thrown UnsupportedOperationException");
             //            assertTrue("Can not see unknown key",
             //         !bean.contains("mappedProperty", "Unknown Key"));
-        } catch (UnsupportedOperationException t) {
+        } catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -252,20 +252,20 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     /** Tests getInstance method */
     public void testGetInstance() {
-        AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
-        WrapDynaBean dynaBean = new WrapDynaBean(alphaBean);
-        Object wrappedInstance = dynaBean.getInstance();
+        final AlphaBean alphaBean = new AlphaBean("Now On Air... John Peel");
+        final WrapDynaBean dynaBean = new WrapDynaBean(alphaBean);
+        final Object wrappedInstance = dynaBean.getInstance();
         assertTrue("Object type is AlphaBean", wrappedInstance instanceof AlphaBean);
-        AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
+        final AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
         assertTrue("Same Object", wrappedAlphaBean == alphaBean);
     }
 
     /** Tests the newInstance implementation for WrapDynaClass */
     public void testNewInstance() throws Exception {
-        WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(AlphaBean.class);
-        Object createdInstance = dynaClass.newInstance();
+        final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(AlphaBean.class);
+        final Object createdInstance = dynaClass.newInstance();
         assertTrue("Object type is WrapDynaBean", createdInstance instanceof WrapDynaBean);
-        WrapDynaBean dynaBean = (WrapDynaBean) createdInstance;
+        final WrapDynaBean dynaBean = (WrapDynaBean) createdInstance;
         assertTrue("Object type is AlphaBean", dynaBean.getInstance() instanceof AlphaBean);
     }
 
@@ -278,14 +278,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     public void testSerialization() {
 
         // Create a bean and set a value
-        WrapDynaBean origBean = new WrapDynaBean(new TestBean());
-        Integer newValue = new Integer(789);
+        final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
+        final Integer newValue = new Integer(789);
         assertEquals("origBean default", new Integer(123), origBean.get("intProperty"));
         origBean.set("intProperty", newValue);
         assertEquals("origBean new value", newValue, origBean.get("intProperty"));
 
         // Serialize/Deserialize & test value
-        WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
+        final WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
         assertEquals("bean value", newValue, bean.get("intProperty"));
 
     }
@@ -293,28 +293,28 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     /**
      * Do serialization and deserialization.
      */
-    private Object serializeDeserialize(Object target, String text) {
+    private Object serializeDeserialize(final Object target, final String text) {
 
         // Serialize the test object
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            final ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(target);
             oos.flush();
             oos.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail(text + ": Exception during serialization: " + e);
         }
 
         // Deserialize the test object
         Object result = null;
         try {
-            ByteArrayInputStream bais =
+            final ByteArrayInputStream bais =
                 new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
+            final ObjectInputStream ois = new ObjectInputStream(bais);
             result = ois.readObject();
             bais.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail(text + ": Exception during deserialization: " + e);
         }
         return result;
@@ -325,7 +325,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * Tests whether a WrapDynaClass can be provided when constructing a bean.
      */
     public void testInitWithDynaClass() {
-        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         bean = new WrapDynaBean(new TestBean(), clazz);
         assertSame("Wrong DynaClass", clazz, bean.getDynaClass());
         checkSimplePropertyAccess();
@@ -335,7 +335,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * Tests whether caching works for WrapDynaClass objects.
      */
     public void testGetWrapDynaClassFromCache() {
-        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         assertSame("Instance not cached", clazz,
                 WrapDynaClass.createDynaClass(TestBean.class));
     }
@@ -345,9 +345,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * taken into account when accessing an instance from the cache.
      */
     public void testGetWrapDynaClassFromCacheWithPropUtils() {
-        WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
-        PropertyUtilsBean pu = new PropertyUtilsBean();
-        WrapDynaClass clazz2 = WrapDynaClass.createDynaClass(TestBean.class, pu);
+        final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
+        final WrapDynaClass clazz2 = WrapDynaClass.createDynaClass(TestBean.class, pu);
         assertNotSame("Got same instance from cache", clazz, clazz2);
     }
 
@@ -356,11 +356,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * bean properties.
      */
     public void testIntrospectionWithCustomPropUtils() {
-        PropertyUtilsBean pu = new PropertyUtilsBean();
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
         pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
-        WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(
+        final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(
                 FluentIntrospectionTestBean.class, pu);
-        FluentIntrospectionTestBean obj = new FluentIntrospectionTestBean();
+        final FluentIntrospectionTestBean obj = new FluentIntrospectionTestBean();
         bean = new WrapDynaBean(obj, dynaClass);
         bean.set("fluentProperty", "testvalue");
         assertEquals("Property not set", "testvalue", obj.getStringProperty());

@@ -83,7 +83,7 @@ public class BeanUtilsBean {
      *
      * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
-    public static void setInstance(BeanUtilsBean newInstance) {
+    public static void setInstance(final BeanUtilsBean newInstance) {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
@@ -122,7 +122,7 @@ public class BeanUtilsBean {
      *
      * @since 1.8.0
      */
-    public BeanUtilsBean(ConvertUtilsBean convertUtilsBean) {
+    public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean) {
         this(convertUtilsBean, new PropertyUtilsBean());
     }
 
@@ -135,8 +135,8 @@ public class BeanUtilsBean {
      * to access properties
      */
     public BeanUtilsBean(
-                            ConvertUtilsBean convertUtilsBean,
-                            PropertyUtilsBean propertyUtilsBean) {
+                            final ConvertUtilsBean convertUtilsBean,
+                            final PropertyUtilsBean propertyUtilsBean) {
 
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
@@ -166,7 +166,7 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public Object cloneBean(Object bean)
+    public Object cloneBean(final Object bean)
             throws IllegalAccessException, InstantiationException,
             InvocationTargetException, NoSuchMethodException {
 
@@ -227,7 +227,7 @@ public class BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    public void copyProperties(Object dest, Object orig)
+    public void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
 
         // Validate existence of the specified beans
@@ -245,43 +245,44 @@ public class BeanUtilsBean {
 
         // Copy the properties, converting as necessary
         if (orig instanceof DynaBean) {
-            DynaProperty[] origDescriptors =
+            final DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (int i = 0; i < origDescriptors.length; i++) {
-                String name = origDescriptors[i].getName();
+                final String name = origDescriptors[i].getName();
                 // Need to check isReadable() for WrapDynaBean
                 // (see Jira issue# BEANUTILS-61)
                 if (getPropertyUtils().isReadable(orig, name) &&
                     getPropertyUtils().isWriteable(dest, name)) {
-                    Object value = ((DynaBean) orig).get(name);
+                    final Object value = ((DynaBean) orig).get(name);
                     copyProperty(dest, name, value);
                 }
             }
         } else if (orig instanceof Map) {
             @SuppressWarnings("unchecked")
+            final
             // Map properties are always of type <String, Object>
             Map<String, Object> propMap = (Map<String, Object>) orig;
-            for (Map.Entry<String, Object> entry : propMap.entrySet()) {
-                String name = entry.getKey();
+            for (final Map.Entry<String, Object> entry : propMap.entrySet()) {
+                final String name = entry.getKey();
                 if (getPropertyUtils().isWriteable(dest, name)) {
                     copyProperty(dest, name, entry.getValue());
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
-            PropertyDescriptor[] origDescriptors =
+            final PropertyDescriptor[] origDescriptors =
                 getPropertyUtils().getPropertyDescriptors(orig);
             for (int i = 0; i < origDescriptors.length; i++) {
-                String name = origDescriptors[i].getName();
+                final String name = origDescriptors[i].getName();
                 if ("class".equals(name)) {
                     continue; // No point in trying to set an object's class
                 }
                 if (getPropertyUtils().isReadable(orig, name) &&
                     getPropertyUtils().isWriteable(dest, name)) {
                     try {
-                        Object value =
+                        final Object value =
                             getPropertyUtils().getSimpleProperty(orig, name);
                         copyProperty(dest, name, value);
-                    } catch (NoSuchMethodException e) {
+                    } catch (final NoSuchMethodException e) {
                         // Should not happen
                     }
                 }
@@ -322,12 +323,12 @@ public class BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    public void copyProperty(Object bean, String name, Object value)
+    public void copyProperty(final Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
-            StringBuilder sb = new StringBuilder("  copyProperty(");
+            final StringBuilder sb = new StringBuilder("  copyProperty(");
             sb.append(bean);
             sb.append(", ");
             sb.append(name);
@@ -337,7 +338,7 @@ public class BeanUtilsBean {
             } else if (value instanceof String) {
                 sb.append((String) value);
             } else if (value instanceof String[]) {
-                String[] values = (String[]) value;
+                final String[] values = (String[]) value;
                 sb.append('[');
                 for (int i = 0; i < values.length; i++) {
                     if (i > 0) {
@@ -355,12 +356,12 @@ public class BeanUtilsBean {
 
         // Resolve any nested expression to get the actual target bean
         Object target = bean;
-        Resolver resolver = getPropertyUtils().getResolver();
+        final Resolver resolver = getPropertyUtils().getResolver();
         while (resolver.hasNested(name)) {
             try {
                 target = getPropertyUtils().getProperty(target, resolver.next(name));
                 name = resolver.remove(name);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -370,15 +371,15 @@ public class BeanUtilsBean {
         }
 
         // Declare local variables we will require
-        String propName = resolver.getProperty(name); // Simple name of target property
+        final String propName = resolver.getProperty(name); // Simple name of target property
         Class<?> type = null;                         // Java type of target property
-        int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
-        String key = resolver.getKey(name);           // Mapped key value (if any)
+        final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
+        final String key = resolver.getKey(name);           // Mapped key value (if any)
 
         // Calculate the target property type
         if (target instanceof DynaBean) {
-            DynaClass dynaClass = ((DynaBean) target).getDynaClass();
-            DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
+            final DynaClass dynaClass = ((DynaBean) target).getDynaClass();
+            final DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
             if (dynaProperty == null) {
                 return; // Skip this property setter
             }
@@ -391,7 +392,7 @@ public class BeanUtilsBean {
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             type = descriptor.getPropertyType();
@@ -415,7 +416,7 @@ public class BeanUtilsBean {
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
                                                  index, value);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException
                     (e, "Cannot set " + propName);
             }
@@ -426,7 +427,7 @@ public class BeanUtilsBean {
             try {
                 getPropertyUtils().setMappedProperty(target, propName,
                                                 key, value);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException
                     (e, "Cannot set " + propName);
             }
@@ -434,7 +435,7 @@ public class BeanUtilsBean {
             value = convertForCopy(value, type);
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException
                     (e, "Cannot set " + propName);
             }
@@ -480,7 +481,7 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public Map<String, String> describe(Object bean)
+    public Map<String, String> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -493,20 +494,20 @@ public class BeanUtilsBean {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
 
-        Map<String, String> description = new HashMap<String, String>();
+        final Map<String, String> description = new HashMap<String, String>();
         if (bean instanceof DynaBean) {
-            DynaProperty[] descriptors =
+            final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
             for (int i = 0; i < descriptors.length; i++) {
-                String name = descriptors[i].getName();
+                final String name = descriptors[i].getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
-            PropertyDescriptor[] descriptors =
+            final PropertyDescriptor[] descriptors =
                 getPropertyUtils().getPropertyDescriptors(bean);
-            Class<?> clazz = bean.getClass();
+            final Class<?> clazz = bean.getClass();
             for (int i = 0; i < descriptors.length; i++) {
-                String name = descriptors[i].getName();
+                final String name = descriptors[i].getName();
                 if (getPropertyUtils().getReadMethod(clazz, descriptors[i]) != null) {
                     description.put(name, getProperty(bean, name));
                 }
@@ -532,16 +533,16 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String[] getArrayProperty(Object bean, String name)
+    public String[] getArrayProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getProperty(bean, name);
+        final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
             return (null);
         } else if (value instanceof Collection) {
-            ArrayList<String> values = new ArrayList<String>();
-            for (Object item : (Collection<?>) value) {
+            final ArrayList<String> values = new ArrayList<String>();
+            for (final Object item : (Collection<?>) value) {
                 if (item == null) {
                     values.add(null);
                 } else {
@@ -551,10 +552,10 @@ public class BeanUtilsBean {
             }
             return (values.toArray(new String[values.size()]));
         } else if (value.getClass().isArray()) {
-            int n = Array.getLength(value);
-            String[] results = new String[n];
+            final int n = Array.getLength(value);
+            final String[] results = new String[n];
             for (int i = 0; i < n; i++) {
-                Object item = Array.get(value, i);
+                final Object item = Array.get(value, i);
                 if (item == null) {
                     results[i] = null;
                 } else {
@@ -564,7 +565,7 @@ public class BeanUtilsBean {
             }
             return (results);
         } else {
-            String[] results = new String[1];
+            final String[] results = new String[1];
             results[0] = getConvertUtils().convert(value);
             return (results);
         }
@@ -591,11 +592,11 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getIndexedProperty(Object bean, String name)
+    public String getIndexedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getIndexedProperty(bean, name);
+        final Object value = getPropertyUtils().getIndexedProperty(bean, name);
         return (getConvertUtils().convert(value));
 
     }
@@ -618,12 +619,12 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getIndexedProperty(Object bean,
-                                            String name, int index)
+    public String getIndexedProperty(final Object bean,
+                                            final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
+        final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
         return (getConvertUtils().convert(value));
 
     }
@@ -648,11 +649,11 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getMappedProperty(Object bean, String name)
+    public String getMappedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getMappedProperty(bean, name);
+        final Object value = getPropertyUtils().getMappedProperty(bean, name);
         return (getConvertUtils().convert(value));
 
     }
@@ -675,12 +676,12 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getMappedProperty(Object bean,
-                                           String name, String key)
+    public String getMappedProperty(final Object bean,
+                                           final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getMappedProperty(bean, name, key);
+        final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
         return (getConvertUtils().convert(value));
 
     }
@@ -703,11 +704,11 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getNestedProperty(Object bean, String name)
+    public String getNestedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getNestedProperty(bean, name);
+        final Object value = getPropertyUtils().getNestedProperty(bean, name);
         return (getConvertUtils().convert(value));
 
     }
@@ -729,7 +730,7 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getProperty(Object bean, String name)
+    public String getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -753,11 +754,11 @@ public class BeanUtilsBean {
      * @exception NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public String getSimpleProperty(Object bean, String name)
+    public String getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        Object value = getPropertyUtils().getSimpleProperty(bean, name);
+        final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return (getConvertUtils().convert(value));
 
     }
@@ -798,7 +799,7 @@ public class BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    public void populate(Object bean, Map<String, ? extends Object> properties)
+    public void populate(final Object bean, final Map<String, ? extends Object> properties)
         throws IllegalAccessException, InvocationTargetException {
 
         // Do nothing unless both arguments have been specified
@@ -811,9 +812,9 @@ public class BeanUtilsBean {
         }
 
         // Loop through the property name/value pairs to be set
-        for(Map.Entry<String, ? extends Object> entry : properties.entrySet()) {
+        for(final Map.Entry<String, ? extends Object> entry : properties.entrySet()) {
             // Identify the property name and value(s) to be assigned
-            String name = entry.getKey();
+            final String name = entry.getKey();
             if (name == null) {
                 continue;
             }
@@ -856,12 +857,12 @@ public class BeanUtilsBean {
      * @exception InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    public void setProperty(Object bean, String name, Object value)
+    public void setProperty(final Object bean, String name, final Object value)
         throws IllegalAccessException, InvocationTargetException {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
-            StringBuilder sb = new StringBuilder("  setProperty(");
+            final StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
             sb.append(name);
@@ -871,7 +872,7 @@ public class BeanUtilsBean {
             } else if (value instanceof String) {
                 sb.append((String) value);
             } else if (value instanceof String[]) {
-                String[] values = (String[]) value;
+                final String[] values = (String[]) value;
                 sb.append('[');
                 for (int i = 0; i < values.length; i++) {
                     if (i > 0) {
@@ -889,7 +890,7 @@ public class BeanUtilsBean {
 
         // Resolve any nested expression to get the actual target bean
         Object target = bean;
-        Resolver resolver = getPropertyUtils().getResolver();
+        final Resolver resolver = getPropertyUtils().getResolver();
         while (resolver.hasNested(name)) {
             try {
                 target = getPropertyUtils().getProperty(target, resolver.next(name));
@@ -897,7 +898,7 @@ public class BeanUtilsBean {
                     return;
                 }
                 name = resolver.remove(name);
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -907,15 +908,15 @@ public class BeanUtilsBean {
         }
 
         // Declare local variables we will require
-        String propName = resolver.getProperty(name); // Simple name of target property
+        final String propName = resolver.getProperty(name); // Simple name of target property
         Class<?> type = null;                         // Java type of target property
-        int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
-        String key = resolver.getKey(name);           // Mapped key value (if any)
+        final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
+        final String key = resolver.getKey(name);           // Mapped key value (if any)
 
         // Calculate the property type
         if (target instanceof DynaBean) {
-            DynaClass dynaClass = ((DynaBean) target).getDynaClass();
-            DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
+            final DynaClass dynaClass = ((DynaBean) target).getDynaClass();
+            final DynaProperty dynaProperty = dynaClass.getDynaProperty(propName);
             if (dynaProperty == null) {
                 return; // Skip this property setter
             }
@@ -932,7 +933,7 @@ public class BeanUtilsBean {
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            } catch (NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
@@ -978,7 +979,7 @@ public class BeanUtilsBean {
         Object newValue = null;
         if (type.isArray() && (index < 0)) { // Scalar value into array
             if (value == null) {
-                String[] values = new String[1];
+                final String[] values = new String[1];
                 values[0] = null;
                 newValue = getConvertUtils().convert(values, type);
             } else if (value instanceof String) {
@@ -1012,7 +1013,7 @@ public class BeanUtilsBean {
         // Invoke the setter method
         try {
           getPropertyUtils().setProperty(target, name, newValue);
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new InvocationTargetException
                 (e, "Cannot set " + propName);
         }
@@ -1045,12 +1046,12 @@ public class BeanUtilsBean {
      * @return  true if the cause was initialized, otherwise false.
      * @since 1.8.0
      */
-    public boolean initCause(Throwable throwable, Throwable cause) {
+    public boolean initCause(final Throwable throwable, final Throwable cause) {
         if (INIT_CAUSE_METHOD != null && cause != null) {
             try {
                 INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
                 return true;
-            } catch (Throwable e) {
+            } catch (final Throwable e) {
                 return false; // can't initialize cause
             }
         }
@@ -1068,8 +1069,8 @@ public class BeanUtilsBean {
      * @exception ConversionException if thrown by an underlying Converter
      * @since 1.8.0
      */
-    protected Object convert(Object value, Class<?> type) {
-        Converter converter = getConvertUtils().lookup(type);
+    protected Object convert(final Object value, final Class<?> type) {
+        final Converter converter = getConvertUtils().lookup(type);
         if (converter != null) {
             log.trace("        USING CONVERTER " + converter);
             return converter.convert(type, value);
@@ -1087,7 +1088,7 @@ public class BeanUtilsBean {
      * @param type the target type of the conversion
      * @return the converted value
      */
-    private Object convertForCopy(Object value, Class<?> type) {
+    private Object convertForCopy(final Object value, final Class<?> type) {
         return (value != null) ? convert(value, type) : value;
     }
 
@@ -1102,16 +1103,16 @@ public class BeanUtilsBean {
      */
     private static Method getInitCauseMethod() {
         try {
-            Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
+            final Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
             return Throwable.class.getMethod("initCause", paramsClasses);
-        } catch (NoSuchMethodException e) {
-            Log log = LogFactory.getLog(BeanUtils.class);
+        } catch (final NoSuchMethodException e) {
+            final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Throwable does not have initCause() method in JDK 1.3");
             }
             return null;
-        } catch (Throwable e) {
-            Log log = LogFactory.getLog(BeanUtils.class);
+        } catch (final Throwable e) {
+            final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Error getting the Throwable initCause() method", e);
             }
@@ -1127,8 +1128,8 @@ public class BeanUtilsBean {
      * @param value the value object to be set for this property
      * @return the type of this property
      */
-    private static Class<?> dynaPropertyType(DynaProperty dynaProperty,
-            Object value) {
+    private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
+            final Object value) {
         if (!dynaProperty.isMapped()) {
             return dynaProperty.getType();
         }

@@ -33,7 +33,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Construct a new Character Converter test case.
      * @param name Test Name
      */
-    public CharacterConverterTestCase(String name) {
+    public CharacterConverterTestCase(final String name) {
         super(name);
     }
 
@@ -65,7 +65,7 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testConvertToString() {
 
-        Converter converter = new CharacterConverter();
+        final Converter converter = new CharacterConverter();
 
         assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
         assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
@@ -77,7 +77,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Test Conversion to Character
      */
     public void testConvertToCharacter() {
-        Converter converter = new CharacterConverter();
+        final Converter converter = new CharacterConverter();
         assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
         assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
         assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
@@ -87,7 +87,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Tests whether the primitive char class can be passed as target type.
      */
     public void testConvertToChar() {
-        Converter converter = new CharacterConverter();
+        final Converter converter = new CharacterConverter();
         assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
@@ -96,11 +96,11 @@ public class CharacterConverterTestCase extends TestCase {
      * provided.
      */
     public void testConvertToCharacterNullNoDefault() {
-        Converter converter = new CharacterConverter();
+        final Converter converter = new CharacterConverter();
         try {
             converter.convert(Character.class, null);
             fail("Expected a ConversionException for null value");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // expected result
         }
     }
@@ -109,7 +109,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Test Conversion to Character (with default)
      */
     public void testDefault() {
-        Converter converter = new CharacterConverter("C");
+        final Converter converter = new CharacterConverter("C");
         assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
     }
 
@@ -117,11 +117,11 @@ public class CharacterConverterTestCase extends TestCase {
      * Tries a conversion to an unsupported type.
      */
     public void testConvertToUnsupportedType() {
-        Converter converter = new CharacterConverter();
+        final Converter converter = new CharacterConverter();
         try {
             converter.convert(Integer.class, "Test");
             fail("Could convert to unsupported type!");
-        } catch (ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

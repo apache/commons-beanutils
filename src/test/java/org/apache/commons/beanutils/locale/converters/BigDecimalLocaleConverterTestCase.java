@@ -31,7 +31,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     // ---------------------------------------------------------- Constructors
 
-    public BigDecimalLocaleConverterTestCase(String name) {
+    public BigDecimalLocaleConverterTestCase(final String name) {
         super(name);
     }
 

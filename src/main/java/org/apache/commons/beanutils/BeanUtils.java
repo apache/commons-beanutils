@@ -75,7 +75,7 @@ public class BeanUtils {
      *             this class.
      */
     @Deprecated
-    public static void setDebug(int newDebug) {
+    public static void setDebug(final int newDebug) {
         debug = newDebug;
     }
 
@@ -101,7 +101,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#cloneBean
      */
-    public static Object cloneBean(Object bean)
+    public static Object cloneBean(final Object bean)
             throws IllegalAccessException, InstantiationException,
             InvocationTargetException, NoSuchMethodException {
 
@@ -129,7 +129,7 @@ public class BeanUtils {
      *  throws an exception
      * @see BeanUtilsBean#copyProperties
      */
-    public static void copyProperties(Object dest, Object orig)
+    public static void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
@@ -152,7 +152,7 @@ public class BeanUtils {
      *  throws an exception
      * @see BeanUtilsBean#copyProperty
      */
-    public static void copyProperty(Object bean, String name, Object value)
+    public static void copyProperty(final Object bean, final String name, final Object value)
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
@@ -176,7 +176,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#describe
      */
-    public static Map<String, String> describe(Object bean)
+    public static Map<String, String> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -202,7 +202,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getArrayProperty
      */
-    public static String[] getArrayProperty(Object bean, String name)
+    public static String[] getArrayProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -229,7 +229,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getIndexedProperty(Object, String)
      */
-    public static String getIndexedProperty(Object bean, String name)
+    public static String getIndexedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -258,8 +258,8 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getIndexedProperty(Object, String, int)
      */
-    public static String getIndexedProperty(Object bean,
-                                            String name, int index)
+    public static String getIndexedProperty(final Object bean,
+                                            final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -287,7 +287,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getMappedProperty(Object, String)
      */
-    public static String getMappedProperty(Object bean, String name)
+    public static String getMappedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -315,8 +315,8 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getMappedProperty(Object, String, String)
      */
-    public static String getMappedProperty(Object bean,
-                                           String name, String key)
+    public static String getMappedProperty(final Object bean,
+                                           final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -345,7 +345,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getNestedProperty
      */
-    public static String getNestedProperty(Object bean, String name)
+    public static String getNestedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -373,7 +373,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getProperty
      */
-    public static String getProperty(Object bean, String name)
+    public static String getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -400,7 +400,7 @@ public class BeanUtils {
      *  property cannot be found
      * @see BeanUtilsBean#getSimpleProperty
      */
-    public static String getSimpleProperty(Object bean, String name)
+    public static String getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
@@ -425,7 +425,7 @@ public class BeanUtils {
      *  throws an exception
      * @see BeanUtilsBean#populate
      */
-    public static void populate(Object bean, Map<String, ? extends Object> properties)
+    public static void populate(final Object bean, final Map<String, ? extends Object> properties)
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().populate(bean, properties);
@@ -448,7 +448,7 @@ public class BeanUtils {
      *  throws an exception
      * @see BeanUtilsBean#setProperty
      */
-    public static void setProperty(Object bean, String name, Object value)
+    public static void setProperty(final Object bean, final String name, final Object value)
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
@@ -462,7 +462,7 @@ public class BeanUtils {
      * @return  true if the cause was initialized, otherwise false.
      * @since 1.8.0
      */
-    public static boolean initCause(Throwable throwable, Throwable cause) {
+    public static boolean initCause(final Throwable throwable, final Throwable cause) {
         return BeanUtilsBean.getInstance().initCause(throwable, cause);
     }
 
@@ -483,7 +483,7 @@ public class BeanUtils {
      * @return Whether it is fast or not.
      * @since 1.8.0
      */
-    public static boolean getCacheFast(Map<?, ?> map) {
+    public static boolean getCacheFast(final Map<?, ?> map) {
         if (map instanceof WeakFastHashMap) {
             return ((WeakFastHashMap<?, ?>) map).getFast();
         } else {
@@ -497,7 +497,7 @@ public class BeanUtils {
      * @param fast Whether it should be fast or not.
      * @since 1.8.0
      */
-    public static void setCacheFast(Map<?, ?> map, boolean fast) {
+    public static void setCacheFast(final Map<?, ?> map, final boolean fast) {
         if (map instanceof WeakFastHashMap) {
             ((WeakFastHashMap<?, ?>)map).setFast(fast);
         }

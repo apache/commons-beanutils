@@ -46,8 +46,8 @@ public class StringConverterTestCase extends TestCase {
      * Tests a conversion to a string type.
      */
     public void testConvertToTypeString() {
-        Object value = new Object();
-        String strVal = converter.convert(String.class, value);
+        final Object value = new Object();
+        final String strVal = converter.convert(String.class, value);
         assertEquals("Wrong conversion result", value.toString(), strVal);
     }
 
@@ -58,7 +58,7 @@ public class StringConverterTestCase extends TestCase {
         try {
             converter.convert(Integer.class, new Object());
             fail("No conversion exception thrown!");
-        } catch(ConversionException cex) {
+        } catch(final ConversionException cex) {
             // expected result
         }
     }

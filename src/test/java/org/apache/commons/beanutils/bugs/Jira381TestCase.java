@@ -36,7 +36,7 @@ public class Jira381TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira381TestCase(String name) {
+    public Jira381TestCase(final String name) {
         super(name);
     }
 
@@ -48,11 +48,11 @@ public class Jira381TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
 
-        Class<?> target = TestServiceBean.class;
-        String methodName = "performOp";
-        Class<?>[] runtimeClasses = new Class<?>[]{TestObjectSubclass.class};
+        final Class<?> target = TestServiceBean.class;
+        final String methodName = "performOp";
+        final Class<?>[] runtimeClasses = new Class<?>[]{TestObjectSubclass.class};
 
-        Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
+        final Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
 
         assertEquals(target, returned.getDeclaringClass());
         assertEquals(methodName, returned.getName());
@@ -67,13 +67,13 @@ public class Jira381TestCase extends TestCase {
         /**
          * Generic object method
          */
-        public void performOp(Object o){
+        public void performOp(final Object o){
         }
 
         /**
          * Object method
          */
-        public void performOp(TestObject o){
+        public void performOp(final TestObject o){
         }
     }
 

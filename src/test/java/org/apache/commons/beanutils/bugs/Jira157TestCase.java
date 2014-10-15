@@ -44,7 +44,7 @@ public class Jira157TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira157TestCase(String name) {
+    public Jira157TestCase(final String name) {
         super(name);
     }
 
@@ -53,7 +53,7 @@ public class Jira157TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -93,7 +93,7 @@ public class Jira157TestCase extends TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Serializable() {
-        Object bean = new Serializable() {
+        final Object bean = new Serializable() {
             private static final long serialVersionUID = 1L;
 
             @SuppressWarnings("unused")
@@ -108,7 +108,7 @@ public class Jira157TestCase extends TestCase {
         Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Describe Serializable: " + t.getMessage(), t);
             fail("Describe Serializable Threw exception: " + t);
         }
@@ -123,7 +123,7 @@ public class Jira157TestCase extends TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() {
-        Object bean = new XY() {
+        final Object bean = new XY() {
             public String getX() {
                 return "x-value";
             }
@@ -134,7 +134,7 @@ public class Jira157TestCase extends TestCase {
         Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Describe Interface: " + t.getMessage(), t);
             fail("Describe Interface Threw exception: " + t);
         }
@@ -153,11 +153,11 @@ public class Jira157TestCase extends TestCase {
      * See Jira issue# BEANUTILS-157.
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Bean() {
-        Object bean = new FooBar();
+        final Object bean = new FooBar();
         Map<String, String> result = null;
         try {
             result = BeanUtils.describe(bean);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Describe Bean: " + t.getMessage(), t);
             fail("Describe Bean Threw exception: " + t);
         }

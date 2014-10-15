@@ -60,7 +60,7 @@ public final class StringConverter extends AbstractConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public StringConverter(Object defaultValue) {
+    public StringConverter(final Object defaultValue) {
         super(defaultValue);
     }
 
@@ -87,7 +87,7 @@ public final class StringConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         // We have to support Object, too, because this class is sometimes
         // used for a standard to Object conversion
         if (String.class.equals(type) || Object.class.equals(type)) {

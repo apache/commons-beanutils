@@ -92,7 +92,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @exception IllegalArgumentException if no property name is specified
      */
-    public DynaProperty getDynaProperty(String name) {
+    public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
@@ -135,7 +135,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @param useColumnLabel true if the column label should be used, otherwise false
      */
-    public void setUseColumnLabel(boolean useColumnLabel) {
+    public void setUseColumnLabel(final boolean useColumnLabel) {
         this.useColumnLabel = useColumnLabel;
     }
 
@@ -150,7 +150,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @exception SQLException if an exception was thrown trying to load
      *  the specified class
      */
-    protected Class<?> loadClass(String className) throws SQLException {
+    protected Class<?> loadClass(final String className) throws SQLException {
 
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -159,7 +159,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             }
             // use Class.forName() - see BEANUTILS-327
             return Class.forName(className, false, cl);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new SQLException(
                     "Cannot load column class '" + className + "': " + e);
         }
@@ -176,8 +176,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @throws SQLException If an error occurs accessing the SQL metadata
      */
     protected DynaProperty createDynaProperty(
-                                    ResultSetMetaData metadata,
-                                    int i)
+                                    final ResultSetMetaData metadata,
+                                    final int i)
                                     throws SQLException {
 
         String columnName = null;
@@ -187,7 +187,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         if (columnName == null || columnName.trim().length() == 0) {
             columnName = metadata.getColumnName(i);
         }
-        String name = lowerCase ? columnName.toLowerCase() : columnName;
+        final String name = lowerCase ? columnName.toLowerCase() : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
                 columnNameXref = new HashMap<String, String>();
@@ -196,7 +196,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         }
         String className = null;
         try {
-            int sqlType = metadata.getColumnType(i);
+            final int sqlType = metadata.getColumnType(i);
             switch (sqlType) {
                 case java.sql.Types.DATE:
                     return new DynaProperty(name, java.sql.Date.class);
@@ -207,7 +207,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
                 default:
                     className = metadata.getColumnClassName(i);
             }
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             // this is a patch for HsqlDb to ignore exceptions
             // thrown by its metadata implementation
         }
@@ -233,14 +233,14 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @exception SQLException if an error is encountered processing the
      *  result set metadata
      */
-    protected void introspect(ResultSet resultSet) throws SQLException {
+    protected void introspect(final ResultSet resultSet) throws SQLException {
 
         // Accumulate an ordered list of DynaProperties
-        ArrayList<DynaProperty> list = new ArrayList<DynaProperty>();
-        ResultSetMetaData metadata = resultSet.getMetaData();
-        int n = metadata.getColumnCount();
+        final ArrayList<DynaProperty> list = new ArrayList<DynaProperty>();
+        final ResultSetMetaData metadata = resultSet.getMetaData();
+        final int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
-            DynaProperty dynaProperty = createDynaProperty(metadata, i);
+            final DynaProperty dynaProperty = createDynaProperty(metadata, i);
             if (dynaProperty != null) {
                     list.add(dynaProperty);
             }
@@ -263,14 +263,14 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @return The value
      * @throws SQLException if an error occurs
      */
-    protected Object getObject(ResultSet resultSet, String name) throws SQLException {
+    protected Object getObject(final ResultSet resultSet, final String name) throws SQLException {
 
-        DynaProperty property = getDynaProperty(name);
+        final DynaProperty property = getDynaProperty(name);
         if (property == null) {
             throw new IllegalArgumentException("Invalid name '" + name + "'");
         }
-        String columnName = getColumnName(name);
-        Class<?> type = property.getType();
+        final String columnName = getColumnName(name);
+        final Class<?> type = property.getType();
 
         // java.sql.Date
         if (type.equals(Date.class)) {
@@ -297,7 +297,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @return The column name (which can be different if the <i>lowerCase</i>
      * option is used).
      */
-    protected String getColumnName(String name) {
+    protected String getColumnName(final String name) {
         if (columnNameXref != null && columnNameXref.containsKey(name)) {
             return columnNameXref.get(name);
         } else {

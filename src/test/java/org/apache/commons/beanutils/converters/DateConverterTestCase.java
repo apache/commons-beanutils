@@ -32,7 +32,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
      * Construct a new Date test case.
      * @param name Test Name
      */
-    public DateConverterTestCase(String name) {
+    public DateConverterTestCase(final String name) {
         super(name);
     }
 
@@ -73,7 +73,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(Object defaultValue) {
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
         return new DateConverter(defaultValue);
     }
 
@@ -93,7 +93,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(Calendar value) {
+    protected Object toType(final Calendar value) {
         return value.getTime();
     }
 }

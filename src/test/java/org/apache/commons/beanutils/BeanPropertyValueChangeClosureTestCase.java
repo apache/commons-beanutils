@@ -38,7 +38,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      *
      * @param name Name of this test case.
      */
-    public BeanPropertyValueChangeClosureTestCase(String name) {
+    public BeanPropertyValueChangeClosureTestCase(final String name) {
         super(name);
     }
 
@@ -46,7 +46,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple float property and Float value.
      */
     public void testExecuteWithSimpleFloatPropertyAndFloatValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("floatProperty", expectedFloatValue).execute(testBean);
         assertTrue(expectedFloatValue.floatValue() == testBean.getFloatProperty());
     }
@@ -58,7 +58,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("floatProperty", "123").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -70,7 +70,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("floatProperty", expectedDoubleValue).execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -79,7 +79,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple float property and Integer value.
      */
     public void testExecuteWithSimpleFloatPropertyAndIntegerValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("floatProperty", expectedIntegerValue).execute(testBean);
         assertTrue(expectedIntegerValue.floatValue() == testBean.getFloatProperty());
     }
@@ -88,7 +88,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple double property and Double value.
      */
     public void testExecuteWithSimpleDoublePropertyAndDoubleValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("doubleProperty", expectedDoubleValue).execute(testBean);
         assertTrue(expectedDoubleValue.doubleValue() == testBean.getDoubleProperty());
     }
@@ -100,7 +100,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("doubleProperty", "123").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -109,7 +109,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple double property and Float value.
      */
     public void testExecuteWithSimpleDoublePropertyAndFloatValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("doubleProperty", expectedFloatValue).execute(testBean);
         assertTrue(expectedFloatValue.doubleValue() == testBean.getDoubleProperty());
     }
@@ -118,7 +118,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple double property and Integer value.
      */
     public void testExecuteWithSimpleDoublePropertyAndIntegerValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("doubleProperty", expectedIntegerValue).execute(testBean);
         assertTrue(expectedIntegerValue.doubleValue() == testBean.getDoubleProperty());
     }
@@ -130,7 +130,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("intProperty", expectedDoubleValue).execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -142,7 +142,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("intProperty", "123").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -154,7 +154,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("intProperty", expectedFloatValue).execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -163,7 +163,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple int property and Integer value.
      */
     public void testExecuteWithSimpleIntPropertyAndIntegerValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("intProperty", expectedIntegerValue).execute(testBean);
         assertTrue(expectedIntegerValue.intValue() == testBean.getIntProperty());
     }
@@ -172,7 +172,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple boolean property and Boolean value.
      */
     public void testExecuteWithSimpleBooleanPropertyAndBooleanValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("booleanProperty", expectedBooleanValue).execute(testBean);
         assertTrue(expectedBooleanValue.booleanValue() == testBean.getBooleanProperty());
     }
@@ -184,7 +184,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("booleanProperty", "true").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -193,7 +193,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with simple byte property and Byte value.
      */
     public void testExecuteWithSimpleBytePropertyAndByteValue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("byteProperty", expectedByteValue).execute(testBean);
         assertTrue(expectedByteValue.byteValue() == testBean.getByteProperty());
     }
@@ -205,7 +205,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("byteProperty", "foo").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -217,7 +217,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("intProperty", null).execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -229,7 +229,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("readOnlyProperty", "foo").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -238,7 +238,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with write only property.
      */
     public void testExecuteWithWriteOnlyProperty() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("writeOnlyProperty", "foo").execute(testBean);
         assertEquals("foo", testBean.getWriteOnlyPropertyValue());
     }
@@ -247,7 +247,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with a nested property.
      */
     public void testExecuteWithNestedProperty() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("nested.stringProperty", "bar").execute(testBean);
         assertEquals("bar", testBean.getNested().getStringProperty());
     }
@@ -259,7 +259,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("anotherNested.stringProperty", "foo").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -268,15 +268,15 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with a nested property and null in the property path and ignoreNull = true.
      */
     public void testExecuteWithNullInPropertyPathAngIgnoreTrue() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
 
         // create a closure that will attempt to set a property on the null bean in the path
-        BeanPropertyValueChangeClosure closure = new BeanPropertyValueChangeClosure("anotherNested.stringProperty",
+        final BeanPropertyValueChangeClosure closure = new BeanPropertyValueChangeClosure("anotherNested.stringProperty",
                 "Should ignore exception", true);
 
         try {
             closure.execute(testBean);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             fail("Should have ignored the exception.");
         }
     }
@@ -285,7 +285,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with indexed property.
      */
     public void testExecuteWithIndexedProperty() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("intIndexed[0]", expectedIntegerValue).execute(testBean);
         assertTrue(expectedIntegerValue.intValue() == testBean.getIntIndexed(0));
     }
@@ -294,7 +294,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with mapped property.
      */
     public void testExecuteWithMappedProperty() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("mappedProperty(fred)", "barney").execute(testBean);
         assertEquals("barney", testBean.getMappedProperty("fred"));
     }
@@ -303,7 +303,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
      * Test execute with a simple String property.
      */
     public void testExecuteWithSimpleStringProperty() {
-        TestBean testBean = new TestBean();
+        final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeClosure("stringProperty", "barney").execute(testBean);
         assertEquals("barney", testBean.getStringProperty());
     }
@@ -315,7 +315,7 @@ public class BeanPropertyValueChangeClosureTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeClosure("bogusProperty", "foo").execute(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }

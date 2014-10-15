@@ -30,7 +30,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     // ---------------------------------------------------------- Constructors
 
-    public LongLocaleConverterTestCase(String name) {
+    public LongLocaleConverterTestCase(final String name) {
         super(name);
     }
 

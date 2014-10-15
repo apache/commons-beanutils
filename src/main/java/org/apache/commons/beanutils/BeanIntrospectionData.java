@@ -55,7 +55,7 @@ class BeanIntrospectionData {
      *
      * @param descs the array with the descriptors of the available properties
      */
-    public BeanIntrospectionData(PropertyDescriptor[] descs) {
+    public BeanIntrospectionData(final PropertyDescriptor[] descs) {
         this(descs, setUpWriteMethodNames(descs));
     }
 
@@ -66,7 +66,7 @@ class BeanIntrospectionData {
      * @param descs the array with the descriptors of the available properties
      * @param writeMethNames the map with the names of write methods
      */
-    BeanIntrospectionData(PropertyDescriptor[] descs, Map<String, String> writeMethNames) {
+    BeanIntrospectionData(final PropertyDescriptor[] descs, final Map<String, String> writeMethNames) {
         descriptors = descs;
         writeMethodNames = writeMethNames;
     }
@@ -87,8 +87,8 @@ class BeanIntrospectionData {
      * @param name the name of the property in question
      * @return the {@code PropertyDescriptor} for this property or <b>null</b>
      */
-    public PropertyDescriptor getDescriptor(String name) {
-        for (PropertyDescriptor pd : getDescriptors()) {
+    public PropertyDescriptor getDescriptor(final String name) {
+        for (final PropertyDescriptor pd : getDescriptors()) {
             if (name.equals(pd.getName())) {
                 return pd;
             }
@@ -109,17 +109,17 @@ class BeanIntrospectionData {
      * @param desc the {@code PropertyDescriptor} of the desired property
      * @return the write method for this property or <b>null</b> if there is none
      */
-    public Method getWriteMethod(Class<?> beanCls, PropertyDescriptor desc) {
+    public Method getWriteMethod(final Class<?> beanCls, final PropertyDescriptor desc) {
         Method method = desc.getWriteMethod();
         if (method == null) {
-            String methodName = writeMethodNames.get(desc.getName());
+            final String methodName = writeMethodNames.get(desc.getName());
             if (methodName != null) {
                 method = MethodUtils.getAccessibleMethod(beanCls, methodName,
                         desc.getPropertyType());
                 if (method != null) {
                     try {
                         desc.setWriteMethod(method);
-                    } catch (IntrospectionException e) {
+                    } catch (final IntrospectionException e) {
                         // ignore, in this case the method is not cached
                     }
                 }
@@ -138,10 +138,10 @@ class BeanIntrospectionData {
      * @param descs the array with the descriptors of the available properties
      * @return the map with the names of write methods for properties
      */
-    private static Map<String, String> setUpWriteMethodNames(PropertyDescriptor[] descs) {
-        Map<String, String> methods = new HashMap<String, String>();
-        for (PropertyDescriptor pd : descs) {
-            Method method = pd.getWriteMethod();
+    private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
+        final Map<String, String> methods = new HashMap<String, String>();
+        for (final PropertyDescriptor pd : descs) {
+            final Method method = pd.getWriteMethod();
             if (method != null) {
                 methods.put(pd.getName(), method.getName());
             }

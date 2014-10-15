@@ -45,7 +45,7 @@ public class LocaleConvertTestSuite {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        TestSuite testSuite = new TestSuite();
+        final TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(LocaleConvertUtilsTestCase.class);
         testSuite.addTestSuite(LocaleBeanificationTestCase.class);
         testSuite.addTestSuite(BigDecimalLocaleConverterTestCase.class);

@@ -40,7 +40,7 @@ public final class ConverterFacade implements Converter {
      *
      * @param converter The converter to delegate to
      */
-    public ConverterFacade(Converter converter) {
+    public ConverterFacade(final Converter converter) {
         if (converter == null) {
             throw new IllegalArgumentException("Converter is missing");
         }
@@ -57,7 +57,7 @@ public final class ConverterFacade implements Converter {
      * @param value The input value to be converted
      * @return The converted value.
      */
-    public <T> T convert(Class<T> type, Object value) {
+    public <T> T convert(final Class<T> type, final Object value) {
         return converter.convert(type, value);
     }
 

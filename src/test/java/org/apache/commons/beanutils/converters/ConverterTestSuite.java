@@ -35,7 +35,7 @@ public class ConverterTestSuite {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        TestSuite testSuite = new TestSuite();
+        final TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(ArrayConverterTestCase.class);
         testSuite.addTestSuite(BigDecimalConverterTestCase.class);
         testSuite.addTestSuite(BigIntegerConverterTestCase.class);

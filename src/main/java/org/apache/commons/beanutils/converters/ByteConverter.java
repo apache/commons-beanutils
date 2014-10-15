@@ -49,7 +49,7 @@ public final class ByteConverter extends NumberConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ByteConverter(Object defaultValue) {
+    public ByteConverter(final Object defaultValue) {
         super(false, defaultValue);
     }
 

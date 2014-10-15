@@ -35,7 +35,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public BigIntegerConverterTestCase(String name) {
+    public BigIntegerConverterTestCase(final String name) {
         super(name);
     }
 
@@ -67,7 +67,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new BigIntegerConverter(defaultValue);
     }
 
@@ -79,7 +79,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -95,7 +95,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             "from Double"
         };
 
-        Object[] input = {
+        final Object[] input = {
             String.valueOf(Long.MIN_VALUE),
             "-17",
             "-1",
@@ -111,7 +111,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             new Double(12.2)
         };
 
-        BigInteger[] expected = {
+        final BigInteger[] expected = {
             BigInteger.valueOf(Long.MIN_VALUE),
             BigInteger.valueOf(-17),
             BigInteger.valueOf(-1),

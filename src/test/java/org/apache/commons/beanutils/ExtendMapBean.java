@@ -37,7 +37,7 @@ public class ExtendMapBean extends Hashtable<Object, Object> {
         return dbName;
     }
 
-    public void setUnusuallyNamedProperty(String dbName)
+    public void setUnusuallyNamedProperty(final String dbName)
     {
         this.dbName = dbName;
     }

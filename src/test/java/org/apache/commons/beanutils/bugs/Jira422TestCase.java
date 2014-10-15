@@ -31,14 +31,14 @@ import org.apache.commons.beanutils.PropertyUtils;
 public class Jira422TestCase extends TestCase {
 
     public void testRootBean() throws Exception {
-        RootBean bean = new FirstChildBean();
-        Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
+        final RootBean bean = new FirstChildBean();
+        final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
     public void testSecondChildBean() throws Exception {
-        RootBean bean = new SecondChildBean();
-        Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
+        final RootBean bean = new SecondChildBean();
+        final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
@@ -53,16 +53,16 @@ class RootBean {
         return file;
     }
 
-    public void setFile(List file) {
+    public void setFile(final List file) {
         this.file = file;
     }
 
-    public String getFile(int i) {
+    public String getFile(final int i) {
         return (String) file.get(i);
     }
 
     @SuppressWarnings("unchecked")
-    public void setFile(int i, String file) {
+    public void setFile(final int i, final String file) {
         this.file.set(i, file);
     }
 

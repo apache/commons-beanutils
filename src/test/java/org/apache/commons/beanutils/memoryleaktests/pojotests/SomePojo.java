@@ -26,7 +26,7 @@ public class SomePojo {
 
     String name = "initialValue";
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

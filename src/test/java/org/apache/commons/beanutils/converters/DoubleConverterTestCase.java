@@ -34,7 +34,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public DoubleConverterTestCase(String name) {
+    public DoubleConverterTestCase(final String name) {
         super(name);
     }
 
@@ -66,7 +66,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new DoubleConverter(defaultValue);
     }
 
@@ -78,7 +78,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -94,7 +94,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
             "from Double"
         };
 
-        Object[] input = {
+        final Object[] input = {
             String.valueOf(Double.MIN_VALUE),
             "-17.2",
             "-1.1",
@@ -110,7 +110,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
             new Double(12.2)
         };
 
-        Double[] expected = {
+        final Double[] expected = {
             new Double(Double.MIN_VALUE),
             new Double(-17.2),
             new Double(-1.1),

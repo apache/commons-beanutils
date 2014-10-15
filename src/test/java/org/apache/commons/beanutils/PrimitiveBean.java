@@ -34,7 +34,7 @@ public class PrimitiveBean {
         return _float;
     }
 
-    public void setFloat(float _float) {
+    public void setFloat(final float _float) {
         this._float = _float;
     }
 
@@ -42,7 +42,7 @@ public class PrimitiveBean {
         return _double;
     }
 
-    public void setDouble(double _double) {
+    public void setDouble(final double _double) {
         this._double = _double;
     }
 
@@ -50,7 +50,7 @@ public class PrimitiveBean {
         return _boolean;
     }
 
-    public void setBoolean(boolean _boolean) {
+    public void setBoolean(final boolean _boolean) {
         this._boolean = _boolean;
     }
 
@@ -58,7 +58,7 @@ public class PrimitiveBean {
         return _long;
     }
 
-    public void setLong(long _long) {
+    public void setLong(final long _long) {
         this._long = _long;
     }
 
@@ -66,7 +66,7 @@ public class PrimitiveBean {
         return _int;
     }
 
-    public void setInt(int _int) {
+    public void setInt(final int _int) {
         this._int = _int;
     }
 }

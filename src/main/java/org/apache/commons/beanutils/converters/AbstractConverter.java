@@ -98,7 +98,7 @@ public abstract class AbstractConverter implements Converter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public AbstractConverter(Object defaultValue) {
+    public AbstractConverter(final Object defaultValue) {
         setDefaultValue(defaultValue);
     }
 
@@ -127,14 +127,14 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if conversion cannot be performed
      * successfully and no default is specified.
      */
-    public <T> T convert(Class<T> type, Object value) {
+    public <T> T convert(final Class<T> type, Object value) {
 
         if (type == null) {
             return convertToDefaultType(type, value);
         }
 
         Class<?> sourceType  = value == null ? null : value.getClass();
-        Class<T> targetType  = ConvertUtils.primitiveToWrapper(type);
+        final Class<T> targetType  = ConvertUtils.primitiveToWrapper(type);
 
         if (log().isDebugEnabled()) {
             log().debug("Converting"
@@ -166,14 +166,14 @@ public abstract class AbstractConverter implements Converter {
 
             // Convert --> Type
             } else {
-                Object result = convertToType(targetType, value);
+                final Object result = convertToType(targetType, value);
                 if (log().isDebugEnabled()) {
                     log().debug("    Converted to " + toString(targetType) +
                                    " value '" + result + "'");
                 }
                 return targetType.cast(result);
             }
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             return handleError(targetType, value, t);
         }
 
@@ -191,7 +191,7 @@ public abstract class AbstractConverter implements Converter {
      * @return the converted String value.
      * @throws Throwable if an error occurs converting to a String
      */
-    protected String convertToString(Object value) throws Throwable {
+    protected String convertToString(final Object value) throws Throwable {
         return value.toString();
     }
 
@@ -220,7 +220,7 @@ public abstract class AbstractConverter implements Converter {
      * @return The first element in an Array (or Collection)
      * or the value unchanged if not an Array (or Collection)
      */
-    protected Object convertArray(Object value) {
+    protected Object convertArray(final Object value) {
         if (value == null) {
             return null;
         }
@@ -232,7 +232,7 @@ public abstract class AbstractConverter implements Converter {
             }
         }
         if (value instanceof Collection) {
-            Collection<?> collection = (Collection<?>)value;
+            final Collection<?> collection = (Collection<?>)value;
             if (collection.size() > 0) {
                 return collection.iterator().next();
             } else {
@@ -256,7 +256,7 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if no default value has been
      * specified for this {@link Converter}.
      */
-    protected <T> T handleError(Class<T> type, Object value, Throwable cause) {
+    protected <T> T handleError(final Class<T> type, final Object value, final Throwable cause) {
         if (log().isDebugEnabled()) {
             if (cause instanceof ConversionException) {
                 log().debug("    Conversion threw ConversionException: " + cause.getMessage());
@@ -277,7 +277,7 @@ public abstract class AbstractConverter implements Converter {
                 log().debug("    " + DEFAULT_CONFIG_MSG);
             }
         } else {
-            String msg = "Error converting from '" + toString(value.getClass()) +
+            final String msg = "Error converting from '" + toString(value.getClass()) +
                     "' to '" + toString(type) + "' " + cause.getMessage();
             cex = new ConversionException(msg, cause);
             if (log().isDebugEnabled()) {
@@ -303,14 +303,14 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if no default value has been
      * specified for this {@link Converter}.
      */
-    protected <T> T handleMissing(Class<T> type) {
+    protected <T> T handleMissing(final Class<T> type) {
 
         if (useDefault || type.equals(String.class)) {
             Object value = getDefault(type);
             if (useDefault && value != null && !(type.equals(value.getClass()))) {
                 try {
                     value = convertToType(type, defaultValue);
-                } catch (Throwable t) {
+                } catch (final Throwable t) {
                     throw new ConversionException("Default conversion to " + toString(type)
                             + " failed.", t);
                 }
@@ -324,7 +324,7 @@ public abstract class AbstractConverter implements Converter {
             return type.cast(value);
         }
 
-        ConversionException cex =  new ConversionException("No value specified for '" +
+        final ConversionException cex =  new ConversionException("No value specified for '" +
                 toString(type) + "'");
         if (log().isDebugEnabled()) {
             log().debug("    Throwing ConversionException: " + cex.getMessage());
@@ -347,7 +347,7 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if an error occurs converting
      * the default value
      */
-    protected void setDefaultValue(Object defaultValue) {
+    protected void setDefaultValue(final Object defaultValue) {
         useDefault = false;
         if (log().isDebugEnabled()) {
             log().debug("Setting default value: " + defaultValue);
@@ -373,7 +373,7 @@ public abstract class AbstractConverter implements Converter {
      * @param type Data type to which this value should be converted.
      * @return The default value for the specified type.
      */
-    protected Object getDefault(Class<?> type) {
+    protected Object getDefault(final Class<?> type) {
         if (type.equals(String.class)) {
             return null;
         } else  {
@@ -415,7 +415,7 @@ public abstract class AbstractConverter implements Converter {
      * @param type The <code>java.lang.Class</code>.
      * @return The String representation.
      */
-    String toString(Class<?> type) {
+    String toString(final Class<?> type) {
         String typeName = null;
         if (type == null) {
             typeName = "null";
@@ -454,8 +454,9 @@ public abstract class AbstractConverter implements Converter {
      * @param value the value to be converted
      * @return the converted value
      */
-    private <T> T convertToDefaultType(Class<T> targetClass, Object value) {
+    private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
         @SuppressWarnings("unchecked")
+        final
         T result = (T) convert(getDefaultType(), value);
         return result;
     }
@@ -469,7 +470,7 @@ public abstract class AbstractConverter implements Converter {
      * @return a {@code ConversionException} with a standard message
      * @since 1.9
      */
-    protected ConversionException conversionException(Class<?> type, Object value) {
+    protected ConversionException conversionException(final Class<?> type, final Object value) {
         return new ConversionException("Can't convert value '" + value
                 + "' to type " + type);
     }

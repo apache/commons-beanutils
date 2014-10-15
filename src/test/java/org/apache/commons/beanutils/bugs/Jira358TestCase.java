@@ -34,7 +34,7 @@ public class Jira358TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira358TestCase(String name) {
+    public Jira358TestCase(final String name) {
         super(name);
     }
 
@@ -43,7 +43,7 @@ public class Jira358TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -81,11 +81,11 @@ public class Jira358TestCase extends TestCase {
      */
     public void testPropertyUtils_getIndexedProperty_Array() throws Exception {
 
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         try {
             PropertyUtils.getIndexedProperty(bean, "intArray", bean.getIntArray().length);
             fail("Expected ArrayIndexOutOfBoundsException");
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (final ArrayIndexOutOfBoundsException e) {
             // expected result
         }
     }
@@ -95,11 +95,11 @@ public class Jira358TestCase extends TestCase {
      */
     public void testPropertyUtils_getIndexedProperty_List() throws Exception {
 
-        TestBean bean = new TestBean();
+        final TestBean bean = new TestBean();
         try {
             PropertyUtils.getIndexedProperty(bean, "listIndexed", bean.getListIndexed().size());
             fail("Expected IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             // expected result
         }
     }

@@ -54,7 +54,7 @@ public class Jira61TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira61TestCase(String name) {
+    public Jira61TestCase(final String name) {
         super(name);
     }
 
@@ -63,7 +63,7 @@ public class Jira61TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -109,7 +109,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "simpleReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleReadOnly Threw exception: " + t);
         }
@@ -117,7 +117,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "simpleWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleWriteOnly Threw exception: " + t);
         }
@@ -133,7 +133,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "simpleReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleReadOnly Threw exception: " + t);
         }
@@ -141,7 +141,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "simpleWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleWriteOnly Threw exception: " + t);
         }
@@ -157,7 +157,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "indexedReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedReadOnly Threw exception: " + t);
         }
@@ -165,7 +165,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "indexedWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedWriteOnly Threw exception: " + t);
         }
@@ -181,7 +181,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "mappedReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedReadOnly Threw exception: " + t);
         }
@@ -189,7 +189,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isReadable(wrapDynaBean, "mappedWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedWriteOnly Threw exception: " + t);
         }
@@ -205,7 +205,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "indexedReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedReadOnly Threw exception: " + t);
         }
@@ -213,7 +213,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "indexedWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedWriteOnly Threw exception: " + t);
         }
@@ -229,7 +229,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "mappedReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedReadOnly Threw exception: " + t);
         }
@@ -237,7 +237,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.isWriteable(wrapDynaBean, "mappedWriteOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedWriteOnly Threw exception: " + t);
         }
@@ -253,7 +253,7 @@ public class Jira61TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "simpleReadOnly");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleWriteOnly Threw exception: " + t);
         }
@@ -261,9 +261,9 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "simpleWriteOnly");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleWriteOnly Threw exception: " + t);
         }
@@ -278,9 +278,9 @@ public class Jira61TestCase extends TestCase {
         boolean threwIllegalArgumentException = false;
         try {
             PropertyUtils.setProperty(wrapDynaBean, "simpleReadOnly", "READONLY-SIMPLE-BAR");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleReadOnly Threw exception: " + t);
         }
@@ -288,7 +288,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             PropertyUtils.setProperty(wrapDynaBean, "simpleWriteOnly", "SIMPLE-BAR");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("simpleWriteOnly Threw exception: " + t);
         }
@@ -304,7 +304,7 @@ public class Jira61TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "indexedReadOnly[0]");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedReadOnly Threw exception: " + t);
         }
@@ -312,9 +312,9 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "indexedWriteOnly[0]");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedWriteOnly Threw exception: " + t);
         }
@@ -329,9 +329,9 @@ public class Jira61TestCase extends TestCase {
         boolean threwIllegalArgumentException = false;
         try {
             PropertyUtils.setProperty(wrapDynaBean, "indexedReadOnly[0]", "READONLY-INDEXED-BAR");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedReadOnly Threw exception: " + t);
         }
@@ -339,7 +339,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             PropertyUtils.setProperty(wrapDynaBean, "indexedWriteOnly[0]", "INDEXED-BAR");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("indexedWriteOnly Threw exception: " + t);
         }
@@ -355,7 +355,7 @@ public class Jira61TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "mappedReadOnly(foo-key)");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedReadOnly Threw exception: " + t);
         }
@@ -363,9 +363,9 @@ public class Jira61TestCase extends TestCase {
 
         try {
             result = PropertyUtils.getProperty(wrapDynaBean, "mappedWriteOnly(foo-key)");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedWriteOnly Threw exception: " + t);
         }
@@ -380,9 +380,9 @@ public class Jira61TestCase extends TestCase {
         boolean threwIllegalArgumentException = false;
         try {
             PropertyUtils.setProperty(wrapDynaBean, "mappedReadOnly(foo-key)", "READONLY-MAPPED-BAR");
-        } catch (IllegalArgumentException ex) {
+        } catch (final IllegalArgumentException ex) {
             threwIllegalArgumentException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedReadOnly Threw exception: " + t);
         }
@@ -390,7 +390,7 @@ public class Jira61TestCase extends TestCase {
 
         try {
             PropertyUtils.setProperty(wrapDynaBean, "mappedWriteOnly(foo-key)", "MAPPED-BAR");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("mappedWriteOnly Threw exception: " + t);
         }
@@ -402,12 +402,12 @@ public class Jira61TestCase extends TestCase {
      * to a read-only WrapDynaBean property.
      */
     public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_to_WrapDynaBean() {
-        String value = "copied simpleReadOnly";
-        Map<String, Object> source = new HashMap<String, Object>();
+        final String value = "copied simpleReadOnly";
+        final Map<String, Object> source = new HashMap<String, Object>();
         source.put("simpleReadOnly", value);
         try {
             PropertyUtils.copyProperties(wrapDynaBean, source);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }
@@ -419,12 +419,12 @@ public class Jira61TestCase extends TestCase {
      * to a read-only WrapDynaBean property.
      */
     public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_from_WrapDynaBean() {
-        String value = "ORIG TARGET VALUE";
-        TestBean targetBean = Jira61BeanFactory.createBean();
+        final String value = "ORIG TARGET VALUE";
+        final TestBean targetBean = Jira61BeanFactory.createBean();
         targetBean.setSimpleWriteOnly(value);
         try {
             PropertyUtils.copyProperties(targetBean, wrapDynaBean);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }
@@ -436,12 +436,12 @@ public class Jira61TestCase extends TestCase {
      * to a read-only WrapDynaBean property.
      */
     public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_to_WrapDynaBean() {
-        String value = "copied simpleReadOnly";
-        Map<String, Object> source = new HashMap<String, Object>();
+        final String value = "copied simpleReadOnly";
+        final Map<String, Object> source = new HashMap<String, Object>();
         source.put("simpleReadOnly", value);
         try {
             BeanUtils.copyProperties(wrapDynaBean, source);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }
@@ -453,12 +453,12 @@ public class Jira61TestCase extends TestCase {
      * to a read-only WrapDynaBean property.
      */
     public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_from_WrapDynaBean() {
-        String value = "ORIG TARGET VALUE";
-        TestBean targetBean = Jira61BeanFactory.createBean();
+        final String value = "ORIG TARGET VALUE";
+        final TestBean targetBean = Jira61BeanFactory.createBean();
         targetBean.setSimpleWriteOnly(value);
         try {
             BeanUtils.copyProperties(targetBean, wrapDynaBean);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }

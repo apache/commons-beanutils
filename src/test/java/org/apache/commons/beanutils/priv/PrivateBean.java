@@ -78,7 +78,7 @@ class PrivateBean implements PrivateDirect {
     /**
      * A method accessible via a directly implemented interface.
      */
-    public String methodBar(String in) {
+    public String methodBar(final String in) {
 
         return (in);
 
@@ -100,7 +100,7 @@ class PrivateBean implements PrivateDirect {
     /**
      * A method accessible via an indirectly implemented interface.
      */
-    public String methodBaz(String in) {
+    public String methodBaz(final String in) {
 
         return (in);
 

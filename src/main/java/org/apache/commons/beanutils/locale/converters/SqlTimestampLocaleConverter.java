@@ -58,7 +58,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(boolean locPattern) {
+    public SqlTimestampLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -70,7 +70,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      *
      * @param locale        The locale
      */
-    public SqlTimestampLocaleConverter(Locale locale) {
+    public SqlTimestampLocaleConverter(final Locale locale) {
 
         this(locale, (String) null);
     }
@@ -83,7 +83,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(Locale locale, boolean locPattern) {
+    public SqlTimestampLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null);
     }
@@ -96,7 +96,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public SqlTimestampLocaleConverter(Locale locale, String pattern) {
+    public SqlTimestampLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -110,7 +110,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public SqlTimestampLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -124,7 +124,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public SqlTimestampLocaleConverter(Object defaultValue) {
+    public SqlTimestampLocaleConverter(final Object defaultValue) {
         this(defaultValue, false);
     }
 
@@ -137,7 +137,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(Object defaultValue, boolean locPattern) {
+    public SqlTimestampLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -150,7 +150,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public SqlTimestampLocaleConverter(Object defaultValue, Locale locale) {
+    public SqlTimestampLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -164,7 +164,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public SqlTimestampLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -178,7 +178,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public SqlTimestampLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public SqlTimestampLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -193,7 +193,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlTimestampLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public SqlTimestampLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -213,7 +213,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @throws ParseException if an error occurs parsing a String to a Number
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, final String pattern) throws ParseException {
 
         return new Timestamp(((java.util.Date) super.parse(value, pattern)).getTime());
     }

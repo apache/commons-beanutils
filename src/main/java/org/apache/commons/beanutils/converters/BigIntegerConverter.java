@@ -51,7 +51,7 @@ public final class BigIntegerConverter extends NumberConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public BigIntegerConverter(Object defaultValue) {
+    public BigIntegerConverter(final Object defaultValue) {
         super(false, defaultValue);
     }
 

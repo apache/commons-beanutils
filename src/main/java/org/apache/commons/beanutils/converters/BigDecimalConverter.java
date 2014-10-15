@@ -51,7 +51,7 @@ public final class BigDecimalConverter extends NumberConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public BigDecimalConverter(Object defaultValue) {
+    public BigDecimalConverter(final Object defaultValue) {
         super(true, defaultValue);
     }
 

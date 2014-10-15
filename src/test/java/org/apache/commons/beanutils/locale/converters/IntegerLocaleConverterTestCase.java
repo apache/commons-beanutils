@@ -30,7 +30,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
     // ---------------------------------------------------------- Constructors
 
-    public IntegerLocaleConverterTestCase(String name) {
+    public IntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
 
@@ -267,7 +267,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // ------------- Construct using specified Locale --------
         converter = new IntegerLocaleConverter(localizedLocale);
 
-        Integer value = new Integer(1234);
+        final Integer value = new Integer(1234);
         assertEquals("Convert Integer", value, converter.convert(value));
         assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
     }
@@ -277,9 +277,9 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
      */
     public void testToPrimitiveType() {
         converter = new IntegerLocaleConverter();
-        Integer value = 20131028;
-        Class<Integer> target = Integer.TYPE;
-        int result = converter.convert(target, (Object) value.toString());
+        final Integer value = 20131028;
+        final Class<Integer> target = Integer.TYPE;
+        final int result = converter.convert(target, (Object) value.toString());
         assertEquals("Wrong result", value.intValue(), result);
     }
 }

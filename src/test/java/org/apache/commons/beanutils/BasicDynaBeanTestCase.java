@@ -87,7 +87,7 @@ public class BasicDynaBeanTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public BasicDynaBeanTestCase(String name) {
+    public BasicDynaBeanTestCase(final String name) {
 
         super(name);
 
@@ -104,7 +104,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void setUp() throws Exception {
 
         // Instantiate a new DynaBean instance
-        DynaClass dynaClass = createDynaClass();
+        final DynaClass dynaClass = createDynaClass();
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
@@ -112,12 +112,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
-        int intArray[] = { 0, 10, 20, 30, 40 };
+        final int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
-        int intIndexed[] = { 0, 10, 20, 30, 40 };
+        final int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
-        List<String> listIndexed = new ArrayList<String>();
+        final List<String> listIndexed = new ArrayList<String>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
@@ -125,20 +125,20 @@ public class BasicDynaBeanTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long(321));
-        HashMap<String, String> mappedProperty = new HashMap<String, String>();
+        final HashMap<String, String> mappedProperty = new HashMap<String, String>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
+        final HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
         mappedIntProperty.put("One", new Integer(1));
         mappedIntProperty.put("Two", new Integer(2));
         bean.set("mappedIntProperty", mappedIntProperty);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
-        String stringArray[] =
+        final String stringArray[] =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        String stringIndexed[] =
+        final String stringIndexed[] =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
@@ -177,20 +177,20 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetDescriptorArguments() {
 
         try {
-            DynaProperty descriptor =
+            final DynaProperty descriptor =
                     bean.getDynaClass().getDynaProperty("unknown");
             assertNull("Unknown property descriptor should be null",
                     descriptor);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of returning null");
         }
 
         try {
             bean.getDynaClass().getDynaProperty(null);
             fail("Should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected response
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
 
@@ -284,11 +284,11 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     public void testGetDescriptors() {
 
-        DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
+        final DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
-        int count[] = new int[properties.length];
+        final int count[] = new int[properties.length];
         for (int i = 0; i < pd.length; i++) {
-            String name = pd[i].getName();
+            final String name = pd[i].getName();
             for (int j = 0; j < properties.length; j++) {
                 if (name.equals(properties[j])) {
                     count[j]++;
@@ -314,9 +314,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             bean.get("intArray", -1);
             fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             // Expected response
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
@@ -340,7 +340,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                         value instanceof Integer);
                 assertEquals("intArray returned correct " + i, i * 10,
                         ((Integer) value).intValue());
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 fail("intArray " + i + " threw " + t);
             }
 
@@ -351,7 +351,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                         value instanceof Integer);
                 assertEquals("intIndexed returned correct " + i, i * 10,
                         ((Integer) value).intValue());
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 fail("intIndexed " + i + " threw " + t);
             }
 
@@ -362,7 +362,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                         value instanceof String);
                 assertEquals("listIndexed returned correct " + i,
                         "String " + i, (String) value);
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 fail("listIndexed " + i + " threw " + t);
             }
 
@@ -373,7 +373,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                         value instanceof String);
                 assertEquals("stringArray returned correct " + i,
                         "String " + i, (String) value);
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 fail("stringArray " + i + " threw " + t);
             }
 
@@ -384,7 +384,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                         value instanceof String);
                 assertEquals("stringIndexed returned correct " + i,
                         "String " + i, (String) value);
-            } catch (Throwable t) {
+            } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
 
@@ -401,9 +401,9 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
         try {
-            Object value = bean.get("mappedProperty", "unknown");
+            final Object value = bean.get("mappedProperty", "unknown");
             assertNull("Should not return a value", value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of returning null");
         }
 
@@ -421,21 +421,21 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             value = bean.get("mappedProperty", "First Key");
             assertEquals("Can find first value", "First Value", value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
             value = bean.get("mappedProperty", "Second Key");
             assertEquals("Can find second value", "Second Value", value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
             value = bean.get("mappedProperty", "Third Key");
             assertNull("Can not find third value", value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
 
@@ -450,9 +450,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             bean.get(null);
             fail("Should throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected response
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
 
@@ -465,12 +465,12 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleBoolean() {
 
         try {
-            Object value = bean.get("booleanProperty");
+            final Object value = bean.get("booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Boolean));
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() == true);
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -483,13 +483,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleDouble() {
 
         try {
-            Object value = bean.get("doubleProperty");
+            final Object value = bean.get("doubleProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Double));
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
                     321.0, 0.005);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -502,14 +502,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleFloat() {
 
         try {
-            Object value = bean.get("floatProperty");
+            final Object value = bean.get("floatProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Float));
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     (float) 123.0,
                     (float) 0.005);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -522,13 +522,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleInt() {
 
         try {
-            Object value = bean.get("intProperty");
+            final Object value = bean.get("intProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Integer));
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     123);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -541,13 +541,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleLong() {
 
         try {
-            Object value = bean.get("longProperty");
+            final Object value = bean.get("longProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Long));
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     321);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -560,13 +560,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleShort() {
 
         try {
-            Object value = bean.get("shortProperty");
+            final Object value = bean.get("shortProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof Short));
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     (short) 987);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -579,13 +579,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetSimpleString() {
 
         try {
-            Object value = bean.get("stringProperty");
+            final Object value = bean.get("stringProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", (value instanceof String));
             assertEquals("Got correct value",
                     (String) value,
                     "This is a string");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -600,7 +600,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -608,7 +608,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -626,7 +626,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.remove("mappedProperty", "First Key");
             assertTrue("Can not see first key",
                     !bean.contains("mappedProperty", "First Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -636,7 +636,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             bean.remove("mappedProperty", "Unknown Key");
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -649,25 +649,25 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSerialization() {
 
         // Serialize the test bean
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            final ObjectOutputStream oos = new ObjectOutputStream(baos);
             oos.writeObject(bean);
             oos.flush();
             oos.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Exception during serialization: " + e);
         }
 
         // Deserialize the test bean
         try {
             bean = null;
-            ByteArrayInputStream bais =
+            final ByteArrayInputStream bais =
                 new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
+            final ObjectInputStream ois = new ObjectInputStream(bais);
             bean = (DynaBean) ois.readObject();
             bais.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Exception during deserialization: " + e);
         }
 
@@ -700,7 +700,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         // Ensure that we can create a new instance of the same DynaClass
         try {
             bean = bean.getDynaClass().newInstance();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Exception creating new instance: " + e);
         }
         testGetDescriptorArguments();
@@ -725,9 +725,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             bean.set("intArray", -1, new Integer(0));
             fail("Should throw IndexOutOfBoundsException");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             // Expected response
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
@@ -749,7 +749,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     value instanceof Integer);
             assertEquals("Returned correct new value 0", 1,
                     ((Integer) value).intValue());
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
@@ -761,7 +761,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     value instanceof Integer);
             assertEquals("Returned correct new value 1", 11,
                     ((Integer) value).intValue());
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
@@ -773,7 +773,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     value instanceof String);
             assertEquals("Returned correct new value 2", "New Value 2",
                     (String) value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
@@ -785,7 +785,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     value instanceof String);
             assertEquals("Returned correct new value 3", "New Value 3",
                     (String) value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
@@ -797,7 +797,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     value instanceof String);
             assertEquals("Returned correct new value 4", "New Value 4",
                     (String) value);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
@@ -815,7 +815,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertEquals("Can replace old value",
                     "New First Value",
                     (String) bean.get("mappedProperty", "First Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
 
@@ -824,7 +824,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertEquals("Can set new value",
                     "Fourth Value",
                     (String) bean.get("mappedProperty", "Fourth Key"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
 
@@ -838,14 +838,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleBoolean() {
 
         try {
-            boolean oldValue =
+            final boolean oldValue =
                     ((Boolean) bean.get("booleanProperty")).booleanValue();
-            boolean newValue = !oldValue;
+            final boolean newValue = !oldValue;
             bean.set("booleanProperty", new Boolean(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     ((Boolean) bean.get("booleanProperty")).booleanValue());
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -858,15 +858,15 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleDouble() {
 
         try {
-            double oldValue =
+            final double oldValue =
                     ((Double) bean.get("doubleProperty")).doubleValue();
-            double newValue = oldValue + 1.0;
+            final double newValue = oldValue + 1.0;
             bean.set("doubleProperty", new Double(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Double) bean.get("doubleProperty")).doubleValue(),
                     0.005);
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -879,15 +879,15 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleFloat() {
 
         try {
-            float oldValue =
+            final float oldValue =
                     ((Float) bean.get("floatProperty")).floatValue();
-            float newValue = oldValue + (float) 1.0;
+            final float newValue = oldValue + (float) 1.0;
             bean.set("floatProperty", new Float(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Float) bean.get("floatProperty")).floatValue(),
                     (float) 0.005);
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -900,14 +900,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleInt() {
 
         try {
-            int oldValue =
+            final int oldValue =
                     ((Integer) bean.get("intProperty")).intValue();
-            int newValue = oldValue + 1;
+            final int newValue = oldValue + 1;
             bean.set("intProperty", new Integer(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Integer) bean.get("intProperty")).intValue());
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -920,14 +920,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleLong() {
 
         try {
-            long oldValue =
+            final long oldValue =
                     ((Long) bean.get("longProperty")).longValue();
-            long newValue = oldValue + 1;
+            final long newValue = oldValue + 1;
             bean.set("longProperty", new Long(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Long) bean.get("longProperty")).longValue());
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -940,14 +940,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleShort() {
 
         try {
-            short oldValue =
+            final short oldValue =
                     ((Short) bean.get("shortProperty")).shortValue();
-            short newValue = (short) (oldValue + 1);
+            final short newValue = (short) (oldValue + 1);
             bean.set("shortProperty", new Short(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Short) bean.get("shortProperty")).shortValue());
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -960,13 +960,13 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetSimpleString() {
 
         try {
-            String oldValue = (String) bean.get("stringProperty");
-            String newValue = oldValue + " Extra Value";
+            final String oldValue = (String) bean.get("stringProperty");
+            final String newValue = oldValue + " Extra Value";
             bean.set("stringProperty", newValue);
             assertEquals("Matched new value",
                     newValue,
                     (String) bean.get("stringProperty"));
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
@@ -982,10 +982,10 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     protected DynaClass createDynaClass() {
 
-        int intArray[] = new int[0];
-        String stringArray[] = new String[0];
+        final int intArray[] = new int[0];
+        final String stringArray[] = new String[0];
 
-        DynaClass dynaClass = new BasicDynaClass
+        final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,
                         new DynaProperty[]{
                             new DynaProperty("booleanProperty", Boolean.TYPE),
@@ -1016,14 +1016,14 @@ public class BasicDynaBeanTestCase extends TestCase {
      * @param name Name of the property to be retrieved
      * @param type Expected class type of this property
      */
-    protected void testGetDescriptorBase(String name, Class<?> type) {
+    protected void testGetDescriptorBase(final String name, final Class<?> type) {
 
         try {
-            DynaProperty descriptor =
+            final DynaProperty descriptor =
                     bean.getDynaClass().getDynaProperty(name);
             assertNotNull("Got descriptor", descriptor);
             assertEquals("Got correct type", type, descriptor.getType());
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             fail("Threw an exception: " + t);
         }
 

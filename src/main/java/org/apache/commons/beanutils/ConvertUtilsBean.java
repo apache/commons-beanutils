@@ -190,7 +190,7 @@ public class ConvertUtilsBean {
      *  Boolean.class instead
      */
     @Deprecated
-    public void setDefaultBoolean(boolean newDefaultBoolean) {
+    public void setDefaultBoolean(final boolean newDefaultBoolean) {
         defaultBoolean = (newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE);
         register(new BooleanConverter(defaultBoolean), Boolean.TYPE);
         register(new BooleanConverter(defaultBoolean), Boolean.class);
@@ -223,7 +223,7 @@ public class ConvertUtilsBean {
      *  Byte.class instead
      */
     @Deprecated
-    public void setDefaultByte(byte newDefaultByte) {
+    public void setDefaultByte(final byte newDefaultByte) {
         defaultByte = new Byte(newDefaultByte);
         register(new ByteConverter(defaultByte), Byte.TYPE);
         register(new ByteConverter(defaultByte), Byte.class);
@@ -256,7 +256,7 @@ public class ConvertUtilsBean {
      *  Character.class instead
      */
     @Deprecated
-    public void setDefaultCharacter(char newDefaultCharacter) {
+    public void setDefaultCharacter(final char newDefaultCharacter) {
         defaultCharacter = new Character(newDefaultCharacter);
         register(new CharacterConverter(defaultCharacter),
                     Character.TYPE);
@@ -291,7 +291,7 @@ public class ConvertUtilsBean {
      *  Double.class instead
      */
     @Deprecated
-    public void setDefaultDouble(double newDefaultDouble) {
+    public void setDefaultDouble(final double newDefaultDouble) {
         defaultDouble = new Double(newDefaultDouble);
         register(new DoubleConverter(defaultDouble), Double.TYPE);
         register(new DoubleConverter(defaultDouble), Double.class);
@@ -324,7 +324,7 @@ public class ConvertUtilsBean {
      *  Float.class instead
      */
     @Deprecated
-    public void setDefaultFloat(float newDefaultFloat) {
+    public void setDefaultFloat(final float newDefaultFloat) {
         defaultFloat = new Float(newDefaultFloat);
         register(new FloatConverter(defaultFloat), Float.TYPE);
         register(new FloatConverter(defaultFloat), Float.class);
@@ -357,7 +357,7 @@ public class ConvertUtilsBean {
      *  Integer.class instead
      */
     @Deprecated
-    public void setDefaultInteger(int newDefaultInteger) {
+    public void setDefaultInteger(final int newDefaultInteger) {
         defaultInteger = new Integer(newDefaultInteger);
         register(new IntegerConverter(defaultInteger), Integer.TYPE);
         register(new IntegerConverter(defaultInteger), Integer.class);
@@ -390,7 +390,7 @@ public class ConvertUtilsBean {
      *  Long.class instead
      */
     @Deprecated
-    public void setDefaultLong(long newDefaultLong) {
+    public void setDefaultLong(final long newDefaultLong) {
         defaultLong = new Long(newDefaultLong);
         register(new LongConverter(defaultLong), Long.TYPE);
         register(new LongConverter(defaultLong), Long.class);
@@ -423,7 +423,7 @@ public class ConvertUtilsBean {
      *  Short.class instead
      */
     @Deprecated
-    public void setDefaultShort(short newDefaultShort) {
+    public void setDefaultShort(final short newDefaultShort) {
         defaultShort = new Short(newDefaultShort);
         register(new ShortConverter(defaultShort), Short.TYPE);
         register(new ShortConverter(defaultShort), Short.class);
@@ -454,11 +454,11 @@ public class ConvertUtilsBean {
             if (value == null) {
                 return null;
             } else {
-                Converter converter = lookup(String.class);
+                final Converter converter = lookup(String.class);
                 return (converter.convert(String.class, value));
             }
         } else {
-            Converter converter = lookup(String.class);
+            final Converter converter = lookup(String.class);
             return (converter.convert(String.class, value));
         }
 
@@ -475,7 +475,7 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(String value, Class<?> clazz) {
+    public Object convert(final String value, final Class<?> clazz) {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" +
@@ -506,7 +506,7 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(String[] values, Class<?> clazz) {
+    public Object convert(final String[] values, final Class<?> clazz) {
 
         Class<?> type = clazz;
         if (clazz.isArray()) {
@@ -523,7 +523,7 @@ public class ConvertUtilsBean {
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
-        Object array = Array.newInstance(type, values.length);
+        final Object array = Array.newInstance(type, values.length);
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, converter.convert(type, values[i]));
         }
@@ -543,9 +543,9 @@ public class ConvertUtilsBean {
      *
      * @exception ConversionException if thrown by an underlying Converter
      */
-    public Object convert(Object value, Class<?> targetType) {
+    public Object convert(final Object value, final Class<?> targetType) {
 
-        Class<?> sourceType = value == null ? null : value.getClass();
+        final Class<?> sourceType = value == null ? null : value.getClass();
 
         if (log.isDebugEnabled()) {
             if (value == null) {
@@ -620,7 +620,7 @@ public class ConvertUtilsBean {
      * Specifying a value less than zero causes a <code>null</code> value to be used for
      * the default.
      */
-    public void register(boolean throwException, boolean defaultNull, int defaultArraySize) {
+    public void register(final boolean throwException, final boolean defaultNull, final int defaultArraySize) {
         registerPrimitives(throwException);
         registerStandard(throwException, defaultNull);
         registerOther(throwException);
@@ -645,7 +645,7 @@ public class ConvertUtilsBean {
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      */
-    private void registerPrimitives(boolean throwException) {
+    private void registerPrimitives(final boolean throwException) {
         register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
         register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
         register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(SPACE));
@@ -681,14 +681,14 @@ public class ConvertUtilsBean {
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
      */
-    private void registerStandard(boolean throwException, boolean defaultNull) {
+    private void registerStandard(final boolean throwException, final boolean defaultNull) {
 
-        Number     defaultNumber     = defaultNull ? null : ZERO;
-        BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
-        BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
-        Boolean    booleanDefault    = defaultNull ? null : Boolean.FALSE;
-        Character  charDefault       = defaultNull ? null : SPACE;
-        String     stringDefault     = defaultNull ? null : "";
+        final Number     defaultNumber     = defaultNull ? null : ZERO;
+        final BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
+        final BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
+        final Boolean    booleanDefault    = defaultNull ? null : Boolean.FALSE;
+        final Character  charDefault       = defaultNull ? null : SPACE;
+        final String     stringDefault     = defaultNull ? null : "";
 
         register(BigDecimal.class, throwException ? new BigDecimalConverter() : new BigDecimalConverter(bigDecDeflt));
         register(BigInteger.class, throwException ? new BigIntegerConverter() : new BigIntegerConverter(bigIntDeflt));
@@ -722,7 +722,7 @@ public class ConvertUtilsBean {
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      */
-    private void registerOther(boolean throwException) {
+    private void registerOther(final boolean throwException) {
         register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
         register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
@@ -744,7 +744,7 @@ public class ConvertUtilsBean {
      * Specifying a value less than zero causes a <code>null<code> value to be used for
      * the default.
      */
-    private void registerArrays(boolean throwException, int defaultArraySize) {
+    private void registerArrays(final boolean throwException, final int defaultArraySize) {
 
         // Primitives
         registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
@@ -791,9 +791,9 @@ public class ConvertUtilsBean {
      * value used in the event of a conversion error
      * @param defaultArraySize The size of the default array
      */
-    private void registerArrayConverter(Class<?> componentType, Converter componentConverter,
-            boolean throwException, int defaultArraySize) {
-        Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
+    private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
+            final boolean throwException, final int defaultArraySize) {
+        final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
         Converter arrayConverter = null;
         if (throwException) {
             arrayConverter = new ArrayConverter(arrayType, componentConverter);
@@ -804,7 +804,7 @@ public class ConvertUtilsBean {
     }
 
     /** strictly for convenience since it has same parameter order as Map.put */
-    private void register(Class<?> clazz, Converter converter) {
+    private void register(final Class<?> clazz, final Converter converter) {
         register(new ConverterFacade(converter), clazz);
     }
 
@@ -814,7 +814,7 @@ public class ConvertUtilsBean {
      *
      * @param clazz Class for which to remove a registered Converter
      */
-    public void deregister(Class<?> clazz) {
+    public void deregister(final Class<?> clazz) {
 
         converters.remove(clazz);
 
@@ -829,7 +829,7 @@ public class ConvertUtilsBean {
      * @param clazz Class for which to return a registered Converter
      * @return The registered {@link Converter} or <code>null</code> if not found
      */
-    public Converter lookup(Class<?> clazz) {
+    public Converter lookup(final Class<?> clazz) {
 
         return (converters.get(clazz));
 
@@ -844,7 +844,7 @@ public class ConvertUtilsBean {
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or <code>null</code> if not found
      */
-    public Converter lookup(Class<?> sourceType, Class<?> targetType) {
+    public Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
 
         if (targetType == null) {
             throw new IllegalArgumentException("Target type is missing");
@@ -890,7 +890,7 @@ public class ConvertUtilsBean {
      * @param clazz Destination class for conversions performed by this
      *  Converter
      */
-    public void register(Converter converter, Class<?> clazz) {
+    public void register(final Converter converter, final Class<?> clazz) {
 
         converters.put(clazz, converter);
 

@@ -40,7 +40,7 @@ public class BenchBean {
         return (booleanProperty);
     }
 
-    public void setBooleanProperty(boolean booleanProperty) {
+    public void setBooleanProperty(final boolean booleanProperty) {
         this.booleanProperty = booleanProperty;
     }
 
@@ -54,7 +54,7 @@ public class BenchBean {
         return (this.byteProperty);
     }
 
-    public void setByteProperty(byte byteProperty) {
+    public void setByteProperty(final byte byteProperty) {
         this.byteProperty = byteProperty;
     }
 
@@ -68,7 +68,7 @@ public class BenchBean {
         return (this.doubleProperty);
     }
 
-    public void setDoubleProperty(double doubleProperty) {
+    public void setDoubleProperty(final double doubleProperty) {
         this.doubleProperty = doubleProperty;
     }
 
@@ -82,7 +82,7 @@ public class BenchBean {
         return (this.floatProperty);
     }
 
-    public void setFloatProperty(float floatProperty) {
+    public void setFloatProperty(final float floatProperty) {
         this.floatProperty = floatProperty;
     }
 
@@ -96,7 +96,7 @@ public class BenchBean {
         return (this.intProperty);
     }
 
-    public void setIntProperty(int intProperty) {
+    public void setIntProperty(final int intProperty) {
         this.intProperty = intProperty;
     }
 
@@ -110,7 +110,7 @@ public class BenchBean {
         return (this.longProperty);
     }
 
-    public void setLongProperty(long longProperty) {
+    public void setLongProperty(final long longProperty) {
         this.longProperty = longProperty;
     }
 
@@ -124,7 +124,7 @@ public class BenchBean {
         return (this.shortProperty);
     }
 
-    public void setShortProperty(short shortProperty) {
+    public void setShortProperty(final short shortProperty) {
         this.shortProperty = shortProperty;
     }
 
@@ -138,7 +138,7 @@ public class BenchBean {
         return (this.stringProperty);
     }
 
-    public void setStringProperty(String stringProperty) {
+    public void setStringProperty(final String stringProperty) {
         this.stringProperty = stringProperty;
     }
 

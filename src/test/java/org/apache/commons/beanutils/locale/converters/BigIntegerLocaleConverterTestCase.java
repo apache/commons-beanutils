@@ -33,7 +33,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
     // ---------------------------------------------------------- Constructors
 
-    public BigIntegerLocaleConverterTestCase(String name) {
+    public BigIntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
 
@@ -270,7 +270,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         try {
             converter.convert(getClass(), "test", null);
             fail("Unsupported type not detected!");
-        } catch (ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

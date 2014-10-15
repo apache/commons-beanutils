@@ -69,7 +69,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @param name Name of this DynaBean class
      */
-    public LazyDynaClass(String name) {
+    public LazyDynaClass(final String name) {
         this(name, (DynaProperty[])null);
     }
 
@@ -79,7 +79,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances
      */
-    public LazyDynaClass(String name, Class<?> dynaBeanClass) {
+    public LazyDynaClass(final String name, final Class<?> dynaBeanClass) {
         this(name, dynaBeanClass, null);
     }
 
@@ -89,7 +89,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param name Name of this DynaBean class
      * @param properties Property descriptors for the supported properties
      */
-    public LazyDynaClass(String name, DynaProperty[] properties) {
+    public LazyDynaClass(final String name, final DynaProperty[] properties) {
         this(name, LazyDynaBean.class, properties);
     }
 
@@ -100,7 +100,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param dynaBeanClass The implementation class for new instances
      * @param properties Property descriptors for the supported properties
      */
-    public LazyDynaClass(String name, Class<?> dynaBeanClass, DynaProperty properties[]) {
+    public LazyDynaClass(final String name, final Class<?> dynaBeanClass, final DynaProperty properties[]) {
         super(name, dynaBeanClass, properties);
     }
 
@@ -122,7 +122,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param restricted <code>true</code> if this {@link MutableDynaClass} cannot
      * be changed otherwise <code>false</code>
      */
-    public void setRestricted(boolean restricted) {
+    public void setRestricted(final boolean restricted) {
         this.restricted = restricted;
     }
 
@@ -147,7 +147,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * should be returned if the property doesn't exist, otherwise
      * <code>false</code> if a new {@link DynaProperty} should be created.
      */
-    public void setReturnNull(boolean returnNull) {
+    public void setReturnNull(final boolean returnNull) {
         this.returnNull = returnNull;
     }
 
@@ -161,7 +161,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name) {
+    public void add(final String name) {
         add(new DynaProperty(name));
     }
 
@@ -177,7 +177,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type) {
+    public void add(final String name, final Class<?> type) {
         if (type == null) {
             add(name);
         } else {
@@ -206,7 +206,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @exception UnsupportedOperationException anytime this method is called
      */
-    public void add(String name, Class<?> type, boolean readable, boolean writeable) {
+    public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
     }
 
@@ -219,7 +219,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    protected void add(DynaProperty property) {
+    protected void add(final DynaProperty property) {
 
         if (property.getName() == null) {
             throw new IllegalArgumentException("Property name is missing.");
@@ -235,8 +235,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         }
 
         // Create a new property array with the specified property
-        DynaProperty[] oldProperties = getDynaProperties();
-        DynaProperty[] newProperties = new DynaProperty[oldProperties.length+1];
+        final DynaProperty[] oldProperties = getDynaProperties();
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length+1];
         System.arraycopy(oldProperties, 0, newProperties, 0, oldProperties.length);
         newProperties[oldProperties.length] = property;
 
@@ -258,7 +258,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @exception IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
-    public void remove(String name) {
+    public void remove(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
@@ -275,8 +275,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
 
         // Create a new property array of without the specified property
-        DynaProperty[] oldProperties = getDynaProperties();
-        DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
+        final DynaProperty[] oldProperties = getDynaProperties();
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
         int j = 0;
         for (int i = 0; i < oldProperties.length; i++) {
             if (!(name.equals(oldProperties[i].getName()))) {
@@ -314,7 +314,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @exception IllegalArgumentException if no property name is specified
      */
     @Override
-    public DynaProperty getDynaProperty(String name) {
+    public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
@@ -345,7 +345,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * specified name, otherwise <code>false</code>
      * @exception IllegalArgumentException if no property name is specified
      */
-    public boolean isDynaProperty(String name) {
+    public boolean isDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");

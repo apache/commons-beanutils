@@ -79,7 +79,7 @@ public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
      * otherwise <code>false</code>
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
      */
-    public DynaBeanMapDecorator(DynaBean dynaBean, boolean readOnly) {
+    public DynaBeanMapDecorator(final DynaBean dynaBean, final boolean readOnly) {
         super(dynaBean, readOnly);
     }
 
@@ -90,12 +90,12 @@ public class DynaBeanMapDecorator extends BaseDynaBeanMapDecorator<Object> {
      * @param dynaBean The dyna bean being decorated
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
      */
-    public DynaBeanMapDecorator(DynaBean dynaBean) {
+    public DynaBeanMapDecorator(final DynaBean dynaBean) {
         super(dynaBean);
     }
 
     @Override
-    protected Object convertKey(String propertyName) {
+    protected Object convertKey(final String propertyName) {
         return propertyName;
     }
 }

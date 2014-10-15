@@ -48,7 +48,7 @@ public class Jira87TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira87TestCase(String name) {
+    public Jira87TestCase(final String name) {
         super(name);
     }
 
@@ -57,7 +57,7 @@ public class Jira87TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -95,11 +95,11 @@ public class Jira87TestCase extends TestCase {
      */
     public void testJira87() {
 
-        Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
+        final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
         try {
             // N.B. The test impl. returns the key value
             assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }

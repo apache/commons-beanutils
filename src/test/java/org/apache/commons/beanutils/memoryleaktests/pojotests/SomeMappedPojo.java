@@ -28,7 +28,7 @@ public class SomeMappedPojo {
 
     private HashMap<String, String> mappedProperty = null;
 
-    public String getMappedProperty(String key) {
+    public String getMappedProperty(final String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
             mappedProperty = new HashMap<String, String>();
@@ -38,7 +38,7 @@ public class SomeMappedPojo {
         return mappedProperty.get(key);
     }
 
-    public void setMappedProperty(String key, String value) {
+    public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
             mappedProperty = new HashMap<String, String>();

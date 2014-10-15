@@ -37,9 +37,9 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * @return a map with property names as keys
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(
-            PropertyDescriptor[] descs) {
-        Map<String, PropertyDescriptor> map = new HashMap<String, PropertyDescriptor>();
-        for (PropertyDescriptor pd : descs) {
+            final PropertyDescriptor[] descs) {
+        final Map<String, PropertyDescriptor> map = new HashMap<String, PropertyDescriptor>();
+        for (final PropertyDescriptor pd : descs) {
             map.put(pd.getName(), pd);
         }
         return map;
@@ -54,7 +54,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * @return the descriptor from the map
      */
     private static PropertyDescriptor fetchDescriptor(
-            Map<String, PropertyDescriptor> props, String name) {
+            final Map<String, PropertyDescriptor> props, final String name) {
         assertTrue("Property not found: " + name, props.containsKey(name));
         return props.get(name);
     }
@@ -66,7 +66,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         try {
             new FluentPropertyBeanIntrospector(null);
             fail("Missing prefix for write methods not detected!");
-        } catch (IllegalArgumentException iex) {
+        } catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -75,10 +75,10 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * Tests whether correct property descriptors are detected.
      */
     public void testIntrospection() throws IntrospectionException {
-        PropertyUtilsBean pu = new PropertyUtilsBean();
-        FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
+        final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
         pu.addBeanIntrospector(introspector);
-        Map<String, PropertyDescriptor> props = createDescriptorMap(pu
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(pu
                 .getPropertyDescriptors(FluentIntrospectionTestBean.class));
         PropertyDescriptor pd = fetchDescriptor(props, "name");
         assertNotNull("No read method for name", pd.getReadMethod());

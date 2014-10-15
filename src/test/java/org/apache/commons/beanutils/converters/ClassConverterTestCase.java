@@ -33,7 +33,7 @@ public class ClassConverterTestCase extends TestCase {
      * Construct a new Class Converter test case.
      * @param name Test Name
      */
-    public ClassConverterTestCase(String name) {
+    public ClassConverterTestCase(final String name) {
         super(name);
     }
 
@@ -64,7 +64,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Conversion to String
      */
     public void testConvertToString() {
-        Converter converter = new ClassConverter();
+        final Converter converter = new ClassConverter();
 
         assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
@@ -76,7 +76,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Conversion to Class
      */
     public void testConvertToClass() {
-        Converter converter = new ClassConverter();
+        final Converter converter = new ClassConverter();
 
         assertEquals("Class Test",        Integer.class, converter.convert(Class.class, Integer.class));
         assertEquals("String Test",       Integer.class, converter.convert(Class.class, "java.lang.Integer"));
@@ -86,7 +86,7 @@ public class ClassConverterTestCase extends TestCase {
         try {
             converter.convert(Class.class, new Integer(6));
             fail("Expected invalid value to fail");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
 
@@ -94,7 +94,7 @@ public class ClassConverterTestCase extends TestCase {
         try {
             converter.convert(Class.class, null);
             fail("Expected null value to fail");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
     }
@@ -104,7 +104,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefault() {
 
-        Converter converter = new ClassConverter(Object.class);
+        final Converter converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, new Integer(6)));
         assertEquals("Null Test",    Object.class, converter.convert(Class.class, null));
@@ -115,7 +115,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefaultNull() {
 
-        Converter converter = new ClassConverter(null);
+        final Converter converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, new Integer(6)));
         assertEquals("Null Test",    null, converter.convert(Class.class, null));
@@ -125,7 +125,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Array Conversion
      */
     public void testArray() {
-        Converter converter = new ClassConverter();
+        final Converter converter = new ClassConverter();
 
         // Test Array Class to String
         assertEquals("Array to String", "[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class));
@@ -139,13 +139,13 @@ public class ClassConverterTestCase extends TestCase {
      * Test Invalid
      */
     public void testInvalid() {
-        Converter converter = new ClassConverter();
+        final Converter converter = new ClassConverter();
 
         // Test invalid class name
         try {
             converter.convert(Class.class, "foo.bar");
             fail("Invalid class name, expected ConversionException");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
     }
@@ -154,11 +154,11 @@ public class ClassConverterTestCase extends TestCase {
      * Tries a conversion to an unsupported target type.
      */
     public void testUnsupportedTargetType() {
-        Converter converter = new ClassConverter();
+        final Converter converter = new ClassConverter();
         try {
             converter.convert(Integer.class, getClass().getName());
             fail("Invalid target class not detected!");
-        } catch (ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

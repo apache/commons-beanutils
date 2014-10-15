@@ -29,35 +29,35 @@ import org.apache.commons.collections.functors.NullPredicate;
  */
 public class BeanPredicateTestCase extends TestCase {
 
-    public BeanPredicateTestCase(String name) {
+    public BeanPredicateTestCase(final String name) {
         super(name);
     }
 
     public void testEqual() {
-        BeanPredicate predicate =
+        final BeanPredicate predicate =
             new BeanPredicate("stringProperty",new EqualPredicate("foo"));
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(!predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNotEqual() {
-        BeanPredicate predicate =
+        final BeanPredicate predicate =
             new BeanPredicate("stringProperty",new NotPredicate( new EqualPredicate("foo")));
         assertTrue(!predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testInstanceOf() {
-        BeanPredicate predicate =
+        final BeanPredicate predicate =
             new BeanPredicate("stringProperty",new InstanceofPredicate( String.class ));
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNull() {
-        BeanPredicate predicate =
+        final BeanPredicate predicate =
             new BeanPredicate("stringProperty", NullPredicate.INSTANCE);
-        String nullString = null;
+        final String nullString = null;
         assertTrue(predicate.evaluate(new TestBean(nullString)));
         assertTrue(!predicate.evaluate(new TestBean("bar")));
     }

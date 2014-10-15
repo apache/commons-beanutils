@@ -80,7 +80,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(boolean locPattern) {
+    public DateLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -92,7 +92,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *
      * @param locale        The locale
      */
-    public DateLocaleConverter(Locale locale) {
+    public DateLocaleConverter(final Locale locale) {
 
         this(locale, false);
     }
@@ -105,7 +105,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(Locale locale, boolean locPattern) {
+    public DateLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null, locPattern);
     }
@@ -118,7 +118,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public DateLocaleConverter(Locale locale, String pattern) {
+    public DateLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -132,7 +132,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public DateLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -146,7 +146,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public DateLocaleConverter(Object defaultValue) {
+    public DateLocaleConverter(final Object defaultValue) {
 
         this(defaultValue, false);
     }
@@ -160,7 +160,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(Object defaultValue, boolean locPattern) {
+    public DateLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -173,7 +173,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public DateLocaleConverter(Object defaultValue, Locale locale) {
+    public DateLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -187,7 +187,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public DateLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -202,7 +202,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public DateLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public DateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -217,7 +217,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public DateLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public DateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -240,7 +240,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
      * @see java.text.DateFormat#setLenient
      */
-    public void setLenient(boolean lenient) {
+    public void setLenient(final boolean lenient) {
         isLenient = lenient;
     }
 
@@ -259,7 +259,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @throws ParseException if an error occurs parsing
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, String pattern) throws ParseException {
 
         // Handle Date
         if (value instanceof java.util.Date) {
@@ -276,15 +276,15 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          }
 
          // Create Formatter - use default if pattern is null
-         DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
+         final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
                                                 : new SimpleDateFormat(pattern, locale);
          formatter.setLenient(isLenient);
 
 
          // Parse the Date
-        ParsePosition pos = new ParsePosition(0);
-        String strValue = value.toString();
-        Object parsedValue = formatter.parseObject(strValue, pos);
+        final ParsePosition pos = new ParsePosition(0);
+        final String strValue = value.toString();
+        final Object parsedValue = formatter.parseObject(strValue, pos);
         if (pos.getErrorIndex() > -1) {
             throw new ConversionException("Error parsing date '" + value +
                     "' at position="+ pos.getErrorIndex());
@@ -304,7 +304,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
       * @param localizedPattern The pattern in 'local' symbol format
       * @return pattern in 'default' symbol format
       */
-     private String convertLocalizedPattern(String localizedPattern, Locale locale) {
+     private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
 
          if (localizedPattern == null) {
             return null;
@@ -315,8 +315,8 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          // that works with some 1.4 series JVM.
 
          // Get the symbols for the localized pattern
-         DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
-         String localChars = localizedSymbols.getLocalPatternChars();
+         final DateFormatSymbols localizedSymbols = new DateFormatSymbols(locale);
+         final String localChars = localizedSymbols.getLocalPatternChars();
 
          if (DEFAULT_PATTERN_CHARS.equals(localChars)) {
              return localizedPattern;
@@ -328,7 +328,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
              convertedPattern = convertPattern(localizedPattern,
                                                 localChars,
                                                 DEFAULT_PATTERN_CHARS);
-         } catch (Exception ex) {
+         } catch (final Exception ex) {
              log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
          }
          return convertedPattern;
@@ -337,9 +337,9 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /**
      * <p>Converts a Pattern from one character set to another.</p>
      */
-    private String convertPattern(String pattern, String fromChars, String toChars) {
+    private String convertPattern(final String pattern, final String fromChars, final String toChars) {
 
-        StringBuilder converted = new StringBuilder();
+        final StringBuilder converted = new StringBuilder();
         boolean quoted = false;
 
         for (int i = 0; i < pattern.length(); ++i) {
@@ -353,7 +353,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
                    quoted = true;
                 } else if ((thisChar >= 'a' && thisChar <= 'z') ||
                            (thisChar >= 'A' && thisChar <= 'Z')) {
-                    int index = fromChars.indexOf(thisChar );
+                    final int index = fromChars.indexOf(thisChar );
                     if (index == -1) {
                         throw new IllegalArgumentException(
                             "Illegal pattern character '" + thisChar + "'");
@@ -377,7 +377,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * this data should just read that constant.
      */
     private static String initDefaultChars() {
-        DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
+        final DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
         return defaultSymbols.getLocalPatternChars();
     }
 

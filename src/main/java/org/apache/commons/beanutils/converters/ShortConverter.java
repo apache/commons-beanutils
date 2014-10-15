@@ -49,7 +49,7 @@ public final class ShortConverter extends NumberConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ShortConverter(Object defaultValue) {
+    public ShortConverter(final Object defaultValue) {
         super(false, defaultValue);
     }
 

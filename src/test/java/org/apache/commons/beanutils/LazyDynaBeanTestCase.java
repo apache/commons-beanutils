@@ -51,7 +51,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public LazyDynaBeanTestCase(String name) {
+    public LazyDynaBeanTestCase(final String name) {
         super(name);
     }
 
@@ -60,7 +60,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     /**
      * Run thus Test
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -113,7 +113,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
             bean.set(testProperty, testString1);
             fail("expected ConversionException trying to set an Integer property to a String");
-        } catch (ConversionException expected) {
+        } catch (final ConversionException expected) {
             // expected result
         }
 
@@ -151,7 +151,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
             bean.set(testProperty, testString1);
             fail("expected IllegalArgumentException trying to add new property to restricted DynaClass");
-        } catch (IllegalArgumentException expected) {
+        } catch (final IllegalArgumentException expected) {
             // expected result
         }
 
@@ -222,13 +222,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(bean, testProperty+"("+testKey+")", testString1);
         }
-        catch (NoSuchMethodException ex) {
+        catch (final NoSuchMethodException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
-        catch (InvocationTargetException ex) {
+        catch (final InvocationTargetException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
-        catch (IllegalAccessException ex) {
+        catch (final IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -254,7 +254,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
             bean.set(testProperty, testKey, testInteger1);
             fail("expected IllegalArgumentException trying to add new property to restricted MutableDynaClass");
-        } catch (IllegalArgumentException expected) {
+        } catch (final IllegalArgumentException expected) {
             // expected result
         }
 
@@ -269,7 +269,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
             bean.set(testProperty, testKey, testInteger1);
             fail("set(property, key, value) should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException expected) {
+        } catch (final IllegalArgumentException expected) {
             // expected result
         }
     }
@@ -336,7 +336,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     public void testIndexedPrimitiveArray() {
 
         int   index     = 3;
-        int[] primitiveArray = new int[0];
+        final int[] primitiveArray = new int[0];
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
@@ -370,7 +370,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     public void testIndexedObjectArray() {
 
         int   index     = 3;
-        Object objectArray = new String[0];
+        final Object objectArray = new String[0];
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
@@ -402,8 +402,8 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedDynaBeanArray() {
 
-        int   index     = 3;
-        Object objectArray = new LazyDynaMap[0];
+        final int   index     = 3;
+        final Object objectArray = new LazyDynaMap[0];
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
@@ -420,7 +420,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         }
 
         dynaClass.add(testPropertyB, objectArray.getClass());
-        LazyDynaMap newMap = new LazyDynaMap();
+        final LazyDynaMap newMap = new LazyDynaMap();
         newMap.set(testPropertyB, testString2);
         bean.set(testPropertyA, index, newMap);
         assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean)bean.get(testPropertyA, index)).get(testPropertyB));
@@ -432,7 +432,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedPropertyUtils() {
 
-        int   index     = 3;
+        final int   index     = 3;
         dynaClass.setReturnNull(false);
 
         // Check the property & value doesn't exist
@@ -444,13 +444,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(bean, testProperty+"["+index+"]", testString1);
         }
-        catch (NoSuchMethodException ex) {
+        catch (final NoSuchMethodException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
-        catch (InvocationTargetException ex) {
+        catch (final InvocationTargetException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
-        catch (IllegalAccessException ex) {
+        catch (final IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -464,7 +464,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedPropertyRestricted() {
 
-        int   index     = 3;
+        final int   index     = 3;
 
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaClass.setRestricted(true);
@@ -478,7 +478,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
             bean.set(testProperty, index, testInteger1);
             fail("expected IllegalArgumentException trying to add new property to restricted MutableDynaClass");
-        } catch (IllegalArgumentException expected) {
+        } catch (final IllegalArgumentException expected) {
             // expected result
         }
 
@@ -488,13 +488,13 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test setting indexed property for type which is not List or Array
      */
     public void testIndexedInvalidType() {
-        int   index     = 3;
+        final int   index     = 3;
         dynaClass.add(testProperty, String.class);
         assertFalse("Check Property is not indexed", dynaClass.getDynaProperty(testProperty).isIndexed());
         try {
             bean.set(testProperty, index, testString1);
             fail("set(property, index, value) should have thrown IllegalArgumentException");
-        } catch (IllegalArgumentException expected) {
+        } catch (final IllegalArgumentException expected) {
             // expected result
         }
     }

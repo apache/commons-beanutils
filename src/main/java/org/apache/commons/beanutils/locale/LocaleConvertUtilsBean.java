@@ -137,7 +137,7 @@ public class LocaleConvertUtilsBean {
      * setter for defaultLocale.
      * @param locale the default locale
      */
-    public void setDefaultLocale(Locale locale) {
+    public void setDefaultLocale(final Locale locale) {
 
         if (locale == null) {
             defaultLocale = Locale.getDefault();
@@ -163,7 +163,7 @@ public class LocaleConvertUtilsBean {
      * @param newApplyLocalized <code>true</code> if pattern is localized,
      * otherwise <code>false</code>
      */
-    public void setApplyLocalized(boolean newApplyLocalized) {
+    public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
 
@@ -178,7 +178,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public String convert(Object value) {
+    public String convert(final Object value) {
         return convert(value, defaultLocale, null);
     }
 
@@ -193,7 +193,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public String convert(Object value, String pattern) {
+    public String convert(final Object value, final String pattern) {
         return convert(value, defaultLocale, pattern);
     }
 
@@ -209,9 +209,9 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public String convert(Object value, Locale locale, String pattern) {
+    public String convert(final Object value, final Locale locale, final String pattern) {
 
-        LocaleConverter converter = lookup(String.class, locale);
+        final LocaleConverter converter = lookup(String.class, locale);
 
         return converter.convert(String.class, value, pattern);
     }
@@ -227,7 +227,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class<?> clazz) {
+    public Object convert(final String value, final Class<?> clazz) {
 
         return convert(value, clazz, defaultLocale, null);
     }
@@ -245,7 +245,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class<?> clazz, String pattern) {
+    public Object convert(final String value, final Class<?> clazz, final String pattern) {
 
         return convert(value, clazz, defaultLocale, pattern);
     }
@@ -264,7 +264,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String value, Class<?> clazz, Locale locale, String pattern) {
+    public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
@@ -298,7 +298,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String[] values, Class<?> clazz, String pattern) {
+    public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
 
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
@@ -314,7 +314,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
     */
-   public Object convert(String[] values, Class<?> clazz) {
+   public Object convert(final String[] values, final Class<?> clazz) {
 
        return convert(values, clazz, getDefaultLocale(), null);
    }
@@ -332,7 +332,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(String[] values, Class<?> clazz, Locale locale, String pattern) {
+    public Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
 
         Class<?> type = clazz;
         if (clazz.isArray()) {
@@ -344,7 +344,7 @@ public class LocaleConvertUtilsBean {
                     " locale and " + pattern + " pattern");
         }
 
-        Object array = Array.newInstance(type, values.length);
+        final Object array = Array.newInstance(type, values.length);
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, convert(values[i], type, locale, pattern));
         }
@@ -361,7 +361,7 @@ public class LocaleConvertUtilsBean {
      *  Converter
      * @param locale The locale
      */
-    public void register(LocaleConverter converter, Class<?> clazz, Locale locale) {
+    public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
 
         lookup(locale).put(clazz, converter);
     }
@@ -371,7 +371,7 @@ public class LocaleConvertUtilsBean {
      */
     public void deregister() {
 
-        FastHashMap defaultConverter = lookup(defaultLocale);
+        final FastHashMap defaultConverter = lookup(defaultLocale);
 
         mapConverters.setFast(false);
 
@@ -387,7 +387,7 @@ public class LocaleConvertUtilsBean {
      *
      * @param locale The locale
      */
-    public void deregister(Locale locale) {
+    public void deregister(final Locale locale) {
 
         mapConverters.remove(locale);
     }
@@ -399,7 +399,7 @@ public class LocaleConvertUtilsBean {
      * @param clazz Class for which to remove a registered Converter
      * @param locale The locale
      */
-    public void deregister(Class<?> clazz, Locale locale) {
+    public void deregister(final Class<?> clazz, final Locale locale) {
 
         lookup(locale).remove(clazz);
     }
@@ -413,9 +413,9 @@ public class LocaleConvertUtilsBean {
      * @param locale The Locale
      * @return The registered locale Converter, if any
      */
-    public LocaleConverter lookup(Class<?> clazz, Locale locale) {
+    public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
 
-        LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
+        final LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
             log.trace("LocaleConverter:" + converter);
@@ -434,7 +434,7 @@ public class LocaleConvertUtilsBean {
      * @deprecated This method will be modified to return a Map in the next release.
      */
     @Deprecated
-    protected FastHashMap lookup(Locale locale) {
+    protected FastHashMap lookup(final Locale locale) {
         FastHashMap localeConverters;
 
         if (locale == null) {
@@ -461,9 +461,9 @@ public class LocaleConvertUtilsBean {
      * @deprecated This method will be modified to return a Map in the next release.
      */
     @Deprecated
-    protected FastHashMap create(Locale locale) {
+    protected FastHashMap create(final Locale locale) {
 
-        FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
+        final FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -514,7 +514,7 @@ public class LocaleConvertUtilsBean {
 
         private final Map<Object, Object> map;
 
-        private DelegateFastHashMap(Map<Object, Object> map) {
+        private DelegateFastHashMap(final Map<Object, Object> map) {
             this.map = map;
         }
         @Override
@@ -522,11 +522,11 @@ public class LocaleConvertUtilsBean {
             map.clear();
         }
         @Override
-        public boolean containsKey(Object key) {
+        public boolean containsKey(final Object key) {
             return map.containsKey(key);
         }
         @Override
-        public boolean containsValue(Object value) {
+        public boolean containsValue(final Object value) {
             return map.containsValue(value);
         }
         @Override
@@ -534,11 +534,11 @@ public class LocaleConvertUtilsBean {
             return map.entrySet();
         }
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             return map.equals(o);
         }
         @Override
-        public Object get(Object key) {
+        public Object get(final Object key) {
             return map.get(key);
         }
         @Override
@@ -554,18 +554,18 @@ public class LocaleConvertUtilsBean {
             return map.keySet();
         }
         @Override
-        public Object put(Object key, Object value) {
+        public Object put(final Object key, final Object value) {
             return map.put(key, value);
         }
         @SuppressWarnings({ "rawtypes", "unchecked" })
         // we operate on very generic types (<Object, Object>), so there is
         // no need for doing type checks
         @Override
-        public void putAll(Map m) {
+        public void putAll(final Map m) {
             map.putAll(m);
         }
         @Override
-        public Object remove(Object key) {
+        public Object remove(final Object key) {
             return map.remove(key);
         }
         @Override
@@ -581,7 +581,7 @@ public class LocaleConvertUtilsBean {
             return BeanUtils.getCacheFast(map);
         }
         @Override
-        public void setFast(boolean fast) {
+        public void setFast(final boolean fast) {
             BeanUtils.setCacheFast(map, fast);
         }
     }

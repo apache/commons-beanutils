@@ -50,7 +50,7 @@ public class Jira411TestCase extends TestCase {
             return imgLink;
         }
 
-        public void setImgLink(String imgLink) {
+        public void setImgLink(final String imgLink) {
             this.imgLink = imgLink;
         }
     }

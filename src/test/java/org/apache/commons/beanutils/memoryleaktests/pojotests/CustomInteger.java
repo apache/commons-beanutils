@@ -36,7 +36,7 @@ public class CustomInteger extends Number {
      * Construct a new instance.
      * @param i the integer value
      */
-    public CustomInteger(int i) {
+    public CustomInteger(final int i) {
         this.i = i;
     }
 

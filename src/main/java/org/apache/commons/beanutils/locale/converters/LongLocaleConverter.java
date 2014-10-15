@@ -58,7 +58,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(boolean locPattern) {
+    public LongLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -70,7 +70,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      *
      * @param locale        The locale
      */
-    public LongLocaleConverter(Locale locale) {
+    public LongLocaleConverter(final Locale locale) {
 
         this(locale, false);
     }
@@ -83,7 +83,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(Locale locale, boolean locPattern) {
+    public LongLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null, locPattern);
     }
@@ -96,7 +96,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public LongLocaleConverter(Locale locale, String pattern) {
+    public LongLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -110,7 +110,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public LongLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -124,7 +124,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public LongLocaleConverter(Object defaultValue) {
+    public LongLocaleConverter(final Object defaultValue) {
 
         this(defaultValue, false);
     }
@@ -138,7 +138,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(Object defaultValue, boolean locPattern) {
+    public LongLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -151,7 +151,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public LongLocaleConverter(Object defaultValue, Locale locale) {
+    public LongLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -165,7 +165,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public LongLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -179,7 +179,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public LongLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public LongLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -194,7 +194,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public LongLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public LongLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -213,9 +213,9 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      * @since 1.8.0
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, final String pattern) throws ParseException {
 
-        Object result = super.parse(value, pattern);
+        final Object result = super.parse(value, pattern);
 
         if (result == null || result instanceof Long) {
             return result;

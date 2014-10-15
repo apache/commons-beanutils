@@ -62,7 +62,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      *
      * @param defaultValue The default value to be returned
      */
-    public StringArrayConverter(Object defaultValue) {
+    public StringArrayConverter(final Object defaultValue) {
 
         this.defaultValue = defaultValue;
         this.useDefault = true;
@@ -121,7 +121,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * for this object.
      */
     @Override
-    public Object convert(Class type, Object value) {
+    public Object convert(final Class type, final Object value) {
 
         // Deal with a null value
         if (value == null) {
@@ -140,8 +140,8 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         // Deal with the input value as an int array
         if (INT_MODEL.getClass() == value.getClass())
         {
-            int[] values = (int[]) value;
-            String[] results = new String[values.length];
+            final int[] values = (int[]) value;
+            final String[] results = new String[values.length];
             for (int i = 0; i < values.length; i++)
             {
                 results[i] = Integer.toString(values[i]);
@@ -153,13 +153,13 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            List list = parseElements(value.toString());
-            String[] results = new String[list.size()];
+            final List list = parseElements(value.toString());
+            final String[] results = new String[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = (String) list.get(i);
             }
             return (results);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
             } else {

@@ -44,7 +44,7 @@ public class PropertyUtilsBenchCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public PropertyUtilsBenchCase(String name) {
+    public PropertyUtilsBenchCase(final String name) {
 
         super(name);
 
@@ -83,7 +83,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     public void setUp() throws Exception {
 
         // Set up loop counter (if property specified)
-        String prop = System.getProperty("counter");
+        final String prop = System.getProperty("counter");
         if (prop != null) {
             counter = Long.parseLong(prop);
         }
@@ -114,7 +114,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         inMap.put("shortProperty", new Short(inBean.getShortProperty()));
         inMap.put("stringProperty", inBean.getStringProperty());
         inDyna = dynaClass.newInstance();
-        for (Map.Entry<String, Object> e : inMap.entrySet()) {
+        for (final Map.Entry<String, Object> e : inMap.entrySet()) {
             inDyna.set(e.getKey(), e.getValue());
         }
 
@@ -122,7 +122,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         outBean = new BenchBean();
         outDyna = dynaClass.newInstance();
         inDyna = dynaClass.newInstance();
-        for (Map.Entry<String, Object> e : inMap.entrySet()) {
+        for (final Map.Entry<String, Object> e : inMap.entrySet()) {
             outDyna.set(e.getKey(), e.getValue());
         }
 

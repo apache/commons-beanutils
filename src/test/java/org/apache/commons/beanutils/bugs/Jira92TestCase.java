@@ -50,7 +50,7 @@ public class Jira92TestCase extends TestCase {
          * @param index index
          * @param date indexed value to set
          */
-        public void setDateArrayProperty(int index, java.util.Date date) {
+        public void setDateArrayProperty(final int index, final java.util.Date date) {
             this.dateArrayProperty[index] = date;
         }
     }

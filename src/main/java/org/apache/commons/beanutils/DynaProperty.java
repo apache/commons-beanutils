@@ -71,7 +71,7 @@ public class DynaProperty implements Serializable {
      *
      * @param name Name of the property being described
      */
-    public DynaProperty(String name) {
+    public DynaProperty(final String name) {
 
         this(name, Object.class);
 
@@ -84,7 +84,7 @@ public class DynaProperty implements Serializable {
      * @param name Name of the property being described
      * @param type Java class representing the property data type
      */
-    public DynaProperty(String name, Class<?> type) {
+    public DynaProperty(final String name, final Class<?> type) {
 
         super();
         this.name = name;
@@ -103,7 +103,7 @@ public class DynaProperty implements Serializable {
      * @param type Java class representing the property data type
      * @param contentType Class that all indexed or mapped elements are instances of
      */
-    public DynaProperty(String name, Class<?> type, Class<?> contentType) {
+    public DynaProperty(final String name, final Class<?> type, final Class<?> contentType) {
 
         super();
         this.name = name;
@@ -250,7 +250,7 @@ public class DynaProperty implements Serializable {
     @Override
     public String toString() {
 
-        StringBuilder sb = new StringBuilder("DynaProperty[name=");
+        final StringBuilder sb = new StringBuilder("DynaProperty[name=");
         sb.append(this.name);
         sb.append(",type=");
         sb.append(this.type);
@@ -270,7 +270,7 @@ public class DynaProperty implements Serializable {
      * (including java 1.3).
      * This method provides a workaround.
      */
-    private void writeObject(ObjectOutputStream out) throws IOException {
+    private void writeObject(final ObjectOutputStream out) throws IOException {
 
         writeAnyClass(this.type,out);
 
@@ -285,7 +285,7 @@ public class DynaProperty implements Serializable {
     /**
      * Write a class using safe encoding to workaround java 1.3 serialization bug.
      */
-    private void writeAnyClass(Class<?> clazz, ObjectOutputStream out) throws IOException {
+    private void writeAnyClass(final Class<?> clazz, final ObjectOutputStream out) throws IOException {
         // safely write out any class
         int primitiveType = 0;
         if (Boolean.TYPE.equals(clazz)) {
@@ -325,7 +325,7 @@ public class DynaProperty implements Serializable {
      *
      * @throws StreamCorruptedException when the stream data values are outside expected range
      */
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
 
         this.type = readAnyClass(in);
 
@@ -341,7 +341,7 @@ public class DynaProperty implements Serializable {
     /**
      * Reads a class using safe encoding to workaround java 1.3 serialization bug.
      */
-    private Class<?> readAnyClass(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private Class<?> readAnyClass(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         // read back type class safely
         if (in.readBoolean()) {
             // it's a type constant

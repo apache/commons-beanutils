@@ -47,7 +47,7 @@ import java.io.InputStream;
  */
 
 public class ClassReloader extends ClassLoader {
-    public ClassReloader(ClassLoader parent) {
+    public ClassReloader(final ClassLoader parent) {
         super(parent);
     }
 
@@ -55,19 +55,19 @@ public class ClassReloader extends ClassLoader {
      * Given a class already in the classpath of a parent classloader,
      * reload that class via this classloader.
      */
-    public Class<?> reload(Class<?> clazz) throws FileNotFoundException, IOException {
-        String className = clazz.getName();
-        String classFile = className.replace('.', '/') + ".class";
-        InputStream classStream = getParent().getResourceAsStream(classFile);
+    public Class<?> reload(final Class<?> clazz) throws FileNotFoundException, IOException {
+        final String className = clazz.getName();
+        final String classFile = className.replace('.', '/') + ".class";
+        final InputStream classStream = getParent().getResourceAsStream(classFile);
 
         if (classStream == null) {
             throw new FileNotFoundException(classFile);
         }
 
-        byte[] buf = new byte[1024];
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final byte[] buf = new byte[1024];
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         for(;;) {
-            int bytesRead = classStream.read(buf);
+            final int bytesRead = classStream.read(buf);
             if (bytesRead == -1) {
                 break;
             }
@@ -75,10 +75,10 @@ public class ClassReloader extends ClassLoader {
         }
         classStream.close();
 
-        byte[] classData = baos.toByteArray();
+        final byte[] classData = baos.toByteArray();
 
         // now we have the raw class data, let's turn it into a class
-        Class<?> newClass = defineClass(className, classData, 0, classData.length);
+        final Class<?> newClass = defineClass(className, classData, 0, classData.length);
         resolveClass(newClass);
         return newClass;
     }

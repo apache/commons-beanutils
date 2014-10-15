@@ -94,7 +94,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @param writePrefix the prefix for write methods (must not be <b>null</b>)
      * @throws IllegalArgumentException if the prefix is <b>null</b>
      */
-    public FluentPropertyBeanIntrospector(String writePrefix) {
+    public FluentPropertyBeanIntrospector(final String writePrefix) {
         if (writePrefix == null) {
             throw new IllegalArgumentException(
                     "Prefix for write methods must not be null!");
@@ -128,12 +128,12 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @param icontext the introspection context
      * @throws IntrospectionException if an error occurs
      */
-    public void introspect(IntrospectionContext icontext)
+    public void introspect(final IntrospectionContext icontext)
             throws IntrospectionException {
-        for (Method m : icontext.getTargetClass().getMethods()) {
+        for (final Method m : icontext.getTargetClass().getMethods()) {
             if (m.getName().startsWith(getWriteMethodPrefix())) {
-                String propertyName = propertyName(m);
-                PropertyDescriptor pd = icontext
+                final String propertyName = propertyName(m);
+                final PropertyDescriptor pd = icontext
                         .getPropertyDescriptor(propertyName);
                 try {
                     if (pd == null) {
@@ -142,7 +142,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                     } else if (pd.getWriteMethod() == null) {
                         pd.setWriteMethod(m);
                     }
-                } catch (IntrospectionException e) {
+                } catch (final IntrospectionException e) {
                     log.warn("Error when creating PropertyDescriptor for " + m
                             + "! Ignoring this property.", e);
                 }
@@ -156,8 +156,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @param m the method
      * @return the corresponding property name
      */
-    private String propertyName(Method m) {
-        String methodName = m.getName().substring(
+    private String propertyName(final Method m) {
+        final String methodName = m.getName().substring(
                 getWriteMethodPrefix().length());
         return (methodName.length() > 1) ? Character.toLowerCase(methodName
                 .charAt(0)) + methodName.substring(1) : methodName
@@ -172,8 +172,8 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @return the descriptor
      * @throws IntrospectionException if an error occurs
      */
-    private PropertyDescriptor createFluentPropertyDescritor(Method m,
-            String propertyName) throws IntrospectionException {
+    private PropertyDescriptor createFluentPropertyDescritor(final Method m,
+            final String propertyName) throws IntrospectionException {
         return new PropertyDescriptor(propertyName(m), null, m);
     }
 }

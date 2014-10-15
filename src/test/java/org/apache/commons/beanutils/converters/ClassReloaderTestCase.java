@@ -30,7 +30,7 @@ public class ClassReloaderTestCase extends TestCase {
 
     // ------------------------------------------------------------------------
 
-    public ClassReloaderTestCase(String name) {
+    public ClassReloaderTestCase(final String name) {
         super(name);
     }
 
@@ -48,11 +48,11 @@ public class ClassReloaderTestCase extends TestCase {
      * Test basic operation of the ClassReloader.
      */
     public void testBasicOperation() throws Exception {
-        ClassLoader sharedLoader = this.getClass().getClassLoader();
-        ClassReloader componentLoader = new ClassReloader(sharedLoader);
+        final ClassLoader sharedLoader = this.getClass().getClassLoader();
+        final ClassReloader componentLoader = new ClassReloader(sharedLoader);
 
-        Class<?> sharedClass = DummyClass.class;
-        Class<?> componentClass = componentLoader.reload(sharedClass);
+        final Class<?> sharedClass = DummyClass.class;
+        final Class<?> componentClass = componentLoader.reload(sharedClass);
 
         // the two Class objects contain the same bytecode, but are not equal
         assertTrue(sharedClass != componentClass);
@@ -63,8 +63,8 @@ public class ClassReloaderTestCase extends TestCase {
         assertTrue(sharedLoader != componentLoader);
 
         // verify that objects of these two types are not assignment-compatible
-        Object obj1 = sharedClass.newInstance();
-        Object obj2 = componentClass.newInstance();
+        final Object obj1 = sharedClass.newInstance();
+        final Object obj2 = componentClass.newInstance();
 
         assertTrue("Obj1 class incorrect", sharedClass.isInstance(obj1));
         assertFalse("Obj1 class incorrect", componentClass.isInstance(obj1));

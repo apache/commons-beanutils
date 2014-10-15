@@ -59,7 +59,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
      *
      * @param defaultValue The default value to be returned
      */
-    public LongArrayConverter(Object defaultValue) {
+    public LongArrayConverter(final Object defaultValue) {
 
         this.defaultValue = defaultValue;
         this.useDefault = true;
@@ -91,7 +91,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
      *  successfully
      */
     @Override
-    public Object convert(Class type, Object value) {
+    public Object convert(final Class type, final Object value) {
 
         // Deal with a null value
         if (value == null) {
@@ -110,13 +110,13 @@ public final class LongArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String[] values = (String[]) value;
-                long[] results = new long[values.length];
+                final String[] values = (String[]) value;
+                final long[] results = new long[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Long.parseLong(values[i]);
                 }
                 return (results);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 if (useDefault) {
                     return (defaultValue);
                 } else {
@@ -128,13 +128,13 @@ public final class LongArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            List list = parseElements(value.toString());
-            long[] results = new long[list.size()];
+            final List list = parseElements(value.toString());
+            final long[] results = new long[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Long.parseLong((String) list.get(i));
             }
             return (results);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
             } else {

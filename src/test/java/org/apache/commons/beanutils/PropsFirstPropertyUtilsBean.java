@@ -40,10 +40,10 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * be correctly handled.
      */
     @Override
-    protected Object getPropertyOfMapBean(Map<?, ?> bean, String propertyName)
+    protected Object getPropertyOfMapBean(final Map<?, ?> bean, final String propertyName)
     throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
-        PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
             // no simple property exists so return the value from the map
             return bean.get(propertyName);
@@ -60,9 +60,9 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      * be correctly handled.
      */
     @Override
-    protected void setPropertyOfMapBean(Map<String, Object> bean, String propertyName, Object value)
+    protected void setPropertyOfMapBean(final Map<String, Object> bean, final String propertyName, final Object value)
         throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
             // no simple property exists so put the value into the map
             bean.put(propertyName, value);

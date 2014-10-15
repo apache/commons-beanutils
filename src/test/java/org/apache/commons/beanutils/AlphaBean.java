@@ -26,7 +26,7 @@ public class AlphaBean extends AbstractParent implements Child {
 
     public AlphaBean() {}
 
-    public AlphaBean(String name) {
+    public AlphaBean(final String name) {
         setName(name);
     }
 
@@ -34,12 +34,12 @@ public class AlphaBean extends AbstractParent implements Child {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     /**
      * Used for testing that correct exception is thrown.
      */
-    public void bogus(String badParameter){}
+    public void bogus(final String badParameter){}
 }

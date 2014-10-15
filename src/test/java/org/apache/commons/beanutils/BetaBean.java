@@ -28,15 +28,15 @@ public class BetaBean extends AbstractChild {
         return secret;
     }
 
-    public void setNoGetterProperty(String secret) {
+    public void setNoGetterProperty(final String secret) {
         this.secret = secret;
     }
 
-    public void setNoGetterMappedProperty(String secret, String key) {
+    public void setNoGetterMappedProperty(final String secret, final String key) {
         this.secret = "MAP:" + secret;
     }
 
-    public BetaBean(String name) {
+    public BetaBean(final String name) {
         setName(name);
     }
 }

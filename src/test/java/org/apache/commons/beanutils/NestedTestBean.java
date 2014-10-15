@@ -30,7 +30,7 @@ public class NestedTestBean {
 
 
     // ------------------------------------------------------------- Constructors
-    public NestedTestBean(String name) {
+    public NestedTestBean(final String name) {
         setName(name);
     }
 
@@ -43,7 +43,7 @@ public class NestedTestBean {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -54,7 +54,7 @@ public class NestedTestBean {
         return testString;
     }
 
-    public void setTestString(String testString) {
+    public void setTestString(final String testString) {
         this.testString = testString;
     }
 
@@ -65,7 +65,7 @@ public class NestedTestBean {
         return testBoolean;
     }
 
-    public void setTestBoolean(boolean testBoolean) {
+    public void setTestBoolean(final boolean testBoolean) {
         this.testBoolean = testBoolean;
     }
 
@@ -83,11 +83,11 @@ public class NestedTestBean {
         simpleBean = new NestedTestBean("Simple Property Bean");
     }
 
-    public NestedTestBean getIndexedProperty(int index) {
+    public NestedTestBean getIndexedProperty(final int index) {
         return (this.indexedBeans[index]);
     }
 
-    public void setIndexedProperty(int index, NestedTestBean value) {
+    public void setIndexedProperty(final int index, final NestedTestBean value) {
         this.indexedBeans[index] = value;
     }
 

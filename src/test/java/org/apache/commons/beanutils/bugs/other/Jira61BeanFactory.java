@@ -66,7 +66,7 @@ public class Jira61BeanFactory {
          *
          * @param simple simple value
          */
-        public void setSimpleWriteOnly(String simple) {
+        public void setSimpleWriteOnly(final String simple) {
             this.simple = simple;
         }
 
@@ -76,7 +76,7 @@ public class Jira61BeanFactory {
          * @param index The index
          * @return The indexed value
          */
-        public String getIndexedReadOnly(int index) {
+        public String getIndexedReadOnly(final int index) {
             return indexed[index];
         }
 
@@ -86,7 +86,7 @@ public class Jira61BeanFactory {
          * @param index The index
          * @param value The indexed value
          */
-        public void setIndexedWriteOnly(int index, String value) {
+        public void setIndexedWriteOnly(final int index, final String value) {
             this.indexed[index] = value;
         }
 
@@ -96,7 +96,7 @@ public class Jira61BeanFactory {
          * @param key The mapped key
          * @return The mapped value
          */
-        public String getMappedReadOnly(String key) {
+        public String getMappedReadOnly(final String key) {
             return (String)mapped.get(key);
         }
 
@@ -106,7 +106,7 @@ public class Jira61BeanFactory {
          * @param key The mapped key
          * @param value The mapped value
          */
-        public void setMappedWriteOnly(String key, String value) {
+        public void setMappedWriteOnly(final String key, final String value) {
             mapped.put(key, value);
         }
 

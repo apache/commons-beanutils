@@ -60,7 +60,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * @throws IllegalArgumentException if the collection with property names is
      * <b>null</b>
      */
-    public SuppressPropertiesBeanIntrospector(Collection<String> propertiesToSuppress) {
+    public SuppressPropertiesBeanIntrospector(final Collection<String> propertiesToSuppress) {
         if (propertiesToSuppress == null) {
             throw new IllegalArgumentException("Property names must not be null!");
         }
@@ -83,8 +83,8 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * {@inheritDoc} This implementation removes all properties from the given context it
      * is configured for.
      */
-    public void introspect(IntrospectionContext icontext) throws IntrospectionException {
-        for (String property : getSuppressedProperties()) {
+    public void introspect(final IntrospectionContext icontext) throws IntrospectionException {
+        for (final String property : getSuppressedProperties()) {
             icontext.removePropertyDescriptor(property);
         }
     }

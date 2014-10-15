@@ -98,7 +98,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public ResultSetDynaClass(ResultSet resultSet) throws SQLException {
+    public ResultSetDynaClass(final ResultSet resultSet) throws SQLException {
 
         this(resultSet, true);
 
@@ -126,7 +126,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public ResultSetDynaClass(ResultSet resultSet, boolean lowerCase)
+    public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
         throws SQLException {
 
         this(resultSet, lowerCase, false);
@@ -157,7 +157,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      *  cannot be introspected
      * @since 1.8.3
      */
-    public ResultSetDynaClass(ResultSet resultSet, boolean lowerCase, boolean useColumnLabel)
+    public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
 
         if (resultSet == null) {
@@ -206,7 +206,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @throws SQLException if an error occurs
      * @since 1.8.0
      */
-    public Object getObjectFromResultSet(String name) throws SQLException {
+    public Object getObjectFromResultSet(final String name) throws SQLException {
         return getObject(getResultSet(), name);
     }
 
@@ -236,12 +236,12 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @throws SQLException if the class cannot be loaded
      */
     @Override
-    protected Class<?> loadClass(String className) throws SQLException {
+    protected Class<?> loadClass(final String className) throws SQLException {
 
         try {
             return getClass().getClassLoader().loadClass(className);
         }
-        catch (Exception e) {
+        catch (final Exception e) {
             throw new SQLException("Cannot load column class '" +
                                    className + "': " + e);
         }

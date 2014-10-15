@@ -53,7 +53,7 @@ public class ConvertUtilsTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public ConvertUtilsTestCase(String name) {
+    public ConvertUtilsTestCase(final String name) {
         super(name);
     }
 
@@ -98,7 +98,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeIntegerArray() {
 
         Object value = null;
-        int intArray[] = new int[0];
+        final int intArray[] = new int[0];
 
         value = ConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -147,7 +147,7 @@ public class ConvertUtilsTestCase extends TestCase {
             value = ConvertUtils.convert
                 ("org.apache.commons.beanutils.Undefined", Class.class);
             fail("Should have thrown conversion exception");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
@@ -203,7 +203,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeStringArray() {
 
         Object value = null;
-        String stringArray[] = new String[0];
+        final String stringArray[] = new String[0];
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -216,12 +216,12 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testObjectToStringArray() {
 
-        int intArray0[] = new int[0];
-        int intArray1[] = { 123 };
-        int intArray2[] = { 123, 456 };
-        String stringArray0[] = new String[0];
-        String stringArray1[] = { "abc" };
-        String stringArray2[] = { "abc", "def" };
+        final int intArray0[] = new int[0];
+        final int intArray1[] = { 123 };
+        final int intArray2[] = { 123, 456 };
+        final String stringArray0[] = new String[0];
+        final String stringArray1[] = { "abc" };
+        final String stringArray2[] = { "abc", "def" };
 
         assertEquals("intArray0", null,
                      ConvertUtils.convert(intArray0));
@@ -276,19 +276,19 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testPositiveArray() {
 
-        String values1[] = { "10", "20", "30" };
+        final String values1[] = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
-        int shape[] = new int[0];
+        final int shape[] = new int[0];
         assertEquals(shape.getClass(), value.getClass());
-        int results1[] = (int[]) value;
+        final int results1[] = (int[]) value;
         assertEquals(results1[0], 10);
         assertEquals(results1[1], 20);
         assertEquals(results1[2], 30);
 
-        String values2[] = { "100", "200", "300" };
+        final String values2[] = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
-        int results2[] = (int[]) value;
+        final int results2[] = (int[]) value;
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
@@ -302,9 +302,9 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveIntegerArray() {
 
         Object value = null;
-        int intArray[] = new int[0];
-        int intArray1[] = new int[] { 0 };
-        int intArray2[] = new int[] { 0, 10 };
+        final int intArray[] = new int[0];
+        final int intArray1[] = new int[] { 0 };
+        final int intArray2[] = new int[] { 0, 10 };
 
         value = ConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -491,10 +491,10 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveStringArray() {
 
         Object value = null;
-        String stringArray[] = new String[0];
-        String stringArray1[] = new String[]
+        final String stringArray[] = new String[0];
+        final String stringArray1[] = new String[]
             { "abc" };
-        String stringArray2[] = new String[]
+        final String stringArray2[] = new String[]
             { "abc", "de,f" };
 
         value = ConvertUtils.convert("", stringArray.getClass());
@@ -542,8 +542,8 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
     public void testSeparateConvertInstances() throws Exception {
-        ConvertUtilsBean utilsOne = new ConvertUtilsBean();
-        ConvertUtilsBean utilsTwo = new ConvertUtilsBean();
+        final ConvertUtilsBean utilsOne = new ConvertUtilsBean();
+        final ConvertUtilsBean utilsTwo = new ConvertUtilsBean();
 
         // make sure that the test work ok before anything's changed
         Object
@@ -569,7 +569,7 @@ public class ConvertUtilsTestCase extends TestCase {
             utilsOne.convert("true", Boolean.TYPE);
             fail("Register converter failed.");
 
-        } catch (PassTestException e) { /* This shows that the registration has worked */ }
+        } catch (final PassTestException e) { /* This shows that the registration has worked */ }
 
         try {
             // nothing should have changed
@@ -580,7 +580,7 @@ public class ConvertUtilsTestCase extends TestCase {
                         ((Boolean) value).booleanValue(),
                         true);
 
-        } catch (PassTestException e) {
+        } catch (final PassTestException e) {
             // This is a failure since utilsTwo should still have
             // standard converters registered
             fail("Registering a converter for an instance should not effect another instance.");
@@ -602,7 +602,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
     public void testDeregisteringSingleConverter() throws Exception {
         // make sure that the test work ok before anything's changed
-        Object
+        final Object
         value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
         assertEquals(
@@ -619,29 +619,29 @@ public class ConvertUtilsTestCase extends TestCase {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     // We need to use raw types in order to test legacy converters
     public void testConvertToString() throws Exception {
-        Converter dummyConverter = new Converter() {
-            public Object convert(Class type, Object value) {
+        final Converter dummyConverter = new Converter() {
+            public Object convert(final Class type, final Object value) {
                 return value;
             }
         };
 
-        Converter fooConverter = new Converter() {
-            public Object convert(Class type, Object value) {
+        final Converter fooConverter = new Converter() {
+            public Object convert(final Class type, final Object value) {
                 return "Foo-Converter";
             }
         };
 
-        DateConverter dateConverter = new DateConverter();
+        final DateConverter dateConverter = new DateConverter();
         dateConverter.setLocale(Locale.US);
 
-        ConvertUtilsBean utils = new ConvertUtilsBean();
+        final ConvertUtilsBean utils = new ConvertUtilsBean();
         utils.register(dateConverter, java.util.Date.class);
         utils.register(fooConverter, String.class);
 
         // Convert using registerd DateConverter
-        java.util.Date today = new java.util.Date();
-        DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
-        String expected = fmt.format(today);
+        final java.util.Date today = new java.util.Date();
+        final DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
+        final String expected = fmt.format(today);
         assertEquals("DateConverter M/d/yy", expected, utils.convert(today, String.class));
 
         // Date converter doesn't do String conversion - use String Converter
@@ -666,8 +666,8 @@ public class ConvertUtilsTestCase extends TestCase {
      * Tests a conversion to an unsupported target type.
      */
     public void testConvertUnsupportedTargetType() {
-        ConvertUtilsBean utils = new ConvertUtilsBean();
-        Object value = "A test value";
+        final ConvertUtilsBean utils = new ConvertUtilsBean();
+        final Object value = "A test value";
         assertSame("Got different object", value,
                 utils.convert(value, getClass()));
     }
@@ -675,12 +675,12 @@ public class ConvertUtilsTestCase extends TestCase {
     // -------------------------------------------------------- Private Methods
 
 
-    private void checkIntegerArray(Object value, int intArray[]) {
+    private void checkIntegerArray(final Object value, final int intArray[]) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is int[]",
                      intArray.getClass(), value.getClass());
-        int results[] = (int[]) value;
+        final int results[] = (int[]) value;
         assertEquals("Returned array length", intArray.length, results.length);
         for (int i = 0; i < intArray.length; i++) {
             assertEquals("Returned array value " + i,
@@ -690,12 +690,12 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
-    private void checkStringArray(Object value, String stringArray[]) {
+    private void checkStringArray(final Object value, final String stringArray[]) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is String[]",
                      stringArray.getClass(), value.getClass());
-        String results[] = (String[]) value;
+        final String results[] = (String[]) value;
         assertEquals("Returned array length",
                      stringArray.length, results.length);
         for (int i = 0; i < stringArray.length; i++) {

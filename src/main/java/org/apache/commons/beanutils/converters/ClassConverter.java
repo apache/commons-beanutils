@@ -48,7 +48,7 @@ public final class ClassConverter extends AbstractConverter {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ClassConverter(Object defaultValue) {
+    public ClassConverter(final Object defaultValue) {
         super(defaultValue);
     }
 
@@ -71,7 +71,7 @@ public final class ClassConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected String convertToString(Object value) {
+    protected String convertToString(final Object value) {
         return (value instanceof Class) ? ((Class<?>)value).getName() : value.toString();
     }
 
@@ -86,14 +86,14 @@ public final class ClassConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected <T> T convertToType(Class<T> type, Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Class.class.equals(type)) {
             ClassLoader classLoader = Thread.currentThread()
                     .getContextClassLoader();
             if (classLoader != null) {
                 try {
                     return type.cast(classLoader.loadClass(value.toString()));
-                } catch (ClassNotFoundException ex) {
+                } catch (final ClassNotFoundException ex) {
                     // Don't fail, carry on and try this class's class loader
                     // (see issue# BEANUTILS-263)
                 }

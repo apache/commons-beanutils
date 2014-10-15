@@ -145,7 +145,7 @@ public class ContextClassLoaderLocal<T> {
         valueByClassLoader.isEmpty();
         try {
 
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
 
                 T value = valueByClassLoader.get(contextClassLoader);
@@ -158,7 +158,7 @@ public class ContextClassLoaderLocal<T> {
 
             }
 
-        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
+        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
 
         // if none or exception, return the globalValue
         if (!globalValueInitialized) {
@@ -174,7 +174,7 @@ public class ContextClassLoaderLocal<T> {
      *
      * @param value the object to be associated with the entrant thread's context classloader
      */
-    public synchronized void set(T value) {
+    public synchronized void set(final T value) {
         // synchronizing the whole method is a bit slower
         // but guarentees no subtle threading problems
 
@@ -182,13 +182,13 @@ public class ContextClassLoaderLocal<T> {
         valueByClassLoader.isEmpty();
         try {
 
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
                 valueByClassLoader.put(contextClassLoader, value);
                 return;
             }
 
-        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
+        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
 
         // if in doubt, set the global value
         globalValue = value;
@@ -201,17 +201,17 @@ public class ContextClassLoaderLocal<T> {
     public synchronized void unset() {
         try {
 
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             unset(contextClassLoader);
 
-        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
+        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
     }
 
     /**
      * Unsets the value associated with the given classloader
      * @param classLoader The classloader to <i>unset</i> for
      */
-    public synchronized void unset(ClassLoader classLoader) {
+    public synchronized void unset(final ClassLoader classLoader) {
         valueByClassLoader.remove(classLoader);
     }
 }

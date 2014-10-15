@@ -41,7 +41,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
-    public String convert(Object value) {
+    public String convert(final Object value) {
         return (String)convert(value, String.class);
     }
 
@@ -56,7 +56,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
-    public Object convert(String value, Class<?> clazz) {
+    public Object convert(final String value, final Class<?> clazz) {
         return convert((Object)value, clazz);
     }
 
@@ -71,7 +71,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
-    public Object convert(String[] value, Class<?> clazz) {
+    public Object convert(final String[] value, final Class<?> clazz) {
         return convert((Object)value, clazz);
     }
 

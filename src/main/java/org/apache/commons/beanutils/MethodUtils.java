@@ -114,7 +114,7 @@ public class MethodUtils {
      * cached for greater performance, otherwise <code>false</code>
      * @since 1.8.0
      */
-    public static synchronized void setCacheMethods(boolean cacheMethods) {
+    public static synchronized void setCacheMethods(final boolean cacheMethods) {
         CACHE_METHODS = cacheMethods;
         if (!CACHE_METHODS) {
             clearCache();
@@ -127,7 +127,7 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static synchronized int clearCache() {
-        int size = cache.size();
+        final int size = cache.size();
         cache.clear();
         return size;
     }
@@ -161,15 +161,15 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeMethod(
-            Object object,
-            String methodName,
-            Object arg)
+            final Object object,
+            final String methodName,
+            final Object arg)
             throws
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = toArray(arg);
+        final Object[] args = toArray(arg);
         return invokeMethod(object, methodName, args);
     }
 
@@ -203,8 +203,8 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeMethod(
-            Object object,
-            String methodName,
+            final Object object,
+            final String methodName,
             Object[] args)
             throws
             NoSuchMethodException,
@@ -214,8 +214,8 @@ public class MethodUtils {
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
-        int arguments = args.length;
-        Class<?>[] parameterTypes = new Class[arguments];
+        final int arguments = args.length;
+        final Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -251,8 +251,8 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeMethod(
-            Object object,
-            String methodName,
+            final Object object,
+            final String methodName,
             Object[] args,
             Class<?>[] parameterTypes)
                 throws
@@ -267,7 +267,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
 
-        Method method = getMatchingAccessibleMethod(
+        final Method method = getMatchingAccessibleMethod(
                 object.getClass(),
                 methodName,
                 parameterTypes);
@@ -300,15 +300,15 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-            Object object,
-            String methodName,
-            Object arg)
+            final Object object,
+            final String methodName,
+            final Object arg)
             throws
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = toArray(arg);
+        final Object[] args = toArray(arg);
         return invokeExactMethod(object, methodName, args);
     }
 
@@ -333,8 +333,8 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-            Object object,
-            String methodName,
+            final Object object,
+            final String methodName,
             Object[] args)
             throws
             NoSuchMethodException,
@@ -344,8 +344,8 @@ public class MethodUtils {
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
-        int arguments = args.length;
-        Class<?>[] parameterTypes = new Class[arguments];
+        final int arguments = args.length;
+        final Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -374,8 +374,8 @@ public class MethodUtils {
      *  via reflection
      */
     public static Object invokeExactMethod(
-            Object object,
-            String methodName,
+            final Object object,
+            final String methodName,
             Object[] args,
             Class<?>[] parameterTypes)
             throws
@@ -391,7 +391,7 @@ public class MethodUtils {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
 
-        Method method = getAccessibleMethod(
+        final Method method = getAccessibleMethod(
                 object.getClass(),
                 methodName,
                 parameterTypes);
@@ -424,8 +424,8 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class<?> objectClass,
-            String methodName,
+            final Class<?> objectClass,
+            final String methodName,
             Object[] args,
             Class<?>[] parameterTypes)
             throws
@@ -441,7 +441,7 @@ public class MethodUtils {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
         }
 
-        Method method = getAccessibleMethod(
+        final Method method = getAccessibleMethod(
                 objectClass,
                 methodName,
                 parameterTypes);
@@ -482,15 +482,15 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class<?> objectClass,
-            String methodName,
-            Object arg)
+            final Class<?> objectClass,
+            final String methodName,
+            final Object arg)
             throws
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = toArray(arg);
+        final Object[] args = toArray(arg);
         return invokeStaticMethod (objectClass, methodName, args);
     }
 
@@ -525,8 +525,8 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class<?> objectClass,
-            String methodName,
+            final Class<?> objectClass,
+            final String methodName,
             Object[] args)
             throws
             NoSuchMethodException,
@@ -536,8 +536,8 @@ public class MethodUtils {
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
-        int arguments = args.length;
-        Class<?>[] parameterTypes = new Class[arguments];
+        final int arguments = args.length;
+        final Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -574,8 +574,8 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeStaticMethod(
-            Class<?> objectClass,
-            String methodName,
+            final Class<?> objectClass,
+            final String methodName,
             Object[] args,
             Class<?>[] parameterTypes)
                 throws
@@ -590,7 +590,7 @@ public class MethodUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
 
-        Method method = getMatchingAccessibleMethod(
+        final Method method = getMatchingAccessibleMethod(
                 objectClass,
                 methodName,
                 parameterTypes);
@@ -624,15 +624,15 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class<?> objectClass,
-            String methodName,
-            Object arg)
+            final Class<?> objectClass,
+            final String methodName,
+            final Object arg)
             throws
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
 
-        Object[] args = toArray(arg);
+        final Object[] args = toArray(arg);
         return invokeExactStaticMethod (objectClass, methodName, args);
     }
 
@@ -657,8 +657,8 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Object invokeExactStaticMethod(
-            Class<?> objectClass,
-            String methodName,
+            final Class<?> objectClass,
+            final String methodName,
             Object[] args)
             throws
             NoSuchMethodException,
@@ -668,8 +668,8 @@ public class MethodUtils {
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
         }
-        int arguments = args.length;
-        Class<?>[] parameterTypes = new Class[arguments];
+        final int arguments = args.length;
+        final Class<?>[] parameterTypes = new Class[arguments];
         for (int i = 0; i < arguments; i++) {
             parameterTypes[i] = args[i].getClass();
         }
@@ -677,7 +677,7 @@ public class MethodUtils {
     }
 
 
-    private static Object[] toArray(Object arg) {
+    private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {
             args = new Object[] { arg };
@@ -698,11 +698,11 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(
-            Class<?> clazz,
-            String methodName,
-            Class<?> parameterType) {
+            final Class<?> clazz,
+            final String methodName,
+            final Class<?> parameterType) {
 
-        Class<?>[] parameterTypes = {parameterType};
+        final Class<?>[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
     }
 
@@ -720,12 +720,12 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(
-            Class<?> clazz,
-            String methodName,
-            Class<?>[] parameterTypes) {
+            final Class<?> clazz,
+            final String methodName,
+            final Class<?>[] parameterTypes) {
 
         try {
-            MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
+            final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
             // Check the cache first
             Method method = getCachedMethod(md);
             if (method != null) {
@@ -736,7 +736,7 @@ public class MethodUtils {
                     (clazz, clazz.getMethod(methodName, parameterTypes));
             cacheMethod(md, method);
             return method;
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             return (null);
         }
     }
@@ -749,7 +749,7 @@ public class MethodUtils {
      * @param method The method that we wish to call
      * @return The accessible method
      */
-    public static Method getAccessibleMethod(Method method) {
+    public static Method getAccessibleMethod(final Method method) {
 
         // Make sure we have a method to check
         if (method == null) {
@@ -802,8 +802,8 @@ public class MethodUtils {
             return (method);
         }
 
-        String methodName      = method.getName();
-        Class<?>[] parameterTypes = method.getParameterTypes();
+        final String methodName      = method.getName();
+        final Class<?>[] parameterTypes = method.getParameterTypes();
 
         // Check the implemented interfaces and subinterfaces
         method =
@@ -834,14 +834,14 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromSuperclass
-            (Class<?> clazz, String methodName, Class<?>[] parameterTypes) {
+            (final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
 
         Class<?> parentClazz = clazz.getSuperclass();
         while (parentClazz != null) {
             if (Modifier.isPublic(parentClazz.getModifiers())) {
                 try {
                     return parentClazz.getMethod(methodName, parameterTypes);
-                } catch (NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     return null;
                 }
             }
@@ -865,7 +865,7 @@ public class MethodUtils {
      * @param parameterTypes The parameter type signatures
      */
     private static Method getAccessibleMethodFromInterfaceNest
-            (Class<?> clazz, String methodName, Class<?>[] parameterTypes) {
+            (Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
 
         Method method = null;
 
@@ -873,7 +873,7 @@ public class MethodUtils {
         for (; clazz != null; clazz = clazz.getSuperclass()) {
 
             // Check the implemented interfaces of the parent class
-            Class<?>[] interfaces = clazz.getInterfaces();
+            final Class<?>[] interfaces = clazz.getInterfaces();
             for (int i = 0; i < interfaces.length; i++) {
 
                 // Is this interface public?
@@ -885,7 +885,7 @@ public class MethodUtils {
                 try {
                     method = interfaces[i].getDeclaredMethod(methodName,
                             parameterTypes);
-                } catch (NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     /* Swallow, if no method is found after the loop then this
                      * method returns null.
                      */
@@ -935,15 +935,15 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getMatchingAccessibleMethod(
-                                                Class<?> clazz,
-                                                String methodName,
-                                                Class<?>[] parameterTypes) {
+                                                final Class<?> clazz,
+                                                final String methodName,
+                                                final Class<?>[] parameterTypes) {
         // trace logging
-        Log log = LogFactory.getLog(MethodUtils.class);
+        final Log log = LogFactory.getLog(MethodUtils.class);
         if (log.isTraceEnabled()) {
             log.trace("Matching name=" + methodName + " on " + clazz);
         }
-        MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
+        final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, false);
 
         // see if we can find the method directly
         // most of the time this works and it's much faster
@@ -965,12 +965,12 @@ public class MethodUtils {
             cacheMethod(md, method);
             return method;
 
-        } catch (NoSuchMethodException e) { /* SWALLOW */ }
+        } catch (final NoSuchMethodException e) { /* SWALLOW */ }
 
         // search through all methods
-        int paramSize = parameterTypes.length;
+        final int paramSize = parameterTypes.length;
         Method bestMatch = null;
-        Method[] methods = clazz.getMethods();
+        final Method[] methods = clazz.getMethods();
         float bestMatchCost = Float.MAX_VALUE;
         float myCost = Float.MAX_VALUE;
         for (int i = 0, size = methods.length; i < size ; i++) {
@@ -982,8 +982,8 @@ public class MethodUtils {
                 }
 
                 // compare parameters
-                Class<?>[] methodsParams = methods[i].getParameterTypes();
-                int methodParamSize = methodsParams.length;
+                final Class<?>[] methodsParams = methods[i].getParameterTypes();
+                final int methodParamSize = methodsParams.length;
                 if (methodParamSize == paramSize) {
                     boolean match = true;
                     for (int n = 0 ; n < methodParamSize; n++) {
@@ -1003,7 +1003,7 @@ public class MethodUtils {
 
                     if (match) {
                         // get accessible version of method
-                        Method method = getAccessibleMethod(clazz, methods[i]);
+                        final Method method = getAccessibleMethod(clazz, methods[i]);
                         if (method != null) {
                             if (log.isTraceEnabled()) {
                                 log.trace(method + " accessible version of "
@@ -1036,7 +1036,7 @@ public class MethodUtils {
      * Try to make the method accessible
      * @param method The source arguments
      */
-    private static void setMethodAccessible(Method method) {
+    private static void setMethodAccessible(final Method method) {
         try {
             //
             // XXX Default access superclass workaround
@@ -1058,13 +1058,13 @@ public class MethodUtils {
                 method.setAccessible(true);
             }
 
-        } catch (SecurityException se) {
+        } catch (final SecurityException se) {
             // log but continue just in case the method.invoke works anyway
-            Log log = LogFactory.getLog(MethodUtils.class);
+            final Log log = LogFactory.getLog(MethodUtils.class);
             if (!loggedAccessibleWarning) {
                 boolean vulnerableJVM = false;
                 try {
-                    String specVersion = System.getProperty("java.specification.version");
+                    final String specVersion = System.getProperty("java.specification.version");
                     if (specVersion.charAt(0) == '1' &&
                             (specVersion.charAt(2) == '0' ||
                              specVersion.charAt(2) == '1' ||
@@ -1073,7 +1073,7 @@ public class MethodUtils {
 
                         vulnerableJVM = true;
                     }
-                } catch (SecurityException e) {
+                } catch (final SecurityException e) {
                     // don't know - so display warning
                     vulnerableJVM = true;
                 }
@@ -1095,7 +1095,7 @@ public class MethodUtils {
      * @param destArgs The destination arguments
      * @return The total transformation cost
      */
-    private static float getTotalTransformationCost(Class<?>[] srcArgs, Class<?>[] destArgs) {
+    private static float getTotalTransformationCost(final Class<?>[] srcArgs, final Class<?>[] destArgs) {
 
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
@@ -1116,11 +1116,11 @@ public class MethodUtils {
      * @param destClass The destination class
      * @return The cost of transforming an object
      */
-    private static float getObjectTransformationCost(Class<?> srcClass, Class<?> destClass) {
+    private static float getObjectTransformationCost(Class<?> srcClass, final Class<?> destClass) {
         float cost = 0.0f;
         while (srcClass != null && !destClass.equals(srcClass)) {
             if (destClass.isPrimitive()) {
-                Class<?> destClassWrapperClazz = getPrimitiveWrapper(destClass);
+                final Class<?> destClassWrapperClazz = getPrimitiveWrapper(destClass);
                 if (destClassWrapperClazz != null && destClassWrapperClazz.equals(srcClass)) {
                     cost += 0.25f;
                     break;
@@ -1167,7 +1167,7 @@ public class MethodUtils {
      *
      * @return true if the assignment is compatible.
      */
-    public static final boolean isAssignmentCompatible(Class<?> parameterType, Class<?> parameterization) {
+    public static final boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
         // try plain assignment
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
@@ -1176,7 +1176,7 @@ public class MethodUtils {
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
             // is this the right behaviour?
-            Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
+            final Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
             if (parameterWrapperClazz != null) {
                 return parameterWrapperClazz.equals(parameterization);
             }
@@ -1192,7 +1192,7 @@ public class MethodUtils {
      * @return the wrapper type associated with the given primitive
      * or null if no match is found
      */
-    public static Class<?> getPrimitiveWrapper(Class<?> primitiveType) {
+    public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
         // does anyone know a better strategy than comparing names?
         if (boolean.class.equals(primitiveType)) {
             return Boolean.class;
@@ -1223,7 +1223,7 @@ public class MethodUtils {
      * @return the primitive type class corresponding to the given wrapper class,
      * null if no match is found
      */
-    public static Class<?> getPrimitiveType(Class<?> wrapperType) {
+    public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
         // does anyone know a better strategy than comparing names?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
@@ -1242,7 +1242,7 @@ public class MethodUtils {
         } else if (Character.class.equals(wrapperType)) {
             return char.class;
         } else {
-            Log log = LogFactory.getLog(MethodUtils.class);
+            final Log log = LogFactory.getLog(MethodUtils.class);
             if (log.isDebugEnabled()) {
                 log.debug("Not a known primitive wrapper class: " + wrapperType);
             }
@@ -1256,9 +1256,9 @@ public class MethodUtils {
      * @param clazz the class to find a representation for, not null
      * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
      */
-    public static Class<?> toNonPrimitiveClass(Class<?> clazz) {
+    public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {
         if (clazz.isPrimitive()) {
-            Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
+            final Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
             // the above method returns
             if (primitiveClazz != null) {
                 return primitiveClazz;
@@ -1277,9 +1277,9 @@ public class MethodUtils {
      * @param md The method descriptor
      * @return The cached method
      */
-    private static Method getCachedMethod(MethodDescriptor md) {
+    private static Method getCachedMethod(final MethodDescriptor md) {
         if (CACHE_METHODS) {
-            Reference<Method> methodRef = cache.get(md);
+            final Reference<Method> methodRef = cache.get(md);
             if (methodRef != null) {
                 return methodRef.get();
             }
@@ -1293,7 +1293,7 @@ public class MethodUtils {
      * @param md The method descriptor
      * @param method The method to cache
      */
-    private static void cacheMethod(MethodDescriptor md, Method method) {
+    private static void cacheMethod(final MethodDescriptor md, final Method method) {
         if (CACHE_METHODS) {
             if (method != null) {
                 cache.put(md, new WeakReference<Method>(method));
@@ -1319,7 +1319,7 @@ public class MethodUtils {
          * @param paramTypes the array of classes representing the parameter types
          * @param exact whether the match has to be exact.
          */
-        public MethodDescriptor(Class<?> cls, String methodName, Class<?>[] paramTypes, boolean exact) {
+        public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes, final boolean exact) {
             if (cls == null) {
                 throw new IllegalArgumentException("Class cannot be null");
             }
@@ -1343,11 +1343,11 @@ public class MethodUtils {
          * @return true, if the object describes the same Method.
          */
         @Override
-        public boolean equals(Object obj) {
+        public boolean equals(final Object obj) {
             if (!(obj instanceof MethodDescriptor)) {
                 return false;
             }
-            MethodDescriptor md = (MethodDescriptor)obj;
+            final MethodDescriptor md = (MethodDescriptor)obj;
 
             return (
                 exact == md.exact &&

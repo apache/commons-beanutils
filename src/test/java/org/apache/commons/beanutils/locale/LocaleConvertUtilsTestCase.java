@@ -55,7 +55,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public LocaleConvertUtilsTestCase(String name) {
+    public LocaleConvertUtilsTestCase(final String name) {
         super(name);
     }
 
@@ -71,8 +71,8 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         LocaleConvertUtils.deregister();
 
-        NumberFormat nf = DecimalFormat.getNumberInstance();
-        String result = nf.format(1.1);
+        final NumberFormat nf = DecimalFormat.getNumberInstance();
+        final String result = nf.format(1.1);
 
         // could be commas instead of stops in Europe.
         m_decimalSeparator = result.charAt(1);
@@ -109,7 +109,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        int intArray[] = new int[0];
+        final int intArray[] = new int[0];
 
         value = LocaleConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -147,14 +147,14 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         try {
             LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (1)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Byte.class);
             fail("Should have thrown conversion exception (2)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
@@ -170,70 +170,70 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         try {
             LocaleConvertUtils.convert("foo", Double.TYPE);
             fail("Should have thrown conversion exception (3)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Double.class);
             fail("Should have thrown conversion exception (4)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Float.TYPE);
             fail("Should have thrown conversion exception (5)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Float.class);
             fail("Should have thrown conversion exception (6)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Integer.TYPE);
             fail("Should have thrown conversion exception (7)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Integer.class);
             fail("Should have thrown conversion exception (8)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Byte.TYPE);
             fail("Should have thrown conversion exception (9)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Long.class);
             fail("Should have thrown conversion exception (10)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Short.TYPE);
             fail("Should have thrown conversion exception (11)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
         try {
             LocaleConvertUtils.convert("foo", Short.class);
             fail("Should have thrown conversion exception (12)");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // Expected result
         }
 
@@ -248,7 +248,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        String stringArray[] = new String[0];
+        final String stringArray[] = new String[0];
 
         value = LocaleConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -261,12 +261,12 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void fixmetestObjectToStringArray() {
 
         fail("Array conversions not implemented yet.");
-        int intArray0[] = new int[0];
-        int intArray1[] = {123};
-        int intArray2[] = {123, 456};
-        String stringArray0[] = new String[0];
-        String stringArray1[] = {"abc"};
-        String stringArray2[] = {"abc", "def"};
+        final int intArray0[] = new int[0];
+        final int intArray1[] = {123};
+        final int intArray2[] = {123, 456};
+        final String stringArray0[] = new String[0];
+        final String stringArray1[] = {"abc"};
+        final String stringArray2[] = {"abc", "def"};
 
         assertEquals("intArray0", null,
                 LocaleConvertUtils.convert(intArray0));
@@ -323,19 +323,19 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        String values1[] = {"10", "20", "30"};
+        final String values1[] = {"10", "20", "30"};
         Object value = LocaleConvertUtils.convert(values1, Integer.TYPE);
-        int shape[] = new int[0];
+        final int shape[] = new int[0];
         assertEquals(shape.getClass(), value.getClass());
-        int results1[] = (int[]) value;
+        final int results1[] = (int[]) value;
         assertEquals(results1[0], 10);
         assertEquals(results1[1], 20);
         assertEquals(results1[2], 30);
 
-        String values2[] = {"100", "200", "300"};
+        final String values2[] = {"100", "200", "300"};
         value = LocaleConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
-        int results2[] = (int[]) value;
+        final int results2[] = (int[]) value;
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
@@ -350,9 +350,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        int intArray[] = new int[0];
-        int intArray1[] = new int[]{0};
-        int intArray2[] = new int[]{0, 10};
+        final int intArray[] = new int[0];
+        final int intArray1[] = new int[]{0};
+        final int intArray2[] = new int[]{0, 10};
 
         value = LocaleConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -546,10 +546,10 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        String stringArray[] = new String[0];
-        String stringArray1[] = new String[]
+        final String stringArray[] = new String[0];
+        final String stringArray1[] = new String[]
         {"abc"};
-        String stringArray2[] = new String[]
+        final String stringArray2[] = new String[]
         {"abc", "de,f"};
 
         value = LocaleConvertUtils.convert("", stringArray.getClass());
@@ -602,7 +602,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         Object result = null;
         try {
             result = LocaleConvertUtils.convert("123", Integer.class, (Locale)null, "#,###");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             fail("Threw: " + e);
         }
@@ -618,7 +618,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         Object result = null;
         try {
             result = LocaleConvertUtils.convert(new String[] {"123"}, Integer[].class, (Locale)null, "#,###");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             fail("Threw: " + e);
         }
@@ -635,7 +635,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * converters have been generified.)
      */
     public void testDefaultToStringConversionUnsupportedType() {
-        Integer value = 20131101;
+        final Integer value = 20131101;
         assertEquals("Wrong result", value.toString(),
                 LocaleConvertUtils.convert(value.toString(), getClass()));
     }
@@ -643,12 +643,12 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     // -------------------------------------------------------- Private Methods
 
 
-    private void checkIntegerArray(Object value, int intArray[]) {
+    private void checkIntegerArray(final Object value, final int intArray[]) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is int[]",
                 intArray.getClass(), value.getClass());
-        int results[] = (int[]) value;
+        final int results[] = (int[]) value;
         assertEquals("Returned array length", intArray.length, results.length);
         for (int i = 0; i < intArray.length; i++) {
             assertEquals("Returned array value " + i,
@@ -658,12 +658,12 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     }
 
 
-    private void checkStringArray(Object value, String stringArray[]) {
+    private void checkStringArray(final Object value, final String stringArray[]) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is String[]",
                 stringArray.getClass(), value.getClass());
-        String results[] = (String[]) value;
+        final String results[] = (String[]) value;
         assertEquals("Returned array length",
                 stringArray.length, results.length);
         for (int i = 0; i < stringArray.length; i++) {

@@ -68,7 +68,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    protected BaseLocaleConverter(Locale locale, String pattern) {
+    protected BaseLocaleConverter(final Locale locale, final String pattern) {
 
         this(null, locale, pattern, false, false);
     }
@@ -81,7 +81,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    protected BaseLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    protected BaseLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         this(null, locale, pattern, false, locPattern);
     }
@@ -95,7 +95,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    protected BaseLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -109,7 +109,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    protected BaseLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         this(defaultValue, locale, pattern, true, locPattern);
     }
@@ -124,8 +124,8 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param useDefault    Indicate whether the default value is used or not
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    private BaseLocaleConverter(Object defaultValue, Locale locale,
-                                String pattern, boolean useDefault, boolean locPattern) {
+    private BaseLocaleConverter(final Object defaultValue, final Locale locale,
+                                final String pattern, final boolean useDefault, final boolean locPattern) {
 
         if (useDefault) {
             this.defaultValue = defaultValue;
@@ -167,7 +167,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(Object value) {
+    public Object convert(final Object value) {
         return convert(value, null);
     }
 
@@ -181,7 +181,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(Object value, String pattern) {
+    public Object convert(final Object value, final String pattern) {
         return convert(null, value, pattern);
     }
 
@@ -197,7 +197,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public <T> T convert(Class<T> type, Object value) {
+    public <T> T convert(final Class<T> type, final Object value) {
         return convert(type, value, null);
     }
 
@@ -216,8 +216,8 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @exception ConversionException if conversion cannot be performed
      *  successfully
      */
-    public <T> T convert(Class<T> type, Object value, String pattern) {
-        Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
+    public <T> T convert(final Class<T> type, final Object value, final String pattern) {
+        final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {
             if (useDefault) {
                 return getDefaultAs(targetType);
@@ -235,7 +235,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
             } else {
                 return checkConversionResult(targetType, parse(value, this.pattern));
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return getDefaultAs(targetType);
             } else {
@@ -258,7 +258,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if the default object is not compatible with
      *         the target type
      */
-    private <T> T getDefaultAs(Class<T> type) {
+    private <T> T getDefaultAs(final Class<T> type) {
         return checkConversionResult(type, defaultValue);
     }
 
@@ -274,10 +274,11 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if the result object is not compatible with
      *         the target type
      */
-    private static <T> T checkConversionResult(Class<T> type, Object result) {
+    private static <T> T checkConversionResult(final Class<T> type, final Object result) {
         if (type == null) {
             // in this case we cannot do much; the result object is returned
             @SuppressWarnings("unchecked")
+            final
             T temp = (T) result;
             return temp;
         }

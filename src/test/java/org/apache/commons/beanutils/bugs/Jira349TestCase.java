@@ -37,7 +37,7 @@ public class Jira349TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira349TestCase(String name) {
+    public Jira349TestCase(final String name) {
         super(name);
     }
 
@@ -46,7 +46,7 @@ public class Jira349TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -83,16 +83,16 @@ public class Jira349TestCase extends TestCase {
      * Test {@link PropertyUtils#copyProperties(Object, Object)}
      */
     public void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
-        PrimitiveBean dest = new PrimitiveBean();
-        ObjectBean origin = new ObjectBean ();
+        final PrimitiveBean dest = new PrimitiveBean();
+        final ObjectBean origin = new ObjectBean ();
         try {
             PropertyUtils.copyProperties(dest, origin);
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) {
             log.error("Failed", e);
             fail("Threw NullPointerException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             log.warn("Expected Result", e);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("Failed", t);
             fail("Threw exception: " + t);
         }
@@ -106,7 +106,7 @@ public class Jira349TestCase extends TestCase {
         public boolean getTestProperty() {
             return testProperty;
         }
-        public void setTestProperty(boolean testProperty) {
+        public void setTestProperty(final boolean testProperty) {
             this.testProperty = testProperty;
         }
     }
@@ -119,7 +119,7 @@ public class Jira349TestCase extends TestCase {
         public Boolean getTestProperty() {
             return testProperty;
         }
-        public void setTestProperty(Boolean testProperty) {
+        public void setTestProperty(final Boolean testProperty) {
             this.testProperty = testProperty;
         }
     }

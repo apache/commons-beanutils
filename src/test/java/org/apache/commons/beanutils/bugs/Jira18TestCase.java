@@ -43,7 +43,7 @@ public class Jira18TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira18TestCase(String name) {
+    public Jira18TestCase(final String name) {
         super(name);
     }
 
@@ -52,7 +52,7 @@ public class Jira18TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -94,7 +94,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isReadable(bean, "simple");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -109,7 +109,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isWriteable(bean, "simple");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -124,7 +124,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isReadable(bean, "indexed");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -139,7 +139,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isWriteable(bean, "indexed");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -154,7 +154,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isReadable(bean, "mapped");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -169,7 +169,7 @@ public class Jira18TestCase extends TestCase {
         boolean result = false;
         try {
             result = PropertyUtils.isWriteable(bean, "mapped");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -185,9 +185,9 @@ public class Jira18TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "simple");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -202,9 +202,9 @@ public class Jira18TestCase extends TestCase {
         boolean threwNoSuchMethodException = false;
         try {
             PropertyUtils.setProperty(bean, "simple", "BAR");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -220,9 +220,9 @@ public class Jira18TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "indexed[0]");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -237,9 +237,9 @@ public class Jira18TestCase extends TestCase {
         boolean threwNoSuchMethodException = false;
         try {
             PropertyUtils.setProperty(bean, "indexed[0]", "BAR");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -255,9 +255,9 @@ public class Jira18TestCase extends TestCase {
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "mapped(foo-key)");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
@@ -272,9 +272,9 @@ public class Jira18TestCase extends TestCase {
         boolean threwNoSuchMethodException = false;
         try {
             PropertyUtils.setProperty(bean, "mapped(foo-key)", "BAR");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             threwNoSuchMethodException = true; // expected result
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }

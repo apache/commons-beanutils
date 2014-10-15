@@ -45,7 +45,7 @@ public class BeanUtilsBenchCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public BeanUtilsBenchCase(String name) {
+    public BeanUtilsBenchCase(final String name) {
 
         super(name);
 
@@ -85,7 +85,7 @@ public class BeanUtilsBenchCase extends TestCase {
     public void setUp() throws Exception {
 
         // Set up loop counter (if property specified)
-        String prop = System.getProperty("counter");
+        final String prop = System.getProperty("counter");
         if (prop != null) {
             counter = Long.parseLong(prop);
         }
@@ -118,22 +118,22 @@ public class BeanUtilsBenchCase extends TestCase {
         inDyna = dynaClass.newInstance();
         Iterator<String> inKeys = inMap.keySet().iterator();
         while (inKeys.hasNext()) {
-            String inKey = inKeys.next();
+            final String inKey = inKeys.next();
             inDyna.set(inKey, inMap.get(inKey));
         }
         inStrs = new HashMap<String, String>();
         inKeys = inMap.keySet().iterator();
         while (inKeys.hasNext()) {
-            String inKey = inKeys.next();
+            final String inKey = inKeys.next();
             inStrs.put(inKey, inMap.get(inKey).toString());
         }
 
         // Create output instances
         outBean = new BenchBean();
         outDyna = dynaClass.newInstance();
-        Iterator<String> outKeys = inMap.keySet().iterator();
+        final Iterator<String> outKeys = inMap.keySet().iterator();
         while (outKeys.hasNext()) {
-            String outKey = outKeys.next();
+            final String outKey = outKeys.next();
             outDyna.set(outKey, inMap.get(outKey));
         }
 

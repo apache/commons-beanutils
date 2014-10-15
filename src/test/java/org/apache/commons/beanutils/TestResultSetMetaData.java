@@ -75,9 +75,9 @@ public class TestResultSetMetaData implements InvocationHandler {
      * @param invocationHandler Invocation Handler
      * @return A result set meta data proxy
      */
-    public static ResultSetMetaData createProxy(InvocationHandler invocationHandler) {
-        ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
-        Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
+    public static ResultSetMetaData createProxy(final InvocationHandler invocationHandler) {
+        final ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
+        final Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
         return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
@@ -90,8 +90,8 @@ public class TestResultSetMetaData implements InvocationHandler {
      * @return The result of invoking the method.
      * @throws Throwable if an error occurs.
      */
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        String methodName = method.getName();
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        final String methodName = method.getName();
         if ("getColumnClassName".equals(methodName)) {
             return getColumnClassName(((Integer)args[0]).intValue());
         } if ("getColumnCount".equals(methodName)) {
@@ -108,7 +108,7 @@ public class TestResultSetMetaData implements InvocationHandler {
     // ---------------------------------------------------- Implemented Methods
 
 
-    public String getColumnClassName(int columnIndex) throws SQLException {
+    public String getColumnClassName(final int columnIndex) throws SQLException {
         return (metadata[columnIndex - 1][1]);
     }
 
@@ -117,13 +117,13 @@ public class TestResultSetMetaData implements InvocationHandler {
         return (metadata.length);
     }
 
-    public String getColumnName(int columnIndex) throws SQLException {
+    public String getColumnName(final int columnIndex) throws SQLException {
         return (metadata[columnIndex - 1][0]);
     }
 
 
-    public Integer getColumnType(int columnIndex) throws SQLException {
-        String columnName = getColumnName(columnIndex);
+    public Integer getColumnType(final int columnIndex) throws SQLException {
+        final String columnName = getColumnName(columnIndex);
         int sqlType = Types.OTHER;
         if (columnName.equals("bigDecimalProperty")) {
             sqlType = Types.DECIMAL;
@@ -162,87 +162,87 @@ public class TestResultSetMetaData implements InvocationHandler {
     // -------------------------------------------------- Unimplemented Methods
 
 
-    public String getCatalogName(int columnIndex) throws SQLException {
+    public String getCatalogName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int getColumnDisplaySize(int columnIndex) throws SQLException {
+    public int getColumnDisplaySize(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public String getColumnLabel(int columnIndex) throws SQLException {
+    public String getColumnLabel(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public String getColumnTypeName(int columnIndex) throws SQLException {
+    public String getColumnTypeName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int getPrecision(int columnIndex) throws SQLException {
+    public int getPrecision(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int getScale(int columnIndex) throws SQLException {
+    public int getScale(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public String getSchemaName(int columnIndex) throws SQLException {
+    public String getSchemaName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public String getTableName(int columnIndex) throws SQLException {
+    public String getTableName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isAutoIncrement(int columnIndex) throws SQLException {
+    public boolean isAutoIncrement(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isCaseSensitive(int columnIndex) throws SQLException {
+    public boolean isCaseSensitive(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isCurrency(int columnIndex) throws SQLException {
+    public boolean isCurrency(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isDefinitelyWritable(int columnIndex) throws SQLException {
+    public boolean isDefinitelyWritable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int isNullable(int columnIndex) throws SQLException {
+    public int isNullable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isReadOnly(int columnIndex) throws SQLException {
+    public boolean isReadOnly(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isSearchable(int columnIndex) throws SQLException {
+    public boolean isSearchable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isSigned(int columnIndex) throws SQLException {
+    public boolean isSigned(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean isWritable(int columnIndex) throws SQLException {
+    public boolean isWritable(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 

@@ -41,7 +41,7 @@ public class Jira273TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira273TestCase(String name) {
+    public Jira273TestCase(final String name) {
         super(name);
     }
 
@@ -50,7 +50,7 @@ public class Jira273TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -88,11 +88,11 @@ public class Jira273TestCase extends TestCase {
      * of a public class.
      */
     public void testIssue_BEANUTILS_273_AnnonymousOverriden() {
-        Object bean = Jira273BeanFactory.createAnnonymousOverriden();
+        final Object bean = Jira273BeanFactory.createAnnonymousOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("AnnonymousOverriden: " + t.getMessage(), t);
             fail("AnnonymousOverriden Threw exception: " + t);
         }
@@ -104,11 +104,11 @@ public class Jira273TestCase extends TestCase {
      * of a public class.
      */
     public void testIssue_BEANUTILS_273_AnnonymousNotOverriden() {
-        Object bean = Jira273BeanFactory.createAnnonymousNotOverriden();
+        final Object bean = Jira273BeanFactory.createAnnonymousNotOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("AnnonymousNotOverriden: " + t.getMessage(), t);
             fail("AnnonymousNotOverriden Threw exception: " + t);
         }
@@ -120,11 +120,11 @@ public class Jira273TestCase extends TestCase {
      * of a public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePublicNotOverriden() {
-        Object bean = Jira273BeanFactory.createPrivatePublicNotOverriden();
+        final Object bean = Jira273BeanFactory.createPrivatePublicNotOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("PrivatePublicNotOverriden: " + t.getMessage(), t);
             fail("PrivatePublicNotOverriden Threw exception: " + t);
         }
@@ -136,11 +136,11 @@ public class Jira273TestCase extends TestCase {
      * of a public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePublicOverriden() {
-        Object bean = Jira273BeanFactory.createPrivatePublicOverriden();
+        final Object bean = Jira273BeanFactory.createPrivatePublicOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("PrivatePublicOverriden: " + t.getMessage(), t);
             fail("PrivatePublicOverriden Threw exception: " + t);
         }
@@ -152,11 +152,11 @@ public class Jira273TestCase extends TestCase {
      * of a "grand parent" public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicNotOverriden() {
-        Object bean = Jira273BeanFactory.createPrivatePrivatePublicNotOverriden();
+        final Object bean = Jira273BeanFactory.createPrivatePrivatePublicNotOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("PrivatePrivatePublicNotOverriden: " + t.getMessage(), t);
             fail("PrivatePrivatePublicNotOverriden Threw exception: " + t);
         }
@@ -168,11 +168,11 @@ public class Jira273TestCase extends TestCase {
      * of a "grand parent" public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicOverriden() {
-        Object bean = Jira273BeanFactory.createPrivatePrivatePublicOverriden();
+        final Object bean = Jira273BeanFactory.createPrivatePrivatePublicOverriden();
         Object result = null;
         try {
             result = PropertyUtils.getProperty(bean, "beanValue");
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             log.error("PrivatePrivatePublicOverriden: " + t.getMessage(), t);
             fail("PrivatePrivatePublicOverriden Threw exception: " + t);
         }

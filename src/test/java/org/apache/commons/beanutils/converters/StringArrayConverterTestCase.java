@@ -27,14 +27,14 @@ import junit.framework.TestCase;
 
 public class StringArrayConverterTestCase extends TestCase {
 
-    public StringArrayConverterTestCase(String name) {
+    public StringArrayConverterTestCase(final String name) {
         super(name);
     }
 
     public void testIntToString() {
 
-        int[] testArray = {1, 2, 3, 4, 5};
-        String[] results = (String []) new StringArrayConverter().convert(String.class, testArray);
+        final int[] testArray = {1, 2, 3, 4, 5};
+        final String[] results = (String []) new StringArrayConverter().convert(String.class, testArray);
 
         assertEquals("Incorrect results size", 5, results.length);
         assertEquals("Entry one is wrong", "1", results[0]);

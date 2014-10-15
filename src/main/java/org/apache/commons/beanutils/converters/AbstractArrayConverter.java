@@ -73,7 +73,7 @@ public abstract class AbstractArrayConverter implements Converter {
      * @param defaultValue The default value to be returned
      * @since 1.8.0
      */
-    public AbstractArrayConverter(Object defaultValue) {
+    public AbstractArrayConverter(final Object defaultValue) {
 
         if (defaultValue == NO_DEFAULT) {
             this.useDefault = false;
@@ -174,7 +174,7 @@ public abstract class AbstractArrayConverter implements Converter {
         try {
 
             // Set up a StreamTokenizer on the characters in this String
-            StreamTokenizer st =
+            final StreamTokenizer st =
                 new StreamTokenizer(new StringReader(svalue));
             st.whitespaceChars(',',','); // Commas are delimiters
             st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
@@ -185,9 +185,9 @@ public abstract class AbstractArrayConverter implements Converter {
             st.wordChars('-', '-');
 
             // Split comma-delimited tokens into a List
-            ArrayList list = new ArrayList();
+            final ArrayList list = new ArrayList();
             while (true) {
-                int ttype = st.nextToken();
+                final int ttype = st.nextToken();
                 if ((ttype == StreamTokenizer.TT_WORD) ||
                     (ttype > 0)) {
                     list.add(st.sval);
@@ -202,7 +202,7 @@ public abstract class AbstractArrayConverter implements Converter {
             // Return the completed list
             return (list);
 
-        } catch (IOException e) {
+        } catch (final IOException e) {
 
             throw new ConversionException(e);
 

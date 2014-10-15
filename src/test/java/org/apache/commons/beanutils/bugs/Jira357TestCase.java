@@ -35,7 +35,7 @@ public class Jira357TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira357TestCase(String name) {
+    public Jira357TestCase(final String name) {
         super(name);
     }
 
@@ -44,7 +44,7 @@ public class Jira357TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -105,18 +105,18 @@ public class Jira357TestCase extends TestCase {
     /**
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
-    private void checkReadMethod(String propertyName, Class<?> expectedDeclaringClass) throws Exception {
+    private void checkReadMethod(final String propertyName, final Class<?> expectedDeclaringClass) throws Exception {
 
         PropertyDescriptor[] descriptors = null;
         try {
             descriptors = PropertyUtils.getPropertyDescriptors(ConcreteTestBean.class);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             fail("Threw: " + e);
         }
 
         // Test InnerClassProperty
-        PropertyDescriptor descriptor = findDescriptor(propertyName, descriptors);
+        final PropertyDescriptor descriptor = findDescriptor(propertyName, descriptors);
         assertNotNull(propertyName + "descriptor", descriptor);
         assertEquals(propertyName + " read method declaring class", expectedDeclaringClass, descriptor.getReadMethod().getDeclaringClass());
     }
@@ -124,7 +124,7 @@ public class Jira357TestCase extends TestCase {
     /**
      * Find a property descriptor.
      */
-    private PropertyDescriptor findDescriptor(String propertyName, PropertyDescriptor[] descriptors) {
+    private PropertyDescriptor findDescriptor(final String propertyName, final PropertyDescriptor[] descriptors) {
         if (descriptors != null) {
             for (int i = 0; i < descriptors.length; i++) {
                 if (propertyName.equals(descriptors[i].getName())) {
@@ -154,7 +154,7 @@ public class Jira357TestCase extends TestCase {
             public String getInnerName() {
                 return firstName;
             }
-            public void setInnerName(String firstName) {
+            public void setInnerName(final String firstName) {
                 this.firstName = firstName;
             }
         }
@@ -174,7 +174,7 @@ public class Jira357TestCase extends TestCase {
             return foo;
         }
         @Override
-        public void setFoo(String foo) {
+        public void setFoo(final String foo) {
             this.foo = foo;
         }
         @Override
@@ -182,14 +182,14 @@ public class Jira357TestCase extends TestCase {
             return bar;
         }
         @Override
-        public void setBar(boolean bar) {
+        public void setBar(final boolean bar) {
             this.bar = bar;
         }
         @Override
         public ConcreteTestBean.InnerClass getInnerClassProperty() {
             return innerClassProperty;
         }
-        public void setInnerClassProperty(ConcreteTestBean.InnerClass innerClassProperty) {
+        public void setInnerClassProperty(final ConcreteTestBean.InnerClass innerClassProperty) {
             this.innerClassProperty = innerClassProperty;
         }
     }

@@ -48,7 +48,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     // ------------------------------------------------------------------------
 
-    public DateLocaleConverterTestCase(String name) {
+    public DateLocaleConverterTestCase(final String name) {
         super(name);
     }
 
@@ -62,15 +62,15 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         super.setUp();
 
-        String version = System.getProperty("java.specification.version");
+        final String version = System.getProperty("java.specification.version");
         log.debug("JDK Version "+version);
 
 
         try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+            final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
             expectedValue      = format.parse("20041001");
             defaultValue       = format.parse("19670316");
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             log.error("Error creating expected/default dates", ex);
         }
 
@@ -92,12 +92,12 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // are expecting - Locale.GERMAN and Locale.GERMANY, Locale.FRENCH all
         // returned the standard "English" pattern characters on my machine
         // for JDK 1.4 (JDK 1.3 was OK). The Austria/German locale was OK though
-        String expectedChars = "GuMtkHmsSEDFwWahKzZ";
-        DateFormatSymbols localizedSymbols = new DateFormatSymbols(localizedLocale);
-        String localChars    = localizedSymbols.getLocalPatternChars();
+        final String expectedChars = "GuMtkHmsSEDFwWahKzZ";
+        final DateFormatSymbols localizedSymbols = new DateFormatSymbols(localizedLocale);
+        final String localChars    = localizedSymbols.getLocalPatternChars();
 
         // different JDK versions seem to have different numbers of pattern characters
-        int lth = localChars.length() > expectedChars.length() ? expectedChars.length() :
+        final int lth = localChars.length() > expectedChars.length() ? expectedChars.length() :
                      localChars.length() < expectedChars.length() ? localChars.length() : expectedChars.length();
         validLocalDateSymbols = expectedChars.substring(0, lth).equals(localChars.substring(0, lth));
 
@@ -116,7 +116,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     public void testSetLenient() {
         // make sure that date format works as expected
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
 
         // test with no leniency
         dateFormat.setLenient(false);
@@ -125,7 +125,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             dateFormat.parse("Feb 10, 2001");
 
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             fail("Could not parse date (1) - " + e.getMessage());
         }
 
@@ -134,7 +134,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
             dateFormat.parse("Feb 31, 2001");
             fail("Parsed illegal date (1)");
 
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             // that's what we expected
         }
 
@@ -145,7 +145,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             dateFormat.parse("Feb 10, 2001");
 
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             fail("Could not parse date (2) - " + e.getMessage());
         }
 
@@ -153,12 +153,12 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             dateFormat.parse("Feb 31, 2001");
 
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             fail("Could not parse date (3) - " + e.getMessage());
         }
 
         // now repeat tests for converter
-        DateLocaleConverter converter = new DateLocaleConverter(Locale.UK, "MMM dd, yyyy");
+        final DateLocaleConverter converter = new DateLocaleConverter(Locale.UK, "MMM dd, yyyy");
 
         // test with no leniency
         converter.setLenient(false);
@@ -168,7 +168,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             converter.convert("Feb 10, 2001");
 
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             fail("Could not parse date (4) - " + e.getMessage());
         }
 
@@ -178,7 +178,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
             assertEquals("Set lenient failed", converter.isLenient(), false);
             fail("Parsed illegal date (2)");
 
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // that's what we expected
         }
 
@@ -190,7 +190,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             converter.convert("Feb 10, 2001");
 
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             fail("Could not parse date (5) - " + e.getMessage());
         }
 
@@ -198,7 +198,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
             converter.convert("Feb 31, 2001");
 
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             fail("Could not parse date (6) - " + e.getMessage());
         }
     }
@@ -416,13 +416,13 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         try {
             converter.convert("01/10/2004", "dd-MM-yyyy");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             assertEquals("Parse Error", "Error parsing date '01/10/2004' at position=2", e.getMessage());
         }
 
         try {
             converter.convert("01-10-2004X", "dd-MM-yyyy");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
         }
 
@@ -441,7 +441,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testCalendarObject() {
         converter = new DateLocaleConverter(defaultLocale);
-        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        final java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.setTime((java.util.Date)expectedValue);
         assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
     }

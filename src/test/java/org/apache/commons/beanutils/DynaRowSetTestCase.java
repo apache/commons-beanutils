@@ -70,7 +70,7 @@ public class DynaRowSetTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public DynaRowSetTestCase(String name) {
+    public DynaRowSetTestCase(final String name) {
 
         super(name);
 
@@ -132,7 +132,7 @@ public class DynaRowSetTestCase extends TestCase {
         try {
             dynaClass.getDynaProperty(null);
             fail("Did not throw IllegaArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
@@ -154,7 +154,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     public void testGetDynaProperties() {
 
-        DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
@@ -170,9 +170,9 @@ public class DynaRowSetTestCase extends TestCase {
         try {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
-        } catch (UnsupportedOperationException e) {
+        } catch (final UnsupportedOperationException e) {
             // Expected result
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw exception " + e);
         }
 
@@ -181,7 +181,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     public void testListCount() {
 
-        List<DynaBean> rows = dynaClass.getRows();
+        final List<DynaBean> rows = dynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("list row count", 5, rows.size());
 
@@ -191,20 +191,20 @@ public class DynaRowSetTestCase extends TestCase {
     public void testListResults() {
 
         // Grab the third row
-        List<DynaBean> rows = dynaClass.getRows();
-        DynaBean row = rows.get(2);
+        final List<DynaBean> rows = dynaClass.getRows();
+        final DynaBean row = rows.get(2);
 
         // Invalid argument test
         try {
             row.get("unknownProperty");
             fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
         // Verify property values
 
-        Object bigDecimalProperty = row.get("bigdecimalproperty");
+        final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
                    bigDecimalProperty instanceof BigDecimal);
@@ -213,7 +213,7 @@ public class DynaRowSetTestCase extends TestCase {
                      ((BigDecimal) bigDecimalProperty).doubleValue(),
                      0.005);
 
-        Object intProperty = row.get("intproperty");
+        final Object intProperty = row.get("intproperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
                    intProperty instanceof Integer);
@@ -221,10 +221,10 @@ public class DynaRowSetTestCase extends TestCase {
                      103,
                      ((Integer) intProperty).intValue());
 
-        Object nullProperty = row.get("nullproperty");
+        final Object nullProperty = row.get("nullproperty");
         assertNull("nullProperty null", nullProperty);
 
-        Object stringProperty = row.get("stringproperty");
+        final Object stringProperty = row.get("stringproperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
                    stringProperty instanceof String);
@@ -242,25 +242,25 @@ public class DynaRowSetTestCase extends TestCase {
         RowSetDynaClass dynaClass = null;
         try {
             dynaClass = new RowSetDynaClass(TestResultSet.createProxy(), false);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Error creating RowSetDynaClass: " + e);
         }
 
         // Grab the third row
-        List<DynaBean> rows = dynaClass.getRows();
-        DynaBean row = rows.get(2);
+        final List<DynaBean> rows = dynaClass.getRows();
+        final DynaBean row = rows.get(2);
 
         // Invalid argument test
         try {
             row.get("unknownProperty");
             fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
         // Verify property values
 
-        Object bigDecimalProperty = row.get("bigDecimalProperty");
+        final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
                    bigDecimalProperty instanceof BigDecimal);
@@ -269,7 +269,7 @@ public class DynaRowSetTestCase extends TestCase {
                      ((BigDecimal) bigDecimalProperty).doubleValue(),
                      0.005);
 
-        Object intProperty = row.get("intProperty");
+        final Object intProperty = row.get("intProperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
                    intProperty instanceof Integer);
@@ -277,10 +277,10 @@ public class DynaRowSetTestCase extends TestCase {
                      103,
                      ((Integer) intProperty).intValue());
 
-        Object nullProperty = row.get("nullProperty");
+        final Object nullProperty = row.get("nullProperty");
         assertNull("nullProperty null", nullProperty);
 
-        Object stringProperty = row.get("stringProperty");
+        final Object stringProperty = row.get("stringProperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
                    stringProperty instanceof String);
@@ -294,8 +294,8 @@ public class DynaRowSetTestCase extends TestCase {
     public void testLimitedRows() throws Exception {
 
         // created one with low limit
-        RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
-        List<DynaBean> rows = limitedDynaClass.getRows();
+        final RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
+        final List<DynaBean> rows = limitedDynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());
 
@@ -310,26 +310,26 @@ public class DynaRowSetTestCase extends TestCase {
      */
     public void testInconsistentOracleDriver() throws Exception {
 
-        ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
-        ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
+        final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
+        final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
 
         // Date Column returns "java.sql.Timestamp" for the column class name but ResultSet getObject
         // returns a java.sql.Date value
-        int dateColIdx = 4;
+        final int dateColIdx = 4;
         assertEquals("Date Meta Name",       "dateProperty",       metaData.getColumnName(dateColIdx));
         assertEquals("Date Meta Class",      "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
         assertEquals("Date Meta Type",       java.sql.Types.DATE,  metaData.getColumnType(dateColIdx));
         assertEquals("Date ResultSet Value", java.sql.Date.class,  resultSet.getObject("dateProperty").getClass());
 
         // Timestamp column class returns a custom Timestamp impl for the column class name and ResultSet getObject
-        int timestampColIdx = 13;
+        final int timestampColIdx = 13;
         assertEquals("Timestamp Meta Name",       "timestampProperty",             metaData.getColumnName(timestampColIdx));
         assertEquals("Timestamp Meta Class",      CustomTimestamp.class.getName(), metaData.getColumnClassName(timestampColIdx));
         assertEquals("Timestamp Meta Type",       java.sql.Types.TIMESTAMP,        metaData.getColumnType(timestampColIdx));
         assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,           resultSet.getObject("timestampProperty").getClass());
 
-        RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
-        DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
+        final RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
+        final DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
         Class<?> expectedType = null;
         DynaProperty property = null;
 
@@ -353,7 +353,7 @@ public class DynaRowSetTestCase extends TestCase {
      */
     private static class TestResultSetInconsistent extends  TestResultSet {
 
-        public TestResultSetInconsistent(ResultSetMetaData metaData) {
+        public TestResultSetInconsistent(final ResultSetMetaData metaData) {
             super(metaData);
         }
         /**
@@ -363,7 +363,7 @@ public class DynaRowSetTestCase extends TestCase {
          * @throws SQLException if an error occurs
          */
         @Override
-        public Object getObject(String columnName) throws SQLException {
+        public Object getObject(final String columnName) throws SQLException {
             if ("timestampProperty".equals(columnName)) {
                 return new CustomTimestamp();
             } else {
@@ -390,8 +390,8 @@ public class DynaRowSetTestCase extends TestCase {
          * @throws SQLException if an error occurs
          */
         @Override
-        public String getColumnClassName(int columnIndex) throws SQLException {
-            String columnName = getColumnName(columnIndex);
+        public String getColumnClassName(final int columnIndex) throws SQLException {
+            final String columnName = getColumnName(columnIndex);
             if (columnName.equals("dateProperty")) {
                 return java.sql.Timestamp.class.getName();
             } else if (columnName.equals("timestampProperty")) {

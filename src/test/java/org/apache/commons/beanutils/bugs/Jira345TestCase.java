@@ -33,7 +33,7 @@ public class Jira345TestCase extends TestCase {
      *
      * @param name The name of the test
      */
-    public Jira345TestCase(String name) {
+    public Jira345TestCase(final String name) {
         super(name);
     }
 
@@ -42,7 +42,7 @@ public class Jira345TestCase extends TestCase {
      *
      * @param args Arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         junit.textui.TestRunner.run(suite());
     }
 
@@ -79,7 +79,7 @@ public class Jira345TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() with 2D array.
      */
     public void testBeanUtilsSetProperty_2DArray() throws Exception{
-        MyBean myBean = new MyBean();
+        final MyBean myBean = new MyBean();
         BeanUtils.setProperty(myBean, "matr[0][0]","Sample");
         assertEquals("Sample", myBean.getMatr()[0][0]);
     }
@@ -88,7 +88,7 @@ public class Jira345TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() with 3D array.
      */
     public void testBeanUtilsSetProperty_3DArray() throws Exception{
-        MyBean myBean = new MyBean();
+        final MyBean myBean = new MyBean();
         BeanUtils.setProperty(myBean, "matr3D[0][0][0]","Sample");
         assertEquals("Sample", myBean.getMatr3D()[0][0][0]);
     }
@@ -106,13 +106,13 @@ public class Jira345TestCase extends TestCase {
         public String[][] getMatr() {
             return matr;
         }
-        public void setMatr(String[][] matr) {
+        public void setMatr(final String[][] matr) {
             this.matr = matr;
         }
         public String[][][] getMatr3D() {
             return matr3D;
         }
-        public void setMatr3D(String[][][] matr3D) {
+        public void setMatr3D(final String[][][] matr3D) {
             this.matr3D = matr3D;
         }
     }

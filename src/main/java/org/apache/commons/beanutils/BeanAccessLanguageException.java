@@ -42,7 +42,7 @@ public class BeanAccessLanguageException extends IllegalArgumentException {
      *
      * @param message the detail message explaining this exception
      */
-    public BeanAccessLanguageException(String message) {
+    public BeanAccessLanguageException(final String message) {
         super(message);
     }
 }

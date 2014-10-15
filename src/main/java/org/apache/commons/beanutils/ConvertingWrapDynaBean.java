@@ -42,7 +42,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      *
      * @param instance JavaBean instance to be wrapped
      */
-    public ConvertingWrapDynaBean(Object instance) {
+    public ConvertingWrapDynaBean(final Object instance) {
 
         super(instance);
 
@@ -61,17 +61,17 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      *            copying the property.
      */
     @Override
-    public void set(String name, Object value) {
+    public void set(final String name, final Object value) {
 
         try {
             BeanUtils.copyProperty(instance, name, value);
-        } catch (InvocationTargetException ite) {
-            Throwable cause = ite.getTargetException();
+        } catch (final InvocationTargetException ite) {
+            final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException
                     ("Error setting property '" + name +
                               "' nested exception - " + cause);
-        } catch (Throwable t) {
-            IllegalArgumentException iae = new IllegalArgumentException
+        } catch (final Throwable t) {
+            final IllegalArgumentException iae = new IllegalArgumentException
                     ("Error setting property '" + name +
                               "', exception - " + t);
             BeanUtils.initCause(iae, t);

@@ -34,7 +34,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public ByteConverterTestCase(String name) {
+    public ByteConverterTestCase(final String name) {
         super(name);
     }
 
@@ -66,7 +66,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new ByteConverter(defaultValue);
     }
     @Override
@@ -77,7 +77,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -93,7 +93,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             "from Double"
         };
 
-        Object[] input = {
+        final Object[] input = {
             String.valueOf(Byte.MIN_VALUE),
             "-17",
             "-1",
@@ -109,7 +109,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             new Double(12.2)
         };
 
-        Byte[] expected = {
+        final Byte[] expected = {
             new Byte(Byte.MIN_VALUE),
             new Byte((byte)-17),
             new Byte((byte)-1),
@@ -136,13 +136,13 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        Converter converter = makeConverter();
-        Class<?> clazz = Byte.class;
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Byte.class;
 
-        Long min         = new Long(Byte.MIN_VALUE);
-        Long max         = new Long(Byte.MAX_VALUE);
-        Long minMinusOne = new Long(min.longValue() - 1);
-        Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long min         = new Long(Byte.MIN_VALUE);
+        final Long max         = new Long(Byte.MAX_VALUE);
+        final Long minMinusOne = new Long(min.longValue() - 1);
+        final Long maxPlusOne  = new Long(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
@@ -154,7 +154,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         try {
             assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
             fail("Less than minimum, expected ConversionException");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // expected result
         }
 
@@ -162,7 +162,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         try {
             assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
             fail("More than maximum, expected ConversionException");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // expected result
         }
     }

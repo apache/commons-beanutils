@@ -38,11 +38,11 @@ import org.apache.commons.collections.map.AbstractTestMap;
 @SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {
 
-    public BeanMapTestCase(String testName) {
+    public BeanMapTestCase(final String testName) {
         super(testName);
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         TestRunner.run(suite());
     }
 
@@ -84,77 +84,77 @@ public class BeanMapTestCase extends AbstractTestMap {
         public int getSomeIntValue() {
             return someInt;
         }
-        public void setSomeIntValue(int value) {
+        public void setSomeIntValue(final int value) {
             someInt = value;
         }
 
         public long getSomeLongValue() {
             return someLong;
         }
-        public void setSomeLongValue(long value) {
+        public void setSomeLongValue(final long value) {
             someLong = value;
         }
 
         public double getSomeDoubleValue() {
             return someDouble;
         }
-        public void setSomeDoubleValue(double value) {
+        public void setSomeDoubleValue(final double value) {
             someDouble = value;
         }
 
         public float getSomeFloatValue() {
             return someFloat;
         }
-        public void setSomeFloatValue(float value) {
+        public void setSomeFloatValue(final float value) {
             someFloat = value;
         }
 
         public short getSomeShortValue() {
             return someShort;
         }
-        public void setSomeShortValue(short value) {
+        public void setSomeShortValue(final short value) {
             someShort = value;
         }
 
         public byte getSomeByteValue() {
             return someByte;
         }
-        public void setSomeByteValue(byte value) {
+        public void setSomeByteValue(final byte value) {
             someByte = value;
         }
 
         public char getSomeCharValue() {
             return someChar;
         }
-        public void setSomeCharValue(char value) {
+        public void setSomeCharValue(final char value) {
             someChar = value;
         }
 
         public String getSomeStringValue() {
             return someString;
         }
-        public void setSomeStringValue(String value) {
+        public void setSomeStringValue(final String value) {
             someString = value;
         }
 
         public Integer getSomeIntegerValue() {
             return someInteger;
         }
-        public void setSomeIntegerValue(Integer value) {
+        public void setSomeIntegerValue(final Integer value) {
             someInteger = value;
         }
 
         public Object getSomeObjectValue() {
             return someObject;
         }
-        public void setSomeObjectValue(Object value) {
+        public void setSomeObjectValue(final Object value) {
             someObject = value;
         }
     }
 
     public static class BeanThrowingExceptions extends BeanWithProperties {
         private static final long serialVersionUID = 1L;
-        public void setValueThrowingException(String value) {
+        public void setValueThrowingException(final String value) {
             throw new TestException();
         }
         public String getValueThrowingException() {
@@ -181,7 +181,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     // all beans (and all objects for that matter.
     @Override
     public Object[] getSampleKeys() {
-        Object[] keys = new Object[] {
+        final Object[] keys = new Object[] {
             "someIntValue",
             "someLongValue",
             "someDoubleValue",
@@ -208,7 +208,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     // note to self: the sample values were created manually
     @Override
     public Object[] getSampleValues() {
-        Object[] values = new Object[] {
+        final Object[] values = new Object[] {
             new Integer(1234),
             new Long(1298341928234L),
             new Double(123423.34),
@@ -226,7 +226,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     @Override
     public Object[] getNewSampleValues() {
-        Object[] values = new Object[] {
+        final Object[] values = new Object[] {
             new Integer(223),
             new Long(23341928234L),
             new Double(23423.34),
@@ -275,7 +275,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     public Map<Object, Object> makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
-        BeanWithProperties bean = new BeanWithProperties();
+        final BeanWithProperties bean = new BeanWithProperties();
         bean.setSomeIntValue(1234);
         bean.setSomeLongValue(1298341928234L);
         bean.setSomeDoubleValue(123423.34);
@@ -335,40 +335,40 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     public void testBeanMapClone() {
-        BeanMap map = (BeanMap)makeFullMap();
+        final BeanMap map = (BeanMap)makeFullMap();
         try {
-            BeanMap map2 = (BeanMap)map.clone();
+            final BeanMap map2 = (BeanMap)map.clone();
 
             // make sure containsKey is working to verify the bean was cloned
             // ok, and the read methods were properly initialized
-            Object[] keys = getSampleKeys();
+            final Object[] keys = getSampleKeys();
             for(int i = 0; i < keys.length; i++) {
                 assertTrue("Cloned BeanMap should contain the same keys",
                            map2.containsKey(keys[i]));
             }
-        } catch (CloneNotSupportedException exception) {
+        } catch (final CloneNotSupportedException exception) {
             fail("BeanMap.clone() should not throw a " +
                  "CloneNotSupportedException when clone should succeed.");
         }
     }
 
     public void testBeanMapPutAllWriteable() {
-        BeanMap map1 = (BeanMap)makeFullMap();
-        BeanMap map2 = (BeanMap)makeFullMap();
+        final BeanMap map1 = (BeanMap)makeFullMap();
+        final BeanMap map2 = (BeanMap)makeFullMap();
         map2.put("someIntValue", new Integer(0));
         map1.putAllWriteable(map2);
         assertEquals(map1.get("someIntValue"), new Integer(0));
     }
 
     public void testMethodAccessor() throws Exception {
-        BeanMap map = (BeanMap) makeFullMap();
-        Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
+        final BeanMap map = (BeanMap) makeFullMap();
+        final Method method = BeanWithProperties.class.getDeclaredMethod("getSomeIntegerValue");
         assertEquals(method, map.getReadMethod("someIntegerValue"));
     }
 
     public void testMethodMutator() throws Exception {
-        BeanMap map = (BeanMap) makeFullMap();
-        Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
+        final BeanMap map = (BeanMap) makeFullMap();
+        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
 
@@ -376,7 +376,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      *  Test the default transformers using the getTypeTransformer() method
      */
     public void testGetTypeTransformerMethod() {
-        BeanMap beanMap = new BeanMap();
+        final BeanMap beanMap = new BeanMap();
         assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
         assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
         assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
@@ -418,25 +418,25 @@ public class BeanMapTestCase extends AbstractTestMap {
         try {
             BeanMap.defaultTransformers.clear();
             fail("clear() - expected UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch(final UnsupportedOperationException e) {
             // expected result
         }
         try {
             BeanMap.defaultTransformers.put("FOO", null);
             fail("put() - expected UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch(final UnsupportedOperationException e) {
             // expected result
         }
         try {
             BeanMap.defaultTransformers.putAll(new HashMap<Object, Object>());
             fail("putAll() - expected UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch(final UnsupportedOperationException e) {
             // expected result
         }
         try {
             BeanMap.defaultTransformers.remove("FOO");
             fail("remove() - expected UnsupportedOperationException");
-        } catch(UnsupportedOperationException e) {
+        } catch(final UnsupportedOperationException e) {
             // expected result
         }
     }
@@ -453,15 +453,15 @@ public class BeanMapTestCase extends AbstractTestMap {
 
         // Test cloning a non-public bean (instantiation exception)
         try {
-            Object bean = Jira87BeanFactory.createMappedPropertyBean();
-            BeanMap map = new BeanMap(bean);
+            final Object bean = Jira87BeanFactory.createMappedPropertyBean();
+            final BeanMap map = new BeanMap(bean);
             map.clone();
             fail("Non-public bean clone() - expected CloneNotSupportedException");
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             Throwable cause = null;
             try {
                 cause = (Throwable)PropertyUtils.getProperty(e, "cause");
-            } catch (Exception e2) {
+            } catch (final Exception e2) {
                 fail("Non-public bean - retrieving the cause threw " + e2);
             }
             assertNotNull("Non-public bean cause null", cause);
@@ -470,14 +470,14 @@ public class BeanMapTestCase extends AbstractTestMap {
 
         // Test cloning a bean that throws exception
         try {
-            BeanMap map = new BeanMap(new BeanThrowingExceptions());
+            final BeanMap map = new BeanMap(new BeanThrowingExceptions());
             map.clone();
             fail("Setter Exception clone() - expected CloneNotSupportedException");
-        } catch (CloneNotSupportedException e) {
+        } catch (final CloneNotSupportedException e) {
             Throwable cause = null;
             try {
                 cause = (Throwable)PropertyUtils.getProperty(e, "cause");
-            } catch (Exception e2) {
+            } catch (final Exception e2) {
                 fail("Setter Exception - retrieving the cause threw " + e2);
             }
             assertNotNull("Setter Exception cause null", cause);
@@ -496,15 +496,15 @@ public class BeanMapTestCase extends AbstractTestMap {
         }
 
         try {
-            Object bean = Jira87BeanFactory.createMappedPropertyBean();
-            BeanMap map = new BeanMap(bean);
+            final Object bean = Jira87BeanFactory.createMappedPropertyBean();
+            final BeanMap map = new BeanMap(bean);
             map.clear();
             fail("clear() - expected UnsupportedOperationException");
-        } catch (UnsupportedOperationException e) {
+        } catch (final UnsupportedOperationException e) {
             Throwable cause = null;
             try {
                 cause = (Throwable)PropertyUtils.getProperty(e, "cause");
-            } catch (Exception e2) {
+            } catch (final Exception e2) {
                 fail("Retrieving the cause threw " + e2);
             }
             assertNotNull("Cause null", cause);
@@ -523,16 +523,16 @@ public class BeanMapTestCase extends AbstractTestMap {
         }
 
         try {
-            Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
+            final Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
             map.put("valueThrowingException", "value");
             fail("Setter exception - expected IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             Throwable cause1 = null;
             Throwable cause2 = null;
             try {
                 cause1 = (Throwable)PropertyUtils.getProperty(e, "cause");
                 cause2 = (Throwable)PropertyUtils.getProperty(e, "cause.cause");
-            } catch (Exception e2) {
+            } catch (final Exception e2) {
                 fail("Setter exception - retrieving the cause threw " + e2);
             }
             assertNotNull("Setter exception cause 1 null", cause1);

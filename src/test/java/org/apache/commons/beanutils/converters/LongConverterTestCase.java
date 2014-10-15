@@ -34,7 +34,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    public LongConverterTestCase(String name) {
+    public LongConverterTestCase(final String name) {
         super(name);
     }
 
@@ -66,7 +66,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected NumberConverter makeConverter(Object defaultValue) {
+    protected NumberConverter makeConverter(final Object defaultValue) {
         return new LongConverter(defaultValue);
     }
 
@@ -78,7 +78,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
-        String[] message= {
+        final String[] message= {
             "from String",
             "from String",
             "from String",
@@ -94,7 +94,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             "from Double"
         };
 
-        Object[] input = {
+        final Object[] input = {
             String.valueOf(Long.MIN_VALUE),
             "-17",
             "-1",
@@ -110,7 +110,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             new Double(12.2)
         };
 
-        Long[] expected = {
+        final Long[] expected = {
             new Long(Long.MIN_VALUE),
             new Long(-17),
             new Long(-1),

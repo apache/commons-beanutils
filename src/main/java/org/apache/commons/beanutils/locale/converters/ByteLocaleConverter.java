@@ -60,7 +60,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(boolean locPattern) {
+    public ByteLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -72,7 +72,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      *
      * @param locale        The locale
      */
-    public ByteLocaleConverter(Locale locale) {
+    public ByteLocaleConverter(final Locale locale) {
 
         this(locale, false);
     }
@@ -85,7 +85,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(Locale locale, boolean locPattern) {
+    public ByteLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null, locPattern);
     }
@@ -98,7 +98,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public ByteLocaleConverter(Locale locale, String pattern) {
+    public ByteLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -112,7 +112,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public ByteLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -126,7 +126,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public ByteLocaleConverter(Object defaultValue) {
+    public ByteLocaleConverter(final Object defaultValue) {
 
         this(defaultValue, false);
     }
@@ -140,7 +140,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(Object defaultValue, boolean locPattern) {
+    public ByteLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -153,7 +153,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public ByteLocaleConverter(Object defaultValue, Locale locale) {
+    public ByteLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -167,7 +167,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public ByteLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -181,7 +181,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public ByteLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public ByteLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -196,7 +196,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ByteLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public ByteLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -214,7 +214,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @throws ParseException if an error occurs parsing a String to a Number
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, final String pattern) throws ParseException {
         final Number parsed = (Number) super.parse(value, pattern);
         if (parsed.longValue() != parsed.byteValue()) {
             throw new ConversionException("Supplied number is not of type Byte: " + parsed.longValue());

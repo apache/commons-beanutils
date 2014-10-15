@@ -201,7 +201,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param capacity The initial capacity of the list.
      */
-    public LazyDynaList(int capacity) {
+    public LazyDynaList(final int capacity) {
         super(capacity);
 
     }
@@ -212,7 +212,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param elementDynaClass The DynaClass of the List's elements.
      */
-    public LazyDynaList(DynaClass elementDynaClass) {
+    public LazyDynaList(final DynaClass elementDynaClass) {
         super();
         setElementDynaClass(elementDynaClass);
     }
@@ -223,7 +223,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param elementType The Type of the List's elements.
      */
-    public LazyDynaList(Class<?> elementType) {
+    public LazyDynaList(final Class<?> elementType) {
         super();
         setElementType(elementType);
     }
@@ -234,7 +234,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param collection The Collection to populate the List from.
      */
-    public LazyDynaList(Collection<?> collection) {
+    public LazyDynaList(final Collection<?> collection) {
         super(collection.size());
         addAll(collection);
     }
@@ -245,7 +245,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param array The Array to populate the List from.
      */
-    public LazyDynaList(Object[] array) {
+    public LazyDynaList(final Object[] array) {
         super(array.length);
         for (int i = 0; i < array.length; i++) {
             add(array[i]);
@@ -266,9 +266,9 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param element The new element to add.
      */
     @Override
-    public void add(int index, Object element) {
+    public void add(final int index, final Object element) {
 
-        DynaBean dynaBean = transform(element);
+        final DynaBean dynaBean = transform(element);
 
         growList(index);
 
@@ -283,9 +283,9 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return true.
      */
     @Override
-    public boolean add(Object element) {
+    public boolean add(final Object element) {
 
-        DynaBean dynaBean = transform(element);
+        final DynaBean dynaBean = transform(element);
 
         return super.add(dynaBean);
 
@@ -298,7 +298,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return true if elements were added.
      */
     @Override
-    public boolean addAll(Collection<?> collection) {
+    public boolean addAll(final Collection<?> collection) {
 
         if (collection == null || collection.size() == 0) {
             return false;
@@ -306,7 +306,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         ensureCapacity(size() + collection.size());
 
-        for (Object e : collection) {
+        for (final Object e : collection) {
             add(e);
         }
 
@@ -327,7 +327,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return true if elements were added.
      */
     @Override
-    public boolean addAll(int index, Collection<?> collection) {
+    public boolean addAll(final int index, final Collection<?> collection) {
 
         if (collection == null || collection.size() == 0) {
             return false;
@@ -345,7 +345,7 @@ public class LazyDynaList extends ArrayList<Object> {
         growList(index);
 
         int currentIndex = index;
-        for (Object e : collection) {
+        for (final Object e : collection) {
             add(currentIndex++, e);
         }
 
@@ -364,7 +364,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return The element at the specified position.
      */
     @Override
-    public Object get(int index) {
+    public Object get(final int index) {
 
         growList(index + 1);
 
@@ -384,9 +384,9 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return The new element.
      */
     @Override
-    public Object set(int index, Object element) {
+    public Object set(final int index, final Object element) {
 
-        DynaBean dynaBean = transform(element);
+        final DynaBean dynaBean = transform(element);
 
         growList(index + 1);
 
@@ -416,7 +416,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        Object[] array = (Object[])Array.newInstance(elementType, size());
+        final Object[] array = (Object[])Array.newInstance(elementType, size());
         for (int i = 0; i < size(); i++) {
             if (Map.class.isAssignableFrom(elementType)) {
                 array[i] = ((LazyDynaMap)get(i)).getMap();
@@ -438,9 +438,9 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return An Array of the elements in this List.
      */
     @Override
-    public <T> T[] toArray(T[] model) {
+    public <T> T[] toArray(final T[] model) {
 
-        Class<?> arrayType = model.getClass().getComponentType();
+        final Class<?> arrayType = model.getClass().getComponentType();
         if ((DynaBean.class.isAssignableFrom(arrayType))
                 || (size() == 0 && elementType == null)) {
             return super.toArray(model);
@@ -452,6 +452,7 @@ public class LazyDynaList extends ArrayList<Object> {
                 array = model;
             } else {
                 @SuppressWarnings("unchecked")
+                final
                 // This is safe because we know the element type
                 T[] tempArray = (T[]) Array.newInstance(arrayType, size());
                 array = tempArray;
@@ -491,7 +492,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        DynaBean[] array = (DynaBean[])Array.newInstance(elementDynaBeanType, size());
+        final DynaBean[] array = (DynaBean[])Array.newInstance(elementDynaBeanType, size());
         for (int i = 0; i < size(); i++) {
             array[i] = (DynaBean)get(i);
         }
@@ -506,13 +507,13 @@ public class LazyDynaList extends ArrayList<Object> {
      * @exception IllegalArgumentException if the List already
      *            contains elements or the DynaClass is null.
      */
-    public void setElementType(Class<?> elementType) {
+    public void setElementType(final Class<?> elementType) {
 
         if (elementType == null) {
             throw new IllegalArgumentException("Element Type is missing");
         }
 
-        boolean changeType = (this.elementType != null && !this.elementType.equals(elementType));
+        final boolean changeType = (this.elementType != null && !this.elementType.equals(elementType));
         if (changeType && size() > 0) {
             throw new IllegalStateException("Element Type cannot be reset");
         }
@@ -523,7 +524,7 @@ public class LazyDynaList extends ArrayList<Object> {
         Object object = null;
         try {
             object = elementType.newInstance();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new IllegalArgumentException("Error creating type: "
                            + elementType.getName() + " - " + e);
         }
@@ -559,7 +560,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * @exception IllegalArgumentException if the List already
      *            contains elements or the DynaClass is null.
      */
-    public void setElementDynaClass(DynaClass elementDynaClass) {
+    public void setElementDynaClass(final DynaClass elementDynaClass) {
 
         if (elementDynaClass == null) {
             throw new IllegalArgumentException("Element DynaClass is missing");
@@ -571,7 +572,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         // Try to create a new instance of the DynaBean
         try {
-            DynaBean dynaBean  = elementDynaClass.newInstance();
+            final DynaBean dynaBean  = elementDynaClass.newInstance();
             this.elementDynaBeanType = dynaBean.getClass();
             if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
                 this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
@@ -583,7 +584,7 @@ public class LazyDynaList extends ArrayList<Object> {
                 this.elementType = dynaBean.getClass();
                 this.elementDynaClass = elementDynaClass;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new IllegalArgumentException(
                         "Error creating DynaBean from " +
                         elementDynaClass.getClass().getName() + " - " + e);
@@ -601,7 +602,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * @param requiredSize the required size of the List.
      */
-    private void growList(int requiredSize) {
+    private void growList(final int requiredSize) {
 
         if (requiredSize < size()) {
             return;
@@ -610,7 +611,7 @@ public class LazyDynaList extends ArrayList<Object> {
         ensureCapacity(requiredSize + 1);
 
         for (int i = size(); i < requiredSize; i++) {
-            DynaBean dynaBean = transform(null);
+            final DynaBean dynaBean = transform(null);
             super.add(dynaBean);
         }
 
@@ -628,7 +629,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param element The element to transformed.
      * @param The DynaBean to store in the List.
      */
-    private DynaBean transform(Object element) {
+    private DynaBean transform(final Object element) {
 
         DynaBean dynaBean     = null;
         Class<?> newDynaBeanType = null;
@@ -652,7 +653,7 @@ public class LazyDynaList extends ArrayList<Object> {
             try {
                 dynaBean = getDynaClass().newInstance();
                 newDynaBeanType = dynaBean.getClass();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 throw new IllegalArgumentException("Error creating DynaBean: "
                               + getDynaClass().getClass().getName()
                               + " - " + e);
@@ -699,8 +700,9 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param value the property value
      * @return the newly created {@code LazyDynaMap}
      */
-    private LazyDynaMap createDynaBeanForMapProperty(Object value) {
+    private LazyDynaMap createDynaBeanForMapProperty(final Object value) {
         @SuppressWarnings("unchecked")
+        final
         // map properties are always stored as Map<String, Object>
         Map<String, Object> valueMap = (Map<String, Object>) value;
         return new LazyDynaMap(valueMap);

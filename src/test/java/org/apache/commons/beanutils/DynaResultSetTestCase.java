@@ -67,7 +67,7 @@ public class DynaResultSetTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public DynaResultSetTestCase(String name) {
+    public DynaResultSetTestCase(final String name) {
 
         super(name);
 
@@ -129,7 +129,7 @@ public class DynaResultSetTestCase extends TestCase {
         try {
             dynaClass.getDynaProperty(null);
             fail("Did not throw IllegaArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
@@ -151,7 +151,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     public void testGetDynaProperties() {
 
-        DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
@@ -167,9 +167,9 @@ public class DynaResultSetTestCase extends TestCase {
         try {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
-        } catch (UnsupportedOperationException e) {
+        } catch (final UnsupportedOperationException e) {
             // Expected result
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Threw exception " + e);
         }
 
@@ -178,7 +178,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     public void testIteratorCount() {
 
-        Iterator<?> rows = dynaClass.iterator();
+        final Iterator<?> rows = dynaClass.iterator();
         assertNotNull("iterator exists", rows);
         int n = 0;
         while (rows.hasNext()) {
@@ -196,22 +196,22 @@ public class DynaResultSetTestCase extends TestCase {
     public void testIteratorResults() {
 
         // Grab the third row
-        Iterator<DynaBean> rows = dynaClass.iterator();
+        final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
-        DynaBean row = (DynaBean) rows.next();
+        final DynaBean row = (DynaBean) rows.next();
 
         // Invalid argument test
         try {
             row.get("unknownProperty");
             fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
         // Verify property values
 
-        Object bigDecimalProperty = row.get("bigdecimalproperty");
+        final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
                    bigDecimalProperty instanceof BigDecimal);
@@ -220,7 +220,7 @@ public class DynaResultSetTestCase extends TestCase {
                      ((BigDecimal) bigDecimalProperty).doubleValue(),
                      0.005);
 
-        Object intProperty = row.get("intproperty");
+        final Object intProperty = row.get("intproperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
                    intProperty instanceof Integer);
@@ -228,10 +228,10 @@ public class DynaResultSetTestCase extends TestCase {
                      103,
                      ((Integer) intProperty).intValue());
 
-        Object nullProperty = row.get("nullproperty");
+        final Object nullProperty = row.get("nullproperty");
         assertNull("nullProperty null", nullProperty);
 
-        Object stringProperty = row.get("stringproperty");
+        final Object stringProperty = row.get("stringproperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
                    stringProperty instanceof String);
@@ -250,27 +250,27 @@ public class DynaResultSetTestCase extends TestCase {
         ResultSetDynaClass dynaClass = null;
         try {
             dynaClass = new ResultSetDynaClass(TestResultSet.createProxy(), false);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Error creating ResultSetDynaClass: " + e);
         }
 
         // Grab the third row
-        Iterator<DynaBean> rows = dynaClass.iterator();
+        final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
-        DynaBean row = (DynaBean) rows.next();
+        final DynaBean row = (DynaBean) rows.next();
 
         // Invalid argument test
         try {
             row.get("unknownProperty");
             fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // Expected result
         }
 
         // Verify property values
 
-        Object bigDecimalProperty = row.get("bigDecimalProperty");
+        final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
                    bigDecimalProperty instanceof BigDecimal);
@@ -279,7 +279,7 @@ public class DynaResultSetTestCase extends TestCase {
                      ((BigDecimal) bigDecimalProperty).doubleValue(),
                      0.005);
 
-        Object intProperty = row.get("intProperty");
+        final Object intProperty = row.get("intProperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
                    intProperty instanceof Integer);
@@ -287,10 +287,10 @@ public class DynaResultSetTestCase extends TestCase {
                      103,
                      ((Integer) intProperty).intValue());
 
-        Object nullProperty = row.get("nullProperty");
+        final Object nullProperty = row.get("nullProperty");
         assertNull("nullProperty null", nullProperty);
 
-        Object stringProperty = row.get("stringProperty");
+        final Object stringProperty = row.get("stringProperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
                    stringProperty instanceof String);

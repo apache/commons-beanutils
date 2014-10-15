@@ -35,66 +35,66 @@ public class MappedPropertyTestBean {
 
     // -------------------------------------------------------------- Properties
 
-    public String getMapproperty(String key) {
+    public String getMapproperty(final String key) {
         return (String) map.get(key);
     }
 
-    public void setMapproperty(String key, String value) {
+    public void setMapproperty(final String key, final String value) {
         map.put(key, value);
     }
 
-    public boolean isMappedBoolean(String key) {
+    public boolean isMappedBoolean(final String key) {
         return ((Boolean)map.get(key)).booleanValue();
     }
 
-    public void setMappedBoolean(String key, boolean value) {
+    public void setMappedBoolean(final String key, final boolean value) {
         map.put(key, (value ? Boolean.TRUE : Boolean.FALSE));
     }
 
-    protected String getProtectedMapped(String key) {
+    protected String getProtectedMapped(final String key) {
         return (String) map.get(key);
     }
 
-    protected void setProtectedMapped(String key, String value) {
+    protected void setProtectedMapped(final String key, final String value) {
         map.put(key, value);
     }
 
-    public void setMappedPrimitive(int key, int value) {
+    public void setMappedPrimitive(final int key, final int value) {
         map.put(new Integer(key), new Integer(value));
     }
 
-    public void setAnyMapped(MappedPropertyTestBean key, MappedPropertyTestBean value) {
+    public void setAnyMapped(final MappedPropertyTestBean key, final MappedPropertyTestBean value) {
         map.put(key, value);
     }
 
-    public void setMappedSetterOnly(String key, String value) {
+    public void setMappedSetterOnly(final String key, final String value) {
         map.put(key, value);
     }
 
-    public String getMappedGetterOnly(String key) {
+    public String getMappedGetterOnly(final String key) {
         return (String) map.get(key);
     }
 
-    public String getInvalidGetter(String key, String other) {
+    public String getInvalidGetter(final String key, final String other) {
         return (String) map.get(key);
     }
     public Map<Object, Object> getMyMap() {
         return myMap;
     }
 
-    public void setInvalidGetter(String key, String value) {
+    public void setInvalidGetter(final String key, final String value) {
         map.put(key, value);
     }
-    public String getInvalidSetter(String key) {
+    public String getInvalidSetter(final String key) {
         return (String) map.get(key);
     }
-    public void setInvalidSetter(String key, String value, String other) {
+    public void setInvalidSetter(final String key, final String value, final String other) {
     }
 
-    public Long getDifferentTypes(String key) {
+    public Long getDifferentTypes(final String key) {
         return new Long(((Number)map.get(key)).longValue());
     }
-    public void setDifferentTypes(String key, Integer value) {
+    public void setDifferentTypes(final String key, final Integer value) {
         map.put(key, value);
     }
 

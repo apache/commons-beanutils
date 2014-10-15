@@ -50,21 +50,21 @@ public class IndexedTestBean {
     /**
      * Setter for the String[] property.
      */
-    public void setStringArray(String[] stringArray) {
+    public void setStringArray(final String[] stringArray) {
         this.stringArray = stringArray;
     }
 
     /**
      * Indexed Getter for the String[] property.
      */
-    public String getStringArray(int index) {
+    public String getStringArray(final int index) {
         return stringArray[index];
     }
 
     /**
      * Indexed Setter for the String[] property.
      */
-    public void setStringArray(int index, String value) {
+    public void setStringArray(final int index, final String value) {
         stringArray[index] = value;
     }
 
@@ -78,21 +78,21 @@ public class IndexedTestBean {
     /**
      * Setter for the java.util.List property.
      */
-    public void setStringList(List<String> stringList) {
+    public void setStringList(final List<String> stringList) {
         this.stringList = stringList;
     }
 
     /**
      * Indexed Getter for the java.util.List property.
      */
-    public String getStringList(int index) {
+    public String getStringList(final int index) {
         return stringList.get(index);
     }
 
     /**
      * Indexed Setter for the java.util.List property.
      */
-    public void setStringList(int index, String value) {
+    public void setStringList(final int index, final String value) {
         stringList.add(index, value);
     }
 
@@ -106,21 +106,21 @@ public class IndexedTestBean {
     /**
      * Setter for the java.util.ArrayList property.
      */
-    public void setArrayList(ArrayList<Object> arrayList) {
+    public void setArrayList(final ArrayList<Object> arrayList) {
         this.arrayList = arrayList;
     }
 
     /**
      * Indexed Getter for the java.util.ArrayList property.
      */
-    public Object getArrayList(int index) {
+    public Object getArrayList(final int index) {
         return arrayList.get(index);
     }
 
     /**
      * Indexed Setter for the java.util.ArrayList property.
      */
-    public void setArrayList(int index, Object value) {
+    public void setArrayList(final int index, final Object value) {
         arrayList.add(index, value);
     }
 

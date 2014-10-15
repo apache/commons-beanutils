@@ -35,7 +35,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     // ---------------------------------------------------------- Constructors
 
-    public FloatLocaleConverterTestCase(String name) {
+    public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
 
@@ -270,7 +270,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void testFloatLimits() {
 
         converter = new FloatLocaleConverter(defaultLocale, defaultDecimalPattern);
-        DecimalFormat fmt = new DecimalFormat("#.#############################################################");
+        final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
 
         assertEquals(new Float(-0.12), converter.convert("-0.12"));
         assertEquals("Positive Float.MAX_VALUE", new Float(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)));
@@ -283,26 +283,26 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         try {
             converter.convert(fmt.format((double)Float.MAX_VALUE * (double)10));
             fail("Positive Too Large should throw ConversionException");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
         try {
             converter.convert(fmt.format((double)Float.MAX_VALUE * (double)-10));
             fail("Negative Too Large should throw ConversionException");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
 
         try {
             converter.convert(fmt.format((double)Float.MIN_VALUE / (double)10));
             fail("Positive Too Small should throw ConversionException");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
         try {
             converter.convert(fmt.format((double)Float.MIN_VALUE / (double)-10));
             fail("Negative Too Small should throw ConversionException");
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
     }
@@ -312,9 +312,9 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testParseZero() {
         try {
-            Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
+            final Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
             assertEquals(new Float(0), result);
-        } catch (ConversionException e) {
+        } catch (final ConversionException e) {
             fail("Zero threw ConversionException: " + e);
         }
 

@@ -47,11 +47,11 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      * @param propName the property name
      * @return the descriptor for this property
      */
-    private static PropertyDescriptor createDescriptor(String propName) {
+    private static PropertyDescriptor createDescriptor(final String propName) {
         try {
             return new PropertyDescriptor(propName,
                     DefaultIntrospectionContextTestCase.class, null, null);
-        } catch (IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             throw new IllegalStateException("Unexpected exception: " + e);
         }
     }
@@ -69,7 +69,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      * Tests whether a property descriptor can be added.
      */
     public void testAddPropertyDescriptor() {
-        PropertyDescriptor desc = createDescriptor(PROP);
+        final PropertyDescriptor desc = createDescriptor(PROP);
         context.addPropertyDescriptor(desc);
         assertTrue("Property not found", context.hasProperty(PROP));
         assertSame("Wrong descriptor", desc,
@@ -83,7 +83,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         try {
             context.addPropertyDescriptor(null);
             fail("Could add null descriptor!");
-        } catch (IllegalArgumentException iex) {
+        } catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -93,27 +93,27 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      */
     public void testAddPropertyDescriptors() {
         final int count = 4;
-        PropertyDescriptor[] descs = new PropertyDescriptor[count];
-        Set<PropertyDescriptor> descSet = new HashSet<PropertyDescriptor>();
+        final PropertyDescriptor[] descs = new PropertyDescriptor[count];
+        final Set<PropertyDescriptor> descSet = new HashSet<PropertyDescriptor>();
         for (int i = 0; i < count; i++) {
             descs[i] = createDescriptor(PROP + i);
             descSet.add(descs[i]);
         }
         context.addPropertyDescriptors(descs);
-        PropertyDescriptor d = createDescriptor(PROP);
+        final PropertyDescriptor d = createDescriptor(PROP);
         context.addPropertyDescriptor(d);
         descSet.add(d);
-        Set<String> names = context.propertyNames();
+        final Set<String> names = context.propertyNames();
         assertEquals("Wrong number of property names", count + 1, names.size());
         assertTrue("Property not found: " + PROP, names.contains(PROP));
         for (int i = 0; i < count; i++) {
             assertTrue("Property not found: " + (PROP + i),
                     names.contains(PROP + i));
         }
-        PropertyDescriptor[] addedDescs = context.getPropertyDescriptors();
+        final PropertyDescriptor[] addedDescs = context.getPropertyDescriptors();
         assertEquals("Wrong number of added descriptors", count + 1,
                 addedDescs.length);
-        for (PropertyDescriptor pd : addedDescs) {
+        for (final PropertyDescriptor pd : addedDescs) {
             assertTrue("Unexpected descriptor: " + pd, descSet.remove(pd));
         }
     }
@@ -125,7 +125,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         try {
             context.addPropertyDescriptors(null);
             fail("Could add a null array with descriptors!");
-        } catch (IllegalArgumentException iex) {
+        } catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -152,11 +152,11 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      * Tests that the set with property names cannot be changed.
      */
     public void testPropertyNamesModify() {
-        Set<String> names = context.propertyNames();
+        final Set<String> names = context.propertyNames();
         try {
             names.add(PROP);
             fail("Could modify property names set!");
-        } catch (UnsupportedOperationException uex) {
+        } catch (final UnsupportedOperationException uex) {
             // ok
         }
     }

@@ -33,14 +33,14 @@ import org.apache.commons.beanutils.Converter;
 public class MemoryTestCase extends TestCase {
 
     public void testWeakReference() throws Exception {
-        ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
+        final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
         ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
 
         Thread.currentThread().setContextClassLoader(componentLoader);
         Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
-        WeakReference<ClassLoader> ref = new WeakReference<ClassLoader>(componentLoader);
+        final WeakReference<ClassLoader> ref = new WeakReference<ClassLoader>(componentLoader);
         componentLoader = null;
 
         forceGarbageCollection(ref);
@@ -74,7 +74,7 @@ public class MemoryTestCase extends TestCase {
      */
     public void testComponentRegistersStandardConverter() throws Exception {
 
-        ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
+        final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
             // sanity check; who's paranoid?? :-)
             assertEquals(origContextClassLoader, ConvertUtils.class.getClassLoader());
@@ -82,10 +82,10 @@ public class MemoryTestCase extends TestCase {
             // create a custom classloader for a "component"
             // just like a container would.
             ClassLoader componentLoader1 = new ClassLoader() {};
-            ClassLoader componentLoader2 = new ClassLoader() {};
+            final ClassLoader componentLoader2 = new ClassLoader() {};
 
-            Converter origFloatConverter = ConvertUtils.lookup(Float.TYPE);
-            Converter floatConverter1 = new FloatConverter();
+            final Converter origFloatConverter = ConvertUtils.lookup(Float.TYPE);
+            final Converter floatConverter1 = new FloatConverter();
 
             // Emulate the container invoking a component #1, and the component
             // registering a custom converter instance whose class is
@@ -125,7 +125,7 @@ public class MemoryTestCase extends TestCase {
 
             // Emulate a container "undeploying" component #1. This should
             // make component loader available for garbage collection (we hope)
-            WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<ClassLoader>(componentLoader1);
+            final WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<ClassLoader>(componentLoader1);
             componentLoader1 = null;
 
             // force garbage collection and  verify that the componentLoader
@@ -163,7 +163,7 @@ public class MemoryTestCase extends TestCase {
      */
     public void testComponentRegistersCustomConverter() throws Exception {
 
-        ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
+        final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
             // sanity check; who's paranoid?? :-)
             assertEquals(origContextClassLoader, ConvertUtils.class.getClassLoader());
@@ -180,7 +180,7 @@ public class MemoryTestCase extends TestCase {
               // Here we pretend we're running inside the component, and that
               // a class FloatConverter has been loaded from the component's
               // private classpath.
-              Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
+              final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
               Object newFloatConverter = newFloatConverterClass.newInstance();
               assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
 
@@ -198,7 +198,7 @@ public class MemoryTestCase extends TestCase {
               // After registering a custom converter, lookup should return
               // it back to us. We'll try this lookup again with a different
               // context-classloader set, and shouldn't see it
-              Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+              final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
               assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
 
               newFloatConverter = null;
@@ -207,19 +207,19 @@ public class MemoryTestCase extends TestCase {
 
             // Because the context classloader has been reset, we shouldn't
             // see the custom registered converter here...
-            Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
+            final Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
             assertFalse(sharedConverter.getClass().getClassLoader() == componentLoader);
 
             // and here we should see it again
             Thread.currentThread().setContextClassLoader(componentLoader);
             {
-                Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
                 assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
             // Emulate a container "undeploying" the component. This should
             // make component loader available for garbage collection (we hope)
-            WeakReference<ClassLoader> weakRefToComponent = new WeakReference<ClassLoader>(componentLoader);
+            final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<ClassLoader>(componentLoader);
             componentLoader = null;
 
             // force garbage collection and  verify that the componentLoader
@@ -255,7 +255,7 @@ public class MemoryTestCase extends TestCase {
      * else we were not able to trigger garbage collection; there is no way
      * to tell these scenarios apart.</p>
      */
-    private void forceGarbageCollection(WeakReference<?> target) {
+    private void forceGarbageCollection(final WeakReference<?> target) {
         int bytes = 2;
 
         while(target.get() != null) {
@@ -268,9 +268,10 @@ public class MemoryTestCase extends TestCase {
             // this easily-reclaimable memory!
             try {
                 @SuppressWarnings("unused")
+                final
                 byte[] b = new byte[bytes];
                 bytes = bytes * 2;
-            } catch(OutOfMemoryError e) {
+            } catch(final OutOfMemoryError e) {
                 // well that sure should have forced a garbage collection
                 // run to occur!
                 break;

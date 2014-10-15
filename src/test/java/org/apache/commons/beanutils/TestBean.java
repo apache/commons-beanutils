@@ -44,60 +44,60 @@ public class TestBean implements Serializable {
         listIndexed.add("String 4");
     }
 
-    public TestBean(String stringProperty) {
+    public TestBean(final String stringProperty) {
         setStringProperty(stringProperty);
     }
 
-    public TestBean(float floatProperty) {
+    public TestBean(final float floatProperty) {
         setFloatProperty(floatProperty);
     }
 
-    public TestBean(boolean booleanProperty) {
+    public TestBean(final boolean booleanProperty) {
         setBooleanProperty(booleanProperty);
     }
 
-    public TestBean(Boolean booleanSecond) {
+    public TestBean(final Boolean booleanSecond) {
         setBooleanSecond(booleanSecond.booleanValue());
     }
 
-    public TestBean(float floatProperty, String stringProperty) {
+    public TestBean(final float floatProperty, final String stringProperty) {
         setFloatProperty(floatProperty);
         setStringProperty(stringProperty);
     }
 
-    public TestBean(boolean booleanProperty, String stringProperty) {
+    public TestBean(final boolean booleanProperty, final String stringProperty) {
         setBooleanProperty(booleanProperty);
         setStringProperty(stringProperty);
     }
 
-    public TestBean(Boolean booleanSecond, String stringProperty) {
+    public TestBean(final Boolean booleanSecond, final String stringProperty) {
         setBooleanSecond(booleanSecond.booleanValue());
         setStringProperty(stringProperty);
     }
 
-    public TestBean(Integer intProperty) {
+    public TestBean(final Integer intProperty) {
         setIntProperty(intProperty.intValue());
     }
 
-   public TestBean(double doubleProperty) {
+   public TestBean(final double doubleProperty) {
        setDoubleProperty(doubleProperty);
    }
 
-    TestBean(int intProperty) {
+    TestBean(final int intProperty) {
         setIntProperty(intProperty);
     }
 
-    protected TestBean(boolean booleanProperty, boolean booleanSecond, String stringProperty) {
+    protected TestBean(final boolean booleanProperty, final boolean booleanSecond, final String stringProperty) {
         setBooleanProperty(booleanProperty);
         setBooleanSecond(booleanSecond);
         setStringProperty(stringProperty);
     }
 
-    public TestBean(List<Object> listIndexed) {
+    public TestBean(final List<Object> listIndexed) {
         this.listIndexed = listIndexed;
     }
 
-    public TestBean(String[][] string2dArray) {
+    public TestBean(final String[][] string2dArray) {
         this.string2dArray = string2dArray;
     }
 
@@ -113,7 +113,7 @@ public class TestBean implements Serializable {
         return (booleanProperty);
     }
 
-    public void setBooleanProperty(boolean booleanProperty) {
+    public void setBooleanProperty(final boolean booleanProperty) {
         this.booleanProperty = booleanProperty;
     }
 
@@ -127,7 +127,7 @@ public class TestBean implements Serializable {
         return (booleanSecond);
     }
 
-    public void setBooleanSecond(boolean booleanSecond) {
+    public void setBooleanSecond(final boolean booleanSecond) {
         this.booleanSecond = booleanSecond;
     }
 
@@ -141,7 +141,7 @@ public class TestBean implements Serializable {
         return (this.byteProperty);
     }
 
-    public void setByteProperty(byte byteProperty) {
+    public void setByteProperty(final byte byteProperty) {
         this.byteProperty = byteProperty;
     }
 
@@ -155,7 +155,7 @@ public class TestBean implements Serializable {
         return dateProperty;
     }
 
-    public void setDateProperty(java.util.Date dateProperty) {
+    public void setDateProperty(final java.util.Date dateProperty) {
         this.dateProperty = dateProperty;
     }
 
@@ -168,7 +168,7 @@ public class TestBean implements Serializable {
         return dateArrayProperty;
     }
 
-    public void setDateArrayProperty(java.util.Date[] dateArrayProperty) {
+    public void setDateArrayProperty(final java.util.Date[] dateArrayProperty) {
         this.dateArrayProperty = dateArrayProperty;
     }
 
@@ -181,7 +181,7 @@ public class TestBean implements Serializable {
         return (this.doubleProperty);
     }
 
-    public void setDoubleProperty(double doubleProperty) {
+    public void setDoubleProperty(final double doubleProperty) {
         this.doubleProperty = doubleProperty;
     }
 
@@ -197,15 +197,15 @@ public class TestBean implements Serializable {
         return (this.dupProperty);
     }
 
-    public String getDupProperty(int index) {
+    public String getDupProperty(final int index) {
         return (this.dupProperty[index]);
     }
 
-    public void setDupProperty(int index, String value) {
+    public void setDupProperty(final int index, final String value) {
         this.dupProperty[index] = value;
     }
 
-    public void setDupProperty(String[] dupProperty) {
+    public void setDupProperty(final String[] dupProperty) {
         this.dupProperty = dupProperty;
     }
 
@@ -219,7 +219,7 @@ public class TestBean implements Serializable {
         return (this.floatProperty);
     }
 
-    public void setFloatProperty(float floatProperty) {
+    public void setFloatProperty(final float floatProperty) {
         this.floatProperty = floatProperty;
     }
 
@@ -233,7 +233,7 @@ public class TestBean implements Serializable {
         return (this.intArray);
     }
 
-    public void setIntArray(int[] intArray) {
+    public void setIntArray(final int[] intArray) {
         this.intArray = intArray;
     }
 
@@ -243,11 +243,11 @@ public class TestBean implements Serializable {
      */
     private final int intIndexed[] = { 0, 10, 20, 30, 40 };
 
-    public int getIntIndexed(int index) {
+    public int getIntIndexed(final int index) {
         return (intIndexed[index]);
     }
 
-    public void setIntIndexed(int index, int value) {
+    public void setIntIndexed(final int index, final int value) {
         intIndexed[index] = value;
     }
 
@@ -261,7 +261,7 @@ public class TestBean implements Serializable {
         return (this.intProperty);
     }
 
-    public void setIntProperty(int intProperty) {
+    public void setIntProperty(final int intProperty) {
         this.intProperty = intProperty;
     }
 
@@ -285,7 +285,7 @@ public class TestBean implements Serializable {
         return (this.longProperty);
     }
 
-    public void setLongProperty(long longProperty) {
+    public void setLongProperty(final long longProperty) {
         this.longProperty = longProperty;
     }
 
@@ -321,7 +321,7 @@ public class TestBean implements Serializable {
      */
     private HashMap<String, Object> mappedObjects = null;
 
-    public Object getMappedObjects(String key) {
+    public Object getMappedObjects(final String key) {
         // Create the map the very first time
         if (mappedObjects == null) {
             mappedObjects = new HashMap<String, Object>();
@@ -331,7 +331,7 @@ public class TestBean implements Serializable {
         return (mappedObjects.get(key));
     }
 
-    public void setMappedObjects(String key, Object value) {
+    public void setMappedObjects(final String key, final Object value) {
         // Create the map the very first time
         if (mappedObjects == null) {
             mappedObjects = new HashMap<String, Object>();
@@ -347,7 +347,7 @@ public class TestBean implements Serializable {
      */
     private HashMap<String, String> mappedProperty = null;
 
-    public String getMappedProperty(String key) {
+    public String getMappedProperty(final String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
             mappedProperty = new HashMap<String, String>();
@@ -357,7 +357,7 @@ public class TestBean implements Serializable {
         return (mappedProperty.get(key));
     }
 
-    public void setMappedProperty(String key, String value) {
+    public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
             mappedProperty = new HashMap<String, String>();
@@ -373,18 +373,18 @@ public class TestBean implements Serializable {
      */
     private HashMap<String, Integer> mappedIntProperty = null;
 
-    public int getMappedIntProperty(String key) {
+    public int getMappedIntProperty(final String key) {
         // Create the map the very first time
         if (mappedIntProperty == null) {
             mappedIntProperty = new HashMap<String, Integer>();
             mappedIntProperty.put("One", 1);
             mappedIntProperty.put("Two", 2);
         }
-        Integer x = mappedIntProperty.get(key);
+        final Integer x = mappedIntProperty.get(key);
         return ((x == null) ? 0 : x.intValue());
     }
 
-    public void setMappedIntProperty(String key, int value) {
+    public void setMappedIntProperty(final String key, final int value) {
         mappedIntProperty.put(key, value);
     }
 
@@ -410,7 +410,7 @@ public class TestBean implements Serializable {
       return anotherNested;
    }
 
-   public void setAnotherNested( TestBean anotherNested ) {
+   public void setAnotherNested( final TestBean anotherNested ) {
       this.anotherNested = anotherNested;
    }
 
@@ -423,7 +423,7 @@ public class TestBean implements Serializable {
       return nestedDynaBean;
    }
 
-   public void setNestedDynaBean(DynaBean nestedDynaBean) {
+   public void setNestedDynaBean(final DynaBean nestedDynaBean) {
       this.nestedDynaBean = nestedDynaBean;
    }
 
@@ -431,8 +431,8 @@ public class TestBean implements Serializable {
      * Another nested reference to a bean containing mapp properties
      */
     public class MappedTestBean {
-        public void setValue(String key,String val) { }
-        public String getValue(String key) { return "Mapped Value"; }
+        public void setValue(final String key,final String val) { }
+        public String getValue(final String key) { return "Mapped Value"; }
     }
 
     private MappedTestBean mappedNested = null;
@@ -454,7 +454,7 @@ public class TestBean implements Serializable {
         return (this.nullProperty);
     }
 
-    public void setNullProperty(String nullProperty) {
+    public void setNullProperty(final String nullProperty) {
         this.nullProperty = nullProperty;
     }
 
@@ -478,7 +478,7 @@ public class TestBean implements Serializable {
         return (this.shortProperty);
     }
 
-    public void setShortProperty(short shortProperty) {
+    public void setShortProperty(final short shortProperty) {
         this.shortProperty = shortProperty;
     }
 
@@ -493,7 +493,7 @@ public class TestBean implements Serializable {
         return (this.stringArray);
     }
 
-    public void setStringArray(String[] stringArray) {
+    public void setStringArray(final String[] stringArray) {
         this.stringArray = stringArray;
     }
 
@@ -504,16 +504,16 @@ public class TestBean implements Serializable {
     private final String[] stringIndexed =
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
-    public String getStringIndexed(int index) {
+    public String getStringIndexed(final int index) {
         return (stringIndexed[index]);
     }
 
-    public void setStringIndexed(int index, String value) {
+    public void setStringIndexed(final int index, final String value) {
         stringIndexed[index] = value;
     }
 
     private String[][] string2dArray = new String[][] {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
-    public String[] getString2dArray(int index) {
+    public String[] getString2dArray(final int index) {
         return string2dArray[index];
     }
 
@@ -526,7 +526,7 @@ public class TestBean implements Serializable {
         return (this.stringProperty);
     }
 
-    public void setStringProperty(String stringProperty) {
+    public void setStringProperty(final String stringProperty) {
         this.stringProperty = stringProperty;
     }
 
@@ -540,7 +540,7 @@ public class TestBean implements Serializable {
         return (this.writeOnlyProperty);
     }
 
-    public void setWriteOnlyProperty(String writeOnlyProperty) {
+    public void setWriteOnlyProperty(final String writeOnlyProperty) {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
@@ -564,7 +564,7 @@ public class TestBean implements Serializable {
         return (this.invalidBoolean);
     }
 
-    public void setInvalidBoolean(String invalidBoolean) {
+    public void setInvalidBoolean(final String invalidBoolean) {
         if ("true".equalsIgnoreCase(invalidBoolean) ||
             "yes".equalsIgnoreCase(invalidBoolean) ||
             "1".equalsIgnoreCase(invalidBoolean)) {
@@ -610,7 +610,7 @@ public class TestBean implements Serializable {
      *
      * @param amount Amount to be added to the current counter
      */
-    public static void incrementCounter(int amount) {
+    public static void incrementCounter(final int amount) {
 
         counter += amount;
 
@@ -622,7 +622,7 @@ public class TestBean implements Serializable {
      * as the method above so as to test the looseness
      * of getMethod.
      */
-    public static void incrementCounter(Number amount) {
+    public static void incrementCounter(final Number amount) {
         counter += 2 * amount.intValue();
     }
 

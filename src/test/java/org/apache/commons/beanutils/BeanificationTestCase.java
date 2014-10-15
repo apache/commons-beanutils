@@ -54,7 +54,7 @@ public class BeanificationTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public BeanificationTestCase(String name) {
+    public BeanificationTestCase(final String name) {
         super(name);
     }
 
@@ -97,7 +97,7 @@ public class BeanificationTestCase extends TestCase {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        WeakReference<ClassLoader> reference = new  WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> reference = new  WeakReference<ClassLoader>(loader);
         @SuppressWarnings("unused")
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
@@ -120,6 +120,7 @@ public class BeanificationTestCase extends TestCase {
             } else {
                 // create garbage:
                 @SuppressWarnings("unused")
+                final
                 byte[] b =  new byte[bytz];
                 bytz = bytz * 2;
             }
@@ -137,13 +138,13 @@ public class BeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        ReferenceQueue<Object> queue = new ReferenceQueue<Object>();
-        WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
+        final ReferenceQueue<Object> queue = new ReferenceQueue<Object>();
+        final WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
         Integer test = new Integer(1);
 
-        WeakReference<Integer> testReference = new WeakReference<Integer>(test, queue);
+        final WeakReference<Integer> testReference = new WeakReference<Integer>(test, queue);
         //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
-        Map<Object, Object> map = new WeakHashMap<Object, Object>();
+        final Map<Object, Object> map = new WeakHashMap<Object, Object>();
         map.put(loader, test);
 
         assertEquals("In map", test, map.get(loader));
@@ -171,6 +172,7 @@ public class BeanificationTestCase extends TestCase {
             } else {
                 // create garbage:
                 @SuppressWarnings("unused")
+                final
                 byte[] b =  new byte[bytz];
                 bytz = bytz * 2;
             }
@@ -186,7 +188,7 @@ public class BeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        WeakReference<ClassLoader> loaderReference = new  WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> loaderReference = new  WeakReference<ClassLoader>(loader);
         BeanUtilsBean.getInstance();
 
         class GetBeanUtilsBeanThread extends Thread {
@@ -215,15 +217,16 @@ public class BeanificationTestCase extends TestCase {
 
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         @SuppressWarnings("unused")
+        final
         WeakReference<Thread> threadWeakReference = new WeakReference<Thread>(thread);
         thread.setContextClassLoader(loader);
 
         thread.start();
         thread.join();
 
-        WeakReference<BeanUtilsBean> beanUtilsReference = new WeakReference<BeanUtilsBean>(thread.beanUtils);
-        WeakReference<PropertyUtilsBean> propertyUtilsReference =  new WeakReference<PropertyUtilsBean>(thread.propertyUtils);
-        WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<ConvertUtilsBean>(thread.convertUtils);
+        final WeakReference<BeanUtilsBean> beanUtilsReference = new WeakReference<BeanUtilsBean>(thread.beanUtils);
+        final WeakReference<PropertyUtilsBean> propertyUtilsReference =  new WeakReference<PropertyUtilsBean>(thread.propertyUtils);
+        final WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<ConvertUtilsBean>(thread.convertUtils);
 
         assertNotNull("Weak reference released early (1)", loaderReference.get());
         assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
@@ -254,6 +257,7 @@ public class BeanificationTestCase extends TestCase {
             } else {
                 // create garbage:
                 @SuppressWarnings("unused")
+                final
                 byte[] b =  new byte[bytz];
                 bytz = bytz * 2;
             }
@@ -270,7 +274,7 @@ public class BeanificationTestCase extends TestCase {
 
             private final Signal signal;
 
-            GetBeanUtilsBeanThread(Signal signal) {
+            GetBeanUtilsBeanThread(final Signal signal) {
                 this.signal = signal;
             }
 
@@ -288,10 +292,10 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-        Signal signal = new Signal();
+        final Signal signal = new Signal();
         signal.setSignal(1);
 
-        GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread(signal);
+        final GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread(signal);
         thread.setContextClassLoader(new TestClassLoader());
 
         thread.start();
@@ -321,7 +325,7 @@ public class BeanificationTestCase extends TestCase {
             private final Signal signal;
             private final ContextClassLoaderLocal<Integer> ccll;
 
-            CCLLTesterThread(Signal signal, ContextClassLoaderLocal<Integer> ccll) {
+            CCLLTesterThread(final Signal signal, final ContextClassLoaderLocal<Integer> ccll) {
                 this.signal = signal;
                 this.ccll = ccll;
             }
@@ -339,14 +343,14 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-        ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<Integer>();
+        final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<Integer>();
         ccll.set(new Integer(1776));
         assertEquals("Start thread sets value", new Integer(1776), ccll.get());
 
-        Signal signal = new Signal();
+        final Signal signal = new Signal();
         signal.setSignal(1);
 
-        CCLLTesterThread thread = new CCLLTesterThread(signal, ccll);
+        final CCLLTesterThread thread = new CCLLTesterThread(signal, ccll);
         thread.setContextClassLoader(new TestClassLoader());
 
         thread.start();
@@ -364,7 +368,7 @@ public class BeanificationTestCase extends TestCase {
             private final Signal signal;
             private final PrimitiveBean bean;
 
-            TestIndependenceThread(Signal signal, PrimitiveBean bean) {
+            TestIndependenceThread(final Signal signal, final PrimitiveBean bean) {
                 this.signal = signal;
                 this.bean = bean;
             }
@@ -374,12 +378,12 @@ public class BeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     ConvertUtils.register(new Converter() {
-                                            public <T> T convert(Class<T> type, Object value) {
+                                            public <T> T convert(final Class<T> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(new Integer(9));
                                             }
                                                 }, Integer.TYPE);
                     BeanUtils.setProperty(bean, "int", new Integer(1));
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                     signal.setException(e);
                 }
@@ -391,21 +395,21 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-        PrimitiveBean bean = new PrimitiveBean();
+        final PrimitiveBean bean = new PrimitiveBean();
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         ConvertUtils.register(new Converter() {
-                                public <T> T convert(Class<T> type, Object value) {
+                                public <T> T convert(final Class<T> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
                                 }
                                     }, Integer.TYPE);
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value(2)", 5, bean.getInt());
 
-        Signal signal = new Signal();
+        final Signal signal = new Signal();
         signal.setSignal(1);
-        TestIndependenceThread thread = new TestIndependenceThread(signal, bean);
+        final TestIndependenceThread thread = new TestIndependenceThread(signal, bean);
         thread.setContextClassLoader(new TestClassLoader());
 
         thread.start();
@@ -425,7 +429,7 @@ public class BeanificationTestCase extends TestCase {
             private final Signal signal;
             private final BeanUtilsBean bean;
 
-            SetInstanceTesterThread(Signal signal, BeanUtilsBean bean) {
+            SetInstanceTesterThread(final Signal signal, final BeanUtilsBean bean) {
                 this.signal = signal;
                 this.bean = bean;
             }
@@ -443,13 +447,13 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-        Signal signal = new Signal();
+        final Signal signal = new Signal();
         signal.setSignal(1);
 
-        BeanUtilsBean beanOne = new BeanUtilsBean();
-        BeanUtilsBean beanTwo = new BeanUtilsBean();
+        final BeanUtilsBean beanOne = new BeanUtilsBean();
+        final BeanUtilsBean beanTwo = new BeanUtilsBean();
 
-        SetInstanceTesterThread thread = new SetInstanceTesterThread(signal, beanTwo);
+        final SetInstanceTesterThread thread = new SetInstanceTesterThread(signal, beanTwo);
         thread.setContextClassLoader(new TestClassLoader());
 
         BeanUtilsBean.setInstance(beanOne);
@@ -465,8 +469,8 @@ public class BeanificationTestCase extends TestCase {
 
     /** Tests whether the unset method works*/
     public void testContextClassLoaderUnset() throws Exception {
-        BeanUtilsBean beanOne = new BeanUtilsBean();
-        ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<BeanUtilsBean>();
+        final BeanUtilsBean beanOne = new BeanUtilsBean();
+        final ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<BeanUtilsBean>();
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
@@ -494,7 +498,7 @@ public class BeanificationTestCase extends TestCase {
             return e;
         }
 
-        public void setException(Exception e) {
+        public void setException(final Exception e) {
             this.e = e;
         }
 
@@ -502,7 +506,7 @@ public class BeanificationTestCase extends TestCase {
             return signal;
         }
 
-        public void setSignal(int signal) {
+        public void setSignal(final int signal) {
             this.signal = signal;
         }
 
@@ -510,7 +514,7 @@ public class BeanificationTestCase extends TestCase {
             return marker;
         }
 
-        public void setMarkerObject(Object marker) {
+        public void setMarkerObject(final Object marker) {
             this.marker = marker;
         }
 
@@ -518,7 +522,7 @@ public class BeanificationTestCase extends TestCase {
             return bean;
         }
 
-        public void setBean(BeanUtilsBean bean) {
+        public void setBean(final BeanUtilsBean bean) {
             this.bean = bean;
         }
 
@@ -526,7 +530,7 @@ public class BeanificationTestCase extends TestCase {
             return propertyUtils;
         }
 
-        public void setPropertyUtils(PropertyUtilsBean propertyUtils) {
+        public void setPropertyUtils(final PropertyUtilsBean propertyUtils) {
             this.propertyUtils = propertyUtils;
         }
 
@@ -534,7 +538,7 @@ public class BeanificationTestCase extends TestCase {
             return convertUtils;
         }
 
-        public void setConvertUtils(ConvertUtilsBean convertUtils) {
+        public void setConvertUtils(final ConvertUtilsBean convertUtils) {
             this.convertUtils = convertUtils;
         }
     }

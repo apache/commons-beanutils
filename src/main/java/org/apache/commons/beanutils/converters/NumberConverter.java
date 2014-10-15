@@ -100,7 +100,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @param allowDecimals Indicates whether decimals are allowed
      */
-    public NumberConverter(boolean allowDecimals) {
+    public NumberConverter(final boolean allowDecimals) {
         super();
         this.allowDecimals = allowDecimals;
     }
@@ -112,7 +112,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param allowDecimals Indicates whether decimals are allowed
      * @param defaultValue The default value to be returned
      */
-    public NumberConverter(boolean allowDecimals, Object defaultValue) {
+    public NumberConverter(final boolean allowDecimals, final Object defaultValue) {
         super();
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
@@ -136,7 +136,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param useLocaleFormat <code>true</code> if a number format
      * should be used.
      */
-    public void setUseLocaleFormat(boolean useLocaleFormat) {
+    public void setUseLocaleFormat(final boolean useLocaleFormat) {
         this.useLocaleFormat = useLocaleFormat;
     }
 
@@ -163,7 +163,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @param pattern The format pattern.
      */
-    public void setPattern(String pattern) {
+    public void setPattern(final String pattern) {
         this.pattern = pattern;
         setUseLocaleFormat(true);
     }
@@ -183,7 +183,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @param locale The locale to use for conversion
      */
-    public void setLocale(Locale locale) {
+    public void setLocale(final Locale locale) {
         this.locale = locale;
         setUseLocaleFormat(true);
     }
@@ -198,11 +198,11 @@ public abstract class NumberConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to a String
      */
     @Override
-    protected String convertToString(Object value) throws Throwable {
+    protected String convertToString(final Object value) throws Throwable {
 
         String result = null;
         if (useLocaleFormat && value instanceof Number) {
-            NumberFormat format = getFormat();
+            final NumberFormat format = getFormat();
             format.setGroupingUsed(false);
             result = format.format(value);
             if (log().isDebugEnabled()) {
@@ -230,9 +230,9 @@ public abstract class NumberConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      */
     @Override
-    protected <T> T convertToType(Class<T> targetType, Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> targetType, final Object value) throws Throwable {
 
-        Class<?> sourceType = value.getClass();
+        final Class<?> sourceType = value.getClass();
         // Handle Number
         if (value instanceof Number) {
             return toNumber(sourceType, targetType, (Number)value);
@@ -254,7 +254,7 @@ public abstract class NumberConverter extends AbstractConverter {
         }
 
         // Convert all other types to String & handle
-        String stringValue = value.toString().trim();
+        final String stringValue = value.toString().trim();
         if (stringValue.length() == 0) {
             return handleMissing(targetType);
         }
@@ -262,7 +262,7 @@ public abstract class NumberConverter extends AbstractConverter {
         // Convert/Parse a String
         Number number = null;
         if (useLocaleFormat) {
-            NumberFormat format = getFormat();
+            final NumberFormat format = getFormat();
             number = parse(sourceType, targetType, stringValue, format);
         } else {
             if (log().isDebugEnabled()) {
@@ -297,7 +297,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @return The converted value.
      */
-    private <T> T toNumber(Class<?> sourceType, Class<T> targetType, Number value) {
+    private <T> T toNumber(final Class<?> sourceType, final Class<T> targetType, final Number value) {
 
         // Correct Number type already
         if (targetType.equals(value.getClass())) {
@@ -306,7 +306,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Byte
         if (targetType.equals(Byte.class)) {
-            long longValue = value.longValue();
+            final long longValue = value.longValue();
             if (longValue > Byte.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too large for " + toString(targetType));
@@ -320,7 +320,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Short
         if (targetType.equals(Short.class)) {
-            long longValue = value.longValue();
+            final long longValue = value.longValue();
             if (longValue > Short.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too large for " + toString(targetType));
@@ -334,7 +334,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Integer
         if (targetType.equals(Integer.class)) {
-            long longValue = value.longValue();
+            final long longValue = value.longValue();
             if (longValue > Integer.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too large for " + toString(targetType));
@@ -387,7 +387,7 @@ public abstract class NumberConverter extends AbstractConverter {
             }
         }
 
-        String msg = toString(getClass()) + " cannot handle conversion to '"
+        final String msg = toString(getClass()) + " cannot handle conversion to '"
                    + toString(targetType) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
@@ -416,7 +416,7 @@ public abstract class NumberConverter extends AbstractConverter {
      *
      * @return The converted Number value.
      */
-    private Number toNumber(Class<?> sourceType, Class<?> targetType, String value) {
+    private Number toNumber(final Class<?> sourceType, final Class<?> targetType, final String value) {
 
         // Byte
         if (targetType.equals(Byte.class)) {
@@ -458,7 +458,7 @@ public abstract class NumberConverter extends AbstractConverter {
             return new BigInteger(value);
         }
 
-        String msg = toString(getClass()) + " cannot handle conversion from '" +
+        final String msg = toString(getClass()) + " cannot handle conversion from '" +
                      toString(sourceType) + "' to '" + toString(targetType) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
@@ -473,7 +473,7 @@ public abstract class NumberConverter extends AbstractConverter {
      */
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
         buffer.append(toString(getClass()));
         buffer.append("[UseDefault=");
         buffer.append(isUseDefault());
@@ -509,7 +509,7 @@ public abstract class NumberConverter extends AbstractConverter {
                     log().debug("    Using pattern '" + pattern + "'" +
                               " with Locale[" + locale + "]");
                 }
-                DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
+                final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
                 format = new DecimalFormat(pattern, symbols);
             }
         } else {
@@ -541,9 +541,9 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted Number object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Number parse(Class<?> sourceType, Class<?> targetType, String value, NumberFormat format) {
-        ParsePosition pos = new ParsePosition(0);
-        Number parsedNumber = format.parse(value, pos);
+    private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value, final NumberFormat format) {
+        final ParsePosition pos = new ParsePosition(0);
+        final Number parsedNumber = format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
             String msg = "Error converting from '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof DecimalFormat) {

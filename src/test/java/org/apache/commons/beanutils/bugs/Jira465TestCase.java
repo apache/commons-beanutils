@@ -47,35 +47,35 @@ public class Jira465TestCase extends TestCase {
      *
      * @param bean the bean to be updated
      */
-    private static void changeValue(Object bean) {
+    private static void changeValue(final Object bean) {
         try {
             BeanUtils.setProperty(bean, PATH, NEW_VALUE);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             fail("Could not set property: " + e);
         }
     }
 
     public void testArrayProperty() throws InvocationTargetException,
             IllegalAccessException {
-        ArrayProp bean = new ArrayProp();
+        final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);
     }
 
     public void testArrayIndexedProperty() {
-        ArrayIndexedProp bean = new ArrayIndexedProp();
+        final ArrayIndexedProp bean = new ArrayIndexedProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
 
     public void testListProperty() {
-        ListProp bean = new ListProp();
+        final ListProp bean = new ListProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo().get(0));
     }
 
     public void testListIndexedProperty() {
-        ListIndexedProp bean = new ListIndexedProp();
+        final ListIndexedProp bean = new ListIndexedProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
@@ -87,7 +87,7 @@ public class Jira465TestCase extends TestCase {
             return foo;
         }
 
-        public void setFoo(Object[] foo) {
+        public void setFoo(final Object[] foo) {
             this.foo = foo;
         }
     }
@@ -95,11 +95,11 @@ public class Jira465TestCase extends TestCase {
     public static class ArrayIndexedProp {
         private final Object[] foo = new Object[] { OLD_VALUE };
 
-        public Object getFoo(int i) {
+        public Object getFoo(final int i) {
             return foo[i];
         }
 
-        public void setFoo(int i, Object value) {
+        public void setFoo(final int i, final Object value) {
             this.foo[i] = value;
         }
     }
@@ -111,7 +111,7 @@ public class Jira465TestCase extends TestCase {
             return foo;
         }
 
-        public void setFoo(List<String> foo) {
+        public void setFoo(final List<String> foo) {
             this.foo = foo;
         }
     }
@@ -119,11 +119,11 @@ public class Jira465TestCase extends TestCase {
     public static class ListIndexedProp {
         private final List<String> foo = new ArrayList<String>(Arrays.asList(OLD_VALUE));
 
-        public String getFoo(int i) {
+        public String getFoo(final int i) {
             return foo.get(i);
         }
 
-        public void setFoo(int i, String value) {
+        public void setFoo(final int i, final String value) {
             this.foo.set(i, value);
         }
     }

@@ -34,7 +34,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * Construct a new Date test case.
      * @param name Test Name
      */
-    public SqlDateConverterTestCase(String name) {
+    public SqlDateConverterTestCase(final String name) {
         super(name);
     }
 
@@ -57,12 +57,12 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
+        final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Date Conversion
-        String testString = "2006-05-16";
-        Object expected = toType(testString, "yyyy-MM-dd", null);
+        final String testString = "2006-05-16";
+        final Object expected = toType(testString, "yyyy-MM-dd", null);
         validConversion(converter, expected, testString);
 
         // Invalid String --> java.sql.Date Conversion
@@ -75,15 +75,15 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
     public void testDefaultTypeToStringConvert() {
 
         // Create & Configure the Converter
-        DateTimeConverter converter = makeConverter();
+        final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Date Conversion
-        String expected  = "2006-05-16";
-        Object testVal   = toType(expected, "yyyy-MM-dd", null);
+        final String expected  = "2006-05-16";
+        final Object testVal   = toType(expected, "yyyy-MM-dd", null);
         stringConversion(converter, expected, testVal);
 
-        Object result = converter.convert(String.class, new Integer(2));
+        final Object result = converter.convert(String.class, new Integer(2));
         assertEquals("Default toString()", "2", result);
     }
 
@@ -102,7 +102,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(Object defaultValue) {
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
         return new SqlDateConverter(defaultValue);
     }
 
@@ -122,7 +122,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(Calendar value) {
+    protected Object toType(final Calendar value) {
         return new java.sql.Date(getTimeInMillis(value));
     }
 

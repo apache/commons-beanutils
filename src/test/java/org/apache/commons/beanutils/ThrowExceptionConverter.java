@@ -30,7 +30,7 @@ package org.apache.commons.beanutils;
 
 public class ThrowExceptionConverter implements Converter {
 
-    public <T> T convert(Class<T> type, Object value) {
+    public <T> T convert(final Class<T> type, final Object value) {
         throw new PassTestException();
     }
 }

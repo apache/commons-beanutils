@@ -99,7 +99,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public RowSetDynaClass(ResultSet resultSet) throws SQLException {
+    public RowSetDynaClass(final ResultSet resultSet) throws SQLException {
 
         this(resultSet, true, -1);
 
@@ -121,7 +121,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public RowSetDynaClass(ResultSet resultSet, int limit) throws SQLException {
+    public RowSetDynaClass(final ResultSet resultSet, final int limit) throws SQLException {
 
         this(resultSet, true, limit);
 
@@ -146,7 +146,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase)
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
                                                     throws SQLException {
         this(resultSet, lowerCase, -1);
 
@@ -174,7 +174,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @exception SQLException if the metadata for this result set
      *  cannot be introspected
      */
-    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase, int limit)
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit)
                                                             throws SQLException {
 
         this(resultSet, lowerCase, limit, false);
@@ -204,7 +204,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *  cannot be introspected
      * @since 1.8.3
      */
-    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase, boolean useColumnLabel)
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
         this(resultSet, lowerCase, -1, useColumnLabel);
 
@@ -234,7 +234,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *  cannot be introspected
      * @since 1.8.3
      */
-    public RowSetDynaClass(ResultSet resultSet, boolean lowerCase, int limit, boolean useColumnLabel)
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit, final boolean useColumnLabel)
                                                             throws SQLException {
 
         if (resultSet == null) {
@@ -282,14 +282,14 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *
      * @exception SQLException if an error is encountered copying the data
      */
-    protected void copy(ResultSet resultSet) throws SQLException {
+    protected void copy(final ResultSet resultSet) throws SQLException {
 
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
-            DynaBean bean = createDynaBean();
+            final DynaBean bean = createDynaBean();
             for (int i = 0; i < properties.length; i++) {
-                String name = properties[i].getName();
-                Object value = getObject(resultSet, name);
+                final String name = properties[i].getName();
+                final Object value = getObject(resultSet, name);
                 bean.set(name, value);
             }
             rows.add(bean);

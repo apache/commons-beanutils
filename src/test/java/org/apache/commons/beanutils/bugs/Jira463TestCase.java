@@ -34,14 +34,14 @@ public class Jira463TestCase extends TestCase {
      * property can be suppressed.
      */
     public void testSuppressClassProperty() throws Exception {
-        BeanUtilsBean bub = new BeanUtilsBean();
+        final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().addBeanIntrospector(
                 SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
-        AlphaBean bean = new AlphaBean();
+        final AlphaBean bean = new AlphaBean();
         try {
             bub.getProperty(bean, "class");
             fail("Could access class property!");
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             // ok
         }
     }

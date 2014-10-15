@@ -30,11 +30,11 @@ public class FluentIntrospectionTestBean extends AlphaBean {
         return stringProperty;
     }
 
-    public void setStringProperty(String stringProperty) {
+    public void setStringProperty(final String stringProperty) {
         this.stringProperty = stringProperty;
     }
 
-    public FluentIntrospectionTestBean setFluentProperty(String value) {
+    public FluentIntrospectionTestBean setFluentProperty(final String value) {
         setStringProperty(value);
         return this;
     }
@@ -44,7 +44,7 @@ public class FluentIntrospectionTestBean extends AlphaBean {
     }
 
     public FluentIntrospectionTestBean setFluentGetProperty(
-            String fluentGetProperty) {
+            final String fluentGetProperty) {
         this.fluentGetProperty = fluentGetProperty;
         return this;
     }

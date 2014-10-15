@@ -70,7 +70,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      *
      * @param defaultValue The default value to be returned
      */
-    public BooleanArrayConverter(Object defaultValue) {
+    public BooleanArrayConverter(final Object defaultValue) {
 
         super(defaultValue);
         this.booleanConverter = DEFAULT_CONVERTER;
@@ -95,7 +95,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * specify that an exception should be thrown on conversion failure.
      *
      */
-    public BooleanArrayConverter(BooleanConverter converter, Object defaultValue) {
+    public BooleanArrayConverter(final BooleanConverter converter, final Object defaultValue) {
 
         super(defaultValue);
         this.booleanConverter = converter;
@@ -180,7 +180,7 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * array elements are null.
      */
     @Override
-    public Object convert(Class type, Object value) {
+    public Object convert(final Class type, final Object value) {
 
         // Deal with a null value
         if (value == null) {
@@ -202,15 +202,15 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         //  this requires casting to Object[], then using values[i].toString()
         if (strings.getClass() == value.getClass()) {
             try {
-                String[] values = (String[]) value;
-                boolean[] results = new boolean[values.length];
+                final String[] values = (String[]) value;
+                final boolean[] results = new boolean[values.length];
                 for (int i = 0; i < values.length; i++) {
-                    String stringValue = values[i];
-                    Object result = booleanConverter.convert(Boolean.class, stringValue);
+                    final String stringValue = values[i];
+                    final Object result = booleanConverter.convert(Boolean.class, stringValue);
                     results[i] = ((Boolean) result).booleanValue();
                 }
                 return (results);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 if (useDefault) {
                     return (defaultValue);
                 } else {
@@ -224,15 +224,15 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         // sequence of values; see method AbstractArrayConverter.parseElements
         // for more information.
         try {
-            List list = parseElements(value.toString());
-            boolean[] results = new boolean[list.size()];
+            final List list = parseElements(value.toString());
+            final boolean[] results = new boolean[list.size()];
             for (int i = 0; i < results.length; i++) {
-                String stringValue = (String) list.get(i);
-                Object result = booleanConverter.convert(Boolean.class, stringValue);
+                final String stringValue = (String) list.get(i);
+                final Object result = booleanConverter.convert(Boolean.class, stringValue);
                 results[i] = ((Boolean) result).booleanValue();
             }
             return (results);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
             } else {

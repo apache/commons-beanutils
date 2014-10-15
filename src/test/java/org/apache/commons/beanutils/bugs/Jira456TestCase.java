@@ -53,8 +53,8 @@ public class Jira456TestCase extends TestCase {
      * @throws Exception if an error occurs
      */
     private FluentIntrospectionTestBean clearWriteMethodRef() throws Exception {
-        FluentIntrospectionTestBean bean = new FluentIntrospectionTestBean();
-        PropertyDescriptor pd = pub.getPropertyDescriptor(bean, TEST_PROP);
+        final FluentIntrospectionTestBean bean = new FluentIntrospectionTestBean();
+        final PropertyDescriptor pd = pub.getPropertyDescriptor(bean, TEST_PROP);
 
         // simulate that the write method reference is freed
         pd.setWriteMethod(null);
@@ -65,7 +65,7 @@ public class Jira456TestCase extends TestCase {
      * Tests whether a lost write method is automatically recovered and can be invoked.
      */
     public void testWriteMethodRecover() throws Exception {
-        FluentIntrospectionTestBean bean = clearWriteMethodRef();
+        final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         final String value = "Test value";
         pub.setProperty(bean, TEST_PROP, value);
         assertEquals("Property not set", value, bean.getFluentGetProperty());
@@ -76,7 +76,7 @@ public class Jira456TestCase extends TestCase {
      * write method was freed.
      */
     public void testPropertyIsWritable() throws Exception {
-        FluentIntrospectionTestBean bean = clearWriteMethodRef();
+        final FluentIntrospectionTestBean bean = clearWriteMethodRef();
         assertTrue("Not writable", pub.isWriteable(bean, TEST_PROP));
     }
 }

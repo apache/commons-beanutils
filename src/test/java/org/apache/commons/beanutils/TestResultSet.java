@@ -86,9 +86,9 @@ public class TestResultSet implements InvocationHandler {
      * @param invocationHandler Invocation Handler
      * @return A result set proxy
      */
-    public static ResultSet createProxy(InvocationHandler invocationHandler) {
-        ClassLoader classLoader = ResultSet.class.getClassLoader();
-        Class<?>[] interfaces = new Class[] { ResultSet.class };
+    public static ResultSet createProxy(final InvocationHandler invocationHandler) {
+        final ClassLoader classLoader = ResultSet.class.getClassLoader();
+        final Class<?>[] interfaces = new Class[] { ResultSet.class };
         return (ResultSet)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
@@ -104,7 +104,7 @@ public class TestResultSet implements InvocationHandler {
      *
      * @param resultSetMetaData The result set meta data
      */
-    public TestResultSet(ResultSetMetaData resultSetMetaData) {
+    public TestResultSet(final ResultSetMetaData resultSetMetaData) {
         this.resultSetMetaData = resultSetMetaData;
     }
 
@@ -117,8 +117,8 @@ public class TestResultSet implements InvocationHandler {
      * @return The result of invoking the method.
      * @throws Throwable if an error occurs.
      */
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        String methodName = method.getName();
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        final String methodName = method.getName();
         if ("close".equals(methodName)) {
             return null;
         } if ("getMetaData".equals(methodName)) {
@@ -141,7 +141,7 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
-    private String columnName(Object arg) throws SQLException {
+    private String columnName(final Object arg) throws SQLException {
         if (arg instanceof Integer) {
             return resultSetMetaData.getColumnName(((Integer)arg).intValue());
         } else {
@@ -162,7 +162,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Object getObject(String columnName) throws SQLException {
+    public Object getObject(final String columnName) throws SQLException {
         if (row > 5) {
             throw new SQLException("No current row");
         }
@@ -201,15 +201,15 @@ public class TestResultSet implements InvocationHandler {
         }
     }
 
-    public Date getDate(String columnName) throws SQLException {
+    public Date getDate(final String columnName) throws SQLException {
         return (new Date(timestamp));
     }
 
-    public Time getTime(String columnName) throws SQLException {
+    public Time getTime(final String columnName) throws SQLException {
         return (new Time(timestamp));
     }
 
-    public Timestamp getTimestamp(String columnName) throws SQLException {
+    public Timestamp getTimestamp(final String columnName) throws SQLException {
         return (new Timestamp(timestamp));
     }
 
@@ -222,7 +222,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public void updateObject(String columnName, Object x)
+    public void updateObject(final String columnName, final Object x)
         throws SQLException {
         if (row > 5) {
             throw new SQLException("No current row");
@@ -234,7 +234,7 @@ public class TestResultSet implements InvocationHandler {
     // -------------------------------------------------- Unimplemented Methods
 
 
-    public boolean absolute(int row) throws SQLException {
+    public boolean absolute(final int row) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -264,7 +264,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public int findColumn(String columnName) throws SQLException {
+    public int findColumn(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -274,118 +274,118 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Array getArray(int columnIndex) throws SQLException {
+    public Array getArray(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Array getArray(String columnName) throws SQLException {
+    public Array getArray(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public InputStream getAsciiStream(int columnIndex) throws SQLException {
+    public InputStream getAsciiStream(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public InputStream getAsciiStream(String columnName) throws SQLException {
+    public InputStream getAsciiStream(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public BigDecimal getBigDecimal(int columnIndex) throws SQLException {
+    public BigDecimal getBigDecimal(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
     /** @deprecated */
     @Deprecated
-    public BigDecimal getBigDecimal(int columnIndex, int scale)
+    public BigDecimal getBigDecimal(final int columnIndex, final int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public BigDecimal getBigDecimal(String columnName) throws SQLException {
+    public BigDecimal getBigDecimal(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
     /** @deprecated */
     @Deprecated
-    public BigDecimal getBigDecimal(String columnName, int scale)
+    public BigDecimal getBigDecimal(final String columnName, final int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public InputStream getBinaryStream(int columnIndex) throws SQLException {
+    public InputStream getBinaryStream(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public InputStream getBinaryStream(String columnName) throws SQLException {
+    public InputStream getBinaryStream(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Blob getBlob(int columnIndex) throws SQLException {
+    public Blob getBlob(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Blob getBlob(String columnName) throws SQLException {
+    public Blob getBlob(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean getBoolean(int columnIndex) throws SQLException {
+    public boolean getBoolean(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public boolean getBoolean(String columnName) throws SQLException {
+    public boolean getBoolean(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public byte getByte(int columnIndex) throws SQLException {
+    public byte getByte(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public byte getByte(String columnName) throws SQLException {
+    public byte getByte(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public byte[] getBytes(int columnIndex) throws SQLException {
+    public byte[] getBytes(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public byte[] getBytes(String columnName) throws SQLException {
+    public byte[] getBytes(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Reader getCharacterStream(int columnIndex)
+    public Reader getCharacterStream(final int columnIndex)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Reader getCharacterStream(String columnName) throws SQLException {
+    public Reader getCharacterStream(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Clob getClob(int columnIndex) throws SQLException {
+    public Clob getClob(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Clob getClob(String columnName) throws SQLException {
+    public Clob getClob(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -400,29 +400,29 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public Date getDate(int columnIndex) throws SQLException {
+    public Date getDate(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Date getDate(int columnIndex, Calendar cal) throws SQLException {
+    public Date getDate(final int columnIndex, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
 
 
-    public Date getDate(String columnName, Calendar cal) throws SQLException {
+    public Date getDate(final String columnName, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public double getDouble(int columnIndex) throws SQLException {
+    public double getDouble(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public double getDouble(String columnName) throws SQLException {
+    public double getDouble(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -437,57 +437,57 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public float getFloat(int columnIndex) throws SQLException {
+    public float getFloat(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public float getFloat(String columnName) throws SQLException {
+    public float getFloat(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int getInt(int columnIndex) throws SQLException {
+    public int getInt(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public int getInt(String columnName) throws SQLException {
+    public int getInt(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public long getLong(int columnIndex) throws SQLException {
+    public long getLong(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public long getLong(String columnName) throws SQLException {
+    public long getLong(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object getObject(int columnIndex) throws SQLException {
+    public Object getObject(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object getObject(int columnIndex, Map<?, ?> map) throws SQLException {
+    public Object getObject(final int columnIndex, final Map<?, ?> map) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Object getObject(String columnName, Map<?, ?> map) throws SQLException {
+    public Object getObject(final String columnName, final Map<?, ?> map) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Ref getRef(int columnIndex) throws SQLException {
+    public Ref getRef(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Ref getRef(String columnName) throws SQLException {
+    public Ref getRef(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -497,12 +497,12 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public short getShort(int columnIndex) throws SQLException {
+    public short getShort(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public short getShort(String columnName) throws SQLException {
+    public short getShort(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -512,45 +512,45 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public String getString(int columnIndex) throws SQLException {
+    public String getString(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public String getString(String columnName) throws SQLException {
+    public String getString(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Time getTime(int columnIndex) throws SQLException {
+    public Time getTime(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Time getTime(int columnIndex, Calendar cal) throws SQLException {
+    public Time getTime(final int columnIndex, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
 
-    public Time getTime(String columnName, Calendar cal) throws SQLException {
+    public Time getTime(final String columnName, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Timestamp getTimestamp(int columnIndex) throws SQLException {
+    public Timestamp getTimestamp(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public Timestamp getTimestamp(int columnIndex, Calendar cal)
+    public Timestamp getTimestamp(final int columnIndex, final Calendar cal)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
 
-    public Timestamp getTimestamp(String columnName, Calendar cal)
+    public Timestamp getTimestamp(final String columnName, final Calendar cal)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -563,24 +563,24 @@ public class TestResultSet implements InvocationHandler {
 
     /** @deprecated */
     @Deprecated
-    public InputStream getUnicodeStream(int columnIndex) throws SQLException {
+    public InputStream getUnicodeStream(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
     /** @deprecated */
     @Deprecated
-    public InputStream getUnicodeStream(String columnName) throws SQLException {
+    public InputStream getUnicodeStream(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public URL getURL(int columnIndex) throws SQLException {
+    public URL getURL(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public URL getURL(String columnName) throws SQLException {
+    public URL getURL(final String columnName) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -640,7 +640,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public boolean relative(int rows) throws SQLException {
+    public boolean relative(final int rows) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
@@ -660,233 +660,233 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public void setFetchDirection(int direction) throws SQLException {
+    public void setFetchDirection(final int direction) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void setFetchSize(int size) throws SQLException {
+    public void setFetchSize(final int size) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateArray(int columnPosition, Array x)
+    public void updateArray(final int columnPosition, final Array x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateArray(String columnName, Array x)
+    public void updateArray(final String columnName, final Array x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateAsciiStream(int columnPosition, InputStream x, int len)
+    public void updateAsciiStream(final int columnPosition, final InputStream x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateAsciiStream(String columnName, InputStream x, int len)
+    public void updateAsciiStream(final String columnName, final InputStream x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBigDecimal(int columnPosition, BigDecimal x)
+    public void updateBigDecimal(final int columnPosition, final BigDecimal x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBigDecimal(String columnName, BigDecimal x)
+    public void updateBigDecimal(final String columnName, final BigDecimal x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBinaryStream(int columnPosition, InputStream x, int len)
+    public void updateBinaryStream(final int columnPosition, final InputStream x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBinaryStream(String columnName, InputStream x, int len)
+    public void updateBinaryStream(final String columnName, final InputStream x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBlob(int columnPosition, Blob x)
+    public void updateBlob(final int columnPosition, final Blob x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBlob(String columnName, Blob x)
+    public void updateBlob(final String columnName, final Blob x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBoolean(int columnPosition, boolean x)
+    public void updateBoolean(final int columnPosition, final boolean x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBoolean(String columnName, boolean x)
+    public void updateBoolean(final String columnName, final boolean x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateByte(int columnPosition, byte x)
+    public void updateByte(final int columnPosition, final byte x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateByte(String columnName, byte x)
+    public void updateByte(final String columnName, final byte x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBytes(int columnPosition, byte x[])
+    public void updateBytes(final int columnPosition, final byte x[])
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateBytes(String columnName, byte x[])
+    public void updateBytes(final String columnName, final byte x[])
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateCharacterStream(int columnPosition, Reader x, int len)
+    public void updateCharacterStream(final int columnPosition, final Reader x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateCharacterStream(String columnName, Reader x, int len)
+    public void updateCharacterStream(final String columnName, final Reader x, final int len)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateClob(int columnPosition, Clob x)
+    public void updateClob(final int columnPosition, final Clob x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateClob(String columnName, Clob x)
+    public void updateClob(final String columnName, final Clob x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateDate(int columnPosition, Date x)
+    public void updateDate(final int columnPosition, final Date x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateDate(String columnName, Date x)
+    public void updateDate(final String columnName, final Date x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateDouble(int columnPosition, double x)
+    public void updateDouble(final int columnPosition, final double x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateDouble(String columnName, double x)
+    public void updateDouble(final String columnName, final double x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateFloat(int columnPosition, float x)
+    public void updateFloat(final int columnPosition, final float x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateFloat(String columnName, float x)
+    public void updateFloat(final String columnName, final float x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateInt(int columnPosition, int x)
+    public void updateInt(final int columnPosition, final int x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateInt(String columnName, int x)
+    public void updateInt(final String columnName, final int x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateLong(int columnPosition, long x)
+    public void updateLong(final int columnPosition, final long x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateLong(String columnName, long x)
+    public void updateLong(final String columnName, final long x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateNull(int columnPosition)
+    public void updateNull(final int columnPosition)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateNull(String columnName)
+    public void updateNull(final String columnName)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateObject(int columnPosition, Object x)
+    public void updateObject(final int columnPosition, final Object x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateObject(int columnPosition, Object x, int scale)
+    public void updateObject(final int columnPosition, final Object x, final int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateObject(String columnName, Object x, int scale)
+    public void updateObject(final String columnName, final Object x, final int scale)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateRef(int columnPosition, Ref x)
+    public void updateRef(final int columnPosition, final Ref x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateRef(String columnName, Ref x)
+    public void updateRef(final String columnName, final Ref x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -897,49 +897,49 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    public void updateShort(int columnPosition, short x)
+    public void updateShort(final int columnPosition, final short x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateShort(String columnName, short x)
+    public void updateShort(final String columnName, final short x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateString(int columnPosition, String x)
+    public void updateString(final int columnPosition, final String x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateString(String columnName, String x)
+    public void updateString(final String columnName, final String x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateTime(int columnPosition, Time x)
+    public void updateTime(final int columnPosition, final Time x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateTime(String columnName, Time x)
+    public void updateTime(final String columnName, final Time x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateTimestamp(int columnPosition, Timestamp x)
+    public void updateTimestamp(final int columnPosition, final Timestamp x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
 
-    public void updateTimestamp(String columnName, Timestamp x)
+    public void updateTimestamp(final String columnName, final Timestamp x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }

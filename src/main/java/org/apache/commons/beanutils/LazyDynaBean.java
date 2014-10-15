@@ -168,7 +168,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of this DynaBean class
      */
-    public LazyDynaBean(String name) {
+    public LazyDynaBean(final String name) {
         this(new LazyDynaClass(name));
     }
 
@@ -179,7 +179,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param dynaClass The DynaClass we are associated with
      */
-    public LazyDynaBean(DynaClass dynaClass) {
+    public LazyDynaBean(final DynaClass dynaClass) {
 
         values = newMap();
 
@@ -218,13 +218,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The indexed or mapped property size
      * @exception IllegalArgumentException if no property name is specified
      */
-    public int size(String name) {
+    public int size(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
 
-        Object value = values.get(name);
+        final Object value = values.get(name);
         if (value == null) {
             return 0;
         }
@@ -258,13 +258,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @exception IllegalArgumentException if no property name is specified
      */
-    public boolean contains(String name, String key) {
+    public boolean contains(final String name, final String key) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
 
-        Object value = values.get(name);
+        final Object value = values.get(name);
         if (value == null) {
             return false;
         }
@@ -287,7 +287,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The property's value
      * @exception IllegalArgumentException if no property name is specified
      */
-    public Object get(String name) {
+    public Object get(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
@@ -330,7 +330,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
-    public Object get(String name, int index) {
+    public Object get(final String name, final int index) {
 
         // If its not a property, then create default indexed property
         if (!isDynaProperty(name)) {
@@ -376,7 +376,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public Object get(String name, String key) {
+    public Object get(final String name, final String key) {
 
         // If its not a property, then create default mapped property
         if (!isDynaProperty(name)) {
@@ -384,7 +384,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Get the mapped property
-        Object mappedProperty = get(name);
+        final Object mappedProperty = get(name);
 
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
@@ -426,13 +426,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public void remove(String name, String key) {
+    public void remove(final String name, final String key) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
 
-        Object value = values.get(name);
+        final Object value = values.get(name);
         if (value == null) {
             return;
         }
@@ -460,7 +460,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
-    public void set(String name, Object value) {
+    public void set(final String name, final Object value) {
 
         // If the property doesn't exist, then add it
         if (!isDynaProperty(name)) {
@@ -477,7 +477,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         }
 
-        DynaProperty descriptor = dynaClass.getDynaProperty(name);
+        final DynaProperty descriptor = dynaClass.getDynaProperty(name);
 
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
@@ -513,7 +513,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
-    public void set(String name, int index, Object value) {
+    public void set(final String name, final int index, final Object value) {
 
         // If its not a property, then create default indexed property
         if (!isDynaProperty(name)) {
@@ -538,6 +538,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
             Array.set(indexedProperty, index, value);
         } else if (indexedProperty instanceof List) {
             @SuppressWarnings("unchecked")
+            final
             // Indexed properties are stored in a List<Object>
             List<Object> values = (List<Object>) indexedProperty;
             values.set(index, value);
@@ -563,7 +564,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @exception IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public void set(String name, String key, Object value) {
+    public void set(final String name, final String key, final Object value) {
 
         // If the 'mapped' property doesn't exist, then add it
         if (!isDynaProperty(name)) {
@@ -571,7 +572,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Get the mapped property
-        Object mappedProperty = get(name);
+        final Object mappedProperty = get(name);
 
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
@@ -582,6 +583,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Set the value in the Map
         @SuppressWarnings("unchecked")
+        final
         // mapped properties are stored in a Map<String, Object>
         Map<String, Object> valuesMap = (Map<String, Object>) mappedProperty;
         valuesMap.put(key, value);
@@ -598,16 +600,17 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * the required size)
      * @return The new property value (grown to the appropriate size)
      */
-    protected Object growIndexedProperty(String name, Object indexedProperty, int index) {
+    protected Object growIndexedProperty(final String name, Object indexedProperty, final int index) {
 
         // Grow a List to the appropriate size
         if (indexedProperty instanceof List) {
 
             @SuppressWarnings("unchecked")
+            final
             // Indexed properties are stored as List<Object>
             List<Object> list = (List<Object>)indexedProperty;
             while (index >= list.size()) {
-                Class<?> contentType = getDynaClass().getDynaProperty(name).getContentType();
+                final Class<?> contentType = getDynaClass().getDynaProperty(name).getContentType();
                 Object value = null;
                 if (contentType != null) {
                     value = createProperty(name+"["+list.size()+"]", contentType);
@@ -620,14 +623,14 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Grow an Array to the appropriate size
         if ((indexedProperty.getClass().isArray())) {
 
-            int length = Array.getLength(indexedProperty);
+            final int length = Array.getLength(indexedProperty);
             if (index >= length) {
-                Class<?> componentType = indexedProperty.getClass().getComponentType();
-                Object newArray = Array.newInstance(componentType, (index + 1));
+                final Class<?> componentType = indexedProperty.getClass().getComponentType();
+                final Object newArray = Array.newInstance(componentType, (index + 1));
                 System.arraycopy(indexedProperty, 0, newArray, 0, length);
                 indexedProperty = newArray;
                 set(name, indexedProperty);
-                int newLength = Array.getLength(indexedProperty);
+                final int newLength = Array.getLength(indexedProperty);
                 for (int i = length; i < newLength; i++) {
                     Array.set(indexedProperty, i, createProperty(name+"["+i+"]", componentType));
                 }
@@ -644,7 +647,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createProperty(String name, Class<?> type) {
+    protected Object createProperty(final String name, final Class<?> type) {
         if (type == null) {
             return null;
         }
@@ -680,7 +683,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createIndexedProperty(String name, Class<?> type) {
+    protected Object createIndexedProperty(final String name, final Class<?> type) {
 
         // Create the indexed object
         Object indexedProperty = null;
@@ -700,7 +703,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
                 try {
                     indexedProperty = type.newInstance();
                 }
-                catch (Exception ex) {
+                catch (final Exception ex) {
                     throw new IllegalArgumentException
                         ("Error instantiating indexed property of type '" +
                                    type.getName() + "' for '" + name + "' " + ex);
@@ -722,7 +725,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createMappedProperty(String name, Class<?> type) {
+    protected Object createMappedProperty(final String name, final Class<?> type) {
 
         // Create the mapped object
         Object mappedProperty = null;
@@ -739,7 +742,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
             try {
                 mappedProperty = type.newInstance();
             }
-            catch (Exception ex) {
+            catch (final Exception ex) {
                 throw new IllegalArgumentException
                     ("Error instantiating mapped property of type '" +
                             type.getName() + "' for '" + name + "' " + ex);
@@ -760,11 +763,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createDynaBeanProperty(String name, Class<?> type) {
+    protected Object createDynaBeanProperty(final String name, final Class<?> type) {
         try {
             return type.newInstance();
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating DynaBean property of type '" +
                         type.getName() + "' for '" + name + "' " + ex);
@@ -779,7 +782,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createPrimitiveProperty(String name, Class<?> type) {
+    protected Object createPrimitiveProperty(final String name, final Class<?> type) {
 
         if (type == Boolean.TYPE) {
             return Boolean.FALSE;
@@ -809,7 +812,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createNumberProperty(String name, Class<?> type) {
+    protected Object createNumberProperty(final String name, final Class<?> type) {
 
         return null;
 
@@ -821,7 +824,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param type The class of the property
      * @return The new value
      */
-    protected Object createOtherProperty(String name, Class<?> type) {
+    protected Object createOtherProperty(final String name, final Class<?> type) {
 
         if (type == Object.class    ||
             type == String.class    ||
@@ -836,7 +839,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         try {
             return type.newInstance();
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
@@ -854,7 +857,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param name Name of the 'indexed property.
      * @return The default value for an indexed property (java.util.ArrayList)
      */
-    protected Object defaultIndexedProperty(String name) {
+    protected Object defaultIndexedProperty(final String name) {
         return new ArrayList<Object>();
     }
 
@@ -868,7 +871,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param name Name of the 'mapped property.
      * @return The default value for a mapped property (java.util.HashMap)
      */
-    protected Map<String, Object> defaultMappedProperty(String name) {
+    protected Map<String, Object> defaultMappedProperty(final String name) {
         return new HashMap<String, Object>();
     }
 
@@ -878,7 +881,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return <code>true</code> if there is a property of the
      * specified name, otherwise <code>false</code>
      */
-    protected boolean isDynaProperty(String name) {
+    protected boolean isDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
@@ -902,7 +905,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return <code>true</code> if the source class is assignable to the
      * destination class, otherwise <code>false</code>
      */
-    protected boolean isAssignable(Class<?> dest, Class<?> source) {
+    protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
                 ((dest == Boolean.TYPE) && (source == Boolean.class)) ||

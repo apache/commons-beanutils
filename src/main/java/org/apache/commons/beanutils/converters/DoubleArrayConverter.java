@@ -59,7 +59,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
      *
      * @param defaultValue The default value to be returned
      */
-    public DoubleArrayConverter(Object defaultValue) {
+    public DoubleArrayConverter(final Object defaultValue) {
 
         this.defaultValue = defaultValue;
         this.useDefault = true;
@@ -90,7 +90,7 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
      *  successfully
      */
     @Override
-    public Object convert(Class type, Object value) {
+    public Object convert(final Class type, final Object value) {
 
         // Deal with a null value
         if (value == null) {
@@ -109,13 +109,13 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
         // Deal with input value as a String array
         if (strings.getClass() == value.getClass()) {
             try {
-                String[] values = (String[]) value;
-                double[] results = new double[values.length];
+                final String[] values = (String[]) value;
+                final double[] results = new double[values.length];
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Double.parseDouble(values[i]);
                 }
                 return (results);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 if (useDefault) {
                     return (defaultValue);
                 } else {
@@ -127,13 +127,13 @@ public final class DoubleArrayConverter extends AbstractArrayConverter {
         // Parse the input value as a String into elements
         // and convert to the appropriate type
         try {
-            List list = parseElements(value.toString());
-            double[] results = new double[list.size()];
+            final List list = parseElements(value.toString());
+            final double[] results = new double[list.size()];
             for (int i = 0; i < results.length; i++) {
                 results[i] = Double.parseDouble((String) list.get(i));
             }
             return (results);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
             } else {

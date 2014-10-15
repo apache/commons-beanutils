@@ -147,7 +147,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @param propertyValue The value to use in object evaluation.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
-    public BeanPropertyValueEqualsPredicate(String propertyName, Object propertyValue) {
+    public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue) {
         this(propertyName, propertyValue, false);
     }
 
@@ -162,7 +162,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * genenerate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
-    public BeanPropertyValueEqualsPredicate(String propertyName, Object propertyValue, boolean ignoreNull) {
+    public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
         super();
 
         if ((propertyName != null) && (propertyName.length() > 0)) {
@@ -192,42 +192,42 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
-    public boolean evaluate(Object object) {
+    public boolean evaluate(final Object object) {
 
         boolean evaluation = false;
 
         try {
             evaluation = evaluateValue(propertyValue,
                     PropertyUtils.getProperty(object, propertyName));
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation. Null value encountered in property path...";
 
             if (ignoreNull) {
                 log.warn("WARNING: " + errorMsg + e);
             } else {
-                IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+                final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
                     log.error(errorMsg, e);
                 }
                 throw iae;
             }
-        } catch (IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        } catch (InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        } catch (NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found.";
-            IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
+            final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
@@ -245,7 +245,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @param actual The actual value.
      * @return True if they are equal; false otherwise.
      */
-    protected boolean evaluateValue(Object expected, Object actual) {
+    protected boolean evaluateValue(final Object expected, final Object actual) {
         return (expected == actual) || ((expected != null) && expected.equals(actual));
     }
 

@@ -73,11 +73,11 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      *
      * @param icontext the introspection context
      */
-    public void introspect(IntrospectionContext icontext) {
+    public void introspect(final IntrospectionContext icontext) {
         BeanInfo beanInfo = null;
         try {
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
-        } catch (IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             // no descriptors are added to the context
             log.error(
                     "Error when inspecting class " + icontext.getTargetClass(),
@@ -119,26 +119,26 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      * @param beanClass the current class to be inspected
      * @param descriptors the array with property descriptors
      */
-    private void handleIndexedPropertyDescriptors(Class<?> beanClass,
-            PropertyDescriptor[] descriptors) {
-        for (PropertyDescriptor pd : descriptors) {
+    private void handleIndexedPropertyDescriptors(final Class<?> beanClass,
+            final PropertyDescriptor[] descriptors) {
+        for (final PropertyDescriptor pd : descriptors) {
             if (pd instanceof IndexedPropertyDescriptor) {
-                IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) pd;
-                String propName = descriptor.getName().substring(0, 1)
+                final IndexedPropertyDescriptor descriptor = (IndexedPropertyDescriptor) pd;
+                final String propName = descriptor.getName().substring(0, 1)
                         .toUpperCase()
                         + descriptor.getName().substring(1);
 
                 if (descriptor.getReadMethod() == null) {
-                    String methodName = descriptor.getIndexedReadMethod() != null ? descriptor
+                    final String methodName = descriptor.getIndexedReadMethod() != null ? descriptor
                             .getIndexedReadMethod().getName() : "get"
                             + propName;
-                    Method readMethod = MethodUtils
+                    final Method readMethod = MethodUtils
                             .getMatchingAccessibleMethod(beanClass, methodName,
                                     EMPTY_CLASS_PARAMETERS);
                     if (readMethod != null) {
                         try {
                             descriptor.setReadMethod(readMethod);
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             log.error(
                                     "Error setting indexed property read method",
                                     e);
@@ -146,16 +146,16 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                     }
                 }
                 if (descriptor.getWriteMethod() == null) {
-                    String methodName = descriptor.getIndexedWriteMethod() != null ? descriptor
+                    final String methodName = descriptor.getIndexedWriteMethod() != null ? descriptor
                             .getIndexedWriteMethod().getName() : "set"
                             + propName;
                     Method writeMethod = MethodUtils
                             .getMatchingAccessibleMethod(beanClass, methodName,
                                     LIST_CLASS_PARAMETER);
                     if (writeMethod == null) {
-                        for (Method m : beanClass.getMethods()) {
+                        for (final Method m : beanClass.getMethods()) {
                             if (m.getName().equals(methodName)) {
-                                Class<?>[] parameterTypes = m.getParameterTypes();
+                                final Class<?>[] parameterTypes = m.getParameterTypes();
                                 if (parameterTypes.length == 1
                                         && List.class
                                                 .isAssignableFrom(parameterTypes[0])) {
@@ -168,7 +168,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                     if (writeMethod != null) {
                         try {
                             descriptor.setWriteMethod(writeMethod);
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             log.error(
                                     "Error setting indexed property write method",
                                     e);

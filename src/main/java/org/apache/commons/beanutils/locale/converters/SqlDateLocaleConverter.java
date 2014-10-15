@@ -58,7 +58,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      *
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(boolean locPattern) {
+    public SqlDateLocaleConverter(final boolean locPattern) {
 
         this(Locale.getDefault(), locPattern);
     }
@@ -70,7 +70,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      *
      * @param locale        The locale
      */
-    public SqlDateLocaleConverter(Locale locale) {
+    public SqlDateLocaleConverter(final Locale locale) {
 
         this(locale, false);
     }
@@ -83,7 +83,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(Locale locale, boolean locPattern) {
+    public SqlDateLocaleConverter(final Locale locale, final boolean locPattern) {
 
         this(locale, (String) null, locPattern);
     }
@@ -96,7 +96,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public SqlDateLocaleConverter(Locale locale, String pattern) {
+    public SqlDateLocaleConverter(final Locale locale, final String pattern) {
 
         this(locale, pattern, false);
     }
@@ -110,7 +110,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(Locale locale, String pattern, boolean locPattern) {
+    public SqlDateLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
         super(locale, pattern, locPattern);
     }
@@ -124,7 +124,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      */
-    public SqlDateLocaleConverter(Object defaultValue) {
+    public SqlDateLocaleConverter(final Object defaultValue) {
 
         this(defaultValue, false);
     }
@@ -138,7 +138,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(Object defaultValue, boolean locPattern) {
+    public SqlDateLocaleConverter(final Object defaultValue, final boolean locPattern) {
 
         this(defaultValue, Locale.getDefault(), locPattern);
     }
@@ -151,7 +151,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
      */
-    public SqlDateLocaleConverter(Object defaultValue, Locale locale) {
+    public SqlDateLocaleConverter(final Object defaultValue, final Locale locale) {
 
         this(defaultValue, locale, false);
     }
@@ -165,7 +165,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(Object defaultValue, Locale locale, boolean locPattern) {
+    public SqlDateLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
 
         this(defaultValue, locale, null, locPattern);
     }
@@ -179,7 +179,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param locale        The locale
      * @param pattern       The convertion pattern
      */
-    public SqlDateLocaleConverter(Object defaultValue, Locale locale, String pattern) {
+    public SqlDateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
         this(defaultValue, locale, pattern, false);
     }
@@ -194,7 +194,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @param pattern       The convertion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public SqlDateLocaleConverter(Object defaultValue, Locale locale, String pattern, boolean locPattern) {
+    public SqlDateLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }
@@ -215,7 +215,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * @throws ParseException if an error occurs parsing a String to a Number
      */
     @Override
-    protected Object parse(Object value, String pattern) throws ParseException {
+    protected Object parse(final Object value, final String pattern) throws ParseException {
 
         return new Date(((java.util.Date) super.parse(value, pattern)).getTime());
     }
