@@ -483,6 +483,7 @@ public class MemoryLeakTestCase extends TestCase {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
                 }
             } catch (final Throwable ignored) {
+                System.out.println("Caught " + ignored); // debug for Continuum failure
             }
             list.clear();
             list = null;
@@ -492,10 +493,10 @@ public class MemoryLeakTestCase extends TestCase {
         }
         // System.out.println("After GC: " + getMemoryStats());
 
+        System.out.println("Count " + count); // debug for Continuum failure
         if (ref.get() != null) {
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }
-        System.out.println("Count " + count); // debug for Continuum failure
     }
 
     /**
