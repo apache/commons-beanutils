@@ -488,10 +488,8 @@ public class MemoryLeakTestCase extends TestCase {
             }
             // Trying to debug Continuum test fail: try calling GC before releasing the memory
             System.gc();
-            System.out.println("After GC1: " + getMemoryStats());
             list.clear();
             list = null;
-            System.out.println("Count(2) " + count + " : " + getMemoryStats());
             System.gc();
             System.out.println("After GC2: " + getMemoryStats());
             Thread.sleep(1000);
