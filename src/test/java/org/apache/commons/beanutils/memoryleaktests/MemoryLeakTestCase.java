@@ -482,18 +482,18 @@ public class MemoryLeakTestCase extends TestCase {
                 while (true && ref.get() != null) {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
                 }
-            } catch (final Throwable ignored) {
-                System.out.println("Caught " + ignored); // debug for Continuum failure
+                System.out.println("Count(1) " + count + " : " + getMemoryStats());
+            } catch (final OutOfMemoryError ignored) {
+                // Cannot do anything here
             }
-            System.out.println("Count " + count + " : " + getMemoryStats());
             // Trying to debug Continuum test fail: try calling GC before releasing the memory
             System.gc();
-            System.out.println("After GC: " + getMemoryStats());
+            System.out.println("After GC1: " + getMemoryStats());
             list.clear();
             list = null;
-            System.out.println("Count " + count + " : " + getMemoryStats());
+            System.out.println("Count(2) " + count + " : " + getMemoryStats());
             System.gc();
-            System.out.println("After GC: " + getMemoryStats());
+            System.out.println("After GC2: " + getMemoryStats());
             Thread.sleep(1000);
         }
 
