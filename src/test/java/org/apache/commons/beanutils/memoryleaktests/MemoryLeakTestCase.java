@@ -495,6 +495,7 @@ public class MemoryLeakTestCase extends TestCase {
         if (ref.get() != null) {
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }
+        System.out.println("Count " + count); // debug for Continuum failure
     }
 
     /**
