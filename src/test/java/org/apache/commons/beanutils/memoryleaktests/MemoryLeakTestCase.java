@@ -491,12 +491,13 @@ public class MemoryLeakTestCase extends TestCase {
             list.clear();
             list = null;
             System.gc();
-            System.out.println("After GC2: " + getMemoryStats());
+            System.out.println("After GC2: " + getMemoryStats()+ " Count " + count);
             Thread.sleep(1000);
         }
 
-        System.out.println("Count " + count); // debug for Continuum failure
-        if (ref.get() != null) {
+        final boolean isNotNull = ref.get() != null;
+        System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
+        if (isNotNull) {
             throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
         }
     }
