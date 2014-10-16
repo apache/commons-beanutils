@@ -485,13 +485,17 @@ public class MemoryLeakTestCase extends TestCase {
             } catch (final Throwable ignored) {
                 System.out.println("Caught " + ignored); // debug for Continuum failure
             }
+            System.out.println("Count " + count + " : " + getMemoryStats());
+            // Trying to debug Continuum test fail: try calling GC before releasing the memory
+            System.gc();
+            System.out.println("After GC: " + getMemoryStats());
             list.clear();
             list = null;
-            // System.out.println("Count " + count + " : " + getMemoryStats());
+            System.out.println("Count " + count + " : " + getMemoryStats());
             System.gc();
+            System.out.println("After GC: " + getMemoryStats());
             Thread.sleep(1000);
         }
-        // System.out.println("After GC: " + getMemoryStats());
 
         System.out.println("Count " + count); // debug for Continuum failure
         if (ref.get() != null) {
