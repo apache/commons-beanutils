@@ -28,7 +28,7 @@ package org.apache.commons.beanutils.converters;
  * By default any object whose string representation is one of the values
  * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and
  * string representations {"no", "n", "false", "off", "0"} are converted
- * to Boolean.FALSE. The recognised true/false strings can be changed by:
+ * to Boolean.FALSE. The recognized true/false strings can be changed by:
  * <pre>
  *  String[] trueStrings = {"oui", "o", "1"};
  *  String[] falseStrings = {"non", "n", "0"};
@@ -72,7 +72,7 @@ public final class BooleanConverter extends AbstractConverter {
      * not one of the known true strings, nor one of the known false strings.
      *
      * @param defaultValue The default value to be returned if the value
-     *  being converted is not recognised. This value may be null, in which
+     *  being converted is not recognized. This value may be null, in which
      *  case null will be returned on conversion failure. When non-null, it is
      *  expected that this value will be either Boolean.TRUE or Boolean.FALSE.
      *  The special value BooleanConverter.NO_DEFAULT can also be passed here,
@@ -125,7 +125,7 @@ public final class BooleanConverter extends AbstractConverter {
      *  ignored.
      *
      * @param defaultValue The default value to be returned if the value
-     *  being converted is not recognised. This value may be null, in which
+     *  being converted is not recognized. This value may be null, in which
      *  case null will be returned on conversion failure. When non-null, it is
      *  expected that this value will be either Boolean.TRUE or Boolean.FALSE.
      *  The special value BooleanConverter.NO_DEFAULT can also be passed here,
@@ -194,9 +194,9 @@ public final class BooleanConverter extends AbstractConverter {
      *  shall be invoked on this object, and the result compared (ignoring
      *  case) against the known "true" and "false" string values.
      *
-     * @return Boolean.TRUE if the value was a recognised "true" value,
-     *  Boolean.FALSE if the value was a recognised "false" value, or
-     *  the default value if the value was not recognised and the constructor
+     * @return Boolean.TRUE if the value was a recognized "true" value,
+     *  Boolean.FALSE if the value was a recognized "false" value, or
+     *  the default value if the value was not recognized and the constructor
      *  was provided with a default value.
      *
      * @throws Throwable if an error occurs converting to the specified type

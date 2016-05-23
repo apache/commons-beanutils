@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.ConversionException;
  * on how this instance is constructed.</p>
  *
  * <p>By default, the values to be converted are expected to be those
- * recognised by a default instance of BooleanConverter. A customised
+ * recognized by a default instance of BooleanConverter. A customised
  * BooleanConverter can be provided in order to recognise alternative values
  * as true/false. </p>
  *
@@ -154,10 +154,10 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * </p>
      *
      * <p>If any of the elements in the value array (or the elements resulting
-     * from splitting up value.toString) are not recognised by the
+     * from splitting up value.toString) are not recognized by the
      * BooleanConverter associated with this object, then what happens depends
      * on whether that BooleanConverter has a default value or not: if it does,
-     * then that unrecognised element is converted into the BooleanConverter's
+     * then that unrecognized element is converted into the BooleanConverter's
      * default value. If the BooleanConverter does <i>not</i> have a default
      * value, then the default value for this object is returned as the
      * <i>complete</i> conversion result (not just for the element), or an

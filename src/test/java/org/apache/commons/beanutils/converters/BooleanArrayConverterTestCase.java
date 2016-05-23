@@ -166,7 +166,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
         assertTrue(results[2]);
 
         try {
-            // the literal string 'true' should no longer be recognised as
+            // the literal string 'true' should no longer be recognized as
             // a true value..
             converter.convert(null, "true");
             fail("Converting invalid string should have generated an exception");
@@ -237,7 +237,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * With the standard BooleanArrayConverter, if <i>any</i> of the elements
      * in the array are bad, then the array-wide default value is returned.
      * However by specifying a custom BooleanConverter which has a per-element
-     * default, the unrecognised elements get that per-element default but the
+     * default, the unrecognized elements get that per-element default but the
      * others are converted as expected.
      */
     public void testElementDefault() {
