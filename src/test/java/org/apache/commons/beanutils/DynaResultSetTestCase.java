@@ -199,7 +199,7 @@ public class DynaResultSetTestCase extends TestCase {
         final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
-        final DynaBean row = (DynaBean) rows.next();
+        final DynaBean row = rows.next();
 
         // Invalid argument test
         try {
@@ -258,7 +258,7 @@ public class DynaResultSetTestCase extends TestCase {
         final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
         rows.next();
-        final DynaBean row = (DynaBean) rows.next();
+        final DynaBean row = rows.next();
 
         // Invalid argument test
         try {
