@@ -443,7 +443,7 @@ public class MemoryLeakTestCase extends TestCase {
         BeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
 
         // Clear LocaleBeanUtilsBean's PropertyUtilsBean descriptor caches
-        LocaleBeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
+        BeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
 
         // Clear MethodUtils's method cache
         MethodUtils.clearCache();
