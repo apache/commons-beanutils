@@ -51,9 +51,6 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that PropertyUtilsBean's descriptorsCache doesn't cause a memory leak.
      */
     public void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
-        if (isPre15JVM()) {
-            return;
-        }
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -100,9 +97,6 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that PropertyUtilsBean's mappedDescriptorsCache doesn't cause a memory leak.
      */
     public void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
-        if (isPre15JVM()) {
-            return;
-        }
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -296,9 +290,6 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that WrapDynaClass's dynaClasses doesn't cause a memory leak.
      */
     public void testWrapDynaClass_dynaClasses_memoryLeak() throws Exception {
-        if (isPre15JVM()) {
-            return;
-        }
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
@@ -545,33 +536,6 @@ public class MemoryLeakTestCase extends TestCase {
         System.out.println(jvmti.exploreClassReferences(className, 8, true, true, true, false, false));
         System.out.println(" ----------------" + test + " END ------------------");
         */
-    }
-
-    /**
-     * Test for JDK 1.5
-     */
-    private boolean isPre15JVM() {
-        final String version = System.getProperty("java.specification.version");
-        final StringTokenizer tokenizer = new StringTokenizer(version,".");
-        if (tokenizer.nextToken().equals("1")) {
-            final String minorVersion = tokenizer.nextToken();
-            if (minorVersion.equals("0")) {
-                return true;
-            }
-            if (minorVersion.equals("1")) {
-                return true;
-            }
-            if (minorVersion.equals("2")) {
-                return true;
-            }
-            if (minorVersion.equals("3")) {
-                return true;
-            }
-            if (minorVersion.equals("4")) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
