@@ -22,9 +22,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Locale;
-import java.util.StringTokenizer;
-
-import junit.framework.TestCase;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -37,6 +34,8 @@ import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.locale.LocaleBeanUtilsBean;
 import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
+
+import junit.framework.TestCase;
 
 /**
  * Test BeanUtils memory leaks.
