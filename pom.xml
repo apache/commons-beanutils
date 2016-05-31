@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>34</version>
+    <version>40</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
@@ -374,7 +374,6 @@
                 <configuration>
                     <configLocation>${basedir}/checkstyle.xml</configLocation>
                     <enableRulesSummary>false</enableRulesSummary>
-                    <headerLocation>${basedir}/license-header.txt</headerLocation>
                 </configuration>
             </plugin>
             <plugin>
