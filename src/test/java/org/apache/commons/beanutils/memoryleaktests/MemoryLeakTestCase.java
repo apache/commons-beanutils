@@ -38,7 +38,7 @@ import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
 import junit.framework.TestCase;
 
 /**
- * Test BeanUtils memory leaks.
+ * Tests BeanUtils memory leaks.
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
  *
@@ -432,7 +432,7 @@ public class MemoryLeakTestCase extends TestCase {
     }
 
     /**
-     * Clear all the BeanUtils Caches manually.
+     * Clears all the BeanUtils Caches manually.
      *
      * This is probably overkill, but since we're dealing with static caches
      * it seems sensible to ensure that all test cases start with a clean sheet.
@@ -459,7 +459,7 @@ public class MemoryLeakTestCase extends TestCase {
     }
 
     /**
-     * Try to force the garbage collector to run by filling up memory and calling System.gc().
+     * Tries to force the garbage collector to run by filling up memory and calling System.gc().
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
@@ -493,7 +493,7 @@ public class MemoryLeakTestCase extends TestCase {
     }
 
     /**
-     * Create a new class loader instance.
+     * Creates a new class loader instance.
      */
     private static URLClassLoader newClassLoader() throws MalformedURLException {
 
@@ -518,7 +518,7 @@ public class MemoryLeakTestCase extends TestCase {
     }
 
     /**
-     * Produce a profiler report about where the leaks are.
+     * Produces a profiler report about where the leaks are.
      *
      * This requires JBoss's profiler be installed, see:
      *     http://labs.jboss.com/jbossprofiler/
@@ -538,7 +538,7 @@ public class MemoryLeakTestCase extends TestCase {
     }
 
     /**
-     * Get the total, free, used memory stats.
+     * Gets the total, free, used memory stats.
      * @return the total, free, used memory stats
      */
     private String getMemoryStats() {
