@@ -394,9 +394,9 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
         // Verify existence of all the properties that should be present
-        for (int i = 0; i < describes.length; i++) {
-            assertTrue("Property '" + describes[i] + "' is present",
-                       map.containsKey(describes[i]));
+        for (String describe : describes) {
+            assertTrue("Property '" + describe + "' is present",
+                       map.containsKey(describe));
         }
         assertTrue("Property 'writeOnlyProperty' is not present",
                    !map.containsKey("writeOnlyProperty"));

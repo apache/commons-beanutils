@@ -712,8 +712,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             final BeanInfo beanInfo = Introspector.getBeanInfo( beanClass );
             final PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
             if ( propertyDescriptors != null ) {
-                for ( int i = 0; i < propertyDescriptors.length; i++ ) {
-                    final PropertyDescriptor propertyDescriptor = propertyDescriptors[i];
+                for (final PropertyDescriptor propertyDescriptor : propertyDescriptors) {
                     if ( propertyDescriptor != null ) {
                         final String name = propertyDescriptor.getName();
                         final Method readMethod = propertyDescriptor.getReadMethod();

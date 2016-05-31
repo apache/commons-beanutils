@@ -126,9 +126,9 @@ public class Jira357TestCase extends TestCase {
      */
     private PropertyDescriptor findDescriptor(final String propertyName, final PropertyDescriptor[] descriptors) {
         if (descriptors != null) {
-            for (int i = 0; i < descriptors.length; i++) {
-                if (propertyName.equals(descriptors[i].getName())) {
-                    return descriptors[i];
+            for (PropertyDescriptor descriptor : descriptors) {
+                if (propertyName.equals(descriptor.getName())) {
+                    return descriptor;
                 }
             }
         }

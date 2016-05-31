@@ -520,9 +520,9 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
         Exception firstEx = null;
-        for (int i = 0; i < patterns.length; i++) {
+        for (String pattern : patterns) {
             try {
-                final DateFormat format = getFormat(patterns[i]);
+                final DateFormat format = getFormat(pattern);
                 final Calendar calendar = parse(sourceType, targetType, value, format);
                 return calendar;
             } catch (final Exception ex) {

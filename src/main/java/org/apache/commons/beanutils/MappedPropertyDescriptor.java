@@ -342,8 +342,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         // So we start with the given class and walk up the superclass chain.
         for (Class<?> clazz = initial; clazz != null; clazz = clazz.getSuperclass()) {
             final Method[] methods = clazz.getDeclaredMethods();
-            for (int i = 0; i < methods.length; i++) {
-                final Method method = methods[i];
+            for (final Method method : methods) {
                 if (method == null) {
                     continue;
                 }
@@ -364,8 +363,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         // the argument class is itself an interface, and when the argument
         // class is an abstract class.
         final Class<?>[] interfaces = initial.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-            final Method method = internalGetMethod(interfaces[i], methodName, parameterCount);
+        for (Class<?> interface1 : interfaces) {
+            final Method method = internalGetMethod(interface1, methodName, parameterCount);
             if (method != null) {
                 return method;
             }

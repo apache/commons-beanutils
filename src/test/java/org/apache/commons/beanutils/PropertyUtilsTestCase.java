@@ -321,9 +321,9 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
         // Verify existence of all the properties that should be present
-        for (int i = 0; i < describes.length; i++) {
-            assertTrue("Property '" + describes[i] + "' is present",
-                       map.containsKey(describes[i]));
+        for (String describe : describes) {
+            assertTrue("Property '" + describe + "' is present",
+                       map.containsKey(describe));
         }
         assertTrue("Property 'writeOnlyProperty' is not present",
                    !map.containsKey("writeOnlyProperty"));
@@ -573,8 +573,8 @@ public class PropertyUtilsTestCase extends TestCase {
                 PropertyUtils.getPropertyDescriptors(bean);
         assertNotNull("Got descriptors", pd);
         final int count[] = new int[properties.length];
-        for (int i = 0; i < pd.length; i++) {
-            final String name = pd[i].getName();
+        for (PropertyDescriptor element : pd) {
+            final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
                 if (name.equals(properties[j])) {
                     count[j]++;
@@ -3992,36 +3992,36 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
-        for (int i = 0; i < properties.length; i++) {
+        for (String propertie : properties) {
 
             // Identify the property descriptor for this property
-            if (properties[i].equals("intIndexed")) {
+            if (propertie.equals("intIndexed")) {
                 continue;
             }
-            if (properties[i].equals("stringIndexed")) {
+            if (propertie.equals("stringIndexed")) {
                 continue;
             }
-            if (properties[i].equals("writeOnlyProperty")) {
+            if (propertie.equals("writeOnlyProperty")) {
                 continue;
             }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
-                if (properties[i].equals(pd[j].getName())) {
+                if (propertie.equals(pd[j].getName())) {
                     n = j;
                     break;
                 }
             }
-            assertTrue("PropertyDescriptor for " + properties[i],
+            assertTrue("PropertyDescriptor for " + propertie,
                     n >= 0);
 
             // Locate an accessible property reader method for it
             final Method reader = PropertyUtils.getReadMethod(pd[n]);
-            assertNotNull("Reader for " + properties[i],
+            assertNotNull("Reader for " + propertie,
                     reader);
             final Class<?> clazz = reader.getDeclaringClass();
-            assertNotNull("Declaring class for " + properties[i],
+            assertNotNull("Declaring class for " + propertie,
                     clazz);
-            assertEquals("Correct declaring class for " + properties[i],
+            assertEquals("Correct declaring class for " + propertie,
                     clazz.getName(),
                     className);
 
@@ -4029,7 +4029,7 @@ public class PropertyUtilsTestCase extends TestCase {
             try {
                 reader.invoke(bean, (Object[]) new Class<?>[0]);
             } catch (final Throwable t) {
-                fail("Call for " + properties[i] + ": " + t);
+                fail("Call for " + propertie + ": " + t);
             }
 
         }
@@ -4050,43 +4050,43 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
-        for (int i = 0; i < properties.length; i++) {
+        for (String propertie : properties) {
 
             // Identify the property descriptor for this property
-            if (properties[i].equals("intIndexed")) {
+            if (propertie.equals("intIndexed")) {
                 continue;
             }
-            if (properties[i].equals("listIndexed")) {
+            if (propertie.equals("listIndexed")) {
                 continue;
             }
-            if (properties[i].equals("nested"))
+            if (propertie.equals("nested"))
              {
                 continue; // This property is read only
             }
-            if (properties[i].equals("readOnlyProperty")) {
+            if (propertie.equals("readOnlyProperty")) {
                 continue;
             }
-            if (properties[i].equals("stringIndexed")) {
+            if (propertie.equals("stringIndexed")) {
                 continue;
             }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
-                if (properties[i].equals(pd[j].getName())) {
+                if (propertie.equals(pd[j].getName())) {
                     n = j;
                     break;
                 }
             }
-            assertTrue("PropertyDescriptor for " + properties[i],
+            assertTrue("PropertyDescriptor for " + propertie,
                     n >= 0);
 
             // Locate an accessible property reader method for it
             final Method writer = PropertyUtils.getWriteMethod(pd[n]);
-            assertNotNull("Writer for " + properties[i],
+            assertNotNull("Writer for " + propertie,
                     writer);
             final Class<?> clazz = writer.getDeclaringClass();
-            assertNotNull("Declaring class for " + properties[i],
+            assertNotNull("Declaring class for " + propertie,
                     clazz);
-            assertEquals("Correct declaring class for " + properties[i],
+            assertEquals("Correct declaring class for " + propertie,
                     clazz.getName(),
                     className);
 
@@ -4503,9 +4503,9 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     private static PropertyDescriptor findNameDescriptor(
             final PropertyDescriptor[] desc) {
-        for (int i = 0; i < desc.length; i++) {
-            if (desc[i].getName().equals("name")) {
-                return desc[i];
+        for (PropertyDescriptor element : desc) {
+            if (element.getName().equals("name")) {
+                return element;
             }
         }
         return null;

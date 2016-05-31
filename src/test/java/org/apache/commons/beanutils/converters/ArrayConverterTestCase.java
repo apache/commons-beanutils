@@ -217,8 +217,8 @@ public class ArrayConverterTestCase extends TestCase {
         // Test Data
         final String[] array = new String[] {"10", "  11", "12  ", "  13  "};
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < array.length; i++) {
-            list.add(array[i]);
+        for (String element : array) {
+            list.add(element);
         }
 
         // Expected results

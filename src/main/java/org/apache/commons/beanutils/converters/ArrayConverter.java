@@ -451,9 +451,9 @@ public class ArrayConverter extends AbstractConverter {
             st.whitespaceChars(delimiter , delimiter); // Set the delimiters
             st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
             st.wordChars('0', '9');      // Needed to make part of tokens
-            for (int i = 0; i < allowedChars.length; i++) {
-                st.ordinaryChars(allowedChars[i], allowedChars[i]);
-                st.wordChars(allowedChars[i], allowedChars[i]);
+            for (char allowedChar : allowedChars) {
+                st.ordinaryChars(allowedChar, allowedChar);
+                st.wordChars(allowedChar, allowedChar);
             }
 
             // Split comma-delimited tokens into a List

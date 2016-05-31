@@ -247,8 +247,8 @@ public class BeanUtilsBean {
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
-            for (int i = 0; i < origDescriptors.length; i++) {
-                final String name = origDescriptors[i].getName();
+            for (DynaProperty origDescriptor : origDescriptors) {
+                final String name = origDescriptor.getName();
                 // Need to check isReadable() for WrapDynaBean
                 // (see Jira issue# BEANUTILS-61)
                 if (getPropertyUtils().isReadable(orig, name) &&
@@ -271,8 +271,8 @@ public class BeanUtilsBean {
         } else /* if (orig is a standard JavaBean) */ {
             final PropertyDescriptor[] origDescriptors =
                 getPropertyUtils().getPropertyDescriptors(orig);
-            for (int i = 0; i < origDescriptors.length; i++) {
-                final String name = origDescriptors[i].getName();
+            for (PropertyDescriptor origDescriptor : origDescriptors) {
+                final String name = origDescriptor.getName();
                 if ("class".equals(name)) {
                     continue; // No point in trying to set an object's class
                 }
@@ -498,17 +498,17 @@ public class BeanUtilsBean {
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
-            for (int i = 0; i < descriptors.length; i++) {
-                final String name = descriptors[i].getName();
+            for (DynaProperty descriptor : descriptors) {
+                final String name = descriptor.getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
             final PropertyDescriptor[] descriptors =
                 getPropertyUtils().getPropertyDescriptors(bean);
             final Class<?> clazz = bean.getClass();
-            for (int i = 0; i < descriptors.length; i++) {
-                final String name = descriptors[i].getName();
-                if (getPropertyUtils().getReadMethod(clazz, descriptors[i]) != null) {
+            for (PropertyDescriptor descriptor : descriptors) {
+                final String name = descriptor.getName();
+                if (getPropertyUtils().getReadMethod(clazz, descriptor) != null) {
                     description.put(name, getProperty(bean, name));
                 }
             }

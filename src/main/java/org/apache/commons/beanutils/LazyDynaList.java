@@ -247,8 +247,8 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     public LazyDynaList(final Object[] array) {
         super(array.length);
-        for (int i = 0; i < array.length; i++) {
-            add(array[i]);
+        for (Object element : array) {
+            add(element);
         }
     }
 

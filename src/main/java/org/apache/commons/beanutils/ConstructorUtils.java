@@ -400,9 +400,9 @@ public class ConstructorUtils {
         // search through all methods
         final int paramSize = parameterTypes.length;
         final Constructor<?>[] ctors = clazz.getConstructors();
-        for (int i = 0, size = ctors.length; i < size; i++) {
+        for (Constructor<?> ctor2 : ctors) {
             // compare parameters
-            final Class<?>[] ctorParams = ctors[i].getParameterTypes();
+            final Class<?>[] ctorParams = ctor2.getParameterTypes();
             final int ctorParamSize = ctorParams.length;
             if (ctorParamSize == paramSize) {
                 boolean match = true;
@@ -418,7 +418,7 @@ public class ConstructorUtils {
 
                 if (match) {
                     // get accessible version of method
-                    final Constructor<?> ctor = getAccessibleConstructor(ctors[i]);
+                    final Constructor<?> ctor = getAccessibleConstructor(ctor2);
                     if (ctor != null) {
                         try {
                             ctor.setAccessible(true);

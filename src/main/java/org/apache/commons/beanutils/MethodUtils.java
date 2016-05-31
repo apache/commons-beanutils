@@ -973,16 +973,16 @@ public class MethodUtils {
         final Method[] methods = clazz.getMethods();
         float bestMatchCost = Float.MAX_VALUE;
         float myCost = Float.MAX_VALUE;
-        for (int i = 0, size = methods.length; i < size ; i++) {
-            if (methods[i].getName().equals(methodName)) {
+        for (Method method2 : methods) {
+            if (method2.getName().equals(methodName)) {
                 // log some trace information
                 if (log.isTraceEnabled()) {
                     log.trace("Found matching name:");
-                    log.trace(methods[i]);
+                    log.trace(method2);
                 }
 
                 // compare parameters
-                final Class<?>[] methodsParams = methods[i].getParameterTypes();
+                final Class<?>[] methodsParams = method2.getParameterTypes();
                 final int methodParamSize = methodsParams.length;
                 if (methodParamSize == paramSize) {
                     boolean match = true;
@@ -1003,11 +1003,11 @@ public class MethodUtils {
 
                     if (match) {
                         // get accessible version of method
-                        final Method method = getAccessibleMethod(clazz, methods[i]);
+                        final Method method = getAccessibleMethod(clazz, method2);
                         if (method != null) {
                             if (log.isTraceEnabled()) {
                                 log.trace(method + " accessible version of "
-                                            + methods[i]);
+                                            + method2);
                             }
                             setMethodAccessible(method); // Default access superclass workaround
                             myCost = getTotalTransformationCost(parameterTypes,method.getParameterTypes());

@@ -328,9 +328,9 @@ public class LazyDynaListTestCase extends TestCase {
      */
     private String findStringProperty(final DynaClass dynaClass) {
         final DynaProperty[] properties = dynaClass.getDynaProperties();
-        for (int i = 0; i < properties.length; i++) {
-            if (properties[i].getType() == String.class) {
-                return properties[i].getName();
+        for (DynaProperty propertie : properties) {
+            if (propertie.getType() == String.class) {
+                return propertie.getName();
             }
         }
         return null;
