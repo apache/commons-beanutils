@@ -21,7 +21,7 @@
 
     <release version="1.9.3" date="2016-MM-DD" description="Buf fix release">
       <action issue="BEANUTILS-433" dev="ggregory" type="update" due-to="Benedikt Ritter, Gary Gregory">
-        Update to JUnit 4.
+        Update dependency from JUnit 3.8.1 to 4.12.
       </action>
       <action issue="BEANUTILS-490" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Java requirement from Java 5 to 6.
