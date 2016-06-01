@@ -20,16 +20,19 @@
   <body>
 
     <release version="1.9.3" date="in SVN" description="TBD">
-      <action dev="ggregory" type="update" issue="BEANUTILS-482">
+      <action issue="BEANUTILS-474" dev="ggregory" type="update" due-to="Michael Grove">
+        FluentPropertyBeanIntrospector does not use the same naming algorithm as DefaultBeanIntrospector.
+      </action>
+      <action issue="BEANUTILS-482" dev="ggregory" type="update" due-to="Gary Gregory">
         Update commons-collections from 3.2.1 to 3.2.2.
       </action>
-      <action dev="oheger" type="fix" issue="BEANUTILS-470" due-to="Tommy Tynj&#228;">
+      <action issue="BEANUTILS-470" dev="oheger" type="fix" due-to="Tommy Tynj&#228;">
         Precision lost when converting BigDecimal
       </action>
-      <action dev="ggregory" type="update" issue="BEANUTILS-469">
+      <action issue="BEANUTILS-469" dev="ggregory" type="update" due-to="Gary Gregory">
         Update commons-logging from 1.1.1 to 1.2.
       </action>
-      <action dev="oheger" type="fix" issue="BEANUTILS-465" due-to="Daniel Atallah">
+      <action issue="BEANUTILS-465" dev="oheger" type="fix" due-to="Daniel Atallah">
         Indexed List Setters no longer work
       </action>
     </release>
