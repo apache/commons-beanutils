@@ -19,7 +19,7 @@
   </properties>
   <body>
 
-    <release version="1.9.3" date="in SVN" description="TBD">
+    <release version="1.9.3" date="2016-MM-DD" description="Buf fix release">
       <action issue="BEANUTILS-474" dev="ggregory" type="update" due-to="Michael Grove">
         FluentPropertyBeanIntrospector does not use the same naming algorithm as DefaultBeanIntrospector.
       </action>
