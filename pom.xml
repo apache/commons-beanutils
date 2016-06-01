@@ -354,8 +354,8 @@
     </build>
 
     <properties>
-        <maven.compiler.source>1.5</maven.compiler.source>
-        <maven.compiler.target>1.5</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <commons.componentid>beanutils</commons.componentid>
         <commons.release.version>1.9.3</commons.release.version>
         <commons.jira.id>BEANUTILS</commons.jira.id>
