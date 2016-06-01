@@ -18,6 +18,7 @@ package org.apache.commons.beanutils;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,4 +94,36 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         assertNotNull("No write method for fluentGetProperty",
                 pd.getWriteMethod());
     }
+
+    public void testIntrospectionCaps() throws Exception {
+	    final PropertyUtilsBean pu = new PropertyUtilsBean();
+
+        final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
+
+	    pu.addBeanIntrospector(introspector);
+
+	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
+			pu.getPropertyDescriptors(CapsBean.class));
+
+	    PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+
+	    assertNotNull("missing property", aDescriptor);
+
+	    assertNotNull("No read method for uri", aDescriptor.getReadMethod());
+	    assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
+
+	    assertNull("Should not find mis-capitalized property", props.get("uRI"));
+    }
+
+	public static final class CapsBean {
+		private URI mURI;
+
+		public URI getURI() {
+			return mURI;
+		}
+
+		public void setURI(final URI theURI) {
+			mURI = theURI;
+		}
+	}
 }

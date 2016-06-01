@@ -17,6 +17,7 @@
 package org.apache.commons.beanutils;
 
 import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Locale;
@@ -159,8 +160,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(
                 getWriteMethodPrefix().length());
-        return (methodName.length() > 1) ? Character.toLowerCase(methodName
-                .charAt(0)) + methodName.substring(1) : methodName
+        return (methodName.length() > 1) ? Introspector.decapitalize(methodName) : methodName
                 .toLowerCase(Locale.ENGLISH);
     }
 
