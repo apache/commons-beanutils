@@ -144,8 +144,9 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                         pd.setWriteMethod(m);
                     }
                 } catch (final IntrospectionException e) {
-                    log.warn("Error when creating PropertyDescriptor for " + m
-                            + "! Ignoring this property.", e);
+                    log.info("Error when creating PropertyDescriptor for " + m
+                            + "! Ignoring this property.");
+                    log.debug("Exception is:", e);
                 }
             }
         }
