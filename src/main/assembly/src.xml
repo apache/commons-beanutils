@@ -27,11 +27,14 @@
                 <include>build.properties.sample</include>
                 <include>build.xml</include>
                 <include>checkstyle.xml</include>
+                <include>CONTRIBUTING.md</include>
                 <include>LICENSE.txt</include>
                 <include>NOTICE.txt</include>
                 <include>pom.xml</include>
-                <include>README.txt</include>
+                <include>PROPOSAL.html</include>
+                <include>README.md</include>
                 <include>RELEASE-NOTES.txt</include>
+                <include>STATUS.html</include>
             </includes>
         </fileSet>
         <fileSet>
