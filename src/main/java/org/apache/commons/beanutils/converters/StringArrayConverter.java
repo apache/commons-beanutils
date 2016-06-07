@@ -116,7 +116,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
      * exists.
      * @return the converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      * successfully, or the input is null and there is no default value set
      * for this object.
      */

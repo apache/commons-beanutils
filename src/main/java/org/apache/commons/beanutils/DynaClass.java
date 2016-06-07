@@ -48,7 +48,7 @@ public interface DynaClass {
      *  is requested
      * @return The descriptor for the specified property
      *
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public DynaProperty getDynaProperty(String name);
 
@@ -73,9 +73,9 @@ public interface DynaClass {
      *
      * @return A new <code>DynaBean</code> instance
      *
-     * @exception IllegalAccessException if the Class or the appropriate
+     * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
+     * @throws InstantiationException if this Class represents an abstract
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */

@@ -57,7 +57,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
-     * @exception IllegalArgumentException if there are any problems
+     * @throws IllegalArgumentException if there are any problems
      *            copying the property.
      */
     @Override

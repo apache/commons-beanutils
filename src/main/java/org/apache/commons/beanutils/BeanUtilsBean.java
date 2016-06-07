@@ -157,13 +157,13 @@ public class BeanUtilsBean {
      * @param bean Bean to be cloned
      * @return the cloned bean
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InstantiationException if a new instance of the bean's
+     * @throws InstantiationException if a new instance of the bean's
      *  class cannot be instantiated
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public Object cloneBean(final Object bean)
@@ -218,13 +218,13 @@ public class BeanUtilsBean {
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if the <code>dest</code> or
+     * @throws IllegalArgumentException if the <code>dest</code> or
      *  <code>orig</code> argument is null or if the <code>dest</code>
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      */
     public void copyProperties(final Object dest, final Object orig)
@@ -318,9 +318,9 @@ public class BeanUtilsBean {
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      */
     public void copyProperty(final Object bean, String name, Object value)
@@ -474,11 +474,11 @@ public class BeanUtilsBean {
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public Map<String, String> describe(final Object bean)
@@ -526,11 +526,11 @@ public class BeanUtilsBean {
      * @param name Name of the property to be extracted
      * @return The array property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String[] getArrayProperty(final Object bean, final String name)
@@ -585,11 +585,11 @@ public class BeanUtilsBean {
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getIndexedProperty(final Object bean, final String name)
@@ -612,11 +612,11 @@ public class BeanUtilsBean {
      * @param index Index of the property value to be extracted
      * @return The indexed property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getIndexedProperty(final Object bean,
@@ -642,11 +642,11 @@ public class BeanUtilsBean {
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getMappedProperty(final Object bean, final String name)
@@ -669,11 +669,11 @@ public class BeanUtilsBean {
      * @param key Lookup key of the property value to be extracted
      * @return The mapped property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getMappedProperty(final Object bean,
@@ -695,13 +695,13 @@ public class BeanUtilsBean {
      * @param name Possibly nested name of the property to be extracted
      * @return The nested property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getNestedProperty(final Object bean, final String name)
@@ -723,11 +723,11 @@ public class BeanUtilsBean {
      *  to be extracted
      * @return The property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getProperty(final Object bean, final String name)
@@ -747,11 +747,11 @@ public class BeanUtilsBean {
      * @param name Name of the property to be extracted
      * @return The property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
     public String getSimpleProperty(final Object bean, final String name)
@@ -794,9 +794,9 @@ public class BeanUtilsBean {
      * @param properties Map keyed by property name, with the
      *  corresponding (String or String[]) value(s) to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      */
     public void populate(final Object bean, final Map<String, ? extends Object> properties)
@@ -852,9 +852,9 @@ public class BeanUtilsBean {
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      */
     public void setProperty(final Object bean, String name, final Object value)
@@ -1066,7 +1066,7 @@ public class BeanUtilsBean {
      * @param type Class of the value to be converted to
      * @return The converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      * @since 1.8.0
      */
     protected Object convert(final Object value, final Class<?> type) {

@@ -167,7 +167,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *  is requested
      * @return The descriptor for the specified property
      *
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public DynaProperty getDynaProperty(final String name) {
 
@@ -203,9 +203,9 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * with this DynaClass.
      *
      * @return A new <code>DynaBean</code> instance
-     * @exception IllegalAccessException if the Class or the appropriate
+     * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
+     * @throws InstantiationException if this Class represents an abstract
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
@@ -254,7 +254,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @param dynaBeanClass The new Class object
      *
-     * @exception IllegalArgumentException if the specified Class does not
+     * @throws IllegalArgumentException if the specified Class does not
      *  implement the <code>DynaBean</code> interface
      */
     protected void setDynaBeanClass(final Class<?> dynaBeanClass) {

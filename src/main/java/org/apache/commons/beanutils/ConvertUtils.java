@@ -276,7 +276,7 @@ public class ConvertUtils {
      * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public static Object convert(final Object value, final Class<?> targetType) {
         return ConvertUtilsBean.getInstance().convert(value, targetType);

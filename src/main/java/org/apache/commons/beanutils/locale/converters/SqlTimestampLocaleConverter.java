@@ -208,7 +208,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return The converted value
      *
-     * @exception org.apache.commons.beanutils.ConversionException if conversion
+     * @throws org.apache.commons.beanutils.ConversionException if conversion
      * cannot be performed successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */

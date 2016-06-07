@@ -216,7 +216,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property
      * @return The indexed or mapped property size
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public int size(final String name) {
 
@@ -256,7 +256,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public boolean contains(final String name, final String key) {
 
@@ -285,7 +285,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property whose value is to be retrieved.
      * @return The property's value
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public Object get(final String name) {
 
@@ -325,9 +325,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
      *
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
     public Object get(final String name, final int index) {
@@ -373,7 +373,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param key Key of the value to be retrieved
      * @return The mapped property's value
      *
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
     public Object get(final String name, final String key) {
@@ -423,7 +423,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *  be removed
      * @param key Key of the value to be removed
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
     public void remove(final String name, final String key) {
@@ -453,11 +453,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
-     * @exception IllegalArgumentException if this is not an existing property
+     * @throws IllegalArgumentException if this is not an existing property
      *  name for our DynaClass and the MutableDynaClass is restricted
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception NullPointerException if an attempt is made to set a
+     * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
     public void set(final String name, final Object value) {
@@ -504,13 +504,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
     public void set(final String name, final int index, final Object value) {
@@ -557,11 +557,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @param key Key of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
     public void set(final String name, final String key, final Object value) {

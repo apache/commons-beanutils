@@ -254,7 +254,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return the converted Date value
      *
-     * @exception org.apache.commons.beanutils.ConversionException
+     * @throws org.apache.commons.beanutils.ConversionException
      * if conversion cannot be performed successfully
      * @throws ParseException if an error occurs parsing
      */

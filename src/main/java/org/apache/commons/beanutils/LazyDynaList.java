@@ -504,7 +504,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * <p>Set the element Type and DynaClass.</p>
      *
      * @param elementType The type of the elements.
-     * @exception IllegalArgumentException if the List already
+     * @throws IllegalArgumentException if the List already
      *            contains elements or the DynaClass is null.
      */
     public void setElementType(final Class<?> elementType) {
@@ -557,7 +557,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * <p>Set the element Type and DynaClass.</p>
      *
      * @param elementDynaClass The DynaClass of the elements.
-     * @exception IllegalArgumentException if the List already
+     * @throws IllegalArgumentException if the List already
      *            contains elements or the DynaClass is null.
      */
     public void setElementDynaClass(final DynaClass elementDynaClass) {

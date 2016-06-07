@@ -255,13 +255,13 @@ public class PropertyUtilsBean {
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if the <code>dest</code> or
+     * @throws IllegalArgumentException if the <code>dest</code> or
      *  <code>orig</code> argument is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void copyProperties(final Object dest, final Object orig)
@@ -351,12 +351,12 @@ public class PropertyUtilsBean {
      * @param bean Bean whose properties are to be extracted
      * @return The set of properties for the bean
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws IllegalArgumentException if <code>bean</code> is null
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Map<String, Object> describe(final Object bean)
@@ -402,15 +402,15 @@ public class PropertyUtilsBean {
      *  to be extracted
      * @return the indexed property value
      *
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying array or List
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getIndexedProperty(final Object bean, String name)
@@ -459,15 +459,15 @@ public class PropertyUtilsBean {
      * @param index Index of the property value to be extracted
      * @return the indexed property value
      *
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getIndexedProperty(final Object bean,
@@ -574,11 +574,11 @@ public class PropertyUtilsBean {
      *  to be extracted
      * @return the mapped property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getMappedProperty(final Object bean, String name)
@@ -625,11 +625,11 @@ public class PropertyUtilsBean {
      * @param key Key of the property value to be extracted
      * @return the mapped property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getMappedProperty(final Object bean,
@@ -753,15 +753,15 @@ public class PropertyUtilsBean {
      * @param name Possibly nested name of the property to be extracted
      * @return the nested property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception NestedNullException if a nested reference to a
+     * @throws NestedNullException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException
+     * @throws InvocationTargetException
      * if the property accessor method throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getNestedProperty(Object bean, String name)
@@ -868,13 +868,13 @@ public class PropertyUtilsBean {
      *  to be extracted
      * @return the property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getProperty(final Object bean, final String name)
@@ -901,15 +901,15 @@ public class PropertyUtilsBean {
      *  which a property descriptor is requested
      * @return the property descriptor
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public PropertyDescriptor getPropertyDescriptor(Object bean,
@@ -990,7 +990,7 @@ public class PropertyUtilsBean {
      * @param beanClass Bean class for which property descriptors are requested
      * @return the property descriptors
      *
-     * @exception IllegalArgumentException if <code>beanClass</code> is null
+     * @throws IllegalArgumentException if <code>beanClass</code> is null
      */
     public PropertyDescriptor[]
             getPropertyDescriptors(final Class<?> beanClass) {
@@ -1009,7 +1009,7 @@ public class PropertyUtilsBean {
      * @param bean Bean for which property descriptors are requested
      * @return the property descriptors
      *
-     * @exception IllegalArgumentException if <code>bean</code> is null
+     * @throws IllegalArgumentException if <code>bean</code> is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
 
@@ -1040,15 +1040,15 @@ public class PropertyUtilsBean {
      *  which a property descriptor is requested
      * @return the property editor class
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Class<?> getPropertyEditorClass(final Object bean, final String name)
@@ -1088,15 +1088,15 @@ public class PropertyUtilsBean {
      *  which a property descriptor is requested
      * @return The property type
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Class<?> getPropertyType(Object bean, String name)
@@ -1200,15 +1200,15 @@ public class PropertyUtilsBean {
      * @param name Name of the property to be extracted
      * @return The property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if the property name
+     * @throws IllegalArgumentException if the property name
      *  is nested or indexed
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public Object getSimpleProperty(final Object bean, final String name)
@@ -1319,7 +1319,7 @@ public class PropertyUtilsBean {
      * @return <code>true</code> if the property is readable,
      * otherwise <code>false</code>
      *
-     * @exception IllegalArgumentException if <code>bean</code>
+     * @throws IllegalArgumentException if <code>bean</code>
      *  or <code>name</code> is <code>null</code>
      *
      * @since BeanUtils 1.6
@@ -1410,7 +1410,7 @@ public class PropertyUtilsBean {
      * @return <code>true</code> if the property is writeable,
      * otherwise <code>false</code>
      *
-     * @exception IllegalArgumentException if <code>bean</code>
+     * @throws IllegalArgumentException if <code>bean</code>
      *  or <code>name</code> is <code>null</code>
      *
      * @since BeanUtils 1.6
@@ -1505,15 +1505,15 @@ public class PropertyUtilsBean {
      * @param value Value to which the specified property element
      *  should be set
      *
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setIndexedProperty(final Object bean, String name,
@@ -1562,15 +1562,15 @@ public class PropertyUtilsBean {
      * @param index Index of the property value to be set
      * @param value Value to which the indexed property element is to be set
      *
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the valid range for the underlying property
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setIndexedProperty(final Object bean, final String name,
@@ -1687,11 +1687,11 @@ public class PropertyUtilsBean {
      *  to be set
      * @param value The property value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setMappedProperty(final Object bean, String name,
@@ -1740,11 +1740,11 @@ public class PropertyUtilsBean {
      * @param key Key of the property value to be set
      * @param value The property value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setMappedProperty(final Object bean, final String name,
@@ -1847,15 +1847,15 @@ public class PropertyUtilsBean {
      * @param name Possibly nested name of the property to be modified
      * @param value Value to which the property is to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setNestedProperty(Object bean,
@@ -1994,13 +1994,13 @@ public class PropertyUtilsBean {
      *  to be modified
      * @param value Value to which this property is to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setProperty(final Object bean, final String name, final Object value)
@@ -2020,15 +2020,15 @@ public class PropertyUtilsBean {
      * @param name Name of the property to be modified
      * @param value Value to which the property should be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if <code>bean</code> or
+     * @throws IllegalArgumentException if <code>bean</code> or
      *  <code>name</code> is null
-     * @exception IllegalArgumentException if the property name is
+     * @throws IllegalArgumentException if the property name is
      *  nested or indexed
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  propety cannot be found
      */
     public void setSimpleProperty(final Object bean,

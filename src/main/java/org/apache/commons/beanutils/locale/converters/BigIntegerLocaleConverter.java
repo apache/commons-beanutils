@@ -208,7 +208,7 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      * @since 1.8.0

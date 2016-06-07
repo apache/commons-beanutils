@@ -150,7 +150,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return The converted value
      *
-     * @exception ParseException if conversion cannot be performed
+     * @throws ParseException if conversion cannot be performed
      *  successfully
      */
 
@@ -164,7 +164,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param value The input object to be converted
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public Object convert(final Object value) {
@@ -178,7 +178,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public Object convert(final Object value, final String pattern) {
@@ -194,7 +194,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param value The input object to be converted
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public <T> T convert(final Class<T> type, final Object value) {
@@ -213,7 +213,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * will be used.
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public <T> T convert(final Class<T> type, final Object value, final String pattern) {

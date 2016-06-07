@@ -87,7 +87,7 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
      * @param value The input value to be converted
      * @return the converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     @Override

@@ -172,11 +172,11 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      *  any sort of error during conversion and the constructor
      *  was provided with a default value.
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully and the constructor was not provided with a default
      *  value to return on conversion failure.
      *
-     * @exception NullPointerException if value is an array, and any of the
+     * @throws NullPointerException if value is an array, and any of the
      * array elements are null.
      */
     @Override

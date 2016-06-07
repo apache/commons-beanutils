@@ -93,9 +93,9 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      *
      * @param resultSet The result set to be wrapped
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet) throws SQLException {
@@ -121,9 +121,9 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
@@ -151,9 +151,9 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      * @param lowerCase Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      * @since 1.8.3
      */

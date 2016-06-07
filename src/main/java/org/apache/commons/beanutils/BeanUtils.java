@@ -91,13 +91,13 @@ public class BeanUtils {
      * @param bean Bean to be cloned
      * @return the cloned bean
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InstantiationException if a new instance of the bean's
+     * @throws InstantiationException if a new instance of the bean's
      *  class cannot be instantiated
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#cloneBean
      */
@@ -119,13 +119,13 @@ public class BeanUtils {
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if the <code>dest</code> or
+     * @throws IllegalArgumentException if the <code>dest</code> or
      *  <code>orig</code> argument is null or if the <code>dest</code>
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @see BeanUtilsBean#copyProperties
      */
@@ -146,9 +146,9 @@ public class BeanUtils {
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @see BeanUtilsBean#copyProperty
      */
@@ -168,11 +168,11 @@ public class BeanUtils {
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#describe
      */
@@ -194,11 +194,11 @@ public class BeanUtils {
      * @param name Name of the property to be extracted
      * @return The array property value
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getArrayProperty
      */
@@ -221,11 +221,11 @@ public class BeanUtils {
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getIndexedProperty(Object, String)
      */
@@ -250,11 +250,11 @@ public class BeanUtils {
      * @param index Index of the property value to be extracted
      * @return The indexed property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getIndexedProperty(Object, String, int)
      */
@@ -279,11 +279,11 @@ public class BeanUtils {
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getMappedProperty(Object, String)
      */
@@ -307,11 +307,11 @@ public class BeanUtils {
      * @param key Lookup key of the property value to be extracted
      * @return The mapped property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getMappedProperty(Object, String, String)
      */
@@ -335,13 +335,13 @@ public class BeanUtils {
      * @param name Possibly nested name of the property to be extracted
      * @return The nested property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception IllegalArgumentException if a nested reference to a
+     * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getNestedProperty
      */
@@ -365,11 +365,11 @@ public class BeanUtils {
      *  to be extracted
      * @return The property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getProperty
      */
@@ -392,11 +392,11 @@ public class BeanUtils {
      * @param name Name of the property to be extracted
      * @return The property's value, converted to a String
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @exception NoSuchMethodException if an accessor method for this
+     * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      * @see BeanUtilsBean#getSimpleProperty
      */
@@ -419,9 +419,9 @@ public class BeanUtils {
      * @param properties Map keyed by property name, with the
      *  corresponding (String or String[]) value(s) to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @see BeanUtilsBean#populate
      */
@@ -442,9 +442,9 @@ public class BeanUtils {
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
      *
-     * @exception IllegalAccessException if the caller does not have
+     * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @exception InvocationTargetException if the property accessor method
+     * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @see BeanUtilsBean#setProperty
      */

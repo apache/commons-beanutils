@@ -110,7 +110,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
     public boolean contains(final String name, final String key) {
@@ -135,7 +135,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param name Name of the property whose value is to be retrieved
      * @return The property's value
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
     public Object get(final String name) {
@@ -183,13 +183,13 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
-     * @exception NullPointerException if no array or List has been
+     * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
     public Object get(final String name, final int index) {
@@ -218,9 +218,9 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param key Key of the value to be retrieved
      * @return The mapped property's value
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
     public Object get(final String name, final String key) {
@@ -260,7 +260,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *  be removed
      * @param key Key of the value to be removed
      *
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
     public void remove(final String name, final String key) {
@@ -285,11 +285,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception NullPointerException if an attempt is made to set a
+     * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
     public void set(final String name, final Object value) {
@@ -319,13 +319,13 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not indexed
-     * @exception IndexOutOfBoundsException if the specified index
+     * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
     public void set(final String name, final int index, final Object value) {
@@ -362,11 +362,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param key Key of the property to be set
      * @param value Value to which this property is to be set
      *
-     * @exception ConversionException if the specified value cannot be
+     * @throws ConversionException if the specified value cannot be
      *  converted to the type required for this property
-     * @exception IllegalArgumentException if there is no property
+     * @throws IllegalArgumentException if there is no property
      *  of the specified name
-     * @exception IllegalArgumentException if the specified property
+     * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
     public void set(final String name, final String key, final Object value) {
@@ -399,7 +399,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param name Name of the property for which to retrieve the descriptor
      * @return The property descriptor
      *
-     * @exception IllegalArgumentException if this is not a valid property
+     * @throws IllegalArgumentException if this is not a valid property
      *  name for our DynaClass
      */
     protected DynaProperty getDynaProperty(final String name) {

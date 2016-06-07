@@ -48,7 +48,7 @@ public interface Converter {
      * @param value The input value to be converted
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public <T> T convert(Class<T> type, Object value);

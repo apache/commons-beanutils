@@ -224,7 +224,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return The converted value
      *
-     * @exception org.apache.commons.beanutils.ConversionException if conversion
+     * @throws org.apache.commons.beanutils.ConversionException if conversion
      * cannot be performed successfully
      * @throws ParseException if an error occurs
      */
@@ -268,7 +268,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern The pattern is used for the convertion
      * @return The format for the locale and pattern
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      * @throws ParseException if an error occurs parsing a String to a Number
      */

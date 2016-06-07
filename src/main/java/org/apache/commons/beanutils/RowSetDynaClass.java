@@ -94,9 +94,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      *
      * @param resultSet The result set to be wrapped
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet) throws SQLException {
@@ -116,9 +116,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param resultSet The result set to be wrapped
      * @param limit The maximum for the size of the result.
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final int limit) throws SQLException {
@@ -141,9 +141,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
@@ -169,9 +169,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param lowerCase Should property names be lower cased?
      * @param limit Maximum limit for the <code>List</code> of {@link DynaBean}
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit)
@@ -198,9 +198,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param lowerCase Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      * @since 1.8.3
      */
@@ -228,9 +228,9 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param limit Maximum limit for the <code>List</code> of {@link DynaBean}
      * @param useColumnLabel true if the column label should be used, otherwise false
      *
-     * @exception NullPointerException if <code>resultSet</code>
+     * @throws NullPointerException if <code>resultSet</code>
      *  is <code>null</code>
-     * @exception SQLException if the metadata for this result set
+     * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      * @since 1.8.3
      */
@@ -280,7 +280,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * @param resultSet The <code>ResultSet</code> whose data is to be
      *  copied
      *
-     * @exception SQLException if an error is encountered copying the data
+     * @throws SQLException if an error is encountered copying the data
      */
     protected void copy(final ResultSet resultSet) throws SQLException {
 

@@ -128,7 +128,7 @@ public abstract class AbstractArrayConverter implements Converter {
      * @param value The input value to be converted
      * @return The converted value
      *
-     * @exception ConversionException if conversion cannot be performed
+     * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
     public abstract Object convert(Class type, Object value);
@@ -153,9 +153,9 @@ public abstract class AbstractArrayConverter implements Converter {
      * @param svalue String value to be parsed
      * @return The parsed list of String values
      *
-     * @exception ConversionException if the syntax of <code>svalue</code>
+     * @throws ConversionException if the syntax of <code>svalue</code>
      *  is not syntactically valid
-     * @exception NullPointerException if <code>svalue</code>
+     * @throws NullPointerException if <code>svalue</code>
      *  is <code>null</code>
      */
     protected List parseElements(String svalue) {

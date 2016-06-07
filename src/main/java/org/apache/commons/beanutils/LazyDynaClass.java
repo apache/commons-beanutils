@@ -157,8 +157,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @param name Name of the new dynamic property
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     public void add(final String name) {
@@ -173,8 +173,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param type Data type of the new dynamic property (null for no
      *  restrictions)
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     public void add(final String name, final Class<?> type) {
@@ -204,7 +204,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param writeable Set to <code>true</code> if this property value
      *  should be writeable
      *
-     * @exception UnsupportedOperationException anytime this method is called
+     * @throws UnsupportedOperationException anytime this method is called
      */
     public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
@@ -215,8 +215,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @param property Property the new dynamic property to add.
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     protected void add(final DynaProperty property) {
@@ -254,8 +254,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @param name Name of the dynamic property to remove
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
     public void remove(final String name) {
@@ -311,7 +311,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *  is requested
      * @return The dyna property for the specified name
      *
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
@@ -343,7 +343,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param name The name of the property to check
      * @return <code>true</code> if there is a property of the
      * specified name, otherwise <code>false</code>
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(final String name) {
 

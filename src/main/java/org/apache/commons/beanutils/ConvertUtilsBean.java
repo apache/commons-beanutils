@@ -473,7 +473,7 @@ public class ConvertUtilsBean {
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
 
@@ -504,7 +504,7 @@ public class ConvertUtilsBean {
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
 
@@ -541,7 +541,7 @@ public class ConvertUtilsBean {
      * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value
      *
-     * @exception ConversionException if thrown by an underlying Converter
+     * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final Object value, final Class<?> targetType) {
 

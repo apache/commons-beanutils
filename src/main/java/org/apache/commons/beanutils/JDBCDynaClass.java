@@ -90,7 +90,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
      *
-     * @exception IllegalArgumentException if no property name is specified
+     * @throws IllegalArgumentException if no property name is specified
      */
     public DynaProperty getDynaProperty(final String name) {
 
@@ -117,9 +117,9 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * with this DynaClass.  <strong>NOTE</strong> - This operation is not
      * supported, and throws an exception.</p>
      *
-     * @exception IllegalAccessException if the Class or the appropriate
+     * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
-     * @exception InstantiationException if this Class represents an abstract
+     * @throws InstantiationException if this Class represents an abstract
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
@@ -147,7 +147,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @param className The name of the class to load
      * @return The loaded class
-     * @exception SQLException if an exception was thrown trying to load
+     * @throws SQLException if an exception was thrown trying to load
      *  the specified class
      */
     protected Class<?> loadClass(final String className) throws SQLException {
@@ -230,7 +230,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @param resultSet The <code>resultSet</code> whose metadata is to
      *  be introspected
      *
-     * @exception SQLException if an error is encountered processing the
+     * @throws SQLException if an error is encountered processing the
      *  result set metadata
      */
     protected void introspect(final ResultSet resultSet) throws SQLException {

@@ -41,8 +41,8 @@ public interface MutableDynaClass extends DynaClass {
      *
      * @param name Name of the new dynamic property
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     public void add(String name);
@@ -56,8 +56,8 @@ public interface MutableDynaClass extends DynaClass {
      * @param type Data type of the new dynamic property (null for no
      *  restrictions)
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     public void add(String name, Class<?> type);
@@ -75,8 +75,8 @@ public interface MutableDynaClass extends DynaClass {
      * @param writeable Set to <code>true</code> if this property value
      *  should be writeable
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     public void add(String name, Class<?> type, boolean readable,
@@ -103,8 +103,8 @@ public interface MutableDynaClass extends DynaClass {
      *
      * @param name Name of the dynamic property to remove
      *
-     * @exception IllegalArgumentException if name is null
-     * @exception IllegalStateException if this DynaClass is currently
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
     public void remove(String name);
