@@ -228,6 +228,7 @@ public class IndexedPropertyTestCase {
             if (pd.getName().equals("stringList")) {
                 Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List",
                         pd instanceof IndexedPropertyDescriptor);
+                return;
             }
         }
         Assert.fail("Could not find PropertyDescriptor for 'stringList'");
