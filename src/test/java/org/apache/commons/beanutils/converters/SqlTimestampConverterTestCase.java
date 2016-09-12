@@ -18,7 +18,9 @@
 package org.apache.commons.beanutils.converters;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import junit.framework.TestSuite;
@@ -51,6 +53,13 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     // ------------------------------------------------------------------------
 
+    private boolean isUSFormatWithComma() {
+        // BEANUTILS-495 workaround - sometimes Java 9 expects "," in date even if
+        // the format is set to lenient
+        DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+        return loc.format(new Date()).contains(",");
+    }
+
     /**
      * Test Date Converter with no default value
      */
@@ -60,15 +69,26 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
+        isUSFormatWithComma();
 
-        final String pattern = "M/d/yy h:mm a"; // SHORT style Date & Time format for US Locale
 
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
+        String pattern; // SHORT style Date & Time format for US Locale
+        String testString;
+        if (isUSFormatWithComma()) {
+            pattern = "M/d/yy, h:mm a";
+            testString = "3/21/06, 3:06 PM";
+        } else {
+            // More regular pattern for Java 8 and earlier
+            pattern = "M/d/yy h:mm a";
+            testString = "3/21/06 3:06 PM";
+        }
+
+
         // Valid String --> Type Conversion
-        final String testString = "3/21/06 3:06 pm";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
 
