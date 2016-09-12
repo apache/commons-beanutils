@@ -895,6 +895,10 @@ public class PropertyUtilsBean {
      * for the last resolved property itself is returned.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
+     * 
+     * <p>Note that for Java 8 and above, this method no longer return
+     * IndexedPropertyDescriptor for {@link List}-typed properties, only for
+     * properties typed as native array. (BEANUTILS-492).
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
