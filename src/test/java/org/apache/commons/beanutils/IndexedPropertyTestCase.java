@@ -130,7 +130,7 @@ public class IndexedPropertyTestCase {
     public void testListIndexedPropertyDescriptor() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
         assertNotNull("No List Descriptor", descriptor);
-      	// BEANUTILS-492 - can't assume lists are handled as arrays in Java 8+
+// BEANUTILS-492 - can't assume lists are handled as arrays in Java 8+
 //            assertEquals("Not IndexedPropertyDescriptor",
 //                         IndexedPropertyDescriptor.class,
 //                         descriptor.getClass());
@@ -222,17 +222,17 @@ public class IndexedPropertyTestCase {
         assertNotNull("No List Write Method", descriptor.getWriteMethod());
     }
 
-	public static void assumeSupportsIndexedLists() throws IntrospectionException {
-		BeanInfo beanInfo = Introspector.getBeanInfo(IndexedTestBean.class);
-		for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
-			if (pd.getName().equals("stringList")) {
-				Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List", 
-						pd instanceof IndexedPropertyDescriptor);
-			}					
-		}
-		Assert.fail("Could not find PropertyDescriptor for 'stringList'"); 
-	}
-	
+    public static void assumeSupportsIndexedLists() throws IntrospectionException {
+        BeanInfo beanInfo = Introspector.getBeanInfo(IndexedTestBean.class);
+        for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
+            if (pd.getName().equals("stringList")) {
+                Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List",
+                        pd instanceof IndexedPropertyDescriptor);
+            }
+        }
+        Assert.fail("Could not find PropertyDescriptor for 'stringList'");
+    }
+
     /**
      * Test Indexed Read Method for a List
      */
@@ -240,7 +240,7 @@ public class IndexedPropertyTestCase {
     public void testListIndexedReadMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
         assertNotNull("stringList descriptor not found", descriptor);
-        assumeSupportsIndexedLists();        
+        assumeSupportsIndexedLists();
         assertNotNull("No List Indexed Read Method",  ((IndexedPropertyDescriptor)descriptor).getIndexedReadMethod());
     }
 
@@ -248,10 +248,10 @@ public class IndexedPropertyTestCase {
      * Test Indexed Write Method for a List
      */
     @Test
-    public void testListIndexedWriteMethod() throws Exception {    	
+    public void testListIndexedWriteMethod() throws Exception {
         final PropertyDescriptor descriptor = propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
         assertNotNull("stringList descriptor not found", descriptor);
-        assumeSupportsIndexedLists();		
+        assumeSupportsIndexedLists();
         assertNotNull("No List Indexed Write Method", ((IndexedPropertyDescriptor)descriptor).getIndexedWriteMethod());
     }
 

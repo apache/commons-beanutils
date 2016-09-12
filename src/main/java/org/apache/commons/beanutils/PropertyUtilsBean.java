@@ -895,7 +895,7 @@ public class PropertyUtilsBean {
      * for the last resolved property itself is returned.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
-     * 
+     *
      * <p>Note that for Java 8 and above, this method no longer return
      * IndexedPropertyDescriptor for {@link List}-typed properties, only for
      * properties typed as native array. (BEANUTILS-492).
@@ -1089,9 +1089,9 @@ public class PropertyUtilsBean {
      * <p>
      * If the property is an indexed property (e.g. <code>String[]</code>),
      * this method will return the type of the items within that array.
-     * Note that from Java 8 and newer, this method do not support  
+     * Note that from Java 8 and newer, this method do not support
      * such index types from items within an Collection, and will
-     * instead return the collection type (e.g. java.util.List) from the 
+     * instead return the collection type (e.g. java.util.List) from the
      * getter mtethod.
      *
      * @param bean Bean for which a property descriptor is requested

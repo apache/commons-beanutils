@@ -26,18 +26,18 @@ import org.junit.Test;
  *
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">BEANUTILS-422</a>
- * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a> 
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
 public class Jira422bTestCase {
 
-    @Test	
+    @Test
     public void testRootBean() throws Exception {
         final RootBeanB bean = new FirstChildBeanB();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
-    
+
     @Test
     public void testSecondChildBean() throws Exception {
         final RootBeanB bean = new SecondChildBeanB();

@@ -35,42 +35,42 @@ import org.junit.Test;
 /**
  * getPropertyType return null on second descendant class
  * <p>
- * This test only work in Java 7 or earlier (See BEANUTILS-492) - as 
+ * This test only work in Java 7 or earlier (See BEANUTILS-492) - as
  * a weaker alternative, see {@link Jira422bTestCase}.
- * 
+ *
  *
  * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
  */
 public class Jira422TestCase {
 
-	/**
-	 * Detects BEANUTILS-492 in Java 8 or later
-	 * 
-	 * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
-	 */
-	@BeforeClass
-	public static void assumeSupportsIndexedLists() throws IntrospectionException {
-		BeanInfo beanInfo = Introspector.getBeanInfo(RootBean.class);
-		for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
-			if (pd.getName().equals("file")) {
-				Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List", 
-						pd instanceof IndexedPropertyDescriptor);
-			}					
-		}
-		Assert.fail("Could not find PropertyDescriptor for 'file'"); 
-	}
-	
-	@Test
-    public void testRootBean() throws Exception {    	
+    /**
+     * Detects BEANUTILS-492 in Java 8 or later
+     *
+     * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
+     */
+    @BeforeClass
+    public static void assumeSupportsIndexedLists() throws IntrospectionException {
+        BeanInfo beanInfo = Introspector.getBeanInfo(RootBean.class);
+        for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
+            if (pd.getName().equals("file")) {
+                Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List",
+                        pd instanceof IndexedPropertyDescriptor);
+            }
+        }
+        Assert.fail("Could not find PropertyDescriptor for 'file'");
+    }
+
+    @Test
+    public void testRootBean() throws Exception {
         final RootBean bean = new FirstChildBean();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
-	@Test	
-    public void testSecondChildBean() throws Exception {    	
-    	final RootBean bean = new SecondChildBean();
+    @Test
+    public void testSecondChildBean() throws Exception {
+        final RootBean bean = new SecondChildBean();
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
