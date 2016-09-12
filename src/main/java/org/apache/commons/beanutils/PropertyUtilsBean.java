@@ -1086,6 +1086,13 @@ public class PropertyUtilsBean {
      * of a name reference is indexed, the type of the property itself will
      * be returned.  If the last (or only) element has no property with the
      * specified name, <code>null</code> is returned.
+     * <p>
+     * If the property is an indexed property (e.g. <code>String[]</code>),
+     * this method will return the type of the items within that array.
+     * Note that from Java 8 and newer, this method do not support  
+     * such index types from items within an Collection, and will
+     * instead return the collection type (e.g. java.util.List) from the 
+     * getter mtethod.
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for
