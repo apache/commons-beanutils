@@ -439,9 +439,9 @@ public class PropertyUtilsTestCase extends TestCase {
               pd.getReadMethod());
     assertNull("invalidBoolean has no write method",
            pd.getWriteMethod());
-    assertTrue("invalidBoolean getter method is isInvalidBoolean",
-           "isInvalidBoolean".equals(pd.getReadMethod().getName()));
-
+    assertTrue("invalidBoolean getter method is isInvalidBoolean or getInvalidBoolean",
+           Arrays.asList("isInvalidBoolean", "getInvalidBoolean")
+           .contains(pd.getReadMethod().getName()));
     }
 
 
