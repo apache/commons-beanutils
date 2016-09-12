@@ -175,6 +175,15 @@
       <email>ggregory@apache.org</email>
       <url>http://www.garygregory.com</url>
       <timezone>-5</timezone>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <id>stain</id>
+      <name>Stian Soiland-Reyes</name>
+      <email>stain@apache.org</email>
+      <url>http://orcid.org/0000-0001-9842-9718</url>
+      <timezone>+0</timezone>
+      <organization>The Apache Software Foundation</organization>
     </developer>
   </developers>
 
