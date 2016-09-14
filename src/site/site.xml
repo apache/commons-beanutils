@@ -36,7 +36,6 @@
         <menu name="Documentation">
             <item name="Building"             href="/building.html"/>
             <item name="History"              href="/changes-report.html"/>
-            <item name="Wiki"                 href="http://wiki.apache.org/commons/BeanUtils"/>
             <item name="1.9.3" collapse="true" href="/index.html">
                 <item name="Release Notes"    href="http://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt"/>
                 <item name="User Guide"       href="http://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/package-summary.html#package_description"/>
