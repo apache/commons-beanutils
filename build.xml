@@ -212,7 +212,7 @@
               todir="${dist.home}"/>
     <copy      file="RELEASE-NOTES.txt"
               todir="${dist.home}"/>
-    <copy      file="README.txt"
+    <copy      file="README.md"
               todir="${dist.home}"/>
     <antcall target="jar"/>
   </target>
