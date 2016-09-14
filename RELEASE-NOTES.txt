@@ -1,32 +1,59 @@
               Apache Commons BeanUtils 1.9.3
                   RELEASE NOTES
 
-The Apache Commons BeanUtils team is pleased to announce the release of Apache Commons BeanUtils 1.9.3
+The Apache Commons team is pleased to announce the release of Apache
+Commons BeanUtils 1.9.3
 
-Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
+Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around
+reflection and introspection.
 
-This is a bug fix release.
+This is a bug fix release, which also improves the tests for building on Java
+8.
+
+Note that Java 8 and later no longer support indexed bean properties on
+java.util.List, only on arrays like String[]. (BEANUTILS-492).  This affects
+PropertyUtils.getPropertyType() and PropertyUtils.getPropertyDescriptor();
+their javadoc have therefore been updated to reflect this change in the JDK.
+
 
 Changes in this version include:
 
 Fixed Bugs:
-o BEANUTILS-470:  Precision lost when converting BigDecimal Thanks to Tommy Tynjä.
-o BEANUTILS-465:  Indexed List Setters no longer work Thanks to Daniel Atallah.
+
+* BEANUTILS-477: Changed log level in FluentPropertyBeanIntrospector
+* BEANUTILS-492: Fixed exception when setting indexed properties on DynaBeans.
+  Thanks to Bernhard Seebass.
+* BEANUTILS-470: Precision lost when converting BigDecimal Thanks to Tommy
+  Tynjä.
+* BEANUTILS-465: Indexed List Setters fixed. Thanks to Daniel Atallah.
 
 Changes:
-o BEANUTILS-433:  Update dependency from JUnit 3.8.1 to 4.12. Thanks to Benedikt Ritter, Gary Gregory.
-o BEANUTILS-490:  Update Java requirement from Java 5 to 6. Thanks to Gary Gregory.
-o BEANUTILS-474:  FluentPropertyBeanIntrospector does not use the same naming algorithm as DefaultBeanIntrospector. Thanks to Michael Grove.
-o BEANUTILS-482:  Update commons-collections from 3.2.1 to 3.2.2. Thanks to Gary Gregory.
-o BEANUTILS-469:  Update commons-logging from 1.1.1 to 1.2. Thanks to Gary Gregory.
+* BEANUTILS-433: Update dependency from JUnit 3.8.1 to 4.12. 
+  Thanks to Benedikt Ritter, Gary Gregory.
+* BEANUTILS-469: Update commons-logging from 1.1.1 to 1.2. 
+  Thanks to Gary Gregory.
+* BEANUTILS-474: FluentPropertyBeanIntrospector does not use the same naming
+  algorithm as DefaultBeanIntrospector.  Thanks to Michael Grove.
+* BEANUTILS-490: Update Java requirement from Java 5 to 6. 
+  Thanks to Gary Gregory.
+* BEANUTILS-482: Update commons-collections from 3.2.1 to 3.2.2
+  (CVE-2015-4852). Thanks to Gary Gregory.
+* BEANUTILS-490: Update java requirement to Java 6. Thanks to Gary Gregory.
+* BEANUTILS-492: IndexedPropertyDescriptor tests now pass on Java 8. 
+  Thanks to Stian Soiland-Reyes.
+* BEANUTILS-495: DateConverterTestBase fails on M/d/yy in Java 9.
+  Thanks to Stian Soiland-Reyes.
+* BEANUTILS-496: testGetDescriptorInvalidBoolean fails on Java 9.
+  Thanks to Stian Soiland-Reyes.
 
 
 Historical list of changes: http://commons.apache.org/proper/commons-beanutils/changes-report.html
 
-For complete information on Apache Commons BeanUtils, including instructions on how to submit bug reports,
-patches, or suggestions for improvement, see the Apache Apache Commons BeanUtils website:
+For complete information on Apache Commons BeanUtils, including instructions on
+how to submit bug reports, patches, or suggestions for improvement, see the
+Apache Apache Commons BeanUtils website:
 
-http://commons.apache.org/proper/commons-beanutils/
+https://commons.apache.org/proper/commons-beanutils/
 
 -----------------------------------------------------------------------------
 

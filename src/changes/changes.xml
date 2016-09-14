@@ -54,13 +54,13 @@
       <action issue="BEANUTILS-490" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Java requirement from Java 5 to 6.
       </action>
-      <action issue="BEANUTILS-492" dev="stain" type="update" due-to="Bernhard Seebass">
+      <action issue="BEANUTILS-492" dev="stain" type="update" due-to="Stian Soiland-Reyes">
         IndexedPropertyDescriptor not supported for List in Java 8
       </action>
       <action issue="BEANUTILS-493" dev="stain" type="fix" due-to="Bernhard Seebass">
         Exception when setting indexed properties: "Default conversion to ArrayList failed"
       </action>
-      <action issue="BEANUTILS-495" dev="stain" type="update">
+      <action issue="BEANUTILS-495" dev="stain" type="update" due-to="Stian Soiland-Reyes">
         DateConverterTestBase fails on M/d/yy in Java 9
       </action>
       <action issue="BEANUTILS-496" dev="stain" type="update" due-to="Stian Soiland-Reyes">
