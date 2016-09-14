@@ -25,7 +25,7 @@ limitations under the License.
 <section name="Overview">
 <p>
   Commons BeanUtils can be built using
-  <a href="http://maven.apache.org">Maven 2</a> or
+  <a href="http://maven.apache.org">Maven 2 or Maven 3</a> or
   <a href="http://ant.apache.org">Ant</a> as the build system.
 </p>
   <p>
