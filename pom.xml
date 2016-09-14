@@ -32,7 +32,7 @@
 
   <inceptionYear>2000</inceptionYear>
   <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
-  <url>http://commons.apache.org/proper/commons-beanutils/</url>
+  <url>https://commons.apache.org/proper/commons-beanutils/</url>
 
   <properties>
       <maven.compiler.source>1.6</maven.compiler.source>
