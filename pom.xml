@@ -353,7 +353,7 @@
               <redirectTestOutputToFile>true</redirectTestOutputToFile>
               <systemPropertyVariables>
                   <org.apache.commons.logging.LogFactory>org.apache.commons.logging.impl.LogFactoryImpl</org.apache.commons.logging.LogFactory>
-                  <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>>
+                  <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>
                   <org.apache.commons.logging.simplelog.defaultlog>WARN</org.apache.commons.logging.simplelog.defaultlog>
               </systemPropertyVariables>
 
