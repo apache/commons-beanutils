@@ -32,8 +32,23 @@
 
   <inceptionYear>2000</inceptionYear>
   <description>Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</description>
-
   <url>http://commons.apache.org/proper/commons-beanutils/</url>
+
+  <properties>
+      <maven.compiler.source>1.6</maven.compiler.source>
+      <maven.compiler.target>1.6</maven.compiler.target>
+      <commons.componentid>beanutils</commons.componentid>
+      <commons.release.version>1.9.3</commons.release.version>
+      <commons.jira.id>BEANUTILS</commons.jira.id>
+      <commons.jira.pid>12310460</commons.jira.pid>
+      <!-- limit memory size see BEANUTILS-291; allow command-line override -->
+      <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
+      <surefire.argLine>-Xmx50M</surefire.argLine>
+      <!-- upgrade from 0.8.0 -->
+      <commons.japicmp.version>0.9.0</commons.japicmp.version>
+  </properties>
+
+
 
   <issueManagement>
     <system>jira</system>
@@ -199,11 +214,11 @@
     <contributor>
       <name>Berin Loritsch</name>
       <email></email>
-    </contributor>    
+    </contributor>
     <contributor>
       <name>Alex Crown</name>
       <email></email>
-    </contributor>    
+    </contributor>
     <contributor>
       <name>Marcus Zander</name>
       <email></email>
@@ -294,13 +309,13 @@
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId> 
-      <version>3.2.2</version> 
+      <artifactId>commons-collections</artifactId>
+      <version>3.2.2</version>
     </dependency>
     <dependency>
       <groupId>commons-collections</groupId>
-      <artifactId>commons-collections-testframework</artifactId> 
-      <version>3.2.1</version> 
+      <artifactId>commons-collections-testframework</artifactId>
+      <version>3.2.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -350,6 +365,18 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
+      <plugin>
+        <!-- Check if we broke compatibibility against previous release -->
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <version>${commons.japicmp.version}</version>
+        <configuration>
+              <parameter>
+                      <!-- Tell japicmp about the -incubator suffix  -->
+                        <oldVersionPattern>\d+\.\d+\.\d+</oldVersionPattern>
+                    </parameter>
+                </configuration>
+      </plugin>
       </plugins>
       <pluginManagement>
         <plugins>
@@ -368,18 +395,6 @@
         </plugins>
       </pluginManagement>
     </build>
-
-    <properties>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <commons.componentid>beanutils</commons.componentid>
-        <commons.release.version>1.9.3</commons.release.version>
-        <commons.jira.id>BEANUTILS</commons.jira.id>
-        <commons.jira.pid>12310460</commons.jira.pid>
-        <!-- limit memory size see BEANUTILS-291; allow command-line override -->
-        <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
-        <surefire.argLine>-Xmx50M</surefire.argLine>
-    </properties> 
 
     <reporting>
         <plugins>
