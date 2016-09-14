@@ -16,22 +16,19 @@
  */
 package org.apache.commons.beanutils.bugs;
 
+import static org.apache.commons.beanutils.bugs.other.Jira492IndexedListsSupport.supportsIndexedLists;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.beans.BeanInfo;
 import java.beans.IndexedPropertyDescriptor;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtilsBean;
-import org.junit.Assert;
+import org.apache.commons.beanutils.bugs.other.Jira492IndexedListsSupport.IndexedBean;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,40 +38,13 @@ import org.junit.Test;
  * returned for properties of type {@link List}, they
  * can still be accessed as positional items.
  *
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */
 public class Jira492TestCase {
 
     private final BeanUtilsBean beanUtils = new BeanUtilsBean();
 
     private final PropertyUtilsBean propertyUtils = new PropertyUtilsBean();
-
-    public static class IndexedBean {
-        private List<String> someList = new ArrayList<String>();
-        public List<String> getSomeList() {
-            return someList;
-        }
-        public void setSomeList(List<String> someList) {
-            this.someList = someList;
-        }
-        public void setSomeList(int i, String value) {
-            someList.set(i, value);
-        }
-        public String getSomeList(int i) {
-            return someList.get(i);
-        }
-    }
-
-    public static boolean supportsIndexedLists() throws IntrospectionException {
-        BeanInfo beanInfo = Introspector.getBeanInfo(IndexedBean.class);
-        for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
-            if (pd.getName().equals("someList")) {
-                return pd instanceof IndexedPropertyDescriptor;
-            }
-        }
-        Assert.fail("Could not find PropertyDescriptor for 'file'");
-        return false;
-    }
-
 
     private IndexedBean bean;
 
@@ -144,8 +114,6 @@ public class Jira492TestCase {
             // Java 7 or earlier? (BEANUTILS-492)
             IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
             assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
-        } else {
-
         }
     }
 
