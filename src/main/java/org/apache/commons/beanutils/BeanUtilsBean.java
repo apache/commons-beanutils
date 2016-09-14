@@ -921,6 +921,9 @@ public class BeanUtilsBean {
                 return; // Skip this property setter
             }
             type = dynaPropertyType(dynaProperty, value);
+            if (index >= 0 && List.class.isAssignableFrom(type)) {
+            	type = Object.class;
+            }
         } else if (target instanceof Map) {
             type = Object.class;
         } else if (target != null && target.getClass().isArray() && index >= 0) {

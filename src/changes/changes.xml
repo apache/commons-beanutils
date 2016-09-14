@@ -19,7 +19,7 @@
   </properties>
   <body>
 
-    <release version="1.9.3" date="2016-06-02" description="Buf fix release">
+    <release version="1.9.3" date="2016-09-14" description="Bug fix release">
       <action issue="BEANUTILS-433" dev="ggregory" type="update" due-to="Benedikt Ritter, Gary Gregory">
         Update dependency from JUnit 3.8.1 to 4.12.
       </action>
@@ -43,6 +43,9 @@
       </action>
       <action issue="BEANUTILS-465" dev="oheger" type="fix" due-to="Daniel Atallah">
         Indexed List Setters no longer work
+      </action>
+      <action issue="BEANUTILS-493" dev="stain" type="fix" due-to="Bernhard Seebass">
+        Exception when setting indexed properties: "Default conversion to ArrayList failed"
       </action>
     </release>
 
