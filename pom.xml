@@ -52,7 +52,7 @@
 
   <issueManagement>
     <system>jira</system>
-    <url>http://issues.apache.org/jira/browse/BEANUTILS</url>
+    <url>https://issues.apache.org/jira/browse/BEANUTILS</url>
   </issueManagement>
 
   <scm>
@@ -370,12 +370,6 @@
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
         <version>${commons.japicmp.version}</version>
-        <configuration>
-              <parameter>
-                      <!-- Tell japicmp about the -incubator suffix  -->
-                        <oldVersionPattern>\d+\.\d+\.\d+</oldVersionPattern>
-                    </parameter>
-                </configuration>
       </plugin>
       </plugins>
       <pluginManagement>
