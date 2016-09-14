@@ -15,10 +15,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
@@ -27,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.9.3-SNAPSHOT</version>
+  <version>1.9.3</version>
   <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -56,9 +53,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/beanutils/trunk/</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC2</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC2</developerConnection>
+    <url>http://svn.apache.org/viewvc/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC2</url>
   </scm>
 
   <distributionManagement>
@@ -205,103 +202,103 @@
   <contributors>
     <contributor>
       <name>Paul Jack</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Stephen Colebourne</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Berin Loritsch</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Alex Crown</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Marcus Zander</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Paul Hamamnt</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Rune Johannesen</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Clebert Suconic</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Norm Deane</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Ralph Schaer</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Chris Audley</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
-      <name>Rey Fran&#231;ois</name>
-      <email></email>
+      <name>Rey François</name>
+      <email />
     </contributor>
     <contributor>
-      <name>Gregor Ra&#253;man</name>
-      <email></email>
+      <name>Gregor Raýman</name>
+      <email />
     </contributor>
     <contributor>
       <name>Jan Sorensen</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Eric Pabst</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Paulo Gaspar</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Michael Smith</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>George Franciscus</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Erik Meade</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Tomas Viberg</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Yauheny Mikulski</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Michael Szlapa</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
       <name>Juozas Baliuka</name>
-      <email></email>
+      <email />
     </contributor>
     <contributor>
-      <name>Tommy Tynj&#228;</name>
-      <email></email>
+      <name>Tommy Tynjä</name>
+      <email />
     </contributor>
     <contributor>
       <name>Bernhard Seebass</name>
-      <email></email>
+      <email />
     </contributor>
   </contributors>
 
