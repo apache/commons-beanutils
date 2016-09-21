@@ -16,46 +16,79 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <document>
- <properties>
-  <title>Building</title>
-  <author email="dev@commons.apache.org">Commons Documentation Team</author>
- </properties>
-<body>
-<!-- ================================================== -->
-<section name="Overview">
-<p>
-  Commons BeanUtils can be built using
-  <a href="http://maven.apache.org">Maven 2 or Maven 3</a> or
-  <a href="http://ant.apache.org">Ant</a> as the build system.
-</p>
-  <p>
-	Further details can be found in the
-	<a href="http://commons.apache.org/building.html">commons build instructions</a>.
-  </p>
-</section>
-<!-- ================================================== -->
-<section name="Maven 2 Goals">
-  <p>
-    To build a jar file, change into BeanUtils's root directory and run 
-    <strong><code>mvn package</code></strong>.
-    The result will be in the "target" subdirectory.
-  </p>
-  <p>
-    To build the full website, run <strong><code>mvn site</code></strong>.
-    The result will be in "target/site" subdirectory.
-  </p>
-  <p>
-    To build the full distribution, run <strong><code>mvn -Prc package</code></strong>.
-    The result will be in "target" subdirectory.
-  </p>
-</section>
-<!-- ================================================== -->
-<section name="Ant Goals">
-  <p>
-    To build a jar file and the javadocs, change into BeanUtils's root directory
-    and run <strong><code>ant dist</code></strong>.
-    The result will be in the "dist" subdirectory.
-  </p>
-</section>
-</body>
+  <properties>
+    <title>Building</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <!-- ================================================== -->
+    <section name="Overview">
+      <p>
+        Commons BeanUtils can be built using
+        <a href="http://maven.apache.org">Maven 3</a>
+        (Recommended: Maven 3.3)
+        and JDK 6 / OpenJDK 6 or later (recommended: JDK 8).
+      </p>
+      <p>
+        Further details can be found in the
+        <a href="http://commons.apache.org/building.html">commons build instructions</a>.
+      </p>
+    </section>
+    <!-- ================================================== -->
+    <section name="Maven 3 Goals">
+      <p>
+        Build using
+        <a href="http://maven.apache.org">Maven 3</a>
+        is the preferred build method.
+        The compiled BeanUtils JAR should work with Java 6 or later.
+      </p>
+
+
+      <p>
+        To build 
+        <code>target/commons-beanutils-*.jar</code>
+      </p>
+
+      <pre>
+        mvn clean package
+      </pre>
+
+      <p>
+        or to install into your
+        <code>~/.m2/repository</code>
+      </p>
+
+      <pre>
+        mvn clean install
+      </pre>
+
+
+      <p>
+        You can skip the unit tests by adding the parameter
+        <code>-DskipTests=true</code>
+      </p>
+
+      <p>
+        To regenerate the web site
+        (corresponding to
+        https://commons.apache.org/proper/commons-beanutils/)
+      </p>
+
+      <pre>
+        mvn clean site
+      </pre>
+
+      <p>
+        Note: the Apache Commons BeanUtils site should include a
+        <a href="japicmp.html">japicmp report</a>
+        for the
+        purpose of checking API version compatibility; to enable this, use Java 7
+        or later and run instead:
+      </p>
+
+      <pre>
+        mvn clean package site -Pjapicmp
+      </pre>
+    </section>
+  </body>
 </document>
