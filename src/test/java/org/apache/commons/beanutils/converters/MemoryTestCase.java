@@ -18,11 +18,10 @@
 package org.apache.commons.beanutils.converters;
 
 import java.lang.ref.WeakReference;
-
-import junit.framework.TestCase;
-
+import static org.junit.Assert.*;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.junit.Test;
 
 /**
  * This class provides a number of unit tests related to classloaders and
@@ -30,8 +29,9 @@ import org.apache.commons.beanutils.Converter;
  *
  * @version $Id$
  */
-public class MemoryTestCase extends TestCase {
+public class MemoryTestCase {
 
+    @Test
     public void testWeakReference() throws Exception {
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
@@ -72,6 +72,7 @@ public class MemoryTestCase extends TestCase {
      * </ul>
      *
      */
+    @Test
     public void testComponentRegistersStandardConverter() throws Exception {
 
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
@@ -161,6 +162,7 @@ public class MemoryTestCase extends TestCase {
      * </ul>
      *
      */
+    @Test
     public void testComponentRegistersCustomConverter() throws Exception {
 
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();

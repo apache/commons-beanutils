@@ -34,8 +34,9 @@ import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.beanutils.locale.LocaleBeanUtilsBean;
 import org.apache.commons.beanutils.locale.LocaleConvertUtils;
 import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
-
-import junit.framework.TestCase;
+import org.junit.Assume;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * Tests BeanUtils memory leaks.
@@ -44,11 +45,12 @@ import junit.framework.TestCase;
  *
  * @version $Id$
  */
-public class MemoryLeakTestCase extends TestCase {
+public class MemoryLeakTestCase {
 
     /**
      * Tests that PropertyUtilsBean's descriptorsCache doesn't cause a memory leak.
      */
+    @Test
     public void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -95,6 +97,7 @@ public class MemoryLeakTestCase extends TestCase {
     /**
      * Tests that PropertyUtilsBean's mappedDescriptorsCache doesn't cause a memory leak.
      */
+    @Test
     public void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -148,6 +151,7 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that MappedPropertyDescriptor can re-create the Method reference after it
      * has been garbage collected.
      */
+    @Test
     public void testMappedPropertyDescriptor_MappedMethodReference1() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -193,6 +197,7 @@ public class MemoryLeakTestCase extends TestCase {
      * Tests that MappedPropertyDescriptor can re-create the Method reference after it
      * has been garbage collected.
      */
+    @Test
     public void testMappedPropertyDescriptor_MappedMethodReference2() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -242,6 +247,7 @@ public class MemoryLeakTestCase extends TestCase {
     /**
      * Tests that MethodUtils's cache doesn't cause a memory leak.
      */
+    @Test
     public void testMethodUtils_cache_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -288,6 +294,7 @@ public class MemoryLeakTestCase extends TestCase {
     /**
      * Tests that WrapDynaClass's dynaClasses doesn't cause a memory leak.
      */
+    @Test
     public void testWrapDynaClass_dynaClasses_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -340,6 +347,7 @@ public class MemoryLeakTestCase extends TestCase {
     /**
      * Tests that ConvertUtilsBean's converters doesn't cause a memory leak.
      */
+    @Test
     public void testConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -387,6 +395,7 @@ public class MemoryLeakTestCase extends TestCase {
     /**
      * Tests that LocaleConvertUtilsBean's converters doesn't cause a memory leak.
      */
+    @Test
     public void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
@@ -487,9 +496,8 @@ public class MemoryLeakTestCase extends TestCase {
 
         final boolean isNotNull = ref.get() != null;
         System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
-        if (isNotNull) {
-            throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
-        }
+        String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
+        Assume.assumeFalse(message, isNotNull);
     }
 
     /**
