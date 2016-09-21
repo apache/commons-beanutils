@@ -1,4 +1,4 @@
-<!--
+CONTRIBUTING<!--
  Licensed to the Apache Software Foundation (ASF) under one or more
  contributor license agreements.  See the NOTICE file distributed with
  this work for additional information regarding copyright ownership.
@@ -28,13 +28,12 @@
                 <include>build.xml</include>
                 <include>checkstyle.xml</include>
                 <include>CONTRIBUTING.md</include>
+                <include>BUILDING.txt</include>
                 <include>LICENSE.txt</include>
                 <include>NOTICE.txt</include>
                 <include>pom.xml</include>
-                <include>PROPOSAL.html</include>
                 <include>README.md</include>
                 <include>RELEASE-NOTES.txt</include>
-                <include>STATUS.html</include>
             </includes>
         </fileSet>
         <fileSet>
