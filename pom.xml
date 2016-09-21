@@ -41,8 +41,6 @@
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
       <surefire.argLine>-Xmx50M</surefire.argLine>
-      <!-- upgrade from 0.8.0 -->
-      <commons.japicmp.version>0.9.0</commons.japicmp.version>
   </properties>
 
 
@@ -366,12 +364,13 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
+	<!-- Disabled as it is not Java 6 compatible
       <plugin>
-        <!-- Check if we broke compatibibility against previous release -->
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
         <version>${commons.japicmp.version}</version>
       </plugin>
+      -->
       </plugins>
       <pluginManagement>
         <plugins>
