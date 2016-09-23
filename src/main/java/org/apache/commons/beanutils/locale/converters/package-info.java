@@ -16,8 +16,10 @@
  */
 
 /**
- * Standard implementations of the locale-aware {@link LocaleConverter}
- * interface that are pre-registered with locale-aware {@link LocaleConvertUtils}
- * at startup time.
+ * Standard implementations of the locale-aware
+ * {@link org.apache.commons.beanutils.locale.LocaleConverter} interface that
+ * are pre-registered with locale-aware
+ * {@link org.apache.commons.beanutils.locale.LocaleConvertUtils} at startup
+ * time.
  */
 package org.apache.commons.beanutils.locale.converters;
