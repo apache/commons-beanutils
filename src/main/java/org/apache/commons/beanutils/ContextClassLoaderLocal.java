@@ -47,8 +47,9 @@ import java.util.WeakHashMap;
  * member variable to store the data, because Thread.getContextClassLoader
  * always returns the same classloader (the system classloader).</p>
  *
- * <p>Expected usage is as follows:<br>
+ * <p>Expected usage is as follows:</p>
  * <pre>
+ * <code>
  *  public class SomeClass {
  *    private static final ContextClassLoaderLocal&lt;String&gt; global
  *      = new ContextClassLoaderLocal&lt;String&gt;() {
@@ -61,8 +62,8 @@ import java.util.WeakHashMap;
  *      System.out.println("global value:" + s);
  *      buf.set("New Value");
  *    }
+ * </code>
  * </pre>
- * </p>
  *
  * <p><strong>Note:</strong> This class takes some care to ensure that when
  * a component which uses this class is "undeployed" by a container the
@@ -80,7 +81,7 @@ import java.util.WeakHashMap;
  * via the component-specific classloader (or any of the objects it refers
  * to were loaded via that classloader).</li>
  * </ul>
- * The result is that the map managed by this object still contains a strong
+ * <p>The result is that the map managed by this object still contains a strong
  * reference to the stored object, which contains a strong reference to the
  * classloader that loaded it, meaning that although the container has
  * "undeployed" the component the component-specific classloader and all the

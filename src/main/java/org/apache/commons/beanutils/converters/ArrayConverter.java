@@ -57,26 +57,28 @@ import org.apache.commons.beanutils.Converter;
  *     <li><b>Multi Dimensional Arrays</b> - it is possible to convert a <code>String</code>
  *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
- *     <li><b>Default Value</b></li>
+ *     <li><b>Default Value</b>
  *         <ul>
- *             <li><b><i>No Default</b></i> - use the
+ *             <li><b><i>No Default</i></b> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
  *                 constructor to create a converter which throws a
  *                 {@link ConversionException} if the value is missing or
  *                 invalid.</li>
- *             <li><b><i>Default values</b></i> - use the
+ *             <li><b><i>Default values</i></b> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter, int)}
  *                 constructor to create a converter which returns a <i>default
  *                 value</i>. The <i>defaultSize</i> parameter controls the
- *                 <i>default value</i> in the following way:</li>
+ *                 <i>default value</i> in the following way:
  *                 <ul>
  *                    <li><i>defaultSize &lt; 0</i> - default is <code>null</code></li>
  *                    <li><i>defaultSize = 0</i> - default is an array of length zero</li>
  *                    <li><i>defaultSize &gt; 0</i> - default is an array with a
- *                        length specified by <code>defaultSize</code> (N.B. elements
- *                        in the array will be <code>null</code>)</li>
+ *                           length specified by <code>defaultSize</code> (N.B. elements
+ *                           in the array will be <code>null</code>)</li>
  *                 </ul>
+ *             </li>
  *         </ul>
+ *     </li>
  * </ul>
  *
  * <h3>Parsing Delimited Lists</h3>
@@ -98,7 +100,7 @@ import org.apache.commons.beanutils.Converter;
  * <p>
  * For example, the following code demonstrates how to construct a {@link Converter}
  * to convert a delimited <code>String</code> into a two dimensional integer array:
- * <p>
+ * </p>
  * <pre>
  *    // Construct an Integer Converter
  *    IntegerConverter integerConverter = new IntegerConverter();
@@ -333,6 +335,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
+     * <p>
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
      * </p>

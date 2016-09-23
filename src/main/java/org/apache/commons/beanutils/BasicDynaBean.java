@@ -79,6 +79,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private transient Map<String, Object> mapDecorator;
 
     /**
+     * <p>
      * Return a Map representation of this DynaBean.
      * </p>
      * This, for example, could be used in JSTL in the following way to access

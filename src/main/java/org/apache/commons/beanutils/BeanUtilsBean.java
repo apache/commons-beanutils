@@ -203,8 +203,8 @@ public class BeanUtilsBean {
      *
      * <p>This method differs from <code>populate()</code>, which
      * was primarily designed for populating JavaBeans from the map of request
-     * parameters retrieved on an HTTP request, is that no scalar->indexed
-     * or indexed->scalar manipulations are performed.  If the origin property
+     * parameters retrieved on an HTTP request, is that no scalar-&gt;indexed
+     * or indexed-&gt;scalar manipulations are performed.  If the origin property
      * is indexed, the destination property must be also.</p>
      *
      * <p>If you know that no type conversions are required, the
@@ -457,8 +457,8 @@ public class BeanUtilsBean {
      *
      * <p><strong>Warning:</strong> if any of the bean property implementations
      * contain (directly or indirectly) a call to this method then
-     * a stack overflow may result. For example:
-     * <code><pre>
+     * a stack overflow may result. For example:</p>
+     * <pre><code>
      * class MyBean
      * {
      *    public Map getParameterMap()
@@ -466,7 +466,8 @@ public class BeanUtilsBean {
      *         BeanUtils.describe(this);
      *    }
      * }
-     * </pre></code>
+     * </code></pre>
+     * <p>
      * will result in an infinite regression when <code>getParametersMap</code>
      * is called. It is recommended that such methods are given alternative
      * names (for example, <code>parametersMap</code>).

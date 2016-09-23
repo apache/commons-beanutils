@@ -19,13 +19,13 @@ package org.apache.commons.beanutils.converters;
 import org.apache.commons.beanutils.Converter;
 
 /**
- * Provides a facade for {@link Converter} implementations
+ * <p>Provides a facade for {@link Converter} implementations
  * preventing access to any public API in the implementation,
- * other than that specified by {@link Converter}.
- * <p />
- * This implementation can be used to prevent registered {@link Converter}
+ * other than that specified by {@link Converter}.</p>
+ *
+ * <p>This implementation can be used to prevent registered {@link Converter}
  * implementations that provide configuration options from being
- * retrieved and modified.
+ * retrieved and modified.</p>
  *
  * @version $Id$
  * @since 1.8.0

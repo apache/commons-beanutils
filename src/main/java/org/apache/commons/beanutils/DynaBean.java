@@ -38,8 +38,8 @@ public interface DynaBean {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
