@@ -53,8 +53,10 @@ import org.apache.commons.logging.LogFactory;
  *    <p>The <code>LazyDynaBean</code> will automatically add a property to the <code>DynaClass</code>
  *       if it doesn't exist when the <code>set(name, value)</code> method is called.</p>
  *
- *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
- *     <code>myBean.set("myProperty", "myValue");</code></br>
+ *     <pre><code>
+ *         DynaBean myBean = new LazyDynaBean();
+ *         myBean.set("myProperty", "myValue");
+ *     </code></pre>
  *
  * <p><b><u>Setting Indexed Properties</u></b></p>
  *    <p>If the property <b>doesn't</b> exist, the <code>LazyDynaBean</code> will automatically add
@@ -66,9 +68,11 @@ import org.apache.commons.logging.LogFactory;
  *       this can be easily changed by overriding the <code>defaultIndexedProperty(name)</code>
  *       method.</p>
  *
- *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
- *     <code>myBean.set("myIndexedProperty", 0, "myValue1");</code></br>
- *     <code>myBean.set("myIndexedProperty", 1, "myValue2");</code></br>
+ *     <pre><code>
+ *         DynaBean myBean = new LazyDynaBean();
+ *         myBean.set("myIndexedProperty", 0, "myValue1");
+ *         myBean.set("myIndexedProperty", 1, "myValue2");
+ *     </code></pre>
  *
  *    <p>If the indexed property <b>does</b> exist in the <code>DynaClass</code> but is set to
  *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
@@ -76,11 +80,13 @@ import org.apache.commons.logging.LogFactory;
  *      in the <code>DynaClass</code> and automatically <i>grow</i> the <code>List</code>
  *      or <code>Array</code> so that it is big enough to accomodate the index being set.</p>
  *
- *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
- *     <code>MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();</code></br>
- *     <code>myClass.add("myIndexedProperty", int[].class);</code></br>
- *     <code>myBean.set("myIndexedProperty", 0, new Integer(10));</code></br>
- *     <code>myBean.set("myIndexedProperty", 1, new Integer(20));</code></br>
+ *     <pre><code>
+ *         DynaBean myBean = new LazyDynaBean();
+ *         MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
+ *         myClass.add("myIndexedProperty", int[].class);
+ *         myBean.set("myIndexedProperty", 0, new Integer(10));
+ *         myBean.set("myIndexedProperty", 1, new Integer(20));
+ *     </code></pre>
  *
  * <p><b><u>Setting Mapped Properties</u></b></p>
  *    <p>If the property <b>doesn't</b> exist, the <code>LazyDynaBean</code> will automatically add
@@ -90,17 +96,21 @@ import org.apache.commons.logging.LogFactory;
  *       mapped property that LazyDynaBean uses but this can be easily changed by overriding
  *       the <code>defaultMappedProperty(name)</code> method.</p>
  *
- *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
- *     <code>myBean.set("myMappedProperty", "myKey", "myValue");</code></br>
+ *     <pre><code>
+ *         DynaBean myBean = new LazyDynaBean();
+ *         myBean.set("myMappedProperty", "myKey", "myValue");
+ *     </code></pre>
  *
  *    <p>If the mapped property <b>does</b> exist in the <code>DynaClass</code> but is set to
  *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
  *      new <code>Map</code> as specified by the property's type in the <code>DynaClass</code>.</p>
  *
- *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
- *     <code>MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();</code></br>
- *     <code>myClass.add("myMappedProperty", TreeMap.class);</code></br>
- *     <code>myBean.set("myMappedProperty", "myKey", "myValue");</code></br>
+ *     <pre><code>
+ *         DynaBean myBean = new LazyDynaBean();
+ *         MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
+ *         myClass.add("myMappedProperty", TreeMap.class);
+ *         myBean.set("myMappedProperty", "myKey", "myValue");
+ *     </code></pre>
  *
  * <p><b><u><i>Restricted</i> DynaClass</u></b></p>
  *    <p><code>MutableDynaClass</code> have a facility to <i>restrict</i> the <code>DynaClass</code>
@@ -195,6 +205,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     // ------------------- Public Methods ----------------------------------
 
     /**
+     * <p>
      * Return a Map representation of this DynaBean.
      * </p>
      * This, for example, could be used in JSTL in the following way to access

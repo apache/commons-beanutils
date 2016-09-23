@@ -25,18 +25,15 @@ package org.apache.commons.beanutils;
  *
  * <p>This can be achieved either by wrapping the {@link DynaBean} prior to
  *    providing it to the technology to process or by providing a <code>Map</code>
- *    accessor method on the DynaBean implementation:
+ *    accessor method on the DynaBean implementation:</p>
  *    <pre><code>
  *         public Map&lt;String, Object&gt; getMap() {
  *             return new DynaBeanPropertyMapDecorator(this);
  *         }</code></pre>
- *   </ul>
- * </p>
  *
  * <p>This, for example, could be used in JSTL in the following way to access
- *    a DynaBean's <code>fooProperty</code>:
+ *    a DynaBean's <code>fooProperty</code>:</p>
  *    <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
- * </p>
  *
  * <h3>Usage</h3>
  *

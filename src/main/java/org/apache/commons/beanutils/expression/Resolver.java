@@ -59,28 +59,31 @@ package org.apache.commons.beanutils.expression;
  * BeanUtils/PropertyUtils uses the <code>resolver</code>. The following are
  * the main methods that use it:
  * <ul>
- *   <li>{@link org.apache.commons.beanutils.PropertyUtilsBean}</li>
- *   <ul>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getIndexedProperty(Object, String)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getMappedProperty(Object, String)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getNestedProperty(Object, String)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getPropertyDescriptor(Object, String)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getSimpleProperty(Object, String)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setIndexedProperty(Object, String, Object)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setMappedProperty(Object, String, Object)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setNestedProperty(Object, String, Object)}</li>
- *       <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)}</li>
- *   </ul>
- *   <li>{@link org.apache.commons.beanutils.BeanUtilsBean}</li>
- *   <ul>
- *       <li>{@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)}</li>
- *       <li>{@link org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)}</li>
- *   </ul>
- *   <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean}</li>
- *   <ul>
- *       <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean#setProperty(Object,
- *        String, Object, String)}</li>
- *   </ul>
+ *   <li>{@link org.apache.commons.beanutils.PropertyUtilsBean}
+ *       <ul>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getIndexedProperty(Object, String)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getMappedProperty(Object, String)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getNestedProperty(Object, String)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getPropertyDescriptor(Object, String)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#getSimpleProperty(Object, String)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setIndexedProperty(Object, String, Object)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setMappedProperty(Object, String, Object)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setNestedProperty(Object, String, Object)}</li>
+ *          <li>{@link org.apache.commons.beanutils.PropertyUtilsBean#setSimpleProperty(Object, String, Object)}</li>
+ *      </ul>
+ *   </li>
+ *   <li>{@link org.apache.commons.beanutils.BeanUtilsBean}
+ *      <ul>
+ *          <li>{@link org.apache.commons.beanutils.BeanUtilsBean#copyProperty(Object, String, Object)}</li>
+ *          <li>{@link org.apache.commons.beanutils.BeanUtilsBean#setProperty(Object, String, Object)}</li>
+ *      </ul>
+ *   </li>
+ *   <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean}
+ *      <ul>
+ *          <li>{@link org.apache.commons.beanutils.locale.LocaleBeanUtilsBean#setProperty(Object,
+ *          String, Object, String)}</li>
+ *      </ul>
+ *   </li>
  * </ul>
  *
  * @version $Id$

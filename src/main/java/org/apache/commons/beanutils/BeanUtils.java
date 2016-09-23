@@ -269,7 +269,7 @@ public class BeanUtils {
 
 
     /**
-     * </p>Return the value of the specified indexed property of the specified
+     * <p>Return the value of the specified indexed property of the specified
      * bean, as a String.</p>
      *
      * <p>For more details see <code>BeanUtilsBean</code>.</p>
@@ -297,7 +297,7 @@ public class BeanUtils {
 
 
     /**
-     * </p>Return the value of the specified mapped property of the specified
+     * <p>Return the value of the specified mapped property of the specified
      * bean, as a String.</p>
      *
      * <p>For more details see <code>BeanUtilsBean</code>.</p>

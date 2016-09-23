@@ -31,12 +31,12 @@ import java.lang.reflect.InvocationTargetException;
  * (This makes it different from the typical use cases for other <code>DynaBean</code>'s.)
  * For example:
  * </p>
- * <code><pre>
+ * <pre><code>
  *  Object aJavaBean = ...;
  *  ...
  *  DynaBean db = new WrapDynaBean(aJavaBean);
  *  ...
- * </pre></code>
+ * </code></pre>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the <code>contains()</code> and <code>remove()</code> methods.</p>
@@ -105,7 +105,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true<code> if the mapped property contains a value for
+     * @return <code>true</code> if the mapped property contains a value for
      * the specified key, otherwise <code>false</code>
      *
      * @throws IllegalArgumentException if there is no property

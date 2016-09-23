@@ -146,8 +146,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     /**
      * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
+     * {@code getName()} method of {@code java.lang.Class}, which
+     * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *
      * @return the name of the DynaClass
@@ -161,7 +161,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     /**
      * Return a property descriptor for the specified property, if it exists;
-     * otherwise, return <code>null</code>.
+     * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
@@ -181,12 +181,12 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * <p>Return an array of {@code ProperyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
      * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
+     * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
      * @return the set of properties for this DynaClass
@@ -202,7 +202,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
      *
-     * @return A new <code>DynaBean</code> instance
+     * @return A new {@code DynaBean} instance
      * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
      * @throws InstantiationException if this Class represents an abstract
@@ -232,8 +232,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     /**
      * Return the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
+     * {@code newInstance()} method.  This Class <strong>MUST</strong>
+     * implement the {@code DynaBean} interface.
      *
      * @return The class of the {@link DynaBean}
      */
@@ -249,13 +249,13 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     /**
      * Set the Class object we will use to create new instances in the
-     * <code>newInstance()</code> method.  This Class <strong>MUST</strong>
-     * implement the <code>DynaBean</code> interface.
+     * {@code newInstance()} method.  This Class <strong>MUST</strong>
+     * implement the {@code DynaBean} interface.
      *
      * @param dynaBeanClass The new Class object
      *
      * @throws IllegalArgumentException if the specified Class does not
-     *  implement the <code>DynaBean</code> interface
+     *  implement the {@code DynaBean} interface
      */
     protected void setDynaBeanClass(final Class<?> dynaBeanClass) {
 

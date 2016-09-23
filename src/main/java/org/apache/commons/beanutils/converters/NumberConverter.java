@@ -49,23 +49,27 @@ import org.apache.commons.beanutils.ConversionException;
  * This class provides a number of ways in which number
  * conversions to/from Strings can be achieved:
  * <ul>
- *    <li>Using the default format for the default Locale, configure using:</li>
+ *    <li>Using the default format for the default Locale, configure using:
  *        <ul>
- *           <li><code>setUseLocaleFormat(true)</code></li>
+ *          <li><code>setUseLocaleFormat(true)</code></li>
  *        </ul>
- *    <li>Using the default format for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the default format for a specified Locale, configure using:
  *        <ul>
- *           <li><code>setLocale(Locale)</code></li>
+ *          <li><code>setLocale(Locale)</code></li>
  *        </ul>
- *    <li>Using a specified pattern for the default Locale, configure using:</li>
+ *    </li>
+ *    <li>Using a specified pattern for the default Locale, configure using:
  *        <ul>
- *           <li><code>setPattern(String)</code></li>
+ *          <li><code>setPattern(String)</code></li>
  *        </ul>
- *    <li>Using a specified pattern for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using a specified pattern for a specified Locale, configure using:
  *        <ul>
- *           <li><code>setPattern(String)</code></li>
- *           <li><code>setLocale(Locale)</code></li>
+ *          <li><code>setPattern(String)</code></li>
+ *          <li><code>setLocale(Locale)</code></li>
  *        </ul>
+ *    </li>
  *    <li>If none of the above are configured the
  *        <code>toNumber(String)</code> method is used to convert
  *        from String to Number and the Number's

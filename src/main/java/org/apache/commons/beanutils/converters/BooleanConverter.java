@@ -24,11 +24,13 @@ package org.apache.commons.beanutils.converters;
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
+ * </p>
  * <p>
  * By default any object whose string representation is one of the values
  * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and
  * string representations {"no", "n", "false", "off", "0"} are converted
  * to Boolean.FALSE. The recognized true/false strings can be changed by:
+ * </p>
  * <pre>
  *  String[] trueStrings = {"oui", "o", "1"};
  *  String[] falseStrings = {"non", "n", "0"};
@@ -36,13 +38,13 @@ package org.apache.commons.beanutils.converters;
  *  ConvertUtils.register(bc, Boolean.class);
  *  ConvertUtils.register(bc, Boolean.TYPE);
  * </pre>
- * In addition, it is recommended that the BooleanArrayConverter also be
- * modified to recognise the same set of values:
+ * <p>In addition, it is recommended that the BooleanArrayConverter also be
+ * modified to recognise the same set of values:</p>
  * <pre>
  *   Converter bac = new BooleanArrayConverter(bc, BooleanArrayConverter.NO_DEFAULT);
  *   ConvertUtils.register(bac, bac.MODEL);
  * </pre>
- * </p>
+ *
  *
  * <p>Case is ignored when converting values to true or false.</p>
  *

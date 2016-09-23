@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * <h2><i>Lazy</i> DynaBean List.</h2>
+ * <h1><i>Lazy</i> DynaBean List.</h1>
  *
  * <p>There are two main purposes for this class:</p>
  *    <ul>
@@ -37,12 +37,12 @@ import java.util.Map;
  *
  * <p>All elements added to the List are stored as <code>DynaBean</code>'s:</p>
  * <ul>
- *    <li><code>java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap</code>.</i>
- *    <li>POJO Bean elements are "wrapped" in a <code>WrapDynaBean.</code></i>
- *    <li><code>DynaBean</code>'s are stored un-changed.</i>
+ *    <li><code>java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap</code>.</li>
+ *    <li>POJO Bean elements are "wrapped" in a <code>WrapDynaBean</code>.</li>
+ *    <li><code>DynaBean</code>'s are stored un-changed.</li>
  * </ul>
  *
- * <h4><code>toArray()</code></h4>
+ * <h2><code>toArray()</code></h2>
  * <p>The <code>toArray()</code> method returns an array of the
  *    elements of the appropriate type. If the <code>LazyDynaList</code>
  *    is populated with <code>java.util.Map</code> objects a
@@ -52,7 +52,7 @@ import java.util.Map;
  *    array is returned.
  * </p>
  *
- * <h4><code>toDynaBeanArray()</code></h4>
+ * <h2><code>toDynaBeanArray()</code></h2>
  * <p>The <code>toDynaBeanArray()</code> method returns a
  *    <code>DynaBean[]</code> array of the elements in the List.
  * </p>
@@ -64,7 +64,7 @@ import java.util.Map;
  *    of the first element populated.
  * </p>
  *
- * <h3>Example 1</h3>
+ * <h2>Example 1</h2>
  * <p>If you have an array of <code>java.util.Map[]</code> - you can put that into
  *    a <code>LazyDynaList</code>.</p>
  *
@@ -91,7 +91,7 @@ import java.util.Map;
  * </code></pre>
  *
  *
- * <h3>Example 2</h3>
+ * <h2>Example 2</h2>
  * <p>Alternatively you can create an <i>empty</i> List and
  *    specify the Class for List's elements. The LazyDynaList
  *    uses the Class to automatically populate elements:</p>
@@ -107,7 +107,7 @@ import java.util.Map;
  *    List lazyList = new LazyDynaList(MyDynaBean.class);
  * </code></pre>
  *
- * <h3>Example 3</h3>
+ * <h2>Example 3</h2>
  * <p>Alternatively you can create an <i>empty</i> List and specify the
  *    DynaClass for List's elements. The LazyDynaList uses
  *    the DynaClass to automatically populate elements:</p>
@@ -133,7 +133,7 @@ import java.util.Map;
  *    therefore need to be instantiated using the <code>DynaClass.newInstance()</code>
  *    method.</p>
  *
- * <h3>Example 4</h3>
+ * <h2>Example 4</h2>
  * <p>A slight variation - set the element type using either
  *    the <code>setElementType(Class)</code> method or the
  *    <code>setElementDynaClass(DynaClass)</code> method - then populate
@@ -406,6 +406,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *        "wrapped" DynaBeans then an Object[] of the most
      *        suitable type will be created.</li>
      *    <li>...otherwise a DynaBean[] will be created.</li>
+     * </ul>
      *
      * @return An Array of the elements in this List.
      */

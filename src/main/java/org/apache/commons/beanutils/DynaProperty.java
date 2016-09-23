@@ -269,6 +269,9 @@ public class DynaProperty implements Serializable {
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This method provides a workaround.
+     *
+     * @param out The ObjectOutputStream object
+     * @throws IOException This exception is thrown when a write error occurs
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
 
@@ -323,7 +326,9 @@ public class DynaProperty implements Serializable {
      * (including java 1.3).
      * This method provides a workaround.
      *
+     * @param in The ObjectInputStream to read
      * @throws StreamCorruptedException when the stream data values are outside expected range
+     * @throws ClassNotFoundException When trying to read an object of class that is not on the classpath
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
 
