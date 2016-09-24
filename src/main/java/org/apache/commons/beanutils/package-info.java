@@ -797,7 +797,7 @@
  * <h1>4. Data Type Conversions</h1>
  *
  * <a name="conversion.background"></a>
- * <h3>4.1 Background</h3>
+ * <h2>4.1 Background</h2>
  *
  * <p>So far, we've only considered the cases where the data types of the
  * dynamically accessed properties are known, and where we can use Java casts
@@ -807,7 +807,7 @@
  * for performing this task as well.</p>
  *
  * <a name="conversion.beanutils"></a>
- * <h3>4.2 <code>BeanUtils</code> and <code>ConvertUtils</code> Conversions</h3>
+ * <h2>4.2 <code>BeanUtils</code> and <code>ConvertUtils</code> Conversions</h2>
  *
  * <p>A very common use case (and the situation that caused the initial creation
  * of the <em>BeanUtils</em> package) was the desire to convert the set of request
@@ -854,7 +854,7 @@
  * new code should not be written with reliance on ConvertUtils.</p>
  *
  * <a name="conversion.defining"></a>
- * <h3>4.3 Defining Your Own Converters</h3>
+ * <h2>4.3 Defining Your Own Converters</h2>
  *
  * <p>The <code>ConvertUtils</code> class supports the ability to define and
  * register your own String --> Object conversions for any given Java class.
@@ -872,7 +872,7 @@
  * </ul>
  *
  * <a name="conversion.i18n"></a>
- * <h3>4.4 Locale Aware Conversions</h3>
+ * <h2>4.4 Locale Aware Conversions</h2>
  * <p>The standard classes in <code>org.apache.commons.beanutils</code> are not
  * locale aware. This gives them a cleaner interface and makes then easier to use
  * in situations where the locale is not important.</p>
@@ -885,7 +885,7 @@
  * <a name="instances"></a>
  * <h1>5. Utility Objects And Static Utility Classes</h1>
  * <a name="instances.background"></a>
- * <h3>Background</h3>
+ * <h2>Background</h2>
  * <p>
  * So far, the examples have covered the static utility classes (<code>BeanUtils</code>,
  * <code>ConvertUtils</code> and <code>PropertyUtils</code>). These are easy to use but are
@@ -912,13 +912,13 @@
  * <a name="collections"></a>
  * <h1>6. Collections</h1>
  * <a name="bean-comparator"></a>
- * <h3>6.1 Comparing Beans</h3>
+ * <h2>6.1 Comparing Beans</h2>
  * <p>
  * <code>org.apache.commons.beanutils.BeanComparator</code> is a <code>Comparator</code> implementation
  * that compares beans based on a shared property value.
  * </p>
  * <a name="bean-property-closure"></a>
- * <h3>6.2 Operating On Collections Of Beans</h3>
+ * <h2>6.2 Operating On Collections Of Beans</h2>
  * <p>
  * The <code>Closure</code> interface in <code>commons-collections</code> encapsulates a block of code that
  * executes on an arbitrary input Object. <code>Commons-collections</code> contains code that allows
@@ -944,7 +944,7 @@
  * </p>
  *
  * <a name="bean-property-predicate"></a>
- * <h3>6.3 Querying Or Filtering Collections Of Beans</h3>
+ * <h2>6.3 Querying Or Filtering Collections Of Beans</h2>
  * <p>
  * The <code>Predicate</code> interface in <code>commons-collections</code> encapsulates an evaluation
  * of an input Object that returns either true or false. <code>Commons-collections</code> contains code
@@ -971,7 +971,7 @@
  * </p>
  *
  * <a href="bean-property-transformer"></a>
- * <h3>6.4 Transforming Collections Of Beans</h3>
+ * <h2>6.4 Transforming Collections Of Beans</h2>
  * <p>
  * The <code>Transformer</code> interface in <code>commons-collections</code> encapsulates the transformation
  * of an input Object into an output object. <code>Commons-collections</code> contains code
@@ -1001,7 +1001,7 @@
  * <h1>7. Frequently Asked Questions</h1>
  *
  * <a name="FAQ.property"></a>
- * <h3>Why Can't BeanUtils Find My Method?</h3>
+ * <h2>Why Can't BeanUtils Find My Method?</h2>
  * <p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than
  * <em>reflection</em>. This means that it will find only
  * <a href='http://java.sun.com/products/javabeans'><em>JavaBean</em>
@@ -1017,7 +1017,7 @@
  * </ul>
  * </p>
  * <a name="FAQ.bc.order"></a>
- * <h3>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h3>
+ * <h2>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h2>
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
  * comparisions. By default,

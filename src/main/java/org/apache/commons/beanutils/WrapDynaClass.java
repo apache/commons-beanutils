@@ -31,19 +31,18 @@ import java.util.WeakHashMap;
 
 
 /**
- * <p>Implementation of <code>DynaClass</code> for DynaBeans that wrap
+ * Implementation of {@link DynaClass} that wrap
  * standard JavaBean instances.</p>
- *
  * <p>
- * It is suggested that this class should not usually need to be used directly
- * to create new <code>WrapDynaBean</code> instances.
- * It's usually better to call the <code>WrapDynaBean</code> constructor directly.
- * For example:</p>
- * <code><pre>
+ * This class should not usually need to be used directly
+ * to create new {@link WrapDynaBean} instances - 
+ * it's usually better to call the {@link WrapDynaBean} constructor.
+ * For example:
+ * </p>
+ * <pre>
  *   Object javaBean = ...;
  *   DynaBean wrapper = new WrapDynaBean(javaBean);
- * </pre></code>
- * <p>
+ * </pre>
  *
  * @version $Id$
  */

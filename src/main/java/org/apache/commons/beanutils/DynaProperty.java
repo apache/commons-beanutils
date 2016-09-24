@@ -45,7 +45,8 @@ public class DynaProperty implements Serializable {
 
     // ----------------------------------------------------------- Constants
 
-    /*
+	private static final long serialVersionUID = -3084907613499830175L;
+	/*
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This class uses a custom serialization implementation that writes an integer
@@ -269,6 +270,9 @@ public class DynaProperty implements Serializable {
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This method provides a workaround.
+     * 
+     * @param out {@link ObjectOutputStream} to write object to
+     * @throws IOException if the object can't be written
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
 
@@ -322,8 +326,10 @@ public class DynaProperty implements Serializable {
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This method provides a workaround.
-     *
+     * 
+     * @param in {@link ObjectInputStream} to read object from
      * @throws StreamCorruptedException when the stream data values are outside expected range
+     * @throws IOException if the input stream can't be read
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
 

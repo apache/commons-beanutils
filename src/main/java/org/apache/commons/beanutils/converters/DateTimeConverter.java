@@ -44,25 +44,29 @@ import org.apache.commons.beanutils.ConversionException;
  * This class provides a number of ways in which date/time
  * conversions to/from Strings can be achieved:
  * <ul>
- *    <li>Using the SHORT date format for the default Locale, configure using:</li>
+ *    <li>Using the SHORT date format for the default Locale, configure using:
  *        <ul>
  *           <li><code>setUseLocaleFormat(true)</code></li>
  *        </ul>
- *    <li>Using the SHORT date format for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the SHORT date format for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
- *    <li>Using the specified date pattern(s) for the default Locale, configure using:</li>
+ *    </li>        
+ *    <li>Using the specified date pattern(s) for the default Locale, configure using:
  *        <ul>
  *           <li>Either <code>setPattern(String)</code> or
  *                      <code>setPatterns(String[])</code></li>
  *        </ul>
- *    <li>Using the specified date pattern(s) for a specified Locale, configure using:</li>
+ *    </li>
+ *    <li>Using the specified date pattern(s) for a specified Locale, configure using:
  *        <ul>
  *           <li><code>setPattern(String)</code> or
  *                    <code>setPatterns(String[]) and...</code></li>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
+ *    </li>
  *    <li>If none of the above are configured the
  *        <code>toDate(String)</code> method is used to convert
  *        from String to Date and the Dates's
@@ -72,7 +76,7 @@ import org.apache.commons.beanutils.ConversionException;
  *
  * <p>
  * The <b>Time Zone</b> to use with the date format can be specified
- * using the <code>setTimeZone()</code> method.
+ * using the {@link #setTimeZone(TimeZone)} method.
  *
  * @version $Id$
  * @since 1.8.0
@@ -475,7 +479,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return a <code>DateFormat<code> for the Locale.
+     * Return a <code>DateFormat</code> for the Locale.
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
      *

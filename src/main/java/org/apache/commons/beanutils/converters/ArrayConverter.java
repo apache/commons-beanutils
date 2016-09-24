@@ -57,7 +57,7 @@ import org.apache.commons.beanutils.Converter;
  *     <li><b>Multi Dimensional Arrays</b> - it is possible to convert a <code>String</code>
  *         to a multi-dimensional arrays, by embedding {@link ArrayConverter}
  *         within each other - see example below.</li>
- *     <li><b>Default Value</b></li>
+ *     <li><b>Default Value</b>
  *         <ul>
  *             <li><b><i>No Default</b></i> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
@@ -77,6 +77,7 @@ import org.apache.commons.beanutils.Converter;
  *                        in the array will be <code>null</code>)</li>
  *                 </ul>
  *         </ul>
+ *     </li>
  * </ul>
  *
  * <h3>Parsing Delimited Lists</h3>
@@ -335,7 +336,7 @@ public class ArrayConverter extends AbstractConverter {
     /**
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
-     * </p>
+     * <p>
      * <ul>
      *   <li>{@link Collection} values are returned unchanged</li>
      *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
