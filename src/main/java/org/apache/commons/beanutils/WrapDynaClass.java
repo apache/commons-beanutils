@@ -32,7 +32,7 @@ import java.util.WeakHashMap;
 
 /**
  * Implementation of {@link DynaClass} that wrap
- * standard JavaBean instances.</p>
+ * standard JavaBean instances.
  * <p>
  * This class should not usually need to be used directly
  * to create new {@link WrapDynaBean} instances - 

@@ -338,7 +338,6 @@ public class ArrayConverter extends AbstractConverter {
      * <p>
      * Converts non-array values to a Collection prior
      * to being converted either to an array or a String.
-     * <p>
      * <ul>
      *   <li>{@link Collection} values are returned unchanged</li>
      *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
