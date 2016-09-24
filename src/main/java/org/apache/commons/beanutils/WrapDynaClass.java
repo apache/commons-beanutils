@@ -277,8 +277,8 @@ public class WrapDynaClass implements DynaClass {
 
     /**
      * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
+     * {@code getName()} method of {@code java.lang.Class}, which
+     * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *
      * @return the name of the DynaClass
@@ -335,14 +335,14 @@ public class WrapDynaClass implements DynaClass {
      * instance. <strong>NOTE</strong> the JavaBean should have a
      * no argument constructor.</p>
      *
-     * <strong>NOTE</strong> - Most common use cases should not need to use
+     * <p><strong>NOTE</strong> - Most common use cases should not need to use
      * this method. It is usually better to create new
      * <code>WrapDynaBean</code> instances by calling its constructor.
      * For example:</p>
-     * <code><pre>
+     * <pre><code>
      *   Object javaBean = ...;
      *   DynaBean wrapper = new WrapDynaBean(javaBean);
-     * </pre></code>
+     * </code></pre>
      * <p>
      * (This method is needed for some kinds of <code>DynaBean</code> framework.)
      * </p>

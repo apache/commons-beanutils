@@ -21,8 +21,8 @@ package org.apache.commons.beanutils.converters;
  * implementation that converts an incoming
  * object into a <code>java.lang.String</code> object.
  * <p>
- * Note that ConvertUtils really is designed to do string->object conversions,
- * and offers very little support for object->string conversions. The
+ * Note that ConvertUtils really is designed to do string-&gt;object conversions,
+ * and offers very little support for object-&gt;string conversions. The
  * ConvertUtils/ConvertUtilsBean methods only select a converter to apply
  * based upon the target type being converted to, and generally assume that
  * the input is a string (by calling its toString method if needed).

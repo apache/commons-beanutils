@@ -53,7 +53,7 @@ import org.apache.commons.beanutils.ConversionException;
  *        <ul>
  *           <li><code>setLocale(Locale)</code></li>
  *        </ul>
- *    </li>        
+ *    </li>
  *    <li>Using the specified date pattern(s) for the default Locale, configure using:
  *        <ul>
  *           <li>Either <code>setPattern(String)</code> or
@@ -605,7 +605,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Log the <code>DateFormat<code> creation.
+     * Log the <code>DateFormat</code> creation.
      * @param action The action the format is being used for
      * @param format The Date format
      */

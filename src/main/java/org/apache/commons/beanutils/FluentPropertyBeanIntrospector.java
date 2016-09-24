@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  * setting a property value do not return <b>void</b>, but an object which can
  * be called for setting another property. An example of such a fluent API could
  * look as follows:
- *
+ * </p>
  * <pre>
  * public class FooBuilder {
  *     public FooBuilder setFooProperty1(String value) {
@@ -51,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  * }
  * </pre>
  *
- * Per default, <code>PropertyUtils</code> does not detect methods like this
+ * <p>Per default, <code>PropertyUtils</code> does not detect methods like this
  * because, having a non-<b>void</b> return type, they violate the Java Beans
  * specification.
  * </p>

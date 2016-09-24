@@ -18,8 +18,8 @@ package org.apache.commons.beanutils;
 
 /**
  * <p>A <strong>DynaClass</strong> is a simulation of the functionality of
- * <code>java.lang.Class</code> for classes implementing the
- * <code>DynaBean</code> interface.  DynaBean instances that share the same
+ * {@code java.lang.Class} for classes implementing the
+ * {@code DynaBean} interface.  DynaBean instances that share the same
  * DynaClass all have the same set of available properties, along with any
  * associated data types, read-only states, and write-only states.</p>
  *
@@ -31,8 +31,8 @@ public interface DynaClass {
 
     /**
      * Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code), which
-     * allows the same <code>DynaClass</code> implementation class to support
+     * {@code getName()} method of {@code java.lang.Class}, which
+     * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *
      * @return the name of the DynaClass
@@ -42,7 +42,7 @@ public interface DynaClass {
 
     /**
      * Return a property descriptor for the specified property, if it exists;
-     * otherwise, return <code>null</code>.
+     * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
@@ -54,12 +54,12 @@ public interface DynaClass {
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * <p>Return an array of {@code ProperyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
      * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
+     * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
      * @return the set of properties for this DynaClass
@@ -71,7 +71,7 @@ public interface DynaClass {
      * Instantiate and return a new DynaBean instance, associated
      * with this DynaClass.
      *
-     * @return A new <code>DynaBean</code> instance
+     * @return A new {@code DynaBean} instance
      *
      * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible

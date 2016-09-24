@@ -38,14 +38,14 @@ import java.lang.reflect.InvocationTargetException;
  *
  * <p>
  * A typical usage might look like:
- * <code><pre>
+ * </p>
+ * <pre><code>
  * // create the transformer
  * BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  * // transform the Collection
  * Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- * </pre></code>
- * </p>
+ * </code></pre>
  *
  * <p>
  * This would take a <code>Collection</code> of person objects and return a <code>Collection</code>

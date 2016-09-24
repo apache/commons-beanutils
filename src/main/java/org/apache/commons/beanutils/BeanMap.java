@@ -251,7 +251,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * <li>If anything fails along the way, throw a
      * CloneNotSupportedException.
      *
-     * <ul>
+     * </ul>
      *
      * @return a cloned instance of this bean map
      * @throws CloneNotSupportedException if the underlying bean

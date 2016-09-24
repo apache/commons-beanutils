@@ -857,7 +857,7 @@
  * <h2>4.3 Defining Your Own Converters</h2>
  *
  * <p>The <code>ConvertUtils</code> class supports the ability to define and
- * register your own String --> Object conversions for any given Java class.
+ * register your own String --&gt; Object conversions for any given Java class.
  * Once registered, such converters will be used transparently by all of the
  * <code>BeanUtils</code> methods (including <code>populate()</code>).  To
  * create and register your own converter, follow these steps:</p>
@@ -896,14 +896,15 @@
  * class use worker instances of these classes). For each static utility class, there is a corresponding
  * class with the same functionality that can be instantiated:
  * </p>
- * <p>
- * <table cols='2' width='60%'>
+ *
+ * <table width='60%'>
+ * <caption>Utility Objects And Static Utility Classes</caption>
  * <tr><th>Static Utility Class</th><th>Utility Object</th></tr>
  * <tr><td>BeanUtils</td><td>BeanUtilsBean</td></tr>
  * <tr><td>ConvertUtils</td><td>ConvertUtilsBean</td></tr>
  * <tr><td>PropertyUtils</td><td>PropertyUtilsBean</td></tr>
  * </table>
- * </p>
+ *
  * <p>
  * Creating an instances allow gives guarenteed control of the caching and registration
  * to the code that creates it.
@@ -931,17 +932,15 @@
  * to a particular value. A typical usage is to combine this with <code>commons-collections</code>
  * so that all the beans in a collection can have a particular property set to a particular value.
  * </p>
- * <p>
- * For example, set the activeEmployee property to TRUE for an entire collection:
- *  <code><pre>
+ * <p>For example, set the activeEmployee property to TRUE for an entire collection:</p>
+ *  <pre><code>
  *     // create the closure
  *     BeanPropertyValueChangeClosure closure =
  *         new BeanPropertyValueChangeClosure( "activeEmployee", Boolean.TRUE );
  *
  *     // update the Collection
  *     CollectionUtils.forAllDo( peopleCollection, closure );
- *   </pre></code>
- * </p>
+ *   </code></pre>
  *
  * <a name="bean-property-predicate"></a>
  * <h2>6.3 Querying Or Filtering Collections Of Beans</h2>
@@ -959,16 +958,14 @@
  * (in combination with <code>commons-collections</code>)
  * to filter collections on the basis of a property value.
  * </p>
- * <p>
- * For example, to filter a collection to find all beans where active employee is false use:
- * <code><pre>
+ * <p>For example, to filter a collection to find all beans where active employee is false use:</p>
+ * <pre><code>
  *     BeanPropertyValueEqualsPredicate predicate =
  *         new BeanPropertyValueEqualsPredicate( "activeEmployee", Boolean.FALSE );
  *
  *     // filter the Collection
  *     CollectionUtils.filter( peopleCollection, predicate );
- * </pre></code>
- * </p>
+ * </code></pre>
  *
  * <a href="bean-property-transformer"></a>
  * <h2>6.4 Transforming Collections Of Beans</h2>
@@ -988,14 +985,14 @@
  * <p>
  * For example, to find all cities that are contained in the address of each person property of each bean in
  * a collection:
- *     <code><pre>
+ * </p>
+ *     <pre><code>
  *     // create the transformer
  *     BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  *     // transform the Collection
  *     Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- *     </pre></code>
- * </p>
+ *     </code></pre>
  *
  * <a name="FAQ"></a>
  * <h1>7. Frequently Asked Questions</h1>
@@ -1006,7 +1003,7 @@
  * <em>reflection</em>. This means that it will find only
  * <a href='http://java.sun.com/products/javabeans'><em>JavaBean</em>
  * compliant</a> properties.</p>
- * <p>There are some subtleties  of this specification that can catch out the unwary:
+ * <p>There are some subtleties  of this specification that can catch out the unwary:</p>
  * <ul>
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
  * <li>The <code>java.beans.Introspector</code> searches widely for a custom <em>BeanInfo</em>
@@ -1015,7 +1012,7 @@
  * creating via reflection based on your class. If this happens, the only solution is to
  * create your own <em>BeanInfo</em>.</li>
  * </ul>
- * </p>
+ *
  * <a name="FAQ.bc.order"></a>
  * <h2>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h2>
  * <p>
@@ -1029,7 +1026,7 @@
  * <p>
  * For example:
  * </p>
- * <code><pre>
+ * <pre><code>
  *     import org.apache.commons.collections.comparators.ComparableComparator;
  *     import org.apache.commons.collections.comparators.ReverseComparator;
  *     import org.apache.commons.beanutils.BeanComparator;
@@ -1038,6 +1035,6 @@
  *         = new BeanComparator("propertyName", new ReverseComparator(new ComparableComparator()));
  *     Collections.sort(myList, reversedNaturalOrderBeanComparator);
  *     ...
- * </pre></code>
+ * </code></pre>
  */
 package org.apache.commons.beanutils;

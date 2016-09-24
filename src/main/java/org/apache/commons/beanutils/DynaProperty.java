@@ -330,6 +330,7 @@ public class DynaProperty implements Serializable {
      * @param in {@link ObjectInputStream} to read object from
      * @throws StreamCorruptedException when the stream data values are outside expected range
      * @throws IOException if the input stream can't be read
+     * @throws ClassNotFoundException When trying to read an object of class that is not on the classpath
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
 

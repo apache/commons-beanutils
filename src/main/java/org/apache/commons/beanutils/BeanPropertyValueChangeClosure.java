@@ -33,9 +33,7 @@ import java.lang.reflect.InvocationTargetException;
  * what property will be updated and with what value.
  * <dl>
  *    <dt>
- *       <b><code>
- *           <pre>public BeanPropertyValueChangeClosure( String propertyName, Object propertyValue )</pre>
- *       </code></b>
+ *       <code>public BeanPropertyValueChangeClosure( String propertyName, Object propertyValue )</code>
  *    </dt>
  *    <dd>
  *       Will create a <code>Closure</code> that will update an object by setting the property
@@ -43,23 +41,23 @@ import java.lang.reflect.InvocationTargetException;
  *    </dd>
  * </dl>
  *
- * <p/>
+ * <p>
  * <strong>Note:</strong> Property names can be a simple, nested, indexed, or mapped property as defined by
  * <code>org.apache.commons.beanutils.PropertyUtils</code>.  If any object in the property path
  * specified by <code>propertyName</code> is <code>null</code> then the outcome is based on the
  * value of the <code>ignoreNull</code> attribute.
- *
- * <p/>
+ * </p>
+ * <p>
  * A typical usage might look like:
- * <code><pre>
+ * </p>
+ * <pre><code>
  * // create the closure
  * BeanPropertyValueChangeClosure closure =
  *    new BeanPropertyValueChangeClosure( "activeEmployee", Boolean.TRUE );
  *
  * // update the Collection
  * CollectionUtils.forAllDo( peopleCollection, closure );
- * </pre></code>
- * <p/>
+ * </code></pre>
  *
  * This would take a <code>Collection</code> of person objects and update the
  * <code>activeEmployee</code> property of each object in the <code>Collection</code> to
