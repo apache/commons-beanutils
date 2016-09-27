@@ -26,9 +26,6 @@ limitations under the License.
   <module name="JavadocPackage">
     <property name="allowLegacy" value="false"/>
   </module>
-  <module name="Header">
-    <property name="headerFile" value="${checkstyle.header.file}"/>
-  </module>
   <module name="FileTabCharacter">
     <property name="fileExtensions" value="java,xml"/>
   </module>
