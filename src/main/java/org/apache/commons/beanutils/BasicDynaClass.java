@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 /**
  * <p>Minimal implementation of the <code>DynaClass</code> interface.  Can be
- * used as a convenience base class for more sophisticated implementations.</p> *
+ * used as a convenience base class for more sophisticated implementations.</p>
  * <p><strong>IMPLEMENTATION NOTE</strong> - The <code>DynaBean</code>
  * implementation class supplied to our constructor MUST have a one-argument
  * constructor of its own that accepts a <code>DynaClass</code>.  This is
