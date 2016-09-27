@@ -23,8 +23,8 @@ Fixed Bugs:
 * BEANUTILS-477: Changed log level in FluentPropertyBeanIntrospector
 * BEANUTILS-492: Fixed exception when setting indexed properties on DynaBeans.
   Thanks to Bernhard Seebass.
-* BEANUTILS-470: Precision lost when converting BigDecimal Thanks to Tommy
-  Tynj‰.
+* BEANUTILS-470: Precision lost when converting BigDecimal. Thanks to Tommy
+  Tynj√§.
 * BEANUTILS-465: Indexed List Setters fixed. Thanks to Daniel Atallah.
 
 Changes:
