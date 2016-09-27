@@ -46,6 +46,7 @@
       <commons.japicmp.version>0.9.1-SNAPSHOT</commons.japicmp.version>
       -->
       <commons.clirr.version>2.8</commons.clirr.version>
+      <commons.encoding>utf-8</commons.encoding>
   </properties>
 
 
