@@ -40,8 +40,11 @@
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
-      <surefire.argLine>-Xmx50M</surefire.argLine>
-      <commons.japicmp.version>0.9.0</commons.japicmp.version>
+      <surefire.argLine>-Xmx49M</surefire.argLine>
+      <!-- TODO: Update to japicmp 0.9.1 to support 
+	   https://github.com/siom79/japicmp/issues/148 
+      <commons.japicmp.version>0.9.1-SNAPSHOT</commons.japicmp.version>
+      -->
       <commons.clirr.version>2.8</commons.clirr.version>
   </properties>
 
@@ -341,8 +344,10 @@
           <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <forkMode>pertest</forkMode>
-              <!-- limit memory size see BEANUTILS-291 -->
-              <argLine>${surefire.argLine}</argLine>
+	      <!-- limit memory size see BEANUTILS-291 
+                   ..also include ${argLine} from jacoco-maven-plugin
+	      -->
+	      <argLine>${surefire.argLine} ${argLine}</argLine>
               <includes>
                 <include>**/*TestCase.java</include>
               </includes>
@@ -373,13 +378,6 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
-    <!-- Disabled as it is not Java 6 compatible
-      <plugin>
-        <groupId>com.github.siom79.japicmp</groupId>
-        <artifactId>japicmp-maven-plugin</artifactId>
-        <version>${commons.japicmp.version}</version>
-      </plugin>
-         -->
       </plugins>
       <pluginManagement>
         <plugins>
@@ -464,6 +462,19 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+<!-- TODO: Enable below using japicmp 0.9.1 or later
+	      <plugin>
+		<groupId>com.github.siom79.japicmp</groupId>
+		<artifactId>japicmp-maven-plugin</artifactId>
+		<version>${commons.japicmp.version}</version>
+     to support "mvn site" instead of "mvn package site"
+		<configuration>
+		   <parameter>
+			   <ignoreMissingNewVersion/>
+		   </parameter>
+		</configuration>
+	      </plugin>
+-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
