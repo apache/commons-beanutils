@@ -41,6 +41,8 @@
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
       <surefire.argLine>-Xmx50M</surefire.argLine>
+      <commons.japicmp.version>0.9.0</commons.japicmp.version>
+      <commons.clirr.version>2.8</commons.clirr.version>
   </properties>
 
 
@@ -331,6 +333,9 @@
 
   <build>
       <plugins>
+
+
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -368,13 +373,13 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
-	<!-- Disabled as it is not Java 6 compatible
+    <!-- Disabled as it is not Java 6 compatible
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
         <version>${commons.japicmp.version}</version>
       </plugin>
-      -->
+         -->
       </plugins>
       <pluginManagement>
         <plugins>
@@ -433,7 +438,44 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                    <linkXref>true</linkXref>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <id>pmd-report</id>
+                        <reports>
+                            <report>pmd</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>pmd-aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>pmd</report>
+                        </reports>
+                        <configuration>
+                            <aggregate>true</aggregate>
+                        </configuration>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${commons.findbugs.version}</version>
+                <configuration>
+                    <threshold>Normal</threshold>
+                    <effort>Default</effort>
+                    <!--<excludeFilterFile>src/conf/findbugs-exclude-filter.xml</excludeFilterFile> -->
+                    <fork>true</fork>
+                    <jvmArgs>-Duser.language=en</jvmArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </reporting>
-
 </project>
