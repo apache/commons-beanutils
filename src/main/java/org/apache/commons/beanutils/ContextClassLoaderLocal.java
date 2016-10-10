@@ -17,8 +17,12 @@
 
 package org.apache.commons.beanutils;
 
+import java.lang.ref.Reference;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
 import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * An instance of this class represents a value that is provided per (thread)
@@ -103,15 +107,67 @@ import java.util.WeakHashMap;
  * @see java.lang.Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {
-    private final Map<ClassLoader, T> valueByClassLoader = new WeakHashMap<ClassLoader, T>();
-    private boolean globalValueInitialized = false;
-    private T globalValue;
+    private final Map<WeakKey<ClassLoader>, Object> valueByClassLoader = new ConcurrentHashMap<WeakKey<ClassLoader>, Object>();
+    private final ReferenceQueue<ClassLoader> weakQueue = new ReferenceQueue<ClassLoader>();
+
+    private AtomicReference<Object> localValue = new AtomicReference<Object>();
+    private AtomicReference<Object> globalValue = new AtomicReference<Object>();
+
+    private WeakReference<ClassLoader> localClassLoader;
+
+    /**
+     * Value representing null keys inside tables.
+     */
+    private static final Object NULL_VALUE = new Object();
+
+    /**
+     * Use NULL_KEY for key if it is null.
+     */
+    private static Object maskNull(Object value) {
+        return (value == null ? NULL_VALUE : value);
+    }
+
+    /**
+     * Returns internal representation of null key back to caller as null.
+     */
+    @SuppressWarnings("unchecked")
+    private static <T> T unmaskNull(Object value) {
+        return (T)(value == NULL_VALUE ? null : value);
+    }
+
+    private static class WeakKey<T> extends WeakReference<T> {
+        private final int hashCode;
+
+        WeakKey(T key) {
+            this(key,null);
+        }
+
+        WeakKey(T key, ReferenceQueue<? super T> queue) {
+            super(key,queue);
+            hashCode = key.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            return this.hashCode;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof WeakKey)) {
+                return false;
+            }
+            T curObj = get();
+            return this == obj || curObj != null && curObj.equals(obj);
+        }
+    }
 
     /**
      * Construct a context classloader instance
      */
     public ContextClassLoaderLocal() {
         super();
+        localClassLoader = new WeakReference<ClassLoader>(this.getClass().getClassLoader());
     }
 
     /**
@@ -131,42 +187,68 @@ public class ContextClassLoaderLocal<T> {
         return null;
     }
 
+    private void expungeStaleValues() {
+      for (Reference<? extends ClassLoader> x; (x = weakQueue.poll()) != null; ) {
+          //noinspection SuspiciousMethodCalls
+          valueByClassLoader.remove(x);
+      }
+    }
+
+    @SuppressWarnings("unchecked")
+    private T getRefValue(AtomicReference<Object> ref) {
+  		Object value = ref.get();
+  		if(value == null) {
+  			value = maskNull(initialValue());
+  			if(!ref.compareAndSet(null, value)) {
+  				value = ref.get();
+  			}
+  		}
+  		return (T)unmaskNull(value);
+    }
+
+    private void setRefValue(AtomicReference<Object> ref, T value) {
+  		ref.set(maskNull(value));
+    }
+
+    private ClassLoader getLocalClassLoader() {
+    	ClassLoader result = localClassLoader.get();
+    	if(result == null) {
+    		synchronized (this) {
+    			if((result = localClassLoader.get()) == null) {
+      			localValue.set(null);
+      			result = this.getClass().getClassLoader();
+      			localClassLoader = new WeakReference<ClassLoader>(result);
+    			}
+    		}
+    	}
+    	return result;
+    }
+
     /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
      * @return the object currently associated with the context-classloader of the current thread.
      */
-    public synchronized T get() {
-        // synchronizing the whole method is a bit slower
-        // but guarantees no subtle threading problems, and there's no
-        // need to synchronize valueByClassLoader
-
-        // make sure that the map is given a change to purge itself
-        valueByClassLoader.isEmpty();
+    public T get() {
+        expungeStaleValues();
         try {
-
-            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
-
-                T value = valueByClassLoader.get(contextClassLoader);
-                if ((value == null)
-                && !valueByClassLoader.containsKey(contextClassLoader)) {
-                    value = initialValue();
-                    valueByClassLoader.put(contextClassLoader, value);
+                if(contextClassLoader.equals(getLocalClassLoader())) {
+                    return getRefValue(localValue);
                 }
-                return value;
-
+                WeakKey<ClassLoader> key = new WeakKey<ClassLoader>(contextClassLoader);
+                Object value = valueByClassLoader.get(key);
+                if(value == null) {
+                    value = initialValue();
+                    valueByClassLoader.put(new WeakKey<ClassLoader>(contextClassLoader,weakQueue), maskNull(value));
+                }
+                return unmaskNull(value);
             }
+  		  } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
 
-        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
-
-        // if none or exception, return the globalValue
-        if (!globalValueInitialized) {
-            globalValue = initialValue();
-            globalValueInitialized = true;
-        }//else already set
-        return globalValue;
+  		return getRefValue(globalValue);
     }
 
     /**
@@ -175,36 +257,29 @@ public class ContextClassLoaderLocal<T> {
      *
      * @param value the object to be associated with the entrant thread's context classloader
      */
-    public synchronized void set(final T value) {
-        // synchronizing the whole method is a bit slower
-        // but guarentees no subtle threading problems
-
-        // make sure that the map is given a change to purge itself
-        valueByClassLoader.isEmpty();
+    public void set(T value) {
+        expungeStaleValues();
         try {
-
-            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
-                valueByClassLoader.put(contextClassLoader, value);
+                if(contextClassLoader.equals(getLocalClassLoader())) {
+                    setRefValue(localValue, value);
+                } else {
+                    valueByClassLoader.put(new WeakKey<ClassLoader>(contextClassLoader), maskNull(value));
+                }
                 return;
             }
+        } catch (SecurityException e) { /* SWALLOW - should we log this? */ }
 
-        } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
-
-        // if in doubt, set the global value
-        globalValue = value;
-        globalValueInitialized = true;
+        setRefValue(globalValue, value);
     }
 
     /**
      * Unsets the value associated with the current thread's context classloader
      */
-    public synchronized void unset() {
+    public void unset() {
         try {
-
-            final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-            unset(contextClassLoader);
-
+            unset(Thread.currentThread().getContextClassLoader());
         } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
     }
 
@@ -212,7 +287,13 @@ public class ContextClassLoaderLocal<T> {
      * Unsets the value associated with the given classloader
      * @param classLoader The classloader to <i>unset</i> for
      */
-    public synchronized void unset(final ClassLoader classLoader) {
-        valueByClassLoader.remove(classLoader);
+    public void unset(ClassLoader classLoader) {
+        if(classLoader != null) {
+            if(classLoader.equals(getLocalClassLoader())) {
+                localValue.set(null);
+            } else {
+                valueByClassLoader.remove(new WeakKey<ClassLoader>(classLoader));
+            }
+        }
     }
 }
