@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.9.4-SNAPSHOT</version>
+  <version>1.9.3</version>
   <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -54,9 +54,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/trunk/</developerConnection>
-    <url>http://svn.apache.org/viewvc/commons/proper/beanutils/trunk/</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC3</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC3</developerConnection>
+    <url>http://svn.apache.org/viewvc/commons/proper/beanutils/tags/BEANUTILS_1_9_3_RC3</url>
   </scm>
 
   <distributionManagement>
