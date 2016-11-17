@@ -464,19 +464,20 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-<!-- TODO: Enable below using japicmp 0.9.1 or later
 	      <plugin>
 		<groupId>com.github.siom79.japicmp</groupId>
 		<artifactId>japicmp-maven-plugin</artifactId>
 		<version>${commons.japicmp.version}</version>
-     to support "mvn site" instead of "mvn package site"
 		<configuration>
 		   <parameter>
-			   <ignoreMissingNewVersion/>
+<!-- 
+ to support "mvn site" (no japicmp report) 
+ as well as "mvn package site" (with  japicmp report) 
+-->
+			   <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
 		   </parameter>
 		</configuration>
 	      </plugin>
--->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
