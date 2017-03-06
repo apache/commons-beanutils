@@ -770,7 +770,7 @@
  *
  *     dynaClass.add("amount", java.lang.Integer.class);    // add property
  *     dynaClass.add("orders", OrderBean[].class);          // add indexed property
- *     dynaClass.add("orders", java.util.TreeMapp.class);   // add mapped property
+ *     dynaClass.add("orders", java.util.TreeMap.class);    // add mapped property
  *
  *     DynaBean dynaBean = new LazyDynaBean(dynaClass);     // Create DynaBean with associated DynaClass
  * </pre>
@@ -784,7 +784,7 @@
  *
  *     dynaClass.add("amount", java.lang.Integer.class);    // add property
  *     dynaClass.add("myBeans", myPackage.MyBean[].class);  // add 'array' indexed property
- *     dynaClass.add("myMap", java.util.TreeMapp.class);    // add mapped property
+ *     dynaClass.add("myMap", java.util.TreeMap.class);     // add mapped property
  * </pre>
  *
  * <p><strong>NOTE:</strong> One feature of {@link org.apache.commons.beanutils.MutableDynaClass} is that it
