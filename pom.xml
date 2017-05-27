@@ -35,6 +35,7 @@
       <maven.compiler.source>1.6</maven.compiler.source>
       <maven.compiler.target>1.6</maven.compiler.target>
       <commons.componentid>beanutils</commons.componentid>
+      <commons.module.name>org.apache.commons.beanutils</commons.module.name>
       <commons.release.version>1.9.3</commons.release.version>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
