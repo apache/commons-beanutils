@@ -42,7 +42,7 @@
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 56M to get round Continuum CI / Travis CI build failures -->
       <surefire.argLine>-Xmx56M</surefire.argLine>
-      <commons.japicmp.version>0.9.1</commons.japicmp.version>
+      <commons.japicmp.version>0.10.0</commons.japicmp.version>
       <commons.clirr.version>2.8</commons.clirr.version>
       <commons.encoding>utf-8</commons.encoding>
   </properties>
@@ -470,7 +470,20 @@
 		<artifactId>japicmp-maven-plugin</artifactId>
 		<version>${commons.japicmp.version}</version>
 		<configuration>
-		   <parameter>
+          <oldVersion>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.3</version>
+				<type>jar</type>
+			</dependency>
+		  </oldVersion>
+		  <newVersion>
+			<file>
+				<path>${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}</path>
+			</file>
+		  </newVersion>		   
+		  <parameter>
 <!-- 
  to support "mvn site" (no japicmp report) 
  as well as "mvn package site" (with  japicmp report) 
@@ -478,7 +491,7 @@
 			   <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
 		   </parameter>
 		</configuration>
-	      </plugin>
+	    </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
