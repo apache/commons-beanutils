@@ -22,14 +22,14 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.LazyDynaBean;
 import org.junit.Test;
 
-/** 
+/**
  * Test setting indexed properties on dynabeans
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-493">BEANUTILS-493</a>
  */
 
 public class Jira493TestCase {
-	
+
 	@Test
 	public void testIndexedProperties() throws Exception {
 		LazyDynaBean lazyDynaBean = new LazyDynaBean();
@@ -39,5 +39,5 @@ public class Jira493TestCase {
 		Object x = lazyDynaBean.get("x");
 		assertEquals("[x1, x2]", x.toString());
 	}
-	
+
 }

@@ -35,7 +35,7 @@ import java.util.WeakHashMap;
  * standard JavaBean instances.
  * <p>
  * This class should not usually need to be used directly
- * to create new {@link WrapDynaBean} instances - 
+ * to create new {@link WrapDynaBean} instances -
  * it's usually better to call the {@link WrapDynaBean} constructor.
  * For example:
  * </p>

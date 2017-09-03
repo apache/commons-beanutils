@@ -270,7 +270,7 @@ public class DynaProperty implements Serializable {
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This method provides a workaround.
-     * 
+     *
      * @param out {@link ObjectOutputStream} to write object to
      * @throws IOException if the object can't be written
      */
@@ -326,7 +326,7 @@ public class DynaProperty implements Serializable {
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * This method provides a workaround.
-     * 
+     *
      * @param in {@link ObjectInputStream} to read object from
      * @throws StreamCorruptedException when the stream data values are outside expected range
      * @throws IOException if the input stream can't be read
