@@ -19,10 +19,10 @@ package org.apache.commons.beanutils;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.collections.functors.EqualPredicate;
-import org.apache.commons.collections.functors.InstanceofPredicate;
-import org.apache.commons.collections.functors.NotPredicate;
-import org.apache.commons.collections.functors.NullPredicate;
+import org.apache.commons.collections4.functors.EqualPredicate;
+import org.apache.commons.collections4.functors.InstanceofPredicate;
+import org.apache.commons.collections4.functors.NotPredicate;
+import org.apache.commons.collections4.functors.NullPredicate;
 
 /**
  * @version $Id$

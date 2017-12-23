@@ -33,8 +33,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.collections.keyvalue.AbstractMapEntry;
+import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
 
 /**
  * An implementation of Map for JavaBeans which uses introspection to
