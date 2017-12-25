@@ -128,8 +128,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class ConvertUtilsBean {
 
-    private static final Integer ZERO = new Integer(0);
-    private static final Character SPACE = new Character(' ');
+    private static final Integer ZERO = Integer.valueOf(0);
+    private static final Character SPACE = Character.valueOf(' ');
 
     // ------------------------------------------------------- Class Methods
     /**
@@ -205,7 +205,7 @@ public class ConvertUtilsBean {
      *  Byte.class instead
      */
     @Deprecated
-    private Byte defaultByte = new Byte((byte) 0);
+    private Byte defaultByte = Byte.valueOf((byte) 0);
 
     /**
      * Gets the default value for Byte conversions.
@@ -226,7 +226,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultByte(final byte newDefaultByte) {
-        defaultByte = new Byte(newDefaultByte);
+        defaultByte = Byte.valueOf(newDefaultByte);
         register(new ByteConverter(defaultByte), Byte.TYPE);
         register(new ByteConverter(defaultByte), Byte.class);
     }
@@ -238,7 +238,7 @@ public class ConvertUtilsBean {
      *  Character.class instead
      */
     @Deprecated
-    private Character defaultCharacter = new Character(' ');
+    private Character defaultCharacter = Character.valueOf(' ');
 
     /**
      * Gets the default value for Character conversions.
@@ -259,7 +259,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultCharacter(final char newDefaultCharacter) {
-        defaultCharacter = new Character(newDefaultCharacter);
+        defaultCharacter = Character.valueOf(newDefaultCharacter);
         register(new CharacterConverter(defaultCharacter),
                     Character.TYPE);
         register(new CharacterConverter(defaultCharacter),
@@ -273,7 +273,7 @@ public class ConvertUtilsBean {
      *  Double.class instead
      */
     @Deprecated
-    private Double defaultDouble = new Double(0.0);
+    private Double defaultDouble = Double.valueOf(0.0);
 
     /**
      * Gets the default value for Double conversions.
@@ -294,7 +294,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultDouble(final double newDefaultDouble) {
-        defaultDouble = new Double(newDefaultDouble);
+        defaultDouble = Double.valueOf(newDefaultDouble);
         register(new DoubleConverter(defaultDouble), Double.TYPE);
         register(new DoubleConverter(defaultDouble), Double.class);
     }
@@ -306,7 +306,7 @@ public class ConvertUtilsBean {
      *  Float.class instead
      */
     @Deprecated
-    private Float defaultFloat = new Float((float) 0.0);
+    private Float defaultFloat = Float.valueOf((float) 0.0);
 
     /**
      * Gets the default value for Float conversions.
@@ -327,7 +327,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultFloat(final float newDefaultFloat) {
-        defaultFloat = new Float(newDefaultFloat);
+        defaultFloat = Float.valueOf(newDefaultFloat);
         register(new FloatConverter(defaultFloat), Float.TYPE);
         register(new FloatConverter(defaultFloat), Float.class);
     }
@@ -339,7 +339,7 @@ public class ConvertUtilsBean {
      *  Integer.class instead
      */
     @Deprecated
-    private Integer defaultInteger = new Integer(0);
+    private Integer defaultInteger = Integer.valueOf(0);
 
     /**
      * Gets the default value for Integer conversions.
@@ -360,7 +360,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultInteger(final int newDefaultInteger) {
-        defaultInteger = new Integer(newDefaultInteger);
+        defaultInteger = Integer.valueOf(newDefaultInteger);
         register(new IntegerConverter(defaultInteger), Integer.TYPE);
         register(new IntegerConverter(defaultInteger), Integer.class);
     }
@@ -372,7 +372,7 @@ public class ConvertUtilsBean {
      *  Long.class instead
      */
     @Deprecated
-    private Long defaultLong = new Long(0);
+    private Long defaultLong = Long.valueOf(0);
 
     /**
      * Gets the default value for Long conversions.
@@ -393,7 +393,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultLong(final long newDefaultLong) {
-        defaultLong = new Long(newDefaultLong);
+        defaultLong = Long.valueOf(newDefaultLong);
         register(new LongConverter(defaultLong), Long.TYPE);
         register(new LongConverter(defaultLong), Long.class);
     }
@@ -405,7 +405,7 @@ public class ConvertUtilsBean {
      *  Short.class instead
      */
     @Deprecated
-    private static Short defaultShort = new Short((short) 0);
+    private static Short defaultShort = Short.valueOf((short) 0);
 
     /**
      * Gets the default value for Short conversions.
@@ -426,7 +426,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultShort(final short newDefaultShort) {
-        defaultShort = new Short(newDefaultShort);
+        defaultShort = Short.valueOf(newDefaultShort);
         register(new ShortConverter(defaultShort), Short.TYPE);
         register(new ShortConverter(defaultShort), Short.class);
     }

@@ -86,7 +86,7 @@ public final class CharacterConverter extends AbstractConverter {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Exception {
         if (Character.class.equals(type) || Character.TYPE.equals(type)) {
-            return type.cast(new Character(value.toString().charAt(0)));
+            return type.cast(Character.valueOf(value.toString().charAt(0)));
         }
 
         throw conversionException(type, value);

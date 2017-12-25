@@ -141,7 +141,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             Character.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
-                    return new Character( input.toString().charAt( 0 ) );
+                    return Character.valueOf( input.toString().charAt( 0 ) );
                 }
             }
         );

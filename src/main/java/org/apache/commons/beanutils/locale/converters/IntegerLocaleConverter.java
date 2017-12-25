@@ -220,6 +220,6 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
         if (parsed.longValue() != parsed.intValue()) {
             throw new ConversionException("Suplied number is not of type Integer: " + parsed.longValue());
         }
-        return new Integer(parsed.intValue()); // unlike superclass it will return proper Integer
+        return Integer.valueOf(parsed.intValue()); // unlike superclass it will return proper Integer
     }
 }

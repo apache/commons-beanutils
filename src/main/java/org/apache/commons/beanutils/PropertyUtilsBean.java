@@ -514,7 +514,7 @@ public class PropertyUtilsBean {
             readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
             if (readMethod != null) {
                 final Object[] subscript = new Object[1];
-                subscript[0] = new Integer(index);
+                subscript[0] = Integer.valueOf(index);
                 try {
                     return (invokeMethod(readMethod,bean, subscript));
                 } catch (final InvocationTargetException e) {
@@ -1627,7 +1627,7 @@ public class PropertyUtilsBean {
             writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
             if (writeMethod != null) {
                 final Object[] subscript = new Object[2];
-                subscript[0] = new Integer(index);
+                subscript[0] = Integer.valueOf(index);
                 subscript[1] = value;
                 try {
                     if (log.isTraceEnabled()) {

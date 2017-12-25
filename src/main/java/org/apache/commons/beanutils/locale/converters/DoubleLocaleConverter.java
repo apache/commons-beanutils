@@ -216,7 +216,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     protected Object parse(final Object value, final String pattern) throws ParseException {
         final Number result = (Number) super.parse(value, pattern);
         if (result instanceof Long) {
-            return new Double(result.doubleValue());
+            return Double.valueOf(result.doubleValue());
         } else {
             return (result);
         }

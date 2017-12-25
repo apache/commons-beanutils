@@ -157,19 +157,19 @@ public class BasicDynaBean implements DynaBean, Serializable {
         if (type == Boolean.TYPE) {
             return (Boolean.FALSE);
         } else if (type == Byte.TYPE) {
-            return (new Byte((byte) 0));
+            return (Byte.valueOf((byte) 0));
         } else if (type == Character.TYPE) {
-            return (new Character((char) 0));
+            return (Character.valueOf((char) 0));
         } else if (type == Double.TYPE) {
-            return (new Double(0.0));
+            return (Double.valueOf(0.0));
         } else if (type == Float.TYPE) {
-            return (new Float((float) 0.0));
+            return (Float.valueOf((float) 0.0));
         } else if (type == Integer.TYPE) {
-            return (new Integer(0));
+            return (Integer.valueOf(0));
         } else if (type == Long.TYPE) {
-            return (new Long(0));
+            return (Long.valueOf(0));
         } else if (type == Short.TYPE) {
-            return (new Short((short) 0));
+            return (Short.valueOf((short) 0));
         } else {
             return (null);
         }

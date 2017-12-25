@@ -220,6 +220,6 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
             throw new ConversionException("Supplied number is not of type Byte: " + parsed.longValue());
         }
         // now returns property Byte
-        return new Byte(parsed.byteValue());
+        return Byte.valueOf(parsed.byteValue());
     }
 }
