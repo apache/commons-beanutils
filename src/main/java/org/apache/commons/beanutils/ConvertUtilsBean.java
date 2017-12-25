@@ -153,7 +153,7 @@ public class ConvertUtilsBean {
     /**
      * The <code>Log</code> instance for this class.
      */
-    private final Log log = LogFactory.getLog(ConvertUtils.class);
+    private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
 
     // ------------------------------------------------------- Constructors
 

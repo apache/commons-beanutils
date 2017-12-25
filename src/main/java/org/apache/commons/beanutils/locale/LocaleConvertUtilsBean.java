@@ -103,7 +103,7 @@ public class LocaleConvertUtilsBean {
     private boolean applyLocalized = false;
 
     /** The <code>Log</code> instance for this class. */
-    private final Log log = LogFactory.getLog(LocaleConvertUtils.class);
+    private final Log log = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /** Every entry of the mapConverters is:
      *  key = locale

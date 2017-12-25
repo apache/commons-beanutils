@@ -92,7 +92,7 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private final Log log = LogFactory.getLog(BeanUtils.class);
+    private final Log log = LogFactory.getLog(BeanUtilsBean.class);
 
     /** Used to perform conversions between object types when setting properties */
     private final ConvertUtilsBean convertUtilsBean;
