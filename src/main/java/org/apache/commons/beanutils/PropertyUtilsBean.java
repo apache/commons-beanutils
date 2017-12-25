@@ -297,9 +297,7 @@ public class PropertyUtilsBean {
                 }
             }
         } else if (orig instanceof Map) {
-            final Iterator<?> entries = ((Map<?, ?>) orig).entrySet().iterator();
-            while (entries.hasNext()) {
-                final Map.Entry<?, ?> entry = (Entry<?, ?>) entries.next();
+            for (Map.Entry<?, ?> entry : ((Map<?, ?>) orig).entrySet()) {
                 final String name = (String)entry.getKey();
                 if (isWriteable(dest, name)) {
                     try {
