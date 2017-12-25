@@ -62,7 +62,7 @@ import java.util.Iterator;
  * use the following code to create standalone copies of the information in
  * a result set:</p>
  * <pre>
- *   ArrayList results = new ArrayList(); // To hold copied list
+ *   List results = new ArrayList(); // To hold copied list
  *   ResultSetDynaClass rsdc = ...;
  *   DynaProperty[] properties = rsdc.getDynaProperties();
  *   BasicDynaClass bdc =

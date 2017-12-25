@@ -25,6 +25,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -236,7 +237,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected void introspect(final ResultSet resultSet) throws SQLException {
 
         // Accumulate an ordered list of DynaProperties
-        final ArrayList<DynaProperty> list = new ArrayList<DynaProperty>();
+        final List<DynaProperty> list = new ArrayList<DynaProperty>();
         final ResultSetMetaData metadata = resultSet.getMetaData();
         final int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
