@@ -30,6 +30,9 @@
   <body>
 
     <release version="2.0.0" date="2017-MM-DD" description="Update from Java 6 to 7, update from Apache Commons Collection 3 to 4.">
+      <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update from Java 6 to 7.
+      </action>
     </release>
 
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">
