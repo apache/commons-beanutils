@@ -37,7 +37,7 @@
   <property name="component.name"          value="beanutils"/>
 
   <!-- The primary package name of this component -->
-  <property name="component.package"       value="org.apache.commons.beanutils"/>
+  <property name="component.package"       value="org.apache.commons.beanutils2"/>
 
   <!-- The title of this component -->
   <property name="component.title"         value="Bean Introspection Utilities"/>
@@ -298,7 +298,7 @@
                  value="${test.log}"/>
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
-      <arg value="org.apache.commons.beanutils.BeanUtilsBenchCase"/>
+      <arg value="org.apache.commons.beanutils2.BeanUtilsBenchCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
@@ -315,7 +315,7 @@
                  value="${test.log}"/>
       <sysproperty key="org.apache.commons.logging.simplelog.defaultlog"
                  value="${test.level}"/>
-      <arg value="org.apache.commons.beanutils.PropertyUtilsBenchCase"/>
+      <arg value="org.apache.commons.beanutils2.PropertyUtilsBenchCase"/>
       <classpath refid="test.classpath"/>
     </java>
   </target>
