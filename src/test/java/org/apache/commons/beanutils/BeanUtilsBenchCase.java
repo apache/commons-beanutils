@@ -106,7 +106,7 @@ public class BeanUtilsBenchCase extends TestCase {
 
         // Create input instances
         inBean = new BenchBean();
-        inMap = new HashMap<String, Object>();
+        inMap = new HashMap<>();
         inMap.put("booleanProperty", new Boolean(inBean.getBooleanProperty()));
         inMap.put("byteProperty", new Byte(inBean.getByteProperty()));
         inMap.put("doubleProperty", new Double(inBean.getDoubleProperty()));
@@ -121,7 +121,7 @@ public class BeanUtilsBenchCase extends TestCase {
             final String inKey = inKeys.next();
             inDyna.set(inKey, inMap.get(inKey));
         }
-        inStrs = new HashMap<String, String>();
+        inStrs = new HashMap<>();
         inKeys = inMap.keySet().iterator();
         while (inKeys.hasNext()) {
             final String inKey = inKeys.next();

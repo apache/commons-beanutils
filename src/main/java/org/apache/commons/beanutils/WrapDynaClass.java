@@ -106,7 +106,7 @@ public class WrapDynaClass implements DynaClass {
      * property name.  Individual descriptor instances will be the same
      * instances as those in the <code>descriptors</code> list.
      */
-    protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<String, PropertyDescriptor>();
+    protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
 
     /**
@@ -120,7 +120,7 @@ public class WrapDynaClass implements DynaClass {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
     // ------------------------------------------------------- Static Variables
@@ -130,7 +130,7 @@ public class WrapDynaClass implements DynaClass {
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
             protected Map<CacheKey, WrapDynaClass> initialValue() {
-                return new WeakHashMap<CacheKey, WrapDynaClass>();
+                return new WeakHashMap<>();
         }
     };
 
@@ -229,7 +229,7 @@ public class WrapDynaClass implements DynaClass {
         @Override
         public Set<Object> keySet() {
             // extract the classes from the key to stay backwards compatible
-            final Set<Object> result = new HashSet<Object>();
+            final Set<Object> result = new HashSet<>();
             for (final CacheKey k : getClassesCache().keySet()) {
                 result.add(k.beanClass);
             }
@@ -464,7 +464,7 @@ public class WrapDynaClass implements DynaClass {
         Map<?, ?> mappeds =
                 PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null) {
-            mappeds = new HashMap<Object, Object>();
+            mappeds = new HashMap<>();
         }
 
         // Construct corresponding DynaProperty information

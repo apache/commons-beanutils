@@ -257,7 +257,7 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
         map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
@@ -625,7 +625,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("intIndexed[0]", "100");
             map.put("intIndexed[2]", "120");
             map.put("intIndexed[4]", "140");
@@ -676,7 +676,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             int intArray[] = new int[] { 123, 456, 789 };
             map.put("intArray", intArray);
             String stringArray[] = new String[]
@@ -714,7 +714,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("mappedProperty(First Key)", "New First Value");
             map.put("mappedProperty(Third Key)", "New Third Value");
 
@@ -748,7 +748,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("nested.booleanProperty", "false");
             // booleanSecond is left at true
             map.put("nested.doubleProperty", "432.0");
@@ -804,7 +804,7 @@ public class BeanUtilsTestCase extends TestCase {
 
             bean.setNullProperty("Non-null value");
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
             map.put("byteProperty", "111");
@@ -1369,10 +1369,10 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedMappedMap() throws Exception {
 
-        final Map<String, Object> origMap = new HashMap<String, Object>();
+        final Map<String, Object> origMap = new HashMap<>();
         origMap.put("First Key", "First Value");
         origMap.put("Second Key", "Second Value");
-        final Map<String, Object> changedMap = new HashMap<String, Object>();
+        final Map<String, Object> changedMap = new HashMap<>();
         changedMap.put("First Key", "First Value");
         changedMap.put("Second Key", "Second Value");
 
@@ -1476,7 +1476,7 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetMappedMap() {
         final TestBean bean = new TestBean();
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");

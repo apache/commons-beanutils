@@ -428,7 +428,7 @@ public class BeanMapTestCase extends AbstractTestMap {
             // expected result
         }
         try {
-            BeanMap.defaultTransformers.putAll(new HashMap<Object, Object>());
+            BeanMap.defaultTransformers.putAll(new HashMap<>());
             fail("putAll() - expected UnsupportedOperationException");
         } catch(final UnsupportedOperationException e) {
             // expected result

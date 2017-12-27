@@ -49,9 +49,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     private transient Object bean;
 
-    private transient HashMap<String, Method> readMethods = new HashMap<String, Method>();
-    private transient HashMap<String, Method> writeMethods = new HashMap<String, Method>();
-    private transient HashMap<String, Class<? extends Object>> types = new HashMap<String, Class<? extends Object>>();
+    private transient HashMap<String, Method> readMethods = new HashMap<>();
+    private transient HashMap<String, Method> writeMethods = new HashMap<>();
+    private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
 
     /**
      * An empty array.  Used to invoke accessors via reflection.
@@ -128,7 +128,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
         final Map<Class<? extends Object>, Transformer> defaultTransformers =
-                new HashMap<Class<? extends Object>, Transformer>();
+                new HashMap<>();
         defaultTransformers.put(
             Boolean.TYPE,
             new Transformer() {
@@ -540,7 +540,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      */
     @Override
     public Collection<Object> values() {
-        final ArrayList<Object> answer = new ArrayList<Object>( readMethods.size() );
+        final ArrayList<Object> answer = new ArrayList<>( readMethods.size() );
         for ( final Iterator<Object> iter = valueIterator(); iter.hasNext(); ) {
             answer.add( iter.next() );
         }

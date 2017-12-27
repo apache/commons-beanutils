@@ -118,7 +118,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         final int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
-        final List<String> listIndexed = new ArrayList<String>();
+        final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
@@ -126,19 +126,19 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long(321));
-        final HashMap<String, Object> mapProperty = new HashMap<String, Object>();
+        final HashMap<String, Object> mapProperty = new HashMap<>();
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
         bean.set("mapProperty", mapProperty);
-        final HashMap<String, Object> mappedObjects = new HashMap<String, Object>();
+        final HashMap<String, Object> mappedObjects = new HashMap<>();
         mappedObjects.put("First Key", "First Value");
         mappedObjects.put("Second Key", "Second Value");
         bean.set("mappedObjects", mappedObjects);
-        final HashMap<String, Object> mappedProperty = new HashMap<String, Object>();
+        final HashMap<String, Object> mappedProperty = new HashMap<>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        final HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
+        final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
         mappedIntProperty.put("One", new Integer(1));
         mappedIntProperty.put("Two", new Integer(2));
         bean.set("mappedIntProperty", mappedIntProperty);
@@ -188,7 +188,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", new Double(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });

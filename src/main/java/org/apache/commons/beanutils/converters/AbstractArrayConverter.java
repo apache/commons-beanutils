@@ -186,7 +186,7 @@ public abstract class AbstractArrayConverter implements Converter {
             st.wordChars('-', '-');
 
             // Split comma-delimited tokens into a List
-            final List<String> list = new ArrayList<String>();
+            final List<String> list = new ArrayList<>();
             while (true) {
                 final int ttype = st.nextToken();
                 if ((ttype == StreamTokenizer.TT_WORD) ||

@@ -72,17 +72,17 @@ public class IndexedPropertyTestCase {
         testArray= new String[] {"array-0", "array-1", "array-2"};
         newArray = new String[]  {"newArray-0", "newArray-1", "newArray-2"};
 
-        testList = new ArrayList<String>();
+        testList = new ArrayList<>();
         testList.add("list-0");
         testList.add("list-1");
         testList.add("list-2");
 
-        newList = new ArrayList<Object>();
+        newList = new ArrayList<>();
         newList.add("newList-0");
         newList.add("newList-1");
         newList.add("newList-2");
 
-        arrayList = new ArrayList<Object>();
+        arrayList = new ArrayList<>();
         arrayList.add("arrayList-0");
         arrayList.add("arrayList-1");
         arrayList.add("arrayList-2");

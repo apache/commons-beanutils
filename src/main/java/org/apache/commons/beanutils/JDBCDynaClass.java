@@ -62,7 +62,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * instances will be the same instances as those in the
      * <code>properties</code> list.</p>
      */
-    protected Map<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected Map<String, DynaProperty> propertiesMap = new HashMap<>();
 
     /**
      * Cross Reference for column name --> dyna property name
@@ -195,7 +195,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         final String name = lowerCase ? columnName.toLowerCase() : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
-                columnNameXref = new HashMap<String, String>();
+                columnNameXref = new HashMap<>();
             }
             columnNameXref.put(name, columnName);
         }
@@ -241,7 +241,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected void introspect(final ResultSet resultSet) throws SQLException {
 
         // Accumulate an ordered list of DynaProperties
-        final List<DynaProperty> list = new ArrayList<DynaProperty>();
+        final List<DynaProperty> list = new ArrayList<>();
         final ResultSetMetaData metadata = resultSet.getMetaData();
         final int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!

@@ -95,7 +95,7 @@ public class BeanComparatorTestCase extends TestCase {
      *  tests comparing two beans via their name using the default Comparator
      */
     public void testSimpleCompare() {
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>(
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
                 "name");
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
         assertTrue("Comparator did not sort properly.  Result:" + result,
@@ -106,7 +106,7 @@ public class BeanComparatorTestCase extends TestCase {
      *  tests comparing two beans via their name using the default Comparator, but the inverse
      */
     public void testSimpleCompareInverse() {
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>(
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
                 "name");
         final int result = beanComparator.compare(alphaBean2, alphaBean1);
         assertTrue("Comparator did not sort properly.  Result:" + result,
@@ -119,7 +119,7 @@ public class BeanComparatorTestCase extends TestCase {
     public void testCompareIdentical() {
         alphaBean1 = new AlphaBean("alphabean");
         alphaBean2 = new AlphaBean("alphabean");
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>(
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
                 "name");
         final int result = beanComparator.compare(alphaBean1, alphaBean2);
         assertTrue("Comparator did not sort properly.  Result:" + result,
@@ -130,7 +130,7 @@ public class BeanComparatorTestCase extends TestCase {
      *  tests comparing one bean against itself.
      */
     public void testCompareBeanAgainstSelf() {
-        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>(
+        final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>(
                 "name");
         final int result = beanComparator.compare(alphaBean1, alphaBean1);
         assertTrue("Comparator did not sort properly.  Result:" + result,
@@ -143,7 +143,7 @@ public class BeanComparatorTestCase extends TestCase {
      */
     public void testCompareWithNulls() {
         try {
-          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>("name");
+          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("name");
           beanComparator.compare(alphaBean2, null);
 
           fail("Should not be able to compare a null value.");
@@ -158,7 +158,7 @@ public class BeanComparatorTestCase extends TestCase {
      */
     public void testCompareOnMissingProperty() {
         try {
-          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<AlphaBean>("bogusName");
+          final BeanComparator<AlphaBean> beanComparator = new BeanComparator<>("bogusName");
           beanComparator.compare(alphaBean2, alphaBean1);
           fail("should not be able to compare");
 
@@ -180,7 +180,7 @@ public class BeanComparatorTestCase extends TestCase {
           testBeanA.setBooleanProperty(true);
           testBeanB.setBooleanProperty(false);
 
-          final BeanComparator<TestBean> beanComparator = new BeanComparator<TestBean>("booleanProperty");
+          final BeanComparator<TestBean> beanComparator = new BeanComparator<>("booleanProperty");
           beanComparator.compare(testBeanA, testBeanB);
 
           // **** java.lang.Boolean implements Comparable from JDK 1.5 onwards
@@ -203,7 +203,7 @@ public class BeanComparatorTestCase extends TestCase {
         testBeanA.setDoubleProperty(5.5);
         testBeanB.setDoubleProperty(1.0);
 
-        final BeanComparator<TestBean> beanComparator = new BeanComparator<TestBean>(
+        final BeanComparator<TestBean> beanComparator = new BeanComparator<>(
                 "doubleProperty");
         int result = beanComparator.compare(testBeanA, testBeanB);
 

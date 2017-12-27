@@ -81,8 +81,8 @@ public class ArrayConverterTestCase extends TestCase {
         final long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
         final Long[]    LONGArray    = new Long[]    {new Long(intArray[0]),    new Long(intArray[1]),    new Long(intArray[2]),    new Long(intArray[3])};
         final Integer[] IntegerArray = new Integer[] {new Integer(intArray[0]), new Integer(intArray[1]), new Integer(intArray[2]), new Integer(intArray[3])};
-        final ArrayList<String> strList = new ArrayList<String>();
-        final ArrayList<Long> longList = new ArrayList<Long>();
+        final ArrayList<String> strList = new ArrayList<>();
+        final ArrayList<Long> longList = new ArrayList<>();
         for (int i = 0; i < strArray.length; i++) {
             strList.add(strArray[i]);
             longList.add(LONGArray[i]);
@@ -216,7 +216,7 @@ public class ArrayConverterTestCase extends TestCase {
 
         // Test Data
         final String[] array = new String[] {"10", "  11", "12  ", "  13  "};
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<>();
         for (final String element : array) {
             list.add(element);
         }

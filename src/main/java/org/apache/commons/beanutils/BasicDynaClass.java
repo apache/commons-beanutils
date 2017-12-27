@@ -138,7 +138,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
     // ------------------------------------------------------ DynaClass Methods

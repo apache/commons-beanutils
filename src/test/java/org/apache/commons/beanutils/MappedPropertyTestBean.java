@@ -29,8 +29,8 @@ import java.util.Map;
 
 public class MappedPropertyTestBean {
 
-    private final Map<Object, Object> map = new HashMap<Object, Object>();
-    private final Map<Object, Object> myMap = new HashMap<Object, Object>();
+    private final Map<Object, Object> map = new HashMap<>();
+    private final Map<Object, Object> myMap = new HashMap<>();
 
 
     // -------------------------------------------------------------- Properties

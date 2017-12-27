@@ -488,14 +488,14 @@ public class BeanUtilsBean {
 
         if (bean == null) {
         //            return (Collections.EMPTY_MAP);
-            return (new java.util.HashMap<String, String>());
+            return (new java.util.HashMap<>());
         }
 
         if (log.isDebugEnabled()) {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
 
-        final Map<String, String> description = new HashMap<String, String>();
+        final Map<String, String> description = new HashMap<>();
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
@@ -542,7 +542,7 @@ public class BeanUtilsBean {
         if (value == null) {
             return (null);
         } else if (value instanceof Collection) {
-            final ArrayList<String> values = new ArrayList<String>();
+            final ArrayList<String> values = new ArrayList<>();
             for (final Object item : (Collection<?>) value) {
                 if (item == null) {
                     values.add(null);

@@ -103,10 +103,10 @@ public class Jira347TestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        final SoftReference<Object> ref = new SoftReference<Object>(new Object());
+        final SoftReference<Object> ref = new SoftReference<>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
-            ArrayList<Object> list = new ArrayList<Object>();
+            ArrayList<Object> list = new ArrayList<>();
             try {
                 long i = 0;
                 while (true && ref.get() != null) {

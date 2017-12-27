@@ -97,7 +97,7 @@ public class BeanificationTestCase extends TestCase {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
         ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
         @SuppressWarnings("unused")
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils.BetaBean");
 
@@ -138,13 +138,13 @@ public class BeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        final ReferenceQueue<Object> queue = new ReferenceQueue<Object>();
+        final ReferenceQueue<Object> queue = new ReferenceQueue<>();
         final WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
         Integer test = new Integer(1);
 
-        final WeakReference<Integer> testReference = new WeakReference<Integer>(test, queue);
+        final WeakReference<Integer> testReference = new WeakReference<>(test, queue);
         //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
-        final Map<Object, Object> map = new WeakHashMap<Object, Object>();
+        final Map<Object, Object> map = new WeakHashMap<>();
         map.put(loader, test);
 
         assertEquals("In map", test, map.get(loader));
@@ -224,9 +224,9 @@ public class BeanificationTestCase extends TestCase {
         thread.start();
         thread.join();
 
-        final WeakReference<BeanUtilsBean> beanUtilsReference = new WeakReference<BeanUtilsBean>(thread.beanUtils);
-        final WeakReference<PropertyUtilsBean> propertyUtilsReference =  new WeakReference<PropertyUtilsBean>(thread.propertyUtils);
-        final WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<ConvertUtilsBean>(thread.convertUtils);
+        final WeakReference<BeanUtilsBean> beanUtilsReference = new WeakReference<>(thread.beanUtils);
+        final WeakReference<PropertyUtilsBean> propertyUtilsReference =  new WeakReference<>(thread.propertyUtils);
+        final WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<>(thread.convertUtils);
 
         assertNotNull("Weak reference released early (1)", loaderReference.get());
         assertNotNull("Weak reference released early (2)", beanUtilsReference.get());
@@ -343,7 +343,7 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-        final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<Integer>();
+        final ContextClassLoaderLocal<Integer> ccll = new ContextClassLoaderLocal<>();
         ccll.set(new Integer(1776));
         assertEquals("Start thread sets value", new Integer(1776), ccll.get());
 
@@ -472,7 +472,7 @@ public class BeanificationTestCase extends TestCase {
     /** Tests whether the unset method works*/
     public void testContextClassLoaderUnset() throws Exception {
         final BeanUtilsBean beanOne = new BeanUtilsBean();
-        final ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<BeanUtilsBean>();
+        final ContextClassLoaderLocal<BeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();

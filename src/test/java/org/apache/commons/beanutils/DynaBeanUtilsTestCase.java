@@ -125,7 +125,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         final int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
-        final List<String> listIndexed = new ArrayList<String>();
+        final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
@@ -133,15 +133,15 @@ public class DynaBeanUtilsTestCase extends TestCase {
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
         bean.set("longProperty", new Long(321));
-        final HashMap<String, Object> mapProperty = new HashMap<String, Object>();
+        final HashMap<String, Object> mapProperty = new HashMap<>();
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
         bean.set("mapProperty", mapProperty);
-        final HashMap<String, Object> mappedProperty = new HashMap<String, Object>();
+        final HashMap<String, Object> mappedProperty = new HashMap<>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        final HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
+        final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
         mappedIntProperty.put("One", new Integer(1));
         mappedIntProperty.put("Two", new Integer(2));
         bean.set("mappedIntProperty", mappedIntProperty);
@@ -344,7 +344,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
         map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
@@ -526,7 +526,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             //            int intArray[] = new int[] { 123, 456, 789 };
             final String intArrayIn[] = new String[] { "123", "456", "789" };
             map.put("intArray", intArrayIn);
@@ -698,7 +698,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("intIndexed[0]", "100");
             map.put("intIndexed[2]", "120");
             map.put("intIndexed[4]", "140");
@@ -758,7 +758,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("mappedProperty(First Key)", "New First Value");
             map.put("mappedProperty(Third Key)", "New Third Value");
 
@@ -792,7 +792,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("nested.booleanProperty", "false");
             // booleanSecond is left at true
             map.put("nested.doubleProperty", "432.0");
@@ -845,7 +845,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
             bean.set("nullProperty", "non-null value");
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
             map.put("doubleProperty", "432.0");
@@ -1150,10 +1150,10 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedMappedMap() throws Exception {
 
-        final Map<String, Object> origMap = new HashMap<String, Object>();
+        final Map<String, Object> origMap = new HashMap<>();
         origMap.put("First Key", "First Value");
         origMap.put("Second Key", "Second Value");
-        final Map<String, Object> changedMap = new HashMap<String, Object>();
+        final Map<String, Object> changedMap = new HashMap<>();
         changedMap.put("First Key", "First Value");
         changedMap.put("Second Key", "Second Value");
 

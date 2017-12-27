@@ -127,11 +127,11 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<Class<?>, BeanIntrospectionData>();
+        descriptorsCache = new WeakFastHashMap<>();
         descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap<Class<?>, Map>();
+        mappedDescriptorsCache = new WeakFastHashMap<>();
         mappedDescriptorsCache.setFast(true);
-        introspectors = new CopyOnWriteArrayList<BeanIntrospector>();
+        introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }
 
@@ -362,7 +362,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        final Map<String, Object> description = new HashMap<String, Object>();
+        final Map<String, Object> description = new HashMap<>();
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();

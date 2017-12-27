@@ -269,7 +269,7 @@ public class TestBean implements Serializable {
     /**
      * A List property accessed as an indexed property.
      */
-    private List<Object> listIndexed = new ArrayList<Object>();
+    private List<Object> listIndexed = new ArrayList<>();
 
     public List<Object> getListIndexed() {
         return (listIndexed);
@@ -298,7 +298,7 @@ public class TestBean implements Serializable {
     public Map<String, Object> getMapProperty() {
         // Create the map the very first time
         if (mapProperty == null) {
-            mapProperty = new HashMap<String, Object>();
+            mapProperty = new HashMap<>();
             mapProperty.put("First Key", "First Value");
             mapProperty.put("Second Key", "Second Value");
         }
@@ -308,7 +308,7 @@ public class TestBean implements Serializable {
     public void setMapProperty(Map<String, Object> mapProperty) {
         // Create the map the very first time
         if (mapProperty == null) {
-            mapProperty = new HashMap<String, Object>();
+            mapProperty = new HashMap<>();
             mapProperty.put("First Key", "First Value");
             mapProperty.put("Second Key", "Second Value");
         }
@@ -324,7 +324,7 @@ public class TestBean implements Serializable {
     public Object getMappedObjects(final String key) {
         // Create the map the very first time
         if (mappedObjects == null) {
-            mappedObjects = new HashMap<String, Object>();
+            mappedObjects = new HashMap<>();
             mappedObjects.put("First Key", "First Value");
             mappedObjects.put("Second Key", "Second Value");
         }
@@ -334,7 +334,7 @@ public class TestBean implements Serializable {
     public void setMappedObjects(final String key, final Object value) {
         // Create the map the very first time
         if (mappedObjects == null) {
-            mappedObjects = new HashMap<String, Object>();
+            mappedObjects = new HashMap<>();
             mappedObjects.put("First Key", "First Value");
             mappedObjects.put("Second Key", "Second Value");
         }
@@ -350,7 +350,7 @@ public class TestBean implements Serializable {
     public String getMappedProperty(final String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
@@ -360,7 +360,7 @@ public class TestBean implements Serializable {
     public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
@@ -376,7 +376,7 @@ public class TestBean implements Serializable {
     public int getMappedIntProperty(final String key) {
         // Create the map the very first time
         if (mappedIntProperty == null) {
-            mappedIntProperty = new HashMap<String, Integer>();
+            mappedIntProperty = new HashMap<>();
             mappedIntProperty.put("One", 1);
             mappedIntProperty.put("Two", 2);
         }

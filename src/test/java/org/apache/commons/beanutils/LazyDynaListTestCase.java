@@ -179,10 +179,10 @@ public class LazyDynaListTestCase extends TestCase {
 
         // ----- Create Collection & Array of Maps -----
         final int size = 5;
-        final List<Object> testList = new ArrayList<Object>(size);
+        final List<Object> testList = new ArrayList<>(size);
         final TreeMap<?, ?>[] testArray = new TreeMap[size];
         for (int i = 0; i < size; i++) {
-            final TreeMap<String, Object> map = new TreeMap<String, Object>();
+            final TreeMap<String, Object> map = new TreeMap<>();
             map.put("prop"+i, "val"+i);
             testArray[i] = map;
             testList.add(testArray[i]);
@@ -278,7 +278,7 @@ public class LazyDynaListTestCase extends TestCase {
         }
 
         // Create Collection
-        final List<Object> collection = new ArrayList<Object>();
+        final List<Object> collection = new ArrayList<>();
         try {
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
@@ -587,7 +587,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testToArrayMapType() {
         final LazyDynaList list = new LazyDynaList(HashMap.class);
-        final HashMap<String, Object> elem = new HashMap<String, Object>();
+        final HashMap<String, Object> elem = new HashMap<>();
         list.add(elem);
         final Map<?, ?>[] array = new Map[1];
         assertSame("Wrong array", array, list.toArray(array));

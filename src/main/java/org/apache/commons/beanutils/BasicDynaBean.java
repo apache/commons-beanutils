@@ -73,7 +73,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     /**
      * The set of property values for this DynaBean, keyed by property name.
      */
-    protected HashMap<String, Object> values = new HashMap<String, Object>();
+    protected HashMap<String, Object> values = new HashMap<>();
 
     /** Map decorator for this DynaBean */
     private transient Map<String, Object> mapDecorator;

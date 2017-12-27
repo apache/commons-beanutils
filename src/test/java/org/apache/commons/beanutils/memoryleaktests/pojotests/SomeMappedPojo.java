@@ -31,7 +31,7 @@ public class SomeMappedPojo {
     public String getMappedProperty(final String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
@@ -41,7 +41,7 @@ public class SomeMappedPojo {
     public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }

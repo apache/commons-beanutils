@@ -54,7 +54,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      */
     public DefaultIntrospectionContext(final Class<?> cls) {
         currentClass = cls;
-        descriptors = new HashMap<String, PropertyDescriptor>();
+        descriptors = new HashMap<>();
     }
 
     @Override

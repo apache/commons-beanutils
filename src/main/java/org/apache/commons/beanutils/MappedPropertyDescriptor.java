@@ -433,7 +433,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             if (m != null) {
                 className = m.getDeclaringClass().getName();
                 methodName = m.getName();
-                methodRef = new SoftReference<Method>(m);
+                methodRef = new SoftReference<>(m);
                 classRef = new WeakReference<Class<?>>(m.getDeclaringClass());
                 final Class<?>[] types = m.getParameterTypes();
                 if (types.length == 2) {
@@ -490,7 +490,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     throw new RuntimeException("Method " + methodName + " for " +
                             className + " could not be reconstructed - method not found");
                 }
-                methodRef = new SoftReference<Method>(m);
+                methodRef = new SoftReference<>(m);
             }
             return m;
         }

@@ -105,7 +105,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListProp {
-        private List<String> foo = new ArrayList<String>(Arrays.asList(OLD_VALUE));
+        private List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
 
         public List<String> getFoo() {
             return foo;
@@ -117,7 +117,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListIndexedProp {
-        private final List<String> foo = new ArrayList<String>(Arrays.asList(OLD_VALUE));
+        private final List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
 
         public String getFoo(final int i) {
             return foo.get(i);

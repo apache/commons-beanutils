@@ -139,7 +139,7 @@ class BeanIntrospectionData {
      * @return the map with the names of write methods for properties
      */
     private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
-        final Map<String, String> methods = new HashMap<String, String>();
+        final Map<String, String> methods = new HashMap<>();
         for (final PropertyDescriptor pd : descs) {
             final Method method = pd.getWriteMethod();
             if (method != null) {

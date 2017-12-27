@@ -878,7 +878,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The default value for an indexed property (java.util.ArrayList)
      */
     protected Object defaultIndexedProperty(final String name) {
-        return new ArrayList<Object>();
+        return new ArrayList<>();
     }
 
     /**
@@ -892,7 +892,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The default value for a mapped property (java.util.HashMap)
      */
     protected Map<String, Object> defaultMappedProperty(final String name) {
-        return new HashMap<String, Object>();
+        return new HashMap<>();
     }
 
     /**
@@ -948,7 +948,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return a new Map instance
      */
     protected Map<String, Object> newMap() {
-        return new HashMap<String, Object>();
+        return new HashMap<>();
     }
 
     /**

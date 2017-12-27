@@ -66,7 +66,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
      * removed.
      */
     public void testPropertyNamesDefensiveCopy() throws IntrospectionException {
-        final Collection<String> properties = new HashSet<String>();
+        final Collection<String> properties = new HashSet<>();
         properties.add("prop1");
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(
                 properties);
@@ -101,7 +101,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
      */
     private static class IntrospectionContextTestImpl implements IntrospectionContext {
         /** Stores the names of properties which have been removed. */
-        private final Set<String> removedProperties = new HashSet<String>();
+        private final Set<String> removedProperties = new HashSet<>();
 
         /**
          * Returns the names of properties which have been removed.

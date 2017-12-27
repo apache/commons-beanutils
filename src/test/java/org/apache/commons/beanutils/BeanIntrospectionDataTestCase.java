@@ -98,7 +98,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP,
                 BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
                         "setFluentGetProperty", String.class));
-        final Map<String, String> methods = new HashMap<String, String>();
+        final Map<String, String> methods = new HashMap<>();
         methods.put(TEST_PROP, "hashCode");
         final BeanIntrospectionData data = new BeanIntrospectionData(
                 new PropertyDescriptor[] { pd }, methods);

@@ -94,7 +94,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     public void testAddPropertyDescriptors() {
         final int count = 4;
         final PropertyDescriptor[] descs = new PropertyDescriptor[count];
-        final Set<PropertyDescriptor> descSet = new HashSet<PropertyDescriptor>();
+        final Set<PropertyDescriptor> descSet = new HashSet<>();
         for (int i = 0; i < count; i++) {
             descs[i] = createDescriptor(PROP + i);
             descSet.add(descs[i]);

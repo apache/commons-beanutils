@@ -126,7 +126,7 @@ public class MemoryTestCase {
 
             // Emulate a container "undeploying" component #1. This should
             // make component loader available for garbage collection (we hope)
-            final WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<ClassLoader>(componentLoader1);
+            final WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<>(componentLoader1);
             componentLoader1 = null;
 
             // force garbage collection and  verify that the componentLoader

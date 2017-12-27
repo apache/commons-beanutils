@@ -258,7 +258,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", new Double(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
@@ -1051,7 +1051,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetIndexedList() {
         final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
         final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        final List<Object> mainList = new ArrayList<Object>();
+        final List<Object> mainList = new ArrayList<>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
         final TestBean bean = new TestBean(mainList);
@@ -1072,14 +1072,14 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test getting a value out of a mapped Map
      */
     public void testGetIndexedMap() {
-        final Map<String, Object> firstMap  = new HashMap<String, Object>();
+        final Map<String, Object> firstMap  = new HashMap<>();
         firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
         firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
-        final Map<String, Object> secondMap  = new HashMap<String, Object>();
+        final Map<String, Object> secondMap  = new HashMap<>();
         secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
         secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
 
-        final List<Object> mainList   = new ArrayList<Object>();
+        final List<Object> mainList   = new ArrayList<>();
         mainList.add(firstMap);
         mainList.add(secondMap);
         final TestBean bean = new TestBean(mainList);
@@ -1181,7 +1181,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetMappedList() {
         final TestBean bean = new TestBean();
-        final List<Object> list = new ArrayList<Object>();
+        final List<Object> list = new ArrayList<>();
         list.add("klm");
         list.add("nop");
         list.add("qrs");
@@ -1200,7 +1200,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetMappedMap() {
         final TestBean bean = new TestBean();
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");
@@ -2620,7 +2620,7 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testSetIndexedList() {
         final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
         final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
-        final List<Object> mainList   = new ArrayList<Object>();
+        final List<Object> mainList   = new ArrayList<>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
         final TestBean bean = new TestBean(mainList);
@@ -2637,14 +2637,14 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test setting a value out of a mapped Map
      */
     public void testSetIndexedMap() {
-        final Map<String, Object> firstMap  = new HashMap<String, Object>();
+        final Map<String, Object> firstMap  = new HashMap<>();
         firstMap.put("FIRST-KEY-1", "FIRST-VALUE-1");
         firstMap.put("FIRST-KEY-2", "FIRST-VALUE-2");
-        final Map<String, Object> secondMap  = new HashMap<String, Object>();
+        final Map<String, Object> secondMap  = new HashMap<>();
         secondMap.put("SECOND-KEY-1", "SECOND-VALUE-1");
         secondMap.put("SECOND-KEY-2", "SECOND-VALUE-2");
 
-        final List<Object> mainList = new ArrayList<Object>();
+        final List<Object> mainList = new ArrayList<>();
         mainList.add(firstMap);
         mainList.add(secondMap);
         final TestBean bean = new TestBean(mainList);
@@ -3097,7 +3097,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedList() {
         final TestBean bean = new TestBean();
-        final List<Object> list = new ArrayList<Object>();
+        final List<Object> list = new ArrayList<>();
         list.add("klm");
         list.add("nop");
         list.add("qrs");
@@ -3117,7 +3117,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedMap() {
         final TestBean bean = new TestBean();
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("sub-key-1", "sub-value-1");
         map.put("sub-key-2", "sub-value-2");
         map.put("sub-key-3", "sub-value-3");
@@ -4278,8 +4278,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * mistake.
      */
     public void testNestedPropertyKeyOrIndexOnBeanImplementingMap() throws Exception {
-        final HashMap<String, Object> map = new HashMap<String, Object>();
-        final HashMap<String, Object> submap = new HashMap<String, Object>();
+        final HashMap<String, Object> map = new HashMap<>();
+        final HashMap<String, Object> submap = new HashMap<>();
         final BetaBean betaBean1 = new BetaBean("test1");
         final BetaBean betaBean2 = new BetaBean("test2");
 
@@ -4427,7 +4427,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("setNestedProperty on non-simple property failed",
                 "value1", utilsBean.getNestedProperty(bean, "mapProperty"));
 
-        final HashMap<String, Object> myMap = new HashMap<String, Object>();
+        final HashMap<String, Object> myMap = new HashMap<>();
         myMap.put("thebean", bean);
         utilsBean.getNestedProperty(myMap, "thebean.mapitem");
         utilsBean.getNestedProperty(myMap, "thebean(mapitem)");
