@@ -787,11 +787,11 @@ public class MethodUtils {
         if (clazz == null) {
             clazz = method.getDeclaringClass();
         } else {
-            sameClass = clazz.equals(method.getDeclaringClass());
             if (!method.getDeclaringClass().isAssignableFrom(clazz)) {
                 throw new IllegalArgumentException(clazz.getName() +
                         " is not assignable from " + method.getDeclaringClass().getName());
             }
+            sameClass = clazz.equals(method.getDeclaringClass());
         }
 
         // If the class is public, we are done
