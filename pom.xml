@@ -41,7 +41,7 @@
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 56M to get round Continuum CI / Travis CI build failures -->
       <surefire.argLine>-Xmx56M</surefire.argLine>
-      <commons.japicmp.version>0.10.0</commons.japicmp.version>
+      <commons.japicmp.version>0.11.0</commons.japicmp.version>
       <commons.clirr.version>2.8</commons.clirr.version>
       <commons.encoding>utf-8</commons.encoding>
   </properties>
@@ -413,7 +413,7 @@
                 <configuration>
                     <linksource>true</linksource>
                     <links>
-                        <link>http://docs.oracle.com/javase/6/docs/api/</link>
+                        <link>https://docs.oracle.com/javase/7/docs/api/</link>
                         <link>http://commons.apache.org/collections/api-release/</link>
                     </links>
                 </configuration>
