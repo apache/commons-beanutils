@@ -158,6 +158,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
+    @Override
     public void execute(final Object object) {
 
         try {

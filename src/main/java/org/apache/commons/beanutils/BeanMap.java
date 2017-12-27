@@ -132,6 +132,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Boolean.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Boolean.valueOf( input.toString() );
                 }
@@ -140,6 +141,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Character.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Character.valueOf( input.toString().charAt( 0 ) );
                 }
@@ -148,6 +150,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Byte.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Byte.valueOf( input.toString() );
                 }
@@ -156,6 +159,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Short.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Short.valueOf( input.toString() );
                 }
@@ -164,6 +168,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Integer.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Integer.valueOf( input.toString() );
                 }
@@ -172,6 +177,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Long.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Long.valueOf( input.toString() );
                 }
@@ -180,6 +186,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Float.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Float.valueOf( input.toString() );
                 }
@@ -188,6 +195,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         defaultTransformers.put(
             Double.TYPE,
             new Transformer() {
+                @Override
                 public Object transform( final Object input ) {
                     return Double.valueOf( input.toString() );
                 }
@@ -573,13 +581,16 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     public Iterator<Object> valueIterator() {
         final Iterator<?> iter = keyIterator();
         return new Iterator<Object>() {
+            @Override
             public boolean hasNext() {
                 return iter.hasNext();
             }
+            @Override
             public Object next() {
                 final Object key = iter.next();
                 return get(key);
             }
+            @Override
             public void remove() {
                 throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
             }
@@ -594,9 +605,11 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     public Iterator<Map.Entry<Object, Object>> entryIterator() {
         final Iterator<String> iter = keyIterator();
         return new Iterator<Map.Entry<Object, Object>>() {
+            @Override
             public boolean hasNext() {
                 return iter.hasNext();
             }
+            @Override
             public Map.Entry<Object, Object> next() {
                 final Object key = iter.next();
                 final Object value = get(key);
@@ -607,6 +620,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 Map.Entry<Object, Object> tmpEntry = new Entry( BeanMap.this, key, value );
                 return tmpEntry;
             }
+            @Override
             public void remove() {
                 throw new UnsupportedOperationException( "remove() not supported for BeanMap" );
             }

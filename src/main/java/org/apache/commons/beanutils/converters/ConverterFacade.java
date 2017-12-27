@@ -57,6 +57,7 @@ public final class ConverterFacade implements Converter {
      * @param value The input value to be converted
      * @return The converted value.
      */
+    @Override
     public <T> T convert(final Class<T> type, final Object value) {
         return converter.convert(type, value);
     }

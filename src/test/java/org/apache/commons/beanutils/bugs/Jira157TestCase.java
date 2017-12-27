@@ -124,9 +124,11 @@ public class Jira157TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() {
         final Object bean = new XY() {
+            @Override
             public String getX() {
                 return "x-value";
             }
+            @Override
             public String getY() {
                 return "y-value";
             }

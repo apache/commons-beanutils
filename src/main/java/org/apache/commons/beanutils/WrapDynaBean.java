@@ -111,6 +111,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public boolean contains(final String name, final String key) {
 
         throw new UnsupportedOperationException
@@ -128,6 +129,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public Object get(final String name) {
 
         Object value = null;
@@ -164,6 +166,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
+    @Override
     public Object get(final String name, final int index) {
 
         Object value = null;
@@ -199,6 +202,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public Object get(final String name, final String key) {
 
         Object value = null;
@@ -224,6 +228,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * properties available for this DynaBean.
      * @return The associated DynaClass
      */
+    @Override
     public DynaClass getDynaClass() {
 
         if (dynaClass == null) {
@@ -246,6 +251,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public void remove(final String name, final String key) {
 
 
@@ -268,6 +274,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @Override
     public void set(final String name, final Object value) {
 
         try {
@@ -302,6 +309,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public void set(final String name, final int index, final Object value) {
 
         try {
@@ -336,6 +344,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public void set(final String name, final String key, final Object value) {
 
         try {

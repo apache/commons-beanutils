@@ -76,6 +76,7 @@ public class DefaultResolver implements Resolver {
      * @throws IllegalArgumentException If the indexed property is illegally
      * formed or has an invalid (non-numeric) value.
      */
+    @Override
     public int getIndex(final String expression) {
         if (expression == null || expression.length() == 0) {
             return -1;
@@ -113,6 +114,7 @@ public class DefaultResolver implements Resolver {
      * @return The index value
      * @throws IllegalArgumentException If the mapped property is illegally formed.
      */
+    @Override
     public String getKey(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;
@@ -138,6 +140,7 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The property name
      */
+    @Override
     public String getProperty(final String expression) {
         if (expression == null || expression.length() == 0) {
             return expression;
@@ -160,6 +163,7 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The next property expression
      */
+    @Override
     public boolean hasNested(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
@@ -175,6 +179,7 @@ public class DefaultResolver implements Resolver {
      * @return <code>true</code> if the expresion is indexed,
      *  otherwise <code>false</code>
      */
+    @Override
     public boolean isIndexed(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
@@ -197,6 +202,7 @@ public class DefaultResolver implements Resolver {
      * @return <code>true</code> if the expresion is mapped,
      *  otherwise <code>false</code>
      */
+    @Override
     public boolean isMapped(final String expression) {
         if (expression == null || expression.length() == 0) {
             return false;
@@ -219,6 +225,7 @@ public class DefaultResolver implements Resolver {
      * @param expression The property expression
      * @return The next property expression
      */
+    @Override
     public String next(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;
@@ -256,6 +263,7 @@ public class DefaultResolver implements Resolver {
      * @return The new expression value, with first property
      * expression removed - null if there are no more expressions
      */
+    @Override
     public String remove(final String expression) {
         if (expression == null || expression.length() == 0) {
             return null;

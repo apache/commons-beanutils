@@ -152,6 +152,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
+    @Override
     public int compare( final T o1, final T o2 ) {
 
         if ( property == null ) {

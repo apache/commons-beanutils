@@ -269,6 +269,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public boolean contains(final String name, final String key) {
 
         if (name == null) {
@@ -298,6 +299,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The property's value
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public Object get(final String name) {
 
         if (name == null) {
@@ -341,6 +343,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public Object get(final String name, final int index) {
 
         // If its not a property, then create default indexed property
@@ -387,6 +390,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public Object get(final String name, final String key) {
 
         // If its not a property, then create default mapped property
@@ -422,6 +426,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @return The associated DynaClass
      */
+    @Override
     public DynaClass getDynaClass() {
         return dynaClass;
     }
@@ -437,6 +442,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public void remove(final String name, final String key) {
 
         if (name == null) {
@@ -471,6 +477,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @Override
     public void set(final String name, final Object value) {
 
         // If the property doesn't exist, then add it
@@ -524,6 +531,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public void set(final String name, final int index, final Object value) {
 
         // If its not a property, then create default indexed property
@@ -575,6 +583,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public void set(final String name, final String key, final Object value) {
 
         // If the 'mapped' property doesn't exist, then add it

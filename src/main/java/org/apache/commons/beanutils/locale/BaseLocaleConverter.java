@@ -197,6 +197,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public <T> T convert(final Class<T> type, final Object value) {
         return convert(type, value, null);
     }
@@ -216,6 +217,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public <T> T convert(final Class<T> type, final Object value, final String pattern) {
         final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {

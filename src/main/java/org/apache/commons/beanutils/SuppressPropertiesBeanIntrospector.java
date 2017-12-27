@@ -83,6 +83,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * {@inheritDoc} This implementation removes all properties from the given context it
      * is configured for.
      */
+    @Override
     public void introspect(final IntrospectionContext icontext) throws IntrospectionException {
         for (final String property : getSuppressedProperties()) {
             icontext.removePropertyDescriptor(property);

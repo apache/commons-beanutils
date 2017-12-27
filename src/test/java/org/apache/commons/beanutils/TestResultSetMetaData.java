@@ -90,6 +90,7 @@ public class TestResultSetMetaData implements InvocationHandler {
      * @return The result of invoking the method.
      * @throws Throwable if an error occurs.
      */
+    @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         final String methodName = method.getName();
         if ("getColumnClassName".equals(methodName)) {

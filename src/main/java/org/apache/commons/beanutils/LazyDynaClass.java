@@ -111,6 +111,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @return <code>true</code> if this {@link MutableDynaClass} cannot be changed
      * otherwise <code>false</code>
      */
+    @Override
     public boolean isRestricted() {
         return restricted;
     }
@@ -122,6 +123,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param restricted <code>true</code> if this {@link MutableDynaClass} cannot
      * be changed otherwise <code>false</code>
      */
+    @Override
     public void setRestricted(final boolean restricted) {
         this.restricted = restricted;
     }
@@ -161,6 +163,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
+    @Override
     public void add(final String name) {
         add(new DynaProperty(name));
     }
@@ -177,6 +180,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
+    @Override
     public void add(final String name, final Class<?> type) {
         if (type == null) {
             add(name);
@@ -206,6 +210,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @throws UnsupportedOperationException anytime this method is called
      */
+    @Override
     public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
     }
@@ -258,6 +263,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
+    @Override
     public void remove(final String name) {
 
         if (name == null) {

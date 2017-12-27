@@ -4468,6 +4468,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final BeanIntrospector bi = new BeanIntrospector() {
             // Only produce read-only property descriptors
+            @Override
             public void introspect(final IntrospectionContext icontext)
                     throws IntrospectionException {
                 final Set<String> names = icontext.propertyNames();
@@ -4516,6 +4517,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testCustomIntrospectionEx() {
         final BeanIntrospector bi = new BeanIntrospector() {
+            @Override
             public void introspect(final IntrospectionContext icontext)
                     throws IntrospectionException {
                 throw new IntrospectionException("TestException");

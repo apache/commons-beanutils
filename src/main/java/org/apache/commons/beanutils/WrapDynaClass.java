@@ -282,6 +282,7 @@ public class WrapDynaClass implements DynaClass {
      *
      * @return the name of the DynaClass
      */
+    @Override
     public String getName() {
 
         return beanClassName;
@@ -299,6 +300,7 @@ public class WrapDynaClass implements DynaClass {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
@@ -321,6 +323,7 @@ public class WrapDynaClass implements DynaClass {
      *
      * @return the set of properties for this DynaClass
      */
+    @Override
     public DynaProperty[] getDynaProperties() {
 
         return (properties);
@@ -353,6 +356,7 @@ public class WrapDynaClass implements DynaClass {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
+    @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 

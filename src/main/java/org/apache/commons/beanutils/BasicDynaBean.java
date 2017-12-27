@@ -114,6 +114,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public boolean contains(final String name, final String key) {
 
         final Object value = values.get(name);
@@ -139,6 +140,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public Object get(final String name) {
 
         // Return any non-null value for the specified property
@@ -193,6 +195,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
+    @Override
     public Object get(final String name, final int index) {
 
         final Object value = values.get(name);
@@ -224,6 +227,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public Object get(final String name, final String key) {
 
         final Object value = values.get(name);
@@ -246,6 +250,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *
      * @return The associated DynaClass
      */
+    @Override
     public DynaClass getDynaClass() {
 
         return (this.dynaClass);
@@ -264,6 +269,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public void remove(final String name, final String key) {
 
         final Object value = values.get(name);
@@ -293,6 +299,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @Override
     public void set(final String name, final Object value) {
 
         final DynaProperty descriptor = getDynaProperty(name);
@@ -329,6 +336,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public void set(final String name, final int index, final Object value) {
 
         final Object prop = values.get(name);
@@ -370,6 +378,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public void set(final String name, final String key, final Object value) {
 
         final Object prop = values.get(name);

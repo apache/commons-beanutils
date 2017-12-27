@@ -620,12 +620,14 @@ public class ConvertUtilsTestCase extends TestCase {
     // We need to use raw types in order to test legacy converters
     public void testConvertToString() throws Exception {
         final Converter dummyConverter = new Converter() {
+            @Override
             public Object convert(final Class type, final Object value) {
                 return value;
             }
         };
 
         final Converter fooConverter = new Converter() {
+            @Override
             public Object convert(final Class type, final Object value) {
                 return "Foo-Converter";
             }

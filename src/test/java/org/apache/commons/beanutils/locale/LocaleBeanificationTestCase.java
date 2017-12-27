@@ -368,9 +368,11 @@ public class LocaleBeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter() {
+                                            @Override
                                             public <T> T convert(final Class<T> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
+                                            @Override
                                             public <T> T convert(final Class<T> type, final Object value, final String pattern) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
@@ -393,9 +395,11 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         LocaleConvertUtils.register(new LocaleConverter() {
+                                @Override
                                 public <T> T convert(final Class<T> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
+                                @Override
                                 public <T> T convert(final Class<T> type, final Object value, final String pattern) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }

@@ -58,6 +58,7 @@ public class Jira87BeanFactory {
          * @param key The key of the mapped value
          * @return The key value
          */
+        @Override
         public Object getValue(final String key) {
             return key;
         }

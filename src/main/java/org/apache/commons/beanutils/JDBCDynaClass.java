@@ -78,6 +78,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.</p>
      */
+    @Override
     public String getName() {
 
         return (this.getClass().getName());
@@ -93,6 +94,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
@@ -107,6 +109,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      */
+    @Override
     public DynaProperty[] getDynaProperties() {
 
         return (properties);
@@ -124,6 +127,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
+    @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 

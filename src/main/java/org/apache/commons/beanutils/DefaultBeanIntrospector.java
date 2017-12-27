@@ -73,6 +73,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      *
      * @param icontext the introspection context
      */
+    @Override
     public void introspect(final IntrospectionContext icontext) {
         BeanInfo beanInfo = null;
         try {

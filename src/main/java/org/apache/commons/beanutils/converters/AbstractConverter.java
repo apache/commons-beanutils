@@ -127,6 +127,7 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if conversion cannot be performed
      * successfully and no default is specified.
      */
+    @Override
     public <T> T convert(final Class<T> type, Object value) {
 
         if (type == null) {

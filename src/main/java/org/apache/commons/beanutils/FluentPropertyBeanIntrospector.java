@@ -129,6 +129,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @param icontext the introspection context
      * @throws IntrospectionException if an error occurs
      */
+    @Override
     public void introspect(final IntrospectionContext icontext)
             throws IntrospectionException {
         for (final Method m : icontext.getTargetClass().getMethods()) {

@@ -378,6 +378,7 @@ public class BeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     ConvertUtils.register(new Converter() {
+                                            @Override
                                             public <T> T convert(final Class<T> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(new Integer(9));
                                             }
@@ -400,6 +401,7 @@ public class BeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         ConvertUtils.register(new Converter() {
+                                @Override
                                 public <T> T convert(final Class<T> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
                                 }

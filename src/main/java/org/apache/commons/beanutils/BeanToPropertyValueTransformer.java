@@ -145,6 +145,7 @@ public class BeanToPropertyValueTransformer implements Transformer {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
+    @Override
     public Object transform(final Object object) {
 
         Object propertyValue = null;

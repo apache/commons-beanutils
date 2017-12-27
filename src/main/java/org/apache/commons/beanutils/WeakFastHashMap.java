@@ -504,6 +504,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         protected abstract E iteratorNext(Map.Entry<K, V> entry);
 
 
+        @Override
         public void clear() {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -516,6 +517,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean remove(final Object o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -531,6 +533,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean removeAll(final Collection<?> o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -546,6 +549,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean retainAll(final Collection<?> o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -561,6 +565,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public int size() {
             if (fast) {
                 return get(map).size();
@@ -572,6 +577,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         }
 
 
+        @Override
         public boolean isEmpty() {
             if (fast) {
                 return get(map).isEmpty();
@@ -582,6 +588,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean contains(final Object o) {
             if (fast) {
                 return get(map).contains(o);
@@ -592,6 +599,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean containsAll(final Collection<?> o) {
             if (fast) {
                 return get(map).containsAll(o);
@@ -602,6 +610,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public <T> T[] toArray(final T[] o) {
             if (fast) {
                 return get(map).toArray(o);
@@ -612,6 +621,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public Object[] toArray() {
             if (fast) {
                 return get(map).toArray();
@@ -648,14 +658,17 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean add(final E o) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public boolean addAll(final Collection<? extends E> c) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public Iterator<E> iterator() {
             return new CollectionViewIterator();
         }
@@ -671,6 +684,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 this.iterator = expected.entrySet().iterator();
             }
 
+            @Override
             public boolean hasNext() {
                 if (expected != map) {
                     throw new ConcurrentModificationException();
@@ -678,6 +692,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 return iterator.hasNext();
             }
 
+            @Override
             public E next() {
                 if (expected != map) {
                     throw new ConcurrentModificationException();
@@ -686,6 +701,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 return iteratorNext(lastReturned);
             }
 
+            @Override
             public void remove() {
                 if (lastReturned == null) {
                     throw new IllegalStateException();
