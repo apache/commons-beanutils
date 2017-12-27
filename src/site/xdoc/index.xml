@@ -57,7 +57,7 @@ easy-to-use wrappers around these capabilities.
 
 <subsection name='BeanUtils Core And Modules'>
 <p>
-The 1.7.x and 1.8.x releases of BeanUtils have distributed three jars:
+The 1.7.x and 1.8.x releases of BeanUtils distributed three jars:
 <ul>
   <li><code>commons-beanutils.jar</code> - contains everything</li>
   <li><code>commons-beanutils-core.jar</code> - excludes <i>Bean Collections</i> classes</li>
@@ -70,6 +70,13 @@ The main <code>commons-beanutils.jar</code> has an <b><i>optional</i></b> depend
 Version 1.9.0 reverts this split for reasons outlined at
 <a href="http://issues.apache.org/jira/browse/BEANUTILS-379">BEANUTILS-379</a>.
 There is now only one jar for the BeanUtils library.
+</p>
+<p>
+Version 2.0.0 updates the dependencies for Apache Commons Collection from version 3 to 4.
+Apache Commons Collection 4 changes packages from <code>org.apache.commons.collections</code> 
+to <code>org.apache.commons.collections4</code>.
+Since some Commons BeanUtils APIs surface Commons Collection types, Commons BeanUtils 2 changes packages from <code>org.apache.commons.beanutils</code>
+to <code>org.apache.commons.beanutils2</code>.  
 </p>
 </subsection>
 <subsection name='Bean Collections'>
@@ -89,6 +96,24 @@ Bean Collections has an additional dependency on
 </section>
 
 <section name="Releases">
+<subsection name="2.0.x releases">
+  <p>
+    BeanUtils <strong>2.0.x</strong> releases are not binary compatible (but easy to port) with version 1.x.x and require a minimum of
+    JDK 1.7.
+  </p>
+  <p>
+    The latest BeanUtils release is available to download
+    <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
+  </p>
+  <ul>
+    <li>2.0.0
+      <ul>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v2.0.0/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="http://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/index.html">JavaDoc</a></li>
+      </ul>
+    </li>
+  </ul>
+</subsection>
 <subsection name="1.9.x releases">
   <p>
     BeanUtils <strong>1.9.x</strong> releases are binary compatible (with a minor exception
