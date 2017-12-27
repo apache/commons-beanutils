@@ -24,8 +24,6 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.WeakFastHashMap;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
