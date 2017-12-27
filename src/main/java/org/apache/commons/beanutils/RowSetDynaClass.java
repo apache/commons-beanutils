@@ -287,7 +287,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
             final DynaBean bean = createDynaBean();
-            for (DynaProperty propertie : properties) {
+            for (final DynaProperty propertie : properties) {
                 final String name = propertie.getName();
                 final Object value = getObject(resultSet, name);
                 bean.set(name, value);

@@ -294,7 +294,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             // copy only properties that are readable and writable.  If its
             // not readable, we can't get the value from the old map.  If
             // its not writable, we can't write a value into the new map.
-            for (Object key : readMethods.keySet()) {
+            for (final Object key : readMethods.keySet()) {
                 if(getWriteMethod(key) != null) {
                     newMap.put(key, get(key));
                 }
@@ -317,7 +317,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @param map  the BeanMap whose properties to put
      */
     public void putAllWriteable(final BeanMap map) {
-        for (Object key : map.readMethods.keySet()) {
+        for (final Object key : map.readMethods.keySet()) {
             if (getWriteMethod(key) != null) {
                 this.put(key, map.get(key));
             }

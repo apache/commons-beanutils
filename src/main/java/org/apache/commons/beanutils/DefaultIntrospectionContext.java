@@ -75,7 +75,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
                     "Array with descriptors must not be null!");
         }
 
-        for (PropertyDescriptor desc : descs) {
+        for (final PropertyDescriptor desc : descs) {
             addPropertyDescriptor(desc);
         }
     }

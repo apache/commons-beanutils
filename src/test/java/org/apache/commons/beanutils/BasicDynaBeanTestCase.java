@@ -287,7 +287,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         final DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
         final int count[] = new int[properties.length];
-        for (DynaProperty element : pd) {
+        for (final DynaProperty element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
                 if (name.equals(properties[j])) {

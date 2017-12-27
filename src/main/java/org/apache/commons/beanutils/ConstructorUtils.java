@@ -400,7 +400,7 @@ public class ConstructorUtils {
         // search through all methods
         final int paramSize = parameterTypes.length;
         final Constructor<?>[] ctors = clazz.getConstructors();
-        for (Constructor<?> ctor2 : ctors) {
+        for (final Constructor<?> ctor2 : ctors) {
             // compare parameters
             final Class<?>[] ctorParams = ctor2.getParameterTypes();
             final int ctorParamSize = ctorParams.length;

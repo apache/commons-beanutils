@@ -453,7 +453,7 @@ public class ArrayConverter extends AbstractConverter {
             st.whitespaceChars(delimiter , delimiter); // Set the delimiters
             st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
             st.wordChars('0', '9');      // Needed to make part of tokens
-            for (char allowedChar : allowedChars) {
+            for (final char allowedChar : allowedChars) {
                 st.ordinaryChars(allowedChar, allowedChar);
                 st.wordChars(allowedChar, allowedChar);
             }

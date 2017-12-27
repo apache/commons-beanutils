@@ -119,10 +119,10 @@ public class BooleanConverterTestCase extends TestCase {
     protected void testConversionValues(final BooleanConverter converter,
             final String[] trueValues, final String[] falseValues) {
 
-        for (String trueValue : trueValues) {
+        for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
         }
-        for (String falseValue : falseValues) {
+        for (final String falseValue : falseValues) {
             assertEquals(Boolean.FALSE, converter.convert(Boolean.class, falseValue));
         }
     }

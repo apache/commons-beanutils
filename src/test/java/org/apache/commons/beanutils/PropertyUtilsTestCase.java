@@ -321,7 +321,7 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
         // Verify existence of all the properties that should be present
-        for (String describe : describes) {
+        for (final String describe : describes) {
             assertTrue("Property '" + describe + "' is present",
                        map.containsKey(describe));
         }
@@ -573,7 +573,7 @@ public class PropertyUtilsTestCase extends TestCase {
                 PropertyUtils.getPropertyDescriptors(bean);
         assertNotNull("Got descriptors", pd);
         final int count[] = new int[properties.length];
-        for (PropertyDescriptor element : pd) {
+        for (final PropertyDescriptor element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
                 if (name.equals(properties[j])) {
@@ -3992,7 +3992,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
-        for (String propertie : properties) {
+        for (final String propertie : properties) {
 
             // Identify the property descriptor for this property
             if (propertie.equals("intIndexed")) {
@@ -4050,7 +4050,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
-        for (String propertie : properties) {
+        for (final String propertie : properties) {
 
             // Identify the property descriptor for this property
             if (propertie.equals("intIndexed")) {
@@ -4503,7 +4503,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     private static PropertyDescriptor findNameDescriptor(
             final PropertyDescriptor[] desc) {
-        for (PropertyDescriptor element : desc) {
+        for (final PropertyDescriptor element : desc) {
             if (element.getName().equals("name")) {
                 return element;
             }

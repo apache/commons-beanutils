@@ -250,7 +250,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         // Convert this list into the internal data structures we need
         properties =
             list.toArray(new DynaProperty[list.size()]);
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             propertiesMap.put(propertie.getName(), propertie);
         }
 

@@ -134,7 +134,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      */
     public boolean containsValue(final Object value) {
         final DynaProperty[] properties = getDynaProperties();
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             final String key = propertie.getName();
             final Object prop = getDynaBean().get(key);
             if (value == null) {
@@ -163,7 +163,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Set<Map.Entry<K, Object>> entrySet() {
         final DynaProperty[] properties = getDynaProperties();
         final Set<Map.Entry<K, Object>> set = new HashSet<Map.Entry<K, Object>>(properties.length);
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             final K key = convertKey(propertie.getName());
             final Object value = getDynaBean().get(propertie.getName());
             set.add(new MapEntry<K>(key, value));
@@ -212,7 +212,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         // Create a Set of the keys
         final DynaProperty[] properties = getDynaProperties();
         Set<K> set = new HashSet<K>(properties.length);
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             set.add(convertKey(propertie.getName()));
         }
         set = Collections.unmodifiableSet(set);
@@ -292,7 +292,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Collection<Object> values() {
         final DynaProperty[] properties = getDynaProperties();
         final List<Object> values = new ArrayList<Object>(properties.length);
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             final String key = propertie.getName();
             final Object value = getDynaBean().get(key);
             values.add(value);

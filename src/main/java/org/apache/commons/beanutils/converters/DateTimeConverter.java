@@ -524,7 +524,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
         Exception firstEx = null;
-        for (String pattern : patterns) {
+        for (final String pattern : patterns) {
             try {
                 final DateFormat format = getFormat(pattern);
                 final Calendar calendar = parse(sourceType, targetType, value, format);

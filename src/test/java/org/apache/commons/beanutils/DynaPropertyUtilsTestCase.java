@@ -253,7 +253,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         // Verify existence of all the properties that should be present
-        for (String describe : describes) {
+        for (final String describe : describes) {
             assertTrue("Property '" + describe + "' is present",
                        map.containsKey(describe));
         }

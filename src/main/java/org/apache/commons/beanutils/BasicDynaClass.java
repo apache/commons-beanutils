@@ -293,7 +293,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
         this.properties = properties;
         propertiesMap.clear();
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             propertiesMap.put(propertie.getName(), propertie);
         }
 

@@ -105,7 +105,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
 	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
 			pu.getPropertyDescriptors(CapsBean.class));
 
-	    PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+	    final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 
 	    assertNotNull("missing property", aDescriptor);
 

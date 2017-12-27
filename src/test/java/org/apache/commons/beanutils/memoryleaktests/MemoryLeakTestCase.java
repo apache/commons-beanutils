@@ -496,7 +496,7 @@ public class MemoryLeakTestCase {
 
         final boolean isNotNull = ref.get() != null;
         System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
-        String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
+        final String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
         Assume.assumeFalse(message, isNotNull);
     }
 

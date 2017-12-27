@@ -342,7 +342,7 @@ public class BeanMapTestCase extends AbstractTestMap {
             // make sure containsKey is working to verify the bean was cloned
             // ok, and the read methods were properly initialized
             final Object[] keys = getSampleKeys();
-            for (Object key : keys) {
+            for (final Object key : keys) {
                 assertTrue("Cloned BeanMap should contain the same keys",
                            map2.containsKey(key));
             }

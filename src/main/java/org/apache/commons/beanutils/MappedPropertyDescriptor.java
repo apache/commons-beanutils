@@ -363,7 +363,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         // the argument class is itself an interface, and when the argument
         // class is an abstract class.
         final Class<?>[] interfaces = initial.getInterfaces();
-        for (Class<?> interface1 : interfaces) {
+        for (final Class<?> interface1 : interfaces) {
             final Method method = internalGetMethod(interface1, methodName, parameterCount);
             if (method != null) {
                 return method;

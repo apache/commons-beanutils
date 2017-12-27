@@ -214,13 +214,13 @@ public final class BooleanConverter extends AbstractConverter {
             // instead of the less-efficient String.equalsIgnoreCase method.
             final String stringValue = value.toString().toLowerCase();
 
-            for (String trueString : trueStrings) {
+            for (final String trueString : trueStrings) {
                 if (trueString.equals(stringValue)) {
                     return type.cast(Boolean.TRUE);
                 }
             }
 
-            for (String falseString : falseStrings) {
+            for (final String falseString : falseStrings) {
                 if (falseString.equals(stringValue)) {
                     return type.cast(Boolean.FALSE);
                 }

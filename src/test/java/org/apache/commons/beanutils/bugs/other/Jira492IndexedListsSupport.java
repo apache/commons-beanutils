@@ -37,20 +37,20 @@ public class Jira492IndexedListsSupport {
         public List<String> getSomeList() {
             return someList;
         }
-        public void setSomeList(List<String> someList) {
+        public void setSomeList(final List<String> someList) {
             this.someList = someList;
         }
-        public void setSomeList(int i, String value) {
+        public void setSomeList(final int i, final String value) {
             someList.set(i, value);
         }
-        public String getSomeList(int i) {
+        public String getSomeList(final int i) {
             return someList.get(i);
         }
     }
 
     public static boolean supportsIndexedLists() throws IntrospectionException {
-        BeanInfo beanInfo = Introspector.getBeanInfo(IndexedBean.class);
-        for (PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
+        final BeanInfo beanInfo = Introspector.getBeanInfo(IndexedBean.class);
+        for (final PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
             if (pd.getName().equals("someList")) {
                 return pd instanceof IndexedPropertyDescriptor;
             }

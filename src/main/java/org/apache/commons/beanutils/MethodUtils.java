@@ -973,7 +973,7 @@ public class MethodUtils {
         final Method[] methods = clazz.getMethods();
         float bestMatchCost = Float.MAX_VALUE;
         float myCost = Float.MAX_VALUE;
-        for (Method method2 : methods) {
+        for (final Method method2 : methods) {
             if (method2.getName().equals(methodName)) {
                 // log some trace information
                 if (log.isTraceEnabled()) {

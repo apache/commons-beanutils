@@ -279,7 +279,7 @@ public class PropertyUtilsBean {
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
-            for (DynaProperty origDescriptor : origDescriptors) {
+            for (final DynaProperty origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
                     try {
@@ -297,7 +297,7 @@ public class PropertyUtilsBean {
                 }
             }
         } else if (orig instanceof Map) {
-            for (Map.Entry<?, ?> entry : ((Map<?, ?>) orig).entrySet()) {
+            for (final Map.Entry<?, ?> entry : ((Map<?, ?>) orig).entrySet()) {
                 final String name = (String)entry.getKey();
                 if (isWriteable(dest, name)) {
                     try {
@@ -316,7 +316,7 @@ public class PropertyUtilsBean {
         } else /* if (orig is a standard JavaBean) */ {
             final PropertyDescriptor[] origDescriptors =
                 getPropertyDescriptors(orig);
-            for (PropertyDescriptor origDescriptor : origDescriptors) {
+            for (final PropertyDescriptor origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
                     try {
@@ -368,14 +368,14 @@ public class PropertyUtilsBean {
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
-            for (DynaProperty descriptor : descriptors) {
+            for (final DynaProperty descriptor : descriptors) {
                 final String name = descriptor.getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
             final PropertyDescriptor[] descriptors =
                 getPropertyDescriptors(bean);
-            for (PropertyDescriptor descriptor : descriptors) {
+            for (final PropertyDescriptor descriptor : descriptors) {
                 final String name = descriptor.getName();
                 if (descriptor.getReadMethod() != null) {
                     description.put(name, getProperty(bean, name));
