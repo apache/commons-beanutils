@@ -1018,7 +1018,7 @@
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
  * comparisions. By default,
- * <code>org.apache.commons.collections.comparators.ComparableComparator</code>
+ * <code>org.apache.commons.collections4.comparators.ComparableComparator</code>
  * is used which imposes a natural order. If you want to change the order,
  * then a custom Comparator should be created and passed into the
  * appropriate constructor.
@@ -1027,8 +1027,8 @@
  * For example:
  * </p>
  * <pre><code>
- *     import org.apache.commons.collections.comparators.ComparableComparator;
- *     import org.apache.commons.collections.comparators.ReverseComparator;
+ *     import org.apache.commons.collections4.comparators.ComparableComparator;
+ *     import org.apache.commons.collections4.comparators.ReverseComparator;
  *     import org.apache.commons.beanutils.BeanComparator;
  *     ...
  *     BeanComparator reversedNaturalOrderBeanComparator

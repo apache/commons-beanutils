@@ -27,7 +27,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * <p><code>Transformer</code> that outputs a property value.</p>
  *
- * <p>An implementation of <code>org.apache.commons.collections.Transformer</code> that transforms
+ * <p>An implementation of <code>org.apache.commons.collections4.Transformer</code> that transforms
  * the object provided by returning the value of a specified property of the object.  The
  * constructor for <code>BeanToPropertyValueTransformer</code> requires the name of the property
  * that will be used in the transformation.  The property can be a simple, nested, indexed, or
@@ -67,7 +67,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtils
- * @see org.apache.commons.collections.Transformer
+ * @see org.apache.commons.collections4.Transformer
  */
 public class BeanToPropertyValueTransformer implements Transformer {
 
