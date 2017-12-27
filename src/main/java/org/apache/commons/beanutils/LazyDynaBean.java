@@ -411,11 +411,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Get the value from the Map
         if (mappedProperty instanceof Map) {
             return (((Map<?, ?>) mappedProperty).get(key));
-        } else {
-            throw new IllegalArgumentException
-              ("Non-mapped property for '" + name + "(" + key + ")'"
-                                  + mappedProperty.getClass().getName());
         }
+        throw new IllegalArgumentException
+          ("Non-mapped property for '" + name + "(" + key + ")'"
+                              + mappedProperty.getClass().getName());
 
     }
 
@@ -937,9 +936,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
                 ((dest == Long.TYPE) && (source == Long.class)) ||
                 ((dest == Short.TYPE) && (source == Short.class))) {
             return (true);
-        } else {
-            return (false);
         }
+        return (false);
 
     }
 

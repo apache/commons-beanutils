@@ -124,11 +124,10 @@ public class LocaleBeanificationTestCase extends TestCase {
             if( reference.get() == null ) {
                 break;
 
-            } else {
-                // create garbage:
-                final byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            final byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 
@@ -174,11 +173,10 @@ public class LocaleBeanificationTestCase extends TestCase {
                 testReference.get() == null) {
                 break;
 
-            } else {
-                // create garbage:
-                final byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            final byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 
@@ -250,11 +248,10 @@ public class LocaleBeanificationTestCase extends TestCase {
                 convertUtilsReference.get() == null) {
                 break;
 
-            } else {
-                // create garbage:
-                final byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            final byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 

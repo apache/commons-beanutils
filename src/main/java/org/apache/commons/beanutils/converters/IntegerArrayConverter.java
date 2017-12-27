@@ -97,9 +97,8 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         if (value == null) {
             if (useDefault) {
                 return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
             }
+            throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
@@ -119,9 +118,8 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
             } catch (final Exception e) {
                 if (useDefault) {
                     return (defaultValue);
-                } else {
-                    throw new ConversionException(value.toString(), e);
                 }
+                throw new ConversionException(value.toString(), e);
             }
         }
 
@@ -137,9 +135,8 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
         } catch (final Exception e) {
             if (useDefault) {
                 return (defaultValue);
-            } else {
-                throw new ConversionException(value.toString(), e);
             }
+            throw new ConversionException(value.toString(), e);
         }
 
     }

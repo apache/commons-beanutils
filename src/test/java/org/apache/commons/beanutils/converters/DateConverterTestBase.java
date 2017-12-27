@@ -531,8 +531,7 @@ public abstract class DateConverterTestBase extends TestCase {
 
         if (date instanceof Calendar) {
             return ((Calendar)date).getTime().getTime();
-        } else {
-            return ((Date)date).getTime();
         }
+        return ((Date)date).getTime();
     }
 }

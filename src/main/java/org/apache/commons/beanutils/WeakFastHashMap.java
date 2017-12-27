@@ -156,10 +156,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public V get(final Object key) {
         if (fast) {
             return (map.get(key));
-        } else {
-            synchronized (map) {
-                return (map.get(key));
-            }
+        }
+        synchronized (map) {
+            return (map.get(key));
         }
     }
 
@@ -172,10 +171,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public int size() {
         if (fast) {
             return (map.size());
-        } else {
-            synchronized (map) {
-                return (map.size());
-            }
+        }
+        synchronized (map) {
+            return (map.size());
         }
     }
 
@@ -188,10 +186,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public boolean isEmpty() {
         if (fast) {
             return (map.isEmpty());
-        } else {
-            synchronized (map) {
-                return (map.isEmpty());
-            }
+        }
+        synchronized (map) {
+            return (map.isEmpty());
         }
     }
 
@@ -206,10 +203,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public boolean containsKey(final Object key) {
         if (fast) {
             return (map.containsKey(key));
-        } else {
-            synchronized (map) {
-                return (map.containsKey(key));
-            }
+        }
+        synchronized (map) {
+            return (map.containsKey(key));
         }
     }
 
@@ -224,10 +220,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public boolean containsValue(final Object value) {
         if (fast) {
             return (map.containsValue(value));
-        } else {
-            synchronized (map) {
-                return (map.containsValue(value));
-            }
+        }
+        synchronized (map) {
+            return (map.containsValue(value));
         }
     }
 
@@ -255,10 +250,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 map = temp;
                 return (result);
             }
-        } else {
-            synchronized (map) {
-                return (map.put(key, value));
-            }
+        }
+        synchronized (map) {
+            return (map.put(key, value));
         }
     }
 
@@ -299,10 +293,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 map = temp;
                 return (result);
             }
-        } else {
-            synchronized (map) {
-                return (map.remove(key));
-            }
+        }
+        synchronized (map) {
+            return (map.remove(key));
         }
     }
 
@@ -364,26 +357,25 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
             return (true);
 
-        } else {
-            synchronized (map) {
-                if (mo.size() != map.size()) {
-                    return (false);
-                }
-                for (final Map.Entry<K, V> e : map.entrySet()) {
-                    final K key = e.getKey();
-                    final V value = e.getValue();
-                    if (value == null) {
-                        if (!(mo.get(key) == null && mo.containsKey(key))) {
-                            return (false);
-                        }
-                    } else {
-                        if (!value.equals(mo.get(key))) {
-                            return (false);
-                        }
+        }
+        synchronized (map) {
+            if (mo.size() != map.size()) {
+                return (false);
+            }
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                final K key = e.getKey();
+                final V value = e.getValue();
+                if (value == null) {
+                    if (!(mo.get(key) == null && mo.containsKey(key))) {
+                        return (false);
+                    }
+                } else {
+                    if (!value.equals(mo.get(key))) {
+                        return (false);
                     }
                 }
-                return (true);
             }
+            return (true);
         }
     }
 
@@ -402,14 +394,13 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 h += e.hashCode();
             }
             return (h);
-        } else {
-            synchronized (map) {
-                int h = 0;
-                for (final Map.Entry<K, V> e : map.entrySet()) {
-                    h += e.hashCode();
-                }
-                return (h);
+        }
+        synchronized (map) {
+            int h = 0;
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                h += e.hashCode();
             }
+            return (h);
         }
     }
 
@@ -526,10 +517,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).remove(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).remove(o);
             }
         }
 
@@ -542,10 +532,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).removeAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).removeAll(o);
             }
         }
 
@@ -558,10 +547,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     map = temp;
                     return r;
                 }
-            } else {
-                synchronized (map) {
-                    return get(map).retainAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).retainAll(o);
             }
         }
 
@@ -569,10 +557,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public int size() {
             if (fast) {
                 return get(map).size();
-            } else {
-                synchronized (map) {
-                    return get(map).size();
-                }
+            }
+            synchronized (map) {
+                return get(map).size();
             }
         }
 
@@ -581,10 +568,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public boolean isEmpty() {
             if (fast) {
                 return get(map).isEmpty();
-            } else {
-                synchronized (map) {
-                    return get(map).isEmpty();
-                }
+            }
+            synchronized (map) {
+                return get(map).isEmpty();
             }
         }
 
@@ -592,10 +578,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public boolean contains(final Object o) {
             if (fast) {
                 return get(map).contains(o);
-            } else {
-                synchronized (map) {
-                    return get(map).contains(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).contains(o);
             }
         }
 
@@ -603,10 +588,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public boolean containsAll(final Collection<?> o) {
             if (fast) {
                 return get(map).containsAll(o);
-            } else {
-                synchronized (map) {
-                    return get(map).containsAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).containsAll(o);
             }
         }
 
@@ -614,10 +598,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public <T> T[] toArray(final T[] o) {
             if (fast) {
                 return get(map).toArray(o);
-            } else {
-                synchronized (map) {
-                    return get(map).toArray(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).toArray(o);
             }
         }
 
@@ -625,10 +608,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public Object[] toArray() {
             if (fast) {
                 return get(map).toArray();
-            } else {
-                synchronized (map) {
-                    return get(map).toArray();
-                }
+            }
+            synchronized (map) {
+                return get(map).toArray();
             }
         }
 
@@ -640,10 +622,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
             if (fast) {
                 return get(map).equals(o);
-            } else {
-                synchronized (map) {
-                    return get(map).equals(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).equals(o);
             }
         }
 
@@ -651,10 +632,9 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public int hashCode() {
             if (fast) {
                 return get(map).hashCode();
-            } else {
-                synchronized (map) {
-                    return get(map).hashCode();
-                }
+            }
+            synchronized (map) {
+                return get(map).hashCode();
             }
         }
 

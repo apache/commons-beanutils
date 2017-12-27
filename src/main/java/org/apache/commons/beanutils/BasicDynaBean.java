@@ -444,9 +444,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
                 ((dest == Long.TYPE) && (source == Long.class)) ||
                 ((dest == Short.TYPE) && (source == Short.class))) {
             return (true);
-        } else {
-            return (false);
         }
+        return (false);
 
     }
 

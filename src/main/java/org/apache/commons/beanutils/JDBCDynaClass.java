@@ -305,9 +305,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected String getColumnName(final String name) {
         if (columnNameXref != null && columnNameXref.containsKey(name)) {
             return columnNameXref.get(name);
-        } else {
-            return name;
         }
+        return name;
     }
 
 }

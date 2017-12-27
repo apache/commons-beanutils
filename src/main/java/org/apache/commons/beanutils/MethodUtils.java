@@ -1262,12 +1262,10 @@ public class MethodUtils {
             // the above method returns
             if (primitiveClazz != null) {
                 return primitiveClazz;
-            } else {
-                return clazz;
             }
-        } else {
             return clazz;
         }
+        return clazz;
     }
 
 

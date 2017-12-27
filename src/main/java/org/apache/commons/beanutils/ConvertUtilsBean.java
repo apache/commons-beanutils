@@ -452,10 +452,9 @@ public class ConvertUtilsBean {
             value = Array.get(value, 0);
             if (value == null) {
                 return null;
-            } else {
-                final Converter converter = lookup(String.class);
-                return (converter.convert(String.class, value));
             }
+            final Converter converter = lookup(String.class);
+            return (converter.convert(String.class, value));
         } else {
             final Converter converter = lookup(String.class);
             return (converter.convert(String.class, value));

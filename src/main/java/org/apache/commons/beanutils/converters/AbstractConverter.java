@@ -228,17 +228,15 @@ public abstract class AbstractConverter implements Converter {
         if (value.getClass().isArray()) {
             if (Array.getLength(value) > 0) {
                 return Array.get(value, 0);
-            } else {
-                return null;
             }
+            return null;
         }
         if (value instanceof Collection) {
             final Collection<?> collection = (Collection<?>)value;
             if (collection.size() > 0) {
                 return collection.iterator().next();
-            } else {
-                return null;
             }
+            return null;
         }
         return value;
     }
@@ -377,9 +375,8 @@ public abstract class AbstractConverter implements Converter {
     protected Object getDefault(final Class<?> type) {
         if (type.equals(String.class)) {
             return null;
-        } else  {
-            return defaultValue;
         }
+        return defaultValue;
     }
 
     /**

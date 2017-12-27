@@ -1078,9 +1078,8 @@ public class BeanUtilsBean {
         if (converter != null) {
             log.trace("        USING CONVERTER " + converter);
             return converter.convert(type, value);
-        } else {
-            return value;
         }
+        return value;
     }
 
     /**

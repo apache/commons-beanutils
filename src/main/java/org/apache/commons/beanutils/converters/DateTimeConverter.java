@@ -342,9 +342,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
             }
             if (Calendar.class.isAssignableFrom(targetType)) {
                 return targetType.cast(calendar);
-            } else {
-                return toDate(targetType, calendar.getTime().getTime());
             }
+            return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Default String conversion
@@ -538,9 +537,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
         if (patterns.length > 1) {
             throw new ConversionException("Error converting '" + toString(sourceType) + "' to '" + toString(targetType)
                     + "' using  patterns '" + displayPatterns + "'");
-        } else {
-            throw firstEx;
         }
+        throw firstEx;
     }
 
     /**

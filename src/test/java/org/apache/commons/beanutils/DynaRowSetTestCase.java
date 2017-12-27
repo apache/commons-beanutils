@@ -366,9 +366,8 @@ public class DynaRowSetTestCase extends TestCase {
         public Object getObject(final String columnName) throws SQLException {
             if ("timestampProperty".equals(columnName)) {
                 return new CustomTimestamp();
-            } else {
-                return super.getObject(columnName);
             }
+            return super.getObject(columnName);
         }
 
     }

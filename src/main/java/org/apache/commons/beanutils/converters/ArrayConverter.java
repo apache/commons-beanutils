@@ -389,9 +389,8 @@ public class ArrayConverter extends AbstractConverter {
 
         if (defaultValue.getClass().equals(type)) {
             return defaultValue;
-        } else {
-            return Array.newInstance(type.getComponentType(), defaultSize);
         }
+        return Array.newInstance(type.getComponentType(), defaultSize);
 
     }
 

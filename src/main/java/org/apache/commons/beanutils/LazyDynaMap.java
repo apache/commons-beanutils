@@ -233,9 +233,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
         if (value == null) {
             return new DynaProperty(name);
-        } else {
-            return new DynaProperty(name, value.getClass());
         }
+        return new DynaProperty(name, value.getClass());
 
     }
 

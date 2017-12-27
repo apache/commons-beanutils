@@ -117,13 +117,12 @@ public class BeanificationTestCase extends TestCase {
             if( reference.get() == null ) {
                 break;
 
-            } else {
-                // create garbage:
-                @SuppressWarnings("unused")
-                final
-                byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            @SuppressWarnings("unused")
+            final
+            byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 
@@ -169,13 +168,12 @@ public class BeanificationTestCase extends TestCase {
                 testReference.get() == null) {
                 break;
 
-            } else {
-                // create garbage:
-                @SuppressWarnings("unused")
-                final
-                byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            @SuppressWarnings("unused")
+            final
+            byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 
@@ -254,13 +252,12 @@ public class BeanificationTestCase extends TestCase {
                 convertUtilsReference.get() == null) {
                 break;
 
-            } else {
-                // create garbage:
-                @SuppressWarnings("unused")
-                final
-                byte[] b =  new byte[bytz];
-                bytz = bytz * 2;
             }
+            // create garbage:
+            @SuppressWarnings("unused")
+            final
+            byte[] b =  new byte[bytz];
+            bytz = bytz * 2;
         }
     }
 

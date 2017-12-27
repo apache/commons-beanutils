@@ -195,9 +195,8 @@ public class DynaProperty implements Serializable {
 
         if (type == null) {
             return (false);
-        } else {
-            return (Map.class.isAssignableFrom(type));
         }
+        return (Map.class.isAssignableFrom(type));
 
     }
 
@@ -370,9 +369,8 @@ public class DynaProperty implements Serializable {
 
             }
 
-        } else {
-            // it's another class
-            return ((Class<?>) in.readObject());
         }
+        // it's another class
+        return ((Class<?>) in.readObject());
     }
 }

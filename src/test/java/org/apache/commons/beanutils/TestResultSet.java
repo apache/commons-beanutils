@@ -145,9 +145,8 @@ public class TestResultSet implements InvocationHandler {
     private String columnName(final Object arg) throws SQLException {
         if (arg instanceof Integer) {
             return resultSetMetaData.getColumnName(((Integer)arg).intValue());
-        } else {
-            return (String)arg;
         }
+        return (String)arg;
     }
 
     // ---------------------------------------------------- Implemented Methods
@@ -172,9 +171,8 @@ public class TestResultSet implements InvocationHandler {
         } else if ("booleanProperty".equals(columnName)) {
             if ((row % 2) == 0) {
                 return (Boolean.TRUE);
-            } else {
-                return (Boolean.FALSE);
             }
+            return (Boolean.FALSE);
         } else if ("byteProperty".equals(columnName)) {
             return (new Byte((byte) row));
         } else if ("dateProperty".equals(columnName)) {
@@ -217,9 +215,8 @@ public class TestResultSet implements InvocationHandler {
     public boolean next() throws SQLException {
         if (row++ < 5) {
             return (true);
-        } else {
-            return (false);
         }
+        return (false);
     }
 
 

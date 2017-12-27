@@ -47,10 +47,9 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
         if (descriptor == null) {
             // no simple property exists so return the value from the map
             return bean.get(propertyName);
-        } else {
-            // a simple property exists so return its value instead.
-            return getSimpleProperty(bean, propertyName);
         }
+        // a simple property exists so return its value instead.
+        return getSimpleProperty(bean, propertyName);
     }
 
     /**

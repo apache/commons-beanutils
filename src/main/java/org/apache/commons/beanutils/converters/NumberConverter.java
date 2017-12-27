@@ -386,9 +386,8 @@ public abstract class NumberConverter extends AbstractConverter {
         if (targetType.equals(BigInteger.class)) {
             if (value instanceof BigDecimal) {
                 return targetType.cast(((BigDecimal)value).toBigInteger());
-            } else {
-                return targetType.cast(BigInteger.valueOf(value.longValue()));
             }
+            return targetType.cast(BigInteger.valueOf(value.longValue()));
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '"
