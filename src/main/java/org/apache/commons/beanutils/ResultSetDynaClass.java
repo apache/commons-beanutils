@@ -80,7 +80,7 @@ import java.util.Iterator;
  * @version $Id$
  */
 
-public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
+public class ResultSetDynaClass extends JDBCDynaClass {
 
 
     // ----------------------------------------------------------- Constructors
