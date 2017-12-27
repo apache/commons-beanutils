@@ -497,10 +497,10 @@ public class LocaleConvertUtilsBean {
                      );
 
         converter.setFast(true);
-        
+
         return converter;
     }
-    
+
     private static class DelegateFastHashMap implements Map {
 
         private final Map<Object, Object> map;
