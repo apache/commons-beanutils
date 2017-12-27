@@ -159,7 +159,7 @@ public class IndexedPropertyTestCase {
     @Test
     public void testArrayReadMethod() throws Exception {
         final PropertyDescriptor descriptor =
-             (PropertyDescriptor)propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
+             propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
         assertNotNull("No Array Read Method", descriptor.getReadMethod());
     }
 
@@ -169,7 +169,7 @@ public class IndexedPropertyTestCase {
     @Test
     public void testArrayWriteMethod() throws Exception {
         final PropertyDescriptor descriptor =
-             (PropertyDescriptor)propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
+             propertyUtilsBean.getPropertyDescriptor(bean, "stringArray");
         assertNotNull("No Array Write Method", descriptor.getWriteMethod());
     }
 
@@ -203,7 +203,7 @@ public class IndexedPropertyTestCase {
     @Test
     public void testListReadMethod() throws Exception {
         final PropertyDescriptor descriptor =
-             (PropertyDescriptor)propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
+             propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
         assertNotNull("No List Read Method", descriptor.getReadMethod());
     }
 
@@ -217,7 +217,7 @@ public class IndexedPropertyTestCase {
     @Test
     public void testListWriteMethod() throws Exception {
         final PropertyDescriptor descriptor =
-             (PropertyDescriptor)propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
+             propertyUtilsBean.getPropertyDescriptor(bean, "stringList");
         assertNotNull("No List Write Method", descriptor.getWriteMethod());
     }
 
@@ -251,7 +251,7 @@ public class IndexedPropertyTestCase {
     @Test
     public void testArrayListReadMethod() throws Exception {
         final PropertyDescriptor descriptor =
-             (PropertyDescriptor)propertyUtilsBean.getPropertyDescriptor(bean, "arrayList");
+             propertyUtilsBean.getPropertyDescriptor(bean, "arrayList");
         assertNotNull("No ArrayList Read Method", descriptor.getReadMethod());
     }
 
