@@ -82,9 +82,9 @@ import java.util.Iterator;
 
 public class ResultSetDynaClass extends JDBCDynaClass {
 
+    private static final long serialVersionUID = 1L;
 
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified

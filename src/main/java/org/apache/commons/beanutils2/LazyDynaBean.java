@@ -123,8 +123,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LazyDynaBean implements DynaBean, Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-   /**
+ /**
     * Commons Logging
     */
     private transient Log logger = LogFactory.getLog(LazyDynaBean.class);

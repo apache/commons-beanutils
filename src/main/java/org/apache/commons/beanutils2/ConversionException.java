@@ -29,9 +29,9 @@ package org.apache.commons.beanutils2;
 
 public class ConversionException extends RuntimeException {
 
+    private static final long serialVersionUID = 1L;
 
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * Construct a new exception with the specified message.

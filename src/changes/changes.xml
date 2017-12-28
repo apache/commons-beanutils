@@ -39,6 +39,9 @@
       <action issue="BEANUTILS-500" dev="dbrosius" type="update" due-to="Dave Brosius, Gary Gregory">
         Upgrade from Apache Commons Collections 3 to 4.
       </action>
+      <action issue="BEANUTILS-505" dev="ggregory" type="update" due-to="Gary Gregory">
+        Add missing serialVersionUID to Serializable classes.
+      </action>
     </release>
 
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">

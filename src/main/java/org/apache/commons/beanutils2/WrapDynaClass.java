@@ -194,6 +194,9 @@ public class WrapDynaClass implements DynaClass {
      */
     @Deprecated
     protected static HashMap<Object, Object> dynaClasses = new HashMap<Object, Object>() {
+
+        private static final long serialVersionUID = 1L;
+
         @Override
         public void clear() {
             getDynaClassesMap().clear();

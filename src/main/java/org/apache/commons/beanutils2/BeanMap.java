@@ -76,6 +76,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      */
     @Deprecated
     public static HashMap defaultTransformers = new HashMap() {
+
+        private static final long serialVersionUID = 1L;
+
         @Override
         public void clear() {
             throw new UnsupportedOperationException();

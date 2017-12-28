@@ -160,6 +160,8 @@ import java.util.Map;
  */
 public class LazyDynaList extends ArrayList<Object> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The DynaClass of the List's elements.
      */

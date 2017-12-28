@@ -27,6 +27,8 @@ package org.apache.commons.beanutils2;
 
 public class NestedNullException extends BeanAccessLanguageException {
 
+    private static final long serialVersionUID = 1L;
+
     // --------------------------------------------------------- Constuctors
 
     /**
