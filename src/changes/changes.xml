@@ -476,7 +476,7 @@
         LazyDynaBean: don't try and instantiate properties of type Object.class.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-133" due-to="Masoud Omidvar">
-        LazyDynabean JavaDoc corrections.
+        LazyDynabean Javadoc corrections.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-250">
         LazyDynaClass can create a DynaProperty with a "null" type.
