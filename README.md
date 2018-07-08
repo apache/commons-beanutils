@@ -43,7 +43,10 @@
 Apache Commons BeanUtils
 ===================
 
-[![Build Status](https://travis-ci.org/apache/commons-beanutils.svg?branch=trunk)](https://travis-ci.org/apache/commons-beanutils)
+[![Build Status](https://travis-ci.org/apache/commons-beanutils.svg)](https://travis-ci.org/apache/commons-beanutils)
+[![Coverage Status](https://coveralls.io/repos/apache/commons-beanutils/badge.svg)](https://coveralls.io/r/apache/commons-beanutils)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/)
+[![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0)
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
@@ -62,9 +65,9 @@ Alternatively you can pull it from the central Maven repositories:
 
 ```xml
 <dependency>
-  <groupId>commons-beanutils</groupId>
-  <artifactId>commons-beanutils</artifactId>
-  <version>1.9.3</version>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-beanutils2</artifactId>
+  <version>2.0.0</version>
 </dependency>
 ```
 
