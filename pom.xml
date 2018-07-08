@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>43</version>
+    <version>47</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>commons-beanutils2</artifactId>
@@ -35,7 +35,7 @@
       <maven.compiler.target>1.7</maven.compiler.target>
       <commons.componentid>beanutils</commons.componentid>
       <commons.module.name>org.apache.commons.beanutils2</commons.module.name>
-      <commons.release.version>1.9.3</commons.release.version>
+      <commons.release.version>2.0.0</commons.release.version>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
