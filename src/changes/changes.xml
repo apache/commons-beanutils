@@ -33,7 +33,7 @@
       <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 6 to 7.
       </action>
-      <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
+      <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
       <action issue="BEANUTILS-500" dev="dbrosius" type="update" due-to="Dave Brosius, Gary Gregory">
