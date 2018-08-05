@@ -239,6 +239,7 @@
             <attribute name="Implementation-Vendor-Id" value="org.apache"/>
             <attribute name="X-Compile-Source-JDK" value="${compile.source}"/>
             <attribute name="X-Compile-Target-JDK" value="${compile.target}"/>
+            <attribute name="Automatic-Module-Name" value="org.apache.commons.beanutils2"/>
         </manifest>
         <fileset dir="${build.home}/classes">
             <include name="**/*.class"/>
