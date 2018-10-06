@@ -40,7 +40,7 @@ import org.junit.Test;
  * The bug causes an infinite loop in WeakHashMap.get which was not accessed in a thread safe manner. This originates
  * with WrapDynaClass.createDynaClass().
  */
-@Ignore("https://issues.apache.org/jira/browse/BEANUTILS-509; always fails with a JUnit test timeout; with or without the change applied to WrapDynaClass.")
+@Ignore("https://issues.apache.org/jira/browse/BEANUTILS-509.")
 public class Jira509TestCase {
 
     protected int random(final int max) {
@@ -56,6 +56,7 @@ public class Jira509TestCase {
         final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class,
                 Collection.class, Set.class, ArrayList.class, List.class, HashSet.class);
 
+        // All daemon threads.
         final ExecutorService executor = Executors.newFixedThreadPool(100, new ThreadFactory() {
 
             @Override
@@ -66,22 +67,25 @@ public class Jira509TestCase {
             }
         });
 
-        for (int i = 1; i < 100_000_000; i++) {
-            executor.submit(new Runnable() {
-                Class<?> c = classList.get(random(classList.size()));
+        try {
+            // Loop _may_ hang without fix.
+            for (int i = 1; i < 10_000_000; i++) {
+                executor.submit(new Runnable() {
+                    Class<?> clazz = classList.get(random(classList.size()));
 
-                @Override
-                public void run() {
-                    final WrapDynaClass w = WrapDynaClass.createDynaClass(c);
-                    assert w != null;
-                }
+                    @Override
+                    public void run() {
+                        final WrapDynaClass w = WrapDynaClass.createDynaClass(clazz);
+                        assert w != null;
+                    }
 
-            });
+                });
+            }
+        } finally {
+            executor.shutdown();
+            executor.awaitTermination(3500, TimeUnit.MILLISECONDS);
+
         }
-
-        executor.shutdown();
-        executor.awaitTermination(3500, TimeUnit.MILLISECONDS);
-
     }
 
 }
