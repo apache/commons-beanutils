@@ -129,9 +129,9 @@ public class WrapDynaClass implements DynaClass {
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
-            protected Map<CacheKey, WrapDynaClass> initialValue() {
-                return new WeakHashMap<>();
-        }
+                protected Map<CacheKey, WrapDynaClass> initialValue() {
+                    return new WeakHashMap<>();
+                }
     };
 
     /**
@@ -141,8 +141,7 @@ public class WrapDynaClass implements DynaClass {
     @SuppressWarnings("unchecked")
     private static Map<Object, Object> getDynaClassesMap() {
         @SuppressWarnings("rawtypes")
-        final
-        Map cache = CLASSLOADER_CACHE.get();
+        final Map cache = CLASSLOADER_CACHE.get();
         return cache;
     }
 
@@ -310,7 +309,7 @@ public class WrapDynaClass implements DynaClass {
             throw new IllegalArgumentException
                     ("No property name specified");
         }
-        return (propertiesMap.get(name));
+        return propertiesMap.get(name);
 
     }
 
@@ -329,7 +328,7 @@ public class WrapDynaClass implements DynaClass {
     @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 
@@ -380,7 +379,7 @@ public class WrapDynaClass implements DynaClass {
      */
     public PropertyDescriptor getPropertyDescriptor(final String name) {
 
-        return (descriptorsMap.get(name));
+        return descriptorsMap.get(name);
 
     }
 
@@ -426,14 +425,14 @@ public class WrapDynaClass implements DynaClass {
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {
 
-        final PropertyUtilsBean propUtils = (pu != null) ? pu : PropertyUtilsBean.getInstance();
+        final PropertyUtilsBean propUtils = pu != null ? pu : PropertyUtilsBean.getInstance();
         final CacheKey key = new CacheKey(beanClass, propUtils);
         WrapDynaClass dynaClass = getClassesCache().get(key);
         if (dynaClass == null) {
             dynaClass = new WrapDynaClass(beanClass, propUtils);
             getClassesCache().put(key, dynaClass);
         }
-        return (dynaClass);
+        return dynaClass;
 
     }
 
