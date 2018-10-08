@@ -35,7 +35,7 @@ import java.util.Set;
  * <p>This rather technical base class implements the methods of the
  *    {@code Map} interface on top of a {@code DynaBean}. It was introduced
  *    to handle generic parameters in a meaningful way without breaking
- *    backwards compatibility of the {@link DynaBeanMapDecorator} class: A
+ *    backwards compatibility of the 1.x {@code DynaBeanMapDecorator} class: A
  *    map wrapping a {@code DynaBean} should be of type {@code Map<String, Object>}.
  *    However, when using these generic parameters in {@code DynaBeanMapDecorator}
  *    this would be an incompatible change (as method signatures would have to

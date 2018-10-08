@@ -21,12 +21,10 @@ package org.apache.commons.beanutils2.locale;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

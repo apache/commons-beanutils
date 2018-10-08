@@ -23,19 +23,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.BasicDynaClass;
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.DynaClass;
-import org.apache.commons.beanutils2.DynaProperty;
-
-import junit.framework.TestCase;
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 

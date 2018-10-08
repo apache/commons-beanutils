@@ -40,44 +40,7 @@ public class BeanUtils {
     // ------------------------------------------------------ Private Variables
 
 
-    /**
-     * The debugging detail level for this component.
-     *
-     * Note that this static variable will have unexpected side-effects if
-     * this class is deployed in a shared classloader within a container.
-     * However as it is actually completely ignored by this class due to its
-     * deprecated status, it doesn't do any actual harm.
-     *
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    private static int debug = 0;
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @return debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static int getDebug() {
-        return debug;
-    }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @param newDebug debug property
-     * @deprecated BeanUtils now uses commons-logging for all log messages.
-     *             Use your favorite logging tool to configure logging for
-     *             this class.
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug) {
-        debug = newDebug;
-    }
+    
 
     // --------------------------------------------------------- Class Methods
 

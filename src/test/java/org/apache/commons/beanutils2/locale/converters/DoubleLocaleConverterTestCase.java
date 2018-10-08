@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-import org.apache.commons.beanutils2.locale.converters.DoubleLocaleConverter;
-
 /**
  * Test Case for the DoubleLocaleConverter class.
  *

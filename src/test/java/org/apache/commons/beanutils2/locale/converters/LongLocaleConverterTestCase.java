@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
-
 /**
  * Test Case for the LongLocaleConverter class.
  *

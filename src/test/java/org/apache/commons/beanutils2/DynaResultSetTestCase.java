@@ -22,10 +22,6 @@ package org.apache.commons.beanutils2;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.DynaProperty;
-import org.apache.commons.beanutils2.ResultSetDynaClass;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

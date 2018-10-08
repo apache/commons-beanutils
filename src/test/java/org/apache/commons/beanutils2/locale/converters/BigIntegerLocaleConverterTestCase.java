@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2.locale.converters;
 import java.math.BigInteger;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter;
 
 /**
  * Test Case for the BigIntegerLocaleConverter class.

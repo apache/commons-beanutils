@@ -21,7 +21,6 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.beanutils2.priv.PrivateBeanFactory;
 import org.apache.commons.beanutils2.priv.PublicSubBean;
 

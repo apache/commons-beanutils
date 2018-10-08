@@ -16,11 +16,11 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.beanutils2.AlphaBean;
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
+
+import junit.framework.TestCase;
 
 /**
  * Class loader vulnerability in DefaultResolver

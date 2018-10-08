@@ -45,6 +45,9 @@
       <action issue="BEANUTILS-512" dev="ggregory" type="update" due-to="Gary Gregory">
         Add Automatic-Module-Name entry to MANIFEST.MF.
       </action>
+      <action issue="BEANUTILS-514" dev="ggregory" type="update" due-to="Gary Gregory">
+        Remove deprecated code for 2.0.0.
+      </action>
     </release>
 
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">

@@ -17,12 +17,15 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.ref.WeakReference;
-import static org.junit.Assert.*;
 
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.FloatConverter;
 import org.junit.Test;
 
 /**

@@ -18,8 +18,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.DoubleConverter;
-import org.apache.commons.beanutils2.converters.NumberConverter;
 
 import junit.framework.TestSuite;
 

@@ -24,11 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.LazyDynaBean;
-import org.apache.commons.beanutils2.LazyDynaMap;
-import org.apache.commons.beanutils2.PropertyUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

@@ -17,14 +17,14 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+
+import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 /**

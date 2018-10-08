@@ -17,11 +17,10 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
+import java.text.ParseException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
-
-import java.text.ParseException;
 
 
 /**

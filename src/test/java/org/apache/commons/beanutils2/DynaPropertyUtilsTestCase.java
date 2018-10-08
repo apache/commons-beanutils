@@ -25,12 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.BasicDynaClass;
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.DynaClass;
-import org.apache.commons.beanutils2.DynaProperty;
-import org.apache.commons.beanutils2.PropertyUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

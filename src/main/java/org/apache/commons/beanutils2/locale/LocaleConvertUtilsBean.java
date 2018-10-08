@@ -431,9 +431,7 @@ public class LocaleConvertUtilsBean {
      * @param locale The Locale
      * @return The map instance contains the all {@link LocaleConverter} types for
      *  the specified locale.
-     * @deprecated This method will be modified to return a Map in the next release.
      */
-    @Deprecated
     protected Map<Class<?>, LocaleConverter> lookup(final Locale locale) {
         Map<Class<?>, LocaleConverter> localeConverters;
 

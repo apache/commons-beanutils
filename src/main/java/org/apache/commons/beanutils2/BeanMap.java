@@ -67,68 +67,6 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     private static final Map<Class<? extends Object>, Transformer> typeTransformers =
             Collections.unmodifiableMap(createTypeTransformers());
 
-    /**
-     * This HashMap has been made unmodifiable to prevent issues when
-     * loaded in a shared ClassLoader environment.
-     *
-     * @see "http://issues.apache.org/jira/browse/BEANUTILS-112"
-     * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
-     */
-    @Deprecated
-    public static HashMap defaultTransformers = new HashMap() {
-
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void clear() {
-            throw new UnsupportedOperationException();
-        }
-        @Override
-        public boolean containsKey(final Object key) {
-            return typeTransformers.containsKey(key);
-        }
-        @Override
-        public boolean containsValue(final Object value) {
-            return typeTransformers.containsValue(value);
-        }
-        @Override
-        public Set entrySet() {
-            return typeTransformers.entrySet();
-        }
-        @Override
-        public Object get(final Object key) {
-            return typeTransformers.get(key);
-        }
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-        @Override
-        public Set keySet() {
-            return typeTransformers.keySet();
-        }
-        @Override
-        public Object put(final Object key, final Object value) {
-            throw new UnsupportedOperationException();
-        }
-        @Override
-        public void putAll(final Map m) {
-            throw new UnsupportedOperationException();
-        }
-        @Override
-        public Object remove(final Object key) {
-            throw new UnsupportedOperationException();
-        }
-        @Override
-        public int size() {
-            return typeTransformers.size();
-        }
-        @Override
-        public Collection values() {
-            return typeTransformers.values();
-        }
-    };
-
     private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
         final Map<Class<? extends Object>, Transformer> defTransformers =
                 new HashMap<>();

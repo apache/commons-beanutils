@@ -17,8 +17,8 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-import java.util.Locale;
 import java.text.ParseException;
+import java.util.Locale;
 
 
 /**

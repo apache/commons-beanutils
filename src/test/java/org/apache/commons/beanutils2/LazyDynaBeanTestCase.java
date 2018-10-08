@@ -22,13 +22,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.DynaBean;
-import org.apache.commons.beanutils2.LazyDynaBean;
-import org.apache.commons.beanutils2.LazyDynaClass;
-import org.apache.commons.beanutils2.LazyDynaMap;
-import org.apache.commons.beanutils2.PropertyUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

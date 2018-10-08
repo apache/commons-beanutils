@@ -22,9 +22,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-
 import junit.framework.TestCase;
 
 /**

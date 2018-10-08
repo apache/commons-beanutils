@@ -16,12 +16,12 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import org.apache.commons.beanutils2.PropertyUtils;
+import org.apache.commons.beanutils2.TestBean;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils2.PropertyUtils;
-import org.apache.commons.beanutils2.TestBean;
 
 /**
  * @version $Id$

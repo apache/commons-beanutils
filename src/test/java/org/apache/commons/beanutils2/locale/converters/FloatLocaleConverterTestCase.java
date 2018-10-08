@@ -22,7 +22,6 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
-import org.apache.commons.beanutils2.locale.converters.FloatLocaleConverter;
 
 /**
  * Test Case for the FloatLocaleConverter class.

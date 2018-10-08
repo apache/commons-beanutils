@@ -17,13 +17,12 @@
 
 package org.apache.commons.beanutils2;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.beanutils2.BeanPredicate;
 import org.apache.commons.collections4.functors.EqualPredicate;
 import org.apache.commons.collections4.functors.InstanceofPredicate;
 import org.apache.commons.collections4.functors.NotPredicate;
 import org.apache.commons.collections4.functors.NullPredicate;
+
+import junit.framework.TestCase;
 
 /**
  * @version $Id$

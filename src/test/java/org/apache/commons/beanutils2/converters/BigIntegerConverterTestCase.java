@@ -20,8 +20,6 @@ package org.apache.commons.beanutils2.converters;
 import java.math.BigInteger;
 
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.BigIntegerConverter;
-import org.apache.commons.beanutils2.converters.NumberConverter;
 
 import junit.framework.TestSuite;
 

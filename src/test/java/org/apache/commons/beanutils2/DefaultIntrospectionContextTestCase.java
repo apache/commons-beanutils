@@ -21,8 +21,6 @@ import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.beanutils2.DefaultIntrospectionContext;
-
 import junit.framework.TestCase;
 
 /**

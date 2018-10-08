@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.DynaBean;
-
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.

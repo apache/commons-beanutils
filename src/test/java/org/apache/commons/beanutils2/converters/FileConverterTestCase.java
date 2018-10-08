@@ -21,7 +21,6 @@ import java.io.File;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.FileConverter;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

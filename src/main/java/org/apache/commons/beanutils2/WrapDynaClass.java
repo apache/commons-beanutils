@@ -21,11 +21,8 @@ package org.apache.commons.beanutils2;
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.WeakHashMap;
 
 
@@ -84,16 +81,6 @@ public class WrapDynaClass implements DynaClass {
 
     /** Stores the associated {@code PropertyUtilsBean} instance. */
     private final PropertyUtilsBean propertyUtilsBean;
-
-    /**
-     * The JavaBean <code>Class</code> which is represented by this
-     * <code>WrapDynaClass</code>.
-     *
-     * @deprecated No longer initialized, use getBeanClass() method instead
-     */
-    @Deprecated
-    protected Class<?> beanClass = null;
-
 
     /**
      * The set of PropertyDescriptors for this bean class.
@@ -155,113 +142,7 @@ public class WrapDynaClass implements DynaClass {
         return CLASSLOADER_CACHE.get();
     }
 
-    /**
-     * The set of <code>WrapDynaClass</code> instances that have ever been
-     * created, keyed by the underlying bean Class. The keys to this map
-     * are Class objects, and the values are corresponding WrapDynaClass
-     * objects.
-     * <p>
-     * This static variable is safe even when this code is deployed via a
-     * shared classloader because it is keyed via a Class object. The same
-     * class loaded via two different classloaders will result in different
-     * entries in this map.
-     * <p>
-     * Note, however, that this HashMap can result in a memory leak. When
-     * this class is in a shared classloader it will retain references to
-     * classes loaded via a webapp classloader even after the webapp has been
-     * undeployed. That will prevent the entire classloader and all the classes
-     * it refers to and all their static members from being freed.
-     *
-     ************* !!!!!!!!!!!! PLEASE NOTE !!!!!!!!!!!! *************
-     *
-     * THE FOLLOWING IS A NASTY HACK TO SO THAT BEANUTILS REMAINS BINARY
-     *              COMPATIBLE WITH PREVIOUS RELEASES.
-     *
-     * There are two issues here:
-     *
-     * 1) Memory Issues: The static HashMap caused memory problems (See BEANUTILS-59)
-     *    to resolve this it has been moved into a ContextClassLoaderLocal instance
-     *    (named CLASSLOADER_CACHE above) which holds one copy per
-     *    ClassLoader in a WeakHashMap.
-     *
-     * 2) Binary Compatibility: As the "dynaClasses" static HashMap is "protected"
-     *    removing it breaks BeanUtils binary compatibility with previous versions.
-     *    To resolve this all the methods have been overriden to delegate to the
-     *    Map for the ClassLoader in the ContextClassLoaderLocal.
-     *
-     * @deprecated The dynaClasses Map will be removed in a subsequent release
-     */
-    @Deprecated
-    protected static HashMap<Object, Object> dynaClasses = new HashMap<Object, Object>() {
-
-        private static final long serialVersionUID = 1L;
-
-        @Override
-        public void clear() {
-            getDynaClassesMap().clear();
-        }
-        @Override
-        public boolean containsKey(final Object key) {
-            return getDynaClassesMap().containsKey(key);
-        }
-        @Override
-        public boolean containsValue(final Object value) {
-            return getDynaClassesMap().containsValue(value);
-        }
-        @Override
-        public Set<Map.Entry<Object, Object>> entrySet() {
-            return getDynaClassesMap().entrySet();
-        }
-        @Override
-        public boolean equals(final Object o) {
-            return getDynaClassesMap().equals(o);
-        }
-        @Override
-        public Object get(final Object key) {
-            return getDynaClassesMap().get(key);
-        }
-        @Override
-        public int hashCode() {
-            return getDynaClassesMap().hashCode();
-        }
-        @Override
-        public boolean isEmpty() {
-            return getDynaClassesMap().isEmpty();
-        }
-        @Override
-        public Set<Object> keySet() {
-            // extract the classes from the key to stay backwards compatible
-            final Set<Object> result = new HashSet<>();
-            for (final CacheKey k : getClassesCache().keySet()) {
-                result.add(k.beanClass);
-            }
-            return result;
-        }
-        @Override
-        public Object put(final Object key, final Object value) {
-            return getClassesCache().put(
-                    new CacheKey((Class<?>) key, PropertyUtilsBean.getInstance()),
-                    (WrapDynaClass) value);
-        }
-        @Override
-        public void putAll(final Map<? extends Object, ? extends Object> m) {
-            for (final Map.Entry<? extends Object, ? extends Object> e : m.entrySet()) {
-                put(e.getKey(), e.getValue());
-            }
-        }
-        @Override
-        public Object remove(final Object key) {
-            return getDynaClassesMap().remove(key);
-        }
-        @Override
-        public int size() {
-            return getDynaClassesMap().size();
-        }
-        @Override
-        public Collection<Object> values() {
-            return getDynaClassesMap().values();
-        }
-    };
+    
 
 
     // ------------------------------------------------------ DynaClass Methods

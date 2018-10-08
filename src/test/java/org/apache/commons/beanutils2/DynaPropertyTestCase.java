@@ -16,13 +16,11 @@
  */
 package org.apache.commons.beanutils2;
 
+import java.util.Collection;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import java.util.Collection;
-
-import org.apache.commons.beanutils2.DynaProperty;
 
 /**
  * Test case for {@link DynaProperty}.

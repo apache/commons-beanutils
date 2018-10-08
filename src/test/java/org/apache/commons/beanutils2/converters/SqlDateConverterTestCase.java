@@ -20,9 +20,6 @@ package org.apache.commons.beanutils2.converters;
 import java.sql.Date;
 import java.util.Calendar;
 
-import org.apache.commons.beanutils2.converters.DateTimeConverter;
-import org.apache.commons.beanutils2.converters.SqlDateConverter;
-
 import junit.framework.TestSuite;
 
 /**

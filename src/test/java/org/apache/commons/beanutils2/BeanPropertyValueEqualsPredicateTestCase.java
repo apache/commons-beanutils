@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-import org.apache.commons.beanutils2.BeanPropertyValueEqualsPredicate;
-
 import junit.framework.TestCase;
 
 

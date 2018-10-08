@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
-
 /**
  * Test Case for the ByteLocaleConverter class.
  *

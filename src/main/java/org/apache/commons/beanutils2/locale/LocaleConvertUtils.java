@@ -18,9 +18,6 @@
 package org.apache.commons.beanutils2.locale;
 
 import java.util.Locale;
-import java.util.Map;
-
-import org.apache.commons.beanutils2.locale.LocaleConverter;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -314,38 +311,5 @@ public class LocaleConvertUtils {
     public static LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
 
         return LocaleConvertUtilsBean.getInstance().lookup(clazz, locale);
-    }
-
-    /**
-     * <p>Look up and return any registered map instance for the specified locale.</p>
-     *
-     * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
-     *
-     * @param locale The Locale
-     * @return The map instance contains the all {@link LocaleConverter} types for
-     *  the specified locale.
-     * @see LocaleConvertUtilsBean#lookup(Locale)
-     * @deprecated This method will be modified to return a Map in the next release.
-     */
-    @Deprecated
-    protected static Map<Class<?>, LocaleConverter> lookup(final Locale locale) {
-        return LocaleConvertUtilsBean.getInstance().lookup(locale);
-    }
-
-    /**
-     * <p>Create all {@link LocaleConverter} types for specified locale.</p>
-     *
-     * <p>For more details see <code>LocaleConvertUtilsBean</code></p>
-     *
-     * @param locale The Locale
-     * @return The map instance contains the all {@link LocaleConverter} types
-     *  for the specified locale.
-     * @see LocaleConvertUtilsBean#create(Locale)
-     * @deprecated This method will be modified to return a Map in the next release.
-     */
-    @Deprecated
-    protected static Map<Class<?>, LocaleConverter> create(final Locale locale) {
-
-        return LocaleConvertUtilsBean.getInstance().create(locale);
     }
 }

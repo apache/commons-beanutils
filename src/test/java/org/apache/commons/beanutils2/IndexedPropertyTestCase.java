@@ -26,8 +26,6 @@ import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils2.BeanUtilsBean;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
 import org.apache.commons.beanutils2.bugs.other.Jira492IndexedListsSupport;
 import org.junit.After;
 import org.junit.Before;

@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.CharacterConverter;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

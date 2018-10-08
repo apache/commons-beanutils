@@ -20,11 +20,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.converters.ArrayConverter;
-import org.apache.commons.beanutils2.converters.DateConverter;
-import org.apache.commons.beanutils2.converters.IntegerConverter;
-import org.apache.commons.beanutils2.converters.StringConverter;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 

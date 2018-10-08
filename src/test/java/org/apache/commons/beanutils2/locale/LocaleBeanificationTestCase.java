@@ -23,23 +23,18 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.BeanUtilsBean;
 import org.apache.commons.beanutils2.BeanUtilsTestCase;
 import org.apache.commons.beanutils2.ContextClassLoaderLocal;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.PrimitiveBean;
-import org.apache.commons.beanutils2.locale.LocaleBeanUtils;
-import org.apache.commons.beanutils2.locale.LocaleBeanUtilsBean;
-import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
-import org.apache.commons.beanutils2.locale.LocaleConvertUtilsBean;
-import org.apache.commons.beanutils2.locale.LocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
 import org.apache.commons.logging.LogFactory;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * <p>

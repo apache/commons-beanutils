@@ -18,8 +18,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.NumberConverter;
-import org.apache.commons.beanutils2.converters.ShortConverter;
 
 import junit.framework.TestSuite;
 

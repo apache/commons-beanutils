@@ -17,12 +17,11 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}

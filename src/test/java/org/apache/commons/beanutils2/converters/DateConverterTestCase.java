@@ -19,9 +19,6 @@ package org.apache.commons.beanutils2.converters;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.beanutils2.converters.DateConverter;
-import org.apache.commons.beanutils2.converters.DateTimeConverter;
-
 import junit.framework.TestSuite;
 
 /**

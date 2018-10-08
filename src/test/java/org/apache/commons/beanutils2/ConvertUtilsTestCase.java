@@ -25,10 +25,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.ConvertUtils;
-import org.apache.commons.beanutils2.ConvertUtilsBean;
-import org.apache.commons.beanutils2.Converter;
 import org.apache.commons.beanutils2.converters.DateConverter;
 
 import junit.framework.Test;

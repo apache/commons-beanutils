@@ -22,8 +22,6 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 
-import org.apache.commons.beanutils2.ConstructorUtils;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

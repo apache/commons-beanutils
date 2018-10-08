@@ -42,98 +42,13 @@ public class PropertyUtils {
     // ----------------------------------------------------- Manifest Constants
 
 
-    /**
-     * The delimiter that preceeds the zero-relative subscript for an
-     * indexed reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link org.apache.commons.beanutils2.expression.Resolver}
-     * implementation being used.
-     */
-    @Deprecated
-    public static final char INDEXED_DELIM = '[';
-
-
-    /**
-     * The delimiter that follows the zero-relative subscript for an
-     * indexed reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link org.apache.commons.beanutils2.expression.Resolver}
-     * implementation being used.
-     */
-    @Deprecated
-    public static final char INDEXED_DELIM2 = ']';
-
-
-    /**
-     * The delimiter that preceeds the key of a mapped property.
-     *
-     * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link org.apache.commons.beanutils2.expression.Resolver}
-     * implementation being used.
-     */
-    @Deprecated
-    public static final char MAPPED_DELIM = '(';
-
-
-    /**
-     * The delimiter that follows the key of a mapped property.
-     *
-     * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link org.apache.commons.beanutils2.expression.Resolver}
-     * implementation being used.
-     */
-    @Deprecated
-    public static final char MAPPED_DELIM2 = ')';
-
-
-    /**
-     * The delimiter that separates the components of a nested reference.
-     *
-     * @deprecated The notation used for property name expressions is now
-     * dependant on the {@link org.apache.commons.beanutils2.expression.Resolver}
-     * implementation being used.
-     */
-    @Deprecated
-    public static final char NESTED_DELIM = '.';
+    
 
 
     // ------------------------------------------------------- Static Variables
 
 
-    /**
-     * The debugging detail level for this component.
-     *
-     * Note that this static variable will have unexpected side-effects if
-     * this class is deployed in a shared classloader within a container.
-     * However as it is actually completely ignored by this class due to its
-     * deprecated status, it doesn't do any actual harm.
-     *
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    private static int debug = 0;
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @return debug property
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    public static int getDebug() {
-        return debug;
-    }
-
-    /**
-     * The <code>debug</code> static property is no longer used
-     * @param newDebug debug property
-     * @deprecated The <code>debug</code> static property is no longer used
-     */
-    @Deprecated
-    public static void setDebug(final int newDebug) {
-        debug = newDebug;
-    }
+    
 
     // --------------------------------------------------------- Public Methods
 
@@ -378,24 +293,6 @@ public class PropertyUtils {
     static Map<Class<?>, Map> getMappedPropertyDescriptors(final Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
-
-    }
-
-
-    /**
-     * <p>Return the mapped property descriptors for this bean.</p>
-     *
-     * <p>For more details see <code>PropertyUtilsBean</code>.</p>
-     *
-     * @param bean Bean to be introspected
-     * @return the mapped property descriptors
-     * @see PropertyUtilsBean#getMappedPropertyDescriptors(Object)
-     * @deprecated This method should not be exposed
-     */
-    @Deprecated
-    public static Map<Class<?>, Map> getMappedPropertyDescriptors(final Object bean) {
-
-        return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
 
     }
 

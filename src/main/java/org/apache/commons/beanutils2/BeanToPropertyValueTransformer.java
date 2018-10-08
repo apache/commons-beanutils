@@ -17,11 +17,11 @@
 
 package org.apache.commons.beanutils2;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.lang.reflect.InvocationTargetException;
 
 
 /**

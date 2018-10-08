@@ -26,8 +26,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.apache.commons.beanutils2.ResultSetDynaClass;
-
 
 /**
  * <p>Mock object that implements enough of

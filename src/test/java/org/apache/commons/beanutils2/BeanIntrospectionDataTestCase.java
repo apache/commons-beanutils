@@ -21,10 +21,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.BeanIntrospectionData;
-import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-
 import junit.framework.TestCase;
 
 /**

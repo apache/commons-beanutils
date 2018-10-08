@@ -18,8 +18,6 @@
 
 package org.apache.commons.beanutils2;
 
-import org.apache.commons.beanutils2.Converter;
-
 /**
  * Converter implementation that throws a <code>PassTestException</code>
  * when convert is called.

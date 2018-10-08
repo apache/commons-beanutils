@@ -23,11 +23,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-import org.apache.commons.beanutils2.WrapDynaBean;
-import org.apache.commons.beanutils2.WrapDynaClass;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

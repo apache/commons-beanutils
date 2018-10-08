@@ -20,8 +20,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-
 /**
  * A PropertyUtilsBean which customises the behaviour of the
  * setNestedProperty and getNestedProperty methods to look for

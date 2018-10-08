@@ -16,12 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.beanutils2.DynaProperty;
-import org.apache.commons.beanutils2.LazyDynaClass;
-
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**

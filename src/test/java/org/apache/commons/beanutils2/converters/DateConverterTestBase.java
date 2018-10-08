@@ -26,7 +26,6 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.DateTimeConverter;
 
 import junit.framework.TestCase;
 

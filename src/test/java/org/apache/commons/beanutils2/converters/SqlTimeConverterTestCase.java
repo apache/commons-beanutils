@@ -21,9 +21,6 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Locale;
 
-import org.apache.commons.beanutils2.converters.DateTimeConverter;
-import org.apache.commons.beanutils2.converters.SqlTimeConverter;
-
 import junit.framework.TestSuite;
 
 /**

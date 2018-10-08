@@ -25,12 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.beanutils2.BasicDynaBean;
-import org.apache.commons.beanutils2.BasicDynaClass;
-import org.apache.commons.beanutils2.DynaBeanMapDecorator;
-import org.apache.commons.beanutils2.DynaClass;
-import org.apache.commons.beanutils2.DynaProperty;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -60,9 +54,9 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private final Object[] values = new Object[] {stringVal, null, intVal, dateVal, mapVal};
 
     private BasicDynaBean dynaBean;
-    private Map<Object, Object> decoratedMap;
-    private Map<Object, Object> modifiableMap;
-    private static final Map<Object, Object> emptyMap = new DynaBeanMapDecorator(new BasicDynaBean(new BasicDynaClass()));
+    private Map<String, Object> decoratedMap;
+    private Map<String, Object> modifiableMap;
+    private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
     // ---------------------------------------------------------- Constructors
 
@@ -108,8 +102,8 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         }
 
         // Create decorated Maps
-        decoratedMap  = new DynaBeanMapDecorator(dynaBean);
-        modifiableMap = new DynaBeanMapDecorator(dynaBean, false);
+        decoratedMap  = new DynaBeanPropertyMapDecorator(dynaBean);
+        modifiableMap = new DynaBeanPropertyMapDecorator(dynaBean, false);
 
     }
 
@@ -129,8 +123,8 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test isReadOnly() method
      */
     public void testIsReadOnly() {
-        assertTrue("decoratedMap true",   ((DynaBeanMapDecorator)decoratedMap).isReadOnly());
-        assertFalse("modifiableMap false", ((DynaBeanMapDecorator)modifiableMap).isReadOnly());
+        assertTrue("decoratedMap true",   ((DynaBeanPropertyMapDecorator)decoratedMap).isReadOnly());
+        assertFalse("modifiableMap false", ((DynaBeanPropertyMapDecorator)modifiableMap).isReadOnly());
     }
 
     /**
@@ -171,21 +165,21 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test entrySet() method
      */
     public void testEntrySet() {
-        final Set<Map.Entry<Object, Object>> set = modifiableMap.entrySet();
+        final Set<Map.Entry<String, Object>> set = modifiableMap.entrySet();
 
         // Check the Set can't be modified
-        final Map<Object, Object> m = new HashMap<>();
+        final Map<String, Object> m = new HashMap<>();
         m.put("key", "value");
         checkUnmodifiable("entrySet()", set, m.entrySet().iterator().next());
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        final Iterator<Map.Entry<Object, Object>> iterator = set.iterator();
+        final Iterator<Map.Entry<String, Object>> iterator = set.iterator();
         final List<String> namesList = new ArrayList<>();
         int i = 0;
         while (iterator.hasNext()) {
-            final Map.Entry<Object, Object> entry = iterator.next();
-            final String name  = (String)entry.getKey();
+            final Map.Entry<String, Object> entry = iterator.next();
+            final String name  = entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);
             assertEquals("entrySet("+i+") val", expectValue, entry.getValue());
@@ -226,7 +220,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test keySet() method
      */
     public void testKeySet() {
-        final Set<Object> set = modifiableMap.keySet();
+        final Set<String> set = modifiableMap.keySet();
 
         // Check the Set can't be modified
         checkUnmodifiable("keySet()", set, "xyz");
@@ -266,7 +260,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public void testPutAll() {
 
         final String newValue = "ABC";
-        final Map<Object, Object> newMap = new HashMap<>();
+        final Map<String, Object> newMap = new HashMap<>();
         newMap.put(stringProp.getName(), newValue);
 
         // Test read only

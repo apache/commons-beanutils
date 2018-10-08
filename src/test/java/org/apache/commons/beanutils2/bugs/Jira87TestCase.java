@@ -20,6 +20,7 @@ import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

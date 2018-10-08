@@ -19,8 +19,6 @@ package org.apache.commons.beanutils2.locale.converters;
 
 import java.math.BigDecimal;
 
-import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter;
-
 /**
  * Test Case for the BigDecimalLocaleConverter class.
  *

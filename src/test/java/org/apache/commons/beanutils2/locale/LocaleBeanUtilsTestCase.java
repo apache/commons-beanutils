@@ -16,14 +16,13 @@
  */
 package org.apache.commons.beanutils2.locale;
 
-import junit.framework.TestCase;
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.apache.commons.beanutils2.TestBean;
-import org.apache.commons.beanutils2.locale.LocaleBeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * Test Case for {@link LocaleBeanUtils}.

@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

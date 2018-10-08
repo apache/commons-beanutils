@@ -16,8 +16,6 @@
  */
 package org.apache.commons.beanutils2.expression;
 
-import org.apache.commons.beanutils2.expression.DefaultResolver;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 

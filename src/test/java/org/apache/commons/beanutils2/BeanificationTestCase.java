@@ -22,18 +22,11 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import org.apache.commons.logging.LogFactory;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.apache.commons.beanutils2.BeanUtils;
-import org.apache.commons.beanutils2.BeanUtilsBean;
-import org.apache.commons.beanutils2.ContextClassLoaderLocal;
-import org.apache.commons.beanutils2.ConvertUtils;
-import org.apache.commons.beanutils2.ConvertUtilsBean;
-import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>

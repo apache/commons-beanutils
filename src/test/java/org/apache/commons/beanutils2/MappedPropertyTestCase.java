@@ -16,9 +16,6 @@
  */
 package org.apache.commons.beanutils2;
 
-import org.apache.commons.beanutils2.BeanUtils;
-import org.apache.commons.beanutils2.MappedPropertyDescriptor;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

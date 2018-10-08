@@ -21,7 +21,6 @@ import java.net.URL;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.beanutils2.converters.URLConverter;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
