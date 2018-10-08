@@ -167,7 +167,7 @@ public class BeanUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(BeanUtilsTestCase.class));
+        return new TestSuite(BeanUtilsTestCase.class);
     }
 
     /**
@@ -447,13 +447,13 @@ public class BeanUtilsTestCase extends TestCase {
             final String comp[] = bean.getStringArray();
 
             assertTrue("String array length = " + comp.length,
-                    (comp.length == arr.length));
+                    comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
             final int iarr[] = bean.getIntArray();
 
             assertTrue("String array length = " + iarr.length,
-                    (iarr.length == arr.length));
+                    iarr.length == arr.length);
 
 
             // Test property which isn't array or collection

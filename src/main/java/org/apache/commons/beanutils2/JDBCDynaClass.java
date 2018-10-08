@@ -83,7 +83,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     @Override
     public String getName() {
 
-        return (this.getClass().getName());
+        return this.getClass().getName();
 
     }
 
@@ -102,7 +102,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
-        return (propertiesMap.get(name));
+        return propertiesMap.get(name);
 
     }
 
@@ -114,7 +114,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 

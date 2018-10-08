@@ -180,7 +180,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public boolean getDefaultBoolean() {
-        return (defaultBoolean.booleanValue());
+        return defaultBoolean.booleanValue();
     }
 
     /**
@@ -191,7 +191,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultBoolean(final boolean newDefaultBoolean) {
-        defaultBoolean = (newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE);
+        defaultBoolean = newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE;
         register(new BooleanConverter(defaultBoolean), Boolean.TYPE);
         register(new BooleanConverter(defaultBoolean), Boolean.class);
     }
@@ -213,7 +213,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public byte getDefaultByte() {
-        return (defaultByte.byteValue());
+        return defaultByte.byteValue();
     }
 
     /**
@@ -246,7 +246,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public char getDefaultCharacter() {
-        return (defaultCharacter.charValue());
+        return defaultCharacter.charValue();
     }
 
     /**
@@ -281,7 +281,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public double getDefaultDouble() {
-        return (defaultDouble.doubleValue());
+        return defaultDouble.doubleValue();
     }
 
     /**
@@ -314,7 +314,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public float getDefaultFloat() {
-        return (defaultFloat.floatValue());
+        return defaultFloat.floatValue();
     }
 
     /**
@@ -347,7 +347,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public int getDefaultInteger() {
-        return (defaultInteger.intValue());
+        return defaultInteger.intValue();
     }
 
     /**
@@ -380,7 +380,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public long getDefaultLong() {
-        return (defaultLong.longValue());
+        return defaultLong.longValue();
     }
 
     /**
@@ -413,7 +413,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public short getDefaultShort() {
-        return (defaultShort.shortValue());
+        return defaultShort.shortValue();
     }
 
     /**
@@ -448,17 +448,17 @@ public class ConvertUtilsBean {
             return null;
         } else if (value.getClass().isArray()) {
             if (Array.getLength(value) < 1) {
-                return (null);
+                return null;
             }
             value = Array.get(value, 0);
             if (value == null) {
                 return null;
             }
             final Converter converter = lookup(String.class);
-            return (converter.convert(String.class, value));
+            return converter.convert(String.class, value);
         } else {
             final Converter converter = lookup(String.class);
-            return (converter.convert(String.class, value));
+            return converter.convert(String.class, value);
         }
 
     }
@@ -487,7 +487,7 @@ public class ConvertUtilsBean {
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
-        return (converter.convert(clazz, value));
+        return converter.convert(clazz, value);
 
     }
 
@@ -526,7 +526,7 @@ public class ConvertUtilsBean {
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, converter.convert(type, values[i]));
         }
-        return (array);
+        return array;
 
     }
 
@@ -830,7 +830,7 @@ public class ConvertUtilsBean {
      */
     public Converter lookup(final Class<?> clazz) {
 
-        return (converters.get(clazz));
+        return converters.get(clazz);
 
     }
 

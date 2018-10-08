@@ -122,7 +122,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public boolean containsKey(final Object key) {
         final DynaClass dynaClass = getDynaBean().getDynaClass();
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(toString(key));
-        return (dynaProperty == null ? false : true);
+        return dynaProperty == null ? false : true;
     }
 
     /**
@@ -196,7 +196,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      */
     @Override
     public boolean isEmpty() {
-        return (getDynaProperties().length == 0);
+        return getDynaProperties().length == 0;
     }
 
     /**
@@ -352,7 +352,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * @return String representation of the object
      */
     private String toString(final Object obj) {
-        return (obj == null ? null : obj.toString());
+        return obj == null ? null : obj.toString();
     }
 
     /**
@@ -371,9 +371,9 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
                 return false;
             }
             final Map.Entry<?, ?> e = (Map.Entry<?, ?>)o;
-            return ((key.equals(e.getKey())) &&
+            return key.equals(e.getKey()) &&
                     (value == null ? e.getValue() == null
-                                   : value.equals(e.getValue())));
+                                   : value.equals(e.getValue()));
         }
         @Override
         public int hashCode() {

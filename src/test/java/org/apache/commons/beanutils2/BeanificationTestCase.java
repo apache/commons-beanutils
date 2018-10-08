@@ -84,7 +84,7 @@ public class BeanificationTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(BeanificationTestCase.class));
+        return new TestSuite(BeanificationTestCase.class);
     }
 
 

@@ -240,7 +240,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(PropertyUtilsTestCase.class));
+        return new TestSuite(PropertyUtilsTestCase.class);
 
     }
 
@@ -1451,7 +1451,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() ==
                     bean.getNested().getBooleanProperty());
@@ -1478,7 +1478,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
                     bean.getNested().getDoubleProperty(),
@@ -1506,7 +1506,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     bean.getNested().getFloatProperty(),
@@ -1534,7 +1534,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     bean.getNested().getIntProperty());
@@ -1561,7 +1561,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     bean.getNested().getLongProperty());
@@ -1588,7 +1588,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.readOnlyProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     bean.getReadOnlyProperty());
@@ -1615,7 +1615,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     bean.getNested().getShortProperty());
@@ -1642,9 +1642,9 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
-                    ((String) value),
+                    (String) value,
                     bean.getNested().getStringProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1984,7 +1984,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() ==
                     bean.getBooleanProperty());
@@ -2011,7 +2011,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
                     bean.getDoubleProperty(), 0.005);
@@ -2038,7 +2038,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     bean.getFloatProperty(),
@@ -2088,7 +2088,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     bean.getIntProperty());
@@ -2115,7 +2115,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     bean.getLongProperty());
@@ -2164,7 +2164,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "readOnlyProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     bean.getReadOnlyProperty());
@@ -2191,7 +2191,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     bean.getShortProperty());
@@ -2218,7 +2218,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     bean.getStringProperty());
@@ -3959,7 +3959,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             final PropertyDescriptor pd =
                     PropertyUtils.getPropertyDescriptor(bean, name);
-            if ((read != null) || (write != null)) {
+            if (read != null || write != null) {
                 assertNotNull("Got descriptor", pd);
             } else {
                 assertNull("Got descriptor", pd);

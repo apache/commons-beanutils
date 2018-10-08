@@ -37,7 +37,7 @@ public class BenchBean {
     private boolean booleanProperty = true;
 
     public boolean getBooleanProperty() {
-        return (booleanProperty);
+        return booleanProperty;
     }
 
     public void setBooleanProperty(final boolean booleanProperty) {
@@ -51,7 +51,7 @@ public class BenchBean {
     private byte byteProperty = (byte) 121;
 
     public byte getByteProperty() {
-        return (this.byteProperty);
+        return this.byteProperty;
     }
 
     public void setByteProperty(final byte byteProperty) {
@@ -65,7 +65,7 @@ public class BenchBean {
     private double doubleProperty = 321.0;
 
     public double getDoubleProperty() {
-        return (this.doubleProperty);
+        return this.doubleProperty;
     }
 
     public void setDoubleProperty(final double doubleProperty) {
@@ -79,7 +79,7 @@ public class BenchBean {
     private float floatProperty = (float) 123.0;
 
     public float getFloatProperty() {
-        return (this.floatProperty);
+        return this.floatProperty;
     }
 
     public void setFloatProperty(final float floatProperty) {
@@ -93,7 +93,7 @@ public class BenchBean {
     private int intProperty = 123;
 
     public int getIntProperty() {
-        return (this.intProperty);
+        return this.intProperty;
     }
 
     public void setIntProperty(final int intProperty) {
@@ -107,7 +107,7 @@ public class BenchBean {
     private long longProperty = 321;
 
     public long getLongProperty() {
-        return (this.longProperty);
+        return this.longProperty;
     }
 
     public void setLongProperty(final long longProperty) {
@@ -121,7 +121,7 @@ public class BenchBean {
     private short shortProperty = (short) 987;
 
     public short getShortProperty() {
-        return (this.shortProperty);
+        return this.shortProperty;
     }
 
     public void setShortProperty(final short shortProperty) {
@@ -135,7 +135,7 @@ public class BenchBean {
     private String stringProperty = "This is a string";
 
     public String getStringProperty() {
-        return (this.stringProperty);
+        return this.stringProperty;
     }
 
     public void setStringProperty(final String stringProperty) {

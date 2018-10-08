@@ -180,7 +180,7 @@ public class BeanUtilsBean {
             newBean = bean.getClass().newInstance();
         }
         getPropertyUtils().copyProperties(newBean, bean);
-        return (newBean);
+        return newBean;
 
     }
 
@@ -488,7 +488,7 @@ public class BeanUtilsBean {
 
         if (bean == null) {
         //            return (Collections.EMPTY_MAP);
-            return (new java.util.HashMap<>());
+            return new java.util.HashMap<>();
         }
 
         if (log.isDebugEnabled()) {
@@ -514,7 +514,7 @@ public class BeanUtilsBean {
                 }
             }
         }
-        return (description);
+        return description;
 
     }
 
@@ -540,7 +540,7 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
-            return (null);
+            return null;
         } else if (value instanceof Collection) {
             final ArrayList<String> values = new ArrayList<>();
             for (final Object item : (Collection<?>) value) {
@@ -551,7 +551,7 @@ public class BeanUtilsBean {
                     values.add(getConvertUtils().convert(item));
                 }
             }
-            return (values.toArray(new String[values.size()]));
+            return values.toArray(new String[values.size()]);
         } else if (value.getClass().isArray()) {
             final int n = Array.getLength(value);
             final String[] results = new String[n];
@@ -564,11 +564,11 @@ public class BeanUtilsBean {
                     results[i] = getConvertUtils().convert(item);
                 }
             }
-            return (results);
+            return results;
         } else {
             final String[] results = new String[1];
             results[0] = getConvertUtils().convert(value);
-            return (results);
+            return results;
         }
 
     }
@@ -598,7 +598,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -626,7 +626,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -655,7 +655,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -683,7 +683,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -710,7 +710,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getNestedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -735,7 +735,7 @@ public class BeanUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (getNestedProperty(bean, name));
+        return getNestedProperty(bean, name);
 
     }
 
@@ -760,7 +760,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -804,7 +804,7 @@ public class BeanUtilsBean {
         throws IllegalAccessException, InvocationTargetException {
 
         // Do nothing unless both arguments have been specified
-        if ((bean == null) || (properties == null)) {
+        if (bean == null || properties == null) {
             return;
         }
         if (log.isDebugEnabled()) {
@@ -967,7 +967,7 @@ public class BeanUtilsBean {
                     }
                     return; // Read-only, skip this property setter
                 }
-                type = (value == null) ? Object.class : value.getClass();
+                type = value == null ? Object.class : value.getClass();
             } else {
                 if (descriptor.getWriteMethod() == null) {
                     if (log.isDebugEnabled()) {
@@ -981,7 +981,7 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type
         Object newValue = null;
-        if (type.isArray() && (index < 0)) { // Scalar value into array
+        if (type.isArray() && index < 0) { // Scalar value into array
             if (value == null) {
                 final String[] values = new String[1];
                 values[0] = null;
@@ -1092,7 +1092,7 @@ public class BeanUtilsBean {
      * @return the converted value
      */
     private Object convertForCopy(final Object value, final Class<?> type) {
-        return (value != null) ? convert(value, type) : value;
+        return value != null ? convert(value, type) : value;
     }
 
     /**
@@ -1136,6 +1136,6 @@ public class BeanUtilsBean {
         if (!dynaProperty.isMapped()) {
             return dynaProperty.getType();
         }
-        return (value == null) ? String.class : value.getClass();
+        return value == null ? String.class : value.getClass();
     }
 }

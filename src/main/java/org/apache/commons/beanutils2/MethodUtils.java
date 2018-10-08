@@ -737,7 +737,7 @@ public class MethodUtils {
             cacheMethod(md, method);
             return method;
         } catch (final NoSuchMethodException e) {
-            return (null);
+            return null;
         }
     }
 
@@ -753,7 +753,7 @@ public class MethodUtils {
 
         // Make sure we have a method to check
         if (method == null) {
-            return (null);
+            return null;
         }
 
         return getAccessibleMethod(method.getDeclaringClass(), method);
@@ -775,12 +775,12 @@ public class MethodUtils {
 
         // Make sure we have a method to check
         if (method == null) {
-            return (null);
+            return null;
         }
 
         // If the requested method is not public we cannot call it
         if (!Modifier.isPublic(method.getModifiers())) {
-            return (null);
+            return null;
         }
 
         boolean sameClass = true;
@@ -799,7 +799,7 @@ public class MethodUtils {
             if (!sameClass && !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
                 setMethodAccessible(method); // Default access superclass workaround
             }
-            return (method);
+            return method;
         }
 
         final String methodName      = method.getName();
@@ -818,7 +818,7 @@ public class MethodUtils {
                         parameterTypes);
         }
 
-        return (method);
+        return method;
     }
 
 
@@ -908,7 +908,7 @@ public class MethodUtils {
         }
 
         // We did not find anything
-        return (null);
+        return null;
     }
 
     /**
@@ -1347,12 +1347,10 @@ public class MethodUtils {
             }
             final MethodDescriptor md = (MethodDescriptor)obj;
 
-            return (
-                exact == md.exact &&
-                methodName.equals(md.methodName) &&
-                cls.equals(md.cls) &&
-                java.util.Arrays.equals(paramTypes, md.paramTypes)
-            );
+            return exact == md.exact &&
+            methodName.equals(md.methodName) &&
+            cls.equals(md.cls) &&
+            java.util.Arrays.equals(paramTypes, md.paramTypes);
         }
         /**
          * Returns the string length of method name. I.e. if the

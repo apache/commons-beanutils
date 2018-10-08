@@ -112,16 +112,16 @@ public class TestResultSetMetaData implements InvocationHandler {
 
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
-        return (metadata[columnIndex - 1][1]);
+        return metadata[columnIndex - 1][1];
     }
 
 
     public int getColumnCount() throws SQLException {
-        return (metadata.length);
+        return metadata.length;
     }
 
     public String getColumnName(final int columnIndex) throws SQLException {
-        return (metadata[columnIndex - 1][0]);
+        return metadata[columnIndex - 1][0];
     }
 
 

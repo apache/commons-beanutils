@@ -88,7 +88,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(DynaBeanMapDecoratorTestCase.class));
+        return new TestSuite(DynaBeanMapDecoratorTestCase.class);
     }
 
     /**

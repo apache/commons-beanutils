@@ -72,7 +72,7 @@ public final class ClassConverter extends AbstractConverter {
      */
     @Override
     protected String convertToString(final Object value) {
-        return (value instanceof Class) ? ((Class<?>)value).getName() : value.toString();
+        return value instanceof Class ? ((Class<?>)value).getName() : value.toString();
     }
 
     /**

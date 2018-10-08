@@ -96,14 +96,14 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
         // Deal with a null value
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
+                return defaultValue;
             }
             throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
         if (MODEL.getClass() == value.getClass()) {
-            return (value);
+            return value;
         }
 
         // Deal with input value as a String array
@@ -114,10 +114,10 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Byte.parseByte(values[i]);
                 }
-                return (results);
+                return results;
             } catch (final Exception e) {
                 if (useDefault) {
-                    return (defaultValue);
+                    return defaultValue;
                 }
                 throw new ConversionException(value.toString(), e);
             }
@@ -131,10 +131,10 @@ public final class ByteArrayConverter extends AbstractArrayConverter {
             for (int i = 0; i < results.length; i++) {
                 results[i] = Byte.parseByte(list.get(i));
             }
-            return (results);
+            return results;
         } catch (final Exception e) {
             if (useDefault) {
-                return (defaultValue);
+                return defaultValue;
             }
             throw new ConversionException(value.toString(), e);
         }

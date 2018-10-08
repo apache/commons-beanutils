@@ -83,7 +83,7 @@ public class LazyDynaListTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LazyDynaListTestCase.class));
+        return new TestSuite(LazyDynaListTestCase.class);
     }
 
     /**

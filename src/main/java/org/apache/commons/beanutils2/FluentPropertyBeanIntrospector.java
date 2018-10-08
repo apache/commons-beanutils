@@ -162,7 +162,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(
                 getWriteMethodPrefix().length());
-        return (methodName.length() > 1) ? Introspector.decapitalize(methodName) : methodName
+        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName
                 .toLowerCase(Locale.ENGLISH);
     }
 

@@ -56,7 +56,7 @@ class PackageBean {
 
     public String getBar() {
 
-        return (this.bar);
+        return this.bar;
 
     }
 

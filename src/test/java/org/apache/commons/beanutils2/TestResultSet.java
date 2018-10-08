@@ -135,7 +135,7 @@ public class TestResultSet implements InvocationHandler {
         } if ("getTimestamp".equals(methodName)) {
             return getTimestamp(columnName(args[0]));
         } if ("next".equals(methodName)) {
-            return (next() ? Boolean.TRUE : Boolean.FALSE);
+            return next() ? Boolean.TRUE : Boolean.FALSE;
         } if ("updateObject".equals(methodName)) {
             updateObject((String)args[0], args[1]);
             return null;
@@ -169,56 +169,56 @@ public class TestResultSet implements InvocationHandler {
             throw new SQLException("No current row");
         }
         if ("bigDecimalProperty".equals(columnName)) {
-            return (new BigDecimal(123.45));
+            return new BigDecimal(123.45);
         } else if ("booleanProperty".equals(columnName)) {
-            if ((row % 2) == 0) {
-                return (Boolean.TRUE);
+            if (row % 2 == 0) {
+                return Boolean.TRUE;
             }
-            return (Boolean.FALSE);
+            return Boolean.FALSE;
         } else if ("byteProperty".equals(columnName)) {
-            return (new Byte((byte) row));
+            return new Byte((byte) row);
         } else if ("dateProperty".equals(columnName)) {
-            return (new Date(timestamp));
+            return new Date(timestamp);
         } else if ("doubleProperty".equals(columnName)) {
-            return (new Double(321.0));
+            return new Double(321.0);
         } else if ("floatProperty".equals(columnName)) {
-            return (new Float((float) 123.0));
+            return new Float((float) 123.0);
         } else if ("intProperty".equals(columnName)) {
-            return (new Integer(100 + row));
+            return new Integer(100 + row);
         } else if ("longProperty".equals(columnName)) {
-            return (new Long(200 + row));
+            return new Long(200 + row);
         } else if ("nullProperty".equals(columnName)) {
-            return (null);
+            return null;
         } else if ("shortProperty".equals(columnName)) {
-            return (new Short((short) (300 + row)));
+            return new Short((short) (300 + row));
         } else if ("stringProperty".equals(columnName)) {
-            return ("This is a string");
+            return "This is a string";
         } else if ("timeProperty".equals(columnName)) {
-            return (new Time(timestamp));
+            return new Time(timestamp);
         } else if ("timestampProperty".equals(columnName)) {
-            return (new Timestamp(timestamp));
+            return new Timestamp(timestamp);
         } else {
             throw new SQLException("Unknown column name " + columnName);
         }
     }
 
     public Date getDate(final String columnName) throws SQLException {
-        return (new Date(timestamp));
+        return new Date(timestamp);
     }
 
     public Time getTime(final String columnName) throws SQLException {
-        return (new Time(timestamp));
+        return new Time(timestamp);
     }
 
     public Timestamp getTimestamp(final String columnName) throws SQLException {
-        return (new Timestamp(timestamp));
+        return new Timestamp(timestamp);
     }
 
     public boolean next() throws SQLException {
         if (row++ < 5) {
-            return (true);
+            return true;
         }
-        return (false);
+        return false;
     }
 
 

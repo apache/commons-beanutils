@@ -73,7 +73,7 @@ public class Jira61TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira61TestCase.class));
+        return new TestSuite(Jira61TestCase.class);
     }
 
     /**

@@ -76,7 +76,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     public WrapDynaBean(final Object instance, final WrapDynaClass cls) {
 
         this.instance = instance;
-        this.dynaClass = (cls != null) ? cls : (WrapDynaClass) getDynaClass();
+        this.dynaClass = cls != null ? cls : (WrapDynaClass) getDynaClass();
 
     }
 
@@ -145,7 +145,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error reading property '" + name +
                               "', exception - " + t);
         }
-        return (value);
+        return value;
 
     }
 
@@ -184,7 +184,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error reading indexed property '" + name +
                               "', exception - " + t);
         }
-        return (value);
+        return value;
 
     }
 
@@ -218,7 +218,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error reading mapped property '" + name +
                               "', exception - " + t);
         }
-        return (value);
+        return value;
 
     }
 
@@ -235,7 +235,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
             dynaClass = WrapDynaClass.createDynaClass(instance.getClass());
         }
 
-        return (this.dynaClass);
+        return this.dynaClass;
 
     }
 
@@ -396,7 +396,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "'");
         }
-        return (descriptor);
+        return descriptor;
 
     }
 
@@ -412,7 +412,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
         if (dynaClass != null) {
             propUtils = dynaClass.getPropertyUtilsBean();
         }
-        return (propUtils != null) ? propUtils : PropertyUtilsBean.getInstance();
+        return propUtils != null ? propUtils : PropertyUtilsBean.getInstance();
 
     }
 }

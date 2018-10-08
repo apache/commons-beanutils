@@ -58,7 +58,7 @@ class PrivateBean implements PrivateDirect {
 
     public String getFoo() {
 
-        return (this.foo);
+        return this.foo;
 
     }
 
@@ -71,7 +71,7 @@ class PrivateBean implements PrivateDirect {
     @Override
     public String getBar() {
 
-        return (this.bar);
+        return this.bar;
 
     }
 
@@ -82,7 +82,7 @@ class PrivateBean implements PrivateDirect {
     @Override
     public String methodBar(final String in) {
 
-        return (in);
+        return in;
 
     }
 
@@ -95,7 +95,7 @@ class PrivateBean implements PrivateDirect {
     @Override
     public String getBaz() {
 
-        return (this.baz);
+        return this.baz;
 
     }
 
@@ -106,7 +106,7 @@ class PrivateBean implements PrivateDirect {
     @Override
     public String methodBaz(final String in) {
 
-        return (in);
+        return in;
 
     }
 

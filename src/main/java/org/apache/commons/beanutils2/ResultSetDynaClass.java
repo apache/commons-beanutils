@@ -192,7 +192,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      */
     public Iterator<DynaBean> iterator() {
 
-        return (new ResultSetIterator(this));
+        return new ResultSetIterator(this);
 
     }
 
@@ -218,7 +218,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      */
     ResultSet getResultSet() {
 
-        return (this.resultSet);
+        return this.resultSet;
 
     }
 

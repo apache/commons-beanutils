@@ -80,7 +80,7 @@ public class ConvertUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(ConvertUtilsTestCase.class));
+        return new TestSuite(ConvertUtilsTestCase.class);
     }
 
 

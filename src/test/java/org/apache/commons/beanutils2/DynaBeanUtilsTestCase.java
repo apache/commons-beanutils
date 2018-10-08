@@ -173,7 +173,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaBeanUtilsTestCase.class));
+        return new TestSuite(DynaBeanUtilsTestCase.class);
 
     }
 
@@ -575,13 +575,13 @@ public class DynaBeanUtilsTestCase extends TestCase {
             final String comp[] = (String[]) bean.get("stringArray");
 
             assertTrue("String array length = " + comp.length,
-                    (comp.length == arr.length));
+                    comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
             final int iarr[] = (int[]) bean.get("intArray");
 
             assertTrue("String array length = " + iarr.length,
-                    (iarr.length == arr.length));
+                    iarr.length == arr.length);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -1267,7 +1267,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return (dynaClass);
+        return dynaClass;
 
     }
 

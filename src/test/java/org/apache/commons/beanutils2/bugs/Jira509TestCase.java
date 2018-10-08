@@ -44,7 +44,7 @@ import org.junit.Test;
 public class Jira509TestCase {
 
     protected int random(final int max) {
-        return ((int) (Math.random() * 100_000)) % max;
+        return (int) (Math.random() * 100_000) % max;
     }
 
     /**

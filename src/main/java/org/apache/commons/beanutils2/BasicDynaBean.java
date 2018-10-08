@@ -122,7 +122,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
-            return (((Map<?, ?>) value).containsKey(key));
+            return ((Map<?, ?>) value).containsKey(key);
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -146,34 +146,34 @@ public class BasicDynaBean implements DynaBean, Serializable {
         // Return any non-null value for the specified property
         final Object value = values.get(name);
         if (value != null) {
-            return (value);
+            return value;
         }
 
         // Return a null value for a non-primitive property
         final Class<?> type = getDynaProperty(name).getType();
         if (!type.isPrimitive()) {
-            return (value);
+            return value;
         }
 
         // Manufacture default values for primitive properties
         if (type == Boolean.TYPE) {
-            return (Boolean.FALSE);
+            return Boolean.FALSE;
         } else if (type == Byte.TYPE) {
-            return (Byte.valueOf((byte) 0));
+            return Byte.valueOf((byte) 0);
         } else if (type == Character.TYPE) {
-            return (Character.valueOf((char) 0));
+            return Character.valueOf((char) 0);
         } else if (type == Double.TYPE) {
-            return (Double.valueOf(0.0));
+            return Double.valueOf(0.0);
         } else if (type == Float.TYPE) {
-            return (Float.valueOf((float) 0.0));
+            return Float.valueOf((float) 0.0);
         } else if (type == Integer.TYPE) {
-            return (Integer.valueOf(0));
+            return Integer.valueOf(0);
         } else if (type == Long.TYPE) {
-            return (Long.valueOf(0));
+            return Long.valueOf(0);
         } else if (type == Short.TYPE) {
-            return (Short.valueOf((short) 0));
+            return Short.valueOf((short) 0);
         } else {
-            return (null);
+            return null;
         }
 
     }
@@ -203,7 +203,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No indexed value for '" + name + "[" + index + "]'");
         } else if (value.getClass().isArray()) {
-            return (Array.get(value, index));
+            return Array.get(value, index);
         } else if (value instanceof List) {
             return ((List<?>) value).get(index);
         } else {
@@ -235,7 +235,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new NullPointerException
                     ("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
-            return (((Map<?, ?>) value).get(key));
+            return ((Map<?, ?>) value).get(key);
         } else {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
@@ -253,7 +253,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     @Override
     public DynaClass getDynaClass() {
 
-        return (this.dynaClass);
+        return this.dynaClass;
 
     }
 
@@ -419,7 +419,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "'");
         }
-        return (descriptor);
+        return descriptor;
 
     }
 
@@ -435,17 +435,17 @@ public class BasicDynaBean implements DynaBean, Serializable {
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
-                ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
-                ((dest == Byte.TYPE) && (source == Byte.class)) ||
-                ((dest == Character.TYPE) && (source == Character.class)) ||
-                ((dest == Double.TYPE) && (source == Double.class)) ||
-                ((dest == Float.TYPE) && (source == Float.class)) ||
-                ((dest == Integer.TYPE) && (source == Integer.class)) ||
-                ((dest == Long.TYPE) && (source == Long.class)) ||
-                ((dest == Short.TYPE) && (source == Short.class))) {
-            return (true);
+                dest == Boolean.TYPE && source == Boolean.class ||
+                dest == Byte.TYPE && source == Byte.class ||
+                dest == Character.TYPE && source == Character.class ||
+                dest == Double.TYPE && source == Double.class ||
+                dest == Float.TYPE && source == Float.class ||
+                dest == Integer.TYPE && source == Integer.class ||
+                dest == Long.TYPE && source == Long.class ||
+                dest == Short.TYPE && source == Short.class) {
+            return true;
         }
-        return (false);
+        return false;
 
     }
 

@@ -249,7 +249,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return ((List<?>)value).size();
         }
 
-        if ((value.getClass().isArray())) {
+        if (value.getClass().isArray()) {
             return Array.getLength(value);
         }
 
@@ -283,7 +283,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            return (((Map<?, ?>) value).containsKey(key));
+            return ((Map<?, ?>) value).containsKey(key);
         }
 
         return false;
@@ -411,7 +411,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Get the value from the Map
         if (mappedProperty instanceof Map) {
-            return (((Map<?, ?>) mappedProperty).get(key));
+            return ((Map<?, ?>) mappedProperty).get(key);
         }
         throw new IllegalArgumentException
           ("Non-mapped property for '" + name + "(" + key + ")'"
@@ -641,12 +641,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Grow an Array to the appropriate size
-        if ((indexedProperty.getClass().isArray())) {
+        if (indexedProperty.getClass().isArray()) {
 
             final int length = Array.getLength(indexedProperty);
             if (index >= length) {
                 final Class<?> componentType = indexedProperty.getClass().getComponentType();
-                final Object newArray = Array.newInstance(componentType, (index + 1));
+                final Object newArray = Array.newInstance(componentType, index + 1);
                 System.arraycopy(indexedProperty, 0, newArray, 0, length);
                 indexedProperty = newArray;
                 set(name, indexedProperty);
@@ -928,17 +928,17 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
-                ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
-                ((dest == Byte.TYPE) && (source == Byte.class)) ||
-                ((dest == Character.TYPE) && (source == Character.class)) ||
-                ((dest == Double.TYPE) && (source == Double.class)) ||
-                ((dest == Float.TYPE) && (source == Float.class)) ||
-                ((dest == Integer.TYPE) && (source == Integer.class)) ||
-                ((dest == Long.TYPE) && (source == Long.class)) ||
-                ((dest == Short.TYPE) && (source == Short.class))) {
-            return (true);
+                dest == Boolean.TYPE && source == Boolean.class ||
+                dest == Byte.TYPE && source == Byte.class ||
+                dest == Character.TYPE && source == Character.class ||
+                dest == Double.TYPE && source == Double.class ||
+                dest == Float.TYPE && source == Float.class ||
+                dest == Integer.TYPE && source == Integer.class ||
+                dest == Long.TYPE && source == Long.class ||
+                dest == Short.TYPE && source == Short.class) {
+            return true;
         }
-        return (false);
+        return false;
 
     }
 

@@ -80,7 +80,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(WrapDynaBeanTestCase.class));
+        return new TestSuite(WrapDynaBeanTestCase.class);
 
     }
 

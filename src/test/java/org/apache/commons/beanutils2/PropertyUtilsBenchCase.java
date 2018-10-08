@@ -143,7 +143,7 @@ public class PropertyUtilsBenchCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(PropertyUtilsBenchCase.class));
+        return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
 

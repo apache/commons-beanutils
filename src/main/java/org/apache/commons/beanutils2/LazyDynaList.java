@@ -444,12 +444,12 @@ public class LazyDynaList extends ArrayList<Object> {
     public <T> T[] toArray(final T[] model) {
 
         final Class<?> arrayType = model.getClass().getComponentType();
-        if ((DynaBean.class.isAssignableFrom(arrayType))
-                || (size() == 0 && elementType == null)) {
+        if (DynaBean.class.isAssignableFrom(arrayType)
+                || size() == 0 && elementType == null) {
             return super.toArray(model);
         }
 
-        if ((arrayType.isAssignableFrom(elementType))) {
+        if (arrayType.isAssignableFrom(elementType)) {
             T[] array;
             if (model.length >= size()) {
                 array = model;
@@ -516,7 +516,7 @@ public class LazyDynaList extends ArrayList<Object> {
             throw new IllegalArgumentException("Element Type is missing");
         }
 
-        final boolean changeType = (this.elementType != null && !this.elementType.equals(elementType));
+        final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
         if (changeType && size() > 0) {
             throw new IllegalStateException("Element Type cannot be reset");
         }
@@ -715,6 +715,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * Return the DynaClass.
      */
     private DynaClass getDynaClass() {
-        return (elementDynaClass == null ? wrapDynaClass : elementDynaClass);
+        return elementDynaClass == null ? wrapDynaClass : elementDynaClass;
     }
 }

@@ -120,7 +120,7 @@ public class BeanToPropertyValueTransformer implements Transformer {
     public BeanToPropertyValueTransformer(final String propertyName, final boolean ignoreNull) {
         super();
 
-        if ((propertyName != null) && (propertyName.length() > 0)) {
+        if (propertyName != null && propertyName.length() > 0) {
             this.propertyName = propertyName;
             this.ignoreNull = ignoreNull;
         } else {

@@ -64,7 +64,7 @@ public class BeanUtils {
      */
     @Deprecated
     public static int getDebug() {
-        return (debug);
+        return debug;
     }
 
     /**

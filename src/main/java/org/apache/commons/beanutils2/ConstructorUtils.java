@@ -306,7 +306,7 @@ public class ConstructorUtils {
             return getAccessibleConstructor(
                 klass.getConstructor(parameterTypes));
         } catch (final NoSuchMethodException e) {
-            return (null);
+            return null;
         }
     }
 
@@ -321,18 +321,18 @@ public class ConstructorUtils {
 
         // Make sure we have a method to check
         if (ctor == null) {
-            return (null);
+            return null;
         }
 
         // If the requested method is not public we cannot call it
         if (!Modifier.isPublic(ctor.getModifiers())) {
-            return (null);
+            return null;
         }
 
         // If the declaring class is public, we are done
         final Class<T> clazz = ctor.getDeclaringClass();
         if (Modifier.isPublic(clazz.getModifiers())) {
-            return (ctor);
+            return ctor;
         }
 
         // what else can we do?

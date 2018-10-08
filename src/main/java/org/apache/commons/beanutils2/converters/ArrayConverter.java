@@ -461,7 +461,7 @@ public class ArrayConverter extends AbstractConverter {
             List<String> list = null;
             while (true) {
                 final int ttype = st.nextToken();
-                if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)) {
+                if (ttype == StreamTokenizer.TT_WORD || ttype > 0) {
                     if (st.sval != null) {
                         if (list == null) {
                             list = new ArrayList<>();
@@ -484,7 +484,7 @@ public class ArrayConverter extends AbstractConverter {
             }
 
             // Return the completed list
-            return (list);
+            return list;
 
         } catch (final IOException e) {
 

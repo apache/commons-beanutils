@@ -57,7 +57,7 @@ public class PublicSubBean extends PackageBean {
 
     public String getFoo() {
 
-        return (this.foo);
+        return this.foo;
 
     }
 

@@ -74,7 +74,7 @@ public class LazyDynaMapTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LazyDynaMapTestCase.class));
+        return new TestSuite(LazyDynaMapTestCase.class);
     }
 
     /**

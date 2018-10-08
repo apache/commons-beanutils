@@ -61,7 +61,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(BeanUtils2TestCase.class));
+        return new TestSuite(BeanUtils2TestCase.class);
     }
 
     /**

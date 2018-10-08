@@ -42,7 +42,7 @@ public class ConvertUtils {
      */
     @Deprecated
     public static boolean getDefaultBoolean() {
-        return (ConvertUtilsBean.getInstance().getDefaultBoolean());
+        return ConvertUtilsBean.getInstance().getDefaultBoolean();
     }
 
     /**
@@ -180,7 +180,7 @@ public class ConvertUtils {
      */
     @Deprecated
     public static long getDefaultLong() {
-        return (ConvertUtilsBean.getInstance().getDefaultLong());
+        return ConvertUtilsBean.getInstance().getDefaultLong();
     }
 
     /**

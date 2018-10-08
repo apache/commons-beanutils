@@ -156,7 +156,7 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(BasicDynaBeanTestCase.class));
+        return new TestSuite(BasicDynaBeanTestCase.class);
 
     }
 
@@ -472,7 +472,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() == true);
         } catch (final Throwable e) {
@@ -490,7 +490,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
                     321.0, 0.005);
@@ -509,7 +509,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     (float) 123.0,
@@ -529,7 +529,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     123);
@@ -548,7 +548,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     321);
@@ -567,7 +567,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     (short) 987);
@@ -586,7 +586,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     "This is a string");
@@ -1010,7 +1010,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return (dynaClass);
+        return dynaClass;
 
     }
 

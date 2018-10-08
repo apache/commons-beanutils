@@ -156,7 +156,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     @Override
     public String getName() {
 
-        return (this.name);
+        return this.name;
 
     }
 
@@ -197,7 +197,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 
@@ -223,7 +223,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
                 setDynaBeanClass(this.dynaBeanClass);
             }
             // Invoke the constructor to create a new bean instance
-            return ((DynaBean) constructor.newInstance(constructorValues));
+            return (DynaBean) constructor.newInstance(constructorValues);
         } catch (final InvocationTargetException e) {
             throw new InstantiationException
                     (e.getTargetException().getMessage());
@@ -244,7 +244,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      */
     public Class<?> getDynaBeanClass() {
 
-        return (this.dynaBeanClass);
+        return this.dynaBeanClass;
 
     }
 

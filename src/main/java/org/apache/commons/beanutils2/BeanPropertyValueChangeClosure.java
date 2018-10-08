@@ -135,7 +135,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
     public BeanPropertyValueChangeClosure(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
         super();
 
-        if ((propertyName != null) && (propertyName.length() > 0)) {
+        if (propertyName != null && propertyName.length() > 0) {
             this.propertyName = propertyName;
             this.propertyValue = propertyValue;
             this.ignoreNull = ignoreNull;

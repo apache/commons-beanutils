@@ -380,7 +380,7 @@ public class PropertyUtilsBean {
                 }
             }
         }
-        return (description);
+        return description;
 
     }
 
@@ -439,7 +439,7 @@ public class PropertyUtilsBean {
         name = resolver.getProperty(name);
 
         // Request the specified indexed property value
-        return (getIndexedProperty(bean, name, index));
+        return getIndexedProperty(bean, name, index);
 
     }
 
@@ -494,7 +494,7 @@ public class PropertyUtilsBean {
                 throw new NoSuchMethodException("Unknown property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
             }
-            return (((DynaBean) bean).get(name, index));
+            return ((DynaBean) bean).get(name, index);
         }
 
         // Retrieve the property descriptor for the specified property
@@ -514,7 +514,7 @@ public class PropertyUtilsBean {
                 final Object[] subscript = new Object[1];
                 subscript[0] = Integer.valueOf(index);
                 try {
-                    return (invokeMethod(readMethod,bean, subscript));
+                    return invokeMethod(readMethod,bean, subscript);
                 } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             IndexOutOfBoundsException) {
@@ -545,7 +545,7 @@ public class PropertyUtilsBean {
         }
         //get the array's value
         try {
-            return (Array.get(value, index));
+            return Array.get(value, index);
         } catch (final ArrayIndexOutOfBoundsException e) {
             throw new ArrayIndexOutOfBoundsException("Index: " +
                     index + ", Size: " + Array.getLength(value) +
@@ -604,7 +604,7 @@ public class PropertyUtilsBean {
         name = resolver.getProperty(name);
 
         // Request the specified indexed property value
-        return (getMappedProperty(bean, name, key));
+        return getMappedProperty(bean, name, key);
 
     }
 
@@ -650,7 +650,7 @@ public class PropertyUtilsBean {
                 throw new NoSuchMethodException("Unknown property '" +
                         name + "'+ on bean class '" + bean.getClass() + "'");
             }
-            return (((DynaBean) bean).get(name, key));
+            return ((DynaBean) bean).get(name, key);
         }
 
         Object result = null;
@@ -729,7 +729,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             return null;
         }
-        return (getMappedPropertyDescriptors(bean.getClass()));
+        return getMappedPropertyDescriptors(bean.getClass());
 
     }
 
@@ -870,7 +870,7 @@ public class PropertyUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (getNestedProperty(bean, name));
+        return getNestedProperty(bean, name);
 
     }
 
@@ -937,7 +937,7 @@ public class PropertyUtilsBean {
         // Look up and return this property from our cache
         // creating and adding it to the cache if not found.
         if (name == null) {
-            return (null);
+            return null;
         }
 
         final BeanIntrospectionData data = getIntrospectionData(bean.getClass());
@@ -1008,7 +1008,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        return (getPropertyDescriptors(bean.getClass()));
+        return getPropertyDescriptors(bean.getClass());
 
     }
 
@@ -1058,9 +1058,9 @@ public class PropertyUtilsBean {
         final PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor != null) {
-            return (descriptor.getPropertyEditorClass());
+            return descriptor.getPropertyEditorClass();
         }
-        return (null);
+        return null;
 
     }
 
@@ -1130,30 +1130,30 @@ public class PropertyUtilsBean {
             final DynaProperty descriptor =
                     ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
-                return (null);
+                return null;
             }
             final Class<?> type = descriptor.getType();
             if (type == null) {
-                return (null);
+                return null;
             } else if (type.isArray()) {
-                return (type.getComponentType());
+                return type.getComponentType();
             } else {
-                return (type);
+                return type;
             }
         }
 
         final PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor == null) {
-            return (null);
+            return null;
         } else if (descriptor instanceof IndexedPropertyDescriptor) {
-            return (((IndexedPropertyDescriptor) descriptor).
-                    getIndexedPropertyType());
+            return ((IndexedPropertyDescriptor) descriptor).
+                    getIndexedPropertyType();
         } else if (descriptor instanceof MappedPropertyDescriptor) {
-            return (((MappedPropertyDescriptor) descriptor).
-                    getMappedPropertyType());
+            return ((MappedPropertyDescriptor) descriptor).
+                    getMappedPropertyType();
         } else {
-            return (descriptor.getPropertyType());
+            return descriptor.getPropertyType();
         }
 
     }
@@ -1170,7 +1170,7 @@ public class PropertyUtilsBean {
      */
     public Method getReadMethod(final PropertyDescriptor descriptor) {
 
-        return (MethodUtils.getAccessibleMethod(descriptor.getReadMethod()));
+        return MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
 
     }
 
@@ -1186,7 +1186,7 @@ public class PropertyUtilsBean {
      * @return The read method
      */
     Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
-        return (MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod()));
+        return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
 
 
@@ -1245,7 +1245,7 @@ public class PropertyUtilsBean {
                         name + "' on dynaclass '" +
                         ((DynaBean) bean).getDynaClass() + "'" );
             }
-            return (((DynaBean) bean).get(name));
+            return ((DynaBean) bean).get(name);
         }
 
         // Retrieve the property getter method for the specified property
@@ -1263,7 +1263,7 @@ public class PropertyUtilsBean {
 
         // Call the property getter and return the value
         final Object value = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
-        return (value);
+        return value;
 
     }
 
@@ -1284,7 +1284,7 @@ public class PropertyUtilsBean {
      */
     public Method getWriteMethod(final PropertyDescriptor descriptor) {
 
-        return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));
+        return MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
 
     }
 
@@ -1302,8 +1302,8 @@ public class PropertyUtilsBean {
      */
     public Method getWriteMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         final BeanIntrospectionData data = getIntrospectionData(clazz);
-        return (MethodUtils.getAccessibleMethod(clazz,
-                data.getWriteMethod(clazz, descriptor)));
+        return MethodUtils.getAccessibleMethod(clazz,
+                data.getWriteMethod(clazz, descriptor));
     }
 
 
@@ -1367,7 +1367,7 @@ public class PropertyUtilsBean {
         // Return the requested result
         if (bean instanceof DynaBean) {
             // All DynaBean properties are readable
-            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
+            return ((DynaBean) bean).getDynaClass().getDynaProperty(name) != null;
         }
         try {
             final PropertyDescriptor desc =
@@ -1382,15 +1382,15 @@ public class PropertyUtilsBean {
                     }
                     readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
                 }
-                return (readMethod != null);
+                return readMethod != null;
             }
-            return (false);
+            return false;
         } catch (final IllegalAccessException e) {
-            return (false);
+            return false;
         } catch (final InvocationTargetException e) {
-            return (false);
+            return false;
         } catch (final NoSuchMethodException e) {
-            return (false);
+            return false;
         }
 
     }
@@ -1456,7 +1456,7 @@ public class PropertyUtilsBean {
         // Return the requested result
         if (bean instanceof DynaBean) {
             // All DynaBean properties are writeable
-            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
+            return ((DynaBean) bean).getDynaClass().getDynaProperty(name) != null;
         }
         try {
             final PropertyDescriptor desc =
@@ -1471,15 +1471,15 @@ public class PropertyUtilsBean {
                     }
                     writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
                 }
-                return (writeMethod != null);
+                return writeMethod != null;
             }
-            return (false);
+            return false;
         } catch (final IllegalAccessException e) {
-            return (false);
+            return false;
         } catch (final InvocationTargetException e) {
-            return (false);
+            return false;
         } catch (final NoSuchMethodException e) {
-            return (false);
+            return false;
         }
 
     }
@@ -2120,7 +2120,7 @@ public class PropertyUtilsBean {
                     if (values[i] == null) {
                         valueString += "<null>";
                     } else {
-                        valueString += (values[i]).getClass().getName();
+                        valueString += values[i].getClass().getName();
                     }
                 }
             }
@@ -2157,7 +2157,7 @@ public class PropertyUtilsBean {
                     if (values[i] == null) {
                         valueString += "<null>";
                     } else {
-                        valueString += (values[i]).getClass().getName();
+                        valueString += values[i].getClass().getName();
                     }
                 }
             }

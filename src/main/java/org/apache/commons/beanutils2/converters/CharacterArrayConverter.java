@@ -97,14 +97,14 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
         // Deal with a null value
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
+                return defaultValue;
             }
             throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
         if (MODEL.getClass() == value.getClass()) {
-            return (value);
+            return value;
         }
 
         // Deal with input value as a String array
@@ -115,10 +115,10 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
                 for (int i = 0; i < values.length; i++) {
                     results[i] = values[i].charAt(0);
                 }
-                return (results);
+                return results;
             } catch (final Exception e) {
                 if (useDefault) {
-                    return (defaultValue);
+                    return defaultValue;
                 }
                 throw new ConversionException(value.toString(), e);
             }
@@ -130,12 +130,12 @@ public final class CharacterArrayConverter extends AbstractArrayConverter {
             final List<String> list = parseElements(value.toString());
             final char[] results = new char[list.size()];
             for (int i = 0; i < results.length; i++) {
-                results[i] = (list.get(i)).charAt(0);
+                results[i] = list.get(i).charAt(0);
             }
-            return (results);
+            return results;
         } catch (final Exception e) {
             if (useDefault) {
-                return (defaultValue);
+                return defaultValue;
             }
             throw new ConversionException(value.toString(), e);
         }

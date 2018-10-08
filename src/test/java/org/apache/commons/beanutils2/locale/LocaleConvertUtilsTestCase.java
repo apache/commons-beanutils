@@ -86,7 +86,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LocaleConvertUtilsTestCase.class));
+        return new TestSuite(LocaleConvertUtilsTestCase.class);
     }
 
 

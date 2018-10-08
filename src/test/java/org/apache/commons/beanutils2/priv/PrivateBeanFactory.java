@@ -33,7 +33,7 @@ public class PrivateBeanFactory {
      */
     public static PrivateDirect create() {
 
-        return (new PrivateBean());
+        return new PrivateBean();
 
     }
 
@@ -43,7 +43,7 @@ public class PrivateBeanFactory {
      */
     public static PrivateDirect createSubclass() {
 
-        return (new PrivateBeanSubclass());
+        return new PrivateBeanSubclass();
 
     }
 

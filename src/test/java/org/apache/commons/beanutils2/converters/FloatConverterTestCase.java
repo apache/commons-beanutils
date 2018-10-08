@@ -132,17 +132,17 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             assertEquals(
                 message[i] + " to Float",
                 expected[i].floatValue(),
-                (converter.convert(Float.class,input[i])).floatValue(),
+                converter.convert(Float.class,input[i]).floatValue(),
                 0.00001);
             assertEquals(
                 message[i] + " to float",
                 expected[i].floatValue(),
-                (converter.convert(Float.TYPE,input[i])).floatValue(),
+                converter.convert(Float.TYPE,input[i]).floatValue(),
                 0.00001);
             assertEquals(
                 message[i] + " to null type",
                 expected[i].floatValue(),
-                ((Float)(converter.convert(null,input[i]))).floatValue(),
+                ((Float)converter.convert(null,input[i])).floatValue(),
                 0.00001);
         }
     }

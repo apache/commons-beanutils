@@ -206,7 +206,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         }
         else
         {
-            return (beanComparator.property == null);
+            return beanComparator.property == null;
         }
 
         return true;

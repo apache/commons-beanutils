@@ -479,7 +479,7 @@ public class MemoryLeakTestCase {
             try {
                 long i = 0;
                 while (true && ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
                 System.out.println("Count(1) " + count + " : " + getMemoryStats());
             } catch (final OutOfMemoryError ignored) {

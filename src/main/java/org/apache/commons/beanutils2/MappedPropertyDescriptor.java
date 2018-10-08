@@ -120,7 +120,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             mappedWriteMethod = getMethod(beanClass, "set" + base, 2);
         }
 
-        if ((mappedReadMethod == null) && (mappedWriteMethod == null)) {
+        if (mappedReadMethod == null && mappedWriteMethod == null) {
             throw new IntrospectionException("Property '" + propertyName +
                     "' not found on " +
                     beanClass.getName());
@@ -406,7 +406,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             return method;
         }
 
-        final int parameterCount = (parameterTypes == null) ? 0 : parameterTypes.length;
+        final int parameterCount = parameterTypes == null ? 0 : parameterTypes.length;
 
         // No Method found
         throw new IntrospectionException("No method \"" + methodName +

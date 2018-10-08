@@ -190,8 +190,8 @@ public abstract class AbstractArrayConverter implements Converter {
             final List<String> list = new ArrayList<>();
             while (true) {
                 final int ttype = st.nextToken();
-                if ((ttype == StreamTokenizer.TT_WORD) ||
-                    (ttype > 0)) {
+                if (ttype == StreamTokenizer.TT_WORD ||
+                    ttype > 0) {
                     list.add(st.sval);
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
@@ -202,7 +202,7 @@ public abstract class AbstractArrayConverter implements Converter {
             }
 
             // Return the completed list
-            return (list);
+            return list;
 
         } catch (final IOException e) {
 

@@ -87,7 +87,7 @@ public class ConversionException extends RuntimeException {
      */
     @Override
     public Throwable getCause() {
-        return (this.cause);
+        return this.cause;
     }
 
 

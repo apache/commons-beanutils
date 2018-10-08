@@ -48,7 +48,7 @@ public class MappedPropertyTestBean {
     }
 
     public void setMappedBoolean(final String key, final boolean value) {
-        map.put(key, (value ? Boolean.TRUE : Boolean.FALSE));
+        map.put(key, value ? Boolean.TRUE : Boolean.FALSE);
     }
 
     protected String getProtectedMapped(final String key) {

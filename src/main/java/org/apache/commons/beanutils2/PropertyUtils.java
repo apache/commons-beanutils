@@ -122,7 +122,7 @@ public class PropertyUtils {
      */
     @Deprecated
     public static int getDebug() {
-        return (debug);
+        return debug;
     }
 
     /**
@@ -240,7 +240,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (PropertyUtilsBean.getInstance().describe(bean));
+        return PropertyUtilsBean.getInstance().describe(bean);
 
     }
 
@@ -272,7 +272,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (PropertyUtilsBean.getInstance().getIndexedProperty(bean, name));
+        return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
 
@@ -305,7 +305,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (PropertyUtilsBean.getInstance().getIndexedProperty(bean, name, index));
+        return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name, index);
     }
 
 
@@ -332,7 +332,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (PropertyUtilsBean.getInstance().getMappedProperty(bean, name));
+        return PropertyUtilsBean.getInstance().getMappedProperty(bean, name);
 
     }
 
@@ -457,7 +457,7 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (PropertyUtilsBean.getInstance().getProperty(bean, name));
+        return PropertyUtilsBean.getInstance().getProperty(bean, name);
 
     }
 
@@ -611,7 +611,7 @@ public class PropertyUtils {
      */
     public static Method getReadMethod(final PropertyDescriptor descriptor) {
 
-        return (PropertyUtilsBean.getInstance().getReadMethod(descriptor));
+        return PropertyUtilsBean.getInstance().getReadMethod(descriptor);
 
     }
 

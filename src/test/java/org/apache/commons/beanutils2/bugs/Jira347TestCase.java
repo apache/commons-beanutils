@@ -110,7 +110,7 @@ public class Jira347TestCase extends TestCase {
             try {
                 long i = 0;
                 while (true && ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
             } catch (final Throwable ignored) {
             }

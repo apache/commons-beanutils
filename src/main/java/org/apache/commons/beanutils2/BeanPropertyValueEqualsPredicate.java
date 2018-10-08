@@ -165,7 +165,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
     public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
         super();
 
-        if ((propertyName != null) && (propertyName.length() > 0)) {
+        if (propertyName != null && propertyName.length() > 0) {
             this.propertyName = propertyName;
             this.propertyValue = propertyValue;
             this.ignoreNull = ignoreNull;
@@ -247,7 +247,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @return True if they are equal; false otherwise.
      */
     protected boolean evaluateValue(final Object expected, final Object actual) {
-        return (expected == actual) || ((expected != null) && expected.equals(actual));
+        return expected == actual || expected != null && expected.equals(actual);
     }
 
     /**

@@ -168,7 +168,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaPropertyUtilsTestCase.class));
+        return new TestSuite(DynaPropertyUtilsTestCase.class);
 
     }
 
@@ -936,7 +936,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             final TestBean nested = (TestBean) bean.get("nested");
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() ==
@@ -964,7 +964,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
@@ -993,7 +993,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
@@ -1022,7 +1022,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
@@ -1050,7 +1050,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
@@ -1078,7 +1078,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.readOnlyProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     (String) value,
@@ -1106,7 +1106,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
@@ -1134,10 +1134,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getNestedProperty
                     (bean, "nested.stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             final TestBean nested = (TestBean) bean.get("nested");
             assertEquals("Got correct value",
-                    ((String) value),
+                    (String) value,
                     nested.getStringProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1209,7 +1209,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
                     ((Boolean) value).booleanValue() == true);
         } catch (final IllegalAccessException e) {
@@ -1235,7 +1235,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(), 321.0, 0.005);
         } catch (final IllegalAccessException e) {
@@ -1261,7 +1261,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     (float) 123.0,
@@ -1311,7 +1311,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     123);
@@ -1338,7 +1338,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     321);
@@ -1387,7 +1387,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     (short) 987);
@@ -1414,7 +1414,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                     PropertyUtils.getSimpleProperty(bean,
                             "stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     "This is a string");
@@ -2642,7 +2642,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return (dynaClass);
+        return dynaClass;
 
     }
 

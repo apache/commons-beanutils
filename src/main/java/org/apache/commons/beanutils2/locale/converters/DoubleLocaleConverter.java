@@ -218,7 +218,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
         if (result instanceof Long) {
             return Double.valueOf(result.doubleValue());
         }
-        return (result);
+        return result;
     }
 
 

@@ -182,7 +182,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public DynaClass getDynaClass() {
 
-        return (this.dynaClass);
+        return this.dynaClass;
 
     }
 
@@ -298,7 +298,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
         try {
             advance();
-            return (!eof);
+            return !eof;
         } catch (final SQLException e) {
             throw new RuntimeException("hasNext():  SQLException:  " + e);
         }
@@ -320,7 +320,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
                 throw new NoSuchElementException();
             }
             current = false;
-            return (this);
+            return this;
         } catch (final SQLException e) {
             throw new RuntimeException("next():  SQLException:  " + e);
         }

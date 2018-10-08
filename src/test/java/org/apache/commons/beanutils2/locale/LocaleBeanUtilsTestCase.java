@@ -60,7 +60,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
      * @return Test Suite
      */
     public static Test suite() {
-        return (new TestSuite(LocaleBeanUtilsTestCase.class));
+        return new TestSuite(LocaleBeanUtilsTestCase.class);
     }
 
 

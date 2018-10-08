@@ -168,7 +168,7 @@ public class DefaultResolver implements Resolver {
         if (expression == null || expression.length() == 0) {
             return false;
         }
-        return (remove(expression) != null);
+        return remove(expression) != null;
     }
 
     /**

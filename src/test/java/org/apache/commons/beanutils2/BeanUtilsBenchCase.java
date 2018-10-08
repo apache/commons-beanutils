@@ -154,7 +154,7 @@ public class BeanUtilsBenchCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(BeanUtilsBenchCase.class));
+        return new TestSuite(BeanUtilsBenchCase.class);
 
     }
 

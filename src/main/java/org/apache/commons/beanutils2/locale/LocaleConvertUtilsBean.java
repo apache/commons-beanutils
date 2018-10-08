@@ -283,7 +283,7 @@ public class LocaleConvertUtilsBean {
             log.trace("  Using converter " + converter);
         }
 
-        return (converter.convert(targetClass, value, pattern));
+        return converter.convert(targetClass, value, pattern);
     }
 
     /**
@@ -349,7 +349,7 @@ public class LocaleConvertUtilsBean {
             Array.set(array, i, convert(values[i], type, locale, pattern));
         }
 
-        return (array);
+        return array;
     }
 
     /**

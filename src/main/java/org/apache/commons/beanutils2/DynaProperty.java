@@ -122,7 +122,7 @@ public class DynaProperty implements Serializable {
      * @return the name of the property
      */
     public String getName() {
-        return (this.name);
+        return this.name;
     }
 
     /** Property type */
@@ -140,7 +140,7 @@ public class DynaProperty implements Serializable {
      * @return the property type
      */
     public Class<?> getType() {
-        return (this.type);
+        return this.type;
     }
 
 
@@ -173,13 +173,13 @@ public class DynaProperty implements Serializable {
     public boolean isIndexed() {
 
         if (type == null) {
-            return (false);
+            return false;
         } else if (type.isArray()) {
-            return (true);
+            return true;
         } else if (List.class.isAssignableFrom(type)) {
-            return (true);
+            return true;
         } else {
-            return (false);
+            return false;
         }
 
     }
@@ -194,9 +194,9 @@ public class DynaProperty implements Serializable {
     public boolean isMapped() {
 
         if (type == null) {
-            return (false);
+            return false;
         }
-        return (Map.class.isAssignableFrom(type));
+        return Map.class.isAssignableFrom(type);
 
     }
 
@@ -213,14 +213,14 @@ public class DynaProperty implements Serializable {
 
         boolean result = false;
 
-        result = (obj == this);
+        result = obj == this;
 
-        if ((!result) && obj instanceof DynaProperty) {
+        if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
             result =
-               ((this.name == null) ? (that.name == null) : (this.name.equals(that.name))) &&
-               ((this.type == null) ? (that.type == null) : (this.type.equals(that.type))) &&
-               ((this.contentType == null) ? (that.contentType == null) : (this.contentType.equals(that.contentType)));
+               (this.name == null ? that.name == null : this.name.equals(that.name)) &&
+               (this.type == null ? that.type == null : this.type.equals(that.type)) &&
+               (this.contentType == null ? that.contentType == null : this.contentType.equals(that.contentType));
         }
 
         return result;
@@ -236,9 +236,9 @@ public class DynaProperty implements Serializable {
 
        int result = 1;
 
-       result = result * 31 + ((name == null) ? 0 : name.hashCode());
-       result = result * 31 + ((type == null) ? 0 : type.hashCode());
-       result = result * 31 + ((contentType == null) ? 0 : contentType.hashCode());
+       result = result * 31 + (name == null ? 0 : name.hashCode());
+       result = result * 31 + (type == null ? 0 : type.hashCode());
+       result = result * 31 + (contentType == null ? 0 : contentType.hashCode());
 
        return result;
     }
@@ -258,7 +258,7 @@ public class DynaProperty implements Serializable {
             sb.append(" <").append(this.contentType).append(">");
         }
         sb.append("]");
-        return (sb.toString());
+        return sb.toString();
 
     }
 
@@ -371,6 +371,6 @@ public class DynaProperty implements Serializable {
 
         }
         // it's another class
-        return ((Class<?>) in.readObject());
+        return (Class<?>) in.readObject();
     }
 }

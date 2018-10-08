@@ -263,7 +263,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     public List<DynaBean> getRows() {
 
-        return (this.rows);
+        return this.rows;
 
     }
 
@@ -306,7 +306,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     protected DynaBean createDynaBean() {
 
-        return (new BasicDynaBean(this));
+        return new BasicDynaBean(this);
 
     }
 

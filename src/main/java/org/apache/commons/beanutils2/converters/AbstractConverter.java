@@ -306,7 +306,7 @@ public abstract class AbstractConverter implements Converter {
 
         if (useDefault || type.equals(String.class)) {
             Object value = getDefault(type);
-            if (useDefault && value != null && !(type.equals(value.getClass()))) {
+            if (useDefault && value != null && !type.equals(value.getClass())) {
                 try {
                     value = convertToType(type, defaultValue);
                 } catch (final Throwable t) {
