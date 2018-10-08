@@ -30,7 +30,7 @@ public interface DynaClass {
 
 
     /**
-     * Return the name of this DynaClass (analogous to the
+     * Returns the name of this DynaClass (analogous to the
      * {@code getName()} method of {@code java.lang.Class}, which
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
@@ -41,7 +41,7 @@ public interface DynaClass {
 
 
     /**
-     * Return a property descriptor for the specified property, if it exists;
+     * Returns a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
@@ -54,7 +54,7 @@ public interface DynaClass {
 
 
     /**
-     * <p>Return an array of {@code ProperyDescriptors} for the properties
+     * <p>Returns an array of {@code ProperyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
@@ -68,7 +68,7 @@ public interface DynaClass {
 
 
     /**
-     * Instantiate and return a new DynaBean instance, associated
+     * Instantiates and return a new DynaBean instance, associated
      * with this DynaClass.
      *
      * @return A new {@code DynaBean} instance
