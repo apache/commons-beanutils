@@ -39,7 +39,6 @@ public class ConverterTestSuite {
         testSuite.addTestSuite(ArrayConverterTestCase.class);
         testSuite.addTestSuite(BigDecimalConverterTestCase.class);
         testSuite.addTestSuite(BigIntegerConverterTestCase.class);
-        testSuite.addTestSuite(BooleanArrayConverterTestCase.class);
         testSuite.addTestSuite(BooleanConverterTestCase.class);
         testSuite.addTestSuite(ByteConverterTestCase.class);
         testSuite.addTestSuite(CalendarConverterTestCase.class);
@@ -55,7 +54,6 @@ public class ConverterTestSuite {
         testSuite.addTestSuite(SqlDateConverterTestCase.class);
         testSuite.addTestSuite(SqlTimeConverterTestCase.class);
         testSuite.addTestSuite(SqlTimestampConverterTestCase.class);
-        testSuite.addTestSuite(StringArrayConverterTestCase.class);
         testSuite.addTestSuite(URLConverterTestCase.class);
         return testSuite;
     }
