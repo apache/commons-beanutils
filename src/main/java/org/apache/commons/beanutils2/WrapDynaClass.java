@@ -122,17 +122,6 @@ public class WrapDynaClass implements DynaClass {
     };
 
     /**
-     * Get the wrap dyna classes cache. Note: This method only exists to
-     * satisfy the deprecated {@code dynaClasses} hash map.
-     */
-    @SuppressWarnings("unchecked")
-    private static Map<Object, Object> getDynaClassesMap() {
-        @SuppressWarnings("rawtypes")
-        final Map cache = CLASSLOADER_CACHE.get();
-        return cache;
-    }
-
-    /**
      * Returns the cache for the already created class instances. For each
      * combination of bean class and {@code PropertyUtilsBean} instance an
      * entry is created in the cache.
