@@ -38,13 +38,6 @@ package org.apache.commons.beanutils2.converters;
  *  ConvertUtils.register(bc, Boolean.class);
  *  ConvertUtils.register(bc, Boolean.TYPE);
  * </pre>
- * <p>In addition, it is recommended that the BooleanArrayConverter also be
- * modified to recognise the same set of values:</p>
- * <pre>
- *   Converter bac = new BooleanArrayConverter(bc, BooleanArrayConverter.NO_DEFAULT);
- *   ConvertUtils.register(bac, bac.MODEL);
- * </pre>
- *
  *
  * <p>Case is ignored when converting values to true or false.</p>
  *
@@ -81,10 +74,7 @@ public final class BooleanConverter extends AbstractConverter {
      *  in which case this constructor acts like the no-argument one.
      */
     public BooleanConverter(final Object defaultValue) {
-        super();
-        if (defaultValue != NO_DEFAULT) {
-            setDefaultValue(defaultValue);
-        }
+        super(defaultValue);
     }
 
     /**
@@ -136,27 +126,16 @@ public final class BooleanConverter extends AbstractConverter {
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings,
                 final Object defaultValue) {
-        super();
+        super(defaultValue);
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
-        if (defaultValue != NO_DEFAULT) {
-            setDefaultValue(defaultValue);
-        }
     }
 
 
     // ----------------------------------------------------- Static Variables
 
 
-    /**
-     * This is a special reference that can be passed as the "default object"
-     * to the constructor to indicate that no default is desired. Note that
-     * the value 'null' cannot be used for this purpose, as the caller may
-     * want a null to be returned as the default.
-     * @deprecated Use constructors without default value.
-     */
-    @Deprecated
-    public static final Object NO_DEFAULT = new Object();
+    
 
 
     // ----------------------------------------------------- Instance Variables

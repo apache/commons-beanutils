@@ -75,7 +75,7 @@ public class BooleanConverterTestCase extends TestCase {
         final String[] trueStrings = {"sure"};
         final String[] falseStrings = {"nope"};
         final BooleanConverter converter = new BooleanConverter(
-            trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
+            trueStrings, falseStrings);
         testConversionValues(
             converter,
             new String[] {"sure", "Sure"},
