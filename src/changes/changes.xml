@@ -33,6 +33,9 @@
       <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 6 to 7.
       </action>
+      <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update from Java 7 to 8.
+      </action>
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
@@ -47,6 +50,9 @@
       </action>
       <action issue="BEANUTILS-514" dev="ggregory" type="update" due-to="Gary Gregory">
         Remove deprecated code for 2.0.0.
+      </action>
+      <action issue="BEANUTILS-509" dev="ggregory" type="update" due-to="sunil, Akshay Gehi">
+        WeakHashmap enters into infinite loop in WrapDynaClass.java.
       </action>
     </release>
 
