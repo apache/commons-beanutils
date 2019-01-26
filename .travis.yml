@@ -19,7 +19,6 @@ sudo: false
 dist: precise
 
 jdk:
-  - openjdk7
   - oraclejdk8
   - openjdk11
 
