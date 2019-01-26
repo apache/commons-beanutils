@@ -19,8 +19,9 @@ sudo: false
 dist: precise
 
 jdk:
-  - openjdk7
   - oraclejdk8
+  - oraclejdk11
+  - openjdk8
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
