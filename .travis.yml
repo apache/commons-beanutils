@@ -20,7 +20,8 @@ dist: precise
 
 jdk:
   - oraclejdk8
-  - openjdk11
+  - oraclejdk11
+  - openjdk8
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
