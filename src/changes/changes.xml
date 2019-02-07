@@ -54,6 +54,9 @@
       <action issue="BEANUTILS-509" dev="ggregory" type="update" due-to="sunil, Akshay Gehi">
         WeakHashmap enters into infinite loop in WrapDynaClass.java.
       </action>
+      <action issue="BEANUTILS-517" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update Apache Commons Collections from 4.2 to 4.3
+      </action>
     </release>
 
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">
