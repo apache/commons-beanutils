@@ -16,13 +16,12 @@
 language: java
 sudo: false
 
-dist: precise
-
 jdk:
   - oraclejdk8
   - oraclejdk11
   - openjdk8
   - openjdk11
+  - openjdk12
   - openjdk-ea
 
 after_success:
