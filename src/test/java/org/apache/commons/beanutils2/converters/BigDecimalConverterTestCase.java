@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the DoubleConverter class.
  *
- * @version $Id$
  */
 
 public class BigDecimalConverterTestCase extends NumberConverterTestBase {

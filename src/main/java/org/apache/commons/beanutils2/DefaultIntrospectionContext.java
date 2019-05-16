@@ -32,7 +32,6 @@ import java.util.Set;
  * based on a map. It is used internally only. It is not thread-safe.
  * </p>
  *
- * @version $Id$
  * @since 1.9
  */
 class DefaultIntrospectionContext implements IntrospectionContext {

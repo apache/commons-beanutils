@@ -23,7 +23,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the CalendarConverter class.
  *
- * @version $Id$
  */
 public class CalendarConverterTestCase extends DateConverterTestBase {
 

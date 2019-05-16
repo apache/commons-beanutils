@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2.locale.converters;
 /**
  * Test Case for the ShortLocaleConverter class.
  *
- * @version $Id$
  */
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {

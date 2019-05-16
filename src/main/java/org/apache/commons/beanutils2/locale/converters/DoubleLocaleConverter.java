@@ -30,7 +30,6 @@ import java.util.Locale;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  *
- * @version $Id$
  */
 
 public class DoubleLocaleConverter extends DecimalLocaleConverter {

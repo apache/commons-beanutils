@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the IntegerConverter class.
  *
- * @version $Id$
  */
 
 public class IntegerConverterTestCase extends NumberConverterTestBase {

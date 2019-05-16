@@ -43,7 +43,6 @@ import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
  * If an exception occurs during attempts to get or set a property then the
  * property is considered non existent in the Map
  *
- * @version $Id$
  */
 public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 

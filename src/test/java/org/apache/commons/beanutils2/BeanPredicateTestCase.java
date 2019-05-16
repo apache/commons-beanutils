@@ -25,7 +25,6 @@ import org.apache.commons.collections4.functors.NullPredicate;
 import junit.framework.TestCase;
 
 /**
- * @version $Id$
  */
 public class BeanPredicateTestCase extends TestCase {
 

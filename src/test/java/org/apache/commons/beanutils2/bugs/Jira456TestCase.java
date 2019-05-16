@@ -29,7 +29,6 @@ import junit.framework.TestCase;
  * <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA issue
  * BEANUTILS-456</a>.
  *
- * @version $Id$
  */
 public class Jira456TestCase extends TestCase {
     /** Constant for the name of the test property. */

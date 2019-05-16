@@ -25,7 +25,6 @@ import java.util.Map;
  * setNestedProperty and getNestedProperty methods to look for
  * simple properties in preference to map entries.
  *
- * @version $Id$
  */
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 

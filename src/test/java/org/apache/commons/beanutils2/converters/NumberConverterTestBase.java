@@ -31,7 +31,6 @@ import junit.framework.TestCase;
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
  *
- * @version $Id$
  */
 
 public abstract class NumberConverterTestBase extends TestCase {

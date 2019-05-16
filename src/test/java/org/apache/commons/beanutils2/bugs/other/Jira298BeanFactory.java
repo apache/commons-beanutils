@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.bugs.Jira298TestCase;
 /**
  * Factory which creates beans for {@link Jira298TestCase}.
  *
- * @version $Id$
  */
 public class Jira298BeanFactory {
 

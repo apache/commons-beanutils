@@ -29,7 +29,6 @@ package org.apache.commons.beanutils2;
  * APIs ... it's here primarily to preserve some concepts that were in the
  * original proposal for further discussion.</p>
  *
- * @version $Id$
  */
 
 public interface MutableDynaClass extends DynaClass {

@@ -30,7 +30,6 @@ import java.util.Date;
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  *
- * @version $Id$
  * @since 1.8.0
  */
 public final class DateConverter extends DateTimeConverter {

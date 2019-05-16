@@ -22,7 +22,6 @@ package org.apache.commons.beanutils2;
  * against given bean since a nested bean referenced is null.
  *
  * @since 1.7
- * @version $Id$
  */
 
 public class NestedNullException extends BeanAccessLanguageException {

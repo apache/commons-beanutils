@@ -41,7 +41,6 @@ package org.apache.commons.beanutils2.converters;
  *
  * <p>Case is ignored when converting values to true or false.</p>
  *
- * @version $Id$
  * @since 1.3
  */
 public final class BooleanConverter extends AbstractConverter {

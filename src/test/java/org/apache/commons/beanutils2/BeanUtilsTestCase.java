@@ -59,7 +59,6 @@ import junit.framework.TestSuite;
  *   <li>getArrayProperty(Object bean, String name)</li>
  * </ul>
  *
- * @version $Id$
  */
 
 public class BeanUtilsTestCase extends TestCase {

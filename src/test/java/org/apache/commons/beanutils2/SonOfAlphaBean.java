@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils2;
 
 /**
- * @version $Id$
  */
 public class SonOfAlphaBean extends AlphaBean {
 

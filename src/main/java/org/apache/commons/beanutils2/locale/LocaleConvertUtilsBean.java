@@ -80,7 +80,6 @@ import org.apache.commons.logging.LogFactory;
  * the specified locale and Class (or primitive type).
  *
  * @since 1.7
- * @version $Id$
  */
 public class LocaleConvertUtilsBean {
 

@@ -65,7 +65,6 @@ import junit.framework.TestSuite;
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
- * @version $Id$
  */
 
 public class PropertyUtilsTestCase extends TestCase {

@@ -26,7 +26,6 @@ package org.apache.commons.beanutils2;
  * </p>
  *
  * @see BeanUtilsBean2
- * @version $Id$
  * @since 1.8.0
  */
 public class ConvertUtilsBean2 extends ConvertUtilsBean {

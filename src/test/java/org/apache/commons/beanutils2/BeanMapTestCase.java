@@ -31,7 +31,6 @@ import junit.textui.TestRunner;
 /**
  * Test cases for BeanMap
  *
- * @version $Id$
  */
 @SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {

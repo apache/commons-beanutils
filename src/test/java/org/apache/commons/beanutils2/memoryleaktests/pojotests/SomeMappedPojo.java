@@ -21,7 +21,6 @@ import java.util.HashMap;
 /**
  * Test POJO with mapped property
  *
- * @version $Id$
  */
 public class SomeMappedPojo {
 

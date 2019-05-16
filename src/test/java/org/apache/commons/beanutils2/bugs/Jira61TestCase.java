@@ -40,7 +40,6 @@ import junit.framework.TestSuite;
  * wrapped may have read-only or write-only properties (unlike
  * regular DynaBeans.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-61">https://issues.apache.org/jira/browse/BEANUTILS-61</a>
  */
 public class Jira61TestCase extends TestCase {

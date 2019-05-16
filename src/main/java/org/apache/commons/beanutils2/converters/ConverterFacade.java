@@ -27,7 +27,6 @@ import org.apache.commons.beanutils2.Converter;
  * implementations that provide configuration options from being
  * retrieved and modified.</p>
  *
- * @version $Id$
  * @since 1.8.0
  */
 public final class ConverterFacade implements Converter {

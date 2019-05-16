@@ -46,7 +46,6 @@ import org.apache.commons.logging.LogFactory;
  * This call will only succeed when the application has sufficient security privilages.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
- * @version $Id$
  */
 
 public class MethodUtils {

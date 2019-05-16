@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the ByteConverter class.
  *
- * @version $Id$
  */
 
 public class ByteConverterTestCase extends NumberConverterTestBase {

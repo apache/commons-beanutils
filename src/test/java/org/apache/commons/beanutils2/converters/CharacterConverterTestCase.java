@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the CharacterConverter class.
  *
- * @version $Id$
  */
 public class CharacterConverterTestCase extends TestCase {
 

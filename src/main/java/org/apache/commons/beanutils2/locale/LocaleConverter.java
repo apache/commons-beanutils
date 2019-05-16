@@ -25,7 +25,6 @@ import org.apache.commons.beanutils2.Converter;
  * within the BeanUtils package to manage the conversion of objects from
  * one type to another.
  *
- * @version $Id$
  */
 
 public interface LocaleConverter extends Converter {

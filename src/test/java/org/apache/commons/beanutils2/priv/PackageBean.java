@@ -27,7 +27,6 @@ package org.apache.commons.beanutils2.priv;
  *
  * <p>This is the default access superclass</p>
  *
- * @version $Id$
  */
 
 class PackageBean {

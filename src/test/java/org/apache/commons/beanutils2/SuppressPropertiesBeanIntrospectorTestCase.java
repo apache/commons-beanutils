@@ -28,7 +28,6 @@ import junit.framework.TestCase;
 /**
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
  *
- * @version $Id$
  */
 public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
     /**

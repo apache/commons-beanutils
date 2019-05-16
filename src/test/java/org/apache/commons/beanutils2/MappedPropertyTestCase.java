@@ -23,7 +23,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>MappedPropertyDescriptor</code>.</p>
  *
- * @version $Id$
  */
 public class MappedPropertyTestCase extends TestCase {
 

@@ -29,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Test Case for the DateLocaleConverter class.
  *
- * @version $Id$
  */
 
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {

@@ -32,7 +32,6 @@ package org.apache.commons.beanutils2;
  * non-thread-safe if the application using them is single-threaded. However
  * it is recommended that they be written in a thread-safe manner anyway.</p>
  *
- * @version $Id$
  * @since 1.3
  */
 

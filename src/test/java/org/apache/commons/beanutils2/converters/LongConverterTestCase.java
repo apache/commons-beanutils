@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the LongConverter class.
  *
- * @version $Id$
  */
 
 public class LongConverterTestCase extends NumberConverterTestBase {

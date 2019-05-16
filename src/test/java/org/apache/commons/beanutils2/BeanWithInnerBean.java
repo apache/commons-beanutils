@@ -22,7 +22,6 @@ import java.util.Properties;
 /**
  * Bean with inner bean.
  *
- * @version $Id$
  */
 public class BeanWithInnerBean {
   private final InnerBean innerBean = new InnerBean();

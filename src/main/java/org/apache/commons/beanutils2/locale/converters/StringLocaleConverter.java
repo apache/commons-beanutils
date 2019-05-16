@@ -40,7 +40,6 @@ import org.apache.commons.logging.LogFactory;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  *
- * @version $Id$
  */
 
 public class StringLocaleConverter extends BaseLocaleConverter {

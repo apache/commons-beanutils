@@ -40,7 +40,6 @@ import java.lang.reflect.Modifier;
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
  *
- * @version $Id$
  */
 public class MappedPropertyDescriptor extends PropertyDescriptor {
     // ----------------------------------------------------- Instance Variables

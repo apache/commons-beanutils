@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for {@link LocaleBeanUtils}.
  *
- * @version $Id$
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
 

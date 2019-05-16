@@ -29,7 +29,6 @@ import junit.framework.TestSuite;
  * Public methods overriden in anonymous or private subclasses
  * are not recognized by PropertyUtils - see issue# BEANUTILS-273.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-273">https://issues.apache.org/jira/browse/BEANUTILS-273</a>
  */
 public class Jira273TestCase extends TestCase {

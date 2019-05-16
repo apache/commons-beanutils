@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the ShortConverter class.
  *
- * @version $Id$
  */
 
 public class ShortConverterTestCase extends NumberConverterTestBase {

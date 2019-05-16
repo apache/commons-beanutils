@@ -36,7 +36,6 @@ import org.apache.commons.logging.LogFactory;
  * if a conversion error occurs.</p>
  *
  * @since 1.7
- * @version $Id$
  */
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {

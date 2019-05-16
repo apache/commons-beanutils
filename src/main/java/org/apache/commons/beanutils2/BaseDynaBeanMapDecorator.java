@@ -47,7 +47,6 @@ import java.util.Set;
  *
  * @param <K> the type of the keys in the decorated map
  * @since BeanUtils 1.9.0
- * @version $Id$
  */
 public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
 

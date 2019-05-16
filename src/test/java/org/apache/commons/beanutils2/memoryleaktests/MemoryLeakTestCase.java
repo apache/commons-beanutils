@@ -48,7 +48,6 @@ import org.junit.Test;
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
  *
- * @version $Id$
  */
 public class MemoryLeakTestCase {
 

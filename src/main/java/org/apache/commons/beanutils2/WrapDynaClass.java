@@ -40,7 +40,6 @@ import java.util.WeakHashMap;
  *   DynaBean wrapper = new WrapDynaBean(javaBean);
  * </pre>
  *
- * @version $Id$
  */
 
 public class WrapDynaClass implements DynaClass {

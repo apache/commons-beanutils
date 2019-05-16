@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
  *
- * @version $Id$
  */
 
 public class PropertyUtilsBenchCase extends TestCase {

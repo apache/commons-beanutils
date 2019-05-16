@@ -36,7 +36,6 @@ import junit.framework.TestSuite;
  * edit the build.xml.
  * </p>
  *
- * @version $Id$
  */
 
 public class LocaleConvertTestSuite {

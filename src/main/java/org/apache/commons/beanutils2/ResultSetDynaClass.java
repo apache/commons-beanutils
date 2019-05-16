@@ -77,7 +77,6 @@ import java.util.Iterator;
  *   }
  * </pre>
  *
- * @version $Id$
  */
 
 public class ResultSetDynaClass extends JDBCDynaClass {

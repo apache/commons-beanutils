@@ -33,7 +33,6 @@ import java.beans.IntrospectionException;
  * code bases using non-standard conventions for accessing properties.
  * </p>
  *
- * @version $Id$
  * @since 1.9
  */
 public interface BeanIntrospector {

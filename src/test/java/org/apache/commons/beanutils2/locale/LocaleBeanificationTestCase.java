@@ -42,7 +42,6 @@ import junit.framework.TestSuite;
  * This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
  *
- * @version $Id$
  */
 
 public class LocaleBeanificationTestCase extends TestCase {

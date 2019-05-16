@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 /**
  * Class loader vulnerability in DefaultResolver
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">https://issues.apache.org/jira/browse/BEANUTILS-463</a>
  */
 public class Jira463TestCase extends TestCase {

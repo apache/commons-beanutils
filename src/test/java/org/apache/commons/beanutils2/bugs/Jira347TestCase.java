@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 /**
  * Test case for Jira issue# BEANUTILS-347.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-347">https://issues.apache.org/jira/browse/BEANUTILS-347</a>
  */
 public class Jira347TestCase extends TestCase {

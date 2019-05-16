@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 /**
  * Test class for {@code BeanIntrospectionData}.
  *
- * @version $Id$
  */
 public class BeanIntrospectionDataTestCase extends TestCase {
     /** Constant for the test bean class. */

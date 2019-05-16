@@ -28,7 +28,6 @@ import java.util.Locale;
  * These static utility method use the default instance. More sophisticated can be provided
  * by using a <code>LocaleConvertUtilsBean</code> instance.</p>
  *
- * @version $Id$
  */
 public class LocaleConvertUtils {
 

@@ -22,7 +22,6 @@ import org.apache.commons.beanutils2.ConversionException;
 import junit.framework.TestCase;
 
 /**
- * @version $Id$
  */
 public class BooleanConverterTestCase extends TestCase {
 

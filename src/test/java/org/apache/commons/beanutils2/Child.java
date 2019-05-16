@@ -19,7 +19,6 @@
 package org.apache.commons.beanutils2;
 
 /**
- * @version $Id$
  */
 public interface Child {
 

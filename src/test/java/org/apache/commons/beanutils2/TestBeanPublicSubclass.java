@@ -23,7 +23,6 @@ package org.apache.commons.beanutils2;
  * This is a public subclass of TestBean.  All of our properties should still
  * be accessible via reflection.
  *
- * @version $Id$
  */
 
 public class TestBeanPublicSubclass extends TestBean {

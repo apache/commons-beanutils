@@ -21,7 +21,6 @@ package org.apache.commons.beanutils2;
 /**
  * Just a runtime exception. Useful for check that a method is called.
  *
- * @version $Id$
  */
 
 public class PassTestException extends RuntimeException {

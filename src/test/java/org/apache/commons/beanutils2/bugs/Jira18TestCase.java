@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
 
  * <p>This test case demonstrates the issue.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-18">https://issues.apache.org/jira/browse/BEANUTILS-18</a>
  */
 public class Jira18TestCase extends TestCase {

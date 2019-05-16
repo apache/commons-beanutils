@@ -155,7 +155,6 @@ import java.util.Map;
  *
  * </code></pre>
  *
- * @version $Id$
  * @since 1.8.0
  */
 public class LazyDynaList extends ArrayList<Object> {

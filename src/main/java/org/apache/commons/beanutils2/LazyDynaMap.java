@@ -43,7 +43,6 @@ import java.util.Map;
  *       restricted then calling any of the <code>set()</code> methods for a property which
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
  *
- * @version $Id$
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 

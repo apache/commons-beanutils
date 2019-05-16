@@ -22,7 +22,6 @@ package org.apache.commons.beanutils2;
 /**
  * Inherited Mapped property test bean.
  *
- * @version $Id$
  */
 
 public class MappedPropertyChildBean extends MappedPropertyTestBean{

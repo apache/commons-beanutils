@@ -31,7 +31,6 @@ import org.apache.commons.beanutils2.ConversionException;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  *
- * @version $Id$
  */
 
 public class FloatLocaleConverter extends DecimalLocaleConverter {

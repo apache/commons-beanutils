@@ -29,7 +29,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the URLConverter class.
  *
- * @version $Id$
  */
 
 public class URLConverterTestCase extends TestCase {
