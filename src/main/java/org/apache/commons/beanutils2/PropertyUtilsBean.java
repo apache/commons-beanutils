@@ -185,6 +185,7 @@ public class PropertyUtilsBean {
     public final void resetBeanIntrospectors() {
         introspectors.clear();
         introspectors.add(DefaultBeanIntrospector.INSTANCE);
+        introspectors.add(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
     }
 
     /**
