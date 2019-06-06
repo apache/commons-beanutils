@@ -42,6 +42,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      */
     private static PropertyDescriptor[] fetchDescriptors() {
         final PropertyUtilsBean pub = new PropertyUtilsBean();
+        pub.removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         pub.addBeanIntrospector(new FluentPropertyBeanIntrospector());
         return pub.getPropertyDescriptors(BEAN_CLASS);
     }

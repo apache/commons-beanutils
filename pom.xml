@@ -195,6 +195,12 @@
       <timezone>+0</timezone>
       <organization>The Apache Software Foundation</organization>
     </developer>
+    <developer>
+      <id>chtompki</id>
+      <name>Rob Tompkins</name>
+      <email>chtompki@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
   </developers>
 
   <contributors>
@@ -296,6 +302,10 @@
     </contributor>
     <contributor>
       <name>Bernhard Seebass</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Melloware</name>
       <email />
     </contributor>
   </contributors>

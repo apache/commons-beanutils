@@ -29,6 +29,12 @@
   </properties>
   <body>
 
+    <release version="1.9.4" date="2019-06-08" description="Bugfix for CVE-2014-0114">
+      <action issue="BEANUTILS-520" dev="chtompki" type="fix" due-to="Melloware">
+        BeanUtils mitigate CVE-2014-0114.
+      </action>
+    </release>
+
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">
       <action issue="BEANUTILS-433" dev="ggregory" type="update" due-to="Benedikt Ritter, Gary Gregory">
         Update dependency from JUnit 3.8.1 to 4.12.

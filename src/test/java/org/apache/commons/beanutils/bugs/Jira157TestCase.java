@@ -24,6 +24,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -74,6 +76,9 @@ public class Jira157TestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        BeanUtilsBean custom = new BeanUtilsBean();
+        custom.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+        BeanUtilsBean.setInstance(custom);
     }
 
     /**
