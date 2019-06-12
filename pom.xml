@@ -24,7 +24,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
   <artifactId>commons-beanutils</artifactId>
-  <version>1.9.4-SNAPSHOT</version>
+  <version>1.9.4</version>
   <name>Apache Commons BeanUtils</name>
 
   <inceptionYear>2000</inceptionYear>
@@ -35,12 +35,38 @@
       <maven.compiler.source>1.6</maven.compiler.source>
       <maven.compiler.target>1.6</maven.compiler.target>
       <commons.componentid>beanutils</commons.componentid>
-      <commons.release.version>1.9.3</commons.release.version>
+      <commons.release.version>1.9.4</commons.release.version>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
       <surefire.argLine>-Xmx50M</surefire.argLine>
+
+      <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+
+      <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</commons.scmPubUrl>
+      <commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
+
+      <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
+      <checkstyle.version>8.21</checkstyle.version>
+
+      <spotbugs.plugin.version>3.1.10</spotbugs.plugin.version>
+
+      <commons.jacoco.version>0.8.2</commons.jacoco.version>
+
+      <!-- generate report even if there are binary incompatible changes -->
+      <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
+      <!-- 0.12.0 dies with a NullPointerException -->
+      <commons.japicmp.version>0.13.0</commons.japicmp.version>
+      <japicmp.skip>false</japicmp.skip>
+
+      <!-- Commons Release Plugin -->
+      <commons.bc.version>1.9.3</commons.bc.version>
+      <commons.rc.version>RC1</commons.rc.version>
+      <commons.release.isDistModule>true</commons.release.isDistModule>
+      <commons.distSvnStagingUrl>scm:svn:https://dist.apache.org/repos/dist/dev/commons/${commons.componentid}</commons.distSvnStagingUrl>
+      <commons.releaseManagerName>Rob Tompkins</commons.releaseManagerName>
+      <commons.releaseManagerKey>B6E73D84EA4FCC47166087253FAAD2CD5ECBB314</commons.releaseManagerKey>
   </properties>
 
 
@@ -442,4 +468,48 @@
         </plugins>
     </reporting>
 
+
+    <profiles>
+      <profile>
+        <id>setup-checkout</id>
+        <activation>
+          <file>
+            <missing>site-content</missing>
+          </file>
+        </activation>
+        <build>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-antrun-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>prepare-checkout</id>
+                  <goals>
+                    <goal>run</goal>
+                  </goals>
+                  <phase>pre-site</phase>
+                  <configuration>
+                    <tasks>
+                      <exec executable="svn">
+                        <arg line="checkout --depth immediates ${commons.scmPubUrl} ${commons.scmPubCheckoutDirectory}"/>
+                      </exec>
+                      <exec executable="svn">
+                        <arg line="update --set-depth exclude ${commons.scmPubCheckoutDirectory}/javadocs"/>
+                      </exec>
+                      <pathconvert pathsep=" " property="dirs">
+                        <dirset dir="${commons.scmPubCheckoutDirectory}" includes="*"/>
+                      </pathconvert>
+                      <exec executable="svn">
+                        <arg line="update --set-depth infinity ${dirs}"/>
+                      </exec>
+                    </tasks>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </build>
+      </profile>
+    </profiles>
 </project>
