@@ -102,7 +102,7 @@ limitations under the License.
         It is essential that you
         <a href="https://www.apache.org/info/verification.html">verify the integrity</a>
         of downloaded files, preferably using the <code>PGP</code> signature (<code>*.asc</code> files);
-        failing that using the <code>MD5</code> hash (<code>*.md5</code> checksum files).
+        failing that using the <code>SHA512</code> hash (<code>*.sha512</code> checksum files).
       </p>
       <p>
         The <a href="https://www.apache.org/dist/commons/KEYS">KEYS</a>
@@ -111,32 +111,32 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BeanUtils 1.9.3 ">
+    <section name="Apache Commons BeanUtils 1.9.4 ">
       <subsection name="Binaries">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.tar.gz">commons-beanutils-1.9.3-bin.tar.gz</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.tar.gz.md5">md5</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.tar.gz">commons-beanutils-1.9.4-bin.tar.gz</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.zip">commons-beanutils-1.9.3-bin.zip</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.zip.md5">md5</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.3-bin.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.zip">commons-beanutils-1.9.4-bin.zip</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.zip.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/binaries/commons-beanutils-1.9.4-bin.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
       <subsection name="Source">
         <table>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.3-src.tar.gz">commons-beanutils-1.9.3-src.tar.gz</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.3-src.tar.gz.md5">md5</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.3-src.tar.gz.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.4-src.tar.gz">commons-beanutils-1.9.4-src.tar.gz</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.4-src.tar.gz.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.4-src.tar.gz.asc">pgp</a></td>
           </tr>
           <tr>
-              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.3-src.zip">commons-beanutils-1.9.3-src.zip</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.3-src.zip.md5">md5</a></td>
-              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.3-src.zip.asc">pgp</a></td>
+              <td><a href="[preferred]/commons/beanutils/source/commons-beanutils-1.9.4-src.zip">commons-beanutils-1.9.4-src.zip</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.4-src.zip.sha512">sha512</a></td>
+              <td><a href="https://www.apache.org/dist/commons/beanutils/source/commons-beanutils-1.9.4-src.zip.asc">pgp</a></td>
           </tr>
         </table>
       </subsection>
