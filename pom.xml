@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>48</version>
+    <version>47</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
@@ -49,6 +49,8 @@
 
       <checkstyle.plugin.version>3.0.0</checkstyle.plugin.version>
       <checkstyle.version>8.21</checkstyle.version>
+
+      <commons.pmd-plugin.version>3.8</commons.pmd-plugin.version>
 
       <spotbugs.plugin.version>3.1.10</spotbugs.plugin.version>
 
