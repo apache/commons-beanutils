@@ -427,7 +427,7 @@
                     <linksource>true</linksource>
                     <links>
                         <link>https://docs.oracle.com/javase/7/docs/api/</link>
-                        <link>http://commons.apache.org/collections/api-release/</link>
+                        <link>https://commons.apache.org/collections/api-release/</link>
                     </links>
                 </configuration>
             </plugin>

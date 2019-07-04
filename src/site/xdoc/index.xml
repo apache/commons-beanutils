@@ -64,7 +64,7 @@ The 1.7.x and 1.8.x releases of BeanUtils distributed three jars:
   <li><code>commons-beanutils-bean-collections.jar</code> - only <i>Bean Collections</i> classes</li>
 </ul>
 The main <code>commons-beanutils.jar</code> has an <b><i>optional</i></b> dependency on
-<a href='http://commons.apache.org/collections'>Commons Collections</a>
+<a href='https://commons.apache.org/collections'>Commons Collections</a>
 </p>
 <p>
 Version 1.9.0 reverts this split for reasons outlined at
@@ -82,7 +82,7 @@ to <code>org.apache.commons.beanutils2</code>.
 <subsection name='Bean Collections'>
 <p>
 Bean collections is a library combining BeanUtils with 
-<a href='http://commons.apache.org/collections'>Commons Collections</a>
+<a href='https://commons.apache.org/collections'>Commons Collections</a>
 to provide services for collections of beans. One class (<code>BeanComparator</code>)
 was previously released, the rest are new. This new distribution strategy should allow
 this sub-component to evolve naturally without the concerns about size and scope
@@ -90,7 +90,7 @@ that might otherwise happen.
 </p>
 <p>
 Bean Collections has an additional dependency on 
-<a href='http://commons.apache.org/collections'>Commons Collections</a>.
+<a href='https://commons.apache.org/collections'>Commons Collections</a>.
 </p>
 </subsection>
 </section>
@@ -103,13 +103,13 @@ Bean Collections has an additional dependency on
   </p>
   <p>
     The latest BeanUtils release is available to download
-    <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
+    <a href="https://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
     <li>2.0.0
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v2.0.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v2.0.0/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v2.0.0/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>
@@ -122,31 +122,31 @@ Bean Collections has an additional dependency on
   </p>
   <p>
     The latest BeanUtils release is available to download
-    <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
+    <a href="https://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.
   </p>
   <ul>
     <li>1.9.3
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.3/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.3/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.2
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.2/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.2/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.1
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.1/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.1/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.1/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.1/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.9.0
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.0/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.0/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.9.0/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>
@@ -159,26 +159,26 @@ Bean Collections has an additional dependency on
   <ul>
     <li>1.8.3
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.3/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.3/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.2
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.2/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.2/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.2/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.2/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.1
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.1/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.1/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.1/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.1/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
     <li>1.8.0
       <ul>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.0/RELEASE-NOTES.txt">Release Notes</a></li>
-        <li><a href="http://commons.apache.org/beanutils/javadocs/v1.8.0/apidocs/index.html">Javadoc</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.0/RELEASE-NOTES.txt">Release Notes</a></li>
+        <li><a href="https://commons.apache.org/beanutils/javadocs/v1.8.0/apidocs/index.html">Javadoc</a></li>
       </ul>
     </li>
   </ul>

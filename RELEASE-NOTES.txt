@@ -47,7 +47,7 @@ Changes:
   Thanks to Stian Soiland-Reyes.
 
 
-Historical list of changes: http://commons.apache.org/proper/commons-beanutils/changes-report.html
+Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes-report.html
 
 For complete information on Apache Commons BeanUtils, including instructions on
 how to submit bug reports, patches, or suggestions for improvement, see the
@@ -68,7 +68,7 @@ This document contains the release notes for this version of the Commons
 BeanUtils package, and highlights changes since the previous version.
 
 For more information on Commons BeanUtils, see
-o http://commons.apache.org/beanutils/
+o https://commons.apache.org/beanutils/
 
 Release 1.9.2 mainly addresses a potential security issue when accessing
 properties in an uncontrolled way. In a nutshell, if an application that uses

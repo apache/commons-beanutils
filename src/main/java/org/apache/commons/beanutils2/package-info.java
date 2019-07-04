@@ -177,9 +177,9 @@
  * additional packages be available in the application's class path at runtime:
  * </p>
  * <ul>
- * <li><a href="http://commons.apache.org/downloads/download_logging.cgi">
+ * <li><a href="https://commons.apache.org/downloads/download_logging.cgi">
  * Logging Package (Apache Commons)</a>, version 1.0 or later</li>
- * <li><a href="http://commons.apache.org/downloads/download_collections.cgi">
+ * <li><a href="https://commons.apache.org/downloads/download_collections.cgi">
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
  *
@@ -924,7 +924,7 @@
  * The <code>Closure</code> interface in <code>commons-collections</code> encapsulates a block of code that
  * executes on an arbitrary input Object. <code>Commons-collections</code> contains code that allows
  * <code>Closures</code> to be applied to the contents of a Collection. For more details, see the
- * <a href='http://commons.apache.org/collections/'>commons-collections</a>
+ * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
@@ -949,7 +949,7 @@
  * of an input Object that returns either true or false. <code>Commons-collections</code> contains code
  * that allows
  * <code>Predicates</code> to be applied to be used to filter collections. For more details, see the
- * <a href='http://commons.apache.org/collections/'>commons-collections</a>
+ * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
@@ -975,7 +975,7 @@
  * that allows
  * <code>Transformers</code> to be applied produce a collection of outputs from a collection of inputs.
  * For more details, see the
- * <a href='http://commons.apache.org/collections/'>commons-collections</a>
+ * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
