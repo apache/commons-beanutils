@@ -68,7 +68,7 @@ The main <code>commons-beanutils.jar</code> has an <b><i>optional</i></b> depend
 </p>
 <p>
 Version 1.9.0 reverts this split for reasons outlined at
-<a href="http://issues.apache.org/jira/browse/BEANUTILS-379">BEANUTILS-379</a>.
+<a href="https://issues.apache.org/jira/browse/BEANUTILS-379">BEANUTILS-379</a>.
 There is now only one jar for the BeanUtils library.
 </p>
 <p>

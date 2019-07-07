@@ -273,8 +273,8 @@ Testing of BeanUtils 1.8.1 revealed that the leak still appears to exist
 in IBM's JDK 1.6 implementation.
 
 
-see http://issues.apache.org/jira/browse/BEANUTILS-291
-    http://issues.apache.org/jira/browse/BEANUTILS-366
+see https://issues.apache.org/jira/browse/BEANUTILS-291
+    https://issues.apache.org/jira/browse/BEANUTILS-366
 
 
 BUGS FIXED:

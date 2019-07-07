@@ -418,7 +418,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * tries to re-create the method if the method reference has been
      * released.
      *
-     * See http://issues.apache.org/jira/browse/BEANUTILS-291
+     * See https://issues.apache.org/jira/browse/BEANUTILS-291
      */
     private static class MappedMethodReference {
         private String className;
