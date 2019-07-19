@@ -16,7 +16,7 @@ test class available in src/test/java/org/apache/commons/beanutils/bugs/Jira520T
 Changes in this version include:
 
 Fixed Bugs:
-o BEANUTILS-520:  BeanUtils mitigate CVE-2014-0114. Thanks to Melloware.
+o BEANUTILS-520:  BeanUtils mitigation of CVE-2014-0114. (CVE-2019-10086 for commons-beanutils). Thanks to Melloware.
 
 
 Historical list of changes: https://commons.apache.org/proper/commons-beanutils/changes-report.html

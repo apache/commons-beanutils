@@ -40,7 +40,7 @@ If one would like to opt out of the default behaviour, one could follow the
 example set out in the test class available in
 src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
       <action issue="BEANUTILS-520" dev="chtompki" type="fix" due-to="Melloware">
-        BeanUtils mitigate CVE-2014-0114.
+        BeanUtils mitigation of CVE-2014-0114. (CVE-2019-10086 for commons-beanutils).
       </action>
     </release>
 
