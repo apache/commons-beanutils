@@ -94,6 +94,10 @@ Bean Collections has an additional dependency on
     The latest BeanUtils release is available to download
     <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.<br/><br/>
     <em><strong>1.9.4</strong></em><br/><br/>
+    <ul>
+      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
+      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+    </ul>
     <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
     the class property in bean introspection by default.<br/><br/>
     <strong>Severity.</strong> Medium<br/><br/>
