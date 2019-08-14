@@ -103,14 +103,20 @@ Bean Collections has an additional dependency on
     <strong>Severity.</strong> Medium<br/><br/>
     <strong>Vendor.</strong> The Apache Software Foundation<br/><br/>
     <strong>Versions Affected.</strong> All versions commons-beanutils-1.9.3 and before.<br/><br/>
-    <strong>Description.</strong> In version 1.9.2, a special BeanIntrospector class was added which allows suppressing the ability for
-    an attacker to access the classloader via the class property available on all Java objects. We, however were not
-    using this by default characteristic of the PropertyUtilsBean.<br/><br/>
+    <strong>Description.</strong> A special BeanIntrospector class was added in version 1.9.2.
+    This can be used to stop attackers from using the class property of
+    Java objects to get access to the classloader.
+    However this protection was not enabled by default.
+    PropertyUtilsBean (and consequently BeanUtilsBean) now disallows class
+    level property access by default, thus protecting against
+    CVE-2014-0114.<br/><br/>
     <strong>Mitigation.</strong> Upgrade to commons-beanutils-1.9.4<br/><br/>
     <strong>Credit.</strong> This was discovered by Melloware (https://melloware.com/).<br/><br/>
     <strong>Example.</strong>
     <source>/**
-* Example usage after 1.9.4
+* Example displaying the new default behaviour such that
+* it is not possible to access class level properties utilizing the
+* BeanUtilsBean, which in turn utilizes the PropertyUtilsBean.
 */
 public void testSuppressClassPropertyByDefault() throws Exception {
   final BeanUtilsBean bub = new BeanUtilsBean();
@@ -124,7 +130,9 @@ public void testSuppressClassPropertyByDefault() throws Exception {
 }
 
 /**
-* Example usage to restore 1.9.3 behaviour
+* Example showing how by which one would use to revert to the
+* behaviour prior to the 1.9.4 release where class level properties were accessible by
+* the BeanUtilsBean and the PropertyUtilsBean.
 */
 public void testAllowAccessToClassProperty() throws Exception {
   final BeanUtilsBean bub = new BeanUtilsBean();
