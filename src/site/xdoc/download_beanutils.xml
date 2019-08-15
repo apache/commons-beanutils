@@ -26,22 +26,24 @@ limitations under the License.
  | commons-build-plugin/trunk/src/main/resources/commons-xdoc-templates |
  +======================================================================+
  |                                                                      |
- | 1) Re-generate using: mvn commons:download-page                      |
+ | 1) Re-generate using: mvn commons-build:download-page                |
  |                                                                      |
  | 2) Set the following properties in the component's pom:              |
- |    - commons.componentid (required, alphabetic, lower case)          |
+ |    - commons.componentid     (required, alphabetic, lower case)      |
  |    - commons.release.version (required)                              |
  |    - commons.release.name    (required)                              |
  |    - commons.binary.suffix   (optional)                              |
  |      (defaults to "-bin", set to "" for pre-maven2 releases)         |
  |    - commons.release.desc    (optional)                              |
  |    - commons.release.subdir  (optional)                              |
+ |    - commons.release.hash    (optional, lowercase, default sha512)   |
  |                                                                      |
- |    - commons.release.2/3.version       (conditional)                 |
- |    - commons.release.2/3.name          (conditional)                 |
- |    - commons.release.2/3.binary.suffix (optional)                    |
- |    - commons.release.2/3.desc          (optional)                    |
- |    - commons.release.2/3.subdir        (optional)                    |
+ |    - commons.release.[234].version       (conditional)               |
+ |    - commons.release.[234].name          (conditional)               |
+ |    - commons.release.[234].binary.suffix (optional)                  |
+ |    - commons.release.[234].desc          (optional)                  |
+ |    - commons.release.[234].subdir        (optional)                  |
+ |    - commons.release.[234].hash       (optional, lowercase, [sha512])|
  |                                                                      |
  | 3) Example Properties                                                |
  |    (commons.release.name inherited by parent:                        |

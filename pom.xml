@@ -36,6 +36,9 @@
       <maven.compiler.target>1.6</maven.compiler.target>
       <commons.componentid>beanutils</commons.componentid>
       <commons.release.version>1.9.4</commons.release.version>
+      <!-- use later build plugin to generate sha256 hash refs.  Can be removed when the pom moves to CP48 -->
+      <commons.build-plugin.version>1.10</commons.build-plugin.version>
+      <commons.release.hash>sha256</commons.release.hash>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
       <!-- limit memory size see BEANUTILS-291; allow command-line override -->
