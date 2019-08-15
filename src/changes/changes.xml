@@ -65,6 +65,20 @@
       </action>
     </release>
 
+    <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
+CVE-2014-0114. More specifically, our goal with BEANUTILS-520
+is to set the default behaviour of the BeanUtilsBean
+to not allow class level access. The goal in doing this now
+is to bring 1.9.X into alignment with the same behaviour
+of the 2.X version line in regards to security.
+If one would like to opt out of the default behaviour, one could follow the
+example set out in the test class available in
+src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
+      <action issue="BEANUTILS-520" dev="chtompki" type="fix" due-to="Melloware">
+        BeanUtils mitigation of CVE-2014-0114. (CVE-2019-10086 for commons-beanutils).
+      </action>
+    </release>
+
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">
       <action issue="BEANUTILS-433" dev="ggregory" type="update" due-to="Benedikt Ritter, Gary Gregory">
         Update dependency from JUnit 3.8.1 to 4.12.

@@ -115,6 +115,50 @@ Bean Collections has an additional dependency on
   </ul>
 </subsection>
 <subsection name="1.9.x releases">
+    <p>
+    The latest BeanUtils release is available to download
+    <a href="http://commons.apache.org/beanutils/download_beanutils.cgi">here</a>.<br/>
+    <em><strong>1.9.4</strong></em><br/><br/>
+    <ul>
+      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/RELEASE-NOTES.txt">Release Notes</a></li>
+      <li><a href="http://commons.apache.org/beanutils/javadocs/v1.9.4/apidocs/index.html">JavaDoc</a></li>
+    </ul>
+    <strong>CVE-2019-10086.</strong> Apache Commons Beanutils does not suppresses
+    the class property in bean introspection by default.<br/><br/>
+    <strong>Severity.</strong> Medium<br/><br/>
+    <strong>Vendor.</strong> The Apache Software Foundation<br/><br/>
+    <strong>Versions Affected.</strong> All versions commons-beanutils-1.9.3 and before.<br/><br/>
+    <strong>Description.</strong> In version 1.9.2, a special BeanIntrospector class was added which allows suppressing the ability for
+    an attacker to access the classloader via the class property available on all Java objects. We, however were not
+    using this by default characteristic of the PropertyUtilsBean.<br/><br/>
+    <strong>Mitigation.</strong> Upgrade to commons-beanutils-1.9.4<br/><br/>
+    <strong>Credit.</strong> This was discovered by Melloware (https://melloware.com/).<br/><br/>
+    <strong>Example.</strong>
+    <source>/**
+* Example usage after 1.9.4
+*/
+public void testSuppressClassPropertyByDefault() throws Exception {
+  final BeanUtilsBean bub = new BeanUtilsBean();
+  final AlphaBean bean = new AlphaBean();
+  try {
+    bub.getProperty(bean, "class");
+    fail("Could access class property!");
+  } catch (final NoSuchMethodException ex) {
+    // ok
+  }
+}
+
+/**
+* Example usage to restore 1.9.3 behaviour
+*/
+public void testAllowAccessToClassProperty() throws Exception {
+  final BeanUtilsBean bub = new BeanUtilsBean();
+  bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+  final AlphaBean bean = new AlphaBean();
+  String result = bub.getProperty(bean, "class");
+  assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+}</source>
+  </p>
   <p>
     BeanUtils <strong>1.9.x</strong> releases are binary compatible (with a minor exception
     described in the release notes) with version 1.8.3 and require a minimum of
