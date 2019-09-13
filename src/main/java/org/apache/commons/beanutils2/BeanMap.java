@@ -71,75 +71,35 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 new HashMap<>();
         defTransformers.put(
             Boolean.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Boolean.valueOf( input.toString() );
-                }
-            }
+            input -> Boolean.valueOf( input.toString() )
         );
         defTransformers.put(
             Character.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Character.valueOf( input.toString().charAt( 0 ) );
-                }
-            }
+            input -> Character.valueOf( input.toString().charAt( 0 ) )
         );
         defTransformers.put(
             Byte.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Byte.valueOf( input.toString() );
-                }
-            }
+            input -> Byte.valueOf( input.toString() )
         );
         defTransformers.put(
             Short.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Short.valueOf( input.toString() );
-                }
-            }
+            input -> Short.valueOf( input.toString() )
         );
         defTransformers.put(
             Integer.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Integer.valueOf( input.toString() );
-                }
-            }
+            input -> Integer.valueOf( input.toString() )
         );
         defTransformers.put(
             Long.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Long.valueOf( input.toString() );
-                }
-            }
+            input -> Long.valueOf( input.toString() )
         );
         defTransformers.put(
             Float.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Float.valueOf( input.toString() );
-                }
-            }
+            input -> Float.valueOf( input.toString() )
         );
         defTransformers.put(
             Double.TYPE,
-            new Transformer() {
-                @Override
-                public Object transform( final Object input ) {
-                    return Double.valueOf( input.toString() );
-                }
-            }
+            input -> Double.valueOf( input.toString() )
         );
         return defTransformers;
     }

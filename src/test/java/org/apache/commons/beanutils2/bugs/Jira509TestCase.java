@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.beanutils2.WrapDynaClass;
@@ -57,14 +56,10 @@ public class Jira509TestCase {
                 Collection.class, Set.class, ArrayList.class, List.class, HashSet.class);
 
         // All daemon threads.
-        final ExecutorService executor = Executors.newFixedThreadPool(100, new ThreadFactory() {
-
-            @Override
-            public Thread newThread(final Runnable r) {
-                final Thread thread = new Thread(r);
-                thread.setDaemon(true);
-                return thread;
-            }
+        final ExecutorService executor = Executors.newFixedThreadPool(100, r -> {
+            final Thread thread = new Thread(r);
+            thread.setDaemon(true);
+            return thread;
         });
 
         try {
