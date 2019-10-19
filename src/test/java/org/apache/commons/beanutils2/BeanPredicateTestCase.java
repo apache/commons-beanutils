@@ -17,14 +17,14 @@
 
 package org.apache.commons.beanutils2;
 
-import org.apache.commons.collections4.functors.EqualPredicate;
-import org.apache.commons.collections4.functors.InstanceofPredicate;
-import org.apache.commons.collections4.functors.NotPredicate;
-import org.apache.commons.collections4.functors.NullPredicate;
+
+import java.util.function.Predicate;
 
 import junit.framework.TestCase;
 
 /**
+ * Unit test for {@link BeanPredicate}
+ *
  */
 public class BeanPredicateTestCase extends TestCase {
 
@@ -33,29 +33,29 @@ public class BeanPredicateTestCase extends TestCase {
     }
 
     public void testEqual() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new EqualPredicate("foo"));
+    	Predicate<String> p = (s) -> s.equals("foo");
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", p);
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(!predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNotEqual() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new NotPredicate( new EqualPredicate("foo")));
+    	Predicate<String> p = (s) -> !s.equals("foo");
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", p);
         assertTrue(!predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testInstanceOf() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty",new InstanceofPredicate( String.class ));
+    	Predicate<String> p = (s) -> (s instanceof String);
+        final BeanPredicate predicate = new BeanPredicate("stringProperty",p);
         assertTrue(predicate.evaluate(new TestBean("foo")));
         assertTrue(predicate.evaluate(new TestBean("bar")));
     }
 
     public void testNull() {
-        final BeanPredicate predicate =
-            new BeanPredicate("stringProperty", NullPredicate.INSTANCE);
+    	Predicate<String> p = (s) -> s == null;
+        final BeanPredicate predicate = new BeanPredicate("stringProperty", p);
         final String nullString = null;
         assertTrue(predicate.evaluate(new TestBean(nullString)));
         assertTrue(!predicate.evaluate(new TestBean("bar")));
