@@ -59,9 +59,9 @@ public class BeanPredicate implements Predicate<Object> {
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
-	public boolean evaluate(Object object) {
-		return test(object);
-	}
+    public boolean evaluate(Object object) {
+        return test(object);
+    }
 
     /**
      * Evaluates the given object by applying the {@link #getPredicate()}
@@ -71,9 +71,9 @@ public class BeanPredicate implements Predicate<Object> {
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
-	@Override
-	public boolean test(Object object) {
-		boolean evaluation = false;
+    @Override
+    public boolean test(Object object) {
+        boolean evaluation = false;
 
         try {
             final Object propValue = PropertyUtils.getProperty( object, propertyName );
@@ -97,8 +97,8 @@ public class BeanPredicate implements Predicate<Object> {
         }
 
         return evaluation;
-	}
-	
+    }
+    
     /**
      * Gets the name of the property whose value is to be predicated.
      * in the evaluation.
