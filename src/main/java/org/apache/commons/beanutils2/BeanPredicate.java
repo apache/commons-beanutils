@@ -59,18 +59,6 @@ public class BeanPredicate implements Predicate<Object> {
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
-    public boolean evaluate(Object object) {
-        return test(object);
-    }
-
-    /**
-     * Evaluates the given object by applying the {@link #getPredicate()}
-     * to a property value named by {@link #getPropertyName()}.
-     *
-     * @param object The object being evaluated
-     * @return the result of the predicate evaluation
-     * @throws IllegalArgumentException when the property cannot be evaluated
-     */
     @Override
     public boolean test(Object object) {
         boolean evaluation = false;
