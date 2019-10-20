@@ -63,6 +63,9 @@
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Apache Commons Collections from 4.3 to 4.4.
       </action>
+      <action issue="BEANUTILS-527" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
+        Convert Collections4 to java.util.function #8.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
