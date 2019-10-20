@@ -29,14 +29,14 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  *
  */
-public class BeanPredicate implements Predicate<Object> {
+public class BeanPredicate<T> implements Predicate<T> {
 
     private final Log log = LogFactory.getLog(this.getClass());
 
     /** Name of the property whose value will be predicated */
     private String propertyName;
     /** <code>Predicate</code> to be applied to the property value */
-    private Predicate<Object> predicate;
+    private Predicate<T> predicate;
 
     /**
      * Constructs a <code>BeanPredicate</code> that applies the given
@@ -46,7 +46,7 @@ public class BeanPredicate implements Predicate<Object> {
      * @param predicate the <code>Predicate</code> to be applied,
      * not null
      */
-    public BeanPredicate(final String propertyName, final Predicate predicate) {
+    public BeanPredicate(final String propertyName, final Predicate<T> predicate) {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
@@ -64,7 +64,7 @@ public class BeanPredicate implements Predicate<Object> {
         boolean evaluation = false;
 
         try {
-            final Object propValue = PropertyUtils.getProperty( object, propertyName );
+            final T propValue = (T) PropertyUtils.getProperty(object, propertyName);
             evaluation = predicate.test(propValue);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
@@ -110,7 +110,7 @@ public class BeanPredicate implements Predicate<Object> {
      * during {@link #evaluate}.
      * @return <code>Predicate</code>, not null
      */
-    public Predicate<Object> getPredicate() {
+    public Predicate<T> getPredicate() {
         return predicate;
     }
 
@@ -119,7 +119,7 @@ public class BeanPredicate implements Predicate<Object> {
      * during {@link #test(Object)}.
      * @param predicate <code>Predicate</code>, not null
      */
-    public void setPredicate(final Predicate<Object> predicate) {
+    public void setPredicate(final Predicate<T> predicate) {
         this.predicate = predicate;
     }
 
