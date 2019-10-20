@@ -102,7 +102,8 @@ import org.apache.commons.logging.LogFactory;
  *       the value for the object's <code>personId</code> property.
  *    </li>
  * </ul>
- * @param <T> the type of the input to the predicate.
+ *
+ * @param <T> The type of the input to the predicate.
  * @param <V> The property value type.
  *
  * @see org.apache.commons.beanutils2.PropertyUtils
