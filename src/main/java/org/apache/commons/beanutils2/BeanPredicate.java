@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Predicate;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -29,14 +29,14 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  *
  */
-public class BeanPredicate implements Predicate {
+public class BeanPredicate implements Predicate<Object> {
 
     private final Log log = LogFactory.getLog(this.getClass());
 
     /** Name of the property whose value will be predicated */
     private String propertyName;
     /** <code>Predicate</code> to be applied to the property value */
-    private Predicate predicate;
+    private Predicate<Object> predicate;
 
     /**
      * Constructs a <code>BeanPredicate</code> that applies the given
@@ -50,6 +50,18 @@ public class BeanPredicate implements Predicate {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
+    
+    /**
+     * Evaluates the given object by applying the {@link #getPredicate()}
+     * to a property value named by {@link #getPropertyName()}.
+     *
+     * @param object The object being evaluated
+     * @return the result of the predicate evaluation
+     * @throws IllegalArgumentException when the property cannot be evaluated
+     */
+    public boolean evaluate(Object object) {
+        return test(object);
+    }
 
     /**
      * Evaluates the given object by applying the {@link #getPredicate()}
@@ -60,13 +72,12 @@ public class BeanPredicate implements Predicate {
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
     @Override
-    public boolean evaluate(final Object object) {
-
+    public boolean test(Object object) {
         boolean evaluation = false;
 
         try {
             final Object propValue = PropertyUtils.getProperty( object, propertyName );
-            evaluation = predicate.evaluate(propValue);
+            evaluation = predicate.test(propValue);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
             log.error("ERROR: " + errorMsg, e);
@@ -87,7 +98,7 @@ public class BeanPredicate implements Predicate {
 
         return evaluation;
     }
-
+    
     /**
      * Gets the name of the property whose value is to be predicated.
      * in the evaluation.
@@ -111,7 +122,7 @@ public class BeanPredicate implements Predicate {
      * during {@link #evaluate}.
      * @return <code>Predicate</code>, not null
      */
-    public Predicate getPredicate() {
+    public Predicate<Object> getPredicate() {
         return predicate;
     }
 
@@ -120,8 +131,12 @@ public class BeanPredicate implements Predicate {
      * during {@link #evaluate(Object)}.
      * @param predicate <code>Predicate</code>, not null
      */
-    public void setPredicate(final Predicate predicate) {
+    public void setPredicate(final Predicate<Object> predicate) {
         this.predicate = predicate;
     }
+
+
+
+
 
 }
