@@ -134,7 +134,7 @@ public final class BooleanConverter extends AbstractConverter {
     // ----------------------------------------------------- Static Variables
 
 
-    
+
 
 
     // ----------------------------------------------------- Instance Variables

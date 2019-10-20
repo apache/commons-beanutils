@@ -41,7 +41,7 @@ public class Jira520TestCase extends TestCase {
             // ok
         }
     }
-    
+
     /**
      * Allow opt-out to make your app less secure but allow access to "class".
      */

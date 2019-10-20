@@ -76,7 +76,7 @@ public class Jira157TestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        
+
         BeanUtilsBean custom = new BeanUtilsBean();
     	custom.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
     	BeanUtilsBean.setInstance(custom);

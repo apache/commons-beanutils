@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  * <p>Predicate implementation that applies the given <code>Predicate</code>
  * to the result of calling the given property getter.
  * </p>
- * 
+ *
  * @param <T> the type of the input to the predicate
  */
 public class BeanPredicate<T> implements Predicate<T> {
@@ -51,7 +51,7 @@ public class BeanPredicate<T> implements Predicate<T> {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
-    
+
     /**
      * Evaluates the given object by applying the {@link #getPredicate()}
      * to a property value named by {@link #getPropertyName()}.
@@ -87,7 +87,7 @@ public class BeanPredicate<T> implements Predicate<T> {
 
         return evaluation;
     }
-    
+
     /**
      * Gets the name of the property whose value is to be predicated.
      * in the evaluation.
