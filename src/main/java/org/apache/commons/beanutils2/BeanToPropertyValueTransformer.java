@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Function;
 
-import org.apache.commons.collections4.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -65,10 +65,13 @@ import org.apache.commons.logging.LogFactory;
  *    </li>
  * </ul>
  *
+ * @param <T> the type of the input to the function
+ * @param <R> the type of the result of the function
+ * 
  * @see org.apache.commons.beanutils2.PropertyUtils
- * @see org.apache.commons.collections4.Transformer
+ * @see java.util.function.Function
  */
-public class BeanToPropertyValueTransformer implements Transformer {
+public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
 
     /** For logging. */
     private final Log log = LogFactory.getLog(this.getClass());
@@ -145,12 +148,12 @@ public class BeanToPropertyValueTransformer implements Transformer {
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
     @Override
-    public Object transform(final Object object) {
+    public R apply(final T object) {
 
-        Object propertyValue = null;
+        R propertyValue = null;
 
         try {
-            propertyValue = PropertyUtils.getProperty(object, propertyName);
+            propertyValue = (R) PropertyUtils.getProperty(object, propertyName);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during transformation. Null value encountered in property path...";
 
