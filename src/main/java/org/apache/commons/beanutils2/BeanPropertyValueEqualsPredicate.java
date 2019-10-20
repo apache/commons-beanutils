@@ -18,16 +18,15 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Predicate;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p><code>Predicate</code> that evaluates a property value against a specified value.</p>
  * <p>
- * An implementation of <code>org.apache.commons.collections4.Predicate</code> that evaluates a
+ * An implementation of <code>java.util.function.Predicate</code> that evaluates a
  * property value on the object provided against a specified value and returns <code>true</code>
  * if equal; <code>false</code> otherwise.
  * The <code>BeanPropertyValueEqualsPredicate</code> constructor takes two parameters which
@@ -103,11 +102,13 @@ import org.apache.commons.logging.LogFactory;
  *       the value for the object's <code>personId</code> property.
  *    </li>
  * </ul>
+ * @param <T> the type of the input to the predicate.
+ * @param <V> The property value type.
  *
  * @see org.apache.commons.beanutils2.PropertyUtils
- * @see org.apache.commons.collections4.Predicate
+ * @see java.util.function.Predicate
  */
-public class BeanPropertyValueEqualsPredicate implements Predicate {
+public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
 
     /** For logging. */
     private final Log log = LogFactory.getLog(this.getClass());
@@ -121,7 +122,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * The value that the property specified by <code>propertyName</code>
      * will be compared to when this <code>Predicate</code> executes.
      */
-    private Object propertyValue;
+    private V propertyValue;
 
     /**
      * <p>Should <code>null</code> objects in the property path be ignored?</p>
@@ -146,7 +147,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @param propertyValue The value to use in object evaluation.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
-    public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue) {
+    public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue) {
         this(propertyName, propertyValue, false);
     }
 
@@ -161,7 +162,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * genenerate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
-    public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
+    public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue, final boolean ignoreNull) {
         super();
 
         if (propertyName != null && propertyName.length() > 0) {
@@ -192,7 +193,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
     @Override
-    public boolean evaluate(final Object object) {
+    public boolean test(final T object) {
 
         boolean evaluation = false;
 
@@ -245,7 +246,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @param actual The actual value.
      * @return True if they are equal; false otherwise.
      */
-    protected boolean evaluateValue(final Object expected, final Object actual) {
+    protected boolean evaluateValue(final V expected, final Object actual) {
         return expected == actual || expected != null && expected.equals(actual);
     }
 
@@ -267,7 +268,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @return The value that the property specified by <code>propertyName</code> will be compared to
      * when this <code>Predicate</code> executes.
      */
-    public Object getPropertyValue() {
+    public V getPropertyValue() {
         return propertyValue;
     }
 
