@@ -269,7 +269,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map<Object, Object> makeFullMap() {
+    public Map<String, Object> makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
         final BeanWithProperties bean = new BeanWithProperties();
@@ -287,7 +287,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map<Object, Object> makeEmptyMap() {
+    public Map<String, Object> makeEmptyMap() {
         return new BeanMap();
     }
 
@@ -466,7 +466,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         }
 
         try {
-            final Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
+            final Map<String, Object> map = new BeanMap(new BeanThrowingExceptions());
             map.put("valueThrowingException", "value");
             fail("Setter exception - expected IllegalArgumentException");
         } catch (final IllegalArgumentException e) {

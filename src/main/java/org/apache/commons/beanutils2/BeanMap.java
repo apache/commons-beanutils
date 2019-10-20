@@ -34,8 +34,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
-
 /**
  * An implementation of Map for JavaBeans which uses introspection to get and put properties in the bean.
  * <p>
@@ -43,7 +41,7 @@ import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
  * Map
  * </p>
  */
-public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
+public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
     private transient Object bean;
 
@@ -167,7 +165,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
             // copy only properties that are readable and writable. If its
             // not readable, we can't get the value from the old map. If
             // its not writable, we can't write a value into the new map.
-            for (final Object key : readMethods.keySet()) {
+            for (final String key : readMethods.keySet()) {
                 if (getWriteMethod(key) != null) {
                     newMap.put(key, get(key));
                 }
@@ -189,7 +187,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @param map the BeanMap whose properties to put
      */
     public void putAllWriteable(final BeanMap map) {
-        for (final Object key : map.readMethods.keySet()) {
+        for (final String key : map.readMethods.keySet()) {
             if (getWriteMethod(key) != null) {
                 this.put(key, map.get(key));
             }
@@ -294,7 +292,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @throws ClassCastException if an error occurs creating the method args
      */
     @Override
-    public Object put(final Object name, final Object value) throws IllegalArgumentException, ClassCastException {
+    public Object put(final String name, final Object value) throws IllegalArgumentException, ClassCastException {
         if (bean != null) {
             final Object oldValue = get(name);
             final Method method = getWriteMethod(name);
@@ -348,7 +346,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     // The set actually contains strings; however, because it cannot be
     // modified there is no danger in selling it as Set<Object>
     @Override
-    public Set<Object> keySet() {
+    public Set<String> keySet() {
         return Collections.unmodifiableSet((Set) readMethods.keySet());
     }
 
@@ -360,10 +358,10 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @return the unmodifiable set of mappings
      */
     @Override
-    public Set<Map.Entry<Object, Object>> entrySet() {
-        return Collections.unmodifiableSet(new AbstractSet<Map.Entry<Object, Object>>() {
+    public Set<Map.Entry<String, Object>> entrySet() {
+        return Collections.unmodifiableSet(new AbstractSet<Map.Entry<String, Object>>() {
             @Override
-            public Iterator<Map.Entry<Object, Object>> iterator() {
+            public Iterator<Map.Entry<String, Object>> iterator() {
                 return entryIterator();
             }
 
@@ -443,17 +441,17 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      *
      * @return an iterator over the entries
      */
-    public Iterator<Map.Entry<Object, Object>> entryIterator() {
+    public Iterator<Map.Entry<String, Object>> entryIterator() {
         final Iterator<String> iter = keyIterator();
-        return new Iterator<Map.Entry<Object, Object>>() {
+        return new Iterator<Map.Entry<String, Object>>() {
             @Override
             public boolean hasNext() {
                 return iter.hasNext();
             }
 
             @Override
-            public Map.Entry<Object, Object> next() {
-                final Object key = iter.next();
+            public Map.Entry<String, Object> next() {
+                final String key = iter.next();
                 final Object value = get(key);
                 // This should not cause any problems; the key is actually a
                 // string, but it does no harm to expose it as Object
@@ -595,7 +593,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Map entry used by {@link BeanMap}.
      */
-    protected static class Entry extends AbstractMapEntry<Object, Object> {
+    protected static class Entry extends AbstractMap.SimpleEntry<String, Object> {
+        
+        private static final long serialVersionUID = 1L;
         private final BeanMap owner;
 
         /**
@@ -605,7 +605,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
          * @param key the key for this entry
          * @param value the value for this entry
          */
-        protected Entry(final BeanMap owner, final Object key, final Object value) {
+        protected Entry(final BeanMap owner, final String key, final Object value) {
             super(key, value);
             this.owner = owner;
         }
@@ -618,7 +618,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
          */
         @Override
         public Object setValue(final Object value) {
-            final Object key = getKey();
+            final String key = getKey();
             final Object oldValue = owner.get(key);
 
             owner.put(key, value);
