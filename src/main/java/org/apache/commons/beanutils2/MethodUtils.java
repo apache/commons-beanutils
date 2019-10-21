@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * <p><code>MethodUtils</code> contains a workaround for this situation.
  * It will attempt to call <code>setAccessible</code> on this method.
  * If this call succeeds, then the method can be invoked as normal.
- * This call will only succeed when the application has sufficient security privilages.
+ * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
  *
  */
@@ -134,7 +134,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than <code>invokeExactMethod()</code>.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -176,7 +176,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -225,7 +225,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link
      * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
@@ -454,7 +454,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object, String, Object[], Class[])}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -497,7 +497,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link #invokeExactMethod(Object object,String methodName,Object [] args)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
@@ -547,7 +547,7 @@ public class MethodUtils {
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
-     * <p>The behaviour of this method is less deterministic
+     * <p>The behavior of this method is less deterministic
      * than {@link
      * #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
      * It loops through all methods with names that match
@@ -917,7 +917,7 @@ public class MethodUtils {
      * In other words, it finds a method with the given name
      * that will take the parameters given.</p>
      *
-     * <p>This method is slightly undeterministic since it loops
+     * <p>This method is slightly indeterministic since it loops
      * through methods names and return the first matching method.</p>
      *
      * <p>This method is used by
@@ -1046,12 +1046,12 @@ public class MethodUtils {
             //
             // Unfortunately, using reflection to invoke these methods
             // seems to (wrongly) to prevent access even when the method
-            // modifer is public.
+            // modifier is public.
             //
             // The following workaround solves the problem but will only
-            // work from sufficiently privilages code.
+            // work from sufficiently privileges code.
             //
-            // Better workarounds would be greatfully accepted.
+            // Better workarounds would be gratefully accepted.
             //
             if (!method.isAccessible()) {
                 method.setAccessible(true);
@@ -1138,7 +1138,7 @@ public class MethodUtils {
         }
 
         /*
-         * If the destination class is null, we've travelled all the way up to
+         * If the destination class is null, we've traveled all the way up to
          * an Object match. We'll penalize this by adding 1.5 to the cost.
          */
         if (srcClass == null) {

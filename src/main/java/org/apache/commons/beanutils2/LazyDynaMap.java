@@ -25,10 +25,10 @@ import java.util.Map;
  * <p>Its a <i>light weight</i> <code>DynaBean</code> implementation because there is no
  *    actual <code>DynaClass</code> associated with this <code>DynaBean</code> - in fact
  *    it implements the <code>DynaClass</code> interface itself providing <i>pseudo</i> DynaClass
- *    behaviour from the actual values stored in the <code>Map</code>.</p>
+ *    behavior from the actual values stored in the <code>Map</code>.</p>
  *
  * <p>As well providing rhe standard <code>DynaBean</code> access to the <code>Map</code>'s properties
- *    this class also provides the usual <i>Lazy</i> behaviour:</p>
+ *    this class also provides the usual <i>Lazy</i> behavior:</p>
  *    <ul>
  *       <li>Properties don't need to be pre-defined in a <code>DynaClass</code></li>
  *       <li>Indexed properties (<code>Lists</code> or <code>Arrays</code>) are automatically instantiated
@@ -203,7 +203,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p>If the property is not found and the <code>returnNull</code> indicator is
      *    <code>false</code> a new property descriptor is created and returned (although
      *    its not actually added to the DynaClass's properties). This is the default
-     *    beahviour.</p>
+     *    behavior.</p>
      *
      * <p>The reason for not returning a <code>null</code> property descriptor is that
      *    <code>BeanUtils</code> uses this method to check if a property exists

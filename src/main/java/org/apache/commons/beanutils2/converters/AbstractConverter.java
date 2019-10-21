@@ -183,7 +183,7 @@ public abstract class AbstractConverter implements Converter {
      * Convert the input object into a String.
      * <p>
      * <b>N.B.</b>This implementation simply uses the value's
-     * <code>toString()</code> method and should be overriden if a
+     * <code>toString()</code> method and should be overridden if a
      * more sophisticated mechanism for <i>conversion to a String</i>
      * is required.
      *
@@ -214,7 +214,7 @@ public abstract class AbstractConverter implements Converter {
      * Return the first element from an Array (or Collection)
      * or the value unchanged if not an Array (or Collection).
      *
-     * N.B. This needs to be overriden for array/Collection converters.
+     * N.B. This needs to be overridden for array/Collection converters.
      *
      * @param value The value to convert
      * @return The first element in an Array (or Collection)

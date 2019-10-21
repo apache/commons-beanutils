@@ -63,7 +63,7 @@ import org.apache.commons.logging.LogFactory;
  *       a property with an <code>ArrayList</code> type to the <code>DynaClass</code> when
  *       the <code>set(name, index, value)</code> method is called.
  *       It will also instantiate a new <code>ArrayList</code> and automatically <i>grow</i>
- *       the <code>List</code> so that it is big enough to accomodate the index being set.
+ *       the <code>List</code> so that it is big enough to accommodate the index being set.
  *       <code>ArrayList</code> is the default indexed property that LazyDynaBean uses but
  *       this can be easily changed by overriding the <code>defaultIndexedProperty(name)</code>
  *       method.</p>
@@ -78,7 +78,7 @@ import org.apache.commons.logging.LogFactory;
  *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
  *      new <code>List</code> or <code>Array</code> as specified by the property's type
  *      in the <code>DynaClass</code> and automatically <i>grow</i> the <code>List</code>
- *      or <code>Array</code> so that it is big enough to accomodate the index being set.</p>
+ *      or <code>Array</code> so that it is big enough to accommodate the index being set.</p>
  *
  *     <pre><code>
  *         DynaBean myBean = new LazyDynaBean();

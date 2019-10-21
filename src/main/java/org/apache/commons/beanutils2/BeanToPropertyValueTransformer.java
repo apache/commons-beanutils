@@ -82,14 +82,14 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
     /**
      * <p>Should null objects on the property path throw an <code>IllegalArgumentException</code>?</p>
      * <p>
-     * Determines whether <code>null</code> objects in the property path will genenerate an
+     * Determines whether <code>null</code> objects in the property path will generate an
      * <code>IllegalArgumentException</code> or not. If set to <code>true</code> then if any objects
      * in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
+     * not re-thrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
      * objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
+     * re-thrown.
      * </p>
      */
     private boolean ignoreNull;
@@ -111,11 +111,11 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
      * Constructs a Transformer and sets ignoreNull.
      * Constructor which takes the name of the property that will be used in the transformation and
      * a boolean which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      *
      * @param propertyName The name of the property that will be used in the transformation.
      * @param ignoreNull Determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the <code>propertyName</code> is <code>null</code> or
      * empty.
      */
@@ -204,16 +204,16 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
 
     /**
      * Returns the flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
+     * generate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
      * if any objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
+     * not re-thrown and <code>null</code> will be returned.  If set to <code>false</code> then if any
      * objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
+     * re-thrown.
      *
      * @return The flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      */
     public boolean isIgnoreNull() {
         return ignoreNull;

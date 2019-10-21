@@ -128,14 +128,14 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
     /**
      * <p>Should <code>null</code> objects in the property path be ignored?</p>
      * <p>
-     * Determines whether <code>null</code> objects in the property path will genenerate an
+     * Determines whether <code>null</code> objects in the property path will generate an
      * <code>IllegalArgumentException</code> or not. If set to <code>true</code> then if any objects
      * in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>false</code> will be returned.  If set to <code>false</code> then if
+     * not re-thrown and <code>false</code> will be returned.  If set to <code>false</code> then if
      * any objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
+     * re-thrown.
      * </p>
      */
     private boolean ignoreNull;
@@ -155,12 +155,12 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
     /**
      * Constructor which takes the name of the property, its expected value
      * to be used in evaluation, and a boolean which determines whether <code>null</code> objects in
-     * the property path will genenerate an <code>IllegalArgumentException</code> or not.
+     * the property path will generate an <code>IllegalArgumentException</code> or not.
      *
      * @param propertyName The name of the property that will be evaluated against the expected value.
      * @param propertyValue The value to use in object evaluation.
      * @param ignoreNull Determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
     public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue, final boolean ignoreNull) {
@@ -176,7 +176,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
     }
 
     /**
-     * Evaulates the object provided against the criteria specified when this
+     * Evaluates the object provided against the criteria specified when this
      * <code>BeanPropertyValueEqualsPredicate</code> was constructed.  Equality is based on
      * either reference or logical equality as defined by the property object's equals method. If
      * any object in the property path leading up to the target property is <code>null</code> then
@@ -275,16 +275,16 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
 
     /**
      * Returns the flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
+     * generate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
      * if any objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown and <code>false</code> will be returned.  If set to <code>false</code> then if
+     * not re-thrown and <code>false</code> will be returned.  If set to <code>false</code> then if
      * any objects in the property path evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
+     * re-thrown.
      *
      * @return The flag which determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      */
     public boolean isIgnoreNull() {
         return ignoreNull;

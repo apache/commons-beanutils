@@ -195,7 +195,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public String getIndexedProperty(
                                     final Object bean,
@@ -227,7 +227,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     @Override
     public String getIndexedProperty(
@@ -258,7 +258,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public String getIndexedProperty(final Object bean,
                                             final String name, final int index, final String pattern)
@@ -286,7 +286,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     @Override
     public String getIndexedProperty(final Object bean,

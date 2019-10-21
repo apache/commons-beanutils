@@ -102,7 +102,7 @@ public class BeanUtilsBean {
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
-    // --------------------------------------------------------- Constuctors
+    // --------------------------------------------------------- Constructors
 
     /**
      * <p>Constructs an instance using new property
@@ -450,7 +450,7 @@ public class BeanUtilsBean {
      * is provided (i.e. where the getReadMethod() returns non-null).</p>
      *
      * <p>This map can be fed back to a call to
-     * <code>BeanUtils.populate()</code> to reconsitute the same set of
+     * <code>BeanUtils.populate()</code> to re-constitute the same set of
      * properties, modulo differences for read-only and write-only
      * properties, but only if there are no indexed properties.</p>
      *
