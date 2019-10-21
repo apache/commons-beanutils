@@ -73,7 +73,7 @@ public final class PathConverter extends AbstractConverter {
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
-        if (Path.class.equals(type)) {
+        if (Path.class.isAssignableFrom(type)) {
             return type.cast(Paths.get(String.valueOf(value)));
         }
 
