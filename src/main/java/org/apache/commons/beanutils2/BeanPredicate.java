@@ -61,7 +61,7 @@ public class BeanPredicate<T> implements Predicate<T> {
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
     @Override
-    public boolean test(Object object) {
+    public boolean test(final Object object) {
         boolean evaluation = false;
 
         try {
