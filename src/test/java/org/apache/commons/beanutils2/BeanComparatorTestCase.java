@@ -40,7 +40,7 @@ public class BeanComparatorTestCase extends TestCase {
     // ---------------------------------------------------------- Constructors
 
     /**
-     * Construct a new instance of this test case.
+     * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
@@ -51,7 +51,7 @@ public class BeanComparatorTestCase extends TestCase {
     // -------------------------------------------------- Overall Test Methods
 
     /**
-     * Set up instance variables required by this test case.
+     * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() {
@@ -62,14 +62,14 @@ public class BeanComparatorTestCase extends TestCase {
 
 
     /**
-     * Return the tests included in this test suite.
+     * Returns the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(BeanComparatorTestCase.class);
     }
 
     /**
-     * Tear down instance variables required by this test case.
+     * Tears down instance variables required by this test case.
      */
     @Override
     public void tearDown() {
@@ -81,7 +81,7 @@ public class BeanComparatorTestCase extends TestCase {
     // ------------------------------------------------ Individual Test Methods
 
     /**
-     *  tests comparing two beans via their name using the default Comparator
+     *  Tests comparing two beans via their name using the default Comparator
      */
     public void testSimpleCompare() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>(
@@ -92,7 +92,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans via their name using the default Comparator, but the inverse
+     *  Tests comparing two beans via their name using the default Comparator, but the inverse
      */
     public void testSimpleCompareInverse() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>(
@@ -103,7 +103,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans via their name using the default Comparator where they have the same value.
+     *  Tests comparing two beans via their name using the default Comparator where they have the same value.
      */
     public void testCompareIdentical() {
         alphaBean1 = new AlphaBean("alphabean");
@@ -116,7 +116,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing one bean against itself.
+     *  Tests comparing one bean against itself.
      */
     public void testCompareBeanAgainstSelf() {
         final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>(
@@ -127,7 +127,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans via their name using the default Comparator, but with one of the beans
+     *  Tests comparing two beans via their name using the default Comparator, but with one of the beans
      *  being null.
      */
     public void testCompareWithNulls() {
@@ -143,7 +143,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans who don't have a property
+     *  Tests comparing two beans who don't have a property
      */
     public void testCompareOnMissingProperty() {
         try {
@@ -159,7 +159,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans on a boolean property, which is not possible.
+     *  Tests comparing two beans on a boolean property, which is not possible.
      */
     public void testCompareOnBooleanProperty() {
         try {
@@ -183,7 +183,7 @@ public class BeanComparatorTestCase extends TestCase {
     }
 
     /**
-     *  tests comparing two beans on a boolean property, then changing the property and testing
+     *  Tests comparing two beans on a boolean property, then changing the property and testing/
      */
     public void testSetProperty() {
         final TestBean testBeanA = new TestBean();
