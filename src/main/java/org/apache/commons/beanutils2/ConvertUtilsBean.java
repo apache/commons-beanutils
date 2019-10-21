@@ -81,7 +81,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.lang.String (default to null)</li>
  * <li>java.io.File (no default value)</li>
  * <li>java.nio.file.Path (no default value)</li>
- * <li>java.net.uRL (no default value)</li>
+ * <li>java.net.URL (no default value)</li>
  * <li>java.net.URI (no default value)</li>
  * <li>java.util.UUID (no default value)</li>
  * <li>java.sql.Date (no default value)</li>
