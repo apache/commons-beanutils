@@ -310,7 +310,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 }
                 mappedPropertyType = params[1];
             }
-            mappedPropertyTypeRef = new SoftReference<Class<?>>(mappedPropertyType);
+            mappedPropertyTypeRef = new SoftReference<>(mappedPropertyType);
         } catch (final IntrospectionException ex) {
             throw ex;
         }
@@ -433,11 +433,11 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 className = m.getDeclaringClass().getName();
                 methodName = m.getName();
                 methodRef = new SoftReference<>(m);
-                classRef = new WeakReference<Class<?>>(m.getDeclaringClass());
+                classRef = new WeakReference<>(m.getDeclaringClass());
                 final Class<?>[] types = m.getParameterTypes();
                 if (types.length == 2) {
-                    writeParamTypeRef0 = new WeakReference<Class<?>>(types[0]);
-                    writeParamTypeRef1 = new WeakReference<Class<?>>(types[1]);
+                    writeParamTypeRef0 = new WeakReference<>(types[0]);
+                    writeParamTypeRef1 = new WeakReference<>(types[1]);
                     writeParamClassNames = new String[2];
                     writeParamClassNames[0] = types[0].getName();
                     writeParamClassNames[1] = types[1].getName();
@@ -454,7 +454,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 if (clazz == null) {
                     clazz = reLoadClass();
                     if (clazz != null) {
-                        classRef = new WeakReference<Class<?>>(clazz);
+                        classRef = new WeakReference<>(clazz);
                     }
                 }
                 if (clazz == null) {
@@ -468,14 +468,14 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     if (paramTypes[0] == null) {
                         paramTypes[0] = reLoadClass(writeParamClassNames[0]);
                         if (paramTypes[0] != null) {
-                            writeParamTypeRef0 = new WeakReference<Class<?>>(paramTypes[0]);
+                            writeParamTypeRef0 = new WeakReference<>(paramTypes[0]);
                         }
                     }
                     paramTypes[1] = writeParamTypeRef1.get();
                     if (paramTypes[1] == null) {
                         paramTypes[1] = reLoadClass(writeParamClassNames[1]);
                         if (paramTypes[1] != null) {
-                            writeParamTypeRef1 = new WeakReference<Class<?>>(paramTypes[1]);
+                            writeParamTypeRef1 = new WeakReference<>(paramTypes[1]);
                         }
                     }
                 } else {

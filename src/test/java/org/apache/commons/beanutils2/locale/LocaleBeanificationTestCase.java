@@ -143,7 +143,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();
-        final WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
+        final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader, queue);
         Integer test = new Integer(1);
 
         final WeakReference<Integer> testReference = new WeakReference<>(test, queue);

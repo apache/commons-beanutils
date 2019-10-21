@@ -44,7 +44,7 @@ public class MemoryTestCase {
         Thread.currentThread().setContextClassLoader(componentLoader);
         Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
-        final WeakReference<ClassLoader> ref = new WeakReference<ClassLoader>(componentLoader);
+        final WeakReference<ClassLoader> ref = new WeakReference<>(componentLoader);
         componentLoader = null;
 
         forceGarbageCollection(ref);
@@ -225,7 +225,7 @@ public class MemoryTestCase {
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
             // Emulate a container "undeploying" the component. This should
             // make component loader available for garbage collection (we hope)
-            final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<ClassLoader>(componentLoader);
+            final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<>(componentLoader);
             componentLoader = null;
 
             // force garbage collection and  verify that the componentLoader
