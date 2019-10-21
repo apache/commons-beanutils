@@ -56,7 +56,7 @@ public class BeanPredicate<T> implements Predicate<T> {
      * Evaluates the given object by applying the {@link #getPredicate()}
      * to a property value named by {@link #getPropertyName()}.
      *
-     * @param object The object being evaluated
+     * @param object The object to test
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
@@ -108,7 +108,7 @@ public class BeanPredicate<T> implements Predicate<T> {
 
     /**
      * Gets the <code>Predicate</code> to be applied to the value of the named property
-     * during {@link #evaluate}.
+     * during {@link #test(Object)}.
      * @return <code>Predicate</code>, not null
      */
     public Predicate<T> getPredicate() {

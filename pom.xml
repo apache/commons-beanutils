@@ -344,6 +344,7 @@
   </dependencies>
 
   <build>
+      <defaultGoal>clean apache-rat:check verify javadoc:javadoc</defaultGoal>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
