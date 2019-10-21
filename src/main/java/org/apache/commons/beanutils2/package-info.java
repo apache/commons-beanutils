@@ -1017,8 +1017,7 @@
  * <h2>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h2>
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
- * comparisions. By default,
- * <code>org.apache.commons.collections4.comparators.ComparableComparator</code>
+ * comparisions. By default, a natural ordering comparator 
  * is used which imposes a natural order. If you want to change the order,
  * then a custom Comparator should be created and passed into the
  * appropriate constructor.
