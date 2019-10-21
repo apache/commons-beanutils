@@ -83,7 +83,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator( final String property ) {
-        this( property, DefaultComparator.INSTANCE );
+        this( property, NaturalOrderingComparator.INSTANCE );
     }
 
     /**
@@ -107,7 +107,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         if (comparator != null) {
             this.comparator = comparator;
         } else {
-            this.comparator = DefaultComparator.INSTANCE;
+            this.comparator = NaturalOrderingComparator.INSTANCE;
         }
     }
 
@@ -248,19 +248,19 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param <E> the type of objects compared by this comparator
      * @see java.util.Collections#reverseOrder()
      */
-    private static class DefaultComparator<E extends Comparable<? super E>> implements Comparator<E>, Serializable {
+    private static class NaturalOrderingComparator<E extends Comparable<? super E>> implements Comparator<E>, Serializable {
 
         /** Serialization version. */
         private static final long serialVersionUID=-291439688585137865L;
 
         /** The singleton instance. */
         @SuppressWarnings("rawtypes")
-        public static final DefaultComparator INSTANCE = new DefaultComparator();
+        public static final NaturalOrderingComparator INSTANCE = new NaturalOrderingComparator();
 
         /**
          * Private constructor to prevent instantiation. Only use INSTANCE.
          */
-        private DefaultComparator() {
+        private NaturalOrderingComparator() {
             super();
         }
 
@@ -276,7 +276,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
 
         @Override
         public int hashCode() {
-            return "ComparableComparator".hashCode();
+            return "NaturalOrderingComparator".hashCode();
         }
 
         @Override
