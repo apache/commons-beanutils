@@ -23,10 +23,13 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.UUID;
 
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.BigDecimalConverter;
@@ -43,12 +46,15 @@ import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
 import org.apache.commons.beanutils2.converters.IntegerConverter;
 import org.apache.commons.beanutils2.converters.LongConverter;
+import org.apache.commons.beanutils2.converters.PathConverter;
 import org.apache.commons.beanutils2.converters.ShortConverter;
 import org.apache.commons.beanutils2.converters.SqlDateConverter;
 import org.apache.commons.beanutils2.converters.SqlTimeConverter;
 import org.apache.commons.beanutils2.converters.SqlTimestampConverter;
 import org.apache.commons.beanutils2.converters.StringConverter;
+import org.apache.commons.beanutils2.converters.URIConverter;
 import org.apache.commons.beanutils2.converters.URLConverter;
+import org.apache.commons.beanutils2.converters.UUIDConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -74,7 +80,10 @@ import org.apache.commons.logging.LogFactory;
  * <li>short and java.lang.Short (default to zero)</li>
  * <li>java.lang.String (default to null)</li>
  * <li>java.io.File (no default value)</li>
- * <li>java.net.URL (no default value)</li>
+ * <li>java.nio.file.Path (no default value)</li>
+ * <li>java.net.uRL (no default value)</li>
+ * <li>java.net.URI (no default value)</li>
+ * <li>java.util.UUID (no default value)</li>
  * <li>java.sql.Date (no default value)</li>
  * <li>java.sql.Time (no default value)</li>
  * <li>java.sql.Timestamp (no default value)</li>
@@ -444,10 +453,13 @@ public class ConvertUtilsBean {
      *     <li><code>java.util.Date.class</code> - {@link DateConverter}</li>
      *     <li><code>java.util.Calendar.class</code> - {@link CalendarConverter}</li>
      *     <li><code>File.class</code> - {@link FileConverter}</li>
+     *     <li><code>Path.class</code> - {@link PathConverter}</li>
      *     <li><code>java.sql.Date.class</code> - {@link SqlDateConverter}</li>
      *     <li><code>java.sql.Time.class</code> - {@link SqlTimeConverter}</li>
      *     <li><code>java.sql.Timestamp.class</code> - {@link SqlTimestampConverter}</li>
      *     <li><code>URL.class</code> - {@link URLConverter}</li>
+     *     <li><code>URI.class</code> - {@link URIConverter}</li>
+     *     <li><code>UUID.class</code> - {@link UUIDConverter}</li>
      * </ul>
      * @param throwException <code>true</code> if the converters should
      * throw an exception when a conversion error occurs, otherwise <code>
@@ -458,10 +470,13 @@ public class ConvertUtilsBean {
         register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
         register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
         register(File.class,          throwException ? new FileConverter()         : new FileConverter(null));
+        register(Path.class,          throwException ? new PathConverter()         : new PathConverter(null));
         register(java.sql.Date.class, throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
         register(java.sql.Time.class, throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
         register(Timestamp.class,     throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
         register(URL.class,           throwException ? new URLConverter()          : new URLConverter(null));
+        register(URI.class,           throwException ? new URIConverter()          : new URIConverter(null));
+        register(UUID.class,          throwException ? new UUIDConverter()         : new UUIDConverter(null));
     }
 
     /**
@@ -505,10 +520,13 @@ public class ConvertUtilsBean {
         registerArrayConverter(java.util.Date.class, new DateConverter(),         throwException, defaultArraySize);
         registerArrayConverter(Calendar.class,       new DateConverter(),         throwException, defaultArraySize);
         registerArrayConverter(File.class,           new FileConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Path.class,           new PathConverter(),         throwException, defaultArraySize);
         registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),      throwException, defaultArraySize);
         registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),      throwException, defaultArraySize);
         registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(), throwException, defaultArraySize);
         registerArrayConverter(URL.class,            new URLConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(URI.class,            new URIConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(UUID.class,           new UUIDConverter(),         throwException, defaultArraySize);
 
     }
 
