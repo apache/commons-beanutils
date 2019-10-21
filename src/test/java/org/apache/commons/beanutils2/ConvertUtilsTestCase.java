@@ -618,19 +618,9 @@ public class ConvertUtilsTestCase extends TestCase {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     // We need to use raw types in order to test legacy converters
     public void testConvertToString() throws Exception {
-        final Converter dummyConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return value;
-            }
-        };
+        final Converter dummyConverter = (type, value) -> value;
 
-        final Converter fooConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return "Foo-Converter";
-            }
-        };
+        final Converter fooConverter = (type, value) -> "Foo-Converter";
 
         final DateConverter dateConverter = new DateConverter();
         dateConverter.setLocale(Locale.US);
