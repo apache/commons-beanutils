@@ -23,7 +23,8 @@ public class AlphaBean extends AbstractParent implements Child {
 
     private String name;
 
-    public AlphaBean() {}
+    public AlphaBean() {
+    }
 
     public AlphaBean(final String name) {
         setName(name);
@@ -41,5 +42,7 @@ public class AlphaBean extends AbstractParent implements Child {
     /**
      * Used for testing that correct exception is thrown.
      */
-    public void bogus(final String badParameter){}
+    public void bogus(final String badParameter) {
+        // noop
+    }
 }
