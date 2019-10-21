@@ -83,7 +83,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator( final String property ) {
-        this( property, NaturalOrderingComparator.INSTANCE );
+        this( property, NaturalOrderComparator.INSTANCE );
     }
 
     /**
@@ -107,7 +107,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         if (comparator != null) {
             this.comparator = comparator;
         } else {
-            this.comparator = NaturalOrderingComparator.INSTANCE;
+            this.comparator = NaturalOrderComparator.INSTANCE;
         }
     }
 
@@ -248,19 +248,19 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param <E> the type of objects compared by this comparator
      * @see java.util.Collections#reverseOrder()
      */
-    private static class NaturalOrderingComparator<E extends Comparable<? super E>> implements Comparator<E>, Serializable {
+    private static class NaturalOrderComparator<E extends Comparable<? super E>> implements Comparator<E>, Serializable {
 
         /** Serialization version. */
         private static final long serialVersionUID=-291439688585137865L;
 
         /** The singleton instance. */
         @SuppressWarnings("rawtypes")
-        public static final NaturalOrderingComparator INSTANCE = new NaturalOrderingComparator();
+        public static final NaturalOrderComparator INSTANCE = new NaturalOrderComparator();
 
         /**
          * Private constructor to prevent instantiation. Only use INSTANCE.
          */
-        private NaturalOrderingComparator() {
+        private NaturalOrderComparator() {
             super();
         }
 
