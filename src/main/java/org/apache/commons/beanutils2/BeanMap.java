@@ -101,7 +101,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
     /**
      * Renders a string representation of this object.
-     * 
+     *
      * @return a <code>String</code> representation of this object
      */
     @Override
@@ -594,7 +594,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * Map entry used by {@link BeanMap}.
      */
     protected static class Entry extends AbstractMap.SimpleEntry<String, Object> {
-        
+
         private static final long serialVersionUID = 1L;
         private final BeanMap owner;
 

@@ -358,15 +358,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Map.Entry implementation.
      */
     private static class MapEntry<K> implements Map.Entry<K, Object> {
-        
+
         private final K key;
         private final Object value;
-        
+
         MapEntry(final K key, final Object value) {
             this.key = key;
             this.value = value;
         }
-        
+
         @Override
         public boolean equals(final Object o) {
             if (!(o instanceof Map.Entry)) {
@@ -377,22 +377,22 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
                     (value == null ? e.getValue() == null
                                    : value.equals(e.getValue()));
         }
-        
+
         @Override
         public int hashCode() {
             return key.hashCode() + (value == null ? 0 : value.hashCode());
         }
-        
+
         @Override
         public K getKey() {
             return key;
         }
-        
+
         @Override
         public Object getValue() {
             return value;
         }
-        
+
         @Override
         public Object setValue(final Object value) {
             throw new UnsupportedOperationException();
