@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.BeanUtilsBean;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
 import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
