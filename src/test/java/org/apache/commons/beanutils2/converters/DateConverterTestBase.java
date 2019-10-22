@@ -19,6 +19,12 @@ package org.apache.commons.beanutils2.converters;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -99,7 +105,11 @@ public abstract class DateConverterTestBase extends TestCase {
             "from Calendar",
             "from SQL Date",
             "from SQL Time",
-            "from SQL Timestamp"
+            "from SQL Timestamp",
+            "from LocalDate",
+            "from LocalDateTime",
+            "from ZonedDateTime",
+            "from OffsetDateTime"
         };
 
         final long now = System.currentTimeMillis();
@@ -109,7 +119,11 @@ public abstract class DateConverterTestBase extends TestCase {
             new java.util.GregorianCalendar(),
             new java.sql.Date(now),
             new java.sql.Time(now),
-            new java.sql.Timestamp(now)
+            new java.sql.Timestamp(now),
+            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDateTime(),
+            ZonedDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault()),
+            OffsetDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault())
         };
 
         // Initialize calendar also with same ms to avoid a failing test in a new time slice
@@ -120,8 +134,14 @@ public abstract class DateConverterTestBase extends TestCase {
             assertNotNull("Convert " + message[i] + " should not be null", val);
             assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
                        getExpectedType().isInstance(val));
+
+            long test = now;
+            if (date[i] instanceof LocalDate || val instanceof LocalDate) {
+            	test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+			}
+
             assertEquals("Convert " + message[i] + " should return a " + date[0],
-                         now, getTimeInMillis(val));
+            		test, getTimeInMillis(val));
         }
     }
 
@@ -201,6 +221,9 @@ public abstract class DateConverterTestBase extends TestCase {
 
         // java.sql.Time --> String Conversion
         stringConversion(converter, expected, toSqlTime(calendar));
+
+        // java.time.LocalDateTime --> String Conversion
+        stringConversion(converter, expected, toLocalDateTime(calendar));
 
         stringConversion(converter, null, null);
         stringConversion(converter, "", "");
@@ -509,6 +532,15 @@ public abstract class DateConverterTestBase extends TestCase {
     java.sql.Timestamp toSqlTimestamp(final Calendar calendar) {
         return new java.sql.Timestamp(getTimeInMillis(calendar));
     }
+    
+    /**
+     * Convert a Calendar to a java.time.LocalDateTime
+     * @param calendar The calendar object to convert
+     * @return The converted java.time.LocalDate
+     */
+    LocalDateTime toLocalDateTime(final Calendar calendar) {
+        return Instant.ofEpochMilli(calendar.getTimeInMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 
     /**
      * Convert a Date or Calendar objects to the time in millisconds
@@ -526,6 +558,22 @@ public abstract class DateConverterTestBase extends TestCase {
             long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
             return timeInMillis;
+        }
+
+        if (date instanceof LocalDate) {
+            return  ((LocalDate)date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof LocalDateTime) {
+            return  ((LocalDateTime)date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof ZonedDateTime) {
+            return  ((ZonedDateTime)date).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof OffsetDateTime) {
+            return  ((OffsetDateTime)date).toInstant().toEpochMilli();
         }
 
         if (date instanceof Calendar) {
