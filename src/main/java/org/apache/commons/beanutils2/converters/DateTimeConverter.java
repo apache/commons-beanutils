@@ -442,25 +442,25 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // java.time.LocalDateTime
         if (type.equals(LocalDate.class)) {
-        	LocalDate localDate =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
+        	final LocalDate localDate =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
             return type.cast(localDate);
         }
 
         // java.time.LocalDateTime
         if (type.equals(LocalDateTime.class)) {
-        	LocalDateTime localDateTime =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
+        	final LocalDateTime localDateTime =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
             return type.cast(localDateTime);
         }
 
         // java.time.ZonedDateTime
         if (type.equals(ZonedDateTime.class)) {
-        	ZonedDateTime zonedDateTime =  ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+        	final ZonedDateTime zonedDateTime =  ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
             return type.cast(zonedDateTime);
         }
 
         // java.time.OffsetDateTime
         if (type.equals(OffsetDateTime.class)) {
-        	OffsetDateTime offsetDateTime =  OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+        	final OffsetDateTime offsetDateTime =  OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
             return type.cast(offsetDateTime);
         }
 

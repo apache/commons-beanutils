@@ -85,7 +85,7 @@ public class PathConverterTestCase extends TestCase {
         };
 
         // get the separator so test works on Windows or *nix
-        String separator = File.pathSeparator;
+        final String separator = File.pathSeparator;
 
         final Object[] input = {
         	separator + "foo"+separator+"bar"+separator+"baz",
