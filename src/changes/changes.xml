@@ -73,7 +73,7 @@
         New converters for Java 8 Time classes LocalDate, LocaleDateTime, ZonedDateTime, OffsetDateTime #13.
       </action>
       <action issue="BEANUTILS-529" dev="ggregory" type="update" due-to="Gary Gregory">
-        Log at the debug level or below, not info or above.
+        Log at the debug level instead of info.
       </action>
     </release>
 
