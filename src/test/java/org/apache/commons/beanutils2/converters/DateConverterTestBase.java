@@ -532,7 +532,7 @@ public abstract class DateConverterTestBase extends TestCase {
     java.sql.Timestamp toSqlTimestamp(final Calendar calendar) {
         return new java.sql.Timestamp(getTimeInMillis(calendar));
     }
-    
+
     /**
      * Convert a Calendar to a java.time.LocalDateTime
      * @param calendar The calendar object to convert

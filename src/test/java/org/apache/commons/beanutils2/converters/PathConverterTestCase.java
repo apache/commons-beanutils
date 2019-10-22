@@ -83,7 +83,7 @@ public class PathConverterTestCase extends TestCase {
             "from String",
             "from String",
         };
-        
+
         // get the separator so test works on Windows or *nix
         String separator = File.pathSeparator;
 
