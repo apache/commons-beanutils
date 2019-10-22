@@ -25,7 +25,7 @@ package org.apache.commons.beanutils2.expression;
  * <li><strong>Simple (<code>name</code>)</strong> - The specified
  *     <code>name</code> identifies an individual property of a particular
  *     JavaBean.  The name of the actual getter or setter method to be used
- *     is determined using standard JavaBeans instrospection, so that (unless
+ *     is determined using standard JavaBeans introspection, so that (unless
  *     overridden by a <code>BeanInfo</code> class, a property named "xyz"
  *     will have a getter method named <code>getXyz()</code> or (for boolean
  *     properties only) <code>isXyz()</code>, and a setter method named
@@ -174,7 +174,7 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is indexed,
+     * @return <code>true</code> if the expression is indexed,
      *  otherwise <code>false</code>
      */
     @Override
@@ -197,7 +197,7 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is mapped,
+     * @return <code>true</code> if the expression is mapped,
      *  otherwise <code>false</code>
      */
     @Override
@@ -254,7 +254,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Remove the last property expresson from the
+     * Remove the last property expression from the
      * current expression.
      *
      * @param expression The property expression

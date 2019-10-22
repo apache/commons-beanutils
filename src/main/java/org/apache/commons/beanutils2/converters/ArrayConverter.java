@@ -42,7 +42,7 @@ import org.apache.commons.beanutils2.Converter;
  *         appropriate for the type, to convert individual elements
  *         of the array. This leverages the power of existing converters
  *         without having to replicate their functionality for converting
- *         to the element type and removes the need to create a specifc
+ *         to the element type and removes the need to create a specific
  *         array type converters.</li>
  *     <li><b>Arrays or Collections</b> - can convert from either arrays or
  *         Collections to an array, limited only by the capability
@@ -111,7 +111,7 @@ import org.apache.commons.beanutils2.Converter;
  *    ArrayConverter arrayConverter = new ArrayConverter(int[].class, integerConverter);
  *
  *    // Construct a "Matrix" Converter which converts arrays of integer arrays using
- *    // the pre-ceeding ArrayConverter as the element Converter.
+ *    // the preceding ArrayConverter as the element Converter.
  *    // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
  *    //      Also the delimiter used by the first ArrayConverter needs to be added to the
  *    //      "allowed characters" for this one.
@@ -427,9 +427,9 @@ public class ArrayConverter extends AbstractConverter {
      * @param value String value to be parsed
      * @return List of parsed elements.
      *
-     * @throws ConversionException if the syntax of <code>svalue</code>
+     * @throws ConversionException if the syntax of <code>value</code>
      *  is not syntactically valid
-     * @throws NullPointerException if <code>svalue</code>
+     * @throws NullPointerException if <code>value</code>
      *  is <code>null</code>
      */
     private List<String> parseElements(final Class<?> type, String value) {

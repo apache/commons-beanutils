@@ -17,7 +17,7 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.lang.Class</b> objects.
  * <p>
  * The class will be loaded from the thread context class

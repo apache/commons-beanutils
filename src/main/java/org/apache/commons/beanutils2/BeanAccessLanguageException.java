@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2;
 
 /**
  * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query
- * against given bean. This is a runtime exception and access langauges are encouraged
+ * against given bean. This is a runtime exception and access languages are encouraged
  * to subclass to create custom exceptions whenever appropriate.
  *
  * @since 1.7
@@ -29,7 +29,7 @@ public class BeanAccessLanguageException extends IllegalArgumentException {
 
     private static final long serialVersionUID = 1L;
 
-    // --------------------------------------------------------- Constuctors
+    // --------------------------------------------------------- Constructors
 
     /**
      * Constructs a <code>BeanAccessLanguageException</code> without a detail message.

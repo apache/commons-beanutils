@@ -227,7 +227,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
     /**
      * <p>Loads the class of the given name which by default uses the class loader used
      * to load this library.
-     * Dervations of this class could implement alternative class loading policies such as
+     * Derivations of this class could implement alternative class loading policies such as
      * using custom ClassLoader or using the Threads's context class loader etc.
      * </p>
      * @param className The name of the class to load

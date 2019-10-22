@@ -29,7 +29,7 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.lang.Number</b> objects.
  * <p>
  * This implementation handles conversion for the following

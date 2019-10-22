@@ -121,7 +121,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#copyProperties
      */
     public static void copyProperties(final Object dest, final Object orig)
@@ -147,7 +147,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#describe
      */
     public static Map<String, Object> describe(final Object bean)
@@ -179,7 +179,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getIndexedProperty(Object,String)
      */
     public static Object getIndexedProperty(final Object bean, final String name)
@@ -211,7 +211,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getIndexedProperty(Object,String, int)
      */
     public static Object getIndexedProperty(final Object bean,
@@ -239,7 +239,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getMappedProperty(Object,String)
      */
     public static Object getMappedProperty(final Object bean, final String name)
@@ -267,7 +267,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getMappedProperty(Object,String, String)
      */
     public static Object getMappedProperty(final Object bean,
@@ -315,7 +315,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException
      * if the property accessor method throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getNestedProperty
      */
     public static Object getNestedProperty(final Object bean, final String name)
@@ -346,7 +346,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getProperty
      */
     public static Object getProperty(final Object bean, final String name)
@@ -379,7 +379,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getPropertyDescriptor
      */
     public static PropertyDescriptor getPropertyDescriptor(final Object bean,
@@ -432,7 +432,7 @@ public class PropertyUtils {
 
 
     /**
-     * <p>Return the Java Class repesenting the property editor class that has
+     * <p>Return the Java Class representing the property editor class that has
      * been registered for this property (if any).</p>
      *
      * <p>For more details see <code>PropertyUtilsBean</code>.</p>
@@ -451,7 +451,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getPropertyEditorClass(Object,String)
      */
     public static Class<?> getPropertyEditorClass(final Object bean, final String name)
@@ -484,7 +484,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getPropertyType(Object, String)
      */
     public static Class<?> getPropertyType(final Object bean, final String name)
@@ -531,7 +531,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#getSimpleProperty
      */
     public static Object getSimpleProperty(final Object bean, final String name)
@@ -627,7 +627,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
     public static void setIndexedProperty(final Object bean, final String name,
@@ -660,7 +660,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
     public static void setIndexedProperty(final Object bean, final String name,
@@ -688,7 +688,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setMappedProperty(Object, String, Object)
      */
     public static void setMappedProperty(final Object bean, final String name,
@@ -716,7 +716,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setMappedProperty(Object, String, String, Object)
      */
     public static void setMappedProperty(final Object bean, final String name,
@@ -747,7 +747,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setNestedProperty
      */
     public static void setNestedProperty(final Object bean,
@@ -778,7 +778,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setProperty
      */
     public static void setProperty(final Object bean, final String name, final Object value)
@@ -809,7 +809,7 @@ public class PropertyUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      * @see PropertyUtilsBean#setSimpleProperty
      */
     public static void setSimpleProperty(final Object bean,

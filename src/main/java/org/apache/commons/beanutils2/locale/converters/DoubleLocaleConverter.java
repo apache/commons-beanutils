@@ -42,7 +42,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      */
     public DoubleLocaleConverter() {
@@ -66,7 +66,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
      */
@@ -91,10 +91,10 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public DoubleLocaleConverter(final Locale locale, final String pattern) {
 
@@ -107,7 +107,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      * if a conversion error occurs.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DoubleLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
@@ -120,7 +120,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      * @param defaultValue  The default value to be returned
      */
@@ -146,7 +146,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
@@ -173,11 +173,11 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public DoubleLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -191,7 +191,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DoubleLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
@@ -204,7 +204,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      * specified type. This method will return Double type.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed

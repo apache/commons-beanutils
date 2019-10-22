@@ -114,7 +114,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, String)
      */
@@ -142,7 +142,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String)
      */
@@ -154,7 +154,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Return the value of the specified locale-sensetive indexed property
+     * <p>Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the specified conversion pattern.</p>
      *
      * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
@@ -170,7 +170,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int, String)
      */
@@ -183,7 +183,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Return the value of the specified locale-sensetive indexed property
+     * <p>Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.</p>
      *
@@ -199,7 +199,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getIndexedProperty(Object, String, int)
      */
@@ -227,7 +227,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String, String)
      */
@@ -254,7 +254,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getSimpleProperty(Object, String)
      */
@@ -282,7 +282,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String, String)
      */
@@ -312,7 +312,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String, String)
      */
@@ -342,7 +342,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getMappedPropertyLocale(Object, String, String)
      */
@@ -371,7 +371,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getMappedProperty(Object, String)
      */
@@ -399,7 +399,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getNestedProperty(Object, String, String)
      */
@@ -425,7 +425,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getNestedProperty(Object, String)
      */
@@ -453,7 +453,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getProperty(Object, String, String)
      */
@@ -480,7 +480,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      *
      * @see LocaleBeanUtilsBean#getProperty(Object, String)
      */

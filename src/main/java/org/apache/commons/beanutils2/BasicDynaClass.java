@@ -69,7 +69,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * Construct a new BasicDynaClass with the specified parameters.
      *
      * @param name Name of this DynaBean class
-     * @param dynaBeanClass The implementation class for new intances
+     * @param dynaBeanClass The implementation class for new instances
      * @param properties Property descriptors for the supported properties
      */
     public BasicDynaClass(final String name, Class<?> dynaBeanClass,
@@ -108,7 +108,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * The argument values to be passed to the constructore we will use
+     * The argument values to be passed to the constructor we will use
      * to create new DynaBean instances.
      */
     protected Object[] constructorValues = { this };

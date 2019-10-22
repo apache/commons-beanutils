@@ -26,7 +26,7 @@ import java.util.WeakHashMap;
 
 /**
  * <p>A customized implementation of <code>java.util.HashMap</code> designed
- * to operate in a multithreaded environment where the large majority of
+ * to operate in a multi-threaded environment where the large majority of
  * method calls are read-only, instead of structural changes.  When operating
  * in "fast" mode, read calls are non-synchronized and write calls perform the
  * following steps:</p>
@@ -229,7 +229,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Map modification
     // ----------------------------------------------------------------------
-    // These methods perform special behaviour in 'fast' mode.
+    // These methods perform special behavior in 'fast' mode.
     // The map is cloned, updated and then assigned back.
     // See the comments at the top as to why this won't always work.
 

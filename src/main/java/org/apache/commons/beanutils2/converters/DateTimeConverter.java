@@ -33,7 +33,7 @@ import java.util.TimeZone;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementaion
+ * {@link org.apache.commons.beanutils2.Converter} implementation
  * that handles conversion to and from <b>date/time</b> objects.
  * <p>
  * This implementation handles conversion for the following
@@ -320,7 +320,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             // ---------------------- JDK 1.3 Fix ----------------------
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
-            //      ensures it works consistently accross JDK versions
+            //      ensures it works consistently across JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
             long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
             timeInMillis += timestamp.getNanos() / 1000000;

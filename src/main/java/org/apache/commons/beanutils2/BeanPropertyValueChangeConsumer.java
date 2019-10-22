@@ -96,14 +96,14 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
     private V propertyValue;
 
     /**
-     * Determines whether <code>null</code> objects in the property path will genenerate an
+     * Determines whether <code>null</code> objects in the property path will generate an
      * <code>IllegalArgumentException</code> or not. If set to <code>true</code> then if any objects
      * in the property path leading up to the target property evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged but
-     * not rethrown.  If set to <code>false</code> then if any objects in the property path leading
+     * not re-thrown.  If set to <code>false</code> then if any objects in the property path leading
      * up to the target property evaluate to <code>null</code> then the
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
-     * rethrown.
+     * re-thrown.
      */
     private boolean ignoreNull;
 
@@ -124,14 +124,14 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
     /**
      * Constructor which takes the name of the property to be changed, the new value to set
      * the property to and a boolean which determines whether <code>null</code> objects in the
-     * property path will genenerate an <code>IllegalArgumentException</code> or not.
+     * property path will generate an <code>IllegalArgumentException</code> or not.
      *
      * @param propertyName The name of the property that will be updated with the value specified by
      * <code>propertyValue</code>.
      * @param propertyValue The value that <code>propertyName</code> will be set to on the target
      * object.
      * @param ignoreNull Determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
     public BeanPropertyValueChangeConsumer(final String propertyName, final V propertyValue, final boolean ignoreNull) {
@@ -223,16 +223,16 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
 
     /**
      * Returns the flag that determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
+     * generate an <code>IllegalArgumentException</code> or not. If set to <code>true</code> then
      * if any objects in the property path leading up to the target property evaluate to
      * <code>null</code> then the <code>IllegalArgumentException</code> throw by
-     * <code>PropertyUtils</code> will be logged but not rethrown.  If set to <code>false</code> then
+     * <code>PropertyUtils</code> will be logged but not re-thrown.  If set to <code>false</code> then
      * if any objects in the property path leading up to the target property evaluate to
      * <code>null</code> then the <code>IllegalArgumentException</code> throw by
-     * <code>PropertyUtils</code> will be logged and rethrown.
+     * <code>PropertyUtils</code> will be logged and re-thrown.
      *
      * @return The flag that determines whether <code>null</code> objects in the property path will
-     * genenerate an <code>IllegalArgumentException</code> or not.
+     * generate an <code>IllegalArgumentException</code> or not.
      */
     public boolean isIgnoreNull() {
         return ignoreNull;

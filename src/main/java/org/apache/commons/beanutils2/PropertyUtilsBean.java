@@ -144,7 +144,7 @@ public class PropertyUtilsBean {
      * The {@link Resolver} handles the <i>property name</i>
      * expressions and the implementation in use effectively
      * controls the dialect of the <i>expression language</i>
-     * that BeanUtils recongnises.
+     * that BeanUtils recognizes.
      * <p>
      * {@link DefaultResolver} is the default implementation used.
      *
@@ -161,7 +161,7 @@ public class PropertyUtilsBean {
      * The {@link Resolver} handles the <i>property name</i>
      * expressions and the implementation in use effectively
      * controls the dialect of the <i>expression language</i>
-     * that BeanUtils recongnises.
+     * that BeanUtils recognizes.
      * <p>
      * {@link DefaultResolver} is the default implementation used.
      *
@@ -260,7 +260,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void copyProperties(final Object dest, final Object orig)
             throws IllegalAccessException, InvocationTargetException,
@@ -353,7 +353,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Map<String, Object> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
@@ -407,7 +407,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getIndexedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -464,7 +464,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getIndexedProperty(final Object bean,
                                             final String name, final int index)
@@ -572,7 +572,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getMappedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -623,7 +623,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getMappedProperty(final Object bean,
                                            final String name, final String key)
@@ -751,7 +751,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException
      * if the property accessor method throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getNestedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -864,7 +864,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -903,7 +903,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public PropertyDescriptor getPropertyDescriptor(Object bean,
                                                            String name)
@@ -1041,7 +1041,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Class<?> getPropertyEditorClass(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -1095,7 +1095,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Class<?> getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -1207,7 +1207,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public Object getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
@@ -1508,7 +1508,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setIndexedProperty(final Object bean, String name,
                                           final Object value)
@@ -1565,7 +1565,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setIndexedProperty(final Object bean, final String name,
                                           final int index, final Object value)
@@ -1685,7 +1685,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setMappedProperty(final Object bean, String name,
                                          final Object value)
@@ -1738,7 +1738,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setMappedProperty(final Object bean, final String name,
                                          final String key, final Object value)
@@ -1849,7 +1849,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setNestedProperty(Object bean,
                                          String name, final Object value)
@@ -1913,26 +1913,26 @@ public class PropertyUtilsBean {
      * or an Array).</li>
      * </ul>
      * <p>
-     * The default behaviour of beanutils 1.7.1 or later is for assigning to
-     * "a.b" to mean a.put(b, obj) always. However the behaviour of beanutils
+     * The default behavior of beanutils 1.7.1 or later is for assigning to
+     * "a.b" to mean a.put(b, obj) always. However the behavior of beanutils
      * version 1.6.0, 1.6.1, 1.7.0 was for "a.b" to mean a.setB(obj) if such
      * a method existed, and a.put(b, obj) otherwise. In version 1.5 it meant
-     * a.put(b, obj) always (ie the same as the behaviour in the current version).
+     * a.put(b, obj) always (ie the same as the behavior in the current version).
      * In versions prior to 1.5 it meant a.setB(obj) always. [yes, this is
      * all <i>very</i> unfortunate]
      * <p>
-     * Users who would like to customise the meaning of "a.b" in method
+     * Users who would like to customize the meaning of "a.b" in method
      * setNestedProperty when a is a Map can create a custom subclass of
-     * this class and override this method to implement the behaviour of
-     * their choice, such as restoring the pre-1.4 behaviour of this class
+     * this class and override this method to implement the behavior of
+     * their choice, such as restoring the pre-1.4 behavior of this class
      * if they wish. When overriding this method, do not forget to deal
      * with MAPPED_DELIM and INDEXED_DELIM characters in the propertyName.
      * <p>
      * Note, however, that the recommended solution for objects that
      * implement Map but want their simple properties to come first is
      * for <i>those</i> objects to override their get/put methods to implement
-     * that behaviour, and <i>not</i> to solve the problem by modifying the
-     * default behaviour of the PropertyUtilsBean class by overriding this
+     * that behavior, and <i>not</i> to solve the problem by modifying the
+     * default behavior of the PropertyUtilsBean class by overriding this
      * method.
      *
      * @param bean Map bean
@@ -1994,7 +1994,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setProperty(final Object bean, final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
@@ -2022,7 +2022,7 @@ public class PropertyUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
-     *  propety cannot be found
+     *  property cannot be found
      */
     public void setSimpleProperty(final Object bean,
                                          final String name, final Object value)

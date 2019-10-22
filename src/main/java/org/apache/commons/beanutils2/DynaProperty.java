@@ -35,7 +35,7 @@ import java.util.Map;
  * for use by mapped and iterated properties.
  * A mapped or iterated property may choose to indicate the type it expects.
  * The DynaBean implementation may choose to enforce this type on its entries.
- * Alternatively, an implementatin may choose to ignore this property.
+ * Alternatively, an implementation may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
  */
@@ -201,7 +201,7 @@ public class DynaProperty implements Serializable {
 
     /**
      * Checks this instance against the specified Object for equality. Overrides the
-     * default refererence test for equality provided by {@link java.lang.Object#equals(Object)}
+     * default reference test for equality provided by {@link java.lang.Object#equals(Object)}
      * @param obj The object to compare to
      * @return <code>true</code> if object is a dyna property with the same name
      * type and content type, otherwise <code>false</code>

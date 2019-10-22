@@ -29,7 +29,7 @@ package org.apache.commons.beanutils2.expression;
  *      // Iterate through a nested property expression
  *      while (resolver.hasNested(name)) {
  *
- *          // isolate a single property from a nested expresion
+ *          // isolate a single property from a nested expression
  *          String next = resolver.next(name);
  *
  *          // Process...
@@ -131,7 +131,7 @@ public interface Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is indexed,
+     * @return <code>true</code> if the expression is indexed,
      *  otherwise <code>false</code>
      */
     boolean isIndexed(String expression);
@@ -140,7 +140,7 @@ public interface Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is mapped,
+     * @return <code>true</code> if the expression is mapped,
      *  otherwise <code>false</code>
      */
     boolean isMapped(String expression);
@@ -155,7 +155,7 @@ public interface Resolver {
     String next(String expression);
 
     /**
-     * Remove the last property expresson from the
+     * Remove the last property expression from the
      * current expression.
      *
      * @param expression The property expression
