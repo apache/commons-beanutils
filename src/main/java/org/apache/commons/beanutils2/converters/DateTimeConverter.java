@@ -19,6 +19,12 @@ package org.apache.commons.beanutils2.converters;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -35,6 +41,10 @@ import org.apache.commons.beanutils2.ConversionException;
  * <ul>
  *     <li><code>java.util.Date</code></li>
  *     <li><code>java.util.Calendar</code></li>
+ *     <li><code>java.time.LocalDate</code></li>
+ *     <li><code>java.time.LocalDateTime</code></li>
+ *     <li><code>java.time.OffsetDateTime</code></li>
+ *     <li><code>java.time.ZonedDateTime</code></li>
  *     <li><code>java.sql.Date</code></li>
  *     <li><code>java.sql.Time</code></li>
  *     <li><code>java.sql.Timestamp</code></li>
@@ -233,6 +243,14 @@ public abstract class DateTimeConverter extends AbstractConverter {
             date = ((Calendar)value).getTime();
         } else if (value instanceof Long) {
             date = new Date(((Long)value).longValue());
+        } else if (value instanceof LocalDateTime) {
+            date =  java.sql.Timestamp.valueOf(((LocalDateTime)value));
+        } else if (value instanceof LocalDate) {
+            date =  java.sql.Date.valueOf(((LocalDate)value));
+        } else if (value instanceof ZonedDateTime) {
+            date =  Date.from(((ZonedDateTime)value).toInstant());
+        } else if (value instanceof OffsetDateTime) {
+            date =  Date.from(((OffsetDateTime)value).toInstant());
         }
 
         String result = null;
@@ -266,6 +284,10 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * <ul>
      *     <li><code>java.util.Date</code></li>
      *     <li><code>java.util.Calendar</code></li>
+     *     <li><code>java.time.LocalDate</code></li>
+     *     <li><code>java.time.LocalDateTime</code></li>
+     *     <li><code>java.time.OffsetDateTime</code></li>
+     *     <li><code>java.time.ZonedDateTime</code></li>
      *     <li><code>java.sql.Date</code></li>
      *     <li><code>java.sql.Time</code></li>
      *     <li><code>java.sql.Timestamp</code></li>
@@ -324,6 +346,30 @@ public abstract class DateTimeConverter extends AbstractConverter {
             return toDate(targetType, longObj.longValue());
         }
 
+        // Handle LocalDate
+        if (value instanceof LocalDate) {
+            final LocalDate date = (LocalDate)value;
+            return toDate(targetType, date.atStartOfDay(getZoneId()).toInstant().toEpochMilli());
+        }
+
+        // Handle LocalDateTime
+        if (value instanceof LocalDateTime) {
+            final LocalDateTime date = (LocalDateTime)value;
+            return toDate(targetType, date.atZone(getZoneId()).toInstant().toEpochMilli());
+        }
+
+        // Handle ZonedDateTime
+        if (value instanceof ZonedDateTime) {
+            final ZonedDateTime date = (ZonedDateTime)value;
+            return toDate(targetType, date.toInstant().toEpochMilli());
+        }
+
+        // Handle OffsetDateTime
+        if (value instanceof OffsetDateTime) {
+            final OffsetDateTime date = (OffsetDateTime)value;
+            return toDate(targetType, date.toInstant().toEpochMilli());
+        }
+
         // Convert all other types to String & handle
         final String stringValue = value.toString().trim();
         if (stringValue.length() == 0) {
@@ -359,6 +405,9 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * <ul>
      *     <li><code>java.util.Date</code></li>
      *     <li><code>java.util.Calendar</code></li>
+     *     <li><code>java.time.LocalDate</code></li>
+     *     <li><code>java.time.LocalDateTime</code></li>
+     *     <li><code>java.time.ZonedDateTime</code></li>
      *     <li><code>java.sql.Date</code></li>
      *     <li><code>java.sql.Time</code></li>
      *     <li><code>java.sql.Timestamp</code></li>
@@ -389,6 +438,30 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
             return type.cast(new java.sql.Timestamp(value));
+        }
+
+        // java.time.LocalDateTime
+        if (type.equals(LocalDate.class)) {
+        	LocalDate localDate =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
+            return type.cast(localDate);
+        }
+
+        // java.time.LocalDateTime
+        if (type.equals(LocalDateTime.class)) {
+        	LocalDateTime localDateTime =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
+            return type.cast(localDateTime);
+        }
+
+        // java.time.ZonedDateTime
+        if (type.equals(ZonedDateTime.class)) {
+        	ZonedDateTime zonedDateTime =  ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            return type.cast(zonedDateTime);
+        }
+
+        // java.time.OffsetDateTime
+        if (type.equals(OffsetDateTime.class)) {
+        	OffsetDateTime offsetDateTime =  OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            return type.cast(offsetDateTime);
         }
 
         // java.util.Calendar
@@ -632,5 +705,14 @@ public abstract class DateTimeConverter extends AbstractConverter {
             }
             log().debug(buffer.toString());
         }
+    }
+
+    /**
+     * Gets the <code>java.time.ZoneId</code> from the <code>java.util.Timezone</code>
+     * set or use the system default if no time zone is set.
+     * @return the <code>ZoneId</code>
+     */
+    private ZoneId getZoneId() {
+    	return timeZone == null ? ZoneId.systemDefault() : timeZone.toZoneId();
     }
 }
