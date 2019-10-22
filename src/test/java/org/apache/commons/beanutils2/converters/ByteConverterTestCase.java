@@ -29,6 +29,12 @@ import junit.framework.TestSuite;
 
 public class ByteConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(ByteConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
@@ -37,7 +43,22 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         super(name);
     }
 
+    @Override
+    protected Class<?> getExpectedType() {
+        return Byte.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new ByteConverter();
+    }
+
     // ------------------------------------------------------------------------
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new ByteConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -47,11 +68,6 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         numbers[2] = new Byte("-22");
         numbers[3] = new Byte("23");
     }
-
-    public static TestSuite suite() {
-        return new TestSuite(ByteConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
@@ -59,21 +75,40 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
 
     // ------------------------------------------------------------------------
 
-    @Override
-    protected NumberConverter makeConverter() {
-        return new ByteConverter();
-    }
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Byte.class;
 
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new ByteConverter(defaultValue);
-    }
-    @Override
-    protected Class<?> getExpectedType() {
-        return Byte.class;
-    }
+        final Long min         = new Long(Byte.MIN_VALUE);
+        final Long max         = new Long(Byte.MAX_VALUE);
+        final Long minMinusOne = new Long(min.longValue() - 1);
+        final Long maxPlusOne  = new Long(max.longValue() + 1);
 
-    // ------------------------------------------------------------------------
+        // Minimum
+        assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
+
+        // Maximum
+        assertEquals("Maximum", new Byte(Byte.MAX_VALUE), converter.convert(clazz, max));
+
+        // Too Small
+        try {
+            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
+            fail("Less than minimum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Too Large
+        try {
+            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
+            fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+    }
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -128,41 +163,6 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to Byte",expected[i],converter.convert(Byte.class,input[i]));
             assertEquals(message[i] + " to byte",expected[i],converter.convert(Byte.TYPE,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
-        }
-    }
-
-    /**
-     * Test Invalid Amounts (too big/small)
-     */
-    public void testInvalidAmount() {
-        final Converter converter = makeConverter();
-        final Class<?> clazz = Byte.class;
-
-        final Long min         = new Long(Byte.MIN_VALUE);
-        final Long max         = new Long(Byte.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
-
-        // Minimum
-        assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
-
-        // Maximum
-        assertEquals("Maximum", new Byte(Byte.MAX_VALUE), converter.convert(clazz, max));
-
-        // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
         }
     }
 

@@ -35,13 +35,6 @@ public class StringConverterTestCase extends TestCase {
     }
 
     /**
-     * Tests whether the correct default type is returned.
-     */
-    public void testDefaultType() {
-        assertEquals("Wrong default type", String.class, converter.getDefaultType());
-    }
-
-    /**
      * Tests a conversion to a string type.
      */
     public void testConvertToTypeString() {
@@ -60,5 +53,12 @@ public class StringConverterTestCase extends TestCase {
         } catch(final ConversionException cex) {
             // expected result
         }
+    }
+
+    /**
+     * Tests whether the correct default type is returned.
+     */
+    public void testDefaultType() {
+        assertEquals("Wrong default type", String.class, converter.getDefaultType());
     }
 }

@@ -36,12 +36,26 @@ import junit.framework.TestSuite;
  */
 public class PathConverterTestCase extends TestCase {
 
+    public static TestSuite suite() {
+        return new TestSuite(PathConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
     public PathConverterTestCase(final String name) {
         super(name);
+    }
+
+    protected Class<?> getExpectedType() {
+        return Path.class;
+    }
+
+    protected Converter makeConverter() {
+        return new PathConverter();
     }
 
     // ------------------------------------------------------------------------
@@ -51,23 +65,9 @@ public class PathConverterTestCase extends TestCase {
         converter = makeConverter();
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(PathConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    protected Converter makeConverter() {
-        return new PathConverter();
-    }
-
-    protected Class<?> getExpectedType() {
-        return Path.class;
     }
 
     // ------------------------------------------------------------------------

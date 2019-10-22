@@ -30,6 +30,12 @@ import junit.framework.TestSuite;
  */
 public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(BigIntegerConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
@@ -38,7 +44,22 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
         super(name);
     }
 
+    @Override
+    protected Class<?> getExpectedType() {
+        return BigInteger.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new BigIntegerConverter();
+    }
+
     // ------------------------------------------------------------------------
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new BigIntegerConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -49,30 +70,9 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new BigInteger("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(BigIntegerConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    @Override
-    protected NumberConverter makeConverter() {
-        return new BigIntegerConverter();
-    }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new BigIntegerConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return BigInteger.class;
     }
 
     // ------------------------------------------------------------------------

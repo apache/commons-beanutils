@@ -33,12 +33,26 @@ import junit.framework.TestSuite;
 
 public class URLConverterTestCase extends TestCase {
 
+    public static TestSuite suite() {
+        return new TestSuite(URLConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
     public URLConverterTestCase(final String name) {
         super(name);
+    }
+
+    protected Class<?> getExpectedType() {
+        return URL.class;
+    }
+
+    protected Converter makeConverter() {
+        return new URLConverter();
     }
 
     // ------------------------------------------------------------------------
@@ -48,23 +62,9 @@ public class URLConverterTestCase extends TestCase {
         converter = makeConverter();
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(URLConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    protected Converter makeConverter() {
-        return new URLConverter();
-    }
-
-    protected Class<?> getExpectedType() {
-        return URL.class;
     }
 
     // ------------------------------------------------------------------------

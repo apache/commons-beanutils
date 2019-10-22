@@ -33,12 +33,26 @@ import junit.framework.TestSuite;
  */
 public class UUIDConverterTestCase extends TestCase {
 
+    public static TestSuite suite() {
+        return new TestSuite(UUIDConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
 
     public UUIDConverterTestCase(final String name) {
         super(name);
+    }
+
+    protected Class<?> getExpectedType() {
+        return UUID.class;
+    }
+
+    protected Converter makeConverter() {
+        return new UUIDConverter();
     }
 
     // ------------------------------------------------------------------------
@@ -48,23 +62,9 @@ public class UUIDConverterTestCase extends TestCase {
         converter = makeConverter();
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(UUIDConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    protected Converter makeConverter() {
-        return new UUIDConverter();
-    }
-
-    protected Class<?> getExpectedType() {
-        return UUID.class;
     }
 
     // ------------------------------------------------------------------------

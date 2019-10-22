@@ -29,6 +29,12 @@ import junit.framework.TestSuite;
 
 public class LongConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(LongConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
     private Converter converter = null;
 
     // ------------------------------------------------------------------------
@@ -37,7 +43,22 @@ public class LongConverterTestCase extends NumberConverterTestBase {
         super(name);
     }
 
+    @Override
+    protected Class<?> getExpectedType() {
+        return Long.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new LongConverter();
+    }
+
     // ------------------------------------------------------------------------
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new LongConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -48,30 +69,9 @@ public class LongConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new Long("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(LongConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
-    }
-
-    // ------------------------------------------------------------------------
-
-    @Override
-    protected NumberConverter makeConverter() {
-        return new LongConverter();
-    }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new LongConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return Long.class;
     }
 
     // ------------------------------------------------------------------------

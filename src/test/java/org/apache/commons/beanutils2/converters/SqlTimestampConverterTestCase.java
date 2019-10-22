@@ -33,6 +33,16 @@ import junit.framework.TestSuite;
 public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     /**
+     * Create Test Suite
+     * @return test suite
+     */
+    public static TestSuite suite() {
+        return new TestSuite(SqlTimestampConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
      * Construct a new Date test case.
      * @param name Test Name
      */
@@ -43,20 +53,60 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     // ------------------------------------------------------------------------
 
     /**
-     * Create Test Suite
-     * @return test suite
+     * Return the expected type
+     * @return The expected type
      */
-    public static TestSuite suite() {
-        return new TestSuite(SqlTimestampConverterTestCase.class);
+    @Override
+    protected Class<?> getExpectedType() {
+        return Timestamp.class;
     }
-
-    // ------------------------------------------------------------------------
 
     private boolean isUSFormatWithComma() {
         // BEANUTILS-495 workaround - sometimes Java 9 expects "," in date even if
         // the format is set to lenient
         final DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
         return loc.format(new Date()).contains(",");
+    }
+
+    /**
+     * Create the Converter with no default value.
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter() {
+        return new SqlTimestampConverter();
+    }
+
+    /**
+     * Create the Converter with a default value.
+     * @param defaultValue The default value
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
+        return new SqlTimestampConverter(defaultValue);
+    }
+
+    /**
+     * Test default String to java.sql.Timestamp conversion
+     */
+    @Override
+    public void testDefaultStringToTypeConvert() {
+
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        // Valid String --> java.sql.Timestamp Conversion
+        final String testString = "2006-10-23 15:36:01.0";
+        final Object expected = toType(testString, "yyyy-MM-dd HH:mm:ss.S", null);
+        validConversion(converter, expected, testString);
+
+        // Invalid String --> java.sql.Timestamp Conversion
+        invalidConversion(converter, "2006/09/21 15:36:01.0");
+        invalidConversion(converter, "2006-10-22");
+        invalidConversion(converter, "15:36:01");
+
     }
 
     /**
@@ -102,56 +152,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
 
-    }
-
-    /**
-     * Test default String to java.sql.Timestamp conversion
-     */
-    @Override
-    public void testDefaultStringToTypeConvert() {
-
-        // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        // Valid String --> java.sql.Timestamp Conversion
-        final String testString = "2006-10-23 15:36:01.0";
-        final Object expected = toType(testString, "yyyy-MM-dd HH:mm:ss.S", null);
-        validConversion(converter, expected, testString);
-
-        // Invalid String --> java.sql.Timestamp Conversion
-        invalidConversion(converter, "2006/09/21 15:36:01.0");
-        invalidConversion(converter, "2006-10-22");
-        invalidConversion(converter, "15:36:01");
-
-    }
-
-    /**
-     * Create the Converter with no default value.
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter() {
-        return new SqlTimestampConverter();
-    }
-
-    /**
-     * Create the Converter with a default value.
-     * @param defaultValue The default value
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
-        return new SqlTimestampConverter(defaultValue);
-    }
-
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
-    @Override
-    protected Class<?> getExpectedType() {
-        return Timestamp.class;
     }
 
     /**

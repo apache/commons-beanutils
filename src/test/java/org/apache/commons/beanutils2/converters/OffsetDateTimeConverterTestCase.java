@@ -30,16 +30,6 @@ import junit.framework.TestSuite;
 public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
-     * @param name Test Name
-     */
-    public OffsetDateTimeConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -47,17 +37,24 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(OffsetDateTimeConverterTestCase.class);
     }
 
-    /** Set Up */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /** Tear Down */
-    @Override
-    public void tearDown() throws Exception {
-    }
-
     // ------------------------------------------------------------------------
+
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
+    public OffsetDateTimeConverterTestCase(final String name) {
+        super(name);
+    }
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    @Override
+    protected Class<?> getExpectedType() {
+        return OffsetDateTime.class;
+    }
 
     /**
      * Create the Converter with no default value.
@@ -67,6 +64,8 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new OffsetDateTimeConverter();
     }
+
+    // ------------------------------------------------------------------------
 
     /**
      * Create the Converter with a default value.
@@ -78,13 +77,14 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
         return new OffsetDateTimeConverter(defaultValue);
     }
 
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
+    /** Set Up */
     @Override
-    protected Class<?> getExpectedType() {
-        return OffsetDateTime.class;
+    public void setUp() throws Exception {
+    }
+
+    /** Tear Down */
+    @Override
+    public void tearDown() throws Exception {
     }
 
     /**

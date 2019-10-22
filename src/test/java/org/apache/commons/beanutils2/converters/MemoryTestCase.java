@@ -35,20 +35,134 @@ import org.junit.Test;
  */
 public class MemoryTestCase {
 
+    /**
+     * Attempt to force garbage collection of the specified target.
+     *
+     * <p>Unfortunately there is no way to force a JVM to perform
+     * garbage collection; all we can do is <i>hint</i> to it that
+     * garbage-collection would be a good idea, and to consume
+     * memory in order to trigger it.</p>
+     *
+     * <p>On return, target.get() will return null if the target has
+     * been garbage collected.</p>
+     *
+     * <p>If target.get() still returns non-null after this method has returned,
+     * then either there is some reference still being held to the target, or
+     * else we were not able to trigger garbage collection; there is no way
+     * to tell these scenarios apart.</p>
+     */
+    private void forceGarbageCollection(final WeakReference<?> target) {
+        int bytes = 2;
+
+        while(target.get() != null) {
+            System.gc();
+
+            // Create increasingly-large amounts of non-referenced memory
+            // in order to persuade the JVM to collect it. We are hoping
+            // here that the JVM is dumb enough to run a full gc pass over
+            // all data (including the target) rather than simply collecting
+            // this easily-reclaimable memory!
+            try {
+                @SuppressWarnings("unused")
+                final
+                byte[] b = new byte[bytes];
+                bytes = bytes * 2;
+            } catch(final OutOfMemoryError e) {
+                // well that sure should have forced a garbage collection
+                // run to occur!
+                break;
+            }
+        }
+
+        // and let's do one more just to clean up any garbage we might have
+        // created on the last pass..
+        System.gc();
+    }
+
+    /**
+     * Test whether registering a custom Converter subclass while
+     * a custom context classloader is set causes a memory leak.
+     *
+     * <p>This test emulates a j2ee container where BeanUtils has been
+     * loaded from a "common" lib location that is shared across all
+     * components running within the container. The "component" registers
+     * a converter object, whose class was loaded via the component-specific
+     * classloader. The registered converter:
+     * <ul>
+     * <li>should not be visible to other components; and</li>
+     * <li>should not prevent the component-specific classloader from being
+     *  garbage-collected when the container sets its reference to null.
+     * </ul>
+     *
+     */
     @Test
-    public void testWeakReference() throws Exception {
+    public void testComponentRegistersCustomConverter() throws Exception {
+
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
-        ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
+            // sanity check; who's paranoid?? :-)
+            assertEquals(origContextClassLoader, ConvertUtils.class.getClassLoader());
 
-        Thread.currentThread().setContextClassLoader(componentLoader);
-        Thread.currentThread().setContextClassLoader(origContextClassLoader);
+            // create a custom classloader for a "component"
+            // just like a container would.
+            ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
 
-        final WeakReference<ClassLoader> ref = new WeakReference<>(componentLoader);
-        componentLoader = null;
+            // Load a custom Converter via component loader. This emulates what
+            // would happen if a user wrote their own FloatConverter subclass
+            // and deployed it via the component-specific classpath.
+            Thread.currentThread().setContextClassLoader(componentLoader);
+            {
+              // Here we pretend we're running inside the component, and that
+              // a class FloatConverter has been loaded from the component's
+              // private classpath.
+              final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
+              Object newFloatConverter = newFloatConverterClass.newInstance();
+              assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
 
-        forceGarbageCollection(ref);
-        assertNull(ref.get());
+              // verify that this new object does implement the Converter type
+              // despite being loaded via a classloader different from the one
+              // that loaded the Converter class.
+              assertTrue(
+                "Converter loader via child does not implement parent type",
+                Converter.class.isInstance(newFloatConverter));
+
+              // this converter registration will only apply to the
+              // componentLoader classloader...
+              ConvertUtils.register((Converter)newFloatConverter, Float.TYPE);
+
+              // After registering a custom converter, lookup should return
+              // it back to us. We'll try this lookup again with a different
+              // context-classloader set, and shouldn't see it
+              final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+              assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
+
+              newFloatConverter = null;
+            }
+            Thread.currentThread().setContextClassLoader(origContextClassLoader);
+
+            // Because the context classloader has been reset, we shouldn't
+            // see the custom registered converter here...
+            final Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
+            assertFalse(sharedConverter.getClass().getClassLoader() == componentLoader);
+
+            // and here we should see it again
+            Thread.currentThread().setContextClassLoader(componentLoader);
+            {
+                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+                assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
+            }
+            Thread.currentThread().setContextClassLoader(origContextClassLoader);
+            // Emulate a container "undeploying" the component. This should
+            // make component loader available for garbage collection (we hope)
+            final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<>(componentLoader);
+            componentLoader = null;
+
+            // force garbage collection and  verify that the componentLoader
+            // has been garbage-collected
+            forceGarbageCollection(weakRefToComponent);
+            assertNull(
+                "Component classloader did not release properly; memory leak present",
+                weakRefToComponent.get());
         } finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
@@ -150,90 +264,20 @@ public class MemoryTestCase {
         }
     }
 
-    /**
-     * Test whether registering a custom Converter subclass while
-     * a custom context classloader is set causes a memory leak.
-     *
-     * <p>This test emulates a j2ee container where BeanUtils has been
-     * loaded from a "common" lib location that is shared across all
-     * components running within the container. The "component" registers
-     * a converter object, whose class was loaded via the component-specific
-     * classloader. The registered converter:
-     * <ul>
-     * <li>should not be visible to other components; and</li>
-     * <li>should not prevent the component-specific classloader from being
-     *  garbage-collected when the container sets its reference to null.
-     * </ul>
-     *
-     */
     @Test
-    public void testComponentRegistersCustomConverter() throws Exception {
-
+    public void testWeakReference() throws Exception {
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
-            // sanity check; who's paranoid?? :-)
-            assertEquals(origContextClassLoader, ConvertUtils.class.getClassLoader());
+        ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
 
-            // create a custom classloader for a "component"
-            // just like a container would.
-            ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
+        Thread.currentThread().setContextClassLoader(componentLoader);
+        Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
-            // Load a custom Converter via component loader. This emulates what
-            // would happen if a user wrote their own FloatConverter subclass
-            // and deployed it via the component-specific classpath.
-            Thread.currentThread().setContextClassLoader(componentLoader);
-            {
-              // Here we pretend we're running inside the component, and that
-              // a class FloatConverter has been loaded from the component's
-              // private classpath.
-              final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
-              Object newFloatConverter = newFloatConverterClass.newInstance();
-              assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
+        final WeakReference<ClassLoader> ref = new WeakReference<>(componentLoader);
+        componentLoader = null;
 
-              // verify that this new object does implement the Converter type
-              // despite being loaded via a classloader different from the one
-              // that loaded the Converter class.
-              assertTrue(
-                "Converter loader via child does not implement parent type",
-                Converter.class.isInstance(newFloatConverter));
-
-              // this converter registration will only apply to the
-              // componentLoader classloader...
-              ConvertUtils.register((Converter)newFloatConverter, Float.TYPE);
-
-              // After registering a custom converter, lookup should return
-              // it back to us. We'll try this lookup again with a different
-              // context-classloader set, and shouldn't see it
-              final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
-              assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
-
-              newFloatConverter = null;
-            }
-            Thread.currentThread().setContextClassLoader(origContextClassLoader);
-
-            // Because the context classloader has been reset, we shouldn't
-            // see the custom registered converter here...
-            final Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
-            assertFalse(sharedConverter.getClass().getClassLoader() == componentLoader);
-
-            // and here we should see it again
-            Thread.currentThread().setContextClassLoader(componentLoader);
-            {
-                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
-                assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
-            }
-            Thread.currentThread().setContextClassLoader(origContextClassLoader);
-            // Emulate a container "undeploying" the component. This should
-            // make component loader available for garbage collection (we hope)
-            final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<>(componentLoader);
-            componentLoader = null;
-
-            // force garbage collection and  verify that the componentLoader
-            // has been garbage-collected
-            forceGarbageCollection(weakRefToComponent);
-            assertNull(
-                "Component classloader did not release properly; memory leak present",
-                weakRefToComponent.get());
+        forceGarbageCollection(ref);
+        assertNull(ref.get());
         } finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
@@ -243,49 +287,5 @@ public class MemoryTestCase {
             // and restore all the standard converters
             ConvertUtils.deregister();
         }
-    }
-
-    /**
-     * Attempt to force garbage collection of the specified target.
-     *
-     * <p>Unfortunately there is no way to force a JVM to perform
-     * garbage collection; all we can do is <i>hint</i> to it that
-     * garbage-collection would be a good idea, and to consume
-     * memory in order to trigger it.</p>
-     *
-     * <p>On return, target.get() will return null if the target has
-     * been garbage collected.</p>
-     *
-     * <p>If target.get() still returns non-null after this method has returned,
-     * then either there is some reference still being held to the target, or
-     * else we were not able to trigger garbage collection; there is no way
-     * to tell these scenarios apart.</p>
-     */
-    private void forceGarbageCollection(final WeakReference<?> target) {
-        int bytes = 2;
-
-        while(target.get() != null) {
-            System.gc();
-
-            // Create increasingly-large amounts of non-referenced memory
-            // in order to persuade the JVM to collect it. We are hoping
-            // here that the JVM is dumb enough to run a full gc pass over
-            // all data (including the target) rather than simply collecting
-            // this easily-reclaimable memory!
-            try {
-                @SuppressWarnings("unused")
-                final
-                byte[] b = new byte[bytes];
-                bytes = bytes * 2;
-            } catch(final OutOfMemoryError e) {
-                // well that sure should have forced a garbage collection
-                // run to occur!
-                break;
-            }
-        }
-
-        // and let's do one more just to clean up any garbage we might have
-        // created on the last pass..
-        System.gc();
     }
 }

@@ -29,21 +29,21 @@ import junit.framework.TestSuite;
 public class CharacterConverterTestCase extends TestCase {
 
     /**
-     * Construct a new Character Converter test case.
-     * @param name Test Name
-     */
-    public CharacterConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
     public static TestSuite suite() {
         return new TestSuite(CharacterConverterTestCase.class);
+    }
+
+    // ------------------------------------------------------------------------
+
+    /**
+     * Construct a new Character Converter test case.
+     * @param name Test Name
+     */
+    public CharacterConverterTestCase(final String name) {
+        super(name);
     }
 
     /** Set Up */
@@ -60,16 +60,11 @@ public class CharacterConverterTestCase extends TestCase {
     // ------------------------------------------------------------------------
 
     /**
-     * Test Conversion to String
+     * Tests whether the primitive char class can be passed as target type.
      */
-    public void testConvertToString() {
-
+    public void testConvertToChar() {
         final Converter converter = new CharacterConverter();
-
-        assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
-        assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
-        assertEquals("Null Test",     null, converter.convert(String.class, null));
+        assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
     /**
@@ -80,14 +75,6 @@ public class CharacterConverterTestCase extends TestCase {
         assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
         assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
         assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
-    }
-
-    /**
-     * Tests whether the primitive char class can be passed as target type.
-     */
-    public void testConvertToChar() {
-        final Converter converter = new CharacterConverter();
-        assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
     /**
@@ -105,11 +92,16 @@ public class CharacterConverterTestCase extends TestCase {
     }
 
     /**
-     * Test Conversion to Character (with default)
+     * Test Conversion to String
      */
-    public void testDefault() {
-        final Converter converter = new CharacterConverter("C");
-        assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
+    public void testConvertToString() {
+
+        final Converter converter = new CharacterConverter();
+
+        assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
+        assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
+        assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
+        assertEquals("Null Test",     null, converter.convert(String.class, null));
     }
 
     /**
@@ -123,5 +115,13 @@ public class CharacterConverterTestCase extends TestCase {
         } catch (final ConversionException cex) {
             // expected result
         }
+    }
+
+    /**
+     * Test Conversion to Character (with default)
+     */
+    public void testDefault() {
+        final Converter converter = new CharacterConverter("C");
+        assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
     }
 }
