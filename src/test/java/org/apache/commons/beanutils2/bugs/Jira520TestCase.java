@@ -50,6 +50,6 @@ public class Jira520TestCase extends TestCase {
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         final String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+        assertEquals("Class property should have been accessed", "org.apache.commons.beanutils2.AlphaBean", result);
     }
 }

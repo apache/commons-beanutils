@@ -1073,12 +1073,7 @@ public class BeanUtilsBean {
      * @since 1.8.0
      */
     protected Object convert(final Object value, final Class<?> type) {
-        final Converter converter = getConvertUtils().lookup(type);
-        if (converter != null) {
-            log.trace("        USING CONVERTER " + converter);
-            return converter.convert(type, value);
-        }
-        return value;
+        return getConvertUtils().convert(value, type);
     }
 
     /**

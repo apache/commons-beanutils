@@ -173,41 +173,20 @@ public class ConvertUtilsBean {
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Convert the specified value into a String.  If the specified value
-     * is an array, the first element (converted to a String) will be
-     * returned.  The registered {@link Converter} for the
-     * <code>java.lang.String</code> class will be used, which allows
-     * applications to customize Object-&gt;String conversions (the default
-     * implementation simply uses toString()).
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
      */
     public String convert(Object value) {
-
-        if (value == null) {
-            return null;
-        } else if (value.getClass().isArray()) {
-            if (Array.getLength(value) < 1) {
-                return null;
-            }
-            value = Array.get(value, 0);
-            if (value == null) {
-                return null;
-            }
-            final Converter converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        } else {
-            final Converter converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        }
-
+    	 return (String)convert(value, String.class);
     }
 
 
     /**
-     * Convert the specified value to an object of the specified class (if
-     * possible).  Otherwise, return a String representation of the value.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
@@ -216,29 +195,13 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("Convert string '" + value + "' to class '" +
-                      clazz.getName() + "'");
-        }
-        Converter converter = lookup(clazz);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        return converter.convert(clazz, value);
-
+    	return convert((Object)value, clazz);
     }
 
 
     /**
-     * Convert an array of specified values to an array of objects of the
-     * specified class (if possible).  If the specified Java class is itself
-     * an array class, this class will be the type of the returned value.
-     * Otherwise, an array will be constructed whose component type is the
-     * specified class.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
      * @param values Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
@@ -247,28 +210,7 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
-
-        Class<?> type = clazz;
-        if (clazz.isArray()) {
-            type = clazz.getComponentType();
-        }
-        if (log.isDebugEnabled()) {
-            log.debug("Convert String[" + values.length + "] to class '" +
-                      type.getName() + "[]'");
-        }
-        Converter converter = lookup(type);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        final Object array = Array.newInstance(type, values.length);
-        for (int i = 0; i < values.length; i++) {
-            Array.set(array, i, converter.convert(type, values[i]));
-        }
-        return array;
-
+    	return convert((Object)values, clazz);
     }
 
 

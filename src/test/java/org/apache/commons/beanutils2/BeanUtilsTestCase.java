@@ -482,7 +482,7 @@ public class BeanUtilsTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, value.length);
-        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), value[0]);
+        assertEquals("java.util.Date[] --> String[] value ", testStringDate, value[0]);
     }
 
     /**
@@ -517,7 +517,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date[0] --> String", testUtilDate.toString(), value);
+        assertEquals("java.util.Date[0] --> String", testStringDate, value);
     }
 
     /**
@@ -614,7 +614,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testUtilDate.toString(), value);
+        assertEquals("java.util.Date --> String", testStringDate, value);
     }
 
     /**
@@ -963,7 +963,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
+        assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
     }
 
     /**
@@ -977,7 +977,7 @@ public class BeanUtilsTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
-        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
+        assertEquals("java.util.Date[] --> String[] value ", testStringDate, bean.getStringArray()[0]);
     }
 
     /**
@@ -990,7 +990,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
+        assertEquals("java.util.Date --> String[]", testStringDate, bean.getStringArray()[0]);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
+        assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
     }
 
     /**
@@ -1204,7 +1204,7 @@ public class BeanUtilsTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
-        assertEquals("java.util.Date[] --> String[] value ", testUtilDate.toString(), bean.getStringArray()[0]);
+        assertEquals("java.util.Date[] --> String[] value ", testStringDate, bean.getStringArray()[0]);
     }
 
     /**
@@ -1217,7 +1217,7 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-        assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
+        assertEquals("java.util.Date --> String[]", testStringDate, bean.getStringArray()[0]);
     }
 
     /**

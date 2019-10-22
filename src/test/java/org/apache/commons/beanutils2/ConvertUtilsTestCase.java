@@ -278,11 +278,10 @@ public class ConvertUtilsTestCase extends TestCase {
         final String values1[] = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
         final int shape[] = new int[0];
-        assertEquals(shape.getClass(), value.getClass());
-        final int results1[] = (int[]) value;
-        assertEquals(results1[0], 10);
-        assertEquals(results1[1], 20);
-        assertEquals(results1[2], 30);
+        assertEquals(Integer.class, value.getClass());
+        final Integer results1 = (Integer) value;
+        assertEquals(results1.intValue(), 10);
+
 
         final String values2[] = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
