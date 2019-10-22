@@ -136,7 +136,7 @@ public abstract class DateConverterTestBase extends TestCase {
                        getExpectedType().isInstance(val));
 
             long test = now;
-            if (date[i] instanceof LocalDate) {
+            if (date[i] instanceof LocalDate || val instanceof LocalDate) {
             	test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 			}
 
