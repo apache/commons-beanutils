@@ -33,6 +33,9 @@
       <action issue="BEANUTILS-346" dev="melloware" type="update" due-to="Melloware">
         New converter for Enum.
       </action>
+      <action issue="BEANUTILS-402" dev="melloware" type="update" due-to="Melloware">
+        Double-Checked Locking anti pattern in WeakFastHashMap.
+      </action>
       <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 6 to 7.
       </action>
