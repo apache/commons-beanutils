@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.Assert.assertNotEquals;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -332,6 +334,29 @@ public class MappedPropertyTestCase extends TestCase {
                 = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
+        } catch (final Exception ex) {
+            fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
+        }
+    }
+
+    /**
+     * Test Equals method
+     */
+    public void testEqualsAndHashCode() {
+        final String property = "mapproperty";
+        final Class<?> clazz = MappedPropertyChildInterface.class;
+        try {
+            final MappedPropertyDescriptor desc
+                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc2
+                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc3
+                = new MappedPropertyDescriptor("mappedPrimitive", MappedPropertyTestBean.class);
+            assertTrue(desc.equals(desc));
+            assertTrue(desc.equals(desc2));
+            assertFalse(desc.equals(desc3));
+            assertEquals(desc.hashCode(), desc2.hashCode());
+            assertNotEquals(desc.hashCode(), desc3.hashCode());
         } catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }

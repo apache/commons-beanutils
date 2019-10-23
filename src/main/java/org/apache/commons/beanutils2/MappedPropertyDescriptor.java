@@ -25,6 +25,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 
 /**
@@ -525,5 +526,50 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 return null;
             }
         }
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(className, methodName);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (!(obj instanceof MappedMethodReference)) {
+				return false;
+			}
+			final MappedMethodReference other = (MappedMethodReference) obj;
+			return Objects.equals(className, other.className) && Objects.equals(methodName, other.methodName);
+		}
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(mappedReadMethodRef, mappedWriteMethodRef);
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof MappedPropertyDescriptor)) {
+			return false;
+		}
+		final MappedPropertyDescriptor other = (MappedPropertyDescriptor) obj;
+		return Objects.equals(mappedReadMethodRef, other.mappedReadMethodRef)
+				&& Objects.equals(mappedWriteMethodRef, other.mappedWriteMethodRef);
+	}
 }
