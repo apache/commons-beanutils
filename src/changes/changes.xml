@@ -29,7 +29,7 @@
   </properties>
   <body>
 
-    <release version="2.0.0" date="2018-MM-DD" description="Update from Java 6 to 7, update from Apache Commons Collection 3 to 4.">
+    <release version="2.0.0" date="2018-MM-DD" description="Update to Java 8.">
       <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 6 to 7.
       </action>
