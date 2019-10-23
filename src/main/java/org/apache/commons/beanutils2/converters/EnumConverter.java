@@ -70,15 +70,15 @@ public final class EnumConverter extends AbstractConverter {
      * @since 2.0
      */
     @SuppressWarnings({ "rawtypes" })
-	@Override
+    @Override
     protected <T> T  convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
-        	final String enumValue = String.valueOf(value);
-        	final T[] constants = type.getEnumConstants();
-        	if (constants == null) {
-        		throw conversionException(type, value);
-			}
-        	for (final T candidate : constants) {
+            final String enumValue = String.valueOf(value);
+            final T[] constants = type.getEnumConstants();
+            if (constants == null) {
+                throw conversionException(type, value);
+            }
+            for (final T candidate : constants) {
                 if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }
