@@ -67,7 +67,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * The underlying map we are managing.
      */
-    private Map<K, V> map = null;
+    private volatile Map<K, V> map = null;
 
     /**
      * Are we currently operating in "fast" mode?
