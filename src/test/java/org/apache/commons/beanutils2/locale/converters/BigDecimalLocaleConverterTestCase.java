@@ -28,13 +28,13 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
     public BigDecimalLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Set up instance variables required by this test case.
@@ -58,7 +58,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

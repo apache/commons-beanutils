@@ -30,28 +30,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>DynaBean which automatically adds properties to the <code>DynaClass</code>
+ * <p>DynaBean which automatically adds properties to the {@code DynaClass}
  *   and provides <i>Lazy List</i> and <i>Lazy Map</i> features.</p>
  *
  * <p>DynaBeans deal with three types of properties - <i>simple</i>, <i>indexed</i> and <i>mapped</i> and
- *    have the following <code>get()</code> and <code>set()</code> methods for
+ *    have the following {@code get()</code> and <code>set()} methods for
  *    each of these types:</p>
  *    <ul>
- *        <li><i>Simple</i> property methods - <code>get(name)</code> and
- *                          <code>set(name, value)</code></li>
- *        <li><i>Indexed</i> property methods - <code>get(name, index)</code> and
- *                          <code>set(name, index, value)</code></li>
- *        <li><i>Mapped</i> property methods - <code>get(name, key)</code> and
- *                          <code>set(name, key, value)</code></li>
+ *        <li><i>Simple</i> property methods - {@code get(name)} and
+ *                          {@code set(name, value)}</li>
+ *        <li><i>Indexed</i> property methods - {@code get(name, index)} and
+ *                          {@code set(name, index, value)}</li>
+ *        <li><i>Mapped</i> property methods - {@code get(name, key)} and
+ *                          {@code set(name, key, value)}</li>
  *    </ul>
  *
  * <p><b><u>Getting Property Values</u></b></p>
- * <p>Calling any of the <code>get()</code> methods, for a property which
- *    doesn't exist, returns <code>null</code> in this implementation.</p>
+ * <p>Calling any of the {@code get()} methods, for a property which
+ *    doesn't exist, returns {@code null} in this implementation.</p>
  *
  * <p><b><u>Setting Simple Properties</u></b></p>
- *    <p>The <code>LazyDynaBean</code> will automatically add a property to the <code>DynaClass</code>
- *       if it doesn't exist when the <code>set(name, value)</code> method is called.</p>
+ *    <p>The {@code LazyDynaBean</code> will automatically add a property to the <code>DynaClass}
+ *       if it doesn't exist when the {@code set(name, value)} method is called.</p>
  *
  *     <pre><code>
  *         DynaBean myBean = new LazyDynaBean();
@@ -59,13 +59,13 @@ import org.apache.commons.logging.LogFactory;
  *     </code></pre>
  *
  * <p><b><u>Setting Indexed Properties</u></b></p>
- *    <p>If the property <b>doesn't</b> exist, the <code>LazyDynaBean</code> will automatically add
- *       a property with an <code>ArrayList</code> type to the <code>DynaClass</code> when
- *       the <code>set(name, index, value)</code> method is called.
- *       It will also instantiate a new <code>ArrayList</code> and automatically <i>grow</i>
- *       the <code>List</code> so that it is big enough to accommodate the index being set.
- *       <code>ArrayList</code> is the default indexed property that LazyDynaBean uses but
- *       this can be easily changed by overriding the <code>defaultIndexedProperty(name)</code>
+ *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
+ *       a property with an {@code ArrayList</code> type to the <code>DynaClass} when
+ *       the {@code set(name, index, value)} method is called.
+ *       It will also instantiate a new {@code ArrayList} and automatically <i>grow</i>
+ *       the {@code List} so that it is big enough to accommodate the index being set.
+ *       {@code ArrayList} is the default indexed property that LazyDynaBean uses but
+ *       this can be easily changed by overriding the {@code defaultIndexedProperty(name)}
  *       method.</p>
  *
  *     <pre><code>
@@ -74,11 +74,11 @@ import org.apache.commons.logging.LogFactory;
  *         myBean.set("myIndexedProperty", 1, "myValue2");
  *     </code></pre>
  *
- *    <p>If the indexed property <b>does</b> exist in the <code>DynaClass</code> but is set to
- *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
- *      new <code>List</code> or <code>Array</code> as specified by the property's type
- *      in the <code>DynaClass</code> and automatically <i>grow</i> the <code>List</code>
- *      or <code>Array</code> so that it is big enough to accommodate the index being set.</p>
+ *    <p>If the indexed property <b>does</b> exist in the {@code DynaClass} but is set to
+ *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
+ *      new {@code List</code> or <code>Array} as specified by the property's type
+ *      in the {@code DynaClass</code> and automatically <i>grow</i> the <code>List}
+ *      or {@code Array} so that it is big enough to accommodate the index being set.</p>
  *
  *     <pre><code>
  *         DynaBean myBean = new LazyDynaBean();
@@ -89,21 +89,21 @@ import org.apache.commons.logging.LogFactory;
  *     </code></pre>
  *
  * <p><b><u>Setting Mapped Properties</u></b></p>
- *    <p>If the property <b>doesn't</b> exist, the <code>LazyDynaBean</code> will automatically add
- *       a property with a <code>HashMap</code> type to the <code>DynaClass</code> and
- *       instantiate a new <code>HashMap</code> in the DynaBean when the
- *       <code>set(name, key, value)</code> method is called. <code>HashMap</code> is the default
+ *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
+ *       a property with a {@code HashMap</code> type to the <code>DynaClass} and
+ *       instantiate a new {@code HashMap} in the DynaBean when the
+ *       {@code set(name, key, value)</code> method is called. <code>HashMap} is the default
  *       mapped property that LazyDynaBean uses but this can be easily changed by overriding
- *       the <code>defaultMappedProperty(name)</code> method.</p>
+ *       the {@code defaultMappedProperty(name)} method.</p>
  *
  *     <pre><code>
  *         DynaBean myBean = new LazyDynaBean();
  *         myBean.set("myMappedProperty", "myKey", "myValue");
  *     </code></pre>
  *
- *    <p>If the mapped property <b>does</b> exist in the <code>DynaClass</code> but is set to
- *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
- *      new <code>Map</code> as specified by the property's type in the <code>DynaClass</code>.</p>
+ *    <p>If the mapped property <b>does</b> exist in the {@code DynaClass} but is set to
+ *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
+ *      new {@code Map</code> as specified by the property's type in the <code>DynaClass}.</p>
  *
  *     <pre><code>
  *         DynaBean myBean = new LazyDynaBean();
@@ -113,10 +113,10 @@ import org.apache.commons.logging.LogFactory;
  *     </code></pre>
  *
  * <p><b><u><i>Restricted</i> DynaClass</u></b></p>
- *    <p><code>MutableDynaClass</code> have a facility to <i>restrict</i> the <code>DynaClass</code>
- *       so that its properties cannot be modified. If the <code>MutableDynaClass</code> is
- *       restricted then calling any of the <code>set()</code> methods for a property which
- *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>
+ *    <p>{@code MutableDynaClass</code> have a facility to <i>restrict</i> the <code>DynaClass}
+ *       so that its properties cannot be modified. If the {@code MutableDynaClass} is
+ *       restricted then calling any of the {@code set()} methods for a property which
+ *       doesn't exist will result in a {@code IllegalArgumentException} being thrown.</p>
  *
  * @see LazyDynaClass
  */
@@ -149,7 +149,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected static final Double     Double_ZERO     = Double.valueOf((byte)0);
 
     /**
-     * The <code>MutableDynaClass</code> "base class" that this DynaBean
+     * The {@code MutableDynaClass} "base class" that this DynaBean
      * is associated with.
      */
     protected Map<String, Object> values;
@@ -158,23 +158,23 @@ public class LazyDynaBean implements DynaBean, Serializable {
     private transient Map<String, Object> mapDecorator;
 
     /**
-     * The <code>MutableDynaClass</code> "base class" that this DynaBean
+     * The {@code MutableDynaClass} "base class" that this DynaBean
      * is associated with.
      */
     protected MutableDynaClass dynaClass;
 
 
-    // ------------------- Constructors ----------------------------------
+    
 
     /**
-     * Construct a new <code>LazyDynaBean</code> with a <code>LazyDynaClass</code> instance.
+     * Construct a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
      */
     public LazyDynaBean() {
         this(new LazyDynaClass());
     }
 
     /**
-     * Construct a new <code>LazyDynaBean</code> with a <code>LazyDynaClass</code> instance.
+     * Construct a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
      *
      * @param name Name of this DynaBean class
      */
@@ -183,9 +183,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Construct a new <code>DynaBean</code> associated with the specified
-     * <code>DynaClass</code> instance - if its not a <code>MutableDynaClass</code>
-     * then a new <code>LazyDynaClass</code> is created and the properties copied.
+     * Construct a new {@code DynaBean} associated with the specified
+     * {@code DynaClass</code> instance - if its not a <code>MutableDynaClass}
+     * then a new {@code LazyDynaClass} is created and the properties copied.
      *
      * @param dynaClass The DynaClass we are associated with
      */
@@ -202,15 +202,15 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
 
-    // ------------------- Public Methods ----------------------------------
+    
 
     /**
      * <p>
      * Return a Map representation of this DynaBean.
      * </p>
      * This, for example, could be used in JSTL in the following way to access
-     * a DynaBean's <code>fooProperty</code>:
-     * <ul><li><code>${myDynaBean.<b>map</b>.fooProperty}</code></li></ul>
+     * a DynaBean's {@code fooProperty}:
+     * <ul><li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li></ul>
      *
      * @return a Map representation of this DynaBean
      */
@@ -256,7 +256,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ------------------- DynaBean Methods ----------------------------------
+    
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -264,8 +264,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return <code>true</code> if the mapped property contains a value for
-     * the specified key, otherwise <code>false</code>
+     * @return {@code true} if the mapped property contains a value for
+     * the specified key, otherwise {@code false}
      *
      * @throws IllegalArgumentException if no property name is specified
      */
@@ -292,7 +292,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * <p>Return the value of a simple property with the specified name.</p>
      *
-     * <p><strong>N.B.</strong> Returns <code>null</code> if there is no property
+     * <p><strong>N.B.</strong> Returns {@code null} if there is no property
      *  of the specified name.</p>
      *
      * @param name Name of the property whose value is to be retrieved.
@@ -331,7 +331,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * <p>Return the value of an indexed property with the specified name.</p>
      *
-     * <p><strong>N.B.</strong> Returns <code>null</code> if there is no 'indexed'
+     * <p><strong>N.B.</strong> Returns {@code null} if there is no 'indexed'
      * property of the specified name.</p>
      *
      * @param name Name of the property whose value is to be retrieved
@@ -380,7 +380,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * <p>Return the value of a mapped property with the specified name.</p>
      *
-     * <p><strong>N.B.</strong> Returns <code>null</code> if there is no 'mapped'
+     * <p><strong>N.B.</strong> Returns {@code null} if there is no 'mapped'
      * property of the specified name.</p>
      *
      * @param name Name of the property whose value is to be retrieved
@@ -420,7 +420,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
 
     /**
-     * Return the <code>DynaClass</code> instance that describes the set of
+     * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass
@@ -609,7 +609,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ------------------- protected Methods ----------------------------------
+    
 
     /**
      * Grow the size of an indexed property
@@ -826,7 +826,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a <code>java.lang.Number</code> Property.
+     * Create a new Instance of a {@code java.lang.Number} Property.
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value
@@ -867,11 +867,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * <p>Creates a new <code>ArrayList</code> for an 'indexed' property
+     * <p>Creates a new {@code ArrayList} for an 'indexed' property
      *    which doesn't exist.</p>
      *
-     * <p>This method should be overridden if an alternative <code>List</code>
-     *    or <code>Array</code> implementation is required for 'indexed' properties.</p>
+     * <p>This method should be overridden if an alternative {@code List}
+     *    or {@code Array} implementation is required for 'indexed' properties.</p>
      *
      * @param name Name of the 'indexed property.
      * @return The default value for an indexed property (java.util.ArrayList)
@@ -881,10 +881,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * <p>Creates a new <code>HashMap</code> for a 'mapped' property
+     * <p>Creates a new {@code HashMap} for a 'mapped' property
      *    which doesn't exist.</p>
      *
-     * <p>This method can be overridden if an alternative <code>Map</code>
+     * <p>This method can be overridden if an alternative {@code Map}
      *    implementation is required for 'mapped' properties.</p>
      *
      * @param name Name of the 'mapped property.
@@ -897,8 +897,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * Indicates if there is a property with the specified name.
      * @param name The name of the property to check
-     * @return <code>true</code> if there is a property of the
-     * specified name, otherwise <code>false</code>
+     * @return {@code true} if there is a property of the
+     * specified name, otherwise {@code false}
      */
     protected boolean isDynaProperty(final String name) {
 
@@ -921,8 +921,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @param dest Destination class
      * @param source Source class
-     * @return <code>true</code> if the source class is assignable to the
-     * destination class, otherwise <code>false</code>
+     * @return {@code true} if the source class is assignable to the
+     * destination class, otherwise {@code false}
      */
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
@@ -942,7 +942,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * <p>Creates a new instance of the <code>Map</code>.</p>
+     * <p>Creates a new instance of the {@code Map}.</p>
      * @return a new Map instance
      */
     protected Map<String, Object> newMap() {
@@ -950,7 +950,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * <p>Returns the <code>Log</code>.
+     * <p>Returns the {@code Log}.
      */
     private Log logger() {
         if (logger == null) {

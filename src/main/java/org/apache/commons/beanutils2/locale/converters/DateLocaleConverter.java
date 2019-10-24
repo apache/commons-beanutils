@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.util.Date</code> object,
+ * locale-sensitive String into a {@code java.util.Date} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DateLocaleConverter extends BaseLocaleConverter {
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);
@@ -56,7 +56,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -221,12 +221,12 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Returns whether date formatting is lenient.
      *
-     * @return true if the <code>DateFormat</code> used for formatting is lenient
+     * @return true if the {@code DateFormat} used for formatting is lenient
      * @see java.text.DateFormat#isLenient
      */
     public boolean isLenient() {
@@ -236,14 +236,14 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     /**
      * Specify whether or not date-time parsing should be lenient.
      *
-     * @param lenient true if the <code>DateFormat</code> used for formatting should be lenient
+     * @param lenient true if the {@code DateFormat} used for formatting should be lenient
      * @see java.text.DateFormat#setLenient
      */
     public void setLenient(final boolean lenient) {
         isLenient = lenient;
     }
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

@@ -28,7 +28,7 @@ package org.apache.commons.beanutils2.priv;
 class PrivateBeanSubclass extends PrivateBean {
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -41,7 +41,7 @@ class PrivateBeanSubclass extends PrivateBean {
     }
 
 
-    // ------------------------------------------------------------- Properties
+    
 
 
     /**

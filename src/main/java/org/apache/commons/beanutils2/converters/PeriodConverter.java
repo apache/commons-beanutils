@@ -23,7 +23,7 @@ import java.time.Period;
  * to and from <b>java.time.Period</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @since 2.0
@@ -33,7 +33,7 @@ public final class PeriodConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.time.Period</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public PeriodConverter() {
         super();
@@ -52,9 +52,9 @@ public final class PeriodConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
     @Override

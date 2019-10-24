@@ -26,11 +26,11 @@ import java.util.HashMap;
 
 
 /**
- * <p>Minimal implementation of the <code>DynaClass</code> interface.  Can be
+ * <p>Minimal implementation of the {@code DynaClass} interface.  Can be
  * used as a convenience base class for more sophisticated implementations.</p>
- * <p><strong>IMPLEMENTATION NOTE</strong> - The <code>DynaBean</code>
+ * <p><strong>IMPLEMENTATION NOTE</strong> - The {@code DynaBean}
  * implementation class supplied to our constructor MUST have a one-argument
- * constructor of its own that accepts a <code>DynaClass</code>.  This is
+ * constructor of its own that accepts a {@code DynaClass}.  This is
  * used to associate the DynaBean instance with this DynaClass.</p>
  *
  */
@@ -39,7 +39,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -90,11 +90,11 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
 
     /**
-     * The constructor of the <code>dynaBeanClass</code> that we will use
+     * The constructor of the {@code dynaBeanClass} that we will use
      * for creating new instances.
      */
     protected transient Constructor<?> constructor = null;
@@ -115,7 +115,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * The <code>DynaBean</code> implementation class we will use for
+     * The {@code DynaBean} implementation class we will use for
      * creating new instances.
      */
     protected Class<?> dynaBeanClass = BasicDynaBean.class;
@@ -136,12 +136,12 @@ public class BasicDynaClass implements DynaClass, Serializable {
     /**
      * The set of dynamic properties that are part of this DynaClass,
      * keyed by the property name.  Individual descriptor instances will
-     * be the same instances as those in the <code>properties</code> list.
+     * be the same instances as those in the {@code properties} list.
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
-    // ------------------------------------------------------ DynaClass Methods
+    
 
 
     /**
@@ -231,7 +231,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // --------------------------------------------------------- Public Methods
+    
 
 
     /**
@@ -248,7 +248,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
+    
 
 
     /**

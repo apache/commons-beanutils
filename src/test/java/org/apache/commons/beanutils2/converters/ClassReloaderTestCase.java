@@ -27,7 +27,7 @@ import junit.framework.TestSuite;
 
 public class ClassReloaderTestCase extends TestCase {
 
-    // ------------------------------------------------------------------------
+    
 
     public static class DummyClass {
     }
@@ -37,7 +37,7 @@ public class ClassReloaderTestCase extends TestCase {
         return new TestSuite(ClassReloaderTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     public ClassReloaderTestCase(final String name) {
         super(name);

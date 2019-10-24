@@ -28,7 +28,7 @@ import junit.framework.TestSuite;
  */
 public class BeanComparatorTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
+    
 
     /**
      * The test beans for each test.
@@ -37,7 +37,7 @@ public class BeanComparatorTestCase extends TestCase {
     protected AlphaBean alphaBean1 = null;
     protected AlphaBean alphaBean2 = null;
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Constructs a new instance of this test case.
@@ -48,7 +48,7 @@ public class BeanComparatorTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Sets up instance variables required by this test case.
@@ -78,7 +78,7 @@ public class BeanComparatorTestCase extends TestCase {
         alphaBean2 = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
      *  Tests comparing two beans via their name using the default Comparator

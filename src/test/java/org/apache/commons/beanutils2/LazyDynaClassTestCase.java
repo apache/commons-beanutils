@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaClass</code> implementation class.</p>
+ * <p>Test Case for the {@code LazyDynaClass} implementation class.</p>
  *
  */
 public class LazyDynaClassTestCase extends TestCase {
@@ -29,7 +29,7 @@ public class LazyDynaClassTestCase extends TestCase {
     protected LazyDynaClass dynaClass = null;
     protected String testProperty     = "myProperty";
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -40,7 +40,7 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Run this Test
@@ -72,7 +72,7 @@ public class LazyDynaClassTestCase extends TestCase {
         dynaClass = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
      * Test add(name) method

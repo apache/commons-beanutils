@@ -27,7 +27,7 @@ import java.beans.IntrospectionException;
  * Before {@link PropertyUtils} can be used for interaction with a specific Java
  * class, the class's properties have to be determined. This is called
  * <em>introspection</em> and is initiated automatically on demand.
- * <code>PropertyUtils</code> does not perform introspection on its own, but
+ * {@code PropertyUtils} does not perform introspection on its own, but
  * delegates this task to one or more objects implementing this interface. This
  * makes it possible to customize introspection which may be useful for certain
  * code bases using non-standard conventions for accessing properties.
@@ -38,7 +38,7 @@ import java.beans.IntrospectionException;
 public interface BeanIntrospector {
     /**
      * Performs introspection on a Java class. The current class to be inspected
-     * can be queried from the passed in <code>IntrospectionContext</code>
+     * can be queried from the passed in {@code IntrospectionContext}
      * object. A typical implementation has to obtain this class, determine its
      * properties according to the rules it implements, and add them to the
      * passed in context object.

@@ -41,10 +41,10 @@ import junit.framework.TestSuite;
 
 public class ConvertUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
+    
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -57,7 +57,7 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -88,7 +88,7 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     /**
@@ -673,7 +673,7 @@ public class ConvertUtilsTestCase extends TestCase {
                 utils.convert(value, getClass()));
     }
 
-    // -------------------------------------------------------- Private Methods
+    
 
 
     private void checkIntegerArray(final Object value, final int intArray[]) {

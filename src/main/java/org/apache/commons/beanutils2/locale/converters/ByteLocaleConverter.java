@@ -26,7 +26,7 @@ import org.apache.commons.beanutils2.ConversionException;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.lang.Byte</code> object,
+ * locale-sensitive String into a {@code java.lang.Byte} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -36,7 +36,7 @@ import org.apache.commons.beanutils2.ConversionException;
 public class ByteLocaleConverter extends DecimalLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

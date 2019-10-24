@@ -32,7 +32,7 @@ package org.apache.commons.beanutils2.priv;
 class PackageBean {
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -46,7 +46,7 @@ class PackageBean {
     }
 
 
-    // ------------------------------------------------------------- Properties
+    
 
 
     /**

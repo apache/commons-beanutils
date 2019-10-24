@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Predicate implementation that applies the given <code>Predicate</code>
+ * <p>Predicate implementation that applies the given {@code Predicate}
  * to the result of calling the given property getter.
  * </p>
  *
@@ -36,15 +36,15 @@ public class BeanPredicate<T> implements Predicate<T> {
 
     /** Name of the property whose value will be predicated */
     private String propertyName;
-    /** <code>Predicate</code> to be applied to the property value */
+    /** {@code Predicate} to be applied to the property value */
     private Predicate<T> predicate;
 
     /**
-     * Constructs a <code>BeanPredicate</code> that applies the given
-     * <code>Predicate</code> to the named property value.
+     * Constructs a {@code BeanPredicate} that applies the given
+     * {@code Predicate} to the named property value.
      * @param propertyName the name of the property whose value is to be predicated,
      * not null
-     * @param predicate the <code>Predicate</code> to be applied,
+     * @param predicate the {@code Predicate} to be applied,
      * not null
      */
     public BeanPredicate(final String propertyName, final Predicate<T> predicate) {
@@ -107,18 +107,18 @@ public class BeanPredicate<T> implements Predicate<T> {
     }
 
     /**
-     * Gets the <code>Predicate</code> to be applied to the value of the named property
+     * Gets the {@code Predicate} to be applied to the value of the named property
      * during {@link #test(Object)}.
-     * @return <code>Predicate</code>, not null
+     * @return {@code Predicate}, not null
      */
     public Predicate<T> getPredicate() {
         return predicate;
     }
 
     /**
-     * Sets the <code>Predicate</code> to be applied to the value of the named property
+     * Sets the {@code Predicate} to be applied to the value of the named property
      * during {@link #test(Object)}.
-     * @param predicate <code>Predicate</code>, not null
+     * @param predicate {@code Predicate}, not null
      */
     public void setPredicate(final Predicate<T> predicate) {
         this.predicate = predicate;

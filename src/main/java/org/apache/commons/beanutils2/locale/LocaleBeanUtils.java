@@ -29,7 +29,7 @@ import org.apache.commons.beanutils2.BeanUtils;
  * <p>Utility methods for populating JavaBeans properties
  * via reflection in a locale-dependent manner.</p>
  *
- * <p>The implementations for these methods are provided by <code>LocaleBeanUtilsBean</code>.
+ * <p>The implementations for these methods are provided by {@code LocaleBeanUtilsBean}.
  * For more details see {@link LocaleBeanUtilsBean}.</p>
  *
  */
@@ -37,12 +37,12 @@ import org.apache.commons.beanutils2.BeanUtils;
 public class LocaleBeanUtils extends BeanUtils {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /**
      * <p>Gets the locale used when no locale is passed.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @return the default locale
      * @see LocaleBeanUtilsBean#getDefaultLocale()
@@ -56,7 +56,7 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Sets the locale used when no locale is passed.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param locale the default locale
      * @see LocaleBeanUtilsBean#setDefaultLocale(Locale)
@@ -69,10 +69,10 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Gets whether the pattern is localized or not.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @return {@code true} if pattern is localized,
+     * otherwise {@code false}
      * @see LocaleBeanUtilsBean#getApplyLocalized()
      */
     public static boolean getApplyLocalized() {
@@ -83,10 +83,10 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Sets whether the pattern is localized or not.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @param newApplyLocalized {@code true} if pattern is localized,
+     * otherwise {@code false}
      * @see LocaleBeanUtilsBean#setApplyLocalized(boolean)
      */
     public static void setApplyLocalized(final boolean newApplyLocalized) {
@@ -95,16 +95,16 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
 
-    // --------------------------------------------------------- Public Methods
+    
 
     /**
      * <p>Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @param pattern The conversion pattern
      * @return The indexed property's value, converted to a String
@@ -130,10 +130,10 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
@@ -157,7 +157,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the specified conversion pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -187,7 +187,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -215,7 +215,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified bean, converted to a String using the specified
      * conversion pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
@@ -243,7 +243,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified bean, converted to a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
@@ -269,7 +269,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String using the specified conversion pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -300,7 +300,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * The key is specified as a method parameter and must *not* be included
      * in the property name expression.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -329,10 +329,10 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the specified pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @param pattern The conversion pattern
      * @return The mapped property's value, converted to a String
@@ -359,10 +359,10 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified bean, as a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *
@@ -387,7 +387,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * of the specified name, for the specified bean,
      * as a String using the specified pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
@@ -414,7 +414,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the (possibly nested) locale-sensitive property
      * of the specified name.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
@@ -440,7 +440,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the specified locale-sensitive property
      * of the specified bean.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
@@ -468,7 +468,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Return the value of the specified locale-sensitive property
      * of the specified bean.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
@@ -496,7 +496,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * conversions as required to conform to the type of the destination property
      * using the default conversion pattern of the corresponding {@link LocaleConverter}.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
@@ -520,7 +520,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * conversions as required to conform to the type of the destination
      * property using the specified conversion pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
@@ -543,7 +543,7 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Calculate the property type.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param target The bean
      * @param name The property name
@@ -567,7 +567,7 @@ public class LocaleBeanUtils extends BeanUtils {
      * <p>Convert the specified value to the required type using the
      * specified conversion pattern.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param type The Java type of target property
      * @param index The indexed subscript value (if any)
@@ -584,7 +584,7 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Convert the specified value to the required type.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param type The Java type of target property
      * @param index The indexed subscript value (if any)
@@ -600,7 +600,7 @@ public class LocaleBeanUtils extends BeanUtils {
     /**
      * <p>Invoke the setter method.</p>
      *
-     * <p>For more details see <code>LocaleBeanUtilsBean</code></p>
+     * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
      * @param target The bean
      * @param propName The Simple name of target property

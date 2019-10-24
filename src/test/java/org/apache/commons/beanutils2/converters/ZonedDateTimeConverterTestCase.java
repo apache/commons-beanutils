@@ -37,7 +37,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(ZonedDateTimeConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Date test case.
@@ -65,7 +65,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
         return new ZonedDateTimeConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Create the Converter with a default value.

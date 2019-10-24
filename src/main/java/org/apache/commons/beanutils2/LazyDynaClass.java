@@ -17,26 +17,26 @@
 package org.apache.commons.beanutils2;
 
 /**
- * <p>DynaClass which implements the <code>MutableDynaClass</code> interface.</p>
+ * <p>DynaClass which implements the {@code MutableDynaClass} interface.</p>
  *
- * <p>A <code>MutableDynaClass</code> is a specialized extension to <code>DynaClass</code>
+ * <p>A {@code MutableDynaClass</code> is a specialized extension to <code>DynaClass}
  *    that allows properties to be added or removed dynamically.</p>
  *
  * <p>This implementation has one slightly unusual default behavior - calling
- *    the <code>getDynaProperty(name)</code> method for a property which doesn't
- *    exist returns a <code>DynaProperty</code> rather than <code>null</code>. The
- *    reason for this is that <code>BeanUtils</code> calls this method to check if
+ *    the {@code getDynaProperty(name)} method for a property which doesn't
+ *    exist returns a {@code DynaProperty</code> rather than <code>null}. The
+ *    reason for this is that {@code BeanUtils} calls this method to check if
  *    a property exists before trying to set the value. This would defeat the object
- *    of the <code>LazyDynaBean</code> which automatically adds missing properties
- *    when any of its <code>set()</code> methods are called. For this reason the
- *    <code>isDynaProperty(name)</code> method has been added to this implementation
+ *    of the {@code LazyDynaBean} which automatically adds missing properties
+ *    when any of its {@code set()} methods are called. For this reason the
+ *    {@code isDynaProperty(name)} method has been added to this implementation
  *    in order to determine if a property actually exists. If the more <i>normal</i>
- *    behavior of returning <code>null</code> is required, then this can be achieved
- *    by calling the <code>setReturnNull(true)</code>.</p>
+ *    behavior of returning {@code null} is required, then this can be achieved
+ *    by calling the {@code setReturnNull(true)}.</p>
  *
- * <p>The <code>add(name, type, readable, writable)</code> method is not implemented
- *    and always throws an <code>UnsupportedOperationException</code>. I believe
- *    this attributes need to be added to the <code>DynaProperty</code> class
+ * <p>The {@code add(name, type, readable, writable)} method is not implemented
+ *    and always throws an {@code UnsupportedOperationException}. I believe
+ *    this attributes need to be added to the {@code DynaProperty} class
  *    in order to control read/write facilities.</p>
  *
  * @see LazyDynaBean
@@ -51,10 +51,10 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     protected boolean restricted;
 
     /**
-     * <p>Controls whether the <code>getDynaProperty()</code> method returns
+     * <p>Controls whether the {@code getDynaProperty()} method returns
      * null if a property doesn't exist - or creates a new one.</p>
      *
-     * <p>Default is <code>false</code>.
+     * <p>Default is {@code false}.
      */
     protected boolean returnNull = false;
 
@@ -109,8 +109,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Is this DynaClass currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
-     * @return <code>true</code> if this {@link MutableDynaClass} cannot be changed
-     * otherwise <code>false</code>
+     * @return {@code true} if this {@link MutableDynaClass} cannot be changed
+     * otherwise {@code false}
      */
     @Override
     public boolean isRestricted() {
@@ -121,8 +121,8 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Set whether this DynaClass is currently restricted.</p>
      * <p>If restricted, no changes to the existing registration of
      *  property names, data types, readability, or writeability are allowed.</p>
-     * @param restricted <code>true</code> if this {@link MutableDynaClass} cannot
-     * be changed otherwise <code>false</code>
+     * @param restricted {@code true} if this {@link MutableDynaClass} cannot
+     * be changed otherwise {@code false}
      */
     @Override
     public void setRestricted(final boolean restricted) {
@@ -130,25 +130,25 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Should this DynaClass return a <code>null</code> from
-     * the <code>getDynaProperty(name)</code> method if the property
+     * Should this DynaClass return a {@code null} from
+     * the {@code getDynaProperty(name)} method if the property
      * doesn't exist.
      *
-     * @return <code>true</code> if a <code>null</code> {@link DynaProperty}
+     * @return {@code true</code> if a <code>null} {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
-     * <code>false</code> if a new {@link DynaProperty} should be created.
+     * {@code false} if a new {@link DynaProperty} should be created.
      */
     public boolean isReturnNull() {
         return returnNull;
     }
 
     /**
-     * Set whether this DynaClass should return a <code>null</code> from
-     * the <code>getDynaProperty(name)</code> method if the property
+     * Set whether this DynaClass should return a {@code null} from
+     * the {@code getDynaProperty(name)} method if the property
      * doesn't exist.
-     * @param returnNull <code>true</code> if a <code>null</code> {@link DynaProperty}
+     * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
      * should be returned if the property doesn't exist, otherwise
-     * <code>false</code> if a new {@link DynaProperty} should be created.
+     * {@code false} if a new {@link DynaProperty} should be created.
      */
     public void setReturnNull(final boolean returnNull) {
         this.returnNull = returnNull;
@@ -195,18 +195,18 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * and writeability.</p>
      *
      * <p><strong>N.B.</strong>Support for readable/writeable properties has not been implemented
-     *    and this method always throws a <code>UnsupportedOperationException</code>.</p>
+     *    and this method always throws a {@code UnsupportedOperationException}.</p>
      *
      * <p>I'm not sure the intention of the original authors for this method, but it seems to
-     *    me that readable/writable should be attributes of the <code>DynaProperty</code> class
+     *    me that readable/writable should be attributes of the {@code DynaProperty} class
      *    (which they are not) and is the reason this method has not been implemented.</p>
      *
      * @param name Name of the new dynamic property
      * @param type Data type of the new dynamic property (null for no
      *  restrictions)
-     * @param readable Set to <code>true</code> if this property value
+     * @param readable Set to {@code true} if this property value
      *  should be readable
-     * @param writeable Set to <code>true</code> if this property value
+     * @param writeable Set to {@code true} if this property value
      *  should be writeable
      *
      * @throws UnsupportedOperationException anytime this method is called
@@ -300,18 +300,18 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     /**
      * <p>Return a property descriptor for the specified property.</p>
      *
-     * <p>If the property is not found and the <code>returnNull</code> indicator is
-     *    <code>true</code>, this method always returns <code>null</code>.</p>
+     * <p>If the property is not found and the {@code returnNull} indicator is
+     *    {@code true</code>, this method always returns <code>null}.</p>
      *
-     * <p>If the property is not found and the <code>returnNull</code> indicator is
-     *    <code>false</code> a new property descriptor is created and returned (although
+     * <p>If the property is not found and the {@code returnNull} indicator is
+     *    {@code false} a new property descriptor is created and returned (although
      *    its not actually added to the DynaClass's properties). This is the default
      *    behavior.</p>
      *
-     * <p>The reason for not returning a <code>null</code> property descriptor is that
-     *    <code>BeanUtils</code> uses this method to check if a property exists
+     * <p>The reason for not returning a {@code null} property descriptor is that
+     *    {@code BeanUtils} uses this method to check if a property exists
      *    before trying to set it - since these <i>Lazy</i> implementations automatically
-     *    add any new properties when they are set, returning <code>null</code> from
+     *    add any new properties when they are set, returning {@code null} from
      *    this method would defeat their purpose.</p>
      *
      * @param name Name of the dynamic property for which a descriptor
@@ -342,14 +342,14 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     /**
      * <p>Indicate whether a property actually exists.</p>
      *
-     * <p><strong>N.B.</strong> Using <code>getDynaProperty(name) == null</code>
+     * <p><strong>N.B.</strong> Using {@code getDynaProperty(name) == null}
      * doesn't work in this implementation because that method might
      * return a DynaProperty if it doesn't exist (depending on the
-     * <code>returnNull</code> indicator).</p>
+     * {@code returnNull} indicator).</p>
      *
      * @param name The name of the property to check
-     * @return <code>true</code> if there is a property of the
-     * specified name, otherwise <code>false</code>
+     * @return {@code true} if there is a property of the
+     * specified name, otherwise {@code false}
      * @throws IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(final String name) {

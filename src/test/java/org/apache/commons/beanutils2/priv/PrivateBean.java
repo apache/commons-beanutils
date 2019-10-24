@@ -33,7 +33,7 @@ package org.apache.commons.beanutils2.priv;
 class PrivateBean implements PrivateDirect {
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -47,7 +47,7 @@ class PrivateBean implements PrivateDirect {
     }
 
 
-    // ------------------------------------------------------------- Properties
+    
 
 
     /**

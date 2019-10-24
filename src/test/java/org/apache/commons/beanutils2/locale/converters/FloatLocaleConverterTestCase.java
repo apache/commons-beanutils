@@ -32,13 +32,13 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
     public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Set up instance variables required by this test case.
@@ -62,7 +62,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

@@ -28,12 +28,12 @@ import junit.framework.TestSuite;
 
 
 /**
- * <p> Test case for <code>ConstructorUtils</code> </p>
+ * <p> Test case for {@code ConstructorUtils} </p>
  *
  */
 public class ConstructorUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -45,7 +45,7 @@ public class ConstructorUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -73,7 +73,7 @@ public class ConstructorUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     public void testInvokeConstructor() throws Exception {
         {

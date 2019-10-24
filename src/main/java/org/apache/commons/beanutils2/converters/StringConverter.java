@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 /**
  * {@link org.apache.commons.beanutils2.Converter}
  * implementation that converts an incoming
- * object into a <code>java.lang.String</code> object.
+ * object into a {@code java.lang.String} object.
  * <p>
  * Note that ConvertUtils really is designed to do string-&gt;object conversions,
  * and offers very little support for object-&gt;string conversions. The
@@ -45,7 +45,7 @@ public final class StringConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.lang.String</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public StringConverter() {
         super();
@@ -64,9 +64,9 @@ public final class StringConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override

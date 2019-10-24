@@ -37,11 +37,11 @@ public class LocalTimeConverterTestCase extends TestCase {
         return new TestSuite(LocalTimeConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+    
 
     public LocalTimeConverterTestCase(final String name) {
         super(name);
@@ -55,7 +55,7 @@ public class LocalTimeConverterTestCase extends TestCase {
         return new LocalTimeConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     @Override
     public void setUp() throws Exception {
@@ -67,7 +67,7 @@ public class LocalTimeConverterTestCase extends TestCase {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
+    
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

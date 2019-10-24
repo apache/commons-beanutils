@@ -92,7 +92,7 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
@@ -100,7 +100,7 @@ public class LocaleConvertUtilsBean {
     /** Indicate whether the pattern is localized or not */
     private boolean applyLocalized = false;
 
-    /** The <code>Log</code> instance for this class. */
+    /** The {@code Log} instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /** Every entry of the mapConverters is:
@@ -109,7 +109,7 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-    // --------------------------------------------------------- Constructors
+    
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -121,7 +121,7 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-    // --------------------------------------------------------- Properties
+    
 
     /**
      * getter for defaultLocale.
@@ -149,8 +149,8 @@ public class LocaleConvertUtilsBean {
     /**
      * getter for applyLocalized
      *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @return {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public boolean getApplyLocalized() {
         return applyLocalized;
@@ -159,14 +159,14 @@ public class LocaleConvertUtilsBean {
     /**
      * setter for applyLocalized
      *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @param newApplyLocalized {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Convert the specified locale-sensitive value into a String.
@@ -353,7 +353,7 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Register a custom {@link LocaleConverter} for the specified destination
-     * <code>Class</code>, replacing any previously registered converter.
+     * {@code Class}, replacing any previously registered converter.
      *
      * @param converter The LocaleConverter to be registered
      * @param clazz The Destination class for conversions performed by this
@@ -406,7 +406,7 @@ public class LocaleConvertUtilsBean {
     /**
      * Look up and return any registered {@link LocaleConverter} for the specified
      * destination class and locale; if there is no registered Converter, return
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param clazz Class for which to return a registered Converter
      * @param locale The Locale
@@ -425,7 +425,7 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Look up and return any registered map instance for the specified locale;
-     * if there is no registered one, return <code>null</code>.
+     * if there is no registered one, return {@code null}.
      *
      * @param locale The Locale
      * @return The map instance contains the all {@link LocaleConverter} types for

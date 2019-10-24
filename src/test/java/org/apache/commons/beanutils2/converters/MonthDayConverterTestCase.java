@@ -37,11 +37,11 @@ public class MonthDayConverterTestCase extends TestCase {
         return new TestSuite(MonthDayConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+    
 
     public MonthDayConverterTestCase(final String name) {
         super(name);
@@ -55,7 +55,7 @@ public class MonthDayConverterTestCase extends TestCase {
         return new MonthDayConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     @Override
     public void setUp() throws Exception {
@@ -67,7 +67,7 @@ public class MonthDayConverterTestCase extends TestCase {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
+    
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

@@ -27,46 +27,46 @@ import java.util.Map;
  * <p>There are two main purposes for this class:</p>
  *    <ul>
  *        <li>To provide <i>Lazy List</i> behavior - automatically
- *            <i>growing</i> and <i>populating</i> the <code>List</code>
- *            with either <code>DynaBean</code>, <code>java.util.Map</code>
+ *            <i>growing</i> and <i>populating</i> the {@code List}
+ *            with either {@code DynaBean</code>, <code>java.util.Map}
  *            or POJO Beans.</li>
  *        <li>To provide a straight forward way of putting a Collection
  *            or Array into the lazy list <i>and</i> a straight forward
  *            way to get it out again at the end.</li>
  *    </ul>
  *
- * <p>All elements added to the List are stored as <code>DynaBean</code>'s:</p>
+ * <p>All elements added to the List are stored as {@code DynaBean}'s:</p>
  * <ul>
- *    <li><code>java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap</code>.</li>
- *    <li>POJO Bean elements are "wrapped" in a <code>WrapDynaBean</code>.</li>
- *    <li><code>DynaBean</code>'s are stored un-changed.</li>
+ *    <li>{@code java.util.Map</code> elements are "wrapped" in a <code>LazyDynaMap}.</li>
+ *    <li>POJO Bean elements are "wrapped" in a {@code WrapDynaBean}.</li>
+ *    <li>{@code DynaBean}'s are stored un-changed.</li>
  * </ul>
  *
- * <h2><code>toArray()</code></h2>
- * <p>The <code>toArray()</code> method returns an array of the
- *    elements of the appropriate type. If the <code>LazyDynaList</code>
- *    is populated with <code>java.util.Map</code> objects a
- *    <code>Map[]</code> array is returned.
+ * <h2>{@code toArray()}</h2>
+ * <p>The {@code toArray()} method returns an array of the
+ *    elements of the appropriate type. If the {@code LazyDynaList}
+ *    is populated with {@code java.util.Map} objects a
+ *    {@code Map[]} array is returned.
  *    If the list is populated with POJO Beans an appropriate
- *    array of the POJO Beans is returned. Otherwise a <code>DynaBean[]</code>
+ *    array of the POJO Beans is returned. Otherwise a {@code DynaBean[]}
  *    array is returned.
  * </p>
  *
- * <h2><code>toDynaBeanArray()</code></h2>
- * <p>The <code>toDynaBeanArray()</code> method returns a
- *    <code>DynaBean[]</code> array of the elements in the List.
+ * <h2>{@code toDynaBeanArray()}</h2>
+ * <p>The {@code toDynaBeanArray()} method returns a
+ *    {@code DynaBean[]} array of the elements in the List.
  * </p>
  *
  * <p><strong>N.B.</strong>All the elements in the List must be the
- *    same type. If the <code>DynaClass</code> or <code>Class</code>
- *    of the <code>LazyDynaList</code>'s elements is
+ *    same type. If the {@code DynaClass</code> or <code>Class}
+ *    of the {@code LazyDynaList}'s elements is
  *    not specified, then it will be automatically set to the type
  *    of the first element populated.
  * </p>
  *
  * <h2>Example 1</h2>
- * <p>If you have an array of <code>java.util.Map[]</code> - you can put that into
- *    a <code>LazyDynaList</code>.</p>
+ * <p>If you have an array of {@code java.util.Map[]} - you can put that into
+ *    a {@code LazyDynaList}.</p>
  *
  * <pre><code>
  *    TreeMap[] myArray = .... // your Map[]
@@ -127,18 +127,18 @@ import java.util.Map;
  * </code></pre>
  *
  * <p><strong>N.B.</strong> You may wonder why control the type
- *    using a <code>DynaClass</code> rather than the <code>Class</code>
- *    as in the previous example - the reason is that some <code>DynaBean</code>
+ *    using a {@code DynaClass</code> rather than the <code>Class}
+ *    as in the previous example - the reason is that some {@code DynaBean}
  *    implementations don't have a <i>default</i> empty constructor and
- *    therefore need to be instantiated using the <code>DynaClass.newInstance()</code>
+ *    therefore need to be instantiated using the {@code DynaClass.newInstance()}
  *    method.</p>
  *
  * <h2>Example 4</h2>
  * <p>A slight variation - set the element type using either
- *    the <code>setElementType(Class)</code> method or the
- *    <code>setElementDynaClass(DynaClass)</code> method - then populate
- *    with the normal <code>java.util.List</code> methods(i.e.
- *    <code>add()</code>, <code>addAll()</code> or <code>set()</code>).</p>
+ *    the {@code setElementType(Class)} method or the
+ *    {@code setElementDynaClass(DynaClass)} method - then populate
+ *    with the normal {@code java.util.List} methods(i.e.
+ *    {@code add()</code>, <code>addAll()</code> or <code>set()}).</p>
  *
  * <pre><code>
  *    // Create a new LazyDynaList (100 element capacity)
@@ -187,7 +187,7 @@ public class LazyDynaList extends ArrayList<Object> {
     private Class<?> elementDynaBeanType;
 
 
-    // ------------------- Constructors ------------------------------
+    
 
     /**
      * Default Constructor.
@@ -254,7 +254,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- java.util.List Methods --------------------
+    
 
     /**
      * <p>Insert an element at the specified index position.</p>
@@ -481,7 +481,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- Public Methods ----------------------------
+    
 
     /**
      * <p>Converts the List to an DynaBean Array.</p>
@@ -595,7 +595,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- Private Methods ---------------------------
+    
 
     /**
      * <p>Automatically <i>grown</i> the List

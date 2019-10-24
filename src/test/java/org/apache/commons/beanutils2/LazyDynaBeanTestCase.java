@@ -27,7 +27,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaBean</code> implementation class.</p>
+ * <p>Test Case for the {@code LazyDynaBean} implementation class.</p>
  *
  */
 public class LazyDynaBeanTestCase extends TestCase {
@@ -43,7 +43,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     protected Integer testInteger2    = new Integer(40);
     protected String testKey          = "myKey";
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -54,7 +54,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Run thus Test
@@ -88,7 +88,7 @@ public class LazyDynaBeanTestCase extends TestCase {
       bean = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
      * Test Getting/Setting a Simple Property

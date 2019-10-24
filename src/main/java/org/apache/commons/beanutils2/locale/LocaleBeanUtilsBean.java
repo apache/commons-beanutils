@@ -47,7 +47,7 @@ import org.apache.commons.logging.LogFactory;
 public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
-     * Contains <code>LocaleBeanUtilsBean</code> instances indexed by context classloader.
+     * Contains {@code LocaleBeanUtilsBean} instances indexed by context classloader.
      */
     private static final ContextClassLoaderLocal<LocaleBeanUtilsBean>
             LOCALE_BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<LocaleBeanUtilsBean>() {
@@ -81,12 +81,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
 
-    // --------------------------------------------------------- Constructors
+    
 
     /** Construct instance with standard conversion bean */
     public LocaleBeanUtilsBean() {
@@ -96,7 +96,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Construct instance that uses given locale conversion
      *
-     * @param localeConvertUtils use this <code>localeConvertUtils</code> to perform
+     * @param localeConvertUtils use this {@code localeConvertUtils} to perform
      * conversions
      * @param convertUtilsBean use this for standard conversions
      * @param propertyUtilsBean use this for property conversions
@@ -112,14 +112,14 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /**
      * Construct instance that uses given locale conversion
      *
-     * @param localeConvertUtils use this <code>localeConvertUtils</code> to perform
+     * @param localeConvertUtils use this {@code localeConvertUtils} to perform
      * conversions
      */
     public LocaleBeanUtilsBean(final LocaleConvertUtilsBean localeConvertUtils) {
         this.localeConvertUtils = localeConvertUtils;
     }
 
-    // --------------------------------------------------------- Public Methods
+    
 
     /**
      * Gets the bean instance used for conversions
@@ -154,8 +154,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * Is the pattern to be applied localized
      * (Indicate whether the pattern is localized or not)
      *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @return {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public boolean getApplyLocalized() {
 
@@ -166,8 +166,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * Sets whether the pattern is applied localized
      * (Indicate whether the pattern is localized or not)
      *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @param newApplyLocalized {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
 
@@ -175,17 +175,17 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
 
-    // --------------------------------------------------------- Public Methods
+    
 
     /**
      * Return the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String. The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @param pattern The conversion pattern
      * @return The indexed property's value, converted to a String
@@ -215,10 +215,10 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}. The zero-relative index
      * of the required value must be included (in square brackets) as a suffix
-     * to the property name, or <code>IllegalArgumentException</code> will be thrown.
+     * to the property name, or {@code IllegalArgumentException} will be thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
@@ -411,11 +411,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * of the specified bean, as a String using the specified pattern.
      * The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @param pattern The conversion pattern
      * @return The mapped property's value, converted to a String
@@ -447,11 +447,11 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * conversion pattern of the corresponding {@link LocaleConverter}.
      * The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *

@@ -40,14 +40,14 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
  * property getter and setter operations on Java objects.  Much of this
- * code was originally included in <code>BeanUtils</code>, but has been
+ * code was originally included in {@code BeanUtils}, but has been
  * separated because of the volume of code involved.
  * <p>
  * In general, the objects that are examined and modified using these
  * methods are expected to conform to the property getter and setter method
  * naming conventions described in the JavaBeans Specification (Version 1.0.1).
  * No data type conversions are performed, and there are no usage of any
- * <code>PropertyEditor</code> classes that have been registered, although
+ * {@code PropertyEditor} classes that have been registered, although
  * a convenient way to access the registered classes themselves is included.
  * <p>
  * For the purposes of this class, five formats for referencing a particular
@@ -56,31 +56,31 @@ import org.apache.commons.logging.LogFactory;
  * and how they are resolved is now (since BeanUtils 1.8.0) controlled by
  * the configured {@link Resolver} implementation:
  * <ul>
- * <li><strong>Simple (<code>name</code>)</strong> - The specified
- *     <code>name</code> identifies an individual property of a particular
+ * <li><strong>Simple ({@code name})</strong> - The specified
+ *     {@code name} identifies an individual property of a particular
  *     JavaBean.  The name of the actual getter or setter method to be used
  *     is determined using standard JavaBeans instrospection, so that (unless
- *     overridden by a <code>BeanInfo</code> class, a property named "xyz"
- *     will have a getter method named <code>getXyz()</code> or (for boolean
- *     properties only) <code>isXyz()</code>, and a setter method named
- *     <code>setXyz()</code>.</li>
- * <li><strong>Nested (<code>name1.name2.name3</code>)</strong> The first
+ *     overridden by a {@code BeanInfo} class, a property named "xyz"
+ *     will have a getter method named {@code getXyz()} or (for boolean
+ *     properties only) {@code isXyz()}, and a setter method named
+ *     {@code setXyz()}.</li>
+ * <li><strong>Nested ({@code name1.name2.name3})</strong> The first
  *     name element is used to select a property getter, as for simple
  *     references above.  The object returned for this property is then
  *     consulted, using the same approach, for a property getter for a
- *     property named <code>name2</code>, and so on.  The property value that
+ *     property named {@code name2}, and so on.  The property value that
  *     is ultimately retrieved or modified is the one identified by the
  *     last name element.</li>
- * <li><strong>Indexed (<code>name[index]</code>)</strong> - The underlying
+ * <li><strong>Indexed ({@code name[index]})</strong> - The underlying
  *     property value is assumed to be an array, or this JavaBean is assumed
  *     to have indexed property getter and setter methods.  The appropriate
- *     (zero-relative) entry in the array is selected.  <code>List</code>
+ *     (zero-relative) entry in the array is selected.  {@code List}
  *     objects are now also supported for read/write.  You simply need to define
- *     a getter that returns the <code>List</code></li>
- * <li><strong>Mapped (<code>name(key)</code>)</strong> - The JavaBean
+ *     a getter that returns the {@code List}</li>
+ * <li><strong>Mapped ({@code name(key)})</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
- *     additional attribute of type <code>java.lang.String</code>.</li>
- * <li><strong>Combined (<code>name1.name2[index].name3(key)</code>)</strong> -
+ *     additional attribute of type {@code java.lang.String}.</li>
+ * <li><strong>Combined ({@code name1.name2[index].name3(key)})</strong> -
  *     Combining mapped, nested, and indexed references is also
  *     supported.</li>
  * </ul>
@@ -94,7 +94,7 @@ public class PropertyUtilsBean {
 
     private Resolver resolver = new DefaultResolver();
 
-    // --------------------------------------------------------- Class Methods
+    
 
     /**
      * Return the PropertyUtils bean instance.
@@ -104,7 +104,7 @@ public class PropertyUtilsBean {
         return BeanUtilsBean.getInstance().getPropertyUtils();
     }
 
-    // --------------------------------------------------------- Variables
+    
 
     /**
      * The cache of PropertyDescriptor arrays for beans we have already
@@ -122,7 +122,7 @@ public class PropertyUtilsBean {
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /** Base constructor */
     public PropertyUtilsBean() {
@@ -135,7 +135,7 @@ public class PropertyUtilsBean {
     }
 
 
-    // --------------------------------------------------------- Public Methods
+    
 
 
     /**
@@ -189,10 +189,10 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Adds a <code>BeanIntrospector</code>. This object is invoked when the
+     * Adds a {@code BeanIntrospector}. This object is invoked when the
      * property descriptors of a class need to be obtained.
      *
-     * @param introspector the <code>BeanIntrospector</code> to be added (must
+     * @param introspector the {@code BeanIntrospector} to be added (must
      *        not be <b>null</b>
      * @throws IllegalArgumentException if the argument is <b>null</b>
      * @since 1.9
@@ -206,10 +206,10 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Removes the specified <code>BeanIntrospector</code>.
+     * Removes the specified {@code BeanIntrospector}.
      *
-     * @param introspector the <code>BeanIntrospector</code> to be removed
-     * @return <b>true</b> if the <code>BeanIntrospector</code> existed and
+     * @param introspector the {@code BeanIntrospector} to be removed
+     * @return <b>true</b> if the {@code BeanIntrospector} existed and
      *         could be removed, <b>false</b> otherwise
      * @since 1.9
      */
@@ -235,12 +235,12 @@ public class PropertyUtilsBean {
      * <p>Copy property values from the "origin" bean to the "destination" bean
      * for all cases where the property names are the same (even though the
      * actual getter and setter methods might have been customized via
-     * <code>BeanInfo</code> classes).  No conversions are performed on the
+     * {@code BeanInfo} classes).  No conversions are performed on the
      * actual property values -- it is assumed that the values retrieved from
      * the origin bean are assignment-compatible with the types expected by
      * the destination bean.</p>
      *
-     * <p>If the origin "bean" is actually a <code>Map</code>, it is assumed
+     * <p>If the origin "bean" is actually a {@code Map}, it is assumed
      * to contain String-valued <strong>simple</strong> property names as the keys, pointing
      * at the corresponding property values that will be set in the destination
      * bean.<strong>Note</strong> that this method is intended to perform
@@ -255,8 +255,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null
+     * @throws IllegalArgumentException if the {@code dest} or
+     *  {@code orig} argument is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -340,7 +340,7 @@ public class PropertyUtilsBean {
      * <p>Return the entire set of properties for which the specified bean
      * provides a read method.  This map contains the unconverted property
      * values for all properties for which a read method is provided
-     * (i.e. where the <code>getReadMethod()</code> returns non-null).</p>
+     * (i.e. where the {@code getReadMethod()} returns non-null).</p>
      *
      * <p><strong>FIXME</strong> - Does not account for mapped properties.</p>
      *
@@ -349,7 +349,7 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> is null
+     * @throws IllegalArgumentException if {@code bean} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -389,12 +389,12 @@ public class PropertyUtilsBean {
      * Return the value of the specified indexed property of the specified
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.  In addition to supporting the JavaBeans specification, this
-     * method has been extended to support <code>List</code> objects as well.
+     * method has been extended to support {@code List} objects as well.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @return the indexed property value
      *
@@ -402,8 +402,8 @@ public class PropertyUtilsBean {
      *  is outside the valid range for the underlying array or List
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -448,7 +448,7 @@ public class PropertyUtilsBean {
      * Return the value of the specified indexed property of the specified
      * bean, with no type conversions.  In addition to supporting the JavaBeans
      * specification, this method has been extended to support
-     * <code>List</code> objects as well.
+     * {@code List} objects as well.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -459,8 +459,8 @@ public class PropertyUtilsBean {
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -559,11 +559,11 @@ public class PropertyUtilsBean {
      * Return the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
      * required value must be included (in brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(key)</code> of the property value
+     * @param name {@code propertyname(key)} of the property value
      *  to be extracted
      * @return the mapped property value
      *
@@ -744,8 +744,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws NestedNullException if a nested reference to a
      *  property returns null
      * @throws InvocationTargetException
@@ -859,8 +859,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -877,7 +877,7 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Retrieve the property descriptor for the specified property of the
-     * specified bean, or return <code>null</code> if there is no such
+     * specified bean, or return {@code null} if there is no such
      * descriptor.  This method resolves indexed and nested property
      * references in the same manner as other methods in this class, except
      * that if the last (or only) name element is indexed, the descriptor
@@ -896,8 +896,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
      * @throws InvocationTargetException if the property accessor method
@@ -982,7 +982,7 @@ public class PropertyUtilsBean {
      * @param beanClass Bean class for which property descriptors are requested
      * @return the property descriptors
      *
-     * @throws IllegalArgumentException if <code>beanClass</code> is null
+     * @throws IllegalArgumentException if {@code beanClass} is null
      */
     public PropertyDescriptor[]
             getPropertyDescriptors(final Class<?> beanClass) {
@@ -1001,7 +1001,7 @@ public class PropertyUtilsBean {
      * @param bean Bean for which property descriptors are requested
      * @return the property descriptors
      *
-     * @throws IllegalArgumentException if <code>bean</code> is null
+     * @throws IllegalArgumentException if {@code bean} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
 
@@ -1016,11 +1016,11 @@ public class PropertyUtilsBean {
     /**
      * <p>Return the Java Class repesenting the property editor class that has
      * been registered for this property (if any).  This method follows the
-     * same name resolution rules used by <code>getPropertyDescriptor()</code>,
+     * same name resolution rules used by {@code getPropertyDescriptor()},
      * so if the last element of a name reference is indexed, the property
      * editor for the underlying property's class is returned.</p>
      *
-     * <p>Note that <code>null</code> will be returned if there is no property,
+     * <p>Note that {@code null} will be returned if there is no property,
      * or if there is no registered property editor class.  Because this
      * return value is ambiguous, you should determine the existence of the
      * property itself by other means.</p>
@@ -1034,8 +1034,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
      * @throws InvocationTargetException if the property accessor method
@@ -1067,14 +1067,14 @@ public class PropertyUtilsBean {
 
     /**
      * Return the Java Class representing the property type of the specified
-     * property, or <code>null</code> if there is no such property for the
+     * property, or {@code null} if there is no such property for the
      * specified bean.  This method follows the same name resolution rules
-     * used by <code>getPropertyDescriptor()</code>, so if the last element
+     * used by {@code getPropertyDescriptor()}, so if the last element
      * of a name reference is indexed, the type of the property itself will
      * be returned.  If the last (or only) element has no property with the
-     * specified name, <code>null</code> is returned.
+     * specified name, {@code null} is returned.
      * <p>
-     * If the property is an indexed property (e.g. <code>String[]</code>),
+     * If the property is an indexed property (e.g. {@code String[]}),
      * this method will return the type of the items within that array.
      * Note that from Java 8 and newer, this method do not support
      * such index types from items within an Collection, and will
@@ -1088,8 +1088,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
      * @throws InvocationTargetException if the property accessor method
@@ -1161,7 +1161,7 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Return an accessible property getter method for this property,
-     * if there is one; otherwise return <code>null</code>.</p>
+     * if there is one; otherwise return {@code null}.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
@@ -1177,7 +1177,7 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Return an accessible property getter method for this property,
-     * if there is one; otherwise return <code>null</code>.</p>
+     * if there is one; otherwise return {@code null}.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
@@ -1200,8 +1200,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if the property name
      *  is nested or indexed
      * @throws InvocationTargetException if the property accessor method
@@ -1270,7 +1270,7 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Return an accessible property setter method for this property,
-     * if there is one; otherwise return <code>null</code>.</p>
+     * if there is one; otherwise return {@code null}.</p>
      *
      * <p><em>Note:</em> This method does not work correctly with custom bean
      * introspection under certain circumstances. It may return {@code null}
@@ -1291,7 +1291,7 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Return an accessible property setter method for this property,
-     * if there is one; otherwise return <code>null</code>.</p>
+     * if there is one; otherwise return {@code null}.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
      *
@@ -1308,17 +1308,17 @@ public class PropertyUtilsBean {
 
 
     /**
-     * <p>Return <code>true</code> if the specified property name identifies
+     * <p>Return {@code true} if the specified property name identifies
      * a readable property on the specified bean; otherwise, return
-     * <code>false</code>.
+     * {@code false}.
      *
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
-     * @return <code>true</code> if the property is readable,
-     * otherwise <code>false</code>
+     * @return {@code true} if the property is readable,
+     * otherwise {@code false}
      *
-     * @throws IllegalArgumentException if <code>bean</code>
-     *  or <code>name</code> is <code>null</code>
+     * @throws IllegalArgumentException if {@code bean}
+     *  or {@code name</code> is <code>null}
      *
      * @since BeanUtils 1.6
      */
@@ -1397,17 +1397,17 @@ public class PropertyUtilsBean {
 
 
     /**
-     * <p>Return <code>true</code> if the specified property name identifies
+     * <p>Return {@code true} if the specified property name identifies
      * a writeable property on the specified bean; otherwise, return
-     * <code>false</code>.
+     * {@code false}.
      *
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
-     * @return <code>true</code> if the property is writeable,
-     * otherwise <code>false</code>
+     * @return {@code true} if the property is writeable,
+     * otherwise {@code false}
      *
-     * @throws IllegalArgumentException if <code>bean</code>
-     *  or <code>name</code> is <code>null</code>
+     * @throws IllegalArgumentException if {@code bean}
+     *  or {@code name</code> is <code>null}
      *
      * @since BeanUtils 1.6
      */
@@ -1489,12 +1489,12 @@ public class PropertyUtilsBean {
      * Set the value of the specified indexed property of the specified
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.  In addition to supporting the JavaBeans specification, this
-     * method has been extended to support <code>List</code> objects as well.
+     * method has been extended to support {@code List} objects as well.
      *
      * @param bean Bean whose property is to be modified
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be modified
      * @param value Value to which the specified property element
      *  should be set
@@ -1503,8 +1503,8 @@ public class PropertyUtilsBean {
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -1549,7 +1549,7 @@ public class PropertyUtilsBean {
      * Set the value of the specified indexed property of the specified
      * bean, with no type conversions.  In addition to supporting the JavaBeans
      * specification, this method has been extended to support
-     * <code>List</code> objects as well.
+     * {@code List} objects as well.
      *
      * @param bean Bean whose property is to be set
      * @param name Simple property name of the property value to be set
@@ -1560,8 +1560,8 @@ public class PropertyUtilsBean {
      *  is outside the valid range for the underlying property
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -1672,11 +1672,11 @@ public class PropertyUtilsBean {
      * Set the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
      * value to set must be included (in brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be set
-     * @param name <code>propertyname(key)</code> of the property value
+     * @param name {@code propertyname(key)} of the property value
      *  to be set
      * @param value The property value to be set
      *
@@ -1842,8 +1842,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if a nested reference to a
      *  property returns null
      * @throws InvocationTargetException if the property accessor method
@@ -1989,8 +1989,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      * @throws NoSuchMethodException if an accessor method for this
@@ -2015,8 +2015,8 @@ public class PropertyUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if <code>bean</code> or
-     *  <code>name</code> is null
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
      * @throws IllegalArgumentException if the property name is
      *  nested or indexed
      * @throws InvocationTargetException if the property accessor method

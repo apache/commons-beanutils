@@ -29,7 +29,7 @@ import java.time.ZonedDateTime;
  * </p>
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  * </p>
  *
  * @since 2.0
@@ -39,7 +39,7 @@ public final class ZonedDateTimeConverter extends DateTimeConverter {
 
     /**
      * Construct a <b>java.time.ZonedDateTime</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public ZonedDateTimeConverter() {
         super();
@@ -58,9 +58,9 @@ public final class ZonedDateTimeConverter extends DateTimeConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      */
     @Override
     protected Class<?> getDefaultType() {
