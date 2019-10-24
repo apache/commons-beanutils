@@ -26,6 +26,7 @@ package org.apache.commons.beanutils2.converters;
  * </p>
  *
  * @since 2.0
+ * @see java.lang.Enum
  */
 public final class EnumConverter extends AbstractConverter {
 
