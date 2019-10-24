@@ -29,7 +29,7 @@
   </properties>
   <body>
 
-    <release version="2.0.0" date="2018-MM-DD" description="Update from Java 6 to 7, update from Apache Commons Collection 3 to 4.">
+    <release version="2.0.0" date="2018-MM-DD" description="Update to Java 8.">
       <action issue="BEANUTILS-402" dev="melloware" type="update" due-to="Melloware">
         Double-Checked Locking anti pattern in WeakFastHashMap.
       </action>
@@ -41,9 +41,6 @@
       </action>
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
-      </action>
-      <action issue="BEANUTILS-500" dev="dbrosius" type="update" due-to="Dave Brosius, Gary Gregory">
-        Upgrade from Apache Commons Collections 3 to 4.
       </action>
       <action issue="BEANUTILS-505" dev="ggregory" type="update" due-to="Gary Gregory">
         Add missing serialVersionUID to Serializable classes.
@@ -57,9 +54,6 @@
       <action issue="BEANUTILS-509" dev="ggregory" type="update" due-to="sunil, Akshay Gehi">
         WeakHashmap enters into infinite loop in WrapDynaClass.java.
       </action>
-      <action issue="BEANUTILS-517" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update Apache Commons Collections from 4.2 to 4.3.
-      </action>
       <action issue="BEANUTILS-520" dev="ggregory" type="update" due-to="Melloware">
         BeanUtils2 mitigate CVE-2014-0114.
       </action>
@@ -67,13 +61,16 @@
         Update Apache Commons Collections from 4.3 to 4.4.
       </action>
       <action issue="BEANUTILS-527" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
-        Convert Collections4 to java.util.function #8.
+        Convert Collections4 to java.util.function. #8.
+      </action>
+      <action issue="BEANUTILS-527" dev="ggregory" type="remove" due-to="Melloware, Matt Sicker, Gary Gregory">
+        Removed Commons Collections dependency. #8.
       </action>
       <action issue="BEANUTILS-528" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
         New converters for UUID, URI, and Path #10.
       </action>
       <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
-        New converters for Java 8 Time classes LocalDate, LocaleDateTime, ZonedDateTime, OffsetDateTime #13.
+        New converters for Java 8 Time classes #13.
       </action>
       <action issue="BEANUTILS-529" dev="ggregory" type="update" due-to="Gary Gregory">
         Log at the debug level instead of info.

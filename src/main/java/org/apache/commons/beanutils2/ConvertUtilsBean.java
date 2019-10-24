@@ -27,6 +27,19 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.MonthDay;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.Period;
+import java.time.Year;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.UUID;
@@ -42,11 +55,19 @@ import org.apache.commons.beanutils2.converters.ClassConverter;
 import org.apache.commons.beanutils2.converters.ConverterFacade;
 import org.apache.commons.beanutils2.converters.DateConverter;
 import org.apache.commons.beanutils2.converters.DoubleConverter;
+import org.apache.commons.beanutils2.converters.DurationConverter;
 import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
 import org.apache.commons.beanutils2.converters.IntegerConverter;
+import org.apache.commons.beanutils2.converters.LocalDateConverter;
+import org.apache.commons.beanutils2.converters.LocalDateTimeConverter;
+import org.apache.commons.beanutils2.converters.LocalTimeConverter;
 import org.apache.commons.beanutils2.converters.LongConverter;
+import org.apache.commons.beanutils2.converters.MonthDayConverter;
+import org.apache.commons.beanutils2.converters.OffsetDateTimeConverter;
+import org.apache.commons.beanutils2.converters.OffsetTimeConverter;
 import org.apache.commons.beanutils2.converters.PathConverter;
+import org.apache.commons.beanutils2.converters.PeriodConverter;
 import org.apache.commons.beanutils2.converters.ShortConverter;
 import org.apache.commons.beanutils2.converters.SqlDateConverter;
 import org.apache.commons.beanutils2.converters.SqlTimeConverter;
@@ -55,6 +76,11 @@ import org.apache.commons.beanutils2.converters.StringConverter;
 import org.apache.commons.beanutils2.converters.URIConverter;
 import org.apache.commons.beanutils2.converters.URLConverter;
 import org.apache.commons.beanutils2.converters.UUIDConverter;
+import org.apache.commons.beanutils2.converters.YearConverter;
+import org.apache.commons.beanutils2.converters.YearMonthConverter;
+import org.apache.commons.beanutils2.converters.ZoneIdConverter;
+import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
+import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -87,6 +113,19 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.sql.Date (no default value)</li>
  * <li>java.sql.Time (no default value)</li>
  * <li>java.sql.Timestamp (no default value)</li>
+ * <li>java.time.LocalDate (no default value)</li>
+ * <li>java.time.LocalDateTime (no default value)</li>
+ * <li>java.time.LocalTime (no default value)</li>
+ * <li>java.time.OffsetDateTime (no default value)</li>
+ * <li>java.time.OffsetTime (no default value)</li>
+ * <li>java.time.ZonedDateTime (no default value)</li>
+ * <li>java.time.Duration (no default value)</li>
+ * <li>java.time.MonthDay (no default value)</li>
+ * <li>java.time.Period (no default value)</li>
+ * <li>java.time.Year (no default value)</li>
+ * <li>java.time.YearMonth (no default value)</li>
+ * <li>java.time.ZoneId (no default value)</li>
+ * <li>java.time.ZoneOffset (no default value)</li>
  * </ul>
  *
  * <p>For backwards compatibility, the standard Converters for primitive
@@ -460,23 +499,51 @@ public class ConvertUtilsBean {
      *     <li><code>URL.class</code> - {@link URLConverter}</li>
      *     <li><code>URI.class</code> - {@link URIConverter}</li>
      *     <li><code>UUID.class</code> - {@link UUIDConverter}</li>
+     *     <li><code>LocalDate.class</code> - {@link LocalDateConverter}</li>
+     *     <li><code>LocalDateTime.class</code> - {@link LocalDateTimeConverter}</li>
+     *     <li><code>LocalTime.class</code> - {@link LocalTimeConverter}</li>
+     *     <li><code>OffsetDateTime.class</code> - {@link OffsetDateTimeConverter}</li>
+     *     <li><code>OffsetTime.class</code> - {@link OffsetTimeConverter}</li>
+     *     <li><code>ZonedDateTime.class</code> - {@link ZonedDateTimeConverter}</li>
+     *     <li><code>Duration.class</code> - {@link DurationConverter}</li>
+     *     <li><code>MonthDay.class</code> - {@link MonthDayConverter}</li>
+     *     <li><code>Period.class</code> - {@link PeriodConverter}</li>
+     *     <li><code>Year.class</code> - {@link YearConverter}</li>
+     *     <li><code>YearMonth.class</code> - {@link YearMonthConverter}</li>
+     *     <li><code>ZoneId.class</code> - {@link ZoneIdConverter}</li>
+     *     <li><code>ZoneOffset.class</code> - {@link ZoneOffsetConverter}</li>
      * </ul>
      * @param throwException <code>true</code> if the converters should
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
      */
     private void registerOther(final boolean throwException) {
-        register(Class.class,         throwException ? new ClassConverter()        : new ClassConverter(null));
-        register(java.util.Date.class, throwException ? new DateConverter()        : new DateConverter(null));
-        register(Calendar.class,      throwException ? new CalendarConverter()     : new CalendarConverter(null));
-        register(File.class,          throwException ? new FileConverter()         : new FileConverter(null));
-        register(Path.class,          throwException ? new PathConverter()         : new PathConverter(null));
-        register(java.sql.Date.class, throwException ? new SqlDateConverter()      : new SqlDateConverter(null));
-        register(java.sql.Time.class, throwException ? new SqlTimeConverter()      : new SqlTimeConverter(null));
-        register(Timestamp.class,     throwException ? new SqlTimestampConverter() : new SqlTimestampConverter(null));
-        register(URL.class,           throwException ? new URLConverter()          : new URLConverter(null));
-        register(URI.class,           throwException ? new URIConverter()          : new URIConverter(null));
-        register(UUID.class,          throwException ? new UUIDConverter()         : new UUIDConverter(null));
+    	// @formatter:off
+        register(Class.class,          throwException ? new ClassConverter()          : new ClassConverter(null));
+        register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
+        register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
+        register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
+        register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
+        register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
+        register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
+        register(Timestamp.class,      throwException ? new SqlTimestampConverter()   : new SqlTimestampConverter(null));
+        register(URL.class,            throwException ? new URLConverter()            : new URLConverter(null));
+        register(URI.class,            throwException ? new URIConverter()            : new URIConverter(null));
+        register(UUID.class,           throwException ? new UUIDConverter()           : new UUIDConverter(null));
+        register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
+        register(LocalDateTime.class,  throwException ? new LocalDateTimeConverter()  : new LocalDateTimeConverter(null));
+        register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
+        register(OffsetDateTime.class, throwException ? new OffsetDateTimeConverter() : new OffsetDateTimeConverter(null));
+        register(OffsetTime.class,     throwException ? new OffsetTimeConverter()     : new OffsetTimeConverter(null));
+        register(ZonedDateTime.class,  throwException ? new ZonedDateTimeConverter()  : new ZonedDateTimeConverter(null));
+        register(Duration.class,       throwException ? new DurationConverter()       : new DurationConverter(null));
+        register(MonthDay.class,       throwException ? new MonthDayConverter()       : new MonthDayConverter(null));
+        register(Period.class,         throwException ? new PeriodConverter()         : new PeriodConverter(null));
+        register(Year.class,           throwException ? new YearConverter()           : new YearConverter(null));
+        register(YearMonth.class,      throwException ? new YearMonthConverter()      : new YearMonthConverter(null));
+        register(ZoneId.class,         throwException ? new ZoneIdConverter()         : new ZoneIdConverter(null));
+        register(ZoneOffset.class,     throwException ? new ZoneOffsetConverter()     : new ZoneOffsetConverter(null));
+        // @formatter:on
     }
 
     /**
@@ -491,6 +558,7 @@ public class ConvertUtilsBean {
      * the default.
      */
     private void registerArrays(final boolean throwException, final int defaultArraySize) {
+    	// @formatter:off
 
         // Primitives
         registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
@@ -516,18 +584,31 @@ public class ConvertUtilsBean {
         registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
 
         // Other
-        registerArrayConverter(Class.class,          new ClassConverter(),        throwException, defaultArraySize);
-        registerArrayConverter(java.util.Date.class, new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(Calendar.class,       new DateConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(File.class,           new FileConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(Path.class,           new PathConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(), throwException, defaultArraySize);
-        registerArrayConverter(URL.class,            new URLConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(URI.class,            new URIConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(UUID.class,           new UUIDConverter(),         throwException, defaultArraySize);
-
+        registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Calendar.class,       new DateConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(),  throwException, defaultArraySize);
+        registerArrayConverter(URL.class,            new URLConverter(),           throwException, defaultArraySize);
+        registerArrayConverter(URI.class,            new URIConverter(),           throwException, defaultArraySize);
+        registerArrayConverter(UUID.class,           new UUIDConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(LocalDate.class,      new LocalDateConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(LocalDateTime.class,  new LocalDateTimeConverter(), throwException, defaultArraySize);
+        registerArrayConverter(LocalTime.class,      new LocalTimeConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(OffsetDateTime.class, new OffsetDateTimeConverter(),throwException, defaultArraySize);
+        registerArrayConverter(OffsetTime.class,     new OffsetTimeConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(ZonedDateTime.class,  new ZonedDateTimeConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Duration.class,       new DurationConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(MonthDay.class,       new MonthDayConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Period.class,         new PeriodConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(Year.class,           new YearConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(YearMonth.class,      new YearMonthConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(ZoneId.class,         new ZoneIdConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(ZoneOffset.class,     new ZoneOffsetConverter(),    throwException, defaultArraySize);
+        // @formatter:on
     }
 
     /**
