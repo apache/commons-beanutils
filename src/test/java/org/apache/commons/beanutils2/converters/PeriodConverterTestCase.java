@@ -82,15 +82,15 @@ public class PeriodConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"P2Y",
-        	"P5D",
-        	"P1Y2M3D"
+            "P2Y",
+            "P5D",
+            "P1Y2M3D"
         };
 
         final Period[] expected = {
-        		Period.parse("P2Y"),
-        		Period.parse("P5D"),
-        		Period.parse("P1Y2M3D")
+                Period.parse("P2Y"),
+                Period.parse("P5D"),
+                Period.parse("P1Y2M3D")
         };
 
         for(int i=0;i<expected.length;i++) {

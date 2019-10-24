@@ -24,6 +24,7 @@ import java.time.Duration;
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
+ * </p>
  *
  * @since 2.0
  */
