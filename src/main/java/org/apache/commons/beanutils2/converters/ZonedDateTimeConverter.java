@@ -26,11 +26,14 @@ import java.time.ZonedDateTime;
  * by using a Locale's default format or by specifying a set of format
  * patterns (note, there is no default String conversion for Calendar).
  * See the {@link DateTimeConverter} documentation for further details.
+ * </p>
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
+ * </p>
  *
  * @since 2.0
+ * @see java.time.ZonedDateTime
  */
 public final class ZonedDateTimeConverter extends DateTimeConverter {
 
