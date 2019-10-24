@@ -30,6 +30,9 @@
   <body>
 
     <release version="2.0.0" date="2018-MM-DD" description="Update to Java 8.">
+      <action issue="BEANUTILS-346" dev="melloware" type="update" due-to="Melloware">
+        New converter for Enum.
+      </action>
       <action issue="BEANUTILS-402" dev="melloware" type="update" due-to="Melloware">
         Double-Checked Locking anti pattern in WeakFastHashMap.
       </action>
