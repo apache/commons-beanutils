@@ -36,11 +36,7 @@ public class EnumConverterTestCase extends TestCase {
         return new TestSuite(EnumConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
-
     private Converter converter = null;
-
-    // ------------------------------------------------------------------------
 
     public EnumConverterTestCase(final String name) {
         super(name);
@@ -54,8 +50,6 @@ public class EnumConverterTestCase extends TestCase {
         return new EnumConverter();
     }
 
-    // ------------------------------------------------------------------------
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,8 +59,6 @@ public class EnumConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
