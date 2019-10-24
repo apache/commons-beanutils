@@ -27,6 +27,7 @@ import java.time.ZoneOffset;
  * </p>
  *
  * @since 2.0
+ * @see java.time.ZoneOffset
  */
 public final class ZoneOffsetConverter extends AbstractConverter {
 

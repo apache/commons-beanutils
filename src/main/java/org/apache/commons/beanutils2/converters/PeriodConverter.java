@@ -27,6 +27,7 @@ import java.time.Period;
  * </p>
  *
  * @since 2.0
+ * @see java.time.Period
  */
 public final class PeriodConverter extends AbstractConverter {
 

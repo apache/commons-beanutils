@@ -33,6 +33,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @since 2.0
+ * @see java.time.LocalDate
  */
 public final class LocalDateConverter extends DateTimeConverter {
 

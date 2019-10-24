@@ -27,6 +27,7 @@ import java.time.YearMonth;
  * </p>
  *
  * @since 2.0
+ * @see java.time.YearMonth
  */
 public final class YearMonthConverter extends AbstractConverter {
 

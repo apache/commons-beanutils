@@ -27,6 +27,7 @@ import java.time.Duration;
  * </p>
  *
  * @since 2.0
+ * @see java.time.Duration
  */
 public final class DurationConverter extends AbstractConverter {
 

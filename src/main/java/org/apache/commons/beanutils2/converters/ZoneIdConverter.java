@@ -27,6 +27,7 @@ import java.time.ZoneId;
  * </p>
  *
  * @since 2.0
+ * @see java.time.ZoneId
  */
 public final class ZoneIdConverter extends AbstractConverter {
 

@@ -27,6 +27,7 @@ import java.time.LocalTime;
  * </p>
  *
  * @since 2.0
+ * @see java.time.LocalTime
  */
 public final class LocalTimeConverter extends AbstractConverter {
 

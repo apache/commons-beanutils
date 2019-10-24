@@ -27,6 +27,7 @@ import java.time.Year;
  * </p>
  *
  * @since 2.0
+ * @see java.time.Year
  */
 public final class YearConverter extends AbstractConverter {
 

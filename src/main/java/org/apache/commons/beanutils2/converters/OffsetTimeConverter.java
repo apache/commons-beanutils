@@ -27,6 +27,7 @@ import java.time.OffsetTime;
  * </p>
  *
  * @since 2.0
+ * @see java.time.OffsetTime
  */
 public final class OffsetTimeConverter extends AbstractConverter {
 

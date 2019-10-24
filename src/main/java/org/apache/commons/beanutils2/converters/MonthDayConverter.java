@@ -27,6 +27,7 @@ import java.time.MonthDay;
  * </p>
  *
  * @since 2.0
+ * @see java.time.MonthDay
  */
 public final class MonthDayConverter extends AbstractConverter {
 
