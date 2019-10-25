@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2.priv;
-
 
 /**
  * <p>This class is designed to test the default access jvm problem workaround.
@@ -31,9 +29,7 @@ package org.apache.commons.beanutils2.priv;
 
 class PackageBean {
 
-
     
-
 
     /**
      * Package private constructor - can only use factory method to create
@@ -45,9 +41,7 @@ class PackageBean {
 
     }
 
-
     
-
 
     /**
      */

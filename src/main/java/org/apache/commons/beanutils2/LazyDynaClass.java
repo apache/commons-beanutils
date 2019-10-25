@@ -280,7 +280,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
             return;
         }
 
-
         // Create a new property array of without the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
         final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];

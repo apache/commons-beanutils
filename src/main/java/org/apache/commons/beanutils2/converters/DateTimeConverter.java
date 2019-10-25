@@ -98,7 +98,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private TimeZone timeZone;
     private boolean useLocaleFormat;
 
-
     
 
     /**
@@ -120,7 +119,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public DateTimeConverter(final Object defaultValue) {
         super(defaultValue);
     }
-
 
     
 

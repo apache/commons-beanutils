@@ -36,9 +36,7 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         super(name);
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -49,7 +47,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         BeanUtilsBean.setInstance(new BeanUtilsBean2());
         setUpShared();
     }
-
 
     /**
      * Return the tests included in this test suite.

@@ -22,7 +22,6 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming

@@ -56,7 +56,6 @@ public class CharacterConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
     }
 
-
     
 
     /**

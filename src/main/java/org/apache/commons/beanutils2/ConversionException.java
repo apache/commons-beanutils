@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 /**
  * <p>A <strong>ConversionException</strong> indicates that a call to
@@ -43,7 +41,6 @@ public class ConversionException extends RuntimeException {
 
     }
 
-
     /**
      * Construct a new exception with the specified message and root cause.
      *
@@ -57,7 +54,6 @@ public class ConversionException extends RuntimeException {
 
     }
 
-
     /**
      * Construct a new exception with the specified root cause.
      *
@@ -70,9 +66,7 @@ public class ConversionException extends RuntimeException {
 
     }
 
-
     
-
 
     /**
      * The root cause of this {@code ConversionException}, compatible with
@@ -88,6 +82,5 @@ public class ConversionException extends RuntimeException {
     public Throwable getCause() {
         return this.cause;
     }
-
 
 }

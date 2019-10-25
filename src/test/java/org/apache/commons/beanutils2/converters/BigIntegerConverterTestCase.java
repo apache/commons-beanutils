@@ -23,7 +23,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the BigInteger class.
  *

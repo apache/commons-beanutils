@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
-
 
 /**
  * <p>Implementation of {@code DynaClass} for DynaBeans that wrap the
@@ -103,7 +100,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
      * {@code ResultSet}.  The property names corresponding
@@ -131,7 +127,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         this(resultSet, lowerCase, false);
 
     }
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -169,18 +164,14 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     
-
 
     /**
      * <p>The {@code ResultSet} we are wrapping.</p>
      */
     protected ResultSet resultSet = null;
 
-
     
-
 
     /**
      * <p>Return an {@code Iterator} of {@link DynaBean} instances for
@@ -194,7 +185,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return new ResultSetIterator(this);
 
     }
-
 
     /**
      * Get a value from the {@link ResultSet} for the specified
@@ -211,7 +201,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     
 
-
     /**
      * <p>Return the result set we are wrapping.</p>
      */
@@ -220,7 +209,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return this.resultSet;
 
     }
-
 
     
 

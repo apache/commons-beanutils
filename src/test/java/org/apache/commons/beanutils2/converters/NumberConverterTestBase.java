@@ -27,7 +27,6 @@ import org.apache.commons.beanutils2.ConversionException;
 
 import junit.framework.TestCase;
 
-
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
  *

@@ -163,7 +163,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected MutableDynaClass dynaClass;
 
-
     
 
     /**
@@ -200,7 +199,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
     }
-
 
     
 
@@ -417,7 +415,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
                               + mappedProperty.getClass().getName());
 
     }
-
 
     /**
      * Return the {@code DynaClass} instance that describes the set of

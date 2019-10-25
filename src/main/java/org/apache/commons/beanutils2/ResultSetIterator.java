@@ -15,14 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
 
 /**
  * <p>Implementation of {@code java.util.Iterator} returned by the
@@ -34,9 +31,7 @@ import java.util.NoSuchElementException;
 
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
-
     
-
 
     /**
      * <p>Construct an {@code Iterator} for the result set being wrapped
@@ -51,10 +46,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     
-
-
 
     /**
      * <p>Flag indicating whether the result set is currently positioned at a
@@ -62,12 +54,10 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      */
     protected boolean current = false;
 
-
     /**
      * <p>The {@link ResultSetDynaClass} we are associated with.</p>
      */
     protected ResultSetDynaClass dynaClass = null;
-
 
     /**
      * <p>Flag indicating whether the result set has indicated that there are
@@ -75,9 +65,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      */
     protected boolean eof = false;
 
-
     
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -98,7 +86,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             ("FIXME - mapped properties not currently supported");
 
     }
-
 
     /**
      * Return the value of a simple property with the specified name.
@@ -124,7 +111,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * Return the value of an indexed property with the specified name.
      *
@@ -149,7 +135,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or {@code null} if there is no value for the specified key.
@@ -171,7 +156,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
@@ -184,7 +168,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         return this.dynaClass;
 
     }
-
 
     /**
      * Remove any existing value for the specified key on the
@@ -204,7 +187,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             ("FIXME - mapped operations not currently supported");
 
     }
-
 
     /**
      * Set the value of a simple property with the specified name.
@@ -234,7 +216,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * Set the value of an indexed property with the specified name.
      *
@@ -259,7 +240,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * Set the value of a mapped property with the specified name.
      *
@@ -282,9 +262,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     
-
 
     /**
      * <p>Return {@code true} if the iteration has more elements.</p>
@@ -303,7 +281,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         }
 
     }
-
 
     /**
      * <p>Return the next element in the iteration.</p>
@@ -326,7 +303,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     /**
      * <p>Remove the current element from the iteration.  This method is
      * not supported.</p>
@@ -338,9 +314,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
     
-
 
     /**
      * <p>Advance the result set to the next row, if there is not a current
@@ -361,6 +335,5 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         }
 
     }
-
 
 }

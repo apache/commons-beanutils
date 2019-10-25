@@ -17,10 +17,8 @@
 
 package org.apache.commons.beanutils2.locale.converters;
 
-
 import java.text.ParseException;
 import java.util.Locale;
-
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -33,7 +31,6 @@ import java.util.Locale;
  */
 
 public class DoubleLocaleConverter extends DecimalLocaleConverter {
-
 
     
 
@@ -220,7 +217,5 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
         return result;
     }
 
-
 }
-
 

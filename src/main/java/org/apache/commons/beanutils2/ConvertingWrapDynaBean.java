@@ -47,7 +47,6 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
 
     }
 
-
     /**
      * Set the value of the property with the specified name
      * performing any type conversions if necessary. So this method

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,7 +24,6 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
@@ -62,9 +59,7 @@ public class DynaProperty implements Serializable {
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
 
-
     
-
 
     /**
      * Construct a property that accepts any data type.
@@ -76,7 +71,6 @@ public class DynaProperty implements Serializable {
         this(name, Object.class);
 
     }
-
 
     /**
      * Construct a property of the specified data type.
@@ -142,7 +136,6 @@ public class DynaProperty implements Serializable {
         return this.type;
     }
 
-
     /** The <em>(optional)</em> type of content elements for indexed {@code DynaProperty} */
     protected transient Class<?> contentType;
     /**
@@ -161,7 +154,6 @@ public class DynaProperty implements Serializable {
     }
 
     
-
 
     /**
      * Does this property represent an indexed value (ie an array or List)?
@@ -182,7 +174,6 @@ public class DynaProperty implements Serializable {
         }
 
     }
-
 
     /**
      * Does this property represent a mapped value (ie a Map)?
@@ -341,7 +332,6 @@ public class DynaProperty implements Serializable {
         // read other values
         in.defaultReadObject();
     }
-
 
     /**
      * Reads a class using safe encoding to workaround java 1.3 serialization bug.

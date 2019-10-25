@@ -33,7 +33,6 @@ import java.util.Locale;
 
 public class SqlDateLocaleConverter extends DateLocaleConverter {
 
-
     
 
     /**
@@ -197,7 +196,6 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
 
         super(defaultValue, locale, pattern, locPattern);
     }
-
 
     
 

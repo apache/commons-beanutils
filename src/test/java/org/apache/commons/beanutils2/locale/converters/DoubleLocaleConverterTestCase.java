@@ -24,8 +24,6 @@ package org.apache.commons.beanutils2.locale.converters;
 
 public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     
 
     public DoubleLocaleConverterTestCase(final String name) {
@@ -55,7 +53,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-
     
 
     /**
@@ -69,12 +66,10 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
                                                   localizedDecimalPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -83,7 +78,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, new Double("1.234"));
-
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -94,7 +88,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-
         // **************************************************************************
         // Convert with specified type
         //
@@ -104,13 +97,11 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-
         // ------------- Construct with non-localized pattern ------------
         converter = new DoubleLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultDecimalPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -155,7 +146,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -172,9 +162,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, locPattern) constructor
@@ -189,7 +177,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -256,8 +243,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertNull(converter, defaultValue);
 
     }
-
-
 
 }
 

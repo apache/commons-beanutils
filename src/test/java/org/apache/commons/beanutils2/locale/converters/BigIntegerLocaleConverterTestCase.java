@@ -28,8 +28,6 @@ import org.apache.commons.beanutils2.ConversionException;
 
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     
 
     public BigIntegerLocaleConverterTestCase(final String name) {
@@ -59,7 +57,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-
     
 
     /**
@@ -73,12 +70,10 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
                                                   localizedIntegerPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -88,7 +83,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new BigInteger("1"));
 
-
         // **************************************************************************
         // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
@@ -96,7 +90,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new BigInteger("1"));
-
 
         // **************************************************************************
         // Convert with specified type
@@ -107,13 +100,11 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
-
         // ------------- Construct with non-localized pattern ------------
         converter = new BigIntegerLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultIntegerPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -158,7 +149,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -175,9 +165,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, locPattern) constructor
@@ -192,7 +180,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 

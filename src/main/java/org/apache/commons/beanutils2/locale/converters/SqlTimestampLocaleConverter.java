@@ -33,7 +33,6 @@ import java.util.Locale;
 
 public class SqlTimestampLocaleConverter extends DateLocaleConverter {
 
-
     
 
     /**

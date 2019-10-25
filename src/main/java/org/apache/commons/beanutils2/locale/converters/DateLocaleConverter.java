@@ -29,7 +29,6 @@ import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -191,7 +190,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         this(defaultValue, locale, null, locPattern);
     }
 
-
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
@@ -278,7 +276,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
          final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
                                                 : new SimpleDateFormat(pattern, locale);
          formatter.setLenient(isLenient);
-
 
          // Parse the Date
         final ParsePosition pos = new ParsePosition(0);

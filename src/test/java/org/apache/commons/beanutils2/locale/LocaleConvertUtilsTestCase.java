@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2.locale;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -29,7 +28,6 @@ import org.apache.commons.beanutils2.ConversionException;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * <p>
@@ -47,7 +45,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     
 
-
     /**
      * Construct a new instance of this test case.
      *
@@ -57,9 +54,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         super(name);
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -75,9 +70,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         // could be commas instead of stops in Europe.
         m_decimalSeparator = result.charAt(1);
 
-
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -85,7 +78,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public static Test suite() {
         return new TestSuite(LocaleConvertUtilsTestCase.class);
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -95,9 +87,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         // No action required
     }
 
-
     
-
 
     /**
      * Negative String to primitive integer array tests.
@@ -126,7 +116,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative scalar conversion tests.  These rely on the standard
      * default value conversions in LocaleConvertUtils.
@@ -140,7 +129,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         value = LocaleConvertUtils.convert("foo", Boolean.class);
         ...
         */
-
 
         try {
             LocaleConvertUtils.convert("foo", Byte.TYPE);
@@ -237,7 +225,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative String to String array tests.
      */
@@ -251,7 +238,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         value = LocaleConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
     }
-
 
     /**
      * Test conversion of object to string for arrays - .
@@ -281,7 +267,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(stringArray2));
 
     }
-
 
     /**
      * Test conversion of object to string for scalars.
@@ -313,7 +298,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive array conversion tests.
      */
@@ -338,7 +322,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
     }
-
 
     /**
      * Positive String to primitive integer array tests.
@@ -375,7 +358,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         value = LocaleConvertUtils.convert("{ 0 10 }", intArray.getClass());
         checkIntegerArray(value, intArray2);
     }
-
 
     /**
      * Positive scalar conversion tests.
@@ -535,7 +517,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive String to String array tests.
      */
@@ -640,7 +621,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
     
 
-
     private void checkIntegerArray(final Object value, final int intArray[]) {
 
         assertNotNull("Returned value is not null", value);
@@ -654,7 +634,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
     private void checkStringArray(final Object value, final String stringArray[]) {
 
@@ -670,7 +649,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
 }
 

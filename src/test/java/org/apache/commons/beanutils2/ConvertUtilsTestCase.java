@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -31,7 +30,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * <p>
  *  Test Case for the ConvertUtils class.
@@ -43,9 +41,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
     
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -56,9 +52,7 @@ public class ConvertUtilsTestCase extends TestCase {
         super(name);
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -70,14 +64,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(ConvertUtilsTestCase.class);
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -87,9 +79,7 @@ public class ConvertUtilsTestCase extends TestCase {
         // No action required
     }
 
-
     
-
 
     /**
      * Negative String to primitive integer array tests.
@@ -114,9 +104,7 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{ 0, 1a3 }", intArray.getClass());
         checkIntegerArray(value, intArray);
 
-
     }
-
 
     /**
      * Negative scalar conversion tests.  These rely on the standard
@@ -195,7 +183,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative String to String array tests.
      */
@@ -208,7 +195,6 @@ public class ConvertUtilsTestCase extends TestCase {
         checkStringArray(value, stringArray);
 
     }
-
 
     /**
      * Test conversion of object to string for arrays.
@@ -237,7 +223,6 @@ public class ConvertUtilsTestCase extends TestCase {
                      ConvertUtils.convert(stringArray2));
 
     }
-
 
     /**
      * Test conversion of object to string for scalars.
@@ -269,7 +254,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive array conversion tests.
      */
@@ -293,7 +277,6 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(results2[2], 300);
 
     }
-
 
     /**
      * Positive String to primitive integer array tests.
@@ -329,7 +312,6 @@ public class ConvertUtilsTestCase extends TestCase {
         checkIntegerArray(value, intArray2);
 
     }
-
 
     /**
      * Positive scalar conversion tests.
@@ -483,7 +465,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive String to String array tests.
      */
@@ -536,7 +517,6 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{'abc', \"de,f\"}",
                                      stringArray.getClass());
         checkStringArray(value, stringArray2);
-
 
     }
 
@@ -675,7 +655,6 @@ public class ConvertUtilsTestCase extends TestCase {
 
     
 
-
     private void checkIntegerArray(final Object value, final int intArray[]) {
 
         assertNotNull("Returned value is not null", value);
@@ -689,7 +668,6 @@ public class ConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
     private void checkStringArray(final Object value, final String stringArray[]) {
 
@@ -705,7 +683,6 @@ public class ConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
 }
 

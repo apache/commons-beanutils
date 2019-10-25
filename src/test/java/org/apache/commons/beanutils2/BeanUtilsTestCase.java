@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -32,7 +31,6 @@ import org.apache.commons.beanutils2.converters.DateConverter;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * <p>
@@ -69,7 +67,6 @@ public class BeanUtilsTestCase extends TestCase {
      * The test bean for each test.
      */
     protected TestBean bean = null;
-
 
     /**
      * The set of properties that should be described.
@@ -117,9 +114,7 @@ public class BeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -153,7 +148,6 @@ public class BeanUtilsTestCase extends TestCase {
         testStringDate = "28.12.1992";
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -169,9 +163,7 @@ public class BeanUtilsTestCase extends TestCase {
         bean = null;
     }
 
-
     
-
 
     /**
      * Test the copyProperties() method from a DynaBean.
@@ -250,7 +242,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
      */
@@ -307,7 +298,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("intArray[2]", 200, intArray[2]);
 
     }
-
 
     /**
      * Test the copyProperties() method from a standard JavaBean.
@@ -379,7 +369,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test the describe() method.
      */
@@ -428,7 +417,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      *  tests the string and int arrays of TestBean
      */
@@ -446,13 +434,11 @@ public class BeanUtilsTestCase extends TestCase {
             assertTrue("String array length = " + iarr.length,
                     iarr.length == arr.length);
 
-
             // Test property which isn't array or collection
             arr = BeanUtils.getArrayProperty(bean, "shortProperty");
             final String shortAsString = "" + bean.getShortProperty();
             assertEquals("Short List Test lth", 1, arr.length);
             assertEquals("Short Test value", shortAsString, arr[0]);
-
 
             // Test comma delimited list
             bean.setStringProperty("ABC");
@@ -544,7 +530,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      *  tests getting a nested property
      */
@@ -562,7 +547,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting a 'whatever' property
@@ -582,7 +566,6 @@ public class BeanUtilsTestCase extends TestCase {
             fail("NoSuchMethodException");
         }
     }
-
 
     /**
      *  tests getting a 'whatever' property
@@ -667,7 +650,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test populate() method on array properties as a whole.
      */
@@ -705,7 +687,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test populate() on mapped properties.
      */
@@ -738,7 +719,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test populate() method on nested properties.
@@ -792,7 +772,6 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test populate() method on scalar properties.
@@ -854,7 +833,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test calling setProperty() with null property values.
      */
@@ -894,7 +872,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test converting to and from primitive wrapper types.
      */
@@ -906,7 +883,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(1, Integer.parseInt(bean.getStringProperty()));
 
     }
-
 
     /**
      * Test narrowing and widening conversions on byte.
@@ -1013,7 +989,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on float.
      */
@@ -1033,7 +1008,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getFloatProperty(), 0.005);
 
     }
-
 
     /**
      * Test narrowing and widening conversions on int.
@@ -1057,7 +1031,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on long.
      */
@@ -1080,7 +1053,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setting a null property value.
      */
@@ -1091,7 +1063,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertNull("nullProperty is null", bean.getNullProperty());
 
     }
-
 
     /**
      * Test narrowing and widening conversions on short.
@@ -1135,7 +1106,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("value[3]", 30, intArray[3]);
         assertEquals("value[4]", 40, intArray[4]);
     }
-
 
     /**
      * Test narrowing and widening conversions on byte.
@@ -1240,7 +1210,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on float.
      */
@@ -1260,7 +1229,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getFloatProperty(), 0.005);
 
     }
-
 
     /**
      * Test narrowing and widening conversions on int.
@@ -1282,7 +1250,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on long.
      */
@@ -1303,7 +1270,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test narrowing and widening conversions on short.
      */
@@ -1323,7 +1289,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals((short) 123, bean.getShortProperty());
 
     }
-
 
     /**
      * Test copying a property using a nested indexed array expression,
@@ -1362,7 +1327,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copying a property using a nested mapped map property.
      */
@@ -1383,7 +1347,6 @@ public class BeanUtilsTestCase extends TestCase {
         checkMap(bean.getNested().getMapProperty(), changedMap);
 
     }
-
 
     /**
      * Test copying a property using a nested simple expression, with and
@@ -1420,7 +1383,6 @@ public class BeanUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test copying a null property value.
      */
@@ -1431,7 +1393,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertNull("nullProperty is null", bean.getNullProperty());
 
     }
-
 
     /**
      * Test copying a new value to a write-only property, with and without
@@ -1450,7 +1411,6 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("123", bean.getWriteOnlyPropertyValue());
 
     }
-
 
     /**
      * Test setting a new value to a write-only property, with and without
@@ -1498,7 +1458,6 @@ public class BeanUtilsTestCase extends TestCase {
         final BeanUtilsBean utilsTwo = new BeanUtilsBean(
                                                 new ConvertUtilsBean(),
                                                 new PropertyUtilsBean());
-
 
         final TestBean bean = new TestBean();
 
@@ -1564,7 +1523,6 @@ public class BeanUtilsTestCase extends TestCase {
                          expected[i], actual[i]);
         }
     }
-
 
     // Ensure that the actual Map matches the expected Map
     protected void checkMap(final Map<?, ?> actual, final Map<?, ?> expected) {

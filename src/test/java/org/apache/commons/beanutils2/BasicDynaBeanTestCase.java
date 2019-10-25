@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +30,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * <p>Test Case for the {@code BasicDynaBean} implementation class.
  * These tests were based on the ones in {@code PropertyUtilsTestCase}
@@ -42,15 +39,12 @@ import junit.framework.TestSuite;
 
 public class BasicDynaBeanTestCase extends TestCase {
 
-
     
-
 
     /**
      * The basic test bean for each test.
      */
     protected DynaBean bean = null;
-
 
     /**
      * The set of property names we expect to have returned when calling
@@ -76,9 +70,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         "stringProperty",
     };
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -91,9 +83,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -143,7 +133,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -152,7 +141,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         return new TestSuite(BasicDynaBeanTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -164,10 +152,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
-
     
-
 
     /**
      * Corner cases on getDynaProperty invalid arguments.
@@ -194,7 +179,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getDynaProperty on property {@code booleanProperty}.
      */
@@ -203,7 +187,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         testGetDescriptorBase("booleanProperty", Boolean.TYPE);
 
     }
-
 
     /**
      * Positive getDynaProperty on property {@code doubleProperty}.
@@ -214,7 +197,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getDynaProperty on property {@code floatProperty}.
      */
@@ -223,7 +205,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         testGetDescriptorBase("floatProperty", Float.TYPE);
 
     }
-
 
     /**
      * Positive getDynaProperty on property {@code intProperty}.
@@ -234,7 +215,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getDynaProperty on property {@code longProperty}.
      */
@@ -243,7 +223,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         testGetDescriptorBase("longProperty", Long.TYPE);
 
     }
-
 
     /**
      * Positive getDynaProperty on property {@code booleanSecond}
@@ -255,7 +234,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getDynaProperty on property {@code shortProperty}.
      */
@@ -265,7 +243,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getDynaProperty on property {@code stringProperty}.
      */
@@ -274,7 +251,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         testGetDescriptorBase("stringProperty", String.class);
 
     }
-
 
     /**
      * Positive test for getDynaPropertys().  Each property name
@@ -303,7 +279,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getIndexedProperty invalid arguments.
      */
@@ -318,9 +293,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
@@ -388,15 +361,12 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         }
 
-
     }
-
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testGetMappedArguments() {
-
 
         try {
             final Object value = bean.get("mappedProperty", "unknown");
@@ -405,9 +375,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t + " instead of returning null");
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
@@ -439,7 +407,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getSimpleProperty invalid arguments.
      */
@@ -455,7 +422,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a boolean property.
@@ -474,7 +440,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a double property.
      */
@@ -492,7 +457,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a float property.
@@ -513,7 +477,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a int property.
      */
@@ -531,7 +494,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a long property.
@@ -551,7 +513,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a short property.
      */
@@ -569,7 +530,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a String property.
@@ -589,7 +549,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test {@code contains()} method for mapped properties.
      */
@@ -602,7 +561,6 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Exception: " + t);
         }
 
-
         try {
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
@@ -611,7 +569,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test {@code remove()} method for mapped properties.
@@ -639,7 +596,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test serialization and deserialization.
@@ -714,7 +670,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on setIndexedProperty invalid arguments.
      */
@@ -730,7 +685,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
@@ -799,9 +753,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t);
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
@@ -826,9 +778,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Finding fourth value threw " + t);
         }
 
-
     }
-
 
     /**
      * Test setSimpleProperty on a boolean property.
@@ -848,7 +798,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a double property.
@@ -870,7 +819,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a float property.
      */
@@ -891,7 +839,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a int property.
      */
@@ -910,7 +857,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a long property.
@@ -931,7 +877,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a short property.
      */
@@ -951,7 +896,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a String property.
      */
@@ -970,9 +914,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Create and return a {@code DynaClass} instance for our test
@@ -1007,7 +949,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Base for testGetDescriptorXxxxx() series of tests.
      *
@@ -1026,6 +967,5 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
 }

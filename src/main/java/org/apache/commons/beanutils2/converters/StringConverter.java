@@ -42,7 +42,6 @@ package org.apache.commons.beanutils2.converters;
  */
 public final class StringConverter extends AbstractConverter {
 
-
     /**
      * Construct a <b>java.lang.String</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
@@ -94,6 +93,5 @@ public final class StringConverter extends AbstractConverter {
         }
         throw conversionException(type, value);
     }
-
 
 }

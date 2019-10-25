@@ -196,7 +196,6 @@ public class LazyDynaClassTestCase extends TestCase {
         assertFalse("property doesnt exist", dynaClass.isDynaProperty(testProperty));
     }
 
-
     /**
      * Test retrieving a property which doesn't exist (returnNull is 'true')
      */

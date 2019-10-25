@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 /**
  * This is a package private subclass of TestBean.  All of our properties
@@ -26,6 +24,5 @@ package org.apache.commons.beanutils2;
  */
 
 class TestBeanPackageSubclass extends TestBean {
-
 
 }

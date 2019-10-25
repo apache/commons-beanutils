@@ -47,7 +47,6 @@ public abstract class AbstractParent {
         return child.getName();
     }
 
-
     public String testAddChild2(final String ignore, final Child child) {
         this.child = child;
         return child.getName();

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -26,7 +24,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test accessing ResultSets via DynaBeans.
  *
@@ -34,15 +31,12 @@ import junit.framework.TestSuite;
 
 public class DynaResultSetTestCase extends TestCase {
 
-
     
-
 
     /**
      * The mock result set DynaClass to be tested.
      */
     protected ResultSetDynaClass dynaClass = null;
-
 
     /**
      * Names of the columns for this test.  Must match the order they are
@@ -57,9 +51,7 @@ public class DynaResultSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -72,9 +64,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -86,7 +76,6 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -95,7 +84,6 @@ public class DynaResultSetTestCase extends TestCase {
         return new TestSuite(DynaResultSetTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -107,10 +95,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
-
     
-
 
     public void testGetName() {
 
@@ -118,9 +103,7 @@ public class DynaResultSetTestCase extends TestCase {
                      "org.apache.commons.beanutils2.ResultSetDynaClass",
                      dynaClass.getName());
 
-
     }
-
 
     public void testGetDynaProperty() {
 
@@ -147,7 +130,6 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
     public void testGetDynaProperties() {
 
         final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
@@ -159,7 +141,6 @@ public class DynaResultSetTestCase extends TestCase {
         }
 
     }
-
 
     public void testNewInstance() {
 
@@ -173,7 +154,6 @@ public class DynaResultSetTestCase extends TestCase {
         }
 
     }
-
 
     public void testIteratorCount() {
 
@@ -190,7 +170,6 @@ public class DynaResultSetTestCase extends TestCase {
         assertEquals("iterator rows", 5, n);
 
     }
-
 
     public void testIteratorResults() {
 
@@ -238,9 +217,7 @@ public class DynaResultSetTestCase extends TestCase {
                      "This is a string",
                      (String) stringProperty);
 
-
     }
-
 
     /**
      * Test normal case column names (i.e. not converted to lower case)
@@ -297,8 +274,6 @@ public class DynaResultSetTestCase extends TestCase {
                      "This is a string",
                      (String) stringProperty);
 
-
     }
-
 
 }

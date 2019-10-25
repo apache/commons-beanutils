@@ -17,13 +17,10 @@
 
 package org.apache.commons.beanutils2.locale;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.BeanUtils;
-
-
 
 /**
  * <p>Utility methods for populating JavaBeans properties
@@ -35,7 +32,6 @@ import org.apache.commons.beanutils2.BeanUtils;
  */
 
 public class LocaleBeanUtils extends BeanUtils {
-
 
     
 
@@ -51,7 +47,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getDefaultLocale();
     }
-
 
     /**
      * <p>Sets the locale used when no locale is passed.</p>
@@ -93,7 +88,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setApplyLocalized(newApplyLocalized);
     }
-
 
     
 
@@ -324,7 +318,6 @@ public class LocaleBeanUtils extends BeanUtils {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedProperty(bean, name, key);
     }
 
-
     /**
      * <p>Return the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the specified pattern.</p>
@@ -352,7 +345,6 @@ public class LocaleBeanUtils extends BeanUtils {
 
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getMappedPropertyLocale(bean, name, pattern);
     }
-
 
     /**
      * <p>Return the value of the specified locale-sensitive mapped property
@@ -621,5 +613,4 @@ public class LocaleBeanUtils extends BeanUtils {
        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().invokeSetter(target, propName, key, index, newValue);
     }
 }
-
 

@@ -158,7 +158,6 @@ public class ConstructorUtils {
         return ctor.newInstance(args);
     }
 
-
     /**
      * <p>Convenience method returning new instance of {@code klazz} using a single argument constructor.
      * The formal parameter type is inferred from the actual values of {@code arg}.

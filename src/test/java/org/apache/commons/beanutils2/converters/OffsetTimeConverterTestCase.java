@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2.converters;
 
-
 import java.time.OffsetTime;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -25,7 +24,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * Test Case for the OffsetTimeConverter class.

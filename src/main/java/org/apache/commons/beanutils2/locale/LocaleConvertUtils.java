@@ -266,7 +266,6 @@ public class LocaleConvertUtils {
        LocaleConvertUtilsBean.getInstance().deregister();
     }
 
-
     /**
      * <p>Remove any registered {@link LocaleConverter} for the specified locale.</p>
      *
@@ -279,7 +278,6 @@ public class LocaleConvertUtils {
 
         LocaleConvertUtilsBean.getInstance().deregister(locale);
     }
-
 
     /**
      * <p>Remove any registered {@link LocaleConverter} for the specified locale and Class.</p>

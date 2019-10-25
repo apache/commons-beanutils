@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -29,7 +27,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test accessing RowSets via DynaBeans.
  *
@@ -37,15 +34,12 @@ import junit.framework.TestSuite;
 
 public class DynaRowSetTestCase extends TestCase {
 
-
     
-
 
     /**
      * The mock result set DynaClass to be tested.
      */
     protected RowSetDynaClass dynaClass = null;
-
 
     /**
      * Names of the columns for this test.  Must match the order they are
@@ -60,9 +54,7 @@ public class DynaRowSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -75,9 +67,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -89,7 +79,6 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -98,7 +87,6 @@ public class DynaRowSetTestCase extends TestCase {
         return new TestSuite(DynaRowSetTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -110,10 +98,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
-
     
-
 
     public void testGetName() {
 
@@ -121,9 +106,7 @@ public class DynaRowSetTestCase extends TestCase {
                      "org.apache.commons.beanutils2.RowSetDynaClass",
                      dynaClass.getName());
 
-
     }
-
 
     public void testGetDynaProperty() {
 
@@ -150,7 +133,6 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
     public void testGetDynaProperties() {
 
         final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
@@ -162,7 +144,6 @@ public class DynaRowSetTestCase extends TestCase {
         }
 
     }
-
 
     public void testNewInstance() {
 
@@ -177,7 +158,6 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
     public void testListCount() {
 
         final List<DynaBean> rows = dynaClass.getRows();
@@ -185,7 +165,6 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("list row count", 5, rows.size());
 
     }
-
 
     public void testListResults() {
 
@@ -230,7 +209,6 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
 
     }
 
@@ -286,7 +264,6 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
 
     }
 

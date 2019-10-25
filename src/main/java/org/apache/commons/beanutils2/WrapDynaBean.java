@@ -15,12 +15,10 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-
 
 /**
  * <p>Implementation of {@code DynaBean} that wraps a standard JavaBean
@@ -81,22 +79,18 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     
 
-
     /**
      * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
     protected transient WrapDynaClass dynaClass = null;
 
-
     /**
      * The JavaBean instance wrapped by this WrapDynaBean.
      */
     protected Object instance = null;
 
-
     
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -117,7 +111,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                 ("WrapDynaBean does not support contains()");
 
     }
-
 
     /**
      * Return the value of a simple property with the specified name.
@@ -147,7 +140,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         return value;
 
     }
-
 
     /**
      * Return the value of an indexed property with the specified name.
@@ -187,7 +179,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the value of a mapped property with the specified name,
      * or {@code null} if there is no value for the specified key.
@@ -221,7 +212,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Return the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
@@ -238,7 +228,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-
     /**
      * Remove any existing value for the specified key on the
      * specified mapped property.
@@ -253,12 +242,10 @@ public class WrapDynaBean implements DynaBean, Serializable {
     @Override
     public void remove(final String name, final String key) {
 
-
         throw new UnsupportedOperationException
                 ("WrapDynaBean does not support remove()");
 
     }
-
 
     /**
      * Set the value of a simple property with the specified name.
@@ -290,7 +277,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         }
 
     }
-
 
     /**
      * Set the value of an indexed property with the specified name.
@@ -327,7 +313,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         }
 
     }
-
 
     /**
      * Set the value of a mapped property with the specified name.
@@ -375,9 +360,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
         return instance;
     }
 
-
     
-
 
     /**
      * Return the property descriptor for the specified property name.

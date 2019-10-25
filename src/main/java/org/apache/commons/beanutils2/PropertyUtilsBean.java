@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -35,7 +34,6 @@ import org.apache.commons.beanutils2.expression.DefaultResolver;
 import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -134,9 +132,7 @@ public class PropertyUtilsBean {
         resetBeanIntrospectors();
     }
 
-
     
-
 
     /**
      * Return the configured {@link Resolver} implementation used by BeanUtils.
@@ -229,7 +225,6 @@ public class PropertyUtilsBean {
         Introspector.flushCaches();
 
     }
-
 
     /**
      * <p>Copy property values from the "origin" bean to the "destination" bean
@@ -335,7 +330,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return the entire set of properties for which the specified bean
      * provides a read method.  This map contains the unconverted property
@@ -383,7 +377,6 @@ public class PropertyUtilsBean {
         return description;
 
     }
-
 
     /**
      * Return the value of the specified indexed property of the specified
@@ -442,7 +435,6 @@ public class PropertyUtilsBean {
         return getIndexedProperty(bean, name, index);
 
     }
-
 
     /**
      * Return the value of the specified indexed property of the specified
@@ -554,7 +546,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
@@ -607,7 +598,6 @@ public class PropertyUtilsBean {
         return getMappedProperty(bean, name, key);
 
     }
-
 
     /**
      * Return the value of the specified mapped property of the specified
@@ -695,7 +685,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean class.</p>
      *
@@ -715,7 +704,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return the mapped property descriptors for this bean.</p>
      *
@@ -732,7 +720,6 @@ public class PropertyUtilsBean {
         return getMappedPropertyDescriptors(bean.getClass());
 
     }
-
 
     /**
      * Return the value of the (possibly nested) property of the specified
@@ -845,8 +832,6 @@ public class PropertyUtilsBean {
         return bean.get(propertyName);
     }
 
-
-
     /**
      * Return the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
@@ -873,7 +858,6 @@ public class PropertyUtilsBean {
         return getNestedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Retrieve the property descriptor for the specified property of the
@@ -971,7 +955,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Retrieve the property descriptors for the specified class,
      * introspecting and caching them the first time a particular bean class
@@ -1011,7 +994,6 @@ public class PropertyUtilsBean {
         return getPropertyDescriptors(bean.getClass());
 
     }
-
 
     /**
      * <p>Return the Java Class repesenting the property editor class that has
@@ -1063,7 +1045,6 @@ public class PropertyUtilsBean {
         return null;
 
     }
-
 
     /**
      * Return the Java Class representing the property type of the specified
@@ -1158,7 +1139,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property getter method for this property,
      * if there is one; otherwise return {@code null}.</p>
@@ -1174,7 +1154,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property getter method for this property,
      * if there is one; otherwise return {@code null}.</p>
@@ -1188,7 +1167,6 @@ public class PropertyUtilsBean {
     Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
-
 
     /**
      * Return the value of the specified simple property of the specified
@@ -1267,7 +1245,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property setter method for this property,
      * if there is one; otherwise return {@code null}.</p>
@@ -1288,7 +1265,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return an accessible property setter method for this property,
      * if there is one; otherwise return {@code null}.</p>
@@ -1305,7 +1281,6 @@ public class PropertyUtilsBean {
         return MethodUtils.getAccessibleMethod(clazz,
                 data.getWriteMethod(clazz, descriptor));
     }
-
 
     /**
      * <p>Return {@code true} if the specified property name identifies
@@ -1395,7 +1370,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * <p>Return {@code true} if the specified property name identifies
      * a writeable property on the specified bean; otherwise, return
@@ -1484,7 +1458,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * Set the value of the specified indexed property of the specified
      * bean, with no type conversions.  The zero-relative index of the
@@ -1543,7 +1516,6 @@ public class PropertyUtilsBean {
         setIndexedProperty(bean, name, index, value);
 
     }
-
 
     /**
      * Set the value of the specified indexed property of the specified
@@ -1667,7 +1639,6 @@ public class PropertyUtilsBean {
 
     }
 
-
     /**
      * Set the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
@@ -1722,7 +1693,6 @@ public class PropertyUtilsBean {
         setMappedProperty(bean, name, key, value);
 
     }
-
 
     /**
      * Set the value of the specified mapped property of the specified
@@ -1819,7 +1789,6 @@ public class PropertyUtilsBean {
         }
 
     }
-
 
     /**
      * Set the value of the (possibly nested) property of the specified
@@ -1975,8 +1944,6 @@ public class PropertyUtilsBean {
         bean.put(propertyName, value);
     }
 
-
-
     /**
      * Set the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
@@ -2003,7 +1970,6 @@ public class PropertyUtilsBean {
         setNestedProperty(bean, name, value);
 
     }
-
 
     /**
      * Set the value of the specified simple property of the specified bean,

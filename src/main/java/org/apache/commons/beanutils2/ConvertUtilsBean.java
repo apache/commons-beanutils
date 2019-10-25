@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.File;
 import java.lang.reflect.Array;
@@ -84,7 +82,6 @@ import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
 import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -189,7 +186,6 @@ public class ConvertUtilsBean {
 
     
 
-
     /**
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
@@ -245,7 +241,6 @@ public class ConvertUtilsBean {
 
     }
 
-
     /**
      * Convert the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.
@@ -272,7 +267,6 @@ public class ConvertUtilsBean {
         return converter.convert(clazz, value);
 
     }
-
 
     /**
      * Convert an array of specified values to an array of objects of the
@@ -311,7 +305,6 @@ public class ConvertUtilsBean {
         return array;
 
     }
-
 
     /**
      * Convert the value to an object of the specified class (if
@@ -654,7 +647,6 @@ public class ConvertUtilsBean {
         converters.remove(clazz);
 
     }
-
 
     /**
      * Look up and return any registered {@link Converter} for the specified

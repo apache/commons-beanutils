@@ -67,7 +67,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     protected boolean returnNull = false;
 
-
     
 
     /**
@@ -295,7 +294,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         return lazyMap;
     }
 
-
     
 
     /**
@@ -436,7 +434,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     }
 
-
     
 
     /**
@@ -464,7 +461,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public void setReturnNull(final boolean returnNull) {
         this.returnNull = returnNull;
     }
-
 
     
 

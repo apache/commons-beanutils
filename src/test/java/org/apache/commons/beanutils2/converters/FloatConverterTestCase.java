@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the FloatConverter class.
  *
@@ -97,7 +96,6 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             // expected result
         }
     }
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

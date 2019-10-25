@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -29,7 +27,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
  *
@@ -37,15 +34,12 @@ import junit.framework.TestSuite;
 
 public class DynaPropertyUtilsTestCase extends TestCase {
 
-
     
-
 
     /**
      * The basic test bean for each test.
      */
     protected DynaBean bean = null;
-
 
     /**
      * The set of properties that should be described.
@@ -72,15 +66,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
       "stringProperty"
     };
 
-
     /**
      * The nested bean pointed at by the "nested" property.
      */
     protected TestBean nested = null;
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -93,9 +84,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -155,7 +144,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -164,7 +152,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         return new TestSuite(DynaPropertyUtilsTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -177,10 +164,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
-
     
-
 
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
@@ -238,7 +222,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test the describe() method.
      */
@@ -277,7 +260,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                      (String) map.get("stringProperty"));
 
     }
-
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
@@ -385,7 +367,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
@@ -645,7 +626,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
@@ -713,7 +693,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getting mapped values with periods in the key.
      */
@@ -754,7 +733,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getting mapped values with slashes in the key.  This is different
@@ -797,7 +775,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
@@ -892,7 +869,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getNestedProperty invalid arguments.
      */
@@ -917,7 +893,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a boolean property.
@@ -945,7 +920,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a double property.
@@ -975,7 +949,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a float property.
      */
@@ -1004,7 +977,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on an int property.
      */
@@ -1031,7 +1003,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a long property.
@@ -1060,7 +1031,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a read-only String property.
      */
@@ -1087,7 +1057,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a short property.
@@ -1116,7 +1085,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a String property.
      */
@@ -1144,7 +1112,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getNestedProperty on an unknown property.
      */
@@ -1164,7 +1131,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Corner cases on getSimpleProperty invalid arguments.
@@ -1191,7 +1157,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a boolean property.
      */
@@ -1217,7 +1182,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a double property.
      */
@@ -1242,7 +1206,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a float property.
@@ -1271,7 +1234,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on an indexed property.
      */
@@ -1292,7 +1254,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on an int property.
@@ -1320,7 +1281,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a long property.
      */
@@ -1347,7 +1307,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on a nested property.
      */
@@ -1368,7 +1327,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a short property.
@@ -1396,7 +1354,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a String property.
      */
@@ -1423,7 +1380,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on an unknown property.
      */
@@ -1445,7 +1401,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Corner cases on setIndexedProperty invalid arguments.
@@ -1563,7 +1518,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
@@ -1850,7 +1804,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
@@ -1922,7 +1875,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
@@ -2014,7 +1966,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on setNestedProperty invalid arguments.
      */
@@ -2039,7 +1990,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNextedProperty on a boolean property.
@@ -2066,7 +2016,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a double property.
@@ -2095,7 +2044,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a float property.
      */
@@ -2123,7 +2071,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a int property.
      */
@@ -2149,7 +2096,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a long property.
@@ -2177,7 +2123,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a read-only String property.
      */
@@ -2201,7 +2146,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a short property.
@@ -2230,7 +2174,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a String property.
      */
@@ -2257,7 +2200,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on an unknown property name.
      */
@@ -2280,7 +2222,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a write-only String property.
@@ -2308,7 +2249,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on setSimpleProperty invalid arguments.
      */
@@ -2333,7 +2273,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a boolean property.
@@ -2360,7 +2299,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a double property.
@@ -2389,7 +2327,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a float property.
      */
@@ -2417,7 +2354,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test setSimpleProperty on an indexed property.
      */
@@ -2439,7 +2375,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a int property.
@@ -2467,7 +2402,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a long property.
      */
@@ -2494,7 +2428,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test setSimpleProperty on a nested property.
      */
@@ -2516,7 +2449,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a short property.
@@ -2545,7 +2477,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a String property.
      */
@@ -2572,7 +2503,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on an unknown property name.
      */
@@ -2598,9 +2528,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Create and return a {@code DynaClass} instance for our test
@@ -2638,6 +2566,5 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         return dynaClass;
 
     }
-
 
 }

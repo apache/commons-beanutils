@@ -15,15 +15,12 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * <p>Implementation of {@link DynaClass} that creates an in-memory collection
@@ -85,7 +82,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     
 
-
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
      * {@code ResultSet}.  The property names corresponding
@@ -125,7 +121,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
         this(resultSet, true, limit);
 
     }
-
 
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
@@ -266,9 +261,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     
-
 
     /**
      * <p>Copy the column values for each row in the specified
@@ -296,7 +289,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     /**
      * <p>Create and return a new {@link DynaBean} instance to be used for
      * representing a row in the underlying result set.</p>
@@ -308,6 +300,5 @@ public class RowSetDynaClass extends JDBCDynaClass {
         return new BasicDynaBean(this);
 
     }
-
 
 }

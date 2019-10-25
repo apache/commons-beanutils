@@ -214,7 +214,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test property with any two args
      */
@@ -261,7 +260,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test 'public' method in parent
      */
@@ -290,7 +288,6 @@ public class MappedPropertyTestCase extends TestCase {
         } catch (final Exception ex) {
         }
     }
-
 
     /**
      * Test Interface with mapped property

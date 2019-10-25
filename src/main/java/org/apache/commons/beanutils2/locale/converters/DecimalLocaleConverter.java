@@ -26,7 +26,6 @@ import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
@@ -39,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {
-
 
     
 

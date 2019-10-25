@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2.converters;
 
-
-
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +26,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * Test Case for the UUIDConverter class.

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 /**
  * Plain old java bean (POJO) for microbenchmarks.
@@ -26,9 +24,7 @@ package org.apache.commons.beanutils2;
 
 public class BenchBean {
 
-
     
-
 
     /**
      * A boolean property.
@@ -43,7 +39,6 @@ public class BenchBean {
         this.booleanProperty = booleanProperty;
     }
 
-
     /**
      * A byte property.
      */
@@ -56,7 +51,6 @@ public class BenchBean {
     public void setByteProperty(final byte byteProperty) {
         this.byteProperty = byteProperty;
     }
-
 
     /**
      * A double property.
@@ -71,7 +65,6 @@ public class BenchBean {
         this.doubleProperty = doubleProperty;
     }
 
-
     /**
      * A float property.
      */
@@ -84,7 +77,6 @@ public class BenchBean {
     public void setFloatProperty(final float floatProperty) {
         this.floatProperty = floatProperty;
     }
-
 
     /**
      * An integer property.
@@ -99,7 +91,6 @@ public class BenchBean {
         this.intProperty = intProperty;
     }
 
-
     /**
      * A long property.
      */
@@ -112,7 +103,6 @@ public class BenchBean {
     public void setLongProperty(final long longProperty) {
         this.longProperty = longProperty;
     }
-
 
     /**
      * A short property.
@@ -127,7 +117,6 @@ public class BenchBean {
         this.shortProperty = shortProperty;
     }
 
-
     /**
      * A String property.
      */
@@ -140,6 +129,5 @@ public class BenchBean {
     public void setStringProperty(final String stringProperty) {
         this.stringProperty = stringProperty;
     }
-
 
 }

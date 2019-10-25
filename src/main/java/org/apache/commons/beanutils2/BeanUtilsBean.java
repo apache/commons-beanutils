@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.beans.IndexedPropertyDescriptor;
 import java.beans.PropertyDescriptor;
@@ -34,7 +32,6 @@ import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>JavaBean property population methods.</p>
  *
@@ -48,7 +45,6 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class BeanUtilsBean {
-
 
     
 
@@ -183,7 +179,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * <p>Copy property values from the origin bean to the destination bean
      * for all cases where the property names are the same.  For each
@@ -289,7 +284,6 @@ public class BeanUtilsBean {
         }
 
     }
-
 
     /**
      * <p>Copy the specified property value to the specified destination bean,
@@ -442,7 +436,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * <p>Return the entire set of properties for which the specified bean
      * provides a read method. This map contains the to {@code String}
@@ -517,7 +510,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified array property of the specified
      * bean, as a String array.
@@ -572,7 +564,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified indexed property of the specified
      * bean, as a String.  The zero-relative index of the
@@ -601,7 +592,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified indexed property of the specified
      * bean, as a String.  The index is specified as a method parameter and
@@ -628,7 +618,6 @@ public class BeanUtilsBean {
         return getConvertUtils().convert(value);
 
     }
-
 
     /**
      * Return the value of the specified indexed property of the specified
@@ -658,7 +647,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified mapped property of the specified
      * bean, as a String.  The key is specified as a method parameter and
@@ -686,7 +674,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the (possibly nested) property of the specified
      * name, for the specified bean, as a String.
@@ -713,7 +700,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified property of the specified bean,
      * no matter which property reference format is used, as a String.
@@ -738,7 +724,6 @@ public class BeanUtilsBean {
 
     }
 
-
     /**
      * Return the value of the specified simple property of the specified
      * bean, converted to a String.
@@ -762,7 +747,6 @@ public class BeanUtilsBean {
         return getConvertUtils().convert(value);
 
     }
-
 
     /**
      * <p>Populate the JavaBeans properties of the specified bean, based on
@@ -825,7 +809,6 @@ public class BeanUtilsBean {
         }
 
     }
-
 
     /**
      * <p>Set the specified property value, performing type conversions as

@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -38,7 +36,6 @@ import org.apache.commons.beanutils2.priv.PublicSubBean;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * <p>Test Case for the PropertyUtils class.  The majority of these tests use
@@ -69,9 +66,7 @@ import junit.framework.TestSuite;
 
 public class PropertyUtilsTestCase extends TestCase {
 
-
     
-
 
     /**
      * The fully qualified class name of our private directly
@@ -80,7 +75,6 @@ public class PropertyUtilsTestCase extends TestCase {
     private static final String PRIVATE_DIRECT_CLASS =
             "org.apache.commons.beanutils2.priv.PrivateDirect";
 
-
     /**
      * The fully qualified class name of our private indirectly
      * implemented interface.
@@ -88,43 +82,36 @@ public class PropertyUtilsTestCase extends TestCase {
     private static final String PRIVATE_INDIRECT_CLASS =
             "org.apache.commons.beanutils2.priv.PrivateIndirect";
 
-
     /**
      * The fully qualified class name of our test bean class.
      */
     private static final String TEST_BEAN_CLASS =
             "org.apache.commons.beanutils2.TestBean";
 
-
     /**
      * The basic test bean for each test.
      */
     protected TestBean bean = null;
-
 
     /**
      * The "package private subclass" test bean for each test.
      */
     protected TestBeanPackageSubclass beanPackageSubclass = null;
 
-
     /**
      * The test bean for private access tests.
      */
     protected PrivateDirect beanPrivate = null;
-
 
     /**
      * The test bean for private access tests of subclasses.
      */
     protected PrivateDirect beanPrivateSubclass = null;
 
-
     /**
      * The "public subclass" test bean for each test.
      */
     protected TestBeanPublicSubclass beanPublicSubclass = null;
-
 
     /**
      * The set of properties that should be described.
@@ -150,7 +137,6 @@ public class PropertyUtilsTestCase extends TestCase {
       //      "stringIndexed",
       "stringProperty"
     };
-
 
     /**
      * The set of property names we expect to have returned when calling
@@ -178,9 +164,7 @@ public class PropertyUtilsTestCase extends TestCase {
         "writeOnlyProperty",
     };
 
-
     
-
 
     /**
      * Construct a new instance of this test case.
@@ -193,9 +177,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -221,7 +203,6 @@ public class PropertyUtilsTestCase extends TestCase {
         PropertyUtils.clearDescriptors();
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -230,7 +211,6 @@ public class PropertyUtilsTestCase extends TestCase {
         return new TestSuite(PropertyUtilsTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -247,10 +227,7 @@ public class PropertyUtilsTestCase extends TestCase {
         PropertyUtils.resetBeanIntrospectors();
     }
 
-
-
     
-
 
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
@@ -306,7 +283,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test the describe() method.
      */
@@ -346,7 +322,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getPropertyDescriptor invalid arguments.
      */
@@ -372,7 +347,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getPropertyDescriptor on property {@code booleanProperty}.
      */
@@ -382,7 +356,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 "setBooleanProperty");
 
     }
-
 
     /**
      * Positive getPropertyDescriptor on property {@code doubleProperty}.
@@ -394,7 +367,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getPropertyDescriptor on property {@code floatProperty}.
      */
@@ -405,7 +377,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getPropertyDescriptor on property {@code intProperty}.
      */
@@ -415,7 +386,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 "setIntProperty");
 
     }
-
 
     /**
      * <p>Negative tests on an invalid property with two different boolean
@@ -442,7 +412,6 @@ public class PropertyUtilsTestCase extends TestCase {
            Arrays.asList("isInvalidBoolean", "getInvalidBoolean")
            .contains(pd.getReadMethod().getName()));
     }
-
 
     /**
      * Positive getPropertyDescriptor on property {@code longProperty}.
@@ -493,7 +462,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Positive getPropertyDescriptor on property
      * {@code readOnlyProperty}.
@@ -504,7 +472,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 null);
 
     }
-
 
     /**
      * Positive getPropertyDescriptor on property {@code booleanSecond}
@@ -517,7 +484,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive getPropertyDescriptor on property {@code shortProperty}.
      */
@@ -527,7 +493,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 "setShortProperty");
 
     }
-
 
     /**
      * Positive getPropertyDescriptor on property {@code stringProperty}.
@@ -539,7 +504,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative getPropertyDescriptor on property {@code unknown}.
      */
@@ -548,7 +512,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetDescriptorBase("unknown", null, null);
 
     }
-
 
     /**
      * Positive getPropertyDescriptor on property
@@ -560,7 +523,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 "setWriteOnlyProperty");
 
     }
-
 
     /**
      * Positive test for getPropertyDescriptors().  Each property name
@@ -590,7 +552,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getPropertyDescriptors invalid arguments.
      */
@@ -606,7 +567,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
@@ -714,7 +674,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
@@ -1022,7 +981,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getting an indexed value out of a multi-dimensional array
      */
@@ -1264,7 +1222,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test getting mapped values with slashes in the key.  This is different
      * from periods because slashes are not syntactically significant.
@@ -1306,7 +1263,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
@@ -1401,7 +1357,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getNestedProperty invalid arguments.
      */
@@ -1426,7 +1381,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a boolean property.
@@ -1453,7 +1407,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a double property.
@@ -1482,7 +1435,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a float property.
      */
@@ -1510,7 +1462,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on an int property.
      */
@@ -1536,7 +1487,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a long property.
@@ -1564,7 +1514,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a read-only String property.
      */
@@ -1590,7 +1539,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getNestedProperty on a short property.
@@ -1618,7 +1566,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getNestedProperty on a String property.
      */
@@ -1644,7 +1591,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Negative test getNestedProperty on an unknown property.
@@ -1703,7 +1649,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getPropertyType() on all kinds of properties.
@@ -1820,7 +1765,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test accessing a public sub-bean of a package scope bean
      */
@@ -1848,7 +1792,6 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("bar property", "bar-start", result);
     }
 
-
     /**
      * Test getting accessible property reader methods for a specified
      * list of properties of our standard test bean.
@@ -1858,7 +1801,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetReadMethod(bean, properties, TEST_BEAN_CLASS);
 
     }
-
 
     /**
      * Test getting accessible property reader methods for a specified
@@ -1870,7 +1812,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetReadMethod(beanPackageSubclass, properties, TEST_BEAN_CLASS);
 
     }
-
 
     /**
      * Test getting accessible property reader methods for a specified
@@ -1923,7 +1864,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getting accessible property reader methods for a specified
      * list of properties of a public subclass of our standard test bean.
@@ -1933,7 +1873,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetReadMethod(beanPublicSubclass, properties, TEST_BEAN_CLASS);
 
     }
-
 
     /**
      * Corner cases on getSimpleProperty invalid arguments.
@@ -1959,7 +1898,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a boolean property.
@@ -1987,7 +1925,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a double property.
      */
@@ -2013,7 +1950,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a float property.
@@ -2042,7 +1978,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on an indexed property.
      */
@@ -2063,7 +1998,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on an int property.
@@ -2091,7 +2025,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a long property.
      */
@@ -2118,7 +2051,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on a nested property.
      */
@@ -2139,7 +2071,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a read-only String property.
@@ -2167,7 +2098,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a short property.
      */
@@ -2193,7 +2123,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a String property.
@@ -2221,7 +2150,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test getSimpleProperty on an unknown property.
      */
@@ -2243,7 +2171,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a write-only String property.
@@ -2267,7 +2194,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getting accessible property writer methods for a specified
      * list of properties of our standard test bean.
@@ -2277,7 +2203,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetWriteMethod(bean, properties, TEST_BEAN_CLASS);
 
     }
-
 
     /**
      * Test getting accessible property writer methods for a specified
@@ -2289,7 +2214,6 @@ public class PropertyUtilsTestCase extends TestCase {
         testGetWriteMethod(beanPackageSubclass, properties, TEST_BEAN_CLASS);
 
     }
-
 
     /**
      * Test getting accessible property writer methods for a specified
@@ -2456,7 +2380,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test the mappedPropertyType of MappedPropertyDescriptor.
      */
@@ -2477,7 +2400,6 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals(Integer.TYPE, desc.getMappedPropertyType());
 
     }
-
 
     /**
      * Corner cases on setIndexedProperty invalid arguments.
@@ -2659,7 +2581,6 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("BEFORE", "FIRST-NEW-VALUE",         ((Map<?, ?>)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
         assertEquals("AFTER",  "SECOND-VALUE-1-UPDATED",  ((Map<?, ?>)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
     }
-
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
@@ -3000,7 +2921,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
@@ -3072,7 +2992,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setting an indexed value out of a mapped array
@@ -3226,7 +3145,6 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedPeriods() {
 
-
         // -------- PropertyUtils.setMappedProperty()--------
         bean.setMappedProperty("key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly (A)",
@@ -3255,7 +3173,6 @@ public class PropertyUtilsTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
-
 
         // -------- PropertyUtils.setNestedProperty() --------
         final TestBean testBean = new TestBean();
@@ -3291,7 +3208,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
     }
 
-
     /**
      * Corner cases on setNestedProperty invalid arguments.
      */
@@ -3316,7 +3232,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNextedProperty on a boolean property.
@@ -3343,7 +3258,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a double property.
@@ -3372,7 +3286,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a float property.
      */
@@ -3400,7 +3313,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a int property.
      */
@@ -3426,7 +3338,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a long property.
@@ -3454,7 +3365,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a read-only String property.
      */
@@ -3478,7 +3388,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a short property.
@@ -3507,7 +3416,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on a String property.
      */
@@ -3534,7 +3442,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setNestedProperty on an unknown property name.
      */
@@ -3557,7 +3464,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setNestedProperty on a write-only String property.
@@ -3585,7 +3491,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on setSimpleProperty invalid arguments.
      */
@@ -3610,7 +3515,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a boolean property.
@@ -3637,7 +3541,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a double property.
@@ -3666,7 +3569,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a float property.
      */
@@ -3694,7 +3596,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test setSimpleProperty on an indexed property.
      */
@@ -3716,7 +3617,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a int property.
@@ -3744,7 +3644,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a long property.
      */
@@ -3771,7 +3670,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative test setSimpleProperty on a nested property.
      */
@@ -3793,7 +3691,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a read-only String property.
@@ -3820,7 +3717,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a short property.
@@ -3849,7 +3745,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a String property.
      */
@@ -3876,7 +3771,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on an unknown property name.
      */
@@ -3901,7 +3795,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a write-only String property.
@@ -3929,9 +3822,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     
-
 
     /**
      * Base for testGetDescriptorXxxxx() series of tests.
@@ -3977,7 +3868,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Base for testGetReadMethod() series of tests.
@@ -4035,7 +3925,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Base for testGetWriteMethod() series of tests.
      *
@@ -4045,7 +3934,6 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     protected void testGetWriteMethod(final Object bean, final String properties[],
                                       final String className) {
-
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
@@ -4143,7 +4031,6 @@ public class PropertyUtilsTestCase extends TestCase {
                 "Cannot set property on indexed bean (2)",
                 "Test#2",
                 nestedBean.getIndexedProperty(1).getTestString());
-
 
         // test first calling indexed properties on a simple property
 

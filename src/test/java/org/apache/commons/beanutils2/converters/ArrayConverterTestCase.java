@@ -73,7 +73,6 @@ public class ArrayConverterTestCase extends TestCase {
     public void setUp() throws Exception {
     }
 
-
     
 
     /** Tear Down */
@@ -107,7 +106,6 @@ public class ArrayConverterTestCase extends TestCase {
             strList.add(strArray[i]);
             longList.add(LONGArray[i]);
         }
-
 
         String msg = null;
 

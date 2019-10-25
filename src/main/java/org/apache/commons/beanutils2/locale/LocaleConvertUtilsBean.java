@@ -380,7 +380,6 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale
      *
@@ -390,7 +389,6 @@ public class LocaleConvertUtilsBean {
 
         mapConverters.remove(locale);
     }
-
 
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale and Class.

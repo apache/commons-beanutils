@@ -25,7 +25,6 @@ import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>The base class for all standard type locale-sensitive converters.
  * It has {@link LocaleConverter} and {@link org.apache.commons.beanutils2.Converter} implementations,
@@ -154,7 +153,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      */
 
     abstract protected Object parse(Object value, String pattern) throws ParseException;
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object.

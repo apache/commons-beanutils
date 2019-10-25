@@ -22,7 +22,6 @@ package org.apache.commons.beanutils2.memoryleaktests.pojotests;
  */
 public class SomePojo {
 
-
     String name = "initialValue";
 
     public void setName(final String name) {

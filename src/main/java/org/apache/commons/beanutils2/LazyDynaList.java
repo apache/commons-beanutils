@@ -186,7 +186,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private Class<?> elementDynaBeanType;
 
-
     
 
     /**
@@ -252,7 +251,6 @@ public class LazyDynaList extends ArrayList<Object> {
             add(element);
         }
     }
-
 
     
 
@@ -480,7 +478,6 @@ public class LazyDynaList extends ArrayList<Object> {
 
     }
 
-
     
 
     /**
@@ -593,7 +590,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
     }
-
 
     
 

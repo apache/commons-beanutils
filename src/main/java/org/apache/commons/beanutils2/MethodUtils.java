@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +28,6 @@ import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
@@ -172,7 +170,6 @@ public class MethodUtils {
         return invokeMethod(object, methodName, args);
     }
 
-
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
      *
@@ -220,7 +217,6 @@ public class MethodUtils {
         }
         return invokeMethod(object, methodName, args, parameterTypes);
     }
-
 
     /**
      * <p>Invoke a named method whose parameter type matches the object type.</p>
@@ -277,7 +273,6 @@ public class MethodUtils {
         return method.invoke(object, args);
     }
 
-
     /**
      * <p>Invoke a method whose parameter type matches exactly the object
      * type.</p>
@@ -310,7 +305,6 @@ public class MethodUtils {
         final Object[] args = toArray(arg);
         return invokeExactMethod(object, methodName, args);
     }
-
 
     /**
      * <p>Invoke a method whose parameter types match exactly the object
@@ -350,7 +344,6 @@ public class MethodUtils {
         }
         return invokeExactMethod(object, methodName, args, parameterTypes);
     }
-
 
     /**
      * <p>Invoke a method whose parameter types match exactly the parameter
@@ -493,7 +486,6 @@ public class MethodUtils {
         return invokeStaticMethod (objectClass, methodName, args);
     }
 
-
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
      *
@@ -542,7 +534,6 @@ public class MethodUtils {
         }
         return invokeStaticMethod (objectClass, methodName, args, parameterTypes);
     }
-
 
     /**
      * <p>Invoke a named static method whose parameter type matches the object type.</p>
@@ -599,7 +590,6 @@ public class MethodUtils {
         }
         return method.invoke(null, args);
     }
-
 
     /**
      * <p>Invoke a static method whose parameter type matches exactly the object
@@ -675,7 +665,6 @@ public class MethodUtils {
         return invokeExactStaticMethod(objectClass, methodName, args, parameterTypes);
     }
 
-
     private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {
@@ -704,7 +693,6 @@ public class MethodUtils {
         final Class<?>[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
     }
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -757,8 +745,6 @@ public class MethodUtils {
 
         return getAccessibleMethod(method.getDeclaringClass(), method);
     }
-
-
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
@@ -819,7 +805,6 @@ public class MethodUtils {
 
         return method;
     }
-
 
     
 
@@ -1148,7 +1133,6 @@ public class MethodUtils {
         return cost;
     }
 
-
     /**
      * <p>Determine whether a type can be used as a parameter in a method invocation.
      * This method handles primitive conversions correctly.</p>
@@ -1266,7 +1250,6 @@ public class MethodUtils {
         }
         return clazz;
     }
-
 
     /**
      * Return the method from the cache, if present.

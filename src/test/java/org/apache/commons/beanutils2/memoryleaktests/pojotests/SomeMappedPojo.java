@@ -24,7 +24,6 @@ import java.util.HashMap;
  */
 public class SomeMappedPojo {
 
-
     private HashMap<String, String> mappedProperty = null;
 
     public String getMappedProperty(final String key) {

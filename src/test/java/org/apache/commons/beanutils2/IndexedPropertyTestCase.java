@@ -31,7 +31,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
@@ -53,9 +52,7 @@ public class IndexedPropertyTestCase {
     private List<Object> newList;
     private ArrayList<Object> arrayList;
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -100,7 +97,6 @@ public class IndexedPropertyTestCase {
     public void tearDown() {
         bean = null;
     }
-
 
     
 
@@ -370,7 +366,6 @@ public class IndexedPropertyTestCase {
         }
     }
 
-
     /**
      * Test setting an indexed item of an Array using setProperty("name[x]", value)
      */
@@ -409,7 +404,6 @@ public class IndexedPropertyTestCase {
         }
     }
 
-
     /**
      * Test setting an indexed item of a List using setProperty("name[x]", value)
      */
@@ -427,7 +421,6 @@ public class IndexedPropertyTestCase {
         propertyUtilsBean.setIndexedProperty(bean, "stringList", 1, "modified-1");
         assertEquals("modified-1", bean.getStringList(1));
     }
-
 
     /**
      * Test getting an ArrayList

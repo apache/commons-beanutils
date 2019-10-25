@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 /**
@@ -24,7 +23,6 @@ package org.apache.commons.beanutils2;
  */
 
 public interface MappedPropertyTestInterface {
-
 
     public String getMapproperty(String key);
 

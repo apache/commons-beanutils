@@ -124,8 +124,4 @@ public class BeanPredicate<T> implements Predicate<T> {
         this.predicate = predicate;
     }
 
-
-
-
-
 }

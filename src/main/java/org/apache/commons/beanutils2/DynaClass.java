@@ -27,7 +27,6 @@ package org.apache.commons.beanutils2;
 
 public interface DynaClass {
 
-
     /**
      * Returns the name of this DynaClass (analogous to the
      * {@code getName()} method of {@code java.lang.Class}, which
@@ -37,7 +36,6 @@ public interface DynaClass {
      * @return the name of the DynaClass
      */
     public String getName();
-
 
     /**
      * Returns a property descriptor for the specified property, if it exists;
@@ -51,7 +49,6 @@ public interface DynaClass {
      */
     public DynaProperty getDynaProperty(String name);
 
-
     /**
      * <p>Returns an array of {@code ProperyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
@@ -64,7 +61,6 @@ public interface DynaClass {
      * @return the set of properties for this DynaClass
      */
     public DynaProperty[] getDynaProperties();
-
 
     /**
      * Instantiates and return a new DynaBean instance, associated
@@ -80,6 +76,5 @@ public interface DynaClass {
      */
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException;
-
 
 }

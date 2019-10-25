@@ -45,9 +45,7 @@ public class MethodUtilsTestCase extends TestCase {
         super(name);
     }
 
-
     
-
 
     /**
      * Set up instance variables required by this test case.
@@ -55,7 +53,6 @@ public class MethodUtilsTestCase extends TestCase {
     @Override
     public void setUp() {
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -70,7 +67,6 @@ public class MethodUtilsTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
 
     
 
@@ -95,7 +91,6 @@ public class MethodUtilsTestCase extends TestCase {
 
         assertMethod(method, "methodBar");
     }
-
 
     public void testGetAccessibleMethodIndirectInterface() {
         Method method;
@@ -144,7 +139,6 @@ public class MethodUtilsTestCase extends TestCase {
 
         assertEquals("Method TWO was invoked correctly", "YET ANOTHER TEST", ret);
     }
-
 
     public void testInvokeExactMethodNullArray() throws Exception {
         final Object result = MethodUtils.invokeExactMethod(
@@ -204,7 +198,6 @@ public class MethodUtilsTestCase extends TestCase {
                         "ChildTwo",
                         MethodUtils.invokeMethod(parent, "testAddChild2", params));
     }
-
 
     public void testInvokeMethodUnknown() throws Exception {
         // test that exception is correctly thrown when a method cannot be found with matching params
@@ -372,7 +365,6 @@ public class MethodUtilsTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Simple tests for accessing static methods via invokeExactMethod().
