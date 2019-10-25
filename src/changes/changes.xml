@@ -30,6 +30,9 @@
   <body>
 
     <release version="2.0.0" date="2018-MM-DD" description="Update to Java 8.">
+      <action issue="BEANUTILS-346" dev="melloware" type="update" due-to="Melloware">
+        New converter for Enum.
+      </action>
       <action issue="BEANUTILS-402" dev="melloware" type="update" due-to="Melloware">
         Double-Checked Locking anti pattern in WeakFastHashMap.
       </action>
@@ -69,7 +72,7 @@
       <action issue="BEANUTILS-528" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
         New converters for UUID, URI, and Path #10.
       </action>
-      <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
+      <action issue="BEANUTILS-530" dev="ggregory" type="add" due-to="Melloware, Matt Sicker, Gary Gregory">
         New converters for Java 8 Time classes #13.
       </action>
       <action issue="BEANUTILS-529" dev="ggregory" type="update" due-to="Gary Gregory">

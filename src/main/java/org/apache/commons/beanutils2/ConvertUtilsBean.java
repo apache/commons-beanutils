@@ -55,6 +55,7 @@ import org.apache.commons.beanutils2.converters.ClassConverter;
 import org.apache.commons.beanutils2.converters.ConverterFacade;
 import org.apache.commons.beanutils2.converters.DateConverter;
 import org.apache.commons.beanutils2.converters.DoubleConverter;
+import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.DurationConverter;
 import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
@@ -105,6 +106,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>long and java.lang.Long (default to zero)</li>
  * <li>short and java.lang.Short (default to zero)</li>
  * <li>java.lang.String (default to null)</li>
+ * <li>java.lang.Enum (default to null)</li>
  * <li>java.io.File (no default value)</li>
  * <li>java.nio.file.Path (no default value)</li>
  * <li>java.net.URL (no default value)</li>
@@ -489,6 +491,7 @@ public class ConvertUtilsBean {
      * This method registers the following converters:
      * <ul>
      *     <li>{@code Class.class} - {@link ClassConverter}</li>
+     *     <li>{@code Enum.class} - {@link EnumConverter}</li>
      *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
      *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
      *     <li>{@code File.class} - {@link FileConverter}</li>
@@ -518,8 +521,9 @@ public class ConvertUtilsBean {
      * {@code false} if a default value should be used.
      */
     private void registerOther(final boolean throwException) {
-    	// @formatter:off
+    	  // @formatter:off
         register(Class.class,          throwException ? new ClassConverter()          : new ClassConverter(null));
+        register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
         register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
         register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
@@ -585,6 +589,7 @@ public class ConvertUtilsBean {
 
         // Other
         registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Enum.class,           new EnumConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
         registerArrayConverter(Calendar.class,       new DateConverter(),          throwException, defaultArraySize);
         registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
