@@ -36,7 +36,7 @@ public class CharacterConverterTestCase extends TestCase {
         return new TestSuite(CharacterConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Character Converter test case.
@@ -57,7 +57,7 @@ public class CharacterConverterTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Tests whether the primitive char class can be passed as target type.

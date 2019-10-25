@@ -36,13 +36,13 @@ import org.apache.commons.logging.LogFactory;
  * conversion error occurs.
  * <p>
  * Implementations should provide conversion to the specified
- * type and from the specified type to a <code>String</code> value
+ * type and from the specified type to a {@code String} value
  * by implementing the following methods:
  * <ul>
- *     <li><code>convertToString(value)</code> - convert to a String
- *        (default implementation uses the objects <code>toString()</code>
+ *     <li>{@code convertToString(value)} - convert to a String
+ *        (default implementation uses the objects {@code toString()}
  *        method).</li>
- *     <li><code>convertToType(Class, value)</code> - convert
+ *     <li>{@code convertToType(Class, value)} - convert
  *         to the specified type</li>
  * </ul>
  * <p>
@@ -80,11 +80,11 @@ public abstract class AbstractConverter implements Converter {
      */
     private Object defaultValue = null;
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a <i>Converter</i> that throws a
-     * <code>ConversionException</code> if an error occurs.
+     * {@code ConversionException} if an error occurs.
      */
     public AbstractConverter() {
     }
@@ -101,14 +101,14 @@ public abstract class AbstractConverter implements Converter {
         setDefaultValue(defaultValue);
     }
 
-    // --------------------------------------------------------- Public Methods
+    
 
     /**
      * Indicates whether a default value will be returned or exception
      * thrown in the event of a conversion error.
      *
-     * @return <code>true</code> if a default value will be returned for
-     * conversion errors or <code>false</code> if a {@link ConversionException}
+     * @return {@code true} if a default value will be returned for
+     * conversion errors or {@code false} if a {@link ConversionException}
      * will be thrown.
      */
     public boolean isUseDefault() {
@@ -183,7 +183,7 @@ public abstract class AbstractConverter implements Converter {
      * Convert the input object into a String.
      * <p>
      * <b>N.B.</b>This implementation simply uses the value's
-     * <code>toString()</code> method and should be overridden if a
+     * {@code toString()} method and should be overridden if a
      * more sophisticated mechanism for <i>conversion to a String</i>
      * is required.
      *
@@ -200,7 +200,7 @@ public abstract class AbstractConverter implements Converter {
      * specified type.
      * <p>
      * Typical implementations will provide a minimum of
-     * <code>String --&gt; type</code> conversion.
+     * {@code String --&gt; type} conversion.
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
@@ -249,7 +249,7 @@ public abstract class AbstractConverter implements Converter {
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted
-     * @param cause The exception thrown by the <code>convert</code> method
+     * @param cause The exception thrown by the {@code convert} method
      * @return The default value.
      * @throws ConversionException if no default value has been
      * specified for this {@link Converter}.
@@ -336,7 +336,7 @@ public abstract class AbstractConverter implements Converter {
      * Set the default value, converting as required.
      * <p>
      * If the default value is different from the type the
-     * <code>Converter</code> handles, it will be converted
+     * {@code Converter} handles, it will be converted
      * to the handled type.
      *
      * @param defaultValue The default value to be returned
@@ -359,9 +359,9 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      */
     protected abstract Class<?> getDefaultType();
 
@@ -388,7 +388,7 @@ public abstract class AbstractConverter implements Converter {
         return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }
 
-    // ----------------------------------------------------------- Package Methods
+    
 
     /**
      * Accessor method for Log instance.
@@ -408,8 +408,8 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Provide a String representation of a <code>java.lang.Class</code>.
-     * @param type The <code>java.lang.Class</code>.
+     * Provide a String representation of a {@code java.lang.Class}.
+     * @param type The {@code java.lang.Class}.
      * @return The String representation.
      */
     String toString(final Class<?> type) {

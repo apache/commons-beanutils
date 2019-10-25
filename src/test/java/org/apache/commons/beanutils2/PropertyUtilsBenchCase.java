@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
 public class PropertyUtilsBenchCase extends TestCase {
 
 
-    // ------------------------------------------------------------ Constructors
+    
 
 
     /**
@@ -50,7 +50,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Instance Variables
+    
 
 
     // Basic loop counter
@@ -72,7 +72,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     private PropertyUtilsBean pu = null;
 
 
-    // ---------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -159,7 +159,7 @@ public class PropertyUtilsBenchCase extends TestCase {
 
 
 
-    // ------------------------------------------------- Individual Test Methods
+    
 
 
     // Time copyProperties() from a bean
@@ -261,7 +261,7 @@ public class PropertyUtilsBenchCase extends TestCase {
     }
 
 
-    // --------------------------------------------------------- Support Methods
+    
 
 
 }

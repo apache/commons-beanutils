@@ -20,14 +20,14 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * <p>Implementation of <code>DynaBean</code> that wraps a standard JavaBean
+ * <p>Implementation of {@code DynaBean} that wraps a standard JavaBean
  * instance, so that DynaBean APIs can be used to access its properties,
  * though this implementation allows type conversion to occur when properties are set.
  * This means that (say) Strings can be passed in as values in setter methods and
  * this DynaBean will convert them to the correct primitive data types.</p>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
- * support the <code>contains()</code> and <code>remove()</code> methods.</p>
+ * support the {@code contains()</code> and <code>remove()} methods.</p>
  *
  */
 
@@ -36,7 +36,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Construct a new <code>DynaBean</code> associated with the specified
+     * Construct a new {@code DynaBean} associated with the specified
      * JavaBean instance.
      *
      * @param instance JavaBean instance to be wrapped

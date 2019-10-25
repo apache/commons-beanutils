@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p> Test case for <code>MethodUtils</code> </p>
+ * <p> Test case for {@code MethodUtils} </p>
  *
  */
 public class MethodUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -46,7 +46,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -72,10 +72,10 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
-     * <p> Test <code>getAccessibleMethod</code>.
+     * <p> Test {@code getAccessibleMethod}.
      */
     public void testGetAccessibleMethod() {
         // easy bit first - find a public method
@@ -117,7 +117,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     /**
-     * <p> Test <code>invokeExactMethod</code>.
+     * <p> Test {@code invokeExactMethod}.
      */
     public void testInvokeExactMethod() throws Exception {
             final TestBean bean = new TestBean();
@@ -171,7 +171,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     /**
-     * <p> Test <code>invokeMethod</code>.
+     * <p> Test {@code invokeMethod}.
      */
     public void testInvokeMethod() throws Exception {
         final AbstractParent parent = new AlphaBean("parent");

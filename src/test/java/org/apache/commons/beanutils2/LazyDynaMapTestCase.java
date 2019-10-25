@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaMap</code> implementation class.</p>
+ * <p>Test Case for the {@code LazyDynaMap} implementation class.</p>
  *
  */
 public class LazyDynaMapTestCase extends TestCase {
@@ -44,7 +44,7 @@ public class LazyDynaMapTestCase extends TestCase {
     protected Integer testInteger2    = new Integer(40);
     protected String testKey          = "myKey";
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -55,7 +55,7 @@ public class LazyDynaMapTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Run thus Test
@@ -88,7 +88,7 @@ public class LazyDynaMapTestCase extends TestCase {
       dynaMap = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
      * General Tests

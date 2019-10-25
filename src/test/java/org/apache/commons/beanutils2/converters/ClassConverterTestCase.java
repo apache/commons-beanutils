@@ -36,7 +36,7 @@ public class ClassConverterTestCase extends TestCase {
         return new TestSuite(ClassConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Class Converter test case.
@@ -57,7 +57,7 @@ public class ClassConverterTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Array Conversion

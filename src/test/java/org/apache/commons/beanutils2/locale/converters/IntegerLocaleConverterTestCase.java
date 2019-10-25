@@ -26,13 +26,13 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
     public IntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Set up instance variables required by this test case.
@@ -56,7 +56,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

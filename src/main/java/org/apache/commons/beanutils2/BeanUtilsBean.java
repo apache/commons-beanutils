@@ -50,10 +50,10 @@ import org.apache.commons.logging.LogFactory;
 public class BeanUtilsBean {
 
 
-    // ------------------------------------------------------ Private Class Variables
+    
 
     /**
-     * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
+     * Contains {@code BeanUtilsBean} instances indexed by context classloader.
      */
     private static final ContextClassLoaderLocal<BeanUtilsBean>
             BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<BeanUtilsBean>() {
@@ -86,7 +86,7 @@ public class BeanUtilsBean {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-    // --------------------------------------------------------- Attributes
+    
 
     /**
      * Logging for this instance
@@ -102,7 +102,7 @@ public class BeanUtilsBean {
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
-    // --------------------------------------------------------- Constructors
+    
 
     /**
      * <p>Constructs an instance using new property
@@ -116,7 +116,7 @@ public class BeanUtilsBean {
      * <p>Constructs an instance using given conversion instances
      * and new {@link PropertyUtilsBean} instance.</p>
      *
-     * @param convertUtilsBean use this <code>ConvertUtilsBean</code>
+     * @param convertUtilsBean use this {@code ConvertUtilsBean}
      * to perform conversions from one object to another
      *
      * @since 1.8.0
@@ -128,9 +128,9 @@ public class BeanUtilsBean {
     /**
      * <p>Constructs an instance using given property and conversion instances.</p>
      *
-     * @param convertUtilsBean use this <code>ConvertUtilsBean</code>
+     * @param convertUtilsBean use this {@code ConvertUtilsBean}
      * to perform conversions from one object to another
-     * @param propertyUtilsBean use this <code>PropertyUtilsBean</code>
+     * @param propertyUtilsBean use this {@code PropertyUtilsBean}
      * to access properties
      */
     public BeanUtilsBean(
@@ -141,7 +141,7 @@ public class BeanUtilsBean {
         this.propertyUtilsBean = propertyUtilsBean;
     }
 
-    // --------------------------------------------------------- Public Methods
+    
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
@@ -193,21 +193,21 @@ public class BeanUtilsBean {
      * in the destination bean (or are read-only in the destination bean) are
      * silently ignored.</p>
      *
-     * <p>If the origin "bean" is actually a <code>Map</code>, it is assumed
+     * <p>If the origin "bean" is actually a {@code Map}, it is assumed
      * to contain String-valued <strong>simple</strong> property names as the keys, pointing at
      * the corresponding property values that will be converted (if necessary)
      * and set in the destination bean. <strong>Note</strong> that this method
      * is intended to perform a "shallow copy" of the properties and so complex
      * properties (for example, nested ones) will not be copied.</p>
      *
-     * <p>This method differs from <code>populate()</code>, which
+     * <p>This method differs from {@code populate()}, which
      * was primarily designed for populating JavaBeans from the map of request
      * parameters retrieved on an HTTP request, is that no scalar-&gt;indexed
      * or indexed-&gt;scalar manipulations are performed.  If the origin property
      * is indexed, the destination property must be also.</p>
      *
      * <p>If you know that no type conversions are required, the
-     * <code>copyProperties()</code> method in {@link PropertyUtils} will
+     * {@code copyProperties()} method in {@link PropertyUtils} will
      * execute faster than this method.</p>
      *
      * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
@@ -219,8 +219,8 @@ public class BeanUtilsBean {
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null or if the <code>dest</code>
+     * @throws IllegalArgumentException if the {@code dest} or
+     *  {@code orig</code> argument is null or if the <code>dest}
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
      * @throws InvocationTargetException if the property accessor method
@@ -297,7 +297,7 @@ public class BeanUtilsBean {
      * bean does not have a property of the specified name, or the property
      * is read only on the destination bean, return without
      * doing anything.  If you have custom destination property types, register
-     * {@link Converter}s for them by calling the <code>register()</code>
+     * {@link Converter}s for them by calling the {@code register()}
      * method of {@link ConvertUtils}.</p>
      *
      * <p><strong>IMPLEMENTATION RESTRICTIONS</strong>:</p>
@@ -445,12 +445,12 @@ public class BeanUtilsBean {
 
     /**
      * <p>Return the entire set of properties for which the specified bean
-     * provides a read method. This map contains the to <code>String</code>
+     * provides a read method. This map contains the to {@code String}
      * converted property values for all properties for which a read method
      * is provided (i.e. where the getReadMethod() returns non-null).</p>
      *
      * <p>This map can be fed back to a call to
-     * <code>BeanUtils.populate()</code> to re-constitute the same set of
+     * {@code BeanUtils.populate()} to re-constitute the same set of
      * properties, modulo differences for read-only and write-only
      * properties, but only if there are no indexed properties.</p>
      *
@@ -467,9 +467,9 @@ public class BeanUtilsBean {
      * }
      * </code></pre>
      * <p>
-     * will result in an infinite regression when <code>getParametersMap</code>
+     * will result in an infinite regression when {@code getParametersMap}
      * is called. It is recommended that such methods are given alternative
-     * names (for example, <code>parametersMap</code>).
+     * names (for example, {@code parametersMap}).
      * </p>
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
@@ -577,11 +577,11 @@ public class BeanUtilsBean {
      * Return the value of the specified indexed property of the specified
      * bean, as a String.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
@@ -634,11 +634,11 @@ public class BeanUtilsBean {
      * Return the value of the specified indexed property of the specified
      * bean, as a String.  The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
-     * the property name, or <code>IllegalArgumentException</code> will be
+     * the property name, or {@code IllegalArgumentException} will be
      * thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *
@@ -768,9 +768,9 @@ public class BeanUtilsBean {
      * <p>Populate the JavaBeans properties of the specified bean, based on
      * the specified name/value pairs.  This method uses Java reflection APIs
      * to identify corresponding "property setter" method names, and deals
-     * with setter arguments of type <code>String</code>, <code>boolean</code>,
-     * <code>int</code>, <code>long</code>, <code>float</code>, and
-     * <code>double</code>.  In addition, array setters for these types (or the
+     * with setter arguments of type {@code String</code>, <code>boolean},
+     * {@code int</code>, <code>long</code>, <code>float}, and
+     * {@code double}.  In addition, array setters for these types (or the
      * corresponding primitive types) can also be identified.</p>
      *
      * <p>The particular setter method to be called for each property is
@@ -788,7 +788,7 @@ public class BeanUtilsBean {
      * for extracting String-based request parameters from an HTTP request.
      * It is probably not what you want for general property copying with
      * type conversion.  For that purpose, check out the
-     * <code>copyProperties()</code> method instead.</p>
+     * {@code copyProperties()} method instead.</p>
      *
      * @param bean JavaBean whose properties are being populated
      * @param properties Map keyed by property name, with the
@@ -834,13 +834,13 @@ public class BeanUtilsBean {
      * <p>If the property is read only then the method returns
      * without throwing an exception.</p>
      *
-     * <p>If <code>null</code> is passed into a property expecting a primitive value,
-     * then this will be converted as if it were a <code>null</code> string.</p>
+     * <p>If {@code null} is passed into a property expecting a primitive value,
+     * then this will be converted as if it were a {@code null} string.</p>
      *
      * <p><strong>WARNING</strong> - The logic of this method is customized
-     * to meet the needs of <code>populate()</code>, and is probably not what
+     * to meet the needs of {@code populate()}, and is probably not what
      * you want for general property copying with type conversion.  For that
-     * purpose, check out the <code>copyProperty()</code> method instead.</p>
+     * purpose, check out the {@code copyProperty()} method instead.</p>
      *
      * <p><strong>WARNING</strong> - PLEASE do not modify the behavior of this
      * method without consulting with the Struts developer community.  There
@@ -1024,7 +1024,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Gets the <code>ConvertUtilsBean</code> instance used to perform the conversions.
+     * Gets the {@code ConvertUtilsBean} instance used to perform the conversions.
      *
      * @return The ConvertUtils bean instance
      */
@@ -1033,7 +1033,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Gets the <code>PropertyUtilsBean</code> instance used to access properties.
+     * Gets the {@code PropertyUtilsBean} instance used to access properties.
      *
      * @return The ConvertUtils bean instance
      */
@@ -1097,11 +1097,11 @@ public class BeanUtilsBean {
     /**
      * Returns a <code>Method<code> allowing access to
      * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or <code>null</code> if the method
+     * or {@code null} if the method
      * does not exist.
      *
-     * @return A <code>Method<code> for <code>Throwable.initCause</code>, or
-     * <code>null</code> if unavailable.
+     * @return A {@code Method<code> for <code>Throwable.initCause}, or
+     * {@code null} if unavailable.
      */
     private static Method getInitCauseMethod() {
         try {

@@ -40,7 +40,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimestampConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Date test case.
@@ -50,7 +50,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Return the expected type

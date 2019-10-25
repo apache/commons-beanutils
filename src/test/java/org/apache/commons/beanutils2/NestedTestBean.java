@@ -28,13 +28,13 @@ package org.apache.commons.beanutils2;
 public class NestedTestBean {
 
 
-    // ------------------------------------------------------------- Constructors
+    
     public NestedTestBean(final String name) {
         setName(name);
     }
 
 
-    // ------------------------------------------------------------- Properties
+    
 
     private String name;
 
@@ -96,6 +96,6 @@ public class NestedTestBean {
         return simpleBean;
     }
 
-    // ------------------------------------------------------- Static Variables
+    
 
 }

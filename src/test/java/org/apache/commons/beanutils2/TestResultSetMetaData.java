@@ -29,7 +29,7 @@ import java.sql.Types;
 
 /**
  * <p>Mock object that implements enough of
- * <code>java.sql.ResultSetMetaData</code>
+ * {@code java.sql.ResultSetMetaData}
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
  */
@@ -37,7 +37,7 @@ import java.sql.Types;
 public class TestResultSetMetaData implements InvocationHandler {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
 
     /**
@@ -105,7 +105,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
-    // ---------------------------------------------------- Implemented Methods
+    
 
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
@@ -159,7 +159,7 @@ public class TestResultSetMetaData implements InvocationHandler {
     }
 
 
-    // -------------------------------------------------- Unimplemented Methods
+    
 
 
     public String getCatalogName(final int columnIndex) throws SQLException {

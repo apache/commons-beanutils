@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class TestBean implements Serializable {
 
-    // ----------------------------------------------------------- Constructors
+    
 
     public TestBean() {
         listIndexed.add("String 0");
@@ -100,7 +100,7 @@ public class TestBean implements Serializable {
         this.string2dArray = string2dArray;
     }
 
-    // ------------------------------------------------------------- Properties
+    
 
 
     /**
@@ -544,7 +544,7 @@ public class TestBean implements Serializable {
     }
 
 
-    // ------------------------------------------------------ Invalid Properties
+    
 
 
     /**
@@ -575,7 +575,7 @@ public class TestBean implements Serializable {
 
 
 
-    // ------------------------------------------------------- Static Variables
+    
 
 
     /**

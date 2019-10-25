@@ -26,13 +26,13 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
     public LongLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Set up instance variables required by this test case.
@@ -56,7 +56,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     }
 
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

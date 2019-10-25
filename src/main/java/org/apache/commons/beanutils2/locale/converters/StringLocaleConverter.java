@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive object into a <code>java.lang.String</code> object,
+ * locale-sensitive object into a {@code java.lang.String} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -44,13 +44,13 @@ import org.apache.commons.logging.LogFactory;
 
 public class StringLocaleConverter extends BaseLocaleConverter {
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -214,7 +214,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

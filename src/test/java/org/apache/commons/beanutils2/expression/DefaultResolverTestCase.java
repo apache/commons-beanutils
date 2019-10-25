@@ -53,7 +53,7 @@ public class DefaultResolverTestCase extends TestCase {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Create Test Suite
@@ -77,7 +77,7 @@ public class DefaultResolverTestCase extends TestCase {
     protected void tearDown() {
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test getIndex() method.

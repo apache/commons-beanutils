@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 /**
- * <p>Mock object that implements enough of <code>java.sql.ResultSet</code>
+ * <p>Mock object that implements enough of {@code java.sql.ResultSet}
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
  *
  */
@@ -51,7 +51,7 @@ import java.util.Map;
 public class TestResultSet implements InvocationHandler {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
 
     /**
@@ -148,7 +148,7 @@ public class TestResultSet implements InvocationHandler {
         return (String)arg;
     }
 
-    // ---------------------------------------------------- Implemented Methods
+    
 
 
     public void close() throws SQLException {
@@ -228,7 +228,7 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    // -------------------------------------------------- Unimplemented Methods
+    
 
 
     public boolean absolute(final int row) throws SQLException {

@@ -38,7 +38,7 @@ import junit.framework.TestSuite;
 public class DynaPropertyUtilsTestCase extends TestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
 
     /**
@@ -79,7 +79,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     protected TestBean nested = null;
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -94,7 +94,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
 
-    // --------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -179,11 +179,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     /**
-     * Test copyProperties() when the origin is a a <code>Map</code>.
+     * Test copyProperties() when the origin is a a {@code Map}.
      */
     public void testCopyPropertiesMap() {
 
@@ -2599,12 +2599,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
+    
 
 
     /**
-     * Create and return a <code>DynaClass</code> instance for our test
-     * <code>DynaBean</code>.
+     * Create and return a {@code DynaClass} instance for our test
+     * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
 

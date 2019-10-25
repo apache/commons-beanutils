@@ -38,7 +38,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /**
      * <p>Flag defining whether column names should be lower cased when
@@ -61,7 +61,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * <p>The set of dynamic properties that are part of this
      * {@link DynaClass}, keyed by the property name.  Individual descriptor
      * instances will be the same instances as those in the
-     * <code>properties</code> list.</p>
+     * {@code properties} list.</p>
      */
     protected Map<String, DynaProperty> propertiesMap = new HashMap<>();
 
@@ -71,12 +71,12 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     private Map<String, String> columnNameXref;
 
-    // ------------------------------------------------------ DynaClass Methods
+    
 
     /**
      * <p>Return the name of this DynaClass (analogous to the
-     * <code>getName()</code> method of <code>java.lang.Class</code>, which
-     * allows the same <code>DynaClass</code> implementation class to support
+     * {@code getName()</code> method of <code>java.lang.Class}, which
+     * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.</p>
      */
     @Override
@@ -88,7 +88,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>Return a property descriptor for the specified property, if it
-     * exists; otherwise, return <code>null</code>.</p>
+     * exists; otherwise, return {@code null}.</p>
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
@@ -106,7 +106,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * <p>Return an array of {@code ProperyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      */
@@ -146,7 +146,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * <p>Loads and returns the <code>Class</code> of the given name.
+     * <p>Loads and returns the {@code Class} of the given name.
      * By default, a load from the thread context class loader is attempted.
      * If there is no such class loader, the class loader used to load this
      * class will be utilized.</p>
@@ -230,10 +230,10 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>Introspect the metadata associated with our result set, and populate
-     * the <code>properties</code> and <code>propertiesMap</code> instance
+     * the {@code properties</code> and <code>propertiesMap} instance
      * variables.</p>
      *
-     * @param resultSet The <code>resultSet</code> whose metadata is to
+     * @param resultSet The {@code resultSet} whose metadata is to
      *  be introspected
      *
      * @throws SQLException if an error is encountered processing the

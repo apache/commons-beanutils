@@ -23,7 +23,7 @@ import java.net.URI;
  * to and from <b>java.net.URI</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 2.0
  */
@@ -31,7 +31,7 @@ public final class URIConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.net.URI</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public URIConverter() {
         super();
@@ -50,9 +50,9 @@ public final class URIConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
     @Override

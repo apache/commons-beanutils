@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class DynaProperty implements Serializable {
 
-    // ----------------------------------------------------------- Constants
+    
 
 	private static final long serialVersionUID = -3084907613499830175L;
 	/*
@@ -63,7 +63,7 @@ public class DynaProperty implements Serializable {
     private static final int SHORT_TYPE = 8;
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -96,7 +96,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Construct an indexed or mapped <code>DynaProperty</code> that supports (pseudo)-introspection
+     * Construct an indexed or mapped {@code DynaProperty} that supports (pseudo)-introspection
      * of the content type.
      *
      * @param name Name of the property being described
@@ -112,7 +112,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // ------------------------------------------------------------- Properties
+    
 
     /** Property name */
     protected String name = null;
@@ -134,7 +134,7 @@ public class DynaProperty implements Serializable {
      * (including java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
-     * <p><strong>Please leave this field as <code>transient</code></strong></p>
+     * <p><strong>Please leave this field as {@code transient}</strong></p>
      *
      * @return the property type
      */
@@ -143,31 +143,31 @@ public class DynaProperty implements Serializable {
     }
 
 
-    /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
+    /** The <em>(optional)</em> type of content elements for indexed {@code DynaProperty} */
     protected transient Class<?> contentType;
     /**
-     * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
+     * Gets the <em>(optional)</em> type of the indexed content for {@code DynaProperty}'s
      * that support this feature.
      *
      * <p>There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
-     * @return the Class for the content type if this is an indexed <code>DynaProperty</code>
+     * @return the Class for the content type if this is an indexed {@code DynaProperty}
      * and this feature is supported. Otherwise null.
      */
     public Class<?> getContentType() {
         return contentType;
     }
 
-    // --------------------------------------------------------- Public Methods
+    
 
 
     /**
      * Does this property represent an indexed value (ie an array or List)?
      *
-     * @return <code>true</code> if the property is indexed (i.e. is a List or
-     * array), otherwise <code>false</code>
+     * @return {@code true} if the property is indexed (i.e. is a List or
+     * array), otherwise {@code false}
      */
     public boolean isIndexed() {
 
@@ -187,8 +187,8 @@ public class DynaProperty implements Serializable {
     /**
      * Does this property represent a mapped value (ie a Map)?
      *
-     * @return <code>true</code> if the property is a Map
-     * otherwise <code>false</code>
+     * @return {@code true} if the property is a Map
+     * otherwise {@code false}
      */
     public boolean isMapped() {
 
@@ -203,8 +203,8 @@ public class DynaProperty implements Serializable {
      * Checks this instance against the specified Object for equality. Overrides the
      * default reference test for equality provided by {@link java.lang.Object#equals(Object)}
      * @param obj The object to compare to
-     * @return <code>true</code> if object is a dyna property with the same name
-     * type and content type, otherwise <code>false</code>
+     * @return {@code true} if object is a dyna property with the same name
+     * type and content type, otherwise {@code false}
      * @since 1.8.0
      */
     @Override
@@ -261,7 +261,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // --------------------------------------------------------- Serialization helper methods
+    
 
     /**
      * Writes this object safely.

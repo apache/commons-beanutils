@@ -53,7 +53,7 @@ import junit.framework.TestSuite;
  *
  * <p>
  *  So far, this test case has tests for the following methods of the
- *  <code>BeanUtils</code> class:
+ *  {@code BeanUtils} class:
  * </p>
  * <ul>
  *   <li>getArrayProperty(Object bean, String name)</li>
@@ -63,7 +63,7 @@ import junit.framework.TestSuite;
 
 public class BeanUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
+    
 
     /**
      * The test bean for each test.
@@ -106,7 +106,7 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -118,7 +118,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -170,7 +170,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     /**
@@ -252,7 +252,7 @@ public class BeanUtilsTestCase extends TestCase {
 
 
     /**
-     * Test copyProperties() when the origin is a a <code>Map</code>.
+     * Test copyProperties() when the origin is a a {@code Map}.
      */
     public void testCopyPropertiesMap() {
 
@@ -471,7 +471,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>getArrayProperty()</code> converting to a String.
+     * Test {@code getArrayProperty()} converting to a String.
      */
     public void testGetArrayPropertyDate() {
         String[] value = null;
@@ -507,7 +507,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>getArrayProperty()</code> converting to a String.
+     * Test {@code getArrayProperty()} converting to a String.
      */
     public void testGetIndexedPropertyDate() {
         String value = null;
@@ -604,7 +604,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>getSimpleProperty()</code> converting to a String.
+     * Test {@code getSimpleProperty()} converting to a String.
      */
     public void testGetSimplePropertyDate() {
         String value = null;
@@ -931,7 +931,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> conversion.
+     * Test {@code setProperty()} conversion.
      */
     public void testSetPropertyConvert() {
         try {
@@ -943,7 +943,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting from a String.
+     * Test {@code setProperty()} converting from a String.
      */
     public void testSetPropertyConvertFromString() {
         try {
@@ -955,7 +955,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String.
+     * Test {@code setProperty()} converting to a String.
      */
     public void testSetPropertyConvertToString() {
         try {
@@ -967,7 +967,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String array.
+     * Test {@code setProperty()} converting to a String array.
      */
     public void testSetPropertyConvertToStringArray() {
         try {
@@ -981,7 +981,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>setProperty()</code> converting to a String on indexed property
+     * Test {@code setProperty()} converting to a String on indexed property
      */
     public void testSetPropertyConvertToStringIndexed() {
         try {
@@ -1158,7 +1158,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> conversion.
+     * Test {@code copyProperty()} conversion.
      */
     public void testCopyPropertyConvert() {
         try {
@@ -1170,7 +1170,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting from a String.
+     * Test {@code copyProperty()} converting from a String.
      */
     public void testCopyPropertyConvertFromString() {
         try {
@@ -1182,7 +1182,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String.
+     * Test {@code copyProperty()} converting to a String.
      */
     public void testCopyPropertyConvertToString() {
         try {
@@ -1194,7 +1194,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String.
+     * Test {@code copyProperty()} converting to a String.
      */
     public void testCopyPropertyConvertToStringArray() {
         try {
@@ -1208,7 +1208,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test <code>copyProperty()</code> converting to a String on indexed property
+     * Test {@code copyProperty()} converting to a String on indexed property
      */
     public void testCopyPropertyConvertToStringIndexed() {
         try {

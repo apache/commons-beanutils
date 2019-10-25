@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 /**
- * <p>A customized implementation of <code>java.util.HashMap</code> designed
+ * <p>A customized implementation of {@code java.util.HashMap} designed
  * to operate in a multi-threaded environment where the large majority of
  * method calls are read-only, instead of structural changes.  When operating
  * in "fast" mode, read calls are non-synchronized and write calls perform the
@@ -38,12 +38,12 @@ import java.util.WeakHashMap;
  * <p>When first created, objects of this class default to "slow" mode, where
  * all accesses of any type are synchronized but no cloning takes place.  This
  * is appropriate for initially populating the collection, followed by a switch
- * to "fast" mode (by calling <code>setFast(true)</code>) after initialization
+ * to "fast" mode (by calling {@code setFast(true)}) after initialization
  * is complete.</p>
  *
  * <p><strong>NOTE</strong>: If you are creating and accessing a
- * <code>HashMap</code> only within a single thread, you should use
- * <code>java.util.HashMap</code> directly (with no synchronization), for
+ * {@code HashMap} only within a single thread, you should use
+ * {@code java.util.HashMap} directly (with no synchronization), for
  * maximum performance.</p>
  *
  * <p><strong>NOTE</strong>: <i>This class is not cross-platform.
@@ -75,7 +75,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     private boolean fast = false;
 
     // Constructors
-    // ----------------------------------------------------------------------
+    
 
     /**
      * Construct an empty map.
@@ -118,7 +118,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
 
     // Property access
-    // ----------------------------------------------------------------------
+    
 
     /**
      *  Returns true if this map is operating in fast mode.
@@ -140,15 +140,15 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
 
     // Map access
-    // ----------------------------------------------------------------------
+    
     // These methods can forward straight to the wrapped Map in 'fast' mode.
     // (because they are query methods)
 
     /**
      * Return the value to which this map maps the specified key.  Returns
-     * <code>null</code> if the map contains no mapping for this key, or if
-     * there is a mapping with a value of <code>null</code>.  Use the
-     * <code>containsKey()</code> method to disambiguate these cases.
+     * {@code null} if the map contains no mapping for this key, or if
+     * there is a mapping with a value of {@code null}.  Use the
+     * {@code containsKey()} method to disambiguate these cases.
      *
      * @param key  the key whose value is to be returned
      * @return the value mapped to that key, or null
@@ -179,7 +179,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return <code>true</code> if this map contains no mappings.
+     * Return {@code true} if this map contains no mappings.
      *
      * @return is the map currently empty
      */
@@ -194,7 +194,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return <code>true</code> if this map contains a mapping for the
+     * Return {@code true} if this map contains a mapping for the
      * specified key.
      *
      * @param key  the key to be searched for
@@ -211,7 +211,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return <code>true</code> if this map contains one or more keys mapping
+     * Return {@code true} if this map contains one or more keys mapping
      * to the specified value.
      *
      * @param value  the value to be searched for
@@ -228,7 +228,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map modification
-    // ----------------------------------------------------------------------
+    
     // These methods perform special behavior in 'fast' mode.
     // The map is cloned, updated and then assigned back.
     // See the comments at the top as to why this won't always work.
@@ -317,13 +317,13 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Basic object methods
-    // ----------------------------------------------------------------------
+    
 
     /**
      * Compare the specified object with this list for equality.  This
      * implementation uses exactly the code that is used to define the
      * list equals function in the documentation for the
-     * <code>Map.equals</code> method.
+     * {@code Map.equals} method.
      *
      * @param o  the object to be compared to this list
      * @return true if the two maps are equal
@@ -383,7 +383,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Return the hash code value for this map.  This implementation uses
      * exactly the code that is used to define the list hash function in the
-     * documentation for the <code>Map.hashCode</code> method.
+     * documentation for the {@code Map.hashCode} method.
      *
      * @return suitable integer hash code
      */
@@ -406,7 +406,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return a shallow copy of this <code>FastHashMap</code> instance.
+     * Return a shallow copy of this {@code FastHashMap} instance.
      * The keys and values themselves are not copied.
      *
      * @return a clone of this map
@@ -426,11 +426,11 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map views
-    // ----------------------------------------------------------------------
+    
 
     /**
      * Return a collection view of the mappings contained in this map.  Each
-     * element in the returned collection is a <code>Map.Entry</code>.
+     * element in the returned collection is a {@code Map.Entry}.
      * @return the set of map Map entries
      */
     @Override
@@ -457,7 +457,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
-    // ----------------------------------------------------------------------
+    
 
     protected Map<K, V> createMap() {
         return new WeakHashMap<>();
@@ -480,7 +480,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map view inner classes
-    // ----------------------------------------------------------------------
+    
 
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().

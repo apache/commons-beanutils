@@ -35,7 +35,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(DateConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Date test case.
@@ -63,7 +63,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new DateConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Create the Converter with a default value.

@@ -34,8 +34,8 @@ import junit.framework.TestSuite;
 
 
 /**
- * <p>Test Case for the <code>BasicDynaBean</code> implementation class.
- * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
+ * <p>Test Case for the {@code BasicDynaBean} implementation class.
+ * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
  *
  */
@@ -43,7 +43,7 @@ import junit.framework.TestSuite;
 public class BasicDynaBeanTestCase extends TestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
+    
 
 
     /**
@@ -54,7 +54,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     /**
      * The set of property names we expect to have returned when calling
-     * <code>getDynaProperties()</code>.  You should update this list
+     * {@code getDynaProperties()}.  You should update this list
      * when new properties are added to TestBean.
      */
     protected final static String[] properties = {
@@ -77,7 +77,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     };
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -92,7 +92,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -166,7 +166,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     /**
@@ -196,7 +196,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>booleanProperty</code>.
+     * Positive getDynaProperty on property {@code booleanProperty}.
      */
     public void testGetDescriptorBoolean() {
 
@@ -206,7 +206,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>doubleProperty</code>.
+     * Positive getDynaProperty on property {@code doubleProperty}.
      */
     public void testGetDescriptorDouble() {
 
@@ -216,7 +216,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>floatProperty</code>.
+     * Positive getDynaProperty on property {@code floatProperty}.
      */
     public void testGetDescriptorFloat() {
 
@@ -226,7 +226,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>intProperty</code>.
+     * Positive getDynaProperty on property {@code intProperty}.
      */
     public void testGetDescriptorInt() {
 
@@ -236,7 +236,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>longProperty</code>.
+     * Positive getDynaProperty on property {@code longProperty}.
      */
     public void testGetDescriptorLong() {
 
@@ -246,7 +246,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>booleanSecond</code>
+     * Positive getDynaProperty on property {@code booleanSecond}
      * that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
@@ -257,7 +257,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>shortProperty</code>.
+     * Positive getDynaProperty on property {@code shortProperty}.
      */
     public void testGetDescriptorShort() {
 
@@ -267,7 +267,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Positive getDynaProperty on property <code>stringProperty</code>.
+     * Positive getDynaProperty on property {@code stringProperty}.
      */
     public void testGetDescriptorString() {
 
@@ -278,7 +278,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     /**
      * Positive test for getDynaPropertys().  Each property name
-     * listed in <code>properties</code> should be returned exactly once.
+     * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {
 
@@ -591,7 +591,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Test <code>contains()</code> method for mapped properties.
+     * Test {@code contains()} method for mapped properties.
      */
     public void testMappedContains() {
 
@@ -614,7 +614,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Test <code>remove()</code> method for mapped properties.
+     * Test {@code remove()} method for mapped properties.
      */
     public void testMappedRemove() {
 
@@ -971,12 +971,12 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
+    
 
 
     /**
-     * Create and return a <code>DynaClass</code> instance for our test
-     * <code>DynaBean</code>.
+     * Create and return a {@code DynaClass} instance for our test
+     * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
 

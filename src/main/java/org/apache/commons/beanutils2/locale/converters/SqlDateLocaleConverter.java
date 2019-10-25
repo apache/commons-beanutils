@@ -24,7 +24,7 @@ import java.util.Locale;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.sql.Date</code> object,
+ * locale-sensitive String into a {@code java.sql.Date} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -34,7 +34,7 @@ import java.util.Locale;
 public class SqlDateLocaleConverter extends DateLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -199,7 +199,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
     }
 
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

@@ -19,7 +19,7 @@
 package org.apache.commons.beanutils2;
 
 /**
- * Converter implementation that throws a <code>PassTestException</code>
+ * Converter implementation that throws a {@code PassTestException}
  * when convert is called.
  * The idea is that catching this exception is a clear signal that this method
  * has been called.

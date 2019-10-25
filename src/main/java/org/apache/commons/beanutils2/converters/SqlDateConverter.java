@@ -28,7 +28,7 @@ import java.sql.Date;
  * See the {@link DateTimeConverter} documentation for further details.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
  */
@@ -36,7 +36,7 @@ public final class SqlDateConverter extends DateTimeConverter {
 
     /**
      * Construct a <b>java.sql.Date</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public SqlDateConverter() {
         super();
@@ -55,9 +55,9 @@ public final class SqlDateConverter extends DateTimeConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override

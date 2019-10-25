@@ -31,8 +31,8 @@ import java.util.Comparator;
  * <p>
  * <strong>Note:</strong> The BeanComparator passes the values of the specified bean property to an internal natural
  * order {@link Comparator}, if no comparator is specified in the constructor. If you are comparing two beans based on a
- * property that could contain "null" values, a suitable <code>Comparator</code> or Apache Commons Collection
- * <code>ComparatorChain</code> should be supplied in the constructor. Note that the passed in {@code Comparator} must
+ * property that could contain "null" values, a suitable {@code Comparator} or Apache Commons Collection
+ * {@code ComparatorChain} should be supplied in the constructor. Note that the passed in {@code Comparator} must
  * be able to handle the passed in objects. Because the type of the property to be compared is not known at compile time
  * no type checks can be performed by the compiler. Thus {@code ClassCastException} exceptions can be thrown if
  * unexpected property values occur.
@@ -65,13 +65,13 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
     /**
      * <p>
      * Constructs a property-based comparator for beans. This compares two beans by the property specified in the
-     * property parameter. This constructor creates a <code>BeanComparator</code> that uses a
-     * <code>ComparableComparator</code> to compare the property values.
+     * property parameter. This constructor creates a {@code BeanComparator} that uses a
+     * {@code ComparableComparator} to compare the property values.
      * </p>
      *
      * <p>
      * Passing "null" to this constructor will cause the BeanComparator to compare objects based on natural order, that
-     * is <code>java.lang.Comparable</code>.
+     * is {@code java.lang.Comparable}.
      * </p>
      *
      * @param property String Name of a bean property, which may contain the name of a simple, nested, indexed, mapped,
@@ -151,7 +151,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
     }
 
     /**
-     * Two <code>BeanComparator</code>'s are equals if and only if the wrapped comparators and the property names to be
+     * Two {@code BeanComparator}'s are equals if and only if the wrapped comparators and the property names to be
      * compared are equal.
      *
      * @param o Comparator to compare to

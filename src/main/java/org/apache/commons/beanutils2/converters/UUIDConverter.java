@@ -23,7 +23,7 @@ import java.util.UUID;
  * to and from <b>java.util.UUID</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 2.0
  */
@@ -31,7 +31,7 @@ public final class UUIDConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.util.UUID</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public UUIDConverter() {
         super();
@@ -50,9 +50,9 @@ public final class UUIDConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
     @Override

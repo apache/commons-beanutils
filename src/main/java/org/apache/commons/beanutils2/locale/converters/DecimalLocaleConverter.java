@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.lang.Number</code> object,
+ * locale-sensitive String into a {@code java.lang.Number} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -41,12 +41,12 @@ import org.apache.commons.logging.LogFactory;
 public class DecimalLocaleConverter extends BaseLocaleConverter {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -211,7 +211,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
 
     }
 
-    // --------------------------------------------------------- Methods
+    
 
     /**
      * Convert the specified locale-sensitive input object into an output

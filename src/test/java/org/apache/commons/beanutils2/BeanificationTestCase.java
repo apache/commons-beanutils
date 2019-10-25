@@ -37,15 +37,15 @@ import junit.framework.TestSuite;
 
 public class BeanificationTestCase extends TestCase {
 
-    // ---------------------------------------------------- Constants
+    
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
 
-    // ---------------------------------------------------- Instance Variables
+    
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -58,7 +58,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -89,7 +89,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {

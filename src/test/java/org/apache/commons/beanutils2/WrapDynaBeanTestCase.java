@@ -28,8 +28,8 @@ import junit.framework.TestSuite;
 
 
 /**
- * <p>Test Case for the <code>WrapDynaBean</code> implementation class.
- * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
+ * <p>Test Case for the {@code WrapDynaBean} implementation class.
+ * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
  *
  */
@@ -37,10 +37,10 @@ import junit.framework.TestSuite;
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
+    
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -55,7 +55,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -91,11 +91,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     public void testSimpleProperties() {
 
@@ -144,7 +144,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     public void testIndexedProperties() {
 
@@ -184,8 +184,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>contains()</code> method is not supported by the
-     * <code>WrapDynaBean</code> implementation class.
+     * The {@code contains()} method is not supported by the
+     * {@code WrapDynaBean} implementation class.
      */
     @Override
     public void testMappedContains() {
@@ -215,8 +215,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
     /**
-     * The <code>remove()</code> method is not supported by the
-     * <code>WrapDynaBean</code> implementation class.
+     * The {@code remove()} method is not supported by the
+     * {@code WrapDynaBean} implementation class.
      */
     @Override
     public void testMappedRemove() {

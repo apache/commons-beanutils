@@ -31,7 +31,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaList</code>class.</p>
+ * <p>Test Case for the {@code LazyDynaList}class.</p>
  *
  */
 public class LazyDynaListTestCase extends TestCase {
@@ -48,7 +48,7 @@ public class LazyDynaListTestCase extends TestCase {
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
-    // ---------------------------------------------------------- Constructors
+    
 
     /**
      * Construct a new instance of this test case.
@@ -59,7 +59,7 @@ public class LazyDynaListTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
     /**
      * Run thus Test
@@ -89,7 +89,7 @@ public class LazyDynaListTestCase extends TestCase {
     public void tearDown() {
     }
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /**
      * Test DynaBean Create

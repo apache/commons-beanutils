@@ -31,7 +31,7 @@ public class IndexedTestBean {
     private ArrayList<Object> arrayList;
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
     /**
      * Default Constructor.

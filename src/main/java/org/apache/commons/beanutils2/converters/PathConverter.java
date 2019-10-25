@@ -24,7 +24,7 @@ import java.nio.file.Paths;
  * to and from <b>java.nio.file.Path</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 2.0
  */
@@ -32,7 +32,7 @@ public final class PathConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.nio.file.Path</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public PathConverter() {
         super();
@@ -51,9 +51,9 @@ public final class PathConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
     @Override

@@ -46,15 +46,15 @@ import junit.framework.TestSuite;
 
 public class LocaleBeanificationTestCase extends TestCase {
 
-    // ---------------------------------------------------- Constants
+    
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
 
-    // ---------------------------------------------------- Instance Variables
+    
 
 
-    // ---------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -67,7 +67,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -98,7 +98,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {

@@ -34,7 +34,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
         return new TestSuite(CalendarConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Calendar test case.
@@ -53,7 +53,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
         return Calendar.class;
     }
 
-    // ------------------------------------------------------------------------
+    
     /**
      * Create the Converter with no default value.
      * @return A new Converter

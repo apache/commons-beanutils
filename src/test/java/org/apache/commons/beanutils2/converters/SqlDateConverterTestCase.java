@@ -37,7 +37,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlDateConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Date test case.
@@ -47,7 +47,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Return the expected type

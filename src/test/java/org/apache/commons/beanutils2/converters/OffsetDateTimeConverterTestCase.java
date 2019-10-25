@@ -37,7 +37,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(OffsetDateTimeConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Construct a new Date test case.
@@ -65,7 +65,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
         return new OffsetDateTimeConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Create the Converter with a default value.

@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
 public class DynaResultSetTestCase extends TestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
+    
 
 
     /**
@@ -58,7 +58,7 @@ public class DynaResultSetTestCase extends TestCase {
       "timestampproperty" };
 
 
-    // ----------------------------------------------------------- Constructors
+    
 
 
     /**
@@ -73,7 +73,7 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
 
-    // --------------------------------------------------- Overall Test Methods
+    
 
 
     /**
@@ -109,7 +109,7 @@ public class DynaResultSetTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
+    
 
 
     public void testGetName() {

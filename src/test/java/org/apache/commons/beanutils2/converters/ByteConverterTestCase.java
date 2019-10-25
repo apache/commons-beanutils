@@ -33,11 +33,11 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(ByteConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+    
 
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+    
 
     public ByteConverterTestCase(final String name) {
         super(name);
@@ -53,7 +53,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         return new ByteConverter();
     }
 
-    // ------------------------------------------------------------------------
+    
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -73,7 +73,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
+    
 
     /**
      * Test Invalid Amounts (too big/small)

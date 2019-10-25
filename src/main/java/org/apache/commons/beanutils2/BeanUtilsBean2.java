@@ -24,12 +24,12 @@ package org.apache.commons.beanutils2;
  *
  * <p>
  * To configure this implementation for the current context ClassLoader invoke
- * <code>BeanUtilsBean.setInstance(new BeanUtilsBean2());</code>
+ * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
  * </p>
  *
  * <p>
  * BeanUtils 1.7.0 delegated all conversion to String to the converter
- * registered for the <code>String.class</code>. One of the improvements in
+ * registered for the {@code String.class}. One of the improvements in
  * BeanUtils 1.8.0 was to upgrade the {@link Converter} implementations so
  * that they could handle conversion to String for their type (e.g.
  * IntegerConverter now handles conversion from an Integer to a String as
