@@ -905,7 +905,7 @@ public class BeanUtilsBean {
             }
             type = dynaPropertyType(dynaProperty, value);
             if (index >= 0 && List.class.isAssignableFrom(type)) {
-            	type = Object.class;
+                type = Object.class;
             }
         } else if (target instanceof Map) {
             type = Object.class;
@@ -1056,7 +1056,7 @@ public class BeanUtilsBean {
      * @since 1.8.0
      */
     protected Object convert(final Object value, final Class<?> type) {
-    	return getConvertUtils().convert(value, type);
+        return getConvertUtils().convert(value, type);
     }
 
     /**

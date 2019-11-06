@@ -217,7 +217,7 @@ public class ConvertUtilsBean {
      * @return The converted String value or null if value is null
      */
     public String convert(Object value) {
-    	return (String)convert(value, String.class);
+        return (String)convert(value, String.class);
     }
 
     /**
@@ -231,7 +231,7 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-    	return convert((Object)value, clazz);
+        return convert((Object)value, clazz);
     }
 
     /**
@@ -248,7 +248,7 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
-    	return convert((Object)values, clazz);
+        return convert((Object)values, clazz);
     }
 
     /**
@@ -459,7 +459,7 @@ public class ConvertUtilsBean {
      * {@code false} if a default value should be used.
      */
     private void registerOther(final boolean throwException) {
-    	  // @formatter:off
+          // @formatter:off
         register(Class.class,          throwException ? new ClassConverter()          : new ClassConverter(null));
         register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
@@ -500,7 +500,7 @@ public class ConvertUtilsBean {
      * the default.
      */
     private void registerArrays(final boolean throwException, final int defaultArraySize) {
-    	// @formatter:off
+        // @formatter:off
 
         // Primitives
         registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
