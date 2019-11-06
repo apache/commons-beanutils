@@ -53,8 +53,8 @@ import org.apache.commons.beanutils2.converters.ClassConverter;
 import org.apache.commons.beanutils2.converters.ConverterFacade;
 import org.apache.commons.beanutils2.converters.DateConverter;
 import org.apache.commons.beanutils2.converters.DoubleConverter;
-import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.DurationConverter;
+import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
 import org.apache.commons.beanutils2.converters.IntegerConverter;
@@ -175,7 +175,7 @@ public class ConvertUtilsBean {
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
 
-    
+
     /**
      * Get singleton instance
      * @return The singleton instance
@@ -184,7 +184,7 @@ public class ConvertUtilsBean {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
 
-    
+
 
     /**
      * The set of {@link Converter}s that can be used to convert Strings
@@ -198,7 +198,7 @@ public class ConvertUtilsBean {
      */
     private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
 
-    
+
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -207,38 +207,17 @@ public class ConvertUtilsBean {
         converters.setFast(true);
     }
 
-    
+
 
     /**
-     * Convert the specified value into a String.  If the specified value
-     * is an array, the first element (converted to a String) will be
-     * returned.  The registered {@link Converter} for the
-     * {@code java.lang.String} class will be used, which allows
-     * applications to customize Object-&gt;String conversions (the default
-     * implementation simply uses toString()).
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
+     * method.
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
      */
     public String convert(Object value) {
-
-        if (value == null) {
-            return null;
-        } else if (value.getClass().isArray()) {
-            if (Array.getLength(value) < 1) {
-                return null;
-            }
-            value = Array.get(value, 0);
-            if (value == null) {
-                return null;
-            }
-            final Converter converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        } else {
-            final Converter converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        }
-
+    	return (String)convert(value, String.class);
     }
 
     /**
@@ -252,20 +231,7 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("Convert string '" + value + "' to class '" +
-                      clazz.getName() + "'");
-        }
-        Converter converter = lookup(clazz);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        return converter.convert(clazz, value);
-
+    	return convert((Object)value, clazz);
     }
 
     /**
@@ -282,28 +248,7 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
-
-        Class<?> type = clazz;
-        if (clazz.isArray()) {
-            type = clazz.getComponentType();
-        }
-        if (log.isDebugEnabled()) {
-            log.debug("Convert String[" + values.length + "] to class '" +
-                      type.getName() + "[]'");
-        }
-        Converter converter = lookup(type);
-        if (converter == null) {
-            converter = lookup(String.class);
-        }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
-        }
-        final Object array = Array.newInstance(type, values.length);
-        for (int i = 0; i < values.length; i++) {
-            Array.set(array, i, converter.convert(type, values[i]));
-        }
-        return array;
-
+    	return convert((Object)values, clazz);
     }
 
     /**
