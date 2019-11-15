@@ -60,9 +60,6 @@ import junit.framework.TestSuite;
  */
 
 public class BeanUtilsTestCase extends TestCase {
-
-    
-
     /**
      * The test bean for each test.
      */
@@ -103,8 +100,6 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-    
-
     /**
      * Construct a new instance of this test case.
      *
@@ -113,8 +108,6 @@ public class BeanUtilsTestCase extends TestCase {
     public BeanUtilsTestCase(final String name) {
         super(name);
     }
-
-    
 
     /**
      * Set up instance variables required by this test case.
@@ -162,8 +155,6 @@ public class BeanUtilsTestCase extends TestCase {
     public void tearDown() {
         bean = null;
     }
-
-    
 
     /**
      * Test the copyProperties() method from a DynaBean.
@@ -366,7 +357,67 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
         assertEquals("stringArray[1]", "New 1", stringArray[1]);
+    }
 
+    /**
+     * Test the copyProperties() method from a standard JavaBean with automatic destination bean instantiation.
+     */
+    public void testCopyPropertiesPassingDestinationClassType() {
+        // Set up an origin bean with customized properties
+        final TestBean orig = new TestBean();
+        orig.setBooleanProperty(false);
+        orig.setByteProperty((byte) 111);
+        orig.setDoubleProperty(333.33);
+        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
+        orig.setIntArray(new int[] { 100, 200, 300 });
+        orig.setIntProperty(333);
+        orig.setLongProperty(3333);
+        orig.setShortProperty((short) 33);
+        orig.setStringArray(new String[] { "New 0", "New 1" });
+        orig.setStringProperty("Custom string");
+
+        // Copy the origin bean to our destination test bean
+        final TestBean actual = BeanUtils.copyProperties(TestBean.class, orig);
+
+        assertFalse("Copied boolean property", actual.getBooleanProperty());
+        assertEquals("Copied byte property",
+                (byte) 111,
+                actual.getByteProperty());
+        assertEquals("Copied double property",
+                333.33,
+                actual.getDoubleProperty(),
+                0.005);
+        assertEquals("Copied int property",
+                333,
+                actual.getIntProperty());
+        assertEquals("Copied long property",
+                3333,
+                actual.getLongProperty());
+        assertEquals("Copied short property",
+                (short) 33,
+                actual.getShortProperty());
+        assertEquals("Copied string property",
+                "Custom string",
+                actual.getStringProperty());
+
+        // Validate the results for array properties
+        final String[] dupProperty = actual.getDupProperty();
+        assertNotNull("dupProperty present", dupProperty);
+        assertEquals("dupProperty length", 3, dupProperty.length);
+        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
+        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
+        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
+        final int[] intArray = actual.getIntArray();
+        assertNotNull("intArray present", intArray);
+        assertEquals("intArray length", 3, intArray.length);
+        assertEquals("intArray[0]", 100, intArray[0]);
+        assertEquals("intArray[1]", 200, intArray[1]);
+        assertEquals("intArray[2]", 300, intArray[2]);
+        final String[] stringArray = actual.getStringArray();
+        assertNotNull("stringArray present", stringArray);
+        assertEquals("stringArray length", 2, stringArray.length);
+        assertEquals("stringArray[0]", "New 0", stringArray[0]);
+        assertEquals("stringArray[1]", "New 1", stringArray[1]);
     }
 
     /**

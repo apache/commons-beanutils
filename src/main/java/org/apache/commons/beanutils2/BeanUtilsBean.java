@@ -32,6 +32,9 @@ import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.hotels.beans.transformer.BeanTransformer;
+import com.hotels.transformer.error.InvalidBeanException;
+
 /**
  * <p>JavaBean property population methods.</p>
  *
@@ -45,9 +48,6 @@ import org.apache.commons.logging.LogFactory;
  */
 
 public class BeanUtilsBean {
-
-    
-
     /**
      * Contains {@code BeanUtilsBean} instances indexed by context classloader.
      */
@@ -283,6 +283,56 @@ public class BeanUtilsBean {
             }
         }
 
+    }
+
+    /**
+     * <p>Copy property values from the origin bean to the destination bean
+     * class for all cases where the property names are the same. For each
+     * property, a conversion is attempted as necessary. All combinations of
+     * standard JavaBeans and DynaBeans as origin and destination are
+     * supported.  Properties that exist in the origin bean, but do not exist
+     * in the destination bean (or are read-only in the destination bean) are
+     * silently ignored and the default value for that type is set.</p>
+     *
+     * <p>To define specific mappings please refer to {@link com.hotels.beans.BeanUtils}
+     * documentation available see:
+     * @see <a href="https://hotelsdotcom.github.io/bull/transformer/bean/samples.html">Bean Transformer documentation</a>
+     * </p>
+     *
+     * @param destClass Destination bean class
+     * @param orig Origin bean whose properties are retrieved
+     *
+     * @throws InvalidBeanException if the destination bean is not valid
+     */
+    public <T> T copyProperties(final Class<T> destClass, final Object orig) {
+        final BeanTransformer beanTransformer = new com.hotels.beans.BeanUtils()
+                .getTransformer()
+                .setDefaultValueForMissingField(true);
+        return copyProperties(destClass, orig, beanTransformer);
+    }
+
+    /**
+     * <p>Copy property values from the origin bean to the destination bean
+     * class for all cases using the given {@link BeanTransformer} properly configured. For each
+     * property, a conversion is attempted as necessary.  All combinations of
+     * standard JavaBeans and DynaBeans as origin and destination are
+     * supported.  Properties that exist in the origin bean, but do not exist
+     * in the destination bean (or are read-only in the destination bean) are
+     * silently ignored and the default value for that type is set.</p>
+     *
+     * <p>To define specific mappings please refer to {@link com.hotels.beans.BeanUtils}
+     * documentation available see:
+     * @see <a href="https://hotelsdotcom.github.io/bull/transformer/bean/samples.html">Bean Transformer documentation</a>
+     * </p>
+     *
+     * @param destClass Destination bean class
+     * @param orig Origin bean whose properties are retrieved
+     * @param beanTransformer the transformer containing all mappings and transformation functions.
+     *
+     * @throws InvalidBeanException if the destination bean is not valid
+     */
+    public <T> T copyProperties(final Class<T> destClass, final Object orig, final BeanTransformer beanTransformer) {
+        return beanTransformer.transform(orig, destClass);
     }
 
     /**
