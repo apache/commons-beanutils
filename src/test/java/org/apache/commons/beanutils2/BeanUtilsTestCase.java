@@ -68,7 +68,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
+    protected String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "byteProperty",
@@ -189,48 +189,7 @@ public class BeanUtilsTestCase extends TestCase {
         }
 
         // Validate the results for scalar properties
-        assertEquals("Copied boolean property",
-                     false,
-                     bean.getBooleanProperty());
-        assertEquals("Copied byte property",
-                     (byte) 111,
-                     bean.getByteProperty());
-        assertEquals("Copied double property",
-                     333.33,
-                     bean.getDoubleProperty(),
-                     0.005);
-        assertEquals("Copied int property",
-                     333,
-                     bean.getIntProperty());
-        assertEquals("Copied long property",
-                     3333,
-                     bean.getLongProperty());
-        assertEquals("Copied short property",
-                     (short) 33,
-                     bean.getShortProperty());
-        assertEquals("Copied string property",
-                     "Custom string",
-                     bean.getStringProperty());
-
-        // Validate the results for array properties
-        final String dupProperty[] = bean.getDupProperty();
-        assertNotNull("dupProperty present", dupProperty);
-        assertEquals("dupProperty length", 3, dupProperty.length);
-        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
-        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
-        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
-        assertNotNull("intArray present", intArray);
-        assertEquals("intArray length", 3, intArray.length);
-        assertEquals("intArray[0]", 100, intArray[0]);
-        assertEquals("intArray[1]", 200, intArray[1]);
-        assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = bean.getStringArray();
-        assertNotNull("stringArray present", stringArray);
-        assertEquals("stringArray length", 2, stringArray.length);
-        assertEquals("stringArray[0]", "New 0", stringArray[0]);
-        assertEquals("stringArray[1]", "New 1", stringArray[1]);
-
+        validateBeanCopyResults(bean);
     }
 
     /**
@@ -296,17 +255,7 @@ public class BeanUtilsTestCase extends TestCase {
     public void testCopyPropertiesStandard() {
 
         // Set up an origin bean with customized properties
-        final TestBean orig = new TestBean();
-        orig.setBooleanProperty(false);
-        orig.setByteProperty((byte) 111);
-        orig.setDoubleProperty(333.33);
-        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
-        orig.setIntArray(new int[] { 100, 200, 300 });
-        orig.setIntProperty(333);
-        orig.setLongProperty(3333);
-        orig.setShortProperty((short) 33);
-        orig.setStringArray(new String[] { "New 0", "New 1" });
-        orig.setStringProperty("Custom string");
+        final TestBean orig = createTestBean();
 
         // Copy the origin bean to our destination test bean
         try {
@@ -314,49 +263,8 @@ public class BeanUtilsTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Threw exception: " + e);
         }
+        validateBeanCopyResults(bean);
 
-        // Validate the results for scalar properties
-        assertEquals("Copied boolean property",
-                     false,
-                     bean.getBooleanProperty());
-        assertEquals("Copied byte property",
-                     (byte) 111,
-                     bean.getByteProperty());
-        assertEquals("Copied double property",
-                     333.33,
-                     bean.getDoubleProperty(),
-                     0.005);
-        assertEquals("Copied int property",
-                     333,
-                     bean.getIntProperty());
-        assertEquals("Copied long property",
-                     3333,
-                     bean.getLongProperty());
-        assertEquals("Copied short property",
-                     (short) 33,
-                     bean.getShortProperty());
-        assertEquals("Copied string property",
-                     "Custom string",
-                     bean.getStringProperty());
-
-        // Validate the results for array properties
-        final String dupProperty[] = bean.getDupProperty();
-        assertNotNull("dupProperty present", dupProperty);
-        assertEquals("dupProperty length", 3, dupProperty.length);
-        assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
-        assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
-        assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
-        assertNotNull("intArray present", intArray);
-        assertEquals("intArray length", 3, intArray.length);
-        assertEquals("intArray[0]", 100, intArray[0]);
-        assertEquals("intArray[1]", 200, intArray[1]);
-        assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = bean.getStringArray();
-        assertNotNull("stringArray present", stringArray);
-        assertEquals("stringArray length", 2, stringArray.length);
-        assertEquals("stringArray[0]", "New 0", stringArray[0]);
-        assertEquals("stringArray[1]", "New 1", stringArray[1]);
     }
 
     /**
@@ -364,22 +272,20 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesPassingDestinationClassType() {
         // Set up an origin bean with customized properties
-        final TestBean orig = new TestBean();
-        orig.setBooleanProperty(false);
-        orig.setByteProperty((byte) 111);
-        orig.setDoubleProperty(333.33);
-        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
-        orig.setIntArray(new int[] { 100, 200, 300 });
-        orig.setIntProperty(333);
-        orig.setLongProperty(3333);
-        orig.setShortProperty((short) 33);
-        orig.setStringArray(new String[] { "New 0", "New 1" });
-        orig.setStringProperty("Custom string");
+        final TestBean orig = createTestBean();
 
         // Copy the origin bean to our destination test bean
         final TestBean actual = BeanUtils.copyProperties(TestBean.class, orig);
 
-        assertFalse("Copied boolean property", actual.getBooleanProperty());
+        // validate results
+        validateBeanCopyResults(actual);
+    }
+
+    private void validateBeanCopyResults(final TestBean actual) {
+        // Validate the results for scalar properties
+        assertEquals("Copied boolean property",
+                false,
+                actual.getBooleanProperty());
         assertEquals("Copied byte property",
                 (byte) 111,
                 actual.getByteProperty());
@@ -418,6 +324,21 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
         assertEquals("stringArray[1]", "New 1", stringArray[1]);
+    }
+
+    private TestBean createTestBean() {
+        final TestBean orig = new TestBean();
+        orig.setBooleanProperty(false);
+        orig.setByteProperty((byte) 111);
+        orig.setDoubleProperty(333.33);
+        orig.setDupProperty(new String[]{"New 0", "New 1", "New 2"});
+        orig.setIntArray(new int[]{100, 200, 300});
+        orig.setIntProperty(333);
+        orig.setLongProperty(3333);
+        orig.setShortProperty((short) 33);
+        orig.setStringArray(new String[]{"New 0", "New 1"});
+        orig.setStringProperty("Custom string");
+        return orig;
     }
 
     /**
