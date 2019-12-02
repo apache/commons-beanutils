@@ -59,7 +59,7 @@
     <commons.releaseManagerName>Gary Gregory</commons.releaseManagerName>
     <commons.releaseManagerKey>86fdc7e2a11262cb</commons.releaseManagerKey>
     <!-- Third party libraries -->
-    <bull-bean-transformer.version>1.1.25</bull-bean-transformer.version>
+    <bull-bean-transformer.version>1.6.2-jdk8</bull-bean-transformer.version>
   </properties>
 
   <issueManagement>
