@@ -132,7 +132,7 @@ public class BeanUtils {
      *
      * @throws InvalidBeanException if the destination bean is not valid
      */
-    public <T> T copyProperties(final Class<T> destClass, final Object orig, final BeanTransformer beanTransformer) {
+    public static <T> T copyProperties(final Class<T> destClass, final Object orig, final BeanTransformer beanTransformer) {
         return BeanUtilsBean.getInstance().copyProperties(destClass, orig, beanTransformer);
     }
 

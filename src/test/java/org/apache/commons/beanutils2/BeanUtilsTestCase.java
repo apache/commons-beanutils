@@ -28,6 +28,9 @@ import java.util.StringTokenizer;
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.DateConverter;
 
+import com.hotels.beans.transformer.BeanTransformer;
+import com.hotels.transformer.model.FieldTransformer;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -276,6 +279,24 @@ public class BeanUtilsTestCase extends TestCase {
 
         // Copy the origin bean to our destination test bean
         final TestBean actual = BeanUtils.copyProperties(TestBean.class, orig);
+
+        // validate results
+        validateBeanCopyResults(actual);
+    }
+
+    /**
+     * Test the copyProperties() method from a standard JavaBean with automatic destination bean instantiation.
+     * This methods pass as a parameter the BeanTransformer class too.
+     */
+    public void testCopyPropertiesPassingDestinationClassTypeAndBeanTransformer() {
+        // Set up an origin bean with customized properties
+        final TestBean orig = createTestBean();
+        // Set up an BeanTransformer that performs a transformation on a given field.
+        final BeanTransformer beanTransformer = new com.hotels.beans.BeanUtils().getTransformer();
+        beanTransformer.withFieldTransformer(new FieldTransformer<Integer, Integer>("intProperty", val -> (val + 2) - 2));
+
+        // Copy the origin bean to our destination test bean
+        final TestBean actual = BeanUtils.copyProperties(TestBean.class, orig, beanTransformer);
 
         // validate results
         validateBeanCopyResults(actual);
