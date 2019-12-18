@@ -483,7 +483,7 @@ public class MethodUtilsTestCase extends TestCase {
                        Modifier.isStatic(incrementCounterMethod2.getModifiers()));
 
             // Return initial value of the counter
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -492,11 +492,11 @@ public class MethodUtilsTestCase extends TestCase {
                          ((Integer) value).intValue());
 
             // Increment via no-arguments version
-            incrementCounterMethod1.invoke(null, new Object[0]);
+            incrementCounterMethod1.invoke(null);
 
             // Validate updated value
             current++;
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -505,12 +505,11 @@ public class MethodUtilsTestCase extends TestCase {
                          ((Integer) value).intValue());
 
             // Increment via specified-argument version
-            incrementCounterMethod2.invoke(null,
-                                           new Object[] { new Integer(5) });
+            incrementCounterMethod2.invoke(null, new Integer(5));
 
             // Validate updated value
             current += 5;
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -549,7 +548,7 @@ public class MethodUtilsTestCase extends TestCase {
         }
         assertNotNull("getAccessibleMethod() setFoo is Null", method);
         try {
-            method.invoke(bean, new Object[] {"1111"});
+            method.invoke(bean, "1111");
         } catch (final Throwable t) {
             fail("Invoking setFoo threw " + t);
         }
@@ -562,7 +561,7 @@ public class MethodUtilsTestCase extends TestCase {
         }
         assertNotNull("getAccessibleMethod() setBar is Null", method);
         try {
-            method.invoke(bean, new Object[] {"2222"});
+            method.invoke(bean, "2222");
         } catch (final Throwable t) {
             fail("Invoking setBar threw " + t);
         }

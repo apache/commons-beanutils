@@ -365,7 +365,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     public void testMethodMutator() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
-        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
+        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
 

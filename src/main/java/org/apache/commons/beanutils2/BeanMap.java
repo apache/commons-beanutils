@@ -701,7 +701,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
         // try call constructor
         try {
             final Constructor<?> constructor = newType.getConstructor(value.getClass());
-            return constructor.newInstance(new Object[] { value });
+            return constructor.newInstance(value);
         } catch (final NoSuchMethodException e) {
             // try using the transformers
             final Function transformer = getTypeTransformer(newType);

@@ -1035,7 +1035,7 @@ public class BeanUtilsBean {
     public boolean initCause(final Throwable throwable, final Throwable cause) {
         if (INIT_CAUSE_METHOD != null && cause != null) {
             try {
-                INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
+                INIT_CAUSE_METHOD.invoke(throwable, cause);
                 return true;
             } catch (final Throwable e) {
                 return false; // can't initialize cause
