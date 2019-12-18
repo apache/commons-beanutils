@@ -77,7 +77,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Constructors
-    
+
 
     /**
      * Constructs a new empty {@code BeanMap}.
@@ -97,7 +97,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Map interface
-    
+
 
     /**
      * Renders a string representation of this object.
@@ -387,7 +387,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Helper methods
-    
+
 
     /**
      * Returns the type of the property with the given name.
@@ -466,7 +466,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Properties
-    
+
 
     /**
      * Returns the bean currently being operated on. The return value may be null if this map is empty.
@@ -508,7 +508,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Implementation methods
-    
+
 
     /**
      * Returns the accessor for the property with the given name.
@@ -588,7 +588,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     // Implementation classes
-    
+
 
     /**
      * Map entry used by {@link BeanMap}.

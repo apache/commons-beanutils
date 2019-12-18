@@ -31,7 +31,7 @@ import java.util.Locale;
  */
 public class LocaleConvertUtils {
 
-    
+
 
     /**
      * <p>Gets the {@code Locale} which will be used when
@@ -86,7 +86,7 @@ public class LocaleConvertUtils {
         LocaleConvertUtilsBean.getInstance().setApplyLocalized(newApplyLocalized);
     }
 
-    
+
 
     /**
      * <p>Convert the specified locale-sensitive value into a String.</p>

@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class DynaProperty implements Serializable {
 
-    
+
 
 	private static final long serialVersionUID = -3084907613499830175L;
 	/*
@@ -59,7 +59,7 @@ public class DynaProperty implements Serializable {
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
 
-    
+
 
     /**
      * Construct a property that accepts any data type.
@@ -106,7 +106,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    
+
 
     /** Property name */
     protected String name = null;
@@ -153,7 +153,7 @@ public class DynaProperty implements Serializable {
         return contentType;
     }
 
-    
+
 
     /**
      * Does this property represent an indexed value (ie an array or List)?
@@ -252,7 +252,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    
+
 
     /**
      * Writes this object safely.

@@ -45,7 +45,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
+
 
     /**
      * Construct a new {@code DynaBean} associated with the specified
@@ -77,7 +77,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-    
+
 
     /**
      * The {@code DynaClass} "base class" that this DynaBean
@@ -90,7 +90,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     protected Object instance = null;
 
-    
+
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -360,7 +360,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
         return instance;
     }
 
-    
+
 
     /**
      * Return the property descriptor for the specified property name.

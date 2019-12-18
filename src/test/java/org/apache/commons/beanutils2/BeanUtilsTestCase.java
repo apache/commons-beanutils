@@ -61,7 +61,7 @@ import junit.framework.TestSuite;
 
 public class BeanUtilsTestCase extends TestCase {
 
-    
+
 
     /**
      * The test bean for each test.
@@ -103,7 +103,7 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -114,7 +114,7 @@ public class BeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -163,7 +163,7 @@ public class BeanUtilsTestCase extends TestCase {
         bean = null;
     }
 
-    
+
 
     /**
      * Test the copyProperties() method from a DynaBean.

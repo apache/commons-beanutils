@@ -32,7 +32,7 @@ import junit.framework.TestSuite;
 
 public class BeanUtilsBenchCase extends TestCase {
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -45,7 +45,7 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-    
+
 
     // Basic loop counter
     private long counter = 100000;
@@ -66,7 +66,7 @@ public class BeanUtilsBenchCase extends TestCase {
     // BeanUtilsBean instance to be used
     private BeanUtilsBean bu = null;
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -157,7 +157,7 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-    
+
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
@@ -352,6 +352,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     }
 
-    
+
 
 }

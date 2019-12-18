@@ -39,9 +39,9 @@ import junit.framework.TestSuite;
 
 public class ConvertUtilsTestCase extends TestCase {
 
-    
 
-    
+
+
 
     /**
      * Construct a new instance of this test case.
@@ -52,7 +52,7 @@ public class ConvertUtilsTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -79,7 +79,7 @@ public class ConvertUtilsTestCase extends TestCase {
         // No action required
     }
 
-    
+
 
     /**
      * Negative String to primitive integer array tests.
@@ -653,7 +653,7 @@ public class ConvertUtilsTestCase extends TestCase {
                 utils.convert(value, getClass()));
     }
 
-    
+
 
     private void checkIntegerArray(final Object value, final int intArray[]) {
 

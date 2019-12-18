@@ -33,7 +33,7 @@ import java.sql.Types;
 
 public class TestResultSetMetaData implements InvocationHandler {
 
-    
+
 
     /**
      * <p>Array of column names and class names for metadata.</p>
@@ -99,7 +99,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
-    
+
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
         return metadata[columnIndex - 1][1];
@@ -149,7 +149,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         return new Integer(sqlType);
     }
 
-    
+
 
     public String getCatalogName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();

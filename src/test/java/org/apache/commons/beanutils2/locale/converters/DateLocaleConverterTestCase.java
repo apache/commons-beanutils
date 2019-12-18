@@ -45,13 +45,13 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     protected boolean validLocalDateSymbols;
 
-    
+
 
     public DateLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -109,7 +109,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-    
+
 
     public void testSetLenient() {
         // make sure that date format works as expected

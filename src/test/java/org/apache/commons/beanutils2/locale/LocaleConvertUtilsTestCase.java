@@ -39,11 +39,11 @@ import junit.framework.TestSuite;
 
 public class LocaleConvertUtilsTestCase extends TestCase {
 
-    
+
 
     private char m_decimalSeparator;
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -54,7 +54,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -87,7 +87,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         // No action required
     }
 
-    
+
 
     /**
      * Negative String to primitive integer array tests.
@@ -619,7 +619,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(value.toString(), getClass()));
     }
 
-    
+
 
     private void checkIntegerArray(final Object value, final int intArray[]) {
 

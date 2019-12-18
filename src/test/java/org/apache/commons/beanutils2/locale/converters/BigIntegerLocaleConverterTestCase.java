@@ -28,13 +28,13 @@ import org.apache.commons.beanutils2.ConversionException;
 
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    
+
 
     public BigIntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -57,7 +57,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-    
+
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

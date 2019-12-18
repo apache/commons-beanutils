@@ -32,7 +32,7 @@ import java.util.Locale;
 
 public class LongLocaleConverter extends DecimalLocaleConverter {
 
-    
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

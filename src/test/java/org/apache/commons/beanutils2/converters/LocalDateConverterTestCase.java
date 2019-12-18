@@ -37,7 +37,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(LocalDateConverterTestCase.class);
     }
 
-    
+
 
     /**
      * Construct a new Date test case.
@@ -65,7 +65,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
         return new LocalDateConverter();
     }
 
-    
+
 
     /**
      * Create the Converter with a default value.

@@ -31,7 +31,7 @@ import junit.framework.TestSuite;
 
 public class DynaResultSetTestCase extends TestCase {
 
-    
+
 
     /**
      * The mock result set DynaClass to be tested.
@@ -51,7 +51,7 @@ public class DynaResultSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -64,7 +64,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -95,7 +95,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-    
+
 
     public void testGetName() {
 

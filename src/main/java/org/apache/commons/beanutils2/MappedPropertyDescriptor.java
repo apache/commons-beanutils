@@ -42,7 +42,7 @@ import java.lang.reflect.Modifier;
  *
  */
 public class MappedPropertyDescriptor extends PropertyDescriptor {
-    
+
 
     /**
      * The underlying data type of the property we are describing.
@@ -64,7 +64,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
 
-    
+
 
     /**
      * Constructs a MappedPropertyDescriptor for a property that follows
@@ -211,7 +211,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-    
+
 
     /**
      * Gets the Class object for the property values.
@@ -273,7 +273,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-    
+
 
     /**
      * Introspect our bean class to identify the corresponding getter

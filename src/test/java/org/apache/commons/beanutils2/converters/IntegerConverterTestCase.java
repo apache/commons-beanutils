@@ -33,11 +33,11 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(IntegerConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public IntegerConverterTestCase(final String name) {
         super(name);
@@ -53,7 +53,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         return new IntegerConverter();
     }
 
-    
+
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -74,7 +74,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-    
+
 
     /**
      * Test Invalid Amounts (too big/small)

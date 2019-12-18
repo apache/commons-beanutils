@@ -43,12 +43,12 @@ import org.apache.commons.logging.LogFactory;
 
 public class StringLocaleConverter extends BaseLocaleConverter {
 
-    
+
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
 
-    
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -212,7 +212,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-    
+
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

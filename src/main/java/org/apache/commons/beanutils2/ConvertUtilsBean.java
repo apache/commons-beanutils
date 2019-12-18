@@ -175,7 +175,7 @@ public class ConvertUtilsBean {
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
 
-    
+
     /**
      * Get singleton instance
      * @return The singleton instance
@@ -184,7 +184,7 @@ public class ConvertUtilsBean {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
 
-    
+
 
     /**
      * The set of {@link Converter}s that can be used to convert Strings
@@ -198,7 +198,7 @@ public class ConvertUtilsBean {
      */
     private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
 
-    
+
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -207,7 +207,7 @@ public class ConvertUtilsBean {
         converters.setFast(true);
     }
 
-    
+
 
     /**
      * Convert the specified value into a String.  If the specified value

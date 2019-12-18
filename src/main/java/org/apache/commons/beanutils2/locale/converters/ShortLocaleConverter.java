@@ -34,7 +34,7 @@ import org.apache.commons.beanutils2.ConversionException;
 
 public class ShortLocaleConverter extends DecimalLocaleConverter {
 
-    
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

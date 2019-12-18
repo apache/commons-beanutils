@@ -38,7 +38,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
+
 
     /**
      * <p>Flag defining whether column names should be lower cased when
@@ -71,7 +71,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     private Map<String, String> columnNameXref;
 
-    
+
 
     /**
      * <p>Return the name of this DynaClass (analogous to the

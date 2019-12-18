@@ -46,7 +46,7 @@ package org.apache.commons.beanutils2.converters;
 public final class BooleanConverter extends AbstractConverter {
 
 
-    
+
 
 
     /**
@@ -131,13 +131,13 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
 
-    
 
 
 
 
 
-    
+
+
 
     /**
      * The set of strings that are known to map to Boolean.TRUE.
@@ -149,7 +149,7 @@ public final class BooleanConverter extends AbstractConverter {
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
 
-    
+
 
     /**
      * Return the default type this {@code Converter} handles.

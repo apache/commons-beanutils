@@ -35,11 +35,11 @@ public class YearConverterTestCase extends TestCase {
         return new TestSuite(YearConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public YearConverterTestCase(final String name) {
         super(name);
@@ -53,7 +53,7 @@ public class YearConverterTestCase extends TestCase {
         return new YearConverter();
     }
 
-    
+
 
     @Override
     public void setUp() throws Exception {
@@ -65,7 +65,7 @@ public class YearConverterTestCase extends TestCase {
         converter = null;
     }
 
-    
+
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

@@ -35,11 +35,11 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new TestSuite(OffsetTimeConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public OffsetTimeConverterTestCase(final String name) {
         super(name);
@@ -53,7 +53,7 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new OffsetTimeConverter();
     }
 
-    
+
 
     @Override
     public void setUp() throws Exception {
@@ -65,7 +65,7 @@ public class OffsetTimeConverterTestCase extends TestCase {
         converter = null;
     }
 
-    
+
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

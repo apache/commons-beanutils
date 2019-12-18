@@ -29,7 +29,7 @@ package org.apache.commons.beanutils2.priv;
 
 class PackageBean {
 
-    
+
 
     /**
      * Package private constructor - can only use factory method to create
@@ -41,7 +41,7 @@ class PackageBean {
 
     }
 
-    
+
 
     /**
      */

@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
 
 public class DynaBeanUtilsTestCase extends TestCase {
 
-    
+
 
     /**
      * The basic test bean for each test.
@@ -74,7 +74,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
       "stringProperty"
     };
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -87,7 +87,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -168,7 +168,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Test the cloneBean() method from a DynaBean.
@@ -1156,7 +1156,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     // Ensure that the nested intArray matches the specified values
     protected void checkIntArray(final int actual[], final int expected[]) {

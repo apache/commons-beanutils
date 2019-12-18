@@ -75,7 +75,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     private boolean fast = false;
 
     // Constructors
-    
+
 
     /**
      * Construct an empty map.
@@ -117,7 +117,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Property access
-    
+
 
     /**
      *  Returns true if this map is operating in fast mode.
@@ -138,7 +138,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map access
-    
+
     // These methods can forward straight to the wrapped Map in 'fast' mode.
     // (because they are query methods)
 
@@ -226,7 +226,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map modification
-    
+
     // These methods perform special behavior in 'fast' mode.
     // The map is cloned, updated and then assigned back.
     // See the comments at the top as to why this won't always work.
@@ -315,7 +315,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Basic object methods
-    
+
 
     /**
      * Compare the specified object with this list for equality.  This
@@ -424,7 +424,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map views
-    
+
 
     /**
      * Return a collection view of the mappings contained in this map.  Each
@@ -455,7 +455,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
-    
+
 
     protected Map<K, V> createMap() {
         return new WeakHashMap<>();
@@ -478,7 +478,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map view inner classes
-    
+
 
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().

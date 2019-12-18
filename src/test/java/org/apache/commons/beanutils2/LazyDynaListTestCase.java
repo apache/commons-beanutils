@@ -48,7 +48,7 @@ public class LazyDynaListTestCase extends TestCase {
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -59,7 +59,7 @@ public class LazyDynaListTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Run thus Test
@@ -89,7 +89,7 @@ public class LazyDynaListTestCase extends TestCase {
     public void tearDown() {
     }
 
-    
+
 
     /**
      * Test DynaBean Create

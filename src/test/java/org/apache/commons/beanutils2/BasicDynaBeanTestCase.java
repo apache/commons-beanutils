@@ -39,7 +39,7 @@ import junit.framework.TestSuite;
 
 public class BasicDynaBeanTestCase extends TestCase {
 
-    
+
 
     /**
      * The basic test bean for each test.
@@ -70,7 +70,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         "stringProperty",
     };
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -83,7 +83,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -152,7 +152,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Corner cases on getDynaProperty invalid arguments.
@@ -914,7 +914,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Create and return a {@code DynaClass} instance for our test

@@ -30,13 +30,13 @@ import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 
 public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    
+
 
     public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -59,7 +59,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-    
+
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

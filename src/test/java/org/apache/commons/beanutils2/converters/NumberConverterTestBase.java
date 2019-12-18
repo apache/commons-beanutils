@@ -37,19 +37,19 @@ public abstract class NumberConverterTestBase extends TestCase {
     /** Test Number values */
     protected Number[] numbers = new Number[4];
 
-    
+
 
     public NumberConverterTestBase(final String name) {
         super(name);
     }
 
-    
+
 
     protected abstract Class<?> getExpectedType();
     protected abstract NumberConverter makeConverter();
     protected abstract NumberConverter makeConverter(Object defaultValue);
 
-    
+
 
     /**
      * Convert Boolean --> Number (default conversion)

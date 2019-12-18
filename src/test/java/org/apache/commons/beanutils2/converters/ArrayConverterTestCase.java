@@ -37,7 +37,7 @@ public class ArrayConverterTestCase extends TestCase {
         return new TestSuite(ArrayConverterTestCase.class);
     }
 
-    
+
 
     /**
      * Construct a new Array Converter test case.
@@ -73,7 +73,7 @@ public class ArrayConverterTestCase extends TestCase {
     public void setUp() throws Exception {
     }
 
-    
+
 
     /** Tear Down */
     @Override

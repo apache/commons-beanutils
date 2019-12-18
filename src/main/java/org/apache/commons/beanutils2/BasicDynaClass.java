@@ -36,7 +36,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
+
 
     /**
      * Construct a new BasicDynaClass with default parameters.
@@ -83,7 +83,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     }
 
-    
+
 
     /**
      * The constructor of the {@code dynaBeanClass} that we will use
@@ -126,7 +126,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
-    
+
 
     /**
      * Return the name of this DynaClass (analogous to the
@@ -211,7 +211,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     }
 
-    
+
 
     /**
      * Return the Class object we will use to create new instances in the
@@ -226,7 +226,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     }
 
-    
+
 
     /**
      * Set the Class object we will use to create new instances in the

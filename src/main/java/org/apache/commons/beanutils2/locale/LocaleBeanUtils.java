@@ -33,7 +33,7 @@ import org.apache.commons.beanutils2.BeanUtils;
 
 public class LocaleBeanUtils extends BeanUtils {
 
-    
+
 
     /**
      * <p>Gets the locale used when no locale is passed.</p>
@@ -89,7 +89,7 @@ public class LocaleBeanUtils extends BeanUtils {
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setApplyLocalized(newApplyLocalized);
     }
 
-    
+
 
     /**
      * <p>Return the value of the specified locale-sensitive indexed property

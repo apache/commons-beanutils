@@ -31,7 +31,7 @@ import java.util.NoSuchElementException;
 
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
-    
+
 
     /**
      * <p>Construct an {@code Iterator} for the result set being wrapped
@@ -46,7 +46,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-    
+
 
     /**
      * <p>Flag indicating whether the result set is currently positioned at a
@@ -65,7 +65,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      */
     protected boolean eof = false;
 
-    
+
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -262,7 +262,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-    
+
 
     /**
      * <p>Return {@code true} if the iteration has more elements.</p>
@@ -314,7 +314,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-    
+
 
     /**
      * <p>Advance the result set to the next row, if there is not a current

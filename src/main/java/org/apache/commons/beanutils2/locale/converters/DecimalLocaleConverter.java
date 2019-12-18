@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {
 
-    
+
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
 
-    
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -209,7 +209,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
 
     }
 
-    
+
 
     /**
      * Convert the specified locale-sensitive input object into an output

@@ -80,7 +80,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
 
-    
+
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -164,14 +164,14 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-    
+
 
     /**
      * <p>The {@code ResultSet} we are wrapping.</p>
      */
     protected ResultSet resultSet = null;
 
-    
+
 
     /**
      * <p>Return an {@code Iterator} of {@link DynaBean} instances for
@@ -199,7 +199,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return getObject(getResultSet(), name);
     }
 
-    
+
 
     /**
      * <p>Return the result set we are wrapping.</p>
@@ -210,7 +210,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-    
+
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used

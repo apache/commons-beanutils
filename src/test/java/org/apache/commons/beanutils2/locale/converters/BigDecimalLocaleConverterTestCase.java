@@ -26,13 +26,13 @@ import java.math.BigDecimal;
 
 public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    
+
 
     public BigDecimalLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -55,7 +55,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-    
+
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

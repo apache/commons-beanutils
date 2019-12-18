@@ -34,7 +34,7 @@ import junit.framework.TestSuite;
 
 public class DynaPropertyUtilsTestCase extends TestCase {
 
-    
+
 
     /**
      * The basic test bean for each test.
@@ -71,7 +71,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     protected TestBean nested = null;
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -84,7 +84,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -164,7 +164,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
@@ -2528,7 +2528,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Create and return a {@code DynaClass} instance for our test

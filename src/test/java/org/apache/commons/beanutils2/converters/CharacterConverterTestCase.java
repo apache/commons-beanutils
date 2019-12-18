@@ -36,7 +36,7 @@ public class CharacterConverterTestCase extends TestCase {
         return new TestSuite(CharacterConverterTestCase.class);
     }
 
-    
+
 
     /**
      * Construct a new Character Converter test case.
@@ -56,7 +56,7 @@ public class CharacterConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
     }
 
-    
+
 
     /**
      * Tests whether the primitive char class can be passed as target type.

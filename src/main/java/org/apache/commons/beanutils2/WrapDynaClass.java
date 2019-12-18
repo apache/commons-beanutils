@@ -45,7 +45,7 @@ import java.util.WeakHashMap;
 public class WrapDynaClass implements DynaClass {
 
 
-    
+
 
 
     /**
@@ -66,7 +66,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    
+
 
     /**
      * Name of the JavaBean class represented by this WrapDynaClass.
@@ -109,7 +109,7 @@ public class WrapDynaClass implements DynaClass {
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
-    
+
 
 
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
@@ -133,7 +133,7 @@ public class WrapDynaClass implements DynaClass {
 
 
 
-    
+
 
     /**
      * Return the class of the underlying wrapped bean.
@@ -236,7 +236,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    
+
 
 
     /**
@@ -253,7 +253,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    
+
 
 
     /**
@@ -306,7 +306,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    
+
 
     /**
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This

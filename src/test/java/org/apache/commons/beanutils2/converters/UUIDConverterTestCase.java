@@ -35,11 +35,11 @@ public class UUIDConverterTestCase extends TestCase {
         return new TestSuite(UUIDConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public UUIDConverterTestCase(final String name) {
         super(name);
@@ -53,7 +53,7 @@ public class UUIDConverterTestCase extends TestCase {
         return new UUIDConverter();
     }
 
-    
+
 
     @Override
     public void setUp() throws Exception {
@@ -65,7 +65,7 @@ public class UUIDConverterTestCase extends TestCase {
         converter = null;
     }
 
-    
+
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

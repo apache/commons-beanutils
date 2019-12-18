@@ -29,7 +29,7 @@ public class LazyDynaClassTestCase extends TestCase {
     protected LazyDynaClass dynaClass = null;
     protected String testProperty     = "myProperty";
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -40,7 +40,7 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Run this Test
@@ -72,7 +72,7 @@ public class LazyDynaClassTestCase extends TestCase {
         dynaClass = null;
     }
 
-    
+
 
     /**
      * Test add(name) method

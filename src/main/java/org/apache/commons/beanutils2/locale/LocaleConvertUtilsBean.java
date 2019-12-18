@@ -92,7 +92,7 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-    
+
 
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
@@ -109,7 +109,7 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-    
+
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -121,7 +121,7 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-    
+
 
     /**
      * getter for defaultLocale.
@@ -166,7 +166,7 @@ public class LocaleConvertUtilsBean {
         applyLocalized = newApplyLocalized;
     }
 
-    
+
 
     /**
      * Convert the specified locale-sensitive value into a String.

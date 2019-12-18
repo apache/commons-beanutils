@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class TestBean implements Serializable {
 
-    
+
 
     public TestBean() {
         listIndexed.add("String 0");
@@ -97,7 +97,7 @@ public class TestBean implements Serializable {
         this.string2dArray = string2dArray;
     }
 
-    
+
 
     /**
      * A boolean property.
@@ -519,7 +519,7 @@ public class TestBean implements Serializable {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-    
+
 
     /**
      * <p>An invalid property that has two boolean getters (getInvalidBoolean
@@ -547,7 +547,7 @@ public class TestBean implements Serializable {
         }
     }
 
-    
+
 
     /**
      * A static variable that is accessed and updated via static methods

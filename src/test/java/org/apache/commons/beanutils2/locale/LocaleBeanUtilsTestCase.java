@@ -41,7 +41,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -65,7 +65,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     public void tearDown() {
     }
 
-    
+
 
     /**
      * Test setting a nested simple property

@@ -24,13 +24,13 @@ package org.apache.commons.beanutils2.locale.converters;
 
 public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    
+
 
     public LongLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -53,7 +53,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-    
+
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor

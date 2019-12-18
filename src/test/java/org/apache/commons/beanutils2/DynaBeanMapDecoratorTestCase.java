@@ -57,7 +57,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private Map<String, Object> modifiableMap;
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -68,7 +68,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Run thus Test
@@ -116,7 +116,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         modifiableMap = null;
     }
 
-    
+
 
     /**
      * Test isReadOnly() method

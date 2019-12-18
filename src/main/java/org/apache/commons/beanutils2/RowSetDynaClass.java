@@ -64,7 +64,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
 
-    
+
 
     /**
      * <p>Limits the size of the returned list.  The call to
@@ -80,7 +80,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     protected List<DynaBean> rows = new ArrayList<>();
 
-    
+
 
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
@@ -261,7 +261,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     }
 
-    
+
 
     /**
      * <p>Copy the column values for each row in the specified

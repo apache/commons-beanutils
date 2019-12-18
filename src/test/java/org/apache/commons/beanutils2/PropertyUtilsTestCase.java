@@ -66,7 +66,7 @@ import junit.framework.TestSuite;
 
 public class PropertyUtilsTestCase extends TestCase {
 
-    
+
 
     /**
      * The fully qualified class name of our private directly
@@ -164,7 +164,7 @@ public class PropertyUtilsTestCase extends TestCase {
         "writeOnlyProperty",
     };
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -177,7 +177,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -227,7 +227,7 @@ public class PropertyUtilsTestCase extends TestCase {
         PropertyUtils.resetBeanIntrospectors();
     }
 
-    
+
 
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
@@ -3822,7 +3822,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     }
 
-    
+
 
     /**
      * Base for testGetDescriptorXxxxx() series of tests.

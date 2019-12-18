@@ -80,7 +80,7 @@ public abstract class AbstractConverter implements Converter {
      */
     private Object defaultValue = null;
 
-    
+
 
     /**
      * Construct a <i>Converter</i> that throws a
@@ -101,7 +101,7 @@ public abstract class AbstractConverter implements Converter {
         setDefaultValue(defaultValue);
     }
 
-    
+
 
     /**
      * Indicates whether a default value will be returned or exception
@@ -388,7 +388,7 @@ public abstract class AbstractConverter implements Converter {
         return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }
 
-    
+
 
     /**
      * Accessor method for Log instance.

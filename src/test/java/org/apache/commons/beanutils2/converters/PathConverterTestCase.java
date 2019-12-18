@@ -37,11 +37,11 @@ public class PathConverterTestCase extends TestCase {
         return new TestSuite(PathConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public PathConverterTestCase(final String name) {
         super(name);
@@ -55,7 +55,7 @@ public class PathConverterTestCase extends TestCase {
         return new PathConverter();
     }
 
-    
+
 
     @Override
     public void setUp() throws Exception {
@@ -67,7 +67,7 @@ public class PathConverterTestCase extends TestCase {
         converter = null;
     }
 
-    
+
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

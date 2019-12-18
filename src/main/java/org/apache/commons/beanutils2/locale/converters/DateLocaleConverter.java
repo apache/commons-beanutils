@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DateLocaleConverter extends BaseLocaleConverter {
 
-    
+
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);
@@ -55,7 +55,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
-    
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -219,7 +219,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-    
+
 
     /**
      * Returns whether date formatting is lenient.
@@ -241,7 +241,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         isLenient = lenient;
     }
 
-    
+
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

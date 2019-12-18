@@ -34,7 +34,7 @@ import junit.framework.TestSuite;
  */
 public class MethodUtilsTestCase extends TestCase {
 
-    
+
 
     /**
      * Construct a new instance of this test case.
@@ -45,7 +45,7 @@ public class MethodUtilsTestCase extends TestCase {
         super(name);
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -68,7 +68,7 @@ public class MethodUtilsTestCase extends TestCase {
     public void tearDown() {
     }
 
-    
+
 
     /**
      * <p> Test {@code getAccessibleMethod}.

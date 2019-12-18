@@ -47,7 +47,7 @@ import java.util.Map;
 
 public class TestResultSet implements InvocationHandler {
 
-    
+
 
     /**
      * Current row number (0 means "before the first one").
@@ -142,7 +142,7 @@ public class TestResultSet implements InvocationHandler {
         return (String)arg;
     }
 
-    
+
 
     public void close() throws SQLException {
         // No action required
@@ -217,7 +217,7 @@ public class TestResultSet implements InvocationHandler {
         // FIXME - updateObject()
     }
 
-    
+
 
     public boolean absolute(final int row) throws SQLException {
         throw new UnsupportedOperationException();

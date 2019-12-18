@@ -34,9 +34,9 @@ import junit.framework.TestSuite;
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
-    
 
-    
+
+
 
     /**
      * Construct a new instance of this test case.
@@ -49,7 +49,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-    
+
 
     /**
      * Set up instance variables required by this test case.
@@ -80,7 +80,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-    
+
 
     /**
      * The {@code set()} method.

@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.priv;
 
 class PrivateBean implements PrivateDirect {
 
-    
+
 
     /**
      * Package private constructor - can only use factory method to create
@@ -42,7 +42,7 @@ class PrivateBean implements PrivateDirect {
 
     }
 
-    
+
 
     /**
      * A directly implemented property.

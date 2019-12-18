@@ -32,11 +32,11 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(ShortConverterTestCase.class);
     }
 
-    
+
 
     private Converter converter = null;
 
-    
+
 
     public ShortConverterTestCase(final String name) {
         super(name);
@@ -52,7 +52,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
         return new ShortConverter();
     }
 
-    
+
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -73,7 +73,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-    
+
 
     /**
      * Test Invalid Amounts (too big/small)

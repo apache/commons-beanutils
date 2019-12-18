@@ -79,12 +79,12 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
-    
+
 
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
 
-    
+
 
     /** Construct instance with standard conversion bean */
     public LocaleBeanUtilsBean() {
@@ -117,7 +117,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         this.localeConvertUtils = localeConvertUtils;
     }
 
-    
+
 
     /**
      * Gets the bean instance used for conversions
@@ -171,7 +171,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         getLocaleConvertUtils().setApplyLocalized(newApplyLocalized);
     }
 
-    
+
 
     /**
      * Return the value of the specified locale-sensitive indexed property
