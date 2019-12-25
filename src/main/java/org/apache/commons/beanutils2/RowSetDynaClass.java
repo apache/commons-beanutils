@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>Implementation of {@link DynaClass} that creates an in-memory collection
@@ -230,10 +231,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit, final boolean useColumnLabel)
                                                             throws SQLException {
-
-        if (resultSet == null) {
-            throw new NullPointerException();
-        }
+        Objects.requireNonNull(resultSet, "resultSet");
         this.lowerCase = lowerCase;
         this.limit = limit;
         setUseColumnLabel(useColumnLabel);
