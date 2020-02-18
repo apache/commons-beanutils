@@ -78,6 +78,27 @@
       <action issue="BEANUTILS-529" dev="ggregory" type="update" due-to="Gary Gregory">
         Log at the debug level instead of info.
       </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update JUnit from 4.12 to 4.13.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update Jacoco from 0.8.4 to 0.8.5.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update JApiCmp from 0.12.0 to 0.14.3.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update maven-surefire-plugin from 2.22.1 to 3.0.0-M4.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update maven-checkstyle-plugin from 3.0.0 to 3.1.1.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update maven-pmd-plugin from 3.12.0 to 3.13.0.
+      </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update BC version from 1.9.3 to 1.9.4.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
