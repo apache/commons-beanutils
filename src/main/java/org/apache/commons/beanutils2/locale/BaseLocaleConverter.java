@@ -26,17 +26,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>The base class for all standard type locale-sensitive converters.
- * It has {@link LocaleConverter} and {@link org.apache.commons.beanutils2.Converter} implementations,
- * that convert an incoming locale-sensitive Object into an object of correspond type,
- * optionally using a default value or throwing a {@link ConversionException}
- * if a conversion error occurs.</p>
- *
+ * <p>
+ * The base class for all standard type locale-sensitive converters. It has
+ * {@link LocaleConverter} and {@link org.apache.commons.beanutils2.Converter}
+ * implementations, that convert an incoming locale-sensitive Object into an
+ * object of correspond type, optionally using a default value or throwing a
+ * {@link ConversionException} if a conversion error occurs.
+ * </p>
  */
 
 public abstract class BaseLocaleConverter implements LocaleConverter {
-
-
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
@@ -56,15 +55,13 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern = false;
 
-
-
     /**
-     * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
-     * An unlocalized pattern is used for the conversion.
+     * Create a {@link LocaleConverter} that will throw a
+     * {@link ConversionException} if a conversion error occurs. An unlocalized
+     * pattern is used for the conversion.
      *
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
+     * @param locale The locale
+     * @param pattern The conversion pattern
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern) {
 
@@ -72,12 +69,12 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     }
 
     /**
-     * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
-     * if a conversion error occurs.
+     * Create a {@link LocaleConverter} that will throw a
+     * {@link ConversionException} if a conversion error occurs.
      *
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param locale The locale
+     * @param pattern The conversion pattern
+     * @param locPattern Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
 
@@ -86,12 +83,12 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /**
      * Create a {@link LocaleConverter} that will return the specified default value
-     * if a conversion error occurs.
-     * An unlocalized pattern is used for the conversion.
+     * if a conversion error occurs. An unlocalized pattern is used for the
+     * conversion.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
+     * @param defaultValue The default value to be returned
+     * @param locale The locale
+     * @param pattern The conversion pattern
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -102,12 +99,13 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Create a {@link LocaleConverter} that will return the specified default value
      * if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned
+     * @param locale The locale
+     * @param pattern The conversion pattern
+     * @param locPattern Indicate whether the pattern is localized or not
      */
-    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
+    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
+                final boolean locPattern) {
 
         this(defaultValue, locale, pattern, true, locPattern);
     }
@@ -116,14 +114,14 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Create a {@link LocaleConverter} that will return the specified default value
      * or throw a {@link ConversionException} if a conversion error occurs.
      *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     * @param useDefault    Indicate whether the default value is used or not
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @param defaultValue The default value to be returned
+     * @param locale The locale
+     * @param pattern The conversion pattern
+     * @param useDefault Indicate whether the default value is used or not
+     * @param locPattern Indicate whether the pattern is localized or not
      */
     private BaseLocaleConverter(final Object defaultValue, final Locale locale,
-                                final String pattern, final boolean useDefault, final boolean locPattern) {
+                final String pattern, final boolean useDefault, final boolean locPattern) {
 
         if (useDefault) {
             this.defaultValue = defaultValue;
@@ -138,18 +136,14 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.locPattern = locPattern;
     }
 
-
-
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output object of
+     * the specified type.
      *
      * @param value The input object to be converted
      * @param pattern The pattern is used for the conversion
      * @return The converted value
-     *
-     * @throws ParseException if conversion cannot be performed
-     *  successfully
+     * @throws ParseException if conversion cannot be performed successfully
      */
 
     abstract protected Object parse(Object value, String pattern) throws ParseException;
@@ -160,9 +154,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param value The input object to be converted
      * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      */
     public Object convert(final Object value) {
         return convert(value, null);
@@ -174,25 +166,21 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param value The input object to be converted
      * @param pattern The pattern is used for the conversion
      * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      */
     public Object convert(final Object value, final String pattern) {
         return convert(null, value, pattern);
     }
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type. The default pattern is used for the conversion.
+     * Convert the specified locale-sensitive input object into an output object of
+     * the specified type. The default pattern is used for the conversion.
      *
      * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input object to be converted
      * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
     public <T> T convert(final Class<T> type, final Object value) {
@@ -200,19 +188,17 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     }
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output object of
+     * the specified type.
      *
      * @param <T> The desired target type of the conversion
      * @param type Data is type to which this value should be converted
      * @param value is the input object to be converted
-     * @param pattern is the pattern is used for the conversion; if null is
-     * passed then the default pattern associated with the converter object
-     * will be used.
+     * @param pattern is the pattern is used for the conversion; if null is passed
+     *            then the default pattern associated with the converter object will
+     *            be used.
      * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
     public <T> T convert(final Class<T> type, final Object value, final String pattern) {
@@ -237,45 +223,44 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
                 return getDefaultAs(targetType);
             }
             if (e instanceof ConversionException) {
-                throw (ConversionException)e;
+                throw (ConversionException) e;
             }
             throw new ConversionException(e);
         }
     }
 
     /**
-     * Returns the default object specified for this converter cast for the
-     * given target type. If the default value is not conform to the given type,
-     * an exception is thrown.
+     * Returns the default object specified for this converter cast for the given
+     * target type. If the default value is not conform to the given type, an
+     * exception is thrown.
      *
      * @param <T> the desired target type
      * @param type the target class of the conversion
      * @return the default value in the given target type
-     * @throws ConversionException if the default object is not compatible with
-     *         the target type
+     * @throws ConversionException if the default object is not compatible with the
+     *             target type
      */
     private <T> T getDefaultAs(final Class<T> type) {
         return checkConversionResult(type, defaultValue);
     }
 
     /**
-     * Checks whether the result of a conversion is conform to the specified
-     * target type. If this is the case, the passed in result object is cast to
-     * the correct target type. Otherwise, an exception is thrown.
+     * Checks whether the result of a conversion is conform to the specified target
+     * type. If this is the case, the passed in result object is cast to the correct
+     * target type. Otherwise, an exception is thrown.
      *
      * @param <T> the desired result type
      * @param type the target class of the conversion
      * @param result the conversion result object
      * @return the result cast to the target class
-     * @throws ConversionException if the result object is not compatible with
-     *         the target type
+     * @throws ConversionException if the result object is not compatible with the
+     *             target type
      */
     private static <T> T checkConversionResult(final Class<T> type, final Object result) {
         if (type == null) {
             // in this case we cannot do much; the result object is returned
             @SuppressWarnings("unchecked")
-            final
-            T temp = (T) result;
+            final T temp = (T) result;
             return temp;
         }
 

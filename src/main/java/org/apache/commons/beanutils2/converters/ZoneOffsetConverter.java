@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.converters;
 import java.time.ZoneOffset;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.time.ZoneOffset</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.time.ZoneOffset</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -32,20 +32,19 @@ import java.time.ZoneOffset;
 public final class ZoneOffsetConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.time.ZoneOffset</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.time.ZoneOffset</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public ZoneOffsetConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.time.ZoneOffset</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.time.ZoneOffset</b> <i>Converter</i> that returns a
+     * default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public ZoneOffsetConverter(final Object defaultValue) {
         super(defaultValue);
@@ -63,7 +62,9 @@ public final class ZoneOffsetConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.time.ZoneOffset or object into a String.</p>
+     * <p>
+     * Convert a java.time.ZoneOffset or object into a String.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

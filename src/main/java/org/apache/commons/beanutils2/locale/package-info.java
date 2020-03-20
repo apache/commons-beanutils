@@ -16,7 +16,7 @@
  */
 
 /**
- * Locale-aware extensions of the standard beanutils classes.
- * This package allows locale-dependent population of JavaBeans.
+ * Locale-aware extensions of the standard beanutils classes. This package
+ * allows locale-dependent population of JavaBeans.
  */
 package org.apache.commons.beanutils2.locale;

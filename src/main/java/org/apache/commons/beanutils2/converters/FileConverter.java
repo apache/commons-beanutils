@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.converters;
 import java.io.File;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.io.File</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.io.File</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -30,20 +30,19 @@ import java.io.File;
 public final class FileConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.io.File</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.io.File</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public FileConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.io.File</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.io.File</b> <i>Converter</i> that returns a default value
+     * if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public FileConverter(final Object defaultValue) {
         super(defaultValue);
@@ -61,7 +60,9 @@ public final class FileConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert the input object into a java.io.File.</p>
+     * <p>
+     * Convert the input object into a java.io.File.
+     * </p>
      *
      * @param <T> The target type of the conversion.
      * @param type Data type to which this value should be converted.

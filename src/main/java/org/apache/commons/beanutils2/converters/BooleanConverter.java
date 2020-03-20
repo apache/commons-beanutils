@@ -17,60 +17,59 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>Boolean</b> objects.
- * {@link org.apache.commons.beanutils2.Converter} implementation that
- * handles conversion to and from <b>java.lang.Boolean</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>Boolean</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.lang.Boolean</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
  * </p>
  * <p>
  * By default any object whose string representation is one of the values
- * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and
- * string representations {"no", "n", "false", "off", "0"} are converted
- * to Boolean.FALSE. The recognized true/false strings can be changed by:
+ * {"yes", "y", "true", "on", "1"} is converted to Boolean.TRUE, and string
+ * representations {"no", "n", "false", "off", "0"} are converted to
+ * Boolean.FALSE. The recognized true/false strings can be changed by:
  * </p>
+ * 
  * <pre>
- *  String[] trueStrings = {"oui", "o", "1"};
- *  String[] falseStrings = {"non", "n", "0"};
- *  Converter bc = new BooleanConverter(trueStrings, falseStrings);
- *  ConvertUtils.register(bc, Boolean.class);
- *  ConvertUtils.register(bc, Boolean.TYPE);
+ * String[] trueStrings = {"oui", "o", "1"};
+ * String[] falseStrings = {"non", "n", "0"};
+ * Converter bc = new BooleanConverter(trueStrings, falseStrings);
+ * ConvertUtils.register(bc, Boolean.class);
+ * ConvertUtils.register(bc, Boolean.TYPE);
  * </pre>
- *
- * <p>Case is ignored when converting values to true or false.</p>
+ * <p>
+ * Case is ignored when converting values to true or false.
+ * </p>
  *
  * @since 1.3
  */
 public final class BooleanConverter extends AbstractConverter {
 
-
-
-
-
     /**
      * Create a {@link org.apache.commons.beanutils2.Converter} that will throw a
-     * {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs, ie the string value being converted is
-     * not one of the known true strings, nor one of the known false strings.
+     * {@link org.apache.commons.beanutils2.ConversionException} if a conversion
+     * error occurs, ie the string value being converted is not one of the known
+     * true strings, nor one of the known false strings.
      */
     public BooleanConverter() {
         super();
     }
 
-
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
-     * if a conversion error occurs, ie the string value being converted is
-     * not one of the known true strings, nor one of the known false strings.
+     * Create a {@link org.apache.commons.beanutils2.Converter} that will return the
+     * specified default value if a conversion error occurs, ie the string value
+     * being converted is not one of the known true strings, nor one of the known
+     * false strings.
      *
-     * @param defaultValue The default value to be returned if the value
-     *  being converted is not recognized. This value may be null, in which
-     *  case null will be returned on conversion failure. When non-null, it is
-     *  expected that this value will be either Boolean.TRUE or Boolean.FALSE.
-     *  The special value BooleanConverter.NO_DEFAULT can also be passed here,
-     *  in which case this constructor acts like the no-argument one.
+     * @param defaultValue The default value to be returned if the value being
+     *            converted is not recognized. This value may be null, in which case
+     *            null will be returned on conversion failure. When non-null, it is
+     *            expected that this value will be either Boolean.TRUE or
+     *            Boolean.FALSE. The special value BooleanConverter.NO_DEFAULT can
+     *            also be passed here, in which case this constructor acts like the
+     *            no-argument one.
      */
     public BooleanConverter(final Object defaultValue) {
         super(defaultValue);
@@ -78,20 +77,17 @@ public final class BooleanConverter extends AbstractConverter {
 
     /**
      * Create a {@link org.apache.commons.beanutils2.Converter} that will throw a
-     * {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs, ie the string value being converted is
-     * not one of the known true strings, nor one of the known false strings.
+     * {@link org.apache.commons.beanutils2.ConversionException} if a conversion
+     * error occurs, ie the string value being converted is not one of the known
+     * true strings, nor one of the known false strings.
      * <p>
-     * The provided string arrays are copied, so that changes to the elements
-     * of the array after this call is made do not affect this object.
+     * The provided string arrays are copied, so that changes to the elements of the
+     * array after this call is made do not affect this object.
      *
-     * @param trueStrings is the set of strings which should convert to the
-     *  value Boolean.TRUE. The value null must not be present. Case is
-     *  ignored.
-     *
-     * @param falseStrings is the set of strings which should convert to the
-     *  value Boolean.TRUE. The value null must not be present. Case is
-     *  ignored.
+     * @param trueStrings is the set of strings which should convert to the value
+     *            Boolean.TRUE. The value null must not be present. Case is ignored.
+     * @param falseStrings is the set of strings which should convert to the value
+     *            Boolean.TRUE. The value null must not be present. Case is ignored.
      * @since 1.8.0
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings) {
@@ -101,26 +97,23 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will return
-     * the specified default value if a conversion error occurs.
+     * Create a {@link org.apache.commons.beanutils2.Converter} that will return the
+     * specified default value if a conversion error occurs.
      * <p>
-     * The provided string arrays are copied, so that changes to the elements
-     * of the array after this call is made do not affect this object.
+     * The provided string arrays are copied, so that changes to the elements of the
+     * array after this call is made do not affect this object.
      *
-     * @param trueStrings is the set of strings which should convert to the
-     *  value Boolean.TRUE. The value null must not be present. Case is
-     *  ignored.
-     *
-     * @param falseStrings is the set of strings which should convert to the
-     *  value Boolean.TRUE. The value null must not be present. Case is
-     *  ignored.
-     *
-     * @param defaultValue The default value to be returned if the value
-     *  being converted is not recognized. This value may be null, in which
-     *  case null will be returned on conversion failure. When non-null, it is
-     *  expected that this value will be either Boolean.TRUE or Boolean.FALSE.
-     *  The special value BooleanConverter.NO_DEFAULT can also be passed here,
-     *  in which case an exception will be thrown on conversion failure.
+     * @param trueStrings is the set of strings which should convert to the value
+     *            Boolean.TRUE. The value null must not be present. Case is ignored.
+     * @param falseStrings is the set of strings which should convert to the value
+     *            Boolean.TRUE. The value null must not be present. Case is ignored.
+     * @param defaultValue The default value to be returned if the value being
+     *            converted is not recognized. This value may be null, in which case
+     *            null will be returned on conversion failure. When non-null, it is
+     *            expected that this value will be either Boolean.TRUE or
+     *            Boolean.FALSE. The special value BooleanConverter.NO_DEFAULT can
+     *            also be passed here, in which case an exception will be thrown on
+     *            conversion failure.
      * @since 1.8.0
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings,
@@ -129,15 +122,6 @@ public final class BooleanConverter extends AbstractConverter {
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
     }
-
-
-
-
-
-
-
-
-
 
     /**
      * The set of strings that are known to map to Boolean.TRUE.
@@ -148,8 +132,6 @@ public final class BooleanConverter extends AbstractConverter {
      * The set of strings that are known to map to Boolean.FALSE.
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
-
-
 
     /**
      * Return the default type this {@code Converter} handles.
@@ -163,22 +145,19 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * Convert the specified input object into an output object of the specified
+     * type.
      *
      * @param <T> Target type of the conversion.
-     * @param type is the type to which this value should be converted. In the
-     *  case of this BooleanConverter class, this value is ignored.
-     *
-     * @param value is the input value to be converted. The toString method
-     *  shall be invoked on this object, and the result compared (ignoring
-     *  case) against the known "true" and "false" string values.
-     *
+     * @param type is the type to which this value should be converted. In the case
+     *            of this BooleanConverter class, this value is ignored.
+     * @param value is the input value to be converted. The toString method shall be
+     *            invoked on this object, and the result compared (ignoring case)
+     *            against the known "true" and "false" string values.
      * @return Boolean.TRUE if the value was a recognized "true" value,
-     *  Boolean.FALSE if the value was a recognized "false" value, or
-     *  the default value if the value was not recognized and the constructor
-     *  was provided with a default value.
-     *
+     *         Boolean.FALSE if the value was a recognized "false" value, or the
+     *         default value if the value was not recognized and the constructor was
+     *         provided with a default value.
      * @throws Throwable if an error occurs converting to the specified type
      * @since 1.8.0
      */
@@ -209,16 +188,15 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * This method creates a copy of the provided array, and ensures that
-     * all the strings in the newly created array contain only lower-case
-     * letters.
+     * This method creates a copy of the provided array, and ensures that all the
+     * strings in the newly created array contain only lower-case letters.
      * <p>
-     * Using this method to copy string arrays means that changes to the
-     * src array do not modify the dst array.
+     * Using this method to copy string arrays means that changes to the src array
+     * do not modify the dst array.
      */
     private static String[] copyStrings(final String[] src) {
         final String[] dst = new String[src.length];
-        for(int i=0; i<src.length; ++i) {
+        for (int i = 0; i < src.length; ++i) {
             dst[i] = src[i].toLowerCase();
         }
         return dst;

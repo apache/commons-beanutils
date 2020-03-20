@@ -19,13 +19,13 @@ package org.apache.commons.beanutils2.converters;
 import java.math.BigDecimal;
 
 /**
- * {@link NumberConverter} implementation that handles conversion to
- * and from <b>java.math.BigDecimal</b> objects.
+ * {@link NumberConverter} implementation that handles conversion to and from
+ * <b>java.math.BigDecimal</b> objects.
  * <p>
- * This implementation can be configured to handle conversion either
- * by using BigDecimal's default String conversion, or by using a Locale's pattern
- * or by specifying a format pattern. See the {@link NumberConverter}
- * documentation for further details.
+ * This implementation can be configured to handle conversion either by using
+ * BigDecimal's default String conversion, or by using a Locale's pattern or by
+ * specifying a format pattern. See the {@link NumberConverter} documentation
+ * for further details.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -35,20 +35,19 @@ import java.math.BigDecimal;
 public final class BigDecimalConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.math.BigDecimal</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.math.BigDecimal</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public BigDecimalConverter() {
         super(true);
     }
 
     /**
-     * Construct a <b>java.math.BigDecimal</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.math.BigDecimal</b> <i>Converter</i> that returns a
+     * default value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public BigDecimalConverter(final Object defaultValue) {
         super(true, defaultValue);

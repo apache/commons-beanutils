@@ -17,8 +17,8 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.lang.Enum</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.lang.Enum</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -30,20 +30,19 @@ package org.apache.commons.beanutils2.converters;
 public final class EnumConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.lang.Enum</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.lang.Enum</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public EnumConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.lang.Enum</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.lang.Enum</b> <i>Converter</i> that returns a default
+     * value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public EnumConverter(final Object defaultValue) {
         super(defaultValue);
@@ -61,7 +60,9 @@ public final class EnumConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.lang.Enum or object into a String.</p>
+     * <p>
+     * Convert a java.lang.Enum or object into a String.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
@@ -70,9 +71,9 @@ public final class EnumConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      * @since 2.0
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     @Override
-    protected <T> T  convertToType(final Class<T> type, final Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
             final String enumValue = String.valueOf(value);
             final T[] constants = type.getEnumConstants();
@@ -80,7 +81,7 @@ public final class EnumConverter extends AbstractConverter {
                 throw conversionException(type, value);
             }
             for (final T candidate : constants) {
-                if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
+                if (((Enum) candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }
             }

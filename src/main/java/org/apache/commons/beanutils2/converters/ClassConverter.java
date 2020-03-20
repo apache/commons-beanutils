@@ -17,12 +17,11 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.lang.Class</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.lang.Class</b> objects.
  * <p>
- * The class will be loaded from the thread context class
- * loader (if it exists); otherwise the class loader that loaded this class
- * will be used.
+ * The class will be loaded from the thread context class loader (if it exists);
+ * otherwise the class loader that loaded this class will be used.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -32,20 +31,19 @@ package org.apache.commons.beanutils2.converters;
 public final class ClassConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.lang.Class</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.lang.Class</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public ClassConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.lang.Class</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.lang.Class</b> <i>Converter</i> that returns a default
+     * value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public ClassConverter(final Object defaultValue) {
         super(defaultValue);
@@ -63,7 +61,9 @@ public final class ClassConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.lang.Class or object into a String.</p>
+     * <p>
+     * Convert a java.lang.Class or object into a String.
+     * </p>
      *
      * @param value The input value to be converted
      * @return the converted String value.
@@ -71,11 +71,13 @@ public final class ClassConverter extends AbstractConverter {
      */
     @Override
     protected String convertToString(final Object value) {
-        return value instanceof Class ? ((Class<?>)value).getName() : value.toString();
+        return value instanceof Class ? ((Class<?>) value).getName() : value.toString();
     }
 
     /**
-     * <p>Convert the input object into a java.lang.Class.</p>
+     * <p>
+     * Convert the input object into a java.lang.Class.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
@@ -88,7 +90,7 @@ public final class ClassConverter extends AbstractConverter {
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Class.class.equals(type)) {
             ClassLoader classLoader = Thread.currentThread()
-                    .getContextClassLoader();
+                        .getContextClassLoader();
             if (classLoader != null) {
                 try {
                     return type.cast(classLoader.loadClass(value.toString()));

@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.converters;
 import java.time.MonthDay;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.time.MonthDay</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.time.MonthDay</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -32,20 +32,19 @@ import java.time.MonthDay;
 public final class MonthDayConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.time.MonthDay</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.time.MonthDay</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public MonthDayConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.time.MonthDay</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.time.MonthDay</b> <i>Converter</i> that returns a default
+     * value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public MonthDayConverter(final Object defaultValue) {
         super(defaultValue);
@@ -63,7 +62,9 @@ public final class MonthDayConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.time.MonthDay or object into a String.</p>
+     * <p>
+     * Convert a java.time.MonthDay or object into a String.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

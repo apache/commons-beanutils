@@ -17,13 +17,13 @@
 package org.apache.commons.beanutils2.converters;
 
 /**
- * {@link NumberConverter} implementation that handles conversion to
- * and from <b>java.lang.Byte</b> objects.
+ * {@link NumberConverter} implementation that handles conversion to and from
+ * <b>java.lang.Byte</b> objects.
  * <p>
- * This implementation can be configured to handle conversion either
- * by using Byte's default String conversion, or by using a Locale's pattern
- * or by specifying a format pattern. See the {@link NumberConverter}
- * documentation for further details.
+ * This implementation can be configured to handle conversion either by using
+ * Byte's default String conversion, or by using a Locale's pattern or by
+ * specifying a format pattern. See the {@link NumberConverter} documentation
+ * for further details.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -33,20 +33,19 @@ package org.apache.commons.beanutils2.converters;
 public final class ByteConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.lang.Byte</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.lang.Byte</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public ByteConverter() {
         super(false);
     }
 
     /**
-     * Construct a <b>java.lang.Byte</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.lang.Byte</b> <i>Converter</i> that returns a default
+     * value if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public ByteConverter(final Object defaultValue) {
         super(false, defaultValue);

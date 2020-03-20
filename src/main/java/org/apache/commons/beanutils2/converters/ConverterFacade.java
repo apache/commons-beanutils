@@ -19,13 +19,15 @@ package org.apache.commons.beanutils2.converters;
 import org.apache.commons.beanutils2.Converter;
 
 /**
- * <p>Provides a facade for {@link Converter} implementations
- * preventing access to any public API in the implementation,
- * other than that specified by {@link Converter}.
+ * <p>
+ * Provides a facade for {@link Converter} implementations preventing access to
+ * any public API in the implementation, other than that specified by
+ * {@link Converter}.
  * <p>
  * This implementation can be used to prevent registered {@link Converter}
- * implementations that provide configuration options from being
- * retrieved and modified.</p>
+ * implementations that provide configuration options from being retrieved and
+ * modified.
+ * </p>
  *
  * @since 1.8.0
  */
@@ -34,8 +36,8 @@ public final class ConverterFacade implements Converter {
     private final Converter converter;
 
     /**
-     * Construct a converter which delegates to the specified
-     * {@link Converter} implementation.
+     * Construct a converter which delegates to the specified {@link Converter}
+     * implementation.
      *
      * @param converter The converter to delegate to
      */
@@ -47,9 +49,8 @@ public final class ConverterFacade implements Converter {
     }
 
     /**
-     * Convert the input object into an output object of the
-     * specified type by delegating to the underlying {@link Converter}
-     * implementation.
+     * Convert the input object into an output object of the specified type by
+     * delegating to the underlying {@link Converter} implementation.
      *
      * @param <T> The result type of the conversion
      * @param type Data type to which this value should be converted
@@ -62,11 +63,11 @@ public final class ConverterFacade implements Converter {
     }
 
     /**
-     * Provide a String representation of this facade implementation
-     * sand the underlying {@link Converter} it delegates to.
+     * Provide a String representation of this facade implementation sand the
+     * underlying {@link Converter} it delegates to.
      *
-     * @return A String representation of this facade implementation
-     * sand the underlying {@link Converter} it delegates to
+     * @return A String representation of this facade implementation sand the
+     *         underlying {@link Converter} it delegates to
      */
     @Override
     public String toString() {

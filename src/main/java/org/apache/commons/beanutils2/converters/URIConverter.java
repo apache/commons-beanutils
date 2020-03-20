@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.converters;
 import java.net.URI;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
- * to and from <b>java.net.URI</b> objects.
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles
+ * conversion to and from <b>java.net.URI</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
@@ -30,20 +30,19 @@ import java.net.URI;
 public final class URIConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.net.URI</b> <i>Converter</i> that throws
-     * a {@code ConversionException} if an error occurs.
+     * Construct a <b>java.net.URI</b> <i>Converter</i> that throws a
+     * {@code ConversionException} if an error occurs.
      */
     public URIConverter() {
         super();
     }
 
     /**
-     * Construct a <b>java.net.URI</b> <i>Converter</i> that returns
-     * a default value if an error occurs.
+     * Construct a <b>java.net.URI</b> <i>Converter</i> that returns a default value
+     * if an error occurs.
      *
-     * @param defaultValue The default value to be returned
-     * if the value to be converted is missing or an error
-     * occurs converting the value.
+     * @param defaultValue The default value to be returned if the value to be
+     *            converted is missing or an error occurs converting the value.
      */
     public URIConverter(final Object defaultValue) {
         super(defaultValue);
@@ -61,7 +60,9 @@ public final class URIConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.net.URI or object into a String.</p>
+     * <p>
+     * Convert a java.net.URI or object into a String.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

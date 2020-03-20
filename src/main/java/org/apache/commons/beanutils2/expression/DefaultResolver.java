@@ -22,44 +22,41 @@ package org.apache.commons.beanutils2.expression;
  * This class assists in resolving property names in the following five formats,
  * with the layout of an identifying String in parentheses:
  * <ul>
- * <li><strong>Simple ({@code name})</strong> - The specified
- *     {@code name} identifies an individual property of a particular
- *     JavaBean.  The name of the actual getter or setter method to be used
- *     is determined using standard JavaBeans introspection, so that (unless
- *     overridden by a {@code BeanInfo} class, a property named "xyz"
- *     will have a getter method named {@code getXyz()} or (for boolean
- *     properties only) {@code isXyz()}, and a setter method named
- *     {@code setXyz()}.</li>
- * <li><strong>Nested ({@code name1.name2.name3})</strong> The first
- *     name element is used to select a property getter, as for simple
- *     references above.  The object returned for this property is then
- *     consulted, using the same approach, for a property getter for a
- *     property named {@code name2}, and so on.  The property value that
- *     is ultimately retrieved or modified is the one identified by the
- *     last name element.</li>
- * <li><strong>Indexed ({@code name[index]})</strong> - The underlying
- *     property value is assumed to be an array, or this JavaBean is assumed
- *     to have indexed property getter and setter methods.  The appropriate
- *     (zero-relative) entry in the array is selected.  {@code List}
- *     objects are now also supported for read/write.  You simply need to define
- *     a getter that returns the {@code List}</li>
- * <li><strong>Mapped ({@code name(key)})</strong> - The JavaBean
- *     is assumed to have an property getter and setter methods with an
- *     additional attribute of type {@code java.lang.String}.</li>
+ * <li><strong>Simple ({@code name})</strong> - The specified {@code name}
+ * identifies an individual property of a particular JavaBean. The name of the
+ * actual getter or setter method to be used is determined using standard
+ * JavaBeans introspection, so that (unless overridden by a {@code BeanInfo}
+ * class, a property named "xyz" will have a getter method named
+ * {@code getXyz()} or (for boolean properties only) {@code isXyz()}, and a
+ * setter method named {@code setXyz()}.</li>
+ * <li><strong>Nested ({@code name1.name2.name3})</strong> The first name
+ * element is used to select a property getter, as for simple references above.
+ * The object returned for this property is then consulted, using the same
+ * approach, for a property getter for a property named {@code name2}, and so
+ * on. The property value that is ultimately retrieved or modified is the one
+ * identified by the last name element.</li>
+ * <li><strong>Indexed ({@code name[index]})</strong> - The underlying property
+ * value is assumed to be an array, or this JavaBean is assumed to have indexed
+ * property getter and setter methods. The appropriate (zero-relative) entry in
+ * the array is selected. {@code List} objects are now also supported for
+ * read/write. You simply need to define a getter that returns the
+ * {@code List}</li>
+ * <li><strong>Mapped ({@code name(key)})</strong> - The JavaBean is assumed to
+ * have an property getter and setter methods with an additional attribute of
+ * type {@code java.lang.String}.</li>
  * <li><strong>Combined ({@code name1.name2[index].name3(key)})</strong> -
- *     Combining mapped, nested, and indexed references is also
- *     supported.</li>
+ * Combining mapped, nested, and indexed references is also supported.</li>
  * </ul>
  *
  * @since 1.8.0
  */
 public class DefaultResolver implements Resolver {
 
-    private static final char NESTED        = '.';
-    private static final char MAPPED_START  = '(';
-    private static final char MAPPED_END    = ')';
+    private static final char NESTED = '.';
+    private static final char MAPPED_START = '(';
+    private static final char MAPPED_END = ')';
     private static final char INDEXED_START = '[';
-    private static final char INDEXED_END   = ']';
+    private static final char INDEXED_END = ']';
 
     /**
      * Default Constructor.
@@ -72,8 +69,8 @@ public class DefaultResolver implements Resolver {
      *
      * @param expression The property expression
      * @return The index value or -1 if the property is not indexed
-     * @throws IllegalArgumentException If the indexed property is illegally
-     * formed or has an invalid (non-numeric) value.
+     * @throws IllegalArgumentException If the indexed property is illegally formed
+     *             or has an invalid (non-numeric) value.
      */
     @Override
     public int getIndex(final String expression) {
@@ -98,7 +95,7 @@ public class DefaultResolver implements Resolver {
                     index = Integer.parseInt(value, 10);
                 } catch (final Exception e) {
                     throw new IllegalArgumentException("Invalid index value '"
-                            + value + "'");
+                                + value + "'");
                 }
                 return index;
             }
@@ -156,8 +153,8 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Indicates whether or not the expression
-     * contains nested property expressions or not.
+     * Indicates whether or not the expression contains nested property expressions
+     * or not.
      *
      * @param expression The property expression
      * @return The next property expression
@@ -174,8 +171,7 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return {@code true} if the expression is indexed,
-     *  otherwise {@code false}
+     * @return {@code true} if the expression is indexed, otherwise {@code false}
      */
     @Override
     public boolean isIndexed(final String expression) {
@@ -197,8 +193,7 @@ public class DefaultResolver implements Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return {@code true} if the expression is mapped,
-     *  otherwise {@code false}
+     * @return {@code true} if the expression is mapped, otherwise {@code false}
      */
     @Override
     public boolean isMapped(final String expression) {
@@ -217,8 +212,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Extract the next property expression from the
-     * current expression.
+     * Extract the next property expression from the current expression.
      *
      * @param expression The property expression
      * @return The next property expression
@@ -229,7 +223,7 @@ public class DefaultResolver implements Resolver {
             return null;
         }
         boolean indexed = false;
-        boolean mapped  = false;
+        boolean mapped = false;
         for (int i = 0; i < expression.length(); i++) {
             final char c = expression.charAt(i);
             if (indexed) {
@@ -254,12 +248,11 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Remove the last property expression from the
-     * current expression.
+     * Remove the last property expression from the current expression.
      *
      * @param expression The property expression
-     * @return The new expression value, with first property
-     * expression removed - null if there are no more expressions
+     * @return The new expression value, with first property expression removed -
+     *         null if there are no more expressions
      */
     @Override
     public String remove(final String expression) {
