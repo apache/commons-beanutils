@@ -169,8 +169,7 @@ public class ContextClassLoaderLocal<T> {
 
             }
 
-        }
-        catch (final SecurityException e) {
+        } catch (final SecurityException e) {
             /* SWALLOW - should we log this? */ }
 
         // if none or exception, return the globalValue
@@ -202,8 +201,7 @@ public class ContextClassLoaderLocal<T> {
                 return;
             }
 
-        }
-        catch (final SecurityException e) {
+        } catch (final SecurityException e) {
             /* SWALLOW - should we log this? */ }
 
         // if in doubt, set the global value
@@ -220,8 +218,7 @@ public class ContextClassLoaderLocal<T> {
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             unset(contextClassLoader);
 
-        }
-        catch (final SecurityException e) {
+        } catch (final SecurityException e) {
             /* SWALLOW - should we log this? */ }
     }
 

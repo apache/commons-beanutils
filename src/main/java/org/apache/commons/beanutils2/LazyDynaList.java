@@ -543,8 +543,7 @@ public class LazyDynaList extends ArrayList<Object> {
         Object object = null;
         try {
             object = elementType.newInstance();
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new IllegalArgumentException("Error creating type: "
                         + elementType.getName() + " - " + e);
         }
@@ -606,8 +605,7 @@ public class LazyDynaList extends ArrayList<Object> {
                 this.elementType = dynaBean.getClass();
                 this.elementDynaClass = elementDynaClass;
             }
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new IllegalArgumentException(
                         "Error creating DynaBean from " +
                                     elementDynaClass.getClass().getName() + " - " + e);
@@ -674,8 +672,7 @@ public class LazyDynaList extends ArrayList<Object> {
             try {
                 dynaBean = getDynaClass().newInstance();
                 newDynaBeanType = dynaBean.getClass();
-            }
-            catch (final Exception e) {
+            } catch (final Exception e) {
                 throw new IllegalArgumentException("Error creating DynaBean: "
                             + getDynaClass().getClass().getName()
                             + " - " + e);

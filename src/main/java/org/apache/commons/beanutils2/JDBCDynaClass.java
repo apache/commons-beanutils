@@ -175,8 +175,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             }
             // use Class.forName() - see BEANUTILS-327
             return Class.forName(className, false, cl);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new SQLException(
                         "Cannot load column class '" + className + "': " + e);
         }
@@ -226,8 +225,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
                 default:
                     className = metadata.getColumnClassName(i);
             }
-        }
-        catch (final SQLException e) {
+        } catch (final SQLException e) {
             // this is a patch for HsqlDb to ignore exceptions
             // thrown by its metadata implementation
         }

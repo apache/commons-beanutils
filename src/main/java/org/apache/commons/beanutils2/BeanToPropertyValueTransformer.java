@@ -158,8 +158,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
 
         try {
             propertyValue = (R) PropertyUtils.getProperty(object, propertyName);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during transformation. Null value encountered in property path...";
 
             if (ignoreNull) {
@@ -171,24 +170,21 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
                 }
                 throw iae;
             }
-        }
-        catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        }
-        catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);
             }
             throw iae;
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final String errorMsg = "No property found for name [" +
                         propertyName + "]";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);

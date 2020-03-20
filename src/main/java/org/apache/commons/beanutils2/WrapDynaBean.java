@@ -121,13 +121,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
         Object value = null;
         try {
             value = getPropertyUtils().getSimpleProperty(instance, name);
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error reading property '" + name +
                         "' nested exception - " + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error reading property '" + name +
                         "', exception - " + t);
         }
@@ -156,16 +154,13 @@ public class WrapDynaBean implements DynaBean, Serializable {
         Object value = null;
         try {
             value = getPropertyUtils().getIndexedProperty(instance, name, index);
-        }
-        catch (final IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             throw e;
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error reading indexed property '" + name +
                         "' nested exception - " + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error reading indexed property '" + name +
                         "', exception - " + t);
         }
@@ -191,13 +186,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
         Object value = null;
         try {
             value = getPropertyUtils().getMappedProperty(instance, name, key);
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error reading mapped property '" + name +
                         "' nested exception - " + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error reading mapped property '" + name +
                         "', exception - " + t);
         }
@@ -255,13 +248,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         try {
             getPropertyUtils().setSimpleProperty(instance, name, value);
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error setting property '" + name +
                         "' nested exception -" + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error setting property '" + name +
                         "', exception - " + t);
         }
@@ -288,16 +279,13 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         try {
             getPropertyUtils().setIndexedProperty(instance, name, index, value);
-        }
-        catch (final IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             throw e;
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error setting indexed property '" + name +
                         "' nested exception - " + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error setting indexed property '" + name +
                         "', exception - " + t);
         }
@@ -322,13 +310,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
         try {
             getPropertyUtils().setMappedProperty(instance, name, key, value);
-        }
-        catch (final InvocationTargetException ite) {
+        } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
             throw new IllegalArgumentException("Error setting mapped property '" + name +
                         "' nested exception - " + cause);
-        }
-        catch (final Throwable t) {
+        } catch (final Throwable t) {
             throw new IllegalArgumentException("Error setting mapped property '" + name +
                         "', exception - " + t);
         }

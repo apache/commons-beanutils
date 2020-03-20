@@ -726,8 +726,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
             } else {
                 try {
                     indexedProperty = type.newInstance();
-                }
-                catch (final Exception ex) {
+                } catch (final Exception ex) {
                     throw new IllegalArgumentException("Error instantiating indexed property of type '" +
                                 type.getName() + "' for '" + name + "' " + ex);
                 }
@@ -765,8 +764,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         } else if (Map.class.isAssignableFrom(type)) {
             try {
                 mappedProperty = type.newInstance();
-            }
-            catch (final Exception ex) {
+            } catch (final Exception ex) {
                 throw new IllegalArgumentException("Error instantiating mapped property of type '" +
                             type.getName() + "' for '" + name + "' " + ex);
             }
@@ -790,8 +788,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected Object createDynaBeanProperty(final String name, final Class<?> type) {
         try {
             return type.newInstance();
-        }
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating DynaBean property of type '" +
                             type.getName() + "' for '" + name + "' " + ex);
@@ -865,8 +862,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         try {
             return type.newInstance();
-        }
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }

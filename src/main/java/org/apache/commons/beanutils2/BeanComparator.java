@@ -156,8 +156,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
             final Object value1 = PropertyUtils.getProperty(o1, property);
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
-        }
-        catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.toString());
         }
     }

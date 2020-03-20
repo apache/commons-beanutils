@@ -739,8 +739,7 @@ public class MethodUtils {
             method = getAccessibleMethod(clazz, clazz.getMethod(methodName, parameterTypes));
             cacheMethod(md, method);
             return method;
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             return null;
         }
     }
@@ -845,8 +844,7 @@ public class MethodUtils {
             if (Modifier.isPublic(parentClazz.getModifiers())) {
                 try {
                     return parentClazz.getMethod(methodName, parameterTypes);
-                }
-                catch (final NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     return null;
                 }
             }
@@ -893,8 +891,7 @@ public class MethodUtils {
                 try {
                     method = interfaces[i].getDeclaredMethod(methodName,
                                 parameterTypes);
-                }
-                catch (final NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     /*
                      * Swallow, if no method is found after the loop then this method returns null.
                      */
@@ -974,8 +971,7 @@ public class MethodUtils {
             cacheMethod(md, method);
             return method;
 
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             /* SWALLOW */ }
 
         // search through all methods
@@ -1070,8 +1066,7 @@ public class MethodUtils {
                 method.setAccessible(true);
             }
 
-        }
-        catch (final SecurityException se) {
+        } catch (final SecurityException se) {
             // log but continue just in case the method.invoke works anyway
             final Log log = LogFactory.getLog(MethodUtils.class);
             if (!loggedAccessibleWarning) {
@@ -1086,8 +1081,7 @@ public class MethodUtils {
 
                         vulnerableJVM = true;
                     }
-                }
-                catch (final SecurityException e) {
+                } catch (final SecurityException e) {
                     // don't know - so display warning
                     vulnerableJVM = true;
                 }

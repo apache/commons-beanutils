@@ -271,8 +271,7 @@ public class PropertyUtilsBean {
                         } else {
                             setSimpleProperty(dest, name, value);
                         }
-                    }
-                    catch (final NoSuchMethodException e) {
+                    } catch (final NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
                             log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
@@ -289,8 +288,7 @@ public class PropertyUtilsBean {
                         } else {
                             setSimpleProperty(dest, name, entry.getValue());
                         }
-                    }
-                    catch (final NoSuchMethodException e) {
+                    } catch (final NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
                             log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
@@ -309,8 +307,7 @@ public class PropertyUtilsBean {
                         } else {
                             setSimpleProperty(dest, name, value);
                         }
-                    }
-                    catch (final NoSuchMethodException e) {
+                    } catch (final NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
                             log.debug("Error writing to '" + name + "' on class '" + dest.getClass() + "'", e);
                         }
@@ -406,8 +403,7 @@ public class PropertyUtilsBean {
         int index = -1;
         try {
             index = resolver.getIndex(name);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid indexed property '" +
                         name + "' on bean class '" + bean.getClass() + "' " +
                         e.getMessage());
@@ -491,8 +487,7 @@ public class PropertyUtilsBean {
                 subscript[0] = Integer.valueOf(index);
                 try {
                     return invokeMethod(readMethod, bean, subscript);
-                }
-                catch (final InvocationTargetException e) {
+                } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof IndexOutOfBoundsException) {
                         throw (IndexOutOfBoundsException) e.getTargetException();
                     }
@@ -521,8 +516,7 @@ public class PropertyUtilsBean {
         // get the array's value
         try {
             return Array.get(value, index);
-        }
-        catch (final ArrayIndexOutOfBoundsException e) {
+        } catch (final ArrayIndexOutOfBoundsException e) {
             throw new ArrayIndexOutOfBoundsException("Index: " +
                         index + ", Size: " + Array.getLength(value) +
                         " for property '" + name + "'");
@@ -562,8 +556,7 @@ public class PropertyUtilsBean {
         String key = null;
         try {
             key = resolver.getKey(name);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid mapped property '" + name +
                         "' on bean class '" + bean.getClass() + "' " + e.getMessage());
         }
@@ -913,8 +906,7 @@ public class PropertyUtilsBean {
             // not found, try to create it
             try {
                 result = new MappedPropertyDescriptor(name, bean.getClass());
-            }
-            catch (final IntrospectionException ie) {
+            } catch (final IntrospectionException ie) {
                 /*
                  * Swallow IntrospectionException TODO: Why?
                  */
@@ -1284,14 +1276,11 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            }
-            catch (final IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 return false;
-            }
-            catch (final InvocationTargetException e) {
+            } catch (final InvocationTargetException e) {
                 return false;
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1331,14 +1320,11 @@ public class PropertyUtilsBean {
                 return readMethod != null;
             }
             return false;
-        }
-        catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             return false;
-        }
-        catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             return false;
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             return false;
         }
 
@@ -1373,14 +1359,11 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            }
-            catch (final IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 return false;
-            }
-            catch (final InvocationTargetException e) {
+            } catch (final InvocationTargetException e) {
                 return false;
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1420,14 +1403,11 @@ public class PropertyUtilsBean {
                 return writeMethod != null;
             }
             return false;
-        }
-        catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             return false;
-        }
-        catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             return false;
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             return false;
         }
 
@@ -1471,8 +1451,7 @@ public class PropertyUtilsBean {
         int index = -1;
         try {
             index = resolver.getIndex(name);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid indexed property '" +
                         name + "' on bean class '" + bean.getClass() + "'");
         }
@@ -1567,8 +1546,7 @@ public class PropertyUtilsBean {
                                     + " (class " + valueClassName + ")");
                     }
                     invokeMethod(writeMethod, bean, subscript);
-                }
-                catch (final InvocationTargetException e) {
+                } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof IndexOutOfBoundsException) {
                         throw (IndexOutOfBoundsException) e.getTargetException();
                     }
@@ -1636,8 +1614,7 @@ public class PropertyUtilsBean {
         String key = null;
         try {
             key = resolver.getKey(name);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid mapped property '" + name +
                         "' on bean class '" + bean.getClass() + "'");
         }
@@ -2005,8 +1982,7 @@ public class PropertyUtilsBean {
 
             return method.invoke(bean, values);
 
-        }
-        catch (final NullPointerException cause) {
+        } catch (final NullPointerException cause) {
             // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
             // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
             String valueString = "";
@@ -2044,8 +2020,7 @@ public class PropertyUtilsBean {
                 log.error("Method invocation failed", cause);
             }
             throw e;
-        }
-        catch (final IllegalArgumentException cause) {
+        } catch (final IllegalArgumentException cause) {
             String valueString = "";
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
@@ -2123,8 +2098,7 @@ public class PropertyUtilsBean {
         for (final BeanIntrospector bi : introspectors) {
             try {
                 bi.introspect(ictx);
-            }
-            catch (final IntrospectionException iex) {
+            } catch (final IntrospectionException iex) {
                 log.error("Exception during introspection", iex);
             }
         }

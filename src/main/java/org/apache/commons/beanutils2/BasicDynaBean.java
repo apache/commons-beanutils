@@ -317,8 +317,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
                 // of type Object
                 List<Object> list = (List<Object>) prop;
                 list.set(index, value);
-            }
-            catch (final ClassCastException e) {
+            } catch (final ClassCastException e) {
                 throw new ConversionException(e.getMessage());
             }
         } else {

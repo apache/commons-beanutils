@@ -121,8 +121,7 @@ class BeanIntrospectionData {
                 if (method != null) {
                     try {
                         desc.setWriteMethod(method);
-                    }
-                    catch (final IntrospectionException e) {
+                    } catch (final IntrospectionException e) {
                         // ignore, in this case the method is not cached
                     }
                 }

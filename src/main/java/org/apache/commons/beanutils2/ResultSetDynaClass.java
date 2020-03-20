@@ -225,8 +225,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
         try {
             return getClass().getClassLoader().loadClass(className);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new SQLException("Cannot load column class '" +
                         className + "': " + e);
         }

@@ -68,23 +68,19 @@ public class BeanPredicate<T> implements Predicate<T> {
         try {
             final T propValue = (T) PropertyUtils.getProperty(object, propertyName);
             evaluation = predicate.test(propValue);
-        }
-        catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
             log.error("ERROR: " + errorMsg, e);
             throw e;
-        }
-        catch (final IllegalAccessException e) {
+        } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);
-        }
-        catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             final String errorMsg = "Exception occurred in property's getter";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final String errorMsg = "Property not found.";
             log.error(errorMsg, e);
             throw new IllegalArgumentException(errorMsg);

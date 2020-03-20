@@ -201,8 +201,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
             }
             // Invoke the constructor to create a new bean instance
             return (DynaBean) constructor.newInstance(constructorValues);
-        }
-        catch (final InvocationTargetException e) {
+        } catch (final InvocationTargetException e) {
             throw new InstantiationException(e.getTargetException().getMessage());
         }
 
@@ -245,8 +244,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
         // Identify the Constructor we will use in newInstance()
         try {
             this.constructor = dynaBeanClass.getConstructor(constructorTypes);
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new IllegalArgumentException("Class " + dynaBeanClass.getName() +
                         " does not have an appropriate constructor");
         }

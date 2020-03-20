@@ -77,8 +77,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
         BeanInfo beanInfo = null;
         try {
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
-        }
-        catch (final IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             // no descriptors are added to the context
             log.error(
                         "Error when inspecting class " + icontext.getTargetClass(),
@@ -140,8 +139,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                     if (readMethod != null) {
                         try {
                             descriptor.setReadMethod(readMethod);
-                        }
-                        catch (final Exception e) {
+                        } catch (final Exception e) {
                             log.error(
                                         "Error setting indexed property read method",
                                         e);
@@ -172,8 +170,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                     if (writeMethod != null) {
                         try {
                             descriptor.setWriteMethod(writeMethod);
-                        }
-                        catch (final Exception e) {
+                        } catch (final Exception e) {
                             log.error(
                                         "Error setting indexed property write method",
                                         e);

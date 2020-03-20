@@ -96,15 +96,13 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             try {
                 mappedReadMethod = getMethod(beanClass, "get" + base,
                             STRING_CLASS_PARAMETER);
-            }
-            catch (final IntrospectionException e) {
+            } catch (final IntrospectionException e) {
                 mappedReadMethod = getMethod(beanClass, "is" + base,
                             STRING_CLASS_PARAMETER);
             }
             final Class<?>[] params = {String.class, mappedReadMethod.getReturnType()};
             mappedWriteMethod = getMethod(beanClass, "set" + base, params);
-        }
-        catch (final IntrospectionException e) {
+        } catch (final IntrospectionException e) {
             /*
              * Swallow IntrospectionException TODO: Why?
              */
@@ -286,8 +284,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 mappedPropertyType = params[1];
             }
             mappedPropertyTypeRef = new SoftReference<>(mappedPropertyType);
-        }
-        catch (final IntrospectionException ex) {
+        } catch (final IntrospectionException ex) {
             throw ex;
         }
     }
@@ -460,8 +457,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     m = clazz.getMethod(methodName, paramTypes);
                     // Un-comment following line for testing
                     // System.out.println("Recreated Method " + methodName + " for " + className);
-                }
-                catch (final NoSuchMethodException e) {
+                } catch (final NoSuchMethodException e) {
                     throw new RuntimeException("Method " + methodName + " for " +
                                 className + " could not be reconstructed - method not found");
                 }
@@ -488,8 +484,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             if (classLoader != null) {
                 try {
                     return classLoader.loadClass(name);
-                }
-                catch (final ClassNotFoundException e) {
+                } catch (final ClassNotFoundException e) {
                     // ignore
                 }
             }
@@ -498,8 +493,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             classLoader = MappedPropertyDescriptor.class.getClassLoader();
             try {
                 return classLoader.loadClass(name);
-            }
-            catch (final ClassNotFoundException e) {
+            } catch (final ClassNotFoundException e) {
                 return null;
             }
         }

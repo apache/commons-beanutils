@@ -278,8 +278,7 @@ public class BeanUtilsBean {
                     try {
                         final Object value = getPropertyUtils().getSimpleProperty(orig, name);
                         copyProperty(dest, name, value);
-                    }
-                    catch (final NoSuchMethodException e) {
+                    } catch (final NoSuchMethodException e) {
                         // Should not happen
                     }
                 }
@@ -355,8 +354,7 @@ public class BeanUtilsBean {
             try {
                 target = getPropertyUtils().getProperty(target, resolver.next(name));
                 name = resolver.remove(name);
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -386,8 +384,7 @@ public class BeanUtilsBean {
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             type = descriptor.getPropertyType();
@@ -411,8 +408,7 @@ public class BeanUtilsBean {
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
                             index, value);
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException(e, "Cannot set " + propName);
             }
         } else if (key != null) { // Destination must be mapped
@@ -422,16 +418,14 @@ public class BeanUtilsBean {
             try {
                 getPropertyUtils().setMappedProperty(target, propName,
                             key, value);
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException(e, "Cannot set " + propName);
             }
         } else { // Destination must be simple
             value = convertForCopy(value, type);
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 throw new InvocationTargetException(e, "Cannot set " + propName);
             }
         }
@@ -882,8 +876,7 @@ public class BeanUtilsBean {
                     return;
                 }
                 name = resolver.remove(name);
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -920,8 +913,7 @@ public class BeanUtilsBean {
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
@@ -999,8 +991,7 @@ public class BeanUtilsBean {
         // Invoke the setter method
         try {
             getPropertyUtils().setProperty(target, name, newValue);
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new InvocationTargetException(e, "Cannot set " + propName);
         }
 
@@ -1038,8 +1029,7 @@ public class BeanUtilsBean {
             try {
                 INIT_CAUSE_METHOD.invoke(throwable, cause);
                 return true;
-            }
-            catch (final Throwable e) {
+            } catch (final Throwable e) {
                 return false; // can't initialize cause
             }
         }
@@ -1092,15 +1082,13 @@ public class BeanUtilsBean {
         try {
             final Class<?>[] paramsClasses = new Class<?>[] {Throwable.class};
             return Throwable.class.getMethod("initCause", paramsClasses);
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Throwable does not have initCause() method in JDK 1.3");
             }
             return null;
-        }
-        catch (final Throwable e) {
+        } catch (final Throwable e) {
             final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Error getting the Throwable initCause() method", e);

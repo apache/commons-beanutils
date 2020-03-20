@@ -323,8 +323,7 @@ public class ConstructorUtils {
         try {
             return getAccessibleConstructor(
                         klass.getConstructor(parameterTypes));
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             return null;
         }
     }
@@ -412,14 +411,12 @@ public class ConstructorUtils {
                 // Better workarounds would be gratefully accepted.
                 //
                 ctor.setAccessible(true);
-            }
-            catch (final SecurityException se) {
+            } catch (final SecurityException se) {
                 /* SWALLOW, if workaround fails don't fret. */
             }
             return ctor;
 
-        }
-        catch (final NoSuchMethodException e) { /* SWALLOW */
+        } catch (final NoSuchMethodException e) { /* SWALLOW */
         }
 
         // search through all methods
@@ -447,8 +444,7 @@ public class ConstructorUtils {
                     if (ctor != null) {
                         try {
                             ctor.setAccessible(true);
-                        }
-                        catch (final SecurityException se) {
+                        } catch (final SecurityException se) {
                             /*
                              * Swallow SecurityException TODO: Why?
                              */
