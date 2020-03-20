@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * Test class for {@code BeanIntrospectionData}.
- *
  */
 public class BeanIntrospectionDataTestCase extends TestCase {
     /** Constant for the test bean class. */
@@ -47,7 +46,8 @@ public class BeanIntrospectionDataTestCase extends TestCase {
     }
 
     /**
-     * Creates a test instance which is initialized with default property descriptors.
+     * Creates a test instance which is initialized with default property
+     * descriptors.
      *
      * @return the test instance
      */
@@ -66,19 +66,20 @@ public class BeanIntrospectionDataTestCase extends TestCase {
     }
 
     /**
-     * Tests whether a write method can be queried if it is defined in the descriptor.
+     * Tests whether a write method can be queried if it is defined in the
+     * descriptor.
      */
     public void testGetWriteMethodDefined() {
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         assertNotNull("No write method", pd.getWriteMethod());
         assertEquals("Wrong write method", pd.getWriteMethod(),
-                data.getWriteMethod(BEAN_CLASS, pd));
+                    data.getWriteMethod(BEAN_CLASS, pd));
     }
 
     /**
-     * Tests whether a write method can be queried that is currently not available in the
-     * property descriptor.
+     * Tests whether a write method can be queried that is currently not available
+     * in the property descriptor.
      */
     public void testGetWriteMethodUndefined() throws Exception {
         final BeanIntrospectionData data = setUpData();
@@ -86,22 +87,22 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         final Method writeMethod = pd.getWriteMethod();
         pd.setWriteMethod(null);
         assertEquals("Wrong write method", writeMethod,
-                data.getWriteMethod(BEAN_CLASS, pd));
+                    data.getWriteMethod(BEAN_CLASS, pd));
         assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
     /**
-     * Tests getWriteMethod() if the method cannot be resolved. (This is a corner case
-     * which should normally not happen in practice.)
+     * Tests getWriteMethod() if the method cannot be resolved. (This is a corner
+     * case which should normally not happen in practice.)
      */
     public void testGetWriteMethodNonExisting() throws Exception {
         final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP,
-                BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
-                        "setFluentGetProperty", String.class));
+                    BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
+                                "setFluentGetProperty", String.class));
         final Map<String, String> methods = new HashMap<>();
         methods.put(TEST_PROP, "hashCode");
         final BeanIntrospectionData data = new BeanIntrospectionData(
-                new PropertyDescriptor[] { pd }, methods);
+                    new PropertyDescriptor[] {pd}, methods);
         pd.setWriteMethod(null);
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
     }

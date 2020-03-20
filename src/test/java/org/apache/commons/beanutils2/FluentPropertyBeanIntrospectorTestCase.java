@@ -26,7 +26,6 @@ import junit.framework.TestCase;
 
 /**
  * Test class for {@code FluentPropertyBeanIntrospector}.
- *
  */
 public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     /**
@@ -37,7 +36,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * @return a map with property names as keys
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(
-            final PropertyDescriptor[] descs) {
+                final PropertyDescriptor[] descs) {
         final Map<String, PropertyDescriptor> map = new HashMap<>();
         for (final PropertyDescriptor pd : descs) {
             map.put(pd.getName(), pd);
@@ -46,15 +45,15 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     }
 
     /**
-     * Convenience method for obtaining a specific property descriptor and
-     * checking whether it exists.
+     * Convenience method for obtaining a specific property descriptor and checking
+     * whether it exists.
      *
      * @param props the map with property descriptors
      * @param name the name of the desired descriptor
      * @return the descriptor from the map
      */
     private static PropertyDescriptor fetchDescriptor(
-            final Map<String, PropertyDescriptor> props, final String name) {
+                final Map<String, PropertyDescriptor> props, final String name) {
         assertTrue("Property not found: " + name, props.containsKey(name));
         return props.get(name);
     }
@@ -66,7 +65,8 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         try {
             new FluentPropertyBeanIntrospector(null);
             fail("Missing prefix for write methods not detected!");
-        } catch (final IllegalArgumentException iex) {
+        }
+        catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -79,7 +79,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
         pu.addBeanIntrospector(introspector);
         final Map<String, PropertyDescriptor> props = createDescriptorMap(pu
-                .getPropertyDescriptors(FluentIntrospectionTestBean.class));
+                    .getPropertyDescriptors(FluentIntrospectionTestBean.class));
         PropertyDescriptor pd = fetchDescriptor(props, "name");
         assertNotNull("No read method for name", pd.getReadMethod());
         assertNotNull("No write method for name", pd.getWriteMethod());
@@ -89,40 +89,40 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         assertNotNull("No write method for fluentProperty", pd.getWriteMethod());
         pd = fetchDescriptor(props, "fluentGetProperty");
         assertNotNull("No read method for fluentGetProperty",
-                pd.getReadMethod());
+                    pd.getReadMethod());
         assertNotNull("No write method for fluentGetProperty",
-                pd.getWriteMethod());
+                    pd.getWriteMethod());
     }
 
     public void testIntrospectionCaps() throws Exception {
-	    final PropertyUtilsBean pu = new PropertyUtilsBean();
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
 
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
 
-	    pu.addBeanIntrospector(introspector);
+        pu.addBeanIntrospector(introspector);
 
-	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
-			pu.getPropertyDescriptors(CapsBean.class));
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(
+                    pu.getPropertyDescriptors(CapsBean.class));
 
-	    final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+        final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 
-	    assertNotNull("missing property", aDescriptor);
+        assertNotNull("missing property", aDescriptor);
 
-	    assertNotNull("No read method for uri", aDescriptor.getReadMethod());
-	    assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
+        assertNotNull("No read method for uri", aDescriptor.getReadMethod());
+        assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
 
-	    assertNull("Should not find mis-capitalized property", props.get("uRI"));
+        assertNull("Should not find mis-capitalized property", props.get("uRI"));
     }
 
-	public static final class CapsBean {
-		private URI mURI;
+    public static final class CapsBean {
+        private URI mURI;
 
-		public URI getURI() {
-			return mURI;
-		}
+        public URI getURI() {
+            return mURI;
+        }
 
-		public void setURI(final URI theURI) {
-			mURI = theURI;
-		}
-	}
+        public void setURI(final URI theURI) {
+            mURI = theURI;
+        }
+    }
 }

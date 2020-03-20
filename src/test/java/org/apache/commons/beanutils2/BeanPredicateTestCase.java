@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for {@link BeanPredicate}
- *
  */
 public class BeanPredicateTestCase extends TestCase {
 

@@ -25,33 +25,33 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 /**
- * <p>Mock object that implements enough of
- * {@code java.sql.ResultSetMetaData}
- * to exercise the {@link ResultSetDynaClass} functionality.</p>
- *
+ * <p>
+ * Mock object that implements enough of {@code java.sql.ResultSetMetaData} to
+ * exercise the {@link ResultSetDynaClass} functionality.
+ * </p>
  */
 
 public class TestResultSetMetaData implements InvocationHandler {
 
-
-
     /**
-     * <p>Array of column names and class names for metadata.</p>
+     * <p>
+     * Array of column names and class names for metadata.
+     * </p>
      */
     protected String metadata[][] = {
-        { "bigDecimalProperty", java.math.BigDecimal.class.getName() },
-        { "booleanProperty", Boolean.class.getName() },
-        { "byteProperty", Byte.class.getName() },
-        { "dateProperty", java.sql.Date.class.getName() },
-        { "doubleProperty", Double.class.getName() },
-        { "floatProperty", Float.class.getName() },
-        { "intProperty", Integer.class.getName() },
-        { "longProperty", Long.class.getName() },
-        { "nullProperty", String.class.getName() },
-        { "shortProperty", Short.class.getName() },
-        { "stringProperty", String.class.getName() },
-        { "timeProperty", java.sql.Time.class.getName() },
-        { "timestampProperty", java.sql.Timestamp.class.getName() },
+                {"bigDecimalProperty", java.math.BigDecimal.class.getName()},
+                {"booleanProperty", Boolean.class.getName()},
+                {"byteProperty", Byte.class.getName()},
+                {"dateProperty", java.sql.Date.class.getName()},
+                {"doubleProperty", Double.class.getName()},
+                {"floatProperty", Float.class.getName()},
+                {"intProperty", Integer.class.getName()},
+                {"longProperty", Long.class.getName()},
+                {"nullProperty", String.class.getName()},
+                {"shortProperty", Short.class.getName()},
+                {"stringProperty", String.class.getName()},
+                {"timeProperty", java.sql.Time.class.getName()},
+                {"timestampProperty", java.sql.Timestamp.class.getName()},
     };
 
     /**
@@ -65,13 +65,14 @@ public class TestResultSetMetaData implements InvocationHandler {
 
     /**
      * Factory method for creating {@link ResultSetMetaData} proxies.
+     * 
      * @param invocationHandler Invocation Handler
      * @return A result set meta data proxy
      */
     public static ResultSetMetaData createProxy(final InvocationHandler invocationHandler) {
         final ClassLoader classLoader = ResultSetMetaData.class.getClassLoader();
-        final Class<?>[] interfaces = new Class[] { ResultSetMetaData.class };
-        return (ResultSetMetaData)Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
+        final Class<?>[] interfaces = new Class[] {ResultSetMetaData.class};
+        return (ResultSetMetaData) Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);
     }
 
     /**
@@ -87,19 +88,20 @@ public class TestResultSetMetaData implements InvocationHandler {
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         final String methodName = method.getName();
         if ("getColumnClassName".equals(methodName)) {
-            return getColumnClassName(((Integer)args[0]).intValue());
-        } if ("getColumnCount".equals(methodName)) {
+            return getColumnClassName(((Integer) args[0]).intValue());
+        }
+        if ("getColumnCount".equals(methodName)) {
             return new Integer(getColumnCount());
-        } if ("getColumnName".equals(methodName)) {
-            return getColumnName(((Integer)args[0]).intValue());
-        } if ("getColumnType".equals(methodName)) {
-            return getColumnType(((Integer)args[0]).intValue());
+        }
+        if ("getColumnName".equals(methodName)) {
+            return getColumnName(((Integer) args[0]).intValue());
+        }
+        if ("getColumnType".equals(methodName)) {
+            return getColumnType(((Integer) args[0]).intValue());
         }
 
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
-
-
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
         return metadata[columnIndex - 1][1];
@@ -118,9 +120,9 @@ public class TestResultSetMetaData implements InvocationHandler {
         int sqlType = Types.OTHER;
         if (columnName.equals("bigDecimalProperty")) {
             sqlType = Types.DECIMAL;
-// Types.BOOLEAN only introduced in JDK 1.4
-//        } else if (columnName.equals("booleanProperty")) {
-//            sqlType = Types.BOOLEAN;
+            // Types.BOOLEAN only introduced in JDK 1.4
+            // } else if (columnName.equals("booleanProperty")) {
+            // sqlType = Types.BOOLEAN;
         } else if (columnName.equals("byteProperty")) {
             sqlType = Types.TINYINT;
         } else if (columnName.equals("dateProperty")) {
@@ -148,8 +150,6 @@ public class TestResultSetMetaData implements InvocationHandler {
         }
         return new Integer(sqlType);
     }
-
-
 
     public String getCatalogName(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();

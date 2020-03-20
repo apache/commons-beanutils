@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2;
 
 /**
  * A bean class used for tests of introspection.
- *
  */
 public class FluentIntrospectionTestBean extends AlphaBean {
     private String stringProperty;
@@ -43,7 +42,7 @@ public class FluentIntrospectionTestBean extends AlphaBean {
     }
 
     public FluentIntrospectionTestBean setFluentGetProperty(
-            final String fluentGetProperty) {
+                final String fluentGetProperty) {
         this.fluentGetProperty = fluentGetProperty;
         return this;
     }

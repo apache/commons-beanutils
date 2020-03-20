@@ -21,12 +21,11 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
- *
+ * <p>
+ * Test Case for the {@code MappedPropertyDescriptor}.
+ * </p>
  */
 public class MappedPropertyTestCase extends TestCase {
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -37,13 +36,11 @@ public class MappedPropertyTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Run this Test
      */
     public static void main(final String[] args) {
-      junit.textui.TestRunner.run(suite());
+        junit.textui.TestRunner.run(suite());
     }
 
     /**
@@ -67,8 +64,6 @@ public class MappedPropertyTestCase extends TestCase {
     public void tearDown() {
     }
 
-
-
     /**
      * Test valid method name
      */
@@ -76,11 +71,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -92,11 +87,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mappedBoolean";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -110,7 +105,8 @@ public class MappedPropertyTestCase extends TestCase {
         try {
             new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             // expected result
         }
     }
@@ -122,11 +118,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mappedGetterOnly";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNull("Setter is found", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -138,11 +134,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mappedSetterOnly";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNull("Getter is found", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -154,11 +150,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "invalidSetter";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNull("Setter is found", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -170,31 +166,29 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "invalidGetter";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNull("Getter is found", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
 
     /**
-     * Test Mapped Property - Different Types
-     *
-     * Expect to find the getDifferentTypes() method, but not
-     * the setDifferentTypes() method because setDifferentTypes()
+     * Test Mapped Property - Different Types Expect to find the getDifferentTypes()
+     * method, but not the setDifferentTypes() method because setDifferentTypes()
      * sets and Integer, while getDifferentTypes() returns a Long.
      */
     public void testDifferentTypes() {
         final String property = "differentTypes";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNull("Setter is found", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -206,10 +200,11 @@ public class MappedPropertyTestCase extends TestCase {
         final MappedPropertyTestBean bean = new MappedPropertyTestBean();
         try {
             final String testValue = "test value";
-            final String testKey   = "testKey";
-            BeanUtils.setProperty(bean, "myMap("+testKey+")", "test value");
+            final String testKey = "testKey";
+            BeanUtils.setProperty(bean, "myMap(" + testKey + ")", "test value");
             assertEquals("Map getter", testValue, bean.getMyMap().get(testKey));
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Test set mapped property failed: " + ex);
         }
     }
@@ -221,11 +216,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "anyMapped";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNull("Getter is found", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -237,11 +232,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mappedPrimitive";
         final Class<?> clazz = MappedPropertyTestBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNull("Getter is found", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -255,7 +250,8 @@ public class MappedPropertyTestCase extends TestCase {
         try {
             new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             // expected result
         }
     }
@@ -267,11 +263,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyChildBean.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -285,7 +281,8 @@ public class MappedPropertyTestCase extends TestCase {
         try {
             new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
         }
     }
 
@@ -296,11 +293,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyTestInterface.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }
@@ -314,7 +311,8 @@ public class MappedPropertyTestCase extends TestCase {
         try {
             new MappedPropertyDescriptor(property, clazz);
             fail("Property '" + property + "' found in " + clazz.getName());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
         }
     }
 
@@ -325,11 +323,11 @@ public class MappedPropertyTestCase extends TestCase {
         final String property = "mapproperty";
         final Class<?> clazz = MappedPropertyChildInterface.class;
         try {
-            final MappedPropertyDescriptor desc
-                = new MappedPropertyDescriptor(property, clazz);
+            final MappedPropertyDescriptor desc = new MappedPropertyDescriptor(property, clazz);
             assertNotNull("Getter is missing", desc.getMappedReadMethod());
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
         }
     }

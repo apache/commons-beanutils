@@ -20,15 +20,15 @@ package org.apache.commons.beanutils2;
 import java.io.OutputStream;
 
 /**
- * <p>Class used in MethodUtils test</p>
- *
+ * <p>
+ * Class used in MethodUtils test
+ * </p>
  */
 public class A {
 
     boolean called = false;
 
-    public void foo(final OutputStream os)
-    {
+    public void foo(final OutputStream os) {
         called = true;
     }
 }

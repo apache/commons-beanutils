@@ -23,12 +23,13 @@ import java.util.Map;
 
 /**
  * <h1><i>Lazy</i> DynaBean List.</h1>
- *
- * <p>There are two main purposes for this class:</p>
- *    <ul>
- *        <li>To provide <i>Lazy List</i> behavior - automatically
- *            <i>growing</i> and <i>populating</i> the {@code List}
- *            with either {@code DynaBean</code>, <code>java.util.Map}
+ * <p>
+ * There are two main purposes for this class:
+ * </p>
+ * <ul>
+ * <li>To provide <i>Lazy List</i> behavior - automatically <i>growing</i> and
+ * <i>populating</i> the {@code List} with either
+ * {@code DynaBean</code>, <code>java.util.Map}
  *            or POJO Beans.</li>
  *        <li>To provide a straight forward way of putting a Collection
  *            or Array into the lazy list <i>and</i> a straight forward
@@ -71,32 +72,40 @@ import java.util.Map;
  * <pre><code>
  *    TreeMap[] myArray = .... // your Map[]
  *    List lazyList = new LazyDynaList(myArray);
- * </code></pre>
+ * </code>
+ * </pre>
+ * <p>
+ * New elements of the appropriate Map type are automatically populated:
+ * </p>
  *
- * <p>New elements of the appropriate Map type are
- *    automatically populated:</p>
- *
- * <pre><code>
+ * <pre>
+ * <code>
  *    // get(index) automatically grows the list
  *    DynaBean newElement = (DynaBean)lazyList.get(lazyList.size());
  *    newElement.put("someProperty", "someValue");
- * </code></pre>
+ * </code>
+ * </pre>
+ * <p>
+ * Once you've finished you can get back an Array of the elements of the
+ * appropriate type:
+ * </p>
  *
- * <p>Once you've finished you can get back an Array of the
- *    elements of the appropriate type:</p>
- *
- * <pre><code>
+ * <pre>
+ * <code>
  *    // Retrieve the array from the list
  *    TreeMap[] myArray = (TreeMap[])lazyList.toArray());
- * </code></pre>
- *
+ * </code>
+ * </pre>
  *
  * <h2>Example 2</h2>
- * <p>Alternatively you can create an <i>empty</i> List and
- *    specify the Class for List's elements. The LazyDynaList
- *    uses the Class to automatically populate elements:</p>
+ * <p>
+ * Alternatively you can create an <i>empty</i> List and specify the Class for
+ * List's elements. The LazyDynaList uses the Class to automatically populate
+ * elements:
+ * </p>
  *
- * <pre><code>
+ * <pre>
+ * <code>
  *    // e.g. For Maps
  *    List lazyList = new LazyDynaList(TreeMap.class);
  *
@@ -105,14 +114,18 @@ import java.util.Map;
  *
  *    // e.g. For DynaBeans
  *    List lazyList = new LazyDynaList(MyDynaBean.class);
- * </code></pre>
+ * </code>
+ * </pre>
  *
  * <h2>Example 3</h2>
- * <p>Alternatively you can create an <i>empty</i> List and specify the
- *    DynaClass for List's elements. The LazyDynaList uses
- *    the DynaClass to automatically populate elements:</p>
+ * <p>
+ * Alternatively you can create an <i>empty</i> List and specify the DynaClass
+ * for List's elements. The LazyDynaList uses the DynaClass to automatically
+ * populate elements:
+ * </p>
  *
- * <pre><code>
+ * <pre>
+ * <code>
  *    // e.g. For Maps
  *    DynaClass dynaClass = new LazyDynaMap(new HashMap());
  *    List lazyList = new LazyDynaList(dynaClass);
@@ -124,10 +137,11 @@ import java.util.Map;
  *    // e.g. For DynaBeans
  *    DynaClass dynaClass = new BasicDynaClass(properties);
  *    List lazyList = new LazyDynaList(dynaClass);
- * </code></pre>
- *
- * <p><strong>N.B.</strong> You may wonder why control the type
- *    using a {@code DynaClass</code> rather than the <code>Class}
+ * </code>
+ * </pre>
+ * <p>
+ * <strong>N.B.</strong> You may wonder why control the type using a
+ * {@code DynaClass</code> rather than the <code>Class}
  *    as in the previous example - the reason is that some {@code DynaBean}
  *    implementations don't have a <i>default</i> empty constructor and
  *    therefore need to be instantiated using the {@code DynaClass.newInstance()}
@@ -153,7 +167,8 @@ import java.util.Map;
  *    // Populate from a collection
  *    lazyList.addAll(myCollection);
  *
- * </code></pre>
+ * </code>
+ * </pre>
  *
  * @since 1.8.0
  */
@@ -167,12 +182,9 @@ public class LazyDynaList extends ArrayList<Object> {
     private DynaClass elementDynaClass;
 
     /**
-     * The WrapDynaClass if the List's contains
-     * POJO Bean elements.
-     *
-     * N.B. WrapDynaClass isn't serlializable, which
-     *      is why its stored separately in a
-     *      transient instance variable.
+     * The WrapDynaClass if the List's contains POJO Bean elements. N.B.
+     * WrapDynaClass isn't serlializable, which is why its stored separately in a
+     * transient instance variable.
      */
     private transient WrapDynaClass wrapDynaClass;
 
@@ -186,8 +198,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private Class<?> elementDynaBeanType;
 
-
-
     /**
      * Default Constructor.
      */
@@ -196,8 +206,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a LazyDynaList with the
-     * specified capacity.
+     * Construct a LazyDynaList with the specified capacity.
      *
      * @param capacity The initial capacity of the list.
      */
@@ -207,8 +216,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList with a
-     * specified DynaClass for its elements.
+     * Construct a LazyDynaList with a specified DynaClass for its elements.
      *
      * @param elementDynaClass The DynaClass of the List's elements.
      */
@@ -218,8 +226,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList with a
-     * specified type for its elements.
+     * Construct a LazyDynaList with a specified type for its elements.
      *
      * @param elementType The Type of the List's elements.
      */
@@ -229,8 +236,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList populated with the
-     * elements of a Collection.
+     * Construct a LazyDynaList populated with the elements of a Collection.
      *
      * @param collection The Collection to populate the List from.
      */
@@ -240,8 +246,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList populated with the
-     * elements of an Array.
+     * Construct a LazyDynaList populated with the elements of an Array.
      *
      * @param array The Array to populate the List from.
      */
@@ -252,14 +257,14 @@ public class LazyDynaList extends ArrayList<Object> {
         }
     }
 
-
-
     /**
-     * <p>Insert an element at the specified index position.</p>
-     *
-     * <p>If the index position is greater than the current
-     *    size of the List, then the List is automatically
-     *    <i>grown</i> to the appropriate size.</p>
+     * <p>
+     * Insert an element at the specified index position.
+     * </p>
+     * <p>
+     * If the index position is greater than the current size of the List, then the
+     * List is automatically <i>grown</i> to the appropriate size.
+     * </p>
      *
      * @param index The index position to insert the new element.
      * @param element The new element to add.
@@ -276,7 +281,9 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Add an element to the List.</p>
+     * <p>
+     * Add an element to the List.
+     * </p>
      *
      * @param element The new element to add.
      * @return true.
@@ -291,7 +298,8 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Add all the elements from a Collection to the list.
+     * <p>
+     * Add all the elements from a Collection to the list.
      *
      * @param collection The Collection of new elements.
      * @return true if elements were added.
@@ -314,12 +322,13 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Insert all the elements from a Collection into the
-     *    list at a specified position.
-     *
-     * <p>If the index position is greater than the current
-     *    size of the List, then the List is automatically
-     *    <i>grown</i> to the appropriate size.</p>
+     * <p>
+     * Insert all the elements from a Collection into the list at a specified
+     * position.
+     * <p>
+     * If the index position is greater than the current size of the List, then the
+     * List is automatically <i>grown</i> to the appropriate size.
+     * </p>
      *
      * @param collection The Collection of new elements.
      * @param index The index position to insert the new elements at.
@@ -353,11 +362,14 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Return the element at the specified position.</p>
-     *
-     * <p>If the position requested is greater than the current
-     *    size of the List, then the List is automatically
-     *    <i>grown</i> (and populated) to the appropriate size.</p>
+     * <p>
+     * Return the element at the specified position.
+     * </p>
+     * <p>
+     * If the position requested is greater than the current size of the List, then
+     * the List is automatically <i>grown</i> (and populated) to the appropriate
+     * size.
+     * </p>
      *
      * @param index The index position to insert the new elements at.
      * @return The element at the specified position.
@@ -372,11 +384,14 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Set the element at the specified position.</p>
-     *
-     * <p>If the position requested is greater than the current
-     *    size of the List, then the List is automatically
-     *    <i>grown</i> (and populated) to the appropriate size.</p>
+     * <p>
+     * Set the element at the specified position.
+     * </p>
+     * <p>
+     * If the position requested is greater than the current size of the List, then
+     * the List is automatically <i>grown</i> (and populated) to the appropriate
+     * size.
+     * </p>
      *
      * @param index The index position to insert the new element at.
      * @param element The new element.
@@ -394,17 +409,18 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Converts the List to an Array.</p>
-     *
-     * <p>The type of Array created depends on the contents
-     *    of the List:</p>
+     * <p>
+     * Converts the List to an Array.
+     * </p>
+     * <p>
+     * The type of Array created depends on the contents of the List:
+     * </p>
      * <ul>
-     *    <li>If the List contains only LazyDynaMap type elements
-     *        then a java.util.Map[] array will be created.</li>
-     *    <li>If the List contains only elements which are
-     *        "wrapped" DynaBeans then an Object[] of the most
-     *        suitable type will be created.</li>
-     *    <li>...otherwise a DynaBean[] will be created.</li>
+     * <li>If the List contains only LazyDynaMap type elements then a
+     * java.util.Map[] array will be created.</li>
+     * <li>If the List contains only elements which are "wrapped" DynaBeans then an
+     * Object[] of the most suitable type will be created.</li>
+     * <li>...otherwise a DynaBean[] will be created.</li>
      * </ul>
      *
      * @return An Array of the elements in this List.
@@ -416,14 +432,14 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        final Object[] array = (Object[])Array.newInstance(elementType, size());
+        final Object[] array = (Object[]) Array.newInstance(elementType, size());
         for (int i = 0; i < size(); i++) {
             if (Map.class.isAssignableFrom(elementType)) {
-                array[i] = ((LazyDynaMap)get(i)).getMap();
+                array[i] = ((LazyDynaMap) get(i)).getMap();
             } else if (DynaBean.class.isAssignableFrom(elementType)) {
                 array[i] = get(i);
             } else {
-                array[i] = ((WrapDynaBean)get(i)).getInstance();
+                array[i] = ((WrapDynaBean) get(i)).getInstance();
             }
         }
         return array;
@@ -431,7 +447,9 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Converts the List to an Array of the specified type.</p>
+     * <p>
+     * Converts the List to an Array of the specified type.
+     * </p>
      *
      * @param <T> The type of the array elements
      * @param model The model for the type of array to return
@@ -442,7 +460,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         final Class<?> arrayType = model.getClass().getComponentType();
         if (DynaBean.class.isAssignableFrom(arrayType)
-                || size() == 0 && elementType == null) {
+                    || size() == 0 && elementType == null) {
             return super.toArray(model);
         }
 
@@ -473,15 +491,15 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         throw new IllegalArgumentException("Invalid array type: "
-                  + arrayType.getName() + " - not compatible with '"
-                  + elementType.getName());
+                    + arrayType.getName() + " - not compatible with '"
+                    + elementType.getName());
 
     }
 
-
-
     /**
-     * <p>Converts the List to an DynaBean Array.</p>
+     * <p>
+     * Converts the List to an DynaBean Array.
+     * </p>
      *
      * @return A DynaBean[] of the elements in this List.
      */
@@ -491,20 +509,22 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        final DynaBean[] array = (DynaBean[])Array.newInstance(elementDynaBeanType, size());
+        final DynaBean[] array = (DynaBean[]) Array.newInstance(elementDynaBeanType, size());
         for (int i = 0; i < size(); i++) {
-            array[i] = (DynaBean)get(i);
+            array[i] = (DynaBean) get(i);
         }
         return array;
 
     }
 
     /**
-     * <p>Set the element Type and DynaClass.</p>
+     * <p>
+     * Set the element Type and DynaClass.
+     * </p>
      *
      * @param elementType The type of the elements.
-     * @throws IllegalArgumentException if the List already
-     *            contains elements or the DynaClass is null.
+     * @throws IllegalArgumentException if the List already contains elements or the
+     *             DynaClass is null.
      */
     public void setElementType(final Class<?> elementType) {
 
@@ -523,9 +543,10 @@ public class LazyDynaList extends ArrayList<Object> {
         Object object = null;
         try {
             object = elementType.newInstance();
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             throw new IllegalArgumentException("Error creating type: "
-                           + elementType.getName() + " - " + e);
+                        + elementType.getName() + " - " + e);
         }
 
         // Create a DynaBean
@@ -534,30 +555,32 @@ public class LazyDynaList extends ArrayList<Object> {
             dynaBean = createDynaBeanForMapProperty(object);
             this.elementDynaClass = dynaBean.getDynaClass();
         } else if (DynaBean.class.isAssignableFrom(elementType)) {
-            dynaBean = (DynaBean)object;
+            dynaBean = (DynaBean) object;
             this.elementDynaClass = dynaBean.getDynaClass();
         } else {
             dynaBean = new WrapDynaBean(object);
-            this.wrapDynaClass = (WrapDynaClass)dynaBean.getDynaClass();
+            this.wrapDynaClass = (WrapDynaClass) dynaBean.getDynaClass();
         }
 
         this.elementDynaBeanType = dynaBean.getClass();
 
         // Re-calculate the type
-        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
+        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((LazyDynaMap) dynaBean).getMap().getClass();
         }
 
     }
 
     /**
-     * <p>Set the element Type and DynaClass.</p>
+     * <p>
+     * Set the element Type and DynaClass.
+     * </p>
      *
      * @param elementDynaClass The DynaClass of the elements.
-     * @throws IllegalArgumentException if the List already
-     *            contains elements or the DynaClass is null.
+     * @throws IllegalArgumentException if the List already contains elements or the
+     *             DynaClass is null.
      */
     public void setElementDynaClass(final DynaClass elementDynaClass) {
 
@@ -571,32 +594,32 @@ public class LazyDynaList extends ArrayList<Object> {
 
         // Try to create a new instance of the DynaBean
         try {
-            final DynaBean dynaBean  = elementDynaClass.newInstance();
+            final DynaBean dynaBean = elementDynaClass.newInstance();
             this.elementDynaBeanType = dynaBean.getClass();
             if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-                this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
+                this.elementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
+                this.wrapDynaClass = (WrapDynaClass) elementDynaClass;
             } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+                this.elementType = ((LazyDynaMap) dynaBean).getMap().getClass();
                 this.elementDynaClass = elementDynaClass;
             } else {
                 this.elementType = dynaBean.getClass();
                 this.elementDynaClass = elementDynaClass;
             }
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             throw new IllegalArgumentException(
                         "Error creating DynaBean from " +
-                        elementDynaClass.getClass().getName() + " - " + e);
+                                    elementDynaClass.getClass().getName() + " - " + e);
         }
 
     }
 
-
-
     /**
-     * <p>Automatically <i>grown</i> the List
-     *    to the appropriate size, populating with
-     *    DynaBeans.</p>
+     * <p>
+     * Automatically <i>grown</i> the List to the appropriate size, populating with
+     * DynaBeans.
+     * </p>
      *
      * @param requiredSize the required size of the List.
      */
@@ -616,22 +639,22 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Transform the element into a DynaBean:</p>
-     *
+     * <p>
+     * Transform the element into a DynaBean:
+     * </p>
      * <ul>
-     *    <li>Map elements are turned into LazyDynaMap's.</li>
-     *    <li>POJO Beans are "wrapped" in a WrapDynaBean.</li>
-     *    <li>DynaBeans are unchanged.</li>
-     * </li>
+     * <li>Map elements are turned into LazyDynaMap's.</li>
+     * <li>POJO Beans are "wrapped" in a WrapDynaBean.</li>
+     * <li>DynaBeans are unchanged.</li></li>
      *
      * @param element The element to transformed.
      * @param The DynaBean to store in the List.
      */
     private DynaBean transform(final Object element) {
 
-        DynaBean dynaBean     = null;
+        DynaBean dynaBean = null;
         Class<?> newDynaBeanType = null;
-        Class<?> newElementType  = null;
+        Class<?> newElementType = null;
 
         // Create a new element
         if (element == null) {
@@ -651,10 +674,11 @@ public class LazyDynaList extends ArrayList<Object> {
             try {
                 dynaBean = getDynaClass().newInstance();
                 newDynaBeanType = dynaBean.getClass();
-            } catch (final Exception e) {
+            }
+            catch (final Exception e) {
                 throw new IllegalArgumentException("Error creating DynaBean: "
-                              + getDynaClass().getClass().getName()
-                              + " - " + e);
+                            + getDynaClass().getClass().getName()
+                            + " - " + e);
             }
 
         } else {
@@ -664,7 +688,7 @@ public class LazyDynaList extends ArrayList<Object> {
             if (Map.class.isAssignableFrom(element.getClass())) {
                 dynaBean = createDynaBeanForMapProperty(element);
             } else if (DynaBean.class.isAssignableFrom(element.getClass())) {
-                dynaBean = (DynaBean)element;
+                dynaBean = (DynaBean) element;
             } else {
                 dynaBean = new WrapDynaBean(element);
             }
@@ -676,16 +700,16 @@ public class LazyDynaList extends ArrayList<Object> {
         // Re-calculate the element type
         newElementType = dynaBean.getClass();
         if (WrapDynaBean.class.isAssignableFrom(newDynaBeanType)) {
-            newElementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
+            newElementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
         } else if (LazyDynaMap.class.isAssignableFrom(newDynaBeanType)) {
-            newElementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+            newElementType = ((LazyDynaMap) dynaBean).getMap().getClass();
         }
 
         // Check the new element type, matches all the
         // other elements in the List
         if (elementType != null && !newElementType.equals(elementType)) {
-            throw new IllegalArgumentException("Element Type "  + newElementType
-                       + " doesn't match other elements " + elementType);
+            throw new IllegalArgumentException("Element Type " + newElementType
+                        + " doesn't match other elements " + elementType);
         }
 
         return dynaBean;

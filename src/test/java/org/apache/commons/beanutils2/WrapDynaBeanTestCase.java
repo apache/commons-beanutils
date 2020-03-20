@@ -26,17 +26,14 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code WrapDynaBean} implementation class.
- * These tests were based on the ones in {@code PropertyUtilsTestCase}
- * because the two classes provide similar levels of functionality.</p>
- *
+ * <p>
+ * Test Case for the {@code WrapDynaBean} implementation class. These tests were
+ * based on the ones in {@code PropertyUtilsTestCase} because the two classes
+ * provide similar levels of functionality.
+ * </p>
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
-
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -48,8 +45,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         super(name);
 
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -80,8 +75,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-
-
     /**
      * The {@code set()} method.
      */
@@ -100,7 +93,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.get("invalidProperty");
             fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             // Expected result
         }
 
@@ -108,14 +102,15 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.set("invalidProperty", "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             // Expected result
         }
 
         // Set up initial Value
         String testValue = "Original Value";
         final String testProperty = "stringProperty";
-        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final TestBean instance = (TestBean) ((WrapDynaBean) bean).getInstance();
         instance.setStringProperty(testValue);
         assertEquals("Check String property", testValue, instance.getStringProperty());
 
@@ -125,7 +120,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set(testProperty, testValue);
             assertEquals("Test Set", testValue, instance.getStringProperty());
             assertEquals("Test Get", testValue, bean.get(testProperty));
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
     }
@@ -139,7 +135,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.get("invalidProperty", 0);
             fail("Invalid get should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             // Expected result
         }
 
@@ -147,14 +144,15 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         try {
             bean.set("invalidProperty", 0, "XYZ");
             fail("Invalid set should have thrown IllegalArgumentException");
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             // Expected result
         }
 
         // Set up initial Value
         String testValue = "Original Value";
         final String testProperty = "stringIndexed";
-        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final TestBean instance = (TestBean) ((WrapDynaBean) bean).getInstance();
         instance.setStringIndexed(0, testValue);
         assertEquals("Check String property", testValue, instance.getStringIndexed(0));
 
@@ -164,71 +162,80 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             bean.set(testProperty, 0, testValue);
             assertEquals("Test Set", testValue, instance.getStringIndexed(0));
             assertEquals("Test Get", testValue, bean.get(testProperty, 0));
-        } catch (final IllegalArgumentException t) {
+        }
+        catch (final IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
 
     }
 
     /**
-     * The {@code contains()} method is not supported by the
-     * {@code WrapDynaBean} implementation class.
+     * The {@code contains()} method is not supported by the {@code WrapDynaBean}
+     * implementation class.
      */
     @Override
     public void testMappedContains() {
 
         try {
             assertTrue("Can see first key",
-                    bean.contains("mappedProperty", "First Key"));
+                        bean.contains("mappedProperty", "First Key"));
             fail("Should have thrown UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
+        }
+        catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
         try {
             assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+                        !bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
+        }
+        catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
     }
 
     /**
-     * The {@code remove()} method is not supported by the
-     * {@code WrapDynaBean} implementation class.
+     * The {@code remove()} method is not supported by the {@code WrapDynaBean}
+     * implementation class.
      */
     @Override
     public void testMappedRemove() {
 
         try {
             assertTrue("Can see first key",
-                    bean.contains("mappedProperty", "First Key"));
+                        bean.contains("mappedProperty", "First Key"));
             bean.remove("mappedProperty", "First Key");
             fail("Should have thrown UnsupportedOperationException");
-            //            assertTrue("Can not see first key",
-            //         !bean.contains("mappedProperty", "First Key"));
-        } catch (final UnsupportedOperationException t) {
+            // assertTrue("Can not see first key",
+            // !bean.contains("mappedProperty", "First Key"));
+        }
+        catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
         try {
             assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+                        !bean.contains("mappedProperty", "Unknown Key"));
             bean.remove("mappedProperty", "Unknown Key");
             fail("Should have thrown UnsupportedOperationException");
-            //            assertTrue("Can not see unknown key",
-            //         !bean.contains("mappedProperty", "Unknown Key"));
-        } catch (final UnsupportedOperationException t) {
+            // assertTrue("Can not see unknown key",
+            // !bean.contains("mappedProperty", "Unknown Key"));
+        }
+        catch (final UnsupportedOperationException t) {
             // Expected result
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
@@ -254,8 +261,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * Serialization and deserialization tests.
-     * (WrapDynaBean is now serializable, although WrapDynaClass still is not)
+     * Serialization and deserialization tests. (WrapDynaBean is now serializable,
+     * although WrapDynaClass still is not)
      */
     @Override
     public void testSerialization() {
@@ -268,7 +275,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertEquals("origBean new value", newValue, origBean.get("intProperty"));
 
         // Serialize/Deserialize & test value
-        final WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
+        final WrapDynaBean bean = (WrapDynaBean) serializeDeserialize(origBean, "First Test");
         assertEquals("bean value", newValue, bean.get("intProperty"));
 
     }
@@ -285,19 +292,20 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             oos.writeObject(target);
             oos.flush();
             oos.close();
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail(text + ": Exception during serialization: " + e);
         }
 
         // Deserialize the test object
         Object result = null;
         try {
-            final ByteArrayInputStream bais =
-                new ByteArrayInputStream(baos.toByteArray());
+            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             final ObjectInputStream ois = new ObjectInputStream(bais);
             result = ois.readObject();
             bais.close();
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail(text + ": Exception during deserialization: " + e);
         }
         return result;
@@ -320,12 +328,12 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     public void testGetWrapDynaClassFromCache() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         assertSame("Instance not cached", clazz,
-                WrapDynaClass.createDynaClass(TestBean.class));
+                    WrapDynaClass.createDynaClass(TestBean.class));
     }
 
     /**
-     * Tests whether the PropertyUtilsBean instance associated with a WrapDynaClass is
-     * taken into account when accessing an instance from the cache.
+     * Tests whether the PropertyUtilsBean instance associated with a WrapDynaClass
+     * is taken into account when accessing an instance from the cache.
      */
     public void testGetWrapDynaClassFromCacheWithPropUtils() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
@@ -335,14 +343,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * Tests whether a custom PropertyUtilsBean instance can be used for introspection of
-     * bean properties.
+     * Tests whether a custom PropertyUtilsBean instance can be used for
+     * introspection of bean properties.
      */
     public void testIntrospectionWithCustomPropUtils() {
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
         final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(
-                FluentIntrospectionTestBean.class, pu);
+                    FluentIntrospectionTestBean.class, pu);
         final FluentIntrospectionTestBean obj = new FluentIntrospectionTestBean();
         bean = new WrapDynaBean(obj, dynaClass);
         bean.set("fluentProperty", "testvalue");

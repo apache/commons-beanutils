@@ -19,10 +19,8 @@ package org.apache.commons.beanutils2;
 
 import junit.framework.TestCase;
 
-
 /**
  * Test cases for {@code BeanPropertyValueChangeClosure}.
- *
  */
 public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
 
@@ -57,7 +55,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("floatProperty", "123").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -69,7 +68,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("floatProperty", expectedDoubleValue).accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -99,7 +99,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("doubleProperty", "123").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -129,7 +130,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("intProperty", expectedDoubleValue).accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -141,7 +143,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("intProperty", "123").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -153,7 +156,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("intProperty", expectedFloatValue).accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -183,7 +187,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("booleanProperty", "true").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -204,7 +209,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("byteProperty", "foo").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -216,7 +222,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("intProperty", null).accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -228,7 +235,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("readOnlyProperty", "foo").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
@@ -258,24 +266,28 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("anotherNested.stringProperty", "foo").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }
 
     /**
-     * Test execute with a nested property and null in the property path and ignoreNull = true.
+     * Test execute with a nested property and null in the property path and
+     * ignoreNull = true.
      */
     public void testExecuteWithNullInPropertyPathAngIgnoreTrue() {
         final TestBean testBean = new TestBean();
 
-        // create a consumer that will attempt to set a property on the null bean in the path
+        // create a consumer that will attempt to set a property on the null bean in the
+        // path
         final BeanPropertyValueChangeConsumer<TestBean, Object> consumer = new BeanPropertyValueChangeConsumer<>(
-                "anotherNested.stringProperty", "Should ignore exception", true);
+                    "anotherNested.stringProperty", "Should ignore exception", true);
 
         try {
             consumer.accept(testBean);
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             fail("Should have ignored the exception.");
         }
     }
@@ -314,7 +326,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         try {
             new BeanPropertyValueChangeConsumer<>("bogusProperty", "foo").accept(new TestBean());
             fail("Should have thrown an IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
+        }
+        catch (final IllegalArgumentException e) {
             /* this is what we expect */
         }
     }

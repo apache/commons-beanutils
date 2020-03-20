@@ -28,8 +28,8 @@ import java.util.Set;
  * </p>
  * <p>
  * This class implements the methods required by the
- * {@code IntrospectionContext} interface in a straight-forward manner
- * based on a map. It is used internally only. It is not thread-safe.
+ * {@code IntrospectionContext} interface in a straight-forward manner based on
+ * a map. It is used internally only. It is not thread-safe.
  * </p>
  *
  * @since 1.9
@@ -45,9 +45,8 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     private final Map<String, PropertyDescriptor> descriptors;
 
     /**
-     *
-     * Creates a new instance of {@code DefaultIntrospectionContext} and sets
-     * the current class for introspection.
+     * Creates a new instance of {@code DefaultIntrospectionContext} and sets the
+     * current class for introspection.
      *
      * @param cls the current class
      */
@@ -65,7 +64,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     public void addPropertyDescriptor(final PropertyDescriptor desc) {
         if (desc == null) {
             throw new IllegalArgumentException(
-                    "Property descriptor must not be null!");
+                        "Property descriptor must not be null!");
         }
         descriptors.put(desc.getName(), desc);
     }
@@ -74,7 +73,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     public void addPropertyDescriptors(final PropertyDescriptor[] descs) {
         if (descs == null) {
             throw new IllegalArgumentException(
-                    "Array with descriptors must not be null!");
+                        "Array with descriptors must not be null!");
         }
 
         for (final PropertyDescriptor desc : descs) {
@@ -103,8 +102,8 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     }
 
     /**
-     * Returns an array with all descriptors added to this context. This method
-     * is used to obtain the results of introspection.
+     * Returns an array with all descriptors added to this context. This method is
+     * used to obtain the results of introspection.
      *
      * @return an array with all known property descriptors
      */

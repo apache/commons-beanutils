@@ -27,8 +27,8 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>
- * An implementation of the {@code BeanIntrospector} interface which can
- * detect write methods for properties used in fluent API scenario.
+ * An implementation of the {@code BeanIntrospector} interface which can detect
+ * write methods for properties used in fluent API scenario.
  * </p>
  * <p>
  * A <em>fluent API</em> allows setting multiple properties using a single
@@ -37,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
  * be called for setting another property. An example of such a fluent API could
  * look as follows:
  * </p>
+ * 
  * <pre>
  * public class FooBuilder {
  *     public FooBuilder setFooProperty1(String value) {
@@ -50,17 +51,17 @@ import org.apache.commons.logging.LogFactory;
  *    }
  * }
  * </pre>
- *
- * <p>Per default, {@code PropertyUtils} does not detect methods like this
- * because, having a non-<b>void</b> return type, they violate the Java Beans
+ * <p>
+ * Per default, {@code PropertyUtils} does not detect methods like this because,
+ * having a non-<b>void</b> return type, they violate the Java Beans
  * specification.
  * </p>
  * <p>
  * This class is more tolerant with regards to the return type of a set method.
  * It basically iterates over all methods of a class and filters them for a
- * configurable prefix (the default prefix is {@code set}). It then
- * generates corresponding {@code PropertyDescriptor} objects for the
- * methods found which use these methods as write methods.
+ * configurable prefix (the default prefix is {@code set}). It then generates
+ * corresponding {@code PropertyDescriptor} objects for the methods found which
+ * use these methods as write methods.
  * </p>
  * <p>
  * An instance of this class is intended to collaborate with a
@@ -68,9 +69,8 @@ import org.apache.commons.logging.LogFactory;
  * adding this instance as custom {@code BeanIntrospector} after the
  * {@code DefaultBeanIntrospector} object. Then default introspection finds
  * read-only properties because it does not detect the write methods with a
- * non-<b>void</b> return type. {@code FluentPropertyBeanIntrospector}
- * completes the descriptors for these properties by setting the correct write
- * method.
+ * non-<b>void</b> return type. {@code FluentPropertyBeanIntrospector} completes
+ * the descriptors for these properties by setting the correct write method.
  * </p>
  *
  * @since 1.9
@@ -86,10 +86,9 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     private final String writeMethodPrefix;
 
     /**
-     *
      * Creates a new instance of {@code FluentPropertyBeanIntrospector} and
-     * initializes it with the prefix for write methods used by the classes to
-     * be inspected.
+     * initializes it with the prefix for write methods used by the classes to be
+     * inspected.
      *
      * @param writePrefix the prefix for write methods (must not be <b>null</b>)
      * @throws IllegalArgumentException if the prefix is <b>null</b>
@@ -97,15 +96,14 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     public FluentPropertyBeanIntrospector(final String writePrefix) {
         if (writePrefix == null) {
             throw new IllegalArgumentException(
-                    "Prefix for write methods must not be null!");
+                        "Prefix for write methods must not be null!");
         }
         writeMethodPrefix = writePrefix;
     }
 
     /**
-     *
-     * Creates a new instance of {@code FluentPropertyBeanIntrospector} and
-     * sets the default prefix for write methods.
+     * Creates a new instance of {@code FluentPropertyBeanIntrospector} and sets the
+     * default prefix for write methods.
      */
     public FluentPropertyBeanIntrospector() {
         this(DEFAULT_WRITE_METHOD_PREFIX);
@@ -130,22 +128,23 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      */
     @Override
     public void introspect(final IntrospectionContext icontext)
-            throws IntrospectionException {
+                throws IntrospectionException {
         for (final Method m : icontext.getTargetClass().getMethods()) {
             if (m.getName().startsWith(getWriteMethodPrefix())) {
                 final String propertyName = propertyName(m);
                 final PropertyDescriptor pd = icontext
-                        .getPropertyDescriptor(propertyName);
+                            .getPropertyDescriptor(propertyName);
                 try {
                     if (pd == null) {
                         icontext.addPropertyDescriptor(createFluentPropertyDescritor(
-                                m, propertyName));
+                                    m, propertyName));
                     } else if (pd.getWriteMethod() == null) {
                         pd.setWriteMethod(m);
                     }
-                } catch (final IntrospectionException e) {
+                }
+                catch (final IntrospectionException e) {
                     log.debug("Error when creating PropertyDescriptor for " + m
-                            + "! Ignoring this property.");
+                                + "! Ignoring this property.");
                     log.debug("Exception is:", e);
                 }
             }
@@ -160,9 +159,10 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      */
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(
-                getWriteMethodPrefix().length());
-        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName
-                .toLowerCase(Locale.ENGLISH);
+                    getWriteMethodPrefix().length());
+        return methodName.length() > 1 ? Introspector.decapitalize(methodName)
+                    : methodName
+                                .toLowerCase(Locale.ENGLISH);
     }
 
     /**
@@ -174,7 +174,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @throws IntrospectionException if an error occurs
      */
     private PropertyDescriptor createFluentPropertyDescritor(final Method m,
-            final String propertyName) throws IntrospectionException {
+                final String propertyName) throws IntrospectionException {
         return new PropertyDescriptor(propertyName(m), null, m);
     }
 }

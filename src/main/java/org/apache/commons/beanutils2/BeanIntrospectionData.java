@@ -24,19 +24,21 @@ import java.util.Map;
 
 /**
  * <p>
- * An internally used helper class for storing introspection information about a bean
- * class.
+ * An internally used helper class for storing introspection information about a
+ * bean class.
  * </p>
  * <p>
- * This class is used by {@link PropertyUtilsBean}. When accessing bean properties via
- * reflection information about the properties available and their types and access
- * methods must be present. {@code PropertyUtilsBean} stores this information in a cache
- * so that it can be accessed quickly. The cache stores instances of this class.
+ * This class is used by {@link PropertyUtilsBean}. When accessing bean
+ * properties via reflection information about the properties available and
+ * their types and access methods must be present. {@code PropertyUtilsBean}
+ * stores this information in a cache so that it can be accessed quickly. The
+ * cache stores instances of this class.
  * </p>
  * <p>
- * This class mainly stores information about the properties of a bean class. Per default,
- * this is contained in {@code PropertyDescriptor} objects. Some additional information
- * required by the {@code BeanUtils} library is also stored here.
+ * This class mainly stores information about the properties of a bean class.
+ * Per default, this is contained in {@code PropertyDescriptor} objects. Some
+ * additional information required by the {@code BeanUtils} library is also
+ * stored here.
  * </p>
  *
  * @since 1.9.1
@@ -59,8 +61,9 @@ class BeanIntrospectionData {
     }
 
     /**
-     * Creates a new instance of {@code BeanIntrospectionData} and allows setting the map
-     * with write method names. This constructor is mainly used for testing purposes.
+     * Creates a new instance of {@code BeanIntrospectionData} and allows setting
+     * the map with write method names. This constructor is mainly used for testing
+     * purposes.
      *
      * @param descs the array with the descriptors of the available properties
      * @param writeMethNames the map with the names of write methods
@@ -80,8 +83,8 @@ class BeanIntrospectionData {
     }
 
     /**
-     * Returns the {@code PropertyDescriptor} for the property with the specified name. If
-     * this property is unknown, result is <b>null</b>.
+     * Returns the {@code PropertyDescriptor} for the property with the specified
+     * name. If this property is unknown, result is <b>null</b>.
      *
      * @param name the name of the property in question
      * @return the {@code PropertyDescriptor} for this property or <b>null</b>
@@ -99,10 +102,10 @@ class BeanIntrospectionData {
      * Returns the write method for the property determined by the given
      * {@code PropertyDescriptor}. This information is normally available in the
      * descriptor object itself. However, at least by the ORACLE implementation, the
-     * method is stored as a {@code SoftReference}. If this reference has been freed by
-     * the GC, it may be the case that the method cannot be obtained again. Then,
-     * additional information stored in this object is necessary to obtain the method
-     * again.
+     * method is stored as a {@code SoftReference}. If this reference has been freed
+     * by the GC, it may be the case that the method cannot be obtained again. Then,
+     * additional information stored in this object is necessary to obtain the
+     * method again.
      *
      * @param beanCls the class of the affected bean
      * @param desc the {@code PropertyDescriptor} of the desired property
@@ -114,11 +117,12 @@ class BeanIntrospectionData {
             final String methodName = writeMethodNames.get(desc.getName());
             if (methodName != null) {
                 method = MethodUtils.getAccessibleMethod(beanCls, methodName,
-                        desc.getPropertyType());
+                            desc.getPropertyType());
                 if (method != null) {
                     try {
                         desc.setWriteMethod(method);
-                    } catch (final IntrospectionException e) {
+                    }
+                    catch (final IntrospectionException e) {
                         // ignore, in this case the method is not cached
                     }
                 }
@@ -130,8 +134,8 @@ class BeanIntrospectionData {
 
     /**
      * Initializes the map with the names of the write methods for the supported
-     * properties. The method names - if defined - need to be stored separately because
-     * they may get lost when the GC claims soft references used by the
+     * properties. The method names - if defined - need to be stored separately
+     * because they may get lost when the GC claims soft references used by the
      * {@code PropertyDescriptor} objects.
      *
      * @param descs the array with the descriptors of the available properties

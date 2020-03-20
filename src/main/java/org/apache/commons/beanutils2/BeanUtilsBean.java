@@ -33,12 +33,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>JavaBean property population methods.</p>
- *
- * <p>This class provides implementations for the utility methods in
- * {@link BeanUtils}.
- * Different instances can be used to isolate caches between classloaders
- * and to vary the value converters registered.</p>
+ * <p>
+ * JavaBean property population methods.
+ * </p>
+ * <p>
+ * This class provides implementations for the utility methods in
+ * {@link BeanUtils}. Different instances can be used to isolate caches between
+ * classloaders and to vary the value converters registered.
+ * </p>
  *
  * @see BeanUtils
  * @since 1.7
@@ -46,24 +48,22 @@ import org.apache.commons.logging.LogFactory;
 
 public class BeanUtilsBean {
 
-
-
     /**
      * Contains {@code BeanUtilsBean} instances indexed by context classloader.
      */
-    private static final ContextClassLoaderLocal<BeanUtilsBean>
-            BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<BeanUtilsBean>() {
-                        // Creates the default instance used when the context classloader is unavailable
-                        @Override
-                        protected BeanUtilsBean initialValue() {
-                            return new BeanUtilsBean();
-                        }
-                    };
+    private static final ContextClassLoaderLocal<BeanUtilsBean> BEANS_BY_CLASSLOADER = new ContextClassLoaderLocal<BeanUtilsBean>() {
+        // Creates the default instance used when the context classloader is unavailable
+        @Override
+        protected BeanUtilsBean initialValue() {
+            return new BeanUtilsBean();
+        }
+    };
 
     /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
-     * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container.
+     * This is a pseudo-singleton - an single instance is provided per (thread)
+     * context classloader. This mechanism provides isolation for web apps deployed
+     * in the same container.
      *
      * @return The (pseudo-singleton) BeanUtils bean instance
      */
@@ -73,16 +73,15 @@ public class BeanUtilsBean {
 
     /**
      * Sets the instance which provides the functionality for {@link BeanUtils}.
-     * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
-     * This mechanism provides isolation for web apps deployed in the same container.
+     * This is a pseudo-singleton - an single instance is provided per (thread)
+     * context classloader. This mechanism provides isolation for web apps deployed
+     * in the same container.
      *
      * @param newInstance The (pseudo-singleton) BeanUtils bean instance
      */
     public static void setInstance(final BeanUtilsBean newInstance) {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
-
-
 
     /**
      * Logging for this instance
@@ -92,29 +91,32 @@ public class BeanUtilsBean {
     /** Used to perform conversions between object types when setting properties */
     private final ConvertUtilsBean convertUtilsBean;
 
-    /** Used to access properties*/
+    /** Used to access properties */
     private final PropertyUtilsBean propertyUtilsBean;
 
-    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
+    /**
+     * A reference to Throwable's initCause method, or null if it's not there in
+     * this JVM
+     */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
-
-
     /**
-     * <p>Constructs an instance using new property
-     * and conversion instances.</p>
+     * <p>
+     * Constructs an instance using new property and conversion instances.
+     * </p>
      */
     public BeanUtilsBean() {
         this(new ConvertUtilsBean(), new PropertyUtilsBean());
     }
 
     /**
-     * <p>Constructs an instance using given conversion instances
-     * and new {@link PropertyUtilsBean} instance.</p>
+     * <p>
+     * Constructs an instance using given conversion instances and new
+     * {@link PropertyUtilsBean} instance.
+     * </p>
      *
-     * @param convertUtilsBean use this {@code ConvertUtilsBean}
-     * to perform conversions from one object to another
-     *
+     * @param convertUtilsBean use this {@code ConvertUtilsBean} to perform
+     *            conversions from one object to another
      * @since 1.8.0
      */
     public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean) {
@@ -122,27 +124,28 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Constructs an instance using given property and conversion instances.</p>
+     * <p>
+     * Constructs an instance using given property and conversion instances.
+     * </p>
      *
-     * @param convertUtilsBean use this {@code ConvertUtilsBean}
-     * to perform conversions from one object to another
-     * @param propertyUtilsBean use this {@code PropertyUtilsBean}
-     * to access properties
+     * @param convertUtilsBean use this {@code ConvertUtilsBean} to perform
+     *            conversions from one object to another
+     * @param propertyUtilsBean use this {@code PropertyUtilsBean} to access
+     *            properties
      */
     public BeanUtilsBean(
-                            final ConvertUtilsBean convertUtilsBean,
-                            final PropertyUtilsBean propertyUtilsBean) {
+                final ConvertUtilsBean convertUtilsBean,
+                final PropertyUtilsBean propertyUtilsBean) {
 
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
     }
 
-
-
     /**
-     * <p>Clone a bean based on the available property getters and setters,
-     * even if the bean class itself does not implement Cloneable.</p>
-     *
+     * <p>
+     * Clone a bean based on the available property getters and setters, even if the
+     * bean class itself does not implement Cloneable.
+     * </p>
      * <p>
      * <strong>Note:</strong> this method creates a <strong>shallow</strong> clone.
      * In other words, any objects referred to by the bean are shared with the clone
@@ -151,19 +154,18 @@ public class BeanUtilsBean {
      *
      * @param bean Bean to be cloned
      * @return the cloned bean
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InstantiationException if a new instance of the bean's
-     *  class cannot be instantiated
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InstantiationException if a new instance of the bean's class cannot
+     *             be instantiated
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public Object cloneBean(final Object bean)
-            throws IllegalAccessException, InstantiationException,
-            InvocationTargetException, NoSuchMethodException {
+                throws IllegalAccessException, InstantiationException,
+                InvocationTargetException, NoSuchMethodException {
 
         if (log.isDebugEnabled()) {
             log.debug("Cloning bean: " + bean.getClass().getName());
@@ -180,73 +182,75 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Copy property values from the origin bean to the destination bean
-     * for all cases where the property names are the same.  For each
-     * property, a conversion is attempted as necessary.  All combinations of
-     * standard JavaBeans and DynaBeans as origin and destination are
-     * supported.  Properties that exist in the origin bean, but do not exist
-     * in the destination bean (or are read-only in the destination bean) are
-     * silently ignored.</p>
-     *
-     * <p>If the origin "bean" is actually a {@code Map}, it is assumed
-     * to contain String-valued <strong>simple</strong> property names as the keys, pointing at
-     * the corresponding property values that will be converted (if necessary)
-     * and set in the destination bean. <strong>Note</strong> that this method
-     * is intended to perform a "shallow copy" of the properties and so complex
-     * properties (for example, nested ones) will not be copied.</p>
-     *
-     * <p>This method differs from {@code populate()}, which
-     * was primarily designed for populating JavaBeans from the map of request
-     * parameters retrieved on an HTTP request, is that no scalar-&gt;indexed
-     * or indexed-&gt;scalar manipulations are performed.  If the origin property
-     * is indexed, the destination property must be also.</p>
-     *
-     * <p>If you know that no type conversions are required, the
-     * {@code copyProperties()} method in {@link PropertyUtils} will
-     * execute faster than this method.</p>
-     *
-     * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
-     * have getter and setter methods for the underlying array or Map are not
-     * copied by this method.</p>
+     * <p>
+     * Copy property values from the origin bean to the destination bean for all
+     * cases where the property names are the same. For each property, a conversion
+     * is attempted as necessary. All combinations of standard JavaBeans and
+     * DynaBeans as origin and destination are supported. Properties that exist in
+     * the origin bean, but do not exist in the destination bean (or are read-only
+     * in the destination bean) are silently ignored.
+     * </p>
+     * <p>
+     * If the origin "bean" is actually a {@code Map}, it is assumed to contain
+     * String-valued <strong>simple</strong> property names as the keys, pointing at
+     * the corresponding property values that will be converted (if necessary) and
+     * set in the destination bean. <strong>Note</strong> that this method is
+     * intended to perform a "shallow copy" of the properties and so complex
+     * properties (for example, nested ones) will not be copied.
+     * </p>
+     * <p>
+     * This method differs from {@code populate()}, which was primarily designed for
+     * populating JavaBeans from the map of request parameters retrieved on an HTTP
+     * request, is that no scalar-&gt;indexed or indexed-&gt;scalar manipulations
+     * are performed. If the origin property is indexed, the destination property
+     * must be also.
+     * </p>
+     * <p>
+     * If you know that no type conversions are required, the
+     * {@code copyProperties()} method in {@link PropertyUtils} will execute faster
+     * than this method.
+     * </p>
+     * <p>
+     * <strong>FIXME</strong> - Indexed and mapped properties that do not have
+     * getter and setter methods for the underlying array or Map are not copied by
+     * this method.
+     * </p>
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
      * @throws IllegalArgumentException if the {@code dest} or
-     *  {@code orig</code> argument is null or if the <code>dest}
-     *  property type is different from the source type and the relevant
-     *  converter has not been registered.
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
+     *             {@code orig</code> argument is null or if the <code>dest}
+     *             property type is different from the source type and the relevant
+     *             converter has not been registered.
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
      */
     public void copyProperties(final Object dest, final Object orig)
-        throws IllegalAccessException, InvocationTargetException {
+                throws IllegalAccessException, InvocationTargetException {
 
         // Validate existence of the specified beans
         if (dest == null) {
-            throw new IllegalArgumentException
-                    ("No destination bean specified");
+            throw new IllegalArgumentException("No destination bean specified");
         }
         if (orig == null) {
             throw new IllegalArgumentException("No origin bean specified");
         }
         if (log.isDebugEnabled()) {
             log.debug("BeanUtils.copyProperties(" + dest + ", " +
-                      orig + ")");
+                        orig + ")");
         }
 
         // Copy the properties, converting as necessary
         if (orig instanceof DynaBean) {
-            final DynaProperty[] origDescriptors =
-                ((DynaBean) orig).getDynaClass().getDynaProperties();
+            final DynaProperty[] origDescriptors = ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (final DynaProperty origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 // Need to check isReadable() for WrapDynaBean
                 // (see Jira issue# BEANUTILS-61)
                 if (getPropertyUtils().isReadable(orig, name) &&
-                    getPropertyUtils().isWriteable(dest, name)) {
+                            getPropertyUtils().isWriteable(dest, name)) {
                     final Object value = ((DynaBean) orig).get(name);
                     copyProperty(dest, name, value);
                 }
@@ -263,20 +267,19 @@ public class BeanUtilsBean {
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
-            final PropertyDescriptor[] origDescriptors =
-                getPropertyUtils().getPropertyDescriptors(orig);
+            final PropertyDescriptor[] origDescriptors = getPropertyUtils().getPropertyDescriptors(orig);
             for (final PropertyDescriptor origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if ("class".equals(name)) {
                     continue; // No point in trying to set an object's class
                 }
                 if (getPropertyUtils().isReadable(orig, name) &&
-                    getPropertyUtils().isWriteable(dest, name)) {
+                            getPropertyUtils().isWriteable(dest, name)) {
                     try {
-                        final Object value =
-                            getPropertyUtils().getSimpleProperty(orig, name);
+                        final Object value = getPropertyUtils().getSimpleProperty(orig, name);
                         copyProperty(dest, name, value);
-                    } catch (final NoSuchMethodException e) {
+                    }
+                    catch (final NoSuchMethodException e) {
                         // Should not happen
                     }
                 }
@@ -286,38 +289,36 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Copy the specified property value to the specified destination bean,
-     * performing any type conversion that is required.  If the specified
-     * bean does not have a property of the specified name, or the property
-     * is read only on the destination bean, return without
-     * doing anything.  If you have custom destination property types, register
-     * {@link Converter}s for them by calling the {@code register()}
-     * method of {@link ConvertUtils}.</p>
-     *
-     * <p><strong>IMPLEMENTATION RESTRICTIONS</strong>:</p>
+     * <p>
+     * Copy the specified property value to the specified destination bean,
+     * performing any type conversion that is required. If the specified bean does
+     * not have a property of the specified name, or the property is read only on
+     * the destination bean, return without doing anything. If you have custom
+     * destination property types, register {@link Converter}s for them by calling
+     * the {@code register()} method of {@link ConvertUtils}.
+     * </p>
+     * <p>
+     * <strong>IMPLEMENTATION RESTRICTIONS</strong>:
+     * </p>
      * <ul>
-     * <li>Does not support destination properties that are indexed,
-     *     but only an indexed setter (as opposed to an array setter)
-     *     is available.</li>
-     * <li>Does not support destination properties that are mapped,
-     *     but only a keyed setter (as opposed to a Map setter)
-     *     is available.</li>
-     * <li>The desired property type of a mapped setter cannot be
-     *     determined (since Maps support any data type), so no conversion
-     *     will be performed.</li>
+     * <li>Does not support destination properties that are indexed, but only an
+     * indexed setter (as opposed to an array setter) is available.</li>
+     * <li>Does not support destination properties that are mapped, but only a keyed
+     * setter (as opposed to a Map setter) is available.</li>
+     * <li>The desired property type of a mapped setter cannot be determined (since
+     * Maps support any data type), so no conversion will be performed.</li>
      * </ul>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
      */
     public void copyProperty(final Object bean, String name, Object value)
-        throws IllegalAccessException, InvocationTargetException {
+                throws IllegalAccessException, InvocationTargetException {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
@@ -354,7 +355,8 @@ public class BeanUtilsBean {
             try {
                 target = getPropertyUtils().getProperty(target, resolver.next(name));
                 name = resolver.remove(name);
-            } catch (final NoSuchMethodException e) {
+            }
+            catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -365,9 +367,9 @@ public class BeanUtilsBean {
 
         // Declare local variables we will require
         final String propName = resolver.getProperty(name); // Simple name of target property
-        Class<?> type = null;                         // Java type of target property
-        final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
-        final String key = resolver.getKey(name);           // Mapped key value (if any)
+        Class<?> type = null; // Java type of target property
+        final int index = resolver.getIndex(name); // Indexed subscript value (if any)
+        final String key = resolver.getKey(name); // Mapped key value (if any)
 
         // Calculate the target property type
         if (target instanceof DynaBean) {
@@ -380,12 +382,12 @@ public class BeanUtilsBean {
         } else {
             PropertyDescriptor descriptor = null;
             try {
-                descriptor =
-                    getPropertyUtils().getPropertyDescriptor(target, name);
+                descriptor = getPropertyUtils().getPropertyDescriptor(target, name);
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            } catch (final NoSuchMethodException e) {
+            }
+            catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             type = descriptor.getPropertyType();
@@ -393,64 +395,69 @@ public class BeanUtilsBean {
                 // Most likely an indexed setter on a POJB only
                 if (log.isTraceEnabled()) {
                     log.trace("    target type for property '" +
-                              propName + "' is null, so skipping ths setter");
+                                propName + "' is null, so skipping ths setter");
                 }
                 return;
             }
         }
         if (log.isTraceEnabled()) {
             log.trace("    target propName=" + propName + ", type=" +
-                      type + ", index=" + index + ", key=" + key);
+                        type + ", index=" + index + ", key=" + key);
         }
 
         // Convert the specified value to the required type and store it
-        if (index >= 0) {                    // Destination must be indexed
+        if (index >= 0) { // Destination must be indexed
             value = convertForCopy(value, type.getComponentType());
             try {
                 getPropertyUtils().setIndexedProperty(target, propName,
-                                                 index, value);
-            } catch (final NoSuchMethodException e) {
-                throw new InvocationTargetException
-                    (e, "Cannot set " + propName);
+                            index, value);
             }
-        } else if (key != null) {            // Destination must be mapped
+            catch (final NoSuchMethodException e) {
+                throw new InvocationTargetException(e, "Cannot set " + propName);
+            }
+        } else if (key != null) { // Destination must be mapped
             // Maps do not know what the preferred data type is,
             // so perform no conversions at all
             // FIXME - should we create or support a TypedMap?
             try {
                 getPropertyUtils().setMappedProperty(target, propName,
-                                                key, value);
-            } catch (final NoSuchMethodException e) {
-                throw new InvocationTargetException
-                    (e, "Cannot set " + propName);
+                            key, value);
             }
-        } else {                             // Destination must be simple
+            catch (final NoSuchMethodException e) {
+                throw new InvocationTargetException(e, "Cannot set " + propName);
+            }
+        } else { // Destination must be simple
             value = convertForCopy(value, type);
             try {
                 getPropertyUtils().setSimpleProperty(target, propName, value);
-            } catch (final NoSuchMethodException e) {
-                throw new InvocationTargetException
-                    (e, "Cannot set " + propName);
+            }
+            catch (final NoSuchMethodException e) {
+                throw new InvocationTargetException(e, "Cannot set " + propName);
             }
         }
 
     }
 
     /**
-     * <p>Return the entire set of properties for which the specified bean
-     * provides a read method. This map contains the to {@code String}
-     * converted property values for all properties for which a read method
-     * is provided (i.e. where the getReadMethod() returns non-null).</p>
-     *
-     * <p>This map can be fed back to a call to
-     * {@code BeanUtils.populate()} to re-constitute the same set of
-     * properties, modulo differences for read-only and write-only
-     * properties, but only if there are no indexed properties.</p>
-     *
-     * <p><strong>Warning:</strong> if any of the bean property implementations
-     * contain (directly or indirectly) a call to this method then
-     * a stack overflow may result. For example:</p>
-     * <pre><code>
+     * <p>
+     * Return the entire set of properties for which the specified bean provides a
+     * read method. This map contains the to {@code String} converted property
+     * values for all properties for which a read method is provided (i.e. where the
+     * getReadMethod() returns non-null).
+     * </p>
+     * <p>
+     * This map can be fed back to a call to {@code BeanUtils.populate()} to
+     * re-constitute the same set of properties, modulo differences for read-only
+     * and write-only properties, but only if there are no indexed properties.
+     * </p>
+     * <p>
+     * <strong>Warning:</strong> if any of the bean property implementations contain
+     * (directly or indirectly) a call to this method then a stack overflow may
+     * result. For example:
+     * </p>
+     * 
+     * <pre>
+     * <code>
      * class MyBean
      * {
      *    public Map getParameterMap()
@@ -458,28 +465,29 @@ public class BeanUtilsBean {
      *         BeanUtils.describe(this);
      *    }
      * }
-     * </code></pre>
+     * </code>
+     * </pre>
      * <p>
-     * will result in an infinite regression when {@code getParametersMap}
-     * is called. It is recommended that such methods are given alternative
-     * names (for example, {@code parametersMap}).
+     * will result in an infinite regression when {@code getParametersMap} is
+     * called. It is recommended that such methods are given alternative names (for
+     * example, {@code parametersMap}).
      * </p>
+     * 
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public Map<String, String> describe(final Object bean)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         if (bean == null) {
-        //            return (Collections.EMPTY_MAP);
+            // return (Collections.EMPTY_MAP);
             return new java.util.HashMap<>();
         }
 
@@ -489,15 +497,13 @@ public class BeanUtilsBean {
 
         final Map<String, String> description = new HashMap<>();
         if (bean instanceof DynaBean) {
-            final DynaProperty[] descriptors =
-                ((DynaBean) bean).getDynaClass().getDynaProperties();
+            final DynaProperty[] descriptors = ((DynaBean) bean).getDynaClass().getDynaProperties();
             for (final DynaProperty descriptor : descriptors) {
                 final String name = descriptor.getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
-            final PropertyDescriptor[] descriptors =
-                getPropertyUtils().getPropertyDescriptors(bean);
+            final PropertyDescriptor[] descriptors = getPropertyUtils().getPropertyDescriptors(bean);
             final Class<?> clazz = bean.getClass();
             for (final PropertyDescriptor descriptor : descriptors) {
                 final String name = descriptor.getName();
@@ -511,23 +517,22 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified array property of the specified
-     * bean, as a String array.
+     * Return the value of the specified array property of the specified bean, as a
+     * String array.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
      * @return The array property value
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String[] getArrayProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
@@ -565,27 +570,24 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String.  The zero-relative index of the
-     * required value must be included (in square brackets) as a suffix to
-     * the property name, or {@code IllegalArgumentException} will be
-     * thrown.
+     * Return the value of the specified indexed property of the specified bean, as
+     * a String. The zero-relative index of the required value must be included (in
+     * square brackets) as a suffix to the property name, or
+     * {@code IllegalArgumentException} will be thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name {@code propertyname[index]} of the property value
-     *  to be extracted
+     * @param name {@code propertyname[index]} of the property value to be extracted
      * @return The indexed property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getIndexedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name);
         return getConvertUtils().convert(value);
@@ -593,26 +595,25 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String.  The index is specified as a method parameter and
-     * must *not* be included in the property name expression
+     * Return the value of the specified indexed property of the specified bean, as
+     * a String. The index is specified as a method parameter and must *not* be
+     * included in the property name expression
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param index Index of the property value to be extracted
      * @return The indexed property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getIndexedProperty(final Object bean,
-                                            final String name, final int index)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final int index)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
         return getConvertUtils().convert(value);
@@ -620,27 +621,24 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
-     * bean, as a String.  The String-valued key of the required value
-     * must be included (in parentheses) as a suffix to
-     * the property name, or {@code IllegalArgumentException} will be
-     * thrown.
+     * Return the value of the specified indexed property of the specified bean, as
+     * a String. The String-valued key of the required value must be included (in
+     * parentheses) as a suffix to the property name, or
+     * {@code IllegalArgumentException} will be thrown.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name {@code propertyname(index)} of the property value
-     *  to be extracted
+     * @param name {@code propertyname(index)} of the property value to be extracted
      * @return The mapped property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getMappedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name);
         return getConvertUtils().convert(value);
@@ -648,26 +646,25 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped property of the specified
-     * bean, as a String.  The key is specified as a method parameter and
-     * must *not* be included in the property name expression
+     * Return the value of the specified mapped property of the specified bean, as a
+     * String. The key is specified as a method parameter and must *not* be included
+     * in the property name expression
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
      * @param key Lookup key of the property value to be extracted
      * @return The mapped property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getMappedProperty(final Object bean,
-                                           final String name, final String key)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final String key)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
         return getConvertUtils().convert(value);
@@ -675,25 +672,24 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the (possibly nested) property of the specified
-     * name, for the specified bean, as a String.
+     * Return the value of the (possibly nested) property of the specified name, for
+     * the specified bean, as a String.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
      * @return The nested property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws IllegalArgumentException if a nested reference to a
-     *  property returns null
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws IllegalArgumentException if a nested reference to a property returns
+     *             null
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getNestedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getNestedProperty(bean, name);
         return getConvertUtils().convert(value);
@@ -701,47 +697,45 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified property of the specified bean,
-     * no matter which property reference format is used, as a String.
+     * Return the value of the specified property of the specified bean, no matter
+     * which property reference format is used, as a String.
      *
      * @param bean Bean whose property is to be extracted
-     * @param name Possibly indexed and/or nested name of the property
-     *  to be extracted
+     * @param name Possibly indexed and/or nested name of the property to be
+     *            extracted
      * @return The property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return getNestedProperty(bean, name);
 
     }
 
     /**
-     * Return the value of the specified simple property of the specified
-     * bean, converted to a String.
+     * Return the value of the specified simple property of the specified bean,
+     * converted to a String.
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
      * @return The property's value, converted to a String
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
+     * @throws NoSuchMethodException if an accessor method for this property cannot
+     *             be found
      */
     public String getSimpleProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getConvertUtils().convert(value);
@@ -749,42 +743,45 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Populate the JavaBeans properties of the specified bean, based on
-     * the specified name/value pairs.  This method uses Java reflection APIs
-     * to identify corresponding "property setter" method names, and deals
-     * with setter arguments of type {@code String</code>, <code>boolean},
-     * {@code int</code>, <code>long</code>, <code>float}, and
-     * {@code double}.  In addition, array setters for these types (or the
-     * corresponding primitive types) can also be identified.</p>
-     *
-     * <p>The particular setter method to be called for each property is
-     * determined using the usual JavaBeans introspection mechanisms.  Thus,
-     * you may identify custom setter methods using a BeanInfo class that is
-     * associated with the class of the bean itself.  If no such BeanInfo
-     * class is available, the standard method name conversion ("set" plus
-     * the capitalized name of the property in question) is used.</p>
-     *
-     * <p><strong>NOTE</strong>:  It is contrary to the JavaBeans Specification
-     * to have more than one setter method (with different argument
-     * signatures) for the same property.</p>
-     *
-     * <p><strong>WARNING</strong> - The logic of this method is customized
-     * for extracting String-based request parameters from an HTTP request.
-     * It is probably not what you want for general property copying with
-     * type conversion.  For that purpose, check out the
-     * {@code copyProperties()} method instead.</p>
+     * <p>
+     * Populate the JavaBeans properties of the specified bean, based on the
+     * specified name/value pairs. This method uses Java reflection APIs to identify
+     * corresponding "property setter" method names, and deals with setter arguments
+     * of type {@code String</code>, <code>boolean},
+     * {@code int</code>, <code>long</code>, <code>float}, and {@code double}. In
+     * addition, array setters for these types (or the corresponding primitive
+     * types) can also be identified.
+     * </p>
+     * <p>
+     * The particular setter method to be called for each property is determined
+     * using the usual JavaBeans introspection mechanisms. Thus, you may identify
+     * custom setter methods using a BeanInfo class that is associated with the
+     * class of the bean itself. If no such BeanInfo class is available, the
+     * standard method name conversion ("set" plus the capitalized name of the
+     * property in question) is used.
+     * </p>
+     * <p>
+     * <strong>NOTE</strong>: It is contrary to the JavaBeans Specification to have
+     * more than one setter method (with different argument signatures) for the same
+     * property.
+     * </p>
+     * <p>
+     * <strong>WARNING</strong> - The logic of this method is customized for
+     * extracting String-based request parameters from an HTTP request. It is
+     * probably not what you want for general property copying with type conversion.
+     * For that purpose, check out the {@code copyProperties()} method instead.
+     * </p>
      *
      * @param bean JavaBean whose properties are being populated
-     * @param properties Map keyed by property name, with the
-     *  corresponding (String or String[]) value(s) to be set
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @param properties Map keyed by property name, with the corresponding (String
+     *            or String[]) value(s) to be set
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
      */
     public void populate(final Object bean, final Map<String, ? extends Object> properties)
-        throws IllegalAccessException, InvocationTargetException {
+                throws IllegalAccessException, InvocationTargetException {
 
         // Do nothing unless both arguments have been specified
         if (bean == null || properties == null) {
@@ -792,11 +789,11 @@ public class BeanUtilsBean {
         }
         if (log.isDebugEnabled()) {
             log.debug("BeanUtils.populate(" + bean + ", " +
-                    properties + ")");
+                        properties + ")");
         }
 
         // Loop through the property name/value pairs to be set
-        for(final Map.Entry<String, ? extends Object> entry : properties.entrySet()) {
+        for (final Map.Entry<String, ? extends Object> entry : properties.entrySet()) {
             // Identify the property name and value(s) to be assigned
             final String name = entry.getKey();
             if (name == null) {
@@ -811,37 +808,41 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Set the specified property value, performing type conversions as
-     * required to conform to the type of the destination property.</p>
-     *
-     * <p>If the property is read only then the method returns
-     * without throwing an exception.</p>
-     *
-     * <p>If {@code null} is passed into a property expecting a primitive value,
-     * then this will be converted as if it were a {@code null} string.</p>
-     *
-     * <p><strong>WARNING</strong> - The logic of this method is customized
-     * to meet the needs of {@code populate()}, and is probably not what
-     * you want for general property copying with type conversion.  For that
-     * purpose, check out the {@code copyProperty()} method instead.</p>
-     *
-     * <p><strong>WARNING</strong> - PLEASE do not modify the behavior of this
-     * method without consulting with the Struts developer community.  There
-     * are some subtleties to its functionality that are not documented in the
-     * Javadoc description above, yet are vital to the way that Struts utilizes
-     * this method.</p>
+     * <p>
+     * Set the specified property value, performing type conversions as required to
+     * conform to the type of the destination property.
+     * </p>
+     * <p>
+     * If the property is read only then the method returns without throwing an
+     * exception.
+     * </p>
+     * <p>
+     * If {@code null} is passed into a property expecting a primitive value, then
+     * this will be converted as if it were a {@code null} string.
+     * </p>
+     * <p>
+     * <strong>WARNING</strong> - The logic of this method is customized to meet the
+     * needs of {@code populate()}, and is probably not what you want for general
+     * property copying with type conversion. For that purpose, check out the
+     * {@code copyProperty()} method instead.
+     * </p>
+     * <p>
+     * <strong>WARNING</strong> - PLEASE do not modify the behavior of this method
+     * without consulting with the Struts developer community. There are some
+     * subtleties to its functionality that are not documented in the Javadoc
+     * description above, yet are vital to the way that Struts utilizes this method.
+     * </p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
      * @param value Value to be set
-     *
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
+     * @throws IllegalAccessException if the caller does not have access to the
+     *             property accessor method
+     * @throws InvocationTargetException if the property accessor method throws an
+     *             exception
      */
     public void setProperty(final Object bean, String name, final Object value)
-        throws IllegalAccessException, InvocationTargetException {
+                throws IllegalAccessException, InvocationTargetException {
 
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
@@ -881,7 +882,8 @@ public class BeanUtilsBean {
                     return;
                 }
                 name = resolver.remove(name);
-            } catch (final NoSuchMethodException e) {
+            }
+            catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
         }
@@ -892,9 +894,9 @@ public class BeanUtilsBean {
 
         // Declare local variables we will require
         final String propName = resolver.getProperty(name); // Simple name of target property
-        Class<?> type = null;                         // Java type of target property
-        final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
-        final String key = resolver.getKey(name);           // Mapped key value (if any)
+        Class<?> type = null; // Java type of target property
+        final int index = resolver.getIndex(name); // Indexed subscript value (if any)
+        final String key = resolver.getKey(name); // Mapped key value (if any)
 
         // Calculate the property type
         if (target instanceof DynaBean) {
@@ -905,7 +907,7 @@ public class BeanUtilsBean {
             }
             type = dynaPropertyType(dynaProperty, value);
             if (index >= 0 && List.class.isAssignableFrom(type)) {
-            	type = Object.class;
+                type = Object.class;
             }
         } else if (target instanceof Map) {
             type = Object.class;
@@ -914,12 +916,12 @@ public class BeanUtilsBean {
         } else {
             PropertyDescriptor descriptor = null;
             try {
-                descriptor =
-                    getPropertyUtils().getPropertyDescriptor(target, name);
+                descriptor = getPropertyUtils().getPropertyDescriptor(target, name);
                 if (descriptor == null) {
                     return; // Skip this property setter
                 }
-            } catch (final NoSuchMethodException e) {
+            }
+            catch (final NoSuchMethodException e) {
                 return; // Skip this property setter
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
@@ -929,8 +931,7 @@ public class BeanUtilsBean {
                     }
                     return; // Read-only, skip this property setter
                 }
-                type = ((MappedPropertyDescriptor) descriptor).
-                    getMappedPropertyType();
+                type = ((MappedPropertyDescriptor) descriptor).getMappedPropertyType();
             } else if (index >= 0 && descriptor instanceof IndexedPropertyDescriptor) {
                 if (((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod() == null) {
                     if (log.isDebugEnabled()) {
@@ -938,8 +939,7 @@ public class BeanUtilsBean {
                     }
                     return; // Read-only, skip this property setter
                 }
-                type = ((IndexedPropertyDescriptor) descriptor).
-                    getIndexedPropertyType();
+                type = ((IndexedPropertyDescriptor) descriptor).getIndexedPropertyType();
             } else if (index >= 0 && List.class.isAssignableFrom(descriptor.getPropertyType())) {
                 type = Object.class;
             } else if (key != null) {
@@ -975,22 +975,22 @@ public class BeanUtilsBean {
             } else {
                 newValue = convert(value, type);
             }
-        } else if (type.isArray()) {         // Indexed value into array
+        } else if (type.isArray()) { // Indexed value into array
             if (value instanceof String || value == null) {
                 newValue = getConvertUtils().convert((String) value,
-                                                type.getComponentType());
+                            type.getComponentType());
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
-                                                type.getComponentType());
+                            type.getComponentType());
             } else {
                 newValue = convert(value, type.getComponentType());
             }
-        } else {                             // Value into scalar
+        } else { // Value into scalar
             if (value instanceof String) {
                 newValue = getConvertUtils().convert((String) value, type);
             } else if (value instanceof String[]) {
                 newValue = getConvertUtils().convert(((String[]) value)[0],
-                                                type);
+                            type);
             } else {
                 newValue = convert(value, type);
             }
@@ -998,10 +998,10 @@ public class BeanUtilsBean {
 
         // Invoke the setter method
         try {
-          getPropertyUtils().setProperty(target, name, newValue);
-        } catch (final NoSuchMethodException e) {
-            throw new InvocationTargetException
-                (e, "Cannot set " + propName);
+            getPropertyUtils().setProperty(target, name, newValue);
+        }
+        catch (final NoSuchMethodException e) {
+            throw new InvocationTargetException(e, "Cannot set " + propName);
         }
 
     }
@@ -1025,11 +1025,12 @@ public class BeanUtilsBean {
     }
 
     /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     * If we're running on JDK 1.4 or later, initialize the cause for the given
+     * throwable.
      *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
+     * @param throwable The throwable.
+     * @param cause The cause of the throwable.
+     * @return true if the cause was initialized, otherwise false.
      * @since 1.8.0
      */
     public boolean initCause(final Throwable throwable, final Throwable cause) {
@@ -1037,7 +1038,8 @@ public class BeanUtilsBean {
             try {
                 INIT_CAUSE_METHOD.invoke(throwable, cause);
                 return true;
-            } catch (final Throwable e) {
+            }
+            catch (final Throwable e) {
                 return false; // can't initialize cause
             }
         }
@@ -1045,13 +1047,13 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Convert the value to an object of the specified class (if
-     * possible).</p>
+     * <p>
+     * Convert the value to an object of the specified class (if possible).
+     * </p>
      *
      * @param value Value to be converted (may be null)
      * @param type Class of the value to be converted to
      * @return The converted value
-     *
      * @throws ConversionException if thrown by an underlying Converter
      * @since 1.8.0
      */
@@ -1065,9 +1067,10 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Performs a type conversion of a property value before it is copied to a target
-     * bean. This method delegates to {@link #convert(Object, Class)}, but <b>null</b>
-     * values are not converted. This causes <b>null</b> values to be copied verbatim.
+     * Performs a type conversion of a property value before it is copied to a
+     * target bean. This method delegates to {@link #convert(Object, Class)}, but
+     * <b>null</b> values are not converted. This causes <b>null</b> values to be
+     * copied verbatim.
      *
      * @param value the value to be converted and copied
      * @param type the target type of the conversion
@@ -1079,24 +1082,25 @@ public class BeanUtilsBean {
 
     /**
      * Returns a <code>Method<code> allowing access to
-     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or {@code null} if the method
-     * does not exist.
+     * {@link Throwable#initCause(Throwable)} method of {@link Throwable}, or
+     * {@code null} if the method does not exist.
      *
-     * @return A {@code Method<code> for <code>Throwable.initCause}, or
-     * {@code null} if unavailable.
+     * @return A {@code Method<code> for <code>Throwable.initCause}, or {@code null}
+     *         if unavailable.
      */
     private static Method getInitCauseMethod() {
         try {
-            final Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
+            final Class<?>[] paramsClasses = new Class<?>[] {Throwable.class};
             return Throwable.class.getMethod("initCause", paramsClasses);
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Throwable does not have initCause() method in JDK 1.3");
             }
             return null;
-        } catch (final Throwable e) {
+        }
+        catch (final Throwable e) {
             final Log log = LogFactory.getLog(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Error getting the Throwable initCause() method", e);
@@ -1106,15 +1110,15 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Determines the type of a {@code DynaProperty}. Here a special treatment
-     * is needed for mapped properties.
+     * Determines the type of a {@code DynaProperty}. Here a special treatment is
+     * needed for mapped properties.
      *
      * @param dynaProperty the property descriptor
      * @param value the value object to be set for this property
      * @return the type of this property
      */
     private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
-            final Object value) {
+                final Object value) {
         if (!dynaProperty.isMapped()) {
             return dynaProperty.getType();
         }

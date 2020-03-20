@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 /**
  * Test Interface
- *
  */
 
 public interface MappedPropertyTestInterface {

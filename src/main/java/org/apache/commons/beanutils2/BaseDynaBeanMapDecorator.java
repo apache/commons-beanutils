@@ -25,25 +25,28 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>A base class for decorators providing {@code Map} behavior on
- * {@link DynaBean}s.</p>
- *
- * <p>The motivation for this implementation is to provide access to {@link DynaBean}
- *    properties in technologies that are unaware of BeanUtils and {@link DynaBean}s -
- *    such as the expression languages of JSTL and JSF.</p>
- *
- * <p>This rather technical base class implements the methods of the
- *    {@code Map} interface on top of a {@code DynaBean}. It was introduced
- *    to handle generic parameters in a meaningful way without breaking
- *    backwards compatibility of the 1.x {@code DynaBeanMapDecorator} class: A
- *    map wrapping a {@code DynaBean} should be of type {@code Map<String, Object>}.
- *    However, when using these generic parameters in {@code DynaBeanMapDecorator}
- *    this would be an incompatible change (as method signatures would have to
- *    be adapted). To solve this problem, this generic base class is added
- *    which allows specifying the key type as parameter. This makes it easy to
- *    have a new subclass using the correct generic parameters while
- *    {@code DynaBeanMapDecorator} could still remain with compatible
- *    parameters.</p>
+ * <p>
+ * A base class for decorators providing {@code Map} behavior on
+ * {@link DynaBean}s.
+ * </p>
+ * <p>
+ * The motivation for this implementation is to provide access to
+ * {@link DynaBean} properties in technologies that are unaware of BeanUtils and
+ * {@link DynaBean}s - such as the expression languages of JSTL and JSF.
+ * </p>
+ * <p>
+ * This rather technical base class implements the methods of the {@code Map}
+ * interface on top of a {@code DynaBean}. It was introduced to handle generic
+ * parameters in a meaningful way without breaking backwards compatibility of
+ * the 1.x {@code DynaBeanMapDecorator} class: A map wrapping a {@code DynaBean}
+ * should be of type {@code Map<String, Object>}. However, when using these
+ * generic parameters in {@code DynaBeanMapDecorator} this would be an
+ * incompatible change (as method signatures would have to be adapted). To solve
+ * this problem, this generic base class is added which allows specifying the
+ * key type as parameter. This makes it easy to have a new subclass using the
+ * correct generic parameters while {@code DynaBeanMapDecorator} could still
+ * remain with compatible parameters.
+ * </p>
  *
  * @param <K> the type of the keys in the decorated map
  * @since BeanUtils 1.9.0
@@ -54,11 +57,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     private final boolean readOnly;
     private transient Set<K> keySet;
 
-
-
     /**
-     * Constructs a read only Map for the specified
-     * {@link DynaBean}.
+     * Constructs a read only Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
@@ -71,8 +71,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Construct a Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
-     * @param readOnly {@code true} if the Map is read only
-     * otherwise {@code false}
+     * @param readOnly {@code true} if the Map is read only otherwise {@code false}
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
      */
     public BaseDynaBeanMapDecorator(final DynaBean dynaBean, final boolean readOnly) {
@@ -83,21 +82,14 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         this.readOnly = readOnly;
     }
 
-
-
-
-
     /**
      * Indicate whether the Map is read only.
      *
-     * @return {@code true} if the Map is read only,
-     * otherwise {@code false}.
+     * @return {@code true} if the Map is read only, otherwise {@code false}.
      */
     public boolean isReadOnly() {
         return readOnly;
     }
-
-
 
     /**
      * clear() operation is not supported.
@@ -110,12 +102,12 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Indicate whether the {@link DynaBean} contains a specified
-     * value for one (or more) of its properties.
+     * Indicate whether the {@link DynaBean} contains a specified value for one (or
+     * more) of its properties.
      *
      * @param key The {@link DynaBean}'s property name
-     * @return {@code true} if one of the {@link DynaBean}'s
-     * properties contains a specified value.
+     * @return {@code true} if one of the {@link DynaBean}'s properties contains a
+     *         specified value.
      */
     @Override
     public boolean containsKey(final Object key) {
@@ -125,13 +117,11 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Indicates whether the decorated {@link DynaBean} contains
-     * a specified value.
+     * Indicates whether the decorated {@link DynaBean} contains a specified value.
      *
      * @param value The value to check for.
-     * @return {@code true} if one of the the {@link DynaBean}'s
-     * properties contains the specified value, otherwise
-     * {@code false}.
+     * @return {@code true} if one of the the {@link DynaBean}'s properties contains
+     *         the specified value, otherwise {@code false}.
      */
     @Override
     public boolean containsValue(final Object value) {
@@ -153,14 +143,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * <p>Returns the Set of the property/value mappings
-     * in the decorated {@link DynaBean}.</p>
+     * <p>
+     * Returns the Set of the property/value mappings in the decorated
+     * {@link DynaBean}.
+     * </p>
+     * <p>
+     * Each element in the Set is a {@code Map.Entry} type.
+     * </p>
      *
-     * <p>Each element in the Set is a {@code Map.Entry}
-     * type.</p>
-     *
-     * @return An unmodifiable set of the DynaBean
-     * property name/value pairs
+     * @return An unmodifiable set of the DynaBean property name/value pairs
      */
     @Override
     public Set<Map.Entry<K, Object>> entrySet() {
@@ -175,8 +166,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Return the value for the specified key from
-     * the decorated {@link DynaBean}.
+     * Return the value for the specified key from the decorated {@link DynaBean}.
      *
      * @param key The {@link DynaBean}'s property name
      * @return The value for the specified property.
@@ -187,11 +177,10 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Indicate whether the decorated {@link DynaBean} has
-     * any properties.
+     * Indicate whether the decorated {@link DynaBean} has any properties.
      *
-     * @return {@code true} if the {@link DynaBean} has
-     * no properties, otherwise {@code false}.
+     * @return {@code true} if the {@link DynaBean} has no properties, otherwise
+     *         {@code false}.
      */
     @Override
     public boolean isEmpty() {
@@ -199,15 +188,16 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * <p>Returns the Set of the property
-     * names in the decorated {@link DynaBean}.</p>
+     * <p>
+     * Returns the Set of the property names in the decorated {@link DynaBean}.
+     * </p>
+     * <p>
+     * <b>N.B.</b>For {@link DynaBean}s whose associated {@link DynaClass} is a
+     * {@link MutableDynaClass} a new Set is created every time, otherwise the Set
+     * is created only once and cached.
+     * </p>
      *
-     * <p><b>N.B.</b>For {@link DynaBean}s whose associated {@link DynaClass}
-     * is a {@link MutableDynaClass} a new Set is created every
-     * time, otherwise the Set is created only once and cached.</p>
-     *
-     * @return An unmodifiable set of the {@link DynaBean}s
-     * property names.
+     * @return An unmodifiable set of the {@link DynaBean}s property names.
      */
     @Override
     public Set<K> keySet() {
@@ -234,14 +224,12 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Set the value for the specified property in
-     * the decorated {@link DynaBean}.
+     * Set the value for the specified property in the decorated {@link DynaBean}.
      *
      * @param key The {@link DynaBean}'s property name
      * @param value The value for the specified property.
      * @return The previous property's value.
-     * @throws UnsupportedOperationException if
-     * {@code isReadOnly()} is true.
+     * @throws UnsupportedOperationException if {@code isReadOnly()} is true.
      */
     @Override
     public Object put(final K key, final Object value) {
@@ -258,8 +246,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Copy the contents of a Map to the decorated {@link DynaBean}.
      *
      * @param map The Map of values to copy.
-     * @throws UnsupportedOperationException if
-     * {@code isReadOnly()} is true.
+     * @throws UnsupportedOperationException if {@code isReadOnly()} is true.
      */
     @Override
     public void putAll(final Map<? extends K, ? extends Object> map) {
@@ -284,8 +271,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Returns the number properties in the decorated
-     * {@link DynaBean}.
+     * Returns the number properties in the decorated {@link DynaBean}.
+     * 
      * @return The number of properties.
      */
     @Override
@@ -294,8 +281,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Returns the set of property values in the
-     * decorated {@link DynaBean}.
+     * Returns the set of property values in the decorated {@link DynaBean}.
      *
      * @return Unmodifiable collection of values.
      */
@@ -311,11 +297,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         return Collections.unmodifiableList(values);
     }
 
-
-
     /**
-     * Provide access to the underlying {@link DynaBean}
-     * this Map decorates.
+     * Provide access to the underlying {@link DynaBean} this Map decorates.
      *
      * @return the decorated {@link DynaBean}.
      */
@@ -331,11 +314,9 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      */
     protected abstract K convertKey(String propertyName);
 
-
-
     /**
-     * Convenience method to retrieve the {@link DynaProperty}s
-     * for this {@link DynaClass}.
+     * Convenience method to retrieve the {@link DynaProperty}s for this
+     * {@link DynaClass}.
      *
      * @return The an array of the {@link DynaProperty}s.
      */
@@ -344,8 +325,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Convenience method to convert an Object
-     * to a String.
+     * Convenience method to convert an Object to a String.
      *
      * @param obj The Object to convert
      * @return String representation of the object
@@ -372,10 +352,10 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-            final Map.Entry<?, ?> e = (Map.Entry<?, ?>)o;
+            final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
             return key.equals(e.getKey()) &&
-                    (value == null ? e.getValue() == null
-                                   : value.equals(e.getValue()));
+                        (value == null ? e.getValue() == null
+                                    : value.equals(e.getValue()));
         }
 
         @Override

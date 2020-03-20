@@ -18,33 +18,35 @@
 package org.apache.commons.beanutils2;
 
 /**
- * <p>General purpose data type converter that can be registered and used
- * within the BeanUtils package to manage the conversion of objects from
- * one type to another.</p>
- *
- * <p>Converter subclasses bundled with the BeanUtils library are required
- * to be thread-safe, as users of the library may call conversion methods
- * from more than one thread simultaneously.</p>
- *
- * <p>Custom converter subclasses created by users of the library can be
- * non-thread-safe if the application using them is single-threaded. However
- * it is recommended that they be written in a thread-safe manner anyway.</p>
+ * <p>
+ * General purpose data type converter that can be registered and used within
+ * the BeanUtils package to manage the conversion of objects from one type to
+ * another.
+ * </p>
+ * <p>
+ * Converter subclasses bundled with the BeanUtils library are required to be
+ * thread-safe, as users of the library may call conversion methods from more
+ * than one thread simultaneously.
+ * </p>
+ * <p>
+ * Custom converter subclasses created by users of the library can be
+ * non-thread-safe if the application using them is single-threaded. However it
+ * is recommended that they be written in a thread-safe manner anyway.
+ * </p>
  *
  * @since 1.3
  */
 public interface Converter {
 
     /**
-     * Convert the specified input object into an output object of the
-     * specified type.
+     * Convert the specified input object into an output object of the specified
+     * type.
      *
      * @param <T> the desired result type
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value
-     *
-     * @throws ConversionException if conversion cannot be performed
-     *  successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      */
     public <T> T convert(Class<T> type, Object value);
 

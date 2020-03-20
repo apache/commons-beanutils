@@ -19,17 +19,13 @@ package org.apache.commons.beanutils2;
 
 /**
  * Specialist test bean for complex nested properties.
- *
  */
 
 public class NestedTestBean {
 
-
     public NestedTestBean(final String name) {
         setName(name);
     }
-
-
 
     private String name;
 
@@ -87,7 +83,5 @@ public class NestedTestBean {
     public NestedTestBean getSimpleBeanProperty() {
         return simpleBean;
     }
-
-
 
 }

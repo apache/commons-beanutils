@@ -17,33 +17,29 @@
 package org.apache.commons.beanutils2;
 
 /**
- * <p>{@link BeanUtilsBean} implementation that creates a
- * {@link ConvertUtilsBean2} and delegates conversion to
- * {@link ConvertUtilsBean#convert(Object, Class)}.
+ * <p>
+ * {@link BeanUtilsBean} implementation that creates a {@link ConvertUtilsBean2}
+ * and delegates conversion to {@link ConvertUtilsBean#convert(Object, Class)}.
  * </p>
- *
  * <p>
  * To configure this implementation for the current context ClassLoader invoke
  * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
  * </p>
- *
  * <p>
  * BeanUtils 1.7.0 delegated all conversion to String to the converter
- * registered for the {@code String.class}. One of the improvements in
- * BeanUtils 1.8.0 was to upgrade the {@link Converter} implementations so
- * that they could handle conversion to String for their type (e.g.
- * IntegerConverter now handles conversion from an Integer to a String as
- * well as String to Integer).
+ * registered for the {@code String.class}. One of the improvements in BeanUtils
+ * 1.8.0 was to upgrade the {@link Converter} implementations so that they could
+ * handle conversion to String for their type (e.g. IntegerConverter now handles
+ * conversion from an Integer to a String as well as String to Integer).
  * </p>
- *
  * <p>
  * In order to take advantage of these improvements BeanUtils needs to change
  * how it gets the appropriate {@link Converter}. This functionality has been
  * implemented in the new {@link ConvertUtilsBean#lookup(Class, Class)} and
  * {@link ConvertUtilsBean#convert(Object, Class)} methods. However changing
- * {@link BeanUtilsBean} to use these methods could create compatibility
- * issues for existing users. In order to avoid that, this new
- * {@link BeanUtilsBean} implementation has been created (and the associated
+ * {@link BeanUtilsBean} to use these methods could create compatibility issues
+ * for existing users. In order to avoid that, this new {@link BeanUtilsBean}
+ * implementation has been created (and the associated
  * {@link ConvertUtilsBean2}).
  * </p>
  *
@@ -53,16 +49,18 @@ package org.apache.commons.beanutils2;
 public class BeanUtilsBean2 extends BeanUtilsBean {
 
     /**
-     * <p>Constructs an instance using new property
-     * and conversion instances.</p>
+     * <p>
+     * Constructs an instance using new property and conversion instances.
+     * </p>
      */
     public BeanUtilsBean2() {
         super(new ConvertUtilsBean2());
     }
 
     /**
-     * <p>Convert the value to an object of the specified class (if
-     * possible).</p>
+     * <p>
+     * Convert the value to an object of the specified class (if possible).
+     * </p>
      *
      * @param value Value to be converted (may be null)
      * @param type Class of the value to be converted to

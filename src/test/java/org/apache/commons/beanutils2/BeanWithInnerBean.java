@@ -21,24 +21,26 @@ import java.util.Properties;
 
 /**
  * Bean with inner bean.
- *
  */
 public class BeanWithInnerBean {
-  private final InnerBean innerBean = new InnerBean();
+    private final InnerBean innerBean = new InnerBean();
 
-  public BeanWithInnerBean() {}
-    public InnerBean getInnerBean(){
-      return innerBean;
+    public BeanWithInnerBean() {
     }
 
-  public class InnerBean {
-    private final Properties fish = new Properties();
+    public InnerBean getInnerBean() {
+        return innerBean;
+    }
 
-    public String getFish(final String key){
-      return fish.getProperty(key);
+    public class InnerBean {
+        private final Properties fish = new Properties();
+
+        public String getFish(final String key) {
+            return fish.getProperty(key);
+        }
+
+        public void setFish(final String key, final String value) {
+            fish.setProperty(key, value);
+        }
     }
-    public void setFish(final String key, final String value){
-      fish.setProperty(key, value);
-    }
-  }
 }

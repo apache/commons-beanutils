@@ -18,7 +18,8 @@
 package org.apache.commons.beanutils2;
 
 /**
- * <p>A <strong>ConversionException</strong> indicates that a call to
+ * <p>
+ * A <strong>ConversionException</strong> indicates that a call to
  * {@code Converter.convert()} has failed to complete successfully.
  *
  * @since 1.3
@@ -27,8 +28,6 @@ package org.apache.commons.beanutils2;
 public class ConversionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * Construct a new exception with the specified message.
@@ -66,16 +65,15 @@ public class ConversionException extends RuntimeException {
 
     }
 
-
-
     /**
-     * The root cause of this {@code ConversionException}, compatible with
-     * JDK 1.4's extensions to {@code java.lang.Throwable}.
+     * The root cause of this {@code ConversionException}, compatible with JDK 1.4's
+     * extensions to {@code java.lang.Throwable}.
      */
     protected Throwable cause = null;
 
     /**
      * Return the root cause of this conversion exception.
+     * 
      * @return the root cause of this conversion exception
      */
     @Override

@@ -22,23 +22,24 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * <p>Implementation of {@code java.util.Iterator} returned by the
- * {@code iterator()} method of {@link ResultSetDynaClass}.  Each
- * object returned by this iterator will be a {@link DynaBean} that
- * represents a single row from the result set being wrapped.</p>
- *
+ * <p>
+ * Implementation of {@code java.util.Iterator} returned by the
+ * {@code iterator()} method of {@link ResultSetDynaClass}. Each object returned
+ * by this iterator will be a {@link DynaBean} that represents a single row from
+ * the result set being wrapped.
+ * </p>
  */
 
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
-
-
     /**
-     * <p>Construct an {@code Iterator} for the result set being wrapped
-     * by the specified {@link ResultSetDynaClass}.</p>
+     * <p>
+     * Construct an {@code Iterator} for the result set being wrapped by the
+     * specified {@link ResultSetDynaClass}.
+     * </p>
      *
-     * @param dynaClass The {@link ResultSetDynaClass} wrapping the
-     *  result set we will iterate over
+     * @param dynaClass The {@link ResultSetDynaClass} wrapping the result set we
+     *            will iterate over
      */
     ResultSetIterator(final ResultSetDynaClass dynaClass) {
 
@@ -46,44 +47,44 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
-
     /**
-     * <p>Flag indicating whether the result set is currently positioned at a
-     * row for which we have not yet returned an element in the iteration.</p>
+     * <p>
+     * Flag indicating whether the result set is currently positioned at a row for
+     * which we have not yet returned an element in the iteration.
+     * </p>
      */
     protected boolean current = false;
 
     /**
-     * <p>The {@link ResultSetDynaClass} we are associated with.</p>
+     * <p>
+     * The {@link ResultSetDynaClass} we are associated with.
+     * </p>
      */
     protected ResultSetDynaClass dynaClass = null;
 
     /**
-     * <p>Flag indicating whether the result set has indicated that there are
-     * no further rows.</p>
+     * <p>
+     * Flag indicating whether the result set has indicated that there are no
+     * further rows.
+     * </p>
      */
     protected boolean eof = false;
 
-
-
     /**
-     * Does the specified mapped property contain a value for the specified
-     * key value?
+     * Does the specified mapped property contain a value for the specified key
+     * value?
      *
      * @param name Name of the property to check
      * @param key Name of the key to check
-     * @return {@code true} if the mapped property contains a value for
-     * the specified key, otherwise {@code false}
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
+     * @return {@code true} if the mapped property contains a value for the
+     *         specified key, otherwise {@code false}
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
      */
     @Override
     public boolean contains(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
 
@@ -92,9 +93,8 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @param name Name of the property whose value is to be retrieved
      * @return The property's value
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
      */
     @Override
     public Object get(final String name) {
@@ -104,9 +104,9 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         }
         try {
             return dynaClass.getObjectFromResultSet(name);
-        } catch (final SQLException e) {
-            throw new RuntimeException
-                ("get(" + name + "): SQLException: " + e);
+        }
+        catch (final SQLException e) {
+            throw new RuntimeException("get(" + name + "): SQLException: " + e);
         }
 
     }
@@ -117,48 +117,44 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
      * @return The indexed property's value
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not indexed
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the range of the underlying property
-     * @throws NullPointerException if no array or List has been
-     *  initialized for this property
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
+     * @throws IllegalArgumentException if the specified property exists, but is not
+     *             indexed
+     * @throws IndexOutOfBoundsException if the specified index is outside the range
+     *             of the underlying property
+     * @throws NullPointerException if no array or List has been initialized for
+     *             this property
      */
     @Override
     public Object get(final String name, final int index) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - indexed properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - indexed properties not currently supported");
 
     }
 
     /**
-     * Return the value of a mapped property with the specified name,
-     * or {@code null} if there is no value for the specified key.
+     * Return the value of a mapped property with the specified name, or
+     * {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param key Key of the value to be retrieved
      * @return The mapped property's value
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not mapped
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
+     * @throws IllegalArgumentException if the specified property exists, but is not
+     *             mapped
      */
     @Override
     public Object get(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
 
     /**
-     * Return the {@code DynaClass} instance that describes the set of
-     * properties available for this DynaBean.
+     * Return the {@code DynaClass} instance that describes the set of properties
+     * available for this DynaBean.
      *
      * @return The associated DynaClass
      */
@@ -170,21 +166,18 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Remove any existing value for the specified key on the
-     * specified mapped property.
+     * Remove any existing value for the specified key on the specified mapped
+     * property.
      *
-     * @param name Name of the property for which a value is to
-     *  be removed
+     * @param name Name of the property for which a value is to be removed
      * @param key Key of the value to be removed
-     *
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
      */
     @Override
     public void remove(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped operations not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped operations not currently supported");
 
     }
 
@@ -193,13 +186,12 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
+     * @throws ConversionException if the specified value cannot be converted to the
+     *             type required for this property
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
+     * @throws NullPointerException if an attempt is made to set a primitive
+     *             property to null
      */
     @Override
     public void set(final String name, final Object value) {
@@ -209,9 +201,9 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         }
         try {
             dynaClass.getResultSet().updateObject(name, value);
-        } catch (final SQLException e) {
-            throw new RuntimeException
-                ("set(" + name + "): SQLException: " + e);
+        }
+        catch (final SQLException e) {
+            throw new RuntimeException("set(" + name + "): SQLException: " + e);
         }
 
     }
@@ -222,21 +214,19 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @param name Name of the property whose value is to be set
      * @param index Index of the property to be set
      * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not indexed
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the range of the underlying property
+     * @throws ConversionException if the specified value cannot be converted to the
+     *             type required for this property
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
+     * @throws IllegalArgumentException if the specified property exists, but is not
+     *             indexed
+     * @throws IndexOutOfBoundsException if the specified index is outside the range
+     *             of the underlying property
      */
     @Override
     public void set(final String name, final int index, final Object value) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - indexed properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - indexed properties not currently supported");
 
     }
 
@@ -246,29 +236,27 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @param name Name of the property whose value is to be set
      * @param key Key of the property to be set
      * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws IllegalArgumentException if the specified property
-     *  exists, but is not mapped
+     * @throws ConversionException if the specified value cannot be converted to the
+     *             type required for this property
+     * @throws IllegalArgumentException if there is no property of the specified
+     *             name
+     * @throws IllegalArgumentException if the specified property exists, but is not
+     *             mapped
      */
     @Override
     public void set(final String name, final String key, final Object value) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
 
-
-
     /**
-     * <p>Return {@code true} if the iteration has more elements.</p>
+     * <p>
+     * Return {@code true} if the iteration has more elements.
+     * </p>
      *
-     * @return {@code true} if the result set has another
-     * row, otherwise {@code false}
+     * @return {@code true} if the result set has another row, otherwise
+     *         {@code false}
      */
     @Override
     public boolean hasNext() {
@@ -276,14 +264,17 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             advance();
             return !eof;
-        } catch (final SQLException e) {
+        }
+        catch (final SQLException e) {
             throw new RuntimeException("hasNext():  SQLException:  " + e);
         }
 
     }
 
     /**
-     * <p>Return the next element in the iteration.</p>
+     * <p>
+     * Return the next element in the iteration.
+     * </p>
      *
      * @return advance to the new row and return this
      */
@@ -297,15 +288,17 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
             }
             current = false;
             return this;
-        } catch (final SQLException e) {
+        }
+        catch (final SQLException e) {
             throw new RuntimeException("next():  SQLException:  " + e);
         }
 
     }
 
     /**
-     * <p>Remove the current element from the iteration.  This method is
-     * not supported.</p>
+     * <p>
+     * Remove the current element from the iteration. This method is not supported.
+     * </p>
      */
     @Override
     public void remove() {
@@ -314,11 +307,11 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     }
 
-
-
     /**
-     * <p>Advance the result set to the next row, if there is not a current
-     * row (and if we are not already at eof).</p>
+     * <p>
+     * Advance the result set to the next row, if there is not a current row (and if
+     * we are not already at eof).
+     * </p>
      *
      * @throws SQLException if the result set throws an exception
      */

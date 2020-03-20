@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2;
 
 /**
- * Thrown to indicate that the <em>Bean Access Language</em> cannot execute query
- * against given bean since a nested bean referenced is null.
+ * Thrown to indicate that the <em>Bean Access Language</em> cannot execute
+ * query against given bean since a nested bean referenced is null.
  *
  * @since 1.7
  */
@@ -27,8 +27,6 @@ package org.apache.commons.beanutils2;
 public class NestedNullException extends BeanAccessLanguageException {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * Constructs a {@code NestedNullException} without a detail message.

@@ -17,21 +17,22 @@
 package org.apache.commons.beanutils2;
 
 /**
- * <p>A <strong>DynaClass</strong> is a simulation of the functionality of
- * {@code java.lang.Class} for classes implementing the
- * {@code DynaBean} interface.  DynaBean instances that share the same
- * DynaClass all have the same set of available properties, along with any
- * associated data types, read-only states, and write-only states.</p>
- *
+ * <p>
+ * A <strong>DynaClass</strong> is a simulation of the functionality of
+ * {@code java.lang.Class} for classes implementing the {@code DynaBean}
+ * interface. DynaBean instances that share the same DynaClass all have the same
+ * set of available properties, along with any associated data types, read-only
+ * states, and write-only states.
+ * </p>
  */
 
 public interface DynaClass {
 
     /**
-     * Returns the name of this DynaClass (analogous to the
-     * {@code getName()} method of {@code java.lang.Class}, which
-     * allows the same {@code DynaClass} implementation class to support
-     * different dynamic classes, with different sets of properties.
+     * Returns the name of this DynaClass (analogous to the {@code getName()} method
+     * of {@code java.lang.Class}, which allows the same {@code DynaClass}
+     * implementation class to support different dynamic classes, with different
+     * sets of properties.
      *
      * @return the name of the DynaClass
      */
@@ -41,40 +42,40 @@ public interface DynaClass {
      * Returns a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
      *
-     * @param name Name of the dynamic property for which a descriptor
-     *  is requested
+     * @param name Name of the dynamic property for which a descriptor is requested
      * @return The descriptor for the specified property
-     *
      * @throws IllegalArgumentException if no property name is specified
      */
     public DynaProperty getDynaProperty(String name);
 
     /**
-     * <p>Returns an array of {@code ProperyDescriptors} for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
-     *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * {@code getBeanInfo()} instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
+     * <p>
+     * Returns an array of {@code ProperyDescriptors} for the properties currently
+     * defined in this DynaClass. If no properties are defined, a zero-length array
+     * will be returned.
+     * </p>
+     * <p>
+     * <strong>FIXME</strong> - Should we really be implementing
+     * {@code getBeanInfo()} instead, which returns property descriptors and a bunch
+     * of other stuff?
+     * </p>
      *
      * @return the set of properties for this DynaClass
      */
     public DynaProperty[] getDynaProperties();
 
     /**
-     * Instantiates and return a new DynaBean instance, associated
-     * with this DynaClass.
+     * Instantiates and return a new DynaBean instance, associated with this
+     * DynaClass.
      *
      * @return A new {@code DynaBean} instance
-     *
-     * @throws IllegalAccessException if the Class or the appropriate
-     *  constructor is not accessible
-     * @throws InstantiationException if this Class represents an abstract
-     *  class, an array class, a primitive type, or void; or if instantiation
-     *  fails for some other reason
+     * @throws IllegalAccessException if the Class or the appropriate constructor is
+     *             not accessible
+     * @throws InstantiationException if this Class represents an abstract class, an
+     *             array class, a primitive type, or void; or if instantiation fails
+     *             for some other reason
      */
     public DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException;
+                throws IllegalAccessException, InstantiationException;
 
 }

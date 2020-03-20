@@ -22,15 +22,12 @@ import java.util.List;
 
 /**
  * Indexed Properties Test bean for JUnit tests for the "beanutils" component.
- *
  */
 public class IndexedTestBean {
 
     private String[] stringArray;
     private List<String> stringList;
     private ArrayList<Object> arrayList;
-
-
 
     /**
      * Default Constructor.

@@ -34,34 +34,28 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- *  Test Case for the BeanUtils class.  The majority of these tests use
- *  instances of the TestBean class, so be sure to update the tests if you
- *  change the characteristics of that class.
+ * Test Case for the BeanUtils class. The majority of these tests use instances
+ * of the TestBean class, so be sure to update the tests if you change the
+ * characteristics of that class.
  * </p>
- *
  * <p>
- *  Template for this stolen from Craigs PropertyUtilsTestCase
+ * Template for this stolen from Craigs PropertyUtilsTestCase
  * </p>
- *
  * <p>
- *   Note that the tests are dependant upon the static aspects
- *   (such as array sizes...) of the TestBean.java class, so ensure
- *   than all changes to TestBean are reflected here.
+ * Note that the tests are dependant upon the static aspects (such as array
+ * sizes...) of the TestBean.java class, so ensure than all changes to TestBean
+ * are reflected here.
  * </p>
- *
  * <p>
- *  So far, this test case has tests for the following methods of the
- *  {@code BeanUtils} class:
+ * So far, this test case has tests for the following methods of the
+ * {@code BeanUtils} class:
  * </p>
  * <ul>
- *   <li>getArrayProperty(Object bean, String name)</li>
+ * <li>getArrayProperty(Object bean, String name)</li>
  * </ul>
- *
  */
 
 public class BeanUtilsTestCase extends TestCase {
-
-
 
     /**
      * The test bean for each test.
@@ -71,27 +65,26 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
-    { "booleanProperty",
-      "booleanSecond",
-      "byteProperty",
-      "doubleProperty",
-      "dupProperty",
-      "floatProperty",
-      "intArray",
-      //      "intIndexed",
-      "longProperty",
-      "listIndexed",
-      "longProperty",
-      //      "mappedProperty",
-      //      "mappedIntProperty",
-      "nested",
-      "nullProperty",
-      "readOnlyProperty",
-      "shortProperty",
-      "stringArray",
-      //      "stringIndexed",
-      "stringProperty"
+    protected String describes[] = {"booleanProperty",
+                "booleanSecond",
+                "byteProperty",
+                "doubleProperty",
+                "dupProperty",
+                "floatProperty",
+                "intArray",
+                // "intIndexed",
+                "longProperty",
+                "listIndexed",
+                "longProperty",
+                // "mappedProperty",
+                // "mappedIntProperty",
+                "nested",
+                "nullProperty",
+                "readOnlyProperty",
+                "shortProperty",
+                "stringArray",
+                // "stringIndexed",
+                "stringProperty"
     };
 
     /** Test Calendar value */
@@ -103,8 +96,6 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -113,8 +104,6 @@ public class BeanUtilsTestCase extends TestCase {
     public BeanUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -137,8 +126,7 @@ public class BeanUtilsTestCase extends TestCase {
         dateConverter.setPattern("dd.MM.yyyy");
         ConvertUtils.register(dateConverter, java.util.Date.class);
 
-        final ArrayConverter dateArrayConverter =
-            new ArrayConverter(java.util.Date[].class, dateConverter, 0);
+        final ArrayConverter dateArrayConverter = new ArrayConverter(java.util.Date[].class, dateConverter, 0);
         ConvertUtils.register(dateArrayConverter, java.util.Date[].class);
 
         testCalendar = Calendar.getInstance();
@@ -163,8 +151,6 @@ public class BeanUtilsTestCase extends TestCase {
         bean = null;
     }
 
-
-
     /**
      * Test the copyProperties() method from a DynaBean.
      */
@@ -175,51 +161,53 @@ public class BeanUtilsTestCase extends TestCase {
         DynaBean orig = null;
         try {
             orig = dynaClass.newInstance();
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail("newInstance(): " + e);
         }
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", new Byte((byte) 111));
         orig.set("doubleProperty", new Double(333.33));
         orig.set("dupProperty",
-                 new String[] { "New 0", "New 1", "New 2" });
-        orig.set("intArray", new int[] { 100, 200, 300 });
+                    new String[] {"New 0", "New 1", "New 2"});
+        orig.set("intArray", new int[] {100, 200, 300});
         orig.set("intProperty", new Integer(333));
         orig.set("longProperty", new Long(3333));
         orig.set("shortProperty", new Short((short) 33));
-        orig.set("stringArray", new String[] { "New 0", "New 1" });
+        orig.set("stringArray", new String[] {"New 0", "New 1"});
         orig.set("stringProperty", "Custom string");
 
         // Copy the origin bean to our destination test bean
         try {
             BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail("Threw exception: " + e);
         }
 
         // Validate the results for scalar properties
         assertEquals("Copied boolean property",
-                     false,
-                     bean.getBooleanProperty());
+                    false,
+                    bean.getBooleanProperty());
         assertEquals("Copied byte property",
-                     (byte) 111,
-                     bean.getByteProperty());
+                    (byte) 111,
+                    bean.getByteProperty());
         assertEquals("Copied double property",
-                     333.33,
-                     bean.getDoubleProperty(),
-                     0.005);
+                    333.33,
+                    bean.getDoubleProperty(),
+                    0.005);
         assertEquals("Copied int property",
-                     333,
-                     bean.getIntProperty());
+                    333,
+                    bean.getIntProperty());
         assertEquals("Copied long property",
-                     3333,
-                     bean.getLongProperty());
+                    3333,
+                    bean.getLongProperty());
         assertEquals("Copied short property",
-                     (short) 33,
-                     bean.getShortProperty());
+                    (short) 33,
+                    bean.getShortProperty());
         assertEquals("Copied string property",
-                     "Custom string",
-                     bean.getStringProperty());
+                    "Custom string",
+                    bean.getStringProperty());
 
         // Validate the results for array properties
         final String dupProperty[] = bean.getDupProperty();
@@ -251,9 +239,9 @@ public class BeanUtilsTestCase extends TestCase {
         map.put("booleanProperty", "false");
         map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
-        map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
+        map.put("dupProperty", new String[] {"New 0", "New 1", "New 2"});
         map.put("floatProperty", "222.0");
-        map.put("intArray", new String[] { "0", "100", "200" });
+        map.put("intArray", new String[] {"0", "100", "200"});
         map.put("intProperty", "111");
         map.put("longProperty", "444");
         map.put("shortProperty", "555");
@@ -261,27 +249,28 @@ public class BeanUtilsTestCase extends TestCase {
 
         try {
             BeanUtils.copyProperties(bean, map);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t.toString());
         }
 
         // Scalar properties
         assertEquals("booleanProperty", false,
-                     bean.getBooleanProperty());
+                    bean.getBooleanProperty());
         assertEquals("byteProperty", (byte) 111,
-                     bean.getByteProperty());
+                    bean.getByteProperty());
         assertEquals("doubleProperty", 333.0,
-                     bean.getDoubleProperty(), 0.005);
+                    bean.getDoubleProperty(), 0.005);
         assertEquals("floatProperty", (float) 222.0,
-                     bean.getFloatProperty(), (float) 0.005);
+                    bean.getFloatProperty(), (float) 0.005);
         assertEquals("longProperty", 111,
-                     bean.getIntProperty());
+                    bean.getIntProperty());
         assertEquals("longProperty", 444,
-                     bean.getLongProperty());
+                    bean.getLongProperty());
         assertEquals("shortProperty", (short) 555,
-                     bean.getShortProperty());
+                    bean.getShortProperty());
         assertEquals("stringProperty", "New String Property",
-                     bean.getStringProperty());
+                    bean.getStringProperty());
 
         // Indexed Properties
         final String dupProperty[] = bean.getDupProperty();
@@ -309,44 +298,45 @@ public class BeanUtilsTestCase extends TestCase {
         orig.setBooleanProperty(false);
         orig.setByteProperty((byte) 111);
         orig.setDoubleProperty(333.33);
-        orig.setDupProperty(new String[] { "New 0", "New 1", "New 2" });
-        orig.setIntArray(new int[] { 100, 200, 300 });
+        orig.setDupProperty(new String[] {"New 0", "New 1", "New 2"});
+        orig.setIntArray(new int[] {100, 200, 300});
         orig.setIntProperty(333);
         orig.setLongProperty(3333);
         orig.setShortProperty((short) 33);
-        orig.setStringArray(new String[] { "New 0", "New 1" });
+        orig.setStringArray(new String[] {"New 0", "New 1"});
         orig.setStringProperty("Custom string");
 
         // Copy the origin bean to our destination test bean
         try {
             BeanUtils.copyProperties(bean, orig);
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail("Threw exception: " + e);
         }
 
         // Validate the results for scalar properties
         assertEquals("Copied boolean property",
-                     false,
-                     bean.getBooleanProperty());
+                    false,
+                    bean.getBooleanProperty());
         assertEquals("Copied byte property",
-                     (byte) 111,
-                     bean.getByteProperty());
+                    (byte) 111,
+                    bean.getByteProperty());
         assertEquals("Copied double property",
-                     333.33,
-                     bean.getDoubleProperty(),
-                     0.005);
+                    333.33,
+                    bean.getDoubleProperty(),
+                    0.005);
         assertEquals("Copied int property",
-                     333,
-                     bean.getIntProperty());
+                    333,
+                    bean.getIntProperty());
         assertEquals("Copied long property",
-                     3333,
-                     bean.getLongProperty());
+                    3333,
+                    bean.getLongProperty());
         assertEquals("Copied short property",
-                     (short) 33,
-                     bean.getShortProperty());
+                    (short) 33,
+                    bean.getShortProperty());
         assertEquals("Copied string property",
-                     "Custom string",
-                     bean.getStringProperty());
+                    "Custom string",
+                    bean.getStringProperty());
 
         // Validate the results for array properties
         final String dupProperty[] = bean.getDupProperty();
@@ -377,48 +367,49 @@ public class BeanUtilsTestCase extends TestCase {
         Map<String, String> map = null;
         try {
             map = BeanUtils.describe(bean);
-        } catch (final Exception e) {
+        }
+        catch (final Exception e) {
             fail("Threw exception " + e);
         }
 
         // Verify existence of all the properties that should be present
         for (final String describe : describes) {
             assertTrue("Property '" + describe + "' is present",
-                       map.containsKey(describe));
+                        map.containsKey(describe));
         }
         assertTrue("Property 'writeOnlyProperty' is not present",
-                   !map.containsKey("writeOnlyProperty"));
+                    !map.containsKey("writeOnlyProperty"));
 
         // Verify the values of scalar properties
         assertEquals("Value of 'booleanProperty'",
-                     "true",
-                     map.get("booleanProperty"));
+                    "true",
+                    map.get("booleanProperty"));
         assertEquals("Value of 'byteProperty'",
-                     "121",
-                     map.get("byteProperty"));
+                    "121",
+                    map.get("byteProperty"));
         assertEquals("Value of 'doubleProperty'",
-                     "321.0",
-                     map.get("doubleProperty"));
+                    "321.0",
+                    map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
-                     "123.0",
-                     map.get("floatProperty"));
+                    "123.0",
+                    map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
-                     "123",
-                     map.get("intProperty"));
+                    "123",
+                    map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
-                     "321",
-                     map.get("longProperty"));
+                    "321",
+                    map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
-                     "987",
-                     map.get("shortProperty"));
+                    "987",
+                    map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
-                     "This is a string",
-                     map.get("stringProperty"));
+                    "This is a string",
+                    map.get("stringProperty"));
 
     }
 
     /**
-     *  tests the string and int arrays of TestBean
+     * tests the string and int arrays of TestBean
      */
     public void testGetArrayProperty() {
         try {
@@ -426,13 +417,13 @@ public class BeanUtilsTestCase extends TestCase {
             final String comp[] = bean.getStringArray();
 
             assertTrue("String array length = " + comp.length,
-                    comp.length == arr.length);
+                        comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
             final int iarr[] = bean.getIntArray();
 
             assertTrue("String array length = " + iarr.length,
-                    iarr.length == arr.length);
+                        iarr.length == arr.length);
 
             // Test property which isn't array or collection
             arr = BeanUtils.getArrayProperty(bean, "shortProperty");
@@ -446,11 +437,14 @@ public class BeanUtilsTestCase extends TestCase {
             assertEquals("Delimited List Test lth", 1, arr.length);
             assertEquals("Delimited List Test value1", "ABC", arr[0]);
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
 
@@ -464,7 +458,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
             value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, value.length);
@@ -472,7 +467,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     *  tests getting an indexed property
+     * tests getting an indexed property
      */
     public void testGetIndexedProperty1() {
         try {
@@ -483,11 +478,14 @@ public class BeanUtilsTestCase extends TestCase {
             val = BeanUtils.getIndexedProperty(bean, "stringIndexed[3]");
             comp = bean.getStringIndexed(3);
             assertTrue("stringIndexed[3] == " + comp, val.equals(comp));
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
@@ -500,14 +498,15 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
             value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[0] --> String", testUtilDate.toString(), value);
     }
 
     /**
-     *  tests getting an indexed property
+     * tests getting an indexed property
      */
     public void testGetIndexedProperty2() {
         try {
@@ -521,35 +520,41 @@ public class BeanUtilsTestCase extends TestCase {
 
             assertTrue("stringIndexed,3 == " + comp, val.equals(comp));
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
 
     /**
-     *  tests getting a nested property
+     * tests getting a nested property
      */
     public void testGetNestedProperty() {
         try {
             final String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
             final String comp = bean.getNested().getStringProperty();
             assertTrue("nested.StringProperty == " + comp,
-                    val.equals(comp));
-        } catch (final IllegalAccessException e) {
+                        val.equals(comp));
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
 
     /**
-     *  tests getting a 'whatever' property
+     * tests getting a 'whatever' property
      */
     public void testGetGeneralProperty() {
         try {
@@ -557,18 +562,21 @@ public class BeanUtilsTestCase extends TestCase {
             final String comp = String.valueOf(bean.getIntIndexed(2));
 
             assertTrue("nested.intIndexed[2] == " + comp,
-                    val.equals(comp));
-        } catch (final IllegalAccessException e) {
+                        val.equals(comp));
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
 
     /**
-     *  tests getting a 'whatever' property
+     * tests getting a 'whatever' property
      */
     public void testGetSimpleProperty() {
         try {
@@ -576,12 +584,15 @@ public class BeanUtilsTestCase extends TestCase {
             final String comp = String.valueOf(bean.getShortProperty());
 
             assertTrue("shortProperty == " + comp,
-                    val.equals(comp));
-        } catch (final IllegalAccessException e) {
+                        val.equals(comp));
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
-        } catch (final NoSuchMethodException e) {
+        }
+        catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
     }
@@ -594,7 +605,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setDateProperty(testUtilDate);
             value = BeanUtils.getSimpleProperty(bean, "dateProperty");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testUtilDate.toString(), value);
@@ -615,15 +627,15 @@ public class BeanUtilsTestCase extends TestCase {
             BeanUtils.populate(bean, map);
 
             assertEquals("intIndexed[0] is 100",
-                         100, bean.getIntIndexed(0));
+                        100, bean.getIntIndexed(0));
             assertEquals("intIndexed[1] is 10",
-                         10, bean.getIntIndexed(1));
+                        10, bean.getIntIndexed(1));
             assertEquals("intIndexed[2] is 120",
-                         120, bean.getIntIndexed(2));
+                        120, bean.getIntIndexed(2));
             assertEquals("intIndexed[3] is 30",
-                         30, bean.getIntIndexed(3));
+                        30, bean.getIntIndexed(3));
             assertEquals("intIndexed[4] is 140",
-                         140, bean.getIntIndexed(4));
+                        140, bean.getIntIndexed(4));
 
             map.clear();
             map.put("stringIndexed[1]", "New String 1");
@@ -632,19 +644,21 @@ public class BeanUtilsTestCase extends TestCase {
             BeanUtils.populate(bean, map);
 
             assertEquals("stringIndexed[0] is \"String 0\"",
-                         "String 0", bean.getStringIndexed(0));
+                        "String 0", bean.getStringIndexed(0));
             assertEquals("stringIndexed[1] is \"New String 1\"",
-                         "New String 1", bean.getStringIndexed(1));
+                        "New String 1", bean.getStringIndexed(1));
             assertEquals("stringIndexed[2] is \"String 2\"",
-                         "String 2", bean.getStringIndexed(2));
+                        "String 2", bean.getStringIndexed(2));
             assertEquals("stringIndexed[3] is \"New String 3\"",
-                         "New String 3", bean.getStringIndexed(3));
+                        "New String 3", bean.getStringIndexed(3));
             assertEquals("stringIndexed[4] is \"String 4\"",
-                         "String 4", bean.getStringIndexed(4));
+                        "String 4", bean.getStringIndexed(4));
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
         }
 
@@ -658,10 +672,9 @@ public class BeanUtilsTestCase extends TestCase {
         try {
 
             final HashMap<String, Object> map = new HashMap<>();
-            int intArray[] = new int[] { 123, 456, 789 };
+            int intArray[] = new int[] {123, 456, 789};
             map.put("intArray", intArray);
-            String stringArray[] = new String[]
-                { "New String 0", "New String 1" };
+            String stringArray[] = new String[] {"New String 0", "New String 1"};
             map.put("stringArray", stringArray);
 
             BeanUtils.populate(bean, map);
@@ -669,7 +682,7 @@ public class BeanUtilsTestCase extends TestCase {
             intArray = bean.getIntArray();
             assertNotNull("intArray is present", intArray);
             assertEquals("intArray length",
-                         3, intArray.length);
+                        3, intArray.length);
             assertEquals("intArray[0]", 123, intArray[0]);
             assertEquals("intArray[1]", 456, intArray[1]);
             assertEquals("intArray[2]", 789, intArray[2]);
@@ -679,9 +692,11 @@ public class BeanUtilsTestCase extends TestCase {
             assertEquals("stringArray[0]", "New String 0", stringArray[0]);
             assertEquals("stringArray[1]", "New String 1", stringArray[1]);
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
         }
 
@@ -701,20 +716,22 @@ public class BeanUtilsTestCase extends TestCase {
             BeanUtils.populate(bean, map);
 
             assertEquals("mappedProperty(First Key)",
-                         "New First Value",
-                         bean.getMappedProperty("First Key"));
+                        "New First Value",
+                        bean.getMappedProperty("First Key"));
             assertEquals("mappedProperty(Second Key)",
-                         "Second Value",
-                         bean.getMappedProperty("Second Key"));
+                        "Second Value",
+                        bean.getMappedProperty("Second Key"));
             assertEquals("mappedProperty(Third Key)",
-                         "New Third Value",
-                         bean.getMappedProperty("Third Key"));
+                        "New Third Value",
+                        bean.getMappedProperty("Third Key"));
             assertNull("mappedProperty(Fourth Key",
-                       bean.getMappedProperty("Fourth Key"));
+                        bean.getMappedProperty("Fourth Key"));
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
         }
 
@@ -741,33 +758,35 @@ public class BeanUtilsTestCase extends TestCase {
             BeanUtils.populate(bean, map);
 
             assertTrue("booleanProperty is false",
-                       !bean.getNested().getBooleanProperty());
+                        !bean.getNested().getBooleanProperty());
             assertTrue("booleanSecond is true",
-                       bean.getNested().isBooleanSecond());
+                        bean.getNested().isBooleanSecond());
             assertEquals("doubleProperty is 432.0",
-                         432.0,
-                         bean.getNested().getDoubleProperty(),
-                         0.005);
+                        432.0,
+                        bean.getNested().getDoubleProperty(),
+                        0.005);
             assertEquals("floatProperty is 123.0",
-                         (float) 123.0,
-                         bean.getNested().getFloatProperty(),
-                         (float) 0.005);
+                        (float) 123.0,
+                        bean.getNested().getFloatProperty(),
+                        (float) 0.005);
             assertEquals("intProperty is 543",
-                         543, bean.getNested().getIntProperty());
+                        543, bean.getNested().getIntProperty());
             assertEquals("longProperty is 321",
-                         321, bean.getNested().getLongProperty());
+                        321, bean.getNested().getLongProperty());
             assertEquals("shortProperty is 654",
-                         (short) 654, bean.getNested().getShortProperty());
+                        (short) 654, bean.getNested().getShortProperty());
             assertEquals("stringProperty is \"This is a string\"",
-                         "This is a string",
-                         bean.getNested().getStringProperty());
+                        "This is a string",
+                        bean.getNested().getStringProperty());
             assertEquals("writeOnlyProperty is \"New writeOnlyProperty value\"",
-                         "New writeOnlyProperty value",
-                         bean.getNested().getWriteOnlyPropertyValue());
+                        "New writeOnlyProperty value",
+                        bean.getNested().getWriteOnlyPropertyValue());
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
         }
 
@@ -801,33 +820,35 @@ public class BeanUtilsTestCase extends TestCase {
             assertTrue("booleanProperty is false", !bean.getBooleanProperty());
             assertTrue("booleanSecond is true", bean.isBooleanSecond());
             assertEquals("byteProperty is 111",
-                         (byte) 111, bean.getByteProperty());
+                        (byte) 111, bean.getByteProperty());
             assertEquals("doubleProperty is 432.0",
-                         432.0, bean.getDoubleProperty(),
-                         0.005);
+                        432.0, bean.getDoubleProperty(),
+                        0.005);
             assertEquals("floatProperty is 123.0",
-                         (float) 123.0, bean.getFloatProperty(),
-                         (float) 0.005);
+                        (float) 123.0, bean.getFloatProperty(),
+                        (float) 0.005);
             assertEquals("intProperty is 543",
-                         543, bean.getIntProperty());
+                        543, bean.getIntProperty());
             assertEquals("longProperty is 0",
-                         0, bean.getLongProperty());
+                        0, bean.getLongProperty());
             assertNull("nullProperty is null",
-                       bean.getNullProperty());
+                        bean.getNullProperty());
             assertEquals("shortProperty is 654",
-                         (short) 654, bean.getShortProperty());
+                        (short) 654, bean.getShortProperty());
             assertEquals("stringProperty is \"This is a string\"",
-                         "This is a string", bean.getStringProperty());
+                        "This is a string", bean.getStringProperty());
             assertEquals("writeOnlyProperty is \"New writeOnlyProperty value\"",
-                         "New writeOnlyProperty value",
-                         bean.getWriteOnlyPropertyValue());
+                        "New writeOnlyProperty value",
+                        bean.getWriteOnlyPropertyValue());
             assertEquals("readOnlyProperty is \"Read Only String Property\"",
-                         "Read Only String Property",
-                         bean.getReadOnlyProperty());
+                        "Read Only String Property",
+                        bean.getReadOnlyProperty());
 
-        } catch (final IllegalAccessException e) {
+        }
+        catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
-        } catch (final InvocationTargetException e) {
+        }
+        catch (final InvocationTargetException e) {
             fail("InvocationTargetException");
         }
 
@@ -847,9 +868,9 @@ public class BeanUtilsTestCase extends TestCase {
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
-                   newValue instanceof String[]);
+                    newValue instanceof String[]);
         assertEquals("stringArray length",
-                     1, ((String[]) newValue).length);
+                    1, ((String[]) newValue).length);
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
         // Indexed value into array
@@ -858,17 +879,17 @@ public class BeanUtilsTestCase extends TestCase {
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
-                   newValue instanceof String[]);
+                    newValue instanceof String[]);
         assertEquals("stringArray length",
-                     5, ((String[]) newValue).length);
+                    5, ((String[]) newValue).length);
         assertTrue("stringArray[2] is null",
-                   ((String[]) newValue)[2] == null);
+                    ((String[]) newValue)[2] == null);
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
         // Value into scalar
         BeanUtils.setProperty(bean, "stringProperty", null);
         assertTrue("stringProperty is now null",
-                   BeanUtils.getProperty(bean, "stringProperty") == null);
+                    BeanUtils.getProperty(bean, "stringProperty") == null);
 
     }
 
@@ -877,9 +898,9 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetPropertyOnPrimitiveWrappers() throws Exception {
 
-        BeanUtils.setProperty(bean,"intProperty", new Integer(1));
-        assertEquals(1,bean.getIntProperty());
-        BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
+        BeanUtils.setProperty(bean, "intProperty", new Integer(1));
+        assertEquals(1, bean.getIntProperty());
+        BeanUtils.setProperty(bean, "stringProperty", new Integer(1));
         assertEquals(1, Integer.parseInt(bean.getStringProperty()));
 
     }
@@ -891,12 +912,12 @@ public class BeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "byteProperty", new Byte((byte) 123));
         assertEquals((byte) 123, bean.getByteProperty());
-/*
-        BeanUtils.setProperty(bean, "byteProperty", new Double((double) 123));
-        assertEquals((byte) 123, bean.getByteProperty());
-        BeanUtils.setProperty(bean, "byteProperty", new Float((float) 123));
-        assertEquals((byte) 123, bean.getByteProperty());
-*/
+        /*
+         * BeanUtils.setProperty(bean, "byteProperty", new Double((double) 123));
+         * assertEquals((byte) 123, bean.getByteProperty()); BeanUtils.setProperty(bean,
+         * "byteProperty", new Float((float) 123)); assertEquals((byte) 123,
+         * bean.getByteProperty());
+         */
         BeanUtils.setProperty(bean, "byteProperty", new Integer(123));
         assertEquals((byte) 123, bean.getByteProperty());
         BeanUtils.setProperty(bean, "byteProperty", new Long(123));
@@ -912,7 +933,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testSetPropertyConvert() {
         try {
             BeanUtils.setProperty(bean, "dateProperty", testCalendar);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
@@ -924,7 +946,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testSetPropertyConvertFromString() {
         try {
             BeanUtils.setProperty(bean, "dateProperty", testStringDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("String --> java.util.Date", testUtilDate, bean.getDateProperty());
@@ -936,7 +959,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testSetPropertyConvertToString() {
         try {
             BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
@@ -949,7 +973,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setStringArray(null);
             BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
@@ -963,7 +988,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setStringArray(new String[1]);
             BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
@@ -1016,12 +1042,12 @@ public class BeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
         assertEquals(123, bean.getIntProperty());
-/*
-        BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
-        assertEquals((int) 123, bean.getIntProperty());
-        BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
-        assertEquals((int) 123, bean.getIntProperty());
-*/
+        /*
+         * BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
+         * assertEquals((int) 123, bean.getIntProperty()); BeanUtils.setProperty(bean,
+         * "longProperty", new Float((float) 123)); assertEquals((int) 123,
+         * bean.getIntProperty());
+         */
         BeanUtils.setProperty(bean, "longProperty", new Integer(123));
         assertEquals(123, bean.getIntProperty());
         BeanUtils.setProperty(bean, "longProperty", new Long(123));
@@ -1038,12 +1064,12 @@ public class BeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
         assertEquals(123, bean.getLongProperty());
-/*
-        BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
-        assertEquals((long) 123, bean.getLongProperty());
-        BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
-        assertEquals((long) 123, bean.getLongProperty());
-*/
+        /*
+         * BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
+         * assertEquals((long) 123, bean.getLongProperty()); BeanUtils.setProperty(bean,
+         * "longProperty", new Float((float) 123)); assertEquals((long) 123,
+         * bean.getLongProperty());
+         */
         BeanUtils.setProperty(bean, "longProperty", new Integer(123));
         assertEquals(123, bean.getLongProperty());
         BeanUtils.setProperty(bean, "longProperty", new Long(123));
@@ -1071,12 +1097,12 @@ public class BeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "shortProperty", new Byte((byte) 123));
         assertEquals((short) 123, bean.getShortProperty());
-/*
-        BeanUtils.setProperty(bean, "shortProperty", new Double((double) 123));
-        assertEquals((short) 123, bean.getShortProperty());
-        BeanUtils.setProperty(bean, "shortProperty", new Float((float) 123));
-        assertEquals((short) 123, bean.getShortProperty());
-*/
+        /*
+         * BeanUtils.setProperty(bean, "shortProperty", new Double((double) 123));
+         * assertEquals((short) 123, bean.getShortProperty());
+         * BeanUtils.setProperty(bean, "shortProperty", new Float((float) 123));
+         * assertEquals((short) 123, bean.getShortProperty());
+         */
         BeanUtils.setProperty(bean, "shortProperty", new Integer(123));
         assertEquals((short) 123, bean.getShortProperty());
         BeanUtils.setProperty(bean, "shortProperty", new Long(123));
@@ -1091,14 +1117,14 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetPropertyStringToArray() throws Exception {
         BeanUtils.setProperty(bean, "stringArray", "ABC,DEF,GHI");
-        final String[] strArray =  bean.getStringArray();
+        final String[] strArray = bean.getStringArray();
         assertEquals("length", 3, strArray.length);
         assertEquals("value[0]", "ABC", strArray[0]);
         assertEquals("value[1]", "DEF", strArray[1]);
         assertEquals("value[2]", "GHI", strArray[2]);
 
         BeanUtils.setProperty(bean, "intArray", "0, 10, 20, 30, 40");
-        final int[] intArray =  bean.getIntArray();
+        final int[] intArray = bean.getIntArray();
         assertEquals("length", 5, intArray.length);
         assertEquals("value[0]", 0, intArray[0]);
         assertEquals("value[1]", 10, intArray[1]);
@@ -1133,7 +1159,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testCopyPropertyConvert() {
         try {
             BeanUtils.copyProperty(bean, "dateProperty", testCalendar);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("Calendar --> java.util.Date", testUtilDate, bean.getDateProperty());
@@ -1145,7 +1172,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testCopyPropertyConvertFromString() {
         try {
             BeanUtils.copyProperty(bean, "dateProperty", testStringDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("String --> java.util.Date", testUtilDate, bean.getDateProperty());
@@ -1157,7 +1185,8 @@ public class BeanUtilsTestCase extends TestCase {
     public void testCopyPropertyConvertToString() {
         try {
             BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testUtilDate.toString(), bean.getStringProperty());
@@ -1170,7 +1199,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setStringArray(null);
             BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
@@ -1184,7 +1214,8 @@ public class BeanUtilsTestCase extends TestCase {
         try {
             bean.setStringArray(new String[1]);
             BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String[]", testUtilDate.toString(), bean.getStringArray()[0]);
@@ -1291,15 +1322,15 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test copying a property using a nested indexed array expression,
-     * with and without conversions.
+     * Test copying a property using a nested indexed array expression, with and
+     * without conversions.
      */
     public void testCopyPropertyNestedIndexedArray() throws Exception {
 
-        final int origArray[] = { 0, 10, 20, 30, 40 };
-        final int intArray[] = { 0, 0, 0 };
+        final int origArray[] = {0, 10, 20, 30, 40};
+        final int intArray[] = {0, 0, 0};
         bean.getNested().setIntArray(intArray);
-        final int intChanged[] = { 0, 0, 0 };
+        final int intChanged[] = {0, 0, 0};
 
         // No conversion required
         BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
@@ -1341,7 +1372,7 @@ public class BeanUtilsTestCase extends TestCase {
 
         // No conversion required
         BeanUtils.copyProperty(bean, "nested.mapProperty(Second Key)",
-                               "New Second Value");
+                    "New Second Value");
         checkMap(bean.getMapProperty(), origMap);
         changedMap.put("Second Key", "New Second Value");
         checkMap(bean.getNested().getMapProperty(), changedMap);
@@ -1349,8 +1380,8 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test copying a property using a nested simple expression, with and
-     * without conversions.
+     * Test copying a property using a nested simple expression, with and without
+     * conversions.
      */
     public void testCopyPropertyNestedSimple() throws Exception {
 
@@ -1441,23 +1472,25 @@ public class BeanUtilsTestCase extends TestCase {
         map.put("sub-key-3", "sub-value-3");
         bean.getMapProperty().put("mappedMap", map);
 
-        assertEquals("BEFORE", "sub-value-3", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("BEFORE", "sub-value-3", ((Map<?, ?>) bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
         try {
             BeanUtils.setProperty(bean, "mapProperty(mappedMap)(sub-key-3)", "SUB-KEY-3-UPDATED");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t + "");
         }
-        assertEquals("AFTER", "SUB-KEY-3-UPDATED", ((Map<?, ?>)bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
+        assertEquals("AFTER", "SUB-KEY-3-UPDATED",
+                    ((Map<?, ?>) bean.getMapProperty().get("mappedMap")).get("sub-key-3"));
     }
 
     /** Tests that separate instances can register separate instances */
     public void testSeparateInstances() throws Exception {
         final BeanUtilsBean utilsOne = new BeanUtilsBean(
-                                                new ConvertUtilsBean(),
-                                                new PropertyUtilsBean());
+                    new ConvertUtilsBean(),
+                    new PropertyUtilsBean());
         final BeanUtilsBean utilsTwo = new BeanUtilsBean(
-                                                new ConvertUtilsBean(),
-                                                new PropertyUtilsBean());
+                    new ConvertUtilsBean(),
+                    new PropertyUtilsBean());
 
         final TestBean bean = new TestBean();
 
@@ -1479,7 +1512,9 @@ public class BeanUtilsTestCase extends TestCase {
             utilsOne.setProperty(bean, "booleanProperty", "true");
             fail("Registered conversion not used.");
 
-        } catch (final PassTestException e) { /* Do nothing */ }
+        }
+        catch (final PassTestException e) {
+            /* Do nothing */ }
 
         // make sure that this conversion has no been registered in the other instance
         try {
@@ -1488,29 +1523,30 @@ public class BeanUtilsTestCase extends TestCase {
             utilsTwo.setProperty(bean, "booleanProperty", "true");
             assertEquals("Set property failed (3)", bean.getBooleanProperty(), true);
 
-        } catch (final PassTestException e) {
+        }
+        catch (final PassTestException e) {
             fail("Registed converter is used by other instances");
         }
     }
 
     public void testArrayPropertyConversion() throws Exception {
         final BeanUtilsBean beanUtils = new BeanUtilsBean(
-                                                    new ConvertUtilsBean(),
-                                                    new PropertyUtilsBean());
+                    new ConvertUtilsBean(),
+                    new PropertyUtilsBean());
 
         final TestBean bean = new TestBean();
-        final String [] results = beanUtils.getArrayProperty(bean, "intArray");
+        final String[] results = beanUtils.getArrayProperty(bean, "intArray");
 
         final int[] values = bean.getIntArray();
         assertEquals(
                     "Converted array size not equal to property array size.",
                     results.length,
                     values.length);
-        for (int i=0, size=values.length ;  i<size; i++) {
+        for (int i = 0, size = values.length; i < size; i++) {
             assertEquals(
-                    "Value " + i + " incorrectly converted ",
-                    values[i] + "",
-                    results[i]);
+                        "Value " + i + " incorrectly converted ",
+                        values[i] + "",
+                        results[i]);
         }
     }
 
@@ -1520,7 +1556,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("actual array length", expected.length, actual.length);
         for (int i = 0; i < actual.length; i++) {
             assertEquals("actual array value[" + i + "]",
-                         expected[i], actual[i]);
+                        expected[i], actual[i]);
         }
     }
 
@@ -1532,7 +1568,7 @@ public class BeanUtilsTestCase extends TestCase {
         while (keys.hasNext()) {
             final Object key = keys.next();
             assertEquals("actual map value(" + key + ")",
-                         expected.get(key), actual.get(key));
+                        expected.get(key), actual.get(key));
         }
     }
 
@@ -1542,9 +1578,9 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "mapproperty(this.that.the-other)", "some.dotty.value");
 
         assertEquals(
-                        "Mapped property set correctly",
-                        "some.dotty.value",
-                        bean.getMapproperty("this.that.the-other"));
+                    "Mapped property set correctly",
+                    "some.dotty.value",
+                    bean.getMapproperty("this.that.the-other"));
     }
 
     /**
@@ -1555,19 +1591,21 @@ public class BeanUtilsTestCase extends TestCase {
             return;
         }
         final String parentMsg = "PARENT-THROWABLE";
-        final String causeMsg  = "THROWABLE-CAUSE";
+        final String causeMsg = "THROWABLE-CAUSE";
         try {
             initCauseAndThrowException(parentMsg, causeMsg);
-        } catch (final Throwable thrownParent) {
+        }
+        catch (final Throwable thrownParent) {
             assertEquals("Parent", parentMsg, thrownParent.getMessage());
             try {
                 assertEquals("Parent", parentMsg, thrownParent.getMessage());
                 final Throwable thrownCause = getCause(thrownParent);
                 assertNotNull("Cause Null", thrownCause);
                 assertEquals("Cause", causeMsg, thrownCause.getMessage());
-            } catch (final Throwable testError) {
+            }
+            catch (final Throwable testError) {
                 fail("If you're running JDK 1.3 then don't worry this should fail," +
-                        " if not then needs checking out: " + testError);
+                            " if not then needs checking out: " + testError);
             }
         }
     }
@@ -1576,7 +1614,7 @@ public class BeanUtilsTestCase extends TestCase {
      * Use reflection to get the cause
      */
     private Throwable getCause(final Throwable t) throws Throwable {
-        return (Throwable)PropertyUtils.getProperty(t, "cause");
+        return (Throwable) PropertyUtils.getProperty(t, "cause");
     }
 
     /**
@@ -1585,7 +1623,8 @@ public class BeanUtilsTestCase extends TestCase {
     private void initCauseAndThrowException(final String parent, final String cause) throws Throwable {
         try {
             throwException(cause);
-        } catch (final Throwable e) {
+        }
+        catch (final Throwable e) {
             final Throwable t = new Exception(parent);
             BeanUtils.initCause(t, e);
             throw t;
@@ -1604,7 +1643,7 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public static boolean isPre14JVM() {
         final String version = System.getProperty("java.specification.version");
-        final StringTokenizer tokenizer = new StringTokenizer(version,".");
+        final StringTokenizer tokenizer = new StringTokenizer(version, ".");
         if (tokenizer.nextToken().equals("1")) {
             final String minorVersion = tokenizer.nextToken();
             if (minorVersion.equals("0")) {

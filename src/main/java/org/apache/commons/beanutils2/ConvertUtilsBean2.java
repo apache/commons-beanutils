@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 /**
  * {@link ConvertUtilsBean} implementation that delegates {@code convert()}
  * methods to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
- *
  * <p>
  * To configure this implementation for the current context ClassLoader invoke
  * {@code BeanUtilsBean.setInstance(new BeanUtilsBean2());}
@@ -31,47 +30,42 @@ package org.apache.commons.beanutils2;
 public class ConvertUtilsBean2 extends ConvertUtilsBean {
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Value to be converted (may be null)
      * @return The converted String value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
     public String convert(final Object value) {
-        return (String)convert(value, String.class);
+        return (String) convert(value, String.class);
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value or null if value is null
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
     public Object convert(final String value, final Class<?> clazz) {
-        return convert((Object)value, clazz);
+        return convert((Object) value, clazz);
     }
 
     /**
-     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)}
-     * method.
+     * Delegates to the new {@link ConvertUtilsBean#convert(Object, Class)} method.
      *
      * @param value Array of values to be converted
-     * @param clazz Java array or element class to be converted to (must not be null)
+     * @param clazz Java array or element class to be converted to (must not be
+     *            null)
      * @return The converted value
-     *
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
     public Object convert(final String[] value, final Class<?> clazz) {
-        return convert((Object)value, clazz);
+        return convert((Object) value, clazz);
     }
 
 }

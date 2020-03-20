@@ -26,12 +26,9 @@ import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
- *
  */
 
 public class PropertyUtilsBenchCase extends TestCase {
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -43,8 +40,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         super(name);
 
     }
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -64,8 +59,6 @@ public class PropertyUtilsBenchCase extends TestCase {
     // PropertyUtilsBean instance to be used
     private PropertyUtilsBean pu = null;
 
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -79,18 +72,17 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
 
         // Set up DynaClass for our DynaBean instances
-        dynaClass = new BasicDynaClass
-            ("BenchDynaClass", null,
-             new DynaProperty[]{
-                 new DynaProperty("booleanProperty", Boolean.TYPE),
-                 new DynaProperty("byteProperty", Byte.TYPE),
-                 new DynaProperty("doubleProperty", Double.TYPE),
-                 new DynaProperty("floatProperty", Float.TYPE),
-                 new DynaProperty("intProperty", Integer.TYPE),
-                 new DynaProperty("longProperty", Long.TYPE),
-                 new DynaProperty("shortProperty", Short.TYPE),
-                 new DynaProperty("stringProperty", String.class),
-             });
+        dynaClass = new BasicDynaClass("BenchDynaClass", null,
+                    new DynaProperty[] {
+                                new DynaProperty("booleanProperty", Boolean.TYPE),
+                                new DynaProperty("byteProperty", Byte.TYPE),
+                                new DynaProperty("doubleProperty", Double.TYPE),
+                                new DynaProperty("floatProperty", Float.TYPE),
+                                new DynaProperty("intProperty", Integer.TYPE),
+                                new DynaProperty("longProperty", Long.TYPE),
+                                new DynaProperty("shortProperty", Short.TYPE),
+                                new DynaProperty("stringProperty", String.class),
+                    });
 
         // Create input instances
         inBean = new BenchBean();
@@ -146,8 +138,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
-
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
 
@@ -164,7 +154,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
         // Bean->Dyna
         for (long i = 0; i < counter; i++) {
@@ -176,7 +166,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
     }
 
@@ -196,7 +186,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
@@ -208,7 +198,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
     }
 
@@ -228,7 +218,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean, map), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
@@ -240,10 +230,8 @@ public class PropertyUtilsBenchCase extends TestCase {
         }
         stop = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna, map), count=" + counter +
-                           ", time=" + (stop - start));
+                    ", time=" + (stop - start));
 
     }
-
-
 
 }

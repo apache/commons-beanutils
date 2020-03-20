@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * Test class for {@code IntrospectionContext}.
- *
  */
 public class DefaultIntrospectionContextTestCase extends TestCase {
     /** Constant for the name of a property. */
@@ -49,8 +48,9 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     private static PropertyDescriptor createDescriptor(final String propName) {
         try {
             return new PropertyDescriptor(propName,
-                    DefaultIntrospectionContextTestCase.class, null, null);
-        } catch (final IntrospectionException e) {
+                        DefaultIntrospectionContextTestCase.class, null, null);
+        }
+        catch (final IntrospectionException e) {
             throw new IllegalStateException("Unexpected exception: " + e);
         }
     }
@@ -60,7 +60,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      */
     public void testInit() {
         assertEquals("Wrong current class", getClass(),
-                context.getTargetClass());
+                    context.getTargetClass());
         assertTrue("Got property names", context.propertyNames().isEmpty());
     }
 
@@ -72,7 +72,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         context.addPropertyDescriptor(desc);
         assertTrue("Property not found", context.hasProperty(PROP));
         assertSame("Wrong descriptor", desc,
-                context.getPropertyDescriptor(PROP));
+                    context.getPropertyDescriptor(PROP));
     }
 
     /**
@@ -82,7 +82,8 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         try {
             context.addPropertyDescriptor(null);
             fail("Could add null descriptor!");
-        } catch (final IllegalArgumentException iex) {
+        }
+        catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -107,11 +108,11 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         assertTrue("Property not found: " + PROP, names.contains(PROP));
         for (int i = 0; i < count; i++) {
             assertTrue("Property not found: " + (PROP + i),
-                    names.contains(PROP + i));
+                        names.contains(PROP + i));
         }
         final PropertyDescriptor[] addedDescs = context.getPropertyDescriptors();
         assertEquals("Wrong number of added descriptors", count + 1,
-                addedDescs.length);
+                    addedDescs.length);
         for (final PropertyDescriptor pd : addedDescs) {
             assertTrue("Unexpected descriptor: " + pd, descSet.remove(pd));
         }
@@ -124,7 +125,8 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         try {
             context.addPropertyDescriptors(null);
             fail("Could add a null array with descriptors!");
-        } catch (final IllegalArgumentException iex) {
+        }
+        catch (final IllegalArgumentException iex) {
             // ok
         }
     }
@@ -155,7 +157,8 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         try {
             names.add(PROP);
             fail("Could modify property names set!");
-        } catch (final UnsupportedOperationException uex) {
+        }
+        catch (final UnsupportedOperationException uex) {
             // ok
         }
     }
@@ -168,6 +171,6 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         context.removePropertyDescriptor(PROP);
         assertTrue("Got property names", context.propertyNames().isEmpty());
         assertEquals("Got descriptors", 0,
-                context.getPropertyDescriptors().length);
+                    context.getPropertyDescriptors().length);
     }
 }

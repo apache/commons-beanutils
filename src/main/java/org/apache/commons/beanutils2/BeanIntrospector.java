@@ -37,16 +37,15 @@ import java.beans.IntrospectionException;
  */
 public interface BeanIntrospector {
     /**
-     * Performs introspection on a Java class. The current class to be inspected
-     * can be queried from the passed in {@code IntrospectionContext}
-     * object. A typical implementation has to obtain this class, determine its
-     * properties according to the rules it implements, and add them to the
-     * passed in context object.
+     * Performs introspection on a Java class. The current class to be inspected can
+     * be queried from the passed in {@code IntrospectionContext} object. A typical
+     * implementation has to obtain this class, determine its properties according
+     * to the rules it implements, and add them to the passed in context object.
      *
-     * @param icontext the context object for interaction with the initiator of
-     *        the introspection request
+     * @param icontext the context object for interaction with the initiator of the
+     *            introspection request
      * @throws IntrospectionException if an error occurs during introspection
      */
     void introspect(IntrospectionContext icontext)
-            throws IntrospectionException;
+                throws IntrospectionException;
 }

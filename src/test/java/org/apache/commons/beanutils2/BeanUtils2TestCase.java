@@ -21,11 +21,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link BeanUtilsBean2}.
- *
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -35,8 +32,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public BeanUtils2TestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -70,7 +65,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public void testCopyPropertyConvertToString() {
         try {
             BeanUtils.copyProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
@@ -84,7 +80,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setStringArray(null);
             BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
@@ -99,7 +96,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setStringArray(new String[1]);
             BeanUtils.copyProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
@@ -115,7 +113,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
             value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, value.length);
@@ -131,7 +130,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
             value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[0] --> String", testStringDate, value);
@@ -146,7 +146,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setDateProperty(testUtilDate);
             value = BeanUtils.getSimpleProperty(bean, "dateProperty");
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testStringDate, value);
@@ -159,7 +160,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public void testSetPropertyConvertToString() {
         try {
             BeanUtils.setProperty(bean, "stringProperty", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String", testStringDate, bean.getStringProperty());
@@ -173,7 +175,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setStringArray(null);
             BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date[] --> String[] length", 1, bean.getStringArray().length);
@@ -188,7 +191,8 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         try {
             bean.setStringArray(new String[1]);
             BeanUtils.setProperty(bean, "stringArray[0]", testUtilDate);
-        } catch (final Throwable t) {
+        }
+        catch (final Throwable t) {
             fail("Threw " + t);
         }
         assertEquals("java.util.Date --> String[]", testStringDate, bean.getStringArray()[0]);

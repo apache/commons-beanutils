@@ -21,15 +21,14 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code LazyDynaClass} implementation class.</p>
- *
+ * <p>
+ * Test Case for the {@code LazyDynaClass} implementation class.
+ * </p>
  */
 public class LazyDynaClassTestCase extends TestCase {
 
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
-
-
+    protected String testProperty = "myProperty";
 
     /**
      * Construct a new instance of this test case.
@@ -40,13 +39,11 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Run this Test
      */
     public static void main(final String[] args) {
-      junit.textui.TestRunner.run(suite());
+        junit.textui.TestRunner.run(suite());
     }
 
     /**
@@ -71,8 +68,6 @@ public class LazyDynaClassTestCase extends TestCase {
     public void tearDown() {
         dynaClass = null;
     }
-
-
 
     /**
      * Test add(name) method
@@ -101,7 +96,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(testProperty, String.class, true, true);
             fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException expected) {
+        }
+        catch (final UnsupportedOperationException expected) {
             // expected result
         }
     }
@@ -111,9 +107,10 @@ public class LazyDynaClassTestCase extends TestCase {
      */
     public void testAddPropertyNullName1() {
         try {
-            dynaClass.add((String)null);
+            dynaClass.add((String) null);
             fail("null property name not prevented");
-        } catch (final IllegalArgumentException expected) {
+        }
+        catch (final IllegalArgumentException expected) {
             // expected result
         }
     }
@@ -125,7 +122,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(null, String.class);
             fail("null property name not prevented");
-        } catch (final IllegalArgumentException expected) {
+        }
+        catch (final IllegalArgumentException expected) {
             // expected result
         }
     }
@@ -137,7 +135,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(null, String.class, true, true);
             fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException expected) {
+        }
+        catch (final UnsupportedOperationException expected) {
             // expected result
         }
     }
@@ -151,7 +150,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(testProperty);
             fail("add(name) did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
+        }
+        catch (final IllegalStateException expected) {
             // expected result
         }
     }
@@ -165,13 +165,15 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(testProperty, String.class);
             fail("add(name, type) did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
+        }
+        catch (final IllegalStateException expected) {
             // expected result
         }
     }
 
     /**
-     * Test add(name, type, readable, writable) method when restricted is set to 'true'
+     * Test add(name, type, readable, writable) method when restricted is set to
+     * 'true'
      */
     public void testAddPropertyRestricted3() {
         dynaClass.setRestricted(true);
@@ -179,7 +181,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.add(testProperty, String.class, true, true);
             fail("add(name, type, readable, writable) did not throw UnsupportedOperationException");
-        } catch (final UnsupportedOperationException t) {
+        }
+        catch (final UnsupportedOperationException t) {
             // expected result
         }
     }
@@ -225,7 +228,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.remove(null);
             fail("remove(null) did not throw IllegalArgumentException");
-        } catch (final IllegalArgumentException expected) {
+        }
+        catch (final IllegalArgumentException expected) {
             // expected result
         }
     }
@@ -241,7 +245,8 @@ public class LazyDynaClassTestCase extends TestCase {
         try {
             dynaClass.remove(testProperty);
             fail("remove property when MutableDynaClassis restricted did not throw IllegalStateException");
-        } catch (final IllegalStateException expected) {
+        }
+        catch (final IllegalStateException expected) {
             // expected result
         }
     }
