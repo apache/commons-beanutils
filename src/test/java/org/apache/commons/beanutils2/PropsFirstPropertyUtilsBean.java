@@ -21,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
- * A PropertyUtilsBean which customises the behaviour of the
+ * A PropertyUtilsBean which customises the behavior of the
  * setNestedProperty and getNestedProperty methods to look for
  * simple properties in preference to map entries.
  *

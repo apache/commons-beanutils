@@ -103,11 +103,11 @@
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
 CVE-2014-0114. More specifically, our goal with BEANUTILS-520
-is to set the default behaviour of the BeanUtilsBean
+is to set the default behavior of the BeanUtilsBean
 to not allow class level access. The goal in doing this now
-is to bring 1.9.X into alignment with the same behaviour
+is to bring 1.9.X into alignment with the same behavior
 of the 2.X version line in regards to security.
-If one would like to opt out of the default behaviour, one could follow the
+If one would like to opt out of the default behavior, one could follow the
 example set out in the test class available in
 src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
       <action issue="BEANUTILS-520" dev="chtompki" type="fix" due-to="Melloware">
@@ -417,7 +417,7 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
         Beanutils's describe() method cannot determine reader methods for anonymous class.
       </action>
       <action dev="rdonkin" type="fix" issue="BEANUTILS-158">
-        Added warning about describe behaviour to the javadocs.
+        Added warning about describe behavior to the javadocs.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-249" due-to="Brad">
         BeanUtilsBean's setProperty() does not convert objects using custom converters properly.
@@ -481,7 +481,7 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
         Create new methods getPropertyOfMapBean and setPropertyOfMapBean that the existing
         setNestedProperty and getNestedProperty methods now call when they discover the bean
         they are accessing implements Map. This makes it much easier for users to subclass
-        and customise this behaviour of PropertyUtilsBean, eg in order to restore pre-1.5 behaviour.
+        and customise this behavior of PropertyUtilsBean, eg in order to restore pre-1.5 behavior.
         This patch also causes an exception to be thrown when the propertyName passed to
         getPropertyOfMapBean or setPropertyOfMapBean has MAPPED_DELIM or INDEXED_DELIM chars in
         it. This never worked as expected before (the whole string was treated literally as the

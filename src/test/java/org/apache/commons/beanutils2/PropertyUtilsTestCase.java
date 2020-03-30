@@ -4249,9 +4249,9 @@ public class PropertyUtilsTestCase extends TestCase {
      * This tests to see that classes that implement Map always have their
      * custom properties ignored.
      * <p>
-     * Note that this behaviour has changed several times over past releases
+     * Note that this behavior has changed several times over past releases
      * of beanutils, breaking backwards compatibility each time. Here's hoping
-     * that the current 1.7.1 release is the last time this behaviour changes!
+     * that the current 1.7.1 release is the last time this behavior changes!
      */
     public void testMapExtensionDefault() throws Exception {
         final ExtendMapBean bean = new ExtendMapBean();
@@ -4284,7 +4284,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
     /**
      * This tests to see that it is possible to subclass PropertyUtilsBean
-     * and change the behaviour of setNestedProperty/getNestedProperty when
+     * and change the behavior of setNestedProperty/getNestedProperty when
      * dealing with objects that implement Map.
      */
     public void testMapExtensionCustom() throws Exception {

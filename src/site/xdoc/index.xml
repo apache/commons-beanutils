@@ -149,7 +149,7 @@ public void testSuppressClassPropertyByDefault() throws Exception {
 }
 
 /**
-* Example usage to restore 1.9.3 behaviour
+* Example usage to restore 1.9.3 behavior
 */
 public void testAllowAccessToClassProperty() throws Exception {
   final BeanUtilsBean bub = new BeanUtilsBean();
