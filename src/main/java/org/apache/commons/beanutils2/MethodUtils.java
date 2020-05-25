@@ -1185,7 +1185,7 @@ public class MethodUtils {
 
         if (parameterType.isPrimitive()) {
             // this method does *not* do widening - you must specify exactly
-            // is this the right behaviour?
+            // is this the right behavior?
             final Class<?> parameterWrapperClazz = getPrimitiveWrapper(parameterType);
             if (parameterWrapperClazz != null) {
                 return parameterWrapperClazz.equals(parameterization);
