@@ -106,7 +106,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      */
     @Override
     public String toString() {
-        return "BeanMap<" + String.valueOf(bean) + ">";
+        return "BeanMap<" + bean + ">";
     }
 
     /**
@@ -267,13 +267,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             if (method != null) {
                 try {
                     return method.invoke(bean, NULL_ARGUMENTS);
-                } catch (final IllegalAccessException e) {
-                    logWarn(e);
-                } catch (final IllegalArgumentException e) {
-                    logWarn(e);
-                } catch (final InvocationTargetException e) {
-                    logWarn(e);
-                } catch (final NullPointerException e) {
+                } catch (final IllegalAccessException | NullPointerException | InvocationTargetException | IllegalArgumentException e) {
                     logWarn(e);
                 }
             }
@@ -306,15 +300,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
                 final Object newValue = get(name);
                 firePropertyChange(name, oldValue, newValue);
-            } catch (final InvocationTargetException e) {
+            } catch (final InvocationTargetException | IllegalAccessException e) {
                 final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (BeanUtils.initCause(iae, e) == false) {
-                    logInfo(e);
-                }
-                throw iae;
-            } catch (final IllegalAccessException e) {
-                final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (BeanUtils.initCause(iae, e) == false) {
+                if (!BeanUtils.initCause(iae, e)) {
                     logInfo(e);
                 }
                 throw iae;
@@ -576,7 +564,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     /**
-     * Called during a successful {@link #put(Object,Object)} operation. Default implementation does nothing. Override
+     * Called during a successful {@link #put(String,Object)} operation. Default implementation does nothing. Override
      * to be notified of property changes in the bean caused by this map.
      *
      * @param key the name of the property that changed
@@ -643,9 +631,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             throws IllegalAccessException, ClassCastException {
         try {
             if (value != null) {
-                final Class<? extends Object>[] parmTypes = method.getParameterTypes();
-                if (parmTypes != null && parmTypes.length > 0) {
-                    final Class<? extends Object> paramType = parmTypes[0];
+                final Class<? extends Object>[] paramTypes = method.getParameterTypes();
+                if (paramTypes != null && paramTypes.length > 0) {
+                    final Class<? extends Object> paramType = paramTypes[0];
                     if (!paramType.isAssignableFrom(value.getClass())) {
                         value = convertType(paramType, value);
                     }
@@ -655,13 +643,13 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             return answer;
         } catch (final InvocationTargetException e) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (BeanUtils.initCause(iae, e) == false) {
+            if (!BeanUtils.initCause(iae, e)) {
                 logInfo(e);
             }
             throw iae;
         } catch (final InstantiationException e) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (BeanUtils.initCause(iae, e) == false) {
+            if (!BeanUtils.initCause(iae, e)) {
                 logInfo(e);
             }
             BeanUtils.initCause(iae, e);

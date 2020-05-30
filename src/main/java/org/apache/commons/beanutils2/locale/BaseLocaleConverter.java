@@ -223,7 +223,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
             }
             // symmetric beanutils function allows null
             // so do not: throw new ConversionException("No value specified");
-            log.debug("Null value specified for conversion, returing null");
+            log.debug("Null value specified for conversion, returning null");
             return null;
         }
 

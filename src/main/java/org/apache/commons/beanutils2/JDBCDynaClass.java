@@ -106,7 +106,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * <p>Return an array of {@code ProperyDescriptors} for the properties
+     * <p>Return an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      */
@@ -255,8 +255,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         // Convert this list into the internal data structures we need
         properties =
             list.toArray(new DynaProperty[list.size()]);
-        for (final DynaProperty propertie : properties) {
-            propertiesMap.put(propertie.getName(), propertie);
+        for (final DynaProperty property : properties) {
+            propertiesMap.put(property.getName(), property);
         }
 
     }

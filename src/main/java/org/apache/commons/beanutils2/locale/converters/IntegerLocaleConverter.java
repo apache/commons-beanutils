@@ -215,7 +215,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     protected Object parse(final Object value, final String pattern) throws ParseException {
         final Number parsed = (Number) super.parse(value, pattern);
         if (parsed.longValue() != parsed.intValue()) {
-            throw new ConversionException("Suplied number is not of type Integer: " + parsed.longValue());
+            throw new ConversionException("Supplied number is not of type Integer: " + parsed.longValue());
         }
         return Integer.valueOf(parsed.intValue()); // unlike superclass it will return proper Integer
     }

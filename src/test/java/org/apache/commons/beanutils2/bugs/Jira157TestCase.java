@@ -174,7 +174,7 @@ public class Jira157TestCase extends TestCase {
         assertEquals("publicFoo Value", "PublicFoo Value", result.get("publicFoo"));
     }
 
-    public static interface XY {
+    public interface XY {
         String getX();
         String getY();
     }

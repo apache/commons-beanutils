@@ -229,7 +229,7 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
             return new BigInteger(result.toString());
         }
         catch (final NumberFormatException ex) {
-            throw new ConversionException("Suplied number is not of type BigInteger: " + result);
+            throw new ConversionException("Supplied number is not of type BigInteger: " + result);
         }
 
     }

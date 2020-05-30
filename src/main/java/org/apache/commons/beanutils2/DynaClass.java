@@ -35,7 +35,7 @@ public interface DynaClass {
      *
      * @return the name of the DynaClass
      */
-    public String getName();
+    String getName();
 
     /**
      * Returns a property descriptor for the specified property, if it exists;
@@ -47,10 +47,10 @@ public interface DynaClass {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
-    public DynaProperty getDynaProperty(String name);
+    DynaProperty getDynaProperty(String name);
 
     /**
-     * <p>Returns an array of {@code ProperyDescriptors} for the properties
+     * <p>Returns an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
@@ -60,7 +60,7 @@ public interface DynaClass {
      *
      * @return the set of properties for this DynaClass
      */
-    public DynaProperty[] getDynaProperties();
+    DynaProperty[] getDynaProperties();
 
     /**
      * Instantiates and return a new DynaBean instance, associated
@@ -74,7 +74,7 @@ public interface DynaClass {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
-    public DynaBean newInstance()
+    DynaBean newInstance()
             throws IllegalAccessException, InstantiationException;
 
 }

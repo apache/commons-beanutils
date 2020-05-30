@@ -193,7 +193,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check Mapped Property exists", TreeMap.class, bean.get(testProperty).getClass());
 //        assertNull("Check mapped property is null", bean.get(testProperty));
 
-        // Set a new mapped property - should instatiate a new TreeMap property and set the mapped value
+        // Set a new mapped property - should instantiate a new TreeMap property and set the mapped value
         bean.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, bean.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, bean.get(testProperty, testKey));

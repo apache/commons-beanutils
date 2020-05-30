@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
@@ -69,7 +70,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <ul>
  *    <li>
- *       The top level object in the {@code peeopleCollection} is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
@@ -94,7 +95,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <ul>
  *    <li>
- *       The top level object in the {@code peeopleCollection} is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
@@ -248,7 +249,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * @return True if they are equal; false otherwise.
      */
     protected boolean evaluateValue(final V expected, final Object actual) {
-        return expected == actual || expected != null && expected.equals(actual);
+        return Objects.equals(expected, actual);
     }
 
     /**

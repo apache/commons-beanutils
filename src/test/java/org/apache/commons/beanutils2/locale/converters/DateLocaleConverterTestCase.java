@@ -96,7 +96,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // different JDK versions seem to have different numbers of pattern characters
         final int lth = localChars.length() > expectedChars.length() ? expectedChars.length() :
-                     localChars.length() < expectedChars.length() ? localChars.length() : expectedChars.length();
+                Math.min(localChars.length(), expectedChars.length());
         validLocalDateSymbols = expectedChars.substring(0, lth).equals(localChars.substring(0, lth));
 
     }

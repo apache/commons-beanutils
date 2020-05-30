@@ -21,5 +21,5 @@ package org.apache.commons.beanutils2;
  */
 public interface Child {
 
-    public String getName();
+    String getName();
 }

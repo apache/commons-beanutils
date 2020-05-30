@@ -100,9 +100,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
-        final int intArray[] = { 0, 10, 20, 30, 40 };
+        final int[] intArray = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
-        final int intIndexed[] = { 0, 10, 20, 30, 40 };
+        final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
         final List<String> listIndexed = new ArrayList<>();
@@ -123,10 +123,10 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("mappedIntProperty", mappedIntProperty);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
-        final String stringArray[] =
+        final String[] stringArray =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        final String stringIndexed[] =
+        final String[] stringIndexed =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
@@ -253,14 +253,14 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
     /**
-     * Positive test for getDynaPropertys().  Each property name
+     * Positive test for getDynaProperties().  Each property name
      * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {
 
-        final DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
+        final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
-        final int count[] = new int[properties.length];
+        final int[] count = new int[properties.length];
         for (final DynaProperty element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
@@ -433,7 +433,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() == true);
+                    (Boolean) value);
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
@@ -922,8 +922,8 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     protected DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int[] intArray = new int[0];
+        final String[] stringArray = new String[0];
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,

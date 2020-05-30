@@ -183,7 +183,7 @@ public class MethodUtils {
      * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
-     * {@link #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
+     * {@link #invokeMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
      * </p>
      *
      * @param object invoke method on this object
@@ -223,7 +223,7 @@ public class MethodUtils {
      *
      * <p>The behavior of this method is less deterministic
      * than {@link
-     * #invokeExactMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
+     * #invokeExactMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
@@ -499,7 +499,7 @@ public class MethodUtils {
      * would match a {@code boolean} primitive.</p>
      *
      * <p> This is a convenient wrapper for
-     * {@link #invokeStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
+     * {@link #invokeStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}.
      * </p>
      *
      * @param objectClass invoke static method on this class
@@ -540,7 +540,7 @@ public class MethodUtils {
      *
      * <p>The behavior of this method is less deterministic
      * than {@link
-     * #invokeExactStaticMethod(Class objectClass,String methodName,Object [] args,Class[] parameterTypes)}.
+     * #invokeExactStaticMethod(Class objectClass, String methodName, Object[] args, Class[] parameterTypes)}.
      * It loops through all methods with names that match
      * and then executes the first it finds with compatible parameters.</p>
      *
@@ -858,16 +858,16 @@ public class MethodUtils {
 
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
+            for (Class<?> anInterface : interfaces) {
 
                 // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers())) {
+                if (!Modifier.isPublic(anInterface.getModifiers())) {
                     continue;
                 }
 
                 // Does the method exist on this interface?
                 try {
-                    method = interfaces[i].getDeclaredMethod(methodName,
+                    method = anInterface.getDeclaredMethod(methodName,
                             parameterTypes);
                 } catch (final NoSuchMethodException e) {
                     /* Swallow, if no method is found after the loop then this
@@ -880,7 +880,7 @@ public class MethodUtils {
 
                 // Recursively check our parent interfaces
                 method =
-                        getAccessibleMethodFromInterfaceNest(interfaces[i],
+                        getAccessibleMethodFromInterfaceNest(anInterface,
                                 methodName,
                                 parameterTypes);
                 if (method != null) {
@@ -907,7 +907,7 @@ public class MethodUtils {
      *
      * <p>This method is used by
      * {@link
-     * #invokeMethod(Object object,String methodName,Object [] args,Class[] parameterTypes)}.
+     * #invokeMethod(Object object, String methodName, Object[] args, Class[] parameterTypes)}.
      *
      * <p>This method can match primitive parameter by passing in wrapper classes.
      * For example, a {@code Boolean</code> will match a primitive <code>boolean}

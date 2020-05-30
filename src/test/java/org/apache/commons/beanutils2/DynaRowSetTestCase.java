@@ -45,7 +45,7 @@ public class DynaRowSetTestCase extends TestCase {
      * Names of the columns for this test.  Must match the order they are
      * defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String columns[] =
+    protected String[] columns =
     { "bigdecimalproperty", "booleanproperty",
       "byteproperty", "dateproperty",
       "doubleproperty", "floatproperty",
@@ -113,7 +113,7 @@ public class DynaRowSetTestCase extends TestCase {
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
-            fail("Did not throw IllegaArgumentException");
+            fail("Did not throw IllegalArgumentException");
         } catch (final IllegalArgumentException e) {
             // Expected result
         }
@@ -135,7 +135,7 @@ public class DynaRowSetTestCase extends TestCase {
 
     public void testGetDynaProperties() {
 
-        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {

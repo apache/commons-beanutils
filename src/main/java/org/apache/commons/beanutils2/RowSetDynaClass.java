@@ -277,8 +277,8 @@ public class RowSetDynaClass extends JDBCDynaClass {
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
             final DynaBean bean = createDynaBean();
-            for (final DynaProperty propertie : properties) {
-                final String name = propertie.getName();
+            for (final DynaProperty property : properties) {
+                final String name = property.getName();
                 final Object value = getObject(resultSet, name);
                 bean.set(name, value);
             }

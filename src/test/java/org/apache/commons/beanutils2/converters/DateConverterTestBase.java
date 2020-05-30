@@ -61,7 +61,7 @@ public abstract class DateConverterTestBase extends TestCase {
     protected abstract Class<?> getExpectedType();
 
     /**
-     * Convert a Date or Calendar objects to the time in millisconds
+     * Convert a Date or Calendar objects to the time in milliseconds
      * @param date The date or calendar object
      * @return The time in milliseconds
      */
@@ -71,7 +71,7 @@ public abstract class DateConverterTestBase extends TestCase {
 
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
-            //      ensures it works consistently accross JDK versions
+            //      ensures it works consistently across JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
             long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;

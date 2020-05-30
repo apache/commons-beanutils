@@ -101,7 +101,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param dynaBeanClass The implementation class for new instances
      * @param properties Property descriptors for the supported properties
      */
-    public LazyDynaClass(final String name, final Class<?> dynaBeanClass, final DynaProperty properties[]) {
+    public LazyDynaClass(final String name, final Class<?> dynaBeanClass, final DynaProperty[] properties) {
         super(name, dynaBeanClass, properties);
     }
 
@@ -284,9 +284,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         final DynaProperty[] oldProperties = getDynaProperties();
         final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
         int j = 0;
-        for (int i = 0; i < oldProperties.length; i++) {
-            if (!name.equals(oldProperties[i].getName())) {
-                newProperties[j] = oldProperties[i];
+        for (DynaProperty oldProperty : oldProperties) {
+            if (!name.equals(oldProperty.getName())) {
+                newProperties[j] = oldProperty;
                 j++;
             }
         }
@@ -357,7 +357,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
-        return propertiesMap.get(name) ==  null ? false : true;
+        return propertiesMap.get(name) != null;
 
     }
 

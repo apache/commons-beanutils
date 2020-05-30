@@ -61,7 +61,7 @@ public class NestedTestBean {
         this.testBoolean = testBoolean;
     }
 
-    private NestedTestBean indexedBeans[];
+    private NestedTestBean[] indexedBeans;
 
     public void init() {
         indexedBeans = new NestedTestBean[5];

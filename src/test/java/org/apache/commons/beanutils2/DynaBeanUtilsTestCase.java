@@ -50,7 +50,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
+    protected String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "byteProperty",
@@ -107,11 +107,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean.set("byteProperty", new Byte((byte) 121));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
-        final String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
+        final String[] dupProperty = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
         bean.set("dupProperty", dupProperty);
-        final int intArray[] = { 0, 10, 20, 30, 40 };
+        final int[] intArray = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
-        final int intIndexed[] = { 0, 10, 20, 30, 40 };
+        final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
         final List<String> listIndexed = new ArrayList<>();
@@ -138,10 +138,10 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean.set("nested", nested);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
-        final String stringArray[] =
+        final String[] stringArray =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        final String stringIndexed[] =
+        final String[] stringIndexed =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
@@ -227,19 +227,19 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) clonedBean.get("stringProperty"));
 
         // Validate the results for array properties
-        final String dupProperty[] = (String[]) clonedBean.get("dupProperty");
+        final String[] dupProperty = (String[]) clonedBean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = (int[]) clonedBean.get("intArray");
+        final int[] intArray = (int[]) clonedBean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 100, intArray[0]);
         assertEquals("intArray[1]", 200, intArray[1]);
         assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = (String[]) clonedBean.get("stringArray");
+        final String[] stringArray = (String[]) clonedBean.get("stringArray");
         assertNotNull("stringArray present", stringArray);
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
@@ -303,19 +303,19 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Validate the results for array properties
-        final String dupProperty[] = (String[]) bean.get("dupProperty");
+        final String[] dupProperty = (String[]) bean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = (int[]) bean.get("intArray");
+        final int[] intArray = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 100, intArray[0]);
         assertEquals("intArray[1]", 200, intArray[1]);
         assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = (String[]) bean.get("stringArray");
+        final String[] stringArray = (String[]) bean.get("stringArray");
         assertNotNull("stringArray present", stringArray);
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
@@ -367,13 +367,13 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Indexed Properties
-        final String dupProperty[] = (String[]) bean.get("dupProperty");
+        final String[] dupProperty = (String[]) bean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = (int[]) bean.get("intArray");
+        final int[] intArray = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 0, intArray[0]);
@@ -432,19 +432,19 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Validate the results for array properties
-        final String dupProperty[] = (String[]) bean.get("dupProperty");
+        final String[] dupProperty = (String[]) bean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = (int[]) bean.get("intArray");
+        final int[] intArray = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 100, intArray[0]);
         assertEquals("intArray[1]", 200, intArray[1]);
         assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = (String[]) bean.get("stringArray");
+        final String[] stringArray = (String[]) bean.get("stringArray");
         assertNotNull("stringArray present", stringArray);
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
@@ -509,15 +509,15 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
             final HashMap<String, Object> map = new HashMap<>();
             //            int intArray[] = new int[] { 123, 456, 789 };
-            final String intArrayIn[] = new String[] { "123", "456", "789" };
+            final String[] intArrayIn = new String[] { "123", "456", "789" };
             map.put("intArray", intArrayIn);
-            String stringArray[] = new String[]
+            String[] stringArray = new String[]
                 { "New String 0", "New String 1" };
             map.put("stringArray", stringArray);
 
             BeanUtils.populate(bean, map);
 
-            final int intArray[] = (int[]) bean.get("intArray");
+            final int[] intArray = (int[]) bean.get("intArray");
             assertNotNull("intArray is present", intArray);
             assertEquals("intArray length",
                          3, intArray.length);
@@ -543,14 +543,14 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testGetArrayProperty() {
         try {
-            String arr[] = BeanUtils.getArrayProperty(bean, "stringArray");
-            final String comp[] = (String[]) bean.get("stringArray");
+            String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
+            final String[] comp = (String[]) bean.get("stringArray");
 
             assertTrue("String array length = " + comp.length,
                     comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
-            final int iarr[] = (int[]) bean.get("intArray");
+            final int[] iarr = (int[]) bean.get("intArray");
 
             assertTrue("String array length = " + iarr.length,
                     iarr.length == arr.length);
@@ -872,7 +872,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         // Scalar value into array
         oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
-        BeanUtils.setProperty(bean, "stringArray", (String) null);
+        BeanUtils.setProperty(bean, "stringArray", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
@@ -883,7 +883,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         // Indexed value into array
         oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
-        BeanUtils.setProperty(bean, "stringArray[2]", (String) null);
+        BeanUtils.setProperty(bean, "stringArray[2]", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
@@ -1069,10 +1069,10 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedIndexedArray() throws Exception {
 
-        final int origArray[] = { 0, 10, 20, 30, 40};
-        final int intArray[] = { 0, 0, 0 };
+        final int[] origArray = { 0, 10, 20, 30, 40};
+        final int[] intArray = { 0, 0, 0 };
         ((TestBean) bean.get("nested")).setIntArray(intArray);
-        final int intChanged[] = { 0, 0, 0 };
+        final int[] intChanged = { 0, 0, 0 };
 
         // No conversion required
         BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
@@ -1159,7 +1159,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
 
     // Ensure that the nested intArray matches the specified values
-    protected void checkIntArray(final int actual[], final int expected[]) {
+    protected void checkIntArray(final int[] actual, final int[] expected) {
         assertNotNull("actual array not null", actual);
         assertEquals("actual array length", expected.length, actual.length);
         for (int i = 0; i < actual.length; i++) {
@@ -1186,8 +1186,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     protected static DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int[] intArray = new int[0];
+        final String[] stringArray = new String[0];
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,

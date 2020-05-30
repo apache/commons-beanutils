@@ -24,8 +24,8 @@ package org.apache.commons.beanutils2;
 
 public interface MappedPropertyTestInterface {
 
-    public String getMapproperty(String key);
+    String getMapproperty(String key);
 
-    public void setMapproperty(String key, String value);
+    void setMapproperty(String key, String value);
 
 }

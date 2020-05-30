@@ -909,7 +909,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Handle other MutableDynaClass
-        return dynaClass.getDynaProperty(name) == null ? false : true;
+        return dynaClass.getDynaProperty(name) != null;
 
     }
 

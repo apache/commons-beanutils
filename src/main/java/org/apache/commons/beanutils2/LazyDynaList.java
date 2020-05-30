@@ -18,6 +18,7 @@ package org.apache.commons.beanutils2;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -170,7 +171,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * The WrapDynaClass if the List's contains
      * POJO Bean elements.
      *
-     * N.B. WrapDynaClass isn't serlializable, which
+     * N.B. WrapDynaClass isn't serializable, which
      *      is why its stored separately in a
      *      transient instance variable.
      */
@@ -247,9 +248,7 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     public LazyDynaList(final Object[] array) {
         super(array.length);
-        for (final Object element : array) {
-            add(element);
-        }
+        this.addAll(Arrays.asList(array));
     }
 
 
@@ -332,7 +331,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return false;
         }
 
-        ensureCapacity((index > size() ? index : size()) + collection.size());
+        ensureCapacity((Math.max(index, size())) + collection.size());
 
         // Call "transform" with first element, before
         // List is "grown" to ensure the correct DynaClass
@@ -625,7 +624,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * </li>
      *
      * @param element The element to transformed.
-     * @param The DynaBean to store in the List.
+     * @return The DynaBean to store in the List.
      */
     private DynaBean transform(final Object element) {
 

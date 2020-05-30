@@ -225,7 +225,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
             return new BigDecimal(result.toString());
         }
         catch (final NumberFormatException ex) {
-            throw new ConversionException("Suplied number is not of type BigDecimal: " + result);
+            throw new ConversionException("Supplied number is not of type BigDecimal: " + result);
         }
 
     }

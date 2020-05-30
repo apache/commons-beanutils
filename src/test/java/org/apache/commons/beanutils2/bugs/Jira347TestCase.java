@@ -108,7 +108,7 @@ public class Jira347TestCase extends TestCase {
             ArrayList<Object> list = new ArrayList<>();
             try {
                 long i = 0;
-                while (true && ref.get() != null) {
+                while (ref.get() != null) {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
             } catch (final Throwable ignored) {

@@ -268,7 +268,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *
      * @throws ConversionException if conversion cannot be performed
      *  successfully
-     * @throws ParseException if an error occurs parsing a String to a Number
+     * @throws IllegalArgumentException if an error occurs parsing a String to a Number
      */
     private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
 

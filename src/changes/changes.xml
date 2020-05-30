@@ -458,7 +458,7 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
         Plugable Property Name Expression Resolver).
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-273" due-to="Marcelo Liberato">
-        Public methods overriden in anonymous or private subclasses are not recognized by PropertyUtils.
+        Public methods overridden in anonymous or private subclasses are not recognized by PropertyUtils.
       </action>
       <action dev="niallp" type="fix" issue="BEANUTILS-88" due-to="Chuck Daniels">
         PropertyUtilsBean's isReadable() / isWriteable() always return false for mapped properties.
