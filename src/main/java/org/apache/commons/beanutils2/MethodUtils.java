@@ -1150,7 +1150,7 @@ public class MethodUtils {
      *
      * @return true if the assignment is compatible.
      */
-    public static boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
+    public static final boolean isAssignmentCompatible(final Class<?> parameterType, final Class<?> parameterization) {
         // try plain assignment
         if (parameterType.isAssignableFrom(parameterization)) {
             return true;
