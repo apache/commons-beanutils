@@ -284,9 +284,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         final DynaProperty[] oldProperties = getDynaProperties();
         final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
         int j = 0;
-        for (int i = 0; i < oldProperties.length; i++) {
-            if (!name.equals(oldProperties[i].getName())) {
-                newProperties[j] = oldProperties[i];
+        for (DynaProperty oldProperty : oldProperties) {
+            if (!name.equals(oldProperty.getName())) {
+                newProperties[j] = oldProperty;
                 j++;
             }
         }

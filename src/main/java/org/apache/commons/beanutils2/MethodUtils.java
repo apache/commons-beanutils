@@ -858,16 +858,16 @@ public class MethodUtils {
 
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
+            for (Class<?> anInterface : interfaces) {
 
                 // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers())) {
+                if (!Modifier.isPublic(anInterface.getModifiers())) {
                     continue;
                 }
 
                 // Does the method exist on this interface?
                 try {
-                    method = interfaces[i].getDeclaredMethod(methodName,
+                    method = anInterface.getDeclaredMethod(methodName,
                             parameterTypes);
                 } catch (final NoSuchMethodException e) {
                     /* Swallow, if no method is found after the loop then this
@@ -880,7 +880,7 @@ public class MethodUtils {
 
                 // Recursively check our parent interfaces
                 method =
-                        getAccessibleMethodFromInterfaceNest(interfaces[i],
+                        getAccessibleMethodFromInterfaceNest(anInterface,
                                 methodName,
                                 parameterTypes);
                 if (method != null) {
