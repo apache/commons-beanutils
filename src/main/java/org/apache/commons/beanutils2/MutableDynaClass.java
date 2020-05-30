@@ -39,7 +39,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name);
+    void add(String name);
 
     /**
      * Add a new dynamic property with the specified data type, but with
@@ -53,7 +53,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type);
+    void add(String name, Class<?> type);
 
     /**
      * Add a new dynamic property with the specified data type, readability,
@@ -71,8 +71,8 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type, boolean readable,
-                    boolean writeable);
+    void add(String name, Class<?> type, boolean readable,
+             boolean writeable);
 
     /**
      * Is this DynaClass currently restricted, if so, no changes to the
@@ -82,7 +82,7 @@ public interface MutableDynaClass extends DynaClass {
      * @return {@code true} if this Mutable {@link DynaClass} is restricted,
      * otherwise {@code false}
      */
-    public boolean isRestricted();
+    boolean isRestricted();
 
     /**
      * Remove the specified dynamic property, and any associated data type,
@@ -97,13 +97,13 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
-    public void remove(String name);
+    void remove(String name);
 
     /**
      * Set the restricted state of this DynaClass to the specified value.
      *
      * @param restricted The new restricted state
      */
-    public void setRestricted(boolean restricted);
+    void setRestricted(boolean restricted);
 
 }

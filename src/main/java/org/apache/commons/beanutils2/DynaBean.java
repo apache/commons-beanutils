@@ -40,7 +40,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public boolean contains(String name, String key);
+    boolean contains(String name, String key);
 
     /**
      * Return the value of a simple property with the specified name.
@@ -51,7 +51,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public Object get(String name);
+    Object get(String name);
 
     /**
      * Return the value of an indexed property with the specified name.
@@ -69,7 +69,7 @@ public interface DynaBean {
      * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
-    public Object get(String name, int index);
+    Object get(String name, int index);
 
     /**
      * Return the value of a mapped property with the specified name,
@@ -84,7 +84,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public Object get(String name, String key);
+    Object get(String name, String key);
 
     /**
      * Return the {@code DynaClass} instance that describes the set of
@@ -92,7 +92,7 @@ public interface DynaBean {
      *
      * @return The associated DynaClass
      */
-    public DynaClass getDynaClass();
+    DynaClass getDynaClass();
 
     /**
      * Remove any existing value for the specified key on the
@@ -105,7 +105,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public void remove(String name, String key);
+    void remove(String name, String key);
 
     /**
      * Set the value of a simple property with the specified name.
@@ -120,7 +120,7 @@ public interface DynaBean {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
-    public void set(String name, Object value);
+    void set(String name, Object value);
 
     /**
      * Set the value of an indexed property with the specified name.
@@ -138,7 +138,7 @@ public interface DynaBean {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
-    public void set(String name, int index, Object value);
+    void set(String name, int index, Object value);
 
     /**
      * Set the value of a mapped property with the specified name.
@@ -154,6 +154,6 @@ public interface DynaBean {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public void set(String name, String key, Object value);
+    void set(String name, String key, Object value);
 
 }
