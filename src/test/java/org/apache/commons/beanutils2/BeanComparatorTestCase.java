@@ -154,7 +154,7 @@ public class BeanComparatorTestCase extends TestCase {
 
         }
         catch (final Exception e) {
-          assertTrue("Wrong exception was thrown: " + e, e.toString().indexOf("Unknown property") > -1);
+          assertTrue("Wrong exception was thrown: " + e, e.toString().contains("Unknown property"));
         }
     }
 
