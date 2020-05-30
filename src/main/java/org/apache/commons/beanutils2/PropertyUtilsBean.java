@@ -2061,27 +2061,27 @@ public class PropertyUtilsBean {
         } catch (final NullPointerException | IllegalArgumentException cause) {
             // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
             // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
-            String valueString = "";
+            StringBuilder valueString = new StringBuilder();
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
                     if (i>0) {
-                        valueString += ", " ;
+                        valueString.append(", ");
                     }
                     if (values[i] == null) {
-                        valueString += "<null>";
+                        valueString.append("<null>");
                     } else {
-                        valueString += values[i].getClass().getName();
+                        valueString.append(values[i].getClass().getName());
                     }
                 }
             }
-            String expectedString = "";
+            StringBuilder expectedString = new StringBuilder();
             final Class<?>[] parTypes = method.getParameterTypes();
             if (parTypes != null) {
                 for (int i = 0; i < parTypes.length; i++) {
                     if (i > 0) {
-                        expectedString += ", ";
+                        expectedString.append(", ");
                     }
-                    expectedString += parTypes[i].getName();
+                    expectedString.append(parTypes[i].getName());
                 }
             }
             final IllegalArgumentException e = new IllegalArgumentException(
