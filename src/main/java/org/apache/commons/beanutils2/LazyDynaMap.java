@@ -427,11 +427,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             throw new IllegalStateException("DynaClass is currently restricted. No properties can be removed.");
         }
 
-        // Remove, if property doesn't exist
-        if (values.containsKey(name)) {
-            values.remove(name);
-        }
-
+        values.remove(name);
     }
 
 
