@@ -124,7 +124,7 @@ public class MemoryTestCase {
               // that loaded the Converter class.
               assertTrue(
                 "Converter loader via child does not implement parent type",
-                Converter.class.isInstance(newFloatConverter));
+                      newFloatConverter instanceof Converter);
 
               // this converter registration will only apply to the
               // componentLoader classloader...
