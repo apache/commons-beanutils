@@ -580,7 +580,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void testConvertStringLocaleNull() {
         Object result = null;
         try {
-            result = LocaleConvertUtils.convert("123", Integer.class, (Locale)null, "#,###");
+            result = LocaleConvertUtils.convert("123", Integer.class, null, "#,###");
         } catch (final Exception e) {
             e.printStackTrace();
             fail("Threw: " + e);
@@ -596,7 +596,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void testConvertStringArrayLocaleNull() {
         Object result = null;
         try {
-            result = LocaleConvertUtils.convert(new String[] {"123"}, Integer[].class, (Locale)null, "#,###");
+            result = LocaleConvertUtils.convert(new String[] {"123"}, Integer[].class, null, "#,###");
         } catch (final Exception e) {
             e.printStackTrace();
             fail("Threw: " + e);

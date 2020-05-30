@@ -872,7 +872,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         // Scalar value into array
         oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
-        BeanUtils.setProperty(bean, "stringArray", (String) null);
+        BeanUtils.setProperty(bean, "stringArray", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
@@ -883,7 +883,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         // Indexed value into array
         oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
-        BeanUtils.setProperty(bean, "stringArray[2]", (String) null);
+        BeanUtils.setProperty(bean, "stringArray[2]", null);
         newValue = PropertyUtils.getSimpleProperty(bean, "stringArray");
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type",
