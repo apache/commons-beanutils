@@ -625,7 +625,7 @@ public class LazyDynaList extends ArrayList<Object> {
      * </li>
      *
      * @param element The element to transformed.
-     * @param The DynaBean to store in the List.
+     * @return The DynaBean to store in the List.
      */
     private DynaBean transform(final Object element) {
 

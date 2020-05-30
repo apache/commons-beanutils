@@ -576,7 +576,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     /**
-     * Called during a successful {@link #put(Object,Object)} operation. Default implementation does nothing. Override
+     * Called during a successful {@link #put(String,Object)} operation. Default implementation does nothing. Override
      * to be notified of property changes in the bean caused by this map.
      *
      * @param key the name of the property that changed
