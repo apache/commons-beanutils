@@ -87,7 +87,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeIntegerArray() {
 
         Object value = null;
-        final int intArray[] = new int[0];
+        final int[] intArray = new int[0];
 
         value = ConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -189,7 +189,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeStringArray() {
 
         Object value = null;
-        final String stringArray[] = new String[0];
+        final String[] stringArray = new String[0];
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -201,12 +201,12 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testObjectToStringArray() {
 
-        final int intArray0[] = new int[0];
-        final int intArray1[] = { 123 };
-        final int intArray2[] = { 123, 456 };
-        final String stringArray0[] = new String[0];
-        final String stringArray1[] = { "abc" };
-        final String stringArray2[] = { "abc", "def" };
+        final int[] intArray0 = new int[0];
+        final int[] intArray1 = { 123 };
+        final int[] intArray2 = { 123, 456 };
+        final String[] stringArray0 = new String[0];
+        final String[] stringArray1 = { "abc" };
+        final String[] stringArray2 = { "abc", "def" };
 
         assertEquals("intArray0", null,
                      ConvertUtils.convert(intArray0));
@@ -259,19 +259,19 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testPositiveArray() {
 
-        final String values1[] = { "10", "20", "30" };
+        final String[] values1 = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
-        final int shape[] = new int[0];
+        final int[] shape = new int[0];
         assertEquals(shape.getClass(), value.getClass());
-        final int results1[] = (int[]) value;
+        final int[] results1 = (int[]) value;
         assertEquals(results1[0], 10);
         assertEquals(results1[1], 20);
         assertEquals(results1[2], 30);
 
-        final String values2[] = { "100", "200", "300" };
+        final String[] values2 = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
-        final int results2[] = (int[]) value;
+        final int[] results2 = (int[]) value;
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
@@ -284,9 +284,9 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveIntegerArray() {
 
         Object value = null;
-        final int intArray[] = new int[0];
-        final int intArray1[] = new int[] { 0 };
-        final int intArray2[] = new int[] { 0, 10 };
+        final int[] intArray = new int[0];
+        final int[] intArray1 = new int[] { 0 };
+        final int[] intArray2 = new int[] { 0, 10 };
 
         value = ConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -471,10 +471,10 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveStringArray() {
 
         Object value = null;
-        final String stringArray[] = new String[0];
-        final String stringArray1[] = new String[]
+        final String[] stringArray = new String[0];
+        final String[] stringArray1 = new String[]
             { "abc" };
-        final String stringArray2[] = new String[]
+        final String[] stringArray2 = new String[]
             { "abc", "de,f" };
 
         value = ConvertUtils.convert("", stringArray.getClass());
@@ -655,12 +655,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
 
 
-    private void checkIntegerArray(final Object value, final int intArray[]) {
+    private void checkIntegerArray(final Object value, final int[] intArray) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is int[]",
                      intArray.getClass(), value.getClass());
-        final int results[] = (int[]) value;
+        final int[] results = (int[]) value;
         assertEquals("Returned array length", intArray.length, results.length);
         for (int i = 0; i < intArray.length; i++) {
             assertEquals("Returned array value " + i,
@@ -669,12 +669,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-    private void checkStringArray(final Object value, final String stringArray[]) {
+    private void checkStringArray(final Object value, final String[] stringArray) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is String[]",
                      stringArray.getClass(), value.getClass());
-        final String results[] = (String[]) value;
+        final String[] results = (String[]) value;
         assertEquals("Returned array length",
                      stringArray.length, results.length);
         for (int i = 0; i < stringArray.length; i++) {

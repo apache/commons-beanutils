@@ -116,7 +116,7 @@ public class PropertyUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
+    protected String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "doubleProperty",
@@ -268,13 +268,13 @@ public class PropertyUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Indexed Properties
-        final String dupProperty[] = bean.getDupProperty();
+        final String[] dupProperty = bean.getDupProperty();
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
+        final int[] intArray = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 0, intArray[0]);
@@ -530,10 +530,10 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetDescriptors() {
 
-        final PropertyDescriptor pd[] =
+        final PropertyDescriptor[] pd =
                 PropertyUtils.getPropertyDescriptors(bean);
         assertNotNull("Got descriptors", pd);
-        final int count[] = new int[properties.length];
+        final int[] count = new int[properties.length];
         for (final PropertyDescriptor element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
@@ -1656,8 +1656,8 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetPropertyType() {
 
         Class<?> clazz = null;
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int[] intArray = new int[0];
+        final String[] stringArray = new String[0];
 
         try {
 
@@ -1841,7 +1841,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         // Property "foo" is not accessible because the underlying
         // class has package scope
-        final PropertyDescriptor pd[] =
+        final PropertyDescriptor[] pd =
                 PropertyUtils.getPropertyDescriptors(beanPrivate);
         int n = -1;
         for (int i = 0; i < pd.length; i++) {
@@ -3876,10 +3876,10 @@ public class PropertyUtilsTestCase extends TestCase {
      * @param properties Property names to search for
      * @param className Class name where this method should be defined
      */
-    protected void testGetReadMethod(final Object bean, final String properties[],
+    protected void testGetReadMethod(final Object bean, final String[] properties,
                                      final String className) {
 
-        final PropertyDescriptor pd[] =
+        final PropertyDescriptor[] pd =
                 PropertyUtils.getPropertyDescriptors(bean);
         for (final String propertie : properties) {
 
@@ -3932,10 +3932,10 @@ public class PropertyUtilsTestCase extends TestCase {
      * @param properties Property names to search for
      * @param className Class name where this method should be defined
      */
-    protected void testGetWriteMethod(final Object bean, final String properties[],
+    protected void testGetWriteMethod(final Object bean, final String[] properties,
                                       final String className) {
 
-        final PropertyDescriptor pd[] =
+        final PropertyDescriptor[] pd =
                 PropertyUtils.getPropertyDescriptors(bean);
         for (final String property : properties) {
 

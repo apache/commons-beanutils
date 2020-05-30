@@ -638,12 +638,12 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
-    public void updateBytes(final int columnPosition, final byte x[])
+    public void updateBytes(final int columnPosition, final byte[] x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }
 
-    public void updateBytes(final String columnName, final byte x[])
+    public void updateBytes(final String columnName, final byte[] x)
         throws SQLException {
         throw new UnsupportedOperationException();
     }

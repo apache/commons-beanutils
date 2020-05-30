@@ -42,7 +42,7 @@ public class DynaResultSetTestCase extends TestCase {
      * Names of the columns for this test.  Must match the order they are
      * defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String columns[] =
+    protected String[] columns =
     { "bigdecimalproperty", "booleanproperty",
       "byteproperty", "dateproperty",
       "doubleproperty", "floatproperty",
@@ -132,7 +132,7 @@ public class DynaResultSetTestCase extends TestCase {
 
     public void testGetDynaProperties() {
 
-        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {

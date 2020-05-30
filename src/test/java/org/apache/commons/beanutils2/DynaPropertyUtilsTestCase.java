@@ -44,7 +44,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
+    protected String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "doubleProperty",
@@ -101,9 +101,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
-        final int intArray[] = { 0, 10, 20, 30, 40 };
+        final int[] intArray = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
-        final int intIndexed[] = { 0, 10, 20, 30, 40 };
+        final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
         final List<String> listIndexed = new ArrayList<>();
@@ -134,10 +134,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("nested", nested);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
-        final String stringArray[] =
+        final String[] stringArray =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        final String stringIndexed[] =
+        final String[] stringIndexed =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
@@ -207,13 +207,13 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                      (String) bean.get("stringProperty"));
 
         // Indexed Properties
-        final String dupProperty[] = (String[]) bean.get("dupProperty");
+        final String[] dupProperty = (String[]) bean.get("dupProperty");
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = (int[]) bean.get("intArray");
+        final int[] intArray = (int[]) bean.get("intArray");
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 0, intArray[0]);
@@ -2536,8 +2536,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     protected DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int[] intArray = new int[0];
+        final String[] stringArray = new String[0];
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,

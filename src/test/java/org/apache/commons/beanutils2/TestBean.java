@@ -216,7 +216,7 @@ public class TestBean implements Serializable {
     /**
      * An integer array property accessed as an array.
      */
-    private int intArray[] = { 0, 10, 20, 30, 40 };
+    private int[] intArray = { 0, 10, 20, 30, 40 };
 
     public int[] getIntArray() {
         return this.intArray;
@@ -229,7 +229,7 @@ public class TestBean implements Serializable {
     /**
      * An integer array property accessed as an indexed property.
      */
-    private final int intIndexed[] = { 0, 10, 20, 30, 40 };
+    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed(final int index) {
         return intIndexed[index];

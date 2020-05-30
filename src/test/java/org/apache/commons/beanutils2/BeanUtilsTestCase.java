@@ -71,7 +71,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String describes[] =
+    protected String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "byteProperty",
@@ -222,19 +222,19 @@ public class BeanUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Validate the results for array properties
-        final String dupProperty[] = bean.getDupProperty();
+        final String[] dupProperty = bean.getDupProperty();
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
+        final int[] intArray = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 100, intArray[0]);
         assertEquals("intArray[1]", 200, intArray[1]);
         assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = bean.getStringArray();
+        final String[] stringArray = bean.getStringArray();
         assertNotNull("stringArray present", stringArray);
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
@@ -284,13 +284,13 @@ public class BeanUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Indexed Properties
-        final String dupProperty[] = bean.getDupProperty();
+        final String[] dupProperty = bean.getDupProperty();
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
+        final int[] intArray = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 0, intArray[0]);
@@ -349,19 +349,19 @@ public class BeanUtilsTestCase extends TestCase {
                      bean.getStringProperty());
 
         // Validate the results for array properties
-        final String dupProperty[] = bean.getDupProperty();
+        final String[] dupProperty = bean.getDupProperty();
         assertNotNull("dupProperty present", dupProperty);
         assertEquals("dupProperty length", 3, dupProperty.length);
         assertEquals("dupProperty[0]", "New 0", dupProperty[0]);
         assertEquals("dupProperty[1]", "New 1", dupProperty[1]);
         assertEquals("dupProperty[2]", "New 2", dupProperty[2]);
-        final int intArray[] = bean.getIntArray();
+        final int[] intArray = bean.getIntArray();
         assertNotNull("intArray present", intArray);
         assertEquals("intArray length", 3, intArray.length);
         assertEquals("intArray[0]", 100, intArray[0]);
         assertEquals("intArray[1]", 200, intArray[1]);
         assertEquals("intArray[2]", 300, intArray[2]);
-        final String stringArray[] = bean.getStringArray();
+        final String[] stringArray = bean.getStringArray();
         assertNotNull("stringArray present", stringArray);
         assertEquals("stringArray length", 2, stringArray.length);
         assertEquals("stringArray[0]", "New 0", stringArray[0]);
@@ -422,14 +422,14 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testGetArrayProperty() {
         try {
-            String arr[] = BeanUtils.getArrayProperty(bean, "stringArray");
-            final String comp[] = bean.getStringArray();
+            String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
+            final String[] comp = bean.getStringArray();
 
             assertTrue("String array length = " + comp.length,
                     comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
-            final int iarr[] = bean.getIntArray();
+            final int[] iarr = bean.getIntArray();
 
             assertTrue("String array length = " + iarr.length,
                     iarr.length == arr.length);
@@ -658,9 +658,9 @@ public class BeanUtilsTestCase extends TestCase {
         try {
 
             final HashMap<String, Object> map = new HashMap<>();
-            int intArray[] = new int[] { 123, 456, 789 };
+            int[] intArray = new int[] { 123, 456, 789 };
             map.put("intArray", intArray);
-            String stringArray[] = new String[]
+            String[] stringArray = new String[]
                 { "New String 0", "New String 1" };
             map.put("stringArray", stringArray);
 
@@ -1296,10 +1296,10 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedIndexedArray() throws Exception {
 
-        final int origArray[] = { 0, 10, 20, 30, 40 };
-        final int intArray[] = { 0, 0, 0 };
+        final int[] origArray = { 0, 10, 20, 30, 40 };
+        final int[] intArray = { 0, 0, 0 };
         bean.getNested().setIntArray(intArray);
-        final int intChanged[] = { 0, 0, 0 };
+        final int[] intChanged = { 0, 0, 0 };
 
         // No conversion required
         BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
@@ -1515,7 +1515,7 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     // Ensure that the actual int[] matches the expected int[]
-    protected void checkIntArray(final int actual[], final int expected[]) {
+    protected void checkIntArray(final int[] actual, final int[] expected) {
         assertNotNull("actual array not null", actual);
         assertEquals("actual array length", expected.length, actual.length);
         for (int i = 0; i < actual.length; i++) {
