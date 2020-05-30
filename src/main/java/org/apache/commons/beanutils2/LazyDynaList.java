@@ -18,6 +18,7 @@ package org.apache.commons.beanutils2;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -247,9 +248,7 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     public LazyDynaList(final Object[] array) {
         super(array.length);
-        for (final Object element : array) {
-            add(element);
-        }
+        this.addAll(Arrays.asList(array));
     }
 
 
