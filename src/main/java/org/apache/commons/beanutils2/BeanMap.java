@@ -643,9 +643,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             throws IllegalAccessException, ClassCastException {
         try {
             if (value != null) {
-                final Class<? extends Object>[] parmTypes = method.getParameterTypes();
-                if (parmTypes != null && parmTypes.length > 0) {
-                    final Class<? extends Object> paramType = parmTypes[0];
+                final Class<? extends Object>[] paramTypes = method.getParameterTypes();
+                if (paramTypes != null && paramTypes.length > 0) {
+                    final Class<? extends Object> paramType = paramTypes[0];
                     if (!paramType.isAssignableFrom(value.getClass())) {
                         value = convertType(paramType, value);
                     }

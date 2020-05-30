@@ -183,7 +183,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check Property is correct type", TreeMap.class, dynaMap.getDynaProperty(testProperty).getType());
         assertEquals("Check Mapped Property now exists", TreeMap.class, dynaMap.get(testProperty).getClass());
 
-        // Set a new mapped property - should instatiate a new TreeMap property and set the mapped value
+        // Set a new mapped property - should instantiate a new TreeMap property and set the mapped value
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));

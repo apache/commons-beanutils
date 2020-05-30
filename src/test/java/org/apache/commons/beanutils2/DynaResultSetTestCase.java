@@ -110,7 +110,7 @@ public class DynaResultSetTestCase extends TestCase {
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
-            fail("Did not throw IllegaArgumentException");
+            fail("Did not throw IllegalArgumentException");
         } catch (final IllegalArgumentException e) {
             // Expected result
         }

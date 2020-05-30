@@ -69,7 +69,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <ul>
  *    <li>
- *       The top level object in the {@code peeopleCollection} is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>
@@ -94,7 +94,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <ul>
  *    <li>
- *       The top level object in the {@code peeopleCollection} is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>

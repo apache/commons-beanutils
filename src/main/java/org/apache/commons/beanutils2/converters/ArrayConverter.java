@@ -94,7 +94,7 @@ import org.apache.commons.beanutils2.Converter;
  * </ul>
  *
  * <h3>Multi Dimensional Arrays</h3>
- * It is possible to convert a {@code String} to mulit-dimensional arrays by using
+ * It is possible to convert a {@code String} to multi-dimensional arrays by using
  * {@link ArrayConverter} as the element {@link Converter}
  * within another {@link ArrayConverter}.
  * <p>

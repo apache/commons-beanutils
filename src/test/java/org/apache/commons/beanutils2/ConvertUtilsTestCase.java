@@ -619,7 +619,7 @@ public class ConvertUtilsTestCase extends TestCase {
         utils.register(dateConverter, java.util.Date.class);
         utils.register(fooConverter, String.class);
 
-        // Convert using registerd DateConverter
+        // Convert using registered DateConverter
         final java.util.Date today = new java.util.Date();
         final DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
         final String expected = fmt.format(today);

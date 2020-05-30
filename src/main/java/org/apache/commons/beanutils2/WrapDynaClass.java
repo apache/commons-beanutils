@@ -184,7 +184,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * <p>Return an array of {@code ProperyDescriptors} for the properties
+     * <p>Return an array of {@code PropertyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *

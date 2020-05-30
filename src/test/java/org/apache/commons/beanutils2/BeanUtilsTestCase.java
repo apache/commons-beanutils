@@ -1489,7 +1489,7 @@ public class BeanUtilsTestCase extends TestCase {
             assertEquals("Set property failed (3)", bean.getBooleanProperty(), true);
 
         } catch (final PassTestException e) {
-            fail("Registed converter is used by other instances");
+            fail("Registered converter is used by other instances");
         }
     }
 

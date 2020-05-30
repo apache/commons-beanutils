@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  * of objects which represents the cities in which each person lived. Assuming...
  * <ul>
  *    <li>
- *       The top level object in the {@code peeopleCollection} is an object which represents a
+ *       The top level object in the {@code peopleCollection} is an object which represents a
  *       person.
  *    </li>
  *    <li>

@@ -253,7 +253,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
     /**
-     * Positive test for getDynaPropertys().  Each property name
+     * Positive test for getDynaProperties().  Each property name
      * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {

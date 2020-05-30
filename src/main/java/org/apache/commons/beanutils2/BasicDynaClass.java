@@ -165,7 +165,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * <p>Return an array of {@code ProperyDescriptors} for the properties
+     * <p>Return an array of {@code PropertyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
@@ -273,8 +273,8 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
         this.properties = properties;
         propertiesMap.clear();
-        for (final DynaProperty propertie : properties) {
-            propertiesMap.put(propertie.getName(), propertie);
+        for (final DynaProperty property : properties) {
+            propertiesMap.put(property.getName(), property);
         }
 
     }

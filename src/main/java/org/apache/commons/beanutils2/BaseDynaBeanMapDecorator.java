@@ -136,8 +136,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     @Override
     public boolean containsValue(final Object value) {
         final DynaProperty[] properties = getDynaProperties();
-        for (final DynaProperty propertie : properties) {
-            final String key = propertie.getName();
+        for (final DynaProperty property : properties) {
+            final String key = property.getName();
             final Object prop = getDynaBean().get(key);
             if (value == null) {
                 if (prop == null) {
@@ -166,9 +166,9 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Set<Map.Entry<K, Object>> entrySet() {
         final DynaProperty[] properties = getDynaProperties();
         final Set<Map.Entry<K, Object>> set = new HashSet<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            final K key = convertKey(propertie.getName());
-            final Object value = getDynaBean().get(propertie.getName());
+        for (final DynaProperty property : properties) {
+            final K key = convertKey(property.getName());
+            final Object value = getDynaBean().get(property.getName());
             set.add(new MapEntry<>(key, value));
         }
         return Collections.unmodifiableSet(set);
@@ -218,8 +218,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         // Create a Set of the keys
         final DynaProperty[] properties = getDynaProperties();
         Set<K> set = new HashSet<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            set.add(convertKey(propertie.getName()));
+        for (final DynaProperty property : properties) {
+            set.add(convertKey(property.getName()));
         }
         set = Collections.unmodifiableSet(set);
 
@@ -303,8 +303,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Collection<Object> values() {
         final DynaProperty[] properties = getDynaProperties();
         final List<Object> values = new ArrayList<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            final String key = propertie.getName();
+        for (final DynaProperty property : properties) {
+            final String key = property.getName();
             final Object value = getDynaBean().get(key);
             values.add(value);
         }

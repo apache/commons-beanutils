@@ -2059,7 +2059,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.getSimpleProperty(bean,
                     "nested.stringProperty");
-            fail("Should have thrown IllegaArgumentException");
+            fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2232,68 +2232,68 @@ public class PropertyUtilsTestCase extends TestCase {
         String property = null;
         try {
             property = "stringProperty";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
         try {
             property = "stringIndexed";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
         try {
             property = "mappedProperty";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.stringProperty";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nestedBean";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nestedBean.nestedDynaBean";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nestedBean.nestedDynaBean.stringProperty";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nullDynaBean";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isReadable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nullDynaBean.foo";
-            assertTrue("Property " + property +" isReadable expeced TRUE", PropertyUtils.isReadable(bean, property));
+            assertTrue("Property " + property +" isReadable expected TRUE", PropertyUtils.isReadable(bean, property));
             fail("Property " + property +" isReadable expected NestedNullException");
         } catch (final NestedNullException e) {
             // expected result
@@ -2309,33 +2309,33 @@ public class PropertyUtilsTestCase extends TestCase {
         String property = null;
         try {
             property = "stringProperty";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
         try {
             property = "stringIndexed";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
         try {
             property = "mappedProperty";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.stringProperty";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             t.printStackTrace();
             fail("Property " + property +" isWriteable Threw exception: " + t);
@@ -2343,35 +2343,35 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             property = "nestedDynaBean.nestedBean";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nestedBean.nestedDynaBean";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nestedBean.nestedDynaBean.stringProperty";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nullDynaBean";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
         } catch (final Throwable t) {
             fail("Property " + property +" isWriteable Threw exception: " + t);
         }
 
         try {
             property = "nestedDynaBean.nullDynaBean.foo";
-            assertTrue("Property " + property +" isWriteable expeced TRUE", PropertyUtils.isWriteable(bean, property));
+            assertTrue("Property " + property +" isWriteable expected TRUE", PropertyUtils.isWriteable(bean, property));
             fail("Property " + property +" isWriteable expected NestedNullException");
         } catch (final NestedNullException e) {
             // expected result
@@ -3937,43 +3937,43 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final PropertyDescriptor pd[] =
                 PropertyUtils.getPropertyDescriptors(bean);
-        for (final String propertie : properties) {
+        for (final String property : properties) {
 
             // Identify the property descriptor for this property
-            if (propertie.equals("intIndexed")) {
+            if (property.equals("intIndexed")) {
                 continue;
             }
-            if (propertie.equals("listIndexed")) {
+            if (property.equals("listIndexed")) {
                 continue;
             }
-            if (propertie.equals("nested"))
+            if (property.equals("nested"))
              {
                 continue; // This property is read only
             }
-            if (propertie.equals("readOnlyProperty")) {
+            if (property.equals("readOnlyProperty")) {
                 continue;
             }
-            if (propertie.equals("stringIndexed")) {
+            if (property.equals("stringIndexed")) {
                 continue;
             }
             int n = -1;
             for (int j = 0; j < pd.length; j++) {
-                if (propertie.equals(pd[j].getName())) {
+                if (property.equals(pd[j].getName())) {
                     n = j;
                     break;
                 }
             }
-            assertTrue("PropertyDescriptor for " + propertie,
+            assertTrue("PropertyDescriptor for " + property,
                     n >= 0);
 
             // Locate an accessible property reader method for it
             final Method writer = PropertyUtils.getWriteMethod(pd[n]);
-            assertNotNull("Writer for " + propertie,
+            assertNotNull("Writer for " + property,
                     writer);
             final Class<?> clazz = writer.getDeclaringClass();
-            assertNotNull("Declaring class for " + propertie,
+            assertNotNull("Declaring class for " + property,
                     clazz);
-            assertEquals("Correct declaring class for " + propertie,
+            assertEquals("Correct declaring class for " + property,
                     clazz.getName(),
                     className);
 

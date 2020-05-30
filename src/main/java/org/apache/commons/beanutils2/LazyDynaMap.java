@@ -124,8 +124,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public LazyDynaMap(final String name, final DynaProperty[] properties) {
         this(name, (Map<String, Object>)null);
         if (properties != null) {
-            for (final DynaProperty propertie : properties) {
-                add(propertie);
+            for (final DynaProperty property : properties) {
+                add(property);
             }
         }
     }
@@ -239,7 +239,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * <p>Return an array of {@code ProperyDescriptors} for the properties
+     * <p>Return an array of {@code PropertyDescriptors} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
@@ -287,8 +287,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         final LazyDynaMap lazyMap = new LazyDynaMap(newMap);
         final DynaProperty[] properties = this.getDynaProperties();
         if (properties != null) {
-            for (final DynaProperty propertie : properties) {
-                lazyMap.add(propertie);
+            for (final DynaProperty property : properties) {
+                lazyMap.add(property);
             }
         }
         return lazyMap;

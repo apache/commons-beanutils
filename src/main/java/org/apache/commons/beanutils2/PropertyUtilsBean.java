@@ -57,7 +57,7 @@ import org.apache.commons.logging.LogFactory;
  * <li><strong>Simple ({@code name})</strong> - The specified
  *     {@code name} identifies an individual property of a particular
  *     JavaBean.  The name of the actual getter or setter method to be used
- *     is determined using standard JavaBeans instrospection, so that (unless
+ *     is determined using standard JavaBeans introspection, so that (unless
  *     overridden by a {@code BeanInfo} class, a property named "xyz"
  *     will have a getter method named {@code getXyz()} or (for boolean
  *     properties only) {@code isXyz()}, and a setter method named
@@ -1060,7 +1060,7 @@ public class PropertyUtilsBean {
      * Note that from Java 8 and newer, this method do not support
      * such index types from items within an Collection, and will
      * instead return the collection type (e.g. java.util.List) from the
-     * getter mtethod.
+     * getter method.
      *
      * @param bean Bean for which a property descriptor is requested
      * @param name Possibly indexed and/or nested name of the property for

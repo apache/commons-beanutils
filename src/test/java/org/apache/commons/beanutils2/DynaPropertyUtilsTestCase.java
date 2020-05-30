@@ -1315,7 +1315,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.getSimpleProperty(bean,
                     "nested.stringProperty");
-            fail("Should have thrown IllegaArgumentException");
+            fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
