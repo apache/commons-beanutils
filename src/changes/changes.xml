@@ -99,6 +99,9 @@
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update BC version from 1.9.3 to 1.9.4.
       </action>
+      <action issue="BEANUTILS-537" dev="ggregory" type="update" due-to="XenoAmess, Gary Gregory">
+        Fix typos; fix error in Javadoc; performance fix; fix code smells #25.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
