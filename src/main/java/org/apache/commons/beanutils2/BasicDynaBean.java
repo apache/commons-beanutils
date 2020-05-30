@@ -38,6 +38,20 @@ import java.util.Map;
 
 public class BasicDynaBean implements DynaBean, Serializable {
 
+    private static final Short SHORT_ZERO = Short.valueOf((short) 0);
+
+    private static final Long LONG_ZERO = Long.valueOf(0);
+
+    private static final Integer INTEGER_ZERO = Integer.valueOf(0);
+
+    private static final Float FLOAT_ZERO = Float.valueOf((float) 0.0);
+
+    private static final Double DOUBLE_ZERO = Double.valueOf(0.0);
+
+    private static final Character CHARACTER_ZERO = Character.valueOf((char) 0);
+
+    private static final Byte BYTE_ZERO = Byte.valueOf((byte) 0);
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -57,7 +71,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
-    protected DynaClass dynaClass = null;
+    protected DynaClass dynaClass;
 
     /**
      * The set of property values for this DynaBean, keyed by property name.
@@ -144,19 +158,19 @@ public class BasicDynaBean implements DynaBean, Serializable {
         if (type == Boolean.TYPE) {
             return Boolean.FALSE;
         } else if (type == Byte.TYPE) {
-            return Byte.valueOf((byte) 0);
+            return BYTE_ZERO;
         } else if (type == Character.TYPE) {
-            return Character.valueOf((char) 0);
+            return CHARACTER_ZERO;
         } else if (type == Double.TYPE) {
-            return Double.valueOf(0.0);
+            return DOUBLE_ZERO;
         } else if (type == Float.TYPE) {
-            return Float.valueOf((float) 0.0);
+            return FLOAT_ZERO;
         } else if (type == Integer.TYPE) {
-            return Integer.valueOf(0);
+            return INTEGER_ZERO;
         } else if (type == Long.TYPE) {
-            return Long.valueOf(0);
+            return LONG_ZERO;
         } else if (type == Short.TYPE) {
-            return Short.valueOf((short) 0);
+            return SHORT_ZERO;
         } else {
             return null;
         }
