@@ -331,7 +331,7 @@ public class LazyDynaList extends ArrayList<Object> {
             return false;
         }
 
-        ensureCapacity((index > size() ? index : size()) + collection.size());
+        ensureCapacity((Math.max(index, size())) + collection.size());
 
         // Call "transform" with first element, before
         // List is "grown" to ensure the correct DynaClass
