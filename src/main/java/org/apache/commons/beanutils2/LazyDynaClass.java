@@ -101,7 +101,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param dynaBeanClass The implementation class for new instances
      * @param properties Property descriptors for the supported properties
      */
-    public LazyDynaClass(final String name, final Class<?> dynaBeanClass, final DynaProperty properties[]) {
+    public LazyDynaClass(final String name, final Class<?> dynaBeanClass, final DynaProperty[] properties) {
         super(name, dynaBeanClass, properties);
     }
 
