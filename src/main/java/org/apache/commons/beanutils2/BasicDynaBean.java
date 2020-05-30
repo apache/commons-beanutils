@@ -57,7 +57,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
-    protected DynaClass dynaClass = null;
+    protected DynaClass dynaClass;
 
     /**
      * The set of property values for this DynaBean, keyed by property name.
