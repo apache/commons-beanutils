@@ -18,6 +18,7 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import org.apache.commons.logging.Log;
@@ -248,7 +249,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * @return True if they are equal; false otherwise.
      */
     protected boolean evaluateValue(final V expected, final Object actual) {
-        return expected == actual || expected != null && expected.equals(actual);
+        return Objects.equals(expected, actual);
     }
 
     /**

@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
@@ -208,9 +209,9 @@ public class DynaProperty implements Serializable {
         if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
             result =
-               (this.name == null ? that.name == null : this.name.equals(that.name)) &&
-               (this.type == null ? that.type == null : this.type.equals(that.type)) &&
-               (this.contentType == null ? that.contentType == null : this.contentType.equals(that.contentType));
+               (Objects.equals(this.name, that.name)) &&
+               (Objects.equals(this.type, that.type)) &&
+               (Objects.equals(this.contentType, that.contentType));
         }
 
         return result;
