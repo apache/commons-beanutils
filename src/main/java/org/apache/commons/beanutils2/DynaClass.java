@@ -50,7 +50,7 @@ public interface DynaClass {
     DynaProperty getDynaProperty(String name);
 
     /**
-     * <p>Returns an array of {@code PropertyDescriptors} for the properties
+     * <p>Returns an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *

@@ -239,7 +239,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * <p>Return an array of {@code PropertyDescriptors} for the properties
+     * <p>Return an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
