@@ -1314,11 +1314,7 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            } catch (final IllegalAccessException e) {
-                return false;
-            } catch (final InvocationTargetException e) {
-                return false;
-            } catch (final NoSuchMethodException e) {
+            } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1360,11 +1356,7 @@ public class PropertyUtilsBean {
                 return readMethod != null;
             }
             return false;
-        } catch (final IllegalAccessException e) {
-            return false;
-        } catch (final InvocationTargetException e) {
-            return false;
-        } catch (final NoSuchMethodException e) {
+        } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             return false;
         }
 
@@ -1402,11 +1394,7 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            } catch (final IllegalAccessException e) {
-                return false;
-            } catch (final InvocationTargetException e) {
-                return false;
-            } catch (final NoSuchMethodException e) {
+            } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1448,11 +1436,7 @@ public class PropertyUtilsBean {
                 return writeMethod != null;
             }
             return false;
-        } catch (final IllegalAccessException e) {
-            return false;
-        } catch (final InvocationTargetException e) {
-            return false;
-        } catch (final NoSuchMethodException e) {
+        } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             return false;
         }
 
@@ -2074,7 +2058,7 @@ public class PropertyUtilsBean {
 
             return method.invoke(bean, values);
 
-        } catch (final NullPointerException cause) {
+        } catch (final NullPointerException | IllegalArgumentException cause) {
             // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
             // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
             String valueString = "";
@@ -2113,44 +2097,6 @@ public class PropertyUtilsBean {
                 log.error("Method invocation failed", cause);
             }
             throw e;
-        } catch (final IllegalArgumentException cause) {
-            String valueString = "";
-            if (values != null) {
-                for (int i = 0; i < values.length; i++) {
-                    if (i>0) {
-                        valueString += ", " ;
-                    }
-                    if (values[i] == null) {
-                        valueString += "<null>";
-                    } else {
-                        valueString += values[i].getClass().getName();
-                    }
-                }
-            }
-            String expectedString = "";
-            final Class<?>[] parTypes = method.getParameterTypes();
-            if (parTypes != null) {
-                for (int i = 0; i < parTypes.length; i++) {
-                    if (i > 0) {
-                        expectedString += ", ";
-                    }
-                    expectedString += parTypes[i].getName();
-                }
-            }
-            final IllegalArgumentException e = new IllegalArgumentException(
-                "Cannot invoke " + method.getDeclaringClass().getName() + "."
-                + method.getName() + " on bean class '" + bean.getClass() +
-                "' - " + cause.getMessage()
-                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
-                + " - had objects of type \"" + valueString
-                + "\" but expected signature \""
-                +   expectedString + "\""
-                );
-            if (!BeanUtils.initCause(e, cause)) {
-                log.error("Method invocation failed", cause);
-            }
-            throw e;
-
         }
     }
 
