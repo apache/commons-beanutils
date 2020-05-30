@@ -308,13 +308,13 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
                 firePropertyChange(name, oldValue, newValue);
             } catch (final InvocationTargetException e) {
                 final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (BeanUtils.initCause(iae, e) == false) {
+                if (!BeanUtils.initCause(iae, e)) {
                     logInfo(e);
                 }
                 throw iae;
             } catch (final IllegalAccessException e) {
                 final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-                if (BeanUtils.initCause(iae, e) == false) {
+                if (!BeanUtils.initCause(iae, e)) {
                     logInfo(e);
                 }
                 throw iae;
@@ -655,13 +655,13 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             return answer;
         } catch (final InvocationTargetException e) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (BeanUtils.initCause(iae, e) == false) {
+            if (!BeanUtils.initCause(iae, e)) {
                 logInfo(e);
             }
             throw iae;
         } catch (final InstantiationException e) {
             final IllegalArgumentException iae = new IllegalArgumentException(e.getMessage());
-            if (BeanUtils.initCause(iae, e) == false) {
+            if (!BeanUtils.initCause(iae, e)) {
                 logInfo(e);
             }
             BeanUtils.initCause(iae, e);

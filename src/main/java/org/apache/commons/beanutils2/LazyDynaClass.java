@@ -357,7 +357,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
-        return propertiesMap.get(name) ==  null ? false : true;
+        return propertiesMap.get(name) != null;
 
     }
 

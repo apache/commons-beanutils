@@ -1169,7 +1169,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() == true);
+                    ((Boolean) value).booleanValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {

@@ -433,7 +433,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() == true);
+                    (Boolean) value);
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }

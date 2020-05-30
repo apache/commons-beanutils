@@ -482,7 +482,7 @@ public class MemoryLeakTestCase {
             java.util.ArrayList<String> list = new java.util.ArrayList<>();
             try {
                 long i = 0;
-                while (true && ref.get() != null) {
+                while (ref.get() != null) {
                     list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
                 System.out.println("Count(1) " + count + " : " + getMemoryStats());

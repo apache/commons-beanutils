@@ -121,7 +121,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public boolean containsKey(final Object key) {
         final DynaClass dynaClass = getDynaBean().getDynaClass();
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(toString(key));
-        return dynaProperty == null ? false : true;
+        return dynaProperty != null;
     }
 
     /**
