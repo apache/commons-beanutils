@@ -17,13 +17,16 @@
 
 package org.apache.commons.beanutils2;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * org.apache.commons.beanutils2.ConcurrentWeakHashMap
- * from https://issues.apache.org/jira/browse/HARMONY-6434
- * http://amino-cbbs.sourceforge.net/
+ * org.apache.commons.beanutils2.ConcurrentWeakHashMap from https://issues.apache.org/jira/browse/HARMONY-6434?jql=text%20~%20%22concurrent%20weak%20hash%20map%22
+ * donated by James Gan
  */
 public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         ConcurrentMap<K, V> {
@@ -81,9 +84,8 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
      * segments.
      */
     private static int hash(Object o) {
-        if (o == null) {
+        if (o == null)
             return 0;
-        }
         int hashCode = o.hashCode();
         hashCode ^= (hashCode << 7);
         hashCode ^= (hashCode >>> 3);
@@ -133,14 +135,12 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
                     + loadFactor);
         }
 
-        if (concurrencyLevel <= 1) {
+        if (concurrencyLevel <= 1)
             throw new IllegalArgumentException("Illegal concurrencyLevel: "
                     + concurrencyLevel);
-        }
 
-        if (concurrencyLevel > MAX_SEGMENTS) {
+        if (concurrencyLevel > MAX_SEGMENTS)
             concurrencyLevel = MAX_SEGMENTS;
-        }
 
         // Find power-of-two sizes best matching arguments
         int sshift = 0;
@@ -154,21 +154,17 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
 
         this.segments = new WeakHashMap[ssize];
 
-        if (initialCapacity > MAXIMUM_CAPACITY) {
+        if (initialCapacity > MAXIMUM_CAPACITY)
             initialCapacity = MAXIMUM_CAPACITY;
-        }
         int c = initialCapacity / ssize;
-        if (c * ssize < initialCapacity) {
+        if (c * ssize < initialCapacity)
             ++c;
-        }
         int cap = 1;
-        while (cap < c) {
+        while (cap < c)
             cap <<= 1;
-        }
 
-        for (int i = 0; i < this.segments.length; ++i) {
+        for (int i = 0; i < this.segments.length; ++i)
             this.segments[i] = new WeakHashMap<K, V>(cap, loadFactor);
-        }
     }
 
     /**
@@ -194,12 +190,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         int hash = hash(key);
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
-            V res;
-            synchronized (segments) {
-                segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                res = segments[(hash >>> segmentShift) & segmentMask].put(key, value);
-            }
-            return res;
+            return whm.put(key, value);
         }
     }
 
@@ -224,12 +215,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         int hash = hash(key);
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
-            V res;
-            synchronized (segments) {
-                segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                res = segments[(hash >>> segmentShift) & segmentMask].remove(key);
-            }
-            return res;
+            return whm.remove(key);
         }
     }
 
@@ -239,10 +225,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
             if (whm.containsKey(key) && (whm.get(key).equals(value))) {
-                synchronized (segments) {
-                    segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                    segments[(hash >>> segmentShift) & segmentMask].remove(key);
-                }
+                whm.remove(key);
                 return true;
             }
         }
@@ -253,16 +236,15 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
      * This function is not accurate under concurrent environment.
      *
      */
-    @Override
     public int size() {
         int sum = 0;
         for (int i = 0; i < segments.length; i++) {
             sum += segments[i].size();
         }
+
         return sum;
     }
 
-    @Override
     public boolean containsKey(Object key) {
         int hash = hash(key);
         WeakHashMap<K, V> whm = segmentFor(hash);
@@ -275,44 +257,35 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
      * Clear all mappings from all segment, leaving the org.apache.commons.beanutils2.ConcurrentWeakHashMap
      * empty.
      */
-    @Override
     public void clear() {
-        synchronized (segments) {
-            for (int i = 0; i < segments.length; i++) {
-                WeakHashMap<K, V> whm = segments[i];
-                synchronized (whm) {
-                    segments[i] = new WeakHashMap<>();
-                }
+        for (int i = 0; i < segments.length; i++) {
+            WeakHashMap<K, V> whm = segments[i];
+            synchronized (whm) {
+                whm.clear();
             }
         }
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public Set<K> keySet() {
         if (keySet == null) {
             keySet = new java.util.AbstractSet() {
-                @Override
                 public Iterator iterator() {
                     return new HashIterator();
                 }
 
-                @Override
                 public int size() {
                     return ConcurrentWeakHashMap.this.size();
                 }
 
-                @Override
                 public boolean contains(Object o) {
                     return containsKey(o);
                 }
 
-                @Override
                 public boolean remove(Object o) {
                     return ConcurrentWeakHashMap.this.remove(o) != null;
                 }
 
-                @Override
                 public void clear() {
                     ConcurrentWeakHashMap.this.clear();
                 }
@@ -333,16 +306,14 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
             if (currSegmentIndex < segments.length) {
                 internal_iter = segments[currSegmentIndex].keySet().iterator();
                 return true;
-            } else {
+            } else
                 return false;
-            }
         }
 
-        @Override
         public boolean hasNext() {
-            if (currSegmentIndex >= segments.length) {
+            if (currSegmentIndex >= segments.length)
                 return false;
-            } else {
+            else {
                 boolean ret = internal_iter.hasNext();
                 while (!ret && advance()) {
                     ret = internal_iter.hasNext();
@@ -351,20 +322,17 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
             }
         }
 
-        @Override
         public K next() {
             try {
                 return internal_iter.next();
             } catch (NoSuchElementException e) {
-                if (advance()) {
+                if (advance())
                     return internal_iter.next();
-                } else {
+                else
                     throw new NoSuchElementException();
-                }
             }
         }
 
-        @Override
         public void remove() {
             ConcurrentWeakHashMap.this.remove(next());
         }
@@ -376,15 +344,9 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
             if (!whm.containsKey(key)) {
-                V res;
-                synchronized (segments) {
-                    segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                    res = segments[(hash >>> segmentShift) & segmentMask].put(key, value);
-                }
-                return res;
-            } else {
+                return whm.put(key, value);
+            } else
                 return whm.get(key);
-            }
         }
     }
 
@@ -394,10 +356,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
             if (whm.containsKey(key) && (whm.get(key).equals(oldValue))) {
-                synchronized (segments) {
-                    segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                    segments[(hash >>> segmentShift) & segmentMask].put(key, newValue);
-                }
+                whm.put(key, newValue);
                 return true;
             }
         }
@@ -410,12 +369,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
         WeakHashMap<K, V> whm = segmentFor(hash);
         synchronized (whm) {
             if (whm.containsKey(key)) {
-                V res;
-                synchronized (segments) {
-                    segments[(hash >>> segmentShift) & segmentMask] = new WeakHashMap<>(whm);
-                    res = segments[(hash >>> segmentShift) & segmentMask].put(key, value);
-                }
-                return res;
+                return whm.put(key, value);
             }
         }
         return null;
@@ -423,12 +377,7 @@ public class ConcurrentWeakHashMap<K, V> extends AbstractMap<K, V> implements
 
     @Override
     public Set<java.util.Map.Entry<K, V>> entrySet() {
-        Set<java.util.Map.Entry<K, V>> res = new HashSet<>();
-        for (WeakHashMap<K, V> whm : segments) {
-            synchronized (whm) {
-                res.addAll(whm.entrySet());
-            }
-        }
-        return res;
+        // TODO:
+        return null;
     }
 }
