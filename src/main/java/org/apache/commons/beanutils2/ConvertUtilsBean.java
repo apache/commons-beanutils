@@ -84,7 +84,7 @@ import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
 import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.impl.WeakHashtable;
+
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -194,7 +194,7 @@ public class ConvertUtilsBean {
      * into objects of a specified Class, keyed by the destination Class.
      */
     private final Map<Class<?>, Converter> converters =
-            new WeakHashtable();
+            new ConcurrentWeakHashMap();
 
     /**
      * The {@code Log} instance for this class.

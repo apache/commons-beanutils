@@ -16,8 +16,9 @@
  */
 package org.apache.commons.beanutils2.performance;
 
+import org.apache.commons.beanutils2.ConcurrentWeakHashMap;
 import org.apache.commons.beanutils2.WeakFastHashMap;
-import org.apache.commons.logging.impl.WeakHashtable;
+
 
 import java.util.Map;
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class WeakFastHashMapTest {
     static final TreeSet<Integer> treeSet = new TreeSet<>();
     static final Random random = new Random();
     static final WeakFastHashMap<Integer, Integer> weakFastHashMap = new WeakFastHashMap<>();
-    static final Map<Integer, Integer> weakHashtable = new WeakHashtable();
+    static final Map<Integer, Integer> weakHashtable = new ConcurrentWeakHashMap();
 
     static final int INIT_SIZE = 50000;
     static final double WRITE_CHANCE = 0.01;
