@@ -17,17 +17,19 @@
 package org.apache.commons.beanutils2.performance;
 
 import org.apache.commons.beanutils2.WeakFastHashMap;
+import org.apache.commons.logging.impl.WeakHashtable;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
+
 
 public class WeakFastHashMapTest {
     static final TreeSet<Integer> treeSet = new TreeSet<>();
     static final Random random = new Random();
     static final WeakFastHashMap<Integer, Integer> weakFastHashMap = new WeakFastHashMap<>();
-    static final ConcurrentHashMap<Integer, Integer> concurrentHashMap = new ConcurrentHashMap<>();
+    static final Map<Integer, Integer> weakHashtable = new WeakHashtable();
 
     static final int INIT_SIZE = 50000;
     static final double WRITE_CHANCE = 0.01;
@@ -64,7 +66,7 @@ public class WeakFastHashMapTest {
         Integer nowValue = random.nextInt() * random.nextInt();
         treeSet.add(nowKey);
         weakFastHashMap.put(nowKey, nowValue);
-        concurrentHashMap.put(nowKey, nowValue);
+        weakHashtable.put(nowKey, nowValue);
     }
 
     public static void readExist() {
@@ -85,7 +87,7 @@ public class WeakFastHashMapTest {
 
     public static void read(Integer nowKey) {
         Integer value1 = weakFastHashMap.get(nowKey);
-        Integer value2 = concurrentHashMap.get(nowKey);
+        Integer value2 = weakHashtable.get(nowKey);
         if (!Objects.equals(value1, value2)) {
             System.out.println("not equal!  nowKey : " + nowKey + " value1 : " + value1 + " value2 : " + value2);
         }
