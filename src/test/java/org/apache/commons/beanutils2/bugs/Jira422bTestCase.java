@@ -36,7 +36,6 @@ public class Jira422bTestCase {
         assertEquals(String.class.getName(), propertyType.getName());
     }
 
-
     @Test
     public void testSecondChildBean() throws Exception {
         final RootBeanB bean = new SecondChildBeanB();
@@ -45,7 +44,6 @@ public class Jira422bTestCase {
     }
 
 }
-
 
 class RootBeanB {
 

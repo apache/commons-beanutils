@@ -25,7 +25,6 @@ import org.apache.commons.beanutils2.Converter;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the FileConverter class.
  *
@@ -33,23 +32,33 @@ import junit.framework.TestSuite;
 
 public class FileConverterTestCase extends TestCase {
 
+    public static TestSuite suite() {
+        return new TestSuite(FileConverterTestCase.class);
+    }
+
+
+
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+
 
     public FileConverterTestCase(final String name) {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    protected Class<?> getExpectedType() {
+        return File.class;
+    }
+
+    protected Converter makeConverter() {
+        return new FileConverter();
+    }
+
+
 
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-    }
-
-    public static TestSuite suite() {
-        return new TestSuite(FileConverterTestCase.class);
     }
 
     @Override
@@ -57,17 +66,7 @@ public class FileConverterTestCase extends TestCase {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
 
-    protected Converter makeConverter() {
-        return new FileConverter();
-    }
-
-    protected Class<?> getExpectedType() {
-        return File.class;
-    }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

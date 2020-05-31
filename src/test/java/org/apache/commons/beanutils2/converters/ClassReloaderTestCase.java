@@ -27,20 +27,19 @@ import junit.framework.TestSuite;
 
 public class ClassReloaderTestCase extends TestCase {
 
-    // ------------------------------------------------------------------------
 
-    public ClassReloaderTestCase(final String name) {
-        super(name);
+
+    public static class DummyClass {
     }
-
 
     public static TestSuite suite() {
         return new TestSuite(ClassReloaderTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
 
-    public static class DummyClass {
+
+    public ClassReloaderTestCase(final String name) {
+        super(name);
     }
 
     /**

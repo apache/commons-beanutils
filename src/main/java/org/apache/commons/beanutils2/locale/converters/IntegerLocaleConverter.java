@@ -22,11 +22,10 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 
-
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.lang.Integer</code> object,
+ * locale-sensitive String into a {@code java.lang.Integer} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -36,14 +35,13 @@ import org.apache.commons.beanutils2.ConversionException;
 public class IntegerLocaleConverter extends DecimalLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      */
 
@@ -68,7 +66,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
      */
@@ -93,10 +91,10 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public IntegerLocaleConverter(final Locale locale, final String pattern) {
 
@@ -109,7 +107,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
      * if a conversion error occurs.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public IntegerLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
@@ -122,7 +120,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      * @param defaultValue  The default value to be returned
      */
@@ -148,7 +146,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
@@ -175,11 +173,11 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public IntegerLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -193,7 +191,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public IntegerLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
@@ -206,7 +204,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
      * specified type. This method will return Integer type.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
      * @throws ConversionException if conversion cannot be performed
@@ -217,7 +215,7 @@ public class IntegerLocaleConverter extends DecimalLocaleConverter {
     protected Object parse(final Object value, final String pattern) throws ParseException {
         final Number parsed = (Number) super.parse(value, pattern);
         if (parsed.longValue() != parsed.intValue()) {
-            throw new ConversionException("Suplied number is not of type Integer: " + parsed.longValue());
+            throw new ConversionException("Supplied number is not of type Integer: " + parsed.longValue());
         }
         return Integer.valueOf(parsed.intValue()); // unlike superclass it will return proper Integer
     }

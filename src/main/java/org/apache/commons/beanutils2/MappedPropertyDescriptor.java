@@ -34,15 +34,15 @@ import java.lang.reflect.Modifier;
  * Such property values are typically stored in a Map collection.
  * For this class to work properly, a mapped value must have
  * getter and setter methods of the form
- * <p><code>get<strong>Property</strong>(String key)</code> and
- * <p><code>set<strong>Property</strong>(String key, Object value)</code>,
- * <p>where <code><strong>Property</strong></code> must be replaced
+ * <p>{@code get<strong>Property</strong>(String key)} and
+ * <p>{@code set<strong>Property</strong>(String key, Object value)},
+ * <p>where {@code <strong>Property</strong>} must be replaced
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
  *
  */
 public class MappedPropertyDescriptor extends PropertyDescriptor {
-    // ----------------------------------------------------- Instance Variables
+
 
     /**
      * The underlying data type of the property we are describing.
@@ -64,7 +64,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * Constructs a MappedPropertyDescriptor for a property that follows
@@ -211,7 +211,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-    // -------------------------------------------------------- Public Methods
+
 
     /**
      * Gets the Class object for the property values.
@@ -273,47 +273,43 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-    // ------------------------------------------------------- Private Methods
+
 
     /**
      * Introspect our bean class to identify the corresponding getter
      * and setter methods.
      */
     private void findMappedPropertyType() throws IntrospectionException {
-        try {
-            final Method mappedReadMethod  = getMappedReadMethod();
-            final Method mappedWriteMethod = getMappedWriteMethod();
-            Class<?> mappedPropertyType = null;
-            if (mappedReadMethod != null) {
-                if (mappedReadMethod.getParameterTypes().length != 1) {
-                    throw new IntrospectionException
-                            ("bad mapped read method arg count");
-                }
-                mappedPropertyType = mappedReadMethod.getReturnType();
-                if (mappedPropertyType == Void.TYPE) {
-                    throw new IntrospectionException
-                            ("mapped read method " +
-                            mappedReadMethod.getName() + " returns void");
-                }
+        final Method mappedReadMethod  = getMappedReadMethod();
+        final Method mappedWriteMethod = getMappedWriteMethod();
+        Class<?> mappedPropertyType = null;
+        if (mappedReadMethod != null) {
+            if (mappedReadMethod.getParameterTypes().length != 1) {
+                throw new IntrospectionException
+                        ("bad mapped read method arg count");
             }
-
-            if (mappedWriteMethod != null) {
-                final Class<?>[] params = mappedWriteMethod.getParameterTypes();
-                if (params.length != 2) {
-                    throw new IntrospectionException
-                            ("bad mapped write method arg count");
-                }
-                if (mappedPropertyType != null &&
-                        mappedPropertyType != params[1]) {
-                    throw new IntrospectionException
-                            ("type mismatch between mapped read and write methods");
-                }
-                mappedPropertyType = params[1];
+            mappedPropertyType = mappedReadMethod.getReturnType();
+            if (mappedPropertyType == Void.TYPE) {
+                throw new IntrospectionException
+                        ("mapped read method " +
+                        mappedReadMethod.getName() + " returns void");
             }
-            mappedPropertyTypeRef = new SoftReference<Class<?>>(mappedPropertyType);
-        } catch (final IntrospectionException ex) {
-            throw ex;
         }
+
+        if (mappedWriteMethod != null) {
+            final Class<?>[] params = mappedWriteMethod.getParameterTypes();
+            if (params.length != 2) {
+                throw new IntrospectionException
+                        ("bad mapped write method arg count");
+            }
+            if (mappedPropertyType != null &&
+                    mappedPropertyType != params[1]) {
+                throw new IntrospectionException
+                        ("type mismatch between mapped read and write methods");
+            }
+            mappedPropertyType = params[1];
+        }
+        mappedPropertyTypeRef = new SoftReference<>(mappedPropertyType);
     }
 
 
@@ -433,11 +429,11 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 className = m.getDeclaringClass().getName();
                 methodName = m.getName();
                 methodRef = new SoftReference<>(m);
-                classRef = new WeakReference<Class<?>>(m.getDeclaringClass());
+                classRef = new WeakReference<>(m.getDeclaringClass());
                 final Class<?>[] types = m.getParameterTypes();
                 if (types.length == 2) {
-                    writeParamTypeRef0 = new WeakReference<Class<?>>(types[0]);
-                    writeParamTypeRef1 = new WeakReference<Class<?>>(types[1]);
+                    writeParamTypeRef0 = new WeakReference<>(types[0]);
+                    writeParamTypeRef1 = new WeakReference<>(types[1]);
                     writeParamClassNames = new String[2];
                     writeParamClassNames[0] = types[0].getName();
                     writeParamClassNames[1] = types[1].getName();
@@ -454,7 +450,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                 if (clazz == null) {
                     clazz = reLoadClass();
                     if (clazz != null) {
-                        classRef = new WeakReference<Class<?>>(clazz);
+                        classRef = new WeakReference<>(clazz);
                     }
                 }
                 if (clazz == null) {
@@ -468,14 +464,14 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     if (paramTypes[0] == null) {
                         paramTypes[0] = reLoadClass(writeParamClassNames[0]);
                         if (paramTypes[0] != null) {
-                            writeParamTypeRef0 = new WeakReference<Class<?>>(paramTypes[0]);
+                            writeParamTypeRef0 = new WeakReference<>(paramTypes[0]);
                         }
                     }
                     paramTypes[1] = writeParamTypeRef1.get();
                     if (paramTypes[1] == null) {
                         paramTypes[1] = reLoadClass(writeParamClassNames[1]);
                         if (paramTypes[1] != null) {
-                            writeParamTypeRef1 = new WeakReference<Class<?>>(paramTypes[1]);
+                            writeParamTypeRef1 = new WeakReference<>(paramTypes[1]);
                         }
                     }
                 } else {

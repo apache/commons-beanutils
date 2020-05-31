@@ -74,10 +74,10 @@
  *     </ul></li>
  * </ul>
  *
- * <a name="overview"></a>
+ * <a id="overview"></a>
  * <h1>1. Overview</h1>
  *
- * <a name="overview.background"></a>
+ * <a id="overview.background"></a>
  * <h2>1.1 Background</h2>
  *
  * <p>The <em>JavaBeans</em> name comes from a
@@ -116,11 +116,11 @@
  * <li>Typically, each bean property will have a public <em>getter</em> and
  *     <em>setter</em> method that are used to retrieve or define the property's
  *     value, respectively.  The JavaBeans Specification defines a design
- *     pattern for these names, using <code>get</code> or <code>set</code> as the
+ *     pattern for these names, using {@code get</code> or <code>set} as the
  *     prefix for the property name with it's first character capitalized.  Thus,
  *     you a JavaBean representing an employee might have
- *     (among others) properties named <code>firstName</code>,
- *     <code>lastName</code>, and <code>hireDate</code>, with method signatures
+ *     (among others) properties named {@code firstName},
+ *     {@code lastName</code>, and <code>hireDate}, with method signatures
  *     like this:
  * <pre>
  *         public class Employee {
@@ -138,7 +138,7 @@
  * </pre></li>
  * <li>As you can see from the above example, there is a special variant allowed
  *     for boolean properties -- you can name the <em>getter</em> method with a
- *     <code>is</code> prefix instead of a <code>get</code> prefix if that makes
+ *     {@code is</code> prefix instead of a <code>get} prefix if that makes
  *     for a more understandable method name.</li>
  * <li>If you have both a <em>getter</em> and a <em>setter</em> method for a
  *     property, the data type returned by the <em>getter</em> must match the
@@ -147,14 +147,14 @@
  *     with the same name, but different property types.</li>
  * <li>It is not required that you provide a <em>getter</em> and a
  *     <em>setter</em> for every property.  In the example above, the
- *     <code>fullName</code> property is read-only, because there is no
+ *     {@code fullName} property is read-only, because there is no
  *     <em>setter</em> method.  It is also possible, but less common, to provide
  *     write-only properties.</li>
  * <li>It is also possible to create a JavaBean where the <em>getter</em> and
  *     <em>setter</em> methods do not match the naming pattern described above.
  *     The standard JavaBeans support classes in the Java language, as well as
  *     all classes in the BeanUtils package, allow you to describe the actual
- *     property method names in a <code>BeanInfo</code> class associated with
+ *     property method names in a {@code BeanInfo} class associated with
  *     your bean class.  See the JavaBeans Specification for full details.</li>
  * <li>The JavaBeans Specification also describes many additional design patterns
  *     for event listeners, wiring JavaBeans together into component hierarchies,
@@ -170,7 +170,7 @@
  *         System.out.println("Hello " + employee.getFirstName() + "!");
  * </pre>
  *
- * <a name="overview.dependencies"></a>
+ * <a id="overview.dependencies"></a>
  * <h2>1.2 External Dependencies</h2>
  *
  * <p>The <em>commons-beanutils</em> package requires that the following
@@ -183,10 +183,10 @@
  * Collections Package (Apache Commons)</a>, version 1.0 or later</li>
  * </ul>
  *
- * <a name="standard"></a>
+ * <a id="standard"></a>
  * <h1>2. Standard JavaBeans</h1>
  *
- * <a name="standard.background"></a>
+ * <a id="standard.background"></a>
  * <h2>2.1 Background</h2>
  *
  * <p>As described above, the standard facilities of the Java programming language
@@ -195,7 +195,7 @@
  * But what happens in more sophisticated environments where you do not
  * necessarily know ahead of time which bean class you are going to be using,
  * or which property you want to retrieve or modify?  The Java language provides
- * classes like <code>java.beans.Introspector</code>, which can examine a Java
+ * classes like {@code java.beans.Introspector}, which can examine a Java
  * class at runtime and identify for you the names of the property getter and
  * setter methods, plus the <em>Reflection</em> capabilities to dynamically call
  * such a method.  However, these APIs can be difficult to use, and expose the
@@ -218,8 +218,8 @@
  * <ul>
  * <li><strong>Simple</strong> - Simple, or scalar, properties have a single
  *     value that may be retrieved or modified.  The underlying property type
- *     might be a Java language primitive (such as <code>int</code>, a simple
- *     object (such as a <code>java.lang.String</code>), or a more complex
+ *     might be a Java language primitive (such as {@code int}, a simple
+ *     object (such as a {@code java.lang.String}), or a more complex
  *     object whose class is defined either by the Java language, by the
  *     application, or by a class library included with the application.</li>
  * <li><strong>Indexed</strong> - An indexed property stores an ordered collection
@@ -228,11 +228,11 @@
  *     entire set of values may be set or retrieved using an array.
  *     As an extension to the JavaBeans specification, the
  *     <em>BeanUtils</em> package considers any property whose underlying data
- *     type is <code>java.util.List</code> (or an implementation of List) to be
+ *     type is {@code java.util.List} (or an implementation of List) to be
  *     indexed as well.</li>
  * <li><strong>Mapped</strong> - As an extension to standard JavaBeans APIs,
  *     the <em>BeanUtils</em> package considers any property whose underlying
- *     value is a <code>java.util.Map</code> to be "mapped".  You can set and
+ *     value is a {@code java.util.Map} to be "mapped".  You can set and
  *     retrieve individual values via a String-valued key.</li>
  * </ul>
  *
@@ -254,7 +254,7 @@
  *     }
  * </pre>
  *
- * <a name="standard.basic"></a>
+ * <a id="standard.basic"></a>
  * <h2>2.2 Basic Property Access</h2>
  *
  * <p>Getting and setting <strong>simple</strong> property values is, well,
@@ -333,7 +333,7 @@
  *     PropertyUtils.setMappedProperty(employee, "address", "home", address);
  * </pre>
  *
- * <a name="standard.nested"></a>
+ * <a id="standard.nested"></a>
  * <h2>2.3 Nested Property Access</h2>
  *
  * <p>In all of the examples above, we have assumed that you wished to retrieve
@@ -342,7 +342,7 @@
  * really a Java object, and you wish to retrieve a property of <em>that</em>
  * object instead?</p>
  *
- * <p>For example, assume we really wanted the <code>city</code> property of the
+ * <p>For example, assume we really wanted the {@code city} property of the
  * employee's home address.  Using standard Java programming techniques for direct
  * access to the bean properties, we might write:</p>
  *
@@ -384,7 +384,7 @@
  *       "subordinate[3].address(home).city");
  * </pre>
  *
- * <a name="standard.customize"></a>
+ * <a id="standard.customize"></a>
  * <h2>2.4 Customizing Introspection</h2>
  *
  * <p>As was pointed out, BeanUtils relies on conventions defined by the
@@ -402,52 +402,52 @@
  * <p>The key to this extension mechanism is the {@link org.apache.commons.beanutils2.BeanIntrospector}
  * interface. The purpose of an object implementing this interface is to
  * process a specific target class and create corresponding
- * <code>PropertyDescriptor</code> objects for the properties it detects.
+ * {@code PropertyDescriptor} objects for the properties it detects.
  * Per default, BeanUtils uses a {@link org.apache.commons.beanutils2.DefaultBeanIntrospector}
  * object which detects properties compatible with the <em>JavaBeans</em>
  * specification.</p>
  *
- * <p>In order to extend the property discovery mechanism, <code>PropertyUtils</code>
+ * <p>In order to extend the property discovery mechanism, {@code PropertyUtils}
  * offers the {@link org.apache.commons.beanutils2.PropertyUtils#addBeanIntrospector(BeanIntrospector)}
- * method. Here a custom <code>BeanIntrospector</code> implementation can be
+ * method. Here a custom {@code BeanIntrospector} implementation can be
  * passed in. During introspection of a class, this custom introspector is
  * then called, and it can add the properties it has detected to the total
- * result. As an example of such a custom <code>BeanIntrospector</code>
+ * result. As an example of such a custom {@code BeanIntrospector}
  * implementation, BeanUtils ships with the {@link org.apache.commons.beanutils2.FluentPropertyBeanIntrospector}
  * class. This implementation can detect properties whose set methods have a
  * non-void return type - thus enabling support for typical properties in a
  * fluent API.</p>
  *
- * <a name="standard.suppress"></a>
+ * <a id="standard.suppress"></a>
  * <h2>2.5 Suppressing Properties</h2>
  * <p>The mechanism of customizing bean introspection described in the previous
  * section can also be used to suppress specific properties. There is a
- * specialized <code>BeanIntrospector</code> implementation that does exactly
+ * specialized {@code BeanIntrospector} implementation that does exactly
  * this: {@link org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector}.
  * When creating an instance, a collection with the names of properties that
  * should not be accessible on beans has to be provided. These properties will
- * then be removed if they have been detected by other <code>BeanIntrospector</code>
+ * then be removed if they have been detected by other {@code BeanIntrospector}
  * instances during processing of a bean class.</p>
  *
- * <p>A good use case for suppressing properties is the special <code>class</code>
+ * <p>A good use case for suppressing properties is the special {@code class}
  * property which is per default available for all beans; it is generated from the
- * <code>getClass()</code> method inherited from <code>Object</code> which follows the
+ * {@code getClass()</code> method inherited from <code>Object} which follows the
  * naming conventions for property get methods. Exposing this property in an
  * uncontrolled way can lead to a security vulnerability as it allows access to
  * the class loader. More information can be found at
  * <a href="https://issues.apache.org/jira/browse/BEANUTILS-463">
  * https://issues.apache.org/jira/browse/BEANUTILS-463</a>.</p>
  *
- * <p>Because the <code>class</code> property is undesired in many use cases
- * there is already an instance of <code>SuppressPropertiesBeanIntrospector</code>
+ * <p>Because the {@code class} property is undesired in many use cases
+ * there is already an instance of {@code SuppressPropertiesBeanIntrospector}
  * which is configured to suppress this property. It can be obtained via the
- * <code>SUPPRESS_CLASS</code> constant of
- * <code>SuppressPropertiesBeanIntrospector</code>.</p>
+ * {@code SUPPRESS_CLASS} constant of
+ * {@code SuppressPropertiesBeanIntrospector}.</p>
  *
- * <a name="dynamic"></a>
+ * <a id="dynamic"></a>
  * <h1>3. Dynamic Beans (DynaBeans)</h1>
  *
- * <a name="dynamic.background"></a>
+ * <a id="dynamic.background"></a>
  * <h2>3.1 Background</h2>
  *
  * <p>The {@link org.apache.commons.beanutils2.PropertyUtils} class described in the
@@ -466,10 +466,10 @@
  * bean class actually implementing the interface's methods, and the associated
  * {@link org.apache.commons.beanutils2.DynaClass} interface that defines the set of
  * properties supported by a particular group of DynaBeans, in much the same way
- * that <code>java.lang.Class</code> defines the set of properties supported by
+ * that {@code java.lang.Class} defines the set of properties supported by
  * all instances of a particular JavaBean class.</p>
  *
- * <p>For example, the <code>Employee</code> class used in the examples above
+ * <p>For example, the {@code Employee} class used in the examples above
  * might be implemented as a DynaBean, rather than as a standard JavaBean.  You
  * can access its properties like this:</p>
  *
@@ -484,7 +484,7 @@
  * <p>One very important convenience feature should be noted:  <em>the
  * PropertyUtils property getter and setter methods understand how to access
  * properties in DynaBeans</em>.  Therefore, if the bean you pass as the first
- * argument to, say, <code>PropertyUtils.getSimpleProperty()</code> is really a
+ * argument to, say, {@code PropertyUtils.getSimpleProperty()} is really a
  * DynaBean implementation, the call will get converted to the appropriate
  * DynaBean getter method transparently.  Thus, you can base your application's
  * dynamic property access totally on the PropertyUtils APIs, if you wish, and
@@ -498,8 +498,8 @@
  * provide your own custom implementations for cases where the standard
  * implementations are not sufficient.</p>
  *
- * <a name="dynamic.basic"></a>
- * <h2>3.2 <code>BasicDynaBean</code> and <code>BasicDynaClass</code></h2>
+ * <a id="dynamic.basic"></a>
+ * <h2>3.2 {@code BasicDynaBean</code> and <code>BasicDynaClass}</h2>
  *
  * <p>The {@link org.apache.commons.beanutils2.BasicDynaBean} and
  * {@link org.apache.commons.beanutils2.BasicDynaClass} implementation provides a
@@ -520,11 +520,11 @@
  * </pre>
  *
  * <p>Note that the 'dynaBeanClass' argument (in the constructor of
- * <code>BasicDynaClass</code>) can have the value of <code>null</code>.  In this
- * case, the value of <code>dynaClass.getDynaBeanClass</code> will just be the
- * <code>Class</code> for BasicDynaBean.</p>
+ * {@code BasicDynaClass</code>) can have the value of <code>null}.  In this
+ * case, the value of {@code dynaClass.getDynaBeanClass} will just be the
+ * {@code Class} for BasicDynaBean.</p>
  *
- * <p>Next, you use the <code>newInstance()</code> method of this DynaClass to
+ * <p>Next, you use the {@code newInstance()} method of this DynaClass to
  * create new DynaBean instances that conform to this DynaClass, and populate
  * its initial property values (much as you would instantiate a new standard
  * JavaBean and then call its property setters):</p>
@@ -538,25 +538,25 @@
  * </pre>
  *
  * <p>Note that the DynaBean class was declared to be
- * <code>DynaBean</code> instead of <code>BasicDynaBean</code>.  In
+ * {@code DynaBean</code> instead of <code>BasicDynaBean}.  In
  * general, if you are using DynaBeans, you will not want to care about the
  * actual implementation class that is being used -- you only care about
- * declaring that it is a <code>DynaBean</code> so that you can use the
+ * declaring that it is a {@code DynaBean} so that you can use the
  * DynaBean APIs.</p>
  *
  * <p>As stated above, you can pass a DynaBean instance as the first argument
- * to a <code>PropertyUtils</code> method that gets and sets properties, and it
+ * to a {@code PropertyUtils} method that gets and sets properties, and it
  * will be interpreted as you expect -- the dynamic properties of the DynaBean
  * will be retrieved or modified, instead of underlying properties on the
  * actual BasicDynaBean implementation class.</p>
  *
- * <a name="dynamic.resultSet"></a>
- * <h2>3.3 <code>ResultSetDynaClass</code> (Wraps ResultSet in DynaBeans)</h2>
+ * <a id="dynamic.resultSet"></a>
+ * <h2>3.3 {@code ResultSetDynaClass} (Wraps ResultSet in DynaBeans)</h2>
  *
  * <p>A very common use case for DynaBean APIs is to wrap other collections of
  * "stuff" that do not normally present themselves as JavaBeans.  One of the most
  * common collections that would be nice to wrap is the
- * <code>java.sql.ResultSet</code> that is returned when you ask a JDBC driver
+ * {@code java.sql.ResultSet} that is returned when you ask a JDBC driver
  * to perform a SQL SELECT statement.  Commons BeanUtils offers a standard
  * mechanism for making each row of the result set visible as a DynaBean,
  * which you can utilize as shown in this example:</p>
@@ -577,21 +577,21 @@
  * </pre>
  *
  *
- * <a name="dynamic.rowSet"></a>
- * <h2>3.4 <code>RowSetDynaClass</code> (Disconnected ResultSet as DynaBeans)</h2>
- * <p>Although <a href="#dynamic.resultSet"><code>ResultSetDynaClass</code></a> is
+ * <a id="dynamic.rowSet"></a>
+ * <h2>3.4 {@code RowSetDynaClass} (Disconnected ResultSet as DynaBeans)</h2>
+ * <p>Although <a href="#dynamic.resultSet">{@code ResultSetDynaClass}</a> is
  * a very useful technique for representing the results of an SQL query as a
  * series of DynaBeans, an important problem is that the underlying
- * <code>ResultSet</code> must remain open throughout the period of time that the
+ * {@code ResultSet} must remain open throughout the period of time that the
  * rows are being processed by your application.  This hinders the ability to use
- * <code>ResultSetDynaClass</code> as a means of communicating information from
+ * {@code ResultSetDynaClass} as a means of communicating information from
  * the model layer to the view layer in a model-view-controller architecture
  * such as that provided by the <a href="http://struts.apache.org/">Struts
  * Framework</a>, because there is no easy mechanism to assure that the result set
- * is finally closed (and the underlying <code>Connection</code> returned to its
+ * is finally closed (and the underlying {@code Connection} returned to its
  * connection pool, if you are using one).</p>
  *
- * <p>The <code>RowSetDynaClass</code> class represents a different approach to
+ * <p>The {@code RowSetDynaClass} class represents a different approach to
  * this problem.  When you construct such an instance, the underlying data is
  * <em>copied</em> into a set of in-memory DynaBeans that represent the result.
  * The advantage of this technique, of course, is that you can immediately close
@@ -602,15 +602,15 @@
  * environments (particularly in web applications), this tradeoff is usually
  * quite beneficial.</p>
  *
- * <p>As an additional benefit, the <code>RowSetDynaClass</code> class is defined
- * to implement <code>java.io.Serializable</code>, so that it (and the
+ * <p>As an additional benefit, the {@code RowSetDynaClass} class is defined
+ * to implement {@code java.io.Serializable}, so that it (and the
  * DynaBeans that correspond to each row of the result) can be conveniently
  * serialized and deserialized (as long as the underlying column values are
- * also Serializable).  Thus, <code>RowSetDynaClass</code> represents a very
+ * also Serializable).  Thus, {@code RowSetDynaClass} represents a very
  * convenient way to transmit the results of an SQL query to a remote Java-based
  * client application (such as an applet).</p>
  *
- * <p>The normal usage pattern for a <code>RowSetDynaClass</code> will look
+ * <p>The normal usage pattern for a {@code RowSetDynaClass} will look
  * something like this:</p>
  * <pre>
  *     Connection conn = ...;  // Acquire connection from pool
@@ -625,11 +625,11 @@
  * </pre>
  *
  *
- * <a name="dynamic.wrap"></a>
- * <h2>3.5 <code>WrapDynaBean</code> and <code>WrapDynaClass</code></h2>
+ * <a id="dynamic.wrap"></a>
+ * <h2>3.5 {@code WrapDynaBean</code> and <code>WrapDynaClass}</h2>
  *
  * <p>OK, you've tried the DynaBeans APIs and they are cool -- very simple
- * <code>get()</code> and <code>set()</code> methods provide easy access to all
+ * {@code get()</code> and <code>set()} methods provide easy access to all
  * of the dynamically defined simple, indexed, and mapped properties of your
  * DynaBeans.  You'd like to use the DynaBean APIs to access <strong>all</strong>
  * of your beans, but you've got a bunch of existing standard JavaBeans classes
@@ -646,10 +646,10 @@
  *     String firstName = wrapper.get("firstName");
  * </pre>
  *
- * <p>Note that, although appropriate <code>WrapDynaClass</code> instances are
+ * <p>Note that, although appropriate {@code WrapDynaClass} instances are
  * created internally, you never need to deal with them.</p>
  *
- * <a name="dynamic.lazy"></a>
+ * <a id="dynamic.lazy"></a>
  * <h2>3.6 <i>Lazy</i> DynaBeans</h2>
  *
  * <ul>
@@ -660,7 +660,7 @@
  *          with <i>lazy</i> map/list processing</li>
  *     <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <i>lazy list</i>
  *          for {@link org.apache.commons.beanutils2.DynaBean DynaBean's},
- *          <code>java.util.Map</code>'s or POJO beans.</li>
+ *          {@code java.util.Map}'s or POJO beans.</li>
  *     <li>4. <a href="#LazyDynaClass">LazyDynaClass</a> - A
  *          {@link org.apache.commons.beanutils2.MutableDynaClass} implementation.</li>
  * </ul>
@@ -675,34 +675,34 @@
  *              interface. This provides the ability to add and remove a DynaClass's
  *              properties. <i>Lazy</i> beans use this feature to automatically add
  *              a property which doesn't exist to the DynaClass when
- *              the <code>set(name, value)</code> method is called.</li>
+ *              the {@code set(name, value)} method is called.</li>
  *          <li><strong><i>Lazy</i> List/Array growth</strong> - If an <i>indexed</i> property is not large
- *              enough to accomodate the <code>index</code> being set then the <code>List</code> or
- *              <code>Array</code> is automatically <i>grown</i> so that it is.</li>
+ *              enough to accomodate the {@code index</code> being set then the <code>List} or
+ *              {@code Array} is automatically <i>grown</i> so that it is.</li>
  *          <li><strong><i>Lazy</i> List/Array instantiation</strong> - if an <i>indexed</i>
  *              property doesn't exist then calling the {@link org.apache.commons.beanutils2.DynaBean DynaBean's}
- *              <i>indexed</i> property getter/setter methods (i.e. <code>get(name, index)</code> or
- *              <code>set(name, index, value)</code>) results in either a new <code>List</code>
- *              or <code>Array</code> being instantiated. If the indexed property has not been
- *              defined in the DynaClass then it is automatically added and a default <code>List</code>
+ *              <i>indexed</i> property getter/setter methods (i.e. {@code get(name, index)} or
+ *              {@code set(name, index, value)</code>) results in either a new <code>List}
+ *              or {@code Array} being instantiated. If the indexed property has not been
+ *              defined in the DynaClass then it is automatically added and a default {@code List}
  *              implementation instantiated.</li>
  *         <li><strong><i>Lazy</i> Map instantiation</strong> - if a <i>mapped</i>
  *              property doesn't exist then calling the {@link org.apache.commons.beanutils2.DynaBean DynaBean's}
- *              <i>mapped</i> property getter/setter methods (i.e. <code>get(name, key)</code> or
- *              <code>set(name, key, value)</code>) results in a new <code>Map</code>
+ *              <i>mapped</i> property getter/setter methods (i.e. {@code get(name, key)} or
+ *              {@code set(name, key, value)</code>) results in a new <code>Map}
  *              being instantiated. If the mapped property has not been defined in the DynaClass
- *              then it is automatically added and a default <code>Map</code> implementation
+ *              then it is automatically added and a default {@code Map} implementation
  *              instantiated.</li>
  *         <li><strong><i>Lazy</i> Bean instantiation</strong> - if a property is defined in
- *              the <code>DynaClass</code> as a <code>DynaBean</code> or regular bean and
- *              doesn't exist in the <code>DynaBean</code> then <code>LazyDynaBean</code> wiill
+ *              the {@code DynaClass</code> as a <code>DynaBean} or regular bean and
+ *              doesn't exist in the {@code DynaBean</code> then <code>LazyDynaBean} wiill
  *              try to instantiate the bean using a default empty constructor.</li>
  *     </ul>
  *
  * <p><strong>1. {@link org.apache.commons.beanutils2.LazyDynaBean}</strong> is the standard <i>lazy</i> bean
  *    implementation. By default it is associated with a {@link org.apache.commons.beanutils2.LazyDynaClass}
  *    which implements the {@link org.apache.commons.beanutils2.MutableDynaClass} interface - however
- *    it can be used with any <code>MutableDynaClass</code> implementation. The question is <i>how do
+ *    it can be used with any {@code MutableDynaClass} implementation. The question is <i>how do
  *    I use it?</i> - well it can be as simple as creating a new bean and then calling the getters/setters...</p>
  *
  * <pre>
@@ -719,15 +719,15 @@
  * </pre>
  *
  * <p><strong>2. {@link org.apache.commons.beanutils2.LazyDynaMap}</strong> is a <i>light weight</i>
- *    <code>DynaBean</code> facade to a <code>Map</code> with all the usual <i>lazy</i> features. Its
- *    <i>light weight</i> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
- *    In fact it actually implements the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>)
- *    and derives all the <i>DynaClass</i> information from the actual contents of the <code>Map</code>. A
- *    <code>LazyDynaMap</code> can be created around an existing <code>Map</code> or can instantiate its own
- *    <code>Map</code>. After any <code>DynaBean</code> processing has finished the <code>Map</code> can be retrieved
+ *    {@code DynaBean</code> facade to a <code>Map} with all the usual <i>lazy</i> features. Its
+ *    <i>light weight</i> because it doesn't have an associated {@code DynaClass} containing all the properties.
+ *    In fact it actually implements the {@code DynaClass</code> interface itself (and <code>MutableDynaClass})
+ *    and derives all the <i>DynaClass</i> information from the actual contents of the {@code Map}. A
+ *    {@code LazyDynaMap</code> can be created around an existing <code>Map} or can instantiate its own
+ *    {@code Map</code>. After any <code>DynaBean</code> processing has finished the <code>Map} can be retrieved
  *    and the DynaBean <i>facade</i> discarded.</p>
  *
- * <p>If you need a new <code>Map</code> then to use....</p>
+ * <p>If you need a new {@code Map} then to use....</p>
  *
  * <pre>
  *     DynaBean dynaBean = new LazyDynaMap();        // create DynaBean
@@ -738,7 +738,7 @@
  *
  *     Map myMap = dynaBean.getMap()                 // retrieve the Map
  * </pre>
- * <p><i>or</i> to use with an existing <code>Map</code> ....</p>
+ * <p><i>or</i> to use with an existing {@code Map} ....</p>
  *
  * <pre>
  *     Map myMap = ....                             // exisitng Map
@@ -748,22 +748,22 @@
  *
  * <p><strong>3. {@link org.apache.commons.beanutils2.LazyDynaList}</strong>
  *      is  <i>lazy list</i> for {@link org.apache.commons.beanutils2.DynaBean DynaBeans}
- *      <code>java.util.Map</code>'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
+ *      {@code java.util.Map}'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
  *      for more details and example usage.</p>
  *
  * <p><strong>4. {@link org.apache.commons.beanutils2.LazyDynaClass}</strong>
  *      extends {@link org.apache.commons.beanutils2.BasicDynaClass} and implements
  *      the <a href="MutableDynaClass.html">MutableDynaClass</a> interface.
- *      It can be used with other <code>DynaBean</code> implementations, but it
- *      is the default <code>DynaClass</code> used by <code>LazyDynaBean</code>.
- *      When using the <code>LazyDynaBean</code> there may be no need to have
- *      anything to do with the <code>DynaClass</code>. However sometimes there
- *      is a requirement to set up the <code>DynaClass</code> first - perhaps to
+ *      It can be used with other {@code DynaBean} implementations, but it
+ *      is the default {@code DynaClass</code> used by <code>LazyDynaBean}.
+ *      When using the {@code LazyDynaBean} there may be no need to have
+ *      anything to do with the {@code DynaClass}. However sometimes there
+ *      is a requirement to set up the {@code DynaClass} first - perhaps to
  *      define the type of array for an indexed property, or if using the DynaBean
  *      in <i>restricted</i> mode (see note below) is required. Doing so is
  *      straight forward...</p>
  *
- * <p><i>Either</i> create a <code>LazyDynaClass</code> first...
+ * <p><i>Either</i> create a {@code LazyDynaClass} first...
  *
  * <pre>
  *     MutableDynaClass dynaClass = new LazyDynaClass();    // create DynaClass
@@ -775,7 +775,7 @@
  *     DynaBean dynaBean = new LazyDynaBean(dynaClass);     // Create DynaBean with associated DynaClass
  * </pre>
  *
- * <p><i>or</i> create a <code>LazyDynaBean</code> and get the <code>DynaClass</code>...
+ * <p><i>or</i> create a {@code LazyDynaBean</code> and get the <code>DynaClass}...
  *
  * <pre>
  *     DynaBean dynaBean = new LazyDynaBean();              // Create LazyDynaBean
@@ -789,14 +789,14 @@
  *
  * <p><strong>NOTE:</strong> One feature of {@link org.apache.commons.beanutils2.MutableDynaClass} is that it
  *    has a <i>Restricted</i> property. When the DynaClass is <i>restricted</i> no properties can be added
- *    or removed from the <code>DynaClass</code>. Neither the <code>LazyDynaBean</code> or <code>LazyDynaMap</code>
- *    will add properties automatically if the <code>DynaClass</code> is <i>restricted</i>.</p>
+ *    or removed from the {@code DynaClass</code>. Neither the <code>LazyDynaBean</code> or <code>LazyDynaMap}
+ *    will add properties automatically if the {@code DynaClass} is <i>restricted</i>.</p>
  *
  *
- * <a name="conversion"></a>
+ * <a id="conversion"></a>
  * <h1>4. Data Type Conversions</h1>
  *
- * <a name="conversion.background"></a>
+ * <a id="conversion.background"></a>
  * <h2>4.1 Background</h2>
  *
  * <p>So far, we've only considered the cases where the data types of the
@@ -806,13 +806,13 @@
  * <em>BeanUtils</em> package provides a variety of APIs and design patterns
  * for performing this task as well.</p>
  *
- * <a name="conversion.beanutils"></a>
- * <h2>4.2 <code>BeanUtils</code> and <code>ConvertUtils</code> Conversions</h2>
+ * <a id="conversion.beanutils"></a>
+ * <h2>4.2 {@code BeanUtils</code> and <code>ConvertUtils} Conversions</h2>
  *
  * <p>A very common use case (and the situation that caused the initial creation
  * of the <em>BeanUtils</em> package) was the desire to convert the set of request
  * parameters that were included in a
- * <code>javax.servlet.HttpServletRequest</code> received by a web application
+ * {@code javax.servlet.HttpServletRequest} received by a web application
  * into a set of corresponding property setter calls on an arbitrary JavaBean.
  * (This is one of the fundamental services provided by the
  * <a href="http://struts.apache.org/">Struts Framework</a>, which uses
@@ -824,9 +824,9 @@
  * data type.  The {@link org.apache.commons.beanutils2.BeanUtils} class provides
  * property setter methods that accept String values, and automatically convert
  * them to appropriate property types for Java primitives (such as
- * <code>int</code> or <code>boolean</code>), and property getter methods that
- * perform the reverse conversion.  Finally, a <code>populate()</code> method
- * is provided that accepts a <code>java.util.Map</code> containing a set of
+ * {@code int</code> or <code>boolean}), and property getter methods that
+ * perform the reverse conversion.  Finally, a {@code populate()} method
+ * is provided that accepts a {@code java.util.Map} containing a set of
  * property values (keyed by property name), and calls all of the appropriate
  * setters whenever the underlying bean has a property with the same name as
  * one of the request parameters.  So, you can perform the all-in-one property
@@ -844,36 +844,36 @@
  *     BeanUtils.populate(bean, map);
  * </pre>
  *
- * <p>The <code>BeanUtils</code> class relies on conversion methods defined in
+ * <p>The {@code BeanUtils} class relies on conversion methods defined in
  * the {@link org.apache.commons.beanutils2.ConvertUtils} class to perform the actual
  * conversions, and these methods are availablve for direct use as well.
  * <strong>WARNING</strong> - It is likely that the hard coded use of
- * <code>ConvertUtils</code> methods will be deprecated in the future, and
+ * {@code ConvertUtils} methods will be deprecated in the future, and
  * replaced with a mechanism that allows you to plug in your own implementations
  * of the {@link org.apache.commons.beanutils2.Converter} interface instead.  Therefore,
  * new code should not be written with reliance on ConvertUtils.</p>
  *
- * <a name="conversion.defining"></a>
+ * <a id="conversion.defining"></a>
  * <h2>4.3 Defining Your Own Converters</h2>
  *
- * <p>The <code>ConvertUtils</code> class supports the ability to define and
+ * <p>The {@code ConvertUtils} class supports the ability to define and
  * register your own String --&gt; Object conversions for any given Java class.
  * Once registered, such converters will be used transparently by all of the
- * <code>BeanUtils</code> methods (including <code>populate()</code>).  To
+ * {@code BeanUtils</code> methods (including <code>populate()}).  To
  * create and register your own converter, follow these steps:</p>
  * <ul>
  * <li>Write a class that implements the {@link org.apache.commons.beanutils2.Converter}
- *     interface.  The <code>convert()</code> method should accept the
- *     <code>java.lang.Class</code> object of your application class (i.e.
+ *     interface.  The {@code convert()} method should accept the
+ *     {@code java.lang.Class} object of your application class (i.e.
  *     the class that you want to convert to, and a String representing the
  *     incoming value to be converted.</li>
  * <li>At application startup time, register an instance of your converter class
- *     by calling the <code>ConvertUtils.register()</code> method.</li>
+ *     by calling the {@code ConvertUtils.register()} method.</li>
  * </ul>
  *
- * <a name="conversion.i18n"></a>
+ * <a id="conversion.i18n"></a>
  * <h2>4.4 Locale Aware Conversions</h2>
- * <p>The standard classes in <code>org.apache.commons.beanutils2</code> are not
+ * <p>The standard classes in {@code org.apache.commons.beanutils2} are not
  * locale aware. This gives them a cleaner interface and makes then easier to use
  * in situations where the locale is not important.</p>
  * <p>Extended, locale-aware analogues can be found in
@@ -882,13 +882,13 @@
  * lines as the basic classes but support localization.</p>
  *
  *
- * <a name="instances"></a>
+ * <a id="instances"></a>
  * <h1>5. Utility Objects And Static Utility Classes</h1>
- * <a name="instances.background"></a>
+ * <a id="instances.background"></a>
  * <h2>Background</h2>
  * <p>
- * So far, the examples have covered the static utility classes (<code>BeanUtils</code>,
- * <code>ConvertUtils</code> and <code>PropertyUtils</code>). These are easy to use but are
+ * So far, the examples have covered the static utility classes ({@code BeanUtils},
+ * {@code ConvertUtils</code> and <code>PropertyUtils}). These are easy to use but are
  * somewhat inflexible. These all share the same registered converters and the same caches.
  * </p>
  * <p>
@@ -897,7 +897,7 @@
  * class with the same functionality that can be instantiated:
  * </p>
  *
- * <table width='60%'>
+ * <table>
  * <caption>Utility Objects And Static Utility Classes</caption>
  * <tr><th>Static Utility Class</th><th>Utility Object</th></tr>
  * <tr><td>BeanUtils</td><td>BeanUtilsBean</td></tr>
@@ -910,26 +910,26 @@
  * to the code that creates it.
  * </p>
  *
- * <a name="collections"></a>
+ * <a id="collections"></a>
  * <h1>6. Collections</h1>
- * <a name="bean-comparator"></a>
+ * <a id="bean-comparator"></a>
  * <h2>6.1 Comparing Beans</h2>
  * <p>
- * <code>org.apache.commons.beanutils2.BeanComparator</code> is a <code>Comparator</code> implementation
+ * {@code org.apache.commons.beanutils2.BeanComparator</code> is a <code>Comparator} implementation
  * that compares beans based on a shared property value.
  * </p>
- * <a name="bean-property-closure"></a>
+ * <a id="bean-property-closure"></a>
  * <h2>6.2 Operating On Collections Of Beans</h2>
  * <p>
- * The <code>Closure</code> interface in <code>commons-collections</code> encapsulates a block of code that
- * executes on an arbitrary input Object. <code>Commons-collections</code> contains code that allows
- * <code>Closures</code> to be applied to the contents of a Collection. For more details, see the
+ * The {@code Closure</code> interface in <code>commons-collections} encapsulates a block of code that
+ * executes on an arbitrary input Object. {@code Commons-collections} contains code that allows
+ * {@code Closures} to be applied to the contents of a Collection. For more details, see the
  * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
- * <code>BeanPropertyValueChangeClosure</code> is a <code>Closure</code> that sets a specified property
- * to a particular value. A typical usage is to combine this with <code>commons-collections</code>
+ * {@code BeanPropertyValueChangeClosure</code> is a <code>Closure} that sets a specified property
+ * to a particular value. A typical usage is to combine this with {@code commons-collections}
  * so that all the beans in a collection can have a particular property set to a particular value.
  * </p>
  * <p>For example, set the activeEmployee property to TRUE for an entire collection:</p>
@@ -942,20 +942,20 @@
  *     CollectionUtils.forAllDo( peopleCollection, closure );
  *   </code></pre>
  *
- * <a name="bean-property-predicate"></a>
+ * <a id="bean-property-predicate"></a>
  * <h2>6.3 Querying Or Filtering Collections Of Beans</h2>
  * <p>
- * The <code>Predicate</code> interface in <code>commons-collections</code> encapsulates an evaluation
- * of an input Object that returns either true or false. <code>Commons-collections</code> contains code
+ * The {@code Predicate</code> interface in <code>commons-collections} encapsulates an evaluation
+ * of an input Object that returns either true or false. {@code Commons-collections} contains code
  * that allows
- * <code>Predicates</code> to be applied to be used to filter collections. For more details, see the
+ * {@code Predicates} to be applied to be used to filter collections. For more details, see the
  * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
- * <code>BeanPropertyValueEqualsPredicate</code> is a <code>Predicate</code> that evaluates a
+ * {@code BeanPropertyValueEqualsPredicate</code> is a <code>Predicate} that evaluates a
  * set property value against a given value. A typical usage is
- * (in combination with <code>commons-collections</code>)
+ * (in combination with {@code commons-collections})
  * to filter collections on the basis of a property value.
  * </p>
  * <p>For example, to filter a collection to find all beans where active employee is false use:</p>
@@ -970,16 +970,16 @@
  * <a href="bean-property-transformer"></a>
  * <h2>6.4 Transforming Collections Of Beans</h2>
  * <p>
- * The <code>Transformer</code> interface in <code>commons-collections</code> encapsulates the transformation
- * of an input Object into an output object. <code>Commons-collections</code> contains code
+ * The {@code Transformer</code> interface in <code>commons-collections} encapsulates the transformation
+ * of an input Object into an output object. {@code Commons-collections} contains code
  * that allows
- * <code>Transformers</code> to be applied produce a collection of outputs from a collection of inputs.
+ * {@code Transformers} to be applied produce a collection of outputs from a collection of inputs.
  * For more details, see the
  * <a href='https://commons.apache.org/collections/'>commons-collections</a>
  * documentation.
  * </p>
  * <p>
- * <code>BeanToPropertyTransformer</code> is a <code>Transformer</code> implementation
+ * {@code BeanToPropertyTransformer</code> is a <code>Transformer} implementation
  * that transforms a bean into it's property value.
  * </p>
  * <p>
@@ -994,10 +994,10 @@
  *     Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
  *     </code></pre>
  *
- * <a name="FAQ"></a>
+ * <a id="FAQ"></a>
  * <h1>7. Frequently Asked Questions</h1>
  *
- * <a name="FAQ.property"></a>
+ * <a id="FAQ.property"></a>
  * <h2>Why Can't BeanUtils Find My Method?</h2>
  * <p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than
  * <em>reflection</em>. This means that it will find only
@@ -1006,19 +1006,18 @@
  * <p>There are some subtleties  of this specification that can catch out the unwary:</p>
  * <ul>
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
- * <li>The <code>java.beans.Introspector</code> searches widely for a custom <em>BeanInfo</em>
+ * <li>The {@code java.beans.Introspector} searches widely for a custom <em>BeanInfo</em>
  * class. If your class has the same name as another with a custom <em>BeanInfo</em>
- * (typically a java API class) then the <code>Introspector</code> may use that instead of
+ * (typically a java API class) then the {@code Introspector} may use that instead of
  * creating via reflection based on your class. If this happens, the only solution is to
  * create your own <em>BeanInfo</em>.</li>
  * </ul>
  *
- * <a name="FAQ.bc.order"></a>
+ * <a id="FAQ.bc.order"></a>
  * <h2>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h2>
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
- * comparisions. By default,
- * <code>org.apache.commons.collections4.comparators.ComparableComparator</code>
+ * comparisions. By default, a natural ordering comparator
  * is used which imposes a natural order. If you want to change the order,
  * then a custom Comparator should be created and passed into the
  * appropriate constructor.

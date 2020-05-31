@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.BeanUtilsBean;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
 import org.apache.commons.beanutils2.SuppressPropertiesBeanIntrospector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -76,8 +75,8 @@ public class Jira157TestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        
-        BeanUtilsBean custom = new BeanUtilsBean();
+
+        final BeanUtilsBean custom = new BeanUtilsBean();
     	custom.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
     	BeanUtilsBean.setInstance(custom);
     }
@@ -175,7 +174,7 @@ public class Jira157TestCase extends TestCase {
         assertEquals("publicFoo Value", "PublicFoo Value", result.get("publicFoo"));
     }
 
-    public static interface XY {
+    public interface XY {
         String getX();
         String getY();
     }

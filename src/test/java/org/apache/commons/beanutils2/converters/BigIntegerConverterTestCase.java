@@ -23,22 +23,42 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the BigInteger class.
  *
  */
 public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(BigIntegerConverterTestCase.class);
+    }
+
+
+
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+
 
     public BigIntegerConverterTestCase(final String name) {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    @Override
+    protected Class<?> getExpectedType() {
+        return BigInteger.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new BigIntegerConverter();
+    }
+
+
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new BigIntegerConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -49,33 +69,12 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new BigInteger("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(BigIntegerConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
 
-    @Override
-    protected NumberConverter makeConverter() {
-        return new BigIntegerConverter();
-    }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new BigIntegerConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return BigInteger.class;
-    }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

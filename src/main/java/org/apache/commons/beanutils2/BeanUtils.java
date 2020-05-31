@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * <p>The implementations are provided by {@link BeanUtilsBean}.
  * These static utility methods use the default instance.
- * More sophisticated behaviour can be provided by using a <code>BeanUtilsBean</code> instance.</p>
+ * More sophisticated behavior can be provided by using a {@code BeanUtilsBean} instance.</p>
  *
  * @see BeanUtilsBean
  */
@@ -36,19 +36,19 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BeanUtils {
 
 
-    // ------------------------------------------------------ Private Variables
 
 
-    
 
-    // --------------------------------------------------------- Class Methods
+
+
+
 
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
      * even if the bean class itself does not implement Cloneable.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean to be cloned
      * @return the cloned bean
@@ -76,15 +76,15 @@ public class BeanUtils {
      * <p>Copy property values from the origin bean to the destination bean
      * for all cases where the property names are the same.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved
      *
      * @throws IllegalAccessException if the caller does not have
      *  access to the property accessor method
-     * @throws IllegalArgumentException if the <code>dest</code> or
-     *  <code>orig</code> argument is null or if the <code>dest</code>
+     * @throws IllegalArgumentException if the {@code dest} or
+     *  {@code orig</code> argument is null or if the <code>dest}
      *  property type is different from the source type and the relevant
      *  converter has not been registered.
      * @throws InvocationTargetException if the property accessor method
@@ -102,7 +102,7 @@ public class BeanUtils {
      * <p>Copy the specified property value to the specified destination bean,
      * performing any type conversion that is required.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)
@@ -125,7 +125,7 @@ public class BeanUtils {
      * <p>Return the entire set of properties for which the specified bean
      * provides a read method.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose properties are to be extracted
      * @return Map of property descriptors
@@ -150,7 +150,7 @@ public class BeanUtils {
      * <p>Return the value of the specified array property of the specified
      * bean, as a String array.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
@@ -176,10 +176,10 @@ public class BeanUtils {
      * <p>Return the value of the specified indexed property of the specified
      * bean, as a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname[index]</code> of the property value
+     * @param name {@code propertyname[index]} of the property value
      *  to be extracted
      * @return The indexed property's value, converted to a String
      *
@@ -205,7 +205,7 @@ public class BeanUtils {
      * bean, as a String.  The index is specified as a method parameter and
      * must *not* be included in the property name expression
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -234,10 +234,10 @@ public class BeanUtils {
      * <p>Return the value of the specified indexed property of the specified
      * bean, as a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
-     * @param name <code>propertyname(index)</code> of the property value
+     * @param name {@code propertyname(index)} of the property value
      *  to be extracted
      * @return The mapped property's value, converted to a String
      *
@@ -262,7 +262,7 @@ public class BeanUtils {
      * <p>Return the value of the specified mapped property of the specified
      * bean, as a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Simple property name of the property value to be extracted
@@ -291,7 +291,7 @@ public class BeanUtils {
      * <p>Return the value of the (possibly nested) property of the specified
      * name, for the specified bean, as a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly nested name of the property to be extracted
@@ -320,7 +320,7 @@ public class BeanUtils {
      * <p>Return the value of the specified property of the specified bean,
      * no matter which property reference format is used, as a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Possibly indexed and/or nested name of the property
@@ -348,7 +348,7 @@ public class BeanUtils {
      * <p>Return the value of the specified simple property of the specified
      * bean, converted to a String.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean whose property is to be extracted
      * @param name Name of the property to be extracted
@@ -375,7 +375,7 @@ public class BeanUtils {
      * <p>Populate the JavaBeans properties of the specified bean, based on
      * the specified name/value pairs.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean JavaBean whose properties are being populated
      * @param properties Map keyed by property name, with the
@@ -398,7 +398,7 @@ public class BeanUtils {
      * <p>Set the specified property value, performing type conversions as
      * required to conform to the type of the destination property.</p>
      *
-     * <p>For more details see <code>BeanUtilsBean</code>.</p>
+     * <p>For more details see {@code BeanUtilsBean}.</p>
      *
      * @param bean Bean on which setting is to be performed
      * @param name Property name (can be nested/indexed/mapped/combo)

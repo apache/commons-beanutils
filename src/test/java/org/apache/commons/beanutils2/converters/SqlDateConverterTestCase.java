@@ -30,16 +30,6 @@ import junit.framework.TestSuite;
 public class SqlDateConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
-     * @param name Test Name
-     */
-    public SqlDateConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -47,7 +37,45 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlDateConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+
+
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
+    public SqlDateConverterTestCase(final String name) {
+        super(name);
+    }
+
+
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    @Override
+    protected Class<?> getExpectedType() {
+        return Date.class;
+    }
+
+    /**
+     * Create the Converter with no default value.
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter() {
+        return new SqlDateConverter();
+    }
+
+    /**
+     * Create the Converter with a default value.
+     * @param defaultValue The default value
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
+        return new SqlDateConverter(defaultValue);
+    }
 
     /**
      * Test default String to java.sql.Date conversion
@@ -84,34 +112,6 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
 
         final Object result = converter.convert(String.class, new Integer(2));
         assertEquals("Default toString()", "2", result);
-    }
-
-    /**
-     * Create the Converter with no default value.
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter() {
-        return new SqlDateConverter();
-    }
-
-    /**
-     * Create the Converter with a default value.
-     * @param defaultValue The default value
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
-        return new SqlDateConverter(defaultValue);
-    }
-
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
-    @Override
-    protected Class<?> getExpectedType() {
-        return Date.class;
     }
 
     /**

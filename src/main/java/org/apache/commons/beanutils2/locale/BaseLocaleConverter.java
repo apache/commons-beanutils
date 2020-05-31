@@ -25,9 +25,8 @@ import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
- * <p>The base class for all standart type locale-sensitive converters.
+ * <p>The base class for all standard type locale-sensitive converters.
  * It has {@link LocaleConverter} and {@link org.apache.commons.beanutils2.Converter} implementations,
  * that convert an incoming locale-sensitive Object into an object of correspond type,
  * optionally using a default value or throwing a {@link ConversionException}
@@ -37,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 
 public abstract class BaseLocaleConverter implements LocaleConverter {
 
-    // ----------------------------------------------------- Instance Variables
+
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
@@ -57,15 +56,15 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern = false;
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
      * if a conversion error occurs.
-     * An unlocalized pattern is used for the convertion.
+     * An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern) {
 
@@ -77,7 +76,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * if a conversion error occurs.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
@@ -88,11 +87,11 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /**
      * Create a {@link LocaleConverter} that will return the specified default value
      * if a conversion error occurs.
-     * An unlocalized pattern is used for the convertion.
+     * An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -105,7 +104,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
@@ -119,7 +118,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param useDefault    Indicate whether the default value is used or not
      * @param locPattern    Indicate whether the pattern is localized or not
      */
@@ -139,14 +138,14 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.locPattern = locPattern;
     }
 
-    // --------------------------------------------------------- Methods
+
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
      * @throws ParseException if conversion cannot be performed
@@ -154,7 +153,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      */
 
     abstract protected Object parse(Object value, String pattern) throws ParseException;
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object.
@@ -186,7 +184,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
-     * specified type. The default pattern is used for the convertion.
+     * specified type. The default pattern is used for the conversion.
      *
      * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
@@ -225,7 +223,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
             }
             // symmetric beanutils function allows null
             // so do not: throw new ConversionException("No value specified");
-            log.debug("Null value specified for conversion, returing null");
+            log.debug("Null value specified for conversion, returning null");
             return null;
         }
 

@@ -46,15 +46,15 @@ import junit.framework.TestSuite;
 
 public class LocaleBeanificationTestCase extends TestCase {
 
-    // ---------------------------------------------------- Constants
+
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
 
-    // ---------------------------------------------------- Instance Variables
 
 
-    // ---------------------------------------------------------- Constructors
+
+
 
 
     /**
@@ -67,7 +67,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
+
 
 
     /**
@@ -98,7 +98,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
+
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
@@ -133,7 +133,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
     /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() throws Exception {
-        // tests when the map used by beanutils has the right behaviour
+        // tests when the map used by beanutils has the right behavior
 
         if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
@@ -143,7 +143,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();
-        final WeakReference<ClassLoader> loaderReference = new WeakReference<ClassLoader>(loader, queue);
+        final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader, queue);
         Integer test = new Integer(1);
 
         final WeakReference<Integer> testReference = new WeakReference<>(test, queue);

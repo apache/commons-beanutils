@@ -31,16 +31,6 @@ import junit.framework.TestSuite;
 public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
-     * @param name Test Name
-     */
-    public SqlTimeConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -48,7 +38,65 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+
+
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
+    public SqlTimeConverterTestCase(final String name) {
+        super(name);
+    }
+
+
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    @Override
+    protected Class<?> getExpectedType() {
+        return Time.class;
+    }
+
+    /**
+     * Create the Converter with no default value.
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter() {
+        return new SqlTimeConverter();
+    }
+
+    /**
+     * Create the Converter with a default value.
+     * @param defaultValue The default value
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
+        return new SqlTimeConverter(defaultValue);
+    }
+
+    /**
+     * Test default String to java.sql.Time conversion
+     */
+    @Override
+    public void testDefaultStringToTypeConvert() {
+
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+
+        // Valid String --> java.sql.Time Conversion
+        final String testString = "15:36:21";
+        final Object expected = toType(testString, "HH:mm:ss", null);
+        validConversion(converter, expected, testString);
+
+        // Invalid String --> java.sql.Time Conversion
+        invalidConversion(converter, "15:36");
+
+    }
 
     /**
      * Test Date Converter with no default value
@@ -87,54 +135,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
 
-    }
-
-    /**
-     * Test default String to java.sql.Time conversion
-     */
-    @Override
-    public void testDefaultStringToTypeConvert() {
-
-        // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
-
-        // Valid String --> java.sql.Time Conversion
-        final String testString = "15:36:21";
-        final Object expected = toType(testString, "HH:mm:ss", null);
-        validConversion(converter, expected, testString);
-
-        // Invalid String --> java.sql.Time Conversion
-        invalidConversion(converter, "15:36");
-
-    }
-
-    /**
-     * Create the Converter with no default value.
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter() {
-        return new SqlTimeConverter();
-    }
-
-    /**
-     * Create the Converter with a default value.
-     * @param defaultValue The default value
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
-        return new SqlTimeConverter(defaultValue);
-    }
-
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
-    @Override
-    protected Class<?> getExpectedType() {
-        return Time.class;
     }
 
     /**

@@ -45,20 +45,20 @@ import java.util.WeakHashMap;
 public class WrapDynaClass implements DynaClass {
 
 
-    // ----------------------------------------------------------- Constructors
+
 
 
     /**
      * Construct a new WrapDynaClass for the specified JavaBean class.  This
      * constructor is private; WrapDynaClass instances will be created as
-     * needed via calls to the <code>createDynaClass(Class)</code> method.
+     * needed via calls to the {@code createDynaClass(Class)} method.
      *
      * @param beanClass JavaBean class to be introspected around
      * @param propUtils the {@code PropertyUtilsBean} associated with this class
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils) {
 
-        this.beanClassRef = new SoftReference<Class<?>>(beanClass);
+        this.beanClassRef = new SoftReference<>(beanClass);
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
@@ -66,7 +66,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
+
 
     /**
      * Name of the JavaBean class represented by this WrapDynaClass.
@@ -90,7 +90,7 @@ public class WrapDynaClass implements DynaClass {
     /**
      * The set of PropertyDescriptors for this bean class, keyed by the
      * property name.  Individual descriptor instances will be the same
-     * instances as those in the <code>descriptors</code> list.
+     * instances as those in the {@code descriptors} list.
      */
     protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
@@ -104,12 +104,12 @@ public class WrapDynaClass implements DynaClass {
     /**
      * The set of dynamic properties that are part of this DynaClass,
      * keyed by the property name.  Individual descriptor instances will
-     * be the same instances as those in the <code>properties</code> list.
+     * be the same instances as those in the {@code properties} list.
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
-    // ------------------------------------------------------- Static Variables
+
 
 
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
@@ -130,10 +130,10 @@ public class WrapDynaClass implements DynaClass {
         return CLASSLOADER_CACHE.get();
     }
 
-    
 
 
-    // ------------------------------------------------------ DynaClass Methods
+
+
 
     /**
      * Return the class of the underlying wrapped bean.
@@ -163,7 +163,7 @@ public class WrapDynaClass implements DynaClass {
 
     /**
      * Return a property descriptor for the specified property, if it exists;
-     * otherwise, return <code>null</code>.
+     * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
      *  is requested
@@ -184,12 +184,12 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * <p>Return an array of <code>ProperyDescriptors</code> for the properties
+     * <p>Return an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      *
      * <p><strong>FIXME</strong> - Should we really be implementing
-     * <code>getBeanInfo()</code> instead, which returns property descriptors
+     * {@code getBeanInfo()} instead, which returns property descriptors
      * and a bunch of other stuff?</p>
      *
      * @return the set of properties for this DynaClass
@@ -210,17 +210,17 @@ public class WrapDynaClass implements DynaClass {
      *
      * <p><strong>NOTE</strong> - Most common use cases should not need to use
      * this method. It is usually better to create new
-     * <code>WrapDynaBean</code> instances by calling its constructor.
+     * {@code WrapDynaBean} instances by calling its constructor.
      * For example:</p>
      * <pre><code>
      *   Object javaBean = ...;
      *   DynaBean wrapper = new WrapDynaBean(javaBean);
      * </code></pre>
      * <p>
-     * (This method is needed for some kinds of <code>DynaBean</code> framework.)
+     * (This method is needed for some kinds of {@code DynaBean} framework.)
      * </p>
      *
-     * @return A new <code>DynaBean</code> instance
+     * @return A new {@code DynaBean} instance
      * @throws IllegalAccessException if the Class or the appropriate
      *  constructor is not accessible
      * @throws InstantiationException if this Class represents an abstract
@@ -236,12 +236,12 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    // --------------------------------------------------------- Public Methods
+
 
 
     /**
      * Return the PropertyDescriptor for the specified property name, if any;
-     * otherwise return <code>null</code>.
+     * otherwise return {@code null}.
      *
      * @param name Name of the property to be retrieved
      * @return The descriptor for the specified property
@@ -253,7 +253,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    // --------------------------------------------------------- Static Methods
+
 
 
     /**
@@ -267,7 +267,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * Create (if necessary) and return a new <code>WrapDynaClass</code>
+     * Create (if necessary) and return a new {@code WrapDynaClass}
      * instance for the specified bean class.
      *
      * @param beanClass Bean class for which a WrapDynaClass is requested
@@ -306,7 +306,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
+
 
     /**
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This

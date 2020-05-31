@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.util.HashMap;
@@ -32,7 +31,6 @@ public class MappedPropertyTestBean {
     private final Map<Object, Object> myMap = new HashMap<>();
 
 
-    // -------------------------------------------------------------- Properties
 
     public String getMapproperty(final String key) {
         return (String) map.get(key);

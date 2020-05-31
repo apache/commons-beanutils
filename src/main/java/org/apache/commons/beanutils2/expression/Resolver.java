@@ -19,8 +19,8 @@ package org.apache.commons.beanutils2.expression;
 /**
  * Property Name Expression Resolver.
  * <p>
- * Methods such as PropertyUtilsBean's <code>setNestedProperty()</code> method
- * use a <code>Resolver</code> to process a <i>property name</i>
+ * Methods such as PropertyUtilsBean's {@code setNestedProperty()} method
+ * use a {@code Resolver} to process a <i>property name</i>
  * expression and resolve <i>nested</i>, <i>indexed</i> and <i>mapped</i>
  * property names. The following code provides an example usage
  * demonstrating all the methods:
@@ -29,7 +29,7 @@ package org.apache.commons.beanutils2.expression;
  *      // Iterate through a nested property expression
  *      while (resolver.hasNested(name)) {
  *
- *          // isolate a single property from a nested expresion
+ *          // isolate a single property from a nested expression
  *          String next = resolver.next(name);
  *
  *          // Process...
@@ -56,7 +56,7 @@ package org.apache.commons.beanutils2.expression;
  * </pre>
  *
  * In order to create an implementation, it is important to understand how
- * BeanUtils/PropertyUtils uses the <code>resolver</code>. The following are
+ * BeanUtils/PropertyUtils uses the {@code resolver}. The following are
  * the main methods that use it:
  * <ul>
  *   <li>{@link org.apache.commons.beanutils2.PropertyUtilsBean}
@@ -102,7 +102,7 @@ public interface Resolver {
     int getIndex(String expression);
 
     /**
-     * Extract the map key from the property expression or <code>null</code>.
+     * Extract the map key from the property expression or {@code null}.
      *
      * @param expression The property expression
      * @return The index value
@@ -131,8 +131,8 @@ public interface Resolver {
      * Indicate whether the expression is for an indexed property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is indexed,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expression is indexed,
+     *  otherwise {@code false}
      */
     boolean isIndexed(String expression);
 
@@ -140,8 +140,8 @@ public interface Resolver {
      * Indicate whether the expression is for a mapped property or not.
      *
      * @param expression The property expression
-     * @return <code>true</code> if the expresion is mapped,
-     *  otherwise <code>false</code>
+     * @return {@code true} if the expression is mapped,
+     *  otherwise {@code false}
      */
     boolean isMapped(String expression);
 
@@ -155,7 +155,7 @@ public interface Resolver {
     String next(String expression);
 
     /**
-     * Remove the last property expresson from the
+     * Remove the last property expression from the
      * current expression.
      *
      * @param expression The property expression

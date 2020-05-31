@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 /**
  * {@link org.apache.commons.beanutils2.Converter}
  * implementation that converts an incoming
- * object into a <code>java.lang.String</code> object.
+ * object into a {@code java.lang.String} object.
  * <p>
  * Note that ConvertUtils really is designed to do string-&gt;object conversions,
  * and offers very little support for object-&gt;string conversions. The
@@ -32,7 +32,7 @@ package org.apache.commons.beanutils2.converters;
  * that value.
  * <p>
  * It is possible to replace this converter with something that has a big
- * if/else statement that selects behaviour based on the real type of the
+ * if/else statement that selects behavior based on the real type of the
  * object being converted (or possibly has a map of converters, and looks
  * them up based on the class of the input object). However this is not part
  * of the existing ConvertUtils framework.
@@ -42,10 +42,9 @@ package org.apache.commons.beanutils2.converters;
  */
 public final class StringConverter extends AbstractConverter {
 
-
     /**
      * Construct a <b>java.lang.String</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public StringConverter() {
         super();
@@ -64,9 +63,9 @@ public final class StringConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override
@@ -94,6 +93,5 @@ public final class StringConverter extends AbstractConverter {
         }
         throw conversionException(type, value);
     }
-
 
 }

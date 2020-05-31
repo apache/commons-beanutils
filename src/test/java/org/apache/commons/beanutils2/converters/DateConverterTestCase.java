@@ -28,16 +28,6 @@ import junit.framework.TestSuite;
 public class DateConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
-     * @param name Test Name
-     */
-    public DateConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -45,17 +35,24 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(DateConverterTestCase.class);
     }
 
-    /** Set Up */
-    @Override
-    public void setUp() throws Exception {
+
+
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
+    public DateConverterTestCase(final String name) {
+        super(name);
     }
 
-    /** Tear Down */
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
     @Override
-    public void tearDown() throws Exception {
+    protected Class<?> getExpectedType() {
+        return Date.class;
     }
-
-    // ------------------------------------------------------------------------
 
     /**
      * Create the Converter with no default value.
@@ -65,6 +62,8 @@ public class DateConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new DateConverter();
     }
+
+
 
     /**
      * Create the Converter with a default value.
@@ -76,13 +75,14 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new DateConverter(defaultValue);
     }
 
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
+    /** Set Up */
     @Override
-    protected Class<?> getExpectedType() {
-        return Date.class;
+    public void setUp() throws Exception {
+    }
+
+    /** Tear Down */
+    @Override
+    public void tearDown() throws Exception {
     }
 
     /**

@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the DoubleConverter class.
  *
@@ -29,15 +28,36 @@ import junit.framework.TestSuite;
 
 public class DoubleConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(DoubleConverterTestCase.class);
+    }
+
+
+
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+
 
     public DoubleConverterTestCase(final String name) {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    @Override
+    protected Class<?> getExpectedType() {
+        return Double.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new DoubleConverter();
+    }
+
+
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new DoubleConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -48,33 +68,12 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new Double("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(DoubleConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
 
-    @Override
-    protected NumberConverter makeConverter() {
-        return new DoubleConverter();
-    }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new DoubleConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return Double.class;
-    }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

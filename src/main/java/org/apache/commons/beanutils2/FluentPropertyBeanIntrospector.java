@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>
- * An implementation of the <code>BeanIntrospector</code> interface which can
+ * An implementation of the {@code BeanIntrospector} interface which can
  * detect write methods for properties used in fluent API scenario.
  * </p>
  * <p>
@@ -51,22 +51,22 @@ import org.apache.commons.logging.LogFactory;
  * }
  * </pre>
  *
- * <p>Per default, <code>PropertyUtils</code> does not detect methods like this
+ * <p>Per default, {@code PropertyUtils} does not detect methods like this
  * because, having a non-<b>void</b> return type, they violate the Java Beans
  * specification.
  * </p>
  * <p>
  * This class is more tolerant with regards to the return type of a set method.
  * It basically iterates over all methods of a class and filters them for a
- * configurable prefix (the default prefix is <code>set</code>). It then
- * generates corresponding <code>PropertyDescriptor</code> objects for the
+ * configurable prefix (the default prefix is {@code set}). It then
+ * generates corresponding {@code PropertyDescriptor} objects for the
  * methods found which use these methods as write methods.
  * </p>
  * <p>
  * An instance of this class is intended to collaborate with a
  * {@link DefaultBeanIntrospector} object. So best results are achieved by
  * adding this instance as custom {@code BeanIntrospector} after the
- * <code>DefaultBeanIntrospector</code> object. Then default introspection finds
+ * {@code DefaultBeanIntrospector} object. Then default introspection finds
  * read-only properties because it does not detect the write methods with a
  * non-<b>void</b> return type. {@code FluentPropertyBeanIntrospector}
  * completes the descriptors for these properties by setting the correct write
@@ -87,7 +87,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
 
     /**
      *
-     * Creates a new instance of <code>FluentPropertyBeanIntrospector</code> and
+     * Creates a new instance of {@code FluentPropertyBeanIntrospector} and
      * initializes it with the prefix for write methods used by the classes to
      * be inspected.
      *
@@ -104,7 +104,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
 
     /**
      *
-     * Creates a new instance of <code>FluentPropertyBeanIntrospector</code> and
+     * Creates a new instance of {@code FluentPropertyBeanIntrospector} and
      * sets the default prefix for write methods.
      */
     public FluentPropertyBeanIntrospector() {
@@ -144,7 +144,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                         pd.setWriteMethod(m);
                     }
                 } catch (final IntrospectionException e) {
-                    log.info("Error when creating PropertyDescriptor for " + m
+                    log.debug("Error when creating PropertyDescriptor for " + m
                             + "! Ignoring this property.");
                     log.debug("Exception is:", e);
                 }

@@ -27,16 +27,6 @@ import junit.framework.TestSuite;
 public class CalendarConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Calendar test case.
-     * @param name Test Name
-     */
-    public CalendarConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -44,7 +34,26 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
         return new TestSuite(CalendarConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+
+
+    /**
+     * Construct a new Calendar test case.
+     * @param name Test Name
+     */
+    public CalendarConverterTestCase(final String name) {
+        super(name);
+    }
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    @Override
+    protected Class<?> getExpectedType() {
+        return Calendar.class;
+    }
+
+
     /**
      * Create the Converter with no default value.
      * @return A new Converter
@@ -62,15 +71,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     @Override
     protected DateTimeConverter makeConverter(final Object defaultValue) {
         return new CalendarConverter(defaultValue);
-    }
-
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
-    @Override
-    protected Class<?> getExpectedType() {
-        return Calendar.class;
     }
 
     /**

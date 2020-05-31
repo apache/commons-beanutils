@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -26,7 +24,7 @@ import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Objects;
 
 /**
  * <p>The metadata describing an individual property of a DynaBean.</p>
@@ -35,14 +33,14 @@ import java.util.Map;
  * for use by mapped and iterated properties.
  * A mapped or iterated property may choose to indicate the type it expects.
  * The DynaBean implementation may choose to enforce this type on its entries.
- * Alternatively, an implementatin may choose to ignore this property.
+ * Alternatively, an implementation may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
  *
  */
 
 public class DynaProperty implements Serializable {
 
-    // ----------------------------------------------------------- Constants
+
 
 	private static final long serialVersionUID = -3084907613499830175L;
 	/*
@@ -63,8 +61,6 @@ public class DynaProperty implements Serializable {
     private static final int SHORT_TYPE = 8;
 
 
-    // ----------------------------------------------------------- Constructors
-
 
     /**
      * Construct a property that accepts any data type.
@@ -76,7 +72,6 @@ public class DynaProperty implements Serializable {
         this(name, Object.class);
 
     }
-
 
     /**
      * Construct a property of the specified data type.
@@ -96,7 +91,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Construct an indexed or mapped <code>DynaProperty</code> that supports (pseudo)-introspection
+     * Construct an indexed or mapped {@code DynaProperty} that supports (pseudo)-introspection
      * of the content type.
      *
      * @param name Name of the property being described
@@ -112,7 +107,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // ------------------------------------------------------------- Properties
+
 
     /** Property name */
     protected String name = null;
@@ -134,7 +129,7 @@ public class DynaProperty implements Serializable {
      * (including java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
-     * <p><strong>Please leave this field as <code>transient</code></strong></p>
+     * <p><strong>Please leave this field as {@code transient}</strong></p>
      *
      * @return the property type
      */
@@ -142,32 +137,30 @@ public class DynaProperty implements Serializable {
         return this.type;
     }
 
-
-    /** The <em>(optional)</em> type of content elements for indexed <code>DynaProperty</code> */
+    /** The <em>(optional)</em> type of content elements for indexed {@code DynaProperty} */
     protected transient Class<?> contentType;
     /**
-     * Gets the <em>(optional)</em> type of the indexed content for <code>DynaProperty</code>'s
+     * Gets the <em>(optional)</em> type of the indexed content for {@code DynaProperty}'s
      * that support this feature.
      *
      * <p>There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
-     * @return the Class for the content type if this is an indexed <code>DynaProperty</code>
+     * @return the Class for the content type if this is an indexed {@code DynaProperty}
      * and this feature is supported. Otherwise null.
      */
     public Class<?> getContentType() {
         return contentType;
     }
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**
      * Does this property represent an indexed value (ie an array or List)?
      *
-     * @return <code>true</code> if the property is indexed (i.e. is a List or
-     * array), otherwise <code>false</code>
+     * @return {@code true} if the property is indexed (i.e. is a List or
+     * array), otherwise {@code false}
      */
     public boolean isIndexed() {
 
@@ -183,12 +176,11 @@ public class DynaProperty implements Serializable {
 
     }
 
-
     /**
      * Does this property represent a mapped value (ie a Map)?
      *
-     * @return <code>true</code> if the property is a Map
-     * otherwise <code>false</code>
+     * @return {@code true} if the property is a Map
+     * otherwise {@code false}
      */
     public boolean isMapped() {
 
@@ -201,10 +193,10 @@ public class DynaProperty implements Serializable {
 
     /**
      * Checks this instance against the specified Object for equality. Overrides the
-     * default refererence test for equality provided by {@link java.lang.Object#equals(Object)}
+     * default reference test for equality provided by {@link java.lang.Object#equals(Object)}
      * @param obj The object to compare to
-     * @return <code>true</code> if object is a dyna property with the same name
-     * type and content type, otherwise <code>false</code>
+     * @return {@code true} if object is a dyna property with the same name
+     * type and content type, otherwise {@code false}
      * @since 1.8.0
      */
     @Override
@@ -217,9 +209,9 @@ public class DynaProperty implements Serializable {
         if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
             result =
-               (this.name == null ? that.name == null : this.name.equals(that.name)) &&
-               (this.type == null ? that.type == null : this.type.equals(that.type)) &&
-               (this.contentType == null ? that.contentType == null : this.contentType.equals(that.contentType));
+               (Objects.equals(this.name, that.name)) &&
+               (Objects.equals(this.type, that.type)) &&
+               (Objects.equals(this.contentType, that.contentType));
         }
 
         return result;
@@ -261,7 +253,7 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // --------------------------------------------------------- Serialization helper methods
+
 
     /**
      * Writes this object safely.
@@ -341,7 +333,6 @@ public class DynaProperty implements Serializable {
         // read other values
         in.defaultReadObject();
     }
-
 
     /**
      * Reads a class using safe encoding to workaround java 1.3 serialization bug.

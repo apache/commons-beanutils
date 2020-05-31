@@ -15,16 +15,13 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
@@ -33,7 +30,7 @@ import java.util.Map;
 
 public class TestBean implements Serializable {
 
-    // ----------------------------------------------------------- Constructors
+
 
     public TestBean() {
         listIndexed.add("String 0");
@@ -100,7 +97,6 @@ public class TestBean implements Serializable {
         this.string2dArray = string2dArray;
     }
 
-    // ------------------------------------------------------------- Properties
 
 
     /**
@@ -116,7 +112,6 @@ public class TestBean implements Serializable {
         this.booleanProperty = booleanProperty;
     }
 
-
     /**
      * A boolean property that uses an "is" method for the getter.
      */
@@ -130,7 +125,6 @@ public class TestBean implements Serializable {
         this.booleanSecond = booleanSecond;
     }
 
-
     /**
      * A byte property.
      */
@@ -143,7 +137,6 @@ public class TestBean implements Serializable {
     public void setByteProperty(final byte byteProperty) {
         this.byteProperty = byteProperty;
     }
-
 
     /**
      * A java.util.Date property.
@@ -184,7 +177,6 @@ public class TestBean implements Serializable {
         this.doubleProperty = doubleProperty;
     }
 
-
     /**
      * An "indexed property" accessible via both array and subscript
      * based getters and setters.
@@ -208,7 +200,6 @@ public class TestBean implements Serializable {
         this.dupProperty = dupProperty;
     }
 
-
     /**
      * A float property.
      */
@@ -222,11 +213,10 @@ public class TestBean implements Serializable {
         this.floatProperty = floatProperty;
     }
 
-
     /**
      * An integer array property accessed as an array.
      */
-    private int intArray[] = { 0, 10, 20, 30, 40 };
+    private int[] intArray = { 0, 10, 20, 30, 40 };
 
     public int[] getIntArray() {
         return this.intArray;
@@ -236,11 +226,10 @@ public class TestBean implements Serializable {
         this.intArray = intArray;
     }
 
-
     /**
      * An integer array property accessed as an indexed property.
      */
-    private final int intIndexed[] = { 0, 10, 20, 30, 40 };
+    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed(final int index) {
         return intIndexed[index];
@@ -249,7 +238,6 @@ public class TestBean implements Serializable {
     public void setIntIndexed(final int index, final int value) {
         intIndexed[index] = value;
     }
-
 
     /**
      * An integer property.
@@ -264,7 +252,6 @@ public class TestBean implements Serializable {
         this.intProperty = intProperty;
     }
 
-
     /**
      * A List property accessed as an indexed property.
      */
@@ -273,7 +260,6 @@ public class TestBean implements Serializable {
     public List<Object> getListIndexed() {
         return listIndexed;
     }
-
 
     /**
      * A long property.
@@ -287,7 +273,6 @@ public class TestBean implements Serializable {
     public void setLongProperty(final long longProperty) {
         this.longProperty = longProperty;
     }
-
 
     /**
      * A mapped property with only a getter and setter for a Map.
@@ -314,7 +299,6 @@ public class TestBean implements Serializable {
         this.mapProperty = mapProperty;
     }
 
-
     /**
      * A mapped property that has String keys and Object values.
      */
@@ -339,7 +323,6 @@ public class TestBean implements Serializable {
         }
         mappedObjects.put(key, value);
     }
-
 
     /**
      * A mapped property that has String keys and String values.
@@ -366,7 +349,6 @@ public class TestBean implements Serializable {
         mappedProperty.put(key, value);
     }
 
-
     /**
      * A mapped property that has String keys and int values.
      */
@@ -386,7 +368,6 @@ public class TestBean implements Serializable {
     public void setMappedIntProperty(final String key, final int value) {
         mappedIntProperty.put(key, value);
     }
-
 
     /**
      * A nested reference to another test bean (populated as needed).
@@ -457,7 +438,6 @@ public class TestBean implements Serializable {
         this.nullProperty = nullProperty;
     }
 
-
     /**
      * A read-only String property.
      */
@@ -466,7 +446,6 @@ public class TestBean implements Serializable {
     public String getReadOnlyProperty() {
         return this.readOnlyProperty;
     }
-
 
     /**
      * A short property.
@@ -481,7 +460,6 @@ public class TestBean implements Serializable {
         this.shortProperty = shortProperty;
     }
 
-
     /**
      * A String array property accessed as a String.
      */
@@ -495,7 +473,6 @@ public class TestBean implements Serializable {
     public void setStringArray(final String[] stringArray) {
         this.stringArray = stringArray;
     }
-
 
     /**
      * A String array property accessed as an indexed property.
@@ -529,7 +506,6 @@ public class TestBean implements Serializable {
         this.stringProperty = stringProperty;
     }
 
-
     /**
      * A write-only String property.
      */
@@ -543,8 +519,6 @@ public class TestBean implements Serializable {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-
-    // ------------------------------------------------------ Invalid Properties
 
 
     /**
@@ -575,15 +549,11 @@ public class TestBean implements Serializable {
 
 
 
-    // ------------------------------------------------------- Static Variables
-
-
     /**
      * A static variable that is accessed and updated via static methods
      * for MethodUtils testing.
      */
     private static int counter = 0;
-
 
     /**
      * Return the current value of the counter.
@@ -593,7 +563,6 @@ public class TestBean implements Serializable {
         return counter;
 
     }
-
 
     /**
      * Increment the current value of the counter by 1.

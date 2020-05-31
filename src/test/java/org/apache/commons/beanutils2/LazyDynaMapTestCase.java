@@ -29,7 +29,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>LazyDynaMap</code> implementation class.</p>
+ * <p>Test Case for the {@code LazyDynaMap} implementation class.</p>
  *
  */
 public class LazyDynaMapTestCase extends TestCase {
@@ -44,7 +44,7 @@ public class LazyDynaMapTestCase extends TestCase {
     protected Integer testInteger2    = new Integer(40);
     protected String testKey          = "myKey";
 
-    // ---------------------------------------------------------- Constructors
+
 
     /**
      * Construct a new instance of this test case.
@@ -55,7 +55,7 @@ public class LazyDynaMapTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+
 
     /**
      * Run thus Test
@@ -88,7 +88,7 @@ public class LazyDynaMapTestCase extends TestCase {
       dynaMap = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+
 
     /**
      * General Tests
@@ -183,7 +183,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check Property is correct type", TreeMap.class, dynaMap.getDynaProperty(testProperty).getType());
         assertEquals("Check Mapped Property now exists", TreeMap.class, dynaMap.get(testProperty).getClass());
 
-        // Set a new mapped property - should instatiate a new TreeMap property and set the mapped value
+        // Set a new mapped property - should instantiate a new TreeMap property and set the mapped value
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));

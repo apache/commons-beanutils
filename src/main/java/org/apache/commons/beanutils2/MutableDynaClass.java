@@ -17,12 +17,8 @@
 
 package org.apache.commons.beanutils2;
 
-
-
-
-
 /**
- * <p>A specialized extension to <code>DynaClass</code> that allows properties
+ * <p>A specialized extension to {@code DynaClass} that allows properties
  * to be added or removed dynamically.</p>
  *
  * <p><strong>WARNING</strong> - No guarantees that this will be in the final
@@ -32,7 +28,6 @@ package org.apache.commons.beanutils2;
  */
 
 public interface MutableDynaClass extends DynaClass {
-
 
     /**
      * Add a new dynamic property with no restrictions on data type,
@@ -44,8 +39,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name);
-
+    void add(String name);
 
     /**
      * Add a new dynamic property with the specified data type, but with
@@ -59,8 +53,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type);
-
+    void add(String name, Class<?> type);
 
     /**
      * Add a new dynamic property with the specified data type, readability,
@@ -69,29 +62,27 @@ public interface MutableDynaClass extends DynaClass {
      * @param name Name of the new dynamic property
      * @param type Data type of the new dynamic property (null for no
      *  restrictions)
-     * @param readable Set to <code>true</code> if this property value
+     * @param readable Set to {@code true} if this property value
      *  should be readable
-     * @param writeable Set to <code>true</code> if this property value
+     * @param writeable Set to {@code true} if this property value
      *  should be writeable
      *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type, boolean readable,
-                    boolean writeable);
-
+    void add(String name, Class<?> type, boolean readable,
+             boolean writeable);
 
     /**
      * Is this DynaClass currently restricted, if so, no changes to the
      * existing registration of property names, data types, readability, or
      * writeability are allowed.
      *
-     * @return <code>true</code> if this Mutable {@link DynaClass} is restricted,
-     * otherwise <code>false</code>
+     * @return {@code true} if this Mutable {@link DynaClass} is restricted,
+     * otherwise {@code false}
      */
-    public boolean isRestricted();
-
+    boolean isRestricted();
 
     /**
      * Remove the specified dynamic property, and any associated data type,
@@ -106,15 +97,13 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
-    public void remove(String name);
-
+    void remove(String name);
 
     /**
      * Set the restricted state of this DynaClass to the specified value.
      *
      * @param restricted The new restricted state
      */
-    public void setRestricted(boolean restricted);
-
+    void setRestricted(boolean restricted);
 
 }

@@ -15,18 +15,16 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
-
+import java.util.Objects;
 
 /**
- * <p>Implementation of <code>DynaClass</code> for DynaBeans that wrap the
- * <code>java.sql.Row</code> objects of a <code>java.sql.ResultSet</code>.
+ * <p>Implementation of {@code DynaClass} for DynaBeans that wrap the
+ * {@code java.sql.Row</code> objects of a <code>java.sql.ResultSet}.
  * The normal usage pattern is something like:</p>
  * <pre>
  *   ResultSet rs = ...;
@@ -44,8 +42,8 @@ import java.util.Iterator;
  * for portability).</p>
  *
  * <p><strong>WARNING</strong> - Any {@link DynaBean} instance returned by
- * this class, or from the <code>Iterator</code> returned by the
- * <code>iterator()</code> method, is directly linked to the row that the
+ * this class, or from the {@code Iterator} returned by the
+ * {@code iterator()} method, is directly linked to the row that the
  * underlying result set is currently positioned at.  This has the following
  * implications:</p>
  * <ul>
@@ -83,17 +81,17 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
-     * <code>ResultSet</code>.  The property names corresponding
+     * {@code ResultSet}.  The property names corresponding
      * to column names in the result set will be lower cased.</p>
      *
      * @param resultSet The result set to be wrapped
      *
-     * @throws NullPointerException if <code>resultSet</code>
-     *  is <code>null</code>
+     * @throws NullPointerException if {@code resultSet}
+     *  is {@code null}
      * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
@@ -103,15 +101,14 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
-     * <code>ResultSet</code>.  The property names corresponding
+     * {@code ResultSet}.  The property names corresponding
      * to the column names in the result set will be lower cased or not,
-     * depending on the specified <code>lowerCase</code> value.</p>
+     * depending on the specified {@code lowerCase} value.</p>
      *
-     * <p><strong>WARNING</strong> - If you specify <code>false</code>
-     * for <code>lowerCase</code>, the returned property names will
+     * <p><strong>WARNING</strong> - If you specify {@code false}
+     * for {@code lowerCase}, the returned property names will
      * exactly match the column names returned by your JDBC driver.
      * Because different drivers might return column names in different
      * cases, the property names seen by your application will vary
@@ -120,8 +117,8 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param resultSet The result set to be wrapped
      * @param lowerCase Should property names be lower cased?
      *
-     * @throws NullPointerException if <code>resultSet</code>
-     *  is <code>null</code>
+     * @throws NullPointerException if {@code resultSet}
+     *  is {@code null}
      * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      */
@@ -132,15 +129,14 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
-     * <code>ResultSet</code>.  The property names corresponding
+     * {@code ResultSet}.  The property names corresponding
      * to the column names in the result set will be lower cased or not,
-     * depending on the specified <code>lowerCase</code> value.</p>
+     * depending on the specified {@code lowerCase} value.</p>
      *
-     * <p><strong>WARNING</strong> - If you specify <code>false</code>
-     * for <code>lowerCase</code>, the returned property names will
+     * <p><strong>WARNING</strong> - If you specify {@code false}
+     * for {@code lowerCase}, the returned property names will
      * exactly match the column names returned by your JDBC driver.
      * Because different drivers might return column names in different
      * cases, the property names seen by your application will vary
@@ -150,18 +146,15 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @param lowerCase Should property names be lower cased?
      * @param useColumnLabel true if the column label should be used, otherwise false
      *
-     * @throws NullPointerException if <code>resultSet</code>
-     *  is <code>null</code>
+     * @throws NullPointerException if {@code resultSet}
+     *  is {@code null}
      * @throws SQLException if the metadata for this result set
      *  cannot be introspected
      * @since 1.8.3
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
-
-        if (resultSet == null) {
-            throw new NullPointerException();
-        }
+        Objects.requireNonNull(resultSet, "resultSet");
         this.resultSet = resultSet;
         this.lowerCase = lowerCase;
         setUseColumnLabel(useColumnLabel);
@@ -170,31 +163,26 @@ public class ResultSetDynaClass extends JDBCDynaClass {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
-
 
     /**
-     * <p>The <code>ResultSet</code> we are wrapping.</p>
+     * <p>The {@code ResultSet} we are wrapping.</p>
      */
     protected ResultSet resultSet = null;
 
 
-    // --------------------------------------------------------- Public Methods
-
 
     /**
-     * <p>Return an <code>Iterator</code> of {@link DynaBean} instances for
-     * each row of the wrapped <code>ResultSet</code>, in "forward" order.
+     * <p>Return an {@code Iterator} of {@link DynaBean} instances for
+     * each row of the wrapped {@code ResultSet}, in "forward" order.
      * Unless the underlying result set supports scrolling, this method
      * should be called only once.</p>
-     * @return An <code>Iterator</code> of {@link DynaBean} instances
+     * @return An {@code Iterator} of {@link DynaBean} instances
      */
     public Iterator<DynaBean> iterator() {
 
         return new ResultSetIterator(this);
 
     }
-
 
     /**
      * Get a value from the {@link ResultSet} for the specified
@@ -209,7 +197,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return getObject(getResultSet(), name);
     }
 
-    // -------------------------------------------------------- Package Methods
 
 
     /**
@@ -222,12 +209,11 @@ public class ResultSetDynaClass extends JDBCDynaClass {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used
      * to load this library.
-     * Dervations of this class could implement alternative class loading policies such as
+     * Derivations of this class could implement alternative class loading policies such as
      * using custom ClassLoader or using the Threads's context class loader etc.
      * </p>
      * @param className The name of the class to load

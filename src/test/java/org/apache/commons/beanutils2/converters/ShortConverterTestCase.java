@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the ShortConverter class.
  *
@@ -29,15 +28,36 @@ import junit.framework.TestSuite;
 
 public class ShortConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(ShortConverterTestCase.class);
+    }
+
+
+
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+
 
     public ShortConverterTestCase(final String name) {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    @Override
+    protected Class<?> getExpectedType() {
+        return Short.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new ShortConverter();
+    }
+
+
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new ShortConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -48,33 +68,47 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new Short("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(ShortConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
 
-    @Override
-    protected NumberConverter makeConverter() {
-        return new ShortConverter();
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Short.class;
+
+        final Long min         = new Long(Short.MIN_VALUE);
+        final Long max         = new Long(Short.MAX_VALUE);
+        final Long minMinusOne = new Long(min.longValue() - 1);
+        final Long maxPlusOne  = new Long(max.longValue() + 1);
+
+        // Minimum
+        assertEquals("Minimum", new Short(Short.MIN_VALUE), converter.convert(clazz, min));
+
+        // Maximum
+        assertEquals("Maximum", new Short(Short.MAX_VALUE), converter.convert(clazz, max));
+
+        // Too Small
+        try {
+            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
+            fail("Less than minimum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
+
+        // Too Large
+        try {
+            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
+            fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
     }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new ShortConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return Short.class;
-    }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -129,41 +163,6 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to Short",expected[i],converter.convert(Short.class,input[i]));
             assertEquals(message[i] + " to short",expected[i],converter.convert(Short.TYPE,input[i]));
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
-        }
-    }
-
-    /**
-     * Test Invalid Amounts (too big/small)
-     */
-    public void testInvalidAmount() {
-        final Converter converter = makeConverter();
-        final Class<?> clazz = Short.class;
-
-        final Long min         = new Long(Short.MIN_VALUE);
-        final Long max         = new Long(Short.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
-
-        // Minimum
-        assertEquals("Minimum", new Short(Short.MIN_VALUE), converter.convert(clazz, min));
-
-        // Maximum
-        assertEquals("Maximum", new Short(Short.MAX_VALUE), converter.convert(clazz, max));
-
-        // Too Small
-        try {
-            assertEquals("Minimum - 1", null, converter.convert(clazz, minMinusOne));
-            fail("Less than minimum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
-        }
-
-        // Too Large
-        try {
-            assertEquals("Maximum + 1", null, converter.convert(clazz, maxPlusOne));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
         }
     }
 }

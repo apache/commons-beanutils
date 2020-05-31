@@ -42,8 +42,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
-
 
     /**
      * Set up instance variables required by this test case.
@@ -51,7 +49,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     @Override
     public void setUp() {
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -61,7 +58,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         return new TestSuite(LocaleBeanUtilsTestCase.class);
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -70,7 +66,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test setting a nested simple property

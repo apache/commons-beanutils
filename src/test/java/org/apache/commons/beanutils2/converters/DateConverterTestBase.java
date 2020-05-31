@@ -19,6 +19,12 @@ package org.apache.commons.beanutils2.converters;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,7 +42,7 @@ import junit.framework.TestCase;
 
 public abstract class DateConverterTestBase extends TestCase {
 
-    // ------------------------------------------------------------------------
+
 
     /**
      * Construct a new test case.
@@ -46,13 +52,77 @@ public abstract class DateConverterTestBase extends TestCase {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    protected abstract Class<?> getExpectedType();
+
+    /**
+     * Convert a Date or Calendar objects to the time in milliseconds
+     * @param date The date or calendar object
+     * @return The time in milliseconds
+     */
+    long getTimeInMillis(final Object date) {
+
+        if (date instanceof java.sql.Timestamp) {
+
+            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
+            //      didn't include the milliseconds. The following code
+            //      ensures it works consistently across JDK versions
+            final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
+            long timeInMillis = timestamp.getTime() / 1000 * 1000;
+            timeInMillis += timestamp.getNanos() / 1000000;
+            return timeInMillis;
+        }
+
+        if (date instanceof LocalDate) {
+            return  ((LocalDate)date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof LocalDateTime) {
+            return  ((LocalDateTime)date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof ZonedDateTime) {
+            return  ((ZonedDateTime)date).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof OffsetDateTime) {
+            return  ((OffsetDateTime)date).toInstant().toEpochMilli();
+        }
+
+        if (date instanceof Calendar) {
+            return ((Calendar)date).getTime().getTime();
+        }
+        return ((Date)date).getTime();
+    }
+
+    /**
+     * Test Conversion Error
+     * @param converter The converter to use
+     * @param value The value to convert
+     */
+    void invalidConversion(final Converter converter, final Object value) {
+        final String valueType = value == null ? "null" : value.getClass().getName();
+        final String msg = "Converting '" + valueType + "' value '" + value + "'";
+        try {
+            final Object result = converter.convert(getExpectedType(), value);
+            fail(msg + ", expected ConversionException, but result = '" + result + "'");
+        } catch (final ConversionException ex) {
+            // Expected Result
+        }
+    }
 
     /**
      * Create the Converter with no default value.
      * @return A new Converter
      */
     protected abstract DateTimeConverter makeConverter();
+
+
 
     /**
      * Create the Converter with a default value.
@@ -62,20 +132,74 @@ public abstract class DateConverterTestBase extends TestCase {
     protected abstract DateTimeConverter makeConverter(Object defaultValue);
 
     /**
-     * Return the expected type
-     * @return The expected type
+     * Test Conversion to String
+     * @param converter The converter to use
+     * @param expected The expected result
+     * @param value The value to convert
      */
-    protected abstract Class<?> getExpectedType();
+    void stringConversion(final Converter converter, final String expected, final Object value) {
+        final String valueType = value == null ? "null" : value.getClass().getName();
+        final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
+        try {
+            final Object result = converter.convert(String.class, value);
+            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> expectType = expected == null ? null : expected.getClass();
+            assertEquals("TYPE "  + msg, expectType, resultType);
+            assertEquals("VALUE " + msg, expected, result);
+        } catch (final Exception ex) {
+            fail(msg + " threw " + ex.toString());
+        }
+    }
 
     /**
-     * Convert from a Calendar to the appropriate Date type
-     *
-     * @param value The Calendar value to convert
-     * @return The converted value
+     * Assumes convert() returns some non-null
+     * instance of getExpectedType().
      */
-    protected abstract Object toType(Calendar value);
+    public void testConvertDate() {
+        final String[] message= {
+            "from Date",
+            "from Calendar",
+            "from SQL Date",
+            "from SQL Time",
+            "from SQL Timestamp",
+            "from LocalDate",
+            "from LocalDateTime",
+            "from ZonedDateTime",
+            "from OffsetDateTime"
+        };
 
-    // ------------------------------------------------------------------------
+        final long now = System.currentTimeMillis();
+
+        final Object[] date = {
+            new Date(now),
+            new java.util.GregorianCalendar(),
+            new java.sql.Date(now),
+            new java.sql.Time(now),
+            new java.sql.Timestamp(now),
+            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDateTime(),
+            ZonedDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault()),
+            OffsetDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault())
+        };
+
+        // Initialize calendar also with same ms to avoid a failing test in a new time slice
+        ((GregorianCalendar)date[1]).setTime(new Date(now));
+
+        for (int i = 0; i < date.length; i++) {
+            final Object val = makeConverter().convert(getExpectedType(), date[i]);
+            assertNotNull("Convert " + message[i] + " should not be null", val);
+            assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
+                       getExpectedType().isInstance(val));
+
+            long test = now;
+            if (date[i] instanceof LocalDate || val instanceof LocalDate) {
+            	test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+			}
+
+            assertEquals("Convert " + message[i] + " should return a " + date[0],
+            		test, getTimeInMillis(val));
+        }
+    }
 
     /**
      * Assumes ConversionException in response to covert(getExpectedType(), null).
@@ -90,39 +214,23 @@ public abstract class DateConverterTestBase extends TestCase {
     }
 
     /**
-     * Assumes convert() returns some non-null
-     * instance of getExpectedType().
+     * Test default String to type conversion
+     *
+     * N.B. This method is overridden by test case
+     * implementations for java.sql.Date/Time/Timestamp
      */
-    public void testConvertDate() {
-        final String[] message= {
-            "from Date",
-            "from Calendar",
-            "from SQL Date",
-            "from SQL Time",
-            "from SQL Timestamp"
-        };
+    public void testDefaultStringToTypeConvert() {
 
-        final long now = System.currentTimeMillis();
-
-        final Object[] date = {
-            new Date(now),
-            new java.util.GregorianCalendar(),
-            new java.sql.Date(now),
-            new java.sql.Time(now),
-            new java.sql.Timestamp(now)
-        };
-
-        // Initialize calendar also with same ms to avoid a failing test in a new time slice
-        ((GregorianCalendar)date[1]).setTime(new Date(now));
-
-        for (int i = 0; i < date.length; i++) {
-            final Object val = makeConverter().convert(getExpectedType(), date[i]);
-            assertNotNull("Convert " + message[i] + " should not be null", val);
-            assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
-                       getExpectedType().isInstance(val));
-            assertEquals("Convert " + message[i] + " should return a " + date[0],
-                         now, getTimeInMillis(val));
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(false);
+        try {
+            converter.convert(getExpectedType(), "2006-10-23");
+            fail("Expected Conversion exception");
+        } catch (final ConversionException e) {
+            // expected result
         }
+
     }
 
     /**
@@ -150,60 +258,108 @@ public abstract class DateConverterTestBase extends TestCase {
     }
 
     /**
-     * Test default String to type conversion
-     *
-     * N.B. This method is overridden by test case
-     * implementations for java.sql.Date/Time/Timestamp
+     * Test Converter with types it can't handle
      */
-    public void testDefaultStringToTypeConvert() {
+    public void testInvalidType() {
 
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(false);
+
+        // Invalid Class Type
         try {
-            converter.convert(getExpectedType(), "2006-10-23");
-            fail("Expected Conversion exception");
+            converter.convert(Character.class, new Date());
+            fail("Requested Character.class conversion, expected ConversionException");
         } catch (final ConversionException e) {
-            // expected result
+            // Expected result
         }
+    }
+
+    /**
+     * Test Date Converter with no default value
+     */
+    public void testLocale() {
+
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
+        final String pattern = "M/d/yy"; // SHORT style date format for US Locale
+
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(true);
+
+        // Valid String --> Type Conversion
+        final String testString = "10/28/06";
+        final Object expected = toType(testString, pattern, null);
+        validConversion(converter, expected, testString);
+
+        // Invalid Conversions
+        invalidConversion(converter, null);
+        invalidConversion(converter, "");
+        invalidConversion(converter, "2006-10-2X");
+        invalidConversion(converter, "10.28.06");
+        invalidConversion(converter, "10-28-06");
+        invalidConversion(converter, new Integer(2));
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
 
     }
 
     /**
-     * Test Conversion to String
+     * Test Converter with multiple patterns
      */
-    public void testStringConversion() {
+    public void testMultiplePatterns() {
+        String testString = null;
+        Object expected = null;
+
+        // Create & Configure the Converter
+        final String[] patterns = new String[] {"yyyy-MM-dd", "yyyy/MM/dd"};
+        final DateTimeConverter converter = makeConverter();
+        converter.setPatterns(patterns);
+
+        // First Pattern
+        testString = "2006-10-28";
+        expected = toType(testString, patterns[0], null);
+        validConversion(converter, expected, testString);
+
+        // Second pattern
+        testString = "2006/10/18";
+        expected = toType(testString, patterns[1], null);
+        validConversion(converter, expected, testString);
+
+        // Invalid Conversion
+        invalidConversion(converter, "17/03/2006");
+        invalidConversion(converter, "17.03.2006");
+
+    }
+
+    /**
+     * Test Converter with no default value
+     */
+    public void testPatternDefault() {
 
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final Object defaultValue = toType("2000-01-01", pattern, null);
+        assertNotNull("Check default date", defaultValue);
+        final DateTimeConverter converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
 
-        // Create Values
-        final String expected = "2006-10-29";
-        final Calendar calendar = toCalendar(expected, pattern, null);
+        // Valid String --> Type Conversion
+        final String testString = "2006-10-29";
+        final Object expected = toType(testString, pattern, null);
+        validConversion(converter, expected, testString);
 
-        // Type --> String Conversion
-        stringConversion(converter, expected, toType(calendar));
-
-        // Calendar --> String Conversion
-        stringConversion(converter, expected, calendar);
-
-        // java.util.Date --> String Conversion
-        stringConversion(converter, expected, toDate(calendar));
-
-        // java.sql.Date --> String Conversion
-        stringConversion(converter, expected, toSqlDate(calendar));
-
-        // java.sql.Timestamp --> String Conversion
-        stringConversion(converter, expected, toSqlTimestamp(calendar));
-
-        // java.sql.Time --> String Conversion
-        stringConversion(converter, expected, toSqlTime(calendar));
-
-        stringConversion(converter, null, null);
-        stringConversion(converter, "", "");
+        // Invalid Values, expect default value
+        validConversion(converter, defaultValue, null);
+        validConversion(converter, defaultValue, "");
+        validConversion(converter, defaultValue, "2006-10-2X");
+        validConversion(converter, defaultValue, "2006/10/01");
+        validConversion(converter, defaultValue, "02/10/06");
+        validConversion(converter, defaultValue, new Integer(2));
 
     }
 
@@ -253,34 +409,6 @@ public abstract class DateConverterTestBase extends TestCase {
     /**
      * Test Converter with no default value
      */
-    public void testPatternDefault() {
-
-        final String pattern = "yyyy-MM-dd";
-
-        // Create & Configure the Converter
-        final Object defaultValue = toType("2000-01-01", pattern, null);
-        assertNotNull("Check default date", defaultValue);
-        final DateTimeConverter converter = makeConverter(defaultValue);
-        converter.setPattern(pattern);
-
-        // Valid String --> Type Conversion
-        final String testString = "2006-10-29";
-        final Object expected = toType(testString, pattern, null);
-        validConversion(converter, expected, testString);
-
-        // Invalid Values, expect default value
-        validConversion(converter, defaultValue, null);
-        validConversion(converter, defaultValue, "");
-        validConversion(converter, defaultValue, "2006-10-2X");
-        validConversion(converter, defaultValue, "2006/10/01");
-        validConversion(converter, defaultValue, "02/10/06");
-        validConversion(converter, defaultValue, new Integer(2));
-
-    }
-
-    /**
-     * Test Converter with no default value
-     */
     public void testPatternNullDefault() {
 
         final String pattern = "yyyy-MM-dd";
@@ -306,149 +434,44 @@ public abstract class DateConverterTestBase extends TestCase {
     }
 
     /**
-     * Test Converter with multiple patterns
-     */
-    public void testMultiplePatterns() {
-        String testString = null;
-        Object expected = null;
-
-        // Create & Configure the Converter
-        final String[] patterns = new String[] {"yyyy-MM-dd", "yyyy/MM/dd"};
-        final DateTimeConverter converter = makeConverter();
-        converter.setPatterns(patterns);
-
-        // First Pattern
-        testString = "2006-10-28";
-        expected = toType(testString, patterns[0], null);
-        validConversion(converter, expected, testString);
-
-        // Second pattern
-        testString = "2006/10/18";
-        expected = toType(testString, patterns[1], null);
-        validConversion(converter, expected, testString);
-
-        // Invalid Conversion
-        invalidConversion(converter, "17/03/2006");
-        invalidConversion(converter, "17.03.2006");
-
-    }
-
-    /**
-     * Test Date Converter with no default value
-     */
-    public void testLocale() {
-
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-
-        final String pattern = "M/d/yy"; // SHORT style date format for US Locale
-
-        // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(true);
-
-        // Valid String --> Type Conversion
-        final String testString = "10/28/06";
-        final Object expected = toType(testString, pattern, null);
-        validConversion(converter, expected, testString);
-
-        // Invalid Conversions
-        invalidConversion(converter, null);
-        invalidConversion(converter, "");
-        invalidConversion(converter, "2006-10-2X");
-        invalidConversion(converter, "10.28.06");
-        invalidConversion(converter, "10-28-06");
-        invalidConversion(converter, new Integer(2));
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-
-    }
-
-    /**
-     * Test Converter with types it can't handle
-     */
-    public void testInvalidType() {
-
-        // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
-
-        // Invalid Class Type
-        try {
-            converter.convert(Character.class, new Date());
-            fail("Requested Character.class conversion, expected ConversionException");
-        } catch (final ConversionException e) {
-            // Expected result
-        }
-    }
-
-    /**
-     * Test Conversion to the required type
-     * @param converter The converter to use
-     * @param expected The expected result
-     * @param value The value to convert
-     */
-    void validConversion(final Converter converter, final Object expected, final Object value) {
-        final String valueType = value == null ? "null" : value.getClass().getName();
-        final String msg = "Converting '" + valueType + "' value '" + value + "'";
-        try {
-            final Object result = converter.convert(getExpectedType(), value);
-            final Class<?> resultType = result   == null ? null : result.getClass();
-            final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE "  + msg, expectType, resultType);
-            assertEquals("VALUE " + msg, expected, result);
-        } catch (final Exception ex) {
-            fail(msg + " threw " + ex.toString());
-        }
-    }
-
-    /**
      * Test Conversion to String
-     * @param converter The converter to use
-     * @param expected The expected result
-     * @param value The value to convert
      */
-    void stringConversion(final Converter converter, final String expected, final Object value) {
-        final String valueType = value == null ? "null" : value.getClass().getName();
-        final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
-        try {
-            final Object result = converter.convert(String.class, value);
-            final Class<?> resultType = result   == null ? null : result.getClass();
-            final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE "  + msg, expectType, resultType);
-            assertEquals("VALUE " + msg, expected, result);
-        } catch (final Exception ex) {
-            fail(msg + " threw " + ex.toString());
-        }
-    }
+    public void testStringConversion() {
 
-    /**
-     * Test Conversion Error
-     * @param converter The converter to use
-     * @param value The value to convert
-     */
-    void invalidConversion(final Converter converter, final Object value) {
-        final String valueType = value == null ? "null" : value.getClass().getName();
-        final String msg = "Converting '" + valueType + "' value '" + value + "'";
-        try {
-            final Object result = converter.convert(getExpectedType(), value);
-            fail(msg + ", expected ConversionException, but result = '" + result + "'");
-        } catch (final ConversionException ex) {
-            // Expected Result
-        }
-    }
+        final String pattern = "yyyy-MM-dd";
 
-    /**
-     * Parse a String value to the required type
-     * @param value The String value to parse
-     * @param pattern The date pattern
-     * @param locale The locale to use (or null)
-     * @return parsed Calendar value
-     */
-    Object toType(final String value, final String pattern, final Locale locale) {
-        final Calendar calendar = toCalendar(value, pattern, locale);
-        return toType(calendar);
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setPattern(pattern);
+
+        // Create Values
+        final String expected = "2006-10-29";
+        final Calendar calendar = toCalendar(expected, pattern, null);
+
+        // Type --> String Conversion
+        stringConversion(converter, expected, toType(calendar));
+
+        // Calendar --> String Conversion
+        stringConversion(converter, expected, calendar);
+
+        // java.util.Date --> String Conversion
+        stringConversion(converter, expected, toDate(calendar));
+
+        // java.sql.Date --> String Conversion
+        stringConversion(converter, expected, toSqlDate(calendar));
+
+        // java.sql.Timestamp --> String Conversion
+        stringConversion(converter, expected, toSqlTimestamp(calendar));
+
+        // java.sql.Time --> String Conversion
+        stringConversion(converter, expected, toSqlTime(calendar));
+
+        // java.time.LocalDateTime --> String Conversion
+        stringConversion(converter, expected, toLocalDateTime(calendar));
+
+        stringConversion(converter, null, null);
+        stringConversion(converter, "", "");
+
     }
 
     /**
@@ -484,6 +507,15 @@ public abstract class DateConverterTestBase extends TestCase {
     }
 
     /**
+     * Convert a Calendar to a java.time.LocalDateTime
+     * @param calendar The calendar object to convert
+     * @return The converted java.time.LocalDate
+     */
+    LocalDateTime toLocalDateTime(final Calendar calendar) {
+        return Instant.ofEpochMilli(calendar.getTimeInMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /**
      * Convert a Calendar to a java.sql.Date
      * @param calendar The calendar object to convert
      * @return The converted java.sql.Date
@@ -511,26 +543,42 @@ public abstract class DateConverterTestBase extends TestCase {
     }
 
     /**
-     * Convert a Date or Calendar objects to the time in millisconds
-     * @param date The date or calendar object
-     * @return The time in milliseconds
+     * Convert from a Calendar to the appropriate Date type
+     *
+     * @param value The Calendar value to convert
+     * @return The converted value
      */
-    long getTimeInMillis(final Object date) {
+    protected abstract Object toType(Calendar value);
 
-        if (date instanceof java.sql.Timestamp) {
-            // ---------------------- JDK 1.3 Fix ----------------------
-            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
-            //      didn't include the milliseconds. The following code
-            //      ensures it works consistently accross JDK versions
-            final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
-            long timeInMillis = timestamp.getTime() / 1000 * 1000;
-            timeInMillis += timestamp.getNanos() / 1000000;
-            return timeInMillis;
-        }
+    /**
+     * Parse a String value to the required type
+     * @param value The String value to parse
+     * @param pattern The date pattern
+     * @param locale The locale to use (or null)
+     * @return parsed Calendar value
+     */
+    Object toType(final String value, final String pattern, final Locale locale) {
+        final Calendar calendar = toCalendar(value, pattern, locale);
+        return toType(calendar);
+    }
 
-        if (date instanceof Calendar) {
-            return ((Calendar)date).getTime().getTime();
+    /**
+     * Test Conversion to the required type
+     * @param converter The converter to use
+     * @param expected The expected result
+     * @param value The value to convert
+     */
+    void validConversion(final Converter converter, final Object expected, final Object value) {
+        final String valueType = value == null ? "null" : value.getClass().getName();
+        final String msg = "Converting '" + valueType + "' value '" + value + "'";
+        try {
+            final Object result = converter.convert(getExpectedType(), value);
+            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> expectType = expected == null ? null : expected.getClass();
+            assertEquals("TYPE "  + msg, expectType, resultType);
+            assertEquals("VALUE " + msg, expected, result);
+        } catch (final Exception ex) {
+            fail(msg + " threw " + ex.toString());
         }
-        return ((Date)date).getTime();
     }
 }

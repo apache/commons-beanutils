@@ -41,7 +41,7 @@ public class Jira520TestCase extends TestCase {
             // ok
         }
     }
-    
+
     /**
      * Allow opt-out to make your app less secure but allow access to "class".
      */
@@ -49,7 +49,7 @@ public class Jira520TestCase extends TestCase {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
-        String result = bub.getProperty(bean, "class");
+        final String result = bub.getProperty(bean, "class");
         assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
     }
 }

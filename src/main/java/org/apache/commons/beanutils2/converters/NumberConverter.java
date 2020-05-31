@@ -29,20 +29,20 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.lang.Number</b> objects.
  * <p>
  * This implementation handles conversion for the following
- * <code>java.lang.Number</code> types.
+ * {@code java.lang.Number} types.
  * <ul>
- *     <li><code>java.lang.Byte</code></li>
- *     <li><code>java.lang.Short</code></li>
- *     <li><code>java.lang.Integer</code></li>
- *     <li><code>java.lang.Long</code></li>
- *     <li><code>java.lang.Float</code></li>
- *     <li><code>java.lang.Double</code></li>
- *     <li><code>java.math.BigDecimal</code></li>
- *     <li><code>java.math.BigInteger</code></li>
+ *     <li>{@code java.lang.Byte}</li>
+ *     <li>{@code java.lang.Short}</li>
+ *     <li>{@code java.lang.Integer}</li>
+ *     <li>{@code java.lang.Long}</li>
+ *     <li>{@code java.lang.Float}</li>
+ *     <li>{@code java.lang.Double}</li>
+ *     <li>{@code java.math.BigDecimal}</li>
+ *     <li>{@code java.math.BigInteger}</li>
  * </ul>
  *
  * <h3>String Conversions (to and from)</h3>
@@ -51,37 +51,37 @@ import org.apache.commons.beanutils2.ConversionException;
  * <ul>
  *    <li>Using the default format for the default Locale, configure using:
  *        <ul>
- *          <li><code>setUseLocaleFormat(true)</code></li>
+ *          <li>{@code setUseLocaleFormat(true)}</li>
  *        </ul>
  *    </li>
  *    <li>Using the default format for a specified Locale, configure using:
  *        <ul>
- *          <li><code>setLocale(Locale)</code></li>
+ *          <li>{@code setLocale(Locale)}</li>
  *        </ul>
  *    </li>
  *    <li>Using a specified pattern for the default Locale, configure using:
  *        <ul>
- *          <li><code>setPattern(String)</code></li>
+ *          <li>{@code setPattern(String)}</li>
  *        </ul>
  *    </li>
  *    <li>Using a specified pattern for a specified Locale, configure using:
  *        <ul>
- *          <li><code>setPattern(String)</code></li>
- *          <li><code>setLocale(Locale)</code></li>
+ *          <li>{@code setPattern(String)}</li>
+ *          <li>{@code setLocale(Locale)}</li>
  *        </ul>
  *    </li>
  *    <li>If none of the above are configured the
- *        <code>toNumber(String)</code> method is used to convert
+ *        {@code toNumber(String)} method is used to convert
  *        from String to Number and the Number's
- *        <code>toString()</code> method used to convert from
+ *        {@code toString()} method used to convert from
  *        Number to String.</li>
  * </ul>
  *
  * <p>
  * <strong>N.B.</strong>Patterns can only be specified using the <i>standard</i>
- * pattern characters and NOT in <i>localized</i> form (see <code>java.text.DecimalFormat</code>).
- * For example to cater for number styles used in Germany such as <code>0.000,00</code> the pattern
- * is specified in the normal form <code>0,000.00</code> and the locale set to <code>Locale.GERMANY</code>.
+ * pattern characters and NOT in <i>localized</i> form (see {@code java.text.DecimalFormat}).
+ * For example to cater for number styles used in Germany such as {@code 0.000,00} the pattern
+ * is specified in the normal form {@code 0,000.00</code> and the locale set to <code>Locale.GERMANY}.
  *
  * @since 1.8.0
  */
@@ -95,11 +95,11 @@ public abstract class NumberConverter extends AbstractConverter {
     private boolean useLocaleFormat;
     private Locale locale;
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * Construct a <b>java.lang.Number</b> <i>Converter</i>
-     * that throws a <code>ConversionException</code> if a error occurs.
+     * that throws a {@code ConversionException} if a error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
      */
@@ -109,7 +109,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Construct a <code>java.lang.Number</code> <i>Converter</i> that returns
+     * Construct a {@code java.lang.Number} <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
@@ -121,7 +121,7 @@ public abstract class NumberConverter extends AbstractConverter {
         setDefaultValue(defaultValue);
     }
 
-    // --------------------------------------------------------- Public Methods
+
 
     /**
      * Return whether decimals are allowed in the number.
@@ -136,7 +136,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * Set whether a format should be used to convert
      * the Number.
      *
-     * @param useLocaleFormat <code>true</code> if a number format
+     * @param useLocaleFormat {@code true} if a number format
      * should be used.
      */
     public void setUseLocaleFormat(final boolean useLocaleFormat) {
@@ -145,10 +145,10 @@ public abstract class NumberConverter extends AbstractConverter {
 
     /**
      * Return the number format pattern used to convert
-     * Numbers to/from a <code>java.lang.String</code>
-     * (or <code>null</code> if none specified).
+     * Numbers to/from a {@code java.lang.String}
+     * (or {@code null} if none specified).
      * <p>
-     * See <code>java.text.DecimalFormat</code> for details
+     * See {@code java.text.DecimalFormat} for details
      * of how to specify the pattern.
      *
      * @return The format pattern.
@@ -159,9 +159,9 @@ public abstract class NumberConverter extends AbstractConverter {
 
     /**
      * Set a number format pattern to use to convert
-     * Numbers to/from a <code>java.lang.String</code>.
+     * Numbers to/from a {@code java.lang.String}.
      * <p>
-     * See <code>java.text.DecimalFormat</code> for details
+     * See {@code java.text.DecimalFormat} for details
      * of how to specify the pattern.
      *
      * @param pattern The format pattern.
@@ -173,7 +173,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
     /**
      * Return the Locale for the <i>Converter</i>
-     * (or <code>null</code> if none specified).
+     * (or {@code null} if none specified).
      *
      * @return The locale to use for conversion
      */
@@ -191,7 +191,7 @@ public abstract class NumberConverter extends AbstractConverter {
         setUseLocaleFormat(true);
     }
 
-    // ------------------------------------------------------ Protected Methods
+
 
     /**
      * Convert an input Number object into a String.
@@ -285,14 +285,14 @@ public abstract class NumberConverter extends AbstractConverter {
      * <p>
      * This method handles conversion to the following types:
      * <ul>
-     *     <li><code>java.lang.Byte</code></li>
-     *     <li><code>java.lang.Short</code></li>
-     *     <li><code>java.lang.Integer</code></li>
-     *     <li><code>java.lang.Long</code></li>
-     *     <li><code>java.lang.Float</code></li>
-     *     <li><code>java.lang.Double</code></li>
-     *     <li><code>java.math.BigDecimal</code></li>
-     *     <li><code>java.math.BigInteger</code></li>
+     *     <li>{@code java.lang.Byte}</li>
+     *     <li>{@code java.lang.Short}</li>
+     *     <li>{@code java.lang.Integer}</li>
+     *     <li>{@code java.lang.Long}</li>
+     *     <li>{@code java.lang.Float}</li>
+     *     <li>{@code java.lang.Double}</li>
+     *     <li>{@code java.math.BigDecimal}</li>
+     *     <li>{@code java.math.BigInteger}</li>
      * </ul>
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
@@ -403,14 +403,14 @@ public abstract class NumberConverter extends AbstractConverter {
      * <p>
      * This method handles conversion from a String to the following types:
      * <ul>
-     *     <li><code>java.lang.Byte</code></li>
-     *     <li><code>java.lang.Short</code></li>
-     *     <li><code>java.lang.Integer</code></li>
-     *     <li><code>java.lang.Long</code></li>
-     *     <li><code>java.lang.Float</code></li>
-     *     <li><code>java.lang.Double</code></li>
-     *     <li><code>java.math.BigDecimal</code></li>
-     *     <li><code>java.math.BigInteger</code></li>
+     *     <li>{@code java.lang.Byte}</li>
+     *     <li>{@code java.lang.Short}</li>
+     *     <li>{@code java.lang.Integer}</li>
+     *     <li>{@code java.lang.Long}</li>
+     *     <li>{@code java.lang.Float}</li>
+     *     <li>{@code java.lang.Double}</li>
+     *     <li>{@code java.math.BigDecimal}</li>
+     *     <li>{@code java.math.BigInteger}</li>
      * </ul>
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
@@ -534,7 +534,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Convert a String into a <code>Number</code> object.
+     * Convert a String into a {@code Number} object.
      * @param sourceType the source type of the conversion
      * @param targetType The type to convert the value to
      * @param value The String date value.

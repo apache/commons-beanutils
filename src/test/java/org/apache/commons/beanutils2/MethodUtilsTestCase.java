@@ -29,12 +29,12 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p> Test case for <code>MethodUtils</code> </p>
+ * <p> Test case for {@code MethodUtils} </p>
  *
  */
 public class MethodUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
+
 
     /**
      * Construct a new instance of this test case.
@@ -46,8 +46,6 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
-
 
     /**
      * Set up instance variables required by this test case.
@@ -55,7 +53,6 @@ public class MethodUtilsTestCase extends TestCase {
     @Override
     public void setUp() {
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -72,10 +69,9 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
-     * <p> Test <code>getAccessibleMethod</code>.
+     * <p> Test {@code getAccessibleMethod}.
      */
     public void testGetAccessibleMethod() {
         // easy bit first - find a public method
@@ -95,7 +91,6 @@ public class MethodUtilsTestCase extends TestCase {
 
         assertMethod(method, "methodBar");
     }
-
 
     public void testGetAccessibleMethodIndirectInterface() {
         Method method;
@@ -117,7 +112,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     /**
-     * <p> Test <code>invokeExactMethod</code>.
+     * <p> Test {@code invokeExactMethod}.
      */
     public void testInvokeExactMethod() throws Exception {
             final TestBean bean = new TestBean();
@@ -145,7 +140,6 @@ public class MethodUtilsTestCase extends TestCase {
         assertEquals("Method TWO was invoked correctly", "YET ANOTHER TEST", ret);
     }
 
-
     public void testInvokeExactMethodNullArray() throws Exception {
         final Object result = MethodUtils.invokeExactMethod(
                 new AlphaBean("parent"),
@@ -171,7 +165,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     /**
-     * <p> Test <code>invokeMethod</code>.
+     * <p> Test {@code invokeMethod}.
      */
     public void testInvokeMethod() throws Exception {
         final AbstractParent parent = new AlphaBean("parent");
@@ -204,7 +198,6 @@ public class MethodUtilsTestCase extends TestCase {
                         "ChildTwo",
                         MethodUtils.invokeMethod(parent, "testAddChild2", params));
     }
-
 
     public void testInvokeMethodUnknown() throws Exception {
         // test that exception is correctly thrown when a method cannot be found with matching params
@@ -373,7 +366,6 @@ public class MethodUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Simple tests for accessing static methods via invokeExactMethod().
      */
@@ -491,7 +483,7 @@ public class MethodUtilsTestCase extends TestCase {
                        Modifier.isStatic(incrementCounterMethod2.getModifiers()));
 
             // Return initial value of the counter
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -500,11 +492,11 @@ public class MethodUtilsTestCase extends TestCase {
                          ((Integer) value).intValue());
 
             // Increment via no-arguments version
-            incrementCounterMethod1.invoke(null, new Object[0]);
+            incrementCounterMethod1.invoke(null);
 
             // Validate updated value
             current++;
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -513,12 +505,11 @@ public class MethodUtilsTestCase extends TestCase {
                          ((Integer) value).intValue());
 
             // Increment via specified-argument version
-            incrementCounterMethod2.invoke(null,
-                                           new Object[] { new Integer(5) });
+            incrementCounterMethod2.invoke(null, new Integer(5));
 
             // Validate updated value
             current += 5;
-            value = currentCounterMethod.invoke(null, new Object[0]);
+            value = currentCounterMethod.invoke(null);
             assertNotNull("currentCounter exists", value);
             assertTrue("currentCounter type",
                        value instanceof Integer);
@@ -557,7 +548,7 @@ public class MethodUtilsTestCase extends TestCase {
         }
         assertNotNull("getAccessibleMethod() setFoo is Null", method);
         try {
-            method.invoke(bean, new Object[] {"1111"});
+            method.invoke(bean, "1111");
         } catch (final Throwable t) {
             fail("Invoking setFoo threw " + t);
         }
@@ -570,7 +561,7 @@ public class MethodUtilsTestCase extends TestCase {
         }
         assertNotNull("getAccessibleMethod() setBar is Null", method);
         try {
-            method.invoke(bean, new Object[] {"2222"});
+            method.invoke(bean, "2222");
         } catch (final Throwable t) {
             fail("Invoking setBar threw " + t);
         }

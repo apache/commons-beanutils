@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.io.ByteArrayInputStream;
@@ -26,10 +25,9 @@ import java.io.ObjectOutputStream;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-
 /**
- * <p>Test Case for the <code>WrapDynaBean</code> implementation class.
- * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
+ * <p>Test Case for the {@code WrapDynaBean} implementation class.
+ * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
  *
  */
@@ -37,10 +35,7 @@ import junit.framework.TestSuite;
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
 
-
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -55,8 +50,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
-
 
     /**
      * Set up instance variables required by this test case.
@@ -68,7 +61,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -77,7 +69,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         return new TestSuite(WrapDynaBeanTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -91,18 +82,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
-
-
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     public void testSimpleProperties() {
 
         checkSimplePropertyAccess();
 
     }
-
 
     /**
      * Helper method for testing whether basic access to properties works as
@@ -144,7 +131,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>set()</code> method.
+     * The {@code set()} method.
      */
     public void testIndexedProperties() {
 
@@ -184,8 +171,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
     /**
-     * The <code>contains()</code> method is not supported by the
-     * <code>WrapDynaBean</code> implementation class.
+     * The {@code contains()} method is not supported by the
+     * {@code WrapDynaBean} implementation class.
      */
     @Override
     public void testMappedContains() {
@@ -200,7 +187,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             fail("Exception: " + t);
         }
 
-
         try {
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
@@ -213,10 +199,9 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
     }
 
-
     /**
-     * The <code>remove()</code> method is not supported by the
-     * <code>WrapDynaBean</code> implementation class.
+     * The {@code remove()} method is not supported by the
+     * {@code WrapDynaBean} implementation class.
      */
     @Override
     public void testMappedRemove() {
@@ -267,7 +252,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         final WrapDynaBean dynaBean = (WrapDynaBean) createdInstance;
         assertTrue("Object type is AlphaBean", dynaBean.getInstance() instanceof AlphaBean);
     }
-
 
     /**
      * Serialization and deserialization tests.

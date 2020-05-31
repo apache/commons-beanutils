@@ -30,7 +30,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>DynaBeanMapDecorator</code> implementation class.</p>
+ * <p>Test Case for the {@code DynaBeanMapDecorator} implementation class.</p>
  *
  */
 @SuppressWarnings("deprecation")
@@ -57,7 +57,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private Map<String, Object> modifiableMap;
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
-    // ---------------------------------------------------------- Constructors
+
 
     /**
      * Construct a new instance of this test case.
@@ -68,7 +68,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+
 
     /**
      * Run thus Test
@@ -116,7 +116,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         modifiableMap = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
+
 
     /**
      * Test isReadOnly() method

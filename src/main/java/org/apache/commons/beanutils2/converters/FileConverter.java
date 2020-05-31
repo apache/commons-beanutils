@@ -19,11 +19,11 @@ package org.apache.commons.beanutils2.converters;
 import java.io.File;
 
 /**
- * {@link org.apache.commons.beanutils2.Converter} implementaion that handles conversion
+ * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.io.File</b> objects.
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
- * <code>ConversionException</code> if a conversion error occurs.
+ * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.6
  */
@@ -31,7 +31,7 @@ public final class FileConverter extends AbstractConverter {
 
     /**
      * Construct a <b>java.io.File</b> <i>Converter</i> that throws
-     * a <code>ConversionException</code> if an error occurs.
+     * a {@code ConversionException} if an error occurs.
      */
     public FileConverter() {
         super();
@@ -50,9 +50,9 @@ public final class FileConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this <code>Converter</code> handles.
+     * Return the default type this {@code Converter} handles.
      *
-     * @return The default type this <code>Converter</code> handles.
+     * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
     @Override

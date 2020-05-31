@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.math.BigDecimal;
 import java.util.Iterator;
@@ -25,7 +23,6 @@ import java.util.Iterator;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  * Test accessing ResultSets via DynaBeans.
@@ -35,20 +32,17 @@ import junit.framework.TestSuite;
 public class DynaResultSetTestCase extends TestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
-
 
     /**
      * The mock result set DynaClass to be tested.
      */
     protected ResultSetDynaClass dynaClass = null;
 
-
     /**
      * Names of the columns for this test.  Must match the order they are
      * defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String columns[] =
+    protected String[] columns =
     { "bigdecimalproperty", "booleanproperty",
       "byteproperty", "dateproperty",
       "doubleproperty", "floatproperty",
@@ -57,8 +51,6 @@ public class DynaResultSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -73,8 +65,6 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
 
-    // --------------------------------------------------- Overall Test Methods
-
 
     /**
      * Set up instance variables required by this test case.
@@ -86,7 +76,6 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -95,7 +84,6 @@ public class DynaResultSetTestCase extends TestCase {
         return new TestSuite(DynaResultSetTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -109,25 +97,20 @@ public class DynaResultSetTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
-
-
     public void testGetName() {
 
         assertEquals("DynaClass name",
                      "org.apache.commons.beanutils2.ResultSetDynaClass",
                      dynaClass.getName());
 
-
     }
-
 
     public void testGetDynaProperty() {
 
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
-            fail("Did not throw IllegaArgumentException");
+            fail("Did not throw IllegalArgumentException");
         } catch (final IllegalArgumentException e) {
             // Expected result
         }
@@ -147,10 +130,9 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
     public void testGetDynaProperties() {
 
-        final DynaProperty dynaProps[] = dynaClass.getDynaProperties();
+        final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
@@ -159,7 +141,6 @@ public class DynaResultSetTestCase extends TestCase {
         }
 
     }
-
 
     public void testNewInstance() {
 
@@ -173,7 +154,6 @@ public class DynaResultSetTestCase extends TestCase {
         }
 
     }
-
 
     public void testIteratorCount() {
 
@@ -190,7 +170,6 @@ public class DynaResultSetTestCase extends TestCase {
         assertEquals("iterator rows", 5, n);
 
     }
-
 
     public void testIteratorResults() {
 
@@ -238,9 +217,7 @@ public class DynaResultSetTestCase extends TestCase {
                      "This is a string",
                      (String) stringProperty);
 
-
     }
-
 
     /**
      * Test normal case column names (i.e. not converted to lower case)
@@ -297,8 +274,6 @@ public class DynaResultSetTestCase extends TestCase {
                      "This is a string",
                      (String) stringProperty);
 
-
     }
-
 
 }

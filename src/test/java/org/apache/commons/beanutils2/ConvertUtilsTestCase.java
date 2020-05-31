@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -31,7 +30,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * <p>
  *  Test Case for the ConvertUtils class.
@@ -41,10 +39,8 @@ import junit.framework.TestSuite;
 
 public class ConvertUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -57,8 +53,6 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
-
 
     /**
      * Set up instance variables required by this test case.
@@ -70,14 +64,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(ConvertUtilsTestCase.class);
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -88,8 +80,6 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
-
 
     /**
      * Negative String to primitive integer array tests.
@@ -97,7 +87,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeIntegerArray() {
 
         Object value = null;
-        final int intArray[] = new int[0];
+        final int[] intArray = new int[0];
 
         value = ConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -114,9 +104,7 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{ 0, 1a3 }", intArray.getClass());
         checkIntegerArray(value, intArray);
 
-
     }
-
 
     /**
      * Negative scalar conversion tests.  These rely on the standard
@@ -195,32 +183,30 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Negative String to String array tests.
      */
     public void testNegativeStringArray() {
 
         Object value = null;
-        final String stringArray[] = new String[0];
+        final String[] stringArray = new String[0];
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
 
     }
 
-
     /**
      * Test conversion of object to string for arrays.
      */
     public void testObjectToStringArray() {
 
-        final int intArray0[] = new int[0];
-        final int intArray1[] = { 123 };
-        final int intArray2[] = { 123, 456 };
-        final String stringArray0[] = new String[0];
-        final String stringArray1[] = { "abc" };
-        final String stringArray2[] = { "abc", "def" };
+        final int[] intArray0 = new int[0];
+        final int[] intArray1 = { 123 };
+        final int[] intArray2 = { 123, 456 };
+        final String[] stringArray0 = new String[0];
+        final String[] stringArray1 = { "abc" };
+        final String[] stringArray2 = { "abc", "def" };
 
         assertEquals("intArray0", null,
                      ConvertUtils.convert(intArray0));
@@ -237,7 +223,6 @@ public class ConvertUtilsTestCase extends TestCase {
                      ConvertUtils.convert(stringArray2));
 
     }
-
 
     /**
      * Test conversion of object to string for scalars.
@@ -269,31 +254,29 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive array conversion tests.
      */
     public void testPositiveArray() {
 
-        final String values1[] = { "10", "20", "30" };
+        final String[] values1 = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
-        final int shape[] = new int[0];
+        final int[] shape = new int[0];
         assertEquals(shape.getClass(), value.getClass());
-        final int results1[] = (int[]) value;
+        final int[] results1 = (int[]) value;
         assertEquals(results1[0], 10);
         assertEquals(results1[1], 20);
         assertEquals(results1[2], 30);
 
-        final String values2[] = { "100", "200", "300" };
+        final String[] values2 = { "100", "200", "300" };
         value = ConvertUtils.convert(values2, shape.getClass());
         assertEquals(shape.getClass(), value.getClass());
-        final int results2[] = (int[]) value;
+        final int[] results2 = (int[]) value;
         assertEquals(results2[0], 100);
         assertEquals(results2[1], 200);
         assertEquals(results2[2], 300);
 
     }
-
 
     /**
      * Positive String to primitive integer array tests.
@@ -301,9 +284,9 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveIntegerArray() {
 
         Object value = null;
-        final int intArray[] = new int[0];
-        final int intArray1[] = new int[] { 0 };
-        final int intArray2[] = new int[] { 0, 10 };
+        final int[] intArray = new int[0];
+        final int[] intArray1 = new int[] { 0 };
+        final int[] intArray2 = new int[] { 0, 10 };
 
         value = ConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -329,7 +312,6 @@ public class ConvertUtilsTestCase extends TestCase {
         checkIntegerArray(value, intArray2);
 
     }
-
 
     /**
      * Positive scalar conversion tests.
@@ -483,17 +465,16 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
     /**
      * Positive String to String array tests.
      */
     public void testPositiveStringArray() {
 
         Object value = null;
-        final String stringArray[] = new String[0];
-        final String stringArray1[] = new String[]
+        final String[] stringArray = new String[0];
+        final String[] stringArray1 = new String[]
             { "abc" };
-        final String stringArray2[] = new String[]
+        final String[] stringArray2 = new String[]
             { "abc", "de,f" };
 
         value = ConvertUtils.convert("", stringArray.getClass());
@@ -536,7 +517,6 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{'abc', \"de,f\"}",
                                      stringArray.getClass());
         checkStringArray(value, stringArray2);
-
 
     }
 
@@ -639,7 +619,7 @@ public class ConvertUtilsTestCase extends TestCase {
         utils.register(dateConverter, java.util.Date.class);
         utils.register(fooConverter, String.class);
 
-        // Convert using registerd DateConverter
+        // Convert using registered DateConverter
         final java.util.Date today = new java.util.Date();
         final DateFormat fmt = new SimpleDateFormat("M/d/yy"); /* US Short Format */
         final String expected = fmt.format(today);
@@ -673,15 +653,14 @@ public class ConvertUtilsTestCase extends TestCase {
                 utils.convert(value, getClass()));
     }
 
-    // -------------------------------------------------------- Private Methods
 
 
-    private void checkIntegerArray(final Object value, final int intArray[]) {
+    private void checkIntegerArray(final Object value, final int[] intArray) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is int[]",
                      intArray.getClass(), value.getClass());
-        final int results[] = (int[]) value;
+        final int[] results = (int[]) value;
         assertEquals("Returned array length", intArray.length, results.length);
         for (int i = 0; i < intArray.length; i++) {
             assertEquals("Returned array value " + i,
@@ -690,13 +669,12 @@ public class ConvertUtilsTestCase extends TestCase {
 
     }
 
-
-    private void checkStringArray(final Object value, final String stringArray[]) {
+    private void checkStringArray(final Object value, final String[] stringArray) {
 
         assertNotNull("Returned value is not null", value);
         assertEquals("Returned value is String[]",
                      stringArray.getClass(), value.getClass());
-        final String results[] = (String[]) value;
+        final String[] results = (String[]) value;
         assertEquals("Returned array length",
                      stringArray.length, results.length);
         for (int i = 0; i < stringArray.length; i++) {
@@ -705,7 +683,6 @@ public class ConvertUtilsTestCase extends TestCase {
         }
 
     }
-
 
 }
 

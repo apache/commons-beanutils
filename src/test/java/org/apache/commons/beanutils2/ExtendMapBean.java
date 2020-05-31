@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 import java.util.Hashtable;
 
-
 /**
  * Used to test
  *

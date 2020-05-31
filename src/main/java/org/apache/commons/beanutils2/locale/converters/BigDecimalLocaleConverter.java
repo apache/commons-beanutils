@@ -26,7 +26,7 @@ import org.apache.commons.beanutils2.ConversionException;
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
  * implementation that converts an incoming
- * locale-sensitive String into a <code>java.math.BigDecimal</code> object,
+ * locale-sensitive String into a {@code java.math.BigDecimal} object,
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
@@ -35,14 +35,14 @@ import org.apache.commons.beanutils2.ConversionException;
 
 public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      */
     public BigDecimalLocaleConverter() {
@@ -66,7 +66,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
      */
@@ -91,10 +91,10 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public BigDecimalLocaleConverter(final Locale locale, final String pattern) {
 
@@ -107,7 +107,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * if a conversion error occurs.
      *
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
@@ -120,7 +120,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * that will return the specified default value
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the convertion.
+     * for the conversion.
      *
      * @param defaultValue  The default value to be returned
      */
@@ -146,7 +146,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
@@ -173,11 +173,11 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the convertion.
+     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
 
@@ -191,7 +191,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      *
      * @param defaultValue  The default value to be returned
      * @param locale        The locale
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
@@ -204,7 +204,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * BigDecimal type.
      *
      * @param value The input object to be converted
-     * @param pattern The pattern is used for the convertion
+     * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
      * @throws ConversionException if conversion cannot be performed
@@ -225,7 +225,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
             return new BigDecimal(result.toString());
         }
         catch (final NumberFormatException ex) {
-            throw new ConversionException("Suplied number is not of type BigDecimal: " + result);
+            throw new ConversionException("Supplied number is not of type BigDecimal: " + result);
         }
 
     }

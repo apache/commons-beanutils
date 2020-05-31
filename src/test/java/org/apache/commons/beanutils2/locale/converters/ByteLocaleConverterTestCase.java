@@ -24,13 +24,13 @@ package org.apache.commons.beanutils2.locale.converters;
 
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    // ---------------------------------------------------------- Constructors
+
 
     public ByteLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+
 
     /**
      * Set up instance variables required by this test case.
@@ -50,7 +50,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         expectedDecimalValue    = "123.56";
         expectedIntegerValue    = "123";
 
-
         defaultValue  = new Byte("99");
         expectedValue = new Byte(expectedIntegerValue);
 
@@ -65,7 +64,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     }
 
 
-    // ------------------------------------------------------------------------
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
@@ -78,12 +76,10 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
                                                   localizedIntegerPattern,
                                                   true);
 
-
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
-
 
         // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
@@ -93,13 +89,11 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Byte("0"));
 
-
         // **************************************************************************
         // Convert with non-localized pattern
         // **************************************************************************
         convertValueWithPattern(converter, "(B)", "123", defaultIntegerPattern, new Byte("123"));
         convertValueWithPattern(converter, "(B-2)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
-
 
         // **************************************************************************
         // Convert with specified type
@@ -110,13 +104,11 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // **************************************************************************
         //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
-
         // ------------- Construct with non-localized pattern ------------
         converter = new ByteLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultIntegerPattern,
                                                   false);
-
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -161,7 +153,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
 
     /**
@@ -178,9 +169,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertInvalid(converter, null);
         convertNull(converter, null);
 
-
     }
-
 
     /**
      * Test Converter(Locale, locPattern) constructor
@@ -195,7 +184,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
 
     }
 
@@ -262,8 +250,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertNull(converter, defaultValue);
 
     }
-
-
 
 }
 

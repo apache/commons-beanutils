@@ -269,7 +269,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map<Object, Object> makeFullMap() {
+    public Map<String, Object> makeFullMap() {
         // note: These values must match (i.e. .equals() must return true)
         // those returned from getSampleValues().
         final BeanWithProperties bean = new BeanWithProperties();
@@ -287,7 +287,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     @Override
-    public Map<Object, Object> makeEmptyMap() {
+    public Map<String, Object> makeEmptyMap() {
         return new BeanMap();
     }
 
@@ -365,7 +365,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     public void testMethodMutator() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
-        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
+        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
 
@@ -374,14 +374,14 @@ public class BeanMapTestCase extends AbstractTestMap {
      */
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
-        assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
-        assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
-        assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
-        assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
-        assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
-        assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
-        assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
-        assertEquals("Double.TYPE",    new Double("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
+        assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).apply("true"));
+        assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).apply("BCD"));
+        assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).apply("1"));
+        assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).apply("2"));
+        assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
+        assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).apply("4"));
+        assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).apply("5"));
+        assertEquals("Double.TYPE",    new Double("6"),     beanMap.getTypeTransformer(Double.TYPE).apply("6"));
     }
 
     /**
@@ -466,7 +466,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         }
 
         try {
-            final Map<Object, Object> map = new BeanMap(new BeanThrowingExceptions());
+            final Map<String, Object> map = new BeanMap(new BeanThrowingExceptions());
             map.put("valueThrowingException", "value");
             fail("Setter exception - expected IllegalArgumentException");
         } catch (final IllegalArgumentException e) {

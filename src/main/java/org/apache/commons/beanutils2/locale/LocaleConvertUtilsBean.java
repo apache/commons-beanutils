@@ -92,15 +92,15 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-    // ----------------------------------------------------- Instance Variables
 
-    /** The locale - default for convertion. */
+
+    /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
     /** Indicate whether the pattern is localized or not */
     private boolean applyLocalized = false;
 
-    /** The <code>Log</code> instance for this class. */
+    /** The {@code Log} instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /** Every entry of the mapConverters is:
@@ -109,7 +109,7 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-    // --------------------------------------------------------- Constructors
+
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -121,7 +121,7 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-    // --------------------------------------------------------- Properties
+
 
     /**
      * getter for defaultLocale.
@@ -149,8 +149,8 @@ public class LocaleConvertUtilsBean {
     /**
      * getter for applyLocalized
      *
-     * @return <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @return {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public boolean getApplyLocalized() {
         return applyLocalized;
@@ -159,14 +159,14 @@ public class LocaleConvertUtilsBean {
     /**
      * setter for applyLocalized
      *
-     * @param newApplyLocalized <code>true</code> if pattern is localized,
-     * otherwise <code>false</code>
+     * @param newApplyLocalized {@code true} if pattern is localized,
+     * otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
 
-    // --------------------------------------------------------- Methods
+
 
     /**
      * Convert the specified locale-sensitive value into a String.
@@ -186,7 +186,7 @@ public class LocaleConvertUtilsBean {
      * using the conversion pattern.
      *
      * @param value The Value to be converted
-     * @param pattern       The convertion pattern
+     * @param pattern       The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -198,11 +198,11 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified locale-sensitive value into a String
-     * using the paticular convertion pattern.
+     * using the particular conversion pattern.
      *
      * @param value The Value to be converted
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -233,12 +233,12 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible) using the convertion pattern. Otherwise, return a String
+     * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -251,13 +251,13 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible) using the convertion pattern. Otherwise, return a String
+     * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.
      *
      * @param value The String scalar value to be converted
      * @param clazz The Data type to which this value should be converted.
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -287,11 +287,11 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the convertion pattern.
+     * specified class (if possible) using the conversion pattern.
      *
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -320,12 +320,12 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Convert an array of specified values to an array of objects of the
-     * specified class (if possible) using the convertion pattern.
+     * specified class (if possible) using the conversion pattern.
      *
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
      * @param locale The locale
-     * @param pattern The convertion pattern
+     * @param pattern The conversion pattern
      * @return the converted value
      *
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
@@ -353,7 +353,7 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Register a custom {@link LocaleConverter} for the specified destination
-     * <code>Class</code>, replacing any previously registered converter.
+     * {@code Class}, replacing any previously registered converter.
      *
      * @param converter The LocaleConverter to be registered
      * @param clazz The Destination class for conversions performed by this
@@ -380,7 +380,6 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale
      *
@@ -390,7 +389,6 @@ public class LocaleConvertUtilsBean {
 
         mapConverters.remove(locale);
     }
-
 
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale and Class.
@@ -406,7 +404,7 @@ public class LocaleConvertUtilsBean {
     /**
      * Look up and return any registered {@link LocaleConverter} for the specified
      * destination class and locale; if there is no registered Converter, return
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param clazz Class for which to return a registered Converter
      * @param locale The Locale
@@ -425,7 +423,7 @@ public class LocaleConvertUtilsBean {
 
     /**
      * Look up and return any registered map instance for the specified locale;
-     * if there is no registered one, return <code>null</code>.
+     * if there is no registered one, return {@code null}.
      *
      * @param locale The Locale
      * @return The map instance contains the all {@link LocaleConverter} types for
@@ -485,7 +483,7 @@ public class LocaleConvertUtilsBean {
         converter.put(String.class, new StringLocaleConverter(locale, applyLocalized));
 
         // conversion format patterns of java.sql.* types should correspond to default
-        // behaviour of toString and valueOf methods of these classes
+        // behavior of toString and valueOf methods of these classes
         converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
         converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
         converter.put( java.sql.Timestamp.class,

@@ -33,16 +33,6 @@ import junit.framework.TestSuite;
 public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
     /**
-     * Construct a new Date test case.
-     * @param name Test Name
-     */
-    public SqlTimestampConverterTestCase(final String name) {
-        super(name);
-    }
-
-    // ------------------------------------------------------------------------
-
-    /**
      * Create Test Suite
      * @return test suite
      */
@@ -50,7 +40,26 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimestampConverterTestCase.class);
     }
 
-    // ------------------------------------------------------------------------
+
+
+    /**
+     * Construct a new Date test case.
+     * @param name Test Name
+     */
+    public SqlTimestampConverterTestCase(final String name) {
+        super(name);
+    }
+
+
+
+    /**
+     * Return the expected type
+     * @return The expected type
+     */
+    @Override
+    protected Class<?> getExpectedType() {
+        return Timestamp.class;
+    }
 
     private boolean isUSFormatWithComma() {
         // BEANUTILS-495 workaround - sometimes Java 9 expects "," in date even if
@@ -60,48 +69,22 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     }
 
     /**
-     * Test Date Converter with no default value
+     * Create the Converter with no default value.
+     * @return A new Converter
      */
     @Override
-    public void testLocale() {
+    protected DateTimeConverter makeConverter() {
+        return new SqlTimestampConverter();
+    }
 
-        // Re-set the default Locale to Locale.US
-        final Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
-        isUSFormatWithComma();
-
-
-        // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
-        converter.setUseLocaleFormat(true);
-
-        String pattern; // SHORT style Date & Time format for US Locale
-        String testString;
-        if (isUSFormatWithComma()) {
-            pattern = "M/d/yy, h:mm a";
-            testString = "3/21/06, 3:06 PM";
-        } else {
-            // More regular pattern for Java 8 and earlier
-            pattern = "M/d/yy h:mm a";
-            testString = "3/21/06 3:06 PM";
-        }
-
-
-        // Valid String --> Type Conversion
-        final Object expected = toType(testString, pattern, null);
-        validConversion(converter, expected, testString);
-
-        // Invalid Conversions
-        invalidConversion(converter, null);
-        invalidConversion(converter, "");
-        invalidConversion(converter, "13:05 pm");
-        invalidConversion(converter, "11:05 p");
-        invalidConversion(converter, "11.05 pm");
-        invalidConversion(converter, new Integer(2));
-
-        // Restore the default Locale
-        Locale.setDefault(defaultLocale);
-
+    /**
+     * Create the Converter with a default value.
+     * @param defaultValue The default value
+     * @return A new Converter
+     */
+    @Override
+    protected DateTimeConverter makeConverter(final Object defaultValue) {
+        return new SqlTimestampConverter(defaultValue);
     }
 
     /**
@@ -127,31 +110,46 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     }
 
     /**
-     * Create the Converter with no default value.
-     * @return A new Converter
+     * Test Date Converter with no default value
      */
     @Override
-    protected DateTimeConverter makeConverter() {
-        return new SqlTimestampConverter();
-    }
+    public void testLocale() {
 
-    /**
-     * Create the Converter with a default value.
-     * @param defaultValue The default value
-     * @return A new Converter
-     */
-    @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
-        return new SqlTimestampConverter(defaultValue);
-    }
+        // Re-set the default Locale to Locale.US
+        final Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+        isUSFormatWithComma();
 
-    /**
-     * Return the expected type
-     * @return The expected type
-     */
-    @Override
-    protected Class<?> getExpectedType() {
-        return Timestamp.class;
+        // Create & Configure the Converter
+        final DateTimeConverter converter = makeConverter();
+        converter.setUseLocaleFormat(true);
+
+        String pattern; // SHORT style Date & Time format for US Locale
+        String testString;
+        if (isUSFormatWithComma()) {
+            pattern = "M/d/yy, h:mm a";
+            testString = "3/21/06, 3:06 PM";
+        } else {
+            // More regular pattern for Java 8 and earlier
+            pattern = "M/d/yy h:mm a";
+            testString = "3/21/06 3:06 PM";
+        }
+
+        // Valid String --> Type Conversion
+        final Object expected = toType(testString, pattern, null);
+        validConversion(converter, expected, testString);
+
+        // Invalid Conversions
+        invalidConversion(converter, null);
+        invalidConversion(converter, "");
+        invalidConversion(converter, "13:05 pm");
+        invalidConversion(converter, "11:05 p");
+        invalidConversion(converter, "11.05 pm");
+        invalidConversion(converter, new Integer(2));
+
+        // Restore the default Locale
+        Locale.setDefault(defaultLocale);
+
     }
 
     /**

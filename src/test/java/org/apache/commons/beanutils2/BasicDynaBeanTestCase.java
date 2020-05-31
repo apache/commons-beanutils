@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,10 +30,9 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
- * <p>Test Case for the <code>BasicDynaBean</code> implementation class.
- * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
+ * <p>Test Case for the {@code BasicDynaBean} implementation class.
+ * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
  *
  */
@@ -43,18 +40,15 @@ import junit.framework.TestSuite;
 public class BasicDynaBeanTestCase extends TestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
-
 
     /**
      * The basic test bean for each test.
      */
     protected DynaBean bean = null;
 
-
     /**
      * The set of property names we expect to have returned when calling
-     * <code>getDynaProperties()</code>.  You should update this list
+     * {@code getDynaProperties()}.  You should update this list
      * when new properties are added to TestBean.
      */
     protected final static String[] properties = {
@@ -77,8 +71,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     };
 
 
-    // ---------------------------------------------------------- Constructors
-
 
     /**
      * Construct a new instance of this test case.
@@ -91,8 +83,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -110,9 +100,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("booleanSecond", new Boolean(true));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
-        final int intArray[] = { 0, 10, 20, 30, 40 };
+        final int[] intArray = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
-        final int intIndexed[] = { 0, 10, 20, 30, 40 };
+        final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
         bean.set("intProperty", new Integer(123));
         final List<String> listIndexed = new ArrayList<>();
@@ -133,16 +123,15 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("mappedIntProperty", mappedIntProperty);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
-        final String stringArray[] =
+        final String[] stringArray =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        final String stringIndexed[] =
+        final String[] stringIndexed =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
 
     }
-
 
     /**
      * Return the tests included in this test suite.
@@ -152,7 +141,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         return new TestSuite(BasicDynaBeanTestCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -164,9 +152,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
-
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**
@@ -194,9 +179,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>booleanProperty</code>.
+     * Positive getDynaProperty on property {@code booleanProperty}.
      */
     public void testGetDescriptorBoolean() {
 
@@ -204,9 +188,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>doubleProperty</code>.
+     * Positive getDynaProperty on property {@code doubleProperty}.
      */
     public void testGetDescriptorDouble() {
 
@@ -214,9 +197,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>floatProperty</code>.
+     * Positive getDynaProperty on property {@code floatProperty}.
      */
     public void testGetDescriptorFloat() {
 
@@ -224,9 +206,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>intProperty</code>.
+     * Positive getDynaProperty on property {@code intProperty}.
      */
     public void testGetDescriptorInt() {
 
@@ -234,9 +215,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>longProperty</code>.
+     * Positive getDynaProperty on property {@code longProperty}.
      */
     public void testGetDescriptorLong() {
 
@@ -244,9 +224,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>booleanSecond</code>
+     * Positive getDynaProperty on property {@code booleanSecond}
      * that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
@@ -255,9 +234,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>shortProperty</code>.
+     * Positive getDynaProperty on property {@code shortProperty}.
      */
     public void testGetDescriptorShort() {
 
@@ -265,9 +243,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive getDynaProperty on property <code>stringProperty</code>.
+     * Positive getDynaProperty on property {@code stringProperty}.
      */
     public void testGetDescriptorString() {
 
@@ -275,16 +252,15 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Positive test for getDynaPropertys().  Each property name
-     * listed in <code>properties</code> should be returned exactly once.
+     * Positive test for getDynaProperties().  Each property name
+     * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {
 
-        final DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
+        final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
-        final int count[] = new int[properties.length];
+        final int[] count = new int[properties.length];
         for (final DynaProperty element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
@@ -303,7 +279,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getIndexedProperty invalid arguments.
      */
@@ -318,9 +293,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
@@ -388,15 +361,12 @@ public class BasicDynaBeanTestCase extends TestCase {
 
         }
 
-
     }
-
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testGetMappedArguments() {
-
 
         try {
             final Object value = bean.get("mappedProperty", "unknown");
@@ -405,9 +375,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t + " instead of returning null");
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
@@ -439,7 +407,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on getSimpleProperty invalid arguments.
      */
@@ -456,7 +423,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a boolean property.
      */
@@ -467,13 +433,12 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() == true);
+                    (Boolean) value);
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a double property.
@@ -492,7 +457,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a float property.
@@ -513,7 +477,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a int property.
      */
@@ -531,7 +494,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a long property.
@@ -551,7 +513,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test getSimpleProperty on a short property.
      */
@@ -569,7 +530,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test getSimpleProperty on a String property.
@@ -589,9 +549,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Test <code>contains()</code> method for mapped properties.
+     * Test {@code contains()} method for mapped properties.
      */
     public void testMappedContains() {
 
@@ -602,7 +561,6 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Exception: " + t);
         }
 
-
         try {
             assertTrue("Can not see unknown key",
                     !bean.contains("mappedProperty", "Unknown Key"));
@@ -612,9 +570,8 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
-     * Test <code>remove()</code> method for mapped properties.
+     * Test {@code remove()} method for mapped properties.
      */
     public void testMappedRemove() {
 
@@ -639,7 +596,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test serialization and deserialization.
@@ -714,7 +670,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Corner cases on setIndexedProperty invalid arguments.
      */
@@ -730,7 +685,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
@@ -799,9 +753,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Threw " + t);
         }
 
-
     }
-
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
@@ -826,9 +778,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             fail("Finding fourth value threw " + t);
         }
 
-
     }
-
 
     /**
      * Test setSimpleProperty on a boolean property.
@@ -848,7 +798,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a double property.
@@ -870,7 +819,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a float property.
      */
@@ -891,7 +839,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a int property.
      */
@@ -910,7 +857,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a long property.
@@ -931,7 +877,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Test setSimpleProperty on a short property.
      */
@@ -950,7 +895,6 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
     /**
      * Test setSimpleProperty on a String property.
@@ -971,17 +915,15 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
-
 
     /**
-     * Create and return a <code>DynaClass</code> instance for our test
-     * <code>DynaBean</code>.
+     * Create and return a {@code DynaClass} instance for our test
+     * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int[] intArray = new int[0];
+        final String[] stringArray = new String[0];
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,
@@ -1007,7 +949,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
     }
 
-
     /**
      * Base for testGetDescriptorXxxxx() series of tests.
      *
@@ -1026,6 +967,5 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
     }
-
 
 }

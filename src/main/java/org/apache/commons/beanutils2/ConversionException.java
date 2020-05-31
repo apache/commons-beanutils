@@ -15,13 +15,11 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 /**
  * <p>A <strong>ConversionException</strong> indicates that a call to
- * <code>Converter.convert()</code> has failed to complete successfully.
+ * {@code Converter.convert()} has failed to complete successfully.
  *
  * @since 1.3
  */
@@ -30,7 +28,7 @@ public class ConversionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    // ----------------------------------------------------------- Constructors
+
 
     /**
      * Construct a new exception with the specified message.
@@ -42,7 +40,6 @@ public class ConversionException extends RuntimeException {
         super(message);
 
     }
-
 
     /**
      * Construct a new exception with the specified message and root cause.
@@ -57,7 +54,6 @@ public class ConversionException extends RuntimeException {
 
     }
 
-
     /**
      * Construct a new exception with the specified root cause.
      *
@@ -71,12 +67,10 @@ public class ConversionException extends RuntimeException {
     }
 
 
-    // ------------------------------------------------------------- Properties
-
 
     /**
-     * The root cause of this <code>ConversionException</code>, compatible with
-     * JDK 1.4's extensions to <code>java.lang.Throwable</code>.
+     * The root cause of this {@code ConversionException}, compatible with
+     * JDK 1.4's extensions to {@code java.lang.Throwable}.
      */
     protected Throwable cause = null;
 
@@ -88,6 +82,5 @@ public class ConversionException extends RuntimeException {
     public Throwable getCause() {
         return this.cause;
     }
-
 
 }

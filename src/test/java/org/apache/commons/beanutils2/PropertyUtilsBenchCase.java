@@ -15,9 +15,7 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +24,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
  *
@@ -34,8 +31,6 @@ import junit.framework.TestSuite;
 
 public class PropertyUtilsBenchCase extends TestCase {
 
-
-    // ------------------------------------------------------------ Constructors
 
 
     /**
@@ -49,8 +44,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
-    // ------------------------------------------------------ Instance Variables
 
 
     // Basic loop counter
@@ -71,8 +64,6 @@ public class PropertyUtilsBenchCase extends TestCase {
     // PropertyUtilsBean instance to be used
     private PropertyUtilsBean pu = null;
 
-
-    // ---------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -130,7 +121,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
@@ -139,7 +129,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -157,9 +146,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
-
-    // ------------------------------------------------- Individual Test Methods
 
 
     // Time copyProperties() from a bean
@@ -194,7 +180,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
     // Time copyProperties() from a DynaBean
     public void testCopyPropertiesDyna() throws Exception {
 
@@ -226,7 +211,6 @@ public class PropertyUtilsBenchCase extends TestCase {
                            ", time=" + (stop - start));
 
     }
-
 
     // Time copyProperties() from a Map
     public void testCopyPropertiesMap() throws Exception {
@@ -260,8 +244,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     }
 
-
-    // --------------------------------------------------------- Support Methods
 
 
 }

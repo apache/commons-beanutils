@@ -46,7 +46,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
 
     /**
      *
-     * Creates a new instance of <code>DefaultIntrospectionContext</code> and sets
+     * Creates a new instance of {@code DefaultIntrospectionContext} and sets
      * the current class for introspection.
      *
      * @param cls the current class

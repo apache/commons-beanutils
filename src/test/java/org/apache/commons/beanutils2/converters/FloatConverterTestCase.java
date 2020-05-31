@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestSuite;
 
-
 /**
  * Test Case for the FloatConverter class.
  *
@@ -29,15 +28,36 @@ import junit.framework.TestSuite;
 
 public class FloatConverterTestCase extends NumberConverterTestBase {
 
+    public static TestSuite suite() {
+        return new TestSuite(FloatConverterTestCase.class);
+    }
+
+
+
     private Converter converter = null;
 
-    // ------------------------------------------------------------------------
+
 
     public FloatConverterTestCase(final String name) {
         super(name);
     }
 
-    // ------------------------------------------------------------------------
+    @Override
+    protected Class<?> getExpectedType() {
+        return Float.class;
+    }
+
+    @Override
+    protected NumberConverter makeConverter() {
+        return new FloatConverter();
+    }
+
+
+
+    @Override
+    protected NumberConverter makeConverter(final Object defaultValue) {
+        return new FloatConverter(defaultValue);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -48,33 +68,34 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
         numbers[3] = new Float("23");
     }
 
-    public static TestSuite suite() {
-        return new TestSuite(FloatConverterTestCase.class);
-    }
-
     @Override
     public void tearDown() throws Exception {
         converter = null;
     }
 
-    // ------------------------------------------------------------------------
 
-    @Override
-    protected NumberConverter makeConverter() {
-        return new FloatConverter();
+
+    /**
+     * Test Invalid Amounts (too big/small)
+     */
+    public void testInvalidAmount() {
+        final Converter converter = makeConverter();
+        final Class<?> clazz = Float.class;
+
+        final Double max     = new Double(Float.MAX_VALUE);
+        final Double tooBig  = new Double(Double.MAX_VALUE);
+
+        // Maximum
+        assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
+
+        // Too Large
+        try {
+            assertEquals("Too Big", null, converter.convert(clazz, tooBig));
+            fail("More than maximum, expected ConversionException");
+        } catch (final Exception e) {
+            // expected result
+        }
     }
-
-    @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
-        return new FloatConverter(defaultValue);
-    }
-
-    @Override
-    protected Class<?> getExpectedType() {
-        return Float.class;
-    }
-
-    // ------------------------------------------------------------------------
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -141,29 +162,6 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
                 expected[i].floatValue(),
                 ((Float)converter.convert(null,input[i])).floatValue(),
                 0.00001);
-        }
-    }
-
-
-    /**
-     * Test Invalid Amounts (too big/small)
-     */
-    public void testInvalidAmount() {
-        final Converter converter = makeConverter();
-        final Class<?> clazz = Float.class;
-
-        final Double max     = new Double(Float.MAX_VALUE);
-        final Double tooBig  = new Double(Double.MAX_VALUE);
-
-        // Maximum
-        assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
-
-        // Too Large
-        try {
-            assertEquals("Too Big", null, converter.convert(clazz, tooBig));
-            fail("More than maximum, expected ConversionException");
-        } catch (final Exception e) {
-            // expected result
         }
     }
 }

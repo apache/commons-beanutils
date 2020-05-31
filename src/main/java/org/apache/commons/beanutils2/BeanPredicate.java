@@ -18,35 +18,36 @@
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Predicate;
 
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Predicate implementation that applies the given <code>Predicate</code>
+ * <p>Predicate implementation that applies the given {@code Predicate}
  * to the result of calling the given property getter.
  * </p>
  *
+ * @param <T> the type of the input to the predicate
  */
-public class BeanPredicate implements Predicate {
+public class BeanPredicate<T> implements Predicate<T> {
 
     private final Log log = LogFactory.getLog(this.getClass());
 
     /** Name of the property whose value will be predicated */
     private String propertyName;
-    /** <code>Predicate</code> to be applied to the property value */
-    private Predicate predicate;
+    /** {@code Predicate} to be applied to the property value */
+    private Predicate<T> predicate;
 
     /**
-     * Constructs a <code>BeanPredicate</code> that applies the given
-     * <code>Predicate</code> to the named property value.
+     * Constructs a {@code BeanPredicate} that applies the given
+     * {@code Predicate} to the named property value.
      * @param propertyName the name of the property whose value is to be predicated,
      * not null
-     * @param predicate the <code>Predicate</code> to be applied,
+     * @param predicate the {@code Predicate} to be applied,
      * not null
      */
-    public BeanPredicate(final String propertyName, final Predicate predicate) {
+    public BeanPredicate(final String propertyName, final Predicate<T> predicate) {
         this.propertyName = propertyName;
         this.predicate = predicate;
     }
@@ -55,18 +56,17 @@ public class BeanPredicate implements Predicate {
      * Evaluates the given object by applying the {@link #getPredicate()}
      * to a property value named by {@link #getPropertyName()}.
      *
-     * @param object The object being evaluated
+     * @param object The object to test
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
     @Override
-    public boolean evaluate(final Object object) {
-
+    public boolean test(final Object object) {
         boolean evaluation = false;
 
         try {
-            final Object propValue = PropertyUtils.getProperty( object, propertyName );
-            evaluation = predicate.evaluate(propValue);
+            final T propValue = (T) PropertyUtils.getProperty(object, propertyName);
+            evaluation = predicate.test(propValue);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
             log.error("ERROR: " + errorMsg, e);
@@ -107,20 +107,20 @@ public class BeanPredicate implements Predicate {
     }
 
     /**
-     * Gets the <code>Predicate</code> to be applied to the value of the named property
-     * during {@link #evaluate}.
-     * @return <code>Predicate</code>, not null
+     * Gets the {@code Predicate} to be applied to the value of the named property
+     * during {@link #test(Object)}.
+     * @return {@code Predicate}, not null
      */
-    public Predicate getPredicate() {
+    public Predicate<T> getPredicate() {
         return predicate;
     }
 
     /**
-     * Sets the <code>Predicate</code> to be applied to the value of the named property
-     * during {@link #evaluate(Object)}.
-     * @param predicate <code>Predicate</code>, not null
+     * Sets the {@code Predicate} to be applied to the value of the named property
+     * during {@link #test(Object)}.
+     * @param predicate {@code Predicate}, not null
      */
-    public void setPredicate(final Predicate predicate) {
+    public void setPredicate(final Predicate<T> predicate) {
         this.predicate = predicate;
     }
 

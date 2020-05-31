@@ -31,7 +31,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
@@ -39,7 +38,7 @@ import org.junit.Test;
 
 public class IndexedPropertyTestCase {
 
-    // ---------------------------------------------------- Instance Variables
+
 
     /**
      * The test bean for each test.
@@ -53,8 +52,6 @@ public class IndexedPropertyTestCase {
     private List<Object> newList;
     private ArrayList<Object> arrayList;
 
-
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -102,7 +99,6 @@ public class IndexedPropertyTestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test IndexedPropertyDescriptor for an Array
@@ -114,7 +110,7 @@ public class IndexedPropertyTestCase {
         assertEquals("Not IndexedPropertyDescriptor",
                      IndexedPropertyDescriptor.class,
                      descriptor.getClass());
-        assertEquals("PropertDescriptor Type invalid",
+        assertEquals("PropertyDescriptor Type invalid",
                      testArray.getClass(),
                      descriptor.getPropertyType());
     }
@@ -131,7 +127,7 @@ public class IndexedPropertyTestCase {
             assertEquals("Not IndexedPropertyDescriptor",
                          IndexedPropertyDescriptor.class, descriptor.getClass());
         }
-        assertEquals("PropertDescriptor Type invalid",
+        assertEquals("PropertyDescriptor Type invalid",
                      List.class,
                      descriptor.getPropertyType());
     }
@@ -147,7 +143,7 @@ public class IndexedPropertyTestCase {
             assertEquals("Not IndexedPropertyDescriptor",
                     IndexedPropertyDescriptor.class, descriptor.getClass());
         }
-        assertEquals("PropertDescriptor Type invalid",
+        assertEquals("PropertyDescriptor Type invalid",
                      ArrayList.class,
                      descriptor.getPropertyType());
     }
@@ -210,7 +206,7 @@ public class IndexedPropertyTestCase {
      * Test Write Method for a List
      *
      * JDK 1.3.1_04: Test Passes
-     * JDK 1.4.2_05: Test Fails - setter whith java.util.List argument not returned
+     * JDK 1.4.2_05: Test Fails - setter which java.util.List argument not returned
      *                            by IndexedPropertyDescriptor.getWriteMethod();
      */
     @Test
@@ -277,7 +273,7 @@ public class IndexedPropertyTestCase {
      * Test getting an array property as a String
      *
      * NOTE: Why does retrieving array just return the first element in the array, whereas
-     *       retrieveing a List returns a comma separated list of all the elements?
+     *       retrieving a List returns a comma separated list of all the elements?
      */
     @Test
     public void testGetArrayAsString() throws Exception {
@@ -370,7 +366,6 @@ public class IndexedPropertyTestCase {
         }
     }
 
-
     /**
      * Test setting an indexed item of an Array using setProperty("name[x]", value)
      */
@@ -409,7 +404,6 @@ public class IndexedPropertyTestCase {
         }
     }
 
-
     /**
      * Test setting an indexed item of a List using setProperty("name[x]", value)
      */
@@ -427,7 +421,6 @@ public class IndexedPropertyTestCase {
         propertyUtilsBean.setIndexedProperty(bean, "stringList", 1, "modified-1");
         assertEquals("modified-1", bean.getStringList(1));
     }
-
 
     /**
      * Test getting an ArrayList

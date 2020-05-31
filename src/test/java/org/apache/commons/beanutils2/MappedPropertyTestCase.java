@@ -21,12 +21,12 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the <code>MappedPropertyDescriptor</code>.</p>
+ * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
  *
  */
 public class MappedPropertyTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
+
 
     /**
      * Construct a new instance of this test case.
@@ -37,7 +37,7 @@ public class MappedPropertyTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
+
 
     /**
      * Run this Test
@@ -67,7 +67,7 @@ public class MappedPropertyTestCase extends TestCase {
     public void tearDown() {
     }
 
-    // ------------------------------------------------ Individual Test Methods
+
 
     /**
      * Test valid method name
@@ -214,7 +214,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test property with any two args
      */
@@ -261,7 +260,6 @@ public class MappedPropertyTestCase extends TestCase {
         }
     }
 
-
     /**
      * Test 'public' method in parent
      */
@@ -290,7 +288,6 @@ public class MappedPropertyTestCase extends TestCase {
         } catch (final Exception ex) {
         }
     }
-
 
     /**
      * Test Interface with mapped property

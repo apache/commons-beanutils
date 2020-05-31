@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>A base class for decorators providing <code>Map</code> behavior on
+ * <p>A base class for decorators providing {@code Map} behavior on
  * {@link DynaBean}s.</p>
  *
  * <p>The motivation for this implementation is to provide access to {@link DynaBean}
@@ -54,7 +54,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     private final boolean readOnly;
     private transient Set<K> keySet;
 
-    // ------------------- Constructors ----------------------------------
+
 
     /**
      * Constructs a read only Map for the specified
@@ -71,8 +71,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Construct a Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
-     * @param readOnly <code>true</code> if the Map is read only
-     * otherwise <code>false</code>
+     * @param readOnly {@code true} if the Map is read only
+     * otherwise {@code false}
      * @throws IllegalArgumentException if the {@link DynaBean} is null.
      */
     public BaseDynaBeanMapDecorator(final DynaBean dynaBean, final boolean readOnly) {
@@ -84,20 +84,20 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
 
-    // ------------------- public Methods --------------------------------
+
 
 
     /**
      * Indicate whether the Map is read only.
      *
-     * @return <code>true</code> if the Map is read only,
-     * otherwise <code>false</code>.
+     * @return {@code true} if the Map is read only,
+     * otherwise {@code false}.
      */
     public boolean isReadOnly() {
         return readOnly;
     }
 
-    // ------------------- java.util.Map Methods -------------------------
+
 
     /**
      * clear() operation is not supported.
@@ -114,14 +114,14 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * value for one (or more) of its properties.
      *
      * @param key The {@link DynaBean}'s property name
-     * @return <code>true</code> if one of the {@link DynaBean}'s
+     * @return {@code true} if one of the {@link DynaBean}'s
      * properties contains a specified value.
      */
     @Override
     public boolean containsKey(final Object key) {
         final DynaClass dynaClass = getDynaBean().getDynaClass();
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(toString(key));
-        return dynaProperty == null ? false : true;
+        return dynaProperty != null;
     }
 
     /**
@@ -129,15 +129,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * a specified value.
      *
      * @param value The value to check for.
-     * @return <code>true</code> if one of the the {@link DynaBean}'s
+     * @return {@code true} if one of the the {@link DynaBean}'s
      * properties contains the specified value, otherwise
-     * <code>false</code>.
+     * {@code false}.
      */
     @Override
     public boolean containsValue(final Object value) {
         final DynaProperty[] properties = getDynaProperties();
-        for (final DynaProperty propertie : properties) {
-            final String key = propertie.getName();
+        for (final DynaProperty property : properties) {
+            final String key = property.getName();
             final Object prop = getDynaBean().get(key);
             if (value == null) {
                 if (prop == null) {
@@ -156,7 +156,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * <p>Returns the Set of the property/value mappings
      * in the decorated {@link DynaBean}.</p>
      *
-     * <p>Each element in the Set is a <code>Map.Entry</code>
+     * <p>Each element in the Set is a {@code Map.Entry}
      * type.</p>
      *
      * @return An unmodifiable set of the DynaBean
@@ -166,9 +166,9 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Set<Map.Entry<K, Object>> entrySet() {
         final DynaProperty[] properties = getDynaProperties();
         final Set<Map.Entry<K, Object>> set = new HashSet<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            final K key = convertKey(propertie.getName());
-            final Object value = getDynaBean().get(propertie.getName());
+        for (final DynaProperty property : properties) {
+            final K key = convertKey(property.getName());
+            final Object value = getDynaBean().get(property.getName());
             set.add(new MapEntry<>(key, value));
         }
         return Collections.unmodifiableSet(set);
@@ -190,8 +190,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Indicate whether the decorated {@link DynaBean} has
      * any properties.
      *
-     * @return <code>true</code> if the {@link DynaBean} has
-     * no properties, otherwise <code>false</code>.
+     * @return {@code true} if the {@link DynaBean} has
+     * no properties, otherwise {@code false}.
      */
     @Override
     public boolean isEmpty() {
@@ -218,8 +218,8 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         // Create a Set of the keys
         final DynaProperty[] properties = getDynaProperties();
         Set<K> set = new HashSet<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            set.add(convertKey(propertie.getName()));
+        for (final DynaProperty property : properties) {
+            set.add(convertKey(property.getName()));
         }
         set = Collections.unmodifiableSet(set);
 
@@ -241,7 +241,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * @param value The value for the specified property.
      * @return The previous property's value.
      * @throws UnsupportedOperationException if
-     * <code>isReadOnly()</code> is true.
+     * {@code isReadOnly()} is true.
      */
     @Override
     public Object put(final K key, final Object value) {
@@ -259,7 +259,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      *
      * @param map The Map of values to copy.
      * @throws UnsupportedOperationException if
-     * <code>isReadOnly()</code> is true.
+     * {@code isReadOnly()} is true.
      */
     @Override
     public void putAll(final Map<? extends K, ? extends Object> map) {
@@ -303,15 +303,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public Collection<Object> values() {
         final DynaProperty[] properties = getDynaProperties();
         final List<Object> values = new ArrayList<>(properties.length);
-        for (final DynaProperty propertie : properties) {
-            final String key = propertie.getName();
+        for (final DynaProperty property : properties) {
+            final String key = property.getName();
             final Object value = getDynaBean().get(key);
             values.add(value);
         }
         return Collections.unmodifiableList(values);
     }
 
-    // ------------------- protected Methods -----------------------------
+
 
     /**
      * Provide access to the underlying {@link DynaBean}
@@ -331,7 +331,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      */
     protected abstract K convertKey(String propertyName);
 
-    // ------------------- private Methods -------------------------------
+
 
     /**
      * Convenience method to retrieve the {@link DynaProperty}s
@@ -358,12 +358,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * Map.Entry implementation.
      */
     private static class MapEntry<K> implements Map.Entry<K, Object> {
+
         private final K key;
         private final Object value;
+
         MapEntry(final K key, final Object value) {
             this.key = key;
             this.value = value;
         }
+
         @Override
         public boolean equals(final Object o) {
             if (!(o instanceof Map.Entry)) {
@@ -374,18 +377,22 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
                     (value == null ? e.getValue() == null
                                    : value.equals(e.getValue()));
         }
+
         @Override
         public int hashCode() {
             return key.hashCode() + (value == null ? 0 : value.hashCode());
         }
+
         @Override
         public K getKey() {
             return key;
         }
+
         @Override
         public Object getValue() {
             return value;
         }
+
         @Override
         public Object setValue(final Object value) {
             throw new UnsupportedOperationException();

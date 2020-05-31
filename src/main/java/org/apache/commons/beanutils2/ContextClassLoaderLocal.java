@@ -176,7 +176,7 @@ public class ContextClassLoaderLocal<T> {
      */
     public synchronized void set(final T value) {
         // synchronizing the whole method is a bit slower
-        // but guarentees no subtle threading problems
+        // but guarantees no subtle threading problems
 
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
