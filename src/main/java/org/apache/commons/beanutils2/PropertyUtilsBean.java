@@ -34,6 +34,7 @@ import org.apache.commons.beanutils2.expression.DefaultResolver;
 import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.impl.WeakHashtable;
 
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -124,9 +125,9 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new ConcurrentWeakHashMap();
+        descriptorsCache = new WeakHashtable();
 //        descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new ConcurrentWeakHashMap();
+        mappedDescriptorsCache = new WeakHashtable();
 //        mappedDescriptorsCache.setFast(true);
         introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();

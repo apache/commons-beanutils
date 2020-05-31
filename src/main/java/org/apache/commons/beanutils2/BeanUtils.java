@@ -18,6 +18,8 @@
 
 package org.apache.commons.beanutils2;
 
+import org.apache.commons.logging.impl.WeakHashtable;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -436,6 +438,6 @@ public class BeanUtils {
      * @since 1.8.0
      */
     public static <K, V> Map<K, V> createCache() {
-        return new ConcurrentWeakHashMap<>();
+        return new WeakHashtable();
     }
 }
