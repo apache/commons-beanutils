@@ -1177,26 +1177,26 @@ public class MethodUtils {
      */
     public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
         // does anyone know a better strategy than comparing names?
-        if (!primitiveType.isPrimitive()) {
-            return null;
-        } else if (int.class.equals(primitiveType)) {
-            return Integer.class;
-        } else if (double.class.equals(primitiveType)) {
-            return Double.class;
-        } else if (long.class.equals(primitiveType)) {
-            return Long.class;
+        if (boolean.class.equals(primitiveType)) {
+            return Boolean.class;
         } else if (float.class.equals(primitiveType)) {
             return Float.class;
-        } else if (boolean.class.equals(primitiveType)) {
-            return Boolean.class;
+        } else if (long.class.equals(primitiveType)) {
+            return Long.class;
+        } else if (int.class.equals(primitiveType)) {
+            return Integer.class;
         } else if (short.class.equals(primitiveType)) {
             return Short.class;
         } else if (byte.class.equals(primitiveType)) {
             return Byte.class;
+        } else if (double.class.equals(primitiveType)) {
+            return Double.class;
         } else if (char.class.equals(primitiveType)) {
             return Character.class;
+        } else {
+
+            return null;
         }
-        return null;
     }
 
     /**
@@ -1207,32 +1207,30 @@ public class MethodUtils {
      * null if no match is found
      */
     public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
-        if (Number.class.isAssignableFrom(wrapperType)) {
-            if (Integer.class.equals(wrapperType)) {
-                return int.class;
-            } else if (Double.class.equals(wrapperType)) {
-                return double.class;
-            } else if (Long.class.equals(wrapperType)) {
-                return long.class;
-            } else if (Float.class.equals(wrapperType)) {
-                return float.class;
-            } else if (Short.class.equals(wrapperType)) {
-                return short.class;
-            } else if (Byte.class.equals(wrapperType)) {
-                return byte.class;
-            }
+        // does anyone know a better strategy than comparing names?
+        if (Boolean.class.equals(wrapperType)) {
+            return boolean.class;
+        } else if (Float.class.equals(wrapperType)) {
+            return float.class;
+        } else if (Long.class.equals(wrapperType)) {
+            return long.class;
+        } else if (Integer.class.equals(wrapperType)) {
+            return int.class;
+        } else if (Short.class.equals(wrapperType)) {
+            return short.class;
+        } else if (Byte.class.equals(wrapperType)) {
+            return byte.class;
+        } else if (Double.class.equals(wrapperType)) {
+            return double.class;
+        } else if (Character.class.equals(wrapperType)) {
+            return char.class;
         } else {
-            if (Boolean.class.equals(wrapperType)) {
-                return boolean.class;
-            } else if (Character.class.equals(wrapperType)) {
-                return char.class;
+            final Log log = LogFactory.getLog(MethodUtils.class);
+            if (log.isDebugEnabled()) {
+                log.debug("Not a known primitive wrapper class: " + wrapperType);
             }
+            return null;
         }
-        final Log log = LogFactory.getLog(MethodUtils.class);
-        if (log.isDebugEnabled()) {
-            log.debug("Not a known primitive wrapper class: " + wrapperType);
-        }
-        return null;
     }
 
     /**
@@ -1315,7 +1313,7 @@ public class MethodUtils {
             this.cls = cls;
             this.methodName = methodName;
             this.paramTypes = paramTypes;
-            this.exact = exact;
+            this.exact= exact;
 
             this.hashCode = methodName.length();
         }
