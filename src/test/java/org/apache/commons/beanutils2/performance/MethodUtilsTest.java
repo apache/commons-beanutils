@@ -211,6 +211,33 @@ public class MethodUtilsTest {
         return null;
     }
 
+    public static Class<?> getPrimitiveType7(final Class<?> wrapperType) {
+        // does anyone know a better strategy than comparing names?
+        if (Boolean.class == wrapperType) {
+            return boolean.class;
+        } else if (Float.class == wrapperType) {
+            return float.class;
+        } else if (Long.class == wrapperType) {
+            return long.class;
+        } else if (Integer.class == wrapperType) {
+            return int.class;
+        } else if (Short.class == wrapperType) {
+            return short.class;
+        } else if (Byte.class == wrapperType) {
+            return byte.class;
+        } else if (Double.class == wrapperType) {
+            return double.class;
+        } else if (Character.class == wrapperType) {
+            return char.class;
+        } else {
+            final Log log = LogFactory.getLog(MethodUtils.class);
+            if (log.isDebugEnabled()) {
+                log.debug("Not a known primitive wrapper class: " + wrapperType);
+            }
+            return null;
+        }
+    }
+
     private static final List<Class> ARRAY0 = new ArrayList<Class>(
             Arrays.asList(
                     new Class[]{
@@ -300,6 +327,15 @@ public class MethodUtilsTest {
         for (int i = 0; i < 100000; i++) {
             for (Class c : ARRAY0) {
                 getPrimitiveType6(c);
+            }
+        }
+    }
+
+    @Benchmark
+    public void test7() {
+        for (int i = 0; i < 100000; i++) {
+            for (Class c : ARRAY0) {
+                getPrimitiveType7(c);
             }
         }
     }
