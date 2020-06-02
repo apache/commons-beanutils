@@ -17,6 +17,9 @@
 
 package org.apache.commons.beanutils2;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -25,9 +28,6 @@ import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
@@ -1177,24 +1177,23 @@ public class MethodUtils {
      */
     public static Class<?> getPrimitiveWrapper(final Class<?> primitiveType) {
         // does anyone know a better strategy than comparing names?
-        if (boolean.class.equals(primitiveType)) {
+        if (boolean.class == primitiveType) {
             return Boolean.class;
-        } else if (float.class.equals(primitiveType)) {
+        } else if (float.class == primitiveType) {
             return Float.class;
-        } else if (long.class.equals(primitiveType)) {
+        } else if (long.class == primitiveType) {
             return Long.class;
-        } else if (int.class.equals(primitiveType)) {
+        } else if (int.class == primitiveType) {
             return Integer.class;
-        } else if (short.class.equals(primitiveType)) {
+        } else if (short.class == primitiveType) {
             return Short.class;
-        } else if (byte.class.equals(primitiveType)) {
+        } else if (byte.class == primitiveType) {
             return Byte.class;
-        } else if (double.class.equals(primitiveType)) {
+        } else if (double.class == primitiveType) {
             return Double.class;
-        } else if (char.class.equals(primitiveType)) {
+        } else if (char.class == primitiveType) {
             return Character.class;
         } else {
-
             return null;
         }
     }
@@ -1208,21 +1207,21 @@ public class MethodUtils {
      */
     public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
         // does anyone know a better strategy than comparing names?
-        if (Boolean.class.equals(wrapperType)) {
+        if (Boolean.class == wrapperType) {
             return boolean.class;
-        } else if (Float.class.equals(wrapperType)) {
+        } else if (Float.class == wrapperType) {
             return float.class;
-        } else if (Long.class.equals(wrapperType)) {
+        } else if (Long.class == wrapperType) {
             return long.class;
-        } else if (Integer.class.equals(wrapperType)) {
+        } else if (Integer.class == wrapperType) {
             return int.class;
-        } else if (Short.class.equals(wrapperType)) {
+        } else if (Short.class == wrapperType) {
             return short.class;
-        } else if (Byte.class.equals(wrapperType)) {
+        } else if (Byte.class == wrapperType) {
             return byte.class;
-        } else if (Double.class.equals(wrapperType)) {
+        } else if (Double.class == wrapperType) {
             return double.class;
-        } else if (Character.class.equals(wrapperType)) {
+        } else if (Character.class == wrapperType) {
             return char.class;
         } else {
             final Log log = LogFactory.getLog(MethodUtils.class);
