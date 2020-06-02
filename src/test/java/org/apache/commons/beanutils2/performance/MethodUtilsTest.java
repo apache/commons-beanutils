@@ -20,19 +20,32 @@ import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@State(Scope.Thread)
 public class MethodUtilsTest {
 
-    public static Class<?> getPrimitiveType1(final Class<?> wrapperType) {
+    public static Class<?> getPrimitiveType1Old(final Class<?> wrapperType) {
         // does anyone know a better strategy than comparing names?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
@@ -111,7 +124,33 @@ public class MethodUtilsTest {
     }
 
     public static Class<?> getPrimitiveType4(final Class<?> wrapperType) {
-        // does anyone know a better strategy than comparing names?
+        if (Comparable.class.isAssignableFrom(wrapperType)) {
+            if (Integer.class.equals(wrapperType)) {
+                return int.class;
+            } else if (Double.class.equals(wrapperType)) {
+                return double.class;
+            } else if (Boolean.class.equals(wrapperType)) {
+                return boolean.class;
+            } else if (Long.class.equals(wrapperType)) {
+                return long.class;
+            } else if (Float.class.equals(wrapperType)) {
+                return float.class;
+            } else if (Short.class.equals(wrapperType)) {
+                return short.class;
+            } else if (Byte.class.equals(wrapperType)) {
+                return byte.class;
+            } else if (Character.class.equals(wrapperType)) {
+                return char.class;
+            }
+        }
+        final Log log = LogFactory.getLog(MethodUtils.class);
+        if (log.isDebugEnabled()) {
+            log.debug("Not a known primitive wrapper class: " + wrapperType);
+        }
+        return null;
+    }
+
+    public static Class<?> getPrimitiveType5(final Class<?> wrapperType) {
         switch (wrapperType.getName()) {
             case "Boolean":
                 return boolean.class;
@@ -138,17 +177,43 @@ public class MethodUtilsTest {
         }
     }
 
+
+    /** The number of primitive types. */
+    private static final int PRIMITIVE_SIZE = 8;
+    /** The boxing types to primitive conversion map. */
+    private static final Map<Class<?>, Class<?>> BOXING_CLASSES;
+
+    static {
+        BOXING_CLASSES = new IdentityHashMap<Class<?>, Class<?>>(PRIMITIVE_SIZE);
+        BOXING_CLASSES.put(Boolean.class, Boolean.TYPE);
+        BOXING_CLASSES.put(Byte.class, Byte.TYPE);
+        BOXING_CLASSES.put(Character.class, Character.TYPE);
+        BOXING_CLASSES.put(Double.class, Double.TYPE);
+        BOXING_CLASSES.put(Float.class, Float.TYPE);
+        BOXING_CLASSES.put(Integer.class, Integer.TYPE);
+        BOXING_CLASSES.put(Long.class, Long.TYPE);
+        BOXING_CLASSES.put(Short.class, Short.TYPE);
+    }
+
+    /**
+     * this function is learned from commons-jexl3, class ArrayBuilder
+     * @param wrapperType
+     * @return
+     */
+    public static Class<?> getPrimitiveType6(final Class<?> wrapperType) {
+        Class<?> prim = BOXING_CLASSES.get(wrapperType);
+        if (prim != null)
+            return prim;
+        final Log log = LogFactory.getLog(MethodUtils.class);
+        if (log.isDebugEnabled()) {
+            log.debug("Not a known primitive wrapper class: " + wrapperType);
+        }
+        return null;
+    }
+
     private static final List<Class> ARRAY0 = new ArrayList<Class>(
             Arrays.asList(
                     new Class[]{
-                            Boolean.class,
-                            Float.class,
-                            Long.class,
-                            Integer.class,
-                            Short.class,
-                            Byte.class,
-                            Double.class,
-                            Character.class,
                             Boolean.class,
                             Float.class,
                             Long.class,
@@ -162,64 +227,104 @@ public class MethodUtilsTest {
                             List.class,
                             BigInteger.class,
                             BigDecimal.class,
-                            List.class,
-                            List.class,
-                            List.class,
-                            List.class,
-                            List.class,
-                            List.class,
-                            List.class,
+                            Map.class,
+                            Set.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
+                            Object.class,
                     }
             )
     );
 
-    @Test
-    public void test() {
-        long start1 = System.nanoTime();
+
+    @Benchmark
+    public void test1Old() {
         for (int i = 0; i < 100000; i++) {
             for (Class c : ARRAY0) {
-                getPrimitiveType1(c);
+                getPrimitiveType1Old(c);
             }
         }
-        System.out.println(System.nanoTime() - start1);
+    }
 
-        long start2 = System.nanoTime();
+    @Benchmark
+    public void test2() {
         for (int i = 0; i < 100000; i++) {
             for (Class c : ARRAY0) {
                 getPrimitiveType2(c);
             }
         }
-        System.out.println(System.nanoTime() - start2);
+    }
 
-        long start3 = System.nanoTime();
+    @Benchmark
+    public void test3() {
         for (int i = 0; i < 100000; i++) {
             for (Class c : ARRAY0) {
                 getPrimitiveType3(c);
             }
         }
-        System.out.println(System.nanoTime() - start3);
+    }
 
-        long start4 = System.nanoTime();
+    @Benchmark
+    public void test4() {
         for (int i = 0; i < 100000; i++) {
             for (Class c : ARRAY0) {
                 getPrimitiveType4(c);
             }
         }
-        System.out.println(System.nanoTime() - start4);
+    }
+
+    @Benchmark
+    public void test5() {
+        for (int i = 0; i < 100000; i++) {
+            for (Class c : ARRAY0) {
+                getPrimitiveType5(c);
+            }
+        }
+    }
+
+    @Benchmark
+    public void test6() {
+        for (int i = 0; i < 100000; i++) {
+            for (Class c : ARRAY0) {
+                getPrimitiveType6(c);
+            }
+        }
     }
 
     @Test
-    public void test2() {
+    public void equalTest1() {
         for (Class c : ARRAY0) {
             assertEquals(
-                    getPrimitiveType1(c),
+                    getPrimitiveType1Old(c),
                     MethodUtils.getPrimitiveType(c)
             );
         }
     }
 
+    @Test
+    public void equalTest2() {
+        for (Class c : ARRAY0) {
+            assertEquals(
+                    getPrimitiveWrapper1Old(c),
+                    MethodUtils.getPrimitiveWrapper(c)
+            );
+        }
+    }
 
-    public static Class<?> getPrimitiveWrapper1(final Class<?> primitiveType) {
+    public static Class<?> getPrimitiveWrapper1Old(final Class<?> primitiveType) {
         // does anyone know a better strategy than comparing names?
         if (boolean.class.equals(primitiveType)) {
             return Boolean.class;
@@ -267,32 +372,24 @@ public class MethodUtilsTest {
         return null;
     }
 
-    @Test
-    public void test3() {
-        long start3 = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
-            for (Class c : ARRAY0) {
-                getPrimitiveWrapper1(c);
-            }
-        }
-        System.out.println(System.nanoTime() - start3);
+//    @Benchmark
+//    public void test3() {
+//        long start3 = System.nanoTime();
+//        for (int i = 0; i < 100000; i++) {
+//            for (Class c : ARRAY0) {
+//                getPrimitiveWrapper1(c);
+//            }
+//        }
+//        System.out.println(System.nanoTime() - start3);
+//
+//        long start4 = System.nanoTime();
+//        for (int i = 0; i < 100000; i++) {
+//            for (Class c : ARRAY0) {
+//                getPrimitiveWrapper2(c);
+//            }
+//        }
+//        System.out.println(System.nanoTime() - start4);
+//    }
 
-        long start4 = System.nanoTime();
-        for (int i = 0; i < 100000; i++) {
-            for (Class c : ARRAY0) {
-                getPrimitiveWrapper2(c);
-            }
-        }
-        System.out.println(System.nanoTime() - start4);
-    }
 
-    @Test
-    public void test4() {
-        for (Class c : ARRAY0) {
-            assertEquals(
-                    getPrimitiveWrapper1(c),
-                    MethodUtils.getPrimitiveWrapper(c)
-            );
-        }
-    }
 }
