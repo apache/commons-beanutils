@@ -344,8 +344,19 @@
   </dependencies>
 
   <build>
-      <defaultGoal>clean apache-rat:check verify javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean apache-rat:check verify javadoc:javadoc</defaultGoal>
       <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <dependencies>
+            <dependency>
+              <groupId>biz.aQute.bnd</groupId>
+              <artifactId>biz.aQute.bndlib</artifactId>
+              <version>5.1.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
