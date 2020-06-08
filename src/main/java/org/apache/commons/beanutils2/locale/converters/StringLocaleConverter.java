@@ -38,17 +38,11 @@ import org.apache.commons.logging.LogFactory;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
- *
  */
-
 public class StringLocaleConverter extends BaseLocaleConverter {
-
-
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -59,7 +53,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      *
      */
     public StringLocaleConverter() {
-
         this(false);
     }
 
@@ -72,7 +65,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final boolean locPattern) {
-
         this(Locale.getDefault(), locPattern);
     }
 
@@ -84,7 +76,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      */
     public StringLocaleConverter(final Locale locale) {
-
         this(locale, false);
     }
 
@@ -97,7 +88,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Locale locale, final boolean locPattern) {
-
         this(locale, (String) null, locPattern);
     }
 
@@ -110,7 +100,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public StringLocaleConverter(final Locale locale, final String pattern) {
-
         this(locale, pattern, false);
     }
 
@@ -124,7 +113,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-
         super(locale, pattern, locPattern);
     }
 
@@ -138,7 +126,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      */
     public StringLocaleConverter(final Object defaultValue) {
-
         this(defaultValue, false);
     }
 
@@ -152,7 +139,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Object defaultValue, final boolean locPattern) {
-
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
@@ -165,7 +151,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale) {
-
         this(defaultValue, locale, false);
     }
 
@@ -179,7 +164,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
-
         this(defaultValue, locale, null, locPattern);
     }
 
@@ -193,7 +177,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-
         this(defaultValue, locale, pattern, false);
     }
 
@@ -208,11 +191,8 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
-
         super(defaultValue, locale, pattern, locPattern);
     }
-
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

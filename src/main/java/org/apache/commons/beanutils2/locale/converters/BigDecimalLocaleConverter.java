@@ -30,12 +30,8 @@ import org.apache.commons.beanutils2.ConversionException;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
- *
  */
-
 public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -43,10 +39,8 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public BigDecimalLocaleConverter() {
-
         this(false);
     }
 
@@ -59,7 +53,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final boolean locPattern) {
-
         this(Locale.getDefault(), locPattern);
     }
 
@@ -71,7 +64,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      */
     public BigDecimalLocaleConverter(final Locale locale) {
-
         this(locale, false);
     }
 
@@ -84,7 +76,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Locale locale, final boolean locPattern) {
-
         this(locale, (String) null, locPattern);
     }
 
@@ -97,7 +88,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public BigDecimalLocaleConverter(final Locale locale, final String pattern) {
-
         this(locale, pattern, false);
     }
 
@@ -111,7 +101,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-
         super(locale, pattern, locPattern);
     }
 
@@ -125,7 +114,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      */
     public BigDecimalLocaleConverter(final Object defaultValue) {
-
         this(defaultValue, false);
     }
 
@@ -139,7 +127,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final boolean locPattern) {
-
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
@@ -152,7 +139,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale) {
-
         this(defaultValue, locale, false);
     }
 
@@ -166,7 +152,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
-
         this(defaultValue, locale, null, locPattern);
     }
 
@@ -180,7 +165,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-
         this(defaultValue, locale, pattern, false);
     }
 
@@ -195,7 +179,6 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
-
         super(defaultValue, locale, pattern, locPattern);
     }
 

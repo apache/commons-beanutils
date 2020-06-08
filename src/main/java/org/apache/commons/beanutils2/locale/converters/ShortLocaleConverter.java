@@ -29,12 +29,8 @@ import org.apache.commons.beanutils2.ConversionException;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
- *
  */
-
 public class ShortLocaleConverter extends DecimalLocaleConverter {
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -45,7 +41,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      *
      */
     public ShortLocaleConverter() {
-
         this(false);
     }
 
@@ -58,7 +53,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final boolean locPattern) {
-
         this(Locale.getDefault(), locPattern);
     }
 
@@ -70,7 +64,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      */
     public ShortLocaleConverter(final Locale locale) {
-
         this(locale, false);
     }
 
@@ -83,7 +76,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Locale locale, final boolean locPattern) {
-
         this(locale, (String) null, locPattern);
     }
 
@@ -96,7 +88,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public ShortLocaleConverter(final Locale locale, final String pattern) {
-
         this(locale, pattern, false);
     }
 
@@ -110,7 +101,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-
         super(locale, pattern, locPattern);
     }
 
@@ -124,7 +114,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param defaultValue  The default value to be returned
      */
     public ShortLocaleConverter(final Object defaultValue) {
-
         this(defaultValue, false);
     }
 
@@ -138,7 +127,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Object defaultValue, final boolean locPattern) {
-
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
@@ -151,7 +139,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locale        The locale
      */
     public ShortLocaleConverter(final Object defaultValue, final Locale locale) {
-
         this(defaultValue, locale, false);
     }
 
@@ -165,7 +152,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
-
         this(defaultValue, locale, null, locPattern);
     }
 
@@ -179,7 +165,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public ShortLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-
         this(defaultValue, locale, pattern, false);
     }
 
@@ -194,7 +179,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
-
         super(defaultValue, locale, pattern, locPattern);
     }
 

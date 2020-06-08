@@ -36,15 +36,10 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 1.7
  */
-
 public class DecimalLocaleConverter extends BaseLocaleConverter {
-
-
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
-
-
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -52,10 +47,8 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public DecimalLocaleConverter() {
-
         this(false);
     }
 
@@ -68,7 +61,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final boolean locPattern) {
-
         this(Locale.getDefault(), locPattern);
     }
 
@@ -80,7 +72,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      */
     public DecimalLocaleConverter(final Locale locale) {
-
         this(locale, false);
     }
 
@@ -93,7 +84,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Locale locale, final boolean locPattern) {
-
         this(locale, (String) null, locPattern);
     }
 
@@ -106,7 +96,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public DecimalLocaleConverter(final Locale locale, final String pattern) {
-
         this(locale, pattern, false);
     }
 
@@ -120,7 +109,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-
         super(locale, pattern, locPattern);
     }
 
@@ -134,7 +122,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param defaultValue  The default value to be returned
      */
     public DecimalLocaleConverter(final Object defaultValue) {
-
         this(defaultValue, false);
     }
 
@@ -148,7 +135,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Object defaultValue, final boolean locPattern) {
-
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 
@@ -161,7 +147,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locale        The locale
      */
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale) {
-
         this(defaultValue, locale, false);
     }
 
@@ -175,7 +160,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
-
         this(defaultValue, locale, null, locPattern);
     }
 
@@ -189,7 +173,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param pattern       The conversion pattern
      */
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-
         this(defaultValue, locale, pattern, false);
     }
 
@@ -204,12 +187,9 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
-
         super(defaultValue, locale, pattern, locPattern);
 
     }
-
-
 
     /**
      * Convert the specified locale-sensitive input object into an output
