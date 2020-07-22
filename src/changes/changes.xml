@@ -102,6 +102,9 @@
       <action issue="BEANUTILS-537" dev="ggregory" type="update" due-to="XenoAmess, Gary Gregory">
         Fix typos; fix error in Javadoc; performance fix; fix code smells #25.
       </action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">
+        Update commons-parent from 50 to 51.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
