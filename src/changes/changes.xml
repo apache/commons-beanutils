@@ -105,6 +105,9 @@
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update commons-parent from 50 to 51.
       </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Update biz.aQute.bndlib from 5.1.0 to 5.1.2 #29.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
