@@ -45,7 +45,7 @@ import org.apache.commons.beanutils2.ConversionException;
  *     <li>{@code java.math.BigInteger}</li>
  * </ul>
  *
- * <h3>String Conversions (to and from)</h3>
+ * <h2>String Conversions (to and from)</h2>
  * This class provides a number of ways in which number
  * conversions to/from Strings can be achieved:
  * <ul>

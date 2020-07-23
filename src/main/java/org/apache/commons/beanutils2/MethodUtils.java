@@ -32,8 +32,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
  *
- * <h3>Known Limitations</h3>
- * <h4>Accessing Public Methods In A Default Access Superclass</h4>
+ * <h2>Known Limitations</h2>
+ * <h3>Accessing Public Methods In A Default Access Superclass</h3>
  * <p>There is an issue when invoking public methods contained in a default access superclass.
  * Reflection locates these methods fine and correctly assigns them as public.
  * However, an {@code IllegalAccessException} is thrown if the method is invoked.</p>

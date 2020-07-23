@@ -35,7 +35,7 @@ package org.apache.commons.beanutils2;
  *    a DynaBean's {@code fooProperty}:</p>
  *    <ul><li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li></ul>
  *
- * <h3>Usage</h3>
+ * <h2>Usage</h2>
  *
  * <p>To decorate a {@link DynaBean} simply instantiate this class with the
  *    target {@link DynaBean}:</p>
@@ -50,7 +50,7 @@ package org.apache.commons.beanutils2;
  * <ul><li><code>Map&lt;String, Object&gt; fooMap =
  *   new DynaBeanPropertyMapDecorator(fooDynaBean, false);</code></li></ul>
  *
- * <h3>Limitations</h3>
+ * <h2>Limitations</h2>
  * <p>In this implementation the {@code entrySet()</code>, <code>keySet()}
  *    and {@code values()} methods create an <b><i>unmodifiable</i></b>
  *    {@code Set</code> and it does not support the Map's <code>clear()}

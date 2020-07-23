@@ -81,7 +81,7 @@ import org.apache.commons.beanutils2.Converter;
  *     </li>
  * </ul>
  *
- * <h3>Parsing Delimited Lists</h3>
+ * <h2>Parsing Delimited Lists</h2>
  * This implementation can convert a delimited list in {@code String} format
  * into an array of the appropriate type. By default, it uses a comma as the delimiter
  * but the following methods can be used to configure parsing:
@@ -93,7 +93,7 @@ import org.apache.commons.beanutils2.Converter;
  *         valid token characters.
  * </ul>
  *
- * <h3>Multi Dimensional Arrays</h3>
+ * <h2>Multi Dimensional Arrays</h2>
  * It is possible to convert a {@code String} to multi-dimensional arrays by using
  * {@link ArrayConverter} as the element {@link Converter}
  * within another {@link ArrayConverter}.

@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * <h1><i>Lazy</i> DynaBean List.</h1>
+ * <h2><i>Lazy</i> DynaBean List.</h2>
  *
  * <p>There are two main purposes for this class:</p>
  *    <ul>

@@ -22,7 +22,7 @@
  * in the JavaBeans Specification, as well as mechanisms for dynamically defining
  * and accessing bean properties.</p>
  *
- * <h1>Table of Contents</h1>
+ * <h2>Table of Contents</h2>
  *
  * <ul>
  * <li>1. <a href="#overview">Overview</a>
@@ -75,10 +75,10 @@
  * </ul>
  *
  * <a id="overview"></a>
- * <h1>1. Overview</h1>
+ * <h2>1. Overview</h2>
  *
  * <a id="overview.background"></a>
- * <h2>1.1 Background</h2>
+ * <h3>1.1 Background</h3>
  *
  * <p>The <em>JavaBeans</em> name comes from a
  * <a href="http://java.sun.com/products/javabeans/">Java API</a>
@@ -171,7 +171,7 @@
  * </pre>
  *
  * <a id="overview.dependencies"></a>
- * <h2>1.2 External Dependencies</h2>
+ * <h3>1.2 External Dependencies</h3>
  *
  * <p>The <em>commons-beanutils</em> package requires that the following
  * additional packages be available in the application's class path at runtime:
@@ -184,10 +184,10 @@
  * </ul>
  *
  * <a id="standard"></a>
- * <h1>2. Standard JavaBeans</h1>
+ * <h2>2. Standard JavaBeans</h2>
  *
  * <a id="standard.background"></a>
- * <h2>2.1 Background</h2>
+ * <h3>2.1 Background</h3>
  *
  * <p>As described above, the standard facilities of the Java programming language
  * make it easy and natural to access the property values of your beans using
@@ -255,7 +255,7 @@
  * </pre>
  *
  * <a id="standard.basic"></a>
- * <h2>2.2 Basic Property Access</h2>
+ * <h3>2.2 Basic Property Access</h3>
  *
  * <p>Getting and setting <strong>simple</strong> property values is, well,
  * simple :-).  Check out the following API signatures in the Javadocs:</p>
@@ -334,7 +334,7 @@
  * </pre>
  *
  * <a id="standard.nested"></a>
- * <h2>2.3 Nested Property Access</h2>
+ * <h3>2.3 Nested Property Access</h3>
  *
  * <p>In all of the examples above, we have assumed that you wished to retrieve
  * the value of a property of the bean being passed as the first argument to a
@@ -385,7 +385,7 @@
  * </pre>
  *
  * <a id="standard.customize"></a>
- * <h2>2.4 Customizing Introspection</h2>
+ * <h3>2.4 Customizing Introspection</h3>
  *
  * <p>As was pointed out, BeanUtils relies on conventions defined by the
  * <em>JavaBeans</em> specification to determine the properties available for
@@ -419,7 +419,7 @@
  * fluent API.</p>
  *
  * <a id="standard.suppress"></a>
- * <h2>2.5 Suppressing Properties</h2>
+ * <h3>2.5 Suppressing Properties</h3>
  * <p>The mechanism of customizing bean introspection described in the previous
  * section can also be used to suppress specific properties. There is a
  * specialized {@code BeanIntrospector} implementation that does exactly
@@ -445,10 +445,10 @@
  * {@code SuppressPropertiesBeanIntrospector}.</p>
  *
  * <a id="dynamic"></a>
- * <h1>3. Dynamic Beans (DynaBeans)</h1>
+ * <h2>3. Dynamic Beans (DynaBeans)</h2>
  *
  * <a id="dynamic.background"></a>
- * <h2>3.1 Background</h2>
+ * <h3>3.1 Background</h3>
  *
  * <p>The {@link org.apache.commons.beanutils2.PropertyUtils} class described in the
  * preceding section is designed to provide dynamic property access on existing
@@ -499,7 +499,7 @@
  * implementations are not sufficient.</p>
  *
  * <a id="dynamic.basic"></a>
- * <h2>3.2 {@code BasicDynaBean</code> and <code>BasicDynaClass}</h2>
+ * <h3>3.2 {@code BasicDynaBean</code> and <code>BasicDynaClass}</h3>
  *
  * <p>The {@link org.apache.commons.beanutils2.BasicDynaBean} and
  * {@link org.apache.commons.beanutils2.BasicDynaClass} implementation provides a
@@ -551,7 +551,7 @@
  * actual BasicDynaBean implementation class.</p>
  *
  * <a id="dynamic.resultSet"></a>
- * <h2>3.3 {@code ResultSetDynaClass} (Wraps ResultSet in DynaBeans)</h2>
+ * <h3>3.3 {@code ResultSetDynaClass} (Wraps ResultSet in DynaBeans)</h3>
  *
  * <p>A very common use case for DynaBean APIs is to wrap other collections of
  * "stuff" that do not normally present themselves as JavaBeans.  One of the most
@@ -578,7 +578,7 @@
  *
  *
  * <a id="dynamic.rowSet"></a>
- * <h2>3.4 {@code RowSetDynaClass} (Disconnected ResultSet as DynaBeans)</h2>
+ * <h3>3.4 {@code RowSetDynaClass} (Disconnected ResultSet as DynaBeans)</h3>
  * <p>Although <a href="#dynamic.resultSet">{@code ResultSetDynaClass}</a> is
  * a very useful technique for representing the results of an SQL query as a
  * series of DynaBeans, an important problem is that the underlying
@@ -626,7 +626,7 @@
  *
  *
  * <a id="dynamic.wrap"></a>
- * <h2>3.5 {@code WrapDynaBean</code> and <code>WrapDynaClass}</h2>
+ * <h3>3.5 {@code WrapDynaBean</code> and <code>WrapDynaClass}</h3>
  *
  * <p>OK, you've tried the DynaBeans APIs and they are cool -- very simple
  * {@code get()</code> and <code>set()} methods provide easy access to all
@@ -794,10 +794,10 @@
  *
  *
  * <a id="conversion"></a>
- * <h1>4. Data Type Conversions</h1>
+ * <h2>4. Data Type Conversions</h2>
  *
  * <a id="conversion.background"></a>
- * <h2>4.1 Background</h2>
+ * <h3>4.1 Background</h3>
  *
  * <p>So far, we've only considered the cases where the data types of the
  * dynamically accessed properties are known, and where we can use Java casts
@@ -807,7 +807,7 @@
  * for performing this task as well.</p>
  *
  * <a id="conversion.beanutils"></a>
- * <h2>4.2 {@code BeanUtils</code> and <code>ConvertUtils} Conversions</h2>
+ * <h3>4.2 {@code BeanUtils</code> and <code>ConvertUtils} Conversions</h3>
  *
  * <p>A very common use case (and the situation that caused the initial creation
  * of the <em>BeanUtils</em> package) was the desire to convert the set of request
@@ -854,7 +854,7 @@
  * new code should not be written with reliance on ConvertUtils.</p>
  *
  * <a id="conversion.defining"></a>
- * <h2>4.3 Defining Your Own Converters</h2>
+ * <h3>4.3 Defining Your Own Converters</h3>
  *
  * <p>The {@code ConvertUtils} class supports the ability to define and
  * register your own String --&gt; Object conversions for any given Java class.
@@ -872,7 +872,7 @@
  * </ul>
  *
  * <a id="conversion.i18n"></a>
- * <h2>4.4 Locale Aware Conversions</h2>
+ * <h3>4.4 Locale Aware Conversions</h3>
  * <p>The standard classes in {@code org.apache.commons.beanutils2} are not
  * locale aware. This gives them a cleaner interface and makes then easier to use
  * in situations where the locale is not important.</p>
@@ -883,9 +883,9 @@
  *
  *
  * <a id="instances"></a>
- * <h1>5. Utility Objects And Static Utility Classes</h1>
+ * <h2>5. Utility Objects And Static Utility Classes</h2>
  * <a id="instances.background"></a>
- * <h2>Background</h2>
+ * <h3>Background</h3>
  * <p>
  * So far, the examples have covered the static utility classes ({@code BeanUtils},
  * {@code ConvertUtils</code> and <code>PropertyUtils}). These are easy to use but are
@@ -911,9 +911,9 @@
  * </p>
  *
  * <a id="collections"></a>
- * <h1>6. Collections</h1>
+ * <h2>6. Collections</h2>
  * <a id="bean-comparator"></a>
- * <h2>6.1 Comparing Beans</h2>
+ * <h3>6.1 Comparing Beans</h3>
  * <p>
  * {@code org.apache.commons.beanutils2.BeanComparator</code> is a <code>Comparator} implementation
  * that compares beans based on a shared property value.
@@ -943,7 +943,7 @@
  *   </code></pre>
  *
  * <a id="bean-property-predicate"></a>
- * <h2>6.3 Querying Or Filtering Collections Of Beans</h2>
+ * <h3>6.3 Querying Or Filtering Collections Of Beans</h3>
  * <p>
  * The {@code Predicate</code> interface in <code>commons-collections} encapsulates an evaluation
  * of an input Object that returns either true or false. {@code Commons-collections} contains code
@@ -968,7 +968,7 @@
  * </code></pre>
  *
  * <a href="bean-property-transformer"></a>
- * <h2>6.4 Transforming Collections Of Beans</h2>
+ * <h3>6.4 Transforming Collections Of Beans</h3>
  * <p>
  * The {@code Transformer</code> interface in <code>commons-collections} encapsulates the transformation
  * of an input Object into an output object. {@code Commons-collections} contains code
@@ -995,10 +995,10 @@
  *     </code></pre>
  *
  * <a id="FAQ"></a>
- * <h1>7. Frequently Asked Questions</h1>
+ * <h2>7. Frequently Asked Questions</h2>
  *
  * <a id="FAQ.property"></a>
- * <h2>Why Can't BeanUtils Find My Method?</h2>
+ * <h3>Why Can't BeanUtils Find My Method?</h3>
  * <p>The <em>BeanUtils</em> package relies on <em>introspection</em> rather than
  * <em>reflection</em>. This means that it will find only
  * <a href='http://java.sun.com/products/javabeans'><em>JavaBean</em>
@@ -1014,7 +1014,7 @@
  * </ul>
  *
  * <a id="FAQ.bc.order"></a>
- * <h2>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h2>
+ * <h3>How Do I Set The BeanComparator Order To Be Ascending/Descending?</h3>
  * <p>
  * BeanComparator relies on an internal Comparator to perform the actual
  * comparisions. By default, a natural ordering comparator
