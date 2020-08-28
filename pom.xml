@@ -53,6 +53,8 @@
     <commons.clirr.version>2.8</commons.clirr.version>
     <commons.encoding>utf-8</commons.encoding>
     <commons.jacoco.version>0.8.5</commons.jacoco.version>
+    <checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
+    <checkstyle.version>8.34</checkstyle.version>
     <!-- Commons Release Plugin -->
     <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
@@ -397,6 +399,16 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
+        <plugin>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${checkstyle.plugin.version}</version>
+            <configuration>
+                <configLocation>${basedir}/checkstyle.xml</configLocation>
+                <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                <enableRulesSummary>false</enableRulesSummary>
+                <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
+            </configuration>
+        </plugin>
       </plugins>
       <pluginManagement>
         <plugins>
@@ -419,12 +431,13 @@
     <reporting>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${checkstyle.plugin.version}</version>
                 <configuration>
                     <configLocation>${basedir}/checkstyle.xml</configLocation>
+                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
                     <enableRulesSummary>false</enableRulesSummary>
+                    <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
                 </configuration>
             </plugin>
             <plugin>
