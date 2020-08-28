@@ -346,7 +346,7 @@
   </dependencies>
 
   <build>
-    <defaultGoal>clean apache-rat:check verify javadoc:javadoc</defaultGoal>
+    <defaultGoal>clean apache-rat:check checkstyle:check verify javadoc:javadoc</defaultGoal>
       <plugins>
         <plugin>
           <groupId>org.apache.felix</groupId>
