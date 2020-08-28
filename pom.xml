@@ -386,6 +386,17 @@
                 <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
         </plugin>
+        <plugin>
+            <groupId>net.revelc.code.formatter</groupId>
+            <artifactId>formatter-maven-plugin</artifactId>
+            <version>2.12.2</version>
+            <configuration>
+                <configFile>${project.basedir}/src/conf/eclipse-apache-formatter.xml</configFile>
+                <directories>
+                    <directory>${project.build.sourceDirectory}</directory>
+                </directories>
+            </configuration>
+        </plugin>
       </plugins>
       <pluginManagement>
         <plugins>
