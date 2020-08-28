@@ -26,7 +26,8 @@
             <includes>
                 <include>build.properties.sample</include>
                 <include>build.xml</include>
-                <include>checkstyle.xml</include>
+                <include>src/conf/checkstyle.xml</include>
+                <include>src/conf/checkstyle-suppressions.xml</include>
                 <include>CONTRIBUTING.md</include>
                 <include>BUILDING.txt</include>
                 <include>LICENSE.txt</include>

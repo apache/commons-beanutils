@@ -403,8 +403,9 @@
             <artifactId>maven-checkstyle-plugin</artifactId>
             <version>${checkstyle.plugin.version}</version>
             <configuration>
-                <configLocation>${basedir}/checkstyle.xml</configLocation>
-                <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+                <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+                <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 <enableRulesSummary>false</enableRulesSummary>
                 <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
             </configuration>
@@ -434,8 +435,9 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${checkstyle.plugin.version}</version>
                 <configuration>
-                    <configLocation>${basedir}/checkstyle.xml</configLocation>
-                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+                    <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <enableRulesSummary>false</enableRulesSummary>
                     <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
                 </configuration>

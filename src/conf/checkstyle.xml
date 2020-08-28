@@ -23,6 +23,11 @@ limitations under the License.
 <!-- commons lang customization of default Checkstyle behavior -->
 <module name="Checker">
   <property name="localeLanguage" value="en"/>
+  <module name="SuppressionFilter">
+    <!-- Default property set by maven-checkstyle-plugin -->
+    <property name="file" value="${checkstyle.suppressions.file}"/>
+    <property name="optional" value="false"/>
+  </module>
   <module name="JavadocPackage">
     <property name="allowLegacy" value="false"/>
   </module>
