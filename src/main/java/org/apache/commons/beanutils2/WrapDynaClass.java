@@ -17,14 +17,12 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
-
 
 /**
  * Implementation of {@link DynaClass} that wrap
@@ -44,10 +42,6 @@ import java.util.WeakHashMap;
 
 public class WrapDynaClass implements DynaClass {
 
-
-
-
-
     /**
      * Construct a new WrapDynaClass for the specified JavaBean class.  This
      * constructor is private; WrapDynaClass instances will be created as
@@ -64,9 +58,6 @@ public class WrapDynaClass implements DynaClass {
         introspect();
 
     }
-
-
-
 
     /**
      * Name of the JavaBean class represented by this WrapDynaClass.
@@ -86,7 +77,6 @@ public class WrapDynaClass implements DynaClass {
      */
     protected PropertyDescriptor[] descriptors = null;
 
-
     /**
      * The set of PropertyDescriptors for this bean class, keyed by the
      * property name.  Individual descriptor instances will be the same
@@ -94,12 +84,10 @@ public class WrapDynaClass implements DynaClass {
      */
     protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
-
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
     protected DynaProperty[] properties = null;
-
 
     /**
      * The set of dynamic properties that are part of this DynaClass,
@@ -108,17 +96,15 @@ public class WrapDynaClass implements DynaClass {
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
-
-
-
-
+    //@formatter:off
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
-        new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
-            @Override
+            new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
+                @Override
                 protected Map<CacheKey, WrapDynaClass> initialValue() {
                     return new WeakHashMap<>();
                 }
     };
+   //@formatter:on
 
     /**
      * Returns the cache for the already created class instances. For each
@@ -129,11 +115,6 @@ public class WrapDynaClass implements DynaClass {
     private static Map<CacheKey, WrapDynaClass> getClassesCache() {
         return CLASSLOADER_CACHE.get();
     }
-
-
-
-
-
 
     /**
      * Return the class of the underlying wrapped bean.
@@ -160,7 +141,6 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
-
     /**
      * Return a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
@@ -175,13 +155,11 @@ public class WrapDynaClass implements DynaClass {
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
-            throw new IllegalArgumentException
-                    ("No property name specified");
+            throw new IllegalArgumentException("No property name specified");
         }
         return propertiesMap.get(name);
 
     }
-
 
     /**
      * <p>Return an array of {@code PropertyDescriptor} for the properties
@@ -200,7 +178,6 @@ public class WrapDynaClass implements DynaClass {
         return properties;
 
     }
-
 
     /**
      * <p>Instantiates a new standard JavaBean instance associated with
@@ -229,15 +206,11 @@ public class WrapDynaClass implements DynaClass {
      */
     @Override
     public DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException {
+                throws IllegalAccessException, InstantiationException {
 
         return new WrapDynaBean(getBeanClass().newInstance());
 
     }
-
-
-
-
 
     /**
      * Return the PropertyDescriptor for the specified property name, if any;
@@ -252,10 +225,6 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
-
-
-
-
     /**
      * Clear our cache of WrapDynaClass instances.
      */
@@ -264,7 +233,6 @@ public class WrapDynaClass implements DynaClass {
         getClassesCache().clear();
 
     }
-
 
     /**
      * Create (if necessary) and return a new {@code WrapDynaClass}
@@ -278,7 +246,6 @@ public class WrapDynaClass implements DynaClass {
         return createDynaClass(beanClass, null);
 
     }
-
 
     /**
      * Create (if necessary) and return a new {@code WrapDynaClass} instance
@@ -305,9 +272,6 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
-
-
-
     /**
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This
      * bean is used for introspection.
@@ -326,13 +290,11 @@ public class WrapDynaClass implements DynaClass {
 
         // Look up the property descriptors for this bean class
         final Class<?> beanClass = getBeanClass();
-        PropertyDescriptor[] regulars =
-                getPropertyUtilsBean().getPropertyDescriptors(beanClass);
+        PropertyDescriptor[] regulars = getPropertyUtilsBean().getPropertyDescriptors(beanClass);
         if (regulars == null) {
             regulars = new PropertyDescriptor[0];
         }
-        Map<?, ?> mappeds =
-                PropertyUtils.getMappedPropertyDescriptors(beanClass);
+        Map<?, ?> mappeds = PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null) {
             mappeds = new HashMap<>();
         }
@@ -341,23 +303,20 @@ public class WrapDynaClass implements DynaClass {
         properties = new DynaProperty[regulars.length + mappeds.size()];
         for (int i = 0; i < regulars.length; i++) {
             descriptorsMap.put(regulars[i].getName(),
-                    regulars[i]);
-            properties[i] =
-                    new DynaProperty(regulars[i].getName(),
-                            regulars[i].getPropertyType());
+                        regulars[i]);
+            properties[i] = new DynaProperty(regulars[i].getName(),
+                        regulars[i].getPropertyType());
             propertiesMap.put(properties[i].getName(),
-                    properties[i]);
+                        properties[i]);
         }
         int j = regulars.length;
         for (final Map.Entry<?, ?> entry : mappeds.entrySet()) {
             final String name = (String) entry.getKey();
-            final PropertyDescriptor descriptor =
-                    (PropertyDescriptor) entry.getValue();
-            properties[j] =
-                    new DynaProperty(descriptor.getName(),
-                            Map.class);
+            final PropertyDescriptor descriptor = (PropertyDescriptor) entry.getValue();
+            properties[j] = new DynaProperty(descriptor.getName(),
+                        Map.class);
             propertiesMap.put(properties[j].getName(),
-                    properties[j]);
+                        properties[j]);
             j++;
         }
 

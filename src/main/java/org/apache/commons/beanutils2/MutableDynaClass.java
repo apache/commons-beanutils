@@ -72,7 +72,7 @@ public interface MutableDynaClass extends DynaClass {
      *  restricted, so no new properties can be added
      */
     void add(String name, Class<?> type, boolean readable,
-             boolean writeable);
+                boolean writeable);
 
     /**
      * Is this DynaClass currently restricted, if so, no changes to the

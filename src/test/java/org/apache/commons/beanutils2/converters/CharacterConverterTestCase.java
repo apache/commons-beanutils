@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -36,8 +37,6 @@ public class CharacterConverterTestCase extends TestCase {
         return new TestSuite(CharacterConverterTestCase.class);
     }
 
-
-
     /**
      * Construct a new Character Converter test case.
      * @param name Test Name
@@ -56,8 +55,6 @@ public class CharacterConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
     }
 
-
-
     /**
      * Tests whether the primitive char class can be passed as target type.
      */
@@ -72,8 +69,8 @@ public class CharacterConverterTestCase extends TestCase {
     public void testConvertToCharacter() {
         final Converter converter = new CharacterConverter();
         assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
-        assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
+        assertEquals("String Test", new Character('F'), converter.convert(Character.class, "FOO"));
+        assertEquals("Integer Test", new Character('3'), converter.convert(Character.class, new Integer(321)));
     }
 
     /**
@@ -98,9 +95,9 @@ public class CharacterConverterTestCase extends TestCase {
         final Converter converter = new CharacterConverter();
 
         assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
-        assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
-        assertEquals("Null Test",     null, converter.convert(String.class, null));
+        assertEquals("String Test", "F", converter.convert(String.class, "FOO"));
+        assertEquals("Integer Test", "3", converter.convert(String.class, new Integer(321)));
+        assertEquals("Null Test", null, converter.convert(String.class, null));
     }
 
     /**
@@ -121,6 +118,6 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testDefault() {
         final Converter converter = new CharacterConverter("C");
-        assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
+        assertEquals("Default Test", new Character('C'), converter.convert(Character.class, null));
     }
 }

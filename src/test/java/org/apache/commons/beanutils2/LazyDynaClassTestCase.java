@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import junit.framework.Test;
@@ -27,9 +28,7 @@ import junit.framework.TestSuite;
 public class LazyDynaClassTestCase extends TestCase {
 
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
-
-
+    protected String testProperty = "myProperty";
 
     /**
      * Construct a new instance of this test case.
@@ -40,13 +39,11 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Run this Test
      */
     public static void main(final String[] args) {
-      junit.textui.TestRunner.run(suite());
+        junit.textui.TestRunner.run(suite());
     }
 
     /**
@@ -71,8 +68,6 @@ public class LazyDynaClassTestCase extends TestCase {
     public void tearDown() {
         dynaClass = null;
     }
-
-
 
     /**
      * Test add(name) method
@@ -111,7 +106,7 @@ public class LazyDynaClassTestCase extends TestCase {
      */
     public void testAddPropertyNullName1() {
         try {
-            dynaClass.add((String)null);
+            dynaClass.add((String) null);
             fail("null property name not prevented");
         } catch (final IllegalArgumentException expected) {
             // expected result

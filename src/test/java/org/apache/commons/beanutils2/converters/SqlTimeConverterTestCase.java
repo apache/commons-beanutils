@@ -38,8 +38,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
-
-
     /**
      * Construct a new Date test case.
      * @param name Test Name
@@ -47,8 +45,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
     public SqlTimeConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Return the expected type
@@ -129,7 +125,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
         // Test specified Locale
         converter.setLocale(Locale.UK);
-        invalidConversion(converter, testString);      // Test previous value now fails
+        invalidConversion(converter, testString); // Test previous value now fails
         validConversion(converter, expected, "15:06"); // UK Short style is "HH:mm"
 
         // Restore the default Locale

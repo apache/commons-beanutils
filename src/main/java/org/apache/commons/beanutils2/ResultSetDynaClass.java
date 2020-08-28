@@ -81,8 +81,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
      * {@code ResultSet}.  The property names corresponding
@@ -123,7 +121,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
-        throws SQLException {
+                throws SQLException {
 
         this(resultSet, lowerCase, false);
 
@@ -153,7 +151,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @since 1.8.3
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
-        throws SQLException {
+                throws SQLException {
         Objects.requireNonNull(resultSet, "resultSet");
         this.resultSet = resultSet;
         this.lowerCase = lowerCase;
@@ -162,14 +160,10 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
     }
 
-
-
     /**
      * <p>The {@code ResultSet} we are wrapping.</p>
      */
     protected ResultSet resultSet = null;
-
-
 
     /**
      * <p>Return an {@code Iterator} of {@link DynaBean} instances for
@@ -197,8 +191,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return getObject(getResultSet(), name);
     }
 
-
-
     /**
      * <p>Return the result set we are wrapping.</p>
      */
@@ -207,8 +199,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return this.resultSet;
 
     }
-
-
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used
@@ -225,10 +215,9 @@ public class ResultSetDynaClass extends JDBCDynaClass {
 
         try {
             return getClass().getClassLoader().loadClass(className);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new SQLException("Cannot load column class '" +
-                                   className + "': " + e);
+                        className + "': " + e);
         }
     }
 }

@@ -23,7 +23,6 @@ import java.util.function.Function;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>{@code Transformer} that outputs a property value.</p>
  *
@@ -127,7 +126,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
             this.ignoreNull = ignoreNull;
         } else {
             throw new IllegalArgumentException(
-                "propertyName cannot be null or empty");
+                        "propertyName cannot be null or empty");
         }
     }
 
@@ -182,7 +181,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
             throw iae;
         } catch (final NoSuchMethodException e) {
             final String errorMsg = "No property found for name [" +
-                propertyName + "]";
+                        propertyName + "]";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
             if (!BeanUtils.initCause(iae, e)) {
                 log.error(errorMsg, e);

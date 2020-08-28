@@ -30,8 +30,6 @@ package org.apache.commons.beanutils2.priv;
 
 class PrivateBean implements PrivateDirect {
 
-
-
     /**
      * Package private constructor - can only use factory method to create
      * beans.
@@ -41,8 +39,6 @@ class PrivateBean implements PrivateDirect {
         super();
 
     }
-
-
 
     /**
      * A directly implemented property.

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.Array;
@@ -187,8 +188,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private Class<?> elementDynaBeanType;
 
-
-
     /**
      * Default Constructor.
      */
@@ -250,8 +249,6 @@ public class LazyDynaList extends ArrayList<Object> {
         super(array.length);
         this.addAll(Arrays.asList(array));
     }
-
-
 
     /**
      * <p>Insert an element at the specified index position.</p>
@@ -415,14 +412,14 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        final Object[] array = (Object[])Array.newInstance(elementType, size());
+        final Object[] array = (Object[]) Array.newInstance(elementType, size());
         for (int i = 0; i < size(); i++) {
             if (Map.class.isAssignableFrom(elementType)) {
-                array[i] = ((LazyDynaMap)get(i)).getMap();
+                array[i] = ((LazyDynaMap) get(i)).getMap();
             } else if (DynaBean.class.isAssignableFrom(elementType)) {
                 array[i] = get(i);
             } else {
-                array[i] = ((WrapDynaBean)get(i)).getInstance();
+                array[i] = ((WrapDynaBean) get(i)).getInstance();
             }
         }
         return array;
@@ -441,7 +438,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         final Class<?> arrayType = model.getClass().getComponentType();
         if (DynaBean.class.isAssignableFrom(arrayType)
-                || size() == 0 && elementType == null) {
+                    || size() == 0 && elementType == null) {
             return super.toArray(model);
         }
 
@@ -472,12 +469,10 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         throw new IllegalArgumentException("Invalid array type: "
-                  + arrayType.getName() + " - not compatible with '"
-                  + elementType.getName());
+                    + arrayType.getName() + " - not compatible with '"
+                    + elementType.getName());
 
     }
-
-
 
     /**
      * <p>Converts the List to an DynaBean Array.</p>
@@ -490,9 +485,9 @@ public class LazyDynaList extends ArrayList<Object> {
             return new LazyDynaBean[0];
         }
 
-        final DynaBean[] array = (DynaBean[])Array.newInstance(elementDynaBeanType, size());
+        final DynaBean[] array = (DynaBean[]) Array.newInstance(elementDynaBeanType, size());
         for (int i = 0; i < size(); i++) {
-            array[i] = (DynaBean)get(i);
+            array[i] = (DynaBean) get(i);
         }
         return array;
 
@@ -524,7 +519,7 @@ public class LazyDynaList extends ArrayList<Object> {
             object = elementType.newInstance();
         } catch (final Exception e) {
             throw new IllegalArgumentException("Error creating type: "
-                           + elementType.getName() + " - " + e);
+                        + elementType.getName() + " - " + e);
         }
 
         // Create a DynaBean
@@ -533,20 +528,20 @@ public class LazyDynaList extends ArrayList<Object> {
             dynaBean = createDynaBeanForMapProperty(object);
             this.elementDynaClass = dynaBean.getDynaClass();
         } else if (DynaBean.class.isAssignableFrom(elementType)) {
-            dynaBean = (DynaBean)object;
+            dynaBean = (DynaBean) object;
             this.elementDynaClass = dynaBean.getDynaClass();
         } else {
             dynaBean = new WrapDynaBean(object);
-            this.wrapDynaClass = (WrapDynaClass)dynaBean.getDynaClass();
+            this.wrapDynaClass = (WrapDynaClass) dynaBean.getDynaClass();
         }
 
         this.elementDynaBeanType = dynaBean.getClass();
 
         // Re-calculate the type
-        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
-            this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+        if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
+        } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
+            this.elementType = ((LazyDynaMap) dynaBean).getMap().getClass();
         }
 
     }
@@ -570,13 +565,13 @@ public class LazyDynaList extends ArrayList<Object> {
 
         // Try to create a new instance of the DynaBean
         try {
-            final DynaBean dynaBean  = elementDynaClass.newInstance();
+            final DynaBean dynaBean = elementDynaClass.newInstance();
             this.elementDynaBeanType = dynaBean.getClass();
             if (WrapDynaBean.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
-                this.wrapDynaClass = (WrapDynaClass)elementDynaClass;
+                this.elementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
+                this.wrapDynaClass = (WrapDynaClass) elementDynaClass;
             } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType)) {
-                this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+                this.elementType = ((LazyDynaMap) dynaBean).getMap().getClass();
                 this.elementDynaClass = elementDynaClass;
             } else {
                 this.elementType = dynaBean.getClass();
@@ -585,12 +580,10 @@ public class LazyDynaList extends ArrayList<Object> {
         } catch (final Exception e) {
             throw new IllegalArgumentException(
                         "Error creating DynaBean from " +
-                        elementDynaClass.getClass().getName() + " - " + e);
+                                    elementDynaClass.getClass().getName() + " - " + e);
         }
 
     }
-
-
 
     /**
      * <p>Automatically <i>grown</i> the List
@@ -628,9 +621,9 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private DynaBean transform(final Object element) {
 
-        DynaBean dynaBean     = null;
+        DynaBean dynaBean = null;
         Class<?> newDynaBeanType = null;
-        Class<?> newElementType  = null;
+        Class<?> newElementType = null;
 
         // Create a new element
         if (element == null) {
@@ -652,8 +645,8 @@ public class LazyDynaList extends ArrayList<Object> {
                 newDynaBeanType = dynaBean.getClass();
             } catch (final Exception e) {
                 throw new IllegalArgumentException("Error creating DynaBean: "
-                              + getDynaClass().getClass().getName()
-                              + " - " + e);
+                            + getDynaClass().getClass().getName()
+                            + " - " + e);
             }
 
         } else {
@@ -663,7 +656,7 @@ public class LazyDynaList extends ArrayList<Object> {
             if (Map.class.isAssignableFrom(element.getClass())) {
                 dynaBean = createDynaBeanForMapProperty(element);
             } else if (DynaBean.class.isAssignableFrom(element.getClass())) {
-                dynaBean = (DynaBean)element;
+                dynaBean = (DynaBean) element;
             } else {
                 dynaBean = new WrapDynaBean(element);
             }
@@ -675,16 +668,16 @@ public class LazyDynaList extends ArrayList<Object> {
         // Re-calculate the element type
         newElementType = dynaBean.getClass();
         if (WrapDynaBean.class.isAssignableFrom(newDynaBeanType)) {
-            newElementType = ((WrapDynaBean)dynaBean).getInstance().getClass();
+            newElementType = ((WrapDynaBean) dynaBean).getInstance().getClass();
         } else if (LazyDynaMap.class.isAssignableFrom(newDynaBeanType)) {
-            newElementType = ((LazyDynaMap)dynaBean).getMap().getClass();
+            newElementType = ((LazyDynaMap) dynaBean).getMap().getClass();
         }
 
         // Check the new element type, matches all the
         // other elements in the List
         if (elementType != null && !newElementType.equals(elementType)) {
-            throw new IllegalArgumentException("Element Type "  + newElementType
-                       + " doesn't match other elements " + elementType);
+            throw new IllegalArgumentException("Element Type " + newElementType
+                        + " doesn't match other elements " + elementType);
         }
 
         return dynaBean;

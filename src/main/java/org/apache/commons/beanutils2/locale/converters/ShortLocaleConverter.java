@@ -179,7 +179,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ShortLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
@@ -205,7 +205,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
             return result;
         }
 
-        final Number parsed = (Number)result;
+        final Number parsed = (Number) result;
         if (parsed.longValue() != parsed.shortValue()) {
             throw new ConversionException("Supplied number is not of type Short: " + parsed.longValue());
         }
@@ -215,4 +215,3 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
     }
 
 }
-

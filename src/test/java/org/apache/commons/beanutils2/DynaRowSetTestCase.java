@@ -34,8 +34,6 @@ import junit.framework.TestSuite;
 
 public class DynaRowSetTestCase extends TestCase {
 
-
-
     /**
      * The mock result set DynaClass to be tested.
      */
@@ -45,16 +43,13 @@ public class DynaRowSetTestCase extends TestCase {
      * Names of the columns for this test.  Must match the order they are
      * defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String[] columns =
-    { "bigdecimalproperty", "booleanproperty",
-      "byteproperty", "dateproperty",
-      "doubleproperty", "floatproperty",
-      "intproperty", "longproperty",
-      "nullproperty", "shortproperty",
-      "stringproperty", "timeproperty",
-      "timestampproperty" };
-
-
+    protected String[] columns = {"bigdecimalproperty", "booleanproperty",
+                "byteproperty", "dateproperty",
+                "doubleproperty", "floatproperty",
+                "intproperty", "longproperty",
+                "nullproperty", "shortproperty",
+                "stringproperty", "timeproperty",
+                "timestampproperty"};
 
     /**
      * Construct a new instance of this test case.
@@ -66,8 +61,6 @@ public class DynaRowSetTestCase extends TestCase {
         super(name);
 
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -98,13 +91,11 @@ public class DynaRowSetTestCase extends TestCase {
 
     }
 
-
-
     public void testGetName() {
 
         assertEquals("DynaClass name",
-                     "org.apache.commons.beanutils2.RowSetDynaClass",
-                     dynaClass.getName());
+                    "org.apache.commons.beanutils2.RowSetDynaClass",
+                    dynaClass.getName());
 
     }
 
@@ -121,15 +112,15 @@ public class DynaRowSetTestCase extends TestCase {
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
         assertTrue("unknown property returns null",
-                   dynaProp == null);
+                    dynaProp == null);
 
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
         assertNotNull("string property exists", dynaProp);
         assertEquals("string property name", "stringproperty",
-                     dynaProp.getName());
+                    dynaProp.getName());
         assertEquals("string property class", String.class,
-                     dynaProp.getType());
+                    dynaProp.getType());
 
     }
 
@@ -140,7 +131,7 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
             assertEquals("Property " + columns[i],
-                         columns[i], dynaProps[i].getName());
+                        columns[i], dynaProps[i].getName());
         }
 
     }
@@ -185,19 +176,19 @@ public class DynaRowSetTestCase extends TestCase {
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
+                    bigDecimalProperty instanceof BigDecimal);
         assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
+                    123.45,
+                    ((BigDecimal) bigDecimalProperty).doubleValue(),
+                    0.005);
 
         final Object intProperty = row.get("intproperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
-                   intProperty instanceof Integer);
+                    intProperty instanceof Integer);
         assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
+                    103,
+                    ((Integer) intProperty).intValue());
 
         final Object nullProperty = row.get("nullproperty");
         assertNull("nullProperty null", nullProperty);
@@ -205,10 +196,10 @@ public class DynaRowSetTestCase extends TestCase {
         final Object stringProperty = row.get("stringproperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
-                   stringProperty instanceof String);
+                    stringProperty instanceof String);
         assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
+                    "This is a string",
+                    (String) stringProperty);
 
     }
 
@@ -240,19 +231,19 @@ public class DynaRowSetTestCase extends TestCase {
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
         assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
+                    bigDecimalProperty instanceof BigDecimal);
         assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
+                    123.45,
+                    ((BigDecimal) bigDecimalProperty).doubleValue(),
+                    0.005);
 
         final Object intProperty = row.get("intProperty");
         assertNotNull("intProperty exists", intProperty);
         assertTrue("intProperty type",
-                   intProperty instanceof Integer);
+                    intProperty instanceof Integer);
         assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
+                    103,
+                    ((Integer) intProperty).intValue());
 
         final Object nullProperty = row.get("nullProperty");
         assertNull("nullProperty null", nullProperty);
@@ -260,10 +251,10 @@ public class DynaRowSetTestCase extends TestCase {
         final Object stringProperty = row.get("stringProperty");
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type",
-                   stringProperty instanceof String);
+                    stringProperty instanceof String);
         assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
+                    "This is a string",
+                    (String) stringProperty);
 
     }
 
@@ -289,20 +280,24 @@ public class DynaRowSetTestCase extends TestCase {
         final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
         final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
 
-        // Date Column returns "java.sql.Timestamp" for the column class name but ResultSet getObject
+        // Date Column returns "java.sql.Timestamp" for the column class name but
+        // ResultSet getObject
         // returns a java.sql.Date value
         final int dateColIdx = 4;
-        assertEquals("Date Meta Name",       "dateProperty",       metaData.getColumnName(dateColIdx));
-        assertEquals("Date Meta Class",      "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
-        assertEquals("Date Meta Type",       java.sql.Types.DATE,  metaData.getColumnType(dateColIdx));
-        assertEquals("Date ResultSet Value", java.sql.Date.class,  resultSet.getObject("dateProperty").getClass());
+        assertEquals("Date Meta Name", "dateProperty", metaData.getColumnName(dateColIdx));
+        assertEquals("Date Meta Class", "java.sql.Timestamp", metaData.getColumnClassName(dateColIdx));
+        assertEquals("Date Meta Type", java.sql.Types.DATE, metaData.getColumnType(dateColIdx));
+        assertEquals("Date ResultSet Value", java.sql.Date.class, resultSet.getObject("dateProperty").getClass());
 
-        // Timestamp column class returns a custom Timestamp impl for the column class name and ResultSet getObject
+        // Timestamp column class returns a custom Timestamp impl for the column class
+        // name and ResultSet getObject
         final int timestampColIdx = 13;
-        assertEquals("Timestamp Meta Name",       "timestampProperty",             metaData.getColumnName(timestampColIdx));
-        assertEquals("Timestamp Meta Class",      CustomTimestamp.class.getName(), metaData.getColumnClassName(timestampColIdx));
-        assertEquals("Timestamp Meta Type",       java.sql.Types.TIMESTAMP,        metaData.getColumnType(timestampColIdx));
-        assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,           resultSet.getObject("timestampProperty").getClass());
+        assertEquals("Timestamp Meta Name", "timestampProperty", metaData.getColumnName(timestampColIdx));
+        assertEquals("Timestamp Meta Class", CustomTimestamp.class.getName(),
+                    metaData.getColumnClassName(timestampColIdx));
+        assertEquals("Timestamp Meta Type", java.sql.Types.TIMESTAMP, metaData.getColumnType(timestampColIdx));
+        assertEquals("Timestamp ResultSet Value", CustomTimestamp.class,
+                    resultSet.getObject("timestampProperty").getClass());
 
         final RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
         final DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
@@ -327,11 +322,12 @@ public class DynaRowSetTestCase extends TestCase {
      *
      * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
      */
-    private static class TestResultSetInconsistent extends  TestResultSet {
+    private static class TestResultSetInconsistent extends TestResultSet {
 
         public TestResultSetInconsistent(final ResultSetMetaData metaData) {
             super(metaData);
         }
+
         /**
          * Get an columns's value
          * @param columnName Name of the column
@@ -354,7 +350,7 @@ public class DynaRowSetTestCase extends TestCase {
      *
      * See issue# https://issues.apache.org/jira/browse/BEANUTILS-142
      */
-    private static class TestResultSetMetaDataInconsistent extends  TestResultSetMetaData {
+    private static class TestResultSetMetaDataInconsistent extends TestResultSetMetaData {
 
         /**
          * This method substitues class names of "java.sql.Timestamp" with
@@ -376,8 +372,10 @@ public class DynaRowSetTestCase extends TestCase {
             }
         }
     }
+
     private static class CustomTimestamp {
         private final long timestamp = new java.util.Date().getTime();
+
         @Override
         public String toString() {
             return "CustomTimestamp[" + timestamp + "]";

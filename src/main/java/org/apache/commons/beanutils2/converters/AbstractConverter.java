@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.lang.reflect.Array;
@@ -57,12 +58,12 @@ import org.apache.commons.logging.LogFactory;
 public abstract class AbstractConverter implements Converter {
 
     /** Debug logging message to indicate default value configuration */
+    //@formatter:off
     private static final String DEFAULT_CONFIG_MSG =
-        "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
+            "(N.B. Converters can be configured to use default values to avoid throwing exceptions)";
+    //@formatter:on
 
     /** Current package name */
-    //    getPackage() below returns null on some platforms/jvm versions during the unit tests.
-//    private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
     private static final String PACKAGE = "org.apache.commons.beanutils2.converters.";
 
     /**
@@ -79,8 +80,6 @@ public abstract class AbstractConverter implements Converter {
      * The default value specified to our Constructor, if any.
      */
     private Object defaultValue = null;
-
-
 
     /**
      * Construct a <i>Converter</i> that throws a
@@ -100,8 +99,6 @@ public abstract class AbstractConverter implements Converter {
     public AbstractConverter(final Object defaultValue) {
         setDefaultValue(defaultValue);
     }
-
-
 
     /**
      * Indicates whether a default value will be returned or exception
@@ -133,13 +130,13 @@ public abstract class AbstractConverter implements Converter {
             return convertToDefaultType(type, value);
         }
 
-        Class<?> sourceType  = value == null ? null : value.getClass();
-        final Class<T> targetType  = ConvertUtils.primitiveToWrapper(type);
+        Class<?> sourceType = value == null ? null : value.getClass();
+        final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
 
         if (log().isDebugEnabled()) {
             log().debug("Converting"
-                    + (value == null ? "" : " '" + toString(sourceType) + "'")
-                    + " value '" + value + "' to type '" + toString(targetType) + "'");
+                        + (value == null ? "" : " '" + toString(sourceType) + "'")
+                        + " value '" + value + "' to type '" + toString(targetType) + "'");
         }
 
         value = convertArray(value);
@@ -156,20 +153,20 @@ public abstract class AbstractConverter implements Converter {
             if (targetType.equals(String.class)) {
                 return targetType.cast(convertToString(value));
 
-            // No conversion necessary
+                // No conversion necessary
             } else if (targetType.equals(sourceType)) {
                 if (log().isDebugEnabled()) {
                     log().debug("    No conversion required, value is already a "
-                                    + toString(targetType));
+                                + toString(targetType));
                 }
                 return targetType.cast(value);
 
-            // Convert --> Type
+                // Convert --> Type
             } else {
                 final Object result = convertToType(targetType, value);
                 if (log().isDebugEnabled()) {
                     log().debug("    Converted to " + toString(targetType) +
-                                   " value '" + result + "'");
+                                " value '" + result + "'");
                 }
                 return targetType.cast(result);
             }
@@ -231,7 +228,7 @@ public abstract class AbstractConverter implements Converter {
             return null;
         }
         if (value instanceof Collection) {
-            final Collection<?> collection = (Collection<?>)value;
+            final Collection<?> collection = (Collection<?>) value;
             if (collection.size() > 0) {
                 return collection.iterator().next();
             }
@@ -269,14 +266,14 @@ public abstract class AbstractConverter implements Converter {
 
         ConversionException cex = null;
         if (cause instanceof ConversionException) {
-            cex = (ConversionException)cause;
+            cex = (ConversionException) cause;
             if (log().isDebugEnabled()) {
                 log().debug("    Re-throwing ConversionException: " + cex.getMessage());
                 log().debug("    " + DEFAULT_CONFIG_MSG);
             }
         } else {
             final String msg = "Error converting from '" + toString(value.getClass()) +
-                    "' to '" + toString(type) + "' " + cause.getMessage();
+                        "' to '" + toString(type) + "' " + cause.getMessage();
             cex = new ConversionException(msg, cause);
             if (log().isDebugEnabled()) {
                 log().debug("    Throwing ConversionException: " + msg);
@@ -310,20 +307,20 @@ public abstract class AbstractConverter implements Converter {
                     value = convertToType(type, defaultValue);
                 } catch (final Throwable t) {
                     throw new ConversionException("Default conversion to " + toString(type)
-                            + " failed.", t);
+                                + " failed.", t);
                 }
             }
             if (log().isDebugEnabled()) {
                 log().debug("    Using default "
-                        + (value == null ? "" : toString(value.getClass()) + " ")
-                        + "value '" + defaultValue + "'");
+                            + (value == null ? "" : toString(value.getClass()) + " ")
+                            + "value '" + defaultValue + "'");
             }
             // value is now either null or of the desired target type
             return type.cast(value);
         }
 
-        final ConversionException cex =  new ConversionException("No value specified for '" +
-                toString(type) + "'");
+        final ConversionException cex = new ConversionException("No value specified for '" +
+                    toString(type) + "'");
         if (log().isDebugEnabled()) {
             log().debug("    Throwing ConversionException: " + cex.getMessage());
             log().debug("    " + DEFAULT_CONFIG_MSG);
@@ -351,9 +348,9 @@ public abstract class AbstractConverter implements Converter {
             log().debug("Setting default value: " + defaultValue);
         }
         if (defaultValue == null) {
-           this.defaultValue  = null;
+            this.defaultValue = null;
         } else {
-           this.defaultValue  = convert(getDefaultType(), defaultValue);
+            this.defaultValue = convert(getDefaultType(), defaultValue);
         }
         useDefault = true;
     }
@@ -388,8 +385,6 @@ public abstract class AbstractConverter implements Converter {
         return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }
 
-
-
     /**
      * Accessor method for Log instance.
      * <p>
@@ -420,7 +415,7 @@ public abstract class AbstractConverter implements Converter {
             Class<?> elementType = type.getComponentType();
             int count = 1;
             while (elementType.isArray()) {
-                elementType = elementType .getComponentType();
+                elementType = elementType.getComponentType();
                 count++;
             }
             StringBuilder typeNameBuilder = new StringBuilder(elementType.getName());
@@ -432,8 +427,8 @@ public abstract class AbstractConverter implements Converter {
             typeName = type.getName();
         }
         if (typeName.startsWith("java.lang.") ||
-            typeName.startsWith("java.util.") ||
-            typeName.startsWith("java.math.")) {
+                    typeName.startsWith("java.util.") ||
+                    typeName.startsWith("java.math.")) {
             typeName = typeName.substring("java.lang.".length());
         } else if (typeName.startsWith(PACKAGE)) {
             typeName = typeName.substring(PACKAGE.length());
@@ -454,8 +449,7 @@ public abstract class AbstractConverter implements Converter {
      */
     private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
         @SuppressWarnings("unchecked")
-        final
-        T result = (T) convert(getDefaultType(), value);
+        final T result = (T) convert(getDefaultType(), value);
         return result;
     }
 
@@ -470,6 +464,6 @@ public abstract class AbstractConverter implements Converter {
      */
     protected ConversionException conversionException(final Class<?> type, final Object value) {
         return new ConversionException("Can't convert value '" + value
-                + "' to type " + type);
+                    + "' to type " + type);
     }
 }

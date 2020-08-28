@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import static org.junit.Assert.assertEquals;
@@ -53,7 +54,7 @@ public class Jira422TestCase {
         for (final PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
             if (pd.getName().equals("file")) {
                 Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List",
-                        pd instanceof IndexedPropertyDescriptor);
+                            pd instanceof IndexedPropertyDescriptor);
                 return;
             }
         }

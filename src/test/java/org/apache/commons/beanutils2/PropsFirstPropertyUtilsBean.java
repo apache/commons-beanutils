@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
@@ -40,7 +41,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      */
     @Override
     protected Object getPropertyOfMapBean(final Map<?, ?> bean, final String propertyName)
-    throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
@@ -59,7 +60,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
      */
     @Override
     protected void setPropertyOfMapBean(final Map<String, Object> bean, final String propertyName, final Object value)
-        throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
             // no simple property exists so put the value into the map

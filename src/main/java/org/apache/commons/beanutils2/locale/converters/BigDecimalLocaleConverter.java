@@ -179,7 +179,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigDecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
@@ -207,8 +207,7 @@ public class BigDecimalLocaleConverter extends DecimalLocaleConverter {
 
         try {
             return new BigDecimal(result.toString());
-        }
-        catch (final NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             throw new ConversionException("Supplied number is not of type BigDecimal: " + result);
         }
 

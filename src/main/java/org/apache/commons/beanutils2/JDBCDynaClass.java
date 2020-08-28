@@ -38,8 +38,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * <p>Flag defining whether column names should be lower cased when
      * converted to property names.</p>
@@ -70,8 +68,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * (needed when lowerCase option is true)
      */
     private Map<String, String> columnNameXref;
-
-
 
     /**
      * <p>Return the name of this DynaClass (analogous to the
@@ -130,7 +126,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException {
+                throws IllegalAccessException, InstantiationException {
 
         throw new UnsupportedOperationException("newInstance() not supported");
 
@@ -161,13 +157,13 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             if (cl == null) {
-                    cl = this.getClass().getClassLoader();
+                cl = this.getClass().getClassLoader();
             }
             // use Class.forName() - see BEANUTILS-327
             return Class.forName(className, false, cl);
         } catch (final Exception e) {
             throw new SQLException(
-                    "Cannot load column class '" + className + "': " + e);
+                        "Cannot load column class '" + className + "': " + e);
         }
 
     }
@@ -182,9 +178,9 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @throws SQLException If an error occurs accessing the SQL metadata
      */
     protected DynaProperty createDynaProperty(
-                                    final ResultSetMetaData metadata,
-                                    final int i)
-                                    throws SQLException {
+                final ResultSetMetaData metadata,
+                final int i)
+                throws SQLException {
 
         String columnName = null;
         if (useColumnLabel) {
@@ -248,13 +244,12 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
             final DynaProperty dynaProperty = createDynaProperty(metadata, i);
             if (dynaProperty != null) {
-                    list.add(dynaProperty);
+                list.add(dynaProperty);
             }
         }
 
         // Convert this list into the internal data structures we need
-        properties =
-            list.toArray(new DynaProperty[list.size()]);
+        properties = list.toArray(new DynaProperty[list.size()]);
         for (final DynaProperty property : properties) {
             propertiesMap.put(property.getName(), property);
         }

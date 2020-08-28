@@ -35,11 +35,7 @@ public class URIConverterTestCase extends TestCase {
         return new TestSuite(URIConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public URIConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class URIConverterTestCase extends TestCase {
         return new URIConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,48 +59,46 @@ public class URIConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "http://www.apache.org",
-            "http://www.apache.org/",
-            "ftp://cvs.apache.org",
-            "file://project.xml",
-            "http://208.185.179.12",
-            "http://www.apache.org:9999/test/thing",
-            "http://user:admin@www.apache.org:50/one/two.three",
-            "http://notreal.apache.org",
+                    "http://www.apache.org",
+                    "http://www.apache.org/",
+                    "ftp://cvs.apache.org",
+                    "file://project.xml",
+                    "http://208.185.179.12",
+                    "http://www.apache.org:9999/test/thing",
+                    "http://user:admin@www.apache.org:50/one/two.three",
+                    "http://notreal.apache.org",
         };
 
         final URI[] expected = {
-            new URI("http://www.apache.org"),
-            new URI("http://www.apache.org/"),
-            new URI("ftp://cvs.apache.org"),
-            new URI("file://project.xml"),
-            new URI("http://208.185.179.12"),
-            new URI("http://www.apache.org:9999/test/thing"),
-            new URI("http://user:admin@www.apache.org:50/one/two.three"),
-            new URI("http://notreal.apache.org")
+                    new URI("http://www.apache.org"),
+                    new URI("http://www.apache.org/"),
+                    new URI("ftp://cvs.apache.org"),
+                    new URI("file://project.xml"),
+                    new URI("http://208.185.179.12"),
+                    new URI("http://www.apache.org:9999/test/thing"),
+                    new URI("http://user:admin@www.apache.org:50/one/two.three"),
+                    new URI("http://notreal.apache.org")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(URI.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(URI.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -123,4 +115,3 @@ public class URIConverterTestCase extends TestCase {
         }
     }
 }
-

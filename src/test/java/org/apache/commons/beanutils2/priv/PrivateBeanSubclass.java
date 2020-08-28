@@ -25,8 +25,6 @@ package org.apache.commons.beanutils2.priv;
 
 class PrivateBeanSubclass extends PrivateBean {
 
-
-
     /**
      * Create a new PrivateBeanSubclass instance.
      */
@@ -35,8 +33,6 @@ class PrivateBeanSubclass extends PrivateBean {
         super();
 
     }
-
-
 
     /**
      * A property accessible via the superclass.

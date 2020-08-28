@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.text.DateFormat;
@@ -98,8 +99,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private TimeZone timeZone;
     private boolean useLocaleFormat;
 
-
-
     /**
      * Construct a Date/Time <i>Converter</i> that throws a
      * {@code ConversionException} if an error occurs.
@@ -119,8 +118,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public DateTimeConverter(final Object defaultValue) {
         super(defaultValue);
     }
-
-
 
     /**
      * Indicate whether conversion should use a format/pattern or not.
@@ -216,8 +213,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
         setUseLocaleFormat(true);
     }
 
-
-
     /**
      * Convert an input Date/Calendar object into a String.
      * <p>
@@ -236,19 +231,19 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         Date date = null;
         if (value instanceof Date) {
-            date = (Date)value;
+            date = (Date) value;
         } else if (value instanceof Calendar) {
-            date = ((Calendar)value).getTime();
+            date = ((Calendar) value).getTime();
         } else if (value instanceof Long) {
-            date = new Date(((Long)value).longValue());
+            date = new Date(((Long) value).longValue());
         } else if (value instanceof LocalDateTime) {
-            date =  java.sql.Timestamp.valueOf(((LocalDateTime)value));
+            date = java.sql.Timestamp.valueOf(((LocalDateTime) value));
         } else if (value instanceof LocalDate) {
-            date =  java.sql.Date.valueOf(((LocalDate)value));
+            date = java.sql.Date.valueOf(((LocalDate) value));
         } else if (value instanceof ZonedDateTime) {
-            date =  Date.from(((ZonedDateTime)value).toInstant());
+            date = Date.from(((ZonedDateTime) value).toInstant());
         } else if (value instanceof OffsetDateTime) {
-            date =  Date.from(((OffsetDateTime)value).toInstant());
+            date = Date.from(((OffsetDateTime) value).toInstant());
         }
 
         String result = null;
@@ -268,7 +263,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             result = value.toString();
             if (log().isDebugEnabled()) {
                 log().debug("    Converted  to String using toString() '" + result + "'");
-             }
+            }
         }
         return result;
     }
@@ -315,11 +310,10 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
 
-
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
-            //      didn't include the milliseconds. The following code
-            //      ensures it works consistently across JDK versions
-            final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
+            // didn't include the milliseconds. The following code
+            // ensures it works consistently across JDK versions
+            final java.sql.Timestamp timestamp = (java.sql.Timestamp) value;
             long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
             timeInMillis += timestamp.getNanos() / 1000000;
 
@@ -328,43 +322,43 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Handle Date (includes java.sql.Date & java.sql.Time)
         if (value instanceof Date) {
-            final Date date = (Date)value;
+            final Date date = (Date) value;
             return toDate(targetType, date.getTime());
         }
 
         // Handle Calendar
         if (value instanceof Calendar) {
-            final Calendar calendar = (Calendar)value;
+            final Calendar calendar = (Calendar) value;
             return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Handle Long
         if (value instanceof Long) {
-            final Long longObj = (Long)value;
+            final Long longObj = (Long) value;
             return toDate(targetType, longObj.longValue());
         }
 
         // Handle LocalDate
         if (value instanceof LocalDate) {
-            final LocalDate date = (LocalDate)value;
+            final LocalDate date = (LocalDate) value;
             return toDate(targetType, date.atStartOfDay(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle LocalDateTime
         if (value instanceof LocalDateTime) {
-            final LocalDateTime date = (LocalDateTime)value;
+            final LocalDateTime date = (LocalDateTime) value;
             return toDate(targetType, date.atZone(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle ZonedDateTime
         if (value instanceof ZonedDateTime) {
-            final ZonedDateTime date = (ZonedDateTime)value;
+            final ZonedDateTime date = (ZonedDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
         }
 
         // Handle OffsetDateTime
         if (value instanceof OffsetDateTime) {
-            final OffsetDateTime date = (OffsetDateTime)value;
+            final OffsetDateTime date = (OffsetDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
         }
 
@@ -440,25 +434,25 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // java.time.LocalDateTime
         if (type.equals(LocalDate.class)) {
-            final LocalDate localDate =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
+            final LocalDate localDate = Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
             return type.cast(localDate);
         }
 
         // java.time.LocalDateTime
         if (type.equals(LocalDateTime.class)) {
-            final LocalDateTime localDateTime =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
+            final LocalDateTime localDateTime = Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
             return type.cast(localDateTime);
         }
 
         // java.time.ZonedDateTime
         if (type.equals(ZonedDateTime.class)) {
-            final ZonedDateTime zonedDateTime =  ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            final ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
             return type.cast(zonedDateTime);
         }
 
         // java.time.OffsetDateTime
         if (type.equals(OffsetDateTime.class)) {
-            final OffsetDateTime offsetDateTime =  OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            final OffsetDateTime offsetDateTime = OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
             return type.cast(offsetDateTime);
         }
 
@@ -480,7 +474,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '"
-                   + toString(type) + "'";
+                    + toString(type) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
         }
@@ -513,7 +507,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
                 return type.cast(java.sql.Date.valueOf(value));
             } catch (final IllegalArgumentException e) {
                 throw new ConversionException(
-                        "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
+                            "String must be in JDBC format [yyyy-MM-dd] to create a java.sql.Date");
             }
         }
 
@@ -523,7 +517,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
                 return type.cast(java.sql.Time.valueOf(value));
             } catch (final IllegalArgumentException e) {
                 throw new ConversionException(
-                        "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
+                            "String must be in JDBC format [HH:mm:ss] to create a java.sql.Time");
             }
         }
 
@@ -533,13 +527,13 @@ public abstract class DateTimeConverter extends AbstractConverter {
                 return type.cast(java.sql.Timestamp.valueOf(value));
             } catch (final IllegalArgumentException e) {
                 throw new ConversionException(
-                        "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
-                        "to create a java.sql.Timestamp");
+                            "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
+                                        "to create a java.sql.Timestamp");
             }
         }
 
         final String msg = toString(getClass()) + " does not support default String to '"
-                   + toString(type) + "' conversion.";
+                    + toString(type) + "' conversion.";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
             log().warn("    (N.B. Re-configure Converter or use alternative implementation)");
@@ -606,7 +600,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         }
         if (patterns.length > 1) {
             throw new ConversionException("Error converting '" + toString(sourceType) + "' to '" + toString(targetType)
-                    + "' using  patterns '" + displayPatterns + "'");
+                        + "' using  patterns '" + displayPatterns + "'");
         }
         throw firstEx;
     }
@@ -624,7 +618,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @throws ConversionException if the String cannot be converted.
      */
     private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value,
-            final DateFormat format) {
+                final DateFormat format) {
         logFormat("Parsing", format);
         format.setLenient(false);
         final ParsePosition pos = new ParsePosition(0);
@@ -632,7 +626,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
-                msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
+                msg += " using pattern '" + ((SimpleDateFormat) format).toPattern() + "'";
             }
             if (log().isDebugEnabled()) {
                 log().debug("    " + msg);
@@ -686,7 +680,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             buffer.append(" with Format");
             if (format instanceof SimpleDateFormat) {
                 buffer.append("[");
-                buffer.append(((SimpleDateFormat)format).toPattern());
+                buffer.append(((SimpleDateFormat) format).toPattern());
                 buffer.append("]");
             }
             buffer.append(" for ");

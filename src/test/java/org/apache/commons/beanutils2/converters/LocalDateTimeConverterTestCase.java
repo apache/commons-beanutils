@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.time.Instant;
@@ -36,8 +37,6 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(LocalDateTimeConverterTestCase.class);
     }
-
-
 
     /**
      * Construct a new Date test case.
@@ -64,8 +63,6 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new LocalDateTimeConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.

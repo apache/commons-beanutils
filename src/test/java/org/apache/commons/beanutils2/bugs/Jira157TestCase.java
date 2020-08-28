@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.io.Serializable;
@@ -105,6 +106,7 @@ public class Jira157TestCase extends TestCase {
             public String getX() {
                 return "x-value";
             }
+
             @SuppressWarnings("unused")
             public String getY() {
                 return "y-value";
@@ -133,6 +135,7 @@ public class Jira157TestCase extends TestCase {
             public String getX() {
                 return "x-value";
             }
+
             @Override
             public String getY() {
                 return "y-value";
@@ -176,6 +179,7 @@ public class Jira157TestCase extends TestCase {
 
     public interface XY {
         String getX();
+
         String getY();
     }
 
@@ -183,13 +187,16 @@ public class Jira157TestCase extends TestCase {
         String getPackageFoo() {
             return "Package Value";
         }
+
         @SuppressWarnings("unused")
         private String getPrivateFoo() {
             return "PrivateFoo Value";
         }
+
         protected String getProtectedFoo() {
             return "ProtectedFoo Value";
         }
+
         public String getPublicFoo() {
             return "PublicFoo Value";
         }

@@ -40,16 +40,13 @@ import java.util.Objects;
 
 public class DynaProperty implements Serializable {
 
-
-
     private static final long serialVersionUID = -3084907613499830175L;
     /*
-     * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
-     * This class uses a custom serialization implementation that writes an integer
-     * for these primitive class.
-     * This list of constants are the ones used in serialization.
-     * If these values are changed, then older versions will no longer be read correctly
+     * There are issues with serializing primitive class types on certain JVM
+     * versions (including java 1.3). This class uses a custom serialization
+     * implementation that writes an integer for these primitive class. This list of
+     * constants are the ones used in serialization. If these values are changed,
+     * then older versions will no longer be read correctly
      */
     private static final int BOOLEAN_TYPE = 1;
     private static final int BYTE_TYPE = 2;
@@ -59,8 +56,6 @@ public class DynaProperty implements Serializable {
     private static final int INT_TYPE = 6;
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
-
-
 
     /**
      * Construct a property that accepts any data type.
@@ -107,10 +102,9 @@ public class DynaProperty implements Serializable {
 
     }
 
-
-
     /** Property name */
     protected String name = null;
+
     /**
      * Get the name of this property.
      * @return the name of the property
@@ -121,6 +115,7 @@ public class DynaProperty implements Serializable {
 
     /** Property type */
     protected transient Class<?> type = null;
+
     /**
      * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>
@@ -139,6 +134,7 @@ public class DynaProperty implements Serializable {
 
     /** The <em>(optional)</em> type of content elements for indexed {@code DynaProperty} */
     protected transient Class<?> contentType;
+
     /**
      * Gets the <em>(optional)</em> type of the indexed content for {@code DynaProperty}'s
      * that support this feature.
@@ -153,8 +149,6 @@ public class DynaProperty implements Serializable {
     public Class<?> getContentType() {
         return contentType;
     }
-
-
 
     /**
      * Does this property represent an indexed value (ie an array or List)?
@@ -206,10 +200,9 @@ public class DynaProperty implements Serializable {
 
         if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
-            result =
-               (Objects.equals(this.name, that.name)) &&
-               (Objects.equals(this.type, that.type)) &&
-               (Objects.equals(this.contentType, that.contentType));
+            result = (Objects.equals(this.name, that.name)) &&
+                        (Objects.equals(this.type, that.type)) &&
+                        (Objects.equals(this.contentType, that.contentType));
         }
 
         return result;
@@ -223,13 +216,13 @@ public class DynaProperty implements Serializable {
     @Override
     public int hashCode() {
 
-       int result = 1;
+        int result = 1;
 
-       result = result * 31 + (name == null ? 0 : name.hashCode());
-       result = result * 31 + (type == null ? 0 : type.hashCode());
-       result = result * 31 + (contentType == null ? 0 : contentType.hashCode());
+        result = result * 31 + (name == null ? 0 : name.hashCode());
+        result = result * 31 + (type == null ? 0 : type.hashCode());
+        result = result * 31 + (contentType == null ? 0 : contentType.hashCode());
 
-       return result;
+        return result;
     }
 
     /**
@@ -251,8 +244,6 @@ public class DynaProperty implements Serializable {
 
     }
 
-
-
     /**
      * Writes this object safely.
      * There are issues with serializing primitive class types on certain JVM versions
@@ -264,10 +255,10 @@ public class DynaProperty implements Serializable {
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
 
-        writeAnyClass(this.type,out);
+        writeAnyClass(this.type, out);
 
         if (isMapped() || isIndexed()) {
-            writeAnyClass(this.contentType,out);
+            writeAnyClass(this.contentType, out);
         }
 
         // write out other values
@@ -341,19 +332,27 @@ public class DynaProperty implements Serializable {
             // it's a type constant
             switch (in.readInt()) {
 
-                case BOOLEAN_TYPE: return   Boolean.TYPE;
-                case BYTE_TYPE:    return      Byte.TYPE;
-                case CHAR_TYPE:    return Character.TYPE;
-                case DOUBLE_TYPE:  return    Double.TYPE;
-                case FLOAT_TYPE:   return     Float.TYPE;
-                case INT_TYPE:     return   Integer.TYPE;
-                case LONG_TYPE:    return      Long.TYPE;
-                case SHORT_TYPE:   return     Short.TYPE;
+                case BOOLEAN_TYPE:
+                    return Boolean.TYPE;
+                case BYTE_TYPE:
+                    return Byte.TYPE;
+                case CHAR_TYPE:
+                    return Character.TYPE;
+                case DOUBLE_TYPE:
+                    return Double.TYPE;
+                case FLOAT_TYPE:
+                    return Float.TYPE;
+                case INT_TYPE:
+                    return Integer.TYPE;
+                case LONG_TYPE:
+                    return Long.TYPE;
+                case SHORT_TYPE:
+                    return Short.TYPE;
                 default:
                     // something's gone wrong
                     throw new StreamCorruptedException(
-                        "Invalid primitive type. "
-                        + "Check version of beanutils used to serialize is compatible.");
+                                "Invalid primitive type. "
+                                            + "Check version of beanutils used to serialize is compatible.");
 
             }
 

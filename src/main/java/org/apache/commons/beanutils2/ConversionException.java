@@ -28,8 +28,6 @@ public class ConversionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * Construct a new exception with the specified message.
      *
@@ -65,8 +63,6 @@ public class ConversionException extends RuntimeException {
         this.cause = cause;
 
     }
-
-
 
     /**
      * The root cause of this {@code ConversionException}, compatible with

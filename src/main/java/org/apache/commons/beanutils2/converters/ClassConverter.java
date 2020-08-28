@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 /**
@@ -71,7 +72,7 @@ public final class ClassConverter extends AbstractConverter {
      */
     @Override
     protected String convertToString(final Object value) {
-        return value instanceof Class ? ((Class<?>)value).getName() : value.toString();
+        return value instanceof Class ? ((Class<?>) value).getName() : value.toString();
     }
 
     /**
@@ -88,7 +89,7 @@ public final class ClassConverter extends AbstractConverter {
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Class.class.equals(type)) {
             ClassLoader classLoader = Thread.currentThread()
-                    .getContextClassLoader();
+                        .getContextClassLoader();
             if (classLoader != null) {
                 try {
                     return type.cast(classLoader.loadClass(value.toString()));

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.expression;
 
 /**
@@ -55,11 +56,11 @@ package org.apache.commons.beanutils2.expression;
  */
 public class DefaultResolver implements Resolver {
 
-    private static final char NESTED        = '.';
-    private static final char MAPPED_START  = '(';
-    private static final char MAPPED_END    = ')';
+    private static final char NESTED = '.';
+    private static final char MAPPED_START = '(';
+    private static final char MAPPED_END = ')';
     private static final char INDEXED_START = '[';
-    private static final char INDEXED_END   = ']';
+    private static final char INDEXED_END = ']';
 
     /**
      * Default Constructor.
@@ -98,7 +99,7 @@ public class DefaultResolver implements Resolver {
                     index = Integer.parseInt(value, 10);
                 } catch (final Exception e) {
                     throw new IllegalArgumentException("Invalid index value '"
-                            + value + "'");
+                                + value + "'");
                 }
                 return index;
             }
@@ -227,7 +228,7 @@ public class DefaultResolver implements Resolver {
             return null;
         }
         boolean indexed = false;
-        boolean mapped  = false;
+        boolean mapped = false;
         for (int i = 0; i < expression.length(); i++) {
             final char c = expression.charAt(i);
             if (indexed) {

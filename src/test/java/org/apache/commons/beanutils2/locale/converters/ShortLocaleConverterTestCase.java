@@ -24,13 +24,9 @@ package org.apache.commons.beanutils2.locale.converters;
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     public ShortLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -40,7 +36,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         super.setUp();
 
-        defaultValue  = new Short("999");
+        defaultValue = new Short("999");
         expectedValue = new Short(expectedIntegerValue);
 
     }
@@ -53,8 +49,6 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
@@ -62,9 +56,9 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // ------------- Construct with localized pattern ------------
         converter = new ShortLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedIntegerPattern,
-                                                  true);
+                    localizedLocale,
+                    localizedIntegerPattern,
+                    true);
 
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
@@ -80,7 +74,8 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Short("1"));
 
         // **************************************************************************
-        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
+        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test
+        // Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
@@ -92,15 +87,16 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Short.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue,
+        // localizedIntegerPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
         converter = new ShortLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultIntegerPattern,
-                                                  false);
+                    localizedLocale,
+                    defaultIntegerPattern,
+                    false);
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -244,4 +240,3 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     }
 
 }
-

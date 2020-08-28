@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import org.apache.commons.beanutils2.AlphaBean;
@@ -35,7 +36,7 @@ public class Jira463TestCase extends TestCase {
     public void testSuppressClassProperty() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
         bub.getPropertyUtils().addBeanIntrospector(
-                SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+                    SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         try {
             bub.getProperty(bean, "class");

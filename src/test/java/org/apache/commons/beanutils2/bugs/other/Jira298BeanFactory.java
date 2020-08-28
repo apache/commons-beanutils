@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import org.apache.commons.beanutils2.bugs.Jira298TestCase;
@@ -35,14 +36,17 @@ public class Jira298BeanFactory {
 
     public interface IX {
         String getName();
+
         void setName(String name);
     }
 
     static class BaseX {
         private String name = "BaseX name value";
+
         public String getName() {
             return name;
         }
+
         public void setName(final String name) {
             this.name = name;
         }

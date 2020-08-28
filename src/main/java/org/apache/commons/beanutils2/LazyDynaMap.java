@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.util.Map;
@@ -67,13 +68,11 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     protected boolean returnNull = false;
 
-
-
     /**
      * Default Constructor.
      */
     public LazyDynaMap() {
-        this(null, (Map<String, Object>)null);
+        this(null, (Map<String, Object>) null);
     }
 
     /**
@@ -82,7 +81,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param name Name of this DynaBean class
      */
     public LazyDynaMap(final String name) {
-        this(name, (Map<String, Object>)null);
+        this(name, (Map<String, Object>) null);
     }
 
     /**
@@ -101,8 +100,8 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param values The Map backing this {@code LazyDynaMap}
      */
     public LazyDynaMap(final String name, final Map<String, Object> values) {
-        this.name      = name   == null ? "LazyDynaMap" : name;
-        this.values    = values == null ? newMap()      : values;
+        this.name = name == null ? "LazyDynaMap" : name;
+        this.values = values == null ? newMap() : values;
         this.dynaClass = this;
     }
 
@@ -122,7 +121,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @param properties Property descriptors for the supported properties
      */
     public LazyDynaMap(final String name, final DynaProperty[] properties) {
-        this(name, (Map<String, Object>)null);
+        this(name, (Map<String, Object>) null);
         if (properties != null) {
             for (final DynaProperty property : properties) {
                 add(property);
@@ -138,8 +137,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public LazyDynaMap(final DynaClass dynaClass) {
         this(dynaClass.getName(), dynaClass.getDynaProperties());
     }
-
-
 
     /**
      * Set the Map backing this {@code DynaBean}
@@ -160,8 +157,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         return values;
     }
 
-
-
     /**
      * Set the value of a simple property with the specified name.
      *
@@ -172,15 +167,12 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     public void set(final String name, final Object value) {
 
         if (isRestricted() && !values.containsKey(name)) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "' (DynaClass is restricted)");
+            throw new IllegalArgumentException("Invalid property name '" + name + "' (DynaClass is restricted)");
         }
 
         values.put(name, value);
 
     }
-
-
 
     /**
      * Return the name of this DynaClass (analogous to the
@@ -257,7 +249,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             final String name = e.getKey();
             final Object value = values.get(name);
             properties[i++] = new DynaProperty(name, value == null ? null
-                    : value.getClass());
+                        : value.getClass());
         }
 
         return properties;
@@ -270,7 +262,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * @return A new {@code DynaBean} instance
      */
     @Override
-    public DynaBean newInstance()  {
+    public DynaBean newInstance() {
 
         // Create a new instance of the Map
         Map<String, Object> newMap = null;
@@ -279,7 +271,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             // The new map is used as properties map
             Map<String, Object> temp = getMap().getClass().newInstance();
             newMap = temp;
-        } catch(final Exception ex) {
+        } catch (final Exception ex) {
             newMap = newMap();
         }
 
@@ -293,8 +285,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         }
         return lazyMap;
     }
-
-
 
     /**
      * <p>Is this DynaClass currently restricted.</p>
@@ -430,8 +420,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         values.remove(name);
     }
 
-
-
     /**
      * Should this DynaClass return a {@code null} from
      * the {@code getDynaProperty(name)} method if the property
@@ -458,9 +446,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this.returnNull = returnNull;
     }
 
-
-
-   /**
+    /**
      * <p>Indicate whether a property actually exists.</p>
      *
      * <p><strong>N.B.</strong> Using {@code getDynaProperty(name) == null}

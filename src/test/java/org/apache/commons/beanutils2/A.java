@@ -27,8 +27,7 @@ public class A {
 
     boolean called = false;
 
-    public void foo(final OutputStream os)
-    {
+    public void foo(final OutputStream os) {
         called = true;
     }
 }

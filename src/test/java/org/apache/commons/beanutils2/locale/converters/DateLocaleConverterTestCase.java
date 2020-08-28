@@ -45,13 +45,9 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
     protected boolean validLocalDateSymbols;
 
-
-
     public DateLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -62,28 +58,28 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.setUp();
 
         final String version = System.getProperty("java.specification.version");
-        log.debug("JDK Version "+version);
+        log.debug("JDK Version " + version);
 
         try {
             final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            expectedValue      = format.parse("20041001");
-            defaultValue       = format.parse("19670316");
+            expectedValue = format.parse("20041001");
+            defaultValue = format.parse("19670316");
         } catch (final Exception ex) {
             log.error("Error creating expected/default dates", ex);
         }
 
         // Default Locale (Use US)
-        defaultLocale           = Locale.US;
-        defaultDatePattern      = "d MMMM yyyy";
-        defaultDateValue        = "1 October 2004";
-        defaultShortDateValue   = "10/01/04";
+        defaultLocale = Locale.US;
+        defaultDatePattern = "d MMMM yyyy";
+        defaultDateValue = "1 October 2004";
+        defaultShortDateValue = "10/01/04";
 
         // Use German Locale
-//        localizedLocale         = Locale.GERMAN;  // N.B. doesn't work for dates
-//        localizedLocale         = Locale.GERMANY; // N.B. doesn't work for dates
-        localizedLocale         = new Locale("de", "AT"); // Austria/German works
-        localizedDatePattern    = "t MMMM uuuu";
-        localizedDateValue      = "1 Oktober 2004";
+        // localizedLocale = Locale.GERMAN; // N.B. doesn't work for dates
+        // localizedLocale = Locale.GERMANY; // N.B. doesn't work for dates
+        localizedLocale = new Locale("de", "AT"); // Austria/German works
+        localizedDatePattern = "t MMMM uuuu";
+        localizedDateValue = "1 Oktober 2004";
         localizedShortDateValue = "01.10.04";
 
         // Test whether the "local pattern characters" are what we
@@ -92,11 +88,11 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         // for JDK 1.4 (JDK 1.3 was OK). The Austria/German locale was OK though
         final String expectedChars = "GuMtkHmsSEDFwWahKzZ";
         final DateFormatSymbols localizedSymbols = new DateFormatSymbols(localizedLocale);
-        final String localChars    = localizedSymbols.getLocalPatternChars();
+        final String localChars = localizedSymbols.getLocalPatternChars();
 
         // different JDK versions seem to have different numbers of pattern characters
-        final int lth = localChars.length() > expectedChars.length() ? expectedChars.length() :
-                Math.min(localChars.length(), expectedChars.length());
+        final int lth = localChars.length() > expectedChars.length() ? expectedChars.length()
+                    : Math.min(localChars.length(), expectedChars.length());
         validLocalDateSymbols = expectedChars.substring(0, lth).equals(localChars.substring(0, lth));
 
     }
@@ -108,8 +104,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void tearDown() {
         super.tearDown();
     }
-
-
 
     public void testSetLenient() {
         // make sure that date format works as expected
@@ -213,9 +207,9 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         // ------------- Construct with localized pattern ------------
         converter = new DateLocaleConverter(defaultValue,
-                                            localizedLocale,
-                                            localizedDatePattern,
-                                            true);
+                    localizedLocale,
+                    localizedDatePattern,
+                    true);
 
         convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
@@ -233,15 +227,16 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Date.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
+        // convertValueToType(converter, "(B)", String.class, localizedDateValue,
+        // localizedDatePattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
         converter = new DateLocaleConverter(defaultValue,
-                                            localizedLocale,
-                                            defaultDatePattern,
-                                            false);
+                    localizedLocale,
+                    defaultDatePattern,
+                    false);
 
         convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);
@@ -412,7 +407,8 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         try {
             converter.convert("01-10-2004X", "dd-MM-yyyy");
         } catch (final ConversionException e) {
-            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
+            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10",
+                        e.getMessage());
         }
 
     }
@@ -431,9 +427,8 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
     public void testCalendarObject() {
         converter = new DateLocaleConverter(defaultLocale);
         final java.util.Calendar calendar = java.util.Calendar.getInstance();
-        calendar.setTime((java.util.Date)expectedValue);
+        calendar.setTime((java.util.Date) expectedValue);
         assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
     }
 
 }
-

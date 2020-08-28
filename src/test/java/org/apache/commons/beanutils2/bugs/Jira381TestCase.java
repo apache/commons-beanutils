@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.Method;
@@ -49,7 +50,7 @@ public class Jira381TestCase extends TestCase {
 
         final Class<?> target = TestServiceBean.class;
         final String methodName = "performOp";
-        final Class<?>[] runtimeClasses = new Class<?>[]{TestObjectSubclass.class};
+        final Class<?>[] runtimeClasses = new Class<?>[] {TestObjectSubclass.class};
 
         final Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
 
@@ -61,18 +62,18 @@ public class Jira381TestCase extends TestCase {
     /**
      * Test bean.
      */
-    public class TestServiceBean{
+    public class TestServiceBean {
 
         /**
          * Generic object method
          */
-        public void performOp(final Object o){
+        public void performOp(final Object o) {
         }
 
         /**
          * Object method
          */
-        public void performOp(final TestObject o){
+        public void performOp(final TestObject o) {
         }
     }
 
@@ -80,12 +81,12 @@ public class Jira381TestCase extends TestCase {
      * Test object.
      *
      */
-    public class TestObject{
+    public class TestObject {
     }
 
     /**
      * Used to match performop with test object
      */
-    public class TestObjectSubclass extends TestObject{
+    public class TestObjectSubclass extends TestObject {
     }
 }

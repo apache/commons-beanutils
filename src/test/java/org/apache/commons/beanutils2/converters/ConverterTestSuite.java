@@ -57,4 +57,3 @@ public class ConverterTestSuite {
         return testSuite;
     }
 }
-

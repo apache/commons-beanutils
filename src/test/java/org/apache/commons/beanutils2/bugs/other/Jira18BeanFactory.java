@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class Jira18BeanFactory {
             mapped.put("foo-key", "foo-value");
             mapped.put("bar-key", "bar-value");
         }
+
         /**
          * Return simple property.
          *
@@ -94,7 +96,7 @@ public class Jira18BeanFactory {
          * @return The mapped value
          */
         public String getMapped(final String key) {
-            return (String)mapped.get(key);
+            return (String) mapped.get(key);
         }
 
         /**

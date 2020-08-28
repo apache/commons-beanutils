@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.beans.PropertyDescriptor;
@@ -89,9 +90,9 @@ public class Jira357TestCase extends TestCase {
     public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
 
         // FIXME the isBar() method returning AbstractTestBean.class as the
-        //       declaring class instead of ConcreteTestBean.class
-        //       causing this test to fail - so its commented out for now
-        //checkReadMethod("bar", ConcreteTestBean.class);
+        // declaring class instead of ConcreteTestBean.class
+        // causing this test to fail - so its commented out for now
+        // checkReadMethod("bar", ConcreteTestBean.class);
     }
 
     /**
@@ -117,7 +118,8 @@ public class Jira357TestCase extends TestCase {
         // Test InnerClassProperty
         final PropertyDescriptor descriptor = findDescriptor(propertyName, descriptors);
         assertNotNull(propertyName + "descriptor", descriptor);
-        assertEquals(propertyName + " read method declaring class", expectedDeclaringClass, descriptor.getReadMethod().getDeclaringClass());
+        assertEquals(propertyName + " read method declaring class", expectedDeclaringClass,
+                    descriptor.getReadMethod().getDeclaringClass());
     }
 
     /**
@@ -140,9 +142,11 @@ public class Jira357TestCase extends TestCase {
     public abstract static class AbstractTestBean {
 
         public abstract String getFoo();
+
         public abstract void setFoo(String foo);
 
         public abstract boolean isBar();
+
         public abstract void setBar(boolean bar);
 
         public abstract AbstractTestBean.InnerClass getInnerClassProperty();
@@ -150,9 +154,11 @@ public class Jira357TestCase extends TestCase {
         /** Inner Class */
         public abstract static class InnerClass {
             private String firstName;
+
             public String getInnerName() {
                 return firstName;
             }
+
             public void setInnerName(final String firstName) {
                 this.firstName = firstName;
             }
@@ -172,22 +178,27 @@ public class Jira357TestCase extends TestCase {
         public String getFoo() {
             return foo;
         }
+
         @Override
         public void setFoo(final String foo) {
             this.foo = foo;
         }
+
         @Override
         public boolean isBar() {
             return bar;
         }
+
         @Override
         public void setBar(final boolean bar) {
             this.bar = bar;
         }
+
         @Override
         public ConcreteTestBean.InnerClass getInnerClassProperty() {
             return innerClassProperty;
         }
+
         public void setInnerClassProperty(final ConcreteTestBean.InnerClass innerClassProperty) {
             this.innerClassProperty = innerClassProperty;
         }

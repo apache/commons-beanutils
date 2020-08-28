@@ -119,13 +119,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object value = values.get(name);
         if (value == null) {
-            throw new NullPointerException
-                    ("No mapped value for '" + name + "(" + key + ")'");
+            throw new NullPointerException("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             return ((Map<?, ?>) value).containsKey(key);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'");
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -198,15 +196,13 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object value = values.get(name);
         if (value == null) {
-            throw new NullPointerException
-                    ("No indexed value for '" + name + "[" + index + "]'");
+            throw new NullPointerException("No indexed value for '" + name + "[" + index + "]'");
         } else if (value.getClass().isArray()) {
             return Array.get(value, index);
         } else if (value instanceof List) {
             return ((List<?>) value).get(index);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-indexed property for '" + name + "[" + index + "]'");
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]'");
         }
 
     }
@@ -229,13 +225,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object value = values.get(name);
         if (value == null) {
-            throw new NullPointerException
-                    ("No mapped value for '" + name + "(" + key + ")'");
+            throw new NullPointerException("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             return ((Map<?, ?>) value).get(key);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'");
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -269,13 +263,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object value = values.get(name);
         if (value == null) {
-            throw new NullPointerException
-                    ("No mapped value for '" + name + "(" + key + ")'");
+            throw new NullPointerException("No mapped value for '" + name + "(" + key + ")'");
         } else if (value instanceof Map) {
             ((Map<?, ?>) value).remove(key);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'");
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -299,15 +291,13 @@ public class BasicDynaBean implements DynaBean, Serializable {
         final DynaProperty descriptor = getDynaProperty(name);
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
-                throw new NullPointerException
-                        ("Primitive value for '" + name + "'");
+                throw new NullPointerException("Primitive value for '" + name + "'");
             }
         } else if (!isAssignable(descriptor.getType(), value.getClass())) {
-            throw new ConversionException
-                    ("Cannot assign value of type '" +
-                    value.getClass().getName() +
-                    "' to property '" + name + "' of type '" +
-                    descriptor.getType().getName() + "'");
+            throw new ConversionException("Cannot assign value of type '" +
+                        value.getClass().getName() +
+                        "' to property '" + name + "' of type '" +
+                        descriptor.getType().getName() + "'");
         }
         values.put(name, value);
 
@@ -334,8 +324,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object prop = values.get(name);
         if (prop == null) {
-            throw new NullPointerException
-                    ("No indexed value for '" + name + "[" + index + "]'");
+            throw new NullPointerException("No indexed value for '" + name + "[" + index + "]'");
         } else if (prop.getClass().isArray()) {
             Array.set(prop, index, value);
         } else if (prop instanceof List) {
@@ -350,8 +339,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
                 throw new ConversionException(e.getMessage());
             }
         } else {
-            throw new IllegalArgumentException
-                    ("Non-indexed property for '" + name + "[" + index + "]'");
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]'");
         }
 
     }
@@ -375,8 +363,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final Object prop = values.get(name);
         if (prop == null) {
-            throw new NullPointerException
-                    ("No mapped value for '" + name + "(" + key + ")'");
+            throw new NullPointerException("No mapped value for '" + name + "(" + key + ")'");
         } else if (prop instanceof Map) {
             @SuppressWarnings("unchecked")
             final
@@ -385,8 +372,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
             Map<String, Object> map = (Map<String, Object>) prop;
             map.put(key, value);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'");
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'");
         }
 
     }
@@ -404,8 +390,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
         final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "'");
+            throw new IllegalArgumentException("Invalid property name '" + name + "'");
         }
         return descriptor;
 
@@ -422,14 +407,14 @@ public class BasicDynaBean implements DynaBean, Serializable {
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
-                dest == Boolean.TYPE && source == Boolean.class ||
-                dest == Byte.TYPE && source == Byte.class ||
-                dest == Character.TYPE && source == Character.class ||
-                dest == Double.TYPE && source == Double.class ||
-                dest == Float.TYPE && source == Float.class ||
-                dest == Integer.TYPE && source == Integer.class ||
-                dest == Long.TYPE && source == Long.class ||
-                dest == Short.TYPE && source == Short.class) {
+                    dest == Boolean.TYPE && source == Boolean.class ||
+                    dest == Byte.TYPE && source == Byte.class ||
+                    dest == Character.TYPE && source == Character.class ||
+                    dest == Double.TYPE && source == Double.class ||
+                    dest == Float.TYPE && source == Float.class ||
+                    dest == Integer.TYPE && source == Integer.class ||
+                    dest == Long.TYPE && source == Long.class ||
+                    dest == Short.TYPE && source == Short.class) {
             return true;
         }
         return false;

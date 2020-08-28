@@ -34,10 +34,6 @@ import junit.framework.TestSuite;
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
-
-
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -48,8 +44,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         super(name);
 
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -79,8 +73,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         bean = null;
 
     }
-
-
 
     /**
      * The {@code set()} method.
@@ -115,7 +107,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         // Set up initial Value
         String testValue = "Original Value";
         final String testProperty = "stringProperty";
-        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final TestBean instance = (TestBean) ((WrapDynaBean) bean).getInstance();
         instance.setStringProperty(testValue);
         assertEquals("Check String property", testValue, instance.getStringProperty());
 
@@ -154,7 +146,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         // Set up initial Value
         String testValue = "Original Value";
         final String testProperty = "stringIndexed";
-        final TestBean instance = (TestBean)((WrapDynaBean)bean).getInstance();
+        final TestBean instance = (TestBean) ((WrapDynaBean) bean).getInstance();
         instance.setStringIndexed(0, testValue);
         assertEquals("Check String property", testValue, instance.getStringIndexed(0));
 
@@ -179,7 +171,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can see first key",
-                    bean.contains("mappedProperty", "First Key"));
+                        bean.contains("mappedProperty", "First Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (final UnsupportedOperationException t) {
             // Expected result
@@ -189,7 +181,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+                        !bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (final UnsupportedOperationException t) {
             // Expected result
@@ -208,11 +200,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can see first key",
-                    bean.contains("mappedProperty", "First Key"));
+                        bean.contains("mappedProperty", "First Key"));
             bean.remove("mappedProperty", "First Key");
             fail("Should have thrown UnsupportedOperationException");
-            //            assertTrue("Can not see first key",
-            //         !bean.contains("mappedProperty", "First Key"));
+            // assertTrue("Can not see first key",
+            // !bean.contains("mappedProperty", "First Key"));
         } catch (final UnsupportedOperationException t) {
             // Expected result
         } catch (final Throwable t) {
@@ -221,11 +213,11 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         try {
             assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+                        !bean.contains("mappedProperty", "Unknown Key"));
             bean.remove("mappedProperty", "Unknown Key");
             fail("Should have thrown UnsupportedOperationException");
-            //            assertTrue("Can not see unknown key",
-            //         !bean.contains("mappedProperty", "Unknown Key"));
+            // assertTrue("Can not see unknown key",
+            // !bean.contains("mappedProperty", "Unknown Key"));
         } catch (final UnsupportedOperationException t) {
             // Expected result
         } catch (final Throwable t) {
@@ -268,7 +260,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         assertEquals("origBean new value", newValue, origBean.get("intProperty"));
 
         // Serialize/Deserialize & test value
-        final WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
+        final WrapDynaBean bean = (WrapDynaBean) serializeDeserialize(origBean, "First Test");
         assertEquals("bean value", newValue, bean.get("intProperty"));
 
     }
@@ -292,8 +284,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         // Deserialize the test object
         Object result = null;
         try {
-            final ByteArrayInputStream bais =
-                new ByteArrayInputStream(baos.toByteArray());
+            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             final ObjectInputStream ois = new ObjectInputStream(bais);
             result = ois.readObject();
             bais.close();
@@ -320,7 +311,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     public void testGetWrapDynaClassFromCache() {
         final WrapDynaClass clazz = WrapDynaClass.createDynaClass(TestBean.class);
         assertSame("Instance not cached", clazz,
-                WrapDynaClass.createDynaClass(TestBean.class));
+                    WrapDynaClass.createDynaClass(TestBean.class));
     }
 
     /**
@@ -342,7 +333,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         final PropertyUtilsBean pu = new PropertyUtilsBean();
         pu.addBeanIntrospector(new FluentPropertyBeanIntrospector());
         final WrapDynaClass dynaClass = WrapDynaClass.createDynaClass(
-                FluentIntrospectionTestBean.class, pu);
+                    FluentIntrospectionTestBean.class, pu);
         final FluentIntrospectionTestBean obj = new FluentIntrospectionTestBean();
         bean = new WrapDynaBean(obj, dynaClass);
         bean.set("fluentProperty", "testvalue");

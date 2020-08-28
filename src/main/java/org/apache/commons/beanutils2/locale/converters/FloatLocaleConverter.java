@@ -178,11 +178,11 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public FloatLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-   /**
+    /**
     * Convert the specified locale-sensitive input object into an output object of the
     * specified type.  This method will return Float value or throw exception if value
     * can not be stored in the Float.
@@ -195,14 +195,14 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
     *  successfully
     * @throws ParseException if an error occurs parsing a String to a Number
     */
-   @Override
-   protected Object parse(final Object value, final String pattern) throws ParseException {
-      final Number parsed = (Number) super.parse(value, pattern);
-      final double doubleValue = parsed.doubleValue();
-      final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
-      if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
-          throw new ConversionException("Supplied number is not of type Float: "+parsed);
-      }
-      return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
-   }
+    @Override
+    protected Object parse(final Object value, final String pattern) throws ParseException {
+        final Number parsed = (Number) super.parse(value, pattern);
+        final double doubleValue = parsed.doubleValue();
+        final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
+        if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
+            throw new ConversionException("Supplied number is not of type Float: " + parsed);
+        }
+        return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
+    }
 }

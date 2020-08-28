@@ -58,34 +58,34 @@ public class EnumConverterTestCase extends TestCase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "DELIVERED",
-            "ORDERED",
-            "READY"
+                    "DELIVERED",
+                    "ORDERED",
+                    "READY"
         };
 
         final PizzaStatus[] expected = {
-            PizzaStatus.DELIVERED,
-            PizzaStatus.ORDERED,
-            PizzaStatus.READY
+                    PizzaStatus.DELIVERED,
+                    PizzaStatus.ORDERED,
+                    PizzaStatus.READY
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Enum",expected[i],converter.convert(PizzaStatus.class,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Enum", expected[i], converter.convert(PizzaStatus.class, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -103,9 +103,6 @@ public class EnumConverterTestCase extends TestCase {
     }
 
     public enum PizzaStatus {
-        ORDERED,
-        READY,
-        DELIVERED;
+        ORDERED, READY, DELIVERED;
     }
 }
-

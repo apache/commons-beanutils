@@ -35,11 +35,7 @@ public class LocalTimeConverterTestCase extends TestCase {
         return new TestSuite(LocalTimeConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public LocalTimeConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class LocalTimeConverterTestCase extends TestCase {
         return new LocalTimeConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,36 +59,34 @@ public class LocalTimeConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "10:15",
-            "08:45:30"
+                    "10:15",
+                    "08:45:30"
         };
 
         final LocalTime[] expected = {
-                LocalTime.parse("10:15"),
-                LocalTime.parse("08:45:30")
+                    LocalTime.parse("10:15"),
+                    LocalTime.parse("08:45:30")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(LocalTime.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(LocalTime.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -111,4 +103,3 @@ public class LocalTimeConverterTestCase extends TestCase {
         }
     }
 }
-

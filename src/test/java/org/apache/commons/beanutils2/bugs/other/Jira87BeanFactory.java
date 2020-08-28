@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import org.apache.commons.beanutils2.bugs.Jira87TestCase;
@@ -33,7 +34,10 @@ public class Jira87BeanFactory {
         return new PackageMappedImpl();
     }
 
-    /* =================== Public interface with Mapped Property ========================= */
+    /*
+     * =================== Public interface with Mapped Property
+     * =========================
+     */
     /**
      * Public interface with a mapped property.
      */
@@ -48,7 +52,10 @@ public class Jira87BeanFactory {
 
     }
 
-    /* =============== Package Friendly implementation of public interface =============== */
+    /*
+     * =============== Package Friendly implementation of public interface
+     * ===============
+     */
     static class PackageMappedImpl implements PublicMappedInterface {
 
         /**

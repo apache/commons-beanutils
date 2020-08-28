@@ -35,11 +35,7 @@ public class UUIDConverterTestCase extends TestCase {
         return new TestSuite(UUIDConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public UUIDConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class UUIDConverterTestCase extends TestCase {
         return new UUIDConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,36 +59,34 @@ public class UUIDConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "123e4567-e89b-12d3-a456-556642440000",
-            "7dc53df5-703e-49b3-8670-b1c468f47f1f"
+                    "123e4567-e89b-12d3-a456-556642440000",
+                    "7dc53df5-703e-49b3-8670-b1c468f47f1f"
         };
 
         final UUID[] expected = {
-            UUID.fromString("123e4567-e89b-12d3-a456-556642440000"),
-            UUID.fromString("7dc53df5-703e-49b3-8670-b1c468f47f1f")
+                    UUID.fromString("123e4567-e89b-12d3-a456-556642440000"),
+                    UUID.fromString("7dc53df5-703e-49b3-8670-b1c468f47f1f")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(UUID.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(UUID.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -111,4 +103,3 @@ public class UUIDConverterTestCase extends TestCase {
         }
     }
 }
-

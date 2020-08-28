@@ -15,14 +15,12 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
-
 
 /**
  * <p>Utility methods for using Java Reflection APIs to facilitate generic
@@ -36,21 +34,6 @@ import java.util.Map;
  */
 
 public class PropertyUtils {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Clear any cached property descriptors information for all classes
@@ -100,7 +83,7 @@ public class PropertyUtils {
      */
     public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
         return PropertyUtilsBean.getInstance().removeBeanIntrospector(
-                introspector);
+                    introspector);
     }
 
     /**
@@ -125,12 +108,11 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#copyProperties
      */
     public static void copyProperties(final Object dest, final Object orig)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().copyProperties(dest, orig);
     }
-
 
     /**
      * <p>Return the entire set of properties for which the specified bean
@@ -151,13 +133,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#describe
      */
     public static Map<String, Object> describe(final Object bean)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().describe(bean);
 
     }
-
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -183,13 +164,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getIndexedProperty(Object,String)
      */
     public static Object getIndexedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -215,13 +195,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getIndexedProperty(Object,String, int)
      */
     public static Object getIndexedProperty(final Object bean,
-                                            final String name, final int index)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final int index)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getIndexedProperty(bean, name, index);
     }
-
 
     /**
      * <p>Return the value of the specified mapped property of the
@@ -243,13 +222,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getMappedProperty(Object,String)
      */
     public static Object getMappedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getMappedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified mapped property of the specified
@@ -271,14 +249,13 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getMappedProperty(Object,String, String)
      */
     public static Object getMappedProperty(final Object bean,
-                                           final String name, final String key)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final String key)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getMappedProperty(bean, name, key);
 
     }
-
 
     /**
      * <p>Return the mapped property descriptors for this bean class.</p>
@@ -294,7 +271,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
 
     }
-
 
     /**
      * <p>Return the value of the (possibly nested) property of the specified
@@ -319,13 +295,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getNestedProperty
      */
     public static Object getNestedProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getNestedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified property of the specified bean,
@@ -350,13 +325,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getProperty
      */
     public static Object getProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getProperty(bean, name);
 
     }
-
 
     /**
      * <p>Retrieve the property descriptor for the specified property of the
@@ -383,14 +357,13 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getPropertyDescriptor
      */
     public static PropertyDescriptor getPropertyDescriptor(final Object bean,
-                                                           final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getPropertyDescriptor(bean, name);
 
     }
-
 
     /**
      * <p>Retrieve the property descriptors for the specified class,
@@ -404,13 +377,11 @@ public class PropertyUtils {
      * @throws IllegalArgumentException if {@code beanClass} is null
      * @see PropertyUtilsBean#getPropertyDescriptors(Class)
      */
-    public static PropertyDescriptor[]
-            getPropertyDescriptors(final Class<?> beanClass) {
+    public static PropertyDescriptor[] getPropertyDescriptors(final Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(beanClass);
 
     }
-
 
     /**
      * <p>Retrieve the property descriptors for the specified bean,
@@ -429,7 +400,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getPropertyDescriptors(bean);
 
     }
-
 
     /**
      * <p>Return the Java Class representing the property editor class that has
@@ -455,13 +425,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getPropertyEditorClass(Object,String)
      */
     public static Class<?> getPropertyEditorClass(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getPropertyEditorClass(bean, name);
 
     }
-
 
     /**
      * <p>Return the Java Class representing the property type of the specified
@@ -488,12 +457,11 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getPropertyType(Object, String)
      */
     public static Class<?> getPropertyType(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getPropertyType(bean, name);
     }
-
 
     /**
      * <p>Return an accessible property getter method for this property,
@@ -510,7 +478,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getReadMethod(descriptor);
 
     }
-
 
     /**
      * <p>Return the value of the specified simple property of the specified
@@ -535,13 +502,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#getSimpleProperty
      */
     public static Object getSimpleProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         return PropertyUtilsBean.getInstance().getSimpleProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return an accessible property setter method for this property,
@@ -558,7 +524,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().getWriteMethod(descriptor);
 
     }
-
 
     /**
      * <p>Return {@code true} if the specified property name identifies
@@ -582,7 +547,6 @@ public class PropertyUtils {
         return PropertyUtilsBean.getInstance().isReadable(bean, name);
     }
 
-
     /**
      * <p>Return {@code true} if the specified property name identifies
      * a writeable property on the specified bean; otherwise, return
@@ -604,7 +568,6 @@ public class PropertyUtils {
 
         return PropertyUtilsBean.getInstance().isWriteable(bean, name);
     }
-
 
     /**
      * <p>Sets the value of the specified indexed property of the specified
@@ -631,14 +594,13 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
     public static void setIndexedProperty(final Object bean, final String name,
-                                          final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, value);
 
     }
-
 
     /**
      * <p>Sets the value of the specified indexed property of the specified
@@ -664,13 +626,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
      */
     public static void setIndexedProperty(final Object bean, final String name,
-                                          final int index, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final int index, final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, index, value);
     }
-
 
     /**
      * <p>Sets the value of the specified mapped property of the
@@ -692,13 +653,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setMappedProperty(Object, String, Object)
      */
     public static void setMappedProperty(final Object bean, final String name,
-                                         final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setMappedProperty(bean, name, value);
     }
-
 
     /**
      * <p>Sets the value of the specified mapped property of the specified
@@ -720,13 +680,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setMappedProperty(Object, String, String, Object)
      */
     public static void setMappedProperty(final Object bean, final String name,
-                                         final String key, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String key, final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setMappedProperty(bean, name, key, value);
     }
-
 
     /**
      * <p>Sets the value of the (possibly nested) property of the specified
@@ -751,13 +710,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setNestedProperty
      */
     public static void setNestedProperty(final Object bean,
-                                         final String name, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setNestedProperty(bean, name, value);
     }
-
 
     /**
      * <p>Set the value of the specified property of the specified bean,
@@ -782,13 +740,12 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setProperty
      */
     public static void setProperty(final Object bean, final String name, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setProperty(bean, name, value);
 
     }
-
 
     /**
      * <p>Set the value of the specified simple property of the specified bean,
@@ -813,12 +770,11 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#setSimpleProperty
      */
     public static void setSimpleProperty(final Object bean,
-                                         final String name, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+                final String name, final Object value)
+                throws IllegalAccessException, InvocationTargetException,
+                NoSuchMethodException {
 
         PropertyUtilsBean.getInstance().setSimpleProperty(bean, name, value);
     }
-
 
 }

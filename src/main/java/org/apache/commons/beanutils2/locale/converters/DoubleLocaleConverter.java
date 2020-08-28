@@ -176,7 +176,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DoubleLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
@@ -201,4 +201,3 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
         return result;
     }
 }
-

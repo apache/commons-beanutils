@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.math.BigDecimal;
@@ -88,14 +89,12 @@ import org.apache.commons.beanutils2.ConversionException;
 public abstract class NumberConverter extends AbstractConverter {
 
     private static final Integer ZERO = Integer.valueOf(0);
-    private static final Integer ONE  = Integer.valueOf(1);
+    private static final Integer ONE = Integer.valueOf(1);
 
     private String pattern;
     private final boolean allowDecimals;
     private boolean useLocaleFormat;
     private Locale locale;
-
-
 
     /**
      * Construct a <b>java.lang.Number</b> <i>Converter</i>
@@ -120,8 +119,6 @@ public abstract class NumberConverter extends AbstractConverter {
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }
-
-
 
     /**
      * Return whether decimals are allowed in the number.
@@ -191,8 +188,6 @@ public abstract class NumberConverter extends AbstractConverter {
         setUseLocaleFormat(true);
     }
 
-
-
     /**
      * Convert an input Number object into a String.
      *
@@ -238,22 +233,22 @@ public abstract class NumberConverter extends AbstractConverter {
         final Class<?> sourceType = value.getClass();
         // Handle Number
         if (value instanceof Number) {
-            return toNumber(sourceType, targetType, (Number)value);
+            return toNumber(sourceType, targetType, (Number) value);
         }
 
         // Handle Boolean
         if (value instanceof Boolean) {
-            return toNumber(sourceType, targetType, ((Boolean)value).booleanValue() ? ONE : ZERO);
+            return toNumber(sourceType, targetType, ((Boolean) value).booleanValue() ? ONE : ZERO);
         }
 
         // Handle Date --> Long
         if (value instanceof Date && Long.class.equals(targetType)) {
-            return targetType.cast(Long.valueOf(((Date)value).getTime()));
+            return targetType.cast(Long.valueOf(((Date) value).getTime()));
         }
 
         // Handle Calendar --> Long
-        if (value instanceof Calendar  && Long.class.equals(targetType)) {
-            return targetType.cast(Long.valueOf(((Calendar)value).getTime().getTime()));
+        if (value instanceof Calendar && Long.class.equals(targetType)) {
+            return targetType.cast(Long.valueOf(((Calendar) value).getTime().getTime()));
         }
 
         // Convert all other types to String & handle
@@ -312,11 +307,11 @@ public abstract class NumberConverter extends AbstractConverter {
             final long longValue = value.longValue();
             if (longValue > Byte.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                            + "' is too large for " + toString(targetType));
             }
             if (longValue < Byte.MIN_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                            + "' is too small " + toString(targetType));
             }
             return targetType.cast(Byte.valueOf(value.byteValue()));
         }
@@ -326,11 +321,11 @@ public abstract class NumberConverter extends AbstractConverter {
             final long longValue = value.longValue();
             if (longValue > Short.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                            + "' is too large for " + toString(targetType));
             }
             if (longValue < Short.MIN_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                            + "' is too small " + toString(targetType));
             }
             return targetType.cast(Short.valueOf(value.shortValue()));
         }
@@ -340,11 +335,11 @@ public abstract class NumberConverter extends AbstractConverter {
             final long longValue = value.longValue();
             if (longValue > Integer.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                            + "' is too large for " + toString(targetType));
             }
             if (longValue < Integer.MIN_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                            + "' is too small " + toString(targetType));
             }
             return targetType.cast(Integer.valueOf(value.intValue()));
         }
@@ -358,7 +353,7 @@ public abstract class NumberConverter extends AbstractConverter {
         if (targetType.equals(Float.class)) {
             if (value.doubleValue() > Float.MAX_VALUE) {
                 throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                            + "' is too large for " + toString(targetType));
             }
             return targetType.cast(Float.valueOf(value.floatValue()));
         }
@@ -373,7 +368,7 @@ public abstract class NumberConverter extends AbstractConverter {
             if (value instanceof Float || value instanceof Double) {
                 return targetType.cast(new BigDecimal(value.toString()));
             } else if (value instanceof BigInteger) {
-                return targetType.cast(new BigDecimal((BigInteger)value));
+                return targetType.cast(new BigDecimal((BigInteger) value));
             } else if (value instanceof BigDecimal) {
                 return targetType.cast(new BigDecimal(value.toString()));
             } else {
@@ -384,13 +379,13 @@ public abstract class NumberConverter extends AbstractConverter {
         // BigInteger
         if (targetType.equals(BigInteger.class)) {
             if (value instanceof BigDecimal) {
-                return targetType.cast(((BigDecimal)value).toBigInteger());
+                return targetType.cast(((BigDecimal) value).toBigInteger());
             }
             return targetType.cast(BigInteger.valueOf(value.longValue()));
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '"
-                   + toString(targetType) + "'";
+                    + toString(targetType) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
         }
@@ -461,7 +456,7 @@ public abstract class NumberConverter extends AbstractConverter {
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion from '" +
-                     toString(sourceType) + "' to '" + toString(targetType) + "'";
+                    toString(sourceType) + "' to '" + toString(targetType) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
         }
@@ -509,7 +504,7 @@ public abstract class NumberConverter extends AbstractConverter {
             } else {
                 if (log().isDebugEnabled()) {
                     log().debug("    Using pattern '" + pattern + "'" +
-                              " with Locale[" + locale + "]");
+                                " with Locale[" + locale + "]");
                 }
                 final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
                 format = new DecimalFormat(pattern, symbols);
@@ -544,13 +539,13 @@ public abstract class NumberConverter extends AbstractConverter {
      * @throws ConversionException if the String cannot be converted.
      */
     private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value,
-            final NumberFormat format) {
+                final NumberFormat format) {
         final ParsePosition pos = new ParsePosition(0);
         final Number parsedNumber = format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {
             String msg = "Error converting from '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof DecimalFormat) {
-                msg += " using pattern '" + ((DecimalFormat)format).toPattern() + "'";
+                msg += " using pattern '" + ((DecimalFormat) format).toPattern() + "'";
             }
             if (locale != null) {
                 msg += " for locale=[" + locale + "]";

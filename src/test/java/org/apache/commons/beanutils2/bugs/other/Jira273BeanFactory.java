@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import org.apache.commons.beanutils2.bugs.Jira273TestCase;
@@ -97,20 +98,24 @@ public class Jira273BeanFactory {
             return "PublicBeanWithMethod";
         }
     }
+
     private static class PrivatePublicOverridden extends PublicBeanWithMethod {
         @Override
         public String getBeanValue() {
             return "PrivatePublicOverridden";
         }
     }
+
     private static class PrivatePublicNotOverridden extends PublicBeanWithMethod {
     }
+
     private static class PrivatePrivatePublicOverridden extends PrivatePublicNotOverridden {
         @Override
         public String getBeanValue() {
             return "PrivatePrivatePublicOverridden";
         }
     }
+
     private static class PrivatePrivatePublicNotOverridden extends PrivatePublicNotOverridden {
     }
 }

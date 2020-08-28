@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.util.ArrayList;
@@ -54,8 +55,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     private final boolean readOnly;
     private transient Set<K> keySet;
 
-
-
     /**
      * Constructs a read only Map for the specified
      * {@link DynaBean}.
@@ -83,10 +82,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         this.readOnly = readOnly;
     }
 
-
-
-
-
     /**
      * Indicate whether the Map is read only.
      *
@@ -96,8 +91,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     public boolean isReadOnly() {
         return readOnly;
     }
-
-
 
     /**
      * clear() operation is not supported.
@@ -311,8 +304,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         return Collections.unmodifiableList(values);
     }
 
-
-
     /**
      * Provide access to the underlying {@link DynaBean}
      * this Map decorates.
@@ -330,8 +321,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * @return the converted key to be used in the decorated map
      */
     protected abstract K convertKey(String propertyName);
-
-
 
     /**
      * Convenience method to retrieve the {@link DynaProperty}s
@@ -372,10 +361,10 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
-            final Map.Entry<?, ?> e = (Map.Entry<?, ?>)o;
+            final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
             return key.equals(e.getKey()) &&
-                    (value == null ? e.getValue() == null
-                                   : value.equals(e.getValue()));
+                        (value == null ? e.getValue() == null
+                                    : value.equals(e.getValue()));
         }
 
         @Override

@@ -175,7 +175,6 @@ public class ConvertUtilsBean {
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
 
-
     /**
      * Get singleton instance
      * @return The singleton instance
@@ -184,21 +183,16 @@ public class ConvertUtilsBean {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
 
-
-
     /**
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap<Class<?>, Converter> converters =
-            new WeakFastHashMap<>();
+    private final WeakFastHashMap<Class<?>, Converter> converters = new WeakFastHashMap<>();
 
     /**
      * The {@code Log} instance for this class.
      */
     private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
-
-
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -206,8 +200,6 @@ public class ConvertUtilsBean {
         deregister();
         converters.setFast(true);
     }
-
-
 
     /**
      * Convert the specified value into a String.  If the specified value
@@ -255,7 +247,7 @@ public class ConvertUtilsBean {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" +
-                      clazz.getName() + "'");
+                        clazz.getName() + "'");
         }
         Converter converter = lookup(clazz);
         if (converter == null) {
@@ -289,7 +281,7 @@ public class ConvertUtilsBean {
         }
         if (log.isDebugEnabled()) {
             log.debug("Convert String[" + values.length + "] to class '" +
-                      type.getName() + "[]'");
+                        type.getName() + "[]'");
         }
         Converter converter = lookup(type);
         if (converter == null) {
@@ -324,10 +316,10 @@ public class ConvertUtilsBean {
         if (log.isDebugEnabled()) {
             if (value == null) {
                 log.debug("Convert null value to type '" +
-                        targetType.getName() + "'");
+                            targetType.getName() + "'");
             } else {
                 log.debug("Convert type '" + sourceType.getName() + "' value '" + value +
-                      "' to type '" + targetType.getName() + "'");
+                            "' to type '" + targetType.getName() + "'");
             }
         }
 
@@ -340,11 +332,11 @@ public class ConvertUtilsBean {
             converted = converter.convert(targetType, value);
         }
         if (String.class.equals(targetType) && converted != null &&
-                !(converted instanceof String)) {
+                    !(converted instanceof String)) {
 
             // NOTE: For backwards compatibility, if the Converter
-            //       doesn't handle  conversion-->String then
-            //       use the registered String Converter
+            // doesn't handle conversion-->String then
+            // use the registered String Converter
             converter = lookup(String.class);
             if (converter != null) {
                 if (log.isTraceEnabled()) {
@@ -420,6 +412,7 @@ public class ConvertUtilsBean {
      * {@code false} if a default value should be used.
      */
     private void registerPrimitives(final boolean throwException) {
+        // @formatter:off
         register(Boolean.TYPE,   throwException ? new BooleanConverter()    : new BooleanConverter(Boolean.FALSE));
         register(Byte.TYPE,      throwException ? new ByteConverter()       : new ByteConverter(ZERO));
         register(Character.TYPE, throwException ? new CharacterConverter()  : new CharacterConverter(SPACE));
@@ -428,6 +421,7 @@ public class ConvertUtilsBean {
         register(Integer.TYPE,   throwException ? new IntegerConverter()    : new IntegerConverter(ZERO));
         register(Long.TYPE,      throwException ? new LongConverter()       : new LongConverter(ZERO));
         register(Short.TYPE,     throwException ? new ShortConverter()      : new ShortConverter(ZERO));
+        // @formatter:on
     }
 
     /**
@@ -456,7 +450,7 @@ public class ConvertUtilsBean {
      * N.B. This values is ignored if {@code throwException</code> is <code>true}
      */
     private void registerStandard(final boolean throwException, final boolean defaultNull) {
-
+        // @formatter:off
         final Number     defaultNumber     = defaultNull ? null : ZERO;
         final BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
         final BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
@@ -475,7 +469,7 @@ public class ConvertUtilsBean {
         register(Long.class,       throwException ? new LongConverter()       : new LongConverter(defaultNumber));
         register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
         register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
-
+        // @formatter:on
     }
 
     /**
@@ -620,7 +614,7 @@ public class ConvertUtilsBean {
      * @param defaultArraySize The size of the default array
      */
     private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
-            final boolean throwException, final int defaultArraySize) {
+                final boolean throwException, final int defaultArraySize) {
         final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
         Converter arrayConverter = null;
         if (throwException) {

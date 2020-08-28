@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -97,7 +98,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     public FluentPropertyBeanIntrospector(final String writePrefix) {
         if (writePrefix == null) {
             throw new IllegalArgumentException(
-                    "Prefix for write methods must not be null!");
+                        "Prefix for write methods must not be null!");
         }
         writeMethodPrefix = writePrefix;
     }
@@ -130,22 +131,22 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      */
     @Override
     public void introspect(final IntrospectionContext icontext)
-            throws IntrospectionException {
+                throws IntrospectionException {
         for (final Method m : icontext.getTargetClass().getMethods()) {
             if (m.getName().startsWith(getWriteMethodPrefix())) {
                 final String propertyName = propertyName(m);
                 final PropertyDescriptor pd = icontext
-                        .getPropertyDescriptor(propertyName);
+                            .getPropertyDescriptor(propertyName);
                 try {
                     if (pd == null) {
                         icontext.addPropertyDescriptor(createFluentPropertyDescritor(
-                                m, propertyName));
+                                    m, propertyName));
                     } else if (pd.getWriteMethod() == null) {
                         pd.setWriteMethod(m);
                     }
                 } catch (final IntrospectionException e) {
                     log.debug("Error when creating PropertyDescriptor for " + m
-                            + "! Ignoring this property.");
+                                + "! Ignoring this property.");
                     log.debug("Exception is:", e);
                 }
             }
@@ -160,9 +161,10 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      */
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(
-                getWriteMethodPrefix().length());
-        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName
-                .toLowerCase(Locale.ENGLISH);
+                    getWriteMethodPrefix().length());
+        return methodName.length() > 1 ? Introspector.decapitalize(methodName)
+                    : methodName
+                                .toLowerCase(Locale.ENGLISH);
     }
 
     /**
@@ -174,7 +176,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @throws IntrospectionException if an error occurs
      */
     private PropertyDescriptor createFluentPropertyDescritor(final Method m,
-            final String propertyName) throws IntrospectionException {
+                final String propertyName) throws IntrospectionException {
         return new PropertyDescriptor(propertyName(m), null, m);
     }
 }

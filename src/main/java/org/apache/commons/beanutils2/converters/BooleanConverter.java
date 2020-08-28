@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 /**
@@ -45,10 +46,6 @@ package org.apache.commons.beanutils2.converters;
  */
 public final class BooleanConverter extends AbstractConverter {
 
-
-
-
-
     /**
      * Create a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
@@ -58,7 +55,6 @@ public final class BooleanConverter extends AbstractConverter {
     public BooleanConverter() {
         super();
     }
-
 
     /**
      * Create a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
@@ -130,15 +126,6 @@ public final class BooleanConverter extends AbstractConverter {
         this.falseStrings = copyStrings(falseStrings);
     }
 
-
-
-
-
-
-
-
-
-
     /**
      * The set of strings that are known to map to Boolean.TRUE.
      */
@@ -148,8 +135,6 @@ public final class BooleanConverter extends AbstractConverter {
      * The set of strings that are known to map to Boolean.FALSE.
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
-
-
 
     /**
      * Return the default type this {@code Converter} handles.
@@ -218,7 +203,7 @@ public final class BooleanConverter extends AbstractConverter {
      */
     private static String[] copyStrings(final String[] src) {
         final String[] dst = new String[src.length];
-        for(int i=0; i<src.length; ++i) {
+        for (int i = 0; i < src.length; ++i) {
             dst[i] = src[i].toLowerCase();
         }
         return dst;

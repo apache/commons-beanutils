@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -48,5 +49,5 @@ public interface BeanIntrospector {
      * @throws IntrospectionException if an error occurs during introspection
      */
     void introspect(IntrospectionContext icontext)
-            throws IntrospectionException;
+                throws IntrospectionException;
 }

@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 public class StringLocaleConverter extends BaseLocaleConverter {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
+    private final Log log = LogFactory.getLog(StringLocaleConverter.class); // msz fix
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -191,7 +191,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public StringLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
@@ -213,27 +213,23 @@ public class StringLocaleConverter extends BaseLocaleConverter {
         String result = null;
 
         if (value instanceof Integer ||
-                value instanceof Long ||
-                value instanceof BigInteger ||
-                value instanceof Byte ||
-                value instanceof Short) {
+                    value instanceof Long ||
+                    value instanceof BigInteger ||
+                    value instanceof Byte ||
+                    value instanceof Short) {
 
             result = getDecimalFormat(locale, pattern).format(((Number) value).longValue());
-        }
-        else if (value instanceof Double ||
-                value instanceof BigDecimal ||
-                value instanceof Float) {
+        } else if (value instanceof Double ||
+                    value instanceof BigDecimal ||
+                    value instanceof Float) {
 
             result = getDecimalFormat(locale, pattern).format(((Number) value).doubleValue());
-        }
-        else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
+        } else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
 
-            final SimpleDateFormat dateFormat =
-                    new SimpleDateFormat(pattern, locale);
+            final SimpleDateFormat dateFormat = new SimpleDateFormat(pattern, locale);
 
             result = dateFormat.format(value);
-        }
-        else {
+        } else {
             result = value.toString();
         }
 
@@ -255,7 +251,8 @@ public class StringLocaleConverter extends BaseLocaleConverter {
 
         final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
 
-        // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
+        // if some constructors default pattern to null, it makes only sense to handle
+        // null pattern gracefully
         if (pattern != null) {
             if (locPattern) {
                 numberFormat.applyLocalizedPattern(pattern);

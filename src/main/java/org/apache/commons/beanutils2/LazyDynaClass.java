@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 /**
@@ -41,7 +42,7 @@ package org.apache.commons.beanutils2;
  *
  * @see LazyDynaBean
  */
-public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
+public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,7 +63,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * Construct a new LazyDynaClass with default parameters.
      */
     public LazyDynaClass() {
-        this(null, (DynaProperty[])null);
+        this(null, (DynaProperty[]) null);
     }
 
     /**
@@ -71,7 +72,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param name Name of this DynaBean class
      */
     public LazyDynaClass(final String name) {
-        this(name, (DynaProperty[])null);
+        this(name, (DynaProperty[]) null);
     }
 
     /**
@@ -237,17 +238,17 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
         // Check if property already exists
         if (propertiesMap.get(property.getName()) != null) {
-           return;
+            return;
         }
 
         // Create a new property array with the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length+1];
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length + 1];
         System.arraycopy(oldProperties, 0, newProperties, 0, oldProperties.length);
         newProperties[oldProperties.length] = property;
 
-       // Update the properties
-       setProperties(newProperties);
+        // Update the properties
+        setProperties(newProperties);
 
     }
 
@@ -282,7 +283,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
         // Create a new property array of without the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length - 1];
         int j = 0;
         for (DynaProperty oldProperty : oldProperties) {
             if (!name.equals(oldProperty.getName())) {

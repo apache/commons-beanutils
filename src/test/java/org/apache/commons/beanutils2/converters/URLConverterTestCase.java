@@ -36,11 +36,7 @@ public class URLConverterTestCase extends TestCase {
         return new TestSuite(URLConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public URLConverterTestCase(final String name) {
         super(name);
@@ -54,8 +50,6 @@ public class URLConverterTestCase extends TestCase {
         return new URLConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -66,48 +60,46 @@ public class URLConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "http://www.apache.org",
-            "http://www.apache.org/",
-            "ftp://cvs.apache.org",
-            "file://project.xml",
-            "http://208.185.179.12",
-            "http://www.apache.org:9999/test/thing",
-            "http://user:admin@www.apache.org:50/one/two.three",
-            "http://notreal.apache.org",
+                    "http://www.apache.org",
+                    "http://www.apache.org/",
+                    "ftp://cvs.apache.org",
+                    "file://project.xml",
+                    "http://208.185.179.12",
+                    "http://www.apache.org:9999/test/thing",
+                    "http://user:admin@www.apache.org:50/one/two.three",
+                    "http://notreal.apache.org",
         };
 
         final URL[] expected = {
-            new URL("http://www.apache.org"),
-            new URL("http://www.apache.org/"),
-            new URL("ftp://cvs.apache.org"),
-            new URL("file://project.xml"),
-            new URL("http://208.185.179.12"),
-            new URL("http://www.apache.org:9999/test/thing"),
-            new URL("http://user:admin@www.apache.org:50/one/two.three"),
-            new URL("http://notreal.apache.org")
+                    new URL("http://www.apache.org"),
+                    new URL("http://www.apache.org/"),
+                    new URL("ftp://cvs.apache.org"),
+                    new URL("file://project.xml"),
+                    new URL("http://208.185.179.12"),
+                    new URL("http://www.apache.org:9999/test/thing"),
+                    new URL("http://user:admin@www.apache.org:50/one/two.three"),
+                    new URL("http://notreal.apache.org")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URL",expected[i],converter.convert(URL.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URL", expected[i], converter.convert(URL.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -124,4 +116,3 @@ public class URLConverterTestCase extends TestCase {
         }
     }
 }
-

@@ -54,7 +54,7 @@ public class MemoryTestCase {
     private void forceGarbageCollection(final WeakReference<?> target) {
         int bytes = 2;
 
-        while(target.get() != null) {
+        while (target.get() != null) {
             System.gc();
 
             // Create increasingly-large amounts of non-referenced memory
@@ -64,10 +64,9 @@ public class MemoryTestCase {
             // this easily-reclaimable memory!
             try {
                 @SuppressWarnings("unused")
-                final
-                byte[] b = new byte[bytes];
+                final byte[] b = new byte[bytes];
                 bytes = bytes * 2;
-            } catch(final OutOfMemoryError e) {
+            } catch (final OutOfMemoryError e) {
                 // well that sure should have forced a garbage collection
                 // run to occur!
                 break;
@@ -112,31 +111,31 @@ public class MemoryTestCase {
             // and deployed it via the component-specific classpath.
             Thread.currentThread().setContextClassLoader(componentLoader);
             {
-              // Here we pretend we're running inside the component, and that
-              // a class FloatConverter has been loaded from the component's
-              // private classpath.
-              final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
-              Object newFloatConverter = newFloatConverterClass.newInstance();
-              assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
+                // Here we pretend we're running inside the component, and that
+                // a class FloatConverter has been loaded from the component's
+                // private classpath.
+                final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
+                Object newFloatConverter = newFloatConverterClass.newInstance();
+                assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
 
-              // verify that this new object does implement the Converter type
-              // despite being loaded via a classloader different from the one
-              // that loaded the Converter class.
-              assertTrue(
-                "Converter loader via child does not implement parent type",
-                      newFloatConverter instanceof Converter);
+                // verify that this new object does implement the Converter type
+                // despite being loaded via a classloader different from the one
+                // that loaded the Converter class.
+                assertTrue(
+                            "Converter loader via child does not implement parent type",
+                            newFloatConverter instanceof Converter);
 
-              // this converter registration will only apply to the
-              // componentLoader classloader...
-              ConvertUtils.register((Converter)newFloatConverter, Float.TYPE);
+                // this converter registration will only apply to the
+                // componentLoader classloader...
+                ConvertUtils.register((Converter) newFloatConverter, Float.TYPE);
 
-              // After registering a custom converter, lookup should return
-              // it back to us. We'll try this lookup again with a different
-              // context-classloader set, and shouldn't see it
-              final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
-              assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
+                // After registering a custom converter, lookup should return
+                // it back to us. We'll try this lookup again with a different
+                // context-classloader set, and shouldn't see it
+                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+                assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
 
-              newFloatConverter = null;
+                newFloatConverter = null;
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
@@ -157,13 +156,14 @@ public class MemoryTestCase {
             final WeakReference<ClassLoader> weakRefToComponent = new WeakReference<>(componentLoader);
             componentLoader = null;
 
-            // force garbage collection and  verify that the componentLoader
+            // force garbage collection and verify that the componentLoader
             // has been garbage-collected
             forceGarbageCollection(weakRefToComponent);
             assertNull(
-                "Component classloader did not release properly; memory leak present",
-                weakRefToComponent.get());
-        } finally {
+                        "Component classloader did not release properly; memory leak present",
+                        weakRefToComponent.get());
+        }
+        finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
             // classloader, but we handle all cases here..
@@ -200,8 +200,10 @@ public class MemoryTestCase {
 
             // create a custom classloader for a "component"
             // just like a container would.
-            ClassLoader componentLoader1 = new ClassLoader() {};
-            final ClassLoader componentLoader2 = new ClassLoader() {};
+            ClassLoader componentLoader1 = new ClassLoader() {
+            };
+            final ClassLoader componentLoader2 = new ClassLoader() {
+            };
 
             final Converter origFloatConverter = ConvertUtils.lookup(Float.TYPE);
             final Converter floatConverter1 = new FloatConverter();
@@ -247,13 +249,14 @@ public class MemoryTestCase {
             final WeakReference<ClassLoader> weakRefToComponent1 = new WeakReference<>(componentLoader1);
             componentLoader1 = null;
 
-            // force garbage collection and  verify that the componentLoader
+            // force garbage collection and verify that the componentLoader
             // has been garbage-collected
             forceGarbageCollection(weakRefToComponent1);
             assertNull(
-                "Component classloader did not release properly; memory leak present",
-                weakRefToComponent1.get());
-        } finally {
+                        "Component classloader did not release properly; memory leak present",
+                        weakRefToComponent1.get());
+        }
+        finally {
             // Restore context classloader that was present before this
             // test started, so that in case of a test failure we don't stuff
             // up later tests...
@@ -268,17 +271,18 @@ public class MemoryTestCase {
     public void testWeakReference() throws Exception {
         final ClassLoader origContextClassLoader = Thread.currentThread().getContextClassLoader();
         try {
-        ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
+            ClassReloader componentLoader = new ClassReloader(origContextClassLoader);
 
-        Thread.currentThread().setContextClassLoader(componentLoader);
-        Thread.currentThread().setContextClassLoader(origContextClassLoader);
+            Thread.currentThread().setContextClassLoader(componentLoader);
+            Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
-        final WeakReference<ClassLoader> ref = new WeakReference<>(componentLoader);
-        componentLoader = null;
+            final WeakReference<ClassLoader> ref = new WeakReference<>(componentLoader);
+            componentLoader = null;
 
-        forceGarbageCollection(ref);
-        assertNull(ref.get());
-        } finally {
+            forceGarbageCollection(ref);
+            assertNull(ref.get());
+        }
+        finally {
             // Restore context classloader that was present before this
             // test started. It is expected to be the same as the system
             // classloader, but we handle all cases here..

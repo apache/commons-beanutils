@@ -24,13 +24,9 @@ package org.apache.commons.beanutils2.locale.converters;
 
 public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     public IntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -40,7 +36,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
         super.setUp();
 
-        defaultValue  = new Integer("999");
+        defaultValue = new Integer("999");
         expectedValue = new Integer(expectedIntegerValue);
 
     }
@@ -53,8 +49,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
@@ -62,9 +56,9 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
         // ------------- Construct with localized pattern ------------
         converter = new IntegerLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedIntegerPattern,
-                                                  true);
+                    localizedLocale,
+                    localizedIntegerPattern,
+                    true);
 
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
@@ -80,7 +74,8 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Integer("1"));
 
         // **************************************************************************
-        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
+        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test
+        // Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
@@ -92,15 +87,16 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Integer.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue,
+        // localizedIntegerPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
         converter = new IntegerLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultIntegerPattern,
-                                                  false);
+                    localizedLocale,
+                    defaultIntegerPattern,
+                    false);
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -253,7 +249,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
         final Integer value = new Integer(1234);
         assertEquals("Convert Integer", value, converter.convert(value));
-        assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
+        assertEquals("Convert Long", value, converter.convert(new Long(value.intValue())));
     }
 
     /**
@@ -267,4 +263,3 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         assertEquals("Wrong result", value.intValue(), result);
     }
 }
-

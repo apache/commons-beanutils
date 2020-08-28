@@ -30,8 +30,6 @@ import java.util.Map;
 
 public class TestBean implements Serializable {
 
-
-
     public TestBean() {
         listIndexed.add("String 0");
         listIndexed.add("String 1");
@@ -75,9 +73,9 @@ public class TestBean implements Serializable {
         setIntProperty(intProperty.intValue());
     }
 
-   public TestBean(final double doubleProperty) {
-       setDoubleProperty(doubleProperty);
-   }
+    public TestBean(final double doubleProperty) {
+        setDoubleProperty(doubleProperty);
+    }
 
     TestBean(final int intProperty) {
         setIntProperty(intProperty);
@@ -96,8 +94,6 @@ public class TestBean implements Serializable {
     public TestBean(final String[][] string2dArray) {
         this.string2dArray = string2dArray;
     }
-
-
 
     /**
      * A boolean property.
@@ -181,8 +177,7 @@ public class TestBean implements Serializable {
      * An "indexed property" accessible via both array and subscript
      * based getters and setters.
      */
-    private String[] dupProperty =
-    { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
+    private String[] dupProperty = {"Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
 
     public String[] getDupProperty() {
         return this.dupProperty;
@@ -216,7 +211,7 @@ public class TestBean implements Serializable {
     /**
      * An integer array property accessed as an array.
      */
-    private int[] intArray = { 0, 10, 20, 30, 40 };
+    private int[] intArray = {0, 10, 20, 30, 40};
 
     public int[] getIntArray() {
         return this.intArray;
@@ -229,7 +224,7 @@ public class TestBean implements Serializable {
     /**
      * An integer array property accessed as an indexed property.
      */
-    private final int[] intIndexed = { 0, 10, 20, 30, 40 };
+    private final int[] intIndexed = {0, 10, 20, 30, 40};
 
     public int getIntIndexed(final int index) {
         return intIndexed[index];
@@ -381,45 +376,48 @@ public class TestBean implements Serializable {
         return nested;
     }
 
-   /**
+    /**
     * Another nested reference to another test bean,
     */
-   private TestBean anotherNested = null;
+    private TestBean anotherNested = null;
 
-   public TestBean getAnotherNested() {
-      return anotherNested;
-   }
+    public TestBean getAnotherNested() {
+        return anotherNested;
+    }
 
-   public void setAnotherNested( final TestBean anotherNested ) {
-      this.anotherNested = anotherNested;
-   }
+    public void setAnotherNested(final TestBean anotherNested) {
+        this.anotherNested = anotherNested;
+    }
 
-   /**
+    /**
     * Another nested reference to another test bean,
     */
-   private DynaBean nestedDynaBean = null;
+    private DynaBean nestedDynaBean = null;
 
-   public DynaBean getNestedDynaBean() {
-      return nestedDynaBean;
-   }
+    public DynaBean getNestedDynaBean() {
+        return nestedDynaBean;
+    }
 
-   public void setNestedDynaBean(final DynaBean nestedDynaBean) {
-      this.nestedDynaBean = nestedDynaBean;
-   }
+    public void setNestedDynaBean(final DynaBean nestedDynaBean) {
+        this.nestedDynaBean = nestedDynaBean;
+    }
 
     /*
      * Another nested reference to a bean containing mapp properties
      */
     public class MappedTestBean {
-        public void setValue(final String key,final String val) { }
-        public String getValue(final String key) { return "Mapped Value"; }
+        public void setValue(final String key, final String val) {
+        }
+
+        public String getValue(final String key) {
+            return "Mapped Value";
+        }
     }
 
     private MappedTestBean mappedNested = null;
 
     public MappedTestBean getMappedNested() {
-        if (mappedNested == null)
-        {
+        if (mappedNested == null) {
             mappedNested = new MappedTestBean();
         }
         return mappedNested;
@@ -463,8 +461,7 @@ public class TestBean implements Serializable {
     /**
      * A String array property accessed as a String.
      */
-    private String[] stringArray =
-            { "String 0", "String 1", "String 2", "String 3", "String 4" };
+    private String[] stringArray = {"String 0", "String 1", "String 2", "String 3", "String 4"};
 
     public String[] getStringArray() {
         return this.stringArray;
@@ -477,8 +474,7 @@ public class TestBean implements Serializable {
     /**
      * A String array property accessed as an indexed property.
      */
-    private final String[] stringIndexed =
-            { "String 0", "String 1", "String 2", "String 3", "String 4" };
+    private final String[] stringIndexed = {"String 0", "String 1", "String 2", "String 3", "String 4"};
 
     public String getStringIndexed(final int index) {
         return stringIndexed[index];
@@ -488,7 +484,8 @@ public class TestBean implements Serializable {
         stringIndexed[index] = value;
     }
 
-    private String[][] string2dArray = new String[][] {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
+    private String[][] string2dArray = new String[][] {new String[] {"1", "2", "3"}, new String[] {"4", "5", "6"}};
+
     public String[] getString2dArray(final int index) {
         return string2dArray[index];
     }
@@ -519,8 +516,6 @@ public class TestBean implements Serializable {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-
-
     /**
      * <p>An invalid property that has two boolean getters (getInvalidBoolean
      * and isInvalidBoolean) plus a String setter (setInvalidBoolean).  By the
@@ -539,15 +534,13 @@ public class TestBean implements Serializable {
 
     public void setInvalidBoolean(final String invalidBoolean) {
         if ("true".equalsIgnoreCase(invalidBoolean) ||
-            "yes".equalsIgnoreCase(invalidBoolean) ||
-            "1".equalsIgnoreCase(invalidBoolean)) {
+                    "yes".equalsIgnoreCase(invalidBoolean) ||
+                    "1".equalsIgnoreCase(invalidBoolean)) {
             this.invalidBoolean = true;
         } else {
             this.invalidBoolean = false;
         }
     }
-
-
 
     /**
      * A static variable that is accessed and updated via static methods

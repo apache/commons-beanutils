@@ -26,12 +26,12 @@ import junit.framework.TestCase;
 public class BooleanConverterTestCase extends TestCase {
 
     public static final String[] STANDARD_TRUES = new String[] {
-            "yes", "y", "true", "on", "1"
-        };
+                "yes", "y", "true", "on", "1"
+    };
 
     public static final String[] STANDARD_FALSES = new String[] {
-            "no", "n", "false", "off", "0"
-        };
+                "no", "n", "false", "off", "0"
+    };
 
     public BooleanConverterTestCase(final String name) {
         super(name);
@@ -41,11 +41,11 @@ public class BooleanConverterTestCase extends TestCase {
         final String[] trueStrings = {"sure"};
         final String[] falseStrings = {"nope"};
         final BooleanConverter converter = new BooleanConverter(
-            trueStrings, falseStrings);
+                    trueStrings, falseStrings);
         testConversionValues(
-            converter,
-            new String[] {"sure", "Sure"},
-            new String[] {"nope", "nOpE"});
+                    converter,
+                    new String[] {"sure", "Sure"},
+                    new String[] {"nope", "nOpE"});
 
         try {
             converter.convert(Boolean.class, "true");
@@ -64,9 +64,9 @@ public class BooleanConverterTestCase extends TestCase {
     public void testCaseInsensitivity() {
         final BooleanConverter converter = new BooleanConverter();
         testConversionValues(
-            converter,
-            new String[] {"Yes", "TRUE"},
-            new String[] {"NO", "fAlSe"});
+                    converter,
+                    new String[] {"Yes", "TRUE"},
+                    new String[] {"NO", "fAlSe"});
     }
 
     /**
@@ -83,7 +83,7 @@ public class BooleanConverterTestCase extends TestCase {
     }
 
     protected void testConversionValues(final BooleanConverter converter,
-            final String[] trueValues, final String[] falseValues) {
+                final String[] trueValues, final String[] falseValues) {
 
         for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));

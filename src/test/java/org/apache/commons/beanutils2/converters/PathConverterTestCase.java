@@ -37,11 +37,7 @@ public class PathConverterTestCase extends TestCase {
         return new TestSuite(PathConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public PathConverterTestCase(final String name) {
         super(name);
@@ -55,8 +51,6 @@ public class PathConverterTestCase extends TestCase {
         return new PathConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -67,39 +61,37 @@ public class PathConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         // get the separator so test works on Windows or *nix
         final String separator = File.pathSeparator;
 
         final Object[] input = {
-            separator + "foo"+separator+"bar"+separator+"baz",
-            separator
+                    separator + "foo" + separator + "bar" + separator + "baz",
+                    separator
         };
 
         final Path[] expected = {
-            Paths.get(separator + "foo"+separator+"bar"+separator+"baz"),
-            Paths.get(separator)
+                    Paths.get(separator + "foo" + separator + "bar" + separator + "baz"),
+                    Paths.get(separator)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(Path.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(Path.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -116,4 +108,3 @@ public class PathConverterTestCase extends TestCase {
         }
     }
 }
-

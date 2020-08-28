@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import org.apache.commons.beanutils2.AlphaBean;
@@ -50,6 +51,7 @@ public class Jira520TestCase extends TestCase {
         bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         final String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean",
+                    result);
     }
 }

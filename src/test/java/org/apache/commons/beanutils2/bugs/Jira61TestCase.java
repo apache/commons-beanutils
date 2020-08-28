@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.util.HashMap;
@@ -427,7 +428,8 @@ public class Jira61TestCase extends TestCase {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }
-        assertTrue("Target value='" + targetBean.getSimpleReadOnly() + "'", value.equals(targetBean.getSimpleReadOnly()));
+        assertTrue("Target value='" + targetBean.getSimpleReadOnly() + "'",
+                    value.equals(targetBean.getSimpleReadOnly()));
     }
 
     /**
@@ -461,6 +463,7 @@ public class Jira61TestCase extends TestCase {
             log.error("ERROR " + t, t);
             fail("copyProperties Threw exception: " + t);
         }
-        assertTrue("Target value='" + targetBean.getSimpleReadOnly() + "'", value.equals(targetBean.getSimpleReadOnly()));
+        assertTrue("Target value='" + targetBean.getSimpleReadOnly() + "'",
+                    value.equals(targetBean.getSimpleReadOnly()));
     }
 }

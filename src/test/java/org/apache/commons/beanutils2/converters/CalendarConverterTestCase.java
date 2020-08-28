@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.util.Calendar;
@@ -34,8 +35,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
         return new TestSuite(CalendarConverterTestCase.class);
     }
 
-
-
     /**
      * Construct a new Calendar test case.
      * @param name Test Name
@@ -52,7 +51,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     protected Class<?> getExpectedType() {
         return Calendar.class;
     }
-
 
     /**
      * Create the Converter with no default value.
@@ -82,6 +80,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     @Override
     protected Object toType(final Calendar value) {
         return value;
-   }
+    }
 
 }

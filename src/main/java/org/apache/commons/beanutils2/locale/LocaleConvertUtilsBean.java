@@ -92,8 +92,6 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-
-
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
@@ -109,8 +107,6 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-
-
     /**
      *  Makes the state by default (deregisters all converters for all locales)
      *  and then registers default locale converters.
@@ -120,8 +116,6 @@ public class LocaleConvertUtilsBean {
         deregister();
         mapConverters.setFast(true);
     }
-
-
 
     /**
      * getter for defaultLocale.
@@ -140,8 +134,7 @@ public class LocaleConvertUtilsBean {
 
         if (locale == null) {
             defaultLocale = Locale.getDefault();
-        }
-        else {
+        } else {
             defaultLocale = locale;
         }
     }
@@ -165,8 +158,6 @@ public class LocaleConvertUtilsBean {
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
-
-
 
     /**
      * Convert the specified locale-sensitive value into a String.
@@ -267,8 +258,8 @@ public class LocaleConvertUtilsBean {
 
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
-                    clazz.getName() + " using " + locale +
-                    " locale and " + pattern + " pattern");
+                        clazz.getName() + " using " + locale +
+                        " locale and " + pattern + " pattern");
         }
 
         Class<?> targetClass = clazz;
@@ -302,7 +293,7 @@ public class LocaleConvertUtilsBean {
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
 
-   /**
+    /**
     * Convert an array of specified values to an array of objects of the
     * specified class (if possible) .
     *
@@ -313,10 +304,10 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
      * underlying Converter
     */
-   public Object convert(final String[] values, final Class<?> clazz) {
+    public Object convert(final String[] values, final Class<?> clazz) {
 
-       return convert(values, clazz, getDefaultLocale(), null);
-   }
+        return convert(values, clazz, getDefaultLocale(), null);
+    }
 
     /**
      * Convert an array of specified values to an array of objects of the
@@ -339,8 +330,8 @@ public class LocaleConvertUtilsBean {
         }
         if (log.isDebugEnabled()) {
             log.debug("Convert String[" + values.length + "] to class " +
-                    type.getName() + "[] using " + locale +
-                    " locale and " + pattern + " pattern");
+                        type.getName() + "[] using " + locale +
+                        " locale and " + pattern + " pattern");
         }
 
         final Object array = Array.newInstance(type, values.length);
@@ -434,8 +425,7 @@ public class LocaleConvertUtilsBean {
 
         if (locale == null) {
             localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(defaultLocale);
-        }
-        else {
+        } else {
             localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(locale);
 
             if (localeConverters == null) {
@@ -486,9 +476,8 @@ public class LocaleConvertUtilsBean {
         // behavior of toString and valueOf methods of these classes
         converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
         converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
-        converter.put( java.sql.Timestamp.class,
-                       new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S")
-                     );
+        converter.put(java.sql.Timestamp.class,
+                    new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S"));
 
         converter.setFast(true);
 
@@ -502,67 +491,82 @@ public class LocaleConvertUtilsBean {
         private DelegateFastHashMap(final Map<Object, Object> map) {
             this.map = map;
         }
+
         @Override
         public void clear() {
             map.clear();
         }
+
         @Override
         public boolean containsKey(final Object key) {
             return map.containsKey(key);
         }
+
         @Override
         public boolean containsValue(final Object value) {
             return map.containsValue(value);
         }
+
         @Override
         public Set<Map.Entry<Object, Object>> entrySet() {
             return map.entrySet();
         }
+
         @Override
         public boolean equals(final Object o) {
             return map.equals(o);
         }
+
         @Override
         public Object get(final Object key) {
             return map.get(key);
         }
+
         @Override
         public int hashCode() {
             return map.hashCode();
         }
+
         @Override
         public boolean isEmpty() {
             return map.isEmpty();
         }
+
         @Override
         public Set<Object> keySet() {
             return map.keySet();
         }
+
         @Override
         public Object put(final Object key, final Object value) {
             return map.put(key, value);
         }
+
         // we operate on very generic types (<Object, Object>), so there is
         // no need for doing type checks
         @Override
         public void putAll(final Map m) {
             map.putAll(m);
         }
+
         @Override
         public Object remove(final Object key) {
             return map.remove(key);
         }
+
         @Override
         public int size() {
             return map.size();
         }
+
         @Override
         public Collection<Object> values() {
             return map.values();
         }
+
         public void setFast(final boolean fast) {
             if (map instanceof WeakFastHashMap) {
-                ((WeakFastHashMap<?, ?>)map).setFast(fast);
+                ((WeakFastHashMap<?, ?>) map).setFast(fast);
             }
         }
     }

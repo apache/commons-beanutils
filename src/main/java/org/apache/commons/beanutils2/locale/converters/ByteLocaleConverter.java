@@ -178,7 +178,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
         this(defaultValue, locale, pattern, false);
     }
 
-   /**
+    /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
      * that will return the specified default value
      * if a conversion error occurs.
@@ -189,7 +189,7 @@ public class ByteLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public ByteLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
 
         super(defaultValue, locale, pattern, locPattern);
     }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import junit.framework.Test;
@@ -25,8 +26,6 @@ import junit.framework.TestSuite;
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
 
-
-
     /**
      * Construct a new instance of this test case.
      *
@@ -35,8 +34,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public BeanUtils2TestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.

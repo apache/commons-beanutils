@@ -31,8 +31,6 @@ import java.util.Locale;
  */
 public class LocaleConvertUtils {
 
-
-
     /**
      * <p>Gets the {@code Locale} which will be used when
      * no {@code Locale} is passed to a method.</p>
@@ -85,8 +83,6 @@ public class LocaleConvertUtils {
     public static void setApplyLocalized(final boolean newApplyLocalized) {
         LocaleConvertUtilsBean.getInstance().setApplyLocalized(newApplyLocalized);
     }
-
-
 
     /**
      * <p>Convert the specified locale-sensitive value into a String.</p>
@@ -203,7 +199,7 @@ public class LocaleConvertUtils {
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, pattern);
     }
 
-   /**
+    /**
     * <p>Convert an array of specified values to an array of objects of the
     * specified class (if possible).</p>
     *
@@ -214,10 +210,10 @@ public class LocaleConvertUtils {
     * @return the converted value
     * @see LocaleConvertUtilsBean#convert(String[], Class)
     */
-   public static Object convert(final String[] values, final Class<?> clazz) {
+    public static Object convert(final String[] values, final Class<?> clazz) {
 
-       return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
-   }
+        return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
+    }
 
     /**
      * <p>Convert an array of specified values to an array of objects of the
@@ -233,7 +229,7 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final Locale locale,
-            final String pattern) {
+                final String pattern) {
 
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, locale, pattern);
     }
@@ -264,7 +260,7 @@ public class LocaleConvertUtils {
      */
     public static void deregister() {
 
-       LocaleConvertUtilsBean.getInstance().deregister();
+        LocaleConvertUtilsBean.getInstance().deregister();
     }
 
     /**

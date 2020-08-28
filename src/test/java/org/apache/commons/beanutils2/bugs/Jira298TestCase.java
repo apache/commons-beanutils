@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.Method;
@@ -103,14 +104,14 @@ public class Jira298TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_298_PropertyUtils_setProperty() {
         final Object bean = Jira298BeanFactory.createImplX();
-        assertEquals("BaseX name value", ((IX)bean).getName());
+        assertEquals("BaseX name value", ((IX) bean).getName());
         try {
             PropertyUtils.setProperty(bean, "name", "new name");
         } catch (final Throwable t) {
             log.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
-        assertEquals("new name", ((IX)bean).getName());
+        assertEquals("new name", ((IX) bean).getName());
     }
 
     /**

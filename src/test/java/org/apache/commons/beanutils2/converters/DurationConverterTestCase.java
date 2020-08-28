@@ -35,11 +35,7 @@ public class DurationConverterTestCase extends TestCase {
         return new TestSuite(DurationConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public DurationConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class DurationConverterTestCase extends TestCase {
         return new DurationConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,38 +59,36 @@ public class DurationConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "PT20.345S",
-            "PT15M",
-            "PT51H4M"
+                    "PT20.345S",
+                    "PT15M",
+                    "PT51H4M"
         };
 
         final Duration[] expected = {
-                Duration.parse("PT20.345S"),
-                Duration.parse("PT15M"),
-                Duration.parse("P2DT3H4M")
+                    Duration.parse("PT20.345S"),
+                    Duration.parse("PT15M"),
+                    Duration.parse("P2DT3H4M")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(Duration.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(Duration.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -113,4 +105,3 @@ public class DurationConverterTestCase extends TestCase {
         }
     }
 }
-

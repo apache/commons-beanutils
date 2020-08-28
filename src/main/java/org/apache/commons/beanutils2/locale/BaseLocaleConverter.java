@@ -36,8 +36,6 @@ import org.apache.commons.logging.LogFactory;
 
 public abstract class BaseLocaleConverter implements LocaleConverter {
 
-
-
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
@@ -55,8 +53,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
 
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern = false;
-
-
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
@@ -108,7 +104,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
 
         this(defaultValue, locale, pattern, true, locPattern);
     }
@@ -124,7 +120,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     private BaseLocaleConverter(final Object defaultValue, final Locale locale,
-                                final String pattern, final boolean useDefault, final boolean locPattern) {
+                final String pattern, final boolean useDefault, final boolean locPattern) {
 
         if (useDefault) {
             this.defaultValue = defaultValue;
@@ -138,8 +134,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.pattern = pattern;
         this.locPattern = locPattern;
     }
-
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
@@ -238,7 +232,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
                 return getDefaultAs(targetType);
             }
             if (e instanceof ConversionException) {
-                throw (ConversionException)e;
+                throw (ConversionException) e;
             }
             throw new ConversionException(e);
         }
@@ -275,8 +269,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         if (type == null) {
             // in this case we cannot do much; the result object is returned
             @SuppressWarnings("unchecked")
-            final
-            T temp = (T) result;
+            final T temp = (T) result;
             return temp;
         }
 

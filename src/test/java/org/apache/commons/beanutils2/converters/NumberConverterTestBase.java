@@ -37,19 +37,15 @@ public abstract class NumberConverterTestBase extends TestCase {
     /** Test Number values */
     protected Number[] numbers = new Number[4];
 
-
-
     public NumberConverterTestBase(final String name) {
         super(name);
     }
 
-
-
     protected abstract Class<?> getExpectedType();
+
     protected abstract NumberConverter makeConverter();
+
     protected abstract NumberConverter makeConverter(Object defaultValue);
-
-
 
     /**
      * Convert Boolean --> Number (default conversion)
@@ -59,8 +55,10 @@ public abstract class NumberConverterTestBase extends TestCase {
         final NumberConverter converter = makeConverter();
 
         // Other type --> String conversion
-        assertEquals("Boolean.FALSE to Number ", 0, ((Number)converter.convert(getExpectedType(), Boolean.FALSE)).intValue());
-        assertEquals("Boolean.TRUE to Number ",  1, ((Number)converter.convert(getExpectedType(), Boolean.TRUE)).intValue());
+        assertEquals("Boolean.FALSE to Number ", 0,
+                    ((Number) converter.convert(getExpectedType(), Boolean.FALSE)).intValue());
+        assertEquals("Boolean.TRUE to Number ", 1,
+                    ((Number) converter.convert(getExpectedType(), Boolean.TRUE)).intValue());
 
     }
 
@@ -86,14 +84,15 @@ public abstract class NumberConverterTestBase extends TestCase {
         }
 
     }
+
     /**
      * Assumes ConversionException in response to covert(getExpectedType(),null).
      */
     public void testConvertNull() {
         try {
-            makeConverter().convert(getExpectedType(),null);
+            makeConverter().convert(getExpectedType(), null);
             fail("Expected ConversionException");
-        } catch(final ConversionException e) {
+        } catch (final ConversionException e) {
             // expected
         }
     }
@@ -103,36 +102,36 @@ public abstract class NumberConverterTestBase extends TestCase {
      * instance of getExpectedType().
      */
     public void testConvertNumber() {
-        final String[] message= {
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double",
-            "from BigDecimal",
-            "from BigInteger",
-            "from Integer array",
+        final String[] message = {
+                    "from Byte",
+                    "from Short",
+                    "from Integer",
+                    "from Long",
+                    "from Float",
+                    "from Double",
+                    "from BigDecimal",
+                    "from BigInteger",
+                    "from Integer array",
         };
 
         final Object[] number = {
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2),
-            new BigDecimal("17.2"),
-            new BigInteger("33"),
-            new Integer[] {new Integer(3), new Integer(2), new Integer(1)}
+                    new Byte((byte) 7),
+                    new Short((short) 8),
+                    new Integer(9),
+                    new Long(10),
+                    new Float(11.1),
+                    new Double(12.2),
+                    new BigDecimal("17.2"),
+                    new BigInteger("33"),
+                    new Integer[] {new Integer(3), new Integer(2), new Integer(1)}
         };
 
-        for(int i=0;i<number.length;i++) {
-            final Object val = makeConverter().convert(getExpectedType(),number[i]);
-            assertNotNull("Convert " + message[i] + " should not be null",val);
+        for (int i = 0; i < number.length; i++) {
+            final Object val = makeConverter().convert(getExpectedType(), number[i]);
+            assertNotNull("Convert " + message[i] + " should not be null", val);
             assertTrue(
-                "Convert " + message[i] + " should return a " + getExpectedType().getName(),
-                getExpectedType().isInstance(val));
+                        "Convert " + message[i] + " should return a " + getExpectedType().getName(),
+                        getExpectedType().isInstance(val));
         }
     }
 
@@ -218,7 +217,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         try {
             converter.convert(Object.class, numbers[0]);
             fail("Invalid type with default test, expected ConversionException");
-        } catch(final ConversionException e) {
+        } catch (final ConversionException e) {
             // expected result
         }
     }
@@ -231,8 +230,10 @@ public abstract class NumberConverterTestBase extends TestCase {
         final NumberConverter converter = makeConverter();
 
         // Default Number --> String conversion
-        assertEquals("Default Convert " + numbers[0], numbers[0].toString(), converter.convert(String.class, numbers[0]));
-        assertEquals("Default Convert " + numbers[1], numbers[1].toString(), converter.convert(String.class, numbers[1]));
+        assertEquals("Default Convert " + numbers[0], numbers[0].toString(),
+                    converter.convert(String.class, numbers[0]));
+        assertEquals("Default Convert " + numbers[1], numbers[1].toString(),
+                    converter.convert(String.class, numbers[1]));
 
     }
 
@@ -250,12 +251,12 @@ public abstract class NumberConverterTestBase extends TestCase {
 
         // Default Locale
         assertEquals("Default Locale " + numbers[0], "-12", converter.convert(String.class, numbers[0]));
-        assertEquals("Default Locale " + numbers[1], "13",  converter.convert(String.class, numbers[1]));
+        assertEquals("Default Locale " + numbers[1], "13", converter.convert(String.class, numbers[1]));
 
         // Locale.GERMAN
         converter.setLocale(Locale.GERMAN);
         assertEquals("Locale.GERMAN " + numbers[2], "-22", converter.convert(String.class, numbers[2]));
-        assertEquals("Locale.GERMAN " + numbers[3], "23",  converter.convert(String.class, numbers[3]));
+        assertEquals("Locale.GERMAN " + numbers[3], "23", converter.convert(String.class, numbers[3]));
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
@@ -307,10 +308,10 @@ public abstract class NumberConverterTestBase extends TestCase {
         final NumberConverter converter = makeConverter(defaultValue);
 
         // Default Locale
-        assertEquals("Valid First",   new Integer(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
-        assertEquals("Invalid First", defaultValue,   converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
-        assertEquals("Null First",    defaultValue,   converter.convert(Integer.class, new String[] {null, "1", "2"}));
-        assertEquals("Long Array",    new Integer(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
+        assertEquals("Valid First", new Integer(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
+        assertEquals("Invalid First", defaultValue, converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
+        assertEquals("Null First", defaultValue, converter.convert(Integer.class, new String[] {null, "1", "2"}));
+        assertEquals("Long Array", new Integer(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
     }
 
     /**
@@ -322,7 +323,8 @@ public abstract class NumberConverterTestBase extends TestCase {
         converter.setUseLocaleFormat(false);
 
         // Default String --> Number conversion
-        assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(getExpectedType(), numbers[0].toString()));
+        assertEquals("Default Convert " + numbers[0], numbers[0],
+                    converter.convert(getExpectedType(), numbers[0].toString()));
 
         // Invalid
         try {
@@ -415,7 +417,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         }
 
         // Invalid Type (will try via String)
-        final Object obj =  new Object() {
+        final Object obj = new Object() {
             @Override
             public String toString() {
                 return "dsdgsdsdg";
@@ -433,4 +435,3 @@ public abstract class NumberConverterTestBase extends TestCase {
     }
 
 }
-

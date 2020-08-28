@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.locale;
 
 import org.apache.commons.beanutils2.TestBean;
@@ -41,8 +42,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Set up instance variables required by this test case.
      */
@@ -64,8 +63,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test setting a nested simple property
@@ -99,4 +96,3 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));
     }
 }
-

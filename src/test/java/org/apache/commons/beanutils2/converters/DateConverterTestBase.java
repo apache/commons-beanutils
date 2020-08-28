@@ -42,8 +42,6 @@ import junit.framework.TestCase;
 
 public abstract class DateConverterTestBase extends TestCase {
 
-
-
     /**
      * Construct a new test case.
      * @param name Name of the test
@@ -51,8 +49,6 @@ public abstract class DateConverterTestBase extends TestCase {
     public DateConverterTestBase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Return the expected type
@@ -70,34 +66,34 @@ public abstract class DateConverterTestBase extends TestCase {
         if (date instanceof java.sql.Timestamp) {
 
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
-            //      didn't include the milliseconds. The following code
-            //      ensures it works consistently across JDK versions
-            final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
+            // didn't include the milliseconds. The following code
+            // ensures it works consistently across JDK versions
+            final java.sql.Timestamp timestamp = (java.sql.Timestamp) date;
             long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
             return timeInMillis;
         }
 
         if (date instanceof LocalDate) {
-            return  ((LocalDate)date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            return ((LocalDate) date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
 
         if (date instanceof LocalDateTime) {
-            return  ((LocalDateTime)date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            return ((LocalDateTime) date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
 
         if (date instanceof ZonedDateTime) {
-            return  ((ZonedDateTime)date).toInstant().toEpochMilli();
+            return ((ZonedDateTime) date).toInstant().toEpochMilli();
         }
 
         if (date instanceof OffsetDateTime) {
-            return  ((OffsetDateTime)date).toInstant().toEpochMilli();
+            return ((OffsetDateTime) date).toInstant().toEpochMilli();
         }
 
         if (date instanceof Calendar) {
-            return ((Calendar)date).getTime().getTime();
+            return ((Calendar) date).getTime().getTime();
         }
-        return ((Date)date).getTime();
+        return ((Date) date).getTime();
     }
 
     /**
@@ -122,8 +118,6 @@ public abstract class DateConverterTestBase extends TestCase {
      */
     protected abstract DateTimeConverter makeConverter();
 
-
-
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
@@ -142,9 +136,9 @@ public abstract class DateConverterTestBase extends TestCase {
         final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
         try {
             final Object result = converter.convert(String.class, value);
-            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> resultType = result == null ? null : result.getClass();
             final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE "  + msg, expectType, resultType);
+            assertEquals("TYPE " + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
             fail(msg + " threw " + ex.toString());
@@ -156,48 +150,51 @@ public abstract class DateConverterTestBase extends TestCase {
      * instance of getExpectedType().
      */
     public void testConvertDate() {
-        final String[] message= {
-            "from Date",
-            "from Calendar",
-            "from SQL Date",
-            "from SQL Time",
-            "from SQL Timestamp",
-            "from LocalDate",
-            "from LocalDateTime",
-            "from ZonedDateTime",
-            "from OffsetDateTime"
+        final String[] message = {
+                    "from Date",
+                    "from Calendar",
+                    "from SQL Date",
+                    "from SQL Time",
+                    "from SQL Timestamp",
+                    "from LocalDate",
+                    "from LocalDateTime",
+                    "from ZonedDateTime",
+                    "from OffsetDateTime"
         };
 
         final long now = System.currentTimeMillis();
 
         final Object[] date = {
-            new Date(now),
-            new java.util.GregorianCalendar(),
-            new java.sql.Date(now),
-            new java.sql.Time(now),
-            new java.sql.Timestamp(now),
-            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
-            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDateTime(),
-            ZonedDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault()),
-            OffsetDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault())
+                    new Date(now),
+                    new java.util.GregorianCalendar(),
+                    new java.sql.Date(now),
+                    new java.sql.Time(now),
+                    new java.sql.Timestamp(now),
+                    Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate()
+                                .atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+                    Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                    ZonedDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault()),
+                    OffsetDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault())
         };
 
-        // Initialize calendar also with same ms to avoid a failing test in a new time slice
-        ((GregorianCalendar)date[1]).setTime(new Date(now));
+        // Initialize calendar also with same ms to avoid a failing test in a new time
+        // slice
+        ((GregorianCalendar) date[1]).setTime(new Date(now));
 
         for (int i = 0; i < date.length; i++) {
             final Object val = makeConverter().convert(getExpectedType(), date[i]);
             assertNotNull("Convert " + message[i] + " should not be null", val);
             assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
-                       getExpectedType().isInstance(val));
+                        getExpectedType().isInstance(val));
 
             long test = now;
             if (date[i] instanceof LocalDate || val instanceof LocalDate) {
-                test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
             }
 
             assertEquals("Convert " + message[i] + " should return a " + date[0],
-                    test, getTimeInMillis(val));
+                        test, getTimeInMillis(val));
         }
     }
 
@@ -208,7 +205,7 @@ public abstract class DateConverterTestBase extends TestCase {
         try {
             makeConverter().convert(getExpectedType(), null);
             fail("Expected ConversionException");
-        } catch(final ConversionException e) {
+        } catch (final ConversionException e) {
             // expected
         }
     }
@@ -246,7 +243,7 @@ public abstract class DateConverterTestBase extends TestCase {
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Calendar calendar = toCalendar(testString, pattern, null);
-        final Object expected   = toType(calendar);
+        final Object expected = toType(calendar);
 
         final Object result = converter.convert(null, testString);
         if (getExpectedType().equals(Calendar.class)) {
@@ -377,7 +374,7 @@ public abstract class DateConverterTestBase extends TestCase {
         // Valid String --> Type Conversion
         final String testString = "2006-10-29";
         final Calendar calendar = toCalendar(testString, pattern, null);
-        final Object expected   = toType(calendar);
+        final Object expected = toType(calendar);
         validConversion(converter, expected, testString);
 
         // Valid java.util.Date --> Type Conversion
@@ -485,14 +482,14 @@ public abstract class DateConverterTestBase extends TestCase {
         Calendar calendar = null;
         try {
             final DateFormat format = locale == null
-                           ? new SimpleDateFormat(pattern)
-                           : new SimpleDateFormat(pattern, locale);
+                        ? new SimpleDateFormat(pattern)
+                        : new SimpleDateFormat(pattern, locale);
             format.setLenient(false);
             format.parse(value);
             calendar = format.getCalendar();
         } catch (final Exception e) {
             fail("Error creating Calendar value ='"
-                    + value + ", pattern='" + pattern + "' " + e.toString());
+                        + value + ", pattern='" + pattern + "' " + e.toString());
         }
         return calendar;
     }
@@ -573,9 +570,9 @@ public abstract class DateConverterTestBase extends TestCase {
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
             final Object result = converter.convert(getExpectedType(), value);
-            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> resultType = result == null ? null : result.getClass();
             final Class<?> expectType = expected == null ? null : expected.getClass();
-            assertEquals("TYPE "  + msg, expectType, resultType);
+            assertEquals("TYPE " + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
             fail(msg + " threw " + ex.toString());

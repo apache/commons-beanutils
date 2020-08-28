@@ -24,12 +24,9 @@ package org.apache.commons.beanutils2;
 
 public class NestedTestBean {
 
-
     public NestedTestBean(final String name) {
         setName(name);
     }
-
-
 
     private String name;
 
@@ -87,7 +84,5 @@ public class NestedTestBean {
     public NestedTestBean getSimpleBeanProperty() {
         return simpleBean;
     }
-
-
 
 }

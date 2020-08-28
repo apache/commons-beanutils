@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import java.util.HashMap;
@@ -96,7 +97,7 @@ public class Jira61BeanFactory {
          * @return The mapped value
          */
         public String getMappedReadOnly(final String key) {
-            return (String)mapped.get(key);
+            return (String) mapped.get(key);
         }
 
         /**

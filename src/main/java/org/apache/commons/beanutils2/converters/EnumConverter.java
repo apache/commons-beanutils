@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 /**
@@ -70,9 +71,9 @@ public final class EnumConverter extends AbstractConverter {
      * @throws Throwable if an error occurs converting to the specified type
      * @since 2.0
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     @Override
-    protected <T> T  convertToType(final Class<T> type, final Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
             final String enumValue = String.valueOf(value);
             final T[] constants = type.getEnumConstants();
@@ -80,7 +81,7 @@ public final class EnumConverter extends AbstractConverter {
                 throw conversionException(type, value);
             }
             for (final T candidate : constants) {
-                if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
+                if (((Enum) candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }
             }

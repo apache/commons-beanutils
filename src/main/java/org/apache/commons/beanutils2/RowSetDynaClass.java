@@ -65,8 +65,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * <p>Limits the size of the returned list.  The call to
      * {@code getRows()} will return at most limit number of rows.
@@ -80,8 +78,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * {@link RowSetDynaClass} was based.</p>
      */
     protected List<DynaBean> rows = new ArrayList<>();
-
-
 
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
@@ -142,7 +138,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
-                                                    throws SQLException {
+                throws SQLException {
         this(resultSet, lowerCase, -1);
 
     }
@@ -170,7 +166,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit)
-                                                            throws SQLException {
+                throws SQLException {
 
         this(resultSet, lowerCase, limit, false);
 
@@ -200,7 +196,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * @since 1.8.3
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
-        throws SQLException {
+                throws SQLException {
         this(resultSet, lowerCase, -1, useColumnLabel);
 
     }
@@ -230,8 +226,8 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * @since 1.8.3
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit,
-            final boolean useColumnLabel)
-            throws SQLException {
+                final boolean useColumnLabel)
+                throws SQLException {
         Objects.requireNonNull(resultSet, "resultSet");
         this.lowerCase = lowerCase;
         this.limit = limit;
@@ -260,8 +256,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
 
     }
 
-
-
     /**
      * <p>Copy the column values for each row in the specified
      * {@code ResultSet} into a newly created {@link DynaBean}, and add
@@ -276,7 +270,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
     protected void copy(final ResultSet resultSet) throws SQLException {
 
         int cnt = 0;
-        while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
+        while (resultSet.next() && (limit < 0 || cnt++ < limit)) {
             final DynaBean bean = createDynaBean();
             for (final DynaProperty property : properties) {
                 final String name = property.getName();

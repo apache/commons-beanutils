@@ -37,16 +37,8 @@ import junit.framework.TestSuite;
 
 public class BeanificationTestCase extends TestCase {
 
-
-
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-
-
-
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -56,10 +48,6 @@ public class BeanificationTestCase extends TestCase {
     public BeanificationTestCase(final String name) {
         super(name);
     }
-
-
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -71,14 +59,12 @@ public class BeanificationTestCase extends TestCase {
 
     }
 
-
     /**
      * Return the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(BeanificationTestCase.class);
     }
-
 
     /**
      * Tear down instance variables required by this test case.
@@ -88,15 +74,13 @@ public class BeanificationTestCase extends TestCase {
         // No action required
     }
 
-
-
-
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
-        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
+        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {
+        };
+        final WeakReference<ClassLoader> reference = new WeakReference<>(loader);
         @SuppressWarnings("unused")
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils2.BetaBean");
 
@@ -108,19 +92,18 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
-            if( reference.get() == null ) {
+            if (reference.get() == null) {
                 break;
 
             }
             // create garbage:
             @SuppressWarnings("unused")
-            final
-            byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -141,7 +124,7 @@ public class BeanificationTestCase extends TestCase {
         Integer test = new Integer(1);
 
         final WeakReference<Integer> testReference = new WeakReference<>(test, queue);
-        //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
+        // Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
         final Map<Object, Object> map = new WeakHashMap<>();
         map.put(loader, test);
 
@@ -155,23 +138,21 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
             map.isEmpty();
 
-            if(
-                loaderReference.get() == null &&
-                testReference.get() == null) {
+            if (loaderReference.get() == null &&
+                        testReference.get() == null) {
                 break;
 
             }
             // create garbage:
             @SuppressWarnings("unused")
-            final
-            byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -185,7 +166,7 @@ public class BeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        final WeakReference<ClassLoader> loaderReference = new  WeakReference<>(loader);
+        final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader);
         BeanUtilsBean.getInstance();
 
         class GetBeanUtilsBeanThread extends Thread {
@@ -194,7 +175,8 @@ public class BeanificationTestCase extends TestCase {
             ConvertUtilsBean convertUtils;
             PropertyUtilsBean propertyUtils;
 
-            GetBeanUtilsBeanThread() {}
+            GetBeanUtilsBeanThread() {
+            }
 
             @Override
             public void run() {
@@ -211,18 +193,16 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         @SuppressWarnings("unused")
-        final
-        WeakReference<Thread> threadWeakReference = new WeakReference<>(thread);
+        final WeakReference<Thread> threadWeakReference = new WeakReference<>(thread);
         thread.setContextClassLoader(loader);
 
         thread.start();
         thread.join();
 
         final WeakReference<BeanUtilsBean> beanUtilsReference = new WeakReference<>(thread.beanUtils);
-        final WeakReference<PropertyUtilsBean> propertyUtilsReference =  new WeakReference<>(thread.propertyUtils);
+        final WeakReference<PropertyUtilsBean> propertyUtilsReference = new WeakReference<>(thread.propertyUtils);
         final WeakReference<ConvertUtilsBean> convertUtilsReference = new WeakReference<>(thread.convertUtils);
 
         assertNotNull("Weak reference released early (1)", loaderReference.get());
@@ -237,25 +217,23 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             BeanUtilsBean.getInstance();
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
 
-            if(
-                loaderReference.get() == null &&
-                beanUtilsReference.get() == null &&
-                propertyUtilsReference.get() == null &&
-                convertUtilsReference.get() == null) {
+            if (loaderReference.get() == null &&
+                        beanUtilsReference.get() == null &&
+                        propertyUtilsReference.get() == null &&
+                        convertUtilsReference.get() == null) {
                 break;
 
             }
             // create garbage:
             @SuppressWarnings("unused")
-            final
-            byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -308,7 +286,6 @@ public class BeanificationTestCase extends TestCase {
                     "Different PropertyUtilsBean instances per context classloader",
                     PropertyUtilsBean.getInstance() != signal.getPropertyUtils());
     }
-
 
     /**
      * Tests whether difference instances are loaded by different
@@ -374,11 +351,11 @@ public class BeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     ConvertUtils.register(new Converter() {
-                                            @Override
-                                            public <T> T convert(final Class<T> type, final Object value) {
-                                                return ConvertUtils.primitiveToWrapper(type).cast(new Integer(9));
-                                            }
-                                                }, Integer.TYPE);
+                        @Override
+                        public <T> T convert(final Class<T> type, final Object value) {
+                            return ConvertUtils.primitiveToWrapper(type).cast(new Integer(9));
+                        }
+                    }, Integer.TYPE);
                     BeanUtils.setProperty(bean, "int", new Integer(1));
                 } catch (final Exception e) {
                     e.printStackTrace();
@@ -397,11 +374,11 @@ public class BeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         ConvertUtils.register(new Converter() {
-                                @Override
-                                public <T> T convert(final Class<T> type, final Object value) {
-                                    return ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
-                                }
-                                    }, Integer.TYPE);
+            @Override
+            public <T> T convert(final Class<T> type, final Object value) {
+                return ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
+            }
+        }, Integer.TYPE);
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value(2)", 5, bean.getInt());
 
@@ -541,4 +518,3 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 }
-

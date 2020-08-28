@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.InvocationTargetException;
@@ -55,7 +56,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public void testArrayProperty() throws InvocationTargetException,
-            IllegalAccessException {
+                IllegalAccessException {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);
@@ -80,7 +81,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayProp {
-        private Object[] foo = new Object[] { OLD_VALUE };
+        private Object[] foo = new Object[] {OLD_VALUE};
 
         public Object[] getFoo() {
             return foo;
@@ -92,7 +93,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayIndexedProp {
-        private final Object[] foo = new Object[] { OLD_VALUE };
+        private final Object[] foo = new Object[] {OLD_VALUE};
 
         public Object getFoo(final int i) {
             return foo[i];

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs.other;
 
 import java.beans.BeanInfo;
@@ -34,15 +35,19 @@ import java.util.List;
 public class Jira492IndexedListsSupport {
     public static class IndexedBean {
         private List<String> someList = new ArrayList<>();
+
         public List<String> getSomeList() {
             return someList;
         }
+
         public void setSomeList(final List<String> someList) {
             this.someList = someList;
         }
+
         public void setSomeList(final int i, final String value) {
             someList.set(i, value);
         }
+
         public String getSomeList(final int i) {
             return someList.get(i);
         }

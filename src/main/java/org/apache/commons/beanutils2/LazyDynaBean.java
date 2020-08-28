@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.io.Serializable;
@@ -124,7 +125,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     private static final long serialVersionUID = 1L;
 
- /**
+    /**
     * Commons Logging
     */
     private transient Log logger = LogFactory.getLog(LazyDynaBean.class);
@@ -134,19 +135,19 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /** BigDecimal Zero */
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
     /** Character Space */
-    protected static final Character  Character_SPACE = Character.valueOf(' ');
+    protected static final Character Character_SPACE = Character.valueOf(' ');
     /** Byte Zero */
-    protected static final Byte       Byte_ZERO       = Byte.valueOf((byte)0);
+    protected static final Byte Byte_ZERO = Byte.valueOf((byte) 0);
     /** Short Zero */
-    protected static final Short      Short_ZERO      = Short.valueOf((short)0);
+    protected static final Short Short_ZERO = Short.valueOf((short) 0);
     /** Integer Zero */
-    protected static final Integer    Integer_ZERO    = Integer.valueOf(0);
+    protected static final Integer Integer_ZERO = Integer.valueOf(0);
     /** Long Zero */
-    protected static final Long       Long_ZERO       = Long.valueOf(0);
+    protected static final Long Long_ZERO = Long.valueOf(0);
     /** Float Zero */
-    protected static final Float      Float_ZERO      = Float.valueOf((byte)0);
+    protected static final Float Float_ZERO = Float.valueOf((byte) 0);
     /** Double Zero */
-    protected static final Double     Double_ZERO     = Double.valueOf((byte)0);
+    protected static final Double Double_ZERO = Double.valueOf((byte) 0);
 
     /**
      * The {@code MutableDynaClass} "base class" that this DynaBean
@@ -162,8 +163,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * is associated with.
      */
     protected MutableDynaClass dynaClass;
-
-
 
     /**
      * Construct a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
@@ -193,14 +192,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
         values = newMap();
 
         if (dynaClass instanceof MutableDynaClass) {
-            this.dynaClass = (MutableDynaClass)dynaClass;
+            this.dynaClass = (MutableDynaClass) dynaClass;
         } else {
             this.dynaClass = new LazyDynaClass(dynaClass.getName(), dynaClass.getDynaProperties());
         }
 
     }
-
-
 
     /**
      * <p>
@@ -239,11 +236,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            return ((Map<?, ?>)value).size();
+            return ((Map<?, ?>) value).size();
         }
 
         if (value instanceof List) {
-            return ((List<?>)value).size();
+            return ((List<?>) value).size();
         }
 
         if (value.getClass().isArray()) {
@@ -253,8 +250,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
         return 0;
 
     }
-
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -354,9 +349,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Check that the property is indexed
         if (!dynaClass.getDynaProperty(name).isIndexed()) {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]' "
-                                      + dynaClass.getDynaProperty(name).getName());
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]' "
+                        + dynaClass.getDynaProperty(name).getName());
         }
 
         // Grow indexed property to appropriate size
@@ -366,11 +360,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
         if (indexedProperty.getClass().isArray()) {
             return Array.get(indexedProperty, index);
         } else if (indexedProperty instanceof List) {
-            return ((List<?>)indexedProperty).get(index);
+            return ((List<?>) indexedProperty).get(index);
         } else {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]' "
-                                  + indexedProperty.getClass().getName());
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]' "
+                        + indexedProperty.getClass().getName());
         }
 
     }
@@ -401,18 +394,16 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
-            throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")' "
-                            + dynaClass.getDynaProperty(name).getType().getName());
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")' "
+                        + dynaClass.getDynaProperty(name).getType().getName());
         }
 
         // Get the value from the Map
         if (mappedProperty instanceof Map) {
             return ((Map<?, ?>) mappedProperty).get(key);
         }
-        throw new IllegalArgumentException
-          ("Non-mapped property for '" + name + "(" + key + ")'"
-                              + mappedProperty.getClass().getName());
+        throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'"
+                    + mappedProperty.getClass().getName());
 
     }
 
@@ -453,9 +444,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
         if (value instanceof Map) {
             ((Map<?, ?>) value).remove(key);
         } else {
-            throw new IllegalArgumentException
-                    ("Non-mapped property for '" + name + "(" + key + ")'"
-                            + value.getClass().getName());
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'"
+                        + value.getClass().getName());
         }
 
     }
@@ -480,8 +470,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         if (!isDynaProperty(name)) {
 
             if (dynaClass.isRestricted()) {
-                throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "' (DynaClass is restricted)");
+                throw new IllegalArgumentException("Invalid property name '" + name + "' (DynaClass is restricted)");
             }
             if (value == null) {
                 dynaClass.add(name);
@@ -495,15 +484,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
-                throw new NullPointerException
-                        ("Primitive value for '" + name + "'");
+                throw new NullPointerException("Primitive value for '" + name + "'");
             }
         } else if (!isAssignable(descriptor.getType(), value.getClass())) {
-            throw new ConversionException
-                    ("Cannot assign value of type '" +
-                    value.getClass().getName() +
-                    "' to property '" + name + "' of type '" +
-                    descriptor.getType().getName() + "'");
+            throw new ConversionException("Cannot assign value of type '" +
+                        value.getClass().getName() +
+                        "' to property '" + name + "' of type '" +
+                        descriptor.getType().getName() + "'");
         }
 
         // Set the property's value
@@ -540,9 +527,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Check that the property is indexed
         if (!dynaClass.getDynaProperty(name).isIndexed()) {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]'"
-                            + dynaClass.getDynaProperty(name).getType().getName());
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]'"
+                        + dynaClass.getDynaProperty(name).getType().getName());
         }
 
         // Grow indexed property to appropriate size
@@ -558,9 +544,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
             List<Object> values = (List<Object>) indexedProperty;
             values.set(index, value);
         } else {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]' "
-                            + indexedProperty.getClass().getName());
+            throw new IllegalArgumentException("Non-indexed property for '" + name + "[" + index + "]' "
+                        + indexedProperty.getClass().getName());
         }
 
     }
@@ -592,9 +577,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Check that the property is mapped
         if (!dynaClass.getDynaProperty(name).isMapped()) {
-            throw new IllegalArgumentException
-                ("Non-mapped property for '" + name + "(" + key + ")'"
-                            + dynaClass.getDynaProperty(name).getType().getName());
+            throw new IllegalArgumentException("Non-mapped property for '" + name + "(" + key + ")'"
+                        + dynaClass.getDynaProperty(name).getType().getName());
         }
 
         // Set the value in the Map
@@ -605,8 +589,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
         valuesMap.put(key, value);
 
     }
-
-
 
     /**
      * Grow the size of an indexed property
@@ -624,12 +606,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
             @SuppressWarnings("unchecked")
             final
             // Indexed properties are stored as List<Object>
-            List<Object> list = (List<Object>)indexedProperty;
+            List<Object> list = (List<Object>) indexedProperty;
             while (index >= list.size()) {
                 final Class<?> contentType = getDynaClass().getDynaProperty(name).getContentType();
                 Object value = null;
                 if (contentType != null) {
-                    value = createProperty(name+"["+list.size()+"]", contentType);
+                    value = createProperty(name + "[" + list.size() + "]", contentType);
                 }
                 list.add(value);
             }
@@ -648,7 +630,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
                 set(name, indexedProperty);
                 final int newLength = Array.getLength(indexedProperty);
                 for (int i = length; i < newLength; i++) {
-                    Array.set(indexedProperty, i, createProperty(name+"["+i+"]", componentType));
+                    Array.set(indexedProperty, i, createProperty(name + "[" + i + "]", componentType));
                 }
             }
         }
@@ -718,17 +700,15 @@ public class LazyDynaBean implements DynaBean, Serializable {
             } else {
                 try {
                     indexedProperty = type.newInstance();
-                }
-                catch (final Exception ex) {
-                    throw new IllegalArgumentException
-                        ("Error instantiating indexed property of type '" +
-                                   type.getName() + "' for '" + name + "' " + ex);
+                } catch (final Exception ex) {
+                    throw new IllegalArgumentException("Error instantiating indexed property of type '" +
+                                type.getName() + "' for '" + name + "' " + ex);
                 }
             }
         } else {
 
-            throw new IllegalArgumentException
-                    ("Non-indexed property of type '" + type.getName() + "' for '" + name + "'");
+            throw new IllegalArgumentException(
+                        "Non-indexed property of type '" + type.getName() + "' for '" + name + "'");
         }
 
         return indexedProperty;
@@ -753,16 +733,14 @@ public class LazyDynaBean implements DynaBean, Serializable {
         } else if (Map.class.isAssignableFrom(type)) {
             try {
                 mappedProperty = type.newInstance();
-            }
-            catch (final Exception ex) {
-                throw new IllegalArgumentException
-                    ("Error instantiating mapped property of type '" +
+            } catch (final Exception ex) {
+                throw new IllegalArgumentException("Error instantiating mapped property of type '" +
                             type.getName() + "' for '" + name + "' " + ex);
             }
         } else {
 
-            throw new IllegalArgumentException
-                    ("Non-mapped property of type '" + type.getName() + "' for '" + name + "'");
+            throw new IllegalArgumentException(
+                        "Non-mapped property of type '" + type.getName() + "' for '" + name + "'");
         }
 
         return mappedProperty;
@@ -778,11 +756,10 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected Object createDynaBeanProperty(final String name, final Class<?> type) {
         try {
             return type.newInstance();
-        }
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating DynaBean property of type '" +
-                        type.getName() + "' for '" + name + "' " + ex);
+                            type.getName() + "' for '" + name + "' " + ex);
             }
             return null;
         }
@@ -838,11 +815,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected Object createOtherProperty(final String name, final Class<?> type) {
 
-        if (type == Object.class    ||
-            type == String.class    ||
-            type == Boolean.class   ||
-            type == Character.class ||
-            Date.class.isAssignableFrom(type)) {
+        if (type == Object.class ||
+                    type == String.class ||
+                    type == Boolean.class ||
+                    type == Character.class ||
+                    Date.class.isAssignableFrom(type)) {
 
             return null;
 
@@ -850,8 +827,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         try {
             return type.newInstance();
-        }
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
             }
@@ -901,7 +877,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Handle LazyDynaClasses
         if (dynaClass instanceof LazyDynaClass) {
-            return ((LazyDynaClass)dynaClass).isDynaProperty(name);
+            return ((LazyDynaClass) dynaClass).isDynaProperty(name);
         }
 
         // Handle other MutableDynaClass
@@ -920,14 +896,14 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
-                dest == Boolean.TYPE && source == Boolean.class ||
-                dest == Byte.TYPE && source == Byte.class ||
-                dest == Character.TYPE && source == Character.class ||
-                dest == Double.TYPE && source == Double.class ||
-                dest == Float.TYPE && source == Float.class ||
-                dest == Integer.TYPE && source == Integer.class ||
-                dest == Long.TYPE && source == Long.class ||
-                dest == Short.TYPE && source == Short.class) {
+                    dest == Boolean.TYPE && source == Boolean.class ||
+                    dest == Byte.TYPE && source == Byte.class ||
+                    dest == Character.TYPE && source == Character.class ||
+                    dest == Double.TYPE && source == Double.class ||
+                    dest == Float.TYPE && source == Float.class ||
+                    dest == Integer.TYPE && source == Integer.class ||
+                    dest == Long.TYPE && source == Long.class ||
+                    dest == Short.TYPE && source == Short.class) {
             return true;
         }
         return false;

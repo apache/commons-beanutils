@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
@@ -65,7 +66,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     public void addPropertyDescriptor(final PropertyDescriptor desc) {
         if (desc == null) {
             throw new IllegalArgumentException(
-                    "Property descriptor must not be null!");
+                        "Property descriptor must not be null!");
         }
         descriptors.put(desc.getName(), desc);
     }
@@ -74,7 +75,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
     public void addPropertyDescriptors(final PropertyDescriptor[] descs) {
         if (descs == null) {
             throw new IllegalArgumentException(
-                    "Array with descriptors must not be null!");
+                        "Array with descriptors must not be null!");
         }
 
         for (final PropertyDescriptor desc : descs) {

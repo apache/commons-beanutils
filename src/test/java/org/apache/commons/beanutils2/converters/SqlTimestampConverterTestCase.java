@@ -40,8 +40,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimestampConverterTestCase.class);
     }
 
-
-
     /**
      * Construct a new Date test case.
      * @param name Test Name
@@ -49,8 +47,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     public SqlTimestampConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Return the expected type

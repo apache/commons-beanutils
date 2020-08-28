@@ -26,13 +26,9 @@ import java.math.BigDecimal;
 
 public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     public BigDecimalLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -42,7 +38,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
         super.setUp();
 
-        defaultValue  = new BigDecimal("9.99");
+        defaultValue = new BigDecimal("9.99");
         expectedValue = new BigDecimal(expectedDecimalValue);
 
     }
@@ -55,8 +51,6 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
@@ -64,9 +58,9 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
         // ------------- Construct with localized pattern ------------
         converter = new BigDecimalLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedDecimalPattern,
-                                                  true);
+                    localizedLocale,
+                    localizedDecimalPattern,
+                    true);
 
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
@@ -84,7 +78,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
         // but it gets swallowed in convert() method and returns default.
-        //  **** IS THIS THE EXPECTED BEHAVIOUR? ****
+        // **** IS THIS THE EXPECTED BEHAVIOUR? ****
         // Maybe if the pattern is no good, we should use a default pattern rather
         // than just returning the default value.
         // **************************************************************************
@@ -95,15 +89,16 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a BigDecimal.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedDecimalValue,
+        // localizedDecimalPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
         converter = new BigDecimalLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultDecimalPattern,
-                                                  false);
+                    localizedLocale,
+                    defaultDecimalPattern,
+                    false);
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -247,4 +242,3 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
     }
 
 }
-

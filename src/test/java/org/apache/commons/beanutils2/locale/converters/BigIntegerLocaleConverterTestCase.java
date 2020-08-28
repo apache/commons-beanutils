@@ -28,13 +28,9 @@ import org.apache.commons.beanutils2.ConversionException;
 
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-
-
     public BigIntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -44,7 +40,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
         super.setUp();
 
-        defaultValue  = new BigInteger("999");
+        defaultValue = new BigInteger("999");
         expectedValue = new BigInteger(expectedIntegerValue);
 
     }
@@ -57,8 +53,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
@@ -66,9 +60,9 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
 
         // ------------- Construct with localized pattern ------------
         converter = new BigIntegerLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedIntegerPattern,
-                                                  true);
+                    localizedLocale,
+                    localizedIntegerPattern,
+                    true);
 
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
@@ -84,7 +78,8 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertValueNoPattern(converter, "(B)", defaultIntegerValue, new BigInteger("1"));
 
         // **************************************************************************
-        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
+        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test
+        // Case
         // it doesn't causes an exception in parse() - DecimalFormat parses it
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
@@ -96,15 +91,16 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a BigInteger.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue,
+        // localizedIntegerPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
         converter = new BigIntegerLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultIntegerPattern,
-                                                  false);
+                    localizedLocale,
+                    defaultIntegerPattern,
+                    false);
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -262,4 +258,3 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
     }
 
 }
-

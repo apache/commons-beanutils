@@ -22,6 +22,6 @@ package org.apache.commons.beanutils2;
  *
  */
 
-public class MappedPropertyChildBean extends MappedPropertyTestBean{
+public class MappedPropertyChildBean extends MappedPropertyTestBean {
 
 }

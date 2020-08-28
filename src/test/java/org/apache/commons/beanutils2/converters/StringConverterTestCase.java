@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -50,7 +51,7 @@ public class StringConverterTestCase extends TestCase {
         try {
             converter.convert(Integer.class, new Object());
             fail("No conversion exception thrown!");
-        } catch(final ConversionException cex) {
+        } catch (final ConversionException cex) {
             // expected result
         }
     }

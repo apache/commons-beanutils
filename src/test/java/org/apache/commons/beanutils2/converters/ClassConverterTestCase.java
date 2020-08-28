@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -36,8 +37,6 @@ public class ClassConverterTestCase extends TestCase {
         return new TestSuite(ClassConverterTestCase.class);
     }
 
-
-
     /**
      * Construct a new Class Converter test case.
      * @param name Test Name
@@ -56,8 +55,6 @@ public class ClassConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
     }
 
-
-
     /**
      * Test Array Conversion
      */
@@ -69,7 +66,8 @@ public class ClassConverterTestCase extends TestCase {
 
         // *** N.B. for some reason the following works on m1, but not m2
         // Test String to Array Class
-        // assertEquals("String to Array", Boolean[].class, converter.convert(Class.class, "[Ljava.lang.Boolean;"));
+        // assertEquals("String to Array", Boolean[].class,
+        // converter.convert(Class.class, "[Ljava.lang.Boolean;"));
     }
 
     /**
@@ -78,9 +76,10 @@ public class ClassConverterTestCase extends TestCase {
     public void testConvertToClass() {
         final Converter converter = new ClassConverter();
 
-        assertEquals("Class Test",        Integer.class, converter.convert(Class.class, Integer.class));
-        assertEquals("String Test",       Integer.class, converter.convert(Class.class, "java.lang.Integer"));
-        assertEquals("StringBuilder Test", Integer.class, converter.convert(Class.class, new StringBuilder("java.lang.Integer")));
+        assertEquals("Class Test", Integer.class, converter.convert(Class.class, Integer.class));
+        assertEquals("String Test", Integer.class, converter.convert(Class.class, "java.lang.Integer"));
+        assertEquals("StringBuilder Test", Integer.class,
+                    converter.convert(Class.class, new StringBuilder("java.lang.Integer")));
 
         // Invalid Test
         try {
@@ -107,7 +106,7 @@ public class ClassConverterTestCase extends TestCase {
         final Converter converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, new Integer(6)));
-        assertEquals("Null Test",    Object.class, converter.convert(Class.class, null));
+        assertEquals("Null Test", Object.class, converter.convert(Class.class, null));
     }
 
     /**
@@ -118,7 +117,7 @@ public class ClassConverterTestCase extends TestCase {
         final Converter converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, new Integer(6)));
-        assertEquals("Null Test",    null, converter.convert(Class.class, null));
+        assertEquals("Null Test", null, converter.convert(Class.class, null));
     }
 
     /**
@@ -130,7 +129,7 @@ public class ClassConverterTestCase extends TestCase {
         assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
         assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuilder("bar")));
-        assertEquals("Null Test",   null, converter.convert(String.class, null));
+        assertEquals("Null Test", null, converter.convert(String.class, null));
     }
 
     /**

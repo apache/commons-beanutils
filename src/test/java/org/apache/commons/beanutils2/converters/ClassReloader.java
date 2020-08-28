@@ -65,7 +65,7 @@ public class ClassReloader extends ClassLoader {
 
         final byte[] buf = new byte[1024];
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        for(;;) {
+        for (;;) {
             final int bytesRead = classStream.read(buf);
             if (bytesRead == -1) {
                 break;

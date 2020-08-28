@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.bugs;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class Jira509TestCase {
     @Test(timeout = 60_000)
     public void test_concurrent() throws InterruptedException {
         final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class,
-                Collection.class, Set.class, ArrayList.class, List.class, HashSet.class);
+                    Collection.class, Set.class, ArrayList.class, List.class, HashSet.class);
 
         // All daemon threads.
         final ExecutorService executor = Executors.newFixedThreadPool(100, r -> {
@@ -76,7 +77,8 @@ public class Jira509TestCase {
 
                 });
             }
-        } finally {
+        }
+        finally {
             executor.shutdown();
             executor.awaitTermination(3500, TimeUnit.MILLISECONDS);
 

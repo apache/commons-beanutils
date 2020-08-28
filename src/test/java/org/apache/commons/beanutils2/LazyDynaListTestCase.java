@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.io.ByteArrayInputStream;
@@ -40,15 +41,13 @@ public class LazyDynaListTestCase extends TestCase {
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";
 
     protected DynaProperty[] properties = new DynaProperty[] {
-                                               new DynaProperty(BASIC_PROP1, String.class),
-                                               new DynaProperty(BASIC_PROP2, HashMap.class)};
+                new DynaProperty(BASIC_PROP1, String.class),
+                new DynaProperty(BASIC_PROP2, HashMap.class)};
 
     protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
     protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
-
-
 
     /**
      * Construct a new instance of this test case.
@@ -58,8 +57,6 @@ public class LazyDynaListTestCase extends TestCase {
     public LazyDynaListTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run thus Test
@@ -88,8 +85,6 @@ public class LazyDynaListTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test DynaBean Create
@@ -173,7 +168,8 @@ public class LazyDynaListTestCase extends TestCase {
     /**
      * Test Collection
      */
-    public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+    public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass,
+                final Object wrongBean) {
 
         // ----- Create Collection & Array of Maps -----
         final int size = 5;
@@ -181,7 +177,7 @@ public class LazyDynaListTestCase extends TestCase {
         final TreeMap<?, ?>[] testArray = new TreeMap[size];
         for (int i = 0; i < size; i++) {
             final TreeMap<String, Object> map = new TreeMap<>();
-            map.put("prop"+i, "val"+i);
+            map.put("prop" + i, "val" + i);
             testArray[i] = map;
             testList.add(testArray[i]);
         }
@@ -191,14 +187,14 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("1. check size", size, lazyList.size());
 
         DynaBean[] dynaArray = lazyList.toDynaBeanArray();
-        TreeMap<?, ?>[]  mapArray  = (TreeMap[])lazyList.toArray();
+        TreeMap<?, ?>[] mapArray = (TreeMap[]) lazyList.toArray();
 
         // Check values
         assertEquals("2. check size", size, dynaArray.length);
         assertEquals("3. check size", size, mapArray.length);
         for (int i = 0; i < size; i++) {
-            assertEquals("4."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
-            assertEquals("5."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
+            assertEquals("4." + i + " DynaBean error ", "val" + i, dynaArray[i].get("prop" + i));
+            assertEquals("5." + i + " Map error ", "val" + i, mapArray[i].get("prop" + i));
         }
 
         // ----- Create LazyArrayList from Array -----
@@ -206,14 +202,14 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("6. check size", size, lazyList.size());
 
         dynaArray = lazyList.toDynaBeanArray();
-        mapArray  = (TreeMap[])lazyList.toArray();
+        mapArray = (TreeMap[]) lazyList.toArray();
 
         // Check values
         assertEquals("7. check size", size, dynaArray.length);
         assertEquals("8. check size", size, mapArray.length);
         for (int i = 0; i < size; i++) {
-            assertEquals("9."+i+" DynaBean error ", "val"+i, dynaArray[i].get("prop"+i));
-            assertEquals("10."+i+" Map error ", "val"+i, mapArray[i].get("prop"+i));
+            assertEquals("9." + i + " DynaBean error ", "val" + i, dynaArray[i].get("prop" + i));
+            assertEquals("10." + i + " Map error ", "val" + i, mapArray[i].get("prop" + i));
         }
 
     }
@@ -229,7 +225,8 @@ public class LazyDynaListTestCase extends TestCase {
     /**
      * Test DynaBean Create
      */
-    private void dynaBeanTest(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
+    private void dynaBeanTest(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass,
+                final Object wrongBean) {
 
         // Test get(index) created correct DynaBean - Second
         Object dynaBean = list.get(1);
@@ -240,7 +237,7 @@ public class LazyDynaListTestCase extends TestCase {
         Object array = list.toArray();
         assertNotNull("3. Array Not Created", array);
         assertEquals("4. Not DynaBean[]", testClass, array.getClass().getComponentType());
-        DynaBean[] dynaArray = (DynaBean[])array;
+        DynaBean[] dynaArray = (DynaBean[]) array;
         assertEquals("5. Array Size Wrong", 2, dynaArray.length);
 
         // Test get(index) created correct DynaBean - Fourth
@@ -252,14 +249,14 @@ public class LazyDynaListTestCase extends TestCase {
         array = list.toArray();
         assertNotNull("8. Array Not Created", array);
         assertEquals("9. Not DynaBean[]", testClass, array.getClass().getComponentType());
-        dynaArray = (DynaBean[])array;
+        dynaArray = (DynaBean[]) array;
         assertEquals("10. Array Size Wrong", 4, dynaArray.length);
 
         // Test fail if different type added
         try {
             list.add(2, wrongBean);
             fail("Expected IllegalArgumentException");
-        } catch(final IllegalArgumentException ignore) {
+        } catch (final IllegalArgumentException ignore) {
             // expected result
         }
 
@@ -268,7 +265,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertNotNull("Test Property Not Found", testProperty);
         dynaArray = list.toDynaBeanArray();
         for (int i = 0; i < dynaArray.length; i++) {
-            dynaArray[i].set(testProperty, "orig_pos"+i);
+            dynaArray[i].set(testProperty, "orig_pos" + i);
         }
 
         // Create Collection
@@ -277,14 +274,14 @@ public class LazyDynaListTestCase extends TestCase {
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
             collection.add(testDynaClass.newInstance());
-        } catch(final Exception ex) {
+        } catch (final Exception ex) {
             fail("1. FAILED: " + ex);
         }
         final int expectedSize = dynaArray.length + collection.size();
-        final String origValue = (String)((DynaBean)collection.get(0)).get(testProperty);
-        ((DynaBean)collection.get(0)).set(testProperty, origValue+"_updated_"+0);
-        ((DynaBean)collection.get(1)).set(testProperty, origValue+"_updated_"+1);
-        ((DynaBean)collection.get(2)).set(testProperty, origValue+"_updated_"+2);
+        final String origValue = (String) ((DynaBean) collection.get(0)).get(testProperty);
+        ((DynaBean) collection.get(0)).set(testProperty, origValue + "_updated_" + 0);
+        ((DynaBean) collection.get(1)).set(testProperty, origValue + "_updated_" + 1);
+        ((DynaBean) collection.get(2)).set(testProperty, origValue + "_updated_" + 2);
 
         // Test Insert - addAll(index, Collection)
         list.addAll(1, collection);
@@ -295,11 +292,11 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("11. Array Size Wrong", expectedSize, dynaArray.length);
 
         // Check Beans have inserted correctly - by checking the property values
-        assertEquals("12. Wrong Value", "orig_pos0",             dynaArray[0].get(testProperty));
-        assertEquals("13. Wrong Value", origValue+"_updated_"+0, dynaArray[1].get(testProperty));
-        assertEquals("14. Wrong Value", origValue+"_updated_"+1, dynaArray[2].get(testProperty));
-        assertEquals("15. Wrong Value", origValue+"_updated_"+2, dynaArray[3].get(testProperty));
-        assertEquals("16. Wrong Value", "orig_pos1",             dynaArray[4].get(testProperty));
+        assertEquals("12. Wrong Value", "orig_pos0", dynaArray[0].get(testProperty));
+        assertEquals("13. Wrong Value", origValue + "_updated_" + 0, dynaArray[1].get(testProperty));
+        assertEquals("14. Wrong Value", origValue + "_updated_" + 1, dynaArray[2].get(testProperty));
+        assertEquals("15. Wrong Value", origValue + "_updated_" + 2, dynaArray[3].get(testProperty));
+        assertEquals("16. Wrong Value", "orig_pos1", dynaArray[4].get(testProperty));
 
         // Test Insert - add(index, Object)
         try {
@@ -307,10 +304,10 @@ public class LazyDynaListTestCase extends TestCase {
             extraElement.set(testProperty, "extraOne");
             list.add(2, extraElement);
             dynaArray = list.toDynaBeanArray();
-            assertEquals("17. Wrong Value", origValue+"_updated_"+0, dynaArray[1].get(testProperty));
-            assertEquals("18. Wrong Value", "extraOne",              dynaArray[2].get(testProperty));
-            assertEquals("19. Wrong Value", origValue+"_updated_"+1, dynaArray[3].get(testProperty));
-        } catch(final Exception ex) {
+            assertEquals("17. Wrong Value", origValue + "_updated_" + 0, dynaArray[1].get(testProperty));
+            assertEquals("18. Wrong Value", "extraOne", dynaArray[2].get(testProperty));
+            assertEquals("19. Wrong Value", origValue + "_updated_" + 1, dynaArray[3].get(testProperty));
+        } catch (final Exception ex) {
             fail("2. FAILED: " + ex);
         }
 
@@ -340,7 +337,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("2. Not LazyDynaMap", LazyDynaMap.class, dynaBean.getClass());
 
         // Test get(index) created correct Map - First
-        Object map = ((LazyDynaMap)dynaBean).getMap();
+        Object map = ((LazyDynaMap) dynaBean).getMap();
         assertNotNull("3. Map Not Created", map);
         assertEquals("4. Wrong Map", testClass, map.getClass());
 
@@ -348,7 +345,7 @@ public class LazyDynaListTestCase extends TestCase {
         Object array = list.toArray();
         assertNotNull("5. Array Not Created", array);
         assertEquals("6. Not Map[]", testClass, array.getClass().getComponentType());
-        Map<?, ?>[] mapArray = (Map[])array;
+        Map<?, ?>[] mapArray = (Map[]) array;
         assertEquals("7. Array Size Wrong", 1, mapArray.length);
 
         // Test get(index) created correct DynaBean - Third
@@ -357,7 +354,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("9. Not LazyDynaMap", LazyDynaMap.class, dynaBean.getClass());
 
         // Test get(index) created correct Map - Third
-        map = ((LazyDynaMap)dynaBean).getMap();
+        map = ((LazyDynaMap) dynaBean).getMap();
         assertNotNull("10. Map Not Created", map);
         assertEquals("11. Wrong Map", testClass, map.getClass());
 
@@ -365,14 +362,14 @@ public class LazyDynaListTestCase extends TestCase {
         array = list.toArray();
         assertNotNull("12. Array Not Created", array);
         assertEquals("13. Not Map[]", testClass, array.getClass().getComponentType());
-        mapArray = (Map[])array;
+        mapArray = (Map[]) array;
         assertEquals("14. Array Size Wrong", 3, mapArray.length);
 
         // Test fail if different type added
         try {
             list.add(2, wrongBean);
             fail("Expected IllegalArgumentException");
-        } catch(final IllegalArgumentException ignore) {
+        } catch (final IllegalArgumentException ignore) {
             // expected result
         }
 
@@ -389,7 +386,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("2. Not WrapDynaBean", WrapDynaBean.class, dynaBean.getClass());
 
         // Test get(index) created correct POJO - First
-        Object pojoBean = ((WrapDynaBean)dynaBean).getInstance();
+        Object pojoBean = ((WrapDynaBean) dynaBean).getInstance();
         assertNotNull("3. POJO Not Created", pojoBean);
         assertEquals("4. Not WrapDynaBean", testClass, pojoBean.getClass());
 
@@ -397,7 +394,7 @@ public class LazyDynaListTestCase extends TestCase {
         Object array = list.toArray();
         assertNotNull("5. Array Not Created", array);
         assertEquals("6. Wrong array", testClass, array.getClass().getComponentType());
-        Object[] pojoArray = (Object[])array;
+        Object[] pojoArray = (Object[]) array;
         assertEquals("7. Array Size Wrong", 1, pojoArray.length);
 
         // Test get(index) created correct DynaBean - Second
@@ -406,7 +403,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("9. Not WrapDynaBean", WrapDynaBean.class, dynaBean.getClass());
 
         // Test get(index) created correct POJO - Second
-        pojoBean = ((WrapDynaBean)dynaBean).getInstance();
+        pojoBean = ((WrapDynaBean) dynaBean).getInstance();
         assertNotNull("10. POJO Not Created", pojoBean);
         assertEquals("11. Not WrapDynaBean", testClass, pojoBean.getClass());
 
@@ -414,14 +411,14 @@ public class LazyDynaListTestCase extends TestCase {
         array = list.toArray();
         assertNotNull("12. Array Not Created", array);
         assertEquals("13. Wrong array", testClass, array.getClass().getComponentType());
-        pojoArray = (Object[])array;
+        pojoArray = (Object[]) array;
         assertEquals("14. Array Size Wrong", 2, pojoArray.length);
 
         // Test fail if different type added
         try {
             list.add(2, wrongBean);
             fail("Expected IllegalArgumentException");
-        } catch(final IllegalArgumentException ignore) {
+        } catch (final IllegalArgumentException ignore) {
             // expected result
         }
 
@@ -434,7 +431,7 @@ public class LazyDynaListTestCase extends TestCase {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(basicDynaClass);
-        BasicDynaBean bean = (BasicDynaBean)target.get(0);
+        BasicDynaBean bean = (BasicDynaBean) target.get(0);
 
         // Set a Property
         assertNull("pre-set check", bean.get(BASIC_PROP1));
@@ -442,12 +439,12 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("post-set check", "value1", bean.get(BASIC_PROP1));
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList)serializeDeserialize(target, "DynaBean");
+        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "DynaBean");
         target = null;
         bean = null;
 
         // Confirm property value
-        bean = (BasicDynaBean)result.get(0);
+        bean = (BasicDynaBean) result.get(0);
         assertEquals("post-serialize check", "value1", bean.get(BASIC_PROP1));
 
     }
@@ -459,7 +456,7 @@ public class LazyDynaListTestCase extends TestCase {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList();
-        LazyDynaBean bean = (LazyDynaBean)target.get(0);
+        LazyDynaBean bean = (LazyDynaBean) target.get(0);
 
         // Set a Property
         assertNull("pre-set check", bean.get(BASIC_PROP1));
@@ -467,12 +464,12 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("post-set check", "value1", bean.get(BASIC_PROP1));
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList)serializeDeserialize(target, "DynaBean");
+        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "DynaBean");
         target = null;
         bean = null;
 
         // Confirm property value
-        bean = (LazyDynaBean)result.get(0);
+        bean = (LazyDynaBean) result.get(0);
         assertEquals("post-serialize check", "value1", bean.get(BASIC_PROP1));
 
     }
@@ -484,7 +481,7 @@ public class LazyDynaListTestCase extends TestCase {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(treeMapDynaClass);
-        LazyDynaMap bean = (LazyDynaMap)target.get(0);
+        LazyDynaMap bean = (LazyDynaMap) target.get(0);
 
         // Set a Property
         assertNull("pre-set check", bean.get(BASIC_PROP1));
@@ -492,12 +489,12 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("post-set check", "value1", bean.get(BASIC_PROP1));
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList)serializeDeserialize(target, "Map");
+        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "Map");
         target = null;
         bean = null;
 
         // Confirm property value
-        bean = (LazyDynaMap)result.get(0);
+        bean = (LazyDynaMap) result.get(0);
         assertEquals("post-serialize check", "value1", bean.get(BASIC_PROP1));
 
     }
@@ -509,7 +506,7 @@ public class LazyDynaListTestCase extends TestCase {
 
         // Create LazyArrayList for DynaBeans
         LazyDynaList target = new LazyDynaList(pojoDynaClass);
-        WrapDynaBean bean = (WrapDynaBean)target.get(0);
+        WrapDynaBean bean = (WrapDynaBean) target.get(0);
 
         // Set a Property
         assertEquals("pre-set check", "This is a string", bean.get("stringProperty"));
@@ -517,7 +514,7 @@ public class LazyDynaListTestCase extends TestCase {
         assertEquals("post-set check", "value1", bean.get("stringProperty"));
 
         // Serialize/Deserialize
-        final LazyDynaList result = (LazyDynaList)serializeDeserialize(target, "POJO");
+        final LazyDynaList result = (LazyDynaList) serializeDeserialize(target, "POJO");
         target = null;
         bean = null;
 
@@ -525,7 +522,7 @@ public class LazyDynaListTestCase extends TestCase {
         result.add(null);
 
         // Confirm property value
-        bean = (WrapDynaBean)result.get(0);
+        bean = (WrapDynaBean) result.get(0);
         assertEquals("post-serialize check", "value1", bean.get("stringProperty"));
 
     }
@@ -549,8 +546,7 @@ public class LazyDynaListTestCase extends TestCase {
         // Deserialize the test object
         Object result = null;
         try {
-            final ByteArrayInputStream bais =
-                new ByteArrayInputStream(baos.toByteArray());
+            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             final ObjectInputStream ois = new ObjectInputStream(bais);
             result = ois.readObject();
             bais.close();

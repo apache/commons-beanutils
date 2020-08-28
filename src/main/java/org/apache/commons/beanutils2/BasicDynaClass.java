@@ -36,8 +36,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * Construct a new BasicDynaClass with default parameters.
      */
@@ -67,7 +65,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * @param properties Property descriptors for the supported properties
      */
     public BasicDynaClass(final String name, Class<?> dynaBeanClass,
-                          final DynaProperty[] properties) {
+                final DynaProperty[] properties) {
 
         super();
         if (name != null) {
@@ -83,8 +81,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     }
 
-
-
     /**
      * The constructor of the {@code dynaBeanClass} that we will use
      * for creating new instances.
@@ -95,13 +91,13 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The method signature of the constructor we will use to create
      * new DynaBean instances.
      */
-    protected static Class<?>[] constructorTypes = { DynaClass.class };
+    protected static Class<?>[] constructorTypes = {DynaClass.class};
 
     /**
      * The argument values to be passed to the constructor we will use
      * to create new DynaBean instances.
      */
-    protected Object[] constructorValues = { this };
+    protected Object[] constructorValues = {this};
 
     /**
      * The {@code DynaBean} implementation class we will use for
@@ -125,8 +121,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * be the same instances as those in the {@code properties} list.
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
-
-
 
     /**
      * Return the name of this DynaClass (analogous to the
@@ -157,8 +151,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
-            throw new IllegalArgumentException
-                    ("No property name specified");
+            throw new IllegalArgumentException("No property name specified");
         }
         return propertiesMap.get(name);
 
@@ -195,7 +188,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException {
+                throws IllegalAccessException, InstantiationException {
 
         try {
             // Refind the constructor after a deserialization (if needed)
@@ -205,13 +198,10 @@ public class BasicDynaClass implements DynaClass, Serializable {
             // Invoke the constructor to create a new bean instance
             return (DynaBean) constructor.newInstance(constructorValues);
         } catch (final InvocationTargetException e) {
-            throw new InstantiationException
-                    (e.getTargetException().getMessage());
+            throw new InstantiationException(e.getTargetException().getMessage());
         }
 
     }
-
-
 
     /**
      * Return the Class object we will use to create new instances in the
@@ -225,8 +215,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
         return this.dynaBeanClass;
 
     }
-
-
 
     /**
      * Set the Class object we will use to create new instances in the
@@ -242,23 +230,20 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
         // Validate the argument type specified
         if (dynaBeanClass.isInterface()) {
-            throw new IllegalArgumentException
-                    ("Class " + dynaBeanClass.getName() +
-                    " is an interface, not a class");
+            throw new IllegalArgumentException("Class " + dynaBeanClass.getName() +
+                        " is an interface, not a class");
         }
         if (!DynaBean.class.isAssignableFrom(dynaBeanClass)) {
-            throw new IllegalArgumentException
-                    ("Class " + dynaBeanClass.getName() +
-                    " does not implement DynaBean");
+            throw new IllegalArgumentException("Class " + dynaBeanClass.getName() +
+                        " does not implement DynaBean");
         }
 
         // Identify the Constructor we will use in newInstance()
         try {
             this.constructor = dynaBeanClass.getConstructor(constructorTypes);
         } catch (final NoSuchMethodException e) {
-            throw new IllegalArgumentException
-                    ("Class " + dynaBeanClass.getName() +
-                    " does not have an appropriate constructor");
+            throw new IllegalArgumentException("Class " + dynaBeanClass.getName() +
+                        " does not have an appropriate constructor");
         }
         this.dynaBeanClass = dynaBeanClass;
 

@@ -59,13 +59,9 @@ public class BaseLocaleConverterTestCase extends TestCase {
     protected String expectedDecimalValue;
     protected String expectedIntegerValue;
 
-
-
     public BaseLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Set up instance variables required by this test case.
@@ -74,22 +70,22 @@ public class BaseLocaleConverterTestCase extends TestCase {
     public void setUp() throws Exception {
 
         // Default Locale (Use US)
-        defaultLocale           = Locale.US;
-        defaultDecimalPattern   = "#,###.00";
-        defaultIntegerPattern   = "#,###";
-        defaultDecimalValue     = "1,234.56";
-        defaultIntegerValue     = "1,234";
+        defaultLocale = Locale.US;
+        defaultDecimalPattern = "#,###.00";
+        defaultIntegerPattern = "#,###";
+        defaultDecimalValue = "1,234.56";
+        defaultIntegerValue = "1,234";
 
         // Use German Locale (uses different separators to US)
-        localizedLocale         = Locale.GERMAN;
+        localizedLocale = Locale.GERMAN;
         localizedDecimalPattern = "#.###,00";
         localizedIntegerPattern = "#.###";
-        localizedDecimalValue   = "1.234,56";
-        localizedIntegerValue   = "1.234";
+        localizedDecimalValue = "1.234,56";
+        localizedIntegerValue = "1.234";
 
         // Expected Values
-        expectedDecimalValue    = "1234.56";
-        expectedIntegerValue    = "1234";
+        expectedDecimalValue = "1234.56";
+        expectedIntegerValue = "1234";
 
         // Reset default to the one specified
         origLocale = Locale.getDefault();
@@ -98,12 +94,13 @@ public class BaseLocaleConverterTestCase extends TestCase {
         converter = null;
         result = null;
         defaultValue = null;
-        expectedValue= null;
+        expectedValue = null;
 
         if (defaultLocale.equals(origLocale)) {
             origLocale = null;
         } else {
-            // System.out.println("Changing default locale from " + origLocale + " to " + defaultLocale);
+            // System.out.println("Changing default locale from " + origLocale + " to " +
+            // defaultLocale);
             Locale.setDefault(defaultLocale);
         }
 
@@ -118,7 +115,7 @@ public class BaseLocaleConverterTestCase extends TestCase {
         converter = null;
         result = null;
         defaultValue = null;
-        expectedValue= null;
+        expectedValue = null;
 
         // Set the Default Locale back to the original value
         if (origLocale != null) {
@@ -128,19 +125,19 @@ public class BaseLocaleConverterTestCase extends TestCase {
 
     }
 
-
-
     /**
      * Test Converting Value WITH a pattern
      */
-    protected void convertValueWithPattern(final BaseLocaleConverter converter, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueWithPattern(final BaseLocaleConverter converter, final Object value,
+                final String pattern, final Object expectedValue) {
         convertValueWithPattern(converter, "", value, pattern, expectedValue);
     }
 
     /**
      * Test Converting Value WITH a pattern
      */
-    protected void convertValueWithPattern(final BaseLocaleConverter converter, final String msgId, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueWithPattern(final BaseLocaleConverter converter, final String msgId, final Object value,
+                final String pattern, final Object expectedValue) {
 
         // Convert value with no pattern
         try {
@@ -155,14 +152,16 @@ public class BaseLocaleConverterTestCase extends TestCase {
     /**
      * Test Converting Value WITHOUT a pattern
      */
-    protected void convertValueNoPattern(final BaseLocaleConverter converter, final Object value, final Object expectedValue) {
+    protected void convertValueNoPattern(final BaseLocaleConverter converter, final Object value,
+                final Object expectedValue) {
         convertValueNoPattern(converter, "", value, expectedValue);
     }
 
     /**
      * Test Converting Value WITHOUT a pattern
      */
-    protected void convertValueNoPattern(final BaseLocaleConverter converter, final String msgId, final Object value, final Object expectedValue) {
+    protected void convertValueNoPattern(final BaseLocaleConverter converter, final String msgId, final Object value,
+                final Object expectedValue) {
 
         // Convert value with no pattern
         try {
@@ -177,14 +176,16 @@ public class BaseLocaleConverterTestCase extends TestCase {
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter converter, final Class<?> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter converter, final Class<?> clazz, final Object value,
+                final String pattern, final Object expectedValue) {
         convertValueToType(converter, "", clazz, value, pattern, expectedValue);
     }
 
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter converter, final String msgId, final Class<?> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter converter, final String msgId, final Class<?> clazz,
+                final Object value, final String pattern, final Object expectedValue) {
 
         // Convert value with no pattern
         try {
@@ -216,7 +217,7 @@ public class BaseLocaleConverterTestCase extends TestCase {
         }
 
         if (expectedValue == null) {
-            assertNull("Check null conversion is null " + msgId + " result="+result, result);
+            assertNull("Check null conversion is null " + msgId + " result=" + result, result);
         } else {
             assertEquals("Check null conversion is default " + msgId, expectedValue, result);
         }
@@ -262,4 +263,3 @@ public class BaseLocaleConverterTestCase extends TestCase {
     public void testNothing() {
     }
 }
-

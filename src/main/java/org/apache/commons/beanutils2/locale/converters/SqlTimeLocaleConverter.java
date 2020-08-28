@@ -180,7 +180,7 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public SqlTimeLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 

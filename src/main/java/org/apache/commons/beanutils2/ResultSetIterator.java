@@ -31,8 +31,6 @@ import java.util.NoSuchElementException;
 
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
-
-
     /**
      * <p>Construct an {@code Iterator} for the result set being wrapped
      * by the specified {@link ResultSetDynaClass}.</p>
@@ -45,8 +43,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         this.dynaClass = dynaClass;
 
     }
-
-
 
     /**
      * <p>Flag indicating whether the result set is currently positioned at a
@@ -65,8 +61,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      */
     protected boolean eof = false;
 
-
-
     /**
      * Does the specified mapped property contain a value for the specified
      * key value?
@@ -82,8 +76,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public boolean contains(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
 
@@ -105,8 +98,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             return dynaClass.getObjectFromResultSet(name);
         } catch (final SQLException e) {
-            throw new RuntimeException
-                ("get(" + name + "): SQLException: " + e);
+            throw new RuntimeException("get(" + name + "): SQLException: " + e);
         }
 
     }
@@ -130,8 +122,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public Object get(final String name, final int index) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - indexed properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - indexed properties not currently supported");
 
     }
 
@@ -151,8 +142,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public Object get(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
 
@@ -183,8 +173,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public void remove(final String name, final String key) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped operations not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped operations not currently supported");
 
     }
 
@@ -210,8 +199,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         try {
             dynaClass.getResultSet().updateObject(name, value);
         } catch (final SQLException e) {
-            throw new RuntimeException
-                ("set(" + name + "): SQLException: " + e);
+            throw new RuntimeException("set(" + name + "): SQLException: " + e);
         }
 
     }
@@ -235,8 +223,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public void set(final String name, final int index, final Object value) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - indexed properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - indexed properties not currently supported");
 
     }
 
@@ -257,12 +244,9 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     @Override
     public void set(final String name, final String key, final Object value) {
 
-        throw new UnsupportedOperationException
-            ("FIXME - mapped properties not currently supported");
+        throw new UnsupportedOperationException("FIXME - mapped properties not currently supported");
 
     }
-
-
 
     /**
      * <p>Return {@code true} if the iteration has more elements.</p>
@@ -313,8 +297,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
         throw new UnsupportedOperationException("remove()");
 
     }
-
-
 
     /**
      * <p>Advance the result set to the next row, if there is not a current

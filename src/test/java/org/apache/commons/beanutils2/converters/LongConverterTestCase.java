@@ -32,11 +32,7 @@ public class LongConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(LongConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public LongConverterTestCase(final String name) {
         super(name);
@@ -51,8 +47,6 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new LongConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -73,63 +67,60 @@ public class LongConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from Byte",
+                    "from Short",
+                    "from Integer",
+                    "from Long",
+                    "from Float",
+                    "from Double"
         };
 
         final Object[] input = {
-            String.valueOf(Long.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Long.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+                    String.valueOf(Long.MIN_VALUE),
+                    "-17",
+                    "-1",
+                    "0",
+                    "1",
+                    "17",
+                    String.valueOf(Long.MAX_VALUE),
+                    new Byte((byte) 7),
+                    new Short((short) 8),
+                    new Integer(9),
+                    new Long(10),
+                    new Float(11.1),
+                    new Double(12.2)
         };
 
         final Long[] expected = {
-            new Long(Long.MIN_VALUE),
-            new Long(-17),
-            new Long(-1),
-            new Long(0),
-            new Long(1),
-            new Long(17),
-            new Long(Long.MAX_VALUE),
-            new Long(7),
-            new Long(8),
-            new Long(9),
-            new Long(10),
-            new Long(11),
-            new Long(12)
+                    new Long(Long.MIN_VALUE),
+                    new Long(-17),
+                    new Long(-1),
+                    new Long(0),
+                    new Long(1),
+                    new Long(17),
+                    new Long(Long.MAX_VALUE),
+                    new Long(7),
+                    new Long(8),
+                    new Long(9),
+                    new Long(10),
+                    new Long(11),
+                    new Long(12)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Long",expected[i],converter.convert(Long.class,input[i]));
-            assertEquals(message[i] + " to long",expected[i],converter.convert(Long.TYPE,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Long", expected[i], converter.convert(Long.class, input[i]));
+            assertEquals(message[i] + " to long", expected[i], converter.convert(Long.TYPE, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 
 }
-

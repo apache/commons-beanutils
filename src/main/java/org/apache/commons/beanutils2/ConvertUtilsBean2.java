@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 /**
@@ -41,7 +42,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      */
     @Override
     public String convert(final Object value) {
-        return (String)convert(value, String.class);
+        return (String) convert(value, String.class);
     }
 
     /**
@@ -56,7 +57,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      */
     @Override
     public Object convert(final String value, final Class<?> clazz) {
-        return convert((Object)value, clazz);
+        return convert((Object) value, clazz);
     }
 
     /**
@@ -71,7 +72,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      */
     @Override
     public Object convert(final String[] value, final Class<?> clazz) {
-        return convert((Object)value, clazz);
+        return convert((Object) value, clazz);
     }
 
 }

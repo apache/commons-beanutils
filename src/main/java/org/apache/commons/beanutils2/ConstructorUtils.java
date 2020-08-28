@@ -64,11 +64,10 @@ public class ConstructorUtils {
      * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, final Object arg)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         final Object[] args = toArray(arg);
         return invokeConstructor(klass, args);
@@ -94,11 +93,10 @@ public class ConstructorUtils {
      * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, Object[] args)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         if (null == args) {
             args = EMPTY_OBJECT_ARRAY;
@@ -130,14 +128,13 @@ public class ConstructorUtils {
      * @see Constructor#newInstance
      */
     public static <T> T invokeConstructor(
-        final Class<T> klass,
-        Object[] args,
-        Class<?>[] parameterTypes)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                final Class<T> klass,
+                Object[] args,
+                Class<?>[] parameterTypes)
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         if (parameterTypes == null) {
             parameterTypes = EMPTY_CLASS_PARAMETERS;
@@ -146,11 +143,10 @@ public class ConstructorUtils {
             args = EMPTY_OBJECT_ARRAY;
         }
 
-        final Constructor<T> ctor =
-            getMatchingAccessibleConstructor(klass, parameterTypes);
+        final Constructor<T> ctor = getMatchingAccessibleConstructor(klass, parameterTypes);
         if (null == ctor) {
             throw new NoSuchMethodException(
-                "No such accessible constructor on object: " + klass.getName());
+                        "No such accessible constructor on object: " + klass.getName());
         }
         return ctor.newInstance(args);
     }
@@ -175,11 +171,10 @@ public class ConstructorUtils {
      * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, final Object arg)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         final Object[] args = toArray(arg);
         return invokeExactConstructor(klass, args);
@@ -205,11 +200,10 @@ public class ConstructorUtils {
      * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, Object[] args)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         if (null == args) {
             args = EMPTY_OBJECT_ARRAY;
@@ -242,14 +236,13 @@ public class ConstructorUtils {
      * @see Constructor#newInstance
      */
     public static <T> T invokeExactConstructor(
-        final Class<T> klass,
-        Object[] args,
-        Class<?>[] parameterTypes)
-        throws
-            NoSuchMethodException,
-            IllegalAccessException,
-            InvocationTargetException,
-            InstantiationException {
+                final Class<T> klass,
+                Object[] args,
+                Class<?>[] parameterTypes)
+                throws NoSuchMethodException,
+                IllegalAccessException,
+                InvocationTargetException,
+                InstantiationException {
 
         if (args == null) {
             args = EMPTY_OBJECT_ARRAY;
@@ -262,7 +255,7 @@ public class ConstructorUtils {
         final Constructor<T> ctor = getAccessibleConstructor(klass, parameterTypes);
         if (null == ctor) {
             throw new NoSuchMethodException(
-                "No such accessible constructor on object: " + klass.getName());
+                        "No such accessible constructor on object: " + klass.getName());
         }
         return ctor.newInstance(args);
     }
@@ -277,10 +270,10 @@ public class ConstructorUtils {
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
      */
     public static <T> Constructor<T> getAccessibleConstructor(
-        final Class<T> klass,
-        final Class<?> parameterType) {
+                final Class<T> klass,
+                final Class<?> parameterType) {
 
-        final Class<?>[] parameterTypes = { parameterType };
+        final Class<?>[] parameterTypes = {parameterType};
         return getAccessibleConstructor(klass, parameterTypes);
     }
 
@@ -294,12 +287,12 @@ public class ConstructorUtils {
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
      */
     public static <T> Constructor<T> getAccessibleConstructor(
-        final Class<T> klass,
-        final Class<?>[] parameterTypes) {
+                final Class<T> klass,
+                final Class<?>[] parameterTypes) {
 
         try {
             return getAccessibleConstructor(
-                klass.getConstructor(parameterTypes));
+                        klass.getConstructor(parameterTypes));
         } catch (final NoSuchMethodException e) {
             return null;
         }
@@ -337,11 +330,10 @@ public class ConstructorUtils {
     private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {
-            args = new Object[] { arg };
+            args = new Object[] {arg};
         }
         return args;
     }
-
 
     /**
      * <p>Find an accessible constructor with compatible parameters.
@@ -360,8 +352,8 @@ public class ConstructorUtils {
      * @return a valid Constructor object. If there's no matching constructor, returns {@code null}.
      */
     private static <T> Constructor<T> getMatchingAccessibleConstructor(
-        final Class<T> clazz,
-        final Class<?>[] parameterTypes) {
+                final Class<T> clazz,
+                final Class<?>[] parameterTypes) {
         // see if we can find the method directly
         // most of the time this works and it's much faster
         try {
@@ -403,9 +395,9 @@ public class ConstructorUtils {
                 boolean match = true;
                 for (int n = 0; n < ctorParamSize; n++) {
                     if (!MethodUtils
-                        .isAssignmentCompatible(
-                            ctorParams[n],
-                            parameterTypes[n])) {
+                                .isAssignmentCompatible(
+                                            ctorParams[n],
+                                            parameterTypes[n])) {
                         match = false;
                         break;
                     }
@@ -418,8 +410,8 @@ public class ConstructorUtils {
                         try {
                             ctor.setAccessible(true);
                         } catch (final SecurityException se) {
-                            /* Swallow SecurityException
-                             * TODO: Why?
+                            /*
+                             * Swallow SecurityException TODO: Why?
                              */
                         }
                         @SuppressWarnings("unchecked")

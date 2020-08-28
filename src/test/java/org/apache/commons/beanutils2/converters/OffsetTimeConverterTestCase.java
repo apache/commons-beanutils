@@ -35,11 +35,7 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new TestSuite(OffsetTimeConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public OffsetTimeConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new OffsetTimeConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,36 +59,34 @@ public class OffsetTimeConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "10:15+01:00",
-            "08:45:30+14:00"
+                    "10:15+01:00",
+                    "08:45:30+14:00"
         };
 
         final OffsetTime[] expected = {
-                OffsetTime.parse("10:15+01:00"),
-                OffsetTime.parse("08:45:30+14:00")
+                    OffsetTime.parse("10:15+01:00"),
+                    OffsetTime.parse("08:45:30+14:00")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(OffsetTime.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(OffsetTime.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -111,4 +103,3 @@ public class OffsetTimeConverterTestCase extends TestCase {
         }
     }
 }
-

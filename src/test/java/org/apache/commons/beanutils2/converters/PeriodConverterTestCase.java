@@ -35,11 +35,7 @@ public class PeriodConverterTestCase extends TestCase {
         return new TestSuite(PeriodConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public PeriodConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class PeriodConverterTestCase extends TestCase {
         return new PeriodConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,38 +59,36 @@ public class PeriodConverterTestCase extends TestCase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
         };
 
         final Object[] input = {
-            "P2Y",
-            "P5D",
-            "P1Y2M3D"
+                    "P2Y",
+                    "P5D",
+                    "P1Y2M3D"
         };
 
         final Period[] expected = {
-                Period.parse("P2Y"),
-                Period.parse("P5D"),
-                Period.parse("P1Y2M3D")
+                    Period.parse("P2Y"),
+                    Period.parse("P5D"),
+                    Period.parse("P1Y2M3D")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(Period.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(Period.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -113,4 +105,3 @@ public class PeriodConverterTestCase extends TestCase {
         }
     }
 }
-

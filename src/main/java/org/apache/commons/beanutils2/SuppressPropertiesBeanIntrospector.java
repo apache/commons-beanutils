@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -44,8 +45,8 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * of {@code PropertyUtilsBean} suppresses the {@code class} property; it can then no
      * longer be accessed.
      */
-    public static final SuppressPropertiesBeanIntrospector SUPPRESS_CLASS =
-            new SuppressPropertiesBeanIntrospector(Collections.singleton("class"));
+    public static final SuppressPropertiesBeanIntrospector SUPPRESS_CLASS = new SuppressPropertiesBeanIntrospector(
+                Collections.singleton("class"));
 
     /** A set with the names of the properties to be suppressed. */
     private final Set<String> propertyNames;
@@ -65,7 +66,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
         }
 
         propertyNames = Collections.unmodifiableSet(new HashSet<>(
-                propertiesToSuppress));
+                    propertiesToSuppress));
     }
 
     /**

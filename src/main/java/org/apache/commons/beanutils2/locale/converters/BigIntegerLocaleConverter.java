@@ -179,7 +179,7 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public BigIntegerLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 
@@ -206,13 +206,12 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
         }
 
         if (result instanceof Number) {
-            return BigInteger.valueOf(((Number)result).longValue());
+            return BigInteger.valueOf(((Number) result).longValue());
         }
 
         try {
             return new BigInteger(result.toString());
-        }
-        catch (final NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             throw new ConversionException("Supplied number is not of type BigInteger: " + result);
         }
 

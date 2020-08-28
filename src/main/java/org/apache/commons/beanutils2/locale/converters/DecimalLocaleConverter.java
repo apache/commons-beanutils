@@ -187,7 +187,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
+                final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
 
     }

@@ -33,11 +33,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(IntegerConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public IntegerConverterTestCase(final String name) {
         super(name);
@@ -52,8 +48,6 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new IntegerConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -74,8 +68,6 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-
-
     /**
      * Test Invalid Amounts (too big/small)
      */
@@ -83,10 +75,10 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         final Converter converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
-        final Long min         = new Long(Integer.MIN_VALUE);
-        final Long max         = new Long(Integer.MAX_VALUE);
+        final Long min = new Long(Integer.MIN_VALUE);
+        final Long max = new Long(Integer.MAX_VALUE);
         final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long maxPlusOne = new Long(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", new Integer(Integer.MIN_VALUE), converter.convert(clazz, min));
@@ -125,59 +117,58 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from Byte",
+                    "from Short",
+                    "from Integer",
+                    "from Long",
+                    "from Float",
+                    "from Double"
         };
 
         final Object[] input = {
-            String.valueOf(Integer.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Integer.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+                    String.valueOf(Integer.MIN_VALUE),
+                    "-17",
+                    "-1",
+                    "0",
+                    "1",
+                    "17",
+                    String.valueOf(Integer.MAX_VALUE),
+                    new Byte((byte) 7),
+                    new Short((short) 8),
+                    new Integer(9),
+                    new Long(10),
+                    new Float(11.1),
+                    new Double(12.2)
         };
 
         final Integer[] expected = {
-            new Integer(Integer.MIN_VALUE),
-            new Integer(-17),
-            new Integer(-1),
-            new Integer(0),
-            new Integer(1),
-            new Integer(17),
-            new Integer(Integer.MAX_VALUE),
-            new Integer(7),
-            new Integer(8),
-            new Integer(9),
-            new Integer(10),
-            new Integer(11),
-            new Integer(12)
+                    new Integer(Integer.MIN_VALUE),
+                    new Integer(-17),
+                    new Integer(-1),
+                    new Integer(0),
+                    new Integer(1),
+                    new Integer(17),
+                    new Integer(Integer.MAX_VALUE),
+                    new Integer(7),
+                    new Integer(8),
+                    new Integer(9),
+                    new Integer(10),
+                    new Integer(11),
+                    new Integer(12)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Integer",expected[i],converter.convert(Integer.class,input[i]));
-            assertEquals(message[i] + " to int",expected[i],converter.convert(Integer.TYPE,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Integer", expected[i], converter.convert(Integer.class, input[i]));
+            assertEquals(message[i] + " to int", expected[i], converter.convert(Integer.TYPE, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 }
-

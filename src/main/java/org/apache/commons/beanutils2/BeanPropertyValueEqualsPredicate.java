@@ -165,7 +165,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
     public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue,
-            final boolean ignoreNull) {
+                final boolean ignoreNull) {
         super();
 
         if (propertyName != null && propertyName.length() > 0) {
@@ -202,7 +202,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
 
         try {
             evaluation = evaluateValue(propertyValue,
-                    PropertyUtils.getProperty(object, propertyName));
+                        PropertyUtils.getProperty(object, propertyName));
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation. Null value encountered in property path...";
 

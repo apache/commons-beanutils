@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -114,7 +115,7 @@ class BeanIntrospectionData {
             final String methodName = writeMethodNames.get(desc.getName());
             if (methodName != null) {
                 method = MethodUtils.getAccessibleMethod(beanCls, methodName,
-                        desc.getPropertyType());
+                            desc.getPropertyType());
                 if (method != null) {
                     try {
                         desc.setWriteMethod(method);

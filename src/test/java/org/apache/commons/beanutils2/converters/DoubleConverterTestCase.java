@@ -32,11 +32,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(DoubleConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public DoubleConverterTestCase(final String name) {
         super(name);
@@ -51,8 +47,6 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new DoubleConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -73,75 +67,72 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
         converter = null;
     }
 
-
-
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
+        final String[] message = {
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from String",
+                    "from Byte",
+                    "from Short",
+                    "from Integer",
+                    "from Long",
+                    "from Float",
+                    "from Double"
         };
 
         final Object[] input = {
-            String.valueOf(Double.MIN_VALUE),
-            "-17.2",
-            "-1.1",
-            "0.0",
-            "1.1",
-            "17.2",
-            String.valueOf(Double.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+                    String.valueOf(Double.MIN_VALUE),
+                    "-17.2",
+                    "-1.1",
+                    "0.0",
+                    "1.1",
+                    "17.2",
+                    String.valueOf(Double.MAX_VALUE),
+                    new Byte((byte) 7),
+                    new Short((short) 8),
+                    new Integer(9),
+                    new Long(10),
+                    new Float(11.1),
+                    new Double(12.2)
         };
 
         final Double[] expected = {
-            new Double(Double.MIN_VALUE),
-            new Double(-17.2),
-            new Double(-1.1),
-            new Double(0.0),
-            new Double(1.1),
-            new Double(17.2),
-            new Double(Double.MAX_VALUE),
-            new Double(7),
-            new Double(8),
-            new Double(9),
-            new Double(10),
-            new Double(11.1),
-            new Double(12.2)
+                    new Double(Double.MIN_VALUE),
+                    new Double(-17.2),
+                    new Double(-1.1),
+                    new Double(0.0),
+                    new Double(1.1),
+                    new Double(17.2),
+                    new Double(Double.MAX_VALUE),
+                    new Double(7),
+                    new Double(8),
+                    new Double(9),
+                    new Double(10),
+                    new Double(11.1),
+                    new Double(12.2)
         };
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(
-                message[i] + " to Double",
-                expected[i].doubleValue(),
-                converter.convert(Double.class,input[i]).doubleValue(),
-                0.00001D);
+                        message[i] + " to Double",
+                        expected[i].doubleValue(),
+                        converter.convert(Double.class, input[i]).doubleValue(),
+                        0.00001D);
             assertEquals(
-                message[i] + " to double",
-                expected[i].doubleValue(),
-                converter.convert(Double.TYPE,input[i]).doubleValue(),
-                0.00001D);
+                        message[i] + " to double",
+                        expected[i].doubleValue(),
+                        converter.convert(Double.TYPE, input[i]).doubleValue(),
+                        0.00001D);
             assertEquals(
-                message[i] + " to null type",
-                expected[i].doubleValue(),
-                ((Double)converter.convert(null,input[i])).doubleValue(),
-                0.00001D);
+                        message[i] + " to null type",
+                        expected[i].doubleValue(),
+                        ((Double) converter.convert(null, input[i])).doubleValue(),
+                        0.00001D);
         }
     }
 
 }
-

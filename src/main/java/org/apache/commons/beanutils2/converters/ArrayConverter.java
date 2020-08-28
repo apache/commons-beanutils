@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2.converters;
 
 import java.io.IOException;
@@ -131,11 +132,9 @@ public class ArrayConverter extends AbstractConverter {
     private final Class<?> defaultType;
     private final Converter elementConverter;
     private int defaultSize;
-    private char delimiter    = ',';
+    private char delimiter = ',';
     private char[] allowedChars = new char[] {'.', '-'};
     private boolean onlyFirstToString = true;
-
-
 
     /**
      * Construct an <b>array</b> {@code Converter} with the specified
@@ -248,7 +247,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         if (size == 0) {
-            return (String)getDefault(String.class);
+            return (String) getDefault(String.class);
         }
 
         if (onlyFirstToString) {
@@ -286,8 +285,8 @@ public class ArrayConverter extends AbstractConverter {
 
         if (!type.isArray()) {
             throw new ConversionException(toString(getClass())
-                    + " cannot handle conversion to '"
-                    + toString(type) + "' (not an array).");
+                        + " cannot handle conversion to '"
+                        + toString(type) + "' (not an array).");
         }
 
         // Handle the source
@@ -309,7 +308,7 @@ public class ArrayConverter extends AbstractConverter {
         for (int i = 0; i < size; i++) {
             Object element = iterator == null ? Array.get(value, i) : iterator.next();
             // TODO - probably should catch conversion errors and throw
-            //        new exception providing better info back to the user
+            // new exception providing better info back to the user
             element = elementConverter.convert(componentType, element);
             Array.set(newArray, i, element);
         }
@@ -356,11 +355,11 @@ public class ArrayConverter extends AbstractConverter {
      */
     protected Collection<?> convertToCollection(final Class<?> type, final Object value) {
         if (value instanceof Collection) {
-            return (Collection<?>)value;
+            return (Collection<?>) value;
         }
         if (value instanceof Number ||
-            value instanceof Boolean ||
-            value instanceof java.util.Date) {
+                    value instanceof Boolean ||
+                    value instanceof java.util.Date) {
             final List<Object> list = new ArrayList<>(1);
             list.add(value);
             return list;
@@ -448,9 +447,9 @@ public class ArrayConverter extends AbstractConverter {
 
             // Set up a StreamTokenizer on the characters in this String
             final StreamTokenizer st = new StreamTokenizer(new StringReader(value));
-            st.whitespaceChars(delimiter , delimiter); // Set the delimiters
-            st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
-            st.wordChars('0', '9');      // Needed to make part of tokens
+            st.whitespaceChars(delimiter, delimiter); // Set the delimiters
+            st.ordinaryChars('0', '9'); // Needed to turn off numeric flag
+            st.wordChars('0', '9'); // Needed to make part of tokens
             for (final char allowedChar : allowedChars) {
                 st.ordinaryChars(allowedChar, allowedChar);
                 st.wordChars(allowedChar, allowedChar);
@@ -471,7 +470,7 @@ public class ArrayConverter extends AbstractConverter {
                     break;
                 } else {
                     throw new ConversionException("Encountered token of type "
-                        + ttype + " parsing elements to '" + toString(type) + ".");
+                                + ttype + " parsing elements to '" + toString(type) + ".");
                 }
             }
 
@@ -488,7 +487,7 @@ public class ArrayConverter extends AbstractConverter {
         } catch (final IOException e) {
 
             throw new ConversionException("Error converting from String to '"
-                    + toString(type) + "': " + e.getMessage(), e);
+                        + toString(type) + "': " + e.getMessage(), e);
 
         }
 

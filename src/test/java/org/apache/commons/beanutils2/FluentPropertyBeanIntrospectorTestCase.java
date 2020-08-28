@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -37,7 +38,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * @return a map with property names as keys
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(
-            final PropertyDescriptor[] descs) {
+                final PropertyDescriptor[] descs) {
         final Map<String, PropertyDescriptor> map = new HashMap<>();
         for (final PropertyDescriptor pd : descs) {
             map.put(pd.getName(), pd);
@@ -54,7 +55,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * @return the descriptor from the map
      */
     private static PropertyDescriptor fetchDescriptor(
-            final Map<String, PropertyDescriptor> props, final String name) {
+                final Map<String, PropertyDescriptor> props, final String name) {
         assertTrue("Property not found: " + name, props.containsKey(name));
         return props.get(name);
     }
@@ -79,7 +80,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
         pu.addBeanIntrospector(introspector);
         final Map<String, PropertyDescriptor> props = createDescriptorMap(pu
-                .getPropertyDescriptors(FluentIntrospectionTestBean.class));
+                    .getPropertyDescriptors(FluentIntrospectionTestBean.class));
         PropertyDescriptor pd = fetchDescriptor(props, "name");
         assertNotNull("No read method for name", pd.getReadMethod());
         assertNotNull("No write method for name", pd.getWriteMethod());
@@ -89,9 +90,9 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         assertNotNull("No write method for fluentProperty", pd.getWriteMethod());
         pd = fetchDescriptor(props, "fluentGetProperty");
         assertNotNull("No read method for fluentGetProperty",
-                pd.getReadMethod());
+                    pd.getReadMethod());
         assertNotNull("No write method for fluentGetProperty",
-                pd.getWriteMethod());
+                    pd.getWriteMethod());
     }
 
     public void testIntrospectionCaps() throws Exception {
@@ -102,7 +103,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         pu.addBeanIntrospector(introspector);
 
         final Map<String, PropertyDescriptor> props = createDescriptorMap(
-            pu.getPropertyDescriptors(CapsBean.class));
+                    pu.getPropertyDescriptors(CapsBean.class));
 
         final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 

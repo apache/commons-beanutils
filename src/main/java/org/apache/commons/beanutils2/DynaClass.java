@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 /**
@@ -75,6 +76,6 @@ public interface DynaClass {
      *  fails for some other reason
      */
     DynaBean newInstance()
-            throws IllegalAccessException, InstantiationException;
+                throws IllegalAccessException, InstantiationException;
 
 }

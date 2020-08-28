@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.IntrospectionException;
@@ -49,7 +50,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     private static PropertyDescriptor createDescriptor(final String propName) {
         try {
             return new PropertyDescriptor(propName,
-                    DefaultIntrospectionContextTestCase.class, null, null);
+                        DefaultIntrospectionContextTestCase.class, null, null);
         } catch (final IntrospectionException e) {
             throw new IllegalStateException("Unexpected exception: " + e);
         }
@@ -60,7 +61,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
      */
     public void testInit() {
         assertEquals("Wrong current class", getClass(),
-                context.getTargetClass());
+                    context.getTargetClass());
         assertTrue("Got property names", context.propertyNames().isEmpty());
     }
 
@@ -72,7 +73,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         context.addPropertyDescriptor(desc);
         assertTrue("Property not found", context.hasProperty(PROP));
         assertSame("Wrong descriptor", desc,
-                context.getPropertyDescriptor(PROP));
+                    context.getPropertyDescriptor(PROP));
     }
 
     /**
@@ -107,11 +108,11 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         assertTrue("Property not found: " + PROP, names.contains(PROP));
         for (int i = 0; i < count; i++) {
             assertTrue("Property not found: " + (PROP + i),
-                    names.contains(PROP + i));
+                        names.contains(PROP + i));
         }
         final PropertyDescriptor[] addedDescs = context.getPropertyDescriptors();
         assertEquals("Wrong number of added descriptors", count + 1,
-                addedDescs.length);
+                    addedDescs.length);
         for (final PropertyDescriptor pd : addedDescs) {
             assertTrue("Unexpected descriptor: " + pd, descSet.remove(pd));
         }
@@ -168,6 +169,6 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         context.removePropertyDescriptor(PROP);
         assertTrue("Got property names", context.propertyNames().isEmpty());
         assertEquals("Got descriptors", 0,
-                context.getPropertyDescriptors().length);
+                    context.getPropertyDescriptors().length);
     }
 }

@@ -146,7 +146,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
         } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e.getClass().getSimpleName()+": " + e.toString());
+            throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.toString());
         }
     }
 
@@ -200,7 +200,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      * @param val2 the second value to be compared
      * @return the result of the comparison
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private int internalCompare(final Object val1, final Object val2) {
         return ((Comparator) comparator).compare(val1, val2);
     }
@@ -216,7 +216,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      * @see java.util.Collections#reverseOrder()
      */
     private static class NaturalOrderComparator<E extends Comparable<? super E>>
-            implements Comparator<E>, Serializable {
+                implements Comparator<E>, Serializable {
 
         /** Serialization version. */
         private static final long serialVersionUID = -291439688585137865L;

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
@@ -73,7 +74,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         assertNotNull("No write method", pd.getWriteMethod());
         assertEquals("Wrong write method", pd.getWriteMethod(),
-                data.getWriteMethod(BEAN_CLASS, pd));
+                    data.getWriteMethod(BEAN_CLASS, pd));
     }
 
     /**
@@ -86,7 +87,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         final Method writeMethod = pd.getWriteMethod();
         pd.setWriteMethod(null);
         assertEquals("Wrong write method", writeMethod,
-                data.getWriteMethod(BEAN_CLASS, pd));
+                    data.getWriteMethod(BEAN_CLASS, pd));
         assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
@@ -96,12 +97,12 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      */
     public void testGetWriteMethodNonExisting() throws Exception {
         final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP,
-                BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
-                        "setFluentGetProperty", String.class));
+                    BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
+                                "setFluentGetProperty", String.class));
         final Map<String, String> methods = new HashMap<>();
         methods.put(TEST_PROP, "hashCode");
         final BeanIntrospectionData data = new BeanIntrospectionData(
-                new PropertyDescriptor[] { pd }, methods);
+                    new PropertyDescriptor[] {pd}, methods);
         pd.setWriteMethod(null);
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
     }

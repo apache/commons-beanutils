@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apache.commons.beanutils2;
 
 /**
@@ -43,7 +44,7 @@ public class FluentIntrospectionTestBean extends AlphaBean {
     }
 
     public FluentIntrospectionTestBean setFluentGetProperty(
-            final String fluentGetProperty) {
+                final String fluentGetProperty) {
         this.fluentGetProperty = fluentGetProperty;
         return this;
     }
