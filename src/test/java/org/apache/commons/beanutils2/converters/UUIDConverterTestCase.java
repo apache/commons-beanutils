@@ -80,8 +80,8 @@ public class UUIDConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"123e4567-e89b-12d3-a456-556642440000",
-        	"7dc53df5-703e-49b3-8670-b1c468f47f1f"
+            "123e4567-e89b-12d3-a456-556642440000",
+            "7dc53df5-703e-49b3-8670-b1c468f47f1f"
         };
 
         final UUID[] expected = {

@@ -80,13 +80,13 @@ public class OffsetTimeConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"10:15+01:00",
-        	"08:45:30+14:00"
+            "10:15+01:00",
+            "08:45:30+14:00"
         };
 
         final OffsetTime[] expected = {
-        		OffsetTime.parse("10:15+01:00"),
-        		OffsetTime.parse("08:45:30+14:00")
+                OffsetTime.parse("10:15+01:00"),
+                OffsetTime.parse("08:45:30+14:00")
         };
 
         for(int i=0;i<expected.length;i++) {

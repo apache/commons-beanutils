@@ -80,15 +80,15 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"-12:00",
-        	"+14:00",
-        	"+02:00"
+            "-12:00",
+            "+14:00",
+            "+02:00"
         };
 
         final ZoneOffset[] expected = {
-        		ZoneOffset.of("-12:00"),
-        		ZoneOffset.of("+14:00"),
-        		ZoneOffset.of("+02:00")
+                ZoneOffset.of("-12:00"),
+                ZoneOffset.of("+14:00"),
+                ZoneOffset.of("+02:00")
         };
 
         for(int i=0;i<expected.length;i++) {

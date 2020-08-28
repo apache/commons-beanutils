@@ -866,7 +866,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
      */
-    protected void invokeSetter(final Object target, final String propName, final String key, final int index, final Object newValue)
+    protected void invokeSetter(final Object target, final String propName, final String key, final int index,
+            final Object newValue)
             throws IllegalAccessException, InvocationTargetException {
 
         try {

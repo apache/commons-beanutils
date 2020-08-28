@@ -229,8 +229,9 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      * @since 1.8.3
      */
-    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit, final boolean useColumnLabel)
-                                                            throws SQLException {
+    public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit,
+            final boolean useColumnLabel)
+            throws SQLException {
         Objects.requireNonNull(resultSet, "resultSet");
         this.lowerCase = lowerCase;
         this.limit = limit;

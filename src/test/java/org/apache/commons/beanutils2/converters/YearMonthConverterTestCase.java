@@ -80,15 +80,15 @@ public class YearMonthConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"2007-12",
-        	"1974-05",
-        	"2112-01"
+            "2007-12",
+            "1974-05",
+            "2112-01"
         };
 
         final YearMonth[] expected = {
-        		YearMonth.parse("2007-12"),
-        		YearMonth.parse("1974-05"),
-        		YearMonth.parse("2112-01")
+                YearMonth.parse("2007-12"),
+                YearMonth.parse("1974-05"),
+                YearMonth.parse("2112-01")
         };
 
         for(int i=0;i<expected.length;i++) {

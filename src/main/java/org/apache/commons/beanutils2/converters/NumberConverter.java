@@ -543,7 +543,8 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted Number object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value, final NumberFormat format) {
+    private Number parse(final Class<?> sourceType, final Class<?> targetType, final String value,
+            final NumberFormat format) {
         final ParsePosition pos = new ParsePosition(0);
         final Number parsedNumber = format.parse(value, pos);
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedNumber == null) {

@@ -607,7 +607,8 @@ public class LocaleBeanUtils extends BeanUtils {
      *
      * @see LocaleBeanUtilsBean#invokeSetter(Object, String, String, int, Object)
      */
-    protected static void invokeSetter(final Object target, final String propName, final String key, final int index, final Object newValue)
+    protected static void invokeSetter(final Object target, final String propName, final String key, final int index,
+            final Object newValue)
             throws IllegalAccessException, InvocationTargetException {
 
        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().invokeSetter(target, propName, key, index, newValue);

@@ -80,13 +80,13 @@ public class LocalTimeConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"10:15",
-        	"08:45:30"
+            "10:15",
+            "08:45:30"
         };
 
         final LocalTime[] expected = {
-        		LocalTime.parse("10:15"),
-        		LocalTime.parse("08:45:30")
+                LocalTime.parse("10:15"),
+                LocalTime.parse("08:45:30")
         };
 
         for(int i=0;i<expected.length;i++) {

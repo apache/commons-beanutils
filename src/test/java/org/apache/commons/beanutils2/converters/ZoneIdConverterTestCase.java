@@ -80,15 +80,15 @@ public class ZoneIdConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"America/New_York",
-        	"-05:00",
-        	"Australia/Sydney"
+            "America/New_York",
+            "-05:00",
+            "Australia/Sydney"
         };
 
         final ZoneId[] expected = {
-        		ZoneId.of("America/New_York"),
-        		ZoneId.of("-05:00"),
-        		ZoneId.of("Australia/Sydney")
+                ZoneId.of("America/New_York"),
+                ZoneId.of("-05:00"),
+                ZoneId.of("Australia/Sydney")
         };
 
         for(int i=0;i<expected.length;i++) {

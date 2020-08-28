@@ -85,8 +85,8 @@ public class PathConverterTestCase extends TestCase {
         final String separator = File.pathSeparator;
 
         final Object[] input = {
-        	separator + "foo"+separator+"bar"+separator+"baz",
-        	separator
+            separator + "foo"+separator+"bar"+separator+"baz",
+            separator
         };
 
         final Path[] expected = {

@@ -178,7 +178,8 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    public ShortLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
+    public ShortLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
+            final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
     }
 

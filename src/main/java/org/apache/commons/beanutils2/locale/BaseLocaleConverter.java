@@ -107,7 +107,8 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern       The conversion pattern
      * @param locPattern    Indicate whether the pattern is localized or not
      */
-    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern, final boolean locPattern) {
+    protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
+            final boolean locPattern) {
 
         this(defaultValue, locale, pattern, true, locPattern);
     }

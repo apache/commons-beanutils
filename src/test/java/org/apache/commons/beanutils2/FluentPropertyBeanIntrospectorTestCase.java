@@ -95,34 +95,34 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
     }
 
     public void testIntrospectionCaps() throws Exception {
-	    final PropertyUtilsBean pu = new PropertyUtilsBean();
+        final PropertyUtilsBean pu = new PropertyUtilsBean();
 
         final FluentPropertyBeanIntrospector introspector = new FluentPropertyBeanIntrospector();
 
-	    pu.addBeanIntrospector(introspector);
+        pu.addBeanIntrospector(introspector);
 
-	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
-			pu.getPropertyDescriptors(CapsBean.class));
+        final Map<String, PropertyDescriptor> props = createDescriptorMap(
+            pu.getPropertyDescriptors(CapsBean.class));
 
-	    final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+        final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 
-	    assertNotNull("missing property", aDescriptor);
+        assertNotNull("missing property", aDescriptor);
 
-	    assertNotNull("No read method for uri", aDescriptor.getReadMethod());
-	    assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
+        assertNotNull("No read method for uri", aDescriptor.getReadMethod());
+        assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
 
-	    assertNull("Should not find mis-capitalized property", props.get("uRI"));
+        assertNull("Should not find mis-capitalized property", props.get("uRI"));
     }
 
-	public static final class CapsBean {
-		private URI mURI;
+    public static final class CapsBean {
+        private URI mURI;
 
-		public URI getURI() {
-			return mURI;
-		}
+        public URI getURI() {
+            return mURI;
+        }
 
-		public void setURI(final URI theURI) {
-			mURI = theURI;
-		}
-	}
+        public void setURI(final URI theURI) {
+            mURI = theURI;
+        }
+    }
 }

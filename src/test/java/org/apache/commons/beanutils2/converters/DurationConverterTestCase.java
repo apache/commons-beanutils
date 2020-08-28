@@ -80,15 +80,15 @@ public class DurationConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"PT20.345S",
-        	"PT15M",
-        	"PT51H4M"
+            "PT20.345S",
+            "PT15M",
+            "PT51H4M"
         };
 
         final Duration[] expected = {
-        		Duration.parse("PT20.345S"),
-        		Duration.parse("PT15M"),
-        		Duration.parse("P2DT3H4M")
+                Duration.parse("PT20.345S"),
+                Duration.parse("PT15M"),
+                Duration.parse("P2DT3H4M")
         };
 
         for(int i=0;i<expected.length;i++) {

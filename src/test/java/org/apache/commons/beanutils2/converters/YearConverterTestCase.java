@@ -80,15 +80,15 @@ public class YearConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"2019",
-        	"1974",
-        	"2112"
+            "2019",
+            "1974",
+            "2112"
         };
 
         final Year[] expected = {
-        		Year.parse("2019"),
-        		Year.parse("1974"),
-        		Year.parse("2112")
+                Year.parse("2019"),
+                Year.parse("1974"),
+                Year.parse("2112")
         };
 
         for(int i=0;i<expected.length;i++) {

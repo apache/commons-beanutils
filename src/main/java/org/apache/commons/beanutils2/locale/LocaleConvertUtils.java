@@ -232,7 +232,8 @@ public class LocaleConvertUtils {
      * @return the converted value
      * @see LocaleConvertUtilsBean#convert(String[], Class, Locale, String)
      */
-    public static Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
+    public static Object convert(final String[] values, final Class<?> clazz, final Locale locale,
+            final String pattern) {
 
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, locale, pattern);
     }

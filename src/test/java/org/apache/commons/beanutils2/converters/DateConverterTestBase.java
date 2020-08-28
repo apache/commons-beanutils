@@ -193,11 +193,11 @@ public abstract class DateConverterTestBase extends TestCase {
 
             long test = now;
             if (date[i] instanceof LocalDate || val instanceof LocalDate) {
-            	test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
-			}
+                test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            }
 
             assertEquals("Convert " + message[i] + " should return a " + date[0],
-            		test, getTimeInMillis(val));
+                    test, getTimeInMillis(val));
         }
     }
 

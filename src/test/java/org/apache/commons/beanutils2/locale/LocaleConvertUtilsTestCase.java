@@ -21,7 +21,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
-import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 

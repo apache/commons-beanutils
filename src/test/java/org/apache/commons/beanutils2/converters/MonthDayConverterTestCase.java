@@ -80,15 +80,15 @@ public class MonthDayConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"--12-03",
-        	"--05-30",
-        	"--01-01"
+            "--12-03",
+            "--05-30",
+            "--01-01"
         };
 
         final MonthDay[] expected = {
-        		MonthDay.parse("--12-03"),
-        		MonthDay.parse("--05-30"),
-        		MonthDay.parse("--01-01")
+                MonthDay.parse("--12-03"),
+                MonthDay.parse("--05-30"),
+                MonthDay.parse("--01-01")
         };
 
         for(int i=0;i<expected.length;i++) {

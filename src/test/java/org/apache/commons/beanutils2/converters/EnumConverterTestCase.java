@@ -70,15 +70,15 @@ public class EnumConverterTestCase extends TestCase {
         };
 
         final Object[] input = {
-        	"DELIVERED",
-        	"ORDERED",
-        	"READY"
+            "DELIVERED",
+            "ORDERED",
+            "READY"
         };
 
         final PizzaStatus[] expected = {
-        	PizzaStatus.DELIVERED,
-        	PizzaStatus.ORDERED,
-        	PizzaStatus.READY
+            PizzaStatus.DELIVERED,
+            PizzaStatus.ORDERED,
+            PizzaStatus.READY
         };
 
         for(int i=0;i<expected.length;i++) {

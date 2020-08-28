@@ -164,7 +164,8 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * generate an {@code IllegalArgumentException} or not.
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
-    public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue, final boolean ignoreNull) {
+    public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue,
+            final boolean ignoreNull) {
         super();
 
         if (propertyName != null && propertyName.length() > 0) {

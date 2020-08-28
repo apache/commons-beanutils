@@ -1299,7 +1299,8 @@ public class MethodUtils {
          * @param paramTypes the array of classes representing the parameter types
          * @param exact whether the match has to be exact.
          */
-        public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes, final boolean exact) {
+        public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes,
+                final boolean exact) {
             if (cls == null) {
                 throw new IllegalArgumentException("Class cannot be null");
             }
