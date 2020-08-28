@@ -86,7 +86,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testNegativeIntegerArray() {
 
-        Object value = null;
+        Object value;
         final int[] intArray = new int[0];
 
         value = ConvertUtils.convert((String) null, intArray.getClass());
@@ -112,7 +112,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testNegativeScalar() {
 
-        Object value = null;
+        Object value;
 
         value = ConvertUtils.convert("foo", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
@@ -188,7 +188,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testNegativeStringArray() {
 
-        Object value = null;
+        Object value;
         final String[] stringArray = new String[0];
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
@@ -283,7 +283,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testPositiveIntegerArray() {
 
-        Object value = null;
+        Object value;
         final int[] intArray = new int[0];
         final int[] intArray1 = new int[] { 0 };
         final int[] intArray2 = new int[] { 0, 10 };
@@ -318,7 +318,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testPositiveScalar() {
 
-        Object value = null;
+        Object value;
 
         value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
@@ -446,7 +446,7 @@ public class ConvertUtilsTestCase extends TestCase {
         assertTrue(value instanceof Short);
         assertEquals(((Short) value).shortValue(), (short) 123);
 
-        String input = null;
+        String input;
 
         input = "2002-03-17";
         value = ConvertUtils.convert(input, Date.class);
@@ -470,7 +470,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testPositiveStringArray() {
 
-        Object value = null;
+        Object value;
         final String[] stringArray = new String[0];
         final String[] stringArray1 = new String[]
             { "abc" };

@@ -306,8 +306,8 @@ public class DynaRowSetTestCase extends TestCase {
 
         final RowSetDynaClass inconsistentDynaClass = new RowSetDynaClass(resultSet);
         final DynaBean firstRow = inconsistentDynaClass.getRows().get(0);
-        Class<?> expectedType = null;
-        DynaProperty property = null;
+        Class<?> expectedType;
+        DynaProperty property;
 
         // Test Date
         property = firstRow.getDynaClass().getDynaProperty("dateproperty");

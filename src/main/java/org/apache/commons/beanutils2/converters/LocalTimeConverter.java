@@ -36,7 +36,6 @@ public final class LocalTimeConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public LocalTimeConverter() {
-        super();
     }
 
     /**

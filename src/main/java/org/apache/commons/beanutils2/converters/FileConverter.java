@@ -34,7 +34,6 @@ public final class FileConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public FileConverter() {
-        super();
     }
 
     /**

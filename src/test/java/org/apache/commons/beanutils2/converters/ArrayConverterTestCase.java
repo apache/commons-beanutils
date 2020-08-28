@@ -18,6 +18,7 @@ package org.apache.commons.beanutils2.converters;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 import junit.framework.TestCase;
@@ -283,9 +284,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Test Data
         final String[] array = new String[] {"10", "  11", "12  ", "  13  "};
         final ArrayList<String> list = new ArrayList<>();
-        for (final String element : array) {
-            list.add(element);
-        }
+        Collections.addAll(list, array);
 
         // Expected results
         String msg = null;
@@ -333,7 +332,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Test Date - create the Matrix!!
         // Following String uses two delimiter:
         //     - comma (",") to separate individual numbers
-        //     - semi-colon (";") to separate lists of numbers
+        //     - semicolon (";") to separate lists of numbers
         final String matrixString = "11,12,13 ; 21,22,23 ; 31,32,33 ; 41,42,43";
         final int[][] expected = new int[][] {new int[] {11, 12, 13},
                                         new int[] {21, 22, 23},
@@ -350,7 +349,7 @@ public class ArrayConverterTestCase extends TestCase {
 
         // Construct a "Matrix" Converter which converts arrays of integer arrays using
         // the first (int[]) Converter as the element Converter.
-        // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
+        // N.B. Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
         //      Also the delimiter for the above array Converter needs to be added to this
         //      array Converter's "allowed characters"
         final ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);

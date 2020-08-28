@@ -42,7 +42,6 @@ public final class OffsetDateTimeConverter extends DateTimeConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public OffsetDateTimeConverter() {
-        super();
     }
 
     /**

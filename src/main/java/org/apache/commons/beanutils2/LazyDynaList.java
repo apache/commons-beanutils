@@ -193,7 +193,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * Default Constructor.
      */
     public LazyDynaList() {
-        super();
     }
 
     /**
@@ -214,7 +213,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param elementDynaClass The DynaClass of the List's elements.
      */
     public LazyDynaList(final DynaClass elementDynaClass) {
-        super();
         setElementDynaClass(elementDynaClass);
     }
 
@@ -225,7 +223,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param elementType The Type of the List's elements.
      */
     public LazyDynaList(final Class<?> elementType) {
-        super();
         setElementType(elementType);
     }
 
@@ -630,7 +627,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         DynaBean dynaBean     = null;
         Class<?> newDynaBeanType = null;
-        Class<?> newElementType  = null;
+        Class<?> newElementType;
 
         // Create a new element
         if (element == null) {

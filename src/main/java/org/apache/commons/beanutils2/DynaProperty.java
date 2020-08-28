@@ -81,7 +81,6 @@ public class DynaProperty implements Serializable {
      */
     public DynaProperty(final String name, final Class<?> type) {
 
-        super();
         this.name = name;
         this.type = type;
         if (type != null && type.isArray()) {
@@ -100,7 +99,6 @@ public class DynaProperty implements Serializable {
      */
     public DynaProperty(final String name, final Class<?> type, final Class<?> contentType) {
 
-        super();
         this.name = name;
         this.type = type;
         this.contentType = contentType;
@@ -200,7 +198,7 @@ public class DynaProperty implements Serializable {
     @Override
     public boolean equals(final Object obj) {
 
-        boolean result = false;
+        boolean result;
 
         result = obj == this;
 

@@ -32,7 +32,6 @@ public final class CharacterConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public CharacterConverter() {
-        super();
     }
 
     /**

@@ -34,7 +34,6 @@ public final class URIConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public URIConverter() {
-        super();
     }
 
     /**

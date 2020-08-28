@@ -38,8 +38,6 @@ class PrivateBean implements PrivateDirect {
      */
     PrivateBean() {
 
-        super();
-
     }
 
 

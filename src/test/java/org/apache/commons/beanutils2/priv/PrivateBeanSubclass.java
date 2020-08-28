@@ -32,8 +32,6 @@ class PrivateBeanSubclass extends PrivateBean {
      */
     PrivateBeanSubclass() {
 
-        super();
-
     }
 
 

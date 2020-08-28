@@ -37,8 +37,6 @@ public class PublicSubBean extends PackageBean {
      */
     public PublicSubBean() {
 
-        super();
-
     }
 
 

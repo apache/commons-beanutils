@@ -36,12 +36,6 @@
       <action issue="BEANUTILS-402" dev="melloware" type="update" due-to="Melloware">
         Double-Checked Locking anti pattern in WeakFastHashMap.
       </action>
-      <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update from Java 6 to 7.
-      </action>
-      <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update from Java 7 to 8.
-      </action>
       <action issue="BEANUTILS-503" dev="ggregory" type="update" due-to="Gary Gregory">
         Change packaging from org.apache.commons.beanutils to org.apache.commons.beanutils2.
       </action>
@@ -60,9 +54,6 @@
       <action issue="BEANUTILS-520" dev="ggregory" type="update" due-to="Melloware">
         BeanUtils2 mitigate CVE-2014-0114.
       </action>
-      <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update Apache Commons Collections from 4.3 to 4.4.
-      </action>
       <action issue="BEANUTILS-527" dev="ggregory" type="update" due-to="Melloware, Matt Sicker, Gary Gregory">
         Convert Collections4 to java.util.function. #8.
       </action>
@@ -78,14 +69,30 @@
       <action issue="BEANUTILS-529" dev="ggregory" type="update" due-to="Gary Gregory">
         Log at the debug level instead of info.
       </action>
+      <action issue="BEANUTILS-537" dev="ggregory" type="update" due-to="XenoAmess, Gary Gregory">
+        Fix typos; fix error in Javadoc; performance fix; fix code smells #25.
+      </action>
+      <action issue="BEANUTILS-539" dev="ggregory" type="update" due-to="Melloware">
+        Switch WeakFastHashMap for ConcurrentWeakKeyHashMap
+      </action>
+      <!--  UPDATES -->
+      <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update Apache Commons Collections from 4.3 to 4.4.
+      </action>
+      <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update from Java 6 to 7.
+      </action>
+      <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update from Java 7 to 8.
+      </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update JUnit from 4.12 to 4.13.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update Jacoco from 0.8.4 to 0.8.5.
       </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update JApiCmp from 0.12.0 to 0.14.3.
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Update JApiCmp from 0.12.0 to 0.14.4, #46.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update maven-surefire-plugin from 2.22.1 to 3.0.0-M5.
@@ -99,17 +106,20 @@
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update BC version from 1.9.3 to 1.9.4.
       </action>
-      <action issue="BEANUTILS-537" dev="ggregory" type="update" due-to="XenoAmess, Gary Gregory">
-        Fix typos; fix error in Javadoc; performance fix; fix code smells #25.
-      </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update commons-parent from 50 to 51.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update biz.aQute.bndlib from 5.1.0 to 5.1.2 #29.
+        Update biz.aQute.bndlib from 5.1.0 to 5.2.0 #29, #45.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update actions/checkout from v2.3.1 to v2.3.2 #33.
+        Update actions/checkout from v2.3.1 to v2.3.4 #33.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Update actions/setup-java from v1.4.0 to v1.4.3 #35.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Update JUnit from 4.13 to 4.13.1.
       </action>
     </release>
 

@@ -42,7 +42,6 @@ public final class LocalDateConverter extends DateTimeConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public LocalDateConverter() {
-        super();
     }
 
     /**

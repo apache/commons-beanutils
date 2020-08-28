@@ -1038,7 +1038,7 @@ public class BeanUtilsBean {
                 INIT_CAUSE_METHOD.invoke(throwable, cause);
                 return true;
             } catch (final Throwable e) {
-                return false; // can't initialize cause
+             // can't initialize cause
             }
         }
         return false;

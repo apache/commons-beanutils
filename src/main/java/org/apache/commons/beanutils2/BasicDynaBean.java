@@ -62,7 +62,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     public BasicDynaBean(final DynaClass dynaClass) {
 
-        super();
         this.dynaClass = dynaClass;
 
     }

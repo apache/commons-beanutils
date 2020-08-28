@@ -23,7 +23,6 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 
 /**
@@ -116,7 +115,7 @@ public class WrapDynaClass implements DynaClass {
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
                 protected Map<CacheKey, WrapDynaClass> initialValue() {
-                    return new WeakHashMap<>();
+                    return new ConcurrentWeakKeyHashMap<>();
                 }
     };
 

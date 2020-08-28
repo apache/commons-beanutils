@@ -105,7 +105,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * {@code ConversionException} if an error occurs.
      */
     public DateTimeConverter() {
-        super();
     }
 
     /**
@@ -204,14 +203,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public void setPatterns(final String[] patterns) {
         this.patterns = patterns;
         if (patterns != null && patterns.length > 1) {
-            final StringBuilder buffer = new StringBuilder();
-            for (int i = 0; i < patterns.length; i++) {
-                if (i > 0) {
-                    buffer.append(", ");
-                }
-                buffer.append(patterns[i]);
-            }
-            displayPatterns = buffer.toString();
+            displayPatterns = String.join(", ", patterns);
         }
         setUseLocaleFormat(true);
     }

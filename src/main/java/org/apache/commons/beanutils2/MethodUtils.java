@@ -858,7 +858,7 @@ public class MethodUtils {
 
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
-            for (Class<?> anInterface : interfaces) {
+            for (final Class<?> anInterface : interfaces) {
 
                 // Is this interface public?
                 if (!Modifier.isPublic(anInterface.getModifiers())) {
@@ -1246,7 +1246,6 @@ public class MethodUtils {
             if (primitiveClazz != null) {
                 return primitiveClazz;
             }
-            return clazz;
         }
         return clazz;
     }

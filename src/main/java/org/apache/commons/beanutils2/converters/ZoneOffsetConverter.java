@@ -36,7 +36,6 @@ public final class ZoneOffsetConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public ZoneOffsetConverter() {
-        super();
     }
 
     /**

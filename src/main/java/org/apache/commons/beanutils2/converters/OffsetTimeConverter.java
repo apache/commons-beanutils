@@ -36,7 +36,6 @@ public final class OffsetTimeConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public OffsetTimeConverter() {
-        super();
     }
 
     /**

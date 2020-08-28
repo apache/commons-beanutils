@@ -108,8 +108,8 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache = null;
-    private WeakFastHashMap<Class<?>, Map> mappedDescriptorsCache = null;
+    private ConcurrentWeakKeyHashMap<Class<?>, BeanIntrospectionData> descriptorsCache = null;
+    private ConcurrentWeakKeyHashMap<Class<?>, Map> mappedDescriptorsCache = null;
 
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
@@ -124,10 +124,8 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<>();
-        descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap<>();
-        mappedDescriptorsCache.setFast(true);
+        descriptorsCache = new ConcurrentWeakKeyHashMap<>();
+        mappedDescriptorsCache = new ConcurrentWeakKeyHashMap<>();
         introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }
@@ -2061,7 +2059,7 @@ public class PropertyUtilsBean {
         } catch (final NullPointerException | IllegalArgumentException cause) {
             // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
             // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
-            StringBuilder valueString = new StringBuilder();
+            final StringBuilder valueString = new StringBuilder();
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
                     if (i>0) {
@@ -2074,7 +2072,7 @@ public class PropertyUtilsBean {
                     }
                 }
             }
-            StringBuilder expectedString = new StringBuilder();
+            final StringBuilder expectedString = new StringBuilder();
             final Class<?>[] parTypes = method.getParameterTypes();
             if (parTypes != null) {
                 for (int i = 0; i < parTypes.length; i++) {
