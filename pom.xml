@@ -55,6 +55,7 @@
     <commons.jacoco.version>0.8.6</commons.jacoco.version>
     <checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
     <checkstyle.version>8.34</checkstyle.version>
+    <spotless.version>2.1.0</spotless.version>
     <!-- Commons Release Plugin -->
     <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
@@ -408,6 +409,21 @@
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <enableRulesSummary>false</enableRulesSummary>
           <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <eclipse>
+              <file>${project.basedir}/src/conf/eclipse-apache-formatter.xml</file> 
+            </eclipse>
+            <licenseHeader>
+              <file>${project.basedir}/src/conf/license-header.txt</file>
+            </licenseHeader>
+          </java>
         </configuration>
       </plugin>
     </plugins>
