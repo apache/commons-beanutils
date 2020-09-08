@@ -43,7 +43,7 @@
     <commons.release.2.desc>(Java 6)</commons.release.2.desc>
     <!-- override parent name, because 1.x uses different artifactId -->
     <commons.release.2.name>commons-beanutils-${commons.release.2.version}</commons.release.2.name>
-    
+
     <commons.jira.id>BEANUTILS</commons.jira.id>
     <commons.jira.pid>12310460</commons.jira.pid>
     <!-- limit memory size see BEANUTILS-291; allow command-line override -->
@@ -347,194 +347,194 @@
 
   <build>
     <defaultGoal>clean apache-rat:check checkstyle:check verify javadoc:javadoc</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>biz.aQute.bnd</groupId>
+            <artifactId>biz.aQute.bndlib</artifactId>
+            <version>5.1.2</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <forkMode>pertest</forkMode>
+          <!-- limit memory size see BEANUTILS-291
+                     ..also include ${argLine} from jacoco-maven-plugin
+          -->
+          <argLine>${surefire.argLine} ${argLine}</argLine>
+          <includes>
+            <include>**/*TestCase.java</include>
+          </includes>
+          <excludes>
+            <!-- This test case is known to fail, and there isn't any proposed fix
+              -  so we will just exclude it until someone comes up with a solution.
+            -->
+            <exclude>**/*MemoryTestCase.java</exclude>
+          </excludes>
+
+          <!-- Configure Logging -->
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <systemPropertyVariables>
+            <org.apache.commons.logging.LogFactory>org.apache.commons.logging.impl.LogFactoryImpl</org.apache.commons.logging.LogFactory>
+            <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>
+            <org.apache.commons.logging.simplelog.defaultlog>WARN</org.apache.commons.logging.simplelog.defaultlog>
+          </systemPropertyVariables>
+
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/bin.xml</descriptor>
+            <descriptor>src/main/assembly/src.xml</descriptor>
+          </descriptors>
+          <tarLongFileMode>gnu</tarLongFileMode>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+          <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <enableRulesSummary>false</enableRulesSummary>
+          <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <dependencies>
-            <dependency>
-              <groupId>biz.aQute.bnd</groupId>
-              <artifactId>biz.aQute.bndlib</artifactId>
-              <version>5.1.2</version>
-            </dependency>
-          </dependencies>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M5</version>
-            <configuration>
-              <forkMode>pertest</forkMode>
-	      <!-- limit memory size see BEANUTILS-291 
-                   ..also include ${argLine} from jacoco-maven-plugin
-	      -->
-	      <argLine>${surefire.argLine} ${argLine}</argLine>
-              <includes>
-                <include>**/*TestCase.java</include>
-              </includes>
-              <excludes>
-                <!-- This test case is known to fail, and there isn't any proposed fix
-                  -  so we will just exclude it until someone comes up with a solution.
-                -->
-                <exclude>**/*MemoryTestCase.java</exclude>
-              </excludes>
-
-              <!-- Configure Logging -->
-              <redirectTestOutputToFile>true</redirectTestOutputToFile>
-              <systemPropertyVariables>
-                  <org.apache.commons.logging.LogFactory>org.apache.commons.logging.impl.LogFactoryImpl</org.apache.commons.logging.LogFactory>
-                  <org.apache.commons.logging.Log>org.apache.commons.logging.impl.SimpleLog</org.apache.commons.logging.Log>
-                  <org.apache.commons.logging.simplelog.defaultlog>WARN</org.apache.commons.logging.simplelog.defaultlog>
-              </systemPropertyVariables>
-
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <configuration>
+            <!-- when moving to svnpubsub links to previous releases must be fixed -->
+            <!-- ignore paths manual content -->
+            <ignorePathsToDelete>
+              <ignorePathToDelete>javadocs**</ignorePathToDelete>
+              <ignorePathToDelete>release-notes**</ignorePathToDelete>
+            </ignorePathsToDelete>
           </configuration>
         </plugin>
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-                <descriptors>
-                    <descriptor>src/main/assembly/bin.xml</descriptor>
-                    <descriptor>src/main/assembly/src.xml</descriptor>
-                </descriptors>
-                <tarLongFileMode>gnu</tarLongFileMode>
-            </configuration>
-        </plugin>
-        <plugin>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>${checkstyle.plugin.version}</version>
-            <configuration>
-                <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-                <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
-                <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                <enableRulesSummary>false</enableRulesSummary>
-                <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
-            </configuration>
-        </plugin>
       </plugins>
-      <pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-scm-publish-plugin</artifactId>
-            <configuration>
-              <!-- when moving to svnpubsub links to previous releases must be fixed -->
-              <!-- ignore paths manual content -->
-              <ignorePathsToDelete>
-                <ignorePathToDelete>javadocs**</ignorePathToDelete>
-                <ignorePathToDelete>release-notes**</ignorePathToDelete>
-              </ignorePathsToDelete>
-            </configuration>
-          </plugin>
-        </plugins>
-      </pluginManagement>
-    </build>
+    </pluginManagement>
+  </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.plugin.version}</version>
-                <configuration>
-                    <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
-                    <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <enableRulesSummary>false</enableRulesSummary>
-                    <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <linksource>true</linksource>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>https://commons.apache.org/collections/api-release/</link>
-                    </links>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>${commons.changes.version}</version>
-                <configuration>
-                    <issueLinkTemplatePerSystem>
-                        <default>%URL%/%ISSUE%</default>
-                    </issueLinkTemplatePerSystem>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>changes-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <targetJdk>${maven.compiler.target}</targetJdk>
-                    <linkXref>true</linkXref>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <id>pmd-report</id>
-                        <reports>
-                            <report>pmd</report>
-                        </reports>
-                    </reportSet>
-                    <reportSet>
-                        <id>pmd-aggregate</id>
-                        <inherited>false</inherited>
-                        <reports>
-                            <report>pmd</report>
-                        </reports>
-                        <configuration>
-                            <aggregate>true</aggregate>
-                        </configuration>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-	      <plugin>
-		<groupId>com.github.siom79.japicmp</groupId>
-		<artifactId>japicmp-maven-plugin</artifactId>
-		<version>${commons.japicmp.version}</version>
-		<configuration>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+          <suppressionsLocation>${basedir}/src/conf/checkstyle-suppressions.xml</suppressionsLocation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          <enableRulesSummary>false</enableRulesSummary>
+          <resourceExcludes>NOTICE.txt,LICENSE.txt,**/pom.properties,target/**.properties,</resourceExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <linksource>true</linksource>
+          <links>
+            <link>https://docs.oracle.com/javase/8/docs/api/</link>
+            <link>https://commons.apache.org/collections/api-release/</link>
+          </links>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>${commons.changes.version}</version>
+        <configuration>
+          <issueLinkTemplatePerSystem>
+            <default>%URL%/%ISSUE%</default>
+          </issueLinkTemplatePerSystem>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <targetJdk>${maven.compiler.target}</targetJdk>
+          <linkXref>true</linkXref>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <id>pmd-report</id>
+            <reports>
+              <report>pmd</report>
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>pmd-aggregate</id>
+            <inherited>false</inherited>
+            <reports>
+              <report>pmd</report>
+            </reports>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <version>${commons.japicmp.version}</version>
+        <configuration>
           <oldVersion>
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-beanutils2</artifactId>
-				<version>2.0.0-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-		  </oldVersion>
-		  <newVersion>
-			<file>
-				<path>${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}</path>
-			</file>
-		  </newVersion>		   
-		  <parameter>
-<!-- 
- to support "mvn site" (no japicmp report) 
- as well as "mvn package site" (with  japicmp report) 
--->
-			   <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
-		   </parameter>
-		</configuration>
-	    </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${commons.findbugs.version}</version>
-                <configuration>
-                    <threshold>Normal</threshold>
-                    <effort>Default</effort>
-                    <!--<excludeFilterFile>src/conf/findbugs-exclude-filter.xml</excludeFilterFile> -->
-                    <fork>true</fork>
-                    <jvmArgs>-Duser.language=en</jvmArgs>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+            <dependency>
+              <groupId>org.apache.commons</groupId>
+              <artifactId>commons-beanutils2</artifactId>
+              <version>2.0.0-SNAPSHOT</version>
+              <type>jar</type>
+            </dependency>
+          </oldVersion>
+          <newVersion>
+            <file>
+              <path>${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}</path>
+            </file>
+          </newVersion>
+          <parameter>
+            <!-- 
+              to support "mvn site" (no japicmp report) 
+              as well as "mvn package site" (with  japicmp report) 
+            -->
+            <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
+          </parameter>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>${commons.findbugs.version}</version>
+        <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+          <!-- <excludeFilterFile>src/conf/findbugs-exclude-filter.xml</excludeFilterFile> -->
+          <fork>true</fork>
+          <jvmArgs>-Duser.language=en</jvmArgs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
