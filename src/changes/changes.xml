@@ -111,6 +111,9 @@
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update actions/checkout from v2.3.1 to v2.3.2 #33.
       </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Update actions/setup-java from v1.4.0 to v1.4.2 #35.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
