@@ -53,7 +53,6 @@ public class ConverterTestSuite {
         testSuite.addTestSuite(SqlDateConverterTestCase.class);
         testSuite.addTestSuite(SqlTimeConverterTestCase.class);
         testSuite.addTestSuite(SqlTimestampConverterTestCase.class);
-        testSuite.addTestSuite(URLConverterTestCase.class);
         return testSuite;
     }
 }

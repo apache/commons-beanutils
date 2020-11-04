@@ -17,57 +17,28 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import org.apache.commons.beanutils2.ConversionException;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.net.URL;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
-
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Test Case for the URLConverter class.
- *
  */
+public class URLConverterTestCase {
 
-public class URLConverterTestCase extends TestCase {
+    private URLConverter converter;
 
-    public static TestSuite suite() {
-        return new TestSuite(URLConverterTestCase.class);
+    @Before
+    public void before() {
+        converter = new URLConverter();
     }
 
-
-
-    private Converter converter = null;
-
-
-
-    public URLConverterTestCase(final String name) {
-        super(name);
-    }
-
-    protected Class<?> getExpectedType() {
-        return URL.class;
-    }
-
-    protected Converter makeConverter() {
-        return new URLConverter();
-    }
-
-
-
-    @Override
-    public void setUp() throws Exception {
-        converter = makeConverter();
-    }
-
-    @Override
-    public void tearDown() throws Exception {
-        converter = null;
-    }
-
-
-
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message= {
             "from String",
@@ -91,23 +62,23 @@ public class URLConverterTestCase extends TestCase {
             "http://notreal.apache.org",
         };
 
-        final URL[] expected = {
-            new URL("http://www.apache.org"),
-            new URL("http://www.apache.org/"),
-            new URL("ftp://cvs.apache.org"),
-            new URL("file://project.xml"),
-            new URL("http://208.185.179.12"),
-            new URL("http://www.apache.org:9999/test/thing"),
-            new URL("http://user:admin@www.apache.org:50/one/two.three"),
-            new URL("http://notreal.apache.org")
+        final String[] expected = {
+            "http://www.apache.org",
+            "http://www.apache.org/",
+            "ftp://cvs.apache.org",
+            "file://project.xml",
+            "http://208.185.179.12",
+            "http://www.apache.org:9999/test/thing",
+            "http://user:admin@www.apache.org:50/one/two.three",
+            "http://notreal.apache.org"
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URL",expected[i],converter.convert(URL.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URL", expected[i], converter.convert(URL.class, input[i]).toString());
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]).toString());
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -115,6 +86,7 @@ public class URLConverterTestCase extends TestCase {
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test
     public void testUnsupportedType() {
         try {
             converter.convert(Integer.class, "http://www.apache.org");
@@ -124,4 +96,3 @@ public class URLConverterTestCase extends TestCase {
         }
     }
 }
-
