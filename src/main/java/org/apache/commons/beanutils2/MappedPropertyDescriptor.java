@@ -478,10 +478,10 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     paramTypes = STRING_CLASS_PARAMETER;
                 }
                 try {
-                    m = clazz.getMethod(methodName, paramTypes);
+                    m = getMethod(clazz, methodName, paramTypes);
                     // Un-comment following line for testing
                     // System.out.println("Recreated Method " + methodName + " for " + className);
-                } catch (final NoSuchMethodException e) {
+                } catch (final IntrospectionException e) {
                     throw new RuntimeException("Method " + methodName + " for " +
                             className + " could not be reconstructed - method not found");
                 }
