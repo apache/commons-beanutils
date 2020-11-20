@@ -627,7 +627,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         DynaBean dynaBean     = null;
         Class<?> newDynaBeanType = null;
-        Class<?> newElementType  = null;
+        Class<?> newElementType;
 
         // Create a new element
         if (element == null) {

@@ -95,7 +95,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        Object value = null;
+        Object value;
         final int[] intArray = new int[0];
 
         value = LocaleConvertUtils.convert((String) null, intArray.getClass());
@@ -231,7 +231,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        Object value = null;
+        Object value;
         final String[] stringArray = new String[0];
 
         value = LocaleConvertUtils.convert((String) null, stringArray.getClass());
@@ -329,7 +329,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        Object value = null;
+        Object value;
         final int[] intArray = new int[0];
         final int[] intArray1 = new int[]{0};
         final int[] intArray2 = new int[]{0, 10};
@@ -362,7 +362,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * Positive scalar conversion tests.
      */
     public void testPositiveScalar() {
-        Object value = null;
+        Object value;
 
         /* fixme Boolean converters not implemented
          value = LocaleConvertUtils.convert("true", Boolean.TYPE);
@@ -497,7 +497,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals(((Short) value).shortValue(), (short) 123);
         */
 
-        String input = null;
+        String input;
 
         input = "2002-03-17";
         value = LocaleConvertUtils.convert(input, Date.class);
@@ -523,7 +523,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        Object value = null;
+        Object value;
         final String[] stringArray = new String[0];
         final String[] stringArray1 = new String[]
         {"abc"};

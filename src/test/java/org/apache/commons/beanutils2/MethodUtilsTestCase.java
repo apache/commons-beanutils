@@ -269,7 +269,7 @@ public class MethodUtilsTestCase extends TestCase {
 
     public void testStaticInvokeMethod() throws Exception {
 
-        Object value = null;
+        Object value;
         int current = TestBean.currentCounter();
 
         value = MethodUtils.invokeStaticMethod(TestBean.class, "currentCounter", new Object[0]);

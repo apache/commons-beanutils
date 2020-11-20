@@ -838,8 +838,8 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetPropertyNullValues() throws Exception {
 
-        Object oldValue = null;
-        Object newValue = null;
+        Object oldValue;
+        Object newValue;
 
         // Scalar value into array
         oldValue = PropertyUtils.getSimpleProperty(bean, "stringArray");

@@ -311,8 +311,8 @@ public abstract class DateConverterTestBase extends TestCase {
      * Test Converter with multiple patterns
      */
     public void testMultiplePatterns() {
-        String testString = null;
-        Object expected = null;
+        String testString;
+        Object expected;
 
         // Create & Configure the Converter
         final String[] patterns = new String[] {"yyyy-MM-dd", "yyyy/MM/dd"};

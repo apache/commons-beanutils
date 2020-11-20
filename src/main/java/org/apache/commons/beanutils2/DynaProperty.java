@@ -198,7 +198,7 @@ public class DynaProperty implements Serializable {
     @Override
     public boolean equals(final Object obj) {
 
-        boolean result = false;
+        boolean result;
 
         result = obj == this;
 
