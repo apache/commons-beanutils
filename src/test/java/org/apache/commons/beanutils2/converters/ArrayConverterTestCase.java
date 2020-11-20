@@ -18,6 +18,7 @@ package org.apache.commons.beanutils2.converters;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 import junit.framework.TestCase;
@@ -283,9 +284,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Test Data
         final String[] array = new String[] {"10", "  11", "12  ", "  13  "};
         final ArrayList<String> list = new ArrayList<>();
-        for (final String element : array) {
-            list.add(element);
-        }
+        Collections.addAll(list, array);
 
         // Expected results
         String msg = null;
