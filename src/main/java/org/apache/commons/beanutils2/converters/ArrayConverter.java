@@ -148,7 +148,6 @@ public class ArrayConverter extends AbstractConverter {
      *  individual array elements.
      */
     public ArrayConverter(final Class<?> defaultType, final Converter elementConverter) {
-        super();
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
         }

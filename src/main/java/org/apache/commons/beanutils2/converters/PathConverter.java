@@ -35,7 +35,6 @@ public final class PathConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public PathConverter() {
-        super();
     }
 
     /**

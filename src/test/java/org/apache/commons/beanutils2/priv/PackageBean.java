@@ -37,8 +37,6 @@ class PackageBean {
      */
     PackageBean() {
 
-        super();
-
     }
 
 

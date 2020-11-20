@@ -34,7 +34,6 @@ public class NestedNullException extends BeanAccessLanguageException {
      * Constructs a {@code NestedNullException} without a detail message.
      */
     public NestedNullException() {
-        super();
     }
 
     /**

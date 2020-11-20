@@ -34,7 +34,6 @@ public final class EnumConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public EnumConverter() {
-        super();
     }
 
     /**

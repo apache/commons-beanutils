@@ -36,7 +36,6 @@ public final class PeriodConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public PeriodConverter() {
-        super();
     }
 
     /**

@@ -69,7 +69,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     public BasicDynaClass(final String name, Class<?> dynaBeanClass,
                           final DynaProperty[] properties) {
 
-        super();
         if (name != null) {
             this.name = name;
         }

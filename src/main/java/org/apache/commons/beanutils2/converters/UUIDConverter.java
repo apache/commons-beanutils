@@ -34,7 +34,6 @@ public final class UUIDConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public UUIDConverter() {
-        super();
     }
 
     /**

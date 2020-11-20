@@ -83,7 +83,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Construct an empty map.
      */
     public WeakFastHashMap() {
-        super();
         this.map = createMap();
     }
 
@@ -93,7 +92,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param capacity  the initial capacity of the empty map
      */
     public WeakFastHashMap(final int capacity) {
-        super();
         this.map = createMap(capacity);
     }
 
@@ -104,7 +102,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param factor  the load factor of the new map
      */
     public WeakFastHashMap(final int capacity, final float factor) {
-        super();
         this.map = createMap(capacity, factor);
     }
 
@@ -114,7 +111,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param map  the map whose mappings are to be copied
      */
     public WeakFastHashMap(final Map<? extends K, ? extends V> map) {
-        super();
         this.map = createMap(map);
     }
 

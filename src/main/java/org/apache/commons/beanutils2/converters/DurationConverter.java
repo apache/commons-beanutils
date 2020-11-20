@@ -36,7 +36,6 @@ public final class DurationConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public DurationConverter() {
-        super();
     }
 
     /**

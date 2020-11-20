@@ -42,7 +42,6 @@ public final class ZonedDateTimeConverter extends DateTimeConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public ZonedDateTimeConverter() {
-        super();
     }
 
     /**

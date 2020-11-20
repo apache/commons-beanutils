@@ -229,7 +229,6 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
          * Private constructor to prevent instantiation. Only use INSTANCE.
          */
         private NaturalOrderComparator() {
-            super();
         }
 
         /**

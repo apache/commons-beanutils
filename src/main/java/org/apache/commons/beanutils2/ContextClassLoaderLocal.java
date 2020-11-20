@@ -110,7 +110,6 @@ public class ContextClassLoaderLocal<T> {
      * Construct a context classloader instance
      */
     public ContextClassLoaderLocal() {
-        super();
     }
 
     /**

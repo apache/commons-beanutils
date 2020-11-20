@@ -36,7 +36,6 @@ public final class YearConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public YearConverter() {
-        super();
     }
 
     /**

@@ -36,7 +36,6 @@ public final class ZoneIdConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public ZoneIdConverter() {
-        super();
     }
 
     /**

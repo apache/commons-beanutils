@@ -56,7 +56,6 @@ public final class BooleanConverter extends AbstractConverter {
      * not one of the known true strings, nor one of the known false strings.
      */
     public BooleanConverter() {
-        super();
     }
 
 
@@ -95,7 +94,6 @@ public final class BooleanConverter extends AbstractConverter {
      * @since 1.8.0
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings) {
-        super();
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
     }

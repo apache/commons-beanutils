@@ -29,7 +29,6 @@ import java.util.Map;
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 
     public PropsFirstPropertyUtilsBean() {
-        super();
     }
 
     /**

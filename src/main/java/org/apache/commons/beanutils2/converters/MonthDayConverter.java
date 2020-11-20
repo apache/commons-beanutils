@@ -36,7 +36,6 @@ public final class MonthDayConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public MonthDayConverter() {
-        super();
     }
 
     /**

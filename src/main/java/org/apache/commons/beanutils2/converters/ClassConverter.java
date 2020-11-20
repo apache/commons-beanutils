@@ -36,7 +36,6 @@ public final class ClassConverter extends AbstractConverter {
      * a {@code ConversionException} if an error occurs.
      */
     public ClassConverter() {
-        super();
     }
 
     /**

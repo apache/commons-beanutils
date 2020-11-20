@@ -105,7 +105,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * {@code ConversionException} if an error occurs.
      */
     public DateTimeConverter() {
-        super();
     }
 
     /**
