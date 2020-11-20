@@ -239,12 +239,17 @@ public class DefaultResolver implements Resolver {
                     return expression.substring(0, i + 1);
                 }
             } else {
-                if (c == NESTED) {
+                switch (c) {
+                case NESTED:
                     return expression.substring(0, i);
-                } else if (c == MAPPED_START) {
+                case MAPPED_START:
                     mapped = true;
-                } else if (c == INDEXED_START) {
+                    break;
+                case INDEXED_START:
                     indexed = true;
+                    break;
+                default:
+                    break;
                 }
             }
         }
