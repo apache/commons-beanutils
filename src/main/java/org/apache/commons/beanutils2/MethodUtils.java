@@ -1246,7 +1246,6 @@ public class MethodUtils {
             if (primitiveClazz != null) {
                 return primitiveClazz;
             }
-            return clazz;
         }
         return clazz;
     }
