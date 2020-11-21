@@ -423,7 +423,7 @@ public abstract class AbstractConverter implements Converter {
                 elementType = elementType .getComponentType();
                 count++;
             }
-            StringBuilder typeNameBuilder = new StringBuilder(elementType.getName());
+            final StringBuilder typeNameBuilder = new StringBuilder(elementType.getName());
             for (int i = 0; i < count; i++) {
                 typeNameBuilder.append("[]");
             }
