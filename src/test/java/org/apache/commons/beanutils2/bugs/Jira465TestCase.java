@@ -18,7 +18,7 @@ package org.apache.commons.beanutils2.bugs;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.beanutils2.BeanUtils;
@@ -104,7 +104,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListProp {
-        private List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
+        private List<String> foo = new ArrayList<>(Collections.singletonList(OLD_VALUE));
 
         public List<String> getFoo() {
             return foo;
@@ -116,7 +116,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListIndexedProp {
-        private final List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
+        private final List<String> foo = new ArrayList<>(Collections.singletonList(OLD_VALUE));
 
         public String getFoo(final int i) {
             return foo.get(i);

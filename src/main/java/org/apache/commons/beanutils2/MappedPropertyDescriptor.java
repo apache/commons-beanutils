@@ -161,7 +161,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         setName(propertyName);
 
         // search the mapped get and set methods
-        Method mappedReadMethod;
+        final Method mappedReadMethod;
         Method mappedWriteMethod = null;
         mappedReadMethod =
             getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);

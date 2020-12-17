@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -1528,11 +1527,9 @@ public class BeanUtilsTestCase extends TestCase {
     protected void checkMap(final Map<?, ?> actual, final Map<?, ?> expected) {
         assertNotNull("actual map not null", actual);
         assertEquals("actual map size", expected.size(), actual.size());
-        final Iterator<?> keys = expected.keySet().iterator();
-        while (keys.hasNext()) {
-            final Object key = keys.next();
+        for (final Object key : expected.keySet()) {
             assertEquals("actual map value(" + key + ")",
-                         expected.get(key), actual.get(key));
+                    expected.get(key), actual.get(key));
         }
     }
 

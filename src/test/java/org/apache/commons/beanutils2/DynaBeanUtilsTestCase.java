@@ -20,7 +20,6 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -102,8 +101,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
-        bean.set("booleanProperty", new Boolean(true));
-        bean.set("booleanSecond", new Boolean(true));
+        bean.set("booleanProperty", Boolean.TRUE);
+        bean.set("booleanSecond", Boolean.TRUE);
         bean.set("byteProperty", new Byte((byte) 121));
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
@@ -1172,11 +1171,9 @@ public class DynaBeanUtilsTestCase extends TestCase {
     protected void checkMap(final Map<?, ?> actual, final Map<?, ?> expected) {
         assertNotNull("actual map not null", actual);
         assertEquals("actual map size", expected.size(), actual.size());
-        final Iterator<?> keys = expected.keySet().iterator();
-        while (keys.hasNext()) {
-            final Object key = keys.next();
+        for (final Object key : expected.keySet()) {
             assertEquals("actual map value(" + key + ")",
-                         expected.get(key), actual.get(key));
+                    expected.get(key), actual.get(key));
         }
     }
 

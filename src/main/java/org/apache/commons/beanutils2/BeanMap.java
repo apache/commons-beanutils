@@ -45,9 +45,9 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
 
     private transient Object bean;
 
-    private transient HashMap<String, Method> readMethods = new HashMap<>();
-    private transient HashMap<String, Method> writeMethods = new HashMap<>();
-    private transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
+    private final transient HashMap<String, Method> readMethods = new HashMap<>();
+    private final transient HashMap<String, Method> writeMethods = new HashMap<>();
+    private final transient HashMap<String, Class<? extends Object>> types = new HashMap<>();
 
     /**
      * An empty array. Used to invoke accessors via reflection.

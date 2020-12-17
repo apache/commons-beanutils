@@ -231,7 +231,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         fail("Array conversions not implemented yet.");
 
-        Object value;
+        final Object value;
         final String[] stringArray = new String[0];
 
         value = LocaleConvertUtils.convert((String) null, stringArray.getClass());

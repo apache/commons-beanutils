@@ -3243,7 +3243,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean,
                     "nested.booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     bean.getNested().getBooleanProperty());
@@ -3526,7 +3526,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean,
                     "booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     bean.getBooleanProperty());

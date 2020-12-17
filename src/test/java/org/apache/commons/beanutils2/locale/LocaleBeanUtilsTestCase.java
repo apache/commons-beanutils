@@ -30,7 +30,7 @@ import junit.framework.TestSuite;
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
 
-    private static Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
+    private static final Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
 
     /**
      * Construct a new instance of this test case.

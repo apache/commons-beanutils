@@ -96,8 +96,8 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
-        bean.set("booleanProperty", new Boolean(true));
-        bean.set("booleanSecond", new Boolean(true));
+        bean.set("booleanProperty", Boolean.TRUE);
+        bean.set("booleanSecond", Boolean.TRUE);
         bean.set("doubleProperty", new Double(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
         final int[] intArray = { 0, 10, 20, 30, 40 };
@@ -789,7 +789,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final boolean oldValue =
                     ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
-            bean.set("booleanProperty", new Boolean(newValue));
+            bean.set("booleanProperty", Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     ((Boolean) bean.get("booleanProperty")).booleanValue());

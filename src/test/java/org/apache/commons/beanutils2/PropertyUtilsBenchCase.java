@@ -95,7 +95,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         // Create input instances
         inBean = new BenchBean();
         inMap = new HashMap<>();
-        inMap.put("booleanProperty", new Boolean(inBean.getBooleanProperty()));
+        inMap.put("booleanProperty", Boolean.valueOf(inBean.getBooleanProperty()));
         inMap.put("byteProperty", new Byte(inBean.getByteProperty()));
         inMap.put("doubleProperty", new Double(inBean.getDoubleProperty()));
         inMap.put("floatProperty", new Float(inBean.getFloatProperty()));

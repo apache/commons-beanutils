@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils2;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import junit.framework.TestCase;
@@ -53,7 +54,7 @@ public class BeanPredicateTestCase extends TestCase {
     }
 
     public void testNull() {
-        final Predicate<String> p = s -> s == null;
+        final Predicate<String> p = Objects::isNull;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         final String nullString = null;
         assertTrue(predicate.test(new TestBean(nullString)));
