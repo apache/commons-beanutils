@@ -112,7 +112,7 @@ import org.apache.commons.beanutils2.Converter;
  *
  *    // Construct a "Matrix" Converter which converts arrays of integer arrays using
  *    // the preceding ArrayConverter as the element Converter.
- *    // N.B. Uses a semi-colon (i.e. ";") as the delimiter to separate the different sets of numbers.
+ *    // N.B. Uses a semicolon (i.e. ";") as the delimiter to separate the different sets of numbers.
  *    //      Also the delimiter used by the first ArrayConverter needs to be added to the
  *    //      "allowed characters" for this one.
  *    ArrayConverter matrixConverter = new ArrayConverter(int[][].class, arrayConverter);
