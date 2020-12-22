@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Timestamp;
+import java.util.Map;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -82,6 +83,8 @@ import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
 import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.impl.WeakHashtable;
+
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -190,8 +193,8 @@ public class ConvertUtilsBean {
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap<Class<?>, Converter> converters =
-            new WeakFastHashMap<>();
+    private final Map<Class<?>, Converter> converters =
+            new WeakHashtable();
 
     /**
      * The {@code Log} instance for this class.
@@ -202,9 +205,9 @@ public class ConvertUtilsBean {
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
-        converters.setFast(false);
+//        converters.setFast(false);
         deregister();
-        converters.setFast(true);
+//        converters.setFast(true);
     }
 
 
