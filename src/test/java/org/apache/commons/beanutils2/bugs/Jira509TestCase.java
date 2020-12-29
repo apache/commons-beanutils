@@ -66,7 +66,7 @@ public class Jira509TestCase {
             // Loop _may_ hang without fix.
             for (int i = 1; i < 10_000_000; i++) {
                 executor.submit(new Runnable() {
-                    Class<?> clazz = classList.get(random(classList.size()));
+                    final Class<?> clazz = classList.get(random(classList.size()));
 
                     @Override
                     public void run() {

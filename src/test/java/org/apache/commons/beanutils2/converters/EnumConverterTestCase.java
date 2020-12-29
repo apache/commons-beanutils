@@ -105,7 +105,7 @@ public class EnumConverterTestCase extends TestCase {
     public enum PizzaStatus {
         ORDERED,
         READY,
-        DELIVERED;
+        DELIVERED
     }
 }
 

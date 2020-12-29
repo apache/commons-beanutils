@@ -261,10 +261,10 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
      */
     public void testToPrimitiveType() {
         converter = new IntegerLocaleConverter();
-        final Integer value = 20131028;
+        final int value = 20131028;
         final Class<Integer> target = Integer.TYPE;
-        final int result = converter.convert(target, (Object) value.toString());
-        assertEquals("Wrong result", value.intValue(), result);
+        final int result = converter.convert(target, (Object) Integer.toString(value));
+        assertEquals("Wrong result", (int) value, result);
     }
 }
 
