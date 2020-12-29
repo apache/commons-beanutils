@@ -52,7 +52,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * The name of this DynaClass (analogous to the
      * {@code getName()</code> method of <code>java.lang.Class}).
      */
-    protected String name;
+    protected final String name;
 
     /**
      * Controls whether changes to this DynaClass's properties are allowed.

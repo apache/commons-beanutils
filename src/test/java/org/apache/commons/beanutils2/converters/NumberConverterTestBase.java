@@ -35,7 +35,7 @@ import junit.framework.TestCase;
 public abstract class NumberConverterTestBase extends TestCase {
 
     /** Test Number values */
-    protected Number[] numbers = new Number[4];
+    protected final Number[] numbers = new Number[4];
 
 
 

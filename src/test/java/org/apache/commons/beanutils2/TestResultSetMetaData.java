@@ -38,7 +38,7 @@ public class TestResultSetMetaData implements InvocationHandler {
     /**
      * <p>Array of column names and class names for metadata.</p>
      */
-    protected String[][] metadata = {
+    protected final String[][] metadata = {
         { "bigDecimalProperty", java.math.BigDecimal.class.getName() },
         { "booleanProperty", Boolean.class.getName() },
         { "byteProperty", Byte.class.getName() },

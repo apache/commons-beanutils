@@ -92,7 +92,7 @@ public class WrapDynaClass implements DynaClass {
      * property name.  Individual descriptor instances will be the same
      * instances as those in the {@code descriptors} list.
      */
-    protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
+    protected final HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
 
     /**
@@ -106,7 +106,7 @@ public class WrapDynaClass implements DynaClass {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the {@code properties} list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
+    protected final HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
 

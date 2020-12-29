@@ -94,13 +94,13 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The method signature of the constructor we will use to create
      * new DynaBean instances.
      */
-    protected static Class<?>[] constructorTypes = { DynaClass.class };
+    protected static final Class<?>[] constructorTypes = { DynaClass.class };
 
     /**
      * The argument values to be passed to the constructor we will use
      * to create new DynaBean instances.
      */
-    protected Object[] constructorValues = { this };
+    protected final Object[] constructorValues = { this };
 
     /**
      * The {@code DynaBean} implementation class we will use for
@@ -123,7 +123,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the {@code properties} list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
+    protected final HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
 

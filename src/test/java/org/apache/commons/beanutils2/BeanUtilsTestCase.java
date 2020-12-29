@@ -71,7 +71,7 @@ public class BeanUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String[] describes =
+    protected final String[] describes =
     { "booleanProperty",
       "booleanSecond",
       "byteProperty",

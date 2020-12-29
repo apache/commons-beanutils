@@ -63,7 +63,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * instances will be the same instances as those in the
      * {@code properties} list.</p>
      */
-    protected Map<String, DynaProperty> propertiesMap = new HashMap<>();
+    protected final Map<String, DynaProperty> propertiesMap = new HashMap<>();
 
     /**
      * Cross Reference for column name --> dyna property name

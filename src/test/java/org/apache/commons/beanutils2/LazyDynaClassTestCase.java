@@ -27,7 +27,7 @@ import junit.framework.TestSuite;
 public class LazyDynaClassTestCase extends TestCase {
 
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
+    protected final String testProperty     = "myProperty";
 
 
 

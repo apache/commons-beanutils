@@ -39,14 +39,14 @@ public class LazyDynaListTestCase extends TestCase {
     private static final String BASIC_PROP1 = "BasicDynaClass_Property1";
     private static final String BASIC_PROP2 = "BasicDynaClass_Property2";
 
-    protected DynaProperty[] properties = new DynaProperty[] {
+    protected final DynaProperty[] properties = new DynaProperty[] {
                                                new DynaProperty(BASIC_PROP1, String.class),
                                                new DynaProperty(BASIC_PROP2, HashMap.class)};
 
-    protected DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
+    protected final DynaClass treeMapDynaClass = new LazyDynaMap(new TreeMap<String, Object>());
     protected DynaClass hashMapDynaClass = new LazyDynaMap(new HashMap<String, Object>());
-    protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
-    protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
+    protected final DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
+    protected final DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
 
 

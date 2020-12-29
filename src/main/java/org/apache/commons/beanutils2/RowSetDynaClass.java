@@ -79,7 +79,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * the original {@code ResultSet} on which this
      * {@link RowSetDynaClass} was based.</p>
      */
-    protected List<DynaBean> rows = new ArrayList<>();
+    protected final List<DynaBean> rows = new ArrayList<>();
 
 
 

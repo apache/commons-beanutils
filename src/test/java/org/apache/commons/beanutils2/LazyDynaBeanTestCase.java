@@ -34,14 +34,14 @@ public class LazyDynaBeanTestCase extends TestCase {
 
     protected LazyDynaBean  bean      = null;
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
-    protected String testPropertyA    = "myProperty-A";
-    protected String testPropertyB    = "myProperty-B";
-    protected String testString1      = "myStringValue-1";
-    protected String testString2      = "myStringValue-2";
-    protected Integer testInteger1    = new Integer(30);
-    protected Integer testInteger2    = new Integer(40);
-    protected String testKey          = "myKey";
+    protected final String testProperty     = "myProperty";
+    protected final String testPropertyA    = "myProperty-A";
+    protected final String testPropertyB    = "myProperty-B";
+    protected final String testString1      = "myStringValue-1";
+    protected final String testString2      = "myStringValue-2";
+    protected final Integer testInteger1    = new Integer(30);
+    protected final Integer testInteger2    = new Integer(40);
+    protected final String testKey          = "myKey";
 
 
 

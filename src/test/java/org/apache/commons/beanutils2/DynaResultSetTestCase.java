@@ -42,7 +42,7 @@ public class DynaResultSetTestCase extends TestCase {
      * Names of the columns for this test.  Must match the order they are
      * defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String[] columns =
+    protected final String[] columns =
     { "bigdecimalproperty", "booleanproperty",
       "byteproperty", "dateproperty",
       "doubleproperty", "floatproperty",

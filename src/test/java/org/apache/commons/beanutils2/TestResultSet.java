@@ -57,12 +57,12 @@ public class TestResultSet implements InvocationHandler {
     /**
      * The constant (per run) value used to initialize date/time/timestamp.
      */
-    protected long timestamp = System.currentTimeMillis();
+    protected final long timestamp = System.currentTimeMillis();
 
     /**
      * Meta data for the result set.
      */
-    protected ResultSetMetaData resultSetMetaData;
+    protected final ResultSetMetaData resultSetMetaData;
 
     /**
      * Factory method for creating {@link ResultSet} proxies.
