@@ -427,7 +427,7 @@ public class BeanUtils {
      * @since 1.8.0
      */
     public static <K, V> Map<K, V> createCache() {
-        return new WeakFastHashMap<>();
+        return new ConcurrentWeakKeyHashMap<>();
     }
 
     /** An empty class array */
