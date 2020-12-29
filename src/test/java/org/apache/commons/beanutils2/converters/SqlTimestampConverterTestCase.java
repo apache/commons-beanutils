@@ -124,8 +124,8 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
-        String pattern; // SHORT style Date & Time format for US Locale
-        String testString;
+        final String pattern; // SHORT style Date & Time format for US Locale
+        final String testString;
         if (isUSFormatWithComma()) {
             pattern = "M/d/yy, h:mm a";
             testString = "3/21/06, 3:06 PM";

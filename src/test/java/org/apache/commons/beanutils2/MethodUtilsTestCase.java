@@ -82,7 +82,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     public void testGetAccessibleMethodFromInterface() {
-        Method method;
+        final Method method;
         // trickier this one - find a method in a direct interface
         method = MethodUtils.getAccessibleMethod
                 (PrivateBeanFactory.create().getClass(),
@@ -93,7 +93,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     public void testGetAccessibleMethodIndirectInterface() {
-        Method method;
+        final Method method;
         // trickier this one - find a method in a indirect interface
         method = MethodUtils.getAccessibleMethod
                 (PrivateBeanFactory.createSubclass().getClass(),

@@ -188,7 +188,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testNegativeStringArray() {
 
-        Object value;
+        final Object value;
         final String[] stringArray = new String[0];
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
