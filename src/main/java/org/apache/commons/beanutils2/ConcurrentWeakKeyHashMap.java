@@ -39,7 +39,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <p></p>
  * Written by Doug Lea with assistance from members of JCP JSR-166
  * Expert Group and released to the public domain, as explained at
- * @see http://creativecommons.org/licenses/publicdomain
+ * @see <a href="http://creativecommons.org/licenses/publicdomain">Creative Commons</a>
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
  * @author <a href="http://www.jboss.org/netty/">The Netty Project</a>
@@ -166,7 +166,6 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
 
    /**
     * ConcurrentReferenceHashMap list entry. Note that this is never exported out as a user-visible Map.Entry.
-    * <p/>
     * Because the value field is volatile, not final, it is legal wrt the Java Memory Model for an unsynchronized
     * reader to see null instead of initial value when read via a data race.  Although a reordering leading to this is
     * not likely to ever actually occur, the Segment.readValueUnderLock method is used as a backup in case a null
@@ -821,10 +820,9 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
    /**
     * Returns the value to which the specified key is mapped, or {@code null} if this map contains no mapping for the
     * key.
-    * <p/>
     * <p>More formally, if this map contains a mapping from a key {@code k} to a value {@code v} such that {@code
     * key.equals(k)}, then this method returns {@code v}; otherwise it returns {@code null}.  (There can be at most one
-    * such mapping.)
+    * such mapping.)</p>
     *
     * @throws NullPointerException if the specified key is null
     */
@@ -849,8 +847,8 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
    }
 
    /**
-    * Returns <code>true</code> if this map maps one or more keys to the specified value. Note: This method requires a full
-    * internal traversal of the hash table, and so is much slower than method <code>containsKey</code>.
+    * Returns <code>true</code> if this map maps one or more keys to the specified value. Note: This method requires a
+    * full internal traversal of the hash table, and so is much slower than method <code>containsKey</code>.
     *
     * @param value value whose presence in this map is to be tested
     * @return <code>true</code> if this map maps one or more keys to the specified value
@@ -916,8 +914,8 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
     * Hashtable}, which supported this method prior to introduction of the Java Collections framework.
     *
     * @param value a value to search for
-    * @return <code>true</code> if and only if some key maps to the <code>value</code> argument in this table as determined by
-    *         the <code>equals</code> method; <code>false</code> otherwise
+    * @return <code>true</code> if and only if some key maps to the <code>value</code> argument in this table as
+    *         determined by the <code>equals</code> method; <code>false</code> otherwise
     * @throws NullPointerException if the specified value is null
     */
    public boolean contains(Object value) {
@@ -926,8 +924,8 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
 
    /**
     * Maps the specified key to the specified value in this table.  Neither the key nor the value can be null.
-    * <p/>
-    * <p>The value can be retrieved by calling the <code>get</code> method with a key that is equal to the original key.
+    * <p>The value can be retrieved by calling the <code>get</code> method with a key that is equal to the
+    * original key.</p>
     *
     * @param key   key with which the specified value is to be associated
     * @param value value to be associated with the specified key
@@ -1047,9 +1045,9 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
     * stale entries are automatically removed lazily, when blocking operations are required. However, there are some
     * cases where this operation should be performed eagerly, such as cleaning up old references to a ClassLoader in a
     * multi-classloader environment.
-    * <p/>
+    * <p>
     * Note: this method will acquire locks, one at a time, across all segments of this table, so if it is to be used,
-    * it should be used sparingly.
+    * it should be used sparingly. </p>
     */
    public void purgeStaleEntries() {
       for (int i = 0; i < segments.length; ++i) {
@@ -1061,12 +1059,11 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
     * Returns a {@link Set} view of the keys contained in this map.  The set is backed by the map, so changes to the
     * map are reflected in the set, and vice-versa.  The set supports element removal, which removes the corresponding
     * mapping from this map, via the <code>Iterator.remove</code>, <code>Set.remove</code>, <code>removeAll</code>,
-    * <code>retainAll</code>, and <code>clear</code> operations.  It does not support the <code>add</code> or <code>addAll</code>
-    * operations.
-    * <p/>
+    * <code>retainAll</code>, and <code>clear</code> operations.  It does not support the <code>add</code> or
+    * <code>addAll</code> operations.
     * <p>The view's <code>iterator</code> is a "weakly consistent" iterator that will never throw {@link
     * ConcurrentModificationException}, and guarantees to traverse elements as they existed upon construction of the
-    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.
+    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.</p>
     */
    @Override
    public Set<K> keySet() {
@@ -1078,12 +1075,11 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
     * Returns a {@link Collection} view of the values contained in this map. The collection is backed by the map, so
     * changes to the map are reflected in the collection, and vice-versa.  The collection supports element removal,
     * which removes the corresponding mapping from this map, via the <code>Iterator.remove</code>,
-    * <code>Collection.remove</code>, <code>removeAll</code>, <code>retainAll</code>, and <code>clear</code> operations.  It does not
-    * support the <code>add</code> or <code>addAll</code> operations.
-    * <p/>
+    * <code>Collection.remove</code>, <code>removeAll</code>, <code>retainAll</code>, and <code>clear</code> operations.
+    * It does not support the <code>add</code> or <code>addAll</code> operations.
     * <p>The view's <code>iterator</code> is a "weakly consistent" iterator that will never throw {@link
     * ConcurrentModificationException}, and guarantees to traverse elements as they existed upon construction of the
-    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.
+    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.</p>
     */
    @Override
    public Collection<V> values() {
@@ -1095,12 +1091,11 @@ public final class ConcurrentWeakKeyHashMap<K, V> extends AbstractMap<K, V> impl
     * Returns a {@link Set} view of the mappings contained in this map. The set is backed by the map, so changes to the
     * map are reflected in the set, and vice-versa.  The set supports element removal, which removes the corresponding
     * mapping from the map, via the <code>Iterator.remove</code>, <code>Set.remove</code>, <code>removeAll</code>,
-    * <code>retainAll</code>, and <code>clear</code> operations.  It does not support the <code>add</code> or <code>addAll</code>
-    * operations.
-    * <p/>
+    * <code>retainAll</code>, and <code>clear</code> operations.  It does not support the <code>add</code> or
+    * <code>addAll</code> operations.
     * <p>The view's <code>iterator</code> is a "weakly consistent" iterator that will never throw {@link
     * ConcurrentModificationException}, and guarantees to traverse elements as they existed upon construction of the
-    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.
+    * iterator, and may (but is not guaranteed to) reflect any modifications subsequent to construction.</p>
     */
    @Override
    public Set<Map.Entry<K, V>> entrySet() {

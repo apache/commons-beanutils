@@ -72,9 +72,6 @@
       <action issue="BEANUTILS-537" dev="ggregory" type="update" due-to="XenoAmess, Gary Gregory">
         Fix typos; fix error in Javadoc; performance fix; fix code smells #25.
       </action>
-      <action issue="BEANUTILS-539" dev="ggregory" type="update" due-to="Melloware">
-        Switch WeakFastHashMap for ConcurrentWeakKeyHashMap
-      </action>
       <!--  UPDATES -->
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Apache Commons Collections from 4.3 to 4.4.
@@ -120,6 +117,9 @@
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update JUnit from 4.13 to 4.13.1.
+      </action>
+      <action dev="ggregory" type="update" due-to="melloware">
+        Jacoco 0.8.6 for JDK15 support #55.
       </action>
     </release>
 
