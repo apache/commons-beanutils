@@ -615,7 +615,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void testDefaultToStringConversionUnsupportedType() {
         final int value = 20131101;
         assertEquals("Wrong result", Integer.toString(value),
-                LocaleConvertUtils.convert(value.toString(), getClass()));
+                LocaleConvertUtils.convert(Integer.toString(value), getClass()));
     }
 
 
