@@ -118,6 +118,9 @@
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update JUnit from 4.13 to 4.13.1.
       </action>
+      <action dev="ggregory" type="update" due-to="melloware">
+        Jacoco 0.8.6 for JDK15 support #55.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
