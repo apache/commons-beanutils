@@ -1083,7 +1083,8 @@ public class MethodUtils {
 
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
-            Class<?> srcClass, destClass;
+            final Class<?> srcClass;
+            final Class<?> destClass;
             srcClass = srcArgs[i];
             destClass = destArgs[i];
             totalCost += getObjectTransformationCost(srcClass, destClass);

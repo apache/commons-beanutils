@@ -443,7 +443,7 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         if (arrayType.isAssignableFrom(elementType)) {
-            T[] array;
+            final T[] array;
             if (model.length >= size()) {
                 array = model;
             } else {
@@ -455,7 +455,7 @@ public class LazyDynaList extends ArrayList<Object> {
             }
 
             for (int i = 0; i < size(); i++) {
-                Object elem;
+                final Object elem;
                 if (Map.class.isAssignableFrom(elementType)) {
                     elem = ((LazyDynaMap) get(i)).getMap();
                 } else if (DynaBean.class.isAssignableFrom(elementType)) {
