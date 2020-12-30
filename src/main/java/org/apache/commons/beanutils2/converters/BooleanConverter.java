@@ -173,7 +173,7 @@ public final class BooleanConverter extends AbstractConverter {
             // guaranteed to be lower-case. By converting the input value
             // to lowercase too, we can use the efficient String.equals method
             // instead of the less-efficient String.equalsIgnoreCase method.
-            final String stringValue = value.toString().toLowerCase();
+            final String stringValue = toLowerCase(value);
 
             for (final String trueString : trueStrings) {
                 if (trueString.equals(stringValue)) {
@@ -191,6 +191,7 @@ public final class BooleanConverter extends AbstractConverter {
         throw conversionException(type, value);
     }
 
+
     /**
      * Copies the provided array, and ensures that
      * all the strings in the newly created array contain only lower-case
@@ -203,7 +204,7 @@ public final class BooleanConverter extends AbstractConverter {
     private static String[] copyStrings(final String[] src) {
         final String[] dst = new String[src.length];
         for(int i=0; i<src.length; ++i) {
-            dst[i] = src[i].toLowerCase();
+            dst[i] = toLowerCase(src[i]);
         }
         return dst;
     }

@@ -438,7 +438,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         // Trim any matching '{' and '}' delimiters
-        value = value.trim();
+        value = toTrim(value);
         if (value.startsWith("{") && value.endsWith("}")) {
             value = value.substring(1, value.length() - 1);
         }

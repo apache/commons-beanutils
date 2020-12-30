@@ -255,7 +255,7 @@ public abstract class NumberConverter extends AbstractConverter {
         }
 
         // Convert all other types to String & handle
-        final String stringValue = value.toString().trim();
+        final String stringValue = toTrim(value);
         if (stringValue.length() == 0) {
             return handleMissing(targetType);
         }

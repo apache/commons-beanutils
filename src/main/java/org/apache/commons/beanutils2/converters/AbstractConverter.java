@@ -18,6 +18,8 @@ package org.apache.commons.beanutils2.converters;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.ConversionException;
@@ -62,8 +64,38 @@ public abstract class AbstractConverter implements Converter {
 
     /** Current package name */
     //    getPackage() below returns null on some platforms/jvm versions during the unit tests.
-//    private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
+    // private static final String PACKAGE = AbstractConverter.class.getPackage().getName() + ".";
     private static final String PACKAGE = "org.apache.commons.beanutils2.converters.";
+
+    /**
+     * Converts the given object to a lower-case string.
+     *
+     * @param value the input string.
+     * @return the given string trimmed and converter to lower-case.
+     */
+    protected static String toLowerCase(final Object value) {
+        return toString(value).toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Converts the given object to a lower-case string.
+     *
+     * @param value the input string.
+     * @return the given string trimmed and converter to lower-case.
+     */
+    protected static String toString(final Object value) {
+        return Objects.requireNonNull(value, "value").toString();
+    }
+
+    /**
+     * Converts the given object to a lower-case string.
+     *
+     * @param value the input string.
+     * @return the given string trimmed and converter to lower-case.
+     */
+    protected static String toTrim(final Object value) {
+        return toString(value).trim();
+    }
 
     /**
      * Logging for this instance.
@@ -80,17 +112,15 @@ public abstract class AbstractConverter implements Converter {
      */
     private Object defaultValue = null;
 
-
-
     /**
-     * Construct a <i>Converter</i> that throws a
+     * Constructs a <i>Converter</i> that throws a
      * {@code ConversionException} if an error occurs.
      */
     public AbstractConverter() {
     }
 
     /**
-     * Construct a <i>Converter</i> that returns a default
+     * Constructs a <i>Converter</i> that returns a default
      * value if an error occurs.
      *
      * @param defaultValue The default value to be returned
@@ -101,22 +131,22 @@ public abstract class AbstractConverter implements Converter {
         setDefaultValue(defaultValue);
     }
 
-
-
     /**
-     * Indicates whether a default value will be returned or exception
-     * thrown in the event of a conversion error.
+     * Creates a standard conversion exception with a message indicating that
+     * the passed in value cannot be converted to the desired target type.
      *
-     * @return {@code true} if a default value will be returned for
-     * conversion errors or {@code false} if a {@link ConversionException}
-     * will be thrown.
+     * @param type the target type
+     * @param value the value to be converted
+     * @return a {@code ConversionException} with a standard message
+     * @since 1.9
      */
-    public boolean isUseDefault() {
-        return useDefault;
+    protected ConversionException conversionException(final Class<?> type, final Object value) {
+        return new ConversionException("Can't convert value '" + value
+                + "' to type " + type);
     }
 
     /**
-     * Convert the input object into an output object of the
+     * Converts the input object into an output object of the
      * specified type.
      *
      * @param <T> the target type of the conversion
@@ -180,38 +210,7 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Convert the input object into a String.
-     * <p>
-     * <b>N.B.</b>This implementation simply uses the value's
-     * {@code toString()} method and should be overridden if a
-     * more sophisticated mechanism for <i>conversion to a String</i>
-     * is required.
-     *
-     * @param value The input value to be converted.
-     * @return the converted String value.
-     * @throws Throwable if an error occurs converting to a String
-     */
-    protected String convertToString(final Object value) throws Throwable {
-        return value.toString();
-    }
-
-    /**
-     * Convert the input object into an output object of the
-     * specified type.
-     * <p>
-     * Typical implementations will provide a minimum of
-     * {@code String --&gt; type} conversion.
-     *
-     * @param <T> Target type of the conversion.
-     * @param type Data type to which this value should be converted.
-     * @param value The input value to be converted.
-     * @return The converted value.
-     * @throws Throwable if an error occurs converting to the specified type
-     */
-    protected abstract <T> T convertToType(Class<T> type, Object value) throws Throwable;
-
-    /**
-     * Return the first element from an Array (or Collection)
+     * Returns the first element from an Array (or Collection)
      * or the value unchanged if not an Array (or Collection).
      *
      * N.B. This needs to be overridden for array/Collection converters.
@@ -241,10 +240,80 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Handle Conversion Errors.
+     * Converts to the default type. This method is called if we do
+     * not have a target class. In this case, the T parameter is not set.
+     * Therefore, we can cast to it (which is required to fulfill the contract
+     * of the method signature).
+     *
+     * @param <T> the type of the result object
+     * @param targetClass the target class of the conversion
+     * @param value the value to be converted
+     * @return the converted value
+     */
+    private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
+        @SuppressWarnings("unchecked")
+        final
+        T result = (T) convert(getDefaultType(), value);
+        return result;
+    }
+
+    /**
+     * Converts the input object into a String.
+     * <p>
+     * <b>N.B.</b>This implementation simply uses the value's
+     * {@code toString()} method and should be overridden if a
+     * more sophisticated mechanism for <i>conversion to a String</i>
+     * is required.
+     *
+     * @param value The input value to be converted.
+     * @return the converted String value.
+     * @throws Throwable if an error occurs converting to a String
+     */
+    protected String convertToString(final Object value) throws Throwable {
+        return value.toString();
+    }
+
+    /**
+     * Converts the input object into an output object of the
+     * specified type.
+     * <p>
+     * Typical implementations will provide a minimum of
+     * {@code String --&gt; type} conversion.
+     *
+     * @param <T> Target type of the conversion.
+     * @param type Data type to which this value should be converted.
+     * @param value The input value to be converted.
+     * @return The converted value.
+     * @throws Throwable if an error occurs converting to the specified type
+     */
+    protected abstract <T> T convertToType(Class<T> type, Object value) throws Throwable;
+
+    /**
+     * Return the default value for conversions to the specified
+     * type.
+     * @param type Data type to which this value should be converted.
+     * @return The default value for the specified type.
+     */
+    protected Object getDefault(final Class<?> type) {
+        if (type.equals(String.class)) {
+            return null;
+        }
+        return defaultValue;
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     */
+    protected abstract Class<?> getDefaultType();
+
+    /**
+     * Handles Conversion Errors.
      * <p>
      * If a default value has been specified then it is returned
      * otherwise a ConversionException is thrown.
+     * </p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
@@ -333,11 +402,42 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
+     * Indicates whether a default value will be returned or exception
+     * thrown in the event of a conversion error.
+     *
+     * @return {@code true} if a default value will be returned for
+     * conversion errors or {@code false} if a {@link ConversionException}
+     * will be thrown.
+     */
+    public boolean isUseDefault() {
+        return useDefault;
+    }
+
+
+    /**
+     * Accessor method for Log instance.
+     * <p>
+     * The Log instance variable is transient and
+     * accessing it through this method ensures it
+     * is re-initialized when this instance is
+     * de-serialized.
+     *
+     * @return The Log instance.
+     */
+    Log log() {
+        if (log == null) {
+            log = LogFactory.getLog(getClass());
+        }
+        return log;
+    }
+
+    /**
      * Set the default value, converting as required.
      * <p>
      * If the default value is different from the type the
      * {@code Converter} handles, it will be converted
      * to the handled type.
+     * </p>
      *
      * @param defaultValue The default value to be returned
      * if the value to be converted is missing or an error
@@ -359,27 +459,7 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Return the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     */
-    protected abstract Class<?> getDefaultType();
-
-    /**
-     * Return the default value for conversions to the specified
-     * type.
-     * @param type Data type to which this value should be converted.
-     * @return The default value for the specified type.
-     */
-    protected Object getDefault(final Class<?> type) {
-        if (type.equals(String.class)) {
-            return null;
-        }
-        return defaultValue;
-    }
-
-    /**
-     * Provide a String representation of this converter.
+     * Converts this instance to a String.
      *
      * @return A String representation of this converter
      */
@@ -388,27 +468,9 @@ public abstract class AbstractConverter implements Converter {
         return toString(getClass()) + "[UseDefault=" + useDefault + "]";
     }
 
-
-
     /**
-     * Accessor method for Log instance.
-     * <p>
-     * The Log instance variable is transient and
-     * accessing it through this method ensures it
-     * is re-initialized when this instance is
-     * de-serialized.
+     * Converts a {@code java.lang.Class} to a String.
      *
-     * @return The Log instance.
-     */
-    Log log() {
-        if (log == null) {
-            log = LogFactory.getLog(getClass());
-        }
-        return log;
-    }
-
-    /**
-     * Provide a String representation of a {@code java.lang.Class}.
      * @param type The {@code java.lang.Class}.
      * @return The String representation.
      */
@@ -441,35 +503,4 @@ public abstract class AbstractConverter implements Converter {
         return typeName;
     }
 
-    /**
-     * Performs a conversion to the default type. This method is called if we do
-     * not have a target class. In this case, the T parameter is not set.
-     * Therefore, we can cast to it (which is required to fulfill the contract
-     * of the method signature).
-     *
-     * @param <T> the type of the result object
-     * @param targetClass the target class of the conversion
-     * @param value the value to be converted
-     * @return the converted value
-     */
-    private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
-        @SuppressWarnings("unchecked")
-        final
-        T result = (T) convert(getDefaultType(), value);
-        return result;
-    }
-
-    /**
-     * Generates a standard conversion exception with a message indicating that
-     * the passed in value cannot be converted to the desired target type.
-     *
-     * @param type the target type
-     * @param value the value to be converted
-     * @return a {@code ConversionException} with a standard message
-     * @since 1.9
-     */
-    protected ConversionException conversionException(final Class<?> type, final Object value) {
-        return new ConversionException("Can't convert value '" + value
-                + "' to type " + type);
-    }
 }
