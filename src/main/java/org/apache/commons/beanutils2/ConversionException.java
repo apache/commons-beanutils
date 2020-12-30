@@ -75,7 +75,7 @@ public class ConversionException extends RuntimeException {
     protected Throwable cause = null;
 
     /**
-     * Return the root cause of this conversion exception.
+     * Gets the root cause of this conversion exception.
      * @return the root cause of this conversion exception
      */
     @Override

@@ -289,7 +289,7 @@ public abstract class AbstractConverter implements Converter {
     protected abstract <T> T convertToType(Class<T> type, Object value) throws Throwable;
 
     /**
-     * Return the default value for conversions to the specified
+     * Gets the default value for conversions to the specified
      * type.
      * @param type Data type to which this value should be converted.
      * @return The default value for the specified type.

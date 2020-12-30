@@ -216,7 +216,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default type this {@code Converter} handles.
+     * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
      */
@@ -369,7 +369,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Return the default value for conversions to the specified
+     * Gets the default value for conversions to the specified
      * type.
      * @param type Data type to which this value should be converted.
      * @return The default value for the specified type.

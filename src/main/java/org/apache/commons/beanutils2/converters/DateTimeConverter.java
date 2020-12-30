@@ -132,7 +132,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return the Time Zone to use when converting dates
+     * Gets the Time Zone to use when converting dates
      * (or {@code null} if none specified.
      *
      * @return The Time Zone.
@@ -151,7 +151,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return the Locale for the <i>Converter</i>
+     * Gets the Locale for the <i>Converter</i>
      * (or {@code null} if none specified).
      *
      * @return The locale to use for conversion
@@ -182,7 +182,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return the date format patterns used to convert
+     * Gets the date format patterns used to convert
      * dates to/from a {@code java.lang.String}
      * (or {@code null} if none specified).
      *
@@ -540,7 +540,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return a {@code DateFormat} for the Locale.
+     * Gets a {@code DateFormat} for the Locale.
      * @param locale The Locale to create the Format with (may be null)
      * @param timeZone The Time Zone create the Format with (may be null)
      *

@@ -88,7 +88,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Return the value of a simple property with the specified name.
+     * Gets the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @return The property's value
@@ -112,7 +112,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Return the value of an indexed property with the specified name.
+     * Gets the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
@@ -136,7 +136,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Return the value of a mapped property with the specified name,
+     * Gets the value of a mapped property with the specified name,
      * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
@@ -157,7 +157,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
     /**
-     * Return the {@code DynaClass} instance that describes the set of
+     * Gets the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass

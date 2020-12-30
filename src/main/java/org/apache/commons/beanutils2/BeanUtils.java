@@ -201,7 +201,7 @@ public class BeanUtils {
 
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, as a String.  The index is specified as a method parameter and
      * must *not* be included in the property name expression
      *

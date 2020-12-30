@@ -50,7 +50,7 @@ public class Jira18BeanFactory {
             mapped.put("bar-key", "bar-value");
         }
         /**
-         * Return simple property.
+         * Gets simple property.
          *
          * @return The simple value
          */
@@ -68,7 +68,7 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Return indexed property.
+         * Gets indexed property.
          *
          * @param index The index
          * @return The indexed value
@@ -88,7 +88,7 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Return mapped property.
+         * Gets mapped property.
          *
          * @param key The mapped key
          * @return The mapped value

@@ -122,7 +122,7 @@ public class Jira339TestCase extends TestCase {
         private Comparator<?> comparator;
 
         /**
-         * Return the comparator.
+         * Gets the comparator.
          *
          * @return the comparator
          */

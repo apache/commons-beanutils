@@ -82,7 +82,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     /**
      * <p>
-     * Return a Map representation of this DynaBean.
+     * Gets a Map representation of this DynaBean.
      * <p>
      * This, for example, could be used in JSTL in the following way to access
      * a DynaBean's {@code fooProperty}:
@@ -130,7 +130,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the value of a simple property with the specified name.
+     * Gets the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @return The property's value
@@ -177,7 +177,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the value of an indexed property with the specified name.
+     * Gets the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be retrieved
      * @param index Index of the value to be retrieved
@@ -211,7 +211,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the value of a mapped property with the specified name,
+     * Gets the value of a mapped property with the specified name,
      * or {@code null} if there is no value for the specified key.
      *
      * @param name Name of the property whose value is to be retrieved
@@ -240,7 +240,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the {@code DynaClass} instance that describes the set of
+     * Gets the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass
@@ -391,7 +391,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the property descriptor for the specified property name.
+     * Gets the property descriptor for the specified property name.
      *
      * @param name Name of the property for which to retrieve the descriptor
      * @return The property descriptor

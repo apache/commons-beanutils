@@ -141,7 +141,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     // (because they are query methods)
 
     /**
-     * Return the value to which this map maps the specified key.  Returns
+     * Gets the value to which this map maps the specified key.  Returns
      * {@code null} if the map contains no mapping for this key, or if
      * there is a mapping with a value of {@code null}.  Use the
      * {@code containsKey()} method to disambiguate these cases.
@@ -160,7 +160,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return the number of key-value mappings in this map.
+     * Gets the number of key-value mappings in this map.
      *
      * @return the current size of the map
      */
@@ -175,7 +175,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return {@code true} if this map contains no mappings.
+     * Gets {@code true} if this map contains no mappings.
      *
      * @return is the map currently empty
      */
@@ -190,7 +190,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return {@code true} if this map contains a mapping for the
+     * Gets {@code true} if this map contains a mapping for the
      * specified key.
      *
      * @param key  the key to be searched for
@@ -207,7 +207,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return {@code true} if this map contains one or more keys mapping
+     * Gets {@code true} if this map contains one or more keys mapping
      * to the specified value.
      *
      * @param value  the value to be searched for
@@ -377,7 +377,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return the hash code value for this map.  This implementation uses
+     * Gets the hash code value for this map.  This implementation uses
      * exactly the code that is used to define the list hash function in the
      * documentation for the {@code Map.hashCode} method.
      *
@@ -402,7 +402,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return a shallow copy of this {@code FastHashMap} instance.
+     * Gets a shallow copy of this {@code FastHashMap} instance.
      * The keys and values themselves are not copied.
      *
      * @return a clone of this map
@@ -425,7 +425,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
 
     /**
-     * Return a collection view of the mappings contained in this map.  Each
+     * Gets a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a {@code Map.Entry}.
      * @return the set of map Map entries
      */
@@ -435,7 +435,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return a set view of the keys contained in this map.
+     * Gets a set view of the keys contained in this map.
      * @return the set of the Map's keys
      */
     @Override
@@ -444,7 +444,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Return a collection view of the values contained in this map.
+     * Gets a collection view of the values contained in this map.
      * @return the set of the Map's values
      */
     @Override

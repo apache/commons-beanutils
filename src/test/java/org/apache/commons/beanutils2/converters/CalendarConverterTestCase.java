@@ -45,7 +45,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     }
 
     /**
-     * Return the expected type
+     * Gets the expected type
      * @return The expected type
      */
     @Override

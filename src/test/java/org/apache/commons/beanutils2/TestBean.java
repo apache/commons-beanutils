@@ -556,7 +556,7 @@ public class TestBean implements Serializable {
     private static int counter = 0;
 
     /**
-     * Return the current value of the counter.
+     * Gets the current value of the counter.
      */
     public static int currentCounter() {
 

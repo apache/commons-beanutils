@@ -57,7 +57,7 @@ public final class LocalDateTimeConverter extends DateTimeConverter {
     }
 
     /**
-     * Return the default type this {@code Converter} handles.
+     * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
      */

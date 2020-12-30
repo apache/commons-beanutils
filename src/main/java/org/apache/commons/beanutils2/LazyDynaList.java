@@ -703,7 +703,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Return the DynaClass.
+     * Gets the DynaClass.
      */
     private DynaClass getDynaClass() {
         return elementDynaClass == null ? wrapDynaClass : elementDynaClass;

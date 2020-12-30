@@ -511,7 +511,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified array property of the specified
+     * Gets the value of the specified array property of the specified
      * bean, as a String array.
      *
      * @param bean Bean whose property is to be extracted
@@ -565,7 +565,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, as a String.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -593,7 +593,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, as a String.  The index is specified as a method parameter and
      * must *not* be included in the property name expression
      *
@@ -620,7 +620,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, as a String.  The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -648,7 +648,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped property of the specified
+     * Gets the value of the specified mapped property of the specified
      * bean, as a String.  The key is specified as a method parameter and
      * must *not* be included in the property name expression
      *
@@ -675,7 +675,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the (possibly nested) property of the specified
+     * Gets the value of the (possibly nested) property of the specified
      * name, for the specified bean, as a String.
      *
      * @param bean Bean whose property is to be extracted
@@ -701,7 +701,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified property of the specified bean,
+     * Gets the value of the specified property of the specified bean,
      * no matter which property reference format is used, as a String.
      *
      * @param bean Bean whose property is to be extracted
@@ -725,7 +725,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified simple property of the specified
+     * Gets the value of the specified simple property of the specified
      * bean, converted to a String.
      *
      * @param bean Bean whose property is to be extracted

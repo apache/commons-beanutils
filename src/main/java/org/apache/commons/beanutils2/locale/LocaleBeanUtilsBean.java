@@ -174,7 +174,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
 
     /**
-     * Return the value of the specified locale-sensitive indexed property
+     * Gets the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String. The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -207,7 +207,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensitive indexed property
+     * Gets the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}. The zero-relative index
      * of the required value must be included (in square brackets) as a suffix
@@ -238,7 +238,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensetive indexed property
+     * Gets the value of the specified locale-sensetive indexed property
      * of the specified bean, as a String using the specified conversion pattern.
      * The index is specified as a method parameter and
      * must *not* be included in the property name expression
@@ -266,7 +266,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensetive indexed property
+     * Gets the value of the specified locale-sensetive indexed property
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.
      * The index is specified as a method parameter and
@@ -293,7 +293,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified simple locale-sensitive property
+     * Gets the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the specified
      * conversion pattern.
      *
@@ -318,7 +318,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified simple locale-sensitive property
+     * Gets the value of the specified simple locale-sensitive property
      * of the specified bean, converted to a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.
      *
@@ -342,7 +342,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped locale-sensitive property
+     * Gets the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String using the specified conversion pattern.
      * The key is specified as a method parameter and must *not* be included in
      * the property name expression.
@@ -375,7 +375,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped locale-sensitive property
+     * Gets the value of the specified mapped locale-sensitive property
      * of the specified bean, as a String
      * The key is specified as a method parameter and must *not* be included
      * in the property name expression
@@ -402,7 +402,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensitive mapped property
+     * Gets the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the specified pattern.
      * The String-valued key of the required value
      * must be included (in parentheses) as a suffix to
@@ -436,7 +436,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensitive mapped property
+     * Gets the value of the specified locale-sensitive mapped property
      * of the specified bean, as a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.
      * The String-valued key of the required value
@@ -467,7 +467,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the (possibly nested) locale-sensitive property
+     * Gets the value of the (possibly nested) locale-sensitive property
      * of the specified name, for the specified bean,
      * as a String using the specified pattern.
      *
@@ -499,7 +499,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the (possibly nested) locale-sensitive property
+     * Gets the value of the (possibly nested) locale-sensitive property
      * of the specified name, for the specified bean, as a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.
      *
@@ -527,7 +527,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensitive property
+     * Gets the value of the specified locale-sensitive property
      * of the specified bean, no matter which property reference
      * format is used, as a String using the specified conversion pattern.
      *
@@ -554,7 +554,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Return the value of the specified locale-sensitive property
+     * Gets the value of the specified locale-sensitive property
      * of the specified bean, no matter which property reference
      * format is used, as a String using the default
      * conversion pattern of the corresponding {@link LocaleConverter}.

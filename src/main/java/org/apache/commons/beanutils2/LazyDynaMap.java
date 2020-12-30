@@ -151,7 +151,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Return the underlying Map backing this {@code DynaBean}
+     * Gets the underlying Map backing this {@code DynaBean}
      * @return the underlying Map
      * @since 1.8.0
      */
@@ -183,7 +183,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
 
     /**
-     * Return the name of this DynaClass (analogous to the
+     * Gets the name of this DynaClass (analogous to the
      * {@code getName()</code> method of <code>java.lang.Class})
      *
      * @return the name of the DynaClass

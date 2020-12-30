@@ -68,7 +68,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Return the index value from the property expression or -1.
+     * Gets the index value from the property expression or -1.
      *
      * @param expression The property expression
      * @return The index value or -1 if the property is not indexed
@@ -107,7 +107,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Return the map key from the property expression or {@code null}.
+     * Gets the map key from the property expression or {@code null}.
      *
      * @param expression The property expression
      * @return The index value
@@ -134,7 +134,7 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
-     * Return the property name from the property expression.
+     * Gets the property name from the property expression.
      *
      * @param expression The property expression
      * @return The property name

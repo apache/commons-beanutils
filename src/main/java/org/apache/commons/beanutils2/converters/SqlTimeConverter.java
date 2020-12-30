@@ -57,7 +57,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
     }
 
     /**
-     * Return the default type this {@code Converter} handles.
+     * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
      * @since 1.8.0
@@ -68,7 +68,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
     }
 
     /**
-     * Return a {@code DateFormat} for the Locale.
+     * Gets a {@code DateFormat} for the Locale.
      * @param locale TODO
      * @param timeZone TODO
      *

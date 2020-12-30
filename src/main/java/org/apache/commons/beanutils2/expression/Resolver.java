@@ -111,7 +111,7 @@ public interface Resolver {
     String getKey(String expression);
 
     /**
-     * Return the property name from the property expression.
+     * Gets the property name from the property expression.
      *
      * @param expression The property expression
      * @return The property name

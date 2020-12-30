@@ -122,7 +122,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
 
     /**
-     * Return whether decimals are allowed in the number.
+     * Gets whether decimals are allowed in the number.
      *
      * @return Whether decimals are allowed in the number
      */
@@ -142,7 +142,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Return the number format pattern used to convert
+     * Gets the number format pattern used to convert
      * Numbers to/from a {@code java.lang.String}
      * (or {@code null} if none specified).
      * <p>
@@ -170,7 +170,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Return the Locale for the <i>Converter</i>
+     * Gets the Locale for the <i>Converter</i>
      * (or {@code null} if none specified).
      *
      * @return The locale to use for conversion
@@ -492,7 +492,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Return a NumberFormat to use for Conversion.
+     * Gets a NumberFormat to use for Conversion.
      *
      * @return The NumberFormat.
      */

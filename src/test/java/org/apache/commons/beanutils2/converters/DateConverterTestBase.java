@@ -55,7 +55,7 @@ public abstract class DateConverterTestBase extends TestCase {
 
 
     /**
-     * Return the expected type
+     * Gets the expected type
      * @return The expected type
      */
     protected abstract Class<?> getExpectedType();

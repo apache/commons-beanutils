@@ -204,7 +204,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     /**
      * <p>
-     * Return a Map representation of this DynaBean.
+     * Gets a Map representation of this DynaBean.
      * </p>
      * This, for example, could be used in JSTL in the following way to access
      * a DynaBean's {@code fooProperty}:
@@ -417,7 +417,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Return the {@code DynaClass} instance that describes the set of
+     * Gets the {@code DynaClass} instance that describes the set of
      * properties available for this DynaBean.
      *
      * @return The associated DynaClass

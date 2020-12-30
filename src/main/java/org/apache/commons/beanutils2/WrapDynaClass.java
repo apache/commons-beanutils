@@ -136,7 +136,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * Return the class of the underlying wrapped bean.
+     * Gets the class of the underlying wrapped bean.
      *
      * @return the class of the underlying wrapped bean
      * @since 1.8.0
@@ -146,7 +146,7 @@ public class WrapDynaClass implements DynaClass {
     }
 
     /**
-     * Return the name of this DynaClass (analogous to the
+     * Gets the name of this DynaClass (analogous to the
      * {@code getName()} method of {@code java.lang.Class}, which
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
@@ -162,7 +162,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * Return a property descriptor for the specified property, if it exists;
+     * Gets a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
@@ -240,7 +240,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * Return the PropertyDescriptor for the specified property name, if any;
+     * Gets the PropertyDescriptor for the specified property name, if any;
      * otherwise return {@code null}.
      *
      * @param name Name of the property to be retrieved

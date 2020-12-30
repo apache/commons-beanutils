@@ -1251,7 +1251,7 @@ public class MethodUtils {
     }
 
     /**
-     * Return the method from the cache, if present.
+     * Gets the method from the cache, if present.
      *
      * @param md The method descriptor
      * @return The cached method

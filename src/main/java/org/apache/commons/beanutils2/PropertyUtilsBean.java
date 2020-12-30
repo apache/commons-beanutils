@@ -95,7 +95,7 @@ public class PropertyUtilsBean {
 
 
     /**
-     * Return the PropertyUtils bean instance.
+     * Gets the PropertyUtils bean instance.
      * @return The PropertyUtils bean instance
      */
     protected static PropertyUtilsBean getInstance() {
@@ -135,7 +135,7 @@ public class PropertyUtilsBean {
 
 
     /**
-     * Return the configured {@link Resolver} implementation used by BeanUtils.
+     * Gets the configured {@link Resolver} implementation used by BeanUtils.
      * <p>
      * The {@link Resolver} handles the <i>property name</i>
      * expressions and the implementation in use effectively
@@ -379,7 +379,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -437,7 +437,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified indexed property of the specified
+     * Gets the value of the specified indexed property of the specified
      * bean, with no type conversions.  In addition to supporting the JavaBeans
      * specification, this method has been extended to support
      * {@code List} objects as well.
@@ -547,7 +547,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped property of the
+     * Gets the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
      * required value must be included (in brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -600,7 +600,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified mapped property of the specified
+     * Gets the value of the specified mapped property of the specified
      * bean, with no type conversions.
      *
      * @param bean Bean whose property is to be extracted
@@ -722,7 +722,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the (possibly nested) property of the specified
+     * Gets the value of the (possibly nested) property of the specified
      * name, for the specified bean, with no type conversions.
      *
      * @param bean Bean whose property is to be extracted
@@ -833,7 +833,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified property of the specified bean,
+     * Gets the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
      * type conversions.
      *
@@ -1047,7 +1047,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the Java Class representing the property type of the specified
+     * Gets the Java Class representing the property type of the specified
      * property, or {@code null} if there is no such property for the
      * specified bean.  This method follows the same name resolution rules
      * used by {@code getPropertyDescriptor()}, so if the last element
@@ -1169,7 +1169,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Return the value of the specified simple property of the specified
+     * Gets the value of the specified simple property of the specified
      * bean, with no type conversions.
      *
      * @param bean Bean whose property is to be extracted

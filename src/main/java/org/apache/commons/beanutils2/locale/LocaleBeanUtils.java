@@ -120,7 +120,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * Return the value of the specified locale-sensitive indexed property
+     * Gets the value of the specified locale-sensitive indexed property
      * of the specified bean, as a String using the default conversion pattern of
      * the corresponding {@link LocaleConverter}.
      *

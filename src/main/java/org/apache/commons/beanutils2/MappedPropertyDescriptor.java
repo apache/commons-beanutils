@@ -314,7 +314,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
 
     /**
-     * Return a capitalized version of the specified property name.
+     * Gets a capitalized version of the specified property name.
      *
      * @param s The property name
      */

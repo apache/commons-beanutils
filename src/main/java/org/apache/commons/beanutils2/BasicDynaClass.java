@@ -128,7 +128,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * Return the name of this DynaClass (analogous to the
+     * Gets the name of this DynaClass (analogous to the
      * {@code getName()} method of {@code java.lang.Class}, which
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
@@ -143,7 +143,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Return a property descriptor for the specified property, if it exists;
+     * Gets a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
      *
      * @param name Name of the dynamic property for which a descriptor
@@ -213,7 +213,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * Return the Class object we will use to create new instances in the
+     * Gets the Class object we will use to create new instances in the
      * {@code newInstance()} method.  This Class <strong>MUST</strong>
      * implement the {@code DynaBean} interface.
      *

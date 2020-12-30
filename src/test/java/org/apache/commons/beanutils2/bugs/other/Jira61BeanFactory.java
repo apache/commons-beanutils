@@ -52,7 +52,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Return simpleReadOnly
+         * Gets simpleReadOnly
          *
          * @return the simple value
          */
@@ -70,7 +70,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Return indexed property.
+         * Gets indexed property.
          *
          * @param index The index
          * @return The indexed value
@@ -90,7 +90,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Return mapped property.
+         * Gets mapped property.
          *
          * @param key The mapped key
          * @return The mapped value

@@ -48,7 +48,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
     }
 
     /**
-     * Return the expected type
+     * Gets the expected type
      * @return The expected type
      */
     @Override
