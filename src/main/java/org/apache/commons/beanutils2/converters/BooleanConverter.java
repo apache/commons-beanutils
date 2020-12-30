@@ -45,12 +45,8 @@ package org.apache.commons.beanutils2.converters;
  */
 public final class BooleanConverter extends AbstractConverter {
 
-
-
-
-
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will throw a
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
@@ -60,7 +56,7 @@ public final class BooleanConverter extends AbstractConverter {
 
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      *
@@ -76,7 +72,7 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will throw a
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
@@ -99,7 +95,7 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.Converter} that will return
+     * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return
      * the specified default value if a conversion error occurs.
      * <p>
      * The provided string arrays are copied, so that changes to the elements
@@ -128,15 +124,6 @@ public final class BooleanConverter extends AbstractConverter {
         this.falseStrings = copyStrings(falseStrings);
     }
 
-
-
-
-
-
-
-
-
-
     /**
      * The set of strings that are known to map to Boolean.TRUE.
      */
@@ -147,10 +134,8 @@ public final class BooleanConverter extends AbstractConverter {
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
 
-
-
     /**
-     * Return the default type this {@code Converter} handles.
+     * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
      * @since 1.8.0
@@ -161,7 +146,7 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * Convert the specified input object into an output object of the
+     * Converts the specified input object into an output object of the
      * specified type.
      *
      * @param <T> Target type of the conversion.
@@ -207,12 +192,13 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
     /**
-     * This method creates a copy of the provided array, and ensures that
+     * Copies the provided array, and ensures that
      * all the strings in the newly created array contain only lower-case
      * letters.
      * <p>
      * Using this method to copy string arrays means that changes to the
      * src array do not modify the dst array.
+     * </p>
      */
     private static String[] copyStrings(final String[] src) {
         final String[] dst = new String[src.length];
