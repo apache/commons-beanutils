@@ -60,7 +60,7 @@ public final class URIConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.net.URI or object into a String.</p>
+     * <p>Converts a java.net.URI or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

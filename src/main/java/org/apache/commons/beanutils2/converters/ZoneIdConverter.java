@@ -62,7 +62,7 @@ public final class ZoneIdConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.time.ZoneId or object into a String.</p>
+     * <p>Converts a java.time.ZoneId or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

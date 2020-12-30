@@ -60,7 +60,7 @@ public final class EnumConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.lang.Enum or object into a String.</p>
+     * <p>Converts a java.lang.Enum or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

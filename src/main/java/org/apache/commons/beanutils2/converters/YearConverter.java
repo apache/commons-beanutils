@@ -62,7 +62,7 @@ public final class YearConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.time.Year or object into a String.</p>
+     * <p>Converts a java.time.Year or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

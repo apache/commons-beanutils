@@ -58,7 +58,7 @@ public final class CharacterConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.lang.Class or object into a String.</p>
+     * <p>Converts a java.lang.Class or object into a String.</p>
      *
      * @param value The input value to be converted
      * @return the converted String value.

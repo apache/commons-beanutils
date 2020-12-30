@@ -60,7 +60,7 @@ public final class UUIDConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert a java.util.UUID or object into a String.</p>
+     * <p>Converts a java.util.UUID or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.
