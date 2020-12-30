@@ -39,7 +39,7 @@ public class ConvertUtils {
 
 
     /**
-     * <p>Convert the specified value into a String.</p>
+     * <p>Converts the specified value into a String.</p>
      *
      * <p>For more details see {@code ConvertUtilsBean}.</p>
      *
@@ -54,7 +54,7 @@ public class ConvertUtils {
 
 
     /**
-     * <p>Convert the specified value to an object of the specified class (if
+     * <p>Converts the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.</p>
      *
      * <p>For more details see {@code ConvertUtilsBean}.</p>
@@ -87,7 +87,7 @@ public class ConvertUtils {
     }
 
     /**
-     * <p>Convert the value to an object of the specified class (if
+     * <p>Converts the value to an object of the specified class (if
      * possible).</p>
      *
      * @param value Value to be converted (may be null)

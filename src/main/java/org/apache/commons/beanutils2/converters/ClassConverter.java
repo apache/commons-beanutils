@@ -74,7 +74,7 @@ public final class ClassConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert the input object into a java.lang.Class.</p>
+     * <p>Converts the input object into a java.lang.Class.</p>
      *
      * @param <T> Target type of the conversion.
      * @param type Data type to which this value should be converted.

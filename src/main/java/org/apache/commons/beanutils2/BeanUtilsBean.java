@@ -1045,7 +1045,7 @@ public class BeanUtilsBean {
     }
 
     /**
-     * <p>Convert the value to an object of the specified class (if
+     * <p>Converts the value to an object of the specified class (if
      * possible).</p>
      *
      * @param value Value to be converted (may be null)

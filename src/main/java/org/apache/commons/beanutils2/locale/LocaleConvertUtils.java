@@ -89,7 +89,7 @@ public class LocaleConvertUtils {
 
 
     /**
-     * <p>Convert the specified locale-sensitive value into a String.</p>
+     * <p>Converts the specified locale-sensitive value into a String.</p>
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
      *
@@ -102,7 +102,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Convert the specified locale-sensitive value into a String
+     * <p>Converts the specified locale-sensitive value into a String
      * using the conversion pattern.</p>
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
@@ -117,7 +117,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Convert the specified locale-sensitive value into a String
+     * <p>Converts the specified locale-sensitive value into a String
      * using the particular conversion pattern.</p>
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
@@ -134,7 +134,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Convert the specified value to an object of the specified class (if
+     * <p>Converts the specified value to an object of the specified class (if
      * possible).  Otherwise, return a String representation of the value.</p>
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
@@ -150,7 +150,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Convert the specified value to an object of the specified class (if
+     * <p>Converts the specified value to an object of the specified class (if
      * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.</p>
      *
@@ -168,7 +168,7 @@ public class LocaleConvertUtils {
     }
 
     /**
-     * <p>Convert the specified value to an object of the specified class (if
+     * <p>Converts the specified value to an object of the specified class (if
      * possible) using the conversion pattern. Otherwise, return a String
      * representation of the value.</p>
      *

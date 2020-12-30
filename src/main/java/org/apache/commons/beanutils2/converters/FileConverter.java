@@ -60,7 +60,7 @@ public final class FileConverter extends AbstractConverter {
     }
 
     /**
-     * <p>Convert the input object into a java.io.File.</p>
+     * <p>Converts the input object into a java.io.File.</p>
      *
      * @param <T> The target type of the conversion.
      * @param type Data type to which this value should be converted.

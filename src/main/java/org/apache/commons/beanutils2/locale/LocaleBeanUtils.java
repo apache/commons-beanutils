@@ -556,7 +556,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Convert the specified value to the required type using the
+     * <p>Converts the specified value to the required type using the
      * specified conversion pattern.</p>
      *
      * <p>For more details see {@code LocaleBeanUtilsBean}</p>
@@ -574,7 +574,7 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
     /**
-     * <p>Convert the specified value to the required type.</p>
+     * <p>Converts the specified value to the required type.</p>
      *
      * <p>For more details see {@code LocaleBeanUtilsBean}</p>
      *
