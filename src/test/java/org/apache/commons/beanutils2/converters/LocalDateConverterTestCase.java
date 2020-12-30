@@ -40,7 +40,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
 
 
     /**
-     * Construct a new Date test case.
+     * Constructs a new Date test case.
      * @param name Test Name
      */
     public LocalDateConverterTestCase(final String name) {

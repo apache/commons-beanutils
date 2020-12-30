@@ -49,7 +49,7 @@ public class WrapDynaClass implements DynaClass {
 
 
     /**
-     * Construct a new WrapDynaClass for the specified JavaBean class.  This
+     * Constructs a new WrapDynaClass for the specified JavaBean class.  This
      * constructor is private; WrapDynaClass instances will be created as
      * needed via calls to the {@code createDynaClass(Class)} method.
      *

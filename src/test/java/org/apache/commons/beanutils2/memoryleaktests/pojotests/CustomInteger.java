@@ -25,14 +25,14 @@ public class CustomInteger extends Number {
     private final int i;
 
     /**
-     * Construct a new instance.
+     * Constructs a new instance.
      */
     public CustomInteger() {
         this.i = 12345;
     }
 
     /**
-     * Construct a new instance.
+     * Constructs a new instance.
      * @param i the integer value
      */
     public CustomInteger(final int i) {

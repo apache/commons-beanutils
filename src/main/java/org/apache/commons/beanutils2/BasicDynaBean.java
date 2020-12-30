@@ -55,7 +55,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Construct a new {@code DynaBean} associated with the specified
+     * Constructs a new {@code DynaBean} associated with the specified
      * {@code DynaClass} instance.
      *
      * @param dynaClass The DynaClass we are associated with

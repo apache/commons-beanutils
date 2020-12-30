@@ -80,14 +80,14 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
 
     /**
-     * Construct an empty map.
+     * Constructs an empty map.
      */
     public WeakFastHashMap() {
         this.map = createMap();
     }
 
     /**
-     * Construct an empty map with the specified capacity.
+     * Constructs an empty map with the specified capacity.
      *
      * @param capacity  the initial capacity of the empty map
      */
@@ -96,7 +96,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Construct an empty map with the specified capacity and load factor.
+     * Constructs an empty map with the specified capacity and load factor.
      *
      * @param capacity  the initial capacity of the empty map
      * @param factor  the load factor of the new map
@@ -106,7 +106,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Construct a new map with the same mappings as the specified map.
+     * Constructs a new map with the same mappings as the specified map.
      *
      * @param map  the map whose mappings are to be copied
      */

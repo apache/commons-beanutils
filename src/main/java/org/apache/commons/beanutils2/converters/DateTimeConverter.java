@@ -101,14 +101,14 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
 
     /**
-     * Construct a Date/Time <i>Converter</i> that throws a
+     * Constructs a Date/Time <i>Converter</i> that throws a
      * {@code ConversionException} if an error occurs.
      */
     public DateTimeConverter() {
     }
 
     /**
-     * Construct a Date/Time <i>Converter</i> that returns a default
+     * Constructs a Date/Time <i>Converter</i> that returns a default
      * value if an error occurs.
      *
      * @param defaultValue The default value to be returned

@@ -60,7 +60,7 @@ package org.apache.commons.beanutils2;
  */
 public class DynaBeanPropertyMapDecorator extends BaseDynaBeanMapDecorator<String> {
     /**
-     * Construct a Map for the specified {@link DynaBean}.
+     * Constructs a Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
      * @param readOnly {@code true} if the Map is read only

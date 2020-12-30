@@ -36,7 +36,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Construct a new {@code DynaBean} associated with the specified
+     * Constructs a new {@code DynaBean} associated with the specified
      * JavaBean instance.
      *
      * @param instance JavaBean instance to be wrapped

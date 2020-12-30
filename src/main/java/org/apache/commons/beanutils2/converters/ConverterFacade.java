@@ -34,7 +34,7 @@ public final class ConverterFacade implements Converter {
     private final Converter converter;
 
     /**
-     * Construct a converter which delegates to the specified
+     * Constructs a converter which delegates to the specified
      * {@link Converter} implementation.
      *
      * @param converter The converter to delegate to

@@ -32,14 +32,14 @@ package org.apache.commons.beanutils2.converters;
 public final class ClassConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.lang.Class</b> <i>Converter</i> that throws
+     * Constructs a <b>java.lang.Class</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public ClassConverter() {
     }
 
     /**
-     * Construct a <b>java.lang.Class</b> <i>Converter</i> that returns
+     * Constructs a <b>java.lang.Class</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

@@ -36,7 +36,7 @@ public class DynaPropertyTestCase extends TestCase {
     private DynaProperty testProperty3Duplicate;
 
     /**
-     * Construct a new instance of this test case.
+     * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */

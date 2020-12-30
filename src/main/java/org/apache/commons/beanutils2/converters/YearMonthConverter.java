@@ -32,14 +32,14 @@ import java.time.YearMonth;
 public final class YearMonthConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.time.YearMonth</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.YearMonth</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public YearMonthConverter() {
     }
 
     /**
-     * Construct a <b>java.time.YearMonth</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.YearMonth</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

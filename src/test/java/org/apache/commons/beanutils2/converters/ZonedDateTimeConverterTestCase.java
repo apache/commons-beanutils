@@ -40,7 +40,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
 
 
     /**
-     * Construct a new Date test case.
+     * Constructs a new Date test case.
      * @param name Test Name
      */
     public ZonedDateTimeConverterTestCase(final String name) {

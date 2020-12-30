@@ -138,7 +138,7 @@ public class ArrayConverter extends AbstractConverter {
 
 
     /**
-     * Construct an <b>array</b> {@code Converter} with the specified
+     * Constructs an <b>array</b> {@code Converter} with the specified
      * <b>component</b> {@code Converter} that throws a
      * {@code ConversionException} if an error occurs.
      *
@@ -162,7 +162,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Construct an <b>array</b> {@code Converter} with the specified
+     * Constructs an <b>array</b> {@code Converter} with the specified
      * <b>component</b> {@code Converter} that returns a default
      * array of the specified size (or {@code null}) if an error occurs.
      *

@@ -35,7 +35,7 @@ import java.math.BigInteger;
 public final class BigIntegerConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that throws
+     * Constructs a <b>java.math.BigInteger</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public BigIntegerConverter() {
@@ -43,7 +43,7 @@ public final class BigIntegerConverter extends NumberConverter {
     }
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that returns
+     * Constructs a <b>java.math.BigInteger</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

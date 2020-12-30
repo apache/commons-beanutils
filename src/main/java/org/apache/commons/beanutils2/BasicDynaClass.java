@@ -39,7 +39,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * Construct a new BasicDynaClass with default parameters.
+     * Constructs a new BasicDynaClass with default parameters.
      */
     public BasicDynaClass() {
 
@@ -48,7 +48,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Construct a new BasicDynaClass with the specified parameters.
+     * Constructs a new BasicDynaClass with the specified parameters.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances
@@ -60,7 +60,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Construct a new BasicDynaClass with the specified parameters.
+     * Constructs a new BasicDynaClass with the specified parameters.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances

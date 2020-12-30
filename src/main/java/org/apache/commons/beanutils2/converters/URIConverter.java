@@ -30,14 +30,14 @@ import java.net.URI;
 public final class URIConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.net.URI</b> <i>Converter</i> that throws
+     * Constructs a <b>java.net.URI</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public URIConverter() {
     }
 
     /**
-     * Construct a <b>java.net.URI</b> <i>Converter</i> that returns
+     * Constructs a <b>java.net.URI</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

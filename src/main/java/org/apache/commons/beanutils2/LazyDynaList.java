@@ -196,7 +196,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a LazyDynaList with the
+     * Constructs a LazyDynaList with the
      * specified capacity.
      *
      * @param capacity The initial capacity of the list.
@@ -207,7 +207,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList with a
+     * Constructs a  LazyDynaList with a
      * specified DynaClass for its elements.
      *
      * @param elementDynaClass The DynaClass of the List's elements.
@@ -217,7 +217,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList with a
+     * Constructs a  LazyDynaList with a
      * specified type for its elements.
      *
      * @param elementType The Type of the List's elements.
@@ -227,7 +227,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList populated with the
+     * Constructs a  LazyDynaList populated with the
      * elements of a Collection.
      *
      * @param collection The Collection to populate the List from.
@@ -238,7 +238,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * Construct a  LazyDynaList populated with the
+     * Constructs a  LazyDynaList populated with the
      * elements of an Array.
      *
      * @param array The Array to populate the List from.

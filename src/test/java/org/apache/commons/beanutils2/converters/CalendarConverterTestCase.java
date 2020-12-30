@@ -37,7 +37,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
 
 
     /**
-     * Construct a new Calendar test case.
+     * Constructs a new Calendar test case.
      * @param name Test Name
      */
     public CalendarConverterTestCase(final String name) {

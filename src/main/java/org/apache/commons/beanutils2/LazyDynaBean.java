@@ -166,14 +166,14 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
 
     /**
-     * Construct a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
+     * Constructs a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
      */
     public LazyDynaBean() {
         this(new LazyDynaClass());
     }
 
     /**
-     * Construct a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
+     * Constructs a new {@code LazyDynaBean</code> with a <code>LazyDynaClass} instance.
      *
      * @param name Name of this DynaBean class
      */
@@ -182,7 +182,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Construct a new {@code DynaBean} associated with the specified
+     * Constructs a new {@code DynaBean} associated with the specified
      * {@code DynaClass</code> instance - if its not a <code>MutableDynaClass}
      * then a new {@code LazyDynaClass} is created and the properties copied.
      *

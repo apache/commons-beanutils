@@ -107,7 +107,7 @@ public class ContextClassLoaderLocal<T> {
     private T globalValue;
 
     /**
-     * Construct a context classloader instance
+     * Constructs a context classloader instance
      */
     public ContextClassLoaderLocal() {
     }

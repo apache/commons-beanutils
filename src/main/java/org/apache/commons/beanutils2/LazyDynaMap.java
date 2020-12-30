@@ -77,7 +77,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap} with the specified name.
+     * Constructs a new {@code LazyDynaMap} with the specified name.
      *
      * @param name Name of this DynaBean class
      */
@@ -86,7 +86,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap</code> with the specified <code>Map}.
+     * Constructs a new {@code LazyDynaMap</code> with the specified <code>Map}.
      *
      * @param values The Map backing this {@code LazyDynaMap}
      */
@@ -95,7 +95,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap</code> with the specified name and  <code>Map}.
+     * Constructs a new {@code LazyDynaMap</code> with the specified name and  <code>Map}.
      *
      * @param name Name of this DynaBean class
      * @param values The Map backing this {@code LazyDynaMap}
@@ -107,7 +107,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap} with the specified properties.
+     * Constructs a new {@code LazyDynaMap} with the specified properties.
      *
      * @param properties Property descriptors for the supported properties
      */
@@ -116,7 +116,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap} with the specified name and properties.
+     * Constructs a new {@code LazyDynaMap} with the specified name and properties.
      *
      * @param name Name of this DynaBean class
      * @param properties Property descriptors for the supported properties
@@ -131,7 +131,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Construct a new {@code LazyDynaMap} based on an exisiting DynaClass
+     * Constructs a new {@code LazyDynaMap} based on an exisiting DynaClass
      *
      * @param dynaClass DynaClass to copy the name and properties from
      */

@@ -200,7 +200,7 @@ public class ConvertUtilsBean {
 
 
 
-    /** Construct a bean with standard converters registered */
+    /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
         converters.setFast(false);
         deregister();

@@ -63,7 +63,7 @@ public class DynaProperty implements Serializable {
 
 
     /**
-     * Construct a property that accepts any data type.
+     * Constructs a property that accepts any data type.
      *
      * @param name Name of the property being described
      */
@@ -74,7 +74,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Construct a property of the specified data type.
+     * Constructs a property of the specified data type.
      *
      * @param name Name of the property being described
      * @param type Java class representing the property data type
@@ -90,7 +90,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Construct an indexed or mapped {@code DynaProperty} that supports (pseudo)-introspection
+     * Constructs an indexed or mapped {@code DynaProperty} that supports (pseudo)-introspection
      * of the content type.
      *
      * @param name Name of the property being described

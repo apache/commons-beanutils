@@ -38,7 +38,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
 
 
     /**
-     * Construct a new Date test case.
+     * Constructs a new Date test case.
      * @param name Test Name
      */
     public DateConverterTestCase(final String name) {

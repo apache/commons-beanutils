@@ -39,7 +39,7 @@ public class CharacterConverterTestCase extends TestCase {
 
 
     /**
-     * Construct a new Character Converter test case.
+     * Constructs a new Character Converter test case.
      * @param name Test Name
      */
     public CharacterConverterTestCase(final String name) {

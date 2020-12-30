@@ -33,7 +33,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     private static Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
 
     /**
-     * Construct a new instance of this test case.
+     * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */

@@ -41,7 +41,7 @@ public class ArrayConverterTestCase extends TestCase {
 
 
     /**
-     * Construct a new Array Converter test case.
+     * Constructs a new Array Converter test case.
      * @param name Test Name
      */
     public ArrayConverterTestCase(final String name) {

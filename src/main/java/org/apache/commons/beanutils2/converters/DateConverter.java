@@ -35,14 +35,14 @@ import java.util.Date;
 public final class DateConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.util.Date</b> <i>Converter</i> that throws
+     * Constructs a <b>java.util.Date</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public DateConverter() {
     }
 
     /**
-     * Construct a <b>java.util.Date</b> <i>Converter</i> that returns
+     * Constructs a <b>java.util.Date</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

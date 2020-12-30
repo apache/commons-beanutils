@@ -35,14 +35,14 @@ import java.util.Calendar;
 public final class CalendarConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.util.Calendar</b> <i>Converter</i> that throws
+     * Constructs a <b>java.util.Calendar</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public CalendarConverter() {
     }
 
     /**
-     * Construct a <b>java.util.Calendar</b> <i>Converter</i> that returns
+     * Constructs a <b>java.util.Calendar</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

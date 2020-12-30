@@ -98,7 +98,7 @@ public abstract class NumberConverter extends AbstractConverter {
 
 
     /**
-     * Construct a <b>java.lang.Number</b> <i>Converter</i>
+     * Constructs a <b>java.lang.Number</b> <i>Converter</i>
      * that throws a {@code ConversionException} if a error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
@@ -108,7 +108,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Construct a {@code java.lang.Number} <i>Converter</i> that returns
+     * Constructs a {@code java.lang.Number} <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed

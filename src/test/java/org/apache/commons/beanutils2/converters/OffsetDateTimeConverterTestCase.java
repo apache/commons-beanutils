@@ -40,7 +40,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
 
 
     /**
-     * Construct a new Date test case.
+     * Constructs a new Date test case.
      * @param name Test Name
      */
     public OffsetDateTimeConverterTestCase(final String name) {

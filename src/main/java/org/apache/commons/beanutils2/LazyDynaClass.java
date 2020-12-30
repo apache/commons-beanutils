@@ -59,14 +59,14 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     protected boolean returnNull = false;
 
     /**
-     * Construct a new LazyDynaClass with default parameters.
+     * Constructs a new LazyDynaClass with default parameters.
      */
     public LazyDynaClass() {
         this(null, (DynaProperty[])null);
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified name.
+     * Constructs a new LazyDynaClass with the specified name.
      *
      * @param name Name of this DynaBean class
      */
@@ -75,7 +75,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified name and DynaBean class.
+     * Constructs a new LazyDynaClass with the specified name and DynaBean class.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances
@@ -85,7 +85,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified name and properties.
+     * Constructs a new LazyDynaClass with the specified name and properties.
      *
      * @param name Name of this DynaBean class
      * @param properties Property descriptors for the supported properties
@@ -95,7 +95,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Construct a new LazyDynaClass with the specified name, DynaBean class and properties.
+     * Constructs a new LazyDynaClass with the specified name, DynaBean class and properties.
      *
      * @param name Name of this DynaBean class
      * @param dynaBeanClass The implementation class for new instances

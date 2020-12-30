@@ -46,7 +46,7 @@ public class DefaultResolverTestCase extends TestCase {
     private final String[] removeProperties  = new String[] {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
 
     /**
-     * Construct a DefaultResolver Test Case.
+     * Constructs a DefaultResolver Test Case.
      * @param name The name of the test
      */
     public DefaultResolverTestCase(final String name) {

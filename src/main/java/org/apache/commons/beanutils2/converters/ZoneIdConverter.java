@@ -32,14 +32,14 @@ import java.time.ZoneId;
 public final class ZoneIdConverter extends AbstractConverter {
 
     /**
-     * Construct a <b>java.time.ZoneId</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.ZoneId</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public ZoneIdConverter() {
     }
 
     /**
-     * Construct a <b>java.time.ZoneId</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.ZoneId</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

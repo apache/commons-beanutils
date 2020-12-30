@@ -68,7 +68,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Construct a Map for the specified {@link DynaBean}.
+     * Constructs a Map for the specified {@link DynaBean}.
      *
      * @param dynaBean The dyna bean being decorated
      * @param readOnly {@code true} if the Map is read only

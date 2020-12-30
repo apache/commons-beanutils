@@ -38,14 +38,14 @@ import java.time.LocalDateTime;
 public final class LocalDateTimeConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.time.LocalDateTime</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.LocalDateTime</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public LocalDateTimeConverter() {
     }
 
     /**
-     * Construct a <b>java.time.LocalDateTime</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.LocalDateTime</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

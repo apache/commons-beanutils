@@ -73,7 +73,7 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
     /**
-     * Construct a new instance of this test case.
+     * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */

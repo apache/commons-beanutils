@@ -45,7 +45,7 @@ public abstract class DateConverterTestBase extends TestCase {
 
 
     /**
-     * Construct a new test case.
+     * Constructs a new test case.
      * @param name Name of the test
      */
     public DateConverterTestBase(final String name) {

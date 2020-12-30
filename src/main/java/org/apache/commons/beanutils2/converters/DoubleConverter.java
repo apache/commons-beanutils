@@ -33,7 +33,7 @@ package org.apache.commons.beanutils2.converters;
 public final class DoubleConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.lang.Double</b> <i>Converter</i> that throws
+     * Constructs a <b>java.lang.Double</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public DoubleConverter() {
@@ -41,7 +41,7 @@ public final class DoubleConverter extends NumberConverter {
     }
 
     /**
-     * Construct a <b>java.lang.Double</b> <i>Converter</i> that returns
+     * Constructs a <b>java.lang.Double</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

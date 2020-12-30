@@ -39,7 +39,7 @@ public class ClassConverterTestCase extends TestCase {
 
 
     /**
-     * Construct a new Class Converter test case.
+     * Constructs a new Class Converter test case.
      * @param name Test Name
      */
     public ClassConverterTestCase(final String name) {

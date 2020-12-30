@@ -38,14 +38,14 @@ import java.time.ZonedDateTime;
 public final class ZonedDateTimeConverter extends DateTimeConverter {
 
     /**
-     * Construct a <b>java.time.ZonedDateTime</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.ZonedDateTime</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public ZonedDateTimeConverter() {
     }
 
     /**
-     * Construct a <b>java.time.ZonedDateTime</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.ZonedDateTime</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
