@@ -234,7 +234,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
-     * Set the value for the specified property in
+     * Puts the value for the specified property in
      * the decorated {@link DynaBean}.
      *
      * @param key The {@link DynaBean}'s property name
