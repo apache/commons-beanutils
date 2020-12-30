@@ -131,7 +131,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Set whether a format should be used to convert
+     * Sets whether a format should be used to convert
      * the Number.
      *
      * @param useLocaleFormat {@code true} if a number format
@@ -156,7 +156,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Set a number format pattern to use to convert
+     * Sets a number format pattern to use to convert
      * Numbers to/from a {@code java.lang.String}.
      * <p>
      * See {@code java.text.DecimalFormat} for details
@@ -180,7 +180,7 @@ public abstract class NumberConverter extends AbstractConverter {
     }
 
     /**
-     * Set the Locale for the <i>Converter</i>.
+     * Sets the Locale for the <i>Converter</i>.
      *
      * @param locale The locale to use for conversion
      */

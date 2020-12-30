@@ -184,7 +184,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Set the delimiter to be used for parsing a delimited String.
+     * Sets the delimiter to be used for parsing a delimited String.
      *
      * @param delimiter The delimiter [default ',']
      */
@@ -193,7 +193,7 @@ public class ArrayConverter extends AbstractConverter {
     }
 
     /**
-     * Set the allowed characters to be used for parsing a delimited String.
+     * Sets the allowed characters to be used for parsing a delimited String.
      *
      * @param allowedChars Characters which are to be considered as part of
      * the tokens when parsing a delimited String [default is '.' and '-']

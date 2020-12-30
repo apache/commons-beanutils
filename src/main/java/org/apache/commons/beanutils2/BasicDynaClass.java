@@ -228,7 +228,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
 
     /**
-     * Set the Class object we will use to create new instances in the
+     * Sets the Class object we will use to create new instances in the
      * {@code newInstance()} method.  This Class <strong>MUST</strong>
      * implement the {@code DynaBean} interface.
      *
@@ -264,7 +264,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Set the list of dynamic properties supported by this DynaClass.
+     * Sets the list of dynamic properties supported by this DynaClass.
      *
      * @param properties List of dynamic properties to be supported
      */

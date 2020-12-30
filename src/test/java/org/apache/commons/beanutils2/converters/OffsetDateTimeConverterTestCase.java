@@ -77,7 +77,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
         return new OffsetDateTimeConverter(defaultValue);
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

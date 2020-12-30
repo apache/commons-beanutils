@@ -61,7 +61,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Set simpleWriteOnly
+         * Sets simpleWriteOnly
          *
          * @param simple simple value
          */
@@ -80,7 +80,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Set indexed property.
+         * Sets indexed property.
          *
          * @param index The index
          * @param value The indexed value
@@ -100,7 +100,7 @@ public class Jira61BeanFactory {
         }
 
         /**
-         * Set mapped property.
+         * Sets mapped property.
          *
          * @param key The mapped key
          * @param value The mapped value

@@ -142,7 +142,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
 
     /**
-     * Set the Map backing this {@code DynaBean}
+     * Sets the Map backing this {@code DynaBean}
      *
      * @param values The new Map of values
      */
@@ -163,7 +163,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
 
     /**
-     * Set the value of a simple property with the specified name.
+     * Sets the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
@@ -446,7 +446,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Set whether this DynaClass should return a {@code null} from
+     * Sets whether this DynaClass should return a {@code null} from
      * the {@code getDynaProperty(name)} method if the property
      * doesn't exist.
      *

@@ -64,7 +64,7 @@ public class Jira339TestCase extends TestCase {
     }
 
     /**
-     * Set up.
+     * Sets up.
      *
      * @throws java.lang.Exception
      */
@@ -131,7 +131,7 @@ public class Jira339TestCase extends TestCase {
         }
 
         /**
-         * Set the comparator.
+         * Sets the comparator.
          *
          * @param comparator the comparator
          */

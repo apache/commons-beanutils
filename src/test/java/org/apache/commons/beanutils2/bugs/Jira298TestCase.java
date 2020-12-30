@@ -64,7 +64,7 @@ public class Jira298TestCase extends TestCase {
     }
 
     /**
-     * Set up.
+     * Sets up.
      *
      * @throws java.lang.Exception
      */

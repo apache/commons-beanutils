@@ -100,7 +100,7 @@ public interface MutableDynaClass extends DynaClass {
     void remove(String name);
 
     /**
-     * Set the restricted state of this DynaClass to the specified value.
+     * Sets the restricted state of this DynaClass to the specified value.
      *
      * @param restricted The new restricted state
      */

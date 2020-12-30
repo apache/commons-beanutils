@@ -69,7 +69,7 @@ public class ArrayConverterTestCase extends TestCase {
         }
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

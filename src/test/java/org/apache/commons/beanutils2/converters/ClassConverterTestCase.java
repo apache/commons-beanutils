@@ -46,7 +46,7 @@ public class ClassConverterTestCase extends TestCase {
         super(name);
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

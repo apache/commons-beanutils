@@ -57,7 +57,7 @@ public class Jira357TestCase extends TestCase {
     }
 
     /**
-     * Set up.
+     * Sets up.
      *
      * @throws java.lang.Exception
      */

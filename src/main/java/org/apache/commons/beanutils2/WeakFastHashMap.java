@@ -698,7 +698,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Set implementation over the keys of the FastHashMap
+     * Sets implementation over the keys of the FastHashMap
      */
     private class KeySet extends CollectionView<K> implements Set<K> {
 
@@ -731,7 +731,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     /**
-     * Set implementation over the entries of the FastHashMap
+     * Sets implementation over the entries of the FastHashMap
      */
     private class EntrySet extends CollectionView<Map.Entry<K, V>> implements Set<Map.Entry<K, V>> {
 

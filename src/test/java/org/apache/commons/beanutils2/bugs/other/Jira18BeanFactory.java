@@ -59,7 +59,7 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Set simple property.
+         * Sets simple property.
          *
          * @param simple The simple value
          */
@@ -78,7 +78,7 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Set indexed property.
+         * Sets indexed property.
          *
          * @param index The index
          * @param value The indexed value
@@ -98,7 +98,7 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Set mapped property.
+         * Sets mapped property.
          *
          * @param key The mapped key
          * @param value The mapped value

@@ -77,7 +77,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
         return new ZonedDateTimeConverter(defaultValue);
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

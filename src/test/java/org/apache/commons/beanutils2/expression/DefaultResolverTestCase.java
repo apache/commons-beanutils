@@ -64,7 +64,7 @@ public class DefaultResolverTestCase extends TestCase {
     }
 
     /**
-     * Set Up
+     * Sets Up
      */
     @Override
     protected void setUp() {

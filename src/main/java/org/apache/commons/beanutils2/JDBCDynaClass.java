@@ -137,7 +137,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Set whether the column label or name should be used for the property name.
+     * Sets whether the column label or name should be used for the property name.
      *
      * @param useColumnLabel true if the column label should be used, otherwise false
      */

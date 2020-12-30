@@ -582,7 +582,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Set the specified locale-sensitive property value, performing type
+     * Sets the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination property
      * using the default conversion pattern of the corresponding {@link LocaleConverter}.
      *
@@ -605,7 +605,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Set the specified locale-sensitive property value, performing type
+     * Sets the specified locale-sensitive property value, performing type
      * conversions as required to conform to the type of the destination
      * property using the specified conversion pattern.
      *

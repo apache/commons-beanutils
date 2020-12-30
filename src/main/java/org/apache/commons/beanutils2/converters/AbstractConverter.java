@@ -432,7 +432,7 @@ public abstract class AbstractConverter implements Converter {
     }
 
     /**
-     * Set the default value, converting as required.
+     * Sets the default value, converting as required.
      * <p>
      * If the default value is different from the type the
      * {@code Converter} handles, it will be converted

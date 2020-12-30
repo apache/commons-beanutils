@@ -104,7 +104,7 @@ public class MethodUtils {
 
 
     /**
-     * Set whether methods should be cached for greater performance or not,
+     * Sets whether methods should be cached for greater performance or not,
      * default is {@code true}.
      *
      * @param cacheMethods {@code true} if methods should be

@@ -280,7 +280,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Set the value of a simple property with the specified name.
+     * Sets the value of a simple property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param value Value to which this property is to be set
@@ -313,7 +313,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Set the value of an indexed property with the specified name.
+     * Sets the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param index Index of the property to be set
@@ -356,7 +356,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Set the value of a mapped property with the specified name.
+     * Sets the value of a mapped property with the specified name.
      *
      * @param name Name of the property whose value is to be set
      * @param key Key of the property to be set

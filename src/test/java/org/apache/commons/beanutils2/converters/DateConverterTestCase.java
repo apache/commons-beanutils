@@ -75,7 +75,7 @@ public class DateConverterTestCase extends DateConverterTestBase {
         return new DateConverter(defaultValue);
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

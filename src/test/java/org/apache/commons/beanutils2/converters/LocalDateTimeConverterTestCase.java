@@ -77,7 +77,7 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
         return new LocalDateTimeConverter(defaultValue);
     }
 
-    /** Set Up */
+    /** Sets Up */
     @Override
     public void setUp() throws Exception {
     }

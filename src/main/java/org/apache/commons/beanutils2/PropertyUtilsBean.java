@@ -1443,7 +1443,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified indexed property of the specified
+     * Sets the value of the specified indexed property of the specified
      * bean, with no type conversions.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -1502,7 +1502,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified indexed property of the specified
+     * Sets the value of the specified indexed property of the specified
      * bean, with no type conversions.  In addition to supporting the JavaBeans
      * specification, this method has been extended to support
      * {@code List} objects as well.
@@ -1624,7 +1624,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified mapped property of the
+     * Sets the value of the specified mapped property of the
      * specified bean, with no type conversions.  The key of the
      * value to set must be included (in brackets) as a suffix to
      * the property name, or {@code IllegalArgumentException} will be
@@ -1679,7 +1679,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified mapped property of the specified
+     * Sets the value of the specified mapped property of the specified
      * bean, with no type conversions.
      *
      * @param bean Bean whose property is to be set
@@ -1775,7 +1775,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the (possibly nested) property of the specified
+     * Sets the value of the (possibly nested) property of the specified
      * name, for the specified bean, with no type conversions.
      * <p>
      * Example values for parameter "name" are:
@@ -1929,7 +1929,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified property of the specified bean,
+     * Sets the value of the specified property of the specified bean,
      * no matter which property reference format is used, with no
      * type conversions.
      *
@@ -1956,7 +1956,7 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * Set the value of the specified simple property of the specified bean,
+     * Sets the value of the specified simple property of the specified bean,
      * with no type conversions.
      *
      * @param bean Bean whose property is to be modified

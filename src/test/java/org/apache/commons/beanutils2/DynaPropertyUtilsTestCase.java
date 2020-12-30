@@ -87,7 +87,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
 
     /**
-     * Set up instance variables required by this test case.
+     * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {

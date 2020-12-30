@@ -143,7 +143,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Set whether this DynaClass should return a {@code null} from
+     * Sets whether this DynaClass should return a {@code null} from
      * the {@code getDynaProperty(name)} method if the property
      * doesn't exist.
      * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
