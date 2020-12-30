@@ -41,7 +41,7 @@ import junit.framework.TestSuite;
 public class LocaleConvertTestSuite {
 
     /**
-     * Return the tests included in this test suite.
+     * Creates the tests included in this test suite.
      */
     public static Test suite() {
         final TestSuite testSuite = new TestSuite();

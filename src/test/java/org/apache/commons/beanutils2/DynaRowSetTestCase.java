@@ -80,7 +80,7 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
     /**
-     * Return the tests included in this test suite.
+     * Creates the tests included in this test suite.
      */
     public static Test suite() {
 

@@ -51,7 +51,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Return the tests included in this test suite.
+     * Creates the tests included in this test suite.
      * @return Test Suite
      */
     public static Test suite() {

@@ -55,7 +55,7 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     /**
-     * Return the tests included in this test suite.
+     * Creates the tests included in this test suite.
      */
     public static Test suite() {
         return new TestSuite(MethodUtilsTestCase.class);
