@@ -24,7 +24,6 @@ import org.junit.Test;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 /**
  * Test Case for the URLConverter class.
@@ -40,18 +39,7 @@ public class URLConverterTestCase {
 
     @Test
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-        };
-
-        final Object[] input = {
+        final String[] input = {
             "http://www.apache.org",
             "http://www.apache.org/",
             "ftp://cvs.apache.org",
@@ -60,39 +48,24 @@ public class URLConverterTestCase {
             "http://www.apache.org:9999/test/thing",
             "http://user:admin@www.apache.org:50/one/two.three",
             "http://notreal.apache.org",
+            "http://notreal.apache.org/test/file.xml#计算机图形学",
+            "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6"
         };
 
-        final String[] expected = {
-            "http://www.apache.org",
-            "http://www.apache.org/",
-            "ftp://cvs.apache.org",
-            "file://project.xml",
-            "http://208.185.179.12",
-            "http://www.apache.org:9999/test/thing",
-            "http://user:admin@www.apache.org:50/one/two.three",
-            "http://notreal.apache.org"
-        };
+        for (String urlString : input) {
+            assertEquals("from String to URL", urlString, converter.convert(URL.class, urlString).toString());
+            assertEquals("from String to null type", urlString, converter.convert(null, urlString).toString());
 
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(message[i] + " to URL", expected[i], converter.convert(URL.class, input[i]).toString());
-            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]).toString());
-        }
-
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
+            URL url = new URL(urlString);
+            assertEquals(urlString + " to String", urlString, converter.convert(String.class, url));
         }
     }
 
     /**
      * Tests a conversion to an unsupported type.
      */
-    @Test
+    @Test(expected = ConversionException.class)
     public void testUnsupportedType() {
-        try {
-            converter.convert(Integer.class, "http://www.apache.org");
-            fail("Unsupported type could be converted!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        converter.convert(Integer.class, "http://www.apache.org");
     }
 }
