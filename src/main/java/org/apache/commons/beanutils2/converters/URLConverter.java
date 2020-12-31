@@ -72,7 +72,7 @@ public final class URLConverter extends AbstractConverter {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (URL.class.equals(type)) {
-            return type.cast(new URL(value.toString()));
+            return type.cast(new URL(toString(value)));
         }
 
         throw conversionException(type, value);

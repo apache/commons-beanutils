@@ -67,7 +67,7 @@ public final class CharacterConverter extends AbstractConverter {
     @Override
     protected String convertToString(final Object value) {
         final String strValue = value.toString();
-        return strValue.length() == 0 ? "" : strValue.substring(0, 1);
+        return strValue.isEmpty() ? "" : strValue.substring(0, 1);
     }
 
     /**
