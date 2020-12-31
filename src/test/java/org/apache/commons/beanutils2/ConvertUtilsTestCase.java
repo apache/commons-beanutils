@@ -234,19 +234,19 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals("Boolean->String", "true",
                      ConvertUtils.convert(Boolean.TRUE));
         assertEquals("Byte->String", "123",
-                     ConvertUtils.convert(new Byte((byte) 123)));
+                     ConvertUtils.convert(Byte.valueOf((byte) 123)));
         assertEquals("Character->String", "a",
-                     ConvertUtils.convert(new Character('a')));
+                     ConvertUtils.convert(Character.valueOf('a')));
         assertEquals("Double->String", "123.0",
-                     ConvertUtils.convert(new Double(123.0)));
+                     ConvertUtils.convert(Double.valueOf(123.0)));
         assertEquals("Float->String", "123.0",
-                     ConvertUtils.convert(new Float((float) 123.0)));
+                     ConvertUtils.convert(Float.valueOf((float) 123.0)));
         assertEquals("Integer->String", "123",
-                     ConvertUtils.convert(new Integer(123)));
+                     ConvertUtils.convert(Integer.valueOf(123)));
         assertEquals("Long->String", "123",
-                     ConvertUtils.convert(new Long(123)));
+                     ConvertUtils.convert(Long.valueOf(123)));
         assertEquals("Short->String", "123",
-                     ConvertUtils.convert(new Short((short) 123)));
+                     ConvertUtils.convert(Short.valueOf((short) 123)));
         assertEquals("String->String", "abc",
                      ConvertUtils.convert("abc"));
         assertEquals("String->String null", null,
