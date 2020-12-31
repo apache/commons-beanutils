@@ -277,19 +277,19 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals("Boolean->String", "true",
                 LocaleConvertUtils.convert(Boolean.TRUE));
         assertEquals("Byte->String", "123",
-                LocaleConvertUtils.convert(new Byte((byte) 123)));
+                LocaleConvertUtils.convert(Byte.valueOf((byte) 123)));
         assertEquals("Character->String", "a",
-                LocaleConvertUtils.convert(new Character('a')));
+                LocaleConvertUtils.convert(Character.valueOf('a')));
         assertEquals("Double->String", "123" + m_decimalSeparator + "4",
-                LocaleConvertUtils.convert(new Double(123.4)));
+                LocaleConvertUtils.convert(Double.valueOf(123.4)));
         assertEquals("Float->String", "123" + m_decimalSeparator + "4",
-                LocaleConvertUtils.convert(new Float((float) 123.4)));
+                LocaleConvertUtils.convert(Float.valueOf((float) 123.4)));
         assertEquals("Integer->String", "123",
-                LocaleConvertUtils.convert(new Integer(123)));
+                LocaleConvertUtils.convert(Integer.valueOf(123)));
         assertEquals("Long->String", "123",
-                LocaleConvertUtils.convert(new Long(123)));
+                LocaleConvertUtils.convert(Long.valueOf(123)));
         assertEquals("Short->String", "123",
-                LocaleConvertUtils.convert(new Short((short) 123)));
+                LocaleConvertUtils.convert(Short.valueOf((short) 123)));
         assertEquals("String->String", "abc",
                 LocaleConvertUtils.convert("abc"));
         assertEquals("String->String null", null,
