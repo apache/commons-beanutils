@@ -211,13 +211,7 @@ public class LazyDynaMapTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(dynaMap, testProperty+"("+testKey+")", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -433,13 +427,7 @@ public class LazyDynaMapTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(dynaMap, testProperty+"["+index+"]", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 

@@ -221,13 +221,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(bean, testProperty+"("+testKey+")", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -443,13 +437,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(bean, testProperty+"["+index+"]", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
