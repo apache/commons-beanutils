@@ -131,6 +131,9 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("string property class", String.class,
                      dynaProp.getType());
 
+        assertFalse(dynaClass.isUseColumnLabel());
+        assertNotNull("Get the Cross Reference Property exists", dynaClass.getColumnNameXref());
+
     }
 
     public void testGetDynaProperties() {
