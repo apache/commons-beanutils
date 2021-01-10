@@ -37,9 +37,9 @@ public class DefaultResolverTestCase extends TestCase {
     private final int[]    validIndexValues     = new int[]    {1,      12,      3,       45,       6,        789};
 
     // Mapped Properties Test Data
-    private final String[] validMapProperties = new String[] {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]"};
-    private final String[] validMapNames      = new String[] {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
-    private final String[] validMapKeys       = new String[] {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
+    private final String[] validMapProperties = new String[] {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]", "test(myvalue(ineedthisparenthis))"};
+    private final String[] validMapNames      = new String[] {"a",    "c",     "fg",    "ij",     "mno",        "tuv", "test"};
+    private final String[] validMapKeys       = new String[] {"b",    "de",    "h",     "kl",     "pqr.s",      "wx",  "myvalue(ineedthisparenthis)"};
 
     private final String[] nextExpressions   = new String[] {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx"};
     private final String[] nextProperties    = new String[] {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]"};
