@@ -370,6 +370,43 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
     /**
+     * Test the copyProperties() method from a standard JavaBean.
+     */
+    public void testCopyPropertiesStandardIgnore() {
+        // Set up an origin bean with customized properties
+        final TestBean orig = new TestBean();
+        orig.setBooleanProperty(false);
+        orig.setStringProperty("Ignore Property");
+
+
+        // Copy the origin bean to our destination test bean
+        try {
+            BeanUtils.copyProperties(bean, orig, "stringProperty");
+        } catch (final Exception e) {
+            fail("Threw exception: " + e);
+        }
+        assertEquals("Not Copied array property",
+                "This is a string",
+                bean.getStringProperty());
+
+        final Map<String, Object> map = new HashMap<>();
+        map.put("booleanProperty", "false");
+        map.put("byteProperty", "111");
+        map.put("stringProperty", "Ignore Property");
+
+        try {
+            BeanUtils.copyProperties(bean, map,"stringProperty");
+        } catch (final Throwable t) {
+            fail("Threw " + t.toString());
+        }
+
+        assertEquals("Not Copied array property",
+                "This is a string",
+                bean.getStringProperty());
+
+    }
+
+    /**
      * Test the describe() method.
      */
     public void testDescribe() {
