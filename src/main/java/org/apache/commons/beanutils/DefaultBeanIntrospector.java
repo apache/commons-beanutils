@@ -74,7 +74,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      * @param icontext the introspection context
      */
     public void introspect(final IntrospectionContext icontext) {
-        BeanInfo beanInfo = null;
+        BeanInfo beanInfo;
         try {
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
         } catch (final IntrospectionException e) {
