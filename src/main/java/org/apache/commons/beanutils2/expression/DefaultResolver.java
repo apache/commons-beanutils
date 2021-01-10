@@ -77,7 +77,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public int getIndex(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return -1;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -115,7 +115,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String getKey(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return null;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -141,7 +141,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String getProperty(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return expression;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -162,7 +162,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean hasNested(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return false;
         }
         return remove(expression) != null;
@@ -177,7 +177,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean isIndexed(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -200,7 +200,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean isMapped(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -215,6 +215,25 @@ public class DefaultResolver implements Resolver {
     }
 
     /**
+     * <p>Checks if a CharSequence is empty ("") or null.</p>
+     *
+     * <pre>
+     * isEmpty(null)      = true
+     * isEmpty("")        = true
+     * isEmpty(" ")       = false
+     * isEmpty("bob")     = false
+     * isEmpty("  bob  ") = false
+     * </pre>
+     *
+     * @param cs  the CharSequence to check, may be null
+     * @return {@code true} if the CharSequence is empty or null
+     * @since 2.0
+     */
+    private boolean isEmpty(final CharSequence cs) {
+        return cs == null || cs.length() == 0;
+    }
+
+    /**
      * Extract the next property expression from the
      * current expression.
      *
@@ -223,7 +242,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String next(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return null;
         }
         boolean indexed = false;
@@ -266,7 +285,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String remove(final String expression) {
-        if (expression == null || expression.isEmpty()) {
+        if (isEmpty(expression)) {
             return null;
         }
         final String property = next(expression);
