@@ -108,8 +108,8 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache = null;
-    private WeakFastHashMap<Class<?>, Map> mappedDescriptorsCache = null;
+    private WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache;
+    private WeakFastHashMap<Class<?>, Map> mappedDescriptorsCache;
 
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];

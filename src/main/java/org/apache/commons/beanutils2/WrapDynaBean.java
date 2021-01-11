@@ -83,12 +83,12 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
-    protected transient WrapDynaClass dynaClass = null;
+    protected transient WrapDynaClass dynaClass;
 
     /**
      * The JavaBean instance wrapped by this WrapDynaBean.
      */
-    protected Object instance = null;
+    protected Object instance;
 
 
 

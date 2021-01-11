@@ -108,7 +108,7 @@ public class DynaProperty implements Serializable {
 
 
     /** Property name */
-    protected String name = null;
+    protected String name;
     /**
      * Get the name of this property.
      * @return the name of the property
@@ -118,7 +118,7 @@ public class DynaProperty implements Serializable {
     }
 
     /** Property type */
-    protected transient Class<?> type = null;
+    protected transient Class<?> type;
     /**
      * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>

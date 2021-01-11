@@ -61,7 +61,7 @@ public class MethodUtils {
      * really optional we can ignore this problem; only one of the webapps
      * will get the warning in its logs but that should be good enough.
      */
-    private static boolean loggedAccessibleWarning = false;
+    private static boolean loggedAccessibleWarning;
 
     /**
      * Indicates whether methods should be cached for improved performance.

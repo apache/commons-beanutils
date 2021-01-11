@@ -167,7 +167,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
     /**
      * <p>The {@code ResultSet} we are wrapping.</p>
      */
-    protected ResultSet resultSet = null;
+    protected ResultSet resultSet;
 
 
 
