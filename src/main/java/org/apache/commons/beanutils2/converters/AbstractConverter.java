@@ -105,12 +105,12 @@ public abstract class AbstractConverter implements Converter {
     /**
      * Should we return the default value on conversion errors?
      */
-    private boolean useDefault = false;
+    private boolean useDefault;
 
     /**
      * The default value specified to our Constructor, if any.
      */
-    private Object defaultValue = null;
+    private Object defaultValue;
 
     /**
      * Constructs a <i>Converter</i> that throws a

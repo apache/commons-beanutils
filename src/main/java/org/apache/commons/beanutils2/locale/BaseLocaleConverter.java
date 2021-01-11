@@ -42,19 +42,19 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
-    private Object defaultValue = null;
+    private Object defaultValue;
 
     /** Should we return the default value on conversion errors? */
-    protected boolean useDefault = false;
+    protected boolean useDefault;
 
     /** The locale specified to our Constructor, by default - system locale. */
     protected Locale locale = Locale.getDefault();
 
     /** The default pattern specified to our Constructor, if any. */
-    protected String pattern = null;
+    protected String pattern;
 
     /** The flag indicating whether the given pattern string is localized or not. */
-    protected boolean locPattern = false;
+    protected boolean locPattern;
 
 
 

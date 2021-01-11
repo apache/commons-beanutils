@@ -52,18 +52,18 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * <p>Flag indicating whether the result set is currently positioned at a
      * row for which we have not yet returned an element in the iteration.</p>
      */
-    protected boolean current = false;
+    protected boolean current;
 
     /**
      * <p>The {@link ResultSetDynaClass} we are associated with.</p>
      */
-    protected ResultSetDynaClass dynaClass = null;
+    protected ResultSetDynaClass dynaClass;
 
     /**
      * <p>Flag indicating whether the result set has indicated that there are
      * no further rows.</p>
      */
-    protected boolean eof = false;
+    protected boolean eof;
 
 
 

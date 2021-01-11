@@ -65,7 +65,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * <p>Default is {@code false}.
      */
-    protected boolean returnNull = false;
+    protected boolean returnNull;
 
 
 

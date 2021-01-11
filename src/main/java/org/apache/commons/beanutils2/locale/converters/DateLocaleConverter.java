@@ -43,7 +43,7 @@ public class DateLocaleConverter extends BaseLocaleConverter {
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);
 
     /** Should the date conversion be lenient? */
-    boolean isLenient = false;
+    boolean isLenient;
 
     /**
      * Default Pattern Characters

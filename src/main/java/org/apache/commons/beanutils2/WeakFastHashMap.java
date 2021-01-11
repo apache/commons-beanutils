@@ -69,12 +69,12 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * The underlying map we are managing.
      */
-    private volatile Map<K, V> map = null;
+    private volatile Map<K, V> map;
 
     /**
      * Are we currently operating in "fast" mode?
      */
-    private boolean fast = false;
+    private boolean fast;
 
     // Constructors
 
@@ -650,7 +650,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         private class CollectionViewIterator implements Iterator<E> {
 
             private Map<K, V> expected;
-            private Map.Entry<K, V> lastReturned = null;
+            private Map.Entry<K, V> lastReturned;
             private final Iterator<Map.Entry<K, V>> iterator;
 
             public CollectionViewIterator() {

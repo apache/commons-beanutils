@@ -72,7 +72,7 @@ public class ConversionException extends RuntimeException {
      * The root cause of this {@code ConversionException}, compatible with
      * JDK 1.4's extensions to {@code java.lang.Throwable}.
      */
-    protected Throwable cause = null;
+    protected Throwable cause;
 
     /**
      * Gets the root cause of this conversion exception.
