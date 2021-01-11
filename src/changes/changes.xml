@@ -124,6 +124,9 @@
       <action dev="ggregory" type="update" due-to="SethFalco">
         Updated URLConverterTestCase to run without Internet access #50.
       </action>
+      <action dev="ggregory" type="update" due-to="Arturo Bernal">
+        Don't initialize variables to defaults #71.
+      </action>
     </release>
 
     <release version="1.9.4" date="2019-08-13" description="The primary reason for this release is a bugfix for
