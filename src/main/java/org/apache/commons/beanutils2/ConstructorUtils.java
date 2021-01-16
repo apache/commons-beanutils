@@ -39,11 +39,6 @@ import java.lang.reflect.Modifier;
  */
 public class ConstructorUtils {
 
-    /** An empty class array */
-    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class<?>[0];
-    /** An empty object array */
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
-
     /**
      * <p>Convenience method returning new instance of {@code klazz} using a single argument constructor.
      * The formal parameter type is inferred from the actual values of {@code arg}.
@@ -101,7 +96,7 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (null == args) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class<?>[arguments];
@@ -140,10 +135,10 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         final Constructor<T> ctor =
@@ -212,7 +207,7 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (null == args) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class[arguments];
@@ -252,11 +247,11 @@ public class ConstructorUtils {
             InstantiationException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
 
         final Constructor<T> ctor = getAccessibleConstructor(klass, parameterTypes);

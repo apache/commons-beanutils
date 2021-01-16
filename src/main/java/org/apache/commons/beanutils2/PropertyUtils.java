@@ -37,21 +37,6 @@ import java.util.Map;
 
 public class PropertyUtils {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Clear any cached property descriptors information for all classes
      * loaded by any class loaders.  This is useful in cases where class
@@ -62,9 +47,7 @@ public class PropertyUtils {
      * @see PropertyUtilsBean#clearDescriptors
      */
     public static void clearDescriptors() {
-
         PropertyUtilsBean.getInstance().clearDescriptors();
-
     }
 
     /**

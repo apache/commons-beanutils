@@ -163,6 +163,8 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected MutableDynaClass dynaClass;
 
+    static final LazyDynaBean[] EMPTY_LAZY_DYNA_BEAN_ARRAY = new LazyDynaBean[0];
+
 
 
     /**

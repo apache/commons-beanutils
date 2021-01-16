@@ -36,8 +36,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * Constructs a new BasicDynaClass with default parameters.
      */
@@ -116,7 +114,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty[] properties = new DynaProperty[0];
+    protected DynaProperty[] properties = DynaProperty.EMPTY_DYNA_PROPERTY_ARRAY;
 
     /**
      * The set of dynamic properties that are part of this DynaClass,

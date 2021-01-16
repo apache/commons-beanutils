@@ -46,11 +46,9 @@ import org.apache.commons.logging.LogFactory;
  * @since 1.9
  */
 public class DefaultBeanIntrospector implements BeanIntrospector {
+
     /** The singleton instance of this class. */
     public static final BeanIntrospector INSTANCE = new DefaultBeanIntrospector();
-
-    /** Constant for argument types of a method that expects no arguments. */
-    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
 
     /** Constant for arguments types of a method that expects a list argument. */
     private static final Class<?>[] LIST_CLASS_PARAMETER = new Class[] { java.util.List.class };
@@ -87,7 +85,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
 
         PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();
         if (descriptors == null) {
-            descriptors = new PropertyDescriptor[0];
+            descriptors = PropertyDescriptors.EMPTY_PROPERTY_DESCRIPTOR_ARRAY;
         }
 
         handleIndexedPropertyDescriptors(icontext.getTargetClass(),
@@ -134,7 +132,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                             + propName;
                     final Method readMethod = MethodUtils
                             .getMatchingAccessibleMethod(beanClass, methodName,
-                                    EMPTY_CLASS_PARAMETERS);
+                                    BeanUtils.EMPTY_CLASS_ARRAY);
                     if (readMethod != null) {
                         try {
                             descriptor.setReadMethod(readMethod);

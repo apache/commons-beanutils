@@ -73,11 +73,6 @@ public class MethodUtils {
      */
     private static boolean CACHE_METHODS = true;
 
-    /** An empty class array */
-    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
-    /** An empty object array */
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
-
     /**
      * Stores a cache of MethodDescriptor -> Method in a WeakHashMap.
      * <p>
@@ -208,7 +203,7 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class[arguments];
@@ -256,10 +251,10 @@ public class MethodUtils {
                     InvocationTargetException {
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         final Method method = getMatchingAccessibleMethod(
@@ -335,7 +330,7 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class[arguments];
@@ -376,11 +371,11 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
 
         final Method method = getAccessibleMethod(
@@ -426,11 +421,11 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
 
         final Method method = getAccessibleMethod(
@@ -525,7 +520,7 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class[arguments];
@@ -574,10 +569,10 @@ public class MethodUtils {
                     InvocationTargetException {
 
         if (parameterTypes == null) {
-            parameterTypes = EMPTY_CLASS_PARAMETERS;
+            parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
 
         final Method method = getMatchingAccessibleMethod(
@@ -655,7 +650,7 @@ public class MethodUtils {
             InvocationTargetException {
 
         if (args == null) {
-            args = EMPTY_OBJECT_ARRAY;
+            args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
         final int arguments = args.length;
         final Class<?>[] parameterTypes = new Class[arguments];
@@ -1307,7 +1302,7 @@ public class MethodUtils {
                 throw new IllegalArgumentException("Method Name cannot be null");
             }
             if (paramTypes == null) {
-                paramTypes = EMPTY_CLASS_PARAMETERS;
+                paramTypes = BeanUtils.EMPTY_CLASS_ARRAY;
             }
 
             this.cls = cls;

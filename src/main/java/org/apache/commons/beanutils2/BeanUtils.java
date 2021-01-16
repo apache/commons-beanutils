@@ -35,15 +35,6 @@ import java.util.Map;
 
 public class BeanUtils {
 
-
-
-
-
-
-
-
-
-
     /**
      * <p>Clone a bean based on the available property getters and setters,
      * even if the bean class itself does not implement Cloneable.</p>
@@ -438,4 +429,10 @@ public class BeanUtils {
     public static <K, V> Map<K, V> createCache() {
         return new WeakFastHashMap<>();
     }
+
+    /** An empty class array */
+    static final Class<?>[] EMPTY_CLASS_ARRAY = new Class<?>[0];
+
+    /** An empty object array */
+    static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 }

@@ -40,8 +40,6 @@ import java.util.Objects;
 
 public class DynaProperty implements Serializable {
 
-
-
     private static final long serialVersionUID = -3084907613499830175L;
     /*
      * There are issues with serializing primitive class types on certain JVM versions
@@ -137,6 +135,12 @@ public class DynaProperty implements Serializable {
 
     /** The <em>(optional)</em> type of content elements for indexed {@code DynaProperty} */
     protected transient Class<?> contentType;
+    
+    /**
+     * Empty array.
+     */
+    static final DynaProperty[] EMPTY_DYNA_PROPERTY_ARRAY = new DynaProperty[0];
+    
     /**
      * Gets the <em>(optional)</em> type of the indexed content for {@code DynaProperty}'s
      * that support this feature.

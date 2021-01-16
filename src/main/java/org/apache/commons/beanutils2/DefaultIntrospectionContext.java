@@ -35,9 +35,6 @@ import java.util.Set;
  * @since 1.9
  */
 class DefaultIntrospectionContext implements IntrospectionContext {
-    /** Constant for an empty array of property descriptors. */
-    private static final PropertyDescriptor[] EMPTY_DESCRIPTORS = new PropertyDescriptor[0];
-
     /** The current class for introspection. */
     private final Class<?> currentClass;
 
@@ -109,6 +106,6 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      * @return an array with all known property descriptors
      */
     public PropertyDescriptor[] getPropertyDescriptors() {
-        return descriptors.values().toArray(EMPTY_DESCRIPTORS);
+        return descriptors.values().toArray(PropertyDescriptors.EMPTY_PROPERTY_DESCRIPTOR_ARRAY);
     }
 }

@@ -409,7 +409,7 @@ public class LazyDynaList extends ArrayList<Object> {
     public Object[] toArray() {
 
         if (size() == 0 && elementType == null) {
-            return new LazyDynaBean[0];
+            return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
 
         final Object[] array = (Object[])Array.newInstance(elementType, size());
@@ -484,7 +484,7 @@ public class LazyDynaList extends ArrayList<Object> {
     public DynaBean[] toDynaBeanArray() {
 
         if (size() == 0 && elementDynaBeanType == null) {
-            return new LazyDynaBean[0];
+            return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
 
         final DynaBean[] array = (DynaBean[])Array.newInstance(elementDynaBeanType, size());
