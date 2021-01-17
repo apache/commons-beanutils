@@ -135,7 +135,7 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
     public BeanPropertyValueChangeConsumer(final String propertyName, final V propertyValue, final boolean ignoreNull) {
-        if (propertyName != null && propertyName.length() > 0) {
+        if (propertyName != null && !propertyName.isEmpty()) {
             this.propertyName = propertyName;
             this.propertyValue = propertyValue;
             this.ignoreNull = ignoreNull;

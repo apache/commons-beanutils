@@ -166,7 +166,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      */
     public BeanPropertyValueEqualsPredicate(final String propertyName, final V propertyValue,
             final boolean ignoreNull) {
-        if (propertyName != null && propertyName.length() > 0) {
+        if (propertyName != null && !propertyName.isEmpty()) {
             this.propertyName = propertyName;
             this.propertyValue = propertyValue;
             this.ignoreNull = ignoreNull;

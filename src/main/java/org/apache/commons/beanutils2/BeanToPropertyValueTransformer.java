@@ -120,7 +120,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
      * empty.
      */
     public BeanToPropertyValueTransformer(final String propertyName, final boolean ignoreNull) {
-        if (propertyName != null && propertyName.length() > 0) {
+        if (propertyName != null && !propertyName.isEmpty()) {
             this.propertyName = propertyName;
             this.ignoreNull = ignoreNull;
         } else {
