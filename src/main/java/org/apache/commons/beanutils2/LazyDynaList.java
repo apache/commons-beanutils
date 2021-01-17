@@ -295,7 +295,7 @@ public class LazyDynaList extends ArrayList<Object> {
     @Override
     public boolean addAll(final Collection<?> collection) {
 
-        if (collection == null || collection.size() == 0) {
+        if (collection == null || collection.isEmpty()) {
             return false;
         }
 
@@ -324,7 +324,7 @@ public class LazyDynaList extends ArrayList<Object> {
     @Override
     public boolean addAll(final int index, final Collection<?> collection) {
 
-        if (collection == null || collection.size() == 0) {
+        if (collection == null || collection.isEmpty()) {
             return false;
         }
 
@@ -333,7 +333,7 @@ public class LazyDynaList extends ArrayList<Object> {
         // Call "transform" with first element, before
         // List is "grown" to ensure the correct DynaClass
         // is set.
-        if (size() == 0) {
+        if (isEmpty()) {
             transform(collection.iterator().next());
         }
 
@@ -408,7 +408,7 @@ public class LazyDynaList extends ArrayList<Object> {
     @Override
     public Object[] toArray() {
 
-        if (size() == 0 && elementType == null) {
+        if (isEmpty() && elementType == null) {
             return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
 
@@ -438,7 +438,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         final Class<?> arrayType = model.getClass().getComponentType();
         if (DynaBean.class.isAssignableFrom(arrayType)
-                || size() == 0 && elementType == null) {
+                || isEmpty() && elementType == null) {
             return super.toArray(model);
         }
 
@@ -483,7 +483,7 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     public DynaBean[] toDynaBeanArray() {
 
-        if (size() == 0 && elementDynaBeanType == null) {
+        if (isEmpty() && elementDynaBeanType == null) {
             return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
 
