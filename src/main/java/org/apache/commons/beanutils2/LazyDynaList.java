@@ -509,7 +509,7 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
-        if (changeType && size() > 0) {
+        if (changeType && !isEmpty()) {
             throw new IllegalStateException("Element Type cannot be reset");
         }
 
@@ -561,7 +561,7 @@ public class LazyDynaList extends ArrayList<Object> {
             throw new IllegalArgumentException("Element DynaClass is missing");
         }
 
-        if (size() > 0) {
+        if (!isEmpty()) {
             throw new IllegalStateException("Element DynaClass cannot be reset");
         }
 

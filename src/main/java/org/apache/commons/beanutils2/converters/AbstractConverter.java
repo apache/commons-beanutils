@@ -231,7 +231,7 @@ public abstract class AbstractConverter implements Converter {
         }
         if (value instanceof Collection) {
             final Collection<?> collection = (Collection<?>)value;
-            if (collection.size() > 0) {
+            if (!collection.isEmpty()) {
                 return collection.iterator().next();
             }
             return null;
