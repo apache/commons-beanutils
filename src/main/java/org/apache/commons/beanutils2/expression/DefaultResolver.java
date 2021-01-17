@@ -77,7 +77,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public int getIndex(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return -1;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -90,7 +90,7 @@ public class DefaultResolver implements Resolver {
                     throw new IllegalArgumentException("Missing End Delimiter");
                 }
                 final String value = expression.substring(i + 1, end);
-                if (value.length() == 0) {
+                if (value.isEmpty()) {
                     throw new IllegalArgumentException("No Index Value");
                 }
                 int index = 0;
@@ -115,7 +115,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String getKey(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return null;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -141,7 +141,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String getProperty(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return expression;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -162,7 +162,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean hasNested(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return false;
         }
         return remove(expression) != null;
@@ -177,7 +177,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean isIndexed(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -200,7 +200,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public boolean isMapped(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return false;
         }
         for (int i = 0; i < expression.length(); i++) {
@@ -223,7 +223,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String next(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return null;
         }
         boolean indexed = false;
@@ -266,7 +266,7 @@ public class DefaultResolver implements Resolver {
      */
     @Override
     public String remove(final String expression) {
-        if (expression == null || expression.length() == 0) {
+        if (expression == null || expression.isEmpty()) {
             return null;
         }
         final String property = next(expression);

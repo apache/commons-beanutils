@@ -87,7 +87,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, null, null);
 
-        if (propertyName == null || propertyName.length() == 0) {
+        if (propertyName == null || propertyName.isEmpty()) {
             throw new IntrospectionException("bad property name: " +
                     propertyName + " on class: " + beanClass.getClass().getName());
         }
@@ -154,7 +154,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, null, null);
 
-        if (propertyName == null || propertyName.length() == 0) {
+        if (propertyName == null || propertyName.isEmpty()) {
             throw new IntrospectionException("bad property name: " +
                     propertyName);
         }
@@ -200,7 +200,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, mappedGetter, mappedSetter);
 
-        if (propertyName == null || propertyName.length() == 0) {
+        if (propertyName == null || propertyName.isEmpty()) {
             throw new IntrospectionException("bad property name: " +
                     propertyName);
         }
@@ -319,7 +319,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * @param s The property name
      */
     private static String capitalizePropertyName(final String s) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             return s;
         }
 

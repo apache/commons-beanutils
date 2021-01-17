@@ -190,7 +190,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         if (useColumnLabel) {
             columnName = metadata.getColumnLabel(i);
         }
-        if (columnName == null || columnName.trim().length() == 0) {
+        if (columnName == null || columnName.trim().isEmpty()) {
             columnName = metadata.getColumnName(i);
         }
         final String name = lowerCase ? columnName.toLowerCase() : columnName;
