@@ -156,7 +156,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
             final String errorMsg = "Problem during transformation. Null value encountered in property path...";
 
             if (ignoreNull) {
-                log.warn("WARNING: " + errorMsg + e);
+                log.warn(errorMsg, e);
             } else {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
