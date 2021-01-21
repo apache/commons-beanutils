@@ -118,13 +118,13 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
     /**
      * The name of the property which will be evaluated when this {@code Predicate} is executed.
      */
-    private String propertyName;
+    private final String propertyName;
 
     /**
      * The value that the property specified by {@code propertyName}
      * will be compared to when this {@code Predicate} executes.
      */
-    private V propertyValue;
+    private final V propertyValue;
 
     /**
      * <p>Should {@code null} objects in the property path be ignored?</p>
@@ -139,7 +139,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      * re-thrown.
      * </p>
      */
-    private boolean ignoreNull;
+    private final boolean ignoreNull;
 
     /**
      * Constructor which takes the name of the property, its expected value to be used in evaluation,

@@ -87,13 +87,13 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
     /**
      * The name of the property which will be updated when this {@code Closure} executes.
      */
-    private String propertyName;
+    private final String propertyName;
 
     /**
      * The value that the property specified by {@code propertyName}
      * will be updated to when this {@code Closure} executes.
      */
-    private V propertyValue;
+    private final V propertyValue;
 
     /**
      * Determines whether {@code null} objects in the property path will generate an
@@ -105,7 +105,7 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
      * {@code IllegalArgumentException</code> throw by <code>PropertyUtils} will be logged and
      * re-thrown.
      */
-    private boolean ignoreNull;
+    private final boolean ignoreNull;
 
     /**
      * Constructor which takes the name of the property to be changed, the new value to set

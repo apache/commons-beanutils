@@ -77,7 +77,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
     private final Log log = LogFactory.getLog(this.getClass());
 
     /** The name of the property that will be used in the transformation of the object. */
-    private String propertyName;
+    private final String propertyName;
 
     /**
      * <p>Should null objects on the property path throw an {@code IllegalArgumentException}?</p>
@@ -92,7 +92,7 @@ public class BeanToPropertyValueTransformer<T, R> implements Function<T, R> {
      * re-thrown.
      * </p>
      */
-    private boolean ignoreNull;
+    private final boolean ignoreNull;
 
     /**
      * Constructs a Transformer which does not ignore nulls.
