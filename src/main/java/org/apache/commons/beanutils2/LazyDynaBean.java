@@ -784,7 +784,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
                 logger().warn("Error instantiating DynaBean property of type '" +
-                        type.getName() + "' for '" + name + "' " + ex);
+                        type.getName() + "' for '" + name + "' ", ex);
             }
             return null;
         }
@@ -855,7 +855,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
         catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
-                logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' " + ex);
+                logger().warn("Error instantiating property of type '" + type.getName() + "' for '" + name + "' ", ex);
             }
             return null;
         }

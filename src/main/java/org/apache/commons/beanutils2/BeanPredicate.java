@@ -69,7 +69,7 @@ public class BeanPredicate<T> implements Predicate<T> {
             evaluation = predicate.test(propValue);
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation.";
-            log.error("ERROR: " + errorMsg, e);
+            log.error(errorMsg, e);
             throw e;
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
