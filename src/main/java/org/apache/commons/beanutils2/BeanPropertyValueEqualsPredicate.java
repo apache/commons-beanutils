@@ -205,7 +205,7 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
             final String errorMsg = "Problem during evaluation. Null value encountered in property path...";
 
             if (ignoreNull) {
-                log.warn("WARNING: " + errorMsg + e);
+                log.warn(errorMsg, e);
             } else {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
