@@ -72,7 +72,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
      */
     @Override
     public void introspect(final IntrospectionContext icontext) {
-        BeanInfo beanInfo = null;
+        final BeanInfo beanInfo;
         try {
             beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
         } catch (final IntrospectionException e) {

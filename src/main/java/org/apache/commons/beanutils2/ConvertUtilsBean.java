@@ -622,7 +622,7 @@ public class ConvertUtilsBean {
     private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
             final boolean throwException, final int defaultArraySize) {
         final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
-        Converter arrayConverter = null;
+        final Converter arrayConverter;
         if (throwException) {
             arrayConverter = new ArrayConverter(arrayType, componentConverter);
         } else {

@@ -161,8 +161,8 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         setName(propertyName);
 
         // search the mapped get and set methods
-        Method mappedReadMethod;
-        Method mappedWriteMethod = null;
+        final Method mappedReadMethod;
+        final Method mappedWriteMethod;
         mappedReadMethod =
             getMethod(beanClass, mappedGetterName, STRING_CLASS_PARAMETER);
 
@@ -457,7 +457,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
                     throw new RuntimeException("Method " + methodName + " for " +
                             className + " could not be reconstructed - class reference has gone");
                 }
-                Class<?>[] paramTypes = null;
+                final Class<?>[] paramTypes;
                 if (writeParamClassNames != null) {
                     paramTypes = new Class[2];
                     paramTypes[0] = writeParamTypeRef0.get();

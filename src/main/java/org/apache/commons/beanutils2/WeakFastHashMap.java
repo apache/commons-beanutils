@@ -410,7 +410,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      */
     @Override
     public Object clone() {
-        WeakFastHashMap<K, V> results = null;
+        final WeakFastHashMap<K, V> results;
         if (fast) {
             results = new WeakFastHashMap<>(map);
         } else {

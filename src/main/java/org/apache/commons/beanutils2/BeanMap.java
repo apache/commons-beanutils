@@ -140,7 +140,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
             return newMap;
         }
 
-        Object newBean = null;
+        final Object newBean;
         final Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
         try {
             newBean = beanClass.newInstance();
