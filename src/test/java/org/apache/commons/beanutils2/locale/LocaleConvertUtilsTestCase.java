@@ -40,7 +40,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
 
 
-    private char m_decimalSeparator;
+    private char decimalSeparator;
 
 
 
@@ -67,7 +67,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         final String result = nf.format(1.1);
 
         // could be commas instead of stops in Europe.
-        m_decimalSeparator = result.charAt(1);
+        decimalSeparator = result.charAt(1);
 
     }
 
@@ -280,9 +280,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(Byte.valueOf((byte) 123)));
         assertEquals("Character->String", "a",
                 LocaleConvertUtils.convert(Character.valueOf('a')));
-        assertEquals("Double->String", "123" + m_decimalSeparator + "4",
+        assertEquals("Double->String", "123" + decimalSeparator + "4",
                 LocaleConvertUtils.convert(Double.valueOf(123.4)));
-        assertEquals("Float->String", "123" + m_decimalSeparator + "4",
+        assertEquals("Float->String", "123" + decimalSeparator + "4",
                 LocaleConvertUtils.convert(Float.valueOf((float) 123.4)));
         assertEquals("Integer->String", "123",
                 LocaleConvertUtils.convert(Integer.valueOf(123)));
@@ -453,20 +453,20 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals(String.class, (Class) value);
         */
 
-        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.TYPE);
+        value = LocaleConvertUtils.convert("123" + decimalSeparator + "456", Double.TYPE);
         assertTrue(value instanceof Double);
         assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
-        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Double.class);
+        value = LocaleConvertUtils.convert("123" + decimalSeparator + "456", Double.class);
         assertTrue(value instanceof Double);
         assertEquals(((Double) value).doubleValue(), 123.456, 0.005);
 
-        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Float.TYPE);
+        value = LocaleConvertUtils.convert("123" + decimalSeparator + "456", Float.TYPE);
         assertTrue(value instanceof Float);
         assertEquals(((Float) value).floatValue(), (float) 123.456,
                 (float) 0.005);
 
-        value = LocaleConvertUtils.convert("123" + m_decimalSeparator + "456", Float.class);
+        value = LocaleConvertUtils.convert("123" + decimalSeparator + "456", Float.class);
         assertTrue(value instanceof Float);
         assertEquals(((Float) value).floatValue(), (float) 123.456,
                 (float) 0.005);
