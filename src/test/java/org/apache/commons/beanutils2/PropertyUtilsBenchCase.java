@@ -151,96 +151,96 @@ public class PropertyUtilsBenchCase extends TestCase {
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Bean->Bean
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inBean);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inBean);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Bean->Dyna
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inBean);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inBean);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time copyProperties() from a DynaBean
     public void testCopyPropertiesDyna() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Dyna->Bean
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inDyna);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inDyna);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inDyna);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inDyna);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time copyProperties() from a Map
     public void testCopyPropertiesMap() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Dyna->Bean
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outBean, inMap);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(bean, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             pu.copyProperties(outDyna, inMap);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 

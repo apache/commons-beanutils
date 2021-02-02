@@ -162,160 +162,160 @@ public class BeanUtilsBenchCase extends TestCase {
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Bean->Bean
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inBean);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inBean);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(bean,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Bean->Dyna
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inBean);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inBean);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,bean), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time copyProperties() from a DynaBean
     public void testCopyPropertiesDyna() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Dyna->Bean
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inDyna);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inDyna);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(bean,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inDyna);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inDyna);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,dyna), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time copyProperties() from a Map of Objects
     public void testCopyPropertiesMap() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Map->Bean
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inMap);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(bean, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Map->Dyna
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inMap);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time copyProperties() from a Map of Strings
     public void testCopyPropertiesStrs() throws Exception {
 
-        long start;
-        long stop;
+        long startMillis;
+        long stopMillis;
 
         // Strs->Bean
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inStrs);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outBean, inStrs);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(bean,strs), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
         // Strs->Dyna
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inStrs);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.copyProperties(outDyna, inStrs);
         }
-        stop = System.currentTimeMillis();
+        stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,strs), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stopMillis - startMillis));
 
     }
 
     // Time populate() from a Map of Objects
     public void testPopulateMap() throws Exception {
 
-        long start;
+        long startMillis;
         long stop;
 
         // Map->Bean
         for (long i = 0; i < counter; i++) {
             bu.populate(outBean, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.populate(outBean, inMap);
         }
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(bean, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stop - startMillis));
 
         // Map->Dyna
         for (long i = 0; i < counter; i++) {
             bu.populate(outDyna, inMap);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.populate(outDyna, inMap);
         }
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(dyna, map), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stop - startMillis));
 
     }
 
@@ -323,32 +323,32 @@ public class BeanUtilsBenchCase extends TestCase {
     // NOTE - This simulates what Struts does when processing form beans
     public void testPopulateStrs() throws Exception {
 
-        long start;
+        long startMillis;
         long stop;
 
         // Strs->Bean
         for (long i = 0; i < counter; i++) {
             bu.populate(outBean, inStrs);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.populate(outBean, inStrs);
         }
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(bean,strs), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stop - startMillis));
 
         // Strs->Dyna
         for (long i = 0; i < counter; i++) {
             bu.populate(outDyna, inStrs);
         }
-        start = System.currentTimeMillis();
+        startMillis = System.currentTimeMillis();
         for (long i = 0; i < counter; i++) {
             bu.populate(outDyna, inStrs);
         }
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(dyna,strs), count=" + counter +
-                           ", time=" + (stop - start));
+                           ", time=" + (stop - startMillis));
 
     }
 

@@ -168,22 +168,23 @@ public abstract class DateConverterTestBase extends TestCase {
             "from OffsetDateTime"
         };
 
-        final long now = System.currentTimeMillis();
+        final long nowMillis = System.currentTimeMillis();
 
         final Object[] date = {
-            new Date(now),
+            new Date(nowMillis),
             new java.util.GregorianCalendar(),
-            new java.sql.Date(now),
-            new java.sql.Time(now),
-            new java.sql.Timestamp(now),
-            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
-            Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDateTime(),
-            ZonedDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault()),
-            OffsetDateTime.ofInstant(Instant.ofEpochMilli(now), ZoneId.systemDefault())
+            new java.sql.Date(nowMillis),
+            new java.sql.Time(nowMillis),
+            new java.sql.Timestamp(nowMillis),
+            Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDate()
+                .atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+            Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDateTime(),
+            ZonedDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault()),
+            OffsetDateTime.ofInstant(Instant.ofEpochMilli(nowMillis), ZoneId.systemDefault())
         };
 
         // Initialize calendar also with same ms to avoid a failing test in a new time slice
-        ((GregorianCalendar)date[1]).setTime(new Date(now));
+        ((GregorianCalendar)date[1]).setTime(new Date(nowMillis));
 
         for (int i = 0; i < date.length; i++) {
             final Object val = makeConverter().convert(getExpectedType(), date[i]);
@@ -191,9 +192,10 @@ public abstract class DateConverterTestBase extends TestCase {
             assertTrue("Convert " + message[i] + " should return a " + getExpectedType().getName(),
                        getExpectedType().isInstance(val));
 
-            long test = now;
+            long test = nowMillis;
             if (date[i] instanceof LocalDate || val instanceof LocalDate) {
-                test = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                test = Instant.ofEpochMilli(nowMillis).atZone(ZoneId.systemDefault()).toLocalDate()
+                    .atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
             }
 
             assertEquals("Convert " + message[i] + " should return a " + date[0],

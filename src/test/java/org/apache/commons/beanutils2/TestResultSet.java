@@ -57,7 +57,7 @@ public class TestResultSet implements InvocationHandler {
     /**
      * The constant (per run) value used to initialize date/time/timestamp.
      */
-    protected long timestamp = System.currentTimeMillis();
+    protected long timestampMillis = System.currentTimeMillis();
 
     /**
      * Meta data for the result set.
@@ -166,7 +166,7 @@ public class TestResultSet implements InvocationHandler {
         } else if ("byteProperty".equals(columnName)) {
             return new Byte((byte) row);
         } else if ("dateProperty".equals(columnName)) {
-            return new Date(timestamp);
+            return new Date(timestampMillis);
         } else if ("doubleProperty".equals(columnName)) {
             return new Double(321.0);
         } else if ("floatProperty".equals(columnName)) {
@@ -182,24 +182,24 @@ public class TestResultSet implements InvocationHandler {
         } else if ("stringProperty".equals(columnName)) {
             return "This is a string";
         } else if ("timeProperty".equals(columnName)) {
-            return new Time(timestamp);
+            return new Time(timestampMillis);
         } else if ("timestampProperty".equals(columnName)) {
-            return new Timestamp(timestamp);
+            return new Timestamp(timestampMillis);
         } else {
             throw new SQLException("Unknown column name " + columnName);
         }
     }
 
     public Date getDate(final String columnName) throws SQLException {
-        return new Date(timestamp);
+        return new Date(timestampMillis);
     }
 
     public Time getTime(final String columnName) throws SQLException {
-        return new Time(timestamp);
+        return new Time(timestampMillis);
     }
 
     public Timestamp getTimestamp(final String columnName) throws SQLException {
-        return new Timestamp(timestamp);
+        return new Timestamp(timestampMillis);
     }
 
     public boolean next() throws SQLException {
