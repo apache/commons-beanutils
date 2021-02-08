@@ -93,7 +93,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      */
     public BeanMap(final Object bean) {
         this.bean = bean;
-        initialise();
+        initialize();
     }
 
     // Map interface
@@ -528,10 +528,10 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
         readMethods.clear();
         writeMethods.clear();
         types.clear();
-        initialise();
+        initialize();
     }
 
-    private void initialise() {
+    private void initialize() {
         if (getBean() == null) {
             return;
         }
