@@ -385,7 +385,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     /**
-     * Test that the cause of exception thrown by a clone() is initialised.
+     * Test that the cause of exception thrown by a clone() is initialized.
      */
     public void testExceptionThrowFromClone() {
 
@@ -429,7 +429,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     }
 
     /**
-     * Test that the cause of exception thrown by clear() is initialised.
+     * Test that the cause of exception thrown by clear() is initialized.
      */
     public void testExceptionThrowFromClear() {
 
