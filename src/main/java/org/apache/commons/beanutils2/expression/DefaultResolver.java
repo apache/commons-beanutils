@@ -123,7 +123,7 @@ public class DefaultResolver implements Resolver {
             if (c == NESTED || c == INDEXED_START) {
                 return null;
             } else if (c == MAPPED_START) {
-                final int end = expression.indexOf(MAPPED_END, i);
+                final int end = expression.lastIndexOf(MAPPED_END);
                 if (end < 0) {
                     throw new IllegalArgumentException("Missing End Delimiter");
                 }
