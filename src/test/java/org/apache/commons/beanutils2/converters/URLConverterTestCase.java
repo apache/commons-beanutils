@@ -52,11 +52,11 @@ public class URLConverterTestCase {
             "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6"
         };
 
-        for (String urlString : input) {
+        for (final String urlString : input) {
             assertEquals("from String to URL", urlString, converter.convert(URL.class, urlString).toString());
             assertEquals("from String to null type", urlString, converter.convert(null, urlString).toString());
 
-            URL url = new URL(urlString);
+            final URL url = new URL(urlString);
             assertEquals(urlString + " to String", urlString, converter.convert(String.class, url));
         }
     }
