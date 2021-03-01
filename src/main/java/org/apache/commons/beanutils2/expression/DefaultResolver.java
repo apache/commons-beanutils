@@ -55,6 +55,12 @@ package org.apache.commons.beanutils2.expression;
  */
 public class DefaultResolver implements Resolver {
 
+    /**
+     * Represents a property is not indexed.
+     * @since 2.0
+     */
+    public static final int NOT_INDEX = -1;
+
     private static final char NESTED        = '.';
     private static final char MAPPED_START  = '(';
     private static final char MAPPED_END    = ')';
@@ -78,12 +84,12 @@ public class DefaultResolver implements Resolver {
     @Override
     public int getIndex(final String expression) {
         if (expression == null || expression.isEmpty()) {
-            return -1;
+            return NOT_INDEX;
         }
         for (int i = 0; i < expression.length(); i++) {
             final char c = expression.charAt(i);
             if (c == NESTED || c == MAPPED_START) {
-                return -1;
+                return NOT_INDEX;
             } else if (c == INDEXED_START) {
                 final int end = expression.indexOf(INDEXED_END, i);
                 if (end < 0) {
@@ -93,7 +99,7 @@ public class DefaultResolver implements Resolver {
                 if (value.isEmpty()) {
                     throw new IllegalArgumentException("No Index Value");
                 }
-                int index = 0;
+                int index;
                 try {
                     index = Integer.parseInt(value, 10);
                 } catch (final Exception e) {
@@ -103,7 +109,7 @@ public class DefaultResolver implements Resolver {
                 return index;
             }
         }
-        return -1;
+        return NOT_INDEX;
     }
 
     /**
