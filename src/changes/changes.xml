@@ -84,8 +84,8 @@
       <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 7 to 8.
       </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update JUnit from 4.12 to 4.13.
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Update JUnit from 4.12 to 4.13.2, #78.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update Jacoco from 0.8.4 to 0.8.5.
@@ -96,8 +96,8 @@
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update maven-surefire-plugin from 2.22.1 to 3.0.0-M5.
       </action>
-      <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update maven-checkstyle-plugin from 3.0.0 to 3.1.1.
+      <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
+        Update maven-checkstyle-plugin from 3.0.0 to 3.1.2, #76.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update maven-pmd-plugin from 3.12.0 to 3.13.0.
@@ -109,16 +109,13 @@
         Update commons-parent from 50 to 51.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update biz.aQute.bndlib from 5.1.0 to 5.2.0 #29, #45.
+        Update biz.aQute.bndlib from 5.1.0 to 5.3.0 #29, #45, #79.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update actions/checkout from v2.3.1 to v2.3.4 #33.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update actions/setup-java from v1.4.0 to v1.4.3 #35.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Update JUnit from 4.13 to 4.13.1.
       </action>
       <action dev="ggregory" type="update" due-to="melloware">
         Jacoco 0.8.6 for JDK15 support #55.
@@ -128,6 +125,9 @@
       </action>
       <action dev="ggregory" type="update" due-to="Arturo Bernal">
         Don't initialize variables to defaults #71.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump actions/cache from v2 to v2.1.4 #77.
       </action>
     </release>
 
