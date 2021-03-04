@@ -106,8 +106,11 @@ public class PropertyUtilsBean {
      * The cache of PropertyDescriptor arrays for beans we have already
      * introspected, keyed by the java.lang.Class of this object.
      */
-    private final WeakFastHashMap<Class<?>, BeanIntrospectionData> descriptorsCache;
-    private final WeakFastHashMap<Class<?>, Map> mappedDescriptorsCache;
+    private ConcurrentWeakKeyHashMap<Class<?>, BeanIntrospectionData> descriptorsCache = null;
+    private ConcurrentWeakKeyHashMap<Class<?>, Map> mappedDescriptorsCache = null;
+
+    /** An empty object array */
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     /** Log instance */
     private final Log log = LogFactory.getLog(PropertyUtilsBean.class);
@@ -119,10 +122,8 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<>();
-        descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap<>();
-        mappedDescriptorsCache.setFast(true);
+        descriptorsCache = new ConcurrentWeakKeyHashMap<>();
+        mappedDescriptorsCache = new ConcurrentWeakKeyHashMap<>();
         introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }
