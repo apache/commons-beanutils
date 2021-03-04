@@ -464,7 +464,8 @@ public class PropertyUtilsBean {
         if (name == null || name.isEmpty()) {
             if (bean.getClass().isArray()) {
                 return Array.get(bean, index);
-            } else if (bean instanceof List) {
+            }
+            if (bean instanceof List) {
                 return ((List<?>)bean).get(index);
             }
         }
@@ -652,29 +653,27 @@ public class PropertyUtilsBean {
             Method readMethod = ((MappedPropertyDescriptor) descriptor).
                     getMappedReadMethod();
             readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
-            if (readMethod != null) {
-                final Object[] keyArray = new Object[1];
-                keyArray[0] = key;
-                result = invokeMethod(readMethod, bean, keyArray);
-            } else {
+            if (readMethod == null) {
                 throw new NoSuchMethodException("Property '" + name +
                         "' has no mapped getter method on bean class '" +
                         bean.getClass() + "'");
             }
+            final Object[] keyArray = new Object[1];
+            keyArray[0] = key;
+            result = invokeMethod(readMethod, bean, keyArray);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
-          if (readMethod != null) {
-            final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
-            /* test and fetch from the map */
-            if (invokeResult instanceof java.util.Map) {
-              result = ((java.util.Map<?, ?>)invokeResult).get(key);
-            }
-          } else {
+          if (readMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
                     "' has no mapped getter method on bean class '" +
                     bean.getClass() + "'");
           }
+        final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
+        /* test and fetch from the map */
+        if (invokeResult instanceof java.util.Map) {
+          result = ((java.util.Map<?, ?>)invokeResult).get(key);
+        }
         }
         return result;
 
@@ -1111,26 +1110,27 @@ public class PropertyUtilsBean {
             final Class<?> type = descriptor.getType();
             if (type == null) {
                 return null;
-            } else if (type.isArray()) {
-                return type.getComponentType();
-            } else {
-                return type;
             }
+            if (type.isArray()) {
+                return type.getComponentType();
+            }
+            return type;
         }
 
         final PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor == null) {
             return null;
-        } else if (descriptor instanceof IndexedPropertyDescriptor) {
+        }
+        if (descriptor instanceof IndexedPropertyDescriptor) {
             return ((IndexedPropertyDescriptor) descriptor).
                     getIndexedPropertyType();
-        } else if (descriptor instanceof MappedPropertyDescriptor) {
+        }
+        if (descriptor instanceof MappedPropertyDescriptor) {
             return ((MappedPropertyDescriptor) descriptor).
                     getMappedPropertyType();
-        } else {
-            return descriptor.getPropertyType();
         }
+        return descriptor.getPropertyType();
 
     }
 
@@ -1199,11 +1199,13 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isIndexed(name)) {
+        }
+        if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isMapped(name)) {
+        }
+        if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
@@ -1530,7 +1532,8 @@ public class PropertyUtilsBean {
             if (bean.getClass().isArray()) {
                 Array.set(bean, index, value);
                 return;
-            } else if (bean instanceof List) {
+            }
+            if (bean instanceof List) {
                 final List<Object> list = toObjectList(bean);
                 list.set(index, value);
                 return;
@@ -1603,14 +1606,13 @@ public class PropertyUtilsBean {
         // Call the property getter to get the array or list
         final Object array = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
         if (!array.getClass().isArray()) {
-            if (array instanceof List) {
-                // Modify the specified value in the List
-                final List<Object> list = toObjectList(array);
-                list.set(index, value);
-            } else {
+            if (!(array instanceof List)) {
                 throw new IllegalArgumentException("Property '" + name +
                         "' is not indexed on bean class '" + bean.getClass() + "'");
             }
+            // Modify the specified value in the List
+            final List<Object> list = toObjectList(array);
+            list.set(index, value);
         } else {
             // Modify the specified value in the array
             Array.set(array, index, value);
@@ -1732,39 +1734,37 @@ public class PropertyUtilsBean {
                     ((MappedPropertyDescriptor) descriptor).
                     getMappedWriteMethod();
             mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
-            if (mappedWriteMethod != null) {
-                final Object[] params = new Object[2];
-                params[0] = key;
-                params[1] = value;
-                if (log.isTraceEnabled()) {
-                    final String valueClassName =
-                        value == null ? "<null>" : value.getClass().getName();
-                    log.trace("setSimpleProperty: Invoking method "
-                              + mappedWriteMethod + " with key=" + key
-                              + ", value=" + value
-                              + " (class " + valueClassName +")");
-                }
-                invokeMethod(mappedWriteMethod, bean, params);
-            } else {
+            if (mappedWriteMethod == null) {
                 throw new NoSuchMethodException
                     ("Property '" + name + "' has no mapped setter method" +
                      "on bean class '" + bean.getClass() + "'");
             }
+            final Object[] params = new Object[2];
+            params[0] = key;
+            params[1] = value;
+            if (log.isTraceEnabled()) {
+                final String valueClassName =
+                    value == null ? "<null>" : value.getClass().getName();
+                log.trace("setSimpleProperty: Invoking method "
+                          + mappedWriteMethod + " with key=" + key
+                          + ", value=" + value
+                          + " (class " + valueClassName +")");
+            }
+            invokeMethod(mappedWriteMethod, bean, params);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
-          if (readMethod != null) {
-            final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
-            /* test and fetch from the map */
-            if (invokeResult instanceof java.util.Map) {
-              final java.util.Map<String, Object> map = toPropertyMap(invokeResult);
-              map.put(key, value);
-            }
-          } else {
+          if (readMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
                     "' has no mapped getter method on bean class '" +
                     bean.getClass() + "'");
           }
+        final Object invokeResult = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
+        /* test and fetch from the map */
+        if (invokeResult instanceof java.util.Map) {
+          final java.util.Map<String, Object> map = toPropertyMap(invokeResult);
+          map.put(key, value);
+        }
         }
 
     }
@@ -1987,11 +1987,13 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isIndexed(name)) {
+        }
+        if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isMapped(name)) {
+        }
+        if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");

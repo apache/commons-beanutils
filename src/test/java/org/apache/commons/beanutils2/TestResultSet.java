@@ -158,36 +158,47 @@ public class TestResultSet implements InvocationHandler {
         }
         if ("bigDecimalProperty".equals(columnName)) {
             return new BigDecimal(123.45);
-        } else if ("booleanProperty".equals(columnName)) {
+        }
+        if ("booleanProperty".equals(columnName)) {
             if (row % 2 == 0) {
                 return Boolean.TRUE;
             }
             return Boolean.FALSE;
-        } else if ("byteProperty".equals(columnName)) {
-            return new Byte((byte) row);
-        } else if ("dateProperty".equals(columnName)) {
-            return new Date(timestampMillis);
-        } else if ("doubleProperty".equals(columnName)) {
-            return new Double(321.0);
-        } else if ("floatProperty".equals(columnName)) {
-            return new Float((float) 123.0);
-        } else if ("intProperty".equals(columnName)) {
-            return new Integer(100 + row);
-        } else if ("longProperty".equals(columnName)) {
-            return new Long(200 + row);
-        } else if ("nullProperty".equals(columnName)) {
-            return null;
-        } else if ("shortProperty".equals(columnName)) {
-            return new Short((short) (300 + row));
-        } else if ("stringProperty".equals(columnName)) {
-            return "This is a string";
-        } else if ("timeProperty".equals(columnName)) {
-            return new Time(timestampMillis);
-        } else if ("timestampProperty".equals(columnName)) {
-            return new Timestamp(timestampMillis);
-        } else {
-            throw new SQLException("Unknown column name " + columnName);
         }
+        if ("byteProperty".equals(columnName)) {
+            return new Byte((byte) row);
+        }
+        if ("dateProperty".equals(columnName)) {
+            return new Date(timestampMillis);
+        }
+        if ("doubleProperty".equals(columnName)) {
+            return new Double(321.0);
+        }
+        if ("floatProperty".equals(columnName)) {
+            return new Float((float) 123.0);
+        }
+        if ("intProperty".equals(columnName)) {
+            return new Integer(100 + row);
+        }
+        if ("longProperty".equals(columnName)) {
+            return new Long(200 + row);
+        }
+        if ("nullProperty".equals(columnName)) {
+            return null;
+        }
+        if ("shortProperty".equals(columnName)) {
+            return new Short((short) (300 + row));
+        }
+        if ("stringProperty".equals(columnName)) {
+            return "This is a string";
+        }
+        if ("timeProperty".equals(columnName)) {
+            return new Time(timestampMillis);
+        }
+        if ("timestampProperty".equals(columnName)) {
+            return new Timestamp(timestampMillis);
+        }
+        throw new SQLException("Unknown column name " + columnName);
     }
 
     public Date getDate(final String columnName) throws SQLException {

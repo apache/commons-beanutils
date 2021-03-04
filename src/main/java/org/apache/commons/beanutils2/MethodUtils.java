@@ -1174,24 +1174,29 @@ public class MethodUtils {
         // does anyone know a better strategy than comparing names?
         if (boolean.class.equals(primitiveType)) {
             return Boolean.class;
-        } else if (float.class.equals(primitiveType)) {
-            return Float.class;
-        } else if (long.class.equals(primitiveType)) {
-            return Long.class;
-        } else if (int.class.equals(primitiveType)) {
-            return Integer.class;
-        } else if (short.class.equals(primitiveType)) {
-            return Short.class;
-        } else if (byte.class.equals(primitiveType)) {
-            return Byte.class;
-        } else if (double.class.equals(primitiveType)) {
-            return Double.class;
-        } else if (char.class.equals(primitiveType)) {
-            return Character.class;
-        } else {
-
-            return null;
         }
+        if (float.class.equals(primitiveType)) {
+            return Float.class;
+        }
+        if (long.class.equals(primitiveType)) {
+            return Long.class;
+        }
+        if (int.class.equals(primitiveType)) {
+            return Integer.class;
+        }
+        if (short.class.equals(primitiveType)) {
+            return Short.class;
+        }
+        if (byte.class.equals(primitiveType)) {
+            return Byte.class;
+        }
+        if (double.class.equals(primitiveType)) {
+            return Double.class;
+        }
+        if (char.class.equals(primitiveType)) {
+            return Character.class;
+        }
+        return null;
     }
 
     /**
@@ -1205,27 +1210,33 @@ public class MethodUtils {
         // does anyone know a better strategy than comparing names?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
-        } else if (Float.class.equals(wrapperType)) {
-            return float.class;
-        } else if (Long.class.equals(wrapperType)) {
-            return long.class;
-        } else if (Integer.class.equals(wrapperType)) {
-            return int.class;
-        } else if (Short.class.equals(wrapperType)) {
-            return short.class;
-        } else if (Byte.class.equals(wrapperType)) {
-            return byte.class;
-        } else if (Double.class.equals(wrapperType)) {
-            return double.class;
-        } else if (Character.class.equals(wrapperType)) {
-            return char.class;
-        } else {
-            final Log log = LogFactory.getLog(MethodUtils.class);
-            if (log.isDebugEnabled()) {
-                log.debug("Not a known primitive wrapper class: " + wrapperType);
-            }
-            return null;
         }
+        if (Float.class.equals(wrapperType)) {
+            return float.class;
+        }
+        if (Long.class.equals(wrapperType)) {
+            return long.class;
+        }
+        if (Integer.class.equals(wrapperType)) {
+            return int.class;
+        }
+        if (Short.class.equals(wrapperType)) {
+            return short.class;
+        }
+        if (Byte.class.equals(wrapperType)) {
+            return byte.class;
+        }
+        if (Double.class.equals(wrapperType)) {
+            return double.class;
+        }
+        if (Character.class.equals(wrapperType)) {
+            return char.class;
+        }
+        final Log log = LogFactory.getLog(MethodUtils.class);
+        if (log.isDebugEnabled()) {
+            log.debug("Not a known primitive wrapper class: " + wrapperType);
+        }
+        return null;
     }
 
     /**

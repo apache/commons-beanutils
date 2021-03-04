@@ -224,20 +224,20 @@ public class ConvertUtilsBean {
 
         if (value == null) {
             return null;
-        } else if (value.getClass().isArray()) {
-            if (Array.getLength(value) < 1) {
-                return null;
-            }
-            value = Array.get(value, 0);
-            if (value == null) {
-                return null;
-            }
-            final Converter converter = lookup(String.class);
-            return converter.convert(String.class, value);
-        } else {
+        }
+        if (!value.getClass().isArray()) {
             final Converter converter = lookup(String.class);
             return converter.convert(String.class, value);
         }
+        if (Array.getLength(value) < 1) {
+            return null;
+        }
+        value = Array.get(value, 0);
+        if (value == null) {
+            return null;
+        }
+        final Converter converter = lookup(String.class);
+        return converter.convert(String.class, value);
 
     }
 

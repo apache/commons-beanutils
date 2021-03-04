@@ -187,7 +187,8 @@ public abstract class AbstractConverter implements Converter {
                 return targetType.cast(convertToString(value));
 
             // No conversion necessary
-            } else if (targetType.equals(sourceType)) {
+            }
+            if (targetType.equals(sourceType)) {
                 if (log().isDebugEnabled()) {
                     log().debug("    No conversion required, value is already a "
                                     + toString(targetType));
@@ -195,14 +196,13 @@ public abstract class AbstractConverter implements Converter {
                 return targetType.cast(value);
 
             // Convert --> Type
-            } else {
-                final Object result = convertToType(targetType, value);
-                if (log().isDebugEnabled()) {
-                    log().debug("    Converted to " + toString(targetType) +
-                                   " value '" + result + "'");
-                }
-                return targetType.cast(result);
             }
+            final Object result = convertToType(targetType, value);
+            if (log().isDebugEnabled()) {
+                log().debug("    Converted to " + toString(targetType) +
+                               " value '" + result + "'");
+            }
+            return targetType.cast(result);
         } catch (final Throwable t) {
             return handleError(targetType, value, t);
         }

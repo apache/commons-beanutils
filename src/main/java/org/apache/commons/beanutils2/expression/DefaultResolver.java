@@ -84,7 +84,8 @@ public class DefaultResolver implements Resolver {
             final char c = expression.charAt(i);
             if (c == NESTED || c == MAPPED_START) {
                 return -1;
-            } else if (c == INDEXED_START) {
+            }
+            if (c == INDEXED_START) {
                 final int end = expression.indexOf(INDEXED_END, i);
                 if (end < 0) {
                     throw new IllegalArgumentException("Missing End Delimiter");
@@ -122,7 +123,8 @@ public class DefaultResolver implements Resolver {
             final char c = expression.charAt(i);
             if (c == NESTED || c == INDEXED_START) {
                 return null;
-            } else if (c == MAPPED_START) {
+            }
+            if (c == MAPPED_START) {
                 final int end = expression.indexOf(MAPPED_END, i);
                 if (end < 0) {
                     throw new IllegalArgumentException("Missing End Delimiter");
@@ -184,7 +186,8 @@ public class DefaultResolver implements Resolver {
             final char c = expression.charAt(i);
             if (c == NESTED || c == MAPPED_START) {
                 return false;
-            } else if (c == INDEXED_START) {
+            }
+            if (c == INDEXED_START) {
                 return true;
             }
         }
@@ -207,7 +210,8 @@ public class DefaultResolver implements Resolver {
             final char c = expression.charAt(i);
             if (c == NESTED || c == INDEXED_START) {
                 return false;
-            } else if (c == MAPPED_START) {
+            }
+            if (c == MAPPED_START) {
                 return true;
             }
         }

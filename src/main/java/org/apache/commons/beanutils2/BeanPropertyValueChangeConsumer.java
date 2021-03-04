@@ -135,13 +135,12 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
     public BeanPropertyValueChangeConsumer(final String propertyName, final V propertyValue, final boolean ignoreNull) {
-        if (propertyName != null && !propertyName.isEmpty()) {
-            this.propertyName = propertyName;
-            this.propertyValue = propertyValue;
-            this.ignoreNull = ignoreNull;
-        } else {
+        if (propertyName == null || propertyName.isEmpty()) {
             throw new IllegalArgumentException("propertyName cannot be null or empty");
         }
+        this.propertyName = propertyName;
+        this.propertyValue = propertyValue;
+        this.ignoreNull = ignoreNull;
     }
 
     /**
@@ -166,15 +165,14 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Unable to execute Closure. Null value encountered in property path...";
 
-            if (ignoreNull) {
-                log.warn(errorMsg, e);
-            } else {
+            if (!ignoreNull) {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
                     log.error(errorMsg, e);
                 }
                 throw iae;
             }
+            log.warn(errorMsg, e);
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);

@@ -171,12 +171,11 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
         if (!comparator.equals(beanComparator.comparator)) {
             return false;
         }
-        if (property != null) {
-            if (!property.equals(beanComparator.property)) {
-                return false;
-            }
-        } else {
+        if (property == null) {
             return beanComparator.property == null;
+        }
+        if (!property.equals(beanComparator.property)) {
+            return false;
         }
 
         return true;

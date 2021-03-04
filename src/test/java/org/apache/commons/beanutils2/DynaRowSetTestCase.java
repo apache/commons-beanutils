@@ -369,11 +369,11 @@ public class DynaRowSetTestCase extends TestCase {
             final String columnName = getColumnName(columnIndex);
             if (columnName.equals("dateProperty")) {
                 return java.sql.Timestamp.class.getName();
-            } else if (columnName.equals("timestampProperty")) {
-                return CustomTimestamp.class.getName();
-            } else {
-                return super.getColumnClassName(columnIndex);
             }
+            if (columnName.equals("timestampProperty")) {
+                return CustomTimestamp.class.getName();
+            }
+            return super.getColumnClassName(columnIndex);
         }
     }
     private static class CustomTimestamp {

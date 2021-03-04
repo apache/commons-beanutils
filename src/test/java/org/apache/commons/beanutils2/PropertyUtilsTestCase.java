@@ -3837,12 +3837,11 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             final PropertyDescriptor pd =
                     PropertyUtils.getPropertyDescriptor(bean, name);
-            if (read != null || write != null) {
-                assertNotNull("Got descriptor", pd);
-            } else {
+            if (read == null && write == null) {
                 assertNull("Got descriptor", pd);
                 return;
             }
+            assertNotNull("Got descriptor", pd);
             final Method rm = pd.getReadMethod();
             if (read != null) {
                 assertNotNull("Got read method", rm);

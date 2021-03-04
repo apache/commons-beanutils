@@ -532,7 +532,8 @@ public class BeanUtilsBean {
         final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
             return null;
-        } else if (value instanceof Collection) {
+        }
+        if (value instanceof Collection) {
             final ArrayList<String> values = new ArrayList<>();
             for (final Object item : (Collection<?>) value) {
                 if (item == null) {
@@ -543,24 +544,24 @@ public class BeanUtilsBean {
                 }
             }
             return values.toArray(new String[values.size()]);
-        } else if (value.getClass().isArray()) {
-            final int n = Array.getLength(value);
-            final String[] results = new String[n];
-            for (int i = 0; i < n; i++) {
-                final Object item = Array.get(value, i);
-                if (item == null) {
-                    results[i] = null;
-                } else {
-                    // convert to string using convert utils
-                    results[i] = getConvertUtils().convert(item);
-                }
-            }
-            return results;
-        } else {
+        }
+        if (!value.getClass().isArray()) {
             final String[] results = new String[1];
             results[0] = getConvertUtils().convert(value);
             return results;
         }
+        final int n = Array.getLength(value);
+        final String[] results = new String[n];
+        for (int i = 0; i < n; i++) {
+            final Object item = Array.get(value, i);
+            if (item == null) {
+                results[i] = null;
+            } else {
+                // convert to string using convert utils
+                results[i] = getConvertUtils().convert(item);
+            }
+        }
+        return results;
 
     }
 

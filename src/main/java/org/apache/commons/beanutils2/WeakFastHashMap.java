@@ -329,7 +329,8 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         // Simple tests that require no synchronization
         if (o == this) {
             return true;
-        } else if (!(o instanceof Map)) {
+        }
+        if (!(o instanceof Map)) {
             return false;
         }
         final Map<?, ?> mo = (Map<?, ?>) o;

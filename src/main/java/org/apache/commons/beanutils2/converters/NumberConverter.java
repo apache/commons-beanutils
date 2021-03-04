@@ -370,13 +370,14 @@ public abstract class NumberConverter extends AbstractConverter {
         if (targetType.equals(BigDecimal.class)) {
             if (value instanceof Float || value instanceof Double) {
                 return targetType.cast(new BigDecimal(value.toString()));
-            } else if (value instanceof BigInteger) {
-                return targetType.cast(new BigDecimal((BigInteger)value));
-            } else if (value instanceof BigDecimal) {
-                return targetType.cast(new BigDecimal(value.toString()));
-            } else {
-                return targetType.cast(BigDecimal.valueOf(value.longValue()));
             }
+            if (value instanceof BigInteger) {
+                return targetType.cast(new BigDecimal((BigInteger)value));
+            }
+            if (value instanceof BigDecimal) {
+                return targetType.cast(new BigDecimal(value.toString()));
+            }
+            return targetType.cast(BigDecimal.valueOf(value.longValue()));
         }
 
         // BigInteger

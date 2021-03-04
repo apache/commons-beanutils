@@ -367,13 +367,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Return the indexed value
         if (indexedProperty.getClass().isArray()) {
             return Array.get(indexedProperty, index);
-        } else if (indexedProperty instanceof List) {
-            return ((List<?>)indexedProperty).get(index);
-        } else {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]' "
-                                  + indexedProperty.getClass().getName());
         }
+        if (indexedProperty instanceof List) {
+            return ((List<?>)indexedProperty).get(index);
+        }
+        throw new IllegalArgumentException
+            ("Non-indexed property for '" + name + "[" + index + "]' "
+                              + indexedProperty.getClass().getName());
 
     }
 
@@ -452,13 +452,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return;
         }
 
-        if (value instanceof Map) {
-            ((Map<?, ?>) value).remove(key);
-        } else {
+        if (!(value instanceof Map)) {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'"
                             + value.getClass().getName());
         }
+        ((Map<?, ?>) value).remove(key);
 
     }
 
@@ -800,23 +799,29 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         if (type == Boolean.TYPE) {
             return Boolean.FALSE;
-        } else if (type == Integer.TYPE) {
-            return Integer_ZERO;
-        } else if (type == Long.TYPE) {
-            return Long_ZERO;
-        } else if (type == Double.TYPE) {
-            return Double_ZERO;
-        } else if (type == Float.TYPE) {
-            return Float_ZERO;
-        } else if (type == Byte.TYPE) {
-            return Byte_ZERO;
-        } else if (type == Short.TYPE) {
-            return Short_ZERO;
-        } else if (type == Character.TYPE) {
-            return Character_SPACE;
-        } else {
-            return null;
         }
+        if (type == Integer.TYPE) {
+            return Integer_ZERO;
+        }
+        if (type == Long.TYPE) {
+            return Long_ZERO;
+        }
+        if (type == Double.TYPE) {
+            return Double_ZERO;
+        }
+        if (type == Float.TYPE) {
+            return Float_ZERO;
+        }
+        if (type == Byte.TYPE) {
+            return Byte_ZERO;
+        }
+        if (type == Short.TYPE) {
+            return Short_ZERO;
+        }
+        if (type == Character.TYPE) {
+            return Character_SPACE;
+        }
+        return null;
 
     }
 
