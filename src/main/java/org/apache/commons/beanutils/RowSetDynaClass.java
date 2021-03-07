@@ -65,7 +65,7 @@ import java.util.List;
  * @version $Id$
  */
 
-public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
+public class RowSetDynaClass extends JDBCDynaClass {
 
 
     // ----------------------------------------------------- Instance variables
