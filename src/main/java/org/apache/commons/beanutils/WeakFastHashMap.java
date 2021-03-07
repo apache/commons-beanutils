@@ -61,7 +61,7 @@ import java.util.WeakHashMap;
  * @since Commons Collections 1.0
  * @version $Id$
  */
-class WeakFastHashMap<K, V> extends HashMap<K, V> {
+public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     /**
      * The underlying map we are managing.

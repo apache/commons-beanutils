@@ -22,8 +22,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
-
-import org.apache.commons.collections.FastHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -376,10 +375,8 @@ public class PropertyUtils {
      * @param beanClass Bean class to be introspected
      * @return the mapped property descriptors
      * @see PropertyUtilsBean#getMappedPropertyDescriptors(Class)
-     * @deprecated This method should not be exposed
      */
-    @Deprecated
-    public static FastHashMap getMappedPropertyDescriptors(final Class<?> beanClass) {
+    public static Map<Class<?>, Map> getMappedPropertyDescriptors(final Class<?> beanClass) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(beanClass);
 
@@ -397,7 +394,7 @@ public class PropertyUtils {
      * @deprecated This method should not be exposed
      */
     @Deprecated
-    public static FastHashMap getMappedPropertyDescriptors(final Object bean) {
+    public static Map<Class<?>, Map> getMappedPropertyDescriptors(final Object bean) {
 
         return PropertyUtilsBean.getInstance().getMappedPropertyDescriptors(bean);
 

@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
 
-import org.apache.commons.collections.comparators.ComparableComparator;
+import org.apache.commons.collections4.comparators.ComparableComparator;
 
 /**
  * <p>
@@ -84,7 +84,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * If the property passed in is null then the actual objects will be compared
      */
     public BeanComparator( final String property ) {
-        this( property, ComparableComparator.getInstance() );
+        this( property, ComparableComparator.INSTANCE );
     }
 
     /**
@@ -108,7 +108,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         if (comparator != null) {
             this.comparator = comparator;
         } else {
-            this.comparator = ComparableComparator.getInstance();
+            this.comparator = ComparableComparator.INSTANCE;
         }
     }
 

@@ -17,7 +17,7 @@
 
 package org.apache.commons.beanutils;
 
-import org.apache.commons.collections.Closure;
+import org.apache.commons.collections4.Closure;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

@@ -27,7 +27,7 @@ import junit.textui.TestRunner;
 
 import org.apache.commons.beanutils.bugs.other.Jira87BeanFactory;
 import org.apache.commons.collections.BulkTest;
-import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections.map.AbstractTestMap;
 
 /**

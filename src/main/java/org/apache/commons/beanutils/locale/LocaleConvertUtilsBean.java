@@ -24,8 +24,10 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.WeakFastHashMap;
 import org.apache.commons.beanutils.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.BigIntegerLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.ByteLocaleConverter;
@@ -38,7 +40,6 @@ import org.apache.commons.beanutils.locale.converters.SqlDateLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.SqlTimeLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.SqlTimestampLocaleConverter;
 import org.apache.commons.beanutils.locale.converters.StringLocaleConverter;
-import org.apache.commons.collections.FastHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -106,9 +107,9 @@ public class LocaleConvertUtilsBean {
 
     /** Every entry of the mapConverters is:
      *  key = locale
-     *  value = FastHashMap of converters for the certain locale.
+     *  value = map of converters for the certain locale.
      */
-    private final FastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
+    private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
     // --------------------------------------------------------- Constructors
 
@@ -371,7 +372,7 @@ public class LocaleConvertUtilsBean {
      */
     public void deregister() {
 
-        final FastHashMap defaultConverter = lookup(defaultLocale);
+        final Map<Class<?>, LocaleConverter> defaultConverter = lookup(defaultLocale);
 
         mapConverters.setFast(false);
 
@@ -415,7 +416,7 @@ public class LocaleConvertUtilsBean {
      */
     public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
 
-        final LocaleConverter converter = (LocaleConverter) lookup(locale).get(clazz);
+        final LocaleConverter converter = lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
             log.trace("LocaleConverter:" + converter);
@@ -425,23 +426,23 @@ public class LocaleConvertUtilsBean {
     }
 
     /**
-     * Look up and return any registered FastHashMap instance for the specified locale;
+     * Look up and return any registered map instance for the specified locale;
      * if there is no registered one, return <code>null</code>.
      *
      * @param locale The Locale
-     * @return The FastHashMap instance contains the all {@link LocaleConverter} types for
+     * @return The map instance contains the all {@link LocaleConverter} types for
      *  the specified locale.
      * @deprecated This method will be modified to return a Map in the next release.
      */
     @Deprecated
-    protected FastHashMap lookup(final Locale locale) {
-        FastHashMap localeConverters;
+    protected Map<Class<?>, LocaleConverter> lookup(final Locale locale) {
+        Map<Class<?>, LocaleConverter> localeConverters;
 
         if (locale == null) {
-            localeConverters = (FastHashMap) mapConverters.get(defaultLocale);
+            localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(defaultLocale);
         }
         else {
-            localeConverters = (FastHashMap) mapConverters.get(locale);
+            localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(locale);
 
             if (localeConverters == null) {
                 localeConverters = create(locale);
@@ -456,14 +457,14 @@ public class LocaleConvertUtilsBean {
      *  Create all {@link LocaleConverter} types for specified locale.
      *
      * @param locale The Locale
-     * @return The FastHashMap instance contains the all {@link LocaleConverter} types
+     * @return The map instance contains the all {@link LocaleConverter} types
      *  for the specified locale.
      * @deprecated This method will be modified to return a Map in the next release.
      */
     @Deprecated
-    protected FastHashMap create(final Locale locale) {
+    protected Map<Class<?>, LocaleConverter> create(final Locale locale) {
 
-        final FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
+        final DelegateFastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -510,7 +511,7 @@ public class LocaleConvertUtilsBean {
      * releases (where FastHashMap is exposed in the API), but
      * use WeakHashMap to resolve memory leaks.
      */
-    private static class DelegateFastHashMap extends FastHashMap {
+    private static class DelegateFastHashMap implements Map {
 
         private final Map<Object, Object> map;
 
@@ -576,13 +577,10 @@ public class LocaleConvertUtilsBean {
         public Collection<Object> values() {
             return map.values();
         }
-        @Override
-        public boolean getFast() {
-            return BeanUtils.getCacheFast(map);
-        }
-        @Override
         public void setFast(final boolean fast) {
-            BeanUtils.setCacheFast(map, fast);
+        	if (map instanceof WeakFastHashMap) {
+        		((WeakFastHashMap<?, ?>)map).setFast(fast);
+        	}
         }
     }
 }

@@ -476,30 +476,4 @@ public class BeanUtils {
     public static <K, V> Map<K, V> createCache() {
         return new WeakFastHashMap<K, V>();
     }
-
-    /**
-     * Return whether a Map is fast
-     * @param map The map
-     * @return Whether it is fast or not.
-     * @since 1.8.0
-     */
-    public static boolean getCacheFast(final Map<?, ?> map) {
-        if (map instanceof WeakFastHashMap) {
-            return ((WeakFastHashMap<?, ?>) map).getFast();
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Set whether fast on a Map
-     * @param map The map
-     * @param fast Whether it should be fast or not.
-     * @since 1.8.0
-     */
-    public static void setCacheFast(final Map<?, ?> map, final boolean fast) {
-        if (map instanceof WeakFastHashMap) {
-            ((WeakFastHashMap<?, ?>)map).setFast(fast);
-        }
-    }
 }
