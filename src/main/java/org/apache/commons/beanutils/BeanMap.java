@@ -69,7 +69,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
 
     /**
      * This HashMap has been made unmodifiable to prevent issues when
-     * loaded in a shared ClassLoader enviroment.
+     * loaded in a shared ClassLoader environment.
      *
      * @see "http://issues.apache.org/jira/browse/BEANUTILS-112"
      * @deprecated Use {@link BeanMap#getTypeTransformer(Class)} method
@@ -127,9 +127,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     };
 
     private static Map<Class<? extends Object>, Transformer> createTypeTransformers() {
-        final Map<Class<? extends Object>, Transformer> defaultTransformers =
+        final Map<Class<? extends Object>, Transformer> defTransformers =
                 new HashMap<Class<? extends Object>, Transformer>();
-        defaultTransformers.put(
+        defTransformers.put(
             Boolean.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -137,7 +137,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Character.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -145,7 +145,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Byte.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -153,7 +153,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Short.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -161,7 +161,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Integer.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -169,7 +169,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Long.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -177,7 +177,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Float.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -185,7 +185,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        defaultTransformers.put(
+        defTransformers.put(
             Double.TYPE,
             new Transformer() {
                 public Object transform( final Object input ) {
@@ -193,7 +193,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
                 }
             }
         );
-        return defaultTransformers;
+        return defTransformers;
     }
 
 
@@ -753,7 +753,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
     /**
      * Map entry used by {@link BeanMap}.
      */
-    protected static class Entry extends AbstractMapEntry {
+    protected static class Entry extends AbstractMapEntry<Object, Object> {
         private final BeanMap owner;
 
         /**
@@ -805,9 +805,9 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         throws IllegalAccessException, ClassCastException {
         try {
             if ( value != null ) {
-                final Class<? extends Object>[] types = method.getParameterTypes();
-                if ( types != null && types.length > 0 ) {
-                    final Class<? extends Object> paramType = types[0];
+                final Class<? extends Object>[] parmTypes = method.getParameterTypes();
+                if ( parmTypes != null && parmTypes.length > 0 ) {
+                    final Class<? extends Object> paramType = parmTypes[0];
                     if ( ! paramType.isAssignableFrom( value.getClass() ) ) {
                         value = convertType( paramType, value );
                     }
@@ -868,9 +868,8 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         // try call constructor
-        final Class<?>[] types = { value.getClass() };
         try {
-            final Constructor<?> constructor = newType.getConstructor( types );
+            final Constructor<?> constructor = newType.getConstructor( value.getClass() );
             final Object[] arguments = { value };
             return constructor.newInstance( arguments );
         }
