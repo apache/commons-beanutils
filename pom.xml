@@ -49,7 +49,7 @@
     <!-- limit memory size see BEANUTILS-291; allow command-line override -->
     <!-- Originally 25M, increased to 56M to get round Continuum CI / Travis CI build failures -->
     <surefire.argLine>-Xmx256M</surefire.argLine>
-    <commons.japicmp.version>0.15.2</commons.japicmp.version>
+    <commons.japicmp.version>0.15.3</commons.japicmp.version>
     <commons.clirr.version>2.8</commons.clirr.version>
     <commons.encoding>utf-8</commons.encoding>
     <commons.jacoco.version>0.8.6</commons.jacoco.version>
