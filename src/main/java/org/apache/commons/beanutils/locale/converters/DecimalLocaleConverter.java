@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
@@ -236,7 +237,7 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
         // fact that objects returned from this method have the same toString
         // representation, each call to getInstance actually returns a new
         // object.
-        final DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(locale);
+        final DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(locale);
 
         // if some constructors default pattern to null, it makes only sense
         // to handle null pattern gracefully
