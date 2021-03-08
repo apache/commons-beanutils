@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p><code>Predicate</code> that evaluates a property value against a specified value.</p>
  * <p>
- * An implementation of <code>org.apache.commons.collections.Predicate</code> that evaluates a
+ * An implementation of <code>org.apache.commons.collections4.Predicate</code> that evaluates a
  * property value on the object provided against a specified value and returns <code>true</code>
  * if equal; <code>false</code> otherwise.
  * The <code>BeanPropertyValueEqualsPredicate</code> constructor takes two parameters which
@@ -106,7 +106,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtils
- * @see org.apache.commons.collections.Predicate
+ * @see org.apache.commons.collections4.Predicate
  */
 public class BeanPropertyValueEqualsPredicate implements Predicate {
 

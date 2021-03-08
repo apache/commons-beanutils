@@ -36,6 +36,12 @@
       <action issue="BEANUTILS-505" dev="ggregory" type="update" due-to="Gary Gregory">
         Add missing serialVersionUID to Serializable classes.
       </action>
+      <action issue="BEANUTILS-517" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update Apache Commons Collections from 4.2 to 4.3
+      </action>      
+      <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
+        Update Apache Commons Collections from 4.3 to 4.4.
+      </action>      
     </release>
 
     <release version="1.9.4" date="2019-06-12" description="The primary reason for this release is a bugfix for

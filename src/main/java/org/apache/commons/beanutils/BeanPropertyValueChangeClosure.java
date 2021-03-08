@@ -27,7 +27,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * <p><code>Closure</code> that sets a property.</p>
  * <p>
- * An implementation of <code>org.apache.commons.collections.Closure</code> that updates
+ * An implementation of <code>org.apache.commons.collections4.Closure</code> that updates
  * a specified property on the object provided with a specified value.
  * The <code>BeanPropertyValueChangeClosure</code> constructor takes two parameters which determine
  * what property will be updated and with what value.
@@ -77,7 +77,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtils
- * @see org.apache.commons.collections.Closure
+ * @see org.apache.commons.collections4.Closure
  */
 public class BeanPropertyValueChangeClosure implements Closure {
 
