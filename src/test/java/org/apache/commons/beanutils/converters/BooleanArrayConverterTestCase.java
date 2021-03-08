@@ -156,7 +156,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
         final BooleanConverter bc = new BooleanConverter(
             trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
         final BooleanArrayConverter converter = new BooleanArrayConverter(
-            bc, BooleanArrayConverter.NO_DEFAULT);
+            bc, AbstractArrayConverter.NO_DEFAULT);
 
         final boolean[] results = (boolean[]) converter.convert(null, "NOPE, sure, sure");
         assertNotNull(results);
@@ -261,7 +261,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
             trueStrings, falseStrings, BooleanConverter.NO_DEFAULT);
 
         final BooleanArrayConverter converter = new BooleanArrayConverter(
-            bc, BooleanArrayConverter.NO_DEFAULT);
+            bc, AbstractArrayConverter.NO_DEFAULT);
 
         ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
         final boolean[] sample = new boolean[0];

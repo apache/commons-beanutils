@@ -71,7 +71,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         LocaleConvertUtils.deregister();
 
-        final NumberFormat nf = DecimalFormat.getNumberInstance();
+        final NumberFormat nf = NumberFormat.getNumberInstance();
         final String result = nf.format(1.1);
 
         // could be commas instead of stops in Europe.

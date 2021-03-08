@@ -27,6 +27,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.BeanUtilsTestCase;
 import org.apache.commons.beanutils.ContextClassLoaderLocal;
 import org.apache.commons.beanutils.ConversionException;
@@ -297,7 +298,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
         assertTrue(
                     "Different LocaleBeanUtilsBean instances per context classloader",
-                    LocaleBeanUtilsBean.getInstance() != signal.getBean());
+                    BeanUtilsBean.getInstance() != signal.getBean());
         assertTrue(
                     "Different LocaleConvertUtilsBean instances per context classloader",
                     LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());
