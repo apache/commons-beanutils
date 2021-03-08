@@ -48,6 +48,7 @@ import org.apache.commons.collections4.comparators.ComparableComparator;
  */
 public class BeanComparator<T> implements Comparator<T>, Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String property;
     private final Comparator<?> comparator;
 

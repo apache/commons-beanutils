@@ -44,6 +44,8 @@ package org.apache.commons.beanutils;
  */
 public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Controls whether changes to this DynaClass's properties are allowed.
      */
