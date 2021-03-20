@@ -275,7 +275,7 @@ public class ConvertUtilsBean {
      * Otherwise, an array will be constructed whose component type is the
      * specified class.
      *
-     * @param values Array of values to be converted
+     * @param values Array of values to be converted, (may be null)
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
      *
@@ -284,6 +284,7 @@ public class ConvertUtilsBean {
     public Object convert(final String[] values, final Class<?> clazz) {
 
         Class<?> type = clazz;
+        String[] args = values;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
         }
@@ -298,9 +299,12 @@ public class ConvertUtilsBean {
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
-        final Object array = Array.newInstance(type, values.length);
-        for (int i = 0; i < values.length; i++) {
-            Array.set(array, i, converter.convert(type, values[i]));
+        if (args == null) {
+            args = BeanUtils.EMPTY_STRING_ARRAY;
+        }
+        final Object array = Array.newInstance(type, args.length);
+        for (int i = 0; i < args.length; i++) {
+            Array.set(array, i, converter.convert(type, args[i]));
         }
         return array;
 
