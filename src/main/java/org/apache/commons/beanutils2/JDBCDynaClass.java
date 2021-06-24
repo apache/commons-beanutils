@@ -262,6 +262,16 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     }
 
     /**
+     * Indicate whether the column names or labels should be used.
+     *
+     * @return {@code true} if the column names or labels should be used,
+     * otherwise {@code false}.
+     */
+    protected boolean isUseColumnLabel() {
+        return useColumnLabel;
+    }
+
+    /**
      * Get a column value from a {@link ResultSet} for the specified name.
      *
      * @param resultSet The result set
@@ -309,5 +319,12 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         }
         return name;
     }
-
+    /**
+     * Get the Cross Reference <code>map</code> for column name.
+     *
+     * @return  The Cross Reference for column name <code>map</code>
+     */
+    protected Map<String, String> getColumnNameXref() {
+        return columnNameXref;
+    }
 }
