@@ -41,9 +41,9 @@ public class DefaultResolverTestCase extends TestCase {
     private final String[] validMapNames      = new String[] {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
     private final String[] validMapKeys       = new String[] {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
 
-    private final String[] nextExpressions   = new String[] {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx"};
-    private final String[] nextProperties    = new String[] {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]"};
-    private final String[] removeProperties  = new String[] {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
+    private final String[] nextExpressions   = new String[] {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx", ""};
+    private final String[] nextProperties    = new String[] {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]", null};
+    private final String[] removeProperties  = new String[] {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx", null};
 
     /**
      * Constructs a DefaultResolver Test Case.
