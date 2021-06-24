@@ -23,6 +23,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -222,7 +223,56 @@ public class BeanUtilsBean {
      *  throws an exception
      */
     public void copyProperties(final Object dest, final Object orig)
-        throws IllegalAccessException, InvocationTargetException {
+            throws IllegalAccessException, InvocationTargetException {
+        copyProperties(dest, orig, (String) null);
+    }
+
+    /**
+     * <p>Copy property values from the origin bean to the destination bean
+     * for all cases where the property names are the same.  For each
+     * property, a conversion is attempted as necessary.  All combinations of
+     * standard JavaBeans and DynaBeans as origin and destination are
+     * supported.  Properties that exist in the origin bean, but do not exist
+     * in the destination bean (or are read-only in the destination bean) are
+     * silently ignored.</p>
+     *
+     * <p>If the origin "bean" is actually a {@code Map}, it is assumed
+     * to contain String-valued <strong>simple</strong> property names as the keys, pointing at
+     * the corresponding property values that will be converted (if necessary)
+     * and set in the destination bean. <strong>Note</strong> that this method
+     * is intended to perform a "shallow copy" of the properties and so complex
+     * properties (for example, nested ones) will not be copied.</p>
+     *
+     * <p>This method differs from {@code populate()}, which
+     * was primarily designed for populating JavaBeans from the map of request
+     * parameters retrieved on an HTTP request, is that no scalar-&gt;indexed
+     * or indexed-&gt;scalar manipulations are performed.  If the origin property
+     * is indexed, the destination property must be also.</p>
+     *
+     * <p>If you know that no type conversions are required, the
+     * {@code copyProperties()} method in {@link PropertyUtils} will
+     * execute faster than this method.</p>
+     *
+     * <p><strong>FIXME</strong> - Indexed and mapped properties that do not
+     * have getter and setter methods for the underlying array or Map are not
+     * copied by this method.</p>
+     *
+     * @param dest Destination bean whose properties are modified
+     * @param orig Origin bean whose properties are retrieved
+     * @param ignore list of properties to ignore, may be null
+     *
+     * @throws IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @throws IllegalArgumentException if the {@code dest} or
+     *  {@code orig</code> argument is null or if the <code>dest}
+     *  property type is different from the source type and the relevant
+     *  converter has not been registered.
+     * @throws InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @since 2.0
+     */
+    public void copyProperties(final Object dest, final Object orig, final String... ignore)
+            throws IllegalAccessException, InvocationTargetException {
 
         // Validate existence of the specified beans
         if (dest == null) {
@@ -246,7 +296,7 @@ public class BeanUtilsBean {
                 // Need to check isReadable() for WrapDynaBean
                 // (see Jira issue# BEANUTILS-61)
                 if (getPropertyUtils().isReadable(orig, name) &&
-                    getPropertyUtils().isWriteable(dest, name)) {
+                    getPropertyUtils().isWriteable(dest, name) && !Arrays.asList(ignore).contains(name)) {
                     final Object value = ((DynaBean) orig).get(name);
                     copyProperty(dest, name, value);
                 }
@@ -258,7 +308,7 @@ public class BeanUtilsBean {
             Map<String, Object> propMap = (Map<String, Object>) orig;
             for (final Map.Entry<String, Object> entry : propMap.entrySet()) {
                 final String name = entry.getKey();
-                if (getPropertyUtils().isWriteable(dest, name)) {
+                if (getPropertyUtils().isWriteable(dest, name) && !Arrays.asList(ignore).contains(name)) {
                     copyProperty(dest, name, entry.getValue());
                 }
             }
@@ -271,7 +321,7 @@ public class BeanUtilsBean {
                     continue; // No point in trying to set an object's class
                 }
                 if (getPropertyUtils().isReadable(orig, name) &&
-                    getPropertyUtils().isWriteable(dest, name)) {
+                    getPropertyUtils().isWriteable(dest, name) && !Arrays.asList(ignore).contains(name)) {
                     try {
                         final Object value =
                             getPropertyUtils().getSimpleProperty(orig, name);
