@@ -20,6 +20,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.beans.IntrospectionException;
+
 /**
  * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
  *
@@ -82,6 +84,36 @@ public class MappedPropertyTestCase extends TestCase {
             assertNotNull("Setter is missing", desc.getMappedWriteMethod());
         } catch (final Exception ex) {
             fail("Property '" + property + "' Not Found in " + clazz.getName() + ": " + ex);
+        }
+    }
+
+    /**
+     * Test valid property Name
+     */
+    public void testIntrospectionException(){
+        final Class<?> clazz = MappedPropertyTestBean.class;
+        try {
+            new MappedPropertyDescriptor(null, clazz);
+            fail("Must have failed");
+        } catch (final IntrospectionException ex) {
+            // expected result
+            assertEquals("bad property name", ex.getMessage());
+        }
+
+        try {
+            new MappedPropertyDescriptor(null, null, null );
+            fail("Must have failed");
+        } catch (final IntrospectionException ex) {
+            // expected result
+            assertEquals("bad property name", ex.getMessage());
+        }
+
+        try {
+            new MappedPropertyDescriptor(null, clazz, null, null );
+                fail("Must have failed");
+        } catch (final IntrospectionException ex) {
+            // expected result
+            assertEquals("bad property name", ex.getMessage());
         }
     }
 

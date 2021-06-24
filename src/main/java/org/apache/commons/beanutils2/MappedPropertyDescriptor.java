@@ -87,11 +87,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         super(propertyName, null, null);
 
-        if (propertyName == null || propertyName.isEmpty()) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName + " on class: " + beanClass.getClass().getName());
-        }
-
         setName(propertyName);
         final String base = capitalizePropertyName(propertyName);
 
@@ -153,11 +148,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             throws IntrospectionException {
 
         super(propertyName, null, null);
-
-        if (propertyName == null || propertyName.isEmpty()) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName);
-        }
         setName(propertyName);
 
         // search the mapped get and set methods
@@ -199,12 +189,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
             throws IntrospectionException {
 
         super(propertyName, mappedGetter, mappedSetter);
-
-        if (propertyName == null || propertyName.isEmpty()) {
-            throw new IntrospectionException("bad property name: " +
-                    propertyName);
-        }
-
         setName(propertyName);
         mappedReadMethodRef  = new MappedMethodReference(mappedGetter);
         mappedWriteMethodRef = new MappedMethodReference(mappedSetter);
