@@ -336,7 +336,7 @@ public abstract class AbstractConverter implements Converter {
             return handleMissing(type);
         }
 
-        ConversionException cex = null;
+        final ConversionException cex;
         if (cause instanceof ConversionException) {
             cex = (ConversionException)cause;
             if (log().isDebugEnabled()) {
@@ -475,7 +475,7 @@ public abstract class AbstractConverter implements Converter {
      * @return The String representation.
      */
     String toString(final Class<?> type) {
-        String typeName = null;
+        String typeName;
         if (type == null) {
             typeName = "null";
         } else if (type.isArray()) {

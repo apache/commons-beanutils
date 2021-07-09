@@ -77,7 +77,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      */
     @Override
     protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
-        DateFormat format = null;
+        final DateFormat format;
         if (locale == null) {
             format = DateFormat.getTimeInstance(DateFormat.SHORT);
         } else {

@@ -98,8 +98,6 @@ public class BeanUtilsBean {
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
-
-
     /**
      * <p>Constructs an instance using new property
      * and conversion instances.</p>
@@ -168,7 +166,7 @@ public class BeanUtilsBean {
         if (log.isDebugEnabled()) {
             log.debug("Cloning bean: " + bean.getClass().getName());
         }
-        Object newBean = null;
+        final Object newBean;
         if (bean instanceof DynaBean) {
             newBean = ((DynaBean) bean).getDynaClass().newInstance();
         } else {
@@ -365,7 +363,7 @@ public class BeanUtilsBean {
 
         // Declare local variables we will require
         final String propName = resolver.getProperty(name); // Simple name of target property
-        Class<?> type = null;                         // Java type of target property
+        final Class<?> type;                         // Java type of target property
         final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
         final String key = resolver.getKey(name);           // Mapped key value (if any)
 
@@ -893,7 +891,7 @@ public class BeanUtilsBean {
 
         // Declare local variables we will require
         final String propName = resolver.getProperty(name); // Simple name of target property
-        Class<?> type = null;                         // Java type of target property
+        Class<?> type;                         // Java type of target property
         final int index  = resolver.getIndex(name);         // Indexed subscript value (if any)
         final String key = resolver.getKey(name);           // Mapped key value (if any)
 

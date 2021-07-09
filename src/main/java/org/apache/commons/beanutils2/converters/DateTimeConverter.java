@@ -243,9 +243,9 @@ public abstract class DateTimeConverter extends AbstractConverter {
             date =  Date.from(((OffsetDateTime)value).toInstant());
         }
 
-        String result = null;
+        final String result;
         if (useLocaleFormat && date != null) {
-            DateFormat format = null;
+            final DateFormat format;
             if (patterns != null && patterns.length > 0) {
                 format = getFormat(patterns[0]);
             } else {
@@ -368,7 +368,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Parse the Date/Time
         if (useLocaleFormat) {
-            Calendar calendar = null;
+            final Calendar calendar;
             if (patterns != null && patterns.length > 0) {
                 calendar = parse(sourceType, targetType, stringValue);
             } else {
@@ -456,7 +456,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // java.util.Calendar
         if (type.equals(Calendar.class)) {
-            Calendar calendar = null;
+            final Calendar calendar;
             if (locale == null && timeZone == null) {
                 calendar = Calendar.getInstance();
             } else if (locale == null) {
@@ -547,7 +547,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return A Date Format.
      */
     protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
-        DateFormat format = null;
+        final DateFormat format;
         if (locale == null) {
             format = DateFormat.getDateInstance(DateFormat.SHORT);
         } else {

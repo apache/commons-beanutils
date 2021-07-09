@@ -574,7 +574,7 @@ public class PropertyUtilsBean {
         }
 
         // Identify the key of the requested individual property
-        String key  = null;
+        final String key;
         try {
             key = resolver.getKey(name);
         } catch (final IllegalArgumentException e) {
@@ -749,7 +749,7 @@ public class PropertyUtilsBean {
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
-            Object nestedBean = null;
+            final Object nestedBean;
             if (bean instanceof Map) {
                 nestedBean = getPropertyOfMapBean((Map<?, ?>) bean, next);
             } else if (resolver.isMapped(next)) {
@@ -1308,7 +1308,7 @@ public class PropertyUtilsBean {
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
-            Object nestedBean = null;
+            final Object nestedBean;
             try {
                 nestedBean = getProperty(bean, next);
             } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -1388,7 +1388,7 @@ public class PropertyUtilsBean {
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
-            Object nestedBean = null;
+            final Object nestedBean;
             try {
                 nestedBean = getProperty(bean, next);
             } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -1653,7 +1653,7 @@ public class PropertyUtilsBean {
         }
 
         // Identify the key of the requested individual property
-        String key  = null;
+        final String key;
         try {
             key = resolver.getKey(name);
         } catch (final IllegalArgumentException e) {
@@ -1815,7 +1815,7 @@ public class PropertyUtilsBean {
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
-            Object nestedBean = null;
+            final Object nestedBean;
             if (bean instanceof Map) {
                 nestedBean = getPropertyOfMapBean((Map<?, ?>)bean, next);
             } else if (resolver.isMapped(next)) {

@@ -435,4 +435,7 @@ public class BeanUtils {
 
     /** An empty object array */
     static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+    /** An empty {@code String} array.*/
+    static final String[] EMPTY_STRING_ARRAY = new String[0];
 }

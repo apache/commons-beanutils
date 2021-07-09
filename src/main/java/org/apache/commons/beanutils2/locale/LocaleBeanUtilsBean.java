@@ -703,7 +703,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     protected Class<?> definePropertyType(final Object target, final String name, final String propName)
             throws IllegalAccessException, InvocationTargetException {
 
-        Class<?> type = null;               // Java type of target property
+        final Class<?> type;               // Java type of target property
 
         if (target instanceof DynaBean) {
             final DynaClass dynaClass = ((DynaBean) target).getDynaClass();
@@ -714,7 +714,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             type = dynaProperty.getType();
         }
         else {
-            PropertyDescriptor descriptor = null;
+            final PropertyDescriptor descriptor;
             try {
                 descriptor =
                         getPropertyUtils().getPropertyDescriptor(target, name);
@@ -756,7 +756,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             log.trace("Converting value '" + value + "' to type:" + type);
         }
 
-        Object newValue = null;
+        final Object newValue;
 
         if (type.isArray() && index < 0) { // Scalar value into array
             if (value instanceof String) {
@@ -809,7 +809,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      */
     protected Object convert(final Class<?> type, final int index, final Object value) {
 
-        Object newValue = null;
+        final Object newValue;
 
         if (type.isArray() && index < 0) { // Scalar value into array
             if (value instanceof String) {

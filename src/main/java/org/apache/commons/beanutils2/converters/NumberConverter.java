@@ -201,7 +201,7 @@ public abstract class NumberConverter extends AbstractConverter {
     @Override
     protected String convertToString(final Object value) throws Throwable {
 
-        String result = null;
+        final String result;
         if (useLocaleFormat && value instanceof Number) {
             final NumberFormat format = getFormat();
             format.setGroupingUsed(false);
@@ -261,7 +261,7 @@ public abstract class NumberConverter extends AbstractConverter {
         }
 
         // Convert/Parse a String
-        Number number = null;
+        final Number number;
         if (useLocaleFormat) {
             final NumberFormat format = getFormat();
             number = parse(sourceType, targetType, stringValue, format);
@@ -498,7 +498,7 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The NumberFormat.
      */
     private NumberFormat getFormat() {
-        NumberFormat format = null;
+        final NumberFormat format;
         if (pattern != null) {
             if (locale == null) {
                 if (log().isDebugEnabled()) {

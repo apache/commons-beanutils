@@ -951,7 +951,7 @@ public class MethodUtils {
         Method bestMatch = null;
         final Method[] methods = clazz.getMethods();
         float bestMatchCost = Float.MAX_VALUE;
-        float myCost = Float.MAX_VALUE;
+        float myCost;
         for (final Method method2 : methods) {
             if (method2.getName().equals(methodName)) {
                 // log some trace information
@@ -1078,7 +1078,8 @@ public class MethodUtils {
 
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
-            Class<?> srcClass, destClass;
+            final Class<?> srcClass;
+            final Class<?> destClass;
             srcClass = srcArgs[i];
             destClass = destArgs[i];
             totalCost += getObjectTransformationCost(srcClass, destClass);

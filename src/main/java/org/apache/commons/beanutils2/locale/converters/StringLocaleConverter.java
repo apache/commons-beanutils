@@ -210,7 +210,7 @@ public class StringLocaleConverter extends BaseLocaleConverter {
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
 
-        String result = null;
+        final String result;
 
         if (value instanceof Integer ||
                 value instanceof Long ||

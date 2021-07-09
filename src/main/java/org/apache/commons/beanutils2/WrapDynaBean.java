@@ -124,7 +124,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     @Override
     public Object get(final String name) {
 
-        Object value = null;
+        final Object value;
         try {
             value = getPropertyUtils().getSimpleProperty(instance, name);
         } catch (final InvocationTargetException ite) {
@@ -160,7 +160,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     @Override
     public Object get(final String name, final int index) {
 
-        Object value = null;
+        final Object value;
         try {
             value = getPropertyUtils().getIndexedProperty(instance, name, index);
         } catch (final IndexOutOfBoundsException e) {
@@ -195,7 +195,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
     @Override
     public Object get(final String name, final String key) {
 
-        Object value = null;
+        final Object value;
         try {
             value = getPropertyUtils().getMappedProperty(instance, name, key);
         } catch (final InvocationTargetException ite) {
