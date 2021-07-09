@@ -22,8 +22,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
-import org.apache.commons.collections.BulkTest;
-import org.apache.commons.collections.map.AbstractTestMap;
+import org.apache.commons.beanutils2.collections.AbstractMapTest;
+import org.apache.commons.beanutils2.collections.BulkTest;
 
 import junit.framework.Test;
 import junit.textui.TestRunner;
@@ -32,8 +32,7 @@ import junit.textui.TestRunner;
  * Test cases for BeanMap
  *
  */
-@SuppressWarnings("deprecation")
-public class BeanMapTestCase extends AbstractTestMap {
+public class BeanMapTestCase extends AbstractMapTest<String, Object> {
 
     public BeanMapTestCase(final String testName) {
         super(testName);
@@ -177,8 +176,8 @@ public class BeanMapTestCase extends AbstractTestMap {
     // Then, I manually added the "class" key, which is a property that exists for
     // all beans (and all objects for that matter.
     @Override
-    public Object[] getSampleKeys() {
-        final Object[] keys = new Object[] {
+    public String[] getSampleKeys() {
+        final String[] keys = new String[] {
             "someIntValue",
             "someLongValue",
             "someDoubleValue",
@@ -284,11 +283,6 @@ public class BeanMapTestCase extends AbstractTestMap {
         bean.setSomeStringValue("SomeStringValue");
         bean.setSomeObjectValue(objectInFullMap);
         return new BeanMap(bean);
-    }
-
-    @Override
-    public Map<String, Object> makeEmptyMap() {
-        return new BeanMap();
     }
 
     @Override
@@ -483,5 +477,10 @@ public class BeanMapTestCase extends AbstractTestMap {
             assertNotNull("Setter exception cause 2 null", cause2);
             assertEquals("Setter exception cause 2", TestException.class, cause2.getClass());
         }
+    }
+
+    @Override
+    public Map<String, Object> makeObject() {
+        return new BeanMap();
     }
 }
