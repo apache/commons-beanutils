@@ -64,15 +64,15 @@ public interface MutableDynaClass extends DynaClass {
      *  restrictions)
      * @param readable Set to {@code true} if this property value
      *  should be readable
-     * @param writeable Set to {@code true} if this property value
-     *  should be writeable
+     * @param writable Set to {@code true} if this property value
+     *  should be writable
      *
      * @throws IllegalArgumentException if name is null
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
     void add(String name, Class<?> type, boolean readable,
-             boolean writeable);
+             boolean writable);
 
     /**
      * Is this DynaClass currently restricted, if so, no changes to the

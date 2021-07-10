@@ -1361,12 +1361,12 @@ public class PropertyUtilsBean {
 
     /**
      * <p>Return {@code true} if the specified property name identifies
-     * a writeable property on the specified bean; otherwise, return
+     * a writable property on the specified bean; otherwise, return
      * {@code false}.
      *
      * @param bean Bean to be examined (may be a {@link DynaBean}
      * @param name Property name to be evaluated
-     * @return {@code true} if the property is writeable,
+     * @return {@code true} if the property is writable,
      * otherwise {@code false}
      *
      * @throws IllegalArgumentException if {@code bean}
@@ -1414,7 +1414,7 @@ public class PropertyUtilsBean {
 
         // Return the requested result
         if (bean instanceof DynaBean) {
-            // All DynaBean properties are writeable
+            // All DynaBean properties are writable
             return ((DynaBean) bean).getDynaClass().getDynaProperty(name) != null;
         }
         try {

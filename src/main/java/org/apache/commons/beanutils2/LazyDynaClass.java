@@ -194,7 +194,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * <p>Add a new dynamic property with the specified data type, readability,
      * and writeability.</p>
      *
-     * <p><strong>N.B.</strong>Support for readable/writeable properties has not been implemented
+     * <p><strong>N.B.</strong>Support for readable/writable properties has not been implemented
      *    and this method always throws a {@code UnsupportedOperationException}.</p>
      *
      * <p>I'm not sure the intention of the original authors for this method, but it seems to
@@ -206,13 +206,13 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *  restrictions)
      * @param readable Set to {@code true} if this property value
      *  should be readable
-     * @param writeable Set to {@code true} if this property value
-     *  should be writeable
+     * @param writable Set to {@code true} if this property value
+     *  should be writable
      *
      * @throws UnsupportedOperationException anytime this method is called
      */
     @Override
-    public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
+    public void add(final String name, final Class<?> type, final boolean readable, final boolean writable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
     }
 
