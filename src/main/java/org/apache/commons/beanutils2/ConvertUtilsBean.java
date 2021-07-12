@@ -17,10 +17,61 @@
 
 package org.apache.commons.beanutils2;
 
+import org.apache.commons.beanutils2.converters.ArrayConverter;
+import org.apache.commons.beanutils2.converters.BigDecimalConverter;
+import org.apache.commons.beanutils2.converters.BigIntegerConverter;
+import org.apache.commons.beanutils2.converters.BooleanConverter;
+import org.apache.commons.beanutils2.converters.ByteConverter;
+import org.apache.commons.beanutils2.converters.CalendarConverter;
+import org.apache.commons.beanutils2.converters.CharacterConverter;
+import org.apache.commons.beanutils2.converters.ClassConverter;
+import org.apache.commons.beanutils2.converters.ColorConverter;
+import org.apache.commons.beanutils2.converters.ConverterFacade;
+import org.apache.commons.beanutils2.converters.DateConverter;
+import org.apache.commons.beanutils2.converters.DimensionConverter;
+import org.apache.commons.beanutils2.converters.DoubleConverter;
+import org.apache.commons.beanutils2.converters.DurationConverter;
+import org.apache.commons.beanutils2.converters.EnumConverter;
+import org.apache.commons.beanutils2.converters.FileConverter;
+import org.apache.commons.beanutils2.converters.FloatConverter;
+import org.apache.commons.beanutils2.converters.InetAddressConverter;
+import org.apache.commons.beanutils2.converters.IntegerConverter;
+import org.apache.commons.beanutils2.converters.LocalDateConverter;
+import org.apache.commons.beanutils2.converters.LocalDateTimeConverter;
+import org.apache.commons.beanutils2.converters.LocalTimeConverter;
+import org.apache.commons.beanutils2.converters.LocaleConverter;
+import org.apache.commons.beanutils2.converters.LongConverter;
+import org.apache.commons.beanutils2.converters.MonthDayConverter;
+import org.apache.commons.beanutils2.converters.OffsetDateTimeConverter;
+import org.apache.commons.beanutils2.converters.OffsetTimeConverter;
+import org.apache.commons.beanutils2.converters.PathConverter;
+import org.apache.commons.beanutils2.converters.PatternConverter;
+import org.apache.commons.beanutils2.converters.PeriodConverter;
+import org.apache.commons.beanutils2.converters.PointConverter;
+import org.apache.commons.beanutils2.converters.ShortConverter;
+import org.apache.commons.beanutils2.converters.SqlDateConverter;
+import org.apache.commons.beanutils2.converters.SqlTimeConverter;
+import org.apache.commons.beanutils2.converters.SqlTimestampConverter;
+import org.apache.commons.beanutils2.converters.StringConverter;
+import org.apache.commons.beanutils2.converters.URIConverter;
+import org.apache.commons.beanutils2.converters.URLConverter;
+import org.apache.commons.beanutils2.converters.UUIDConverter;
+import org.apache.commons.beanutils2.converters.YearConverter;
+import org.apache.commons.beanutils2.converters.YearMonthConverter;
+import org.apache.commons.beanutils2.converters.ZoneIdConverter;
+import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
+import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.io.File;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
@@ -40,48 +91,9 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.UUID;
-
-import org.apache.commons.beanutils2.converters.ArrayConverter;
-import org.apache.commons.beanutils2.converters.BigDecimalConverter;
-import org.apache.commons.beanutils2.converters.BigIntegerConverter;
-import org.apache.commons.beanutils2.converters.BooleanConverter;
-import org.apache.commons.beanutils2.converters.ByteConverter;
-import org.apache.commons.beanutils2.converters.CalendarConverter;
-import org.apache.commons.beanutils2.converters.CharacterConverter;
-import org.apache.commons.beanutils2.converters.ClassConverter;
-import org.apache.commons.beanutils2.converters.ConverterFacade;
-import org.apache.commons.beanutils2.converters.DateConverter;
-import org.apache.commons.beanutils2.converters.DoubleConverter;
-import org.apache.commons.beanutils2.converters.EnumConverter;
-import org.apache.commons.beanutils2.converters.DurationConverter;
-import org.apache.commons.beanutils2.converters.FileConverter;
-import org.apache.commons.beanutils2.converters.FloatConverter;
-import org.apache.commons.beanutils2.converters.IntegerConverter;
-import org.apache.commons.beanutils2.converters.LocalDateConverter;
-import org.apache.commons.beanutils2.converters.LocalDateTimeConverter;
-import org.apache.commons.beanutils2.converters.LocalTimeConverter;
-import org.apache.commons.beanutils2.converters.LongConverter;
-import org.apache.commons.beanutils2.converters.MonthDayConverter;
-import org.apache.commons.beanutils2.converters.OffsetDateTimeConverter;
-import org.apache.commons.beanutils2.converters.OffsetTimeConverter;
-import org.apache.commons.beanutils2.converters.PathConverter;
-import org.apache.commons.beanutils2.converters.PeriodConverter;
-import org.apache.commons.beanutils2.converters.ShortConverter;
-import org.apache.commons.beanutils2.converters.SqlDateConverter;
-import org.apache.commons.beanutils2.converters.SqlTimeConverter;
-import org.apache.commons.beanutils2.converters.SqlTimestampConverter;
-import org.apache.commons.beanutils2.converters.StringConverter;
-import org.apache.commons.beanutils2.converters.URIConverter;
-import org.apache.commons.beanutils2.converters.URLConverter;
-import org.apache.commons.beanutils2.converters.UUIDConverter;
-import org.apache.commons.beanutils2.converters.YearConverter;
-import org.apache.commons.beanutils2.converters.YearMonthConverter;
-import org.apache.commons.beanutils2.converters.ZoneIdConverter;
-import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
-import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.regex.Pattern;
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -484,10 +496,13 @@ public class ConvertUtilsBean {
      * This method registers the following converters:
      * <ul>
      *     <li>{@code Class.class} - {@link ClassConverter}</li>
+     *     <li>{@code Color.class} - {@link ColorConverter}</li>
      *     <li>{@code Enum.class} - {@link EnumConverter}</li>
      *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
      *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
+     *     <li>{@code Dimension.class} - {@link DimensionConverter}</li>
      *     <li>{@code File.class} - {@link FileConverter}</li>
+     *     <li>{@code InetAddress.class} - {@link InetAddressConverter}</li>
      *     <li>{@code Path.class} - {@link PathConverter}</li>
      *     <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
      *     <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
@@ -498,12 +513,15 @@ public class ConvertUtilsBean {
      *     <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
      *     <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
      *     <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
+     *     <li>{@code Locale.class} - {@link LocaleConverter}</li>
      *     <li>{@code OffsetDateTime.class} - {@link OffsetDateTimeConverter}</li>
      *     <li>{@code OffsetTime.class} - {@link OffsetTimeConverter}</li>
      *     <li>{@code ZonedDateTime.class} - {@link ZonedDateTimeConverter}</li>
      *     <li>{@code Duration.class} - {@link DurationConverter}</li>
      *     <li>{@code MonthDay.class} - {@link MonthDayConverter}</li>
+     *     <li>{@code Pattern.class} - {@link PatternConverter}</li>
      *     <li>{@code Period.class} - {@link PeriodConverter}</li>
+     *     <li>{@code Point.class} - {@link PointConverter}</li>
      *     <li>{@code Year.class} - {@link YearConverter}</li>
      *     <li>{@code YearMonth.class} - {@link YearMonthConverter}</li>
      *     <li>{@code ZoneId.class} - {@link ZoneIdConverter}</li>
@@ -516,10 +534,13 @@ public class ConvertUtilsBean {
     private void registerOther(final boolean throwException) {
         // @formatter:off
         register(Class.class,          throwException ? new ClassConverter()          : new ClassConverter(null));
+        register(Color.class,          throwException ? new ColorConverter()          : new ColorConverter(null));
         register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
         register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
+        register(Dimension.class,      throwException ? new DimensionConverter()      : new DimensionConverter(null));
         register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
+        register(InetAddress.class,    throwException ? new InetAddressConverter()    : new InetAddressConverter(null));
         register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
         register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
         register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
@@ -530,12 +551,15 @@ public class ConvertUtilsBean {
         register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
         register(LocalDateTime.class, throwException ? new LocalDateTimeConverter() : new LocalDateTimeConverter(null));
         register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
+        register(Locale.class,         throwException ? new LocaleConverter()         : new LocaleConverter(null));
         register(OffsetDateTime.class,throwException ? new OffsetDateTimeConverter():new OffsetDateTimeConverter(null));
         register(OffsetTime.class,     throwException ? new OffsetTimeConverter()     : new OffsetTimeConverter(null));
         register(ZonedDateTime.class, throwException ? new ZonedDateTimeConverter() : new ZonedDateTimeConverter(null));
         register(Duration.class,       throwException ? new DurationConverter()       : new DurationConverter(null));
         register(MonthDay.class,       throwException ? new MonthDayConverter()       : new MonthDayConverter(null));
+        register(Pattern.class,        throwException ? new PatternConverter()        : new PatternConverter(null));
         register(Period.class,         throwException ? new PeriodConverter()         : new PeriodConverter(null));
+        register(Point.class,          throwException ? new PointConverter()          : new PointConverter(null));
         register(Year.class,           throwException ? new YearConverter()           : new YearConverter(null));
         register(YearMonth.class,      throwException ? new YearMonthConverter()      : new YearMonthConverter(null));
         register(ZoneId.class,         throwException ? new ZoneIdConverter()         : new ZoneIdConverter(null));
@@ -582,10 +606,14 @@ public class ConvertUtilsBean {
 
         // Other
         registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Color.class,          new ColorConverter(),         throwException, defaultArraySize);
         registerArrayConverter(Enum.class,           new EnumConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
         registerArrayConverter(Calendar.class,       new DateConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Dimension.class,      new DimensionConverter(),     throwException, defaultArraySize);
         registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Color.class,          new ColorConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(InetAddress.class,    new InetAddressConverter(),   throwException, defaultArraySize);
         registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
         registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),       throwException, defaultArraySize);
@@ -596,12 +624,15 @@ public class ConvertUtilsBean {
         registerArrayConverter(LocalDate.class,      new LocalDateConverter(),     throwException, defaultArraySize);
         registerArrayConverter(LocalDateTime.class,  new LocalDateTimeConverter(), throwException, defaultArraySize);
         registerArrayConverter(LocalTime.class,      new LocalTimeConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Locale.class,         new LocaleConverter(),        throwException, defaultArraySize);
         registerArrayConverter(OffsetDateTime.class, new OffsetDateTimeConverter(),throwException, defaultArraySize);
         registerArrayConverter(OffsetTime.class,     new OffsetTimeConverter(),    throwException, defaultArraySize);
         registerArrayConverter(ZonedDateTime.class,  new ZonedDateTimeConverter(), throwException, defaultArraySize);
         registerArrayConverter(Duration.class,       new DurationConverter(),      throwException, defaultArraySize);
         registerArrayConverter(MonthDay.class,       new MonthDayConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Pattern.class,        new PatternConverter(),       throwException, defaultArraySize);
         registerArrayConverter(Period.class,         new PeriodConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(Point.class,          new PointConverter(),         throwException, defaultArraySize);
         registerArrayConverter(Year.class,           new YearConverter(),          throwException, defaultArraySize);
         registerArrayConverter(YearMonth.class,      new YearMonthConverter(),     throwException, defaultArraySize);
         registerArrayConverter(ZoneId.class,         new ZoneIdConverter(),        throwException, defaultArraySize);
