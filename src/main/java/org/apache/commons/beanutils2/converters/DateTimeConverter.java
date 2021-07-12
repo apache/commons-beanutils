@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import org.apache.commons.beanutils2.ConversionException;
+
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -25,12 +27,11 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import org.apache.commons.beanutils2.ConversionException;
 
 /**
  * {@link org.apache.commons.beanutils2.Converter} implementation
@@ -44,6 +45,7 @@ import org.apache.commons.beanutils2.ConversionException;
  *     <li>{@code java.time.LocalDate}</li>
  *     <li>{@code java.time.LocalDateTime}</li>
  *     <li>{@code java.time.OffsetDateTime}</li>
+ *     <li>{@code java.time.Instant}</li>
  *     <li>{@code java.time.ZonedDateTime}</li>
  *     <li>{@code java.sql.Date}</li>
  *     <li>{@code java.sql.Time}</li>
@@ -228,19 +230,21 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         Date date = null;
         if (value instanceof Date) {
-            date = (Date)value;
+            date = (Date) value;
         } else if (value instanceof Calendar) {
-            date = ((Calendar)value).getTime();
+            date = ((Calendar) value).getTime();
         } else if (value instanceof Long) {
-            date = new Date(((Long)value).longValue());
+            date = new Date(((Long) value).longValue());
         } else if (value instanceof LocalDateTime) {
-            date =  java.sql.Timestamp.valueOf(((LocalDateTime)value));
+            date =  java.sql.Timestamp.valueOf(((LocalDateTime) value));
         } else if (value instanceof LocalDate) {
-            date =  java.sql.Date.valueOf(((LocalDate)value));
+            date =  java.sql.Date.valueOf(((LocalDate) value));
         } else if (value instanceof ZonedDateTime) {
-            date =  Date.from(((ZonedDateTime)value).toInstant());
+            date =  Date.from(((ZonedDateTime) value).toInstant());
         } else if (value instanceof OffsetDateTime) {
-            date =  Date.from(((OffsetDateTime)value).toInstant());
+            date =  Date.from(((OffsetDateTime) value).toInstant());
+        } else if (value instanceof Instant) {
+            date =  Date.from(((Instant) value));
         }
 
         String result = null;
@@ -260,7 +264,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             result = value.toString();
             if (log().isDebugEnabled()) {
                 log().debug("    Converted  to String using toString() '" + result + "'");
-             }
+            }
         }
         return result;
     }
@@ -277,6 +281,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      *     <li>{@code java.time.LocalDate}</li>
      *     <li>{@code java.time.LocalDateTime}</li>
      *     <li>{@code java.time.OffsetDateTime}</li>
+     *     <li>{@code java.time.Instant}</li>
      *     <li>{@code java.time.ZonedDateTime}</li>
      *     <li>{@code java.sql.Date}</li>
      *     <li>{@code java.sql.Time}</li>
@@ -320,44 +325,49 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Handle Date (includes java.sql.Date & java.sql.Time)
         if (value instanceof Date) {
-            final Date date = (Date)value;
+            final Date date = (Date) value;
             return toDate(targetType, date.getTime());
         }
 
         // Handle Calendar
         if (value instanceof Calendar) {
-            final Calendar calendar = (Calendar)value;
+            final Calendar calendar = (Calendar) value;
             return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Handle Long
         if (value instanceof Long) {
-            final Long longObj = (Long)value;
+            final Long longObj = (Long) value;
             return toDate(targetType, longObj.longValue());
         }
 
         // Handle LocalDate
         if (value instanceof LocalDate) {
-            final LocalDate date = (LocalDate)value;
+            final LocalDate date = (LocalDate) value;
             return toDate(targetType, date.atStartOfDay(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle LocalDateTime
         if (value instanceof LocalDateTime) {
-            final LocalDateTime date = (LocalDateTime)value;
+            final LocalDateTime date = (LocalDateTime) value;
             return toDate(targetType, date.atZone(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle ZonedDateTime
         if (value instanceof ZonedDateTime) {
-            final ZonedDateTime date = (ZonedDateTime)value;
+            final ZonedDateTime date = (ZonedDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
         }
 
         // Handle OffsetDateTime
         if (value instanceof OffsetDateTime) {
-            final OffsetDateTime date = (OffsetDateTime)value;
+            final OffsetDateTime date = (OffsetDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
+        }
+
+        if (value instanceof Instant) {
+            final Instant date = (Instant) value;
+            return toDate(targetType, date.toEpochMilli());
         }
 
         // Convert all other types to String & handle
@@ -454,6 +464,10 @@ public abstract class DateTimeConverter extends AbstractConverter {
             return type.cast(offsetDateTime);
         }
 
+        if (type.equals(Instant.class)) {
+            return type.cast(Instant.ofEpochMilli(value));
+        }
+
         // java.util.Calendar
         if (type.equals(Calendar.class)) {
             Calendar calendar = null;
@@ -487,6 +501,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      *     <li>{@code java.sql.Date}</li>
      *     <li>{@code java.sql.Time}</li>
      *     <li>{@code java.sql.Timestamp}</li>
+     *     <li>{@code java.time.Instant}</li>
      * </ul>
      * <p>
      * <strong>N.B.</strong> No default String conversion
@@ -527,6 +542,14 @@ public abstract class DateTimeConverter extends AbstractConverter {
                 throw new ConversionException(
                         "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
                         "to create a java.sql.Timestamp");
+            }
+        }
+
+        if (type.equals(Instant.class)) {
+            try {
+                return type.cast(Instant.parse(value));
+            } catch (final DateTimeParseException ex) {
+                throw new ConversionException("String must be in ISO-8601 format to create a java.time.Instant");
             }
         }
 

@@ -17,56 +17,28 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import org.apache.commons.beanutils2.ConversionException;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.time.Duration;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
-
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test Case for the DurationConverter class.
  *
  */
-public class DurationConverterTestCase extends TestCase {
+public class DurationConverterTestCase {
 
-    public static TestSuite suite() {
-        return new TestSuite(DurationConverterTestCase.class);
+    private DurationConverter converter;
+
+    @Before
+    public void before() {
+        converter = new DurationConverter();
     }
 
-
-
-    private Converter converter = null;
-
-
-
-    public DurationConverterTestCase(final String name) {
-        super(name);
-    }
-
-    protected Class<?> getExpectedType() {
-        return Duration.class;
-    }
-
-    protected Converter makeConverter() {
-        return new DurationConverter();
-    }
-
-
-
-    @Override
-    public void setUp() throws Exception {
-        converter = makeConverter();
-    }
-
-    @Override
-    public void tearDown() throws Exception {
-        converter = null;
-    }
-
-
-
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message= {
             "from String",
@@ -86,17 +58,17 @@ public class DurationConverterTestCase extends TestCase {
         };
 
         final Duration[] expected = {
-                Duration.parse("PT20.345S"),
-                Duration.parse("PT15M"),
-                Duration.parse("P2DT3H4M")
+            Duration.parse("PT20.345S"),
+            Duration.parse("PT15M"),
+            Duration.parse("P2DT3H4M")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(Duration.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i],converter.convert(Duration.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -104,13 +76,9 @@ public class DurationConverterTestCase extends TestCase {
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test(expected = ConversionException.class)
     public void testUnsupportedType() {
-        try {
-            converter.convert(Integer.class, "http://www.apache.org");
-            fail("Unsupported type could be converted!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        converter.convert(Integer.class, "http://www.apache.org");
     }
 }
 

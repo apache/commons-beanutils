@@ -18,45 +18,28 @@
 package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.time.DayOfWeek;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test Case for the EnumConverter class.
- *
  */
-public class EnumConverterTestCase extends TestCase {
+public class EnumConverterTestCase {
 
-    public static TestSuite suite() {
-        return new TestSuite(EnumConverterTestCase.class);
+    private EnumConverter converter;
+
+    @Before
+    public void before() {
+        converter = new EnumConverter();
     }
 
-    private Converter converter = null;
-
-    public EnumConverterTestCase(final String name) {
-        super(name);
-    }
-
-    protected Class<?> getExpectedType() {
-        return Enum.class;
-    }
-
-    protected Converter makeConverter() {
-        return new EnumConverter();
-    }
-
-    @Override
-    public void setUp() throws Exception {
-        converter = makeConverter();
-    }
-
-    @Override
-    public void tearDown() throws Exception {
-        converter = null;
-    }
-
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message= {
             "from String",
@@ -81,11 +64,11 @@ public class EnumConverterTestCase extends TestCase {
             PizzaStatus.READY
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Enum",expected[i],converter.convert(PizzaStatus.class,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Enum", expected[i], converter.convert(PizzaStatus.class,input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -93,19 +76,52 @@ public class EnumConverterTestCase extends TestCase {
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test(expected = ConversionException.class)
     public void testUnsupportedType() {
-        try {
-            converter.convert(Integer.class, "http://www.apache.org");
-            fail("Unsupported type could be converted!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        converter.convert(Integer.class, "http://www.apache.org");
     }
 
     public enum PizzaStatus {
         ORDERED,
         READY,
         DELIVERED;
+    }
+
+    @Test
+    public void testConvertTimeUnit() {
+        final TimeUnit expected = TimeUnit.NANOSECONDS;
+        final Enum actual = converter.convert(Enum.class, "java.util.concurrent.TimeUnit.NANOSECONDS");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testConvertDayOfWeek() {
+        final DayOfWeek expected = DayOfWeek.MONDAY;
+        final Enum actual = converter.convert(Enum.class, "java.time.DayOfWeek#MONDAY");
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = ConversionException.class)
+    public void testConvertWrongEnumType() {
+        converter.convert(TimeUnit.class, "java.time.DayOfWeek#MONDAY");
+    }
+
+    @Test(expected = ConversionException.class)
+    public void testBrokenNamingConvention() {
+        converter.convert(Enum.class, "JAVA-TIME-DAYOFWEEK#MONDAY");
+    }
+
+    @Test(expected = ConversionException.class)
+    public void testNonEnumClasses() {
+        converter.convert(Enum.class, "java.lang.String#MONDAY");
+    }
+
+    @Test(expected = ConversionException.class)
+    public void testNonExistingClasses() {
+        converter.convert(Enum.class, "java.lang.does.not.exist#MONDAY");
     }
 }
 

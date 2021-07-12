@@ -17,56 +17,28 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import org.apache.commons.beanutils2.ConversionException;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.time.Period;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.apache.commons.beanutils2.Converter;
-
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test Case for the PeriodConverter class.
  *
  */
-public class PeriodConverterTestCase extends TestCase {
+public class PeriodConverterTestCase {
 
-    public static TestSuite suite() {
-        return new TestSuite(PeriodConverterTestCase.class);
+    private PeriodConverter converter;
+
+    @Before
+    public void before() {
+        converter = new PeriodConverter();
     }
 
-
-
-    private Converter converter = null;
-
-
-
-    public PeriodConverterTestCase(final String name) {
-        super(name);
-    }
-
-    protected Class<?> getExpectedType() {
-        return Period.class;
-    }
-
-    protected Converter makeConverter() {
-        return new PeriodConverter();
-    }
-
-
-
-    @Override
-    public void setUp() throws Exception {
-        converter = makeConverter();
-    }
-
-    @Override
-    public void tearDown() throws Exception {
-        converter = null;
-    }
-
-
-
+    @Test
     public void testSimpleConversion() throws Exception {
         final String[] message= {
             "from String",
@@ -86,17 +58,17 @@ public class PeriodConverterTestCase extends TestCase {
         };
 
         final Period[] expected = {
-                Period.parse("P2Y"),
-                Period.parse("P5D"),
-                Period.parse("P1Y2M3D")
+            Period.parse("P2Y"),
+            Period.parse("P5D"),
+            Period.parse("P1Y2M3D")
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(Period.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(Period.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -104,13 +76,9 @@ public class PeriodConverterTestCase extends TestCase {
     /**
      * Tests a conversion to an unsupported type.
      */
+    @Test(expected = ConversionException.class)
     public void testUnsupportedType() {
-        try {
-            converter.convert(Integer.class, "http://www.apache.org");
-            fail("Unsupported type could be converted!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        converter.convert(Integer.class, "http://www.apache.org");
     }
 }
 

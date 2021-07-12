@@ -18,109 +18,89 @@ package org.apache.commons.beanutils2.converters;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test Case for the CharacterConverter class.
- *
  */
-public class CharacterConverterTestCase extends TestCase {
+public class CharacterConverterTestCase {
 
-    /**
-     * Create Test Suite
-     * @return test suite
-     */
-    public static TestSuite suite() {
-        return new TestSuite(CharacterConverterTestCase.class);
+    private CharacterConverter converter;
+
+    @Before
+    public void before() {
+        converter = new CharacterConverter();
     }
-
-
-
-    /**
-     * Constructs a new Character Converter test case.
-     * @param name Test Name
-     */
-    public CharacterConverterTestCase(final String name) {
-        super(name);
-    }
-
-    /** Sets Up */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /** Tear Down */
-    @Override
-    public void tearDown() throws Exception {
-    }
-
-
 
     /**
      * Tests whether the primitive char class can be passed as target type.
      */
+    @Test
     public void testConvertToChar() {
-        final Converter converter = new CharacterConverter();
-        assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
+        assertEquals("Wrong result", Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
     /**
      * Test Conversion to Character
      */
+    @Test
     public void testConvertToCharacter() {
-        final Converter converter = new CharacterConverter();
-        assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
-        assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
+        assertEquals("Character Test", Character.valueOf('N'), converter.convert(Character.class, 'N'));
+        assertEquals("String Test", Character.valueOf('F'), converter.convert(Character.class, "FOO"));
+        assertEquals("Integer Test", Character.valueOf('3'), converter.convert(Character.class, 321));
     }
 
     /**
-     * Tests a conversion to character for null input if no default value is
-     * provided.
+     * Tests a conversion to character for null input if no default value is provided.
      */
+    @Test(expected = ConversionException.class)
     public void testConvertToCharacterNullNoDefault() {
-        final Converter converter = new CharacterConverter();
-        try {
-            converter.convert(Character.class, null);
-            fail("Expected a ConversionException for null value");
-        } catch (final Exception e) {
-            // expected result
-        }
+        converter.convert(Character.class, null);
     }
 
     /**
      * Test Conversion to String
      */
+    @Test
     public void testConvertToString() {
-
-        final Converter converter = new CharacterConverter();
-
-        assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
-        assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
-        assertEquals("Null Test",     null, converter.convert(String.class, null));
+        assertEquals("Character Test", "N", converter.convert(String.class, 'N'));
+        assertEquals("String Test", "F", converter.convert(String.class, "FOO"));
+        assertEquals("Integer Test", "3", converter.convert(String.class, 321));
+        assertNull("Null Test", converter.convert(String.class, null));
     }
 
     /**
      * Tries a conversion to an unsupported type.
      */
+    @Test(expected = ConversionException.class)
     public void testConvertToUnsupportedType() {
-        final Converter converter = new CharacterConverter();
-        try {
-            converter.convert(Integer.class, "Test");
-            fail("Could convert to unsupported type!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        converter.convert(Integer.class, "Test");
     }
 
     /**
      * Test Conversion to Character (with default)
      */
+    @Test
     public void testDefault() {
         final Converter converter = new CharacterConverter("C");
-        assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
+        assertEquals("Default Test", Character.valueOf('C'), converter.convert(Character.class, null));
+    }
+
+    /**
+     * If a hexadecimal value is provided, we'll convert it to a character if possible.
+     */
+    @Test
+    public void testConvertHexCharacter() {
+        Assert.assertEquals('A', (char) converter.convert(Character.class, "0x41"));
+    }
+
+    @Test
+    public void testConvertHexSymbol() {
+        Assert.assertEquals('£', (char) converter.convert(Character.class, "0xA3"));
     }
 }

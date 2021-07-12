@@ -16,6 +16,9 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.lang.Enum</b> objects.
@@ -28,6 +31,11 @@ package org.apache.commons.beanutils2.converters;
  * @see java.lang.Enum
  */
 public final class EnumConverter extends AbstractConverter {
+
+    /** Validates that the value is an enum, and splits it into it's components. */
+    private static final Pattern ENUM_PATTERN = Pattern.compile(
+        "(?<package>(?:[a-z\\d.]+)*)\\.(?<class>[A-Za-z\\d]+)[#.](?<name>[A-Z\\d_]+)"
+    );
 
     /**
      * Constructs a <b>java.lang.Enum</b> <i>Converter</i> that throws
@@ -71,21 +79,42 @@ public final class EnumConverter extends AbstractConverter {
      */
     @SuppressWarnings({ "rawtypes" })
     @Override
-    protected <T> T  convertToType(final Class<T> type, final Object value) throws Throwable {
+    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
-            final String enumValue = String.valueOf(value);
-            final T[] constants = type.getEnumConstants();
-            if (constants == null) {
-                throw conversionException(type, value);
+            final String stringValue = toString(value);
+
+            try {
+                return type.cast((Enum) Enum.valueOf((Class) type, stringValue));
+            } catch (IllegalArgumentException ex) {
+                // Continue to check fully qualified name.
             }
-            for (final T candidate : constants) {
-                if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
-                    return candidate;
+
+            Matcher matcher = ENUM_PATTERN.matcher(stringValue);
+
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException(
+                    "Value doesn't follow Java naming conventions, expected input like: java.time.DayOfWeek.MONDAY");
+            }
+
+            String className = matcher.group(1) + "." + matcher.group(2);
+
+            try {
+                Class classForName = Class.forName(className);
+
+                if (!classForName.isEnum()) {
+                    throw new IllegalArgumentException("Value provided isn't an enumerated type.");
                 }
+
+                if (!type.isAssignableFrom(classForName)) {
+                    throw new IllegalArgumentException("Class provided is not the required type.");
+                }
+
+                return type.cast((Enum) Enum.valueOf(classForName, matcher.group(3)));
+            } catch (ClassNotFoundException ex) {
+                throw new IllegalArgumentException("Class \"" + className + "\" doesn't exist.", ex);
             }
         }
 
         throw conversionException(type, value);
     }
-
 }

@@ -74,7 +74,8 @@ public final class PeriodConverter extends AbstractConverter {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Period.class.equals(type)) {
-            return type.cast(Period.parse((String.valueOf(value))));
+            final String stringValue = toString(value);
+            return type.cast(Period.parse(stringValue));
         }
 
         throw conversionException(type, value);
