@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the OffsetTimeConverter class.
- *
  */
 public class OffsetTimeConverterTestCase extends TestCase {
 
@@ -35,11 +34,7 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new TestSuite(OffsetTimeConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public OffsetTimeConverterTestCase(final String name) {
         super(name);
@@ -53,8 +48,6 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new OffsetTimeConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -64,8 +57,6 @@ public class OffsetTimeConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -111,4 +102,3 @@ public class OffsetTimeConverterTestCase extends TestCase {
         }
     }
 }
-

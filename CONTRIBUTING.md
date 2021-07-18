@@ -82,7 +82,6 @@ The JIRA tickets are used to generate the changelog for the next release.
 For changes of a trivial nature to comments and documentation, it is not always necessary to create a new ticket in JIRA.
 In this case, it is appropriate to start the first line of a commit with '(doc)' instead of a ticket number.
 
-
 Submitting Changes
 ------------------
 
@@ -98,7 +97,6 @@ Submitting Changes
 
 If you prefer to not use GitHub, then you can instead use
 `git format-patch` (or `svn diff`) and attach the patch file to the JIRA issue.
-
 
 Additional Resources
 --------------------

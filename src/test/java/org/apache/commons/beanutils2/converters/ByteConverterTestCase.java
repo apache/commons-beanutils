@@ -23,20 +23,14 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ByteConverter class.
- *
  */
-
 public class ByteConverterTestCase extends NumberConverterTestBase {
 
     public static TestSuite suite() {
         return new TestSuite(ByteConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public ByteConverterTestCase(final String name) {
         super(name);
@@ -51,8 +45,6 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new ByteConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -71,8 +63,6 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     /**
      * Test Invalid Amounts (too big/small)
@@ -164,6 +154,4 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-
 }
-

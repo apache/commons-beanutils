@@ -62,5 +62,4 @@ public final class IntegerConverter extends NumberConverter {
     protected Class<Integer> getDefaultType() {
         return Integer.class;
     }
-
 }

@@ -88,5 +88,4 @@ public final class SqlTimeConverter extends DateTimeConverter {
         }
         return format;
     }
-
 }

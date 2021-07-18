@@ -31,12 +31,8 @@ import org.apache.commons.logging.LogFactory;
  * that convert an incoming locale-sensitive Object into an object of correspond type,
  * optionally using a default value or throwing a {@link ConversionException}
  * if a conversion error occurs.</p>
- *
  */
-
 public abstract class BaseLocaleConverter implements LocaleConverter {
-
-
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
@@ -56,8 +52,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern;
 
-
-
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
      * if a conversion error occurs.
@@ -67,7 +61,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern) {
-
         this(null, locale, pattern, false, false);
     }
 
@@ -80,7 +73,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     protected BaseLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-
         this(null, locale, pattern, false, locPattern);
     }
 
@@ -94,7 +86,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @param pattern       The conversion pattern
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-
         this(defaultValue, locale, pattern, false);
     }
 
@@ -109,7 +100,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      */
     protected BaseLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
             final boolean locPattern) {
-
         this(defaultValue, locale, pattern, true, locPattern);
     }
 
@@ -125,7 +115,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      */
     private BaseLocaleConverter(final Object defaultValue, final Locale locale,
                                 final String pattern, final boolean useDefault, final boolean locPattern) {
-
         if (useDefault) {
             this.defaultValue = defaultValue;
             this.useDefault = true;
@@ -138,8 +127,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.pattern = pattern;
         this.locPattern = locPattern;
     }
-
-
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

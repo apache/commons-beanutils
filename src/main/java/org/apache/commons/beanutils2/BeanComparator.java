@@ -135,7 +135,6 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      */
     @Override
     public int compare(final T o1, final T o2) {
-
         if (property == null) {
             // compare the actual objects
             return internalCompare(o1, o2);
@@ -146,7 +145,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
             final Object value2 = PropertyUtils.getProperty(o2, property);
             return internalCompare(value1, value2);
         } catch (final NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e.getClass().getSimpleName()+": " + e.toString());
+            throw new RuntimeException(e.getClass().getSimpleName() + ": " + e.toString());
         }
     }
 

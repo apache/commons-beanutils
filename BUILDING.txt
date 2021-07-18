@@ -4,7 +4,7 @@ Building BeanUtils requires:
 
  - JDK 6/OpenJDK 6 or later (recommended: JDK 8)
    http://www.oracle.com/technetwork/java/javase/downloads/
-   
+
  - Apache Maven 3 or later (recommended: Maven 3.3)
    https://maven.apache.org/download.cgi
 
@@ -19,7 +19,7 @@ or to install into your ~/.m2/repository
 
     mvn clean install
 
- 
+
 You can skip the unit tests by adding the parameter
 
     -DskipTests=true
@@ -36,5 +36,3 @@ purpose of checking API version compatibility, to enable this, use Java 7 or
 later and run instead:
 
     mvn clean package site -Pjapicmp
-
-

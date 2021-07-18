@@ -29,12 +29,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test accessing RowSets via DynaBeans.
- *
  */
-
 public class DynaRowSetTestCase extends TestCase {
-
-
 
     /**
      * The mock result set DynaClass to be tested.
@@ -54,38 +50,28 @@ public class DynaRowSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
     public DynaRowSetTestCase(final String name) {
-
         super(name);
-
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         dynaClass = new RowSetDynaClass(TestResultSet.createProxy());
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(DynaRowSetTestCase.class);
-
     }
 
     /**
@@ -93,23 +79,16 @@ public class DynaRowSetTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
-
     }
 
-
-
     public void testGetName() {
-
         assertEquals("DynaClass name",
                      "org.apache.commons.beanutils2.RowSetDynaClass",
                      dynaClass.getName());
-
     }
 
     public void testGetDynaProperty() {
-
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
@@ -130,11 +109,9 @@ public class DynaRowSetTestCase extends TestCase {
                      dynaProp.getName());
         assertEquals("string property class", String.class,
                      dynaProp.getType());
-
     }
 
     public void testGetDynaProperties() {
-
         final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
@@ -142,11 +119,9 @@ public class DynaRowSetTestCase extends TestCase {
             assertEquals("Property " + columns[i],
                          columns[i], dynaProps[i].getName());
         }
-
     }
 
     public void testNewInstance() {
-
         try {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
@@ -155,19 +130,15 @@ public class DynaRowSetTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Threw exception " + e);
         }
-
     }
 
     public void testListCount() {
-
         final List<DynaBean> rows = dynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("list row count", 5, rows.size());
-
     }
 
     public void testListResults() {
-
         // Grab the third row
         final List<DynaBean> rows = dynaClass.getRows();
         final DynaBean row = rows.get(2);
@@ -209,7 +180,6 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
     }
 
     /**
@@ -264,17 +234,14 @@ public class DynaRowSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
     }
 
     public void testLimitedRows() throws Exception {
-
         // created one with low limit
         final RowSetDynaClass limitedDynaClass = new RowSetDynaClass(TestResultSet.createProxy(), 3);
         final List<DynaBean> rows = limitedDynaClass.getRows();
         assertNotNull("list exists", rows);
         assertEquals("limited row count", 3, rows.size());
-
     }
 
     /**
@@ -285,7 +252,6 @@ public class DynaRowSetTestCase extends TestCase {
      * @throws Exception if an error occurs
      */
     public void testInconsistentOracleDriver() throws Exception {
-
         final ResultSetMetaData metaData = TestResultSetMetaData.createProxy(new TestResultSetMetaDataInconsistent());
         final ResultSet resultSet = TestResultSet.createProxy(new TestResultSetInconsistent(metaData));
 
@@ -332,6 +298,7 @@ public class DynaRowSetTestCase extends TestCase {
         public TestResultSetInconsistent(final ResultSetMetaData metaData) {
             super(metaData);
         }
+
         /**
          * Get an columns's value
          * @param columnName Name of the column
@@ -345,7 +312,6 @@ public class DynaRowSetTestCase extends TestCase {
             }
             return super.getObject(columnName);
         }
-
     }
 
     /**

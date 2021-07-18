@@ -22,11 +22,8 @@ import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code MappedPropertyDescriptor}.</p>
- *
  */
 public class MappedPropertyTestCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -36,8 +33,6 @@ public class MappedPropertyTestCase extends TestCase {
     public MappedPropertyTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run this Test
@@ -66,8 +61,6 @@ public class MappedPropertyTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test valid method name

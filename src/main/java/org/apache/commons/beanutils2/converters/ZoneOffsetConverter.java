@@ -79,5 +79,4 @@ public final class ZoneOffsetConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

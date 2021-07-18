@@ -27,9 +27,9 @@ import junit.framework.TestCase;
 
 /**
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
- *
  */
 public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
+
     /**
      * Tries to create an instance without properties.
      */

@@ -19,12 +19,8 @@ package org.apache.commons.beanutils2;
 
 /**
  * Plain old java bean (POJO) for microbenchmarks.
- *
  */
-
 public class BenchBean {
-
-
 
     /**
      * A boolean property.
@@ -129,5 +125,4 @@ public class BenchBean {
     public void setStringProperty(final String stringProperty) {
         this.stringProperty = stringProperty;
     }
-
 }

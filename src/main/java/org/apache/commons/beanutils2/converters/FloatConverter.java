@@ -62,5 +62,4 @@ public final class FloatConverter extends NumberConverter {
     protected Class<Float> getDefaultType() {
         return Float.class;
     }
-
 }

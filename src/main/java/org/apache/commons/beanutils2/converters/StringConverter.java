@@ -92,5 +92,4 @@ public final class StringConverter extends AbstractConverter {
         }
         throw conversionException(type, value);
     }
-
 }

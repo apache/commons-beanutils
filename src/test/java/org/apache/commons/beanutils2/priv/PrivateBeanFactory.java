@@ -19,27 +19,20 @@ package org.apache.commons.beanutils2.priv;
 
 /**
  * Factory class for PrivateBean instances.
- *
  */
-
 public class PrivateBeanFactory {
 
     /**
      * Factory method to create new beans.
      */
     public static PrivateDirect create() {
-
         return new PrivateBean();
-
     }
 
     /**
      * Factory method to create new beans.
      */
     public static PrivateDirect createSubclass() {
-
         return new PrivateBeanSubclass();
-
     }
-
 }

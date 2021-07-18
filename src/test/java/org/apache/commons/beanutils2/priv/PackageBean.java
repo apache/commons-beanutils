@@ -24,12 +24,8 @@ package org.apache.commons.beanutils2.priv;
  * when they are invoked.</p>
  *
  * <p>This is the default access superclass</p>
- *
  */
-
 class PackageBean {
-
-
 
     /**
      * Package private constructor - can only use factory method to create
@@ -39,22 +35,13 @@ class PackageBean {
 
     }
 
-
-
-    /**
-     */
     private String bar = "This is bar";
 
     public String getBar() {
-
         return this.bar;
-
     }
 
     public void setBar(final String bar) {
-
         this.bar = bar;
-
     }
-
 }

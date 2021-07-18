@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ArrayConverter class.
- *
  */
 public class ArrayConverterTestCase extends TestCase {
 
@@ -37,8 +36,6 @@ public class ArrayConverterTestCase extends TestCase {
     public static TestSuite suite() {
         return new TestSuite(ArrayConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Array Converter test case.
@@ -74,8 +71,6 @@ public class ArrayConverterTestCase extends TestCase {
     public void setUp() throws Exception {
     }
 
-
-
     /** Tear Down */
     @Override
     public void tearDown() throws Exception {
@@ -85,7 +80,6 @@ public class ArrayConverterTestCase extends TestCase {
      * Test Converting using the IntegerConverter as the component Converter
      */
     public void testComponentIntegerConverter() {
-
         final IntegerConverter intConverter = new IntegerConverter(new Integer(0));
         intConverter.setPattern("#,###");
         intConverter.setLocale(Locale.US);
@@ -276,7 +270,6 @@ public class ArrayConverterTestCase extends TestCase {
      * Test Converting a String[] to integer array (with leading/trailing whitespace)
      */
     public void testStringArrayToNumber() {
-
         // Configure Converter
         final IntegerConverter intConverter = new IntegerConverter();
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter);
@@ -328,7 +321,6 @@ public class ArrayConverterTestCase extends TestCase {
      * Test the Matrix!!!! (parses a String into a 2 dimensional integer array or matrix)
      */
     public void testTheMatrix() {
-
         // Test Date - create the Matrix!!
         // Following String uses two delimiter:
         //     - comma (",") to separate individual numbers

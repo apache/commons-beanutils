@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the DurationConverter class.
- *
  */
 public class DurationConverterTestCase extends TestCase {
 
@@ -35,11 +34,7 @@ public class DurationConverterTestCase extends TestCase {
         return new TestSuite(DurationConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public DurationConverterTestCase(final String name) {
         super(name);
@@ -53,8 +48,6 @@ public class DurationConverterTestCase extends TestCase {
         return new DurationConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -64,8 +57,6 @@ public class DurationConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -113,4 +104,3 @@ public class DurationConverterTestCase extends TestCase {
         }
     }
 }
-

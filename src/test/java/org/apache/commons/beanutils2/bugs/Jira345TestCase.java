@@ -77,7 +77,7 @@ public class Jira345TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() with 2D array.
      */
-    public void testBeanUtilsSetProperty_2DArray() throws Exception{
+    public void testBeanUtilsSetProperty_2DArray() throws Exception {
         final MyBean myBean = new MyBean();
         BeanUtils.setProperty(myBean, "matr[0][0]","Sample");
         assertEquals("Sample", myBean.getMatr()[0][0]);
@@ -86,7 +86,7 @@ public class Jira345TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() with 3D array.
      */
-    public void testBeanUtilsSetProperty_3DArray() throws Exception{
+    public void testBeanUtilsSetProperty_3DArray() throws Exception {
         final MyBean myBean = new MyBean();
         BeanUtils.setProperty(myBean, "matr3D[0][0][0]","Sample");
         assertEquals("Sample", myBean.getMatr3D()[0][0][0]);

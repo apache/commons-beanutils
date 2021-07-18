@@ -65,5 +65,4 @@ public final class ZonedDateTimeConverter extends DateTimeConverter {
     protected Class<?> getDefaultType() {
         return ZonedDateTime.class;
     }
-
 }

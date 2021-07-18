@@ -77,5 +77,4 @@ public final class URLConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

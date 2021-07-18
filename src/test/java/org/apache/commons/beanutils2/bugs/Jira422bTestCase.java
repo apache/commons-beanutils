@@ -42,7 +42,6 @@ public class Jira422bTestCase {
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
-
 }
 
 class RootBeanB {
@@ -64,7 +63,6 @@ class RootBeanB {
     public void setFile(final int i, final String file) {
         this.file[i] = file;
     }
-
 }
 
 class FirstChildBeanB extends RootBeanB {

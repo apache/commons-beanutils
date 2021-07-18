@@ -65,5 +65,4 @@ public final class LocalDateConverter extends DateTimeConverter {
     protected Class<?> getDefaultType() {
         return LocalDate.class;
     }
-
 }

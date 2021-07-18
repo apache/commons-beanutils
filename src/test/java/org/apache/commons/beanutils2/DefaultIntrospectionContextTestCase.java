@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 
 /**
  * Test class for {@code IntrospectionContext}.
- *
  */
 public class DefaultIntrospectionContextTestCase extends TestCase {
     /** Constant for the name of a property. */

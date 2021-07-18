@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test case for {@link DynaProperty}.
- *
  */
 public class DynaPropertyTestCase extends TestCase {
 
@@ -49,9 +48,7 @@ public class DynaPropertyTestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-
         return new TestSuite(DynaPropertyTestCase.class);
-
     }
 
     /**
@@ -88,7 +85,6 @@ public class DynaPropertyTestCase extends TestCase {
      * Class under test for int hashCode(Object)
      */
     public void testHashCode() {
-
         final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
         assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
         assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
@@ -100,7 +96,6 @@ public class DynaPropertyTestCase extends TestCase {
      * Class under test for boolean equals(Object)
      */
     public void testEqualsObject() {
-
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
@@ -108,5 +103,4 @@ public class DynaPropertyTestCase extends TestCase {
         assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
         assertFalse(testPropertyWithName.equals(null));
     }
-
 }

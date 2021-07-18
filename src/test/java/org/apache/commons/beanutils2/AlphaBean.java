@@ -17,8 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-/**
- */
 public class AlphaBean extends AbstractParent implements Child {
 
     private String name;

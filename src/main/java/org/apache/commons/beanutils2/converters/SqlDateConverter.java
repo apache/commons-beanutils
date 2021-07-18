@@ -63,5 +63,4 @@ public final class SqlDateConverter extends DateTimeConverter {
     protected Class<?> getDefaultType() {
         return Date.class;
     }
-
 }

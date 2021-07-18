@@ -21,11 +21,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link BeanUtilsBean2}.
- *
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -35,8 +32,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     public BeanUtils2TestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -193,5 +188,4 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
         }
         assertEquals("java.util.Date --> String[]", testStringDate, bean.getStringArray()[0]);
     }
-
 }

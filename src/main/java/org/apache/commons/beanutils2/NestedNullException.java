@@ -23,12 +23,9 @@ package org.apache.commons.beanutils2;
  *
  * @since 1.7
  */
-
 public class NestedNullException extends BeanAccessLanguageException {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * Constructs a {@code NestedNullException} without a detail message.

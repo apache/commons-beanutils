@@ -26,12 +26,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test accessing ResultSets via DynaBeans.
- *
  */
-
 public class DynaResultSetTestCase extends TestCase {
-
-
 
     /**
      * The mock result set DynaClass to be tested.
@@ -51,38 +47,28 @@ public class DynaResultSetTestCase extends TestCase {
       "stringproperty", "timeproperty",
       "timestampproperty" };
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
     public DynaResultSetTestCase(final String name) {
-
         super(name);
-
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         dynaClass = new ResultSetDynaClass(TestResultSet.createProxy());
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(DynaResultSetTestCase.class);
-
     }
 
     /**
@@ -90,23 +76,16 @@ public class DynaResultSetTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
-
     }
 
-
-
     public void testGetName() {
-
         assertEquals("DynaClass name",
                      "org.apache.commons.beanutils2.ResultSetDynaClass",
                      dynaClass.getName());
-
     }
 
     public void testGetDynaProperty() {
-
         // Invalid argument test
         try {
             dynaClass.getDynaProperty(null);
@@ -127,11 +106,9 @@ public class DynaResultSetTestCase extends TestCase {
                      dynaProp.getName());
         assertEquals("string property class", String.class,
                      dynaProp.getType());
-
     }
 
     public void testGetDynaProperties() {
-
         final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
@@ -139,11 +116,9 @@ public class DynaResultSetTestCase extends TestCase {
             assertEquals("Property " + columns[i],
                          columns[i], dynaProps[i].getName());
         }
-
     }
 
     public void testNewInstance() {
-
         try {
             dynaClass.newInstance();
             fail("Did not throw UnsupportedOperationException()");
@@ -152,11 +127,9 @@ public class DynaResultSetTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Threw exception " + e);
         }
-
     }
 
     public void testIteratorCount() {
-
         final Iterator<?> rows = dynaClass.iterator();
         assertNotNull("iterator exists", rows);
         int n = 0;
@@ -168,11 +141,9 @@ public class DynaResultSetTestCase extends TestCase {
             }
         }
         assertEquals("iterator rows", 5, n);
-
     }
 
     public void testIteratorResults() {
-
         // Grab the third row
         final Iterator<DynaBean> rows = dynaClass.iterator();
         rows.next();
@@ -216,7 +187,6 @@ public class DynaResultSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
     }
 
     /**
@@ -273,7 +243,5 @@ public class DynaResultSetTestCase extends TestCase {
         assertEquals("stringProperty value",
                      "This is a string",
                      (String) stringProperty);
-
     }
-
 }

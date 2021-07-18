@@ -28,12 +28,8 @@ import org.apache.commons.beanutils2.BeanUtils;
  *
  * <p>The implementations for these methods are provided by {@code LocaleBeanUtilsBean}.
  * For more details see {@link LocaleBeanUtilsBean}.</p>
- *
  */
-
 public class LocaleBeanUtils extends BeanUtils {
-
-
 
     /**
      * <p>Gets the locale used when no locale is passed.</p>
@@ -44,7 +40,6 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {
-
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getDefaultLocale();
     }
 
@@ -57,7 +52,6 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(final Locale locale) {
-
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setDefaultLocale(locale);
     }
 
@@ -71,7 +65,6 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#getApplyLocalized()
      */
     public static boolean getApplyLocalized() {
-
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getApplyLocalized();
     }
 
@@ -85,11 +78,8 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#setApplyLocalized(boolean)
      */
     public static void setApplyLocalized(final boolean newApplyLocalized) {
-
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().setApplyLocalized(newApplyLocalized);
     }
-
-
 
     /**
      * <p>Return the value of the specified locale-sensitive indexed property
@@ -569,7 +559,6 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#convert(Class, int, Object, String)
      */
     protected static Object convert(final Class<?> type, final int index, final Object value, final String pattern) {
-
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value, pattern);
     }
 
@@ -585,7 +574,6 @@ public class LocaleBeanUtils extends BeanUtils {
      * @see LocaleBeanUtilsBean#convert(Class, int, Object)
      */
     protected static Object convert(final Class<?> type, final int index, final Object value) {
-
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().convert(type, index, value);
     }
 
@@ -614,4 +602,3 @@ public class LocaleBeanUtils extends BeanUtils {
        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().invokeSetter(target, propName, key, index, newValue);
     }
 }
-

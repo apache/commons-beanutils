@@ -28,7 +28,6 @@ import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code LazyDynaBean} implementation class.</p>
- *
  */
 public class LazyDynaBeanTestCase extends TestCase {
 
@@ -43,8 +42,6 @@ public class LazyDynaBeanTestCase extends TestCase {
     protected Integer testInteger2    = new Integer(40);
     protected String testKey          = "myKey";
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
@@ -53,8 +50,6 @@ public class LazyDynaBeanTestCase extends TestCase {
     public LazyDynaBeanTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run thus Test
@@ -88,13 +83,10 @@ public class LazyDynaBeanTestCase extends TestCase {
       bean = null;
     }
 
-
-
     /**
      * Test Getting/Setting a Simple Property
      */
     public void testSimpleProperty() {
-
         // Check the property & value doesn't exist
         assertNull("Check Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Value is null", bean.get(testProperty));
@@ -115,14 +107,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         } catch (final ConversionException expected) {
             // expected result
         }
-
     }
 
     /**
      * Test Getting/Setting a 'null' Property
      */
     public void testNullProperty() {
-
         // Check the property & value doesn't exist
         assertNull("Check Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Value is null", bean.get(testProperty));
@@ -130,14 +120,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         // Set a new property to null
         bean.set(testProperty, null);
         assertNull("Check Value is still null", bean.get(testProperty));
-
     }
 
     /**
      * Test Setting a Simple Property when MutableDynaClass is set to restricted
      */
     public void testSimplePropertyRestricted() {
-
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaClass.setRestricted(true);
         assertTrue("Check MutableDynaClass is restricted", dynaClass.isRestricted());
@@ -153,14 +141,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         } catch (final IllegalArgumentException expected) {
             // expected result
         }
-
     }
 
     /**
      * Test Getting/Setting a 'Mapped' Property - default HashMap property
      */
     public void testMappedPropertyDefault() {
-
         // Check the property & value doesn't exist
         assertNull("Check Mapped Property doesn't exist", dynaClass.getDynaProperty(testProperty));
         assertNull("Check Map is null", bean.get(testProperty));
@@ -182,7 +168,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Getting/Setting a 'Mapped' Property - use TreeMap property
      */
     public void testMappedPropertyTreeMap() {
-
         // Check the property & value doesn't exist
         assertNull("Check Mapped Property doesn't exist", dynaClass.getDynaProperty(testProperty));
 
@@ -209,7 +194,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Setting a 'Mapped' Property using PropertyUtils
      */
     public void testMappedPropertyUtils() {
-
         dynaClass.setReturnNull(false);
 
         // Check the property & value doesn't exist
@@ -219,22 +203,19 @@ public class LazyDynaBeanTestCase extends TestCase {
 
         // Set the mapped property using PropertyUtils
         try {
-          PropertyUtils.setProperty(bean, testProperty+"("+testKey+")", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+            PropertyUtils.setProperty(bean, testProperty+"("+testKey+")", testString1);
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
         // Check property value correctly set
         assertEquals("Check Mapped Bean Value is correct", testString1, bean.get(testProperty, testKey));
-
     }
 
     /**
      * Test Setting a Mapped Property when MutableDynaClass is set to restricted
      */
     public void testMappedPropertyRestricted() {
-
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaClass.setRestricted(true);
         assertTrue("Check MutableDynaClass is restricted", dynaClass.isRestricted());
@@ -250,7 +231,6 @@ public class LazyDynaBeanTestCase extends TestCase {
         } catch (final IllegalArgumentException expected) {
             // expected result
         }
-
     }
 
     /**
@@ -271,7 +251,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Getting/Setting an 'Indexed' Property - default ArrayList property
      */
     public void testIndexedPropertyDefault() {
-
         int index = 3;
 
         // Check the property & value doesn't exist
@@ -297,7 +276,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Getting/Setting a List 'Indexed' Property - use alternative List (LinkedList)
      */
     public void testIndexedLinkedList() {
-
         int   index     = 3;
 
         // Check the property & value doesn't exist
@@ -327,7 +305,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Getting/Setting a primitive array 'Indexed' Property - use int[]
      */
     public void testIndexedPrimitiveArray() {
-
         int   index     = 3;
         final int[] primitiveArray = new int[0];
 
@@ -354,14 +331,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, bean.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testInteger2, new Integer(((int[])bean.get(testProperty))[index]));
         assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((int[])bean.get(testProperty)).length));
-
     }
 
     /**
      * Test Getting/Setting an Object array 'Indexed' Property - use String[]
      */
     public void testIndexedObjectArray() {
-
         int   index     = 3;
         final Object objectArray = new String[0];
 
@@ -394,7 +369,6 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test Getting/Setting an DynaBean[] array
      */
     public void testIndexedDynaBeanArray() {
-
         final int   index     = 3;
         final Object objectArray = new LazyDynaMap[0];
 
@@ -417,14 +391,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         newMap.set(testPropertyB, testString2);
         bean.set(testPropertyA, index, newMap);
         assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean)bean.get(testPropertyA, index)).get(testPropertyB));
-
     }
 
     /**
      * Test Setting an 'Indexed' Property using PropertyUtils
      */
     public void testIndexedPropertyUtils() {
-
         final int   index     = 3;
         dynaClass.setReturnNull(false);
 
@@ -436,21 +408,18 @@ public class LazyDynaBeanTestCase extends TestCase {
         // Use PropertyUtils to set the indexed value
         try {
           PropertyUtils.setProperty(bean, testProperty+"["+index+"]", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
         // Check property value correctly set
         assertEquals("Check Indexed Bean Value is correct", testString1, bean.get(testProperty, index));
-
     }
 
     /**
      * Test Setting an Indexed Property when MutableDynaClass is set to restricted
      */
     public void testIndexedPropertyRestricted() {
-
         final int   index     = 3;
 
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
@@ -468,7 +437,6 @@ public class LazyDynaBeanTestCase extends TestCase {
         } catch (final IllegalArgumentException expected) {
             // expected result
         }
-
     }
 
     /**
@@ -485,5 +453,4 @@ public class LazyDynaBeanTestCase extends TestCase {
             // expected result
         }
     }
-
 }

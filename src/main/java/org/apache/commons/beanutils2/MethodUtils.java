@@ -43,12 +43,8 @@ import org.apache.commons.logging.LogFactory;
  * If this call succeeds, then the method can be invoked as normal.
  * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
- *
  */
-
 public class MethodUtils {
-
-
 
     /**
      * Only log warning about accessibility work around once.
@@ -95,8 +91,6 @@ public class MethodUtils {
      */
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
             .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
-
-
 
     /**
      * Sets whether methods should be cached for greater performance or not,
@@ -732,7 +726,6 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(final Method method) {
-
         // Make sure we have a method to check
         if (method == null) {
             return null;
@@ -752,7 +745,6 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Method getAccessibleMethod(Class<?> clazz, Method method) {
-
         // Make sure we have a method to check
         if (method == null) {
             return null;
@@ -801,8 +793,6 @@ public class MethodUtils {
         return method;
     }
 
-
-
     /**
      * <p>Return an accessible method (that is, one that can be invoked via
      * reflection) by scanning through the superclasses. If no such method
@@ -850,11 +840,9 @@ public class MethodUtils {
 
         // Search up the superclass chain
         for (; clazz != null; clazz = clazz.getSuperclass()) {
-
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
             for (final Class<?> anInterface : interfaces) {
-
                 // Is this interface public?
                 if (!Modifier.isPublic(anInterface.getModifiers())) {
                     continue;
@@ -881,9 +869,7 @@ public class MethodUtils {
                 if (method != null) {
                     return method;
                 }
-
             }
-
         }
 
         // We did not find anything
@@ -943,7 +929,6 @@ public class MethodUtils {
 
             cacheMethod(md, method);
             return method;
-
         } catch (final NoSuchMethodException e) { /* SWALLOW */ }
 
         // search through all methods
@@ -1036,7 +1021,6 @@ public class MethodUtils {
             if (!method.isAccessible()) {
                 method.setAccessible(true);
             }
-
         } catch (final SecurityException se) {
             // log but continue just in case the method.invoke works anyway
             final Log log = LogFactory.getLog(MethodUtils.class);
@@ -1075,7 +1059,6 @@ public class MethodUtils {
      * @return The total transformation cost
      */
     private static float getTotalTransformationCost(final Class<?>[] srcArgs, final Class<?>[] destArgs) {
-
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
             Class<?> srcClass, destClass;

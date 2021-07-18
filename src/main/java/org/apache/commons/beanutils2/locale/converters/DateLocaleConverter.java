@@ -200,8 +200,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         super(defaultValue, locale, pattern, locPattern);
     }
 
-
-
     /**
      * Returns whether date formatting is lenient.
      *
@@ -236,7 +234,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, String pattern) throws ParseException {
-
         // Handle Date
         if (value instanceof java.util.Date) {
             return value;
@@ -280,7 +277,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
       * @return pattern in 'default' symbol format
       */
      private String convertLocalizedPattern(final String localizedPattern, final Locale locale) {
-
          if (localizedPattern == null) {
             return null;
          }
@@ -315,7 +311,6 @@ public class DateLocaleConverter extends BaseLocaleConverter {
      * <p>Converts a Pattern from one character set to another.</p>
      */
     private String convertPattern(final String pattern, final String fromChars, final String toChars) {
-
         final StringBuilder converted = new StringBuilder();
         boolean quoted = false;
 
@@ -357,5 +352,4 @@ public class DateLocaleConverter extends BaseLocaleConverter {
         final DateFormatSymbols defaultSymbols = new DateFormatSymbols(Locale.US);
         return defaultSymbols.getLocalPatternChars();
     }
-
 }

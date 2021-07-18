@@ -73,14 +73,11 @@ public class Jira509TestCase {
                         final WrapDynaClass w = WrapDynaClass.createDynaClass(clazz);
                         assert w != null;
                     }
-
                 });
             }
         } finally {
             executor.shutdown();
             executor.awaitTermination(3500, TimeUnit.MILLISECONDS);
-
         }
     }
-
 }

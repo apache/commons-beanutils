@@ -23,20 +23,14 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the LongConverter class.
- *
  */
-
 public class LongConverterTestCase extends NumberConverterTestBase {
 
     public static TestSuite suite() {
         return new TestSuite(LongConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public LongConverterTestCase(final String name) {
         super(name);
@@ -51,8 +45,6 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new LongConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -72,8 +64,6 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -130,6 +120,4 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-
 }
-

@@ -98,8 +98,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private TimeZone timeZone;
     private boolean useLocaleFormat;
 
-
-
     /**
      * Constructs a Date/Time <i>Converter</i> that throws a
      * {@code ConversionException} if an error occurs.
@@ -118,8 +116,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public DateTimeConverter(final Object defaultValue) {
         super(defaultValue);
     }
-
-
 
     /**
      * Indicate whether conversion should use a format/pattern or not.
@@ -207,8 +203,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
         }
         setUseLocaleFormat(true);
     }
-
-
 
     /**
      * Convert an input Date/Calendar object into a String.
@@ -301,13 +295,10 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     @Override
     protected <T> T convertToType(final Class<T> targetType, final Object value) throws Exception {
-
         final Class<?> sourceType = value.getClass();
 
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
-
-
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently across JDK versions
@@ -383,7 +374,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Default String conversion
         return toDate(targetType, stringValue);
-
     }
 
     /**
@@ -409,7 +399,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return The converted date value.
      */
     private <T> T toDate(final Class<T> type, final long value) {
-
         // java.util.Date
         if (type.equals(Date.class)) {
             return type.cast(new Date(value));

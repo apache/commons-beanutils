@@ -29,12 +29,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test accessing DynaBeans transparently via PropertyUtils.
- *
  */
-
 public class DynaPropertyUtilsTestCase extends TestCase {
-
-
 
     /**
      * The basic test bean for each test.
@@ -71,27 +67,20 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     protected TestBean nested = null;
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
     public DynaPropertyUtilsTestCase(final String name) {
-
         super(name);
-
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         // Instantiate a new DynaBean instance
         final DynaClass dynaClass = createDynaClass();
         bean = dynaClass.newInstance();
@@ -141,16 +130,13 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(DynaPropertyUtilsTestCase.class);
-
     }
 
     /**
@@ -158,19 +144,14 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         bean = null;
         nested = null;
-
     }
-
-
 
     /**
      * Test copyProperties() when the origin is a a {@code Map}.
      */
     public void testCopyPropertiesMap() {
-
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", new Double(333.0));
@@ -219,14 +200,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         assertEquals("intArray[0]", 0, intArray[0]);
         assertEquals("intArray[1]", 100, intArray[1]);
         assertEquals("intArray[2]", 200, intArray[2]);
-
     }
 
     /**
      * Test the describe() method.
      */
     public void testDescribe() {
-
         Map<String, Object> map = null;
         try {
             map = PropertyUtils.describe(bean);
@@ -258,14 +237,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
                      (String) map.get("stringProperty"));
-
     }
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
      */
     public void testGetIndexedArguments() {
-
         // Use explicit index argument
 
         try {
@@ -365,20 +342,17 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
-
     }
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
      */
     public void testGetIndexedValues() {
-
         Object value = null;
 
         // Use explicit key argument
 
         for (int i = 0; i < 5; i++) {
-
             try {
                 value =
                         PropertyUtils.getIndexedProperty(bean, "intArray", i);
@@ -438,13 +412,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
-
         }
 
         // Use key expression
 
         for (int i = 0; i < 5; i++) {
-
             try {
                 value =
                         PropertyUtils.getIndexedProperty(bean,
@@ -509,7 +481,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
-
         }
 
         // Index out of bounds tests
@@ -623,14 +594,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
-
     }
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testGetMappedArguments() {
-
         // Use explicit key argument
 
         try {
@@ -690,14 +659,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
         }
-
     }
 
     /**
      * Test getting mapped values with periods in the key.
      */
     public void testGetMappedPeriods() {
-
         bean.set("mappedProperty", "key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly",
                      "Special Value",
@@ -731,7 +698,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
-
     }
 
     /**
@@ -739,7 +705,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      * from periods because slashes are not syntactically significant.
      */
     public void testGetMappedSlashes() {
-
         bean.set("mappedProperty", "key/with/a/slash", "Special Value");
         assertEquals("Can retrieve directly",
                      "Special Value",
@@ -773,14 +738,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
-
     }
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
      */
     public void testGetMappedValues() {
-
         Object value = null;
 
         // Use explicit key argument
@@ -866,14 +829,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
-
     }
 
     /**
      * Corner cases on getNestedProperty invalid arguments.
      */
     public void testGetNestedArguments() {
-
         try {
             PropertyUtils.getNestedProperty(null, "stringProperty");
             fail("Should throw IllegalArgumentException 1");
@@ -891,14 +852,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
-
     }
 
     /**
      * Test getNestedProperty on a boolean property.
      */
     public void testGetNestedBoolean() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -918,14 +877,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a double property.
      */
     public void testGetNestedDouble() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -946,14 +903,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a float property.
      */
     public void testGetNestedFloat() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -974,14 +929,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on an int property.
      */
     public void testGetNestedInt() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -1001,14 +954,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a long property.
      */
     public void testGetNestedLong() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -1028,14 +979,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a read-only String property.
      */
     public void testGetNestedReadOnly() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -1055,14 +1004,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a short property.
      */
     public void testGetNestedShort() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -1082,14 +1029,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getNestedProperty on a String property.
      */
     public void testGetNestedString() {
-
         try {
             final Object value =
                     PropertyUtils.getNestedProperty
@@ -1109,14 +1054,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test getNestedProperty on an unknown property.
      */
     public void testGetNestedUnknown() {
-
         try {
             PropertyUtils.getNestedProperty(bean, "nested.unknown");
             fail("Should have thrown NoSuchMethodException");
@@ -1129,14 +1072,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
         }
-
     }
 
     /**
      * Corner cases on getSimpleProperty invalid arguments.
      */
     public void testGetSimpleArguments() {
-
         try {
             PropertyUtils.getSimpleProperty(null, "stringProperty");
             fail("Should throw IllegalArgumentException 1");
@@ -1154,14 +1095,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a boolean property.
      */
     public void testGetSimpleBoolean() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1179,14 +1118,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a double property.
      */
     public void testGetSimpleDouble() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1204,14 +1141,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a float property.
      */
     public void testGetSimpleFloat() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1231,14 +1166,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test getSimpleProperty on an indexed property.
      */
     public void testGetSimpleIndexed() {
-
         try {
             PropertyUtils.getSimpleProperty(bean,
                     "intIndexed[0]");
@@ -1252,14 +1185,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on an int property.
      */
     public void testGetSimpleInt() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1278,14 +1209,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a long property.
      */
     public void testGetSimpleLong() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1304,14 +1233,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test getSimpleProperty on a nested property.
      */
     public void testGetSimpleNested() {
-
         try {
             PropertyUtils.getSimpleProperty(bean,
                     "nested.stringProperty");
@@ -1325,14 +1252,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a short property.
      */
     public void testGetSimpleShort() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1351,14 +1276,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a String property.
      */
     public void testGetSimpleString() {
-
         try {
             final Object value =
                     PropertyUtils.getSimpleProperty(bean,
@@ -1377,14 +1300,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test getSimpleProperty on an unknown property.
      */
     public void testGetSimpleUnknown() {
-
         try {
             PropertyUtils.getSimpleProperty(bean, "unknown");
             fail("Should have thrown NoSuchMethodException");
@@ -1399,14 +1320,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertEquals("Unknown property 'unknown' on dynaclass '" +
                          bean.getDynaClass() + "'", e.getMessage() );
         }
-
     }
 
     /**
      * Corner cases on setIndexedProperty invalid arguments.
      */
     public void testSetIndexedArguments() {
-
         // Use explicit index argument
 
         try {
@@ -1516,14 +1435,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 5");
         }
-
     }
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
      */
     public void testSetIndexedValues() {
-
         Object value = null;
 
         // Use explicit index argument
@@ -1801,14 +1718,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of ArrayIndexOutOfBoundsException");
         }
-
     }
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testSetMappedArguments() {
-
         // Use explicit key argument
 
         try {
@@ -1873,14 +1788,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 6");
         }
-
     }
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
      */
     public void testSetMappedValues() {
-
         Object value = null;
 
         // Use explicit key argument
@@ -1963,14 +1876,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Finding sixth value threw " + t);
         }
-
     }
 
     /**
      * Corner cases on setNestedProperty invalid arguments.
      */
     public void testSetNestedArguments() {
-
         try {
             PropertyUtils.setNestedProperty(null, "stringProperty", "");
             fail("Should throw IllegalArgumentException 1");
@@ -1988,14 +1899,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
-
     }
 
     /**
      * Test setNextedProperty on a boolean property.
      */
     public void testSetNestedBoolean() {
-
         try {
             final boolean oldValue = nested.getBooleanProperty();
             final boolean newValue = !oldValue;
@@ -2014,14 +1923,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a double property.
      */
     public void testSetNestedDouble() {
-
         try {
             final double oldValue = nested.getDoubleProperty();
             final double newValue = oldValue + 1.0;
@@ -2041,14 +1948,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a float property.
      */
     public void testSetNestedFloat() {
-
         try {
             final float oldValue = nested.getFloatProperty();
             final float newValue = oldValue + (float) 1.0;
@@ -2068,14 +1973,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a int property.
      */
     public void testSetNestedInt() {
-
         try {
             final int oldValue = nested.getIntProperty();
             final int newValue = oldValue + 1;
@@ -2094,14 +1997,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a long property.
      */
     public void testSetNestedLong() {
-
         try {
             final long oldValue = nested.getLongProperty();
             final long newValue = oldValue + 1;
@@ -2120,14 +2021,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a read-only String property.
      */
     public void testSetNestedReadOnly() {
-
         try {
             final String oldValue = nested.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
@@ -2144,14 +2043,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
         }
-
     }
 
     /**
      * Test setNestedProperty on a short property.
      */
     public void testSetNestedShort() {
-
         try {
             final short oldValue = nested.getShortProperty();
             short newValue = oldValue;
@@ -2171,14 +2068,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on a String property.
      */
     public void testSetNestedString() {
-
         try {
             final String oldValue = nested.getStringProperty();
             final String newValue = oldValue + " Extra Value";
@@ -2197,14 +2092,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setNestedProperty on an unknown property name.
      */
     public void testSetNestedUnknown() {
-
         try {
             final String newValue = "New String Value";
             PropertyUtils.setNestedProperty(bean,
@@ -2220,14 +2113,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
         }
-
     }
 
     /**
      * Test setNestedProperty on a write-only String property.
      */
     public void testSetNestedWriteOnly() {
-
         try {
             final String oldValue = nested.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
@@ -2246,14 +2137,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Corner cases on setSimpleProperty invalid arguments.
      */
     public void testSetSimpleArguments() {
-
         try {
             PropertyUtils.setSimpleProperty(null, "stringProperty", "");
             fail("Should throw IllegalArgumentException 1");
@@ -2271,14 +2160,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException 2");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a boolean property.
      */
     public void testSetSimpleBoolean() {
-
         try {
             final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
@@ -2297,14 +2184,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a double property.
      */
     public void testSetSimpleDouble() {
-
         try {
             final double oldValue = ((Double) bean.get("doubleProperty")).doubleValue();
             final double newValue = oldValue + 1.0;
@@ -2324,14 +2209,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a float property.
      */
     public void testSetSimpleFloat() {
-
         try {
             final float oldValue = ((Float) bean.get("floatProperty")).floatValue();
             final float newValue = oldValue + (float) 1.0;
@@ -2351,14 +2234,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test setSimpleProperty on an indexed property.
      */
     public void testSetSimpleIndexed() {
-
         try {
             PropertyUtils.setSimpleProperty(bean,
                     "stringIndexed[0]",
@@ -2373,14 +2254,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a int property.
      */
     public void testSetSimpleInt() {
-
         try {
             final int oldValue = ((Integer) bean.get("intProperty")).intValue();
             final int newValue = oldValue + 1;
@@ -2399,14 +2278,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a long property.
      */
     public void testSetSimpleLong() {
-
         try {
             final long oldValue = ((Long) bean.get("longProperty")).longValue();
             final long newValue = oldValue + 1;
@@ -2425,14 +2302,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Negative test setSimpleProperty on a nested property.
      */
     public void testSetSimpleNested() {
-
         try {
             PropertyUtils.setSimpleProperty(bean,
                     "nested.stringProperty",
@@ -2447,14 +2322,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a short property.
      */
     public void testSetSimpleShort() {
-
         try {
             final short oldValue = ((Short) bean.get("shortProperty")).shortValue();
             short newValue = oldValue;
@@ -2474,14 +2347,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on a String property.
      */
     public void testSetSimpleString() {
-
         try {
             final String oldValue = (String) bean.get("stringProperty");
             final String newValue = oldValue + " Extra Value";
@@ -2500,14 +2371,12 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
-
     }
 
     /**
      * Test setSimpleProperty on an unknown property name.
      */
     public void testSetSimpleUnknown() {
-
         try {
             final String newValue = "New String Value";
             PropertyUtils.setSimpleProperty(bean,
@@ -2525,17 +2394,13 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertEquals("Unknown property 'unknown' on dynaclass '" +
                          bean.getDynaClass() + "'", e.getMessage() );
         }
-
     }
-
-
 
     /**
      * Create and return a {@code DynaClass} instance for our test
      * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
-
         final int[] intArray = new int[0];
         final String[] stringArray = new String[0];
 
@@ -2564,7 +2429,5 @@ public class DynaPropertyUtilsTestCase extends TestCase {
                             new DynaProperty("stringProperty", String.class),
                         });
         return dynaClass;
-
     }
-
 }

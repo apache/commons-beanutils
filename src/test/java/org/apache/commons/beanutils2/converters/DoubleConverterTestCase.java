@@ -23,20 +23,14 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the DoubleConverter class.
- *
  */
-
 public class DoubleConverterTestCase extends NumberConverterTestBase {
 
     public static TestSuite suite() {
         return new TestSuite(DoubleConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public DoubleConverterTestCase(final String name) {
         super(name);
@@ -51,8 +45,6 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new DoubleConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -72,8 +64,6 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -142,6 +132,4 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
                 0.00001D);
         }
     }
-
 }
-

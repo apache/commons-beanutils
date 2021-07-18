@@ -30,7 +30,6 @@ import junit.textui.TestRunner;
 
 /**
  * Test cases for BeanMap
- *
  */
 @SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {
@@ -64,7 +63,6 @@ public class BeanMapTestCase extends AbstractTestMap {
 
   Also note:  The sample keys and mappings were generated manually.
 */
-
 
     public static class BeanWithProperties implements Serializable {
         private int someInt;
@@ -388,7 +386,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by a clone() is initialized.
      */
     public void testExceptionThrowFromClone() {
-
         if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromClone() skipped on pre 1.4 JVM");
             return;
@@ -432,7 +429,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by clear() is initialized.
      */
     public void testExceptionThrowFromClear() {
-
         if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromClear() skipped on pre 1.4 JVM");
             return;
@@ -459,7 +455,6 @@ public class BeanMapTestCase extends AbstractTestMap {
      * Test that the cause of exception thrown by put() is initialized.
      */
     public void testExceptionThrowFromPut() {
-
         if (BeanUtilsTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromPut() skipped on pre 1.4 JVM");
             return;

@@ -25,12 +25,8 @@ package org.apache.commons.beanutils2.priv;
  * <li><strong>bar</strong> - Via directly implemented interface
  * <li><strong>baz</strong> - Via indirectly implemented interface
  * </ul>
- *
  */
-
 class PrivateBean implements PrivateDirect {
-
-
 
     /**
      * Package private constructor - can only use factory method to create
@@ -40,17 +36,13 @@ class PrivateBean implements PrivateDirect {
 
     }
 
-
-
     /**
      * A directly implemented property.
      */
     private final String foo = "This is foo";
 
     public String getFoo() {
-
         return this.foo;
-
     }
 
     /**
@@ -60,9 +52,7 @@ class PrivateBean implements PrivateDirect {
 
     @Override
     public String getBar() {
-
         return this.bar;
-
     }
 
     /**
@@ -70,9 +60,7 @@ class PrivateBean implements PrivateDirect {
      */
     @Override
     public String methodBar(final String in) {
-
         return in;
-
     }
 
     /**
@@ -82,9 +70,7 @@ class PrivateBean implements PrivateDirect {
 
     @Override
     public String getBaz() {
-
         return this.baz;
-
     }
 
     /**
@@ -92,9 +78,6 @@ class PrivateBean implements PrivateDirect {
      */
     @Override
     public String methodBaz(final String in) {
-
         return in;
-
     }
-
 }

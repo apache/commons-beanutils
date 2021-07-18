@@ -62,5 +62,4 @@ public final class DoubleConverter extends NumberConverter {
     protected Class<Double> getDefaultType() {
         return Double.class;
     }
-
 }

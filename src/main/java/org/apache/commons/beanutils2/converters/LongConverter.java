@@ -62,5 +62,4 @@ public final class LongConverter extends NumberConverter {
     protected Class<Long> getDefaultType() {
         return Long.class;
     }
-
 }

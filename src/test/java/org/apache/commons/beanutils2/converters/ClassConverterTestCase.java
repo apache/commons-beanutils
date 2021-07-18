@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ClassConverter class.
- *
  */
 public class ClassConverterTestCase extends TestCase {
 
@@ -35,8 +34,6 @@ public class ClassConverterTestCase extends TestCase {
     public static TestSuite suite() {
         return new TestSuite(ClassConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Class Converter test case.
@@ -55,8 +52,6 @@ public class ClassConverterTestCase extends TestCase {
     @Override
     public void tearDown() throws Exception {
     }
-
-
 
     /**
      * Test Array Conversion
@@ -103,7 +98,6 @@ public class ClassConverterTestCase extends TestCase {
      * Test Invalid Conversion with default
      */
     public void testConvertToClassDefault() {
-
         final Converter converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, new Integer(6)));
@@ -114,7 +108,6 @@ public class ClassConverterTestCase extends TestCase {
      * Test Invalid Conversion with default "null"
      */
     public void testConvertToClassDefaultNull() {
-
         final Converter converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, new Integer(6)));

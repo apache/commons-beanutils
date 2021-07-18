@@ -54,7 +54,6 @@ public class Jira347TestCase extends TestCase {
         final Class<?> beanClass    = loader.loadClass(className);
         beanClass.newInstance();
 
-
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
         assertNotNull("BeanClass is null", beanClass);
@@ -65,8 +64,7 @@ public class Jira347TestCase extends TestCase {
         MappedPropertyDescriptor descriptor = null;
         try {
           descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
-        }
-        catch (final IntrospectionException e) {
+        } catch (final IntrospectionException e) {
           // this would be fine as well
         }
 
@@ -76,8 +74,7 @@ public class Jira347TestCase extends TestCase {
              try {
                  final String m2 = getMappedWriteMethod(descriptor);
                  assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
-             }
-             catch (final RuntimeException e) {
+             } catch (final RuntimeException e) {
                  fail("getMappedWriteMethod threw an exception after garbage collection " + e);
              }
         }
@@ -130,7 +127,6 @@ public class Jira347TestCase extends TestCase {
      * Create a new class loader instance.
      */
     private static URLClassLoader newClassLoader() throws MalformedURLException {
-
         final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
         //System.out.println("dataFilePath: " + dataFilePath);
         final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils2.memoryleaktests.pojotests".length());

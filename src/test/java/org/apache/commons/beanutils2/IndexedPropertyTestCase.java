@@ -33,12 +33,8 @@ import org.junit.Test;
 
 /**
  * <p>Test Case for the Indexed Properties.</p>
- *
  */
-
 public class IndexedPropertyTestCase {
-
-
 
     /**
      * The test bean for each test.
@@ -52,14 +48,11 @@ public class IndexedPropertyTestCase {
     private List<Object> newList;
     private ArrayList<Object> arrayList;
 
-
-
     /**
      * Sets up instance variables required by this test case.
      */
     @Before
     public void setUp() {
-
         // BeanUtils
         beanUtilsBean = new BeanUtilsBean();
         propertyUtilsBean = beanUtilsBean.getPropertyUtils();
@@ -97,8 +90,6 @@ public class IndexedPropertyTestCase {
     public void tearDown() {
         bean = null;
     }
-
-
 
     /**
      * Test IndexedPropertyDescriptor for an Array
@@ -445,5 +436,4 @@ public class IndexedPropertyTestCase {
             assertEquals("Element " + i + " is different", newList.get(i), list.get(i));
         }
     }
-
 }

@@ -54,7 +54,6 @@ public final class BooleanConverter extends AbstractConverter {
     public BooleanConverter() {
     }
 
-
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
      * if a conversion error occurs, ie the string value being converted is
@@ -190,7 +189,6 @@ public final class BooleanConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 
     /**
      * Copies the provided array, and ensures that

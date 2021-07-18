@@ -46,7 +46,6 @@ public class Jira381TestCase extends TestCase {
      * See Jira issue# BEANUTILS-381.
      */
     public void testIssue_BEANUTILS_381_getMatchingAccessibleMethod() {
-
         final Class<?> target = TestServiceBean.class;
         final String methodName = "performOp";
         final Class<?>[] runtimeClasses = new Class<?>[]{TestObjectSubclass.class};
@@ -61,7 +60,7 @@ public class Jira381TestCase extends TestCase {
     /**
      * Test bean.
      */
-    public class TestServiceBean{
+    public class TestServiceBean {
 
         /**
          * Generic object method
@@ -80,12 +79,12 @@ public class Jira381TestCase extends TestCase {
      * Test object.
      *
      */
-    public class TestObject{
+    public class TestObject {
     }
 
     /**
      * Used to match performop with test object
      */
-    public class TestObjectSubclass extends TestObject{
+    public class TestObjectSubclass extends TestObject {
     }
 }

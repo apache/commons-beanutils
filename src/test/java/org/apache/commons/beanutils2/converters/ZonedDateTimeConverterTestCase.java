@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ZonedDateTimeConverter class.
- *
  */
 public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
 
@@ -36,8 +35,6 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(ZonedDateTimeConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -64,8 +61,6 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new ZonedDateTimeConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.

@@ -33,9 +33,7 @@ import java.util.Map;
  * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class can be
  * successfully serialized and deserialized <strong>ONLY</strong> if all
  * property values are {@code Serializable}.</p>
- *
  */
-
 public class BasicDynaBean implements DynaBean, Serializable {
 
     private static final Short SHORT_ZERO = Short.valueOf((short) 0);
@@ -61,9 +59,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @param dynaClass The DynaClass we are associated with
      */
     public BasicDynaBean(final DynaClass dynaClass) {
-
         this.dynaClass = dynaClass;
-
     }
 
     /**
@@ -92,13 +88,11 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * @since 1.8.0
      */
     public Map<String, Object> getMap() {
-
         // cache the Map
         if (mapDecorator == null) {
             mapDecorator = new DynaBeanPropertyMapDecorator(this);
         }
         return mapDecorator;
-
     }
 
     /**
@@ -115,7 +109,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public boolean contains(final String name, final String key) {
-
         final Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -126,7 +119,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         }
         throw new IllegalArgumentException
                 ("Non-mapped property for '" + name + "(" + key + ")'");
-
     }
 
     /**
@@ -140,7 +132,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name) {
-
         // Return any non-null value for the specified property
         final Object value = values.get(name);
         if (value != null) {
@@ -179,7 +170,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
             return SHORT_ZERO;
         }
         return null;
-
     }
 
     /**
@@ -200,7 +190,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name, final int index) {
-
         final Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -214,7 +203,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         }
         throw new IllegalArgumentException
                 ("Non-indexed property for '" + name + "[" + index + "]'");
-
     }
 
     /**
@@ -232,7 +220,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name, final String key) {
-
         final Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -243,7 +230,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         }
         throw new IllegalArgumentException
                 ("Non-mapped property for '" + name + "(" + key + ")'");
-
     }
 
     /**
@@ -254,9 +240,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public DynaClass getDynaClass() {
-
         return this.dynaClass;
-
     }
 
     /**
@@ -272,7 +256,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void remove(final String name, final String key) {
-
         final Object value = values.get(name);
         if (value == null) {
             throw new NullPointerException
@@ -283,7 +266,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
                     ("Non-mapped property for '" + name + "(" + key + ")'");
         }
         ((Map<?, ?>) value).remove(key);
-
     }
 
     /**
@@ -301,7 +283,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final Object value) {
-
         final DynaProperty descriptor = getDynaProperty(name);
         if (value == null) {
             if (descriptor.getType().isPrimitive()) {
@@ -316,7 +297,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
                     descriptor.getType().getName() + "'");
         }
         values.put(name, value);
-
     }
 
     /**
@@ -337,7 +317,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final int index, final Object value) {
-
         final Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
@@ -360,7 +339,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
             throw new IllegalArgumentException
                     ("Non-indexed property for '" + name + "[" + index + "]'");
         }
-
     }
 
     /**
@@ -379,7 +357,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final String key, final Object value) {
-
         final Object prop = values.get(name);
         if (prop == null) {
             throw new NullPointerException
@@ -395,7 +372,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         // maps of types String -> Object
         Map<String, Object> map = (Map<String, Object>) prop;
         map.put(key, value);
-
     }
 
     /**
@@ -408,14 +384,12 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *  name for our DynaClass
      */
     protected DynaProperty getDynaProperty(final String name) {
-
         final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "'");
         }
         return descriptor;
-
     }
 
     /**
@@ -427,7 +401,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      * destination class, otherwise {@code false}
      */
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
-
         if (dest.isAssignableFrom(source) ||
                 dest == Boolean.TYPE && source == Boolean.class ||
                 dest == Byte.TYPE && source == Byte.class ||
@@ -440,7 +413,5 @@ public class BasicDynaBean implements DynaBean, Serializable {
             return true;
         }
         return false;
-
     }
-
 }

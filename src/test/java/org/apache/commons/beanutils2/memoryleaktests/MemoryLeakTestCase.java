@@ -47,7 +47,6 @@ import org.junit.Test;
  * Tests BeanUtils memory leaks.
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
- *
  */
 public class MemoryLeakTestCase {
 
@@ -66,7 +65,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -113,7 +111,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -166,7 +163,6 @@ public class MemoryLeakTestCase {
         final Class<?> beanClass    = loader.loadClass(className);
         final Object bean        = beanClass.newInstance();
 
-
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
         assertNotNull("BeanClass is null", beanClass);
@@ -211,7 +207,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
-
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -264,7 +259,6 @@ public class MemoryLeakTestCase {
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
 
-
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
@@ -300,7 +294,6 @@ public class MemoryLeakTestCase {
      */
     @Test
     public void testWrapDynaClass_dynaClasses_memoryLeak() throws Exception {
-
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
@@ -311,7 +304,6 @@ public class MemoryLeakTestCase {
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -353,7 +345,6 @@ public class MemoryLeakTestCase {
      */
     @Test
     public void testConvertUtilsBean_converters_memoryLeak() throws Exception {
-
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
@@ -363,7 +354,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -401,7 +391,6 @@ public class MemoryLeakTestCase {
      */
     @Test
     public void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
-
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
@@ -411,7 +400,6 @@ public class MemoryLeakTestCase {
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
         Object bean        = beanClass.newInstance();
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -451,7 +439,6 @@ public class MemoryLeakTestCase {
      * it seems sensible to ensure that all test cases start with a clean sheet.
      */
     private void clearAllBeanUtilsCaches() {
-
         // Clear BeanUtilsBean's PropertyUtilsBean descriptor caches
         BeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
 
@@ -508,7 +495,6 @@ public class MemoryLeakTestCase {
      * Creates a new class loader instance.
      */
     private static URLClassLoader newClassLoader() throws MalformedURLException {
-
         final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
         //System.out.println("dataFilePath: " + dataFilePath);
         final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils2.memoryleaktests.pojotests".length());

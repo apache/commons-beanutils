@@ -26,11 +26,8 @@ import junit.framework.TestSuite;
 
 /**
  * <p> Test case for {@code ConstructorUtils} </p>
- *
  */
 public class ConstructorUtilsTestCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -40,8 +37,6 @@ public class ConstructorUtilsTestCase extends TestCase {
     public ConstructorUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -65,8 +60,6 @@ public class ConstructorUtilsTestCase extends TestCase {
     public void tearDown() throws Exception {
         super.tearDown();
     }
-
-
 
     public void testInvokeConstructor() throws Exception {
         {
@@ -261,5 +254,4 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertNull(ctor);
         }
     }
-
 }

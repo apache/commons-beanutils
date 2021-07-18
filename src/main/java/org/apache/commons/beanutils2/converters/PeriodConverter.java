@@ -79,5 +79,4 @@ public final class PeriodConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

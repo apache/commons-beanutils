@@ -201,4 +201,3 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter {
         return result;
     }
 }
-

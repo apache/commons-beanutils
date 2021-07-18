@@ -35,7 +35,6 @@ import java.lang.reflect.Modifier;
  * If this call succeeds, then the method can be invoked as normal.
  * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
- *
  */
 public class ConstructorUtils {
 
@@ -308,7 +307,6 @@ public class ConstructorUtils {
      * @see java.lang.SecurityManager
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
-
         // Make sure we have a method to check
         if (ctor == null) {
             return null;
@@ -336,7 +334,6 @@ public class ConstructorUtils {
         }
         return args;
     }
-
 
     /**
      * <p>Find an accessible constructor with compatible parameters.
@@ -383,8 +380,8 @@ public class ConstructorUtils {
                 /* SWALLOW, if workaround fails don't fret. */
             }
             return ctor;
-
-        } catch (final NoSuchMethodException e) { /* SWALLOW */
+        } catch (final NoSuchMethodException e) {
+            /* SWALLOW */
         }
 
         // search through all methods
@@ -430,5 +427,4 @@ public class ConstructorUtils {
 
         return null;
     }
-
 }

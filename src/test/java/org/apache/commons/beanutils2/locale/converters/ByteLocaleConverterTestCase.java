@@ -19,25 +19,18 @@ package org.apache.commons.beanutils2.locale.converters;
 
 /**
  * Test Case for the ByteLocaleConverter class.
- *
  */
-
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
-
-
 
     public ByteLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         super.setUp();
 
         defaultIntegerPattern   = "#,###";
@@ -52,7 +45,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
         defaultValue  = new Byte("99");
         expectedValue = new Byte(expectedIntegerValue);
-
     }
 
     /**
@@ -63,13 +55,10 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
-
         // ------------- Construct with localized pattern ------------
         converter = new ByteLocaleConverter(defaultValue,
                                                   localizedLocale,
@@ -114,17 +103,14 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
-
     }
 
     /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
-
         // ------------- Construct using default locale ------------
         converter = new ByteLocaleConverter();
 
@@ -133,7 +119,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -143,7 +128,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      *
      */
     public void testConstructor_3() {
-
         // ------------- Construct using localized pattern (default locale) --------
         converter = new ByteLocaleConverter(true);
 
@@ -152,14 +136,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale) constructor
      */
     public void testConstructor_4() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale);
 
@@ -168,14 +150,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, locPattern) constructor
      */
     public void testConstructor_5() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, true);
 
@@ -184,14 +164,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern) constructor
      */
     public void testConstructor_6() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, defaultIntegerPattern);
 
@@ -200,14 +178,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     public void testConstructor_7() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, localizedIntegerPattern, true);
 
@@ -216,14 +192,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(defaultValue) constructor
      */
     public void testConstructor_8() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(defaultValue);
 
@@ -232,14 +206,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
     public void testConstructor_9() {
-
         // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(defaultValue, true);
 
@@ -248,8 +220,5 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
-
 }
-

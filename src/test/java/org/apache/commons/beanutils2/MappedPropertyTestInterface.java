@@ -19,13 +19,10 @@ package org.apache.commons.beanutils2;
 
 /**
  * Test Interface
- *
  */
-
 public interface MappedPropertyTestInterface {
 
     String getMapproperty(String key);
 
     void setMapproperty(String key, String value);
-
 }

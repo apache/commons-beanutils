@@ -37,12 +37,8 @@ import junit.framework.TestCase;
 
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
- *
  */
-
 public abstract class DateConverterTestBase extends TestCase {
-
-
 
     /**
      * Constructs a new test case.
@@ -51,8 +47,6 @@ public abstract class DateConverterTestBase extends TestCase {
     public DateConverterTestBase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Gets the expected type
@@ -66,9 +60,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return The time in milliseconds
      */
     long getTimeInMillis(final Object date) {
-
         if (date instanceof java.sql.Timestamp) {
-
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently across JDK versions
@@ -121,8 +113,6 @@ public abstract class DateConverterTestBase extends TestCase {
      * @return A new Converter
      */
     protected abstract DateTimeConverter makeConverter();
-
-
 
     /**
      * Create the Converter with a default value.
@@ -222,7 +212,6 @@ public abstract class DateConverterTestBase extends TestCase {
      * implementations for java.sql.Date/Time/Timestamp
      */
     public void testDefaultStringToTypeConvert() {
-
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
@@ -232,7 +221,6 @@ public abstract class DateConverterTestBase extends TestCase {
         } catch (final ConversionException e) {
             // expected result
         }
-
     }
 
     /**
@@ -263,7 +251,6 @@ public abstract class DateConverterTestBase extends TestCase {
      * Test Converter with types it can't handle
      */
     public void testInvalidType() {
-
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
 
@@ -280,7 +267,6 @@ public abstract class DateConverterTestBase extends TestCase {
      * Test Date Converter with no default value
      */
     public void testLocale() {
-
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -306,7 +292,6 @@ public abstract class DateConverterTestBase extends TestCase {
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
-
     }
 
     /**
@@ -334,14 +319,12 @@ public abstract class DateConverterTestBase extends TestCase {
         // Invalid Conversion
         invalidConversion(converter, "17/03/2006");
         invalidConversion(converter, "17.03.2006");
-
     }
 
     /**
      * Test Converter with no default value
      */
     public void testPatternDefault() {
-
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
@@ -362,14 +345,12 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
         validConversion(converter, defaultValue, new Integer(2));
-
     }
 
     /**
      * Test Converter with no default value
      */
     public void testPatternNoDefault() {
-
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
@@ -405,14 +386,12 @@ public abstract class DateConverterTestBase extends TestCase {
         invalidConversion(converter, "02/10/2006");
         invalidConversion(converter, "02/10/06");
         invalidConversion(converter, new Integer(2));
-
     }
 
     /**
      * Test Converter with no default value
      */
     public void testPatternNullDefault() {
-
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
@@ -432,14 +411,12 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
         validConversion(converter, defaultValue, new Integer(2));
-
     }
 
     /**
      * Test Conversion to String
      */
     public void testStringConversion() {
-
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
@@ -473,7 +450,6 @@ public abstract class DateConverterTestBase extends TestCase {
 
         stringConversion(converter, null, null);
         stringConversion(converter, "", "");
-
     }
 
     /**

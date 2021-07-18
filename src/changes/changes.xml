@@ -435,8 +435,6 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
       <action dev="niallp" type="update" issue="BEANUTILS-233" due-to="Russell">
         Implement equals() and hashCode() methods for DynaProperty.
       </action>
-
-
       <action dev="niallp" type="fix" issue="BEANUTILS-243" due-to="Henri Yandell">
         BeanUtils's tests fail to compile under JDK 1.6
       </action>

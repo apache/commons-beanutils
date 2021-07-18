@@ -77,5 +77,4 @@ public final class UUIDConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

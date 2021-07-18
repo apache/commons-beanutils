@@ -37,7 +37,6 @@ import org.junit.Test;
  * This test only work in Java 7 or earlier (See BEANUTILS-492) - as
  * a weaker alternative, see {@link Jira422bTestCase}.
  *
- *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
  */
 public class Jira422TestCase {
@@ -73,7 +72,6 @@ public class Jira422TestCase {
         final Class<?> propertyType = PropertyUtils.getPropertyType(bean, "file[0]");
         assertEquals(String.class.getName(), propertyType.getName());
     }
-
 }
 
 @SuppressWarnings("rawtypes")
@@ -97,7 +95,6 @@ class RootBean {
     public void setFile(final int i, final String file) {
         this.file.set(i, file);
     }
-
 }
 
 class FirstChildBean extends RootBean {

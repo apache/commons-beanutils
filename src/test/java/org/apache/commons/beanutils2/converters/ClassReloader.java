@@ -42,9 +42,7 @@ import java.io.InputStream;
  * present in the classpath for a container's "shared" classloader <i>and</i>
  * been present in the component-specific classpath too, without any messing
  * about with the way unit test code is compiled or executed.
- *
  */
-
 public class ClassReloader extends ClassLoader {
     public ClassReloader(final ClassLoader parent) {
         super(parent);

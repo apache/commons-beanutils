@@ -62,5 +62,4 @@ public final class CalendarConverter extends DateTimeConverter {
     protected Class<?> getDefaultType() {
         return Calendar.class;
     }
-
 }

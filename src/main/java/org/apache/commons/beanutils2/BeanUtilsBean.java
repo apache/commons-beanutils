@@ -43,10 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * @see BeanUtils
  * @since 1.7
  */
-
 public class BeanUtilsBean {
-
-
 
     /**
      * Contains {@code BeanUtilsBean} instances indexed by context classloader.
@@ -82,8 +79,6 @@ public class BeanUtilsBean {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-
-
     /**
      * Logging for this instance
      */
@@ -97,8 +92,6 @@ public class BeanUtilsBean {
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
-
-
 
     /**
      * <p>Constructs an instance using new property
@@ -132,12 +125,9 @@ public class BeanUtilsBean {
     public BeanUtilsBean(
                             final ConvertUtilsBean convertUtilsBean,
                             final PropertyUtilsBean propertyUtilsBean) {
-
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
     }
-
-
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
@@ -176,7 +166,6 @@ public class BeanUtilsBean {
         }
         getPropertyUtils().copyProperties(newBean, bean);
         return newBean;
-
     }
 
     /**
@@ -282,7 +271,6 @@ public class BeanUtilsBean {
                 }
             }
         }
-
     }
 
     /**
@@ -433,7 +421,6 @@ public class BeanUtilsBean {
                     (e, "Cannot set " + propName);
             }
         }
-
     }
 
     /**
@@ -507,7 +494,6 @@ public class BeanUtilsBean {
             }
         }
         return description;
-
     }
 
     /**
@@ -562,7 +548,6 @@ public class BeanUtilsBean {
             }
         }
         return results;
-
     }
 
     /**
@@ -590,7 +575,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -617,7 +601,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -645,7 +628,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -672,7 +654,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -698,7 +679,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getNestedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -722,7 +702,6 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         return getNestedProperty(bean, name);
-
     }
 
     /**
@@ -746,7 +725,6 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -806,9 +784,7 @@ public class BeanUtilsBean {
 
             // Perform the assignment for this property
             setProperty(bean, name, entry.getValue());
-
         }
-
     }
 
     /**
@@ -1004,7 +980,6 @@ public class BeanUtilsBean {
             throw new InvocationTargetException
                 (e, "Cannot set " + propName);
         }
-
     }
 
     /**

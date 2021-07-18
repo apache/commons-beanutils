@@ -22,7 +22,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the CalendarConverter class.
- *
  */
 public class CalendarConverterTestCase extends DateConverterTestBase {
 
@@ -33,8 +32,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(CalendarConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Calendar test case.
@@ -52,7 +49,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase {
     protected Class<?> getExpectedType() {
         return Calendar.class;
     }
-
 
     /**
      * Create the Converter with no default value.

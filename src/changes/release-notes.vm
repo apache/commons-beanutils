@@ -85,7 +85,7 @@ Changes in this version include:
 New features:
 #foreach($actionItem in $release.getActions('add'))
 #processaction()
-#end 
+#end
 
 #end
 ##

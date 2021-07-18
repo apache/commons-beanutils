@@ -23,7 +23,6 @@ import java.util.function.Consumer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>{@code Closure} that sets a property.</p>
  * <p>
@@ -159,7 +158,6 @@ public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
      */
     @Override
     public void accept(final Object object) {
-
         try {
             PropertyUtils.setProperty(object, propertyName, propertyValue);
         } catch (final IllegalArgumentException e) {

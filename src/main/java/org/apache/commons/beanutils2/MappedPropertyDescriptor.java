@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
@@ -25,7 +24,6 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
 
 /**
  * A MappedPropertyDescriptor describes one mapped property.
@@ -39,10 +37,8 @@ import java.lang.reflect.Modifier;
  * <p>where {@code <strong>Property</strong>} must be replaced
  * by the name of the property.
  * @see java.beans.PropertyDescriptor
- *
  */
 public class MappedPropertyDescriptor extends PropertyDescriptor {
-
 
     /**
      * The underlying data type of the property we are describing.
@@ -63,8 +59,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * The parameter types array for the reader method signature.
      */
     private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
-
-
 
     /**
      * Constructs a MappedPropertyDescriptor for a property that follows
@@ -129,7 +123,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         findMappedPropertyType();
     }
-
 
     /**
      * This constructor takes the name of a mapped property, and method
@@ -211,8 +204,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-
-
     /**
      * Gets the Class object for the property values.
      *
@@ -273,8 +264,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-
-
     /**
      * Introspect our bean class to identify the corresponding getter
      * and setter methods.
@@ -311,7 +300,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
         mappedPropertyTypeRef = new SoftReference<>(mappedPropertyType);
     }
-
 
     /**
      * Gets a capitalized version of the specified property name.
@@ -501,7 +489,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
          * Try to re-load the class
          */
         private Class<?> reLoadClass(final String name) {
-
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
             // Try the context class loader

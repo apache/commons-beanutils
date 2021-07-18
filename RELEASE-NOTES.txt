@@ -28,18 +28,18 @@ Fixed Bugs:
 * BEANUTILS-465: Indexed List Setters fixed. Thanks to Daniel Atallah.
 
 Changes:
-* BEANUTILS-433: Update dependency from JUnit 3.8.1 to 4.12. 
+* BEANUTILS-433: Update dependency from JUnit 3.8.1 to 4.12.
   Thanks to Benedikt Ritter, Gary Gregory.
-* BEANUTILS-469: Update commons-logging from 1.1.1 to 1.2. 
+* BEANUTILS-469: Update commons-logging from 1.1.1 to 1.2.
   Thanks to Gary Gregory.
 * BEANUTILS-474: FluentPropertyBeanIntrospector does not use the same naming
   algorithm as DefaultBeanIntrospector.  Thanks to Michael Grove.
-* BEANUTILS-490: Update Java requirement from Java 5 to 6. 
+* BEANUTILS-490: Update Java requirement from Java 5 to 6.
   Thanks to Gary Gregory.
 * BEANUTILS-482: Update commons-collections from 3.2.1 to 3.2.2
   (CVE-2015-4852). Thanks to Gary Gregory.
 * BEANUTILS-490: Update java requirement to Java 6. Thanks to Gary Gregory.
-* BEANUTILS-492: IndexedPropertyDescriptor tests now pass on Java 8. 
+* BEANUTILS-492: IndexedPropertyDescriptor tests now pass on Java 8.
   Thanks to Stian Soiland-Reyes.
 * BEANUTILS-495: DateConverterTestBase fails on M/d/yy in Java 9.
   Thanks to Stian Soiland-Reyes.
@@ -284,4 +284,3 @@ The following is a list of the bugs fixed in this release, with their Jira issue
 
   * [BEANUTILS-373] - MethodUtils is not thread safe because WeakFastHashMap which uses WeakHashMap is not thread-safe
   * [BEANUTILS-371] - Add constructors which have useColumnLabel parameter to ResultSetDynaClass and RowSetDynaClass
-

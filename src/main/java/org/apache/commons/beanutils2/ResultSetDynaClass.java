@@ -74,14 +74,10 @@ import java.util.Objects;
  *     results.add(newRow);
  *   }
  * </pre>
- *
  */
-
 public class ResultSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
@@ -96,9 +92,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public ResultSetDynaClass(final ResultSet resultSet) throws SQLException {
-
         this(resultSet, true);
-
     }
 
     /**
@@ -126,7 +120,6 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         throws SQLException {
 
         this(resultSet, lowerCase, false);
-
     }
 
     /**
@@ -159,17 +152,12 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         this.lowerCase = lowerCase;
         setUseColumnLabel(useColumnLabel);
         introspect(resultSet);
-
     }
-
-
 
     /**
      * <p>The {@code ResultSet} we are wrapping.</p>
      */
     protected ResultSet resultSet;
-
-
 
     /**
      * <p>Return an {@code Iterator} of {@link DynaBean} instances for
@@ -179,9 +167,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @return An {@code Iterator} of {@link DynaBean} instances
      */
     public Iterator<DynaBean> iterator() {
-
         return new ResultSetIterator(this);
-
     }
 
     /**
@@ -197,18 +183,12 @@ public class ResultSetDynaClass extends JDBCDynaClass {
         return getObject(getResultSet(), name);
     }
 
-
-
     /**
      * <p>Return the result set we are wrapping.</p>
      */
     ResultSet getResultSet() {
-
         return this.resultSet;
-
     }
-
-
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used
@@ -222,11 +202,9 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      */
     @Override
     protected Class<?> loadClass(final String className) throws SQLException {
-
         try {
             return getClass().getClassLoader().loadClass(className);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new SQLException("Cannot load column class '" +
                                    className + "': " + e);
         }

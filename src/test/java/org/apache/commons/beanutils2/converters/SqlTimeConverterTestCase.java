@@ -25,9 +25,7 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlTimeConverter} class.
- *
  */
-
 public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
     /**
@@ -38,8 +36,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Date test case.
      * @param name Test Name
@@ -47,8 +43,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
     public SqlTimeConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Gets the expected type
@@ -83,7 +77,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testDefaultStringToTypeConvert() {
-
         // Create & Configure the Converter
         final DateTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
@@ -95,7 +88,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
         // Invalid String --> java.sql.Time Conversion
         invalidConversion(converter, "15:36");
-
     }
 
     /**
@@ -103,7 +95,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testLocale() {
-
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -134,7 +125,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
-
     }
 
     /**

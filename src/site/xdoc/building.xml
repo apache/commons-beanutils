@@ -43,9 +43,8 @@ limitations under the License.
         The compiled BeanUtils JAR should work with Java 6 or later.
       </p>
 
-
       <p>
-        To build 
+        To build
         <code>target/commons-beanutils-*.jar</code>
       </p>
 
@@ -61,7 +60,6 @@ limitations under the License.
       <pre>
         mvn clean install
       </pre>
-
 
       <p>
         You can skip the unit tests by adding the parameter

@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the CharacterConverter class.
- *
  */
 public class CharacterConverterTestCase extends TestCase {
 
@@ -35,8 +34,6 @@ public class CharacterConverterTestCase extends TestCase {
     public static TestSuite suite() {
         return new TestSuite(CharacterConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Character Converter test case.
@@ -55,8 +52,6 @@ public class CharacterConverterTestCase extends TestCase {
     @Override
     public void tearDown() throws Exception {
     }
-
-
 
     /**
      * Tests whether the primitive char class can be passed as target type.
@@ -94,7 +89,6 @@ public class CharacterConverterTestCase extends TestCase {
      * Test Conversion to String
      */
     public void testConvertToString() {
-
         final Converter converter = new CharacterConverter();
 
         assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));

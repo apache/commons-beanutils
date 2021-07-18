@@ -35,9 +35,7 @@ import java.util.Objects;
  * The DynaBean implementation may choose to enforce this type on its entries.
  * Alternatively, an implementation may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
- *
  */
-
 public class DynaProperty implements Serializable {
 
     private static final long serialVersionUID = -3084907613499830175L;
@@ -58,17 +56,13 @@ public class DynaProperty implements Serializable {
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
 
-
-
     /**
      * Constructs a property that accepts any data type.
      *
      * @param name Name of the property being described
      */
     public DynaProperty(final String name) {
-
         this(name, Object.class);
-
     }
 
     /**
@@ -78,13 +72,11 @@ public class DynaProperty implements Serializable {
      * @param type Java class representing the property data type
      */
     public DynaProperty(final String name, final Class<?> type) {
-
         this.name = name;
         this.type = type;
         if (type != null && type.isArray()) {
             this.contentType = type.getComponentType();
         }
-
     }
 
     /**
@@ -96,14 +88,10 @@ public class DynaProperty implements Serializable {
      * @param contentType Class that all indexed or mapped elements are instances of
      */
     public DynaProperty(final String name, final Class<?> type, final Class<?> contentType) {
-
         this.name = name;
         this.type = type;
         this.contentType = contentType;
-
     }
-
-
 
     /** Property name */
     protected String name;
@@ -156,8 +144,6 @@ public class DynaProperty implements Serializable {
         return contentType;
     }
 
-
-
     /**
      * Does this property represent an indexed value (ie an array or List)?
      *
@@ -165,7 +151,6 @@ public class DynaProperty implements Serializable {
      * array), otherwise {@code false}
      */
     public boolean isIndexed() {
-
         if (type == null) {
             return false;
         }
@@ -173,7 +158,6 @@ public class DynaProperty implements Serializable {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -183,12 +167,10 @@ public class DynaProperty implements Serializable {
      * otherwise {@code false}
      */
     public boolean isMapped() {
-
         if (type == null) {
             return false;
         }
         return Map.class.isAssignableFrom(type);
-
     }
 
     /**
@@ -201,7 +183,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public boolean equals(final Object obj) {
-
         boolean result;
 
         result = obj == this;
@@ -224,7 +205,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public int hashCode() {
-
        int result = 1;
 
        result = result * 31 + (name == null ? 0 : name.hashCode());
@@ -240,7 +220,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public String toString() {
-
         final StringBuilder sb = new StringBuilder("DynaProperty[name=");
         sb.append(this.name);
         sb.append(",type=");
@@ -250,10 +229,7 @@ public class DynaProperty implements Serializable {
         }
         sb.append("]");
         return sb.toString();
-
     }
-
-
 
     /**
      * Writes this object safely.
@@ -265,7 +241,6 @@ public class DynaProperty implements Serializable {
      * @throws IOException if the object can't be written
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
-
         writeAnyClass(this.type,out);
 
         if (isMapped() || isIndexed()) {
@@ -342,7 +317,6 @@ public class DynaProperty implements Serializable {
         if (in.readBoolean()) {
             // it's a type constant
             switch (in.readInt()) {
-
                 case BOOLEAN_TYPE: return   Boolean.TYPE;
                 case BYTE_TYPE:    return      Byte.TYPE;
                 case CHAR_TYPE:    return Character.TYPE;
@@ -356,9 +330,7 @@ public class DynaProperty implements Serializable {
                     throw new StreamCorruptedException(
                         "Invalid primitive type. "
                         + "Check version of beanutils used to serialize is compatible.");
-
             }
-
         }
         // it's another class
         return (Class<?>) in.readObject();

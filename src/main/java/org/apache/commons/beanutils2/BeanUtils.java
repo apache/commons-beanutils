@@ -15,13 +15,10 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-
 
 /**
  * <p>Utility methods for populating JavaBeans properties via reflection.</p>
@@ -32,7 +29,6 @@ import java.util.Map;
  *
  * @see BeanUtilsBean
  */
-
 public class BeanUtils {
 
     /**
@@ -59,9 +55,7 @@ public class BeanUtils {
             InvocationTargetException, NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().cloneBean(bean);
-
     }
-
 
     /**
      * <p>Copy property values from the origin bean to the destination bean
@@ -88,7 +82,6 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
-
     /**
      * <p>Copy the specified property value to the specified destination bean,
      * performing any type conversion that is required.</p>
@@ -110,7 +103,6 @@ public class BeanUtils {
 
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
     }
-
 
     /**
      * <p>Return the entire set of properties for which the specified bean
@@ -135,7 +127,6 @@ public class BeanUtils {
 
         return BeanUtilsBean.getInstance().describe(bean);
     }
-
 
     /**
      * <p>Return the value of the specified array property of the specified
@@ -162,7 +153,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
     }
 
-
     /**
      * <p>Return the value of the specified indexed property of the specified
      * bean, as a String.</p>
@@ -187,9 +177,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
-
     }
-
 
     /**
      * Gets the value of the specified indexed property of the specified
@@ -217,9 +205,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name, index);
-
     }
-
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -245,9 +231,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getMappedProperty(bean, name);
-
     }
-
 
     /**
      * <p>Return the value of the specified mapped property of the specified
@@ -274,9 +258,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getMappedProperty(bean, name, key);
-
     }
-
 
     /**
      * <p>Return the value of the (possibly nested) property of the specified
@@ -303,9 +285,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getNestedProperty(bean, name);
-
     }
-
 
     /**
      * <p>Return the value of the specified property of the specified bean,
@@ -331,9 +311,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getProperty(bean, name);
-
     }
-
 
     /**
      * <p>Return the value of the specified simple property of the specified
@@ -358,9 +336,7 @@ public class BeanUtils {
             NoSuchMethodException {
 
         return BeanUtilsBean.getInstance().getSimpleProperty(bean, name);
-
     }
-
 
     /**
      * <p>Populate the JavaBeans properties of the specified bean, based on
@@ -383,7 +359,6 @@ public class BeanUtils {
 
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
-
 
     /**
      * <p>Set the specified property value, performing type conversions as

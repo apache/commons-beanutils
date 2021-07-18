@@ -24,12 +24,9 @@ package org.apache.commons.beanutils2;
  *
  * @since 1.7
  */
-
 public class BeanAccessLanguageException extends IllegalArgumentException {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * Constructs a {@code BeanAccessLanguageException} without a detail message.

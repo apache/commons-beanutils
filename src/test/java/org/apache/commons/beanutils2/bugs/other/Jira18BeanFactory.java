@@ -24,7 +24,6 @@ import org.apache.commons.beanutils2.bugs.Jira18TestCase;
 /**
  * Factory which creates <i>package</i> scope beans with
  * public methods for {@link Jira18TestCase}.
- *
  */
 public class Jira18BeanFactory {
 
@@ -106,7 +105,5 @@ public class Jira18BeanFactory {
         public void setMapped(final String key, final String value) {
             mapped.put(key, value);
         }
-
     }
-
 }

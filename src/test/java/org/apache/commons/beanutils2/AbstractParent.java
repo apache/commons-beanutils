@@ -17,14 +17,11 @@
 
 package org.apache.commons.beanutils2;
 
-/**
- */
 public abstract class AbstractParent {
 
     private Child child;
 
-    public Child getChild()
-    {
+    public Child getChild() {
         return child;
     }
 
@@ -51,5 +48,4 @@ public abstract class AbstractParent {
         this.child = child;
         return child.getName();
     }
-
 }

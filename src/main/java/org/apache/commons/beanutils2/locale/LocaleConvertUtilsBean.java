@@ -92,8 +92,6 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-
-
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
@@ -109,8 +107,6 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-
-
     /**
      *  Makes the state by default (deregisters all converters for all locales)
      *  and then registers default locale converters.
@@ -121,14 +117,11 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-
-
     /**
      * getter for defaultLocale.
      * @return the default locale
      */
     public Locale getDefaultLocale() {
-
         return defaultLocale;
     }
 
@@ -137,11 +130,9 @@ public class LocaleConvertUtilsBean {
      * @param locale the default locale
      */
     public void setDefaultLocale(final Locale locale) {
-
         if (locale == null) {
             defaultLocale = Locale.getDefault();
-        }
-        else {
+        } else {
             defaultLocale = locale;
         }
     }
@@ -165,8 +156,6 @@ public class LocaleConvertUtilsBean {
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
-
-
 
     /**
      * Convert the specified locale-sensitive value into a String.
@@ -209,7 +198,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
-
         final LocaleConverter converter = lookup(String.class, locale);
 
         return converter.convert(String.class, value, pattern);
@@ -227,7 +215,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-
         return convert(value, clazz, defaultLocale, null);
     }
 
@@ -245,7 +232,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final String pattern) {
-
         return convert(value, clazz, defaultLocale, pattern);
     }
 
@@ -264,7 +250,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
-
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
                     clazz.getName() + " using " + locale +
@@ -298,7 +283,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
-
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
 
@@ -314,7 +298,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
     */
    public Object convert(final String[] values, final Class<?> clazz) {
-
        return convert(values, clazz, getDefaultLocale(), null);
    }
 
@@ -332,7 +315,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
-
         Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
@@ -361,7 +343,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
-
         lookup(locale).put(clazz, converter);
     }
 
@@ -369,7 +350,6 @@ public class LocaleConvertUtilsBean {
      * Remove any registered {@link LocaleConverter}.
      */
     public void deregister() {
-
         final Map<Class<?>, LocaleConverter> defaultConverter = lookup(defaultLocale);
 
         mapConverters.setFast(false);
@@ -386,7 +366,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void deregister(final Locale locale) {
-
         mapConverters.remove(locale);
     }
 
@@ -397,7 +376,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void deregister(final Class<?> clazz, final Locale locale) {
-
         lookup(locale).remove(clazz);
     }
 
@@ -411,7 +389,6 @@ public class LocaleConvertUtilsBean {
      * @return The registered locale Converter, if any
      */
     public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
-
         final LocaleConverter converter = lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
@@ -455,7 +432,6 @@ public class LocaleConvertUtilsBean {
      *  for the specified locale.
      */
     protected Map<Class<?>, LocaleConverter> create(final Locale locale) {
-
         final DelegateFastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
         converter.setFast(false);
 

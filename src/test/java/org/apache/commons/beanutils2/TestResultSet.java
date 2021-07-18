@@ -42,12 +42,8 @@ import java.util.Map;
 /**
  * <p>Mock object that implements enough of {@code java.sql.ResultSet}
  * to exercise the {@link ResultSetDynaClass} functionality.</p>
- *
  */
-
 public class TestResultSet implements InvocationHandler {
-
-
 
     /**
      * Current row number (0 means "before the first one").
@@ -142,8 +138,6 @@ public class TestResultSet implements InvocationHandler {
         return (String)arg;
     }
 
-
-
     public void close() throws SQLException {
         // No action required
     }
@@ -227,8 +221,6 @@ public class TestResultSet implements InvocationHandler {
         }
         // FIXME - updateObject()
     }
-
-
 
     public boolean absolute(final int row) throws SQLException {
         throw new UnsupportedOperationException();
@@ -811,5 +803,4 @@ public class TestResultSet implements InvocationHandler {
     public boolean wasNull() throws SQLException {
         throw new UnsupportedOperationException();
     }
-
 }

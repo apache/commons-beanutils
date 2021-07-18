@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the BigInteger class.
- *
  */
 public class BigIntegerConverterTestCase extends NumberConverterTestBase {
 
@@ -33,11 +32,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
         return new TestSuite(BigIntegerConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public BigIntegerConverterTestCase(final String name) {
         super(name);
@@ -52,8 +47,6 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     protected NumberConverter makeConverter() {
         return new BigIntegerConverter();
     }
-
-
 
     @Override
     protected NumberConverter makeConverter(final Object defaultValue) {
@@ -73,8 +66,6 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -130,6 +121,4 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
         }
     }
-
 }
-

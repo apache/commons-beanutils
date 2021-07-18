@@ -28,9 +28,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the {@code contains()</code> and <code>remove()} methods.</p>
- *
  */
-
 public class ConvertingWrapDynaBean extends WrapDynaBean {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +40,7 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      * @param instance JavaBean instance to be wrapped
      */
     public ConvertingWrapDynaBean(final Object instance) {
-
         super(instance);
-
     }
 
     /**
@@ -60,7 +56,6 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
      */
     @Override
     public void set(final String name, final Object value) {
-
         try {
             BeanUtils.copyProperty(instance, name, value);
         } catch (final InvocationTargetException ite) {
@@ -75,6 +70,5 @@ public class ConvertingWrapDynaBean extends WrapDynaBean {
             BeanUtils.initCause(iae, t);
             throw iae;
         }
-
     }
 }

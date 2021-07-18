@@ -64,5 +64,4 @@ public final class BigIntegerConverter extends NumberConverter {
     protected Class<BigInteger> getDefaultType() {
         return BigInteger.class;
     }
-
 }

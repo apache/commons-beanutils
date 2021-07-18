@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the EnumConverter class.
- *
  */
 public class EnumConverterTestCase extends TestCase {
 
@@ -108,4 +107,3 @@ public class EnumConverterTestCase extends TestCase {
         DELIVERED;
     }
 }
-

@@ -79,5 +79,4 @@ public final class YearConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

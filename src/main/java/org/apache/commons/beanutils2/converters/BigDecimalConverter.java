@@ -64,5 +64,4 @@ public final class BigDecimalConverter extends NumberConverter {
     protected Class<BigDecimal> getDefaultType() {
         return BigDecimal.class;
     }
-
 }

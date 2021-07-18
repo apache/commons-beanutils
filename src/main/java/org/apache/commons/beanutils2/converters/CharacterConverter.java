@@ -88,5 +88,4 @@ public final class CharacterConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 /**
@@ -27,16 +26,7 @@ package org.apache.commons.beanutils2;
  *
  * @see ConvertUtilsBean
  */
-
 public class ConvertUtils {
-
-
-
-
-
-
-
-
 
     /**
      * <p>Converts the specified value into a String.</p>
@@ -51,7 +41,6 @@ public class ConvertUtils {
     public static String convert(final Object value) {
         return ConvertUtilsBean.getInstance().convert(value);
     }
-
 
     /**
      * <p>Converts the specified value to an object of the specified class (if
@@ -68,7 +57,6 @@ public class ConvertUtils {
     public static Object convert(final String value, final Class<?> clazz) {
         return ConvertUtilsBean.getInstance().convert(value, clazz);
     }
-
 
     /**
      * <p>Convert an array of specified values to an array of objects of the
@@ -112,7 +100,6 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().deregister();
     }
 
-
     /**
      * <p>Remove any registered {@link Converter} for the specified destination
      * {@code Class}.</p>
@@ -125,7 +112,6 @@ public class ConvertUtils {
     public static void deregister(final Class<?> clazz) {
         ConvertUtilsBean.getInstance().deregister(clazz);
     }
-
 
     /**
      * <p>Look up and return any registered {@link Converter} for the specified
@@ -169,7 +155,6 @@ public class ConvertUtils {
     public static void register(final Converter converter, final Class<?> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }
-
 
     /**
      * Change primitive Class types to the associated wrapper class. This is

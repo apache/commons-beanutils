@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for {@link BeanPredicate}
- *
  */
 public class BeanPredicateTestCase extends TestCase {
 
@@ -59,5 +58,4 @@ public class BeanPredicateTestCase extends TestCase {
         assertTrue(predicate.test(new TestBean(nullString)));
         assertTrue(!predicate.test(new TestBean("bar")));
     }
-
 }

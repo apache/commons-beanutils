@@ -24,7 +24,6 @@ import java.util.Map;
  * A PropertyUtilsBean which customises the behavior of the
  * setNestedProperty and getNestedProperty methods to look for
  * simple properties in preference to map entries.
- *
  */
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 

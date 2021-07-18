@@ -25,9 +25,7 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the DoubleConverter class.
- *
  */
-
 public class BigDecimalConverterTestCase extends NumberConverterTestBase {
 
     /**
@@ -40,13 +38,9 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         }
     }
 
-
-
     public static TestSuite suite() {
         return new TestSuite(BigDecimalConverterTestCase.class);
     }
-
-
 
     private Converter converter = null;
 
@@ -58,8 +52,6 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
     protected Class<?> getExpectedType() {
         return BigDecimal.class;
     }
-
-
 
     @Override
     protected NumberConverter makeConverter() {
@@ -79,8 +71,6 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         numbers[2] = new BigDecimal("-22");
         numbers[3] = new BigDecimal("23");
     }
-
-
 
     @Override
     public void tearDown() throws Exception {
@@ -148,4 +138,3 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         }
     }
 }
-

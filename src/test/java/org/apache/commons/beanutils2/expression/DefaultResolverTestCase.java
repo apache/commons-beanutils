@@ -21,7 +21,6 @@ import junit.framework.TestSuite;
 
 /**
  * Junit Test for BasicResolver.
- *
  */
 public class DefaultResolverTestCase extends TestCase {
 
@@ -53,8 +52,6 @@ public class DefaultResolverTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Create Test Suite
      * @return test suite
@@ -76,8 +73,6 @@ public class DefaultResolverTestCase extends TestCase {
     @Override
     protected void tearDown() {
     }
-
-
 
     /**
      * Test getIndex() method.

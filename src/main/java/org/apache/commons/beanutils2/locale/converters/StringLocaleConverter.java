@@ -209,7 +209,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         String result = null;
 
         if (value instanceof Integer ||
@@ -217,13 +216,11 @@ public class StringLocaleConverter extends BaseLocaleConverter {
                 value instanceof BigInteger ||
                 value instanceof Byte ||
                 value instanceof Short) {
-
             result = getDecimalFormat(locale, pattern).format(((Number) value).longValue());
         }
         else if (value instanceof Double ||
                 value instanceof BigDecimal ||
                 value instanceof Float) {
-
             result = getDecimalFormat(locale, pattern).format(((Number) value).doubleValue());
         }
         else if (value instanceof Date) { // java.util.Date, java.sql.Date, java.sql.Time, java.sql.Timestamp
@@ -252,7 +249,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @throws IllegalArgumentException if an error occurs parsing a String to a Number
      */
     private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
-
         final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
 
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully

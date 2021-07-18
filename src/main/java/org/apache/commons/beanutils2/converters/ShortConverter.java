@@ -62,5 +62,4 @@ public final class ShortConverter extends NumberConverter {
     protected Class<Short> getDefaultType() {
         return Short.class;
     }
-
 }

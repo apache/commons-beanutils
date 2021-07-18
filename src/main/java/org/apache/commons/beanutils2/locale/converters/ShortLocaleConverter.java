@@ -198,7 +198,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         final Object result = super.parse(value, pattern);
 
         if (result == null || result instanceof Short) {
@@ -213,6 +212,4 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
         // now returns property Short
         return Short.valueOf(parsed.shortValue());
     }
-
 }
-

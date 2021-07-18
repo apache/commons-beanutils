@@ -126,7 +126,6 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public SqlTimestampLocaleConverter(final Object defaultValue, final boolean locPattern) {
-
         this(defaultValue, Locale.getDefault(), locPattern);
     }
 

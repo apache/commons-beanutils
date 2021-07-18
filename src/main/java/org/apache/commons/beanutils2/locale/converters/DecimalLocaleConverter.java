@@ -189,7 +189,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
     public DecimalLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
             final boolean locPattern) {
         super(defaultValue, locale, pattern, locPattern);
-
     }
 
     /**
@@ -206,7 +205,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         if (value instanceof Number) {
             return value;
         }

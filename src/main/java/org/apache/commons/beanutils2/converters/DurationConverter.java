@@ -79,5 +79,4 @@ public final class DurationConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

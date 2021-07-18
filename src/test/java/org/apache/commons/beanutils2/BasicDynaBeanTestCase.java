@@ -34,12 +34,8 @@ import junit.framework.TestSuite;
  * <p>Test Case for the {@code BasicDynaBean} implementation class.
  * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
- *
  */
-
 public class BasicDynaBeanTestCase extends TestCase {
-
-
 
     /**
      * The basic test bean for each test.
@@ -70,20 +66,14 @@ public class BasicDynaBeanTestCase extends TestCase {
         "stringProperty",
     };
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
     public BasicDynaBeanTestCase(final String name) {
-
         super(name);
-
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -130,16 +120,13 @@ public class BasicDynaBeanTestCase extends TestCase {
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(BasicDynaBeanTestCase.class);
-
     }
 
     /**
@@ -147,18 +134,13 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         bean = null;
-
     }
-
-
 
     /**
      * Corner cases on getDynaProperty invalid arguments.
      */
     public void testGetDescriptorArguments() {
-
         try {
             final DynaProperty descriptor =
                     bean.getDynaClass().getDynaProperty("unknown");
@@ -176,52 +158,41 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
-
     }
 
     /**
      * Positive getDynaProperty on property {@code booleanProperty}.
      */
     public void testGetDescriptorBoolean() {
-
         testGetDescriptorBase("booleanProperty", Boolean.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code doubleProperty}.
      */
     public void testGetDescriptorDouble() {
-
         testGetDescriptorBase("doubleProperty", Double.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code floatProperty}.
      */
     public void testGetDescriptorFloat() {
-
         testGetDescriptorBase("floatProperty", Float.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code intProperty}.
      */
     public void testGetDescriptorInt() {
-
         testGetDescriptorBase("intProperty", Integer.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code longProperty}.
      */
     public void testGetDescriptorLong() {
-
         testGetDescriptorBase("longProperty", Long.TYPE);
-
     }
 
     /**
@@ -229,27 +200,21 @@ public class BasicDynaBeanTestCase extends TestCase {
      * that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
-
         testGetDescriptorBase("booleanSecond", Boolean.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code shortProperty}.
      */
     public void testGetDescriptorShort() {
-
         testGetDescriptorBase("shortProperty", Short.TYPE);
-
     }
 
     /**
      * Positive getDynaProperty on property {@code stringProperty}.
      */
     public void testGetDescriptorString() {
-
         testGetDescriptorBase("stringProperty", String.class);
-
     }
 
     /**
@@ -257,7 +222,6 @@ public class BasicDynaBeanTestCase extends TestCase {
      * listed in {@code properties} should be returned exactly once.
      */
     public void testGetDescriptors() {
-
         final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
         final int[] count = new int[properties.length];
@@ -276,14 +240,12 @@ public class BasicDynaBeanTestCase extends TestCase {
                 fail("Duplicate property " + properties[j]);
             }
         }
-
     }
 
     /**
      * Corner cases on getIndexedProperty invalid arguments.
      */
     public void testGetIndexedArguments() {
-
         try {
             bean.get("intArray", -1);
             fail("Should throw IndexOutOfBoundsException");
@@ -292,18 +254,15 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
-
     }
 
     /**
      * Positive and negative tests on getIndexedProperty valid arguments.
      */
     public void testGetIndexedValues() {
-
         Object value = null;
 
         for (int i = 0; i < 5; i++) {
-
             try {
                 value = bean.get("intArray", i);
                 assertNotNull("intArray returned value " + i, value);
@@ -358,30 +317,25 @@ public class BasicDynaBeanTestCase extends TestCase {
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
-
         }
-
     }
 
     /**
      * Corner cases on getMappedProperty invalid arguments.
      */
     public void testGetMappedArguments() {
-
         try {
             final Object value = bean.get("mappedProperty", "unknown");
             assertNull("Should not return a value", value);
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of returning null");
         }
-
     }
 
     /**
      * Positive and negative tests on getMappedProperty valid arguments.
      */
     public void testGetMappedValues() {
-
         Object value = null;
 
         try {
@@ -404,14 +358,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
         }
-
     }
 
     /**
      * Corner cases on getSimpleProperty invalid arguments.
      */
     public void testGetSimpleArguments() {
-
         try {
             bean.get(null);
             fail("Should throw IllegalArgumentException");
@@ -420,14 +372,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
         }
-
     }
 
     /**
      * Test getSimpleProperty on a boolean property.
      */
     public void testGetSimpleBoolean() {
-
         try {
             final Object value = bean.get("booleanProperty");
             assertNotNull("Got a value", value);
@@ -437,14 +387,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a double property.
      */
     public void testGetSimpleDouble() {
-
         try {
             final Object value = bean.get("doubleProperty");
             assertNotNull("Got a value", value);
@@ -455,14 +403,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a float property.
      */
     public void testGetSimpleFloat() {
-
         try {
             final Object value = bean.get("floatProperty");
             assertNotNull("Got a value", value);
@@ -474,14 +420,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a int property.
      */
     public void testGetSimpleInt() {
-
         try {
             final Object value = bean.get("intProperty");
             assertNotNull("Got a value", value);
@@ -492,14 +436,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a long property.
      */
     public void testGetSimpleLong() {
-
         try {
             final Object value = bean.get("longProperty");
             assertNotNull("Got a value", value);
@@ -510,14 +452,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a short property.
      */
     public void testGetSimpleShort() {
-
         try {
             final Object value = bean.get("shortProperty");
             assertNotNull("Got a value", value);
@@ -528,14 +468,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test getSimpleProperty on a String property.
      */
     public void testGetSimpleString() {
-
         try {
             final Object value = bean.get("stringProperty");
             assertNotNull("Got a value", value);
@@ -546,14 +484,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test {@code contains()} method for mapped properties.
      */
     public void testMappedContains() {
-
         try {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
@@ -567,14 +503,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test {@code remove()} method for mapped properties.
      */
     public void testMappedRemove() {
-
         try {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
@@ -594,14 +528,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
      * Test serialization and deserialization.
      */
     public void testSerialization() {
-
         // Serialize the test bean
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
@@ -667,14 +599,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         testGetDescriptorShort();
         testGetDescriptorString();
         testGetDescriptors();
-
     }
 
     /**
      * Corner cases on setIndexedProperty invalid arguments.
      */
     public void testSetIndexedArguments() {
-
         try {
             bean.set("intArray", -1, new Integer(0));
             fail("Should throw IndexOutOfBoundsException");
@@ -683,14 +613,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IndexOutOfBoundsException");
         }
-
     }
 
     /**
      * Positive and negative tests on setIndexedProperty valid arguments.
      */
     public void testSetIndexedValues() {
-
         Object value = null;
 
         try {
@@ -752,14 +680,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
-
     }
 
     /**
      * Positive and negative tests on setMappedProperty valid arguments.
      */
     public void testSetMappedValues() {
-
         try {
             bean.set("mappedProperty", "First Key", "New First Value");
             assertEquals("Can replace old value",
@@ -777,14 +703,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a boolean property.
      */
     public void testSetSimpleBoolean() {
-
         try {
             final boolean oldValue =
                     ((Boolean) bean.get("booleanProperty")).booleanValue();
@@ -796,14 +720,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a double property.
      */
     public void testSetSimpleDouble() {
-
         try {
             final double oldValue =
                     ((Double) bean.get("doubleProperty")).doubleValue();
@@ -816,14 +738,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a float property.
      */
     public void testSetSimpleFloat() {
-
         try {
             final float oldValue =
                     ((Float) bean.get("floatProperty")).floatValue();
@@ -836,14 +756,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a int property.
      */
     public void testSetSimpleInt() {
-
         try {
             final int oldValue =
                     ((Integer) bean.get("intProperty")).intValue();
@@ -855,14 +773,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a long property.
      */
     public void testSetSimpleLong() {
-
         try {
             final long oldValue =
                     ((Long) bean.get("longProperty")).longValue();
@@ -874,14 +790,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a short property.
      */
     public void testSetSimpleShort() {
-
         try {
             final short oldValue =
                     ((Short) bean.get("shortProperty")).shortValue();
@@ -893,14 +807,12 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
 
     /**
      * Test setSimpleProperty on a String property.
      */
     public void testSetSimpleString() {
-
         try {
             final String oldValue = (String) bean.get("stringProperty");
             final String newValue = oldValue + " Extra Value";
@@ -911,17 +823,13 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
-
     }
-
-
 
     /**
      * Create and return a {@code DynaClass} instance for our test
      * {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
-
         final int[] intArray = new int[0];
         final String[] stringArray = new String[0];
 
@@ -946,7 +854,6 @@ public class BasicDynaBeanTestCase extends TestCase {
                             new DynaProperty("stringProperty", String.class),
                         });
         return dynaClass;
-
     }
 
     /**
@@ -956,7 +863,6 @@ public class BasicDynaBeanTestCase extends TestCase {
      * @param type Expected class type of this property
      */
     protected void testGetDescriptorBase(final String name, final Class<?> type) {
-
         try {
             final DynaProperty descriptor =
                     bean.getDynaClass().getDynaProperty(name);
@@ -965,7 +871,5 @@ public class BasicDynaBeanTestCase extends TestCase {
         } catch (final Throwable t) {
             fail("Threw an exception: " + t);
         }
-
     }
-
 }

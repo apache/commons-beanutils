@@ -135,8 +135,6 @@ public class ArrayConverter extends AbstractConverter {
     private char[] allowedChars = new char[] {'.', '-'};
     private boolean onlyFirstToString = true;
 
-
-
     /**
      * Constructs an <b>array</b> {@code Converter} with the specified
      * <b>component</b> {@code Converter} that throws a
@@ -268,7 +266,6 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         return buffer.toString();
-
     }
 
     /**
@@ -389,7 +386,6 @@ public class ArrayConverter extends AbstractConverter {
             return defaultValue;
         }
         return Array.newInstance(type.getComponentType(), defaultSize);
-
     }
 
     /**
@@ -432,7 +428,6 @@ public class ArrayConverter extends AbstractConverter {
      *  is {@code null}
      */
     private List<String> parseElements(final Class<?> type, String value) {
-
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
         }
@@ -444,7 +439,6 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         try {
-
             // Set up a StreamTokenizer on the characters in this String
             final StreamTokenizer st = new StreamTokenizer(new StringReader(value));
             st.whitespaceChars(delimiter , delimiter); // Set the delimiters
@@ -483,14 +477,9 @@ public class ArrayConverter extends AbstractConverter {
 
             // Return the completed list
             return list;
-
         } catch (final IOException e) {
-
             throw new ConversionException("Error converting from String to '"
                     + toString(type) + "': " + e.getMessage(), e);
-
         }
-
     }
-
 }

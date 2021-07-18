@@ -27,7 +27,6 @@ import org.junit.Test;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-493">BEANUTILS-493</a>
  */
-
 public class Jira493TestCase {
 
     @Test

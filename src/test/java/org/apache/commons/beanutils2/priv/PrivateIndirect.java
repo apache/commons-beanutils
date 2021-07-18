@@ -19,12 +19,8 @@ package org.apache.commons.beanutils2.priv;
 
 /**
  * Interface that is indirectly implemented by PrivateBean.
- *
  */
-
 public interface PrivateIndirect {
-
-
 
     /**
      * A property accessible via an indirectly implemented interface.
@@ -35,5 +31,4 @@ public interface PrivateIndirect {
      * A method accessible via an indirectly implemented interface.
      */
     String methodBaz(String in);
-
 }

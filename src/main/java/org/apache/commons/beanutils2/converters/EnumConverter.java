@@ -87,5 +87,4 @@ public final class EnumConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

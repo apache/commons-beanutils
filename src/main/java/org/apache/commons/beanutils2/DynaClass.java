@@ -22,9 +22,7 @@ package org.apache.commons.beanutils2;
  * {@code DynaBean} interface.  DynaBean instances that share the same
  * DynaClass all have the same set of available properties, along with any
  * associated data types, read-only states, and write-only states.</p>
- *
  */
-
 public interface DynaClass {
 
     /**
@@ -76,5 +74,4 @@ public interface DynaClass {
      */
     DynaBean newInstance()
             throws IllegalAccessException, InstantiationException;
-
 }

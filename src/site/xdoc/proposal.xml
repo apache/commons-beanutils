@@ -20,10 +20,7 @@
 </properties>
 <body>
 
-
 <section name="Proposal for BeanUtils Package">
-
-
 
 <subsection name="(0) Rationale">
 
@@ -52,7 +49,6 @@ packages in the JDK Javadocs).  However, these APIs can be quite complex to
 understand and utilize.  The proposed <em>BeanUtils</em> component provides
 easy-to-use wrappers around these capabilities.</p>
 
-
 </subsection>
 <subsection name="(1) Scope of the Package">
 
@@ -75,7 +71,6 @@ For example, the following property accessor expressions are supported:</p>
     providing indexed getter and setter methods).</li>
 </ul>
 
-
 </subsection>
 <subsection name="(1.5) Interaction With Other Packages">
 
@@ -86,7 +81,6 @@ developers of the component.  BeanUtils will also be a dependency for
 several future proposed components for the Jakarta Commons subproject.</p>
 
 <p>No external configuration files are utilized.</p>
-
 
 </subsection>
 <subsection name="(2) Initial Source of the Package">
@@ -102,7 +96,6 @@ versions will be deprecated.</p>
 
 <p>The proposed package name for the new component is
 <code>org.apache.commons.beanutils</code>.</p>
-
 
 </subsection>
 <subsection name="(3)  Required Jakarta-Commons Resources">
@@ -122,14 +115,11 @@ versions will be deprecated.</p>
 <li>Jyve FAQ - New category "commons-beanutils" (when available). </li>
 </ul>
 
-
 </subsection>
 <subsection name="(4) Initial Committers">
 
 <p>The initial committers on the BeanUtils component shall be Craig
 McClanahan and Geir Magnusson Jr.</p>
-
-
 
 </subsection>
 </section>

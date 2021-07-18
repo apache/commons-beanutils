@@ -79,5 +79,4 @@ public final class OffsetTimeConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

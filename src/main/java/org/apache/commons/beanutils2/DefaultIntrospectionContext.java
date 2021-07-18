@@ -35,6 +35,7 @@ import java.util.Set;
  * @since 1.9
  */
 class DefaultIntrospectionContext implements IntrospectionContext {
+
     /** The current class for introspection. */
     private final Class<?> currentClass;
 

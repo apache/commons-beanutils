@@ -47,5 +47,4 @@ public interface Converter {
      *  successfully
      */
     <T> T convert(Class<T> type, Object value);
-
 }

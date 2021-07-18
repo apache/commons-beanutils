@@ -23,12 +23,9 @@ package org.apache.commons.beanutils2;
  *
  * @since 1.3
  */
-
 public class ConversionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * Constructs a new exception with the specified message.
@@ -36,9 +33,7 @@ public class ConversionException extends RuntimeException {
      * @param message The message describing this exception
      */
     public ConversionException(final String message) {
-
         super(message);
-
     }
 
     /**
@@ -48,10 +43,8 @@ public class ConversionException extends RuntimeException {
      * @param cause The root cause of this exception
      */
     public ConversionException(final String message, final Throwable cause) {
-
         super(message);
         this.cause = cause;
-
     }
 
     /**
@@ -60,13 +53,9 @@ public class ConversionException extends RuntimeException {
      * @param cause The root cause of this exception
      */
     public ConversionException(final Throwable cause) {
-
         super(cause.getMessage());
         this.cause = cause;
-
     }
-
-
 
     /**
      * The root cause of this {@code ConversionException}, compatible with
@@ -82,5 +71,4 @@ public class ConversionException extends RuntimeException {
     public Throwable getCause() {
         return this.cause;
     }
-
 }

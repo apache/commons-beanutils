@@ -202,7 +202,7 @@
       <email>ggregory at apache.org</email>
       <url>https://www.garygregory.com</url>
       <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>      
+      <organizationUrl>https://www.apache.org/</organizationUrl>
       <roles>
         <role>PMC Member</role>
       </roles>
@@ -522,9 +522,9 @@
             </file>
           </newVersion>
           <parameter>
-            <!-- 
-              to support "mvn site" (no japicmp report) 
-              as well as "mvn package site" (with  japicmp report) 
+            <!--
+              to support "mvn site" (no japicmp report)
+              as well as "mvn package site" (with  japicmp report)
             -->
             <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
           </parameter>

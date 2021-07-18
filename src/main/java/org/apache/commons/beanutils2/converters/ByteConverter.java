@@ -62,5 +62,4 @@ public final class ByteConverter extends NumberConverter {
     protected Class<Byte> getDefaultType() {
         return Byte.class;
     }
-
 }

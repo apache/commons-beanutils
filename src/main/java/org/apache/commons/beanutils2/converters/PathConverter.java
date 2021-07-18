@@ -78,5 +78,4 @@ public final class PathConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

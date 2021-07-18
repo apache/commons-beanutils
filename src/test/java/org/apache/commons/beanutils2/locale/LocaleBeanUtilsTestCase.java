@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for {@link LocaleBeanUtils}.
- *
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
 
@@ -40,8 +39,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     public LocaleBeanUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -64,8 +61,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test setting a nested simple property
@@ -99,4 +94,3 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));
     }
 }
-

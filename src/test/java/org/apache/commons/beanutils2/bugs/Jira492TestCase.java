@@ -116,5 +116,4 @@ public class Jira492TestCase {
             assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
         }
     }
-
 }

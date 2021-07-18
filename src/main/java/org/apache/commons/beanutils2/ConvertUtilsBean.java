@@ -169,12 +169,10 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 1.7
  */
-
 public class ConvertUtilsBean {
 
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
-
 
     /**
      * Get singleton instance
@@ -183,8 +181,6 @@ public class ConvertUtilsBean {
     protected static ConvertUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
-
-
 
     /**
      * The set of {@link Converter}s that can be used to convert Strings
@@ -198,16 +194,12 @@ public class ConvertUtilsBean {
      */
     private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
 
-
-
     /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
         converters.setFast(false);
         deregister();
         converters.setFast(true);
     }
-
-
 
     /**
      * Convert the specified value into a String.  If the specified value
@@ -221,7 +213,6 @@ public class ConvertUtilsBean {
      * @return The converted String value or null if value is null
      */
     public String convert(Object value) {
-
         if (value == null) {
             return null;
         }
@@ -238,7 +229,6 @@ public class ConvertUtilsBean {
         }
         final Converter converter = lookup(String.class);
         return converter.convert(String.class, value);
-
     }
 
     /**
@@ -252,7 +242,6 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" +
                       clazz.getName() + "'");
@@ -265,7 +254,6 @@ public class ConvertUtilsBean {
             log.trace("  Using converter " + converter);
         }
         return converter.convert(clazz, value);
-
     }
 
     /**
@@ -282,7 +270,6 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz) {
-
         Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
@@ -303,7 +290,6 @@ public class ConvertUtilsBean {
             Array.set(array, i, converter.convert(type, values[i]));
         }
         return array;
-
     }
 
     /**
@@ -318,7 +304,6 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final Object value, final Class<?> targetType) {
-
         final Class<?> sourceType = value == null ? null : value.getClass();
 
         if (log.isDebugEnabled()) {
@@ -341,7 +326,6 @@ public class ConvertUtilsBean {
         }
         if (String.class.equals(targetType) && converted != null &&
                 !(converted instanceof String)) {
-
             // NOTE: For backwards compatibility, if the Converter
             //       doesn't handle  conversion-->String then
             //       use the registered String Converter
@@ -357,10 +341,8 @@ public class ConvertUtilsBean {
             if (converted != null && !(converted instanceof String)) {
                 converted = converted.toString();
             }
-
         }
         return converted;
-
     }
 
     /**
@@ -368,7 +350,6 @@ public class ConvertUtilsBean {
      * standard Converters.
      */
     public void deregister() {
-
         converters.clear();
 
         registerPrimitives(false);
@@ -456,7 +437,6 @@ public class ConvertUtilsBean {
      * N.B. This values is ignored if {@code throwException</code> is <code>true}
      */
     private void registerStandard(final boolean throwException, final boolean defaultNull) {
-
         final Number     defaultNumber     = defaultNull ? null : ZERO;
         final BigDecimal bigDecDeflt       = defaultNull ? null : new BigDecimal("0.0");
         final BigInteger bigIntDeflt       = defaultNull ? null : new BigInteger("0");
@@ -475,7 +455,6 @@ public class ConvertUtilsBean {
         register(Long.class,       throwException ? new LongConverter()       : new LongConverter(defaultNumber));
         register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
         register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
-
     }
 
     /**
@@ -643,9 +622,7 @@ public class ConvertUtilsBean {
      * @param clazz Class for which to remove a registered Converter
      */
     public void deregister(final Class<?> clazz) {
-
         converters.remove(clazz);
-
     }
 
     /**
@@ -657,9 +634,7 @@ public class ConvertUtilsBean {
      * @return The registered {@link Converter} or {@code null} if not found
      */
     public Converter lookup(final Class<?> clazz) {
-
         return converters.get(clazz);
-
     }
 
     /**
@@ -672,7 +647,6 @@ public class ConvertUtilsBean {
      * @return The registered {@link Converter} or {@code null} if not found
      */
     public Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
-
         if (targetType == null) {
             throw new IllegalArgumentException("Target type is missing");
         }
@@ -706,7 +680,6 @@ public class ConvertUtilsBean {
         }
 
         return lookup(targetType);
-
     }
 
     /**
@@ -718,8 +691,6 @@ public class ConvertUtilsBean {
      *  Converter
      */
     public void register(final Converter converter, final Class<?> clazz) {
-
         converters.put(clazz, converter);
-
     }
 }

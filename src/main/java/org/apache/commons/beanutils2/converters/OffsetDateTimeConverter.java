@@ -65,5 +65,4 @@ public final class OffsetDateTimeConverter extends DateTimeConverter {
     protected Class<?> getDefaultType() {
         return OffsetDateTime.class;
     }
-
 }

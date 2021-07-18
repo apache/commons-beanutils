@@ -32,21 +32,11 @@ import junit.framework.TestSuite;
  * <p>
  * Test Case for changes made during Beanutils Beanification
  * </p>
- *
  */
-
 public class BeanificationTestCase extends TestCase {
-
-
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -57,20 +47,13 @@ public class BeanificationTestCase extends TestCase {
         super(name);
     }
 
-
-
-
-
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() {
-
         ConvertUtils.deregister();
-
     }
-
 
     /**
      * Creates the tests included in this test suite.
@@ -79,7 +62,6 @@ public class BeanificationTestCase extends TestCase {
         return new TestSuite(BeanificationTestCase.class);
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -87,9 +69,6 @@ public class BeanificationTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
-
-
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
@@ -108,14 +87,13 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS){
                 fail("Max iterations reached before resource released.");
             }
-            if( reference.get() == null ) {
+            if ( reference.get() == null ) {
                 break;
-
             }
             // create garbage:
             @SuppressWarnings("unused")
@@ -155,23 +133,21 @@ public class BeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS){
                 fail("Max iterations reached before resource released.");
             }
             map.isEmpty();
 
-            if(
+            if (
                 loaderReference.get() == null &&
                 testReference.get() == null) {
                 break;
-
             }
             // create garbage:
             @SuppressWarnings("unused")
-            final
-            byte[] b =  new byte[bytz];
+            final byte[] b =  new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -211,7 +187,6 @@ public class BeanificationTestCase extends TestCase {
             }
         }
 
-
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         @SuppressWarnings("unused")
         final
@@ -250,7 +225,6 @@ public class BeanificationTestCase extends TestCase {
                 propertyUtilsReference.get() == null &&
                 convertUtilsReference.get() == null) {
                 break;
-
             }
             // create garbage:
             @SuppressWarnings("unused")
@@ -308,7 +282,6 @@ public class BeanificationTestCase extends TestCase {
                     "Different PropertyUtilsBean instances per context classloader",
                     PropertyUtilsBean.getInstance() != signal.getPropertyUtils());
     }
-
 
     /**
      * Tests whether difference instances are loaded by different
@@ -416,7 +389,6 @@ public class BeanificationTestCase extends TestCase {
         assertNull("Exception thrown by test thread:" + signal.getException(), signal.getException());
         assertEquals("Signal not set by test thread", 3, signal.getSignal());
         assertEquals("Wrong property value(3)", 9, bean.getInt());
-
     }
 
     /** Tests whether different threads can set beanutils instances correctly */
@@ -541,4 +513,3 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 }
-

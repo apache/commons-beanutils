@@ -19,30 +19,22 @@ package org.apache.commons.beanutils2.locale.converters;
 
 /**
  * Test Case for the LongLocaleConverter class.
- *
  */
-
 public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
-
-
 
     public LongLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         super.setUp();
 
         defaultValue  = new Long("999");
         expectedValue = new Long(expectedIntegerValue);
-
     }
 
     /**
@@ -53,13 +45,10 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
-
         // ------------- Construct with localized pattern ------------
         converter = new LongLocaleConverter(defaultValue,
                                                   localizedLocale,
@@ -106,7 +95,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
-
     }
 
     /**
@@ -116,7 +104,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      *
      */
     public void testConstructor_2() {
-
         // ------------- Construct using default locale ------------
         converter = new LongLocaleConverter();
 
@@ -125,7 +112,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -135,7 +121,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      *
      */
     public void testConstructor_3() {
-
         // ------------- Construct using localized pattern (default locale) --------
         converter = new LongLocaleConverter(true);
 
@@ -144,14 +129,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale) constructor
      */
     public void testConstructor_4() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(localizedLocale);
 
@@ -160,14 +143,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, locPattern) constructor
      */
     public void testConstructor_5() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(localizedLocale, true);
 
@@ -176,14 +157,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern) constructor
      */
     public void testConstructor_6() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(localizedLocale, defaultIntegerPattern);
 
@@ -192,14 +171,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     public void testConstructor_7() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(localizedLocale, localizedIntegerPattern, true);
 
@@ -208,14 +185,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedIntegerValue, localizedIntegerPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(defaultValue) constructor
      */
     public void testConstructor_8() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(defaultValue);
 
@@ -224,14 +199,12 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
     public void testConstructor_9() {
-
         // ------------- Construct using specified Locale --------
         converter = new LongLocaleConverter(defaultValue, true);
 
@@ -240,8 +213,5 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
-
 }
-

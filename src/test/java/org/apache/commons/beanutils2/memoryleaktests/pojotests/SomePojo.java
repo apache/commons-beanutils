@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2.memoryleaktests.pojotests;
 
 /**
  * Test POJO
- *
  */
 public class SomePojo {
 

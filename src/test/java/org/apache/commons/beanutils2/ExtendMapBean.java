@@ -21,23 +21,18 @@ import java.util.Hashtable;
 
 /**
  * Used to test
- *
  */
-
 public class ExtendMapBean extends Hashtable<Object, Object> {
 
     private String dbName = "[UNSET]";
 
     public ExtendMapBean() {}
 
-    public String getUnusuallyNamedProperty()
-    {
+    public String getUnusuallyNamedProperty() {
         return dbName;
     }
 
-    public void setUnusuallyNamedProperty(final String dbName)
-    {
+    public void setUnusuallyNamedProperty(final String dbName) {
         this.dbName = dbName;
     }
-
 }

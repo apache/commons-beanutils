@@ -194,7 +194,6 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
      */
     @Override
     public boolean test(final T object) {
-
         boolean evaluation = false;
 
         try {

@@ -31,7 +31,6 @@ import junit.framework.TestSuite;
 
 /**
  * <p>Test Case for the {@code DynaBeanMapDecorator} implementation class.</p>
- *
  */
 @SuppressWarnings("deprecation")
 public class DynaBeanMapDecoratorTestCase extends TestCase {
@@ -57,8 +56,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private Map<String, Object> modifiableMap;
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
@@ -67,8 +64,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public DynaBeanMapDecoratorTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run thus Test
@@ -89,7 +84,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      */
     @Override
     public void setUp() throws Exception {
-
         mapVal.clear();
         mapVal.put("key1", "key1Value");
         mapVal.put("key2", "key2Value");
@@ -103,7 +97,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         // Create decorated Maps
         decoratedMap  = new DynaBeanPropertyMapDecorator(dynaBean);
         modifiableMap = new DynaBeanPropertyMapDecorator(dynaBean, false);
-
     }
 
     /**
@@ -115,8 +108,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         decoratedMap = null;
         modifiableMap = null;
     }
-
-
 
     /**
      * Test isReadOnly() method
@@ -194,7 +185,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test get() method
      */
     public void testGet() {
-
         // valid property name
         assertEquals("decoratedMap valid", stringVal, decoratedMap.get(stringProp.getName()));
 
@@ -236,7 +226,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test put() method
      */
     public void testPut() {
-
         final String newValue = "ABC";
 
         // Test read only
@@ -257,7 +246,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test putAll() method
      */
     public void testPutAll() {
-
         final String newValue = "ABC";
         final Map<String, Object> newMap = new HashMap<>();
         newMap.put(stringProp.getName(), newValue);

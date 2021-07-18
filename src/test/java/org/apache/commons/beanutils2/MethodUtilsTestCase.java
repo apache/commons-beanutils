@@ -30,11 +30,8 @@ import junit.framework.TestSuite;
 
 /**
  * <p> Test case for {@code MethodUtils} </p>
- *
  */
 public class MethodUtilsTestCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -44,8 +41,6 @@ public class MethodUtilsTestCase extends TestCase {
     public MethodUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -67,8 +62,6 @@ public class MethodUtilsTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * <p> Test {@code getAccessibleMethod}.
@@ -311,7 +304,6 @@ public class MethodUtilsTestCase extends TestCase {
      * Simple tests for accessing static methods via invokeMethod().
      */
     public void testSimpleStatic1() {
-
         final TestBean bean = new TestBean();
         Object value = null;
         int current = TestBean.currentCounter();
@@ -359,18 +351,15 @@ public class MethodUtilsTestCase extends TestCase {
             assertEquals("currentCounter value",
                          current,
                          ((Integer) value).intValue());
-
         } catch (final Exception e) {
             fail("Threw exception" + e);
         }
-
     }
 
     /**
      * Simple tests for accessing static methods via invokeExactMethod().
      */
     public void testSimpleStatic2() {
-
         final TestBean bean = new TestBean();
         Object value = null;
         int current = TestBean.currentCounter();
@@ -418,18 +407,15 @@ public class MethodUtilsTestCase extends TestCase {
             assertEquals("currentCounter value",
                          current,
                          ((Integer) value).intValue());
-
         } catch (final Exception e) {
             fail("Threw exception" + e);
         }
-
     }
 
     /**
      * Simple tests for accessing static methods via getAccessibleMethod()
      */
     public void testSimpleStatic3() {
-
         Object value = null;
         int current = TestBean.currentCounter();
 
@@ -516,11 +502,9 @@ public class MethodUtilsTestCase extends TestCase {
             assertEquals("currentCounter value",
                          current,
                          ((Integer) value).intValue());
-
         } catch (final Exception e) {
             fail("Threw exception" + e);
         }
-
     }
 
     public void testPublicSub() throws Exception {
@@ -566,7 +550,6 @@ public class MethodUtilsTestCase extends TestCase {
             fail("Invoking setBar threw " + t);
         }
         assertEquals("Set value (bar:3)", "2222", bean.getBar());
-
     }
 
     public void testParentMethod() throws Exception {

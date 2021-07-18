@@ -27,11 +27,8 @@ import java.util.Locale;
  * <p>The implementations for these method are provided by {@link LocaleConvertUtilsBean}.
  * These static utility method use the default instance. More sophisticated can be provided
  * by using a {@code LocaleConvertUtilsBean} instance.</p>
- *
  */
 public class LocaleConvertUtils {
-
-
 
     /**
      * <p>Gets the {@code Locale} which will be used when
@@ -42,7 +39,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#getDefaultLocale()
      */
     public static Locale getDefaultLocale() {
-
         return LocaleConvertUtilsBean.getInstance().getDefaultLocale();
     }
 
@@ -56,7 +52,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#setDefaultLocale(Locale)
      */
     public static void setDefaultLocale(final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().setDefaultLocale(locale);
     }
 
@@ -85,8 +80,6 @@ public class LocaleConvertUtils {
     public static void setApplyLocalized(final boolean newApplyLocalized) {
         LocaleConvertUtilsBean.getInstance().setApplyLocalized(newApplyLocalized);
     }
-
-
 
     /**
      * <p>Converts the specified locale-sensitive value into a String.</p>
@@ -129,7 +122,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(Object, Locale, String)
      */
     public static String convert(final Object value, final Locale locale, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, locale, pattern);
     }
 
@@ -145,7 +137,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class)
      */
     public static Object convert(final String value, final Class<?> clazz) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz);
     }
 
@@ -163,7 +154,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz, pattern);
     }
 
@@ -182,7 +172,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String, Class, Locale, String)
      */
     public static Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(value, clazz, locale, pattern);
     }
 
@@ -199,7 +188,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#convert(String[], Class, String)
      */
     public static Object convert(final String[] values, final Class<?> clazz, final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, pattern);
     }
 
@@ -215,7 +203,6 @@ public class LocaleConvertUtils {
     * @see LocaleConvertUtilsBean#convert(String[], Class)
     */
    public static Object convert(final String[] values, final Class<?> clazz) {
-
        return LocaleConvertUtilsBean.getInstance().convert(values, clazz);
    }
 
@@ -234,7 +221,6 @@ public class LocaleConvertUtils {
      */
     public static Object convert(final String[] values, final Class<?> clazz, final Locale locale,
             final String pattern) {
-
         return LocaleConvertUtilsBean.getInstance().convert(values, clazz, locale, pattern);
     }
 
@@ -251,7 +237,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#register(LocaleConverter, Class, Locale)
      */
     public static void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().register(converter, clazz, locale);
     }
 
@@ -263,7 +248,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#deregister()
      */
     public static void deregister() {
-
        LocaleConvertUtilsBean.getInstance().deregister();
     }
 
@@ -276,7 +260,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#deregister(Locale)
      */
     public static void deregister(final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().deregister(locale);
     }
 
@@ -290,7 +273,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#deregister(Class, Locale)
      */
     public static void deregister(final Class<?> clazz, final Locale locale) {
-
         LocaleConvertUtilsBean.getInstance().deregister(clazz, locale);
     }
 
@@ -307,7 +289,6 @@ public class LocaleConvertUtils {
      * @see LocaleConvertUtilsBean#lookup(Class, Locale)
      */
     public static LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
-
         return LocaleConvertUtilsBean.getInstance().lookup(clazz, locale);
     }
 }

@@ -17,18 +17,14 @@
 
 package org.apache.commons.beanutils2;
 
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 /**
  *  Test Case for the BeanComparator class.
  */
 public class BeanComparatorTestCase extends TestCase {
-
-
 
     /**
      * The test beans for each test.
@@ -36,8 +32,6 @@ public class BeanComparatorTestCase extends TestCase {
     protected TestBean bean = null;
     protected AlphaBean alphaBean1 = null;
     protected AlphaBean alphaBean2 = null;
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -48,8 +42,6 @@ public class BeanComparatorTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Sets up instance variables required by this test case.
      */
@@ -59,7 +51,6 @@ public class BeanComparatorTestCase extends TestCase {
         alphaBean1 = new AlphaBean("alphaBean1");
         alphaBean2 = new AlphaBean("alphaBean2");
     }
-
 
     /**
      * Returns the tests included in this test suite.
@@ -77,8 +68,6 @@ public class BeanComparatorTestCase extends TestCase {
         alphaBean1 = null;
         alphaBean2 = null;
     }
-
-
 
     /**
      *  Tests comparing two beans via their name using the default Comparator
@@ -136,8 +125,7 @@ public class BeanComparatorTestCase extends TestCase {
           beanComparator.compare(alphaBean2, null);
 
           fail("Should not be able to compare a null value.");
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             // expected result
         }
     }
@@ -150,10 +138,7 @@ public class BeanComparatorTestCase extends TestCase {
           final BeanComparator<AlphaBean, String> beanComparator = new BeanComparator<>("bogusName");
           beanComparator.compare(alphaBean2, alphaBean1);
           fail("should not be able to compare");
-
-
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
           assertTrue("Wrong exception was thrown: " + e, e.toString().contains("Unknown property"));
         }
     }
@@ -175,9 +160,7 @@ public class BeanComparatorTestCase extends TestCase {
           // **** java.lang.Boolean implements Comparable from JDK 1.5 onwards
           //      so this test no longer fails
           // fail("BeanComparator should throw an exception when comparing two booleans.");
-
-        }
-        catch (final ClassCastException cce){
+        } catch (final ClassCastException cce){
           // Expected result
         }
     }

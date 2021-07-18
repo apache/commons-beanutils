@@ -41,7 +41,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 1.7
  */
-
 public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
     /**
@@ -79,12 +78,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
-
-
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
-
-
 
     /** Construct instance with standard conversion bean */
     public LocaleBeanUtilsBean() {
@@ -117,8 +112,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
         this.localeConvertUtils = localeConvertUtils;
     }
 
-
-
     /**
      * Gets the bean instance used for conversions
      *
@@ -133,7 +126,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @return the default locale
      */
     public Locale getDefaultLocale() {
-
         return getLocaleConvertUtils().getDefaultLocale();
     }
 
@@ -143,7 +135,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @param locale the default locale
      */
     public void setDefaultLocale(final Locale locale) {
-
         getLocaleConvertUtils().setDefaultLocale(locale);
     }
 
@@ -155,7 +146,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * otherwise {@code false}
      */
     public boolean getApplyLocalized() {
-
         return getLocaleConvertUtils().getApplyLocalized();
     }
 
@@ -167,11 +157,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * otherwise {@code false}
      */
     public void setApplyLocalized(final boolean newApplyLocalized) {
-
         getLocaleConvertUtils().setApplyLocalized(newApplyLocalized);
     }
-
-
 
     /**
      * Gets the value of the specified locale-sensitive indexed property
@@ -721,8 +708,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                 if (descriptor == null) {
                     return null; // Skip this property setter
                 }
-            }
-            catch (final NoSuchMethodException e) {
+            } catch (final NoSuchMethodException e) {
                 return null; // Skip this property setter
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
@@ -751,7 +737,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @return The converted value
      */
     protected Object convert(final Class<?> type, final int index, final Object value, final String pattern) {
-
         if (log.isTraceEnabled()) {
             log.trace("Converting value '" + value + "' to type:" + type);
         }
@@ -808,7 +793,6 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @return The converted value
      */
     protected Object convert(final Class<?> type, final int index, final Object value) {
-
         Object newValue = null;
 
         if (type.isArray() && index < 0) { // Scalar value into array
@@ -882,11 +866,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             else {
                 getPropertyUtils().setProperty(target, propName, newValue);
             }
-        }
-        catch (final NoSuchMethodException e) {
+        } catch (final NoSuchMethodException e) {
             throw new InvocationTargetException
                     (e, "Cannot set " + propName);
         }
     }
 }
-

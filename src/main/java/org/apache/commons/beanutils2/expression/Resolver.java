@@ -163,5 +163,4 @@ public interface Resolver {
      * expression removed - null if there are no more expressions
      */
     String remove(String expression);
-
 }

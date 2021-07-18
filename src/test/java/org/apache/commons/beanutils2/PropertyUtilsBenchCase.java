@@ -26,12 +26,8 @@ import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
- *
  */
-
 public class PropertyUtilsBenchCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -39,12 +35,8 @@ public class PropertyUtilsBenchCase extends TestCase {
      * @param name Name of the test case
      */
     public PropertyUtilsBenchCase(final String name) {
-
         super(name);
-
     }
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -63,8 +55,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     // PropertyUtilsBean instance to be used
     private PropertyUtilsBean pu = null;
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -118,16 +108,13 @@ public class PropertyUtilsBenchCase extends TestCase {
 
         // Set up PropertyUtilsBean instance we will use
         pu = PropertyUtilsBean.getInstance();
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(PropertyUtilsBenchCase.class);
-
     }
 
     /**
@@ -135,7 +122,6 @@ public class PropertyUtilsBenchCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
         inBean = null;
         inDyna = null;
@@ -143,14 +129,10 @@ public class PropertyUtilsBenchCase extends TestCase {
         outBean = null;
         outDyna = null;
         pu = null;
-
     }
-
-
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
-
         long startMillis;
         long stopMillis;
 
@@ -177,7 +159,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,bean), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time copyProperties() from a DynaBean
@@ -209,7 +190,6 @@ public class PropertyUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna,dyna), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time copyProperties() from a Map
@@ -241,9 +221,5 @@ public class PropertyUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("PU.copyProperties(dyna, map), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
-
-
-
 }

@@ -22,15 +22,11 @@ import java.util.Map;
 
 /**
  * Just a java bean (JAJB) to try to replicate a reported bug
- *
  */
-
 public class MappedPropertyTestBean {
 
     private final Map<Object, Object> map = new HashMap<>();
     private final Map<Object, Object> myMap = new HashMap<>();
-
-
 
     public String getMapproperty(final String key) {
         return (String) map.get(key);
@@ -75,6 +71,7 @@ public class MappedPropertyTestBean {
     public String getInvalidGetter(final String key, final String other) {
         return (String) map.get(key);
     }
+
     public Map<Object, Object> getMyMap() {
         return myMap;
     }
@@ -82,17 +79,20 @@ public class MappedPropertyTestBean {
     public void setInvalidGetter(final String key, final String value) {
         map.put(key, value);
     }
+
     public String getInvalidSetter(final String key) {
         return (String) map.get(key);
     }
+
     public void setInvalidSetter(final String key, final String value, final String other) {
+
     }
 
     public Long getDifferentTypes(final String key) {
         return new Long(((Number)map.get(key)).longValue());
     }
+
     public void setDifferentTypes(final String key, final Integer value) {
         map.put(key, value);
     }
-
 }

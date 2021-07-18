@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the LocalDateConverter class.
- *
  */
 public class LocalDateConverterTestCase extends DateConverterTestBase {
 
@@ -36,8 +35,6 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(LocalDateConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -64,8 +61,6 @@ public class LocalDateConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new LocalDateConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.

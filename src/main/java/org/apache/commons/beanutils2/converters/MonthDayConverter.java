@@ -79,5 +79,4 @@ public final class MonthDayConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

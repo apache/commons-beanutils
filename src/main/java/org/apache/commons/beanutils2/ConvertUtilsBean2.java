@@ -73,5 +73,4 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
     public Object convert(final String[] value, final Class<?> clazz) {
         return convert((Object)value, clazz);
     }
-
 }

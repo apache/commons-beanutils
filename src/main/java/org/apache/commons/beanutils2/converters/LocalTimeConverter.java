@@ -79,5 +79,4 @@ public final class LocalTimeConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

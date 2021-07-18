@@ -20,7 +20,6 @@ import org.apache.commons.beanutils2.bugs.Jira87TestCase;
 
 /**
  * Factory which creates beans for {@link Jira87TestCase}.
- *
  */
 public class Jira87BeanFactory {
 
@@ -45,7 +44,6 @@ public class Jira87BeanFactory {
          * @return The value
          */
         Object getValue(String key);
-
     }
 
     /* =============== Package Friendly implementation of public interface =============== */
@@ -61,7 +59,5 @@ public class Jira87BeanFactory {
         public Object getValue(final String key) {
             return key;
         }
-
     }
-
 }

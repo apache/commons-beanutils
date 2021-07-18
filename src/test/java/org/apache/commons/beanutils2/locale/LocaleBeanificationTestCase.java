@@ -41,21 +41,11 @@ import junit.framework.TestSuite;
  * Test Case for changes made during LocaleBeanutils Beanification.
  * This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
- *
  */
-
 public class LocaleBeanificationTestCase extends TestCase {
-
-
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -66,20 +56,13 @@ public class LocaleBeanificationTestCase extends TestCase {
         super(name);
     }
 
-
-
-
-
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() {
-
         LocaleConvertUtils.deregister();
-
     }
-
 
     /**
      * Creates the tests included in this test suite.
@@ -88,7 +71,6 @@ public class LocaleBeanificationTestCase extends TestCase {
         return new TestSuite(LocaleBeanificationTestCase.class);
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -96,9 +78,6 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
-
-
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
@@ -123,7 +102,6 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
             if( reference.get() == null ) {
                 break;
-
             }
             // create garbage:
             final byte[] b =  new byte[bytz];
@@ -168,11 +146,10 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
             map.isEmpty();
 
-            if(
+            if (
                 loaderReference.get() == null &&
                 testReference.get() == null) {
                 break;
-
             }
             // create garbage:
             final byte[] b =  new byte[bytz];
@@ -213,7 +190,6 @@ public class LocaleBeanificationTestCase extends TestCase {
             }
         }
 
-
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         final WeakReference<GetBeanUtilsBeanThread> threadWeakReference = new WeakReference<>(thread);
         thread.setContextClassLoader(loader);
@@ -247,7 +223,6 @@ public class LocaleBeanificationTestCase extends TestCase {
                 beanUtilsReference.get() == null &&
                 convertUtilsReference.get() == null) {
                 break;
-
             }
             // create garbage:
             final byte[] b =  new byte[bytz];
@@ -299,7 +274,6 @@ public class LocaleBeanificationTestCase extends TestCase {
                     "Different LocaleConvertUtilsBean instances per context classloader",
                     LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());
     }
-
 
     /**
      * Tests whether difference instances are loaded by different
@@ -415,7 +389,6 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertNull("Exception thrown by test thread:" + signal.getException(), signal.getException());
         assertEquals("Signal not set by test thread", 3, signal.getSignal());
         assertEquals("Wrong property value(3)", 9, bean.getInt());
-
     }
 
     /** Tests whether different threads can set beanutils instances correctly */
@@ -483,8 +456,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             try {
                 final Long data = (Long) ConvertUtils.convert("777", Long.class);
                 assertEquals("Standard format long converted ok", 777, data.longValue());
-            }
-            catch(final ConversionException ex) {
+            } catch(final ConversionException ex) {
                 fail("Unable to convert non-locale-aware number 777");
             }
 
@@ -495,8 +467,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 // zero on error.
                 final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
                 assertEquals("Standard format behaved as expected", 0, data.longValue());
-            }
-            catch(final ConversionException ex) {
+            } catch(final ConversionException ex) {
                 fail("Unexpected exception from standard Long converter.");
             }
 
@@ -505,7 +476,6 @@ public class LocaleBeanificationTestCase extends TestCase {
             // large numbers can be split up into groups of three digits
             // using a dot character (and comma is the decimal-point indicator).
             try {
-
                 final Locale germanLocale = Locale.GERMAN;
                 final LongLocaleConverter longLocaleConverter = new LongLocaleConverter(germanLocale);
                 ConvertUtils.register(longLocaleConverter, Long.class);
@@ -523,6 +493,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     // ---- Auxillary classes
 
     class TestClassLoader extends ClassLoader {
+
         @Override
         public String toString() {
             return "TestClassLoader";
@@ -530,6 +501,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
     class Signal {
+
         private Exception e;
         private int signal = 0;
         private LocaleBeanUtilsBean bean;
@@ -577,4 +549,3 @@ public class LocaleBeanificationTestCase extends TestCase {
         }
     }
 }
-

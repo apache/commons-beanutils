@@ -25,30 +25,22 @@ import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
 
 /**
  * Test Case for the FloatLocaleConverter class.
- *
  */
-
 public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
-
-
 
     public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         super.setUp();
 
         defaultValue  = new Float("9.99");
         expectedValue = new Float(expectedDecimalValue);
-
     }
 
     /**
@@ -59,13 +51,10 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
-
         // ------------- Construct with localized pattern ------------
         converter = new FloatLocaleConverter(defaultValue,
                                                   localizedLocale,
@@ -113,7 +102,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, "(C)", defaultValue);
         convertNull(converter, "(C)", defaultValue);
-
     }
 
     /**
@@ -123,7 +111,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      *
      */
     public void testConstructor_2() {
-
         // ------------- Construct using default locale ------------
         converter = new FloatLocaleConverter();
 
@@ -132,7 +119,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
@@ -142,7 +128,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      *
      */
     public void testConstructor_3() {
-
         // ------------- Construct using localized pattern (default locale) --------
         converter = new FloatLocaleConverter(true);
 
@@ -151,14 +136,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale) constructor
      */
     public void testConstructor_4() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale);
 
@@ -167,14 +150,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, locPattern) constructor
      */
     public void testConstructor_5() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, true);
 
@@ -183,14 +164,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern) constructor
      */
     public void testConstructor_6() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, defaultDecimalPattern);
 
@@ -199,14 +178,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(Locale, pattern, locPattern) constructor
      */
     public void testConstructor_7() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, localizedDecimalPattern, true);
 
@@ -215,14 +192,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, localizedDecimalValue, localizedDecimalPattern, expectedValue);
         convertInvalid(converter, null);
         convertNull(converter, null);
-
     }
 
     /**
      * Test Converter(defaultValue) constructor
      */
     public void testConstructor_8() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(defaultValue);
 
@@ -231,14 +206,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
      * Test Converter(defaultValue, locPattern) constructor
      */
     public void testConstructor_9() {
-
         // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(defaultValue, true);
 
@@ -247,14 +220,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
-
     }
 
     /**
      * Test Float limits
      */
     public void testFloatLimits() {
-
         converter = new FloatLocaleConverter(defaultLocale, defaultDecimalPattern);
         final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
 
@@ -302,8 +273,5 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         } catch (final ConversionException e) {
             fail("Zero threw ConversionException: " + e);
         }
-
     }
-
 }
-

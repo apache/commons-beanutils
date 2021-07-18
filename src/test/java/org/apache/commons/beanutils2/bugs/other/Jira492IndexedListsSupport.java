@@ -57,5 +57,4 @@ public class Jira492IndexedListsSupport {
         }
         throw new IllegalStateException("Could not find PropertyDescriptor for 'file'");
     }
-
 }

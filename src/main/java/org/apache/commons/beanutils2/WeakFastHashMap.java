@@ -78,7 +78,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Constructors
 
-
     /**
      * Constructs an empty map.
      */
@@ -115,7 +114,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Property access
-
 
     /**
      *  Returns true if this map is operating in fast mode.
@@ -314,7 +312,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Basic object methods
 
-
     /**
      * Compare the specified object with this list for equality.  This
      * implementation uses exactly the code that is used to define the
@@ -354,7 +351,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 }
             }
             return true;
-
         }
         synchronized (map) {
             if (mo.size() != map.size()) {
@@ -424,7 +420,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Map views
 
-
     /**
      * Gets a collection view of the mappings contained in this map.  Each
      * element in the returned collection is a {@code Map.Entry}.
@@ -455,7 +450,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
 
-
     protected Map<K, V> createMap() {
         return new WeakHashMap<>();
     }
@@ -477,7 +471,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map view inner classes
-
 
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().
@@ -712,7 +705,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         protected K iteratorNext(final Map.Entry<K, V> entry) {
             return entry.getKey();
         }
-
     }
 
     /**
@@ -745,7 +737,5 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
         protected Map.Entry<K, V> iteratorNext(final Map.Entry<K, V> entry) {
             return entry;
         }
-
     }
-
 }

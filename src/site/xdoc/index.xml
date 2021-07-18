@@ -73,15 +73,15 @@ There is now only one jar for the BeanUtils library.
 </p>
 <p>
 Version 2.0.0 updates the dependencies for Apache Commons Collection from version 3 to 4.
-Apache Commons Collection 4 changes packages from <code>org.apache.commons.collections</code> 
+Apache Commons Collection 4 changes packages from <code>org.apache.commons.collections</code>
 to <code>org.apache.commons.collections4</code>.
 Since some Commons BeanUtils APIs surface Commons Collection types, Commons BeanUtils 2 changes packages from <code>org.apache.commons.beanutils</code>
-to <code>org.apache.commons.beanutils2</code>.  
+to <code>org.apache.commons.beanutils2</code>.
 </p>
 </subsection>
 <subsection name='Bean Collections'>
 <p>
-Bean collections is a library combining BeanUtils with 
+Bean collections is a library combining BeanUtils with
 <a href='https://commons.apache.org/collections'>Commons Collections</a>
 to provide services for collections of beans. One class (<code>BeanComparator</code>)
 was previously released, the rest are new. This new distribution strategy should allow
@@ -89,7 +89,7 @@ this sub-component to evolve naturally without the concerns about size and scope
 that might otherwise happen.
 </p>
 <p>
-Bean Collections has an additional dependency on 
+Bean Collections has an additional dependency on
 <a href='https://commons.apache.org/collections'>Commons Collections</a>.
 </p>
 </subsection>
@@ -240,27 +240,27 @@ This important service release is intended to help downstream applications solve
 dependency issues. The dependency on commons collections (which has become problematic
 now that there are two incompatible series of commons collections releases)
 has been factored into a separate optional sub-component plus a small number of
-stable and mature <code>org.apache.commons.collections</code> packaged classes 
-(which are distributed with the BeanUtils core). This arrangement means that the 
-BeanUtils core sub-component (which is the primary dependency for most downsteam 
-applications) can now be safely included on the same classpath as commons collections 
+stable and mature <code>org.apache.commons.collections</code> packaged classes
+(which are distributed with the BeanUtils core). This arrangement means that the
+BeanUtils core sub-component (which is the primary dependency for most downsteam
+applications) can now be safely included on the same classpath as commons collections
 2.x, 3.x or indeed neither.
 </p>
 <p>
 The distribution now contains alternative jar sets. The all-in-one
 jar contains all classes. The modular jar set consists of a core jar dependent only
-on commons logging and an optional bean collections jar (containing classes that 
-provide easy and efficient ways to manage collections of beans) which depends on 
+on commons logging and an optional bean collections jar (containing classes that
+provide easy and efficient ways to manage collections of beans) which depends on
 commons collections 3.
 </p>
 </subsection>
     <subsection name='Older Releases (Not Mirrored)'>
     <p>
     <ul>
-    <li>Version 1.6.1 - 18 Feb 2003 
+    <li>Version 1.6.1 - 18 Feb 2003
         <a href="https://archive.apache.org/dist/commons/beanutils/binaries/">binary</a> and
         <a href="https://archive.apache.org/dist/commons/beanutils/source/">source</a></li>
-    <li>Version 1.6 - 21 Jan 2003 
+    <li>Version 1.6 - 21 Jan 2003
         <a href="https://archive.apache.org/dist/commons/beanutils/binaries/">binary</a> and
         <a href="https://archive.apache.org/dist/commons/beanutils/source/">source</a></li>
     <li><a href="https://archive.apache.org/dist/commons/beanutils/old/v1.5/">Version 1.5 </a> - 23 Oct 2002</li>
@@ -275,7 +275,6 @@ commons collections 3.
     </subsection>
 </section>
 
-
 <section name="Support">
     <p>
     The <a href="mail-lists.html">commons mailing lists</a> act as the main support forum.
@@ -288,8 +287,7 @@ commons collections 3.
     <p>
     Issues may be reported via <a href="issue-tracking.html">ASF JIRA</a>.
     </p>
-    </section>
-
+</section>
 
 </body>
 </document>

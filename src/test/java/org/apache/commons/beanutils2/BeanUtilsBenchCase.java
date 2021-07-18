@@ -27,12 +27,8 @@ import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for BeanUtils.
- *
  */
-
 public class BeanUtilsBenchCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -40,12 +36,8 @@ public class BeanUtilsBenchCase extends TestCase {
      * @param name Name of the test case
      */
     public BeanUtilsBenchCase(final String name) {
-
         super(name);
-
     }
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -65,8 +57,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     // BeanUtilsBean instance to be used
     private BeanUtilsBean bu = null;
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -129,16 +119,13 @@ public class BeanUtilsBenchCase extends TestCase {
 
         // Set up BeanUtilsBean instance we will use
         bu = BeanUtilsBean.getInstance();
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(BeanUtilsBenchCase.class);
-
     }
 
     /**
@@ -146,7 +133,6 @@ public class BeanUtilsBenchCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
         inBean = null;
         inDyna = null;
@@ -154,14 +140,10 @@ public class BeanUtilsBenchCase extends TestCase {
         outBean = null;
         outDyna = null;
         bu = null;
-
     }
-
-
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
-
         long startMillis;
         long stopMillis;
 
@@ -188,7 +170,6 @@ public class BeanUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,bean), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time copyProperties() from a DynaBean
@@ -220,7 +201,6 @@ public class BeanUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,dyna), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time copyProperties() from a Map of Objects
@@ -252,7 +232,6 @@ public class BeanUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna, map), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time copyProperties() from a Map of Strings
@@ -284,7 +263,6 @@ public class BeanUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,strs), count=" + counter +
                            ", time=" + (stopMillis - startMillis));
-
     }
 
     // Time populate() from a Map of Objects
@@ -316,7 +294,6 @@ public class BeanUtilsBenchCase extends TestCase {
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(dyna, map), count=" + counter +
                            ", time=" + (stop - startMillis));
-
     }
 
     // Time populate() from a Map of Strings
@@ -349,9 +326,5 @@ public class BeanUtilsBenchCase extends TestCase {
         stop = System.currentTimeMillis();
         System.err.println("BU.populate(dyna,strs), count=" + counter +
                            ", time=" + (stop - startMillis));
-
     }
-
-
-
 }

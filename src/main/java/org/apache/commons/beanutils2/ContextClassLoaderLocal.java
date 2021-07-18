@@ -102,6 +102,7 @@ import java.util.WeakHashMap;
  * @see java.lang.Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {
+
     private final Map<ClassLoader, T> valueByClassLoader = new WeakHashMap<>();
     private boolean globalValueInitialized;
     private T globalValue;
@@ -143,10 +144,8 @@ public class ContextClassLoaderLocal<T> {
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
-
                 T value = valueByClassLoader.get(contextClassLoader);
                 if (value == null
                 && !valueByClassLoader.containsKey(contextClassLoader)) {
@@ -154,9 +153,7 @@ public class ContextClassLoaderLocal<T> {
                     valueByClassLoader.put(contextClassLoader, value);
                 }
                 return value;
-
             }
-
         } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
 
         // if none or exception, return the globalValue
@@ -180,13 +177,11 @@ public class ContextClassLoaderLocal<T> {
         // make sure that the map is given a change to purge itself
         valueByClassLoader.isEmpty();
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             if (contextClassLoader != null) {
                 valueByClassLoader.put(contextClassLoader, value);
                 return;
             }
-
         } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
 
         // if in doubt, set the global value
@@ -199,10 +194,8 @@ public class ContextClassLoaderLocal<T> {
      */
     public synchronized void unset() {
         try {
-
             final ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             unset(contextClassLoader);
-
         } catch (final SecurityException e) { /* SWALLOW - should we log this? */ }
     }
 

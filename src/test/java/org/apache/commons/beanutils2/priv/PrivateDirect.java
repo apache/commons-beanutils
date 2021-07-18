@@ -19,12 +19,8 @@ package org.apache.commons.beanutils2.priv;
 
 /**
  * Interface that is directly implemented by PrivateBean.
- *
  */
-
 public interface PrivateDirect extends PrivateIndirect {
-
-
 
     /**
      * A property accessible via a directly implemented interface.
@@ -35,5 +31,4 @@ public interface PrivateDirect extends PrivateIndirect {
      * A method accessible via a directly implemented interface.
      */
     String methodBar(String in);
-
 }

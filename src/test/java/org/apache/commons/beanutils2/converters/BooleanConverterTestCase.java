@@ -84,7 +84,6 @@ public class BooleanConverterTestCase extends TestCase {
 
     protected void testConversionValues(final AbstractConverter converter,
             final String[] trueValues, final String[] falseValues) {
-
         for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
         }
@@ -123,5 +122,4 @@ public class BooleanConverterTestCase extends TestCase {
         final AbstractConverter converter = new BooleanConverter();
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }
-
 }

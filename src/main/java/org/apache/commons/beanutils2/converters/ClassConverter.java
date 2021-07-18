@@ -104,5 +104,4 @@ public final class ClassConverter extends AbstractConverter {
 
         throw conversionException(type, value);
     }
-
 }

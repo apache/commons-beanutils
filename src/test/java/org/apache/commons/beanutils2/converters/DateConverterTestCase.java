@@ -23,7 +23,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the DateConverter class.
- *
  */
 public class DateConverterTestCase extends DateConverterTestBase {
 
@@ -34,8 +33,6 @@ public class DateConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(DateConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -62,8 +59,6 @@ public class DateConverterTestCase extends DateConverterTestBase {
     protected DateTimeConverter makeConverter() {
         return new DateConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.

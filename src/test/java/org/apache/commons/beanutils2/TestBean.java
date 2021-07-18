@@ -25,12 +25,8 @@ import java.util.Map;
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
- *
  */
-
 public class TestBean implements Serializable {
-
-
 
     public TestBean() {
         listIndexed.add("String 0");
@@ -96,8 +92,6 @@ public class TestBean implements Serializable {
     public TestBean(final String[][] string2dArray) {
         this.string2dArray = string2dArray;
     }
-
-
 
     /**
      * A boolean property.
@@ -418,8 +412,7 @@ public class TestBean implements Serializable {
     private MappedTestBean mappedNested = null;
 
     public MappedTestBean getMappedNested() {
-        if (mappedNested == null)
-        {
+        if (mappedNested == null) {
             mappedNested = new MappedTestBean();
         }
         return mappedNested;
@@ -519,8 +512,6 @@ public class TestBean implements Serializable {
         this.writeOnlyProperty = writeOnlyProperty;
     }
 
-
-
     /**
      * <p>An invalid property that has two boolean getters (getInvalidBoolean
      * and isInvalidBoolean) plus a String setter (setInvalidBoolean).  By the
@@ -547,8 +538,6 @@ public class TestBean implements Serializable {
         }
     }
 
-
-
     /**
      * A static variable that is accessed and updated via static methods
      * for MethodUtils testing.
@@ -559,18 +548,14 @@ public class TestBean implements Serializable {
      * Gets the current value of the counter.
      */
     public static int currentCounter() {
-
         return counter;
-
     }
 
     /**
      * Increment the current value of the counter by 1.
      */
     public static void incrementCounter() {
-
         incrementCounter(1);
-
     }
 
     /**
@@ -579,9 +564,7 @@ public class TestBean implements Serializable {
      * @param amount Amount to be added to the current counter
      */
     public static void incrementCounter(final int amount) {
-
         counter += amount;
-
     }
 
     /**
@@ -593,5 +576,4 @@ public class TestBean implements Serializable {
     public static void incrementCounter(final Number amount) {
         counter += 2 * amount.intValue();
     }
-
 }

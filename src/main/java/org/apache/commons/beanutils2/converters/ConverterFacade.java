@@ -72,5 +72,4 @@ public final class ConverterFacade implements Converter {
     public String toString() {
         return "ConverterFacade[" + converter.toString() + "]";
     }
-
 }

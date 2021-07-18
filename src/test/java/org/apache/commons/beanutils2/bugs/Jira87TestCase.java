@@ -94,7 +94,6 @@ public class Jira87TestCase extends TestCase {
      * Interface definition with a mapped property
      */
     public void testJira87() {
-
         final Jira87BeanFactory.PublicMappedInterface bean = Jira87BeanFactory.createMappedPropertyBean();
         try {
             // N.B. The test impl. returns the key value

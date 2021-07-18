@@ -42,7 +42,6 @@ import java.util.Map;
  *       so that its properties cannot be modified. If the {@code MutableDynaClass} is
  *       restricted then calling any of the {@code set()} methods for a property which
  *       doesn't exist will result in a {@code IllegalArgumentException} being thrown.</p>
- *
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
@@ -66,8 +65,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      * <p>Default is {@code false}.
      */
     protected boolean returnNull;
-
-
 
     /**
      * Default Constructor.
@@ -139,8 +136,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this(dynaClass.getName(), dynaClass.getDynaProperties());
     }
 
-
-
     /**
      * Sets the Map backing this {@code DynaBean}
      *
@@ -160,8 +155,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         return values;
     }
 
-
-
     /**
      * Sets the value of a simple property with the specified name.
      *
@@ -170,17 +163,13 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public void set(final String name, final Object value) {
-
         if (isRestricted() && !values.containsKey(name)) {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "' (DynaClass is restricted)");
         }
 
         values.put(name, value);
-
     }
-
-
 
     /**
      * Gets the name of this DynaClass (analogous to the
@@ -218,7 +207,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -235,7 +223,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             return new DynaProperty(name);
         }
         return new DynaProperty(name, value.getClass());
-
     }
 
     /**
@@ -250,7 +237,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public DynaProperty[] getDynaProperties() {
-
         int i = 0;
         final DynaProperty[] properties = new DynaProperty[values.size()];
         for (final Map.Entry<String, Object> e : values.entrySet()) {
@@ -261,7 +247,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         }
 
         return properties;
-
     }
 
     /**
@@ -293,8 +278,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         }
         return lazyMap;
     }
-
-
 
     /**
      * <p>Is this DynaClass currently restricted.</p>
@@ -348,7 +331,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public void add(final String name, final Class<?> type) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -363,7 +345,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         if (value == null) {
             values.put(name, type == null ? null : createProperty(name, type));
         }
-
     }
 
     /**
@@ -418,7 +399,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public void remove(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -429,8 +409,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
         values.remove(name);
     }
-
-
 
     /**
      * Should this DynaClass return a {@code null} from
@@ -458,8 +436,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this.returnNull = returnNull;
     }
 
-
-
    /**
      * <p>Indicate whether a property actually exists.</p>
      *
@@ -475,13 +451,10 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     protected boolean isDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
         return values.containsKey(name);
-
     }
-
 }

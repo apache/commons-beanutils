@@ -29,14 +29,8 @@ import junit.framework.TestSuite;
  * <p>Test Case for the {@code WrapDynaBean} implementation class.
  * These tests were based on the ones in {@code PropertyUtilsTestCase}
  * because the two classes provide similar levels of functionality.</p>
- *
  */
-
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -44,30 +38,22 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * @param name Name of the test case
      */
     public WrapDynaBeanTestCase(final String name) {
-
         super(name);
-
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         bean = new WrapDynaBean(new TestBean());
-
     }
 
     /**
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(WrapDynaBeanTestCase.class);
-
     }
 
     /**
@@ -75,20 +61,14 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     public void tearDown() {
-
         bean = null;
-
     }
-
-
 
     /**
      * The {@code set()} method.
      */
     public void testSimpleProperties() {
-
         checkSimplePropertyAccess();
-
     }
 
     /**
@@ -134,7 +114,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      * The {@code set()} method.
      */
     public void testIndexedProperties() {
-
         // Invalid getter
         try {
             bean.get("invalidProperty", 0);
@@ -167,7 +146,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         } catch (final IllegalArgumentException t) {
             fail("Get threw exception: " + t);
         }
-
     }
 
     /**
@@ -176,7 +154,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     public void testMappedContains() {
-
         try {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
@@ -196,7 +173,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /**
@@ -205,7 +181,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     public void testMappedRemove() {
-
         try {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
@@ -231,7 +206,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
-
     }
 
     /** Tests getInstance method */
@@ -259,7 +233,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
      */
     @Override
     public void testSerialization() {
-
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
         final Integer newValue = new Integer(789);
@@ -270,14 +243,12 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         // Serialize/Deserialize & test value
         final WrapDynaBean bean = (WrapDynaBean)serializeDeserialize(origBean, "First Test");
         assertEquals("bean value", newValue, bean.get("intProperty"));
-
     }
 
     /**
      * Do serialization and deserialization.
      */
     private Object serializeDeserialize(final Object target, final String text) {
-
         // Serialize the test object
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
@@ -301,7 +272,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
             fail(text + ": Exception during deserialization: " + e);
         }
         return result;
-
     }
 
     /**

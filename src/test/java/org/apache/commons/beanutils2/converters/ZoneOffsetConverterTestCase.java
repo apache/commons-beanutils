@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ZoneOffsetConverter class.
- *
  */
 public class ZoneOffsetConverterTestCase extends TestCase {
 
@@ -35,11 +34,7 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         return new TestSuite(ZoneOffsetConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public ZoneOffsetConverterTestCase(final String name) {
         super(name);
@@ -53,8 +48,6 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         return new ZoneOffsetConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -64,8 +57,6 @@ public class ZoneOffsetConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -113,4 +104,3 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         }
     }
 }
-
