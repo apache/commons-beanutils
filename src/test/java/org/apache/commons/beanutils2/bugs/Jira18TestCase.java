@@ -16,14 +16,13 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira18BeanFactory;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for Jira issue# BEANUTILS-18.
@@ -32,251 +31,120 @@ import junit.framework.TestSuite;
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-18">https://issues.apache.org/jira/browse/BEANUTILS-18</a>
  */
-public class Jira18TestCase extends TestCase {
+public class Jira18TestCase {
 
-    private final Log log = LogFactory.getLog(Jira18TestCase.class);
-    private Object bean;
+    private static Object bean;
 
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira18TestCase(final String name) {
-        super(name);
-    }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira18TestCase.class);
-    }
-
-    /**
-     * Sets up.
-     *
-     * @throws java.lang.Exception
-     */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeAll
+    public static void beforeAll() {
         bean = Jira18BeanFactory.createBean();
     }
 
     /**
-     * Tear Down.
-     *
-     * @throws java.lang.Exception
-     */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    /**
      * Test {@link PropertyUtils#isReadable(Object, String)}
      * for simple properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isReadable(bean, "simple");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"simple\") returned true", result);
+        assertFalse(PropertyUtils.isReadable(bean, "simple"));
     }
 
     /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for simple properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isWriteable(bean, "simple");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isWriteable(bean, \"simple\") returned true", result);
+        assertFalse(PropertyUtils.isWriteable(bean, "simple"));
     }
 
     /**
      * Test {@link PropertyUtils#isReadable(Object, String)}
      * for indexed properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Indexed() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isReadable(bean, "indexed");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"indexed\") returned true", result);
+        assertFalse(PropertyUtils.isReadable(bean, "indexed"));
     }
 
     /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for indexed properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Indexed() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isWriteable(bean, "indexed");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isWriteable(bean, \"indexed\") returned true", result);
+        assertFalse(PropertyUtils.isWriteable(bean, "indexed"));
     }
 
     /**
      * Test {@link PropertyUtils#isReadable(Object, String)}
      * for Mapped properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Mapped() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isReadable(bean, "mapped");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isReadable(bean, \"mapped\") returned true", result);
+        assertFalse(PropertyUtils.isReadable(bean, "mapped"));
     }
 
     /**
      * Test {@link PropertyUtils#isWriteable(Object, String)}
      * for Mapped properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Mapped() {
-        boolean result = false;
-        try {
-            result = PropertyUtils.isWriteable(bean, "mapped");
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertFalse("PropertyUtils.isWriteable(bean, \"mapped\") returned true", result);
+        assertFalse(PropertyUtils.isWriteable(bean, "mapped"));
     }
 
     /**
      * Test {@link PropertyUtils#getProperty(Object, String)}
      * for simple properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty() {
-        boolean threwNoSuchMethodException = false;
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "simple");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.getProperty(bean, "simple"));
     }
 
     /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      * for simple properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty() {
-        boolean threwNoSuchMethodException = false;
-        try {
-            PropertyUtils.setProperty(bean, "simple", "BAR");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "simple", "BAR"));
     }
 
     /**
      * Test {@link PropertyUtils#getProperty(Object, String)}
      * for indexed properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty_Indexed() {
-        boolean threwNoSuchMethodException = false;
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "indexed[0]");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.getProperty(bean, "indexed[0]"));
     }
 
     /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      * for indexed properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Indexed() {
-        boolean threwNoSuchMethodException = false;
-        try {
-            PropertyUtils.setProperty(bean, "indexed[0]", "BAR");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "indexed[0]", "BAR"));
     }
 
     /**
      * Test {@link PropertyUtils#getProperty(Object, String)}
      * for mapped properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty_Mapped() {
-        boolean threwNoSuchMethodException = false;
-        Object result = null;
-        try {
-            result = PropertyUtils.getProperty(bean, "mapped(foo-key)");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException but returned '" + result + "'", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.getProperty(bean, "mapped(foo-key)"));
     }
 
     /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)}
      * for mapped properties.
      */
+    @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Mapped() {
-        boolean threwNoSuchMethodException = false;
-        try {
-            PropertyUtils.setProperty(bean, "mapped(foo-key)", "BAR");
-        } catch (final NoSuchMethodException ex) {
-            threwNoSuchMethodException = true; // expected result
-        } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
-            fail("Threw exception: " + t);
-        }
-        assertTrue("Expected NoSuchMethodException", threwNoSuchMethodException);
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "mapped(foo-key)", "BAR"));
     }
 }

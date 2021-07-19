@@ -16,8 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
@@ -570,16 +570,18 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
     public void testParentMethod() throws Exception {
-        final OutputStream os = new PrintStream(System.out);
-        final PrintStream ps = new PrintStream(System.out);
+        final String a = "A";
 
-        A a = new A();
-        MethodUtils.invokeMethod(a, "foo", os);
-        assertTrue("Method Invoked(1)", a.called);
-
-        a = new A();
-        MethodUtils.invokeMethod(a, "foo", ps);
-        assertTrue("Method Invoked(2)", a.called);
+        assertAll(
+            () -> {
+                final String actual1 = (String) MethodUtils.invokeMethod(a, "toLowerCase", null);
+                assertEquals("a", actual1);
+            },
+            () -> {
+                final char actual2 = (char) MethodUtils.invokeMethod(a, "charAt", 0);
+                assertEquals('A', actual2);
+            }
+        );
     }
 
     /**
