@@ -24,6 +24,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import junit.framework.TestCase;
+import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
+import static org.mockito.Mockito.*;
+import org.apache.commons.beanutils2.IntrospectionContext;
 
 /**
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
@@ -49,14 +53,35 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
         final String[] properties = { "test", "other", "oneMore" };
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(
                 Arrays.asList(properties));
-        final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();
+        // Create variables for tracking behaviors of mock object
+		Set<String> contextRemovedProperties = new HashSet<>();
+		// Construct mock object
+		final IntrospectionContext context = mock(IntrospectionContext.class);
+		// Method Stubs
+		doThrow(new UnsupportedOperationException("Unexpected method call!")).when(context)
+				.addPropertyDescriptors(any(PropertyDescriptor[].class));
+		doThrow(new UnsupportedOperationException("Unexpected method call!")).when(context)
+				.addPropertyDescriptor(any(PropertyDescriptor.class));
+		doAnswer((stubInvo) -> {
+			String name = stubInvo.getArgument(0);
+			contextRemovedProperties.add(name);
+			return null;
+		}).when(context).removePropertyDescriptor(any(String.class));
+		when(context.getTargetClass()).thenAnswer((stubInvo) -> {
+			throw new UnsupportedOperationException("Unexpected method call!");
+		});
+		when(context.hasProperty(any(String.class)))
+				.thenThrow(new UnsupportedOperationException("Unexpected method call!"));
+		when(context.getPropertyDescriptor(any(String.class)))
+				.thenThrow(new UnsupportedOperationException("Unexpected method call!"));
+		when(context.propertyNames()).thenAnswer((stubInvo) -> {
+			throw new UnsupportedOperationException("Unexpected method call!");
+		});
 
         introspector.introspect(context);
-        assertEquals("Wrong number of removed properties", properties.length, context
-                .getRemovedProperties().size());
+        assertEquals("Wrong number of removed properties", properties.length, contextRemovedProperties.size());
         for (final String property : properties) {
-            assertTrue("Property not removed: " + property, context
-                    .getRemovedProperties().contains(property));
+            assertTrue("Property not removed: " + property, contextRemovedProperties.contains(property));
         }
     }
 
@@ -70,13 +95,35 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(
                 properties);
         properties.add("prop2");
-        final IntrospectionContextTestImpl context = new IntrospectionContextTestImpl();
+        // Create variables for tracking behaviors of mock object
+		Set<String> contextRemovedProperties = new HashSet<>();
+		// Construct mock object
+		final IntrospectionContext context = mock(IntrospectionContext.class);
+		// Method Stubs
+		doThrow(new UnsupportedOperationException("Unexpected method call!")).when(context)
+				.addPropertyDescriptors(any(PropertyDescriptor[].class));
+		doThrow(new UnsupportedOperationException("Unexpected method call!")).when(context)
+				.addPropertyDescriptor(any(PropertyDescriptor.class));
+		doAnswer((stubInvo) -> {
+			String name = stubInvo.getArgument(0);
+			contextRemovedProperties.add(name);
+			return null;
+		}).when(context).removePropertyDescriptor(any(String.class));
+		when(context.getTargetClass()).thenAnswer((stubInvo) -> {
+			throw new UnsupportedOperationException("Unexpected method call!");
+		});
+		when(context.hasProperty(any(String.class)))
+				.thenThrow(new UnsupportedOperationException("Unexpected method call!"));
+		when(context.getPropertyDescriptor(any(String.class)))
+				.thenThrow(new UnsupportedOperationException("Unexpected method call!"));
+		when(context.propertyNames()).thenAnswer((stubInvo) -> {
+			throw new UnsupportedOperationException("Unexpected method call!");
+		});
 
         introspector.introspect(context);
-        assertEquals("Wrong number of removed properties", 1, context
-                .getRemovedProperties().size());
+        assertEquals("Wrong number of removed properties", 1, contextRemovedProperties.size());
         assertTrue("Wrong removed property",
-                context.getRemovedProperties().contains("prop1"));
+                contextRemovedProperties.contains("prop1"));
     }
 
     /**
@@ -91,59 +138,6 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
             fail("Could modify properties");
         } catch (final UnsupportedOperationException uoex) {
             // ok
-        }
-    }
-
-    /**
-     * A test implementation of IntrospectionContext which collects the properties which
-     * have been removed.
-     */
-    private static class IntrospectionContextTestImpl implements IntrospectionContext {
-        /** Stores the names of properties which have been removed. */
-        private final Set<String> removedProperties = new HashSet<>();
-
-        /**
-         * Returns the names of properties which have been removed.
-         *
-         * @return the set with removed properties
-         */
-        public Set<String> getRemovedProperties() {
-            return removedProperties;
-        }
-
-        @Override
-        public Class<?> getTargetClass() {
-            throw new UnsupportedOperationException("Unexpected method call!");
-        }
-
-        @Override
-        public void addPropertyDescriptor(final PropertyDescriptor desc) {
-            throw new UnsupportedOperationException("Unexpected method call!");
-        }
-
-        @Override
-        public void addPropertyDescriptors(final PropertyDescriptor[] descriptors) {
-            throw new UnsupportedOperationException("Unexpected method call!");
-        }
-
-        @Override
-        public boolean hasProperty(final String name) {
-            throw new UnsupportedOperationException("Unexpected method call!");
-        }
-
-        @Override
-        public PropertyDescriptor getPropertyDescriptor(final String name) {
-            throw new UnsupportedOperationException("Unexpected method call!");
-        }
-
-        @Override
-        public void removePropertyDescriptor(final String name) {
-            removedProperties.add(name);
-        }
-
-        @Override
-        public Set<String> propertyNames() {
-            throw new UnsupportedOperationException("Unexpected method call!");
         }
     }
 }
