@@ -754,7 +754,7 @@ public class BeanUtilsBean {
      * the specified name/value pairs.  This method uses Java reflection APIs
      * to identify corresponding "property setter" method names, and deals
      * with setter arguments of type {@code String</code>, <code>boolean},
-     * {@code int</code>, <code>long</code>, <code>float}, and
+     * {@code int}, {@code long}, {@code float}, and
      * {@code double}.  In addition, array setters for these types (or the
      * corresponding primitive types) can also be identified.</p>
      *

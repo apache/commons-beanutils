@@ -724,7 +724,7 @@
  *    In fact it actually implements the {@code DynaClass</code> interface itself (and <code>MutableDynaClass})
  *    and derives all the <i>DynaClass</i> information from the actual contents of the {@code Map}. A
  *    {@code LazyDynaMap</code> can be created around an existing <code>Map} or can instantiate its own
- *    {@code Map</code>. After any <code>DynaBean</code> processing has finished the <code>Map} can be retrieved
+ *    {@code Map</code>. After any {@code DynaBean} processing has finished the <code>Map} can be retrieved
  *    and the DynaBean <i>facade</i> discarded.</p>
  *
  * <p>If you need a new {@code Map} then to use....</p>
@@ -789,7 +789,7 @@
  *
  * <p><strong>NOTE:</strong> One feature of {@link org.apache.commons.beanutils2.MutableDynaClass} is that it
  *    has a <i>Restricted</i> property. When the DynaClass is <i>restricted</i> no properties can be added
- *    or removed from the {@code DynaClass</code>. Neither the <code>LazyDynaBean</code> or <code>LazyDynaMap}
+ *    or removed from the {@code DynaClass}. Neither the {@code LazyDynaBean} or {@code LazyDynaMap}
  *    will add properties automatically if the {@code DynaClass} is <i>restricted</i>.</p>
  *
  *

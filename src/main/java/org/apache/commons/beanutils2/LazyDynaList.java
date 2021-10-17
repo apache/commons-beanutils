@@ -138,8 +138,8 @@ import java.util.Map;
  * <p>A slight variation - set the element type using either
  *    the {@code setElementType(Class)} method or the
  *    {@code setElementDynaClass(DynaClass)} method - then populate
- *    with the normal {@code java.util.List} methods(i.e.
- *    {@code add()</code>, <code>addAll()</code> or <code>set()}).</p>
+ *    with the normal {@code java.util.List} methods (i.e.
+ *    {@code add()}, {@code addAll()} or {@code set()}).</p>
  *
  * <pre><code>
  *    // Create a new LazyDynaList (100 element capacity)
