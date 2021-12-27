@@ -37,6 +37,8 @@ import java.util.Set;
 class DefaultIntrospectionContext implements IntrospectionContext {
     /** The current class for introspection. */
     private final Class<?> currentClass;
+    /** The stop class for introspection. */
+    private final Class<?> stopClass;
 
     /** A map for storing the already added property descriptors. */
     private final Map<String, PropertyDescriptor> descriptors;
@@ -49,13 +51,31 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      * @param cls the current class
      */
     public DefaultIntrospectionContext(final Class<?> cls) {
+        this(cls, Object.class);
+    }
+
+    /**
+     *
+     * Creates a new instance of {@code DefaultIntrospectionContext} and sets
+     * the current class for introspection.
+     *
+     * @param cls the current class
+     * @param stopCls the stop class
+     */
+    public DefaultIntrospectionContext(final Class<?> cls, final Class<?> stopCls) {
         currentClass = cls;
+        stopClass = stopCls;
         descriptors = new HashMap<>();
     }
 
     @Override
     public Class<?> getTargetClass() {
         return currentClass;
+    }
+
+    @Override
+    public Class<?> getStopClass() {
+        return stopClass;
     }
 
     @Override

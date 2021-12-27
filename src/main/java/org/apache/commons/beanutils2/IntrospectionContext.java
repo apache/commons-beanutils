@@ -44,6 +44,16 @@ public interface IntrospectionContext {
     Class<?> getTargetClass();
 
     /**
+     * The baseclass at which to stop the analysis.
+     * Any methods/properties/events in the stopClass or in its baseclasses will be ignored in the analysis.
+     *
+     * @return the stop class
+     */
+    default Class<?> getStopClass() {
+        return Object.class;
+    }
+
+    /**
      * Adds the given property descriptor to this context. This method is called
      * by a {@code BeanIntrospector} during introspection for each detected
      * property. If this context already contains a descriptor for the affected

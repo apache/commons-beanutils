@@ -119,15 +119,17 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
+        this(new CopyOnWriteArrayList<>());
+        resetBeanIntrospectors();
+    }
+
+    public PropertyUtilsBean(List<BeanIntrospector> introspectors) {
         descriptorsCache = new WeakFastHashMap<>();
         descriptorsCache.setFast(true);
         mappedDescriptorsCache = new WeakFastHashMap<>();
         mappedDescriptorsCache.setFast(true);
-        introspectors = new CopyOnWriteArrayList<>();
-        resetBeanIntrospectors();
+        this.introspectors = new CopyOnWriteArrayList<>(introspectors);
     }
-
-
 
     /**
      * Gets the configured {@link Resolver} implementation used by BeanUtils.
@@ -176,7 +178,6 @@ public class PropertyUtilsBean {
     public final void resetBeanIntrospectors() {
         introspectors.clear();
         introspectors.add(DefaultBeanIntrospector.INSTANCE);
-        introspectors.add(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
     }
 
     /**
