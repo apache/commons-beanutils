@@ -970,6 +970,24 @@ public class PropertyUtilsBean {
     }
 
     /**
+     * <p>Retrieve the property descriptors for the specified class,
+     * introspecting and caching them the first time a particular bean class
+     * is encountered.</p>
+     *
+     * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
+     *
+     * @param beanClass Bean class for which property descriptors are requested
+     * @return the property descriptors
+     *
+     * @throws IllegalArgumentException if {@code beanClass} is null
+     */
+    public PropertyDescriptor[] getPropertyDescriptors(final Class<?> beanClass, final Class<?> stopClass) {
+
+        return getIntrospectionData(beanClass, stopClass).getDescriptors();
+
+    }
+
+    /**
      * <p>Retrieve the property descriptors for the specified bean,
      * introspecting and caching them the first time a particular bean class
      * is encountered.</p>
@@ -2108,14 +2126,31 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if the bean class is <b>null</b>
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
+        return getIntrospectionData(beanClass, Object.class);
+    }
+
+    /**
+     * Obtains the {@code BeanIntrospectionData} object describing the specified bean
+     * class. This object is looked up in the internal cache. If necessary, introspection
+     * is performed now on the affected bean class, and the results object is created.
+     *
+     * @param beanClass the bean class in question
+     * @return the {@code BeanIntrospectionData} object for this class
+     * @throws IllegalArgumentException if the bean class is <b>null</b>
+     */
+    private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass, final Class<?> stopClass) {
         if (beanClass == null) {
             throw new IllegalArgumentException("No bean class specified");
+        }
+
+        if (stopClass == null) {
+            throw new IllegalArgumentException("No stop class specified");
         }
 
         // Look up any cached information for this bean class
         BeanIntrospectionData data = descriptorsCache.get(beanClass);
         if (data == null) {
-            data = fetchIntrospectionData(beanClass);
+            data = fetchIntrospectionData(beanClass, stopClass);
             descriptorsCache.put(beanClass, data);
         }
 
@@ -2129,8 +2164,8 @@ public class PropertyUtilsBean {
      * @param beanClass the class to be inspected
      * @return a data object with the results of introspection
      */
-    private BeanIntrospectionData fetchIntrospectionData(final Class<?> beanClass) {
-        final DefaultIntrospectionContext ictx = new DefaultIntrospectionContext(beanClass);
+    private BeanIntrospectionData fetchIntrospectionData(final Class<?> beanClass, final Class<?> stopClass) {
+        final DefaultIntrospectionContext ictx = new DefaultIntrospectionContext(beanClass, stopClass);
 
         for (final BeanIntrospector bi : introspectors) {
             try {
