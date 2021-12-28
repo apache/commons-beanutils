@@ -117,6 +117,11 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
         }
 
         @Override
+        public Class<?> getStopClass() {
+            throw new UnsupportedOperationException("Unexpected method call!");
+        }
+
+        @Override
         public void addPropertyDescriptor(final PropertyDescriptor desc) {
             throw new UnsupportedOperationException("Unexpected method call!");
         }

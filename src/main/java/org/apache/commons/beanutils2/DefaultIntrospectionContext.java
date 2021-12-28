@@ -51,7 +51,7 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      * @param cls the current class
      */
     public DefaultIntrospectionContext(final Class<?> cls) {
-        this(cls, Object.class);
+        this(cls, null);
     }
 
     /**

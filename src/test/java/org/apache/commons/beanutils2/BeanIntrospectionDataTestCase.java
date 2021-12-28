@@ -111,7 +111,7 @@ public class BeanIntrospectionDataTestCase extends TestCase {
      */
     public void testGetWriteMethodUnknown() {
         final BeanIntrospectionData data = setUpData();
-        final PropertyDescriptor pd = data.getDescriptor("child");
+        final PropertyDescriptor pd = data.getDescriptor("class");
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
     }
 }

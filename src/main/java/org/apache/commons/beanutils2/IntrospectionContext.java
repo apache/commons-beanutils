@@ -49,9 +49,7 @@ public interface IntrospectionContext {
      *
      * @return the stop class
      */
-    default Class<?> getStopClass() {
-        return Object.class;
-    }
+    Class<?> getStopClass();
 
     /**
      * Adds the given property descriptor to this context. This method is called

@@ -178,6 +178,7 @@ public class PropertyUtilsBean {
     public final void resetBeanIntrospectors() {
         introspectors.clear();
         introspectors.add(DefaultBeanIntrospector.INSTANCE);
+        introspectors.add(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
     }
 
     /**
@@ -2126,7 +2127,7 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if the bean class is <b>null</b>
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
-        return getIntrospectionData(beanClass, Object.class);
+        return getIntrospectionData(beanClass, null);
     }
 
     /**
@@ -2141,10 +2142,6 @@ public class PropertyUtilsBean {
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass, final Class<?> stopClass) {
         if (beanClass == null) {
             throw new IllegalArgumentException("No bean class specified");
-        }
-
-        if (stopClass == null) {
-            throw new IllegalArgumentException("No stop class specified");
         }
 
         // Look up any cached information for this bean class
