@@ -295,9 +295,6 @@ public abstract class AbstractConverter implements Converter {
      * @return The default value for the specified type.
      */
     protected Object getDefault(final Class<?> type) {
-        if (type.equals(String.class)) {
-            return null;
-        }
         return defaultValue;
     }
 

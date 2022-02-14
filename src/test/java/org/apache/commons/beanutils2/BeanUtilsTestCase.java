@@ -27,6 +27,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.DateConverter;
+import org.apache.commons.beanutils2.converters.StringConverter;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -146,6 +147,12 @@ public class BeanUtilsTestCase extends TestCase {
         testCalendar.set(Calendar.MILLISECOND, 0);
         testUtilDate = testCalendar.getTime();
         testStringDate = "28.12.1992";
+
+        /**
+         * Replacing default StringConverter (having default value) with StringConverter without default value
+         * to allow testing of nullProperty.
+         */
+        ConvertUtils.register(new StringConverter(), String.class);
     }
 
     /**

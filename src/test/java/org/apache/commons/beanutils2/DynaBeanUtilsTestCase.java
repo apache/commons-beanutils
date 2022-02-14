@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils2.converters.StringConverter;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -96,6 +98,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
     public void setUp() throws Exception {
 
         ConvertUtils.deregister();
+        /**
+         * Replacing default StringConverter (having default value) with StringConverter without default value
+         * to allow testing of nullProperty.
+         */
+        ConvertUtils.register(new StringConverter(), String.class);
 
         // Instantiate a new DynaBean instance
         final DynaClass dynaClass = createDynaClass();
@@ -811,6 +818,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      * Test populate() method on scalar properties.
      */
     public void testPopulateScalar() {
+
 
         try {
 
