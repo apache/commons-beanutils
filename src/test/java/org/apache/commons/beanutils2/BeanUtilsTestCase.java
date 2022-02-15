@@ -148,7 +148,7 @@ public class BeanUtilsTestCase extends TestCase {
         testUtilDate = testCalendar.getTime();
         testStringDate = "28.12.1992";
 
-        /**
+        /*
          * Replacing default StringConverter (having default value) with StringConverter without default value
          * to allow testing of nullProperty.
          */

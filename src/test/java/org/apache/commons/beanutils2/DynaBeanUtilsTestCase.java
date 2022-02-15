@@ -98,7 +98,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     public void setUp() throws Exception {
 
         ConvertUtils.deregister();
-        /**
+        /*
          * Replacing default StringConverter (having default value) with StringConverter without default value
          * to allow testing of nullProperty.
          */
