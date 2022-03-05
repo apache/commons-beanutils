@@ -109,7 +109,7 @@
         Update commons-parent from 50 to 51.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update biz.aQute.bndlib from 5.1.0 to 5.3.0 #29, #45, #79.
+        Update biz.aQute.bndlib from 5.1.0 to 6.2.0 #29, #45, #79, #109.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update actions/checkout from v2.3.1 to v2.3.4 #33.
