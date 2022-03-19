@@ -74,6 +74,9 @@
       <action dev="ggregory" type="fix" due-to="Andrei Korzhevskii, Gary Gregory">
         Refactor logger usage #72.
       </action>
+      <action dev="ggregory" type="fix" due-to="SethFalco">
+        Start migration to JUnit 5 #93.
+      </action>
       <!--  UPDATES -->
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Apache Commons Collections from 4.3 to 4.4.
