@@ -202,7 +202,7 @@
       <email>ggregory at apache.org</email>
       <url>https://www.garygregory.com</url>
       <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>      
+      <organizationUrl>https://www.apache.org/</organizationUrl>
       <roles>
         <role>PMC Member</role>
       </roles>
@@ -345,9 +345,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.7.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -522,9 +528,9 @@
             </file>
           </newVersion>
           <parameter>
-            <!-- 
-              to support "mvn site" (no japicmp report) 
-              as well as "mvn package site" (with  japicmp report) 
+            <!--
+              to support "mvn site" (no japicmp report)
+              as well as "mvn package site" (with  japicmp report)
             -->
             <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
           </parameter>
