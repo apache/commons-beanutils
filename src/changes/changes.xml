@@ -88,7 +88,7 @@
         Update from Java 7 to 8.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update JUnit from 4.12 to 4.13.2, #78.
+        Update JUnit from 4 to 5 vintage, #78, #112.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
         Update Jacoco from 0.8.4 to 0.8.5.
