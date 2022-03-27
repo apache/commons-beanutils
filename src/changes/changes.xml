@@ -130,7 +130,7 @@
         Don't initialize variables to defaults #71.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump actions/cache from v2 to v2.1.7 #77, #89, #103.
+        Bump actions/cache from 2 to 3 #77, #89, #103, #111.
       </action>
     </release>
 
