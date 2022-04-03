@@ -70,7 +70,7 @@ public class Jira157TestCase extends TestCase {
     /**
      * Sets up.
      *
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @Override
     protected void setUp() throws Exception {
@@ -84,7 +84,7 @@ public class Jira157TestCase extends TestCase {
     /**
      * Tear Down.
      *
-     * @throws java.lang.Exception
+     * @throws Exception
      */
     @Override
     protected void tearDown() throws Exception {
