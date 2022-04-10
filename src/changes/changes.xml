@@ -118,7 +118,7 @@
         Update actions/checkout from 2.3.1 to 3 #33, #108.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
-        Update actions/setup-java from 1.4.0 to 2 #35.
+        Update actions/setup-java from 1.4.0 to 3 #35, #114.
       </action>
       <action dev="ggregory" type="update" due-to="melloware">
         Jacoco 0.8.6 for JDK15 support #55.
