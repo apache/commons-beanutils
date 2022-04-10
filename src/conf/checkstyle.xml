@@ -46,7 +46,7 @@ limitations under the License.
       <property name="scope" value="protected"/>
     </module>
     <module name="JavadocMethod">
-      <property name="scope" value="protected"/>
+      <property name="accessModifiers" value="protected"/>
     </module>
   </module>
   <!-- Line with trailing spaces -->
