@@ -78,6 +78,15 @@
         Start migration to JUnit 5 #93.
       </action>
       <!--  UPDATES -->
+      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
+        Bump actions/cache from 2 to 3.0.2 #77, #89, #103, #111.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Update actions/checkout from 2.3.1 to 3 #33, #108.
+      </action>
+      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
+        Update actions/setup-java from 1.4.0 to 3 #35, #114.
+      </action>
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Apache Commons Collections from 4.3 to 4.4.
       </action>
@@ -114,12 +123,6 @@
       <action dev="ggregory" type="update" due-to="Dependabot">
         Update biz.aQute.bndlib from 5.1.0 to 6.2.0 #29, #45, #79, #109.
       </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Update actions/checkout from 2.3.1 to 3 #33, #108.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
-        Update actions/setup-java from 1.4.0 to 3 #35, #114.
-      </action>
       <action dev="ggregory" type="update" due-to="melloware">
         Jacoco 0.8.6 for JDK15 support #55.
       </action>
@@ -128,9 +131,6 @@
       </action>
       <action dev="ggregory" type="update" due-to="Arturo Bernal">
         Don't initialize variables to defaults #71.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump actions/cache from 2 to 3 #77, #89, #103, #111.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump junit-jupiter from 5.7.2 to 5.8.2 #113.
