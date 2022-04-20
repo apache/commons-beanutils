@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.apache.commons.beanutils2.DynaProperty.EMPTY_DYNA_PROPERTY_ARRAY;
+
 /**
  * <p>Provides common logic for JDBC implementations of {@link DynaClass}.</p>
  *
@@ -37,8 +39,6 @@ import java.util.Map;
 abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * <p>Flag defining whether column names should be lower cased when
@@ -254,7 +254,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
         // Convert this list into the internal data structures we need
         properties =
-            list.toArray(new DynaProperty[list.size()]);
+            list.toArray(EMPTY_DYNA_PROPERTY_ARRAY);
         for (final DynaProperty property : properties) {
             propertiesMap.put(property.getName(), property);
         }

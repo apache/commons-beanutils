@@ -139,7 +139,7 @@ public class DynaProperty implements Serializable {
     /**
      * Empty array.
      */
-    static final DynaProperty[] EMPTY_DYNA_PROPERTY_ARRAY = new DynaProperty[0];
+    static final DynaProperty[] EMPTY_DYNA_PROPERTY_ARRAY = {};
 
     /**
      * Gets the <em>(optional)</em> type of the indexed content for {@code DynaProperty}'s

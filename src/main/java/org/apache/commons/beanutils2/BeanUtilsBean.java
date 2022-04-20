@@ -47,6 +47,10 @@ import org.apache.commons.logging.LogFactory;
 public class BeanUtilsBean {
 
 
+    /**
+     * An empty immutable {@code String} array.
+     */
+    static final String[] EMPTY_STRING_ARRAY = {};
 
     /**
      * Contains {@code BeanUtilsBean} instances indexed by context classloader.
@@ -543,7 +547,7 @@ public class BeanUtilsBean {
                     values.add(getConvertUtils().convert(item));
                 }
             }
-            return values.toArray(new String[values.size()]);
+            return values.toArray(EMPTY_STRING_ARRAY);
         }
         if (!value.getClass().isArray()) {
             final String[] results = new String[1];
