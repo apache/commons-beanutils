@@ -477,6 +477,8 @@ public class ConvertUtilsTestCase extends TestCase {
         final String[] stringArray2 = new String[]
             { "abc", "de,f" };
 
+        value = ConvertUtils.convert((String[]) null, stringArray.getClass());
+        checkStringArray(value, stringArray);
         value = ConvertUtils.convert("", stringArray.getClass());
         checkStringArray(value, stringArray);
         value = ConvertUtils.convert(" ", stringArray.getClass());
