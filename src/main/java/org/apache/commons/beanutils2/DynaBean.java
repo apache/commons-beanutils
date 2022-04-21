@@ -23,9 +23,7 @@ package org.apache.commons.beanutils2;
  * To the maximum degree feasible, other components of the BeanUtils package
  * will recognize such beans and treat them as standard JavaBeans for the
  * purpose of retrieving and setting property values.</p>
- *
  */
-
 public interface DynaBean {
 
     /**
