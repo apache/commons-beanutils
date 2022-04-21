@@ -77,6 +77,9 @@
       <action dev="ggregory" type="fix" due-to="SethFalco">
         Start migration to JUnit 5 #93.
       </action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">
+        Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.BasicDynaClass.constructorTypes should be both final and package protected [org.apache.commons.beanutils2.BasicDynaClass] At BasicDynaClass.java:[line 95] MS_FINAL_PKGPROTECT.
+      </action>
       <!--  UPDATES -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.2 #77, #89, #103, #111.

@@ -92,7 +92,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * The method signature of the constructor we will use to create
      * new DynaBean instances.
      */
-    protected static Class<?>[] constructorTypes = { DynaClass.class };
+    private static final Class<?>[] CONSTRUCTOR_TYPES = { DynaClass.class };
 
     /**
      * The argument values to be passed to the constructor we will use
@@ -251,7 +251,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
         // Identify the Constructor we will use in newInstance()
         try {
-            this.constructor = dynaBeanClass.getConstructor(constructorTypes);
+            this.constructor = dynaBeanClass.getConstructor(CONSTRUCTOR_TYPES);
         } catch (final NoSuchMethodException e) {
             throw new IllegalArgumentException
                     ("Class " + dynaBeanClass.getName() +
