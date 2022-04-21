@@ -98,8 +98,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private TimeZone timeZone;
     private boolean useLocaleFormat;
 
-
-
     /**
      * Constructs a Date/Time <i>Converter</i> that throws a
      * {@code ConversionException} if an error occurs.
@@ -118,8 +116,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     public DateTimeConverter(final Object defaultValue) {
         super(defaultValue);
     }
-
-
 
     /**
      * Indicate whether conversion should use a format/pattern or not.
@@ -207,8 +203,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
         }
         setUseLocaleFormat(true);
     }
-
-
 
     /**
      * Convert an input Date/Calendar object into a String.
@@ -383,7 +377,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
         // Default String conversion
         return toDate(targetType, stringValue);
-
     }
 
     /**
