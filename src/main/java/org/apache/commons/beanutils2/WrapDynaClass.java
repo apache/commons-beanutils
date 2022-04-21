@@ -73,11 +73,6 @@ public class WrapDynaClass implements DynaClass {
     private final PropertyUtilsBean propertyUtilsBean;
 
     /**
-     * The set of PropertyDescriptors for this bean class.
-     */
-    protected PropertyDescriptor[] descriptors;
-
-    /**
      * The set of PropertyDescriptors for this bean class, keyed by the
      * property name.  Individual descriptor instances will be the same
      * instances as those in the {@code descriptors} list.
