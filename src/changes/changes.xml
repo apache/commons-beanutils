@@ -100,7 +100,7 @@
         Update JUnit from 4 to 5 vintage, #78, #112.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update Jacoco from 0.8.4 to 0.8.5.
+        Update Jacoco from 0.8.4 to 0.8.8.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update JApiCmp from 0.12.0 to 0.15.7, #46, #110.
