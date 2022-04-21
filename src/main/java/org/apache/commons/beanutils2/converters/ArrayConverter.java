@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -199,7 +200,7 @@ public class ArrayConverter extends AbstractConverter {
      * the tokens when parsing a delimited String [default is '.' and '-']
      */
     public void setAllowedChars(final char[] allowedChars) {
-        this.allowedChars = allowedChars;
+        this.allowedChars = Objects.requireNonNull(allowedChars, "allowedChars").clone();
     }
 
     /**
