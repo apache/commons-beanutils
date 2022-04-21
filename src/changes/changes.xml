@@ -92,6 +92,15 @@
       <action dev="ggregory" type="fix" due-to="Gary Gregory">
         Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.converters.DateTimeConverter.setPatterns(String[]) may expose internal representation by storing an externally mutable object into DateTimeConverter.patterns [org.apache.commons.beanutils2.converters.DateTimeConverter] At DateTimeConverter.java:[line 204] EI_EXPOSE_REP2.
       </action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">
+        Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.ConversionException.getCause() may expose internal representation by returning ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 83] EI_EXPOSE_REP.
+      </action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">
+        Fix SpotBugs [ERROR] Medium: new org.apache.commons.beanutils2.ConversionException(String, Throwable) may expose internal representation by storing an externally mutable object into ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 53] EI_EXPOSE_REP2.
+      </action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">
+        Fix SpotBugs [ERROR] Medium: new org.apache.commons.beanutils2.ConversionException(Throwable) may expose internal representation by storing an externally mutable object into ConversionException.cause [org.apache.commons.beanutils2.ConversionException] At ConversionException.java:[line 65] EI_EXPOSE_REP2.
+      </action>
       <!--  UPDATES -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.2 #77, #89, #103, #111.

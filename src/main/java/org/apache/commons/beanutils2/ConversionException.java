@@ -43,8 +43,7 @@ public class ConversionException extends RuntimeException {
      * @param cause The root cause of this exception
      */
     public ConversionException(final String message, final Throwable cause) {
-        super(message);
-        this.cause = cause;
+        super(message, cause);
     }
 
     /**
@@ -54,22 +53,6 @@ public class ConversionException extends RuntimeException {
      */
     public ConversionException(final Throwable cause) {
         super(cause.getMessage());
-        this.cause = cause;
-    }
-
-    /**
-     * The root cause of this {@code ConversionException}, compatible with
-     * JDK 1.4's extensions to {@code java.lang.Throwable}.
-     */
-    protected Throwable cause;
-
-    /**
-     * Gets the root cause of this conversion exception.
-     * @return the root cause of this conversion exception
-     */
-    @Override
-    public Throwable getCause() {
-        return this.cause;
     }
 
 }
