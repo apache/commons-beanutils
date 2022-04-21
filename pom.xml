@@ -55,6 +55,8 @@
     <commons.jacoco.version>0.8.8</commons.jacoco.version>
     <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
     <checkstyle.version>8.34</checkstyle.version>
+    <commons.spotbugs.plugin.version>4.6.0.0</commons.spotbugs.plugin.version>
+    <commons.spotbugs.impl.version>4.6.0</commons.spotbugs.impl.version>    
     <!-- Commons Release Plugin -->
     <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
