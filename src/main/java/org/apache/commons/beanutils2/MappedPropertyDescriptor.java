@@ -43,7 +43,6 @@ import java.lang.reflect.Modifier;
  */
 public class MappedPropertyDescriptor extends PropertyDescriptor {
 
-
     /**
      * The underlying data type of the property we are describing.
      */
@@ -63,8 +62,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      * The parameter types array for the reader method signature.
      */
     private static final Class<?>[] STRING_CLASS_PARAMETER = new Class[]{String.class};
-
-
 
     /**
      * Constructs a MappedPropertyDescriptor for a property that follows
@@ -129,7 +126,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
 
         findMappedPropertyType();
     }
-
 
     /**
      * This constructor takes the name of a mapped property, and method
@@ -211,8 +207,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-
-
     /**
      * Gets the Class object for the property values.
      *
@@ -273,8 +267,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         findMappedPropertyType();
     }
 
-
-
     /**
      * Introspect our bean class to identify the corresponding getter
      * and setter methods.
@@ -311,7 +303,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
         }
         mappedPropertyTypeRef = new SoftReference<>(mappedPropertyType);
     }
-
 
     /**
      * Gets a capitalized version of the specified property name.

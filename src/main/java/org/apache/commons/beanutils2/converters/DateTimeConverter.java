@@ -197,9 +197,9 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @param patterns Array of format patterns.
      */
     public void setPatterns(final String[] patterns) {
-        this.patterns = patterns;
-        if (patterns != null && patterns.length > 1) {
-            displayPatterns = String.join(", ", patterns);
+        this.patterns = patterns != null ? patterns.clone() : null;
+        if (this.patterns != null && this.patterns.length > 1) {
+            displayPatterns = String.join(", ", this.patterns);
         }
         setUseLocaleFormat(true);
     }
