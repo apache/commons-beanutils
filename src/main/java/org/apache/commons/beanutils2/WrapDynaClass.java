@@ -41,12 +41,7 @@ import java.util.WeakHashMap;
  * </pre>
  *
  */
-
 public class WrapDynaClass implements DynaClass {
-
-
-
-
 
     /**
      * Constructs a new WrapDynaClass for the specified JavaBean class.  This
@@ -62,11 +57,7 @@ public class WrapDynaClass implements DynaClass {
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
-
     }
-
-
-
 
     /**
      * Name of the JavaBean class represented by this WrapDynaClass.
@@ -86,7 +77,6 @@ public class WrapDynaClass implements DynaClass {
      */
     protected PropertyDescriptor[] descriptors;
 
-
     /**
      * The set of PropertyDescriptors for this bean class, keyed by the
      * property name.  Individual descriptor instances will be the same
@@ -94,12 +84,10 @@ public class WrapDynaClass implements DynaClass {
      */
     protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
-
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
     protected DynaProperty[] properties;
-
 
     /**
      * The set of dynamic properties that are part of this DynaClass,
@@ -107,10 +95,6 @@ public class WrapDynaClass implements DynaClass {
      * be the same instances as those in the {@code properties} list.
      */
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
-
-
-
-
 
     private static final ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>> CLASSLOADER_CACHE =
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
@@ -129,11 +113,6 @@ public class WrapDynaClass implements DynaClass {
     private static Map<CacheKey, WrapDynaClass> getClassesCache() {
         return CLASSLOADER_CACHE.get();
     }
-
-
-
-
-
 
     /**
      * Gets the class of the underlying wrapped bean.
@@ -160,7 +139,6 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
-
     /**
      * Gets a property descriptor for the specified property, if it exists;
      * otherwise, return {@code null}.
@@ -182,7 +160,6 @@ public class WrapDynaClass implements DynaClass {
 
     }
 
-
     /**
      * <p>Return an array of {@code PropertyDescriptor} for the properties
      * currently defined in this DynaClass.  If no properties are defined, a
@@ -200,7 +177,6 @@ public class WrapDynaClass implements DynaClass {
         return properties;
 
     }
-
 
     /**
      * <p>Instantiates a new standard JavaBean instance associated with
@@ -230,14 +206,8 @@ public class WrapDynaClass implements DynaClass {
     @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
-
         return new WrapDynaBean(getBeanClass().newInstance());
-
     }
-
-
-
-
 
     /**
      * Gets the PropertyDescriptor for the specified property name, if any;
@@ -247,24 +217,15 @@ public class WrapDynaClass implements DynaClass {
      * @return The descriptor for the specified property
      */
     public PropertyDescriptor getPropertyDescriptor(final String name) {
-
         return descriptorsMap.get(name);
-
     }
-
-
-
-
 
     /**
      * Clear our cache of WrapDynaClass instances.
      */
     public static void clear() {
-
         getClassesCache().clear();
-
     }
-
 
     /**
      * Create (if necessary) and return a new {@code WrapDynaClass}
@@ -274,11 +235,8 @@ public class WrapDynaClass implements DynaClass {
      * @return A new <i>Wrap</i> {@link DynaClass}
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass) {
-
         return createDynaClass(beanClass, null);
-
     }
-
 
     /**
      * Create (if necessary) and return a new {@code WrapDynaClass} instance
@@ -304,9 +262,6 @@ public class WrapDynaClass implements DynaClass {
         return dynaClass;
 
     }
-
-
-
 
     /**
      * Returns the {@code PropertyUtilsBean} instance associated with this class. This
