@@ -186,7 +186,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return Array of format patterns.
      */
     public String[] getPatterns() {
-        return patterns;
+        return patterns.clone();
     }
 
     /**
