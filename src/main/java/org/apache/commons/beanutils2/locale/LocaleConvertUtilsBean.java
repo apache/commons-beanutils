@@ -92,8 +92,6 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
-
-
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
@@ -109,8 +107,6 @@ public class LocaleConvertUtilsBean {
      */
     private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
 
-
-
     /**
      *  Makes the state by default (deregisters all converters for all locales)
      *  and then registers default locale converters.
@@ -121,14 +117,11 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-
-
     /**
      * getter for defaultLocale.
      * @return the default locale
      */
     public Locale getDefaultLocale() {
-
         return defaultLocale;
     }
 
@@ -137,7 +130,6 @@ public class LocaleConvertUtilsBean {
      * @param locale the default locale
      */
     public void setDefaultLocale(final Locale locale) {
-
         if (locale == null) {
             defaultLocale = Locale.getDefault();
         }
@@ -165,8 +157,6 @@ public class LocaleConvertUtilsBean {
     public void setApplyLocalized(final boolean newApplyLocalized) {
         applyLocalized = newApplyLocalized;
     }
-
-
 
     /**
      * Convert the specified locale-sensitive value into a String.
@@ -209,9 +199,7 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
-
         final LocaleConverter converter = lookup(String.class, locale);
-
         return converter.convert(String.class, value, pattern);
     }
 
@@ -227,7 +215,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
-
         return convert(value, clazz, defaultLocale, null);
     }
 
@@ -245,7 +232,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final String pattern) {
-
         return convert(value, clazz, defaultLocale, pattern);
     }
 
@@ -264,7 +250,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
-
         if (log.isDebugEnabled()) {
             log.debug("Convert string " + value + " to class " +
                     clazz.getName() + " using " + locale +
@@ -298,7 +283,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
-
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
 
@@ -314,7 +298,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
     */
    public Object convert(final String[] values, final Class<?> clazz) {
-
        return convert(values, clazz, getDefaultLocale(), null);
    }
 
@@ -332,7 +315,6 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
-
         Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
@@ -347,7 +329,6 @@ public class LocaleConvertUtilsBean {
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, convert(values[i], type, locale, pattern));
         }
-
         return array;
     }
 
@@ -361,7 +342,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
-
         lookup(locale).put(clazz, converter);
     }
 
@@ -369,7 +349,6 @@ public class LocaleConvertUtilsBean {
      * Remove any registered {@link LocaleConverter}.
      */
     public void deregister() {
-
         final Map<Class<?>, LocaleConverter> defaultConverter = lookup(defaultLocale);
 
         mapConverters.setFast(false);
@@ -386,7 +365,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void deregister(final Locale locale) {
-
         mapConverters.remove(locale);
     }
 
@@ -397,7 +375,6 @@ public class LocaleConvertUtilsBean {
      * @param locale The locale
      */
     public void deregister(final Class<?> clazz, final Locale locale) {
-
         lookup(locale).remove(clazz);
     }
 
@@ -411,7 +388,6 @@ public class LocaleConvertUtilsBean {
      * @return The registered locale Converter, if any
      */
     public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
-
         final LocaleConverter converter = lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
@@ -496,73 +472,87 @@ public class LocaleConvertUtilsBean {
     }
 
     private static class DelegateFastHashMap implements Map {
-
         private final Map<Object, Object> map;
 
         private DelegateFastHashMap(final Map<Object, Object> map) {
             this.map = map;
         }
+
         @Override
         public void clear() {
             map.clear();
         }
+
         @Override
         public boolean containsKey(final Object key) {
             return map.containsKey(key);
         }
+
         @Override
         public boolean containsValue(final Object value) {
             return map.containsValue(value);
         }
+
         @Override
         public Set<Map.Entry<Object, Object>> entrySet() {
             return map.entrySet();
         }
+
         @Override
         public boolean equals(final Object o) {
             return map.equals(o);
         }
+
         @Override
         public Object get(final Object key) {
             return map.get(key);
         }
+
         @Override
         public int hashCode() {
             return map.hashCode();
         }
+
         @Override
         public boolean isEmpty() {
             return map.isEmpty();
         }
+
         @Override
         public Set<Object> keySet() {
             return map.keySet();
         }
+
         @Override
         public Object put(final Object key, final Object value) {
             return map.put(key, value);
         }
+
         // we operate on very generic types (<Object, Object>), so there is
         // no need for doing type checks
         @Override
         public void putAll(final Map m) {
             map.putAll(m);
         }
+
         @Override
         public Object remove(final Object key) {
             return map.remove(key);
         }
+
         @Override
         public int size() {
             return map.size();
         }
+
         @Override
         public Collection<Object> values() {
             return map.values();
         }
+
         public void setFast(final boolean fast) {
             if (map instanceof WeakFastHashMap) {
-                ((WeakFastHashMap<?, ?>)map).setFast(fast);
+                ((WeakFastHashMap<?, ?>) map).setFast(fast);
             }
         }
     }
