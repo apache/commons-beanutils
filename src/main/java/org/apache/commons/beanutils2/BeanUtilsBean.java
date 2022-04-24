@@ -947,15 +947,13 @@ public class BeanUtilsBean {
             } else {
                 newValue = convert(value, type.getComponentType());
             }
-        } else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = getConvertUtils().convert((String) value, type);
-            } else if (value instanceof String[]) {
-                newValue = getConvertUtils().convert(((String[]) value)[0],
-                                                type);
-            } else {
-                newValue = convert(value, type);
-            }
+        } else if (value instanceof String) {
+            newValue = getConvertUtils().convert((String) value, type);
+        } else if (value instanceof String[]) {
+            newValue = getConvertUtils().convert(((String[]) value)[0],
+                                            type);
+        } else {
+            newValue = convert(value, type);
         }
 
         // Invoke the setter method
@@ -1051,7 +1049,7 @@ public class BeanUtilsBean {
      */
     private static Method getInitCauseMethod() {
         try {
-            final Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
+            final Class<?>[] paramsClasses = { Throwable.class };
             return Throwable.class.getMethod("initCause", paramsClasses);
         } catch (final NoSuchMethodException e) {
             final Log log = LogFactory.getLog(BeanUtils.class);

@@ -347,10 +347,8 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     if (!(mo.get(key) == null && mo.containsKey(key))) {
                         return false;
                     }
-                } else {
-                    if (!value.equals(mo.get(key))) {
-                        return false;
-                    }
+                } else if (!value.equals(mo.get(key))) {
+                    return false;
                 }
             }
             return true;
@@ -367,10 +365,8 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
                     if (!(mo.get(key) == null && mo.containsKey(key))) {
                         return false;
                     }
-                } else {
-                    if (!value.equals(mo.get(key))) {
-                        return false;
-                    }
+                } else if (!value.equals(mo.get(key))) {
+                    return false;
                 }
             }
             return true;

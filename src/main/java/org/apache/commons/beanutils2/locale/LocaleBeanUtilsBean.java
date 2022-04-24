@@ -753,18 +753,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             else {
                 newValue = value;
             }
+        } else if (value instanceof String) {
+            newValue = getLocaleConvertUtils().convert((String) value, type, pattern);
         }
-        else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = getLocaleConvertUtils().convert((String) value, type, pattern);
-            }
-            else if (value instanceof String[]) {
-                newValue = getLocaleConvertUtils().convert(((String[]) value)[0],
-                        type, pattern);
-            }
-            else {
-                newValue = value;
-            }
+        else if (value instanceof String[]) {
+            newValue = getLocaleConvertUtils().convert(((String[]) value)[0],
+                    type, pattern);
+        }
+        else {
+            newValue = value;
         }
         return newValue;
     }
@@ -805,18 +802,15 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
             else {
                 newValue = value;
             }
+        } else if (value instanceof String) {
+            newValue = ConvertUtils.convert((String) value, type);
         }
-        else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = ConvertUtils.convert((String) value, type);
-            }
-            else if (value instanceof String[]) {
-                newValue = ConvertUtils.convert(((String[]) value)[0],
-                        type);
-            }
-            else {
-                newValue = value;
-            }
+        else if (value instanceof String[]) {
+            newValue = ConvertUtils.convert(((String[]) value)[0],
+                    type);
+        }
+        else {
+            newValue = value;
         }
         return newValue;
     }

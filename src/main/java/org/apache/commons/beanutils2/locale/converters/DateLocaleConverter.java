@@ -320,18 +320,16 @@ public class DateLocaleConverter extends BaseLocaleConverter {
                 if (thisChar == '\'') {
                     quoted = false;
                 }
-            } else {
-                if (thisChar == '\'') {
-                   quoted = true;
-                } else if ((thisChar >= 'a' && thisChar <= 'z') ||
-                           (thisChar >= 'A' && thisChar <= 'Z')) {
-                    final int index = fromChars.indexOf(thisChar );
-                    if (index == -1) {
-                        throw new IllegalArgumentException(
-                            "Illegal pattern character '" + thisChar + "'");
-                    }
-                    thisChar = toChars.charAt(index);
+            } else if (thisChar == '\'') {
+               quoted = true;
+            } else if ((thisChar >= 'a' && thisChar <= 'z') ||
+                       (thisChar >= 'A' && thisChar <= 'Z')) {
+                final int index = fromChars.indexOf(thisChar );
+                if (index == -1) {
+                    throw new IllegalArgumentException(
+                        "Illegal pattern character '" + thisChar + "'");
                 }
+                thisChar = toChars.charAt(index);
             }
             converted.append(thisChar);
         }

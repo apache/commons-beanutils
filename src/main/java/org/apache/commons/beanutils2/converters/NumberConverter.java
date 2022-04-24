@@ -502,18 +502,16 @@ public abstract class NumberConverter extends AbstractConverter {
                 final DecimalFormatSymbols symbols = new DecimalFormatSymbols(locale);
                 format = new DecimalFormat(pattern, symbols);
             }
-        } else {
-            if (locale == null) {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using default Locale format");
-                }
-                format = NumberFormat.getInstance();
-            } else {
-                if (log().isDebugEnabled()) {
-                    log().debug("    Using Locale[" + locale + "] format");
-                }
-                format = NumberFormat.getInstance(locale);
+        } else if (locale == null) {
+            if (log().isDebugEnabled()) {
+                log().debug("    Using default Locale format");
             }
+            format = NumberFormat.getInstance();
+        } else {
+            if (log().isDebugEnabled()) {
+                log().debug("    Using Locale[" + locale + "] format");
+            }
+            format = NumberFormat.getInstance(locale);
         }
         if (!allowDecimals) {
             format.setParseIntegerOnly(true);

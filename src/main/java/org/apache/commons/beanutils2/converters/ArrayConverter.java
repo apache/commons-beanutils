@@ -133,7 +133,7 @@ public class ArrayConverter extends AbstractConverter {
     private final Converter elementConverter;
     private int defaultSize;
     private char delimiter = ',';
-    private char[] allowedChars = new char[] {'.', '-'};
+    private char[] allowedChars = {'.', '-'};
     private boolean onlyFirstToString = true;
 
     /**
