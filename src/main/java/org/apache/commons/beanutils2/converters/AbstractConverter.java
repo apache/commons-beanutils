@@ -443,9 +443,9 @@ public abstract class AbstractConverter implements Converter {
             log().debug("Setting default value: " + defaultValue);
         }
         if (defaultValue == null) {
-           this.defaultValue  = null;
+           this.defaultValue = null;
         } else {
-           this.defaultValue  = convert(getDefaultType(), defaultValue);
+           this.defaultValue = convert(getDefaultType(), defaultValue);
         }
         useDefault = true;
     }
