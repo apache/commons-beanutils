@@ -43,10 +43,7 @@ import org.apache.commons.logging.LogFactory;
  * @see BeanUtils
  * @since 1.7
  */
-
 public class BeanUtilsBean {
-
-
 
     /**
      * Contains {@code BeanUtilsBean} instances indexed by context classloader.
@@ -82,8 +79,6 @@ public class BeanUtilsBean {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-
-
     /**
      * Logging for this instance
      */
@@ -97,8 +92,6 @@ public class BeanUtilsBean {
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
-
-
 
     /**
      * <p>Constructs an instance using new property
@@ -129,15 +122,11 @@ public class BeanUtilsBean {
      * @param propertyUtilsBean use this {@code PropertyUtilsBean}
      * to access properties
      */
-    public BeanUtilsBean(
-                            final ConvertUtilsBean convertUtilsBean,
-                            final PropertyUtilsBean propertyUtilsBean) {
-
+    public BeanUtilsBean(final ConvertUtilsBean convertUtilsBean,
+                         final PropertyUtilsBean propertyUtilsBean) {
         this.convertUtilsBean = convertUtilsBean;
         this.propertyUtilsBean = propertyUtilsBean;
     }
-
-
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
@@ -164,7 +153,6 @@ public class BeanUtilsBean {
     public Object cloneBean(final Object bean)
             throws IllegalAccessException, InstantiationException,
             InvocationTargetException, NoSuchMethodException {
-
         if (log.isDebugEnabled()) {
             log.debug("Cloning bean: " + bean.getClass().getName());
         }
@@ -176,7 +164,6 @@ public class BeanUtilsBean {
         }
         getPropertyUtils().copyProperties(newBean, bean);
         return newBean;
-
     }
 
     /**
@@ -223,7 +210,6 @@ public class BeanUtilsBean {
      */
     public void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
-
         // Validate existence of the specified beans
         if (dest == null) {
             throw new IllegalArgumentException
@@ -282,7 +268,6 @@ public class BeanUtilsBean {
                 }
             }
         }
-
     }
 
     /**
@@ -318,7 +303,6 @@ public class BeanUtilsBean {
      */
     public void copyProperty(final Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
-
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder("  copyProperty(");
@@ -433,7 +417,6 @@ public class BeanUtilsBean {
                     (e, "Cannot set " + propName);
             }
         }
-
     }
 
     /**
@@ -477,7 +460,6 @@ public class BeanUtilsBean {
     public Map<String, String> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
         //            return (Collections.EMPTY_MAP);
             return new java.util.HashMap<>();
@@ -507,7 +489,6 @@ public class BeanUtilsBean {
             }
         }
         return description;
-
     }
 
     /**
@@ -528,7 +509,6 @@ public class BeanUtilsBean {
     public String[] getArrayProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
             return null;
@@ -562,7 +542,6 @@ public class BeanUtilsBean {
             }
         }
         return results;
-
     }
 
     /**
@@ -587,10 +566,8 @@ public class BeanUtilsBean {
     public String getIndexedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getIndexedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -614,10 +591,8 @@ public class BeanUtilsBean {
                                             final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -642,10 +617,8 @@ public class BeanUtilsBean {
     public String getMappedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getMappedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -669,10 +642,8 @@ public class BeanUtilsBean {
                                            final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -695,10 +666,8 @@ public class BeanUtilsBean {
     public String getNestedProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getNestedProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -720,9 +689,7 @@ public class BeanUtilsBean {
     public String getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         return getNestedProperty(bean, name);
-
     }
 
     /**
@@ -743,10 +710,8 @@ public class BeanUtilsBean {
     public String getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getConvertUtils().convert(value);
-
     }
 
     /**
@@ -786,7 +751,6 @@ public class BeanUtilsBean {
      */
     public void populate(final Object bean, final Map<String, ? extends Object> properties)
         throws IllegalAccessException, InvocationTargetException {
-
         // Do nothing unless both arguments have been specified
         if (bean == null || properties == null) {
             return;
@@ -806,9 +770,7 @@ public class BeanUtilsBean {
 
             // Perform the assignment for this property
             setProperty(bean, name, entry.getValue());
-
         }
-
     }
 
     /**
@@ -843,7 +805,6 @@ public class BeanUtilsBean {
      */
     public void setProperty(final Object bean, String name, final Object value)
         throws IllegalAccessException, InvocationTargetException {
-
         // Trace logging (if enabled)
         if (log.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder("  setProperty(");
@@ -1004,7 +965,6 @@ public class BeanUtilsBean {
             throw new InvocationTargetException
                 (e, "Cannot set " + propName);
         }
-
     }
 
     /**
