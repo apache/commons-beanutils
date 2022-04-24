@@ -58,14 +58,10 @@ import java.util.Objects;
  * be serialized.  Therefore, a {@link RowSetDynaClass} makes a very
  * convenient mechanism for transporting data sets to remote Java-based
  * application components.</p>
- *
  */
-
 public class RowSetDynaClass extends JDBCDynaClass {
 
     private static final long serialVersionUID = 1L;
-
-
 
     /**
      * <p>Limits the size of the returned list.  The call to
@@ -81,8 +77,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     protected List<DynaBean> rows = new ArrayList<>();
 
-
-
     /**
      * <p>Construct a new {@link RowSetDynaClass} for the specified
      * {@code ResultSet}.  The property names corresponding
@@ -96,9 +90,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet) throws SQLException {
-
         this(resultSet, true, -1);
-
     }
 
     /**
@@ -118,9 +110,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      */
     public RowSetDynaClass(final ResultSet resultSet, final int limit) throws SQLException {
-
         this(resultSet, true, limit);
-
     }
 
     /**
@@ -144,7 +134,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase)
                                                     throws SQLException {
         this(resultSet, lowerCase, -1);
-
     }
 
     /**
@@ -171,9 +160,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      */
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit)
                                                             throws SQLException {
-
         this(resultSet, lowerCase, limit, false);
-
     }
 
     /**
@@ -202,7 +189,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
         this(resultSet, lowerCase, -1, useColumnLabel);
-
     }
 
     /**
@@ -238,7 +224,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
         setUseColumnLabel(useColumnLabel);
         introspect(resultSet);
         copy(resultSet);
-
     }
 
     /**
@@ -255,9 +240,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * @return A {@code List} of {@link DynaBean} instances
      */
     public List<DynaBean> getRows() {
-
         return this.rows;
-
     }
 
 
@@ -274,7 +257,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * @throws SQLException if an error is encountered copying the data
      */
     protected void copy(final ResultSet resultSet) throws SQLException {
-
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
             final DynaBean bean = createDynaBean();
@@ -285,7 +267,6 @@ public class RowSetDynaClass extends JDBCDynaClass {
             }
             rows.add(bean);
         }
-
     }
 
     /**
@@ -295,9 +276,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      * @return A new {@code DynaBean} instance
      */
     protected DynaBean createDynaBean() {
-
         return new BasicDynaBean(this);
-
     }
 
 }

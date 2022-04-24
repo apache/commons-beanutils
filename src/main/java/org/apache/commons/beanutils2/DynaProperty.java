@@ -41,6 +41,7 @@ import java.util.Objects;
 public class DynaProperty implements Serializable {
 
     private static final long serialVersionUID = -3084907613499830175L;
+
     /*
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
@@ -58,17 +59,13 @@ public class DynaProperty implements Serializable {
     private static final int LONG_TYPE = 7;
     private static final int SHORT_TYPE = 8;
 
-
-
     /**
      * Constructs a property that accepts any data type.
      *
      * @param name Name of the property being described
      */
     public DynaProperty(final String name) {
-
         this(name, Object.class);
-
     }
 
     /**
@@ -78,13 +75,11 @@ public class DynaProperty implements Serializable {
      * @param type Java class representing the property data type
      */
     public DynaProperty(final String name, final Class<?> type) {
-
         this.name = name;
         this.type = type;
         if (type != null && type.isArray()) {
             this.contentType = type.getComponentType();
         }
-
     }
 
     /**
@@ -96,14 +91,10 @@ public class DynaProperty implements Serializable {
      * @param contentType Class that all indexed or mapped elements are instances of
      */
     public DynaProperty(final String name, final Class<?> type, final Class<?> contentType) {
-
         this.name = name;
         this.type = type;
         this.contentType = contentType;
-
     }
-
-
 
     /** Property name */
     protected String name;
@@ -156,8 +147,6 @@ public class DynaProperty implements Serializable {
         return contentType;
     }
 
-
-
     /**
      * Does this property represent an indexed value (ie an array or List)?
      *
@@ -165,7 +154,6 @@ public class DynaProperty implements Serializable {
      * array), otherwise {@code false}
      */
     public boolean isIndexed() {
-
         if (type == null) {
             return false;
         }
@@ -173,7 +161,6 @@ public class DynaProperty implements Serializable {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -183,7 +170,6 @@ public class DynaProperty implements Serializable {
      * otherwise {@code false}
      */
     public boolean isMapped() {
-
         if (type == null) {
             return false;
         }
@@ -201,7 +187,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public boolean equals(final Object obj) {
-
         boolean result;
 
         result = obj == this;
@@ -224,7 +209,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public int hashCode() {
-
        int result = 1;
 
        result = result * 31 + (name == null ? 0 : name.hashCode());
@@ -240,7 +224,6 @@ public class DynaProperty implements Serializable {
      */
     @Override
     public String toString() {
-
         final StringBuilder sb = new StringBuilder("DynaProperty[name=");
         sb.append(this.name);
         sb.append(",type=");
@@ -250,7 +233,6 @@ public class DynaProperty implements Serializable {
         }
         sb.append("]");
         return sb.toString();
-
     }
 
 
@@ -265,7 +247,6 @@ public class DynaProperty implements Serializable {
      * @throws IOException if the object can't be written
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
-
         writeAnyClass(this.type,out);
 
         if (isMapped() || isIndexed()) {
@@ -323,7 +304,6 @@ public class DynaProperty implements Serializable {
      * @throws ClassNotFoundException When trying to read an object of class that is not on the classpath
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-
         this.type = readAnyClass(in);
 
         if (isMapped() || isIndexed()) {

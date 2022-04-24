@@ -158,7 +158,6 @@ public abstract class AbstractConverter implements Converter {
      */
     @Override
     public <T> T convert(final Class<T> type, Object value) {
-
         if (type == null) {
             return convertToDefaultType(value);
         }
@@ -206,7 +205,6 @@ public abstract class AbstractConverter implements Converter {
         } catch (final Throwable t) {
             return handleError(targetType, value, t);
         }
-
     }
 
     /**
@@ -368,7 +366,6 @@ public abstract class AbstractConverter implements Converter {
      * specified for this {@link Converter}.
      */
     protected <T> T handleMissing(final Class<T> type) {
-
         if (useDefault || type.equals(String.class)) {
             Object value = getDefault(type);
             if (useDefault && value != null && !type.equals(value.getClass())) {
@@ -395,7 +392,6 @@ public abstract class AbstractConverter implements Converter {
             log().debug("    " + DEFAULT_CONFIG_MSG);
         }
         throw cex;
-
     }
 
     /**
@@ -409,7 +405,6 @@ public abstract class AbstractConverter implements Converter {
     public boolean isUseDefault() {
         return useDefault;
     }
-
 
     /**
      * Accessor method for Log instance.

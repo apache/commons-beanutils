@@ -81,7 +81,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      */
     public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass)
             throws IntrospectionException {
-
         super(propertyName, null, null);
 
         if (propertyName == null || propertyName.isEmpty()) {
@@ -147,7 +146,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     public MappedPropertyDescriptor(final String propertyName, final Class<?> beanClass,
                                     final String mappedGetterName, final String mappedSetterName)
             throws IntrospectionException {
-
         super(propertyName, null, null);
 
         if (propertyName == null || propertyName.isEmpty()) {
@@ -193,7 +191,6 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
     public MappedPropertyDescriptor(final String propertyName,
                                     final Method mappedGetter, final Method mappedSetter)
             throws IntrospectionException {
-
         super(propertyName, mappedGetter, mappedSetter);
 
         if (propertyName == null || propertyName.isEmpty()) {

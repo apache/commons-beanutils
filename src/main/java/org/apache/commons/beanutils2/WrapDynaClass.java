@@ -128,9 +128,7 @@ public class WrapDynaClass implements DynaClass {
      */
     @Override
     public String getName() {
-
         return beanClassName;
-
     }
 
     /**
@@ -145,13 +143,11 @@ public class WrapDynaClass implements DynaClass {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException
                     ("No property name specified");
         }
         return propertiesMap.get(name);
-
     }
 
     /**
@@ -243,7 +239,6 @@ public class WrapDynaClass implements DynaClass {
      * @since 1.9
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {
-
         final PropertyUtilsBean propUtils = pu != null ? pu : PropertyUtilsBean.getInstance();
         final CacheKey key = new CacheKey(beanClass, propUtils);
         WrapDynaClass dynaClass = getClassesCache().get(key);
@@ -252,7 +247,6 @@ public class WrapDynaClass implements DynaClass {
             getClassesCache().put(key, dynaClass);
         }
         return dynaClass;
-
     }
 
     /**
@@ -270,7 +264,6 @@ public class WrapDynaClass implements DynaClass {
      * Introspect our bean class to identify the supported properties.
      */
     protected void introspect() {
-
         // Look up the property descriptors for this bean class
         final Class<?> beanClass = getBeanClass();
         PropertyDescriptor[] regulars =
@@ -307,7 +300,6 @@ public class WrapDynaClass implements DynaClass {
                     properties[j]);
             j++;
         }
-
     }
 
     /**
@@ -316,6 +308,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code PropertyUtilsBean}. Instances are immutable.
      */
     private static class CacheKey {
+
         /** The bean class. */
         private final Class<?> beanClass;
 

@@ -87,7 +87,6 @@ import org.apache.commons.logging.LogFactory;
  * @see PropertyUtils
  * @since 1.7
  */
-
 public class PropertyUtilsBean {
 
     private Resolver resolver = new DefaultResolver();
@@ -99,8 +98,6 @@ public class PropertyUtilsBean {
     protected static PropertyUtilsBean getInstance() {
         return BeanUtilsBean.getInstance().getPropertyUtils();
     }
-
-
 
     /**
      * The cache of PropertyDescriptor arrays for beans we have already
@@ -115,8 +112,6 @@ public class PropertyUtilsBean {
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
 
-
-
     /** Base constructor */
     public PropertyUtilsBean() {
         descriptorsCache = new WeakFastHashMap<>();
@@ -126,8 +121,6 @@ public class PropertyUtilsBean {
         introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }
-
-
 
     /**
      * Gets the configured {@link Resolver} implementation used by BeanUtils.
@@ -214,11 +207,9 @@ public class PropertyUtilsBean {
      * loaders are thrown away to implement class reloading.
      */
     public void clearDescriptors() {
-
         descriptorsCache.clear();
         mappedDescriptorsCache.clear();
         Introspector.flushCaches();
-
     }
 
     /**
@@ -255,7 +246,6 @@ public class PropertyUtilsBean {
     public void copyProperties(final Object dest, final Object orig)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (dest == null) {
             throw new IllegalArgumentException
                     ("No destination bean specified");
@@ -370,7 +360,6 @@ public class PropertyUtilsBean {
             }
         }
         return description;
-
     }
 
     /**
@@ -400,7 +389,6 @@ public class PropertyUtilsBean {
     public Object getIndexedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -428,7 +416,6 @@ public class PropertyUtilsBean {
 
         // Request the specified indexed property value
         return getIndexedProperty(bean, name, index);
-
     }
 
     /**
@@ -457,7 +444,6 @@ public class PropertyUtilsBean {
                                             final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -539,7 +525,6 @@ public class PropertyUtilsBean {
                     index + ", Size: " + Array.getLength(value) +
                     " for property '" + name + "'");
         }
-
     }
 
     /**
@@ -564,7 +549,6 @@ public class PropertyUtilsBean {
     public Object getMappedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -592,7 +576,6 @@ public class PropertyUtilsBean {
 
         // Request the specified indexed property value
         return getMappedProperty(bean, name, key);
-
     }
 
     /**
@@ -615,7 +598,6 @@ public class PropertyUtilsBean {
                                            final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -676,7 +658,6 @@ public class PropertyUtilsBean {
         }
         }
         return result;
-
     }
 
     /**
@@ -688,14 +669,12 @@ public class PropertyUtilsBean {
      * @return the mapped property descriptors
      */
     Map<Class<?>, Map> getMappedPropertyDescriptors(final Class<?> beanClass) {
-
         if (beanClass == null) {
             return null;
         }
 
         // Look up any cached descriptors for this bean class
         return mappedDescriptorsCache.get(beanClass);
-
     }
 
     /**
@@ -707,12 +686,10 @@ public class PropertyUtilsBean {
      * @return the mapped property descriptors
      */
     Map getMappedPropertyDescriptors(final Object bean) {
-
         if (bean == null) {
             return null;
         }
         return getMappedPropertyDescriptors(bean.getClass());
-
     }
 
     /**
@@ -737,7 +714,6 @@ public class PropertyUtilsBean {
     public Object getNestedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -778,7 +754,6 @@ public class PropertyUtilsBean {
             bean = getSimpleProperty(bean, name);
         }
         return bean;
-
     }
 
     /**
@@ -848,9 +823,7 @@ public class PropertyUtilsBean {
     public Object getProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         return getNestedProperty(bean, name);
-
     }
 
     /**
@@ -887,7 +860,6 @@ public class PropertyUtilsBean {
                                                            String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -946,7 +918,6 @@ public class PropertyUtilsBean {
         }
 
         return result;
-
     }
 
     /**
@@ -963,9 +934,7 @@ public class PropertyUtilsBean {
      */
     public PropertyDescriptor[]
             getPropertyDescriptors(final Class<?> beanClass) {
-
         return getIntrospectionData(beanClass).getDescriptors();
-
     }
 
     /**
@@ -981,12 +950,10 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if {@code bean} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
         return getPropertyDescriptors(bean.getClass());
-
     }
 
     /**
@@ -1022,7 +989,6 @@ public class PropertyUtilsBean {
     public Class<?> getPropertyEditorClass(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1037,7 +1003,6 @@ public class PropertyUtilsBean {
             return descriptor.getPropertyEditorClass();
         }
         return null;
-
     }
 
     /**
@@ -1075,7 +1040,6 @@ public class PropertyUtilsBean {
     public Class<?> getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1131,7 +1095,6 @@ public class PropertyUtilsBean {
                     getMappedPropertyType();
         }
         return descriptor.getPropertyType();
-
     }
 
     /**
@@ -1144,9 +1107,7 @@ public class PropertyUtilsBean {
      * @return The read method
      */
     public Method getReadMethod(final PropertyDescriptor descriptor) {
-
         return MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
-
     }
 
     /**
@@ -1185,7 +1146,6 @@ public class PropertyUtilsBean {
     public Object getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1239,7 +1199,6 @@ public class PropertyUtilsBean {
         // Call the property getter and return the value
         final Object value = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
         return value;
-
     }
 
     /**
@@ -1257,9 +1216,7 @@ public class PropertyUtilsBean {
      * @return The write method
      */
     public Method getWriteMethod(final PropertyDescriptor descriptor) {
-
         return MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
-
     }
 
     /**
@@ -1295,7 +1252,6 @@ public class PropertyUtilsBean {
      * @since BeanUtils 1.6
      */
     public boolean isReadable(Object bean, String name) {
-
         // Validate method parameters
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
@@ -1356,7 +1312,6 @@ public class PropertyUtilsBean {
         } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             return false;
         }
-
     }
 
     /**
@@ -1375,7 +1330,6 @@ public class PropertyUtilsBean {
      * @since BeanUtils 1.6
      */
     public boolean isWriteable(Object bean, String name) {
-
         // Validate method parameters
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
@@ -1436,7 +1390,6 @@ public class PropertyUtilsBean {
         } catch (final IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             return false;
         }
-
     }
 
     /**
@@ -1468,7 +1421,6 @@ public class PropertyUtilsBean {
                                           final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1495,7 +1447,6 @@ public class PropertyUtilsBean {
 
         // Set the specified indexed property value
         setIndexedProperty(bean, name, index, value);
-
     }
 
     /**
@@ -1524,7 +1475,6 @@ public class PropertyUtilsBean {
                                           final int index, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1617,7 +1567,6 @@ public class PropertyUtilsBean {
             // Modify the specified value in the array
             Array.set(array, index, value);
         }
-
     }
 
     /**
@@ -1643,7 +1592,6 @@ public class PropertyUtilsBean {
                                          final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1672,7 +1620,6 @@ public class PropertyUtilsBean {
 
         // Request the specified indexed property value
         setMappedProperty(bean, name, key, value);
-
     }
 
     /**
@@ -1695,7 +1642,6 @@ public class PropertyUtilsBean {
                                          final String key, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1766,7 +1712,6 @@ public class PropertyUtilsBean {
           map.put(key, value);
         }
         }
-
     }
 
     /**
@@ -1803,7 +1748,6 @@ public class PropertyUtilsBean {
                                          String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -1843,7 +1787,6 @@ public class PropertyUtilsBean {
         } else {
             setSimpleProperty(bean, name, value);
         }
-
     }
 
     /**
@@ -1905,7 +1848,6 @@ public class PropertyUtilsBean {
     protected void setPropertyOfMapBean(final Map<String, Object> bean, String propertyName, final Object value)
         throws IllegalArgumentException, IllegalAccessException,
         InvocationTargetException, NoSuchMethodException {
-
         if (resolver.isMapped(propertyName)) {
             final String name = resolver.getProperty(propertyName);
             if (name == null || name.isEmpty()) {
@@ -1945,9 +1887,7 @@ public class PropertyUtilsBean {
     public void setProperty(final Object bean, final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         setNestedProperty(bean, name, value);
-
     }
 
     /**
@@ -1973,7 +1913,6 @@ public class PropertyUtilsBean {
                                          final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
@@ -2035,7 +1974,6 @@ public class PropertyUtilsBean {
                       + " with value " + value + " (class " + valueClassName + ")");
         }
         invokeMethod(writeMethod, bean, values);
-
     }
 
     /** This just catches and wraps IllegalArgumentException. */
@@ -2046,7 +1984,7 @@ public class PropertyUtilsBean {
                             throws
                                 IllegalAccessException,
                                 InvocationTargetException {
-        if(bean == null) {
+        if (bean == null) {
             throw new IllegalArgumentException("No bean specified " +
                 "- this should have been checked before reaching this method");
         }

@@ -95,8 +95,6 @@ public abstract class NumberConverter extends AbstractConverter {
     private boolean useLocaleFormat;
     private Locale locale;
 
-
-
     /**
      * Constructs a <b>java.lang.Number</b> <i>Converter</i>
      * that throws a {@code ConversionException} if a error occurs.
@@ -118,8 +116,6 @@ public abstract class NumberConverter extends AbstractConverter {
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }
-
-
 
     /**
      * Gets whether decimals are allowed in the number.
@@ -189,8 +185,6 @@ public abstract class NumberConverter extends AbstractConverter {
         setUseLocaleFormat(true);
     }
 
-
-
     /**
      * Convert an input Number object into a String.
      *
@@ -232,7 +226,6 @@ public abstract class NumberConverter extends AbstractConverter {
      */
     @Override
     protected <T> T convertToType(final Class<T> targetType, final Object value) throws Throwable {
-
         final Class<?> sourceType = value.getClass();
         // Handle Number
         if (value instanceof Number) {
@@ -274,7 +267,6 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Ensure the correct number type is returned
         return toNumber(sourceType, targetType, number);
-
     }
 
     /**
@@ -299,7 +291,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted value.
      */
     private <T> T toNumber(final Class<?> sourceType, final Class<T> targetType, final Number value) {
-
         // Correct Number type already
         if (targetType.equals(value.getClass())) {
             return targetType.cast(value);
@@ -394,7 +385,6 @@ public abstract class NumberConverter extends AbstractConverter {
             log().warn("    " + msg);
         }
         throw new ConversionException(msg);
-
     }
 
     /**
@@ -418,7 +408,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @return The converted Number value.
      */
     private Number toNumber(final Class<?> sourceType, final Class<?> targetType, final String value) {
-
         // Byte
         if (targetType.equals(Byte.class)) {
             return Byte.valueOf(value);

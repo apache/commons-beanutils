@@ -198,7 +198,6 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         final Object result = super.parse(value, pattern);
 
         if (result == null || result instanceof BigInteger) {
@@ -215,7 +214,6 @@ public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
         catch (final NumberFormatException ex) {
             throw new ConversionException("Supplied number is not of type BigInteger: " + result);
         }
-
     }
 
 }

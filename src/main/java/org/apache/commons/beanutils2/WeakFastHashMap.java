@@ -478,7 +478,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Map view inner classes
 
-
     /**
      * Abstract collection implementation shared by keySet(), values() and entrySet().
      *

@@ -28,7 +28,6 @@ import java.util.Locale;
  * optionally using a default value or throwing a
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
- *
  */
 public class SqlTimeLocaleConverter extends DateLocaleConverter {
 
@@ -38,7 +37,6 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public SqlTimeLocaleConverter() {
         this(false);
@@ -76,7 +74,6 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     public SqlTimeLocaleConverter(final Locale locale, final boolean locPattern) {
-
         this(locale, (String) null, locPattern);
     }
 

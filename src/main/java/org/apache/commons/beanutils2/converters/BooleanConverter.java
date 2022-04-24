@@ -54,7 +54,6 @@ public final class BooleanConverter extends AbstractConverter {
     public BooleanConverter() {
     }
 
-
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
      * if a conversion error occurs, ie the string value being converted is
@@ -167,7 +166,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
-
         if (Boolean.class.equals(type) || Boolean.TYPE.equals(type)) {
             // All the values in the trueStrings and falseStrings arrays are
             // guaranteed to be lower-case. By converting the input value

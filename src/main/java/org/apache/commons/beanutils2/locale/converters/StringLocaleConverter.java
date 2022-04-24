@@ -50,7 +50,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public StringLocaleConverter() {
         this(false);
@@ -209,7 +208,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         String result = null;
 
         if (value instanceof Integer ||
@@ -252,7 +250,6 @@ public class StringLocaleConverter extends BaseLocaleConverter {
      * @throws IllegalArgumentException if an error occurs parsing a String to a Number
      */
     private DecimalFormat getDecimalFormat(final Locale locale, final String pattern) {
-
         final DecimalFormat numberFormat = (DecimalFormat) NumberFormat.getInstance(locale);
 
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully

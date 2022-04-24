@@ -59,6 +59,7 @@ package org.apache.commons.beanutils2;
  * @since BeanUtils 1.9.0
  */
 public class DynaBeanPropertyMapDecorator extends BaseDynaBeanMapDecorator<String> {
+
     /**
      * Constructs a Map for the specified {@link DynaBean}.
      *

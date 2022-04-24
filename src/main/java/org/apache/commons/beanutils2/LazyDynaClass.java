@@ -226,7 +226,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *  restricted, so no new properties can be added
      */
     protected void add(final DynaProperty property) {
-
         if (property.getName() == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -248,7 +247,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
        // Update the properties
        setProperties(newProperties);
-
     }
 
     /**
@@ -266,7 +264,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      */
     @Override
     public void remove(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -293,7 +290,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
         // Update the properties
         setProperties(newProperties);
-
     }
 
     /**
@@ -321,7 +317,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
@@ -335,7 +330,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         }
 
         return dynaProperty;
-
     }
 
     /**
@@ -352,13 +346,11 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
         return propertiesMap.get(name) != null;
-
     }
 
 }

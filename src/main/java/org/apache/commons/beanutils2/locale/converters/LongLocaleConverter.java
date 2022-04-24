@@ -196,7 +196,6 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         final Object result = super.parse(value, pattern);
 
         if (result == null || result instanceof Long) {
@@ -204,6 +203,5 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
         }
 
         return Long.valueOf(((Number)result).longValue());
-
     }
 }

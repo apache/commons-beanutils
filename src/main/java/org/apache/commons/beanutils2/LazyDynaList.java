@@ -187,8 +187,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     private Class<?> elementDynaBeanType;
 
-
-
     /**
      * Default Constructor.
      */
@@ -248,8 +246,6 @@ public class LazyDynaList extends ArrayList<Object> {
         this.addAll(Arrays.asList(array));
     }
 
-
-
     /**
      * <p>Insert an element at the specified index position.</p>
      *
@@ -262,13 +258,11 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public void add(final int index, final Object element) {
-
         final DynaBean dynaBean = transform(element);
 
         growList(index);
 
         super.add(index, dynaBean);
-
     }
 
     /**
@@ -279,11 +273,9 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public boolean add(final Object element) {
-
         final DynaBean dynaBean = transform(element);
 
         return super.add(dynaBean);
-
     }
 
     /**
@@ -294,7 +286,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public boolean addAll(final Collection<?> collection) {
-
         if (collection == null || collection.isEmpty()) {
             return false;
         }
@@ -306,7 +297,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         return true;
-
     }
 
     /**
@@ -323,7 +313,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public boolean addAll(final int index, final Collection<?> collection) {
-
         if (collection == null || collection.isEmpty()) {
             return false;
         }
@@ -345,7 +334,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         return true;
-
     }
 
     /**
@@ -360,11 +348,9 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public Object get(final int index) {
-
         growList(index + 1);
 
         return super.get(index);
-
     }
 
     /**
@@ -380,13 +366,11 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public Object set(final int index, final Object element) {
-
         final DynaBean dynaBean = transform(element);
 
         growList(index + 1);
 
         return super.set(index, dynaBean);
-
     }
 
     /**
@@ -407,7 +391,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public Object[] toArray() {
-
         if (isEmpty() && elementType == null) {
             return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
@@ -423,7 +406,6 @@ public class LazyDynaList extends ArrayList<Object> {
             }
         }
         return array;
-
     }
 
     /**
@@ -435,7 +417,6 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     @Override
     public <T> T[] toArray(final T[] model) {
-
         final Class<?> arrayType = model.getClass().getComponentType();
         if (DynaBean.class.isAssignableFrom(arrayType)
                 || isEmpty() && elementType == null) {
@@ -471,7 +452,6 @@ public class LazyDynaList extends ArrayList<Object> {
         throw new IllegalArgumentException("Invalid array type: "
                   + arrayType.getName() + " - not compatible with '"
                   + elementType.getName());
-
     }
 
 
@@ -482,7 +462,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return A DynaBean[] of the elements in this List.
      */
     public DynaBean[] toDynaBeanArray() {
-
         if (isEmpty() && elementDynaBeanType == null) {
             return LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY;
         }
@@ -492,7 +471,6 @@ public class LazyDynaList extends ArrayList<Object> {
             array[i] = (DynaBean)get(i);
         }
         return array;
-
     }
 
     /**
@@ -503,7 +481,6 @@ public class LazyDynaList extends ArrayList<Object> {
      *            contains elements or the DynaClass is null.
      */
     public void setElementType(final Class<?> elementType) {
-
         if (elementType == null) {
             throw new IllegalArgumentException("Element Type is missing");
         }
@@ -545,7 +522,6 @@ public class LazyDynaList extends ArrayList<Object> {
         } else if (LazyDynaMap.class.isAssignableFrom(elementDynaBeanType )) {
             this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
         }
-
     }
 
     /**
@@ -556,7 +532,6 @@ public class LazyDynaList extends ArrayList<Object> {
      *            contains elements or the DynaClass is null.
      */
     public void setElementDynaClass(final DynaClass elementDynaClass) {
-
         if (elementDynaClass == null) {
             throw new IllegalArgumentException("Element DynaClass is missing");
         }
@@ -584,7 +559,6 @@ public class LazyDynaList extends ArrayList<Object> {
                         "Error creating DynaBean from " +
                         elementDynaClass.getClass().getName() + " - " + e);
         }
-
     }
 
 
@@ -597,7 +571,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param requiredSize the required size of the List.
      */
     private void growList(final int requiredSize) {
-
         if (requiredSize < size()) {
             return;
         }
@@ -608,7 +581,6 @@ public class LazyDynaList extends ArrayList<Object> {
             final DynaBean dynaBean = transform(null);
             super.add(dynaBean);
         }
-
     }
 
     /**
@@ -624,7 +596,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @return The DynaBean to store in the List.
      */
     private DynaBean transform(final Object element) {
-
         DynaBean dynaBean     = null;
         Class<?> newDynaBeanType = null;
         Class<?> newElementType;
@@ -685,7 +656,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
 
         return dynaBean;
-
     }
 
     /**

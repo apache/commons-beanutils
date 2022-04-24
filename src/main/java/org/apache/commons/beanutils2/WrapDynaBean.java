@@ -45,8 +45,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * Constructs a new {@code DynaBean} associated with the specified
      * JavaBean instance.
@@ -54,9 +52,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @param instance JavaBean instance to be wrapped
      */
     public WrapDynaBean(final Object instance) {
-
         this(instance, null);
-
     }
 
     /**
@@ -71,13 +67,9 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @since 1.9
      */
     public WrapDynaBean(final Object instance, final WrapDynaClass cls) {
-
         this.instance = instance;
         this.dynaClass = cls != null ? cls : (WrapDynaClass) getDynaClass();
-
     }
-
-
 
     /**
      * The {@code DynaClass} "base class" that this DynaBean
@@ -89,8 +81,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * The JavaBean instance wrapped by this WrapDynaBean.
      */
     protected Object instance;
-
-
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -106,10 +96,8 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public boolean contains(final String name, final String key) {
-
         throw new UnsupportedOperationException
                 ("WrapDynaBean does not support contains()");
-
     }
 
     /**
@@ -123,7 +111,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name) {
-
         Object value = null;
         try {
             value = getPropertyUtils().getSimpleProperty(instance, name);
@@ -138,7 +125,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                               "', exception - " + t);
         }
         return value;
-
     }
 
     /**
@@ -159,7 +145,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name, final int index) {
-
         Object value = null;
         try {
             value = getPropertyUtils().getIndexedProperty(instance, name, index);
@@ -176,7 +161,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                               "', exception - " + t);
         }
         return value;
-
     }
 
     /**
@@ -194,7 +178,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name, final String key) {
-
         Object value = null;
         try {
             value = getPropertyUtils().getMappedProperty(instance, name, key);
@@ -209,7 +192,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                               "', exception - " + t);
         }
         return value;
-
     }
 
     /**
@@ -219,13 +201,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public DynaClass getDynaClass() {
-
         if (dynaClass == null) {
             dynaClass = WrapDynaClass.createDynaClass(instance.getClass());
         }
 
         return this.dynaClass;
-
     }
 
     /**
@@ -241,10 +221,8 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void remove(final String name, final String key) {
-
         throw new UnsupportedOperationException
                 ("WrapDynaBean does not support remove()");
-
     }
 
     /**
@@ -262,7 +240,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final Object value) {
-
         try {
             getPropertyUtils().setSimpleProperty(instance, name, value);
         } catch (final InvocationTargetException ite) {
@@ -275,7 +252,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error setting property '" + name +
                               "', exception - " + t);
         }
-
     }
 
     /**
@@ -296,7 +272,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final int index, final Object value) {
-
         try {
             getPropertyUtils().setIndexedProperty(instance, name, index, value);
         } catch (final IndexOutOfBoundsException e) {
@@ -311,7 +286,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error setting indexed property '" + name +
                               "', exception - " + t);
         }
-
     }
 
     /**
@@ -330,7 +304,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
      */
     @Override
     public void set(final String name, final String key, final Object value) {
-
         try {
             getPropertyUtils().setMappedProperty(instance, name, key, value);
         } catch (final InvocationTargetException ite) {
@@ -343,7 +316,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
                     ("Error setting mapped property '" + name +
                               "', exception - " + t);
         }
-
     }
 
     /**
@@ -360,8 +332,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
         return instance;
     }
 
-
-
     /**
      * Gets the property descriptor for the specified property name.
      *
@@ -372,14 +342,12 @@ public class WrapDynaBean implements DynaBean, Serializable {
      *  name for our DynaClass
      */
     protected DynaProperty getDynaProperty(final String name) {
-
         final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException
                     ("Invalid property name '" + name + "'");
         }
         return descriptor;
-
     }
 
     /**
@@ -389,12 +357,10 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * @return the associated {@code PropertyUtilsBean}
      */
     private PropertyUtilsBean getPropertyUtils() {
-
         PropertyUtilsBean propUtils = null;
         if (dynaClass != null) {
             propUtils = dynaClass.getPropertyUtilsBean();
         }
         return propUtils != null ? propUtils : PropertyUtilsBean.getInstance();
-
     }
 }

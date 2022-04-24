@@ -43,12 +43,8 @@ import org.apache.commons.logging.LogFactory;
  * If this call succeeds, then the method can be invoked as normal.
  * This call will only succeed when the application has sufficient security privileges.
  * If this call fails then a warning will be logged and the method may fail.</p>
- *
  */
-
 public class MethodUtils {
-
-
 
     /**
      * Only log warning about accessibility work around once.
@@ -95,8 +91,6 @@ public class MethodUtils {
      */
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
             .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
-
-
 
     /**
      * Sets whether methods should be cached for greater performance or not,
@@ -160,7 +154,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         final Object[] args = toArray(arg);
         return invokeMethod(object, methodName, args);
     }
@@ -201,7 +194,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -249,7 +241,6 @@ public class MethodUtils {
                     NoSuchMethodException,
                     IllegalAccessException,
                     InvocationTargetException {
-
         if (parameterTypes == null) {
             parameterTypes = BeanUtils.EMPTY_CLASS_ARRAY;
         }
@@ -296,7 +287,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         final Object[] args = toArray(arg);
         return invokeExactMethod(object, methodName, args);
     }
@@ -328,7 +318,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -369,7 +358,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -419,7 +407,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -476,7 +463,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         final Object[] args = toArray(arg);
         return invokeStaticMethod (objectClass, methodName, args);
     }
@@ -518,7 +504,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -615,7 +600,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         final Object[] args = toArray(arg);
         return invokeExactStaticMethod (objectClass, methodName, args);
     }
@@ -648,7 +632,6 @@ public class MethodUtils {
             NoSuchMethodException,
             IllegalAccessException,
             InvocationTargetException {
-
         if (args == null) {
             args = BeanUtils.EMPTY_OBJECT_ARRAY;
         }
@@ -684,7 +667,6 @@ public class MethodUtils {
             final Class<?> clazz,
             final String methodName,
             final Class<?> parameterType) {
-
         final Class<?>[] parameterTypes = {parameterType};
         return getAccessibleMethod(clazz, methodName, parameterTypes);
     }
@@ -705,7 +687,6 @@ public class MethodUtils {
             final Class<?> clazz,
             final String methodName,
             final Class<?>[] parameterTypes) {
-
         try {
             final MethodDescriptor md = new MethodDescriptor(clazz, methodName, parameterTypes, true);
             // Check the cache first
@@ -732,7 +713,6 @@ public class MethodUtils {
      * @return The accessible method
      */
     public static Method getAccessibleMethod(final Method method) {
-
         // Make sure we have a method to check
         if (method == null) {
             return null;
@@ -752,7 +732,6 @@ public class MethodUtils {
      * @since 1.8.0
      */
     public static Method getAccessibleMethod(Class<?> clazz, Method method) {
-
         // Make sure we have a method to check
         if (method == null) {
             return null;
@@ -814,7 +793,6 @@ public class MethodUtils {
      */
     private static Method getAccessibleMethodFromSuperclass
             (final Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
-
         Class<?> parentClazz = clazz.getSuperclass();
         while (parentClazz != null) {
             if (Modifier.isPublic(parentClazz.getModifiers())) {
@@ -845,7 +823,6 @@ public class MethodUtils {
      */
     private static Method getAccessibleMethodFromInterfaceNest
             (Class<?> clazz, final String methodName, final Class<?>[] parameterTypes) {
-
         Method method = null;
 
         // Search up the superclass chain
@@ -1075,7 +1052,6 @@ public class MethodUtils {
      * @return The total transformation cost
      */
     private static float getTotalTransformationCost(final Class<?>[] srcArgs, final Class<?>[] destArgs) {
-
         float totalCost = 0.0f;
         for (int i = 0; i < srcArgs.length; i++) {
             Class<?> srcClass, destClass;

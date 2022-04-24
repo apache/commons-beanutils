@@ -38,7 +38,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public ShortLocaleConverter() {
         this(false);
@@ -198,7 +197,6 @@ public class ShortLocaleConverter extends DecimalLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         final Object result = super.parse(value, pattern);
 
         if (result == null || result instanceof Short) {

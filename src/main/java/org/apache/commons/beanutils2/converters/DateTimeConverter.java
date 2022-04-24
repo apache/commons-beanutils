@@ -219,7 +219,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     @Override
     protected String convertToString(final Object value) throws Throwable {
-
         Date date = null;
         if (value instanceof Date) {
             date = (Date)value;
@@ -295,7 +294,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     @Override
     protected <T> T convertToType(final Class<T> targetType, final Object value) throws Exception {
-
         final Class<?> sourceType = value.getClass();
 
         // Handle java.sql.Timestamp
@@ -402,7 +400,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * @return The converted date value.
      */
     private <T> T toDate(final Class<T> type, final long value) {
-
         // java.util.Date
         if (type.equals(Date.class)) {
             return type.cast(new Date(value));

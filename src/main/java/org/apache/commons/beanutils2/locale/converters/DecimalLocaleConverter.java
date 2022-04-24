@@ -206,7 +206,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
      */
     @Override
     protected Object parse(final Object value, final String pattern) throws ParseException {
-
         if (value instanceof Number) {
             return value;
         }

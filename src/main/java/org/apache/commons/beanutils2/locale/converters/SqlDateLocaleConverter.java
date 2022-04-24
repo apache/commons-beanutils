@@ -37,7 +37,6 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
      * if a conversion error occurs. The locale is the default locale for
      * this instance of the Java Virtual Machine and an unlocalized pattern is used
      * for the conversion.
-     *
      */
     public SqlDateLocaleConverter() {
         this(false);

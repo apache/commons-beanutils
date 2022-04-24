@@ -38,8 +38,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /**
      * <p>Flag defining whether column names should be lower cased when
      * converted to property names.</p>
@@ -71,8 +69,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     private Map<String, String> columnNameXref;
 
-
-
     /**
      * <p>Return the name of this DynaClass (analogous to the
      * {@code getName()</code> method of <code>java.lang.Class}, which
@@ -81,7 +77,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     @Override
     public String getName() {
-
         return this.getClass().getName();
 
     }
@@ -97,7 +92,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
@@ -112,9 +106,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaProperty[] getDynaProperties() {
-
         return properties;
-
     }
 
     /**
@@ -131,9 +123,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
-
         throw new UnsupportedOperationException("newInstance() not supported");
-
     }
 
     /**
@@ -157,7 +147,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *  the specified class
      */
     protected Class<?> loadClass(final String className) throws SQLException {
-
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             if (cl == null) {
@@ -169,7 +158,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             throw new SQLException(
                     "Cannot load column class '" + className + "': " + e);
         }
-
     }
 
     /**
@@ -185,7 +173,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
                                     final ResultSetMetaData metadata,
                                     final int i)
                                     throws SQLException {
-
         String columnName = null;
         if (useColumnLabel) {
             columnName = metadata.getColumnLabel(i);
@@ -225,7 +212,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
             clazz = loadClass(className);
         }
         return new DynaProperty(name, clazz);
-
     }
 
     /**
@@ -240,7 +226,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *  result set metadata
      */
     protected void introspect(final ResultSet resultSet) throws SQLException {
-
         // Accumulate an ordered list of DynaProperties
         final List<DynaProperty> list = new ArrayList<>();
         final ResultSetMetaData metadata = resultSet.getMetaData();
@@ -258,7 +243,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         for (final DynaProperty property : properties) {
             propertiesMap.put(property.getName(), property);
         }
-
     }
 
     /**
@@ -270,7 +254,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * @throws SQLException if an error occurs
      */
     protected Object getObject(final ResultSet resultSet, final String name) throws SQLException {
-
         final DynaProperty property = getDynaProperty(name);
         if (property == null) {
             throw new IllegalArgumentException("Invalid name '" + name + "'");
