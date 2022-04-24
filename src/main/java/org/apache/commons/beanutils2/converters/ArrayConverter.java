@@ -132,11 +132,9 @@ public class ArrayConverter extends AbstractConverter {
     private final Class<?> defaultType;
     private final Converter elementConverter;
     private int defaultSize;
-    private char delimiter    = ',';
+    private char delimiter = ',';
     private char[] allowedChars = new char[] {'.', '-'};
     private boolean onlyFirstToString = true;
-
-
 
     /**
      * Constructs an <b>array</b> {@code Converter} with the specified
