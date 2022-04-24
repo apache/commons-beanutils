@@ -20,12 +20,9 @@ package org.apache.commons.beanutils2.locale;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
-import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.WeakFastHashMap;
 import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter;
@@ -101,11 +98,14 @@ public class LocaleConvertUtilsBean {
     /** The {@code Log} instance for this class. */
     private final Log log = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
-    /** Every entry of the mapConverters is:
-     *  key = locale
-     *  value = map of converters for the certain locale.
+    /**
+     * Every entry of the mapConverters is:
+     * <ul>
+     * <li>key = locale</li>
+     * <li>value = map of converters for the certain locale.</li>
+     * <ul>
      */
-    private final DelegateFastHashMap mapConverters = new DelegateFastHashMap(BeanUtils.createCache());
+    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter>> mapConverters = new WeakFastHashMap<>();
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -406,25 +406,11 @@ public class LocaleConvertUtilsBean {
      *  the specified locale.
      */
     protected Map<Class<?>, LocaleConverter> lookup(final Locale locale) {
-        Map<Class<?>, LocaleConverter> localeConverters;
-
-        if (locale == null) {
-            localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(defaultLocale);
-        }
-        else {
-            localeConverters = (Map<Class<?>, LocaleConverter>) mapConverters.get(locale);
-
-            if (localeConverters == null) {
-                localeConverters = create(locale);
-                mapConverters.put(locale, localeConverters);
-            }
-        }
-
-        return localeConverters;
+        return mapConverters.computeIfAbsent(locale == null ? defaultLocale : locale, this::create);
     }
 
     /**
-     *  Create all {@link LocaleConverter} types for specified locale.
+     * Create all {@link LocaleConverter} types for specified locale.
      *
      * @param locale The Locale
      * @return The map instance contains the all {@link LocaleConverter} types
@@ -432,7 +418,7 @@ public class LocaleConvertUtilsBean {
      */
     protected Map<Class<?>, LocaleConverter> create(final Locale locale) {
 
-        final DelegateFastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
+        final WeakFastHashMap<Class<?>, LocaleConverter> converter = new WeakFastHashMap<>();
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -462,98 +448,10 @@ public class LocaleConvertUtilsBean {
         // behavior of toString and valueOf methods of these classes
         converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
         converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
-        converter.put( java.sql.Timestamp.class,
-                       new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S")
-                     );
+        converter.put(java.sql.Timestamp.class, new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S"));
 
         converter.setFast(true);
 
         return converter;
-    }
-
-    private static class DelegateFastHashMap implements Map {
-        private final Map<Object, Object> map;
-
-        private DelegateFastHashMap(final Map<Object, Object> map) {
-            this.map = map;
-        }
-
-        @Override
-        public void clear() {
-            map.clear();
-        }
-
-        @Override
-        public boolean containsKey(final Object key) {
-            return map.containsKey(key);
-        }
-
-        @Override
-        public boolean containsValue(final Object value) {
-            return map.containsValue(value);
-        }
-
-        @Override
-        public Set<Map.Entry<Object, Object>> entrySet() {
-            return map.entrySet();
-        }
-
-        @Override
-        public boolean equals(final Object o) {
-            return map.equals(o);
-        }
-
-        @Override
-        public Object get(final Object key) {
-            return map.get(key);
-        }
-
-        @Override
-        public int hashCode() {
-            return map.hashCode();
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return map.isEmpty();
-        }
-
-        @Override
-        public Set<Object> keySet() {
-            return map.keySet();
-        }
-
-        @Override
-        public Object put(final Object key, final Object value) {
-            return map.put(key, value);
-        }
-
-        // we operate on very generic types (<Object, Object>), so there is
-        // no need for doing type checks
-        @Override
-        public void putAll(final Map m) {
-            map.putAll(m);
-        }
-
-        @Override
-        public Object remove(final Object key) {
-            return map.remove(key);
-        }
-
-        @Override
-        public int size() {
-            return map.size();
-        }
-
-        @Override
-        public Collection<Object> values() {
-            return map.values();
-        }
-
-        public void setFast(final boolean fast) {
-            if (map instanceof WeakFastHashMap) {
-                ((WeakFastHashMap<?, ?>) map).setFast(fast);
-            }
-        }
     }
 }
