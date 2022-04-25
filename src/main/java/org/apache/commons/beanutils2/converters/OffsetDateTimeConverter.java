@@ -35,7 +35,7 @@ import java.time.OffsetDateTime;
  * @since 2.0
  * @see java.time.OffsetDateTime
  */
-public final class OffsetDateTimeConverter extends DateTimeConverter {
+public final class OffsetDateTimeConverter extends DateTimeConverter<OffsetDateTime> {
 
     /**
      * Constructs a <b>java.time.OffsetDateTime</b> <i>Converter</i> that throws
@@ -62,7 +62,7 @@ public final class OffsetDateTimeConverter extends DateTimeConverter {
      * @return The default type this {@code Converter} handles.
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<OffsetDateTime> getDefaultType() {
         return OffsetDateTime.class;
     }
 

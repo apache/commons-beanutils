@@ -143,7 +143,7 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
-        final LocaleConverter converter = lookup(String.class, locale);
+        final LocaleConverter<String> converter = lookup(String.class, locale);
         return converter.convert(String.class, value, pattern);
     }
 
@@ -299,7 +299,6 @@ public class LocaleConvertUtilsBean {
      *  for the specified locale.
      */
     protected Map<Class<?>, LocaleConverter> create(final Locale locale) {
-
         final WeakFastHashMap<Class<?>, LocaleConverter> converter = new WeakFastHashMap<>();
         converter.setFast(false);
 
@@ -342,7 +341,6 @@ public class LocaleConvertUtilsBean {
      */
     public void deregister() {
         final Map<Class<?>, LocaleConverter> defaultConverter = lookup(defaultLocale);
-
         mapConverters.setFast(false);
 
         mapConverters.clear();
@@ -393,12 +391,13 @@ public void deregister(final Class<?> clazz, final Locale locale) {
      * destination class and locale; if there is no registered Converter, return
      * {@code null}.
      *
+     * @param <T> The converter type.
      * @param clazz Class for which to return a registered Converter
      * @param locale The Locale
      * @return The registered locale Converter, if any
      */
-    public LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
-        final LocaleConverter converter = lookup(locale).get(clazz);
+    public <T> LocaleConverter<T> lookup(final Class<T> clazz, final Locale locale) {
+        final LocaleConverter<T> converter = lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
             log.trace("LocaleConverter:" + converter);
@@ -428,7 +427,7 @@ public void deregister(final Class<?> clazz, final Locale locale) {
      *  Converter
      * @param locale The locale
      */
-    public void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
+    public <T> void register(final LocaleConverter<T> converter, final Class<T> clazz, final Locale locale) {
         lookup(locale).put(clazz, converter);
     }
 

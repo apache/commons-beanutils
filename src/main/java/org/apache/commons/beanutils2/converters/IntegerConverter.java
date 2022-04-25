@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class IntegerConverter extends NumberConverter {
+public final class IntegerConverter extends NumberConverter<Integer> {
 
     /**
      * Constructs a <b>java.lang.Integer</b> <i>Converter</i> that throws

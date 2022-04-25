@@ -43,7 +43,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class BooleanConverter extends AbstractConverter {
+public final class BooleanConverter extends AbstractConverter<Boolean> {
 
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a

@@ -27,7 +27,7 @@ import java.util.UUID;
  *
  * @since 2.0
  */
-public final class UUIDConverter extends AbstractConverter {
+public final class UUIDConverter extends AbstractConverter<UUID> {
 
     /**
      * Constructs a <b>java.util.UUID</b> <i>Converter</i> that throws
@@ -55,7 +55,7 @@ public final class UUIDConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<UUID> getDefaultType() {
         return UUID.class;
     }
 

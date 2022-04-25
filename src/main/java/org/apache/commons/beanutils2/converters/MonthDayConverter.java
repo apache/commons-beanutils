@@ -29,7 +29,7 @@ import java.time.MonthDay;
  * @since 2.0
  * @see java.time.MonthDay
  */
-public final class MonthDayConverter extends AbstractConverter {
+public final class MonthDayConverter extends AbstractConverter<MonthDay> {
 
     /**
      * Constructs a <b>java.time.MonthDay</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class MonthDayConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<MonthDay> getDefaultType() {
         return MonthDay.class;
     }
 

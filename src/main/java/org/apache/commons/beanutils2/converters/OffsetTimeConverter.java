@@ -29,7 +29,7 @@ import java.time.OffsetTime;
  * @since 2.0
  * @see java.time.OffsetTime
  */
-public final class OffsetTimeConverter extends AbstractConverter {
+public final class OffsetTimeConverter extends AbstractConverter<OffsetTime> {
 
     /**
      * Constructs a <b>java.time.OffsetTime</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class OffsetTimeConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<OffsetTime> getDefaultType() {
         return OffsetTime.class;
     }
 

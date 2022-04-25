@@ -24,15 +24,14 @@ import org.apache.commons.beanutils2.Converter;
  * within the BeanUtils package to manage the conversion of objects from
  * one type to another.
  *
+ * @param <T> The converter type.
  */
-
-public interface LocaleConverter extends Converter {
+public interface LocaleConverter<T> extends Converter<T> {
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
-     * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
@@ -41,5 +40,5 @@ public interface LocaleConverter extends Converter {
      * @throws org.apache.commons.beanutils2.ConversionException if conversion
      * cannot be performed successfully or if the target type is not supported
      */
-    <T> T convert(Class<T> type, Object value, String pattern);
+    T convert(Class<T> type, Object value, String pattern);
 }

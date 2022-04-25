@@ -29,7 +29,7 @@ import java.time.LocalTime;
  * @since 2.0
  * @see java.time.LocalTime
  */
-public final class LocalTimeConverter extends AbstractConverter {
+public final class LocalTimeConverter extends AbstractConverter<LocalTime> {
 
     /**
      * Constructs a <b>java.time.LocalTime</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class LocalTimeConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<LocalTime> getDefaultType() {
         return LocalTime.class;
     }
 

@@ -27,7 +27,7 @@ import java.net.URL;
  *
  * @since 1.3
  */
-public final class URLConverter extends AbstractConverter {
+public final class URLConverter extends AbstractConverter<URL> {
 
     /**
      * Constructs a <b>java.net.URL</b> <i>Converter</i> that throws
@@ -55,7 +55,7 @@ public final class URLConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<URL> getDefaultType() {
         return URL.class;
     }
 

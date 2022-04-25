@@ -32,7 +32,7 @@ import java.sql.Date;
  *
  * @since 1.3
  */
-public final class SqlDateConverter extends DateTimeConverter {
+public final class SqlDateConverter extends DateTimeConverter<Date> {
 
     /**
      * Constructs a <b>java.sql.Date</b> <i>Converter</i> that throws
@@ -60,7 +60,7 @@ public final class SqlDateConverter extends DateTimeConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Date> getDefaultType() {
         return Date.class;
     }
 

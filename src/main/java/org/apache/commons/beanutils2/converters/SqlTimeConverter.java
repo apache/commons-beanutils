@@ -35,7 +35,7 @@ import java.util.TimeZone;
  *
  * @since 1.3
  */
-public final class SqlTimeConverter extends DateTimeConverter {
+public final class SqlTimeConverter extends DateTimeConverter<Time> {
 
     /**
      * Constructs a <b>java.sql.Time</b> <i>Converter</i> that throws
@@ -63,7 +63,7 @@ public final class SqlTimeConverter extends DateTimeConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Time> getDefaultType() {
         return Time.class;
     }
 

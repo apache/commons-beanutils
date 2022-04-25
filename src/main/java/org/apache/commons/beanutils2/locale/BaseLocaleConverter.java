@@ -31,8 +31,10 @@ import org.apache.commons.logging.LogFactory;
  * that convert an incoming locale-sensitive Object into an object of correspond type,
  * optionally using a default value or throwing a {@link ConversionException}
  * if a conversion error occurs.</p>
+ *
+ * @param <T> The converter type.
  */
-public abstract class BaseLocaleConverter implements LocaleConverter {
+public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
@@ -175,7 +177,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type. The default pattern is used for the conversion.
      *
-     * @param <T> The desired target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input object to be converted
      * @return The converted value
@@ -184,7 +185,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *  successfully
      */
     @Override
-    public <T> T convert(final Class<T> type, final Object value) {
+    public T convert(final Class<T> type, final Object value) {
         return convert(type, value, null);
     }
 
@@ -192,7 +193,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
      *
-     * @param <T> The desired target type of the conversion
      * @param type Data is type to which this value should be converted
      * @param value is the input object to be converted
      * @param pattern is the pattern is used for the conversion; if null is
@@ -204,7 +204,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      *  successfully
      */
     @Override
-    public <T> T convert(final Class<T> type, final Object value, final String pattern) {
+    public T convert(final Class<T> type, final Object value, final String pattern) {
         final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {
             if (useDefault) {
@@ -237,13 +237,12 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * given target type. If the default value is not conform to the given type,
      * an exception is thrown.
      *
-     * @param <T> the desired target type
      * @param type the target class of the conversion
      * @return the default value in the given target type
      * @throws ConversionException if the default object is not compatible with
      *         the target type
      */
-    private <T> T getDefaultAs(final Class<T> type) {
+    private T getDefaultAs(final Class<T> type) {
         return checkConversionResult(type, defaultValue);
     }
 

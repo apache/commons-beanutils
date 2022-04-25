@@ -20,6 +20,7 @@ package org.apache.commons.beanutils2.locale.converters;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -31,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 
-public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
+public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Date> {
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverterTestCase.class);

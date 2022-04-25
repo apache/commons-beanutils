@@ -29,7 +29,7 @@ import java.time.ZoneId;
  * @since 2.0
  * @see java.time.ZoneId
  */
-public final class ZoneIdConverter extends AbstractConverter {
+public final class ZoneIdConverter extends AbstractConverter<ZoneId> {
 
     /**
      * Constructs a <b>java.time.ZoneId</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class ZoneIdConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<ZoneId> getDefaultType() {
         return ZoneId.class;
     }
 

@@ -27,7 +27,7 @@ package org.apache.commons.beanutils2.converters;
  * @since 2.0
  * @see java.lang.Enum
  */
-public final class EnumConverter extends AbstractConverter {
+public final class EnumConverter extends AbstractConverter<Enum> {
 
     /**
      * Constructs a <b>java.lang.Enum</b> <i>Converter</i> that throws
@@ -55,7 +55,7 @@ public final class EnumConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Enum> getDefaultType() {
         return Enum.class;
     }
 

@@ -30,7 +30,7 @@ import org.apache.commons.beanutils2.ConversionException;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  */
-public class ByteLocaleConverter extends DecimalLocaleConverter {
+public class ByteLocaleConverter extends DecimalLocaleConverter<Byte> {
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

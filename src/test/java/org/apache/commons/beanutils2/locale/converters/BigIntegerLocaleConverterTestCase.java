@@ -19,34 +19,25 @@ package org.apache.commons.beanutils2.locale.converters;
 
 import java.math.BigInteger;
 
-import org.apache.commons.beanutils2.ConversionException;
-
 /**
  * Test Case for the BigIntegerLocaleConverter class.
  *
  */
 
-public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {
-
-
+public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase<BigInteger> {
 
     public BigIntegerLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() throws Exception {
-
         super.setUp();
-
         defaultValue  = new BigInteger("999");
         expectedValue = new BigInteger(expectedIntegerValue);
-
     }
 
     /**
@@ -56,8 +47,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
     public void tearDown() {
         super.tearDown();
     }
-
-
 
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
@@ -245,20 +234,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
 
-    }
-
-    /**
-     * Tries to convert to an unsupported type. This tests behavior of the base
-     * class. All locale converters should react in the same way.
-     */
-    public void testUnsupportedType() {
-        converter = new BigIntegerLocaleConverter();
-        try {
-            converter.convert(getClass(), "test", null);
-            fail("Unsupported type not detected!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
     }
 
 }

@@ -237,7 +237,7 @@ public class LocaleConvertUtils {
      * @param locale The locale
      * @see LocaleConvertUtilsBean#register(LocaleConverter, Class, Locale)
      */
-    public static void register(final LocaleConverter converter, final Class<?> clazz, final Locale locale) {
+    public static void register(final LocaleConverter converter, final Class clazz, final Locale locale) {
         LocaleConvertUtilsBean.getInstance().register(converter, clazz, locale);
     }
 
@@ -284,12 +284,13 @@ public class LocaleConvertUtils {
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
      *
+     * @param <T> The converter type.
      * @param clazz Class for which to return a registered Converter
      * @param locale The Locale
      * @return The registered locale Converter, if any
      * @see LocaleConvertUtilsBean#lookup(Class, Locale)
      */
-    public static LocaleConverter lookup(final Class<?> clazz, final Locale locale) {
+    public static <T> LocaleConverter<T> lookup(final Class<T> clazz, final Locale locale) {
         return LocaleConvertUtilsBean.getInstance().lookup(clazz, locale);
     }
 }

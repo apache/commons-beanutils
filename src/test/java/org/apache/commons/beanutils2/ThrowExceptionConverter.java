@@ -22,13 +22,11 @@ package org.apache.commons.beanutils2;
  * when convert is called.
  * The idea is that catching this exception is a clear signal that this method
  * has been called.
- *
  */
-
-public class ThrowExceptionConverter implements Converter {
+public class ThrowExceptionConverter implements Converter<Void> {
 
     @Override
-    public <T> T convert(final Class<T> type, final Object value) {
+    public Void convert(final Class<Void> type, final Object value) {
         throw new PassTestException();
     }
 }

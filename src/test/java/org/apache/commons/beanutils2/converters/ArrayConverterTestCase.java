@@ -72,13 +72,13 @@ public class ArrayConverterTestCase extends TestCase {
     /** Sets Up */
     @Override
     public void setUp() throws Exception {
+        // empty
     }
-
-
 
     /** Tear Down */
     @Override
     public void tearDown() throws Exception {
+        // empty
     }
 
     /**
@@ -382,7 +382,7 @@ public class ArrayConverterTestCase extends TestCase {
      */
     public void testUnderscore_BEANUTILS_302() {
         final String value = "first_value,second_value";
-        final ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
+        final ArrayConverter<String[]> converter = new ArrayConverter(String[].class, new StringConverter());
 
         // test underscore not allowed (the default)
         String[] result = converter.convert(String[].class, value);

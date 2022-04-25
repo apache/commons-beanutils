@@ -32,7 +32,7 @@ import java.util.Date;
  *
  * @since 1.8.0
  */
-public final class DateConverter extends DateTimeConverter {
+public final class DateConverter extends DateTimeConverter<Date> {
 
     /**
      * Constructs a <b>java.util.Date</b> <i>Converter</i> that throws
@@ -59,7 +59,7 @@ public final class DateConverter extends DateTimeConverter {
      * @return The default type this {@code Converter} handles.
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Date> getDefaultType() {
         return Date.class;
     }
 

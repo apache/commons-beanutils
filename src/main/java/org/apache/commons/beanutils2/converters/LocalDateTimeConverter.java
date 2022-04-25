@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  * @since 2.0
  * @see java.time.LocalDateTime
  */
-public final class LocalDateTimeConverter extends DateTimeConverter {
+public final class LocalDateTimeConverter extends DateTimeConverter<LocalDateTime> {
 
     /**
      * Constructs a <b>java.time.LocalDateTime</b> <i>Converter</i> that throws
@@ -62,7 +62,7 @@ public final class LocalDateTimeConverter extends DateTimeConverter {
      * @return The default type this {@code Converter} handles.
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<LocalDateTime> getDefaultType() {
         return LocalDateTime.class;
     }
 

@@ -54,9 +54,10 @@ import org.apache.commons.logging.LogFactory;
  * tries to transform the default value to the requested target type.
  * If this fails, a {@code ConversionException} if thrown.
  *
+ * @param <D> The default value type.
  * @since 1.8.0
  */
-public abstract class AbstractConverter implements Converter {
+public abstract class AbstractConverter<D> implements Converter<D> {
 
     /** Debug logging message to indicate default value configuration */
     private static final String DEFAULT_CONFIG_MSG =
@@ -110,7 +111,7 @@ public abstract class AbstractConverter implements Converter {
     /**
      * The default value specified to our Constructor, if any.
      */
-    private Object defaultValue;
+    private D defaultValue;
 
     /**
      * Constructs a <i>Converter</i> that throws a
@@ -149,7 +150,6 @@ public abstract class AbstractConverter implements Converter {
      * Converts the input object into an output object of the
      * specified type.
      *
-     * @param <T> the target type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value.
@@ -157,13 +157,13 @@ public abstract class AbstractConverter implements Converter {
      * successfully and no default is specified.
      */
     @Override
-    public <T> T convert(final Class<T> type, Object value) {
+    public D convert(final Class<D> type, Object value) {
         if (type == null) {
             return convertToDefaultType(value);
         }
 
         Class<?> sourceType  = value == null ? null : value.getClass();
-        final Class<T> targetType  = ConvertUtils.primitiveToWrapper(type);
+        final Class<D> targetType  = ConvertUtils.primitiveToWrapper(type);
 
         if (log().isDebugEnabled()) {
             log().debug("Converting"
@@ -301,7 +301,7 @@ public abstract class AbstractConverter implements Converter {
      *
      * @return The default type this {@code Converter} handles.
      */
-    protected abstract Class<?> getDefaultType();
+    protected abstract Class<D> getDefaultType();
 
     /**
      * Handles Conversion Errors.

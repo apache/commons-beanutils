@@ -29,7 +29,7 @@ import java.time.Duration;
  * @since 2.0
  * @see java.time.Duration
  */
-public final class DurationConverter extends AbstractConverter {
+public final class DurationConverter extends AbstractConverter<Duration> {
 
     /**
      * Constructs a <b>java.time.Duration</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class DurationConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Duration> getDefaultType() {
         return Duration.class;
     }
 

@@ -125,11 +125,12 @@ import org.apache.commons.beanutils2.Converter;
  *    int[][] result = (int[][])matrixConverter.convert(int[][].class, matrixString);
  * </pre>
  *
+ * @param <C> The converter type.
  * @since 1.8.0
  */
-public class ArrayConverter extends AbstractConverter {
+public class ArrayConverter<C> extends AbstractConverter<C> {
 
-    private final Class<?> defaultType;
+    private final Class<C> defaultType;
     private final Converter elementConverter;
     private int defaultSize;
     private char delimiter = ',';
@@ -146,7 +147,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param elementConverter Converter used to convert
      *  individual array elements.
      */
-    public ArrayConverter(final Class<?> defaultType, final Converter elementConverter) {
+    public ArrayConverter(final Class<C> defaultType, final Converter elementConverter) {
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
         }
@@ -172,7 +173,7 @@ public class ArrayConverter extends AbstractConverter {
      * @param defaultSize Specifies the size of the default array value or if less
      *  than zero indicates that a {@code null} default value should be used.
      */
-    public ArrayConverter(final Class<?> defaultType, final Converter elementConverter, final int defaultSize) {
+    public ArrayConverter(final Class<C> defaultType, final Converter elementConverter, final int defaultSize) {
         this(defaultType, elementConverter);
         this.defaultSize = defaultSize;
         Object defaultValue = null;
@@ -220,7 +221,7 @@ public class ArrayConverter extends AbstractConverter {
      * @return The default type this {@code Converter} handles.
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<C> getDefaultType() {
         return defaultType;
     }
 
@@ -246,7 +247,7 @@ public class ArrayConverter extends AbstractConverter {
         }
 
         if (size == 0) {
-            return (String)getDefault(String.class);
+            return (String) getDefault(String.class);
         }
 
         if (onlyFirstToString) {

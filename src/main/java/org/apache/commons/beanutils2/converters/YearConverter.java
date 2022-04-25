@@ -29,7 +29,7 @@ import java.time.Year;
  * @since 2.0
  * @see java.time.Year
  */
-public final class YearConverter extends AbstractConverter {
+public final class YearConverter extends AbstractConverter<Year> {
 
     /**
      * Constructs a <b>java.time.Year</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class YearConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Year> getDefaultType() {
         return Year.class;
     }
 

@@ -40,7 +40,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class StringConverter extends AbstractConverter {
+public final class StringConverter extends AbstractConverter<String> {
 
     /**
      * Constructs a <b>java.lang.String</b> <i>Converter</i> that throws
@@ -68,7 +68,7 @@ public final class StringConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<String> getDefaultType() {
         return String.class;
     }
 

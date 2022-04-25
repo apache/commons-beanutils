@@ -29,7 +29,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.4
  */
-public final class ClassConverter extends AbstractConverter {
+public final class ClassConverter extends AbstractConverter<Class> {
 
     /**
      * Constructs a <b>java.lang.Class</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class ClassConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Class> getDefaultType() {
         return Class.class;
     }
 
@@ -70,7 +70,7 @@ public final class ClassConverter extends AbstractConverter {
      */
     @Override
     protected String convertToString(final Object value) {
-        return value instanceof Class ? ((Class<?>)value).getName() : value.toString();
+        return value instanceof Class ? ((Class<?>) value).getName() : value.toString();
     }
 
     /**

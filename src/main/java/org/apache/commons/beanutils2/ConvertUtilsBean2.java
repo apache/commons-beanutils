@@ -55,7 +55,7 @@ public class ConvertUtilsBean2 extends ConvertUtilsBean {
      * @see ConvertUtilsBean#convert(String[], Class)
      */
     @Override
-    public Object convert(final String value, final Class<?> clazz) {
+    public <T> Object convert(final String value, final Class<T> clazz) {
         return convert((Object) value, clazz);
     }
 

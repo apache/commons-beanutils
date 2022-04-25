@@ -24,7 +24,7 @@ import java.math.BigDecimal;
  *
  */
 
-public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase {
+public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCase<BigDecimal> {
 
 
 

@@ -25,7 +25,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class CharacterConverter extends AbstractConverter {
+public final class CharacterConverter extends AbstractConverter<Character> {
 
     /**
      * Constructs a <b>java.lang.Character</b> <i>Converter</i> that throws
@@ -53,7 +53,7 @@ public final class CharacterConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Character> getDefaultType() {
         return Character.class;
     }
 

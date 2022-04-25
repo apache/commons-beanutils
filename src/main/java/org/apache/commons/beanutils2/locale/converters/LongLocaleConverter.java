@@ -28,7 +28,7 @@ import java.util.Locale;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  */
-public class LongLocaleConverter extends DecimalLocaleConverter {
+public class LongLocaleConverter extends DecimalLocaleConverter<Long> {
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

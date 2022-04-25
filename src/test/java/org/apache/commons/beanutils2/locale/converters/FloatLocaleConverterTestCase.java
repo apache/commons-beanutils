@@ -28,7 +28,7 @@ import org.apache.commons.beanutils2.locale.LocaleConvertUtils;
  *
  */
 
-public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
+public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Float> {
 
 
 

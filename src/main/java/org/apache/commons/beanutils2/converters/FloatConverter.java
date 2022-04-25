@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class FloatConverter extends NumberConverter {
+public final class FloatConverter extends NumberConverter<Float> {
 
     /**
      * Constructs a <b>java.lang.Float</b> <i>Converter</i> that throws

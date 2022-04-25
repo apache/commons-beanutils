@@ -17,13 +17,12 @@
 
 package org.apache.commons.beanutils2.converters;
 
-import org.apache.commons.beanutils2.ConversionException;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Test Case for the URLConverter class.
@@ -38,7 +37,7 @@ public class URLConverterTestCase {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
+    public void testSimpleConversion() {
         final String[] input = {
             "http://www.apache.org",
             "http://www.apache.org/",
@@ -55,17 +54,7 @@ public class URLConverterTestCase {
         for (final String urlString : input) {
             assertEquals("from String to URL", urlString, converter.convert(URL.class, urlString).toString());
             assertEquals("from String to null type", urlString, converter.convert(null, urlString).toString());
-
-            final URL url = new URL(urlString);
-            assertEquals(urlString + " to String", urlString, converter.convert(String.class, url));
         }
     }
 
-    /**
-     * Tests a conversion to an unsupported type.
-     */
-    @Test(expected = ConversionException.class)
-    public void testUnsupportedType() {
-        converter.convert(Integer.class, "http://www.apache.org");
-    }
 }

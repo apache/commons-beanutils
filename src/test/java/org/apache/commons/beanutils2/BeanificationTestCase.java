@@ -32,21 +32,11 @@ import junit.framework.TestSuite;
  * <p>
  * Test Case for changes made during Beanutils Beanification
  * </p>
- *
  */
-
 public class BeanificationTestCase extends TestCase {
-
-
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -57,20 +47,13 @@ public class BeanificationTestCase extends TestCase {
         super(name);
     }
 
-
-
-
-
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() {
-
         ConvertUtils.deregister();
-
     }
-
 
     /**
      * Creates the tests included in this test suite.
@@ -79,7 +62,6 @@ public class BeanificationTestCase extends TestCase {
         return new TestSuite(BeanificationTestCase.class);
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -87,9 +69,6 @@ public class BeanificationTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
-
-
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
@@ -210,7 +189,6 @@ public class BeanificationTestCase extends TestCase {
                 return "GetBeanUtilsBeanThread";
             }
         }
-
 
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         @SuppressWarnings("unused")
@@ -373,9 +351,9 @@ public class BeanificationTestCase extends TestCase {
             public void run() {
                 try {
                     signal.setSignal(3);
-                    ConvertUtils.register(new Converter() {
+                    ConvertUtils.register(new Converter<Integer>() {
                                             @Override
-                                            public <T> T convert(final Class<T> type, final Object value) {
+                                            public Integer convert(final Class<Integer> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(new Integer(9));
                                             }
                                                 }, Integer.TYPE);
@@ -396,9 +374,9 @@ public class BeanificationTestCase extends TestCase {
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
-        ConvertUtils.register(new Converter() {
+        ConvertUtils.register(new Converter<Integer>() {
                                 @Override
-                                public <T> T convert(final Class<T> type, final Object value) {
+                                public Integer convert(final Class<Integer> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
                                 }
                                     }, Integer.TYPE);

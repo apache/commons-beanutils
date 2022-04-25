@@ -29,7 +29,7 @@ import java.time.ZoneOffset;
  * @since 2.0
  * @see java.time.ZoneOffset
  */
-public final class ZoneOffsetConverter extends AbstractConverter {
+public final class ZoneOffsetConverter extends AbstractConverter<ZoneOffset> {
 
     /**
      * Constructs a <b>java.time.ZoneOffset</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class ZoneOffsetConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<ZoneOffset> getDefaultType() {
         return ZoneOffset.class;
     }
 

@@ -132,7 +132,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
     /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
-    public void testMemoryLeak2() throws Exception {
+    public void testMemoryLeak2() {
         // tests when the map used by beanutils has the right behavior
 
         if (BeanUtilsTestCase.isPre14JVM()) {
@@ -364,13 +364,13 @@ public class LocaleBeanificationTestCase extends TestCase {
             public void run() {
                 try {
                     signal.setSignal(3);
-                    LocaleConvertUtils.register(new LocaleConverter() {
+                    LocaleConvertUtils.register(new LocaleConverter<Integer>() {
                                             @Override
-                                            public <T> T convert(final Class<T> type, final Object value) {
+                                            public Integer convert(final Class<Integer> type, final Object value) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
                                             @Override
-                                            public <T> T convert(final Class<T> type, final Object value, final String pattern) {
+                                            public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
                                                 return ConvertUtils.primitiveToWrapper(type).cast(9);
                                             }
                                                 }, Integer.TYPE, Locale.getDefault());
@@ -391,13 +391,13 @@ public class LocaleBeanificationTestCase extends TestCase {
         LocaleBeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
-        LocaleConvertUtils.register(new LocaleConverter() {
+        LocaleConvertUtils.register(new LocaleConverter<Integer>() {
                                 @Override
-                                public <T> T convert(final Class<T> type, final Object value) {
+                                public Integer convert(final Class<Integer> type, final Object value) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
                                 @Override
-                                public <T> T convert(final Class<T> type, final Object value, final String pattern) {
+                                public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
                                     return ConvertUtils.primitiveToWrapper(type).cast(5);
                                 }
                                     }, Integer.TYPE, Locale.getDefault());
@@ -465,7 +465,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     }
 
     /** Tests whether the unset method works*/
-    public void testContextClassLoaderUnset() throws Exception {
+    public void testContextClassLoaderUnset() {
         final LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
         final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
         ccll.set(beanOne);
@@ -477,7 +477,7 @@ public class LocaleBeanificationTestCase extends TestCase {
     /**
      * Test registering a locale-aware converter with the standard ConvertUtils.
      */
-    public void testLocaleAwareConverterInConvertUtils() throws Exception {
+    public void testLocaleAwareConverterInConvertUtils() {
         try {
             // first use the default non-locale-aware converter
             try {

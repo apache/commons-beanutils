@@ -31,7 +31,7 @@ import org.apache.commons.beanutils2.ConversionException;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  */
-public class BigIntegerLocaleConverter extends DecimalLocaleConverter {
+public class BigIntegerLocaleConverter extends DecimalLocaleConverter<BigInteger> {
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}

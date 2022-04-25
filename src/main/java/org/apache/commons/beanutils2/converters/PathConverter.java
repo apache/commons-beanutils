@@ -28,7 +28,7 @@ import java.nio.file.Paths;
  *
  * @since 2.0
  */
-public final class PathConverter extends AbstractConverter {
+public final class PathConverter extends AbstractConverter<Path> {
 
     /**
      * Constructs a <b>java.nio.file.Path</b> <i>Converter</i> that throws
@@ -56,7 +56,7 @@ public final class PathConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Path> getDefaultType() {
         return Path.class;
     }
 

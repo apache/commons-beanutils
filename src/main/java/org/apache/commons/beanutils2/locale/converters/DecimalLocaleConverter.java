@@ -34,9 +34,10 @@ import org.apache.commons.logging.LogFactory;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  *
+ * @param <T> The converter type.
  * @since 1.7
  */
-public class DecimalLocaleConverter extends BaseLocaleConverter {
+public class DecimalLocaleConverter<T> extends BaseLocaleConverter<T> {
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);

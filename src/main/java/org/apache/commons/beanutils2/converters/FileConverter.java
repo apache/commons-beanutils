@@ -27,7 +27,7 @@ import java.io.File;
  *
  * @since 1.6
  */
-public final class FileConverter extends AbstractConverter {
+public final class FileConverter extends AbstractConverter<File> {
 
     /**
      * Constructs a <b>java.io.File</b> <i>Converter</i> that throws
@@ -55,7 +55,7 @@ public final class FileConverter extends AbstractConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<File> getDefaultType() {
         return File.class;
     }
 

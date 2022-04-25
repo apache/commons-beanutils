@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class DoubleConverter extends NumberConverter {
+public final class DoubleConverter extends NumberConverter<Double> {
 
     /**
      * Constructs a <b>java.lang.Double</b> <i>Converter</i> that throws

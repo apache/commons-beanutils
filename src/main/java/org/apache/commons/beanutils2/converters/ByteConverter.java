@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class ByteConverter extends NumberConverter {
+public final class ByteConverter extends NumberConverter<Byte> {
 
     /**
      * Constructs a <b>java.lang.Byte</b> <i>Converter</i> that throws

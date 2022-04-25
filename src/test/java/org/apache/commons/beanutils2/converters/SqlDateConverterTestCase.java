@@ -24,9 +24,7 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlDateConverter} class.
- *
  */
-
 public class SqlDateConverterTestCase extends DateConverterTestBase {
 
     /**
@@ -37,8 +35,6 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlDateConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Date test case.
      * @param name Test Name
@@ -46,8 +42,6 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
     public SqlDateConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Gets the expected type

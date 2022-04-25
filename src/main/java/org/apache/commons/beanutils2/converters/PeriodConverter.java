@@ -29,7 +29,7 @@ import java.time.Period;
  * @since 2.0
  * @see java.time.Period
  */
-public final class PeriodConverter extends AbstractConverter {
+public final class PeriodConverter extends AbstractConverter<Period> {
 
     /**
      * Constructs a <b>java.time.Period</b> <i>Converter</i> that throws
@@ -57,7 +57,7 @@ public final class PeriodConverter extends AbstractConverter {
      * @since 2.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Period> getDefaultType() {
         return Period.class;
     }
 

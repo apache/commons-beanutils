@@ -35,7 +35,7 @@ import java.util.TimeZone;
  *
  * @since 1.3
  */
-public final class SqlTimestampConverter extends DateTimeConverter {
+public final class SqlTimestampConverter extends DateTimeConverter<Timestamp> {
 
     /**
      * Constructs a <b>java.sql.Timestamp</b> <i>Converter</i> that throws
@@ -63,7 +63,7 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * @since 1.8.0
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<Timestamp> getDefaultType() {
         return Timestamp.class;
     }
 

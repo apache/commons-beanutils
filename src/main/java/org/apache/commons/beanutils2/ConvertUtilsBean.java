@@ -169,12 +169,10 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 1.7
  */
-
 public class ConvertUtilsBean {
 
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
-
 
     /**
      * Get singleton instance
@@ -184,21 +182,16 @@ public class ConvertUtilsBean {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
 
-
-
     /**
      * The set of {@link Converter}s that can be used to convert Strings
      * into objects of a specified Class, keyed by the destination Class.
      */
-    private final WeakFastHashMap<Class<?>, Converter> converters =
-            new WeakFastHashMap<>();
+    private final WeakFastHashMap<Class<?>, Converter<?>> converters = new WeakFastHashMap<>();
 
     /**
      * The {@code Log} instance for this class.
      */
     private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
-
-
 
     /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -206,8 +199,6 @@ public class ConvertUtilsBean {
         deregister();
         converters.setFast(true);
     }
-
-
 
     /**
      * Convert the specified value into a String.  If the specified value
@@ -226,7 +217,7 @@ public class ConvertUtilsBean {
             return null;
         }
         if (!value.getClass().isArray()) {
-            final Converter converter = lookup(String.class);
+            final Converter<String> converter = lookup(String.class);
             return converter.convert(String.class, value);
         }
         if (Array.getLength(value) < 1) {
@@ -236,36 +227,38 @@ public class ConvertUtilsBean {
         if (value == null) {
             return null;
         }
-        final Converter converter = lookup(String.class);
+        final Converter<String> converter = lookup(String.class);
         return converter.convert(String.class, value);
 
     }
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible).  Otherwise, return a String representation of the value.
+     * possible). Otherwise, return a String representation of the value.
      *
+     * @param <T> The desired return type
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
      *
      * @throws ConversionException if thrown by an underlying Converter
      */
-    public Object convert(final String value, final Class<?> clazz) {
-
+    public <T> Object convert(final String value, final Class<T> clazz) {
         if (log.isDebugEnabled()) {
-            log.debug("Convert string '" + value + "' to class '" +
-                      clazz.getName() + "'");
+            log.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
-        Converter converter = lookup(clazz);
+        Converter<T> converter = lookup(clazz);
         if (converter == null) {
-            converter = lookup(String.class);
+            Converter<String> sConverter = lookup(String.class);
+            if (log.isTraceEnabled()) {
+                log.trace("  Using converter " + converter);
+            }
+            return sConverter.convert(String.class, value);
         }
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
         return converter.convert(clazz, value);
-
     }
 
     /**
@@ -318,16 +311,14 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public Object convert(final Object value, final Class<?> targetType) {
-
         final Class<?> sourceType = value == null ? null : value.getClass();
 
         if (log.isDebugEnabled()) {
             if (value == null) {
-                log.debug("Convert null value to type '" +
-                        targetType.getName() + "'");
+                log.debug("Convert null value to type '" + targetType.getName() + "'");
             } else {
-                log.debug("Convert type '" + sourceType.getName() + "' value '" + value +
-                      "' to type '" + targetType.getName() + "'");
+                log.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
+                    + targetType.getName() + "'");
             }
         }
 
@@ -339,12 +330,11 @@ public class ConvertUtilsBean {
             }
             converted = converter.convert(targetType, value);
         }
-        if (String.class.equals(targetType) && converted != null &&
-                !(converted instanceof String)) {
+        if (String.class.equals(targetType) && converted != null && !(converted instanceof String)) {
 
             // NOTE: For backwards compatibility, if the Converter
-            //       doesn't handle  conversion-->String then
-            //       use the registered String Converter
+            // doesn't handle conversion-->String then
+            // use the registered String Converter
             converter = lookup(String.class);
             if (converter != null) {
                 if (log.isTraceEnabled()) {
@@ -360,7 +350,6 @@ public class ConvertUtilsBean {
 
         }
         return converted;
-
     }
 
     /**
@@ -584,7 +573,7 @@ public class ConvertUtilsBean {
         registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
         registerArrayConverter(Enum.class,           new EnumConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(Calendar.class,       new DateConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Calendar.class,       new CalendarConverter(),      throwException, defaultArraySize);
         registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
         registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
         registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
@@ -619,21 +608,21 @@ public class ConvertUtilsBean {
      * value used in the event of a conversion error
      * @param defaultArraySize The size of the default array
      */
-    private void registerArrayConverter(final Class<?> componentType, final Converter componentConverter,
+    private <T> void registerArrayConverter(final Class<T> componentType, final Converter<T> componentConverter,
             final boolean throwException, final int defaultArraySize) {
-        final Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
-        Converter arrayConverter = null;
+        final Class<T[]> arrayType = (Class<T[]>) Array.newInstance(componentType, 0).getClass();
+        final Converter<T[]> arrayConverter;
         if (throwException) {
-            arrayConverter = new ArrayConverter(arrayType, componentConverter);
+            arrayConverter = new ArrayConverter<>(arrayType, componentConverter);
         } else {
-            arrayConverter = new ArrayConverter(arrayType, componentConverter, defaultArraySize);
+            arrayConverter = new ArrayConverter<>(arrayType, componentConverter, defaultArraySize);
         }
         register(arrayType, arrayConverter);
     }
 
     /** strictly for convenience since it has same parameter order as Map.put */
-    private void register(final Class<?> clazz, final Converter converter) {
-        register(new ConverterFacade(converter), clazz);
+    private <T> void register(final Class<?> clazz, final Converter<T> converter) {
+        register(new ConverterFacade<>(converter), clazz);
     }
 
     /**
@@ -643,9 +632,7 @@ public class ConvertUtilsBean {
      * @param clazz Class for which to remove a registered Converter
      */
     public void deregister(final Class<?> clazz) {
-
         converters.remove(clazz);
-
     }
 
     /**
@@ -653,13 +640,13 @@ public class ConvertUtilsBean {
      * destination class; if there is no registered Converter, return
      * {@code null}.
      *
+     * @param <T> The converter type.
      * @param clazz Class for which to return a registered Converter
      * @return The registered {@link Converter} or {@code null} if not found
      */
-    public Converter lookup(final Class<?> clazz) {
-
-        return converters.get(clazz);
-
+    @SuppressWarnings("unchecked")
+    public <T> Converter<T> lookup(final Class<T> clazz) {
+        return (Converter<T>) converters.get(clazz);
     }
 
     /**
@@ -667,11 +654,12 @@ public class ConvertUtilsBean {
      * source and destination class; if there is no registered Converter,
      * return {@code null}.
      *
+     * @param <T> The converter type.
      * @param sourceType Class of the value being converted
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or {@code null} if not found
      */
-    public Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
+    public <T> Converter<T> lookup(final Class<?> sourceType, final Class<T> targetType) {
 
         if (targetType == null) {
             throw new IllegalArgumentException("Target type is missing");
@@ -718,8 +706,6 @@ public class ConvertUtilsBean {
      *  Converter
      */
     public void register(final Converter converter, final Class<?> clazz) {
-
         converters.put(clazz, converter);
-
     }
 }

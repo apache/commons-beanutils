@@ -22,6 +22,7 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
@@ -37,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * {@link org.apache.commons.beanutils2.ConversionException}
  * if a conversion error occurs.</p>
  */
-public class DateLocaleConverter extends BaseLocaleConverter {
+public class DateLocaleConverter extends BaseLocaleConverter<Date> {
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DateLocaleConverter.class);

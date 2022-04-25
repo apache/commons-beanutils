@@ -27,11 +27,12 @@ import org.apache.commons.beanutils2.Converter;
  * implementations that provide configuration options from being
  * retrieved and modified.</p>
  *
+ * @param <T> The converter type.
  * @since 1.8.0
  */
-public final class ConverterFacade implements Converter {
+public final class ConverterFacade<T> implements Converter<T> {
 
-    private final Converter converter;
+    private final Converter<T> converter;
 
     /**
      * Constructs a converter which delegates to the specified
@@ -39,7 +40,7 @@ public final class ConverterFacade implements Converter {
      *
      * @param converter The converter to delegate to
      */
-    public ConverterFacade(final Converter converter) {
+    public ConverterFacade(final Converter<T> converter) {
         if (converter == null) {
             throw new IllegalArgumentException("Converter is missing");
         }
@@ -51,13 +52,12 @@ public final class ConverterFacade implements Converter {
      * specified type by delegating to the underlying {@link Converter}
      * implementation.
      *
-     * @param <T> The result type of the conversion
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value.
      */
     @Override
-    public <T> T convert(final Class<T> type, final Object value) {
+    public T convert(final Class<T> type, final Object value) {
         return converter.convert(type, value);
     }
 

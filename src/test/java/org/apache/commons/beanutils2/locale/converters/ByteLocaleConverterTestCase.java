@@ -22,7 +22,7 @@ package org.apache.commons.beanutils2.locale.converters;
  *
  */
 
-public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
+public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byte> {
 
 
 

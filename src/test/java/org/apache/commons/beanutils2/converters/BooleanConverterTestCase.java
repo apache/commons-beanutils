@@ -115,7 +115,7 @@ public class BooleanConverterTestCase extends TestCase {
      * Tests whether a conversion to a primitive boolean is possible.
      */
     public void testPrimitiveTargetClass() {
-        final AbstractConverter converter = new BooleanConverter();
+        final AbstractConverter<Boolean> converter = new BooleanConverter();
         assertTrue("Wrong result", converter.convert(Boolean.TYPE, STANDARD_TRUES[0]));
     }
 

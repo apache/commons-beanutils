@@ -16,8 +16,6 @@
  */
 package org.apache.commons.beanutils2.converters;
 
-import org.apache.commons.beanutils2.ConversionException;
-
 import junit.framework.TestCase;
 
 /**
@@ -41,18 +39,6 @@ public class StringConverterTestCase extends TestCase {
         final Object value = new Object();
         final String strVal = converter.convert(String.class, value);
         assertEquals("Wrong conversion result", value.toString(), strVal);
-    }
-
-    /**
-     * Tries to convert an object to an unsupported type.
-     */
-    public void testConvertToUnsupportedType() {
-        try {
-            converter.convert(Integer.class, new Object());
-            fail("No conversion exception thrown!");
-        } catch(final ConversionException cex) {
-            // expected result
-        }
     }
 
     /**

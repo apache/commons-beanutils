@@ -81,11 +81,12 @@ import org.apache.commons.beanutils2.ConversionException;
  * <strong>N.B.</strong>Patterns can only be specified using the <i>standard</i>
  * pattern characters and NOT in <i>localized</i> form (see {@code java.text.DecimalFormat}).
  * For example to cater for number styles used in Germany such as {@code 0.000,00} the pattern
- * is specified in the normal form {@code 0,000.00</code> and the locale set to <code>Locale.GERMANY}.
+ * is specified in the normal form {@code 0,000.00</code> and the locale set to <code>Locale.GERMANY}
  *
+ * @param <N> The default value type.
  * @since 1.8.0
  */
-public abstract class NumberConverter extends AbstractConverter {
+public abstract class NumberConverter<N extends Number> extends AbstractConverter<N> {
 
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Integer ONE  = Integer.valueOf(1);

@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @since 1.3
  */
-public final class ShortConverter extends NumberConverter {
+public final class ShortConverter extends NumberConverter<Short> {
 
     /**
      * Constructs a <b>java.lang.Short</b> <i>Converter</i> that throws

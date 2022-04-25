@@ -35,7 +35,7 @@ import java.time.ZonedDateTime;
  * @since 2.0
  * @see java.time.ZonedDateTime
  */
-public final class ZonedDateTimeConverter extends DateTimeConverter {
+public final class ZonedDateTimeConverter extends DateTimeConverter<ZonedDateTime> {
 
     /**
      * Constructs a <b>java.time.ZonedDateTime</b> <i>Converter</i> that throws
@@ -62,7 +62,7 @@ public final class ZonedDateTimeConverter extends DateTimeConverter {
      * @return The default type this {@code Converter} handles.
      */
     @Override
-    protected Class<?> getDefaultType() {
+    protected Class<ZonedDateTime> getDefaultType() {
         return ZonedDateTime.class;
     }
 

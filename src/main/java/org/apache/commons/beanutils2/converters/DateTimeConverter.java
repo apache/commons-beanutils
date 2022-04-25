@@ -88,9 +88,10 @@ import org.apache.commons.beanutils2.ConversionException;
  * The <b>Time Zone</b> to use with the date format can be specified
  * using the {@link #setTimeZone(TimeZone)} method.
  *
+ * @param <D> The default value type.
  * @since 1.8.0
  */
-public abstract class DateTimeConverter extends AbstractConverter {
+public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
     private String[] patterns;
     private String displayPatterns;
