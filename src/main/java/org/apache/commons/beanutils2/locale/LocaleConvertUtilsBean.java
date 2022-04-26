@@ -422,6 +422,7 @@ public void deregister(final Class<?> clazz, final Locale locale) {
      * Register a custom {@link LocaleConverter} for the specified destination
      * {@code Class}, replacing any previously registered converter.
      *
+     * @param <T> The converter type.
      * @param converter The LocaleConverter to be registered
      * @param clazz The Destination class for conversions performed by this
      *  Converter
