@@ -231,13 +231,14 @@ public class LocaleConvertUtils {
      *
      * <p>For more details see {@code LocaleConvertUtilsBean}</p>
      *
+     * @param <T> The converter type.
      * @param converter The LocaleConverter to be registered
      * @param clazz The Destination class for conversions performed by this
      *  Converter
      * @param locale The locale
      * @see LocaleConvertUtilsBean#register(LocaleConverter, Class, Locale)
      */
-    public static void register(final LocaleConverter converter, final Class clazz, final Locale locale) {
+    public static <T> void register(final LocaleConverter<T> converter, final Class<T> clazz, final Locale locale) {
         LocaleConvertUtilsBean.getInstance().register(converter, clazz, locale);
     }
 

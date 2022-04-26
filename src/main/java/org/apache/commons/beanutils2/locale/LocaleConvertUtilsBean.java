@@ -248,6 +248,7 @@ public class LocaleConvertUtilsBean {
      * Convert an array of specified values to an array of objects of the
      * specified class (if possible) using the conversion pattern.
      *
+     * @param <T> The result component type
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
      * @param locale The locale
@@ -257,7 +258,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(final String[] values, final Class<?> clazz, final Locale locale, final String pattern) {
+    public <T> T[] convert(final String[] values, final Class<T> clazz, final Locale locale, final String pattern) {
         Class<?> type = clazz;
         if (clazz.isArray()) {
             type = clazz.getComponentType();
@@ -268,7 +269,7 @@ public class LocaleConvertUtilsBean {
                     " locale and " + pattern + " pattern");
         }
 
-        final Object array = Array.newInstance(type, values.length);
+        final T[] array = (T[]) Array.newInstance(type, values.length);
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, convert(values[i], type, locale, pattern));
         }
@@ -287,7 +288,7 @@ public class LocaleConvertUtilsBean {
      * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
      * underlying Converter
      */
-    public Object convert(final String[] values, final Class<?> clazz, final String pattern) {
+    public <T> T[] convert(final String[] values, final Class<T> clazz, final String pattern) {
         return convert(values, clazz, getDefaultLocale(), pattern);
     }
 
@@ -349,15 +350,15 @@ public class LocaleConvertUtilsBean {
         mapConverters.setFast(true);
     }
 
-   /**
- * Remove any registered {@link LocaleConverter} for the specified locale and Class.
- *
- * @param clazz Class for which to remove a registered Converter
- * @param locale The locale
- */
-public void deregister(final Class<?> clazz, final Locale locale) {
-    lookup(locale).remove(clazz);
-}
+    /**
+     * Remove any registered {@link LocaleConverter} for the specified locale and Class.
+     *
+     * @param clazz Class for which to remove a registered Converter
+     * @param locale The locale
+     */
+    public void deregister(final Class<?> clazz, final Locale locale) {
+        lookup(locale).remove(clazz);
+    }
 
     /**
      * Remove any registered {@link LocaleConverter} for the specified locale

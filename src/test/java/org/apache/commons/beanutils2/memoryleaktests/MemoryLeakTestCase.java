@@ -409,9 +409,8 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -423,7 +422,7 @@ public class MemoryLeakTestCase {
 
         // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
-        LocaleConvertUtils.register(new IntegerLocaleConverter(Locale.US, false), beanClass, Locale.US);
+        LocaleConvertUtils.register(new IntegerLocaleConverter(Locale.US, false), (Class<Integer>) beanClass, Locale.US);
         assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
 
         // this should make the reference go away.
