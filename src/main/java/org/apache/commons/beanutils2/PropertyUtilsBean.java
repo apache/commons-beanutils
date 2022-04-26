@@ -896,8 +896,7 @@ public class PropertyUtilsBean {
             return result;
         }
 
-        Map mappedDescriptors =
-                getMappedPropertyDescriptors(bean);
+        Map mappedDescriptors = getMappedPropertyDescriptors(bean);
         if (mappedDescriptors == null) {
             mappedDescriptors = new ConcurrentHashMap<Class<?>, Map>();
             mappedDescriptorsCache.put(bean.getClass(), mappedDescriptors);

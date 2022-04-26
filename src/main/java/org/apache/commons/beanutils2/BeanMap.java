@@ -60,8 +60,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      *
      * N.B. private & unmodifiable replacement for the (public & static) defaultTransformers instance.
      */
-    private static final Map<Class<? extends Object>, Function<?, ?>> typeTransformers = Collections
-            .unmodifiableMap(createTypeTransformers());
+    private static final Map<Class<? extends Object>, Function<?, ?>> typeTransformers = Collections.unmodifiableMap(createTypeTransformers());
 
     private static Map<Class<? extends Object>, Function<?, ?>> createTypeTransformers() {
         final Map<Class<? extends Object>, Function<?, ?>> defTransformers = new HashMap<>();
@@ -674,6 +673,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * If no special constructor exists and the given type is not a primitive type, this method returns the original
      * value.
      *
+     * @param <R> The return type.
      * @param newType the type to convert the value to
      * @param value the value to convert
      * @return the converted value
@@ -684,16 +684,16 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
      * @throws IllegalAccessException never
      * @throws IllegalArgumentException never
      */
-    protected Object convertType(final Class<?> newType, final Object value)
+    protected <R> Object convertType(final Class<R> newType, final Object value)
             throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         // try call constructor
         try {
-            final Constructor<?> constructor = newType.getConstructor(value.getClass());
+            final Constructor<R> constructor = newType.getConstructor(value.getClass());
             return constructor.newInstance(value);
         } catch (final NoSuchMethodException e) {
             // try using the transformers
-            final Function transformer = getTypeTransformer(newType);
+            final Function<Object, R> transformer = getTypeTransformer(newType);
             if (transformer != null) {
                 return transformer.apply(value);
             }
@@ -704,11 +704,12 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     /**
      * Returns a transformer for the given primitive type.
      *
-     * @param aType the primitive type whose transformer to return
+     * @param <R> The transformer result type.
+     * @param type the primitive type whose transformer to return
      * @return a transformer that will convert strings into that type, or null if the given type is not a primitive type
      */
-    protected Function getTypeTransformer(final Class<?> aType) {
-        return typeTransformers.get(aType);
+    protected <R> Function<Object, R> getTypeTransformer(final Class<R> type) {
+        return (Function<Object, R>) typeTransformers.get(type);
     }
 
     /**

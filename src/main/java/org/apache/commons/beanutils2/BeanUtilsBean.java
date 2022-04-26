@@ -1007,6 +1007,7 @@ public class BeanUtilsBean {
      * <p>Converts the value to an object of the specified class (if
      * possible).</p>
      *
+     * @param <R> The desired return type
      * @param value Value to be converted (may be null)
      * @param type Class of the value to be converted to
      * @return The converted value
@@ -1014,8 +1015,8 @@ public class BeanUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      * @since 1.8.0
      */
-    protected Object convert(final Object value, final Class<?> type) {
-        final Converter converter = getConvertUtils().lookup(type);
+    protected <R> Object convert(final Object value, final Class<R> type) {
+        final Converter<R> converter = getConvertUtils().lookup(type);
         if (converter != null) {
             if (log.isTraceEnabled()) {
                 log.trace("        USING CONVERTER " + converter);
