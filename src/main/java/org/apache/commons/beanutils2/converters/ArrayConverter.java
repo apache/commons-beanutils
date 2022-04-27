@@ -240,7 +240,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         if (type.isArray()) {
             size = Array.getLength(value);
         } else {
-            final Collection<?> collection = convertToCollection(type, value);
+            final Collection<?> collection = convertToCollection(value);
             size = collection.size();
             iterator = collection.iterator();
         }
@@ -292,7 +292,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         if (value.getClass().isArray()) {
             size = Array.getLength(value);
         } else {
-            final Collection<?> collection = convertToCollection(type, value);
+            final Collection<?> collection = convertToCollection(value);
             size = collection.size();
             iterator = collection.iterator();
         }
@@ -345,14 +345,13 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * {@link ArrayConverter#convertToType(Class, Object)} and
      * {@link ArrayConverter#convertToString(Object)} methods for
      * <i>non-array</i> types.
-     *
-     * @param type The type to convert the value to
      * @param value value to be converted
+     *
      * @return Collection elements.
      */
-    protected Collection<?> convertToCollection(final Class<?> type, final Object value) {
+    protected Collection<?> convertToCollection(final Object value) {
         if (value instanceof Collection) {
-            return (Collection<?>)value;
+            return (Collection<?>) value;
         }
         if (value instanceof Number ||
             value instanceof Boolean ||
