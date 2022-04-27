@@ -216,25 +216,25 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *
      * @param value The input value to be converted
      * @return the converted String value.
-     * @throws Throwable if an error occurs converting to a String
+     * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override
-    protected String convertToString(final Object value) throws Throwable {
+    protected String convertToString(final Object value) {
         Date date = null;
         if (value instanceof Date) {
-            date = (Date)value;
+            date = (Date) value;
         } else if (value instanceof Calendar) {
-            date = ((Calendar)value).getTime();
+            date = ((Calendar) value).getTime();
         } else if (value instanceof Long) {
-            date = new Date(((Long)value).longValue());
+            date = new Date(((Long) value).longValue());
         } else if (value instanceof LocalDateTime) {
-            date =  java.sql.Timestamp.valueOf(((LocalDateTime)value));
+            date = java.sql.Timestamp.valueOf(((LocalDateTime) value));
         } else if (value instanceof LocalDate) {
-            date =  java.sql.Date.valueOf(((LocalDate)value));
+            date = java.sql.Date.valueOf(((LocalDate) value));
         } else if (value instanceof ZonedDateTime) {
-            date =  Date.from(((ZonedDateTime)value).toInstant());
+            date = Date.from(((ZonedDateTime) value).toInstant());
         } else if (value instanceof OffsetDateTime) {
-            date =  Date.from(((OffsetDateTime)value).toInstant());
+            date = Date.from(((OffsetDateTime) value).toInstant());
         }
 
         String result = null;
@@ -254,7 +254,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             result = value.toString();
             if (log().isDebugEnabled()) {
                 log().debug("    Converted  to String using toString() '" + result + "'");
-             }
+            }
         }
         return result;
     }
