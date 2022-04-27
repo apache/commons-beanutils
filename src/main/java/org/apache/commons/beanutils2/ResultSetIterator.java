@@ -179,6 +179,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @SuppressWarnings("resource") // getResultSet() does not allocate.
     @Override
     public void set(final String name, final Object value) {
         if (dynaClass.getDynaProperty(name) == null) {
@@ -284,6 +285,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @throws SQLException if the result set throws an exception
      */
+    @SuppressWarnings("resource") // getResultSet() does not allocate.
     protected void advance() throws SQLException {
         if (!current && !eof) {
             if (dynaClass.getResultSet().next()) {
