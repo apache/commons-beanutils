@@ -234,7 +234,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      */
     @Override
     protected String convertToString(final Object value) throws Throwable {
-
         int size = 0;
         Iterator<?> iterator = null;
         final Class<?> type = value.getClass();
@@ -268,7 +267,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
         }
 
         return buffer.toString();
-
     }
 
     /**
@@ -282,7 +280,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      */
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
-
         if (!type.isArray()) {
             throw new ConversionException(toString(getClass())
                     + " cannot handle conversion to '"
@@ -389,7 +386,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             return defaultValue;
         }
         return Array.newInstance(type.getComponentType(), defaultSize);
-
     }
 
     /**
@@ -432,7 +428,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      *  is {@code null}
      */
     private List<String> parseElements(final Class<?> type, String value) {
-
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
         }
@@ -485,12 +480,9 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             return list;
 
         } catch (final IOException e) {
-
             throw new ConversionException("Error converting from String to '"
                     + toString(type) + "': " + e.getMessage(), e);
-
         }
-
     }
 
 }
