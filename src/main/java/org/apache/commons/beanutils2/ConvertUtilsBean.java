@@ -504,7 +504,7 @@ public class ConvertUtilsBean {
      */
     private void registerOther(final boolean throwException) {
         // @formatter:off
-        register(Class.class,          throwException ? new ClassConverter()          : new ClassConverter(null));
+        register(Class.class,          throwException ? new ClassConverter<>()        : new ClassConverter<>(null));
         register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
         register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
         register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
@@ -512,16 +512,16 @@ public class ConvertUtilsBean {
         register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
         register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
         register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
-        register(Timestamp.class,      throwException ? new SqlTimestampConverter()  : new SqlTimestampConverter(null));
+        register(Timestamp.class,      throwException ? new SqlTimestampConverter()   : new SqlTimestampConverter(null));
         register(URL.class,            throwException ? new URLConverter()            : new URLConverter(null));
         register(URI.class,            throwException ? new URIConverter()            : new URIConverter(null));
         register(UUID.class,           throwException ? new UUIDConverter()           : new UUIDConverter(null));
         register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
-        register(LocalDateTime.class, throwException ? new LocalDateTimeConverter() : new LocalDateTimeConverter(null));
+        register(LocalDateTime.class,  throwException ? new LocalDateTimeConverter()  : new LocalDateTimeConverter(null));
         register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
-        register(OffsetDateTime.class,throwException ? new OffsetDateTimeConverter():new OffsetDateTimeConverter(null));
+        register(OffsetDateTime.class, throwException ? new OffsetDateTimeConverter() : new OffsetDateTimeConverter(null));
         register(OffsetTime.class,     throwException ? new OffsetTimeConverter()     : new OffsetTimeConverter(null));
-        register(ZonedDateTime.class, throwException ? new ZonedDateTimeConverter() : new ZonedDateTimeConverter(null));
+        register(ZonedDateTime.class,  throwException ? new ZonedDateTimeConverter()  : new ZonedDateTimeConverter(null));
         register(Duration.class,       throwException ? new DurationConverter()       : new DurationConverter(null));
         register(MonthDay.class,       throwException ? new MonthDayConverter()       : new MonthDayConverter(null));
         register(Period.class,         throwException ? new PeriodConverter()         : new PeriodConverter(null));

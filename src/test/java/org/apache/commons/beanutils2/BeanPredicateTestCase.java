@@ -23,7 +23,6 @@ import junit.framework.TestCase;
 
 /**
  * Unit test for {@link BeanPredicate}
- *
  */
 public class BeanPredicateTestCase extends TestCase {
 
@@ -46,7 +45,7 @@ public class BeanPredicateTestCase extends TestCase {
     }
 
     public void testInstanceOf() {
-        final Predicate<String> p = s -> (s instanceof String);
+        final Predicate<String> p = s -> s instanceof String;
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
         assertTrue(predicate.test(new TestBean("bar")));

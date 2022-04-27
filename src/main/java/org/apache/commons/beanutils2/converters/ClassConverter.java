@@ -27,9 +27,10 @@ package org.apache.commons.beanutils2.converters;
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
  *
+ * @param <T> the type of the class.
  * @since 1.4
  */
-public final class ClassConverter extends AbstractConverter<Class> {
+public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
 
     /**
      * Constructs a <b>java.lang.Class</b> <i>Converter</i> that throws
@@ -56,9 +57,10 @@ public final class ClassConverter extends AbstractConverter<Class> {
      * @return The default type this {@code Converter} handles.
      * @since 1.8.0
      */
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    protected Class<Class> getDefaultType() {
-        return Class.class;
+    protected Class<Class<T>> getDefaultType() {
+        return (Class) Class.class;
     }
 
     /**
@@ -76,7 +78,7 @@ public final class ClassConverter extends AbstractConverter<Class> {
     /**
      * <p>Converts the input object into a java.lang.Class.</p>
      *
-     * @param <T> Target type of the conversion.
+     * @param <R> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
@@ -84,7 +86,7 @@ public final class ClassConverter extends AbstractConverter<Class> {
      * @since 1.8.0
      */
     @Override
-    protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
+    protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Class.class.equals(type)) {
             ClassLoader classLoader = Thread.currentThread()
                     .getContextClassLoader();

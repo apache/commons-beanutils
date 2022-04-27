@@ -105,7 +105,7 @@ public class LocaleConvertUtilsBean {
      * <li>value = map of converters for the certain locale.</li>
      * <ul>
      */
-    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter>> mapConverters = new WeakFastHashMap<>();
+    private final WeakFastHashMap<Locale, Map<Class<?>, LocaleConverter<?>>> mapConverters = new WeakFastHashMap<>();
 
     /**
      *  Makes the state by default (deregisters all converters for all locales)
@@ -280,6 +280,7 @@ public class LocaleConvertUtilsBean {
      * Convert an array of specified values to an array of objects of the
      * specified class (if possible) using the conversion pattern.
      *
+     * @param <T> The array component type
      * @param values Value to be converted (may be null)
      * @param clazz Java array or element class to be converted to
      * @param pattern The conversion pattern
@@ -299,8 +300,8 @@ public class LocaleConvertUtilsBean {
      * @return The map instance contains the all {@link LocaleConverter} types
      *  for the specified locale.
      */
-    protected Map<Class<?>, LocaleConverter> create(final Locale locale) {
-        final WeakFastHashMap<Class<?>, LocaleConverter> converter = new WeakFastHashMap<>();
+    protected Map<Class<?>, LocaleConverter<?>> create(final Locale locale) {
+        final WeakFastHashMap<Class<?>, LocaleConverter<?>> converter = new WeakFastHashMap<>();
         converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
@@ -341,7 +342,7 @@ public class LocaleConvertUtilsBean {
      * Remove any registered {@link LocaleConverter}.
      */
     public void deregister() {
-        final Map<Class<?>, LocaleConverter> defaultConverter = lookup(defaultLocale);
+        final Map<Class<?>, LocaleConverter<?>> defaultConverter = lookup(defaultLocale);
         mapConverters.setFast(false);
 
         mapConverters.clear();
@@ -398,7 +399,7 @@ public class LocaleConvertUtilsBean {
      * @return The registered locale Converter, if any
      */
     public <T> LocaleConverter<T> lookup(final Class<T> clazz, final Locale locale) {
-        final LocaleConverter<T> converter = lookup(locale).get(clazz);
+        final LocaleConverter<T> converter = (LocaleConverter<T>) lookup(locale).get(clazz);
 
         if (log.isTraceEnabled()) {
             log.trace("LocaleConverter:" + converter);
@@ -415,7 +416,7 @@ public class LocaleConvertUtilsBean {
      * @return The map instance contains the all {@link LocaleConverter} types for
      *  the specified locale.
      */
-    protected Map<Class<?>, LocaleConverter> lookup(final Locale locale) {
+    protected Map<Class<?>, LocaleConverter<?>> lookup(final Locale locale) {
         return mapConverters.computeIfAbsent(locale == null ? defaultLocale : locale, this::create);
     }
 

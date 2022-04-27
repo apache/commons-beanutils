@@ -310,9 +310,7 @@ public class PropertyUtils {
      *  property cannot be found
      * @see PropertyUtilsBean#getProperty
      */
-    public static Object getProperty(final Object bean, final String name)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+    public static Object getProperty(final Object bean, final String name) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         return PropertyUtilsBean.getInstance().getProperty(bean, name);
     }
 

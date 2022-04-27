@@ -24,10 +24,11 @@ package org.apache.commons.beanutils2.converters;
  * {@code ConversionException} if a conversion error occurs.
  * </p>
  *
+ * @param <E> The enum type subclass
  * @since 2.0
  * @see java.lang.Enum
  */
-public final class EnumConverter extends AbstractConverter<Enum> {
+public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<Enum<E>> {
 
     /**
      * Constructs a <b>java.lang.Enum</b> <i>Converter</i> that throws
@@ -54,31 +55,32 @@ public final class EnumConverter extends AbstractConverter<Enum> {
      * @return The default type this {@code Converter} handles.
      * @since 2.0
      */
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    protected Class<Enum> getDefaultType() {
-        return Enum.class;
+    protected Class<Enum<E>> getDefaultType() {
+        return (Class) Enum.class;
     }
 
     /**
      * <p>Converts a java.lang.Enum or object into a String.</p>
      *
-     * @param <T> Target type of the conversion.
+     * @param <R> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
      * @since 2.0
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     @Override
-    protected <T> T  convertToType(final Class<T> type, final Object value) throws Throwable {
+    protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
             final String enumValue = String.valueOf(value);
-            final T[] constants = type.getEnumConstants();
+            final R[] constants = type.getEnumConstants();
             if (constants == null) {
                 throw conversionException(type, value);
             }
-            for (final T candidate : constants) {
+            for (final R candidate : constants) {
                 if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }

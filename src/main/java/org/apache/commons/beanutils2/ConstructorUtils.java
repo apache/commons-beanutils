@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils2;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -422,13 +423,27 @@ public class ConstructorUtils {
         return ctor.newInstance(args);
     }
 
-
     private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {
             args = new Object[] { arg };
         }
         return args;
+    }
+
+
+    /**
+     * Delegates to {@link Array#newInstance(Class, int)}.
+     *
+     * @param <T> Component type.
+     *
+     * @param componentType See {@link Array#newInstance(Class, int)}.
+     * @param length See {@link Array#newInstance(Class, int)}.
+     * @return See {@link Array#newInstance(Class, int)}.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T[] newArray(Class<T> componentType, int length) {
+        return (T[]) Array.newInstance(componentType, length);
     }
 
 }

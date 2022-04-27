@@ -275,13 +275,13 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * Typical implementations will provide a minimum of
      * {@code String --&gt; type} conversion.
      *
-     * @param <T> Target type of the conversion.
+     * @param <R> Target type of the conversion.
      * @param type Data type to which this value should be converted.
      * @param value The input value to be converted.
      * @return The converted value.
      * @throws Throwable if an error occurs converting to the specified type
      */
-    protected abstract <T> T convertToType(Class<T> type, Object value) throws Throwable;
+    protected abstract <R> R convertToType(Class<R> type, Object value) throws Throwable;
 
     /**
      * Gets the default value for conversions to the specified
