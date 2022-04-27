@@ -147,8 +147,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      */
     public ResultSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final boolean useColumnLabel)
         throws SQLException {
-        Objects.requireNonNull(resultSet, "resultSet");
-        this.resultSet = resultSet;
+        this.resultSet = Objects.requireNonNull(resultSet, "resultSet");
         this.lowerCase = lowerCase;
         setUseColumnLabel(useColumnLabel);
         introspect(resultSet);
@@ -179,6 +178,7 @@ public class ResultSetDynaClass extends JDBCDynaClass {
      * @throws SQLException if an error occurs
      * @since 1.8.0
      */
+    @SuppressWarnings("resource") // getResultSet() does not allocate.
     public Object getObjectFromResultSet(final String name) throws SQLException {
         return getObject(getResultSet(), name);
     }
