@@ -290,7 +290,6 @@ public class WrapDynaClass implements DynaClass {
         }
         int j = regulars.length;
         for (final Map.Entry<?, ?> entry : mappeds.entrySet()) {
-            final String name = (String) entry.getKey();
             final PropertyDescriptor descriptor =
                     (PropertyDescriptor) entry.getValue();
             properties[j] =
