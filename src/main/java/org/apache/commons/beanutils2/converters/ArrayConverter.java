@@ -362,7 +362,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             return list;
         }
 
-        return parseElements(type, value.toString());
+        return parseElements(value.toString());
     }
 
     /**
@@ -417,9 +417,8 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * <li>Elements in the list may be delimited by single or double quotes.
      *  Within a quoted elements, the normal Java escape sequences are valid.</li>
      * </ul>
-     *
-     * @param type The type to convert the value to
      * @param value String value to be parsed
+     *
      * @return List of parsed elements.
      *
      * @throws ConversionException if the syntax of {@code value}
@@ -427,7 +426,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * @throws NullPointerException if {@code value}
      *  is {@code null}
      */
-    private List<String> parseElements(final Class<?> type, String value) {
+    private List<String> parseElements(String value) {
         if (log().isDebugEnabled()) {
             log().debug("Parsing elements, delimiter=[" + delimiter + "], value=[" + value + "]");
         }
@@ -438,6 +437,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             value = value.substring(1, value.length() - 1);
         }
 
+        final String typeName = toString(String.class);
         try {
 
             // Set up a StreamTokenizer on the characters in this String
@@ -465,7 +465,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
                     break;
                 } else {
                     throw new ConversionException("Encountered token of type "
-                        + ttype + " parsing elements to '" + toString(type) + ".");
+                        + ttype + " parsing elements to '" + typeName + ".");
                 }
             }
 
@@ -481,7 +481,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
 
         } catch (final IOException e) {
             throw new ConversionException("Error converting from String to '"
-                    + toString(type) + "': " + e.getMessage(), e);
+                    + typeName + "': " + e.getMessage(), e);
         }
     }
 
