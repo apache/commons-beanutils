@@ -45,7 +45,7 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public EnumConverter(final Object defaultValue) {
+    public EnumConverter(final Enum<E> defaultValue) {
         super(defaultValue);
     }
 

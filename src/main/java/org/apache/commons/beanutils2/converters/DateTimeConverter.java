@@ -114,7 +114,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public DateTimeConverter(final Object defaultValue) {
+    public DateTimeConverter(final D defaultValue) {
         super(defaultValue);
     }
 

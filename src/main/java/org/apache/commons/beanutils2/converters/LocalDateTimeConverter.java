@@ -52,7 +52,7 @@ public final class LocalDateTimeConverter extends DateTimeConverter<LocalDateTim
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public LocalDateTimeConverter(final Object defaultValue) {
+    public LocalDateTimeConverter(final LocalDateTime defaultValue) {
         super(defaultValue);
     }
 

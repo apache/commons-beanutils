@@ -45,7 +45,7 @@ public final class PathConverter extends AbstractConverter<Path> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public PathConverter(final Object defaultValue) {
+    public PathConverter(final Path defaultValue) {
         super(defaultValue);
     }
 

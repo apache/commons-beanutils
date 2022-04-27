@@ -48,8 +48,20 @@ public final class ByteConverter extends NumberConverter<Byte> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ByteConverter(final Object defaultValue) {
+    public ByteConverter(final Byte defaultValue) {
         super(false, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Byte</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public ByteConverter(final Number defaultValue) {
+        this(defaultValue.byteValue());
     }
 
     /**

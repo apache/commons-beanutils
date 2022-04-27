@@ -25,9 +25,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ZonedDateTimeConverter class.
- *
  */
-public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
+public class ZonedDateTimeConverterTestCase extends DateConverterTestBase<ZonedDateTime> {
 
     /**
      * Create Test Suite
@@ -36,8 +35,6 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(ZonedDateTimeConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -52,7 +49,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<ZonedDateTime> getExpectedType() {
         return ZonedDateTime.class;
     }
 
@@ -61,11 +58,9 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected ZonedDateTimeConverter makeConverter() {
         return new ZonedDateTimeConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.
@@ -73,18 +68,8 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected ZonedDateTimeConverter makeConverter(final ZonedDateTime defaultValue) {
         return new ZonedDateTimeConverter(defaultValue);
-    }
-
-    /** Sets Up */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /** Tear Down */
-    @Override
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -94,7 +79,7 @@ public class ZonedDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
+    protected ZonedDateTime toType(final Calendar value) {
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(value.getTimeInMillis()), ZoneId.systemDefault());
     }
 }

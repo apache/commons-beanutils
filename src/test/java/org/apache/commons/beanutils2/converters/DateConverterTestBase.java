@@ -38,11 +38,9 @@ import junit.framework.TestCase;
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
  *
+ * @param <T> type to test
  */
-
-public abstract class DateConverterTestBase extends TestCase {
-
-
+public abstract class DateConverterTestBase<T> extends TestCase {
 
     /**
      * Constructs a new test case.
@@ -52,13 +50,11 @@ public abstract class DateConverterTestBase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Gets the expected type
      * @return The expected type
      */
-    protected abstract Class<?> getExpectedType();
+    protected abstract Class<T> getExpectedType();
 
     /**
      * Convert a Date or Calendar objects to the time in milliseconds
@@ -120,16 +116,14 @@ public abstract class DateConverterTestBase extends TestCase {
      * Create the Converter with no default value.
      * @return A new Converter
      */
-    protected abstract DateTimeConverter makeConverter();
-
-
+    protected abstract DateTimeConverter<T> makeConverter();
 
     /**
      * Create the Converter with a default value.
      * @param defaultValue The default value
      * @return A new Converter
      */
-    protected abstract DateTimeConverter makeConverter(Object defaultValue);
+    protected abstract DateTimeConverter<T> makeConverter(T defaultValue);
 
     /**
      * Test Conversion to String
@@ -302,7 +296,7 @@ public abstract class DateConverterTestBase extends TestCase {
         invalidConversion(converter, "2006-10-2X");
         invalidConversion(converter, "10.28.06");
         invalidConversion(converter, "10-28-06");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
@@ -317,7 +311,7 @@ public abstract class DateConverterTestBase extends TestCase {
         Object expected;
 
         // Create & Configure the Converter
-        final String[] patterns = new String[] {"yyyy-MM-dd", "yyyy/MM/dd"};
+        final String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd"};
         final DateTimeConverter converter = makeConverter();
         converter.setPatterns(patterns);
 
@@ -345,9 +339,9 @@ public abstract class DateConverterTestBase extends TestCase {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final Object defaultValue = toType("2000-01-01", pattern, null);
+        final T defaultValue = toType("2000-01-01", pattern, null);
         assertNotNull("Check default date", defaultValue);
-        final DateTimeConverter converter = makeConverter(defaultValue);
+        final DateTimeConverter<T> converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
 
         // Valid String --> Type Conversion
@@ -361,7 +355,7 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006-10-2X");
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
-        validConversion(converter, defaultValue, new Integer(2));
+        validConversion(converter, defaultValue, Integer.valueOf(2));
 
     }
 
@@ -404,7 +398,7 @@ public abstract class DateConverterTestBase extends TestCase {
         invalidConversion(converter, "2006/10/01");
         invalidConversion(converter, "02/10/2006");
         invalidConversion(converter, "02/10/06");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
     }
 
@@ -416,8 +410,8 @@ public abstract class DateConverterTestBase extends TestCase {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final Object defaultValue = null;
-        final DateTimeConverter converter = makeConverter(defaultValue);
+        final T defaultValue = null;
+        final DateTimeConverter<T> converter = makeConverter(defaultValue);
         converter.setPattern(pattern);
 
         // Valid String --> Type Conversion
@@ -431,7 +425,7 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006-10-2X");
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
-        validConversion(converter, defaultValue, new Integer(2));
+        validConversion(converter, defaultValue, Integer.valueOf(2));
 
     }
 
@@ -550,7 +544,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @param value The Calendar value to convert
      * @return The converted value
      */
-    protected abstract Object toType(Calendar value);
+    protected abstract T toType(Calendar value);
 
     /**
      * Parse a String value to the required type
@@ -559,9 +553,8 @@ public abstract class DateConverterTestBase extends TestCase {
      * @param locale The locale to use (or null)
      * @return parsed Calendar value
      */
-    Object toType(final String value, final String pattern, final Locale locale) {
-        final Calendar calendar = toCalendar(value, pattern, locale);
-        return toType(calendar);
+    T toType(final String value, final String pattern, final Locale locale) {
+        return toType(toCalendar(value, pattern, locale));
     }
 
     /**

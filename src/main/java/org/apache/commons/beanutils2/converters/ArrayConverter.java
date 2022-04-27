@@ -176,9 +176,9 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     public ArrayConverter(final Class<C> defaultType, final Converter elementConverter, final int defaultSize) {
         this(defaultType, elementConverter);
         this.defaultSize = defaultSize;
-        Object defaultValue = null;
+        C defaultValue = null;
         if (defaultSize >= 0) {
-            defaultValue = Array.newInstance(defaultType.getComponentType(), defaultSize);
+            defaultValue = (C) Array.newInstance(defaultType.getComponentType(), defaultSize);
         }
         setDefaultValue(defaultValue);
     }

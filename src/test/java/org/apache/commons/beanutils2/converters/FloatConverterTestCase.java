@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the FloatConverter class.
  */
-public class FloatConverterTestCase extends NumberConverterTestBase {
+public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
 
     public static TestSuite suite() {
         return new TestSuite(FloatConverterTestCase.class);
@@ -37,17 +37,17 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Float> getExpectedType() {
         return Float.class;
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected FloatConverter makeConverter() {
         return new FloatConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected FloatConverter makeConverter(final Float defaultValue) {
         return new FloatConverter(defaultValue);
     }
 
@@ -136,7 +136,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase {
             new Float(12.2)
         };
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(
                 message[i] + " to Float",
                 expected[i].floatValue(),

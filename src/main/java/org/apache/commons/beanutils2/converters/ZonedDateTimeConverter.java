@@ -52,7 +52,7 @@ public final class ZonedDateTimeConverter extends DateTimeConverter<ZonedDateTim
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ZonedDateTimeConverter(final Object defaultValue) {
+    public ZonedDateTimeConverter(final ZonedDateTime defaultValue) {
         super(defaultValue);
     }
 

@@ -44,7 +44,7 @@ public final class FileConverter extends AbstractConverter<File> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public FileConverter(final Object defaultValue) {
+    public FileConverter(final File defaultValue) {
         super(defaultValue);
     }
 

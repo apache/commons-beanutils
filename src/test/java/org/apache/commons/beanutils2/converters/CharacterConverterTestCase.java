@@ -120,7 +120,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Test Conversion to Character (with default)
      */
     public void testDefault() {
-        final Converter converter = new CharacterConverter("C");
+        final CharacterConverter converter = new CharacterConverter('C');
         assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
     }
 }

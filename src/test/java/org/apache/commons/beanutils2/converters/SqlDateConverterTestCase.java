@@ -25,7 +25,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the {@link SqlDateConverter} class.
  */
-public class SqlDateConverterTestCase extends DateConverterTestBase {
+public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create Test Suite
@@ -48,7 +48,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Date> getExpectedType() {
         return Date.class;
     }
 
@@ -57,7 +57,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected SqlDateConverter makeConverter() {
         return new SqlDateConverter();
     }
 
@@ -67,7 +67,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected SqlDateConverter makeConverter(final Date defaultValue) {
         return new SqlDateConverter(defaultValue);
     }
 
@@ -78,7 +78,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final SqlDateConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Date Conversion
@@ -115,8 +115,8 @@ public class SqlDateConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
-        return new java.sql.Date(getTimeInMillis(value));
+    protected Date toType(final Calendar value) {
+        return new Date(getTimeInMillis(value));
     }
 
 }

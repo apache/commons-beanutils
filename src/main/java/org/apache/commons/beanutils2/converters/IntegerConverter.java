@@ -48,8 +48,20 @@ public final class IntegerConverter extends NumberConverter<Integer> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public IntegerConverter(final Object defaultValue) {
+    public IntegerConverter(final Integer defaultValue) {
         super(false, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Integer</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public IntegerConverter(final Number defaultValue) {
+        this(defaultValue.intValue());
     }
 
     /**

@@ -46,7 +46,7 @@ public final class OffsetTimeConverter extends AbstractConverter<OffsetTime> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public OffsetTimeConverter(final Object defaultValue) {
+    public OffsetTimeConverter(final OffsetTime defaultValue) {
         super(defaultValue);
     }
 

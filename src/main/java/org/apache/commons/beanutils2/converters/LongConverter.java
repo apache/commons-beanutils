@@ -48,8 +48,20 @@ public final class LongConverter extends NumberConverter<Long> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public LongConverter(final Object defaultValue) {
+    public LongConverter(final Long defaultValue) {
         super(false, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Long</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public LongConverter(final Number defaultValue) {
+        this(defaultValue.longValue());
     }
 
     /**

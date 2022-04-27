@@ -52,7 +52,7 @@ public final class SqlTimestampConverter extends DateTimeConverter<Timestamp> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlTimestampConverter(final Object defaultValue) {
+    public SqlTimestampConverter(final Timestamp defaultValue) {
         super(defaultValue);
     }
 

@@ -94,7 +94,7 @@ public class BooleanConverterTestCase extends TestCase {
     }
 
     public void testDefaultValue() {
-        final Object defaultValue = Boolean.TRUE;
+        final Boolean defaultValue = Boolean.TRUE;
         final AbstractConverter converter = new BooleanConverter(defaultValue);
 
         assertSame(defaultValue, converter.convert(Boolean.class, "bogus"));

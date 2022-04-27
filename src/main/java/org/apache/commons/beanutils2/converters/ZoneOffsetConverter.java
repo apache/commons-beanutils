@@ -46,7 +46,7 @@ public final class ZoneOffsetConverter extends AbstractConverter<ZoneOffset> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ZoneOffsetConverter(final Object defaultValue) {
+    public ZoneOffsetConverter(final ZoneOffset defaultValue) {
         super(defaultValue);
     }
 

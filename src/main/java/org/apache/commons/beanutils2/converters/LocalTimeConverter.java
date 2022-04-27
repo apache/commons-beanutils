@@ -46,7 +46,7 @@ public final class LocalTimeConverter extends AbstractConverter<LocalTime> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public LocalTimeConverter(final Object defaultValue) {
+    public LocalTimeConverter(final LocalTime defaultValue) {
         super(defaultValue);
     }
 

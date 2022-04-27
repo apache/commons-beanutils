@@ -44,7 +44,7 @@ public final class URIConverter extends AbstractConverter<URI> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public URIConverter(final Object defaultValue) {
+    public URIConverter(final URI defaultValue) {
         super(defaultValue);
     }
 

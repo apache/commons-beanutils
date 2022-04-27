@@ -42,7 +42,19 @@ public final class CharacterConverter extends AbstractConverter<Character> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public CharacterConverter(final Object defaultValue) {
+    public CharacterConverter(final Character defaultValue) {
+        super(defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Character</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public CharacterConverter(final char defaultValue) {
         super(defaultValue);
     }
 

@@ -44,7 +44,7 @@ public final class URLConverter extends AbstractConverter<URL> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public URLConverter(final Object defaultValue) {
+    public URLConverter(final URL defaultValue) {
         super(defaultValue);
     }
 

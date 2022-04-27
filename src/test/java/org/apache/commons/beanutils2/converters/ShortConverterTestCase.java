@@ -23,39 +23,31 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ShortConverter class.
- *
  */
-
-public class ShortConverterTestCase extends NumberConverterTestBase {
+public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
 
     public static TestSuite suite() {
         return new TestSuite(ShortConverterTestCase.class);
     }
 
-
-
-    private Converter converter = null;
-
-
+    private ShortConverter converter = null;
 
     public ShortConverterTestCase(final String name) {
         super(name);
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Short> getExpectedType() {
         return Short.class;
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected ShortConverter makeConverter() {
         return new ShortConverter();
     }
 
-
-
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected ShortConverter makeConverter(final Short defaultValue) {
         return new ShortConverter(defaultValue);
     }
 
@@ -72,8 +64,6 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     /**
      * Test Invalid Amounts (too big/small)
@@ -159,10 +149,10 @@ public class ShortConverterTestCase extends NumberConverterTestBase {
             new Short((short)12)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Short",expected[i],converter.convert(Short.class,input[i]));
-            assertEquals(message[i] + " to short",expected[i],converter.convert(Short.TYPE,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Short", expected[i], converter.convert(Short.class, input[i]));
+            assertEquals(message[i] + " to short", expected[i], converter.convert(Short.TYPE, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 }

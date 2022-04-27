@@ -23,39 +23,31 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ByteConverter class.
- *
  */
-
-public class ByteConverterTestCase extends NumberConverterTestBase {
+public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
 
     public static TestSuite suite() {
         return new TestSuite(ByteConverterTestCase.class);
     }
 
-
-
-    private Converter converter = null;
-
-
+    private Converter<Byte> converter = null;
 
     public ByteConverterTestCase(final String name) {
         super(name);
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Byte> getExpectedType() {
         return Byte.class;
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected ByteConverter makeConverter() {
         return new ByteConverter();
     }
 
-
-
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected ByteConverter makeConverter(final Byte defaultValue) {
         return new ByteConverter(defaultValue);
     }
 
@@ -67,12 +59,11 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         numbers[2] = new Byte("-22");
         numbers[3] = new Byte("23");
     }
+
     @Override
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     /**
      * Test Invalid Amounts (too big/small)

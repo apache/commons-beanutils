@@ -46,7 +46,7 @@ public final class YearConverter extends AbstractConverter<Year> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public YearConverter(final Object defaultValue) {
+    public YearConverter(final Year defaultValue) {
         super(defaultValue);
     }
 

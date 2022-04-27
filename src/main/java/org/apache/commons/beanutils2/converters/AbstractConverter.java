@@ -128,7 +128,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public AbstractConverter(final Object defaultValue) {
+    public AbstractConverter(final D defaultValue) {
         setDefaultValue(defaultValue);
     }
 
@@ -437,7 +437,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * @throws ConversionException if an error occurs converting
      * the default value
      */
-    protected void setDefaultValue(final Object defaultValue) {
+    protected void setDefaultValue(final D defaultValue) {
         useDefault = false;
         if (log().isDebugEnabled()) {
             log().debug("Setting default value: " + defaultValue);

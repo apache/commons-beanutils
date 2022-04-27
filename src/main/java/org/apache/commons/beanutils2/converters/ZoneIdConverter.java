@@ -46,7 +46,7 @@ public final class ZoneIdConverter extends AbstractConverter<ZoneId> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ZoneIdConverter(final Object defaultValue) {
+    public ZoneIdConverter(final ZoneId defaultValue) {
         super(defaultValue);
     }
 

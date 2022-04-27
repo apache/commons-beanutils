@@ -49,7 +49,7 @@ public final class DateConverter extends DateTimeConverter<Date> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public DateConverter(final Object defaultValue) {
+    public DateConverter(final Date defaultValue) {
         super(defaultValue);
     }
 

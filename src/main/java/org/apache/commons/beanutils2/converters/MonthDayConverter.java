@@ -46,7 +46,7 @@ public final class MonthDayConverter extends AbstractConverter<MonthDay> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public MonthDayConverter(final Object defaultValue) {
+    public MonthDayConverter(final MonthDay defaultValue) {
         super(defaultValue);
     }
 

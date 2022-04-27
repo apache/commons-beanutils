@@ -25,9 +25,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the LocalDateTimeConverter class.
- *
  */
-public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
+public class LocalDateTimeConverterTestCase extends DateConverterTestBase<LocalDateTime> {
 
     /**
      * Create Test Suite
@@ -36,8 +35,6 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(LocalDateTimeConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -52,7 +49,7 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<LocalDateTime> getExpectedType() {
         return LocalDateTime.class;
     }
 
@@ -61,11 +58,9 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected LocalDateTimeConverter makeConverter() {
         return new LocalDateTimeConverter();
     }
-
-
 
     /**
      * Create the Converter with a default value.
@@ -73,18 +68,8 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected LocalDateTimeConverter makeConverter(final LocalDateTime defaultValue) {
         return new LocalDateTimeConverter(defaultValue);
-    }
-
-    /** Sets Up */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /** Tear Down */
-    @Override
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -94,7 +79,7 @@ public class LocalDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
+    protected LocalDateTime toType(final Calendar value) {
         return Instant.ofEpochMilli(value.getTimeInMillis()).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

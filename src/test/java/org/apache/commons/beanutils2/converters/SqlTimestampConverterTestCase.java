@@ -27,10 +27,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlTimestampConverter} class.
- *
  */
-
-public class SqlTimestampConverterTestCase extends DateConverterTestBase {
+public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timestamp> {
 
     /**
      * Create Test Suite
@@ -40,8 +38,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimestampConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Date test case.
      * @param name Test Name
@@ -50,14 +46,12 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         super(name);
     }
 
-
-
     /**
      * Gets the expected type
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Timestamp> getExpectedType() {
         return Timestamp.class;
     }
 
@@ -73,7 +67,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected SqlTimestampConverter makeConverter() {
         return new SqlTimestampConverter();
     }
 
@@ -83,7 +77,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected SqlTimestampConverter makeConverter(final Timestamp defaultValue) {
         return new SqlTimestampConverter(defaultValue);
     }
 
@@ -92,9 +86,8 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testDefaultStringToTypeConvert() {
-
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final SqlTimestampConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Timestamp Conversion
@@ -106,7 +99,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         invalidConversion(converter, "2006/09/21 15:36:01.0");
         invalidConversion(converter, "2006-10-22");
         invalidConversion(converter, "15:36:01");
-
     }
 
     /**
@@ -114,14 +106,13 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testLocale() {
-
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
         isUSFormatWithComma();
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final SqlTimestampConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         String pattern; // SHORT style Date & Time format for US Locale
@@ -149,7 +140,6 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
-
     }
 
     /**
@@ -159,7 +149,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
+    protected Timestamp toType(final Calendar value) {
         return new Timestamp(getTimeInMillis(value));
     }
 

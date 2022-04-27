@@ -49,7 +49,7 @@ public final class CalendarConverter extends DateTimeConverter<Calendar> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public CalendarConverter(final Object defaultValue) {
+    public CalendarConverter(final Calendar defaultValue) {
         super(defaultValue);
     }
 

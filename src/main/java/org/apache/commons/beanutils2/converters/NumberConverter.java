@@ -113,7 +113,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * @param allowDecimals Indicates whether decimals are allowed
      * @param defaultValue The default value to be returned
      */
-    public NumberConverter(final boolean allowDecimals, final Object defaultValue) {
+    public NumberConverter(final boolean allowDecimals, final N defaultValue) {
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }

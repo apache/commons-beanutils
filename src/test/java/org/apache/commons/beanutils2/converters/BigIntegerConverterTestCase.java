@@ -25,38 +25,31 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the BigInteger class.
- *
  */
-public class BigIntegerConverterTestCase extends NumberConverterTestBase {
+public class BigIntegerConverterTestCase extends NumberConverterTestBase<BigInteger> {
 
     public static TestSuite suite() {
         return new TestSuite(BigIntegerConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public BigIntegerConverterTestCase(final String name) {
         super(name);
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<BigInteger> getExpectedType() {
         return BigInteger.class;
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected BigIntegerConverter makeConverter() {
         return new BigIntegerConverter();
     }
 
-
-
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected BigIntegerConverter makeConverter(final BigInteger defaultValue) {
         return new BigIntegerConverter(defaultValue);
     }
 
@@ -73,8 +66,6 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
@@ -125,9 +116,9 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase {
             BigInteger.valueOf(12)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to BigInteger",expected[i],converter.convert(BigInteger.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to BigInteger", expected[i], converter.convert(BigInteger.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 

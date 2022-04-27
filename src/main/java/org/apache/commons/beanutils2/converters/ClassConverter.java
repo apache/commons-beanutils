@@ -47,7 +47,7 @@ public final class ClassConverter<T> extends AbstractConverter<Class<T>> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ClassConverter(final Object defaultValue) {
+    public ClassConverter(final Class<T> defaultValue) {
         super(defaultValue);
     }
 

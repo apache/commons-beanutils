@@ -25,10 +25,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the DoubleConverter class.
- *
  */
-
-public class BigDecimalConverterTestCase extends NumberConverterTestBase {
+public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDecimal> {
 
     /**
      * A class derived from {@code BigDecimal} used for testing whether
@@ -40,34 +38,28 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         }
     }
 
-
-
     public static TestSuite suite() {
         return new TestSuite(BigDecimalConverterTestCase.class);
     }
 
-
-
-    private Converter converter = null;
+    private Converter<BigDecimal> converter = null;
 
     public BigDecimalConverterTestCase(final String name) {
         super(name);
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<BigDecimal> getExpectedType() {
         return BigDecimal.class;
     }
 
-
-
     @Override
-    protected NumberConverter makeConverter() {
+    protected BigDecimalConverter makeConverter() {
         return new BigDecimalConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected BigDecimalConverter makeConverter(final BigDecimal defaultValue) {
         return new BigDecimalConverter(defaultValue);
     }
 
@@ -79,8 +71,6 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
         numbers[2] = new BigDecimal("-22");
         numbers[3] = new BigDecimal("23");
     }
-
-
 
     @Override
     public void tearDown() throws Exception {
@@ -136,7 +126,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             new BigDecimal("3200.11")
         };
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(
                 message[i] + " to BigDecimal",
                 expected[i],

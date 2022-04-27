@@ -57,7 +57,7 @@ public final class StringConverter extends AbstractConverter<String> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public StringConverter(final Object defaultValue) {
+    public StringConverter(final String defaultValue) {
         super(defaultValue);
     }
 

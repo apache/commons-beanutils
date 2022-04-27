@@ -27,24 +27,20 @@ import junit.framework.TestSuite;
  *
  */
 
-public class IntegerConverterTestCase extends NumberConverterTestBase {
+public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
 
     public static TestSuite suite() {
         return new TestSuite(IntegerConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public IntegerConverterTestCase(final String name) {
         super(name);
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Integer> getExpectedType() {
         return Integer.class;
     }
 
@@ -53,10 +49,8 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         return new IntegerConverter();
     }
 
-
-
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected IntegerConverter makeConverter(final Integer defaultValue) {
         return new IntegerConverter(defaultValue);
     }
 
@@ -73,8 +67,6 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     /**
      * Test Invalid Amounts (too big/small)
@@ -173,10 +165,10 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
             new Integer(12)
         };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Integer",expected[i],converter.convert(Integer.class,input[i]));
-            assertEquals(message[i] + " to int",expected[i],converter.convert(Integer.TYPE,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Integer", expected[i], converter.convert(Integer.class, input[i]));
+            assertEquals(message[i] + " to int", expected[i], converter.convert(Integer.TYPE, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 }

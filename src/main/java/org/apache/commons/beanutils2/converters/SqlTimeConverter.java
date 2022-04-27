@@ -52,7 +52,7 @@ public final class SqlTimeConverter extends DateTimeConverter<Time> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlTimeConverter(final Object defaultValue) {
+    public SqlTimeConverter(final Time defaultValue) {
         super(defaultValue);
     }
 

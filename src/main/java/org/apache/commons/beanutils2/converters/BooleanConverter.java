@@ -66,7 +66,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      *  The special value BooleanConverter.NO_DEFAULT can also be passed here,
      *  in which case this constructor acts like the no-argument one.
      */
-    public BooleanConverter(final Object defaultValue) {
+    public BooleanConverter(final Boolean defaultValue) {
         super(defaultValue);
     }
 
@@ -116,8 +116,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
      *  in which case an exception will be thrown on conversion failure.
      * @since 1.8.0
      */
-    public BooleanConverter(final String[] trueStrings, final String[] falseStrings,
-                final Object defaultValue) {
+    public BooleanConverter(final String[] trueStrings, final String[] falseStrings, final Boolean defaultValue) {
         super(defaultValue);
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);

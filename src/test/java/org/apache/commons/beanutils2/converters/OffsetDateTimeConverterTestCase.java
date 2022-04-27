@@ -25,9 +25,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the OffsetDateTimeConverter class.
- *
  */
-public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
+public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<OffsetDateTime> {
 
     /**
      * Create Test Suite
@@ -36,8 +35,6 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
     public static TestSuite suite() {
         return new TestSuite(OffsetDateTimeConverterTestCase.class);
     }
-
-
 
     /**
      * Constructs a new Date test case.
@@ -52,7 +49,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<OffsetDateTime> getExpectedType() {
         return OffsetDateTime.class;
     }
 
@@ -61,7 +58,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected OffsetDateTimeConverter makeConverter() {
         return new OffsetDateTimeConverter();
     }
 
@@ -73,18 +70,8 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected OffsetDateTimeConverter makeConverter(final OffsetDateTime defaultValue) {
         return new OffsetDateTimeConverter(defaultValue);
-    }
-
-    /** Sets Up */
-    @Override
-    public void setUp() throws Exception {
-    }
-
-    /** Tear Down */
-    @Override
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -94,7 +81,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
+    protected OffsetDateTime toType(final Calendar value) {
         return OffsetDateTime.ofInstant(Instant.ofEpochMilli(value.getTimeInMillis()), ZoneId.systemDefault());
     }
 }

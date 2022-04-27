@@ -44,7 +44,7 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public UUIDConverter(final Object defaultValue) {
+    public UUIDConverter(final UUID defaultValue) {
         super(defaultValue);
     }
 

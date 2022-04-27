@@ -48,8 +48,20 @@ public final class FloatConverter extends NumberConverter<Float> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public FloatConverter(final Object defaultValue) {
+    public FloatConverter(final Float defaultValue) {
         super(true, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Float</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public FloatConverter(final Number defaultValue) {
+        this(defaultValue.floatValue());
     }
 
     /**

@@ -50,8 +50,20 @@ public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public BigDecimalConverter(final Object defaultValue) {
+    public BigDecimalConverter(final BigDecimal defaultValue) {
         super(true, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.math.BigDecimal</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public BigDecimalConverter(final Number defaultValue) {
+        this(BigDecimal.valueOf(defaultValue.doubleValue()));
     }
 
     /**

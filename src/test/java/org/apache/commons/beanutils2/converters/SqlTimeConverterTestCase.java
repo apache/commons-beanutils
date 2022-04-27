@@ -25,10 +25,8 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link SqlTimeConverter} class.
- *
  */
-
-public class SqlTimeConverterTestCase extends DateConverterTestBase {
+public class SqlTimeConverterTestCase extends DateConverterTestBase<Time> {
 
     /**
      * Create Test Suite
@@ -38,8 +36,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Date test case.
      * @param name Test Name
@@ -48,14 +44,12 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         super(name);
     }
 
-
-
     /**
      * Gets the expected type
      * @return The expected type
      */
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Time> getExpectedType() {
         return Time.class;
     }
 
@@ -64,7 +58,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter() {
+    protected SqlTimeConverter makeConverter() {
         return new SqlTimeConverter();
     }
 
@@ -74,7 +68,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * @return A new Converter
      */
     @Override
-    protected DateTimeConverter makeConverter(final Object defaultValue) {
+    protected SqlTimeConverter makeConverter(final Time defaultValue) {
         return new SqlTimeConverter(defaultValue);
     }
 
@@ -83,9 +77,8 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testDefaultStringToTypeConvert() {
-
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Time Conversion
@@ -95,7 +88,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
         // Invalid String --> java.sql.Time Conversion
         invalidConversion(converter, "15:36");
-
     }
 
     /**
@@ -103,7 +95,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      */
     @Override
     public void testLocale() {
-
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
@@ -111,7 +102,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         final String pattern = "h:mm a"; // SHORT style time format for US Locale
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Valid String --> Type Conversion
@@ -134,7 +125,6 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
-
     }
 
     /**
@@ -144,7 +134,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
      * @return The converted value
      */
     @Override
-    protected Object toType(final Calendar value) {
+    protected Time toType(final Calendar value) {
         return new Time(getTimeInMillis(value));
     }
 

@@ -46,7 +46,7 @@ public final class PeriodConverter extends AbstractConverter<Period> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public PeriodConverter(final Object defaultValue) {
+    public PeriodConverter(final Period defaultValue) {
         super(defaultValue);
     }
 

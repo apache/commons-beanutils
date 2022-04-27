@@ -49,7 +49,7 @@ public final class SqlDateConverter extends DateTimeConverter<Date> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlDateConverter(final Object defaultValue) {
+    public SqlDateConverter(final Date defaultValue) {
         super(defaultValue);
     }
 

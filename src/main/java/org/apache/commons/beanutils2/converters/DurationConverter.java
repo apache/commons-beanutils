@@ -46,7 +46,7 @@ public final class DurationConverter extends AbstractConverter<Duration> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public DurationConverter(final Object defaultValue) {
+    public DurationConverter(final Duration defaultValue) {
         super(defaultValue);
     }
 

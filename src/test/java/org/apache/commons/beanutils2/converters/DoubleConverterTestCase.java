@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the DoubleConverter class.
  */
-public class DoubleConverterTestCase extends NumberConverterTestBase {
+public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
 
     public static TestSuite suite() {
         return new TestSuite(DoubleConverterTestCase.class);
@@ -37,17 +37,17 @@ public class DoubleConverterTestCase extends NumberConverterTestBase {
     }
 
     @Override
-    protected Class<?> getExpectedType() {
+    protected Class<Double> getExpectedType() {
         return Double.class;
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected DoubleConverter makeConverter() {
         return new DoubleConverter();
     }
 
     @Override
-    protected NumberConverter makeConverter(final Object defaultValue) {
+    protected DoubleConverter makeConverter(final Double defaultValue) {
         return new DoubleConverter(defaultValue);
     }
 

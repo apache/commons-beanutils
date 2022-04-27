@@ -48,8 +48,20 @@ public final class ShortConverter extends NumberConverter<Short> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ShortConverter(final Object defaultValue) {
+    public ShortConverter(final Short defaultValue) {
         super(false, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.lang.Short</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public ShortConverter(final Number defaultValue) {
+        this(defaultValue.shortValue());
     }
 
     /**

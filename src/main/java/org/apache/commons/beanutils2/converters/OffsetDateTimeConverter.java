@@ -52,7 +52,7 @@ public final class OffsetDateTimeConverter extends DateTimeConverter<OffsetDateT
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public OffsetDateTimeConverter(final Object defaultValue) {
+    public OffsetDateTimeConverter(final OffsetDateTime defaultValue) {
         super(defaultValue);
     }
 

@@ -50,8 +50,20 @@ public final class BigIntegerConverter extends NumberConverter<BigInteger> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public BigIntegerConverter(final Object defaultValue) {
+    public BigIntegerConverter(final BigInteger defaultValue) {
         super(false, defaultValue);
+    }
+
+    /**
+     * Constructs a <b>java.math.BigInteger</b> <i>Converter</i> that returns
+     * a default value if an error occurs.
+     *
+     * @param defaultValue The default value to be returned
+     * if the value to be converted is missing or an error
+     * occurs converting the value.
+     */
+    public BigIntegerConverter(final Number defaultValue) {
+        this(BigInteger.valueOf(defaultValue.longValue()));
     }
 
     /**

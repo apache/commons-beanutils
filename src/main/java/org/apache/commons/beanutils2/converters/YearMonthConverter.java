@@ -46,7 +46,7 @@ public final class YearMonthConverter extends AbstractConverter<YearMonth> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public YearMonthConverter(final Object defaultValue) {
+    public YearMonthConverter(final YearMonth defaultValue) {
         super(defaultValue);
     }
 
