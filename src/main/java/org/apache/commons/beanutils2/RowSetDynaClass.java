@@ -215,6 +215,7 @@ public class RowSetDynaClass extends JDBCDynaClass {
      *  cannot be introspected
      * @since 1.8.3
      */
+    @SuppressWarnings("resource") // resultSet is not allocated here
     public RowSetDynaClass(final ResultSet resultSet, final boolean lowerCase, final int limit,
             final boolean useColumnLabel)
             throws SQLException {
