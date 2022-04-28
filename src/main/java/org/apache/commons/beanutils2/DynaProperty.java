@@ -108,6 +108,7 @@ public class DynaProperty implements Serializable {
 
     /** Property type */
     protected transient Class<?> type;
+
     /**
      * <p>Gets the Java class representing the data type of the underlying property
      * values.</p>
