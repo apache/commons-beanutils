@@ -1195,8 +1195,7 @@ public class PropertyUtilsBean {
         }
 
         // Call the property getter and return the value
-        final Object value = invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
-        return value;
+        return invokeMethod(readMethod, bean, BeanUtils.EMPTY_OBJECT_ARRAY);
     }
 
     /**
