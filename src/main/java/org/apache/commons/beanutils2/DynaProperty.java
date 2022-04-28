@@ -35,9 +35,7 @@ import java.util.Objects;
  * The DynaBean implementation may choose to enforce this type on its entries.
  * Alternatively, an implementation may choose to ignore this property.
  * All keys for maps must be of type String so no meta data is needed for map keys.</p>
- *
  */
-
 public class DynaProperty implements Serializable {
 
     private static final long serialVersionUID = -3084907613499830175L;
