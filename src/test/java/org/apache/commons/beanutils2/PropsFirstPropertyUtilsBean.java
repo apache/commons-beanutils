@@ -28,9 +28,6 @@ import java.util.Map;
  */
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 
-    public PropsFirstPropertyUtilsBean() {
-    }
-
     /**
      * Note: this is a *very rough* override of this method. In particular,
      * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
