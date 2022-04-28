@@ -245,18 +245,16 @@ public class PropertyUtilsBean {
      */
     public void copyProperties(final Object dest, final Object orig)
             throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+        NoSuchMethodException {
         if (dest == null) {
-            throw new IllegalArgumentException
-                    ("No destination bean specified");
+            throw new IllegalArgumentException("No destination bean specified");
         }
         if (orig == null) {
             throw new IllegalArgumentException("No origin bean specified");
         }
 
         if (orig instanceof DynaBean) {
-            final DynaProperty[] origDescriptors =
-                ((DynaBean) orig).getDynaClass().getDynaProperties();
+            final DynaProperty[] origDescriptors = ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (final DynaProperty origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
@@ -265,7 +263,7 @@ public class PropertyUtilsBean {
                         if (dest instanceof DynaBean) {
                             ((DynaBean) dest).set(name, value);
                         } else {
-                                setSimpleProperty(dest, name, value);
+                            setSimpleProperty(dest, name, value);
                         }
                     } catch (final NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
@@ -276,7 +274,7 @@ public class PropertyUtilsBean {
             }
         } else if (orig instanceof Map) {
             for (final Map.Entry<?, ?> entry : ((Map<?, ?>) orig).entrySet()) {
-                final String name = (String)entry.getKey();
+                final String name = (String) entry.getKey();
                 if (isWriteable(dest, name)) {
                     try {
                         if (dest instanceof DynaBean) {
@@ -292,8 +290,7 @@ public class PropertyUtilsBean {
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
-            final PropertyDescriptor[] origDescriptors =
-                getPropertyDescriptors(orig);
+            final PropertyDescriptor[] origDescriptors = getPropertyDescriptors(orig);
             for (final PropertyDescriptor origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
@@ -302,7 +299,7 @@ public class PropertyUtilsBean {
                         if (dest instanceof DynaBean) {
                             ((DynaBean) dest).set(name, value);
                         } else {
-                                setSimpleProperty(dest, name, value);
+                            setSimpleProperty(dest, name, value);
                         }
                     } catch (final NoSuchMethodException e) {
                         if (log.isDebugEnabled()) {
