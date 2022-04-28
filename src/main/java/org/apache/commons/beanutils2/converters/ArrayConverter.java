@@ -230,10 +230,10 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      *
      * @param value The value to be converted.
      * @return the converted String value.
-     * @throws Throwable if an error occurs converting to a String
+     * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override
-    protected String convertToString(final Object value) throws Throwable {
+    protected String convertToString(final Object value) {
         int size = 0;
         Iterator<?> iterator = null;
         final Class<?> type = value.getClass();

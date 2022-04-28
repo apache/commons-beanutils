@@ -262,9 +262,9 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      *
      * @param value The input value to be converted.
      * @return the converted String value.
-     * @throws Throwable if an error occurs converting to a String
+     * @throws IllegalArgumentException if an error occurs converting to a String
      */
-    protected String convertToString(final Object value) throws Throwable {
+    protected String convertToString(final Object value) {
         return value.toString();
     }
 

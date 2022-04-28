@@ -191,10 +191,10 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      *
      * @param value The input value to be converted
      * @return the converted String value.
-     * @throws Throwable if an error occurs converting to a String
+     * @throws IllegalArgumentException if an error occurs converting to a String
      */
     @Override
-    protected String convertToString(final Object value) throws Throwable {
+    protected String convertToString(final Object value) {
 
         String result = null;
         if (useLocaleFormat && value instanceof Number) {
