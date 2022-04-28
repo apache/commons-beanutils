@@ -1911,67 +1911,52 @@ public class PropertyUtilsBean {
     public void setSimpleProperty(final Object bean,
                                          final String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
+        NoSuchMethodException {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
         final Class<?> beanClass = bean.getClass();
         if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    beanClass + "'");
+            throw new IllegalArgumentException("No name specified for bean class '" + beanClass + "'");
         }
 
         // Validate the syntax of the property name
         if (resolver.hasNested(name)) {
-            throw new IllegalArgumentException
-                    ("Nested property names are not allowed: Property '" +
-                    name + "' on bean class '" + beanClass + "'");
+            throw new IllegalArgumentException("Nested property names are not allowed: Property '" + name + "' on bean class '" + beanClass + "'");
         }
         if (resolver.isIndexed(name)) {
-            throw new IllegalArgumentException
-                    ("Indexed property names are not allowed: Property '" +
-                    name + "' on bean class '" + beanClass + "'");
+            throw new IllegalArgumentException("Indexed property names are not allowed: Property '" + name + "' on bean class '" + beanClass + "'");
         }
         if (resolver.isMapped(name)) {
-            throw new IllegalArgumentException
-                    ("Mapped property names are not allowed: Property '" +
-                    name + "' on bean class '" + beanClass + "'");
+            throw new IllegalArgumentException("Mapped property names are not allowed: Property '" + name + "' on bean class '" + beanClass + "'");
         }
 
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
-            final DynaProperty descriptor =
-                    ((DynaBean) bean).getDynaClass().getDynaProperty(name);
+            final DynaProperty descriptor = ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
-                throw new NoSuchMethodException("Unknown property '" +
-                        name + "' on dynaclass '" +
-                        ((DynaBean) bean).getDynaClass() + "'" );
+                throw new NoSuchMethodException("Unknown property '" + name + "' on dynaclass '" + ((DynaBean) bean).getDynaClass() + "'");
             }
             ((DynaBean) bean).set(name, value);
             return;
         }
 
         // Retrieve the property setter method for the specified property
-        final PropertyDescriptor descriptor =
-                getPropertyDescriptor(bean, name);
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor == null) {
-            throw new NoSuchMethodException("Unknown property '" +
-                    name + "' on class '" + beanClass + "'" );
+            throw new NoSuchMethodException("Unknown property '" + name + "' on class '" + beanClass + "'");
         }
         final Method writeMethod = getWriteMethod(beanClass, descriptor);
         if (writeMethod == null) {
-            throw new NoSuchMethodException("Property '" + name +
-                    "' has no setter method in class '" + beanClass + "'");
+            throw new NoSuchMethodException("Property '" + name + "' has no setter method in class '" + beanClass + "'");
         }
 
         // Call the property setter method
         final Object[] values = new Object[1];
         values[0] = value;
         if (log.isTraceEnabled()) {
-            final String valueClassName =
-                value == null ? "<null>" : value.getClass().getName();
-            log.trace("setSimpleProperty: Invoking method " + writeMethod
-                      + " with value " + value + " (class " + valueClassName + ")");
+            final String valueClassName = value == null ? "<null>" : value.getClass().getName();
+            log.trace("setSimpleProperty: Invoking method " + writeMethod + " with value " + value + " (class " + valueClassName + ")");
         }
         invokeMethod(writeMethod, bean, values);
     }
