@@ -245,6 +245,8 @@ public class PropertyUtilsBean {
      */
     public void copyProperties(final Object dest, final Object orig)
             throws IllegalAccessException, InvocationTargetException,
+            // TODO BEFORE 2.0
+            // MISMATCH between implementation and Javadoc.
         NoSuchMethodException {
         if (dest == null) {
             throw new IllegalArgumentException("No destination bean specified");
