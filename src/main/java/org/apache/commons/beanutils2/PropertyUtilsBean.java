@@ -1915,26 +1915,27 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
+        final Class<?> beanClass = bean.getClass();
         if (name == null) {
             throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
+                    beanClass + "'");
         }
 
         // Validate the syntax of the property name
         if (resolver.hasNested(name)) {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+                    name + "' on bean class '" + beanClass + "'");
         }
         if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+                    name + "' on bean class '" + beanClass + "'");
         }
         if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
+                    name + "' on bean class '" + beanClass + "'");
         }
 
         // Handle DynaBean instances specially
@@ -1955,12 +1956,12 @@ public class PropertyUtilsBean {
                 getPropertyDescriptor(bean, name);
         if (descriptor == null) {
             throw new NoSuchMethodException("Unknown property '" +
-                    name + "' on class '" + bean.getClass() + "'" );
+                    name + "' on class '" + beanClass + "'" );
         }
-        final Method writeMethod = getWriteMethod(bean.getClass(), descriptor);
+        final Method writeMethod = getWriteMethod(beanClass, descriptor);
         if (writeMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
-                    "' has no setter method in class '" + bean.getClass() + "'");
+                    "' has no setter method in class '" + beanClass + "'");
         }
 
         // Call the property setter method
