@@ -107,6 +107,10 @@
       <action dev="ggregory" type="fix" due-to="Gary Gregory">
         Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.WrapDynaClass.getDynaProperties() may expose internal representation by returning WrapDynaClass.properties [org.apache.commons.beanutils2.WrapDynaClass] At WrapDynaClass.java:[line 172] EI_EXPOSE_REP.
       </action>
+      <!-- ADD -->
+      <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
+        Add github/codeql-action #118.
+      </action>
       <!--  UPDATES -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.2 #77, #89, #103, #111.
