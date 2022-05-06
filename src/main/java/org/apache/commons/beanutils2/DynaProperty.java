@@ -234,8 +234,6 @@ public class DynaProperty implements Serializable {
         return sb.toString();
     }
 
-
-
     /**
      * Writes this object safely.
      * There are issues with serializing primitive class types on certain JVM versions
