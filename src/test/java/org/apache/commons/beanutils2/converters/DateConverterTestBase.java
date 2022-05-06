@@ -62,38 +62,30 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @return The time in milliseconds
      */
     long getTimeInMillis(final Object date) {
-
         if (date instanceof java.sql.Timestamp) {
-
-            // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
-            //      didn't include the milliseconds. The following code
-            //      ensures it works consistently across JDK versions
-            final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
-            long timeInMillis = timestamp.getTime() / 1000 * 1000;
-            timeInMillis += timestamp.getNanos() / 1000000;
-            return timeInMillis;
+            return ((java.sql.Timestamp) date).getTime();
         }
 
         if (date instanceof LocalDate) {
-            return  ((LocalDate)date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            return ((LocalDate) date).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
 
         if (date instanceof LocalDateTime) {
-            return  ((LocalDateTime)date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            return ((LocalDateTime) date).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         }
 
         if (date instanceof ZonedDateTime) {
-            return  ((ZonedDateTime)date).toInstant().toEpochMilli();
+            return ((ZonedDateTime) date).toInstant().toEpochMilli();
         }
 
         if (date instanceof OffsetDateTime) {
-            return  ((OffsetDateTime)date).toInstant().toEpochMilli();
+            return ((OffsetDateTime) date).toInstant().toEpochMilli();
         }
 
         if (date instanceof Calendar) {
-            return ((Calendar)date).getTime().getTime();
+            return ((Calendar) date).getTime().getTime();
         }
-        return ((Date)date).getTime();
+        return ((Date) date).getTime();
     }
 
     /**
