@@ -141,7 +141,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
             assertEquals("TYPE "  + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
-            fail(msg + " threw " + ex.toString());
+            throw new IllegalStateException(msg + " threw " + ex.toString(), ex);
         }
     }
 

@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -235,6 +236,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             date = Date.from(((ZonedDateTime) value).toInstant());
         } else if (value instanceof OffsetDateTime) {
             date = Date.from(((OffsetDateTime) value).toInstant());
+        } else if (value instanceof TemporalAccessor) {
+            // Backstop for other TemporalAccessor implementations.
+            date = Date.from(Instant.from(((TemporalAccessor) value)));
         }
 
         String result = null;
