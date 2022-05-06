@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -57,11 +58,15 @@ public abstract class DateConverterTestBase<T> extends TestCase {
     protected abstract Class<T> getExpectedType();
 
     /**
-     * Convert a Date or Calendar objects to the time in milliseconds
+     * Converts a Date or Calendar objects to the time in milliseconds
      * @param date The date or calendar object
      * @return The time in milliseconds
      */
     long getTimeInMillis(final Object date) {
+        if (date instanceof java.sql.Date) {
+            return ((java.sql.Date) date).getTime();
+        }
+
         if (date instanceof java.sql.Timestamp) {
             return ((java.sql.Timestamp) date).getTime();
         }
@@ -85,7 +90,11 @@ public abstract class DateConverterTestBase<T> extends TestCase {
         if (date instanceof Calendar) {
             return ((Calendar) date).getTime().getTime();
         }
-        return ((Date) date).getTime();
+
+        if (date instanceof Date) {
+            return ((Date) date).getTime();
+        }
+        throw new IllegalArgumentException(Objects.toString(date));
     }
 
     /**
