@@ -31,15 +31,6 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     /** Constant for the name of a property. */
     private static final String PROP = "foo";
 
-    /** The context to be tested. */
-    private DefaultIntrospectionContext context;
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        context = new DefaultIntrospectionContext(getClass());
-    }
-
     /**
      * Creates a property descriptor object for a property with the given name.
      *
@@ -55,13 +46,13 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         }
     }
 
-    /**
-     * Tests a newly created instance.
-     */
-    public void testInit() {
-        assertEquals("Wrong current class", getClass(),
-                context.getTargetClass());
-        assertTrue("Got property names", context.propertyNames().isEmpty());
+    /** The context to be tested. */
+    private DefaultIntrospectionContext context;
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        context = new DefaultIntrospectionContext(getClass());
     }
 
     /**
@@ -130,6 +121,15 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     }
 
     /**
+     * Tests getPropertyDescriptor() if the property name is unknown.
+     */
+    public void testGetPropertyDescriptorUnknown() {
+        assertNull("Got a property (1)", context.getPropertyDescriptor(PROP));
+        context.addPropertyDescriptor(createDescriptor(PROP));
+        assertNull("Got a property (2)", context.getPropertyDescriptor("other"));
+    }
+
+    /**
      * Tests hasProperty() if the expected result is false.
      */
     public void testHasPropertyFalse() {
@@ -139,12 +139,12 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     }
 
     /**
-     * Tests getPropertyDescriptor() if the property name is unknown.
+     * Tests a newly created instance.
      */
-    public void testGetPropertyDescriptorUnknown() {
-        assertNull("Got a property (1)", context.getPropertyDescriptor(PROP));
-        context.addPropertyDescriptor(createDescriptor(PROP));
-        assertNull("Got a property (2)", context.getPropertyDescriptor("other"));
+    public void testInit() {
+        assertEquals("Wrong current class", getClass(),
+                context.getTargetClass());
+        assertTrue("Got property names", context.propertyNames().isEmpty());
     }
 
     /**
