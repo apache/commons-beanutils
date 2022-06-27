@@ -252,8 +252,7 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
         // Scalar properties
-        assertEquals("booleanProperty", false,
-                     bean.getBooleanProperty());
+        assertFalse("booleanProperty", bean.getBooleanProperty());
         assertEquals("doubleProperty", 333.0,
                      bean.getDoubleProperty(), 0.005);
         assertEquals("floatProperty", (float) 222.0,
@@ -300,8 +299,7 @@ public class PropertyUtilsTestCase extends TestCase {
             assertTrue("Property '" + describe + "' is present",
                        map.containsKey(describe));
         }
-        assertTrue("Property 'writeOnlyProperty' is not present",
-                   !map.containsKey("writeOnlyProperty"));
+        assertFalse("Property 'writeOnlyProperty' is not present", map.containsKey("writeOnlyProperty"));
 
         // Verify the values of scalar properties
         assertEquals("Value of 'booleanProperty'",
@@ -1393,9 +1391,7 @@ public class PropertyUtilsTestCase extends TestCase {
                     (bean, "nested.booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() ==
-                    bean.getNested().getBooleanProperty());
+            assertEquals("Got correct value", ((Boolean) value).booleanValue(), bean.getNested().getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1910,9 +1906,7 @@ public class PropertyUtilsTestCase extends TestCase {
                             "booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() ==
-                    bean.getBooleanProperty());
+            assertEquals("Got correct value", ((Boolean) value).booleanValue(), bean.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2570,7 +2564,7 @@ public class PropertyUtilsTestCase extends TestCase {
         mainList.add(secondMap);
         final TestBean bean = new TestBean(mainList);
 
-        assertEquals("BEFORE",  null,              ((Map<?, ?>)bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
+        assertNull("BEFORE", ((Map<?, ?>) bean.getListIndexed().get(0)).get("FIRST-NEW-KEY"));
         assertEquals("BEFORE",  "SECOND-VALUE-1",  ((Map<?, ?>)bean.getListIndexed().get(1)).get("SECOND-KEY-1"));
         try {
             PropertyUtils.setProperty(bean, "listIndexed[0](FIRST-NEW-KEY)", "FIRST-NEW-VALUE");
@@ -3244,9 +3238,7 @@ public class PropertyUtilsTestCase extends TestCase {
             PropertyUtils.setNestedProperty(bean,
                     "nested.booleanProperty",
                     new Boolean(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    bean.getNested().getBooleanProperty());
+            assertEquals("Matched new value", newValue, bean.getNested().getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -3527,9 +3519,7 @@ public class PropertyUtilsTestCase extends TestCase {
             PropertyUtils.setSimpleProperty(bean,
                     "booleanProperty",
                     new Boolean(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    bean.getBooleanProperty());
+            assertEquals("Matched new value", newValue, bean.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {

@@ -188,8 +188,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         }
 
         try {
-            assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+            assertFalse("Can not see unknown key", bean.contains("mappedProperty", "Unknown Key"));
             fail("Should have thrown UnsupportedOperationException");
         } catch (final UnsupportedOperationException t) {
             // Expected result
@@ -220,8 +219,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         }
 
         try {
-            assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+            assertFalse("Can not see unknown key", bean.contains("mappedProperty", "Unknown Key"));
             bean.remove("mappedProperty", "Unknown Key");
             fail("Should have thrown UnsupportedOperationException");
             //            assertTrue("Can not see unknown key",
@@ -241,7 +239,7 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
         final Object wrappedInstance = dynaBean.getInstance();
         assertTrue("Object type is AlphaBean", wrappedInstance instanceof AlphaBean);
         final AlphaBean wrappedAlphaBean = (AlphaBean) wrappedInstance;
-        assertTrue("Same Object", wrappedAlphaBean == alphaBean);
+        assertSame("Same Object", wrappedAlphaBean, alphaBean);
     }
 
     /** Tests the newInstance implementation for WrapDynaClass */

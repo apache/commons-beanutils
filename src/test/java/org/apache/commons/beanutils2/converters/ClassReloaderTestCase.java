@@ -53,12 +53,12 @@ public class ClassReloaderTestCase extends TestCase {
         final Class<?> componentClass = componentLoader.reload(sharedClass);
 
         // the two Class objects contain the same bytecode, but are not equal
-        assertTrue(sharedClass != componentClass);
+        assertNotSame(sharedClass, componentClass);
 
         // the two class objects have different classloaders
         assertSame(sharedLoader, sharedClass.getClassLoader());
         assertSame(componentLoader, componentClass.getClassLoader());
-        assertTrue(sharedLoader != componentLoader);
+        assertNotSame(sharedLoader, componentLoader);
 
         // verify that objects of these two types are not assignment-compatible
         final Object obj1 = sharedClass.newInstance();

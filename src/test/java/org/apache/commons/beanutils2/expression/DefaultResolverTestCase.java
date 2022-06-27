@@ -159,7 +159,7 @@ public class DefaultResolverTestCase extends TestCase {
         for (int i = 0; i < validProperties.length; i++) {
             try {
                 label = "Simple " + label(validProperties[i], i);
-                assertEquals(label, null, resolver.getKey(validProperties[i]));
+                assertNull(label, resolver.getKey(validProperties[i]));
             } catch (final Throwable t) {
                 fail(label + " threw " + t);
             }
@@ -169,7 +169,7 @@ public class DefaultResolverTestCase extends TestCase {
         for (int i = 0; i < validIndexProperties.length; i++) {
             try {
                 label = "Indexed " + label(validIndexProperties[i], i);
-                assertEquals(label, null, resolver.getKey(validIndexProperties[i]));
+                assertNull(label, resolver.getKey(validIndexProperties[i]));
             } catch (final Throwable t) {
                 fail(label + " threw " + t);
             }

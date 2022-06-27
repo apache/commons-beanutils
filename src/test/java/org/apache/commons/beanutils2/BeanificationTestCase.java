@@ -276,15 +276,9 @@ public class BeanificationTestCase extends TestCase {
         thread.join();
 
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertTrue(
-                    "Different BeanUtilsBean instances per context classloader",
-                    BeanUtilsBean.getInstance() != signal.getBean());
-        assertTrue(
-                    "Different ConvertUtilsBean instances per context classloader",
-                    ConvertUtilsBean.getInstance() != signal.getConvertUtils());
-        assertTrue(
-                    "Different PropertyUtilsBean instances per context classloader",
-                    PropertyUtilsBean.getInstance() != signal.getPropertyUtils());
+        assertNotSame("Different BeanUtilsBean instances per context classloader", BeanUtilsBean.getInstance(), signal.getBean());
+        assertNotSame("Different ConvertUtilsBean instances per context classloader", ConvertUtilsBean.getInstance(), signal.getConvertUtils());
+        assertNotSame("Different PropertyUtilsBean instances per context classloader", PropertyUtilsBean.getInstance(), signal.getPropertyUtils());
     }
 
 
@@ -450,7 +444,7 @@ public class BeanificationTestCase extends TestCase {
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
-        assertTrue("Unset works", !beanOne.equals(ccll.get()));
+        assertFalse("Unset works", beanOne.equals(ccll.get()));
     }
 
     // ---- Auxillary classes

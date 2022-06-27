@@ -47,7 +47,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, String> predicate =
             new BeanPropertyValueEqualsPredicate<>("stringProperty","foo");
         assertTrue(predicate.test(new TestBean("foo")));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
     /**
@@ -57,7 +57,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, String> predicate =
             new BeanPropertyValueEqualsPredicate<>("stringProperty",null);
         assertTrue(predicate.test(new TestBean((String) null)));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
     /**
@@ -71,7 +71,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         testBean.setAnotherNested(nestedBean);
         assertTrue(predicate.test(testBean));
         testBean.setAnotherNested(new TestBean("no-match"));
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
     }
 
     /**
@@ -96,7 +96,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, String> predicate =
             new BeanPropertyValueEqualsPredicate<>("anotherNested.stringProperty","foo", true);
         try {
-            assertTrue(!predicate.test(new TestBean()));
+            assertFalse(predicate.test(new TestBean()));
         } catch (final IllegalArgumentException e) {
             fail("Should not have throw IllegalArgumentException");
         }
@@ -109,7 +109,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, Integer> predicate =
             new BeanPropertyValueEqualsPredicate<>("intProperty",expectedIntegerValue);
         assertTrue(predicate.test(new TestBean(expectedIntegerValue.intValue())));
-        assertTrue(!predicate.test(new TestBean(expectedIntegerValue.intValue() - 1)));
+        assertFalse(predicate.test(new TestBean(expectedIntegerValue.intValue() - 1)));
     }
 
     /**
@@ -119,7 +119,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, Float> predicate =
             new BeanPropertyValueEqualsPredicate<>("floatProperty",expectedFloatValue);
         assertTrue(predicate.test(new TestBean(expectedFloatValue.floatValue())));
-        assertTrue(!predicate.test(new TestBean(expectedFloatValue.floatValue() - 1)));
+        assertFalse(predicate.test(new TestBean(expectedFloatValue.floatValue() - 1)));
     }
 
     /**
@@ -129,7 +129,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, Double> predicate =
             new BeanPropertyValueEqualsPredicate<>("doubleProperty",expectedDoubleValue);
         assertTrue(predicate.test(new TestBean(expectedDoubleValue.doubleValue())));
-        assertTrue(!predicate.test(new TestBean(expectedDoubleValue.doubleValue() - 1)));
+        assertFalse(predicate.test(new TestBean(expectedDoubleValue.doubleValue() - 1)));
     }
 
     /**
@@ -139,7 +139,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         final BeanPropertyValueEqualsPredicate<TestBean, Boolean> predicate =
             new BeanPropertyValueEqualsPredicate<>("booleanProperty",expectedBooleanValue);
         assertTrue(predicate.test(new TestBean(expectedBooleanValue.booleanValue())));
-        assertTrue(!predicate.test(new TestBean(!expectedBooleanValue.booleanValue())));
+        assertFalse(predicate.test(new TestBean(!expectedBooleanValue.booleanValue())));
     }
 
     /**
@@ -152,7 +152,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         testBean.setByteProperty(expectedByteValue.byteValue());
         assertTrue(predicate.test(testBean));
         testBean.setByteProperty((byte) (expectedByteValue.byteValue() - 1));
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
     }
 
     /**
@@ -166,11 +166,11 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         testBean.setMappedProperty("test-key", "match");
         assertTrue(predicate.test(testBean));
         testBean.setMappedProperty("test-key", "no-match");
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
 
         // try a key that isn't in the map
         predicate = new BeanPropertyValueEqualsPredicate<>("mappedProperty(invalid-key)", "match");
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
     }
 
     /**
@@ -184,13 +184,13 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         testBean.setIntIndexed(0, expectedIntegerValue.intValue());
         assertTrue(predicate.test(testBean));
         testBean.setIntIndexed(0, expectedIntegerValue.intValue() - 1);
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
 
         // try an invalid index
         predicate = new BeanPropertyValueEqualsPredicate<>("intIndexed[999]", "exception-ahead");
 
         try {
-            assertTrue(!predicate.test(testBean));
+            assertFalse(predicate.test(testBean));
         } catch (final ArrayIndexOutOfBoundsException e) {
             /* this is what should happen */
         }
@@ -202,13 +202,13 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
     public void testEvaluateWithPrimitiveAndNull() {
         BeanPropertyValueEqualsPredicate<TestBean, Object> predicate =
             new BeanPropertyValueEqualsPredicate<>("intProperty",null);
-        assertTrue(!predicate.test(new TestBean(0)));
+        assertFalse(predicate.test(new TestBean(0)));
 
         predicate = new BeanPropertyValueEqualsPredicate<>("booleanProperty", null);
-        assertTrue(!predicate.test(new TestBean(true)));
+        assertFalse(predicate.test(new TestBean(true)));
 
         predicate = new BeanPropertyValueEqualsPredicate<>("floatProperty", null);
-        assertTrue(!predicate.test(new TestBean(expectedFloatValue.floatValue())));
+        assertFalse(predicate.test(new TestBean(expectedFloatValue.floatValue())));
     }
 
     /**
@@ -223,7 +223,7 @@ public class BeanPropertyValueEqualsPredicateTestCase extends TestCase {
         testBean.setAnotherNested(nestedBean);
         assertTrue(predicate.test(testBean));
         nestedBean.setMappedProperty("test-key", "no-match");
-        assertTrue(!predicate.test(testBean));
+        assertFalse(predicate.test(testBean));
     }
 
     /**

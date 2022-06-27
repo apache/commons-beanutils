@@ -240,7 +240,7 @@ public class MethodUtilsTestCase extends TestCase {
     public void testInvokeMethodPrimitiveBoolean() throws Exception {
         final PrimitiveBean bean = new PrimitiveBean();
         MethodUtils.invokeMethod(bean, "setBoolean", Boolean.FALSE);
-        assertEquals("Call boolean property using invokeMethod", false, bean.getBoolean());
+        assertFalse("Call boolean property using invokeMethod", bean.getBoolean());
     }
 
     public void testInvokeMethodPrimitiveFloat() throws Exception {

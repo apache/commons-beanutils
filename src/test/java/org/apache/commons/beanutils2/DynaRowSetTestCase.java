@@ -120,8 +120,7 @@ public class DynaRowSetTestCase extends TestCase {
 
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
-        assertTrue("unknown property returns null",
-                   dynaProp == null);
+        assertNull("unknown property returns null", dynaProp);
 
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");

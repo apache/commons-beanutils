@@ -34,13 +34,13 @@ public class BeanPredicateTestCase extends TestCase {
         final Predicate<String> p = s -> s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         assertTrue(predicate.test(new TestBean("foo")));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
     public void testNotEqual() {
         final Predicate<String> p = s -> !s.equals("foo");
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
-        assertTrue(!predicate.test(new TestBean("foo")));
+        assertFalse(predicate.test(new TestBean("foo")));
         assertTrue(predicate.test(new TestBean("bar")));
     }
 
@@ -56,7 +56,7 @@ public class BeanPredicateTestCase extends TestCase {
         final BeanPredicate<String> predicate = new BeanPredicate<>("stringProperty", p);
         final String nullString = null;
         assertTrue(predicate.test(new TestBean(nullString)));
-        assertTrue(!predicate.test(new TestBean("bar")));
+        assertFalse(predicate.test(new TestBean("bar")));
     }
 
 }

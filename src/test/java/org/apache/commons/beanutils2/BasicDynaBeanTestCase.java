@@ -562,8 +562,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
         try {
-            assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+            assertFalse("Can not see unknown key", bean.contains("mappedProperty", "Unknown Key"));
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
@@ -579,18 +578,15 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertTrue("Can see first key",
                     bean.contains("mappedProperty", "First Key"));
             bean.remove("mappedProperty", "First Key");
-            assertTrue("Can not see first key",
-                    !bean.contains("mappedProperty", "First Key"));
+            assertFalse("Can not see first key", bean.contains("mappedProperty", "First Key"));
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
 
         try {
-            assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+            assertFalse("Can not see unknown key", bean.contains("mappedProperty", "Unknown Key"));
             bean.remove("mappedProperty", "Unknown Key");
-            assertTrue("Can not see unknown key",
-                    !bean.contains("mappedProperty", "Unknown Key"));
+            assertFalse("Can not see unknown key", bean.contains("mappedProperty", "Unknown Key"));
         } catch (final Throwable t) {
             fail("Exception: " + t);
         }
@@ -790,9 +786,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                     ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
             bean.set("booleanProperty", new Boolean(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    ((Boolean) bean.get("booleanProperty")).booleanValue());
+            assertEquals("Matched new value", newValue, ((Boolean) bean.get("booleanProperty")).booleanValue());
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }

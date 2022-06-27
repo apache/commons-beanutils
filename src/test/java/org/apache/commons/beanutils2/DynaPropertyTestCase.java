@@ -22,6 +22,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import static org.junit.Assert.assertNotEquals;
+
 /**
  * Test case for {@link DynaProperty}.
  *
@@ -104,9 +106,9 @@ public class DynaPropertyTestCase extends TestCase {
         assertEquals(testPropertyWithName, testProperty1Duplicate);
         assertEquals(testPropertyWithNameAndType, testProperty2Duplicate);
         assertEquals(testPropertyWithNameAndTypeAndContentType, testProperty3Duplicate);
-        assertFalse(testPropertyWithName.equals(testPropertyWithNameAndType));
-        assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
-        assertFalse(testPropertyWithName.equals(null));
+        assertNotEquals(testPropertyWithName, testPropertyWithNameAndType);
+        assertNotEquals(testPropertyWithNameAndType, testPropertyWithNameAndTypeAndContentType);
+        assertNotEquals(null, testPropertyWithName);
     }
 
 }

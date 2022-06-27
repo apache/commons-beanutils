@@ -232,7 +232,7 @@ public class ArrayConverterTestCase extends TestCase {
         final IntegerConverter intConverter = new IntegerConverter();
 
         checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
-        assertEquals("Default String",  null, new ArrayConverter(int[].class, intConverter).convert(String.class, null));
+        assertNull("Default String", new ArrayConverter(int[].class, intConverter).convert(String.class, null));
     }
 
     /**
@@ -267,7 +267,7 @@ public class ArrayConverterTestCase extends TestCase {
         final int[]  oneArray   = new int[1];
         final IntegerConverter intConverter = new IntegerConverter();
 
-        assertEquals("Null Default", null,   new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
+        assertNull("Null Default", new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, null));
         checkArray("Zero Length",  zeroArray, new ArrayConverter(int[].class, intConverter, 0).convert(int[].class, null));
         checkArray("One Length",   oneArray,  new ArrayConverter(Integer[].class, intConverter, 1).convert(int[].class, null));
     }
