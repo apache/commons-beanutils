@@ -266,10 +266,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         // Create a new instance of the Map
         Map<String, Object> newMap = null;
         try {
-            final
-            // The new map is used as properties map
-            Map<String, Object> temp = getMap().getClass().newInstance();
-            newMap = temp;
+            newMap = (Map<String, Object>) getMap().getClass().newInstance();
         } catch(final Exception ex) {
             newMap = newMap();
         }

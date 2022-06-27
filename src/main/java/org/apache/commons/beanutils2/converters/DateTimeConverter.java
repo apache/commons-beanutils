@@ -583,8 +583,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         for (final String pattern : patterns) {
             try {
                 final DateFormat format = getFormat(pattern);
-                final Calendar calendar = parse(sourceType, targetType, value, format);
-                return calendar;
+                return parse(sourceType, targetType, value, format);
             } catch (final Exception ex) {
                 if (firstEx == null) {
                     firstEx = ex;
@@ -626,8 +625,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             }
             throw new ConversionException(msg);
         }
-        final Calendar calendar = format.getCalendar();
-        return calendar;
+        return format.getCalendar();
     }
 
     /**
