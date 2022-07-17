@@ -22,7 +22,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -243,9 +242,9 @@ public class BeanUtilsBean {
             // Map properties are always of type <String, Object>
             Map<String, Object> propMap = (Map<String, Object>) orig;
             for (final Map.Entry<String, Object> entry : propMap.entrySet()) {
-                final String name = entry.getKey();
-                if (getPropertyUtils().isWriteable(dest, name)) {
-                    copyProperty(dest, name, entry.getValue());
+                final String k = entry.getKey();
+                if (getPropertyUtils().isWriteable(dest, k)) {
+                    copyProperty(dest, k, entry.getValue());
                 }
             }
         } else /* if (orig is a standard JavaBean) */ {
@@ -514,16 +513,7 @@ public class BeanUtilsBean {
             return null;
         }
         if (value instanceof Collection) {
-            final ArrayList<String> values = new ArrayList<>();
-            for (final Object item : (Collection<?>) value) {
-                if (item == null) {
-                    values.add(null);
-                } else {
-                    // convert to string using convert utils
-                    values.add(getConvertUtils().convert(item));
-                }
-            }
-            return values.toArray(new String[values.size()]);
+            return ((Collection<?>) value).stream().map(item -> item != null ? getConvertUtils().convert(item) : null).toArray(String[]::new);
         }
         if (!value.getClass().isArray()) {
             final String[] results = new String[1];

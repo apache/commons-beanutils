@@ -264,9 +264,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         if (isReadOnly()) {
             throw new UnsupportedOperationException("Map is read only");
         }
-        for (final Map.Entry<? extends K, ?> e : map.entrySet()) {
-            put(e.getKey(), e.getValue());
-        }
+        map.forEach(this::put);
     }
 
     /**

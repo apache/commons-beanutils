@@ -292,9 +292,7 @@ public class LazyDynaList extends ArrayList<Object> {
 
         ensureCapacity(size() + collection.size());
 
-        for (final Object e : collection) {
-            add(e);
-        }
+        collection.forEach(this::add);
 
         return true;
     }

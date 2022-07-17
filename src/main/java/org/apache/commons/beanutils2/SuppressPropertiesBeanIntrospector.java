@@ -84,8 +84,6 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      */
     @Override
     public void introspect(final IntrospectionContext icontext) throws IntrospectionException {
-        for (final String property : getSuppressedProperties()) {
-            icontext.removePropertyDescriptor(property);
-        }
+        getSuppressedProperties().forEach(icontext::removePropertyDescriptor);
     }
 }
