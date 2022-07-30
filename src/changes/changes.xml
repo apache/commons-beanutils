@@ -130,6 +130,9 @@
       <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
         Update from Java 7 to 8.
       </action>
+      <action dev="ggregory" type="update" due-to="Dependabot">
+        Bump junit-jupiter from 5.7.2 to 5.9.0 #113, #126.
+      </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update JUnit from 4 to 5 vintage, #78, #112.
       </action>
@@ -165,9 +168,6 @@
       </action>
       <action dev="ggregory" type="update" due-to="Arturo Bernal">
         Don't initialize variables to defaults #71.
-      </action>
-      <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump junit-jupiter from 5.7.2 to 5.8.2 #113.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump spotbugs-maven-plugin from 4.5.3.0 to 4.6.0.0.
