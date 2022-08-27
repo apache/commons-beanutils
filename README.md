@@ -47,6 +47,7 @@ Apache Commons BeanUtils
 [![Coverage Status](https://coveralls.io/repos/apache/commons-beanutils/badge.svg)](https://coveralls.io/r/apache/commons-beanutils)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0)
+[![CodeQL](https://github.com/apache/commons-beanutils/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-beanutils/actions?query=workflow%3ACodeQL)
 
 Apache Commons BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.
 
