@@ -99,7 +99,7 @@ import java.util.WeakHashMap;
  * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
  *
  * @param <T> the type of data stored in an instance
- * @see java.lang.Thread#getContextClassLoader
+ * @see Thread#getContextClassLoader
  */
 public class ContextClassLoaderLocal<T> {
     private final Map<ClassLoader, T> valueByClassLoader = new WeakHashMap<>();

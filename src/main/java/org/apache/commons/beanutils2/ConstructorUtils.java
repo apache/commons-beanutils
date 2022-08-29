@@ -83,7 +83,7 @@ public class ConstructorUtils {
      * @param <T> the type of the constructor
      * @param ctor prototype constructor object.
      * @return {@code null} if accessible constructor can not be found.
-     * @see java.lang.SecurityManager
+     * @see SecurityManager
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
 
@@ -217,7 +217,7 @@ public class ConstructorUtils {
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException If an error occurs instantiating the class
      *
-     * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
+     * @see #invokeConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, final Object arg)
         throws
@@ -247,7 +247,7 @@ public class ConstructorUtils {
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException If an error occurs instantiating the class
      *
-     * @see #invokeConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
+     * @see #invokeConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeConstructor(final Class<T> klass, Object[] args)
         throws
@@ -328,7 +328,7 @@ public class ConstructorUtils {
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException If an error occurs instantiating the class
      *
-     * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
+     * @see #invokeExactConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, final Object arg)
         throws
@@ -358,7 +358,7 @@ public class ConstructorUtils {
      * @throws InvocationTargetException If an error occurs invoking the constructor
      * @throws InstantiationException If an error occurs instantiating the class
      *
-     * @see #invokeExactConstructor(java.lang.Class, java.lang.Object[], java.lang.Class[])
+     * @see #invokeExactConstructor(Class, Object[], Class[])
      */
     public static <T> T invokeExactConstructor(final Class<T> klass, Object[] args)
         throws

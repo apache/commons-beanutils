@@ -203,7 +203,7 @@ public class DynaProperty implements Serializable {
 
     /**
      * @return the hashcode for this dyna property
-     * @see java.lang.Object#hashCode
+     * @see Object#hashCode
      * @since 1.8.0
      */
     @Override

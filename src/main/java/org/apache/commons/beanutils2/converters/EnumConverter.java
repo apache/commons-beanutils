@@ -26,7 +26,7 @@ package org.apache.commons.beanutils2.converters;
  *
  * @param <E> The enum type subclass
  * @since 2.0
- * @see java.lang.Enum
+ * @see Enum
  */
 public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<Enum<E>> {
 
