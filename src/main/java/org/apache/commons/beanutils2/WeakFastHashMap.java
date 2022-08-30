@@ -58,7 +58,8 @@ import java.util.WeakHashMap;
  * <a href="http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html">
  * Double-Checked Locking Idiom Is Broken Declaration</a>.</p>
  *
- * @since Commons Collections 1.0
+ * Copied from Commons Collections 1.0
+ *
  * @param <K> the key
  * @param <V> the value
  */
