@@ -56,7 +56,7 @@ package org.apache.commons.beanutils2;
  *    {@code Set</code> and it does not support the Map's <code>clear()}
  *    and {@code remove()} operations.</p>
  *
- * @since BeanUtils 1.9.0
+ * @since 1.9.0
  */
 public class DynaBeanPropertyMapDecorator extends BaseDynaBeanMapDecorator<String> {
 

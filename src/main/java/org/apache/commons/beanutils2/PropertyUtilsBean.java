@@ -1246,7 +1246,7 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if {@code bean}
      *  or {@code name</code> is <code>null}
      *
-     * @since BeanUtils 1.6
+     * @since 1.6
      */
     public boolean isReadable(Object bean, String name) {
         // Validate method parameters
@@ -1324,7 +1324,7 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if {@code bean}
      *  or {@code name</code> is <code>null}
      *
-     * @since BeanUtils 1.6
+     * @since 1.6
      */
     public boolean isWriteable(Object bean, String name) {
         // Validate method parameters

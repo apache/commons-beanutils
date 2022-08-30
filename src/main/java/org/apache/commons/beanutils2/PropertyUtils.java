@@ -508,7 +508,7 @@ public class PropertyUtils {
      * @throws IllegalArgumentException if {@code bean}
      *  or {@code name</code> is <code>null}
      * @see PropertyUtilsBean#isReadable
-     * @since BeanUtils 1.6
+     * @since 1.6
      */
     public static boolean isReadable(final Object bean, final String name) {
         return PropertyUtilsBean.getInstance().isReadable(bean, name);
@@ -529,7 +529,7 @@ public class PropertyUtils {
      * @throws IllegalArgumentException if {@code bean}
      *  or {@code name</code> is <code>null}
      * @see PropertyUtilsBean#isWriteable
-     * @since BeanUtils 1.6
+     * @since 1.6
      */
     public static boolean isWriteable(final Object bean, final String name) {
         return PropertyUtilsBean.getInstance().isWriteable(bean, name);
