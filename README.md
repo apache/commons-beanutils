@@ -45,7 +45,7 @@ Apache Commons BeanUtils
 
 [![Build Status](https://travis-ci.org/apache/commons-beanutils.svg)](https://travis-ci.org/apache/commons-beanutils)
 [![Coverage Status](https://codecov.io/gh/apache/commons-beanutils/branch/master/graph/badge.svg)](https://app.codecov.io/gh/apache/commons-beanutils/branch/master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/badge.svg?gav=true)](https://maven-badges.herokuapp.com/maven-central/org.apache.commons/commons-beanutils2/?gav=true)
 [![Javadocs](https://javadoc.io/badge/org.apache.commons/commons-beanutils2/2.0.0.svg)](https://javadoc.io/doc/org.apache.commons/commons-beanutils2/2.0.0)
 [![CodeQL](https://github.com/apache/commons-beanutils/workflows/CodeQL/badge.svg)](https://github.com/apache/commons-beanutils/actions/workflows/codeql-analysis.yml?query=workflow%3ACodeQL)
 
