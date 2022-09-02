@@ -146,7 +146,7 @@
         Update maven-surefire-plugin from 2.22.1 to 3.0.0-M7, #116, #122.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update maven-checkstyle-plugin from 3.0.0 to 3.1.2, #76.
+        Update maven-checkstyle-plugin from 3.0.0 to 3.2.0, #76, #129.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update maven-pmd-plugin from 3.12.0 to 3.17.0, #120.
