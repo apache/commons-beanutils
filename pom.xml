@@ -49,11 +49,11 @@
     <!-- limit memory size see BEANUTILS-291; allow command-line override -->
     <!-- Originally 25M, increased to 56M to get round Continuum CI / Travis CI build failures -->
     <surefire.argLine>-Xmx256M</surefire.argLine>
-    <commons.japicmp.version>0.15.7</commons.japicmp.version>
+    <commons.japicmp.version>0.16.0</commons.japicmp.version>
     <commons.clirr.version>2.8</commons.clirr.version>
     <commons.encoding>utf-8</commons.encoding>
     <commons.jacoco.version>0.8.8</commons.jacoco.version>
-    <checkstyle.plugin.version>3.1.2</checkstyle.plugin.version>
+    <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
     <checkstyle.version>8.34</checkstyle.version>
     <commons.spotbugs.plugin.version>4.6.0.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.6.0</commons.spotbugs.impl.version>    
@@ -487,7 +487,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.17.0</version>
+        <version>3.18.0</version>
         <configuration>
           <targetJdk>${maven.compiler.target}</targetJdk>
           <linkXref>true</linkXref>
