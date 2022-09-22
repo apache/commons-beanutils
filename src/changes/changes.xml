@@ -131,7 +131,7 @@
         Update from Java 7 to 8.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Bump junit-jupiter from 5.7.2 to 5.9.0 #113, #126.
+        Bump junit-jupiter from 5.7.2 to 5.9.1 #113, #126, #134.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update JUnit from 4 to 5.9.1 vintage, #78, #112, #127, #136.
