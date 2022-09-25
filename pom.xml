@@ -57,6 +57,7 @@
     <checkstyle.version>8.34</checkstyle.version>
     <commons.spotbugs.plugin.version>4.6.0.0</commons.spotbugs.plugin.version>
     <commons.spotbugs.impl.version>4.6.0</commons.spotbugs.impl.version>    
+    <commons.junit.version>5.9.1</commons.junit.version>
     <!-- Commons Release Plugin -->
     <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
@@ -349,13 +350,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.9.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
-      <version>5.9.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
