@@ -119,7 +119,7 @@
         Update actions/checkout from 2.3.1 to 3.0.2 #33, #108.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
-        Update actions/setup-java from 1.4.0 to 3 #35, #114.
+        Update actions/setup-java from 1.4.0 to 3.5.1 #35, #114.
       </action>
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
         Update Apache Commons Collections from 4.3 to 4.4.
