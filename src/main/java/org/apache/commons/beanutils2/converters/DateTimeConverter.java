@@ -309,10 +309,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently across JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
-            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
-            timeInMillis += timestamp.getNanos() / 1000000;
-
-            return toDate(targetType, timeInMillis);
+            return toDate(targetType, timestamp.getTime() / 1000,
+                timestamp.getNanos());
         }
 
         // Handle Date (includes java.sql.Date & java.sql.Time)
@@ -336,25 +334,29 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         // Handle LocalDate
         if (value instanceof LocalDate) {
             final LocalDate date = (LocalDate)value;
-            return toDate(targetType, date.atStartOfDay(getZoneId()).toInstant().toEpochMilli());
+            final Instant temp = date.atStartOfDay(getZoneId()).toInstant();
+            return toDate(targetType, temp.getEpochSecond(), temp.getNano());
         }
 
         // Handle LocalDateTime
         if (value instanceof LocalDateTime) {
             final LocalDateTime date = (LocalDateTime)value;
-            return toDate(targetType, date.atZone(getZoneId()).toInstant().toEpochMilli());
+            final Instant temp = date.atZone(getZoneId()).toInstant();
+            return toDate(targetType,  temp.getEpochSecond(), temp.getNano());
         }
 
         // Handle ZonedDateTime
         if (value instanceof ZonedDateTime) {
             final ZonedDateTime date = (ZonedDateTime)value;
-            return toDate(targetType, date.toInstant().toEpochMilli());
+            final Instant temp = date.toInstant();
+            return toDate(targetType, temp.getEpochSecond(), temp.getNano());
         }
 
         // Handle OffsetDateTime
         if (value instanceof OffsetDateTime) {
             final OffsetDateTime date = (OffsetDateTime)value;
-            return toDate(targetType, date.toInstant().toEpochMilli());
+            final Instant temp = date.toInstant();
+            return toDate(targetType, temp.getEpochSecond(), temp.getNano());
         }
 
         // Convert all other types to String & handle
@@ -383,7 +385,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     }
 
     /**
-     * Convert a long value to the specified Date type for this
+     * Convert a milliseconds long value to the specified Date type for this
      * <i>Converter</i>.
      * <p>
      *
@@ -401,10 +403,49 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *
      * @param <T> The target type
      * @param type The Date type to convert to
-     * @param value The long value to convert.
+     * @param milliSeconds The milliseconds long value to convert.
      * @return The converted date value.
      */
-    private <T> T toDate(final Class<T> type, final long value) {
+    private <T> T toDate(final Class<T> type, final long milliSeconds) {
+      return toDate(type, milliSeconds / 1000,
+          Long.valueOf(milliSeconds % 1000).intValue() * 1000000);
+    }
+
+    /**
+     * Convert a seconds value and a nanos value to the specified
+     * Date type for this <i>Converter</i>.
+     * <p>
+     * 
+     * This method handles conversion to the following types:
+     * <ul>
+     *     <li>{@code java.util.Date}</li>
+     *     <li>{@code java.util.Calendar}</li>
+     *     <li>{@code java.time.LocalDate}</li>
+     *     <li>{@code java.time.LocalDateTime}</li>
+     *     <li>{@code java.time.ZonedDateTime}</li>
+     *     <li>{@code java.sql.Date}</li>
+     *     <li>{@code java.sql.Time}</li>
+     *     <li>{@code java.sql.Timestamp}</li>
+     * </ul>
+     *
+     * @param <T>     The target type
+     * @param type    The Date type to convert to
+     * @param seconds Represents seconds of UTC time since Unix epoch
+     *                1970-01-01T00:00:00Z. Must be from
+     *                0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z
+     *                inclusive.
+     * @param nanos   Non-negative fractions of a second at
+     *                nanosecond resolution. Negative second values
+     *                with fractions must still have non-negative
+     *                nanos values that count forward in time. Must
+     *                be from 0 to 999,999,999 inclusive.
+     * @return The converted date value.
+     */
+    private <T> T toDate(final Class<T> type, final long seconds,
+            final int nanos) {
+        // milliseconds
+        long value = seconds * 1000 + nanos / 1000000;
+
         // java.util.Date
         if (type.equals(Date.class)) {
             return type.cast(new Date(value));
@@ -422,30 +463,37 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
         // java.sql.Timestamp
         if (type.equals(java.sql.Timestamp.class)) {
-            return type.cast(new java.sql.Timestamp(value));
+            java.sql.Timestamp stamp = new java.sql.Timestamp(value);
+            stamp.setNanos(nanos);
+            return type.cast(stamp);
         }
 
         // java.time.LocalDateTime
         if (type.equals(LocalDate.class)) {
-            final LocalDate localDate =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDate();
+            final LocalDate localDate = Instant.ofEpochSecond(seconds, nanos)
+                    .atZone(getZoneId()).toLocalDate();
             return type.cast(localDate);
         }
 
         // java.time.LocalDateTime
         if (type.equals(LocalDateTime.class)) {
-            final LocalDateTime localDateTime =  Instant.ofEpochMilli(value).atZone(getZoneId()).toLocalDateTime();
+            final LocalDateTime localDateTime = Instant
+                    .ofEpochSecond(seconds, nanos).atZone(getZoneId())
+                    .toLocalDateTime();
             return type.cast(localDateTime);
         }
 
         // java.time.ZonedDateTime
         if (type.equals(ZonedDateTime.class)) {
-            final ZonedDateTime zonedDateTime =  ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            final ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(
+                    Instant.ofEpochSecond(seconds, nanos), getZoneId());
             return type.cast(zonedDateTime);
         }
 
         // java.time.OffsetDateTime
         if (type.equals(OffsetDateTime.class)) {
-            final OffsetDateTime offsetDateTime =  OffsetDateTime.ofInstant(Instant.ofEpochMilli(value), getZoneId());
+            final OffsetDateTime offsetDateTime = OffsetDateTime.ofInstant(
+                    Instant.ofEpochSecond(seconds, nanos), getZoneId());
             return type.cast(offsetDateTime);
         }
 
@@ -466,14 +514,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             return type.cast(calendar);
         }
 
-        final String msg = toString(getClass()) + " cannot handle conversion to '"
-                   + toString(type) + "'";
+        final String msg = toString(getClass())
+                + " cannot handle conversion to '" + toString(type) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
         }
         throw new ConversionException(msg);
     }
-
+    
     /**
      * Default String to Date conversion.
      * <p>
