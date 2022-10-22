@@ -42,6 +42,7 @@ import org.apache.commons.beanutils2.ConversionException;
  * <ul>
  *     <li>{@code java.util.Date}</li>
  *     <li>{@code java.util.Calendar}</li>
+ *     <li>{@code java.time.Instant}</li>
  *     <li>{@code java.time.LocalDate}</li>
  *     <li>{@code java.time.LocalDateTime}</li>
  *     <li>{@code java.time.OffsetDateTime}</li>
@@ -227,7 +228,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         } else if (value instanceof Calendar) {
             date = ((Calendar) value).getTime();
         } else if (value instanceof Long) {
-            date = new Date(((Long) value).longValue());
+            date = new Date(((Long) value).longValue());  
         } else if (value instanceof LocalDateTime) {
             date = java.sql.Timestamp.valueOf(((LocalDateTime) value));
         } else if (value instanceof LocalDate) {
@@ -276,6 +277,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *     <li>{@code java.time.LocalDateTime}</li>
      *     <li>{@code java.time.OffsetDateTime}</li>
      *     <li>{@code java.time.ZonedDateTime}</li>
+     *     <li>{@code java.time.Instant}</li>
      *     <li>{@code java.sql.Date}</li>
      *     <li>{@code java.sql.Time}</li>
      *     <li>{@code java.sql.Timestamp}</li>
@@ -358,6 +360,12 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             final Instant temp = date.toInstant();
             return toDate(targetType, temp.getEpochSecond(), temp.getNano());
         }
+        
+        //Handle Instant and other TemporalAccessor implementations.
+        if (value instanceof TemporalAccessor) {
+            final Instant temp = Instant.from(((TemporalAccessor) value));
+            return toDate(targetType, temp.getEpochSecond(), temp.getNano());
+        }
 
         // Convert all other types to String & handle
         final String stringValue = toTrim(value);
@@ -396,6 +404,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *     <li>{@code java.time.LocalDate}</li>
      *     <li>{@code java.time.LocalDateTime}</li>
      *     <li>{@code java.time.ZonedDateTime}</li>
+     *     <li>{@code java.time.Instant}</li>
      *     <li>{@code java.sql.Date}</li>
      *     <li>{@code java.sql.Time}</li>
      *     <li>{@code java.sql.Timestamp}</li>
@@ -423,6 +432,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *     <li>{@code java.time.LocalDate}</li>
      *     <li>{@code java.time.LocalDateTime}</li>
      *     <li>{@code java.time.ZonedDateTime}</li>
+     *     <li>{@code java.time.Instant}</li>
      *     <li>{@code java.sql.Date}</li>
      *     <li>{@code java.sql.Time}</li>
      *     <li>{@code java.sql.Timestamp}</li>
@@ -495,6 +505,12 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             final OffsetDateTime offsetDateTime = OffsetDateTime.ofInstant(
                     Instant.ofEpochSecond(seconds, nanos), getZoneId());
             return type.cast(offsetDateTime);
+        }
+        
+        // java.time.Instant
+        if (type.equals(Instant.class)) {
+            final Instant instant = Instant.ofEpochSecond(seconds, nanos);
+            return type.cast(instant);
         }
 
         // java.util.Calendar

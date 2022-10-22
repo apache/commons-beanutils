@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -85,6 +86,12 @@ public abstract class DateConverterTestBase<T> extends TestCase {
 
         if (date instanceof OffsetDateTime) {
             return ((OffsetDateTime) date).toInstant().toEpochMilli();
+        }
+        
+        //Instant and other TemporalAccessor 
+        if (date instanceof TemporalAccessor) {
+          final Instant temp = Instant.from(((TemporalAccessor) date));
+          return temp.toEpochMilli();
         }
 
         if (date instanceof Calendar) {
