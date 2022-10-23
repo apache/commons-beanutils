@@ -17,11 +17,9 @@
 package org.apache.commons.beanutils2.converters;
 
 import static java.time.temporal.ChronoField.INSTANT_SECONDS;
-import static java.time.temporal.ChronoField.NANO_OF_SECOND;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,10 +27,8 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
 import java.util.Calendar;
@@ -107,7 +103,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     private String[] patterns;
     private String displayPatterns;
     private Locale locale;
-    private TimeZone timeZone;
+    private ZoneId zoneId;
     private boolean useLocaleFormat;
 
     /**
@@ -146,7 +142,10 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @return The Time Zone.
      */
     public TimeZone getTimeZone() {
-        return timeZone;
+        if(zoneId!=null) {
+          return TimeZone.getTimeZone(zoneId);
+        } 
+        return null;
     }
 
     /**
@@ -155,7 +154,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @param timeZone The Time Zone.
      */
     public void setTimeZone(final TimeZone timeZone) {
-        this.timeZone = timeZone;
+        this.zoneId = timeZone.toZoneId();
     }
 
     /**
@@ -524,14 +523,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         // java.util.Calendar
         if (type.equals(Calendar.class)) {
             Calendar calendar = null;
-            if (locale == null && timeZone == null) {
+            if (locale == null && this.getTimeZone() == null) {
                 calendar = Calendar.getInstance();
             } else if (locale == null) {
-                calendar = Calendar.getInstance(timeZone);
-            } else if (timeZone == null) {
+                calendar = Calendar.getInstance(this.getTimeZone());
+            } else if (this.getTimeZone() == null) {
                 calendar = Calendar.getInstance(locale);
             } else {
-                calendar = Calendar.getInstance(timeZone, locale);
+                calendar = Calendar.getInstance(this.getTimeZone(), locale);
             }
             calendar.setTime(new Date(value));
             calendar.setLenient(false);
@@ -656,7 +655,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      */
     private DateTimeFormatter getFormat(final String pattern) {
         final DateTimeFormatter format = DateTimeFormatter.ofPattern(pattern);
-        if (timeZone != null ) {
+        if (zoneId != null ) {
             return format.withZone(getZoneId());
         }
         return format;
@@ -837,9 +836,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             buffer.append(", Locale=");
             buffer.append(locale);
         }
-        if (timeZone != null) {
-            buffer.append(", TimeZone=");
-            buffer.append(timeZone);
+        if (zoneId != null) {
+            buffer.append(", ZoneId=");
+            buffer.append(zoneId);
         }
         buffer.append(']');
         return buffer.toString();
@@ -870,13 +869,23 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                 buffer.append(locale);
                 buffer.append("]");
             }
-            if (timeZone != null) {
-                buffer.append(", TimeZone[");
-                buffer.append(timeZone);
+            if (zoneId != null) {
+                buffer.append(", ZoneId[");
+                buffer.append(zoneId);
                 buffer.append("]");
             }
             log().debug(buffer.toString());
         }
+    }
+    
+    
+    /**
+     * Sets the {@code java.time.ZoneId</code> from the <code>java.util.Timezone}.
+     *
+     * @param zoneId The ZoneId.
+     */
+    public void setZoneId(ZoneId zoneId) {
+      this.zoneId = zoneId;
     }
 
     /**
@@ -884,7 +893,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * set or use the system default if no time zone is set.
      * @return the {@code ZoneId}
      */
-    private ZoneId getZoneId() {
-        return timeZone == null ? ZoneId.systemDefault() : timeZone.toZoneId();
+    public ZoneId getZoneId() {
+        return zoneId == null ? ZoneId.systemDefault() : zoneId;
     }
 }
