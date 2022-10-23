@@ -17,9 +17,9 @@
 package org.apache.commons.beanutils2.converters;
 
 import java.sql.Time;
-import java.text.DateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
@@ -68,25 +68,17 @@ public final class SqlTimeConverter extends DateTimeConverter<Time> {
     }
 
     /**
-     * Gets a {@code DateFormat} for the Locale.
+     * Gets a {@code DateTimeFormatter} for the Locale.
      * @param locale TODO
-     * @param timeZone TODO
+     * @param zoneId TODO
+     * @param value TODO
      *
-     * @return The DateFormat.
+     * @return The DateTimeFormatter.
      * @since 1.8.0
      */
     @Override
-    protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
-        DateFormat format = null;
-        if (locale == null) {
-            format = DateFormat.getTimeInstance(DateFormat.SHORT);
-        } else {
-            format = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
-        }
-        if (timeZone != null) {
-            format.setTimeZone(timeZone);
-        }
-        return format;
+    protected DateTimeFormatter getFormat(final Locale locale, final ZoneId zoneId,String value) {
+        return super.getFormat(locale, zoneId, 2);
     }
-
+    
 }

@@ -16,16 +16,25 @@
  */
 package org.apache.commons.beanutils2.converters;
 
-import java.text.DateFormat;
+import static java.time.temporal.ChronoField.INSTANT_SECONDS;
+import static java.time.temporal.ChronoField.NANO_OF_SECOND;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.chrono.IsoChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalQueries;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -222,33 +231,28 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      */
     @Override
     protected String convertToString(final Object value) {
-        Date date = null;
-        if (value instanceof Date) {
-            date = (Date) value;
-        } else if (value instanceof Calendar) {
-            date = ((Calendar) value).getTime();
-        } else if (value instanceof Long) {
-            date = new Date(((Long) value).longValue());  
-        } else if (value instanceof LocalDateTime) {
-            date = java.sql.Timestamp.valueOf(((LocalDateTime) value));
-        } else if (value instanceof LocalDate) {
-            date = java.sql.Date.valueOf(((LocalDate) value));
-        } else if (value instanceof ZonedDateTime) {
-            date = Date.from(((ZonedDateTime) value).toInstant());
-        } else if (value instanceof OffsetDateTime) {
-            date = Date.from(((OffsetDateTime) value).toInstant());
-        } else if (value instanceof TemporalAccessor) {
-            // Backstop for other TemporalAccessor implementations.
-            date = Date.from(Instant.from(((TemporalAccessor) value)));
+        TemporalAccessor date = null;
+        
+        if(value instanceof Instant) {
+          date = ((Instant)value).atZone(getZoneId());
+        }else if (value instanceof TemporalAccessor) {
+          //LocalDateTime、LocalDate、ZonedDateTime、OffsetDateTime
+          date = (TemporalAccessor) value;
+        } else {
+            try {
+              date= convertToType(LocalDateTime.class,value);
+            }catch(Exception e) {
+              log().debug(value+" to LocalDateTime Error : ",e);
+            }
         }
-
+        
         String result = null;
         if (useLocaleFormat && date != null) {
-            DateFormat format = null;
+            DateTimeFormatter format = null;
             if (patterns != null && patterns.length > 0) {
                 format = getFormat(patterns[0]);
             } else {
-                format = getFormat(locale, timeZone);
+                format = getFormat(locale, getZoneId(),0);
             }
             logFormat("Formatting", format);
             result = format.format(date);
@@ -339,6 +343,13 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             final Instant temp = date.atStartOfDay(getZoneId()).toInstant();
             return toDate(targetType, temp.getEpochSecond(), temp.getNano());
         }
+        
+        // Handle LocalDate
+        if (value instanceof LocalTime) {
+            final LocalTime date = (LocalTime)value;
+            final Instant temp = date.atDate(LocalDate.of(1970, 1, 1)).atZone(getZoneId()).toInstant();
+            return toDate(targetType, temp.getEpochSecond(), temp.getNano());
+        }
 
         // Handle LocalDateTime
         if (value instanceof LocalDateTime) {
@@ -375,17 +386,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
         // Parse the Date/Time
         if (useLocaleFormat) {
-            Calendar calendar = null;
+            TemporalAccessor temporalAccessor = null;
             if (patterns != null && patterns.length > 0) {
-                calendar = parse(sourceType, targetType, stringValue);
+                temporalAccessor = parse(sourceType, targetType, stringValue);
             } else {
-                final DateFormat format = getFormat(locale, timeZone);
-                calendar = parse(sourceType, targetType, stringValue, format);
+                final DateTimeFormatter format = getFormat(locale, getZoneId(),stringValue);
+                temporalAccessor = parse(sourceType, targetType, stringValue, format);
             }
-            if (Calendar.class.isAssignableFrom(targetType)) {
-                return targetType.cast(calendar);
-            }
-            return toDate(targetType, calendar.getTime().getTime());
+            return convertToType(targetType, temporalAccessor);
         }
 
         // Default String conversion
@@ -599,35 +607,57 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     }
 
     /**
-     * Gets a {@code DateFormat} for the Locale.
+     * Gets a {@code DateTimeFormatter} for the Locale.
      * @param locale The Locale to create the Format with (may be null)
-     * @param timeZone The Time Zone create the Format with (may be null)
+     * @param zoneId The Time Zone create the Format with (may be null)
+     * @param value format Value
      *
      * @return A Date Format.
      */
-    protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
-        DateFormat format = null;
-        if (locale == null) {
-            format = DateFormat.getDateInstance(DateFormat.SHORT);
-        } else {
-            format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+    protected DateTimeFormatter getFormat(final Locale locale, final ZoneId zoneId,String value) {
+        if (value.length()>10) {
+          return getFormat(locale,zoneId,0);
+        }else {
+          return getFormat(locale,zoneId,1);
         }
-        if (timeZone != null) {
-            format.setTimeZone(timeZone);
-        }
-        return format;
+    }
+    
+    /**
+     * Gets a {@code DateTimeFormatter} for the Locale.
+     * @param locale The Locale to create the Format with (may be null)
+     * @param zoneId The Time Zone create the Format with (may be null)
+     * @param type 0:LocalizedDateTime、1:LocalizedDate、2:LocalizedTime
+     * @return
+     */
+    protected DateTimeFormatter getFormat(final Locale locale, final ZoneId zoneId,final int type) {
+      DateTimeFormatter format = null;
+      //DateTime
+      if (type==0) {
+        format = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+      }else if (type==1){
+        format = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+      }else if (type==2) {
+        format = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+      }
+      if (locale != null) {
+          format = format.withLocale(locale);
+      }
+      if (zoneId != null ) {
+          format = format.withZone(zoneId);
+      }
+      return format;
     }
 
     /**
      * Create a date format for the specified pattern.
      *
      * @param pattern The date pattern
-     * @return The DateFormat
+     * @return The DateTimeFormatter
      */
-    private DateFormat getFormat(final String pattern) {
-        final DateFormat format = new SimpleDateFormat(pattern);
-        if (timeZone != null) {
-            format.setTimeZone(timeZone);
+    private DateTimeFormatter getFormat(final String pattern) {
+        final DateTimeFormatter format = DateTimeFormatter.ofPattern(pattern);
+        if (timeZone != null ) {
+            return format.withZone(getZoneId());
         }
         return format;
     }
@@ -642,13 +672,13 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @return The converted Date object.
      * @throws Exception if an error occurs parsing the date.
      */
-    private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
+    private TemporalAccessor parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
         Exception firstEx = null;
         for (final String pattern : patterns) {
             try {
-                final DateFormat format = getFormat(pattern);
-                final Calendar calendar = parse(sourceType, targetType, value, format);
-                return calendar;
+                final DateTimeFormatter format = getFormat(pattern);
+                final TemporalAccessor temporalAccessor = parse(sourceType, targetType, value, format);
+                return temporalAccessor;
             } catch (final Exception ex) {
                 if (firstEx == null) {
                     firstEx = ex;
@@ -674,24 +704,115 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value,
-            final DateFormat format) {
+    private TemporalAccessor parse(final Class<?> sourceType, final Class<?> targetType, final String value,
+            DateTimeFormatter format) {
         logFormat("Parsing", format);
-        format.setLenient(false);
         final ParsePosition pos = new ParsePosition(0);
-        final Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
+        final TemporalAccessor parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
         if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
-            if (format instanceof SimpleDateFormat) {
-                msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
+            if (format instanceof DateTimeFormatter) {
+                //msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
+                msg += " using pattern '" + ((DateTimeFormatter)format).toString() + "'";
             }
             if (log().isDebugEnabled()) {
                 log().debug("    " + msg);
             }
             throw new ConversionException(msg);
         }
-        final Calendar calendar = format.getCalendar();
-        return calendar;
+
+        if (checkZonedDateTime(parsedDate)) {
+          return ZonedDateTime.from(parsedDate);
+        } else if(checkOffsetDateTime(parsedDate)) {
+          return OffsetDateTime.from(parsedDate);
+        } else if (checkLocalDateTime(parsedDate)) {
+          return LocalDateTime.from(parsedDate);
+        } else if (checkLocalDate(parsedDate)) {
+          return LocalDate.from(parsedDate);
+        } else if (checkLocalTime(parsedDate)) {
+          return LocalTime.from(parsedDate);
+        } else  {
+          return Instant.from(parsedDate);
+        } 
+    }
+
+    /**
+     * Check ZonedDateTime from TemporalAccessor.
+     */
+    public boolean checkZonedDateTime(TemporalAccessor temporal) {
+        if (temporal instanceof ZonedDateTime) {
+          return true;
+        }
+        if (temporal.query(TemporalQueries.offset())!=null) {
+          return false;
+        }
+        if (temporal.query(TemporalQueries.zone())==null) {
+          return false;
+        }
+        if (temporal.isSupported(INSTANT_SECONDS)) {
+          return true;
+        }
+        return checkLocalDateTime(temporal);
+    }
+    /**
+     * Check LocalDateTime from TemporalAccessor.
+     */
+    public boolean checkLocalDateTime(TemporalAccessor temporal) {
+        if (temporal instanceof LocalDateTime) {
+          return true;
+        }
+        if (temporal.query(TemporalQueries.localDate())==null) {
+          return false;
+        }
+        if (temporal.query(TemporalQueries.localTime())==null) {
+          return false;
+        }
+        return true;
+    }
+    /**
+     * Check LocalDate from TemporalAccessor.
+     */
+    public boolean checkLocalDate(TemporalAccessor temporal) {
+        if (temporal instanceof LocalDate) {
+          return true;
+        }
+        if (temporal.query(TemporalQueries.localDate())==null) {
+          return false;
+        }
+        if (temporal.query(TemporalQueries.localTime())!=null) {
+          return false;
+        }
+        return true;
+    }
+    /**
+     * Check LocalTime from TemporalAccessor.
+     */
+    public boolean checkLocalTime(TemporalAccessor temporal) {
+        if (temporal instanceof LocalTime) {
+          return true;
+        }
+        if (temporal.query(TemporalQueries.localDate())!=null) {
+          return false;
+        }
+        if (temporal.query(TemporalQueries.localTime())==null) {
+          return false;
+        }
+        return true;
+    }
+    /**
+     * Check OffsetDateTime from TemporalAccessor.
+     */
+    public boolean checkOffsetDateTime(TemporalAccessor temporal) {
+        if (temporal instanceof OffsetDateTime) {
+          return true;
+        }
+        if (temporal.query(TemporalQueries.offset())==null) {
+          return false;
+        }
+        if (temporal.isSupported(INSTANT_SECONDS)) {
+          return true;
+        }
+        return checkLocalDateTime(temporal);
     }
 
     /**
@@ -729,15 +850,16 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @param action The action the format is being used for
      * @param format The Date format
      */
-    private void logFormat(final String action, final DateFormat format) {
+    private void logFormat(final String action, final DateTimeFormatter format) {
         if (log().isDebugEnabled()) {
             final StringBuilder buffer = new StringBuilder(45);
             buffer.append("    ");
             buffer.append(action);
             buffer.append(" with Format");
-            if (format instanceof SimpleDateFormat) {
+            if (format instanceof DateTimeFormatter) {
                 buffer.append("[");
-                buffer.append(((SimpleDateFormat)format).toPattern());
+                buffer.append(((DateTimeFormatter)format).toString());
+                //buffer.append(((SimpleDateFormat)format).toPattern());
                 buffer.append("]");
             }
             buffer.append(" for ");
