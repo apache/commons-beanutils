@@ -29,6 +29,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
 import java.util.Calendar;
@@ -730,9 +731,18 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
           return LocalDate.from(parsedDate);
         } else if (checkLocalTime(parsedDate)) {
           return LocalTime.from(parsedDate);
-        } else  {
+        } else if (parsedDate.isSupported(INSTANT_SECONDS)){
           return Instant.from(parsedDate);
-        } 
+        } else {
+          LocalDateTime ldt=LocalDateTime.of(1970, 1, 1, 0, 0);
+          if (parsedDate.isSupported(ChronoField.YEAR)) {
+            ldt=ldt.withYear(parsedDate.get(ChronoField.YEAR));
+          }
+          if (parsedDate.isSupported(ChronoField.MONTH_OF_YEAR)) {
+            ldt=ldt.withMonth(parsedDate.get(ChronoField.MONTH_OF_YEAR));
+          }          
+          return ldt;
+        }
     }
 
     /**
@@ -783,6 +793,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         }
         return true;
     }
+    
     /**
      * Check LocalTime from TemporalAccessor.
      */
