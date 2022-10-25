@@ -27,8 +27,11 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
@@ -648,7 +651,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
       }else if (type==1){
         format = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
       }else if (type==2) {
-        format = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+        //CaseSensitive 10:36 am. 
+        format = new DateTimeFormatterBuilder().parseCaseInsensitive()
+            .appendLocalized(null, FormatStyle.SHORT).toFormatter().withChronology(IsoChronology.INSTANCE);
       }
       if (locale != null) {
           format = format.withLocale(locale);
