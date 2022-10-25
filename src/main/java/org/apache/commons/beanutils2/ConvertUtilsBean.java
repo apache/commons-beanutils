@@ -246,11 +246,17 @@ public class ConvertUtilsBean {
      *
      * @throws ConversionException if thrown by an underlying Converter
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T> Object convert(final String value, final Class<T> clazz) {
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
         Converter<T> converter = lookup(clazz);
+        //Enum Converter
+        if (converter == null && clazz.isEnum()) {          
+            converter = (Converter)lookup(Enum.class);
+        }
+        
         if (converter == null) {
             Converter<String> sConverter = lookup(String.class);
             if (log.isTraceEnabled()) {
@@ -327,6 +333,12 @@ public class ConvertUtilsBean {
 
         Object converted = value;
         Converter converter = lookup(sourceType, targetType);
+        
+        //Enum Converter
+        if (sourceType.isEnum() || targetType.isEnum()) {          
+            converter = (Converter)lookup(Enum.class);
+        }
+        
         if (converter != null) {
             if (log.isTraceEnabled()) {
                 log.trace("  Using converter " + converter);

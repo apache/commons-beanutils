@@ -17,7 +17,9 @@
 
 package org.apache.commons.beanutils2.converters;
 
+
 import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
 
 import junit.framework.TestCase;
@@ -74,6 +76,12 @@ public class EnumConverterTestCase extends TestCase {
             "ORDERED",
             "READY"
         };
+        
+        final Object[] ordinals= {
+            2,
+            0,
+            1
+        };
 
         final PizzaStatus[] expected = {
             PizzaStatus.DELIVERED,
@@ -88,6 +96,15 @@ public class EnumConverterTestCase extends TestCase {
         for(int i=0;i<expected.length;i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
+        
+        for(int i=0;i<expected.length;i++) {
+          assertEquals("from Integer to Enum",expected[i],converter.convert(PizzaStatus.class,ordinals[i]));
+        }
+        
+        for(int i=0;i<expected.length;i++) {
+          assertEquals(input[i] + " to Integer", ordinals[i], converter.convert(Integer.class, expected[i]));
+        }
+      
     }
 
     /**
