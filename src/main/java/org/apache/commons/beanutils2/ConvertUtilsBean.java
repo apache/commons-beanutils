@@ -335,7 +335,7 @@ public class ConvertUtilsBean {
         Converter converter = lookup(sourceType, targetType);
         
         //Enum Converter
-        if (sourceType.isEnum() || targetType.isEnum()) {          
+        if ((sourceType !=null && sourceType.isEnum()) || targetType.isEnum()) {          
             converter = (Converter)lookup(Enum.class);
         }
         
