@@ -49,14 +49,15 @@ import org.apache.commons.beanutils2.ConversionException;
  * This implementation handles conversion for the following
  * <i>date/time</i> types.
  * <ul>
- *     <li>{@code java.util.Date}</li>
- *     <li>{@code java.util.Calendar}</li>
+
  *     <li>{@code java.time.Instant}</li>
  *     <li>{@code java.time.LocalDate}</li>
  *     <li>{@code java.time.LocalTime}</li>
  *     <li>{@code java.time.LocalDateTime}</li>
  *     <li>{@code java.time.OffsetDateTime}</li>
  *     <li>{@code java.time.ZonedDateTime}</li>
+ *     <li>{@code java.util.Date}</li>
+ *     <li>{@code java.util.Calendar}</li>
  *     <li>{@code java.sql.Date}</li>
  *     <li>{@code java.sql.Time}</li>
  *     <li>{@code java.sql.Timestamp}</li>
@@ -745,7 +746,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
           return LocalDateTime.from(parsedDate);
         } else if (checkLocalDate(parsedDate)) {
           return LocalDate.from(parsedDate);
-        } else if (checkLocalTime(parsedDate)) {
+        } else if (checkLocalTime(parsedDate)) { 
           return LocalTime.from(parsedDate);
         } else if (parsedDate.isSupported(INSTANT_SECONDS)){
           return Instant.from(parsedDate);
