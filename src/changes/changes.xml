@@ -143,7 +143,7 @@
         Update Jacoco from 0.8.4 to 0.8.8.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update JApiCmp from 0.12.0 to 0.16.0, #46, #110, #130.
+        Update JApiCmp from 0.12.0 to 0.17.1, #46, #110, #130, #146.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
         Update maven-surefire-plugin from 2.22.1 to 3.0.0-M7, #116, #122.
