@@ -105,7 +105,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty[] properties = DynaProperty.EMPTY_DYNA_PROPERTY_ARRAY;
+    protected DynaProperty[] properties = DynaProperty.EMPTY_ARRAY;
 
     /**
      * The set of dynamic properties that are part of this DynaClass,

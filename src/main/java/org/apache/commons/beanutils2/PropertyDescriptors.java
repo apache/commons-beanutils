@@ -21,6 +21,6 @@ import java.beans.PropertyDescriptor;
 
 class PropertyDescriptors {
 
-    static final PropertyDescriptor[] EMPTY_PROPERTY_DESCRIPTOR_ARRAY = {};
+    static final PropertyDescriptor[] EMPTY_ARRAY = {};
 
 }

@@ -85,7 +85,7 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
 
         PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();
         if (descriptors == null) {
-            descriptors = PropertyDescriptors.EMPTY_PROPERTY_DESCRIPTOR_ARRAY;
+            descriptors = PropertyDescriptors.EMPTY_ARRAY;
         }
 
         handleIndexedPropertyDescriptors(icontext.getTargetClass(),

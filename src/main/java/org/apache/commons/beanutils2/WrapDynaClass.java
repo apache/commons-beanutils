@@ -269,7 +269,7 @@ public class WrapDynaClass implements DynaClass {
         PropertyDescriptor[] regulars =
                 getPropertyUtilsBean().getPropertyDescriptors(beanClass);
         if (regulars == null) {
-            regulars = PropertyDescriptors.EMPTY_PROPERTY_DESCRIPTOR_ARRAY;
+            regulars = PropertyDescriptors.EMPTY_ARRAY;
         }
         Map<?, ?> mappeds =
                 PropertyUtils.getMappedPropertyDescriptors(beanClass);
