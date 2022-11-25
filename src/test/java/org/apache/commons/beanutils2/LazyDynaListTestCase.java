@@ -604,7 +604,7 @@ public class LazyDynaListTestCase extends TestCase {
         final LazyDynaList list = new LazyDynaList(LazyDynaBean.class);
         final LazyDynaBean elem = new LazyDynaBean();
         list.add(elem);
-        final LazyDynaBean[] array = list.toArray(new LazyDynaBean[0]);
+        final LazyDynaBean[] array = list.toArray(LazyDynaBean.EMPTY_LAZY_DYNA_BEAN_ARRAY);
         assertEquals("Wrong array size", 1, array.length);
         assertEquals("Wrong element", elem, array[0]);
     }
