@@ -148,8 +148,7 @@ public class ContextClassLoaderLocal<T> {
             if (contextClassLoader != null) {
 
                 T value = valueByClassLoader.get(contextClassLoader);
-                if (value == null
-                && !valueByClassLoader.containsKey(contextClassLoader)) {
+                if (value == null && !valueByClassLoader.containsKey(contextClassLoader)) {
                     value = initialValue();
                     valueByClassLoader.put(contextClassLoader, value);
                 }
