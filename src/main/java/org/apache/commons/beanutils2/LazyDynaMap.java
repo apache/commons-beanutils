@@ -218,13 +218,13 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             throw new IllegalArgumentException("Property name is missing.");
         }
 
+        final Object value = values.get(name);
+
         // If it doesn't exist and returnNull is false
         // create a new DynaProperty
-        if (!values.containsKey(name) && isReturnNull()) {
+        if (value == null && isReturnNull()) {
             return null;
         }
-
-        final Object value = values.get(name);
 
         if (value == null) {
             return new DynaProperty(name);
