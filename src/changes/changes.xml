@@ -161,7 +161,7 @@
         Update commons-parent from 50 to 54, #135.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update biz.aQute.bndlib from 5.1.0 to 6.3.1 #29, #45, #79, #109, #119, #121.
+        Update biz.aQute.bndlib from 5.1.0 to 6.4.0 #29, #45, #79, #109, #119, #121, #147.
       </action>
       <action dev="ggregory" type="update" due-to="melloware">
         Jacoco 0.8.6 for JDK15 support #55.
