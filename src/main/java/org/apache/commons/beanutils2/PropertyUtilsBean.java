@@ -797,7 +797,15 @@ public class PropertyUtilsBean {
                     + " objects of type Map: " + propertyName);
         }
 
-        return bean.get(propertyName);
+        Object result = bean.get(propertyName);
+        if(result==null){
+            try{
+                return bean.get(Integer.parseInt(propertyName))
+            }catch(NumberFormatException ex){
+                return result;
+            }
+        }
+        return result;
     }
 
     /**
