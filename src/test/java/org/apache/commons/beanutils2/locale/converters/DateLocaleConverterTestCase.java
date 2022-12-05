@@ -160,7 +160,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         // test with no leniency
         converter.setLenient(false);
-        assertEquals("Set lenient failed", converter.isLenient(), false);
+        assertFalse("Set lenient failed", converter.isLenient());
 
         try {
 
@@ -173,7 +173,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
         try {
 
             converter.convert("Feb 31, 2001");
-            assertEquals("Set lenient failed", converter.isLenient(), false);
+            assertFalse("Set lenient failed", converter.isLenient());
             fail("Parsed illegal date (2)");
 
         } catch (final ConversionException e) {
@@ -182,7 +182,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         // test with leniency
         converter.setLenient(true);
-        assertEquals("Set lenient failed", converter.isLenient(), true);
+        assertTrue("Set lenient failed", converter.isLenient());
 
         try {
 

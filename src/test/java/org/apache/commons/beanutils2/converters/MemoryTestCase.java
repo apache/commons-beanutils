@@ -18,8 +18,9 @@
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.ref.WeakReference;
@@ -117,7 +118,7 @@ public class MemoryTestCase {
               // private classpath.
               final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
               Object newFloatConverter = newFloatConverterClass.newInstance();
-              assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
+                assertSame(newFloatConverter.getClass().getClassLoader(), componentLoader);
 
               // verify that this new object does implement the Converter type
               // despite being loaded via a classloader different from the one
@@ -134,7 +135,7 @@ public class MemoryTestCase {
               // it back to us. We'll try this lookup again with a different
               // context-classloader set, and shouldn't see it
               final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
-              assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
+                assertSame(componentConverter.getClass().getClassLoader(), componentLoader);
 
               newFloatConverter = null;
             }
@@ -143,13 +144,13 @@ public class MemoryTestCase {
             // Because the context classloader has been reset, we shouldn't
             // see the custom registered converter here...
             final Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
-            assertFalse(sharedConverter.getClass().getClassLoader() == componentLoader);
+            assertNotSame(sharedConverter.getClass().getClassLoader(), componentLoader);
 
             // and here we should see it again
             Thread.currentThread().setContextClassLoader(componentLoader);
             {
                 final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
-                assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
+                assertSame(componentConverter.getClass().getClassLoader(), componentLoader);
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
             // Emulate a container "undeploying" the component. This should
@@ -216,19 +217,19 @@ public class MemoryTestCase {
                 // When we first do a ConvertUtils operation inside a custom
                 // classloader, we get a completely fresh copy of the
                 // ConvertUtilsBean, with all-new Converter objects in it..
-                assertFalse(ConvertUtils.lookup(Float.TYPE) == origFloatConverter);
+                assertNotSame(ConvertUtils.lookup(Float.TYPE), origFloatConverter);
 
                 // Now we register a custom converter (but of a standard class).
                 // This should only affect code that runs with exactly the
                 // same context classloader set.
                 ConvertUtils.register(floatConverter1, Float.TYPE);
-                assertTrue(ConvertUtils.lookup(Float.TYPE) == floatConverter1);
+                assertSame(ConvertUtils.lookup(Float.TYPE), floatConverter1);
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
 
             // The converter visible outside any custom component should not
             // have been altered.
-            assertTrue(ConvertUtils.lookup(Float.TYPE) == origFloatConverter);
+            assertSame(ConvertUtils.lookup(Float.TYPE), origFloatConverter);
 
             // Emulate the container invoking a component #2.
             Thread.currentThread().setContextClassLoader(componentLoader2);
@@ -237,8 +238,8 @@ public class MemoryTestCase {
 
                 // we should get a completely fresh ConvertUtilsBean, with
                 // all-new Converter objects again.
-                assertFalse(ConvertUtils.lookup(Float.TYPE) == origFloatConverter);
-                assertFalse(ConvertUtils.lookup(Float.TYPE) == floatConverter1);
+                assertNotSame(ConvertUtils.lookup(Float.TYPE), origFloatConverter);
+                assertNotSame(ConvertUtils.lookup(Float.TYPE), floatConverter1);
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
 

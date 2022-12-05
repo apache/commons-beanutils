@@ -80,7 +80,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
 
         // Too Large
         try {
-            assertEquals("Too Big", null, converter.convert(clazz, tooBig));
+            assertNull("Too Big", converter.convert(clazz, tooBig));
             fail("More than maximum, expected ConversionException");
         } catch (final Exception e) {
             // expected result

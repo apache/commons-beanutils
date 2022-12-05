@@ -292,12 +292,8 @@ public class LocaleBeanificationTestCase extends TestCase {
         thread.join();
 
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertTrue(
-                    "Different LocaleBeanUtilsBean instances per context classloader",
-                    BeanUtilsBean.getInstance() != signal.getBean());
-        assertTrue(
-                    "Different LocaleConvertUtilsBean instances per context classloader",
-                    LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());
+        assertNotSame("Different LocaleBeanUtilsBean instances per context classloader", BeanUtilsBean.getInstance(), signal.getBean());
+        assertNotSame("Different LocaleConvertUtilsBean instances per context classloader", LocaleConvertUtilsBean.getInstance(), signal.getConvertUtils());
     }
 
 
@@ -471,7 +467,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
-        assertTrue("Unset works", !beanOne.equals(ccll.get()));
+        assertFalse("Unset works", beanOne.equals(ccll.get()));
     }
 
     /**

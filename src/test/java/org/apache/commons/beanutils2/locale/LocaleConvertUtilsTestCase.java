@@ -251,15 +251,13 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         final String[] stringArray1 = {"abc"};
         final String[] stringArray2 = {"abc", "def"};
 
-        assertEquals("intArray0", null,
-                LocaleConvertUtils.convert(intArray0));
+        assertNull("intArray0", LocaleConvertUtils.convert(intArray0));
         assertEquals("intArray1", "123",
                 LocaleConvertUtils.convert(intArray1));
         assertEquals("intArray2", "123",
                 LocaleConvertUtils.convert(intArray2));
 
-        assertEquals("stringArray0", null,
-                LocaleConvertUtils.convert(stringArray0));
+        assertNull("stringArray0", LocaleConvertUtils.convert(stringArray0));
         assertEquals("stringArray1", "abc",
                 LocaleConvertUtils.convert(stringArray1));
         assertEquals("stringArray2", "abc",
@@ -292,8 +290,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(Short.valueOf((short) 123)));
         assertEquals("String->String", "abc",
                 LocaleConvertUtils.convert("abc"));
-        assertEquals("String->String null", null,
-                LocaleConvertUtils.convert(null));
+        assertNull("String->String null", LocaleConvertUtils.convert(null));
 
     }
 

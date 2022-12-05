@@ -100,7 +100,7 @@ public class CharacterConverterTestCase extends TestCase {
         assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
         assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
         assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
-        assertEquals("Null Test",     null, converter.convert(String.class, null));
+        assertNull("Null Test", converter.convert(String.class, null));
     }
 
     /**

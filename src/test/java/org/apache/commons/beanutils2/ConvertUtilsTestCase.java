@@ -116,11 +116,11 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("foo", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("foo", Byte.TYPE);
         assertTrue(value instanceof Byte);
@@ -208,15 +208,13 @@ public class ConvertUtilsTestCase extends TestCase {
         final String[] stringArray1 = { "abc" };
         final String[] stringArray2 = { "abc", "def" };
 
-        assertEquals("intArray0", null,
-                     ConvertUtils.convert(intArray0));
+        assertNull("intArray0", ConvertUtils.convert(intArray0));
         assertEquals("intArray1", "123",
                      ConvertUtils.convert(intArray1));
         assertEquals("intArray2", "123",
                      ConvertUtils.convert(intArray2));
 
-        assertEquals("stringArray0", null,
-                     ConvertUtils.convert(stringArray0));
+        assertNull("stringArray0", ConvertUtils.convert(stringArray0));
         assertEquals("stringArray1", "abc",
                      ConvertUtils.convert(stringArray1));
         assertEquals("stringArray2", "abc",
@@ -249,8 +247,7 @@ public class ConvertUtilsTestCase extends TestCase {
                      ConvertUtils.convert(Short.valueOf((short) 123)));
         assertEquals("String->String", "abc",
                      ConvertUtils.convert("abc"));
-        assertEquals("String->String null", null,
-                     ConvertUtils.convert(null));
+        assertNull("String->String null", ConvertUtils.convert(null));
 
     }
 
@@ -322,67 +319,67 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("true", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("yes", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("yes", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("y", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("y", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("on", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("on", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), true);
+        assertTrue(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("false", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("false", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("no", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("no", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("n", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("n", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("off", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("off", Boolean.class);
         assertTrue(value instanceof Boolean);
-        assertEquals(((Boolean) value).booleanValue(), false);
+        assertFalse(((Boolean) value).booleanValue());
 
         value = ConvertUtils.convert("123", Byte.TYPE);
         assertTrue(value instanceof Byte);
@@ -528,17 +525,11 @@ public class ConvertUtilsTestCase extends TestCase {
         Object
         value = utilsOne.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (1)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertTrue("Standard conversion failed (1)", ((Boolean) value).booleanValue());
 
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (2)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertTrue("Standard conversion failed (2)", ((Boolean) value).booleanValue());
 
         // now register a test
 
@@ -554,10 +545,7 @@ public class ConvertUtilsTestCase extends TestCase {
             // nothing should have changed
             value = utilsTwo.convert("true", Boolean.TYPE);
             assertTrue(value instanceof Boolean);
-            assertEquals(
-                        "Standard conversion failed (3)",
-                        ((Boolean) value).booleanValue(),
-                        true);
+            assertTrue("Standard conversion failed (3)", ((Boolean) value).booleanValue());
 
         } catch (final PassTestException e) {
             // This is a failure since utilsTwo should still have
@@ -569,14 +557,11 @@ public class ConvertUtilsTestCase extends TestCase {
         utilsOne.deregister();
         value = utilsOne.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals("Instance deregister failed.", ((Boolean) value).booleanValue(), true);
+        assertTrue("Instance deregister failed.", ((Boolean) value).booleanValue());
 
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (4)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertTrue("Standard conversion failed (4)", ((Boolean) value).booleanValue());
     }
 
     public void testDeregisteringSingleConverter() throws Exception {
@@ -584,10 +569,7 @@ public class ConvertUtilsTestCase extends TestCase {
         final Object
         value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (1)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertTrue("Standard conversion failed (1)", ((Boolean) value).booleanValue());
 
         // we'll test deregister
         ConvertUtils.deregister(Boolean.TYPE);

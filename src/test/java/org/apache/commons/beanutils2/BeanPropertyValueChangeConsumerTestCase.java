@@ -47,7 +47,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleFloatPropertyAndFloatValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("floatProperty", expectedFloatValue).accept(testBean);
-        assertTrue(expectedFloatValue.floatValue() == testBean.getFloatProperty());
+        assertEquals(expectedFloatValue.floatValue(), testBean.getFloatProperty());
     }
 
     /**
@@ -80,7 +80,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleFloatPropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("floatProperty", expectedIntegerValue).accept(testBean);
-        assertTrue(expectedIntegerValue.floatValue() == testBean.getFloatProperty());
+        assertEquals(expectedIntegerValue.floatValue(), testBean.getFloatProperty());
     }
 
     /**
@@ -89,7 +89,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleDoublePropertyAndDoubleValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedDoubleValue).accept(testBean);
-        assertTrue(expectedDoubleValue.doubleValue() == testBean.getDoubleProperty());
+        assertEquals(expectedDoubleValue.doubleValue(), testBean.getDoubleProperty());
     }
 
     /**
@@ -110,7 +110,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleDoublePropertyAndFloatValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedFloatValue).accept(testBean);
-        assertTrue(expectedFloatValue.doubleValue() == testBean.getDoubleProperty());
+        assertEquals(expectedFloatValue.doubleValue(), testBean.getDoubleProperty());
     }
 
     /**
@@ -119,7 +119,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleDoublePropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("doubleProperty", expectedIntegerValue).accept(testBean);
-        assertTrue(expectedIntegerValue.doubleValue() == testBean.getDoubleProperty());
+        assertEquals(expectedIntegerValue.doubleValue(), testBean.getDoubleProperty());
     }
 
     /**
@@ -164,7 +164,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleIntPropertyAndIntegerValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("intProperty", expectedIntegerValue).accept(testBean);
-        assertTrue(expectedIntegerValue.intValue() == testBean.getIntProperty());
+        assertEquals(expectedIntegerValue.intValue(), testBean.getIntProperty());
     }
 
     /**
@@ -173,7 +173,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleBooleanPropertyAndBooleanValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("booleanProperty", expectedBooleanValue).accept(testBean);
-        assertTrue(expectedBooleanValue.booleanValue() == testBean.getBooleanProperty());
+        assertEquals(expectedBooleanValue.booleanValue(), testBean.getBooleanProperty());
     }
 
     /**
@@ -194,7 +194,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithSimpleBytePropertyAndByteValue() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("byteProperty", expectedByteValue).accept(testBean);
-        assertTrue(expectedByteValue.byteValue() == testBean.getByteProperty());
+        assertEquals(expectedByteValue.byteValue(), testBean.getByteProperty());
     }
 
     /**
@@ -286,7 +286,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
     public void testExecuteWithIndexedProperty() {
         final TestBean testBean = new TestBean();
         new BeanPropertyValueChangeConsumer<>("intIndexed[0]", expectedIntegerValue).accept(testBean);
-        assertTrue(expectedIntegerValue.intValue() == testBean.getIntIndexed(0));
+        assertEquals(expectedIntegerValue.intValue(), testBean.getIntIndexed(0));
     }
 
     /**
