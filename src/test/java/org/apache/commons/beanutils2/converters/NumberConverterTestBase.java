@@ -110,7 +110,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
             new Integer(9),
             new Long(10),
             new Float(11.1),
-            new Double(12.2),
+            Double.valueOf(12.2),
             new BigDecimal("17.2"),
             new BigInteger("33"),
             new Integer[] {new Integer(3), new Integer(2), new Integer(1)}

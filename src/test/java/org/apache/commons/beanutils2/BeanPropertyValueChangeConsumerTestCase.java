@@ -28,7 +28,7 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
 
     private static final Integer expectedIntegerValue = new Integer(123);
     private static final Float expectedFloatValue = new Float(123.123f);
-    private static final Double expectedDoubleValue = new Double(567879.12344d);
+    private static final Double expectedDoubleValue = Double.valueOf(567879.12344d);
     private static final Boolean expectedBooleanValue = Boolean.TRUE;
     private static final Byte expectedByteValue = new Byte("12");
 

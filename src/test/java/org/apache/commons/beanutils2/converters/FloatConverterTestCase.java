@@ -72,8 +72,8 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Float.class;
 
-        final Double max     = new Double(Float.MAX_VALUE);
-        final Double tooBig  = new Double(Double.MAX_VALUE);
+        final Double max     = Double.valueOf(Float.MAX_VALUE);
+        final Double tooBig  = Double.valueOf(Double.MAX_VALUE);
 
         // Maximum
         assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
@@ -117,7 +117,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
             new Integer(9),
             new Long(10),
             new Float(11.1),
-            new Double(12.2),
+            Double.valueOf(12.2),
         };
 
         final Float[] expected = {

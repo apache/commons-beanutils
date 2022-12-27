@@ -97,7 +97,7 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase<BigInte
             new Integer(9),
             new Long(10),
             new Float(11.1),
-            new Double(12.2)
+            Double.valueOf(12.2)
         };
 
         final BigInteger[] expected = {

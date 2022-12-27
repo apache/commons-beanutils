@@ -99,7 +99,7 @@ public class BeanUtilsBenchCase extends TestCase {
         inMap = new HashMap<>();
         inMap.put("booleanProperty", new Boolean(inBean.getBooleanProperty()));
         inMap.put("byteProperty", new Byte(inBean.getByteProperty()));
-        inMap.put("doubleProperty", new Double(inBean.getDoubleProperty()));
+        inMap.put("doubleProperty", Double.valueOf(inBean.getDoubleProperty()));
         inMap.put("floatProperty", new Float(inBean.getFloatProperty()));
         inMap.put("intProperty", new Integer(inBean.getIntProperty()));
         inMap.put("longProperty", new Long(inBean.getLongProperty()));

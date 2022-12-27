@@ -105,7 +105,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean.set("booleanProperty", new Boolean(true));
         bean.set("booleanSecond", new Boolean(true));
         bean.set("byteProperty", new Byte((byte) 121));
-        bean.set("doubleProperty", new Double(321.0));
+        bean.set("doubleProperty", Double.valueOf(321.0));
         bean.set("floatProperty", new Float((float) 123.0));
         final String[] dupProperty = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
         bean.set("dupProperty", dupProperty);
@@ -185,7 +185,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", new Byte((byte)111));
-        orig.set("doubleProperty", new Double(333.33));
+        orig.set("doubleProperty", Double.valueOf(333.33));
         orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
         orig.set("intProperty", new Integer(333));
@@ -262,7 +262,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
         orig.set("booleanProperty", Boolean.FALSE);
         orig.set("byteProperty", new Byte((byte)111));
-        orig.set("doubleProperty", new Double(333.33));
+        orig.set("doubleProperty", Double.valueOf(333.33));
         orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
         orig.set("intProperty", new Integer(333));
@@ -480,7 +480,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      new Byte((byte) 121),
                      map.get("byteProperty"));
         assertEquals("Value of 'doubleProperty'",
-                     new Double(321.0),
+                     Double.valueOf(321.0),
                      map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
                      new Float((float) 123.0),
@@ -953,7 +953,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "doubleProperty", new Byte((byte) 123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Double(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Double.valueOf(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
         BeanUtils.setProperty(bean, "doubleProperty", new Float(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
@@ -973,7 +973,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         BeanUtils.setProperty(bean, "floatProperty", new Byte((byte) 123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Double(123));
+        BeanUtils.setProperty(bean, "floatProperty", Double.valueOf(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
         BeanUtils.setProperty(bean, "floatProperty", new Float(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
