@@ -54,10 +54,10 @@ public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Double("-12");
-        numbers[1] = new Double("13");
-        numbers[2] = new Double("-22");
-        numbers[3] = new Double("23");
+        numbers[0] = Double.valueOf("-12");
+        numbers[1] = Double.valueOf("13");
+        numbers[2] = Double.valueOf("-22");
+        numbers[3] = Double.valueOf("23");
     }
 
     @Override
