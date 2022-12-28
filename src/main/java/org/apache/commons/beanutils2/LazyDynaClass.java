@@ -236,17 +236,17 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
         // Check if property already exists
         if (propertiesMap.get(property.getName()) != null) {
-           return;
+            return;
         }
 
         // Create a new property array with the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length+1];
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length + 1];
         System.arraycopy(oldProperties, 0, newProperties, 0, oldProperties.length);
         newProperties[oldProperties.length] = property;
 
-       // Update the properties
-       setProperties(newProperties);
+        // Update the properties
+        setProperties(newProperties);
     }
 
     /**
