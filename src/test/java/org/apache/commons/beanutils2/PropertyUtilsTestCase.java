@@ -236,7 +236,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", Boolean.FALSE);
-        map.put("doubleProperty", new Double(333.0));
+        map.put("doubleProperty", Double.valueOf(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         map.put("floatProperty", new Float((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
@@ -307,7 +307,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'booleanProperty'",
                      Boolean.TRUE, map.get("booleanProperty"));
         assertEquals("Value of 'doubleProperty'",
-                     new Double(321.0), map.get("doubleProperty"));
+                     Double.valueOf(321.0), map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
                      new Float((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
@@ -3269,7 +3269,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final double newValue = oldValue + 1.0;
             PropertyUtils.setNestedProperty(bean,
                     "nested.doubleProperty",
-                    new Double(newValue));
+                    Double.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getNested().getDoubleProperty(),
@@ -3552,7 +3552,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final double newValue = oldValue + 1.0;
             PropertyUtils.setSimpleProperty(bean,
                     "doubleProperty",
-                    new Double(newValue));
+                    Double.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getDoubleProperty(),

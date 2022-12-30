@@ -172,7 +172,7 @@ public class TestResultSet implements InvocationHandler {
             return new Date(timestampMillis);
         }
         if ("doubleProperty".equals(columnName)) {
-            return new Double(321.0);
+            return Double.valueOf(321.0);
         }
         if ("floatProperty".equals(columnName)) {
             return new Float((float) 123.0);

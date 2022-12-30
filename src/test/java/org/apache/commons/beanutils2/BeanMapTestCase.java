@@ -381,7 +381,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
         assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).apply("4"));
         assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).apply("5"));
-        assertEquals("Double.TYPE",    new Double("6"),     beanMap.getTypeTransformer(Double.TYPE).apply("6"));
+        assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).apply("6"));
     }
 
     /**

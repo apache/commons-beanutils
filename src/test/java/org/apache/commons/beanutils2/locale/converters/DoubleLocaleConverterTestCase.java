@@ -40,8 +40,8 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
 
         super.setUp();
 
-        defaultValue  = new Double("9.99");
-        expectedValue = new Double(expectedDecimalValue);
+        defaultValue  = Double.valueOf("9.99");
+        expectedValue = Double.valueOf(expectedDecimalValue);
 
     }
 
@@ -77,7 +77,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
         // quite happily turning "1,234.56" into "1.234"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultDecimalValue, new Double("1.234"));
+        convertValueNoPattern(converter, "(B)", defaultDecimalValue, Double.valueOf("1.234"));
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()

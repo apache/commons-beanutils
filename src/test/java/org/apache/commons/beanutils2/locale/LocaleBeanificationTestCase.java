@@ -41,21 +41,11 @@ import junit.framework.TestSuite;
  * Test Case for changes made during LocaleBeanutils Beanification.
  * This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
- *
  */
-
 public class LocaleBeanificationTestCase extends TestCase {
-
-
 
     /** Maximum number of iterations before our test fails */
     public static final int MAX_GC_ITERATIONS = 50;
-
-
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -66,20 +56,13 @@ public class LocaleBeanificationTestCase extends TestCase {
         super(name);
     }
 
-
-
-
-
     /**
      * Sets up instance variables required by this test case.
      */
     @Override
     public void setUp() {
-
         LocaleConvertUtils.deregister();
-
     }
-
 
     /**
      * Creates the tests included in this test suite.
@@ -88,7 +71,6 @@ public class LocaleBeanificationTestCase extends TestCase {
         return new TestSuite(LocaleBeanificationTestCase.class);
     }
 
-
     /**
      * Tear down instance variables required by this test case.
      */
@@ -96,9 +78,6 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
-
-
 
     /** Test of the methodology we'll use for some of the later tests */
     public void testMemoryTestMethodology() throws Exception {
@@ -212,7 +191,6 @@ public class LocaleBeanificationTestCase extends TestCase {
                 return "GetBeanUtilsBeanThread";
             }
         }
-
 
         GetBeanUtilsBeanThread thread = new GetBeanUtilsBeanThread();
         final WeakReference<GetBeanUtilsBeanThread> threadWeakReference = new WeakReference<>(thread);
@@ -519,8 +497,6 @@ public class LocaleBeanificationTestCase extends TestCase {
             ConvertUtils.deregister();
         }
     }
-
-    // ---- Auxillary classes
 
     class TestClassLoader extends ClassLoader {
         @Override
