@@ -122,7 +122,7 @@ public class Jira347TestCase extends TestCase {
         // System.out.println("After GC: " + getMemoryStats());
 
         if (ref.get() != null) {
-            throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)");
+            throw new IllegalStateException("Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)");
         }
     }
 

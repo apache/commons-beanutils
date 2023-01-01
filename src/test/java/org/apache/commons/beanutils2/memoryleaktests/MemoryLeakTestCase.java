@@ -76,7 +76,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following line, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
         assertEquals("initialValue", PropertyUtils.getProperty(bean, "name"));
 
@@ -123,7 +123,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following three lines, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following three lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
         assertEquals("Second Value", PropertyUtils.getProperty(bean, "mappedProperty(Second Key)"));
         PropertyUtils.setProperty(bean, "mappedProperty(Second Key)", "New Second Value");
@@ -273,7 +273,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following line, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and MethodUtils is holding a reference
         assertEquals("initialValue", MethodUtils.invokeExactMethod(bean, "getName", new Object[0]));
 
@@ -321,7 +321,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following line, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following line, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and WrapDynaClass is holding a reference
         assertEquals("initialValue", wrapDynaBean.get("name"));
 
@@ -373,7 +373,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
         ConvertUtils.register(new IntegerConverter(), beanClass);
         assertEquals("12345", ConvertUtils.convert(bean, String.class));
@@ -420,7 +420,7 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
+        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
         LocaleConvertUtils.register(new IntegerLocaleConverter(Locale.US, false), (Class<Integer>) beanClass, Locale.US);
         assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
@@ -499,7 +499,7 @@ public class MemoryLeakTestCase {
 
         final boolean isNotNull = ref.get() != null;
         System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
-        final String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
+        final String message = "Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)";
         Assume.assumeFalse(message, isNotNull);
     }
 

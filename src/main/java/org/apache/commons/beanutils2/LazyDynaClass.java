@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
+import java.util.Arrays;
+
 /**
  * <p>DynaClass which implements the {@code MutableDynaClass} interface.</p>
  *
@@ -241,8 +243,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
         // Create a new property array with the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length + 1];
-        System.arraycopy(oldProperties, 0, newProperties, 0, oldProperties.length);
+        final DynaProperty[] newProperties = Arrays.copyOf(oldProperties, oldProperties.length + 1);
         newProperties[oldProperties.length] = property;
 
         // Update the properties
