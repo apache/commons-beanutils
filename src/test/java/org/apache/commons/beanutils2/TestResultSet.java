@@ -166,7 +166,7 @@ public class TestResultSet implements InvocationHandler {
             return Boolean.FALSE;
         }
         if ("byteProperty".equals(columnName)) {
-            return new Byte((byte) row);
+            return Byte.valueOf((byte) row);
         }
         if ("dateProperty".equals(columnName)) {
             return new Date(timestampMillis);

@@ -100,7 +100,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
             "0.0",
             "1.1",
             "17.2",
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),

@@ -50,8 +50,8 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
         expectedDecimalValue    = "123.56";
         expectedIntegerValue    = "123";
 
-        defaultValue  = new Byte("99");
-        expectedValue = new Byte(expectedIntegerValue);
+        defaultValue  = Byte.valueOf("99");
+        expectedValue = Byte.valueOf(expectedIntegerValue);
 
     }
 
@@ -87,12 +87,12 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
         // quite happily turning ",123" into "0"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Byte("0"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Byte.valueOf("0"));
 
         // **************************************************************************
         // Convert with non-localized pattern
         // **************************************************************************
-        convertValueWithPattern(converter, "(B)", "123", defaultIntegerPattern, new Byte("123"));
+        convertValueWithPattern(converter, "(B)", "123", defaultIntegerPattern, Byte.valueOf("123"));
         convertValueWithPattern(converter, "(B-2)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
 
         // **************************************************************************

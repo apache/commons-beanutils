@@ -90,7 +90,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
             "1.1",
             "17.2",
             String.valueOf(Double.MAX_VALUE),
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),

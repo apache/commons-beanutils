@@ -125,7 +125,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
             "1",
             "17",
             String.valueOf(Short.MAX_VALUE),
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),

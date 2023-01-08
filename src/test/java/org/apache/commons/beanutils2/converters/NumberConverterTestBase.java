@@ -105,7 +105,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         };
 
         final Object[] number = {
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),

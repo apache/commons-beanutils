@@ -90,7 +90,7 @@ public class LongConverterTestCase extends NumberConverterTestBase<Long> {
             "1",
             "17",
             String.valueOf(Long.MAX_VALUE),
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),

@@ -54,10 +54,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Byte("-12");
-        numbers[1] = new Byte("13");
-        numbers[2] = new Byte("-22");
-        numbers[3] = new Byte("23");
+        numbers[0] = Byte.valueOf("-12");
+        numbers[1] = Byte.valueOf("13");
+        numbers[2] = Byte.valueOf("-22");
+        numbers[3] = Byte.valueOf("23");
     }
 
     @Override
@@ -78,10 +78,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
         final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals("Minimum", Byte.valueOf(Byte.MIN_VALUE), converter.convert(clazz, min));
 
         // Maximum
-        assertEquals("Maximum", new Byte(Byte.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals("Maximum", Byte.valueOf(Byte.MAX_VALUE), converter.convert(clazz, max));
 
         // Too Small
         try {
@@ -125,7 +125,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
             "1",
             "17",
             String.valueOf(Byte.MAX_VALUE),
-            new Byte((byte)7),
+            Byte.valueOf((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
@@ -134,19 +134,19 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
         };
 
         final Byte[] expected = {
-            new Byte(Byte.MIN_VALUE),
-            new Byte((byte)-17),
-            new Byte((byte)-1),
-            new Byte((byte)0),
-            new Byte((byte)1),
-            new Byte((byte)17),
-            new Byte(Byte.MAX_VALUE),
-            new Byte((byte)7),
-            new Byte((byte)8),
-            new Byte((byte)9),
-            new Byte((byte)10),
-            new Byte((byte)11),
-            new Byte((byte)12)
+            Byte.valueOf(Byte.MIN_VALUE),
+            Byte.valueOf((byte)-17),
+            Byte.valueOf((byte)-1),
+            Byte.valueOf((byte)0),
+            Byte.valueOf((byte)1),
+            Byte.valueOf((byte)17),
+            Byte.valueOf(Byte.MAX_VALUE),
+            Byte.valueOf((byte)7),
+            Byte.valueOf((byte)8),
+            Byte.valueOf((byte)9),
+            Byte.valueOf((byte)10),
+            Byte.valueOf((byte)11),
+            Byte.valueOf((byte)12)
         };
 
         for(int i=0;i<expected.length;i++) {
