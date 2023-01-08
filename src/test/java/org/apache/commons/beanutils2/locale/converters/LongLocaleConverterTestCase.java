@@ -40,8 +40,8 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
 
         super.setUp();
 
-        defaultValue  = new Long("999");
-        expectedValue = new Long(expectedIntegerValue);
+        defaultValue  = Long.valueOf("999");
+        expectedValue = Long.valueOf(expectedIntegerValue);
 
     }
 
@@ -77,7 +77,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
         // quite happily turning "1,234" into "1"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Long("1"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Long.valueOf("1"));
 
         // **************************************************************************
         // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
@@ -85,7 +85,7 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new Long("1"));
+        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Long.valueOf("1"));
 
         // **************************************************************************
         // Convert with specified type

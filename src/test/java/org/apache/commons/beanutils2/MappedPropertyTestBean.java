@@ -89,7 +89,7 @@ public class MappedPropertyTestBean {
     }
 
     public Long getDifferentTypes(final String key) {
-        return new Long(((Number)map.get(key)).longValue());
+        return Long.valueOf(((Number)map.get(key)).longValue());
     }
     public void setDifferentTypes(final String key, final Integer value) {
         map.put(key, value);

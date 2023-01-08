@@ -112,7 +112,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         listIndexed.add("String 3");
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
-        bean.set("longProperty", new Long(321));
+        bean.set("longProperty", Long.valueOf(321));
         final HashMap<String, String> mappedProperty = new HashMap<>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
@@ -867,7 +867,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final long oldValue =
                     ((Long) bean.get("longProperty")).longValue();
             final long newValue = oldValue + 1;
-            bean.set("longProperty", new Long(newValue));
+            bean.set("longProperty", Long.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Long) bean.get("longProperty")).longValue());

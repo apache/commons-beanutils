@@ -99,7 +99,7 @@ public class ArrayConverterTestCase extends TestCase {
         final String    stringB      = intArray[0]+ ";" + intArray[1] + ";" + intArray[2] + ";" +intArray[3];
         final String[]  strArray     = new String[] {""+intArray[0], ""+intArray[1], ""+intArray[2], ""+intArray[3]};
         final long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
-        final Long[]    LONGArray    = new Long[]    {new Long(intArray[0]),    new Long(intArray[1]),    new Long(intArray[2]),    new Long(intArray[3])};
+        final Long[]    LONGArray    = new Long[]    {Long.valueOf(intArray[0]),    Long.valueOf(intArray[1]),    Long.valueOf(intArray[2]),    Long.valueOf(intArray[3])};
         final Integer[] IntegerArray = new Integer[] {Integer.valueOf(intArray[0]), Integer.valueOf(intArray[1]), Integer.valueOf(intArray[2]), Integer.valueOf(intArray[3])};
         final ArrayList<String> strList = new ArrayList<>();
         final ArrayList<Long> longList = new ArrayList<>();

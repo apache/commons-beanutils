@@ -75,10 +75,10 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
-        final Long min         = new Long(Integer.MIN_VALUE);
-        final Long max         = new Long(Integer.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long min         = Long.valueOf(Integer.MIN_VALUE);
+        final Long max         = Long.valueOf(Integer.MAX_VALUE);
+        final Long minMinusOne = Long.valueOf(min.longValue() - 1);
+        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", Integer.valueOf(Integer.MIN_VALUE), converter.convert(clazz, min));
@@ -144,7 +144,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
             new Byte((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
-            new Long(10),
+            Long.valueOf(10),
             new Float(11.1),
             Double.valueOf(12.2)
         };

@@ -72,10 +72,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Byte.class;
 
-        final Long min         = new Long(Byte.MIN_VALUE);
-        final Long max         = new Long(Byte.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long min         = Long.valueOf(Byte.MIN_VALUE);
+        final Long max         = Long.valueOf(Byte.MAX_VALUE);
+        final Long minMinusOne = Long.valueOf(min.longValue() - 1);
+        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
@@ -128,7 +128,7 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
             new Byte((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
-            new Long(10),
+            Long.valueOf(10),
             new Float(11.1),
             Double.valueOf(12.2)
         };

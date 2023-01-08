@@ -241,7 +241,7 @@ public class PropertyUtilsTestCase extends TestCase {
         map.put("floatProperty", new Float((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
         map.put("intProperty", Integer.valueOf(111));
-        map.put("longProperty", new Long(444));
+        map.put("longProperty", Long.valueOf(444));
         map.put("shortProperty", new Short((short) 555));
         map.put("stringProperty", "New String Property");
 
@@ -313,7 +313,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'intProperty'",
                      Integer.valueOf(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
-                     new Long(321), map.get("longProperty"));
+                     Long.valueOf(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
                      new Short((short) 987), map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
@@ -3349,7 +3349,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final long newValue = oldValue + 1;
             PropertyUtils.setNestedProperty(bean,
                     "nested.longProperty",
-                    new Long(newValue));
+                    Long.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getNested().getLongProperty());
@@ -3654,7 +3654,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final long newValue = oldValue + 1;
             PropertyUtils.setSimpleProperty(bean,
                     "longProperty",
-                    new Long(newValue));
+                    Long.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getLongProperty());

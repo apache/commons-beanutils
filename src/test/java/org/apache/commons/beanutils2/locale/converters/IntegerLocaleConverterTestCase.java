@@ -224,7 +224,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase<
 
         final Integer value = Integer.valueOf(1234);
         assertEquals("Convert Integer", value, converter.convert(value));
-        assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
+        assertEquals("Convert Long",    value, converter.convert(Long.valueOf(value.intValue())));
     }
 
     /**

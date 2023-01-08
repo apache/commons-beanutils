@@ -64,7 +64,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final long longValue = calendarValue.getTime().getTime();
 
         // Calendar --> Long conversion
-        assertEquals("Calendar to Long", new Long(longValue), converter.convert(Long.class, calendarValue));
+        assertEquals("Calendar to Long", Long.valueOf(longValue), converter.convert(Long.class, calendarValue));
 
         // Calendar --> Integer
         try {
@@ -108,7 +108,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
             new Byte((byte)7),
             new Short((short)8),
             Integer.valueOf(9),
-            new Long(10),
+            Long.valueOf(10),
             new Float(11.1),
             Double.valueOf(12.2),
             new BigDecimal("17.2"),
@@ -135,7 +135,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final long longValue = dateValue.getTime();
 
         // Date --> Long conversion
-        assertEquals("Date to Long", new Long(longValue), converter.convert(Long.class, dateValue));
+        assertEquals("Date to Long", Long.valueOf(longValue), converter.convert(Long.class, dateValue));
 
         // Date --> Integer
         try {

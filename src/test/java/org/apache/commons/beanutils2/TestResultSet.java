@@ -181,7 +181,7 @@ public class TestResultSet implements InvocationHandler {
             return Integer.valueOf(100 + row);
         }
         if ("longProperty".equals(columnName)) {
-            return new Long(200 + row);
+            return Long.valueOf(200 + row);
         }
         if ("nullProperty".equals(columnName)) {
             return null;
