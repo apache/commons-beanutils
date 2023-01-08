@@ -99,7 +99,7 @@ public class PropertyUtilsBenchCase extends TestCase {
         inMap.put("byteProperty", new Byte(inBean.getByteProperty()));
         inMap.put("doubleProperty", Double.valueOf(inBean.getDoubleProperty()));
         inMap.put("floatProperty", new Float(inBean.getFloatProperty()));
-        inMap.put("intProperty", new Integer(inBean.getIntProperty()));
+        inMap.put("intProperty", Integer.valueOf(inBean.getIntProperty()));
         inMap.put("longProperty", new Long(inBean.getLongProperty()));
         inMap.put("shortProperty", new Short(inBean.getShortProperty()));
         inMap.put("stringProperty", inBean.getStringProperty());

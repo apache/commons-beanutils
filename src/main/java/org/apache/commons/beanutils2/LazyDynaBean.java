@@ -84,8 +84,8 @@ import org.apache.commons.logging.LogFactory;
  *         DynaBean myBean = new LazyDynaBean();
  *         MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
  *         myClass.add("myIndexedProperty", int[].class);
- *         myBean.set("myIndexedProperty", 0, new Integer(10));
- *         myBean.set("myIndexedProperty", 1, new Integer(20));
+ *         myBean.set("myIndexedProperty", 0, Integer.valueOf(10));
+ *         myBean.set("myIndexedProperty", 1, Integer.valueOf(20));
  *     </code></pre>
  *
  * <p><b><u>Setting Mapped Properties</u></b></p>

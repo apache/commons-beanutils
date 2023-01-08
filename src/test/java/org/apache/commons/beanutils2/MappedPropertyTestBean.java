@@ -57,7 +57,7 @@ public class MappedPropertyTestBean {
     }
 
     public void setMappedPrimitive(final int key, final int value) {
-        map.put(new Integer(key), new Integer(value));
+        map.put(Integer.valueOf(key), Integer.valueOf(value));
     }
 
     public void setAnyMapped(final MappedPropertyTestBean key, final MappedPropertyTestBean value) {

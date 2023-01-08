@@ -240,7 +240,7 @@ public class PropertyUtilsTestCase extends TestCase {
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         map.put("floatProperty", new Float((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
-        map.put("intProperty", new Integer(111));
+        map.put("intProperty", Integer.valueOf(111));
         map.put("longProperty", new Long(444));
         map.put("shortProperty", new Short((short) 555));
         map.put("stringProperty", "New String Property");
@@ -311,7 +311,7 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'floatProperty'",
                      new Float((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
-                     new Integer(123), map.get("intProperty"));
+                     Integer.valueOf(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
                      new Long(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
@@ -431,12 +431,12 @@ public class PropertyUtilsTestCase extends TestCase {
         bean.getMappedIntProperty("xyz"); // initializes mappedIntProperty
 
         PropertyDescriptor desc;
-        final Integer testIntegerValue = new Integer(1234);
+        final Integer testIntegerValue = Integer.valueOf(1234);
 
         bean.setMappedIntProperty("key.with.a.dot", testIntegerValue.intValue());
         assertEquals("Can retrieve directly",
                      testIntegerValue,
-                     new Integer(bean.getMappedIntProperty("key.with.a.dot")));
+                     Integer.valueOf(bean.getMappedIntProperty("key.with.a.dot")));
         try {
             desc = PropertyUtils.getPropertyDescriptor
                          (bean, "mappedIntProperty(key.with.a.dot)");
@@ -450,7 +450,7 @@ public class PropertyUtilsTestCase extends TestCase {
         bean.setMappedObjects("nested.property", new TestBean(testIntegerValue.intValue()));
         assertEquals("Can retrieve directly",
                       testIntegerValue,
-                      new Integer(((TestBean)bean.getMappedObjects("nested.property")).getIntProperty()));
+                      Integer.valueOf(((TestBean)bean.getMappedObjects("nested.property")).getIntProperty()));
         try {
             desc = PropertyUtils.getPropertyDescriptor
                          (bean, "mappedObjects(nested.property).intProperty");
@@ -2410,7 +2410,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(null, "intArray", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2420,7 +2420,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, null, 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2433,7 +2433,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(null,
                     "intArray[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2443,7 +2443,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -2453,7 +2453,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "intArray",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2465,7 +2465,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(null, "intIndexed", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2475,7 +2475,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, null, 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2488,7 +2488,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(null,
                     "intIndexed[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2498,7 +2498,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -2508,7 +2508,7 @@ public class PropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "intIndexed",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -2610,7 +2610,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intArray", 0);
@@ -2626,7 +2626,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", 1,
-                    new Integer(11));
+                    Integer.valueOf(11));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intIndexed", 1);
@@ -2708,7 +2708,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray[4]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intArray[4]");
@@ -2724,7 +2724,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed[3]",
-                    new Integer(11));
+                    Integer.valueOf(11));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intIndexed[3]");
@@ -2812,7 +2812,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", -1,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -2823,7 +2823,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", 5,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -2834,7 +2834,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", -1,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -2845,7 +2845,7 @@ public class PropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", 5,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -3323,7 +3323,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final int newValue = oldValue + 1;
             PropertyUtils.setNestedProperty(bean,
                     "nested.intProperty",
-                    new Integer(newValue));
+                    Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getNested().getIntProperty());
@@ -3628,7 +3628,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final int newValue = oldValue + 1;
             PropertyUtils.setSimpleProperty(bean,
                     "intProperty",
-                    new Integer(newValue));
+                    Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getIntProperty());

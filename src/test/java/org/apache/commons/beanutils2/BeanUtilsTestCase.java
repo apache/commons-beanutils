@@ -184,7 +184,7 @@ public class BeanUtilsTestCase extends TestCase {
         orig.set("dupProperty",
                  new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
-        orig.set("intProperty", new Integer(333));
+        orig.set("intProperty", Integer.valueOf(333));
         orig.set("longProperty", new Long(3333));
         orig.set("shortProperty", new Short((short) 33));
         orig.set("stringArray", new String[] { "New 0", "New 1" });
@@ -877,9 +877,9 @@ public class BeanUtilsTestCase extends TestCase {
      */
     public void testSetPropertyOnPrimitiveWrappers() throws Exception {
 
-        BeanUtils.setProperty(bean,"intProperty", new Integer(1));
+        BeanUtils.setProperty(bean,"intProperty", Integer.valueOf(1));
         assertEquals(1,bean.getIntProperty());
-        BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
+        BeanUtils.setProperty(bean,"stringProperty", Integer.valueOf(1));
         assertEquals(1, Integer.parseInt(bean.getStringProperty()));
 
     }
@@ -897,7 +897,7 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "byteProperty", new Float((float) 123));
         assertEquals((byte) 123, bean.getByteProperty());
 */
-        BeanUtils.setProperty(bean, "byteProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "byteProperty", Integer.valueOf(123));
         assertEquals((byte) 123, bean.getByteProperty());
         BeanUtils.setProperty(bean, "byteProperty", new Long(123));
         assertEquals((byte) 123, bean.getByteProperty());
@@ -980,7 +980,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getDoubleProperty(), 0.005);
         BeanUtils.setProperty(bean, "doubleProperty", new Float(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Integer.valueOf(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
         BeanUtils.setProperty(bean, "doubleProperty", new Long(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
@@ -1000,7 +1000,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getFloatProperty(), 0.005);
         BeanUtils.setProperty(bean, "floatProperty", new Float(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "floatProperty", Integer.valueOf(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
         BeanUtils.setProperty(bean, "floatProperty", new Long(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
@@ -1022,7 +1022,7 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
         assertEquals((int) 123, bean.getIntProperty());
 */
-        BeanUtils.setProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, bean.getIntProperty());
         BeanUtils.setProperty(bean, "longProperty", new Long(123));
         assertEquals(123, bean.getIntProperty());
@@ -1044,7 +1044,7 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
         assertEquals((long) 123, bean.getLongProperty());
 */
-        BeanUtils.setProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, bean.getLongProperty());
         BeanUtils.setProperty(bean, "longProperty", new Long(123));
         assertEquals(123, bean.getLongProperty());
@@ -1077,7 +1077,7 @@ public class BeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "shortProperty", new Float((float) 123));
         assertEquals((short) 123, bean.getShortProperty());
 */
-        BeanUtils.setProperty(bean, "shortProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "shortProperty", Integer.valueOf(123));
         assertEquals((short) 123, bean.getShortProperty());
         BeanUtils.setProperty(bean, "shortProperty", new Long(123));
         assertEquals((short) 123, bean.getShortProperty());
@@ -1118,7 +1118,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals((byte) 123, bean.getByteProperty());
         BeanUtils.copyProperty(bean, "byteProperty", new Float(123));
         assertEquals((byte) 123, bean.getByteProperty());
-        BeanUtils.copyProperty(bean, "byteProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "byteProperty", Integer.valueOf(123));
         assertEquals((byte) 123, bean.getByteProperty());
         BeanUtils.copyProperty(bean, "byteProperty", new Long(123));
         assertEquals((byte) 123, bean.getByteProperty());
@@ -1201,7 +1201,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getDoubleProperty(), 0.005);
         BeanUtils.copyProperty(bean, "doubleProperty", new Float(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
-        BeanUtils.copyProperty(bean, "doubleProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "doubleProperty", Integer.valueOf(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
         BeanUtils.copyProperty(bean, "doubleProperty", new Long(123));
         assertEquals(123, bean.getDoubleProperty(), 0.005);
@@ -1221,7 +1221,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getFloatProperty(), 0.005);
         BeanUtils.copyProperty(bean, "floatProperty", new Float(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
-        BeanUtils.copyProperty(bean, "floatProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "floatProperty", Integer.valueOf(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
         BeanUtils.copyProperty(bean, "floatProperty", new Long(123));
         assertEquals(123, bean.getFloatProperty(), 0.005);
@@ -1241,7 +1241,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getIntProperty());
         BeanUtils.copyProperty(bean, "longProperty", new Float(123));
         assertEquals(123, bean.getIntProperty());
-        BeanUtils.copyProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, bean.getIntProperty());
         BeanUtils.copyProperty(bean, "longProperty", new Long(123));
         assertEquals(123, bean.getIntProperty());
@@ -1261,7 +1261,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals(123, bean.getLongProperty());
         BeanUtils.copyProperty(bean, "longProperty", new Float(123));
         assertEquals(123, bean.getLongProperty());
-        BeanUtils.copyProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, bean.getLongProperty());
         BeanUtils.copyProperty(bean, "longProperty", new Long(123));
         assertEquals(123, bean.getLongProperty());
@@ -1281,7 +1281,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals((short) 123, bean.getShortProperty());
         BeanUtils.copyProperty(bean, "shortProperty", new Float(123));
         assertEquals((short) 123, bean.getShortProperty());
-        BeanUtils.copyProperty(bean, "shortProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "shortProperty", Integer.valueOf(123));
         assertEquals((short) 123, bean.getShortProperty());
         BeanUtils.copyProperty(bean, "shortProperty", new Long(123));
         assertEquals((short) 123, bean.getShortProperty());
@@ -1302,7 +1302,7 @@ public class BeanUtilsTestCase extends TestCase {
         final int[] intChanged = { 0, 0, 0 };
 
         // No conversion required
-        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", Integer.valueOf(1));
         checkIntArray(bean.getIntArray(), origArray);
         intChanged[1] = 1;
         checkIntArray(bean.getNested().getIntArray(), intChanged);
@@ -1358,7 +1358,7 @@ public class BeanUtilsTestCase extends TestCase {
         bean.getNested().setIntProperty(0);
 
         // No conversion required
-        BeanUtils.copyProperty(bean, "nested.intProperty", new Integer(1));
+        BeanUtils.copyProperty(bean, "nested.intProperty", Integer.valueOf(1));
         assertNotNull(bean.getNested());
         assertEquals(0, bean.getIntProperty());
         assertEquals(1, bean.getNested().getIntProperty());
@@ -1407,7 +1407,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("New value", bean.getWriteOnlyPropertyValue());
 
         // Integer->String conversion required
-        BeanUtils.copyProperty(bean, "writeOnlyProperty", new Integer(123));
+        BeanUtils.copyProperty(bean, "writeOnlyProperty", Integer.valueOf(123));
         assertEquals("123", bean.getWriteOnlyPropertyValue());
 
     }
@@ -1425,7 +1425,7 @@ public class BeanUtilsTestCase extends TestCase {
         assertEquals("New value", bean.getWriteOnlyPropertyValue());
 
         // Integer->String conversion required
-        BeanUtils.setProperty(bean, "writeOnlyProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "writeOnlyProperty", Integer.valueOf(123));
         assertEquals("123", bean.getWriteOnlyPropertyValue());
 
     }

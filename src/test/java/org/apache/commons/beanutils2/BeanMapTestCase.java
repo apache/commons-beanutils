@@ -280,7 +280,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         bean.setSomeShortValue((short)134);
         bean.setSomeByteValue((byte)10);
         bean.setSomeCharValue('a');
-        bean.setSomeIntegerValue(new Integer(1432));
+        bean.setSomeIntegerValue(Integer.valueOf(1432));
         bean.setSomeStringValue("SomeStringValue");
         bean.setSomeObjectValue(objectInFullMap);
         return new BeanMap(bean);
@@ -352,9 +352,9 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testBeanMapPutAllWriteable() {
         final BeanMap map1 = (BeanMap)makeFullMap();
         final BeanMap map2 = (BeanMap)makeFullMap();
-        map2.put("someIntValue", new Integer(0));
+        map2.put("someIntValue", Integer.valueOf(0));
         map1.putAllWriteable(map2);
-        assertEquals(map1.get("someIntValue"), new Integer(0));
+        assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
     }
 
     public void testMethodAccessor() throws Exception {
@@ -378,7 +378,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).apply("BCD"));
         assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).apply("1"));
         assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).apply("2"));
-        assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
+        assertEquals("Integer.TYPE",   Integer.valueOf(3),      beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
         assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).apply("4"));
         assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).apply("5"));
         assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).apply("6"));

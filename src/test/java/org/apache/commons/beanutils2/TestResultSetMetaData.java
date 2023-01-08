@@ -89,7 +89,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         if ("getColumnClassName".equals(methodName)) {
             return getColumnClassName(((Integer)args[0]).intValue());
         } if ("getColumnCount".equals(methodName)) {
-            return new Integer(getColumnCount());
+            return Integer.valueOf(getColumnCount());
         } if ("getColumnName".equals(methodName)) {
             return getColumnName(((Integer)args[0]).intValue());
         } if ("getColumnType".equals(methodName)) {
@@ -146,7 +146,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         } else {
             sqlType = Types.OTHER;
         }
-        return new Integer(sqlType);
+        return Integer.valueOf(sqlType);
     }
 
 

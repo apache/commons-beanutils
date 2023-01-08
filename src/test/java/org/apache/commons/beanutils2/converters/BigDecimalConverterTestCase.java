@@ -102,7 +102,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
             "17.2",
             new Byte((byte)7),
             new Short((short)8),
-            new Integer(9),
+            Integer.valueOf(9),
             new Long(10),
             new Float("11.1"),
             Double.valueOf("12.2"),

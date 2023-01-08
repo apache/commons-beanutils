@@ -46,7 +46,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final DynaClass dynaClass = new BasicDynaClass("testDynaClass", BasicDynaBean.class, properties);
 
     private static final String  stringVal = "somevalue";
-    private static final Integer intVal    = new Integer(5);
+    private static final Integer intVal    = Integer.valueOf(5);
     private static final Date    dateVal   = new Date();
     private final Map<Object, Object>     mapVal    = new HashMap<>();
 

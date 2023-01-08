@@ -104,7 +104,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean.set("intArray", intArray);
         final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
-        bean.set("intProperty", new Integer(123));
+        bean.set("intProperty", Integer.valueOf(123));
         final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
@@ -118,8 +118,8 @@ public class BasicDynaBeanTestCase extends TestCase {
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
         final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
-        mappedIntProperty.put("One", new Integer(1));
-        mappedIntProperty.put("Two", new Integer(2));
+        mappedIntProperty.put("One", Integer.valueOf(1));
+        mappedIntProperty.put("Two", Integer.valueOf(2));
         bean.set("mappedIntProperty", mappedIntProperty);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", new Short((short) 987));
@@ -676,7 +676,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetIndexedArguments() {
 
         try {
-            bean.set("intArray", -1, new Integer(0));
+            bean.set("intArray", -1, Integer.valueOf(0));
             fail("Should throw IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException e) {
             // Expected response
@@ -694,7 +694,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         Object value = null;
 
         try {
-            bean.set("intArray", 0, new Integer(1));
+            bean.set("intArray", 0, Integer.valueOf(1));
             value = bean.get("intArray", 0);
             assertNotNull("Returned new value 0", value);
             assertTrue("Returned Integer new value 0",
@@ -706,7 +706,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
         try {
-            bean.set("intIndexed", 1, new Integer(11));
+            bean.set("intIndexed", 1, Integer.valueOf(11));
             value = bean.get("intIndexed", 1);
             assertNotNull("Returned new value 1", value);
             assertTrue("Returned Integer new value 1",
@@ -848,7 +848,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final int oldValue =
                     ((Integer) bean.get("intProperty")).intValue();
             final int newValue = oldValue + 1;
-            bean.set("intProperty", new Integer(newValue));
+            bean.set("intProperty", Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Integer) bean.get("intProperty")).intValue());

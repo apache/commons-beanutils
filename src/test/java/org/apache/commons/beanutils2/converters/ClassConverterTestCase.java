@@ -84,7 +84,7 @@ public class ClassConverterTestCase extends TestCase {
 
         // Invalid Test
         try {
-            converter.convert(Class.class, new Integer(6));
+            converter.convert(Class.class, Integer.valueOf(6));
             fail("Expected invalid value to fail");
         } catch (final ConversionException e) {
             // expected result
@@ -106,7 +106,7 @@ public class ClassConverterTestCase extends TestCase {
 
         final Converter converter = new ClassConverter(Object.class);
 
-        assertEquals("Invalid Test", Object.class, converter.convert(Class.class, new Integer(6)));
+        assertEquals("Invalid Test", Object.class, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test",    Object.class, converter.convert(Class.class, null));
     }
 
@@ -117,7 +117,7 @@ public class ClassConverterTestCase extends TestCase {
 
         final Converter converter = new ClassConverter(null);
 
-        assertEquals("Invalid Test", null, converter.convert(Class.class, new Integer(6)));
+        assertEquals("Invalid Test", null, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test",    null, converter.convert(Class.class, null));
     }
 

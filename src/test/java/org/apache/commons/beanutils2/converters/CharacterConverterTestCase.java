@@ -73,7 +73,7 @@ public class CharacterConverterTestCase extends TestCase {
         final Converter converter = new CharacterConverter();
         assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
         assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, new Integer(321)));
+        assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, Integer.valueOf(321)));
     }
 
     /**
@@ -99,7 +99,7 @@ public class CharacterConverterTestCase extends TestCase {
 
         assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
         assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", converter.convert(String.class, new Integer(321)));
+        assertEquals("Integer Test",   "3", converter.convert(String.class, Integer.valueOf(321)));
         assertEquals("Null Test",     null, converter.convert(String.class, null));
     }
 

@@ -104,7 +104,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
         final Object testVal   = toType(expected, "yyyy-MM-dd", null);
         stringConversion(converter, expected, testVal);
 
-        final Object result = converter.convert(String.class, new Integer(2));
+        final Object result = converter.convert(String.class, Integer.valueOf(2));
         assertEquals("Default toString()", "2", result);
     }
 

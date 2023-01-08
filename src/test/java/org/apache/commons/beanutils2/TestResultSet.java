@@ -178,7 +178,7 @@ public class TestResultSet implements InvocationHandler {
             return new Float((float) 123.0);
         }
         if ("intProperty".equals(columnName)) {
-            return new Integer(100 + row);
+            return Integer.valueOf(100 + row);
         }
         if ("longProperty".equals(columnName)) {
             return new Long(200 + row);

@@ -105,7 +105,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("intArray", intArray);
         final int[] intIndexed = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
-        bean.set("intProperty", new Integer(123));
+        bean.set("intProperty", Integer.valueOf(123));
         final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
@@ -127,8 +127,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
         final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
-        mappedIntProperty.put("One", new Integer(1));
-        mappedIntProperty.put("Two", new Integer(2));
+        mappedIntProperty.put("One", Integer.valueOf(1));
+        mappedIntProperty.put("Two", Integer.valueOf(2));
         bean.set("mappedIntProperty", mappedIntProperty);
         nested = new TestBean();
         bean.set("nested", nested);
@@ -177,7 +177,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         map.put("floatProperty", new Float((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
-        map.put("intProperty", new Integer(111));
+        map.put("intProperty", Integer.valueOf(111));
         map.put("longProperty", new Long(444));
         map.put("shortProperty", new Short((short) 555));
         map.put("stringProperty", "New String Property");
@@ -250,7 +250,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'floatProperty'",
                      new Float((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
-                     new Integer(123), map.get("intProperty"));
+                     Integer.valueOf(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
                      new Long(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
@@ -1411,7 +1411,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(null, "intArray", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1421,7 +1421,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, null, 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1434,7 +1434,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(null,
                     "intArray[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1444,7 +1444,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -1454,7 +1454,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "intArray",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1466,7 +1466,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(null, "intIndexed", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1476,7 +1476,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, null, 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1489,7 +1489,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(null,
                     "intIndexed[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1499,7 +1499,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "[0]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -1509,7 +1509,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             PropertyUtils.setIndexedProperty(bean, "intIndexed",
-                    new Integer(1));
+                    Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1531,7 +1531,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", 0,
-                    new Integer(1));
+                    Integer.valueOf(1));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intArray", 0);
@@ -1547,7 +1547,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", 1,
-                    new Integer(11));
+                    Integer.valueOf(11));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intIndexed", 1);
@@ -1613,7 +1613,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray[4]",
-                    new Integer(1));
+                    Integer.valueOf(1));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intArray[4]");
@@ -1629,7 +1629,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed[3]",
-                    new Integer(11));
+                    Integer.valueOf(11));
             value =
                     PropertyUtils.getIndexedProperty(bean,
                             "intIndexed[3]");
@@ -1695,7 +1695,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", -1,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1706,7 +1706,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intArray", 5,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1717,7 +1717,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", -1,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1728,7 +1728,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             PropertyUtils.setIndexedProperty(bean,
                     "intIndexed", 5,
-                    new Integer(0));
+                    Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -2081,7 +2081,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final int newValue = oldValue + 1;
             PropertyUtils.setNestedProperty(bean,
                     "nested.intProperty",
-                    new Integer(newValue));
+                    Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     nested.getIntProperty());
@@ -2386,7 +2386,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final int newValue = oldValue + 1;
             PropertyUtils.setSimpleProperty(bean,
                     "intProperty",
-                    new Integer(newValue));
+                    Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Integer) bean.get("intProperty")).intValue());

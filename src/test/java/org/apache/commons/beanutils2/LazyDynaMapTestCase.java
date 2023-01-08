@@ -40,8 +40,8 @@ public class LazyDynaMapTestCase extends TestCase {
     protected String testPropertyB    = "myProperty-B";
     protected String testString1      = "myStringValue-1";
     protected String testString2      = "myStringValue-2";
-    protected Integer testInteger1    = new Integer(30);
-    protected Integer testInteger2    = new Integer(40);
+    protected Integer testInteger1    = Integer.valueOf(30);
+    protected Integer testInteger2    = Integer.valueOf(40);
     protected String testKey          = "myKey";
 
 
@@ -247,7 +247,7 @@ public class LazyDynaMapTestCase extends TestCase {
      * Test setting mapped property for type which is not Map
      */
     public void testMappedInvalidType() {
-        dynaMap.set(testProperty, new Integer(1));
+        dynaMap.set(testProperty, Integer.valueOf(1));
         assertFalse("Check Property is not mapped", dynaMap.getDynaProperty(testProperty).isMapped());
         try {
             dynaMap.set(testProperty, testKey, testInteger1);
@@ -274,13 +274,13 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", ArrayList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((ArrayList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -304,13 +304,13 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Property type is correct", LinkedList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((LinkedList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -335,15 +335,15 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", primitiveArray.getClass(), dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Indexed Value is correct(b)", testInteger1, new Integer(((int[])dynaMap.get(testProperty))[index]));
-        assertEquals("Check Array length is correct", new Integer(index+1),  new Integer(((int[])dynaMap.get(testProperty)).length));
+        assertEquals("Check First Indexed Value is correct(b)", testInteger1, Integer.valueOf(((int[])dynaMap.get(testProperty))[index]));
+        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the int[] and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testInteger2);
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, new Integer(((int[])dynaMap.get(testProperty))[index]));
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((int[])dynaMap.get(testProperty)).length));
+        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[])dynaMap.get(testProperty))[index]));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])dynaMap.get(testProperty)).length));
 
     }
 
@@ -370,14 +370,14 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check Indexed Property is correct type", objectArray.getClass(), dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testString1, dynaMap.get(testProperty, index));
         assertEquals("Check First Indexed Value is correct(b)", testString1, ((String[])dynaMap.get(testProperty))[index]);
-        assertEquals("Check Array length is correct", new Integer(index+1),  new Integer(((String[])dynaMap.get(testProperty)).length));
+        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the String[] and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testString2);
         assertEquals("Check Second Indexed Value is correct(a)", testString2, dynaMap.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[])dynaMap.get(testProperty))[index]);
-        assertEquals("Check Second Array length is correct", new Integer(index+1),  new Integer(((String[])dynaMap.get(testProperty)).length));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])dynaMap.get(testProperty)).length));
     }
 
     /**

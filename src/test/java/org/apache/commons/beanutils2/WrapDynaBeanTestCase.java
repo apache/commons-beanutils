@@ -262,8 +262,8 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
         // Create a bean and set a value
         final WrapDynaBean origBean = new WrapDynaBean(new TestBean());
-        final Integer newValue = new Integer(789);
-        assertEquals("origBean default", new Integer(123), origBean.get("intProperty"));
+        final Integer newValue = Integer.valueOf(789);
+        assertEquals("origBean default", Integer.valueOf(123), origBean.get("intProperty"));
         origBean.set("intProperty", newValue);
         assertEquals("origBean new value", newValue, origBean.get("intProperty"));
 

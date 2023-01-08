@@ -86,7 +86,7 @@ public class ArrayConverterTestCase extends TestCase {
      */
     public void testComponentIntegerConverter() {
 
-        final IntegerConverter intConverter = new IntegerConverter(new Integer(0));
+        final IntegerConverter intConverter = new IntegerConverter(Integer.valueOf(0));
         intConverter.setPattern("#,###");
         intConverter.setLocale(Locale.US);
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter, 0);
@@ -100,7 +100,7 @@ public class ArrayConverterTestCase extends TestCase {
         final String[]  strArray     = new String[] {""+intArray[0], ""+intArray[1], ""+intArray[2], ""+intArray[3]};
         final long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
         final Long[]    LONGArray    = new Long[]    {new Long(intArray[0]),    new Long(intArray[1]),    new Long(intArray[2]),    new Long(intArray[3])};
-        final Integer[] IntegerArray = new Integer[] {new Integer(intArray[0]), new Integer(intArray[1]), new Integer(intArray[2]), new Integer(intArray[3])};
+        final Integer[] IntegerArray = new Integer[] {Integer.valueOf(intArray[0]), Integer.valueOf(intArray[1]), Integer.valueOf(intArray[2]), Integer.valueOf(intArray[3])};
         final ArrayList<String> strList = new ArrayList<>();
         final ArrayList<Long> longList = new ArrayList<>();
         for (int i = 0; i < strArray.length; i++) {
@@ -289,7 +289,7 @@ public class ArrayConverterTestCase extends TestCase {
         // Expected results
         String msg = null;
         final int[]     expectedInt     = new int[] {10, 11, 12, 13};
-        final Integer[] expectedInteger = new Integer[] {new Integer(expectedInt[0]), new Integer(expectedInt[1]), new Integer(expectedInt[2]), new Integer(expectedInt[3])};
+        final Integer[] expectedInteger = new Integer[] {Integer.valueOf(expectedInt[0]), Integer.valueOf(expectedInt[1]), Integer.valueOf(expectedInt[2]), Integer.valueOf(expectedInt[3])};
 
         // Test String[] --> int[]
         try {

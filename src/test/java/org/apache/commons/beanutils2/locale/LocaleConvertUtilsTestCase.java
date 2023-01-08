@@ -586,7 +586,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         }
         assertNotNull("Null Result", result);
         assertEquals("Integer Type", Integer.class, result.getClass());
-        assertEquals("Integer Value", new Integer(123), result);
+        assertEquals("Integer Value", Integer.valueOf(123), result);
     }
 
     /**
@@ -603,7 +603,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertNotNull("Null Result", result);
         assertEquals("Integer Array Type", Integer[].class, result.getClass());
         assertEquals("Integer Array Length", 1, ((Integer[])result).length);
-        assertEquals("Integer Array Value", new Integer(123), ((Integer[])result)[0]);
+        assertEquals("Integer Array Value", Integer.valueOf(123), ((Integer[])result)[0]);
     }
 
     /**
