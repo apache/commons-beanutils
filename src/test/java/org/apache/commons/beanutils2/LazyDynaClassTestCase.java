@@ -187,7 +187,7 @@ public class LazyDynaClassTestCase extends TestCase {
         final DynaProperty dynaProperty = dynaClass.getDynaProperty(testProperty);
         assertEquals("name is correct", testProperty, dynaProperty.getName());
         assertEquals("type is correct", Object.class, dynaProperty.getType());
-        assertFalse("property doesnt exist", dynaClass.isDynaProperty(testProperty));
+        assertFalse("property doesn't exist", dynaClass.isDynaProperty(testProperty));
     }
 
     /**
