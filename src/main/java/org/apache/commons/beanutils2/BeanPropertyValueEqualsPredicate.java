@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  *    <dd>
  *       Will create a {@code Predicate} that will evaluate the target object and return
  *       {@code true</code> if the property specified by <code>propertyName} has a value which
- *       is equal to the the value specified by {@code propertyValue}. Or return
+ *       is equal to the value specified by {@code propertyValue}. Or return
  *       {@code false} otherwise.
  *    </dd>
  * </dl>

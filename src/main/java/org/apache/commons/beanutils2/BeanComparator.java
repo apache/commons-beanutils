@@ -155,7 +155,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      * compared are equal.
      *
      * @param o Comparator to compare to
-     * @return whether the the comparators are equal or not
+     * @return whether the comparators are equal or not
      */
     @Override
     public boolean equals(final Object o) {

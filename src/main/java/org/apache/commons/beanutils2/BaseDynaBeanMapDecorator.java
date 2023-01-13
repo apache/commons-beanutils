@@ -129,7 +129,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * a specified value.
      *
      * @param value The value to check for.
-     * @return {@code true} if one of the the {@link DynaBean}'s
+     * @return {@code true} if one of the {@link DynaBean}'s
      * properties contains the specified value, otherwise
      * {@code false}.
      */
