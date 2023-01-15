@@ -656,7 +656,7 @@ public class BeanMap extends AbstractMap<String, Object> implements Cloneable {
     }
 
     /**
-     * Converts the given value to the given type. First, reflection is is used to find a public constructor declared by
+     * Converts the given value to the given type. First, reflection is used to find a public constructor declared by
      * the given class that takes one argument, which must be the precise type of the given value. If such a constructor
      * is found, a new object is created by passing the given value to that constructor, and the newly constructed
      * object is returned.

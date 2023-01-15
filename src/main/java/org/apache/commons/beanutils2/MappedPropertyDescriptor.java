@@ -180,7 +180,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * @param propertyName The programmatic name of the property.
      * @param mappedGetter The method used for reading one of
-     *          the property values.  May be be null if the property
+     *          the property values.  May be null if the property
      *          is write-only.
      * @param mappedSetter The method used for writing one the
      *          property values.  May be null if the property is read-only.

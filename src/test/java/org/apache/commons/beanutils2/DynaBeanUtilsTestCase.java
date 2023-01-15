@@ -324,7 +324,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test copyProperties() when the origin is a a {@code Map}.
+     * Test copyProperties() when the origin is a {@code Map}.
      */
     public void testCopyPropertiesMap() {
 
