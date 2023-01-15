@@ -51,7 +51,7 @@ Historical list of changes: https://commons.apache.org/proper/commons-beanutils/
 
 For complete information on Apache Commons BeanUtils, including instructions on
 how to submit bug reports, patches, or suggestions for improvement, see the
-Apache Apache Commons BeanUtils website:
+Apache Commons BeanUtils website:
 
 https://commons.apache.org/proper/commons-beanutils/
 
