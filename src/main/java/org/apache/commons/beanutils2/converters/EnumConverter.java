@@ -16,6 +16,9 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion
  * to and from <b>java.lang.Enum</b> objects.
@@ -80,14 +83,41 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
             if (constants == null) {
                 throw conversionException(type, value);
             }
+            //Enum number
+            if (isNumeric(enumValue)) {
+                Integer enumNumber= Integer.valueOf(enumValue);
+                if (enumNumber>=0 && enumNumber < constants.length) {
+                    return constants[enumNumber];
+                }
+                throw conversionException(type, value);
+            }
+            //Enum String
             for (final R candidate : constants) {
                 if (((Enum)candidate).name().equalsIgnoreCase(enumValue)) {
                     return candidate;
                 }
             }
         }
+        //Enum to Integer Enum Ordinal
+        if (value instanceof Enum && type.equals(Integer.class)) {
+            return type.cast(((Enum)value).ordinal());
+        }
 
         throw conversionException(type, value);
+    }
+    
+    /**
+     * String is digit ?
+     * @param str String
+     * @return true/false
+     */
+    public boolean isNumeric(String str){ 
+        Pattern pattern = Pattern.compile("[0-9]*"); 
+        Matcher isNum = pattern.matcher(str);
+        if( !isNum.matches() ){
+            return false; 
+        } 
+        return true; 
     }
 
 }

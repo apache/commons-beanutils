@@ -16,43 +16,43 @@
  */
 package org.apache.commons.beanutils2.converters;
 
-import java.sql.Time;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import java.time.Instant;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.sql.Time</b> objects.
+ * and from <b>java.time.Instant</b> objects.
  * <p>
  * This implementation can be configured to handle conversion either
- * by using java.sql.Time's default String conversion, or by using a
- * Locale's default format or by specifying a set of format patterns.
+ * by using a Locale's default format or by specifying a set of format
+ * patterns (note, there is no default String conversion for Calendar).
  * See the {@link DateTimeConverter} documentation for further details.
+ * </p>
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
+ * </p>
  *
- * @since 1.3
+ * @since 2.0
+ * @see java.time.Instant
  */
-public final class SqlTimeConverter extends DateTimeConverter<Time> {
+public final class InstantConverter extends DateTimeConverter<Instant> {
 
     /**
-     * Constructs a <b>java.sql.Time</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.Instant</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
-    public SqlTimeConverter() {
+    public InstantConverter() {
     }
 
     /**
-     * Constructs a <b>java.sql.Time</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.Instant</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlTimeConverter(final Time defaultValue) {
+    public InstantConverter(final Instant defaultValue) {
         super(defaultValue);
     }
 
@@ -60,25 +60,10 @@ public final class SqlTimeConverter extends DateTimeConverter<Time> {
      * Gets the default type this {@code Converter} handles.
      *
      * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
      */
     @Override
-    protected Class<Time> getDefaultType() {
-        return Time.class;
+    protected Class<Instant> getDefaultType() {
+        return Instant.class;
     }
 
-    /**
-     * Gets a {@code DateTimeFormatter} for the Locale.
-     * @param locale TODO
-     * @param zoneId TODO
-     * @param value TODO
-     *
-     * @return The DateTimeFormatter.
-     * @since 1.8.0
-     */
-    @Override
-    protected DateTimeFormatter getFormat(final Locale locale, final ZoneId zoneId,String value) {
-        return super.getFormat(locale, zoneId, 2);
-    }
-    
 }

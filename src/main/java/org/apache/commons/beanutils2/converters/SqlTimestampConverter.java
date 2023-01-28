@@ -17,9 +17,6 @@
 package org.apache.commons.beanutils2.converters;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
@@ -66,26 +63,5 @@ public final class SqlTimestampConverter extends DateTimeConverter<Timestamp> {
     protected Class<Timestamp> getDefaultType() {
         return Timestamp.class;
     }
-
-    /**
-     * Gets a {@code DateFormat} for the Locale.
-     * @param locale TODO
-     * @param timeZone TODO
-     *
-     * @return The DateFormat.
-     * @since 1.8.0
-     */
-    @Override
-    protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
-        DateFormat format = null;
-        if (locale == null) {
-            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-        } else {
-            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
-        }
-        if (timeZone != null) {
-            format.setTimeZone(timeZone);
-        }
-        return format;
-    }
+    
 }

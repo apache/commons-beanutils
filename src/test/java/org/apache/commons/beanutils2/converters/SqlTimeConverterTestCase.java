@@ -105,6 +105,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase<Time> {
         final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
+        //Locale.US require  UpperCase , AM PM replace am pm 
         // Valid String --> Type Conversion
         final String testString = "3:06 pm";
         final Object expected = toType(testString, pattern, null);

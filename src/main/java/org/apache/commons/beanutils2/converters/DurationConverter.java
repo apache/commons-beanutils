@@ -76,7 +76,6 @@ public final class DurationConverter extends AbstractConverter<Duration> {
         if (Duration.class.equals(type)) {
             return type.cast(Duration.parse((String.valueOf(value))));
         }
-
         throw conversionException(type, value);
     }
 

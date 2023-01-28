@@ -26,6 +26,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -53,10 +54,11 @@ import org.apache.commons.beanutils2.converters.ClassConverter;
 import org.apache.commons.beanutils2.converters.ConverterFacade;
 import org.apache.commons.beanutils2.converters.DateConverter;
 import org.apache.commons.beanutils2.converters.DoubleConverter;
-import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.DurationConverter;
+import org.apache.commons.beanutils2.converters.EnumConverter;
 import org.apache.commons.beanutils2.converters.FileConverter;
 import org.apache.commons.beanutils2.converters.FloatConverter;
+import org.apache.commons.beanutils2.converters.InstantConverter;
 import org.apache.commons.beanutils2.converters.IntegerConverter;
 import org.apache.commons.beanutils2.converters.LocalDateConverter;
 import org.apache.commons.beanutils2.converters.LocalDateTimeConverter;
@@ -112,6 +114,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>java.sql.Date (no default value)</li>
  * <li>java.sql.Time (no default value)</li>
  * <li>java.sql.Timestamp (no default value)</li>
+ * <li>java.time.Instant (no default value)</li>
  * <li>java.time.LocalDate (no default value)</li>
  * <li>java.time.LocalDateTime (no default value)</li>
  * <li>java.time.LocalTime (no default value)</li>
@@ -243,11 +246,17 @@ public class ConvertUtilsBean {
      *
      * @throws ConversionException if thrown by an underlying Converter
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T> Object convert(final String value, final Class<T> clazz) {
         if (log.isDebugEnabled()) {
             log.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
         Converter<T> converter = lookup(clazz);
+        //Enum Converter
+        if (converter == null && clazz.isEnum()) {          
+            converter = (Converter)lookup(Enum.class);
+        }
+        
         if (converter == null) {
             Converter<String> sConverter = lookup(String.class);
             if (log.isTraceEnabled()) {
@@ -324,6 +333,12 @@ public class ConvertUtilsBean {
 
         Object converted = value;
         Converter converter = lookup(sourceType, targetType);
+        
+        //Enum Converter
+        if ((sourceType !=null && sourceType.isEnum()) || targetType.isEnum()) {          
+            converter = (Converter)lookup(Enum.class);
+        }
+        
         if (converter != null) {
             if (log.isTraceEnabled()) {
                 log.trace("  Using converter " + converter);
@@ -484,6 +499,7 @@ public class ConvertUtilsBean {
      *     <li>{@code URL.class} - {@link URLConverter}</li>
      *     <li>{@code URI.class} - {@link URIConverter}</li>
      *     <li>{@code UUID.class} - {@link UUIDConverter}</li>
+     *     <li>{@code Instant.class} - {@link InstantConverter}</li>
      *     <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
      *     <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
      *     <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
@@ -516,6 +532,7 @@ public class ConvertUtilsBean {
         register(URL.class,            throwException ? new URLConverter()            : new URLConverter(null));
         register(URI.class,            throwException ? new URIConverter()            : new URIConverter(null));
         register(UUID.class,           throwException ? new UUIDConverter()           : new UUIDConverter(null));
+        register(Instant.class,        throwException ? new InstantConverter()        : new InstantConverter(null));
         register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
         register(LocalDateTime.class,  throwException ? new LocalDateTimeConverter()  : new LocalDateTimeConverter(null));
         register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
@@ -582,6 +599,7 @@ public class ConvertUtilsBean {
         registerArrayConverter(URL.class,            new URLConverter(),           throwException, defaultArraySize);
         registerArrayConverter(URI.class,            new URIConverter(),           throwException, defaultArraySize);
         registerArrayConverter(UUID.class,           new UUIDConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Instant.class,        new InstantConverter(),       throwException, defaultArraySize);
         registerArrayConverter(LocalDate.class,      new LocalDateConverter(),     throwException, defaultArraySize);
         registerArrayConverter(LocalDateTime.class,  new LocalDateTimeConverter(), throwException, defaultArraySize);
         registerArrayConverter(LocalTime.class,      new LocalTimeConverter(),     throwException, defaultArraySize);
