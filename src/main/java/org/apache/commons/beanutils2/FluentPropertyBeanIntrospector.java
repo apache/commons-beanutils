@@ -138,9 +138,12 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                         .getPropertyDescriptor(propertyName);
                 try {
                     if (pd == null) {
-                        icontext.addPropertyDescriptor(createFluentPropertyDescritor(
-                                m, propertyName));
+                        icontext.addPropertyDescriptor(createFluentPropertyDescriptor(m));
                     } else if (pd.getWriteMethod() == null) {
+                        // We change statically cached PropertyDescriptor, it may affect
+                        // other subclasses of targetClass supertype.
+                        // See BEANUTILS-541 for more details.
+                        clearDescriptorsCacheHierarchy(icontext.getTargetClass().getSuperclass());
                         pd.setWriteMethod(m);
                     }
                 } catch (final IntrospectionException e) {
@@ -150,6 +153,13 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                     }
                 }
             }
+        }
+    }
+
+    private static void clearDescriptorsCacheHierarchy(Class<?> cls) {
+        if (cls != null && cls != Object.class) {
+            Introspector.flushFromCaches(cls);
+            clearDescriptorsCacheHierarchy(cls.getSuperclass());
         }
     }
 
@@ -170,12 +180,10 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * Creates a property descriptor for a fluent API property.
      *
      * @param m the set method for the fluent API property
-     * @param propertyName the name of the corresponding property
      * @return the descriptor
      * @throws IntrospectionException if an error occurs
      */
-    private PropertyDescriptor createFluentPropertyDescritor(final Method m,
-            final String propertyName) throws IntrospectionException {
+    private PropertyDescriptor createFluentPropertyDescriptor(final Method m) throws IntrospectionException {
         return new PropertyDescriptor(propertyName(m), null, m);
     }
 }
