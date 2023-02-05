@@ -290,9 +290,6 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * @return The default value for the specified type.
      */
     protected Object getDefault(final Class<?> type) {
-        if (type.equals(String.class)) {
-            return null;
-        }
         return defaultValue;
     }
 

@@ -23,6 +23,9 @@ import junit.framework.TestCase;
  *
  */
 public class StringConverterTestCase extends TestCase {
+
+    private static final String DEFAULT_VALUE = "default";
+
     /** The converter to be tested. */
     private StringConverter converter;
 
@@ -46,5 +49,13 @@ public class StringConverterTestCase extends TestCase {
      */
     public void testDefaultType() {
         assertEquals("Wrong default type", String.class, converter.getDefaultType());
+    }
+
+    /**
+     * Tests whether the correct default value is returned.
+     */
+    public void testDefaultValue() {
+        converter.setDefaultValue(DEFAULT_VALUE);
+        assertEquals("Wrong default value", DEFAULT_VALUE, converter.convert(String.class, null));
     }
 }
