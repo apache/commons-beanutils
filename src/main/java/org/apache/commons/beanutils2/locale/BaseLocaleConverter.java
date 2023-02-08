@@ -43,7 +43,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     private Object defaultValue;
 
     /** Should we return the default value on conversion errors? */
-    protected boolean useDefault;
+    protected final boolean useDefault;
 
     /** The locale specified to our Constructor, by default - system locale. */
     protected final Locale locale;
@@ -119,8 +119,8 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
             final String pattern, final boolean useDefault, final boolean locPattern) {
         if (useDefault) {
             this.defaultValue = defaultValue;
-            this.useDefault = true;
         }
+        this.useDefault = useDefault;
         this.locale = locale != null ? locale : Locale.getDefault();
         this.pattern = pattern;
         this.localizedPattern = locPattern;
