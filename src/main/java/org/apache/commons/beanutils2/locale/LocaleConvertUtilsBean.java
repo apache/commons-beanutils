@@ -32,10 +32,10 @@ import org.apache.commons.beanutils2.locale.converters.FloatLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.ShortLocaleConverter;
-import org.apache.commons.beanutils2.locale.converters.SqlDateLocaleConverter;
-import org.apache.commons.beanutils2.locale.converters.SqlTimeLocaleConverter;
-import org.apache.commons.beanutils2.locale.converters.SqlTimestampLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.StringLocaleConverter;
+import org.apache.commons.beanutils2.locale.converters.sql.SqlDateLocaleConverter;
+import org.apache.commons.beanutils2.locale.converters.sql.SqlTimeLocaleConverter;
+import org.apache.commons.beanutils2.locale.converters.sql.SqlTimestampLocaleConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

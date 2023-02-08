@@ -15,10 +15,13 @@
  * limitations under the License.
  */
 
-package org.apache.commons.beanutils2.converters;
+package org.apache.commons.beanutils2.converters.sql;
 
 import java.sql.Date;
 import java.util.Calendar;
+
+import org.apache.commons.beanutils2.converters.DateConverterTestBase;
+import org.apache.commons.beanutils2.converters.DateTimeConverter;
 
 import junit.framework.TestSuite;
 

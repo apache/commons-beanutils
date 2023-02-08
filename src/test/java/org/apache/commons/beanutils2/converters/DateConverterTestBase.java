@@ -62,7 +62,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param date The date or calendar object
      * @return The time in milliseconds
      */
-    long getTimeInMillis(final Object date) {
+    protected long getTimeInMillis(final Object date) {
         if (date instanceof java.sql.Date) {
             return ((java.sql.Date) date).getTime();
         }
@@ -102,7 +102,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param converter The converter to use
      * @param value The value to convert
      */
-    void invalidConversion(final Converter converter, final Object value) {
+    protected void invalidConversion(final Converter converter, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
@@ -132,7 +132,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param expected The expected result
      * @param value The value to convert
      */
-    void stringConversion(final Converter converter, final String expected, final Object value) {
+    protected void stringConversion(final Converter converter, final String expected, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
         try {
@@ -554,7 +554,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param locale The locale to use (or null)
      * @return parsed Calendar value
      */
-    T toType(final String value, final String pattern, final Locale locale) {
+    protected T toType(final String value, final String pattern, final Locale locale) {
         return toType(toCalendar(value, pattern, locale));
     }
 
@@ -564,7 +564,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param expected The expected result
      * @param value The value to convert
      */
-    void validConversion(final Converter converter, final Object expected, final Object value) {
+    protected void validConversion(final Converter converter, final Object expected, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {

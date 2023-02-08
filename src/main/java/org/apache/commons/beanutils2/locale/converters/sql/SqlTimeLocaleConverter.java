@@ -15,11 +15,13 @@
  * limitations under the License.
  */
 
-package org.apache.commons.beanutils2.locale.converters;
+package org.apache.commons.beanutils2.locale.converters.sql;
 
 import java.sql.Time;
 import java.text.ParseException;
 import java.util.Locale;
+
+import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter;
 
 /**
  * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}

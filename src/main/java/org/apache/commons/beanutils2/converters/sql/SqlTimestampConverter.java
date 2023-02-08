@@ -14,16 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.beanutils2.converters;
+package org.apache.commons.beanutils2.converters.sql;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import org.apache.commons.beanutils2.converters.DateTimeConverter;
 
 /**
  * {@link DateTimeConverter} implementation that handles conversion to
- * and from <b>java.sql.Date</b> objects.
+ * and from <b>java.sql.Timestamp</b> objects.
  * <p>
  * This implementation can be configured to handle conversion either
- * by using java.sql.Date's default String conversion, or by using a
+ * by using java.sql.Timestamp's default String conversion, or by using a
  * Locale's default format or by specifying a set of format patterns.
  * See the {@link DateTimeConverter} documentation for further details.
  * <p>
@@ -32,24 +37,24 @@ import java.sql.Date;
  *
  * @since 1.3
  */
-public final class SqlDateConverter extends DateTimeConverter<Date> {
+public final class SqlTimestampConverter extends DateTimeConverter<Timestamp> {
 
     /**
-     * Constructs a <b>java.sql.Date</b> <i>Converter</i> that throws
+     * Constructs a <b>java.sql.Timestamp</b> <i>Converter</i> that throws
      * a {@code ConversionException} if an error occurs.
      */
-    public SqlDateConverter() {
+    public SqlTimestampConverter() {
     }
 
     /**
-     * Constructs a <b>java.sql.Date</b> <i>Converter</i> that returns
+     * Constructs a <b>java.sql.Timestamp</b> <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public SqlDateConverter(final Date defaultValue) {
+    public SqlTimestampConverter(final Timestamp defaultValue) {
         super(defaultValue);
     }
 
@@ -60,8 +65,29 @@ public final class SqlDateConverter extends DateTimeConverter<Date> {
      * @since 1.8.0
      */
     @Override
-    protected Class<Date> getDefaultType() {
-        return Date.class;
+    protected Class<Timestamp> getDefaultType() {
+        return Timestamp.class;
     }
 
+    /**
+     * Gets a {@code DateFormat} for the Locale.
+     * @param locale TODO
+     * @param timeZone TODO
+     *
+     * @return The DateFormat.
+     * @since 1.8.0
+     */
+    @Override
+    protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
+        DateFormat format = null;
+        if (locale == null) {
+            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+        } else {
+            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
+        }
+        if (timeZone != null) {
+            format.setTimeZone(timeZone);
+        }
+        return format;
+    }
 }

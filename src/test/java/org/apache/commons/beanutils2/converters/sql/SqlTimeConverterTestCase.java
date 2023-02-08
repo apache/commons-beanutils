@@ -15,34 +15,34 @@
  * limitations under the License.
  */
 
-package org.apache.commons.beanutils2.converters;
+package org.apache.commons.beanutils2.converters.sql;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
+import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
+
+import org.apache.commons.beanutils2.converters.DateConverterTestBase;
 
 import junit.framework.TestSuite;
 
 /**
- * Test Case for the {@link SqlTimestampConverter} class.
+ * Test Case for the {@link SqlTimeConverter} class.
  */
-public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timestamp> {
+public class SqlTimeConverterTestCase extends DateConverterTestBase<Time> {
 
     /**
      * Create Test Suite
      * @return test suite
      */
     public static TestSuite suite() {
-        return new TestSuite(SqlTimestampConverterTestCase.class);
+        return new TestSuite(SqlTimeConverterTestCase.class);
     }
 
     /**
      * Constructs a new Date test case.
      * @param name Test Name
      */
-    public SqlTimestampConverterTestCase(final String name) {
+    public SqlTimeConverterTestCase(final String name) {
         super(name);
     }
 
@@ -51,15 +51,8 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
      * @return The expected type
      */
     @Override
-    protected Class<Timestamp> getExpectedType() {
-        return Timestamp.class;
-    }
-
-    private boolean isUSFormatWithComma() {
-        // BEANUTILS-495 workaround - sometimes Java 9 expects "," in date even if
-        // the format is set to lenient
-        final DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
-        return loc.format(new Date()).contains(",");
+    protected Class<Time> getExpectedType() {
+        return Time.class;
     }
 
     /**
@@ -67,8 +60,8 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
      * @return A new Converter
      */
     @Override
-    protected SqlTimestampConverter makeConverter() {
-        return new SqlTimestampConverter();
+    protected SqlTimeConverter makeConverter() {
+        return new SqlTimeConverter();
     }
 
     /**
@@ -77,28 +70,26 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
      * @return A new Converter
      */
     @Override
-    protected SqlTimestampConverter makeConverter(final Timestamp defaultValue) {
-        return new SqlTimestampConverter(defaultValue);
+    protected SqlTimeConverter makeConverter(final Time defaultValue) {
+        return new SqlTimeConverter(defaultValue);
     }
 
     /**
-     * Test default String to java.sql.Timestamp conversion
+     * Test default String to java.sql.Time conversion
      */
     @Override
     public void testDefaultStringToTypeConvert() {
         // Create & Configure the Converter
-        final SqlTimestampConverter converter = makeConverter();
+        final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
-        // Valid String --> java.sql.Timestamp Conversion
-        final String testString = "2006-10-23 15:36:01.0";
-        final Object expected = toType(testString, "yyyy-MM-dd HH:mm:ss.S", null);
+        // Valid String --> java.sql.Time Conversion
+        final String testString = "15:36:21";
+        final Object expected = toType(testString, "HH:mm:ss", null);
         validConversion(converter, expected, testString);
 
-        // Invalid String --> java.sql.Timestamp Conversion
-        invalidConversion(converter, "2006/09/21 15:36:01.0");
-        invalidConversion(converter, "2006-10-22");
-        invalidConversion(converter, "15:36:01");
+        // Invalid String --> java.sql.Time Conversion
+        invalidConversion(converter, "15:36");
     }
 
     /**
@@ -109,34 +100,30 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-        isUSFormatWithComma();
+
+        final String pattern = "h:mm a"; // SHORT style time format for US Locale
 
         // Create & Configure the Converter
-        final SqlTimestampConverter converter = makeConverter();
+        final SqlTimeConverter converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
-        String pattern; // SHORT style Date & Time format for US Locale
-        String testString;
-        if (isUSFormatWithComma()) {
-            pattern = "M/d/yy, h:mm a";
-            testString = "3/21/06, 3:06 PM";
-        } else {
-            // More regular pattern for Java 8 and earlier
-            pattern = "M/d/yy h:mm a";
-            testString = "3/21/06 3:06 PM";
-        }
-
         // Valid String --> Type Conversion
+        final String testString = "3:06 pm";
         final Object expected = toType(testString, pattern, null);
         validConversion(converter, expected, testString);
 
         // Invalid Conversions
         invalidConversion(converter, null);
         invalidConversion(converter, "");
-        invalidConversion(converter, "13:05 pm");
+        invalidConversion(converter, "13:05");
         invalidConversion(converter, "11:05 p");
         invalidConversion(converter, "11.05 pm");
         invalidConversion(converter, Integer.valueOf(2));
+
+        // Test specified Locale
+        converter.setLocale(Locale.UK);
+        invalidConversion(converter, testString);      // Test previous value now fails
+        validConversion(converter, expected, "15:06"); // UK Short style is "HH:mm"
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
@@ -149,8 +136,8 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
      * @return The converted value
      */
     @Override
-    protected Timestamp toType(final Calendar value) {
-        return new Timestamp(getTimeInMillis(value));
+    protected Time toType(final Calendar value) {
+        return new Time(getTimeInMillis(value));
     }
 
 }
