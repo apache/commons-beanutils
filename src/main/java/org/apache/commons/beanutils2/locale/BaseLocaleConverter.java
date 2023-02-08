@@ -130,8 +130,6 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         this.locPattern = locPattern;
     }
 
-
-
     /**
      * Convert the specified locale-sensitive input object into an output object of the
      * specified type.
