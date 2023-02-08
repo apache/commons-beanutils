@@ -46,7 +46,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     protected boolean useDefault;
 
     /** The locale specified to our Constructor, by default - system locale. */
-    protected Locale locale = Locale.getDefault();
+    protected final Locale locale;
 
     /** The default pattern specified to our Constructor, if any. */
     protected String pattern;
@@ -116,16 +116,12 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @param locPattern    Indicate whether the pattern is localized or not
      */
     private BaseLocaleConverter(final Object defaultValue, final Locale locale,
-                                final String pattern, final boolean useDefault, final boolean locPattern) {
+            final String pattern, final boolean useDefault, final boolean locPattern) {
         if (useDefault) {
             this.defaultValue = defaultValue;
             this.useDefault = true;
         }
-
-        if (locale != null) {
-            this.locale = locale;
-        }
-
+        this.locale = locale != null ? locale : Locale.getDefault();
         this.pattern = pattern;
         this.locPattern = locPattern;
     }
