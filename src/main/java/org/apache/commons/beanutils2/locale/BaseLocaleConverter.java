@@ -161,7 +161,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
-    public Object convert(final Object value, final String pattern) {
+    public T convert(final Object value, final String pattern) {
         return convert(null, value, pattern);
     }
 
