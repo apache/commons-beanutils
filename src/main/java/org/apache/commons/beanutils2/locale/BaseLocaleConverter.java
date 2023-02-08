@@ -49,7 +49,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     protected final Locale locale;
 
     /** The default pattern specified to our Constructor, if any. */
-    protected String pattern;
+    protected final String pattern;
 
     /** The flag indicating whether the given pattern string is localized or not. */
     protected final boolean localizedPattern;
