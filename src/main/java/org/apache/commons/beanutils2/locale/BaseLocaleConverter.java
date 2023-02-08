@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
+    private static final Log LOG = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
     private final Object defaultValue;
@@ -204,7 +204,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
             }
             // symmetric beanutils function allows null
             // so do not: throw new ConversionException("No value specified");
-            log.debug("Null value specified for conversion, returning null");
+            LOG.debug("Null value specified for conversion, returning null");
             return null;
         }
 
