@@ -245,7 +245,7 @@ public class DateLocaleConverter extends BaseLocaleConverter<Date> {
             return ((java.util.Calendar)value).getTime();
         }
 
-         if (locPattern) {
+         if (localizedPattern) {
              pattern = convertLocalizedPattern(pattern, locale);
          }
 

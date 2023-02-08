@@ -220,7 +220,7 @@ public class DecimalLocaleConverter<T> extends BaseLocaleConverter<T> {
         // if some constructors default pattern to null, it makes only sense
         // to handle null pattern gracefully
         if (pattern != null) {
-            if (locPattern) {
+            if (localizedPattern) {
                 formatter.applyLocalizedPattern(pattern);
             } else {
                 formatter.applyPattern(pattern);

@@ -254,7 +254,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
 
         // if some constructors default pattern to null, it makes only sense to handle null pattern gracefully
         if (pattern != null) {
-            if (locPattern) {
+            if (localizedPattern) {
                 numberFormat.applyLocalizedPattern(pattern);
             } else {
                 numberFormat.applyPattern(pattern);

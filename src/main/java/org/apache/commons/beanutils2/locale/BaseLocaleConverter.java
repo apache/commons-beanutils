@@ -52,7 +52,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     protected String pattern;
 
     /** The flag indicating whether the given pattern string is localized or not. */
-    protected boolean locPattern;
+    protected boolean localizedPattern;
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
@@ -123,7 +123,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
         }
         this.locale = locale != null ? locale : Locale.getDefault();
         this.pattern = pattern;
-        this.locPattern = locPattern;
+        this.localizedPattern = locPattern;
     }
 
     /**
