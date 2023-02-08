@@ -52,7 +52,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     protected String pattern;
 
     /** The flag indicating whether the given pattern string is localized or not. */
-    protected boolean localizedPattern;
+    protected final boolean localizedPattern;
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
