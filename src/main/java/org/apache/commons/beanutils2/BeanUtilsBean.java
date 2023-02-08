@@ -81,7 +81,7 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private final Log log = LogFactory.getLog(BeanUtilsBean.class);
+    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
 
     /** Used to perform conversions between object types when setting properties */
     private final ConvertUtilsBean convertUtilsBean;
@@ -152,8 +152,8 @@ public class BeanUtilsBean {
     public Object cloneBean(final Object bean)
             throws IllegalAccessException, InstantiationException,
             InvocationTargetException, NoSuchMethodException {
-        if (log.isDebugEnabled()) {
-            log.debug("Cloning bean: " + bean.getClass().getName());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Cloning bean: " + bean.getClass().getName());
         }
         Object newBean = null;
         if (bean instanceof DynaBean) {
@@ -217,8 +217,8 @@ public class BeanUtilsBean {
         if (orig == null) {
             throw new IllegalArgumentException("No origin bean specified");
         }
-        if (log.isDebugEnabled()) {
-            log.debug("BeanUtils.copyProperties(" + dest + ", " +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("BeanUtils.copyProperties(" + dest + ", " +
                       orig + ")");
         }
 
@@ -303,7 +303,7 @@ public class BeanUtilsBean {
     public void copyProperty(final Object bean, String name, Object value)
         throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
-        if (log.isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder("  copyProperty(");
             sb.append(bean);
             sb.append(", ");
@@ -327,7 +327,7 @@ public class BeanUtilsBean {
                 sb.append(value.toString());
             }
             sb.append(')');
-            log.trace(sb.toString());
+            LOG.trace(sb.toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -341,9 +341,9 @@ public class BeanUtilsBean {
                 return; // Skip this property setter
             }
         }
-        if (log.isTraceEnabled()) {
-            log.trace("    Target bean = " + target);
-            log.trace("    Target name = " + name);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("    Target bean = " + target);
+            LOG.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
@@ -374,15 +374,15 @@ public class BeanUtilsBean {
             type = descriptor.getPropertyType();
             if (type == null) {
                 // Most likely an indexed setter on a POJB only
-                if (log.isTraceEnabled()) {
-                    log.trace("    target type for property '" +
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("    target type for property '" +
                               propName + "' is null, so skipping ths setter");
                 }
                 return;
             }
         }
-        if (log.isTraceEnabled()) {
-            log.trace("    target propName=" + propName + ", type=" +
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("    target propName=" + propName + ", type=" +
                       type + ", index=" + index + ", key=" + key);
         }
 
@@ -464,8 +464,8 @@ public class BeanUtilsBean {
             return new java.util.HashMap<>();
         }
 
-        if (log.isDebugEnabled()) {
-            log.debug("Describing bean: " + bean.getClass().getName());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Describing bean: " + bean.getClass().getName());
         }
 
         final Map<String, String> description = new HashMap<>();
@@ -745,8 +745,8 @@ public class BeanUtilsBean {
         if (bean == null || properties == null) {
             return;
         }
-        if (log.isDebugEnabled()) {
-            log.debug("BeanUtils.populate(" + bean + ", " +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("BeanUtils.populate(" + bean + ", " +
                     properties + ")");
         }
 
@@ -796,7 +796,7 @@ public class BeanUtilsBean {
     public void setProperty(final Object bean, String name, final Object value)
         throws IllegalAccessException, InvocationTargetException {
         // Trace logging (if enabled)
-        if (log.isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
@@ -820,7 +820,7 @@ public class BeanUtilsBean {
                 sb.append(value.toString());
             }
             sb.append(')');
-            log.trace(sb.toString());
+            LOG.trace(sb.toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -837,9 +837,9 @@ public class BeanUtilsBean {
                 return; // Skip this property setter
             }
         }
-        if (log.isTraceEnabled()) {
-            log.trace("    Target bean = " + target);
-            log.trace("    Target name = " + name);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("    Target bean = " + target);
+            LOG.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
@@ -876,8 +876,8 @@ public class BeanUtilsBean {
             }
             if (descriptor instanceof MappedPropertyDescriptor) {
                 if (((MappedPropertyDescriptor) descriptor).getMappedWriteMethod() == null) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Skipping read-only property");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Skipping read-only property");
                     }
                     return; // Read-only, skip this property setter
                 }
@@ -885,8 +885,8 @@ public class BeanUtilsBean {
                     getMappedPropertyType();
             } else if (index >= 0 && descriptor instanceof IndexedPropertyDescriptor) {
                 if (((IndexedPropertyDescriptor) descriptor).getIndexedWriteMethod() == null) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Skipping read-only property");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Skipping read-only property");
                     }
                     return; // Read-only, skip this property setter
                 }
@@ -896,16 +896,16 @@ public class BeanUtilsBean {
                 type = Object.class;
             } else if (key != null) {
                 if (descriptor.getReadMethod() == null) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Skipping read-only property");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Skipping read-only property");
                     }
                     return; // Read-only, skip this property setter
                 }
                 type = value == null ? Object.class : value.getClass();
             } else {
                 if (descriptor.getWriteMethod() == null) {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Skipping read-only property");
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Skipping read-only property");
                     }
                     return; // Read-only, skip this property setter
                 }
@@ -1008,8 +1008,8 @@ public class BeanUtilsBean {
     protected <R> Object convert(final Object value, final Class<R> type) {
         final Converter<R> converter = getConvertUtils().lookup(type);
         if (converter != null) {
-            if (log.isTraceEnabled()) {
-                log.trace("        USING CONVERTER " + converter);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("        USING CONVERTER " + converter);
             }
             return converter.convert(type, value);
         }

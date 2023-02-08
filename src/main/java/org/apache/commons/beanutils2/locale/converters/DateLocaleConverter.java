@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
 public class DateLocaleConverter extends BaseLocaleConverter<Date> {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(DateLocaleConverter.class);
+    private static final Log LOG = LogFactory.getLog(DateLocaleConverter.class);
 
     /** Should the date conversion be lenient? */
     boolean isLenient;
@@ -301,8 +301,8 @@ public class DateLocaleConverter extends BaseLocaleConverter<Date> {
                                                 localChars,
                                                 DEFAULT_PATTERN_CHARS);
          } catch (final Exception ex) {
-             if (log.isDebugEnabled()) {
-                 log.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
+             if (LOG.isDebugEnabled()) {
+                 LOG.debug("Converting pattern '" + localizedPattern + "' for " + locale, ex);
              }
          }
          return convertedPattern;

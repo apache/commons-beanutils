@@ -76,7 +76,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(LocaleBeanUtilsBean.class);
+    private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsBean.class);
 
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
@@ -601,7 +601,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                                     IllegalAccessException,
                                     InvocationTargetException {
         // Trace logging (if enabled)
-        if (log.isTraceEnabled()) {
+        if (LOG.isTraceEnabled()) {
             final StringBuilder sb = new StringBuilder("  setProperty(");
             sb.append(bean);
             sb.append(", ");
@@ -628,7 +628,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                 sb.append(value.toString());
             }
             sb.append(')');
-            log.trace(sb.toString());
+            LOG.trace(sb.toString());
         }
 
         // Resolve any nested expression to get the actual target bean
@@ -642,9 +642,9 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
                 return; // Skip this property setter
             }
         }
-        if (log.isTraceEnabled()) {
-            log.trace("    Target bean = " + target);
-            log.trace("    Target name = " + name);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("    Target bean = " + target);
+            LOG.trace("    Target name = " + name);
         }
 
         // Declare local variables we will require
@@ -722,8 +722,8 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
      * @return The converted value
      */
     protected Object convert(final Class<?> type, final int index, final Object value, final String pattern) {
-        if (log.isTraceEnabled()) {
-            log.trace("Converting value '" + value + "' to type:" + type);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("Converting value '" + value + "' to type:" + type);
         }
 
         Object newValue = null;

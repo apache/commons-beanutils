@@ -34,7 +34,7 @@ import junit.framework.TestSuite;
  */
 public class Jira298TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira298TestCase.class);
+    private static final Log LOG = LogFactory.getLog(Jira298TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -92,7 +92,7 @@ public class Jira298TestCase extends TestCase {
         try {
             result = PropertyUtils.getProperty(bean, "name");
         } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
+            LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("BaseX name value", result);
@@ -107,7 +107,7 @@ public class Jira298TestCase extends TestCase {
         try {
             PropertyUtils.setProperty(bean, "name", "new name");
         } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
+            LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("new name", ((IX)bean).getName());
@@ -123,7 +123,7 @@ public class Jira298TestCase extends TestCase {
             final Method m2 = MethodUtils.getAccessibleMethod(bean.getClass(), "getName", new Class[0]);
             result = m2.invoke(bean);
         } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
+            LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertEquals("BaseX name value", result);

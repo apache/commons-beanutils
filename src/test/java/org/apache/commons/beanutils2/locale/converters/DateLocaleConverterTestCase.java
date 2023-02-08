@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Date> {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(DateLocaleConverterTestCase.class);
+    private static final Log LOG = LogFactory.getLog(DateLocaleConverterTestCase.class);
 
     protected String localizedDatePattern;
     protected String localizedDateValue;
@@ -63,14 +63,14 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
         super.setUp();
 
         final String version = System.getProperty("java.specification.version");
-        log.debug("JDK Version "+version);
+        LOG.debug("JDK Version "+version);
 
         try {
             final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
             expectedValue      = format.parse("20041001");
             defaultValue       = format.parse("19670316");
         } catch (final Exception ex) {
-            log.error("Error creating expected/default dates", ex);
+            LOG.error("Error creating expected/default dates", ex);
         }
 
         // Default Locale (Use US)
@@ -208,7 +208,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructorMain() **");
+            LOG.error("Invalid locale symbols *** skipping testConstructorMain() **");
             return;
         }
 
@@ -312,7 +312,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructor_5() **");
+            LOG.error("Invalid locale symbols *** skipping testConstructor_5() **");
             return;
         }
 
@@ -350,7 +350,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         // Skip this test if no valid symbols for the locale
         if (!validLocalDateSymbols) {
-            log.error("Invalid locale symbols *** skipping testConstructor_7() **");
+            LOG.error("Invalid locale symbols *** skipping testConstructor_7() **");
             return;
         }
 

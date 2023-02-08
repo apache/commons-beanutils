@@ -89,14 +89,14 @@ public class LocaleConvertUtilsBean {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
 
+    /** The {@code Log} instance for this class. */
+    private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
+
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();
 
     /** Indicate whether the pattern is localized or not */
     private boolean applyLocalized;
-
-    /** The {@code Log} instance for this class. */
-    private final Log log = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /**
      * Every entry of the mapConverters is:
@@ -192,8 +192,8 @@ public class LocaleConvertUtilsBean {
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
-        if (log.isDebugEnabled()) {
-            log.debug("Convert string " + value + " to class " +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Convert string " + value + " to class " +
                     clazz.getName() + " using " + locale +
                     " locale and " + pattern + " pattern");
         }
@@ -205,8 +205,8 @@ public class LocaleConvertUtilsBean {
             converter = lookup(String.class, locale);
             targetClass = String.class;
         }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("  Using converter " + converter);
         }
 
         return converter.convert(targetClass, value, pattern);
@@ -263,8 +263,8 @@ public class LocaleConvertUtilsBean {
         if (clazz.isArray()) {
             type = clazz.getComponentType();
         }
-        if (log.isDebugEnabled()) {
-            log.debug("Convert String[" + values.length + "] to class " +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Convert String[" + values.length + "] to class " +
                     type.getName() + "[] using " + locale +
                     " locale and " + pattern + " pattern");
         }
@@ -401,8 +401,8 @@ public class LocaleConvertUtilsBean {
     public <T> LocaleConverter<T> lookup(final Class<T> clazz, final Locale locale) {
         final LocaleConverter<T> converter = (LocaleConverter<T>) lookup(locale).get(clazz);
 
-        if (log.isTraceEnabled()) {
-            log.trace("LocaleConverter:" + converter);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("LocaleConverter:" + converter);
         }
 
         return converter;

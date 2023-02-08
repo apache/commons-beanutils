@@ -38,7 +38,7 @@ import junit.framework.TestSuite;
  */
 public class Jira157TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira157TestCase.class);
+    private static final Log LOG = LogFactory.getLog(Jira157TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -114,7 +114,7 @@ public class Jira157TestCase extends TestCase {
         try {
             result = BeanUtils.describe(bean);
         } catch (final Throwable t) {
-            log.error("Describe Serializable: " + t.getMessage(), t);
+            LOG.error("Describe Serializable: " + t.getMessage(), t);
             fail("Describe Serializable Threw exception: " + t);
         }
         assertEquals("Check Size", 1, result.size());
@@ -142,7 +142,7 @@ public class Jira157TestCase extends TestCase {
         try {
             result = BeanUtils.describe(bean);
         } catch (final Throwable t) {
-            log.error("Describe Interface: " + t.getMessage(), t);
+            LOG.error("Describe Interface: " + t.getMessage(), t);
             fail("Describe Interface Threw exception: " + t);
         }
         assertEquals("Check Size", 3, result.size());
@@ -165,7 +165,7 @@ public class Jira157TestCase extends TestCase {
         try {
             result = BeanUtils.describe(bean);
         } catch (final Throwable t) {
-            log.error("Describe Bean: " + t.getMessage(), t);
+            LOG.error("Describe Bean: " + t.getMessage(), t);
             fail("Describe Bean Threw exception: " + t);
         }
         assertEquals("Check Size", 2, result.size());

@@ -191,7 +191,7 @@ public class ConvertUtilsBean {
     /**
      * The {@code Log} instance for this class.
      */
-    private final Log log = LogFactory.getLog(ConvertUtilsBean.class);
+    private static final Log LOG = LogFactory.getLog(ConvertUtilsBean.class);
 
     /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -244,19 +244,19 @@ public class ConvertUtilsBean {
      * @throws ConversionException if thrown by an underlying Converter
      */
     public <T> Object convert(final String value, final Class<T> clazz) {
-        if (log.isDebugEnabled()) {
-            log.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
         Converter<T> converter = lookup(clazz);
         if (converter == null) {
             Converter<String> sConverter = lookup(String.class);
-            if (log.isTraceEnabled()) {
-                log.trace("  Using converter " + converter);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("  Using converter " + converter);
             }
             return sConverter.convert(String.class, value);
         }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("  Using converter " + converter);
         }
         return converter.convert(clazz, value);
     }
@@ -280,16 +280,16 @@ public class ConvertUtilsBean {
         if (clazz.isArray()) {
             type = clazz.getComponentType();
         }
-        if (log.isDebugEnabled()) {
-            log.debug("Convert String[" + values.length + "] to class '" +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Convert String[" + values.length + "] to class '" +
                       type.getName() + "[]'");
         }
         Converter converter = lookup(type);
         if (converter == null) {
             converter = lookup(String.class);
         }
-        if (log.isTraceEnabled()) {
-            log.trace("  Using converter " + converter);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("  Using converter " + converter);
         }
         final Object array = Array.newInstance(type, values.length);
         for (int i = 0; i < values.length; i++) {
@@ -313,11 +313,11 @@ public class ConvertUtilsBean {
     public Object convert(final Object value, final Class<?> targetType) {
         final Class<?> sourceType = value == null ? null : value.getClass();
 
-        if (log.isDebugEnabled()) {
+        if (LOG.isDebugEnabled()) {
             if (value == null) {
-                log.debug("Convert null value to type '" + targetType.getName() + "'");
+                LOG.debug("Convert null value to type '" + targetType.getName() + "'");
             } else {
-                log.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
+                LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
                     + targetType.getName() + "'");
             }
         }
@@ -325,8 +325,8 @@ public class ConvertUtilsBean {
         Object converted = value;
         Converter converter = lookup(sourceType, targetType);
         if (converter != null) {
-            if (log.isTraceEnabled()) {
-                log.trace("  Using converter " + converter);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("  Using converter " + converter);
             }
             converted = converter.convert(targetType, value);
         }
@@ -337,8 +337,8 @@ public class ConvertUtilsBean {
             // use the registered String Converter
             converter = lookup(String.class);
             if (converter != null) {
-                if (log.isTraceEnabled()) {
-                    log.trace("  Using converter " + converter);
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("  Using converter " + converter);
                 }
                 converted = converter.convert(String.class, converted);
             }

@@ -30,7 +30,7 @@ import junit.framework.TestSuite;
  */
 public class LocaleBeanUtilsTestCase extends TestCase {
 
-    private static final Log log = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
+    private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
 
     /**
      * Constructs a new instance of this test case.
@@ -77,7 +77,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
         } catch (final Throwable t) {
-            log.error(t);
+            LOG.error(t);
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
@@ -93,7 +93,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
         } catch (final Throwable t) {
-            log.error(t);
+            LOG.error(t);
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));

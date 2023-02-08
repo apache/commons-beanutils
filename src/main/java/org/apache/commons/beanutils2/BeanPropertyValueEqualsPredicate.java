@@ -112,7 +112,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
 
-    /** For logging. */
+    /** For logging. Each subclass gets its own log instance. */
     private final Log log = LogFactory.getLog(this.getClass());
 
     /**

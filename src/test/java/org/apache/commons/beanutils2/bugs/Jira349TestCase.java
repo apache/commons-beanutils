@@ -29,7 +29,7 @@ import junit.framework.TestSuite;
  */
 public class Jira349TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira349TestCase .class);
+    private static final Log LOG = LogFactory.getLog(Jira349TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -87,12 +87,12 @@ public class Jira349TestCase extends TestCase {
         try {
             PropertyUtils.copyProperties(dest, origin);
         } catch (final NullPointerException e) {
-            log.error("Failed", e);
+            LOG.error("Failed", e);
             fail("Threw NullPointerException");
         } catch (final IllegalArgumentException e) {
-            log.warn("Expected Result", e);
+            LOG.warn("Expected Result", e);
         } catch (final Throwable t) {
-            log.error("Failed", t);
+            LOG.error("Failed", t);
             fail("Threw exception: " + t);
         }
     }

@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
 public class DecimalLocaleConverter<T> extends BaseLocaleConverter<T> {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
+    private static final Log LOG = LogFactory.getLog(DecimalLocaleConverter.class);
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -226,7 +226,7 @@ public class DecimalLocaleConverter<T> extends BaseLocaleConverter<T> {
                 formatter.applyPattern(pattern);
             }
         } else {
-            log.debug("No pattern provided, using default.");
+            LOG.debug("No pattern provided, using default.");
         }
 
         return formatter.parse((String) value);

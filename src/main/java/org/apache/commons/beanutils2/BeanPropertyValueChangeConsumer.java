@@ -81,7 +81,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
 
-    /** For logging. */
+    /** For logging. Each subclass gets its own log instance. */
     private final Log log = LogFactory.getLog(this.getClass());
 
     /**

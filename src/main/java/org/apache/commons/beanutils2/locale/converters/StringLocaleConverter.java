@@ -42,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 public class StringLocaleConverter extends BaseLocaleConverter<String> {
 
     /** All logging goes through this logger */
-    private final Log log = LogFactory.getLog(StringLocaleConverter.class);     //msz fix
+    private static final Log LOG = LogFactory.getLog(StringLocaleConverter.class);
 
     /**
      * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
@@ -260,7 +260,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
                 numberFormat.applyPattern(pattern);
             }
         } else {
-            log.debug("No pattern provided, using default.");
+            LOG.debug("No pattern provided, using default.");
         }
 
         return numberFormat;

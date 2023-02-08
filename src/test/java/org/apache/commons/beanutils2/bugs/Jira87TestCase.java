@@ -41,7 +41,7 @@ import junit.framework.TestSuite;
  */
 public class Jira87TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira87TestCase.class);
+    private static final Log LOG = LogFactory.getLog(Jira87TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -100,7 +100,7 @@ public class Jira87TestCase extends TestCase {
             // N.B. The test impl. returns the key value
             assertEquals("foo", PropertyUtils.getMappedProperty(bean, "value(foo)"));
         } catch (final Throwable t) {
-            log.error("ERROR " + t, t);
+            LOG.error("ERROR " + t, t);
             fail("Threw exception: " + t);
         }
     }

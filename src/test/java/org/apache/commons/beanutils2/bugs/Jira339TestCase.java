@@ -34,7 +34,7 @@ import junit.framework.TestSuite;
  */
 public class Jira339TestCase extends TestCase {
 
-    private final Log log = LogFactory.getLog(Jira339TestCase.class);
+    private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
 
     /**
      * Create a test case with the specified name.
@@ -92,7 +92,7 @@ public class Jira339TestCase extends TestCase {
         try {
             BeanUtils.setProperty(bean, "comparator", null);
         } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
+            LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertNull("TestBean comparator should be null", bean.getComparator());
@@ -109,7 +109,7 @@ public class Jira339TestCase extends TestCase {
             properties.put("comparator", null);
             BeanUtils.populate(bean, properties);
         } catch (final Throwable t) {
-            log.error("Failed: " + t.getMessage(), t);
+            LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
         assertNull("TestBean comparator should be null", bean.getComparator());
