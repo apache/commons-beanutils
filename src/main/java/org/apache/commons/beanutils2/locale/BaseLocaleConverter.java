@@ -40,7 +40,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
 
     /** The default value specified to our Constructor, if any. */
-    private Object defaultValue;
+    private final Object defaultValue;
 
     /** Should we return the default value on conversion errors? */
     protected final boolean useDefault;
@@ -117,9 +117,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      */
     private BaseLocaleConverter(final Object defaultValue, final Locale locale,
             final String pattern, final boolean useDefault, final boolean locPattern) {
-        if (useDefault) {
-            this.defaultValue = defaultValue;
-        }
+        this.defaultValue = useDefault ? defaultValue : null;
         this.useDefault = useDefault;
         this.locale = locale != null ? locale : Locale.getDefault();
         this.pattern = pattern;
