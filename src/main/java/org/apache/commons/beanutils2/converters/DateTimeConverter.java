@@ -317,43 +317,43 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
         // Handle Date (includes java.sql.Date & java.sql.Time)
         if (value instanceof Date) {
-            final Date date = (Date)value;
+            final Date date = (Date) value;
             return toDate(targetType, date.getTime());
         }
 
         // Handle Calendar
         if (value instanceof Calendar) {
-            final Calendar calendar = (Calendar)value;
+            final Calendar calendar = (Calendar) value;
             return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Handle Long
         if (value instanceof Long) {
-            final Long longObj = (Long)value;
+            final Long longObj = (Long) value;
             return toDate(targetType, longObj.longValue());
         }
 
         // Handle LocalDate
         if (value instanceof LocalDate) {
-            final LocalDate date = (LocalDate)value;
+            final LocalDate date = (LocalDate) value;
             return toDate(targetType, date.atStartOfDay(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle LocalDateTime
         if (value instanceof LocalDateTime) {
-            final LocalDateTime date = (LocalDateTime)value;
+            final LocalDateTime date = (LocalDateTime) value;
             return toDate(targetType, date.atZone(getZoneId()).toInstant().toEpochMilli());
         }
 
         // Handle ZonedDateTime
         if (value instanceof ZonedDateTime) {
-            final ZonedDateTime date = (ZonedDateTime)value;
+            final ZonedDateTime date = (ZonedDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
         }
 
         // Handle OffsetDateTime
         if (value instanceof OffsetDateTime) {
-            final OffsetDateTime date = (OffsetDateTime)value;
+            final OffsetDateTime date = (OffsetDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
         }
 
@@ -583,8 +583,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         for (final String pattern : patterns) {
             try {
                 final DateFormat format = getFormat(pattern);
-                final Calendar calendar = parse(sourceType, targetType, value, format);
-                return calendar;
+                return parse(sourceType, targetType, value, format);
             } catch (final Exception ex) {
                 if (firstEx == null) {
                     firstEx = ex;
