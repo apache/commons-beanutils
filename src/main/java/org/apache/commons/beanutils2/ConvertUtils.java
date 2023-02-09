@@ -125,7 +125,7 @@ public class ConvertUtils {
      * @return The registered {@link Converter} or {@code null} if not found
      * @see ConvertUtilsBean#lookup(Class)
      */
-    public static Converter lookup(final Class<?> clazz) {
+    public static <T> Converter<T> lookup(final Class<T> clazz) {
         return ConvertUtilsBean.getInstance().lookup(clazz);
     }
 
@@ -138,7 +138,7 @@ public class ConvertUtils {
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or {@code null} if not found
      */
-    public static Converter lookup(final Class<?> sourceType, final Class<?> targetType) {
+    public static <T> Converter<T> lookup(final Class<?> sourceType, final Class<T> targetType) {
         return ConvertUtilsBean.getInstance().lookup(sourceType, targetType);
     }
 
@@ -153,7 +153,7 @@ public class ConvertUtils {
      *  Converter
      * @see ConvertUtilsBean#register(Converter, Class)
      */
-    public static void register(final Converter converter, final Class<?> clazz) {
+    public static <T> void register(final Converter<T> converter, final Class<T> clazz) {
         ConvertUtilsBean.getInstance().register(converter, clazz);
     }
 
