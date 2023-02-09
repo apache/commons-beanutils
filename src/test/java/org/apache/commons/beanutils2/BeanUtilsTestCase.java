@@ -60,8 +60,6 @@ import junit.framework.TestSuite;
  */
 public class BeanUtilsTestCase extends TestCase {
 
-
-
     /**
      * The test bean for each test.
      */
