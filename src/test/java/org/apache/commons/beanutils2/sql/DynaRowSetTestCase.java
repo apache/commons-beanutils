@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
-import org.apache.commons.beanutils2.sql.RowSetDynaClass;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

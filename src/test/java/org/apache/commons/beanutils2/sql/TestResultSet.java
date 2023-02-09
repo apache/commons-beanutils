@@ -39,8 +39,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
 
-import org.apache.commons.beanutils2.sql.ResultSetDynaClass;
-
 /**
  * <p>Mock object that implements enough of {@code java.sql.ResultSet}
  * to exercise the {@link ResultSetDynaClass} functionality.</p>

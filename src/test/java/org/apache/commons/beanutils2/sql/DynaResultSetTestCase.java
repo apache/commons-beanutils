@@ -22,7 +22,6 @@ import java.util.Iterator;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaProperty;
-import org.apache.commons.beanutils2.sql.ResultSetDynaClass;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

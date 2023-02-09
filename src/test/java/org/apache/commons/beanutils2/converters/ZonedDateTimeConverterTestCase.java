@@ -17,8 +17,8 @@
 package org.apache.commons.beanutils2.converters;
 
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 
 import junit.framework.TestSuite;
