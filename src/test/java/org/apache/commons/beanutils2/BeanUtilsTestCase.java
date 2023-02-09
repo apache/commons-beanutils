@@ -58,7 +58,6 @@ import junit.framework.TestSuite;
  * </ul>
  *
  */
-
 public class BeanUtilsTestCase extends TestCase {
 
 
@@ -103,8 +102,6 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-
-
     /**
      * Constructs a new instance of this test case.
      *
@@ -113,8 +110,6 @@ public class BeanUtilsTestCase extends TestCase {
     public BeanUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -162,8 +157,6 @@ public class BeanUtilsTestCase extends TestCase {
     public void tearDown() {
         bean = null;
     }
-
-
 
     /**
      * Test the copyProperties() method from a DynaBean.
