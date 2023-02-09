@@ -16,6 +16,6 @@
  */
 
 /**
- * TODO
+ * Contains code that relies on the {@code java.sql} module.
  */
 package org.apache.commons.beanutils2.sql.converters.locale;
