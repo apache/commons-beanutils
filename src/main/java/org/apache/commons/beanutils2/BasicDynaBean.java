@@ -298,11 +298,8 @@ public class BasicDynaBean implements DynaBean, Serializable {
                         ("Primitive value for '" + name + "'");
             }
         } else if (!isAssignable(descriptor.getType(), value.getClass())) {
-            throw new ConversionException
-                    ("Cannot assign value of type '" +
-                    value.getClass().getName() +
-                    "' to property '" + name + "' of type '" +
-                    descriptor.getType().getName() + "'");
+            throw ConversionException.format("Cannot assign value of type '%s' to property '%s' of type '%s'", value.getClass().getName(), name,
+                    descriptor.getType().getName());
         }
         values.put(name, value);
 

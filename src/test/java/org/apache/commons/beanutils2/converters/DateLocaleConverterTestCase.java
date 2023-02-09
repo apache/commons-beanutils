@@ -408,13 +408,13 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
         try {
             converter.convert("01/10/2004", "dd-MM-yyyy");
         } catch (final ConversionException e) {
-            assertEquals("Parse Error", "Error parsing date '01/10/2004' at position=2", e.getMessage());
+            assertEquals("Parse Error", "Error parsing date '01/10/2004' at position = 2", e.getMessage());
         }
 
         try {
             converter.convert("01-10-2004X", "dd-MM-yyyy");
         } catch (final ConversionException e) {
-            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position=10", e.getMessage());
+            assertEquals("Parse Length", "Date '01-10-2004X' contains unparsed characters from position = 10", e.getMessage());
         }
 
     }

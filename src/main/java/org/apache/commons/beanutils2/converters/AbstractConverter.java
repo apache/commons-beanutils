@@ -142,8 +142,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * @since 1.9
      */
     protected ConversionException conversionException(final Class<?> type, final Object value) {
-        return new ConversionException("Can't convert value '" + value
-                + "' to type " + type);
+        return ConversionException.format("Can't convert value '%s' to type %s", value, type);
     }
 
     /**
@@ -385,8 +384,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
             return type.cast(value);
         }
 
-        final ConversionException cex =  new ConversionException("No value specified for '" +
-                toString(type) + "'");
+        final ConversionException cex = ConversionException.format("No value specified for '%s'", toString(type));
         if (log().isDebugEnabled()) {
             log().debug("    Throwing ConversionException: " + cex.getMessage());
             log().debug("    " + DEFAULT_CONFIG_MSG);

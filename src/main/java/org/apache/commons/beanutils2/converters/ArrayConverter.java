@@ -281,9 +281,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (!type.isArray()) {
-            throw new ConversionException(toString(getClass())
-                    + " cannot handle conversion to '"
-                    + toString(type) + "' (not an array).");
+            throw ConversionException.format("%s cannot handle conversion to '%s' (not an array).", toString(getClass()), toString(type));
         }
 
         // Handle the source
@@ -463,8 +461,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
                 } else {
-                    throw new ConversionException("Encountered token of type "
-                        + ttype + " parsing elements to '" + typeName + ".");
+                    throw ConversionException.format("Encountered token of type %s parsing elements to '%s'.", ttype, typeName);
                 }
             }
 

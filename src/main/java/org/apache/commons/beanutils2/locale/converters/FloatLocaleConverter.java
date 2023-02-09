@@ -197,12 +197,12 @@ public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
     */
    @Override
    protected Object parse(final Object value, final String pattern) throws ParseException {
-      final Number parsed = (Number) super.parse(value, pattern);
-      final double doubleValue = parsed.doubleValue();
-      final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
-      if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
-          throw new ConversionException("Supplied number is not of type Float: "+parsed);
-      }
-      return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
+       final Number parsed = (Number) super.parse(value, pattern);
+       final double doubleValue = parsed.doubleValue();
+       final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
+       if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
+           throw new ConversionException("Supplied number is not of type Float: " + parsed);
+       }
+       return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
    }
 }

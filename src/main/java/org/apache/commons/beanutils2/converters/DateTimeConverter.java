@@ -591,8 +591,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             }
         }
         if (patterns.length > 1) {
-            throw new ConversionException("Error converting '" + toString(sourceType) + "' to '" + toString(targetType)
-                    + "' using  patterns '" + displayPatterns + "'");
+            throw ConversionException.format("Error converting '%s' to '%s' using  patterns '%s'", toString(sourceType), toString(targetType), displayPatterns);
         }
         throw firstEx;
     }

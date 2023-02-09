@@ -301,12 +301,10 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         if (targetType.equals(Byte.class)) {
             final long longValue = value.longValue();
             if (longValue > Byte.MAX_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
             }
             if (longValue < Byte.MIN_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
             }
             return targetType.cast(Byte.valueOf(value.byteValue()));
         }
@@ -315,12 +313,10 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         if (targetType.equals(Short.class)) {
             final long longValue = value.longValue();
             if (longValue > Short.MAX_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
             }
             if (longValue < Short.MIN_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
             }
             return targetType.cast(Short.valueOf(value.shortValue()));
         }
@@ -329,12 +325,10 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         if (targetType.equals(Integer.class)) {
             final long longValue = value.longValue();
             if (longValue > Integer.MAX_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
             }
             if (longValue < Integer.MIN_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too small " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too small %s", toString(sourceType), value, toString(targetType));
             }
             return targetType.cast(Integer.valueOf(value.intValue()));
         }
@@ -347,8 +341,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         // Float
         if (targetType.equals(Float.class)) {
             if (value.doubleValue() > Float.MAX_VALUE) {
-                throw new ConversionException(toString(sourceType) + " value '" + value
-                        + "' is too large for " + toString(targetType));
+                throw ConversionException.format("%s value '%s' is too large for %s", toString(sourceType), value, toString(targetType));
             }
             return targetType.cast(Float.valueOf(value.floatValue()));
         }
@@ -364,7 +357,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
                 return targetType.cast(new BigDecimal(value.toString()));
             }
             if (value instanceof BigInteger) {
-                return targetType.cast(new BigDecimal((BigInteger)value));
+                return targetType.cast(new BigDecimal((BigInteger) value));
             }
             if (value instanceof BigDecimal) {
                 return targetType.cast(new BigDecimal(value.toString()));
@@ -375,13 +368,12 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
         // BigInteger
         if (targetType.equals(BigInteger.class)) {
             if (value instanceof BigDecimal) {
-                return targetType.cast(((BigDecimal)value).toBigInteger());
+                return targetType.cast(((BigDecimal) value).toBigInteger());
             }
             return targetType.cast(BigInteger.valueOf(value.longValue()));
         }
 
-        final String msg = toString(getClass()) + " cannot handle conversion to '"
-                   + toString(targetType) + "'";
+        final String msg = toString(getClass()) + " cannot handle conversion to '" + toString(targetType) + "'";
         if (log().isWarnEnabled()) {
             log().warn("    " + msg);
         }

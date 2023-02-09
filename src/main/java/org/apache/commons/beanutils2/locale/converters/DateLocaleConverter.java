@@ -242,33 +242,30 @@ public class DateLocaleConverter extends BaseLocaleConverter<Date> {
 
         // Handle Calendar
         if (value instanceof java.util.Calendar) {
-            return ((java.util.Calendar)value).getTime();
+            return ((java.util.Calendar) value).getTime();
         }
 
-         if (localizedPattern) {
-             pattern = convertLocalizedPattern(pattern, locale);
-         }
+        if (localizedPattern) {
+            pattern = convertLocalizedPattern(pattern, locale);
+        }
 
-         // Create Formatter - use default if pattern is null
-         final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale)
-                                                : new SimpleDateFormat(pattern, locale);
-         formatter.setLenient(isLenient);
+        // Create Formatter - use default if pattern is null
+        final DateFormat formatter = pattern == null ? DateFormat.getDateInstance(DateFormat.SHORT, locale) : new SimpleDateFormat(pattern, locale);
+        formatter.setLenient(isLenient);
 
-         // Parse the Date
+        // Parse the Date
         final ParsePosition pos = new ParsePosition(0);
         final String strValue = value.toString();
         final Object parsedValue = formatter.parseObject(strValue, pos);
         if (pos.getErrorIndex() > -1) {
-            throw new ConversionException("Error parsing date '" + value +
-                    "' at position="+ pos.getErrorIndex());
+            throw ConversionException.format("Error parsing date '%s' at position = %s", value, pos.getErrorIndex());
         }
         if (pos.getIndex() < strValue.length()) {
-            throw new ConversionException("Date '" + value +
-                    "' contains unparsed characters from position=" + pos.getIndex());
+            throw ConversionException.format("Date '%s' contains unparsed characters from position = %s", value, pos.getIndex());
         }
 
         return parsedValue;
-     }
+    }
 
      /**
       * Convert a pattern from a localized format to the default format.
