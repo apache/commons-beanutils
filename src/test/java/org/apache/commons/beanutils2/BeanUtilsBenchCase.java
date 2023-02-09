@@ -29,10 +29,7 @@ import junit.framework.TestSuite;
  * JUnit Test Case containing microbenchmarks for BeanUtils.
  *
  */
-
 public class BeanUtilsBenchCase extends TestCase {
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -40,12 +37,8 @@ public class BeanUtilsBenchCase extends TestCase {
      * @param name Name of the test case
      */
     public BeanUtilsBenchCase(final String name) {
-
         super(name);
-
     }
-
-
 
     // Basic loop counter
     private long counter = 100000;
@@ -65,8 +58,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
     // BeanUtilsBean instance to be used
     private BeanUtilsBean bu = null;
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -136,9 +127,7 @@ public class BeanUtilsBenchCase extends TestCase {
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-
         return new TestSuite(BeanUtilsBenchCase.class);
-
     }
 
     /**
@@ -146,7 +135,6 @@ public class BeanUtilsBenchCase extends TestCase {
      */
     @Override
     public void tearDown() {
-
         dynaClass = null;
         inBean = null;
         inDyna = null;
@@ -154,10 +142,7 @@ public class BeanUtilsBenchCase extends TestCase {
         outBean = null;
         outDyna = null;
         bu = null;
-
     }
-
-
 
     // Time copyProperties() from a bean
     public void testCopyPropertiesBean() throws Exception {
@@ -351,7 +336,5 @@ public class BeanUtilsBenchCase extends TestCase {
                            ", time=" + (stop - startMillis));
 
     }
-
-
 
 }
