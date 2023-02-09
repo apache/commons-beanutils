@@ -361,9 +361,8 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -375,13 +374,13 @@ public class MemoryLeakTestCase {
 
         // if you comment the following two lines, the test will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
-        ConvertUtils.register(new IntegerConverter(), beanClass);
+        ConvertUtils.register(new IntegerConverter(), (Class<Integer>) beanClass);
         assertEquals("12345", ConvertUtils.convert(bean, String.class));
 
         // this should make the reference go away.
-        loader    = null;
+        loader = null;
         beanClass = null;
-        bean      = null;
+        bean = null;
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 

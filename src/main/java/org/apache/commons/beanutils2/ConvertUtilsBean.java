@@ -234,9 +234,9 @@ public class ConvertUtilsBean {
 
     /**
      * Convert the specified value to an object of the specified class (if
-     * possible). Otherwise, return a String representation of the value.
+     * possible). Otherwise, return a {@link String} representation of the value.
      *
-     * @param <T> The desired return type
+     * @param <T> The <em>desired</em> return type
      * @param value Value to be converted (may be null)
      * @param clazz Java class to be converted to (must not be null)
      * @return The converted value
@@ -274,20 +274,19 @@ public class ConvertUtilsBean {
      *
      * @throws ConversionException if thrown by an underlying Converter
      */
-    public Object convert(final String[] values, final Class<?> clazz) {
-
-        Class<?> type = clazz;
-        if (clazz.isArray()) {
-            type = clazz.getComponentType();
-        }
+    public <T> Object convert(final String[] values, final Class<T> clazz) {
+        final Class<?> type = clazz.isArray() ? clazz.getComponentType() : clazz;
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Convert String[" + values.length + "] to class '" +
-                      type.getName() + "[]'");
+            LOG.debug("Convert String[" + values.length + "] to class '" + type.getName() + "[]'");
         }
         Converter converter = lookup(type);
         if (converter == null) {
             converter = lookup(String.class);
         }
+        return convert(values, type, converter);
+    }
+
+    private <T> Object convert(final String[] values, final Class<T> type, final Converter<T> converter) {
         if (LOG.isTraceEnabled()) {
             LOG.trace("  Using converter " + converter);
         }
@@ -296,7 +295,6 @@ public class ConvertUtilsBean {
             Array.set(array, i, converter.convert(type, values[i]));
         }
         return array;
-
     }
 
     /**
@@ -310,11 +308,12 @@ public class ConvertUtilsBean {
      *
      * @throws ConversionException if thrown by an underlying Converter
      */
-    public Object convert(final Object value, final Class<?> targetType) {
-        final Class<?> sourceType = value == null ? null : value.getClass();
+    public <T> Object convert(final Object value, final Class<T> targetType) {
+        final boolean nullValue = value == null;
+        final Class<?> sourceType = nullValue ? null : value.getClass();
 
         if (LOG.isDebugEnabled()) {
-            if (value == null) {
+            if (nullValue) {
                 LOG.debug("Convert null value to type '" + targetType.getName() + "'");
             } else {
                 LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
@@ -323,7 +322,7 @@ public class ConvertUtilsBean {
         }
 
         Object converted = value;
-        Converter converter = lookup(sourceType, targetType);
+        Converter<T> converter = lookup(sourceType, targetType);
         if (converter != null) {
             if (LOG.isTraceEnabled()) {
                 LOG.trace("  Using converter " + converter);
@@ -335,12 +334,12 @@ public class ConvertUtilsBean {
             // NOTE: For backwards compatibility, if the Converter
             // doesn't handle conversion-->String then
             // use the registered String Converter
-            converter = lookup(String.class);
-            if (converter != null) {
+            Converter<String> strConverter = lookup(String.class);
+            if (strConverter != null) {
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("  Using converter " + converter);
                 }
-                converted = converter.convert(String.class, converted);
+                converted = strConverter.convert(String.class, converted);
             }
 
             // If the object still isn't a String, use toString() method
