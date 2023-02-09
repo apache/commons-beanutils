@@ -23,20 +23,16 @@ import junit.framework.TestSuite;
  * Test Case for the {@link BeanUtilsBean2}.
  *
  */
-public class BeanUtils2TestCase extends BeanUtilsBeanTestCase {
-
-
+public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
 
     /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
      */
-    public BeanUtils2TestCase(final String name) {
+    public BeanUtilsBean2TestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -52,7 +48,7 @@ public class BeanUtils2TestCase extends BeanUtilsBeanTestCase {
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-        return new TestSuite(BeanUtils2TestCase.class);
+        return new TestSuite(BeanUtilsBean2TestCase.class);
     }
 
     /**
