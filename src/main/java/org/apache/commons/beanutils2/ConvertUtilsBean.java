@@ -77,9 +77,9 @@ import org.apache.commons.beanutils2.converters.YearMonthConverter;
 import org.apache.commons.beanutils2.converters.ZoneIdConverter;
 import org.apache.commons.beanutils2.converters.ZoneOffsetConverter;
 import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
-import org.apache.commons.beanutils2.converters.sql.SqlDateConverter;
-import org.apache.commons.beanutils2.converters.sql.SqlTimeConverter;
-import org.apache.commons.beanutils2.converters.sql.SqlTimestampConverter;
+import org.apache.commons.beanutils2.sql.converters.SqlDateConverter;
+import org.apache.commons.beanutils2.sql.converters.SqlTimeConverter;
+import org.apache.commons.beanutils2.sql.converters.SqlTimestampConverter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
