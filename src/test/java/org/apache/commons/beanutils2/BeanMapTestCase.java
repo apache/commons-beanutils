@@ -389,7 +389,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      */
     public void testExceptionThrowFromClone() {
 
-        if (BeanUtilsTestCase.isPre14JVM()) {
+        if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromClone() skipped on pre 1.4 JVM");
             return;
         }
@@ -433,7 +433,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      */
     public void testExceptionThrowFromClear() {
 
-        if (BeanUtilsTestCase.isPre14JVM()) {
+        if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromClear() skipped on pre 1.4 JVM");
             return;
         }
@@ -460,7 +460,7 @@ public class BeanMapTestCase extends AbstractTestMap {
      */
     public void testExceptionThrowFromPut() {
 
-        if (BeanUtilsTestCase.isPre14JVM()) {
+        if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("testExceptionThrowFromPut() skipped on pre 1.4 JVM");
             return;
         }

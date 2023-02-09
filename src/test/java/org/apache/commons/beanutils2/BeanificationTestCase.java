@@ -108,7 +108,7 @@ public class BeanificationTestCase extends TestCase {
     public void testMemoryLeak2() throws Exception {
         // tests when the map used by beanutils has the right behavior
 
-        if (BeanUtilsTestCase.isPre14JVM()) {
+        if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
             return;
         }
@@ -157,7 +157,7 @@ public class BeanificationTestCase extends TestCase {
 
     /** Tests whether classloaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
-        if (BeanUtilsTestCase.isPre14JVM()) {
+        if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
             return;
         }

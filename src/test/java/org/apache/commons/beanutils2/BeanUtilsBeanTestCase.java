@@ -58,7 +58,7 @@ import junit.framework.TestSuite;
  * </ul>
  *
  */
-public class BeanUtilsTestCase extends TestCase {
+public class BeanUtilsBeanTestCase extends TestCase {
 
     /**
      * The test bean for each test.
@@ -105,7 +105,7 @@ public class BeanUtilsTestCase extends TestCase {
      *
      * @param name Name of the test case
      */
-    public BeanUtilsTestCase(final String name) {
+    public BeanUtilsBeanTestCase(final String name) {
         super(name);
     }
 
@@ -145,7 +145,7 @@ public class BeanUtilsTestCase extends TestCase {
      * Creates the tests included in this test suite.
      */
     public static Test suite() {
-        return new TestSuite(BeanUtilsTestCase.class);
+        return new TestSuite(BeanUtilsBeanTestCase.class);
     }
 
     /**
