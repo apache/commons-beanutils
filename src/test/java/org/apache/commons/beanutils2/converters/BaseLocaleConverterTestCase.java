@@ -224,7 +224,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
             }
         } catch (final Exception e) {
             if (expectedValue != null) {
-                fail("Expected default value '" + msgId + "' threw " + e);
+                fail("Expected default value '" + msgId + "' threw " + e + ", value = '" + expectedValue + "'");
             }
         }
 
