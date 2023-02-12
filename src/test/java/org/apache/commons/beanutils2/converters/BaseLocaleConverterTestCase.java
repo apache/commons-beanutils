@@ -134,7 +134,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         try {
             result = converter.convert(value, pattern);
         } catch (final Exception e) {
-            fail("Pattern conversion threw " + msgId + " threw " + e);
+            fail("Pattern conversion threw '" + msgId + "' threw " + e);
         }
         assertEquals("Check conversion value with pattern " + msgId, expectedValue, result);
     }
@@ -154,7 +154,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         try {
             result = converter.convert(value);
         } catch (final Exception e) {
-            fail("No Pattern conversion threw " + msgId + " threw " + e);
+            fail("No Pattern conversion threw '" + msgId + "' threw " + e);
         }
         assertEquals("Check conversion value without pattern " + msgId, expectedValue, result);
 
@@ -175,7 +175,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         try {
             result = converter.convert(clazz, value, pattern);
         } catch (final Exception e) {
-            fail("Type  conversion threw " + msgId + " threw " + e);
+            fail("Type  conversion threw '" + msgId + "' threw " + e);
         }
         assertEquals("Check conversion value to type " + msgId, expectedValue, result);
     }
@@ -199,7 +199,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         }
 
         if (expectedValue == null) {
-            assertNull("Check null conversion is null " + msgId + " result="+result, result);
+            assertNull("Check null conversion is null '" + msgId + "' result="+result, result);
         } else {
             assertEquals("Check null conversion is default " + msgId, expectedValue, result);
         }
@@ -220,11 +220,11 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         try {
             result = converter.convert("xyz");
             if (expectedValue == null) {
-                fail("Expected ConversionException if no default value " + msgId);
+                fail("Expected ConversionException if no default value " + msgId + ", converter = " + converter);
             }
         } catch (final Exception e) {
             if (expectedValue != null) {
-                fail("Expected default value " + msgId + " threw " + e);
+                fail("Expected default value '" + msgId + "' threw " + e);
             }
         }
 
@@ -235,7 +235,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
 
     /**
      * This class isn't intended to perform any real tests; it just provides
-     * methods for the real test cases to inherit. However junit complains
+     * methods for the real test cases to inherit. However JUnit complains
      * if a class named ..TestCase contains no test methods, so here we
      * define a dummy one to keep it happy.
      */
