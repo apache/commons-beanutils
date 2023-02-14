@@ -121,6 +121,7 @@ public class ConvertUtils {
      *
      * <p>For more details see {@code ConvertUtilsBean}.</p>
      *
+     * @param <T> The converter type.
      * @param clazz Class for which to return a registered Converter
      * @return The registered {@link Converter} or {@code null} if not found
      * @see ConvertUtilsBean#lookup(Class)
@@ -134,6 +135,7 @@ public class ConvertUtils {
      * source and destination class; if there is no registered Converter,
      * return {@code null}.
      *
+     * @param <T> The converter type.
      * @param sourceType Class of the value being converted
      * @param targetType Class of the value to be converted to
      * @return The registered {@link Converter} or {@code null} if not found
@@ -148,6 +150,7 @@ public class ConvertUtils {
      *
      * <p>For more details see {@code ConvertUtilsBean}.</p>
      *
+     * @param <T> The converter type.
      * @param converter Converter to be registered
      * @param clazz Destination class for conversions performed by this
      *  Converter

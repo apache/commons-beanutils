@@ -26,13 +26,9 @@ import org.apache.commons.beanutils2.locale.converters.ShortLocaleConverter;
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Short> {
 
-
-
     public ShortLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -42,7 +38,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
 
         super.setUp();
 
-        defaultValue  = new Short("999");
+        defaultValue = new Short("999");
         expectedValue = new Short(expectedIntegerValue);
 
     }
@@ -55,18 +51,14 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
 
         // ------------- Construct with localized pattern ------------
-        converter = new ShortLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedIntegerPattern,
-                                                  true);
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
+                .setLocalizedPattern(true).get();
 
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
@@ -94,15 +86,13 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Short.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
-        converter = new ShortLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultIntegerPattern,
-                                                  false);
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
+                .setLocalizedPattern(false).get();
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -120,7 +110,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_2() {
 
         // ------------- Construct using default locale ------------
-        converter = new ShortLocaleConverter();
+        converter = ShortLocaleConverter.builder().get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -139,7 +129,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_3() {
 
         // ------------- Construct using localized pattern (default locale) --------
-        converter = new ShortLocaleConverter(true);
+        converter = ShortLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -155,7 +145,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_4() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(localizedLocale);
+        converter = ShortLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -171,7 +161,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_5() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(localizedLocale, true);
+        converter = ShortLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -187,7 +177,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_6() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(localizedLocale, defaultIntegerPattern);
+        converter = ShortLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -203,7 +193,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_7() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(localizedLocale, localizedIntegerPattern, true);
+        converter = ShortLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -219,7 +209,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_8() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(defaultValue);
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -235,7 +225,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     public void testConstructor_9() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ShortLocaleConverter(defaultValue, true);
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -246,4 +236,3 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     }
 
 }
-

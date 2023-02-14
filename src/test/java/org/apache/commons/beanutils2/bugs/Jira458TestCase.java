@@ -36,7 +36,8 @@ public class Jira458TestCase extends TestCase {
      * @param input the input string
      */
     private void checkConversionWithNullDefault(final String input) {
-        final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);
+        //final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);
+        final Converter<Integer> converter = IntegerLocaleConverter.builder().setUseDefault(true).setLocale(Locale.US).get();
         assertNull("Wrong result", converter.convert(Integer.class, input));
     }
 

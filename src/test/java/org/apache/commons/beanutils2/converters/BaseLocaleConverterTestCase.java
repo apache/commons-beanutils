@@ -36,7 +36,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     // Converter
     protected BaseLocaleConverter<T> converter;
     protected Object result;
-    protected Object defaultValue;
+    protected T defaultValue;
     protected Object expectedValue;
 
     // Localized values

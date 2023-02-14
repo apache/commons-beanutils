@@ -268,6 +268,7 @@ public class ConvertUtilsBean {
      * Otherwise, an array will be constructed whose component type is the
      * specified class.
      *
+     * @param <T> The Class type.
      * @param values Array of values to be converted
      * @param clazz Java array or element class to be converted to (must not be null)
      * @return The converted value
@@ -302,6 +303,7 @@ public class ConvertUtilsBean {
      * possible). If no converter for the desired target type is registered,
      * the passed in object is returned unchanged.
      *
+     * @param <T> The Class type.
      * @param value Value to be converted (may be null)
      * @param targetType Class of the value to be converted to (must not be null)
      * @return The converted value

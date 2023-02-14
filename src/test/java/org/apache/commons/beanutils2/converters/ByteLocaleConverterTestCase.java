@@ -26,13 +26,9 @@ import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
 
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byte> {
 
-
-
     public ByteLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -42,17 +38,17 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
 
         super.setUp();
 
-        defaultIntegerPattern   = "#,###";
-        defaultIntegerValue     = ",123";
+        defaultIntegerPattern = "#,###";
+        defaultIntegerValue = ",123";
 
         localizedIntegerPattern = "#.###";
-        localizedIntegerValue   = ".123";
+        localizedIntegerValue = ".123";
 
         // Expected Values
-        expectedDecimalValue    = "123.56";
-        expectedIntegerValue    = "123";
+        expectedDecimalValue = "123.56";
+        expectedIntegerValue = "123";
 
-        defaultValue  = Byte.valueOf("99");
+        defaultValue = Byte.valueOf("99");
         expectedValue = Byte.valueOf(expectedIntegerValue);
 
     }
@@ -65,18 +61,14 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
 
         // ------------- Construct with localized pattern ------------
-        converter = new ByteLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedIntegerPattern,
-                                                  true);
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
+                .setLocalizedPattern(true).get();
 
         convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
@@ -102,15 +94,13 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Byte.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
-        converter = new ByteLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultIntegerPattern,
-                                                  false);
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
+                .setLocalizedPattern(false).get();
 
         convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
@@ -128,7 +118,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_2() {
 
         // ------------- Construct using default locale ------------
-        converter = new ByteLocaleConverter();
+        converter = ByteLocaleConverter.builder().get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -147,7 +137,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_3() {
 
         // ------------- Construct using localized pattern (default locale) --------
-        converter = new ByteLocaleConverter(true);
+        converter = ByteLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -163,7 +153,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_4() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(localizedLocale);
+        converter = ByteLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -179,7 +169,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_5() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(localizedLocale, true);
+        converter = ByteLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -195,7 +185,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_6() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(localizedLocale, defaultIntegerPattern);
+        converter = ByteLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -211,7 +201,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_7() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(localizedLocale, localizedIntegerPattern, true);
+        converter = ByteLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedIntegerValue, expectedValue);
@@ -227,7 +217,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_8() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(defaultValue);
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -243,7 +233,7 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     public void testConstructor_9() {
 
         // ------------- Construct using specified Locale --------
-        converter = new ByteLocaleConverter(defaultValue, true);
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultIntegerValue, expectedValue);
@@ -254,4 +244,3 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     }
 
 }
-

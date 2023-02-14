@@ -485,7 +485,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             try {
 
                 final Locale germanLocale = Locale.GERMAN;
-                final LongLocaleConverter longLocaleConverter = new LongLocaleConverter(germanLocale);
+                final LongLocaleConverter longLocaleConverter = LongLocaleConverter.builder().setLocale(germanLocale).get();
                 ConvertUtils.register(longLocaleConverter, Long.class);
 
                 final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);

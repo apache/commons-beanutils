@@ -26,13 +26,9 @@ import org.apache.commons.beanutils2.locale.converters.DoubleLocaleConverter;
 
 public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<Double> {
 
-
-
     public DoubleLocaleConverterTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -42,7 +38,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
 
         super.setUp();
 
-        defaultValue  = Double.valueOf("9.99");
+        defaultValue = Double.valueOf("9.99");
         expectedValue = Double.valueOf(expectedDecimalValue);
 
     }
@@ -55,18 +51,14 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
         super.tearDown();
     }
 
-
-
     /**
      * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
      */
     public void testConstructorMain() {
 
         // ------------- Construct with localized pattern ------------
-        converter = new DoubleLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  localizedDecimalPattern,
-                                                  true);
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
+                .setLocalizedPattern(true).get();
 
         convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
@@ -84,7 +76,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
         // but it gets swallowed in convert() method and returns default.
-        //  **** IS THIS THE EXPECTED BEHAVIOUR? ****
+        // **** IS THIS THE EXPECTED BEHAVIOUR? ****
         // Maybe if the pattern is no good, we should use a default pattern rather
         // than just returning the default value.
         // **************************************************************************
@@ -95,15 +87,13 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a Double.
-        //  **** This has been changed due to BEANUTILS-449 ****
+        // **** This has been changed due to BEANUTILS-449 ****
         // **************************************************************************
-        //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
+        // convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
         // ------------- Construct with non-localized pattern ------------
-        converter = new DoubleLocaleConverter(defaultValue,
-                                                  localizedLocale,
-                                                  defaultDecimalPattern,
-                                                  false);
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
+                .setLocalizedPattern(false).get();
 
         convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
         convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
@@ -121,7 +111,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_2() {
 
         // ------------- Construct using default locale ------------
-        converter = new DoubleLocaleConverter();
+        converter = DoubleLocaleConverter.builder().get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
@@ -140,7 +130,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_3() {
 
         // ------------- Construct using localized pattern (default locale) --------
-        converter = new DoubleLocaleConverter(true);
+        converter = DoubleLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
@@ -156,7 +146,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_4() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(localizedLocale);
+        converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
@@ -172,7 +162,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_5() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(localizedLocale, true);
+        converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
@@ -188,7 +178,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_6() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(localizedLocale, defaultDecimalPattern);
+        converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDecimalPattern).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
@@ -204,7 +194,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_7() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(localizedLocale, localizedDecimalPattern, true);
+        converter = DoubleLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedDecimalPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, localizedDecimalValue, expectedValue);
@@ -220,7 +210,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_8() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(defaultValue);
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
@@ -236,7 +226,7 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     public void testConstructor_9() {
 
         // ------------- Construct using specified Locale --------
-        converter = new DoubleLocaleConverter(defaultValue, true);
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
         convertValueNoPattern(converter, defaultDecimalValue, expectedValue);
@@ -247,4 +237,3 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     }
 
 }
-

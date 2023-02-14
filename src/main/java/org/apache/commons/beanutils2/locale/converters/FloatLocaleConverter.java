@@ -23,186 +23,56 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 
 /**
- * <p>Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter}
- * implementation that converts an incoming
- * locale-sensitive String into a {@code java.math.BigDecimal} object,
- * optionally using a default value or throwing a
- * {@link org.apache.commons.beanutils2.ConversionException}
- * if a conversion error occurs.</p>
+ * Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
+ * {@link java.math.BigDecimal} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils2.ConversionException} if a conversion
+ * error occurs.
  */
 public class FloatLocaleConverter extends DecimalLocaleConverter<Float> {
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the conversion.
+     * Builds instances of {@link ByteLocaleConverter}.
      */
-    public FloatLocaleConverter() {
-        this(false);
+    public static class Builder extends DecimalLocaleConverter.Builder<Builder, Float> {
+
+        @Override
+        public FloatLocaleConverter get() {
+            return new FloatLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern);
+        }
+
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
+     * Constructs a new builder.
      *
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @return a new builder.
      */
-    public FloatLocaleConverter(final boolean locPattern) {
-        this(Locale.getDefault(), locPattern);
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    private FloatLocaleConverter(final Float defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern) {
+        super(defaultValue, locale, pattern, useDefault, locPattern);
     }
 
     /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
+     * Parses the specified locale-sensitive input object into an output object of the specified type. This method will return Float value or throw exception if
+     * value can not be stored in the Float.
      *
-     * @param locale        The locale
-     */
-    public FloatLocaleConverter(final Locale locale) {
-        this(locale, false);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs.
+     * @param value   The input object to be converted
+     * @param pattern The pattern is used for the conversion
+     * @return The converted value
      *
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
+     * @throws ConversionException if conversion cannot be performed successfully
+     * @throws ParseException      if an error occurs parsing a String to a Number
      */
-    public FloatLocaleConverter(final Locale locale, final boolean locPattern) {
-        this(locale, (String) null, locPattern);
+    @Override
+    protected Float parse(final Object value, final String pattern) throws ParseException {
+        final Number parsed = super.parse(value, pattern);
+        final double doubleValue = parsed.doubleValue();
+        final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
+        if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
+            throw new ConversionException("Supplied number is not of type Float: " + parsed);
+        }
+        return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
     }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
-     *
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     */
-    public FloatLocaleConverter(final Locale locale, final String pattern) {
-        this(locale, pattern, false);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will throw a {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs.
-     *
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
-     */
-    public FloatLocaleConverter(final Locale locale, final String pattern, final boolean locPattern) {
-        super(locale, pattern, locPattern);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine and an unlocalized pattern is used
-     * for the conversion.
-     *
-     * @param defaultValue  The default value to be returned
-     */
-    public FloatLocaleConverter(final Object defaultValue) {
-        this(defaultValue, false);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. The locale is the default locale for
-     * this instance of the Java Virtual Machine.
-     *
-     * @param defaultValue  The default value to be returned
-     * @param locPattern    Indicate whether the pattern is localized or not
-     */
-    public FloatLocaleConverter(final Object defaultValue, final boolean locPattern) {
-        this(defaultValue, Locale.getDefault(), locPattern);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
-     *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     */
-    public FloatLocaleConverter(final Object defaultValue, final Locale locale) {
-        this(defaultValue, locale, false);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
-     *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param locPattern    Indicate whether the pattern is localized or not
-     */
-    public FloatLocaleConverter(final Object defaultValue, final Locale locale, final boolean locPattern) {
-        this(defaultValue, locale, null, locPattern);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs. An unlocalized pattern is used for the conversion.
-     *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     */
-    public FloatLocaleConverter(final Object defaultValue, final Locale locale, final String pattern) {
-        this(defaultValue, locale, pattern, false);
-    }
-
-    /**
-     * Create a {@link org.apache.commons.beanutils2.locale.LocaleConverter}
-     * that will return the specified default value
-     * if a conversion error occurs.
-     *
-     * @param defaultValue  The default value to be returned
-     * @param locale        The locale
-     * @param pattern       The conversion pattern
-     * @param locPattern    Indicate whether the pattern is localized or not
-     */
-    public FloatLocaleConverter(final Object defaultValue, final Locale locale, final String pattern,
-            final boolean locPattern) {
-        super(defaultValue, locale, pattern, locPattern);
-    }
-
-   /**
-    * Convert the specified locale-sensitive input object into an output object of the
-    * specified type.  This method will return Float value or throw exception if value
-    * can not be stored in the Float.
-    *
-    * @param value The input object to be converted
-    * @param pattern The pattern is used for the conversion
-    * @return The converted value
-    *
-    * @throws ConversionException if conversion cannot be performed
-    *  successfully
-    * @throws ParseException if an error occurs parsing a String to a Number
-    */
-   @Override
-   protected Object parse(final Object value, final String pattern) throws ParseException {
-       final Number parsed = (Number) super.parse(value, pattern);
-       final double doubleValue = parsed.doubleValue();
-       final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
-       if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
-           throw new ConversionException("Supplied number is not of type Float: " + parsed);
-       }
-       return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
-   }
 }

@@ -304,34 +304,34 @@ public class LocaleConvertUtilsBean {
         final WeakFastHashMap<Class<?>, LocaleConverter<?>> converter = new WeakFastHashMap<>();
         converter.setFast(false);
 
-        converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
-        converter.put(BigInteger.class, new BigIntegerLocaleConverter(locale, applyLocalized));
+        converter.put(BigDecimal.class, BigDecimalLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(BigInteger.class, BigIntegerLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Byte.class, new ByteLocaleConverter(locale, applyLocalized));
-        converter.put(Byte.TYPE, new ByteLocaleConverter(locale, applyLocalized));
+        converter.put(Byte.class, ByteLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Byte.TYPE, ByteLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Double.class, new DoubleLocaleConverter(locale, applyLocalized));
-        converter.put(Double.TYPE, new DoubleLocaleConverter(locale, applyLocalized));
+        converter.put(Double.class, DoubleLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Double.TYPE, DoubleLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Float.class, new FloatLocaleConverter(locale, applyLocalized));
-        converter.put(Float.TYPE, new FloatLocaleConverter(locale, applyLocalized));
+        converter.put(Float.class, FloatLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Float.TYPE, FloatLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Integer.class, new IntegerLocaleConverter(locale, applyLocalized));
-        converter.put(Integer.TYPE, new IntegerLocaleConverter(locale, applyLocalized));
+        converter.put(Integer.class, IntegerLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Integer.TYPE, IntegerLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Long.class, new LongLocaleConverter(locale, applyLocalized));
-        converter.put(Long.TYPE, new LongLocaleConverter(locale, applyLocalized));
+        converter.put(Long.class, LongLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Long.TYPE, LongLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(Short.class, new ShortLocaleConverter(locale, applyLocalized));
-        converter.put(Short.TYPE, new ShortLocaleConverter(locale, applyLocalized));
+        converter.put(Short.class, ShortLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
+        converter.put(Short.TYPE, ShortLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
-        converter.put(String.class, new StringLocaleConverter(locale, applyLocalized));
+        converter.put(String.class, StringLocaleConverter.builder().setLocale(locale).setLocalizedPattern(applyLocalized).get());
 
         // conversion format patterns of java.sql.* types should correspond to default
         // behavior of toString and valueOf methods of these classes
-        converter.put(java.sql.Date.class, new SqlDateLocaleConverter(locale, "yyyy-MM-dd"));
-        converter.put(java.sql.Time.class, new SqlTimeLocaleConverter(locale, "HH:mm:ss"));
-        converter.put(java.sql.Timestamp.class, new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S"));
+        converter.put(java.sql.Date.class, SqlDateLocaleConverter.builder().setLocale(locale).setPattern("yyyy-MM-dd").get());
+        converter.put(java.sql.Time.class, SqlTimeLocaleConverter.builder().setLocale(locale).setPattern("HH:mm:ss").get());
+        converter.put(java.sql.Timestamp.class, SqlTimestampLocaleConverter.builder().setLocale(locale).setPattern("yyyy-MM-dd HH:mm:ss.S").get());
 
         converter.setFast(true);
 
