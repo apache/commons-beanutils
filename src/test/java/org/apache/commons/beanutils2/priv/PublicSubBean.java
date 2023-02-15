@@ -32,16 +32,16 @@ package org.apache.commons.beanutils2.priv;
 public class PublicSubBean extends PackageBean {
 
     /**
+     * A directly implemented property.
+     */
+    private String foo = "This is foo";
+
+    /**
      * Package private constructor - can only use factory method to create beans.
      */
     public PublicSubBean() {
 
     }
-
-    /**
-     * A directly implemented property.
-     */
-    private String foo = "This is foo";
 
     public String getFoo() {
 

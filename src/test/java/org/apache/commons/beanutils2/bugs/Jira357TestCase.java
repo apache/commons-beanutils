@@ -30,12 +30,71 @@ import junit.framework.TestSuite;
 public class Jira357TestCase extends TestCase {
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
+     * Abstract test bean.
      */
-    public Jira357TestCase(final String name) {
-        super(name);
+    public abstract static class AbstractTestBean {
+
+        /** Inner Class */
+        public abstract static class InnerClass {
+            private String firstName;
+
+            public String getInnerName() {
+                return firstName;
+            }
+
+            public void setInnerName(final String firstName) {
+                this.firstName = firstName;
+            }
+        }
+
+        public abstract String getFoo();
+
+        public abstract AbstractTestBean.InnerClass getInnerClassProperty();
+
+        public abstract boolean isBar();
+
+        public abstract void setBar(boolean bar);
+
+        public abstract void setFoo(String foo);
+    }
+
+    /**
+     * Concrete bean implementation.
+     */
+    public static class ConcreteTestBean extends AbstractTestBean {
+
+        private String foo;
+        private boolean bar;
+        private ConcreteTestBean.InnerClass innerClassProperty;
+
+        @Override
+        public String getFoo() {
+            return foo;
+        }
+
+        @Override
+        public ConcreteTestBean.InnerClass getInnerClassProperty() {
+            return innerClassProperty;
+        }
+
+        @Override
+        public boolean isBar() {
+            return bar;
+        }
+
+        @Override
+        public void setBar(final boolean bar) {
+            this.bar = bar;
+        }
+
+        @Override
+        public void setFoo(final String foo) {
+            this.foo = foo;
+        }
+
+        public void setInnerClassProperty(final ConcreteTestBean.InnerClass innerClassProperty) {
+            this.innerClassProperty = innerClassProperty;
+        }
     }
 
     /**
@@ -57,48 +116,12 @@ public class Jira357TestCase extends TestCase {
     }
 
     /**
-     * Sets up.
+     * Create a test case with the specified name.
      *
-     * @throws Exception
+     * @param name The name of the test
      */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    /**
-     * Tear Down.
-     *
-     * @throws Exception
-     */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    /**
-     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
-     */
-    public void testPropertyUtils_getPropertyDescriptors_Foo() throws Exception {
-        checkReadMethod("foo", ConcreteTestBean.class);
-    }
-
-    /**
-     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
-     */
-    public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
-
-        // FIXME the isBar() method returning AbstractTestBean.class as the
-        // declaring class instead of ConcreteTestBean.class
-        // causing this test to fail - so its commented out for now
-        // checkReadMethod("bar", ConcreteTestBean.class);
-    }
-
-    /**
-     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
-     */
-    public void testPropertyUtils_getPropertyDescriptors_InnerClassProperty() throws Exception {
-        checkReadMethod("innerClassProperty", ConcreteTestBean.class);
+    public Jira357TestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -135,70 +158,47 @@ public class Jira357TestCase extends TestCase {
     }
 
     /**
-     * Abstract test bean.
+     * Sets up.
+     *
+     * @throws Exception
      */
-    public abstract static class AbstractTestBean {
-
-        public abstract String getFoo();
-
-        public abstract void setFoo(String foo);
-
-        public abstract boolean isBar();
-
-        public abstract void setBar(boolean bar);
-
-        public abstract AbstractTestBean.InnerClass getInnerClassProperty();
-
-        /** Inner Class */
-        public abstract static class InnerClass {
-            private String firstName;
-
-            public String getInnerName() {
-                return firstName;
-            }
-
-            public void setInnerName(final String firstName) {
-                this.firstName = firstName;
-            }
-        }
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
     }
 
     /**
-     * Concrete bean implementation.
+     * Tear Down.
+     *
+     * @throws Exception
      */
-    public static class ConcreteTestBean extends AbstractTestBean {
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
 
-        private String foo;
-        private boolean bar;
-        private ConcreteTestBean.InnerClass innerClassProperty;
+    /**
+     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
+     */
+    public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
 
-        @Override
-        public String getFoo() {
-            return foo;
-        }
+        // FIXME the isBar() method returning AbstractTestBean.class as the
+        // declaring class instead of ConcreteTestBean.class
+        // causing this test to fail - so its commented out for now
+        // checkReadMethod("bar", ConcreteTestBean.class);
+    }
 
-        @Override
-        public void setFoo(final String foo) {
-            this.foo = foo;
-        }
+    /**
+     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
+     */
+    public void testPropertyUtils_getPropertyDescriptors_Foo() throws Exception {
+        checkReadMethod("foo", ConcreteTestBean.class);
+    }
 
-        @Override
-        public boolean isBar() {
-            return bar;
-        }
-
-        @Override
-        public void setBar(final boolean bar) {
-            this.bar = bar;
-        }
-
-        @Override
-        public ConcreteTestBean.InnerClass getInnerClassProperty() {
-            return innerClassProperty;
-        }
-
-        public void setInnerClassProperty(final ConcreteTestBean.InnerClass innerClassProperty) {
-            this.innerClassProperty = innerClassProperty;
-        }
+    /**
+     * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
+     */
+    public void testPropertyUtils_getPropertyDescriptors_InnerClassProperty() throws Exception {
+        checkReadMethod("innerClassProperty", ConcreteTestBean.class);
     }
 }

@@ -49,17 +49,6 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0
-     */
-    @Override
-    protected Class<UUID> getDefaultType() {
-        return UUID.class;
-    }
-
-    /**
      * <p>Converts a java.util.UUID or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
@@ -76,6 +65,17 @@ public final class UUIDConverter extends AbstractConverter<UUID> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0
+     */
+    @Override
+    protected Class<UUID> getDefaultType() {
+        return UUID.class;
     }
 
 }

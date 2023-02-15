@@ -30,32 +30,44 @@ package org.apache.commons.beanutils2.priv;
 class PrivateBean implements PrivateDirect {
 
     /**
-     * Package private constructor - can only use factory method to create beans.
-     */
-    PrivateBean() {
-
-    }
-
-    /**
      * A directly implemented property.
      */
     private final String foo = "This is foo";
-
-    public String getFoo() {
-
-        return this.foo;
-
-    }
 
     /**
      * A property accessible via a directly implemented interface.
      */
     private final String bar = "This is bar";
 
+    /**
+     * A property accessible via an indirectly implemented interface.
+     */
+    private final String baz = "This is baz";
+
+    /**
+     * Package private constructor - can only use factory method to create beans.
+     */
+    PrivateBean() {
+
+    }
+
     @Override
     public String getBar() {
 
         return this.bar;
+
+    }
+
+    @Override
+    public String getBaz() {
+
+        return this.baz;
+
+    }
+
+    public String getFoo() {
+
+        return this.foo;
 
     }
 
@@ -66,18 +78,6 @@ class PrivateBean implements PrivateDirect {
     public String methodBar(final String in) {
 
         return in;
-
-    }
-
-    /**
-     * A property accessible via an indirectly implemented interface.
-     */
-    private final String baz = "This is baz";
-
-    @Override
-    public String getBaz() {
-
-        return this.baz;
 
     }
 

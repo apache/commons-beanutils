@@ -33,6 +33,13 @@ import junit.framework.TestSuite;
 public class ConstructorUtilsTestCase extends TestCase {
 
     /**
+     * Creates the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(ConstructorUtilsTestCase.class);
+    }
+
+    /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
@@ -50,18 +57,65 @@ public class ConstructorUtilsTestCase extends TestCase {
     }
 
     /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(ConstructorUtilsTestCase.class);
-    }
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
     public void tearDown() throws Exception {
         super.tearDown();
+    }
+
+    public void testGetAccessibleConstructor() throws Exception {
+        {
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, String.class);
+            assertNotNull(ctor);
+            assertTrue(Modifier.isPublic(ctor.getModifiers()));
+        }
+        {
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, Integer.class);
+            assertNotNull(ctor);
+            assertTrue(Modifier.isPublic(ctor.getModifiers()));
+        }
+        {
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, Integer.TYPE);
+            assertNull(ctor);
+        }
+    }
+
+    public void testGetAccessibleConstructorWithConstructorArg() throws Exception {
+        {
+            final Class<?>[] types = { Integer.class };
+            final Constructor<?> c1 = TestBean.class.getConstructor(types);
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
+            assertNotNull(ctor);
+            assertTrue(Modifier.isPublic(ctor.getModifiers()));
+        }
+        {
+            final Class<?>[] types = { Integer.class };
+            final Constructor<?> c1 = TestBean.class.getDeclaredConstructor(types);
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
+            assertNotNull(ctor);
+            assertTrue(Modifier.isPublic(ctor.getModifiers()));
+        }
+        {
+            final Class<?>[] types = { Integer.TYPE };
+            final Constructor<?> c1 = TestBean.class.getDeclaredConstructor(types);
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
+            assertNull(ctor);
+        }
+    }
+
+    public void testGetAccessibleConstructorWithTypeArray() throws Exception {
+        {
+            final Class<?>[] types = { Boolean.TYPE, String.class };
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, types);
+            assertNotNull(ctor);
+            assertTrue(Modifier.isPublic(ctor.getModifiers()));
+        }
+        {
+            final Class<?>[] types = { Boolean.TYPE, Boolean.TYPE, String.class };
+            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, types);
+            assertNull(ctor);
+        }
     }
 
     public void testInvokeConstructor() throws Exception {
@@ -138,12 +192,6 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
     }
 
-    public void testInvokeExactConstructorWithNull() throws Exception {
-        final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, (Object) null);
-        assertNotNull(obj);
-        assertTrue(obj instanceof TestBean);
-    }
-
     public void testInvokeExactConstructorWithArgArray() throws Exception {
         {
             final Object[] args = { Float.valueOf(17.3f), "TEST" };
@@ -162,6 +210,12 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertEquals(true, ((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
+    }
+
+    public void testInvokeExactConstructorWithNull() throws Exception {
+        final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, (Object) null);
+        assertNotNull(obj);
+        assertTrue(obj instanceof TestBean);
     }
 
     public void testInvokeExactConstructorWithTypeArray() throws Exception {
@@ -201,60 +255,6 @@ public class ConstructorUtilsTestCase extends TestCase {
             } catch (final NoSuchMethodException e) {
                 // expected
             }
-        }
-    }
-
-    public void testGetAccessibleConstructor() throws Exception {
-        {
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, String.class);
-            assertNotNull(ctor);
-            assertTrue(Modifier.isPublic(ctor.getModifiers()));
-        }
-        {
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, Integer.class);
-            assertNotNull(ctor);
-            assertTrue(Modifier.isPublic(ctor.getModifiers()));
-        }
-        {
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, Integer.TYPE);
-            assertNull(ctor);
-        }
-    }
-
-    public void testGetAccessibleConstructorWithTypeArray() throws Exception {
-        {
-            final Class<?>[] types = { Boolean.TYPE, String.class };
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, types);
-            assertNotNull(ctor);
-            assertTrue(Modifier.isPublic(ctor.getModifiers()));
-        }
-        {
-            final Class<?>[] types = { Boolean.TYPE, Boolean.TYPE, String.class };
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(TestBean.class, types);
-            assertNull(ctor);
-        }
-    }
-
-    public void testGetAccessibleConstructorWithConstructorArg() throws Exception {
-        {
-            final Class<?>[] types = { Integer.class };
-            final Constructor<?> c1 = TestBean.class.getConstructor(types);
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
-            assertNotNull(ctor);
-            assertTrue(Modifier.isPublic(ctor.getModifiers()));
-        }
-        {
-            final Class<?>[] types = { Integer.class };
-            final Constructor<?> c1 = TestBean.class.getDeclaredConstructor(types);
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
-            assertNotNull(ctor);
-            assertTrue(Modifier.isPublic(ctor.getModifiers()));
-        }
-        {
-            final Class<?>[] types = { Integer.TYPE };
-            final Constructor<?> c1 = TestBean.class.getDeclaredConstructor(types);
-            final Constructor<?> ctor = ConstructorUtils.getAccessibleConstructor(c1);
-            assertNull(ctor);
         }
     }
 

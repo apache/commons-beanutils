@@ -51,17 +51,6 @@ public final class DurationConverter extends AbstractConverter<Duration> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0
-     */
-    @Override
-    protected Class<Duration> getDefaultType() {
-        return Duration.class;
-    }
-
-    /**
      * <p>Converts a java.time.Duration or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
@@ -78,6 +67,17 @@ public final class DurationConverter extends AbstractConverter<Duration> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0
+     */
+    @Override
+    protected Class<Duration> getDefaultType() {
+        return Duration.class;
     }
 
 }

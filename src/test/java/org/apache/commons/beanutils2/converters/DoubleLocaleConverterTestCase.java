@@ -50,57 +50,6 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
     }
 
     /**
-     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
-     */
-    public void testConstructorMain() {
-
-        // ------------- Construct with localized pattern ------------
-        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
-                .setLocalizedPattern(true).get();
-
-        convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
-        convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
-        convertInvalid(converter, "(A)", defaultValue);
-        convertNull(converter, "(A)", defaultValue);
-
-        // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning "1,234.56" into "1.234"
-        // I guess this is one of the limitations of DecimalFormat
-        // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultDecimalValue, Double.valueOf("1.234"));
-
-        // **************************************************************************
-        // Convert with non-localized pattern - this causes an exception in parse()
-        // but it gets swallowed in convert() method and returns default.
-        // **** IS THIS THE EXPECTED BEHAVIOUR? ****
-        // Maybe if the pattern is no good, we should use a default pattern rather
-        // than just returning the default value.
-        // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
-
-        // **************************************************************************
-        // Convert with specified type
-        //
-        // BaseLocaleConverter completely ignores the type - so even if we specify
-        // Double.class here it still returns a Double.
-        // **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
-        // convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
-
-        // ------------- Construct with non-localized pattern ------------
-        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
-                .setLocalizedPattern(false).get();
-
-        convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
-        convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
-        convertInvalid(converter, "(C)", defaultValue);
-        convertNull(converter, "(C)", defaultValue);
-
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
@@ -231,6 +180,57 @@ public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase<D
         convertValueWithPattern(converter, defaultDecimalValue, defaultDecimalPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
+
+    }
+
+    /**
+     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     */
+    public void testConstructorMain() {
+
+        // ------------- Construct with localized pattern ------------
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
+                .setLocalizedPattern(true).get();
+
+        convertValueNoPattern(converter, "(A)", localizedDecimalValue, expectedValue);
+        convertValueWithPattern(converter, "(A)", localizedDecimalValue, localizedDecimalPattern, expectedValue);
+        convertInvalid(converter, "(A)", defaultValue);
+        convertNull(converter, "(A)", defaultValue);
+
+        // **************************************************************************
+        // Convert value in the wrong format - maybe you would expect it to throw an
+        // exception and return the default - it doesn't, DecimalFormat parses it
+        // quite happily turning "1,234.56" into "1.234"
+        // I guess this is one of the limitations of DecimalFormat
+        // **************************************************************************
+        convertValueNoPattern(converter, "(B)", defaultDecimalValue, Double.valueOf("1.234"));
+
+        // **************************************************************************
+        // Convert with non-localized pattern - this causes an exception in parse()
+        // but it gets swallowed in convert() method and returns default.
+        // **** IS THIS THE EXPECTED BEHAVIOUR? ****
+        // Maybe if the pattern is no good, we should use a default pattern rather
+        // than just returning the default value.
+        // **************************************************************************
+        convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
+
+        // **************************************************************************
+        // Convert with specified type
+        //
+        // BaseLocaleConverter completely ignores the type - so even if we specify
+        // Double.class here it still returns a Double.
+        // **** This has been changed due to BEANUTILS-449 ****
+        // **************************************************************************
+        // convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
+
+        // ------------- Construct with non-localized pattern ------------
+        converter = DoubleLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
+                .setLocalizedPattern(false).get();
+
+        convertValueNoPattern(converter, "(C)", localizedDecimalValue, expectedValue);
+        convertValueWithPattern(converter, "(C)", localizedDecimalValue, defaultDecimalPattern, expectedValue);
+        convertInvalid(converter, "(C)", defaultValue);
+        convertNull(converter, "(C)", defaultValue);
 
     }
 

@@ -42,67 +42,11 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)} for simple properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable() {
-        assertFalse(PropertyUtils.isReadable(bean, "simple"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)} for simple properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable() {
-        assertFalse(PropertyUtils.isWriteable(bean, "simple"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isReadable(Object, String)} for indexed properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Indexed() {
-        assertFalse(PropertyUtils.isReadable(bean, "indexed"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)} for indexed properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Indexed() {
-        assertFalse(PropertyUtils.isWriteable(bean, "indexed"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isReadable(Object, String)} for Mapped properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Mapped() {
-        assertFalse(PropertyUtils.isReadable(bean, "mapped"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)} for Mapped properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Mapped() {
-        assertFalse(PropertyUtils.isWriteable(bean, "mapped"));
-    }
-
-    /**
      * Test {@link PropertyUtils#getProperty(Object, String)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty() {
         assertThrows(NoSuchMethodException.class, () -> PropertyUtils.getProperty(bean, "simple"));
-    }
-
-    /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for simple properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_setProperty() {
-        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "simple", "BAR"));
     }
 
     /**
@@ -114,19 +58,75 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for indexed properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Indexed() {
-        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "indexed[0]", "BAR"));
-    }
-
-    /**
      * Test {@link PropertyUtils#getProperty(Object, String)} for mapped properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty_Mapped() {
         assertThrows(NoSuchMethodException.class, () -> PropertyUtils.getProperty(bean, "mapped(foo-key)"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isReadable(Object, String)} for simple properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable() {
+        assertFalse(PropertyUtils.isReadable(bean, "simple"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isReadable(Object, String)} for indexed properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Indexed() {
+        assertFalse(PropertyUtils.isReadable(bean, "indexed"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isReadable(Object, String)} for Mapped properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Mapped() {
+        assertFalse(PropertyUtils.isReadable(bean, "mapped"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for simple properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable() {
+        assertFalse(PropertyUtils.isWriteable(bean, "simple"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for indexed properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Indexed() {
+        assertFalse(PropertyUtils.isWriteable(bean, "indexed"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for Mapped properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Mapped() {
+        assertFalse(PropertyUtils.isWriteable(bean, "mapped"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for simple properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_setProperty() {
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "simple", "BAR"));
+    }
+
+    /**
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for indexed properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Indexed() {
+        assertThrows(NoSuchMethodException.class, () -> PropertyUtils.setProperty(bean, "indexed[0]", "BAR"));
     }
 
     /**

@@ -61,54 +61,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
     }
 
     /**
-     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
-     */
-    public void testConstructorMain() {
-
-        // ------------- Construct with localized pattern ------------
-        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
-                .setLocalizedPattern(true).get();
-
-        convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
-        convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
-        convertInvalid(converter, "(A)", defaultValue);
-        convertNull(converter, "(A)", defaultValue);
-
-        // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning ",123" into "0"
-        // I guess this is one of the limitations of DecimalFormat
-        // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Byte.valueOf("0"));
-
-        // **************************************************************************
-        // Convert with non-localized pattern
-        // **************************************************************************
-        convertValueWithPattern(converter, "(B)", "123", defaultIntegerPattern, Byte.valueOf("123"));
-        convertValueWithPattern(converter, "(B-2)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
-
-        // **************************************************************************
-        // Convert with specified type
-        //
-        // BaseLocaleConverter completely ignores the type - so even if we specify
-        // Double.class here it still returns a Byte.
-        // **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
-        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
-
-        // ------------- Construct with non-localized pattern ------------
-        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
-                .setLocalizedPattern(false).get();
-
-        convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
-        convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
-        convertInvalid(converter, "(C)", defaultValue);
-        convertNull(converter, "(C)", defaultValue);
-
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
@@ -239,6 +191,54 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
+
+    }
+
+    /**
+     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     */
+    public void testConstructorMain() {
+
+        // ------------- Construct with localized pattern ------------
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
+                .setLocalizedPattern(true).get();
+
+        convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
+        convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        convertInvalid(converter, "(A)", defaultValue);
+        convertNull(converter, "(A)", defaultValue);
+
+        // **************************************************************************
+        // Convert value in the wrong format - maybe you would expect it to throw an
+        // exception and return the default - it doesn't, DecimalFormat parses it
+        // quite happily turning ",123" into "0"
+        // I guess this is one of the limitations of DecimalFormat
+        // **************************************************************************
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Byte.valueOf("0"));
+
+        // **************************************************************************
+        // Convert with non-localized pattern
+        // **************************************************************************
+        convertValueWithPattern(converter, "(B)", "123", defaultIntegerPattern, Byte.valueOf("123"));
+        convertValueWithPattern(converter, "(B-2)", localizedIntegerValue, defaultIntegerPattern, defaultValue);
+
+        // **************************************************************************
+        // Convert with specified type
+        //
+        // BaseLocaleConverter completely ignores the type - so even if we specify
+        // Double.class here it still returns a Byte.
+        // **** This has been changed due to BEANUTILS-449 ****
+        // **************************************************************************
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+
+        // ------------- Construct with non-localized pattern ------------
+        converter = ByteLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
+                .setLocalizedPattern(false).get();
+
+        convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
+        convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
+        convertInvalid(converter, "(C)", defaultValue);
+        convertNull(converter, "(C)", defaultValue);
 
     }
 

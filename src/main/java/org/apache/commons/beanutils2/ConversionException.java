@@ -25,6 +25,8 @@ package org.apache.commons.beanutils2;
  */
 public class ConversionException extends RuntimeException {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a new instance with a message formatted using {@link String#format(String, Object...)}.
      *
@@ -36,8 +38,6 @@ public class ConversionException extends RuntimeException {
     public static ConversionException format(final String format, final Object... args) {
         return new ConversionException(String.format(format, args));
     }
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new exception with the specified message.

@@ -31,6 +31,9 @@ import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+class FirstChildBean extends RootBean {
+}
+
 /**
  * getPropertyType return null on second descendant class
  * <p>
@@ -83,10 +86,6 @@ class RootBean {
         return file;
     }
 
-    public void setFile(final List file) {
-        this.file = file;
-    }
-
     public String getFile(final int i) {
         return (String) file.get(i);
     }
@@ -96,9 +95,10 @@ class RootBean {
         this.file.set(i, file);
     }
 
-}
+    public void setFile(final List file) {
+        this.file = file;
+    }
 
-class FirstChildBean extends RootBean {
 }
 
 class SecondChildBean extends RootBean {

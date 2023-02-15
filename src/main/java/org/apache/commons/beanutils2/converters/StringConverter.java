@@ -62,17 +62,6 @@ public final class StringConverter extends AbstractConverter<String> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<String> getDefaultType() {
-        return String.class;
-    }
-
-    /**
      * Convert the specified input object into an output object of the
      * specified type.
      *
@@ -91,6 +80,17 @@ public final class StringConverter extends AbstractConverter<String> {
             return type.cast(value.toString());
         }
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 1.8.0
+     */
+    @Override
+    protected Class<String> getDefaultType() {
+        return String.class;
     }
 
 }

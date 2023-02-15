@@ -35,6 +35,15 @@ import junit.framework.TestSuite;
 public class DynaPropertyUtilsTestCase extends TestCase {
 
     /**
+     * Creates the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(DynaPropertyUtilsTestCase.class);
+
+    }
+
+    /**
      * The basic test bean for each test.
      */
     protected DynaBean bean = null;
@@ -60,6 +69,27 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public DynaPropertyUtilsTestCase(final String name) {
 
         super(name);
+
+    }
+
+    /**
+     * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
+     */
+    protected DynaClass createDynaClass() {
+
+        final int[] intArray = {};
+        final String[] stringArray = {};
+
+        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
+                new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("doubleProperty", Double.TYPE),
+                new DynaProperty("dupProperty", stringArray.getClass()), new DynaProperty("floatProperty", Float.TYPE),
+                new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
+                new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("listIndexed", List.class), new DynaProperty("longProperty", Long.TYPE),
+                new DynaProperty("mapProperty", Map.class), new DynaProperty("mappedObjects", Map.class), new DynaProperty("mappedProperty", Map.class),
+                new DynaProperty("mappedIntProperty", Map.class), new DynaProperty("nested", TestBean.class), new DynaProperty("nullProperty", String.class),
+                new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringArray", stringArray.getClass()),
+                new DynaProperty("stringIndexed", stringArray.getClass()), new DynaProperty("stringProperty", String.class), });
+        return dynaClass;
 
     }
 
@@ -116,15 +146,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         final String[] stringIndexed = { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
-
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaPropertyUtilsTestCase.class);
 
     }
 
@@ -2125,27 +2146,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             // Correct result for this test
             assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
         }
-
-    }
-
-    /**
-     * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
-     */
-    protected DynaClass createDynaClass() {
-
-        final int[] intArray = {};
-        final String[] stringArray = {};
-
-        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
-                new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("doubleProperty", Double.TYPE),
-                new DynaProperty("dupProperty", stringArray.getClass()), new DynaProperty("floatProperty", Float.TYPE),
-                new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
-                new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("listIndexed", List.class), new DynaProperty("longProperty", Long.TYPE),
-                new DynaProperty("mapProperty", Map.class), new DynaProperty("mappedObjects", Map.class), new DynaProperty("mappedProperty", Map.class),
-                new DynaProperty("mappedIntProperty", Map.class), new DynaProperty("nested", TestBean.class), new DynaProperty("nullProperty", String.class),
-                new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringArray", stringArray.getClass()),
-                new DynaProperty("stringIndexed", stringArray.getClass()), new DynaProperty("stringProperty", String.class), });
-        return dynaClass;
 
     }
 

@@ -32,13 +32,11 @@ import junit.framework.TestSuite;
 public class PropertyUtilsBenchCase extends TestCase {
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
+     * Creates the tests included in this test suite.
      */
-    public PropertyUtilsBenchCase(final String name) {
+    public static Test suite() {
 
-        super(name);
+        return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
 
@@ -59,6 +57,17 @@ public class PropertyUtilsBenchCase extends TestCase {
 
     // PropertyUtilsBean instance to be used
     private PropertyUtilsBean pu = null;
+
+    /**
+     * Constructs a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public PropertyUtilsBenchCase(final String name) {
+
+        super(name);
+
+    }
 
     /**
      * Sets up instance variables required by this test case.
@@ -105,15 +114,6 @@ public class PropertyUtilsBenchCase extends TestCase {
 
         // Set up PropertyUtilsBean instance we will use
         pu = PropertyUtilsBean.getInstance();
-
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(PropertyUtilsBenchCase.class);
 
     }
 

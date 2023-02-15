@@ -48,8 +48,8 @@ public final class ShortConverter extends NumberConverter<Short> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ShortConverter(final Short defaultValue) {
-        super(false, defaultValue);
+    public ShortConverter(final Number defaultValue) {
+        this(defaultValue.shortValue());
     }
 
     /**
@@ -60,8 +60,8 @@ public final class ShortConverter extends NumberConverter<Short> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public ShortConverter(final Number defaultValue) {
-        this(defaultValue.shortValue());
+    public ShortConverter(final Short defaultValue) {
+        super(false, defaultValue);
     }
 
     /**

@@ -42,15 +42,6 @@ public class Jira87TestCase extends TestCase {
     private static final Log LOG = LogFactory.getLog(Jira87TestCase.class);
 
     /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira87TestCase(final String name) {
-        super(name);
-    }
-
-    /**
      * Run the Test.
      *
      * @param args Arguments
@@ -66,6 +57,15 @@ public class Jira87TestCase extends TestCase {
      */
     public static Test suite() {
         return new TestSuite(Jira87TestCase.class);
+    }
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira87TestCase(final String name) {
+        super(name);
     }
 
     /**

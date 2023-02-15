@@ -106,21 +106,6 @@ public interface DynaBean {
     void remove(String name, String key);
 
     /**
-     * Sets the value of a simple property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
-     */
-    void set(String name, Object value);
-
-    /**
      * Sets the value of an indexed property with the specified name.
      *
      * @param name Name of the property whose value is to be set
@@ -137,6 +122,21 @@ public interface DynaBean {
      *  is outside the range of the underlying property
      */
     void set(String name, int index, Object value);
+
+    /**
+     * Sets the value of a simple property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws NullPointerException if an attempt is made to set a
+     *  primitive property to null
+     */
+    void set(String name, Object value);
 
     /**
      * Sets the value of a mapped property with the specified name.

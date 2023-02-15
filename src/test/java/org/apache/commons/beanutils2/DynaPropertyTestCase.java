@@ -28,22 +28,6 @@ import junit.framework.TestSuite;
  */
 public class DynaPropertyTestCase extends TestCase {
 
-    private DynaProperty testPropertyWithName;
-    private DynaProperty testProperty1Duplicate;
-    private DynaProperty testPropertyWithNameAndType;
-    private DynaProperty testProperty2Duplicate;
-    private DynaProperty testPropertyWithNameAndTypeAndContentType;
-    private DynaProperty testProperty3Duplicate;
-
-    /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
-     */
-    public DynaPropertyTestCase(final String name) {
-        super(name);
-    }
-
     /**
      * Creates the tests included in this test suite.
      *
@@ -53,6 +37,22 @@ public class DynaPropertyTestCase extends TestCase {
 
         return new TestSuite(DynaPropertyTestCase.class);
 
+    }
+    private DynaProperty testPropertyWithName;
+    private DynaProperty testProperty1Duplicate;
+    private DynaProperty testPropertyWithNameAndType;
+    private DynaProperty testProperty2Duplicate;
+    private DynaProperty testPropertyWithNameAndTypeAndContentType;
+
+    private DynaProperty testProperty3Duplicate;
+
+    /**
+     * Constructs a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public DynaPropertyTestCase(final String name) {
+        super(name);
     }
 
     /**
@@ -86,18 +86,6 @@ public class DynaPropertyTestCase extends TestCase {
     }
 
     /**
-     * Class under test for int hashCode(Object)
-     */
-    public void testHashCode() {
-
-        final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
-        assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
-        assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
-        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
-        assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
-    }
-
-    /**
      * Class under test for boolean equals(Object)
      */
     public void testEqualsObject() {
@@ -108,6 +96,18 @@ public class DynaPropertyTestCase extends TestCase {
         assertFalse(testPropertyWithName.equals(testPropertyWithNameAndType));
         assertFalse(testPropertyWithNameAndType.equals(testPropertyWithNameAndTypeAndContentType));
         assertFalse(testPropertyWithName.equals(null));
+    }
+
+    /**
+     * Class under test for int hashCode(Object)
+     */
+    public void testHashCode() {
+
+        final int initialHashCode = testPropertyWithNameAndTypeAndContentType.hashCode();
+        assertEquals(testPropertyWithName.hashCode(), testProperty1Duplicate.hashCode());
+        assertEquals(testPropertyWithNameAndType.hashCode(), testProperty2Duplicate.hashCode());
+        assertEquals(testPropertyWithNameAndTypeAndContentType.hashCode(), testProperty3Duplicate.hashCode());
+        assertEquals(initialHashCode, testPropertyWithNameAndTypeAndContentType.hashCode());
     }
 
 }

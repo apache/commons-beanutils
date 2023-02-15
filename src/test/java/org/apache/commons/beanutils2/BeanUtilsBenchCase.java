@@ -32,12 +32,10 @@ import junit.framework.TestSuite;
 public class BeanUtilsBenchCase extends TestCase {
 
     /**
-     * Constructs a new instance of this test case.
-     *
-     * @param name Name of the test case
+     * Creates the tests included in this test suite.
      */
-    public BeanUtilsBenchCase(final String name) {
-        super(name);
+    public static Test suite() {
+        return new TestSuite(BeanUtilsBenchCase.class);
     }
 
     // Basic loop counter
@@ -58,6 +56,15 @@ public class BeanUtilsBenchCase extends TestCase {
 
     // BeanUtilsBean instance to be used
     private BeanUtilsBean bu = null;
+
+    /**
+     * Constructs a new instance of this test case.
+     *
+     * @param name Name of the test case
+     */
+    public BeanUtilsBenchCase(final String name) {
+        super(name);
+    }
 
     /**
      * Sets up instance variables required by this test case.
@@ -112,13 +119,6 @@ public class BeanUtilsBenchCase extends TestCase {
         // Set up BeanUtilsBean instance we will use
         bu = BeanUtilsBean.getInstance();
 
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtilsBenchCase.class);
     }
 
     /**

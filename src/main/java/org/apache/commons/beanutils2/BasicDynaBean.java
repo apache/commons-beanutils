@@ -56,18 +56,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructs a new {@code DynaBean} associated with the specified
-     * {@code DynaClass} instance.
-     *
-     * @param dynaClass The DynaClass we are associated with
-     */
-    public BasicDynaBean(final DynaClass dynaClass) {
-
-        this.dynaClass = dynaClass;
-
-    }
-
-    /**
      * The {@code DynaClass} "base class" that this DynaBean
      * is associated with.
      */
@@ -82,23 +70,14 @@ public class BasicDynaBean implements DynaBean, Serializable {
     private transient Map<String, Object> mapDecorator;
 
     /**
-     * <p>
-     * Gets a Map representation of this DynaBean.
-     * <p>
-     * This, for example, could be used in JSTL in the following way to access
-     * a DynaBean's {@code fooProperty}:
-     * <ul><li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li></ul>
+     * Constructs a new {@code DynaBean} associated with the specified
+     * {@code DynaClass} instance.
      *
-     * @return a Map representation of this DynaBean
-     * @since 1.8.0
+     * @param dynaClass The DynaClass we are associated with
      */
-    public Map<String, Object> getMap() {
+    public BasicDynaBean(final DynaClass dynaClass) {
 
-        // cache the Map
-        if (mapDecorator == null) {
-            mapDecorator = new DynaBeanPropertyMapDecorator(this);
-        }
-        return mapDecorator;
+        this.dynaClass = dynaClass;
 
     }
 
@@ -252,6 +231,72 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
+     * Gets the property descriptor for the specified property name.
+     *
+     * @param name Name of the property for which to retrieve the descriptor
+     * @return The property descriptor
+     *
+     * @throws IllegalArgumentException if this is not a valid property
+     *  name for our DynaClass
+     */
+    protected DynaProperty getDynaProperty(final String name) {
+
+        final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
+        if (descriptor == null) {
+            throw new IllegalArgumentException
+                    ("Invalid property name '" + name + "'");
+        }
+        return descriptor;
+
+    }
+
+    /**
+     * <p>
+     * Gets a Map representation of this DynaBean.
+     * <p>
+     * This, for example, could be used in JSTL in the following way to access
+     * a DynaBean's {@code fooProperty}:
+     * <ul><li>{@code ${myDynaBean.<b>map</b>.fooProperty}}</li></ul>
+     *
+     * @return a Map representation of this DynaBean
+     * @since 1.8.0
+     */
+    public Map<String, Object> getMap() {
+
+        // cache the Map
+        if (mapDecorator == null) {
+            mapDecorator = new DynaBeanPropertyMapDecorator(this);
+        }
+        return mapDecorator;
+
+    }
+
+    /**
+     * Is an object of the source class assignable to the destination class?
+     *
+     * @param dest Destination class
+     * @param source Source class
+     * @return {@code true} if the source class is assignable to the
+     * destination class, otherwise {@code false}
+     */
+    protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
+
+        if (dest.isAssignableFrom(source) ||
+                dest == Boolean.TYPE && source == Boolean.class ||
+                dest == Byte.TYPE && source == Byte.class ||
+                dest == Character.TYPE && source == Character.class ||
+                dest == Double.TYPE && source == Double.class ||
+                dest == Float.TYPE && source == Float.class ||
+                dest == Integer.TYPE && source == Integer.class ||
+                dest == Long.TYPE && source == Long.class ||
+                dest == Short.TYPE && source == Short.class) {
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
      * Remove any existing value for the specified key on the
      * specified mapped property.
      *
@@ -272,36 +317,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
                     ("Non-mapped property for '" + name + "(" + key + ")'");
         }
         ((Map<?, ?>) value).remove(key);
-
-    }
-
-    /**
-     * Sets the value of a simple property with the specified name.
-     *
-     * @param name Name of the property whose value is to be set
-     * @param value Value to which this property is to be set
-     *
-     * @throws ConversionException if the specified value cannot be
-     *  converted to the type required for this property
-     * @throws IllegalArgumentException if there is no property
-     *  of the specified name
-     * @throws NullPointerException if an attempt is made to set a
-     *  primitive property to null
-     */
-    @Override
-    public void set(final String name, final Object value) {
-
-        final DynaProperty descriptor = getDynaProperty(name);
-        if (value == null) {
-            if (descriptor.getType().isPrimitive()) {
-                throw new NullPointerException
-                        ("Primitive value for '" + name + "'");
-            }
-        } else if (!isAssignable(descriptor.getType(), value.getClass())) {
-            throw ConversionException.format("Cannot assign value of type '%s' to property '%s' of type '%s'", value.getClass().getName(), name,
-                    descriptor.getType().getName());
-        }
-        values.put(name, value);
 
     }
 
@@ -347,6 +362,36 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
     /**
+     * Sets the value of a simple property with the specified name.
+     *
+     * @param name Name of the property whose value is to be set
+     * @param value Value to which this property is to be set
+     *
+     * @throws ConversionException if the specified value cannot be
+     *  converted to the type required for this property
+     * @throws IllegalArgumentException if there is no property
+     *  of the specified name
+     * @throws NullPointerException if an attempt is made to set a
+     *  primitive property to null
+     */
+    @Override
+    public void set(final String name, final Object value) {
+
+        final DynaProperty descriptor = getDynaProperty(name);
+        if (value == null) {
+            if (descriptor.getType().isPrimitive()) {
+                throw new NullPointerException
+                        ("Primitive value for '" + name + "'");
+            }
+        } else if (!isAssignable(descriptor.getType(), value.getClass())) {
+            throw ConversionException.format("Cannot assign value of type '%s' to property '%s' of type '%s'", value.getClass().getName(), name,
+                    descriptor.getType().getName());
+        }
+        values.put(name, value);
+
+    }
+
+    /**
      * Sets the value of a mapped property with the specified name.
      *
      * @param name Name of the property whose value is to be set
@@ -375,51 +420,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
         // maps of types String -> Object
         Map<String, Object> map = (Map<String, Object>) prop;
         map.put(key, value);
-
-    }
-
-    /**
-     * Gets the property descriptor for the specified property name.
-     *
-     * @param name Name of the property for which to retrieve the descriptor
-     * @return The property descriptor
-     *
-     * @throws IllegalArgumentException if this is not a valid property
-     *  name for our DynaClass
-     */
-    protected DynaProperty getDynaProperty(final String name) {
-
-        final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
-        if (descriptor == null) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "'");
-        }
-        return descriptor;
-
-    }
-
-    /**
-     * Is an object of the source class assignable to the destination class?
-     *
-     * @param dest Destination class
-     * @param source Source class
-     * @return {@code true} if the source class is assignable to the
-     * destination class, otherwise {@code false}
-     */
-    protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
-
-        if (dest.isAssignableFrom(source) ||
-                dest == Boolean.TYPE && source == Boolean.class ||
-                dest == Byte.TYPE && source == Byte.class ||
-                dest == Character.TYPE && source == Character.class ||
-                dest == Double.TYPE && source == Double.class ||
-                dest == Float.TYPE && source == Float.class ||
-                dest == Integer.TYPE && source == Integer.class ||
-                dest == Long.TYPE && source == Long.class ||
-                dest == Short.TYPE && source == Short.class) {
-            return true;
-        }
-        return false;
 
     }
 

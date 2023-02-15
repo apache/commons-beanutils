@@ -26,6 +26,13 @@ import junit.framework.TestSuite;
 public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
 
     /**
+     * Creates the tests included in this test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(BeanUtilsBean2TestCase.class);
+    }
+
+    /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
@@ -42,13 +49,6 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
         ConvertUtils.deregister();
         BeanUtilsBean.setInstance(new BeanUtilsBean2());
         setUpShared();
-    }
-
-    /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-        return new TestSuite(BeanUtilsBean2TestCase.class);
     }
 
     /**

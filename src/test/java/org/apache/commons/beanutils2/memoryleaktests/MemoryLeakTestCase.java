@@ -52,15 +52,133 @@ import org.junit.Test;
 public class MemoryLeakTestCase {
 
     /**
-     * Tests that PropertyUtilsBean's descriptorsCache doesn't cause a memory leak.
+     * Creates a new class loader instance.
+     */
+    private static URLClassLoader newClassLoader() throws MalformedURLException {
+
+        final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
+        // System.out.println("dataFilePath: " + dataFilePath);
+        final String location = "file://"
+                + dataFilePath.substring(0, dataFilePath.length() - "org.apache.commons.beanutils2.memoryleaktests.pojotests".length());
+        // System.out.println("location: " + location);
+
+        final StringBuilder newString = new StringBuilder();
+        for (int i = 0; i < location.length(); i++) {
+            if (location.charAt(i) == '\\') {
+                newString.append("/");
+            } else {
+                newString.append(location.charAt(i));
+            }
+        }
+        final String classLocation = newString.toString();
+        // System.out.println("classlocation: " + classLocation);
+
+        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[] { new URL(classLocation) }, null);
+        return theLoader;
+    }
+
+    /**
+     * Clears all the BeanUtils Caches manually.
+     *
+     * This is probably overkill, but since we're dealing with static caches it seems sensible to ensure that all test cases start with a clean sheet.
+     */
+    private void clearAllBeanUtilsCaches() {
+
+        // Clear BeanUtilsBean's PropertyUtilsBean descriptor caches
+        BeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
+
+        // Clear LocaleBeanUtilsBean's PropertyUtilsBean descriptor caches
+        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getPropertyUtils().clearDescriptors();
+
+        // Clear MethodUtils's method cache
+        MethodUtils.clearCache();
+
+        // Clear WrapDynaClass cache
+        WrapDynaClass.clear();
+
+        // replace the existing BeanUtilsBean instance for the current class loader with a new, clean instance
+        BeanUtilsBean.setInstance(new BeanUtilsBean());
+
+        // replace the existing LocaleBeanUtilsBean instance for the current class loader with a new, clean instance
+        LocaleBeanUtilsBean.setInstance(new LocaleBeanUtilsBean());
+    }
+
+    /**
+     * Tries to force the garbage collector to run by filling up memory and calling System.gc().
+     */
+    private void forceGarbageCollection() throws Exception {
+        // Fill up memory
+        final SoftReference<Object> ref = new SoftReference<>(new Object());
+        int count = 0;
+        while (ref.get() != null && count++ < 5) {
+            java.util.ArrayList<String> list = new java.util.ArrayList<>();
+            try {
+                long i = 0;
+                while (ref.get() != null) {
+                    list.add(
+                            "A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String "
+                                    + i++);
+                }
+                System.out.println("Count(1) " + count + " : " + getMemoryStats());
+            } catch (final OutOfMemoryError ignored) {
+                // Cannot do anything here
+            }
+            // Trying to debug Continuum test fail: try calling GC before releasing the memory
+            System.gc();
+            list.clear();
+            list = null;
+            System.gc();
+            System.out.println("After GC2: " + getMemoryStats() + " Count " + count);
+            Thread.sleep(1000);
+        }
+
+        final boolean isNotNull = ref.get() != null;
+        System.out.println("Count " + count + " " + isNotNull); // debug for Continuum failure
+        final String message = "Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)";
+        Assume.assumeFalse(message, isNotNull);
+    }
+
+    /**
+     * Gets the total, free, used memory stats.
+     *
+     * @return the total, free, used memory stats
+     */
+    private String getMemoryStats() {
+        final java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");
+        final Runtime runtime = Runtime.getRuntime();
+        final long free = runtime.freeMemory() / 1024;
+        final long total = runtime.totalMemory() / 1024;
+        final long used = total - free;
+        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: " + fmt.format(used) + "k " + "Free: " + fmt.format(free) + "k";
+    }
+
+    /**
+     * Produces a profiler report about where the leaks are.
+     *
+     * This requires JBoss's profiler be installed, see: http://labs.jboss.com/jbossprofiler/
+     *
+     * @param className The name of the class to profile
+     */
+    private void profilerLeakReport(final String test, final String className) {
+        /*
+         * If you want a report about where the leaks are... uncomment this, add jboss-profiler.jvmti.jar and jboss-commons.jar (for org.jboss.loggin). You will
+         * then have a report for where the references are. System.out.println(" ----------------" + test + " START ----------------");
+         * org.jboss.profiler.jvmti.JVMTIInterface jvmti = new org.jboss.profiler.jvmti.JVMTIInterface();
+         * System.out.println(jvmti.exploreClassReferences(className, 8, true, true, true, false, false)); System.out.println(" ----------------" + test +
+         * " END ------------------");
+         */
+    }
+
+    /**
+     * Tests that ConvertUtilsBean's converters doesn't cause a memory leak.
      */
     @Test
-    public void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
+    public void testConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomePojo";
+        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.CustomInteger";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -75,9 +193,10 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following line, the test will work, and the ClassLoader will be released.
-        // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
-        assertEquals("initialValue", PropertyUtils.getProperty(bean, "name"));
+        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
+        // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
+        ConvertUtils.register(new IntegerConverter(), (Class<Integer>) beanClass);
+        assertEquals("12345", ConvertUtils.convert(bean, String.class));
 
         // this should make the reference go away.
         loader = null;
@@ -87,26 +206,26 @@ public class MemoryLeakTestCase {
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
         if (someRef.get() != null) {
-            profilerLeakReport("PropertyUtilsBean descriptorsCache", className);
+            profilerLeakReport("ConvertUtilsBean converters", className);
         }
 
         // if everything is fine, this will be null
-        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull("ConvertUtilsBean is holding a reference to the classLoader", someRef.get());
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
     }
 
     /**
-     * Tests that PropertyUtilsBean's mappedDescriptorsCache doesn't cause a memory leak.
+     * Tests that LocaleConvertUtilsBean's converters doesn't cause a memory leak.
      */
     @Test
-    public void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
+    public void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
 
         // Clear All BeanUtils caches before the test
         clearAllBeanUtilsCaches();
 
-        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomeMappedPojo";
+        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.CustomInteger";
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
@@ -121,29 +240,25 @@ public class MemoryLeakTestCase {
         assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
         assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // if you comment the following three lines, the test will work, and the ClassLoader will be released.
-        // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
-        assertEquals("Second Value", PropertyUtils.getProperty(bean, "mappedProperty(Second Key)"));
-        PropertyUtils.setProperty(bean, "mappedProperty(Second Key)", "New Second Value");
-        assertEquals("New Second Value", PropertyUtils.getProperty(bean, "mappedProperty(Second Key)"));
+        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
+        // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
+        LocaleConvertUtils.register(IntegerLocaleConverter.builder().setLocale(Locale.US).setLocalizedPattern(false).get(), (Class<Integer>) beanClass,
+                Locale.US);
+        assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
 
         // this should make the reference go away.
         loader = null;
         beanClass = null;
         bean = null;
 
-        // PropertyUtilsBean uses the MethodUtils's method cache for mapped properties.
-        // Uncomment the following line to check this is not just a repeat of that memory leak.
-        // MethodUtils.clearCache();
-
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
         if (someRef.get() != null) {
-            profilerLeakReport("PropertyUtilsBean mappedDescriptorsCache", className);
+            profilerLeakReport("LocaleConvertUtilsBean converters", className);
         }
 
         // if everything is fine, this will be null
-        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+        assertNull("LocaleConvertUtilsBean is holding a reference to the classLoader", someRef.get());
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
@@ -289,6 +404,104 @@ public class MemoryLeakTestCase {
     }
 
     /**
+     * Tests that PropertyUtilsBean's descriptorsCache doesn't cause a memory leak.
+     */
+    @Test
+    public void testPropertyUtilsBean_descriptorsCache_memoryLeak() throws Exception {
+
+        // Clear All BeanUtils caches before the test
+        clearAllBeanUtilsCaches();
+
+        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomePojo";
+
+        // The classLoader will go away only when these following variables are released
+        ClassLoader loader = newClassLoader();
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
+
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
+
+        // Sanity checks only
+        assertNotNull("ClassLoader is null", loader);
+        assertNotNull("BeanClass is null", beanClass);
+        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
+        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+
+        // if you comment the following line, the test will work, and the ClassLoader will be released.
+        // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
+        assertEquals("initialValue", PropertyUtils.getProperty(bean, "name"));
+
+        // this should make the reference go away.
+        loader = null;
+        beanClass = null;
+        bean = null;
+
+        forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
+
+        if (someRef.get() != null) {
+            profilerLeakReport("PropertyUtilsBean descriptorsCache", className);
+        }
+
+        // if everything is fine, this will be null
+        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+
+        // Clear All BeanUtils caches after the test
+        clearAllBeanUtilsCaches();
+    }
+
+    /**
+     * Tests that PropertyUtilsBean's mappedDescriptorsCache doesn't cause a memory leak.
+     */
+    @Test
+    public void testPropertyUtilsBean_mappedDescriptorsCache_memoryLeak() throws Exception {
+
+        // Clear All BeanUtils caches before the test
+        clearAllBeanUtilsCaches();
+
+        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomeMappedPojo";
+
+        // The classLoader will go away only when these following variables are released
+        ClassLoader loader = newClassLoader();
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
+
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
+
+        // Sanity checks only
+        assertNotNull("ClassLoader is null", loader);
+        assertNotNull("BeanClass is null", beanClass);
+        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
+        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+
+        // if you comment the following three lines, the test will work, and the ClassLoader will be released.
+        // That proves that nothing is wrong with the test, and PropertyUtils is holding a reference
+        assertEquals("Second Value", PropertyUtils.getProperty(bean, "mappedProperty(Second Key)"));
+        PropertyUtils.setProperty(bean, "mappedProperty(Second Key)", "New Second Value");
+        assertEquals("New Second Value", PropertyUtils.getProperty(bean, "mappedProperty(Second Key)"));
+
+        // this should make the reference go away.
+        loader = null;
+        beanClass = null;
+        bean = null;
+
+        // PropertyUtilsBean uses the MethodUtils's method cache for mapped properties.
+        // Uncomment the following line to check this is not just a repeat of that memory leak.
+        // MethodUtils.clearCache();
+
+        forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
+
+        if (someRef.get() != null) {
+            profilerLeakReport("PropertyUtilsBean mappedDescriptorsCache", className);
+        }
+
+        // if everything is fine, this will be null
+        assertNull("PropertyUtilsBean is holding a reference to the classLoader", someRef.get());
+
+        // Clear All BeanUtils caches after the test
+        clearAllBeanUtilsCaches();
+    }
+
+    /**
      * Tests that WrapDynaClass's dynaClasses doesn't cause a memory leak.
      */
     @Test
@@ -338,218 +551,5 @@ public class MemoryLeakTestCase {
 
         // Clear All BeanUtils caches after the test
         clearAllBeanUtilsCaches();
-    }
-
-    /**
-     * Tests that ConvertUtilsBean's converters doesn't cause a memory leak.
-     */
-    @Test
-    public void testConvertUtilsBean_converters_memoryLeak() throws Exception {
-
-        // Clear All BeanUtils caches before the test
-        clearAllBeanUtilsCaches();
-
-        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.CustomInteger";
-
-        // The classLoader will go away only when these following variables are released
-        ClassLoader loader = newClassLoader();
-        Class<?> beanClass = loader.loadClass(className);
-        Object bean = beanClass.newInstance();
-
-        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
-
-        // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
-
-        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
-        // That proves that nothing is wrong with the test, and ConvertUtilsBean is holding a reference
-        ConvertUtils.register(new IntegerConverter(), (Class<Integer>) beanClass);
-        assertEquals("12345", ConvertUtils.convert(bean, String.class));
-
-        // this should make the reference go away.
-        loader = null;
-        beanClass = null;
-        bean = null;
-
-        forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
-
-        if (someRef.get() != null) {
-            profilerLeakReport("ConvertUtilsBean converters", className);
-        }
-
-        // if everything is fine, this will be null
-        assertNull("ConvertUtilsBean is holding a reference to the classLoader", someRef.get());
-
-        // Clear All BeanUtils caches after the test
-        clearAllBeanUtilsCaches();
-    }
-
-    /**
-     * Tests that LocaleConvertUtilsBean's converters doesn't cause a memory leak.
-     */
-    @Test
-    public void testLocaleConvertUtilsBean_converters_memoryLeak() throws Exception {
-
-        // Clear All BeanUtils caches before the test
-        clearAllBeanUtilsCaches();
-
-        final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.CustomInteger";
-
-        // The classLoader will go away only when these following variables are released
-        ClassLoader loader = newClassLoader();
-        Class<?> beanClass = loader.loadClass(className);
-        Object bean = beanClass.newInstance();
-
-        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
-
-        // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
-
-        // if you comment the following two lines, the test will work, and the ClassLoader will be released.
-        // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
-        LocaleConvertUtils.register(IntegerLocaleConverter.builder().setLocale(Locale.US).setLocalizedPattern(false).get(), (Class<Integer>) beanClass,
-                Locale.US);
-        assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
-
-        // this should make the reference go away.
-        loader = null;
-        beanClass = null;
-        bean = null;
-
-        forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
-
-        if (someRef.get() != null) {
-            profilerLeakReport("LocaleConvertUtilsBean converters", className);
-        }
-
-        // if everything is fine, this will be null
-        assertNull("LocaleConvertUtilsBean is holding a reference to the classLoader", someRef.get());
-
-        // Clear All BeanUtils caches after the test
-        clearAllBeanUtilsCaches();
-    }
-
-    /**
-     * Clears all the BeanUtils Caches manually.
-     *
-     * This is probably overkill, but since we're dealing with static caches it seems sensible to ensure that all test cases start with a clean sheet.
-     */
-    private void clearAllBeanUtilsCaches() {
-
-        // Clear BeanUtilsBean's PropertyUtilsBean descriptor caches
-        BeanUtilsBean.getInstance().getPropertyUtils().clearDescriptors();
-
-        // Clear LocaleBeanUtilsBean's PropertyUtilsBean descriptor caches
-        LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getPropertyUtils().clearDescriptors();
-
-        // Clear MethodUtils's method cache
-        MethodUtils.clearCache();
-
-        // Clear WrapDynaClass cache
-        WrapDynaClass.clear();
-
-        // replace the existing BeanUtilsBean instance for the current class loader with a new, clean instance
-        BeanUtilsBean.setInstance(new BeanUtilsBean());
-
-        // replace the existing LocaleBeanUtilsBean instance for the current class loader with a new, clean instance
-        LocaleBeanUtilsBean.setInstance(new LocaleBeanUtilsBean());
-    }
-
-    /**
-     * Tries to force the garbage collector to run by filling up memory and calling System.gc().
-     */
-    private void forceGarbageCollection() throws Exception {
-        // Fill up memory
-        final SoftReference<Object> ref = new SoftReference<>(new Object());
-        int count = 0;
-        while (ref.get() != null && count++ < 5) {
-            java.util.ArrayList<String> list = new java.util.ArrayList<>();
-            try {
-                long i = 0;
-                while (ref.get() != null) {
-                    list.add(
-                            "A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String "
-                                    + i++);
-                }
-                System.out.println("Count(1) " + count + " : " + getMemoryStats());
-            } catch (final OutOfMemoryError ignored) {
-                // Cannot do anything here
-            }
-            // Trying to debug Continuum test fail: try calling GC before releasing the memory
-            System.gc();
-            list.clear();
-            list = null;
-            System.gc();
-            System.out.println("After GC2: " + getMemoryStats() + " Count " + count);
-            Thread.sleep(1000);
-        }
-
-        final boolean isNotNull = ref.get() != null;
-        System.out.println("Count " + count + " " + isNotNull); // debug for Continuum failure
-        final String message = "Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)";
-        Assume.assumeFalse(message, isNotNull);
-    }
-
-    /**
-     * Creates a new class loader instance.
-     */
-    private static URLClassLoader newClassLoader() throws MalformedURLException {
-
-        final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
-        // System.out.println("dataFilePath: " + dataFilePath);
-        final String location = "file://"
-                + dataFilePath.substring(0, dataFilePath.length() - "org.apache.commons.beanutils2.memoryleaktests.pojotests".length());
-        // System.out.println("location: " + location);
-
-        final StringBuilder newString = new StringBuilder();
-        for (int i = 0; i < location.length(); i++) {
-            if (location.charAt(i) == '\\') {
-                newString.append("/");
-            } else {
-                newString.append(location.charAt(i));
-            }
-        }
-        final String classLocation = newString.toString();
-        // System.out.println("classlocation: " + classLocation);
-
-        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[] { new URL(classLocation) }, null);
-        return theLoader;
-    }
-
-    /**
-     * Produces a profiler report about where the leaks are.
-     *
-     * This requires JBoss's profiler be installed, see: http://labs.jboss.com/jbossprofiler/
-     *
-     * @param className The name of the class to profile
-     */
-    private void profilerLeakReport(final String test, final String className) {
-        /*
-         * If you want a report about where the leaks are... uncomment this, add jboss-profiler.jvmti.jar and jboss-commons.jar (for org.jboss.loggin). You will
-         * then have a report for where the references are. System.out.println(" ----------------" + test + " START ----------------");
-         * org.jboss.profiler.jvmti.JVMTIInterface jvmti = new org.jboss.profiler.jvmti.JVMTIInterface();
-         * System.out.println(jvmti.exploreClassReferences(className, 8, true, true, true, false, false)); System.out.println(" ----------------" + test +
-         * " END ------------------");
-         */
-    }
-
-    /**
-     * Gets the total, free, used memory stats.
-     *
-     * @return the total, free, used memory stats
-     */
-    private String getMemoryStats() {
-        final java.text.DecimalFormat fmt = new java.text.DecimalFormat("#,##0");
-        final Runtime runtime = Runtime.getRuntime();
-        final long free = runtime.freeMemory() / 1024;
-        final long total = runtime.totalMemory() / 1024;
-        final long used = total - free;
-        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: " + fmt.format(used) + "k " + "Free: " + fmt.format(free) + "k";
     }
 }

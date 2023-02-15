@@ -80,6 +80,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LocaleConvertUtilsBean {
 
+    /** The {@code Log} instance for this class. */
+    private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
+
     /**
      * Gets singleton instance.
      * This is the same as the instance used by the default {@link LocaleBeanUtilsBean} singleton.
@@ -88,9 +91,6 @@ public class LocaleConvertUtilsBean {
     public static LocaleConvertUtilsBean getInstance() {
         return LocaleBeanUtilsBean.getLocaleBeanUtilsInstance().getLocaleConvertUtils();
     }
-
-    /** The {@code Log} instance for this class. */
-    private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
 
     /** The locale - default for conversion. */
     private Locale defaultLocale = Locale.getDefault();

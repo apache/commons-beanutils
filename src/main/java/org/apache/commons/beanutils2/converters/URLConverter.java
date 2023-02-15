@@ -49,17 +49,6 @@ public final class URLConverter extends AbstractConverter<URL> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<URL> getDefaultType() {
-        return URL.class;
-    }
-
-    /**
      * <p>Converts a java.net.URL or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
@@ -76,6 +65,17 @@ public final class URLConverter extends AbstractConverter<URL> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 1.8.0
+     */
+    @Override
+    protected Class<URL> getDefaultType() {
+        return URL.class;
     }
 
 }

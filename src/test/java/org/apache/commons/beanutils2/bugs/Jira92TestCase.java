@@ -29,13 +29,6 @@ import junit.framework.TestCase;
 public class Jira92TestCase extends TestCase {
 
     /**
-     * Test copy properties where the target bean only has an indexed setter.
-     */
-    public void testIssue_BEANUTILS_92_copyProperties_indexed_only_setter() throws Exception {
-        PropertyUtils.copyProperties(new Jira92TestBean(), new TestBean());
-    }
-
-    /**
      * Test bean which has only indexed setter
      */
     public static class Jira92TestBean {
@@ -51,5 +44,12 @@ public class Jira92TestCase extends TestCase {
         public void setDateArrayProperty(final int index, final java.util.Date date) {
             this.dateArrayProperty[index] = date;
         }
+    }
+
+    /**
+     * Test copy properties where the target bean only has an indexed setter.
+     */
+    public void testIssue_BEANUTILS_92_copyProperties_indexed_only_setter() throws Exception {
+        PropertyUtils.copyProperties(new Jira92TestBean(), new TestBean());
     }
 }

@@ -29,6 +29,10 @@ import junit.framework.TestSuite;
  */
 public class EnumConverterTestCase extends TestCase {
 
+    public enum PizzaStatus {
+        ORDERED, READY, DELIVERED;
+    }
+
     public static TestSuite suite() {
         return new TestSuite(EnumConverterTestCase.class);
     }
@@ -83,9 +87,5 @@ public class EnumConverterTestCase extends TestCase {
         } catch (final ConversionException cex) {
             // expected result
         }
-    }
-
-    public enum PizzaStatus {
-        ORDERED, READY, DELIVERED;
     }
 }

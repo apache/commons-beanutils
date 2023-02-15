@@ -63,6 +63,123 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     }
 
     /**
+     * Test Converting an invalid value.
+     */
+    protected void convertInvalid(final BaseLocaleConverter<T> converter, final Object expectedValue) {
+        convertInvalid(converter, "", expectedValue);
+    }
+
+    /**
+     * Test Converting an invalid value.
+     */
+    protected void convertInvalid(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
+        // Convert value with no pattern
+        try {
+            result = converter.convert("xyz");
+            if (expectedValue == null) {
+                fail("Expected ConversionException if no default value " + msgId + ", converter = " + converter);
+            }
+        } catch (final Exception e) {
+            if (expectedValue != null) {
+                fail("Expected default value '" + msgId + "' threw " + e + ", expectedValue = '" + expectedValue + "'");
+            }
+        }
+
+        if (expectedValue != null) {
+            assertEquals("Check invalid conversion is default " + msgId, expectedValue, result);
+        }
+    }
+
+    /**
+     * Test Converting Null value.
+     */
+    protected void convertNull(final BaseLocaleConverter<T> converter, final Object expectedValue) {
+        convertNull(converter, "", expectedValue);
+    }
+
+    /**
+     * Test Converting Null value.
+     */
+    protected void convertNull(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
+        // Convert value with no pattern
+        try {
+            result = converter.convert(null);
+        } catch (final Exception e) {
+            fail("Null conversion " + msgId + " threw " + e);
+        }
+
+        if (expectedValue == null) {
+            assertNull("Check null conversion is null '" + msgId + "' result=" + result, result);
+        } else {
+            assertEquals("Check null conversion is default " + msgId, expectedValue, result);
+        }
+    }
+
+    /**
+     * Test Converting Value WITHOUT a pattern
+     */
+    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final Object value, final Object expectedValue) {
+        convertValueNoPattern(converter, "", value, expectedValue);
+    }
+
+    /**
+     * Test Converting Value WITHOUT a pattern
+     */
+    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final Object expectedValue) {
+        // Convert value with no pattern
+        try {
+            result = converter.convert(value);
+        } catch (final Exception e) {
+            fail("No Pattern conversion threw '" + msgId + "' threw " + e);
+        }
+        assertEquals("Check conversion value without pattern " + msgId, expectedValue, result);
+
+    }
+
+    /**
+     * Test Converting Value To a specified Type
+     */
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern,
+            final Object expectedValue) {
+        convertValueToType(converter, "", clazz, value, pattern, expectedValue);
+    }
+
+    /**
+     * Test Converting Value To a specified Type
+     */
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value,
+            final String pattern, final Object expectedValue) {
+        // Convert value with no pattern
+        try {
+            result = converter.convert(clazz, value, pattern);
+        } catch (final Exception e) {
+            fail("Type  conversion threw '" + msgId + "' threw " + e);
+        }
+        assertEquals("Check conversion value to type " + msgId, expectedValue, result);
+    }
+
+    /**
+     * Test Converting Value WITH a pattern
+     */
+    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final Object value, final String pattern, final Object expectedValue) {
+        convertValueWithPattern(converter, "", value, pattern, expectedValue);
+    }
+
+    /**
+     * Test Converting Value WITH a pattern
+     */
+    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern,
+            final Object expectedValue) {
+        // Convert value with no pattern
+        try {
+            result = converter.convert(value, pattern);
+        } catch (final Exception e) {
+            fail("Pattern conversion threw '" + msgId + "' threw " + e);
+        }
+        assertEquals("Check conversion value with pattern " + msgId, expectedValue, result);
+    }
+
+    /**
      * Sets up instance variables required by this test case.
      */
     @Override
@@ -117,123 +234,6 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         if (origLocale != null) {
             // System.out.println("Restoring default locale to " + origLocale);
             Locale.setDefault(origLocale);
-        }
-    }
-
-    /**
-     * Test Converting Value WITH a pattern
-     */
-    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final Object value, final String pattern, final Object expectedValue) {
-        convertValueWithPattern(converter, "", value, pattern, expectedValue);
-    }
-
-    /**
-     * Test Converting Value WITH a pattern
-     */
-    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern,
-            final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert(value, pattern);
-        } catch (final Exception e) {
-            fail("Pattern conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value with pattern " + msgId, expectedValue, result);
-    }
-
-    /**
-     * Test Converting Value WITHOUT a pattern
-     */
-    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final Object value, final Object expectedValue) {
-        convertValueNoPattern(converter, "", value, expectedValue);
-    }
-
-    /**
-     * Test Converting Value WITHOUT a pattern
-     */
-    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert(value);
-        } catch (final Exception e) {
-            fail("No Pattern conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value without pattern " + msgId, expectedValue, result);
-
-    }
-
-    /**
-     * Test Converting Value To a specified Type
-     */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern,
-            final Object expectedValue) {
-        convertValueToType(converter, "", clazz, value, pattern, expectedValue);
-    }
-
-    /**
-     * Test Converting Value To a specified Type
-     */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value,
-            final String pattern, final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert(clazz, value, pattern);
-        } catch (final Exception e) {
-            fail("Type  conversion threw '" + msgId + "' threw " + e);
-        }
-        assertEquals("Check conversion value to type " + msgId, expectedValue, result);
-    }
-
-    /**
-     * Test Converting Null value.
-     */
-    protected void convertNull(final BaseLocaleConverter<T> converter, final Object expectedValue) {
-        convertNull(converter, "", expectedValue);
-    }
-
-    /**
-     * Test Converting Null value.
-     */
-    protected void convertNull(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert(null);
-        } catch (final Exception e) {
-            fail("Null conversion " + msgId + " threw " + e);
-        }
-
-        if (expectedValue == null) {
-            assertNull("Check null conversion is null '" + msgId + "' result=" + result, result);
-        } else {
-            assertEquals("Check null conversion is default " + msgId, expectedValue, result);
-        }
-    }
-
-    /**
-     * Test Converting an invalid value.
-     */
-    protected void convertInvalid(final BaseLocaleConverter<T> converter, final Object expectedValue) {
-        convertInvalid(converter, "", expectedValue);
-    }
-
-    /**
-     * Test Converting an invalid value.
-     */
-    protected void convertInvalid(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
-        // Convert value with no pattern
-        try {
-            result = converter.convert("xyz");
-            if (expectedValue == null) {
-                fail("Expected ConversionException if no default value " + msgId + ", converter = " + converter);
-            }
-        } catch (final Exception e) {
-            if (expectedValue != null) {
-                fail("Expected default value '" + msgId + "' threw " + e + ", expectedValue = '" + expectedValue + "'");
-            }
-        }
-
-        if (expectedValue != null) {
-            assertEquals("Check invalid conversion is default " + msgId, expectedValue, result);
         }
     }
 

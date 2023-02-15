@@ -30,13 +30,19 @@ import junit.framework.TestSuite;
  */
 public class Jira359TestCase extends TestCase {
 
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira359TestCase(final String name) {
-        super(name);
+    public static class SimplePojoData {
+        private String[] jcrMixinTypes = new String[1];
+
+        public SimplePojoData() {
+        }
+
+        public String[] getJcrMixinTypes() {
+            return this.jcrMixinTypes;
+        }
+
+        public void setJcrMixinTypes(final String[] mixinTypes) {
+            this.jcrMixinTypes = mixinTypes;
+        }
     }
 
     /**
@@ -58,6 +64,15 @@ public class Jira359TestCase extends TestCase {
     }
 
     /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira359TestCase(final String name) {
+        super(name);
+    }
+
+    /**
      * Sets up.
      *
      * @throws Exception
@@ -65,6 +80,20 @@ public class Jira359TestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+    }
+
+    /**
+     * Show array contents.
+     */
+    private void showArray(final String text, final String[] array) {
+        if (array == null) {
+            System.out.println(text + " array is null");
+        } else {
+            System.out.println(text + " array length=" + array.length);
+            for (int i = 0; i < array.length; i++) {
+                System.out.println(text + " array[" + i + "]=" + array[i]);
+            }
+        }
     }
 
     /**
@@ -130,34 +159,5 @@ public class Jira359TestCase extends TestCase {
         showArray("Default WithoutColonAndNocoma", simplePojo.getJcrMixinTypes());
         assertEquals("array size", 1, simplePojo.getJcrMixinTypes().length);
         assertEquals("mixrereferencible", simplePojo.getJcrMixinTypes()[0]);
-    }
-
-    /**
-     * Show array contents.
-     */
-    private void showArray(final String text, final String[] array) {
-        if (array == null) {
-            System.out.println(text + " array is null");
-        } else {
-            System.out.println(text + " array length=" + array.length);
-            for (int i = 0; i < array.length; i++) {
-                System.out.println(text + " array[" + i + "]=" + array[i]);
-            }
-        }
-    }
-
-    public static class SimplePojoData {
-        private String[] jcrMixinTypes = new String[1];
-
-        public SimplePojoData() {
-        }
-
-        public String[] getJcrMixinTypes() {
-            return this.jcrMixinTypes;
-        }
-
-        public void setJcrMixinTypes(final String[] mixinTypes) {
-            this.jcrMixinTypes = mixinTypes;
-        }
     }
 }

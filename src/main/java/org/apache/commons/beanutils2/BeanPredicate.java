@@ -54,6 +54,42 @@ public class BeanPredicate<T> implements Predicate<T> {
     }
 
     /**
+     * Gets the {@code Predicate} to be applied to the value of the named property
+     * during {@link #test(Object)}.
+     * @return {@code Predicate}, not null
+     */
+    public Predicate<T> getPredicate() {
+        return predicate;
+    }
+
+    /**
+     * Gets the name of the property whose value is to be predicated.
+     * in the evaluation.
+     * @return the property name, not null
+     */
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    /**
+     * Sets the {@code Predicate} to be applied to the value of the named property
+     * during {@link #test(Object)}.
+     * @param predicate {@code Predicate}, not null
+     */
+    public void setPredicate(final Predicate<T> predicate) {
+        this.predicate = predicate;
+    }
+
+    /**
+     * Sets the name of the property whose value is to be predicated.
+     * @param propertyName the name of the property whose value is to be predicated,
+     * not null
+     */
+    public void setPropertyName(final String propertyName) {
+        this.propertyName = propertyName;
+    }
+
+    /**
      * Evaluates the given object by applying the {@link #getPredicate()}
      * to a property value named by {@link #getPropertyName()}.
      *
@@ -87,42 +123,6 @@ public class BeanPredicate<T> implements Predicate<T> {
         }
 
         return evaluation;
-    }
-
-    /**
-     * Gets the name of the property whose value is to be predicated.
-     * in the evaluation.
-     * @return the property name, not null
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    /**
-     * Sets the name of the property whose value is to be predicated.
-     * @param propertyName the name of the property whose value is to be predicated,
-     * not null
-     */
-    public void setPropertyName(final String propertyName) {
-        this.propertyName = propertyName;
-    }
-
-    /**
-     * Gets the {@code Predicate} to be applied to the value of the named property
-     * during {@link #test(Object)}.
-     * @return {@code Predicate}, not null
-     */
-    public Predicate<T> getPredicate() {
-        return predicate;
-    }
-
-    /**
-     * Sets the {@code Predicate} to be applied to the value of the named property
-     * during {@link #test(Object)}.
-     * @param predicate {@code Predicate}, not null
-     */
-    public void setPredicate(final Predicate<T> predicate) {
-        this.predicate = predicate;
     }
 
 }

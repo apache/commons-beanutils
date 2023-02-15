@@ -29,6 +29,18 @@ import junit.framework.TestCase;
  *
  */
 public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
+    public static final class CapsBean {
+        private URI mURI;
+
+        public URI getURI() {
+            return mURI;
+        }
+
+        public void setURI(final URI theURI) {
+            mURI = theURI;
+        }
+    }
+
     /**
      * Puts all property descriptors into a map so that they can be accessed by property name.
      *
@@ -104,17 +116,5 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
         assertNotNull("No write method for uri", aDescriptor.getWriteMethod());
 
         assertNull("Should not find mis-capitalized property", props.get("uRI"));
-    }
-
-    public static final class CapsBean {
-        private URI mURI;
-
-        public URI getURI() {
-            return mURI;
-        }
-
-        public void setURI(final URI theURI) {
-            mURI = theURI;
-        }
     }
 }

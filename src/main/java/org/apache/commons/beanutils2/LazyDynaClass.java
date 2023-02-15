@@ -87,16 +87,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Constructs a new LazyDynaClass with the specified name and properties.
-     *
-     * @param name Name of this DynaBean class
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaClass(final String name, final DynaProperty[] properties) {
-        this(name, LazyDynaBean.class, properties);
-    }
-
-    /**
      * Constructs a new LazyDynaClass with the specified name, DynaBean class and properties.
      *
      * @param name Name of this DynaBean class
@@ -108,52 +98,45 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * <p>Is this DynaClass currently restricted.</p>
-     * <p>If restricted, no changes to the existing registration of
-     *  property names, data types, readability, or writeability are allowed.</p>
-     * @return {@code true} if this {@link MutableDynaClass} cannot be changed
-     * otherwise {@code false}
-     */
-    @Override
-    public boolean isRestricted() {
-        return restricted;
-    }
-
-    /**
-     * <p>Set whether this DynaClass is currently restricted.</p>
-     * <p>If restricted, no changes to the existing registration of
-     *  property names, data types, readability, or writeability are allowed.</p>
-     * @param restricted {@code true} if this {@link MutableDynaClass} cannot
-     * be changed otherwise {@code false}
-     */
-    @Override
-    public void setRestricted(final boolean restricted) {
-        this.restricted = restricted;
-    }
-
-    /**
-     * Should this DynaClass return a {@code null} from
-     * the {@code getDynaProperty(name)} method if the property
-     * doesn't exist.
+     * Constructs a new LazyDynaClass with the specified name and properties.
      *
-     * @return {@code true</code> if a <code>null} {@link DynaProperty}
-     * should be returned if the property doesn't exist, otherwise
-     * {@code false} if a new {@link DynaProperty} should be created.
+     * @param name Name of this DynaBean class
+     * @param properties Property descriptors for the supported properties
      */
-    public boolean isReturnNull() {
-        return returnNull;
+    public LazyDynaClass(final String name, final DynaProperty[] properties) {
+        this(name, LazyDynaBean.class, properties);
     }
 
     /**
-     * Sets whether this DynaClass should return a {@code null} from
-     * the {@code getDynaProperty(name)} method if the property
-     * doesn't exist.
-     * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
-     * should be returned if the property doesn't exist, otherwise
-     * {@code false} if a new {@link DynaProperty} should be created.
+     * Add a new dynamic property.
+     *
+     * @param property Property the new dynamic property to add.
+     *
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
+     *  restricted, so no new properties can be added
      */
-    public void setReturnNull(final boolean returnNull) {
-        this.returnNull = returnNull;
+    protected void add(final DynaProperty property) {
+        if (property.getName() == null) {
+            throw new IllegalArgumentException("Property name is missing.");
+        }
+
+        if (isRestricted()) {
+            throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
+        }
+
+        // Check if property already exists
+        if (propertiesMap.get(property.getName()) != null) {
+            return;
+        }
+
+        // Create a new property array with the specified property
+        final DynaProperty[] oldProperties = getDynaProperties();
+        final DynaProperty[] newProperties = Arrays.copyOf(oldProperties, oldProperties.length + 1);
+        newProperties[oldProperties.length] = property;
+
+        // Update the properties
+        setProperties(newProperties);
     }
 
     /**
@@ -219,81 +202,6 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
     }
 
     /**
-     * Add a new dynamic property.
-     *
-     * @param property Property the new dynamic property to add.
-     *
-     * @throws IllegalArgumentException if name is null
-     * @throws IllegalStateException if this DynaClass is currently
-     *  restricted, so no new properties can be added
-     */
-    protected void add(final DynaProperty property) {
-        if (property.getName() == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
-        if (isRestricted()) {
-            throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
-        }
-
-        // Check if property already exists
-        if (propertiesMap.get(property.getName()) != null) {
-            return;
-        }
-
-        // Create a new property array with the specified property
-        final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = Arrays.copyOf(oldProperties, oldProperties.length + 1);
-        newProperties[oldProperties.length] = property;
-
-        // Update the properties
-        setProperties(newProperties);
-    }
-
-    /**
-     * Remove the specified dynamic property, and any associated data type,
-     * readability, and writeability, from this dynamic class.
-     * <strong>NOTE</strong> - This does <strong>NOT</strong> cause any
-     * corresponding property values to be removed from DynaBean instances
-     * associated with this DynaClass.
-     *
-     * @param name Name of the dynamic property to remove
-     *
-     * @throws IllegalArgumentException if name is null
-     * @throws IllegalStateException if this DynaClass is currently
-     *  restricted, so no properties can be removed
-     */
-    @Override
-    public void remove(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
-        if (isRestricted()) {
-            throw new IllegalStateException("DynaClass is currently restricted. No properties can be removed.");
-        }
-
-        // Ignore if property doesn't exist
-        if (propertiesMap.get(name) == null) {
-            return;
-        }
-
-        // Create a new property array of without the specified property
-        final DynaProperty[] oldProperties = getDynaProperties();
-        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
-        int j = 0;
-        for (final DynaProperty oldProperty : oldProperties) {
-            if (!name.equals(oldProperty.getName())) {
-                newProperties[j] = oldProperty;
-                j++;
-            }
-        }
-
-        // Update the properties
-        setProperties(newProperties);
-    }
-
-    /**
      * <p>Return a property descriptor for the specified property.</p>
      *
      * <p>If the property is not found and the {@code returnNull} indicator is
@@ -352,6 +260,98 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         }
 
         return propertiesMap.get(name) != null;
+    }
+
+    /**
+     * <p>Is this DynaClass currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
+     * @return {@code true} if this {@link MutableDynaClass} cannot be changed
+     * otherwise {@code false}
+     */
+    @Override
+    public boolean isRestricted() {
+        return restricted;
+    }
+
+    /**
+     * Should this DynaClass return a {@code null} from
+     * the {@code getDynaProperty(name)} method if the property
+     * doesn't exist.
+     *
+     * @return {@code true</code> if a <code>null} {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * {@code false} if a new {@link DynaProperty} should be created.
+     */
+    public boolean isReturnNull() {
+        return returnNull;
+    }
+
+    /**
+     * Remove the specified dynamic property, and any associated data type,
+     * readability, and writeability, from this dynamic class.
+     * <strong>NOTE</strong> - This does <strong>NOT</strong> cause any
+     * corresponding property values to be removed from DynaBean instances
+     * associated with this DynaClass.
+     *
+     * @param name Name of the dynamic property to remove
+     *
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
+     *  restricted, so no properties can be removed
+     */
+    @Override
+    public void remove(final String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Property name is missing.");
+        }
+
+        if (isRestricted()) {
+            throw new IllegalStateException("DynaClass is currently restricted. No properties can be removed.");
+        }
+
+        // Ignore if property doesn't exist
+        if (propertiesMap.get(name) == null) {
+            return;
+        }
+
+        // Create a new property array of without the specified property
+        final DynaProperty[] oldProperties = getDynaProperties();
+        final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
+        int j = 0;
+        for (final DynaProperty oldProperty : oldProperties) {
+            if (!name.equals(oldProperty.getName())) {
+                newProperties[j] = oldProperty;
+                j++;
+            }
+        }
+
+        // Update the properties
+        setProperties(newProperties);
+    }
+
+    /**
+     * <p>Set whether this DynaClass is currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
+     * @param restricted {@code true} if this {@link MutableDynaClass} cannot
+     * be changed otherwise {@code false}
+     */
+    @Override
+    public void setRestricted(final boolean restricted) {
+        this.restricted = restricted;
+    }
+
+    /**
+     * Sets whether this DynaClass should return a {@code null} from
+     * the {@code getDynaProperty(name)} method if the property
+     * doesn't exist.
+     * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * {@code false} if a new {@link DynaProperty} should be created.
+     */
+    public void setReturnNull(final boolean returnNull) {
+        this.returnNull = returnNull;
     }
 
 }

@@ -25,12 +25,17 @@ public class FluentIntrospectionTestBean extends AlphaBean {
 
     private String fluentGetProperty;
 
+    public String getFluentGetProperty() {
+        return fluentGetProperty;
+    }
+
     public String getStringProperty() {
         return stringProperty;
     }
 
-    public void setStringProperty(final String stringProperty) {
-        this.stringProperty = stringProperty;
+    public FluentIntrospectionTestBean setFluentGetProperty(final String fluentGetProperty) {
+        this.fluentGetProperty = fluentGetProperty;
+        return this;
     }
 
     public FluentIntrospectionTestBean setFluentProperty(final String value) {
@@ -38,12 +43,7 @@ public class FluentIntrospectionTestBean extends AlphaBean {
         return this;
     }
 
-    public String getFluentGetProperty() {
-        return fluentGetProperty;
-    }
-
-    public FluentIntrospectionTestBean setFluentGetProperty(final String fluentGetProperty) {
-        this.fluentGetProperty = fluentGetProperty;
-        return this;
+    public void setStringProperty(final String stringProperty) {
+        this.stringProperty = stringProperty;
     }
 }

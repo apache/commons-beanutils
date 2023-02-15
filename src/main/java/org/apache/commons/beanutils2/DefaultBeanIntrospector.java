@@ -63,37 +63,6 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
     }
 
     /**
-     * Performs introspection of a specific Java class. This implementation uses
-     * the {@code java.beans.Introspector.getBeanInfo()} method to obtain
-     * all property descriptors for the current class and adds them to the
-     * passed in introspection context.
-     *
-     * @param icontext the introspection context
-     */
-    @Override
-    public void introspect(final IntrospectionContext icontext) {
-        BeanInfo beanInfo = null;
-        try {
-            beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
-        } catch (final IntrospectionException e) {
-            // no descriptors are added to the context
-            log.error(
-                    "Error when inspecting class " + icontext.getTargetClass(),
-                    e);
-            return;
-        }
-
-        PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();
-        if (descriptors == null) {
-            descriptors = PropertyDescriptors.EMPTY_ARRAY;
-        }
-
-        handleIndexedPropertyDescriptors(icontext.getTargetClass(),
-                descriptors);
-        icontext.addPropertyDescriptors(descriptors);
-    }
-
-    /**
      * This method fixes an issue where IndexedPropertyDescriptor behaves
      * differently in different versions of the JDK for 'indexed' properties
      * which use java.util.List (rather than an array). It implements a
@@ -175,5 +144,36 @@ public class DefaultBeanIntrospector implements BeanIntrospector {
                 }
             }
         }
+    }
+
+    /**
+     * Performs introspection of a specific Java class. This implementation uses
+     * the {@code java.beans.Introspector.getBeanInfo()} method to obtain
+     * all property descriptors for the current class and adds them to the
+     * passed in introspection context.
+     *
+     * @param icontext the introspection context
+     */
+    @Override
+    public void introspect(final IntrospectionContext icontext) {
+        BeanInfo beanInfo = null;
+        try {
+            beanInfo = Introspector.getBeanInfo(icontext.getTargetClass());
+        } catch (final IntrospectionException e) {
+            // no descriptors are added to the context
+            log.error(
+                    "Error when inspecting class " + icontext.getTargetClass(),
+                    e);
+            return;
+        }
+
+        PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();
+        if (descriptors == null) {
+            descriptors = PropertyDescriptors.EMPTY_ARRAY;
+        }
+
+        handleIndexedPropertyDescriptors(icontext.getTargetClass(),
+                descriptors);
+        icontext.addPropertyDescriptors(descriptors);
     }
 }

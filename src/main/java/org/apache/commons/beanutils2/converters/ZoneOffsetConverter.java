@@ -51,17 +51,6 @@ public final class ZoneOffsetConverter extends AbstractConverter<ZoneOffset> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0
-     */
-    @Override
-    protected Class<ZoneOffset> getDefaultType() {
-        return ZoneOffset.class;
-    }
-
-    /**
      * <p>Converts a java.time.ZoneOffset or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
@@ -78,6 +67,17 @@ public final class ZoneOffsetConverter extends AbstractConverter<ZoneOffset> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0
+     */
+    @Override
+    protected Class<ZoneOffset> getDefaultType() {
+        return ZoneOffset.class;
     }
 
 }

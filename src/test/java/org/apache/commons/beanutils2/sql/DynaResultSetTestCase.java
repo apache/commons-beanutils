@@ -35,6 +35,15 @@ import junit.framework.TestSuite;
 public class DynaResultSetTestCase extends TestCase {
 
     /**
+     * Creates the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(DynaResultSetTestCase.class);
+
+    }
+
+    /**
      * The mock result set DynaClass to be tested.
      */
     protected ResultSetDynaClass dynaClass = null;
@@ -67,15 +76,6 @@ public class DynaResultSetTestCase extends TestCase {
     }
 
     /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(DynaResultSetTestCase.class);
-
-    }
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
@@ -85,9 +85,14 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-    public void testGetName() {
+    public void testGetDynaProperties() {
 
-        assertEquals("DynaClass name", "org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName());
+        final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
+        assertNotNull("dynaProps exists", dynaProps);
+        assertEquals("dynaProps length", columns.length, dynaProps.length);
+        for (int i = 0; i < columns.length; i++) {
+            assertEquals("Property " + columns[i], columns[i], dynaProps[i].getName());
+        }
 
     }
 
@@ -113,27 +118,9 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-    public void testGetDynaProperties() {
+    public void testGetName() {
 
-        final DynaProperty[] dynaProps = dynaClass.getDynaProperties();
-        assertNotNull("dynaProps exists", dynaProps);
-        assertEquals("dynaProps length", columns.length, dynaProps.length);
-        for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i], columns[i], dynaProps[i].getName());
-        }
-
-    }
-
-    public void testNewInstance() {
-
-        try {
-            dynaClass.newInstance();
-            fail("Did not throw UnsupportedOperationException()");
-        } catch (final UnsupportedOperationException e) {
-            // Expected result
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
+        assertEquals("DynaClass name", "org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName());
 
     }
 
@@ -235,6 +222,19 @@ public class DynaResultSetTestCase extends TestCase {
         assertNotNull("stringProperty exists", stringProperty);
         assertTrue("stringProperty type", stringProperty instanceof String);
         assertEquals("stringProperty value", "This is a string", (String) stringProperty);
+
+    }
+
+    public void testNewInstance() {
+
+        try {
+            dynaClass.newInstance();
+            fail("Did not throw UnsupportedOperationException()");
+        } catch (final UnsupportedOperationException e) {
+            // Expected result
+        } catch (final Exception e) {
+            fail("Threw exception " + e);
+        }
 
     }
 

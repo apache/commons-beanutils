@@ -27,15 +27,6 @@ import org.apache.commons.beanutils2.bugs.Jira18TestCase;
  */
 public class Jira18BeanFactory {
 
-    /**
-     * Factory method which creates package friendly beans.
-     *
-     * @return The a package friendly bean with public methods
-     */
-    public static Object createBean() {
-        return new PackageFriendlyBean();
-    }
-
     /* =============== Package Friendly Bean =============== */
     static class PackageFriendlyBean {
 
@@ -50,24 +41,6 @@ public class Jira18BeanFactory {
         }
 
         /**
-         * Gets simple property.
-         *
-         * @return The simple value
-         */
-        public String getSimple() {
-            return simple;
-        }
-
-        /**
-         * Sets simple property.
-         *
-         * @param simple The simple value
-         */
-        public void setSimple(final String simple) {
-            this.simple = simple;
-        }
-
-        /**
          * Gets indexed property.
          *
          * @param index The index
@@ -75,16 +48,6 @@ public class Jira18BeanFactory {
          */
         public String getIndexed(final int index) {
             return indexed[index];
-        }
-
-        /**
-         * Sets indexed property.
-         *
-         * @param index The index
-         * @param value The indexed value
-         */
-        public void setIndexed(final int index, final String value) {
-            this.indexed[index] = value;
         }
 
         /**
@@ -98,6 +61,25 @@ public class Jira18BeanFactory {
         }
 
         /**
+         * Gets simple property.
+         *
+         * @return The simple value
+         */
+        public String getSimple() {
+            return simple;
+        }
+
+        /**
+         * Sets indexed property.
+         *
+         * @param index The index
+         * @param value The indexed value
+         */
+        public void setIndexed(final int index, final String value) {
+            this.indexed[index] = value;
+        }
+
+        /**
          * Sets mapped property.
          *
          * @param key   The mapped key
@@ -107,6 +89,24 @@ public class Jira18BeanFactory {
             mapped.put(key, value);
         }
 
+        /**
+         * Sets simple property.
+         *
+         * @param simple The simple value
+         */
+        public void setSimple(final String simple) {
+            this.simple = simple;
+        }
+
+    }
+
+    /**
+     * Factory method which creates package friendly beans.
+     *
+     * @return The a package friendly bean with public methods
+     */
+    public static Object createBean() {
+        return new PackageFriendlyBean();
     }
 
 }

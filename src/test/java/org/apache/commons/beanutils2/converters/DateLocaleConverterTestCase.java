@@ -104,151 +104,14 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
         super.tearDown();
     }
 
-    public void testSetLenient() {
-        // make sure that date format works as expected
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
-
-        // test with no leniency
-        dateFormat.setLenient(false);
-
-        try {
-
-            dateFormat.parse("Feb 10, 2001");
-
-        } catch (final ParseException e) {
-            fail("Could not parse date (1) - " + e.getMessage());
-        }
-
-        try {
-
-            dateFormat.parse("Feb 31, 2001");
-            fail("Parsed illegal date (1)");
-
-        } catch (final ParseException e) {
-            // that's what we expected
-        }
-
-        // test with leniency
-        dateFormat.setLenient(true);
-
-        try {
-
-            dateFormat.parse("Feb 10, 2001");
-
-        } catch (final ParseException e) {
-            fail("Could not parse date (2) - " + e.getMessage());
-        }
-
-        try {
-
-            dateFormat.parse("Feb 31, 2001");
-
-        } catch (final ParseException e) {
-            fail("Could not parse date (3) - " + e.getMessage());
-        }
-
-        // now repeat tests for converter
-        // test with no leniency
-        final Builder<?, Date> builder = DateLocaleConverter.builder().setLocale(Locale.UK).setLenient(false).setPattern("MMM dd, yyyy");
-        DateLocaleConverter<Date> converter = builder.get();
-
-        assertEquals("Set lenient failed", converter.isLenient(), false);
-
-        try {
-
-            converter.convert("Feb 10, 2001");
-
-        } catch (final ConversionException e) {
-            fail("Could not parse date (4) - " + e.getMessage());
-        }
-
-        try {
-
-            converter.convert("Feb 31, 2001");
-            assertEquals("Set lenient failed", converter.isLenient(), false);
-            fail("Parsed illegal date (2)");
-
-        } catch (final ConversionException e) {
-            // that's what we expected
-        }
-
-        // test with leniency
-        converter = builder.setLenient(true).get();
-        assertEquals("Set lenient failed", converter.isLenient(), true);
-
-        try {
-
-            converter.convert("Feb 10, 2001");
-
-        } catch (final ConversionException e) {
-            fail("Could not parse date (5) - " + e.getMessage());
-        }
-
-        try {
-
-            converter.convert("Feb 31, 2001");
-
-        } catch (final ConversionException e) {
-            fail("Could not parse date (6) - " + e.getMessage());
-        }
-    }
-
     /**
-     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     * Test Calendar
      */
-    public void testConstructorMain() {
-
-        // Skip this test if no valid symbols for the locale
-        if (!validLocalDateSymbols) {
-            LOG.error("Invalid locale symbols *** skipping testConstructorMain() **");
-            return;
-        }
-
-        // ------------- Construct with localized pattern ------------
-        // @formatter:off
-        converter = DateLocaleConverter.builder()
-                .setDefault(defaultValue)
-                .setLocale(localizedLocale)
-                .setPattern(localizedDatePattern)
-                .setLocalizedPattern(true)
-                .get();
-        // @formatter:on
-
-        convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
-        convertInvalid(converter, "(A)", defaultValue);
-        convertNull(converter, "(A)", defaultValue);
-
-        // Convert value in the wrong format - should return default value
-        convertValueNoPattern(converter, "(B)", defaultDateValue, defaultValue);
-
-        // Convert with non-localized pattern - should return default value
-        convertValueWithPattern(converter, "(B)", localizedDateValue, defaultDatePattern, defaultValue);
-
-        // **************************************************************************
-        // Convert with specified type
-        //
-        // BaseLocaleConverter completely ignores the type - so even if we specify
-        // Double.class here it still returns a Date.
-        // **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
-        // convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
-
-        // ------------- Construct with non-localized pattern ------------
-        // @formatter:off
-        converter = DateLocaleConverter.builder()
-                .setDefault(defaultValue)
-                .setLocale(localizedLocale)
-                .setPattern(defaultDatePattern)
-                .setLocalizedPattern(false)
-                .get();
-        // @formatter:on
-
-        convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
-        convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);
-        convertInvalid(converter, "(C)", defaultValue);
-        convertNull(converter, "(C)", defaultValue);
-
+    public void testCalendarObject() {
+        converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
+        final java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTime((java.util.Date) expectedValue);
+        assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
     }
 
     /**
@@ -420,6 +283,72 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
     }
 
     /**
+     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     */
+    public void testConstructorMain() {
+
+        // Skip this test if no valid symbols for the locale
+        if (!validLocalDateSymbols) {
+            LOG.error("Invalid locale symbols *** skipping testConstructorMain() **");
+            return;
+        }
+
+        // ------------- Construct with localized pattern ------------
+        // @formatter:off
+        converter = DateLocaleConverter.builder()
+                .setDefault(defaultValue)
+                .setLocale(localizedLocale)
+                .setPattern(localizedDatePattern)
+                .setLocalizedPattern(true)
+                .get();
+        // @formatter:on
+
+        convertValueNoPattern(converter, "(A)", localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, "(A)", localizedDateValue, localizedDatePattern, expectedValue);
+        convertInvalid(converter, "(A)", defaultValue);
+        convertNull(converter, "(A)", defaultValue);
+
+        // Convert value in the wrong format - should return default value
+        convertValueNoPattern(converter, "(B)", defaultDateValue, defaultValue);
+
+        // Convert with non-localized pattern - should return default value
+        convertValueWithPattern(converter, "(B)", localizedDateValue, defaultDatePattern, defaultValue);
+
+        // **************************************************************************
+        // Convert with specified type
+        //
+        // BaseLocaleConverter completely ignores the type - so even if we specify
+        // Double.class here it still returns a Date.
+        // **** This has been changed due to BEANUTILS-449 ****
+        // **************************************************************************
+        // convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
+
+        // ------------- Construct with non-localized pattern ------------
+        // @formatter:off
+        converter = DateLocaleConverter.builder()
+                .setDefault(defaultValue)
+                .setLocale(localizedLocale)
+                .setPattern(defaultDatePattern)
+                .setLocalizedPattern(false)
+                .get();
+        // @formatter:on
+
+        convertValueNoPattern(converter, "(C)", localizedDateValue, expectedValue);
+        convertValueWithPattern(converter, "(C)", localizedDateValue, defaultDatePattern, expectedValue);
+        convertInvalid(converter, "(C)", defaultValue);
+        convertNull(converter, "(C)", defaultValue);
+
+    }
+
+    /**
+     * Test java.util.Date
+     */
+    public void testDateObject() {
+        converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
+        assertEquals("java.util.Date", expectedValue, converter.convert(expectedValue));
+    }
+
+    /**
      * Test invalid date
      */
     public void testInvalidDate() {
@@ -440,22 +369,93 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
     }
 
-    /**
-     * Test java.util.Date
-     */
-    public void testDateObject() {
-        converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
-        assertEquals("java.util.Date", expectedValue, converter.convert(expectedValue));
-    }
+    public void testSetLenient() {
+        // make sure that date format works as expected
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.UK);
 
-    /**
-     * Test Calendar
-     */
-    public void testCalendarObject() {
-        converter = DateLocaleConverter.builder().setLocale(defaultLocale).get();
-        final java.util.Calendar calendar = java.util.Calendar.getInstance();
-        calendar.setTime((java.util.Date) expectedValue);
-        assertEquals("java.util.Calendar", expectedValue, converter.convert(calendar));
+        // test with no leniency
+        dateFormat.setLenient(false);
+
+        try {
+
+            dateFormat.parse("Feb 10, 2001");
+
+        } catch (final ParseException e) {
+            fail("Could not parse date (1) - " + e.getMessage());
+        }
+
+        try {
+
+            dateFormat.parse("Feb 31, 2001");
+            fail("Parsed illegal date (1)");
+
+        } catch (final ParseException e) {
+            // that's what we expected
+        }
+
+        // test with leniency
+        dateFormat.setLenient(true);
+
+        try {
+
+            dateFormat.parse("Feb 10, 2001");
+
+        } catch (final ParseException e) {
+            fail("Could not parse date (2) - " + e.getMessage());
+        }
+
+        try {
+
+            dateFormat.parse("Feb 31, 2001");
+
+        } catch (final ParseException e) {
+            fail("Could not parse date (3) - " + e.getMessage());
+        }
+
+        // now repeat tests for converter
+        // test with no leniency
+        final Builder<?, Date> builder = DateLocaleConverter.builder().setLocale(Locale.UK).setLenient(false).setPattern("MMM dd, yyyy");
+        DateLocaleConverter<Date> converter = builder.get();
+
+        assertEquals("Set lenient failed", converter.isLenient(), false);
+
+        try {
+
+            converter.convert("Feb 10, 2001");
+
+        } catch (final ConversionException e) {
+            fail("Could not parse date (4) - " + e.getMessage());
+        }
+
+        try {
+
+            converter.convert("Feb 31, 2001");
+            assertEquals("Set lenient failed", converter.isLenient(), false);
+            fail("Parsed illegal date (2)");
+
+        } catch (final ConversionException e) {
+            // that's what we expected
+        }
+
+        // test with leniency
+        converter = builder.setLenient(true).get();
+        assertEquals("Set lenient failed", converter.isLenient(), true);
+
+        try {
+
+            converter.convert("Feb 10, 2001");
+
+        } catch (final ConversionException e) {
+            fail("Could not parse date (5) - " + e.getMessage());
+        }
+
+        try {
+
+            converter.convert("Feb 31, 2001");
+
+        } catch (final ConversionException e) {
+            fail("Could not parse date (6) - " + e.getMessage());
+        }
     }
 
 }

@@ -57,21 +57,97 @@ public class Jira61TestCase {
     }
 
     /**
+     * Test {@link BeanUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_from_WrapDynaBean() throws Exception {
+        final String value = "ORIG TARGET VALUE";
+        final TestBean targetBean = Jira61BeanFactory.createBean();
+        targetBean.setSimpleWriteOnly(value);
+        BeanUtils.copyProperties(targetBean, wrapDynaBean);
+
+        assertEquals(value, targetBean.getSimpleReadOnly());
+    }
+
+    /**
+     * Test {@link BeanUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_to_WrapDynaBean() throws Exception {
+        final String value = "copied simpleReadOnly";
+        final Map<String, Object> source = new HashMap<>();
+        source.put("simpleReadOnly", value);
+        BeanUtils.copyProperties(wrapDynaBean, source);
+
+        assertNotEquals(value, testBean.getSimpleReadOnly());
+    }
+
+    /**
+     * Test {@link PropertyUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_from_WrapDynaBean() throws Exception {
+        final String value = "ORIG TARGET VALUE";
+        final TestBean targetBean = Jira61BeanFactory.createBean();
+        targetBean.setSimpleWriteOnly(value);
+        PropertyUtils.copyProperties(targetBean, wrapDynaBean);
+
+        assertEquals(value, targetBean.getSimpleReadOnly());
+    }
+
+    /**
+     * Test {@link PropertyUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_to_WrapDynaBean() throws Exception {
+        final String expected = "copied simpleReadOnly";
+        final Map<String, Object> source = new HashMap<>();
+        source.put("simpleReadOnly", expected);
+        PropertyUtils.copyProperties(wrapDynaBean, source);
+
+        assertNotEquals(expected, testBean.getSimpleReadOnly());
+    }
+
+    /**
+     * Test {@link PropertyUtils#getProperty(Object, String)} for simple properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty() {
+        assertAll(() -> assertEquals(testBean.getSimpleReadOnly(), PropertyUtils.getProperty(wrapDynaBean, "simpleReadOnly")),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    PropertyUtils.getProperty(wrapDynaBean, "simpleWriteOnly");
+                }));
+    }
+
+    /**
+     * Test {@link PropertyUtils#getProperty(Object, String)} for indexed properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty_Indexed() {
+        assertAll(() -> assertEquals(testBean.getIndexedReadOnly(0), PropertyUtils.getProperty(wrapDynaBean, "indexedReadOnly[0]")),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    PropertyUtils.getProperty(wrapDynaBean, "indexedWriteOnly[0]");
+                }));
+    }
+
+    /**
+     * Test {@link PropertyUtils#getProperty(Object, String)} for mapped properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty_Mapped() {
+        assertAll(() -> assertEquals(testBean.getMappedReadOnly("foo-key"), PropertyUtils.getProperty(wrapDynaBean, "mappedReadOnly(foo-key)")),
+                () -> assertThrows(IllegalArgumentException.class, () -> {
+                    PropertyUtils.getProperty(wrapDynaBean, "mappedWriteOnly(foo-key)");
+                }));
+    }
+
+    /**
      * Test {@link PropertyUtils#isReadable(Object, String)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_61_PropertyUtils_isReadable() {
         assertAll(() -> assertTrue(PropertyUtils.isReadable(wrapDynaBean, "simpleReadOnly")),
                 () -> assertFalse(PropertyUtils.isReadable(wrapDynaBean, "simpleWriteOnly")));
-    }
-
-    /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)} for simple properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_isWriteable() {
-        assertAll(() -> assertFalse(PropertyUtils.isWriteable(wrapDynaBean, "simpleReadOnly")),
-                () -> assertTrue(PropertyUtils.isWriteable(wrapDynaBean, "simpleWriteOnly")));
     }
 
     /**
@@ -93,6 +169,15 @@ public class Jira61TestCase {
     }
 
     /**
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for simple properties.
+     */
+    @Test
+    public void testIssue_BEANUTILS_61_PropertyUtils_isWriteable() {
+        assertAll(() -> assertFalse(PropertyUtils.isWriteable(wrapDynaBean, "simpleReadOnly")),
+                () -> assertTrue(PropertyUtils.isWriteable(wrapDynaBean, "simpleWriteOnly")));
+    }
+
+    /**
      * Test {@link PropertyUtils#isWriteable(Object, String)} for indexed properties.
      */
     @Test
@@ -111,17 +196,6 @@ public class Jira61TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)} for simple properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty() {
-        assertAll(() -> assertEquals(testBean.getSimpleReadOnly(), PropertyUtils.getProperty(wrapDynaBean, "simpleReadOnly")),
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    PropertyUtils.getProperty(wrapDynaBean, "simpleWriteOnly");
-                }));
-    }
-
-    /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)} for simple properties.
      */
     @Test
@@ -132,17 +206,6 @@ public class Jira61TestCase {
             PropertyUtils.setProperty(wrapDynaBean, "simpleWriteOnly", "SIMPLE-BAR");
             assertEquals("SIMPLE-BAR", testBean.getSimpleReadOnly());
         });
-    }
-
-    /**
-     * Test {@link PropertyUtils#getProperty(Object, String)} for indexed properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty_Indexed() {
-        assertAll(() -> assertEquals(testBean.getIndexedReadOnly(0), PropertyUtils.getProperty(wrapDynaBean, "indexedReadOnly[0]")),
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    PropertyUtils.getProperty(wrapDynaBean, "indexedWriteOnly[0]");
-                }));
     }
 
     /**
@@ -159,17 +222,6 @@ public class Jira61TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)} for mapped properties.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_getProperty_Mapped() {
-        assertAll(() -> assertEquals(testBean.getMappedReadOnly("foo-key"), PropertyUtils.getProperty(wrapDynaBean, "mappedReadOnly(foo-key)")),
-                () -> assertThrows(IllegalArgumentException.class, () -> {
-                    PropertyUtils.getProperty(wrapDynaBean, "mappedWriteOnly(foo-key)");
-                }));
-    }
-
-    /**
      * Test {@link PropertyUtils#setProperty(Object, String, Object)} for mapped properties.
      */
     @Test
@@ -180,57 +232,5 @@ public class Jira61TestCase {
             PropertyUtils.setProperty(wrapDynaBean, "mappedWriteOnly(foo-key)", "MAPPED-BAR");
             assertEquals("MAPPED-BAR", testBean.getMappedReadOnly("foo-key"));
         });
-    }
-
-    /**
-     * Test {@link PropertyUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_to_WrapDynaBean() throws Exception {
-        final String expected = "copied simpleReadOnly";
-        final Map<String, Object> source = new HashMap<>();
-        source.put("simpleReadOnly", expected);
-        PropertyUtils.copyProperties(wrapDynaBean, source);
-
-        assertNotEquals(expected, testBean.getSimpleReadOnly());
-    }
-
-    /**
-     * Test {@link PropertyUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_from_WrapDynaBean() throws Exception {
-        final String value = "ORIG TARGET VALUE";
-        final TestBean targetBean = Jira61BeanFactory.createBean();
-        targetBean.setSimpleWriteOnly(value);
-        PropertyUtils.copyProperties(targetBean, wrapDynaBean);
-
-        assertEquals(value, targetBean.getSimpleReadOnly());
-    }
-
-    /**
-     * Test {@link BeanUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_to_WrapDynaBean() throws Exception {
-        final String value = "copied simpleReadOnly";
-        final Map<String, Object> source = new HashMap<>();
-        source.put("simpleReadOnly", value);
-        BeanUtils.copyProperties(wrapDynaBean, source);
-
-        assertNotEquals(value, testBean.getSimpleReadOnly());
-    }
-
-    /**
-     * Test {@link BeanUtils#copyProperties(Object, Object)} to a read-only WrapDynaBean property.
-     */
-    @Test
-    public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_from_WrapDynaBean() throws Exception {
-        final String value = "ORIG TARGET VALUE";
-        final TestBean targetBean = Jira61BeanFactory.createBean();
-        targetBean.setSimpleWriteOnly(value);
-        BeanUtils.copyProperties(targetBean, wrapDynaBean);
-
-        assertEquals(value, targetBean.getSimpleReadOnly());
     }
 }

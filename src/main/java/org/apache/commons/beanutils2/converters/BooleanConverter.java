@@ -46,6 +46,33 @@ package org.apache.commons.beanutils2.converters;
 public final class BooleanConverter extends AbstractConverter<Boolean> {
 
     /**
+     * Copies the provided array, and ensures that
+     * all the strings in the newly created array contain only lower-case
+     * letters.
+     * <p>
+     * Using this method to copy string arrays means that changes to the
+     * src array do not modify the dst array.
+     * </p>
+     */
+    private static String[] copyStrings(final String[] src) {
+        final String[] dst = new String[src.length];
+        for(int i=0; i<src.length; ++i) {
+            dst[i] = toLowerCase(src[i]);
+        }
+        return dst;
+    }
+
+    /**
+     * The set of strings that are known to map to Boolean.TRUE.
+     */
+    private String[] trueStrings = {"true", "yes", "y", "on", "1"};
+
+    /**
+     * The set of strings that are known to map to Boolean.FALSE.
+     */
+    private String[] falseStrings = {"false", "no", "n", "off", "0"};
+
+    /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
      * if a conversion error occurs, ie the string value being converted is
@@ -123,27 +150,6 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
     }
 
     /**
-     * The set of strings that are known to map to Boolean.TRUE.
-     */
-    private String[] trueStrings = {"true", "yes", "y", "on", "1"};
-
-    /**
-     * The set of strings that are known to map to Boolean.FALSE.
-     */
-    private String[] falseStrings = {"false", "no", "n", "off", "0"};
-
-    /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<Boolean> getDefaultType() {
-        return Boolean.class;
-    }
-
-    /**
      * Converts the specified input object into an output object of the
      * specified type.
      *
@@ -190,19 +196,13 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
 
 
     /**
-     * Copies the provided array, and ensures that
-     * all the strings in the newly created array contain only lower-case
-     * letters.
-     * <p>
-     * Using this method to copy string arrays means that changes to the
-     * src array do not modify the dst array.
-     * </p>
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 1.8.0
      */
-    private static String[] copyStrings(final String[] src) {
-        final String[] dst = new String[src.length];
-        for(int i=0; i<src.length; ++i) {
-            dst[i] = toLowerCase(src[i]);
-        }
-        return dst;
+    @Override
+    protected Class<Boolean> getDefaultType() {
+        return Boolean.class;
     }
 }

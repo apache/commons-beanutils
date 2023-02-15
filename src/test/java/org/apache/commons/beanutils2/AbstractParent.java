@@ -27,6 +27,11 @@ public abstract class AbstractParent {
         return child;
     }
 
+    public String testAddChild(final Child child) {
+        this.child = child;
+        return child.getName();
+    }
+
     /**
      * Method which matches signature but which has wrong parameters
      */
@@ -34,21 +39,16 @@ public abstract class AbstractParent {
         return null;
     }
 
+    public String testAddChild2(final String ignore, final Child child) {
+        this.child = child;
+        return child.getName();
+    }
+
     /**
      * Method which matches signature but which has wrong parameters
      */
     public String testAddChild2(final String ignore, final String badParameter) {
         return null;
-    }
-
-    public String testAddChild(final Child child) {
-        this.child = child;
-        return child.getName();
-    }
-
-    public String testAddChild2(final String ignore, final Child child) {
-        this.child = child;
-        return child.getName();
     }
 
 }

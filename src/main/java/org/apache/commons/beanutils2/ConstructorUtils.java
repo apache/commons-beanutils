@@ -423,15 +423,6 @@ public class ConstructorUtils {
         return ctor.newInstance(args);
     }
 
-    private static Object[] toArray(final Object arg) {
-        Object[] args = null;
-        if (arg != null) {
-            args = new Object[] { arg };
-        }
-        return args;
-    }
-
-
     /**
      * Delegates to {@link Array#newInstance(Class, int)}.
      *
@@ -444,6 +435,15 @@ public class ConstructorUtils {
     @SuppressWarnings("unchecked")
     public static <T> T[] newArray(final Class<T> componentType, final int length) {
         return (T[]) Array.newInstance(componentType, length);
+    }
+
+
+    private static Object[] toArray(final Object arg) {
+        Object[] args = null;
+        if (arg != null) {
+            args = new Object[] { arg };
+        }
+        return args;
     }
 
 }

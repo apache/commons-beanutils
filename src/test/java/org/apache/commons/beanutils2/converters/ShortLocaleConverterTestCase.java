@@ -52,56 +52,6 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
     }
 
     /**
-     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
-     */
-    public void testConstructorMain() {
-
-        // ------------- Construct with localized pattern ------------
-        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
-                .setLocalizedPattern(true).get();
-
-        convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
-        convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
-        convertInvalid(converter, "(A)", defaultValue);
-        convertNull(converter, "(A)", defaultValue);
-
-        // **************************************************************************
-        // Convert value in the wrong format - maybe you would expect it to throw an
-        // exception and return the default - it doesn't, DecimalFormat parses it
-        // quite happily turning "1,234" into "1"
-        // I guess this is one of the limitations of DecimalFormat
-        // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Short.valueOf("1"));
-
-        // **************************************************************************
-        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
-        // it doesn't causes an exception in parse() - DecimalFormat parses it
-        // quite happily turning "1,234" into "1"
-        // Again this is one of the limitations of DecimalFormat
-        // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Short.valueOf("1"));
-
-        // **************************************************************************
-        // Convert with specified type
-        //
-        // BaseLocaleConverter completely ignores the type - so even if we specify
-        // Double.class here it still returns a Short.
-        // **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
-        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
-
-        // ------------- Construct with non-localized pattern ------------
-        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
-                .setLocalizedPattern(false).get();
-
-        convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
-        convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
-        convertInvalid(converter, "(C)", defaultValue);
-        convertNull(converter, "(C)", defaultValue);
-
-    }
-
-    /**
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
@@ -232,6 +182,56 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
         convertValueWithPattern(converter, defaultIntegerValue, defaultIntegerPattern, expectedValue);
         convertInvalid(converter, defaultValue);
         convertNull(converter, defaultValue);
+
+    }
+
+    /**
+     * Test Converter(defaultValue, locale, pattern, localizedPattern) constructor
+     */
+    public void testConstructorMain() {
+
+        // ------------- Construct with localized pattern ------------
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
+                .setLocalizedPattern(true).get();
+
+        convertValueNoPattern(converter, "(A)", localizedIntegerValue, expectedValue);
+        convertValueWithPattern(converter, "(A)", localizedIntegerValue, localizedIntegerPattern, expectedValue);
+        convertInvalid(converter, "(A)", defaultValue);
+        convertNull(converter, "(A)", defaultValue);
+
+        // **************************************************************************
+        // Convert value in the wrong format - maybe you would expect it to throw an
+        // exception and return the default - it doesn't, DecimalFormat parses it
+        // quite happily turning "1,234" into "1"
+        // I guess this is one of the limitations of DecimalFormat
+        // **************************************************************************
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Short.valueOf("1"));
+
+        // **************************************************************************
+        // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
+        // it doesn't causes an exception in parse() - DecimalFormat parses it
+        // quite happily turning "1,234" into "1"
+        // Again this is one of the limitations of DecimalFormat
+        // **************************************************************************
+        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Short.valueOf("1"));
+
+        // **************************************************************************
+        // Convert with specified type
+        //
+        // BaseLocaleConverter completely ignores the type - so even if we specify
+        // Double.class here it still returns a Short.
+        // **** This has been changed due to BEANUTILS-449 ****
+        // **************************************************************************
+        // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
+
+        // ------------- Construct with non-localized pattern ------------
+        converter = ShortLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
+                .setLocalizedPattern(false).get();
+
+        convertValueNoPattern(converter, "(C)", localizedIntegerValue, expectedValue);
+        convertValueWithPattern(converter, "(C)", localizedIntegerValue, defaultIntegerPattern, expectedValue);
+        convertInvalid(converter, "(C)", defaultValue);
+        convertNull(converter, "(C)", defaultValue);
 
     }
 

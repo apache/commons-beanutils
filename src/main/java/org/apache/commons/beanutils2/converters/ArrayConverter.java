@@ -184,45 +184,49 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     }
 
     /**
-     * Sets the delimiter to be used for parsing a delimited String.
+     * Returns the value unchanged.
      *
-     * @param delimiter The delimiter [default ',']
-     */
-    public void setDelimiter(final char delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    /**
-     * Sets the allowed characters to be used for parsing a delimited String.
-     *
-     * @param allowedChars Characters which are to be considered as part of
-     * the tokens when parsing a delimited String [default is '.' and '-']
-     */
-    public void setAllowedChars(final char[] allowedChars) {
-        this.allowedChars = Objects.requireNonNull(allowedChars, "allowedChars").clone();
-    }
-
-    /**
-     * Indicates whether converting to a String should create
-     * a delimited list or just convert the first value.
-     *
-     * @param onlyFirstToString {@code true} converts only
-     * the first value in the array to a String, {@code false}
-     * converts all values in the array into a delimited list (default
-     * is {@code true}
-     */
-    public void setOnlyFirstToString(final boolean onlyFirstToString) {
-        this.onlyFirstToString = onlyFirstToString;
-    }
-
-    /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
+     * @param value The value to convert
+     * @return The value unchanged
      */
     @Override
-    protected Class<C> getDefaultType() {
-        return defaultType;
+    protected Object convertArray(final Object value) {
+        return value;
+    }
+
+    /**
+     * <p>
+     * Converts non-array values to a Collection prior
+     * to being converted either to an array or a String.
+     * <ul>
+     *   <li>{@link Collection} values are returned unchanged</li>
+     *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
+     *       values returned as a the only element in a List.</li>
+     *   <li>All other types are converted to a String and parsed
+     *       as a delimited list.</li>
+     * </ul>
+     *
+     * <strong>N.B.</strong> The method is called by both the
+     * {@link ArrayConverter#convertToType(Class, Object)} and
+     * {@link ArrayConverter#convertToString(Object)} methods for
+     * <i>non-array</i> types.
+     * @param value value to be converted
+     *
+     * @return Collection elements.
+     */
+    protected Collection<?> convertToCollection(final Object value) {
+        if (value instanceof Collection) {
+            return (Collection<?>) value;
+        }
+        if (value instanceof Number ||
+            value instanceof Boolean ||
+            value instanceof java.util.Date) {
+            final List<Object> list = new ArrayList<>(1);
+            list.add(value);
+            return list;
+        }
+
+        return parseElements(value.toString());
     }
 
     /**
@@ -317,52 +321,6 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     }
 
     /**
-     * Returns the value unchanged.
-     *
-     * @param value The value to convert
-     * @return The value unchanged
-     */
-    @Override
-    protected Object convertArray(final Object value) {
-        return value;
-    }
-
-    /**
-     * <p>
-     * Converts non-array values to a Collection prior
-     * to being converted either to an array or a String.
-     * <ul>
-     *   <li>{@link Collection} values are returned unchanged</li>
-     *   <li>{@link Number}, {@link Boolean}  and {@link java.util.Date}
-     *       values returned as a the only element in a List.</li>
-     *   <li>All other types are converted to a String and parsed
-     *       as a delimited list.</li>
-     * </ul>
-     *
-     * <strong>N.B.</strong> The method is called by both the
-     * {@link ArrayConverter#convertToType(Class, Object)} and
-     * {@link ArrayConverter#convertToString(Object)} methods for
-     * <i>non-array</i> types.
-     * @param value value to be converted
-     *
-     * @return Collection elements.
-     */
-    protected Collection<?> convertToCollection(final Object value) {
-        if (value instanceof Collection) {
-            return (Collection<?>) value;
-        }
-        if (value instanceof Number ||
-            value instanceof Boolean ||
-            value instanceof java.util.Date) {
-            final List<Object> list = new ArrayList<>(1);
-            list.add(value);
-            return list;
-        }
-
-        return parseElements(value.toString());
-    }
-
-    /**
      * Gets the default value for conversions to the specified
      * type.
      * @param type Data type to which this value should be converted.
@@ -386,20 +344,13 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
     }
 
     /**
-     * Provide a String representation of this array converter.
+     * Gets the default type this {@code Converter} handles.
      *
-     * @return A String representation of this array converter
+     * @return The default type this {@code Converter} handles.
      */
     @Override
-    public String toString() {
-        final StringBuilder buffer = new StringBuilder();
-        buffer.append(toString(getClass()));
-        buffer.append("[UseDefault=");
-        buffer.append(isUseDefault());
-        buffer.append(", ");
-        buffer.append(elementConverter.toString());
-        buffer.append(']');
-        return buffer.toString();
+    protected Class<C> getDefaultType() {
+        return defaultType;
     }
 
     /**
@@ -479,6 +430,55 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             throw new ConversionException("Error converting from String to '"
                     + typeName + "': " + e.getMessage(), e);
         }
+    }
+
+    /**
+     * Sets the allowed characters to be used for parsing a delimited String.
+     *
+     * @param allowedChars Characters which are to be considered as part of
+     * the tokens when parsing a delimited String [default is '.' and '-']
+     */
+    public void setAllowedChars(final char[] allowedChars) {
+        this.allowedChars = Objects.requireNonNull(allowedChars, "allowedChars").clone();
+    }
+
+    /**
+     * Sets the delimiter to be used for parsing a delimited String.
+     *
+     * @param delimiter The delimiter [default ',']
+     */
+    public void setDelimiter(final char delimiter) {
+        this.delimiter = delimiter;
+    }
+
+    /**
+     * Indicates whether converting to a String should create
+     * a delimited list or just convert the first value.
+     *
+     * @param onlyFirstToString {@code true} converts only
+     * the first value in the array to a String, {@code false}
+     * converts all values in the array into a delimited list (default
+     * is {@code true}
+     */
+    public void setOnlyFirstToString(final boolean onlyFirstToString) {
+        this.onlyFirstToString = onlyFirstToString;
+    }
+
+    /**
+     * Provide a String representation of this array converter.
+     *
+     * @return A String representation of this array converter
+     */
+    @Override
+    public String toString() {
+        final StringBuilder buffer = new StringBuilder();
+        buffer.append(toString(getClass()));
+        buffer.append("[UseDefault=");
+        buffer.append(isUseDefault());
+        buffer.append(", ");
+        buffer.append(elementConverter.toString());
+        buffer.append(']');
+        return buffer.toString();
     }
 
 }

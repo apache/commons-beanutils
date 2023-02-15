@@ -30,6 +30,37 @@ import junit.framework.TestCase;
 public class Jira381TestCase extends TestCase {
 
     /**
+     * Test object.
+     *
+     */
+    public class TestObject {
+    }
+
+    /**
+     * Used to match performop with test object
+     */
+    public class TestObjectSubclass extends TestObject {
+    }
+
+    /**
+     * Test bean.
+     */
+    public class TestServiceBean {
+
+        /**
+         * Generic object method
+         */
+        public void performOp(final Object o) {
+        }
+
+        /**
+         * Object method
+         */
+        public void performOp(final TestObject o) {
+        }
+    }
+
+    /**
      * Create a test case with the specified name.
      *
      * @param name The name of the test
@@ -54,36 +85,5 @@ public class Jira381TestCase extends TestCase {
         assertEquals(target, returned.getDeclaringClass());
         assertEquals(methodName, returned.getName());
         assertEquals(TestObject.class, returned.getParameterTypes()[0]);
-    }
-
-    /**
-     * Test bean.
-     */
-    public class TestServiceBean {
-
-        /**
-         * Generic object method
-         */
-        public void performOp(final Object o) {
-        }
-
-        /**
-         * Object method
-         */
-        public void performOp(final TestObject o) {
-        }
-    }
-
-    /**
-     * Test object.
-     *
-     */
-    public class TestObject {
-    }
-
-    /**
-     * Used to match performop with test object
-     */
-    public class TestObjectSubclass extends TestObject {
     }
 }

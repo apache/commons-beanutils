@@ -75,12 +75,21 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Constructs a new {@code LazyDynaMap} with the specified name.
+     * Constructs a new {@code LazyDynaMap} based on an exisiting DynaClass
      *
-     * @param name Name of this DynaBean class
+     * @param dynaClass DynaClass to copy the name and properties from
      */
-    public LazyDynaMap(final String name) {
-        this(name, (Map<String, Object>)null);
+    public LazyDynaMap(final DynaClass dynaClass) {
+        this(dynaClass.getName(), dynaClass.getDynaProperties());
+    }
+
+    /**
+     * Constructs a new {@code LazyDynaMap} with the specified properties.
+     *
+     * @param properties Property descriptors for the supported properties
+     */
+    public LazyDynaMap(final DynaProperty[] properties) {
+        this(null, properties);
     }
 
     /**
@@ -93,24 +102,12 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Constructs a new {@code LazyDynaMap</code> with the specified name and  <code>Map}.
+     * Constructs a new {@code LazyDynaMap} with the specified name.
      *
      * @param name Name of this DynaBean class
-     * @param values The Map backing this {@code LazyDynaMap}
      */
-    public LazyDynaMap(final String name, final Map<String, Object> values) {
-        this.name      = name   == null ? "LazyDynaMap" : name;
-        this.values    = values == null ? newMap()      : values;
-        this.dynaClass = this;
-    }
-
-    /**
-     * Constructs a new {@code LazyDynaMap} with the specified properties.
-     *
-     * @param properties Property descriptors for the supported properties
-     */
-    public LazyDynaMap(final DynaProperty[] properties) {
-        this(null, properties);
+    public LazyDynaMap(final String name) {
+        this(name, (Map<String, Object>)null);
     }
 
     /**
@@ -129,64 +126,125 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Constructs a new {@code LazyDynaMap} based on an exisiting DynaClass
+     * Constructs a new {@code LazyDynaMap</code> with the specified name and  <code>Map}.
      *
-     * @param dynaClass DynaClass to copy the name and properties from
+     * @param name Name of this DynaBean class
+     * @param values The Map backing this {@code LazyDynaMap}
      */
-    public LazyDynaMap(final DynaClass dynaClass) {
-        this(dynaClass.getName(), dynaClass.getDynaProperties());
+    public LazyDynaMap(final String name, final Map<String, Object> values) {
+        this.name      = name   == null ? "LazyDynaMap" : name;
+        this.values    = values == null ? newMap()      : values;
+        this.dynaClass = this;
     }
 
 
 
     /**
-     * Sets the Map backing this {@code DynaBean}
+     * Add a new dynamic property.
      *
-     * @param values The new Map of values
+     * @param property Property the new dynamic property to add.
+     *
+     * @throws IllegalArgumentException if name is null
      */
-    public void setMap(final Map<String, Object> values) {
-        this.values = values;
+    protected void add(final DynaProperty property) {
+        add(property.getName(), property.getType());
     }
 
     /**
-     * Gets the underlying Map backing this {@code DynaBean}
-     * @return the underlying Map
-     * @since 1.8.0
+     * Add a new dynamic property with no restrictions on data type,
+     * readability, or writeability.
+     *
+     * @param name Name of the new dynamic property
+     *
+     * @throws IllegalArgumentException if name is null
      */
     @Override
-    public Map<String, Object> getMap() {
-        return values;
+    public void add(final String name) {
+        add(name, null);
     }
 
 
 
     /**
-     * Sets the value of a simple property with the specified name.
+     * Add a new dynamic property with the specified data type, but with
+     * no restrictions on readability or writeability.
      *
-     * @param name Name of the property whose value is to be set
-     * @param value Value to which this property is to be set
+     * @param name Name of the new dynamic property
+     * @param type Data type of the new dynamic property (null for no
+     *  restrictions)
+     *
+     * @throws IllegalArgumentException if name is null
+     * @throws IllegalStateException if this DynaClass is currently
+     *  restricted, so no new properties can be added
      */
     @Override
-    public void set(final String name, final Object value) {
-        if (isRestricted() && !values.containsKey(name)) {
-            throw new IllegalArgumentException
-                    ("Invalid property name '" + name + "' (DynaClass is restricted)");
+    public void add(final String name, final Class<?> type) {
+        if (name == null) {
+            throw new IllegalArgumentException("Property name is missing.");
         }
 
-        values.put(name, value);
+        if (isRestricted()) {
+            throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
+        }
+
+        final Object value = values.get(name);
+
+        // Check if the property already exists
+        if (value == null) {
+            values.put(name, type == null ? null : createProperty(name, type));
+        }
     }
 
 
 
     /**
-     * Gets the name of this DynaClass (analogous to the
-     * {@code getName()</code> method of <code>java.lang.Class})
+     * <p>Add a new dynamic property with the specified data type, readability,
+     * and writeability.</p>
      *
-     * @return the name of the DynaClass
+     * <p><strong>N.B.</strong>Support for readable/writable properties has not been implemented
+     *    and this method always throws a {@code UnsupportedOperationException}.</p>
+     *
+     * <p>I'm not sure the intention of the original authors for this method, but it seems to
+     *    me that readable/writable should be attributes of the {@code DynaProperty} class
+     *    (which they are not) and is the reason this method has not been implemented.</p>
+     *
+     * @param name Name of the new dynamic property
+     * @param type Data type of the new dynamic property (null for no
+     *  restrictions)
+     * @param readable Set to {@code true} if this property value
+     *  should be readable
+     * @param writable Set to {@code true} if this property value
+     *  should be writable
+     *
+     * @throws UnsupportedOperationException anytime this method is called
      */
     @Override
-    public String getName() {
-        return this.name;
+    public void add(final String name, final Class<?> type, final boolean readable, final boolean writable) {
+        throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
+    }
+
+    /**
+     * <p>Return an array of {@code PropertyDescriptor} for the properties
+     * currently defined in this DynaClass.  If no properties are defined, a
+     * zero-length array will be returned.</p>
+     *
+     * <p><strong>FIXME</strong> - Should we really be implementing
+     * {@code getBeanInfo()} instead, which returns property descriptors
+     * and a bunch of other stuff?</p>
+     * @return the set of properties for this DynaClass
+     */
+    @Override
+    public DynaProperty[] getDynaProperties() {
+        int i = 0;
+        final DynaProperty[] properties = new DynaProperty[values.size()];
+        for (final Map.Entry<String, Object> e : values.entrySet()) {
+            final String name = e.getKey();
+            final Object value = values.get(name);
+            properties[i++] = new DynaProperty(name, value == null ? null
+                    : value.getClass());
+        }
+
+        return properties;
     }
 
     /**
@@ -233,27 +291,72 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * <p>Return an array of {@code PropertyDescriptor} for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
-     *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * {@code getBeanInfo()} instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
-     * @return the set of properties for this DynaClass
+     * Gets the underlying Map backing this {@code DynaBean}
+     * @return the underlying Map
+     * @since 1.8.0
      */
     @Override
-    public DynaProperty[] getDynaProperties() {
-        int i = 0;
-        final DynaProperty[] properties = new DynaProperty[values.size()];
-        for (final Map.Entry<String, Object> e : values.entrySet()) {
-            final String name = e.getKey();
-            final Object value = values.get(name);
-            properties[i++] = new DynaProperty(name, value == null ? null
-                    : value.getClass());
+    public Map<String, Object> getMap() {
+        return values;
+    }
+
+    /**
+     * Gets the name of this DynaClass (analogous to the
+     * {@code getName()</code> method of <code>java.lang.Class})
+     *
+     * @return the name of the DynaClass
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+         * <p>Indicate whether a property actually exists.</p>
+         *
+         * <p><strong>N.B.</strong> Using {@code getDynaProperty(name) == null}
+         * doesn't work in this implementation because that method might
+         * return a DynaProperty if it doesn't exist (depending on the
+         * {@code returnNull} indicator).</p>
+         *
+         * @param name Name of the dynamic property
+         * @return {@code true} if the property exists,
+         * otherwise {@code false}
+         * @throws IllegalArgumentException if no property name is specified
+         */
+        @Override
+        protected boolean isDynaProperty(final String name) {
+            if (name == null) {
+                throw new IllegalArgumentException("Property name is missing.");
+            }
+
+            return values.containsKey(name);
         }
 
-        return properties;
+    /**
+     * <p>Is this DynaClass currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
+     *
+     * @return {@code true} if this Mutable {@link DynaClass} is restricted,
+     * otherwise {@code false}
+     */
+    @Override
+    public boolean isRestricted() {
+        return restricted;
+    }
+
+    /**
+     * Should this DynaClass return a {@code null} from
+     * the {@code getDynaProperty(name)} method if the property
+     * doesn't exist.
+     *
+     * @return {@code true</code> if a <code>null} {@link DynaProperty}
+     * should be returned if the property doesn't exist, otherwise
+     * {@code false} if a new {@link DynaProperty} should be created.
+     */
+    public boolean isReturnNull() {
+        return returnNull;
     }
 
     /**
@@ -286,111 +389,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * <p>Is this DynaClass currently restricted.</p>
-     * <p>If restricted, no changes to the existing registration of
-     *  property names, data types, readability, or writeability are allowed.</p>
-     *
-     * @return {@code true} if this Mutable {@link DynaClass} is restricted,
-     * otherwise {@code false}
-     */
-    @Override
-    public boolean isRestricted() {
-        return restricted;
-    }
-
-    /**
-     * <p>Set whether this DynaClass is currently restricted.</p>
-     * <p>If restricted, no changes to the existing registration of
-     *  property names, data types, readability, or writeability are allowed.</p>
-     *
-     * @param restricted The new restricted state
-     */
-    @Override
-    public void setRestricted(final boolean restricted) {
-        this.restricted = restricted;
-    }
-
-    /**
-     * Add a new dynamic property with no restrictions on data type,
-     * readability, or writeability.
-     *
-     * @param name Name of the new dynamic property
-     *
-     * @throws IllegalArgumentException if name is null
-     */
-    @Override
-    public void add(final String name) {
-        add(name, null);
-    }
-
-    /**
-     * Add a new dynamic property with the specified data type, but with
-     * no restrictions on readability or writeability.
-     *
-     * @param name Name of the new dynamic property
-     * @param type Data type of the new dynamic property (null for no
-     *  restrictions)
-     *
-     * @throws IllegalArgumentException if name is null
-     * @throws IllegalStateException if this DynaClass is currently
-     *  restricted, so no new properties can be added
-     */
-    @Override
-    public void add(final String name, final Class<?> type) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
-        if (isRestricted()) {
-            throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
-        }
-
-        final Object value = values.get(name);
-
-        // Check if the property already exists
-        if (value == null) {
-            values.put(name, type == null ? null : createProperty(name, type));
-        }
-    }
-
-    /**
-     * <p>Add a new dynamic property with the specified data type, readability,
-     * and writeability.</p>
-     *
-     * <p><strong>N.B.</strong>Support for readable/writable properties has not been implemented
-     *    and this method always throws a {@code UnsupportedOperationException}.</p>
-     *
-     * <p>I'm not sure the intention of the original authors for this method, but it seems to
-     *    me that readable/writable should be attributes of the {@code DynaProperty} class
-     *    (which they are not) and is the reason this method has not been implemented.</p>
-     *
-     * @param name Name of the new dynamic property
-     * @param type Data type of the new dynamic property (null for no
-     *  restrictions)
-     * @param readable Set to {@code true} if this property value
-     *  should be readable
-     * @param writable Set to {@code true} if this property value
-     *  should be writable
-     *
-     * @throws UnsupportedOperationException anytime this method is called
-     */
-    @Override
-    public void add(final String name, final Class<?> type, final boolean readable, final boolean writable) {
-        throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
-    }
-
-    /**
-     * Add a new dynamic property.
-     *
-     * @param property Property the new dynamic property to add.
-     *
-     * @throws IllegalArgumentException if name is null
-     */
-    protected void add(final DynaProperty property) {
-        add(property.getName(), property.getType());
-    }
-
-    /**
      * Remove the specified dynamic property, and any associated data type,
      * readability, and writeability, from this dynamic class.
      * <strong>NOTE</strong> - This does <strong>NOT</strong> cause any
@@ -417,51 +415,53 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
     /**
-     * Should this DynaClass return a {@code null} from
-     * the {@code getDynaProperty(name)} method if the property
-     * doesn't exist.
+     * Sets the value of a simple property with the specified name.
      *
-     * @return {@code true</code> if a <code>null} {@link DynaProperty}
-     * should be returned if the property doesn't exist, otherwise
-     * {@code false} if a new {@link DynaProperty} should be created.
+     * @param name Name of the property whose value is to be set
+     * @param value Value to which this property is to be set
      */
-    public boolean isReturnNull() {
-        return returnNull;
+    @Override
+    public void set(final String name, final Object value) {
+        if (isRestricted() && !values.containsKey(name)) {
+            throw new IllegalArgumentException
+                    ("Invalid property name '" + name + "' (DynaClass is restricted)");
+        }
+
+        values.put(name, value);
     }
 
     /**
-     * Sets whether this DynaClass should return a {@code null} from
-     * the {@code getDynaProperty(name)} method if the property
-     * doesn't exist.
+     * Sets the Map backing this {@code DynaBean}
      *
-     * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
-     * should be returned if the property doesn't exist, otherwise
-     * {@code false} if a new {@link DynaProperty} should be created.
+     * @param values The new Map of values
      */
-    public void setReturnNull(final boolean returnNull) {
-        this.returnNull = returnNull;
+    public void setMap(final Map<String, Object> values) {
+        this.values = values;
+    }
+
+    /**
+     * <p>Set whether this DynaClass is currently restricted.</p>
+     * <p>If restricted, no changes to the existing registration of
+     *  property names, data types, readability, or writeability are allowed.</p>
+     *
+     * @param restricted The new restricted state
+     */
+    @Override
+    public void setRestricted(final boolean restricted) {
+        this.restricted = restricted;
     }
 
    /**
-     * <p>Indicate whether a property actually exists.</p>
-     *
-     * <p><strong>N.B.</strong> Using {@code getDynaProperty(name) == null}
-     * doesn't work in this implementation because that method might
-     * return a DynaProperty if it doesn't exist (depending on the
-     * {@code returnNull} indicator).</p>
-     *
-     * @param name Name of the dynamic property
-     * @return {@code true} if the property exists,
-     * otherwise {@code false}
-     * @throws IllegalArgumentException if no property name is specified
-     */
-    @Override
-    protected boolean isDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
-        return values.containsKey(name);
-    }
+ * Sets whether this DynaClass should return a {@code null} from
+ * the {@code getDynaProperty(name)} method if the property
+ * doesn't exist.
+ *
+ * @param returnNull {@code true</code> if a <code>null} {@link DynaProperty}
+ * should be returned if the property doesn't exist, otherwise
+ * {@code false} if a new {@link DynaProperty} should be created.
+ */
+public void setReturnNull(final boolean returnNull) {
+    this.returnNull = returnNull;
+}
 
 }

@@ -38,29 +38,6 @@ import java.util.Map;
 public class PropertyUtils {
 
     /**
-     * Clear any cached property descriptors information for all classes
-     * loaded by any class loaders.  This is useful in cases where class
-     * loaders are thrown away to implement class reloading.
-     *
-     * <p>For more details see {@code PropertyUtilsBean}.</p>
-     *
-     * @see PropertyUtilsBean#clearDescriptors
-     */
-    public static void clearDescriptors() {
-        PropertyUtilsBean.getInstance().clearDescriptors();
-    }
-
-    /**
-     * Resets the registered {@link BeanIntrospector} objects to the initial default
-     * state.
-     *
-     * @since 1.9
-     */
-    public static void resetBeanIntrospectors() {
-        PropertyUtilsBean.getInstance().resetBeanIntrospectors();
-    }
-
-    /**
      * Adds a {@code BeanIntrospector}. This object is invoked when the
      * property descriptors of a class need to be obtained.
      *
@@ -74,16 +51,16 @@ public class PropertyUtils {
     }
 
     /**
-     * Removes the specified {@code BeanIntrospector}.
+     * Clear any cached property descriptors information for all classes
+     * loaded by any class loaders.  This is useful in cases where class
+     * loaders are thrown away to implement class reloading.
      *
-     * @param introspector the {@code BeanIntrospector} to be removed
-     * @return <b>true</b> if the {@code BeanIntrospector} existed and
-     *         could be removed, <b>false</b> otherwise
-     * @since 1.9
+     * <p>For more details see {@code PropertyUtilsBean}.</p>
+     *
+     * @see PropertyUtilsBean#clearDescriptors
      */
-    public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
-        return PropertyUtilsBean.getInstance().removeBeanIntrospector(
-                introspector);
+    public static void clearDescriptors() {
+        PropertyUtilsBean.getInstance().clearDescriptors();
     }
 
     /**
@@ -536,34 +513,26 @@ public class PropertyUtils {
     }
 
     /**
-     * <p>Sets the value of the specified indexed property of the specified
-     * bean, with no type conversions.</p>
+     * Removes the specified {@code BeanIntrospector}.
      *
-     * <p>For more details see {@code PropertyUtilsBean}.</p>
-     *
-     * @param bean Bean whose property is to be modified
-     * @param name {@code propertyname[index]} of the property value
-     *  to be modified
-     * @param value Value to which the specified property element
-     *  should be set
-     *
-     * @throws IndexOutOfBoundsException if the specified index
-     *  is outside the valid range for the underlying property
-     * @throws IllegalAccessException if the caller does not have
-     *  access to the property accessor method
-     * @throws IllegalArgumentException if {@code bean} or
-     *  {@code name} is null
-     * @throws InvocationTargetException if the property accessor method
-     *  throws an exception
-     * @throws NoSuchMethodException if an accessor method for this
-     *  property cannot be found
-     * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
+     * @param introspector the {@code BeanIntrospector} to be removed
+     * @return <b>true</b> if the {@code BeanIntrospector} existed and
+     *         could be removed, <b>false</b> otherwise
+     * @since 1.9
      */
-    public static void setIndexedProperty(final Object bean, final String name,
-                                          final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-            NoSuchMethodException {
-        PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, value);
+    public static boolean removeBeanIntrospector(final BeanIntrospector introspector) {
+        return PropertyUtilsBean.getInstance().removeBeanIntrospector(
+                introspector);
+    }
+
+    /**
+     * Resets the registered {@link BeanIntrospector} objects to the initial default
+     * state.
+     *
+     * @since 1.9
+     */
+    public static void resetBeanIntrospectors() {
+        PropertyUtilsBean.getInstance().resetBeanIntrospectors();
     }
 
     /**
@@ -594,6 +563,37 @@ public class PropertyUtils {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
         PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, index, value);
+    }
+
+    /**
+     * <p>Sets the value of the specified indexed property of the specified
+     * bean, with no type conversions.</p>
+     *
+     * <p>For more details see {@code PropertyUtilsBean}.</p>
+     *
+     * @param bean Bean whose property is to be modified
+     * @param name {@code propertyname[index]} of the property value
+     *  to be modified
+     * @param value Value to which the specified property element
+     *  should be set
+     *
+     * @throws IndexOutOfBoundsException if the specified index
+     *  is outside the valid range for the underlying property
+     * @throws IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @throws IllegalArgumentException if {@code bean} or
+     *  {@code name} is null
+     * @throws InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @throws NoSuchMethodException if an accessor method for this
+     *  property cannot be found
+     * @see PropertyUtilsBean#setIndexedProperty(Object, String, Object)
+     */
+    public static void setIndexedProperty(final Object bean, final String name,
+                                          final Object value)
+            throws IllegalAccessException, InvocationTargetException,
+            NoSuchMethodException {
+        PropertyUtilsBean.getInstance().setIndexedProperty(bean, name, value);
     }
 
     /**

@@ -42,6 +42,26 @@ import java.util.Map;
  * @since 1.9.1
  */
 class BeanIntrospectionData {
+    /**
+     * Initializes the map with the names of the write methods for the supported
+     * properties. The method names - if defined - need to be stored separately because
+     * they may get lost when the GC claims soft references used by the
+     * {@code PropertyDescriptor} objects.
+     *
+     * @param descs the array with the descriptors of the available properties
+     * @return the map with the names of write methods for properties
+     */
+    private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
+        final Map<String, String> methods = new HashMap<>();
+        for (final PropertyDescriptor pd : descs) {
+            final Method method = pd.getWriteMethod();
+            if (method != null) {
+                methods.put(pd.getName(), method.getName());
+            }
+        }
+        return methods;
+    }
+
     /** An array with property descriptors for the managed bean class. */
     private final PropertyDescriptor[] descriptors;
 
@@ -71,15 +91,6 @@ class BeanIntrospectionData {
     }
 
     /**
-     * Returns the array with property descriptors.
-     *
-     * @return the property descriptors for the associated bean class
-     */
-    public PropertyDescriptor[] getDescriptors() {
-        return descriptors;
-    }
-
-    /**
      * Returns the {@code PropertyDescriptor} for the property with the specified name. If
      * this property is unknown, result is <b>null</b>.
      *
@@ -93,6 +104,15 @@ class BeanIntrospectionData {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns the array with property descriptors.
+     *
+     * @return the property descriptors for the associated bean class
+     */
+    public PropertyDescriptor[] getDescriptors() {
+        return descriptors;
     }
 
     /**
@@ -126,25 +146,5 @@ class BeanIntrospectionData {
         }
 
         return method;
-    }
-
-    /**
-     * Initializes the map with the names of the write methods for the supported
-     * properties. The method names - if defined - need to be stored separately because
-     * they may get lost when the GC claims soft references used by the
-     * {@code PropertyDescriptor} objects.
-     *
-     * @param descs the array with the descriptors of the available properties
-     * @return the map with the names of write methods for properties
-     */
-    private static Map<String, String> setUpWriteMethodNames(final PropertyDescriptor[] descs) {
-        final Map<String, String> methods = new HashMap<>();
-        for (final PropertyDescriptor pd : descs) {
-            final Method method = pd.getWriteMethod();
-            if (method != null) {
-                methods.put(pd.getName(), method.getName());
-            }
-        }
-        return methods;
     }
 }

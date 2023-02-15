@@ -41,16 +41,16 @@ public class Jira458TestCase extends TestCase {
     }
 
     /**
-     * Tests a conversion passing in null.
-     */
-    public void testConversionWithNullDefaultNullInput() {
-        checkConversionWithNullDefault(null);
-    }
-
-    /**
      * Tests a conversion passing in an empty string.
      */
     public void testConversionWithNullDefaultEmptyString() {
         checkConversionWithNullDefault("");
+    }
+
+    /**
+     * Tests a conversion passing in null.
+     */
+    public void testConversionWithNullDefaultNullInput() {
+        checkConversionWithNullDefault(null);
     }
 }

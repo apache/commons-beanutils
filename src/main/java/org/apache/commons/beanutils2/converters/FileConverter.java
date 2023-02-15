@@ -49,17 +49,6 @@ public final class FileConverter extends AbstractConverter<File> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<File> getDefaultType() {
-        return File.class;
-    }
-
-    /**
      * <p>Converts the input object into a java.io.File.</p>
      *
      * @param <T> The target type of the conversion.
@@ -76,5 +65,16 @@ public final class FileConverter extends AbstractConverter<File> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 1.8.0
+     */
+    @Override
+    protected Class<File> getDefaultType() {
+        return File.class;
     }
 }

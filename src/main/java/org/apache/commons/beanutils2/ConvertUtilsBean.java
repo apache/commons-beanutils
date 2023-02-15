@@ -175,6 +175,11 @@ public class ConvertUtilsBean {
     private static final Character SPACE = Character.valueOf(' ');
 
     /**
+     * The {@code Log} instance for this class.
+     */
+    private static final Log LOG = LogFactory.getLog(ConvertUtilsBean.class);
+
+    /**
      * Get singleton instance
      * @return The singleton instance
      */
@@ -187,11 +192,6 @@ public class ConvertUtilsBean {
      * into objects of a specified Class, keyed by the destination Class.
      */
     private final WeakFastHashMap<Class<?>, Converter<?>> converters = new WeakFastHashMap<>();
-
-    /**
-     * The {@code Log} instance for this class.
-     */
-    private static final Log LOG = LogFactory.getLog(ConvertUtilsBean.class);
 
     /** Constructs a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -230,6 +230,61 @@ public class ConvertUtilsBean {
         final Converter<String> converter = lookup(String.class);
         return converter.convert(String.class, value);
 
+    }
+
+    /**
+     * Convert the value to an object of the specified class (if
+     * possible). If no converter for the desired target type is registered,
+     * the passed in object is returned unchanged.
+     *
+     * @param <T> The Class type.
+     * @param value Value to be converted (may be null)
+     * @param targetType Class of the value to be converted to (must not be null)
+     * @return The converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     */
+    public <T> Object convert(final Object value, final Class<T> targetType) {
+        final boolean nullValue = value == null;
+        final Class<?> sourceType = nullValue ? null : value.getClass();
+
+        if (LOG.isDebugEnabled()) {
+            if (nullValue) {
+                LOG.debug("Convert null value to type '" + targetType.getName() + "'");
+            } else {
+                LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
+                    + targetType.getName() + "'");
+            }
+        }
+
+        Object converted = value;
+        final Converter<T> converter = lookup(sourceType, targetType);
+        if (converter != null) {
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("  Using converter " + converter);
+            }
+            converted = converter.convert(targetType, value);
+        }
+        if (String.class.equals(targetType) && converted != null && !(converted instanceof String)) {
+
+            // NOTE: For backwards compatibility, if the Converter
+            // doesn't handle conversion-->String then
+            // use the registered String Converter
+            final Converter<String> strConverter = lookup(String.class);
+            if (strConverter != null) {
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace("  Using converter " + converter);
+                }
+                converted = strConverter.convert(String.class, converted);
+            }
+
+            // If the object still isn't a String, use toString() method
+            if (converted != null && !(converted instanceof String)) {
+                converted = converted.toString();
+            }
+
+        }
+        return converted;
     }
 
     /**
@@ -299,61 +354,6 @@ public class ConvertUtilsBean {
     }
 
     /**
-     * Convert the value to an object of the specified class (if
-     * possible). If no converter for the desired target type is registered,
-     * the passed in object is returned unchanged.
-     *
-     * @param <T> The Class type.
-     * @param value Value to be converted (may be null)
-     * @param targetType Class of the value to be converted to (must not be null)
-     * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     */
-    public <T> Object convert(final Object value, final Class<T> targetType) {
-        final boolean nullValue = value == null;
-        final Class<?> sourceType = nullValue ? null : value.getClass();
-
-        if (LOG.isDebugEnabled()) {
-            if (nullValue) {
-                LOG.debug("Convert null value to type '" + targetType.getName() + "'");
-            } else {
-                LOG.debug("Convert type '" + sourceType.getName() + "' value '" + value + "' to type '"
-                    + targetType.getName() + "'");
-            }
-        }
-
-        Object converted = value;
-        final Converter<T> converter = lookup(sourceType, targetType);
-        if (converter != null) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace("  Using converter " + converter);
-            }
-            converted = converter.convert(targetType, value);
-        }
-        if (String.class.equals(targetType) && converted != null && !(converted instanceof String)) {
-
-            // NOTE: For backwards compatibility, if the Converter
-            // doesn't handle conversion-->String then
-            // use the registered String Converter
-            final Converter<String> strConverter = lookup(String.class);
-            if (strConverter != null) {
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace("  Using converter " + converter);
-                }
-                converted = strConverter.convert(String.class, converted);
-            }
-
-            // If the object still isn't a String, use toString() method
-            if (converted != null && !(converted instanceof String)) {
-                converted = converted.toString();
-            }
-
-        }
-        return converted;
-    }
-
-    /**
      * Remove all registered {@link Converter}s, and re-establish the
      * standard Converters.
      */
@@ -367,6 +367,78 @@ public class ConvertUtilsBean {
         registerArrays(false, 0);
         register(BigDecimal.class, new BigDecimalConverter());
         register(BigInteger.class, new BigIntegerConverter());
+    }
+
+    /**
+     * Remove any registered {@link Converter} for the specified destination
+     * {@code Class}.
+     *
+     * @param clazz Class for which to remove a registered Converter
+     */
+    public void deregister(final Class<?> clazz) {
+        converters.remove(clazz);
+    }
+
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * source and destination class; if there is no registered Converter,
+     * return {@code null}.
+     *
+     * @param <T> The converter type.
+     * @param sourceType Class of the value being converted
+     * @param targetType Class of the value to be converted to
+     * @return The registered {@link Converter} or {@code null} if not found
+     */
+    public <T> Converter<T> lookup(final Class<?> sourceType, final Class<T> targetType) {
+
+        if (targetType == null) {
+            throw new IllegalArgumentException("Target type is missing");
+        }
+        if (sourceType == null) {
+            return lookup(targetType);
+        }
+
+        Converter converter = null;
+        // Convert --> String
+        if (targetType == String.class) {
+            converter = lookup(sourceType);
+            if (converter == null && (sourceType.isArray() ||
+                        Collection.class.isAssignableFrom(sourceType))) {
+                converter = lookup(String[].class);
+            }
+            if (converter == null) {
+                converter = lookup(String.class);
+            }
+            return converter;
+        }
+
+        // Convert --> String array
+        if (targetType == String[].class) {
+            if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
+                converter = lookup(sourceType);
+            }
+            if (converter == null) {
+                converter = lookup(String[].class);
+            }
+            return converter;
+        }
+
+        return lookup(targetType);
+
+    }
+
+    /**
+     * Look up and return any registered {@link Converter} for the specified
+     * destination class; if there is no registered Converter, return
+     * {@code null}.
+     *
+     * @param <T> The converter type.
+     * @param clazz Class for which to return a registered Converter
+     * @return The registered {@link Converter} or {@code null} if not found
+     */
+    @SuppressWarnings("unchecked")
+    public <T> Converter<T> lookup(final Class<T> clazz) {
+        return (Converter<T>) converters.get(clazz);
     }
 
     /**
@@ -389,6 +461,176 @@ public class ConvertUtilsBean {
         registerStandard(throwException, defaultNull);
         registerOther(throwException);
         registerArrays(throwException, defaultArraySize);
+    }
+
+    /** strictly for convenience since it has same parameter order as Map.put */
+    private <T> void register(final Class<?> clazz, final Converter<T> converter) {
+        register(new ConverterFacade<>(converter), clazz);
+    }
+
+    /**
+     * Register a custom {@link Converter} for the specified destination
+     * {@code Class}, replacing any previously registered Converter.
+     *
+     * @param converter Converter to be registered
+     * @param clazz Destination class for conversions performed by this
+     *  Converter
+     */
+    public void register(final Converter converter, final Class<?> clazz) {
+        converters.put(clazz, converter);
+    }
+
+    /**
+     * Register a new ArrayConverter with the specified element delegate converter
+     * that returns a default array of the specified size in the event of conversion errors.
+     *
+     * @param componentType The component type of the array
+     * @param componentConverter The converter to delegate to for the array elements
+     * @param throwException Whether a conversion exception should be thrown or a default
+     * value used in the event of a conversion error
+     * @param defaultArraySize The size of the default array
+     */
+    private <T> void registerArrayConverter(final Class<T> componentType, final Converter<T> componentConverter,
+            final boolean throwException, final int defaultArraySize) {
+        final Class<T[]> arrayType = (Class<T[]>) Array.newInstance(componentType, 0).getClass();
+        final Converter<T[]> arrayConverter;
+        if (throwException) {
+            arrayConverter = new ArrayConverter<>(arrayType, componentConverter);
+        } else {
+            arrayConverter = new ArrayConverter<>(arrayType, componentConverter, defaultArraySize);
+        }
+        register(arrayType, arrayConverter);
+    }
+
+    /**
+     * Register array converters.
+     *
+     * @param throwException {@code true} if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * {@code false} if a default value should be used.
+     * @param defaultArraySize The size of the default array value for array converters
+     * (N.B. This values is ignored if {@code throwException</code> is <code>true}).
+     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * the default.
+     */
+    private void registerArrays(final boolean throwException, final int defaultArraySize) {
+        // @formatter:off
+
+        // Primitives
+        registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Byte.TYPE,      new ByteConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Character.TYPE, new CharacterConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Double.TYPE,    new DoubleConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Float.TYPE,     new FloatConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Integer.TYPE,   new IntegerConverter(),   throwException, defaultArraySize);
+        registerArrayConverter(Long.TYPE,      new LongConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Short.TYPE,     new ShortConverter(),     throwException, defaultArraySize);
+
+        // Standard
+        registerArrayConverter(BigDecimal.class, new BigDecimalConverter(), throwException, defaultArraySize);
+        registerArrayConverter(BigInteger.class, new BigIntegerConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Boolean.class,    new BooleanConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Byte.class,       new ByteConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Character.class,  new CharacterConverter(),  throwException, defaultArraySize);
+        registerArrayConverter(Double.class,     new DoubleConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(Float.class,      new FloatConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Integer.class,    new IntegerConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(Long.class,       new LongConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Short.class,      new ShortConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
+
+        // Other
+        registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
+        registerArrayConverter(Enum.class,           new EnumConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Calendar.class,       new CalendarConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),       throwException, defaultArraySize);
+        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(),  throwException, defaultArraySize);
+        registerArrayConverter(URL.class,            new URLConverter(),           throwException, defaultArraySize);
+        registerArrayConverter(URI.class,            new URIConverter(),           throwException, defaultArraySize);
+        registerArrayConverter(UUID.class,           new UUIDConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(LocalDate.class,      new LocalDateConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(LocalDateTime.class,  new LocalDateTimeConverter(), throwException, defaultArraySize);
+        registerArrayConverter(LocalTime.class,      new LocalTimeConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(OffsetDateTime.class, new OffsetDateTimeConverter(),throwException, defaultArraySize);
+        registerArrayConverter(OffsetTime.class,     new OffsetTimeConverter(),    throwException, defaultArraySize);
+        registerArrayConverter(ZonedDateTime.class,  new ZonedDateTimeConverter(), throwException, defaultArraySize);
+        registerArrayConverter(Duration.class,       new DurationConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(MonthDay.class,       new MonthDayConverter(),      throwException, defaultArraySize);
+        registerArrayConverter(Period.class,         new PeriodConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(Year.class,           new YearConverter(),          throwException, defaultArraySize);
+        registerArrayConverter(YearMonth.class,      new YearMonthConverter(),     throwException, defaultArraySize);
+        registerArrayConverter(ZoneId.class,         new ZoneIdConverter(),        throwException, defaultArraySize);
+        registerArrayConverter(ZoneOffset.class,     new ZoneOffsetConverter(),    throwException, defaultArraySize);
+        // @formatter:on
+    }
+
+    /**
+     * Register the converters for other types.
+     * </p>
+     * This method registers the following converters:
+     * <ul>
+     *     <li>{@code Class.class} - {@link ClassConverter}</li>
+     *     <li>{@code Enum.class} - {@link EnumConverter}</li>
+     *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
+     *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
+     *     <li>{@code File.class} - {@link FileConverter}</li>
+     *     <li>{@code Path.class} - {@link PathConverter}</li>
+     *     <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
+     *     <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
+     *     <li>{@code java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
+     *     <li>{@code URL.class} - {@link URLConverter}</li>
+     *     <li>{@code URI.class} - {@link URIConverter}</li>
+     *     <li>{@code UUID.class} - {@link UUIDConverter}</li>
+     *     <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
+     *     <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
+     *     <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
+     *     <li>{@code OffsetDateTime.class} - {@link OffsetDateTimeConverter}</li>
+     *     <li>{@code OffsetTime.class} - {@link OffsetTimeConverter}</li>
+     *     <li>{@code ZonedDateTime.class} - {@link ZonedDateTimeConverter}</li>
+     *     <li>{@code Duration.class} - {@link DurationConverter}</li>
+     *     <li>{@code MonthDay.class} - {@link MonthDayConverter}</li>
+     *     <li>{@code Period.class} - {@link PeriodConverter}</li>
+     *     <li>{@code Year.class} - {@link YearConverter}</li>
+     *     <li>{@code YearMonth.class} - {@link YearMonthConverter}</li>
+     *     <li>{@code ZoneId.class} - {@link ZoneIdConverter}</li>
+     *     <li>{@code ZoneOffset.class} - {@link ZoneOffsetConverter}</li>
+     * </ul>
+     * @param throwException {@code true} if the converters should
+     * throw an exception when a conversion error occurs, otherwise <code>
+     * {@code false} if a default value should be used.
+     */
+    private void registerOther(final boolean throwException) {
+        // @formatter:off
+        register(Class.class,          throwException ? new ClassConverter<>()        : new ClassConverter<>(null));
+        register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
+        register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
+        register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
+        register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
+        register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
+        register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
+        register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
+        register(Timestamp.class,      throwException ? new SqlTimestampConverter()   : new SqlTimestampConverter(null));
+        register(URL.class,            throwException ? new URLConverter()            : new URLConverter(null));
+        register(URI.class,            throwException ? new URIConverter()            : new URIConverter(null));
+        register(UUID.class,           throwException ? new UUIDConverter()           : new UUIDConverter(null));
+        register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
+        register(LocalDateTime.class,  throwException ? new LocalDateTimeConverter()  : new LocalDateTimeConverter(null));
+        register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
+        register(OffsetDateTime.class, throwException ? new OffsetDateTimeConverter() : new OffsetDateTimeConverter(null));
+        register(OffsetTime.class,     throwException ? new OffsetTimeConverter()     : new OffsetTimeConverter(null));
+        register(ZonedDateTime.class,  throwException ? new ZonedDateTimeConverter()  : new ZonedDateTimeConverter(null));
+        register(Duration.class,       throwException ? new DurationConverter()       : new DurationConverter(null));
+        register(MonthDay.class,       throwException ? new MonthDayConverter()       : new MonthDayConverter(null));
+        register(Period.class,         throwException ? new PeriodConverter()         : new PeriodConverter(null));
+        register(Year.class,           throwException ? new YearConverter()           : new YearConverter(null));
+        register(YearMonth.class,      throwException ? new YearMonthConverter()      : new YearMonthConverter(null));
+        register(ZoneId.class,         throwException ? new ZoneIdConverter()         : new ZoneIdConverter(null));
+        register(ZoneOffset.class,     throwException ? new ZoneOffsetConverter()     : new ZoneOffsetConverter(null));
+        // @formatter:on
     }
 
     /**
@@ -466,247 +708,5 @@ public class ConvertUtilsBean {
         register(Short.class,      throwException ? new ShortConverter()      : new ShortConverter(defaultNumber));
         register(String.class,     throwException ? new StringConverter()     : new StringConverter(stringDefault));
 
-    }
-
-    /**
-     * Register the converters for other types.
-     * </p>
-     * This method registers the following converters:
-     * <ul>
-     *     <li>{@code Class.class} - {@link ClassConverter}</li>
-     *     <li>{@code Enum.class} - {@link EnumConverter}</li>
-     *     <li>{@code java.util.Date.class} - {@link DateConverter}</li>
-     *     <li>{@code java.util.Calendar.class} - {@link CalendarConverter}</li>
-     *     <li>{@code File.class} - {@link FileConverter}</li>
-     *     <li>{@code Path.class} - {@link PathConverter}</li>
-     *     <li>{@code java.sql.Date.class} - {@link SqlDateConverter}</li>
-     *     <li>{@code java.sql.Time.class} - {@link SqlTimeConverter}</li>
-     *     <li>{@code java.sql.Timestamp.class} - {@link SqlTimestampConverter}</li>
-     *     <li>{@code URL.class} - {@link URLConverter}</li>
-     *     <li>{@code URI.class} - {@link URIConverter}</li>
-     *     <li>{@code UUID.class} - {@link UUIDConverter}</li>
-     *     <li>{@code LocalDate.class} - {@link LocalDateConverter}</li>
-     *     <li>{@code LocalDateTime.class} - {@link LocalDateTimeConverter}</li>
-     *     <li>{@code LocalTime.class} - {@link LocalTimeConverter}</li>
-     *     <li>{@code OffsetDateTime.class} - {@link OffsetDateTimeConverter}</li>
-     *     <li>{@code OffsetTime.class} - {@link OffsetTimeConverter}</li>
-     *     <li>{@code ZonedDateTime.class} - {@link ZonedDateTimeConverter}</li>
-     *     <li>{@code Duration.class} - {@link DurationConverter}</li>
-     *     <li>{@code MonthDay.class} - {@link MonthDayConverter}</li>
-     *     <li>{@code Period.class} - {@link PeriodConverter}</li>
-     *     <li>{@code Year.class} - {@link YearConverter}</li>
-     *     <li>{@code YearMonth.class} - {@link YearMonthConverter}</li>
-     *     <li>{@code ZoneId.class} - {@link ZoneIdConverter}</li>
-     *     <li>{@code ZoneOffset.class} - {@link ZoneOffsetConverter}</li>
-     * </ul>
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * {@code false} if a default value should be used.
-     */
-    private void registerOther(final boolean throwException) {
-        // @formatter:off
-        register(Class.class,          throwException ? new ClassConverter<>()        : new ClassConverter<>(null));
-        register(Enum.class,           throwException ? new EnumConverter()           : new EnumConverter(null));
-        register(java.util.Date.class, throwException ? new DateConverter()           : new DateConverter(null));
-        register(Calendar.class,       throwException ? new CalendarConverter()       : new CalendarConverter(null));
-        register(File.class,           throwException ? new FileConverter()           : new FileConverter(null));
-        register(Path.class,           throwException ? new PathConverter()           : new PathConverter(null));
-        register(java.sql.Date.class,  throwException ? new SqlDateConverter()        : new SqlDateConverter(null));
-        register(java.sql.Time.class,  throwException ? new SqlTimeConverter()        : new SqlTimeConverter(null));
-        register(Timestamp.class,      throwException ? new SqlTimestampConverter()   : new SqlTimestampConverter(null));
-        register(URL.class,            throwException ? new URLConverter()            : new URLConverter(null));
-        register(URI.class,            throwException ? new URIConverter()            : new URIConverter(null));
-        register(UUID.class,           throwException ? new UUIDConverter()           : new UUIDConverter(null));
-        register(LocalDate.class,      throwException ? new LocalDateConverter()      : new LocalDateConverter(null));
-        register(LocalDateTime.class,  throwException ? new LocalDateTimeConverter()  : new LocalDateTimeConverter(null));
-        register(LocalTime.class,      throwException ? new LocalTimeConverter()      : new LocalTimeConverter(null));
-        register(OffsetDateTime.class, throwException ? new OffsetDateTimeConverter() : new OffsetDateTimeConverter(null));
-        register(OffsetTime.class,     throwException ? new OffsetTimeConverter()     : new OffsetTimeConverter(null));
-        register(ZonedDateTime.class,  throwException ? new ZonedDateTimeConverter()  : new ZonedDateTimeConverter(null));
-        register(Duration.class,       throwException ? new DurationConverter()       : new DurationConverter(null));
-        register(MonthDay.class,       throwException ? new MonthDayConverter()       : new MonthDayConverter(null));
-        register(Period.class,         throwException ? new PeriodConverter()         : new PeriodConverter(null));
-        register(Year.class,           throwException ? new YearConverter()           : new YearConverter(null));
-        register(YearMonth.class,      throwException ? new YearMonthConverter()      : new YearMonthConverter(null));
-        register(ZoneId.class,         throwException ? new ZoneIdConverter()         : new ZoneIdConverter(null));
-        register(ZoneOffset.class,     throwException ? new ZoneOffsetConverter()     : new ZoneOffsetConverter(null));
-        // @formatter:on
-    }
-
-    /**
-     * Register array converters.
-     *
-     * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
-     * {@code false} if a default value should be used.
-     * @param defaultArraySize The size of the default array value for array converters
-     * (N.B. This values is ignored if {@code throwException</code> is <code>true}).
-     * Specifying a value less than zero causes a <code>null<code> value to be used for
-     * the default.
-     */
-    private void registerArrays(final boolean throwException, final int defaultArraySize) {
-        // @formatter:off
-
-        // Primitives
-        registerArrayConverter(Boolean.TYPE,   new BooleanConverter(),   throwException, defaultArraySize);
-        registerArrayConverter(Byte.TYPE,      new ByteConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Character.TYPE, new CharacterConverter(), throwException, defaultArraySize);
-        registerArrayConverter(Double.TYPE,    new DoubleConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Float.TYPE,     new FloatConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(Integer.TYPE,   new IntegerConverter(),   throwException, defaultArraySize);
-        registerArrayConverter(Long.TYPE,      new LongConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Short.TYPE,     new ShortConverter(),     throwException, defaultArraySize);
-
-        // Standard
-        registerArrayConverter(BigDecimal.class, new BigDecimalConverter(), throwException, defaultArraySize);
-        registerArrayConverter(BigInteger.class, new BigIntegerConverter(), throwException, defaultArraySize);
-        registerArrayConverter(Boolean.class,    new BooleanConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Byte.class,       new ByteConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(Character.class,  new CharacterConverter(),  throwException, defaultArraySize);
-        registerArrayConverter(Double.class,     new DoubleConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(Float.class,      new FloatConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Integer.class,    new IntegerConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(Long.class,       new LongConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(Short.class,      new ShortConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(String.class,     new StringConverter(),     throwException, defaultArraySize);
-
-        // Other
-        registerArrayConverter(Class.class,          new ClassConverter(),         throwException, defaultArraySize);
-        registerArrayConverter(Enum.class,           new EnumConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(java.util.Date.class, new DateConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(Calendar.class,       new CalendarConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(File.class,           new FileConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(Path.class,           new PathConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Date.class,  new SqlDateConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(java.sql.Time.class,  new SqlTimeConverter(),       throwException, defaultArraySize);
-        registerArrayConverter(Timestamp.class,      new SqlTimestampConverter(),  throwException, defaultArraySize);
-        registerArrayConverter(URL.class,            new URLConverter(),           throwException, defaultArraySize);
-        registerArrayConverter(URI.class,            new URIConverter(),           throwException, defaultArraySize);
-        registerArrayConverter(UUID.class,           new UUIDConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(LocalDate.class,      new LocalDateConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(LocalDateTime.class,  new LocalDateTimeConverter(), throwException, defaultArraySize);
-        registerArrayConverter(LocalTime.class,      new LocalTimeConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(OffsetDateTime.class, new OffsetDateTimeConverter(),throwException, defaultArraySize);
-        registerArrayConverter(OffsetTime.class,     new OffsetTimeConverter(),    throwException, defaultArraySize);
-        registerArrayConverter(ZonedDateTime.class,  new ZonedDateTimeConverter(), throwException, defaultArraySize);
-        registerArrayConverter(Duration.class,       new DurationConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(MonthDay.class,       new MonthDayConverter(),      throwException, defaultArraySize);
-        registerArrayConverter(Period.class,         new PeriodConverter(),        throwException, defaultArraySize);
-        registerArrayConverter(Year.class,           new YearConverter(),          throwException, defaultArraySize);
-        registerArrayConverter(YearMonth.class,      new YearMonthConverter(),     throwException, defaultArraySize);
-        registerArrayConverter(ZoneId.class,         new ZoneIdConverter(),        throwException, defaultArraySize);
-        registerArrayConverter(ZoneOffset.class,     new ZoneOffsetConverter(),    throwException, defaultArraySize);
-        // @formatter:on
-    }
-
-    /**
-     * Register a new ArrayConverter with the specified element delegate converter
-     * that returns a default array of the specified size in the event of conversion errors.
-     *
-     * @param componentType The component type of the array
-     * @param componentConverter The converter to delegate to for the array elements
-     * @param throwException Whether a conversion exception should be thrown or a default
-     * value used in the event of a conversion error
-     * @param defaultArraySize The size of the default array
-     */
-    private <T> void registerArrayConverter(final Class<T> componentType, final Converter<T> componentConverter,
-            final boolean throwException, final int defaultArraySize) {
-        final Class<T[]> arrayType = (Class<T[]>) Array.newInstance(componentType, 0).getClass();
-        final Converter<T[]> arrayConverter;
-        if (throwException) {
-            arrayConverter = new ArrayConverter<>(arrayType, componentConverter);
-        } else {
-            arrayConverter = new ArrayConverter<>(arrayType, componentConverter, defaultArraySize);
-        }
-        register(arrayType, arrayConverter);
-    }
-
-    /** strictly for convenience since it has same parameter order as Map.put */
-    private <T> void register(final Class<?> clazz, final Converter<T> converter) {
-        register(new ConverterFacade<>(converter), clazz);
-    }
-
-    /**
-     * Remove any registered {@link Converter} for the specified destination
-     * {@code Class}.
-     *
-     * @param clazz Class for which to remove a registered Converter
-     */
-    public void deregister(final Class<?> clazz) {
-        converters.remove(clazz);
-    }
-
-    /**
-     * Look up and return any registered {@link Converter} for the specified
-     * destination class; if there is no registered Converter, return
-     * {@code null}.
-     *
-     * @param <T> The converter type.
-     * @param clazz Class for which to return a registered Converter
-     * @return The registered {@link Converter} or {@code null} if not found
-     */
-    @SuppressWarnings("unchecked")
-    public <T> Converter<T> lookup(final Class<T> clazz) {
-        return (Converter<T>) converters.get(clazz);
-    }
-
-    /**
-     * Look up and return any registered {@link Converter} for the specified
-     * source and destination class; if there is no registered Converter,
-     * return {@code null}.
-     *
-     * @param <T> The converter type.
-     * @param sourceType Class of the value being converted
-     * @param targetType Class of the value to be converted to
-     * @return The registered {@link Converter} or {@code null} if not found
-     */
-    public <T> Converter<T> lookup(final Class<?> sourceType, final Class<T> targetType) {
-
-        if (targetType == null) {
-            throw new IllegalArgumentException("Target type is missing");
-        }
-        if (sourceType == null) {
-            return lookup(targetType);
-        }
-
-        Converter converter = null;
-        // Convert --> String
-        if (targetType == String.class) {
-            converter = lookup(sourceType);
-            if (converter == null && (sourceType.isArray() ||
-                        Collection.class.isAssignableFrom(sourceType))) {
-                converter = lookup(String[].class);
-            }
-            if (converter == null) {
-                converter = lookup(String.class);
-            }
-            return converter;
-        }
-
-        // Convert --> String array
-        if (targetType == String[].class) {
-            if (sourceType.isArray() || Collection.class.isAssignableFrom(sourceType)) {
-                converter = lookup(sourceType);
-            }
-            if (converter == null) {
-                converter = lookup(String[].class);
-            }
-            return converter;
-        }
-
-        return lookup(targetType);
-
-    }
-
-    /**
-     * Register a custom {@link Converter} for the specified destination
-     * {@code Class}, replacing any previously registered Converter.
-     *
-     * @param converter Converter to be registered
-     * @param clazz Destination class for conversions performed by this
-     *  Converter
-     */
-    public void register(final Converter converter, final Class<?> clazz) {
-        converters.put(clazz, converter);
     }
 }

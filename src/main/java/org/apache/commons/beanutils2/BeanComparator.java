@@ -43,8 +43,57 @@ import java.util.Comparator;
  */
 public class BeanComparator<T, V> implements Comparator<T>, Serializable {
 
+    /**
+     * A {@link Comparator Comparator} that compares {@link Comparable Comparable} objects.
+     * <p>
+     * This Comparator is useful, for example, for enforcing the natural order in custom implementations of
+     * {@link java.util.SortedSet SortedSet} and {@link java.util.SortedMap SortedMap}.
+     * </p>
+     *
+     * @param <E> the type of objects compared by this comparator
+     * @see java.util.Collections#reverseOrder()
+     */
+    private static class NaturalOrderComparator<E extends Comparable<? super E>>
+            implements Comparator<E>, Serializable {
+
+        /** Serialization version. */
+        private static final long serialVersionUID = -291439688585137865L;
+
+        /** The singleton instance. */
+        @SuppressWarnings("rawtypes")
+        public static final NaturalOrderComparator INSTANCE = new NaturalOrderComparator();
+
+        /**
+         * Private constructor to prevent instantiation. Only use INSTANCE.
+         */
+        private NaturalOrderComparator() {
+        }
+
+        /**
+         * Compare the two {@link Comparable Comparable} arguments. This method is equivalent to:
+         *
+         * <pre>
+         * ((Comparable) obj1).compareTo(obj2)
+         * </pre>
+         */
+        @Override
+        public int compare(final E obj1, final E obj2) {
+            return obj1.compareTo(obj2);
+        }
+
+        @Override
+        public boolean equals(final Object object) {
+            return this == object || null != object && object.getClass().equals(this.getClass());
+        }
+
+        @Override
+        public int hashCode() {
+            return "NaturalOrderComparator".hashCode();
+        }
+    }
     private static final long serialVersionUID = 1L;
     private String property;
+
     private final Comparator<V> comparator;
 
     /**
@@ -95,34 +144,6 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
     public BeanComparator(final String property, final Comparator<V> comparator) {
         setProperty(property);
         this.comparator = comparator != null ? comparator : NaturalOrderComparator.INSTANCE;
-    }
-
-    /**
-     * Sets the method to be called to compare two JavaBeans
-     *
-     * @param property String method name to call to compare If the property passed in is null then the actual objects
-     *        will be compared
-     */
-    public void setProperty(final String property) {
-        this.property = property;
-    }
-
-    /**
-     * Gets the property attribute of the BeanComparator
-     *
-     * @return String method name to call to compare. A null value indicates that the actual objects will be compared
-     */
-    public String getProperty() {
-        return property;
-    }
-
-    /**
-     * Gets the Comparator being used to compare beans.
-     *
-     * @return the Comparator being used to compare beans
-     */
-    public Comparator<V> getComparator() {
-        return comparator;
     }
 
     /**
@@ -182,6 +203,24 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
     }
 
     /**
+     * Gets the Comparator being used to compare beans.
+     *
+     * @return the Comparator being used to compare beans
+     */
+    public Comparator<V> getComparator() {
+        return comparator;
+    }
+
+    /**
+     * Gets the property attribute of the BeanComparator
+     *
+     * @return String method name to call to compare. A null value indicates that the actual objects will be compared
+     */
+    public String getProperty() {
+        return property;
+    }
+
+    /**
      * Hashcode compatible with equals.
      *
      * @return the hash code for this comparator
@@ -205,51 +244,12 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
     }
 
     /**
-     * A {@link Comparator Comparator} that compares {@link Comparable Comparable} objects.
-     * <p>
-     * This Comparator is useful, for example, for enforcing the natural order in custom implementations of
-     * {@link java.util.SortedSet SortedSet} and {@link java.util.SortedMap SortedMap}.
-     * </p>
+     * Sets the method to be called to compare two JavaBeans
      *
-     * @param <E> the type of objects compared by this comparator
-     * @see java.util.Collections#reverseOrder()
+     * @param property String method name to call to compare If the property passed in is null then the actual objects
+     *        will be compared
      */
-    private static class NaturalOrderComparator<E extends Comparable<? super E>>
-            implements Comparator<E>, Serializable {
-
-        /** Serialization version. */
-        private static final long serialVersionUID = -291439688585137865L;
-
-        /** The singleton instance. */
-        @SuppressWarnings("rawtypes")
-        public static final NaturalOrderComparator INSTANCE = new NaturalOrderComparator();
-
-        /**
-         * Private constructor to prevent instantiation. Only use INSTANCE.
-         */
-        private NaturalOrderComparator() {
-        }
-
-        /**
-         * Compare the two {@link Comparable Comparable} arguments. This method is equivalent to:
-         *
-         * <pre>
-         * ((Comparable) obj1).compareTo(obj2)
-         * </pre>
-         */
-        @Override
-        public int compare(final E obj1, final E obj2) {
-            return obj1.compareTo(obj2);
-        }
-
-        @Override
-        public int hashCode() {
-            return "NaturalOrderComparator".hashCode();
-        }
-
-        @Override
-        public boolean equals(final Object object) {
-            return this == object || null != object && object.getClass().equals(this.getClass());
-        }
+    public void setProperty(final String property) {
+        this.property = property;
     }
 }

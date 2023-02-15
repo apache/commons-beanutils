@@ -175,6 +175,57 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
     }
 
     /**
+     * Utility method which evaluates whether the actual property value equals the expected property
+     * value.
+     *
+     * @param expected The expected value.
+     * @param actual The actual value.
+     * @return True if they are equal; false otherwise.
+     */
+    protected boolean evaluateValue(final V expected, final Object actual) {
+        return Objects.equals(expected, actual);
+    }
+
+    /**
+     * Returns the name of the property which will be evaluated when this {@code Predicate} is
+     * executed.
+     *
+     * @return The name of the property which will be evaluated when this {@code Predicate} is
+     * executed.
+     */
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    /**
+     * Returns the value that the property specified by {@code propertyName} will be compared to
+     * when this {@code Predicate} executes.
+     *
+     * @return The value that the property specified by {@code propertyName} will be compared to
+     * when this {@code Predicate} executes.
+     */
+    public V getPropertyValue() {
+        return propertyValue;
+    }
+
+    /**
+     * Returns the flag which determines whether {@code null} objects in the property path will
+     * generate an {@code IllegalArgumentException</code> or not. If set to <code>true} then
+     * if any objects in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException</code> throw by <code>PropertyUtils} will be logged but
+     * not re-thrown and {@code false</code> will be returned.  If set to <code>false} then if
+     * any objects in the property path evaluate to {@code null} then the
+     * {@code IllegalArgumentException</code> throw by <code>PropertyUtils} will be logged and
+     * re-thrown.
+     *
+     * @return The flag which determines whether {@code null} objects in the property path will
+     * generate an {@code IllegalArgumentException} or not.
+     */
+    public boolean isIgnoreNull() {
+        return ignoreNull;
+    }
+
+    /**
      * Evaluates the object provided against the criteria specified when this
      * {@code BeanPropertyValueEqualsPredicate} was constructed.  Equality is based on
      * either reference or logical equality as defined by the property object's equals method. If
@@ -235,56 +286,5 @@ public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
         }
 
         return evaluation;
-    }
-
-    /**
-     * Utility method which evaluates whether the actual property value equals the expected property
-     * value.
-     *
-     * @param expected The expected value.
-     * @param actual The actual value.
-     * @return True if they are equal; false otherwise.
-     */
-    protected boolean evaluateValue(final V expected, final Object actual) {
-        return Objects.equals(expected, actual);
-    }
-
-    /**
-     * Returns the name of the property which will be evaluated when this {@code Predicate} is
-     * executed.
-     *
-     * @return The name of the property which will be evaluated when this {@code Predicate} is
-     * executed.
-     */
-    public String getPropertyName() {
-        return propertyName;
-    }
-
-    /**
-     * Returns the value that the property specified by {@code propertyName} will be compared to
-     * when this {@code Predicate} executes.
-     *
-     * @return The value that the property specified by {@code propertyName} will be compared to
-     * when this {@code Predicate} executes.
-     */
-    public V getPropertyValue() {
-        return propertyValue;
-    }
-
-    /**
-     * Returns the flag which determines whether {@code null} objects in the property path will
-     * generate an {@code IllegalArgumentException</code> or not. If set to <code>true} then
-     * if any objects in the property path evaluate to {@code null} then the
-     * {@code IllegalArgumentException</code> throw by <code>PropertyUtils} will be logged but
-     * not re-thrown and {@code false</code> will be returned.  If set to <code>false} then if
-     * any objects in the property path evaluate to {@code null} then the
-     * {@code IllegalArgumentException</code> throw by <code>PropertyUtils} will be logged and
-     * re-thrown.
-     *
-     * @return The flag which determines whether {@code null} objects in the property path will
-     * generate an {@code IllegalArgumentException} or not.
-     */
-    public boolean isIgnoreNull() {
-        return ignoreNull;
     }
 }

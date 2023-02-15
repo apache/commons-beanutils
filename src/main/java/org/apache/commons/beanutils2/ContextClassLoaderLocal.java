@@ -113,23 +113,6 @@ public class ContextClassLoaderLocal<T> {
     }
 
     /**
-     * Returns the initial value for this ContextClassLoaderLocal
-     * variable. This method will be called once per Context ClassLoader for
-     * each ContextClassLoaderLocal, the first time it is accessed
-     * with get or set.  If the programmer desires ContextClassLoaderLocal variables
-     * to be initialized to some value other than null, ContextClassLoaderLocal must
-     * be subclassed, and this method overridden.  Typically, an anonymous
-     * inner class will be used.  Typical implementations of initialValue
-     * will call an appropriate constructor and return the newly constructed
-     * object.
-     *
-     * @return a new Object to be used as an initial value for this ContextClassLoaderLocal
-     */
-    protected T initialValue() {
-        return null;
-    }
-
-    /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
@@ -164,6 +147,23 @@ public class ContextClassLoaderLocal<T> {
             globalValueInitialized = true;
         }//else already set
         return globalValue;
+    }
+
+    /**
+     * Returns the initial value for this ContextClassLoaderLocal
+     * variable. This method will be called once per Context ClassLoader for
+     * each ContextClassLoaderLocal, the first time it is accessed
+     * with get or set.  If the programmer desires ContextClassLoaderLocal variables
+     * to be initialized to some value other than null, ContextClassLoaderLocal must
+     * be subclassed, and this method overridden.  Typically, an anonymous
+     * inner class will be used.  Typical implementations of initialValue
+     * will call an appropriate constructor and return the newly constructed
+     * object.
+     *
+     * @return a new Object to be used as an initial value for this ContextClassLoaderLocal
+     */
+    protected T initialValue() {
+        return null;
     }
 
     /**

@@ -49,21 +49,6 @@ import java.util.Map;
 public class TestResultSet implements InvocationHandler {
 
     /**
-     * Current row number (0 means "before the first one").
-     */
-    protected int row = 0;
-
-    /**
-     * The constant (per run) value used to initialize date/time/timestamp.
-     */
-    protected long timestampMillis = System.currentTimeMillis();
-
-    /**
-     * Meta data for the result set.
-     */
-    protected ResultSetMetaData resultSetMetaData;
-
-    /**
      * Factory method for creating {@link ResultSet} proxies.
      *
      * @return A result set proxy
@@ -85,6 +70,21 @@ public class TestResultSet implements InvocationHandler {
     }
 
     /**
+     * Current row number (0 means "before the first one").
+     */
+    protected int row = 0;
+
+    /**
+     * The constant (per run) value used to initialize date/time/timestamp.
+     */
+    protected long timestampMillis = System.currentTimeMillis();
+
+    /**
+     * Meta data for the result set.
+     */
+    protected ResultSetMetaData resultSetMetaData;
+
+    /**
      * Create a proxy ResultSet.
      */
     public TestResultSet() {
@@ -98,137 +98,6 @@ public class TestResultSet implements InvocationHandler {
      */
     public TestResultSet(final ResultSetMetaData resultSetMetaData) {
         this.resultSetMetaData = resultSetMetaData;
-    }
-
-    /**
-     * Handles method invocation on the ResultSet proxy.
-     *
-     * @param proxy  The proxy ResultSet object
-     * @param method the method being invoked
-     * @param args   The method arguments
-     * @return The result of invoking the method.
-     * @throws Throwable if an error occurs.
-     */
-    @Override
-    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-        final String methodName = method.getName();
-        if ("close".equals(methodName)) {
-            return null;
-        }
-        if ("getMetaData".equals(methodName)) {
-            return getMetaData();
-        }
-        if ("getObject".equals(methodName)) {
-            return getObject(columnName(args[0]));
-        }
-        if ("getDate".equals(methodName)) {
-            return getDate(columnName(args[0]));
-        }
-        if ("getTime".equals(methodName)) {
-            return getTime(columnName(args[0]));
-        }
-        if ("getTimestamp".equals(methodName)) {
-            return getTimestamp(columnName(args[0]));
-        }
-        if ("next".equals(methodName)) {
-            return next() ? Boolean.TRUE : Boolean.FALSE;
-        }
-        if ("updateObject".equals(methodName)) {
-            updateObject((String) args[0], args[1]);
-            return null;
-        }
-
-        throw new UnsupportedOperationException(methodName + " not implemented");
-    }
-
-    private String columnName(final Object arg) throws SQLException {
-        if (arg instanceof Integer) {
-            return resultSetMetaData.getColumnName(((Integer) arg).intValue());
-        }
-        return (String) arg;
-    }
-
-    public void close() throws SQLException {
-        // No action required
-    }
-
-    public ResultSetMetaData getMetaData() throws SQLException {
-        return resultSetMetaData;
-    }
-
-    public Object getObject(final String columnName) throws SQLException {
-        if (row > 5) {
-            throw new SQLException("No current row");
-        }
-        if ("bigDecimalProperty".equals(columnName)) {
-            return new BigDecimal(123.45);
-        }
-        if ("booleanProperty".equals(columnName)) {
-            if (row % 2 == 0) {
-                return Boolean.TRUE;
-            }
-            return Boolean.FALSE;
-        }
-        if ("byteProperty".equals(columnName)) {
-            return Byte.valueOf((byte) row);
-        }
-        if ("dateProperty".equals(columnName)) {
-            return new Date(timestampMillis);
-        }
-        if ("doubleProperty".equals(columnName)) {
-            return Double.valueOf(321.0);
-        }
-        if ("floatProperty".equals(columnName)) {
-            return Float.valueOf((float) 123.0);
-        }
-        if ("intProperty".equals(columnName)) {
-            return Integer.valueOf(100 + row);
-        }
-        if ("longProperty".equals(columnName)) {
-            return Long.valueOf(200 + row);
-        }
-        if ("nullProperty".equals(columnName)) {
-            return null;
-        }
-        if ("shortProperty".equals(columnName)) {
-            return Short.valueOf((short) (300 + row));
-        }
-        if ("stringProperty".equals(columnName)) {
-            return "This is a string";
-        }
-        if ("timeProperty".equals(columnName)) {
-            return new Time(timestampMillis);
-        }
-        if ("timestampProperty".equals(columnName)) {
-            return new Timestamp(timestampMillis);
-        }
-        throw new SQLException("Unknown column name " + columnName);
-    }
-
-    public Date getDate(final String columnName) throws SQLException {
-        return new Date(timestampMillis);
-    }
-
-    public Time getTime(final String columnName) throws SQLException {
-        return new Time(timestampMillis);
-    }
-
-    public Timestamp getTimestamp(final String columnName) throws SQLException {
-        return new Timestamp(timestampMillis);
-    }
-
-    public boolean next() throws SQLException {
-        if (row++ < 5) {
-            return true;
-        }
-        return false;
-    }
-
-    public void updateObject(final String columnName, final Object x) throws SQLException {
-        if (row > 5) {
-            throw new SQLException("No current row");
-        }
-        // FIXME - updateObject()
     }
 
     public boolean absolute(final int row) throws SQLException {
@@ -249,6 +118,17 @@ public class TestResultSet implements InvocationHandler {
 
     public void clearWarnings() throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+    public void close() throws SQLException {
+        // No action required
+    }
+
+    private String columnName(final Object arg) throws SQLException {
+        if (arg instanceof Integer) {
+            return resultSetMetaData.getColumnName(((Integer) arg).intValue());
+        }
+        return (String) arg;
     }
 
     public void deleteRow() throws SQLException {
@@ -371,6 +251,10 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
+    public Date getDate(final String columnName) throws SQLException {
+        return new Date(timestampMillis);
+    }
+
     public Date getDate(final String columnName, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -415,12 +299,65 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
+    public ResultSetMetaData getMetaData() throws SQLException {
+        return resultSetMetaData;
+    }
+
     public Object getObject(final int columnIndex) throws SQLException {
         throw new UnsupportedOperationException();
     }
 
     public Object getObject(final int columnIndex, final Map<?, ?> map) throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+    public Object getObject(final String columnName) throws SQLException {
+        if (row > 5) {
+            throw new SQLException("No current row");
+        }
+        if ("bigDecimalProperty".equals(columnName)) {
+            return new BigDecimal(123.45);
+        }
+        if ("booleanProperty".equals(columnName)) {
+            if (row % 2 == 0) {
+                return Boolean.TRUE;
+            }
+            return Boolean.FALSE;
+        }
+        if ("byteProperty".equals(columnName)) {
+            return Byte.valueOf((byte) row);
+        }
+        if ("dateProperty".equals(columnName)) {
+            return new Date(timestampMillis);
+        }
+        if ("doubleProperty".equals(columnName)) {
+            return Double.valueOf(321.0);
+        }
+        if ("floatProperty".equals(columnName)) {
+            return Float.valueOf((float) 123.0);
+        }
+        if ("intProperty".equals(columnName)) {
+            return Integer.valueOf(100 + row);
+        }
+        if ("longProperty".equals(columnName)) {
+            return Long.valueOf(200 + row);
+        }
+        if ("nullProperty".equals(columnName)) {
+            return null;
+        }
+        if ("shortProperty".equals(columnName)) {
+            return Short.valueOf((short) (300 + row));
+        }
+        if ("stringProperty".equals(columnName)) {
+            return "This is a string";
+        }
+        if ("timeProperty".equals(columnName)) {
+            return new Time(timestampMillis);
+        }
+        if ("timestampProperty".equals(columnName)) {
+            return new Timestamp(timestampMillis);
+        }
+        throw new SQLException("Unknown column name " + columnName);
     }
 
     public Object getObject(final String columnName, final Map<?, ?> map) throws SQLException {
@@ -467,6 +404,10 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
+    public Time getTime(final String columnName) throws SQLException {
+        return new Time(timestampMillis);
+    }
+
     public Time getTime(final String columnName, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -477,6 +418,10 @@ public class TestResultSet implements InvocationHandler {
 
     public Timestamp getTimestamp(final int columnIndex, final Calendar cal) throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+    public Timestamp getTimestamp(final String columnName) throws SQLException {
+        return new Timestamp(timestampMillis);
     }
 
     public Timestamp getTimestamp(final String columnName, final Calendar cal) throws SQLException {
@@ -515,6 +460,47 @@ public class TestResultSet implements InvocationHandler {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Handles method invocation on the ResultSet proxy.
+     *
+     * @param proxy  The proxy ResultSet object
+     * @param method the method being invoked
+     * @param args   The method arguments
+     * @return The result of invoking the method.
+     * @throws Throwable if an error occurs.
+     */
+    @Override
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        final String methodName = method.getName();
+        if ("close".equals(methodName)) {
+            return null;
+        }
+        if ("getMetaData".equals(methodName)) {
+            return getMetaData();
+        }
+        if ("getObject".equals(methodName)) {
+            return getObject(columnName(args[0]));
+        }
+        if ("getDate".equals(methodName)) {
+            return getDate(columnName(args[0]));
+        }
+        if ("getTime".equals(methodName)) {
+            return getTime(columnName(args[0]));
+        }
+        if ("getTimestamp".equals(methodName)) {
+            return getTimestamp(columnName(args[0]));
+        }
+        if ("next".equals(methodName)) {
+            return next() ? Boolean.TRUE : Boolean.FALSE;
+        }
+        if ("updateObject".equals(methodName)) {
+            updateObject((String) args[0], args[1]);
+            return null;
+        }
+
+        throw new UnsupportedOperationException(methodName + " not implemented");
+    }
+
     public boolean isAfterLast() throws SQLException {
         throw new UnsupportedOperationException();
     }
@@ -541,6 +527,13 @@ public class TestResultSet implements InvocationHandler {
 
     public void moveToInsertRow() throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+    public boolean next() throws SQLException {
+        if (row++ < 5) {
+            return true;
+        }
+        return false;
     }
 
     public boolean previous() throws SQLException {
@@ -709,6 +702,13 @@ public class TestResultSet implements InvocationHandler {
 
     public void updateObject(final int columnPosition, final Object x, final int scale) throws SQLException {
         throw new UnsupportedOperationException();
+    }
+
+    public void updateObject(final String columnName, final Object x) throws SQLException {
+        if (row > 5) {
+            throw new SQLException("No current row");
+        }
+        // FIXME - updateObject()
     }
 
     public void updateObject(final String columnName, final Object x, final int scale) throws SQLException {

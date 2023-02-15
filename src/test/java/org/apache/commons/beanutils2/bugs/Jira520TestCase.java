@@ -29,6 +29,17 @@ import junit.framework.TestCase;
  */
 public class Jira520TestCase extends TestCase {
     /**
+     * Allow opt-out to make your app less secure but allow access to "class".
+     */
+    public void testAllowAccessToClassProperty() throws Exception {
+        final BeanUtilsBean bub = new BeanUtilsBean();
+        bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+        final AlphaBean bean = new AlphaBean();
+        final String result = bub.getProperty(bean, "class");
+        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
+    }
+
+    /**
      * By default opt-in to security that does not allow access to "class".
      */
     public void testSuppressClassPropertyByDefault() throws Exception {
@@ -40,16 +51,5 @@ public class Jira520TestCase extends TestCase {
         } catch (final NoSuchMethodException ex) {
             // ok
         }
-    }
-
-    /**
-     * Allow opt-out to make your app less secure but allow access to "class".
-     */
-    public void testAllowAccessToClassProperty() throws Exception {
-        final BeanUtilsBean bub = new BeanUtilsBean();
-        bub.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
-        final AlphaBean bean = new AlphaBean();
-        final String result = bub.getProperty(bean, "class");
-        assertEquals("Class property should have been accessed", "class org.apache.commons.beanutils2.AlphaBean", result);
     }
 }

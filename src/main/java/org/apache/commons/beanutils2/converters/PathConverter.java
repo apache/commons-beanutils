@@ -50,17 +50,6 @@ public final class PathConverter extends AbstractConverter<Path> {
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0
-     */
-    @Override
-    protected Class<Path> getDefaultType() {
-        return Path.class;
-    }
-
-    /**
      * <p>Converts a java.nio.file.Path or object into a String.</p>
      *
      * @param <T> Target type of the conversion.
@@ -77,6 +66,17 @@ public final class PathConverter extends AbstractConverter<Path> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0
+     */
+    @Override
+    protected Class<Path> getDefaultType() {
+        return Path.class;
     }
 
 }

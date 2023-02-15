@@ -48,8 +48,51 @@ import java.util.Set;
  */
 public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
 
+    /**
+     * Map.Entry implementation.
+     */
+    private static class MapEntry<K> implements Map.Entry<K, Object> {
+
+        private final K key;
+        private final Object value;
+
+        MapEntry(final K key, final Object value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (!(o instanceof Map.Entry)) {
+                return false;
+            }
+            final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
+            return key.equals(e.getKey()) && (value == null ? e.getValue() == null : value.equals(e.getValue()));
+        }
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public Object getValue() {
+            return value;
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode() + (value == null ? 0 : value.hashCode());
+        }
+
+        @Override
+        public Object setValue(final Object value) {
+            throw new UnsupportedOperationException();
+        }
+    }
     private final DynaBean dynaBean;
     private final boolean readOnly;
+
     private transient Set<K> keySet;
 
     /**
@@ -75,15 +118,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         }
         this.dynaBean = dynaBean;
         this.readOnly = readOnly;
-    }
-
-    /**
-     * Indicate whether the Map is read only.
-     *
-     * @return {@code true} if the Map is read only, otherwise {@code false}.
-     */
-    public boolean isReadOnly() {
-        return readOnly;
     }
 
     /**
@@ -133,6 +167,14 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
+     * Converts the name of a property to the key type of this decorator.
+     *
+     * @param propertyName the name of a property
+     * @return the converted key to be used in the decorated map
+     */
+    protected abstract K convertKey(String propertyName);
+
+    /**
      * <p>
      * Returns the Set of the property/value mappings in the decorated {@link DynaBean}.
      * </p>
@@ -167,6 +209,24 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
+     * Provide access to the underlying {@link DynaBean} this Map decorates.
+     *
+     * @return the decorated {@link DynaBean}.
+     */
+    public DynaBean getDynaBean() {
+        return dynaBean;
+    }
+
+    /**
+     * Convenience method to retrieve the {@link DynaProperty}s for this {@link DynaClass}.
+     *
+     * @return The an array of the {@link DynaProperty}s.
+     */
+    private DynaProperty[] getDynaProperties() {
+        return getDynaBean().getDynaClass().getDynaProperties();
+    }
+
+    /**
      * Indicate whether the decorated {@link DynaBean} has any properties.
      *
      * @return {@code true} if the {@link DynaBean} has no properties, otherwise {@code false}.
@@ -174,6 +234,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     @Override
     public boolean isEmpty() {
         return getDynaProperties().length == 0;
+    }
+
+    /**
+     * Indicate whether the Map is read only.
+     *
+     * @return {@code true} if the Map is read only, otherwise {@code false}.
+     */
+    public boolean isReadOnly() {
+        return readOnly;
     }
 
     /**
@@ -268,6 +337,16 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
     /**
+     * Convenience method to convert an Object to a String.
+     *
+     * @param obj The Object to convert
+     * @return String representation of the object
+     */
+    private String toString(final Object obj) {
+        return obj == null ? null : obj.toString();
+    }
+
+    /**
      * Returns the set of property values in the decorated {@link DynaBean}.
      *
      * @return Unmodifiable collection of values.
@@ -282,85 +361,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
             values.add(value);
         }
         return Collections.unmodifiableList(values);
-    }
-
-    /**
-     * Provide access to the underlying {@link DynaBean} this Map decorates.
-     *
-     * @return the decorated {@link DynaBean}.
-     */
-    public DynaBean getDynaBean() {
-        return dynaBean;
-    }
-
-    /**
-     * Converts the name of a property to the key type of this decorator.
-     *
-     * @param propertyName the name of a property
-     * @return the converted key to be used in the decorated map
-     */
-    protected abstract K convertKey(String propertyName);
-
-    /**
-     * Convenience method to retrieve the {@link DynaProperty}s for this {@link DynaClass}.
-     *
-     * @return The an array of the {@link DynaProperty}s.
-     */
-    private DynaProperty[] getDynaProperties() {
-        return getDynaBean().getDynaClass().getDynaProperties();
-    }
-
-    /**
-     * Convenience method to convert an Object to a String.
-     *
-     * @param obj The Object to convert
-     * @return String representation of the object
-     */
-    private String toString(final Object obj) {
-        return obj == null ? null : obj.toString();
-    }
-
-    /**
-     * Map.Entry implementation.
-     */
-    private static class MapEntry<K> implements Map.Entry<K, Object> {
-
-        private final K key;
-        private final Object value;
-
-        MapEntry(final K key, final Object value) {
-            this.key = key;
-            this.value = value;
-        }
-
-        @Override
-        public boolean equals(final Object o) {
-            if (!(o instanceof Map.Entry)) {
-                return false;
-            }
-            final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-            return key.equals(e.getKey()) && (value == null ? e.getValue() == null : value.equals(e.getValue()));
-        }
-
-        @Override
-        public int hashCode() {
-            return key.hashCode() + (value == null ? 0 : value.hashCode());
-        }
-
-        @Override
-        public K getKey() {
-            return key;
-        }
-
-        @Override
-        public Object getValue() {
-            return value;
-        }
-
-        @Override
-        public Object setValue(final Object value) {
-            throw new UnsupportedOperationException();
-        }
     }
 
 }

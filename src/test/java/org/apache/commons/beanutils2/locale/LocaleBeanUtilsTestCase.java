@@ -33,6 +33,15 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
 
     /**
+     * Creates the tests included in this test suite.
+     *
+     * @return Test Suite
+     */
+    public static Test suite() {
+        return new TestSuite(LocaleBeanUtilsTestCase.class);
+    }
+
+    /**
      * Constructs a new instance of this test case.
      *
      * @param name Name of the test case
@@ -49,35 +58,10 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
     /**
-     * Creates the tests included in this test suite.
-     *
-     * @return Test Suite
-     */
-    public static Test suite() {
-        return new TestSuite(LocaleBeanUtilsTestCase.class);
-    }
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
     public void tearDown() {
-    }
-
-    /**
-     * Test setting a nested simple property
-     */
-    public void testSetNestedPropertySimple() {
-        final TestBean bean = new TestBean();
-        bean.getNested().setIntProperty(5);
-        assertEquals("Initial value 5", 5, bean.getNested().getIntProperty());
-        try {
-            LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
-        } catch (final Throwable t) {
-            LOG.error(t);
-            fail("Threw " + t);
-        }
-        assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
     }
 
     /**
@@ -94,5 +78,21 @@ public class LocaleBeanUtilsTestCase extends TestCase {
             fail("Threw " + t);
         }
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));
+    }
+
+    /**
+     * Test setting a nested simple property
+     */
+    public void testSetNestedPropertySimple() {
+        final TestBean bean = new TestBean();
+        bean.getNested().setIntProperty(5);
+        assertEquals("Initial value 5", 5, bean.getNested().getIntProperty());
+        try {
+            LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
+        } catch (final Throwable t) {
+            LOG.error(t);
+            fail("Threw " + t);
+        }
+        assertEquals("Check Set Value", 123, bean.getNested().getIntProperty());
     }
 }

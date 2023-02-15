@@ -34,87 +34,6 @@ import junit.framework.TestSuite;
  */
 public class Jira339TestCase extends TestCase {
 
-    private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
-
-    /**
-     * Create a test case with the specified name.
-     *
-     * @param name The name of the test
-     */
-    public Jira339TestCase(final String name) {
-        super(name);
-    }
-
-    /**
-     * Run the Test.
-     *
-     * @param args Arguments
-     */
-    public static void main(final String[] args) {
-        junit.textui.TestRunner.run(suite());
-    }
-
-    /**
-     * Create a test suite for this test.
-     *
-     * @return a test suite
-     */
-    public static Test suite() {
-        return new TestSuite(Jira339TestCase.class);
-    }
-
-    /**
-     * Sets up.
-     *
-     * @throws Exception
-     */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    /**
-     * Tear Down.
-     *
-     * @throws Exception
-     */
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
-     */
-    public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
-
-        final TestBean bean = new TestBean();
-        try {
-            BeanUtils.setProperty(bean, "comparator", null);
-        } catch (final Throwable t) {
-            LOG.error("Failed: " + t.getMessage(), t);
-            fail("Threw exception: " + t);
-        }
-        assertNull("TestBean comparator should be null", bean.getComparator());
-    }
-
-    /**
-     * Test {@link BeanUtils#populate(Object, Map)}
-     */
-    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
-
-        final TestBean bean = new TestBean();
-        try {
-            final Map<String, Object> properties = new HashMap<>();
-            properties.put("comparator", null);
-            BeanUtils.populate(bean, properties);
-        } catch (final Throwable t) {
-            LOG.error("Failed: " + t.getMessage(), t);
-            fail("Threw exception: " + t);
-        }
-        assertNull("TestBean comparator should be null", bean.getComparator());
-    }
-
     /**
      * Test Bean.
      */
@@ -139,5 +58,86 @@ public class Jira339TestCase extends TestCase {
             this.comparator = comparator;
         }
 
+    }
+
+    private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
+
+    /**
+     * Run the Test.
+     *
+     * @param args Arguments
+     */
+    public static void main(final String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
+
+    /**
+     * Create a test suite for this test.
+     *
+     * @return a test suite
+     */
+    public static Test suite() {
+        return new TestSuite(Jira339TestCase.class);
+    }
+
+    /**
+     * Create a test case with the specified name.
+     *
+     * @param name The name of the test
+     */
+    public Jira339TestCase(final String name) {
+        super(name);
+    }
+
+    /**
+     * Sets up.
+     *
+     * @throws Exception
+     */
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+    }
+
+    /**
+     * Tear Down.
+     *
+     * @throws Exception
+     */
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
+
+    /**
+     * Test {@link BeanUtils#populate(Object, Map)}
+     */
+    public void testIssue_BEANUTILS_331_BeanUtilsBean_populate() {
+
+        final TestBean bean = new TestBean();
+        try {
+            final Map<String, Object> properties = new HashMap<>();
+            properties.put("comparator", null);
+            BeanUtils.populate(bean, properties);
+        } catch (final Throwable t) {
+            LOG.error("Failed: " + t.getMessage(), t);
+            fail("Threw exception: " + t);
+        }
+        assertNull("TestBean comparator should be null", bean.getComparator());
+    }
+
+    /**
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
+     */
+    public void testIssue_BEANUTILS_339_BeanUtilsBean_setProperty() {
+
+        final TestBean bean = new TestBean();
+        try {
+            BeanUtils.setProperty(bean, "comparator", null);
+        } catch (final Throwable t) {
+            LOG.error("Failed: " + t.getMessage(), t);
+            fail("Threw exception: " + t);
+        }
+        assertNull("TestBean comparator should be null", bean.getComparator());
     }
 }

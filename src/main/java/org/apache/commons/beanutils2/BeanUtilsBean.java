@@ -57,6 +57,58 @@ public class BeanUtilsBean {
                     };
 
     /**
+     * Logging for this instance
+     */
+    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
+
+    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
+    private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
+
+    /**
+     * Determines the type of a {@code DynaProperty}. Here a special treatment
+     * is needed for mapped properties.
+     *
+     * @param dynaProperty the property descriptor
+     * @param value the value object to be set for this property
+     * @return the type of this property
+     */
+    private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
+            final Object value) {
+        if (!dynaProperty.isMapped()) {
+            return dynaProperty.getType();
+        }
+        return value == null ? String.class : value.getClass();
+    }
+
+    /**
+     * Returns a <code>Method<code> allowing access to
+     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
+     * or {@code null} if the method
+     * does not exist.
+     *
+     * @return A {@code Method<code> for <code>Throwable.initCause}, or
+     * {@code null} if unavailable.
+     */
+    private static Method getInitCauseMethod() {
+        try {
+            final Class<?>[] paramsClasses = { Throwable.class };
+            return Throwable.class.getMethod("initCause", paramsClasses);
+        } catch (final NoSuchMethodException e) {
+            final Log log = LogFactory.getLog(BeanUtils.class);
+            if (log.isWarnEnabled()) {
+                log.warn("Throwable does not have initCause() method in JDK 1.3");
+            }
+            return null;
+        } catch (final Throwable e) {
+            final Log log = LogFactory.getLog(BeanUtils.class);
+            if (log.isWarnEnabled()) {
+                log.warn("Error getting the Throwable initCause() method", e);
+            }
+            return null;
+        }
+    }
+
+    /**
      * Gets the instance which provides the functionality for {@link BeanUtils}.
      * This is a pseudo-singleton - an single instance is provided per (thread) context classloader.
      * This mechanism provides isolation for web apps deployed in the same container.
@@ -78,19 +130,11 @@ public class BeanUtilsBean {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-    /**
-     * Logging for this instance
-     */
-    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
-
     /** Used to perform conversions between object types when setting properties */
     private final ConvertUtilsBean convertUtilsBean;
 
     /** Used to access properties*/
     private final PropertyUtilsBean propertyUtilsBean;
-
-    /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
-    private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
     /**
      * <p>Constructs an instance using new property
@@ -163,6 +207,42 @@ public class BeanUtilsBean {
         }
         getPropertyUtils().copyProperties(newBean, bean);
         return newBean;
+    }
+
+    /**
+     * <p>Converts the value to an object of the specified class (if
+     * possible).</p>
+     *
+     * @param <R> The desired return type
+     * @param value Value to be converted (may be null)
+     * @param type Class of the value to be converted to
+     * @return The converted value
+     *
+     * @throws ConversionException if thrown by an underlying Converter
+     * @since 1.8.0
+     */
+    protected <R> Object convert(final Object value, final Class<R> type) {
+        final Converter<R> converter = getConvertUtils().lookup(type);
+        if (converter != null) {
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("        USING CONVERTER " + converter);
+            }
+            return converter.convert(type, value);
+        }
+        return value;
+    }
+
+    /**
+     * Performs a type conversion of a property value before it is copied to a target
+     * bean. This method delegates to {@link #convert(Object, Class)}, but <b>null</b>
+     * values are not converted. This causes <b>null</b> values to be copied verbatim.
+     *
+     * @param value the value to be converted and copied
+     * @param type the target type of the conversion
+     * @return the converted value
+     */
+    private Object convertForCopy(final Object value, final Class<?> type) {
+        return value != null ? convert(value, type) : value;
     }
 
     /**
@@ -535,6 +615,15 @@ public class BeanUtilsBean {
     }
 
     /**
+     * Gets the {@code ConvertUtilsBean} instance used to perform the conversions.
+     *
+     * @return The ConvertUtils bean instance
+     */
+    public ConvertUtilsBean getConvertUtils() {
+        return convertUtilsBean;
+    }
+
+    /**
      * Gets the value of the specified indexed property of the specified
      * bean, as a String.  The zero-relative index of the
      * required value must be included (in square brackets) as a suffix to
@@ -683,6 +772,15 @@ public class BeanUtilsBean {
     }
 
     /**
+     * Gets the {@code PropertyUtilsBean} instance used to access properties.
+     *
+     * @return The ConvertUtils bean instance
+     */
+    public PropertyUtilsBean getPropertyUtils() {
+        return propertyUtilsBean;
+    }
+
+    /**
      * Gets the value of the specified simple property of the specified
      * bean, converted to a String.
      *
@@ -702,6 +800,26 @@ public class BeanUtilsBean {
             NoSuchMethodException {
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
         return getConvertUtils().convert(value);
+    }
+
+    /**
+     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     *
+     * @param  throwable The throwable.
+     * @param  cause     The cause of the throwable.
+     * @return  true if the cause was initialized, otherwise false.
+     * @since 1.8.0
+     */
+    public boolean initCause(final Throwable throwable, final Throwable cause) {
+        if (INIT_CAUSE_METHOD != null && cause != null) {
+            try {
+                INIT_CAUSE_METHOD.invoke(throwable, cause);
+                return true;
+            } catch (final Throwable e) {
+             // can't initialize cause
+            }
+        }
+        return false;
     }
 
     /**
@@ -953,123 +1071,5 @@ public class BeanUtilsBean {
             throw new InvocationTargetException
                 (e, "Cannot set " + propName);
         }
-    }
-
-    /**
-     * Gets the {@code ConvertUtilsBean} instance used to perform the conversions.
-     *
-     * @return The ConvertUtils bean instance
-     */
-    public ConvertUtilsBean getConvertUtils() {
-        return convertUtilsBean;
-    }
-
-    /**
-     * Gets the {@code PropertyUtilsBean} instance used to access properties.
-     *
-     * @return The ConvertUtils bean instance
-     */
-    public PropertyUtilsBean getPropertyUtils() {
-        return propertyUtilsBean;
-    }
-
-    /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public boolean initCause(final Throwable throwable, final Throwable cause) {
-        if (INIT_CAUSE_METHOD != null && cause != null) {
-            try {
-                INIT_CAUSE_METHOD.invoke(throwable, cause);
-                return true;
-            } catch (final Throwable e) {
-             // can't initialize cause
-            }
-        }
-        return false;
-    }
-
-    /**
-     * <p>Converts the value to an object of the specified class (if
-     * possible).</p>
-     *
-     * @param <R> The desired return type
-     * @param value Value to be converted (may be null)
-     * @param type Class of the value to be converted to
-     * @return The converted value
-     *
-     * @throws ConversionException if thrown by an underlying Converter
-     * @since 1.8.0
-     */
-    protected <R> Object convert(final Object value, final Class<R> type) {
-        final Converter<R> converter = getConvertUtils().lookup(type);
-        if (converter != null) {
-            if (LOG.isTraceEnabled()) {
-                LOG.trace("        USING CONVERTER " + converter);
-            }
-            return converter.convert(type, value);
-        }
-        return value;
-    }
-
-    /**
-     * Performs a type conversion of a property value before it is copied to a target
-     * bean. This method delegates to {@link #convert(Object, Class)}, but <b>null</b>
-     * values are not converted. This causes <b>null</b> values to be copied verbatim.
-     *
-     * @param value the value to be converted and copied
-     * @param type the target type of the conversion
-     * @return the converted value
-     */
-    private Object convertForCopy(final Object value, final Class<?> type) {
-        return value != null ? convert(value, type) : value;
-    }
-
-    /**
-     * Returns a <code>Method<code> allowing access to
-     * {@link Throwable#initCause(Throwable)} method of {@link Throwable},
-     * or {@code null} if the method
-     * does not exist.
-     *
-     * @return A {@code Method<code> for <code>Throwable.initCause}, or
-     * {@code null} if unavailable.
-     */
-    private static Method getInitCauseMethod() {
-        try {
-            final Class<?>[] paramsClasses = { Throwable.class };
-            return Throwable.class.getMethod("initCause", paramsClasses);
-        } catch (final NoSuchMethodException e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Throwable does not have initCause() method in JDK 1.3");
-            }
-            return null;
-        } catch (final Throwable e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
-            if (log.isWarnEnabled()) {
-                log.warn("Error getting the Throwable initCause() method", e);
-            }
-            return null;
-        }
-    }
-
-    /**
-     * Determines the type of a {@code DynaProperty}. Here a special treatment
-     * is needed for mapped properties.
-     *
-     * @param dynaProperty the property descriptor
-     * @param value the value object to be set for this property
-     * @return the type of this property
-     */
-    private static Class<?> dynaPropertyType(final DynaProperty dynaProperty,
-            final Object value) {
-        if (!dynaProperty.isMapped()) {
-            return dynaProperty.getType();
-        }
-        return value == null ? String.class : value.getClass();
     }
 }

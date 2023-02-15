@@ -41,17 +41,26 @@ import junit.framework.TestSuite;
 public class BasicDynaBeanTestCase extends TestCase {
 
     /**
-     * The basic test bean for each test.
-     */
-    protected DynaBean bean = null;
-
-    /**
      * The set of property names we expect to have returned when calling {@code getDynaProperties()}. You should update this list when new properties are added
      * to TestBean.
      */
     protected final static String[] properties = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed",
             "intProperty", "listIndexed", "longProperty", "mappedProperty", "mappedIntProperty", "nullProperty", "shortProperty", "stringArray",
             "stringIndexed", "stringProperty", };
+
+    /**
+     * Creates the tests included in this test suite.
+     */
+    public static Test suite() {
+
+        return new TestSuite(BasicDynaBeanTestCase.class);
+
+    }
+
+    /**
+     * The basic test bean for each test.
+     */
+    protected DynaBean bean = null;
 
     /**
      * Constructs a new instance of this test case.
@@ -61,6 +70,25 @@ public class BasicDynaBeanTestCase extends TestCase {
     public BasicDynaBeanTestCase(final String name) {
 
         super(name);
+
+    }
+
+    /**
+     * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
+     */
+    protected DynaClass createDynaClass() {
+
+        final int[] intArray = {};
+        final String[] stringArray = {};
+
+        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
+                new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("doubleProperty", Double.TYPE), new DynaProperty("floatProperty", Float.TYPE),
+                new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
+                new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("listIndexed", List.class), new DynaProperty("longProperty", Long.TYPE),
+                new DynaProperty("mappedProperty", Map.class), new DynaProperty("mappedIntProperty", Map.class), new DynaProperty("nullProperty", String.class),
+                new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringArray", stringArray.getClass()),
+                new DynaProperty("stringIndexed", stringArray.getClass()), new DynaProperty("stringProperty", String.class), });
+        return dynaClass;
 
     }
 
@@ -111,15 +139,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
     /**
-     * Creates the tests included in this test suite.
-     */
-    public static Test suite() {
-
-        return new TestSuite(BasicDynaBeanTestCase.class);
-
-    }
-
-    /**
      * Tear down instance variables required by this test case.
      */
     @Override
@@ -148,6 +167,24 @@ public class BasicDynaBeanTestCase extends TestCase {
             // Expected response
         } catch (final Throwable t) {
             fail("Threw " + t + " instead of IllegalArgumentException");
+        }
+
+    }
+
+    /**
+     * Base for testGetDescriptorXxxxx() series of tests.
+     *
+     * @param name Name of the property to be retrieved
+     * @param type Expected class type of this property
+     */
+    protected void testGetDescriptorBase(final String name, final Class<?> type) {
+
+        try {
+            final DynaProperty descriptor = bean.getDynaClass().getDynaProperty(name);
+            assertNotNull("Got descriptor", descriptor);
+            assertEquals("Got correct type", type, descriptor.getType());
+        } catch (final Throwable t) {
+            fail("Threw an exception: " + t);
         }
 
     }
@@ -198,6 +235,32 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
     /**
+     * Positive test for getDynaProperties(). Each property name listed in {@code properties} should be returned exactly once.
+     */
+    public void testGetDescriptors() {
+
+        final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
+        assertNotNull("Got descriptors", pd);
+        final int[] count = new int[properties.length];
+        for (final DynaProperty element : pd) {
+            final String name = element.getName();
+            for (int j = 0; j < properties.length; j++) {
+                if (name.equals(properties[j])) {
+                    count[j]++;
+                }
+            }
+        }
+        for (int j = 0; j < properties.length; j++) {
+            if (count[j] < 0) {
+                fail("Missing property " + properties[j]);
+            } else if (count[j] > 1) {
+                fail("Duplicate property " + properties[j]);
+            }
+        }
+
+    }
+
+    /**
      * Positive getDynaProperty on property {@code booleanSecond} that uses an "is" method as the getter.
      */
     public void testGetDescriptorSecond() {
@@ -221,32 +284,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testGetDescriptorString() {
 
         testGetDescriptorBase("stringProperty", String.class);
-
-    }
-
-    /**
-     * Positive test for getDynaProperties(). Each property name listed in {@code properties} should be returned exactly once.
-     */
-    public void testGetDescriptors() {
-
-        final DynaProperty[] pd = bean.getDynaClass().getDynaProperties();
-        assertNotNull("Got descriptors", pd);
-        final int[] count = new int[properties.length];
-        for (final DynaProperty element : pd) {
-            final String name = element.getName();
-            for (int j = 0; j < properties.length; j++) {
-                if (name.equals(properties[j])) {
-                    count[j]++;
-                }
-            }
-        }
-        for (int j = 0; j < properties.length; j++) {
-            if (count[j] < 0) {
-                fail("Missing property " + properties[j]);
-            } else if (count[j] > 1) {
-                fail("Duplicate property " + properties[j]);
-            }
-        }
 
     }
 
@@ -814,43 +851,6 @@ public class BasicDynaBeanTestCase extends TestCase {
             assertEquals("Matched new value", newValue, (String) bean.get("stringProperty"));
         } catch (final Throwable e) {
             fail("Exception: " + e);
-        }
-
-    }
-
-    /**
-     * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
-     */
-    protected DynaClass createDynaClass() {
-
-        final int[] intArray = {};
-        final String[] stringArray = {};
-
-        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
-                new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("doubleProperty", Double.TYPE), new DynaProperty("floatProperty", Float.TYPE),
-                new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
-                new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("listIndexed", List.class), new DynaProperty("longProperty", Long.TYPE),
-                new DynaProperty("mappedProperty", Map.class), new DynaProperty("mappedIntProperty", Map.class), new DynaProperty("nullProperty", String.class),
-                new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringArray", stringArray.getClass()),
-                new DynaProperty("stringIndexed", stringArray.getClass()), new DynaProperty("stringProperty", String.class), });
-        return dynaClass;
-
-    }
-
-    /**
-     * Base for testGetDescriptorXxxxx() series of tests.
-     *
-     * @param name Name of the property to be retrieved
-     * @param type Expected class type of this property
-     */
-    protected void testGetDescriptorBase(final String name, final Class<?> type) {
-
-        try {
-            final DynaProperty descriptor = bean.getDynaClass().getDynaProperty(name);
-            assertNotNull("Got descriptor", descriptor);
-            assertEquals("Got correct type", type, descriptor.getType());
-        } catch (final Throwable t) {
-            fail("Threw an exception: " + t);
         }
 
     }

@@ -24,41 +24,39 @@ package org.apache.commons.beanutils2;
 
 public class NestedTestBean {
 
+    private String name;
+
+    private String testString = "NOT SET";
+
+    private boolean testBoolean = false;
+
+    private NestedTestBean[] indexedBeans;
+
+    private NestedTestBean simpleBean;
+
     public NestedTestBean(final String name) {
         setName(name);
     }
 
-    private String name;
+    public NestedTestBean getIndexedProperty(final int index) {
+        return this.indexedBeans[index];
+    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
-        this.name = name;
+    public NestedTestBean getSimpleBeanProperty() {
+        return simpleBean;
     }
-
-    private String testString = "NOT SET";
-
-    public String getTestString() {
-        return testString;
-    }
-
-    public void setTestString(final String testString) {
-        this.testString = testString;
-    }
-
-    private boolean testBoolean = false;
 
     public boolean getTestBoolean() {
         return testBoolean;
     }
 
-    public void setTestBoolean(final boolean testBoolean) {
-        this.testBoolean = testBoolean;
+    public String getTestString() {
+        return testString;
     }
-
-    private NestedTestBean[] indexedBeans;
 
     public void init() {
         indexedBeans = new NestedTestBean[5];
@@ -71,18 +69,20 @@ public class NestedTestBean {
         simpleBean = new NestedTestBean("Simple Property Bean");
     }
 
-    public NestedTestBean getIndexedProperty(final int index) {
-        return this.indexedBeans[index];
-    }
-
     public void setIndexedProperty(final int index, final NestedTestBean value) {
         this.indexedBeans[index] = value;
     }
 
-    private NestedTestBean simpleBean;
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-    public NestedTestBean getSimpleBeanProperty() {
-        return simpleBean;
+    public void setTestBoolean(final boolean testBoolean) {
+        this.testBoolean = testBoolean;
+    }
+
+    public void setTestString(final String testString) {
+        this.testString = testString;
     }
 
 }

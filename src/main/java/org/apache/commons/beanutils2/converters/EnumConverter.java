@@ -50,18 +50,6 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
     }
 
     /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 2.0
-     */
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    @Override
-    protected Class<Enum<E>> getDefaultType() {
-        return (Class) Enum.class;
-    }
-
-    /**
      * <p>Converts a java.lang.Enum or object into a String.</p>
      *
      * @param <R> Target type of the conversion.
@@ -88,6 +76,18 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 2.0
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Override
+    protected Class<Enum<E>> getDefaultType() {
+        return (Class) Enum.class;
     }
 
 }

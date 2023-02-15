@@ -26,14 +26,17 @@ package org.apache.commons.beanutils2;
 public interface DynaClass {
 
     /**
-     * Returns the name of this DynaClass (analogous to the
-     * {@code getName()} method of {@code java.lang.Class}, which
-     * allows the same {@code DynaClass} implementation class to support
-     * different dynamic classes, with different sets of properties.
+     * <p>Returns an array of {@code PropertyDescriptor} for the properties
+     * currently defined in this DynaClass.  If no properties are defined, a
+     * zero-length array will be returned.</p>
      *
-     * @return the name of the DynaClass
+     * <p><strong>FIXME</strong> - Should we really be implementing
+     * {@code getBeanInfo()} instead, which returns property descriptors
+     * and a bunch of other stuff?</p>
+     *
+     * @return the set of properties for this DynaClass
      */
-    String getName();
+    DynaProperty[] getDynaProperties();
 
     /**
      * Returns a property descriptor for the specified property, if it exists;
@@ -48,17 +51,14 @@ public interface DynaClass {
     DynaProperty getDynaProperty(String name);
 
     /**
-     * <p>Returns an array of {@code PropertyDescriptor} for the properties
-     * currently defined in this DynaClass.  If no properties are defined, a
-     * zero-length array will be returned.</p>
+     * Returns the name of this DynaClass (analogous to the
+     * {@code getName()} method of {@code java.lang.Class}, which
+     * allows the same {@code DynaClass} implementation class to support
+     * different dynamic classes, with different sets of properties.
      *
-     * <p><strong>FIXME</strong> - Should we really be implementing
-     * {@code getBeanInfo()} instead, which returns property descriptors
-     * and a bunch of other stuff?</p>
-     *
-     * @return the set of properties for this DynaClass
+     * @return the name of the DynaClass
      */
-    DynaProperty[] getDynaProperties();
+    String getName();
 
     /**
      * Instantiates and return a new DynaBean instance, associated

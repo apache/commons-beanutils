@@ -35,6 +35,14 @@ import java.util.Map;
 
 public class BeanUtils {
 
+    /** An empty class array */
+    static final Class<?>[] EMPTY_CLASS_ARRAY = {};
+
+
+    /** An empty object array */
+    static final Object[] EMPTY_OBJECT_ARRAY = {};
+
+
     /**
      * <p>Clone a bean based on the available property getters and setters,
      * even if the bean class itself does not implement Cloneable.</p>
@@ -109,6 +117,18 @@ public class BeanUtils {
         throws IllegalAccessException, InvocationTargetException {
 
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
+    }
+
+
+    /**
+     * Create a cache.
+     * @param <K> the key type of the cache
+     * @param <V> the value type of the cache
+     * @return a new cache
+     * @since 1.8.0
+     */
+    public static <K, V> Map<K, V> createCache() {
+        return new WeakFastHashMap<>();
     }
 
 
@@ -334,7 +354,6 @@ public class BeanUtils {
 
     }
 
-
     /**
      * <p>Return the value of the specified simple property of the specified
      * bean, converted to a String.</p>
@@ -361,6 +380,17 @@ public class BeanUtils {
 
     }
 
+    /**
+     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
+     *
+     * @param  throwable The throwable.
+     * @param  cause     The cause of the throwable.
+     * @return  true if the cause was initialized, otherwise false.
+     * @since 1.8.0
+     */
+    public static boolean initCause(final Throwable throwable, final Throwable cause) {
+        return BeanUtilsBean.getInstance().initCause(throwable, cause);
+    }
 
     /**
      * <p>Populate the JavaBeans properties of the specified bean, based on
@@ -384,7 +414,6 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().populate(bean, properties);
     }
 
-
     /**
      * <p>Set the specified property value, performing type conversions as
      * required to conform to the type of the destination property.</p>
@@ -406,33 +435,4 @@ public class BeanUtils {
 
         BeanUtilsBean.getInstance().setProperty(bean, name, value);
     }
-
-    /**
-     * If we're running on JDK 1.4 or later, initialize the cause for the given throwable.
-     *
-     * @param  throwable The throwable.
-     * @param  cause     The cause of the throwable.
-     * @return  true if the cause was initialized, otherwise false.
-     * @since 1.8.0
-     */
-    public static boolean initCause(final Throwable throwable, final Throwable cause) {
-        return BeanUtilsBean.getInstance().initCause(throwable, cause);
-    }
-
-    /**
-     * Create a cache.
-     * @param <K> the key type of the cache
-     * @param <V> the value type of the cache
-     * @return a new cache
-     * @since 1.8.0
-     */
-    public static <K, V> Map<K, V> createCache() {
-        return new WeakFastHashMap<>();
-    }
-
-    /** An empty class array */
-    static final Class<?>[] EMPTY_CLASS_ARRAY = {};
-
-    /** An empty object array */
-    static final Object[] EMPTY_OBJECT_ARRAY = {};
 }

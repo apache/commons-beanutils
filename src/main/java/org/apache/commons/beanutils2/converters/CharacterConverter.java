@@ -42,7 +42,7 @@ public final class CharacterConverter extends AbstractConverter<Character> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public CharacterConverter(final Character defaultValue) {
+    public CharacterConverter(final char defaultValue) {
         super(defaultValue);
     }
 
@@ -54,19 +54,8 @@ public final class CharacterConverter extends AbstractConverter<Character> {
      * if the value to be converted is missing or an error
      * occurs converting the value.
      */
-    public CharacterConverter(final char defaultValue) {
+    public CharacterConverter(final Character defaultValue) {
         super(defaultValue);
-    }
-
-    /**
-     * Gets the default type this {@code Converter} handles.
-     *
-     * @return The default type this {@code Converter} handles.
-     * @since 1.8.0
-     */
-    @Override
-    protected Class<Character> getDefaultType() {
-        return Character.class;
     }
 
     /**
@@ -99,6 +88,17 @@ public final class CharacterConverter extends AbstractConverter<Character> {
         }
 
         throw conversionException(type, value);
+    }
+
+    /**
+     * Gets the default type this {@code Converter} handles.
+     *
+     * @return The default type this {@code Converter} handles.
+     * @since 1.8.0
+     */
+    @Override
+    protected Class<Character> getDefaultType() {
+        return Character.class;
     }
 
 }
