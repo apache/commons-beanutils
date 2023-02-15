@@ -20,7 +20,6 @@ import junit.framework.TestCase;
 
 /**
  * Test case for {@code StringConverter}.
- *
  */
 public class StringConverterTestCase extends TestCase {
     /** The converter to be tested. */

@@ -35,11 +35,7 @@ public class PeriodConverterTestCase extends TestCase {
         return new TestSuite(PeriodConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public PeriodConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class PeriodConverterTestCase extends TestCase {
         return new PeriodConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -64,8 +58,6 @@ public class PeriodConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

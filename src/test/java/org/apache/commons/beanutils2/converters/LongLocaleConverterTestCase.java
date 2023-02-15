@@ -21,9 +21,7 @@ import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
 
 /**
  * Test Case for the LongLocaleConverter class.
- *
  */
-
 public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Long> {
 
     public LongLocaleConverterTestCase(final String name) {

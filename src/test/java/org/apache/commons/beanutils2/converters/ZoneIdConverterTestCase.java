@@ -35,11 +35,7 @@ public class ZoneIdConverterTestCase extends TestCase {
         return new TestSuite(ZoneIdConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public ZoneIdConverterTestCase(final String name) {
         super(name);
@@ -53,8 +49,6 @@ public class ZoneIdConverterTestCase extends TestCase {
         return new ZoneIdConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -64,8 +58,6 @@ public class ZoneIdConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {
