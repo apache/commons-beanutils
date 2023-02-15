@@ -23,7 +23,6 @@ import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
  * Test Case for the ByteLocaleConverter class.
  *
  */
-
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byte> {
 
     public ByteLocaleConverterTestCase(final String name) {

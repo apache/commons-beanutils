@@ -27,20 +27,14 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the FileConverter class.
- *
  */
-
 public class FileConverterTestCase extends TestCase {
 
     public static TestSuite suite() {
         return new TestSuite(FileConverterTestCase.class);
     }
 
-
-
     private Converter converter = null;
-
-
 
     public FileConverterTestCase(final String name) {
         super(name);
@@ -54,8 +48,6 @@ public class FileConverterTestCase extends TestCase {
         return new FileConverter();
     }
 
-
-
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
@@ -65,8 +57,6 @@ public class FileConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
         converter = null;
     }
-
-
 
     public void testSimpleConversion() throws Exception {
         final String[] message= {

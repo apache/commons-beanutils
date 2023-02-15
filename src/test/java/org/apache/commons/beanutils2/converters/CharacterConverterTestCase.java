@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the CharacterConverter class.
- *
  */
 public class CharacterConverterTestCase extends TestCase {
 
@@ -62,7 +61,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Tests whether the primitive char class can be passed as target type.
      */
     public void testConvertToChar() {
-        final Converter converter = new CharacterConverter();
+        final Converter<Character> converter = new CharacterConverter();
         assertEquals("Wrong result", Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
@@ -70,7 +69,7 @@ public class CharacterConverterTestCase extends TestCase {
      * Test Conversion to Character
      */
     public void testConvertToCharacter() {
-        final Converter converter = new CharacterConverter();
+        final Converter<Character> converter = new CharacterConverter();
         assertEquals("Character Test", Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')));
         assertEquals("String Test",    Character.valueOf('F'), converter.convert(Character.class, "FOO"));
         assertEquals("Integer Test",   Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)));
@@ -81,7 +80,7 @@ public class CharacterConverterTestCase extends TestCase {
      * provided.
      */
     public void testConvertToCharacterNullNoDefault() {
-        final Converter converter = new CharacterConverter();
+        final Converter<Character> converter = new CharacterConverter();
         try {
             converter.convert(Character.class, null);
             fail("Expected a ConversionException for null value");
@@ -93,20 +92,25 @@ public class CharacterConverterTestCase extends TestCase {
     /**
      * Test Conversion to String
      */
+    @SuppressWarnings("unchecked") // testing raw conversion
     public void testConvertToString() {
 
-        final Converter converter = new CharacterConverter();
+        final Converter<Character> converter = new CharacterConverter();
+        @SuppressWarnings("rawtypes")
+        final Converter raw = converter;
 
-        assertEquals("Character Test", "N", converter.convert(String.class, Character.valueOf('N')));
-        assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", converter.convert(String.class, Integer.valueOf(321)));
-        assertEquals("Null Test",     null, converter.convert(String.class, null));
+        assertEquals("Character Test", "N", raw.convert(String.class, Character.valueOf('N')));
+        assertEquals("String Test",    "F", raw.convert(String.class, "FOO"));
+        assertEquals("Integer Test",   "3", raw.convert(String.class, Integer.valueOf(321)));
+        assertEquals("Null Test",     null, raw.convert(String.class, null));
     }
 
     /**
      * Tries a conversion to an unsupported type.
      */
+    @SuppressWarnings("unchecked") // tests failure so allow mismatch
     public void testConvertToUnsupportedType() {
+        @SuppressWarnings("rawtypes") // tests failure so allow mismatch
         final Converter converter = new CharacterConverter();
         try {
             converter.convert(Integer.class, "Test");

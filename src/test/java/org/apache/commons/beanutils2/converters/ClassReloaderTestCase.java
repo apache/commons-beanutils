@@ -22,12 +22,8 @@ import junit.framework.TestSuite;
 
 /**
  * Tests for the ClassReloader utility class.
- *
  */
-
 public class ClassReloaderTestCase extends TestCase {
-
-
 
     public static class DummyClass {
     }
@@ -35,8 +31,6 @@ public class ClassReloaderTestCase extends TestCase {
     public static TestSuite suite() {
         return new TestSuite(ClassReloaderTestCase.class);
     }
-
-
 
     public ClassReloaderTestCase(final String name) {
         super(name);

@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ClassConverter class.
- *
  */
 public class ClassConverterTestCase extends TestCase {
 

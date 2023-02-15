@@ -27,6 +27,7 @@ import junit.framework.TestCase;
  * Base Test Case for the DecimalLocaleConverter classes. This class doesn't
  * define any real tests; it just provides useful methods for the real
  * test case classes to inherit.
+ * @param <T> The converter type.
  */
 public class BaseLocaleConverterTestCase<T> extends TestCase {
 
@@ -122,14 +123,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Value WITH a pattern
      */
-    protected void convertValueWithPattern(final BaseLocaleConverter converter, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final Object value, final String pattern, final Object expectedValue) {
         convertValueWithPattern(converter, "", value, pattern, expectedValue);
     }
 
     /**
      * Test Converting Value WITH a pattern
      */
-    protected void convertValueWithPattern(final BaseLocaleConverter converter, final String msgId, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(value, pattern);
@@ -142,14 +143,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Value WITHOUT a pattern
      */
-    protected void convertValueNoPattern(final BaseLocaleConverter converter, final Object value, final Object expectedValue) {
+    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final Object value, final Object expectedValue) {
         convertValueNoPattern(converter, "", value, expectedValue);
     }
 
     /**
      * Test Converting Value WITHOUT a pattern
      */
-    protected void convertValueNoPattern(final BaseLocaleConverter converter, final String msgId, final Object value, final Object expectedValue) {
+    protected void convertValueNoPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(value);
@@ -163,14 +164,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter converter, final Class<?> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern, final Object expectedValue) {
         convertValueToType(converter, "", clazz, value, pattern, expectedValue);
     }
 
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter converter, final String msgId, final Class<?> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value, final String pattern, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(clazz, value, pattern);
@@ -183,14 +184,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Null value.
      */
-    protected void convertNull(final BaseLocaleConverter converter, final Object expectedValue) {
+    protected void convertNull(final BaseLocaleConverter<T> converter, final Object expectedValue) {
         convertNull(converter, "", expectedValue);
     }
 
     /**
      * Test Converting Null value.
      */
-    protected void convertNull(final BaseLocaleConverter converter, final String msgId, final Object expectedValue) {
+    protected void convertNull(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(null);
@@ -208,14 +209,14 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting an invalid value.
      */
-    protected void convertInvalid(final BaseLocaleConverter converter, final Object expectedValue) {
+    protected void convertInvalid(final BaseLocaleConverter<T> converter, final Object expectedValue) {
         convertInvalid(converter, "", expectedValue);
     }
 
     /**
      * Test Converting an invalid value.
      */
-    protected void convertInvalid(final BaseLocaleConverter converter, final String msgId, final Object expectedValue) {
+    protected void convertInvalid(final BaseLocaleConverter<T> converter, final String msgId, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert("xyz");

@@ -219,7 +219,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
     public void testDefaultStringToTypeConvert() {
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
         try {
             converter.convert(getExpectedType(), "2006-10-23");
@@ -237,7 +237,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
 
         // Valid String --> Type Conversion
@@ -260,7 +260,8 @@ public abstract class DateConverterTestBase<T> extends TestCase {
     public void testInvalidType() {
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        @SuppressWarnings("unchecked") // we are creating a mismatch to assert a failure
+        final DateTimeConverter<Character> converter = (DateTimeConverter<Character>) makeConverter();
 
         // Invalid Class Type
         try {
@@ -283,7 +284,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
         final String pattern = "M/d/yy"; // SHORT style date format for US Locale
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Valid String --> Type Conversion
@@ -313,7 +314,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
 
         // Create & Configure the Converter
         final String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd"};
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setPatterns(patterns);
 
         // First Pattern
@@ -368,7 +369,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
 
         // Valid String --> Type Conversion
@@ -438,7 +439,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
         final String pattern = "yyyy-MM-dd";
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<T> converter = makeConverter();
         converter.setPattern(pattern);
 
         // Create Values
@@ -564,7 +565,7 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param expected The expected result
      * @param value The value to convert
      */
-    protected void validConversion(final Converter converter, final Object expected, final Object value) {
+    protected void validConversion(final Converter<T> converter, final Object expected, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
