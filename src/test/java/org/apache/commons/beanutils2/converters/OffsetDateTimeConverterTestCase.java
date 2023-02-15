@@ -30,6 +30,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<Offse
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -38,6 +39,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<Offse
 
     /**
      * Constructs a new Date test case.
+     *
      * @param name Test Name
      */
     public OffsetDateTimeConverterTestCase(final String name) {
@@ -46,6 +48,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<Offse
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -55,6 +58,7 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<Offse
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -62,10 +66,9 @@ public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<Offse
         return new OffsetDateTimeConverter();
     }
 
-
-
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */

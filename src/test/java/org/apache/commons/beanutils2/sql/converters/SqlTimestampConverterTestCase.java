@@ -34,6 +34,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -42,6 +43,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
 
     /**
      * Constructs a new Date test case.
+     *
      * @param name Test Name
      */
     public SqlTimestampConverterTestCase(final String name) {
@@ -50,6 +52,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -66,6 +69,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -75,6 +79,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase<Timesta
 
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */

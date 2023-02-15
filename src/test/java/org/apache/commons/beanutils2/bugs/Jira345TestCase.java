@@ -77,40 +77,40 @@ public class Jira345TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() with 2D array.
      */
-    public void testBeanUtilsSetProperty_2DArray() throws Exception{
+    public void testBeanUtilsSetProperty_2DArray() throws Exception {
         final MyBean myBean = new MyBean();
-        BeanUtils.setProperty(myBean, "matr[0][0]","Sample");
+        BeanUtils.setProperty(myBean, "matr[0][0]", "Sample");
         assertEquals("Sample", myBean.getMatr()[0][0]);
     }
 
     /**
      * Test {@link BeanUtils} setProperty() with 3D array.
      */
-    public void testBeanUtilsSetProperty_3DArray() throws Exception{
+    public void testBeanUtilsSetProperty_3DArray() throws Exception {
         final MyBean myBean = new MyBean();
-        BeanUtils.setProperty(myBean, "matr3D[0][0][0]","Sample");
+        BeanUtils.setProperty(myBean, "matr3D[0][0][0]", "Sample");
         assertEquals("Sample", myBean.getMatr3D()[0][0][0]);
     }
 
     /** Example Bean */
     public static class MyBean {
 
-        private String[][] matr = {{"1","2"},{"3","4"}};
+        private String[][] matr = { { "1", "2" }, { "3", "4" } };
 
-        private String[][][] matr3D = {
-                {{"11","12"}, {"13","14"}},
-                {{"21","22"}, {"23","24"}},
-        };
+        private String[][][] matr3D = { { { "11", "12" }, { "13", "14" } }, { { "21", "22" }, { "23", "24" } }, };
 
         public String[][] getMatr() {
             return matr;
         }
+
         public void setMatr(final String[][] matr) {
             this.matr = matr;
         }
+
         public String[][][] getMatr3D() {
             return matr3D;
         }
+
         public void setMatr3D(final String[][][] matr3D) {
             this.matr3D = matr3D;
         }

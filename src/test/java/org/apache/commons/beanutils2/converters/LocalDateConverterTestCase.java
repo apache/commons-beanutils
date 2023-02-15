@@ -30,6 +30,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate>
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -38,6 +39,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate>
 
     /**
      * Constructs a new Date test case.
+     *
      * @param name Test Name
      */
     public LocalDateConverterTestCase(final String name) {
@@ -46,6 +48,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate>
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -55,6 +58,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate>
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -64,6 +68,7 @@ public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate>
 
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */

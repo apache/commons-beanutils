@@ -27,6 +27,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -35,6 +36,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
 
     /**
      * Constructs a new Calendar test case.
+     *
      * @param name Test Name
      */
     public CalendarConverterTestCase(final String name) {
@@ -43,6 +45,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -52,6 +55,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -61,6 +65,7 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
 
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */
@@ -78,6 +83,6 @@ public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
     @Override
     protected Calendar toType(final Calendar value) {
         return value;
-   }
+    }
 
 }

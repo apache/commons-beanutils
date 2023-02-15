@@ -25,9 +25,8 @@ import org.apache.commons.beanutils2.PropertyUtilsBean;
 import junit.framework.TestCase;
 
 /**
- * Write methods for PropertyDescriptors created during custom introspection are lost. See
- * <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA issue
- * BEANUTILS-456</a>.
+ * Write methods for PropertyDescriptors created during custom introspection are lost. See <a href="https://issues.apache.org/jira/browse/BEANUTILS-456">JIRA
+ * issue BEANUTILS-456</a>.
  *
  */
 public class Jira456TestCase extends TestCase {
@@ -45,8 +44,8 @@ public class Jira456TestCase extends TestCase {
     }
 
     /**
-     * Clears the reference to the write method in the property descriptor of the test
-     * property. This simulates that the write method reference is freed by the GC.
+     * Clears the reference to the write method in the property descriptor of the test property. This simulates that the write method reference is freed by the
+     * GC.
      *
      * @return the bean instance used for testing
      * @throws Exception if an error occurs
@@ -71,8 +70,7 @@ public class Jira456TestCase extends TestCase {
     }
 
     /**
-     * Tests whether a property is recognized as writable even if the reference to its
-     * write method was freed.
+     * Tests whether a property is recognized as writable even if the reference to its write method was freed.
      */
     public void testPropertyIsWritable() throws Exception {
         final FluentIntrospectionTestBean bean = clearWriteMethodRef();

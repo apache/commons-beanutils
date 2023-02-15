@@ -34,8 +34,6 @@ import junit.framework.TestSuite;
 
 public class DynaPropertyUtilsTestCase extends TestCase {
 
-
-
     /**
      * The basic test bean for each test.
      */
@@ -44,34 +42,15 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     /**
      * The set of properties that should be described.
      */
-    protected String[] describes =
-    { "booleanProperty",
-      "booleanSecond",
-      "doubleProperty",
-      "floatProperty",
-      "intArray",
-      "intIndexed",
-      "intProperty",
-      "listIndexed",
-      "longProperty",
-      "mappedObjects",
-      "mappedProperty",
-      "mappedIntProperty",
-      "nested",
-      "nullProperty",
-      //      "readOnlyProperty",
-      "shortProperty",
-      "stringArray",
-      "stringIndexed",
-      "stringProperty"
-    };
+    protected String[] describes = { "booleanProperty", "booleanSecond", "doubleProperty", "floatProperty", "intArray", "intIndexed", "intProperty",
+            "listIndexed", "longProperty", "mappedObjects", "mappedProperty", "mappedIntProperty", "nested", "nullProperty",
+            // "readOnlyProperty",
+            "shortProperty", "stringArray", "stringIndexed", "stringProperty" };
 
     /**
      * The nested bean pointed at by the "nested" property.
      */
     protected TestBean nested = null;
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -83,8 +62,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         super(name);
 
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -134,11 +111,9 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean.set("nested", nested);
         // Property "nullProperty" is not initialized, so it should return null
         bean.set("shortProperty", Short.valueOf((short) 987));
-        final String[] stringArray =
-                { "String 0", "String 1", "String 2", "String 3", "String 4" };
+        final String[] stringArray = { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
-        final String[] stringIndexed =
-                { "String 0", "String 1", "String 2", "String 3", "String 4" };
+        final String[] stringIndexed = { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringIndexed", stringIndexed);
         bean.set("stringProperty", "This is a string");
 
@@ -164,8 +139,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
     }
 
-
-
     /**
      * Test copyProperties() when the origin is a {@code Map}.
      */
@@ -189,22 +162,13 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         // Scalar properties
-        assertEquals("booleanProperty", false,
-                     ((Boolean) bean.get("booleanProperty")).booleanValue());
-        assertEquals("doubleProperty", 333.0,
-                     ((Double) bean.get("doubleProperty")).doubleValue(),
-                     0.005);
-        assertEquals("floatProperty", (float) 222.0,
-                     ((Float) bean.get("floatProperty")).floatValue(),
-                     (float) 0.005);
-        assertEquals("intProperty", 111,
-                     ((Integer) bean.get("intProperty")).intValue());
-        assertEquals("longProperty", 444,
-                     ((Long) bean.get("longProperty")).longValue());
-        assertEquals("shortProperty", (short) 555,
-                     ((Short) bean.get("shortProperty")).shortValue());
-        assertEquals("stringProperty", "New String Property",
-                     (String) bean.get("stringProperty"));
+        assertEquals("booleanProperty", false, ((Boolean) bean.get("booleanProperty")).booleanValue());
+        assertEquals("doubleProperty", 333.0, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
+        assertEquals("floatProperty", (float) 222.0, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005);
+        assertEquals("intProperty", 111, ((Integer) bean.get("intProperty")).intValue());
+        assertEquals("longProperty", 444, ((Long) bean.get("longProperty")).longValue());
+        assertEquals("shortProperty", (short) 555, ((Short) bean.get("shortProperty")).shortValue());
+        assertEquals("stringProperty", "New String Property", (String) bean.get("stringProperty"));
 
         // Indexed Properties
         final String[] dupProperty = (String[]) bean.get("dupProperty");
@@ -236,28 +200,18 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         // Verify existence of all the properties that should be present
         for (final String describe : describes) {
-            assertTrue("Property '" + describe + "' is present",
-                       map.containsKey(describe));
+            assertTrue("Property '" + describe + "' is present", map.containsKey(describe));
         }
-        assertTrue("Property 'writeOnlyProperty' is not present",
-                   !map.containsKey("writeOnlyProperty"));
+        assertTrue("Property 'writeOnlyProperty' is not present", !map.containsKey("writeOnlyProperty"));
 
         // Verify the values of scalar properties
-        assertEquals("Value of 'booleanProperty'",
-                     Boolean.TRUE, map.get("booleanProperty"));
-        assertEquals("Value of 'doubleProperty'",
-                     Double.valueOf(321.0), map.get("doubleProperty"));
-        assertEquals("Value of 'floatProperty'",
-                     Float.valueOf((float) 123.0), map.get("floatProperty"));
-        assertEquals("Value of 'intProperty'",
-                     Integer.valueOf(123), map.get("intProperty"));
-        assertEquals("Value of 'longProperty'",
-                     Long.valueOf(321), map.get("longProperty"));
-        assertEquals("Value of 'shortProperty'",
-                     Short.valueOf((short) 987), map.get("shortProperty"));
-        assertEquals("Value of 'stringProperty'",
-                     "This is a string",
-                     (String) map.get("stringProperty"));
+        assertEquals("Value of 'booleanProperty'", Boolean.TRUE, map.get("booleanProperty"));
+        assertEquals("Value of 'doubleProperty'", Double.valueOf(321.0), map.get("doubleProperty"));
+        assertEquals("Value of 'floatProperty'", Float.valueOf((float) 123.0), map.get("floatProperty"));
+        assertEquals("Value of 'intProperty'", Integer.valueOf(123), map.get("intProperty"));
+        assertEquals("Value of 'longProperty'", Long.valueOf(321), map.get("longProperty"));
+        assertEquals("Value of 'shortProperty'", Short.valueOf((short) 987), map.get("shortProperty"));
+        assertEquals("Value of 'stringProperty'", "This is a string", (String) map.get("stringProperty"));
 
     }
 
@@ -289,8 +243,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use index expression
 
         try {
-            PropertyUtils.getIndexedProperty(null,
-                    "intArray[0]");
+            PropertyUtils.getIndexedProperty(null, "intArray[0]");
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -339,8 +292,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use index expression
 
         try {
-            PropertyUtils.getIndexedProperty(null,
-                    "intIndexed[0]");
+            PropertyUtils.getIndexedProperty(null, "intIndexed[0]");
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -380,61 +332,46 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < 5; i++) {
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean, "intArray", i);
+                value = PropertyUtils.getIndexedProperty(bean, "intArray", i);
                 assertNotNull("intArray returned value " + i, value);
-                assertTrue("intArray returned Integer " + i,
-                        value instanceof Integer);
-                assertEquals("intArray returned correct " + i, i * 10,
-                        ((Integer) value).intValue());
+                assertTrue("intArray returned Integer " + i, value instanceof Integer);
+                assertEquals("intArray returned correct " + i, i * 10, ((Integer) value).intValue());
             } catch (final Throwable t) {
                 fail("intArray " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean, "intIndexed", i);
+                value = PropertyUtils.getIndexedProperty(bean, "intIndexed", i);
                 assertNotNull("intIndexed returned value " + i, value);
-                assertTrue("intIndexed returned Integer " + i,
-                        value instanceof Integer);
-                assertEquals("intIndexed returned correct " + i, i * 10,
-                        ((Integer) value).intValue());
+                assertTrue("intIndexed returned Integer " + i, value instanceof Integer);
+                assertEquals("intIndexed returned correct " + i, i * 10, ((Integer) value).intValue());
             } catch (final Throwable t) {
                 fail("intIndexed " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean, "listIndexed", i);
+                value = PropertyUtils.getIndexedProperty(bean, "listIndexed", i);
                 assertNotNull("listIndexed returned value " + i, value);
-                assertTrue("list returned String " + i,
-                        value instanceof String);
-                assertEquals("listIndexed returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("list returned String " + i, value instanceof String);
+                assertEquals("listIndexed returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("listIndexed " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean, "stringArray", i);
+                value = PropertyUtils.getIndexedProperty(bean, "stringArray", i);
                 assertNotNull("stringArray returned value " + i, value);
-                assertTrue("stringArray returned String " + i,
-                        value instanceof String);
-                assertEquals("stringArray returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("stringArray returned String " + i, value instanceof String);
+                assertEquals("stringArray returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("stringArray " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean, "stringIndexed", i);
+                value = PropertyUtils.getIndexedProperty(bean, "stringIndexed", i);
                 assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("stringIndexed returned String " + i,
-                        value instanceof String);
-                assertEquals("stringIndexed returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("stringIndexed returned String " + i, value instanceof String);
+                assertEquals("stringIndexed returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
@@ -446,66 +383,46 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         for (int i = 0; i < 5; i++) {
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean,
-                                "intArray[" + i + "]");
+                value = PropertyUtils.getIndexedProperty(bean, "intArray[" + i + "]");
                 assertNotNull("intArray returned value " + i, value);
-                assertTrue("intArray returned Integer " + i,
-                        value instanceof Integer);
-                assertEquals("intArray returned correct " + i, i * 10,
-                        ((Integer) value).intValue());
+                assertTrue("intArray returned Integer " + i, value instanceof Integer);
+                assertEquals("intArray returned correct " + i, i * 10, ((Integer) value).intValue());
             } catch (final Throwable t) {
                 fail("intArray " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean,
-                                "intIndexed[" + i + "]");
+                value = PropertyUtils.getIndexedProperty(bean, "intIndexed[" + i + "]");
                 assertNotNull("intIndexed returned value " + i, value);
-                assertTrue("intIndexed returned Integer " + i,
-                        value instanceof Integer);
-                assertEquals("intIndexed returned correct " + i, i * 10,
-                        ((Integer) value).intValue());
+                assertTrue("intIndexed returned Integer " + i, value instanceof Integer);
+                assertEquals("intIndexed returned correct " + i, i * 10, ((Integer) value).intValue());
             } catch (final Throwable t) {
                 fail("intIndexed " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean,
-                                "listIndexed[" + i + "]");
+                value = PropertyUtils.getIndexedProperty(bean, "listIndexed[" + i + "]");
                 assertNotNull("listIndexed returned value " + i, value);
-                assertTrue("listIndexed returned String " + i,
-                        value instanceof String);
-                assertEquals("listIndexed returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("listIndexed returned String " + i, value instanceof String);
+                assertEquals("listIndexed returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("listIndexed " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean,
-                                "stringArray[" + i + "]");
+                value = PropertyUtils.getIndexedProperty(bean, "stringArray[" + i + "]");
                 assertNotNull("stringArray returned value " + i, value);
-                assertTrue("stringArray returned String " + i,
-                        value instanceof String);
-                assertEquals("stringArray returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("stringArray returned String " + i, value instanceof String);
+                assertEquals("stringArray returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("stringArray " + i + " threw " + t);
             }
 
             try {
-                value =
-                        PropertyUtils.getIndexedProperty(bean,
-                                "stringIndexed[" + i + "]");
+                value = PropertyUtils.getIndexedProperty(bean, "stringIndexed[" + i + "]");
                 assertNotNull("stringIndexed returned value " + i, value);
-                assertTrue("stringIndexed returned String " + i,
-                        value instanceof String);
-                assertEquals("stringIndexed returned correct " + i,
-                        "String " + i, (String) value);
+                assertTrue("stringIndexed returned String " + i, value instanceof String);
+                assertEquals("stringIndexed returned correct " + i, "String " + i, (String) value);
             } catch (final Throwable t) {
                 fail("stringIndexed " + i + " threw " + t);
             }
@@ -515,9 +432,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Index out of bounds tests
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intArray", -1);
+            value = PropertyUtils.getIndexedProperty(bean, "intArray", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -526,9 +441,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intArray", 5);
+            value = PropertyUtils.getIndexedProperty(bean, "intArray", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -537,9 +450,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intIndexed", -1);
+            value = PropertyUtils.getIndexedProperty(bean, "intIndexed", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -548,9 +459,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intIndexed", 5);
+            value = PropertyUtils.getIndexedProperty(bean, "intIndexed", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -559,9 +468,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "listIndexed", -1);
+            value = PropertyUtils.getIndexedProperty(bean, "listIndexed", -1);
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException t) {
             // Expected results
@@ -570,9 +477,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "listIndexed", 5);
+            value = PropertyUtils.getIndexedProperty(bean, "listIndexed", 5);
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException t) {
             // Expected results
@@ -581,9 +486,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray", -1);
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -592,9 +495,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray", 5);
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -603,9 +504,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringIndexed", -1);
+            value = PropertyUtils.getIndexedProperty(bean, "stringIndexed", -1);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -614,9 +513,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringIndexed", 5);
+            value = PropertyUtils.getIndexedProperty(bean, "stringIndexed", 5);
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -634,8 +531,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit key argument
 
         try {
-            PropertyUtils.getMappedProperty(null, "mappedProperty",
-                    "First Key");
+            PropertyUtils.getMappedProperty(null, "mappedProperty", "First Key");
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -664,8 +560,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression
 
         try {
-            PropertyUtils.getMappedProperty(null,
-                    "mappedProperty(First Key)");
+            PropertyUtils.getMappedProperty(null, "mappedProperty(First Key)");
             fail("Should throw IllegalArgumentException 4");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -699,35 +594,22 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetMappedPeriods() {
 
         bean.set("mappedProperty", "key.with.a.dot", "Special Value");
-        assertEquals("Can retrieve directly",
-                     "Special Value",
-                     (String) bean.get("mappedProperty", "key.with.a.dot"));
+        assertEquals("Can retrieve directly", "Special Value", (String) bean.get("mappedProperty", "key.with.a.dot"));
         try {
-            assertEquals("Can retrieve via getMappedProperty",
-                         "Special Value",
-                         PropertyUtils.getMappedProperty
-                         (bean, "mappedProperty", "key.with.a.dot"));
+            assertEquals("Can retrieve via getMappedProperty", "Special Value", PropertyUtils.getMappedProperty(bean, "mappedProperty", "key.with.a.dot"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
         try {
-            assertEquals("Can retrieve via getNestedProperty",
-                         "Special Value",
-                         PropertyUtils.getNestedProperty
-                         (bean, "mappedProperty(key.with.a.dot)"));
+            assertEquals("Can retrieve via getNestedProperty", "Special Value", PropertyUtils.getNestedProperty(bean, "mappedProperty(key.with.a.dot)"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
 
         bean.set("mappedObjects", "nested.property", new TestBean());
-        assertNotNull("Can retrieve directly",
-                      bean.get("mappedObjects", "nested.property"));
+        assertNotNull("Can retrieve directly", bean.get("mappedObjects", "nested.property"));
         try {
-            assertEquals("Can retrieve nested",
-                         "This is a string",
-                         PropertyUtils.getNestedProperty
-                         (bean,
-                          "mappedObjects(nested.property).stringProperty"));
+            assertEquals("Can retrieve nested", "This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested.property).stringProperty"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
@@ -735,41 +617,27 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
     /**
-     * Test getting mapped values with slashes in the key.  This is different
-     * from periods because slashes are not syntactically significant.
+     * Test getting mapped values with slashes in the key. This is different from periods because slashes are not syntactically significant.
      */
     public void testGetMappedSlashes() {
 
         bean.set("mappedProperty", "key/with/a/slash", "Special Value");
-        assertEquals("Can retrieve directly",
-                     "Special Value",
-                     bean.get("mappedProperty", "key/with/a/slash"));
+        assertEquals("Can retrieve directly", "Special Value", bean.get("mappedProperty", "key/with/a/slash"));
         try {
-            assertEquals("Can retrieve via getMappedProperty",
-                         "Special Value",
-                         PropertyUtils.getMappedProperty
-                         (bean, "mappedProperty", "key/with/a/slash"));
+            assertEquals("Can retrieve via getMappedProperty", "Special Value", PropertyUtils.getMappedProperty(bean, "mappedProperty", "key/with/a/slash"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
         try {
-            assertEquals("Can retrieve via getNestedProperty",
-                         "Special Value",
-                         PropertyUtils.getNestedProperty
-                         (bean, "mappedProperty(key/with/a/slash)"));
+            assertEquals("Can retrieve via getNestedProperty", "Special Value", PropertyUtils.getNestedProperty(bean, "mappedProperty(key/with/a/slash)"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
 
         bean.set("mappedObjects", "nested/property", new TestBean());
-        assertNotNull("Can retrieve directly",
-                      bean.get("mappedObjects", "nested/property"));
+        assertNotNull("Can retrieve directly", bean.get("mappedObjects", "nested/property"));
         try {
-            assertEquals("Can retrieve nested",
-                         "This is a string",
-                         PropertyUtils.getNestedProperty
-                         (bean,
-                          "mappedObjects(nested/property).stringProperty"));
+            assertEquals("Can retrieve nested", "This is a string", PropertyUtils.getNestedProperty(bean, "mappedObjects(nested/property).stringProperty"));
         } catch (final Exception e) {
             fail("Thew exception: " + e);
         }
@@ -786,24 +654,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit key argument
 
         try {
-            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
-                    "First Key");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "First Key");
             assertEquals("Can find first value", "First Value", value);
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
-            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
-                    "Second Key");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Second Key");
             assertEquals("Can find second value", "Second Value", value);
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
-            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
-                    "Third Key");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Third Key");
             assertNull("Can not find third value", value);
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
@@ -812,27 +677,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression with parentheses
 
         try {
-            value =
-                    PropertyUtils.getMappedProperty(bean,
-                            "mappedProperty(First Key)");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty(First Key)");
             assertEquals("Can find first value", "First Value", value);
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getMappedProperty(bean,
-                            "mappedProperty(Second Key)");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Second Key)");
             assertEquals("Can find second value", "Second Value", value);
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getMappedProperty(bean,
-                            "mappedProperty(Third Key)");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Third Key)");
             assertNull("Can not find third value", value);
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
@@ -841,27 +700,21 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression with dotted syntax
 
         try {
-            value =
-                    PropertyUtils.getNestedProperty(bean,
-                            "mapProperty.First Key");
+            value = PropertyUtils.getNestedProperty(bean, "mapProperty.First Key");
             assertEquals("Can find first value", "First Value", value);
         } catch (final Throwable t) {
             fail("Finding first value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getNestedProperty(bean,
-                            "mapProperty.Second Key");
+            value = PropertyUtils.getNestedProperty(bean, "mapProperty.Second Key");
             assertEquals("Can find second value", "Second Value", value);
         } catch (final Throwable t) {
             fail("Finding second value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getNestedProperty(bean,
-                            "mapProperty.Third Key");
+            value = PropertyUtils.getNestedProperty(bean, "mapProperty.Third Key");
             assertNull("Can not find third value", value);
         } catch (final Throwable t) {
             fail("Finding third value threw " + t);
@@ -900,15 +753,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedBoolean() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.booleanProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() ==
-                    nested.getBooleanProperty());
+            assertTrue("Got correct value", ((Boolean) value).booleanValue() == nested.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -927,16 +776,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedDouble() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.doubleProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.doubleProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Double);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    ((Double) value).doubleValue(),
-                    nested.getDoubleProperty(),
-                    0.005);
+            assertEquals("Got correct value", ((Double) value).doubleValue(), nested.getDoubleProperty(), 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -955,16 +799,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedFloat() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.floatProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.floatProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Float);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    ((Float) value).floatValue(),
-                    nested.getFloatProperty(),
-                    (float) 0.005);
+            assertEquals("Got correct value", ((Float) value).floatValue(), nested.getFloatProperty(), (float) 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -983,15 +822,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedInt() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.intProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.intProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Integer);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    ((Integer) value).intValue(),
-                    nested.getIntProperty());
+            assertEquals("Got correct value", ((Integer) value).intValue(), nested.getIntProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1010,15 +845,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedLong() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.longProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.longProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Long);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    ((Long) value).longValue(),
-                    nested.getLongProperty());
+            assertEquals("Got correct value", ((Long) value).longValue(), nested.getLongProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1037,15 +868,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedReadOnly() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.readOnlyProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.readOnlyProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof String);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    (String) value,
-                    nested.getReadOnlyProperty());
+            assertEquals("Got correct value", (String) value, nested.getReadOnlyProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1064,15 +891,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedShort() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.shortProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.shortProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Short);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    ((Short) value).shortValue(),
-                    nested.getShortProperty());
+            assertEquals("Got correct value", ((Short) value).shortValue(), nested.getShortProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1091,15 +914,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetNestedString() {
 
         try {
-            final Object value =
-                    PropertyUtils.getNestedProperty
-                    (bean, "nested.stringProperty");
+            final Object value = PropertyUtils.getNestedProperty(bean, "nested.stringProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof String);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertEquals("Got correct value",
-                    (String) value,
-                    nested.getStringProperty());
+            assertEquals("Got correct value", (String) value, nested.getStringProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1163,13 +982,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleBoolean() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "booleanProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue());
+            assertTrue("Got correct value", ((Boolean) value).booleanValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1188,13 +1004,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleDouble() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "doubleProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "doubleProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Double);
-            assertEquals("Got correct value",
-                    ((Double) value).doubleValue(), 321.0, 0.005);
+            assertEquals("Got correct value", ((Double) value).doubleValue(), 321.0, 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1213,15 +1026,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleFloat() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "floatProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "floatProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Float);
-            assertEquals("Got correct value",
-                    ((Float) value).floatValue(),
-                    (float) 123.0,
-                    (float) 0.005);
+            assertEquals("Got correct value", ((Float) value).floatValue(), (float) 123.0, (float) 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1240,8 +1048,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleIndexed() {
 
         try {
-            PropertyUtils.getSimpleProperty(bean,
-                    "intIndexed[0]");
+            PropertyUtils.getSimpleProperty(bean, "intIndexed[0]");
             fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1261,14 +1068,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleInt() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "intProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "intProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Integer);
-            assertEquals("Got correct value",
-                    ((Integer) value).intValue(),
-                    123);
+            assertEquals("Got correct value", ((Integer) value).intValue(), 123);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1287,14 +1090,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleLong() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "longProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "longProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Long);
-            assertEquals("Got correct value",
-                    ((Long) value).longValue(),
-                    321);
+            assertEquals("Got correct value", ((Long) value).longValue(), 321);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1313,8 +1112,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleNested() {
 
         try {
-            PropertyUtils.getSimpleProperty(bean,
-                    "nested.stringProperty");
+            PropertyUtils.getSimpleProperty(bean, "nested.stringProperty");
             fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -1334,14 +1132,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleShort() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "shortProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "shortProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Short);
-            assertEquals("Got correct value",
-                    ((Short) value).shortValue(),
-                    (short) 987);
+            assertEquals("Got correct value", ((Short) value).shortValue(), (short) 987);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1360,14 +1154,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testGetSimpleString() {
 
         try {
-            final Object value =
-                    PropertyUtils.getSimpleProperty(bean,
-                            "stringProperty");
+            final Object value = PropertyUtils.getSimpleProperty(bean, "stringProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof String);
-            assertEquals("Got correct value",
-                    (String) value,
-                    "This is a string");
+            assertEquals("Got correct value", (String) value, "This is a string");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1396,8 +1186,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" +
-                         bean.getDynaClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
         }
 
     }
@@ -1410,8 +1199,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit index argument
 
         try {
-            PropertyUtils.setIndexedProperty(null, "intArray", 0,
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(null, "intArray", 0, Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1420,8 +1208,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, null, 0,
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, null, 0, Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1432,9 +1219,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use index expression
 
         try {
-            PropertyUtils.setIndexedProperty(null,
-                    "intArray[0]",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(null, "intArray[0]", Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1443,8 +1228,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, "[0]",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, "[0]", Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -1453,8 +1237,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, "intArray",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, "intArray", Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1465,8 +1248,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit index argument
 
         try {
-            PropertyUtils.setIndexedProperty(null, "intIndexed", 0,
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(null, "intIndexed", 0, Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1475,8 +1257,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, null, 0,
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, null, 0, Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1487,9 +1268,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use index expression
 
         try {
-            PropertyUtils.setIndexedProperty(null,
-                    "intIndexed[0]",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(null, "intIndexed[0]", Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1498,8 +1277,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, "[0]",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, "[0]", Integer.valueOf(1));
             fail("Should throw NoSuchMethodException 4");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -1508,8 +1286,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean, "intIndexed",
-                    Integer.valueOf(1));
+            PropertyUtils.setIndexedProperty(bean, "intIndexed", Integer.valueOf(1));
             fail("Should throw IllegalArgumentException 5");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1529,81 +1306,51 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit index argument
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intArray", 0,
-                    Integer.valueOf(1));
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intArray", 0);
+            PropertyUtils.setIndexedProperty(bean, "intArray", 0, Integer.valueOf(1));
+            value = PropertyUtils.getIndexedProperty(bean, "intArray", 0);
             assertNotNull("Returned new value 0", value);
-            assertTrue("Returned Integer new value 0",
-                    value instanceof Integer);
-            assertEquals("Returned correct new value 0", 1,
-                    ((Integer) value).intValue());
+            assertTrue("Returned Integer new value 0", value instanceof Integer);
+            assertEquals("Returned correct new value 0", 1, ((Integer) value).intValue());
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intIndexed", 1,
-                    Integer.valueOf(11));
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intIndexed", 1);
+            PropertyUtils.setIndexedProperty(bean, "intIndexed", 1, Integer.valueOf(11));
+            value = PropertyUtils.getIndexedProperty(bean, "intIndexed", 1);
             assertNotNull("Returned new value 1", value);
-            assertTrue("Returned Integer new value 1",
-                    value instanceof Integer);
-            assertEquals("Returned correct new value 1", 11,
-                    ((Integer) value).intValue());
+            assertTrue("Returned Integer new value 1", value instanceof Integer);
+            assertEquals("Returned correct new value 1", 11, ((Integer) value).intValue());
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "listIndexed", 2,
-                    "New Value 2");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "listIndexed", 2);
+            PropertyUtils.setIndexedProperty(bean, "listIndexed", 2, "New Value 2");
+            value = PropertyUtils.getIndexedProperty(bean, "listIndexed", 2);
             assertNotNull("Returned new value 2", value);
-            assertTrue("Returned String new value 2",
-                    value instanceof String);
-            assertEquals("Returned correct new value 2", "New Value 2",
-                    (String) value);
+            assertTrue("Returned String new value 2", value instanceof String);
+            assertEquals("Returned correct new value 2", "New Value 2", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray", 2,
-                    "New Value 2");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray", 2);
+            PropertyUtils.setIndexedProperty(bean, "stringArray", 2, "New Value 2");
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray", 2);
             assertNotNull("Returned new value 2", value);
-            assertTrue("Returned String new value 2",
-                    value instanceof String);
-            assertEquals("Returned correct new value 2", "New Value 2",
-                    (String) value);
+            assertTrue("Returned String new value 2", value instanceof String);
+            assertEquals("Returned correct new value 2", "New Value 2", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray", 3,
-                    "New Value 3");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray", 3);
+            PropertyUtils.setIndexedProperty(bean, "stringArray", 3, "New Value 3");
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray", 3);
             assertNotNull("Returned new value 3", value);
-            assertTrue("Returned String new value 3",
-                    value instanceof String);
-            assertEquals("Returned correct new value 3", "New Value 3",
-                    (String) value);
+            assertTrue("Returned String new value 3", value instanceof String);
+            assertEquals("Returned correct new value 3", "New Value 3", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1611,81 +1358,51 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use index expression
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intArray[4]",
-                    Integer.valueOf(1));
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intArray[4]");
+            PropertyUtils.setIndexedProperty(bean, "intArray[4]", Integer.valueOf(1));
+            value = PropertyUtils.getIndexedProperty(bean, "intArray[4]");
             assertNotNull("Returned new value 4", value);
-            assertTrue("Returned Integer new value 4",
-                    value instanceof Integer);
-            assertEquals("Returned correct new value 4", 1,
-                    ((Integer) value).intValue());
+            assertTrue("Returned Integer new value 4", value instanceof Integer);
+            assertEquals("Returned correct new value 4", 1, ((Integer) value).intValue());
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intIndexed[3]",
-                    Integer.valueOf(11));
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "intIndexed[3]");
+            PropertyUtils.setIndexedProperty(bean, "intIndexed[3]", Integer.valueOf(11));
+            value = PropertyUtils.getIndexedProperty(bean, "intIndexed[3]");
             assertNotNull("Returned new value 5", value);
-            assertTrue("Returned Integer new value 5",
-                    value instanceof Integer);
-            assertEquals("Returned correct new value 5", 11,
-                    ((Integer) value).intValue());
+            assertTrue("Returned Integer new value 5", value instanceof Integer);
+            assertEquals("Returned correct new value 5", 11, ((Integer) value).intValue());
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "listIndexed[1]",
-                    "New Value 2");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "listIndexed[1]");
+            PropertyUtils.setIndexedProperty(bean, "listIndexed[1]", "New Value 2");
+            value = PropertyUtils.getIndexedProperty(bean, "listIndexed[1]");
             assertNotNull("Returned new value 6", value);
-            assertTrue("Returned String new value 6",
-                    value instanceof String);
-            assertEquals("Returned correct new value 6", "New Value 2",
-                    (String) value);
+            assertTrue("Returned String new value 6", value instanceof String);
+            assertEquals("Returned correct new value 6", "New Value 2", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray[1]",
-                    "New Value 2");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray[2]");
+            PropertyUtils.setIndexedProperty(bean, "stringArray[1]", "New Value 2");
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray[2]");
             assertNotNull("Returned new value 6", value);
-            assertTrue("Returned String new value 6",
-                    value instanceof String);
-            assertEquals("Returned correct new value 6", "New Value 2",
-                    (String) value);
+            assertTrue("Returned String new value 6", value instanceof String);
+            assertEquals("Returned correct new value 6", "New Value 2", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray[0]",
-                    "New Value 3");
-            value =
-                    PropertyUtils.getIndexedProperty(bean,
-                            "stringArray[0]");
+            PropertyUtils.setIndexedProperty(bean, "stringArray[0]", "New Value 3");
+            value = PropertyUtils.getIndexedProperty(bean, "stringArray[0]");
             assertNotNull("Returned new value 7", value);
-            assertTrue("Returned String new value 7",
-                    value instanceof String);
-            assertEquals("Returned correct new value 7", "New Value 3",
-                    (String) value);
+            assertTrue("Returned String new value 7", value instanceof String);
+            assertEquals("Returned correct new value 7", "New Value 3", (String) value);
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -1693,9 +1410,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Index out of bounds tests
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intArray", -1,
-                    Integer.valueOf(0));
+            PropertyUtils.setIndexedProperty(bean, "intArray", -1, Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1704,9 +1419,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intArray", 5,
-                    Integer.valueOf(0));
+            PropertyUtils.setIndexedProperty(bean, "intArray", 5, Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1715,9 +1428,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intIndexed", -1,
-                    Integer.valueOf(0));
+            PropertyUtils.setIndexedProperty(bean, "intIndexed", -1, Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1726,9 +1437,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "intIndexed", 5,
-                    Integer.valueOf(0));
+            PropertyUtils.setIndexedProperty(bean, "intIndexed", 5, Integer.valueOf(0));
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1737,9 +1446,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "listIndexed", 5,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "listIndexed", 5, "New String");
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException t) {
             // Expected results
@@ -1748,9 +1455,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "listIndexed", -1,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "listIndexed", -1, "New String");
             fail("Should have thrown IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException t) {
             // Expected results
@@ -1759,9 +1464,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray", -1,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "stringArray", -1, "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1770,9 +1473,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringArray", 5,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "stringArray", 5, "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1781,9 +1482,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringIndexed", -1,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "stringIndexed", -1, "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1792,9 +1491,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setIndexedProperty(bean,
-                    "stringIndexed", 5,
-                    "New String");
+            PropertyUtils.setIndexedProperty(bean, "stringIndexed", 5, "New String");
             fail("Should have thrown ArrayIndexOutOfBoundsException");
         } catch (final ArrayIndexOutOfBoundsException t) {
             // Expected results
@@ -1812,8 +1509,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit key argument
 
         try {
-            PropertyUtils.setMappedProperty(null, "mappedProperty",
-                    "First Key", "First Value");
+            PropertyUtils.setMappedProperty(null, "mappedProperty", "First Key", "First Value");
             fail("Should throw IllegalArgumentException 1");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1822,8 +1518,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean, null, "First Key",
-                    "First Value");
+            PropertyUtils.setMappedProperty(bean, null, "First Key", "First Value");
             fail("Should throw IllegalArgumentException 2");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1832,8 +1527,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean, "mappedProperty", null,
-                    "First Value");
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", null, "First Value");
             fail("Should throw IllegalArgumentException 3");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1844,9 +1538,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression
 
         try {
-            PropertyUtils.setMappedProperty(null,
-                    "mappedProperty(First Key)",
-                    "First Value");
+            PropertyUtils.setMappedProperty(null, "mappedProperty(First Key)", "First Value");
             fail("Should throw IllegalArgumentException 4");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1855,8 +1547,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean, "(Second Key)",
-                    "Second Value");
+            PropertyUtils.setMappedProperty(bean, "(Second Key)", "Second Value");
             fail("Should throw IllegalArgumentException 5");
         } catch (final NoSuchMethodException e) {
             // Expected response
@@ -1865,8 +1556,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean, "mappedProperty",
-                    "Third Value");
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", "Third Value");
             fail("Should throw IllegalArgumentException 6");
         } catch (final IllegalArgumentException e) {
             // Expected response
@@ -1886,23 +1576,20 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use explicit key argument
 
         try {
-            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
-                    "Fourth Key");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Fourth Key");
             assertNull("Can not find fourth value", value);
         } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean, "mappedProperty",
-                    "Fourth Key", "Fourth Value");
+            PropertyUtils.setMappedProperty(bean, "mappedProperty", "Fourth Key", "Fourth Value");
         } catch (final Throwable t) {
             fail("Setting fourth value threw " + t);
         }
 
         try {
-            value = PropertyUtils.getMappedProperty(bean, "mappedProperty",
-                    "Fourth Key");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty", "Fourth Key");
             assertEquals("Can find fourth value", "Fourth Value", value);
         } catch (final Throwable t) {
             fail("Finding fourth value threw " + t);
@@ -1911,26 +1598,20 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression with parentheses
 
         try {
-            value =
-                    PropertyUtils.getMappedProperty(bean,
-                            "mappedProperty(Fifth Key)");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Fifth Key)");
             assertNull("Can not find fifth value", value);
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
         }
 
         try {
-            PropertyUtils.setMappedProperty(bean,
-                    "mappedProperty(Fifth Key)",
-                    "Fifth Value");
+            PropertyUtils.setMappedProperty(bean, "mappedProperty(Fifth Key)", "Fifth Value");
         } catch (final Throwable t) {
             fail("Setting fifth value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getMappedProperty(bean,
-                            "mappedProperty(Fifth Key)");
+            value = PropertyUtils.getMappedProperty(bean, "mappedProperty(Fifth Key)");
             assertEquals("Can find fifth value", "Fifth Value", value);
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
@@ -1939,26 +1620,20 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         // Use key expression with dotted expression
 
         try {
-            value =
-                    PropertyUtils.getNestedProperty(bean,
-                            "mapProperty.Sixth Key");
+            value = PropertyUtils.getNestedProperty(bean, "mapProperty.Sixth Key");
             assertNull("Can not find sixth value", value);
         } catch (final Throwable t) {
             fail("Finding fifth value threw " + t);
         }
 
         try {
-            PropertyUtils.setNestedProperty(bean,
-                    "mapProperty.Sixth Key",
-                    "Sixth Value");
+            PropertyUtils.setNestedProperty(bean, "mapProperty.Sixth Key", "Sixth Value");
         } catch (final Throwable t) {
             fail("Setting sixth value threw " + t);
         }
 
         try {
-            value =
-                    PropertyUtils.getNestedProperty(bean,
-                            "mapProperty.Sixth Key");
+            value = PropertyUtils.getNestedProperty(bean, "mapProperty.Sixth Key");
             assertEquals("Can find sixth value", "Sixth Value", value);
         } catch (final Throwable t) {
             fail("Finding sixth value threw " + t);
@@ -1999,12 +1674,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final boolean oldValue = nested.getBooleanProperty();
             final boolean newValue = !oldValue;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.booleanProperty",
-                    Boolean.valueOf(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    nested.getBooleanProperty());
+            PropertyUtils.setNestedProperty(bean, "nested.booleanProperty", Boolean.valueOf(newValue));
+            assertTrue("Matched new value", newValue == nested.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2025,13 +1696,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final double oldValue = nested.getDoubleProperty();
             final double newValue = oldValue + 1.0;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.doubleProperty",
-                    Double.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getDoubleProperty(),
-                    0.005);
+            PropertyUtils.setNestedProperty(bean, "nested.doubleProperty", Double.valueOf(newValue));
+            assertEquals("Matched new value", newValue, nested.getDoubleProperty(), 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2052,13 +1718,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final float oldValue = nested.getFloatProperty();
             final float newValue = oldValue + (float) 1.0;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.floatProperty",
-                    Float.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getFloatProperty(),
-                    (float) 0.005);
+            PropertyUtils.setNestedProperty(bean, "nested.floatProperty", Float.valueOf(newValue));
+            assertEquals("Matched new value", newValue, nested.getFloatProperty(), (float) 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2079,12 +1740,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final int oldValue = nested.getIntProperty();
             final int newValue = oldValue + 1;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.intProperty",
-                    Integer.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getIntProperty());
+            PropertyUtils.setNestedProperty(bean, "nested.intProperty", Integer.valueOf(newValue));
+            assertEquals("Matched new value", newValue, nested.getIntProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2105,12 +1762,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final long oldValue = nested.getLongProperty();
             final long newValue = oldValue + 1;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.longProperty",
-                    Long.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getLongProperty());
+            PropertyUtils.setNestedProperty(bean, "nested.longProperty", Long.valueOf(newValue));
+            assertEquals("Matched new value", newValue, nested.getLongProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2131,9 +1784,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = nested.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.readOnlyProperty",
-                    newValue);
+            PropertyUtils.setNestedProperty(bean, "nested.readOnlyProperty", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2156,12 +1807,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final short oldValue = nested.getShortProperty();
             short newValue = oldValue;
             newValue++;
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.shortProperty",
-                    Short.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getShortProperty());
+            PropertyUtils.setNestedProperty(bean, "nested.shortProperty", Short.valueOf(newValue));
+            assertEquals("Matched new value", newValue, nested.getShortProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2182,12 +1829,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = nested.getStringProperty();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.stringProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getStringProperty());
+            PropertyUtils.setNestedProperty(bean, "nested.stringProperty", newValue);
+            assertEquals("Matched new value", newValue, nested.getStringProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2207,9 +1850,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             final String newValue = "New String Value";
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.unknown",
-                    newValue);
+            PropertyUtils.setNestedProperty(bean, "nested.unknown", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2231,12 +1872,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = nested.getWriteOnlyPropertyValue();
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setNestedProperty(bean,
-                    "nested.writeOnlyProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    nested.getWriteOnlyPropertyValue());
+            PropertyUtils.setNestedProperty(bean, "nested.writeOnlyProperty", newValue);
+            assertEquals("Matched new value", newValue, nested.getWriteOnlyPropertyValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2282,12 +1919,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
-            PropertyUtils.setSimpleProperty(bean,
-                    "booleanProperty",
-                    Boolean.valueOf(newValue));
-            assertTrue("Matched new value",
-                    newValue ==
-                    ((Boolean) bean.get("booleanProperty")).booleanValue());
+            PropertyUtils.setSimpleProperty(bean, "booleanProperty", Boolean.valueOf(newValue));
+            assertTrue("Matched new value", newValue == ((Boolean) bean.get("booleanProperty")).booleanValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2308,13 +1941,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final double oldValue = ((Double) bean.get("doubleProperty")).doubleValue();
             final double newValue = oldValue + 1.0;
-            PropertyUtils.setSimpleProperty(bean,
-                    "doubleProperty",
-                    Double.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    ((Double) bean.get("doubleProperty")).doubleValue(),
-                    0.005);
+            PropertyUtils.setSimpleProperty(bean, "doubleProperty", Double.valueOf(newValue));
+            assertEquals("Matched new value", newValue, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2335,13 +1963,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final float oldValue = ((Float) bean.get("floatProperty")).floatValue();
             final float newValue = oldValue + (float) 1.0;
-            PropertyUtils.setSimpleProperty(bean,
-                    "floatProperty",
-                    Float.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    ((Float) bean.get("floatProperty")).floatValue(),
-                    (float) 0.005);
+            PropertyUtils.setSimpleProperty(bean, "floatProperty", Float.valueOf(newValue));
+            assertEquals("Matched new value", newValue, ((Float) bean.get("floatProperty")).floatValue(), (float) 0.005);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2360,9 +1983,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testSetSimpleIndexed() {
 
         try {
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringIndexed[0]",
-                    "New String Value");
+            PropertyUtils.setSimpleProperty(bean, "stringIndexed[0]", "New String Value");
             fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2384,12 +2005,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final int oldValue = ((Integer) bean.get("intProperty")).intValue();
             final int newValue = oldValue + 1;
-            PropertyUtils.setSimpleProperty(bean,
-                    "intProperty",
-                    Integer.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    ((Integer) bean.get("intProperty")).intValue());
+            PropertyUtils.setSimpleProperty(bean, "intProperty", Integer.valueOf(newValue));
+            assertEquals("Matched new value", newValue, ((Integer) bean.get("intProperty")).intValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2410,12 +2027,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final long oldValue = ((Long) bean.get("longProperty")).longValue();
             final long newValue = oldValue + 1;
-            PropertyUtils.setSimpleProperty(bean,
-                    "longProperty",
-                    Long.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    ((Long) bean.get("longProperty")).longValue());
+            PropertyUtils.setSimpleProperty(bean, "longProperty", Long.valueOf(newValue));
+            assertEquals("Matched new value", newValue, ((Long) bean.get("longProperty")).longValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2434,9 +2047,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     public void testSetSimpleNested() {
 
         try {
-            PropertyUtils.setSimpleProperty(bean,
-                    "nested.stringProperty",
-                    "New String Value");
+            PropertyUtils.setSimpleProperty(bean, "nested.stringProperty", "New String Value");
             fail("Should have thrown IllegalArgumentException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2459,12 +2070,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final short oldValue = ((Short) bean.get("shortProperty")).shortValue();
             short newValue = oldValue;
             newValue++;
-            PropertyUtils.setSimpleProperty(bean,
-                    "shortProperty",
-                    Short.valueOf(newValue));
-            assertEquals("Matched new value",
-                    newValue,
-                    ((Short) bean.get("shortProperty")).shortValue());
+            PropertyUtils.setSimpleProperty(bean, "shortProperty", Short.valueOf(newValue));
+            assertEquals("Matched new value", newValue, ((Short) bean.get("shortProperty")).shortValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2485,12 +2092,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         try {
             final String oldValue = (String) bean.get("stringProperty");
             final String newValue = oldValue + " Extra Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "stringProperty",
-                    newValue);
-            assertEquals("Matched new value",
-                    newValue,
-                    (String) bean.get("stringProperty"));
+            PropertyUtils.setSimpleProperty(bean, "stringProperty", newValue);
+            assertEquals("Matched new value", newValue, (String) bean.get("stringProperty"));
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -2510,9 +2113,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
         try {
             final String newValue = "New String Value";
-            PropertyUtils.setSimpleProperty(bean,
-                    "unknown",
-                    newValue);
+            PropertyUtils.setSimpleProperty(bean, "unknown", newValue);
             fail("Should have thrown NoSuchMethodException");
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -2522,47 +2123,28 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             fail("InvocationTargetException");
         } catch (final NoSuchMethodException e) {
             // Correct result for this test
-            assertEquals("Unknown property 'unknown' on dynaclass '" +
-                         bean.getDynaClass() + "'", e.getMessage() );
+            assertEquals("Unknown property 'unknown' on dynaclass '" + bean.getDynaClass() + "'", e.getMessage());
         }
 
     }
 
-
-
     /**
-     * Create and return a {@code DynaClass} instance for our test
-     * {@code DynaBean}.
+     * Create and return a {@code DynaClass} instance for our test {@code DynaBean}.
      */
     protected DynaClass createDynaClass() {
 
         final int[] intArray = {};
         final String[] stringArray = {};
 
-        final DynaClass dynaClass = new BasicDynaClass
-                ("TestDynaClass", null,
-                        new DynaProperty[]{
-                            new DynaProperty("booleanProperty", Boolean.TYPE),
-                            new DynaProperty("booleanSecond", Boolean.TYPE),
-                            new DynaProperty("doubleProperty", Double.TYPE),
-                            new DynaProperty("dupProperty", stringArray.getClass()),
-                            new DynaProperty("floatProperty", Float.TYPE),
-                            new DynaProperty("intArray", intArray.getClass()),
-                            new DynaProperty("intIndexed", intArray.getClass()),
-                            new DynaProperty("intProperty", Integer.TYPE),
-                            new DynaProperty("listIndexed", List.class),
-                            new DynaProperty("longProperty", Long.TYPE),
-                            new DynaProperty("mapProperty", Map.class),
-                            new DynaProperty("mappedObjects", Map.class),
-                            new DynaProperty("mappedProperty", Map.class),
-                            new DynaProperty("mappedIntProperty", Map.class),
-                            new DynaProperty("nested", TestBean.class),
-                            new DynaProperty("nullProperty", String.class),
-                            new DynaProperty("shortProperty", Short.TYPE),
-                            new DynaProperty("stringArray", stringArray.getClass()),
-                            new DynaProperty("stringIndexed", stringArray.getClass()),
-                            new DynaProperty("stringProperty", String.class),
-                        });
+        final DynaClass dynaClass = new BasicDynaClass("TestDynaClass", null, new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE),
+                new DynaProperty("booleanSecond", Boolean.TYPE), new DynaProperty("doubleProperty", Double.TYPE),
+                new DynaProperty("dupProperty", stringArray.getClass()), new DynaProperty("floatProperty", Float.TYPE),
+                new DynaProperty("intArray", intArray.getClass()), new DynaProperty("intIndexed", intArray.getClass()),
+                new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("listIndexed", List.class), new DynaProperty("longProperty", Long.TYPE),
+                new DynaProperty("mapProperty", Map.class), new DynaProperty("mappedObjects", Map.class), new DynaProperty("mappedProperty", Map.class),
+                new DynaProperty("mappedIntProperty", Map.class), new DynaProperty("nested", TestBean.class), new DynaProperty("nullProperty", String.class),
+                new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringArray", stringArray.getClass()),
+                new DynaProperty("stringIndexed", stringArray.getClass()), new DynaProperty("stringProperty", String.class), });
         return dynaClass;
 
     }

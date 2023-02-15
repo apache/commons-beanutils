@@ -73,10 +73,10 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
-        final Long min         = Long.valueOf(Integer.MIN_VALUE);
-        final Long max         = Long.valueOf(Integer.MAX_VALUE);
+        final Long min = Long.valueOf(Integer.MIN_VALUE);
+        final Long max = Long.valueOf(Integer.MAX_VALUE);
         final Long minMinusOne = Long.valueOf(min.longValue() - 1);
-        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
+        final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", Integer.valueOf(Integer.MIN_VALUE), converter.convert(clazz, min));
@@ -115,53 +115,15 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
+                "from Short", "from Integer", "from Long", "from Float", "from Double" };
 
-        final Object[] input = {
-            String.valueOf(Integer.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Integer.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Double.valueOf(12.2)
-        };
+        final Object[] input = { String.valueOf(Integer.MIN_VALUE), "-17", "-1", "0", "1", "17", String.valueOf(Integer.MAX_VALUE), Byte.valueOf((byte) 7),
+                Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
 
-        final Integer[] expected = {
-            Integer.valueOf(Integer.MIN_VALUE),
-            Integer.valueOf(-17),
-            Integer.valueOf(-1),
-            Integer.valueOf(0),
-            Integer.valueOf(1),
-            Integer.valueOf(17),
-            Integer.valueOf(Integer.MAX_VALUE),
-            Integer.valueOf(7),
-            Integer.valueOf(8),
-            Integer.valueOf(9),
-            Integer.valueOf(10),
-            Integer.valueOf(11),
-            Integer.valueOf(12)
-        };
+        final Integer[] expected = { Integer.valueOf(Integer.MIN_VALUE), Integer.valueOf(-17), Integer.valueOf(-1), Integer.valueOf(0), Integer.valueOf(1),
+                Integer.valueOf(17), Integer.valueOf(Integer.MAX_VALUE), Integer.valueOf(7), Integer.valueOf(8), Integer.valueOf(9), Integer.valueOf(10),
+                Integer.valueOf(11), Integer.valueOf(12) };
 
         for (int i = 0; i < expected.length; i++) {
             assertEquals(message[i] + " to Integer", expected[i], converter.convert(Integer.class, input[i]));
@@ -170,4 +132,3 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
         }
     }
 }
-

@@ -23,8 +23,7 @@ public abstract class AbstractParent {
 
     private Child child;
 
-    public Child getChild()
-    {
+    public Child getChild() {
         return child;
     }
 

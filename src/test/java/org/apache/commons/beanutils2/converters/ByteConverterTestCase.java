@@ -72,10 +72,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Byte.class;
 
-        final Long min         = Long.valueOf(Byte.MIN_VALUE);
-        final Long max         = Long.valueOf(Byte.MAX_VALUE);
+        final Long min = Long.valueOf(Byte.MIN_VALUE);
+        final Long max = Long.valueOf(Byte.MAX_VALUE);
         final Long minMinusOne = Long.valueOf(min.longValue() - 1);
-        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
+        final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", Byte.valueOf(Byte.MIN_VALUE), converter.convert(clazz, min));
@@ -101,60 +101,21 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
+                "from Short", "from Integer", "from Long", "from Float", "from Double" };
 
-        final Object[] input = {
-            String.valueOf(Byte.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Byte.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Double.valueOf(12.2)
-        };
+        final Object[] input = { String.valueOf(Byte.MIN_VALUE), "-17", "-1", "0", "1", "17", String.valueOf(Byte.MAX_VALUE), Byte.valueOf((byte) 7),
+                Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
 
-        final Byte[] expected = {
-            Byte.valueOf(Byte.MIN_VALUE),
-            Byte.valueOf((byte)-17),
-            Byte.valueOf((byte)-1),
-            Byte.valueOf((byte)0),
-            Byte.valueOf((byte)1),
-            Byte.valueOf((byte)17),
-            Byte.valueOf(Byte.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Byte.valueOf((byte)8),
-            Byte.valueOf((byte)9),
-            Byte.valueOf((byte)10),
-            Byte.valueOf((byte)11),
-            Byte.valueOf((byte)12)
-        };
+        final Byte[] expected = { Byte.valueOf(Byte.MIN_VALUE), Byte.valueOf((byte) -17), Byte.valueOf((byte) -1), Byte.valueOf((byte) 0),
+                Byte.valueOf((byte) 1), Byte.valueOf((byte) 17), Byte.valueOf(Byte.MAX_VALUE), Byte.valueOf((byte) 7), Byte.valueOf((byte) 8),
+                Byte.valueOf((byte) 9), Byte.valueOf((byte) 10), Byte.valueOf((byte) 11), Byte.valueOf((byte) 12) };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to Byte",expected[i],converter.convert(Byte.class,input[i]));
-            assertEquals(message[i] + " to byte",expected[i],converter.convert(Byte.TYPE,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to Byte", expected[i], converter.convert(Byte.class, input[i]));
+            assertEquals(message[i] + " to byte", expected[i], converter.convert(Byte.TYPE, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 
 }
-

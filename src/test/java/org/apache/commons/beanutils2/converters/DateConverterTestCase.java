@@ -28,6 +28,7 @@ public class DateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -36,6 +37,7 @@ public class DateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Constructs a new Date test case.
+     *
      * @param name Test Name
      */
     public DateConverterTestCase(final String name) {
@@ -44,6 +46,7 @@ public class DateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -53,6 +56,7 @@ public class DateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -62,6 +66,7 @@ public class DateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */

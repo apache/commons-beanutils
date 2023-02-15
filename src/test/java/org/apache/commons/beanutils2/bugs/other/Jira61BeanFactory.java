@@ -41,7 +41,7 @@ public class Jira61BeanFactory {
      */
     public static class TestBean {
 
-        private final String[] indexed = {"one", "two", "three"};
+        private final String[] indexed = { "one", "two", "three" };
         private String simple = "FOO";
         private final Map<String, Object> mapped = new HashMap<>();
 
@@ -96,13 +96,13 @@ public class Jira61BeanFactory {
          * @return The mapped value
          */
         public String getMappedReadOnly(final String key) {
-            return (String)mapped.get(key);
+            return (String) mapped.get(key);
         }
 
         /**
          * Sets mapped property.
          *
-         * @param key The mapped key
+         * @param key   The mapped key
          * @param value The mapped value
          */
         public void setMappedWriteOnly(final String key, final String value) {

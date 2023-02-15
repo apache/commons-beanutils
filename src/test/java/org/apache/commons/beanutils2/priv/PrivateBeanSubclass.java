@@ -18,14 +18,11 @@
 package org.apache.commons.beanutils2.priv;
 
 /**
- * Bean that exposes methods defined by an interface that is implemented
- * in the superclass.
+ * Bean that exposes methods defined by an interface that is implemented in the superclass.
  *
  */
 
 class PrivateBeanSubclass extends PrivateBean {
-
-
 
     /**
      * Create a new PrivateBeanSubclass instance.
@@ -33,8 +30,6 @@ class PrivateBeanSubclass extends PrivateBean {
     PrivateBeanSubclass() {
 
     }
-
-
 
     /**
      * A property accessible via the superclass.

@@ -33,6 +33,7 @@ public class CustomInteger extends Number {
 
     /**
      * Constructs a new instance.
+     *
      * @param i the integer value
      */
     public CustomInteger(final int i) {
@@ -41,7 +42,8 @@ public class CustomInteger extends Number {
 
     /**
      * Gets the double value.
-     * @return  the double value
+     *
+     * @return the double value
      */
     @Override
     public double doubleValue() {
@@ -50,7 +52,8 @@ public class CustomInteger extends Number {
 
     /**
      * Gets the float value.
-     * @return  the float value
+     *
+     * @return the float value
      */
     @Override
     public float floatValue() {
@@ -59,7 +62,8 @@ public class CustomInteger extends Number {
 
     /**
      * Gets the integer value.
-     * @return  the integer value
+     *
+     * @return the integer value
      */
     @Override
     public int intValue() {
@@ -68,7 +72,8 @@ public class CustomInteger extends Number {
 
     /**
      * Gets the long value.
-     * @return  the long value
+     *
+     * @return the long value
      */
     @Override
     public long longValue() {

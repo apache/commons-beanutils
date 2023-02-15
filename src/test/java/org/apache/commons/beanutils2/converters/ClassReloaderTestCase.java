@@ -65,4 +65,3 @@ public class ClassReloaderTestCase extends TestCase {
     }
 
 }
-

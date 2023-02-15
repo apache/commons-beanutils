@@ -29,16 +29,16 @@ public class ClassConverterTestCase extends TestCase {
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
         return new TestSuite(ClassConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Class Converter test case.
+     *
      * @param name Test Name
      */
     public ClassConverterTestCase(final String name) {
@@ -54,8 +54,6 @@ public class ClassConverterTestCase extends TestCase {
     @Override
     public void tearDown() throws Exception {
     }
-
-
 
     /**
      * Test Array Conversion
@@ -77,8 +75,8 @@ public class ClassConverterTestCase extends TestCase {
     public void testConvertToClass() {
         final Converter converter = new ClassConverter();
 
-        assertEquals("Class Test",        Integer.class, converter.convert(Class.class, Integer.class));
-        assertEquals("String Test",       Integer.class, converter.convert(Class.class, "java.lang.Integer"));
+        assertEquals("Class Test", Integer.class, converter.convert(Class.class, Integer.class));
+        assertEquals("String Test", Integer.class, converter.convert(Class.class, "java.lang.Integer"));
         assertEquals("StringBuilder Test", Integer.class, converter.convert(Class.class, new StringBuilder("java.lang.Integer")));
 
         // Invalid Test
@@ -106,7 +104,7 @@ public class ClassConverterTestCase extends TestCase {
         final Converter converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, Integer.valueOf(6)));
-        assertEquals("Null Test",    Object.class, converter.convert(Class.class, null));
+        assertEquals("Null Test", Object.class, converter.convert(Class.class, null));
     }
 
     /**
@@ -117,7 +115,7 @@ public class ClassConverterTestCase extends TestCase {
         final Converter converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, Integer.valueOf(6)));
-        assertEquals("Null Test",    null, converter.convert(Class.class, null));
+        assertEquals("Null Test", null, converter.convert(Class.class, null));
     }
 
     /**
@@ -129,7 +127,7 @@ public class ClassConverterTestCase extends TestCase {
         assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
         assertEquals("Value Test", "bar", converter.convert(String.class, new StringBuilder("bar")));
-        assertEquals("Null Test",   null, converter.convert(String.class, null));
+        assertEquals("Null Test", null, converter.convert(String.class, null));
     }
 
     /**

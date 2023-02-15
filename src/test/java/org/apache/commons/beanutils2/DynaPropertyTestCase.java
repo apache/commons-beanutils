@@ -46,6 +46,7 @@ public class DynaPropertyTestCase extends TestCase {
 
     /**
      * Creates the tests included in this test suite.
+     *
      * @return a test suite
      */
     public static Test suite() {

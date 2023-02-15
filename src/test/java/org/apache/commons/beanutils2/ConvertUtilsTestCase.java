@@ -32,16 +32,12 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- *  Test Case for the ConvertUtils class.
+ * Test Case for the ConvertUtils class.
  * </p>
  *
  */
 
 public class ConvertUtilsTestCase extends TestCase {
-
-
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -51,8 +47,6 @@ public class ConvertUtilsTestCase extends TestCase {
     public ConvertUtilsTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -78,8 +72,6 @@ public class ConvertUtilsTestCase extends TestCase {
     public void tearDown() {
         // No action required
     }
-
-
 
     /**
      * Negative String to primitive integer array tests.
@@ -107,8 +99,7 @@ public class ConvertUtilsTestCase extends TestCase {
     }
 
     /**
-     * Negative scalar conversion tests.  These rely on the standard
-     * default value conversions in ConvertUtils.
+     * Negative scalar conversion tests. These rely on the standard default value conversions in ConvertUtils.
      */
     public void testNegativeScalar() {
 
@@ -131,8 +122,7 @@ public class ConvertUtilsTestCase extends TestCase {
         assertEquals(((Byte) value).byteValue(), (byte) 0);
 
         try {
-            value = ConvertUtils.convert
-                ("org.apache.commons.beanutils2.Undefined", Class.class);
+            value = ConvertUtils.convert("org.apache.commons.beanutils2.Undefined", Class.class);
             fail("Should have thrown conversion exception");
         } catch (final ConversionException e) {
             // Expected result
@@ -140,8 +130,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Double.TYPE);
         assertTrue(value instanceof Double);
-        assertEquals(((Double) value).doubleValue(), 0.0,
-                     0.005);
+        assertEquals(((Double) value).doubleValue(), 0.0, 0.005);
 
         value = ConvertUtils.convert("foo", Double.class);
         assertTrue(value instanceof Double);
@@ -149,13 +138,11 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("foo", Float.TYPE);
         assertTrue(value instanceof Float);
-        assertEquals(((Float) value).floatValue(), (float) 0.0,
-                     (float) 0.005);
+        assertEquals(((Float) value).floatValue(), (float) 0.0, (float) 0.005);
 
         value = ConvertUtils.convert("foo", Float.class);
         assertTrue(value instanceof Float);
-        assertEquals(((Float) value).floatValue(), (float) 0.0,
-                     (float) 0.005);
+        assertEquals(((Float) value).floatValue(), (float) 0.0, (float) 0.005);
 
         value = ConvertUtils.convert("foo", Integer.TYPE);
         assertTrue(value instanceof Integer);
@@ -208,19 +195,13 @@ public class ConvertUtilsTestCase extends TestCase {
         final String[] stringArray1 = { "abc" };
         final String[] stringArray2 = { "abc", "def" };
 
-        assertEquals("intArray0", null,
-                     ConvertUtils.convert(intArray0));
-        assertEquals("intArray1", "123",
-                     ConvertUtils.convert(intArray1));
-        assertEquals("intArray2", "123",
-                     ConvertUtils.convert(intArray2));
+        assertEquals("intArray0", null, ConvertUtils.convert(intArray0));
+        assertEquals("intArray1", "123", ConvertUtils.convert(intArray1));
+        assertEquals("intArray2", "123", ConvertUtils.convert(intArray2));
 
-        assertEquals("stringArray0", null,
-                     ConvertUtils.convert(stringArray0));
-        assertEquals("stringArray1", "abc",
-                     ConvertUtils.convert(stringArray1));
-        assertEquals("stringArray2", "abc",
-                     ConvertUtils.convert(stringArray2));
+        assertEquals("stringArray0", null, ConvertUtils.convert(stringArray0));
+        assertEquals("stringArray1", "abc", ConvertUtils.convert(stringArray1));
+        assertEquals("stringArray2", "abc", ConvertUtils.convert(stringArray2));
 
     }
 
@@ -229,28 +210,17 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testObjectToStringScalar() {
 
-        assertEquals("Boolean->String", "false",
-                     ConvertUtils.convert(Boolean.FALSE));
-        assertEquals("Boolean->String", "true",
-                     ConvertUtils.convert(Boolean.TRUE));
-        assertEquals("Byte->String", "123",
-                     ConvertUtils.convert(Byte.valueOf((byte) 123)));
-        assertEquals("Character->String", "a",
-                     ConvertUtils.convert(Character.valueOf('a')));
-        assertEquals("Double->String", "123.0",
-                     ConvertUtils.convert(Double.valueOf(123.0)));
-        assertEquals("Float->String", "123.0",
-                     ConvertUtils.convert(Float.valueOf((float) 123.0)));
-        assertEquals("Integer->String", "123",
-                     ConvertUtils.convert(Integer.valueOf(123)));
-        assertEquals("Long->String", "123",
-                     ConvertUtils.convert(Long.valueOf(123)));
-        assertEquals("Short->String", "123",
-                     ConvertUtils.convert(Short.valueOf((short) 123)));
-        assertEquals("String->String", "abc",
-                     ConvertUtils.convert("abc"));
-        assertEquals("String->String null", null,
-                     ConvertUtils.convert(null));
+        assertEquals("Boolean->String", "false", ConvertUtils.convert(Boolean.FALSE));
+        assertEquals("Boolean->String", "true", ConvertUtils.convert(Boolean.TRUE));
+        assertEquals("Byte->String", "123", ConvertUtils.convert(Byte.valueOf((byte) 123)));
+        assertEquals("Character->String", "a", ConvertUtils.convert(Character.valueOf('a')));
+        assertEquals("Double->String", "123.0", ConvertUtils.convert(Double.valueOf(123.0)));
+        assertEquals("Float->String", "123.0", ConvertUtils.convert(Float.valueOf((float) 123.0)));
+        assertEquals("Integer->String", "123", ConvertUtils.convert(Integer.valueOf(123)));
+        assertEquals("Long->String", "123", ConvertUtils.convert(Long.valueOf(123)));
+        assertEquals("Short->String", "123", ConvertUtils.convert(Short.valueOf((short) 123)));
+        assertEquals("String->String", "abc", ConvertUtils.convert("abc"));
+        assertEquals("String->String null", null, ConvertUtils.convert(null));
 
     }
 
@@ -414,13 +384,11 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = ConvertUtils.convert("123.456", Float.TYPE);
         assertTrue(value instanceof Float);
-        assertEquals(((Float) value).floatValue(), (float) 123.456,
-                     (float) 0.005);
+        assertEquals(((Float) value).floatValue(), (float) 123.456, (float) 0.005);
 
         value = ConvertUtils.convert("123.456", Float.class);
         assertTrue(value instanceof Float);
-        assertEquals(((Float) value).floatValue(), (float) 123.456,
-                     (float) 0.005);
+        assertEquals(((Float) value).floatValue(), (float) 123.456, (float) 0.005);
 
         value = ConvertUtils.convert("123", Integer.TYPE);
         assertTrue(value instanceof Integer);
@@ -497,23 +465,17 @@ public class ConvertUtilsTestCase extends TestCase {
         value = ConvertUtils.convert("{'abc'}", stringArray.getClass());
         checkStringArray(value, stringArray1);
 
-        value = ConvertUtils.convert("abc 'de,f'",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("abc 'de,f'", stringArray.getClass());
         checkStringArray(value, stringArray2);
-        value = ConvertUtils.convert("{abc, 'de,f'}",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("{abc, 'de,f'}", stringArray.getClass());
         checkStringArray(value, stringArray2);
-        value = ConvertUtils.convert("\"abc\",\"de,f\"",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("\"abc\",\"de,f\"", stringArray.getClass());
         checkStringArray(value, stringArray2);
-        value = ConvertUtils.convert("{\"abc\" 'de,f'}",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("{\"abc\" 'de,f'}", stringArray.getClass());
         checkStringArray(value, stringArray2);
-        value = ConvertUtils.convert("'abc' 'de,f'",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("'abc' 'de,f'", stringArray.getClass());
         checkStringArray(value, stringArray2);
-        value = ConvertUtils.convert("{'abc', \"de,f\"}",
-                                     stringArray.getClass());
+        value = ConvertUtils.convert("{'abc', \"de,f\"}", stringArray.getClass());
         checkStringArray(value, stringArray2);
 
     }
@@ -523,20 +485,13 @@ public class ConvertUtilsTestCase extends TestCase {
         final ConvertUtilsBean utilsTwo = new ConvertUtilsBean();
 
         // make sure that the test work ok before anything's changed
-        Object
-        value = utilsOne.convert("true", Boolean.TYPE);
+        Object value = utilsOne.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (1)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertEquals("Standard conversion failed (1)", ((Boolean) value).booleanValue(), true);
 
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (2)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertEquals("Standard conversion failed (2)", ((Boolean) value).booleanValue(), true);
 
         // now register a test
 
@@ -546,16 +501,14 @@ public class ConvertUtilsTestCase extends TestCase {
             utilsOne.convert("true", Boolean.TYPE);
             fail("Register converter failed.");
 
-        } catch (final PassTestException e) { /* This shows that the registration has worked */ }
+        } catch (final PassTestException e) {
+            /* This shows that the registration has worked */ }
 
         try {
             // nothing should have changed
             value = utilsTwo.convert("true", Boolean.TYPE);
             assertTrue(value instanceof Boolean);
-            assertEquals(
-                        "Standard conversion failed (3)",
-                        ((Boolean) value).booleanValue(),
-                        true);
+            assertEquals("Standard conversion failed (3)", ((Boolean) value).booleanValue(), true);
 
         } catch (final PassTestException e) {
             // This is a failure since utilsTwo should still have
@@ -571,25 +524,18 @@ public class ConvertUtilsTestCase extends TestCase {
 
         value = utilsTwo.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (4)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertEquals("Standard conversion failed (4)", ((Boolean) value).booleanValue(), true);
     }
 
     public void testDeregisteringSingleConverter() throws Exception {
         // make sure that the test work ok before anything's changed
-        final Object
-        value = ConvertUtils.convert("true", Boolean.TYPE);
+        final Object value = ConvertUtils.convert("true", Boolean.TYPE);
         assertTrue(value instanceof Boolean);
-        assertEquals(
-                    "Standard conversion failed (1)",
-                    ((Boolean) value).booleanValue(),
-                    true);
+        assertEquals("Standard conversion failed (1)", ((Boolean) value).booleanValue(), true);
 
         // we'll test deregister
         ConvertUtils.deregister(Boolean.TYPE);
-        assertNull("Converter should be null",ConvertUtils.lookup(Boolean.TYPE));
+        assertNull("Converter should be null", ConvertUtils.lookup(Boolean.TYPE));
 
     }
 
@@ -637,22 +583,17 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testConvertUnsupportedTargetType() {
         final ConvertUtilsBean utils = new ConvertUtilsBean();
         final Object value = "A test value";
-        assertSame("Got different object", value,
-                utils.convert(value, getClass()));
+        assertSame("Got different object", value, utils.convert(value, getClass()));
     }
-
-
 
     private void checkIntegerArray(final Object value, final int[] intArray) {
 
         assertNotNull("Returned value is not null", value);
-        assertEquals("Returned value is int[]",
-                     intArray.getClass(), value.getClass());
+        assertEquals("Returned value is int[]", intArray.getClass(), value.getClass());
         final int[] results = (int[]) value;
         assertEquals("Returned array length", intArray.length, results.length);
         for (int i = 0; i < intArray.length; i++) {
-            assertEquals("Returned array value " + i,
-                         intArray[i], results[i]);
+            assertEquals("Returned array value " + i, intArray[i], results[i]);
         }
 
     }
@@ -660,17 +601,13 @@ public class ConvertUtilsTestCase extends TestCase {
     private void checkStringArray(final Object value, final String[] stringArray) {
 
         assertNotNull("Returned value is not null", value);
-        assertEquals("Returned value is String[]",
-                     stringArray.getClass(), value.getClass());
+        assertEquals("Returned value is String[]", stringArray.getClass(), value.getClass());
         final String[] results = (String[]) value;
-        assertEquals("Returned array length",
-                     stringArray.length, results.length);
+        assertEquals("Returned array length", stringArray.length, results.length);
         for (int i = 0; i < stringArray.length; i++) {
-            assertEquals("Returned array value " + i,
-                         stringArray[i], results[i]);
+            assertEquals("Returned array value " + i, stringArray[i], results[i]);
         }
 
     }
 
 }
-

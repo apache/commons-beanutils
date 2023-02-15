@@ -18,8 +18,7 @@
 package org.apache.commons.beanutils2.priv;
 
 /**
- * Bean that has a private constructor that exposes properties via
- * various mechanisms (based on property name):
+ * Bean that has a private constructor that exposes properties via various mechanisms (based on property name):
  * <ul>
  * <li><strong>foo</strong> - Via direct public method
  * <li><strong>bar</strong> - Via directly implemented interface
@@ -30,17 +29,12 @@ package org.apache.commons.beanutils2.priv;
 
 class PrivateBean implements PrivateDirect {
 
-
-
     /**
-     * Package private constructor - can only use factory method to create
-     * beans.
+     * Package private constructor - can only use factory method to create beans.
      */
     PrivateBean() {
 
     }
-
-
 
     /**
      * A directly implemented property.

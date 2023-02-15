@@ -42,8 +42,7 @@ public class FluentIntrospectionTestBean extends AlphaBean {
         return fluentGetProperty;
     }
 
-    public FluentIntrospectionTestBean setFluentGetProperty(
-            final String fluentGetProperty) {
+    public FluentIntrospectionTestBean setFluentGetProperty(final String fluentGetProperty) {
         this.fluentGetProperty = fluentGetProperty;
         return this;
     }

@@ -79,7 +79,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
     public void testCopyPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
-            BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
+            BeanUtils.copyProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         } catch (final Throwable t) {
             fail("Threw " + t);
         }
@@ -109,7 +109,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
     public void testGetArrayPropertyDate() {
         String[] value = null;
         try {
-            bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
+            bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
             value = BeanUtils.getArrayProperty(bean, "dateArrayProperty");
         } catch (final Throwable t) {
             fail("Threw " + t);
@@ -125,7 +125,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
     public void testGetIndexedPropertyDate() {
         String value = null;
         try {
-            bean.setDateArrayProperty(new java.util.Date[] {testUtilDate});
+            bean.setDateArrayProperty(new java.util.Date[] { testUtilDate });
             value = BeanUtils.getIndexedProperty(bean, "dateArrayProperty[0]");
         } catch (final Throwable t) {
             fail("Threw " + t);
@@ -168,7 +168,7 @@ public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
     public void testSetPropertyConvertToStringArray() {
         try {
             bean.setStringArray(null);
-            BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] {testUtilDate});
+            BeanUtils.setProperty(bean, "stringArray", new java.util.Date[] { testUtilDate });
         } catch (final Throwable t) {
             fail("Threw " + t);
         }

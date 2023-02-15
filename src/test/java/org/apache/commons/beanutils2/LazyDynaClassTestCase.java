@@ -21,13 +21,15 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code LazyDynaClass} implementation class.</p>
+ * <p>
+ * Test Case for the {@code LazyDynaClass} implementation class.
+ * </p>
  *
  */
 public class LazyDynaClassTestCase extends TestCase {
 
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
+    protected String testProperty = "myProperty";
 
     /**
      * Constructs a new instance of this test case.
@@ -42,7 +44,7 @@ public class LazyDynaClassTestCase extends TestCase {
      * Run this Test
      */
     public static void main(final String[] args) {
-      junit.textui.TestRunner.run(suite());
+        junit.textui.TestRunner.run(suite());
     }
 
     /**
@@ -105,7 +107,7 @@ public class LazyDynaClassTestCase extends TestCase {
      */
     public void testAddPropertyNullName1() {
         try {
-            dynaClass.add((String)null);
+            dynaClass.add((String) null);
             fail("null property name not prevented");
         } catch (final IllegalArgumentException expected) {
             // expected result

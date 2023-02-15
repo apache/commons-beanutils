@@ -34,8 +34,7 @@ import org.junit.Test;
 /**
  * getPropertyType return null on second descendant class
  * <p>
- * This test only work in Java 7 or earlier (See BEANUTILS-492) - as
- * a weaker alternative, see {@link Jira422bTestCase}.
+ * This test only work in Java 7 or earlier (See BEANUTILS-492) - as a weaker alternative, see {@link Jira422bTestCase}.
  *
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
@@ -52,8 +51,7 @@ public class Jira422TestCase {
         final BeanInfo beanInfo = Introspector.getBeanInfo(RootBean.class);
         for (final PropertyDescriptor pd : beanInfo.getPropertyDescriptors()) {
             if (pd.getName().equals("file")) {
-                Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List",
-                        pd instanceof IndexedPropertyDescriptor);
+                Assume.assumeTrue("BEANUTILS-492: IndexedPropertyDescriptor no longer supported for java.util.List", pd instanceof IndexedPropertyDescriptor);
                 return;
             }
         }

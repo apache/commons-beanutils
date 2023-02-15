@@ -23,8 +23,7 @@ import org.apache.commons.beanutils2.MethodUtils;
 import junit.framework.TestCase;
 
 /**
- * MethodUtils's getMatchingAccessibleMethod() does not correctly
- * handle inheritance and method overloading.
+ * MethodUtils's getMatchingAccessibleMethod() does not correctly handle inheritance and method overloading.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-381">https://issues.apache.org/jira/browse/BEANUTILS-381</a>
  */
@@ -40,8 +39,7 @@ public class Jira381TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a "grand parent" public class.
+     * Test with an private class that overrides a public method of a "grand parent" public class.
      * <p />
      * See Jira issue# BEANUTILS-381.
      */
@@ -49,7 +47,7 @@ public class Jira381TestCase extends TestCase {
 
         final Class<?> target = TestServiceBean.class;
         final String methodName = "performOp";
-        final Class<?>[] runtimeClasses = {TestObjectSubclass.class};
+        final Class<?>[] runtimeClasses = { TestObjectSubclass.class };
 
         final Method returned = MethodUtils.getMatchingAccessibleMethod(target, methodName, runtimeClasses);
 
@@ -61,18 +59,18 @@ public class Jira381TestCase extends TestCase {
     /**
      * Test bean.
      */
-    public class TestServiceBean{
+    public class TestServiceBean {
 
         /**
          * Generic object method
          */
-        public void performOp(final Object o){
+        public void performOp(final Object o) {
         }
 
         /**
          * Object method
          */
-        public void performOp(final TestObject o){
+        public void performOp(final TestObject o) {
         }
     }
 
@@ -80,12 +78,12 @@ public class Jira381TestCase extends TestCase {
      * Test object.
      *
      */
-    public class TestObject{
+    public class TestObject {
     }
 
     /**
      * Used to match performop with test object
      */
-    public class TestObjectSubclass extends TestObject{
+    public class TestObjectSubclass extends TestObject {
     }
 }

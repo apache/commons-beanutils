@@ -25,8 +25,7 @@ import org.apache.commons.beanutils2.bugs.Jira273TestCase;
 public class Jira273BeanFactory {
 
     /**
-     * Factory method which creates anonymous
-     * {@link PublicBeanWithMethod} with method NOT overridden.
+     * Factory method which creates anonymous {@link PublicBeanWithMethod} with method NOT overridden.
      *
      * @return a new anonymous {@link PublicBeanWithMethod}.
      */
@@ -40,8 +39,7 @@ public class Jira273BeanFactory {
     }
 
     /**
-     * Factory method which creates anonymous
-     * {@link PublicBeanWithMethod} with method overridden.
+     * Factory method which creates anonymous {@link PublicBeanWithMethod} with method overridden.
      *
      * @return a new anonymous {@link PublicBeanWithMethod}.
      */
@@ -97,20 +95,24 @@ public class Jira273BeanFactory {
             return "PublicBeanWithMethod";
         }
     }
+
     private static class PrivatePublicOverridden extends PublicBeanWithMethod {
         @Override
         public String getBeanValue() {
             return "PrivatePublicOverridden";
         }
     }
+
     private static class PrivatePublicNotOverridden extends PublicBeanWithMethod {
     }
+
     private static class PrivatePrivatePublicOverridden extends PrivatePublicNotOverridden {
         @Override
         public String getBeanValue() {
             return "PrivatePrivatePublicOverridden";
         }
     }
+
     private static class PrivatePrivatePublicNotOverridden extends PrivatePublicNotOverridden {
     }
 }

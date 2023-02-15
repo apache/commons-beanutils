@@ -24,8 +24,6 @@ package org.apache.commons.beanutils2;
 
 public class BenchBean {
 
-
-
     /**
      * A boolean property.
      */

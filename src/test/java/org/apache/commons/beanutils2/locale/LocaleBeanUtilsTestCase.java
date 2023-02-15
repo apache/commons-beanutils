@@ -41,8 +41,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         super(name);
     }
 
-
-
     /**
      * Sets up instance variables required by this test case.
      */
@@ -52,6 +50,7 @@ public class LocaleBeanUtilsTestCase extends TestCase {
 
     /**
      * Creates the tests included in this test suite.
+     *
      * @return Test Suite
      */
     public static Test suite() {
@@ -64,8 +63,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     @Override
     public void tearDown() {
     }
-
-
 
     /**
      * Test setting a nested simple property
@@ -99,4 +96,3 @@ public class LocaleBeanUtilsTestCase extends TestCase {
         assertEquals("Check Set Value", 123, bean.getNested().getIntIndexed(1));
     }
 }
-

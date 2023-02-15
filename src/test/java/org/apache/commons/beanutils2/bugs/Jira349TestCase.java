@@ -83,7 +83,7 @@ public class Jira349TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_349_PropertyUtils_copyProperties() {
         final PrimitiveBean dest = new PrimitiveBean();
-        final ObjectBean origin = new ObjectBean ();
+        final ObjectBean origin = new ObjectBean();
         try {
             PropertyUtils.copyProperties(dest, origin);
         } catch (final NullPointerException e) {
@@ -102,9 +102,11 @@ public class Jira349TestCase extends TestCase {
      */
     public static class PrimitiveBean {
         private boolean testProperty;
+
         public boolean getTestProperty() {
             return testProperty;
         }
+
         public void setTestProperty(final boolean testProperty) {
             this.testProperty = testProperty;
         }
@@ -115,9 +117,11 @@ public class Jira349TestCase extends TestCase {
      */
     public static class ObjectBean {
         private Boolean testProperty;
+
         public Boolean getTestProperty() {
             return testProperty;
         }
+
         public void setTestProperty(final Boolean testProperty) {
             this.testProperty = testProperty;
         }

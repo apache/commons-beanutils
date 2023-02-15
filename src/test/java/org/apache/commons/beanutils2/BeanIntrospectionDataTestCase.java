@@ -72,36 +72,30 @@ public class BeanIntrospectionDataTestCase extends TestCase {
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         assertNotNull("No write method", pd.getWriteMethod());
-        assertEquals("Wrong write method", pd.getWriteMethod(),
-                data.getWriteMethod(BEAN_CLASS, pd));
+        assertEquals("Wrong write method", pd.getWriteMethod(), data.getWriteMethod(BEAN_CLASS, pd));
     }
 
     /**
-     * Tests whether a write method can be queried that is currently not available in the
-     * property descriptor.
+     * Tests whether a write method can be queried that is currently not available in the property descriptor.
      */
     public void testGetWriteMethodUndefined() throws Exception {
         final BeanIntrospectionData data = setUpData();
         final PropertyDescriptor pd = fetchTestDescriptor(data);
         final Method writeMethod = pd.getWriteMethod();
         pd.setWriteMethod(null);
-        assertEquals("Wrong write method", writeMethod,
-                data.getWriteMethod(BEAN_CLASS, pd));
+        assertEquals("Wrong write method", writeMethod, data.getWriteMethod(BEAN_CLASS, pd));
         assertEquals("Method not set in descriptor", writeMethod, pd.getWriteMethod());
     }
 
     /**
-     * Tests getWriteMethod() if the method cannot be resolved. (This is a corner case
-     * which should normally not happen in practice.)
+     * Tests getWriteMethod() if the method cannot be resolved. (This is a corner case which should normally not happen in practice.)
      */
     public void testGetWriteMethodNonExisting() throws Exception {
-        final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP,
-                BEAN_CLASS.getMethod("getFluentGetProperty"), BEAN_CLASS.getMethod(
-                        "setFluentGetProperty", String.class));
+        final PropertyDescriptor pd = new PropertyDescriptor(TEST_PROP, BEAN_CLASS.getMethod("getFluentGetProperty"),
+                BEAN_CLASS.getMethod("setFluentGetProperty", String.class));
         final Map<String, String> methods = new HashMap<>();
         methods.put(TEST_PROP, "hashCode");
-        final BeanIntrospectionData data = new BeanIntrospectionData(
-                new PropertyDescriptor[] { pd }, methods);
+        final BeanIntrospectionData data = new BeanIntrospectionData(new PropertyDescriptor[] { pd }, methods);
         pd.setWriteMethod(null);
         assertNull("Got a write method", data.getWriteMethod(BEAN_CLASS, pd));
     }

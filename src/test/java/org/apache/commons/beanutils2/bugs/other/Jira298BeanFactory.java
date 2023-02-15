@@ -35,14 +35,17 @@ public class Jira298BeanFactory {
 
     public interface IX {
         String getName();
+
         void setName(String name);
     }
 
     static class BaseX {
         private String name = "BaseX name value";
+
         public String getName() {
             return name;
         }
+
         public void setName(final String name) {
             this.name = name;
         }

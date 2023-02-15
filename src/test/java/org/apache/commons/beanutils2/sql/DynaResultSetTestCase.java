@@ -34,27 +34,16 @@ import junit.framework.TestSuite;
 
 public class DynaResultSetTestCase extends TestCase {
 
-
-
     /**
      * The mock result set DynaClass to be tested.
      */
     protected ResultSetDynaClass dynaClass = null;
 
     /**
-     * Names of the columns for this test.  Must match the order they are
-     * defined in {@link TestResultSetMetaData}, and must be all lower case.
+     * Names of the columns for this test. Must match the order they are defined in {@link TestResultSetMetaData}, and must be all lower case.
      */
-    protected String[] columns =
-    { "bigdecimalproperty", "booleanproperty",
-      "byteproperty", "dateproperty",
-      "doubleproperty", "floatproperty",
-      "intproperty", "longproperty",
-      "nullproperty", "shortproperty",
-      "stringproperty", "timeproperty",
-      "timestampproperty" };
-
-
+    protected String[] columns = { "bigdecimalproperty", "booleanproperty", "byteproperty", "dateproperty", "doubleproperty", "floatproperty", "intproperty",
+            "longproperty", "nullproperty", "shortproperty", "stringproperty", "timeproperty", "timestampproperty" };
 
     /**
      * Constructs a new instance of this test case.
@@ -66,8 +55,6 @@ public class DynaResultSetTestCase extends TestCase {
         super(name);
 
     }
-
-
 
     /**
      * Sets up instance variables required by this test case.
@@ -98,13 +85,9 @@ public class DynaResultSetTestCase extends TestCase {
 
     }
 
-
-
     public void testGetName() {
 
-        assertEquals("DynaClass name",
-                     "org.apache.commons.beanutils2.sql.ResultSetDynaClass",
-                     dynaClass.getName());
+        assertEquals("DynaClass name", "org.apache.commons.beanutils2.sql.ResultSetDynaClass", dynaClass.getName());
 
     }
 
@@ -120,16 +103,13 @@ public class DynaResultSetTestCase extends TestCase {
 
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
-        assertTrue("unknown property returns null",
-                   dynaProp == null);
+        assertTrue("unknown property returns null", dynaProp == null);
 
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
         assertNotNull("string property exists", dynaProp);
-        assertEquals("string property name", "stringproperty",
-                     dynaProp.getName());
-        assertEquals("string property class", String.class,
-                     dynaProp.getType());
+        assertEquals("string property name", "stringproperty", dynaProp.getName());
+        assertEquals("string property class", String.class, dynaProp.getType());
 
     }
 
@@ -139,8 +119,7 @@ public class DynaResultSetTestCase extends TestCase {
         assertNotNull("dynaProps exists", dynaProps);
         assertEquals("dynaProps length", columns.length, dynaProps.length);
         for (int i = 0; i < columns.length; i++) {
-            assertEquals("Property " + columns[i],
-                         columns[i], dynaProps[i].getName());
+            assertEquals("Property " + columns[i], columns[i], dynaProps[i].getName());
         }
 
     }
@@ -194,31 +173,21 @@ public class DynaResultSetTestCase extends TestCase {
 
         final Object bigDecimalProperty = row.get("bigdecimalproperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
+        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
+        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
 
         final Object intProperty = row.get("intproperty");
         assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type",
-                   intProperty instanceof Integer);
-        assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
+        assertTrue("intProperty type", intProperty instanceof Integer);
+        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
 
         final Object nullProperty = row.get("nullproperty");
         assertNull("nullProperty null", nullProperty);
 
         final Object stringProperty = row.get("stringproperty");
         assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type",
-                   stringProperty instanceof String);
-        assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
+        assertTrue("stringProperty type", stringProperty instanceof String);
+        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
 
     }
 
@@ -251,31 +220,21 @@ public class DynaResultSetTestCase extends TestCase {
 
         final Object bigDecimalProperty = row.get("bigDecimalProperty");
         assertNotNull("bigDecimalProperty exists", bigDecimalProperty);
-        assertTrue("bigDecimalProperty type",
-                   bigDecimalProperty instanceof BigDecimal);
-        assertEquals("bigDecimalProperty value",
-                     123.45,
-                     ((BigDecimal) bigDecimalProperty).doubleValue(),
-                     0.005);
+        assertTrue("bigDecimalProperty type", bigDecimalProperty instanceof BigDecimal);
+        assertEquals("bigDecimalProperty value", 123.45, ((BigDecimal) bigDecimalProperty).doubleValue(), 0.005);
 
         final Object intProperty = row.get("intProperty");
         assertNotNull("intProperty exists", intProperty);
-        assertTrue("intProperty type",
-                   intProperty instanceof Integer);
-        assertEquals("intProperty value",
-                     103,
-                     ((Integer) intProperty).intValue());
+        assertTrue("intProperty type", intProperty instanceof Integer);
+        assertEquals("intProperty value", 103, ((Integer) intProperty).intValue());
 
         final Object nullProperty = row.get("nullProperty");
         assertNull("nullProperty null", nullProperty);
 
         final Object stringProperty = row.get("stringProperty");
         assertNotNull("stringProperty exists", stringProperty);
-        assertTrue("stringProperty type",
-                   stringProperty instanceof String);
-        assertEquals("stringProperty value",
-                     "This is a string",
-                     (String) stringProperty);
+        assertTrue("stringProperty type", stringProperty instanceof String);
+        assertEquals("stringProperty value", "This is a string", (String) stringProperty);
 
     }
 

@@ -60,35 +60,18 @@ public class ZoneOffsetConverterTestCase extends TestCase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
-        final Object[] input = {
-            "-12:00",
-            "+14:00",
-            "+02:00"
-        };
+        final Object[] input = { "-12:00", "+14:00", "+02:00" };
 
-        final ZoneOffset[] expected = {
-                ZoneOffset.of("-12:00"),
-                ZoneOffset.of("+14:00"),
-                ZoneOffset.of("+02:00")
-        };
+        final ZoneOffset[] expected = { ZoneOffset.of("-12:00"), ZoneOffset.of("+14:00"), ZoneOffset.of("+02:00") };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(ZoneOffset.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(ZoneOffset.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -105,4 +88,3 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         }
     }
 }
-

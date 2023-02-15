@@ -103,14 +103,14 @@ public class Jira298TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_298_PropertyUtils_setProperty() {
         final Object bean = Jira298BeanFactory.createImplX();
-        assertEquals("BaseX name value", ((IX)bean).getName());
+        assertEquals("BaseX name value", ((IX) bean).getName());
         try {
             PropertyUtils.setProperty(bean, "name", "new name");
         } catch (final Throwable t) {
             LOG.error("Failed: " + t.getMessage(), t);
             fail("Threw exception: " + t);
         }
-        assertEquals("new name", ((IX)bean).getName());
+        assertEquals("new name", ((IX) bean).getName());
     }
 
     /**

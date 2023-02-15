@@ -29,22 +29,22 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code LazyDynaMap} implementation class.</p>
+ * <p>
+ * Test Case for the {@code LazyDynaMap} implementation class.
+ * </p>
  *
  */
 public class LazyDynaMapTestCase extends TestCase {
 
-    protected LazyDynaMap  dynaMap    = null;
-    protected String testProperty     = "myProperty";
-    protected String testPropertyA    = "myProperty-A";
-    protected String testPropertyB    = "myProperty-B";
-    protected String testString1      = "myStringValue-1";
-    protected String testString2      = "myStringValue-2";
-    protected Integer testInteger1    = Integer.valueOf(30);
-    protected Integer testInteger2    = Integer.valueOf(40);
-    protected String testKey          = "myKey";
-
-
+    protected LazyDynaMap dynaMap = null;
+    protected String testProperty = "myProperty";
+    protected String testPropertyA = "myProperty-A";
+    protected String testPropertyB = "myProperty-B";
+    protected String testString1 = "myStringValue-1";
+    protected String testString2 = "myStringValue-2";
+    protected Integer testInteger1 = Integer.valueOf(30);
+    protected Integer testInteger2 = Integer.valueOf(40);
+    protected String testKey = "myKey";
 
     /**
      * Constructs a new instance of this test case.
@@ -54,8 +54,6 @@ public class LazyDynaMapTestCase extends TestCase {
     public LazyDynaMapTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run thus Test
@@ -85,10 +83,8 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-      dynaMap = null;
+        dynaMap = null;
     }
-
-
 
     /**
      * General Tests
@@ -160,12 +156,12 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", HashMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>) dynaMap.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         dynaMap.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, dynaMap.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>) dynaMap.get(testProperty)).get(testKey));
     }
 
     /**
@@ -187,12 +183,12 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, dynaMap.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>) dynaMap.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         dynaMap.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, dynaMap.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>)dynaMap.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>) dynaMap.get(testProperty)).get(testKey));
     }
 
     /**
@@ -209,10 +205,9 @@ public class LazyDynaMapTestCase extends TestCase {
 
         // Set the mapped property using PropertyUtils
         try {
-          PropertyUtils.setProperty(dynaMap, testProperty+"("+testKey+")", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
+            PropertyUtils.setProperty(dynaMap, testProperty + "(" + testKey + ")", testString1);
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+            fail("testIndexedPropertyUtils threw " + ex);
         }
 
         // Check property value correctly set
@@ -274,13 +269,13 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", ArrayList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -288,7 +283,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedLinkedList() {
 
-        int   index     = 3;
+        int index = 3;
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaMap.getDynaProperty(testProperty));
@@ -304,13 +299,13 @@ public class LazyDynaMapTestCase extends TestCase {
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Property type is correct", LinkedList.class, dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)dynaMap.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) dynaMap.get(testProperty)).size()));
     }
 
     /**
@@ -318,7 +313,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedPrimitiveArray() {
 
-        int   index     = 3;
+        int index = 3;
         final int[] primitiveArray = {};
 
         // Check the property & value doesn't exist
@@ -335,15 +330,15 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", primitiveArray.getClass(), dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testInteger1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Indexed Value is correct(b)", testInteger1, Integer.valueOf(((int[])dynaMap.get(testProperty))[index]));
-        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])dynaMap.get(testProperty)).length));
+        assertEquals("Check First Indexed Value is correct(b)", testInteger1, Integer.valueOf(((int[]) dynaMap.get(testProperty))[index]));
+        assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the int[] and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testInteger2);
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[])dynaMap.get(testProperty))[index]));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])dynaMap.get(testProperty)).length));
+        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[]) dynaMap.get(testProperty))[index]));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) dynaMap.get(testProperty)).length));
 
     }
 
@@ -352,7 +347,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedObjectArray() {
 
-        int   index     = 3;
+        int index = 3;
         final Object objectArray = new String[0];
 
         // Check the property & value doesn't exist
@@ -369,15 +364,15 @@ public class LazyDynaMapTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", dynaMap.get(testProperty));
         assertEquals("Check Indexed Property is correct type", objectArray.getClass(), dynaMap.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testString1, dynaMap.get(testProperty, index));
-        assertEquals("Check First Indexed Value is correct(b)", testString1, ((String[])dynaMap.get(testProperty))[index]);
-        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])dynaMap.get(testProperty)).length));
+        assertEquals("Check First Indexed Value is correct(b)", testString1, ((String[]) dynaMap.get(testProperty))[index]);
+        assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the String[] and set appropriate indexed value
         index = index + 2;
         dynaMap.set(testProperty, index, testString2);
         assertEquals("Check Second Indexed Value is correct(a)", testString2, dynaMap.get(testProperty, index));
-        assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[])dynaMap.get(testProperty))[index]);
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])dynaMap.get(testProperty)).length));
+        assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[]) dynaMap.get(testProperty))[index]);
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) dynaMap.get(testProperty)).length));
     }
 
     /**
@@ -385,7 +380,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedDynaBeanArray() {
 
-        final int   index     = 3;
+        final int index = 3;
         final Object objectArray = new LazyDynaBean[0];
 
         // Check the property & value doesn't exist
@@ -406,7 +401,7 @@ public class LazyDynaMapTestCase extends TestCase {
         final LazyDynaBean newBean = new LazyDynaBean();
         newBean.set(testPropertyB, testString2);
         dynaMap.set(testPropertyA, index, newBean);
-        assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean)dynaMap.get(testPropertyA, index)).get(testPropertyB));
+        assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean) dynaMap.get(testPropertyA, index)).get(testPropertyB));
 
     }
 
@@ -415,7 +410,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedPropertyUtils() {
 
-        final int   index     = 3;
+        final int index = 3;
         dynaMap.setReturnNull(false);
 
         // Check the property & value doesn't exist
@@ -425,10 +420,9 @@ public class LazyDynaMapTestCase extends TestCase {
 
         // Use PropertyUtils to set the indexed value
         try {
-          PropertyUtils.setProperty(dynaMap, testProperty+"["+index+"]", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
+            PropertyUtils.setProperty(dynaMap, testProperty + "[" + index + "]", testString1);
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+            fail("testIndexedPropertyUtils threw " + ex);
         }
 
         // Check property value correctly set
@@ -441,7 +435,7 @@ public class LazyDynaMapTestCase extends TestCase {
      */
     public void testIndexedPropertyRestricted() {
 
-        final int   index     = 3;
+        final int index = 3;
 
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaMap.setRestricted(true);
@@ -465,7 +459,7 @@ public class LazyDynaMapTestCase extends TestCase {
      * Test setting indexed property for type which is not List or Array
      */
     public void testIndexedInvalidType() {
-        final int   index     = 3;
+        final int index = 3;
         dynaMap.set(testProperty, "Test String");
         assertFalse("Check Property is not indexed", dynaMap.getDynaProperty(testProperty).isIndexed());
         try {
@@ -486,13 +480,13 @@ public class LazyDynaMapTestCase extends TestCase {
         final LazyDynaMap orig = new LazyDynaMap(new TreeMap<String, Object>());
         orig.set("indexProp", 0, "indexVal0");
         orig.set("indexProp", 1, "indexVal1");
-        assertEquals("Index prop size", 2, ((List<?>)orig.get("indexProp")).size());
+        assertEquals("Index prop size", 2, ((List<?>) orig.get("indexProp")).size());
 
-        final LazyDynaMap newOne = (LazyDynaMap)orig.newInstance();
+        final LazyDynaMap newOne = (LazyDynaMap) orig.newInstance();
         final Map<String, Object> newMap = newOne.getMap();
         assertEquals("Check Map type", TreeMap.class, newMap.getClass());
 
-        final ArrayList<?> indexProp = (ArrayList<?>)newMap.get("indexProp");
+        final ArrayList<?> indexProp = (ArrayList<?>) newMap.get("indexProp");
         assertNotNull("Indexed Prop missing", indexProp);
         assertEquals("Index prop size", 0, indexProp.size());
     }

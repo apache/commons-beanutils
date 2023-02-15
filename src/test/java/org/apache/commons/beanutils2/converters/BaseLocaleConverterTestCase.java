@@ -24,9 +24,9 @@ import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import junit.framework.TestCase;
 
 /**
- * Base Test Case for the DecimalLocaleConverter classes. This class doesn't
- * define any real tests; it just provides useful methods for the real
- * test case classes to inherit.
+ * Base Test Case for the DecimalLocaleConverter classes. This class doesn't define any real tests; it just provides useful methods for the real test case
+ * classes to inherit.
+ *
  * @param <T> The converter type.
  */
 public class BaseLocaleConverterTestCase<T> extends TestCase {
@@ -69,22 +69,22 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     public void setUp() throws Exception {
 
         // Default Locale (Use US)
-        defaultLocale           = Locale.US;
-        defaultDecimalPattern   = "#,###.00";
-        defaultIntegerPattern   = "#,###";
-        defaultDecimalValue     = "1,234.56";
-        defaultIntegerValue     = "1,234";
+        defaultLocale = Locale.US;
+        defaultDecimalPattern = "#,###.00";
+        defaultIntegerPattern = "#,###";
+        defaultDecimalValue = "1,234.56";
+        defaultIntegerValue = "1,234";
 
         // Use German Locale (uses different separators to US)
-        localizedLocale         = Locale.GERMAN;
+        localizedLocale = Locale.GERMAN;
         localizedDecimalPattern = "#.###,00";
         localizedIntegerPattern = "#.###";
-        localizedDecimalValue   = "1.234,56";
-        localizedIntegerValue   = "1.234";
+        localizedDecimalValue = "1.234,56";
+        localizedIntegerValue = "1.234";
 
         // Expected Values
-        expectedDecimalValue    = "1234.56";
-        expectedIntegerValue    = "1234";
+        expectedDecimalValue = "1234.56";
+        expectedIntegerValue = "1234";
 
         // Reset default to the one specified
         origLocale = Locale.getDefault();
@@ -93,7 +93,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         converter = null;
         result = null;
         defaultValue = null;
-        expectedValue= null;
+        expectedValue = null;
 
         if (defaultLocale.equals(origLocale)) {
             origLocale = null;
@@ -111,7 +111,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         converter = null;
         result = null;
         defaultValue = null;
-        expectedValue= null;
+        expectedValue = null;
 
         // Set the Default Locale back to the original value
         if (origLocale != null) {
@@ -130,7 +130,8 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Value WITH a pattern
      */
-    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueWithPattern(final BaseLocaleConverter<T> converter, final String msgId, final Object value, final String pattern,
+            final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(value, pattern);
@@ -164,14 +165,16 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final Class<T> clazz, final Object value, final String pattern,
+            final Object expectedValue) {
         convertValueToType(converter, "", clazz, value, pattern, expectedValue);
     }
 
     /**
      * Test Converting Value To a specified Type
      */
-    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value, final String pattern, final Object expectedValue) {
+    protected void convertValueToType(final BaseLocaleConverter<T> converter, final String msgId, final Class<T> clazz, final Object value,
+            final String pattern, final Object expectedValue) {
         // Convert value with no pattern
         try {
             result = converter.convert(clazz, value, pattern);
@@ -200,7 +203,7 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
         }
 
         if (expectedValue == null) {
-            assertNull("Check null conversion is null '" + msgId + "' result="+result, result);
+            assertNull("Check null conversion is null '" + msgId + "' result=" + result, result);
         } else {
             assertEquals("Check null conversion is default " + msgId, expectedValue, result);
         }
@@ -235,12 +238,9 @@ public class BaseLocaleConverterTestCase<T> extends TestCase {
     }
 
     /**
-     * This class isn't intended to perform any real tests; it just provides
-     * methods for the real test cases to inherit. However JUnit complains
-     * if a class named ..TestCase contains no test methods, so here we
-     * define a dummy one to keep it happy.
+     * This class isn't intended to perform any real tests; it just provides methods for the real test cases to inherit. However JUnit complains if a class
+     * named ..TestCase contains no test methods, so here we define a dummy one to keep it happy.
      */
     public void testNothing() {
     }
 }
-

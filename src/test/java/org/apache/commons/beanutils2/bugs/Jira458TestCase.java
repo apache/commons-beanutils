@@ -24,8 +24,7 @@ import org.apache.commons.beanutils2.locale.converters.IntegerLocaleConverter;
 import junit.framework.TestCase;
 
 /**
- * BaseLocaleConverter.checkConversionResult() fails with ConversionException when result
- * is null when it should not.
+ * BaseLocaleConverter.checkConversionResult() fails with ConversionException when result is null when it should not.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-458">https://issues.apache.org/jira/browse/BEANUTILS-458</a>
  */
@@ -36,7 +35,7 @@ public class Jira458TestCase extends TestCase {
      * @param input the input string
      */
     private void checkConversionWithNullDefault(final String input) {
-        //final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);
+        // final Converter<Integer> converter = new IntegerLocaleConverter(null, Locale.US);
         final Converter<Integer> converter = IntegerLocaleConverter.builder().setUseDefault(true).setLocale(Locale.US).get();
         assertNull("Wrong result", converter.convert(Integer.class, input));
     }

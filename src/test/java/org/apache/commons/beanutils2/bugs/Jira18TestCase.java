@@ -26,8 +26,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for Jira issue# BEANUTILS-18.
-
- * <p>This test case demonstrates the issue.
+ *
+ * <p>
+ * This test case demonstrates the issue.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-18">https://issues.apache.org/jira/browse/BEANUTILS-18</a>
  */
@@ -41,8 +42,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for simple properties.
+     * Test {@link PropertyUtils#isReadable(Object, String)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable() {
@@ -50,8 +50,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)}
-     * for simple properties.
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable() {
@@ -59,8 +58,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for indexed properties.
+     * Test {@link PropertyUtils#isReadable(Object, String)} for indexed properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Indexed() {
@@ -68,8 +66,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)}
-     * for indexed properties.
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for indexed properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Indexed() {
@@ -77,8 +74,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isReadable(Object, String)}
-     * for Mapped properties.
+     * Test {@link PropertyUtils#isReadable(Object, String)} for Mapped properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isReadable_Mapped() {
@@ -86,8 +82,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#isWriteable(Object, String)}
-     * for Mapped properties.
+     * Test {@link PropertyUtils#isWriteable(Object, String)} for Mapped properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_isWriteable_Mapped() {
@@ -95,8 +90,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)}
-     * for simple properties.
+     * Test {@link PropertyUtils#getProperty(Object, String)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty() {
@@ -104,8 +98,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
-     * for simple properties.
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for simple properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty() {
@@ -113,8 +106,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)}
-     * for indexed properties.
+     * Test {@link PropertyUtils#getProperty(Object, String)} for indexed properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty_Indexed() {
@@ -122,8 +114,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
-     * for indexed properties.
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for indexed properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Indexed() {
@@ -131,8 +122,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#getProperty(Object, String)}
-     * for mapped properties.
+     * Test {@link PropertyUtils#getProperty(Object, String)} for mapped properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_getProperty_Mapped() {
@@ -140,8 +130,7 @@ public class Jira18TestCase {
     }
 
     /**
-     * Test {@link PropertyUtils#setProperty(Object, String, Object)}
-     * for mapped properties.
+     * Test {@link PropertyUtils#setProperty(Object, String, Object)} for mapped properties.
      */
     @Test
     public void testIssue_BEANUTILS_18_PropertyUtils_setProperty_Mapped() {

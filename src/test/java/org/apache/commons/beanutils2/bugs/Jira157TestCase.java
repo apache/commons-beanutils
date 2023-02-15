@@ -30,11 +30,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Beanutils's describe() method cannot determine reader methods for anonymous
- * class - see Jira issue# BEANUTILS-157.
+ * Beanutils's describe() method cannot determine reader methods for anonymous class - see Jira issue# BEANUTILS-157.
  *
- * @see <a
- *      href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
+ * See <a href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
  */
 public class Jira157TestCase extends TestCase {
 
@@ -92,8 +90,7 @@ public class Jira157TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a "grand parent" public class.
+     * Test with an private class that overrides a public method of a "grand parent" public class.
      * <p />
      * See Jira issue# BEANUTILS-157.
      */
@@ -105,6 +102,7 @@ public class Jira157TestCase extends TestCase {
             public String getX() {
                 return "x-value";
             }
+
             @SuppressWarnings("unused")
             public String getY() {
                 return "y-value";
@@ -122,8 +120,7 @@ public class Jira157TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a "grand parent" public class.
+     * Test with an private class that overrides a public method of a "grand parent" public class.
      * <p />
      * See Jira issue# BEANUTILS-157.
      */
@@ -133,6 +130,7 @@ public class Jira157TestCase extends TestCase {
             public String getX() {
                 return "x-value";
             }
+
             @Override
             public String getY() {
                 return "y-value";
@@ -154,8 +152,7 @@ public class Jira157TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a "grand parent" public class.
+     * Test with an private class that overrides a public method of a "grand parent" public class.
      * <p />
      * See Jira issue# BEANUTILS-157.
      */
@@ -176,6 +173,7 @@ public class Jira157TestCase extends TestCase {
 
     public interface XY {
         String getX();
+
         String getY();
     }
 
@@ -183,13 +181,16 @@ public class Jira157TestCase extends TestCase {
         String getPackageFoo() {
             return "Package Value";
         }
+
         @SuppressWarnings("unused")
         private String getPrivateFoo() {
             return "PrivateFoo Value";
         }
+
         protected String getProtectedFoo() {
             return "ProtectedFoo Value";
         }
+
         public String getPublicFoo() {
             return "PublicFoo Value";
         }

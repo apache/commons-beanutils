@@ -38,18 +38,10 @@ public class URLConverterTestCase {
 
     @Test
     public void testSimpleConversion() {
-        final String[] input = {
-            "http://www.apache.org",
-            "http://www.apache.org/",
-            "ftp://cvs.apache.org",
-            "file://project.xml",
-            "http://208.185.179.12",
-            "http://www.apache.org:9999/test/thing",
-            "http://user:admin@www.apache.org:50/one/two.three",
-            "http://notreal.apache.org",
-            "http://notreal.apache.org/test/file.xml#计算机图形学",
-            "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6"
-        };
+        final String[] input = { "http://www.apache.org", "http://www.apache.org/", "ftp://cvs.apache.org", "file://project.xml", "http://208.185.179.12",
+                "http://www.apache.org:9999/test/thing", "http://user:admin@www.apache.org:50/one/two.three", "http://notreal.apache.org",
+                "http://notreal.apache.org/test/file.xml#计算机图形学",
+                "http://notreal.apache.org/test/file.xml#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6" };
 
         for (final String urlString : input) {
             assertEquals("from String to URL", urlString, converter.convert(URL.class, urlString).toString());

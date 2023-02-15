@@ -29,10 +29,8 @@ import junit.framework.TestSuite;
  * Test case for Jiar issue# BEANUTILS-87.
  *
  * <p>
- * In BeanUtils 1.7.0 a "package friendly" implementation
- * of a public interface with defined a "mapped property"
- * caused an {@link IllegalAccessException} to be thrown by
- * PropertyUtils's getMappedProperty method.
+ * In BeanUtils 1.7.0 a "package friendly" implementation of a public interface with defined a "mapped property" caused an {@link IllegalAccessException} to be
+ * thrown by PropertyUtils's getMappedProperty method.
  *
  * <p>
  * This test case demonstrates the issue.

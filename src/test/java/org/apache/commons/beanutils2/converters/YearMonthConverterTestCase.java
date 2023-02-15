@@ -59,35 +59,18 @@ public class YearMonthConverterTestCase extends TestCase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
-        final Object[] input = {
-            "2007-12",
-            "1974-05",
-            "2112-01"
-        };
+        final Object[] input = { "2007-12", "1974-05", "2112-01" };
 
-        final YearMonth[] expected = {
-                YearMonth.parse("2007-12"),
-                YearMonth.parse("1974-05"),
-                YearMonth.parse("2112-01")
-        };
+        final YearMonth[] expected = { YearMonth.parse("2007-12"), YearMonth.parse("1974-05"), YearMonth.parse("2112-01") };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(YearMonth.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(YearMonth.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -104,4 +87,3 @@ public class YearMonthConverterTestCase extends TestCase {
         }
     }
 }
-

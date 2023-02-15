@@ -80,9 +80,9 @@ public class Jira359TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
-    public void testBeanUtilsSetProperty_CustomConvertStringToArray_WithColonValue() throws Exception{
+    public void testBeanUtilsSetProperty_CustomConvertStringToArray_WithColonValue() throws Exception {
         final ArrayConverter converter = new ArrayConverter(String[].class, new StringConverter());
-        converter.setAllowedChars(new char[] {'.', '-', ':'});
+        converter.setAllowedChars(new char[] { '.', '-', ':' });
 
         final BeanUtilsBean utils = new BeanUtilsBean();
         utils.getConvertUtils().register(converter, String[].class);
@@ -98,7 +98,7 @@ public class Jira359TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() String to array with colon value
      */
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithColonValue() throws Exception{
+    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithColonValue() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mix:rereferencible,mix:simple");
         showArray("Default WithColonValue", simplePojo.getJcrMixinTypes());
@@ -112,7 +112,7 @@ public class Jira359TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() String to array without colon value
      */
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValue() throws Exception{
+    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValue() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible,mixsimple");
         showArray("Default WithoutColonValue", simplePojo.getJcrMixinTypes());
@@ -124,7 +124,7 @@ public class Jira359TestCase extends TestCase {
     /**
      * Test {@link BeanUtils} setProperty() String to array without colon value and no comma
      */
-    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValueAndNocoma() throws Exception{
+    public void testBeanUtilsSetProperty_DefaultConvertStringToArray_WithoutColonValueAndNocoma() throws Exception {
         final SimplePojoData simplePojo = new SimplePojoData();
         BeanUtils.setProperty(simplePojo, "jcrMixinTypes", "mixrereferencible");
         showArray("Default WithoutColonAndNocoma", simplePojo.getJcrMixinTypes());
@@ -148,11 +148,14 @@ public class Jira359TestCase extends TestCase {
 
     public static class SimplePojoData {
         private String[] jcrMixinTypes = new String[1];
+
         public SimplePojoData() {
         }
+
         public String[] getJcrMixinTypes() {
             return this.jcrMixinTypes;
         }
+
         public void setJcrMixinTypes(final String[] mixinTypes) {
             this.jcrMixinTypes = mixinTypes;
         }

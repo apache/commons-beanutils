@@ -33,10 +33,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This test verifies that although BEANUTILS-492
- * means {@link IndexedPropertyDescriptor}s are not
- * returned for properties of type {@link List}, they
- * can still be accessed as positional items.
+ * This test verifies that although BEANUTILS-492 means {@link IndexedPropertyDescriptor}s are not returned for properties of type {@link List}, they can still
+ * be accessed as positional items.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */

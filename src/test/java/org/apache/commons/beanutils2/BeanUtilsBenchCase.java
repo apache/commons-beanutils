@@ -49,7 +49,7 @@ public class BeanUtilsBenchCase extends TestCase {
     // Input objects that have identical sets of properties and values.
     private BenchBean inBean = null;
     private DynaBean inDyna = null;
-    private Map<String, Object> inMap = null;  // Map of Objects requiring no conversion
+    private Map<String, Object> inMap = null; // Map of Objects requiring no conversion
     private Map<String, String> inStrs = null; // Map of Strings requiring conversion
 
     // Output objects that have identical sets of properties.
@@ -72,18 +72,11 @@ public class BeanUtilsBenchCase extends TestCase {
         }
 
         // Set up DynaClass for our DynaBean instances
-        dynaClass = new BasicDynaClass
-            ("BenchDynaClass", null,
-             new DynaProperty[]{
-                 new DynaProperty("booleanProperty", Boolean.TYPE),
-                 new DynaProperty("byteProperty", Byte.TYPE),
-                 new DynaProperty("doubleProperty", Double.TYPE),
-                 new DynaProperty("floatProperty", Float.TYPE),
-                 new DynaProperty("intProperty", Integer.TYPE),
-                 new DynaProperty("longProperty", Long.TYPE),
-                 new DynaProperty("shortProperty", Short.TYPE),
-                 new DynaProperty("stringProperty", String.class),
-             });
+        dynaClass = new BasicDynaClass("BenchDynaClass", null,
+                new DynaProperty[] { new DynaProperty("booleanProperty", Boolean.TYPE), new DynaProperty("byteProperty", Byte.TYPE),
+                        new DynaProperty("doubleProperty", Double.TYPE), new DynaProperty("floatProperty", Float.TYPE),
+                        new DynaProperty("intProperty", Integer.TYPE), new DynaProperty("longProperty", Long.TYPE),
+                        new DynaProperty("shortProperty", Short.TYPE), new DynaProperty("stringProperty", String.class), });
 
         // Create input instances
         inBean = new BenchBean();
@@ -157,8 +150,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outBean, inBean);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(bean,bean), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(bean,bean), count=" + counter + ", time=" + (stopMillis - startMillis));
 
         // Bean->Dyna
         for (long i = 0; i < counter; i++) {
@@ -169,8 +161,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outDyna, inBean);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(dyna,bean), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(dyna,bean), count=" + counter + ", time=" + (stopMillis - startMillis));
 
     }
 
@@ -189,8 +180,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outBean, inDyna);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(bean,dyna), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(bean,dyna), count=" + counter + ", time=" + (stopMillis - startMillis));
 
         // Dyna->Dyna
         for (long i = 0; i < counter; i++) {
@@ -201,8 +191,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outDyna, inDyna);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(dyna,dyna), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(dyna,dyna), count=" + counter + ", time=" + (stopMillis - startMillis));
 
     }
 
@@ -221,8 +210,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outBean, inMap);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(bean, map), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(bean, map), count=" + counter + ", time=" + (stopMillis - startMillis));
 
         // Map->Dyna
         for (long i = 0; i < counter; i++) {
@@ -233,8 +221,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outDyna, inMap);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(dyna, map), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(dyna, map), count=" + counter + ", time=" + (stopMillis - startMillis));
 
     }
 
@@ -253,8 +240,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outBean, inStrs);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(bean,strs), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(bean,strs), count=" + counter + ", time=" + (stopMillis - startMillis));
 
         // Strs->Dyna
         for (long i = 0; i < counter; i++) {
@@ -265,8 +251,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.copyProperties(outDyna, inStrs);
         }
         stopMillis = System.currentTimeMillis();
-        System.err.println("BU.copyProperties(dyna,strs), count=" + counter +
-                           ", time=" + (stopMillis - startMillis));
+        System.err.println("BU.copyProperties(dyna,strs), count=" + counter + ", time=" + (stopMillis - startMillis));
 
     }
 
@@ -285,8 +270,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.populate(outBean, inMap);
         }
         stop = System.currentTimeMillis();
-        System.err.println("BU.populate(bean, map), count=" + counter +
-                           ", time=" + (stop - startMillis));
+        System.err.println("BU.populate(bean, map), count=" + counter + ", time=" + (stop - startMillis));
 
         // Map->Dyna
         for (long i = 0; i < counter; i++) {
@@ -297,8 +281,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.populate(outDyna, inMap);
         }
         stop = System.currentTimeMillis();
-        System.err.println("BU.populate(dyna, map), count=" + counter +
-                           ", time=" + (stop - startMillis));
+        System.err.println("BU.populate(dyna, map), count=" + counter + ", time=" + (stop - startMillis));
 
     }
 
@@ -318,8 +301,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.populate(outBean, inStrs);
         }
         stop = System.currentTimeMillis();
-        System.err.println("BU.populate(bean,strs), count=" + counter +
-                           ", time=" + (stop - startMillis));
+        System.err.println("BU.populate(bean,strs), count=" + counter + ", time=" + (stop - startMillis));
 
         // Strs->Dyna
         for (long i = 0; i < counter; i++) {
@@ -330,8 +312,7 @@ public class BeanUtilsBenchCase extends TestCase {
             bu.populate(outDyna, inStrs);
         }
         stop = System.currentTimeMillis();
-        System.err.println("BU.populate(dyna,strs), count=" + counter +
-                           ", time=" + (stop - startMillis));
+        System.err.println("BU.populate(dyna,strs), count=" + counter + ", time=" + (stop - startMillis));
 
     }
 

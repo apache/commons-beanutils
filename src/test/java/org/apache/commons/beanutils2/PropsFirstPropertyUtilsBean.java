@@ -21,22 +21,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
- * A PropertyUtilsBean which customizes the behavior of the
- * setNestedProperty and getNestedProperty methods to look for
- * simple properties in preference to map entries.
+ * A PropertyUtilsBean which customizes the behavior of the setNestedProperty and getNestedProperty methods to look for simple properties in preference to map
+ * entries.
  *
  */
 public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
 
     /**
-     * Note: this is a *very rough* override of this method. In particular,
-     * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
-     * propertyName, so propertyNames like "a(b)" or "a[3]" will not
-     * be correctly handled.
+     * Note: this is a *very rough* override of this method. In particular, it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the propertyName, so
+     * propertyNames like "a(b)" or "a[3]" will not be correctly handled.
      */
     @Override
     protected Object getPropertyOfMapBean(final Map<?, ?> bean, final String propertyName)
-    throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
@@ -48,14 +45,12 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
     }
 
     /**
-     * Note: this is a *very rough* override of this method. In particular,
-     * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
-     * propertyName, so propertyNames like "a(b)" or "a[3]" will not
-     * be correctly handled.
+     * Note: this is a *very rough* override of this method. In particular, it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the propertyName, so
+     * propertyNames like "a(b)" or "a[3]" will not be correctly handled.
      */
     @Override
     protected void setPropertyOfMapBean(final Map<String, Object> bean, final String propertyName, final Object value)
-        throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         final PropertyDescriptor descriptor = getPropertyDescriptor(bean, propertyName);
         if (descriptor == null) {
             // no simple property exists so put the value into the map

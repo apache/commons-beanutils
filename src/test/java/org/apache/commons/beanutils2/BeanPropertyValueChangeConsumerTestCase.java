@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 import junit.framework.TestCase;
 
-
 /**
  * Test cases for {@code BeanPropertyValueChangeClosure}.
  *
@@ -270,8 +269,8 @@ public class BeanPropertyValueChangeConsumerTestCase extends TestCase {
         final TestBean testBean = new TestBean();
 
         // create a consumer that will attempt to set a property on the null bean in the path
-        final BeanPropertyValueChangeConsumer<TestBean, Object> consumer = new BeanPropertyValueChangeConsumer<>(
-                "anotherNested.stringProperty", "Should ignore exception", true);
+        final BeanPropertyValueChangeConsumer<TestBean, Object> consumer = new BeanPropertyValueChangeConsumer<>("anotherNested.stringProperty",
+                "Should ignore exception", true);
 
         try {
             consumer.accept(testBean);

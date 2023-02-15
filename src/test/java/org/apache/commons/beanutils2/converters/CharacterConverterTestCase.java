@@ -29,16 +29,16 @@ public class CharacterConverterTestCase extends TestCase {
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
         return new TestSuite(CharacterConverterTestCase.class);
     }
 
-
-
     /**
      * Constructs a new Character Converter test case.
+     *
      * @param name Test Name
      */
     public CharacterConverterTestCase(final String name) {
@@ -55,8 +55,6 @@ public class CharacterConverterTestCase extends TestCase {
     public void tearDown() throws Exception {
     }
 
-
-
     /**
      * Tests whether the primitive char class can be passed as target type.
      */
@@ -71,13 +69,12 @@ public class CharacterConverterTestCase extends TestCase {
     public void testConvertToCharacter() {
         final Converter<Character> converter = new CharacterConverter();
         assertEquals("Character Test", Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')));
-        assertEquals("String Test",    Character.valueOf('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test",   Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)));
+        assertEquals("String Test", Character.valueOf('F'), converter.convert(Character.class, "FOO"));
+        assertEquals("Integer Test", Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)));
     }
 
     /**
-     * Tests a conversion to character for null input if no default value is
-     * provided.
+     * Tests a conversion to character for null input if no default value is provided.
      */
     public void testConvertToCharacterNullNoDefault() {
         final Converter<Character> converter = new CharacterConverter();
@@ -100,9 +97,9 @@ public class CharacterConverterTestCase extends TestCase {
         final Converter raw = converter;
 
         assertEquals("Character Test", "N", raw.convert(String.class, Character.valueOf('N')));
-        assertEquals("String Test",    "F", raw.convert(String.class, "FOO"));
-        assertEquals("Integer Test",   "3", raw.convert(String.class, Integer.valueOf(321)));
-        assertEquals("Null Test",     null, raw.convert(String.class, null));
+        assertEquals("String Test", "F", raw.convert(String.class, "FOO"));
+        assertEquals("Integer Test", "3", raw.convert(String.class, Integer.valueOf(321)));
+        assertEquals("Null Test", null, raw.convert(String.class, null));
     }
 
     /**
@@ -125,6 +122,6 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testDefault() {
         final CharacterConverter converter = new CharacterConverter('C');
-        assertEquals("Default Test",   Character.valueOf('C'), converter.convert(Character.class, null));
+        assertEquals("Default Test", Character.valueOf('C'), converter.convert(Character.class, null));
     }
 }

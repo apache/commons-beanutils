@@ -31,34 +31,33 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code DynaBeanMapDecorator} implementation class.</p>
+ * <p>
+ * Test Case for the {@code DynaBeanMapDecorator} implementation class.
+ * </p>
  *
  */
 @SuppressWarnings("deprecation")
 public class DynaBeanMapDecoratorTestCase extends TestCase {
 
     private static final DynaProperty stringProp = new DynaProperty("stringProp", String.class);
-    private static final DynaProperty nullProp   = new DynaProperty("nullProp",   String.class);
-    private static final DynaProperty intProp    = new DynaProperty("intProp",    Integer.class);
-    private static final DynaProperty dateProp   = new DynaProperty("dateProp",   Date.class);
-    private static final DynaProperty mapProp    = new DynaProperty("mapProp",    Map.class);
-    private static final DynaProperty[] properties = {
-                      stringProp, nullProp, intProp, dateProp, mapProp};
+    private static final DynaProperty nullProp = new DynaProperty("nullProp", String.class);
+    private static final DynaProperty intProp = new DynaProperty("intProp", Integer.class);
+    private static final DynaProperty dateProp = new DynaProperty("dateProp", Date.class);
+    private static final DynaProperty mapProp = new DynaProperty("mapProp", Map.class);
+    private static final DynaProperty[] properties = { stringProp, nullProp, intProp, dateProp, mapProp };
     private static final DynaClass dynaClass = new BasicDynaClass("testDynaClass", BasicDynaBean.class, properties);
 
-    private static final String  stringVal = "somevalue";
-    private static final Integer intVal    = Integer.valueOf(5);
-    private static final Date    dateVal   = new Date();
-    private final Map<Object, Object>     mapVal    = new HashMap<>();
+    private static final String stringVal = "somevalue";
+    private static final Integer intVal = Integer.valueOf(5);
+    private static final Date dateVal = new Date();
+    private final Map<Object, Object> mapVal = new HashMap<>();
 
-    private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
+    private final Object[] values = { stringVal, null, intVal, dateVal, mapVal };
 
     private BasicDynaBean dynaBean;
     private Map<String, Object> decoratedMap;
     private Map<String, Object> modifiableMap;
     private static final Map<String, Object> emptyMap = new DynaBeanPropertyMapDecorator(new BasicDynaBean(new BasicDynaClass()));
-
-
 
     /**
      * Constructs a new instance of this test case.
@@ -68,8 +67,6 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public DynaBeanMapDecoratorTestCase(final String name) {
         super(name);
     }
-
-
 
     /**
      * Run thus Test
@@ -102,7 +99,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         }
 
         // Create decorated Maps
-        decoratedMap  = new DynaBeanPropertyMapDecorator(dynaBean);
+        decoratedMap = new DynaBeanPropertyMapDecorator(dynaBean);
         modifiableMap = new DynaBeanPropertyMapDecorator(dynaBean, false);
 
     }
@@ -117,14 +114,12 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         modifiableMap = null;
     }
 
-
-
     /**
      * Test isReadOnly() method
      */
     public void testIsReadOnly() {
-        assertTrue("decoratedMap true",   ((DynaBeanPropertyMapDecorator)decoratedMap).isReadOnly());
-        assertFalse("modifiableMap false", ((DynaBeanPropertyMapDecorator)modifiableMap).isReadOnly());
+        assertTrue("decoratedMap true", ((DynaBeanPropertyMapDecorator) decoratedMap).isReadOnly());
+        assertFalse("modifiableMap false", ((DynaBeanPropertyMapDecorator) modifiableMap).isReadOnly());
     }
 
     /**
@@ -134,13 +129,13 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             decoratedMap.clear();
             fail("decoratedMap.clear()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
         try {
             modifiableMap.clear();
             fail("modifiableMap.clear()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
     }
@@ -149,7 +144,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test containsKey() method
      */
     public void testContainsKey() {
-        assertTrue("decoratedMap true",   decoratedMap.containsKey(stringProp.getName()));
+        assertTrue("decoratedMap true", decoratedMap.containsKey(stringProp.getName()));
         assertFalse("decoratedMap false", decoratedMap.containsKey("xyz"));
     }
 
@@ -157,7 +152,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test containsValue() method
      */
     public void testContainsValue() {
-        assertTrue("decoratedMap true",   decoratedMap.containsValue(stringVal));
+        assertTrue("decoratedMap true", decoratedMap.containsValue(stringVal));
         assertFalse("decoratedMap false", decoratedMap.containsValue("xyz"));
     }
 
@@ -177,10 +172,10 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         final List<String> namesList = new ArrayList<>();
         int i = 0;
         for (final Entry<String, Object> entry : set) {
-            final String name  = entry.getKey();
+            final String name = entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);
-            assertEquals("entrySet("+i+") val", expectValue, entry.getValue());
+            assertEquals("entrySet(" + i + ") val", expectValue, entry.getValue());
             i++;
         }
         for (int j = 0; j < properties.length; j++) {
@@ -201,7 +196,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             decoratedMap.get("xyz");
             fail("decoratedMap invalid");
-        } catch(final IllegalArgumentException ignore) {
+        } catch (final IllegalArgumentException ignore) {
             // expected result
         }
     }
@@ -210,7 +205,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Test isEmpty() method
      */
     public void testIsEmpty() {
-        assertTrue("Empty",      emptyMap.isEmpty());
+        assertTrue("Empty", emptyMap.isEmpty());
         assertFalse("Not Empty", decoratedMap.isEmpty());
     }
 
@@ -242,7 +237,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             decoratedMap.put(stringProp.getName(), newValue);
             fail("Not read only");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -265,14 +260,14 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             decoratedMap.putAll(newMap);
             fail("Not read only");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
         // Test Writable
         assertEquals("before putAll", stringVal, dynaBean.get(stringProp.getName()));
         modifiableMap.putAll(newMap);
-        assertEquals("after putAll",  newValue,  dynaBean.get(stringProp.getName()));
+        assertEquals("after putAll", newValue, dynaBean.get(stringProp.getName()));
     }
 
     /**
@@ -282,13 +277,13 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             decoratedMap.remove(stringProp.getName());
             fail("decoratedMap.remove()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
         try {
             modifiableMap.remove(stringProp.getName());
             fail("modifiableMap.remove()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
     }
@@ -316,7 +311,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         final Iterator<Object> iterator = collection.iterator();
         int i = 0;
         while (iterator.hasNext()) {
-            assertEquals("values("+i+")", values[i], iterator.next());
+            assertEquals("values(" + i + ")", values[i], iterator.next());
             i++;
         }
     }
@@ -329,7 +324,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.add(addElem);
             fail(desc + ".add()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -339,7 +334,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.addAll(list);
             fail(desc + ".addAll()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -347,7 +342,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.clear();
             fail(desc + ".clear()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -355,7 +350,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.remove("abc");
             fail(desc + ".remove()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -363,7 +358,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.removeAll(list);
             fail(desc + ".removeAll()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
 
@@ -371,7 +366,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         try {
             collection.retainAll(list);
             fail(desc + ".retainAll()");
-        } catch(final UnsupportedOperationException ignore) {
+        } catch (final UnsupportedOperationException ignore) {
             // expected result
         }
     }

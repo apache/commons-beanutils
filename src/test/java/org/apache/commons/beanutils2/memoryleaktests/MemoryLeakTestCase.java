@@ -64,9 +64,8 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -81,9 +80,9 @@ public class MemoryLeakTestCase {
         assertEquals("initialValue", PropertyUtils.getProperty(bean, "name"));
 
         // this should make the reference go away.
-        loader    = null;
+        loader = null;
         beanClass = null;
-        bean      = null;
+        bean = null;
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
@@ -111,9 +110,8 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -152,8 +150,7 @@ public class MemoryLeakTestCase {
     }
 
     /**
-     * Tests that MappedPropertyDescriptor can re-create the Method reference after it
-     * has been garbage collected.
+     * Tests that MappedPropertyDescriptor can re-create the Method reference after it has been garbage collected.
      */
     @Test
     public void testMappedPropertyDescriptor_MappedMethodReference1() throws Exception {
@@ -163,9 +160,8 @@ public class MemoryLeakTestCase {
 
         final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomeMappedPojo";
         final ClassLoader loader = newClassLoader();
-        final Class<?> beanClass    = loader.loadClass(className);
-        final Object bean        = beanClass.newInstance();
-
+        final Class<?> beanClass = loader.loadClass(className);
+        final Object bean = beanClass.newInstance();
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -198,8 +194,7 @@ public class MemoryLeakTestCase {
     }
 
     /**
-     * Tests that MappedPropertyDescriptor can re-create the Method reference after it
-     * has been garbage collected.
+     * Tests that MappedPropertyDescriptor can re-create the Method reference after it has been garbage collected.
      */
     @Test
     public void testMappedPropertyDescriptor_MappedMethodReference2() throws Exception {
@@ -209,9 +204,8 @@ public class MemoryLeakTestCase {
 
         final String className = "org.apache.commons.beanutils2.memoryleaktests.pojotests.SomeMappedPojo";
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -261,9 +255,8 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
-
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -278,9 +271,9 @@ public class MemoryLeakTestCase {
         assertEquals("initialValue", MethodUtils.invokeExactMethod(bean, "getName", new Object[0]));
 
         // this should make the reference go away.
-        loader    = null;
+        loader = null;
         beanClass = null;
-        bean      = null;
+        bean = null;
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
@@ -308,10 +301,9 @@ public class MemoryLeakTestCase {
 
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
-        Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Class<?> beanClass = loader.loadClass(className);
+        Object bean = beanClass.newInstance();
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
-
 
         final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
@@ -326,9 +318,9 @@ public class MemoryLeakTestCase {
         assertEquals("initialValue", wrapDynaBean.get("name"));
 
         // this should make the reference go away.
-        loader       = null;
-        beanClass    = null;
-        bean         = null;
+        loader = null;
+        beanClass = null;
+        bean = null;
         wrapDynaBean = null;
 
         // Wrap Dyna Class uses the PropertyUtilsBean's decriptor caches.
@@ -426,9 +418,9 @@ public class MemoryLeakTestCase {
         assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
 
         // this should make the reference go away.
-        loader    = null;
+        loader = null;
         beanClass = null;
-        bean      = null;
+        bean = null;
 
         forceGarbageCollection(); /* Try to force the garbage collector to run by filling up memory */
 
@@ -446,8 +438,7 @@ public class MemoryLeakTestCase {
     /**
      * Clears all the BeanUtils Caches manually.
      *
-     * This is probably overkill, but since we're dealing with static caches
-     * it seems sensible to ensure that all test cases start with a clean sheet.
+     * This is probably overkill, but since we're dealing with static caches it seems sensible to ensure that all test cases start with a clean sheet.
      */
     private void clearAllBeanUtilsCaches() {
 
@@ -477,12 +468,14 @@ public class MemoryLeakTestCase {
         // Fill up memory
         final SoftReference<Object> ref = new SoftReference<>(new Object());
         int count = 0;
-        while(ref.get() != null && count++ < 5) {
+        while (ref.get() != null && count++ < 5) {
             java.util.ArrayList<String> list = new java.util.ArrayList<>();
             try {
                 long i = 0;
                 while (ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
+                    list.add(
+                            "A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String "
+                                    + i++);
                 }
                 System.out.println("Count(1) " + count + " : " + getMemoryStats());
             } catch (final OutOfMemoryError ignored) {
@@ -493,12 +486,12 @@ public class MemoryLeakTestCase {
             list.clear();
             list = null;
             System.gc();
-            System.out.println("After GC2: " + getMemoryStats()+ " Count " + count);
+            System.out.println("After GC2: " + getMemoryStats() + " Count " + count);
             Thread.sleep(1000);
         }
 
         final boolean isNotNull = ref.get() != null;
-        System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
+        System.out.println("Count " + count + " " + isNotNull); // debug for Continuum failure
         final String message = "Your JVM is not releasing SoftReference, try running the test with less memory (-Xmx)";
         Assume.assumeFalse(message, isNotNull);
     }
@@ -509,47 +502,46 @@ public class MemoryLeakTestCase {
     private static URLClassLoader newClassLoader() throws MalformedURLException {
 
         final String dataFilePath = MemoryLeakTestCase.class.getResource("pojotests").getFile();
-        //System.out.println("dataFilePath: " + dataFilePath);
-        final String location = "file://" + dataFilePath.substring(0,dataFilePath.length()-"org.apache.commons.beanutils2.memoryleaktests.pojotests".length());
-        //System.out.println("location: " + location);
+        // System.out.println("dataFilePath: " + dataFilePath);
+        final String location = "file://"
+                + dataFilePath.substring(0, dataFilePath.length() - "org.apache.commons.beanutils2.memoryleaktests.pojotests".length());
+        // System.out.println("location: " + location);
 
         final StringBuilder newString = new StringBuilder();
-        for (int i=0;i<location.length();i++) {
-            if (location.charAt(i)=='\\') {
+        for (int i = 0; i < location.length(); i++) {
+            if (location.charAt(i) == '\\') {
                 newString.append("/");
             } else {
                 newString.append(location.charAt(i));
             }
         }
         final String classLocation = newString.toString();
-        //System.out.println("classlocation: " + classLocation);
+        // System.out.println("classlocation: " + classLocation);
 
-        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
+        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[] { new URL(classLocation) }, null);
         return theLoader;
     }
 
     /**
      * Produces a profiler report about where the leaks are.
      *
-     * This requires JBoss's profiler be installed, see:
-     *     http://labs.jboss.com/jbossprofiler/
+     * This requires JBoss's profiler be installed, see: http://labs.jboss.com/jbossprofiler/
      *
      * @param className The name of the class to profile
      */
     private void profilerLeakReport(final String test, final String className) {
-       /*
-        * If you want a report about where the leaks are... uncomment this,
-        * add jboss-profiler.jvmti.jar and jboss-commons.jar (for org.jboss.loggin).
-        * You will then have a report for where the references are.
-        System.out.println(" ----------------" + test + " START ----------------");
-        org.jboss.profiler.jvmti.JVMTIInterface jvmti = new org.jboss.profiler.jvmti.JVMTIInterface();
-        System.out.println(jvmti.exploreClassReferences(className, 8, true, true, true, false, false));
-        System.out.println(" ----------------" + test + " END ------------------");
-        */
+        /*
+         * If you want a report about where the leaks are... uncomment this, add jboss-profiler.jvmti.jar and jboss-commons.jar (for org.jboss.loggin). You will
+         * then have a report for where the references are. System.out.println(" ----------------" + test + " START ----------------");
+         * org.jboss.profiler.jvmti.JVMTIInterface jvmti = new org.jboss.profiler.jvmti.JVMTIInterface();
+         * System.out.println(jvmti.exploreClassReferences(className, 8, true, true, true, false, false)); System.out.println(" ----------------" + test +
+         * " END ------------------");
+         */
     }
 
     /**
      * Gets the total, free, used memory stats.
+     *
      * @return the total, free, used memory stats
      */
     private String getMemoryStats() {
@@ -558,8 +550,6 @@ public class MemoryLeakTestCase {
         final long free = runtime.freeMemory() / 1024;
         final long total = runtime.totalMemory() / 1024;
         final long used = total - free;
-        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: "
-                + fmt.format(used) + "k " + "Free: "
-                + fmt.format(free) + "k";
+        return "MEMORY - Total: " + fmt.format(total) + "k " + "Used: " + fmt.format(used) + "k " + "Free: " + fmt.format(free) + "k";
     }
 }

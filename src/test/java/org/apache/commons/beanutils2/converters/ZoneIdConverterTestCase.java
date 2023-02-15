@@ -60,35 +60,18 @@ public class ZoneIdConverterTestCase extends TestCase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
 
-        final Object[] input = {
-            "America/New_York",
-            "-05:00",
-            "Australia/Sydney"
-        };
+        final Object[] input = { "America/New_York", "-05:00", "Australia/Sydney" };
 
-        final ZoneId[] expected = {
-                ZoneId.of("America/New_York"),
-                ZoneId.of("-05:00"),
-                ZoneId.of("Australia/Sydney")
-        };
+        final ZoneId[] expected = { ZoneId.of("America/New_York"), ZoneId.of("-05:00"), ZoneId.of("Australia/Sydney") };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to URI",expected[i],converter.convert(ZoneId.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to URI", expected[i], converter.convert(ZoneId.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
 
-        for(int i=0;i<expected.length;i++) {
+        for (int i = 0; i < expected.length; i++) {
             assertEquals(input[i] + " to String", input[i], converter.convert(String.class, expected[i]));
         }
     }
@@ -105,4 +88,3 @@ public class ZoneIdConverterTestCase extends TestCase {
         }
     }
 }
-

@@ -38,8 +38,7 @@ import junit.framework.TestSuite;
 
 /**
  * <p>
- * Test Case for changes made during LocaleBeanutils Beanification.
- * This is basically a cut-and-correct version of the beanutils beanifications tests.
+ * Test Case for changes made during LocaleBeanutils Beanification. This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
  */
 public class LocaleBeanificationTestCase extends TestCase {
@@ -83,8 +82,9 @@ public class LocaleBeanificationTestCase extends TestCase {
     public void testMemoryTestMethodology() throws Exception {
         // test methodology
         // many thanks to Juozas Baliuka for suggesting this method
-        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {};
-        final WeakReference<ClassLoader> reference = new  WeakReference<>(loader);
+        ClassLoader loader = new ClassLoader(this.getClass().getClassLoader()) {
+        };
+        final WeakReference<ClassLoader> reference = new WeakReference<>(loader);
         Class<?> myClass = loader.loadClass("org.apache.commons.beanutils2.BetaBean");
 
         assertNotNull("Weak reference released early", reference.get());
@@ -95,17 +95,17 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
-            if( reference.get() == null ) {
+            if (reference.get() == null) {
                 break;
 
             }
             // create garbage:
-            final byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -126,7 +126,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         Integer test = new Integer(1);
 
         final WeakReference<Integer> testReference = new WeakReference<>(test, queue);
-        //Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
+        // Map map = new ReferenceMap(ReferenceMap.WEAK, ReferenceMap.HARD, true);
         final Map<TestClassLoader, Integer> map = new WeakHashMap<>();
         map.put(loader, test);
 
@@ -140,21 +140,19 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
             map.isEmpty();
 
-            if(
-                loaderReference.get() == null &&
-                testReference.get() == null) {
+            if (loaderReference.get() == null && testReference.get() == null) {
                 break;
 
             }
             // create garbage:
-            final byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
@@ -168,7 +166,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
-        final WeakReference<TestClassLoader> loaderReference = new  WeakReference<>(loader);
+        final WeakReference<TestClassLoader> loaderReference = new WeakReference<>(loader);
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
 
         class GetBeanUtilsBeanThread extends Thread {
@@ -176,7 +174,8 @@ public class LocaleBeanificationTestCase extends TestCase {
             LocaleBeanUtilsBean beanUtils;
             LocaleConvertUtilsBean convertUtils;
 
-            GetBeanUtilsBeanThread() {}
+            GetBeanUtilsBeanThread() {
+            }
 
             @Override
             public void run() {
@@ -213,29 +212,25 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         int iterations = 0;
         int bytz = 2;
-        while(true) {
+        while (true) {
             LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
             System.gc();
-            if(iterations++ > MAX_GC_ITERATIONS){
+            if (iterations++ > MAX_GC_ITERATIONS) {
                 fail("Max iterations reached before resource released.");
             }
 
-            if(
-                loaderReference.get() == null &&
-                beanUtilsReference.get() == null &&
-                convertUtilsReference.get() == null) {
+            if (loaderReference.get() == null && beanUtilsReference.get() == null && convertUtilsReference.get() == null) {
                 break;
 
             }
             // create garbage:
-            final byte[] b =  new byte[bytz];
+            final byte[] b = new byte[bytz];
             bytz = bytz * 2;
         }
     }
 
     /**
-     * Tests whether difference instances are loaded by different
-     * context classloaders.
+     * Tests whether difference instances are loaded by different context classloaders.
      */
     public void testGetByContextClassLoader() throws Exception {
 
@@ -270,18 +265,12 @@ public class LocaleBeanificationTestCase extends TestCase {
         thread.join();
 
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertTrue(
-                    "Different LocaleBeanUtilsBean instances per context classloader",
-                    BeanUtilsBean.getInstance() != signal.getBean());
-        assertTrue(
-                    "Different LocaleConvertUtilsBean instances per context classloader",
-                    LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());
+        assertTrue("Different LocaleBeanUtilsBean instances per context classloader", BeanUtilsBean.getInstance() != signal.getBean());
+        assertTrue("Different LocaleConvertUtilsBean instances per context classloader", LocaleConvertUtilsBean.getInstance() != signal.getConvertUtils());
     }
 
-
     /**
-     * Tests whether difference instances are loaded by different
-     * context classloaders.
+     * Tests whether difference instances are loaded by different context classloaders.
      */
     public void testContextClassLoaderLocal() throws Exception {
 
@@ -343,15 +332,16 @@ public class LocaleBeanificationTestCase extends TestCase {
                 try {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter<Integer>() {
-                                            @Override
-                                            public Integer convert(final Class<Integer> type, final Object value) {
-                                                return ConvertUtils.primitiveToWrapper(type).cast(9);
-                                            }
-                                            @Override
-                                            public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
-                                                return ConvertUtils.primitiveToWrapper(type).cast(9);
-                                            }
-                                                }, Integer.TYPE, Locale.getDefault());
+                        @Override
+                        public Integer convert(final Class<Integer> type, final Object value) {
+                            return ConvertUtils.primitiveToWrapper(type).cast(9);
+                        }
+
+                        @Override
+                        public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
+                            return ConvertUtils.primitiveToWrapper(type).cast(9);
+                        }
+                    }, Integer.TYPE, Locale.getDefault());
                     LocaleBeanUtils.setProperty(bean, "int", "1");
                 } catch (final Exception e) {
                     e.printStackTrace();
@@ -370,15 +360,16 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
         LocaleConvertUtils.register(new LocaleConverter<Integer>() {
-                                @Override
-                                public Integer convert(final Class<Integer> type, final Object value) {
-                                    return ConvertUtils.primitiveToWrapper(type).cast(5);
-                                }
-                                @Override
-                                public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
-                                    return ConvertUtils.primitiveToWrapper(type).cast(5);
-                                }
-                                    }, Integer.TYPE, Locale.getDefault());
+            @Override
+            public Integer convert(final Class<Integer> type, final Object value) {
+                return ConvertUtils.primitiveToWrapper(type).cast(5);
+            }
+
+            @Override
+            public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
+                return ConvertUtils.primitiveToWrapper(type).cast(5);
+            }
+        }, Integer.TYPE, Locale.getDefault());
         LocaleBeanUtils.setProperty(bean, "int", "1");
         assertEquals("Wrong property value(2)", 5, bean.getInt());
 
@@ -442,7 +433,7 @@ public class LocaleBeanificationTestCase extends TestCase {
         assertEquals("Second thread gets value it set", beanTwo, signal.getBean());
     }
 
-    /** Tests whether the unset method works*/
+    /** Tests whether the unset method works */
     public void testContextClassLoaderUnset() {
         final LocaleBeanUtilsBean beanOne = new LocaleBeanUtilsBean();
         final ContextClassLoaderLocal<LocaleBeanUtilsBean> ccll = new ContextClassLoaderLocal<>();
@@ -461,8 +452,7 @@ public class LocaleBeanificationTestCase extends TestCase {
             try {
                 final Long data = (Long) ConvertUtils.convert("777", Long.class);
                 assertEquals("Standard format long converted ok", 777, data.longValue());
-            }
-            catch(final ConversionException ex) {
+            } catch (final ConversionException ex) {
                 fail("Unable to convert non-locale-aware number 777");
             }
 
@@ -473,8 +463,7 @@ public class LocaleBeanificationTestCase extends TestCase {
                 // zero on error.
                 final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
                 assertEquals("Standard format behaved as expected", 0, data.longValue());
-            }
-            catch(final ConversionException ex) {
+            } catch (final ConversionException ex) {
                 fail("Unexpected exception from standard Long converter.");
             }
 
@@ -490,7 +479,7 @@ public class LocaleBeanificationTestCase extends TestCase {
 
                 final Long data = (Long) ConvertUtils.convert("1.000.000", Long.class);
                 assertEquals("German-format long converted ok", 1000000, data.longValue());
-            } catch(final ConversionException ex) {
+            } catch (final ConversionException ex) {
                 fail("Unable to convert german-format number");
             }
         } finally {
@@ -553,4 +542,3 @@ public class LocaleBeanificationTestCase extends TestCase {
         }
     }
 }
-

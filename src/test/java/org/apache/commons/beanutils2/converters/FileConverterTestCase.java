@@ -59,27 +59,15 @@ public class FileConverterTestCase extends TestCase {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String"
-        };
+        final String[] message = { "from String", "from String", "from String" };
 
-        final Object[] input = {
-            "/tmp",
-            "/tmp/foo.txt",
-            "/tmp/does/not/exist.foo"
-        };
+        final Object[] input = { "/tmp", "/tmp/foo.txt", "/tmp/does/not/exist.foo" };
 
-        final File[] expected = {
-            new File("/tmp"),
-            new File("/tmp/foo.txt"),
-            new File("/tmp/does/not/exist.foo")
-        };
+        final File[] expected = { new File("/tmp"), new File("/tmp/foo.txt"), new File("/tmp/does/not/exist.foo") };
 
-        for(int i=0;i<expected.length;i++) {
-            assertEquals(message[i] + " to File",expected[i],converter.convert(File.class,input[i]));
-            assertEquals(message[i] + " to null type",expected[i],converter.convert(null,input[i]));
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(message[i] + " to File", expected[i], converter.convert(File.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 
@@ -95,4 +83,3 @@ public class FileConverterTestCase extends TestCase {
         }
     }
 }
-

@@ -68,53 +68,15 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase<BigInte
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
+                "from Short", "from Integer", "from Long", "from Float", "from Double" };
 
-        final Object[] input = {
-            String.valueOf(Long.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Long.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Double.valueOf(12.2)
-        };
+        final Object[] input = { String.valueOf(Long.MIN_VALUE), "-17", "-1", "0", "1", "17", String.valueOf(Long.MAX_VALUE), Byte.valueOf((byte) 7),
+                Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
 
-        final BigInteger[] expected = {
-            BigInteger.valueOf(Long.MIN_VALUE),
-            BigInteger.valueOf(-17),
-            BigInteger.valueOf(-1),
-            BigInteger.valueOf(0),
-            BigInteger.valueOf(1),
-            BigInteger.valueOf(17),
-            BigInteger.valueOf(Long.MAX_VALUE),
-            BigInteger.valueOf(7),
-            BigInteger.valueOf(8),
-            BigInteger.valueOf(9),
-            BigInteger.valueOf(10),
-            BigInteger.valueOf(11),
-            BigInteger.valueOf(12)
-        };
+        final BigInteger[] expected = { BigInteger.valueOf(Long.MIN_VALUE), BigInteger.valueOf(-17), BigInteger.valueOf(-1), BigInteger.valueOf(0),
+                BigInteger.valueOf(1), BigInteger.valueOf(17), BigInteger.valueOf(Long.MAX_VALUE), BigInteger.valueOf(7), BigInteger.valueOf(8),
+                BigInteger.valueOf(9), BigInteger.valueOf(10), BigInteger.valueOf(11), BigInteger.valueOf(12) };
 
         for (int i = 0; i < expected.length; i++) {
             assertEquals(message[i] + " to BigInteger", expected[i], converter.convert(BigInteger.class, input[i]));
@@ -123,4 +85,3 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase<BigInte
     }
 
 }
-

@@ -72,10 +72,10 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Short.class;
 
-        final Long min         = Long.valueOf(Short.MIN_VALUE);
-        final Long max         = Long.valueOf(Short.MAX_VALUE);
+        final Long min = Long.valueOf(Short.MIN_VALUE);
+        final Long max = Long.valueOf(Short.MAX_VALUE);
         final Long minMinusOne = Long.valueOf(min.longValue() - 1);
-        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
+        final Long maxPlusOne = Long.valueOf(max.longValue() + 1);
 
         // Minimum
         assertEquals("Minimum", Short.valueOf(Short.MIN_VALUE), converter.convert(clazz, min));
@@ -101,53 +101,15 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
+                "from Short", "from Integer", "from Long", "from Float", "from Double" };
 
-        final Object[] input = {
-            String.valueOf(Short.MIN_VALUE),
-            "-17",
-            "-1",
-            "0",
-            "1",
-            "17",
-            String.valueOf(Short.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Double.valueOf(12.2)
-        };
+        final Object[] input = { String.valueOf(Short.MIN_VALUE), "-17", "-1", "0", "1", "17", String.valueOf(Short.MAX_VALUE), Byte.valueOf((byte) 7),
+                Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2) };
 
-        final Short[] expected = {
-            Short.valueOf(Short.MIN_VALUE),
-            Short.valueOf((short)-17),
-            Short.valueOf((short)-1),
-            Short.valueOf((short)0),
-            Short.valueOf((short)1),
-            Short.valueOf((short)17),
-            Short.valueOf(Short.MAX_VALUE),
-            Short.valueOf((short)7),
-            Short.valueOf((short)8),
-            Short.valueOf((short)9),
-            Short.valueOf((short)10),
-            Short.valueOf((short)11),
-            Short.valueOf((short)12)
-        };
+        final Short[] expected = { Short.valueOf(Short.MIN_VALUE), Short.valueOf((short) -17), Short.valueOf((short) -1), Short.valueOf((short) 0),
+                Short.valueOf((short) 1), Short.valueOf((short) 17), Short.valueOf(Short.MAX_VALUE), Short.valueOf((short) 7), Short.valueOf((short) 8),
+                Short.valueOf((short) 9), Short.valueOf((short) 10), Short.valueOf((short) 11), Short.valueOf((short) 12) };
 
         for (int i = 0; i < expected.length; i++) {
             assertEquals(message[i] + " to Short", expected[i], converter.convert(Short.class, input[i]));
@@ -156,4 +118,3 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
         }
     }
 }
-

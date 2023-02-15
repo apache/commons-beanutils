@@ -25,27 +25,19 @@ import junit.framework.TestCase;
  */
 public class BooleanConverterTestCase extends TestCase {
 
-    public static final String[] STANDARD_TRUES = {
-            "yes", "y", "true", "on", "1"
-        };
+    public static final String[] STANDARD_TRUES = { "yes", "y", "true", "on", "1" };
 
-    public static final String[] STANDARD_FALSES = {
-            "no", "n", "false", "off", "0"
-        };
+    public static final String[] STANDARD_FALSES = { "no", "n", "false", "off", "0" };
 
     public BooleanConverterTestCase(final String name) {
         super(name);
     }
 
     public void testAdditionalStrings() {
-        final String[] trueStrings = {"sure"};
-        final String[] falseStrings = {"nope"};
-        final AbstractConverter converter = new BooleanConverter(
-            trueStrings, falseStrings);
-        testConversionValues(
-            converter,
-            new String[] {"sure", "Sure"},
-            new String[] {"nope", "nOpE"});
+        final String[] trueStrings = { "sure" };
+        final String[] falseStrings = { "nope" };
+        final AbstractConverter converter = new BooleanConverter(trueStrings, falseStrings);
+        testConversionValues(converter, new String[] { "sure", "Sure" }, new String[] { "nope", "nOpE" });
 
         try {
             converter.convert(Boolean.class, "true");
@@ -63,10 +55,7 @@ public class BooleanConverterTestCase extends TestCase {
 
     public void testCaseInsensitivity() {
         final AbstractConverter converter = new BooleanConverter();
-        testConversionValues(
-            converter,
-            new String[] {"Yes", "TRUE"},
-            new String[] {"NO", "fAlSe"});
+        testConversionValues(converter, new String[] { "Yes", "TRUE" }, new String[] { "NO", "fAlSe" });
     }
 
     /**
@@ -82,8 +71,7 @@ public class BooleanConverterTestCase extends TestCase {
         }
     }
 
-    protected void testConversionValues(final AbstractConverter converter,
-            final String[] trueValues, final String[] falseValues) {
+    protected void testConversionValues(final AbstractConverter converter, final String[] trueValues, final String[] falseValues) {
 
         for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));

@@ -72,8 +72,8 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
         final Converter converter = makeConverter();
         final Class<?> clazz = Float.class;
 
-        final Double max     = Double.valueOf(Float.MAX_VALUE);
-        final Double tooBig  = Double.valueOf(Double.MAX_VALUE);
+        final Double max = Double.valueOf(Float.MAX_VALUE);
+        final Double tooBig = Double.valueOf(Double.MAX_VALUE);
 
         // Maximum
         assertEquals("Maximum", Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max));
@@ -88,71 +88,20 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
     }
 
     public void testSimpleConversion() {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from Byte",
+                "from Short", "from Integer", "from Long", "from Float", "from Double" };
 
-        final Object[] input = {
-            String.valueOf(Float.MIN_VALUE),
-            "-17.2",
-            "-1.1",
-            "0.0",
-            "1.1",
-            "17.2",
-            String.valueOf(Float.MAX_VALUE),
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Double.valueOf(12.2),
-        };
+        final Object[] input = { String.valueOf(Float.MIN_VALUE), "-17.2", "-1.1", "0.0", "1.1", "17.2", String.valueOf(Float.MAX_VALUE),
+                Byte.valueOf((byte) 7), Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10), Float.valueOf((float) 11.1), Double.valueOf(12.2), };
 
-        final Float[] expected = {
-            Float.valueOf(Float.MIN_VALUE),
-            Float.valueOf((float) -17.2),
-            Float.valueOf((float) -1.1),
-            Float.valueOf((float) 0.0),
-            Float.valueOf((float) 1.1),
-            Float.valueOf((float) 17.2),
-            Float.valueOf(Float.MAX_VALUE),
-            Float.valueOf(7),
-            Float.valueOf(8),
-            Float.valueOf(9),
-            Float.valueOf(10),
-            Float.valueOf((float) 11.1),
-            Float.valueOf((float) 12.2)
-        };
+        final Float[] expected = { Float.valueOf(Float.MIN_VALUE), Float.valueOf((float) -17.2), Float.valueOf((float) -1.1), Float.valueOf((float) 0.0),
+                Float.valueOf((float) 1.1), Float.valueOf((float) 17.2), Float.valueOf(Float.MAX_VALUE), Float.valueOf(7), Float.valueOf(8), Float.valueOf(9),
+                Float.valueOf(10), Float.valueOf((float) 11.1), Float.valueOf((float) 12.2) };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(
-                message[i] + " to Float",
-                expected[i].floatValue(),
-                converter.convert(Float.class,input[i]).floatValue(),
-                0.00001);
-            assertEquals(
-                message[i] + " to float",
-                expected[i].floatValue(),
-                converter.convert(Float.TYPE,input[i]).floatValue(),
-                0.00001);
-            assertEquals(
-                message[i] + " to null type",
-                expected[i].floatValue(),
-                converter.convert(null,input[i]).floatValue(),
-                0.00001);
+            assertEquals(message[i] + " to Float", expected[i].floatValue(), converter.convert(Float.class, input[i]).floatValue(), 0.00001);
+            assertEquals(message[i] + " to float", expected[i].floatValue(), converter.convert(Float.TYPE, input[i]).floatValue(), 0.00001);
+            assertEquals(message[i] + " to null type", expected[i].floatValue(), converter.convert(null, input[i]).floatValue(), 0.00001);
         }
     }
 }
-

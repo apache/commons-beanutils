@@ -28,8 +28,7 @@ import junit.framework.TestCase;
 /**
  * Indexed List Setters no longer work.
  *
- * @see <a
- * href="https://issues.apache.org/jira/browse/BEANUTILS-465">https://issues.apache.org/jira/browse/BEANUTILS-465</a>
+ * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-465">https://issues.apache.org/jira/browse/BEANUTILS-465</a>
  */
 public class Jira465TestCase extends TestCase {
     /** Constant for the property path. */
@@ -54,8 +53,7 @@ public class Jira465TestCase extends TestCase {
         }
     }
 
-    public void testArrayProperty() throws InvocationTargetException,
-            IllegalAccessException {
+    public void testArrayProperty() throws InvocationTargetException, IllegalAccessException {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);

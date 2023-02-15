@@ -29,13 +29,11 @@ import junit.framework.TestCase;
  */
 public class Jira463TestCase extends TestCase {
     /**
-     * Tests that with a specialized {@code BeanIntrospector} implementation the class
-     * property can be suppressed.
+     * Tests that with a specialized {@code BeanIntrospector} implementation the class property can be suppressed.
      */
     public void testSuppressClassProperty() throws Exception {
         final BeanUtilsBean bub = new BeanUtilsBean();
-        bub.getPropertyUtils().addBeanIntrospector(
-                SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
+        bub.getPropertyUtils().addBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         final AlphaBean bean = new AlphaBean();
         try {
             bub.getProperty(bean, "class");

@@ -21,8 +21,7 @@ import org.apache.commons.beanutils2.BeanUtilsBean;
 import junit.framework.TestCase;
 
 /**
- * BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested
- * property returns null
+ * BeanUtilsBean.setProperty throws IllegalArgumentException if getter of nested property returns null
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-411">https://issues.apache.org/jira/browse/BEANUTILS-411</a>
  */

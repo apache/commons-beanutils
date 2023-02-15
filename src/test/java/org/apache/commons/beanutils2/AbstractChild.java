@@ -23,14 +23,12 @@ public class AbstractChild implements Child {
 
     private String name;
 
-    protected void setName(final String name)
-    {
+    protected void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 

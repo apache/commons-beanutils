@@ -22,8 +22,7 @@ import java.util.Map;
 import org.apache.commons.beanutils2.bugs.Jira18TestCase;
 
 /**
- * Factory which creates <i>package</i> scope beans with
- * public methods for {@link Jira18TestCase}.
+ * Factory which creates <i>package</i> scope beans with public methods for {@link Jira18TestCase}.
  *
  */
 public class Jira18BeanFactory {
@@ -40,7 +39,7 @@ public class Jira18BeanFactory {
     /* =============== Package Friendly Bean =============== */
     static class PackageFriendlyBean {
 
-        private final String[] indexed = {"one", "two", "three"};
+        private final String[] indexed = { "one", "two", "three" };
         private String simple = "FOO";
         private final Map<String, Object> mapped = new HashMap<>();
 
@@ -49,6 +48,7 @@ public class Jira18BeanFactory {
             mapped.put("foo-key", "foo-value");
             mapped.put("bar-key", "bar-value");
         }
+
         /**
          * Gets simple property.
          *
@@ -94,13 +94,13 @@ public class Jira18BeanFactory {
          * @return The mapped value
          */
         public String getMapped(final String key) {
-            return (String)mapped.get(key);
+            return (String) mapped.get(key);
         }
 
         /**
          * Sets mapped property.
          *
-         * @param key The mapped key
+         * @param key   The mapped key
          * @param value The mapped value
          */
         public void setMapped(final String key, final String value) {

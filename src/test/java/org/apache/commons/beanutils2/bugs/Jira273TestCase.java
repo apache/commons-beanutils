@@ -26,8 +26,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Public methods overridden in anonymous or private subclasses
- * are not recognized by PropertyUtils - see issue# BEANUTILS-273.
+ * Public methods overridden in anonymous or private subclasses are not recognized by PropertyUtils - see issue# BEANUTILS-273.
  *
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-273">https://issues.apache.org/jira/browse/BEANUTILS-273</a>
  */
@@ -83,8 +82,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an anonymous class that overrides a public method
-     * of a public class.
+     * Test with an anonymous class that overrides a public method of a public class.
      */
     public void testIssue_BEANUTILS_273_AnonymousOverridden() {
         final Object bean = Jira273BeanFactory.createAnonymousOverridden();
@@ -99,8 +97,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an anonymous class that inherits a public method
-     * of a public class.
+     * Test with an anonymous class that inherits a public method of a public class.
      */
     public void testIssue_BEANUTILS_273_AnonymousNotOverridden() {
         final Object bean = Jira273BeanFactory.createAnonymousNotOverridden();
@@ -115,8 +112,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that inherits a public method
-     * of a public class.
+     * Test with an private class that inherits a public method of a public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePublicNotOverridden() {
         final Object bean = Jira273BeanFactory.createPrivatePublicNotOverridden();
@@ -131,8 +127,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a public class.
+     * Test with an private class that overrides a public method of a public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePublicOverridden() {
         final Object bean = Jira273BeanFactory.createPrivatePublicOverridden();
@@ -147,8 +142,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that inherits a public method
-     * of a "grand parent" public class.
+     * Test with an private class that inherits a public method of a "grand parent" public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicNotOverridden() {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicNotOverridden();
@@ -163,8 +157,7 @@ public class Jira273TestCase extends TestCase {
     }
 
     /**
-     * Test with an private class that overrides a public method
-     * of a "grand parent" public class.
+     * Test with an private class that overrides a public method of a "grand parent" public class.
      */
     public void testIssue_BEANUTILS_273_PrivatePrivatePublicOverridden() {
         final Object bean = Jira273BeanFactory.createPrivatePrivatePublicOverridden();

@@ -36,8 +36,7 @@ import org.junit.Test;
 /**
  * Tests Jira issue# BEANUTILS-509.
  *
- * The bug causes an infinite loop in WeakHashMap.get which was not accessed in a thread safe manner. This originates
- * with WrapDynaClass.createDynaClass().
+ * The bug causes an infinite loop in WeakHashMap.get which was not accessed in a thread safe manner. This originates with WrapDynaClass.createDynaClass().
  */
 @Ignore("https://issues.apache.org/jira/browse/BEANUTILS-509.")
 public class Jira509TestCase {
@@ -47,13 +46,13 @@ public class Jira509TestCase {
     }
 
     /**
-     * The bug makes the {@link WrapDynaClass#createDynaClass} method run in an infinite loop and acquire locks. The
-     * test case adds a timeout. The test case may pass even without this fix because this is a rare scenario.
+     * The bug makes the {@link WrapDynaClass#createDynaClass} method run in an infinite loop and acquire locks. The test case adds a timeout. The test case may
+     * pass even without this fix because this is a rare scenario.
      */
     @Test(timeout = 60_000)
     public void test_concurrent() throws InterruptedException {
-        final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class,
-                Collection.class, Set.class, ArrayList.class, List.class, HashSet.class);
+        final List<Class<?>> classList = Arrays.asList(Map.class, HashMap.class, Collections.class, Arrays.class, Collection.class, Set.class, ArrayList.class,
+                List.class, HashSet.class);
 
         // All daemon threads.
         final ExecutorService executor = Executors.newFixedThreadPool(100, r -> {

@@ -27,21 +27,23 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * <p>Test Case for the {@code LazyDynaBean} implementation class.</p>
+ * <p>
+ * Test Case for the {@code LazyDynaBean} implementation class.
+ * </p>
  *
  */
 public class LazyDynaBeanTestCase extends TestCase {
 
-    protected LazyDynaBean  bean      = null;
+    protected LazyDynaBean bean = null;
     protected LazyDynaClass dynaClass = null;
-    protected String testProperty     = "myProperty";
-    protected String testPropertyA    = "myProperty-A";
-    protected String testPropertyB    = "myProperty-B";
-    protected String testString1      = "myStringValue-1";
-    protected String testString2      = "myStringValue-2";
-    protected Integer testInteger1    = Integer.valueOf(30);
-    protected Integer testInteger2    = Integer.valueOf(40);
-    protected String testKey          = "myKey";
+    protected String testProperty = "myProperty";
+    protected String testPropertyA = "myProperty-A";
+    protected String testPropertyB = "myProperty-B";
+    protected String testString1 = "myStringValue-1";
+    protected String testString2 = "myStringValue-2";
+    protected Integer testInteger1 = Integer.valueOf(30);
+    protected Integer testInteger2 = Integer.valueOf(40);
+    protected String testKey = "myKey";
 
     /**
      * Constructs a new instance of this test case.
@@ -72,7 +74,7 @@ public class LazyDynaBeanTestCase extends TestCase {
     @Override
     public void setUp() throws Exception {
         bean = new LazyDynaBean();
-        dynaClass = (LazyDynaClass)bean.getDynaClass();
+        dynaClass = (LazyDynaClass) bean.getDynaClass();
         dynaClass.setReturnNull(true);
     }
 
@@ -81,7 +83,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     @Override
     public void tearDown() {
-      bean = null;
+        bean = null;
     }
 
     /**
@@ -164,12 +166,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", HashMap.class, bean.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, bean.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>)bean.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((HashMap<?, ?>) bean.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         bean.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, bean.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>)bean.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((HashMap<?, ?>) bean.get(testProperty)).get(testKey));
     }
 
     /**
@@ -191,12 +193,12 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, testKey, testInteger1);
         assertEquals("Check Mapped Property exists", TreeMap.class, bean.get(testProperty).getClass());
         assertEquals("Check First Mapped Value is correct(a)", testInteger1, bean.get(testProperty, testKey));
-        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>)bean.get(testProperty)).get(testKey));
+        assertEquals("Check First Mapped Value is correct(b)", testInteger1, ((TreeMap<?, ?>) bean.get(testProperty)).get(testKey));
 
         // Set the property again - should set the new value
         bean.set(testProperty, testKey, testInteger2);
         assertEquals("Check Second Mapped Value is correct(a)", testInteger2, bean.get(testProperty, testKey));
-        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>)bean.get(testProperty)).get(testKey));
+        assertEquals("Check Second Mapped Value is correct(b)", testInteger2, ((TreeMap<?, ?>) bean.get(testProperty)).get(testKey));
     }
 
     /**
@@ -213,10 +215,9 @@ public class LazyDynaBeanTestCase extends TestCase {
 
         // Set the mapped property using PropertyUtils
         try {
-          PropertyUtils.setProperty(bean, testProperty+"("+testKey+")", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
+            PropertyUtils.setProperty(bean, testProperty + "(" + testKey + ")", testString1);
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+            fail("testIndexedPropertyUtils threw " + ex);
         }
 
         // Check property value correctly set
@@ -278,13 +279,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", bean.get(testProperty));
         assertEquals("Check Indexed Property is correct type", ArrayList.class, bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testInteger1, bean.get(testProperty, index));
-        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)bean.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, bean.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((ArrayList<?>)bean.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) bean.get(testProperty)).size()));
     }
 
     /**
@@ -292,7 +293,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedLinkedList() {
 
-        int   index     = 3;
+        int index = 3;
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaClass.getDynaProperty(testProperty));
@@ -308,13 +309,13 @@ public class LazyDynaBeanTestCase extends TestCase {
         bean.set(testProperty, index, testString1);
         assertEquals("Check Property type is correct", LinkedList.class, bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct", testString1, bean.get(testProperty, index));
-        assertEquals("Check First Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)bean.get(testProperty)).size()));
+        assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, bean.get(testProperty, index));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((LinkedList<?>)bean.get(testProperty)).size()));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) bean.get(testProperty)).size()));
     }
 
     /**
@@ -322,7 +323,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedPrimitiveArray() {
 
-        int   index     = 3;
+        int index = 3;
         final int[] primitiveArray = {};
 
         // Check the property & value doesn't exist
@@ -339,15 +340,15 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", bean.get(testProperty));
         assertEquals("Check Indexed Property is correct type", primitiveArray.getClass(), bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testInteger1, bean.get(testProperty, index));
-        assertEquals("Check First Indexed Value is correct(b)", testInteger1, Integer.valueOf(((int[])bean.get(testProperty))[index]));
-        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])bean.get(testProperty)).length));
+        assertEquals("Check First Indexed Value is correct(b)", testInteger1, Integer.valueOf(((int[]) bean.get(testProperty))[index]));
+        assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) bean.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the int[] and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testInteger2);
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, bean.get(testProperty, index));
-        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[])bean.get(testProperty))[index]));
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((int[])bean.get(testProperty)).length));
+        assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[]) bean.get(testProperty))[index]));
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) bean.get(testProperty)).length));
 
     }
 
@@ -356,7 +357,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedObjectArray() {
 
-        int   index     = 3;
+        int index = 3;
         final Object objectArray = new String[0];
 
         // Check the property & value doesn't exist
@@ -373,15 +374,15 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertNotNull("Check Indexed Property is not null", bean.get(testProperty));
         assertEquals("Check Indexed Property is correct type", objectArray.getClass(), bean.get(testProperty).getClass());
         assertEquals("Check First Indexed Value is correct(a)", testString1, bean.get(testProperty, index));
-        assertEquals("Check First Indexed Value is correct(b)", testString1, ((String[])bean.get(testProperty))[index]);
-        assertEquals("Check Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])bean.get(testProperty)).length));
+        assertEquals("Check First Indexed Value is correct(b)", testString1, ((String[]) bean.get(testProperty))[index]);
+        assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) bean.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the String[] and set appropriate indexed value
         index = index + 2;
         bean.set(testProperty, index, testString2);
         assertEquals("Check Second Indexed Value is correct(a)", testString2, bean.get(testProperty, index));
-        assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[])bean.get(testProperty))[index]);
-        assertEquals("Check Second Array length is correct", Integer.valueOf(index+1),  Integer.valueOf(((String[])bean.get(testProperty)).length));
+        assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[]) bean.get(testProperty))[index]);
+        assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) bean.get(testProperty)).length));
     }
 
     /**
@@ -389,7 +390,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedDynaBeanArray() {
 
-        final int   index     = 3;
+        final int index = 3;
         final Object objectArray = new LazyDynaMap[0];
 
         // Check the property & value doesn't exist
@@ -410,7 +411,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         final LazyDynaMap newMap = new LazyDynaMap();
         newMap.set(testPropertyB, testString2);
         bean.set(testPropertyA, index, newMap);
-        assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean)bean.get(testPropertyA, index)).get(testPropertyB));
+        assertEquals("Check Indexed Value is correct(a)", testString2, ((DynaBean) bean.get(testPropertyA, index)).get(testPropertyB));
 
     }
 
@@ -419,7 +420,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedPropertyUtils() {
 
-        final int   index     = 3;
+        final int index = 3;
         dynaClass.setReturnNull(false);
 
         // Check the property & value doesn't exist
@@ -429,10 +430,9 @@ public class LazyDynaBeanTestCase extends TestCase {
 
         // Use PropertyUtils to set the indexed value
         try {
-          PropertyUtils.setProperty(bean, testProperty+"["+index+"]", testString1);
-        }
-        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
+            PropertyUtils.setProperty(bean, testProperty + "[" + index + "]", testString1);
+        } catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
+            fail("testIndexedPropertyUtils threw " + ex);
         }
 
         // Check property value correctly set
@@ -445,7 +445,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      */
     public void testIndexedPropertyRestricted() {
 
-        final int   index     = 3;
+        final int index = 3;
 
         // Set the MutableDyanClass to 'restricted' (i.e. no new properties cab be added
         dynaClass.setRestricted(true);
@@ -469,7 +469,7 @@ public class LazyDynaBeanTestCase extends TestCase {
      * Test setting indexed property for type which is not List or Array
      */
     public void testIndexedInvalidType() {
-        final int   index     = 3;
+        final int index = 3;
         dynaClass.add(testProperty, String.class);
         assertFalse("Check Property is not indexed", dynaClass.getDynaProperty(testProperty).isIndexed());
         try {

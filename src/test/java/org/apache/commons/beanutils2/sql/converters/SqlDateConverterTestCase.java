@@ -32,6 +32,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create Test Suite
+     *
      * @return test suite
      */
     public static TestSuite suite() {
@@ -40,6 +41,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Constructs a new Date test case.
+     *
      * @param name Test Name
      */
     public SqlDateConverterTestCase(final String name) {
@@ -48,6 +50,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Gets the expected type
+     *
      * @return The expected type
      */
     @Override
@@ -57,6 +60,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create the Converter with no default value.
+     *
      * @return A new Converter
      */
     @Override
@@ -66,6 +70,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
 
     /**
      * Create the Converter with a default value.
+     *
      * @param defaultValue The default value
      * @return A new Converter
      */
@@ -103,8 +108,8 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Date Conversion
-        final String expected  = "2006-05-16";
-        final Object testVal   = toType(expected, "yyyy-MM-dd", null);
+        final String expected = "2006-05-16";
+        final Object testVal = toType(expected, "yyyy-MM-dd", null);
         stringConversion(converter, expected, testVal);
 
         final Object result = converter.convert(String.class, Integer.valueOf(2));

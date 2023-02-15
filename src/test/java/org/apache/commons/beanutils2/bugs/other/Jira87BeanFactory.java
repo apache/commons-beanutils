@@ -41,6 +41,7 @@ public class Jira87BeanFactory {
 
         /**
          * Mapped Property method
+         *
          * @param key The key of the mapped value
          * @return The value
          */

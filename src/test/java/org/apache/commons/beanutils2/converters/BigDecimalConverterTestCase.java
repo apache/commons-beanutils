@@ -29,8 +29,7 @@ import junit.framework.TestSuite;
 public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDecimal> {
 
     /**
-     * A class derived from {@code BigDecimal} used for testing whether
-     * derived number classes are handled correctly.
+     * A class derived from {@code BigDecimal} used for testing whether derived number classes are handled correctly.
      */
     private static class ExtendingBigDecimal extends BigDecimal {
         private ExtendingBigDecimal(final String val) {
@@ -78,64 +77,19 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
     }
 
     public void testSimpleConversion() throws Exception {
-        final String[] message= {
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from String",
-            "from Byte",
-            "from Short",
-            "from Integer",
-            "from Long",
-            "from Float",
-            "from Double",
-            "from BigDecimal",
-            "from BigDecimal extension"
-        };
+        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from Byte", "from Short", "from Integer",
+                "from Long", "from Float", "from Double", "from BigDecimal", "from BigDecimal extension" };
 
-        final Object[] input = {
-            "-17.2",
-            "-1.1",
-            "0.0",
-            "1.1",
-            "17.2",
-            Byte.valueOf((byte)7),
-            Short.valueOf((short)8),
-            Integer.valueOf(9),
-            Long.valueOf(10),
-            Float.valueOf("11.1"),
-            Double.valueOf("12.2"),
-            new BigDecimal("3200.11"),
-            new ExtendingBigDecimal("3200.11")
-        };
+        final Object[] input = { "-17.2", "-1.1", "0.0", "1.1", "17.2", Byte.valueOf((byte) 7), Short.valueOf((short) 8), Integer.valueOf(9), Long.valueOf(10),
+                Float.valueOf("11.1"), Double.valueOf("12.2"), new BigDecimal("3200.11"), new ExtendingBigDecimal("3200.11") };
 
-        final BigDecimal[] expected = {
-            new BigDecimal("-17.2"),
-            new BigDecimal("-1.1"),
-            new BigDecimal("0.0"),
-            new BigDecimal("1.1"),
-            new BigDecimal("17.2"),
-            new BigDecimal("7"),
-            new BigDecimal("8"),
-            new BigDecimal("9"),
-            new BigDecimal("10"),
-            new BigDecimal("11.1"),
-            new BigDecimal("12.2"),
-            new BigDecimal("3200.11"),
-            new BigDecimal("3200.11")
-        };
+        final BigDecimal[] expected = { new BigDecimal("-17.2"), new BigDecimal("-1.1"), new BigDecimal("0.0"), new BigDecimal("1.1"), new BigDecimal("17.2"),
+                new BigDecimal("7"), new BigDecimal("8"), new BigDecimal("9"), new BigDecimal("10"), new BigDecimal("11.1"), new BigDecimal("12.2"),
+                new BigDecimal("3200.11"), new BigDecimal("3200.11") };
 
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(
-                message[i] + " to BigDecimal",
-                expected[i],
-                converter.convert(BigDecimal.class,input[i]));
-            assertEquals(
-                message[i] + " to null type",
-                expected[i],
-                converter.convert(null,input[i]));
+            assertEquals(message[i] + " to BigDecimal", expected[i], converter.convert(BigDecimal.class, input[i]));
+            assertEquals(message[i] + " to null type", expected[i], converter.convert(null, input[i]));
         }
     }
 }
-
