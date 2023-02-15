@@ -80,7 +80,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayProp {
-        private Object[] foo = new Object[] { OLD_VALUE };
+        private Object[] foo = { OLD_VALUE };
 
         public Object[] getFoo() {
             return foo;
@@ -92,7 +92,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayIndexedProp {
-        private final Object[] foo = new Object[] { OLD_VALUE };
+        private final Object[] foo = { OLD_VALUE };
 
         public Object getFoo(final int i) {
             return foo[i];

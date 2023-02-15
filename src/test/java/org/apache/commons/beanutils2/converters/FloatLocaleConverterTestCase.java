@@ -43,8 +43,8 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
 
         super.setUp();
 
-        defaultValue = new Float("9.99");
-        expectedValue = new Float(expectedDecimalValue);
+        defaultValue = Float.valueOf("9.99");
+        expectedValue = Float.valueOf(expectedDecimalValue);
 
     }
 
@@ -76,7 +76,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
         // quite happily turning "1,234.56" into "1.234"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultDecimalValue, new Float("1.234"));
+        convertValueNoPattern(converter, "(B)", defaultDecimalValue, Float.valueOf("1.234"));
 
         // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
@@ -249,12 +249,12 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
         converter = FloatLocaleConverter.builder().setLocale(defaultLocale).setPattern(defaultDecimalPattern).get();
         final DecimalFormat fmt = new DecimalFormat("#.#############################################################");
 
-        assertEquals(new Float(-0.12), converter.convert("-0.12"));
-        assertEquals("Positive Float.MAX_VALUE", new Float(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)));
-        assertEquals("Positive Float.MIN_VALUE", new Float(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)));
+        assertEquals(Float.valueOf((float) -0.12), converter.convert("-0.12"));
+        assertEquals("Positive Float.MAX_VALUE", Float.valueOf(Float.MAX_VALUE), converter.convert(fmt.format(Float.MAX_VALUE)));
+        assertEquals("Positive Float.MIN_VALUE", Float.valueOf(Float.MIN_VALUE), converter.convert(fmt.format(Float.MIN_VALUE)));
 
-        assertEquals("Negative Float.MAX_VALUE", new Float(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
-        assertEquals("Negative Float.MIN_VALUE", new Float(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
+        assertEquals("Negative Float.MAX_VALUE", Float.valueOf(Float.MAX_VALUE * -1), converter.convert(fmt.format(Float.MAX_VALUE * -1)));
+        assertEquals("Negative Float.MIN_VALUE", Float.valueOf(Float.MIN_VALUE * -1), converter.convert(fmt.format(Float.MIN_VALUE * -1)));
 
         try {
             converter.convert(fmt.format((double) Float.MAX_VALUE * (double) 10));
@@ -289,7 +289,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
     public void testParseZero() {
         try {
             final Object result = LocaleConvertUtils.convert("0", Float.class, Locale.US, null);
-            assertEquals(new Float(0), result);
+            assertEquals(Float.valueOf(0), result);
         } catch (final ConversionException e) {
             fail("Zero threw ConversionException: " + e);
         }

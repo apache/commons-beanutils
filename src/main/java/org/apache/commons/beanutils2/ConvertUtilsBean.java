@@ -247,9 +247,9 @@ public class ConvertUtilsBean {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Convert string '" + value + "' to class '" + clazz.getName() + "'");
         }
-        Converter<T> converter = lookup(clazz);
+        final Converter<T> converter = lookup(clazz);
         if (converter == null) {
-            Converter<String> sConverter = lookup(String.class);
+            final Converter<String> sConverter = lookup(String.class);
             if (LOG.isTraceEnabled()) {
                 LOG.trace("  Using converter " + converter);
             }
@@ -324,7 +324,7 @@ public class ConvertUtilsBean {
         }
 
         Object converted = value;
-        Converter<T> converter = lookup(sourceType, targetType);
+        final Converter<T> converter = lookup(sourceType, targetType);
         if (converter != null) {
             if (LOG.isTraceEnabled()) {
                 LOG.trace("  Using converter " + converter);
@@ -336,7 +336,7 @@ public class ConvertUtilsBean {
             // NOTE: For backwards compatibility, if the Converter
             // doesn't handle conversion-->String then
             // use the registered String Converter
-            Converter<String> strConverter = lookup(String.class);
+            final Converter<String> strConverter = lookup(String.class);
             if (strConverter != null) {
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("  Using converter " + converter);

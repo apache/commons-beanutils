@@ -63,7 +63,7 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testConvertToChar() {
         final Converter converter = new CharacterConverter();
-        assertEquals("Wrong result", new Character('F'), converter.convert(Character.TYPE, "FOO"));
+        assertEquals("Wrong result", Character.valueOf('F'), converter.convert(Character.TYPE, "FOO"));
     }
 
     /**
@@ -71,9 +71,9 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testConvertToCharacter() {
         final Converter converter = new CharacterConverter();
-        assertEquals("Character Test", new Character('N'), converter.convert(Character.class, new Character('N')));
-        assertEquals("String Test",    new Character('F'), converter.convert(Character.class, "FOO"));
-        assertEquals("Integer Test",   new Character('3'), converter.convert(Character.class, Integer.valueOf(321)));
+        assertEquals("Character Test", Character.valueOf('N'), converter.convert(Character.class, Character.valueOf('N')));
+        assertEquals("String Test",    Character.valueOf('F'), converter.convert(Character.class, "FOO"));
+        assertEquals("Integer Test",   Character.valueOf('3'), converter.convert(Character.class, Integer.valueOf(321)));
     }
 
     /**
@@ -97,7 +97,7 @@ public class CharacterConverterTestCase extends TestCase {
 
         final Converter converter = new CharacterConverter();
 
-        assertEquals("Character Test", "N", converter.convert(String.class, new Character('N')));
+        assertEquals("Character Test", "N", converter.convert(String.class, Character.valueOf('N')));
         assertEquals("String Test",    "F", converter.convert(String.class, "FOO"));
         assertEquals("Integer Test",   "3", converter.convert(String.class, Integer.valueOf(321)));
         assertEquals("Null Test",     null, converter.convert(String.class, null));
@@ -121,6 +121,6 @@ public class CharacterConverterTestCase extends TestCase {
      */
     public void testDefault() {
         final CharacterConverter converter = new CharacterConverter('C');
-        assertEquals("Default Test",   new Character('C'), converter.convert(Character.class, null));
+        assertEquals("Default Test",   Character.valueOf('C'), converter.convert(Character.class, null));
     }
 }

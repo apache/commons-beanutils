@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import junit.framework.Test;
@@ -41,7 +42,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final DynaProperty intProp    = new DynaProperty("intProp",    Integer.class);
     private static final DynaProperty dateProp   = new DynaProperty("dateProp",   Date.class);
     private static final DynaProperty mapProp    = new DynaProperty("mapProp",    Map.class);
-    private static final DynaProperty[] properties = new DynaProperty[] {
+    private static final DynaProperty[] properties = {
                       stringProp, nullProp, intProp, dateProp, mapProp};
     private static final DynaClass dynaClass = new BasicDynaClass("testDynaClass", BasicDynaBean.class, properties);
 
@@ -50,7 +51,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final Date    dateVal   = new Date();
     private final Map<Object, Object>     mapVal    = new HashMap<>();
 
-    private final Object[] values = new Object[] {stringVal, null, intVal, dateVal, mapVal};
+    private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
 
     private BasicDynaBean dynaBean;
     private Map<String, Object> decoratedMap;
@@ -173,11 +174,9 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
 
         assertEquals("entrySet size", properties.length, set.size());
 
-        final Iterator<Map.Entry<String, Object>> iterator = set.iterator();
         final List<String> namesList = new ArrayList<>();
         int i = 0;
-        while (iterator.hasNext()) {
-            final Map.Entry<String, Object> entry = iterator.next();
+        for (final Entry<String, Object> entry : set) {
             final String name  = entry.getKey();
             namesList.add(name);
             final Object expectValue = decoratedMap.get(name);

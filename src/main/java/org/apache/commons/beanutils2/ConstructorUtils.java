@@ -442,7 +442,7 @@ public class ConstructorUtils {
      * @return See {@link Array#newInstance(Class, int)}.
      */
     @SuppressWarnings("unchecked")
-    public static <T> T[] newArray(Class<T> componentType, int length) {
+    public static <T> T[] newArray(final Class<T> componentType, final int length) {
         return (T[]) Array.newInstance(componentType, length);
     }
 

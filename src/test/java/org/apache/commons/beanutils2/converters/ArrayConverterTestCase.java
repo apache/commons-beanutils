@@ -94,13 +94,13 @@ public class ArrayConverterTestCase extends TestCase {
         arrayConverter.setDelimiter(';');
 
         // Expected results
-        final int[]     intArray     = new int[] {1111, 2222, 3333, 4444};
+        final int[]     intArray     = {1111, 2222, 3333, 4444};
         final String    stringA      = "1,111; 2,222; 3,333; 4,444";
         final String    stringB      = intArray[0]+ ";" + intArray[1] + ";" + intArray[2] + ";" +intArray[3];
-        final String[]  strArray     = new String[] {""+intArray[0], ""+intArray[1], ""+intArray[2], ""+intArray[3]};
-        final long[]    longArray    = new long[] {intArray[0], intArray[1], intArray[2], intArray[3]};
-        final Long[]    LONGArray    = new Long[]    {Long.valueOf(intArray[0]),    Long.valueOf(intArray[1]),    Long.valueOf(intArray[2]),    Long.valueOf(intArray[3])};
-        final Integer[] IntegerArray = new Integer[] {Integer.valueOf(intArray[0]), Integer.valueOf(intArray[1]), Integer.valueOf(intArray[2]), Integer.valueOf(intArray[3])};
+        final String[]  strArray     = {""+intArray[0], ""+intArray[1], ""+intArray[2], ""+intArray[3]};
+        final long[]    longArray    = {intArray[0], intArray[1], intArray[2], intArray[3]};
+        final Long[]    LONGArray    = {Long.valueOf(intArray[0]),    Long.valueOf(intArray[1]),    Long.valueOf(intArray[2]),    Long.valueOf(intArray[3])};
+        final Integer[] IntegerArray = {Integer.valueOf(intArray[0]), Integer.valueOf(intArray[1]), Integer.valueOf(intArray[2]), Integer.valueOf(intArray[3])};
         final ArrayList<String> strList = new ArrayList<>();
         final ArrayList<Long> longList = new ArrayList<>();
         for (int i = 0; i < strArray.length; i++) {
@@ -228,7 +228,7 @@ public class ArrayConverterTestCase extends TestCase {
      * Test Empty String
      */
     public void testEmptyString() {
-        final int[]  zeroArray  = new int[0];
+        final int[]  zeroArray  = {};
         final IntegerConverter intConverter = new IntegerConverter();
 
         checkArray("Empty String",  zeroArray, new ArrayConverter(int[].class, intConverter, -1).convert(int[].class, ""));
@@ -263,7 +263,7 @@ public class ArrayConverterTestCase extends TestCase {
      * Test Converting using the IntegerConverter as the component Converter
      */
     public void testInvalidWithDefault() {
-        final int[]  zeroArray  = new int[0];
+        final int[]  zeroArray  = {};
         final int[]  oneArray   = new int[1];
         final IntegerConverter intConverter = new IntegerConverter();
 
@@ -282,14 +282,14 @@ public class ArrayConverterTestCase extends TestCase {
         final ArrayConverter arrayConverter = new ArrayConverter(int[].class, intConverter);
 
         // Test Data
-        final String[] array = new String[] {"10", "  11", "12  ", "  13  "};
+        final String[] array = {"10", "  11", "12  ", "  13  "};
         final ArrayList<String> list = new ArrayList<>();
         Collections.addAll(list, array);
 
         // Expected results
         String msg = null;
-        final int[]     expectedInt     = new int[] {10, 11, 12, 13};
-        final Integer[] expectedInteger = new Integer[] {Integer.valueOf(expectedInt[0]), Integer.valueOf(expectedInt[1]), Integer.valueOf(expectedInt[2]), Integer.valueOf(expectedInt[3])};
+        final int[]     expectedInt     = {10, 11, 12, 13};
+        final Integer[] expectedInteger = {Integer.valueOf(expectedInt[0]), Integer.valueOf(expectedInt[1]), Integer.valueOf(expectedInt[2]), Integer.valueOf(expectedInt[3])};
 
         // Test String[] --> int[]
         try {
@@ -334,7 +334,7 @@ public class ArrayConverterTestCase extends TestCase {
         //     - comma (",") to separate individual numbers
         //     - semicolon (";") to separate lists of numbers
         final String matrixString = "11,12,13 ; 21,22,23 ; 31,32,33 ; 41,42,43";
-        final int[][] expected = new int[][] {new int[] {11, 12, 13},
+        final int[][] expected = {new int[] {11, 12, 13},
                                         new int[] {21, 22, 23},
                                         new int[] {31, 32, 33},
                                         new int[] {41, 42, 43}};

@@ -54,10 +54,10 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Float("-12");
-        numbers[1] = new Float("13");
-        numbers[2] = new Float("-22");
-        numbers[3] = new Float("23");
+        numbers[0] = Float.valueOf("-12");
+        numbers[1] = Float.valueOf("13");
+        numbers[2] = Float.valueOf("-22");
+        numbers[3] = Float.valueOf("23");
     }
 
     @Override
@@ -76,7 +76,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
         final Double tooBig  = Double.valueOf(Double.MAX_VALUE);
 
         // Maximum
-        assertEquals("Maximum", new Float(Float.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals("Maximum", Float.valueOf(Float.MAX_VALUE), converter.convert(clazz, max));
 
         // Too Large
         try {
@@ -113,27 +113,27 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
             "17.2",
             String.valueOf(Float.MAX_VALUE),
             Byte.valueOf((byte)7),
-            new Short((short)8),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float(11.1),
+            Float.valueOf((float) 11.1),
             Double.valueOf(12.2),
         };
 
         final Float[] expected = {
-            new Float(Float.MIN_VALUE),
-            new Float(-17.2),
-            new Float(-1.1),
-            new Float(0.0),
-            new Float(1.1),
-            new Float(17.2),
-            new Float(Float.MAX_VALUE),
-            new Float(7),
-            new Float(8),
-            new Float(9),
-            new Float(10),
-            new Float(11.1),
-            new Float(12.2)
+            Float.valueOf(Float.MIN_VALUE),
+            Float.valueOf((float) -17.2),
+            Float.valueOf((float) -1.1),
+            Float.valueOf((float) 0.0),
+            Float.valueOf((float) 1.1),
+            Float.valueOf((float) 17.2),
+            Float.valueOf(Float.MAX_VALUE),
+            Float.valueOf(7),
+            Float.valueOf(8),
+            Float.valueOf(9),
+            Float.valueOf(10),
+            Float.valueOf((float) 11.1),
+            Float.valueOf((float) 12.2)
         };
 
         for (int i = 0; i < expected.length; i++) {
@@ -150,7 +150,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
             assertEquals(
                 message[i] + " to null type",
                 expected[i].floatValue(),
-                ((Float)converter.convert(null,input[i])).floatValue(),
+                converter.convert(null,input[i]).floatValue(),
                 0.00001);
         }
     }

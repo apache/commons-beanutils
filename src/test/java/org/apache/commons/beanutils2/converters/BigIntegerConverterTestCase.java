@@ -92,11 +92,11 @@ public class BigIntegerConverterTestCase extends NumberConverterTestBase<BigInte
             "1",
             "17",
             String.valueOf(Long.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float(11.1),
+            Float.valueOf((float) 11.1),
             Double.valueOf(12.2)
         };
 

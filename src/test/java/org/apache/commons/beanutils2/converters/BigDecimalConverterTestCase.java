@@ -32,7 +32,7 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
      * A class derived from {@code BigDecimal} used for testing whether
      * derived number classes are handled correctly.
      */
-    private class ExtendingBigDecimal extends BigDecimal {
+    private static class ExtendingBigDecimal extends BigDecimal {
         private ExtendingBigDecimal(final String val) {
             super(val);
         }
@@ -101,10 +101,10 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
             "1.1",
             "17.2",
             Byte.valueOf((byte)7),
-            new Short((short)8),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float("11.1"),
+            Float.valueOf("11.1"),
             Double.valueOf("12.2"),
             new BigDecimal("3200.11"),
             new ExtendingBigDecimal("3200.11")

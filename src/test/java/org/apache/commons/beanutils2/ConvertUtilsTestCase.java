@@ -87,7 +87,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeIntegerArray() {
 
         Object value;
-        final int[] intArray = new int[0];
+        final int[] intArray = {};
 
         value = ConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -189,7 +189,7 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testNegativeStringArray() {
 
         Object value;
-        final String[] stringArray = new String[0];
+        final String[] stringArray = {};
 
         value = ConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -201,10 +201,10 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     public void testObjectToStringArray() {
 
-        final int[] intArray0 = new int[0];
+        final int[] intArray0 = {};
         final int[] intArray1 = { 123 };
         final int[] intArray2 = { 123, 456 };
-        final String[] stringArray0 = new String[0];
+        final String[] stringArray0 = {};
         final String[] stringArray1 = { "abc" };
         final String[] stringArray2 = { "abc", "def" };
 
@@ -261,7 +261,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
         final String[] values1 = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
-        final int[] shape = new int[0];
+        final int[] shape = {};
         assertEquals(shape.getClass(), value.getClass());
         final int[] results1 = (int[]) value;
         assertEquals(results1[0], 10);
@@ -284,9 +284,9 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveIntegerArray() {
 
         Object value;
-        final int[] intArray = new int[0];
-        final int[] intArray1 = new int[] { 0 };
-        final int[] intArray2 = new int[] { 0, 10 };
+        final int[] intArray = {};
+        final int[] intArray1 = { 0 };
+        final int[] intArray2 = { 0, 10 };
 
         value = ConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -471,11 +471,9 @@ public class ConvertUtilsTestCase extends TestCase {
     public void testPositiveStringArray() {
 
         Object value;
-        final String[] stringArray = new String[0];
-        final String[] stringArray1 = new String[]
-            { "abc" };
-        final String[] stringArray2 = new String[]
-            { "abc", "de,f" };
+        final String[] stringArray = {};
+        final String[] stringArray1 = { "abc" };
+        final String[] stringArray2 = { "abc", "de,f" };
 
         value = ConvertUtils.convert("", stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -598,19 +596,9 @@ public class ConvertUtilsTestCase extends TestCase {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     // We need to use raw types in order to test legacy converters
     public void testConvertToString() throws Exception {
-        final Converter dummyConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return value;
-            }
-        };
+        final Converter dummyConverter = (type, value) -> value;
 
-        final Converter fooConverter = new Converter() {
-            @Override
-            public Object convert(final Class type, final Object value) {
-                return "Foo-Converter";
-            }
-        };
+        final Converter fooConverter = (type, value) -> "Foo-Converter";
 
         final DateConverter dateConverter = new DateConverter();
         dateConverter.setLocale(Locale.US);

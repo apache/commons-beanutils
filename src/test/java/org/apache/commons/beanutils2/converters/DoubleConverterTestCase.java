@@ -91,10 +91,10 @@ public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
             "17.2",
             String.valueOf(Double.MAX_VALUE),
             Byte.valueOf((byte)7),
-            new Short((short)8),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float(11.1),
+            Float.valueOf((float) 11.1),
             Double.valueOf(12.2)
         };
 
@@ -128,7 +128,7 @@ public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
             assertEquals(
                 message[i] + " to null type",
                 expected[i].doubleValue(),
-                ((Double)converter.convert(null,input[i])).doubleValue(),
+                converter.convert(null,input[i]).doubleValue(),
                 0.00001D);
         }
     }

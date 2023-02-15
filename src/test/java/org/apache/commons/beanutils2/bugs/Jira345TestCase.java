@@ -95,9 +95,9 @@ public class Jira345TestCase extends TestCase {
     /** Example Bean */
     public static class MyBean {
 
-        private String[][] matr = new String[][]{{"1","2"},{"3","4"}};
+        private String[][] matr = {{"1","2"},{"3","4"}};
 
-        private String[][][] matr3D = new String[][][] {
+        private String[][][] matr3D = {
                 {{"11","12"}, {"13","14"}},
                 {{"21","22"}, {"23","24"}},
         };

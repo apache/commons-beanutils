@@ -38,8 +38,8 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
 
         super.setUp();
 
-        defaultValue = new Short("999");
-        expectedValue = new Short(expectedIntegerValue);
+        defaultValue = Short.valueOf("999");
+        expectedValue = Short.valueOf(expectedIntegerValue);
 
     }
 
@@ -71,7 +71,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
         // quite happily turning "1,234" into "1"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Short("1"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Short.valueOf("1"));
 
         // **************************************************************************
         // Convert with non-localized pattern - unlike the equivalent BigDecimal Test Case
@@ -79,7 +79,7 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new Short("1"));
+        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Short.valueOf("1"));
 
         // **************************************************************************
         // Convert with specified type

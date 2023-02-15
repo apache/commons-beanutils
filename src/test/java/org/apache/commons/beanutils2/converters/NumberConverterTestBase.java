@@ -106,10 +106,10 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
 
         final Object[] number = {
             Byte.valueOf((byte)7),
-            new Short((short)8),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float(11.1),
+            Float.valueOf((float) 11.1),
             Double.valueOf(12.2),
             new BigDecimal("17.2"),
             new BigInteger("33"),

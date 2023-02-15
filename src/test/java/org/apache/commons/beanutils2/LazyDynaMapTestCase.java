@@ -319,7 +319,7 @@ public class LazyDynaMapTestCase extends TestCase {
     public void testIndexedPrimitiveArray() {
 
         int   index     = 3;
-        final int[] primitiveArray = new int[0];
+        final int[] primitiveArray = {};
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaMap.getDynaProperty(testProperty));

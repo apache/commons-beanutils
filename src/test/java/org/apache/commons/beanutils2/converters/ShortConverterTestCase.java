@@ -54,10 +54,10 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Short("-12");
-        numbers[1] = new Short("13");
-        numbers[2] = new Short("-22");
-        numbers[3] = new Short("23");
+        numbers[0] = Short.valueOf("-12");
+        numbers[1] = Short.valueOf("13");
+        numbers[2] = Short.valueOf("-22");
+        numbers[3] = Short.valueOf("23");
     }
 
     @Override
@@ -78,10 +78,10 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
         final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", new Short(Short.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals("Minimum", Short.valueOf(Short.MIN_VALUE), converter.convert(clazz, min));
 
         // Maximum
-        assertEquals("Maximum", new Short(Short.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals("Maximum", Short.valueOf(Short.MAX_VALUE), converter.convert(clazz, max));
 
         // Too Small
         try {
@@ -126,27 +126,27 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
             "17",
             String.valueOf(Short.MAX_VALUE),
             Byte.valueOf((byte)7),
-            new Short((short)8),
+            Short.valueOf((short)8),
             Integer.valueOf(9),
             Long.valueOf(10),
-            new Float(11.1),
+            Float.valueOf((float) 11.1),
             Double.valueOf(12.2)
         };
 
         final Short[] expected = {
-            new Short(Short.MIN_VALUE),
-            new Short((short)-17),
-            new Short((short)-1),
-            new Short((short)0),
-            new Short((short)1),
-            new Short((short)17),
-            new Short(Short.MAX_VALUE),
-            new Short((short)7),
-            new Short((short)8),
-            new Short((short)9),
-            new Short((short)10),
-            new Short((short)11),
-            new Short((short)12)
+            Short.valueOf(Short.MIN_VALUE),
+            Short.valueOf((short)-17),
+            Short.valueOf((short)-1),
+            Short.valueOf((short)0),
+            Short.valueOf((short)1),
+            Short.valueOf((short)17),
+            Short.valueOf(Short.MAX_VALUE),
+            Short.valueOf((short)7),
+            Short.valueOf((short)8),
+            Short.valueOf((short)9),
+            Short.valueOf((short)10),
+            Short.valueOf((short)11),
+            Short.valueOf((short)12)
         };
 
         for (int i = 0; i < expected.length; i++) {

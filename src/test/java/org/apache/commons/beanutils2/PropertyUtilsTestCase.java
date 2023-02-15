@@ -191,7 +191,7 @@ public class PropertyUtilsTestCase extends TestCase {
         beanPrivateSubclass = PrivateBeanFactory.createSubclass();
         beanPublicSubclass = new TestBeanPublicSubclass();
 
-        final DynaProperty[] properties = new DynaProperty[] {
+        final DynaProperty[] properties = {
                 new DynaProperty("stringProperty", String.class),
                 new DynaProperty("nestedBean", TestBean.class),
                 new DynaProperty("nullDynaBean", DynaBean.class)
@@ -238,11 +238,11 @@ public class PropertyUtilsTestCase extends TestCase {
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", Double.valueOf(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
-        map.put("floatProperty", new Float((float) 222.0));
+        map.put("floatProperty", Float.valueOf((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
         map.put("intProperty", Integer.valueOf(111));
         map.put("longProperty", Long.valueOf(444));
-        map.put("shortProperty", new Short((short) 555));
+        map.put("shortProperty", Short.valueOf((short) 555));
         map.put("stringProperty", "New String Property");
 
         try {
@@ -309,13 +309,13 @@ public class PropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'doubleProperty'",
                      Double.valueOf(321.0), map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
-                     new Float((float) 123.0), map.get("floatProperty"));
+                     Float.valueOf((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
                      Integer.valueOf(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
                      Long.valueOf(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
-                     new Short((short) 987), map.get("shortProperty"));
+                     Short.valueOf((short) 987), map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
                      (String) map.get("stringProperty"));
@@ -985,8 +985,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test getting an indexed value out of a multi-dimensional array
      */
     public void testGetIndexedArray() {
-        final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
         final String[][] mainArray = {firstArray, secondArray};
         final TestBean bean = new TestBean(mainArray);
         try {
@@ -1006,8 +1006,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test getting an indexed value out of List of Lists
      */
     public void testGetIndexedList() {
-        final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
         final List<Object> mainList = new ArrayList<>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
@@ -1122,7 +1122,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testGetMappedArray() {
         final TestBean bean = new TestBean();
-        final String[] array = new String[] {"abc", "def", "ghi"};
+        final String[] array = {"abc", "def", "ghi"};
         bean.getMapProperty().put("mappedArray", array);
         try {
             assertEquals("abc", PropertyUtils.getProperty(bean, "mapProperty(mappedArray)[0]"));
@@ -1656,8 +1656,8 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testGetPropertyType() {
 
         Class<?> clazz = null;
-        final int[] intArray = new int[0];
-        final String[] stringArray = new String[0];
+        final int[] intArray = {};
+        final String[] stringArray = {};
 
         try {
 
@@ -2522,8 +2522,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test setting an indexed value out of a multi-dimensional array
      */
     public void testSetIndexedArray() {
-        final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
         final String[][] mainArray = {firstArray, secondArray};
         final TestBean bean = new TestBean(mainArray);
         assertEquals("BEFORE", "SECOND-3", bean.getString2dArray(1)[2]);
@@ -2539,8 +2539,8 @@ public class PropertyUtilsTestCase extends TestCase {
      * Test setting an indexed value out of List of Lists
      */
     public void testSetIndexedList() {
-        final String[] firstArray = new String[] {"FIRST-1", "FIRST-2", "FIRST-3"};
-        final String[] secondArray = new String[] {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
+        final String[] firstArray = {"FIRST-1", "FIRST-2", "FIRST-3"};
+        final String[] secondArray = {"SECOND-1", "SECOND-2", "SECOND-3",  "SECOND-4"};
         final List<Object> mainList   = new ArrayList<>();
         mainList.add(Arrays.asList(firstArray));
         mainList.add(Arrays.asList(secondArray));
@@ -2998,7 +2998,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedArray() {
         final TestBean bean = new TestBean();
-        final String[] array = new String[] {"abc", "def", "ghi"};
+        final String[] array = {"abc", "def", "ghi"};
         bean.getMapProperty().put("mappedArray", array);
 
         assertEquals("BEFORE", "def", ((String[])bean.getMapProperty().get("mappedArray"))[1]);
@@ -3243,7 +3243,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean,
                     "nested.booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     bean.getNested().getBooleanProperty());
@@ -3296,7 +3296,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setNestedProperty(bean,
                     "nested.floatProperty",
-                    new Float(newValue));
+                    Float.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getNested().getFloatProperty(),
@@ -3400,7 +3400,7 @@ public class PropertyUtilsTestCase extends TestCase {
             newValue++;
             PropertyUtils.setNestedProperty(bean,
                     "nested.shortProperty",
-                    new Short(newValue));
+                    Short.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getNested().getShortProperty());
@@ -3526,7 +3526,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean,
                     "booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     bean.getBooleanProperty());
@@ -3579,7 +3579,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setSimpleProperty(bean,
                     "floatProperty",
-                    new Float(newValue));
+                    Float.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getFloatProperty(),
@@ -3729,7 +3729,7 @@ public class PropertyUtilsTestCase extends TestCase {
             newValue++;
             PropertyUtils.setSimpleProperty(bean,
                     "shortProperty",
-                    new Short(newValue));
+                    Short.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     bean.getShortProperty());

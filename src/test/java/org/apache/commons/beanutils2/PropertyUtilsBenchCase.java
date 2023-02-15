@@ -95,13 +95,13 @@ public class PropertyUtilsBenchCase extends TestCase {
         // Create input instances
         inBean = new BenchBean();
         inMap = new HashMap<>();
-        inMap.put("booleanProperty", new Boolean(inBean.getBooleanProperty()));
+        inMap.put("booleanProperty", Boolean.valueOf(inBean.getBooleanProperty()));
         inMap.put("byteProperty", Byte.valueOf(inBean.getByteProperty()));
         inMap.put("doubleProperty", Double.valueOf(inBean.getDoubleProperty()));
-        inMap.put("floatProperty", new Float(inBean.getFloatProperty()));
+        inMap.put("floatProperty", Float.valueOf(inBean.getFloatProperty()));
         inMap.put("intProperty", Integer.valueOf(inBean.getIntProperty()));
         inMap.put("longProperty", Long.valueOf(inBean.getLongProperty()));
-        inMap.put("shortProperty", new Short(inBean.getShortProperty()));
+        inMap.put("shortProperty", Short.valueOf(inBean.getShortProperty()));
         inMap.put("stringProperty", inBean.getStringProperty());
         inDyna = dynaClass.newInstance();
         for (final Map.Entry<String, Object> e : inMap.entrySet()) {

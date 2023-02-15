@@ -97,10 +97,10 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
-        bean.set("booleanProperty", new Boolean(true));
-        bean.set("booleanSecond", new Boolean(true));
+        bean.set("booleanProperty", Boolean.valueOf(true));
+        bean.set("booleanSecond", Boolean.valueOf(true));
         bean.set("doubleProperty", Double.valueOf(321.0));
-        bean.set("floatProperty", new Float((float) 123.0));
+        bean.set("floatProperty", Float.valueOf((float) 123.0));
         final int[] intArray = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
         final int[] intIndexed = { 0, 10, 20, 30, 40 };
@@ -133,7 +133,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         nested = new TestBean();
         bean.set("nested", nested);
         // Property "nullProperty" is not initialized, so it should return null
-        bean.set("shortProperty", new Short((short) 987));
+        bean.set("shortProperty", Short.valueOf((short) 987));
         final String[] stringArray =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
@@ -175,11 +175,11 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         map.put("booleanProperty", Boolean.FALSE);
         map.put("doubleProperty", Double.valueOf(333.0));
         map.put("dupProperty", new String[] { "New 0", "New 1", "New 2" });
-        map.put("floatProperty", new Float((float) 222.0));
+        map.put("floatProperty", Float.valueOf((float) 222.0));
         map.put("intArray", new int[] { 0, 100, 200 });
         map.put("intProperty", Integer.valueOf(111));
         map.put("longProperty", Long.valueOf(444));
-        map.put("shortProperty", new Short((short) 555));
+        map.put("shortProperty", Short.valueOf((short) 555));
         map.put("stringProperty", "New String Property");
 
         try {
@@ -248,13 +248,13 @@ public class DynaPropertyUtilsTestCase extends TestCase {
         assertEquals("Value of 'doubleProperty'",
                      Double.valueOf(321.0), map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
-                     new Float((float) 123.0), map.get("floatProperty"));
+                     Float.valueOf((float) 123.0), map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
                      Integer.valueOf(123), map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
                      Long.valueOf(321), map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
-                     new Short((short) 987), map.get("shortProperty"));
+                     Short.valueOf((short) 987), map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
                      (String) map.get("stringProperty"));
@@ -2001,7 +2001,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean,
                     "nested.booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     nested.getBooleanProperty());
@@ -2054,7 +2054,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setNestedProperty(bean,
                     "nested.floatProperty",
-                    new Float(newValue));
+                    Float.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     nested.getFloatProperty(),
@@ -2158,7 +2158,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             newValue++;
             PropertyUtils.setNestedProperty(bean,
                     "nested.shortProperty",
-                    new Short(newValue));
+                    Short.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     nested.getShortProperty());
@@ -2284,7 +2284,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean,
                     "booleanProperty",
-                    new Boolean(newValue));
+                    Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     ((Boolean) bean.get("booleanProperty")).booleanValue());
@@ -2337,7 +2337,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final float newValue = oldValue + (float) 1.0;
             PropertyUtils.setSimpleProperty(bean,
                     "floatProperty",
-                    new Float(newValue));
+                    Float.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Float) bean.get("floatProperty")).floatValue(),
@@ -2461,7 +2461,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             newValue++;
             PropertyUtils.setSimpleProperty(bean,
                     "shortProperty",
-                    new Short(newValue));
+                    Short.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Short) bean.get("shortProperty")).shortValue());
@@ -2536,8 +2536,8 @@ public class DynaPropertyUtilsTestCase extends TestCase {
      */
     protected DynaClass createDynaClass() {
 
-        final int[] intArray = new int[0];
-        final String[] stringArray = new String[0];
+        final int[] intArray = {};
+        final String[] stringArray = {};
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,

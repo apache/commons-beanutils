@@ -175,7 +175,7 @@ public class TestResultSet implements InvocationHandler {
             return Double.valueOf(321.0);
         }
         if ("floatProperty".equals(columnName)) {
-            return new Float((float) 123.0);
+            return Float.valueOf((float) 123.0);
         }
         if ("intProperty".equals(columnName)) {
             return Integer.valueOf(100 + row);
@@ -187,7 +187,7 @@ public class TestResultSet implements InvocationHandler {
             return null;
         }
         if ("shortProperty".equals(columnName)) {
-            return new Short((short) (300 + row));
+            return Short.valueOf((short) (300 + row));
         }
         if ("stringProperty".equals(columnName)) {
             return "This is a string";

@@ -178,7 +178,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     // all beans (and all objects for that matter.
     @Override
     public Object[] getSampleKeys() {
-        final Object[] keys = new Object[] {
+        final Object[] keys = {
             "someIntValue",
             "someLongValue",
             "someDoubleValue",
@@ -205,7 +205,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     // note to self: the sample values were created manually
     @Override
     public Object[] getSampleValues() {
-        final Object[] values = new Object[] {
+        final Object[] values = {
             Integer.valueOf(1234),
             Long.valueOf(1298341928234L),
             Double.valueOf(123423.34),
@@ -223,7 +223,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     @Override
     public Object[] getNewSampleValues() {
-        final Object[] values = new Object[] {
+        final Object[] values = {
             Integer.valueOf(223),
             Long.valueOf(23341928234L),
             Double.valueOf(23423.34),
@@ -375,12 +375,12 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
         assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).apply("true"));
-        assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).apply("BCD"));
+        assertEquals("Character.TYPE", Character.valueOf('B'),  beanMap.getTypeTransformer(Character.TYPE).apply("BCD"));
         assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).apply("1"));
-        assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).apply("2"));
+        assertEquals("Short.TYPE",     Short.valueOf((short)2), beanMap.getTypeTransformer(Short.TYPE).apply("2"));
         assertEquals("Integer.TYPE",   Integer.valueOf(3),      beanMap.getTypeTransformer(Integer.TYPE).apply("3"));
         assertEquals("Long.TYPE",      Long.valueOf(4),         beanMap.getTypeTransformer(Long.TYPE).apply("4"));
-        assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).apply("5"));
+        assertEquals("Float.TYPE",     Float.valueOf("5"),      beanMap.getTypeTransformer(Float.TYPE).apply("5"));
         assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).apply("6"));
     }
 

@@ -25,11 +25,11 @@ import junit.framework.TestCase;
  */
 public class BooleanConverterTestCase extends TestCase {
 
-    public static final String[] STANDARD_TRUES = new String[] {
+    public static final String[] STANDARD_TRUES = {
             "yes", "y", "true", "on", "1"
         };
 
-    public static final String[] STANDARD_FALSES = new String[] {
+    public static final String[] STANDARD_FALSES = {
             "no", "n", "false", "off", "0"
         };
 

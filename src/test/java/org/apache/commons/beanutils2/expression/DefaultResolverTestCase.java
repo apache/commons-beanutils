@@ -28,22 +28,22 @@ public class DefaultResolverTestCase extends TestCase {
     private final DefaultResolver resolver = new DefaultResolver();
 
     // Simple Properties Test Data
-    private final String[] validProperties = new String[] {null, "", "a", "bc", "def", "g.h", "ij.k", "lm.no", "pqr.stu"};
-    private final String[] validNames      = new String[] {null, "", "a", "bc", "def", "g",   "ij",   "lm",    "pqr"};
+    private final String[] validProperties = {null, "", "a", "bc", "def", "g.h", "ij.k", "lm.no", "pqr.stu"};
+    private final String[] validNames      = {null, "", "a", "bc", "def", "g",   "ij",   "lm",    "pqr"};
 
     // Indexed Properties Test Data
-    private final String[] validIndexProperties = new String[] {"a[1]", "b[12]", "cd[3]", "ef[45]", "ghi[6]", "jkl[789]", };
-    private final String[] validIndexNames      = new String[] {"a",    "b",     "cd",    "ef",     "ghi",    "jkl"};
-    private final int[]    validIndexValues     = new int[]    {1,      12,      3,       45,       6,        789};
+    private final String[] validIndexProperties = {"a[1]", "b[12]", "cd[3]", "ef[45]", "ghi[6]", "jkl[789]", };
+    private final String[] validIndexNames      = {"a",    "b",     "cd",    "ef",     "ghi",    "jkl"};
+    private final int[]    validIndexValues     = {1,      12,      3,       45,       6,        789};
 
     // Mapped Properties Test Data
-    private final String[] validMapProperties = new String[] {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]"};
-    private final String[] validMapNames      = new String[] {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
-    private final String[] validMapKeys       = new String[] {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
+    private final String[] validMapProperties = {"a(b)", "c(de)", "fg(h)", "ij(kl)", "mno(pqr.s)", "tuv(wx).yz[1]"};
+    private final String[] validMapNames      = {"a",    "c",     "fg",    "ij",     "mno",        "tuv"};
+    private final String[] validMapKeys       = {"b",    "de",    "h",     "kl",     "pqr.s",      "wx"};
 
-    private final String[] nextExpressions   = new String[] {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx"};
-    private final String[] nextProperties    = new String[] {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]"};
-    private final String[] removeProperties  = new String[] {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
+    private final String[] nextExpressions   = {"a", "bc", "d.e", "fg.h", "ij.kl", "m(12)", "no(3.4)", "pq(r).s", "t[12]", "uv[34].wx"};
+    private final String[] nextProperties    = {"a", "bc", "d",   "fg",   "ij",    "m(12)", "no(3.4)", "pq(r)",   "t[12]", "uv[34]"};
+    private final String[] removeProperties  = {null, null, "e",  "h",    "kl",    null,    null,      "s",       null,    "wx"};
 
     /**
      * Constructs a DefaultResolver Test Case.
