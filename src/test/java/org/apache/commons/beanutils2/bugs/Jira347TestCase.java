@@ -47,32 +47,33 @@ public class Jira347TestCase extends TestCase {
      */
     public void testMappedPropertyDescriptor_AnyArgsProperty() throws Exception {
         final String className = "org.apache.commons.beanutils2.MappedPropertyTestBean";
-        final ClassLoader loader = newClassLoader();
-        final Class<?> beanClass = loader.loadClass(className);
-        beanClass.newInstance();
+        try (final URLClassLoader loader = newClassLoader()) {
+            final Class<?> beanClass = loader.loadClass(className);
+            beanClass.newInstance();
 
-        // Sanity checks only
-        assertNotNull("ClassLoader is null", loader);
-        assertNotNull("BeanClass is null", beanClass);
-        assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
-        assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
+            // Sanity checks only
+            assertNotNull("ClassLoader is null", loader);
+            assertNotNull("BeanClass is null", beanClass);
+            assertNotSame("ClassLoaders should be different..", getClass().getClassLoader(), beanClass.getClassLoader());
+            assertSame("BeanClass ClassLoader incorrect", beanClass.getClassLoader(), loader);
 
-        // now start the test
-        MappedPropertyDescriptor descriptor = null;
-        try {
-            descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
-        } catch (final IntrospectionException e) {
-            // this would be fine as well
-        }
-
-        if (descriptor != null) {
-            final String m1 = getMappedWriteMethod(descriptor);
-            forceGarbageCollection();
+            // now start the test
+            MappedPropertyDescriptor descriptor = null;
             try {
-                final String m2 = getMappedWriteMethod(descriptor);
-                assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
-            } catch (final RuntimeException e) {
-                fail("getMappedWriteMethod threw an exception after garbage collection " + e);
+                descriptor = new MappedPropertyDescriptor("anyMapped", beanClass);
+            } catch (final IntrospectionException e) {
+                // this would be fine as well
+            }
+
+            if (descriptor != null) {
+                final String m1 = getMappedWriteMethod(descriptor);
+                forceGarbageCollection();
+                try {
+                    final String m2 = getMappedWriteMethod(descriptor);
+                    assertEquals("Method returned post garbage collection differs from Method returned prior to gc", m1, m2);
+                } catch (final RuntimeException e) {
+                    fail("getMappedWriteMethod threw an exception after garbage collection " + e);
+                }
             }
         }
     }

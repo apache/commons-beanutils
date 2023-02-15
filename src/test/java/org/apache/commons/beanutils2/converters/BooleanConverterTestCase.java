@@ -36,7 +36,7 @@ public class BooleanConverterTestCase extends TestCase {
     public void testAdditionalStrings() {
         final String[] trueStrings = { "sure" };
         final String[] falseStrings = { "nope" };
-        final AbstractConverter converter = new BooleanConverter(trueStrings, falseStrings);
+        final AbstractConverter<Boolean> converter = new BooleanConverter(trueStrings, falseStrings);
         testConversionValues(converter, new String[] { "sure", "Sure" }, new String[] { "nope", "nOpE" });
 
         try {
@@ -54,7 +54,7 @@ public class BooleanConverterTestCase extends TestCase {
     }
 
     public void testCaseInsensitivity() {
-        final AbstractConverter converter = new BooleanConverter();
+        final AbstractConverter<Boolean> converter = new BooleanConverter();
         testConversionValues(converter, new String[] { "Yes", "TRUE" }, new String[] { "NO", "fAlSe" });
     }
 
@@ -71,7 +71,7 @@ public class BooleanConverterTestCase extends TestCase {
         }
     }
 
-    protected void testConversionValues(final AbstractConverter converter, final String[] trueValues, final String[] falseValues) {
+    protected void testConversionValues(final AbstractConverter<Boolean> converter, final String[] trueValues, final String[] falseValues) {
 
         for (final String trueValue : trueValues) {
             assertEquals(Boolean.TRUE, converter.convert(Boolean.class, trueValue));
@@ -83,14 +83,14 @@ public class BooleanConverterTestCase extends TestCase {
 
     public void testDefaultValue() {
         final Boolean defaultValue = Boolean.TRUE;
-        final AbstractConverter converter = new BooleanConverter(defaultValue);
+        final AbstractConverter<Boolean> converter = new BooleanConverter(defaultValue);
 
         assertSame(defaultValue, converter.convert(Boolean.class, "bogus"));
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }
 
     public void testInvalidString() {
-        final AbstractConverter converter = new BooleanConverter();
+        final AbstractConverter<Boolean> converter = new BooleanConverter();
         try {
             converter.convert(Boolean.class, "bogus");
             fail("Converting invalid string should have generated an exception");
@@ -108,7 +108,7 @@ public class BooleanConverterTestCase extends TestCase {
     }
 
     public void testStandardValues() {
-        final AbstractConverter converter = new BooleanConverter();
+        final AbstractConverter<Boolean> converter = new BooleanConverter();
         testConversionValues(converter, STANDARD_TRUES, STANDARD_FALSES);
     }
 

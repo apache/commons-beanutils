@@ -69,8 +69,8 @@ public class ByteConverterTestCase extends NumberConverterTestBase<Byte> {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        final Converter converter = makeConverter();
-        final Class<?> clazz = Byte.class;
+        final Converter<Byte> converter = makeConverter();
+        final Class<Byte> clazz = Byte.class;
 
         final Long min = Long.valueOf(Byte.MIN_VALUE);
         final Long max = Long.valueOf(Byte.MAX_VALUE);

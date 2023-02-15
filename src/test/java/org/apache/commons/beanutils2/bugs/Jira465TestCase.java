@@ -16,7 +16,6 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -107,7 +106,7 @@ public class Jira465TestCase extends TestCase {
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo(0));
     }
 
-    public void testArrayProperty() throws InvocationTargetException, IllegalAccessException {
+    public void testArrayProperty() {
         final ArrayProp bean = new ArrayProp();
         changeValue(bean);
         assertEquals("Wrong value", NEW_VALUE, bean.getFoo()[0]);

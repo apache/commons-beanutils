@@ -32,6 +32,8 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase<BigDeci
      * A class derived from {@code BigDecimal} used for testing whether derived number classes are handled correctly.
      */
     private static class ExtendingBigDecimal extends BigDecimal {
+        private static final long serialVersionUID = 1L;
+
         private ExtendingBigDecimal(final String val) {
             super(val);
         }

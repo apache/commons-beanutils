@@ -73,7 +73,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Conversion to Class
      */
     public void testConvertToClass() {
-        final Converter converter = new ClassConverter();
+        final Converter<Class> converter = new ClassConverter();
 
         assertEquals("Class Test", Integer.class, converter.convert(Class.class, Integer.class));
         assertEquals("String Test", Integer.class, converter.convert(Class.class, "java.lang.Integer"));
@@ -101,7 +101,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefault() {
 
-        final Converter converter = new ClassConverter(Object.class);
+        final Converter<Class> converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test", Object.class, converter.convert(Class.class, null));
@@ -112,7 +112,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefaultNull() {
 
-        final Converter converter = new ClassConverter(null);
+        final Converter<Class> converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test", null, converter.convert(Class.class, null));
