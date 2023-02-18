@@ -37,7 +37,7 @@ public class PathConverterTestCase extends TestCase {
         return new TestSuite(PathConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<Path> converter = null;
 
     public PathConverterTestCase(final String name) {
         super(name);
@@ -47,7 +47,7 @@ public class PathConverterTestCase extends TestCase {
         return Path.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<Path> makeConverter() {
         return new PathConverter();
     }
 

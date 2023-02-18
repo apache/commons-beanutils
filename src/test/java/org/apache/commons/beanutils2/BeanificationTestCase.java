@@ -196,7 +196,8 @@ public class BeanificationTestCase extends TestCase {
             public void run() {
                 try {
                     signal.setSignal(3);
-                    ConvertUtils.register((type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(9)), Integer.TYPE);
+                    Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(Integer.TYPE).cast(new Integer(9));
+                    ConvertUtils.register(c, Integer.TYPE);
                     BeanUtils.setProperty(bean, "int", new Integer(1));
                 } catch (final Exception e) {
                     e.printStackTrace();
@@ -214,7 +215,8 @@ public class BeanificationTestCase extends TestCase {
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value (1)", 1, bean.getInt());
 
-        ConvertUtils.register((type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(5)), Integer.TYPE);
+        Converter c = (type, value) -> ConvertUtils.primitiveToWrapper(type).cast(new Integer(5));
+        ConvertUtils.register(c, Integer.TYPE);
         BeanUtils.setProperty(bean, "int", new Integer(1));
         assertEquals("Wrong property value(2)", 5, bean.getInt());
 
@@ -330,7 +332,7 @@ public class BeanificationTestCase extends TestCase {
         assertTrue("Different PropertyUtilsBean instances per context classloader", PropertyUtilsBean.getInstance() != signal.getPropertyUtils());
     }
 
-    /** Tests whether classloaders and beans are released from memory */
+    /** Tests whether class loaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
         if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");

@@ -69,7 +69,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        final Converter converter = makeConverter();
+        final Converter<Float> converter = makeConverter();
         final Class<?> clazz = Float.class;
 
         final Double max = Double.valueOf(Float.MAX_VALUE);
@@ -101,7 +101,7 @@ public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
         for (int i = 0; i < expected.length; i++) {
             assertEquals(message[i] + " to Float", expected[i].floatValue(), converter.convert(Float.class, input[i]).floatValue(), 0.00001);
             assertEquals(message[i] + " to float", expected[i].floatValue(), converter.convert(Float.TYPE, input[i]).floatValue(), 0.00001);
-            assertEquals(message[i] + " to null type", expected[i].floatValue(), converter.convert(null, input[i]).floatValue(), 0.00001);
+            assertEquals(message[i] + " to null type", expected[i].floatValue(), converter.convert((Class<Float>) null, input[i]).floatValue(), 0.00001);
         }
     }
 }

@@ -197,12 +197,12 @@ public class LocaleBeanificationTestCase extends TestCase {
                     signal.setSignal(3);
                     LocaleConvertUtils.register(new LocaleConverter<Integer>() {
                         @Override
-                        public Integer convert(final Class<Integer> type, final Object value) {
+                        public <R> R convert(final Class<R> type, final Object value) {
                             return ConvertUtils.primitiveToWrapper(type).cast(9);
                         }
 
                         @Override
-                        public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
+                        public <R> R convert(final Class<R> type, final Object value, final String pattern) {
                             return ConvertUtils.primitiveToWrapper(type).cast(9);
                         }
                     }, Integer.TYPE, Locale.getDefault());
@@ -225,12 +225,12 @@ public class LocaleBeanificationTestCase extends TestCase {
 
         LocaleConvertUtils.register(new LocaleConverter<Integer>() {
             @Override
-            public Integer convert(final Class<Integer> type, final Object value) {
+            public <R> R convert(final Class<R> type, final Object value) {
                 return ConvertUtils.primitiveToWrapper(type).cast(5);
             }
 
             @Override
-            public Integer convert(final Class<Integer> type, final Object value, final String pattern) {
+            public <R> R convert(final Class<R> type, final Object value, final String pattern) {
                 return ConvertUtils.primitiveToWrapper(type).cast(5);
             }
         }, Integer.TYPE, Locale.getDefault());

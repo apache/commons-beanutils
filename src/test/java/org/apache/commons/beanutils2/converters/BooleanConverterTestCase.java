@@ -62,7 +62,7 @@ public class BooleanConverterTestCase extends TestCase {
      * Tests a conversion to another target type. This should not be possible.
      */
     public void testConversionToOtherType() {
-        final AbstractConverter converter = new BooleanConverter();
+        final AbstractConverter<Boolean> converter = new BooleanConverter();
         try {
             converter.convert(Integer.class, STANDARD_TRUES[0]);
             fail("Could convert to unsupported type!");

@@ -34,7 +34,7 @@ public class FileConverterTestCase extends TestCase {
         return new TestSuite(FileConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<File> converter;
 
     public FileConverterTestCase(final String name) {
         super(name);
@@ -44,7 +44,7 @@ public class FileConverterTestCase extends TestCase {
         return File.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<File> makeConverter() {
         return new FileConverter();
     }
 

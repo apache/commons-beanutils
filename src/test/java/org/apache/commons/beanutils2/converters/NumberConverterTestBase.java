@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 
 /**
  * Abstract base for &lt;Number&gt;Converter classes.
+ * @param <T> Number type.
  */
 public abstract class NumberConverterTestBase<T extends Number> extends TestCase {
 
@@ -60,7 +61,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert Calendar --> Long
      */
     public void testCalendarToNumber() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         final Calendar calendarValue = Calendar.getInstance();
         final long longValue = calendarValue.getTime().getTime();
@@ -111,7 +112,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert Date --> Long
      */
     public void testDateToNumber() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         final Date dateValue = new Date();
         final long longValue = dateValue.getTime();
@@ -144,7 +145,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert Number --> String (using default and specified Locales)
      */
     public void testInvalidException() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         try {
             converter.convert(getExpectedType(), null);
@@ -164,7 +165,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Test specifying an invalid type.
      */
     public void testInvalidType() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         try {
             converter.convert(Object.class, numbers[0]);
@@ -178,7 +179,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Tests a conversion to an unsupported type if a default value is set.
      */
     public void testInvalidTypeWithDefault() {
-        final NumberConverter converter = makeConverter((T) numbers[0]);
+        final NumberConverter<T> converter = makeConverter((T) numbers[0]);
 
         try {
             converter.convert(Object.class, numbers[0]);
@@ -192,7 +193,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert Number --> String (default conversion)
      */
     public void testNumberToStringDefault() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         // Default Number --> String conversion
         assertEquals("Default Convert " + numbers[0], numbers[0].toString(), converter.convert(String.class, numbers[0]));
@@ -207,7 +208,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Default Locale
@@ -231,7 +232,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setPattern("[0,0.0];(0,0.0)");
 
         // Default Locale
@@ -251,7 +252,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert Other --> String (default conversion)
      */
     public void testOtherToStringDefault() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
 
         // Other type --> String conversion
         assertEquals("Default Convert ", "ABC", converter.convert(String.class, new StringBuilder("ABC")));
@@ -262,7 +263,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      */
     public void testStringArrayToInteger() {
         final Integer defaultValue = Integer.valueOf(-1);
-        final NumberConverter converter = new IntegerConverterTestCase("test").makeConverter(defaultValue);
+        final NumberConverter<Integer> converter = new IntegerConverterTestCase("test").makeConverter(defaultValue);
 
         // Default Locale
         assertEquals("Valid First", Integer.valueOf(5), converter.convert(Integer.class, new String[] { "5", "4", "3" }));
@@ -275,7 +276,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert String --> Number (default conversion)
      */
     public void testStringToNumberDefault() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Default String --> Number conversion
@@ -294,7 +295,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
      * Convert String --> Number if the target type is not defined. Then the default type should be used.
      */
     public void testStringToNumberDefaultType() {
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         assertEquals("Default Convert " + numbers[0], numbers[0], converter.convert(null, numbers[0].toString()));
@@ -308,7 +309,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setUseLocaleFormat(true);
 
         // Default Locale
@@ -349,7 +350,7 @@ public abstract class NumberConverterTestBase<T extends Number> extends TestCase
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        final NumberConverter converter = makeConverter();
+        final NumberConverter<T> converter = makeConverter();
         converter.setPattern("[0,0];(0,0)");
 
         // Default Locale

@@ -20,8 +20,8 @@ package org.apache.commons.beanutils2.locale;
 import org.apache.commons.beanutils2.Converter;
 
 /**
- * <p>General purpose locale-sensitive data type converter that can be registered and used
- * within the BeanUtils package to manage the conversion of objects from
+ * <p>
+ * General purpose locale-sensitive data type converter that can be registered and used within the BeanUtils package to manage the conversion of objects from
  * one type to another.
  *
  * @param <T> The converter type.
@@ -29,16 +29,14 @@ import org.apache.commons.beanutils2.Converter;
 public interface LocaleConverter<T> extends Converter<T> {
 
     /**
-     * Convert the specified locale-sensitive input object into an output object of the
-     * specified type.
+     * Convert the specified locale-sensitive input object into an output object of the specified type.
      *
-     * @param type Data type to which this value should be converted
-     * @param value The input value to be converted
+     * @param <R>     the result type.
+     * @param type    Data type to which this value should be converted
+     * @param value   The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
      * @return The converted value
-     *
-     * @throws org.apache.commons.beanutils2.ConversionException if conversion
-     * cannot be performed successfully or if the target type is not supported
+     * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed successfully or if the target type is not supported
      */
-    T convert(Class<T> type, Object value, String pattern);
+    <R> R convert(Class<R> type, Object value, String pattern);
 }

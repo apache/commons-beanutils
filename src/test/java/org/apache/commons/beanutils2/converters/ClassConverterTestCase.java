@@ -59,7 +59,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Array Conversion
      */
     public void testArray() {
-        final Converter converter = new ClassConverter();
+        final Converter<Class<?>> converter = new ClassConverter();
 
         // Test Array Class to String
         assertEquals("Array to String", "[Ljava.lang.Boolean;", converter.convert(String.class, Boolean[].class));
@@ -73,7 +73,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Conversion to Class
      */
     public void testConvertToClass() {
-        final Converter<Class> converter = new ClassConverter();
+        final Converter<Class<?>> converter = new ClassConverter();
 
         assertEquals("Class Test", Integer.class, converter.convert(Class.class, Integer.class));
         assertEquals("String Test", Integer.class, converter.convert(Class.class, "java.lang.Integer"));
@@ -101,7 +101,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefault() {
 
-        final Converter<Class> converter = new ClassConverter(Object.class);
+        final Converter<Class<?>> converter = new ClassConverter(Object.class);
 
         assertEquals("Invalid Test", Object.class, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test", Object.class, converter.convert(Class.class, null));
@@ -112,7 +112,7 @@ public class ClassConverterTestCase extends TestCase {
      */
     public void testConvertToClassDefaultNull() {
 
-        final Converter<Class> converter = new ClassConverter(null);
+        final Converter<Class<?>> converter = new ClassConverter(null);
 
         assertEquals("Invalid Test", null, converter.convert(Class.class, Integer.valueOf(6)));
         assertEquals("Null Test", null, converter.convert(Class.class, null));
@@ -122,7 +122,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Conversion to String
      */
     public void testConvertToString() {
-        final Converter converter = new ClassConverter();
+        final Converter<Class<?>> converter = new ClassConverter();
 
         assertEquals("Class Test", "java.lang.Integer", converter.convert(String.class, Integer.class));
         assertEquals("Value Test", "foo", converter.convert(String.class, "foo"));
@@ -134,7 +134,7 @@ public class ClassConverterTestCase extends TestCase {
      * Test Invalid
      */
     public void testInvalid() {
-        final Converter converter = new ClassConverter();
+        final Converter<Class<?>> converter = new ClassConverter();
 
         // Test invalid class name
         try {
@@ -149,7 +149,7 @@ public class ClassConverterTestCase extends TestCase {
      * Tries a conversion to an unsupported target type.
      */
     public void testUnsupportedTargetType() {
-        final Converter converter = new ClassConverter();
+        final Converter<Class<?>> converter = new ClassConverter();
         try {
             converter.convert(Integer.class, getClass().getName());
             fail("Invalid target class not detected!");

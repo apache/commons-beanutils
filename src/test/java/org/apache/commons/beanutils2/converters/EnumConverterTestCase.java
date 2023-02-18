@@ -37,7 +37,7 @@ public class EnumConverterTestCase extends TestCase {
         return new TestSuite(EnumConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<Enum<PizzaStatus>> converter;
 
     public EnumConverterTestCase(final String name) {
         super(name);
@@ -47,8 +47,8 @@ public class EnumConverterTestCase extends TestCase {
         return Enum.class;
     }
 
-    protected Converter makeConverter() {
-        return new EnumConverter();
+    protected Converter<Enum<PizzaStatus>> makeConverter() {
+        return new EnumConverter<>();
     }
 
     @Override

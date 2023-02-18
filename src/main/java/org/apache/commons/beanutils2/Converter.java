@@ -30,7 +30,7 @@ package org.apache.commons.beanutils2;
  * non-thread-safe if the application using them is single-threaded. However
  * it is recommended that they be written in a thread-safe manner anyway.</p>
  *
- * @param <T> the desired result type.
+ * @param <T> the convert type.
  * @since 1.3
  */
 public interface Converter<T> {
@@ -39,6 +39,7 @@ public interface Converter<T> {
      * Convert the specified input object into an output object of the
      * specified type.
      *
+     * @param <R> the result type.
      * @param type Data type to which this value should be converted
      * @param value The input value to be converted
      * @return The converted value
@@ -46,6 +47,6 @@ public interface Converter<T> {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
-    T convert(Class<T> type, Object value);
+    <R> R convert(Class<R> type, Object value);
 
 }

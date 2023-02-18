@@ -156,13 +156,13 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * successfully and no default is specified.
      */
     @Override
-    public D convert(final Class<D> type, Object value) {
+    public <R> R convert(final Class<R> type, Object value) {
         if (type == null) {
             return convertToDefaultType(value);
         }
 
         Class<?> sourceType  = value == null ? null : value.getClass();
-        final Class<D> targetType  = ConvertUtils.primitiveToWrapper(type);
+        final Class<R> targetType  = ConvertUtils.primitiveToWrapper(type);
 
         if (log().isDebugEnabled()) {
             log().debug("Converting"

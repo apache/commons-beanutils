@@ -34,7 +34,7 @@ public class YearConverterTestCase extends TestCase {
         return new TestSuite(YearConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<Year> converter = null;
 
     public YearConverterTestCase(final String name) {
         super(name);
@@ -44,7 +44,7 @@ public class YearConverterTestCase extends TestCase {
         return Year.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<Year> makeConverter() {
         return new YearConverter();
     }
 

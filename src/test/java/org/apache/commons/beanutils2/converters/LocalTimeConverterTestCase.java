@@ -34,7 +34,7 @@ public class LocalTimeConverterTestCase extends TestCase {
         return new TestSuite(LocalTimeConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<LocalTime> converter;
 
     public LocalTimeConverterTestCase(final String name) {
         super(name);
@@ -44,7 +44,7 @@ public class LocalTimeConverterTestCase extends TestCase {
         return LocalTime.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<LocalTime> makeConverter() {
         return new LocalTimeConverter();
     }
 

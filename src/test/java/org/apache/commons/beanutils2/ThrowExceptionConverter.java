@@ -24,7 +24,7 @@ package org.apache.commons.beanutils2;
 public class ThrowExceptionConverter implements Converter<Void> {
 
     @Override
-    public Void convert(final Class<Void> type, final Object value) {
+    public <R> R convert(final Class<R> type, final Object value) {
         throw new PassTestException();
     }
 }

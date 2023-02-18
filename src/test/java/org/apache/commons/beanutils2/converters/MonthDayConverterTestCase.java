@@ -35,7 +35,7 @@ public class MonthDayConverterTestCase extends TestCase {
         return new TestSuite(MonthDayConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<MonthDay> converter;
 
     public MonthDayConverterTestCase(final String name) {
         super(name);
@@ -45,7 +45,7 @@ public class MonthDayConverterTestCase extends TestCase {
         return MonthDay.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<MonthDay> makeConverter() {
         return new MonthDayConverter();
     }
 

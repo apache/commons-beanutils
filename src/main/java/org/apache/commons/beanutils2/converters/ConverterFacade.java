@@ -57,7 +57,7 @@ public final class ConverterFacade<T> implements Converter<T> {
      * @return The converted value.
      */
     @Override
-    public T convert(final Class<T> type, final Object value) {
+    public <R> R convert(final Class<R> type, final Object value) {
         return converter.convert(type, value);
     }
 

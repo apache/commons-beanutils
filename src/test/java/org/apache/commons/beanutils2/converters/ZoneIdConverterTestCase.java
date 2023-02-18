@@ -35,7 +35,7 @@ public class ZoneIdConverterTestCase extends TestCase {
         return new TestSuite(ZoneIdConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<ZoneId> converter;
 
     public ZoneIdConverterTestCase(final String name) {
         super(name);
@@ -45,7 +45,7 @@ public class ZoneIdConverterTestCase extends TestCase {
         return ZoneId.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<ZoneId> makeConverter() {
         return new ZoneIdConverter();
     }
 

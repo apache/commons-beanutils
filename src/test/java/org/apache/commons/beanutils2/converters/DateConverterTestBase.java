@@ -106,11 +106,11 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param converter The converter to use
      * @param value     The value to convert
      */
-    protected void invalidConversion(final Converter converter, final Object value) {
+    protected void invalidConversion(final Converter<T> converter, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
-            final Object result = converter.convert(getExpectedType(), value);
+            final T result = converter.convert(getExpectedType(), value);
             fail(msg + ", expected ConversionException, but result = '" + result + "'");
         } catch (final ConversionException ex) {
             // Expected Result
@@ -139,11 +139,11 @@ public abstract class DateConverterTestBase<T> extends TestCase {
      * @param expected  The expected result
      * @param value     The value to convert
      */
-    protected void stringConversion(final Converter converter, final String expected, final Object value) {
+    protected void stringConversion(final Converter<T> converter, final String expected, final Object value) {
         final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
         try {
-            final Object result = converter.convert(String.class, value);
+            final String result = converter.convert(String.class, value);
             final Class<?> resultType = result == null ? null : result.getClass();
             final Class<?> expectType = expected == null ? null : expected.getClass();
             assertEquals("TYPE " + msg, expectType, resultType);

@@ -34,7 +34,7 @@ public class DurationConverterTestCase extends TestCase {
         return new TestSuite(DurationConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<Duration> converter;
 
     public DurationConverterTestCase(final String name) {
         super(name);
@@ -44,7 +44,7 @@ public class DurationConverterTestCase extends TestCase {
         return Duration.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<Duration> makeConverter() {
         return new DurationConverter();
     }
 

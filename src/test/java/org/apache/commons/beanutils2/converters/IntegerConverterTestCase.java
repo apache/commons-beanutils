@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 
@@ -31,7 +33,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
         return new TestSuite(IntegerConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<Integer> converter;
 
     public IntegerConverterTestCase(final String name) {
         super(name);
@@ -43,7 +45,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
     }
 
     @Override
-    protected NumberConverter makeConverter() {
+    protected NumberConverter<Integer> makeConverter() {
         return new IntegerConverter();
     }
 
@@ -70,7 +72,7 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        final Converter converter = makeConverter();
+        final Converter<Integer> converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
         final Long min = Long.valueOf(Integer.MIN_VALUE);
@@ -104,14 +106,11 @@ public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
     /**
      * Tests whether an invalid default object causes an exception.
      */
+    @SuppressWarnings("unchecked") // raw to test throwing
     public void testInvalidDefaultObject() {
+        @SuppressWarnings("rawtypes") // raw to test throwing
         final NumberConverter converter = makeConverter();
-        try {
-            converter.setDefaultValue("notANumber");
-            fail("Invalid default value not detected!");
-        } catch (final ConversionException cex) {
-            // expected result
-        }
+        assertThrows(ConversionException.class, () -> converter.setDefaultValue("notANumber"), "Invalid default value not detected!");
     }
 
     public void testSimpleConversion() throws Exception {

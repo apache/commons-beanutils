@@ -35,7 +35,7 @@ public class URIConverterTestCase extends TestCase {
         return new TestSuite(URIConverterTestCase.class);
     }
 
-    private Converter converter = null;
+    private Converter<URI> converter = null;
 
     public URIConverterTestCase(final String name) {
         super(name);
@@ -45,7 +45,7 @@ public class URIConverterTestCase extends TestCase {
         return URI.class;
     }
 
-    protected Converter makeConverter() {
+    protected Converter<URI> makeConverter() {
         return new URIConverter();
     }
 

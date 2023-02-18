@@ -109,10 +109,10 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @return the result cast to the target class
      * @throws ConversionException if the result object is not compatible with the target type
      */
-    private static <T> T checkConversionResult(final Class<T> type, final T result) {
+    private static <R> R checkConversionResult(final Class<R> type, final Object result) {
         if (type == null) {
-            // in this case we cannot do much; the result object is returned
-            return result;
+            // In this case we cannot do much: The result object is returned.
+            return (R) result;
         }
 
         if (result == null) {
@@ -166,7 +166,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
-    public T convert(final Class<T> type, final Object value) {
+    public <R> R convert(final Class<R> type, final Object value) {
         return convert(type, value, null);
     }
 
@@ -181,8 +181,8 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @throws ConversionException if conversion cannot be performed successfully
      */
     @Override
-    public T convert(final Class<T> type, final Object value, final String pattern) {
-        final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
+    public <R> R convert(final Class<R> type, final Object value, final String pattern) {
+        final Class<R> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {
             if (useDefault) {
                 return getDefaultAs(targetType);
@@ -242,7 +242,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
      * @return the default value in the given target type
      * @throws ConversionException if the default object is not compatible with the target type
      */
-    private T getDefaultAs(final Class<T> type) {
+    private <R> R getDefaultAs(final Class<R> type) {
         return checkConversionResult(type, defaultValue);
     }
 

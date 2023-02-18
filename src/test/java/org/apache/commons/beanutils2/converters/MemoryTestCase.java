@@ -125,7 +125,7 @@ public class MemoryTestCase {
                 // After registering a custom converter, lookup should return
                 // it back to us. We'll try this lookup again with a different
                 // context-classloader set, and shouldn't see it
-                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+                final Converter<Float> componentConverter = ConvertUtils.lookup(Float.TYPE);
                 assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
 
                 newFloatConverter = null;
@@ -134,13 +134,13 @@ public class MemoryTestCase {
 
             // Because the context classloader has been reset, we shouldn't
             // see the custom registered converter here...
-            final Converter sharedConverter = ConvertUtils.lookup(Float.TYPE);
+            final Converter<Float> sharedConverter = ConvertUtils.lookup(Float.TYPE);
             assertFalse(sharedConverter.getClass().getClassLoader() == componentLoader);
 
             // and here we should see it again
             Thread.currentThread().setContextClassLoader(componentLoader);
             {
-                final Converter componentConverter = ConvertUtils.lookup(Float.TYPE);
+                final Converter<Float> componentConverter = ConvertUtils.lookup(Float.TYPE);
                 assertTrue(componentConverter.getClass().getClassLoader() == componentLoader);
             }
             Thread.currentThread().setContextClassLoader(origContextClassLoader);
@@ -191,8 +191,8 @@ public class MemoryTestCase {
             final ClassLoader componentLoader2 = new ClassLoader() {
             };
 
-            final Converter origFloatConverter = ConvertUtils.lookup(Float.TYPE);
-            final Converter floatConverter1 = new FloatConverter();
+            final Converter<Float> origFloatConverter = ConvertUtils.lookup(Float.TYPE);
+            final Converter<Float> floatConverter1 = new FloatConverter();
 
             // Emulate the container invoking a component #1, and the component
             // registering a custom converter instance whose class is

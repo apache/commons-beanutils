@@ -30,7 +30,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
         return new TestSuite(ShortConverterTestCase.class);
     }
 
-    private ShortConverter converter = null;
+    private ShortConverter converter;
 
     public ShortConverterTestCase(final String name) {
         super(name);
@@ -69,7 +69,7 @@ public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
      * Test Invalid Amounts (too big/small)
      */
     public void testInvalidAmount() {
-        final Converter converter = makeConverter();
+        final Converter<Short> converter = makeConverter();
         final Class<?> clazz = Short.class;
 
         final Long min = Long.valueOf(Short.MIN_VALUE);

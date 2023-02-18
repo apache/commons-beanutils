@@ -53,22 +53,22 @@ public class ClassReloader extends ClassLoader {
     public Class<?> reload(final Class<?> clazz) throws FileNotFoundException, IOException {
         final String className = clazz.getName();
         final String classFile = className.replace('.', '/') + ".class";
-        final InputStream classStream = getParent().getResourceAsStream(classFile);
-
-        if (classStream == null) {
-            throw new FileNotFoundException(classFile);
-        }
-
-        final byte[] buf = new byte[1024];
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        for (;;) {
-            final int bytesRead = classStream.read(buf);
-            if (bytesRead == -1) {
-                break;
+        try (InputStream classStream = getParent().getResourceAsStream(classFile)) {
+
+            if (classStream == null) {
+                throw new FileNotFoundException(classFile);
             }
-            baos.write(buf, 0, bytesRead);
+
+            final byte[] buf = new byte[1024];
+            for (;;) {
+                final int bytesRead = classStream.read(buf);
+                if (bytesRead == -1) {
+                    break;
+                }
+                baos.write(buf, 0, bytesRead);
+            }
         }
-        classStream.close();
 
         final byte[] classData = baos.toByteArray();
 

@@ -104,7 +104,7 @@ public class SqlDateConverterTestCase extends DateConverterTestBase<Date> {
     public void testDefaultTypeToStringConvert() {
 
         // Create & Configure the Converter
-        final DateTimeConverter converter = makeConverter();
+        final DateTimeConverter<Date> converter = makeConverter();
         converter.setUseLocaleFormat(false);
 
         // Valid String --> java.sql.Date Conversion
