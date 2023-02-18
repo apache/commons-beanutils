@@ -65,7 +65,7 @@ public class ShortLocaleConverter extends DecimalLocaleConverter<Short> {
      * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      * @throws ParseException                                    if an error occurs parsing a String to a Number
      * @since 1.8.0
      */

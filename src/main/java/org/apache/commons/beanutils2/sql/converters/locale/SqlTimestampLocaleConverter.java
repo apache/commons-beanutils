@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter;
 
 /**
@@ -62,7 +63,7 @@ public class SqlTimestampLocaleConverter extends DateLocaleConverter<Timestamp> 
      * @param value   The input object to be converted
      * @param pattern The pattern is used for the conversion
      * @return The converted value
-     * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      * @throws ParseException                                    if an error occurs parsing a String to a Number
      */
     @Override

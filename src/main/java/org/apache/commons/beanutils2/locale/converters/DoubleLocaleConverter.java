@@ -20,6 +20,8 @@ package org.apache.commons.beanutils2.locale.converters;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.beanutils2.ConversionException;
+
 /**
  * Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@link Double}
  * object, optionally using a default value or throwing a {@link org.apache.commons.beanutils2.ConversionException} if a conversion error occurs.
@@ -58,7 +60,7 @@ public class DoubleLocaleConverter extends DecimalLocaleConverter<Double> {
      * @param pattern The pattern is used for the conversion
      * @return The converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed successfully
+     * @throws ConversionException if conversion cannot be performed successfully
      * @throws ParseException                                    if an error occurs parsing a String to a Number
      */
     @Override

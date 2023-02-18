@@ -17,6 +17,7 @@
 
 package org.apache.commons.beanutils2.locale;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
 
 /**
@@ -36,7 +37,7 @@ public interface LocaleConverter<T> extends Converter<T> {
      * @param value   The input value to be converted
      * @param pattern The user-defined pattern is used for the input object formatting.
      * @return The converted value
-     * @throws org.apache.commons.beanutils2.ConversionException if conversion cannot be performed successfully or if the target type is not supported
+     * @throws ConversionException if conversion cannot be performed successfully or if the target type is not supported
      */
     <R> R convert(Class<R> type, Object value, String pattern);
 }

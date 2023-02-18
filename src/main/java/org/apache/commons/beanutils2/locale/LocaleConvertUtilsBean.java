@@ -23,6 +23,7 @@ import java.math.BigInteger;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.WeakFastHashMap;
 import org.apache.commons.beanutils2.locale.converters.BigDecimalLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter;
@@ -123,7 +124,7 @@ public class LocaleConvertUtilsBean {
      * @param value The Value to be converted
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public String convert(final Object value) {
@@ -139,7 +140,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public String convert(final Object value, final Locale locale, final String pattern) {
@@ -155,7 +156,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern       The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public String convert(final Object value, final String pattern) {
@@ -170,7 +171,7 @@ public class LocaleConvertUtilsBean {
      * @param clazz The Data type to which this value should be converted.
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz) {
@@ -188,7 +189,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final Locale locale, final String pattern) {
@@ -222,7 +223,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public Object convert(final String value, final Class<?> clazz, final String pattern) {
@@ -237,7 +238,7 @@ public class LocaleConvertUtilsBean {
         * @param clazz Java array or element class to be converted to
         * @return the converted value
         *
-         * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+         * @throws ConversionException if thrown by an
          * underlying Converter
         */
        public Object convert(final String[] values, final Class<?> clazz) {
@@ -255,7 +256,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final Locale locale, final String pattern) {
@@ -286,7 +287,7 @@ public class LocaleConvertUtilsBean {
      * @param pattern The conversion pattern
      * @return the converted value
      *
-     * @throws org.apache.commons.beanutils2.ConversionException if thrown by an
+     * @throws ConversionException if thrown by an
      * underlying Converter
      */
     public <T> T[] convert(final String[] values, final Class<T> clazz, final String pattern) {
