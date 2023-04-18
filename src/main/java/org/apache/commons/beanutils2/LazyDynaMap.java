@@ -373,7 +373,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             // The new map is used as properties map
             Map<String, Object> temp = getMap().getClass().newInstance();
             newMap = temp;
-        } catch(final Exception ex) {
+        } catch (final Exception ex) {
             newMap = newMap();
         }
 
