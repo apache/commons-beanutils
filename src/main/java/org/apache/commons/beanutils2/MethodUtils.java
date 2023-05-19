@@ -102,8 +102,8 @@ public class MethodUtils {
         }
         /**
          * Returns the string length of method name. I.e. if the
-         * hashcodes are different, the objects are different. If the
-         * hashcodes are the same, need to use the equals method to
+         * hash codes are different, the objects are different. If the
+         * hash codes are the same, need to use the equals method to
          * determine equality.
          * @return the string length of method name.
          */

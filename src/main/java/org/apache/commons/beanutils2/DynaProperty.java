@@ -172,7 +172,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * @return the hashcode for this dyna property
+     * @return the hash code for this dyna property
      * @see Object#hashCode
      * @since 1.8.0
      */
