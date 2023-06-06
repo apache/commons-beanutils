@@ -88,12 +88,12 @@ public class BeanUtils {
      *  converter has not been registered.
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @see BeanUtilsBean#copyProperties
+     * @see BeanUtilsBean#copyProperties(Object, Object, String...)
      */
     public static void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
 
-        BeanUtilsBean.getInstance().copyProperties(dest, orig);
+        copyProperties(dest, orig);
     }
 
 
