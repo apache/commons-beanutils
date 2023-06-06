@@ -163,6 +163,17 @@ public class BeanUtilsBenchCase extends TestCase {
         stopMillis = System.currentTimeMillis();
         System.err.println("BU.copyProperties(dyna,bean), count=" + counter + ", time=" + (stopMillis - startMillis));
 
+        final String[] ignore =  new String[] { "booleanProperty", "floatProperty", null, ""};
+
+        startMillis = System.currentTimeMillis();
+        for (long i = 0; i < counter; i++) {
+            bu.copyProperties(outDyna, inBean, ignore);
+        }
+        stopMillis = System.currentTimeMillis();
+
+        System.err.println("BU.copyProperties(dyna,bean, ignore), count=" + counter +
+                ", time=" + (stopMillis - startMillis));
+                
     }
 
     // Time copyProperties() from a DynaBean
