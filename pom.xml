@@ -367,7 +367,6 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <forkMode>pertest</forkMode>
-          <reuseForks>false</reuseForks>
           <!-- limit memory size see BEANUTILS-291
                      ..also include ${argLine} from jacoco-maven-plugin
           -->

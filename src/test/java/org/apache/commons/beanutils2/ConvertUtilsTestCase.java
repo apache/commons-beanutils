@@ -85,7 +85,7 @@ public class ConvertUtilsTestCase extends TestCase {
      */
     @Override
     public void setUp() {
-
+        BeanUtilsBean.setInstance(new BeanUtilsBean());
         ConvertUtils.deregister();
 
     }
