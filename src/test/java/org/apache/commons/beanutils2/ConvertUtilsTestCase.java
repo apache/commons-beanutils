@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.DateConverter;
+import org.apache.commons.lang3.ArrayUtils;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -314,7 +315,7 @@ public class ConvertUtilsTestCase extends TestCase {
 
         final String[] values1 = { "10", "20", "30" };
         Object value = ConvertUtils.convert(values1, Integer.TYPE);
-        final int[] shape = {};
+        final int[] shape = ArrayUtils.EMPTY_INT_ARRAY;
         assertEquals(shape.getClass(), value.getClass());
         final int[] results1 = (int[]) value;
         assertEquals(results1[0], 10);
