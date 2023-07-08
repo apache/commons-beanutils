@@ -331,10 +331,10 @@ public class DynaProperty implements Serializable {
      * @throws IOException if the object can't be written
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
-        writeAnyClass(this.type,out);
+        writeAnyClass(this.type, out);
 
         if (isMapped() || isIndexed()) {
-            writeAnyClass(this.contentType,out);
+            writeAnyClass(this.contentType, out);
         }
 
         // write out other values
