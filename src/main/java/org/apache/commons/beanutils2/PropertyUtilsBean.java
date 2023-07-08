@@ -478,7 +478,7 @@ public class PropertyUtilsBean {
                 final Object[] subscript = new Object[1];
                 subscript[0] = Integer.valueOf(index);
                 try {
-                    return invokeMethod(readMethod,bean, subscript);
+                    return invokeMethod(readMethod, bean, subscript);
                 } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             IndexOutOfBoundsException) {
