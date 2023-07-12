@@ -23,7 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
- * <p> Utility reflection methods focused on constructors, modeled after {@link MethodUtils}. </p>
+ * <p>Utility reflection methods focused on constructors, modeled after {@link MethodUtils}.</p>
  *
  * <h2>Known Limitations</h2>
  * <h3>Accessing Public Constructors In A Default Access Superclass</h3>

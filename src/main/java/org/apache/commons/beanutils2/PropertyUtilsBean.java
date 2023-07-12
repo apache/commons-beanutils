@@ -199,7 +199,7 @@ public class PropertyUtilsBean {
      * (for example, nested ones) will not be copied.</p>
      *
      * <p>Note, that this method will not copy a List to a List, or an Object[]
-     * to an Object[]. It's specifically for copying JavaBean properties. </p>
+     * to an Object[]. It's specifically for copying JavaBean properties.</p>
      *
      * @param dest Destination bean whose properties are modified
      * @param orig Origin bean whose properties are retrieved

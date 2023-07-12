@@ -30,7 +30,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p> Utility reflection methods focused on methods in general rather than properties in particular. </p>
+ * <p>Utility reflection methods focused on methods in general rather than properties in particular.</p>
  *
  * <h2>Known Limitations</h2>
  * <h3>Accessing Public Methods In A Default Access Superclass</h3>
