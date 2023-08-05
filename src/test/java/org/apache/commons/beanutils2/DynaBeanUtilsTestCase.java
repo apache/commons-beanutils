@@ -661,12 +661,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
             String[] arr = BeanUtils.getArrayProperty(bean, "stringArray");
             final String[] comp = (String[]) bean.get("stringArray");
 
-            assertTrue("String array length = " + comp.length, comp.length == arr.length);
+            assertEquals("String array length = " + comp.length, comp.length, arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
             final int[] iarr = (int[]) bean.get("intArray");
 
-            assertTrue("String array length = " + iarr.length, iarr.length == arr.length);
+            assertEquals("String array length = " + iarr.length, iarr.length, arr.length);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -685,7 +685,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             final String val = BeanUtils.getProperty(bean, "nested.intIndexed[2]");
             final String comp = String.valueOf(bean.get("intIndexed", 2));
 
-            assertTrue("nested.intIndexed[2] == " + comp, val.equals(comp));
+            assertEquals("nested.intIndexed[2] == " + comp, val, comp);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -702,11 +702,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         try {
             String val = BeanUtils.getIndexedProperty(bean, "intIndexed[3]");
             String comp = String.valueOf(bean.get("intIndexed", 3));
-            assertTrue("intIndexed[3] == " + comp, val.equals(comp));
+            assertEquals("intIndexed[3] == " + comp, val, comp);
 
             val = BeanUtils.getIndexedProperty(bean, "stringIndexed[3]");
             comp = (String) bean.get("stringIndexed", 3);
-            assertTrue("stringIndexed[3] == " + comp, val.equals(comp));
+            assertEquals("stringIndexed[3] == " + comp, val, comp);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -724,12 +724,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
             String val = BeanUtils.getIndexedProperty(bean, "intIndexed", 3);
             String comp = String.valueOf(bean.get("intIndexed", 3));
 
-            assertTrue("intIndexed,3 == " + comp, val.equals(comp));
+            assertEquals("intIndexed,3 == " + comp, val, comp);
 
             val = BeanUtils.getIndexedProperty(bean, "stringIndexed", 3);
             comp = (String) bean.get("stringIndexed", 3);
 
-            assertTrue("stringIndexed,3 == " + comp, val.equals(comp));
+            assertEquals("stringIndexed,3 == " + comp, val, comp);
 
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
@@ -747,7 +747,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         try {
             final String val = BeanUtils.getNestedProperty(bean, "nested.stringProperty");
             final String comp = nested.getStringProperty();
-            assertTrue("nested.StringProperty == " + comp, val.equals(comp));
+            assertEquals("nested.StringProperty == " + comp, val, comp);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -765,7 +765,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
             final String val = BeanUtils.getSimpleProperty(bean, "shortProperty");
             final String comp = String.valueOf(bean.get("shortProperty"));
 
-            assertTrue("shortProperty == " + comp, val.equals(comp));
+            assertEquals("shortProperty == " + comp, val, comp);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -1000,12 +1000,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
         assertNotNull("stringArray is not null", newValue);
         assertTrue("stringArray of correct type", newValue instanceof String[]);
         assertEquals("stringArray length", 5, ((String[]) newValue).length);
-        assertTrue("stringArray[2] is null", ((String[]) newValue)[2] == null);
+        assertNull("stringArray[2] is null", ((String[]) newValue)[2]);
         PropertyUtils.setProperty(bean, "stringArray", oldValue);
 
         // Value into scalar
         BeanUtils.setProperty(bean, "stringProperty", null);
-        assertTrue("stringProperty is now null", BeanUtils.getProperty(bean, "stringProperty") == null);
+        assertNull("stringProperty is now null", BeanUtils.getProperty(bean, "stringProperty"));
 
     }
 

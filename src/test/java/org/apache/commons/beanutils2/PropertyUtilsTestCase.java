@@ -1334,7 +1334,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final Object value = PropertyUtils.getNestedProperty(bean, "nested.booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value", ((Boolean) value).booleanValue() == bean.getNested().getBooleanProperty());
+            assertEquals("Got correct value", ((Boolean) value).booleanValue(), bean.getNested().getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1858,7 +1858,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final Object value = PropertyUtils.getSimpleProperty(bean, "booleanProperty");
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
-            assertTrue("Got correct value", ((Boolean) value).booleanValue() == bean.getBooleanProperty());
+            assertEquals("Got correct value", ((Boolean) value).booleanValue(), bean.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -3247,7 +3247,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean oldValue = bean.getNested().getBooleanProperty();
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean, "nested.booleanProperty", Boolean.valueOf(newValue));
-            assertTrue("Matched new value", newValue == bean.getNested().getBooleanProperty());
+            assertEquals("Matched new value", newValue, bean.getNested().getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -3537,7 +3537,7 @@ public class PropertyUtilsTestCase extends TestCase {
             final boolean oldValue = bean.getBooleanProperty();
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean, "booleanProperty", Boolean.valueOf(newValue));
-            assertTrue("Matched new value", newValue == bean.getBooleanProperty());
+            assertEquals("Matched new value", newValue, bean.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {

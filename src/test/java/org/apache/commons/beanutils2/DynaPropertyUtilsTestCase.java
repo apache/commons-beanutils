@@ -778,7 +778,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             assertNotNull("Got a value", value);
             assertTrue("Got correct type", value instanceof Boolean);
             final TestBean nested = (TestBean) bean.get("nested");
-            assertTrue("Got correct value", ((Boolean) value).booleanValue() == nested.getBooleanProperty());
+            assertEquals("Got correct value", ((Boolean) value).booleanValue(), nested.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1696,7 +1696,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final boolean oldValue = nested.getBooleanProperty();
             final boolean newValue = !oldValue;
             PropertyUtils.setNestedProperty(bean, "nested.booleanProperty", Boolean.valueOf(newValue));
-            assertTrue("Matched new value", newValue == nested.getBooleanProperty());
+            assertEquals("Matched new value", newValue, nested.getBooleanProperty());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {
@@ -1941,7 +1941,7 @@ public class DynaPropertyUtilsTestCase extends TestCase {
             final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
             PropertyUtils.setSimpleProperty(bean, "booleanProperty", Boolean.valueOf(newValue));
-            assertTrue("Matched new value", newValue == ((Boolean) bean.get("booleanProperty")).booleanValue());
+            assertEquals("Matched new value", newValue, ((Boolean) bean.get("booleanProperty")).booleanValue());
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final IllegalArgumentException e) {

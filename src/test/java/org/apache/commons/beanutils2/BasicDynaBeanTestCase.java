@@ -752,7 +752,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final boolean oldValue = ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
             bean.set("booleanProperty", Boolean.valueOf(newValue));
-            assertTrue("Matched new value", newValue == ((Boolean) bean.get("booleanProperty")).booleanValue());
+            assertEquals("Matched new value", newValue, ((Boolean) bean.get("booleanProperty")).booleanValue());
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
