@@ -77,7 +77,7 @@ import org.apache.commons.beanutils2.DynaBean;
  * </pre>
  *
  */
-public class ResultSetDynaClass extends JDBCDynaClass {
+public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 
     private static final long serialVersionUID = 1L;
 

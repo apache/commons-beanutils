@@ -63,7 +63,7 @@ import org.apache.commons.beanutils2.DynaProperty;
  * Java-based application components.
  * </p>
  */
-public class RowSetDynaClass extends JDBCDynaClass {
+public class RowSetDynaClass extends AbstractJdbcDynaClass {
 
     private static final long serialVersionUID = 1L;
 

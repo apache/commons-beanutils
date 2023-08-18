@@ -37,9 +37,8 @@ import org.apache.commons.beanutils2.DynaProperty;
  * <p>
  * Provides common logic for JDBC implementations of {@link DynaClass}.
  * </p>
- *
  */
-abstract class JDBCDynaClass implements DynaClass, Serializable {
+abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
 
     private static final long serialVersionUID = 1L;
 
