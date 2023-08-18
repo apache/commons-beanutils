@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the ZonedDateTimeConverter class.
  */
-public class ZonedDateTimeConverterTestCase extends DateConverterTestBase<ZonedDateTime> {
+public class ZonedDateTimeConverterTestCase extends AbstractDateConverterTest<ZonedDateTime> {
 
     /**
      * Create Test Suite

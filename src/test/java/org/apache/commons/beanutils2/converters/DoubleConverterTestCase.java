@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the DoubleConverter class.
  */
-public class DoubleConverterTestCase extends NumberConverterTestBase<Double> {
+public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double> {
 
     public static TestSuite suite() {
         return new TestSuite(DoubleConverterTestCase.class);

@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the LocalDateConverter class.
  */
-public class LocalDateConverterTestCase extends DateConverterTestBase<LocalDate> {
+public class LocalDateConverterTestCase extends AbstractDateConverterTest<LocalDate> {
 
     /**
      * Create Test Suite

@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the FloatConverter class.
  */
-public class FloatConverterTestCase extends NumberConverterTestBase<Float> {
+public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
 
     public static TestSuite suite() {
         return new TestSuite(FloatConverterTestCase.class);

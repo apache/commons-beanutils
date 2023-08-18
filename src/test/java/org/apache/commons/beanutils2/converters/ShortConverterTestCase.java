@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the ShortConverter class.
  */
-public class ShortConverterTestCase extends NumberConverterTestBase<Short> {
+public class ShortConverterTestCase extends AbstractNumberConverterTest<Short> {
 
     public static TestSuite suite() {
         return new TestSuite(ShortConverterTestCase.class);

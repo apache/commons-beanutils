@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the OffsetDateTimeConverter class.
  */
-public class OffsetDateTimeConverterTestCase extends DateConverterTestBase<OffsetDateTime> {
+public class OffsetDateTimeConverterTestCase extends AbstractDateConverterTest<OffsetDateTime> {
 
     /**
      * Create Test Suite

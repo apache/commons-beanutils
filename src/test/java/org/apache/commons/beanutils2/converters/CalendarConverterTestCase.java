@@ -23,7 +23,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the CalendarConverter class.
  */
-public class CalendarConverterTestCase extends DateConverterTestBase<Calendar> {
+public class CalendarConverterTestCase extends AbstractDateConverterTest<Calendar> {
 
     /**
      * Create Test Suite

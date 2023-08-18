@@ -31,12 +31,12 @@ import junit.framework.TestCase;
  * Abstract base for &lt;Number&gt;Converter classes.
  * @param <T> Number type.
  */
-public abstract class NumberConverterTestBase<T extends Number> extends TestCase {
+public abstract class AbstractNumberConverterTest<T extends Number> extends TestCase {
 
     /** Test Number values */
     protected Number[] numbers = new Number[4];
 
-    public NumberConverterTestBase(final String name) {
+    public AbstractNumberConverterTest(final String name) {
         super(name);
     }
 

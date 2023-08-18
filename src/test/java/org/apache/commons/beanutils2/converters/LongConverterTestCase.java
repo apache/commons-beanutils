@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the LongConverter class.
  */
-public class LongConverterTestCase extends NumberConverterTestBase<Long> {
+public class LongConverterTestCase extends AbstractNumberConverterTest<Long> {
 
     public static TestSuite suite() {
         return new TestSuite(LongConverterTestCase.class);

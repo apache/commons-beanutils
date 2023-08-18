@@ -27,7 +27,7 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the IntegerConverter class.
  */
-public class IntegerConverterTestCase extends NumberConverterTestBase<Integer> {
+public class IntegerConverterTestCase extends AbstractNumberConverterTest<Integer> {
 
     public static TestSuite suite() {
         return new TestSuite(IntegerConverterTestCase.class);

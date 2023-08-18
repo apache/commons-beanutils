@@ -41,14 +41,14 @@ import junit.framework.TestCase;
  *
  * @param <T> type to test
  */
-public abstract class DateConverterTestBase<T> extends TestCase {
+public abstract class AbstractDateConverterTest<T> extends TestCase {
 
     /**
      * Constructs a new test case.
      *
      * @param name Name of the test
      */
-    public DateConverterTestBase(final String name) {
+    public AbstractDateConverterTest(final String name) {
         super(name);
     }
 
