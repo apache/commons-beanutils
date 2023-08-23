@@ -103,6 +103,16 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     /** Should the date conversion be lenient? */
     private final boolean isLenient;
 
+    /**
+     * Constructs a new instance.
+     *
+     * @param defaultValue default value.
+     * @param locale locale.
+     * @param pattern pattern.
+     * @param useDefault use the default.
+     * @param locPattern localized pattern.
+     * @param lenient leniency policy.
+     */
     protected DateLocaleConverter(final D defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern,
             final boolean lenient) {
         super(defaultValue, locale, pattern, useDefault, locPattern);
