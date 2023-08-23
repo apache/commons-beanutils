@@ -76,6 +76,15 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
         return (B) new Builder<>();
     }
 
+    /**
+     * Constructs a new instance.
+     *
+     * @param defaultValue default value.
+     * @param locale locale.
+     * @param pattern pattern.
+     * @param useDefault use the default.
+     * @param locPattern localized pattern.
+     */
     protected DecimalLocaleConverter(final T defaultValue, final Locale locale, final String pattern, final boolean useDefault, final boolean locPattern) {
         super(defaultValue, locale, pattern, useDefault, locPattern);
     }
