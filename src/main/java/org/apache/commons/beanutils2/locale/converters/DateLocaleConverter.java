@@ -65,6 +65,12 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
             return new DateLocaleConverter<>(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, lenient);
         }
 
+        /**
+         * Sets the leniency policy.
+         *
+         * @param lenient the leniency policy.
+         * @return this.
+         */
         public B setLenient(final boolean lenient) {
             this.lenient = lenient;
             return asThis();
