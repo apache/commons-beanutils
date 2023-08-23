@@ -67,28 +67,63 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
             return (B) this;
         }
 
+        /**
+         * Gets a newly built instance.
+         *
+         * @return a newly built instance.
+         */
         public abstract BaseLocaleConverter<?> get();
 
+        /**
+         * Sets the default value.
+         *
+         * @param defaultValue the default value.
+         * @return this
+         */
         public B setDefault(final T defaultValue) {
             this.defaultValue = defaultValue;
             return asThis();
         }
 
+        /**
+         * Sets the locale.
+         *
+         * @param locale the locale.
+         * @return this
+         */
         public B setLocale(final Locale locale) {
             this.locale = locale;
             return asThis();
         }
 
+        /**
+         * Sets the localized pattern.
+         *
+         * @param localizedPattern the localized pattern.
+         * @return this
+         */
         public B setLocalizedPattern(final boolean localizedPattern) {
             this.localizedPattern = localizedPattern;
             return asThis();
         }
 
+        /**
+         * Sets the pattern.
+         *
+         * @param pattern the pattern.
+         * @return this
+         */
         public B setPattern(final String pattern) {
             this.pattern = pattern;
             return asThis();
         }
 
+        /**
+         * Sets the use of default.
+         *
+         * @param useDefault the use of default.
+         * @return this
+         */
         public B setUseDefault(final boolean useDefault) {
             this.useDefault = useDefault;
             return asThis();
