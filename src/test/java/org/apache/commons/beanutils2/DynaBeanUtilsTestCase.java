@@ -827,7 +827,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         try {
 
             final HashMap<String, Object> map = new HashMap<>();
-            // int intArray[] = new int[] { 123, 456, 789 };
+            // int[] intArray = new int[] { 123, 456, 789 };
             final String[] intArrayIn = { "123", "456", "789" };
             map.put("intArray", intArrayIn);
             String[] stringArray = { "New String 0", "New String 1" };
