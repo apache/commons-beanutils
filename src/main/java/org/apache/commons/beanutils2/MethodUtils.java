@@ -159,7 +159,7 @@ public class MethodUtils {
      * objects and hence end up with different entries in the map.
      */
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
-            .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
+            .synchronizedMap(new WeakHashMap<>());
 
     /**
      * Add a method to the cache.
