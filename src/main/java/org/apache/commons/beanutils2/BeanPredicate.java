@@ -20,8 +20,8 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Predicate;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Predicate implementation that applies the given {@code Predicate}
@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BeanPredicate<T> implements Predicate<T> {
 
-    private final Log log = LogFactory.getLog(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     /** Name of the property whose value will be predicated */
     private String propertyName;

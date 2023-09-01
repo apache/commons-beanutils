@@ -25,8 +25,8 @@ import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base {@link Converter} implementation that provides the structure
@@ -101,7 +101,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     /**
      * Logging for this instance.
      */
-    private transient Log log;
+    private transient Logger log;
 
     /**
      * Should we return the default value on conversion errors?
@@ -405,18 +405,18 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Accessor method for Log instance.
+     * Accessor method for Logger instance.
      * <p>
-     * The Log instance variable is transient and
+     * The Logger instance variable is transient and
      * accessing it through this method ensures it
      * is re-initialized when this instance is
      * de-serialized.
      *
-     * @return The Log instance.
+     * @return The Logger instance.
      */
-    Log log() {
+    Logger log() {
         if (log == null) {
-            log = LogFactory.getLog(getClass());
+            log = LoggerFactory.getLogger(getClass());
         }
         return log;
     }

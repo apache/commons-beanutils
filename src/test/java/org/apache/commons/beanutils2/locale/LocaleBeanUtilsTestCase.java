@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.TestBean;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LocaleBeanUtilsTestCase {
 
-    private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocaleBeanUtilsTestCase.class);
 
     /**
      * Test setting a nested indexed property
@@ -43,7 +43,7 @@ public class LocaleBeanUtilsTestCase {
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intIndexed[1]", "123", null);
         } catch (final Throwable t) {
-            LOG.error(t);
+            LOG.error(t.getMessage(), t);
             fail("Threw " + t);
         }
         assertEquals(123, bean.getNested().getIntIndexed(1), "Check Set Value");
@@ -60,7 +60,7 @@ public class LocaleBeanUtilsTestCase {
         try {
             LocaleBeanUtils.setProperty(bean, "nested.intProperty", "123", null);
         } catch (final Throwable t) {
-            LOG.error(t);
+            LOG.error(t.getMessage(), t);
             fail("Threw " + t);
         }
         assertEquals(123, bean.getNested().getIntProperty(), "Check Set Value");

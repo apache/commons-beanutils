@@ -26,8 +26,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Utility reflection methods focused on methods in general rather than properties in particular.</p>
@@ -113,7 +113,7 @@ public class MethodUtils {
         }
     }
 
-    private static final Log LOG = LogFactory.getLog(MethodUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MethodUtils.class);
 
     /**
      * Only log warning about accessibility work around once.
@@ -480,7 +480,7 @@ public class MethodUtils {
                 // log some trace information
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("Found matching name:");
-                    LOG.trace(method2);
+                    LOG.trace(method2.toString());
                 }
 
                 // compare parameters

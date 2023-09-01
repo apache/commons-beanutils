@@ -20,8 +20,8 @@ package org.apache.commons.beanutils2;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -82,7 +82,7 @@ import org.apache.commons.logging.LogFactory;
 public class BeanPropertyValueChangeConsumer<T, V> implements Consumer<T> {
 
     /** For logging. Each subclass gets its own log instance. */
-    private final Log log = LogFactory.getLog(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
      * The name of the property which will be updated when this {@code Closure} executes.

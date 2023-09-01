@@ -22,8 +22,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -60,7 +60,7 @@ public class Jira339TestCase extends TestCase {
 
     }
 
-    private static final Log LOG = LogFactory.getLog(Jira339TestCase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Jira339TestCase.class);
 
     /**
      * Run the Test.
