@@ -26,8 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * <p>DynaBean which automatically adds properties to the {@code DynaClass}
@@ -127,7 +127,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
  /**
     * Commons Logging
     */
-    private static transient Log LOG = LogFactory.getLog(LazyDynaBean.class);
+    private static transient Logger LOG = LogManager.getLogger(LazyDynaBean.class);
 
     /** BigInteger Zero */
     protected static final BigInteger BigInteger_ZERO = new BigInteger("0");
@@ -701,9 +701,9 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /**
      * <p>Returns the {@code Log}.
      */
-    private Log logger() {
+    private Logger logger() {
         if (LOG == null) {
-            LOG = LogFactory.getLog(LazyDynaBean.class);
+            LOG = LogManager.getLogger(LazyDynaBean.class);
         }
         return LOG;
     }

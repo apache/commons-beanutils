@@ -22,8 +22,8 @@ import org.apache.commons.beanutils2.MethodUtils;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory;
 import org.apache.commons.beanutils2.bugs.other.Jira298BeanFactory.IX;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -34,7 +34,7 @@ import junit.framework.TestSuite;
  */
 public class Jira298TestCase extends TestCase {
 
-    private static final Log LOG = LogFactory.getLog(Jira298TestCase.class);
+    private static final Logger LOG = LogManager.getLogger(Jira298TestCase.class);
 
     /**
      * Run the Test.

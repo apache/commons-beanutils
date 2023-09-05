@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.beanutils2.TestBean;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LocaleBeanUtilsTestCase {
 
-    private static final Log LOG = LogFactory.getLog(LocaleBeanUtilsTestCase.class);
+    private static final Logger LOG = LogManager.getLogger(LocaleBeanUtilsTestCase.class);
 
     /**
      * Test setting a nested indexed property

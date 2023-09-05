@@ -28,8 +28,8 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.beanutils2.locale.LocaleConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
@@ -84,7 +84,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     private static final String DEFAULT_PATTERN_CHARS = DateLocaleConverter.initDefaultChars();
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(DateLocaleConverter.class);
+    private static final Logger LOG = LogManager.getLogger(DateLocaleConverter.class);
 
     /**
      * Constructs a new builder.
