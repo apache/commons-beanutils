@@ -107,6 +107,9 @@
       <action dev="ggregory" type="fix" due-to="Gary Gregory">
         Fix SpotBugs [ERROR] Medium: org.apache.commons.beanutils2.WrapDynaClass.getDynaProperties() may expose internal representation by returning WrapDynaClass.properties [org.apache.commons.beanutils2.WrapDynaClass] At WrapDynaClass.java:[line 172] EI_EXPOSE_REP.
       </action>
+      <action dev="ggregory" type="fix" due-to="Melloware, sebbASF, Gary Gregory, Michal Landsman">
+        Replace Commons Collections Test Framework 3.2.2 with 4.4 #40.
+      </action>
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Dependabot, Gary Gregory">
         Add github/codeql-action #118.
