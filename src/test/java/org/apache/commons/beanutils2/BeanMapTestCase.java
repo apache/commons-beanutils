@@ -22,8 +22,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
-import org.apache.commons.beanutils2.collections.AbstractMapTest;
-import org.apache.commons.beanutils2.collections.BulkTest;
+import org.apache.commons.collections4.AbstractMapTest;
+import org.apache.commons.collections4.BulkTest;
 
 import junit.framework.Test;
 import junit.textui.TestRunner;
