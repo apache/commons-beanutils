@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -62,12 +63,15 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         }
 
         @Override
-        public boolean equals(final Object o) {
-            if (!(o instanceof Map.Entry)) {
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof Map.Entry)) {
                 return false;
             }
-            final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-            return key.equals(e.getKey()) && (value == null ? e.getValue() == null : value.equals(e.getValue()));
+            final Map.Entry<? ,?> other = (Map.Entry<? ,?>) obj;
+            return Objects.equals(key, other.getKey()) && Objects.equals(value, other.getValue());
         }
 
         @Override
@@ -82,7 +86,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
 
         @Override
         public int hashCode() {
-            return key.hashCode() + (value == null ? 0 : value.hashCode());
+            return Objects.hash(key, value);
         }
 
         @Override
