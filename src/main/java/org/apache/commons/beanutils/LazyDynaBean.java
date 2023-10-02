@@ -765,7 +765,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     protected Object createDynaBeanProperty(final String name, final Class<?> type) {
         try {
-            return type.newInstance();
+            return type.getConstructor().newInstance();
         }
         catch (final Exception ex) {
             if (logger().isWarnEnabled()) {
