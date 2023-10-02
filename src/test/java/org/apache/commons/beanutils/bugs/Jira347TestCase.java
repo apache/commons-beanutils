@@ -53,7 +53,7 @@ public class Jira347TestCase extends TestCase {
         final String className = "org.apache.commons.beanutils.MappedPropertyTestBean";
         final ClassLoader loader = newClassLoader();
         final Class<?> beanClass    = loader.loadClass(className);
-        beanClass.newInstance();
+        beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only

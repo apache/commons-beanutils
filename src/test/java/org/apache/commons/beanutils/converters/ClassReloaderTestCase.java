@@ -63,8 +63,8 @@ public class ClassReloaderTestCase extends TestCase {
         assertTrue(sharedLoader != componentLoader);
 
         // verify that objects of these two types are not assignment-compatible
-        final Object obj1 = sharedClass.newInstance();
-        final Object obj2 = componentClass.newInstance();
+        final Object obj1 = sharedClass.getConstructor().newInstance();
+        final Object obj2 = componentClass.getConstructor().newInstance();
 
         assertTrue("Obj1 class incorrect", sharedClass.isInstance(obj1));
         assertFalse("Obj1 class incorrect", componentClass.isInstance(obj1));

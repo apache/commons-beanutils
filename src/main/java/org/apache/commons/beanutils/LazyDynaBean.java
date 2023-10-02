@@ -701,7 +701,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
                 indexedProperty = defaultIndexedProperty(name);
             } else {
                 try {
-                    indexedProperty = type.newInstance();
+                    indexedProperty = type.getConstructor().newInstance();
                 }
                 catch (final Exception ex) {
                     throw new IllegalArgumentException
@@ -740,7 +740,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         } else if (Map.class.isAssignableFrom(type)) {
             try {
-                mappedProperty = type.newInstance();
+                mappedProperty = type.getConstructor().newInstance();
             }
             catch (final Exception ex) {
                 throw new IllegalArgumentException
@@ -837,7 +837,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         try {
-            return type.newInstance();
+            return type.getConstructor().newInstance();
         }
         catch (final Exception ex) {
             if (logger().isWarnEnabled()) {

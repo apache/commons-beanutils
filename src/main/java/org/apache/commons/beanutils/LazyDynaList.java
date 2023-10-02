@@ -523,7 +523,7 @@ public class LazyDynaList extends ArrayList<Object> {
         // Create a new object of the specified type
         Object object = null;
         try {
-            object = elementType.newInstance();
+            object = elementType.getConstructor().newInstance();
         } catch (final Exception e) {
             throw new IllegalArgumentException("Error creating type: "
                            + elementType.getName() + " - " + e);

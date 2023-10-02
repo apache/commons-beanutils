@@ -177,7 +177,7 @@ public class BeanUtilsBean {
         if (bean instanceof DynaBean) {
             newBean = ((DynaBean) bean).getDynaClass().newInstance();
         } else {
-            newBean = bean.getClass().newInstance();
+            newBean = bean.getClass().getConstructor().newInstance();
         }
         getPropertyUtils().copyProperties(newBean, bean);
         return (newBean);

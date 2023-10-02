@@ -270,7 +270,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         Object newBean = null;
         final Class<? extends Object> beanClass = bean.getClass(); // Cannot throw Exception
         try {
-            newBean = beanClass.newInstance();
+            newBean = beanClass.getConstructor().newInstance();
         } catch (final Exception e) {
             // unable to instantiate
             final CloneNotSupportedException cnse = new CloneNotSupportedException
@@ -346,7 +346,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         Class<? extends Object> beanClass = null;
         try {
             beanClass = bean.getClass();
-            bean = beanClass.newInstance();
+            bean = beanClass.getConstructor().newInstance();
         }
         catch (final Exception e) {
             final UnsupportedOperationException uoe =

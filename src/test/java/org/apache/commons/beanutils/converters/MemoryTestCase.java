@@ -183,7 +183,7 @@ public class MemoryTestCase {
               // a class FloatConverter has been loaded from the component's
               // private classpath.
               final Class<?> newFloatConverterClass = componentLoader.reload(FloatConverter.class);
-              Object newFloatConverter = newFloatConverterClass.newInstance();
+              Object newFloatConverter = newFloatConverterClass.getConstructor().newInstance();
               assertTrue(newFloatConverter.getClass().getClassLoader() == componentLoader);
 
               // verify that this new object does implement the Converter type

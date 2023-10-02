@@ -275,7 +275,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
             @SuppressWarnings("unchecked")
             final
             // The new map is used as properties map
-            Map<String, Object> temp = getMap().getClass().newInstance();
+            Map<String, Object> temp = getMap().getClass().getConstructor().newInstance();
             newMap = temp;
         } catch(final Exception ex) {
             newMap = newMap();

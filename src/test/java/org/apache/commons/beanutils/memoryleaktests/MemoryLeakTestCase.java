@@ -61,7 +61,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
@@ -108,7 +108,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
@@ -160,7 +160,7 @@ public class MemoryLeakTestCase {
         final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
         final ClassLoader loader = newClassLoader();
         final Class<?> beanClass    = loader.loadClass(className);
-        final Object bean        = beanClass.newInstance();
+        final Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
@@ -206,7 +206,7 @@ public class MemoryLeakTestCase {
         final String className = "org.apache.commons.beanutils.memoryleaktests.pojotests.SomeMappedPojo";
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         // Sanity checks only
@@ -258,7 +258,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
@@ -305,7 +305,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
         // -----------------------------------------------------------------------------
 
@@ -358,7 +358,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
@@ -406,7 +406,7 @@ public class MemoryLeakTestCase {
         // The classLoader will go away only when these following variables are released
         ClassLoader loader = newClassLoader();
         Class<?> beanClass    = loader.loadClass(className);
-        Object bean        = beanClass.newInstance();
+        Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
         final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
