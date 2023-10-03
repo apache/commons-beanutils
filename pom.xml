@@ -53,8 +53,6 @@
     <!-- Commons Release Plugin -->
     <commons.bc.version>2.0.0-SNAPSHOT</commons.bc.version>
     <commons.release.isDistModule>true</commons.release.isDistModule>
-    <commons.releaseManagerName>Gary Gregory</commons.releaseManagerName>
-    <commons.releaseManagerKey>86fdc7e2a11262cb</commons.releaseManagerKey>
     <!-- Temp until commons-parent 59, fixes GHA build somehow? -->
     <commons.felix.version>5.1.9</commons.felix.version>
     <commons.biz.aQute.bndlib.version>6.4.1</commons.biz.aQute.bndlib.version>
