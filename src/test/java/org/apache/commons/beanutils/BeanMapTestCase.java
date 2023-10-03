@@ -465,7 +465,7 @@ public class BeanMapTestCase extends AbstractTestMap {
                 fail("Non-public bean - retrieving the cause threw " + e2);
             }
             assertNotNull("Non-public bean cause null", cause);
-            assertEquals("Non-public bean cause", IllegalAccessException.class, cause.getClass());
+            assertEquals("Non-public bean cause", NoSuchMethodException.class, cause.getClass());
         }
 
         // Test cloning a bean that throws exception
@@ -508,7 +508,7 @@ public class BeanMapTestCase extends AbstractTestMap {
                 fail("Retrieving the cause threw " + e2);
             }
             assertNotNull("Cause null", cause);
-            assertEquals("Cause", IllegalAccessException.class, cause.getClass());
+            assertEquals("Cause", NoSuchMethodException.class, cause.getClass());
         }
     }
 
