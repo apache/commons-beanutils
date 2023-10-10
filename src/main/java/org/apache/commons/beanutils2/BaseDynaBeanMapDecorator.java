@@ -52,7 +52,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     /**
      * Map.Entry implementation.
      */
-    private static class MapEntry<K> implements Map.Entry<K, Object> {
+    private static final class MapEntry<K> implements Map.Entry<K, Object> {
 
         private final K key;
         private final Object value;

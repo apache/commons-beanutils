@@ -49,7 +49,7 @@ public class MethodUtils {
     /**
      * Represents the key to looking up a Method by reflection.
      */
-    private static class MethodDescriptor {
+    private static final class MethodDescriptor {
         private final Class<?> cls;
         private final String methodName;
         private final Class<?>[] paramTypes;

@@ -53,7 +53,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      * @param <E> the type of objects compared by this comparator
      * @see java.util.Collections#reverseOrder()
      */
-    private static class NaturalOrderComparator<E extends Comparable<? super E>>
+    private static final class NaturalOrderComparator<E extends Comparable<? super E>>
             implements Comparator<E>, Serializable {
 
         /** Serialization version. */

@@ -48,7 +48,7 @@ public class WrapDynaClass implements DynaClass {
      * instances. A single key consists of a bean class and an instance of
      * {@code PropertyUtilsBean}. Instances are immutable.
      */
-    private static class CacheKey {
+    private static final class CacheKey {
 
         /** The bean class. */
         private final Class<?> beanClass;

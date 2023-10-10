@@ -51,7 +51,7 @@ public class MappedPropertyDescriptor extends PropertyDescriptor {
      *
      * See https://issues.apache.org/jira/browse/BEANUTILS-291
      */
-    private static class MappedMethodReference {
+    private static final class MappedMethodReference {
         private String className;
         private String methodName;
         private Reference<Method> methodRef;
