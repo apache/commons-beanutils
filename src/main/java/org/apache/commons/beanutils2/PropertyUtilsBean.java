@@ -32,8 +32,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.commons.beanutils2.expression.DefaultResolver;
 import org.apache.commons.beanutils2.expression.Resolver;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility methods for using Java Reflection APIs to facilitate generic
@@ -89,8 +89,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PropertyUtilsBean {
 
-    /** Log instance */
-    private static final Log LOG = LogFactory.getLog(PropertyUtilsBean.class);
+    /** Logger instance */
+    private static final Logger LOG = LoggerFactory.getLogger(PropertyUtilsBean.class);
 
     /**
      * Gets the PropertyUtils bean instance.

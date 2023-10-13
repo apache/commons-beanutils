@@ -80,8 +80,8 @@ import org.apache.commons.beanutils2.converters.ZonedDateTimeConverter;
 import org.apache.commons.beanutils2.sql.converters.SqlDateConverter;
 import org.apache.commons.beanutils2.sql.converters.SqlTimeConverter;
 import org.apache.commons.beanutils2.sql.converters.SqlTimestampConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Utility methods for converting String scalar values to objects of the
@@ -175,9 +175,9 @@ public class ConvertUtilsBean {
     private static final Character SPACE = Character.valueOf(' ');
 
     /**
-     * The {@code Log} instance for this class.
+     * The {@code Logger} instance for this class.
      */
-    private static final Log LOG = LogFactory.getLog(ConvertUtilsBean.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConvertUtilsBean.class);
 
     /**
      * Get singleton instance

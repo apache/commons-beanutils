@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils2.expression.Resolver;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>JavaBean property population methods.</p>
@@ -59,7 +59,7 @@ public class BeanUtilsBean {
     /**
      * Logging for this instance
      */
-    private static final Log LOG = LogFactory.getLog(BeanUtilsBean.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BeanUtilsBean.class);
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
@@ -94,13 +94,13 @@ public class BeanUtilsBean {
             final Class<?>[] paramsClasses = { Throwable.class };
             return Throwable.class.getMethod("initCause", paramsClasses);
         } catch (final NoSuchMethodException e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
+            final Logger log = LoggerFactory.getLogger(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Throwable does not have initCause() method in JDK 1.3");
             }
             return null;
         } catch (final Throwable e) {
-            final Log log = LogFactory.getLog(BeanUtils.class);
+            final Logger log = LoggerFactory.getLogger(BeanUtils.class);
             if (log.isWarnEnabled()) {
                 log.warn("Error getting the Throwable initCause() method", e);
             }

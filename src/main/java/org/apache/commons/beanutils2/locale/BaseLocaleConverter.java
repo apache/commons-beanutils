@@ -22,8 +22,8 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The base class for all standard type locale-sensitive converters. It has {@link LocaleConverter} and {@link org.apache.commons.beanutils2.Converter}
@@ -132,7 +132,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
     }
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(BaseLocaleConverter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BaseLocaleConverter.class);
 
     /**
      * Checks whether the result of a conversion is conform to the specified target type. If this is the case, the passed in result object is cast to the

@@ -21,8 +21,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>{@code Predicate} that evaluates a property value against a specified value.</p>
@@ -113,7 +113,7 @@ import org.apache.commons.logging.LogFactory;
 public class BeanPropertyValueEqualsPredicate<T, V> implements Predicate<T> {
 
     /** For logging. Each subclass gets its own log instance. */
-    private final Log log = LogFactory.getLog(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
      * The name of the property which will be evaluated when this {@code Predicate} is executed.
