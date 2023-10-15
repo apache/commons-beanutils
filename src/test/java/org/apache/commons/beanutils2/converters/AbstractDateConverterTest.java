@@ -568,6 +568,7 @@ public abstract class AbstractDateConverterTest<T> extends TestCase {
             assertEquals("TYPE " + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
+            ex.printStackTrace();
             fail(msg + " threw " + ex.toString());
         }
     }
