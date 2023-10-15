@@ -454,8 +454,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         if (errorIndex >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
-                msg += String.format(" using pattern '%s', errorIndex %,d, %s", ((SimpleDateFormat) format).toPattern(), errorIndex,
-                        format.getCalendar().getClass().getSimpleName());
+                final SimpleDateFormat simpleFormat = (SimpleDateFormat) format;
+                msg += String.format(" using pattern '%s', localized pattern '%s', errorIndex %,d, calendar type %s, this %s", simpleFormat.toPattern(),
+                        simpleFormat.toLocalizedPattern(), errorIndex, format.getCalendar().getClass().getSimpleName(), this);
             }
             if (log().isDebugEnabled()) {
                 log().debug("    " + msg);
