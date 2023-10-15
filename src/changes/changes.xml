@@ -110,6 +110,9 @@
       <action dev="ggregory" type="fix" due-to="Melloware, sebbASF, Gary Gregory, Michal Landsman">
         Replace Commons Collections Test Framework 3.2.2 with 4.4 #40.
       </action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">
+        Provide error index in ConversionException message in DateTimeConverter.parse(Class, Class, String, DateFormat).
+      </action>
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Dependabot, Gary Gregory">
         Add github/codeql-action #118.

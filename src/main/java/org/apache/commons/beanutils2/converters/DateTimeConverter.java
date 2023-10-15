@@ -449,10 +449,11 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         format.setLenient(false);
         final ParsePosition pos = new ParsePosition(0);
         final Date parsedDate = format.parse(value, pos); // ignore the result (use the Calendar)
-        if (pos.getErrorIndex() >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
+        int errorIndex = pos.getErrorIndex();
+        if (errorIndex >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
-                msg += " using pattern '" + ((SimpleDateFormat)format).toPattern() + "'";
+                msg += " using pattern '" + ((SimpleDateFormat) format).toPattern() + "', errorIndex = " + errorIndex;
             }
             if (log().isDebugEnabled()) {
                 log().debug("    " + msg);
