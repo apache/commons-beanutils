@@ -427,7 +427,10 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         if (patterns.length > 1) {
             throw ConversionException.format("Error converting '%s' to '%s' using  patterns '%s'", toString(sourceType), toString(targetType), displayPatterns);
         }
-        throw firstEx;
+        if (firstEx != null) {
+            throw firstEx;
+        }
+        return null;
     }
 
     /**
