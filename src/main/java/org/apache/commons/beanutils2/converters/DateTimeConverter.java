@@ -458,8 +458,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                         format.getCalendar().getClass().getSimpleName());
             }
             if (log().isDebugEnabled()) {
+                log().debug("    " + msg);
             }
-            log().debug("    " + msg);
             throw new ConversionException(msg);
         }
         return format.getCalendar();
