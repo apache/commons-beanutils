@@ -445,8 +445,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * @return The converted Calendar object.
      * @throws ConversionException if the String cannot be converted.
      */
-    private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value,
-            final DateFormat format) {
+    private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value, final DateFormat format) {
         logFormat("Parsing", format);
         format.setLenient(false);
         final ParsePosition pos = new ParsePosition(0);
@@ -455,11 +454,12 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         if (errorIndex >= 0 || pos.getIndex() != value.length() || parsedDate == null) {
             String msg = "Error converting '" + toString(sourceType) + "' to '" + toString(targetType) + "'";
             if (format instanceof SimpleDateFormat) {
-                msg += " using pattern '" + ((SimpleDateFormat) format).toPattern() + "', errorIndex = " + errorIndex;
+                msg += String.format(" using pattern '%s', errorIndex %,d, %s", ((SimpleDateFormat) format).toPattern(), errorIndex,
+                        format.getCalendar().getClass().getSimpleName());
             }
             if (log().isDebugEnabled()) {
-                log().debug("    " + msg);
             }
+            log().debug("    " + msg);
             throw new ConversionException(msg);
         }
         return format.getCalendar();
