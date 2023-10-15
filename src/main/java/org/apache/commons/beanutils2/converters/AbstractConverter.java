@@ -36,10 +36,12 @@ import org.apache.commons.logging.LogFactory;
  * converting to/from a specified type optionally using a default
  * value or throwing a {@link ConversionException} if a
  * conversion error occurs.
+ * </p>
  * <p>
  * Implementations should provide conversion to the specified
  * type and from the specified type to a {@code String} value
  * by implementing the following methods:
+ * </p>
  * <ul>
  *     <li>{@code convertToString(value)} - convert to a String
  *        (default implementation uses the objects {@code toString()}
@@ -53,6 +55,7 @@ import org.apache.commons.logging.LogFactory;
  * conversion is not possible and a default value is set, the converter
  * tries to transform the default value to the requested target type.
  * If this fails, a {@code ConversionException} if thrown.
+ * </p>
  *
  * @param <D> The default value type.
  * @since 1.8.0
@@ -258,6 +261,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * {@code toString()} method and should be overridden if a
      * more sophisticated mechanism for <i>conversion to a String</i>
      * is required.
+     * </p>
      *
      * @param value The input value to be converted.
      * @return the converted String value.
@@ -273,6 +277,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * <p>
      * Typical implementations will provide a minimum of
      * {@code String --&gt; type} conversion.
+     * </p>
      *
      * @param <R> Target type of the conversion.
      * @param type Data type to which this value should be converted.
@@ -353,10 +358,11 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Handle missing values.
+     * Handles missing values.
      * <p>
      * If a default value has been specified, then it is returned (after a cast
      * to the desired target class); otherwise a ConversionException is thrown.
+     * </p>
      *
      * @param <T> the desired target type
      * @param type Data type to which this value should be converted.
@@ -393,7 +399,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Indicates whether a default value will be returned or exception
+     * Tests whether a default value will be returned or exception
      * thrown in the event of a conversion error.
      *
      * @return {@code true} if a default value will be returned for
@@ -405,12 +411,10 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Accessor method for Log instance.
+     * Gets the Log instance.
      * <p>
-     * The Log instance variable is transient and
-     * accessing it through this method ensures it
-     * is re-initialized when this instance is
-     * de-serialized.
+     * The Log instance variable is transient and accessing it through this method ensures it is re-initialized when this instance is de-serialized.
+     * </p>
      *
      * @return The Log instance.
      */
