@@ -462,8 +462,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             }
             throw new ConversionException(msg);
         }
-        final Calendar calendar = format.getCalendar();
-        return calendar;
+        return format.getCalendar();
     }
 
     /**
