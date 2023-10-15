@@ -417,8 +417,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         Exception firstEx = null;
         for (final String pattern : patterns) {
             try {
-                final DateFormat format = getFormat(pattern);
-                return parse(sourceType, targetType, value, format);
+                return parse(sourceType, targetType, value, getFormat(pattern));
             } catch (final Exception ex) {
                 if (firstEx == null) {
                     firstEx = ex;
