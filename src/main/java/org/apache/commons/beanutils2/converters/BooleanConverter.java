@@ -75,7 +75,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs, ie the string value being converted is
+     * if a conversion error occurs, that is, if the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      */
     public BooleanConverter() {
@@ -83,7 +83,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
 
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will return the specified default value
-     * if a conversion error occurs, ie the string value being converted is
+     * if a conversion error occurs, that is, the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      *
      * @param defaultValue The default value to be returned if the value
@@ -100,7 +100,7 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
     /**
      * Constructs a {@link org.apache.commons.beanutils2.Converter} that will throw a
      * {@link org.apache.commons.beanutils2.ConversionException}
-     * if a conversion error occurs, ie the string value being converted is
+     * if a conversion error occurs, that is, the string value being converted is
      * not one of the known true strings, nor one of the known false strings.
      * <p>
      * The provided string arrays are copied, so that changes to the elements

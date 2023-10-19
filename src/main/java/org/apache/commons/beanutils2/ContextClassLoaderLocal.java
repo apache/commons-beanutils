@@ -94,9 +94,9 @@ import java.util.WeakHashMap;
  * <p><strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in
  * a memory leak for those JVMs.</p>
  *
- * <p><strong>Note:</strong> Of course all of this would be unnecessary if
+ * <p><strong>Note:</strong> Of course, all of this would be unnecessary if
  * containers required each component to load the full set of classes it
- * needs, ie avoided providing classes loaded via a "shared" classloader.</p>
+ * needs, that is, avoided providing classes loaded via a "shared" classloader.</p>
  *
  * @param <T> the type of data stored in an instance
  * @see Thread#getContextClassLoader

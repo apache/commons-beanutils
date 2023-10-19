@@ -144,7 +144,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * <p>
  * Converters generally treat null input as if it were invalid
- * input, ie they return their default value if one was specified when the
+ * input, that is, they return their default value if one was specified when the
  * converter was constructed, and throw an exception otherwise. If you prefer
  * nulls to be preserved for converters that are converting to objects (not
  * primitives) then register a converter as above, passing a default value of

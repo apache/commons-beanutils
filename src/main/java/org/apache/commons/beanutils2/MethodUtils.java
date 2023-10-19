@@ -144,7 +144,7 @@ public class MethodUtils {
      * The keys into this map only ever exist as temporary variables within
      * methods of this class, and are never exposed to users of this class.
      * This means that the WeakHashMap is used only as a mechanism for
-     * limiting the size of the cache, ie a way to tell the garbage collector
+     * limiting the size of the cache, that is, a way to tell the garbage collector
      * that the contents of the cache can be completely garbage-collected
      * whenever it needs the memory. Whether this is a good approach to
      * this problem is doubtful; something like the commons-collections
