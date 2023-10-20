@@ -305,9 +305,9 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
     protected DateFormat getFormat(final Locale locale, final TimeZone timeZone) {
         DateFormat format = null;
         if (locale == null) {
-            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+            format = DateFormat.getDateInstance(DateFormat.SHORT);
         } else {
-            format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
+            format = DateFormat.getDateInstance(DateFormat.SHORT, locale);
         }
         if (timeZone != null) {
             format.setTimeZone(timeZone);
