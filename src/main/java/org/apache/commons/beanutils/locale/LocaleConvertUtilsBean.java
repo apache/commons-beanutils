@@ -117,9 +117,7 @@ public class LocaleConvertUtilsBean {
      *  and then registers default locale converters.
      */
     public LocaleConvertUtilsBean() {
-        mapConverters.setFast(false);
         deregister();
-        mapConverters.setFast(true);
     }
 
     // --------------------------------------------------------- Properties
@@ -370,15 +368,10 @@ public class LocaleConvertUtilsBean {
      * Remove any registered {@link LocaleConverter}.
      */
     public void deregister() {
-
         final FastHashMap defaultConverter = lookup(defaultLocale);
-
-        mapConverters.setFast(false);
 
         mapConverters.clear();
         mapConverters.put(defaultLocale, defaultConverter);
-
-        mapConverters.setFast(true);
     }
 
 
@@ -464,7 +457,6 @@ public class LocaleConvertUtilsBean {
     protected FastHashMap create(final Locale locale) {
 
         final FastHashMap converter = new DelegateFastHashMap(BeanUtils.createCache());
-        converter.setFast(false);
 
         converter.put(BigDecimal.class, new BigDecimalLocaleConverter(locale, applyLocalized));
         converter.put(BigInteger.class, new BigIntegerLocaleConverter(locale, applyLocalized));
@@ -496,8 +488,6 @@ public class LocaleConvertUtilsBean {
         converter.put( java.sql.Timestamp.class,
                        new SqlTimestampLocaleConverter(locale, "yyyy-MM-dd HH:mm:ss.S")
                      );
-
-        converter.setFast(true);
 
         return converter;
     }
@@ -575,14 +565,6 @@ public class LocaleConvertUtilsBean {
         @Override
         public Collection<Object> values() {
             return map.values();
-        }
-        @Override
-        public boolean getFast() {
-            return BeanUtils.getCacheFast(map);
-        }
-        @Override
-        public void setFast(final boolean fast) {
-            BeanUtils.setCacheFast(map, fast);
         }
     }
 }
