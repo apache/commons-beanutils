@@ -29,7 +29,7 @@ public class Jira411TestCase extends TestCase {
 
     public class DummyBean {
 
-        private String imgLink = null;
+        private String imgLink;
 
         public String getImgLink() {
             return imgLink;

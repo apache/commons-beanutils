@@ -67,12 +67,12 @@ public class DynaBeanUtilsTestCase extends TestCase {
     /**
      * The basic test bean for each test.
      */
-    protected DynaBean bean = null;
+    protected DynaBean bean;
 
     /**
      * The nested bean pointed at by the "nested" property.
      */
-    protected TestBean nested = null;
+    protected TestBean nested;
 
     /**
      * The set of properties that should be described.

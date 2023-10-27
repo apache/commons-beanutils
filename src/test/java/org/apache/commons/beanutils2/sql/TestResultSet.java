@@ -72,7 +72,7 @@ public class TestResultSet implements InvocationHandler {
     /**
      * Current row number (0 means "before the first one").
      */
-    protected int row = 0;
+    protected int row;
 
     /**
      * The constant (per run) value used to initialize date/time/timestamp.

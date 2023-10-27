@@ -171,24 +171,24 @@ public class TestBean implements Serializable {
     /**
      * A nested reference to another test bean (populated as needed).
      */
-    private TestBean nested = null;
+    private TestBean nested;
 
     /**
      * Another nested reference to another test bean,
      */
-    private TestBean anotherNested = null;
+    private TestBean anotherNested;
 
     /**
      * Another nested reference to another test bean,
      */
-    private DynaBean nestedDynaBean = null;
+    private DynaBean nestedDynaBean;
 
-    private MappedTestBean mappedNested = null;
+    private MappedTestBean mappedNested;
 
     /**
      * A String property with an initial value of null.
      */
-    private String nullProperty = null;
+    private String nullProperty;
 
     /**
      * A read-only String property.
@@ -228,7 +228,7 @@ public class TestBean implements Serializable {
      * described in the JavaBeans Specification, this will be considered a read-only boolean property, using isInvalidBoolean() as the getter.
      * </p>
      */
-    private boolean invalidBoolean = false;
+    private boolean invalidBoolean;
 
     public TestBean() {
         listIndexed.add("String 0");

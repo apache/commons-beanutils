@@ -43,7 +43,7 @@ public class IndexedPropertyTestCase {
     /**
      * The test bean for each test.
      */
-    private IndexedTestBean bean = null;
+    private IndexedTestBean bean;
     private BeanUtilsBean beanUtilsBean;
     private PropertyUtilsBean propertyUtilsBean;
     private String[] testArray;

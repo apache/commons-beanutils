@@ -49,7 +49,7 @@ public class LocaleBeanificationTestCase {
 
     class Signal {
         private Exception e;
-        private int signal = 0;
+        private int signal;
         private LocaleBeanUtilsBean bean;
         private LocaleConvertUtilsBean convertUtils;
         private Object marker;

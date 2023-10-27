@@ -90,7 +90,7 @@ public class BeanUtilsBeanTestCase extends TestCase {
     /**
      * The test bean for each test.
      */
-    protected TestBean bean = null;
+    protected TestBean bean;
 
     /**
      * The set of properties that should be described.

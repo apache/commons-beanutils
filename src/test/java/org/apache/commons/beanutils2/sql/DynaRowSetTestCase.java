@@ -113,7 +113,7 @@ public class DynaRowSetTestCase extends TestCase {
     /**
      * The mock result set DynaClass to be tested.
      */
-    protected RowSetDynaClass dynaClass = null;
+    protected RowSetDynaClass dynaClass;
 
     /**
      * Names of the columns for this test. Must match the order they are defined in {@link TestResultSetMetaData}, and must be all lower case.

@@ -118,27 +118,27 @@ public class PropertyUtilsTestCase extends TestCase {
     /**
      * The basic test bean for each test.
      */
-    protected TestBean bean = null;
+    protected TestBean bean;
 
     /**
      * The "package private subclass" test bean for each test.
      */
-    protected TestBeanPackageSubclass beanPackageSubclass = null;
+    protected TestBeanPackageSubclass beanPackageSubclass;
 
     /**
      * The test bean for private access tests.
      */
-    protected PrivateDirect beanPrivate = null;
+    protected PrivateDirect beanPrivate;
 
     /**
      * The test bean for private access tests of subclasses.
      */
-    protected PrivateDirect beanPrivateSubclass = null;
+    protected PrivateDirect beanPrivateSubclass;
 
     /**
      * The "public subclass" test bean for each test.
      */
-    protected TestBeanPublicSubclass beanPublicSubclass = null;
+    protected TestBeanPublicSubclass beanPublicSubclass;
 
     /**
      * The set of properties that should be described.

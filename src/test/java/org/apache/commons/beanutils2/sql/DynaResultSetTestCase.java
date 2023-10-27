@@ -46,7 +46,7 @@ public class DynaResultSetTestCase extends TestCase {
     /**
      * The mock result set DynaClass to be tested.
      */
-    protected ResultSetDynaClass dynaClass = null;
+    protected ResultSetDynaClass dynaClass;
 
     /**
      * Names of the columns for this test. Must match the order they are defined in {@link TestResultSetMetaData}, and must be all lower case.
