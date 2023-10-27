@@ -43,7 +43,7 @@ public class BigDecimalConverterTestCase extends AbstractNumberConverterTest<Big
         return new TestSuite(BigDecimalConverterTestCase.class);
     }
 
-    private Converter<BigDecimal> converter = null;
+    private Converter<BigDecimal> converter;
 
     public BigDecimalConverterTestCase(final String name) {
         super(name);

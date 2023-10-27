@@ -30,7 +30,7 @@ public class ByteConverterTestCase extends AbstractNumberConverterTest<Byte> {
         return new TestSuite(ByteConverterTestCase.class);
     }
 
-    private Converter<Byte> converter = null;
+    private Converter<Byte> converter;
 
     public ByteConverterTestCase(final String name) {
         super(name);

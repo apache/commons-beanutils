@@ -35,7 +35,7 @@ public class ZoneOffsetConverterTestCase extends TestCase {
         return new TestSuite(ZoneOffsetConverterTestCase.class);
     }
 
-    private Converter<ZoneOffset> converter = null;
+    private Converter<ZoneOffset> converter;
 
     public ZoneOffsetConverterTestCase(final String name) {
         super(name);

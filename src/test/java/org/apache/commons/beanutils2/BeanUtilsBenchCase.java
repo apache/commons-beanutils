@@ -47,8 +47,8 @@ public class BeanUtilsBenchCase extends TestCase {
     // Input objects that have identical sets of properties and values.
     private BenchBean inBean;
     private DynaBean inDyna;
-    private Map<String, Object> inMap = null; // Map of Objects requiring no conversion
-    private Map<String, String> inStrs = null; // Map of Strings requiring conversion
+    private Map<String, Object> inMap; // Map of Objects requiring no conversion
+    private Map<String, String> inStrs; // Map of Strings requiring conversion
 
     // Output objects that have identical sets of properties.
     private BenchBean outBean;

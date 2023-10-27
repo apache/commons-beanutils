@@ -30,7 +30,7 @@ public class FloatConverterTestCase extends AbstractNumberConverterTest<Float> {
         return new TestSuite(FloatConverterTestCase.class);
     }
 
-    private Converter<Float> converter = null;
+    private Converter<Float> converter;
 
     public FloatConverterTestCase(final String name) {
         super(name);

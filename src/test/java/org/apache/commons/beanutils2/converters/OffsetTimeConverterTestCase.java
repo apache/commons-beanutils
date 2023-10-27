@@ -34,7 +34,7 @@ public class OffsetTimeConverterTestCase extends TestCase {
         return new TestSuite(OffsetTimeConverterTestCase.class);
     }
 
-    private Converter<OffsetTime> converter = null;
+    private Converter<OffsetTime> converter;
 
     public OffsetTimeConverterTestCase(final String name) {
         super(name);

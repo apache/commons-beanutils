@@ -34,7 +34,7 @@ public class YearConverterTestCase extends TestCase {
         return new TestSuite(YearConverterTestCase.class);
     }
 
-    private Converter<Year> converter = null;
+    private Converter<Year> converter;
 
     public YearConverterTestCase(final String name) {
         super(name);

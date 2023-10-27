@@ -30,7 +30,7 @@ public class LongConverterTestCase extends AbstractNumberConverterTest<Long> {
         return new TestSuite(LongConverterTestCase.class);
     }
 
-    private Converter<Long> converter = null;
+    private Converter<Long> converter;
 
     public LongConverterTestCase(final String name) {
         super(name);

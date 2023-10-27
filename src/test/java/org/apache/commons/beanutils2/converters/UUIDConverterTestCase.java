@@ -35,7 +35,7 @@ public class UUIDConverterTestCase extends TestCase {
         return new TestSuite(UUIDConverterTestCase.class);
     }
 
-    private Converter<UUID> converter = null;
+    private Converter<UUID> converter;
 
     public UUIDConverterTestCase(final String name) {
         super(name);

@@ -45,7 +45,7 @@ public class TestBean implements Serializable {
     /**
      * A static variable that is accessed and updated via static methods for MethodUtils testing.
      */
-    private static int counter = 0;
+    private static int counter;
 
     /**
      * Gets the current value of the counter.
@@ -151,22 +151,22 @@ public class TestBean implements Serializable {
     /**
      * A mapped property with only a getter and setter for a Map.
      */
-    private Map<String, Object> mapProperty = null;
+    private Map<String, Object> mapProperty;
 
     /**
      * A mapped property that has String keys and Object values.
      */
-    private HashMap<String, Object> mappedObjects = null;
+    private HashMap<String, Object> mappedObjects;
 
     /**
      * A mapped property that has String keys and String values.
      */
-    private HashMap<String, String> mappedProperty = null;
+    private HashMap<String, String> mappedProperty;
 
     /**
      * A mapped property that has String keys and int values.
      */
-    private HashMap<String, Integer> mappedIntProperty = null;
+    private HashMap<String, Integer> mappedIntProperty;
 
     /**
      * A nested reference to another test bean (populated as needed).

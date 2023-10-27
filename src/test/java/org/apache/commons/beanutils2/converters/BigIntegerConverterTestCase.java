@@ -32,7 +32,7 @@ public class BigIntegerConverterTestCase extends AbstractNumberConverterTest<Big
         return new TestSuite(BigIntegerConverterTestCase.class);
     }
 
-    private Converter<BigInteger> converter = null;
+    private Converter<BigInteger> converter;
 
     public BigIntegerConverterTestCase(final String name) {
         super(name);

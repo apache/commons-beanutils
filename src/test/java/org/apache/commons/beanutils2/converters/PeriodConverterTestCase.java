@@ -35,7 +35,7 @@ public class PeriodConverterTestCase extends TestCase {
         return new TestSuite(PeriodConverterTestCase.class);
     }
 
-    private Converter<Period> converter = null;
+    private Converter<Period> converter;
 
     public PeriodConverterTestCase(final String name) {
         super(name);

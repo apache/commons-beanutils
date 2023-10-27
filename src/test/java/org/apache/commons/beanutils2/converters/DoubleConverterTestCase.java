@@ -30,7 +30,7 @@ public class DoubleConverterTestCase extends AbstractNumberConverterTest<Double>
         return new TestSuite(DoubleConverterTestCase.class);
     }
 
-    private Converter<Double> converter = null;
+    private Converter<Double> converter;
 
     public DoubleConverterTestCase(final String name) {
         super(name);
