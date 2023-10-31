@@ -148,7 +148,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Get the name of this property.
+     * Gets the name of this property.
      * @return the name of the property
      */
     public String getName() {

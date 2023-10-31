@@ -180,7 +180,7 @@ public class ConvertUtilsBean {
     private static final Log LOG = LogFactory.getLog(ConvertUtilsBean.class);
 
     /**
-     * Get singleton instance
+     * Gets singleton instance
      * @return The singleton instance
      */
     protected static ConvertUtilsBean getInstance() {

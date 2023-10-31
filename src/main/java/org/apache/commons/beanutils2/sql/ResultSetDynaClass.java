@@ -153,7 +153,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
     }
 
     /**
-     * Get a value from the {@link ResultSet} for the specified property name.
+     * Gets a value from the {@link ResultSet} for the specified property name.
      *
      * @param name The property name
      * @return The value

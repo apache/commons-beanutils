@@ -128,7 +128,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Get the table column name for the specified property name.
+     * Gets the table column name for the specified property name.
      *
      * @param name The property name
      * @return The column name (which can be different if the <i>lowerCase</i> option is used).
@@ -182,7 +182,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
     }
 
     /**
-     * Get a column value from a {@link ResultSet} for the specified name.
+     * Gets a column value from a {@link ResultSet} for the specified name.
      *
      * @param resultSet The result set
      * @param name      The property name

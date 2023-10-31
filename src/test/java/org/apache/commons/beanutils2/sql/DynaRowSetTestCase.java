@@ -58,7 +58,7 @@ public class DynaRowSetTestCase extends TestCase {
         }
 
         /**
-         * Get an columns's value
+         * Gets an columns's value
          *
          * @param columnName Name of the column
          * @return the column value
