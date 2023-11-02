@@ -111,7 +111,7 @@ limitations under the License.
       </p>
     </subsection>
     </section>
-    <section name="Apache Commons BeanUtils 2.0.0 (Java 6)">
+    <section name="Apache Commons BeanUtils 2.0.0 (Java 6 or above)">
       <subsection name="Binaries">
         <table>
           <tr>
@@ -141,7 +141,7 @@ limitations under the License.
         </table>
       </subsection>
     </section>
-    <section name="Apache Commons BeanUtils 1.9.3 (Java 6)">
+    <section name="Apache Commons BeanUtils 1.9.3 (Java 6 or above)">
       <subsection name="Binaries">
         <table>
           <tr>
