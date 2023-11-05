@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.junit.Test;
 
-class FirstChildBeanB extends RootBeanB {
+final class FirstChildBeanB extends RootBeanB {
 }
 
 /**
@@ -70,5 +70,5 @@ class RootBeanB {
 
 }
 
-class SecondChildBeanB extends RootBeanB {
+final class SecondChildBeanB extends RootBeanB {
 }

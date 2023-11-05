@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
 
-class PropertyDescriptors {
+final class PropertyDescriptors {
 
     static final PropertyDescriptor[] EMPTY_ARRAY = {};
 

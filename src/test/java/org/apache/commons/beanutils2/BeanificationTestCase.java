@@ -35,7 +35,7 @@ import junit.framework.TestSuite;
  */
 public class BeanificationTestCase extends TestCase {
 
-    class Signal {
+    final class Signal {
         private Exception e;
         private int signal;
         private BeanUtilsBean bean;
@@ -92,7 +92,7 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 
-    class TestClassLoader extends ClassLoader {
+    final class TestClassLoader extends ClassLoader {
         @Override
         public String toString() {
             return "TestClassLoader";
@@ -137,7 +137,7 @@ public class BeanificationTestCase extends TestCase {
     /** Tests whether different threads can set beanutils instances correctly */
     public void testBeanUtilsBeanSetInstance() throws Exception {
 
-        class SetInstanceTesterThread extends Thread {
+        final class SetInstanceTesterThread extends Thread {
 
             private final Signal signal;
             private final BeanUtilsBean bean;
@@ -183,7 +183,7 @@ public class BeanificationTestCase extends TestCase {
     /** Tests whether calls are independent for different classloaders */
     public void testContextClassloaderIndependence() throws Exception {
 
-        class TestIndependenceThread extends Thread {
+        final class TestIndependenceThread extends Thread {
             private final Signal signal;
             private final PrimitiveBean bean;
 
@@ -239,7 +239,7 @@ public class BeanificationTestCase extends TestCase {
      */
     public void testContextClassLoaderLocal() throws Exception {
 
-        class CCLLTesterThread extends Thread {
+        final class CCLLTesterThread extends Thread {
 
             private final Signal signal;
             private final ContextClassLoaderLocal<Integer> ccll;
@@ -295,7 +295,7 @@ public class BeanificationTestCase extends TestCase {
      */
     public void testGetByContextClassLoader() throws Exception {
 
-        class GetBeanUtilsBeanThread extends Thread {
+        final class GetBeanUtilsBeanThread extends Thread {
 
             private final Signal signal;
 
@@ -344,7 +344,7 @@ public class BeanificationTestCase extends TestCase {
         final WeakReference<ClassLoader> loaderReference = new WeakReference<>(loader);
         BeanUtilsBean.getInstance();
 
-        class GetBeanUtilsBeanThread extends Thread {
+        final class GetBeanUtilsBeanThread extends Thread {
 
             BeanUtilsBean beanUtils;
             ConvertUtilsBean convertUtils;

@@ -22,7 +22,7 @@ package org.apache.commons.beanutils2.priv;
  *
  */
 
-class PrivateBeanSubclass extends PrivateBean {
+final class PrivateBeanSubclass extends PrivateBean {
 
     /**
      * Create a new PrivateBeanSubclass instance.

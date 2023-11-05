@@ -22,6 +22,6 @@ package org.apache.commons.beanutils2;
  *
  */
 
-class TestBeanPackageSubclass extends TestBean {
+final class TestBeanPackageSubclass extends TestBean {
 
 }

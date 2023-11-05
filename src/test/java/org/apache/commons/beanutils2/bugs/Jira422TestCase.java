@@ -31,7 +31,7 @@ import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-class FirstChildBean extends RootBean {
+final class FirstChildBean extends RootBean {
 }
 
 /**
@@ -101,5 +101,5 @@ class RootBean {
 
 }
 
-class SecondChildBean extends RootBean {
+final class SecondChildBean extends RootBean {
 }

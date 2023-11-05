@@ -47,7 +47,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LocaleBeanificationTestCase {
 
-    class Signal {
+    final class Signal {
         private Exception e;
         private int signal;
         private LocaleBeanUtilsBean bean;
@@ -95,7 +95,7 @@ public class LocaleBeanificationTestCase {
         }
     }
 
-    class TestClassLoader extends ClassLoader {
+    final class TestClassLoader extends ClassLoader {
         @Override
         public String toString() {
             return "TestClassLoader";
@@ -117,7 +117,7 @@ public class LocaleBeanificationTestCase {
     @Test
     public void testBeanUtilsBeanSetInstance() throws Exception {
 
-        class SetInstanceTesterThread extends Thread {
+        final class SetInstanceTesterThread extends Thread {
 
             private final Signal signal;
             private final LocaleBeanUtilsBean bean;
@@ -163,7 +163,7 @@ public class LocaleBeanificationTestCase {
     /** Tests whether calls are independent for different classloaders */
     public void testContextClassloaderIndependence() throws Exception {
 
-        class TestIndependenceThread extends Thread {
+        final class TestIndependenceThread extends Thread {
             private final Signal signal;
             private final PrimitiveBean bean;
 
@@ -237,7 +237,7 @@ public class LocaleBeanificationTestCase {
      */
     public void testContextClassLoaderLocal() throws Exception {
 
-        class CCLLTesterThread extends Thread {
+        final class CCLLTesterThread extends Thread {
 
             private final Signal signal;
             private final ContextClassLoaderLocal<Integer> ccll;
@@ -293,7 +293,7 @@ public class LocaleBeanificationTestCase {
      */
     public void testGetByContextClassLoader() throws Exception {
 
-        class GetBeanUtilsBeanThread extends Thread {
+        final class GetBeanUtilsBeanThread extends Thread {
 
             private final Signal signal;
 
@@ -384,7 +384,7 @@ public class LocaleBeanificationTestCase {
         final WeakReference<TestClassLoader> loaderReference = new WeakReference<>(loader);
         LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
 
-        class GetBeanUtilsBeanThread extends Thread {
+        final class GetBeanUtilsBeanThread extends Thread {
 
             LocaleBeanUtilsBean beanUtils;
             LocaleConvertUtilsBean convertUtils;

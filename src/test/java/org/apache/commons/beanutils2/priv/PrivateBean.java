@@ -24,9 +24,7 @@ package org.apache.commons.beanutils2.priv;
  * <li><strong>bar</strong> - Via directly implemented interface
  * <li><strong>baz</strong> - Via indirectly implemented interface
  * </ul>
- *
  */
-
 class PrivateBean implements PrivateDirect {
 
     /**
