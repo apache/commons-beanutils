@@ -72,7 +72,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
      */
     private abstract class AbstractCollectionView<E> implements Collection<E> {
 
-        private class CollectionViewIterator implements Iterator<E> {
+        private final class CollectionViewIterator implements Iterator<E> {
 
             private Map<K, V> expected;
             private Map.Entry<K, V> lastReturned;
@@ -287,7 +287,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Sets implementation over the entries of the FastHashMap
      */
-    private class EntrySet extends AbstractCollectionView<Map.Entry<K, V>> implements Set<Map.Entry<K, V>> {
+    private final class EntrySet extends AbstractCollectionView<Map.Entry<K, V>> implements Set<Map.Entry<K, V>> {
 
         @Override
         protected Collection<Map.Entry<K, V>> get(final Map<K, V> map) {
@@ -304,7 +304,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Sets implementation over the keys of the FastHashMap
      */
-    private class KeySet extends AbstractCollectionView<K> implements Set<K> {
+    private final class KeySet extends AbstractCollectionView<K> implements Set<K> {
 
         @Override
         protected Collection<K> get(final Map<K, V> map) {
@@ -324,7 +324,7 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     /**
      * Collection implementation over the values of the FastHashMap
      */
-    private class Values extends AbstractCollectionView<V> {
+    private final class Values extends AbstractCollectionView<V> {
 
         @Override
         protected Collection<V> get(final Map<K, V> map) {
