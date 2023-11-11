@@ -56,7 +56,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     /**
      * <p>
-     * Construct an {@code Iterator} for the result set being wrapped by the specified {@link ResultSetDynaClass}.
+     * Constructs an {@code Iterator} for the result set being wrapped by the specified {@link ResultSetDynaClass}.
      * </p>
      *
      * @param dynaClass The {@link ResultSetDynaClass} wrapping the result set we will iterate over

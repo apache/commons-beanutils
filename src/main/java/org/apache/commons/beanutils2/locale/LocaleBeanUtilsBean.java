@@ -81,13 +81,13 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     /** Convertor used by this class */
     private final LocaleConvertUtilsBean localeConvertUtils;
 
-    /** Construct instance with standard conversion bean */
+    /** Constructs instance with standard conversion bean */
     public LocaleBeanUtilsBean() {
         this.localeConvertUtils = new LocaleConvertUtilsBean();
     }
 
     /**
-     * Construct instance that uses given locale conversion
+     * Constructs instance that uses given locale conversion
      *
      * @param localeConvertUtils use this {@code localeConvertUtils} to perform
      * conversions
@@ -97,7 +97,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
     }
 
     /**
-     * Construct instance that uses given locale conversion
+     * Constructs instance that uses given locale conversion
      *
      * @param localeConvertUtils use this {@code localeConvertUtils} to perform
      * conversions

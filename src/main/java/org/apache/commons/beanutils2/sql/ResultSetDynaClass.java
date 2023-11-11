@@ -90,7 +90,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 
     /**
      * <p>
-     * Construct a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to column names in the result set will be lower
+     * Constructs a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to column names in the result set will be lower
      * cased.
      * </p>
      *
@@ -105,7 +105,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 
     /**
      * <p>
-     * Construct a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to the column names in the result set will be
+     * Constructs a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to the column names in the result set will be
      * lower cased or not, depending on the specified {@code lowerCase} value.
      * </p>
      *
@@ -127,7 +127,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 
     /**
      * <p>
-     * Construct a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to the column names in the result set will be
+     * Constructs a new ResultSetDynaClass for the specified {@code ResultSet}. The property names corresponding to the column names in the result set will be
      * lower cased or not, depending on the specified {@code lowerCase} value.
      * </p>
      *
