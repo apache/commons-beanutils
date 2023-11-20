@@ -180,7 +180,7 @@ public class BeanificationTestCase extends TestCase {
         assertEquals("Second thread gets value it set", beanTwo, signal.getBean());
     }
 
-    /** Tests whether calls are independent for different classloaders */
+    /** Tests whether calls are independent for different class loaders */
     public void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
@@ -235,7 +235,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
     /**
-     * Tests whether difference instances are loaded by different context classloaders.
+     * Tests whether difference instances are loaded by different context class loaders.
      */
     public void testContextClassLoaderLocal() throws Exception {
 
@@ -291,7 +291,7 @@ public class BeanificationTestCase extends TestCase {
     }
 
     /**
-     * Tests whether difference instances are loaded by different context classloaders.
+     * Tests whether difference instances are loaded by different context class loaders.
      */
     public void testGetByContextClassLoader() throws Exception {
 
@@ -413,7 +413,7 @@ public class BeanificationTestCase extends TestCase {
 
     // ---- Auxillary classes
 
-    /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
+    /** Tests whether class loaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() throws Exception {
         // tests when the map used by beanutils has the right behavior
 

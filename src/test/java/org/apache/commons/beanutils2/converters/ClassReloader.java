@@ -26,12 +26,12 @@ import java.io.InputStream;
  * A special classloader useful for testing j2ee-like scenarios.
  *
  * <p>
- * In some tests we want to be able to emulate "container" frameworks, where code runs in a hierarchy of classloaders, and certain classes may be loaded by
- * various classloaders in the hierarchy.
+ * In some tests we want to be able to emulate "container" frameworks, where code runs in a hierarchy of class loaders, and certain classes may be loaded by
+ * various class loaders in the hierarchy.
  * </p>
  *
  * <p>
- * Normally this is done by having certain jars or class-file-directories in the classpath of some classloaders but not others. This is quite difficult to
+ * Normally this is done by having certain jars or class-file-directories in the classpath of some class loaders but not others. This is quite difficult to
  * integrate with the build process for the unit tests though; compiling certain classes and having the output go into places that is not in the default
  * classpath for the unit tests would be a major pain.
  * </p>

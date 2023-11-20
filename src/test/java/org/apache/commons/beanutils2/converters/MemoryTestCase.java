@@ -30,7 +30,7 @@ import org.apache.commons.beanutils2.Converter;
 import org.junit.Test;
 
 /**
- * This class provides a number of unit tests related to classloaders and garbage collection, particularly in j2ee-like situations.
+ * This class provides a number of unit tests related to class loaders and garbage collection, particularly in j2ee-like situations.
  */
 public class MemoryTestCase {
 

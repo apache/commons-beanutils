@@ -160,7 +160,7 @@ public class LocaleBeanificationTestCase {
         assertEquals(beanTwo, signal.getBean(), "Second thread gets value it set");
     }
 
-    /** Tests whether calls are independent for different classloaders */
+    /** Tests whether calls are independent for different class loaders */
     public void testContextClassloaderIndependence() throws Exception {
 
         final class TestIndependenceThread extends Thread {
@@ -233,7 +233,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /**
-     * Tests whether difference instances are loaded by different context classloaders.
+     * Tests whether difference instances are loaded by different context class loaders.
      */
     public void testContextClassLoaderLocal() throws Exception {
 
@@ -289,7 +289,7 @@ public class LocaleBeanificationTestCase {
     }
 
     /**
-     * Tests whether difference instances are loaded by different context classloaders.
+     * Tests whether difference instances are loaded by different context class loaders.
      */
     public void testGetByContextClassLoader() throws Exception {
 
@@ -372,7 +372,7 @@ public class LocaleBeanificationTestCase {
         }
     }
 
-    /** Tests whether classloaders and beans are released from memory */
+    /** Tests whether class loaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
         if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
@@ -444,7 +444,7 @@ public class LocaleBeanificationTestCase {
         }
     }
 
-    /** Tests whether classloaders and beans are released from memory by the map used by beanutils */
+    /** Tests whether class loaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() {
         // tests when the map used by beanutils has the right behavior
 
