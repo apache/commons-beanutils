@@ -27,7 +27,7 @@ import java.util.WeakHashMap;
  * <p>Occasionally it is necessary to store data in "global" variables
  * (including uses of the Singleton pattern). In applications which have only
  * a single classloader such data can simply be stored as "static" members on
- * some class. When multiple classloaders are involved, however, this approach
+ * some class. When multiple class loaders are involved, however, this approach
  * can fail; in particular, this doesn't work when the code may be run within a
  * servlet container or a j2ee container, and the class on which the static
  * member is defined is loaded via a "shared" classloader that is visible to all

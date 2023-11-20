@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * <p>This class provides implementations for the utility methods in
  * {@link BeanUtils}.
- * Different instances can be used to isolate caches between classloaders
+ * Different instances can be used to isolate caches between class loaders
  * and to vary the value converters registered.</p>
  *
  * @see BeanUtils

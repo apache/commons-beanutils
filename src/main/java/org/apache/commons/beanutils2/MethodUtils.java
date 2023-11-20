@@ -155,7 +155,7 @@ public class MethodUtils {
      * shared classloader because it is keyed via a MethodDescriptor object
      * which has a Class as one of its members and that member is used in
      * the MethodDescriptor.equals method. So two components that load the same
-     * class via different classloaders will generate non-equal MethodDescriptor
+     * class via different class loaders will generate non-equal MethodDescriptor
      * objects and hence end up with different entries in the map.
      */
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
