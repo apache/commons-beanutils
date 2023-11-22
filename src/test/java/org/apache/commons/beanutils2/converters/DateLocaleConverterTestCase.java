@@ -26,8 +26,8 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter.Builder;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Test Case for the DateLocaleConverter class.
@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
 public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Date> {
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(DateLocaleConverterTestCase.class);
+    private static final Logger LOG = LogManager.getLogger(DateLocaleConverterTestCase.class);
 
     protected String localizedDatePattern;
     protected String localizedDateValue;

@@ -18,8 +18,8 @@ package org.apache.commons.beanutils2.bugs;
 
 import org.apache.commons.beanutils2.PropertyUtils;
 import org.apache.commons.beanutils2.bugs.other.Jira87BeanFactory;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -39,7 +39,7 @@ import junit.framework.TestSuite;
  */
 public class Jira87TestCase extends TestCase {
 
-    private static final Log LOG = LogFactory.getLog(Jira87TestCase.class);
+    private static final Logger LOG = LogManager.getLogger(Jira87TestCase.class);
 
     /**
      * Run the Test.

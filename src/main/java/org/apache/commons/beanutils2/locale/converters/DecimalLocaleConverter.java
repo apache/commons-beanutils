@@ -25,8 +25,8 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.beanutils2.locale.LocaleConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@code java.lang.Number} object, optionally using a
@@ -62,7 +62,7 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
     }
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(DecimalLocaleConverter.class);
+    private static final Logger LOG = LogManager.getLogger(DecimalLocaleConverter.class);
 
     /**
      * Constructs a new builder.

@@ -36,7 +36,6 @@ import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.PrimitiveBean;
 import org.apache.commons.beanutils2.locale.converters.LongLocaleConverter;
-import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -396,8 +395,6 @@ public class LocaleBeanificationTestCase {
             public void run() {
                 beanUtils = LocaleBeanUtilsBean.getLocaleBeanUtilsInstance();
                 convertUtils = LocaleConvertUtilsBean.getInstance();
-                // XXX Log keeps a reference around!
-                LogFactory.releaseAll();
             }
 
             @Override

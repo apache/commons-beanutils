@@ -37,8 +37,8 @@ import org.apache.commons.beanutils2.locale.converters.StringLocaleConverter;
 import org.apache.commons.beanutils2.sql.converters.locale.SqlDateLocaleConverter;
 import org.apache.commons.beanutils2.sql.converters.locale.SqlTimeLocaleConverter;
 import org.apache.commons.beanutils2.sql.converters.locale.SqlTimestampLocaleConverter;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 /**
  * <p>Utility methods for converting locale-sensitive String scalar values to objects of the
@@ -82,7 +82,7 @@ import org.apache.commons.logging.LogFactory;
 public class LocaleConvertUtilsBean {
 
     /** The {@code Log} instance for this class. */
-    private static final Log LOG = LogFactory.getLog(LocaleConvertUtilsBean.class);
+    private static final Logger LOG = LogManager.getLogger(LocaleConvertUtilsBean.class);
 
     /**
      * Gets singleton instance.

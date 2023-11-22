@@ -22,8 +22,6 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.apache.commons.logging.LogFactory;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -358,8 +356,6 @@ public class BeanificationTestCase extends TestCase {
                 beanUtils = BeanUtilsBean.getInstance();
                 convertUtils = ConvertUtilsBean.getInstance();
                 propertyUtils = PropertyUtilsBean.getInstance();
-                // XXX Log keeps a reference around!
-                LogFactory.releaseAll();
             }
 
             @Override
