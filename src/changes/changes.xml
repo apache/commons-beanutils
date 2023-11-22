@@ -137,43 +137,43 @@
         Bump actions/upload-artifact from 3.1.0 to 3.1.1 #143.
       </action>
       <action issue="BEANUTILS-522" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update Apache Commons Collections from 4.3 to 4.4.
+        Bump Apache Commons Collections from 4.3 to 4.4.
       </action>
       <action issue="BEANUTILS-504" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update from Java 6 to 7.
+        Bump Java from 6 to 7.
       </action>
       <action issue="BEANUTILS-515" dev="ggregory" type="update" due-to="Gary Gregory">
-        Update from Java 7 to 8.
+        Bump Java from 7 to 8.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
         Bump junit-jupiter from 5.7.2 to 5.9.1 #113, #126, #134.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update JUnit from 4 to 5.9.1 vintage, #78, #112, #127, #136.
+        Bump JUnit from 4 to 5.9.1 vintage, #78, #112, #127, #136.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update Jacoco from 0.8.4 to 0.8.8.
+        Bump Jacoco from 0.8.4 to 0.8.8.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update JApiCmp from 0.12.0 to 0.17.1, #46, #110, #130, #146.
+        Bump JApiCmp from 0.12.0 to 0.17.1, #46, #110, #130, #146.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update maven-surefire-plugin from 2.22.1 to 3.0.0-M7, #116, #122.
+        Bump maven-surefire-plugin from 2.22.1 to 3.0.0-M7, #116, #122.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update maven-checkstyle-plugin from 3.0.0 to 3.2.0, #76, #129.
+        Bump maven-checkstyle-plugin from 3.0.0 to 3.2.0, #76, #129.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update maven-pmd-plugin from 3.12.0 to 3.19.0, #120, #128, #131.
+        Bump maven-pmd-plugin from 3.12.0 to 3.19.0, #120, #128, #131.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">
-        Update BC version from 1.9.3 to 1.9.4.
+        Bump BC version from 1.9.3 to 1.9.4.
       </action>
       <action dev="ggregory" type="update" due-to="Gary Gregory, Dependabot">
-        Update commons-parent from 50 to 64, #135, #152, #156, #171, #172.
+        Bump commons-parent from 50 to 64, #135, #152, #156, #171, #172.
       </action>
       <action dev="ggregory" type="update" due-to="Dependabot">
-        Update biz.aQute.bndlib from 5.1.0 to 6.4.1 #29, #45, #79, #109, #119, #121, #147, #175.
+        Bump biz.aQute.bndlib from 5.1.0 to 6.4.1 #29, #45, #79, #109, #119, #121, #147, #175.
       </action>
       <action dev="ggregory" type="update" due-to="melloware">
         Jacoco 0.8.6 for JDK15 support #55.
