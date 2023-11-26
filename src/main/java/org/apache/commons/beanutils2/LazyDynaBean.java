@@ -246,8 +246,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
     }
 
-
-
     /**
      * Create a new Instance of an 'Indexed' Property
      * @param name The name of the property

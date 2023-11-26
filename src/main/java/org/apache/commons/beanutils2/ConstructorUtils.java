@@ -437,7 +437,6 @@ public class ConstructorUtils {
         return (T[]) Array.newInstance(componentType, length);
     }
 
-
     private static Object[] toArray(final Object arg) {
         Object[] args = null;
         if (arg != null) {

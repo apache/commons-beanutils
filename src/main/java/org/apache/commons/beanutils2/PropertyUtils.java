@@ -15,14 +15,12 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
-
 
 /**
  * <p>Utility methods for using Java Reflection APIs to facilitate generic

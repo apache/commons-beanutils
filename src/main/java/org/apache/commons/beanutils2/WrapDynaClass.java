@@ -17,14 +17,12 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
-
 
 /**
  * Implementation of {@link DynaClass} that wrap

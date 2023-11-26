@@ -15,13 +15,10 @@
  * limitations under the License.
  */
 
-
 package org.apache.commons.beanutils2;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-
 
 /**
  * <p>Utility methods for populating JavaBeans properties via reflection.</p>
@@ -38,10 +35,8 @@ public class BeanUtils {
     /** An empty class array */
     static final Class<?>[] EMPTY_CLASS_ARRAY = {};
 
-
     /** An empty object array */
     static final Object[] EMPTY_OBJECT_ARRAY = {};
-
 
     /**
      * <p>Clone a bean based on the available property getters and setters,
@@ -70,7 +65,6 @@ public class BeanUtils {
 
     }
 
-
     /**
      * <p>Copy property values from the origin bean to the destination bean
      * for all cases where the property names are the same.</p>
@@ -96,7 +90,6 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().copyProperties(dest, orig);
     }
 
-
     /**
      * <p>Copy the specified property value to the specified destination bean,
      * performing any type conversion that is required.</p>
@@ -119,7 +112,6 @@ public class BeanUtils {
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
     }
 
-
     /**
      * Create a cache.
      * @param <K> the key type of the cache
@@ -130,7 +122,6 @@ public class BeanUtils {
     public static <K, V> Map<K, V> createCache() {
         return new WeakFastHashMap<>();
     }
-
 
     /**
      * <p>Return the entire set of properties for which the specified bean
@@ -156,7 +147,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().describe(bean);
     }
 
-
     /**
      * <p>Return the value of the specified array property of the specified
      * bean, as a String array.</p>
@@ -181,7 +171,6 @@ public class BeanUtils {
 
         return BeanUtilsBean.getInstance().getArrayProperty(bean, name);
     }
-
 
     /**
      * <p>Return the value of the specified indexed property of the specified
@@ -209,7 +198,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().getIndexedProperty(bean, name);
 
     }
-
 
     /**
      * Gets the value of the specified indexed property of the specified
@@ -240,7 +228,6 @@ public class BeanUtils {
 
     }
 
-
     /**
      * <p>Return the value of the specified indexed property of the specified
      * bean, as a String.</p>
@@ -267,7 +254,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().getMappedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified mapped property of the specified
@@ -297,7 +283,6 @@ public class BeanUtils {
 
     }
 
-
     /**
      * <p>Return the value of the (possibly nested) property of the specified
      * name, for the specified bean, as a String.</p>
@@ -325,7 +310,6 @@ public class BeanUtils {
         return BeanUtilsBean.getInstance().getNestedProperty(bean, name);
 
     }
-
 
     /**
      * <p>Return the value of the specified property of the specified bean,

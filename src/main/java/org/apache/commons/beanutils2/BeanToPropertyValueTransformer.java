@@ -23,7 +23,6 @@ import java.util.function.Function;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * <p>{@code Transformer} that outputs a property value.</p>
  *

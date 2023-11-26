@@ -17,7 +17,6 @@
 
 package org.apache.commons.beanutils2;
 
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.ref.Reference;
@@ -25,7 +24,6 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
 
 /**
  * A MappedPropertyDescriptor describes one mapped property.

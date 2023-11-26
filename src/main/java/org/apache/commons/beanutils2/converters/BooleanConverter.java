@@ -194,7 +194,6 @@ public final class BooleanConverter extends AbstractConverter<Boolean> {
         throw conversionException(type, value);
     }
 
-
     /**
      * Gets the default type this {@code Converter} handles.
      *

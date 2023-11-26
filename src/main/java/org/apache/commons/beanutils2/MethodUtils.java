@@ -820,8 +820,6 @@ public class MethodUtils {
         return invokeExactStaticMethod (objectClass, methodName, args);
     }
 
-
-
     /**
      * <p>Invoke a static method whose parameter types match exactly the object
      * types.</p>

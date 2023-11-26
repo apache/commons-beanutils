@@ -320,7 +320,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Constructors
 
-
     /**
      * Collection implementation over the values of the FastHashMap
      */
@@ -350,7 +349,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     private boolean fast;
 
     // Property access
-
 
     /**
      * Constructs an empty map.
@@ -482,7 +480,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
     // Basic object methods
 
-
     protected Map<K, V> createMap(final int capacity, final float factor) {
         return new WeakHashMap<>(capacity, factor);
     }
@@ -502,7 +499,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Map views
-
 
     /**
      * Compare the specified object with this list for equality.  This
@@ -591,7 +587,6 @@ public class WeakFastHashMap<K, V> extends HashMap<K, V> {
     }
 
     // Abstractions on Map creations (for subclasses such as WeakFastHashMap)
-
 
     /**
      * Gets the hash code value for this map.  This implementation uses

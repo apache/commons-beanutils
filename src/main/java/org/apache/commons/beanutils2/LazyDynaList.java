@@ -392,8 +392,6 @@ public class LazyDynaList extends ArrayList<Object> {
         }
     }
 
-
-
     /**
      * <p>Set the element at the specified position.</p>
      *
@@ -501,8 +499,6 @@ public class LazyDynaList extends ArrayList<Object> {
             this.elementType = ((LazyDynaMap)dynaBean).getMap().getClass();
         }
     }
-
-
 
     /**
      * <p>Converts the List to an Array.</p>
