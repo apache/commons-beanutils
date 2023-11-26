@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Just a java bean (JAJB) to try to replicate a reported bug
+ * Just a Java bean (JAJB) to try to replicate a reported bug
  *
  */
 

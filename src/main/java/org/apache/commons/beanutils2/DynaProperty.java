@@ -42,7 +42,7 @@ public class DynaProperty implements Serializable {
 
     /*
      * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
+     * (including Java 1.3).
      * This class uses a custom serialization implementation that writes an integer
      * for these primitive class.
      * This list of constants are the ones used in serialization.
@@ -137,7 +137,7 @@ public class DynaProperty implements Serializable {
      * that support this feature.
      *
      * <p>There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
+     * (including Java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
      * @return the Class for the content type if this is an indexed {@code DynaProperty}
@@ -160,7 +160,7 @@ public class DynaProperty implements Serializable {
      * values.</p>
      *
      * <p>There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
+     * (including Java 1.3).
      * Therefore, this field <strong>must not be serialized using the standard methods</strong>.</p>
      *
      * <p><strong>Please leave this field as {@code transient}</strong></p>
@@ -218,7 +218,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Reads a class using safe encoding to workaround java 1.3 serialization bug.
+     * Reads a class using safe encoding to workaround Java 1.3 serialization bug.
      */
     private Class<?> readAnyClass(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         // read back type class safely
@@ -250,7 +250,7 @@ public class DynaProperty implements Serializable {
     /**
      * Reads field values for this object safely.
      * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
+     * (including Java 1.3).
      * This method provides a workaround.
      *
      * @param in {@link ObjectInputStream} to read object from
@@ -287,7 +287,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Write a class using safe encoding to workaround java 1.3 serialization bug.
+     * Write a class using safe encoding to workaround Java 1.3 serialization bug.
      */
     private void writeAnyClass(final Class<?> clazz, final ObjectOutputStream out) throws IOException {
         // safely write out any class
@@ -324,7 +324,7 @@ public class DynaProperty implements Serializable {
     /**
      * Writes this object safely.
      * There are issues with serializing primitive class types on certain JVM versions
-     * (including java 1.3).
+     * (including Java 1.3).
      * This method provides a workaround.
      *
      * @param out {@link ObjectOutputStream} to write object to

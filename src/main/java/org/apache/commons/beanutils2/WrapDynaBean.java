@@ -25,7 +25,7 @@ import java.lang.reflect.InvocationTargetException;
  * instance, so that DynaBean APIs can be used to access its properties.</p>
  *
  * <p>
- * The most common use cases for this class involve wrapping an existing java bean.
+ * The most common use cases for this class involve wrapping an existing Java bean.
  * (This makes it different from the typical use cases for other {@code DynaBean}'s.)
  * For example:
  * </p>
@@ -234,7 +234,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      * But some creators of frameworks using {@code DynaBean}'s may
      * find this useful.
      *
-     * @return the java bean Object wrapped by this {@code DynaBean}
+     * @return the Java bean Object wrapped by this {@code DynaBean}
      */
     public Object getInstance() {
         return instance;

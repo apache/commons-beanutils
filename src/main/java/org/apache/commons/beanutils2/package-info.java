@@ -1008,7 +1008,7 @@
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
  * <li>The {@code java.beans.Introspector} searches widely for a custom <em>BeanInfo</em>
  * class. If your class has the same name as another with a custom <em>BeanInfo</em>
- * (typically a java API class) then the {@code Introspector} may use that instead of
+ * (typically a Java API class) then the {@code Introspector} may use that instead of
  * creating via reflection based on your class. If this happens, the only solution is to
  * create your own <em>BeanInfo</em>.</li>
  * </ul>
