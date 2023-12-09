@@ -109,7 +109,7 @@ public class DynaProperty implements Serializable {
 
     /**
      * Checks this instance against the specified Object for equality. Overrides the
-     * default reference test for equality provided by {@link java.lang.Object#equals(Object)}
+     * default reference test for equality provided by {@link Object#equals(Object)}
      * @param obj The object to compare to
      * @return {@code true} if object is a dyna property with the same name
      * type and content type, otherwise {@code false}
