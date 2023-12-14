@@ -463,7 +463,7 @@ public class ConvertUtilsBean {
         registerArrays(throwException, defaultArraySize);
     }
 
-    /** strictly for convenience since it has same parameter order as Map.put */
+    /** Strictly for convenience since it has same parameter order as Map.put */
     private <T> void register(final Class<?> clazz, final Converter<T> converter) {
         register(new ConverterFacade<>(converter), clazz);
     }
