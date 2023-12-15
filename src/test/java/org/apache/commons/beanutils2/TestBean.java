@@ -507,11 +507,7 @@ public class TestBean implements Serializable {
     }
 
     public void setInvalidBoolean(final String invalidBoolean) {
-        if ("true".equalsIgnoreCase(invalidBoolean) || "yes".equalsIgnoreCase(invalidBoolean) || "1".equalsIgnoreCase(invalidBoolean)) {
-            this.invalidBoolean = true;
-        } else {
-            this.invalidBoolean = false;
-        }
+        this.invalidBoolean = Boolean.parseBoolean(invalidBoolean) || "yes".equalsIgnoreCase(invalidBoolean) || "1".equalsIgnoreCase(invalidBoolean);
     }
 
     public void setLongProperty(final long longProperty) {
