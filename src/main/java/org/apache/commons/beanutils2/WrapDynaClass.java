@@ -241,7 +241,7 @@ public class WrapDynaClass implements DynaClass {
 
     /**
      * Gets the name of this DynaClass (analogous to the
-     * {@code getName()} method of {@code java.lang.Class}, which
+     * {@code getName()} method of {@link Class}, which
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *

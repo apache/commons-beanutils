@@ -319,7 +319,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
     /**
-     * Create a new Instance of a {@code java.lang.Number} Property.
+     * Create a new Instance of a {@link Number} Property.
      * @param name The name of the property
      * @param type The class of the property
      * @return The new value

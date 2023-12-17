@@ -29,7 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@code java.lang.Number} object, optionally using a
+ * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@link Number} object, optionally using a
  * default value or throwing a {@link ConversionException} if a conversion error occurs.
  *
  * @param <T> The converter type.

@@ -204,7 +204,7 @@ public class ConvertUtilsBean {
      * Convert the specified value into a String.  If the specified value
      * is an array, the first element (converted to a String) will be
      * returned.  The registered {@link Converter} for the
-     * {@code java.lang.String} class will be used, which allows
+     * {@link String} class will be used, which allows
      * applications to customize Object-&gt;String conversions (the default
      * implementation simply uses toString()).
      *

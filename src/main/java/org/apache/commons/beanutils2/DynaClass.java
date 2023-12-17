@@ -18,7 +18,7 @@ package org.apache.commons.beanutils2;
 
 /**
  * <p>A <strong>DynaClass</strong> is a simulation of the functionality of
- * {@code java.lang.Class} for classes implementing the
+ * {@link Class} for classes implementing the
  * {@code DynaBean} interface.  DynaBean instances that share the same
  * DynaClass all have the same set of available properties, along with any
  * associated data types, read-only states, and write-only states.</p>
@@ -52,7 +52,7 @@ public interface DynaClass {
 
     /**
      * Returns the name of this DynaClass (analogous to the
-     * {@code getName()} method of {@code java.lang.Class}, which
+     * {@code getName()} method of {@link Class}, which
      * allows the same {@code DynaClass} implementation class to support
      * different dynamic classes, with different sets of properties.
      *

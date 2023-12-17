@@ -120,7 +120,7 @@ public class BeanComparator<T, V> implements Comparator<T>, Serializable {
      *
      * <p>
      * Passing "null" to this constructor will cause the BeanComparator to compare objects based on natural order, that
-     * is {@code java.lang.Comparable}.
+     * is {@link Comparable}.
      * </p>
      *
      * @param property String Name of a bean property, which may contain the name of a simple, nested, indexed, mapped,

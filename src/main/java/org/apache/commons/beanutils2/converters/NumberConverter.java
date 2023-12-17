@@ -33,14 +33,14 @@ import org.apache.commons.beanutils2.ConversionException;
  * to and from <b>java.lang.Number</b> objects.
  * <p>
  * This implementation handles conversion for the following
- * {@code java.lang.Number} types.
+ * {@link Number} types.
  * <ul>
- *     <li>{@code java.lang.Byte}</li>
- *     <li>{@code java.lang.Short}</li>
- *     <li>{@code java.lang.Integer}</li>
- *     <li>{@code java.lang.Long}</li>
- *     <li>{@code java.lang.Float}</li>
- *     <li>{@code java.lang.Double}</li>
+ *     <li>{@link Byte}</li>
+ *     <li>{@link Short}</li>
+ *     <li>{@link Integer}</li>
+ *     <li>{@link Long}</li>
+ *     <li>{@link Float}</li>
+ *     <li>{@link Double}</li>
  *     <li>{@code java.math.BigDecimal}</li>
  *     <li>{@code java.math.BigInteger}</li>
  * </ul>
@@ -107,7 +107,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     }
 
     /**
-     * Constructs a {@code java.lang.Number} <i>Converter</i> that returns
+     * Constructs a {@link Number} <i>Converter</i> that returns
      * a default value if an error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
@@ -252,7 +252,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
 
     /**
      * Gets the number format pattern used to convert
-     * Numbers to/from a {@code java.lang.String}
+     * Numbers to/from a {@link String}
      * (or {@code null} if none specified).
      * <p>
      * See {@code java.text.DecimalFormat} for details
@@ -315,7 +315,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
 
     /**
      * Sets a number format pattern to use to convert
-     * Numbers to/from a {@code java.lang.String}.
+     * Numbers to/from a {@link String}.
      * <p>
      * See {@code java.text.DecimalFormat} for details
      * of how to specify the pattern.
@@ -343,12 +343,12 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * <p>
      * This method handles conversion from a String to the following types:
      * <ul>
-     *     <li>{@code java.lang.Byte}</li>
-     *     <li>{@code java.lang.Short}</li>
-     *     <li>{@code java.lang.Integer}</li>
-     *     <li>{@code java.lang.Long}</li>
-     *     <li>{@code java.lang.Float}</li>
-     *     <li>{@code java.lang.Double}</li>
+     *     <li>{@link Byte}</li>
+     *     <li>{@link Short}</li>
+     *     <li>{@link Integer}</li>
+     *     <li>{@link Long}</li>
+     *     <li>{@link Float}</li>
+     *     <li>{@link Double}</li>
      *     <li>{@code java.math.BigDecimal}</li>
      *     <li>{@code java.math.BigInteger}</li>
      * </ul>
@@ -413,12 +413,12 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * <p>
      * This method handles conversion to the following types:
      * <ul>
-     *     <li>{@code java.lang.Byte}</li>
-     *     <li>{@code java.lang.Short}</li>
-     *     <li>{@code java.lang.Integer}</li>
-     *     <li>{@code java.lang.Long}</li>
-     *     <li>{@code java.lang.Float}</li>
-     *     <li>{@code java.lang.Double}</li>
+     *     <li>{@link Byte}</li>
+     *     <li>{@link Short}</li>
+     *     <li>{@link Integer}</li>
+     *     <li>{@link Long}</li>
+     *     <li>{@link Float}</li>
+     *     <li>{@link Double}</li>
      *     <li>{@code java.math.BigDecimal}</li>
      *     <li>{@code java.math.BigInteger}</li>
      * </ul>

@@ -45,7 +45,7 @@ package org.apache.commons.beanutils2.expression;
  *     a getter that returns the {@code List}</li>
  * <li><strong>Mapped ({@code name(key)})</strong> - The JavaBean
  *     is assumed to have an property getter and setter methods with an
- *     additional attribute of type {@code java.lang.String}.</li>
+ *     additional attribute of type {@link String}.</li>
  * <li><strong>Combined ({@code name1.name2[index].name3(key)})</strong> -
  *     Combining mapped, nested, and indexed references is also
  *     supported.</li>

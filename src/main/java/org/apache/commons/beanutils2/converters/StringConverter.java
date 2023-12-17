@@ -19,7 +19,7 @@ package org.apache.commons.beanutils2.converters;
 /**
  * {@link org.apache.commons.beanutils2.Converter}
  * implementation that converts an incoming
- * object into a {@code java.lang.String} object.
+ * object into a {@link String} object.
  * <p>
  * Note that ConvertUtils really is designed to do string-&gt;object conversions,
  * and offers very little support for object-&gt;string conversions. The

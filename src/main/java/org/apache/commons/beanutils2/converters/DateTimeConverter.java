@@ -340,7 +340,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
     /**
      * Gets the date format patterns used to convert
-     * dates to/from a {@code java.lang.String}
+     * dates to/from a {@link String}
      * (or {@code null} if none specified).
      *
      * @see SimpleDateFormat
@@ -477,7 +477,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
     /**
      * Sets a date format pattern to use to convert
-     * dates to/from a {@code java.lang.String}.
+     * dates to/from a {@link String}.
      *
      * @see SimpleDateFormat
      * @param pattern The format pattern.
@@ -488,7 +488,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
 
     /**
      * Sets the date format patterns to use to convert
-     * dates to/from a {@code java.lang.String}.
+     * dates to/from a {@link String}.
      *
      * @see SimpleDateFormat
      * @param patterns Array of format patterns.
