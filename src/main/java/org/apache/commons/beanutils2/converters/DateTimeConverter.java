@@ -40,15 +40,15 @@ import org.apache.commons.beanutils2.ConversionException;
  * This implementation handles conversion for the following
  * <i>date/time</i> types.
  * <ul>
- *     <li>{@code java.util.Date}</li>
- *     <li>{@code java.util.Calendar}</li>
- *     <li>{@code java.time.LocalDate}</li>
- *     <li>{@code java.time.LocalDateTime}</li>
- *     <li>{@code java.time.OffsetDateTime}</li>
- *     <li>{@code java.time.ZonedDateTime}</li>
- *     <li>{@code java.sql.Date}</li>
- *     <li>{@code java.sql.Time}</li>
- *     <li>{@code java.sql.Timestamp}</li>
+ *     <li>{@link java.util.Date}</li>
+ *     <li>{@link java.util.Calendar}</li>
+ *     <li>{@link java.time.LocalDate}</li>
+ *     <li>{@link java.time.LocalDateTime}</li>
+ *     <li>{@link java.time.OffsetDateTime}</li>
+ *     <li>{@link java.time.ZonedDateTime}</li>
+ *     <li>{@link java.sql.Date}</li>
+ *     <li>{@link java.sql.Time}</li>
+ *     <li>{@link java.sql.Timestamp}</li>
  * </ul>
  *
  * <h2>String Conversions (to and from)</h2>
@@ -183,15 +183,15 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * This method handles conversions between the following
      * types:
      * <ul>
-     *     <li>{@code java.util.Date}</li>
-     *     <li>{@code java.util.Calendar}</li>
-     *     <li>{@code java.time.LocalDate}</li>
-     *     <li>{@code java.time.LocalDateTime}</li>
-     *     <li>{@code java.time.OffsetDateTime}</li>
-     *     <li>{@code java.time.ZonedDateTime}</li>
-     *     <li>{@code java.sql.Date}</li>
-     *     <li>{@code java.sql.Time}</li>
-     *     <li>{@code java.sql.Timestamp}</li>
+     *     <li>{@link java.util.Date}</li>
+     *     <li>{@link java.util.Calendar}</li>
+     *     <li>{@link java.time.LocalDate}</li>
+     *     <li>{@link java.time.LocalDateTime}</li>
+     *     <li>{@link java.time.OffsetDateTime}</li>
+     *     <li>{@link java.time.ZonedDateTime}</li>
+     *     <li>{@link java.sql.Date}</li>
+     *     <li>{@link java.sql.Time}</li>
+     *     <li>{@link java.sql.Timestamp}</li>
      * </ul>
      *
      * It also handles conversion from a {@code String} to
@@ -527,14 +527,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *
      * This method handles conversion to the following types:
      * <ul>
-     *     <li>{@code java.util.Date}</li>
-     *     <li>{@code java.util.Calendar}</li>
-     *     <li>{@code java.time.LocalDate}</li>
-     *     <li>{@code java.time.LocalDateTime}</li>
-     *     <li>{@code java.time.ZonedDateTime}</li>
-     *     <li>{@code java.sql.Date}</li>
-     *     <li>{@code java.sql.Time}</li>
-     *     <li>{@code java.sql.Timestamp}</li>
+     *     <li>{@link java.util.Date}</li>
+     *     <li>{@link java.util.Calendar}</li>
+     *     <li>{@link java.time.LocalDate}</li>
+     *     <li>{@link java.time.LocalDateTime}</li>
+     *     <li>{@link java.time.ZonedDateTime}</li>
+     *     <li>{@link java.sql.Date}</li>
+     *     <li>{@link java.sql.Time}</li>
+     *     <li>{@link java.sql.Timestamp}</li>
      * </ul>
      *
      * @param <T> The target type
@@ -617,14 +617,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      * <p>
      * This method handles conversion from a String to the following types:
      * <ul>
-     *     <li>{@code java.sql.Date}</li>
-     *     <li>{@code java.sql.Time}</li>
-     *     <li>{@code java.sql.Timestamp}</li>
+     *     <li>{@link java.sql.Date}</li>
+     *     <li>{@link java.sql.Time}</li>
+     *     <li>{@link java.sql.Timestamp}</li>
      * </ul>
      * <p>
      * <strong>N.B.</strong> No default String conversion
-     * mechanism is provided for {@code java.util.Date}
-     * and {@code java.util.Calendar} type.
+     * mechanism is provided for {@link java.util.Date}
+     * and {@link java.util.Calendar} type.
      *
      * @param <T> The target type
      * @param type The date type to convert to

@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>{@code Predicate} that evaluates a property value against a specified value.</p>
  * <p>
- * An implementation of {@code java.util.function.Predicate} that evaluates a
+ * An implementation of {@link java.util.function.Predicate} that evaluates a
  * property value on the object provided against a specified value and returns {@code true}
  * if equal; {@code false} otherwise.
  * The {@code BeanPropertyValueEqualsPredicate} constructor takes two parameters which

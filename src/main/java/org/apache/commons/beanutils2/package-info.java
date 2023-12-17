@@ -195,7 +195,7 @@
  * But what happens in more sophisticated environments where you do not
  * necessarily know ahead of time which bean class you are going to be using,
  * or which property you want to retrieve or modify?  The Java language provides
- * classes like {@code java.beans.Introspector}, which can examine a Java
+ * classes like {@link java.beans.Introspector}, which can examine a Java
  * class at runtime and identify for you the names of the property getter and
  * setter methods, plus the <em>Reflection</em> capabilities to dynamically call
  * such a method.  However, these APIs can be difficult to use, and expose the
@@ -219,7 +219,7 @@
  * <li><strong>Simple</strong> - Simple, or scalar, properties have a single
  *     value that may be retrieved or modified.  The underlying property type
  *     might be a Java language primitive (such as {@code int}, a simple
- *     object (such as a {@code java.lang.String}), or a more complex
+ *     object (such as a {@link java.lang.String}), or a more complex
  *     object whose class is defined either by the Java language, by the
  *     application, or by a class library included with the application.</li>
  * <li><strong>Indexed</strong> - An indexed property stores an ordered collection
@@ -228,11 +228,11 @@
  *     entire set of values may be set or retrieved using an array.
  *     As an extension to the JavaBeans specification, the
  *     <em>BeanUtils</em> package considers any property whose underlying data
- *     type is {@code java.util.List} (or an implementation of List) to be
+ *     type is {@link java.util.List} (or an implementation of List) to be
  *     indexed as well.</li>
  * <li><strong>Mapped</strong> - As an extension to standard JavaBeans APIs,
  *     the <em>BeanUtils</em> package considers any property whose underlying
- *     value is a {@code java.util.Map} to be "mapped".  You can set and
+ *     value is a {@link java.util.Map} to be "mapped".  You can set and
  *     retrieve individual values via a String-valued key.</li>
  * </ul>
  *
@@ -466,7 +466,7 @@
  * bean class actually implementing the interface's methods, and the associated
  * {@link org.apache.commons.beanutils2.DynaClass} interface that defines the set of
  * properties supported by a particular group of DynaBeans, in much the same way
- * that {@code java.lang.Class} defines the set of properties supported by
+ * that {@link java.lang.Class} defines the set of properties supported by
  * all instances of a particular JavaBean class.</p>
  *
  * <p>For example, the {@code Employee} class used in the examples above
@@ -556,7 +556,7 @@
  * <p>A very common use case for DynaBean APIs is to wrap other collections of
  * "stuff" that do not normally present themselves as JavaBeans.  One of the most
  * common collections that would be nice to wrap is the
- * {@code java.sql.ResultSet} that is returned when you ask a JDBC driver
+ * {@link java.sql.ResultSet} that is returned when you ask a JDBC driver
  * to perform a SQL SELECT statement.  Commons BeanUtils offers a standard
  * mechanism for making each row of the result set visible as a DynaBean,
  * which you can utilize as shown in this example:</p>
@@ -603,7 +603,7 @@
  * quite beneficial.</p>
  *
  * <p>As an additional benefit, the {@code RowSetDynaClass} class is defined
- * to implement {@code java.io.Serializable}, so that it (and the
+ * to implement {@link java.io.Serializable}, so that it (and the
  * DynaBeans that correspond to each row of the result) can be conveniently
  * serialized and deserialized (as long as the underlying column values are
  * also Serializable).  Thus, {@code RowSetDynaClass} represents a very
@@ -660,7 +660,7 @@
  *          with <i>lazy</i> map/list processing</li>
  *     <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <i>lazy list</i>
  *          for {@link org.apache.commons.beanutils2.DynaBean DynaBean's},
- *          {@code java.util.Map}'s or POJO beans.</li>
+ *          {@link java.util.Map}'s or POJO beans.</li>
  *     <li>4. <a href="#LazyDynaClass">LazyDynaClass</a> - A
  *          {@link org.apache.commons.beanutils2.MutableDynaClass} implementation.</li>
  * </ul>
@@ -748,7 +748,7 @@
  *
  * <p><strong>3. {@link org.apache.commons.beanutils2.LazyDynaList}</strong>
  *      is  <i>lazy list</i> for {@link org.apache.commons.beanutils2.DynaBean DynaBeans}
- *      {@code java.util.Map}'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
+ *      {@link java.util.Map}'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
  *      for more details and example usage.</p>
  *
  * <p><strong>4. {@link org.apache.commons.beanutils2.LazyDynaClass}</strong>
@@ -826,7 +826,7 @@
  * them to appropriate property types for Java primitives (such as
  * {@code int</code> or <code>boolean}), and property getter methods that
  * perform the reverse conversion.  Finally, a {@code populate()} method
- * is provided that accepts a {@code java.util.Map} containing a set of
+ * is provided that accepts a {@link java.util.Map} containing a set of
  * property values (keyed by property name), and calls all of the appropriate
  * setters whenever the underlying bean has a property with the same name as
  * one of the request parameters.  So, you can perform the all-in-one property
@@ -864,7 +864,7 @@
  * <ul>
  * <li>Write a class that implements the {@link org.apache.commons.beanutils2.Converter}
  *     interface.  The {@code convert()} method should accept the
- *     {@code java.lang.Class} object of your application class (i.e.
+ *     {@link java.lang.Class} object of your application class (i.e.
  *     the class that you want to convert to, and a String representing the
  *     incoming value to be converted.</li>
  * <li>At application startup time, register an instance of your converter class
@@ -1006,7 +1006,7 @@
  * <p>There are some subtleties  of this specification that can catch out the unwary:</p>
  * <ul>
  * <li>A property can have only one set and one get method. Overloading is not allowed.</li>
- * <li>The {@code java.beans.Introspector} searches widely for a custom <em>BeanInfo</em>
+ * <li>The {@link java.beans.Introspector} searches widely for a custom <em>BeanInfo</em>
  * class. If your class has the same name as another with a custom <em>BeanInfo</em>
  * (typically a Java API class) then the {@code Introspector} may use that instead of
  * creating via reflection based on your class. If this happens, the only solution is to

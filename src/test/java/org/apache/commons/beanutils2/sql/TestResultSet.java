@@ -41,7 +41,7 @@ import java.util.Map;
 
 /**
  * <p>
- * Mock object that implements enough of {@code java.sql.ResultSet} to exercise the {@link ResultSetDynaClass} functionality.
+ * Mock object that implements enough of {@link java.sql.ResultSet} to exercise the {@link ResultSetDynaClass} functionality.
  * </p>
  *
  */

@@ -41,8 +41,8 @@ import org.apache.commons.beanutils2.ConversionException;
  *     <li>{@link Long}</li>
  *     <li>{@link Float}</li>
  *     <li>{@link Double}</li>
- *     <li>{@code java.math.BigDecimal}</li>
- *     <li>{@code java.math.BigInteger}</li>
+ *     <li>{@link java.math.BigDecimal}</li>
+ *     <li>{@link java.math.BigInteger}</li>
  * </ul>
  *
  * <h2>String Conversions (to and from)</h2>
@@ -79,7 +79,7 @@ import org.apache.commons.beanutils2.ConversionException;
  *
  * <p>
  * <strong>N.B.</strong>Patterns can only be specified using the <i>standard</i>
- * pattern characters and NOT in <i>localized</i> form (see {@code java.text.DecimalFormat}).
+ * pattern characters and NOT in <i>localized</i> form (see {@link java.text.DecimalFormat}).
  * For example to cater for number styles used in Germany such as {@code 0.000,00} the pattern
  * is specified in the normal form {@code 0,000.00</code> and the locale set to <code>Locale.GERMANY}
  *
@@ -255,7 +255,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * Numbers to/from a {@link String}
      * (or {@code null} if none specified).
      * <p>
-     * See {@code java.text.DecimalFormat} for details
+     * See {@link java.text.DecimalFormat} for details
      * of how to specify the pattern.
      *
      * @return The format pattern.
@@ -317,7 +317,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      * Sets a number format pattern to use to convert
      * Numbers to/from a {@link String}.
      * <p>
-     * See {@code java.text.DecimalFormat} for details
+     * See {@link java.text.DecimalFormat} for details
      * of how to specify the pattern.
      *
      * @param pattern The format pattern.
@@ -349,8 +349,8 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      *     <li>{@link Long}</li>
      *     <li>{@link Float}</li>
      *     <li>{@link Double}</li>
-     *     <li>{@code java.math.BigDecimal}</li>
-     *     <li>{@code java.math.BigInteger}</li>
+     *     <li>{@link java.math.BigDecimal}</li>
+     *     <li>{@link java.math.BigInteger}</li>
      * </ul>
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to
@@ -419,8 +419,8 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
      *     <li>{@link Long}</li>
      *     <li>{@link Float}</li>
      *     <li>{@link Double}</li>
-     *     <li>{@code java.math.BigDecimal}</li>
-     *     <li>{@code java.math.BigInteger}</li>
+     *     <li>{@link java.math.BigDecimal}</li>
+     *     <li>{@link java.math.BigInteger}</li>
      * </ul>
      * @param sourceType The type being converted from
      * @param targetType The Number type to convert to

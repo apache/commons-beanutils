@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  * <p>
  * This class implements a default bean introspection algorithm based on the JDK
- * classes in the {@code java.beans} package. It discovers properties
+ * classes in the {@link java.beans} package. It discovers properties
  * conforming to the Java Beans specification.
  * </p>
  * <p>

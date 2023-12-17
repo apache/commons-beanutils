@@ -25,7 +25,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 /**
- * <p>A customized implementation of {@code java.util.HashMap} designed
+ * <p>A customized implementation of {@link java.util.HashMap} designed
  * to operate in a multi-threaded environment where the large majority of
  * method calls are read-only, instead of structural changes.  When operating
  * in "fast" mode, read calls are non-synchronized and write calls perform the
@@ -43,7 +43,7 @@ import java.util.WeakHashMap;
  *
  * <p><strong>NOTE</strong>: If you are creating and accessing a
  * {@code HashMap} only within a single thread, you should use
- * {@code java.util.HashMap} directly (with no synchronization), for
+ * {@link java.util.HashMap} directly (with no synchronization), for
  * maximum performance.</p>
  *
  * <p><strong>NOTE</strong>: <i>This class is not cross-platform.

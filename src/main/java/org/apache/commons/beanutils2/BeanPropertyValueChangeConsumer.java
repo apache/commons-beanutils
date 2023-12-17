@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>{@code Closure} that sets a property.</p>
  * <p>
- * An implementation of {@code java.util.function.Consumer} that updates
+ * An implementation of {@link java.util.function.Consumer} that updates
  * a specified property on the object provided with a specified value.
  * The {@code BeanPropertyValueChangeClosure} constructor takes two parameters which determine
  * what property will be updated and with what value.

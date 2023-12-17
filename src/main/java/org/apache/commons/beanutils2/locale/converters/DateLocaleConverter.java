@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter} implementation that converts an incoming locale-sensitive String into a
- * {@code java.util.Date} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils2.ConversionException} if a conversion error
+ * {@link java.util.Date} object, optionally using a default value or throwing a {@link org.apache.commons.beanutils2.ConversionException} if a conversion error
  * occurs.
  *
  * @param <D> The Date type.

@@ -16,6 +16,6 @@
  */
 
 /**
- * Contains code that relies on the {@code java.sql} module.
+ * Contains code that relies on the {@link java.sql} module.
  */
 package org.apache.commons.beanutils2.sql.converters;

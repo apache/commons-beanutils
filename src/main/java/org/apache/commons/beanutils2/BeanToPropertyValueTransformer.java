@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <p>{@code Transformer} that outputs a property value.</p>
  *
- * <p>An implementation of {@code java.util.function.Function} that transforms
+ * <p>An implementation of {@link java.util.function.Function} that transforms
  * the object provided by returning the value of a specified property of the object.  The
  * constructor for {@code BeanToPropertyValueTransformer} requires the name of the property
  * that will be used in the transformation.  The property can be a simple, nested, indexed, or

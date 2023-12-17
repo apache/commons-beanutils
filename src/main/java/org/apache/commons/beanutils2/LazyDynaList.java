@@ -46,7 +46,7 @@ import java.util.Map;
  * <h2>{@code toArray()}</h2>
  * <p>The {@code toArray()} method returns an array of the
  *    elements of the appropriate type. If the {@code LazyDynaList}
- *    is populated with {@code java.util.Map} objects a
+ *    is populated with {@link java.util.Map} objects a
  *    {@code Map[]} array is returned.
  *    If the list is populated with POJO Beans an appropriate
  *    array of the POJO Beans is returned. Otherwise a {@code DynaBean[]}
@@ -138,7 +138,7 @@ import java.util.Map;
  * <p>A slight variation - set the element type using either
  *    the {@code setElementType(Class)} method or the
  *    {@code setElementDynaClass(DynaClass)} method - then populate
- *    with the normal {@code java.util.List} methods (i.e.
+ *    with the normal {@link java.util.List} methods (i.e.
  *    {@code add()}, {@code addAll()} or {@code set()}).</p>
  *
  * <pre><code>
