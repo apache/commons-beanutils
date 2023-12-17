@@ -38,7 +38,7 @@ public class SqlDateLocaleConverter extends DateLocaleConverter<Date> {
 
         @Override
         public SqlDateLocaleConverter get() {
-            return new SqlDateLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, lenient);
+            return new SqlDateLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, isLenient());
         }
 
     }

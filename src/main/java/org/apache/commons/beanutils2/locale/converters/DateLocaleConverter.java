@@ -49,7 +49,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
     public static class Builder<B extends Builder<B, D>, D extends Date> extends BaseLocaleConverter.Builder<B, D> {
 
         /** Should the date conversion be lenient? */
-        protected boolean lenient;
+        private boolean lenient;
 
         /**
          * Gets a new instance.
@@ -63,6 +63,16 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
         @Override
         public DateLocaleConverter<D> get() {
             return new DateLocaleConverter<>(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, lenient);
+        }
+
+        /**
+         * Tests whether date formatting is lenient.
+         *
+         * @return true if the {@code DateFormat} used for formatting is lenient
+         * @see java.text.DateFormat#isLenient()
+         */
+        public boolean isLenient() {
+            return lenient;
         }
 
         /**
@@ -197,7 +207,7 @@ public class DateLocaleConverter<D extends Date> extends BaseLocaleConverter<D> 
      * Tests whether date formatting is lenient.
      *
      * @return true if the {@code DateFormat} used for formatting is lenient
-     * @see java.text.DateFormat#isLenient
+     * @see java.text.DateFormat#isLenient()
      */
     public boolean isLenient() {
         return isLenient;

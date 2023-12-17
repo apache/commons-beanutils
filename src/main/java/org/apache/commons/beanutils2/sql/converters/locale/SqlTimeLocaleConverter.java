@@ -38,7 +38,7 @@ public class SqlTimeLocaleConverter extends DateLocaleConverter<Time> {
 
         @Override
         public SqlTimeLocaleConverter get() {
-            return new SqlTimeLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, lenient);
+            return new SqlTimeLocaleConverter(defaultValue, locale, pattern, useDefault || defaultValue != null, localizedPattern, isLenient());
         }
 
     }

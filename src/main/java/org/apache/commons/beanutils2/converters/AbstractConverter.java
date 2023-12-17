@@ -463,9 +463,9 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     }
 
     /**
-     * Converts a {@code java.lang.Class} to a String.
+     * Converts a {@link Class} to a String.
      *
-     * @param type The {@code java.lang.Class}.
+     * @param type The {@link Class}.
      * @return The String representation.
      */
     String toString(final Class<?> type) {
