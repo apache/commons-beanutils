@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2.sql.converters;
 
 import java.sql.Time;
-//import java.util.Calendar;
-//import java.util.Locale;
+import java.util.Calendar;
+import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 
