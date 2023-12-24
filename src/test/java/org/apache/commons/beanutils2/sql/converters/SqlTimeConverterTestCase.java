@@ -18,8 +18,8 @@
 package org.apache.commons.beanutils2.sql.converters;
 
 import java.sql.Time;
-import java.util.Calendar;
-import java.util.Locale;
+//import java.util.Calendar;
+//import java.util.Locale;
 
 import org.apache.commons.beanutils2.converters.AbstractDateConverterTest;
 
@@ -105,7 +105,7 @@ public class SqlTimeConverterTestCase extends AbstractDateConverterTest<Time> {
         // Re-set the default Locale to Locale.US
         final Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-
+        System.out.println("test");
         final String pattern = "h:mm a"; // SHORT style time format for US Locale
 
         // Create & Configure the Converter
