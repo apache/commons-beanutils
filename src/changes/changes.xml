@@ -116,6 +116,9 @@
       <action dev="ggregory" type="fix" due-to="Gary Gregory">
         Avoid possible NPE in DateTimeConverter.parse(Class, Class, String).
       </action>
+      <action dev="ggregory" type="fix" due-to="Claude Warren, Gary Gregory">
+        Annotate Converter with @FunctionalInterface.
+      </action>
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Dependabot, Gary Gregory">
         Add github/codeql-action #118.

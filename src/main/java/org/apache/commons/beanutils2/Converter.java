@@ -33,6 +33,7 @@ package org.apache.commons.beanutils2;
  * @param <T> the convert type.
  * @since 1.3
  */
+@FunctionalInterface
 public interface Converter<T> {
 
     /**
