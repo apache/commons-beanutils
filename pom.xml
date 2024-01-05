@@ -371,7 +371,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <forkMode>pertest</forkMode>
+          <reuseForks>false</reuseForks>
           <!-- limit memory size see BEANUTILS-291
                      ..also include ${argLine} from jacoco-maven-plugin
           -->
@@ -438,6 +438,7 @@
   <reporting>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
           <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
@@ -527,9 +528,9 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>${commons.findbugs.version}</version>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.12.2</version>
         <configuration>
           <threshold>Normal</threshold>
           <effort>Default</effort>
