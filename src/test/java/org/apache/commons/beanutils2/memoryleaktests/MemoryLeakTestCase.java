@@ -155,7 +155,7 @@ public class MemoryLeakTestCase {
     /**
      * Produces a profiler report about where the leaks are.
      *
-     * This requires JBoss's profiler be installed, see: http://labs.jboss.com/jbossprofiler/
+     * This requires JBoss's profiler be installed, see: https://labs.jboss.com/jbossprofiler/
      *
      * @param className The name of the class to profile
      */
