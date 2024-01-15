@@ -440,7 +440,7 @@ public class LocaleBeanificationTestCase {
             }
             // create garbage:
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
 
@@ -487,7 +487,7 @@ public class LocaleBeanificationTestCase {
             }
             // create garbage:
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
 
@@ -519,7 +519,7 @@ public class LocaleBeanificationTestCase {
             }
             // create garbage:
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
 }

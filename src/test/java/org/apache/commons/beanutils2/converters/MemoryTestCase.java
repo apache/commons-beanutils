@@ -65,7 +65,7 @@ public class MemoryTestCase {
             try {
                 @SuppressWarnings("unused")
                 final byte[] b = new byte[bytes];
-                bytes = bytes * 2;
+                bytes *= 2;
             } catch (final OutOfMemoryError e) {
                 // well that sure should have forced a garbage collection
                 // run to occur!

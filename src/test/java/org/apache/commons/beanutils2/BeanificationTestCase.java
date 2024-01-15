@@ -407,11 +407,9 @@ public class BeanificationTestCase extends TestCase {
             // create garbage:
             @SuppressWarnings("unused")
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
-
-    // ---- Auxillary classes
 
     /** Tests whether class loaders and beans are released from memory by the map used by beanutils */
     public void testMemoryLeak2() throws Exception {
@@ -457,7 +455,7 @@ public class BeanificationTestCase extends TestCase {
             // create garbage:
             @SuppressWarnings("unused")
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
 
@@ -491,7 +489,7 @@ public class BeanificationTestCase extends TestCase {
             // create garbage:
             @SuppressWarnings("unused")
             final byte[] b = new byte[bytz];
-            bytz = bytz * 2;
+            bytz *= 2;
         }
     }
 }
