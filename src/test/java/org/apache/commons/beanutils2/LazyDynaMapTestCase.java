@@ -164,7 +164,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         dynaMap.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, dynaMap.get(testProperty, index));
         assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) dynaMap.get(testProperty)).size()));
@@ -196,7 +196,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the String[] and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         dynaMap.set(testProperty, index, testString2);
         assertEquals("Check Second Indexed Value is correct(a)", testString2, dynaMap.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[]) dynaMap.get(testProperty))[index]);
@@ -229,7 +229,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) dynaMap.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the int[] and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         dynaMap.set(testProperty, index, testInteger2);
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, dynaMap.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[]) dynaMap.get(testProperty))[index]));
@@ -257,7 +257,7 @@ public class LazyDynaMapTestCase extends TestCase {
         assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) dynaMap.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         dynaMap.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, dynaMap.get(testProperty, index));
         assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) dynaMap.get(testProperty)).size()));

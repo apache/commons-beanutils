@@ -155,7 +155,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the LinkedList and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         bean.set(testProperty, index, testInteger1);
         assertEquals("Check Second Indexed Value is correct", testInteger1, bean.get(testProperty, index));
         assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((LinkedList<?>) bean.get(testProperty)).size()));
@@ -187,7 +187,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((String[]) bean.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the String[] and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         bean.set(testProperty, index, testString2);
         assertEquals("Check Second Indexed Value is correct(a)", testString2, bean.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testString2, ((String[]) bean.get(testProperty))[index]);
@@ -220,7 +220,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((int[]) bean.get(testProperty)).length));
 
         // Set a second indexed value, should automatically grow the int[] and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         bean.set(testProperty, index, testInteger2);
         assertEquals("Check Second Indexed Value is correct(a)", testInteger2, bean.get(testProperty, index));
         assertEquals("Check Second Indexed Value is correct(b)", testInteger2, Integer.valueOf(((int[]) bean.get(testProperty))[index]));
@@ -248,7 +248,7 @@ public class LazyDynaBeanTestCase extends TestCase {
         assertEquals("Check First Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) bean.get(testProperty)).size()));
 
         // Set a second indexed value, should automatically grow the ArrayList and set appropriate indexed value
-        index = index + 2;
+        index += 2;
         bean.set(testProperty, index, testString1);
         assertEquals("Check Second Indexed Value is correct", testString1, bean.get(testProperty, index));
         assertEquals("Check Second Array length is correct", Integer.valueOf(index + 1), Integer.valueOf(((ArrayList<?>) bean.get(testProperty)).size()));
