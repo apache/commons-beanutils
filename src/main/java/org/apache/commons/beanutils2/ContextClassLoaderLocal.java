@@ -88,7 +88,7 @@ import java.util.WeakHashMap;
  * related classes and static variables cannot be garbage-collected. This is
  * not expected to be an issue with the commons-beanutils library as the only
  * classes which use this class are BeanUtilsBean and ConvertUtilsBean and
- * there is no obvious reason for a user of the beanutils library to subclass
+ * there is no obvious reason for a user of the BeanUtils library to subclass
  * either of those classes.</p>
  *
  * <p><strong>Note:</strong> A WeakHashMap bug in several 1.3 JVMs results in

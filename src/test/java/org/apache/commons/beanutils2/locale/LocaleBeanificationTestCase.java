@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * <p>
- * Test Case for changes made during LocaleBeanutils Beanification. This is basically a cut-and-correct version of the beanutils beanifications tests.
+ * Test Case for changes made during LocaleBeanutils Beanification. This is basically a cut-and-correct version of the BeanUtils beanifications tests.
  * </p>
  */
 public class LocaleBeanificationTestCase {
@@ -113,7 +113,7 @@ public class LocaleBeanificationTestCase {
         LocaleConvertUtils.deregister();
     }
 
-    /** Tests whether different threads can set beanutils instances correctly */
+    /** Tests whether different threads can set BeanUtils instances correctly */
     @Test
     public void testBeanUtilsBeanSetInstance() throws Exception {
 
@@ -444,9 +444,9 @@ public class LocaleBeanificationTestCase {
         }
     }
 
-    /** Tests whether class loaders and beans are released from memory by the map used by beanutils */
+    /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils */
     public void testMemoryLeak2() {
-        // tests when the map used by beanutils has the right behavior
+        // tests when the map used by BeanUtils has the right behavior
 
         if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");

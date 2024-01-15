@@ -2457,7 +2457,7 @@ public class PropertyUtilsTestCase extends TestCase {
             // probably just tried to do
             // map.set("submap(beta2)", betaBean2)
             // which is almost certainly not what the used expected. This is
-            // what beanutils 1.5.0 to 1.7.1 did....
+            // what BeanUtils 1.5.0 to 1.7.1 did....
             fail("Exception not thrown for invalid setNestedProperty syntax");
         } catch (final IllegalArgumentException ex) {
             // ok, getting an exception was expected. As it is of a generic
@@ -2480,7 +2480,7 @@ public class PropertyUtilsTestCase extends TestCase {
             // probably just tried to do
             // map.get("submap[3]")
             // which is almost certainly not what the used expected. This is
-            // what beanutils 1.5.0 to 1.7.1 did....
+            // what BeanUtils 1.5.0 to 1.7.1 did....
             fail("Exception not thrown for invalid setNestedProperty syntax");
         } catch (final IllegalArgumentException ex) {
             // ok, getting an exception was expected. As it is of a generic

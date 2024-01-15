@@ -1941,8 +1941,8 @@ public class PropertyUtilsBean {
      * or an Array).</li>
      * </ul>
      * <p>
-     * The default behavior of beanutils 1.7.1 or later is for assigning to
-     * "a.b" to mean a.put(b, obj) always. However the behavior of beanutils
+     * The default behavior of BeanUtils 1.7.1 or later is for assigning to
+     * "a.b" to mean a.put(b, obj) always. However the behavior of BeanUtils
      * version 1.6.0, 1.6.1, 1.7.0 was for "a.b" to mean a.setB(obj) if such
      * a method existed, and a.put(b, obj) otherwise. In version 1.5 it meant
      * a.put(b, obj) always (ie the same as the behavior in the current version).

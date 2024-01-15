@@ -134,7 +134,7 @@ public class BeanificationTestCase extends TestCase {
         // No action required
     }
 
-    /** Tests whether different threads can set beanutils instances correctly */
+    /** Tests whether different threads can set BeanUtils instances correctly */
     public void testBeanUtilsBeanSetInstance() throws Exception {
 
         final class SetInstanceTesterThread extends Thread {
@@ -411,9 +411,9 @@ public class BeanificationTestCase extends TestCase {
         }
     }
 
-    /** Tests whether class loaders and beans are released from memory by the map used by beanutils */
+    /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils. */
     public void testMemoryLeak2() throws Exception {
-        // tests when the map used by beanutils has the right behavior
+        // tests when the map used by BeanUtils has the right behavior
 
         if (BeanUtilsBeanTestCase.isPre14JVM()) {
             System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");

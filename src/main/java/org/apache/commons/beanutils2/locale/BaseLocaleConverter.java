@@ -222,7 +222,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
             if (useDefault) {
                 return getDefaultAs(targetType);
             }
-            // symmetric beanutils function allows null
+            // symmetric BeanUtils function allows null
             // so do not: throw new ConversionException("No value specified");
             LOG.debug("Null value specified for conversion, returning null");
             return null;
