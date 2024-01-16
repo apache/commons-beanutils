@@ -119,6 +119,9 @@
       <action dev="ggregory" type="fix" due-to="Claude Warren, Gary Gregory">
         Annotate Converter with @FunctionalInterface.
       </action>
+      <action dev="ggregory" type="fix" due-to="SingingBush">
+        Fix JDK 21 CI failure due to locale changes #201.
+      </action>
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Dependabot, Gary Gregory">
         Add github/codeql-action #118.
