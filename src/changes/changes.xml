@@ -119,7 +119,7 @@
       <action dev="ggregory" type="fix" due-to="Claude Warren, Gary Gregory">
         Annotate Converter with @FunctionalInterface.
       </action>
-      <action dev="ggregory" type="fix" due-to="SingingBush">
+      <action issue="BEANUTILS-564" dev="ggregory" type="fix" due-to="SingingBush">
         Fix JDK 21 CI failure due to locale changes #201.
       </action>
       <!-- ADD -->
