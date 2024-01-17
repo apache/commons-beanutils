@@ -142,7 +142,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>
-     * Return an array of {@code PropertyDescriptor} for the properties currently defined in this DynaClass. If no properties are defined, a zero-length array
+     * Gets an array of {@code PropertyDescriptor} for the properties currently defined in this DynaClass. If no properties are defined, a zero-length array
      * will be returned.
      * </p>
      */
@@ -153,7 +153,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>
-     * Return a property descriptor for the specified property, if it exists; otherwise, return {@code null}.
+     * Gets a property descriptor for the specified property, if it exists; otherwise, return {@code null}.
      * </p>
      *
      * @param name Name of the dynamic property for which a descriptor is requested
@@ -171,7 +171,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
 
     /**
      * <p>
-     * Return the name of this DynaClass (analogous to the {@code getName()</code> method of <code>java.lang.Class}, which allows the same {@code DynaClass}
+     * Gets the name of this DynaClass (analogous to the {@code getName()</code> method of <code>java.lang.Class}, which allows the same {@code DynaClass}
      * implementation class to support different dynamic classes, with different sets of properties.
      * </p>
      */

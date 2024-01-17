@@ -247,7 +247,7 @@ public class RowSetDynaClass extends AbstractJdbcDynaClass {
 
     /**
      * <p>
-     * Return a {@code List} containing the {@link DynaBean}s that represent the contents of each {@code Row} from the {@code ResultSet} that was the basis of
+     * Gets a {@code List} containing the {@link DynaBean}s that represent the contents of each {@code Row} from the {@code ResultSet} that was the basis of
      * this {@link RowSetDynaClass} instance. These {@link DynaBean}s are disconnected from the database itself, so there is no problem with modifying the
      * contents of the list, or the values of the properties of these {@link DynaBean}s. However, it is the application's responsibility to persist any such
      * changes back to the database, if it so desires.

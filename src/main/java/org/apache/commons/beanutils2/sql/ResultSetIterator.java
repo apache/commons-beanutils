@@ -163,7 +163,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     /**
      * <p>
-     * Return {@code true} if the iteration has more elements.
+     * Gets {@code true} if the iteration has more elements.
      * </p>
      *
      * @return {@code true} if the result set has another row, otherwise {@code false}
@@ -180,7 +180,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
     /**
      * <p>
-     * Return the next element in the iteration.
+     * Gets the next element in the iteration.
      * </p>
      *
      * @return advance to the new row and return this

@@ -167,7 +167,7 @@ public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 
     /**
      * <p>
-     * Return the result set we are wrapping.
+     * Gets the result set we are wrapping.
      * </p>
      */
     ResultSet getResultSet() {
