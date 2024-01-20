@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.locale.converters.ShortLocaleConverter;
 
 /**
  * Test Case for the ShortLocaleConverter class.
- *
  */
 
 public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Short> {
@@ -55,7 +54,6 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
 
@@ -74,7 +72,6 @@ public class ShortLocaleConverterTestCase extends BaseLocaleConverterTestCase<Sh
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
 

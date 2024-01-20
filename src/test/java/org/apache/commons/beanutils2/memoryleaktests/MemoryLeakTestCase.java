@@ -47,7 +47,6 @@ import org.junit.Test;
  * Tests BeanUtils memory leaks.
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
- *
  */
 public class MemoryLeakTestCase {
 

@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 /**
  * This is a package private subclass of TestBean. All of our properties should still be accessible via reflection.
- *
  */
 
 final class TestBeanPackageSubclass extends TestBean {

@@ -32,7 +32,6 @@ import junit.framework.TestSuite;
  * <p>
  * Test case for {@code MethodUtils}
  * </p>
- *
  */
 public class MethodUtilsTestCase extends TestCase {
 

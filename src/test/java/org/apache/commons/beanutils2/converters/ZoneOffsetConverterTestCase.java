@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ZoneOffsetConverter class.
- *
  */
 public class ZoneOffsetConverterTestCase extends TestCase {
 

@@ -50,7 +50,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase<
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
         // ------------- Construct using default locale ------------
@@ -67,7 +66,6 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase<
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
         // ------------- Construct using localized pattern (default locale) --------

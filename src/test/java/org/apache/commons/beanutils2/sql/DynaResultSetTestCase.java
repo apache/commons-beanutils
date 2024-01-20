@@ -29,7 +29,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test accessing ResultSets via DynaBeans.
- *
  */
 
 public class DynaResultSetTestCase extends TestCase {

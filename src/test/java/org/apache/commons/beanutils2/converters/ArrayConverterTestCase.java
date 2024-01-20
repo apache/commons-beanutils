@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ArrayConverter class.
- *
  */
 public class ArrayConverterTestCase extends TestCase {
 

@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test Case for {@link LocaleBeanUtils}.
- *
  */
 public class LocaleBeanUtilsTestCase {
 

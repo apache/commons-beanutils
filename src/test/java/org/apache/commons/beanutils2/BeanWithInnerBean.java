@@ -21,7 +21,6 @@ import java.util.Properties;
 
 /**
  * Bean with inner bean.
- *
  */
 public class BeanWithInnerBean {
     public class InnerBean {

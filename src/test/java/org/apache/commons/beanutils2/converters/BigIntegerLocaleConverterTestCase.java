@@ -23,7 +23,6 @@ import org.apache.commons.beanutils2.locale.converters.BigIntegerLocaleConverter
 
 /**
  * Test Case for the BigIntegerLocaleConverter class.
- *
  */
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase<BigInteger> {
 
@@ -53,7 +52,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
 
@@ -72,7 +70,6 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
 

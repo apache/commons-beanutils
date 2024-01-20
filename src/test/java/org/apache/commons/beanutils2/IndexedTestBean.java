@@ -22,7 +22,6 @@ import java.util.List;
 
 /**
  * Indexed Properties Test bean for JUnit tests for the "beanutils" component.
- *
  */
 public class IndexedTestBean {
 

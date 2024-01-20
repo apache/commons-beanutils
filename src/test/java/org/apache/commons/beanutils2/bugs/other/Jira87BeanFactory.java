@@ -20,7 +20,6 @@ import org.apache.commons.beanutils2.bugs.Jira87TestCase;
 
 /**
  * Factory which creates beans for {@link Jira87TestCase}.
- *
  */
 public class Jira87BeanFactory {
 

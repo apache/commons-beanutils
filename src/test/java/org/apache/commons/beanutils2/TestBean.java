@@ -25,7 +25,6 @@ import java.util.Map;
 
 /**
  * General purpose test bean for JUnit tests for the "beanutils" component.
- *
  */
 
 public class TestBean implements Serializable {

@@ -18,7 +18,6 @@ package org.apache.commons.beanutils2.memoryleaktests.pojotests;
 
 /**
  * Custom number implementation to test with converters.
- *
  */
 public class CustomInteger extends Number {
 

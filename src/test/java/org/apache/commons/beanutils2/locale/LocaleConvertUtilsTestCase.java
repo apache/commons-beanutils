@@ -32,7 +32,6 @@ import junit.framework.TestSuite;
  * <p>
  * Test Case for the LocaleConvertUtils class. See unimplemented functionality of the convert utils in the method begining with fixme
  * </p>
- *
  */
 
 public class LocaleConvertUtilsTestCase extends TestCase {

@@ -28,7 +28,6 @@ import junit.framework.TestSuite;
  * <p>
  * Test case for {@code ConstructorUtils}
  * </p>
- *
  */
 public class ConstructorUtilsTestCase extends TestCase {
 

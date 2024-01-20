@@ -21,7 +21,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the {@link BeanUtilsBean2}.
- *
  */
 public class BeanUtilsBean2TestCase extends BeanUtilsBeanTestCase {
 

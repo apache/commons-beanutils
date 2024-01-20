@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 /**
  * Test cases for {@code BeanToPropertyValueTransformer}.
- *
  */
 public class BeanToPropertyValueTransformerTestCase extends TestCase {
 
@@ -209,7 +208,6 @@ public class BeanToPropertyValueTransformerTestCase extends TestCase {
 
     /**
      * Test transform with simple String property and null value.
-     *
      */
     public void testTransformWithSimpleStringPropertyAndNullValue() {
         final BeanToPropertyValueTransformer<TestBean, String> transformer = new BeanToPropertyValueTransformer<>("stringProperty");

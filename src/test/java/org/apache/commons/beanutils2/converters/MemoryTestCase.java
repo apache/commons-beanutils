@@ -88,7 +88,6 @@ public class MemoryTestCase {
      * <li>should not be visible to other components; and</li>
      * <li>should not prevent the component-specific classloader from being garbage-collected when the container sets its reference to null.
      * </ul>
-     *
      */
     @Test
     public void testComponentRegistersCustomConverter() throws Exception {
@@ -175,7 +174,6 @@ public class MemoryTestCase {
      * <li>should not be visible to other components; and</li>
      * <li>should not prevent the component-specific classloader from being garbage-collected when the container sets its reference to null.
      * </ul>
-     *
      */
     @Test
     public void testComponentRegistersStandardConverter() throws Exception {

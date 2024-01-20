@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2.priv;
 
 /**
  * Factory class for PrivateBean instances.
- *
  */
 
 public class PrivateBeanFactory {

@@ -53,7 +53,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
 
@@ -72,7 +71,6 @@ public class LongLocaleConverterTestCase extends BaseLocaleConverterTestCase<Lon
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
 

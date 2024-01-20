@@ -21,7 +21,6 @@ import java.util.Hashtable;
 
 /**
  * Used to test
- *
  */
 
 public class ExtendMapBean extends Hashtable<Object, Object> {

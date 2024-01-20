@@ -118,7 +118,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
 
@@ -145,7 +144,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
 

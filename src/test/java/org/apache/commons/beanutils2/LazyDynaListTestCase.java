@@ -34,7 +34,6 @@ import junit.framework.TestSuite;
  * <p>
  * Test Case for the {@code LazyDynaList}class.
  * </p>
- *
  */
 public class LazyDynaListTestCase extends TestCase {
 

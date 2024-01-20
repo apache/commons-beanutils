@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 /**
  * Test POJO with mapped property
- *
  */
 public class SomeMappedPojo {
 

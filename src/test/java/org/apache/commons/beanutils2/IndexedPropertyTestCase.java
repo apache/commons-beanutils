@@ -35,7 +35,6 @@ import org.junit.Test;
  * <p>
  * Test Case for the Indexed Properties.
  * </p>
- *
  */
 
 public class IndexedPropertyTestCase {
@@ -318,7 +317,6 @@ public class IndexedPropertyTestCase {
      * Fails because of a bug in BeanUtilsBean.setProperty() method. Value is always converted to the array's component type which in this case is a String.
      * Then it calls the setStringArray(String[]) passing a String rather than String[] causing this exception. If there isn't an "index" value then the
      * PropertyType (rather than IndexedPropertyType) should be used.
-     *
      */
     @Test
     public void testSetArray() throws Exception {

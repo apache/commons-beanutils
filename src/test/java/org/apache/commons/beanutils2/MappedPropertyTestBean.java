@@ -22,7 +22,6 @@ import java.util.Map;
 
 /**
  * Just a Java bean (JAJB) to try to replicate a reported bug
- *
  */
 
 public class MappedPropertyTestBean {

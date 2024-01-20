@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the MonthDayConverter class.
- *
  */
 public class MonthDayConverterTestCase extends TestCase {
 

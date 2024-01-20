@@ -28,7 +28,6 @@ import java.sql.Types;
  * <p>
  * Mock object that implements enough of {@link java.sql.ResultSetMetaData} to exercise the {@link ResultSetDynaClass} functionality.
  * </p>
- *
  */
 
 public class TestResultSetMetaData implements InvocationHandler {

@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the PeriodConverter class.
- *
  */
 public class PeriodConverterTestCase extends TestCase {
 

@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2.priv;
 
 /**
  * Bean that exposes methods defined by an interface that is implemented in the superclass.
- *
  */
 
 final class PrivateBeanSubclass extends PrivateBean {

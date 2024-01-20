@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test case for {@link DynaProperty}.
- *
  */
 public class DynaPropertyTestCase extends TestCase {
 

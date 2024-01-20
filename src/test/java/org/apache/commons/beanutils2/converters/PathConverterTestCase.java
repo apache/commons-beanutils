@@ -29,7 +29,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the UUIDConverter class.
- *
  */
 public class PathConverterTestCase extends TestCase {
 

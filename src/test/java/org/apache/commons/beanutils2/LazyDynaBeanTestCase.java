@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
  * <p>
  * Test Case for the {@code LazyDynaBean} implementation class.
  * </p>
- *
  */
 public class LazyDynaBeanTestCase extends TestCase {
 

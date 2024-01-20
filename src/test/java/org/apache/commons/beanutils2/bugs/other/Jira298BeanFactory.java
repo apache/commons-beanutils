@@ -20,7 +20,6 @@ import org.apache.commons.beanutils2.bugs.Jira298TestCase;
 
 /**
  * Factory which creates beans for {@link Jira298TestCase}.
- *
  */
 public class Jira298BeanFactory {
 

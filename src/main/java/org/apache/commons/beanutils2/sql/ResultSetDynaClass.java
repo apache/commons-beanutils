@@ -75,7 +75,6 @@ import org.apache.commons.beanutils2.DynaBean;
  *     results.add(newRow);
  *   }
  * </pre>
- *
  */
 public class ResultSetDynaClass extends AbstractJdbcDynaClass {
 

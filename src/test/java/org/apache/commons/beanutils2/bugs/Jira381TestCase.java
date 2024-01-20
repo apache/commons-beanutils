@@ -31,7 +31,6 @@ public class Jira381TestCase extends TestCase {
 
     /**
      * Test object.
-     *
      */
     public class TestObject {
     }

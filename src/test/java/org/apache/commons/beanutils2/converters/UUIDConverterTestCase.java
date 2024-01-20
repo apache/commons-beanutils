@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the UUIDConverter class.
- *
  */
 public class UUIDConverterTestCase extends TestCase {
 

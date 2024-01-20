@@ -24,7 +24,6 @@ import junit.framework.TestCase;
 
 /**
  * copyProperties() throws a ConversionException : No value specified for 'Date' when the field is a java.util.Date with a null value
- *
  */
 public class Jira454TestCase extends TestCase {
     public static class TestBean {

@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the URIConverter class.
- *
  */
 public class URIConverterTestCase extends TestCase {
 

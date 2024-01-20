@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
 
 /**
  * Test Case for the ZoneIdConverter class.
- *
  */
 public class ZoneIdConverterTestCase extends TestCase {
 

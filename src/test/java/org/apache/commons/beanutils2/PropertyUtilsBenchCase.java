@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 
 /**
  * JUnit Test Case containing microbenchmarks for PropertyUtils.
- *
  */
 
 public class PropertyUtilsBenchCase extends TestCase {

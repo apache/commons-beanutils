@@ -34,7 +34,6 @@ import java.util.Objects;
  * <p><strong>IMPLEMENTATION NOTE</strong> - Instances of this class can be
  * successfully serialized and deserialized <strong>ONLY</strong> if all
  * property values are {@code Serializable}.</p>
- *
  */
 
 public class BasicDynaBean implements DynaBean, Serializable {

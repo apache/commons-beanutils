@@ -19,7 +19,6 @@ package org.apache.commons.beanutils2;
 
 /**
  * Bean that has primitive properties
- *
  */
 public class PrimitiveBean {
 

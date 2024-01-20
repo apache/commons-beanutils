@@ -21,7 +21,6 @@ import org.apache.commons.beanutils2.locale.converters.ByteLocaleConverter;
 
 /**
  * Test Case for the ByteLocaleConverter class.
- *
  */
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byte> {
 
@@ -64,7 +63,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
      * Test Converter() constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_2() {
 
@@ -83,7 +81,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase<Byt
      * Test Converter(locPattern) constructor
      *
      * Uses the default locale, no default value
-     *
      */
     public void testConstructor_3() {
 

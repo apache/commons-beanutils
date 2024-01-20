@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
  * Test Case for the {@code WrapDynaBean} implementation class. These tests were based on the ones in {@code PropertyUtilsTestCase} because the two classes
  * provide similar levels of functionality.
  * </p>
- *
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {

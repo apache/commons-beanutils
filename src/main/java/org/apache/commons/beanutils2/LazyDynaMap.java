@@ -42,7 +42,6 @@ import java.util.Map;
  *       so that its properties cannot be modified. If the {@code MutableDynaClass} is
  *       restricted then calling any of the {@code set()} methods for a property which
  *       doesn't exist will result in a {@code IllegalArgumentException} being thrown.</p>
- *
  */
 public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 

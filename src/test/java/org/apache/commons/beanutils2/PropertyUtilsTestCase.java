@@ -63,7 +63,6 @@ import junit.framework.TestSuite;
  * <li>setNestedProperty(Object,String,Object)</li>
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
- *
  */
 
 public class PropertyUtilsTestCase extends TestCase {

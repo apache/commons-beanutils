@@ -38,7 +38,6 @@ import java.lang.reflect.InvocationTargetException;
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the {@code contains()</code> and <code>remove()} methods.</p>
- *
  */
 
 public class WrapDynaBean implements DynaBean, Serializable {

@@ -23,7 +23,6 @@ import org.apache.commons.beanutils2.bugs.Jira61TestCase;
 
 /**
  * Factory which creates beans for {@link Jira61TestCase}.
- *
  */
 public class Jira61BeanFactory {
 

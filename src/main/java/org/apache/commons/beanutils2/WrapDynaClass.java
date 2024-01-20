@@ -37,7 +37,6 @@ import java.util.WeakHashMap;
  *   Object javaBean = ...;
  *   DynaBean wrapper = new WrapDynaBean(javaBean);
  * </pre>
- *
  */
 public class WrapDynaClass implements DynaClass {
 
