@@ -55,7 +55,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default locale ------------
+        // Construct using default locale
         converter = BigDecimalLocaleConverter.builder().get();
 
         // Perform Tests
@@ -73,7 +73,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using localized pattern (default locale) --------
+        // Construct using localized pattern (default locale)
         converter = BigDecimalLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -89,7 +89,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
@@ -105,7 +105,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_5() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -121,7 +121,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDecimalPattern).get();
 
         // Perform Tests
@@ -137,7 +137,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_7() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedDecimalPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -153,7 +153,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
@@ -169,7 +169,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigDecimalLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -185,7 +185,7 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructorMain() {
 
-        // ------------- Construct with localized pattern ------------
+        // Construct with localized pattern
         converter = BigDecimalLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
                 .setLocalizedPattern(true).get();
 
@@ -194,33 +194,27 @@ public class BigDecimalLocaleConverterTestCase extends BaseLocaleConverterTestCa
         convertInvalid(converter, "(A)", defaultValue);
         convertNull(converter, "(A)", defaultValue);
 
-        // **************************************************************************
         // Convert value in the wrong format - maybe you would expect it to throw an
         // exception and return the default - it doesn't, DecimalFormat parses it
         // quite happily turning "1,234.56" into "1.234"
         // I guess this is one of the limitations of DecimalFormat
-        // **************************************************************************
         convertValueNoPattern(converter, "(B)", defaultDecimalValue, new BigDecimal("1.234"));
 
-        // **************************************************************************
         // Convert with non-localized pattern - this causes an exception in parse()
         // but it gets swallowed in convert() method and returns default.
         // **** IS THIS THE EXPECTED BEHAVIOUR? ****
         // Maybe if the pattern is no good, we should use a default pattern rather
         // than just returning the default value.
-        // **************************************************************************
         convertValueWithPattern(converter, "(B)", localizedDecimalValue, defaultDecimalPattern, defaultValue);
 
-        // **************************************************************************
         // Convert with specified type
         //
         // BaseLocaleConverter completely ignores the type - so even if we specify
         // Double.class here it still returns a BigDecimal.
         // **** This has been changed due to BEANUTILS-449 ****
-        // **************************************************************************
         // convertValueToType(converter, "(B)", Double.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-        // ------------- Construct with non-localized pattern ------------
+        // Construct with non-localized pattern
         converter = BigDecimalLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
                 .setLocalizedPattern(false).get();
 

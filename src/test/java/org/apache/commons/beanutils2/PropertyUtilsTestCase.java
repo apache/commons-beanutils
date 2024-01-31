@@ -3092,7 +3092,7 @@ public class PropertyUtilsTestCase extends TestCase {
      */
     public void testSetMappedPeriods() {
 
-        // -------- PropertyUtils.setMappedProperty()--------
+        // PropertyUtils.setMappedProperty()--------
         bean.setMappedProperty("key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly (A)", "Special Value", bean.getMappedProperty("key.with.a.dot"));
 
@@ -3103,7 +3103,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
-        // -------- PropertyUtils.setNestedProperty() --------
+        // PropertyUtils.setNestedProperty()
         bean.setMappedProperty("key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly (B)", "Special Value", bean.getMappedProperty("key.with.a.dot"));
         try {
@@ -3113,7 +3113,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
-        // -------- PropertyUtils.setNestedProperty() --------
+        // PropertyUtils.setNestedProperty()
         final TestBean testBean = new TestBean();
         bean.setMappedObjects("nested.property", testBean);
         assertEquals("Can retrieve directly (C)", "This is a string", testBean.getStringProperty());
@@ -3124,7 +3124,7 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
-        // -------- PropertyUtils.setNestedProperty() --------
+        // PropertyUtils.setNestedProperty()
         bean.getNested().setMappedProperty("Mapped Key", "Nested Mapped Value");
         try {
             assertEquals("Can retrieve via getNestedProperty (D)", "Nested Mapped Value",

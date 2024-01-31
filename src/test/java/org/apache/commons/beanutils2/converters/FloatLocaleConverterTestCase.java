@@ -61,7 +61,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default locale ------------
+        // Construct using default locale
         converter = FloatLocaleConverter.builder().get();
 
         // Perform Tests
@@ -79,7 +79,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using localized pattern (default locale) --------
+        // Construct using localized pattern (default locale)
         converter = FloatLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -95,7 +95,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
@@ -111,7 +111,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_5() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -127,7 +127,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultDecimalPattern).get();
 
         // Perform Tests
@@ -143,7 +143,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_7() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedDecimalPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -159,7 +159,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
@@ -175,7 +175,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -191,7 +191,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
      */
     public void testConstructorMain() {
 
-        // ------------- Construct with localized pattern ------------
+        // Construct with localized pattern
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedDecimalPattern)
                 .setLocalizedPattern(true).get();
 
@@ -226,7 +226,7 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase<Fl
         // **************************************************************************
         // convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
-        // ------------- Construct with non-localized pattern ------------
+        // Construct with non-localized pattern
         converter = FloatLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultDecimalPattern)
                 .setLocalizedPattern(false).get();
 

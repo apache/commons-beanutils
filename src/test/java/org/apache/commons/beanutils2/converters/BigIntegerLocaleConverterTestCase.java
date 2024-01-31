@@ -55,7 +55,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default locale ------------
+        // Construct using default locale
         converter = BigIntegerLocaleConverter.builder().get();
 
         // Perform Tests
@@ -73,7 +73,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using localized pattern (default locale) --------
+        // Construct using localized pattern (default locale)
         converter = BigIntegerLocaleConverter.builder().setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -89,7 +89,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).get();
 
         // Perform Tests
@@ -105,7 +105,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_5() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -121,7 +121,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(defaultIntegerPattern).get();
 
         // Perform Tests
@@ -137,7 +137,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_7() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setLocale(localizedLocale).setPattern(localizedIntegerPattern).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -153,7 +153,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).get();
 
         // Perform Tests
@@ -169,7 +169,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
+        // Construct using specified Locale
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).setLocalizedPattern(true).get();
 
         // Perform Tests
@@ -185,7 +185,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
      */
     public void testConstructorMain() {
 
-        // ------------- Construct with localized pattern ------------
+        // Construct with localized pattern
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(localizedIntegerPattern)
                 .setLocalizedPattern(true).get();
 
@@ -219,7 +219,7 @@ public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCa
         // **************************************************************************
         // convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
-        // ------------- Construct with non-localized pattern ------------
+        // Construct with non-localized pattern
         converter = BigIntegerLocaleConverter.builder().setDefault(defaultValue).setLocale(localizedLocale).setPattern(defaultIntegerPattern)
                 .setLocalizedPattern(false).get();
 

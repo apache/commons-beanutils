@@ -320,7 +320,7 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
 
-        // ----- Create Collection & Array of Maps -----
+        // Create Collection & Array of Maps
         final int size = 5;
         final List<Object> testList = new ArrayList<>(size);
         final TreeMap<?, ?>[] testArray = new TreeMap[size];
@@ -331,7 +331,7 @@ public class LazyDynaListTestCase extends TestCase {
             testList.add(testArray[i]);
         }
 
-        // ----- Create LazyArrayList from Collection -----
+        // Create LazyArrayList from Collection
         LazyDynaList lazyList = new LazyDynaList(testList);
         assertEquals("1. check size", size, lazyList.size());
 
@@ -346,7 +346,7 @@ public class LazyDynaListTestCase extends TestCase {
             assertEquals("5." + i + " Map error ", "val" + i, mapArray[i].get("prop" + i));
         }
 
-        // ----- Create LazyArrayList from Array -----
+        // Create LazyArrayList from Array
         lazyList = new LazyDynaList(testArray);
         assertEquals("6. check size", size, lazyList.size());
 
