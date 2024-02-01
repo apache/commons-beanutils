@@ -181,11 +181,7 @@ public class Jira357TestCase extends TestCase {
      * Test {@link PropertyUtils#getPropertyDescriptors(Class)}
      */
     public void testPropertyUtils_getPropertyDescriptors_Bar() throws Exception {
-
-        // FIXME the isBar() method returning AbstractTestBean.class as the
-        // declaring class instead of ConcreteTestBean.class
-        // causing this test to fail - so its commented out for now
-        // checkReadMethod("bar", ConcreteTestBean.class);
+        checkReadMethod("bar", ConcreteTestBean.class);
     }
 
     /**

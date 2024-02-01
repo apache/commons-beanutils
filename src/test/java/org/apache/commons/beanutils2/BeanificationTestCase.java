@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -287,7 +289,7 @@ public class BeanificationTestCase extends TestCase {
         ccll.set(beanOne);
         assertEquals("Start thread gets right instance", beanOne, ccll.get());
         ccll.unset();
-        assertTrue("Unset works", !beanOne.equals(ccll.get()));
+        assertNotEquals("Unset works", beanOne, ccll.get());
     }
 
     /**
@@ -327,9 +329,21 @@ public class BeanificationTestCase extends TestCase {
         thread.join();
 
         assertEquals("Signal not set by test thread", 2, signal.getSignal());
-        assertTrue("Different BeanUtilsBean instances per context classloader", BeanUtilsBean.getInstance() != signal.getBean());
-        assertTrue("Different ConvertUtilsBean instances per context classloader", ConvertUtilsBean.getInstance() != signal.getConvertUtils());
-        assertTrue("Different PropertyUtilsBean instances per context classloader", PropertyUtilsBean.getInstance() != signal.getPropertyUtils());
+        assertNotEquals(
+            "Different BeanUtilsBean instances per context classloader",
+            BeanUtilsBean.getInstance(),
+            signal.getBean()
+        );
+        assertNotEquals(
+            "Different ConvertUtilsBean instances per context classloader",
+            ConvertUtilsBean.getInstance(),
+            signal.getConvertUtils()
+        );
+        assertNotEquals(
+            "Different PropertyUtilsBean instances per context classloader",
+            PropertyUtilsBean.getInstance(),
+            signal.getPropertyUtils()
+        );
     }
 
     /** Tests whether class loaders and beans are released from memory */

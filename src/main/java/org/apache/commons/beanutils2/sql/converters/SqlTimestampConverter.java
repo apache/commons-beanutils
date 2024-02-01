@@ -62,12 +62,6 @@ public final class SqlTimestampConverter extends DateTimeConverter<Timestamp> {
     }
 
     /**
-     * Gets a {@code DateFormat} for the Locale.
-     *
-     * @param locale   TODO
-     * @param timeZone TODO
-     *
-     * @return The DateFormat.
      * @since 1.8.0
      */
     @Override

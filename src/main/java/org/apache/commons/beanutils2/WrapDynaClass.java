@@ -301,15 +301,13 @@ public class WrapDynaClass implements DynaClass {
             propertiesMap.put(properties[i].getName(),
                     properties[i]);
         }
+
         int j = regulars.length;
-        for (final Map.Entry<?, ?> entry : mappeds.entrySet()) {
-            final PropertyDescriptor descriptor =
-                    (PropertyDescriptor) entry.getValue();
-            properties[j] =
-                    new DynaProperty(descriptor.getName(),
-                            Map.class);
-            propertiesMap.put(properties[j].getName(),
-                    properties[j]);
+
+        for (final Object value : mappeds.values()) {
+            final PropertyDescriptor descriptor = (PropertyDescriptor) value;
+            properties[j] = new DynaProperty(descriptor.getName(), Map.class);
+            propertiesMap.put(properties[j].getName(), properties[j]);
             j++;
         }
     }
