@@ -57,6 +57,7 @@
     <!-- Temp until commons-parent 59, fixes GHA build somehow? -->
     <commons.felix.version>5.1.9</commons.felix.version>
     <commons.biz.aQute.bndlib.version>6.4.1</commons.biz.aQute.bndlib.version>
+    <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
   </properties>
 
   <issueManagement>
