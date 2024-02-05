@@ -16,6 +16,9 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from <strong>java.lang.Enum</strong> objects.
  * <p>
@@ -27,6 +30,11 @@ package org.apache.commons.beanutils2.converters;
  * @see Enum
  */
 public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<Enum<E>> {
+
+    /** Matches if a given input is an enum string. */
+    private static final Pattern ENUM_PATTERN = Pattern.compile(
+        "((?:[a-z\\d.]+)*)\\.([A-Za-z\\d]+)[#.]([A-Z\\d_]+)"
+    );
 
     /**
      * Constructs a <strong>java.lang.Enum</strong> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
@@ -59,15 +67,37 @@ public final class EnumConverter<E extends Enum<E>> extends AbstractConverter<En
     @Override
     protected <R> R convertToType(final Class<R> type, final Object value) throws Throwable {
         if (Enum.class.isAssignableFrom(type)) {
-            final String enumValue = String.valueOf(value);
-            final R[] constants = type.getEnumConstants();
-            if (constants == null) {
-                throw conversionException(type, value);
+            final String stringValue = toString(value);
+
+            try {
+                return type.cast((Enum) Enum.valueOf((Class) type, stringValue));
+            } catch (IllegalArgumentException ex) {
+                // Continue to check fully qualified name.
             }
-            for (final R candidate : constants) {
-                if (((Enum) candidate).name().equalsIgnoreCase(enumValue)) {
-                    return candidate;
+
+            Matcher matcher = ENUM_PATTERN.matcher(stringValue);
+
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException(
+                    "Value doesn't follow Enum naming convention, expecting value like: java.time.DayOfWeek.MONDAY");
+            }
+
+            String className = matcher.group(1) + "." + matcher.group(2);
+
+            try {
+                Class classForName = Class.forName(className);
+
+                if (!classForName.isEnum()) {
+                    throw new IllegalArgumentException("Value isn't an enumerated type.");
                 }
+
+                if (!type.isAssignableFrom(classForName)) {
+                    throw new IllegalArgumentException("Class is not the required type.");
+                }
+
+                return type.cast((Enum) Enum.valueOf(classForName, matcher.group(3)));
+            } catch (ClassNotFoundException ex) {
+                throw new IllegalArgumentException("Class \"" + className + "\" doesn't exist.", ex);
             }
         }
 
