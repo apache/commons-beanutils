@@ -524,11 +524,11 @@ public class ConvertUtilsBean {
      * Register array converters.
      *
      * @param throwException {@code true} if the converters should
-     * throw an exception when a conversion error occurs, otherwise <code>
+     * throw an exception when a conversion error occurs, otherwise
      * {@code false} if a default value should be used.
      * @param defaultArraySize The size of the default array value for array converters
      * (N.B. This values is ignored if {@code throwException</code> is <code>true}).
-     * Specifying a value less than zero causes a <code>null<code> value to be used for
+     * Specifying a value less than zero causes a {@code null} value to be used for
      * the default.
      */
     private void registerArrays(final boolean throwException, final int defaultArraySize) {
