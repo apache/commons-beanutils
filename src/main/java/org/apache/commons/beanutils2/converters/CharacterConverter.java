@@ -22,10 +22,17 @@ package org.apache.commons.beanutils2.converters;
  * <p>
  * Can be configured to either return a <i>default value</i> or throw a
  * {@code ConversionException} if a conversion error occurs.
+ * </p>
+ * <p>
+ *     Also accepts hexadecimal {@link String strings} if values are prefixed with {@link #HEX_PREFIX}.
+ * </p>
  *
  * @since 1.3
  */
 public final class CharacterConverter extends AbstractConverter<Character> {
+
+    /** Determines if an input is a hexadecimal {@link String}. */
+    private static final String HEX_PREFIX = "0x";
 
     /**
      * Constructs a <b>java.lang.Character</b> <i>Converter</i> that throws
@@ -84,7 +91,19 @@ public final class CharacterConverter extends AbstractConverter<Character> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Exception {
         if (Character.class.equals(type) || Character.TYPE.equals(type)) {
-            return type.cast(Character.valueOf(value.toString().charAt(0)));
+            final String stringValue = toString(value);
+
+            if (stringValue.isEmpty()) {
+                throw new IllegalArgumentException("Value must not be empty");
+            }
+
+            if (stringValue.length() > 2 && stringValue.substring(0, 2).equalsIgnoreCase(HEX_PREFIX)) {
+                final String substring = stringValue.substring(HEX_PREFIX.length());
+                final int hex = Integer.parseInt(substring, 16);
+                return type.cast((char) hex);
+            }
+
+            return type.cast(stringValue.charAt(0));
         }
 
         throw conversionException(type, value);

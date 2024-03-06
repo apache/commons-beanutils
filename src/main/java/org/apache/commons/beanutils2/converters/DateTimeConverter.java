@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
@@ -152,6 +153,8 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         } else if (value instanceof TemporalAccessor) {
             // Backstop for other TemporalAccessor implementations.
             date = Date.from(Instant.from(((TemporalAccessor) value)));
+        } else if (value instanceof Instant) {
+            date = Date.from((Instant) value);
         }
 
         String result = null;
@@ -188,6 +191,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *     <li>{@link java.time.LocalDate}</li>
      *     <li>{@link java.time.LocalDateTime}</li>
      *     <li>{@link java.time.OffsetDateTime}</li>
+     *     <li>{@link java.time.Instant}</li>
      *     <li>{@link java.time.ZonedDateTime}</li>
      *     <li>{@link java.sql.Date}</li>
      *     <li>{@link java.sql.Time}</li>
@@ -267,6 +271,11 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
         if (value instanceof OffsetDateTime) {
             final OffsetDateTime date = (OffsetDateTime) value;
             return toDate(targetType, date.toInstant().toEpochMilli());
+        }
+
+        if (value instanceof Instant) {
+            final Instant date = (Instant) value;
+            return toDate(targetType, date.toEpochMilli());
         }
 
         // Convert all other types to String & handle
@@ -587,6 +596,10 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
             return type.cast(offsetDateTime);
         }
 
+        if (type.equals(Instant.class)) {
+            return type.cast(Instant.ofEpochMilli(value));
+        }
+
         // java.util.Calendar
         if (type.equals(Calendar.class)) {
             Calendar calendar = null;
@@ -620,6 +633,7 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
      *     <li>{@link java.sql.Date}</li>
      *     <li>{@link java.sql.Time}</li>
      *     <li>{@link java.sql.Timestamp}</li>
+     *     <li>{@link java.time.Instant}</li>
      * </ul>
      * <p>
      * <strong>N.B.</strong> No default String conversion
@@ -660,6 +674,14 @@ public abstract class DateTimeConverter<D> extends AbstractConverter<D> {
                 throw new ConversionException(
                         "String must be in JDBC format [yyyy-MM-dd HH:mm:ss.fffffffff] " +
                         "to create a java.sql.Timestamp");
+            }
+        }
+
+        if (type.equals(Instant.class)) {
+            try {
+                return type.cast(Instant.parse(value));
+            } catch (final DateTimeParseException ex) {
+                throw new ConversionException("String must be in ISO-8601 format to create a java.time.Instant");
             }
         }
 
