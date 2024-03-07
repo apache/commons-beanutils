@@ -2,13 +2,13 @@
 
 Building BeanUtils requires:
 
- - JDK 6/OpenJDK 6 or later (recommended: JDK 8)
+ - JDK 8/OpenJDK 8 or later (recommended: JDK 8)
    http://www.oracle.com/technetwork/java/javase/downloads/
    
- - Apache Maven 3 or later (recommended: Maven 3.3)
+ - Apache Maven 3 or later (recommended: Maven 3.8)
    https://maven.apache.org/download.cgi
 
-The compiled BeanUtils JAR should work with Java 6 or later.
+The compiled BeanUtils JAR should work with Java 8 or later.
 
 
 To build target/commons-beanutils-*.jar
