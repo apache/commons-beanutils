@@ -1276,7 +1276,7 @@ public class MethodUtils {
                 boolean vulnerableJVM = false;
                 try {
                     final String specVersion = System.getProperty("java.specification.version");
-                    if (specVersion.charAt(0) == '1' &&
+                    if (specVersion.charAt(0) == '1' && specVersion.charAt(1) == '.' &&
                             (specVersion.charAt(2) == '0' ||
                              specVersion.charAt(2) == '1' ||
                              specVersion.charAt(2) == '2' ||
