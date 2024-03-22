@@ -2462,8 +2462,7 @@ public class PropertyUtilsTestCase extends TestCase {
             // ok, getting an exception was expected. As it is of a generic
             // type, let's check the message string to make sure it really
             // was caused by the issue we expected.
-            final int index = ex.getMessage().indexOf("Indexed or mapped properties are not supported");
-            assertTrue("Unexpected exception message", index >= 0);
+            assertTrue("Unexpected exception message", ex.getMessage().contains("Indexed or mapped properties are not supported"));
         }
 
         try {
