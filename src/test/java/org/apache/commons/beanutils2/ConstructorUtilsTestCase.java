@@ -154,7 +154,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args, types);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).getBooleanProperty());
+            assertTrue( ((TestBean) obj).getBooleanProperty());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -163,7 +163,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeConstructor(TestBean.class, args, types);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).isBooleanSecond());
+            assertTrue( ((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
     }
@@ -187,7 +187,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, Boolean.TRUE);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).isBooleanSecond());
+            assertTrue( ((TestBean) obj).isBooleanSecond());
         }
     }
 
@@ -206,7 +206,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).isBooleanSecond());
+            assertTrue( ((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
     }
@@ -224,7 +224,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).getBooleanProperty());
+            assertTrue( ((TestBean) obj).getBooleanProperty());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
@@ -233,7 +233,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class, args, types);
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
-            assertEquals(true, ((TestBean) obj).isBooleanSecond());
+            assertTrue( ((TestBean) obj).isBooleanSecond());
             assertEquals("TEST", ((TestBean) obj).getStringProperty());
         }
         {
