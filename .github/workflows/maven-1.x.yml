@@ -17,9 +17,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ 1.x ]
+    branches: [ 1.X ]
   pull_request:
-    branches: [ 1.x ]
+    branches: [ 1.X ]
 
 permissions:
   contents: read
