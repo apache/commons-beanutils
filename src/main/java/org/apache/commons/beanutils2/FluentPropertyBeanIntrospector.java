@@ -154,6 +154,10 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                         icontext.addPropertyDescriptor(createFluentPropertyDescritor(
                                 m, propertyName));
                     } else if (pd.getWriteMethod() == null) {
+                        // We change statically cached PropertyDescriptor, it may affect
+                        // other subclasses of targetClass supertype.
+                        // See BEANUTILS-541 for more details.
+                        clearDescriptorsCacheHierarchy(icontext.getTargetClass().getSuperclass());
                         pd.setWriteMethod(m);
                     }
                 } catch (final IntrospectionException e) {
@@ -163,6 +167,13 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                     }
                 }
             }
+        }
+    }
+
+    private static void clearDescriptorsCacheHierarchy(Class<?> cls) {
+        if (cls != null && cls != Object.class) {
+            Introspector.flushFromCaches(cls);
+            clearDescriptorsCacheHierarchy(cls.getSuperclass());
         }
     }
 
