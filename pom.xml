@@ -84,253 +84,6 @@
     </site>
   </distributionManagement>
 
-  <developers>
-    <developer>
-      <name>Robert Burrell Donkin</name>
-      <id>rdonkin</id>
-      <email>rdonkin@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Dion Gillard</name>
-      <id>dion</id>
-      <email>dion@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Craig McClanahan</name>
-      <id>craigmcc</id>
-      <email>craigmcc@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Geir Magnusson Jr.</name>
-      <id>geirm</id>
-      <email>geirm@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Scott Sanders</name>
-      <id>sanders</id>
-      <email>sanders@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>James Strachan</name>
-      <id>jstrachan</id>
-      <email>jstrachan@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Rodney Waldhoff</name>
-      <id>rwaldhoff</id>
-      <email>rwaldhoff@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Martin van den Bemt</name>
-      <id>mvdb</id>
-      <email>mvdb@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Yoav Shapira</name>
-      <id>yoavs</id>
-      <email>yoavs@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Niall Pemberton</name>
-      <id>niallp</id>
-      <email>niallp@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Simon Kitching</name>
-      <id>skitching</id>
-      <email>skitching@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>James Carman</name>
-      <id>jcarman</id>
-      <email>jcarman@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Benedikt Ritter</name>
-      <id>britter</id>
-      <email>britter@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Tim O'Brien</name>
-      <id>tobrien</id>
-      <email>tobrien@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>David Eric Pugh</name>
-      <id>epugh</id>
-      <email>epugh@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Rodney Waldhoff</name>
-      <id>rwaldhoff</id>
-      <email>rwaldhoff@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Morgan James Delagrange</name>
-      <id>morgand</id>
-      <email>morgand@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>John E. Conlon</name>
-      <id>jconlon</id>
-      <email>jconlon@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <name>Stephen Colebourne</name>
-      <id>scolebourne</id>
-      <email>scolebourne@apache.org</email>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-    <developer>
-      <id>ggregory</id>
-      <name>Gary Gregory</name>
-      <email>ggregory at apache.org</email>
-      <url>https://www.garygregory.com</url>
-      <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>
-      <roles>
-        <role>PMC Member</role>
-      </roles>
-      <timezone>America/New_York</timezone>
-      <properties>
-        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
-      </properties>
-    </developer>
-    <developer>
-      <id>stain</id>
-      <name>Stian Soiland-Reyes</name>
-      <email>stain@apache.org</email>
-      <url>http://orcid.org/0000-0001-9842-9718</url>
-      <timezone>+0</timezone>
-      <organization>The Apache Software Foundation</organization>
-    </developer>
-  </developers>
-
-  <contributors>
-    <contributor>
-      <name>Paul Jack</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Stephen Colebourne</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Berin Loritsch</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Alex Crown</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Marcus Zander</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Paul Hamamnt</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Rune Johannesen</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Clebert Suconic</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Norm Deane</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Ralph Schaer</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Chris Audley</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Rey François</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Gregor Raýman</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Jan Sorensen</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Eric Pabst</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Paulo Gaspar</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Michael Smith</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>George Franciscus</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Erik Meade</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Tomas Viberg</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Yauheny Mikulski</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Michael Szlapa</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Juozas Baliuka</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Tommy Tynjä</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Bernhard Seebass</name>
-      <email />
-    </contributor>
-    <contributor>
-      <name>Raviteja Lokineni</name>
-      <email />
-    </contributor>
-  </contributors>
-
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -542,4 +295,249 @@
       </plugin>
     </plugins>
   </reporting>
+  <developers>
+    <developer>
+      <name>Robert Burrell Donkin</name>
+      <id>rdonkin</id>
+      <email>rdonkin@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Dion Gillard</name>
+      <id>dion</id>
+      <email>dion@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Craig McClanahan</name>
+      <id>craigmcc</id>
+      <email>craigmcc@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Geir Magnusson Jr.</name>
+      <id>geirm</id>
+      <email>geirm@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Scott Sanders</name>
+      <id>sanders</id>
+      <email>sanders@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>James Strachan</name>
+      <id>jstrachan</id>
+      <email>jstrachan@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Rodney Waldhoff</name>
+      <id>rwaldhoff</id>
+      <email>rwaldhoff@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Martin van den Bemt</name>
+      <id>mvdb</id>
+      <email>mvdb@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Yoav Shapira</name>
+      <id>yoavs</id>
+      <email>yoavs@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Niall Pemberton</name>
+      <id>niallp</id>
+      <email>niallp@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Simon Kitching</name>
+      <id>skitching</id>
+      <email>skitching@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>James Carman</name>
+      <id>jcarman</id>
+      <email>jcarman@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Benedikt Ritter</name>
+      <id>britter</id>
+      <email>britter@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Tim O'Brien</name>
+      <id>tobrien</id>
+      <email>tobrien@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>David Eric Pugh</name>
+      <id>epugh</id>
+      <email>epugh@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Rodney Waldhoff</name>
+      <id>rwaldhoff</id>
+      <email>rwaldhoff@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Morgan James Delagrange</name>
+      <id>morgand</id>
+      <email>morgand@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>John E. Conlon</name>
+      <id>jconlon</id>
+      <email>jconlon@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <name>Stephen Colebourne</name>
+      <id>scolebourne</id>
+      <email>scolebourne@apache.org</email>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory at apache.org</email>
+      <url>https://www.garygregory.com</url>
+      <organization>The Apache Software Foundation</organization>
+      <organizationUrl>https://www.apache.org/</organizationUrl>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+      <properties>
+        <picUrl>https://people.apache.org/~ggregory/img/garydgregory80.png</picUrl>
+      </properties>
+    </developer>
+    <developer>
+      <id>stain</id>
+      <name>Stian Soiland-Reyes</name>
+      <email>stain@apache.org</email>
+      <url>http://orcid.org/0000-0001-9842-9718</url>
+      <timezone>+0</timezone>
+      <organization>The Apache Software Foundation</organization>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Paul Jack</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Stephen Colebourne</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Berin Loritsch</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Alex Crown</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Marcus Zander</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Paul Hamamnt</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Rune Johannesen</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Clebert Suconic</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Norm Deane</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Ralph Schaer</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Chris Audley</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Rey François</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Gregor Raýman</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Jan Sorensen</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Eric Pabst</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Paulo Gaspar</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Michael Smith</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>George Franciscus</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Erik Meade</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Tomas Viberg</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Yauheny Mikulski</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Michael Szlapa</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Juozas Baliuka</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Tommy Tynjä</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Bernhard Seebass</name>
+      <email />
+    </contributor>
+    <contributor>
+      <name>Raviteja Lokineni</name>
+      <email />
+    </contributor>
+  </contributors>
 </project>
