@@ -28,7 +28,9 @@
     <title>Release Notes</title>
   </properties>
   <body>
-
+    <release version="1.9.5" date="YYYY-MM-DD" description="This is a maintenance release.">
+      <action issue="BEANUTILS-541" dev="ggregory" type="fix" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
+    </release>
     <release version="1.9.4" date="2019-06-12" description="The primary reason for this release is a bugfix for
 CVE-2014-0114. More specifically, our goal with BEANUTILS-520
 is to set the default behaviour of the BeanUtilsBean
@@ -43,7 +45,6 @@ src/test/java/org/apache/commons/beanutils/bugs/Jira520TestCase.java.">
         BeanUtils mitigation of CVE-2014-0114. (CVE-2019-10086 for commons-beanutils).
       </action>
     </release>
-
     <release version="1.9.3" date="2016-09-21" description="Bug fix release, now builds with Java 8">
       <action issue="BEANUTILS-433" dev="ggregory" type="update" due-to="Benedikt Ritter, Gary Gregory">
         Update dependency from JUnit 3.8.1 to 4.12.
