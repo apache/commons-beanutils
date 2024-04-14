@@ -16,7 +16,13 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
 import org.apache.commons.beanutils2.PropertyUtilsBean;
@@ -34,6 +40,29 @@ public class Jira541TestCase {
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
+        testImpl();
+    }
+
+    @Test
+    public void testFluentBeanIntrospectorOnOverriddenSetterConcurrent() throws Exception {
+        ExecutorService executionService = Executors.newFixedThreadPool(256);
+        try {
+            List<Future<?>> futures = new ArrayList<>();
+            for (int i = 0; i < 10000; i++) {
+                futures.add(executionService.submit(() -> {
+                    testImpl();
+                    return null;
+                }));
+            }
+            for (Future<?> future : futures) {
+                future.get();
+            }
+        } finally {
+            executionService.shutdown();
+        }
+    }
+
+    private static void testImpl() throws ReflectiveOperationException {
         PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
 
