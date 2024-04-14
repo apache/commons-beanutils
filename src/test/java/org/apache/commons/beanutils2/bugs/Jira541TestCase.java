@@ -16,9 +16,7 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
-import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
-import org.apache.commons.beanutils2.PropertyUtilsBean;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.apache.commons.beanutils2.FluentPropertyBeanIntrospector;
+import org.apache.commons.beanutils2.PropertyUtilsBean;
+import org.junit.jupiter.api.Test;
 
 /**
  * Fix BEANUTILS-541
