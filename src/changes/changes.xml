@@ -30,6 +30,7 @@
   <body>
     <release version="1.9.5" date="YYYY-MM-DD" description="This is a maintenance release.">
       <action issue="BEANUTILS-541" dev="ggregory" type="fix" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
+      <action dev="ggregory" type="fix" due-to="Gary Gregory">Bump Java requirement from Java 6 to 7.</action>
     </release>
     <release version="1.9.4" date="2019-06-12" description="The primary reason for this release is a bugfix for
 CVE-2014-0114. More specifically, our goal with BEANUTILS-520

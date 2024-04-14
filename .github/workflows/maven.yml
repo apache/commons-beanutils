@@ -31,11 +31,13 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        java: [ 8, 11 ]
+        java: [ 8, 11, 17 ]
         experimental: [false]
-#        include:
-#          - java: 22-ea
-#            experimental: true
+        include:
+          - java: 21
+            experimental: true
+          - java: 23-ea
+            experimental: true
         
     steps:
     - uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v4.1.2
@@ -53,6 +55,7 @@ jobs:
         distribution: 'temurin'
         java-version: ${{ matrix.java }}
     - name: Build with Maven
-      run: mvn --show-version --batch-mode --no-transfer-progress -e
+#     run: mvn --show-version --batch-mode --no-transfer-progress -e
+      run: mvn --show-version --batch-mode --no-transfer-progress -e -Dmoditect.skip
 
 # For Java 11, you can be more strict: -DadditionalJOption=-Xdoclint/package:-org.apache.commons.configuration2.plist
