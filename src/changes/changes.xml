@@ -125,6 +125,7 @@
       <action dev="ggregory" type="fix" due-to="Seth Falco">
         Fix warnings and To-Dos #92.
       </action>
+      <action issue="BEANUTILS-541" dev="ggregory" type="fix" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (2.x) #68.</action>
       <!-- ADD -->
       <action dev="ggregory" type="add" due-to="Dependabot, Gary Gregory">
         Add github/codeql-action #118.
