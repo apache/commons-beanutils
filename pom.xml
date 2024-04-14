@@ -339,6 +339,10 @@
       <name>Melloware</name>
       <email />
     </contributor>
+    <contributor>
+      <name>Sergey Chernov</name>
+      <email></email>
+    </contributor>
   </contributors>
 
   <dependencies>
