@@ -34,6 +34,7 @@
   <properties>
       <maven.compiler.source>1.7</maven.compiler.source>
       <maven.compiler.target>1.7</maven.compiler.target>
+      <commons.module.name>org.apache.commons.beanutils</commons.module.name>
       <commons.componentid>beanutils</commons.componentid>
       <commons.release.version>1.9.5</commons.release.version>
       <commons.jira.id>BEANUTILS</commons.jira.id>

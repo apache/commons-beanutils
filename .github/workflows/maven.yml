@@ -55,8 +55,6 @@ jobs:
         distribution: 'temurin'
         java-version: ${{ matrix.java }}
     - name: Build with Maven
-# https://github.com/moditect/moditect/issues/248
-#     run: mvn --show-version --batch-mode --no-transfer-progress -e
-      run: mvn --show-version --batch-mode --no-transfer-progress -e -Dmoditect.skip
+     run: mvn --show-version --batch-mode --no-transfer-progress -e
 
 # For Java 11, you can be more strict: -DadditionalJOption=-Xdoclint/package:-org.apache.commons.configuration2.plist
