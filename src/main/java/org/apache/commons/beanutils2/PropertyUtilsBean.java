@@ -1119,6 +1119,7 @@ public class PropertyUtilsBean {
      * @param clazz The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a getter for
      * @return The read method
+     * @since 2.0.0
      */
     public Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
