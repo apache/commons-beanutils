@@ -354,9 +354,6 @@ public class PropertyUtilsTestCase extends TestCase {
      * See BEANUTILS-266 for changes and reason for test
      */
     public void testExceptionFromInvoke() throws Exception {
-        if (BeanUtilsBeanTestCase.isPre14JVM()) {
-            return;
-        }
         try {
             PropertyUtils.setSimpleProperty(bean, "intProperty", "XXX");
         } catch (final IllegalArgumentException t) {

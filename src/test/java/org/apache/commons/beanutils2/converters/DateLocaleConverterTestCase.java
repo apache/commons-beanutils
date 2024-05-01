@@ -26,6 +26,7 @@ import java.util.Locale;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter;
 import org.apache.commons.beanutils2.locale.converters.DateLocaleConverter.Builder;
+import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -57,7 +58,7 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase<Dat
 
         super.setUp();
 
-        final String version = System.getProperty("java.specification.version");
+        final String version = SystemProperties.getJavaSpecificationVersion();
         LOG.debug("JDK Version " + version);
 
         try {

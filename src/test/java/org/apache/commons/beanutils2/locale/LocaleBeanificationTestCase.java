@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.apache.commons.beanutils2.BeanUtilsBean;
-import org.apache.commons.beanutils2.BeanUtilsBeanTestCase;
 import org.apache.commons.beanutils2.ContextClassLoaderLocal;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
@@ -374,11 +373,6 @@ public class LocaleBeanificationTestCase {
 
     /** Tests whether class loaders and beans are released from memory */
     public void testMemoryLeak() throws Exception {
-        if (BeanUtilsBeanTestCase.isPre14JVM()) {
-            System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
-            return;
-        }
-
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final WeakReference<TestClassLoader> loaderReference = new WeakReference<>(loader);
@@ -446,13 +440,6 @@ public class LocaleBeanificationTestCase {
 
     /** Tests whether class loaders and beans are released from memory by the map used by BeanUtils */
     public void testMemoryLeak2() {
-        // tests when the map used by BeanUtils has the right behavior
-
-        if (BeanUtilsBeanTestCase.isPre14JVM()) {
-            System.out.println("WARNING: CANNOT TEST MEMORY LEAK ON PRE1.4 JVM");
-            return;
-        }
-
         // many thanks to Juozas Baliuka for suggesting this methodology
         TestClassLoader loader = new TestClassLoader();
         final ReferenceQueue<Object> queue = new ReferenceQueue<>();

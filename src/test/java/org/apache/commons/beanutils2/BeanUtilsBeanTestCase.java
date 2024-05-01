@@ -22,7 +22,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.apache.commons.beanutils2.converters.ArrayConverter;
 import org.apache.commons.beanutils2.converters.DateConverter;
@@ -59,23 +58,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
      * Test for JDK 1.4
      */
     public static boolean isPre14JVM() {
-        final String version = System.getProperty("java.specification.version");
-        final StringTokenizer tokenizer = new StringTokenizer(version, ".");
-        if (tokenizer.nextToken().equals("1")) {
-            final String minorVersion = tokenizer.nextToken();
-            if (minorVersion.equals("0")) {
-                return true;
-            }
-            if (minorVersion.equals("1")) {
-                return true;
-            }
-            if (minorVersion.equals("2")) {
-                return true;
-            }
-            if (minorVersion.equals("3")) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -889,9 +871,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
      * Test for {@link BeanUtilsBean#initCause(Throwable, Throwable)} method.
      */
     public void testInitCause() {
-        if (isPre14JVM()) {
-            return;
-        }
         final String parentMsg = "PARENT-THROWABLE";
         final String causeMsg = "THROWABLE-CAUSE";
         try {
