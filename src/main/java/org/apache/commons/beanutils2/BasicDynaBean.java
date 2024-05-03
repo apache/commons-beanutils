@@ -96,7 +96,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     public boolean contains(final String name, final String key) {
 
         final Object value = values.get(name);
-        Objects.requireNonNull(value, "No mapped value for '" + name + "(" + key + ")'");
+        requireMappedValue(name, key, value);
         if (value instanceof Map) {
             return ((Map<?, ?>) value).containsKey(key);
         }
@@ -207,7 +207,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     public Object get(final String name, final String key) {
 
         final Object value = values.get(name);
-        Objects.requireNonNull(value, "No mapped value for '" + name + "(" + key + ")'");
+        requireMappedValue(name, key, value);
         if (value instanceof Map) {
             return ((Map<?, ?>) value).get(key);
         }
@@ -310,13 +310,17 @@ public class BasicDynaBean implements DynaBean, Serializable {
     public void remove(final String name, final String key) {
 
         final Object value = values.get(name);
-        Objects.requireNonNull(value, "No mapped value for '" + name + "(" + key + ")'");
+        requireMappedValue(name, key, value);
         if (!(value instanceof Map)) {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
         }
         ((Map<?, ?>) value).remove(key);
 
+    }
+
+    private void requireMappedValue(final String name, final String key, final Object value) {
+        Objects.requireNonNull(value, () -> "No mapped value for '" + name + "(" + key + ")'");
     }
 
     /**
@@ -408,7 +412,7 @@ public class BasicDynaBean implements DynaBean, Serializable {
     public void set(final String name, final String key, final Object value) {
 
         final Object prop = values.get(name);
-        Objects.requireNonNull(prop, "No mapped value for '" + name + "(" + key + ")'");
+        requireMappedValue(name, key, prop);
         if (!(prop instanceof Map)) {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'");
