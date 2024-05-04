@@ -17,6 +17,7 @@
 package org.apache.commons.beanutils2;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * <p>DynaClass which implements the {@code MutableDynaClass} interface.</p>
@@ -117,24 +118,19 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *  restricted, so no new properties can be added
      */
     protected void add(final DynaProperty property) {
-        if (property.getName() == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(property, "property");
+        Objects.requireNonNull(property.getName(), "property.getName()");
         if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
         }
-
         // Check if property already exists
         if (propertiesMap.get(property.getName()) != null) {
             return;
         }
-
         // Create a new property array with the specified property
         final DynaProperty[] oldProperties = getDynaProperties();
         final DynaProperty[] newProperties = Arrays.copyOf(oldProperties, oldProperties.length + 1);
         newProperties[oldProperties.length] = property;
-
         // Update the properties
         setProperties(newProperties);
     }
@@ -226,18 +222,13 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         DynaProperty dynaProperty = propertiesMap.get(name);
-
         // If it doesn't exist and returnNull is false
         // create a new DynaProperty
         if (dynaProperty == null && !isReturnNull() && !isRestricted()) {
             dynaProperty = new DynaProperty(name);
         }
-
         return dynaProperty;
     }
 
@@ -255,10 +246,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalArgumentException if no property name is specified
      */
     public boolean isDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         return propertiesMap.get(name) != null;
     }
 
@@ -302,10 +290,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      */
     @Override
     public void remove(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No properties can be removed.");
         }

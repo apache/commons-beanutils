@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2.sql;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -163,31 +165,20 @@ public class DynaRowSetTestCase extends TestCase {
     }
 
     public void testGetDynaProperty() {
-
         // Invalid argument test
-        try {
-            dynaClass.getDynaProperty(null);
-            fail("Did not throw IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // Expected result
-        }
-
+        assertThrows(NullPointerException.class, () -> dynaClass.getDynaProperty(null));
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
         assertNull("unknown property returns null", dynaProp);
-
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
         assertNotNull("string property exists", dynaProp);
         assertEquals("string property name", "stringproperty", dynaProp.getName());
         assertEquals("string property class", String.class, dynaProp.getType());
-
     }
 
     public void testGetName() {
-
         assertEquals("DynaClass name", "org.apache.commons.beanutils2.sql.RowSetDynaClass", dynaClass.getName());
-
     }
 
     /**

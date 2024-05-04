@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import java.util.Objects;
+
 import org.apache.commons.beanutils2.Converter;
 
 /**
@@ -41,9 +43,7 @@ public final class ConverterFacade<T> implements Converter<T> {
      * @param converter The converter to delegate to
      */
     public ConverterFacade(final Converter<T> converter) {
-        if (converter == null) {
-            throw new IllegalArgumentException("Converter is missing");
-        }
+        Objects.requireNonNull(converter, "converter");
         this.converter = converter;
     }
 

@@ -388,4 +388,8 @@ public abstract class AbstractNumberConverterTest<T extends Number> extends Test
         Locale.setDefault(defaultLocale);
     }
 
+    public void testToString() {
+        assertNotNull(makeConverter().toString());
+    }
+
 }

@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -105,24 +107,14 @@ public class LazyDynaClassTestCase extends TestCase {
      * Test add(name) method with 'null' name
      */
     public void testAddPropertyNullName1() {
-        try {
-            dynaClass.add((String) null);
-            fail("null property name not prevented");
-        } catch (final IllegalArgumentException expected) {
-            // expected result
-        }
+        assertThrows(NullPointerException.class, () -> dynaClass.add((String) null));
     }
 
     /**
      * Test add(name, type) method with 'null' name
      */
     public void testAddPropertyNullName2() {
-        try {
-            dynaClass.add(null, String.class);
-            fail("null property name not prevented");
-        } catch (final IllegalArgumentException expected) {
-            // expected result
-        }
+        assertThrows(NullPointerException.class, () -> dynaClass.add(null, String.class));
     }
 
     /**
@@ -226,12 +218,7 @@ public class LazyDynaClassTestCase extends TestCase {
      * Test removing a property, name is null
      */
     public void testRemovePropertyNullName() {
-        try {
-            dynaClass.remove(null);
-            fail("remove(null) did not throw IllegalArgumentException");
-        } catch (final IllegalArgumentException expected) {
-            // expected result
-        }
+        assertThrows(NullPointerException.class, () -> dynaClass.remove(null));
     }
 
     /**

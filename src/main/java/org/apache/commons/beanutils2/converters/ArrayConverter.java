@@ -148,15 +148,11 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      *  individual array elements.
      */
     public ArrayConverter(final Class<C> defaultType, final Converter elementConverter) {
-        if (defaultType == null) {
-            throw new IllegalArgumentException("Default type is missing");
-        }
+        Objects.requireNonNull(defaultType, "defaultType");
         if (!defaultType.isArray()) {
             throw new IllegalArgumentException("Default type must be an array.");
         }
-        if (elementConverter == null) {
-            throw new IllegalArgumentException("Component Converter is missing.");
-        }
+        Objects.requireNonNull(elementConverter, "elementConverter");
         this.defaultType = defaultType;
         this.elementConverter = elementConverter;
     }

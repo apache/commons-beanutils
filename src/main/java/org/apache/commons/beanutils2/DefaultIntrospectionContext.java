@@ -19,6 +19,7 @@ package org.apache.commons.beanutils2;
 import java.beans.PropertyDescriptor;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -55,20 +56,13 @@ final class DefaultIntrospectionContext implements IntrospectionContext {
 
     @Override
     public void addPropertyDescriptor(final PropertyDescriptor desc) {
-        if (desc == null) {
-            throw new IllegalArgumentException(
-                    "Property descriptor must not be null!");
-        }
+        Objects.requireNonNull(desc, "desc");
         descriptors.put(desc.getName(), desc);
     }
 
     @Override
     public void addPropertyDescriptors(final PropertyDescriptor[] descs) {
-        if (descs == null) {
-            throw new IllegalArgumentException(
-                    "Array with descriptors must not be null!");
-        }
-
+        Objects.requireNonNull(descs, "descs");
         for (final PropertyDescriptor desc : descs) {
             addPropertyDescriptor(desc);
         }

@@ -45,6 +45,7 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -408,14 +409,10 @@ public class ConvertUtilsBean {
      * @return The registered {@link Converter} or {@code null} if not found
      */
     public <T> Converter<T> lookup(final Class<?> sourceType, final Class<T> targetType) {
-
-        if (targetType == null) {
-            throw new IllegalArgumentException("Target type is missing");
-        }
+        Objects.requireNonNull(targetType, "targetType");
         if (sourceType == null) {
             return lookup(targetType);
         }
-
         Converter converter = null;
         // Convert --> String
         if (targetType == String.class) {

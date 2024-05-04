@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.net.URI;
@@ -70,12 +72,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      * Tries to create an instance without a prefix for write methods.
      */
     public void testInitNoPrefix() {
-        try {
-            new FluentPropertyBeanIntrospector(null);
-            fail("Missing prefix for write methods not detected!");
-        } catch (final IllegalArgumentException iex) {
-            // ok
-        }
+        assertThrows(NullPointerException.class, () -> new FluentPropertyBeanIntrospector(null));
     }
 
     /**

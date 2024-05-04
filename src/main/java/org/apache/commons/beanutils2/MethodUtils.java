@@ -25,6 +25,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.WeakHashMap;
 
 import org.apache.commons.lang3.SystemProperties;
@@ -68,21 +69,15 @@ public class MethodUtils {
          */
         public MethodDescriptor(final Class<?> cls, final String methodName, Class<?>[] paramTypes,
                 final boolean exact) {
-            if (cls == null) {
-                throw new IllegalArgumentException("Class cannot be null");
-            }
-            if (methodName == null) {
-                throw new IllegalArgumentException("Method Name cannot be null");
-            }
+            Objects.requireNonNull(cls, "cls");
+            Objects.requireNonNull(methodName, "methodName");
             if (paramTypes == null) {
                 paramTypes = BeanUtils.EMPTY_CLASS_ARRAY;
             }
-
             this.cls = cls;
             this.methodName = methodName;
             this.paramTypes = paramTypes;
             this.exact= exact;
-
             this.hashCode = methodName.length();
         }
         /**

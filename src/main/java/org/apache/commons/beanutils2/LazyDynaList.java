@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <h2><i>Lazy</i> DynaBean List.</h2>
@@ -420,10 +421,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *            contains elements or the DynaClass is null.
      */
     public void setElementDynaClass(final DynaClass elementDynaClass) {
-        if (elementDynaClass == null) {
-            throw new IllegalArgumentException("Element DynaClass is missing");
-        }
-
+        Objects.requireNonNull(elementDynaClass, "elementDynaClass");
         if (!isEmpty()) {
             throw new IllegalStateException("Element DynaClass cannot be reset");
         }
@@ -457,10 +455,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *            contains elements or the DynaClass is null.
      */
     public void setElementType(final Class<?> elementType) {
-        if (elementType == null) {
-            throw new IllegalArgumentException("Element Type is missing");
-        }
-
+        Objects.requireNonNull(elementType, "elementType");
         final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
         if (changeType && !isEmpty()) {
             throw new IllegalStateException("Element Type cannot be reset");

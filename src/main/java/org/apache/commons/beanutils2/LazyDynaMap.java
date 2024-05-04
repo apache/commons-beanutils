@@ -17,6 +17,7 @@
 package org.apache.commons.beanutils2;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>Provides a <i>light weight</i> {@code DynaBean</code> facade to a <code>Map}
@@ -174,16 +175,11 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public void add(final String name, final Class<?> type) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No new properties can be added.");
         }
-
         final Object value = values.get(name);
-
         // Check if the property already exists
         if (value == null) {
             values.put(name, type == null ? null : createProperty(name, type));
@@ -265,18 +261,13 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         final Object value = values.get(name);
-
         // If it doesn't exist and returnNull is false
         // create a new DynaProperty
         if (value == null && isReturnNull()) {
             return null;
         }
-
         if (value == null) {
             return new DynaProperty(name);
         }
@@ -319,10 +310,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
          */
         @Override
         protected boolean isDynaProperty(final String name) {
-            if (name == null) {
-                throw new IllegalArgumentException("Property name is missing.");
-            }
-
+            Objects.requireNonNull(name, "name");
             return values.containsKey(name);
         }
 
@@ -396,14 +384,10 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      */
     @Override
     public void remove(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Property name is missing.");
-        }
-
+        Objects.requireNonNull(name, "name");
         if (isRestricted()) {
             throw new IllegalStateException("DynaClass is currently restricted. No properties can be removed.");
         }
-
         values.remove(name);
     }
 

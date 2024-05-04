@@ -239,7 +239,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
      *  name for our DynaClass
      */
     protected DynaProperty getDynaProperty(final String name) {
-
         final DynaProperty descriptor = getDynaClass().getDynaProperty(name);
         if (descriptor == null) {
             throw new IllegalArgumentException

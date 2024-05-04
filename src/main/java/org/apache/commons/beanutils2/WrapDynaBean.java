@@ -107,6 +107,7 @@ public class WrapDynaBean implements DynaBean, Serializable {
      *
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
+     * @throws NullPointerException for null input.
      */
     @Override
     public Object get(final String name) {
@@ -115,13 +116,11 @@ public class WrapDynaBean implements DynaBean, Serializable {
             value = getPropertyUtils().getSimpleProperty(instance, name);
         } catch (final InvocationTargetException ite) {
             final Throwable cause = ite.getTargetException();
-            throw new IllegalArgumentException
-                    ("Error reading property '" + name +
-                              "' nested exception - " + cause);
+            throw new IllegalArgumentException("Error reading property '" + name + "' nested exception - " + cause);
+        } catch (final NullPointerException t) {
+            throw t;
         } catch (final Throwable t) {
-            throw new IllegalArgumentException
-                    ("Error reading property '" + name +
-                              "', exception - " + t);
+            throw new IllegalArgumentException("Error reading property '" + name + "', exception - " + t);
         }
         return value;
     }

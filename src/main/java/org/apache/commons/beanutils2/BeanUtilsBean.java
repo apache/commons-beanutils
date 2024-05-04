@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.expression.Resolver;
 import org.apache.commons.logging.Log;
@@ -290,18 +291,12 @@ public class BeanUtilsBean {
     public void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
         // Validate existence of the specified beans
-        if (dest == null) {
-            throw new IllegalArgumentException
-                    ("No destination bean specified");
-        }
-        if (orig == null) {
-            throw new IllegalArgumentException("No origin bean specified");
-        }
+        Objects.requireNonNull(dest, "dest");
+        Objects.requireNonNull(orig, "orig");
         if (LOG.isDebugEnabled()) {
             LOG.debug("BeanUtils.copyProperties(" + dest + ", " +
                       orig + ")");
         }
-
         // Copy the properties, converting as necessary
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors =

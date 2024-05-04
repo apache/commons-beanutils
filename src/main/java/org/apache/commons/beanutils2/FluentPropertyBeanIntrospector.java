@@ -21,6 +21,7 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -104,10 +105,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @throws IllegalArgumentException if the prefix is <b>null</b>
      */
     public FluentPropertyBeanIntrospector(final String writePrefix) {
-        if (writePrefix == null) {
-            throw new IllegalArgumentException(
-                    "Prefix for write methods must not be null!");
-        }
+        Objects.requireNonNull(writePrefix, "writePrefix");
         writeMethodPrefix = writePrefix;
     }
 

@@ -27,6 +27,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -164,10 +165,7 @@ public class PropertyUtilsBean {
      * @since 1.9
      */
     public void addBeanIntrospector(final BeanIntrospector introspector) {
-        if (introspector == null) {
-            throw new IllegalArgumentException(
-                    "BeanIntrospector must not be null!");
-        }
+        Objects.requireNonNull(introspector, "introspector");
         introspectors.add(introspector);
     }
 
@@ -218,13 +216,8 @@ public class PropertyUtilsBean {
             // TODO BEFORE 2.0
             // MISMATCH between implementation and Javadoc.
         NoSuchMethodException {
-        if (dest == null) {
-            throw new IllegalArgumentException("No destination bean specified");
-        }
-        if (orig == null) {
-            throw new IllegalArgumentException("No origin bean specified");
-        }
-
+        Objects.requireNonNull(dest, "dest");
+        Objects.requireNonNull(orig, "orig");
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors = ((DynaBean) orig).getDynaClass().getDynaProperties();
             for (final DynaProperty origDescriptor : origDescriptors) {
@@ -306,10 +299,7 @@ public class PropertyUtilsBean {
     public Map<String, Object> describe(final Object bean)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
+        Objects.requireNonNull(bean, "bean");
         final Map<String, Object> description = new HashMap<>();
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
@@ -379,14 +369,8 @@ public class PropertyUtilsBean {
     public Object getIndexedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Identify the index of the requested individual property
         int index = -1;
         try {
@@ -434,9 +418,7 @@ public class PropertyUtilsBean {
                                             final String name, final int index)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
+        Objects.requireNonNull(bean, "bean");
         if (name == null || name.isEmpty()) {
             if (bean.getClass().isArray()) {
                 return Array.get(bean, index);
@@ -445,11 +427,7 @@ public class PropertyUtilsBean {
                 return ((List<?>)bean).get(index);
             }
         }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(name, "name");
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             final DynaProperty descriptor =
@@ -527,17 +505,13 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if the bean class is <b>null</b>
      */
     private BeanIntrospectionData getIntrospectionData(final Class<?> beanClass) {
-        if (beanClass == null) {
-            throw new IllegalArgumentException("No bean class specified");
-        }
-
+        Objects.requireNonNull(beanClass, "beanClass");
         // Look up any cached information for this bean class
         BeanIntrospectionData data = descriptorsCache.get(beanClass);
         if (data == null) {
             data = fetchIntrospectionData(beanClass);
             descriptorsCache.put(beanClass, data);
         }
-
         return data;
     }
 
@@ -563,14 +537,8 @@ public class PropertyUtilsBean {
     public Object getMappedProperty(final Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Identify the key of the requested individual property
         String key  = null;
         try {
@@ -612,18 +580,9 @@ public class PropertyUtilsBean {
                                            final String name, final String key)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-        if (key == null) {
-            throw new IllegalArgumentException("No key specified for property '" +
-                    name + "' on bean class " + bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(key, "key");
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             final DynaProperty descriptor =
@@ -728,14 +687,8 @@ public class PropertyUtilsBean {
     public Object getNestedProperty(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -829,14 +782,8 @@ public class PropertyUtilsBean {
                                                            String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -918,9 +865,7 @@ public class PropertyUtilsBean {
      * @throws IllegalArgumentException if {@code bean} is null
      */
     public PropertyDescriptor[] getPropertyDescriptors(final Object bean) {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
+        Objects.requireNonNull(bean, "bean");
         return getPropertyDescriptors(bean.getClass());
     }
 
@@ -957,16 +902,9 @@ public class PropertyUtilsBean {
     public Class<?> getPropertyEditorClass(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
-        final PropertyDescriptor descriptor =
-                getPropertyDescriptor(bean, name);
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
+        final PropertyDescriptor descriptor = getPropertyDescriptor(bean, name);
         if (descriptor != null) {
             return descriptor.getPropertyEditorClass();
         }
@@ -1053,14 +991,8 @@ public class PropertyUtilsBean {
     public Class<?> getPropertyType(Object bean, String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -1176,14 +1108,8 @@ public class PropertyUtilsBean {
     public Object getSimpleProperty(final Object bean, final String name)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Validate the syntax of the property name
         if (resolver.hasNested(name)) {
             throw new IllegalArgumentException
@@ -1273,15 +1199,9 @@ public class PropertyUtilsBean {
                             throws
                                 IllegalAccessException,
                                 InvocationTargetException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified " +
-                "- this should have been checked before reaching this method");
-        }
-
+        Objects.requireNonNull(bean, "bean");
         try {
-
             return method.invoke(bean, values);
-
         } catch (final NullPointerException | IllegalArgumentException cause) {
             // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
             // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
@@ -1341,14 +1261,8 @@ public class PropertyUtilsBean {
      */
     public boolean isReadable(Object bean, String name) {
         // Validate method parameters
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -1419,14 +1333,8 @@ public class PropertyUtilsBean {
      */
     public boolean isWriteable(Object bean, String name) {
         // Validate method parameters
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -1530,9 +1438,7 @@ public class PropertyUtilsBean {
                                           final int index, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
+        Objects.requireNonNull(bean, "bean");
         if (name == null || name.isEmpty()) {
             if (bean.getClass().isArray()) {
                 Array.set(bean, index, value);
@@ -1544,11 +1450,7 @@ public class PropertyUtilsBean {
                 return;
             }
         }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(name, "name");
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             final DynaProperty descriptor =
@@ -1653,14 +1555,8 @@ public class PropertyUtilsBean {
                                           final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Identify the index of the requested individual property
         int index = -1;
         try {
@@ -1704,13 +1600,8 @@ public class PropertyUtilsBean {
                                          final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
 
         // Identify the key of the requested individual property
         String key  = null;
@@ -1754,18 +1645,9 @@ public class PropertyUtilsBean {
                                          final String key, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-        if (key == null) {
-            throw new IllegalArgumentException("No key specified for property '" +
-                    name + "' on bean class '" + bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(key, "key");
         // Handle DynaBean instances specially
         if (bean instanceof DynaBean) {
             final DynaProperty descriptor =
@@ -1860,14 +1742,8 @@ public class PropertyUtilsBean {
                                          String name, final Object value)
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" +
-                    bean.getClass() + "'");
-        }
-
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         // Resolve nested references
         while (resolver.hasNested(name)) {
             final String next = resolver.next(name);
@@ -2042,18 +1918,11 @@ public class PropertyUtilsBean {
      * @throws NoSuchMethodException if an accessor method for this
      *  property cannot be found
      */
-    public void setSimpleProperty(final Object bean,
-                                         final String name, final Object value)
-            throws IllegalAccessException, InvocationTargetException,
-        NoSuchMethodException {
-        if (bean == null) {
-            throw new IllegalArgumentException("No bean specified");
-        }
+    public void setSimpleProperty(final Object bean, final String name, final Object value)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        Objects.requireNonNull(bean, "bean");
+        Objects.requireNonNull(name, "name");
         final Class<?> beanClass = bean.getClass();
-        if (name == null) {
-            throw new IllegalArgumentException("No name specified for bean class '" + beanClass + "'");
-        }
-
         // Validate the syntax of the property name
         if (resolver.hasNested(name)) {
             throw new IllegalArgumentException("Nested property names are not allowed: Property '" + name + "' on bean class '" + beanClass + "'");

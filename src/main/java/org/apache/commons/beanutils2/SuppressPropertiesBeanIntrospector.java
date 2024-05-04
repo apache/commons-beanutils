@@ -20,6 +20,7 @@ import java.beans.IntrospectionException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -60,10 +61,7 @@ public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {
      * <b>null</b>
      */
     public SuppressPropertiesBeanIntrospector(final Collection<String> propertiesToSuppress) {
-        if (propertiesToSuppress == null) {
-            throw new IllegalArgumentException("Property names must not be null!");
-        }
-
+        Objects.requireNonNull(propertiesToSuppress, "propertiesToSuppress");
         propertyNames = Collections.unmodifiableSet(new HashSet<>(
                 propertiesToSuppress));
     }

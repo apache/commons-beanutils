@@ -17,6 +17,8 @@
 
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -662,21 +664,15 @@ public class BeanUtilsBeanTestCase extends TestCase {
     /**
      * Test the describe() method.
      */
-    public void testDescribe() {
-
+    public void testDescribe() throws Exception {
+        assertTrue(BeanUtils.describe(null).isEmpty());
         Map<String, String> map = null;
-        try {
-            map = BeanUtils.describe(bean);
-        } catch (final Exception e) {
-            fail("Threw exception " + e);
-        }
-
+        map = BeanUtils.describe(bean);
         // Verify existence of all the properties that should be present
         for (final String describe : describes) {
             assertTrue("Property '" + describe + "' is present", map.containsKey(describe));
         }
         assertTrue("Property 'writeOnlyProperty' is not present", !map.containsKey("writeOnlyProperty"));
-
         // Verify the values of scalar properties
         assertEquals("Value of 'booleanProperty'", "true", map.get("booleanProperty"));
         assertEquals("Value of 'byteProperty'", "121", map.get("byteProperty"));
@@ -686,7 +682,6 @@ public class BeanUtilsBeanTestCase extends TestCase {
         assertEquals("Value of 'longProperty'", "321", map.get("longProperty"));
         assertEquals("Value of 'shortProperty'", "987", map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'", "This is a string", map.get("stringProperty"));
-
     }
 
     /**
@@ -757,6 +752,18 @@ public class BeanUtilsBeanTestCase extends TestCase {
         } catch (final NoSuchMethodException e) {
             fail("NoSuchMethodException");
         }
+    }
+
+    public void testGetMappedProperty2Args() throws Exception {
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, ""));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null));
+    }
+
+    public void testGetMappedProperty3Args() throws Exception {
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty(null, "", null));
+        assertThrows(NullPointerException.class, () -> BeanUtils.getMappedProperty("", null, null));
     }
 
     /**
@@ -934,6 +941,12 @@ public class BeanUtilsBeanTestCase extends TestCase {
             fail("InvocationTargetException");
         }
 
+    }
+
+    public void testPopulate() throws Exception {
+        BeanUtilsBean.getInstance().populate(null, null);
+        BeanUtilsBean.getInstance().populate("", null);
+        BeanUtilsBean.getInstance().populate(null, new HashMap<>());
     }
 
     /**

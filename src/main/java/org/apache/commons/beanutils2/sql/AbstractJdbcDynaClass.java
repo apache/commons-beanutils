@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.DynaBean;
 import org.apache.commons.beanutils2.DynaClass;
@@ -162,9 +163,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("No property name specified");
-        }
+        Objects.requireNonNull(name, "name");
         return propertiesMap.get(name);
 
     }

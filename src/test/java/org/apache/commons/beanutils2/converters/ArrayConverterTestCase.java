@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2.converters;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -240,24 +242,9 @@ public class ArrayConverterTestCase extends TestCase {
      * Test Errors creating the converter
      */
     public void testErrors() {
-        try {
-            new ArrayConverter(null, new DateConverter());
-            fail("Default Type missing - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
-        try {
-            new ArrayConverter(Boolean.class, new DateConverter());
-            fail("Default Type not an array - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
-        try {
-            new ArrayConverter(int[].class, null);
-            fail("Component Converter missing - expected IllegalArgumentException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        }
+        assertThrows(NullPointerException.class, () -> new ArrayConverter(null, new DateConverter()));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayConverter(Boolean.class, new DateConverter()));
+        assertThrows(NullPointerException.class, () -> new ArrayConverter(int[].class, null));
     }
 
     /**

@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.apache.commons.beanutils2.BeanUtils;
 
 import junit.framework.Test;
@@ -78,14 +80,6 @@ public class Jira368TestCase extends TestCase {
      * Test {@link BeanUtils} setProperty() with Null value
      */
     public void testBeanUtilsSetProperty_NullBean() throws Exception {
-        try {
-            BeanUtils.setProperty(null, "foo", "bar");
-        } catch (final NullPointerException e) {
-            fail("Threw NullPointerException");
-        } catch (final IllegalArgumentException e) {
-            // expected result
-        } catch (final Exception e) {
-            fail("Threw " + e);
-        }
+        assertThrows(NullPointerException.class, () -> BeanUtils.setProperty(null, "foo", "bar"));
     }
 }

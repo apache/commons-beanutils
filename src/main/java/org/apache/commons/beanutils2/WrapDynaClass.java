@@ -22,6 +22,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.WeakHashMap;
 
 /**
@@ -231,10 +232,7 @@ public class WrapDynaClass implements DynaClass {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException
-                    ("No property name specified");
-        }
+        Objects.requireNonNull(name, "name");
         return propertiesMap.get(name);
     }
 

@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -211,10 +212,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     @Override
     public boolean contains(final String name, final String key) {
-        if (name == null) {
-            throw new IllegalArgumentException("No property name specified");
-        }
-
+        Objects.requireNonNull(name, "name");
         final Object value = values.get(name);
         if (value == null) {
             return false;
@@ -465,10 +463,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      */
     @Override
     public Object get(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("No property name specified");
-        }
-
+        Objects.requireNonNull(name, "name");
         // Value found
         Object value = values.get(name);
         if (value != null) {
@@ -683,15 +678,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * specified name, otherwise {@code false}
      */
     protected boolean isDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("No property name specified");
-        }
-
+        Objects.requireNonNull(name, "name");
         // Handle LazyDynaClasses
         if (dynaClass instanceof LazyDynaClass) {
             return ((LazyDynaClass)dynaClass).isDynaProperty(name);
         }
-
         // Handle other MutableDynaClass
         return dynaClass.getDynaProperty(name) != null;
     }
@@ -889,10 +880,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if no property name is specified
      */
     public int size(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("No property name specified");
-        }
-
+        Objects.requireNonNull(name, "name");
         final Object value = values.get(name);
         if (value == null) {
             return 0;

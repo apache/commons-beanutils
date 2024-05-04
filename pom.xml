@@ -206,13 +206,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <linksource>true</linksource>
-          <links>
-            <link>https://docs.oracle.com/javase/8/docs/api/</link>
-            <link>https://commons.apache.org/collections/api-release/</link>
-          </links>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -256,6 +249,7 @@
           </reportSet>
         </reportSets>
       </plugin>
+      <!-- Enabled post 2.0.0
       <plugin>
         <groupId>com.github.siom79.japicmp</groupId>
         <artifactId>japicmp-maven-plugin</artifactId>
@@ -274,14 +268,11 @@
             </file>
           </newVersion>
           <parameter>
-            <!--
-              to support "mvn site" (no japicmp report)
-              as well as "mvn package site" (with  japicmp report)
-            -->
             <ignoreMissingNewVersion>true</ignoreMissingNewVersion>
           </parameter>
         </configuration>
       </plugin>
+      -->
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>

@@ -153,10 +153,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      */
     @Override
     public DynaProperty getDynaProperty(final String name) {
-        if (name == null) {
-            throw new IllegalArgumentException
-                    ("No property name specified");
-        }
+        Objects.requireNonNull(name, "name");
         return propertiesMap.get(name);
     }
 

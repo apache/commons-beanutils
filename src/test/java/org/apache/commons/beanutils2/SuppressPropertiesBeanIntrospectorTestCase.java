@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.util.Arrays;
@@ -29,6 +31,7 @@ import junit.framework.TestCase;
  * Test class for {@code SuppressPropertiesBeanIntrospector}.
  */
 public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
+
     /**
      * A test implementation of IntrospectionContext which collects the properties which have been removed.
      */
@@ -99,12 +102,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
      * Tries to create an instance without properties.
      */
     public void testInitNoPropertyNames() {
-        try {
-            new SuppressPropertiesBeanIntrospector(null);
-            fail("Missing properties not detected!");
-        } catch (final IllegalArgumentException iaex) {
-            // ok
-        }
+        assertThrows(NullPointerException.class, () -> new SuppressPropertiesBeanIntrospector(null));
     }
 
     /**
