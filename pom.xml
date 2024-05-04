@@ -129,7 +129,7 @@
         <configuration>
           <reuseForks>false</reuseForks>
           <!-- limit memory size see BEANUTILS-291
-                     ..also include ${argLine} from jacoco-maven-plugin
+               also include ${argLine} from jacoco-maven-plugin
           -->
           <argLine>${surefire.argLine} ${argLine}</argLine>
           <includes>
