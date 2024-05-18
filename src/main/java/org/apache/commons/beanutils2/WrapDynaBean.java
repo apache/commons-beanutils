@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * <p>Implementation of {@code DynaBean} that wraps a standard JavaBean
+ * <p>Implements {@code DynaBean} to wrap a standard JavaBean
  * instance, so that DynaBean APIs can be used to access its properties.</p>
  *
  * <p>
