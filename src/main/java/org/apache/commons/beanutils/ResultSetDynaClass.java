@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 
 /**
- * <p>Implementation of <code>DynaClass</code> for DynaBeans that wrap the
+ * <p>Implements <code>DynaClass</code> for DynaBeans that wrap the
  * <code>java.sql.Row</code> objects of a <code>java.sql.ResultSet</code>.
  * The normal usage pattern is something like:</p>
  * <pre>

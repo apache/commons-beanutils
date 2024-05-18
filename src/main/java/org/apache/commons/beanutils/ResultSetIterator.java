@@ -25,7 +25,7 @@ import java.util.NoSuchElementException;
 
 
 /**
- * <p>Implementation of <code>java.util.Iterator</code> returned by the
+ * <p>Implements {@link Iterator} returned by the
  * <code>iterator()</code> method of {@link ResultSetDynaClass}.  Each
  * object returned by this iterator will be a {@link DynaBean} that
  * represents a single row from the result set being wrapped.</p>

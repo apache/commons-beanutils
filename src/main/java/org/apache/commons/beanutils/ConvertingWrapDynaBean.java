@@ -20,7 +20,7 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * <p>Implementation of <code>DynaBean</code> that wraps a standard JavaBean
+ * <p>Implements <code>DynaBean</code> to wrap a standard JavaBean
  * instance, so that DynaBean APIs can be used to access its properties,
  * though this implementation allows type conversion to occur when properties are set.
  * This means that (say) Strings can be passed in as values in setter methods and

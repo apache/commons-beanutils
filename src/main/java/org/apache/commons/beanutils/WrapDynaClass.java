@@ -31,7 +31,7 @@ import java.util.WeakHashMap;
 
 
 /**
- * <p>Implementation of <code>DynaClass</code> for DynaBeans that wrap
+ * <p>Implements <code>DynaClass</code> for DynaBeans that wrap
  * standard JavaBean instances.</p>
  *
  * <p>

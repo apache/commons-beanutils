@@ -27,7 +27,7 @@ import java.util.List;
 
 
 /**
- * <p>Implementation of {@link DynaClass} that creates an in-memory collection
+ * <p>Implements {@link DynaClass} to create an in-memory collection
  * of {@link DynaBean}s representing the results of an SQL query.  Once the
  * {@link DynaClass} instance has been created, the JDBC <code>ResultSet</code>
  * and <code>Statement</code> on which it is based can be closed, and the
