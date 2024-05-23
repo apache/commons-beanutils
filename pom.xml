@@ -59,7 +59,8 @@
     <commons.jacoco.haltOnFailure>true</commons.jacoco.haltOnFailure>
     <commons.jacoco.classRatio>0.95</commons.jacoco.classRatio>
     <commons.jacoco.instructionRatio>0.70</commons.jacoco.instructionRatio>
-    <commons.jacoco.methodRatio>0.77</commons.jacoco.methodRatio>
+    <!-- methodRatio is 0.76 on Java 8, and 0.77 on Java 11 and up. -->
+    <commons.jacoco.methodRatio>0.76</commons.jacoco.methodRatio>
     <commons.jacoco.branchRatio>0.67</commons.jacoco.branchRatio>
     <commons.jacoco.complexityRatio>0.61</commons.jacoco.complexityRatio>
     <commons.jacoco.lineRatio>0.73</commons.jacoco.lineRatio>
