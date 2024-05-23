@@ -78,7 +78,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
          * Sets the default value.
          *
          * @param defaultValue the default value.
-         * @return this
+         * @return {@code this} instance.
          */
         public B setDefault(final T defaultValue) {
             this.defaultValue = defaultValue;
@@ -89,7 +89,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
          * Sets the locale.
          *
          * @param locale the locale.
-         * @return this
+         * @return {@code this} instance.
          */
         public B setLocale(final Locale locale) {
             this.locale = locale;
@@ -100,7 +100,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
          * Sets the localized pattern.
          *
          * @param localizedPattern the localized pattern.
-         * @return this
+         * @return {@code this} instance.
          */
         public B setLocalizedPattern(final boolean localizedPattern) {
             this.localizedPattern = localizedPattern;
@@ -111,7 +111,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
          * Sets the pattern.
          *
          * @param pattern the pattern.
-         * @return this
+         * @return {@code this} instance.
          */
         public B setPattern(final String pattern) {
             this.pattern = pattern;
@@ -122,7 +122,7 @@ public abstract class BaseLocaleConverter<T> implements LocaleConverter<T> {
          * Sets the use of default.
          *
          * @param useDefault the use of default.
-         * @return this
+         * @return {@code this} instance.
          */
         public B setUseDefault(final boolean useDefault) {
             this.useDefault = useDefault;
