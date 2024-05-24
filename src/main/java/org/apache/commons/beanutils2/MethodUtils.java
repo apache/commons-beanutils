@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -201,7 +202,7 @@ public class MethodUtils {
         if (!Modifier.isPublic(method.getModifiers())) {
             return null;
         }
-
+MethodUtils.getAccessibleMethod(method);
         boolean sameClass = true;
         if (clazz == null) {
             clazz = method.getDeclaringClass();
