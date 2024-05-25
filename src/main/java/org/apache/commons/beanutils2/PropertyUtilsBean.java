@@ -1043,16 +1043,22 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * <p>Return an accessible property getter method for this property,
-     * if there is one; otherwise return {@code null}.</p>
+     * <p>Return the property getter method for this property if accessible from given
+     * {@code clazz} (and if there is one at all); otherwise return {@code null}.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
+     *
+     * <p>This fairly low-level method shouldn't be needed for most usecases. However, if
+     * you do have to implement something extra, you can improve consistency with the
+     * standard code (e.g. that of {@link #getProperty getProperty()}) by calling this
+     * method instead of using {@code descriptor.getReadMethod()} directly.
      *
      * @param clazz The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a getter for
      * @return The read method
+     * @since 2.0.0
      */
-    Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
+    public Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
 
@@ -1157,10 +1163,15 @@ public class PropertyUtilsBean {
     }
 
     /**
-     * <p>Return an accessible property setter method for this property,
-     * if there is one; otherwise return {@code null}.</p>
+     * <p>Return the property setter method for this property if accessible from given
+     * {@code clazz} (and if there is one at all); otherwise return {@code null}.</p>
      *
      * <p><strong>FIXME</strong> - Does not work with DynaBeans.</p>
+     *
+     * <p>This fairly low-level method shouldn't be needed for most usecases. However, if
+     * you do have to implement something extra, you can improve consistency with the
+     * standard code (e.g. that of {@link #setProperty setProperty()}) by calling this
+     * method instead of using {@code descriptor.getWriteMethod()} directly.
      *
      * @param clazz The class of the read method will be invoked on
      * @param descriptor Property descriptor to return a setter for
