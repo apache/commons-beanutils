@@ -136,6 +136,9 @@
       <action dev="ggregory" type="add" due-to="Seth Falco, Gary Gregory">
         Add Converters for additional types: Color, Dimension, InetAddress, Locale, Pattern, Point #47.
       </action>
+      <action dev="ggregory" type="add" due-to="Sergey Chernov, Gary Gregory">
+        Make PropertyUtilsBean.getReadMethod(Class, PropertyDescriptor) public #232.
+      </action>
       <!--  UPDATES -->
       <action dev="ggregory" type="update" due-to="Dependabot, Gary Gregory">
         Bump actions/cache from 2 to 3.0.11 #77, #89, #103, #111. #137, #141.
