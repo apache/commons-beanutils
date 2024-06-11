@@ -345,7 +345,7 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      * @return String representation of the object
      */
     private String toString(final Object obj) {
-        return obj == null ? null : obj.toString();
+        return Objects.toString(obj, null);
     }
 
     /**

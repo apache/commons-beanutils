@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.apache.commons.beanutils2.MappedPropertyDescriptor;
 import org.apache.commons.beanutils2.memoryleaktests.MemoryLeakTestCase;
@@ -101,7 +102,7 @@ public class Jira347TestCase extends TestCase {
      */
     private String getMappedWriteMethod(final MappedPropertyDescriptor descriptor) {
         final Method m = descriptor.getMappedWriteMethod();
-        return m == null ? null : m.toString();
+        return Objects.toString(m, null);
     }
 
     /**
