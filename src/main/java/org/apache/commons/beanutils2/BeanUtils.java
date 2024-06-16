@@ -82,12 +82,12 @@ public class BeanUtils {
      *  converter has not been registered.
      * @throws InvocationTargetException if the property accessor method
      *  throws an exception
-     * @see BeanUtilsBean#copyProperties
+     * @see BeanUtilsBean#copyProperties(Object, Object, String...)
      */
     public static void copyProperties(final Object dest, final Object orig)
         throws IllegalAccessException, InvocationTargetException {
 
-        BeanUtilsBean.getInstance().copyProperties(dest, orig);
+            copyProperties(dest, orig, (String) null);
     }
 
     /**
@@ -111,6 +111,34 @@ public class BeanUtils {
 
         BeanUtilsBean.getInstance().copyProperty(bean, name, value);
     }
+
+    /**
+     * <p>Copy property values from the origin bean to the destination bean
+     * for all cases where the property names are the same</p>
+     *
+     * <p>For more details see {@code BeanUtilsBean}.</p>
+     *
+     * @param dest Destination bean whose properties are modified
+     * @param orig Origin bean whose properties are retrieved
+     * @param ignore list of properties to ignore, may be null
+     *
+     * @throws IllegalAccessException if the caller does not have
+     *  access to the property accessor method
+     * @throws IllegalArgumentException if the {@code dest} or
+     *  {@code orig</code> argument is null or if the <code>dest}
+     *  property type is different from the source type and the relevant
+     *  converter has not been registered.
+     * @throws InvocationTargetException if the property accessor method
+     *  throws an exception
+     * @see BeanUtilsBean#copyProperties(Object, Object, String...)
+     * @since 2.0
+     */
+    public static void copyProperties(final Object dest, final Object orig, final String... ignore)
+            throws IllegalAccessException, InvocationTargetException {
+
+        BeanUtilsBean.getInstance().copyProperties(dest, orig, ignore);
+    }
+
 
     /**
      * Create a cache.
