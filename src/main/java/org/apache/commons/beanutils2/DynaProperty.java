@@ -248,7 +248,7 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Reads field values for this object safely.
+     * Deserializes field values for this object safely.
      * There are issues with serializing primitive class types on certain JVM versions
      * (including Java 1.3).
      * This method provides a workaround.
