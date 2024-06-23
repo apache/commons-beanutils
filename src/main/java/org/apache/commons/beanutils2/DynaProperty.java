@@ -324,8 +324,8 @@ public class DynaProperty implements Serializable {
     /**
      * Serializes this object to an ObjectOutputStream.
      *
-     * @param out the target ObjectOutputStream/
-     * @throws IOException thrown when an I/O errors occur writing to the underlying stream
+     * @param out the target ObjectOutputStream.
+     * @throws IOException thrown when an I/O errors occur writing to the target stream.
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
         writeAnyClass(this.type, out);
