@@ -322,13 +322,10 @@ public class DynaProperty implements Serializable {
     }
 
     /**
-     * Writes this object safely.
-     * There are issues with serializing primitive class types on certain JVM versions
-     * (including Java 1.3).
-     * This method provides a workaround.
+     * Serializes this object to an ObjectOutputStream.
      *
-     * @param out {@link ObjectOutputStream} to write object to
-     * @throws IOException if the object can't be written
+     * @param out the target ObjectOutputStream/
+     * @throws IOException thrown when an I/O errors occur writing to the underlying stream
      */
     private void writeObject(final ObjectOutputStream out) throws IOException {
         writeAnyClass(this.type, out);
