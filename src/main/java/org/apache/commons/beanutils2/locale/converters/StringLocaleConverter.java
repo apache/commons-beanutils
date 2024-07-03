@@ -27,10 +27,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.LoggerUtil;
 import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.beanutils2.locale.LocaleConverter;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Standard {@link org.apache.commons.beanutils2.locale.LocaleConverter} implementation that converts an incoming locale-sensitive object into a {@link String}
@@ -60,7 +60,7 @@ public class StringLocaleConverter extends BaseLocaleConverter<String> {
     }
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(StringLocaleConverter.class);
+    private static final Log LOG = LoggerUtil.createLoggerWithContextClassLoader(StringLocaleConverter.class);
 
     /**
      * Constructs a new builder.

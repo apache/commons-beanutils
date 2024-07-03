@@ -23,10 +23,10 @@ import java.text.ParseException;
 import java.util.Locale;
 
 import org.apache.commons.beanutils2.ConversionException;
+import org.apache.commons.beanutils2.LoggerUtil;
 import org.apache.commons.beanutils2.locale.BaseLocaleConverter;
 import org.apache.commons.beanutils2.locale.LocaleConverter;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Standard {@link LocaleConverter} implementation that converts an incoming locale-sensitive String into a {@link Number} object, optionally using a
@@ -62,7 +62,7 @@ public class DecimalLocaleConverter<T extends Number> extends BaseLocaleConverte
     }
 
     /** All logging goes through this logger */
-    private static final Log LOG = LogFactory.getLog(DecimalLocaleConverter.class);
+    private static final Log LOG = LoggerUtil.createLoggerWithContextClassLoader(DecimalLocaleConverter.class);
 
     /**
      * Constructs a new builder.

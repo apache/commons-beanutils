@@ -25,8 +25,8 @@ import org.apache.commons.beanutils2.BeanUtils;
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.ConvertUtils;
 import org.apache.commons.beanutils2.Converter;
+import org.apache.commons.beanutils2.LoggerUtil;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Base {@link Converter} implementation that provides the structure
@@ -420,7 +420,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      */
     Log log() {
         if (log == null) {
-            log = LogFactory.getLog(getClass());
+            log = LoggerUtil.createLoggerWithContextClassLoader(getClass());
         }
         return log;
     }
