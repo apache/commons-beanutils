@@ -22,7 +22,6 @@ package org.apache.commons.beanutils.priv;
 /**
  * Interface that is indirectly implemented by PrivateBean.
  *
- * @version $Id$
  */
 
 public interface PrivateIndirect {

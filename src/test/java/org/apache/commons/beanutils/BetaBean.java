@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils;
 
 /**
- * @version $Id$
  */
 public class BetaBean extends AbstractChild {
 

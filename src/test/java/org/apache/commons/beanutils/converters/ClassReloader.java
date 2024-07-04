@@ -43,7 +43,6 @@ import java.io.InputStream;
  * been present in the component-specific classpath too, without any messing
  * about with the way unit test code is compiled or executed.
  *
- * @version $Id$
  */
 
 public class ClassReloader extends ClassLoader {

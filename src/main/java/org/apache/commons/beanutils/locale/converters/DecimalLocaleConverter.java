@@ -35,7 +35,6 @@ import java.util.Locale;
  * if a conversion error occurs.</p>
  *
  * @since 1.7
- * @version $Id$
  */
 
 public class DecimalLocaleConverter extends BaseLocaleConverter {

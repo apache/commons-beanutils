@@ -43,7 +43,6 @@ import static org.junit.Assert.*;
  *
  * See https://issues.apache.org/jira/browse/BEANUTILS-291
  *
- * @version $Id$
  */
 public class MemoryLeakTestCase {
 

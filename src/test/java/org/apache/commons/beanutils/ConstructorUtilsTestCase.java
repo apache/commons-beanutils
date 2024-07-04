@@ -30,7 +30,6 @@ import junit.framework.TestSuite;
 /**
  * <p> Test case for <code>ConstructorUtils</code> </p>
  *
- * @version $Id$
  */
 public class ConstructorUtilsTestCase extends TestCase {
 

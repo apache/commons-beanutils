@@ -24,7 +24,6 @@ import org.apache.commons.beanutils.TestBean;
 /**
  * Test case for Jira issue# BEANUTILS-92.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-92">https://issues.apache.org/jira/browse/BEANUTILS-92</a>
  */
 public class Jira92TestCase extends TestCase {

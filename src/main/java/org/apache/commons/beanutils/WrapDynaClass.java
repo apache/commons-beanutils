@@ -45,7 +45,6 @@ import java.util.WeakHashMap;
  * </pre></code>
  * <p>
  *
- * @version $Id$
  */
 
 public class WrapDynaClass implements DynaClass {

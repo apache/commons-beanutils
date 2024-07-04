@@ -29,7 +29,6 @@ import org.apache.commons.beanutils.ConversionException;
  * a specified default value or throws a {@link ConversionException} depending
  * on how this instance is constructed.</p>
  *
- * @version $Id$
  * @since 1.4
  * @deprecated Replaced by the new {@link ArrayConverter} implementation
  */

@@ -18,7 +18,6 @@
 package org.apache.commons.beanutils;
 
 /**
- * @version $Id$
  */
 public class AlphaBean extends AbstractParent implements Child {
 

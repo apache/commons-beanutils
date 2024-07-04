@@ -21,7 +21,6 @@ package org.apache.commons.beanutils;
 /**
  * Test Interface
  *
- * @version $Id$
  */
 
 public interface MappedPropertyTestInterface {

@@ -22,7 +22,6 @@ package org.apache.commons.beanutils;
 /**
  * Test Child Interface
  *
- * @version $Id$
  */
 
 public interface MappedPropertyChildInterface extends MappedPropertyTestInterface  {

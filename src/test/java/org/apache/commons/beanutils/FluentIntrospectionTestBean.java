@@ -19,7 +19,6 @@ package org.apache.commons.beanutils;
 /**
  * A bean class used for tests of introspection.
  *
- * @version $Id$
  */
 public class FluentIntrospectionTestBean extends AlphaBean {
     private String stringProperty;

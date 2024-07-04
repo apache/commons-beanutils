@@ -33,7 +33,6 @@ import org.apache.commons.collections.map.AbstractTestMap;
 /**
  * Test cases for BeanMap
  *
- * @version $Id$
  */
 @SuppressWarnings("deprecation")
 public class BeanMapTestCase extends AbstractTestMap {

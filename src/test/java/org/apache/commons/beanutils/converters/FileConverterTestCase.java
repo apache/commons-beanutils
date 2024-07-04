@@ -29,7 +29,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the FileConverter class.
  *
- * @version $Id$
  */
 
 public class FileConverterTestCase extends TestCase {

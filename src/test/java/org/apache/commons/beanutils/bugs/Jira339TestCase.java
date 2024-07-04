@@ -30,7 +30,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-339">https://issues.apache.org/jira/browse/BEANUTILS-339</a>
  */
 public class Jira339TestCase extends TestCase {

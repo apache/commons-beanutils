@@ -38,7 +38,6 @@ import org.apache.commons.beanutils.ConversionException;
  *  See unimplemented functionality of the convert utils in the method begining with fixme
  * </p>
  *
- * @version $Id$
  */
 
 public class LocaleConvertUtilsTestCase extends TestCase {

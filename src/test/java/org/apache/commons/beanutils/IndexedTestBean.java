@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * Indexed Properties Test bean for JUnit tests for the "beanutils" component.
  *
- * @version $Id$
  */
 public class IndexedTestBean {
 

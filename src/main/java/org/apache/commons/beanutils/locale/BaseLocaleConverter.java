@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * optionally using a default value or throwing a {@link ConversionException}
  * if a conversion error occurs.</p>
  *
- * @version $Id$
  */
 
 public abstract class BaseLocaleConverter implements LocaleConverter {

@@ -27,7 +27,6 @@ import junit.framework.TestSuite;
  * <p>
  *  Test Case for the BeanComparator class.
  *
- * @version $Id$
  */
 
 public class BeanComparatorTestCase extends TestCase {

@@ -38,7 +38,6 @@ import org.apache.commons.logging.LogFactory;
  * {@link org.apache.commons.beanutils.ConversionException}
  * if a conversion error occurs.</p>
  *
- * @version $Id$
  */
 
 public class DateLocaleConverter extends BaseLocaleConverter {

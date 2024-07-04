@@ -63,7 +63,6 @@ package org.apache.commons.beanutils;
  *    keys of the map are typically strings.</p>
  *
  * @since BeanUtils 1.8.0
- * @version $Id$
  * @deprecated Use {@link DynaBeanPropertyMapDecorator} instead. When adding
  * generics it turned out that it was not possible to use the correct type
  * parameters without breaking backwards compatibility. Therefore, class

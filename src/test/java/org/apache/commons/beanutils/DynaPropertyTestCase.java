@@ -25,7 +25,6 @@ import java.util.Collection;
 /**
  * Test case for {@link DynaProperty}.
  *
- * @version $Id$
  */
 public class DynaPropertyTestCase extends TestCase {
 

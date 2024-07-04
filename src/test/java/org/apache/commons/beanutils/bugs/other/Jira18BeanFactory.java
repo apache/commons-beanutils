@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.bugs.Jira18TestCase;
  * Factory which creates <i>package</i> scope beans with
  * public methods for {@link Jira18TestCase}.
  *
- * @version $Id$
  */
 public class Jira18BeanFactory {
 

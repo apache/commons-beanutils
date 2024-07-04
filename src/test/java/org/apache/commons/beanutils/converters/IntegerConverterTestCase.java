@@ -26,7 +26,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the IntegerConverter class.
  *
- * @version $Id$
  */
 
 public class IntegerConverterTestCase extends NumberConverterTestBase {

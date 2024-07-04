@@ -25,7 +25,6 @@ package org.apache.commons.beanutils;
  * <p>For more details, see <code>ConvertUtilsBean</code> which provides the
  * implementations for these methods.</p>
  *
- * @version $Id$
  * @see ConvertUtilsBean
  */
 

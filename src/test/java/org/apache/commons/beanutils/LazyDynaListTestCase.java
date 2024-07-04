@@ -33,7 +33,6 @@ import junit.framework.TestSuite;
 /**
  * <p>Test Case for the <code>LazyDynaList</code>class.</p>
  *
- * @version $Id$
  */
 public class LazyDynaListTestCase extends TestCase {
 

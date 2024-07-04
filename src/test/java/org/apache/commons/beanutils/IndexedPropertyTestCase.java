@@ -35,7 +35,6 @@ import org.junit.Test;
 /**
  * <p>Test Case for the Indexed Properties.</p>
  *
- * @version $Id$
  */
 
 public class IndexedPropertyTestCase {

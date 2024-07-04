@@ -20,7 +20,6 @@ package org.apache.commons.beanutils;
 /**
  * Bean that has primitive properties
  *
- * @version $Id$
  */
 public class PrimitiveBean {
 

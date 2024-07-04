@@ -44,7 +44,6 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  * </p>
  *
  * @param <T> the type of beans to be compared by this {@code Comparator}
- * @version $Id$
  */
 public class BeanComparator<T> implements Comparator<T>, Serializable {
 

@@ -52,7 +52,6 @@ import org.apache.commons.logging.LogFactory;
  * tries to transform the default value to the requested target type.
  * If this fails, a {@code ConversionException} if thrown.
  *
- * @version $Id$
  * @since 1.8.0
  */
 public abstract class AbstractConverter implements Converter {

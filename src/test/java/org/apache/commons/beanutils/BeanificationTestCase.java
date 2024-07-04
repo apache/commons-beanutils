@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * Test Case for changes made during Beanutils Beanification
  * </p>
  *
- * @version $Id$
  */
 
 public class BeanificationTestCase extends TestCase {

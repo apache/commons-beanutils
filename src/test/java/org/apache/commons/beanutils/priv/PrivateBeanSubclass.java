@@ -23,7 +23,6 @@ package org.apache.commons.beanutils.priv;
  * Bean that exposes methods defined by an interface that is implemented
  * in the superclass.
  *
- * @version $Id$
  */
 
 class PrivateBeanSubclass extends PrivateBean {

@@ -21,7 +21,6 @@ package org.apache.commons.beanutils.locale.converters;
 /**
  * Test Case for the DoubleLocaleConverter class.
  *
- * @version $Id$
  */
 
 public class DoubleLocaleConverterTestCase extends BaseLocaleConverterTestCase {

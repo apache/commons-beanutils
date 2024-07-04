@@ -60,7 +60,6 @@ package org.apache.commons.beanutils;
  *    and <code>remove()</code> operations.</p>
  *
  * @since BeanUtils 1.9.0
- * @version $Id$
  */
 public class DynaBeanPropertyMapDecorator extends BaseDynaBeanMapDecorator<String> {
     /**

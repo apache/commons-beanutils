@@ -33,7 +33,6 @@ import java.util.Set;
  * {@code BeanIntrospector} are removed again.
  * </p>
  *
- * @version $Id$
  * @since 1.9.2
  */
 public class SuppressPropertiesBeanIntrospector implements BeanIntrospector {

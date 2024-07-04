@@ -33,7 +33,6 @@ import org.apache.commons.logging.LogFactory;
  * Beanutils's describe() method cannot determine reader methods for anonymous
  * class - see Jira issue# BEANUTILS-157.
  *
- * @version $Id$
  * @see <a
  *      href="https://issues.apache.org/jira/browse/BEANUTILS-157">https://issues.apache.org/jira/browse/BEANUTILS-157<a/>
  */

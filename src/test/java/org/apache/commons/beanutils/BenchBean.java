@@ -22,7 +22,6 @@ package org.apache.commons.beanutils;
 /**
  * Plain old java bean (POJO) for microbenchmarks.
  *
- * @version $Id$
  */
 
 public class BenchBean {

@@ -39,7 +39,6 @@ import org.junit.Test;
  * a weaker alternative, see {@link Jira422bTestCase}.
  *
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">https://issues.apache.org/jira/browse/BEANUTILS-422</a>
  */
 public class Jira422TestCase {

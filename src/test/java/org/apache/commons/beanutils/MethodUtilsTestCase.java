@@ -31,7 +31,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
 /**
  * <p> Test case for <code>MethodUtils</code> </p>
  *
- * @version $Id$
  */
 public class MethodUtilsTestCase extends TestCase {
 

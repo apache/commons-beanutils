@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-349">https://issues.apache.org/jira/browse/BEANUTILS-349</a>
  */
 public class Jira349TestCase extends TestCase {

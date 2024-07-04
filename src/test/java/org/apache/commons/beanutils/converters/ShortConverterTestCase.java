@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the ShortConverter class.
  *
- * @version $Id$
  */
 
 public class ShortConverterTestCase extends NumberConverterTestBase {

@@ -28,7 +28,6 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * Indexed List Setters no longer work.
  *
- * @version $Id$
  * @see <a
  * href="https://issues.apache.org/jira/browse/BEANUTILS-465">https://issues.apache.org/jira/browse/BEANUTILS-465</a>
  */

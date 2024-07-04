@@ -24,7 +24,6 @@ package org.apache.commons.beanutils;
  * <code>Converter.convert()</code> has failed to complete successfully.
  *
  * @since 1.3
- * @version $Id$
  */
 
 public class ConversionException extends RuntimeException {

@@ -33,7 +33,6 @@ import junit.framework.TestSuite;
 /**
  * Test accessing RowSets via DynaBeans.
  *
- * @version $Id$
  */
 
 public class DynaRowSetTestCase extends TestCase {

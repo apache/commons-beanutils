@@ -24,7 +24,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the DateConverter class.
  *
- * @version $Id$
  */
 public class DateConverterTestCase extends DateConverterTestBase {
 

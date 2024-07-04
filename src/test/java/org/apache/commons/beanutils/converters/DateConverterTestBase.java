@@ -32,7 +32,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Abstract base for &lt;Date&gt;Converter classes.
  *
- * @version $Id$
  */
 
 public abstract class DateConverterTestBase extends TestCase {

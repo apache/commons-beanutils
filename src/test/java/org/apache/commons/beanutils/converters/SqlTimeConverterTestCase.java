@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
 /**
  * Test Case for the {@link SqlTimeConverter} class.
  *
- * @version $Id$
  */
 
 public class SqlTimeConverterTestCase extends DateConverterTestBase {

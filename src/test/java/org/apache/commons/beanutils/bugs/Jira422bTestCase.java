@@ -24,7 +24,6 @@ import org.junit.Test;
 /**
  * Variant of {@link Jira422TestCase} that is compatible with BEANUTILS-492
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-422">BEANUTILS-422</a>
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-492">BEANUTILS-492</a>
  */

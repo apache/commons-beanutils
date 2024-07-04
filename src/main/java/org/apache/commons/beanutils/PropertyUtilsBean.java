@@ -87,7 +87,6 @@ import org.apache.commons.logging.LogFactory;
  *     supported.</li>
  * </ul>
  *
- * @version $Id$
  * @see Resolver
  * @see PropertyUtils
  * @since 1.7

@@ -36,7 +36,6 @@ import junit.framework.TestSuite;
  * <p>
  * This test case demonstrates the issue.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-87">https://issues.apache.org/jira/browse/BEANUTILS-87</a>
  */
 public class Jira87TestCase extends TestCase {

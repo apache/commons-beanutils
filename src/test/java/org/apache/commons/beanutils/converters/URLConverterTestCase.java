@@ -29,7 +29,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the URLConverter class.
  *
- * @version $Id$
  */
 
 public class URLConverterTestCase extends TestCase {

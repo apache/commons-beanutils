@@ -104,7 +104,6 @@ import org.apache.commons.logging.LogFactory;
  * </ul>
  * </p>
  *
- * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see org.apache.commons.collections.Predicate
  */

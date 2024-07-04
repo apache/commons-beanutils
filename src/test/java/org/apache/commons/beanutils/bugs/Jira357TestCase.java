@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-357">https://issues.apache.org/jira/browse/BEANUTILS-357</a>
  */
 public class Jira357TestCase extends TestCase {

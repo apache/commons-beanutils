@@ -83,7 +83,6 @@ package org.apache.commons.beanutils.expression;
  *   </ul>
  * </ul>
  *
- * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtilsBean#setResolver(Resolver)
  * @since 1.8.0
  */

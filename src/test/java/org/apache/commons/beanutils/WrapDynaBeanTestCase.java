@@ -32,7 +32,6 @@ import junit.framework.TestSuite;
  * These tests were based on the ones in <code>PropertyUtilsTestCase</code>
  * because the two classes provide similar levels of functionality.</p>
  *
- * @version $Id$
  */
 
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {

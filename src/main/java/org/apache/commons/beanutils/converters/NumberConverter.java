@@ -79,7 +79,6 @@ import org.apache.commons.beanutils.ConversionException;
  * For example to cater for number styles used in Germany such as <code>0.000,00</code> the pattern
  * is specified in the normal form <code>0,000.00</code> and the locale set to <code>Locale.GERMANY</code>.
  *
- * @version $Id$
  * @since 1.8.0
  */
 public abstract class NumberConverter extends AbstractConverter {

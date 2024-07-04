@@ -37,7 +37,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
  *  Test Case for the ConvertUtils class.
  * </p>
  *
- * @version $Id$
  */
 
 public class ConvertUtilsTestCase extends TestCase {

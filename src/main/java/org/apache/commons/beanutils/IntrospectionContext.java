@@ -33,7 +33,6 @@ import java.util.Set;
  * {@code BeanIntrospector} instances to collaborate.
  * </p>
  *
- * @version $Id$
  * @since 1.9
  */
 public interface IntrospectionContext {

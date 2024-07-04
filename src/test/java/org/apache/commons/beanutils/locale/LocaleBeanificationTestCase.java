@@ -41,7 +41,6 @@ import org.apache.commons.logging.LogFactory;
  * This is basically a cut-and-correct version of the beanutils beanifications tests.
  * </p>
  *
- * @version $Id$
  */
 
 public class LocaleBeanificationTestCase extends TestCase {

@@ -65,7 +65,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
  * <li>setSimpleProperty(Object,String,Object)</li>
  * </ul>
  *
- * @version $Id$
  */
 
 public class PropertyUtilsTestCase extends TestCase {

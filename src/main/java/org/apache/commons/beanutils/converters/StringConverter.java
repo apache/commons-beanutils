@@ -38,7 +38,6 @@ package org.apache.commons.beanutils.converters;
  * of the existing ConvertUtils framework.
  *
  *
- * @version $Id$
  * @since 1.3
  */
 public final class StringConverter extends AbstractConverter {

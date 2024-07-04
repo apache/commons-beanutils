@@ -65,7 +65,6 @@ import java.lang.reflect.InvocationTargetException;
  *    </li>
  * </ul>
  *
- * @version $Id$
  * @see org.apache.commons.beanutils.PropertyUtils
  * @see org.apache.commons.collections.Transformer
  */

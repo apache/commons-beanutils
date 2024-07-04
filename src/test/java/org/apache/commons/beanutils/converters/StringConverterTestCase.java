@@ -23,7 +23,6 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Test case for {@code StringConverter}.
  *
- * @version $Id$
  */
 public class StringConverterTestCase extends TestCase {
     /** The converter to be tested. */

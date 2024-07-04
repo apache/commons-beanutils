@@ -27,7 +27,6 @@ import org.apache.commons.beanutils.locale.converters.IntegerLocaleConverter;
  * BaseLocaleConverter.checkConversionResult() fails with ConversionException when result
  * is null when it should not.
  *
- * @version $Id$
  * @see <a href="https://issues.apache.org/jira/browse/BEANUTILS-458">https://issues.apache.org/jira/browse/BEANUTILS-458</a>
  */
 public class Jira458TestCase extends TestCase {

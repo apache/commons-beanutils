@@ -28,7 +28,6 @@ import org.apache.commons.beanutils.locale.BaseLocaleConverter;
  * define any real tests; it just provides useful methods for the real
  * test case classes to inherit.
  *
- * @version $Id$
  */
 
 public class BaseLocaleConverterTestCase extends TestCase {

@@ -25,7 +25,6 @@ import org.apache.commons.beanutils.Converter;
 /**
  * Test Case for the DoubleConverter class.
  *
- * @version $Id$
  */
 
 public class DoubleConverterTestCase extends NumberConverterTestBase {

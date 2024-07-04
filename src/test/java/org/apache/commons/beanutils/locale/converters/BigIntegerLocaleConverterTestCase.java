@@ -24,7 +24,6 @@ import org.apache.commons.beanutils.ConversionException;
 /**
  * Test Case for the BigIntegerLocaleConverter class.
  *
- * @version $Id$
  */
 
 public class BigIntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase {

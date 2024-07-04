@@ -28,7 +28,6 @@ import java.lang.reflect.InvocationTargetException;
  * to the result of calling the given property getter.
  * </p>
  *
- * @version $Id$
  */
 public class BeanPredicate implements Predicate {
 
