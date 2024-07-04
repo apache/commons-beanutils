@@ -32,7 +32,7 @@
       <!-- FIX -->
       <action issue="BEANUTILS-541" dev="ggregory" type="fix" due-to="Sergey Chernov">FluentPropertyBeanIntrospector caches corrupted writeMethod (1.x backport) #69.</action>
       <!-- UPDATE -->
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump commons-parent from 47 to 69.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 71.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java requirement from Java 6 to 7.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump junit:junit from 4.12 to 4.13.2.</action>
     </release>

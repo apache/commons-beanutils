@@ -19,7 +19,7 @@
   <parent>
     <groupId>org.apache.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>69</version>
+    <version>71</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>commons-beanutils</groupId>
@@ -39,14 +39,14 @@
       <commons.release.version>1.9.5</commons.release.version>
       <commons.jira.id>BEANUTILS</commons.jira.id>
       <commons.jira.pid>12310460</commons.jira.pid>
-      <!-- limit memory size see BEANUTILS-291; allow command-line override -->
+      <!-- Limit memory size see BEANUTILS-291; allow command-line override -->
       <!-- Originally 25M, increased to 50M to get round Continuum CI build failures -->
       <surefire.argLine>-Xmx50M</surefire.argLine>
       <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
       <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-beanutils</commons.scmPubUrl>
       <commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
       <project.build.outputTimestamp>2024-01-01T00:00:00Z</project.build.outputTimestamp>
-      <!-- generate report even if there are binary incompatible changes -->
+      <!-- Generate report even if there are binary incompatible changes -->
       <commons.japicmp.breakBuildOnBinaryIncompatibleModifications>false</commons.japicmp.breakBuildOnBinaryIncompatibleModifications>
       <japicmp.skip>false</japicmp.skip>
       <!-- Commons Release Plugin -->
