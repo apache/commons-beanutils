@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.beanutils2.converters;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.Duration;
+import java.time.Instant;
+import java.time.Period;
 
 import org.apache.commons.beanutils2.ConversionException;
 import org.apache.commons.beanutils2.Converter;
@@ -28,19 +28,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * Test Case for the DurationConverter class.
- */
-public class DurationConverterTestCase {
+public class InstantConverterTestCase {
 
-    private Converter<Duration> converter;
+    private Converter<Instant> converter;
 
     protected Class<?> getExpectedType() {
-        return Duration.class;
+        return Period.class;
     }
 
-    protected Converter<Duration> makeConverter() {
-        return new DurationConverter();
+    protected Converter<Instant> makeConverter() {
+        return new InstantConverter();
     }
 
     @BeforeEach
@@ -54,28 +51,26 @@ public class DurationConverterTestCase {
     }
 
     @Test
-    public void testSimpleConversion() throws Exception {
-        final String[] message = { "from String", "from String", "from String", "from String", "from String", "from String", "from String", "from String", };
-
-        final Object[] input = { "PT20.345S", "PT15M", "PT51H4M" };
-
-        final Duration[] expected = { Duration.parse("PT20.345S"), Duration.parse("PT15M"), Duration.parse("P2DT3H4M") };
-
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], converter.convert(Duration.class, input[i]), message[i] + " to URI");
-            assertEquals(expected[i], converter.convert(null, input[i]), message[i] + " to null type");
-        }
-
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(input[i], converter.convert(String.class, expected[i]), input[i] + " to String");
-        }
+    public void testConvertingMilliseconds() {
+        final Instant expected = Instant.ofEpochMilli(1596500083605L);
+        final Instant actual = converter.convert(Instant.class, 1596500083605L);
+        assertEquals(expected, actual);
     }
 
-    /**
-     * Tests a conversion to an unsupported type.
-     */
     @Test
-    public void testUnsupportedType() {
-        assertThrows(ConversionException.class, () -> converter.convert(Integer.class, "http://www.apache.org"));
+    public void testConvertingInstantString() {
+        final Instant expected = Instant.ofEpochMilli(1196676930000L);
+        final Instant actual = converter.convert(Instant.class, "2007-12-03T10:15:30.00Z");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testText() {
+        assertThrows(ConversionException.class, () -> converter.convert(Instant.class, "Hello, world!"));
+    }
+
+    @Test
+    public void testLocalizedNumber() {
+        assertThrows(ConversionException.class, () -> converter.convert(Instant.class, "200,000,000,000"));
     }
 }
