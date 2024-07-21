@@ -32,7 +32,7 @@ public class PointConverter extends AbstractConverter<Point> {
     private static final Pattern POINT_SPLIT = Pattern.compile("\\s*,\\s*");
 
     /**
-     * Construct a <b>{@link Point}</b> <i>Converter</i> that throws a {@code ConversionException} if an error occurs.
+     * Construct a <b>{@link Point}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public PointConverter() {
         super();

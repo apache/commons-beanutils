@@ -44,7 +44,7 @@ public class ColorConverter extends AbstractConverter<Color> {
         Pattern.compile("^(?:[A-Za-z\\d._]+)??\\[?(?:r=)?(\\d{1,3}),(?:g=)?(\\d{1,3}),(?:b=)?(\\d{1,3})\\]?$");
 
     /**
-     * Construct a <b>{@link Color}</b> <i>Converter</i> that throws a {@code ConversionException} if an error occurs.
+     * Construct a <b>{@link Color}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public ColorConverter() {
         super();

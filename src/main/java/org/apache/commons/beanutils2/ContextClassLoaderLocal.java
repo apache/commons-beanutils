@@ -69,7 +69,7 @@ import java.util.WeakHashMap;
  * a component which uses this class is "undeployed" by a container the
  * component-specific classloader and all its associated classes (and their
  * static variables) are garbage-collected. Unfortunately there is one
- * scenario in which this does <i>not</i> work correctly and there
+ * scenario in which this does <em>not</em> work correctly and there
  * is unfortunately no known workaround other than ensuring that the
  * component (or its container) calls the "unset" method on this class for
  * each instance of this class when the component is undeployed. The problem
@@ -207,7 +207,7 @@ public class ContextClassLoaderLocal<T> {
 
     /**
      * Unsets the value associated with the given classloader
-     * @param classLoader The classloader to <i>unset</i> for
+     * @param classLoader The classloader to <em>unset</em> for
      */
     public synchronized void unset(final ClassLoader classLoader) {
         valueByClassLoader.remove(classLoader);

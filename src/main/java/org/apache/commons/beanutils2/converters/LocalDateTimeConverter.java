@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
  * See the {@link DateTimeConverter} documentation for further details.
  * </p>
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  * </p>
  *
@@ -38,14 +38,14 @@ import java.time.LocalDateTime;
 public final class LocalDateTimeConverter extends DateTimeConverter<LocalDateTime> {
 
     /**
-     * Constructs a <b>java.time.LocalDateTime</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.LocalDateTime</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public LocalDateTimeConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.LocalDateTime</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.LocalDateTime</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

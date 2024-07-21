@@ -132,7 +132,7 @@ abstract class AbstractJdbcDynaClass implements DynaClass, Serializable {
      * Gets the table column name for the specified property name.
      *
      * @param name The property name
-     * @return The column name (which can be different if the <i>lowerCase</i> option is used).
+     * @return The column name (which can be different if the <em>lowerCase</em> option is used).
      */
     protected String getColumnName(final String name) {
         if (columnNameXref != null && columnNameXref.containsKey(name)) {

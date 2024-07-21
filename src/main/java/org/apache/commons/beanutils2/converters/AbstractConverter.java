@@ -117,14 +117,14 @@ public abstract class AbstractConverter<D> implements Converter<D> {
     private D defaultValue;
 
     /**
-     * Constructs a <i>Converter</i> that throws a
+     * Constructs a <em>Converter</em> that throws a
      * {@code ConversionException} if an error occurs.
      */
     public AbstractConverter() {
     }
 
     /**
-     * Constructs a <i>Converter</i> that returns a default
+     * Constructs a <em>Converter</em> that returns a default
      * value if an error occurs.
      *
      * @param defaultValue The default value to be returned
@@ -259,7 +259,7 @@ public abstract class AbstractConverter<D> implements Converter<D> {
      * <p>
      * <b>N.B.</b>This implementation simply uses the value's
      * {@code toString()} method and should be overridden if a
-     * more sophisticated mechanism for <i>conversion to a String</i>
+     * more sophisticated mechanism for <em>conversion to a String</em>
      * is required.
      * </p>
      *

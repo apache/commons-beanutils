@@ -20,26 +20,26 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * <p>Provides a <i>light weight</i> {@code DynaBean</code> facade to a <code>Map}
- *  with <i>lazy</i> map/list processing.</p>
+ * <p>Provides a <em>light weight</em> {@code DynaBean</code> facade to a <code>Map}
+ *  with <em>lazy</em> map/list processing.</p>
  *
- * <p>Its a <i>light weight</i> {@code DynaBean} implementation because there is no
+ * <p>Its a <em>light weight</em> {@code DynaBean} implementation because there is no
  *    actual {@code DynaClass</code> associated with this <code>DynaBean} - in fact
- *    it implements the {@code DynaClass} interface itself providing <i>pseudo</i> DynaClass
+ *    it implements the {@code DynaClass} interface itself providing <em>pseudo</em> DynaClass
  *    behavior from the actual values stored in the {@code Map}.</p>
  *
  * <p>As well providing rhe standard {@code DynaBean</code> access to the <code>Map}'s properties
- *    this class also provides the usual <i>Lazy</i> behavior:</p>
+ *    this class also provides the usual <em>Lazy</em> behavior:</p>
  *    <ul>
  *       <li>Properties don't need to be pre-defined in a {@code DynaClass}</li>
  *       <li>Indexed properties ({@code Lists</code> or <code>Arrays}) are automatically instantiated
- *           and <i>grown</i> so that they are large enough to cater for the index being set.</li>
+ *           and <em>grown</em> so that they are large enough to cater for the index being set.</li>
  *       <li>Mapped properties are automatically instantiated.</li>
  *    </ul>
  *
- * <p><b><u><i>Restricted</i> DynaClass</u></b></p>
+ * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
  *    <p>This class implements the {@code MutableDynaClass} interface.
- *       {@code MutableDynaClass</code> have a facility to <i>restrict</i> the <code>DynaClass}
+ *       {@code MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass}
  *       so that its properties cannot be modified. If the {@code MutableDynaClass} is
  *       restricted then calling any of the {@code set()} methods for a property which
  *       doesn't exist will result in a {@code IllegalArgumentException} being thrown.</p>
@@ -249,7 +249,7 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
      *
      * <p>The reason for not returning a {@code null} property descriptor is that
      *    {@code BeanUtils} uses this method to check if a property exists
-     *    before trying to set it - since these <i>Map</i> implementations automatically
+     *    before trying to set it - since these <em>Map</em> implementations automatically
      *    add any new properties when they are set, returning {@code null} from
      *    this method would defeat their purpose.</p>
      *

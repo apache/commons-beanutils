@@ -34,7 +34,7 @@ import org.apache.commons.beanutils2.Converter;
  * Generic {@link Converter} implementation that handles conversion
  * to and from <b>array</b> objects.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  * <p>
  * The main features of this implementation are:
@@ -51,7 +51,7 @@ import org.apache.commons.beanutils2.Converter;
  *     <li><b>Delimited Lists</b> - can Convert <b>to</b> and <b>from</b> a
  *         delimited list in String format.</li>
  *     <li><b>Conversion to String</b> - converts an array to a
- *         {@code String} in one of two ways: as a <i>delimited list</i>
+ *         {@code String} in one of two ways: as a <em>delimited list</em>
  *         or by converting the first element in the array to a String - this
  *         is controlled by the {@link ArrayConverter#setOnlyFirstToString(boolean)}
  *         parameter.</li>
@@ -60,20 +60,20 @@ import org.apache.commons.beanutils2.Converter;
  *         within each other - see example below.</li>
  *     <li><b>Default Value</b>
  *         <ul>
- *             <li><b><i>No Default</i></b> - use the
+ *             <li><b><em>No Default</em></b> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter)}
  *                 constructor to create a converter which throws a
  *                 {@link ConversionException} if the value is missing or
  *                 invalid.</li>
- *             <li><b><i>Default values</i></b> - use the
+ *             <li><b><em>Default values</em></b> - use the
  *                 {@link ArrayConverter#ArrayConverter(Class, Converter, int)}
  *                 constructor to create a converter which returns a <i>default
- *                 value</i>. The <i>defaultSize</i> parameter controls the
- *                 <i>default value</i> in the following way:
+ *                 value</i>. The <em>defaultSize</em> parameter controls the
+ *                 <em>default value</em> in the following way:
  *                 <ul>
- *                    <li><i>defaultSize &lt; 0</i> - default is {@code null}</li>
- *                    <li><i>defaultSize = 0</i> - default is an array of length zero</li>
- *                    <li><i>defaultSize &gt; 0</i> - default is an array with a
+ *                    <li><em>defaultSize &lt; 0</em> - default is {@code null}</li>
+ *                    <li><em>defaultSize = 0</em> - default is an array of length zero</li>
+ *                    <li><em>defaultSize &gt; 0</em> - default is an array with a
  *                           length specified by {@code defaultSize} (N.B. elements
  *                           in the array will be {@code null})</li>
  *                 </ul>
@@ -205,7 +205,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
      * <strong>N.B.</strong> The method is called by both the
      * {@link ArrayConverter#convertToType(Class, Object)} and
      * {@link ArrayConverter#convertToString(Object)} methods for
-     * <i>non-array</i> types.
+     * <em>non-array</em> types.
      * @param value value to be converted
      *
      * @return Collection elements.

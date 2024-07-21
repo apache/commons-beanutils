@@ -39,7 +39,7 @@ public class DimensionConverter extends AbstractConverter<Dimension> {
     private static final Pattern DIMENSION_PATTERN = Pattern.compile("(\\d+)(?:x(\\d+))?");
 
     /**
-     * Construct a <b>{@link Dimension}</b> <i>Converter</i> that throws a {@code ConversionException} if an error
+     * Construct a <b>{@link Dimension}</b> <em>Converter</em> that throws a {@code ConversionException} if an error
      * occurs.
      */
     public DimensionConverter() {

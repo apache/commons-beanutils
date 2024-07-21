@@ -25,7 +25,7 @@ package org.apache.commons.beanutils2.converters;
  * or by specifying a format pattern. See the {@link NumberConverter}
  * documentation for further details.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
@@ -33,7 +33,7 @@ package org.apache.commons.beanutils2.converters;
 public final class FloatConverter extends NumberConverter<Float> {
 
     /**
-     * Constructs a <b>java.lang.Float</b> <i>Converter</i> that throws
+     * Constructs a <b>java.lang.Float</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public FloatConverter() {
@@ -41,7 +41,7 @@ public final class FloatConverter extends NumberConverter<Float> {
     }
 
     /**
-     * Constructs a <b>java.lang.Float</b> <i>Converter</i> that returns
+     * Constructs a <b>java.lang.Float</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
@@ -53,7 +53,7 @@ public final class FloatConverter extends NumberConverter<Float> {
     }
 
     /**
-     * Constructs a <b>java.lang.Float</b> <i>Converter</i> that returns
+     * Constructs a <b>java.lang.Float</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

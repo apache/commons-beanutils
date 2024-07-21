@@ -24,16 +24,16 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * <h2><i>Lazy</i> DynaBean List.</h2>
+ * <h2><em>Lazy</em> DynaBean List.</h2>
  *
  * <p>There are two main purposes for this class:</p>
  *    <ul>
- *        <li>To provide <i>Lazy List</i> behavior - automatically
- *            <i>growing</i> and <i>populating</i> the {@code List}
+ *        <li>To provide <em>Lazy List</em> behavior - automatically
+ *            <em>growing</em> and <em>populating</em> the {@code List}
  *            with either {@code DynaBean</code>, <code>java.util.Map}
  *            or POJO Beans.</li>
  *        <li>To provide a straight forward way of putting a Collection
- *            or Array into the lazy list <i>and</i> a straight forward
+ *            or Array into the lazy list <em>and</em> a straight forward
  *            way to get it out again at the end.</li>
  *    </ul>
  *
@@ -94,7 +94,7 @@ import java.util.Objects;
  *
  *
  * <h2>Example 2</h2>
- * <p>Alternatively you can create an <i>empty</i> List and
+ * <p>Alternatively you can create an <em>empty</em> List and
  *    specify the Class for List's elements. The LazyDynaList
  *    uses the Class to automatically populate elements:</p>
  *
@@ -110,7 +110,7 @@ import java.util.Objects;
  * </code></pre>
  *
  * <h2>Example 3</h2>
- * <p>Alternatively you can create an <i>empty</i> List and specify the
+ * <p>Alternatively you can create an <em>empty</em> List and specify the
  *    DynaClass for List's elements. The LazyDynaList uses
  *    the DynaClass to automatically populate elements:</p>
  *
@@ -131,7 +131,7 @@ import java.util.Objects;
  * <p><strong>N.B.</strong> You may wonder why control the type
  *    using a {@code DynaClass</code> rather than the <code>Class}
  *    as in the previous example - the reason is that some {@code DynaBean}
- *    implementations don't have a <i>default</i> empty constructor and
+ *    implementations don't have a <em>default</em> empty constructor and
  *    therefore need to be instantiated using the {@code DynaClass.newInstance()}
  *    method.</p>
  *
@@ -252,7 +252,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * <p>If the index position is greater than the current
      *    size of the List, then the List is automatically
-     *    <i>grown</i> to the appropriate size.</p>
+     *    <em>grown</em> to the appropriate size.</p>
      *
      * @param index The index position to insert the new element.
      * @param element The new element to add.
@@ -304,7 +304,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * <p>If the index position is greater than the current
      *    size of the List, then the List is automatically
-     *    <i>grown</i> to the appropriate size.</p>
+     *    <em>grown</em> to the appropriate size.</p>
      *
      * @param collection The Collection of new elements.
      * @param index The index position to insert the new elements at.
@@ -354,7 +354,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * <p>If the position requested is greater than the current
      *    size of the List, then the List is automatically
-     *    <i>grown</i> (and populated) to the appropriate size.</p>
+     *    <em>grown</em> (and populated) to the appropriate size.</p>
      *
      * @param index The index position to insert the new elements at.
      * @return The element at the specified position.
@@ -374,7 +374,7 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
     /**
-     * <p>Automatically <i>grown</i> the List
+     * <p>Automatically <em>grown</em> the List
      *    to the appropriate size, populating with
      *    DynaBeans.</p>
      *
@@ -398,7 +398,7 @@ public class LazyDynaList extends ArrayList<Object> {
      *
      * <p>If the position requested is greater than the current
      *    size of the List, then the List is automatically
-     *    <i>grown</i> (and populated) to the appropriate size.</p>
+     *    <em>grown</em> (and populated) to the appropriate size.</p>
      *
      * @param index The index position to insert the new element at.
      * @param element The new element.

@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
  * a convenient way to access the registered classes themselves is included.
  * <p>
  * For the purposes of this class, five formats for referencing a particular
- * property value of a bean are defined, with the <i>default</i> layout of an
+ * property value of a bean are defined, with the <em>default</em> layout of an
  * identifying String in parentheses. However the notation for these formats
  * and how they are resolved is now (since BeanUtils 1.8.0) controlled by
  * the configured {@link Resolver} implementation:
@@ -1078,9 +1078,9 @@ public class PropertyUtilsBean {
     /**
      * Gets the configured {@link Resolver} implementation used by BeanUtils.
      * <p>
-     * The {@link Resolver} handles the <i>property name</i>
+     * The {@link Resolver} handles the <em>property name</em>
      * expressions and the implementation in use effectively
-     * controls the dialect of the <i>expression language</i>
+     * controls the dialect of the <em>expression language</em>
      * that BeanUtils recognizes.
      * <p>
      * {@link DefaultResolver} is the default implementation used.
@@ -1834,7 +1834,7 @@ public class PropertyUtilsBean {
      * a method existed, and a.put(b, obj) otherwise. In version 1.5 it meant
      * a.put(b, obj) always (ie the same as the behavior in the current version).
      * In versions prior to 1.5 it meant a.setB(obj) always. [yes, this is
-     * all <i>very</i> unfortunate]
+     * all <em>very</em> unfortunate]
      * <p>
      * Users who would like to customize the meaning of "a.b" in method
      * setNestedProperty when a is a Map can create a custom subclass of
@@ -1845,8 +1845,8 @@ public class PropertyUtilsBean {
      * <p>
      * Note, however, that the recommended solution for objects that
      * implement Map but want their simple properties to come first is
-     * for <i>those</i> objects to override their get/put methods to implement
-     * that behavior, and <i>not</i> to solve the problem by modifying the
+     * for <em>those</em> objects to override their get/put methods to implement
+     * that behavior, and <em>not</em> to solve the problem by modifying the
      * default behavior of the PropertyUtilsBean class by overriding this
      * method.
      *
@@ -1892,9 +1892,9 @@ public class PropertyUtilsBean {
     /**
      * Configure the {@link Resolver} implementation used by BeanUtils.
      * <p>
-     * The {@link Resolver} handles the <i>property name</i>
+     * The {@link Resolver} handles the <em>property name</em>
      * expressions and the implementation in use effectively
-     * controls the dialect of the <i>expression language</i>
+     * controls the dialect of the <em>expression language</em>
      * that BeanUtils recognizes.
      * <p>
      * {@link DefaultResolver} is the default implementation used.

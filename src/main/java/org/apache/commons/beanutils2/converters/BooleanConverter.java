@@ -22,7 +22,7 @@ package org.apache.commons.beanutils2.converters;
  * {@link org.apache.commons.beanutils2.Converter} implementation that
  * handles conversion to and from {@link Boolean} objects.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  * </p>
  * <p>

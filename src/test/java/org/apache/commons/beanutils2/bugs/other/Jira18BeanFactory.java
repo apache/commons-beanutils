@@ -22,7 +22,7 @@ import java.util.Map;
 import org.apache.commons.beanutils2.bugs.Jira18TestCase;
 
 /**
- * Factory which creates <i>package</i> scope beans with public methods for {@link Jira18TestCase}.
+ * Factory which creates <em>package</em> scope beans with public methods for {@link Jira18TestCase}.
  */
 public class Jira18BeanFactory {
 

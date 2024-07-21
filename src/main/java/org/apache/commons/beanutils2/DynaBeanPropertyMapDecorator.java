@@ -42,9 +42,9 @@ package org.apache.commons.beanutils2;
  *
  * <ul><li>{@code Map&lt;String, Object&gt; fooMap = new DynaBeanPropertyMapDecorator(fooDynaBean);}</li></ul>
  *
- * <p>The above example creates a <b><i>read only</i></b> {@code Map}.
+ * <p>The above example creates a <b><em>read only</em></b> {@code Map}.
  *    To create  a {@code Map} which can be modified, construct a
- *    {@code DynaBeanPropertyMapDecorator} with the <b><i>read only</i></b>
+ *    {@code DynaBeanPropertyMapDecorator} with the <b><em>read only</em></b>
  *    attribute set to {@code false}:</p>
  *
  * <ul><li><code>Map&lt;String, Object&gt; fooMap =
@@ -52,7 +52,7 @@ package org.apache.commons.beanutils2;
  *
  * <h2>Limitations</h2>
  * <p>In this implementation the {@code entrySet()</code>, <code>keySet()}
- *    and {@code values()} methods create an <b><i>unmodifiable</i></b>
+ *    and {@code values()} methods create an <b><em>unmodifiable</em></b>
  *    {@code Set</code> and it does not support the Map's <code>clear()}
  *    and {@code remove()} operations.</p>
  *

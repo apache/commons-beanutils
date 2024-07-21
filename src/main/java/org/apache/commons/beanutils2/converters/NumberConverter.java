@@ -78,8 +78,8 @@ import org.apache.commons.beanutils2.ConversionException;
  * </ul>
  *
  * <p>
- * <strong>N.B.</strong>Patterns can only be specified using the <i>standard</i>
- * pattern characters and NOT in <i>localized</i> form (see {@link java.text.DecimalFormat}).
+ * <strong>N.B.</strong>Patterns can only be specified using the <em>standard</em>
+ * pattern characters and NOT in <em>localized</em> form (see {@link java.text.DecimalFormat}).
  * For example to cater for number styles used in Germany such as {@code 0.000,00} the pattern
  * is specified in the normal form {@code 0,000.00</code> and the locale set to <code>Locale.GERMANY}
  *
@@ -97,7 +97,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     private Locale locale;
 
     /**
-     * Constructs a <b>java.lang.Number</b> <i>Converter</i>
+     * Constructs a <b>java.lang.Number</b> <em>Converter</em>
      * that throws a {@code ConversionException} if a error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
@@ -107,7 +107,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     }
 
     /**
-     * Constructs a {@link Number} <i>Converter</i> that returns
+     * Constructs a {@link Number} <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param allowDecimals Indicates whether decimals are allowed
@@ -241,7 +241,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     }
 
     /**
-     * Gets the Locale for the <i>Converter</i>
+     * Gets the Locale for the <em>Converter</em>
      * (or {@code null} if none specified).
      *
      * @return The locale to use for conversion
@@ -304,7 +304,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
     }
 
     /**
-     * Sets the Locale for the <i>Converter</i>.
+     * Sets the Locale for the <em>Converter</em>.
      *
      * @param locale The locale to use for conversion
      */
@@ -409,7 +409,7 @@ public abstract class NumberConverter<N extends Number> extends AbstractConverte
 
     /**
      * Convert any Number object to the specified type for this
-     * <i>Converter</i>.
+     * <em>Converter</em>.
      * <p>
      * This method handles conversion to the following types:
      * <ul>

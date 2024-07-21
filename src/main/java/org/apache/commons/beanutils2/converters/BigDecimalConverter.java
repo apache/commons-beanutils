@@ -27,7 +27,7 @@ import java.math.BigDecimal;
  * or by specifying a format pattern. See the {@link NumberConverter}
  * documentation for further details.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.3
@@ -35,7 +35,7 @@ import java.math.BigDecimal;
 public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <i>Converter</i> that throws
+     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public BigDecimalConverter() {
@@ -43,7 +43,7 @@ public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
     }
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <i>Converter</i> that returns
+     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
@@ -55,7 +55,7 @@ public final class BigDecimalConverter extends NumberConverter<BigDecimal> {
     }
 
     /**
-     * Constructs a <b>java.math.BigDecimal</b> <i>Converter</i> that returns
+     * Constructs a <b>java.math.BigDecimal</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

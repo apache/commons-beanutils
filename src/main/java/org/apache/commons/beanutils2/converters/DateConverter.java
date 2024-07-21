@@ -27,7 +27,7 @@ import java.util.Date;
  * patterns (note, there is no default String conversion for Date).
  * See the {@link DateTimeConverter} documentation for further details.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  *
  * @since 1.8.0
@@ -35,14 +35,14 @@ import java.util.Date;
 public final class DateConverter extends DateTimeConverter<Date> {
 
     /**
-     * Constructs a <b>java.util.Date</b> <i>Converter</i> that throws
+     * Constructs a <b>java.util.Date</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public DateConverter() {
     }
 
     /**
-     * Constructs a <b>java.util.Date</b> <i>Converter</i> that returns
+     * Constructs a <b>java.util.Date</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

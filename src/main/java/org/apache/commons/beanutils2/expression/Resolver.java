@@ -20,8 +20,8 @@ package org.apache.commons.beanutils2.expression;
  * Property Name Expression Resolver.
  * <p>
  * Methods such as PropertyUtilsBean's {@code setNestedProperty()} method
- * use a {@code Resolver} to process a <i>property name</i>
- * expression and resolve <i>nested</i>, <i>indexed</i> and <i>mapped</i>
+ * use a {@code Resolver} to process a <em>property name</em>
+ * expression and resolve <em>nested</em>, <em>indexed</em> and <em>mapped</em>
  * property names. The following code provides an example usage
  * demonstrating all the methods:
  *

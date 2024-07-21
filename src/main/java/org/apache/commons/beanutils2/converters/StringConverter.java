@@ -43,14 +43,14 @@ package org.apache.commons.beanutils2.converters;
 public final class StringConverter extends AbstractConverter<String> {
 
     /**
-     * Constructs a <b>java.lang.String</b> <i>Converter</i> that throws
+     * Constructs a <b>java.lang.String</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public StringConverter() {
     }
 
     /**
-     * Constructs a <b>java.lang.String</b> <i>Converter</i> that returns
+     * Constructs a <b>java.lang.String</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

@@ -38,7 +38,7 @@ public class MemoryTestCase {
      * Attempt to force garbage collection of the specified target.
      *
      * <p>
-     * Unfortunately there is no way to force a JVM to perform garbage collection; all we can do is <i>hint</i> to it that garbage-collection would be a good
+     * Unfortunately there is no way to force a JVM to perform garbage collection; all we can do is <em>hint</em> to it that garbage-collection would be a good
      * idea, and to consume memory in order to trigger it.
      * </p>
      *

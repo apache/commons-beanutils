@@ -28,7 +28,7 @@ import java.util.Locale;
 public class LocaleConverter extends AbstractConverter<Locale> {
 
     /**
-     * Construct a <b>{@link Locale}</b> <i>Converter</i> that throws a {@code ConversionException} if an error occurs.
+     * Construct a <b>{@link Locale}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public LocaleConverter() {
         super();

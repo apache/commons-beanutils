@@ -33,7 +33,7 @@ import java.util.Objects;
  *    of the {@code LazyDynaBean} which automatically adds missing properties
  *    when any of its {@code set()} methods are called. For this reason the
  *    {@code isDynaProperty(name)} method has been added to this implementation
- *    in order to determine if a property actually exists. If the more <i>normal</i>
+ *    in order to determine if a property actually exists. If the more <em>normal</em>
  *    behavior of returning {@code null} is required, then this can be achieved
  *    by calling the {@code setReturnNull(true)}.</p>
  *
@@ -210,7 +210,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * <p>The reason for not returning a {@code null} property descriptor is that
      *    {@code BeanUtils} uses this method to check if a property exists
-     *    before trying to set it - since these <i>Lazy</i> implementations automatically
+     *    before trying to set it - since these <em>Lazy</em> implementations automatically
      *    add any new properties when they are set, returning {@code null} from
      *    this method would defeat their purpose.</p>
      *

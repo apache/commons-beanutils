@@ -108,7 +108,7 @@ public class WrapDynaClass implements DynaClass {
      * instance for the specified bean class.
      *
      * @param beanClass Bean class for which a WrapDynaClass is requested
-     * @return A new <i>Wrap</i> {@link DynaClass}
+     * @return A new <em>Wrap</em> {@link DynaClass}
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass) {
         return createDynaClass(beanClass, null);
@@ -123,7 +123,7 @@ public class WrapDynaClass implements DynaClass {
      * {@code PropertyUtilsBean} object is provided, the default instance is used.
      * @param beanClass Bean class for which a WrapDynaClass is requested
      * @param pu the optional {@code PropertyUtilsBean} to be used for introspection
-     * @return A new <i>Wrap</i> {@link DynaClass}
+     * @return A new <em>Wrap</em> {@link DynaClass}
      * @since 1.9
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {

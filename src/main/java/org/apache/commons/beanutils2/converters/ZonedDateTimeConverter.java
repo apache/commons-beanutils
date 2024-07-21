@@ -28,7 +28,7 @@ import java.time.ZonedDateTime;
  * See the {@link DateTimeConverter} documentation for further details.
  * </p>
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * {@code ConversionException} if a conversion error occurs.
  * </p>
  *
@@ -38,14 +38,14 @@ import java.time.ZonedDateTime;
 public final class ZonedDateTimeConverter extends DateTimeConverter<ZonedDateTime> {
 
     /**
-     * Constructs a <b>java.time.ZonedDateTime</b> <i>Converter</i> that throws
+     * Constructs a <b>java.time.ZonedDateTime</b> <em>Converter</em> that throws
      * a {@code ConversionException} if an error occurs.
      */
     public ZonedDateTimeConverter() {
     }
 
     /**
-     * Constructs a <b>java.time.ZonedDateTime</b> <i>Converter</i> that returns
+     * Constructs a <b>java.time.ZonedDateTime</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned
