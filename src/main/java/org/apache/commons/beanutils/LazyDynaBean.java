@@ -31,17 +31,17 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <p>DynaBean which automatically adds properties to the <code>DynaClass</code>
- *   and provides <i>Lazy List</i> and <i>Lazy Map</i> features.</p>
+ *   and provides <em>Lazy List</em> and <em>Lazy Map</em> features.</p>
  *
- * <p>DynaBeans deal with three types of properties - <i>simple</i>, <i>indexed</i> and <i>mapped</i> and
+ * <p>DynaBeans deal with three types of properties - <em>simple</em>, <em>indexed</em> and <em>mapped</em> and
  *    have the following <code>get()</code> and <code>set()</code> methods for
  *    each of these types:</p>
  *    <ul>
- *        <li><i>Simple</i> property methods - <code>get(name)</code> and
+ *        <li><em>Simple</em> property methods - <code>get(name)</code> and
  *                          <code>set(name, value)</code></li>
- *        <li><i>Indexed</i> property methods - <code>get(name, index)</code> and
+ *        <li><em>Indexed</em> property methods - <code>get(name, index)</code> and
  *                          <code>set(name, index, value)</code></li>
- *        <li><i>Mapped</i> property methods - <code>get(name, key)</code> and
+ *        <li><em>Mapped</em> property methods - <code>get(name, key)</code> and
  *                          <code>set(name, key, value)</code></li>
  *    </ul>
  *
@@ -60,7 +60,7 @@ import org.apache.commons.logging.LogFactory;
  *    <p>If the property <b>doesn't</b> exist, the <code>LazyDynaBean</code> will automatically add
  *       a property with an <code>ArrayList</code> type to the <code>DynaClass</code> when
  *       the <code>set(name, index, value)</code> method is called.
- *       It will also instantiate a new <code>ArrayList</code> and automatically <i>grow</i>
+ *       It will also instantiate a new <code>ArrayList</code> and automatically <em>grow</em>
  *       the <code>List</code> so that it is big enough to accomodate the index being set.
  *       <code>ArrayList</code> is the default indexed property that LazyDynaBean uses but
  *       this can be easily changed by overriding the <code>defaultIndexedProperty(name)</code>
@@ -73,7 +73,7 @@ import org.apache.commons.logging.LogFactory;
  *    <p>If the indexed property <b>does</b> exist in the <code>DynaClass</code> but is set to
  *      <code>null</code> in the <code>LazyDynaBean</code>, then it will instantiate a
  *      new <code>List</code> or <code>Array</code> as specified by the property's type
- *      in the <code>DynaClass</code> and automatically <i>grow</i> the <code>List</code>
+ *      in the <code>DynaClass</code> and automatically <em>grow</em> the <code>List</code>
  *      or <code>Array</code> so that it is big enough to accomodate the index being set.</p>
  *
  *     <code>DynaBean myBean = new LazyDynaBean();</code></br>
@@ -102,8 +102,8 @@ import org.apache.commons.logging.LogFactory;
  *     <code>myClass.add("myMappedProperty", TreeMap.class);</code></br>
  *     <code>myBean.set("myMappedProperty", "myKey", "myValue");</code></br>
  *
- * <p><b><u><i>Restricted</i> DynaClass</u></b></p>
- *    <p><code>MutableDynaClass</code> have a facility to <i>restrict</i> the <code>DynaClass</code>
+ * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
+ *    <p><code>MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass</code>
  *       so that its properties cannot be modified. If the <code>MutableDynaClass</code> is
  *       restricted then calling any of the <code>set()</code> methods for a property which
  *       doesn't exist will result in a <code>IllegalArgumentException</code> being thrown.</p>

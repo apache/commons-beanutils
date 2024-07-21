@@ -27,7 +27,7 @@ import java.math.BigInteger;
  * or by specifying a format pattern. See the {@link NumberConverter}
  * documentation for further details.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  *
  * @since 1.3
@@ -35,7 +35,7 @@ import java.math.BigInteger;
 public final class BigIntegerConverter extends NumberConverter {
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that throws
+     * Construct a <b>java.math.BigInteger</b> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public BigIntegerConverter() {
@@ -43,7 +43,7 @@ public final class BigIntegerConverter extends NumberConverter {
     }
 
     /**
-     * Construct a <b>java.math.BigInteger</b> <i>Converter</i> that returns
+     * Construct a <b>java.math.BigInteger</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

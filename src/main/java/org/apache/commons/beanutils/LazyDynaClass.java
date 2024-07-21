@@ -30,7 +30,7 @@ package org.apache.commons.beanutils;
  *    of the <code>LazyDynaBean</code> which automatically adds missing properties
  *    when any of its <code>set()</code> methods are called. For this reason the
  *    <code>isDynaProperty(name)</code> method has been added to this implementation
- *    in order to determine if a property actually exists. If the more <i>normal</i>
+ *    in order to determine if a property actually exists. If the more <em>normal</em>
  *    behaviour of returning <code>null</code> is required, then this can be achieved
  *    by calling the <code>setReturnNull(true)</code>.</p>
  *
@@ -302,7 +302,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * <p>The reason for not returning a <code>null</code> property descriptor is that
      *    <code>BeanUtils</code> uses this method to check if a property exists
-     *    before trying to set it - since these <i>Lazy</i> implementations automatically
+     *    before trying to set it - since these <em>Lazy</em> implementations automatically
      *    add any new properties when they are set, returning <code>null</code> from
      *    this method would defeat their purpose.</p>
      *

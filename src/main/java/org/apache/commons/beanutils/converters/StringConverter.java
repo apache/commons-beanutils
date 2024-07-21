@@ -44,7 +44,7 @@ public final class StringConverter extends AbstractConverter {
 
 
     /**
-     * Construct a <b>java.lang.String</b> <i>Converter</i> that throws
+     * Construct a <b>java.lang.String</b> <em>Converter</em> that throws
      * a <code>ConversionException</code> if an error occurs.
      */
     public StringConverter() {
@@ -52,7 +52,7 @@ public final class StringConverter extends AbstractConverter {
     }
 
     /**
-     * Construct a <b>java.lang.String</b> <i>Converter</i> that returns
+     * Construct a <b>java.lang.String</b> <em>Converter</em> that returns
      * a default value if an error occurs.
      *
      * @param defaultValue The default value to be returned

@@ -233,7 +233,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
      * has a (per-element) default, then that element (and just that element)
      * is assigned the default value.
      * <p>
-     * With the standard BooleanArrayConverter, if <i>any</i> of the elements
+     * With the standard BooleanArrayConverter, if <em>any</em> of the elements
      * in the array are bad, then the array-wide default value is returned.
      * However by specifying a custom BooleanConverter which has a per-element
      * default, the unrecognized elements get that per-element default but the

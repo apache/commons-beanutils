@@ -293,7 +293,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * Get the table column name for the specified property name.
      *
      * @param name The property name
-     * @return The column name (which can be different if the <i>lowerCase</i>
+     * @return The column name (which can be different if the <em>lowerCase</em>
      * option is used).
      */
     protected String getColumnName(final String name) {

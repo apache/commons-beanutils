@@ -31,7 +31,7 @@ import org.apache.commons.beanutils.ConversionException;
  * that handles conversion to and from <b>date/time</b> objects.
  * <p>
  * This implementation handles conversion for the following
- * <i>date/time</i> types.
+ * <em>date/time</em> types.
  * <ul>
  *     <li><code>java.util.Date</code></li>
  *     <li><code>java.util.Calendar</code></li>
@@ -88,7 +88,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     // ----------------------------------------------------------- Constructors
 
     /**
-     * Construct a Date/Time <i>Converter</i> that throws a
+     * Construct a Date/Time <em>Converter</em> that throws a
      * <code>ConversionException</code> if an error occurs.
      */
     public DateTimeConverter() {
@@ -96,7 +96,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Construct a Date/Time <i>Converter</i> that returns a default
+     * Construct a Date/Time <em>Converter</em> that returns a default
      * value if an error occurs.
      *
      * @param defaultValue The default value to be returned
@@ -140,7 +140,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Return the Locale for the <i>Converter</i>
+     * Return the Locale for the <em>Converter</em>
      * (or <code>null</code> if none specified).
      *
      * @return The locale to use for conversion
@@ -150,7 +150,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
     /**
-     * Set the Locale for the <i>Converter</i>.
+     * Set the Locale for the <em>Converter</em>.
      *
      * @param locale The Locale.
      */
@@ -213,7 +213,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * one or more patterns (using <code>setPatterns()</code>), then
      * the first pattern will be used to format the date into a String.
      * Otherwise the default <code>DateFormat</code> for the default locale
-     * (and <i>style</i> if configured) will be used.
+     * (and <em>style</em> if configured) will be used.
      *
      * @param value The input value to be converted
      * @return the converted String value.
@@ -275,7 +275,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * with one or more patterns (using <code>setPatterns()</code>), then
      * the conversion is attempted with each of the specified patterns.
      * Otherwise the default <code>DateFormat</code> for the default locale
-     * (and <i>style</i> if configured) will be used.
+     * (and <em>style</em> if configured) will be used.
      *
      * @param <T> The desired target type of the conversion.
      * @param targetType Data type to which this value should be converted.
@@ -349,7 +349,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
 
     /**
      * Convert a long value to the specified Date type for this
-     * <i>Converter</i>.
+     * <em>Converter</em>.
      * <p>
      *
      * This method handles conversion to the following types:

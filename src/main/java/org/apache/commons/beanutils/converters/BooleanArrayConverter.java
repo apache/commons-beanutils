@@ -157,9 +157,9 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      * BooleanConverter associated with this object, then what happens depends
      * on whether that BooleanConverter has a default value or not: if it does,
      * then that unrecognized element is converted into the BooleanConverter's
-     * default value. If the BooleanConverter does <i>not</i> have a default
+     * default value. If the BooleanConverter does <em>not</em> have a default
      * value, then the default value for this object is returned as the
-     * <i>complete</i> conversion result (not just for the element), or an
+     * <em>complete</em> conversion result (not just for the element), or an
      * exception is thrown if this object has no default value defined.</p>
      *
      * @param type is the type to which this value should be converted. In the

@@ -37,9 +37,9 @@ import java.io.InputStream;
  * a major pain.</p>
  *
  * <p>So this class takes a sneaky alternative approach: it can grab any class
- * already loaded by a parent classloader and <i>reload</i> that class via this
+ * already loaded by a parent classloader and <em>reload</em> that class via this
  * classloader. The effect is exactly as if a class (or jar file) had been
- * present in the classpath for a container's "shared" classloader <i>and</i>
+ * present in the classpath for a container's "shared" classloader <em>and</em>
  * been present in the component-specific classpath too, without any messing
  * about with the way unit test code is compiled or executed.
  *

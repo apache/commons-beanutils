@@ -22,7 +22,7 @@ package org.apache.commons.beanutils.converters;
  * {@link org.apache.commons.beanutils.Converter} implementation that
  * handles conversion to and from <b>java.lang.Boolean</b> objects.
  * <p>
- * Can be configured to either return a <i>default value</i> or throw a
+ * Can be configured to either return a <em>default value</em> or throw a
  * <code>ConversionException</code> if a conversion error occurs.
  * <p>
  * By default any object whose string representation is one of the values

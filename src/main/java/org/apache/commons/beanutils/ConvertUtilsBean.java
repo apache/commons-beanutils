@@ -114,7 +114,7 @@ import org.apache.commons.logging.LogFactory;
  * </p>
  *
  * <p>
- * Converters that generate <i>arrays</i> of each of the primitive types are
+ * Converters that generate <em>arrays</em> of each of the primitive types are
  * also automatically configured (including String[]). When passed null
  * or invalid input, these return an empty array (not null). See class
  * AbstractArrayConverter for the supported input formats for these converters.
@@ -610,7 +610,7 @@ public class ConvertUtilsBean {
      * @param throwException <code>true</code> if the converters should
      * throw an exception when a conversion error occurs, otherwise
      * <code>false</code> if a default value should be used.
-     * @param defaultNull <code>true</code>if the <i>standard</i> converters
+     * @param defaultNull <code>true</code>if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>
@@ -675,7 +675,7 @@ public class ConvertUtilsBean {
      * @param throwException <code>true</code> if the converters should
      * throw an exception when a conversion error occurs, otherwise <code>
      * <code>false</code> if a default value should be used.
-     * @param defaultNull <code>true</code>if the <i>standard</i> converters
+     * @param defaultNull <code>true</code>if the <em>standard</em> converters
      * (see {@link ConvertUtilsBean#registerStandard(boolean, boolean)})
      * should use a default value of <code>null</code>, otherwise <code>false</code>.
      * N.B. This values is ignored if <code>throwException</code> is <code>true</code>

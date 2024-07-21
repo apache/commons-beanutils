@@ -47,7 +47,7 @@
  *     <li>3.3 <a href="#dynamic.resultSet">ResultSetDynaClass (Wraps ResultSet in DynaBeans)</a></li>
  *     <li>3.4 <a href="#dynamic.rowSet">RowSetDynaClass (Disconnected ResultSet as DynaBeans)</a></li>
  *     <li>3.5 <a href="#dynamic.wrap">WrapDynaBean and WrapDynaClass</a></li>
- *     <li>3.6 <a href="#dynamic.lazy"><i>Lazy</i> DynaBeans</a></li>
+ *     <li>3.6 <a href="#dynamic.lazy"><em>Lazy</em> DynaBeans</a></li>
  *     </ul>
  * </li>
  * <li>4. <a href="#conversion">Data Type Conversions</a>
@@ -650,15 +650,15 @@
  * created internally, you never need to deal with them.</p>
  *
  * <a name="dynamic.lazy"></a>
- * <h2>3.6 <i>Lazy</i> DynaBeans</h2>
+ * <h2>3.6 <em>Lazy</em> DynaBeans</h2>
  *
  * <ul>
- *     <li>1. <a href="#LazyDynaBean">LazyDynaBean</a> - A <i>Lazy</i>
+ *     <li>1. <a href="#LazyDynaBean">LazyDynaBean</a> - A <em>Lazy</em>
  *          {@link org.apache.commons.beanutils.DynaBean}</li>
- *     <li>2. <a href="#LazyDynaMap">LazyDynaMap</a> - A <i>light weight</i>
+ *     <li>2. <a href="#LazyDynaMap">LazyDynaMap</a> - A <em>light weight</em>
  *          {@link org.apache.commons.beanutils.DynaBean} facade to a Map
- *          with <i>lazy</i> map/list processing</li>
- *     <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <i>lazy list</i>
+ *          with <em>lazy</em> map/list processing</li>
+ *     <li>3. <a href="#LazyDynaList">LazyDynaList</a> - A <em>lazy list</em>
  *          for {@link org.apache.commons.beanutils.DynaBean DynaBean's},
  *          <code>java.util.Map</code>'s or POJO beans.</li>
  *     <li>4. <a href="#LazyDynaClass">LazyDynaClass</a> - A
@@ -666,40 +666,40 @@
  * </ul>
  *
  * <p>You bought into the DynaBeans because it saves coding all those POJO JavaBeans but
- *    you're here because <i>lazy</i> caught your eye and wondered whats that about?
- *    What makes these flavors of DynaBean <i>lazy</i> are the following features:</p>
+ *    you're here because <em>lazy</em> caught your eye and wondered whats that about?
+ *    What makes these flavors of DynaBean <em>lazy</em> are the following features:</p>
  *     <ul>
- *         <li><strong><i>Lazy</i> property addition</strong> - lazy beans use a
+ *         <li><strong><em>Lazy</em> property addition</strong> - lazy beans use a
  *              {@link org.apache.commons.beanutils.DynaClass} which implements
  *              the {@link org.apache.commons.beanutils.MutableDynaClass}
  *              interface. This provides the ability to add and remove a DynaClass's
- *              properties. <i>Lazy</i> beans use this feature to automatically add
+ *              properties. <em>Lazy</em> beans use this feature to automatically add
  *              a property which doesn't exist to the DynaClass when
  *              the <code>set(name, value)</code> method is called.</li>
- *          <li><strong><i>Lazy</i> List/Array growth</strong> - If an <i>indexed</i> property is not large
+ *          <li><strong><em>Lazy</em> List/Array growth</strong> - If an <em>indexed</em> property is not large
  *              enough to accomodate the <code>index</code> being set then the <code>List</code> or
- *              <code>Array</code> is automatically <i>grown</i> so that it is.</li>
- *          <li><strong><i>Lazy</i> List/Array instantiation</strong> - if an <i>indexed</i>
+ *              <code>Array</code> is automatically <em>grown</em> so that it is.</li>
+ *          <li><strong><em>Lazy</em> List/Array instantiation</strong> - if an <em>indexed</em>
  *              property doesn't exist then calling the {@link org.apache.commons.beanutils.DynaBean DynaBean's}
- *              <i>indexed</i> property getter/setter methods (i.e. <code>get(name, index)</code> or
+ *              <em>indexed</em> property getter/setter methods (i.e. <code>get(name, index)</code> or
  *              <code>set(name, index, value)</code>) results in either a new <code>List</code>
  *              or <code>Array</code> being instantiated. If the indexed property has not been
  *              defined in the DynaClass then it is automatically added and a default <code>List</code>
  *              implementation instantiated.</li>
- *         <li><strong><i>Lazy</i> Map instantiation</strong> - if a <i>mapped</i>
+ *         <li><strong><em>Lazy</em> Map instantiation</strong> - if a <em>mapped</em>
  *              property doesn't exist then calling the {@link org.apache.commons.beanutils.DynaBean DynaBean's}
- *              <i>mapped</i> property getter/setter methods (i.e. <code>get(name, key)</code> or
+ *              <em>mapped</em> property getter/setter methods (i.e. <code>get(name, key)</code> or
  *              <code>set(name, key, value)</code>) results in a new <code>Map</code>
  *              being instantiated. If the mapped property has not been defined in the DynaClass
  *              then it is automatically added and a default <code>Map</code> implementation
  *              instantiated.</li>
- *         <li><strong><i>Lazy</i> Bean instantiation</strong> - if a property is defined in
+ *         <li><strong><em>Lazy</em> Bean instantiation</strong> - if a property is defined in
  *              the <code>DynaClass</code> as a <code>DynaBean</code> or regular bean and
  *              doesn't exist in the <code>DynaBean</code> then <code>LazyDynaBean</code> wiill
  *              try to instantiate the bean using a default empty constructor.</li>
  *     </ul>
  *
- * <p><strong>1. {@link org.apache.commons.beanutils.LazyDynaBean}</strong> is the standard <i>lazy</i> bean
+ * <p><strong>1. {@link org.apache.commons.beanutils.LazyDynaBean}</strong> is the standard <em>lazy</em> bean
  *    implementation. By default it is associated with a {@link org.apache.commons.beanutils.LazyDynaClass}
  *    which implements the {@link org.apache.commons.beanutils.MutableDynaClass} interface - however
  *    it can be used with any <code>MutableDynaClass</code> implementation. The question is <i>how do
@@ -718,14 +718,14 @@
  *     dynaBean.set("address", 2, addressLine3);     // indexed
  * </pre>
  *
- * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <i>light weight</i>
- *    <code>DynaBean</code> facade to a <code>Map</code> with all the usual <i>lazy</i> features. Its
- *    <i>light weight</i> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
+ * <p><strong>2. {@link org.apache.commons.beanutils.LazyDynaMap}</strong> is a <em>light weight</em>
+ *    <code>DynaBean</code> facade to a <code>Map</code> with all the usual <em>lazy</em> features. Its
+ *    <em>light weight</em> because it doesn't have an associated <code>DynaClass</code> containing all the properties.
  *    In fact it actually implements the <code>DynaClass</code> interface itself (and <code>MutableDynaClass</code>)
- *    and derives all the <i>DynaClass</i> information from the actual contents of the <code>Map</code>. A
+ *    and derives all the <em>DynaClass</em> information from the actual contents of the <code>Map</code>. A
  *    <code>LazyDynaMap</code> can be created around an existing <code>Map</code> or can instantiate its own
  *    <code>Map</code>. After any <code>DynaBean</code> processing has finished the <code>Map</code> can be retrieved
- *    and the DynaBean <i>facade</i> discarded.</p>
+ *    and the DynaBean <em>facade</em> discarded.</p>
  *
  * <p>If you need a new <code>Map</code> then to use....</p>
  *
@@ -738,7 +738,7 @@
  *
  *     Map myMap = dynaBean.getMap()                 // retrieve the Map
  * </pre>
- * <p><i>or</i> to use with an existing <code>Map</code> ....</p>
+ * <p><em>or</em> to use with an existing <code>Map</code> ....</p>
  *
  * <pre>
  *     Map myMap = ....                             // exisitng Map
@@ -747,7 +747,7 @@
  * </pre>
  *
  * <p><strong>3. {@link org.apache.commons.beanutils.LazyDynaList}</strong>
- *      is  <i>lazy list</i> for {@link org.apache.commons.beanutils.DynaBean DynaBeans}
+ *      is  <em>lazy list</em> for {@link org.apache.commons.beanutils.DynaBean DynaBeans}
  *      <code>java.util.Map</code>'s or POJO beans. See the <a href="LazyDynaList.html">Javadoc</a>
  *      for more details and example usage.</p>
  *
@@ -760,10 +760,10 @@
  *      anything to do with the <code>DynaClass</code>. However sometimes there
  *      is a requirement to set up the <code>DynaClass</code> first - perhaps to
  *      define the type of array for an indexed property, or if using the DynaBean
- *      in <i>restricted</i> mode (see note below) is required. Doing so is
+ *      in <em>restricted</em> mode (see note below) is required. Doing so is
  *      straight forward...</p>
  *
- * <p><i>Either</i> create a <code>LazyDynaClass</code> first...
+ * <p><em>Either</em> create a <code>LazyDynaClass</code> first...
  *
  * <pre>
  *     MutableDynaClass dynaClass = new LazyDynaClass();    // create DynaClass
@@ -775,7 +775,7 @@
  *     DynaBean dynaBean = new LazyDynaBean(dynaClass);     // Create DynaBean with associated DynaClass
  * </pre>
  *
- * <p><i>or</i> create a <code>LazyDynaBean</code> and get the <code>DynaClass</code>...
+ * <p><em>or</em> create a <code>LazyDynaBean</code> and get the <code>DynaClass</code>...
  *
  * <pre>
  *     DynaBean dynaBean = new LazyDynaBean();              // Create LazyDynaBean
@@ -788,9 +788,9 @@
  * </pre>
  *
  * <p><strong>NOTE:</strong> One feature of {@link org.apache.commons.beanutils.MutableDynaClass} is that it
- *    has a <i>Restricted</i> property. When the DynaClass is <i>restricted</i> no properties can be added
+ *    has a <em>Restricted</em> property. When the DynaClass is <em>restricted</em> no properties can be added
  *    or removed from the <code>DynaClass</code>. Neither the <code>LazyDynaBean</code> or <code>LazyDynaMap</code>
- *    will add properties automatically if the <code>DynaClass</code> is <i>restricted</i>.</p>
+ *    will add properties automatically if the <code>DynaClass</code> is <em>restricted</em>.</p>
  *
  *
  * <a name="conversion"></a>
