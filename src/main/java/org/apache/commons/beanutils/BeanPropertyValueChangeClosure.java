@@ -134,15 +134,12 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * @throws IllegalArgumentException If the propertyName provided is null or empty.
      */
     public BeanPropertyValueChangeClosure(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
-        super();
-
-        if ((propertyName != null) && (propertyName.length() > 0)) {
-            this.propertyName = propertyName;
-            this.propertyValue = propertyValue;
-            this.ignoreNull = ignoreNull;
-        } else {
+        if (propertyName == null || propertyName.length() <= 0) {
             throw new IllegalArgumentException("propertyName cannot be null or empty");
         }
+        this.propertyName = propertyName;
+        this.propertyValue = propertyValue;
+        this.ignoreNull = ignoreNull;
     }
 
     /**
@@ -159,6 +156,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
+    @Override
     public void execute(final Object object) {
 
         try {
@@ -166,15 +164,14 @@ public class BeanPropertyValueChangeClosure implements Closure {
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Unable to execute Closure. Null value encountered in property path...";
 
-            if (ignoreNull) {
-                log.warn("WARNING: " + errorMsg + e);
-            } else {
+            if (!ignoreNull) {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
                     log.error(errorMsg, e);
                 }
                 throw iae;
             }
+            log.warn("WARNING: " + errorMsg + e);
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
