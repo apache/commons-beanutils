@@ -126,6 +126,7 @@ public abstract class AbstractConverter implements Converter {
      * @throws ConversionException if conversion cannot be performed
      * successfully and no default is specified.
      */
+    @Override
     public <T> T convert(final Class<T> type, Object value) {
 
         if (type == null) {
@@ -156,7 +157,8 @@ public abstract class AbstractConverter implements Converter {
                 return targetType.cast(convertToString(value));
 
             // No conversion necessary
-            } else if (targetType.equals(sourceType)) {
+            }
+            if (targetType.equals(sourceType)) {
                 if (log().isDebugEnabled()) {
                     log().debug("    No conversion required, value is already a "
                                     + toString(targetType));
@@ -226,17 +228,15 @@ public abstract class AbstractConverter implements Converter {
         if (value.getClass().isArray()) {
             if (Array.getLength(value) > 0) {
                 return Array.get(value, 0);
-            } else {
-                return null;
             }
+            return null;
         }
         if (value instanceof Collection) {
             final Collection<?> collection = (Collection<?>)value;
             if (collection.size() > 0) {
                 return collection.iterator().next();
-            } else {
-                return null;
             }
+            return null;
         }
         return value;
     }
@@ -306,7 +306,7 @@ public abstract class AbstractConverter implements Converter {
 
         if (useDefault || type.equals(String.class)) {
             Object value = getDefault(type);
-            if (useDefault && value != null && !(type.equals(value.getClass()))) {
+            if (useDefault && value != null && !type.equals(value.getClass())) {
                 try {
                     value = convertToType(type, defaultValue);
                 } catch (final Throwable t) {
@@ -375,9 +375,8 @@ public abstract class AbstractConverter implements Converter {
     protected Object getDefault(final Class<?> type) {
         if (type.equals(String.class)) {
             return null;
-        } else  {
-            return defaultValue;
         }
+        return defaultValue;
     }
 
     /**
