@@ -29,6 +29,7 @@ public class AlphaBean extends AbstractParent implements Child {
         setName(name);
     }
 
+    @Override
     public String getName() {
         return name;
     }
