@@ -59,6 +59,7 @@ public class BeanPredicate implements Predicate {
      * @return the result of the predicate evaluation
      * @throws IllegalArgumentException when the property cannot be evaluated
      */
+    @Override
     public boolean evaluate(final Object object) {
 
         boolean evaluation = false;
