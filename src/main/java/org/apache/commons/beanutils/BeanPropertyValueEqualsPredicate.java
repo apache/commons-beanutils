@@ -162,15 +162,12 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @throws IllegalArgumentException If the property name provided is null or empty.
      */
     public BeanPropertyValueEqualsPredicate(final String propertyName, final Object propertyValue, final boolean ignoreNull) {
-        super();
-
-        if ((propertyName != null) && (propertyName.length() > 0)) {
-            this.propertyName = propertyName;
-            this.propertyValue = propertyValue;
-            this.ignoreNull = ignoreNull;
-        } else {
+        if (propertyName == null || propertyName.length() <= 0) {
             throw new IllegalArgumentException("propertyName cannot be null or empty");
         }
+        this.propertyName = propertyName;
+        this.propertyValue = propertyValue;
+        this.ignoreNull = ignoreNull;
     }
 
     /**
@@ -191,6 +188,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * provided. Or if an object in the property path provided is <code>null</code> and
      * <code>ignoreNull</code> is set to <code>false</code>.
      */
+    @Override
     public boolean evaluate(final Object object) {
 
         boolean evaluation = false;
@@ -201,15 +199,14 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
         } catch (final IllegalArgumentException e) {
             final String errorMsg = "Problem during evaluation. Null value encountered in property path...";
 
-            if (ignoreNull) {
-                log.warn("WARNING: " + errorMsg + e);
-            } else {
+            if (!ignoreNull) {
                 final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
                 if (!BeanUtils.initCause(iae, e)) {
                     log.error(errorMsg, e);
                 }
                 throw iae;
             }
+            log.warn("WARNING: " + errorMsg + e);
         } catch (final IllegalAccessException e) {
             final String errorMsg = "Unable to access the property provided.";
             final IllegalArgumentException iae = new IllegalArgumentException(errorMsg);
@@ -245,7 +242,7 @@ public class BeanPropertyValueEqualsPredicate implements Predicate {
      * @return True if they are equal; false otherwise.
      */
     protected boolean evaluateValue(final Object expected, final Object actual) {
-        return (expected == actual) || ((expected != null) && expected.equals(actual));
+        return expected == actual || expected != null && expected.equals(actual);
     }
 
     /**
