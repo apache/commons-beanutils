@@ -28,6 +28,7 @@ public class AbstractChild implements Child {
         this.name = name;
     }
 
+    @Override
     public String getName()
     {
         return name;
