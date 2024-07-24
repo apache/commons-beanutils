@@ -100,7 +100,7 @@ public abstract class AbstractArrayConverter implements Converter {
     /**
      * <p>Model object for string arrays.</p>
      */
-    protected static String[] strings = new String[0];
+    protected static String[] strings = {};
 
 
     /**
@@ -130,6 +130,7 @@ public abstract class AbstractArrayConverter implements Converter {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public abstract Object convert(Class type, Object value);
 
 
@@ -187,8 +188,8 @@ public abstract class AbstractArrayConverter implements Converter {
             final ArrayList list = new ArrayList();
             while (true) {
                 final int ttype = st.nextToken();
-                if ((ttype == StreamTokenizer.TT_WORD) ||
-                    (ttype > 0)) {
+                if (ttype == StreamTokenizer.TT_WORD ||
+                    ttype > 0) {
                     list.add(st.sval);
                 } else if (ttype == StreamTokenizer.TT_EOF) {
                     break;
@@ -199,7 +200,7 @@ public abstract class AbstractArrayConverter implements Converter {
             }
 
             // Return the completed list
-            return (list);
+            return list;
 
         } catch (final IOException e) {
 
