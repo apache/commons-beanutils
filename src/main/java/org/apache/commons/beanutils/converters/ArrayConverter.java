@@ -130,7 +130,7 @@ public class ArrayConverter extends AbstractConverter {
     private final Converter elementConverter;
     private int defaultSize;
     private char delimiter    = ',';
-    private char[] allowedChars = new char[] {'.', '-'};
+    private char[] allowedChars = {'.', '-'};
     private boolean onlyFirstToString = true;
 
     // ----------------------------------------------------------- Constructors
@@ -146,7 +146,6 @@ public class ArrayConverter extends AbstractConverter {
      *  individual array elements.
      */
     public ArrayConverter(final Class<?> defaultType, final Converter elementConverter) {
-        super();
         if (defaultType == null) {
             throw new IllegalArgumentException("Default type is missing");
         }
@@ -359,7 +358,7 @@ public class ArrayConverter extends AbstractConverter {
         if (value instanceof Number ||
             value instanceof Boolean ||
             value instanceof java.util.Date) {
-            final List<Object> list = new ArrayList<Object>(1);
+            final List<Object> list = new ArrayList<>(1);
             list.add(value);
             return list;
         }
@@ -386,9 +385,8 @@ public class ArrayConverter extends AbstractConverter {
 
         if (defaultValue.getClass().equals(type)) {
             return defaultValue;
-        } else {
-            return Array.newInstance(type.getComponentType(), defaultSize);
         }
+        return Array.newInstance(type.getComponentType(), defaultSize);
 
     }
 
@@ -450,7 +448,7 @@ public class ArrayConverter extends AbstractConverter {
             st.whitespaceChars(delimiter , delimiter); // Set the delimiters
             st.ordinaryChars('0', '9');  // Needed to turn off numeric flag
             st.wordChars('0', '9');      // Needed to make part of tokens
-            for (char allowedChar : allowedChars) {
+            for (final char allowedChar : allowedChars) {
                 st.ordinaryChars(allowedChar, allowedChar);
                 st.wordChars(allowedChar, allowedChar);
             }
@@ -459,10 +457,10 @@ public class ArrayConverter extends AbstractConverter {
             List<String> list = null;
             while (true) {
                 final int ttype = st.nextToken();
-                if ((ttype == StreamTokenizer.TT_WORD) || (ttype > 0)) {
+                if (ttype == StreamTokenizer.TT_WORD || ttype > 0) {
                     if (st.sval != null) {
                         if (list == null) {
-                            list = new ArrayList<String>();
+                            list = new ArrayList<>();
                         }
                         list.add(st.sval);
                     }
@@ -482,7 +480,7 @@ public class ArrayConverter extends AbstractConverter {
             }
 
             // Return the completed list
-            return (list);
+            return list;
 
         } catch (final IOException e) {
 
