@@ -42,10 +42,10 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Byte("-12");
-        numbers[1] = new Byte("13");
-        numbers[2] = new Byte("-22");
-        numbers[3] = new Byte("23");
+        numbers[0] = Byte.valueOf("-12");
+        numbers[1] = Byte.valueOf("13");
+        numbers[2] = Byte.valueOf("-22");
+        numbers[3] = Byte.valueOf("23");
     }
 
     public static TestSuite suite() {
@@ -100,28 +100,28 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
             "1",
             "17",
             String.valueOf(Byte.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
+            Integer.valueOf(9),
+            Long.valueOf(10),
+            Float.valueOf((float) 11.1),
+            Double.valueOf(12.2)
         };
 
         final Byte[] expected = {
-            new Byte(Byte.MIN_VALUE),
-            new Byte((byte)-17),
-            new Byte((byte)-1),
-            new Byte((byte)0),
-            new Byte((byte)1),
-            new Byte((byte)17),
-            new Byte(Byte.MAX_VALUE),
-            new Byte((byte)7),
-            new Byte((byte)8),
-            new Byte((byte)9),
-            new Byte((byte)10),
-            new Byte((byte)11),
-            new Byte((byte)12)
+            Byte.valueOf(Byte.MIN_VALUE),
+            Byte.valueOf((byte)-17),
+            Byte.valueOf((byte)-1),
+            Byte.valueOf((byte)0),
+            Byte.valueOf((byte)1),
+            Byte.valueOf((byte)17),
+            Byte.valueOf(Byte.MAX_VALUE),
+            Byte.valueOf((byte)7),
+            Byte.valueOf((byte)8),
+            Byte.valueOf((byte)9),
+            Byte.valueOf((byte)10),
+            Byte.valueOf((byte)11),
+            Byte.valueOf((byte)12)
         };
 
         for(int i=0;i<expected.length;i++) {
@@ -138,16 +138,16 @@ public class ByteConverterTestCase extends NumberConverterTestBase {
         final Converter converter = makeConverter();
         final Class<?> clazz = Byte.class;
 
-        final Long min         = new Long(Byte.MIN_VALUE);
-        final Long max         = new Long(Byte.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long min         = Long.valueOf(Byte.MIN_VALUE);
+        final Long max         = Long.valueOf(Byte.MAX_VALUE);
+        final Long minMinusOne = Long.valueOf(min.longValue() - 1);
+        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", new Byte(Byte.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals("Minimum", Byte.valueOf(Byte.MIN_VALUE), converter.convert(clazz, min));
 
         // Maximum
-        assertEquals("Maximum", new Byte(Byte.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals("Maximum", Byte.valueOf(Byte.MAX_VALUE), converter.convert(clazz, max));
 
         // Too Small
         try {
