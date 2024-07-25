@@ -95,7 +95,7 @@ public class DynaRowSetTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaRowSetTestCase.class));
+        return new TestSuite(DynaRowSetTestCase.class);
 
     }
 
@@ -138,7 +138,7 @@ public class DynaRowSetTestCase extends TestCase {
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
         assertTrue("unknown property returns null",
-                   (dynaProp == null));
+                   dynaProp == null);
 
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
@@ -365,9 +365,8 @@ public class DynaRowSetTestCase extends TestCase {
         public Object getObject(final String columnName) throws SQLException {
             if ("timestampProperty".equals(columnName)) {
                 return new CustomTimestamp();
-            } else {
-                return super.getObject(columnName);
             }
+            return super.getObject(columnName);
         }
 
     }
@@ -393,7 +392,8 @@ public class DynaRowSetTestCase extends TestCase {
             final String columnName = getColumnName(columnIndex);
             if (columnName.equals("dateProperty")) {
                 return java.sql.Timestamp.class.getName();
-            } else if (columnName.equals("timestampProperty")) {
+            }
+            if (columnName.equals("timestampProperty")) {
                 return CustomTimestamp.class.getName();
             } else {
                 return super.getColumnClassName(columnIndex);
