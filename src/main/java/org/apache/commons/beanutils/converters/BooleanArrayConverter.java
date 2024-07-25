@@ -54,7 +54,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      */
     public BooleanArrayConverter() {
 
-        super();
         this.booleanConverter = DEFAULT_CONVERTER;
 
     }
@@ -184,15 +183,14 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
         // Deal with a null value
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
+                return defaultValue;
             }
+            throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
         if (MODEL == value.getClass()) {
-            return (value);
+            return value;
         }
 
         // Deal with input value as a String array
@@ -208,13 +206,12 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
                     final Object result = booleanConverter.convert(Boolean.class, stringValue);
                     results[i] = ((Boolean) result).booleanValue();
                 }
-                return (results);
+                return results;
             } catch (final Exception e) {
                 if (useDefault) {
-                    return (defaultValue);
-                } else {
-                    throw new ConversionException(value.toString(), e);
+                    return defaultValue;
                 }
+                throw new ConversionException(value.toString(), e);
             }
         }
 
@@ -230,13 +227,12 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
                 final Object result = booleanConverter.convert(Boolean.class, stringValue);
                 results[i] = ((Boolean) result).booleanValue();
             }
-            return (results);
+            return results;
         } catch (final Exception e) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(value.toString(), e);
+                return defaultValue;
             }
+            throw new ConversionException(value.toString(), e);
         }
 
     }
