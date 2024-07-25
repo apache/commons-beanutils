@@ -47,6 +47,7 @@ import org.apache.commons.collections.comparators.ComparableComparator;
  */
 public class BeanComparator<T> implements Comparator<T>, Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String property;
     private final Comparator<?> comparator;
 
@@ -151,6 +152,7 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
      * @param  o2 Object The second bean to get data from to compare
      * @return int negative or positive based on order
      */
+    @Override
     public int compare( final T o1, final T o2 ) {
 
         if ( property == null ) {
@@ -195,29 +197,23 @@ public class BeanComparator<T> implements Comparator<T>, Serializable {
         if (!comparator.equals(beanComparator.comparator)) {
             return false;
         }
-        if (property != null)
-        {
-            if (!property.equals(beanComparator.property)) {
-                return false;
-            }
+        if (property == null) {
+            return beanComparator.property == null;
         }
-        else
-        {
-            return (beanComparator.property == null);
+        if (!property.equals(beanComparator.property)) {
+            return false;
         }
 
         return true;
     }
 
     /**
-     * Hashcode compatible with equals.
+     * Hash code compatible with equals.
      * @return the hash code for this comparator
      */
     @Override
     public int hashCode() {
-        int result;
-        result = comparator.hashCode();
-        return result;
+        return comparator.hashCode();
     }
 
     /**
