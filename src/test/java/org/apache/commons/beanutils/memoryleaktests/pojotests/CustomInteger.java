@@ -22,6 +22,7 @@ package org.apache.commons.beanutils.memoryleaktests.pojotests;
  */
 public class CustomInteger extends Number {
 
+    private static final long serialVersionUID = 1L;
     private final int i;
 
     /**
