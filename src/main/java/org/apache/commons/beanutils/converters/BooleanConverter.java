@@ -61,7 +61,6 @@ public final class BooleanConverter extends AbstractConverter {
      * not one of the known true strings, nor one of the known false strings.
      */
     public BooleanConverter() {
-        super();
     }
 
 
@@ -78,7 +77,6 @@ public final class BooleanConverter extends AbstractConverter {
      *  in which case this constructor acts like the no-argument one.
      */
     public BooleanConverter(final Object defaultValue) {
-        super();
         if (defaultValue != NO_DEFAULT) {
             setDefaultValue(defaultValue);
         }
@@ -103,7 +101,6 @@ public final class BooleanConverter extends AbstractConverter {
      * @since 1.8.0
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings) {
-        super();
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
     }
@@ -133,7 +130,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     public BooleanConverter(final String[] trueStrings, final String[] falseStrings,
                 final Object defaultValue) {
-        super();
         this.trueStrings = copyStrings(trueStrings);
         this.falseStrings = copyStrings(falseStrings);
         if (defaultValue != NO_DEFAULT) {
@@ -211,13 +207,13 @@ public final class BooleanConverter extends AbstractConverter {
             // instead of the less-efficient String.equalsIgnoreCase method.
             final String stringValue = value.toString().toLowerCase();
 
-            for (String trueString : trueStrings) {
+            for (final String trueString : trueStrings) {
                 if (trueString.equals(stringValue)) {
                     return type.cast(Boolean.TRUE);
                 }
             }
 
-            for (String falseString : falseStrings) {
+            for (final String falseString : falseStrings) {
                 if (falseString.equals(stringValue)) {
                     return type.cast(Boolean.FALSE);
                 }
