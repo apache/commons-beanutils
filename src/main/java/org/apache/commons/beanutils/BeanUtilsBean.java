@@ -179,7 +179,7 @@ public class BeanUtilsBean {
             newBean = bean.getClass().getConstructor().newInstance();
         }
         getPropertyUtils().copyProperties(newBean, bean);
-        return (newBean);
+        return newBean;
 
     }
 
@@ -246,7 +246,7 @@ public class BeanUtilsBean {
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
-            for (DynaProperty origDescriptor : origDescriptors) {
+            for (final DynaProperty origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 // Need to check isReadable() for WrapDynaBean
                 // (see Jira issue# BEANUTILS-61)
@@ -270,7 +270,7 @@ public class BeanUtilsBean {
         } else /* if (orig is a standard JavaBean) */ {
             final PropertyDescriptor[] origDescriptors =
                 getPropertyUtils().getPropertyDescriptors(orig);
-            for (PropertyDescriptor origDescriptor : origDescriptors) {
+            for (final PropertyDescriptor origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if ("class".equals(name)) {
                     continue; // No point in trying to set an object's class
@@ -486,18 +486,18 @@ public class BeanUtilsBean {
 
         if (bean == null) {
         //            return (Collections.EMPTY_MAP);
-            return (new java.util.HashMap<String, String>());
+            return new java.util.HashMap<>();
         }
 
         if (log.isDebugEnabled()) {
             log.debug("Describing bean: " + bean.getClass().getName());
         }
 
-        final Map<String, String> description = new HashMap<String, String>();
+        final Map<String, String> description = new HashMap<>();
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
-            for (DynaProperty descriptor : descriptors) {
+            for (final DynaProperty descriptor : descriptors) {
                 final String name = descriptor.getName();
                 description.put(name, getProperty(bean, name));
             }
@@ -505,14 +505,14 @@ public class BeanUtilsBean {
             final PropertyDescriptor[] descriptors =
                 getPropertyUtils().getPropertyDescriptors(bean);
             final Class<?> clazz = bean.getClass();
-            for (PropertyDescriptor descriptor : descriptors) {
+            for (final PropertyDescriptor descriptor : descriptors) {
                 final String name = descriptor.getName();
                 if (getPropertyUtils().getReadMethod(clazz, descriptor) != null) {
                     description.put(name, getProperty(bean, name));
                 }
             }
         }
-        return (description);
+        return description;
 
     }
 
@@ -538,9 +538,10 @@ public class BeanUtilsBean {
 
         final Object value = getPropertyUtils().getProperty(bean, name);
         if (value == null) {
-            return (null);
-        } else if (value instanceof Collection) {
-            final ArrayList<String> values = new ArrayList<String>();
+            return null;
+        }
+        if (value instanceof Collection) {
+            final ArrayList<String> values = new ArrayList<>();
             for (final Object item : (Collection<?>) value) {
                 if (item == null) {
                     values.add(null);
@@ -549,7 +550,7 @@ public class BeanUtilsBean {
                     values.add(getConvertUtils().convert(item));
                 }
             }
-            return (values.toArray(new String[values.size()]));
+            return values.toArray(new String[values.size()]);
         } else if (value.getClass().isArray()) {
             final int n = Array.getLength(value);
             final String[] results = new String[n];
@@ -562,11 +563,11 @@ public class BeanUtilsBean {
                     results[i] = getConvertUtils().convert(item);
                 }
             }
-            return (results);
+            return results;
         } else {
             final String[] results = new String[1];
             results[0] = getConvertUtils().convert(value);
-            return (results);
+            return results;
         }
 
     }
@@ -596,7 +597,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -624,7 +625,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getIndexedProperty(bean, name, index);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -653,7 +654,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -681,7 +682,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getMappedProperty(bean, name, key);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -708,7 +709,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getNestedProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -733,7 +734,7 @@ public class BeanUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (getNestedProperty(bean, name));
+        return getNestedProperty(bean, name);
 
     }
 
@@ -758,7 +759,7 @@ public class BeanUtilsBean {
             NoSuchMethodException {
 
         final Object value = getPropertyUtils().getSimpleProperty(bean, name);
-        return (getConvertUtils().convert(value));
+        return getConvertUtils().convert(value);
 
     }
 
@@ -802,7 +803,7 @@ public class BeanUtilsBean {
         throws IllegalAccessException, InvocationTargetException {
 
         // Do nothing unless both arguments have been specified
-        if ((bean == null) || (properties == null)) {
+        if (bean == null || properties == null) {
             return;
         }
         if (log.isDebugEnabled()) {
@@ -965,7 +966,7 @@ public class BeanUtilsBean {
                     }
                     return; // Read-only, skip this property setter
                 }
-                type = (value == null) ? Object.class : value.getClass();
+                type = value == null ? Object.class : value.getClass();
             } else {
                 if (descriptor.getWriteMethod() == null) {
                     if (log.isDebugEnabled()) {
@@ -979,7 +980,7 @@ public class BeanUtilsBean {
 
         // Convert the specified value to the required type
         Object newValue = null;
-        if (type.isArray() && (index < 0)) { // Scalar value into array
+        if (type.isArray() && index < 0) { // Scalar value into array
             if (value == null) {
                 final String[] values = new String[1];
                 values[0] = null;
@@ -1051,10 +1052,10 @@ public class BeanUtilsBean {
     public boolean initCause(final Throwable throwable, final Throwable cause) {
         if (INIT_CAUSE_METHOD != null && cause != null) {
             try {
-                INIT_CAUSE_METHOD.invoke(throwable, new Object[] { cause });
+                INIT_CAUSE_METHOD.invoke(throwable, cause);
                 return true;
             } catch (final Throwable e) {
-                return false; // can't initialize cause
+                // can't initialize cause
             }
         }
         return false;
@@ -1076,9 +1077,8 @@ public class BeanUtilsBean {
         if (converter != null) {
             log.trace("        USING CONVERTER " + converter);
             return converter.convert(type, value);
-        } else {
-            return value;
         }
+        return value;
     }
 
     /**
@@ -1091,7 +1091,7 @@ public class BeanUtilsBean {
      * @return the converted value
      */
     private Object convertForCopy(final Object value, final Class<?> type) {
-        return (value != null) ? convert(value, type) : value;
+        return value != null ? convert(value, type) : value;
     }
 
     /**
@@ -1105,7 +1105,7 @@ public class BeanUtilsBean {
      */
     private static Method getInitCauseMethod() {
         try {
-            final Class<?>[] paramsClasses = new Class<?>[] { Throwable.class };
+            final Class<?>[] paramsClasses = { Throwable.class };
             return Throwable.class.getMethod("initCause", paramsClasses);
         } catch (final NoSuchMethodException e) {
             final Log log = LogFactory.getLog(BeanUtils.class);
@@ -1135,6 +1135,6 @@ public class BeanUtilsBean {
         if (!dynaProperty.isMapped()) {
             return dynaProperty.getType();
         }
-        return (value == null) ? String.class : value.getClass();
+        return value == null ? String.class : value.getClass();
     }
 }
