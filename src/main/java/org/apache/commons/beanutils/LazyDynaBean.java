@@ -113,7 +113,9 @@ import org.apache.commons.logging.LogFactory;
 public class LazyDynaBean implements DynaBean, Serializable {
 
 
-   /**
+   private static final long serialVersionUID = 1L;
+
+/**
     * Commons Logging
     */
     private transient Log logger = LogFactory.getLog(LazyDynaBean.class);
@@ -123,19 +125,19 @@ public class LazyDynaBean implements DynaBean, Serializable {
     /** BigDecimal Zero */
     protected static final BigDecimal BigDecimal_ZERO = new BigDecimal("0");
     /** Character Space */
-    protected static final Character  Character_SPACE = new Character(' ');
+    protected static final Character  Character_SPACE = Character.valueOf(' ');
     /** Byte Zero */
-    protected static final Byte       Byte_ZERO       = new Byte((byte)0);
+    protected static final Byte       Byte_ZERO       = Byte.valueOf((byte)0);
     /** Short Zero */
-    protected static final Short      Short_ZERO      = new Short((short)0);
+    protected static final Short      Short_ZERO      = Short.valueOf((short)0);
     /** Integer Zero */
-    protected static final Integer    Integer_ZERO    = new Integer(0);
+    protected static final Integer    Integer_ZERO    = Integer.valueOf(0);
     /** Long Zero */
-    protected static final Long       Long_ZERO       = new Long(0);
+    protected static final Long       Long_ZERO       = Long.valueOf(0);
     /** Float Zero */
-    protected static final Float      Float_ZERO      = new Float((byte)0);
+    protected static final Float      Float_ZERO      = Float.valueOf((byte)0);
     /** Double Zero */
-    protected static final Double     Double_ZERO     = new Double((byte)0);
+    protected static final Double     Double_ZERO     = Double.valueOf((byte)0);
 
     /**
      * The <code>MutableDynaClass</code> "base class" that this DynaBean
@@ -236,7 +238,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return ((List<?>)value).size();
         }
 
-        if ((value.getClass().isArray())) {
+        if (value.getClass().isArray()) {
             return Array.getLength(value);
         }
 
@@ -257,6 +259,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public boolean contains(final String name, final String key) {
 
         if (name == null) {
@@ -269,7 +272,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         if (value instanceof Map) {
-            return (((Map<?, ?>) value).containsKey(key));
+            return ((Map<?, ?>) value).containsKey(key);
         }
 
         return false;
@@ -286,6 +289,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The property's value
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public Object get(final String name) {
 
         if (name == null) {
@@ -329,6 +333,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public Object get(final String name, final int index) {
 
         // If its not a property, then create default indexed property
@@ -352,13 +357,13 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Return the indexed value
         if (indexedProperty.getClass().isArray()) {
             return Array.get(indexedProperty, index);
-        } else if (indexedProperty instanceof List) {
-            return ((List<?>)indexedProperty).get(index);
-        } else {
-            throw new IllegalArgumentException
-                ("Non-indexed property for '" + name + "[" + index + "]' "
-                                  + indexedProperty.getClass().getName());
         }
+        if (indexedProperty instanceof List) {
+            return ((List<?>)indexedProperty).get(index);
+        }
+        throw new IllegalArgumentException
+            ("Non-indexed property for '" + name + "[" + index + "]' "
+                              + indexedProperty.getClass().getName());
 
     }
 
@@ -375,6 +380,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public Object get(final String name, final String key) {
 
         // If its not a property, then create default mapped property
@@ -394,12 +400,11 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
         // Get the value from the Map
         if (mappedProperty instanceof Map) {
-            return (((Map<?, ?>) mappedProperty).get(key));
-        } else {
-            throw new IllegalArgumentException
-              ("Non-mapped property for '" + name + "(" + key + ")'"
-                                  + mappedProperty.getClass().getName());
+            return ((Map<?, ?>) mappedProperty).get(key);
         }
+        throw new IllegalArgumentException
+          ("Non-mapped property for '" + name + "(" + key + ")'"
+                              + mappedProperty.getClass().getName());
 
     }
 
@@ -410,6 +415,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      *
      * @return The associated DynaClass
      */
+    @Override
     public DynaClass getDynaClass() {
         return dynaClass;
     }
@@ -425,6 +431,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public void remove(final String name, final String key) {
 
         if (name == null) {
@@ -436,13 +443,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
             return;
         }
 
-        if (value instanceof Map) {
-            ((Map<?, ?>) value).remove(key);
-        } else {
+        if (!(value instanceof Map)) {
             throw new IllegalArgumentException
                     ("Non-mapped property for '" + name + "(" + key + ")'"
                             + value.getClass().getName());
         }
+        ((Map<?, ?>) value).remove(key);
 
     }
 
@@ -459,6 +465,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @Override
     public void set(final String name, final Object value) {
 
         // If the property doesn't exist, then add it
@@ -512,6 +519,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public void set(final String name, final int index, final Object value) {
 
         // If its not a property, then create default indexed property
@@ -563,6 +571,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public void set(final String name, final String key, final Object value) {
 
         // If the 'mapped' property doesn't exist, then add it
@@ -620,12 +629,12 @@ public class LazyDynaBean implements DynaBean, Serializable {
         }
 
         // Grow an Array to the appropriate size
-        if ((indexedProperty.getClass().isArray())) {
+        if (indexedProperty.getClass().isArray()) {
 
             final int length = Array.getLength(indexedProperty);
             if (index >= length) {
                 final Class<?> componentType = indexedProperty.getClass().getComponentType();
-                final Object newArray = Array.newInstance(componentType, (index + 1));
+                final Object newArray = Array.newInstance(componentType, index + 1);
                 System.arraycopy(indexedProperty, 0, newArray, 0, length);
                 indexedProperty = newArray;
                 set(name, indexedProperty);
@@ -729,11 +738,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
         // Create the mapped object
         Object mappedProperty = null;
 
-        if (type == null) {
-
-            mappedProperty = defaultMappedProperty(name);
-
-        } else if (type.isInterface()) {
+        if (type == null || type.isInterface()) {
 
             mappedProperty = defaultMappedProperty(name);
 
@@ -782,27 +787,31 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The new value
      */
     protected Object createPrimitiveProperty(final String name, final Class<?> type) {
-
         if (type == Boolean.TYPE) {
             return Boolean.FALSE;
-        } else if (type == Integer.TYPE) {
-            return Integer_ZERO;
-        } else if (type == Long.TYPE) {
-            return Long_ZERO;
-        } else if (type == Double.TYPE) {
-            return Double_ZERO;
-        } else if (type == Float.TYPE) {
-            return Float_ZERO;
-        } else if (type == Byte.TYPE) {
-            return Byte_ZERO;
-        } else if (type == Short.TYPE) {
-            return Short_ZERO;
-        } else if (type == Character.TYPE) {
-            return Character_SPACE;
-        } else {
-            return null;
         }
-
+        if (type == Integer.TYPE) {
+            return Integer_ZERO;
+        }
+        if (type == Long.TYPE) {
+            return Long_ZERO;
+        }
+        if (type == Double.TYPE) {
+            return Double_ZERO;
+        }
+        if (type == Float.TYPE) {
+            return Float_ZERO;
+        }
+        if (type == Byte.TYPE) {
+            return Byte_ZERO;
+        }
+        if (type == Short.TYPE) {
+            return Short_ZERO;
+        }
+        if (type == Character.TYPE) {
+            return Character_SPACE;
+        }
+        return null;
     }
 
     /**
@@ -857,7 +866,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The default value for an indexed property (java.util.ArrayList)
      */
     protected Object defaultIndexedProperty(final String name) {
-        return new ArrayList<Object>();
+        return new ArrayList<>();
     }
 
     /**
@@ -871,7 +880,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return The default value for a mapped property (java.util.HashMap)
      */
     protected Map<String, Object> defaultMappedProperty(final String name) {
-        return new HashMap<String, Object>();
+        return new HashMap<>();
     }
 
     /**
@@ -907,18 +916,17 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected boolean isAssignable(final Class<?> dest, final Class<?> source) {
 
         if (dest.isAssignableFrom(source) ||
-                ((dest == Boolean.TYPE) && (source == Boolean.class)) ||
-                ((dest == Byte.TYPE) && (source == Byte.class)) ||
-                ((dest == Character.TYPE) && (source == Character.class)) ||
-                ((dest == Double.TYPE) && (source == Double.class)) ||
-                ((dest == Float.TYPE) && (source == Float.class)) ||
-                ((dest == Integer.TYPE) && (source == Integer.class)) ||
-                ((dest == Long.TYPE) && (source == Long.class)) ||
-                ((dest == Short.TYPE) && (source == Short.class))) {
-            return (true);
-        } else {
-            return (false);
+                dest == Boolean.TYPE && source == Boolean.class ||
+                dest == Byte.TYPE && source == Byte.class ||
+                dest == Character.TYPE && source == Character.class ||
+                dest == Double.TYPE && source == Double.class ||
+                dest == Float.TYPE && source == Float.class ||
+                dest == Integer.TYPE && source == Integer.class ||
+                dest == Long.TYPE && source == Long.class ||
+                dest == Short.TYPE && source == Short.class) {
+            return true;
         }
+        return false;
 
     }
 
@@ -927,7 +935,7 @@ public class LazyDynaBean implements DynaBean, Serializable {
      * @return a new Map instance
      */
     protected Map<String, Object> newMap() {
-        return new HashMap<String, Object>();
+        return new HashMap<>();
     }
 
     /**
