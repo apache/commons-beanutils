@@ -61,7 +61,7 @@ public class ConstructorUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(ConstructorUtilsTestCase.class));
+        return new TestSuite(ConstructorUtilsTestCase.class);
     }
 
     /**
@@ -83,7 +83,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertEquals("TEST",((TestBean)obj).getStringProperty());
         }
         {
-            final Object obj = ConstructorUtils.invokeConstructor(TestBean.class,new Float(17.3f));
+            final Object obj = ConstructorUtils.invokeConstructor(TestBean.class,Float.valueOf(17.3f));
             assertNotNull(obj);
             assertTrue(obj instanceof TestBean);
             assertEquals(17.3f,((TestBean)obj).getFloatProperty(),0.0f);
@@ -97,7 +97,7 @@ public class ConstructorUtilsTestCase extends TestCase {
     }
 
     public void testInvokeConstructorWithArgArray() throws Exception {
-        final Object[] args = { new Float(17.3f), "TEST" };
+        final Object[] args = { Float.valueOf(17.3f), "TEST" };
         final Object obj = ConstructorUtils.invokeConstructor(TestBean.class,args);
         assertNotNull(obj);
         assertTrue(obj instanceof TestBean);
@@ -135,7 +135,7 @@ public class ConstructorUtilsTestCase extends TestCase {
         }
         {
             try {
-                ConstructorUtils.invokeExactConstructor(TestBean.class,new Float(17.3f));
+                ConstructorUtils.invokeExactConstructor(TestBean.class,Float.valueOf(17.3f));
                 fail("Expected NoSuchMethodException");
             } catch(final NoSuchMethodException e) {
                 // expected
@@ -157,7 +157,7 @@ public class ConstructorUtilsTestCase extends TestCase {
 
     public void testInvokeExactConstructorWithArgArray() throws Exception {
         {
-            final Object[] args = { new Float(17.3f), "TEST" };
+            final Object[] args = { Float.valueOf(17.3f), "TEST" };
             try {
                 ConstructorUtils.invokeExactConstructor(TestBean.class,args);
                 fail("Expected NoSuchMethodException");
@@ -195,7 +195,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertEquals("TEST",((TestBean)obj).getStringProperty());
         }
         {
-            final Object[] args = { new Float(17.3f), "TEST" };
+            final Object[] args = { Float.valueOf(17.3f), "TEST" };
             final Class<?>[] types = { Float.TYPE, String.class };
             final Object obj = ConstructorUtils.invokeExactConstructor(TestBean.class,args,types);
             assertNotNull(obj);
@@ -204,7 +204,7 @@ public class ConstructorUtilsTestCase extends TestCase {
             assertEquals("TEST",((TestBean)obj).getStringProperty());
         }
         {
-            final Object[] args = { new Float(17.3f), "TEST" };
+            final Object[] args = { Float.valueOf(17.3f), "TEST" };
             final Class<?>[] types = { Float.class, String.class };
             try {
                 ConstructorUtils.invokeExactConstructor(TestBean.class,args,types);
