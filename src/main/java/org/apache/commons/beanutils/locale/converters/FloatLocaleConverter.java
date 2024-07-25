@@ -217,10 +217,10 @@ public class FloatLocaleConverter extends DecimalLocaleConverter {
 protected Object parse(final Object value, final String pattern) throws ParseException {
       final Number parsed = (Number) super.parse(value, pattern);
       final double doubleValue = parsed.doubleValue();
-      final double posDouble = (doubleValue >= 0) ? doubleValue : (doubleValue * -1);
+      final double posDouble = doubleValue >= 0 ? doubleValue : doubleValue * -1;
       if (posDouble != 0 && (posDouble < Float.MIN_VALUE || posDouble > Float.MAX_VALUE)) {
           throw new ConversionException("Supplied number is not of type Float: "+parsed);
       }
-      return new Float(parsed.floatValue()); // unlike superclass it returns Float type
+      return Float.valueOf(parsed.floatValue()); // unlike superclass it returns Float type
    }
 }
