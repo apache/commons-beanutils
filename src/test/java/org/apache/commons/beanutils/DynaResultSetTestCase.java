@@ -92,7 +92,7 @@ public class DynaResultSetTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaResultSetTestCase.class));
+        return new TestSuite(DynaResultSetTestCase.class);
 
     }
 
@@ -135,7 +135,7 @@ public class DynaResultSetTestCase extends TestCase {
         // Negative test
         DynaProperty dynaProp = dynaClass.getDynaProperty("unknownProperty");
         assertTrue("unknown property returns null",
-                   (dynaProp == null));
+                   dynaProp == null);
 
         // Positive test
         dynaProp = dynaClass.getDynaProperty("stringproperty");
