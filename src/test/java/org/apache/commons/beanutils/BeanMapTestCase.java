@@ -69,6 +69,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
 
     public static class BeanWithProperties implements Serializable {
+        private static final long serialVersionUID = 1L;
         private int someInt;
         private long someLong;
         private double someDouble;
@@ -180,7 +181,7 @@ public class BeanMapTestCase extends AbstractTestMap {
     // all beans (and all objects for that matter.
     @Override
     public Object[] getSampleKeys() {
-        final Object[] keys = new Object[] {
+        return new Object[] {
             "someIntValue",
             "someLongValue",
             "someDoubleValue",
@@ -193,7 +194,6 @@ public class BeanMapTestCase extends AbstractTestMap {
             "someObjectValue",
             "class",
         };
-        return keys;
     }
 
     /**
@@ -207,38 +207,36 @@ public class BeanMapTestCase extends AbstractTestMap {
     // note to self: the sample values were created manually
     @Override
     public Object[] getSampleValues() {
-        final Object[] values = new Object[] {
-            new Integer(1234),
-            new Long(1298341928234L),
-            new Double(123423.34),
-            new Float(1213332.12f),
-            new Short((short)134),
-            new Byte((byte)10),
-            new Character('a'),
-            new Integer(1432),
+        return new Object[] {
+            Integer.valueOf(1234),
+            Long.valueOf(1298341928234L),
+            Double.valueOf(123423.34),
+            Float.valueOf(1213332.12f),
+            Short.valueOf((short)134),
+            Byte.valueOf((byte)10),
+            Character.valueOf('a'),
+            Integer.valueOf(1432),
             "SomeStringValue",
             objectInFullMap,
             BeanWithProperties.class,
         };
-        return values;
     }
 
     @Override
     public Object[] getNewSampleValues() {
-        final Object[] values = new Object[] {
-            new Integer(223),
-            new Long(23341928234L),
-            new Double(23423.34),
-            new Float(213332.12f),
-            new Short((short)234),
-            new Byte((byte)20),
-            new Character('b'),
-            new Integer(232),
+        return new Object[] {
+            Integer.valueOf(223),
+            Long.valueOf(23341928234L),
+            Double.valueOf(23423.34),
+            Float.valueOf(213332.12f),
+            Short.valueOf((short)234),
+            Byte.valueOf((byte)20),
+            Character.valueOf('b'),
+            Integer.valueOf(232),
             "SomeNewStringValue",
             new Object(),
             null,
         };
-        return values;
     }
 
     /**
@@ -282,7 +280,7 @@ public class BeanMapTestCase extends AbstractTestMap {
         bean.setSomeShortValue((short)134);
         bean.setSomeByteValue((byte)10);
         bean.setSomeCharValue('a');
-        bean.setSomeIntegerValue(new Integer(1432));
+        bean.setSomeIntegerValue(Integer.valueOf(1432));
         bean.setSomeStringValue("SomeStringValue");
         bean.setSomeObjectValue(objectInFullMap);
         return new BeanMap(bean);
@@ -341,7 +339,7 @@ public class BeanMapTestCase extends AbstractTestMap {
             // make sure containsKey is working to verify the bean was cloned
             // ok, and the read methods were properly initialized
             final Object[] keys = getSampleKeys();
-            for (Object key : keys) {
+            for (final Object key : keys) {
                 assertTrue("Cloned BeanMap should contain the same keys",
                            map2.containsKey(key));
             }
@@ -354,9 +352,9 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testBeanMapPutAllWriteable() {
         final BeanMap map1 = (BeanMap)makeFullMap();
         final BeanMap map2 = (BeanMap)makeFullMap();
-        map2.put("someIntValue", new Integer(0));
+        map2.put("someIntValue", Integer.valueOf(0));
         map1.putAllWriteable(map2);
-        assertEquals(map1.get("someIntValue"), new Integer(0));
+        assertEquals(map1.get("someIntValue"), Integer.valueOf(0));
     }
 
     public void testMethodAccessor() throws Exception {
@@ -367,7 +365,7 @@ public class BeanMapTestCase extends AbstractTestMap {
 
     public void testMethodMutator() throws Exception {
         final BeanMap map = (BeanMap) makeFullMap();
-        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", new Class[] {Integer.class});
+        final Method method = BeanWithProperties.class.getDeclaredMethod("setSomeIntegerValue", Integer.class);
         assertEquals(method, map.getWriteMethod("someIntegerValue"));
     }
 
@@ -377,13 +375,13 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testGetTypeTransformerMethod() {
         final BeanMap beanMap = new BeanMap();
         assertEquals("Boolean.TYPE",   Boolean.TRUE,        beanMap.getTypeTransformer(Boolean.TYPE).transform("true"));
-        assertEquals("Character.TYPE", new Character('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
-        assertEquals("Byte.TYPE",      new Byte((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
-        assertEquals("Short.TYPE",     new Short((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
-        assertEquals("Integer.TYPE",   new Integer(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
-        assertEquals("Long.TYPE",      new Long(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
-        assertEquals("Float.TYPE",     new Float("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
-        assertEquals("Double.TYPE",    new Double("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
+        assertEquals("Character.TYPE", Character.valueOf('B'),  beanMap.getTypeTransformer(Character.TYPE).transform("BCD"));
+        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   beanMap.getTypeTransformer(Byte.TYPE).transform("1"));
+        assertEquals("Short.TYPE",     Short.valueOf((short)2), beanMap.getTypeTransformer(Short.TYPE).transform("2"));
+        assertEquals("Integer.TYPE",   Integer.valueOf(3),      beanMap.getTypeTransformer(Integer.TYPE).transform("3"));
+        assertEquals("Long.TYPE",      Long.valueOf(4),         beanMap.getTypeTransformer(Long.TYPE).transform("4"));
+        assertEquals("Float.TYPE",     Float.valueOf("5"),      beanMap.getTypeTransformer(Float.TYPE).transform("5"));
+        assertEquals("Double.TYPE",    Double.valueOf("6"),     beanMap.getTypeTransformer(Double.TYPE).transform("6"));
     }
 
     /**
@@ -391,13 +389,13 @@ public class BeanMapTestCase extends AbstractTestMap {
      */
     public void testGetDefaultTransformersMap() {
         assertEquals("Boolean.TYPE",   Boolean.TRUE,        ((Transformer)BeanMap.defaultTransformers.get(Boolean.TYPE)).transform("true"));
-        assertEquals("Character.TYPE", new Character('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
-        assertEquals("Byte.TYPE",      new Byte((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
-        assertEquals("Short.TYPE",     new Short((short)2), ((Transformer)BeanMap.defaultTransformers.get(Short.TYPE)).transform("2"));
-        assertEquals("Integer.TYPE",   new Integer(3),      ((Transformer)BeanMap.defaultTransformers.get(Integer.TYPE)).transform("3"));
-        assertEquals("Long.TYPE",      new Long(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
-        assertEquals("Float.TYPE",     new Float("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
-        assertEquals("Double.TYPE",    new Double("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
+        assertEquals("Character.TYPE", Character.valueOf('B'),  ((Transformer)BeanMap.defaultTransformers.get(Character.TYPE)).transform("BCD"));
+        assertEquals("Byte.TYPE",      Byte.valueOf((byte)1),   ((Transformer)BeanMap.defaultTransformers.get(Byte.TYPE)).transform("1"));
+        assertEquals("Short.TYPE",     Short.valueOf((short)2), ((Transformer)BeanMap.defaultTransformers.get(Short.TYPE)).transform("2"));
+        assertEquals("Integer.TYPE",   Integer.valueOf(3),      ((Transformer)BeanMap.defaultTransformers.get(Integer.TYPE)).transform("3"));
+        assertEquals("Long.TYPE",      Long.valueOf(4),         ((Transformer)BeanMap.defaultTransformers.get(Long.TYPE)).transform("4"));
+        assertEquals("Float.TYPE",     Float.valueOf("5"),      ((Transformer)BeanMap.defaultTransformers.get(Float.TYPE)).transform("5"));
+        assertEquals("Double.TYPE",    Double.valueOf("6"),     ((Transformer)BeanMap.defaultTransformers.get(Double.TYPE)).transform("6"));
     }
 
     /**
@@ -406,8 +404,8 @@ public class BeanMapTestCase extends AbstractTestMap {
     public void testDefaultTransformersMap() {
         assertEquals("Size",     8, BeanMap.defaultTransformers.size());
         assertEquals("entrySet", 8, BeanMap.defaultTransformers.entrySet().size());
-        assertEquals("keySet",   8, BeanMap.defaultTransformers.keySet().size());
-        assertEquals("values",   8, BeanMap.defaultTransformers.values().size());
+        assertEquals("keySet",   8, BeanMap.defaultTransformers.size());
+        assertEquals("values",   8, BeanMap.defaultTransformers.size());
         assertFalse("isEmpty",      BeanMap.defaultTransformers.isEmpty());
         assertTrue("containsKey(Double)",    BeanMap.defaultTransformers.containsKey(Double.TYPE));
         assertFalse("containsKey(Object)",   BeanMap.defaultTransformers.containsKey(Object.class));
@@ -427,7 +425,7 @@ public class BeanMapTestCase extends AbstractTestMap {
             // expected result
         }
         try {
-            BeanMap.defaultTransformers.putAll(new HashMap<Object, Object>());
+            BeanMap.defaultTransformers.putAll(new HashMap<>());
             fail("putAll() - expected UnsupportedOperationException");
         } catch(final UnsupportedOperationException e) {
             // expected result
