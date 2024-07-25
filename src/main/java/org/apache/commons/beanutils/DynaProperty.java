@@ -44,6 +44,7 @@ public class DynaProperty implements Serializable {
 
     // ----------------------------------------------------------- Constants
 
+    private static final long serialVersionUID = 1L;
     /*
      * There are issues with serializing primitive class types on certain JVM versions
      * (including java 1.3).
@@ -85,7 +86,6 @@ public class DynaProperty implements Serializable {
      */
     public DynaProperty(final String name, final Class<?> type) {
 
-        super();
         this.name = name;
         this.type = type;
         if (type != null && type.isArray()) {
@@ -104,7 +104,6 @@ public class DynaProperty implements Serializable {
      */
     public DynaProperty(final String name, final Class<?> type, final Class<?> contentType) {
 
-        super();
         this.name = name;
         this.type = type;
         this.contentType = contentType;
@@ -120,7 +119,7 @@ public class DynaProperty implements Serializable {
      * @return the name of the property
      */
     public String getName() {
-        return (this.name);
+        return this.name;
     }
 
     /** Property type */
@@ -138,7 +137,7 @@ public class DynaProperty implements Serializable {
      * @return the property type
      */
     public Class<?> getType() {
-        return (this.type);
+        return this.type;
     }
 
 
@@ -171,13 +170,12 @@ public class DynaProperty implements Serializable {
     public boolean isIndexed() {
 
         if (type == null) {
-            return (false);
-        } else if (type.isArray()) {
-            return (true);
-        } else if (List.class.isAssignableFrom(type)) {
-            return (true);
+            return false;
+        }
+        if (type.isArray() || List.class.isAssignableFrom(type)) {
+            return true;
         } else {
-            return (false);
+            return false;
         }
 
     }
@@ -192,10 +190,9 @@ public class DynaProperty implements Serializable {
     public boolean isMapped() {
 
         if (type == null) {
-            return (false);
-        } else {
-            return (Map.class.isAssignableFrom(type));
+            return false;
         }
+        return Map.class.isAssignableFrom(type);
 
     }
 
@@ -212,14 +209,14 @@ public class DynaProperty implements Serializable {
 
         boolean result = false;
 
-        result = (obj == this);
+        result = obj == this;
 
-        if ((!result) && obj instanceof DynaProperty) {
+        if (!result && obj instanceof DynaProperty) {
             final DynaProperty that = (DynaProperty) obj;
             result =
-               ((this.name == null) ? (that.name == null) : (this.name.equals(that.name))) &&
-               ((this.type == null) ? (that.type == null) : (this.type.equals(that.type))) &&
-               ((this.contentType == null) ? (that.contentType == null) : (this.contentType.equals(that.contentType)));
+               (this.name == null ? that.name == null : this.name.equals(that.name)) &&
+               (this.type == null ? that.type == null : this.type.equals(that.type)) &&
+               (this.contentType == null ? that.contentType == null : this.contentType.equals(that.contentType));
         }
 
         return result;
@@ -235,11 +232,9 @@ public class DynaProperty implements Serializable {
 
        int result = 1;
 
-       result = result * 31 + ((name == null) ? 0 : name.hashCode());
-       result = result * 31 + ((type == null) ? 0 : type.hashCode());
-       result = result * 31 + ((contentType == null) ? 0 : contentType.hashCode());
-
-       return result;
+       result = result * 31 + (name == null ? 0 : name.hashCode());
+       result = result * 31 + (type == null ? 0 : type.hashCode());
+       return result * 31 + (contentType == null ? 0 : contentType.hashCode());
     }
 
     /**
@@ -257,7 +252,7 @@ public class DynaProperty implements Serializable {
             sb.append(" <").append(this.contentType).append(">");
         }
         sb.append("]");
-        return (sb.toString());
+        return sb.toString();
 
     }
 
@@ -342,29 +337,27 @@ public class DynaProperty implements Serializable {
      */
     private Class<?> readAnyClass(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         // read back type class safely
-        if (in.readBoolean()) {
-            // it's a type constant
-            switch (in.readInt()) {
-
-                case BOOLEAN_TYPE: return   Boolean.TYPE;
-                case BYTE_TYPE:    return      Byte.TYPE;
-                case CHAR_TYPE:    return Character.TYPE;
-                case DOUBLE_TYPE:  return    Double.TYPE;
-                case FLOAT_TYPE:   return     Float.TYPE;
-                case INT_TYPE:     return   Integer.TYPE;
-                case LONG_TYPE:    return      Long.TYPE;
-                case SHORT_TYPE:   return     Short.TYPE;
-                default:
-                    // something's gone wrong
-                    throw new StreamCorruptedException(
-                        "Invalid primitive type. "
-                        + "Check version of beanutils used to serialize is compatible.");
-
-            }
-
-        } else {
+        if (!in.readBoolean()) {
             // it's another class
-            return ((Class<?>) in.readObject());
+            return (Class<?>) in.readObject();
+        }
+        // it's a type constant
+        switch (in.readInt()) {
+
+            case BOOLEAN_TYPE: return   Boolean.TYPE;
+            case BYTE_TYPE:    return      Byte.TYPE;
+            case CHAR_TYPE:    return Character.TYPE;
+            case DOUBLE_TYPE:  return    Double.TYPE;
+            case FLOAT_TYPE:   return     Float.TYPE;
+            case INT_TYPE:     return   Integer.TYPE;
+            case LONG_TYPE:    return      Long.TYPE;
+            case SHORT_TYPE:   return     Short.TYPE;
+            default:
+                // something's gone wrong
+                throw new StreamCorruptedException(
+                    "Invalid primitive type. "
+                    + "Check version of beanutils used to serialize is compatible.");
+
         }
     }
 }
