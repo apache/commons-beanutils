@@ -41,9 +41,9 @@ public class ConstructorUtils {
 
     // --------------------------------------------------------- Private Members
     /** An empty class array */
-    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class<?>[0];
+    private static final Class<?>[] EMPTY_CLASS_PARAMETERS = {};
     /** An empty object array */
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
     // --------------------------------------------------------- Public Methods
 
@@ -305,7 +305,7 @@ public class ConstructorUtils {
             return getAccessibleConstructor(
                 klass.getConstructor(parameterTypes));
         } catch (final NoSuchMethodException e) {
-            return (null);
+            return null;
         }
     }
 
@@ -320,18 +320,18 @@ public class ConstructorUtils {
 
         // Make sure we have a method to check
         if (ctor == null) {
-            return (null);
+            return null;
         }
 
         // If the requested method is not public we cannot call it
         if (!Modifier.isPublic(ctor.getModifiers())) {
-            return (null);
+            return null;
         }
 
         // If the declaring class is public, we are done
         final Class<T> clazz = ctor.getDeclaringClass();
         if (Modifier.isPublic(clazz.getModifiers())) {
-            return (ctor);
+            return ctor;
         }
 
         // what else can we do?
@@ -399,7 +399,7 @@ public class ConstructorUtils {
         // search through all methods
         final int paramSize = parameterTypes.length;
         final Constructor<?>[] ctors = clazz.getConstructors();
-        for (Constructor<?> ctor2 : ctors) {
+        for (final Constructor<?> ctor2 : ctors) {
             // compare parameters
             final Class<?>[] ctorParams = ctor2.getParameterTypes();
             final int ctorParamSize = ctorParams.length;
