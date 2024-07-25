@@ -166,14 +166,13 @@ public abstract class AbstractConverter implements Converter {
                 return targetType.cast(value);
 
             // Convert --> Type
-            } else {
-                final Object result = convertToType(targetType, value);
-                if (log().isDebugEnabled()) {
-                    log().debug("    Converted to " + toString(targetType) +
-                                   " value '" + result + "'");
-                }
-                return targetType.cast(result);
             }
+            final Object result = convertToType(targetType, value);
+            if (log().isDebugEnabled()) {
+                log().debug("    Converted to " + toString(targetType) +
+                               " value '" + result + "'");
+            }
+            return targetType.cast(result);
         } catch (final Throwable t) {
             return handleError(targetType, value, t);
         }
@@ -453,10 +452,7 @@ public abstract class AbstractConverter implements Converter {
      * @return the converted value
      */
     private <T> T convertToDefaultType(final Class<T> targetClass, final Object value) {
-        @SuppressWarnings("unchecked")
-        final
-        T result = (T) convert(getDefaultType(), value);
-        return result;
+        return (T) convert(getDefaultType(), value);
     }
 
     /**
