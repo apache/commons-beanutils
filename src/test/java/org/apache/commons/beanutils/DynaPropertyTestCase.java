@@ -50,7 +50,7 @@ public class DynaPropertyTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaPropertyTestCase.class));
+        return new TestSuite(DynaPropertyTestCase.class);
 
     }
 
