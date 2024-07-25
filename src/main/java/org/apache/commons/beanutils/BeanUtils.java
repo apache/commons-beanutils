@@ -63,7 +63,7 @@ public class BeanUtils {
      */
     @Deprecated
     public static int getDebug() {
-        return (debug);
+        return debug;
     }
 
     /**
@@ -473,7 +473,7 @@ public class BeanUtils {
      * @since 1.8.0
      */
     public static <K, V> Map<K, V> createCache() {
-        return new WeakFastHashMap<K, V>();
+        return new WeakFastHashMap<>();
     }
 
     /**
@@ -485,9 +485,8 @@ public class BeanUtils {
     public static boolean getCacheFast(final Map<?, ?> map) {
         if (map instanceof WeakFastHashMap) {
             return ((WeakFastHashMap<?, ?>) map).getFast();
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
