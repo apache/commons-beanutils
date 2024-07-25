@@ -105,14 +105,14 @@ public class BeanUtilsBenchCase extends TestCase {
 
         // Create input instances
         inBean = new BenchBean();
-        inMap = new HashMap<String, Object>();
-        inMap.put("booleanProperty", new Boolean(inBean.getBooleanProperty()));
-        inMap.put("byteProperty", new Byte(inBean.getByteProperty()));
-        inMap.put("doubleProperty", new Double(inBean.getDoubleProperty()));
-        inMap.put("floatProperty", new Float(inBean.getFloatProperty()));
-        inMap.put("intProperty", new Integer(inBean.getIntProperty()));
-        inMap.put("longProperty", new Long(inBean.getLongProperty()));
-        inMap.put("shortProperty", new Short(inBean.getShortProperty()));
+        inMap = new HashMap<>();
+        inMap.put("booleanProperty", Boolean.valueOf(inBean.getBooleanProperty()));
+        inMap.put("byteProperty", Byte.valueOf(inBean.getByteProperty()));
+        inMap.put("doubleProperty", Double.valueOf(inBean.getDoubleProperty()));
+        inMap.put("floatProperty", Float.valueOf(inBean.getFloatProperty()));
+        inMap.put("intProperty", Integer.valueOf(inBean.getIntProperty()));
+        inMap.put("longProperty", Long.valueOf(inBean.getLongProperty()));
+        inMap.put("shortProperty", Short.valueOf(inBean.getShortProperty()));
         inMap.put("stringProperty", inBean.getStringProperty());
         inDyna = dynaClass.newInstance();
         Iterator<String> inKeys = inMap.keySet().iterator();
@@ -120,7 +120,7 @@ public class BeanUtilsBenchCase extends TestCase {
             final String inKey = inKeys.next();
             inDyna.set(inKey, inMap.get(inKey));
         }
-        inStrs = new HashMap<String, String>();
+        inStrs = new HashMap<>();
         inKeys = inMap.keySet().iterator();
         while (inKeys.hasNext()) {
             final String inKey = inKeys.next();
@@ -130,9 +130,7 @@ public class BeanUtilsBenchCase extends TestCase {
         // Create output instances
         outBean = new BenchBean();
         outDyna = dynaClass.newInstance();
-        final Iterator<String> outKeys = inMap.keySet().iterator();
-        while (outKeys.hasNext()) {
-            final String outKey = outKeys.next();
+        for (String outKey : inMap.keySet()) {
             outDyna.set(outKey, inMap.get(outKey));
         }
 
@@ -147,7 +145,7 @@ public class BeanUtilsBenchCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(BeanUtilsBenchCase.class));
+        return new TestSuite(BeanUtilsBenchCase.class);
 
     }
 
