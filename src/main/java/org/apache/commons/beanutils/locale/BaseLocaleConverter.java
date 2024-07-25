@@ -196,6 +196,7 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public <T> T convert(final Class<T> type, final Object value) {
         return convert(type, value, null);
     }
@@ -215,34 +216,32 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
      * @throws ConversionException if conversion cannot be performed
      *  successfully
      */
+    @Override
     public <T> T convert(final Class<T> type, final Object value, final String pattern) {
         final Class<T> targetType = ConvertUtils.primitiveToWrapper(type);
         if (value == null) {
             if (useDefault) {
                 return getDefaultAs(targetType);
-            } else {
-                // symmetric beanutils function allows null
-                // so do not: throw new ConversionException("No value specified");
-                log.debug("Null value specified for conversion, returing null");
-                return null;
             }
+            // symmetric beanutils function allows null
+            // so do not: throw new ConversionException("No value specified");
+            log.debug("Null value specified for conversion, returing null");
+            return null;
         }
 
         try {
             if (pattern != null) {
                 return checkConversionResult(targetType, parse(value, pattern));
-            } else {
-                return checkConversionResult(targetType, parse(value, this.pattern));
             }
+            return checkConversionResult(targetType, parse(value, this.pattern));
         } catch (final Exception e) {
             if (useDefault) {
                 return getDefaultAs(targetType);
-            } else {
-                if (e instanceof ConversionException) {
-                    throw (ConversionException)e;
-                }
-                throw new ConversionException(e);
             }
+            if (e instanceof ConversionException) {
+                throw (ConversionException)e;
+            }
+            throw new ConversionException(e);
         }
     }
 
