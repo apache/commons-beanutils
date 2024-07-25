@@ -34,11 +34,11 @@ import org.apache.commons.beanutils.ConvertUtils;
  */
 public class BooleanArrayConverterTestCase extends TestCase {
 
-    public static final String[] STANDARD_TRUES = new String[] {
+    public static final String[] STANDARD_TRUES = {
             "yes", "y", "true", "on", "1"
         };
 
-    public static final String[] STANDARD_FALSES = new String[] {
+    public static final String[] STANDARD_FALSES = {
             "no", "n", "false", "off", "0"
         };
 
@@ -263,7 +263,7 @@ public class BooleanArrayConverterTestCase extends TestCase {
             bc, BooleanArrayConverter.NO_DEFAULT);
 
         ConvertUtils.register(converter, BooleanArrayConverter.MODEL);
-        final boolean[] sample = new boolean[0];
+        final boolean[] sample = {};
         final boolean[] results = (boolean[]) ConvertUtils.convert("sure,nope", sample.getClass());
 
         assertEquals(2, results.length);
