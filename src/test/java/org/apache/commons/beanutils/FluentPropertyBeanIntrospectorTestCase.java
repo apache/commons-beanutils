@@ -38,7 +38,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
      */
     private static Map<String, PropertyDescriptor> createDescriptorMap(
             final PropertyDescriptor[] descs) {
-        final Map<String, PropertyDescriptor> map = new HashMap<String, PropertyDescriptor>();
+        final Map<String, PropertyDescriptor> map = new HashMap<>();
         for (final PropertyDescriptor pd : descs) {
             map.put(pd.getName(), pd);
         }
@@ -104,7 +104,7 @@ public class FluentPropertyBeanIntrospectorTestCase extends TestCase {
 	    final Map<String, PropertyDescriptor> props = createDescriptorMap(
 			pu.getPropertyDescriptors(CapsBean.class));
 
-	    PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
+	    final PropertyDescriptor aDescriptor = fetchDescriptor(props, "URI");
 
 	    assertNotNull("missing property", aDescriptor);
 
