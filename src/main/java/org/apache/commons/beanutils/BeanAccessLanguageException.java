@@ -29,11 +29,12 @@ public class BeanAccessLanguageException extends IllegalArgumentException {
 
     // --------------------------------------------------------- Constuctors
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a <code>BeanAccessLanguageException</code> without a detail message.
      */
     public BeanAccessLanguageException() {
-        super();
     }
 
     /**
