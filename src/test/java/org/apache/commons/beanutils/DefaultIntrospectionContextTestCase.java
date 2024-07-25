@@ -93,7 +93,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
     public void testAddPropertyDescriptors() {
         final int count = 4;
         final PropertyDescriptor[] descs = new PropertyDescriptor[count];
-        final Set<PropertyDescriptor> descSet = new HashSet<PropertyDescriptor>();
+        final Set<PropertyDescriptor> descSet = new HashSet<>();
         for (int i = 0; i < count; i++) {
             descs[i] = createDescriptor(PROP + i);
             descSet.add(descs[i]);
@@ -106,7 +106,7 @@ public class DefaultIntrospectionContextTestCase extends TestCase {
         assertEquals("Wrong number of property names", count + 1, names.size());
         assertTrue("Property not found: " + PROP, names.contains(PROP));
         for (int i = 0; i < count; i++) {
-            assertTrue("Property not found: " + (PROP + i),
+            assertTrue("Property not found: " + PROP + i,
                     names.contains(PROP + i));
         }
         final PropertyDescriptor[] addedDescs = context.getPropertyDescriptors();
