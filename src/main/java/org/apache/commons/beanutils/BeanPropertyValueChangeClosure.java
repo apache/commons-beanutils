@@ -86,13 +86,13 @@ public class BeanPropertyValueChangeClosure implements Closure {
     /**
      * The name of the property which will be updated when this <code>Closure</code> executes.
      */
-    private String propertyName;
+    private final String propertyName;
 
     /**
      * The value that the property specified by <code>propertyName</code>
      * will be updated to when this <code>Closure</code> executes.
      */
-    private Object propertyValue;
+    private final Object propertyValue;
 
     /**
      * Determines whether <code>null</code> objects in the property path will genenerate an
@@ -104,7 +104,7 @@ public class BeanPropertyValueChangeClosure implements Closure {
      * <code>IllegalArgumentException</code> throw by <code>PropertyUtils</code> will be logged and
      * rethrown.
      */
-    private boolean ignoreNull;
+    private final boolean ignoreNull;
 
     /**
      * Constructor which takes the name of the property to be changed, the new value to set
