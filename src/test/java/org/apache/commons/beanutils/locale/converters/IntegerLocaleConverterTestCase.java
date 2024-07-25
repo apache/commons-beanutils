@@ -43,8 +43,8 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
 
         super.setUp();
 
-        defaultValue  = new Integer("999");
-        expectedValue = new Integer(expectedIntegerValue);
+        defaultValue  = Integer.valueOf("999");
+        expectedValue = Integer.valueOf(expectedIntegerValue);
 
     }
 
@@ -83,7 +83,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // quite happily turning "1,234" into "1"
         // I guess this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueNoPattern(converter, "(B)", defaultIntegerValue, new Integer("1"));
+        convertValueNoPattern(converter, "(B)", defaultIntegerValue, Integer.valueOf("1"));
 
 
         // **************************************************************************
@@ -92,7 +92,7 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // quite happily turning "1,234" into "1"
         // Again this is one of the limitations of DecimalFormat
         // **************************************************************************
-        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, new Integer("1"));
+        convertValueWithPattern(converter, "(B)", localizedIntegerValue, defaultIntegerPattern, Integer.valueOf("1"));
 
 
         // **************************************************************************
@@ -266,9 +266,9 @@ public class IntegerLocaleConverterTestCase extends BaseLocaleConverterTestCase 
         // ------------- Construct using specified Locale --------
         converter = new IntegerLocaleConverter(localizedLocale);
 
-        final Integer value = new Integer(1234);
+        final Integer value = Integer.valueOf(1234);
         assertEquals("Convert Integer", value, converter.convert(value));
-        assertEquals("Convert Long",    value, converter.convert(new Long(value.intValue())));
+        assertEquals("Convert Long",    value, converter.convert(Long.valueOf(value.intValue())));
     }
 
     /**
