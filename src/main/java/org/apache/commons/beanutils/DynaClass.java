@@ -36,7 +36,7 @@ public interface DynaClass {
      *
      * @return the name of the DynaClass
      */
-    public String getName();
+    String getName();
 
 
     /**
@@ -49,7 +49,7 @@ public interface DynaClass {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
-    public DynaProperty getDynaProperty(String name);
+    DynaProperty getDynaProperty(String name);
 
 
     /**
@@ -63,7 +63,7 @@ public interface DynaClass {
      *
      * @return the set of properties for this DynaClass
      */
-    public DynaProperty[] getDynaProperties();
+    DynaProperty[] getDynaProperties();
 
 
     /**
@@ -78,7 +78,7 @@ public interface DynaClass {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
-    public DynaBean newInstance()
+    DynaBean newInstance()
             throws IllegalAccessException, InstantiationException;
 
 
