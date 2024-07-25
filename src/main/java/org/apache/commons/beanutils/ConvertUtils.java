@@ -41,7 +41,7 @@ public class ConvertUtils {
      */
     @Deprecated
     public static boolean getDefaultBoolean() {
-        return (ConvertUtilsBean.getInstance().getDefaultBoolean());
+        return ConvertUtilsBean.getInstance().getDefaultBoolean();
     }
 
     /**
@@ -179,7 +179,7 @@ public class ConvertUtils {
      */
     @Deprecated
     public static long getDefaultLong() {
-        return (ConvertUtilsBean.getInstance().getDefaultLong());
+        return ConvertUtilsBean.getInstance().getDefaultLong();
     }
 
     /**
@@ -369,25 +369,30 @@ public class ConvertUtils {
         if (type == null || !type.isPrimitive()) {
             return type;
         }
-
         if (type == Integer.TYPE) {
             return (Class<T>) Integer.class;
-        } else if (type == Double.TYPE) {
-            return (Class<T>) Double.class;
-        } else if (type == Long.TYPE) {
-            return (Class<T>) Long.class;
-        } else if (type == Boolean.TYPE) {
-            return (Class<T>) Boolean.class;
-        } else if (type == Float.TYPE) {
-            return (Class<T>) Float.class;
-        } else if (type == Short.TYPE) {
-            return (Class<T>) Short.class;
-        } else if (type == Byte.TYPE) {
-            return (Class<T>) Byte.class;
-        } else if (type == Character.TYPE) {
-            return (Class<T>) Character.class;
-        } else {
-            return type;
         }
+        if (type == Double.TYPE) {
+            return (Class<T>) Double.class;
+        }
+        if (type == Long.TYPE) {
+            return (Class<T>) Long.class;
+        }
+        if (type == Boolean.TYPE) {
+            return (Class<T>) Boolean.class;
+        }
+        if (type == Float.TYPE) {
+            return (Class<T>) Float.class;
+        }
+        if (type == Short.TYPE) {
+            return (Class<T>) Short.class;
+        }
+        if (type == Byte.TYPE) {
+            return (Class<T>) Byte.class;
+        }
+        if (type == Character.TYPE) {
+            return (Class<T>) Character.class;
+        }
+        return type;
     }
 }
