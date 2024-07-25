@@ -100,12 +100,12 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
             "0.0",
             "1.1",
             "17.2",
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float("11.1"),
-            new Double("12.2"),
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
+            Integer.valueOf(9),
+            Long.valueOf(10),
+            Float.valueOf("11.1"),
+            Double.valueOf("12.2"),
             new BigDecimal("3200.11"),
             new ExtendingBigDecimal("3200.11")
         };
@@ -142,7 +142,9 @@ public class BigDecimalConverterTestCase extends NumberConverterTestBase {
      * A class derived from {@code BigDecimal} used for testing whether
      * derived number classes are handled correctly.
      */
-    private class ExtendingBigDecimal extends BigDecimal {
+    private static class ExtendingBigDecimal extends BigDecimal {
+        private static final long serialVersionUID = 1L;
+
         private ExtendingBigDecimal(final String val) {
             super(val);
         }
