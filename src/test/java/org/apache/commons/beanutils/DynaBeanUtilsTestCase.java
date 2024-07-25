@@ -21,7 +21,6 @@ package org.apache.commons.beanutils;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -112,42 +111,42 @@ public class DynaBeanUtilsTestCase extends TestCase {
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
-        bean.set("booleanProperty", new Boolean(true));
-        bean.set("booleanSecond", new Boolean(true));
-        bean.set("byteProperty", new Byte((byte) 121));
-        bean.set("doubleProperty", new Double(321.0));
-        bean.set("floatProperty", new Float((float) 123.0));
+        bean.set("booleanProperty", Boolean.valueOf(true));
+        bean.set("booleanSecond", Boolean.valueOf(true));
+        bean.set("byteProperty", Byte.valueOf((byte) 121));
+        bean.set("doubleProperty", Double.valueOf(321.0));
+        bean.set("floatProperty", Float.valueOf((float) 123.0));
         final String dupProperty[] = { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4"};
         bean.set("dupProperty", dupProperty);
         final int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
         final int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
-        bean.set("intProperty", new Integer(123));
-        final List<String> listIndexed = new ArrayList<String>();
+        bean.set("intProperty", Integer.valueOf(123));
+        final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
         listIndexed.add("String 3");
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
-        bean.set("longProperty", new Long(321));
-        final HashMap<String, Object> mapProperty = new HashMap<String, Object>();
+        bean.set("longProperty", Long.valueOf(321));
+        final HashMap<String, Object> mapProperty = new HashMap<>();
         mapProperty.put("First Key", "First Value");
         mapProperty.put("Second Key", "Second Value");
         bean.set("mapProperty", mapProperty);
-        final HashMap<String, Object> mappedProperty = new HashMap<String, Object>();
+        final HashMap<String, Object> mappedProperty = new HashMap<>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        final HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
-        mappedIntProperty.put("One", new Integer(1));
-        mappedIntProperty.put("Two", new Integer(2));
+        final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
+        mappedIntProperty.put("One", Integer.valueOf(1));
+        mappedIntProperty.put("Two", Integer.valueOf(2));
         bean.set("mappedIntProperty", mappedIntProperty);
         nested = new TestBean();
         bean.set("nested", nested);
         // Property "nullProperty" is not initialized, so it should return null
-        bean.set("shortProperty", new Short((short) 987));
+        bean.set("shortProperty", Short.valueOf((short) 987));
         final String stringArray[] =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
@@ -164,7 +163,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(DynaBeanUtilsTestCase.class));
+        return new TestSuite(DynaBeanUtilsTestCase.class);
 
     }
 
@@ -198,13 +197,13 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("newInstance(): " + e);
         }
         orig.set("booleanProperty", Boolean.FALSE);
-        orig.set("byteProperty", new Byte((byte)111));
-        orig.set("doubleProperty", new Double(333.33));
+        orig.set("byteProperty", Byte.valueOf((byte)111));
+        orig.set("doubleProperty", Double.valueOf(333.33));
         orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
-        orig.set("intProperty", new Integer(333));
-        orig.set("longProperty", new Long(3333));
-        orig.set("shortProperty", new Short((short) 33));
+        orig.set("intProperty", Integer.valueOf(333));
+        orig.set("longProperty", Long.valueOf(3333));
+        orig.set("shortProperty", Short.valueOf((short) 33));
         orig.set("stringArray", new String[] { "New 0", "New 1" });
         orig.set("stringProperty", "Custom string");
 
@@ -275,13 +274,13 @@ public class DynaBeanUtilsTestCase extends TestCase {
             fail("newInstance(): " + e);
         }
         orig.set("booleanProperty", Boolean.FALSE);
-        orig.set("byteProperty", new Byte((byte)111));
-        orig.set("doubleProperty", new Double(333.33));
+        orig.set("byteProperty", Byte.valueOf((byte)111));
+        orig.set("doubleProperty", Double.valueOf(333.33));
         orig.set("dupProperty", new String[] { "New 0", "New 1", "New 2" });
         orig.set("intArray", new int[] { 100, 200, 300 });
-        orig.set("intProperty", new Integer(333));
-        orig.set("longProperty", new Long(3333));
-        orig.set("shortProperty", new Short((short) 33));
+        orig.set("intProperty", Integer.valueOf(333));
+        orig.set("longProperty", Long.valueOf(3333));
+        orig.set("shortProperty", Short.valueOf((short) 33));
         orig.set("stringArray", new String[] { "New 0", "New 1" });
         orig.set("stringProperty", "Custom string");
 
@@ -343,7 +342,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertiesMap() {
 
-        final Map<String, Object> map = new HashMap<String, Object>();
+        final Map<String, Object> map = new HashMap<>();
         map.put("booleanProperty", "false");
         map.put("byteProperty", "111");
         map.put("doubleProperty", "333.0");
@@ -482,7 +481,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
         }
 
         // Verify existence of all the properties that should be present
-        for (String describe : describes) {
+        for (final String describe : describes) {
             assertTrue("Property '" + describe + "' is present",
                        map.containsKey(describe));
         }
@@ -494,22 +493,22 @@ public class DynaBeanUtilsTestCase extends TestCase {
                      Boolean.TRUE,
                      map.get("booleanProperty"));
         assertEquals("Value of 'byteProperty'",
-                     new Byte((byte) 121),
+                     Byte.valueOf((byte) 121),
                      map.get("byteProperty"));
         assertEquals("Value of 'doubleProperty'",
-                     new Double(321.0),
+                     Double.valueOf(321.0),
                      map.get("doubleProperty"));
         assertEquals("Value of 'floatProperty'",
-                     new Float((float) 123.0),
+                     Float.valueOf((float) 123.0),
                      map.get("floatProperty"));
         assertEquals("Value of 'intProperty'",
-                     new Integer(123),
+                     Integer.valueOf(123),
                      map.get("intProperty"));
         assertEquals("Value of 'longProperty'",
-                     new Long(321),
+                     Long.valueOf(321),
                      map.get("longProperty"));
         assertEquals("Value of 'shortProperty'",
-                     new Short((short) 987),
+                     Short.valueOf((short) 987),
                      map.get("shortProperty"));
         assertEquals("Value of 'stringProperty'",
                      "This is a string",
@@ -525,12 +524,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             //            int intArray[] = new int[] { 123, 456, 789 };
-            final String intArrayIn[] = new String[] { "123", "456", "789" };
+            final String intArrayIn[] = { "123", "456", "789" };
             map.put("intArray", intArrayIn);
-            String stringArray[] = new String[]
-                { "New String 0", "New String 1" };
+            String stringArray[] = { "New String 0", "New String 1" };
             map.put("stringArray", stringArray);
 
             BeanUtils.populate(bean, map);
@@ -566,13 +564,13 @@ public class DynaBeanUtilsTestCase extends TestCase {
             final String comp[] = (String[]) bean.get("stringArray");
 
             assertTrue("String array length = " + comp.length,
-                    (comp.length == arr.length));
+                    comp.length == arr.length);
 
             arr = BeanUtils.getArrayProperty(bean, "intArray");
             final int iarr[] = (int[]) bean.get("intArray");
 
             assertTrue("String array length = " + iarr.length,
-                    (iarr.length == arr.length));
+                    iarr.length == arr.length);
         } catch (final IllegalAccessException e) {
             fail("IllegalAccessException");
         } catch (final InvocationTargetException e) {
@@ -697,7 +695,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("intIndexed[0]", "100");
             map.put("intIndexed[2]", "120");
             map.put("intIndexed[4]", "140");
@@ -757,7 +755,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("mappedProperty(First Key)", "New First Value");
             map.put("mappedProperty(Third Key)", "New Third Value");
 
@@ -791,7 +789,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
         try {
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("nested.booleanProperty", "false");
             // booleanSecond is left at true
             map.put("nested.doubleProperty", "432.0");
@@ -844,7 +842,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
             bean.set("nullProperty", "non-null value");
 
-            final HashMap<String, Object> map = new HashMap<String, Object>();
+            final HashMap<String, Object> map = new HashMap<>();
             map.put("booleanProperty", "false");
             // booleanSecond is left at true
             map.put("doubleProperty", "432.0");
@@ -936,9 +934,9 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testSetPropertyOnPrimitiveWrappers() throws Exception {
 
-        BeanUtils.setProperty(bean,"intProperty", new Integer(1));
+        BeanUtils.setProperty(bean,"intProperty", Integer.valueOf(1));
         assertEquals(1,((Integer) bean.get("intProperty")).intValue());
-        BeanUtils.setProperty(bean,"stringProperty", new Integer(1));
+        BeanUtils.setProperty(bean,"stringProperty", Integer.valueOf(1));
         assertEquals(1, Integer.parseInt((String) bean.get("stringProperty")));
 
     }
@@ -961,7 +959,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyByte() throws Exception {
 
-        BeanUtils.setProperty(bean, "byteProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "byteProperty", Byte.valueOf((byte) 123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
 /*
         BeanUtils.setProperty(bean, "byteProperty", new Double((double) 123));
@@ -969,11 +967,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "byteProperty", new Float((float) 123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
 */
-        BeanUtils.setProperty(bean, "byteProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "byteProperty", Integer.valueOf(123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
-        BeanUtils.setProperty(bean, "byteProperty", new Long(123));
+        BeanUtils.setProperty(bean, "byteProperty", Long.valueOf(123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
-        BeanUtils.setProperty(bean, "byteProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "byteProperty", Short.valueOf((short) 123));
         assertEquals((byte) 123, ((Byte) bean.get("byteProperty")).byteValue());
 
     }
@@ -984,17 +982,17 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyDouble() throws Exception {
 
-        BeanUtils.setProperty(bean, "doubleProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "doubleProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Double(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Double.valueOf(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Float(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Float.valueOf(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Integer.valueOf(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Long(123));
+        BeanUtils.setProperty(bean, "doubleProperty", Long.valueOf(123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
-        BeanUtils.setProperty(bean, "doubleProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "doubleProperty", Short.valueOf((short) 123));
         assertEquals(123, ((Double) bean.get("doubleProperty")).doubleValue(), 0.005);
 
     }
@@ -1005,17 +1003,17 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyFloat() throws Exception {
 
-        BeanUtils.setProperty(bean, "floatProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "floatProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Double(123));
+        BeanUtils.setProperty(bean, "floatProperty", Double.valueOf(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Float(123));
+        BeanUtils.setProperty(bean, "floatProperty", Float.valueOf(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "floatProperty", Integer.valueOf(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Long(123));
+        BeanUtils.setProperty(bean, "floatProperty", Long.valueOf(123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
-        BeanUtils.setProperty(bean, "floatProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "floatProperty", Short.valueOf((short) 123));
         assertEquals(123, ((Float) bean.get("floatProperty")).floatValue(), 0.005);
 
     }
@@ -1026,7 +1024,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyInteger() throws Exception {
 
-        BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "longProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Integer) bean.get("intProperty")).intValue());
 /*
         BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
@@ -1034,11 +1032,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
         assertEquals((int) 123, ((Integer) bean.get("intProperty")).intValue());
 */
-        BeanUtils.setProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, ((Integer) bean.get("intProperty")).intValue());
-        BeanUtils.setProperty(bean, "longProperty", new Long(123));
+        BeanUtils.setProperty(bean, "longProperty", Long.valueOf(123));
         assertEquals(123, ((Integer) bean.get("intProperty")).intValue());
-        BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "longProperty", Short.valueOf((short) 123));
         assertEquals(123, ((Integer) bean.get("intProperty")).intValue());
 
     }
@@ -1049,7 +1047,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyLong() throws Exception {
 
-        BeanUtils.setProperty(bean, "longProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "longProperty", Byte.valueOf((byte) 123));
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
 /*
         BeanUtils.setProperty(bean, "longProperty", new Double((double) 123));
@@ -1057,11 +1055,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "longProperty", new Float((float) 123));
         assertEquals((long) 123, ((Long) bean.get("longProperty")).longValue());
 */
-        BeanUtils.setProperty(bean, "longProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "longProperty", Integer.valueOf(123));
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
-        BeanUtils.setProperty(bean, "longProperty", new Long(123));
+        BeanUtils.setProperty(bean, "longProperty", Long.valueOf(123));
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
-        BeanUtils.setProperty(bean, "longProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "longProperty", Short.valueOf((short) 123));
         assertEquals(123, ((Long) bean.get("longProperty")).longValue());
 
     }
@@ -1084,7 +1082,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyShort() throws Exception {
 
-        BeanUtils.setProperty(bean, "shortProperty", new Byte((byte) 123));
+        BeanUtils.setProperty(bean, "shortProperty", Byte.valueOf((byte) 123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
 /*
         BeanUtils.setProperty(bean, "shortProperty", new Double((double) 123));
@@ -1092,11 +1090,11 @@ public class DynaBeanUtilsTestCase extends TestCase {
         BeanUtils.setProperty(bean, "shortProperty", new Float((float) 123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
 */
-        BeanUtils.setProperty(bean, "shortProperty", new Integer(123));
+        BeanUtils.setProperty(bean, "shortProperty", Integer.valueOf(123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
-        BeanUtils.setProperty(bean, "shortProperty", new Long(123));
+        BeanUtils.setProperty(bean, "shortProperty", Long.valueOf(123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
-        BeanUtils.setProperty(bean, "shortProperty", new Short((short) 123));
+        BeanUtils.setProperty(bean, "shortProperty", Short.valueOf((short) 123));
         assertEquals((short) 123, ((Short) bean.get("shortProperty")).shortValue());
 
     }
@@ -1114,21 +1112,21 @@ public class DynaBeanUtilsTestCase extends TestCase {
         final int intChanged[] = { 0, 0, 0 };
 
         // No conversion required
-        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Integer(1));
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", Integer.valueOf(1));
         checkIntArray((int[]) bean.get("intArray"), origArray);
         intChanged[1] = 1;
         checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
                       intChanged);
 
         // Widening conversion required
-        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Byte((byte) 2));
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", Byte.valueOf((byte) 2));
         checkIntArray((int[]) bean.get("intArray"), origArray);
         intChanged[1] = 2;
         checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
                       intChanged);
 
         // Narrowing conversion required
-        BeanUtils.copyProperty(bean, "nested.intArray[1]", new Long(3));
+        BeanUtils.copyProperty(bean, "nested.intArray[1]", Long.valueOf(3));
         checkIntArray((int[]) bean.get("intArray"), origArray);
         intChanged[1] = 3;
         checkIntArray(((TestBean) bean.get("nested")).getIntArray(),
@@ -1149,10 +1147,10 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedMappedMap() throws Exception {
 
-        final Map<String, Object> origMap = new HashMap<String, Object>();
+        final Map<String, Object> origMap = new HashMap<>();
         origMap.put("First Key", "First Value");
         origMap.put("Second Key", "Second Value");
-        final Map<String, Object> changedMap = new HashMap<String, Object>();
+        final Map<String, Object> changedMap = new HashMap<>();
         changedMap.put("First Key", "First Value");
         changedMap.put("Second Key", "Second Value");
 
@@ -1172,21 +1170,21 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     public void testCopyPropertyNestedSimple() throws Exception {
 
-        bean.set("intProperty", new Integer(0));
+        bean.set("intProperty", Integer.valueOf(0));
         nested.setIntProperty(0);
 
         // No conversion required
-        BeanUtils.copyProperty(bean, "nested.intProperty", new Integer(1));
+        BeanUtils.copyProperty(bean, "nested.intProperty", Integer.valueOf(1));
         assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
         assertEquals(1, nested.getIntProperty());
 
         // Widening conversion required
-        BeanUtils.copyProperty(bean, "nested.intProperty", new Byte((byte) 2));
+        BeanUtils.copyProperty(bean, "nested.intProperty", Byte.valueOf((byte) 2));
         assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
         assertEquals(2, nested.getIntProperty());
 
         // Narrowing conversion required
-        BeanUtils.copyProperty(bean, "nested.intProperty", new Long(3));
+        BeanUtils.copyProperty(bean, "nested.intProperty", Long.valueOf(3));
         assertEquals(0, ((Integer) bean.get("intProperty")).intValue());
         assertEquals(3, nested.getIntProperty());
 
@@ -1216,9 +1214,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
     protected void checkMap(final Map<?, ?> actual, final Map<?, ?> expected) {
         assertNotNull("actual map not null", actual);
         assertEquals("actual map size", expected.size(), actual.size());
-        final Iterator<?> keys = expected.keySet().iterator();
-        while (keys.hasNext()) {
-            final Object key = keys.next();
+        for (Object key : expected.keySet()) {
             assertEquals("actual map value(" + key + ")",
                          expected.get(key), actual.get(key));
         }
@@ -1231,8 +1227,8 @@ public class DynaBeanUtilsTestCase extends TestCase {
      */
     protected static DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int intArray[] = {};
+        final String stringArray[] = {};
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,
@@ -1258,7 +1254,7 @@ public class DynaBeanUtilsTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return (dynaClass);
+        return dynaClass;
 
     }
 
