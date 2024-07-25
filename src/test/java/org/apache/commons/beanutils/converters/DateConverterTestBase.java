@@ -246,7 +246,7 @@ public abstract class DateConverterTestBase extends TestCase {
         invalidConversion(converter, "2006/10/01");
         invalidConversion(converter, "02/10/2006");
         invalidConversion(converter, "02/10/06");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
     }
 
@@ -274,7 +274,7 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006-10-2X");
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
-        validConversion(converter, defaultValue, new Integer(2));
+        validConversion(converter, defaultValue, Integer.valueOf(2));
 
     }
 
@@ -301,7 +301,7 @@ public abstract class DateConverterTestBase extends TestCase {
         validConversion(converter, defaultValue, "2006-10-2X");
         validConversion(converter, defaultValue, "2006/10/01");
         validConversion(converter, defaultValue, "02/10/06");
-        validConversion(converter, defaultValue, new Integer(2));
+        validConversion(converter, defaultValue, Integer.valueOf(2));
 
     }
 
@@ -313,7 +313,7 @@ public abstract class DateConverterTestBase extends TestCase {
         Object expected = null;
 
         // Create & Configure the Converter
-        final String[] patterns = new String[] {"yyyy-MM-dd", "yyyy/MM/dd"};
+        final String[] patterns = {"yyyy-MM-dd", "yyyy/MM/dd"};
         final DateTimeConverter converter = makeConverter();
         converter.setPatterns(patterns);
 
@@ -359,7 +359,7 @@ public abstract class DateConverterTestBase extends TestCase {
         invalidConversion(converter, "2006-10-2X");
         invalidConversion(converter, "10.28.06");
         invalidConversion(converter, "10-28-06");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
@@ -390,12 +390,12 @@ public abstract class DateConverterTestBase extends TestCase {
      * @param value The value to convert
      */
     void validConversion(final Converter converter, final Object expected, final Object value) {
-        final String valueType = (value == null ? "null" : value.getClass().getName());
+        final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
             final Object result = converter.convert(getExpectedType(), value);
-            final Class<?> resultType = (result   == null ? null : result.getClass());
-            final Class<?> expectType = (expected == null ? null : expected.getClass());
+            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> expectType = expected == null ? null : expected.getClass();
             assertEquals("TYPE "  + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
@@ -410,12 +410,12 @@ public abstract class DateConverterTestBase extends TestCase {
      * @param value The value to convert
      */
     void stringConversion(final Converter converter, final String expected, final Object value) {
-        final String valueType = (value == null ? "null" : value.getClass().getName());
+        final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "' to String";
         try {
             final Object result = converter.convert(String.class, value);
-            final Class<?> resultType = (result   == null ? null : result.getClass());
-            final Class<?> expectType = (expected == null ? null : expected.getClass());
+            final Class<?> resultType = result   == null ? null : result.getClass();
+            final Class<?> expectType = expected == null ? null : expected.getClass();
             assertEquals("TYPE "  + msg, expectType, resultType);
             assertEquals("VALUE " + msg, expected, result);
         } catch (final Exception ex) {
@@ -429,7 +429,7 @@ public abstract class DateConverterTestBase extends TestCase {
      * @param value The value to convert
      */
     void invalidConversion(final Converter converter, final Object value) {
-        final String valueType = (value == null ? "null" : value.getClass().getName());
+        final String valueType = value == null ? "null" : value.getClass().getName();
         final String msg = "Converting '" + valueType + "' value '" + value + "'";
         try {
             final Object result = converter.convert(getExpectedType(), value);
@@ -461,7 +461,7 @@ public abstract class DateConverterTestBase extends TestCase {
     Calendar toCalendar(final String value, final String pattern, final Locale locale) {
         Calendar calendar = null;
         try {
-            final DateFormat format = (locale == null)
+            final DateFormat format = locale == null
                            ? new SimpleDateFormat(pattern)
                            : new SimpleDateFormat(pattern, locale);
             format.setLenient(false);
@@ -523,15 +523,14 @@ public abstract class DateConverterTestBase extends TestCase {
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently accross JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)date;
-            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
+            long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
             return timeInMillis;
         }
 
         if (date instanceof Calendar) {
             return ((Calendar)date).getTime().getTime();
-        } else {
-            return ((Date)date).getTime();
         }
+        return ((Date)date).getTime();
     }
 }
