@@ -128,6 +128,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
      * @param icontext the introspection context
      * @throws IntrospectionException if an error occurs
      */
+    @Override
     public void introspect(final IntrospectionContext icontext)
             throws IntrospectionException {
         for (final Method m : icontext.getTargetClass().getMethods()) {
@@ -155,7 +156,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
         }
     }
 
-    private static void clearDescriptorsCacheHierarchy(Class<?> cls) {
+    private static void clearDescriptorsCacheHierarchy(final Class<?> cls) {
         if (cls != null && cls != Object.class) {
             Introspector.flushFromCaches(cls);
             clearDescriptorsCacheHierarchy(cls.getSuperclass());
@@ -171,7 +172,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
     private String propertyName(final Method m) {
         final String methodName = m.getName().substring(
                 getWriteMethodPrefix().length());
-        return (methodName.length() > 1) ? Introspector.decapitalize(methodName) : methodName
+        return methodName.length() > 1 ? Introspector.decapitalize(methodName) : methodName
                 .toLowerCase(Locale.ENGLISH);
     }
 
