@@ -43,7 +43,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public boolean contains(String name, String key);
+    boolean contains(String name, String key);
 
 
     /**
@@ -55,7 +55,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public Object get(String name);
+    Object get(String name);
 
 
     /**
@@ -74,7 +74,7 @@ public interface DynaBean {
      * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
-    public Object get(String name, int index);
+    Object get(String name, int index);
 
 
     /**
@@ -90,7 +90,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public Object get(String name, String key);
+    Object get(String name, String key);
 
 
     /**
@@ -99,7 +99,7 @@ public interface DynaBean {
      *
      * @return The associated DynaClass
      */
-    public DynaClass getDynaClass();
+    DynaClass getDynaClass();
 
 
     /**
@@ -113,7 +113,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
-    public void remove(String name, String key);
+    void remove(String name, String key);
 
 
     /**
@@ -129,7 +129,7 @@ public interface DynaBean {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
-    public void set(String name, Object value);
+    void set(String name, Object value);
 
 
     /**
@@ -148,7 +148,7 @@ public interface DynaBean {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
-    public void set(String name, int index, Object value);
+    void set(String name, int index, Object value);
 
 
     /**
@@ -165,7 +165,7 @@ public interface DynaBean {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
-    public void set(String name, String key, Object value);
+    void set(String name, String key, Object value);
 
 
 }
