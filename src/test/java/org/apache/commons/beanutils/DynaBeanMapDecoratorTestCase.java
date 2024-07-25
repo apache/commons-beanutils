@@ -41,16 +41,16 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     private static final DynaProperty intProp    = new DynaProperty("intProp",    Integer.class);
     private static final DynaProperty dateProp   = new DynaProperty("dateProp",   Date.class);
     private static final DynaProperty mapProp    = new DynaProperty("mapProp",    Map.class);
-    private static final DynaProperty[] properties = new DynaProperty[] {
+    private static final DynaProperty[] properties = {
                       stringProp, nullProp, intProp, dateProp, mapProp};
     private static final DynaClass dynaClass = new BasicDynaClass("testDynaClass", BasicDynaBean.class, properties);
 
     private static String  stringVal = "somevalue";
-    private static Integer intVal    = new Integer(5);
+    private static Integer intVal    = Integer.valueOf(5);
     private static Date    dateVal   = new Date();
-    private final Map<Object, Object>     mapVal    = new HashMap<Object, Object>();
+    private final Map<Object, Object>     mapVal    = new HashMap<>();
 
-    private final Object[] values = new Object[] {stringVal, null, intVal, dateVal, mapVal};
+    private final Object[] values = {stringVal, null, intVal, dateVal, mapVal};
 
     private BasicDynaBean dynaBean;
     private Map<Object, Object> decoratedMap;
@@ -81,7 +81,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(DynaBeanMapDecoratorTestCase.class));
+        return new TestSuite(DynaBeanMapDecoratorTestCase.class);
     }
 
     /**
@@ -167,7 +167,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         final Set<Map.Entry<Object, Object>> set = modifiableMap.entrySet();
 
         // Check the Set can't be modified
-        final Map<Object, Object> m = new HashMap<Object, Object>();
+        final Map<Object, Object> m = new HashMap<>();
         m.put("key", "value");
         checkUnmodifiable("entrySet()", set, m.entrySet().iterator().next());
 
@@ -259,7 +259,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
     public void testPutAll() {
 
         final String newValue = "ABC";
-        final Map<Object, Object> newMap = new HashMap<Object, Object>();
+        final Map<Object, Object> newMap = new HashMap<>();
         newMap.put(stringProp.getName(), newValue);
 
         // Test read only
@@ -335,7 +335,7 @@ public class DynaBeanMapDecoratorTestCase extends TestCase {
         }
 
         // Check can't addAll()
-        final List<E> list = new ArrayList<E>(1);
+        final List<E> list = new ArrayList<>(1);
         list.add(addElem);
         try {
             collection.addAll(list);
