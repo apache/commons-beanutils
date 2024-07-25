@@ -37,6 +37,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
 
     // ----------------------------------------------------- Instance Variables
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * <p>Flag defining whether column names should be lower cased when
      * converted to property names.</p>
@@ -60,7 +62,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * instances will be the same instances as those in the
      * <code>properties</code> list.</p>
      */
-    protected Map<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected Map<String, DynaProperty> propertiesMap = new HashMap<>();
 
     /**
      * Cross Reference for column name --> dyna property name
@@ -76,9 +78,10 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * allows the same <code>DynaClass</code> implementation class to support
      * different dynamic classes, with different sets of properties.</p>
      */
+    @Override
     public String getName() {
 
-        return (this.getClass().getName());
+        return this.getClass().getName();
 
     }
 
@@ -91,12 +94,13 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException("No property name specified");
         }
-        return (propertiesMap.get(name));
+        return propertiesMap.get(name);
 
     }
 
@@ -105,9 +109,10 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      * currently defined in this DynaClass.  If no properties are defined, a
      * zero-length array will be returned.</p>
      */
+    @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 
@@ -122,6 +127,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
+    @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 
@@ -189,7 +195,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         final String name = lowerCase ? columnName.toLowerCase() : columnName;
         if (!name.equals(columnName)) {
             if (columnNameXref == null) {
-                columnNameXref = new HashMap<String, String>();
+                columnNameXref = new HashMap<>();
             }
             columnNameXref.put(name, columnName);
         }
@@ -235,7 +241,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected void introspect(final ResultSet resultSet) throws SQLException {
 
         // Accumulate an ordered list of DynaProperties
-        final ArrayList<DynaProperty> list = new ArrayList<DynaProperty>();
+        final ArrayList<DynaProperty> list = new ArrayList<>();
         final ResultSetMetaData metadata = resultSet.getMetaData();
         final int n = metadata.getColumnCount();
         for (int i = 1; i <= n; i++) { // JDBC is one-relative!
@@ -248,7 +254,7 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
         // Convert this list into the internal data structures we need
         properties =
             list.toArray(new DynaProperty[list.size()]);
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             propertiesMap.put(propertie.getName(), propertie);
         }
 
@@ -299,9 +305,8 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
     protected String getColumnName(final String name) {
         if (columnNameXref != null && columnNameXref.containsKey(name)) {
             return columnNameXref.get(name);
-        } else {
-            return name;
         }
+        return name;
     }
 
 }
