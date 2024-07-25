@@ -92,7 +92,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
      * <code>ConversionException</code> if an error occurs.
      */
     public DateTimeConverter() {
-        super();
     }
 
     /**
@@ -296,7 +295,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently accross JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
-            long timeInMillis = ((timestamp.getTime() / 1000) * 1000);
+            long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
             // ---------------------- JDK 1.3 Fix ----------------------
             return toDate(targetType, timeInMillis);
@@ -337,9 +336,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
             }
             if (Calendar.class.isAssignableFrom(targetType)) {
                 return targetType.cast(calendar);
-            } else {
-                return toDate(targetType, calendar.getTime().getTime());
             }
+            return toDate(targetType, calendar.getTime().getTime());
         }
 
         // Default String conversion
@@ -519,11 +517,10 @@ public abstract class DateTimeConverter extends AbstractConverter {
      */
     private Calendar parse(final Class<?> sourceType, final Class<?> targetType, final String value) throws Exception {
         Exception firstEx = null;
-        for (String pattern : patterns) {
+        for (final String pattern : patterns) {
             try {
                 final DateFormat format = getFormat(pattern);
-                final Calendar calendar = parse(sourceType, targetType, value, format);
-                return calendar;
+                return parse(sourceType, targetType, value, format);
             } catch (final Exception ex) {
                 if (firstEx == null) {
                     firstEx = ex;
@@ -533,9 +530,8 @@ public abstract class DateTimeConverter extends AbstractConverter {
         if (patterns.length > 1) {
             throw new ConversionException("Error converting '" + toString(sourceType) + "' to '" + toString(targetType)
                     + "' using  patterns '" + displayPatterns + "'");
-        } else {
-            throw firstEx;
         }
+        throw firstEx;
     }
 
     /**
@@ -565,8 +561,7 @@ public abstract class DateTimeConverter extends AbstractConverter {
             }
             throw new ConversionException(msg);
         }
-        final Calendar calendar = format.getCalendar();
-        return calendar;
+        return format.getCalendar();
     }
 
     /**
