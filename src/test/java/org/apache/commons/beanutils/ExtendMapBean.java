@@ -27,6 +27,7 @@ import java.util.Hashtable;
 
 public class ExtendMapBean extends Hashtable<Object, Object> {
 
+    private static final long serialVersionUID = 1L;
     private String dbName = "[UNSET]";
 
     public ExtendMapBean() {}
