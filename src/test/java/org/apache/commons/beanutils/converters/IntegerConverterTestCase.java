@@ -43,10 +43,10 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Integer("-12");
-        numbers[1] = new Integer("13");
-        numbers[2] = new Integer("-22");
-        numbers[3] = new Integer("23");
+        numbers[0] = Integer.valueOf("-12");
+        numbers[1] = Integer.valueOf("13");
+        numbers[2] = Integer.valueOf("-22");
+        numbers[3] = Integer.valueOf("23");
     }
 
     public static TestSuite suite() {
@@ -102,28 +102,28 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
             "1",
             "17",
             String.valueOf(Integer.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
+            Integer.valueOf(9),
+            Long.valueOf(10),
+            Float.valueOf((float) 11.1),
+            Double.valueOf(12.2)
         };
 
         final Integer[] expected = {
-            new Integer(Integer.MIN_VALUE),
-            new Integer(-17),
-            new Integer(-1),
-            new Integer(0),
-            new Integer(1),
-            new Integer(17),
-            new Integer(Integer.MAX_VALUE),
-            new Integer(7),
-            new Integer(8),
-            new Integer(9),
-            new Integer(10),
-            new Integer(11),
-            new Integer(12)
+            Integer.valueOf(Integer.MIN_VALUE),
+            Integer.valueOf(-17),
+            Integer.valueOf(-1),
+            Integer.valueOf(0),
+            Integer.valueOf(1),
+            Integer.valueOf(17),
+            Integer.valueOf(Integer.MAX_VALUE),
+            Integer.valueOf(7),
+            Integer.valueOf(8),
+            Integer.valueOf(9),
+            Integer.valueOf(10),
+            Integer.valueOf(11),
+            Integer.valueOf(12)
         };
 
         for(int i=0;i<expected.length;i++) {
@@ -140,16 +140,16 @@ public class IntegerConverterTestCase extends NumberConverterTestBase {
         final Converter converter = makeConverter();
         final Class<?> clazz = Integer.class;
 
-        final Long min         = new Long(Integer.MIN_VALUE);
-        final Long max         = new Long(Integer.MAX_VALUE);
-        final Long minMinusOne = new Long(min.longValue() - 1);
-        final Long maxPlusOne  = new Long(max.longValue() + 1);
+        final Long min         = Long.valueOf(Integer.MIN_VALUE);
+        final Long max         = Long.valueOf(Integer.MAX_VALUE);
+        final Long minMinusOne = Long.valueOf(min.longValue() - 1);
+        final Long maxPlusOne  = Long.valueOf(max.longValue() + 1);
 
         // Minimum
-        assertEquals("Minimum", new Integer(Integer.MIN_VALUE), converter.convert(clazz, min));
+        assertEquals("Minimum", Integer.valueOf(Integer.MIN_VALUE), converter.convert(clazz, min));
 
         // Maximum
-        assertEquals("Maximum", new Integer(Integer.MAX_VALUE), converter.convert(clazz, max));
+        assertEquals("Maximum", Integer.valueOf(Integer.MAX_VALUE), converter.convert(clazz, max));
 
         // Too Small
         try {
