@@ -36,7 +36,7 @@ import java.util.Set;
  */
 class DefaultIntrospectionContext implements IntrospectionContext {
     /** Constant for an empty array of property descriptors. */
-    private static final PropertyDescriptor[] EMPTY_DESCRIPTORS = new PropertyDescriptor[0];
+    private static final PropertyDescriptor[] EMPTY_DESCRIPTORS = {};
 
     /** The current class for introspection. */
     private final Class<?> currentClass;
@@ -53,13 +53,15 @@ class DefaultIntrospectionContext implements IntrospectionContext {
      */
     public DefaultIntrospectionContext(final Class<?> cls) {
         currentClass = cls;
-        descriptors = new HashMap<String, PropertyDescriptor>();
+        descriptors = new HashMap<>();
     }
 
+    @Override
     public Class<?> getTargetClass() {
         return currentClass;
     }
 
+    @Override
     public void addPropertyDescriptor(final PropertyDescriptor desc) {
         if (desc == null) {
             throw new IllegalArgumentException(
@@ -68,29 +70,34 @@ class DefaultIntrospectionContext implements IntrospectionContext {
         descriptors.put(desc.getName(), desc);
     }
 
+    @Override
     public void addPropertyDescriptors(final PropertyDescriptor[] descs) {
         if (descs == null) {
             throw new IllegalArgumentException(
                     "Array with descriptors must not be null!");
         }
 
-        for (PropertyDescriptor desc : descs) {
+        for (final PropertyDescriptor desc : descs) {
             addPropertyDescriptor(desc);
         }
     }
 
+    @Override
     public boolean hasProperty(final String name) {
         return descriptors.containsKey(name);
     }
 
+    @Override
     public PropertyDescriptor getPropertyDescriptor(final String name) {
         return descriptors.get(name);
     }
 
+    @Override
     public void removePropertyDescriptor(final String name) {
         descriptors.remove(name);
     }
 
+    @Override
     public Set<String> propertyNames() {
         return descriptors.keySet();
     }
