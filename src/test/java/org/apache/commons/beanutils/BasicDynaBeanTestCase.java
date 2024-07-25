@@ -107,33 +107,33 @@ public class BasicDynaBeanTestCase extends TestCase {
         bean = dynaClass.newInstance();
 
         // Initialize the DynaBean's property values (like TestBean)
-        bean.set("booleanProperty", new Boolean(true));
-        bean.set("booleanSecond", new Boolean(true));
-        bean.set("doubleProperty", new Double(321.0));
-        bean.set("floatProperty", new Float((float) 123.0));
+        bean.set("booleanProperty", Boolean.valueOf(true));
+        bean.set("booleanSecond", Boolean.valueOf(true));
+        bean.set("doubleProperty", Double.valueOf(321.0));
+        bean.set("floatProperty", Float.valueOf((float) 123.0));
         final int intArray[] = { 0, 10, 20, 30, 40 };
         bean.set("intArray", intArray);
         final int intIndexed[] = { 0, 10, 20, 30, 40 };
         bean.set("intIndexed", intIndexed);
-        bean.set("intProperty", new Integer(123));
-        final List<String> listIndexed = new ArrayList<String>();
+        bean.set("intProperty", Integer.valueOf(123));
+        final List<String> listIndexed = new ArrayList<>();
         listIndexed.add("String 0");
         listIndexed.add("String 1");
         listIndexed.add("String 2");
         listIndexed.add("String 3");
         listIndexed.add("String 4");
         bean.set("listIndexed", listIndexed);
-        bean.set("longProperty", new Long(321));
-        final HashMap<String, String> mappedProperty = new HashMap<String, String>();
+        bean.set("longProperty", Long.valueOf(321));
+        final HashMap<String, String> mappedProperty = new HashMap<>();
         mappedProperty.put("First Key", "First Value");
         mappedProperty.put("Second Key", "Second Value");
         bean.set("mappedProperty", mappedProperty);
-        final HashMap<String, Integer> mappedIntProperty = new HashMap<String, Integer>();
-        mappedIntProperty.put("One", new Integer(1));
-        mappedIntProperty.put("Two", new Integer(2));
+        final HashMap<String, Integer> mappedIntProperty = new HashMap<>();
+        mappedIntProperty.put("One", Integer.valueOf(1));
+        mappedIntProperty.put("Two", Integer.valueOf(2));
         bean.set("mappedIntProperty", mappedIntProperty);
         // Property "nullProperty" is not initialized, so it should return null
-        bean.set("shortProperty", new Short((short) 987));
+        bean.set("shortProperty", Short.valueOf((short) 987));
         final String stringArray[] =
                 { "String 0", "String 1", "String 2", "String 3", "String 4" };
         bean.set("stringArray", stringArray);
@@ -150,7 +150,7 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     public static Test suite() {
 
-        return (new TestSuite(BasicDynaBeanTestCase.class));
+        return new TestSuite(BasicDynaBeanTestCase.class);
 
     }
 
@@ -286,7 +286,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         final DynaProperty pd[] = bean.getDynaClass().getDynaProperties();
         assertNotNull("Got descriptors", pd);
         final int count[] = new int[properties.length];
-        for (DynaProperty element : pd) {
+        for (final DynaProperty element : pd) {
             final String name = element.getName();
             for (int j = 0; j < properties.length; j++) {
                 if (name.equals(properties[j])) {
@@ -466,9 +466,9 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("booleanProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Boolean));
+            assertTrue("Got correct type", value instanceof Boolean);
             assertTrue("Got correct value",
-                    ((Boolean) value).booleanValue() == true);
+                    ((Boolean) value).booleanValue());
         } catch (final Throwable e) {
             fail("Exception: " + e);
         }
@@ -484,7 +484,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("doubleProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Double));
+            assertTrue("Got correct type", value instanceof Double);
             assertEquals("Got correct value",
                     ((Double) value).doubleValue(),
                     321.0, 0.005);
@@ -503,7 +503,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("floatProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Float));
+            assertTrue("Got correct type", value instanceof Float);
             assertEquals("Got correct value",
                     ((Float) value).floatValue(),
                     (float) 123.0,
@@ -523,7 +523,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("intProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Integer));
+            assertTrue("Got correct type", value instanceof Integer);
             assertEquals("Got correct value",
                     ((Integer) value).intValue(),
                     123);
@@ -542,7 +542,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("longProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Long));
+            assertTrue("Got correct type", value instanceof Long);
             assertEquals("Got correct value",
                     ((Long) value).longValue(),
                     321);
@@ -561,7 +561,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("shortProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof Short));
+            assertTrue("Got correct type", value instanceof Short);
             assertEquals("Got correct value",
                     ((Short) value).shortValue(),
                     (short) 987);
@@ -580,7 +580,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         try {
             final Object value = bean.get("stringProperty");
             assertNotNull("Got a value", value);
-            assertTrue("Got correct type", (value instanceof String));
+            assertTrue("Got correct type", value instanceof String);
             assertEquals("Got correct value",
                     (String) value,
                     "This is a string");
@@ -722,7 +722,7 @@ public class BasicDynaBeanTestCase extends TestCase {
     public void testSetIndexedArguments() {
 
         try {
-            bean.set("intArray", -1, new Integer(0));
+            bean.set("intArray", -1, Integer.valueOf(0));
             fail("Should throw IndexOutOfBoundsException");
         } catch (final IndexOutOfBoundsException e) {
             // Expected response
@@ -741,7 +741,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         Object value = null;
 
         try {
-            bean.set("intArray", 0, new Integer(1));
+            bean.set("intArray", 0, Integer.valueOf(1));
             value = bean.get("intArray", 0);
             assertNotNull("Returned new value 0", value);
             assertTrue("Returned Integer new value 0",
@@ -753,7 +753,7 @@ public class BasicDynaBeanTestCase extends TestCase {
         }
 
         try {
-            bean.set("intIndexed", 1, new Integer(11));
+            bean.set("intIndexed", 1, Integer.valueOf(11));
             value = bean.get("intIndexed", 1);
             assertNotNull("Returned new value 1", value);
             assertTrue("Returned Integer new value 1",
@@ -840,7 +840,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final boolean oldValue =
                     ((Boolean) bean.get("booleanProperty")).booleanValue();
             final boolean newValue = !oldValue;
-            bean.set("booleanProperty", new Boolean(newValue));
+            bean.set("booleanProperty", Boolean.valueOf(newValue));
             assertTrue("Matched new value",
                     newValue ==
                     ((Boolean) bean.get("booleanProperty")).booleanValue());
@@ -860,7 +860,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final double oldValue =
                     ((Double) bean.get("doubleProperty")).doubleValue();
             final double newValue = oldValue + 1.0;
-            bean.set("doubleProperty", new Double(newValue));
+            bean.set("doubleProperty", Double.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Double) bean.get("doubleProperty")).doubleValue(),
@@ -881,7 +881,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final float oldValue =
                     ((Float) bean.get("floatProperty")).floatValue();
             final float newValue = oldValue + (float) 1.0;
-            bean.set("floatProperty", new Float(newValue));
+            bean.set("floatProperty", Float.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Float) bean.get("floatProperty")).floatValue(),
@@ -902,7 +902,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final int oldValue =
                     ((Integer) bean.get("intProperty")).intValue();
             final int newValue = oldValue + 1;
-            bean.set("intProperty", new Integer(newValue));
+            bean.set("intProperty", Integer.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Integer) bean.get("intProperty")).intValue());
@@ -922,7 +922,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final long oldValue =
                     ((Long) bean.get("longProperty")).longValue();
             final long newValue = oldValue + 1;
-            bean.set("longProperty", new Long(newValue));
+            bean.set("longProperty", Long.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Long) bean.get("longProperty")).longValue());
@@ -942,7 +942,7 @@ public class BasicDynaBeanTestCase extends TestCase {
             final short oldValue =
                     ((Short) bean.get("shortProperty")).shortValue();
             final short newValue = (short) (oldValue + 1);
-            bean.set("shortProperty", new Short(newValue));
+            bean.set("shortProperty", Short.valueOf(newValue));
             assertEquals("Matched new value",
                     newValue,
                     ((Short) bean.get("shortProperty")).shortValue());
@@ -981,8 +981,8 @@ public class BasicDynaBeanTestCase extends TestCase {
      */
     protected DynaClass createDynaClass() {
 
-        final int intArray[] = new int[0];
-        final String stringArray[] = new String[0];
+        final int intArray[] = {};
+        final String stringArray[] = {};
 
         final DynaClass dynaClass = new BasicDynaClass
                 ("TestDynaClass", null,
@@ -1004,7 +1004,7 @@ public class BasicDynaBeanTestCase extends TestCase {
                             new DynaProperty("stringIndexed", stringArray.getClass()),
                             new DynaProperty("stringProperty", String.class),
                         });
-        return (dynaClass);
+        return dynaClass;
 
     }
 
