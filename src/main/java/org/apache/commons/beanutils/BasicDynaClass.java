@@ -41,6 +41,9 @@ public class BasicDynaClass implements DynaClass, Serializable {
     // ----------------------------------------------------------- Constructors
 
 
+    private static final long serialVersionUID = 1L;
+
+
     /**
      * Construct a new BasicDynaClass with default parameters.
      */
@@ -74,7 +77,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     public BasicDynaClass(final String name, Class<?> dynaBeanClass,
                           final DynaProperty[] properties) {
 
-        super();
         if (name != null) {
             this.name = name;
         }
@@ -129,7 +131,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
     /**
      * The set of dynamic properties that are part of this DynaClass.
      */
-    protected DynaProperty[] properties = new DynaProperty[0];
+    protected DynaProperty[] properties = {};
 
 
     /**
@@ -137,7 +139,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
     // ------------------------------------------------------ DynaClass Methods
@@ -151,9 +153,10 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @return the name of the DynaClass
      */
+    @Override
     public String getName() {
 
-        return (this.name);
+        return this.name;
 
     }
 
@@ -168,6 +171,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
@@ -190,9 +194,10 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *
      * @return the set of properties for this DynaClass
      */
+    @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 
@@ -208,6 +213,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
+    @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 
@@ -217,7 +223,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
                 setDynaBeanClass(this.dynaBeanClass);
             }
             // Invoke the constructor to create a new bean instance
-            return ((DynaBean) constructor.newInstance(constructorValues));
+            return (DynaBean) constructor.newInstance(constructorValues);
         } catch (final InvocationTargetException e) {
             throw new InstantiationException
                     (e.getTargetException().getMessage());
@@ -238,7 +244,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
      */
     public Class<?> getDynaBeanClass() {
 
-        return (this.dynaBeanClass);
+        return this.dynaBeanClass;
 
     }
 
@@ -292,7 +298,7 @@ public class BasicDynaClass implements DynaClass, Serializable {
 
         this.properties = properties;
         propertiesMap.clear();
-        for (DynaProperty propertie : properties) {
+        for (final DynaProperty propertie : properties) {
             propertiesMap.put(propertie.getName(), propertie);
         }
 
