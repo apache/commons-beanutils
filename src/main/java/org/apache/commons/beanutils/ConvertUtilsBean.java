@@ -125,8 +125,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class ConvertUtilsBean {
 
-    private static final Integer ZERO = new Integer(0);
-    private static final Character SPACE = new Character(' ');
+    private static final Integer ZERO = Integer.valueOf(0);
+    private static final Character SPACE = Character.valueOf(' ');
 
     // ------------------------------------------------------- Class Methods
     /**
@@ -145,7 +145,7 @@ public class ConvertUtilsBean {
      * into objects of a specified Class, keyed by the destination Class.
      */
     private final WeakFastHashMap<Class<?>, Converter> converters =
-            new WeakFastHashMap<Class<?>, Converter>();
+            new WeakFastHashMap<>();
 
     /**
      * The <code>Log</code> instance for this class.
@@ -179,7 +179,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public boolean getDefaultBoolean() {
-        return (defaultBoolean.booleanValue());
+        return defaultBoolean.booleanValue();
     }
 
     /**
@@ -190,7 +190,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultBoolean(final boolean newDefaultBoolean) {
-        defaultBoolean = (newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE);
+        defaultBoolean = newDefaultBoolean ? Boolean.TRUE : Boolean.FALSE;
         register(new BooleanConverter(defaultBoolean), Boolean.TYPE);
         register(new BooleanConverter(defaultBoolean), Boolean.class);
     }
@@ -202,7 +202,7 @@ public class ConvertUtilsBean {
      *  Byte.class instead
      */
     @Deprecated
-    private Byte defaultByte = new Byte((byte) 0);
+    private Byte defaultByte = Byte.valueOf((byte) 0);
 
     /**
      * Gets the default value for Byte conversions.
@@ -212,7 +212,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public byte getDefaultByte() {
-        return (defaultByte.byteValue());
+        return defaultByte.byteValue();
     }
 
     /**
@@ -223,7 +223,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultByte(final byte newDefaultByte) {
-        defaultByte = new Byte(newDefaultByte);
+        defaultByte = Byte.valueOf(newDefaultByte);
         register(new ByteConverter(defaultByte), Byte.TYPE);
         register(new ByteConverter(defaultByte), Byte.class);
     }
@@ -235,7 +235,7 @@ public class ConvertUtilsBean {
      *  Character.class instead
      */
     @Deprecated
-    private Character defaultCharacter = new Character(' ');
+    private Character defaultCharacter = Character.valueOf(' ');
 
     /**
      * Gets the default value for Character conversions.
@@ -245,7 +245,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public char getDefaultCharacter() {
-        return (defaultCharacter.charValue());
+        return defaultCharacter.charValue();
     }
 
     /**
@@ -256,7 +256,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultCharacter(final char newDefaultCharacter) {
-        defaultCharacter = new Character(newDefaultCharacter);
+        defaultCharacter = Character.valueOf(newDefaultCharacter);
         register(new CharacterConverter(defaultCharacter),
                     Character.TYPE);
         register(new CharacterConverter(defaultCharacter),
@@ -270,7 +270,7 @@ public class ConvertUtilsBean {
      *  Double.class instead
      */
     @Deprecated
-    private Double defaultDouble = new Double(0.0);
+    private Double defaultDouble = Double.valueOf(0.0);
 
     /**
      * Gets the default value for Double conversions.
@@ -280,7 +280,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public double getDefaultDouble() {
-        return (defaultDouble.doubleValue());
+        return defaultDouble.doubleValue();
     }
 
     /**
@@ -291,7 +291,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultDouble(final double newDefaultDouble) {
-        defaultDouble = new Double(newDefaultDouble);
+        defaultDouble = Double.valueOf(newDefaultDouble);
         register(new DoubleConverter(defaultDouble), Double.TYPE);
         register(new DoubleConverter(defaultDouble), Double.class);
     }
@@ -303,7 +303,7 @@ public class ConvertUtilsBean {
      *  Float.class instead
      */
     @Deprecated
-    private Float defaultFloat = new Float((float) 0.0);
+    private Float defaultFloat = Float.valueOf((float) 0.0);
 
     /**
      * Gets the default value for Float conversions.
@@ -313,7 +313,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public float getDefaultFloat() {
-        return (defaultFloat.floatValue());
+        return defaultFloat.floatValue();
     }
 
     /**
@@ -324,7 +324,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultFloat(final float newDefaultFloat) {
-        defaultFloat = new Float(newDefaultFloat);
+        defaultFloat = Float.valueOf(newDefaultFloat);
         register(new FloatConverter(defaultFloat), Float.TYPE);
         register(new FloatConverter(defaultFloat), Float.class);
     }
@@ -336,7 +336,7 @@ public class ConvertUtilsBean {
      *  Integer.class instead
      */
     @Deprecated
-    private Integer defaultInteger = new Integer(0);
+    private Integer defaultInteger = Integer.valueOf(0);
 
     /**
      * Gets the default value for Integer conversions.
@@ -346,7 +346,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public int getDefaultInteger() {
-        return (defaultInteger.intValue());
+        return defaultInteger.intValue();
     }
 
     /**
@@ -357,7 +357,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultInteger(final int newDefaultInteger) {
-        defaultInteger = new Integer(newDefaultInteger);
+        defaultInteger = Integer.valueOf(newDefaultInteger);
         register(new IntegerConverter(defaultInteger), Integer.TYPE);
         register(new IntegerConverter(defaultInteger), Integer.class);
     }
@@ -369,7 +369,7 @@ public class ConvertUtilsBean {
      *  Long.class instead
      */
     @Deprecated
-    private Long defaultLong = new Long(0);
+    private Long defaultLong = Long.valueOf(0);
 
     /**
      * Gets the default value for Long conversions.
@@ -379,7 +379,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public long getDefaultLong() {
-        return (defaultLong.longValue());
+        return defaultLong.longValue();
     }
 
     /**
@@ -390,7 +390,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultLong(final long newDefaultLong) {
-        defaultLong = new Long(newDefaultLong);
+        defaultLong = Long.valueOf(newDefaultLong);
         register(new LongConverter(defaultLong), Long.TYPE);
         register(new LongConverter(defaultLong), Long.class);
     }
@@ -402,7 +402,7 @@ public class ConvertUtilsBean {
      *  Short.class instead
      */
     @Deprecated
-    private static Short defaultShort = new Short((short) 0);
+    private static Short defaultShort = Short.valueOf((short) 0);
 
     /**
      * Gets the default value for Short conversions.
@@ -412,7 +412,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public short getDefaultShort() {
-        return (defaultShort.shortValue());
+        return defaultShort.shortValue();
     }
 
     /**
@@ -423,7 +423,7 @@ public class ConvertUtilsBean {
      */
     @Deprecated
     public void setDefaultShort(final short newDefaultShort) {
-        defaultShort = new Short(newDefaultShort);
+        defaultShort = Short.valueOf(newDefaultShort);
         register(new ShortConverter(defaultShort), Short.TYPE);
         register(new ShortConverter(defaultShort), Short.class);
     }
@@ -445,21 +445,20 @@ public class ConvertUtilsBean {
 
         if (value == null) {
             return null;
-        } else if (value.getClass().isArray()) {
-            if (Array.getLength(value) < 1) {
-                return (null);
-            }
-            value = Array.get(value, 0);
-            if (value == null) {
-                return null;
-            } else {
-                final Converter converter = lookup(String.class);
-                return (converter.convert(String.class, value));
-            }
-        } else {
-            final Converter converter = lookup(String.class);
-            return (converter.convert(String.class, value));
         }
+        if (!value.getClass().isArray()) {
+            final Converter converter = lookup(String.class);
+            return converter.convert(String.class, value);
+        }
+        if (Array.getLength(value) < 1) {
+            return null;
+        }
+        value = Array.get(value, 0);
+        if (value == null) {
+            return null;
+        }
+        final Converter converter = lookup(String.class);
+        return converter.convert(String.class, value);
 
     }
 
@@ -487,7 +486,7 @@ public class ConvertUtilsBean {
         if (log.isTraceEnabled()) {
             log.trace("  Using converter " + converter);
         }
-        return (converter.convert(clazz, value));
+        return converter.convert(clazz, value);
 
     }
 
@@ -526,7 +525,7 @@ public class ConvertUtilsBean {
         for (int i = 0; i < values.length; i++) {
             Array.set(array, i, converter.convert(type, values[i]));
         }
-        return (array);
+        return array;
 
     }
 
@@ -830,7 +829,7 @@ public class ConvertUtilsBean {
      */
     public Converter lookup(final Class<?> clazz) {
 
-        return (converters.get(clazz));
+        return converters.get(clazz);
 
     }
 
