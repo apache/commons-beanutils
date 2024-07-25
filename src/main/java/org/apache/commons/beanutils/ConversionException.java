@@ -32,6 +32,8 @@ public class ConversionException extends RuntimeException {
     // ----------------------------------------------------------- Constructors
 
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construct a new exception with the specified message.
      *
@@ -86,7 +88,7 @@ public class ConversionException extends RuntimeException {
      */
     @Override
     public Throwable getCause() {
-        return (this.cause);
+        return this.cause;
     }
 
 
