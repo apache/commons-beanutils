@@ -85,6 +85,9 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     // ----------------------------------------------------------- Constructors
 
 
+    private static final long serialVersionUID = 1L;
+
+
     /**
      * <p>Construct a new ResultSetDynaClass for the specified
      * <code>ResultSet</code>.  The property names corresponding
@@ -191,7 +194,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      */
     public Iterator<DynaBean> iterator() {
 
-        return (new ResultSetIterator(this));
+        return new ResultSetIterator(this);
 
     }
 
@@ -217,7 +220,7 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
      */
     ResultSet getResultSet() {
 
-        return (this.resultSet);
+        return this.resultSet;
 
     }
 
