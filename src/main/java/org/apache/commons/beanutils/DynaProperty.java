@@ -174,9 +174,8 @@ public class DynaProperty implements Serializable {
         }
         if (type.isArray() || List.class.isAssignableFrom(type)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 
