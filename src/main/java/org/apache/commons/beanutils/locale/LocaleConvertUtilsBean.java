@@ -282,7 +282,7 @@ public class LocaleConvertUtilsBean {
             log.trace("  Using converter " + converter);
         }
 
-        return (converter.convert(targetClass, value, pattern));
+        return converter.convert(targetClass, value, pattern);
     }
 
     /**
@@ -348,7 +348,7 @@ public class LocaleConvertUtilsBean {
             Array.set(array, i, convert(values[i], type, locale, pattern));
         }
 
-        return (array);
+        return array;
     }
 
     /**
@@ -511,6 +511,7 @@ public class LocaleConvertUtilsBean {
      */
     private static class DelegateFastHashMap extends FastHashMap {
 
+        private static final long serialVersionUID = 1L;
         private final Map<Object, Object> map;
 
         private DelegateFastHashMap(final Map<Object, Object> map) {
