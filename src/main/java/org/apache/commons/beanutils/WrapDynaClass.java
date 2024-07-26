@@ -63,7 +63,7 @@ public class WrapDynaClass implements DynaClass {
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils) {
 
-        this.beanClassRef = new SoftReference<Class<?>>(beanClass);
+        this.beanClassRef = new SoftReference<>(beanClass);
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
@@ -107,7 +107,7 @@ public class WrapDynaClass implements DynaClass {
      * property name.  Individual descriptor instances will be the same
      * instances as those in the <code>descriptors</code> list.
      */
-    protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<String, PropertyDescriptor>();
+    protected HashMap<String, PropertyDescriptor> descriptorsMap = new HashMap<>();
 
 
     /**
@@ -121,7 +121,7 @@ public class WrapDynaClass implements DynaClass {
      * keyed by the property name.  Individual descriptor instances will
      * be the same instances as those in the <code>properties</code> list.
      */
-    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<String, DynaProperty>();
+    protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
     // ------------------------------------------------------- Static Variables
@@ -131,7 +131,7 @@ public class WrapDynaClass implements DynaClass {
         new ContextClassLoaderLocal<Map<CacheKey, WrapDynaClass>>() {
             @Override
             protected Map<CacheKey, WrapDynaClass> initialValue() {
-                return new WeakHashMap<CacheKey, WrapDynaClass>();
+                return new WeakHashMap<>();
         }
     };
 
@@ -195,6 +195,7 @@ public class WrapDynaClass implements DynaClass {
      */
     @Deprecated
     protected static HashMap<Object, Object> dynaClasses = new HashMap<Object, Object>() {
+        private static final long serialVersionUID = 1L;
         @Override
         public void clear() {
             getDynaClassesMap().clear();
@@ -230,7 +231,7 @@ public class WrapDynaClass implements DynaClass {
         @Override
         public Set<Object> keySet() {
             // extract the classes from the key to stay backwards compatible
-            final Set<Object> result = new HashSet<Object>();
+            final Set<Object> result = new HashSet<>();
             for (final CacheKey k : getClassesCache().keySet()) {
                 result.add(k.beanClass);
             }
@@ -283,6 +284,7 @@ public class WrapDynaClass implements DynaClass {
      *
      * @return the name of the DynaClass
      */
+    @Override
     public String getName() {
 
         return beanClassName;
@@ -300,13 +302,14 @@ public class WrapDynaClass implements DynaClass {
      *
      * @throws IllegalArgumentException if no property name is specified
      */
+    @Override
     public DynaProperty getDynaProperty(final String name) {
 
         if (name == null) {
             throw new IllegalArgumentException
                     ("No property name specified");
         }
-        return (propertiesMap.get(name));
+        return propertiesMap.get(name);
 
     }
 
@@ -322,9 +325,10 @@ public class WrapDynaClass implements DynaClass {
      *
      * @return the set of properties for this DynaClass
      */
+    @Override
     public DynaProperty[] getDynaProperties() {
 
-        return (properties);
+        return properties;
 
     }
 
@@ -354,6 +358,7 @@ public class WrapDynaClass implements DynaClass {
      *  class, an array class, a primitive type, or void; or if instantiation
      *  fails for some other reason
      */
+    @Override
     public DynaBean newInstance()
             throws IllegalAccessException, InstantiationException {
 
@@ -374,7 +379,7 @@ public class WrapDynaClass implements DynaClass {
      */
     public PropertyDescriptor getPropertyDescriptor(final String name) {
 
-        return (descriptorsMap.get(name));
+        return descriptorsMap.get(name);
 
     }
 
@@ -420,14 +425,14 @@ public class WrapDynaClass implements DynaClass {
      */
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {
 
-        final PropertyUtilsBean propUtils = (pu != null) ? pu : PropertyUtilsBean.getInstance();
+        final PropertyUtilsBean propUtils = pu != null ? pu : PropertyUtilsBean.getInstance();
         final CacheKey key = new CacheKey(beanClass, propUtils);
         WrapDynaClass dynaClass = getClassesCache().get(key);
         if (dynaClass == null) {
             dynaClass = new WrapDynaClass(beanClass, propUtils);
             getClassesCache().put(key, dynaClass);
         }
-        return (dynaClass);
+        return dynaClass;
 
     }
 
@@ -461,7 +466,7 @@ public class WrapDynaClass implements DynaClass {
         Map<?, ?> mappeds =
                 PropertyUtils.getMappedPropertyDescriptors(beanClass);
         if (mappeds == null) {
-            mappeds = new HashMap<Object, Object>();
+            mappeds = new HashMap<>();
         }
 
         // Construct corresponding DynaProperty information
@@ -519,8 +524,7 @@ public class WrapDynaClass implements DynaClass {
             final int factor = 31;
             int result = 17;
             result = factor * beanClass.hashCode() + result;
-            result = factor * propUtils.hashCode() + result;
-            return result;
+            return factor * propUtils.hashCode() + result;
         }
 
         @Override
