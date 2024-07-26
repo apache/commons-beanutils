@@ -129,12 +129,7 @@ public class WrapDynaClass implements DynaClass {
     public static WrapDynaClass createDynaClass(final Class<?> beanClass, final PropertyUtilsBean pu) {
         final PropertyUtilsBean propUtils = pu != null ? pu : PropertyUtilsBean.getInstance();
         final CacheKey key = new CacheKey(beanClass, propUtils);
-        WrapDynaClass dynaClass = getClassesCache().get(key);
-        if (dynaClass == null) {
-            dynaClass = new WrapDynaClass(beanClass, propUtils);
-            getClassesCache().put(key, dynaClass);
-        }
-        return dynaClass;
+        return getClassesCache().computeIfAbsent(key, k -> new WrapDynaClass(beanClass, propUtils));
     }
 
     /**
