@@ -27,5 +27,7 @@ package org.apache.commons.beanutils;
 
 class TestBeanPackageSubclass extends TestBean {
 
+    private static final long serialVersionUID = 1L;
+
 
 }
