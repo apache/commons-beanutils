@@ -62,6 +62,8 @@ import java.util.WeakHashMap;
  */
 class WeakFastHashMap<K, V> extends HashMap<K, V> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The underlying map we are managing.
      */
@@ -79,7 +81,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * Construct an empty map.
      */
     public WeakFastHashMap() {
-        super();
         this.map = createMap();
     }
 
@@ -89,7 +90,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param capacity  the initial capacity of the empty map
      */
     public WeakFastHashMap(final int capacity) {
-        super();
         this.map = createMap(capacity);
     }
 
@@ -100,7 +100,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param factor  the load factor of the new map
      */
     public WeakFastHashMap(final int capacity, final float factor) {
-        super();
         this.map = createMap(capacity, factor);
     }
 
@@ -110,7 +109,6 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      * @param map  the map whose mappings are to be copied
      */
     public WeakFastHashMap(final Map<? extends K, ? extends V> map) {
-        super();
         this.map = createMap(map);
     }
 
@@ -124,7 +122,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
      *  @return true if this map is operating in fast mode
      */
     public boolean getFast() {
-        return (this.fast);
+        return this.fast;
     }
 
     /**
@@ -154,11 +152,10 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     @Override
     public V get(final Object key) {
         if (fast) {
-            return (map.get(key));
-        } else {
-            synchronized (map) {
-                return (map.get(key));
-            }
+            return map.get(key);
+        }
+        synchronized (map) {
+            return map.get(key);
         }
     }
 
@@ -170,11 +167,10 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     @Override
     public int size() {
         if (fast) {
-            return (map.size());
-        } else {
-            synchronized (map) {
-                return (map.size());
-            }
+            return map.size();
+        }
+        synchronized (map) {
+            return map.size();
         }
     }
 
@@ -186,11 +182,10 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     @Override
     public boolean isEmpty() {
         if (fast) {
-            return (map.isEmpty());
-        } else {
-            synchronized (map) {
-                return (map.isEmpty());
-            }
+            return map.isEmpty();
+        }
+        synchronized (map) {
+            return map.isEmpty();
         }
     }
 
@@ -204,11 +199,10 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     @Override
     public boolean containsKey(final Object key) {
         if (fast) {
-            return (map.containsKey(key));
-        } else {
-            synchronized (map) {
-                return (map.containsKey(key));
-            }
+            return map.containsKey(key);
+        }
+        synchronized (map) {
+            return map.containsKey(key);
         }
     }
 
@@ -222,11 +216,10 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     @Override
     public boolean containsValue(final Object value) {
         if (fast) {
-            return (map.containsValue(value));
-        } else {
-            synchronized (map) {
-                return (map.containsValue(value));
-            }
+            return map.containsValue(value);
+        }
+        synchronized (map) {
+            return map.containsValue(value);
         }
     }
 
@@ -252,11 +245,11 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 final Map<K, V> temp = cloneMap(map);
                 final V result = temp.put(key, value);
                 map = temp;
-                return (result);
+                return result;
             }
         } else {
             synchronized (map) {
-                return (map.put(key, value));
+                return map.put(key, value);
             }
         }
     }
@@ -296,11 +289,11 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 final Map<K, V> temp = cloneMap(map);
                 final V result = temp.remove(key);
                 map = temp;
-                return (result);
+                return result;
             }
         } else {
             synchronized (map) {
-                return (map.remove(key));
+                return map.remove(key);
             }
         }
     }
@@ -337,52 +330,52 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public boolean equals(final Object o) {
         // Simple tests that require no synchronization
         if (o == this) {
-            return (true);
-        } else if (!(o instanceof Map)) {
-            return (false);
+            return true;
+        }
+        if (!(o instanceof Map)) {
+            return false;
         }
         final Map<?, ?> mo = (Map<?, ?>) o;
 
         // Compare the two maps for equality
         if (fast) {
             if (mo.size() != map.size()) {
-                return (false);
+                return false;
             }
             for (final Map.Entry<K, V> e : map.entrySet()) {
                 final K key = e.getKey();
                 final V value = e.getValue();
                 if (value == null) {
                     if (!(mo.get(key) == null && mo.containsKey(key))) {
-                        return (false);
+                        return false;
                     }
                 } else {
                     if (!value.equals(mo.get(key))) {
-                        return (false);
+                        return false;
                     }
                 }
             }
-            return (true);
+            return true;
 
-        } else {
-            synchronized (map) {
-                if (mo.size() != map.size()) {
-                    return (false);
-                }
-                for (final Map.Entry<K, V> e : map.entrySet()) {
-                    final K key = e.getKey();
-                    final V value = e.getValue();
-                    if (value == null) {
-                        if (!(mo.get(key) == null && mo.containsKey(key))) {
-                            return (false);
-                        }
-                    } else {
-                        if (!value.equals(mo.get(key))) {
-                            return (false);
-                        }
+        }
+        synchronized (map) {
+            if (mo.size() != map.size()) {
+                return false;
+            }
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                final K key = e.getKey();
+                final V value = e.getValue();
+                if (value == null) {
+                    if (!(mo.get(key) == null && mo.containsKey(key))) {
+                        return false;
+                    }
+                } else {
+                    if (!value.equals(mo.get(key))) {
+                        return false;
                     }
                 }
-                return (true);
             }
+            return true;
         }
     }
 
@@ -400,15 +393,14 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             for (final Map.Entry<K, V> e : map.entrySet()) {
                 h += e.hashCode();
             }
-            return (h);
-        } else {
-            synchronized (map) {
-                int h = 0;
-                for (final Map.Entry<K, V> e : map.entrySet()) {
-                    h += e.hashCode();
-                }
-                return (h);
+            return h;
+        }
+        synchronized (map) {
+            int h = 0;
+            for (final Map.Entry<K, V> e : map.entrySet()) {
+                h += e.hashCode();
             }
+            return h;
         }
     }
 
@@ -422,14 +414,14 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     public Object clone() {
         WeakFastHashMap<K, V> results = null;
         if (fast) {
-            results = new WeakFastHashMap<K, V>(map);
+            results = new WeakFastHashMap<>(map);
         } else {
             synchronized (map) {
-                results = new WeakFastHashMap<K, V>(map);
+                results = new WeakFastHashMap<>(map);
             }
         }
         results.setFast(getFast());
-        return (results);
+        return results;
     }
 
     // Map views
@@ -467,19 +459,19 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
     // ----------------------------------------------------------------------
 
     protected Map<K, V> createMap() {
-        return new WeakHashMap<K, V>();
+        return new WeakHashMap<>();
     }
 
     protected Map<K, V> createMap(final int capacity) {
-        return new WeakHashMap<K, V>(capacity);
+        return new WeakHashMap<>(capacity);
     }
 
     protected Map<K, V> createMap(final int capacity, final float factor) {
-        return new WeakHashMap<K, V>(capacity, factor);
+        return new WeakHashMap<>(capacity, factor);
     }
 
     protected Map<K, V> createMap(final Map<? extends K, ? extends V> map) {
-        return new WeakHashMap<K, V>(map);
+        return new WeakHashMap<>(map);
     }
 
     protected Map<K, V> cloneMap(final Map<? extends K, ? extends V> map) {
@@ -503,6 +495,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
         protected abstract E iteratorNext(Map.Entry<K, V> entry);
 
 
+        @Override
         public void clear() {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -515,6 +508,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean remove(final Object o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -530,6 +524,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean removeAll(final Collection<?> o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -545,6 +540,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public boolean retainAll(final Collection<?> o) {
             if (fast) {
                 synchronized (WeakFastHashMap.this) {
@@ -560,64 +556,64 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
         }
 
+        @Override
         public int size() {
             if (fast) {
                 return get(map).size();
-            } else {
-                synchronized (map) {
-                    return get(map).size();
-                }
+            }
+            synchronized (map) {
+                return get(map).size();
             }
         }
 
 
+        @Override
         public boolean isEmpty() {
             if (fast) {
                 return get(map).isEmpty();
-            } else {
-                synchronized (map) {
-                    return get(map).isEmpty();
-                }
+            }
+            synchronized (map) {
+                return get(map).isEmpty();
             }
         }
 
+        @Override
         public boolean contains(final Object o) {
             if (fast) {
                 return get(map).contains(o);
-            } else {
-                synchronized (map) {
-                    return get(map).contains(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).contains(o);
             }
         }
 
+        @Override
         public boolean containsAll(final Collection<?> o) {
             if (fast) {
                 return get(map).containsAll(o);
-            } else {
-                synchronized (map) {
-                    return get(map).containsAll(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).containsAll(o);
             }
         }
 
+        @Override
         public <T> T[] toArray(final T[] o) {
             if (fast) {
                 return get(map).toArray(o);
-            } else {
-                synchronized (map) {
-                    return get(map).toArray(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).toArray(o);
             }
         }
 
+        @Override
         public Object[] toArray() {
             if (fast) {
                 return get(map).toArray();
-            } else {
-                synchronized (map) {
-                    return get(map).toArray();
-                }
+            }
+            synchronized (map) {
+                return get(map).toArray();
             }
         }
 
@@ -629,10 +625,9 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
             }
             if (fast) {
                 return get(map).equals(o);
-            } else {
-                synchronized (map) {
-                    return get(map).equals(o);
-                }
+            }
+            synchronized (map) {
+                return get(map).equals(o);
             }
         }
 
@@ -640,21 +635,23 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
         public int hashCode() {
             if (fast) {
                 return get(map).hashCode();
-            } else {
-                synchronized (map) {
-                    return get(map).hashCode();
-                }
+            }
+            synchronized (map) {
+                return get(map).hashCode();
             }
         }
 
+        @Override
         public boolean add(final E o) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public boolean addAll(final Collection<? extends E> c) {
             throw new UnsupportedOperationException();
         }
 
+        @Override
         public Iterator<E> iterator() {
             return new CollectionViewIterator();
         }
@@ -670,6 +667,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 this.iterator = expected.entrySet().iterator();
             }
 
+            @Override
             public boolean hasNext() {
                 if (expected != map) {
                     throw new ConcurrentModificationException();
@@ -677,6 +675,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 return iterator.hasNext();
             }
 
+            @Override
             public E next() {
                 if (expected != map) {
                     throw new ConcurrentModificationException();
@@ -685,6 +684,7 @@ class WeakFastHashMap<K, V> extends HashMap<K, V> {
                 return iteratorNext(lastReturned);
             }
 
+            @Override
             public void remove() {
                 if (lastReturned == null) {
                     throw new IllegalStateException();
