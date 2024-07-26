@@ -62,8 +62,8 @@ public class WrapDynaClass implements DynaClass {
      * @param propUtils the {@code PropertyUtilsBean} associated with this class
      */
     private WrapDynaClass(final Class<?> beanClass, final PropertyUtilsBean propUtils) {
-
-        this.beanClassRef = new SoftReference<>(beanClass);
+        // Compiler needs generic.
+        this.beanClassRef = new SoftReference<Class<?>>(beanClass);
         this.beanClassName = beanClass.getName();
         propertyUtilsBean = propUtils;
         introspect();
