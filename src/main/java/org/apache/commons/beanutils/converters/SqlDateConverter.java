@@ -39,7 +39,6 @@ public final class SqlDateConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlDateConverter() {
-        super();
     }
 
     /**
