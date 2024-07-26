@@ -89,12 +89,13 @@ public class TestResultSetMetaData implements InvocationHandler {
      * @return The result of invoking the method.
      * @throws Throwable if an error occurs.
      */
+    @Override
     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
         final String methodName = method.getName();
         if ("getColumnClassName".equals(methodName)) {
             return getColumnClassName(((Integer)args[0]).intValue());
         } if ("getColumnCount".equals(methodName)) {
-            return new Integer(getColumnCount());
+            return Integer.valueOf(getColumnCount());
         } if ("getColumnName".equals(methodName)) {
             return getColumnName(((Integer)args[0]).intValue());
         } if ("getColumnType".equals(methodName)) {
@@ -108,16 +109,16 @@ public class TestResultSetMetaData implements InvocationHandler {
 
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
-        return (metadata[columnIndex - 1][1]);
+        return metadata[columnIndex - 1][1];
     }
 
 
     public int getColumnCount() throws SQLException {
-        return (metadata.length);
+        return metadata.length;
     }
 
     public String getColumnName(final int columnIndex) throws SQLException {
-        return (metadata[columnIndex - 1][0]);
+        return metadata[columnIndex - 1][0];
     }
 
 
@@ -154,7 +155,7 @@ public class TestResultSetMetaData implements InvocationHandler {
         } else {
             sqlType = Types.OTHER;
         }
-        return new Integer(sqlType);
+        return Integer.valueOf(sqlType);
     }
 
 
