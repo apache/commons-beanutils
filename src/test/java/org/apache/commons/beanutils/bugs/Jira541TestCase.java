@@ -34,15 +34,15 @@ public class Jira541TestCase {
 
     @Test
     public void testFluentBeanIntrospectorOnOverriddenSetter() throws Exception {
-        PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
+        final PropertyUtilsBean propertyUtilsBean = new PropertyUtilsBean();
         propertyUtilsBean.addBeanIntrospector(new FluentPropertyBeanIntrospector());
 
         // note: we should setProperty first on SubTypeA (with overridden setter), then on subTypeB
         // but not vice versa
-        SubTypeA subTypeA = new SubTypeA();
+        final SubTypeA subTypeA = new SubTypeA();
         propertyUtilsBean.setProperty(subTypeA, FIELD_NAME, FIELD_VALUE);
 
-        SubTypeB subTypeB = new SubTypeB();
+        final SubTypeB subTypeB = new SubTypeB();
         propertyUtilsBean.setProperty(subTypeB, FIELD_NAME, FIELD_VALUE);
 
         assertEquals(FIELD_VALUE, subTypeA.getField());
@@ -53,7 +53,7 @@ public class Jira541TestCase {
 
         private String field;
 
-        public BaseType setField(String objectName) {
+        public BaseType setField(final String objectName) {
             this.field = objectName;
             return this;
         }
@@ -66,7 +66,7 @@ public class Jira541TestCase {
     public static class SubTypeA extends BaseType {
 
         @Override
-        public SubTypeA setField(String field) {
+        public SubTypeA setField(final String field) {
             super.setField(field);
             return this;
         }
