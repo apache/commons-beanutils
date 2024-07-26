@@ -64,7 +64,7 @@ public class Jira157TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira157TestCase.class));
+        return new TestSuite(Jira157TestCase.class);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Jira157TestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        BeanUtilsBean custom = new BeanUtilsBean();
+        final BeanUtilsBean custom = new BeanUtilsBean();
         custom.getPropertyUtils().removeBeanIntrospector(SuppressPropertiesBeanIntrospector.SUPPRESS_CLASS);
         BeanUtilsBean.setInstance(custom);
     }
@@ -128,9 +128,11 @@ public class Jira157TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_157_BeanUtils_Describe_Interface() {
         final Object bean = new XY() {
+            @Override
             public String getX() {
                 return "x-value";
             }
+            @Override
             public String getY() {
                 return "y-value";
             }
@@ -171,7 +173,7 @@ public class Jira157TestCase extends TestCase {
         assertEquals("publicFoo Value", "PublicFoo Value", result.get("publicFoo"));
     }
 
-    public static interface XY {
+    public interface XY {
         String getX();
         String getY();
     }
