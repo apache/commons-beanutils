@@ -75,12 +75,12 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final String[] MODEL = new String[0];
+    private static final String[] MODEL = {};
 
     /**
      * <p> Model object for int arrays.</p>
      */
-    private static final int[] INT_MODEL = new int[0];
+    private static final int[] INT_MODEL = {};
 
 
 
@@ -125,15 +125,14 @@ public final class StringArrayConverter extends AbstractArrayConverter {
         // Deal with a null value
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
+                return defaultValue;
             }
+            throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
         if (MODEL.getClass() == value.getClass()) {
-            return (value);
+            return value;
         }
 
         // Deal with the input value as an int array
@@ -146,7 +145,7 @@ public final class StringArrayConverter extends AbstractArrayConverter {
                 results[i] = Integer.toString(values[i]);
             }
 
-            return (results);
+            return results;
         }
 
         // Parse the input value as a String into elements
@@ -157,13 +156,12 @@ public final class StringArrayConverter extends AbstractArrayConverter {
             for (int i = 0; i < results.length; i++) {
                 results[i] = (String) list.get(i);
             }
-            return (results);
+            return results;
         } catch (final Exception e) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(value.toString(), e);
+                return defaultValue;
             }
+            throw new ConversionException(value.toString(), e);
         }
     }
 
