@@ -16,6 +16,8 @@
  */
 package org.apache.commons.beanutils2.bugs;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -70,7 +72,7 @@ public class Jira509TestCase {
                     @Override
                     public void run() {
                         final WrapDynaClass w = WrapDynaClass.createDynaClass(clazz);
-                        assert w != null;
+                        assertNotNull(w);
                     }
 
                 });
