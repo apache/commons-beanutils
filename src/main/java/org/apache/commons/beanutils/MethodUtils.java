@@ -1228,7 +1228,7 @@ public class MethodUtils {
      * null if no match is found
      */
     public static Class<?> getPrimitiveType(final Class<?> wrapperType) {
-        // does anyone know a better strategy than comparing names?
+        // does anyone know a better strategy?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
         }
