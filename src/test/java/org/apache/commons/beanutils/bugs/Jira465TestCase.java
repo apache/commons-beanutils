@@ -80,7 +80,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayProp {
-        private Object[] foo = new Object[] { OLD_VALUE };
+        private Object[] foo = { OLD_VALUE };
 
         public Object[] getFoo() {
             return foo;
@@ -92,7 +92,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ArrayIndexedProp {
-        private final Object[] foo = new Object[] { OLD_VALUE };
+        private final Object[] foo = { OLD_VALUE };
 
         public Object getFoo(final int i) {
             return foo[i];
@@ -104,7 +104,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListProp {
-        private List<String> foo = new ArrayList<String>(Arrays.asList(OLD_VALUE));
+        private List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
 
         public List<String> getFoo() {
             return foo;
@@ -116,7 +116,7 @@ public class Jira465TestCase extends TestCase {
     }
 
     public static class ListIndexedProp {
-        private final List<String> foo = new ArrayList<String>(Arrays.asList(OLD_VALUE));
+        private final List<String> foo = new ArrayList<>(Arrays.asList(OLD_VALUE));
 
         public String getFoo(final int i) {
             return foo.get(i);
