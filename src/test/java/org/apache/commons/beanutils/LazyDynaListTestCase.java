@@ -48,7 +48,6 @@ public class LazyDynaListTestCase extends TestCase {
     protected DynaClass pojoDynaClass = new WrapDynaBean(new TestBean()).getDynaClass();
     protected DynaClass basicDynaClass = new BasicDynaClass("test", BasicDynaBean.class, properties);
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -59,7 +58,6 @@ public class LazyDynaListTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Run thus Test
@@ -89,7 +87,6 @@ public class LazyDynaListTestCase extends TestCase {
     public void tearDown() {
     }
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test DynaBean Create
@@ -176,7 +173,6 @@ public class LazyDynaListTestCase extends TestCase {
      */
     public void testCollection(final LazyDynaList list, final Class<?> testClass, final DynaClass testDynaClass, final Object wrongBean) {
 
-        // ----- Create Collection & Array of Maps -----
         final int size = 5;
         final List<Object> testList = new ArrayList<Object>(size);
         final TreeMap<?, ?>[] testArray = new TreeMap[size];
@@ -188,7 +184,6 @@ public class LazyDynaListTestCase extends TestCase {
         }
 
 
-        // ----- Create LazyArrayList from Collection -----
         LazyDynaList lazyList = new LazyDynaList(testList);
         assertEquals("1. check size", size, lazyList.size());
 
@@ -205,7 +200,6 @@ public class LazyDynaListTestCase extends TestCase {
 
 
 
-        // ----- Create LazyArrayList from Array -----
         lazyList = new LazyDynaList(testArray);
         assertEquals("6. check size", size, lazyList.size());
 

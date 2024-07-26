@@ -35,7 +35,6 @@ import java.util.Locale;
 public class DoubleLocaleConverter extends DecimalLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

@@ -33,7 +33,6 @@ import org.apache.commons.collections.FastHashMap;
  */
 public class LocaleConvertUtils {
 
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * <p>Gets the <code>Locale</code> which will be used when
@@ -88,7 +87,6 @@ public class LocaleConvertUtils {
         LocaleConvertUtilsBean.getInstance().setApplyLocalized(newApplyLocalized);
     }
 
-    // --------------------------------------------------------- Methods
 
     /**
      * <p>Convert the specified locale-sensitive value into a String.</p>

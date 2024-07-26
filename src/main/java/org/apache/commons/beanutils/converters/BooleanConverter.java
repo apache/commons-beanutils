@@ -51,7 +51,6 @@ package org.apache.commons.beanutils.converters;
 public final class BooleanConverter extends AbstractConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -138,7 +137,6 @@ public final class BooleanConverter extends AbstractConverter {
     }
 
 
-    // ----------------------------------------------------- Static Variables
 
 
     /**
@@ -152,7 +150,6 @@ public final class BooleanConverter extends AbstractConverter {
     public static final Object NO_DEFAULT = new Object();
 
 
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * The set of strings that are known to map to Boolean.TRUE.
@@ -164,7 +161,6 @@ public final class BooleanConverter extends AbstractConverter {
      */
     private String[] falseStrings = {"false", "no", "n", "off", "0"};
 
-    // --------------------------------------------------------- Protected Methods
 
     /**
      * Return the default type this <code>Converter</code> handles.

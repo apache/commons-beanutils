@@ -37,7 +37,6 @@ import org.apache.commons.beanutils.ConversionException;
 public final class LongArrayConverter extends AbstractArrayConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -66,7 +65,6 @@ public final class LongArrayConverter extends AbstractArrayConverter {
     }
 
 
-    // ------------------------------------------------------- Static Variables
 
 
     /**
@@ -75,7 +73,6 @@ public final class LongArrayConverter extends AbstractArrayConverter {
     private static final long[] MODEL = {};
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

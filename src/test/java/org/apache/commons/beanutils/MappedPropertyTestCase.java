@@ -26,7 +26,6 @@ import junit.framework.TestSuite;
  */
 public class MappedPropertyTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -37,7 +36,6 @@ public class MappedPropertyTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Run this Test
@@ -67,7 +65,6 @@ public class MappedPropertyTestCase extends TestCase {
     public void tearDown() {
     }
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test valid method name

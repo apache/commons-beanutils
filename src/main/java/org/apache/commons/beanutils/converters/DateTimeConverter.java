@@ -85,7 +85,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     private boolean useLocaleFormat;
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Construct a Date/Time <em>Converter</em> that throws a
@@ -107,7 +106,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
     }
 
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Indicate whether conversion should use a format/pattern or not.
@@ -203,7 +201,6 @@ public abstract class DateTimeConverter extends AbstractConverter {
         setUseLocaleFormat(true);
     }
 
-    // ------------------------------------------------------ Protected Methods
 
     /**
      * Convert an input Date/Calendar object into a String.
@@ -290,14 +287,12 @@ public abstract class DateTimeConverter extends AbstractConverter {
         // Handle java.sql.Timestamp
         if (value instanceof java.sql.Timestamp) {
 
-            // ---------------------- JDK 1.3 Fix ----------------------
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently accross JDK versions
             final java.sql.Timestamp timestamp = (java.sql.Timestamp)value;
             long timeInMillis = timestamp.getTime() / 1000 * 1000;
             timeInMillis += timestamp.getNanos() / 1000000;
-            // ---------------------- JDK 1.3 Fix ----------------------
             return toDate(targetType, timeInMillis);
         }
 

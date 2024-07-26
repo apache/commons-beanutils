@@ -38,7 +38,6 @@ import junit.framework.TestSuite;
 public class DynaPropertyUtilsTestCase extends TestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -79,7 +78,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     protected TestBean nested = null;
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -94,7 +92,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
 
-    // --------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -179,7 +176,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**
@@ -2599,7 +2595,6 @@ public class DynaPropertyUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

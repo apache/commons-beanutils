@@ -70,7 +70,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
 public class PropertyUtilsTestCase extends TestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -179,7 +178,6 @@ public class PropertyUtilsTestCase extends TestCase {
     };
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -194,7 +192,6 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -249,7 +246,6 @@ public class PropertyUtilsTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**
@@ -3227,7 +3223,6 @@ public class PropertyUtilsTestCase extends TestCase {
     public void testSetMappedPeriods() {
 
 
-        // -------- PropertyUtils.setMappedProperty()--------
         bean.setMappedProperty("key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly (A)",
                      "Special Value",
@@ -3242,7 +3237,6 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
-        // -------- PropertyUtils.setNestedProperty() --------
         bean.setMappedProperty("key.with.a.dot", "Special Value");
         assertEquals("Can retrieve directly (B)",
                      "Special Value",
@@ -3257,7 +3251,6 @@ public class PropertyUtilsTestCase extends TestCase {
         }
 
 
-        // -------- PropertyUtils.setNestedProperty() --------
         final TestBean testBean = new TestBean();
         bean.setMappedObjects("nested.property", testBean);
         assertEquals("Can retrieve directly (C)",
@@ -3273,7 +3266,6 @@ public class PropertyUtilsTestCase extends TestCase {
             fail("Thew exception: " + e);
         }
 
-        // -------- PropertyUtils.setNestedProperty() --------
         bean.getNested().setMappedProperty("Mapped Key", "Nested Mapped Value");
         try {
             assertEquals("Can retrieve via getNestedProperty (D)",
@@ -3930,7 +3922,6 @@ public class PropertyUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

@@ -54,7 +54,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     private final boolean readOnly;
     private transient Set<K> keySet;
 
-    // ------------------- Constructors ----------------------------------
 
     /**
      * Constructs a read only Map for the specified
@@ -84,7 +83,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
     }
 
 
-    // ------------------- public Methods --------------------------------
 
 
     /**
@@ -97,7 +95,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         return readOnly;
     }
 
-    // ------------------- java.util.Map Methods -------------------------
 
     /**
      * clear() operation is not supported.
@@ -311,7 +308,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
         return Collections.unmodifiableList(values);
     }
 
-    // ------------------- protected Methods -----------------------------
 
     /**
      * Provide access to the underlying {@link DynaBean}
@@ -331,7 +327,6 @@ public abstract class BaseDynaBeanMapDecorator<K> implements Map<K, Object> {
      */
     protected abstract K convertKey(String propertyName);
 
-    // ------------------- private Methods -------------------------------
 
     /**
      * Convenience method to retrieve the {@link DynaProperty}s

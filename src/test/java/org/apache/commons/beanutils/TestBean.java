@@ -33,7 +33,6 @@ import java.util.Map;
 
 public class TestBean implements Serializable {
 
-    // ----------------------------------------------------------- Constructors
 
     private static final long serialVersionUID = 1L;
 
@@ -102,7 +101,6 @@ public class TestBean implements Serializable {
         this.string2dArray = string2dArray;
     }
 
-    // ------------------------------------------------------------- Properties
 
 
     /**
@@ -546,7 +544,6 @@ public class TestBean implements Serializable {
     }
 
 
-    // ------------------------------------------------------ Invalid Properties
 
 
     /**
@@ -577,7 +574,6 @@ public class TestBean implements Serializable {
 
 
 
-    // ------------------------------------------------------- Static Variables
 
 
     /**

@@ -155,7 +155,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
     protected MutableDynaClass dynaClass;
 
 
-    // ------------------- Constructors ----------------------------------
 
     /**
      * Construct a new <code>LazyDynaBean</code> with a <code>LazyDynaClass</code> instance.
@@ -193,7 +192,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
     }
 
 
-    // ------------------- Public Methods ----------------------------------
 
     /**
      * Return a Map representation of this DynaBean.
@@ -246,7 +244,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ------------------- DynaBean Methods ----------------------------------
 
     /**
      * Does the specified mapped property contain a value for the specified
@@ -598,7 +595,6 @@ public class LazyDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ------------------- protected Methods ----------------------------------
 
     /**
      * Grow the size of an indexed property

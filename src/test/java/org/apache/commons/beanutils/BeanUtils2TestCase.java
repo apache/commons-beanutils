@@ -25,7 +25,6 @@ import junit.framework.TestSuite;
  */
 public class BeanUtils2TestCase extends BeanUtilsTestCase {
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -37,7 +36,6 @@ public class BeanUtils2TestCase extends BeanUtilsTestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**

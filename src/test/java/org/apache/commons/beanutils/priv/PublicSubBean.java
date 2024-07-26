@@ -32,7 +32,6 @@ package org.apache.commons.beanutils.priv;
 public class PublicSubBean extends PackageBean {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -44,7 +43,6 @@ public class PublicSubBean extends PackageBean {
     }
 
 
-    // ------------------------------------------------------------- Properties
 
 
     /**

@@ -42,7 +42,6 @@ import java.util.Map;
 public class BasicDynaBean implements DynaBean, Serializable {
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     private static final long serialVersionUID = 1L;
@@ -60,7 +59,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
 
-    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -98,7 +96,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ------------------------------------------------------ DynaBean Methods
 
 
     /**
@@ -406,7 +403,6 @@ public class BasicDynaBean implements DynaBean, Serializable {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

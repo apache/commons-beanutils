@@ -35,7 +35,6 @@ import java.util.NoSuchElementException;
 public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
 
 
-    // ------------------------------------------------------------ Constructor
 
 
     /**
@@ -52,7 +51,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
 
@@ -76,7 +74,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     protected boolean eof = false;
 
 
-    // ------------------------------------------------------- DynaBean Methods
 
 
     /**
@@ -283,7 +280,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
 
-    // ------------------------------------------------------- Iterator Methods
 
 
     /**
@@ -339,7 +335,6 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

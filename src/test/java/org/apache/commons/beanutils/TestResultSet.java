@@ -51,7 +51,6 @@ import java.util.Map;
 public class TestResultSet implements InvocationHandler {
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -148,7 +147,6 @@ public class TestResultSet implements InvocationHandler {
         return (String)arg;
     }
 
-    // ---------------------------------------------------- Implemented Methods
 
 
     public void close() throws SQLException {
@@ -230,7 +228,6 @@ public class TestResultSet implements InvocationHandler {
     }
 
 
-    // -------------------------------------------------- Unimplemented Methods
 
 
     public boolean absolute(final int row) throws SQLException {

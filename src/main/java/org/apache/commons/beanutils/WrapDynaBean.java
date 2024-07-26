@@ -46,7 +46,6 @@ import java.lang.reflect.InvocationTargetException;
 public class WrapDynaBean implements DynaBean, Serializable {
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     private static final long serialVersionUID = 1L;
@@ -82,7 +81,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
 
     }
 
-    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -98,7 +96,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
     protected Object instance = null;
 
 
-    // ------------------------------------------------------ DynaBean Methods
 
 
     /**
@@ -379,7 +376,6 @@ public class WrapDynaBean implements DynaBean, Serializable {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

@@ -29,7 +29,6 @@ package org.apache.commons.beanutils;
 public class ConversionException extends RuntimeException {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     private static final long serialVersionUID = 1L;
@@ -73,7 +72,6 @@ public class ConversionException extends RuntimeException {
     }
 
 
-    // ------------------------------------------------------------- Properties
 
 
     /**

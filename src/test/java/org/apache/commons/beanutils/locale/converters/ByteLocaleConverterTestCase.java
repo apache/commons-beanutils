@@ -25,13 +25,11 @@ package org.apache.commons.beanutils.locale.converters;
 
 public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
-    // ---------------------------------------------------------- Constructors
 
     public ByteLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Set up instance variables required by this test case.
@@ -73,7 +71,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructorMain() {
 
-        // ------------- Construct with localized pattern ------------
         converter = new ByteLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   localizedIntegerPattern,
@@ -112,7 +109,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //convertValueToType(converter, "(B)", Double.class, localizedIntegerValue, localizedIntegerPattern, expectedValue);
 
 
-        // ------------- Construct with non-localized pattern ------------
         converter = new ByteLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultIntegerPattern,
@@ -134,7 +130,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default locale ------------
         converter = new ByteLocaleConverter();
 
         // Perform Tests
@@ -153,7 +148,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using localized pattern (default locale) --------
         converter = new ByteLocaleConverter(true);
 
         // Perform Tests
@@ -170,7 +164,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale);
 
         // Perform Tests
@@ -188,7 +181,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_5() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, true);
 
         // Perform Tests
@@ -205,7 +197,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, defaultIntegerPattern);
 
         // Perform Tests
@@ -221,7 +212,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_7() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(localizedLocale, localizedIntegerPattern, true);
 
         // Perform Tests
@@ -237,7 +227,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(defaultValue);
 
         // Perform Tests
@@ -253,7 +242,6 @@ public class ByteLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
         converter = new ByteLocaleConverter(defaultValue, true);
 
         // Perform Tests

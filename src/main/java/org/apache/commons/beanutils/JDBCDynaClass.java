@@ -35,7 +35,6 @@ import java.util.Map;
 
 abstract class JDBCDynaClass implements DynaClass, Serializable {
 
-    // ----------------------------------------------------- Instance Variables
 
     private static final long serialVersionUID = 1L;
 
@@ -70,7 +69,6 @@ abstract class JDBCDynaClass implements DynaClass, Serializable {
      */
     private Map<String, String> columnNameXref;
 
-    // ------------------------------------------------------ DynaClass Methods
 
     /**
      * <p>Return the name of this DynaClass (analogous to the

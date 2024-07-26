@@ -42,11 +42,9 @@ import org.apache.commons.beanutils.ConversionException;
 
 public class LocaleConvertUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
 
     private char m_decimalSeparator;
 
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -59,7 +57,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -97,7 +94,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**
@@ -637,7 +633,6 @@ public class LocaleConvertUtilsTestCase extends TestCase {
                 LocaleConvertUtils.convert(value.toString(), getClass()));
     }
 
-    // -------------------------------------------------------- Private Methods
 
 
     private void checkIntegerArray(final Object value, final int intArray[]) {

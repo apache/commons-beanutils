@@ -51,7 +51,6 @@ import org.apache.commons.beanutils.Converter;
 public abstract class AbstractArrayConverter implements Converter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -83,7 +82,6 @@ public abstract class AbstractArrayConverter implements Converter {
 
     }
 
-    // ------------------------------------------------------- Static Variables
 
     /**
      * This is a special reference that can be passed as the "default object"
@@ -94,7 +92,6 @@ public abstract class AbstractArrayConverter implements Converter {
      */
     public static final Object NO_DEFAULT = new Object();
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -115,7 +112,6 @@ public abstract class AbstractArrayConverter implements Converter {
     protected boolean useDefault = true;
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**
@@ -134,7 +130,6 @@ public abstract class AbstractArrayConverter implements Converter {
     public abstract Object convert(Class type, Object value);
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

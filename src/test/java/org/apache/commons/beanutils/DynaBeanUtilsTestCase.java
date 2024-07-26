@@ -37,7 +37,6 @@ import junit.framework.TestSuite;
 public class DynaBeanUtilsTestCase extends TestCase {
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -80,7 +79,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
     };
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -95,7 +93,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
     }
 
 
-    // --------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -181,7 +178,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test the cloneBean() method from a DynaBean.
@@ -1196,7 +1192,6 @@ public class DynaBeanUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     // Ensure that the nested intArray matches the specified values

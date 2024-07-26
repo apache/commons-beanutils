@@ -37,7 +37,6 @@ import org.apache.commons.logging.LogFactory;
 
 public abstract class BaseLocaleConverter implements LocaleConverter {
 
-    // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(BaseLocaleConverter.class);
@@ -57,7 +56,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
     /** The flag indicating whether the given pattern string is localized or not. */
     protected boolean locPattern = false;
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link LocaleConverter} that will throw a {@link ConversionException}
@@ -139,7 +137,6 @@ public abstract class BaseLocaleConverter implements LocaleConverter {
         this.locPattern = locPattern;
     }
 
-    // --------------------------------------------------------- Methods
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

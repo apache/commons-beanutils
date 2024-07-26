@@ -31,7 +31,6 @@ package org.apache.commons.beanutils;
 public class ConvertUtils {
 
 
-    // ------------------------------------------------------ Static Properties
 
     /**
      * Gets the default value for Boolean conversions.
@@ -216,7 +215,6 @@ public class ConvertUtils {
         ConvertUtilsBean.getInstance().setDefaultShort(newDefaultShort);
     }
 
-    // --------------------------------------------------------- Public Classes
 
 
     /**

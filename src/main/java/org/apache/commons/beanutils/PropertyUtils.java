@@ -40,7 +40,6 @@ import org.apache.commons.collections.FastHashMap;
 public class PropertyUtils {
 
 
-    // ----------------------------------------------------- Manifest Constants
 
 
     /**
@@ -100,7 +99,6 @@ public class PropertyUtils {
     public static final char NESTED_DELIM = '.';
 
 
-    // ------------------------------------------------------- Static Variables
 
 
     /**
@@ -136,7 +134,6 @@ public class PropertyUtils {
         debug = newDebug;
     }
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

@@ -32,7 +32,6 @@ package org.apache.commons.beanutils.priv;
 class PackageBean {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -44,7 +43,6 @@ class PackageBean {
     }
 
 
-    // ------------------------------------------------------------- Properties
 
 
     /**

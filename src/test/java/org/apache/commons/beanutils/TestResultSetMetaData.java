@@ -37,7 +37,6 @@ import java.sql.Types;
 public class TestResultSetMetaData implements InvocationHandler {
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -105,7 +104,6 @@ public class TestResultSetMetaData implements InvocationHandler {
         throw new UnsupportedOperationException(methodName + " not implemented");
     }
 
-    // ---------------------------------------------------- Implemented Methods
 
 
     public String getColumnClassName(final int columnIndex) throws SQLException {
@@ -159,7 +157,6 @@ public class TestResultSetMetaData implements InvocationHandler {
     }
 
 
-    // -------------------------------------------------- Unimplemented Methods
 
 
     public String getCatalogName(final int columnIndex) throws SQLException {

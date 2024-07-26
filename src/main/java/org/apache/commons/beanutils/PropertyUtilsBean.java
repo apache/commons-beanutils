@@ -96,7 +96,6 @@ public class PropertyUtilsBean {
 
     private Resolver resolver = new DefaultResolver();
 
-    // --------------------------------------------------------- Class Methods
 
     /**
      * Return the PropertyUtils bean instance.
@@ -106,7 +105,6 @@ public class PropertyUtilsBean {
         return BeanUtilsBean.getInstance().getPropertyUtils();
     }
 
-    // --------------------------------------------------------- Variables
 
     /**
      * The cache of PropertyDescriptor arrays for beans we have already
@@ -124,7 +122,6 @@ public class PropertyUtilsBean {
     /** The list with BeanIntrospector objects. */
     private final List<BeanIntrospector> introspectors;
 
-    // ---------------------------------------------------------- Constructors
 
     /** Base constructor */
     public PropertyUtilsBean() {
@@ -137,7 +134,6 @@ public class PropertyUtilsBean {
     }
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

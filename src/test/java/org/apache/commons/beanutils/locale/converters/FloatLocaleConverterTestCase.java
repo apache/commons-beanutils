@@ -32,13 +32,11 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
 
 
 
-    // ---------------------------------------------------------- Constructors
 
     public FloatLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Set up instance variables required by this test case.
@@ -69,7 +67,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructorMain() {
 
-        // ------------- Construct with localized pattern ------------
         converter = new FloatLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   localizedDecimalPattern,
@@ -111,7 +108,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //convertValueToType(converter, "(B)", Integer.class, localizedDecimalValue, localizedDecimalPattern, expectedValue);
 
 
-        // ------------- Construct with non-localized pattern ------------
         converter = new FloatLocaleConverter(defaultValue,
                                                   localizedLocale,
                                                   defaultDecimalPattern,
@@ -133,7 +129,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default locale ------------
         converter = new FloatLocaleConverter();
 
         // Perform Tests
@@ -152,7 +147,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using localized pattern (default locale) --------
         converter = new FloatLocaleConverter(true);
 
         // Perform Tests
@@ -169,7 +163,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale);
 
         // Perform Tests
@@ -187,7 +180,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_5() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, true);
 
         // Perform Tests
@@ -204,7 +196,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, defaultDecimalPattern);
 
         // Perform Tests
@@ -220,7 +211,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_7() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(localizedLocale, localizedDecimalPattern, true);
 
         // Perform Tests
@@ -236,7 +226,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(defaultValue);
 
         // Perform Tests
@@ -252,7 +241,6 @@ public class FloatLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
         converter = new FloatLocaleConverter(defaultValue, true);
 
         // Perform Tests

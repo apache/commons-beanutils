@@ -42,7 +42,6 @@ import org.apache.commons.beanutils.ConversionException;
 public final class BooleanArrayConverter extends AbstractArrayConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -100,7 +99,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
 
     }
 
-    // ------------------------------------------------------- Static Variables
 
     /**
      * Type which this class converts its input to. This value can be
@@ -117,7 +115,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
     private static final BooleanConverter DEFAULT_CONVERTER
         = new BooleanConverter();
 
-    // ---------------------------------------------------- Instance Variables
 
     /**
      * This object is used to perform the conversion of individual strings
@@ -125,7 +122,6 @@ public final class BooleanArrayConverter extends AbstractArrayConverter {
      */
     protected final BooleanConverter booleanConverter;
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

@@ -37,7 +37,6 @@ import org.apache.commons.beanutils.ConversionException;
 public final class IntegerArrayConverter extends AbstractArrayConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -66,7 +65,6 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
     }
 
 
-    // ------------------------------------------------------- Static Variables
 
 
     /**
@@ -75,7 +73,6 @@ public final class IntegerArrayConverter extends AbstractArrayConverter {
     private static final int[] MODEL = {};
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

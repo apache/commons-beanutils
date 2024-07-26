@@ -42,7 +42,6 @@ import java.util.Map;
 
 public class DynaProperty implements Serializable {
 
-    // ----------------------------------------------------------- Constants
 
     private static final long serialVersionUID = 1L;
     /*
@@ -63,7 +62,6 @@ public class DynaProperty implements Serializable {
     private static final int SHORT_TYPE = 8;
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -110,7 +108,6 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // ------------------------------------------------------------- Properties
 
     /** Property name */
     protected String name = null;
@@ -158,7 +155,6 @@ public class DynaProperty implements Serializable {
         return contentType;
     }
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**
@@ -255,7 +251,6 @@ public class DynaProperty implements Serializable {
 
     }
 
-    // --------------------------------------------------------- Serialization helper methods
 
     /**
      * Writes this object safely.

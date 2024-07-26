@@ -82,7 +82,6 @@ import java.util.Iterator;
 public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     private static final long serialVersionUID = 1L;
@@ -173,7 +172,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -182,7 +180,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     protected ResultSet resultSet = null;
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**
@@ -212,7 +209,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
         return getObject(getResultSet(), name);
     }
 
-    // -------------------------------------------------------- Package Methods
 
 
     /**
@@ -225,7 +221,6 @@ public class ResultSetDynaClass extends JDBCDynaClass implements DynaClass {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
     /**
      * <p>Loads the class of the given name which by default uses the class loader used

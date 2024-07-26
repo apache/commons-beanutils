@@ -42,7 +42,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -70,7 +69,6 @@ public class LocaleBeanUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test setting a nested simple property

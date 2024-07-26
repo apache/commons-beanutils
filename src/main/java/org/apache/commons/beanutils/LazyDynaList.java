@@ -187,7 +187,6 @@ public class LazyDynaList extends ArrayList<Object> {
     private Class<?> elementDynaBeanType;
 
 
-    // ------------------- Constructors ------------------------------
 
     /**
      * Default Constructor.
@@ -251,7 +250,6 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- java.util.List Methods --------------------
 
     /**
      * <p>Insert an element at the specified index position.</p>
@@ -477,7 +475,6 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- Public Methods ----------------------------
 
     /**
      * <p>Converts the List to an DynaBean Array.</p>
@@ -591,7 +588,6 @@ public class LazyDynaList extends ArrayList<Object> {
     }
 
 
-    // ------------------- Private Methods ---------------------------
 
     /**
      * <p>Automatically <em>grown</em> the List

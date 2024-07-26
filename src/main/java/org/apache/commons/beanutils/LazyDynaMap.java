@@ -68,7 +68,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     protected boolean returnNull = false;
 
 
-    // ------------------- Constructors ----------------------------------
 
     /**
      * Default Constructor.
@@ -140,7 +139,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         this(dynaClass.getName(), dynaClass.getDynaProperties());
     }
 
-    // ------------------- Public Methods ----------------------------------
 
     /**
      * Set the Map backing this <code>DynaBean</code>
@@ -161,7 +159,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
         return values;
     }
 
-    // ------------------- DynaBean Methods ----------------------------------
 
     /**
      * Set the value of a simple property with the specified name.
@@ -181,7 +178,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
 
     }
 
-    // ------------------- DynaClass Methods ----------------------------------
 
     /**
      * Return the name of this DynaClass (analogous to the
@@ -297,7 +293,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
 
-    // ------------------- MutableDynaClass Methods ----------------------------------
 
     /**
      * <p>Is this DynaClass currently restricted.</p>
@@ -438,7 +433,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
 
-    // ------------------- Additional Public Methods ----------------------------------
 
     /**
      * Should this DynaClass return a <code>null</code> from
@@ -467,7 +461,6 @@ public class LazyDynaMap extends LazyDynaBean implements MutableDynaClass {
     }
 
 
-    // ------------------- Protected Methods ----------------------------------
 
    /**
      * <p>Indicate whether a property actually exists.</p>

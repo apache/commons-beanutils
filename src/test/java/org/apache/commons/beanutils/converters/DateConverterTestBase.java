@@ -518,7 +518,6 @@ public abstract class DateConverterTestBase extends TestCase {
     long getTimeInMillis(final Object date) {
 
         if (date instanceof java.sql.Timestamp) {
-            // ---------------------- JDK 1.3 Fix ----------------------
             // N.B. Prior to JDK 1.4 the Timestamp's getTime() method
             //      didn't include the milliseconds. The following code
             //      ensures it works consistently accross JDK versions

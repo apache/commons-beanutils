@@ -38,7 +38,6 @@ import java.util.HashMap;
 public class BasicDynaClass implements DynaClass, Serializable {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     private static final long serialVersionUID = 1L;
@@ -91,7 +90,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // ----------------------------------------------------- Instance Variables
 
 
     /**
@@ -142,7 +140,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     protected HashMap<String, DynaProperty> propertiesMap = new HashMap<>();
 
 
-    // ------------------------------------------------------ DynaClass Methods
 
 
     /**
@@ -232,7 +229,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**
@@ -249,7 +245,6 @@ public class BasicDynaClass implements DynaClass, Serializable {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

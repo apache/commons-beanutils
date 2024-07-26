@@ -27,7 +27,6 @@ package org.apache.commons.beanutils.priv;
 public interface PrivateDirect extends PrivateIndirect {
 
 
-    // ------------------------------------------------------------- Properties
 
 
     /**

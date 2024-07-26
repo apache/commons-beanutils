@@ -50,7 +50,6 @@ import org.apache.commons.logging.LogFactory;
 public class BeanUtilsBean {
 
 
-    // ------------------------------------------------------ Private Class Variables
 
     /**
      * Contains <code>BeanUtilsBean</code> instances indexed by context classloader.
@@ -86,7 +85,6 @@ public class BeanUtilsBean {
         BEANS_BY_CLASSLOADER.set(newInstance);
     }
 
-    // --------------------------------------------------------- Attributes
 
     /**
      * Logging for this instance
@@ -102,7 +100,6 @@ public class BeanUtilsBean {
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */
     private static final Method INIT_CAUSE_METHOD = getInitCauseMethod();
 
-    // --------------------------------------------------------- Constuctors
 
     /**
      * <p>Constructs an instance using new property
@@ -141,7 +138,6 @@ public class BeanUtilsBean {
         this.propertyUtilsBean = propertyUtilsBean;
     }
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * <p>Clone a bean based on the available property getters and setters,

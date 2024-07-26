@@ -39,7 +39,6 @@ import org.junit.Test;
 
 public class IndexedPropertyTestCase {
 
-    // ---------------------------------------------------- Instance Variables
 
     /**
      * The test bean for each test.
@@ -54,7 +53,6 @@ public class IndexedPropertyTestCase {
     private ArrayList<Object> arrayList;
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -102,7 +100,6 @@ public class IndexedPropertyTestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test IndexedPropertyDescriptor for an Array

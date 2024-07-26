@@ -36,7 +36,6 @@ import java.text.ParseException;
 public class FloatLocaleConverter extends DecimalLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

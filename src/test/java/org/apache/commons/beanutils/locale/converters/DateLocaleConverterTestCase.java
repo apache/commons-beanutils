@@ -51,7 +51,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Set up instance variables required by this test case.
@@ -213,7 +212,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
             return;
         }
 
-        // ------------- Construct with localized pattern ------------
         converter = new DateLocaleConverter(defaultValue,
                                             localizedLocale,
                                             localizedDatePattern,
@@ -242,7 +240,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
         //convertValueToType(converter, "(B)", String.class, localizedDateValue, localizedDatePattern, expectedValue);
 
 
-        // ------------- Construct with non-localized pattern ------------
         converter = new DateLocaleConverter(defaultValue,
                                             localizedLocale,
                                             defaultDatePattern,
@@ -264,7 +261,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_2() {
 
-        // ------------- Construct using default pattern & default locale ------------
         converter = new DateLocaleConverter();
 
         // Perform Tests
@@ -283,7 +279,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_3() {
 
-        // ------------- Construct using default pattern & default locale --------
         converter = new DateLocaleConverter(true);
 
         // Perform Tests
@@ -300,7 +295,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_4() {
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale);
 
         // Perform Tests
@@ -324,7 +318,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
             return;
         }
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale, true);
 
         // Perform Tests
@@ -341,7 +334,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_6() {
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale, defaultDatePattern);
 
         // Perform Tests
@@ -363,7 +355,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
             return;
         }
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(localizedLocale, localizedDatePattern, true);
 
         // Perform Tests
@@ -379,7 +370,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_8() {
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(defaultValue);
 
         // Perform Tests
@@ -395,7 +385,6 @@ public class DateLocaleConverterTestCase extends BaseLocaleConverterTestCase {
      */
     public void testConstructor_9() {
 
-        // ------------- Construct using specified Locale --------
         converter = new DateLocaleConverter(defaultValue, true);
 
         // Perform Tests

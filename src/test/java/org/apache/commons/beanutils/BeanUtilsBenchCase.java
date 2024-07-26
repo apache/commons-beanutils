@@ -36,7 +36,6 @@ import junit.framework.TestSuite;
 public class BeanUtilsBenchCase extends TestCase {
 
 
-    // ------------------------------------------------------------ Constructors
 
 
     /**
@@ -51,7 +50,6 @@ public class BeanUtilsBenchCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Instance Variables
 
 
     // Basic loop counter
@@ -74,7 +72,6 @@ public class BeanUtilsBenchCase extends TestCase {
     private BeanUtilsBean bu = null;
 
 
-    // ---------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -168,7 +165,6 @@ public class BeanUtilsBenchCase extends TestCase {
 
 
 
-    // ------------------------------------------------- Individual Test Methods
 
 
     // Time copyProperties() from a bean
@@ -370,7 +366,6 @@ public class BeanUtilsBenchCase extends TestCase {
     }
 
 
-    // --------------------------------------------------------- Support Methods
 
 
 }

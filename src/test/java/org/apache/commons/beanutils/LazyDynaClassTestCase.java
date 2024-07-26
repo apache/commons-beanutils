@@ -29,7 +29,6 @@ public class LazyDynaClassTestCase extends TestCase {
     protected LazyDynaClass dynaClass = null;
     protected String testProperty     = "myProperty";
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -40,7 +39,6 @@ public class LazyDynaClassTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Run this Test
@@ -72,7 +70,6 @@ public class LazyDynaClassTestCase extends TestCase {
         dynaClass = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test add(name) method

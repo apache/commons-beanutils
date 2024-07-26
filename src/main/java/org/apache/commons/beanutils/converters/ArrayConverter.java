@@ -133,7 +133,6 @@ public class ArrayConverter extends AbstractConverter {
     private char[] allowedChars = {'.', '-'};
     private boolean onlyFirstToString = true;
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Construct an <b>array</b> <code>Converter</code> with the specified

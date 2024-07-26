@@ -50,7 +50,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class MethodUtils {
 
-    // --------------------------------------------------------- Private Methods
 
     /**
      * Only log warning about accessibility work around once.
@@ -103,7 +102,6 @@ public class MethodUtils {
     private static final Map<MethodDescriptor, Reference<Method>> cache = Collections
             .synchronizedMap(new WeakHashMap<MethodDescriptor, Reference<Method>>());
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * Set whether methods should be cached for greater performance or not,
@@ -821,7 +819,6 @@ public class MethodUtils {
     }
 
 
-    // -------------------------------------------------------- Private Methods
 
     /**
      * <p>Return an accessible method (that is, one that can be invoked via

@@ -34,7 +34,6 @@ import java.text.ParseException;
 public class LongLocaleConverter extends DecimalLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}

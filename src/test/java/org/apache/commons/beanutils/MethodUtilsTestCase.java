@@ -34,7 +34,6 @@ import org.apache.commons.beanutils.priv.PublicSubBean;
  */
 public class MethodUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -46,7 +45,6 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -72,7 +70,6 @@ public class MethodUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * <p> Test <code>getAccessibleMethod</code>.

@@ -43,7 +43,6 @@ public class LazyDynaBeanTestCase extends TestCase {
     protected Integer testInteger2    = Integer.valueOf(40);
     protected String testKey          = "myKey";
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -54,7 +53,6 @@ public class LazyDynaBeanTestCase extends TestCase {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Run thus Test
@@ -88,7 +86,6 @@ public class LazyDynaBeanTestCase extends TestCase {
       bean = null;
     }
 
-    // ------------------------------------------------ Individual Test Methods
 
     /**
      * Test Getting/Setting a Simple Property

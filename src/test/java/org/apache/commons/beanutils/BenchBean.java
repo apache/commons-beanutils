@@ -27,7 +27,6 @@ package org.apache.commons.beanutils;
 public class BenchBean {
 
 
-    // -------------------------------------------------------------- Properties
 
 
     /**

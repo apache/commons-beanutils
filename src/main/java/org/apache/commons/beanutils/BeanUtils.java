@@ -36,7 +36,6 @@ import java.util.Map;
 public class BeanUtils {
 
 
-    // ------------------------------------------------------ Private Variables
 
 
     /**
@@ -78,7 +77,6 @@ public class BeanUtils {
         debug = newDebug;
     }
 
-    // --------------------------------------------------------- Class Methods
 
 
     /**

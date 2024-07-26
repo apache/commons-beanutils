@@ -40,7 +40,6 @@ import org.apache.commons.beanutils.ConversionException;
 public final class StringArrayConverter extends AbstractArrayConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -69,7 +68,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
     }
 
 
-    // ------------------------------------------------------- Static Variables
 
 
     /**
@@ -84,7 +82,6 @@ public final class StringArrayConverter extends AbstractArrayConverter {
 
 
 
-    // --------------------------------------------------------- Public Methods
 
 
     /**

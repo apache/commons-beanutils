@@ -67,7 +67,6 @@ import java.util.List;
 public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Serializable {
 
 
-    // ----------------------------------------------------- Instance variables
 
     private static final long serialVersionUID = 1L;
 
@@ -85,7 +84,6 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      */
     protected List<DynaBean> rows = new ArrayList<>();
 
-    // ----------------------------------------------------------- Constructors
 
 
     /**
@@ -269,7 +267,6 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

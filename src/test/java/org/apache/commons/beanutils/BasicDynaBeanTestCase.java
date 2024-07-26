@@ -44,7 +44,6 @@ import junit.framework.TestSuite;
 public class BasicDynaBeanTestCase extends TestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
 
 
     /**
@@ -78,7 +77,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     };
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -93,7 +91,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -167,7 +164,6 @@ public class BasicDynaBeanTestCase extends TestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**
@@ -972,7 +968,6 @@ public class BasicDynaBeanTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------------ Protected Methods
 
 
     /**

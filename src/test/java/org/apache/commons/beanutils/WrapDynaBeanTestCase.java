@@ -37,10 +37,8 @@ import junit.framework.TestSuite;
 public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
-    // ---------------------------------------------------- Instance Variables
 
 
-    // ---------------------------------------------------------- Constructors
 
 
     /**
@@ -55,7 +53,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -91,7 +88,6 @@ public class WrapDynaBeanTestCase extends BasicDynaBeanTestCase {
 
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**

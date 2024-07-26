@@ -128,7 +128,6 @@ public class ConvertUtilsBean {
     private static final Integer ZERO = Integer.valueOf(0);
     private static final Character SPACE = Character.valueOf(' ');
 
-    // ------------------------------------------------------- Class Methods
     /**
      * Get singleton instance
      * @return The singleton instance
@@ -137,7 +136,6 @@ public class ConvertUtilsBean {
         return BeanUtilsBean.getInstance().getConvertUtils();
     }
 
-    // ------------------------------------------------------- Variables
 
 
     /**
@@ -152,7 +150,6 @@ public class ConvertUtilsBean {
      */
     private final Log log = LogFactory.getLog(ConvertUtils.class);
 
-    // ------------------------------------------------------- Constructors
 
     /** Construct a bean with standard converters registered */
     public ConvertUtilsBean() {
@@ -161,7 +158,6 @@ public class ConvertUtilsBean {
         converters.setFast(true);
     }
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * The default value for Boolean conversions.

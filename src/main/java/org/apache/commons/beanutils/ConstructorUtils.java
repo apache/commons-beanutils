@@ -39,13 +39,11 @@ import java.lang.reflect.Modifier;
  */
 public class ConstructorUtils {
 
-    // --------------------------------------------------------- Private Members
     /** An empty class array */
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = {};
     /** An empty object array */
     private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * <p>Convenience method returning new instance of <code>klazz</code> using a single argument constructor.
@@ -346,7 +344,6 @@ public class ConstructorUtils {
         return args;
     }
 
-    // -------------------------------------------------------- Private Methods
     /**
      * <p>Find an accessible constructor with compatible parameters.
      * Compatible parameters mean that every method parameter is assignable from

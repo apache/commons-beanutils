@@ -34,7 +34,6 @@ import java.util.Locale;
 public class SqlDateLocaleConverter extends DateLocaleConverter {
 
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -199,7 +198,6 @@ public class SqlDateLocaleConverter extends DateLocaleConverter {
     }
 
 
-    // --------------------------------------------------------- Methods
 
     /**
      * Convert the specified locale-sensitive input object into an output object of the

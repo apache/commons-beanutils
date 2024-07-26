@@ -40,12 +40,10 @@ import java.util.Locale;
 public class DecimalLocaleConverter extends BaseLocaleConverter {
 
 
-    // ----------------------------------------------------- Instance Variables
 
     /** All logging goes through this logger */
     private final Log log = LogFactory.getLog(DecimalLocaleConverter.class);
 
-    // ----------------------------------------------------------- Constructors
 
     /**
      * Create a {@link org.apache.commons.beanutils.locale.LocaleConverter}
@@ -210,7 +208,6 @@ public class DecimalLocaleConverter extends BaseLocaleConverter {
 
     }
 
-    // --------------------------------------------------------- Methods
 
     /**
      * Convert the specified locale-sensitive input object into an output

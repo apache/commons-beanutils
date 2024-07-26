@@ -62,7 +62,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
 
 public class BeanUtilsTestCase extends TestCase {
 
-    // ---------------------------------------------------- Instance Variables
 
     /**
      * The test bean for each test.
@@ -105,7 +104,6 @@ public class BeanUtilsTestCase extends TestCase {
     /** Test String Date value */
     protected String testStringDate;
 
-    // ---------------------------------------------------------- Constructors
 
     /**
      * Construct a new instance of this test case.
@@ -117,7 +115,6 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Overall Test Methods
 
 
     /**
@@ -169,7 +166,6 @@ public class BeanUtilsTestCase extends TestCase {
     }
 
 
-    // ------------------------------------------------ Individual Test Methods
 
 
     /**

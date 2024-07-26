@@ -62,13 +62,11 @@ public class BaseLocaleConverterTestCase extends TestCase {
     protected String expectedDecimalValue;
     protected String expectedIntegerValue;
 
-    // ---------------------------------------------------------- Constructors
 
     public BaseLocaleConverterTestCase(final String name) {
         super(name);
     }
 
-    // -------------------------------------------------- Overall Test Methods
 
     /**
      * Set up instance variables required by this test case.
@@ -133,7 +131,6 @@ public class BaseLocaleConverterTestCase extends TestCase {
     }
 
 
-    // -------------------------------------------------- Generic Test Methods
 
     /**
      * Test Converting Value WITH a pattern

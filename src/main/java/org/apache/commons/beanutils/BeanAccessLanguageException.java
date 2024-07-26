@@ -27,7 +27,6 @@ package org.apache.commons.beanutils;
 
 public class BeanAccessLanguageException extends IllegalArgumentException {
 
-    // --------------------------------------------------------- Constuctors
 
     private static final long serialVersionUID = 1L;
 

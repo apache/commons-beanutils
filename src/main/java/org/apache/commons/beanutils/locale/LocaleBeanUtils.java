@@ -37,7 +37,6 @@ import org.apache.commons.beanutils.BeanUtils;
 public class LocaleBeanUtils extends BeanUtils {
 
 
-    // ----------------------------------------------------- Instance Variables
 
     /**
      * <p>Gets the locale used when no locale is passed.</p>
@@ -95,7 +94,6 @@ public class LocaleBeanUtils extends BeanUtils {
     }
 
 
-    // --------------------------------------------------------- Public Methods
 
     /**
      * <p>Return the value of the specified locale-sensitive indexed property
