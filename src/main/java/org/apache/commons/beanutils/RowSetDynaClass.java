@@ -69,6 +69,8 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
 
     // ----------------------------------------------------- Instance variables
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * <p>Limits the size of the returned list.  The call to
      * <code>getRows()</code> will return at most limit number of rows.
@@ -81,7 +83,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      * the original <code>ResultSet</code> on which this
      * {@link RowSetDynaClass} was based.</p>
      */
-    protected List<DynaBean> rows = new ArrayList<DynaBean>();
+    protected List<DynaBean> rows = new ArrayList<>();
 
     // ----------------------------------------------------------- Constructors
 
@@ -262,7 +264,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      */
     public List<DynaBean> getRows() {
 
-        return (this.rows);
+        return this.rows;
 
     }
 
@@ -286,7 +288,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
         int cnt = 0;
         while (resultSet.next() && (limit < 0  || cnt++ < limit) ) {
             final DynaBean bean = createDynaBean();
-            for (DynaProperty propertie : properties) {
+            for (final DynaProperty propertie : properties) {
                 final String name = propertie.getName();
                 final Object value = getObject(resultSet, name);
                 bean.set(name, value);
@@ -305,7 +307,7 @@ public class RowSetDynaClass extends JDBCDynaClass implements DynaClass, Seriali
      */
     protected DynaBean createDynaBean() {
 
-        return (new BasicDynaBean(this));
+        return new BasicDynaBean(this);
 
     }
 
