@@ -40,9 +40,9 @@ public class Jira18BeanFactory {
     /* =============== Package Friendly Bean =============== */
     static class PackageFriendlyBean {
 
-        private final String[] indexed = new String[] {"one", "two", "three"};
+        private final String[] indexed = {"one", "two", "three"};
         private String simple = "FOO";
-        private final Map<String, Object> mapped = new HashMap<String, Object>();
+        private final Map<String, Object> mapped = new HashMap<>();
 
         /** Default Constructor */
         public PackageFriendlyBean() {
