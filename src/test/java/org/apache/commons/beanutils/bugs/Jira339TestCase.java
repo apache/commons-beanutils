@@ -60,7 +60,7 @@ public class Jira339TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira339TestCase.class));
+        return new TestSuite(Jira339TestCase.class);
     }
 
     /**
@@ -105,7 +105,7 @@ public class Jira339TestCase extends TestCase {
 
         final TestBean bean = new TestBean();
         try {
-            final Map<String, Object> properties = new HashMap<String, Object>();
+            final Map<String, Object> properties = new HashMap<>();
             properties.put("comparator", null);
             BeanUtils.populate(bean, properties);
         } catch (final Throwable t) {
