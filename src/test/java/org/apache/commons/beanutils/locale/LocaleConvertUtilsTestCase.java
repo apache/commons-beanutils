@@ -84,7 +84,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LocaleConvertUtilsTestCase.class));
+        return new TestSuite(LocaleConvertUtilsTestCase.class);
     }
 
 
@@ -108,7 +108,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        final int intArray[] = new int[0];
+        final int intArray[] = {};
 
         value = LocaleConvertUtils.convert((String) null, intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -247,7 +247,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        final String stringArray[] = new String[0];
+        final String stringArray[] = {};
 
         value = LocaleConvertUtils.convert((String) null, stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -260,10 +260,10 @@ public class LocaleConvertUtilsTestCase extends TestCase {
     public void fixmetestObjectToStringArray() {
 
         fail("Array conversions not implemented yet.");
-        final int intArray0[] = new int[0];
+        final int intArray0[] = {};
         final int intArray1[] = {123};
         final int intArray2[] = {123, 456};
-        final String stringArray0[] = new String[0];
+        final String stringArray0[] = {};
         final String stringArray1[] = {"abc"};
         final String stringArray2[] = {"abc", "def"};
 
@@ -294,19 +294,19 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertEquals("Boolean->String", "true",
                 LocaleConvertUtils.convert(Boolean.TRUE));
         assertEquals("Byte->String", "123",
-                LocaleConvertUtils.convert(new Byte((byte) 123)));
+                LocaleConvertUtils.convert(Byte.valueOf((byte) 123)));
         assertEquals("Character->String", "a",
-                LocaleConvertUtils.convert(new Character('a')));
+                LocaleConvertUtils.convert(Character.valueOf('a')));
         assertEquals("Double->String", "123" + m_decimalSeparator + "4",
-                LocaleConvertUtils.convert(new Double(123.4)));
+                LocaleConvertUtils.convert(Double.valueOf(123.4)));
         assertEquals("Float->String", "123" + m_decimalSeparator + "4",
-                LocaleConvertUtils.convert(new Float((float) 123.4)));
+                LocaleConvertUtils.convert(Float.valueOf((float) 123.4)));
         assertEquals("Integer->String", "123",
-                LocaleConvertUtils.convert(new Integer(123)));
+                LocaleConvertUtils.convert(Integer.valueOf(123)));
         assertEquals("Long->String", "123",
-                LocaleConvertUtils.convert(new Long(123)));
+                LocaleConvertUtils.convert(Long.valueOf(123)));
         assertEquals("Short->String", "123",
-                LocaleConvertUtils.convert(new Short((short) 123)));
+                LocaleConvertUtils.convert(Short.valueOf((short) 123)));
         assertEquals("String->String", "abc",
                 LocaleConvertUtils.convert("abc"));
         assertEquals("String->String null", null,
@@ -324,7 +324,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
 
         final String values1[] = {"10", "20", "30"};
         Object value = LocaleConvertUtils.convert(values1, Integer.TYPE);
-        final int shape[] = new int[0];
+        final int shape[] = {};
         assertEquals(shape.getClass(), value.getClass());
         final int results1[] = (int[]) value;
         assertEquals(results1[0], 10);
@@ -349,9 +349,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        final int intArray[] = new int[0];
-        final int intArray1[] = new int[]{0};
-        final int intArray2[] = new int[]{0, 10};
+        final int intArray[] = {};
+        final int intArray1[] = {0};
+        final int intArray2[] = {0, 10};
 
         value = LocaleConvertUtils.convert("{  }", intArray.getClass());
         checkIntegerArray(value, intArray);
@@ -545,11 +545,9 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         fail("Array conversions not implemented yet.");
 
         Object value = null;
-        final String stringArray[] = new String[0];
-        final String stringArray1[] = new String[]
-        {"abc"};
-        final String stringArray2[] = new String[]
-        {"abc", "de,f"};
+        final String stringArray[] = {};
+        final String stringArray1[] = {"abc"};
+        final String stringArray2[] = {"abc", "de,f"};
 
         value = LocaleConvertUtils.convert("", stringArray.getClass());
         checkStringArray(value, stringArray);
@@ -607,7 +605,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         }
         assertNotNull("Null Result", result);
         assertEquals("Integer Type", Integer.class, result.getClass());
-        assertEquals("Integer Value", new Integer(123), result);
+        assertEquals("Integer Value", Integer.valueOf(123), result);
     }
 
     /**
@@ -624,7 +622,7 @@ public class LocaleConvertUtilsTestCase extends TestCase {
         assertNotNull("Null Result", result);
         assertEquals("Integer Array Type", Integer[].class, result.getClass());
         assertEquals("Integer Array Length", 1, ((Integer[])result).length);
-        assertEquals("Integer Array Value", new Integer(123), ((Integer[])result)[0]);
+        assertEquals("Integer Array Value", Integer.valueOf(123), ((Integer[])result)[0]);
     }
 
     /**
