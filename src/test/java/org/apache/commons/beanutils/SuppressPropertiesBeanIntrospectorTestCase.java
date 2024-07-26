@@ -65,7 +65,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
      * removed.
      */
     public void testPropertyNamesDefensiveCopy() throws IntrospectionException {
-        final Collection<String> properties = new HashSet<String>();
+        final Collection<String> properties = new HashSet<>();
         properties.add("prop1");
         final SuppressPropertiesBeanIntrospector introspector = new SuppressPropertiesBeanIntrospector(
                 properties);
@@ -100,7 +100,7 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
      */
     private static class IntrospectionContextTestImpl implements IntrospectionContext {
         /** Stores the names of properties which have been removed. */
-        private final Set<String> removedProperties = new HashSet<String>();
+        private final Set<String> removedProperties = new HashSet<>();
 
         /**
          * Returns the names of properties which have been removed.
@@ -111,30 +111,37 @@ public class SuppressPropertiesBeanIntrospectorTestCase extends TestCase {
             return removedProperties;
         }
 
+        @Override
         public Class<?> getTargetClass() {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
 
+        @Override
         public void addPropertyDescriptor(final PropertyDescriptor desc) {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
 
+        @Override
         public void addPropertyDescriptors(final PropertyDescriptor[] descriptors) {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
 
+        @Override
         public boolean hasProperty(final String name) {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
 
+        @Override
         public PropertyDescriptor getPropertyDescriptor(final String name) {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
 
+        @Override
         public void removePropertyDescriptor(final String name) {
             removedProperties.add(name);
         }
 
+        @Override
         public Set<String> propertyNames() {
             throw new UnsupportedOperationException("Unexpected method call!");
         }
