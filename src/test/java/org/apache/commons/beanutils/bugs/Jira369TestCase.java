@@ -51,7 +51,7 @@ public class Jira369TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira369TestCase.class));
+        return new TestSuite(Jira369TestCase.class);
     }
 
     /**
