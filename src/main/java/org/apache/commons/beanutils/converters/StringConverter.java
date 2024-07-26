@@ -48,7 +48,6 @@ public final class StringConverter extends AbstractConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public StringConverter() {
-        super();
     }
 
     /**
