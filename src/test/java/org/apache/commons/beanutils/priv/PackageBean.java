@@ -41,8 +41,6 @@ class PackageBean {
      */
     PackageBean() {
 
-        super();
-
     }
 
 
@@ -55,7 +53,7 @@ class PackageBean {
 
     public String getBar() {
 
-        return (this.bar);
+        return this.bar;
 
     }
 

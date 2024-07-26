@@ -33,13 +33,13 @@ public interface PrivateIndirect {
     /**
      * A property accessible via an indirectly implemented interface.
      */
-    public String getBaz();
+    String getBaz();
 
 
     /**
      * A method accessible via an indirectly implemented interface.
      */
-    public String methodBaz(String in);
+    String methodBaz(String in);
 
 
 }

@@ -36,8 +36,6 @@ class PrivateBeanSubclass extends PrivateBean {
      */
     PrivateBeanSubclass() {
 
-        super();
-
     }
 
 
@@ -50,7 +48,7 @@ class PrivateBeanSubclass extends PrivateBean {
     @Override
     public String getBar() {
 
-        return (super.getBar());
+        return super.getBar();
 
     }
 
