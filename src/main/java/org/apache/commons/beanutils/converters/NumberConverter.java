@@ -83,8 +83,8 @@ import org.apache.commons.beanutils.ConversionException;
  */
 public abstract class NumberConverter extends AbstractConverter {
 
-    private static final Integer ZERO = new Integer(0);
-    private static final Integer ONE  = new Integer(1);
+    private static final Integer ZERO = Integer.valueOf(0);
+    private static final Integer ONE  = Integer.valueOf(1);
 
     private String pattern;
     private final boolean allowDecimals;
@@ -100,7 +100,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param allowDecimals Indicates whether decimals are allowed
      */
     public NumberConverter(final boolean allowDecimals) {
-        super();
         this.allowDecimals = allowDecimals;
     }
 
@@ -112,7 +111,6 @@ public abstract class NumberConverter extends AbstractConverter {
      * @param defaultValue The default value to be returned
      */
     public NumberConverter(final boolean allowDecimals, final Object defaultValue) {
-        super();
         this.allowDecimals = allowDecimals;
         setDefaultValue(defaultValue);
     }
@@ -244,12 +242,12 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Handle Date --> Long
         if (value instanceof Date && Long.class.equals(targetType)) {
-            return targetType.cast(new Long(((Date)value).getTime()));
+            return targetType.cast(Long.valueOf(((Date)value).getTime()));
         }
 
         // Handle Calendar --> Long
         if (value instanceof Calendar  && Long.class.equals(targetType)) {
-            return targetType.cast(new Long(((Calendar)value).getTime().getTime()));
+            return targetType.cast(Long.valueOf(((Calendar)value).getTime().getTime()));
         }
 
         // Convert all other types to String & handle
@@ -314,7 +312,7 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return targetType.cast(new Byte(value.byteValue()));
+            return targetType.cast(Byte.valueOf(value.byteValue()));
         }
 
         // Short
@@ -328,7 +326,7 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return targetType.cast(new Short(value.shortValue()));
+            return targetType.cast(Short.valueOf(value.shortValue()));
         }
 
         // Integer
@@ -342,12 +340,12 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too small " + toString(targetType));
             }
-            return targetType.cast(new Integer(value.intValue()));
+            return targetType.cast(Integer.valueOf(value.intValue()));
         }
 
         // Long
         if (targetType.equals(Long.class)) {
-            return targetType.cast(new Long(value.longValue()));
+            return targetType.cast(Long.valueOf(value.longValue()));
         }
 
         // Float
@@ -356,19 +354,20 @@ public abstract class NumberConverter extends AbstractConverter {
                 throw new ConversionException(toString(sourceType) + " value '" + value
                         + "' is too large for " + toString(targetType));
             }
-            return targetType.cast(new Float(value.floatValue()));
+            return targetType.cast(Float.valueOf(value.floatValue()));
         }
 
         // Double
         if (targetType.equals(Double.class)) {
-            return targetType.cast(new Double(value.doubleValue()));
+            return targetType.cast(Double.valueOf(value.doubleValue()));
         }
 
         // BigDecimal
         if (targetType.equals(BigDecimal.class)) {
             if (value instanceof Float || value instanceof Double) {
                 return targetType.cast(new BigDecimal(value.toString()));
-            } else if (value instanceof BigInteger) {
+            }
+            if (value instanceof BigInteger) {
                 return targetType.cast(new BigDecimal((BigInteger)value));
             } else if (value instanceof BigDecimal) {
                 return targetType.cast(new BigDecimal(value.toString()));
@@ -381,9 +380,8 @@ public abstract class NumberConverter extends AbstractConverter {
         if (targetType.equals(BigInteger.class)) {
             if (value instanceof BigDecimal) {
                 return targetType.cast(((BigDecimal)value).toBigInteger());
-            } else {
-                return targetType.cast(BigInteger.valueOf(value.longValue()));
             }
+            return targetType.cast(BigInteger.valueOf(value.longValue()));
         }
 
         final String msg = toString(getClass()) + " cannot handle conversion to '"
@@ -419,32 +417,32 @@ public abstract class NumberConverter extends AbstractConverter {
 
         // Byte
         if (targetType.equals(Byte.class)) {
-            return new Byte(value);
+            return Byte.valueOf(value);
         }
 
         // Short
         if (targetType.equals(Short.class)) {
-            return new Short(value);
+            return Short.valueOf(value);
         }
 
         // Integer
         if (targetType.equals(Integer.class)) {
-            return new Integer(value);
+            return Integer.valueOf(value);
         }
 
         // Long
         if (targetType.equals(Long.class)) {
-            return new Long(value);
+            return Long.valueOf(value);
         }
 
         // Float
         if (targetType.equals(Float.class)) {
-            return new Float(value);
+            return Float.valueOf(value);
         }
 
         // Double
         if (targetType.equals(Double.class)) {
-            return new Double(value);
+            return Double.valueOf(value);
         }
 
         // BigDecimal
