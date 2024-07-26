@@ -55,7 +55,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
     private boolean isUSFormatWithComma() {
         // BEANUTILS-495 workaround - sometimes Java 9 expects "," in date even if
         // the format is set to lenient
-        DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
+        final DateFormat loc = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.US);
         return loc.format(new Date()).contains(",");
     }
 
@@ -97,7 +97,7 @@ public class SqlTimestampConverterTestCase extends DateConverterTestBase {
         invalidConversion(converter, "13:05 pm");
         invalidConversion(converter, "11:05 p");
         invalidConversion(converter, "11.05 pm");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
         // Restore the default Locale
         Locale.setDefault(defaultLocale);
