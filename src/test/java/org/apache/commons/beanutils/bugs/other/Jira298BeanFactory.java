@@ -34,8 +34,8 @@ public class Jira298BeanFactory {
     }
 
     public interface IX {
-        public String getName();
-        public void setName(String name);
+        String getName();
+        void setName(String name);
     }
 
     static class BaseX {
