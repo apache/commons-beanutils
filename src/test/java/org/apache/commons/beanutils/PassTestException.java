@@ -24,4 +24,6 @@ package org.apache.commons.beanutils;
  */
 
 public class PassTestException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
 }
