@@ -43,5 +43,5 @@ public interface LocaleConverter extends Converter {
      * @throws org.apache.commons.beanutils.ConversionException if conversion
      * cannot be performed successfully or if the target type is not supported
      */
-    public <T> T convert(Class<T> type, Object value, String pattern);
+    <T> T convert(Class<T> type, Object value, String pattern);
 }
