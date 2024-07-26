@@ -116,7 +116,7 @@ public class PropertyUtilsBean {
     private WeakFastHashMap<Class<?>, FastHashMap> mappedDescriptorsCache = null;
 
     /** An empty object array */
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
     /** Log instance */
     private final Log log = LogFactory.getLog(PropertyUtils.class);
@@ -128,11 +128,11 @@ public class PropertyUtilsBean {
 
     /** Base constructor */
     public PropertyUtilsBean() {
-        descriptorsCache = new WeakFastHashMap<Class<?>, BeanIntrospectionData>();
+        descriptorsCache = new WeakFastHashMap<>();
         descriptorsCache.setFast(true);
-        mappedDescriptorsCache = new WeakFastHashMap<Class<?>, FastHashMap>();
+        mappedDescriptorsCache = new WeakFastHashMap<>();
         mappedDescriptorsCache.setFast(true);
-        introspectors = new CopyOnWriteArrayList<BeanIntrospector>();
+        introspectors = new CopyOnWriteArrayList<>();
         resetBeanIntrospectors();
     }
 
@@ -279,7 +279,7 @@ public class PropertyUtilsBean {
         if (orig instanceof DynaBean) {
             final DynaProperty[] origDescriptors =
                 ((DynaBean) orig).getDynaClass().getDynaProperties();
-            for (DynaProperty origDescriptor : origDescriptors) {
+            for (final DynaProperty origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
                     try {
@@ -318,7 +318,7 @@ public class PropertyUtilsBean {
         } else /* if (orig is a standard JavaBean) */ {
             final PropertyDescriptor[] origDescriptors =
                 getPropertyDescriptors(orig);
-            for (PropertyDescriptor origDescriptor : origDescriptors) {
+            for (final PropertyDescriptor origDescriptor : origDescriptors) {
                 final String name = origDescriptor.getName();
                 if (isReadable(orig, name) && isWriteable(dest, name)) {
                     try {
@@ -366,25 +366,25 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        final Map<String, Object> description = new HashMap<String, Object>();
+        final Map<String, Object> description = new HashMap<>();
         if (bean instanceof DynaBean) {
             final DynaProperty[] descriptors =
                 ((DynaBean) bean).getDynaClass().getDynaProperties();
-            for (DynaProperty descriptor : descriptors) {
+            for (final DynaProperty descriptor : descriptors) {
                 final String name = descriptor.getName();
                 description.put(name, getProperty(bean, name));
             }
         } else {
             final PropertyDescriptor[] descriptors =
                 getPropertyDescriptors(bean);
-            for (PropertyDescriptor descriptor : descriptors) {
+            for (final PropertyDescriptor descriptor : descriptors) {
                 final String name = descriptor.getName();
                 if (descriptor.getReadMethod() != null) {
                     description.put(name, getProperty(bean, name));
                 }
             }
         }
-        return (description);
+        return description;
 
     }
 
@@ -443,7 +443,7 @@ public class PropertyUtilsBean {
         name = resolver.getProperty(name);
 
         // Request the specified indexed property value
-        return (getIndexedProperty(bean, name, index));
+        return getIndexedProperty(bean, name, index);
 
     }
 
@@ -481,7 +481,8 @@ public class PropertyUtilsBean {
         if (name == null || name.length() == 0) {
             if (bean.getClass().isArray()) {
                 return Array.get(bean, index);
-            } else if (bean instanceof List) {
+            }
+            if (bean instanceof List) {
                 return ((List<?>)bean).get(index);
             }
         }
@@ -498,7 +499,7 @@ public class PropertyUtilsBean {
                 throw new NoSuchMethodException("Unknown property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
             }
-            return (((DynaBean) bean).get(name, index));
+            return ((DynaBean) bean).get(name, index);
         }
 
         // Retrieve the property descriptor for the specified property
@@ -516,17 +517,16 @@ public class PropertyUtilsBean {
             readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
             if (readMethod != null) {
                 final Object[] subscript = new Object[1];
-                subscript[0] = new Integer(index);
+                subscript[0] = Integer.valueOf(index);
                 try {
-                    return (invokeMethod(readMethod,bean, subscript));
+                    return invokeMethod(readMethod,bean, subscript);
                 } catch (final InvocationTargetException e) {
                     if (e.getTargetException() instanceof
                             IndexOutOfBoundsException) {
                         throw (IndexOutOfBoundsException)
                                 e.getTargetException();
-                    } else {
-                        throw e;
                     }
+                    throw e;
                 }
             }
         }
@@ -544,19 +544,17 @@ public class PropertyUtilsBean {
             if (!(value instanceof java.util.List)) {
                 throw new IllegalArgumentException("Property '" + name +
                         "' is not indexed on bean class '" + bean.getClass() + "'");
-            } else {
-                //get the List's value
-                return ((java.util.List<?>) value).get(index);
             }
-        } else {
-            //get the array's value
-            try {
-                return (Array.get(value, index));
-            } catch (final ArrayIndexOutOfBoundsException e) {
-                throw new ArrayIndexOutOfBoundsException("Index: " +
-                        index + ", Size: " + Array.getLength(value) +
-                        " for property '" + name + "'");
-            }
+            //get the List's value
+            return ((java.util.List<?>) value).get(index);
+        }
+        //get the array's value
+        try {
+            return Array.get(value, index);
+        } catch (final ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("Index: " +
+                    index + ", Size: " + Array.getLength(value) +
+                    " for property '" + name + "'");
         }
 
     }
@@ -611,7 +609,7 @@ public class PropertyUtilsBean {
         name = resolver.getProperty(name);
 
         // Request the specified indexed property value
-        return (getMappedProperty(bean, name, key));
+        return getMappedProperty(bean, name, key);
 
     }
 
@@ -657,7 +655,7 @@ public class PropertyUtilsBean {
                 throw new NoSuchMethodException("Unknown property '" +
                         name + "'+ on bean class '" + bean.getClass() + "'");
             }
-            return (((DynaBean) bean).get(name, key));
+            return ((DynaBean) bean).get(name, key);
         }
 
         Object result = null;
@@ -674,29 +672,27 @@ public class PropertyUtilsBean {
             Method readMethod = ((MappedPropertyDescriptor) descriptor).
                     getMappedReadMethod();
             readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
-            if (readMethod != null) {
-                final Object[] keyArray = new Object[1];
-                keyArray[0] = key;
-                result = invokeMethod(readMethod, bean, keyArray);
-            } else {
+            if (readMethod == null) {
                 throw new NoSuchMethodException("Property '" + name +
                         "' has no mapped getter method on bean class '" +
                         bean.getClass() + "'");
             }
+            final Object[] keyArray = new Object[1];
+            keyArray[0] = key;
+            result = invokeMethod(readMethod, bean, keyArray);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
-          if (readMethod != null) {
-            final Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
-            /* test and fetch from the map */
-            if (invokeResult instanceof java.util.Map) {
-              result = ((java.util.Map<?, ?>)invokeResult).get(key);
-            }
-          } else {
+          if (readMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
                     "' has no mapped getter method on bean class '" +
                     bean.getClass() + "'");
           }
+        final Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
+        /* test and fetch from the map */
+        if (invokeResult instanceof java.util.Map) {
+          result = ((java.util.Map<?, ?>)invokeResult).get(key);
+        }
         }
         return result;
 
@@ -740,7 +736,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             return null;
         }
-        return (getMappedPropertyDescriptors(bean.getClass()));
+        return getMappedPropertyDescriptors(bean.getClass());
 
     }
 
@@ -881,7 +877,7 @@ public class PropertyUtilsBean {
             throws IllegalAccessException, InvocationTargetException,
             NoSuchMethodException {
 
-        return (getNestedProperty(bean, name));
+        return getNestedProperty(bean, name);
 
     }
 
@@ -948,7 +944,7 @@ public class PropertyUtilsBean {
         // Look up and return this property from our cache
         // creating and adding it to the cache if not found.
         if (name == null) {
-            return (null);
+            return null;
         }
 
         final BeanIntrospectionData data = getIntrospectionData(bean.getClass());
@@ -1020,7 +1016,7 @@ public class PropertyUtilsBean {
         if (bean == null) {
             throw new IllegalArgumentException("No bean specified");
         }
-        return (getPropertyDescriptors(bean.getClass()));
+        return getPropertyDescriptors(bean.getClass());
 
     }
 
@@ -1070,10 +1066,9 @@ public class PropertyUtilsBean {
         final PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor != null) {
-            return (descriptor.getPropertyEditorClass());
-        } else {
-            return (null);
+            return descriptor.getPropertyEditorClass();
         }
+        return null;
 
     }
 
@@ -1143,31 +1138,32 @@ public class PropertyUtilsBean {
             final DynaProperty descriptor =
                     ((DynaBean) bean).getDynaClass().getDynaProperty(name);
             if (descriptor == null) {
-                return (null);
+                return null;
             }
             final Class<?> type = descriptor.getType();
             if (type == null) {
-                return (null);
-            } else if (type.isArray()) {
-                return (type.getComponentType());
-            } else {
-                return (type);
+                return null;
             }
+            if (type.isArray()) {
+                return type.getComponentType();
+            }
+            return type;
         }
 
         final PropertyDescriptor descriptor =
                 getPropertyDescriptor(bean, name);
         if (descriptor == null) {
-            return (null);
-        } else if (descriptor instanceof IndexedPropertyDescriptor) {
-            return (((IndexedPropertyDescriptor) descriptor).
-                    getIndexedPropertyType());
-        } else if (descriptor instanceof MappedPropertyDescriptor) {
-            return (((MappedPropertyDescriptor) descriptor).
-                    getMappedPropertyType());
-        } else {
-            return (descriptor.getPropertyType());
+            return null;
         }
+        if (descriptor instanceof IndexedPropertyDescriptor) {
+            return ((IndexedPropertyDescriptor) descriptor).
+                    getIndexedPropertyType();
+        }
+        if (descriptor instanceof MappedPropertyDescriptor) {
+            return ((MappedPropertyDescriptor) descriptor).
+                    getMappedPropertyType();
+        }
+        return descriptor.getPropertyType();
 
     }
 
@@ -1183,7 +1179,7 @@ public class PropertyUtilsBean {
      */
     public Method getReadMethod(final PropertyDescriptor descriptor) {
 
-        return (MethodUtils.getAccessibleMethod(descriptor.getReadMethod()));
+        return MethodUtils.getAccessibleMethod(descriptor.getReadMethod());
 
     }
 
@@ -1199,7 +1195,7 @@ public class PropertyUtilsBean {
      * @return The read method
      */
     Method getReadMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
-        return (MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod()));
+        return MethodUtils.getAccessibleMethod(clazz, descriptor.getReadMethod());
     }
 
 
@@ -1239,11 +1235,13 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isIndexed(name)) {
+        }
+        if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isMapped(name)) {
+        }
+        if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
@@ -1258,7 +1256,7 @@ public class PropertyUtilsBean {
                         name + "' on dynaclass '" +
                         ((DynaBean) bean).getDynaClass() + "'" );
             }
-            return (((DynaBean) bean).get(name));
+            return ((DynaBean) bean).get(name);
         }
 
         // Retrieve the property getter method for the specified property
@@ -1274,9 +1272,7 @@ public class PropertyUtilsBean {
                     "' has no getter method in class '" + bean.getClass() + "'");
         }
 
-        // Call the property getter and return the value
-        final Object value = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
-        return (value);
+        return invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
 
     }
 
@@ -1297,7 +1293,7 @@ public class PropertyUtilsBean {
      */
     public Method getWriteMethod(final PropertyDescriptor descriptor) {
 
-        return (MethodUtils.getAccessibleMethod(descriptor.getWriteMethod()));
+        return MethodUtils.getAccessibleMethod(descriptor.getWriteMethod());
 
     }
 
@@ -1315,8 +1311,8 @@ public class PropertyUtilsBean {
      */
     public Method getWriteMethod(final Class<?> clazz, final PropertyDescriptor descriptor) {
         final BeanIntrospectionData data = getIntrospectionData(clazz);
-        return (MethodUtils.getAccessibleMethod(clazz,
-                data.getWriteMethod(clazz, descriptor)));
+        return MethodUtils.getAccessibleMethod(clazz,
+                data.getWriteMethod(clazz, descriptor));
     }
 
 
@@ -1352,11 +1348,7 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            } catch (final IllegalAccessException e) {
-                return false;
-            } catch (final InvocationTargetException e) {
-                return false;
-            } catch (final NoSuchMethodException e) {
+            } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1380,32 +1372,26 @@ public class PropertyUtilsBean {
         // Return the requested result
         if (bean instanceof DynaBean) {
             // All DynaBean properties are readable
-            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
-        } else {
-            try {
-                final PropertyDescriptor desc =
-                    getPropertyDescriptor(bean, name);
-                if (desc != null) {
-                    Method readMethod = getReadMethod(bean.getClass(), desc);
-                    if (readMethod == null) {
-                        if (desc instanceof IndexedPropertyDescriptor) {
-                            readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
-                        } else if (desc instanceof MappedPropertyDescriptor) {
-                            readMethod = ((MappedPropertyDescriptor) desc).getMappedReadMethod();
-                        }
-                        readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
-                    }
-                    return (readMethod != null);
-                } else {
-                    return (false);
-                }
-            } catch (final IllegalAccessException e) {
-                return (false);
-            } catch (final InvocationTargetException e) {
-                return (false);
-            } catch (final NoSuchMethodException e) {
-                return (false);
+            return ((DynaBean) bean).getDynaClass().getDynaProperty(name) != null;
+        }
+        try {
+            final PropertyDescriptor desc =
+                getPropertyDescriptor(bean, name);
+            if (desc == null) {
+                return false;
             }
+            Method readMethod = getReadMethod(bean.getClass(), desc);
+            if (readMethod == null) {
+                if (desc instanceof IndexedPropertyDescriptor) {
+                    readMethod = ((IndexedPropertyDescriptor) desc).getIndexedReadMethod();
+                } else if (desc instanceof MappedPropertyDescriptor) {
+                    readMethod = ((MappedPropertyDescriptor) desc).getMappedReadMethod();
+                }
+                readMethod = MethodUtils.getAccessibleMethod(bean.getClass(), readMethod);
+            }
+            return readMethod != null;
+        } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            return false;
         }
 
     }
@@ -1443,11 +1429,7 @@ public class PropertyUtilsBean {
             Object nestedBean = null;
             try {
                 nestedBean = getProperty(bean, next);
-            } catch (final IllegalAccessException e) {
-                return false;
-            } catch (final InvocationTargetException e) {
-                return false;
-            } catch (final NoSuchMethodException e) {
+            } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 return false;
             }
             if (nestedBean == null) {
@@ -1471,32 +1453,26 @@ public class PropertyUtilsBean {
         // Return the requested result
         if (bean instanceof DynaBean) {
             // All DynaBean properties are writeable
-            return (((DynaBean) bean).getDynaClass().getDynaProperty(name) != null);
-        } else {
-            try {
-                final PropertyDescriptor desc =
-                    getPropertyDescriptor(bean, name);
-                if (desc != null) {
-                    Method writeMethod = getWriteMethod(bean.getClass(), desc);
-                    if (writeMethod == null) {
-                        if (desc instanceof IndexedPropertyDescriptor) {
-                            writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
-                        } else if (desc instanceof MappedPropertyDescriptor) {
-                            writeMethod = ((MappedPropertyDescriptor) desc).getMappedWriteMethod();
-                        }
-                        writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
-                    }
-                    return (writeMethod != null);
-                } else {
-                    return (false);
-                }
-            } catch (final IllegalAccessException e) {
-                return (false);
-            } catch (final InvocationTargetException e) {
-                return (false);
-            } catch (final NoSuchMethodException e) {
-                return (false);
+            return ((DynaBean) bean).getDynaClass().getDynaProperty(name) != null;
+        }
+        try {
+            final PropertyDescriptor desc =
+                getPropertyDescriptor(bean, name);
+            if (desc == null) {
+                return false;
             }
+            Method writeMethod = getWriteMethod(bean.getClass(), desc);
+            if (writeMethod == null) {
+                if (desc instanceof IndexedPropertyDescriptor) {
+                    writeMethod = ((IndexedPropertyDescriptor) desc).getIndexedWriteMethod();
+                } else if (desc instanceof MappedPropertyDescriptor) {
+                    writeMethod = ((MappedPropertyDescriptor) desc).getMappedWriteMethod();
+                }
+                writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
+            }
+            return writeMethod != null;
+        } catch (final IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            return false;
         }
 
     }
@@ -1596,7 +1572,8 @@ public class PropertyUtilsBean {
             if (bean.getClass().isArray()) {
                 Array.set(bean, index, value);
                 return;
-            } else if (bean instanceof List) {
+            }
+            if (bean instanceof List) {
                 final List<Object> list = toObjectList(bean);
                 list.set(index, value);
                 return;
@@ -1634,7 +1611,7 @@ public class PropertyUtilsBean {
             writeMethod = MethodUtils.getAccessibleMethod(bean.getClass(), writeMethod);
             if (writeMethod != null) {
                 final Object[] subscript = new Object[2];
-                subscript[0] = new Integer(index);
+                subscript[0] = Integer.valueOf(index);
                 subscript[1] = value;
                 try {
                     if (log.isTraceEnabled()) {
@@ -1652,9 +1629,8 @@ public class PropertyUtilsBean {
                             IndexOutOfBoundsException) {
                         throw (IndexOutOfBoundsException)
                                 e.getTargetException();
-                    } else {
-                        throw e;
                     }
+                    throw e;
                 }
                 return;
             }
@@ -1670,14 +1646,13 @@ public class PropertyUtilsBean {
         // Call the property getter to get the array or list
         final Object array = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
         if (!array.getClass().isArray()) {
-            if (array instanceof List) {
-                // Modify the specified value in the List
-                final List<Object> list = toObjectList(array);
-                list.set(index, value);
-            } else {
+            if (!(array instanceof List)) {
                 throw new IllegalArgumentException("Property '" + name +
                         "' is not indexed on bean class '" + bean.getClass() + "'");
             }
+            // Modify the specified value in the List
+            final List<Object> list = toObjectList(array);
+            list.set(index, value);
         } else {
             // Modify the specified value in the array
             Array.set(array, index, value);
@@ -1801,39 +1776,37 @@ public class PropertyUtilsBean {
                     ((MappedPropertyDescriptor) descriptor).
                     getMappedWriteMethod();
             mappedWriteMethod = MethodUtils.getAccessibleMethod(bean.getClass(), mappedWriteMethod);
-            if (mappedWriteMethod != null) {
-                final Object[] params = new Object[2];
-                params[0] = key;
-                params[1] = value;
-                if (log.isTraceEnabled()) {
-                    final String valueClassName =
-                        value == null ? "<null>" : value.getClass().getName();
-                    log.trace("setSimpleProperty: Invoking method "
-                              + mappedWriteMethod + " with key=" + key
-                              + ", value=" + value
-                              + " (class " + valueClassName +")");
-                }
-                invokeMethod(mappedWriteMethod, bean, params);
-            } else {
+            if (mappedWriteMethod == null) {
                 throw new NoSuchMethodException
                     ("Property '" + name + "' has no mapped setter method" +
                      "on bean class '" + bean.getClass() + "'");
             }
+            final Object[] params = new Object[2];
+            params[0] = key;
+            params[1] = value;
+            if (log.isTraceEnabled()) {
+                final String valueClassName =
+                    value == null ? "<null>" : value.getClass().getName();
+                log.trace("setSimpleProperty: Invoking method "
+                          + mappedWriteMethod + " with key=" + key
+                          + ", value=" + value
+                          + " (class " + valueClassName +")");
+            }
+            invokeMethod(mappedWriteMethod, bean, params);
         } else {
           /* means that the result has to be retrieved from a map */
           final Method readMethod = getReadMethod(bean.getClass(), descriptor);
-          if (readMethod != null) {
-            final Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
-            /* test and fetch from the map */
-            if (invokeResult instanceof java.util.Map) {
-              final java.util.Map<String, Object> map = toPropertyMap(invokeResult);
-              map.put(key, value);
-            }
-          } else {
+          if (readMethod == null) {
             throw new NoSuchMethodException("Property '" + name +
                     "' has no mapped getter method on bean class '" +
                     bean.getClass() + "'");
           }
+        final Object invokeResult = invokeMethod(readMethod, bean, EMPTY_OBJECT_ARRAY);
+        /* test and fetch from the map */
+        if (invokeResult instanceof java.util.Map) {
+          final java.util.Map<String, Object> map = toPropertyMap(invokeResult);
+          map.put(key, value);
+        }
         }
 
     }
@@ -2060,11 +2033,13 @@ public class PropertyUtilsBean {
             throw new IllegalArgumentException
                     ("Nested property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isIndexed(name)) {
+        }
+        if (resolver.isIndexed(name)) {
             throw new IllegalArgumentException
                     ("Indexed property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
-        } else if (resolver.isMapped(name)) {
+        }
+        if (resolver.isMapped(name)) {
             throw new IllegalArgumentException
                     ("Mapped property names are not allowed: Property '" +
                     name + "' on bean class '" + bean.getClass() + "'");
@@ -2126,77 +2101,32 @@ public class PropertyUtilsBean {
 
             return method.invoke(bean, values);
 
-        } catch (final NullPointerException cause) {
-            // JDK 1.3 and JDK 1.4 throw NullPointerException if an argument is
-            // null for a primitive value (JDK 1.5+ throw IllegalArgumentException)
-            String valueString = "";
+        } catch (final NullPointerException | IllegalArgumentException cause) {
+            final StringBuilder valueString = new StringBuilder();
             if (values != null) {
                 for (int i = 0; i < values.length; i++) {
                     if (i>0) {
-                        valueString += ", " ;
+                        valueString.append(", ") ;
                     }
                     if (values[i] == null) {
-                        valueString += "<null>";
+                        valueString.append("<null>");
                     } else {
-                        valueString += (values[i]).getClass().getName();
+                        valueString.append(values[i].getClass().getName());
                     }
                 }
             }
-            String expectedString = "";
+            final StringBuilder expectedString = new StringBuilder();
             final Class<?>[] parTypes = method.getParameterTypes();
             if (parTypes != null) {
                 for (int i = 0; i < parTypes.length; i++) {
                     if (i > 0) {
-                        expectedString += ", ";
+                        expectedString.append(", ");
                     }
-                    expectedString += parTypes[i].getName();
+                    expectedString.append(parTypes[i].getName());
                 }
             }
             final IllegalArgumentException e = new IllegalArgumentException(
-                "Cannot invoke " + method.getDeclaringClass().getName() + "."
-                + method.getName() + " on bean class '" + bean.getClass() +
-                "' - " + cause.getMessage()
-                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
-                + " - had objects of type \"" + valueString
-                + "\" but expected signature \""
-                +   expectedString + "\""
-                );
-            if (!BeanUtils.initCause(e, cause)) {
-                log.error("Method invocation failed", cause);
-            }
-            throw e;
-        } catch (final IllegalArgumentException cause) {
-            String valueString = "";
-            if (values != null) {
-                for (int i = 0; i < values.length; i++) {
-                    if (i>0) {
-                        valueString += ", " ;
-                    }
-                    if (values[i] == null) {
-                        valueString += "<null>";
-                    } else {
-                        valueString += (values[i]).getClass().getName();
-                    }
-                }
-            }
-            String expectedString = "";
-            final Class<?>[] parTypes = method.getParameterTypes();
-            if (parTypes != null) {
-                for (int i = 0; i < parTypes.length; i++) {
-                    if (i > 0) {
-                        expectedString += ", ";
-                    }
-                    expectedString += parTypes[i].getName();
-                }
-            }
-            final IllegalArgumentException e = new IllegalArgumentException(
-                "Cannot invoke " + method.getDeclaringClass().getName() + "."
-                + method.getName() + " on bean class '" + bean.getClass() +
-                "' - " + cause.getMessage()
-                // as per https://issues.apache.org/jira/browse/BEANUTILS-224
-                + " - had objects of type \"" + valueString
-                + "\" but expected signature \""
-                +   expectedString + "\""
+                "Cannot invoke " + method.getDeclaringClass().getName() + "." + method.getName() + " on bean class '" + bean.getClass() + "' - " + cause.getMessage() + " - had objects of type \"" + valueString.append("\" but expected signature \"").append(expectedString.toString()).append("\"").toString()
                 );
             if (!BeanUtils.initCause(e, cause)) {
                 log.error("Method invocation failed", cause);
@@ -2260,11 +2190,7 @@ public class PropertyUtilsBean {
      * @return the resulting list of objects
      */
     private static List<Object> toObjectList(final Object obj) {
-        @SuppressWarnings("unchecked")
-        final
-        // indexed properties are stored in lists of objects
-        List<Object> list = (List<Object>) obj;
-        return list;
+        return (List<Object>) obj;
     }
 
     /**
@@ -2276,10 +2202,6 @@ public class PropertyUtilsBean {
      * @return the resulting properties map
      */
     private static Map<String, Object> toPropertyMap(final Object obj) {
-        @SuppressWarnings("unchecked")
-        final
-        // mapped properties are stores in maps of type <String, Object>
-        Map<String, Object> map = (Map<String, Object>) obj;
-        return map;
+        return (Map<String, Object>) obj;
     }
 }
