@@ -72,7 +72,7 @@ public class Jira61TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira61TestCase.class));
+        return new TestSuite(Jira61TestCase.class);
     }
 
     /**
@@ -402,7 +402,7 @@ public class Jira61TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_61_PropertyUtils_copyProperties_to_WrapDynaBean() {
         final String value = "copied simpleReadOnly";
-        final Map<String, Object> source = new HashMap<String, Object>();
+        final Map<String, Object> source = new HashMap<>();
         source.put("simpleReadOnly", value);
         try {
             PropertyUtils.copyProperties(wrapDynaBean, source);
@@ -436,7 +436,7 @@ public class Jira61TestCase extends TestCase {
      */
     public void testIssue_BEANUTILS_61_BeanUtils_copyProperties_to_WrapDynaBean() {
         final String value = "copied simpleReadOnly";
-        final Map<String, Object> source = new HashMap<String, Object>();
+        final Map<String, Object> source = new HashMap<>();
         source.put("simpleReadOnly", value);
         try {
             BeanUtils.copyProperties(wrapDynaBean, source);
