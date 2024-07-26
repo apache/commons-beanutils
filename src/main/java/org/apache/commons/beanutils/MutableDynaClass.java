@@ -44,7 +44,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name);
+    void add(String name);
 
 
     /**
@@ -59,7 +59,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type);
+    void add(String name, Class<?> type);
 
 
     /**
@@ -78,7 +78,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
-    public void add(String name, Class<?> type, boolean readable,
+    void add(String name, Class<?> type, boolean readable,
                     boolean writeable);
 
 
@@ -90,7 +90,7 @@ public interface MutableDynaClass extends DynaClass {
      * @return <code>true</code> if this Mutable {@link DynaClass} is restricted,
      * otherwise <code>false</code>
      */
-    public boolean isRestricted();
+    boolean isRestricted();
 
 
     /**
@@ -106,7 +106,7 @@ public interface MutableDynaClass extends DynaClass {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
-    public void remove(String name);
+    void remove(String name);
 
 
     /**
@@ -114,7 +114,7 @@ public interface MutableDynaClass extends DynaClass {
      *
      * @param restricted The new restricted state
      */
-    public void setRestricted(boolean restricted);
+    void setRestricted(boolean restricted);
 
 
 }
