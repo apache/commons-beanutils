@@ -299,7 +299,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
         }
 
         try {
-            for (Object key : readMethods.keySet()) {
+            for (final Object key : readMethods.keySet()) {
                 if(getWriteMethod(key) != null) {
                     newMap.put(key, get(key));
                 }
@@ -322,7 +322,7 @@ public class BeanMap extends AbstractMap<Object, Object> implements Cloneable {
      * @param map  the BeanMap whose properties to put
      */
     public void putAllWriteable(final BeanMap map) {
-        for (Object key : map.readMethods.keySet()) {
+        for (final Object key : map.readMethods.keySet()) {
             if (getWriteMethod(key) != null) {
                 this.put(key, map.get(key));
             }
