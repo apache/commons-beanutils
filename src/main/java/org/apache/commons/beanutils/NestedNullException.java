@@ -28,11 +28,12 @@ public class NestedNullException extends BeanAccessLanguageException {
 
     // --------------------------------------------------------- Constuctors
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a <code>NestedNullException</code> without a detail message.
      */
     public NestedNullException() {
-        super();
     }
 
     /**
