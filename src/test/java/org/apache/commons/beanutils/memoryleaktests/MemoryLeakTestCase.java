@@ -63,7 +63,7 @@ public class MemoryLeakTestCase {
         Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -110,7 +110,7 @@ public class MemoryLeakTestCase {
         Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -260,7 +260,7 @@ public class MemoryLeakTestCase {
         Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -308,7 +308,7 @@ public class MemoryLeakTestCase {
         WrapDynaBean wrapDynaBean = new WrapDynaBean(bean);
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -360,7 +360,7 @@ public class MemoryLeakTestCase {
         Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -408,7 +408,7 @@ public class MemoryLeakTestCase {
         Object bean        = beanClass.getConstructor().newInstance();
         // -----------------------------------------------------------------------------
 
-        final WeakReference<ClassLoader> someRef = new WeakReference<ClassLoader>(loader);
+        final WeakReference<ClassLoader> someRef = new WeakReference<>(loader);
 
         // Sanity checks only
         assertNotNull("ClassLoader is null", loader);
@@ -419,7 +419,7 @@ public class MemoryLeakTestCase {
         // if you comment the following two lines, the testcase will work, and the ClassLoader will be released.
         // That proves that nothing is wrong with the test, and LocaleConvertUtilsBean is holding a reference
         LocaleConvertUtils.register(new IntegerLocaleConverter(Locale.US, false), beanClass, Locale.US);
-        assertEquals(new Integer(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
+        assertEquals(Integer.valueOf(12345), LocaleConvertUtils.convert(bean.toString(), Integer.class, Locale.US, "#,###"));
 
         // this should make the reference go away.
         loader    = null;
@@ -471,14 +471,14 @@ public class MemoryLeakTestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        final SoftReference<Object> ref = new SoftReference<Object>(new Object());
+        final SoftReference<Object> ref = new SoftReference<>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
-            java.util.ArrayList<String> list = new java.util.ArrayList<String>();
+            java.util.ArrayList<String> list = new java.util.ArrayList<>();
             try {
                 long i = 0;
                 while (true && ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
                 System.out.println("Count(1) " + count + " : " + getMemoryStats());
             } catch (final OutOfMemoryError ignored) {
@@ -495,7 +495,7 @@ public class MemoryLeakTestCase {
 
         final boolean isNotNull = ref.get() != null;
         System.out.println("Count " + count+ " " + isNotNull); // debug for Continuum failure
-        String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
+        final String message = "Your JVM is not releasing SoftReference, try running the testcase with less memory (-Xmx)";
         Assume.assumeFalse(message, isNotNull);
     }
 
@@ -520,8 +520,7 @@ public class MemoryLeakTestCase {
         final String classLocation = newString.toString();
         //System.out.println("classlocation: " + classLocation);
 
-        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
-        return theLoader;
+        return URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
     }
 
     /**
