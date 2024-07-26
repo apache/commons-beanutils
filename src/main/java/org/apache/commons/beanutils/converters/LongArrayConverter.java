@@ -72,7 +72,7 @@ public final class LongArrayConverter extends AbstractArrayConverter {
     /**
      * <p>Model object for type comparisons.</p>
      */
-    private static final long[] MODEL = new long[0];
+    private static final long[] MODEL = {};
 
 
     // --------------------------------------------------------- Public Methods
@@ -95,15 +95,14 @@ public final class LongArrayConverter extends AbstractArrayConverter {
         // Deal with a null value
         if (value == null) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException("No value specified");
+                return defaultValue;
             }
+            throw new ConversionException("No value specified");
         }
 
         // Deal with the no-conversion-needed case
         if (MODEL.getClass() == value.getClass()) {
-            return (value);
+            return value;
         }
 
         // Deal with input value as a String array
@@ -114,13 +113,12 @@ public final class LongArrayConverter extends AbstractArrayConverter {
                 for (int i = 0; i < values.length; i++) {
                     results[i] = Long.parseLong(values[i]);
                 }
-                return (results);
+                return results;
             } catch (final Exception e) {
                 if (useDefault) {
-                    return (defaultValue);
-                } else {
-                    throw new ConversionException(value.toString(), e);
+                    return defaultValue;
                 }
+                throw new ConversionException(value.toString(), e);
             }
         }
 
@@ -132,13 +130,12 @@ public final class LongArrayConverter extends AbstractArrayConverter {
             for (int i = 0; i < results.length; i++) {
                 results[i] = Long.parseLong((String) list.get(i));
             }
-            return (results);
+            return results;
         } catch (final Exception e) {
             if (useDefault) {
-                return (defaultValue);
-            } else {
-                throw new ConversionException(value.toString(), e);
+                return defaultValue;
             }
+            throw new ConversionException(value.toString(), e);
         }
 
     }
