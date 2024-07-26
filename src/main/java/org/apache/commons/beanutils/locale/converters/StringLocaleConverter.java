@@ -232,17 +232,17 @@ public class StringLocaleConverter extends BaseLocaleConverter {
 
         String result = null;
 
-        if ((value instanceof Integer) ||
-                (value instanceof Long) ||
-                (value instanceof BigInteger) ||
-                (value instanceof Byte) ||
-                (value instanceof Short)) {
+        if (value instanceof Integer ||
+                value instanceof Long ||
+                value instanceof BigInteger ||
+                value instanceof Byte ||
+                value instanceof Short) {
 
             result = getDecimalFormat(locale, pattern).format(((Number) value).longValue());
         }
-        else if ((value instanceof Double) ||
-                (value instanceof BigDecimal) ||
-                (value instanceof Float)) {
+        else if (value instanceof Double ||
+                value instanceof BigDecimal ||
+                value instanceof Float) {
 
             result = getDecimalFormat(locale, pattern).format(((Number) value).doubleValue());
         }
