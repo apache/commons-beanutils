@@ -91,6 +91,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public boolean contains(final String name, final String key) {
 
         throw new UnsupportedOperationException
@@ -108,6 +109,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public Object get(final String name) {
 
         if (dynaClass.getDynaProperty(name) == null) {
@@ -139,6 +141,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws NullPointerException if no array or List has been
      *  initialized for this property
      */
+    @Override
     public Object get(final String name, final int index) {
 
         throw new UnsupportedOperationException
@@ -160,6 +163,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public Object get(final String name, final String key) {
 
         throw new UnsupportedOperationException
@@ -174,9 +178,10 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @return The associated DynaClass
      */
+    @Override
     public DynaClass getDynaClass() {
 
-        return (this.dynaClass);
+        return this.dynaClass;
 
     }
 
@@ -192,6 +197,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IllegalArgumentException if there is no property
      *  of the specified name
      */
+    @Override
     public void remove(final String name, final String key) {
 
         throw new UnsupportedOperationException
@@ -213,6 +219,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws NullPointerException if an attempt is made to set a
      *  primitive property to null
      */
+    @Override
     public void set(final String name, final Object value) {
 
         if (dynaClass.getDynaProperty(name) == null) {
@@ -244,6 +251,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IndexOutOfBoundsException if the specified index
      *  is outside the range of the underlying property
      */
+    @Override
     public void set(final String name, final int index, final Object value) {
 
         throw new UnsupportedOperationException
@@ -266,6 +274,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @throws IllegalArgumentException if the specified property
      *  exists, but is not mapped
      */
+    @Override
     public void set(final String name, final String key, final Object value) {
 
         throw new UnsupportedOperationException
@@ -283,11 +292,12 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * @return <code>true</code> if the result set has another
      * row, otherwise <code>false</code>
      */
+    @Override
     public boolean hasNext() {
 
         try {
             advance();
-            return (!eof);
+            return !eof;
         } catch (final SQLException e) {
             throw new RuntimeException("hasNext():  SQLException:  " + e);
         }
@@ -300,6 +310,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      *
      * @return advance to the new row and return this
      */
+    @Override
     public DynaBean next() {
 
         try {
@@ -308,7 +319,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
                 throw new NoSuchElementException();
             }
             current = false;
-            return (this);
+            return this;
         } catch (final SQLException e) {
             throw new RuntimeException("next():  SQLException:  " + e);
         }
@@ -320,6 +331,7 @@ public class ResultSetIterator implements DynaBean, Iterator<DynaBean> {
      * <p>Remove the current element from the iteration.  This method is
      * not supported.</p>
      */
+    @Override
     public void remove() {
 
         throw new UnsupportedOperationException("remove()");
