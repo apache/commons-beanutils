@@ -77,7 +77,7 @@ public class SqlTimeConverterTestCase extends DateConverterTestBase {
         invalidConversion(converter, "13:05");
         invalidConversion(converter, "11:05 p");
         invalidConversion(converter, "11.05 pm");
-        invalidConversion(converter, new Integer(2));
+        invalidConversion(converter, Integer.valueOf(2));
 
         // Test specified Locale
         converter.setLocale(Locale.UK);
