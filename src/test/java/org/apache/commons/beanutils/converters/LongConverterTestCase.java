@@ -42,10 +42,10 @@ public class LongConverterTestCase extends NumberConverterTestBase {
     @Override
     public void setUp() throws Exception {
         converter = makeConverter();
-        numbers[0] = new Long("-12");
-        numbers[1] = new Long("13");
-        numbers[2] = new Long("-22");
-        numbers[3] = new Long("23");
+        numbers[0] = Long.valueOf("-12");
+        numbers[1] = Long.valueOf("13");
+        numbers[2] = Long.valueOf("-22");
+        numbers[3] = Long.valueOf("23");
     }
 
     public static TestSuite suite() {
@@ -101,28 +101,28 @@ public class LongConverterTestCase extends NumberConverterTestBase {
             "1",
             "17",
             String.valueOf(Long.MAX_VALUE),
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2)
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
+            Integer.valueOf(9),
+            Long.valueOf(10),
+            Float.valueOf((float) 11.1),
+            Double.valueOf(12.2)
         };
 
         final Long[] expected = {
-            new Long(Long.MIN_VALUE),
-            new Long(-17),
-            new Long(-1),
-            new Long(0),
-            new Long(1),
-            new Long(17),
-            new Long(Long.MAX_VALUE),
-            new Long(7),
-            new Long(8),
-            new Long(9),
-            new Long(10),
-            new Long(11),
-            new Long(12)
+            Long.valueOf(Long.MIN_VALUE),
+            Long.valueOf(-17),
+            Long.valueOf(-1),
+            Long.valueOf(0),
+            Long.valueOf(1),
+            Long.valueOf(17),
+            Long.valueOf(Long.MAX_VALUE),
+            Long.valueOf(7),
+            Long.valueOf(8),
+            Long.valueOf(9),
+            Long.valueOf(10),
+            Long.valueOf(11),
+            Long.valueOf(12)
         };
 
         for(int i=0;i<expected.length;i++) {
