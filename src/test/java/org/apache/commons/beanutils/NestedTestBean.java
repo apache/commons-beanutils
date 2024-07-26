@@ -83,7 +83,7 @@ public class NestedTestBean {
     }
 
     public NestedTestBean getIndexedProperty(final int index) {
-        return (this.indexedBeans[index]);
+        return this.indexedBeans[index];
     }
 
     public void setIndexedProperty(final int index, final NestedTestBean value) {
