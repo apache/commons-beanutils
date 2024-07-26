@@ -28,8 +28,8 @@ import java.util.Map;
 
 public class MappedPropertyTestBean {
 
-    private final Map<Object, Object> map = new HashMap<Object, Object>();
-    private final Map<Object, Object> myMap = new HashMap<Object, Object>();
+    private final Map<Object, Object> map = new HashMap<>();
+    private final Map<Object, Object> myMap = new HashMap<>();
 
 
     // -------------------------------------------------------------- Properties
@@ -47,7 +47,7 @@ public class MappedPropertyTestBean {
     }
 
     public void setMappedBoolean(final String key, final boolean value) {
-        map.put(key, (value ? Boolean.TRUE : Boolean.FALSE));
+        map.put(key, value ? Boolean.TRUE : Boolean.FALSE);
     }
 
     protected String getProtectedMapped(final String key) {
@@ -59,7 +59,7 @@ public class MappedPropertyTestBean {
     }
 
     public void setMappedPrimitive(final int key, final int value) {
-        map.put(new Integer(key), new Integer(value));
+        map.put(Integer.valueOf(key), Integer.valueOf(value));
     }
 
     public void setAnyMapped(final MappedPropertyTestBean key, final MappedPropertyTestBean value) {
@@ -91,7 +91,7 @@ public class MappedPropertyTestBean {
     }
 
     public Long getDifferentTypes(final String key) {
-        return new Long(((Number)map.get(key)).longValue());
+        return Long.valueOf(((Number)map.get(key)).longValue());
     }
     public void setDifferentTypes(final String key, final Integer value) {
         map.put(key, value);
