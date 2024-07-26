@@ -79,12 +79,12 @@ public class Jira492TestCase {
 
     @Test
     public void getPropertyUnconverted() throws Exception {
-        Object someList = propertyUtils.getProperty(bean, "someList");
+        final Object someList = propertyUtils.getProperty(bean, "someList");
         assertTrue("Did not retrieve list", someList instanceof List);
     }
 
     public void getArrayProperty() throws Exception {
-        String[] arr = beanUtils.getArrayProperty(bean, "someList");
+        final String[] arr = beanUtils.getArrayProperty(bean, "someList");
         assertEquals(2, arr.length);
         assertEquals("item0", arr[0]);
         assertEquals("item1", arr[1]);
@@ -92,7 +92,7 @@ public class Jira492TestCase {
 
     @Test
     public void describe() throws Exception {
-        Map<String, String> described = beanUtils.describe(bean);
+        final Map<String, String> described = beanUtils.describe(bean);
         // Only first element survives as a String
         assertEquals("item0", described.get("someList"));
     }
@@ -109,10 +109,10 @@ public class Jira492TestCase {
 
     @Test
     public void getPropertyDescriptor() throws Exception {
-        PropertyDescriptor propDesc = propertyUtils.getPropertyDescriptor(bean, "someList");
+        final PropertyDescriptor propDesc = propertyUtils.getPropertyDescriptor(bean, "someList");
         if (supportsIndexedLists()) {
             // Java 7 or earlier? (BEANUTILS-492)
-            IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
+            final IndexedPropertyDescriptor indexed = (IndexedPropertyDescriptor) propDesc;
             assertEquals(String.class, indexed.getIndexedReadMethod().getReturnType());
         }
     }
