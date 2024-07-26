@@ -43,6 +43,8 @@ package org.apache.commons.beanutils;
  */
 public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Controls whether changes to this DynaClass's properties are allowed.
      */
@@ -110,6 +112,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @return <code>true</code> if this {@link MutableDynaClass} cannot be changed
      * otherwise <code>false</code>
      */
+    @Override
     public boolean isRestricted() {
         return restricted;
     }
@@ -121,6 +124,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @param restricted <code>true</code> if this {@link MutableDynaClass} cannot
      * be changed otherwise <code>false</code>
      */
+    @Override
     public void setRestricted(final boolean restricted) {
         this.restricted = restricted;
     }
@@ -160,6 +164,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
+    @Override
     public void add(final String name) {
         add(new DynaProperty(name));
     }
@@ -176,6 +181,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no new properties can be added
      */
+    @Override
     public void add(final String name, final Class<?> type) {
         if (type == null) {
             add(name);
@@ -205,6 +211,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      *
      * @throws UnsupportedOperationException anytime this method is called
      */
+    @Override
     public void add(final String name, final Class<?> type, final boolean readable, final boolean writeable) {
         throw new java.lang.UnsupportedOperationException("readable/writable properties not supported");
     }
@@ -257,6 +264,7 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
      * @throws IllegalStateException if this DynaClass is currently
      *  restricted, so no properties can be removed
      */
+    @Override
     public void remove(final String name) {
 
         if (name == null) {
@@ -277,9 +285,9 @@ public class LazyDynaClass extends BasicDynaClass implements MutableDynaClass  {
         final DynaProperty[] oldProperties = getDynaProperties();
         final DynaProperty[] newProperties = new DynaProperty[oldProperties.length-1];
         int j = 0;
-        for (int i = 0; i < oldProperties.length; i++) {
-            if (!(name.equals(oldProperties[i].getName()))) {
-                newProperties[j] = oldProperties[i];
+        for (final DynaProperty oldProperty : oldProperties) {
+            if (!name.equals(oldProperty.getName())) {
+                newProperties[j] = oldProperty;
                 j++;
             }
         }
