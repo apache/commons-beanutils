@@ -102,14 +102,14 @@ public class Jira347TestCase extends TestCase {
      */
     private void forceGarbageCollection() throws Exception {
         // Fill up memory
-        final SoftReference<Object> ref = new SoftReference<Object>(new Object());
+        final SoftReference<Object> ref = new SoftReference<>(new Object());
         int count = 0;
         while(ref.get() != null && count++ < 5) {
-            ArrayList<Object> list = new ArrayList<Object>();
+            ArrayList<Object> list = new ArrayList<>();
             try {
                 long i = 0;
                 while (true && ref.get() != null) {
-                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + (i++));
+                    list.add("A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String A Big String " + i++);
                 }
             } catch (final Throwable ignored) {
             }
@@ -147,7 +147,6 @@ public class Jira347TestCase extends TestCase {
         final String classLocation = newString.toString();
         //System.out.println("classlocation: " + classLocation);
 
-        final URLClassLoader theLoader = URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
-        return theLoader;
+        return URLClassLoader.newInstance(new URL[]{new URL(classLocation)},null);
     }
 }
