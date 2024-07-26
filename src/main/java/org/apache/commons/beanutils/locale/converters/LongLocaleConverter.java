@@ -220,7 +220,7 @@ public class LongLocaleConverter extends DecimalLocaleConverter {
             return result;
         }
 
-        return new Long(((Number)result).longValue());
+        return Long.valueOf(((Number)result).longValue());
 
     }
 }
