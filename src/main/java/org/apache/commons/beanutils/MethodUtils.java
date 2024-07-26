@@ -78,7 +78,7 @@ public class MethodUtils {
     /** An empty class array */
     private static final Class<?>[] EMPTY_CLASS_PARAMETERS = new Class[0];
     /** An empty object array */
-    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+    private static final Object[] EMPTY_OBJECT_ARRAY = {};
 
     /**
      * Stores a cache of MethodDescriptor -> Method in a WeakHashMap.
@@ -736,7 +736,7 @@ public class MethodUtils {
             cacheMethod(md, method);
             return method;
         } catch (final NoSuchMethodException e) {
-            return (null);
+            return null;
         }
     }
 
@@ -752,7 +752,7 @@ public class MethodUtils {
 
         // Make sure we have a method to check
         if (method == null) {
-            return (null);
+            return null;
         }
 
         return getAccessibleMethod(method.getDeclaringClass(), method);
@@ -774,12 +774,12 @@ public class MethodUtils {
 
         // Make sure we have a method to check
         if (method == null) {
-            return (null);
+            return null;
         }
 
         // If the requested method is not public we cannot call it
         if (!Modifier.isPublic(method.getModifiers())) {
-            return (null);
+            return null;
         }
 
         boolean sameClass = true;
@@ -798,7 +798,7 @@ public class MethodUtils {
             if (!sameClass && !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
                 setMethodAccessible(method); // Default access superclass workaround
             }
-            return (method);
+            return method;
         }
 
         final String methodName      = method.getName();
@@ -817,7 +817,7 @@ public class MethodUtils {
                         parameterTypes);
         }
 
-        return (method);
+        return method;
     }
 
 
@@ -873,16 +873,16 @@ public class MethodUtils {
 
             // Check the implemented interfaces of the parent class
             final Class<?>[] interfaces = clazz.getInterfaces();
-            for (int i = 0; i < interfaces.length; i++) {
+            for (final Class<?> element : interfaces) {
 
                 // Is this interface public?
-                if (!Modifier.isPublic(interfaces[i].getModifiers())) {
+                if (!Modifier.isPublic(element.getModifiers())) {
                     continue;
                 }
 
                 // Does the method exist on this interface?
                 try {
-                    method = interfaces[i].getDeclaredMethod(methodName,
+                    method = element.getDeclaredMethod(methodName,
                             parameterTypes);
                 } catch (final NoSuchMethodException e) {
                     /* Swallow, if no method is found after the loop then this
@@ -895,7 +895,7 @@ public class MethodUtils {
 
                 // Recursively check our parent interfaces
                 method =
-                        getAccessibleMethodFromInterfaceNest(interfaces[i],
+                        getAccessibleMethodFromInterfaceNest(element,
                                 methodName,
                                 parameterTypes);
                 if (method != null) {
@@ -907,7 +907,7 @@ public class MethodUtils {
         }
 
         // We did not find anything
-        return (null);
+        return null;
     }
 
     /**
@@ -972,7 +972,7 @@ public class MethodUtils {
         final Method[] methods = clazz.getMethods();
         float bestMatchCost = Float.MAX_VALUE;
         float myCost = Float.MAX_VALUE;
-        for (Method method2 : methods) {
+        for (final Method method2 : methods) {
             if (method2.getName().equals(methodName)) {
                 // log some trace information
                 if (log.isTraceEnabled()) {
@@ -1195,24 +1195,29 @@ public class MethodUtils {
         // does anyone know a better strategy than comparing names?
         if (boolean.class.equals(primitiveType)) {
             return Boolean.class;
-        } else if (float.class.equals(primitiveType)) {
-            return Float.class;
-        } else if (long.class.equals(primitiveType)) {
-            return Long.class;
-        } else if (int.class.equals(primitiveType)) {
-            return Integer.class;
-        } else if (short.class.equals(primitiveType)) {
-            return Short.class;
-        } else if (byte.class.equals(primitiveType)) {
-            return Byte.class;
-        } else if (double.class.equals(primitiveType)) {
-            return Double.class;
-        } else if (char.class.equals(primitiveType)) {
-            return Character.class;
-        } else {
-
-            return null;
         }
+        if (float.class.equals(primitiveType)) {
+            return Float.class;
+        }
+        if (long.class.equals(primitiveType)) {
+            return Long.class;
+        }
+        if (int.class.equals(primitiveType)) {
+            return Integer.class;
+        }
+        if (short.class.equals(primitiveType)) {
+            return Short.class;
+        }
+        if (byte.class.equals(primitiveType)) {
+            return Byte.class;
+        }
+        if (double.class.equals(primitiveType)) {
+            return Double.class;
+        }
+        if (char.class.equals(primitiveType)) {
+            return Character.class;
+        }
+        return null;
     }
 
     /**
@@ -1226,27 +1231,33 @@ public class MethodUtils {
         // does anyone know a better strategy than comparing names?
         if (Boolean.class.equals(wrapperType)) {
             return boolean.class;
-        } else if (Float.class.equals(wrapperType)) {
-            return float.class;
-        } else if (Long.class.equals(wrapperType)) {
-            return long.class;
-        } else if (Integer.class.equals(wrapperType)) {
-            return int.class;
-        } else if (Short.class.equals(wrapperType)) {
-            return short.class;
-        } else if (Byte.class.equals(wrapperType)) {
-            return byte.class;
-        } else if (Double.class.equals(wrapperType)) {
-            return double.class;
-        } else if (Character.class.equals(wrapperType)) {
-            return char.class;
-        } else {
-            final Log log = LogFactory.getLog(MethodUtils.class);
-            if (log.isDebugEnabled()) {
-                log.debug("Not a known primitive wrapper class: " + wrapperType);
-            }
-            return null;
         }
+        if (Float.class.equals(wrapperType)) {
+            return float.class;
+        }
+        if (Long.class.equals(wrapperType)) {
+            return long.class;
+        }
+        if (Integer.class.equals(wrapperType)) {
+            return int.class;
+        }
+        if (Short.class.equals(wrapperType)) {
+            return short.class;
+        }
+        if (Byte.class.equals(wrapperType)) {
+            return byte.class;
+        }
+        if (Double.class.equals(wrapperType)) {
+            return double.class;
+        }
+        if (Character.class.equals(wrapperType)) {
+            return char.class;
+        }
+        final Log log = LogFactory.getLog(MethodUtils.class);
+        if (log.isDebugEnabled()) {
+            log.debug("Not a known primitive wrapper class: " + wrapperType);
+        }
+        return null;
     }
 
     /**
@@ -1256,17 +1267,15 @@ public class MethodUtils {
      * @return the original class if it not a primitive. Otherwise the wrapper class. Not null
      */
     public static Class<?> toNonPrimitiveClass(final Class<?> clazz) {
-        if (clazz.isPrimitive()) {
-            final Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
-            // the above method returns
-            if (primitiveClazz != null) {
-                return primitiveClazz;
-            } else {
-                return clazz;
-            }
-        } else {
+        if (!clazz.isPrimitive()) {
             return clazz;
         }
+        final Class<?> primitiveClazz = MethodUtils.getPrimitiveWrapper(clazz);
+        // the above method returns
+        if (primitiveClazz != null) {
+            return primitiveClazz;
+        }
+        return clazz;
     }
 
 
@@ -1295,7 +1304,7 @@ public class MethodUtils {
     private static void cacheMethod(final MethodDescriptor md, final Method method) {
         if (CACHE_METHODS) {
             if (method != null) {
-                cache.put(md, new WeakReference<Method>(method));
+                cache.put(md, new WeakReference<>(method));
             }
         }
     }
@@ -1348,12 +1357,10 @@ public class MethodUtils {
             }
             final MethodDescriptor md = (MethodDescriptor)obj;
 
-            return (
-                exact == md.exact &&
-                methodName.equals(md.methodName) &&
-                cls.equals(md.cls) &&
-                java.util.Arrays.equals(paramTypes, md.paramTypes)
-            );
+            return exact == md.exact &&
+            methodName.equals(md.methodName) &&
+            cls.equals(md.cls) &&
+            java.util.Arrays.equals(paramTypes, md.paramTypes);
         }
         /**
          * Returns the string length of method name. I.e. if the
