@@ -53,7 +53,7 @@ public class Jira357TestCase extends TestCase {
      * @return a test suite
      */
     public static Test suite() {
-        return (new TestSuite(Jira357TestCase.class));
+        return new TestSuite(Jira357TestCase.class);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Jira357TestCase extends TestCase {
      */
     private PropertyDescriptor findDescriptor(final String propertyName, final PropertyDescriptor[] descriptors) {
         if (descriptors != null) {
-            for (PropertyDescriptor descriptor : descriptors) {
+            for (final PropertyDescriptor descriptor : descriptors) {
                 if (propertyName.equals(descriptor.getName())) {
                     return descriptor;
                 }
