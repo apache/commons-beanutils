@@ -764,7 +764,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         Object newValue = null;
 
-        if (type.isArray() && (index < 0)) { // Scalar value into array
+        if (type.isArray() && index < 0) { // Scalar value into array
             if (value instanceof String) {
                 final String[] values = new String[1];
                 values[0] = (String) value;
@@ -817,7 +817,7 @@ public class LocaleBeanUtilsBean extends BeanUtilsBean {
 
         Object newValue = null;
 
-        if (type.isArray() && (index < 0)) { // Scalar value into array
+        if (type.isArray() && index < 0) { // Scalar value into array
             if (value instanceof String) {
                 final String[] values = new String[1];
                 values[0] = (String) value;
