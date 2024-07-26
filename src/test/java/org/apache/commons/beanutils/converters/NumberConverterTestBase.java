@@ -82,15 +82,15 @@ public abstract class NumberConverterTestBase extends TestCase {
         };
 
         final Object[] number = {
-            new Byte((byte)7),
-            new Short((short)8),
-            new Integer(9),
-            new Long(10),
-            new Float(11.1),
-            new Double(12.2),
+            Byte.valueOf((byte)7),
+            Short.valueOf((short)8),
+            Integer.valueOf(9),
+            Long.valueOf(10),
+            Float.valueOf((float) 11.1),
+            Double.valueOf(12.2),
             new BigDecimal("17.2"),
             new BigInteger("33"),
-            new Integer[] {new Integer(3), new Integer(2), new Integer(1)}
+            new Integer[] {Integer.valueOf(3), Integer.valueOf(2), Integer.valueOf(1)}
         };
 
         for(int i=0;i<number.length;i++) {
@@ -156,14 +156,14 @@ public abstract class NumberConverterTestBase extends TestCase {
      */
     public void testStringArrayToInteger() {
 
-        final Integer defaultValue = new Integer(-1);
+        final Integer defaultValue = Integer.valueOf(-1);
         final NumberConverter converter = makeConverter(defaultValue);
 
         // Default Locale
-        assertEquals("Valid First",   new Integer(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
+        assertEquals("Valid First",   Integer.valueOf(5), converter.convert(Integer.class, new String[] {"5", "4", "3"}));
         assertEquals("Invalid First", defaultValue,   converter.convert(Integer.class, new String[] {"FOO", "1", "2"}));
         assertEquals("Null First",    defaultValue,   converter.convert(Integer.class, new String[] {null, "1", "2"}));
-        assertEquals("Long Array",    new Integer(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
+        assertEquals("Long Array",    Integer.valueOf(9), converter.convert(Integer.class, new long[] {9, 2, 6}));
     }
 
     /**
@@ -322,7 +322,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         final long longValue = dateValue.getTime();
 
         // Date --> Long conversion
-        assertEquals("Date to Long", new Long(longValue), converter.convert(Long.class, dateValue));
+        assertEquals("Date to Long", Long.valueOf(longValue), converter.convert(Long.class, dateValue));
 
         // Date --> Integer
         try {
@@ -345,7 +345,7 @@ public abstract class NumberConverterTestBase extends TestCase {
         final long longValue = calendarValue.getTime().getTime();
 
         // Calendar --> Long conversion
-        assertEquals("Calendar to Long", new Long(longValue), converter.convert(Long.class, calendarValue));
+        assertEquals("Calendar to Long", Long.valueOf(longValue), converter.convert(Long.class, calendarValue));
 
         // Calendar --> Integer
         try {
