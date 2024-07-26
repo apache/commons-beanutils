@@ -42,7 +42,6 @@ public final class SqlTimestampConverter extends DateTimeConverter {
      * a <code>ConversionException</code> if an error occurs.
      */
     public SqlTimestampConverter() {
-        super();
     }
 
     /**
