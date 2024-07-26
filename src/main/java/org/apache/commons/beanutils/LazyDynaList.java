@@ -159,6 +159,8 @@ import java.util.Map;
  */
 public class LazyDynaList extends ArrayList<Object> {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The DynaClass of the List's elements.
      */
@@ -191,7 +193,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * Default Constructor.
      */
     public LazyDynaList() {
-        super();
     }
 
     /**
@@ -212,7 +213,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param elementDynaClass The DynaClass of the List's elements.
      */
     public LazyDynaList(final DynaClass elementDynaClass) {
-        super();
         setElementDynaClass(elementDynaClass);
     }
 
@@ -223,7 +223,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * @param elementType The Type of the List's elements.
      */
     public LazyDynaList(final Class<?> elementType) {
-        super();
         setElementType(elementType);
     }
 
@@ -246,7 +245,7 @@ public class LazyDynaList extends ArrayList<Object> {
      */
     public LazyDynaList(final Object[] array) {
         super(array.length);
-        for (Object element : array) {
+        for (final Object element : array) {
             add(element);
         }
     }
@@ -440,12 +439,12 @@ public class LazyDynaList extends ArrayList<Object> {
     public <T> T[] toArray(final T[] model) {
 
         final Class<?> arrayType = model.getClass().getComponentType();
-        if ((DynaBean.class.isAssignableFrom(arrayType))
-                || (size() == 0 && elementType == null)) {
+        if (DynaBean.class.isAssignableFrom(arrayType)
+                || size() == 0 && elementType == null) {
             return super.toArray(model);
         }
 
-        if ((arrayType.isAssignableFrom(elementType))) {
+        if (arrayType.isAssignableFrom(elementType)) {
             T[] array;
             if (model.length >= size()) {
                 array = model;
@@ -512,7 +511,7 @@ public class LazyDynaList extends ArrayList<Object> {
             throw new IllegalArgumentException("Element Type is missing");
         }
 
-        final boolean changeType = (this.elementType != null && !this.elementType.equals(elementType));
+        final boolean changeType = this.elementType != null && !this.elementType.equals(elementType);
         if (changeType && size() > 0) {
             throw new IllegalStateException("Element Type cannot be reset");
         }
@@ -711,6 +710,6 @@ public class LazyDynaList extends ArrayList<Object> {
      * Return the DynaClass.
      */
     private DynaClass getDynaClass() {
-        return (elementDynaClass == null ? wrapDynaClass : elementDynaClass);
+        return elementDynaClass == null ? wrapDynaClass : elementDynaClass;
     }
 }
