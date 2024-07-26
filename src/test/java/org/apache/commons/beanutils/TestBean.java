@@ -35,6 +35,8 @@ public class TestBean implements Serializable {
 
     // ----------------------------------------------------------- Constructors
 
+    private static final long serialVersionUID = 1L;
+
     public TestBean() {
         listIndexed.add("String 0");
         listIndexed.add("String 1");
@@ -109,7 +111,7 @@ public class TestBean implements Serializable {
     private boolean booleanProperty = true;
 
     public boolean getBooleanProperty() {
-        return (booleanProperty);
+        return booleanProperty;
     }
 
     public void setBooleanProperty(final boolean booleanProperty) {
@@ -123,7 +125,7 @@ public class TestBean implements Serializable {
     private boolean booleanSecond = true;
 
     public boolean isBooleanSecond() {
-        return (booleanSecond);
+        return booleanSecond;
     }
 
     public void setBooleanSecond(final boolean booleanSecond) {
@@ -137,7 +139,7 @@ public class TestBean implements Serializable {
     private byte byteProperty = (byte) 121;
 
     public byte getByteProperty() {
-        return (this.byteProperty);
+        return this.byteProperty;
     }
 
     public void setByteProperty(final byte byteProperty) {
@@ -177,7 +179,7 @@ public class TestBean implements Serializable {
     private double doubleProperty = 321.0;
 
     public double getDoubleProperty() {
-        return (this.doubleProperty);
+        return this.doubleProperty;
     }
 
     public void setDoubleProperty(final double doubleProperty) {
@@ -193,11 +195,11 @@ public class TestBean implements Serializable {
     { "Dup 0", "Dup 1", "Dup 2", "Dup 3", "Dup 4" };
 
     public String[] getDupProperty() {
-        return (this.dupProperty);
+        return this.dupProperty;
     }
 
     public String getDupProperty(final int index) {
-        return (this.dupProperty[index]);
+        return this.dupProperty[index];
     }
 
     public void setDupProperty(final int index, final String value) {
@@ -215,7 +217,7 @@ public class TestBean implements Serializable {
     private float floatProperty = (float) 123.0;
 
     public float getFloatProperty() {
-        return (this.floatProperty);
+        return this.floatProperty;
     }
 
     public void setFloatProperty(final float floatProperty) {
@@ -229,7 +231,7 @@ public class TestBean implements Serializable {
     private int intArray[] = { 0, 10, 20, 30, 40 };
 
     public int[] getIntArray() {
-        return (this.intArray);
+        return this.intArray;
     }
 
     public void setIntArray(final int[] intArray) {
@@ -243,7 +245,7 @@ public class TestBean implements Serializable {
     private final int intIndexed[] = { 0, 10, 20, 30, 40 };
 
     public int getIntIndexed(final int index) {
-        return (intIndexed[index]);
+        return intIndexed[index];
     }
 
     public void setIntIndexed(final int index, final int value) {
@@ -257,7 +259,7 @@ public class TestBean implements Serializable {
     private int intProperty = 123;
 
     public int getIntProperty() {
-        return (this.intProperty);
+        return this.intProperty;
     }
 
     public void setIntProperty(final int intProperty) {
@@ -268,10 +270,10 @@ public class TestBean implements Serializable {
     /**
      * A List property accessed as an indexed property.
      */
-    private List<Object> listIndexed = new ArrayList<Object>();
+    private List<Object> listIndexed = new ArrayList<>();
 
     public List<Object> getListIndexed() {
-        return (listIndexed);
+        return listIndexed;
     }
 
 
@@ -281,7 +283,7 @@ public class TestBean implements Serializable {
     private long longProperty = 321;
 
     public long getLongProperty() {
-        return (this.longProperty);
+        return this.longProperty;
     }
 
     public void setLongProperty(final long longProperty) {
@@ -297,17 +299,17 @@ public class TestBean implements Serializable {
     public Map<String, Object> getMapProperty() {
         // Create the map the very first time
         if (mapProperty == null) {
-            mapProperty = new HashMap<String, Object>();
+            mapProperty = new HashMap<>();
             mapProperty.put("First Key", "First Value");
             mapProperty.put("Second Key", "Second Value");
         }
-        return (mapProperty);
+        return mapProperty;
     }
 
     public void setMapProperty(Map<String, Object> mapProperty) {
         // Create the map the very first time
         if (mapProperty == null) {
-            mapProperty = new HashMap<String, Object>();
+            mapProperty = new HashMap<>();
             mapProperty.put("First Key", "First Value");
             mapProperty.put("Second Key", "Second Value");
         }
@@ -323,17 +325,17 @@ public class TestBean implements Serializable {
     public Object getMappedObjects(final String key) {
         // Create the map the very first time
         if (mappedObjects == null) {
-            mappedObjects = new HashMap<String, Object>();
+            mappedObjects = new HashMap<>();
             mappedObjects.put("First Key", "First Value");
             mappedObjects.put("Second Key", "Second Value");
         }
-        return (mappedObjects.get(key));
+        return mappedObjects.get(key);
     }
 
     public void setMappedObjects(final String key, final Object value) {
         // Create the map the very first time
         if (mappedObjects == null) {
-            mappedObjects = new HashMap<String, Object>();
+            mappedObjects = new HashMap<>();
             mappedObjects.put("First Key", "First Value");
             mappedObjects.put("Second Key", "Second Value");
         }
@@ -349,17 +351,17 @@ public class TestBean implements Serializable {
     public String getMappedProperty(final String key) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
-        return (mappedProperty.get(key));
+        return mappedProperty.get(key);
     }
 
     public void setMappedProperty(final String key, final String value) {
         // Create the map the very first time
         if (mappedProperty == null) {
-            mappedProperty = new HashMap<String, String>();
+            mappedProperty = new HashMap<>();
             mappedProperty.put("First Key", "First Value");
             mappedProperty.put("Second Key", "Second Value");
         }
@@ -375,12 +377,12 @@ public class TestBean implements Serializable {
     public int getMappedIntProperty(final String key) {
         // Create the map the very first time
         if (mappedIntProperty == null) {
-            mappedIntProperty = new HashMap<String, Integer>();
+            mappedIntProperty = new HashMap<>();
             mappedIntProperty.put("One", 1);
             mappedIntProperty.put("Two", 2);
         }
         final Integer x = mappedIntProperty.get(key);
-        return ((x == null) ? 0 : x.intValue());
+        return x == null ? 0 : x.intValue();
     }
 
     public void setMappedIntProperty(final String key, final int value) {
@@ -397,7 +399,7 @@ public class TestBean implements Serializable {
         if (nested == null) {
             nested = new TestBean();
         }
-        return (nested);
+        return nested;
     }
 
    /**
@@ -450,7 +452,7 @@ public class TestBean implements Serializable {
     private String nullProperty = null;
 
     public String getNullProperty() {
-        return (this.nullProperty);
+        return this.nullProperty;
     }
 
     public void setNullProperty(final String nullProperty) {
@@ -464,7 +466,7 @@ public class TestBean implements Serializable {
     private final String readOnlyProperty = "Read Only String Property";
 
     public String getReadOnlyProperty() {
-        return (this.readOnlyProperty);
+        return this.readOnlyProperty;
     }
 
 
@@ -474,7 +476,7 @@ public class TestBean implements Serializable {
     private short shortProperty = (short) 987;
 
     public short getShortProperty() {
-        return (this.shortProperty);
+        return this.shortProperty;
     }
 
     public void setShortProperty(final short shortProperty) {
@@ -489,7 +491,7 @@ public class TestBean implements Serializable {
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String[] getStringArray() {
-        return (this.stringArray);
+        return this.stringArray;
     }
 
     public void setStringArray(final String[] stringArray) {
@@ -504,14 +506,14 @@ public class TestBean implements Serializable {
             { "String 0", "String 1", "String 2", "String 3", "String 4" };
 
     public String getStringIndexed(final int index) {
-        return (stringIndexed[index]);
+        return stringIndexed[index];
     }
 
     public void setStringIndexed(final int index, final String value) {
         stringIndexed[index] = value;
     }
 
-    private String[][] string2dArray = new String[][] {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
+    private String[][] string2dArray = {new String[] {"1", "2", "3"}, new String[] {"4","5","6"}};
     public String[] getString2dArray(final int index) {
         return string2dArray[index];
     }
@@ -522,7 +524,7 @@ public class TestBean implements Serializable {
     private String stringProperty = "This is a string";
 
     public String getStringProperty() {
-        return (this.stringProperty);
+        return this.stringProperty;
     }
 
     public void setStringProperty(final String stringProperty) {
@@ -536,7 +538,7 @@ public class TestBean implements Serializable {
     private String writeOnlyProperty = "Write Only String Property";
 
     public String getWriteOnlyPropertyValue() {
-        return (this.writeOnlyProperty);
+        return this.writeOnlyProperty;
     }
 
     public void setWriteOnlyProperty(final String writeOnlyProperty) {
@@ -556,11 +558,11 @@ public class TestBean implements Serializable {
     private boolean invalidBoolean = false;
 
     public boolean getInvalidBoolean() {
-        return (this.invalidBoolean);
+        return this.invalidBoolean;
     }
 
     public boolean isInvalidBoolean() {
-        return (this.invalidBoolean);
+        return this.invalidBoolean;
     }
 
     public void setInvalidBoolean(final String invalidBoolean) {
@@ -590,7 +592,7 @@ public class TestBean implements Serializable {
      */
     public static int currentCounter() {
 
-        return (counter);
+        return counter;
 
     }
 
