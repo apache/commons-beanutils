@@ -49,14 +49,14 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * A typical usage might look like:
  * </p>
- * <pre><code>
+ * <pre>{@code
  * // create the closure
  * BeanPropertyValueChangeClosure closure =
  *    new BeanPropertyValueChangeClosure( "activeEmployee", Boolean.TRUE );
  *
  * // update the Collection
  * CollectionUtils.forAllDo( peopleCollection, closure );
- * </code></pre>
+ * }</pre>
  *
  * This would take a {@code Collection} of person objects and update the
  * {@code activeEmployee</code> property of each object in the <code>Collection} to

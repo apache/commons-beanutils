@@ -29,12 +29,12 @@ import java.lang.reflect.InvocationTargetException;
  * (This makes it different from the typical use cases for other {@code DynaBean}'s.)
  * For example:
  * </p>
- * <pre><code>
+ * <pre>{@code
  *  Object aJavaBean = ...;
  *  ...
  *  DynaBean db = new WrapDynaBean(aJavaBean);
  *  ...
- * </code></pre>
+ * }</pre>
  *
  * <p><strong>IMPLEMENTATION NOTE</strong> - This implementation does not
  * support the {@code contains()</code> and <code>remove()} methods.</p>

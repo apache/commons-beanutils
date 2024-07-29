@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  *
  * <p>
  *     Will interpret hexadecimal colors similar to CSS engines, for example #RGB is interpreted as
- *     #RRGGBB. If using the literal hexadecimal value is desired, the value should be prefixed with <code>0x</code>
+ *     #RRGGBB. If using the literal hexadecimal value is desired, the value should be prefixed with {@code 0x}
  *     instead of {@link #HEX_COLOR_PREFIX #}.
  * </p>
  *
@@ -164,10 +164,10 @@ public class ColorConverter extends AbstractConverter<Color> {
      *
      * Accepts the following values:
      * <ul>
-     *     <li><code>java.awt.Color[r=255,g=255,b=255]</code></li>
-     *     <li><code>[r=255,g=255,b=255]</code></li>
-     *     <li><code>r=255,g=255,b=255</code></li>
-     *     <li><code>255,255,255</code></li>
+     *     <li>{@code java.awt.Color[r=255,g=255,b=255]}</li>
+     *     <li>{@code [r=255,g=255,b=255]}</li>
+     *     <li>{@code r=255,g=255,b=255}</li>
+     *     <li>{@code 255,255,255}</li>
      * </ul>
      *
      * @param value A color as represented by {@link Color#toString()}.

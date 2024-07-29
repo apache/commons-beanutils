@@ -877,8 +877,8 @@
  * locale aware. This gives them a cleaner interface and makes then easier to use
  * in situations where the locale is not important.</p>
  * <p>Extended, locale-aware analogues can be found in
- * <code><a href='locale/package-summary.html'>org.apache.commons.beanutils2.locale
- * </a></code>. These are built along the same
+ * <a href='locale/package-summary.html'>{@code org.apache.commons.beanutils2.locale}</a>.
+ * These are built along the same
  * lines as the basic classes but support localization.</p>
  *
  *
@@ -933,14 +933,14 @@
  * so that all the beans in a collection can have a particular property set to a particular value.
  * </p>
  * <p>For example, set the activeEmployee property to TRUE for an entire collection:</p>
- *  <pre><code>
+ *  <pre>{@code
  *     // create the closure
  *     BeanPropertyValueChangeClosure closure =
  *         new BeanPropertyValueChangeClosure( "activeEmployee", Boolean.TRUE );
  *
  *     // update the Collection
  *     CollectionUtils.forAllDo( peopleCollection, closure );
- *   </code></pre>
+ *   }</pre>
  *
  * <a id="bean-property-predicate"></a>
  * <h3>6.3 Querying Or Filtering Collections Of Beans</h3>
@@ -959,13 +959,13 @@
  * to filter collections on the basis of a property value.
  * </p>
  * <p>For example, to filter a collection to find all beans where active employee is false use:</p>
- * <pre><code>
+ * <pre>{@code
  *     BeanPropertyValueEqualsPredicate predicate =
  *         new BeanPropertyValueEqualsPredicate( "activeEmployee", Boolean.FALSE );
  *
  *     // filter the Collection
  *     CollectionUtils.filter( peopleCollection, predicate );
- * </code></pre>
+ * }</pre>
  *
  * <a href="bean-property-transformer"></a>
  * <h3>6.4 Transforming Collections Of Beans</h3>
@@ -986,13 +986,13 @@
  * For example, to find all cities that are contained in the address of each person property of each bean in
  * a collection:
  * </p>
- *     <pre><code>
+ *     <pre>{@code
  *     // create the transformer
  *     BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  *     // transform the Collection
  *     Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- *     </code></pre>
+ *     }</pre>
  *
  * <a id="FAQ"></a>
  * <h2>7. Frequently Asked Questions</h2>
@@ -1025,7 +1025,7 @@
  * <p>
  * For example:
  * </p>
- * <pre><code>
+ * <pre>{@code
  *     import org.apache.commons.collections4.comparators.ComparableComparator;
  *     import org.apache.commons.collections4.comparators.ReverseComparator;
  *     import org.apache.commons.beanutils2.BeanComparator;
@@ -1034,6 +1034,6 @@
  *         = new BeanComparator("propertyName", new ReverseComparator(new ComparableComparator()));
  *     Collections.sort(myList, reversedNaturalOrderBeanComparator);
  *     ...
- * </code></pre>
+ * }</pre>
  */
 package org.apache.commons.beanutils2;

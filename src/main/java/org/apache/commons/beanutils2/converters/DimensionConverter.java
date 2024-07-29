@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * {@link org.apache.commons.beanutils2.Converter} implementation that handles conversion to and from {@link Dimension}.
  *
  * <p>
- *     Accepts a single {@link Integer} value, or two {@link Integer} values separated by the character <code>x</code>.
+ *     Accepts a single {@link Integer} value, or two {@link Integer} values separated by the character {@code x}.
  * </p>
  *
  * <p>The dimensions must consist of non-negative {@link Integer} values only.</p>

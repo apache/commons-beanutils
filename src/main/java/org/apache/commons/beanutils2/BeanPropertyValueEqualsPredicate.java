@@ -56,14 +56,14 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * A typical usage might look like:
  * </p>
- * <pre><code>
+ * <pre>{@code
  * // create the closure
  * BeanPropertyValueEqualsPredicate predicate =
  *    new BeanPropertyValueEqualsPredicate( "activeEmployee", Boolean.FALSE );
  *
  * // filter the Collection
  * CollectionUtils.filter( peopleCollection, predicate );
- * </code></pre>
+ * }</pre>
  * <p>
  * This would take a {@code Collection} of person objects and filter out any people whose
  * {@code activeEmployee</code> property is <code>false}. Assuming...
@@ -81,14 +81,14 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * Another typical usage might look like:
  * </p>
- * <pre><code>
+ * <pre>{@code
  * // create the closure
  * BeanPropertyValueEqualsPredicate predicate =
  *    new BeanPropertyValueEqualsPredicate( "personId", "456-12-1234" );
  *
  * // search the Collection
  * CollectionUtils.find( peopleCollection, predicate );
- * </code></pre>
+ * }</pre>
  * <p>
  * This would search a {@code Collection} of person objects and return the first object whose
  * {@code personId</code> property value equals <code>456-12-1234}. Assuming...

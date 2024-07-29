@@ -38,13 +38,13 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * A typical usage might look like:
  * </p>
- * <pre><code>
+ * <pre>{@code
  * // create the transformer
  * BeanToPropertyValueTransformer transformer = new BeanToPropertyValueTransformer( "person.address.city" );
  *
  * // transform the Collection
  * Collection peoplesCities = CollectionUtils.collect( peopleCollection, transformer );
- * </code></pre>
+ * }</pre>
  *
  * <p>
  * This would take a {@code Collection</code> of person objects and return a <code>Collection}

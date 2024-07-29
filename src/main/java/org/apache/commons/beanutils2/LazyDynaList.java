@@ -70,27 +70,27 @@ import java.util.Objects;
  * <p>If you have an array of {@code java.util.Map[]} - you can put that into
  *    a {@code LazyDynaList}.</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    TreeMap[] myArray = .... // your Map[]
  *    List lazyList = new LazyDynaList(myArray);
- * </code></pre>
+ * }</pre>
  *
  * <p>New elements of the appropriate Map type are
  *    automatically populated:</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    // get(index) automatically grows the list
  *    DynaBean newElement = (DynaBean)lazyList.get(lazyList.size());
  *    newElement.put("someProperty", "someValue");
- * </code></pre>
+ * }</pre>
  *
  * <p>Once you've finished you can get back an Array of the
  *    elements of the appropriate type:</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    // Retrieve the array from the list
  *    TreeMap[] myArray = (TreeMap[])lazyList.toArray());
- * </code></pre>
+ * }</pre>
  *
  *
  * <h2>Example 2</h2>
@@ -98,7 +98,7 @@ import java.util.Objects;
  *    specify the Class for List's elements. The LazyDynaList
  *    uses the Class to automatically populate elements:</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    // e.g. For Maps
  *    List lazyList = new LazyDynaList(TreeMap.class);
  *
@@ -107,14 +107,14 @@ import java.util.Objects;
  *
  *    // e.g. For DynaBeans
  *    List lazyList = new LazyDynaList(MyDynaBean.class);
- * </code></pre>
+ * }</pre>
  *
  * <h2>Example 3</h2>
  * <p>Alternatively you can create an <em>empty</em> List and specify the
  *    DynaClass for List's elements. The LazyDynaList uses
  *    the DynaClass to automatically populate elements:</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    // e.g. For Maps
  *    DynaClass dynaClass = new LazyDynaMap(new HashMap());
  *    List lazyList = new LazyDynaList(dynaClass);
@@ -126,7 +126,7 @@ import java.util.Objects;
  *    // e.g. For DynaBeans
  *    DynaClass dynaClass = new BasicDynaClass(properties);
  *    List lazyList = new LazyDynaList(dynaClass);
- * </code></pre>
+ * }</pre>
  *
  * <p><strong>N.B.</strong> You may wonder why control the type
  *    using a {@code DynaClass</code> rather than the <code>Class}
@@ -142,7 +142,7 @@ import java.util.Objects;
  *    with the normal {@link java.util.List} methods (i.e.
  *    {@code add()}, {@code addAll()} or {@code set()}).</p>
  *
- * <pre><code>
+ * <pre>{@code
  *    // Create a new LazyDynaList (100 element capacity)
  *    LazyDynaList lazyList = new LazyDynaList(100);
  *
@@ -155,7 +155,7 @@ import java.util.Objects;
  *    // Populate from a collection
  *    lazyList.addAll(myCollection);
  *
- * </code></pre>
+ * }</pre>
  *
  * @since 1.8.0
  */

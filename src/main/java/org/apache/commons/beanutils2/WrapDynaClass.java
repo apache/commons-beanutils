@@ -315,10 +315,10 @@ public class WrapDynaClass implements DynaClass {
      * this method. It is usually better to create new
      * {@code WrapDynaBean} instances by calling its constructor.
      * For example:</p>
-     * <pre><code>
+     * <pre>{@code
      *   Object javaBean = ...;
      *   DynaBean wrapper = new WrapDynaBean(javaBean);
-     * </code></pre>
+     * }</pre>
      * <p>
      * (This method is needed for some kinds of {@code DynaBean} framework.)
      * </p>

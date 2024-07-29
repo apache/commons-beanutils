@@ -54,10 +54,10 @@ import org.apache.commons.logging.LogFactory;
  *    <p>The {@code LazyDynaBean</code> will automatically add a property to the <code>DynaClass}
  *       if it doesn't exist when the {@code set(name, value)} method is called.</p>
  *
- *     <pre><code>
+ *     <pre>{@code
  *         DynaBean myBean = new LazyDynaBean();
  *         myBean.set("myProperty", "myValue");
- *     </code></pre>
+ *     }</pre>
  *
  * <p><b><u>Setting Indexed Properties</u></b></p>
  *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
@@ -69,11 +69,11 @@ import org.apache.commons.logging.LogFactory;
  *       this can be easily changed by overriding the {@code defaultIndexedProperty(name)}
  *       method.</p>
  *
- *     <pre><code>
+ *     <pre>{@code
  *         DynaBean myBean = new LazyDynaBean();
  *         myBean.set("myIndexedProperty", 0, "myValue1");
  *         myBean.set("myIndexedProperty", 1, "myValue2");
- *     </code></pre>
+ *     }</pre>
  *
  *    <p>If the indexed property <b>does</b> exist in the {@code DynaClass} but is set to
  *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
@@ -81,13 +81,13 @@ import org.apache.commons.logging.LogFactory;
  *      in the {@code DynaClass</code> and automatically <em>grow</em> the <code>List}
  *      or {@code Array} so that it is big enough to accommodate the index being set.</p>
  *
- *     <pre><code>
+ *     <pre>{@code
  *         DynaBean myBean = new LazyDynaBean();
  *         MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
  *         myClass.add("myIndexedProperty", int[].class);
  *         myBean.set("myIndexedProperty", 0, Integer.valueOf(10));
  *         myBean.set("myIndexedProperty", 1, Integer.valueOf(20));
- *     </code></pre>
+ *     }</pre>
  *
  * <p><b><u>Setting Mapped Properties</u></b></p>
  *    <p>If the property <b>doesn't</b> exist, the {@code LazyDynaBean} will automatically add
@@ -97,21 +97,21 @@ import org.apache.commons.logging.LogFactory;
  *       mapped property that LazyDynaBean uses but this can be easily changed by overriding
  *       the {@code defaultMappedProperty(name)} method.</p>
  *
- *     <pre><code>
+ *     <pre>{@code
  *         DynaBean myBean = new LazyDynaBean();
  *         myBean.set("myMappedProperty", "myKey", "myValue");
- *     </code></pre>
+ *     }</pre>
  *
  *    <p>If the mapped property <b>does</b> exist in the {@code DynaClass} but is set to
  *      {@code null</code> in the <code>LazyDynaBean}, then it will instantiate a
  *      new {@code Map</code> as specified by the property's type in the <code>DynaClass}.</p>
  *
- *     <pre><code>
+ *     <pre>{@code
  *         DynaBean myBean = new LazyDynaBean();
  *         MutableDynaClass myClass = (MutableDynaClass)myBean.getDynaClass();
  *         myClass.add("myMappedProperty", TreeMap.class);
  *         myBean.set("myMappedProperty", "myKey", "myValue");
- *     </code></pre>
+ *     }</pre>
  *
  * <p><b><u><em>Restricted</em> DynaClass</u></b></p>
  *    <p>{@code MutableDynaClass</code> have a facility to <em>restrict</em> the <code>DynaClass}
