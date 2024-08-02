@@ -32,7 +32,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
     }
 
     /**
-     * Note: this is a *very rough* override of this method. In particular,
+     * Note: This is a *very rough* override of this method. In particular,
      * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
      * propertyName, so propertyNames like "a(b)" or "a[3]" will not
      * be correctly handled.
@@ -51,7 +51,7 @@ public class PropsFirstPropertyUtilsBean extends PropertyUtilsBean {
     }
 
     /**
-     * Note: this is a *very rough* override of this method. In particular,
+     * Note: This is a *very rough* override of this method. In particular,
      * it does not handle MAPPED_DELIM and INDEXED_DELIM chars in the
      * propertyName, so propertyNames like "a(b)" or "a[3]" will not
      * be correctly handled.
