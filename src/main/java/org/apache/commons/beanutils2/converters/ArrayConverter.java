@@ -253,7 +253,7 @@ public class ArrayConverter<C> extends AbstractConverter<C> {
             size = 1;
         }
 
-        // Create a StringBuffer containing a delimited list of the values
+        // Create a StringBuilder containing a delimited list of the values
         final StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < size; i++) {
             if (i > 0) {
