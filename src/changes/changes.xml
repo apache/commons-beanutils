@@ -34,7 +34,7 @@
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace internal use of Locale.ENGLISH with Locale.ROOT.</action>
       <action type="fix" dev="ggregory" due-to="Gary Gregory">Replace Maven CLIRR plugin with JApiCmp.</action>
       <!-- UPDATE -->
-      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 71.</action>
+      <action dev="ggregory" type="update" due-to="Gary Gregory">Bump org.apache.commons:commons-parent from 47 to 72.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump Java requirement from Java 6 to 7.</action>
       <action dev="ggregory" type="update" due-to="Gary Gregory">Bump junit:junit from 4.12 to 4.13.2.</action>
     </release>
