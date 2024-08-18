@@ -363,25 +363,20 @@ public class PropertyUtilsTestCase extends TestCase {
         PropertyDescriptor nameDescriptor = findNameDescriptor(desc1);
         assertNotNull("No write method", nameDescriptor.getWriteMethod());
 
-        final BeanIntrospector bi = new BeanIntrospector() {
-            // Only produce read-only property descriptors
-            @Override
-            public void introspect(final IntrospectionContext icontext)
-                    throws IntrospectionException {
-                final Set<String> names = icontext.propertyNames();
-                final PropertyDescriptor[] newDescs = new PropertyDescriptor[names
-                        .size()];
-                int idx = 0;
-                for (final Iterator<String> it = names.iterator(); it.hasNext(); idx++) {
-                    final String propName = it.next();
-                    final PropertyDescriptor pd = icontext
-                            .getPropertyDescriptor(propName);
-                    newDescs[idx] = new PropertyDescriptor(pd.getName(),
-                            pd.getReadMethod(), null);
-                }
-                icontext.addPropertyDescriptors(newDescs);
+        final BeanIntrospector bi = icontext -> {
+            final Set<String> names = icontext.propertyNames();
+            final PropertyDescriptor[] newDescs = new PropertyDescriptor[names
+            .size()];
+            int idx = 0;
+            for (final Iterator<String> it = names.iterator(); it.hasNext(); idx++) {
+        final String propName = it.next();
+        final PropertyDescriptor pd = icontext
+                .getPropertyDescriptor(propName);
+        newDescs[idx] = new PropertyDescriptor(pd.getName(),
+                pd.getReadMethod(), null);
             }
-        };
+            icontext.addPropertyDescriptors(newDescs);
+         };
         PropertyUtils.clearDescriptors();
         PropertyUtils.addBeanIntrospector(bi);
         final PropertyDescriptor[] desc2 = PropertyUtils
@@ -398,13 +393,9 @@ public class PropertyUtilsTestCase extends TestCase {
      * Tests whether exceptions during custom introspection are handled.
      */
     public void testCustomIntrospectionEx() {
-        final BeanIntrospector bi = new BeanIntrospector() {
-            @Override
-            public void introspect(final IntrospectionContext icontext)
-                    throws IntrospectionException {
-                throw new IntrospectionException("TestException");
-            }
-        };
+        final BeanIntrospector bi = icontext -> {
+            throw new IntrospectionException("TestException");
+         };
         PropertyUtils.clearDescriptors();
         PropertyUtils.addBeanIntrospector(bi);
         final PropertyDescriptor[] desc = PropertyUtils
