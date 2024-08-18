@@ -31,7 +31,6 @@ public class PatternConverter extends AbstractConverter<Pattern> {
      * Construct a <b>{@link Pattern}</b> <em>Converter</em> that throws a {@code ConversionException} if an error occurs.
      */
     public PatternConverter() {
-        super();
     }
 
     /**
