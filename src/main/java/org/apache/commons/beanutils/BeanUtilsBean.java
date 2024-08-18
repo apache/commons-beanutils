@@ -1113,15 +1113,14 @@ public class BeanUtilsBean {
             } else {
                 newValue = convert(value, type.getComponentType());
             }
-        } else {                             // Value into scalar
-            if (value instanceof String) {
-                newValue = getConvertUtils().convert((String) value, type);
-            } else if (value instanceof String[]) {
-                newValue = getConvertUtils().convert(((String[]) value)[0],
-                                                type);
-            } else {
-                newValue = convert(value, type);
-            }
+        // Value into scalar
+        } else if (value instanceof String) {
+            newValue = getConvertUtils().convert((String) value, type);
+        } else if (value instanceof String[]) {
+            newValue = getConvertUtils().convert(((String[]) value)[0],
+                                            type);
+        } else {
+            newValue = convert(value, type);
         }
 
         // Invoke the setter method
