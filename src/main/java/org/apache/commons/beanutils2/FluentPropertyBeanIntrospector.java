@@ -155,7 +155,7 @@ public class FluentPropertyBeanIntrospector implements BeanIntrospector {
                         // We should not change statically cached PropertyDescriptor as it can be from super-type,
                         // it may affect other subclasses of targetClass supertype.
                         // See BEANUTILS-541 for more details.
-                        PropertyDescriptor fluentPropertyDescriptor = new PropertyDescriptor(
+                        final PropertyDescriptor fluentPropertyDescriptor = new PropertyDescriptor(
                                 pd.getName(), pd.getReadMethod(), m);
                         // replace existing (possibly inherited from super-class) to one specific to current class
                         icontext.addPropertyDescriptor(fluentPropertyDescriptor);
