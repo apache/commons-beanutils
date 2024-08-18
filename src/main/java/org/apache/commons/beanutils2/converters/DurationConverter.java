@@ -63,7 +63,7 @@ public final class DurationConverter extends AbstractConverter<Duration> {
     @Override
     protected <T> T convertToType(final Class<T> type, final Object value) throws Throwable {
         if (Duration.class.equals(type)) {
-            return type.cast(Duration.parse((String.valueOf(value))));
+            return type.cast(Duration.parse(String.valueOf(value)));
         }
 
         throw conversionException(type, value);
