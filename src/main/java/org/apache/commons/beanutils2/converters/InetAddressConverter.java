@@ -34,7 +34,6 @@ public class InetAddressConverter extends AbstractConverter<InetAddress> {
      * occurs.
      */
     public InetAddressConverter() {
-        super();
     }
 
     /**
@@ -75,7 +74,7 @@ public class InetAddressConverter extends AbstractConverter<InetAddress> {
 
             try {
                 return type.cast(InetAddress.getByName(stringValue));
-            } catch (UnknownHostException ex) {
+            } catch (final UnknownHostException ex) {
                 throw new IllegalArgumentException("Unable to get IP address of the named host.", ex);
             }
         }
