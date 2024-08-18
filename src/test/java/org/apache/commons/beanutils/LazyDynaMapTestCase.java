@@ -44,7 +44,7 @@ public class LazyDynaMapTestCase extends TestCase {
      * Return the tests included in this test suite.
      */
     public static Test suite() {
-        return (new TestSuite(LazyDynaMapTestCase.class));
+        return new TestSuite(LazyDynaMapTestCase.class);
     }
     protected LazyDynaMap  dynaMap    = null;
     protected String testProperty     = "myProperty";
@@ -210,7 +210,7 @@ public class LazyDynaMapTestCase extends TestCase {
     public void testIndexedPrimitiveArray() {
 
         int   index     = 3;
-        final int[] primitiveArray = new int[0];
+        final int[] primitiveArray = {};
 
         // Check the property & value doesn't exist
         assertNull("Check Indexed Property doesn't exist", dynaMap.getDynaProperty(testProperty));
@@ -306,13 +306,7 @@ public class LazyDynaMapTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(dynaMap, testProperty+"["+index+"]", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -423,13 +417,7 @@ public class LazyDynaMapTestCase extends TestCase {
         try {
           PropertyUtils.setProperty(dynaMap, testProperty+"("+testKey+")", testString1);
         }
-        catch (final NoSuchMethodException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final InvocationTargetException ex) {
-            fail("testIndexedPropertyUtils threw "+ex);
-        }
-        catch (final IllegalAccessException ex) {
+        catch (final NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
             fail("testIndexedPropertyUtils threw "+ex);
         }
 
@@ -445,7 +433,7 @@ public class LazyDynaMapTestCase extends TestCase {
 
         // Create LazyDynaMap using TreeMap
         // containing some properties
-        final LazyDynaMap orig = new LazyDynaMap(new TreeMap<String, Object>());
+        final LazyDynaMap orig = new LazyDynaMap(new TreeMap<>());
         orig.set("indexProp", 0, "indexVal0");
         orig.set("indexProp", 1, "indexVal1");
         assertEquals("Index prop size", 2, ((List<?>)orig.get("indexProp")).size());
